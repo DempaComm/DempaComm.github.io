@@ -202,6 +202,102 @@ class MigrationLedgerTest(unittest.TestCase):
             self.assertEqual("unique", by_name["version-a"]["duplicate_status"])
             self.assertEqual("unique", by_name["version-b"]["duplicate_status"])
 
+    def test_mt_metadata_matching_is_proposed_then_explicitly_confirmed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repo"
+            myblog = Path(temporary) / "Myblogstr"
+            source_dir = myblog / "2022" / "11__20" / "ar11" / "upper"
+            source_dir.mkdir(parents=True)
+            (source_dir / "extupperhalf.tex").write_text(
+                r"\title{$C^{\infty}$関数の鏡像拡張}", encoding="utf-8"
+            )
+            (source_dir / "extupperhalf.pdf").write_bytes(b"%PDF exact")
+            (root / "papers").mkdir(parents=True)
+            environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
+
+            export = Path(temporary) / "hatena.export.txt"
+            export.write_text(
+                "\n".join(
+                    [
+                        "AUTHOR: example",
+                        "TITLE: 滑らかな関数の鏡像拡張と，境界付き多様体の座標変換",
+                        "BASENAME: 2022/09/10/234249",
+                        "STATUS: Publish",
+                        "DATE: 09/10/2022 23:42:49",
+                        "CATEGORY: 位相空間",
+                        "CATEGORY: 数学",
+                        "CATEGORY: 解析",
+                        "-----",
+                        "BODY:",
+                        (
+                            '<iframe title="url=https%3A%2F%2Fwww.dropbox.com'
+                            '%2Fs%2Fexample%2Fextupperhalf.pdf%3Frlkey%3Dsecret">'
+                            "</iframe>"
+                        ),
+                        "-----",
+                        "--------",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, str(TOOL), "scan", str(myblog)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "match-metadata",
+                    str(export),
+                    str(myblog),
+                    "--blog-url",
+                    "https://example.hatenablog.com",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            csv_path = root / "ledger" / "migration-ledger.csv"
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                row = next(csv.DictReader(stream))
+            self.assertEqual("exact", row["metadata_match"])
+            self.assertEqual("", row["original_url"])
+            self.assertEqual(
+                "https://example.hatenablog.com/entry/2022/09/10/234249",
+                row["metadata_original_url"],
+            )
+            self.assertEqual("位相空間|数学|解析", row["metadata_tags"])
+            self.assertEqual("extupperhalf.pdf", row["metadata_pdf_files"])
+            self.assertNotIn("dropbox.com", row["metadata_pdf_files"])
+            self.assertNotIn("rlkey", row["metadata_pdf_files"])
+            self.assertEqual("1", row["metadata_sequence"])
+            self.assertEqual("source_found", row["status"])
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "confirm-metadata",
+                    row["record_id"],
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                confirmed = next(csv.DictReader(stream))
+            self.assertEqual("metadata_ready", confirmed["status"])
+            self.assertEqual(
+                confirmed["metadata_original_url"], confirmed["original_url"]
+            )
+            self.assertEqual(confirmed["metadata_title"], confirmed["title"])
+
 
 if __name__ == "__main__":
     unittest.main()

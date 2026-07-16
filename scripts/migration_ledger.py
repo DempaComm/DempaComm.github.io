@@ -6,13 +6,18 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import json
 import os
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
-from pathlib import Path
-from typing import Any, Iterable
+from datetime import datetime
+from difflib import SequenceMatcher
+from pathlib import Path, PurePosixPath
+from typing import Any, Iterable, Optional
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(
@@ -40,12 +45,35 @@ FIELDS = (
     "duplicate_group",
     "canonical_record_id",
     "duplicate_basis",
+    "metadata_match",
+    "metadata_score",
+    "metadata_candidate_count",
+    "metadata_title",
+    "metadata_published_at",
+    "metadata_sequence",
+    "metadata_original_url",
+    "metadata_tags",
+    "metadata_pdf_files",
+    "metadata_evidence",
     "target_slug",
     "math_section",
     "build_engine",
     "author_review",
     "notes",
 )
+METADATA_FIELDS = {
+    "metadata_match",
+    "metadata_score",
+    "metadata_candidate_count",
+    "metadata_title",
+    "metadata_published_at",
+    "metadata_sequence",
+    "metadata_original_url",
+    "metadata_tags",
+    "metadata_pdf_files",
+    "metadata_evidence",
+}
+PRE_METADATA_FIELDS = tuple(field for field in FIELDS if field not in METADATA_FIELDS)
 LEGACY_FIELDS = tuple(
     field
     for field in FIELDS
@@ -55,9 +83,18 @@ LEGACY_FIELDS = tuple(
         "duplicate_group",
         "canonical_record_id",
         "duplicate_basis",
+        *METADATA_FIELDS,
     }
 )
-LIST_FIELDS = {"tags", "tex_files", "pdf_files", "bib_files", "bst_files"}
+LIST_FIELDS = {
+    "tags",
+    "tex_files",
+    "pdf_files",
+    "bib_files",
+    "bst_files",
+    "metadata_tags",
+    "metadata_pdf_files",
+}
 EDITABLE_FIELDS = {
     "status",
     "published_at",
@@ -70,6 +107,16 @@ EDITABLE_FIELDS = {
     "build_engine",
     "author_review",
     "notes",
+    "metadata_match",
+    "metadata_score",
+    "metadata_candidate_count",
+    "metadata_title",
+    "metadata_published_at",
+    "metadata_sequence",
+    "metadata_original_url",
+    "metadata_tags",
+    "metadata_pdf_files",
+    "metadata_evidence",
 }
 STATUSES = {
     "source_found",
@@ -88,6 +135,7 @@ AUTHOR_REVIEW_STATES = {
 }
 DUPLICATE_STATES = {"unique", "canonical", "duplicate"}
 DUPLICATE_BASES = {"", "tex+pdf", "tex", "pdf"}
+METADATA_MATCH_STATES = {"", "exact", "likely", "ambiguous", "unmatched"}
 MATH_SECTIONS = {
     "",
     "代数・組合せ",
@@ -96,6 +144,13 @@ MATH_SECTIONS = {
     "その他",
 }
 YEAR_PATTERN = re.compile(r"^(19|20)\d{2}$")
+PDF_NAME_PATTERN = re.compile(
+    r"""(?ix)
+    (?:title|href|src)=["'][^"']*?
+    (?P<name>[^/"'?&<>]+\.pdf)
+    """
+)
+TEX_TITLE_PATTERN = re.compile(r"\\title\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}", re.S)
 
 
 class LedgerError(RuntimeError):
@@ -146,7 +201,7 @@ def read_rows(path: Path = CSV_PATH) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
         header = tuple(reader.fieldnames or ())
-        if header not in {FIELDS, LEGACY_FIELDS}:
+        if header not in {FIELDS, PRE_METADATA_FIELDS, LEGACY_FIELDS}:
             raise LedgerError(
                 f"{path}: unsupported header; expected the current ledger fields"
             )
@@ -198,6 +253,43 @@ def validate_rows(
             errors.append(
                 f"{label}: invalid duplicate_basis {row['duplicate_basis']!r}"
             )
+        if row["metadata_match"] not in METADATA_MATCH_STATES:
+            errors.append(
+                f"{label}: invalid metadata_match {row['metadata_match']!r}"
+            )
+        if row["metadata_score"]:
+            try:
+                score = float(row["metadata_score"])
+                if not 0 <= score <= 100:
+                    raise ValueError
+            except ValueError:
+                errors.append(f"{label}: metadata_score must be between 0 and 100")
+        if row["metadata_candidate_count"]:
+            try:
+                if int(row["metadata_candidate_count"]) < 0:
+                    raise ValueError
+            except ValueError:
+                errors.append(
+                    f"{label}: metadata_candidate_count must be a non-negative integer"
+                )
+        if row["metadata_sequence"]:
+            try:
+                if int(row["metadata_sequence"]) < 1:
+                    raise ValueError
+            except ValueError:
+                errors.append(
+                    f"{label}: metadata_sequence must be a positive integer"
+                )
+        if row["metadata_match"] in {"exact", "likely"}:
+            for field in (
+                "metadata_title",
+                "metadata_published_at",
+                "metadata_original_url",
+            ):
+                if not row[field]:
+                    errors.append(
+                        f"{label}: {row['metadata_match']} match requires {field}"
+                    )
         if row["duplicate_group"]:
             duplicate_groups[row["duplicate_group"]].append(row)
         if row["sequence"]:
@@ -295,14 +387,16 @@ def json_value(rows: list[dict[str, str]]) -> dict[str, Any]:
             value = row[field]
             if field in LIST_FIELDS:
                 record[field] = split_list(value)
-            elif field == "sequence":
+            elif field in {"sequence", "metadata_sequence", "metadata_candidate_count"}:
                 record[field] = int(value) if value else None
+            elif field == "metadata_score":
+                record[field] = float(value) if value else None
             else:
                 record[field] = value
         records.append(record)
     counts = Counter(row["status"] for row in rows)
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "source_root_label": "MyBlog/Myblogstr",
         "record_count": len(records),
         "status_counts": {key: counts.get(key, 0) for key in sorted(STATUSES)},
@@ -317,6 +411,10 @@ def json_value(rows: list[dict[str, str]]) -> dict[str, Any]:
                 if row["duplicate_status"] == "canonical"
             }
         ),
+        "metadata_match_counts": {
+            key: sum(row["metadata_match"] == key for row in rows)
+            for key in sorted(METADATA_MATCH_STATES - {""})
+        },
         "records": records,
     }
 
@@ -338,6 +436,21 @@ def source_record_id(source_dir: str) -> str:
 def candidate_title(source_dir: str) -> str:
     name = Path(source_dir).name
     return name if name not in {"", ".", "source"} else source_dir
+
+
+def empty_metadata() -> dict[str, str]:
+    return {
+        "metadata_match": "",
+        "metadata_score": "",
+        "metadata_candidate_count": "",
+        "metadata_title": "",
+        "metadata_published_at": "",
+        "metadata_sequence": "",
+        "metadata_original_url": "",
+        "metadata_tags": "",
+        "metadata_pdf_files": "",
+        "metadata_evidence": "",
+    }
 
 
 def scan_candidates(
@@ -397,6 +510,7 @@ def scan_candidates(
                 "duplicate_group": "",
                 "canonical_record_id": "",
                 "duplicate_basis": "",
+                **empty_metadata(),
                 "target_slug": "",
                 "math_section": "",
                 "build_engine": "",
@@ -472,6 +586,313 @@ def classify_duplicates(
                 continue
             apply_duplicate_group(rows_by_source, sources, basis, signature)
             claimed.update(sources)
+
+
+def normalized_text(value: str) -> str:
+    value = html.unescape(value)
+    for _ in range(3):
+        decoded = unquote(value)
+        if decoded == value:
+            break
+        value = decoded
+    value = unicodedata.normalize("NFKC", value).casefold()
+    value = re.sub(r"\\[a-zA-Z]+", " ", value)
+    value = value.replace("infty", "∞")
+    return "".join(character for character in value if character.isalnum() or character == "∞")
+
+
+def normalized_file_name(value: str) -> str:
+    decoded = html.unescape(value)
+    for _ in range(3):
+        next_value = unquote(decoded)
+        if next_value == decoded:
+            break
+        decoded = next_value
+    return normalized_text(PurePosixPath(urlsplit(decoded).path).name or decoded)
+
+
+def public_pdf_name(value: str) -> str:
+    decoded = html.unescape(value).strip()
+    for _ in range(3):
+        next_value = unquote(decoded)
+        if next_value == decoded:
+            break
+        decoded = next_value
+    if decoded.casefold().startswith("url="):
+        decoded = decoded[4:]
+    name = PurePosixPath(urlsplit(decoded).path).name or PurePosixPath(decoded).name
+    return name if name.casefold().endswith(".pdf") else ""
+
+
+def extract_pdf_names(body: str) -> list[str]:
+    names: list[str] = []
+    decoded_body = html.unescape(body)
+    for match in PDF_NAME_PATTERN.finditer(decoded_body):
+        names.append(public_pdf_name(match.group("name")))
+    for url in re.findall(r"""https?://[^\s"'<>]+""", decoded_body):
+        names.append(public_pdf_name(url))
+    return list(dict.fromkeys(name for name in names if name))
+
+
+def parse_mt_export(path: Path, blog_url: str) -> list[dict[str, Any]]:
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except OSError as error:
+        raise LedgerError(f"cannot read MT export {path}: {error}") from error
+    articles: list[dict[str, Any]] = []
+    for block in re.split(r"(?m)^--------\s*$", text):
+        if not block.strip():
+            continue
+        header_text = block.split("\n-----\n", 1)[0]
+        headers: dict[str, list[str]] = defaultdict(list)
+        for line in header_text.splitlines():
+            if ": " not in line:
+                continue
+            key, value = line.split(": ", 1)
+            headers[key].append(value.strip())
+        if (headers.get("STATUS") or [""])[0].casefold() != "publish":
+            continue
+        title = (headers.get("TITLE") or [""])[0].strip()
+        basename = (headers.get("BASENAME") or [""])[0].strip().strip("/")
+        date_text = (headers.get("DATE") or [""])[0].strip()
+        if not title or not basename or not date_text:
+            continue
+        try:
+            published = datetime.strptime(date_text, "%m/%d/%Y %H:%M:%S")
+        except ValueError as error:
+            raise LedgerError(f"invalid MT DATE {date_text!r} for {title}") from error
+        body = block[len(header_text) :]
+        articles.append(
+            {
+                "title": title,
+                "published": published,
+                "published_at": published.strftime("%Y-%m-%dT%H:%M:%S+09:00"),
+                "url": f"{blog_url.rstrip('/')}/entry/{basename}",
+                "tags": list(dict.fromkeys(headers.get("CATEGORY", []))),
+                "pdf_files": extract_pdf_names(body),
+            }
+        )
+    by_day: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for article in articles:
+        by_day[article["published"].strftime("%Y-%m-%d")].append(article)
+    for day_articles in by_day.values():
+        for sequence, article in enumerate(
+            sorted(day_articles, key=lambda value: value["published"]), start=1
+        ):
+            article["sequence"] = sequence
+    return articles
+
+
+def tex_title(path: Path) -> str:
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+    match = TEX_TITLE_PATTERN.search(text)
+    if not match:
+        return ""
+    title = match.group(1)
+    title = re.sub(r"\$([^$]+)\$", r"\1", title)
+    title = title.replace(r"\infty", "∞")
+    title = re.sub(r"\\[a-zA-Z]+", " ", title)
+    title = title.replace("{", "").replace("}", "")
+    return " ".join(title.split())
+
+
+def row_match_terms(row: dict[str, str], myblog_root: Path) -> dict[str, Any]:
+    labels = [row["title"], Path(row["source_dir"]).name]
+    for field in ("tex_files", "pdf_files"):
+        labels.extend(Path(name).stem for name in split_list(row[field]))
+    for name in split_list(row["tex_files"]):
+        title = tex_title(myblog_root / row["source_dir"] / name)
+        if title:
+            labels.append(title)
+    pdf_names = split_list(row["pdf_files"])
+    year = ""
+    if row["source_dir"]:
+        first = Path(row["source_dir"]).parts[0]
+        if YEAR_PATTERN.match(first):
+            year = first
+    return {
+        "labels": [value for value in dict.fromkeys(labels) if value],
+        "normalized_labels": [
+            normalized_text(value) for value in dict.fromkeys(labels) if value
+        ],
+        "pdf_names": pdf_names,
+        "normalized_pdf_names": {
+            normalized_file_name(value) for value in pdf_names if value
+        },
+        "year": year,
+    }
+
+
+def similarity(left: str, right: str) -> float:
+    if not left or not right:
+        return 0.0
+    if left == right:
+        return 1.0
+    if min(len(left), len(right)) >= 4 and (left in right or right in left):
+        return min(len(left), len(right)) / max(len(left), len(right))
+    return SequenceMatcher(None, left, right).ratio()
+
+
+def article_score(
+    row: dict[str, str], terms: dict[str, Any], article: dict[str, Any]
+) -> tuple[float, list[str], bool]:
+    if row["original_url"] and row["original_url"] == article["url"]:
+        return 100.0, ["confirmed original_url"], True
+    article_pdf_names = {
+        normalized_file_name(value) for value in article["pdf_files"] if value
+    }
+    exact_pdf = bool(terms["normalized_pdf_names"] & article_pdf_names)
+    year_match = bool(terms["year"]) and terms["year"] == str(article["published"].year)
+    article_title = normalized_text(article["title"])
+    title_score = max(
+        (similarity(value, article_title) for value in terms["normalized_labels"]),
+        default=0.0,
+    )
+    pdf_score = max(
+        (
+            similarity(local, remote)
+            for local in terms["normalized_pdf_names"]
+            for remote in article_pdf_names
+        ),
+        default=0.0,
+    )
+    evidence: list[str] = []
+    if exact_pdf:
+        score = 96.0 + (2.0 if year_match else 0.0)
+        evidence.append("PDF filename exact")
+    else:
+        score = max(title_score * 78.0, pdf_score * 82.0)
+        if title_score >= 0.55:
+            evidence.append(f"title similarity {title_score:.2f}")
+        if pdf_score >= 0.55:
+            evidence.append(f"PDF similarity {pdf_score:.2f}")
+        if year_match:
+            score += 8.0
+            evidence.append("year")
+    return min(score, 100.0), evidence, exact_pdf
+
+
+def set_metadata_result(
+    row: dict[str, str],
+    match: str,
+    score: float,
+    candidate_count: int,
+    article: Optional[dict[str, Any]],
+    evidence: str,
+) -> None:
+    row.update(empty_metadata())
+    row["metadata_match"] = match
+    row["metadata_score"] = f"{score:.1f}" if score else ""
+    row["metadata_candidate_count"] = str(candidate_count)
+    row["metadata_evidence"] = evidence
+    if article:
+        row["metadata_title"] = article["title"]
+        row["metadata_published_at"] = article["published_at"]
+        row["metadata_sequence"] = str(article["sequence"])
+        row["metadata_original_url"] = article["url"]
+        row["metadata_tags"] = join_list(article["tags"])
+        row["metadata_pdf_files"] = join_list(article["pdf_files"])
+
+
+def match_metadata_rows(
+    rows: list[dict[str, str]],
+    articles: list[dict[str, Any]],
+    myblog_root: Path,
+) -> None:
+    rows_by_id = {row["record_id"]: row for row in rows}
+    for row in rows:
+        if row["duplicate_status"] == "duplicate":
+            continue
+        terms = row_match_terms(row, myblog_root) if row["source_dir"] else {
+            "labels": [row["title"]],
+            "normalized_labels": [normalized_text(row["title"])],
+            "pdf_names": [],
+            "normalized_pdf_names": set(),
+            "year": row["published_at"][:4],
+        }
+        scored = []
+        for article in articles:
+            score, evidence, exact_pdf = article_score(row, terms, article)
+            scored.append((score, exact_pdf, article, evidence))
+        scored.sort(key=lambda value: (value[0], value[2]["published"]), reverse=True)
+        exact = [value for value in scored if value[1] or value[0] == 100.0]
+        year_exact = [
+            value
+            for value in exact
+            if terms["year"] and str(value[2]["published"].year) == terms["year"]
+        ]
+        if len(exact) > 1 and len(year_exact) == 1:
+            exact = year_exact
+            exact[0][3].append("year disambiguation")
+        if len(exact) == 1:
+            score, _, article, evidence = exact[0]
+            set_metadata_result(
+                row, "exact", score, 1, article, "; ".join(evidence)
+            )
+            continue
+        if len(exact) > 1:
+            best = exact[0]
+            set_metadata_result(
+                row,
+                "ambiguous",
+                best[0],
+                len(exact),
+                best[2],
+                "multiple exact PDF or URL matches",
+            )
+            continue
+        best = scored[0] if scored else (0.0, False, None, [])
+        second_score = scored[1][0] if len(scored) > 1 else 0.0
+        close_count = sum(value[0] >= best[0] - 5.0 for value in scored if value[0] >= 55)
+        if best[0] >= 68 and best[0] - second_score >= 8:
+            set_metadata_result(
+                row,
+                "likely",
+                best[0],
+                1,
+                best[2],
+                "; ".join(best[3]),
+            )
+        elif best[0] >= 55:
+            set_metadata_result(
+                row,
+                "ambiguous",
+                best[0],
+                max(close_count, 2),
+                best[2],
+                "multiple similarly scored candidates; " + "; ".join(best[3]),
+            )
+        else:
+            set_metadata_result(
+                row,
+                "unmatched",
+                best[0],
+                0,
+                None,
+                "no candidate passed the matching threshold",
+            )
+    for row in rows:
+        if row["duplicate_status"] != "duplicate":
+            continue
+        canonical = rows_by_id[row["canonical_record_id"]]
+        for field in (
+            "metadata_match",
+            "metadata_score",
+            "metadata_candidate_count",
+            "metadata_title",
+            "metadata_published_at",
+            "metadata_sequence",
+            "metadata_original_url",
+            "metadata_tags",
+            "metadata_pdf_files",
+        ):
+            row[field] = canonical[field]
+        row["metadata_evidence"] = (
+            f"inherited from canonical {canonical['record_id']}"
+        )
 
 
 def manifest_hashes(manifest: dict[str, Any]) -> set[str]:
@@ -565,6 +986,7 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
             "duplicate_group": "",
             "canonical_record_id": "",
             "duplicate_basis": "",
+            **empty_metadata(),
             "target_slug": "",
             "math_section": "",
             "build_engine": "",
@@ -673,6 +1095,80 @@ def command_duplicates(args: argparse.Namespace) -> None:
             print(f"  {marker} {row['source_dir'] or '(source unmatched)'}{published}")
 
 
+def command_match_metadata(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    if not rows:
+        raise LedgerError("ledger CSV does not exist or is empty; run scan first")
+    myblog_root = Path(args.myblog_root).expanduser().resolve()
+    articles = parse_mt_export(
+        Path(args.export_file).expanduser().resolve(), args.blog_url
+    )
+    if not articles:
+        raise LedgerError("MT export contained no published articles")
+    match_metadata_rows(rows, articles, myblog_root)
+    validate_rows(rows, load_manifests())
+    write_rows(rows)
+    write_json(rows)
+    counts = Counter(row["metadata_match"] for row in rows)
+    print(f"MATCHED {len(rows)} ledger records against {len(articles)} articles")
+    for state in ("exact", "likely", "ambiguous", "unmatched"):
+        print(f"{state}: {counts.get(state, 0)}")
+
+
+def command_metadata(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    validate_rows(rows, load_manifests())
+    counts = Counter(row["metadata_match"] for row in rows)
+    for state in ("exact", "likely", "ambiguous", "unmatched"):
+        print(f"{state}: {counts.get(state, 0)}")
+    if args.list:
+        for row in rows:
+            if args.list != "all" and row["metadata_match"] != args.list:
+                continue
+            if row["duplicate_status"] == "duplicate" and not args.include_duplicates:
+                continue
+            candidate = row["metadata_title"] or "-"
+            print(
+                f"{row['metadata_match'] or 'pending':10} "
+                f"{row['metadata_score'] or '-':>5} "
+                f"{row['record_id']} {row['source_dir'] or '(source unmatched)'} "
+                f"=> {candidate}"
+            )
+
+
+def command_confirm_metadata(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    manifests = load_manifests()
+    validate_rows(rows, manifests)
+    rows_by_id = {row["record_id"]: row for row in rows}
+    confirmed = 0
+    for record_id in args.record_ids:
+        row = rows_by_id.get(record_id)
+        if not row:
+            raise LedgerError(f"unknown record_id: {record_id}")
+        if row["duplicate_status"] == "duplicate":
+            raise LedgerError(
+                f"{record_id}: confirm the canonical record "
+                f"{row['canonical_record_id']} instead"
+            )
+        if row["metadata_match"] not in {"exact", "likely"}:
+            raise LedgerError(
+                f"{record_id}: metadata_match must be exact or likely before confirmation"
+            )
+        row["published_at"] = row["metadata_published_at"]
+        row["sequence"] = row["metadata_sequence"]
+        row["title"] = row["metadata_title"]
+        row["original_url"] = row["metadata_original_url"]
+        row["tags"] = row["metadata_tags"]
+        if row["status"] != "published":
+            row["status"] = "metadata_ready"
+        confirmed += 1
+    validate_rows(rows, manifests)
+    write_rows(rows)
+    write_json(rows)
+    print(f"CONFIRMED metadata for {confirmed} record(s)")
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(
         description="Scan Myblogstr and maintain the migration ledger."
@@ -707,6 +1203,34 @@ def parser() -> argparse.ArgumentParser:
         "duplicates", help="list duplicate groups and their canonical candidates"
     )
     duplicates.set_defaults(func=command_duplicates)
+
+    match_metadata = subparsers.add_parser(
+        "match-metadata",
+        help="match ledger records against a Hatena MT export without confirming them",
+    )
+    match_metadata.add_argument("export_file")
+    match_metadata.add_argument("myblog_root")
+    match_metadata.add_argument(
+        "--blog-url", default="https://concious4410.hatenablog.com"
+    )
+    match_metadata.set_defaults(func=command_match_metadata)
+
+    metadata = subparsers.add_parser(
+        "metadata", help="show metadata matching counts or candidate records"
+    )
+    metadata.add_argument(
+        "--list",
+        choices=("all", "exact", "likely", "ambiguous", "unmatched"),
+    )
+    metadata.add_argument("--include-duplicates", action="store_true")
+    metadata.set_defaults(func=command_metadata)
+
+    confirm_metadata = subparsers.add_parser(
+        "confirm-metadata",
+        help="copy an exact or likely candidate into the confirmed ledger fields",
+    )
+    confirm_metadata.add_argument("record_ids", nargs="+")
+    confirm_metadata.set_defaults(func=command_confirm_metadata)
     return result
 
 

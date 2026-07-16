@@ -76,6 +76,48 @@ python3 scripts/migration_ledger.py duplicates
 `duplicates` コマンドでは、各グループの正本候補を `C`、複製候補を `D` として
 一覧表示します。
 
+## はてな記事メタデータとの対応
+
+はてなブログから取得したMT形式バックアップを、リポジトリの外に保存したまま照合
+できます。
+
+```sh
+python3 scripts/migration_ledger.py match-metadata \
+  /path/to/concious4410.hatenablog.com.export.txt \
+  /path/to/MyBlog/Myblogstr
+```
+
+この操作は確認済みの `title`、`published_at`、`original_url`、`tags` を変更しません。
+候補は `metadata_` で始まる欄に保存されます。MT原本や記事本文、Dropboxの秘密付き
+URLはリポジトリへコピーせず、記事URL、公開日時、タグ、PDFファイル名、照合根拠だけ
+を記録します。
+
+照合結果を確認します。
+
+```sh
+python3 scripts/migration_ledger.py metadata --list exact
+python3 scripts/migration_ledger.py metadata --list likely
+python3 scripts/migration_ledger.py metadata --list ambiguous
+python3 scripts/migration_ledger.py metadata --list unmatched
+```
+
+判定は次の4段階です。
+
+- `exact`: 確認済み元URL、または記事内PDFファイル名が完全一致
+- `likely`: 題名、原稿名、PDF名、年の組合せが高得点で、次候補と十分な差がある
+- `ambiguous`: 完全一致や高得点候補が複数ある
+- `unmatched`: 閾値を超える候補がない
+
+自動照合だけでは `metadata_ready` になりません。内容を確認した `exact` または
+`likely` の台帳番号だけを明示的に確定します。
+
+```sh
+python3 scripts/migration_ledger.py confirm-metadata source:0123456789abcdef
+```
+
+この操作で初めて候補のタイトル、日時、同日内番号、元記事URL、タグを確認済み欄へ
+コピーします。`ambiguous` と `unmatched`、および複製候補は確定できません。
+
 ## 状態
 
 - `source_found`: MyBlog内で原稿候補を発見
