@@ -1213,6 +1213,9 @@ def metadata_review_records(
                 "metadata_pdf_files": split_list(row["metadata_pdf_files"]),
                 "metadata_evidence": row["metadata_evidence"],
                 "priority_archive": priority_archive,
+                "article_already_published": (
+                    bool(candidate_url) and candidate_url in published_urls
+                ),
             }
         )
     order = {"exact": 0, "likely": 1, "ambiguous": 2, "unmatched": 3}
@@ -1407,9 +1410,20 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
         <option value="rejected">却下</option>
       </select>
       <select id="priority-filter" aria-label="アーカイブ優先度">
-        <option value="priority">優先アーカイブのみ</option>
         <option value="all">全候補</option>
+        <option value="priority">優先アーカイブのみ</option>
         <option value="standard">通常候補のみ</option>
+      </select>
+      <select id="tag-filter" aria-label="タグ">
+        <option value="favorite">僕のお気に入り</option>
+        <option value="all">全タグ</option>
+      </select>
+      <select id="scope-filter" aria-label="原稿状態">
+        <option value="new-candidates">未移行の新規記事候補</option>
+        <option value="published-variants">既存記事の別版</option>
+        <option value="all">公開済み・重複を含む全候補</option>
+        <option value="published">公開済みのみ</option>
+        <option value="duplicates">重複候補のみ</option>
       </select>
       <select id="year-filter" aria-label="公開年"><option value="all">全年</option></select>
       <button id="copy-command" type="button">採用分の確定コマンドをコピー</button>
@@ -1431,6 +1445,8 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
     const matchFilter = document.getElementById("match-filter");
     const decisionFilter = document.getElementById("decision-filter");
     const priorityFilter = document.getElementById("priority-filter");
+    const tagFilter = document.getElementById("tag-filter");
+    const scopeFilter = document.getElementById("scope-filter");
     const yearFilter = document.getElementById("year-filter");
     const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, char => ({{
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -1480,6 +1496,20 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
         && (priorityFilter.value === "all"
           || (priorityFilter.value === "priority" && record.priority_archive)
           || (priorityFilter.value === "standard" && !record.priority_archive))
+        && (tagFilter.value === "all"
+          || (tagFilter.value === "favorite"
+            && record.metadata_tags.includes("僕のお気に入り")))
+        && (scopeFilter.value === "all"
+          || (scopeFilter.value === "new-candidates"
+            && record.status !== "published"
+            && record.duplicate_status !== "duplicate"
+            && !record.article_already_published)
+          || (scopeFilter.value === "published-variants"
+            && record.status !== "published"
+            && record.article_already_published)
+          || (scopeFilter.value === "published" && record.status === "published")
+          || (scopeFilter.value === "duplicates"
+            && record.duplicate_status === "duplicate"))
         && (yearFilter.value === "all" || recordYear(record) === yearFilter.value);
     }}
     function card(record) {{
@@ -1498,6 +1528,12 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
           <h2>${{escapeHtml(record.metadata_title || record.local_title || record.source_dir)}}</h2>
           <div class="badges">
             ${{record.priority_archive ? '<span class="badge">優先アーカイブ</span>' : ""}}
+            ${{record.metadata_tags.includes("僕のお気に入り")
+              ? '<span class="badge">僕のお気に入り</span>' : ""}}
+            ${{record.article_already_published
+              ? '<span class="badge">元記事は公開済み</span>' : ""}}
+            ${{record.duplicate_status !== "unique"
+              ? `<span class="badge">${{escapeHtml(record.duplicate_status)}}</span>` : ""}}
             <span class="badge">${{escapeHtml(record.metadata_match)}}</span>
             <span class="badge">score ${{score}}</span>
             <span class="badge">${{escapeHtml(decision)}}</span>
@@ -1563,7 +1599,10 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
       option.textContent = year;
       yearFilter.appendChild(option);
     }});
-    [query, matchFilter, decisionFilter, priorityFilter, yearFilter].forEach(element =>
+    [
+      query, matchFilter, decisionFilter, priorityFilter,
+      tagFilter, scopeFilter, yearFilter
+    ].forEach(element =>
       element.addEventListener(element === query ? "input" : "change", render));
     document.getElementById("copy-command").addEventListener("click", async () => {{
       const accepted = records.filter(record =>
