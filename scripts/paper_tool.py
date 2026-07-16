@@ -8,6 +8,7 @@ import hashlib
 import html
 import json
 import os
+import re
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -169,8 +170,41 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
                 raise PaperToolError(f"{path}: invalid {key} for {relative}")
     if build["enabled"] and str(build["root"]) not in seen:
         raise PaperToolError(f"{path}: build.root must appear in files")
-    if not build["enabled"] and "published.pdf" not in seen:
-        raise PaperToolError(f"{path}: archived papers must protect published.pdf")
+    if not build["enabled"] and "published.pdf" not in seen and "main.tex" in seen:
+        raise PaperToolError(
+            f"{path}: source-only papers must not use main.tex; use source.tex"
+        )
+
+
+def has_pdf(manifest: dict[str, Any]) -> bool:
+    """Return whether staging will provide main.pdf for this paper."""
+    if manifest["build"]["enabled"]:
+        return True
+    return any(entry["path"] == "published.pdf" for entry in manifest["files"])
+
+
+def public_file_actions(
+    manifest: dict[str, Any], prefix: str, indent: str
+) -> list[str]:
+    """Render PDF/source actions, making a source primary when no PDF exists."""
+    actions: list[str] = []
+    pdf_available = has_pdf(manifest)
+    if pdf_available:
+        actions.append(
+            f'{indent}<a class="primary-action" href="{prefix}main.pdf">PDFを読む</a>'
+        )
+    primary_source_added = False
+    for entry in manifest["files"]:
+        if not entry["public"] or not entry["label"]:
+            continue
+        relative = html.escape(entry["path"], quote=True)
+        label = html.escape(entry["label"])
+        primary = ""
+        if not pdf_available and not primary_source_added and entry["role"] == "manuscript":
+            primary = ' class="primary-action"'
+            primary_source_added = True
+        actions.append(f'{indent}<a{primary} href="{prefix}{relative}">{label}</a>')
+    return actions
 
 
 def manifests(slugs: Iterable[str] | None = None) -> list[tuple[Path, dict[str, Any]]]:
@@ -246,7 +280,6 @@ def paper_card(manifest: dict[str, Any]) -> str:
     title = html.escape(manifest["title"])
     kind = html.escape(manifest["kind"])
     summary = html.escape(manifest["summary"])
-    original_url = html.escape(manifest["original_url"], quote=True)
     published_date = str(manifest["published_at"])[:10]
     year = int(manifest["year"])
     search_terms = " ".join(
@@ -267,17 +300,11 @@ def paper_card(manifest: dict[str, Any]) -> str:
         f'          <a class="paper-tag" href="{tag_href(tag)}">{html.escape(tag)}</a>'
         for tag in manifest["tags"]
     )
-    actions = [
-        f'          <a class="primary-action" href="papers/{slug}/main.pdf">PDFを読む</a>'
-    ]
-    for entry in manifest["files"]:
-        if not entry["public"] or not entry["label"]:
-            continue
-        relative = html.escape(entry["path"], quote=True)
-        label = html.escape(entry["label"])
-        actions.append(f'          <a href="papers/{slug}/{relative}">{label}</a>')
+    actions = public_file_actions(manifest, f"papers/{slug}/", "          ")
     actions.append(f'          <a href="papers/{slug}/keywords.txt">検索語</a>')
-    actions.append(f'          <a href="{original_url}">元の記事</a>')
+    if manifest["original_url"]:
+        original_url = html.escape(manifest["original_url"], quote=True)
+        actions.append(f'          <a href="{original_url}">元の記事</a>')
     actions_html = "\n".join(actions)
     aria = html.escape(f"{manifest['title']}のファイル", quote=True)
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
@@ -358,17 +385,12 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
         f"{html.escape(tag)}</a>"
         for tag in manifest["tags"]
     )
-    actions = [
-        f'            <a class="primary-action" href="../../papers/{slug}/main.pdf">PDFを読む</a>'
-    ]
-    for entry in manifest["files"]:
-        if not entry["public"] or not entry["label"]:
-            continue
-        path = html.escape(entry["path"], quote=True)
-        label = html.escape(entry["label"])
-        actions.append(f'            <a href="../../papers/{slug}/{path}">{label}</a>')
-    original_url = html.escape(manifest["original_url"], quote=True)
-    actions.append(f'            <a href="{original_url}">元の記事</a>')
+    actions = public_file_actions(
+        manifest, f"../../papers/{slug}/", "            "
+    )
+    if manifest["original_url"]:
+        original_url = html.escape(manifest["original_url"], quote=True)
+        actions.append(f'            <a href="{original_url}">元の記事</a>')
     return f"""        <article class="tag-page-paper">
           <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span><span>{kind}</span></div>
           <h3><a href="../../papers/{slug}/">{title}</a></h3>
@@ -435,7 +457,9 @@ def rendered_math_index_item(manifest: dict[str, Any]) -> str:
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
     published_date = html.escape(str(manifest["published_at"])[:10])
-    file_links = [f'<a href="../papers/{slug}/main.pdf">PDF</a>']
+    file_links = (
+        [f'<a href="../papers/{slug}/main.pdf">PDF</a>'] if has_pdf(manifest) else []
+    )
     for entry in manifest["files"]:
         if not entry["public"] or not entry["label"]:
             continue
@@ -525,16 +549,11 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
         f'          <span class="keyword-chip">{html.escape(keyword)}</span>'
         for keyword in manifest["keywords"]
     )
-    actions = ['          <a class="primary-action" href="main.pdf">PDFを読む</a>']
-    for entry in manifest["files"]:
-        if not entry["public"] or not entry["label"]:
-            continue
-        path = html.escape(entry["path"], quote=True)
-        label = html.escape(entry["label"])
-        actions.append(f'          <a href="{path}">{label}</a>')
+    actions = public_file_actions(manifest, "", "          ")
     actions.append('          <a href="keywords.txt">検索語テキスト</a>')
-    original_url = html.escape(manifest["original_url"], quote=True)
-    actions.append(f'          <a href="{original_url}">電波通信の元記事</a>')
+    if manifest["original_url"]:
+        original_url = html.escape(manifest["original_url"], quote=True)
+        actions.append(f'          <a href="{original_url}">電波通信の元記事</a>')
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -709,7 +728,7 @@ def command_stage(args: argparse.Namespace) -> None:
             if not pdf.is_file():
                 raise PaperToolError(f"generated PDF is missing: {pdf}")
             shutil.copy2(pdf, target_dir / "main.pdf")
-        else:
+        elif has_pdf(manifest):
             shutil.copy2(source_dir / "published.pdf", target_dir / "main.pdf")
         (target_dir / "index.html").write_text(
             rendered_paper_page(manifest), encoding="utf-8"
@@ -742,6 +761,136 @@ def resolve_source_dir(spec_path: Path, spec: dict[str, Any]) -> Path:
         raise PaperToolError("spec.source_dir is required")
     raw = Path(raw_value)
     return (raw if raw.is_absolute() else spec_path.parent / raw).resolve()
+
+
+def extracted_tex_title(source: str) -> str:
+    """Extract a conservative plain-text title from a TeX title command."""
+    match = re.search(r"\\title\s*\{", source)
+    if not match:
+        return ""
+    start = match.end()
+    depth = 1
+    escaped = False
+    end = start
+    for end in range(start, len(source)):
+        character = source[end]
+        if escaped:
+            escaped = False
+            continue
+        if character == "\\":
+            escaped = True
+            continue
+        if character == "{":
+            depth += 1
+        elif character == "}":
+            depth -= 1
+            if depth == 0:
+                break
+    if depth != 0:
+        return ""
+    title = source[start:end]
+    previous = None
+    while title != previous:
+        previous = title
+        title = re.sub(r"\\[A-Za-z@]+\*?(?:\[[^\]]*\])?\{([^{}]*)\}", r"\1", title)
+    title = re.sub(r"\\[A-Za-z@]+\*?", "", title)
+    title = title.replace("~", " ").replace("{", "").replace("}", "")
+    return " ".join(title.split()).strip()
+
+
+def next_sequence_for_date(published: datetime) -> int:
+    used: list[int] = []
+    for manifest_path in sorted(PAPERS_DIR.glob("*/paper.json")):
+        manifest = load_json(manifest_path)
+        validate_manifest(manifest, manifest_path)
+        if str(manifest["published_at"])[:10] == f"{published:%Y-%m-%d}":
+            used.append(int(manifest["sequence"]))
+    return max(used, default=0) + 1
+
+
+def command_import_tex(args: argparse.Namespace) -> None:
+    """Create a guaranteed-publishable source-only paper from one TeX file."""
+    source = Path(args.tex_file).expanduser().resolve()
+    if not source.is_file():
+        raise PaperToolError(f"TeX file does not exist: {source}")
+    if source.suffix.casefold() != ".tex":
+        raise PaperToolError(f"expected a .tex file: {source}")
+    try:
+        source_text = source.read_text(encoding="utf-8", errors="replace")
+    except OSError as error:
+        raise PaperToolError(f"cannot read TeX file: {source}: {error}") from error
+
+    if args.published_at:
+        try:
+            published = datetime.fromisoformat(args.published_at)
+        except ValueError as error:
+            raise PaperToolError("--published-at must be ISO 8601") from error
+        published_at = args.published_at
+    else:
+        published = datetime.now().astimezone().replace(microsecond=0)
+        published_at = published.isoformat()
+    sequence = args.sequence or next_sequence_for_date(published)
+    if sequence < 1:
+        raise PaperToolError("--sequence must be a positive integer")
+    slug = f"{published:%Y-%m-%d}-{sequence:02d}"
+    destination = PAPERS_DIR / slug
+    if destination.exists():
+        raise PaperToolError(f"destination already exists: {destination}")
+
+    title = (args.title or extracted_tex_title(source_text) or source.stem).strip()
+    if not title:
+        title = "無題のTeX原稿"
+    target_name = "source.tex"
+    try:
+        destination.mkdir(parents=True)
+        target = destination / target_name
+        shutil.copy2(source, target)
+        source_hash = sha256(source)
+        if sha256(target) != source_hash:
+            raise PaperToolError(f"copy verification failed: {source}")
+        manifest = {
+            "schema_version": 1,
+            "slug": slug,
+            "legacy_slugs": [],
+            "title": title,
+            "published_at": published_at,
+            "sequence": sequence,
+            "year": published.year,
+            "kind": "TeX原稿",
+            "math_section": "",
+            "summary": "TeX原稿を公開しています。",
+            "original_url": args.original_url or "",
+            "order": int(f"{published:%Y%m%d}{sequence:02d}"),
+            "tags": ["数学"],
+            "keywords": [title],
+            "build": {"enabled": False, "engine": ""},
+            "files": [
+                {
+                    "path": target_name,
+                    "role": "manuscript",
+                    "label": "TeXソース",
+                    "public": True,
+                    "original_sha256": source_hash,
+                    "sha256": source_hash,
+                }
+            ],
+            "approved_changes": [],
+        }
+        manifest_path = destination / "paper.json"
+        write_json(manifest_path, manifest)
+        (destination / "keywords.txt").write_text(
+            rendered_keywords(manifest), encoding="utf-8"
+        )
+        validate_manifest(manifest, manifest_path)
+        errors = verify_one(manifest_path, manifest)
+        if errors:
+            raise PaperToolError("; ".join(errors))
+    except Exception:
+        shutil.rmtree(destination, ignore_errors=True)
+        raise
+    if not args.no_catalog:
+        command_catalog(argparse.Namespace(check=False))
+    print(f"IMPORTED {slug} as a source-only paper with byte-identical TeX")
 
 
 def command_import(args: argparse.Namespace) -> None:
@@ -937,6 +1086,17 @@ def parser() -> argparse.ArgumentParser:
     import_parser.add_argument("spec")
     import_parser.add_argument("--no-catalog", action="store_true")
     import_parser.set_defaults(func=command_import)
+
+    import_tex_parser = subparsers.add_parser(
+        "import-tex", help="create a source-only paper from one TeX file"
+    )
+    import_tex_parser.add_argument("tex_file")
+    import_tex_parser.add_argument("--title")
+    import_tex_parser.add_argument("--published-at")
+    import_tex_parser.add_argument("--sequence", type=int)
+    import_tex_parser.add_argument("--original-url")
+    import_tex_parser.add_argument("--no-catalog", action="store_true")
+    import_tex_parser.set_defaults(func=command_import_tex)
 
     approve_parser = subparsers.add_parser(
         "approve-change", help="record an explicitly requested source-file change"

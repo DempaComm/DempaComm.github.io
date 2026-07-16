@@ -14,6 +14,16 @@
 
 ## 新しい原稿の取り込み
 
+TeXファイル1本だけから、コンパイル成否に左右されない最低限の記事を作る場合は次を使う。
+
+```sh
+python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex
+```
+
+原稿はバイト単位で同一の `source.tex` として保存され、PDFのないソースのみの記事ページになる。題名は単純な `\title{...}` またはファイル名から、公開日時と同日内番号は実行時点から補う。詳しい指定方法と、一般的なAIに渡せる手順は `docs/MINIMAL_TEX_IMPORT.md` にある。
+
+複数ファイル、既存PDF、自動ビルド設定まで一度に登録する通常の取り込みでは、次の仕様JSONを使う。
+
 まず、リポジトリ外に取り込み仕様JSONを作る。仕様例は `examples/paper-import.example.json` にある。
 
 ```sh
@@ -29,7 +39,7 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json
 5. 標準の `.latexmkrc` がなければ生成する。
 6. `paper.json` から `keywords.txt` と `index.html` の原稿一覧を再生成する。
 
-既存PDFを原稿と一緒に保存するだけの試験公開では、取り込み仕様の `build_enabled` を `false` にし、完成PDFを `published.pdf` として保護対象へ含める。この場合は原稿を自動コンパイルせず、保存されたPDFを公開時に `main.pdf` として配置する。
+既存PDFを原稿と一緒に保存するだけの試験公開では、取り込み仕様の `build_enabled` を `false` にし、完成PDFを `published.pdf` として保護対象へ含める。この場合は原稿を自動コンパイルせず、保存されたPDFを公開時に `main.pdf` として配置する。`build_enabled` が `false` で `published.pdf` もない場合は、PDFリンクを出さず公開ソースへのリンクを主ボタンにする。
 
 既存の保存先がある場合は上書きせず停止する。
 
