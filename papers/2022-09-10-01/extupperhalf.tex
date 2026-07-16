@@ -1,0 +1,969 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+\newcommand{\ddd}{\mathbf{D}}
+
+\title{$C^{\infty}$関数の鏡像拡張}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+\section{準備}
+
+
+\begin{df}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき$f$が$a\in U$で
+\textbf{全微分可能}
+であるとは
+線型写像\footnote{本来は接空間の間の線型写像$A: T_{a}U\to T_{f(a)}\rr^{l}$と書くべきかもしれないが，解析学だとユークリッド空間とその接空間を同一視する．また線型写像ではなく，行列と言ってもよい．なぜなら有限次元空間の間の線型写像は行列と同一視されるからである．}
+$A: \rr^{k}\to \rr^{l}$
+が存在し
+\[
+\lim_{x\to a, x\neq a}
+\frac{|f(x)-f(a)-A(x-a)|}{|x-a|}
+\]
+が成り立つときにいう．
+このとき$f$は点$a$において
+任意の方向に偏微分可能であり，さらに
+$A$は行列として
+\[
+A=\left(\frac{\partial f_{j}}{\partial x_{i}}(a)\right)_{i=1, \dots, k, j=1, \dots, l}
+\]
+と表される．
+この$A$のことを\textbf{$f$の導関数}であるとか
+\textbf{ヤコビ行列}だとか呼ぶ．
+ここで
+$f=(f_{1}, \dots, f_{l})$と定義する．
+そしてこの$A$をこの文章では
+$A=(\ddd f)(a)$と表す．
+\end{df}
+
+
+\begin{df}
+$k, l\in \zz_{ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$は$C^{1}$級とする．
+このとき関数$e_{f}: U\times U\to \rr^{l}$
+を
+\[
+e_{f}(x, y)=f(x)-f(y)-(\ddd f)(y)(x-y)
+\]
+と定義する．
+この関数は連続関数であることに注意しよう．
+そして
+$U\times U$上の
+関数$E: U\times U\to \rr^{l}$を
+\[
+E_{f}(x, y)=
+\begin{cases}
+\frac{e_{f}(x, y)}{|x-y|} & \text{$x\neq y$;}\\
+0 & \text{$x=y$}
+\end{cases}
+\]
+と定義する．
+\end{df}
+
+この定義のもと次が成り立つ．
+\begin{lem}\label{lem:1step}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$を$C^{1}$級とする．
+このとき任意の$a\in U$について
+\[
+\lim_{x\to a, x\neq a}\frac{e(x, a)}{|x-a|}
+=\lim_{x\to a}E(x, a)=0. 
+\]
+が成り立つ．
+
+\end{lem}
+\begin{proof}
+全微分可能性の定義から明らか．
+\end{proof}
+
+
+初等的な事実として以下が成り立つ．
+\begin{thm}
+$k, l\in \zz_{ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき
+$f$を$C^{1}$級ならば
+$f$は$U$内の任意の点で全微分可能である．
+またこのとき$\ddd f: U\to \rr^{k\times l}$; 
+$x\to (\ddd f)(x)$
+は連続写像である．
+\end{thm}
+
+以下は多変数関数に関する平均値の定理である．
+\begin{lem}\label{lem:heikinnti}
+$k\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr$を$C^{1}$級とする．
+2点$x, y\in U$に関して
+$x$と$y$を結ぶ直線が$U$に含まれていると仮定する．
+すなわち任意の$t\in [0, 1]$
+について$tx+(1-t)y\in U$ということである．
+このとき，
+$x$と$y$を結ぶ直線上の点$z$が存在して
+\[
+f(x)-f(y)=\sum_{q=0}^{k}\partial_{q}f(z)(x_{q}-y_{q})
+\]
+が成り立つ．
+\end{lem}
+
+\begin{proof}
+関数$F\colon [0, 1]\to \rr$
+を
+$F(t)=f(tx+(1-t)y)$
+と定義する．
+このとき$F$は$[0, 1]$上連続で
+$(0, 1)$上では微分可能である．
+よって一変数の平均値の定理により
+$F(1)-F(0)=F^{\prime}(s)$
+となる$s\in (0, 1)$が存在する．
+$z=sx+(1-s)y$とおく．
+ここで合成関数の微分の公式から
+$F^{\prime}(s)=
+\sum_{q=1}^{k}\partial_{q}f(z)(x_{q}-y_{q})$
+となるので，結局
+\[
+f(x)-f(y)=\sum_{q=1}^{k}\partial_{q}f(z)(x_{q}-y_{q})
+\]
+となる．
+\end{proof}
+
+
+\begin{lem}\label{lem:hodai}
+$m\in \zz_{\ge 0}$
+とする．$\rr^{m}$
+上の連続関数からなる族
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+は関数$g\colon \rr^{m}\to \rr$
+に広義一様収束しているとする．
+このとき
+$\rr^{m}$の任意のコンパクト集合$K$
+と正の数$\epsilon \in (0, \infty)$
+に対して$\delta=\delta(K, \epsilon)\in (0, \infty)$
+が存在して以下を満たす．
+もし$x, y\in K$が$\|x-y\|\le \delta$
+を満たすならば任意の$n$について
+$|f_{n}(x)-f_{n}(y)|\le \epsilon$ 
+と
+$|g(x)-g(y)|\le \epsilon$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず，
+各$f_{n}$は連続であり，$g$に広義一様収束しているので
+$g$は連続である．
+ゆえに
+$g$は$K$上で一様連続である．
+よって
+ある$\delta_{1}\in (0, \infty)$が存在して
+$x, y\in K$が
+$\|x-y\|\le \delta_{1}$を満たすならば$|g(x)-g(y)|\le \epsilon/3$
+が成り立つ．
+さて$\{f_{n}\}$
+は$g$に広義一様収束しているので特に$K$上では
+$g$に一様収束している．
+つまり十分大きい$N\in \zz_{\ge 0}$
+について$n>N$を満たす$n$について
+任意の$x\in K$
+について$|g(x)-f_{n}(x)|\le \epsilon/3$
+が成り立つ．
+さて，$\{0, \dots, N\}$
+は有限集合であり，
+$f_{0}, \dots, f_{N}$は$K$上で一様連続になるので，十分小さい$\delta_{2}\in (0, \infty)$
+をとれば，もし$x, y\in K$
+が$|x-y|\le \delta_{2}$
+を満たすならば任意の$i\in \{0, \dots, N\}$について
+$|f_{i}(x)-f_{i}(x)|\le \epsilon$
+が成り立つ．
+ここで$\delta=\min\{\delta_{1}, \delta_{2}\}$とする．
+そして
+$x, y\in K$が$|x-y|\le \delta$
+を満たすとする．
+このとき$\delta\le \delta_{2}$
+なので$i\in \{0, \dots, N\}$
+について
+$|f_{i}(x)-f_{i}(y)|\le \epsilon$
+となる．
+$n>N$となる$n$については
+$\delta\le \delta_{1}$なので
+\[
+|f_{n}(x)-f_{n}(y)|
+=|f_{n}(x)-g(x)|
++|g(x)-g(y)|
++
+|g(y)-f_{n}(y)|
+\le 3\cdot \frac{\epsilon}{3}=\epsilon
+\]
+が成り立つ．
+これで補題が示された．
+\end{proof}
+\begin{cau}
+おそらく，コンパクト開位相におけるコンパクトな族は
+定義域内のコンパクト集合を与えるとその上で
+同程度一様連続になるという定理があるのだと思われる．
+\end{cau}
+
+\begin{prop}\label{prop:limit}
+$m\in \zz_{\ge 1}$
+とする．
+任意の$n\in \zz_{\ge 0}$
+に対して$f_{n}\colon \rr^{m}\to \rr$
+を関数とする．
+以下を仮定する．
+\begin{enumerate}
+\item
+各点$x\in \rr^{m}$について
+$\lim_{n\to \infty}f_{n}(x)$が存在する．
+以下では$f(x)=\lim_{n\to \infty}f_{n}(x)$とおく．
+\item 
+各$f_{n}$は各$q\in \{1, \dots, m\}$について
+$x_{q}$方向に偏微分可能であり，さらに
+$\partial_{q}f_{n}$は$\rr^{m}$上で連続である．
+\item 
+各点$x$について
+$\lim_{n\to \infty}\partial f_{n}(x)$
+は収束し，
+さらに$\rr^{m}$
+上で広義一様収束する．
+
+\end{enumerate}
+このとき$f$全微分可能である．
+特に
+各$x_{q}$方向に偏微分可能であり，
+さらに任意の$q$と$x\in \rr^{m}$について
+$\partial_{q}f(x)=
+\lim_{n\to \infty}\partial_{q}f_{n}(x)$が成り立つ．
+\end{prop}
+\begin{proof}
+まず$f_{n}$が$f$に広義一様収束していることをみよう．
+$\rr^{m}$の閉球体上で一様収束すること証明すれば十分である．
+$\delta\in (0, \infty)$を任意に取る．
+$B(0, \delta)$上で一様収束することをこれから示す．
+仮定の1, 2から，
+十分大きい$N\in \zz_{\ge 0}$を取ると
+任意の$i, j>N$についてと
+任意の$q\in \{1, \dots, m\}$について
+\[
+\sup_{x\in \rr^{m}}|\partial_{q}f_{j}(x)-\partial_{q}f_{i}(x)|\le \frac{\epsilon}{2m\delta}
+\] 
+と
+\[
+|f_{i}(0)-f_{j}(0)|\le \epsilon/2
+\]
+が成り立つ．
+(収束するので特にコーシー列になる)．
+
+$k, l\in \zz_{\ge 0}$を$k, l>N$となるようにとる．
+このとき
+補題\ref{lem:heikinnti}より
+$x\in B(a, \delta)$を任意に取ると
+$a$と$x$を結ぶ直線上の点$z$と$w$が存在して
+\begin{align}
+&f_{k}(x)-f_{k}(a)=
+\sum_{q=1}^{m}\partial_{q}f_{k}(z)x_{q}\\
+&f_{l}(x)-f_{l}(a)
+=
+\sum_{q=1}^{m}\partial_{q}f_{l}(w)x_{q}
+\end{align}
+が成り立つ．
+このとき$|x_{i}|\le \|x\|\le \delta$なので
+\[
+|(f_{k}(x)-f_{k}(a))-(f_{l}(x)-f_{l}(a))|
+\le 
+\|x\|\cdot \sum_{q=0}^{m}|
+\partial_{q}f_{k}(z))-\partial_{q}f_{l}(w)|
+\le \epsilon/2
+\]
+が成り立つ．
+よって$|f_{k}(0)-f_{l}(0)|\le \epsilon/2$なので
+\[
+|f_{k}(x)-f_{l}(x)|\le \epsilon. 
+\]
+が成り立つ．
+$l\to \infty$とすると
+\[
+|f(x)-f_{l}(x)|\le \epsilon
+\]
+なので$f_{n}$が$f$に$B(a, \delta)$上
+一様収束している
+ことがわかる．
+よって$\rr^{m}$上で
+$f_{n}$は$f$に広義一様収束する.
+
+
+
+
+
+
+
+
+
+
+さて任意の$q\in \{1, \dots, m\}$
+について
+$\lim_{n\to \infty}\partial_{q}f_{n}(x)$
+を$G_{q}(x)$と書くことにする．
+各$\partial_{q}f_{n}$が連続なので
+$G_{q}$も連続である．
+
+
+さて
+\[
+R(x, y)=
+f(x)-f(y)-
+\sum_{q=1}^{m}G_{q}(y)(x_{q}-y_{q})
+\]
+とする．今から
+任意に固定した$a\in \rr^{m}$について
+\[
+\lim_{x\to a, x\neq a}\frac{R(x, a)}{\|x-a\|}=0
+\]
+となることを証明しよう．
+
+まず$K=B(a, 1)$
+とおく．
+$x\in K\setminus \{a\}$を任意に取る．
+各$n\in \zz_{\ge 0}$について
+補題 \ref{lem:heikinnti}より
+$x$と$a$の間の点$z_{n}$
+が存在して
+\[
+f_{n}(x)-f_{n}(a)=\sum_{q=1}^{m}\partial_{q}f_{n}(z_{n})
+(x_{q}-a_{q})
+\]
+が成り立つ．
+ここで必要ならば部分列をとり，
+$z_{n}$は$z$に収束するとしてもよい．
+この$z$は$a$と$x$を結ぶ直線の上の点である．
+
+補題\ref{lem:hodai}より，
+$\epsilon\in (0, \infty)$
+を与えたとき，
+$\delta=\delta(\epsilon)\in (0, \infty)$
+が存在して
+$x, y\in B(a, 1)$が$|x-y|\le \delta$
+を満たすならば任意の$n\in \zz_{\ge 0}$
+と$q\in \{1, \dots, m\}$について
+$|\partial_{q}f_{n}(x)-\partial_{q}f_{n}(y)|\le \epsilon$
+である．特に$|G_{q}(x)-G_{q}(y)|\le \epsilon$
+もわかる．
+
+ここで$B(a, 1)$上で
+$\partial_{q}f_{n}(z)$は
+$G_{q}$
+に一様収束しているの十分大きい$n$について
+$ |G_{a}(z)-\partial_{q}f_{n}(z)|\le \epsilon$
+である．
+そして$n$を十分大きく取れば$\|z_{n}-z\|\le \delta$
+となるので，
+$|\partial_{q}f_{n}(z)-\partial_{q}f_{n}(z_{n})|\le \epsilon$
+となる．
+よって
+\[
+|G_{q}(z)-\partial_{q}f_{n}(z_{n})|
+\le |G_{a}(z)-\partial_{q}f_{n}(z)|+
+|\partial_{q}f_{n}(z)-\partial_{q}f_{n}(z_{n})|
+\le 2\epsilon
+\]
+なので特に$\lim_{n\to \infty}\partial_{q}f_{n}(z_{n})=G_{q}(z)$である．
+よって
+\[
+f(x)-f(a)=\sum_{q=1}^{m}G_{q}(z)(x_{q}-a_{q})
+\]
+である．
+従って，$x\in B(a, 1)$
+が$\|x-a\|\le \delta$
+を満たすならば
+\begin{align*}
+|R(x, a)|&=
+\left|
+\sum_{q=1}^{m}G_{q}(z)(x_{q}-a_{q})-\sum_{q=1}^{m}G_{q}(a)(x_{q}-a_{q})
+\right|
+\le \|x-a\|\sum_{q=1}^{m}|G_{q}(z)-G_{q}(a)|\\
+&\le
+m\epsilon\|x-a\|
+\end{align*}
+が成り立つので，
+\[
+\lim_{x\to a}\frac{R(x, y)}{\|x-a\|}=0
+\]
+である．
+これは$f$が全微分可能であり，
+さらに
+$\partial_{q}f=G_{q}=\lim_{n\to \infty}\partial_{q}f_{n}$
+ということを意味する．
+\end{proof}
+
+
+\begin{prop}\label{prop:sumsum}
+$m\in \zz_{\ge 1}$
+とする．
+任意の$n\in \zz_{\ge 0}$
+に対して$f_{n}\colon \rr^{m}\to \rr$
+を関数とする．
+以下を仮定する．
+\begin{enumerate}
+\item
+各点$x\in \rr^{m}$について
+$\sum_{n=0}^{\infty}f_{n}(x)$が存在する．
+以下では$f(x)=\sum_{n=0}^{\infty}f_{n}(x)$とおく．
+\item 
+各$f_{n}$は各$q\in \{1, \dots, m\}$について
+$x_{q}$方向に偏微分可能であり，さらに
+$\partial_{q}f_{n}$は$\rr^{m}$上で連続である．
+\item 
+各点$x$について
+$\sum_{n=0}^{\infty}\partial f_{n}(x)$
+は収束し，
+さらに$\rr^{m}$
+上で広義一様収束する．
+
+\end{enumerate}
+このとき$f$全微分可能である．
+特に
+各$x_{q}$方向に偏微分可能であり，
+さらに任意の$q$と$x\in \rr^{m}$について
+$\partial_{q}f(x)=
+\lim_{n\to \infty}\partial_{q}f_{n}(x)$が成り立つ．
+\end{prop}
+\begin{proof}
+各$n\in\zz_{\ge 0}$に対し
+$F_{n}\colon \rr^{m}\to \rr$
+を
+$F_{n}(x)=\sum_{k=0}^{n}f_{n(x)}$
+と定義すると，
+$\{F_{n}\}_{n\in \zz_{\ge 0}}$
+は命題 \ref{prop:limit}
+の仮定を満たすので，
+定理が成り立つ．
+\end{proof}
+
+\section{本文}
+
+
+\begin{thm}[ファンデルモンドの行列式]
+$n\in \zz_{\ge 1}$とする．
+このとき任意の$x_{1}\dots, x_{n}\in \rr$
+に対して
+\[
+\begin{vmatrix}
+1 & x_{1} & x_{1}^{2} & \dots & x_{1}^{n-1}\\
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1}\\
+\vdots & \vdots  &  \vdots & \ddots &\vdots\\
+1 & x_{n} & x_{n}^{2} & \dots & x_{n}^{n-1}
+\end{vmatrix}
+=
+\begin{vmatrix}
+1 & 1 &  \dots & 1\\
+x_{1} & x_{2} &  \dots & x_{n}\\
+x_{1}^{2} & x_{2}^{2} &  \dots & x_{n}^{2}\\
+\vdots & \vdots  &  \ddots & \vdots &\\
+x_{1}^{n-1} & x_{2}^{n-1} &  \dots & x_{n}^{n-1}
+\end{vmatrix}
+=\prod_{i<j}(x_{j}-x_{i})
+\]
+が成り立つ．
+\end{thm}
+
+\begin{lem}[クラメルの公式]
+$n\in \zz_{\ge 0}$
+とする．$A$を$n$次の可逆な正方行列として
+\[
+A=
+\begin{pmatrix}
+a_{11} & a_{12} &  \dots & a_{1n}\\
+a_{21} & a_{22} &  \dots & a_{2n}\\
+\vdots & \vdots  &   \ddots &\vdots\\
+a_{n1} & a_{n2} &  \dots & a_{nn}
+\end{pmatrix}
+\]
+とする．
+$b$を$n$次元の縦ベクトルとして
+\[
+b=
+\begin{pmatrix}
+b_{1}\\
+b_{2}\\
+\vdots\\
+b_{n}
+\end{pmatrix}
+\]
+とする．
+このとき
+線形方程式
+$Ax=b$の解は
+$x$の第$i$成分を$x_{i}$として
+\[
+x_{i}=\frac{\det(A_{i})}{\det(A)}
+\]
+で表される．
+ここで$A_{i}$
+は$A$の第$i$列目の成分を$b$に置き換えた行列である．
+\end{lem}
+
+
+\begin{lem}\label{lem:seq}
+以下の条件を満たす二つの実数列$\{a_{i}\}_{i\in \zz_{\ge 0}}$
+と$\{b_{i}\}_{i\in \zz_{\ge 0}}$が存在して以下を満たす．
+\begin{enumerate}
+\item 
+任意の$i$について$b_{i}<0$を満たす．
+\item 
+任意の$n\in  \zz_{\ge 0}$について
+$\sum_{i=0}^{\infty}|a_{i}||b_{i}|^n<\infty$を満たす. 
+\item 
+任意の$n\in \zz_{\ge 0}$について
+$\sum_{i=0}^{\infty}a_{i}(b_{i})^n=1$を満たす. 
+\item 
+$\lim_{i\to \infty}b_{i}=-\infty$が成り立つ．
+\end{enumerate}
+
+\end{lem}
+\begin{proof}
+各$k\in \zz_{\ge 0}$に対して
+$b_{k}=-2^{k}$
+と定義する．
+そして$a_{k, N}$
+を
+$\sum_{k=0}^{N}X_{k}(b_{k})^{n}=1$
+の解とする．
+つまり$N+1$次の行列
+\[
+A=
+\begin{pmatrix}
+1 & 1 &  \dots & 1\\
+b_{0} & b_{1} &  \dots & b_{N}\\
+b_{0}^{2} & b_{1}^{2} &  \dots & b_{N}^{2}\\
+\vdots & \vdots  &  \ddots & \vdots &\\
+b_{0}^{N} & b_{1}^{N} &  \dots & b_{N}^{N}
+\end{pmatrix}
+\]
+と全ての成分が$1$である$N+1$次元の縦ベクトル
+\[
+u=
+\begin{pmatrix}
+1\\
+\vdots\\
+1
+\end{pmatrix}
+\]
+についての線形方程式
+$Ax=u$
+の第$k$成分を$a_{k, N}$
+とする．
+するとクラメルの公式から$a_{k, N}$
+は
+\[
+a_{k, N}
+=
+\frac{\det(A_{k})}{\det(A)}
+\]
+と表される．
+ここで$A_{k}$は$A$の第$k$列を$u$に変えた行列である．
+今からこの量を具体的に表示しよう．
+まず$A_{k}$
+を
+\[
+A_{k}=
+\begin{pmatrix}
+1 & 1 &  \dots & 1\\
+c_{0} & c_{1} &  \dots & c_{N}\\
+c_{0}^{2} & c_{1}^{2} &  \dots & c_{N}^{2}\\
+\vdots & \vdots  &  \ddots & \vdots &\\
+c_{0}^{N} & c_{1}^{N} &  \dots & c_{N}^{N}
+\end{pmatrix}
+\]
+と表示する．
+このとき$i\neq k$ならば$c_{i}=b_{i}$
+であり，$i=k$の時は$c_{k}=1$である．
+
+さて，まず$\det(A)$
+はファンデルモンドの行列式の公式が使えて
+\[
+\det(A)=\prod_{i<j}(b_{j}-b_{i})=
+\prod_{i<j}(2^{i}-2^{j})
+\]
+となる．
+また
+$\det(A_{k})$
+もファンデルモンドの行列式が適応できる行列の形になっている．よって第$k$列の成分が$u$になっていることに気をつけると
+\[
+\det(A_{k})=\prod_{i<j}(c_{j}-c_{i})
+=\prod_{i<j, i\neq k, j\neq k}(b_{j}-b_{i})
+\prod_{j<k}(1-b_{j})\prod_{k<j}(b_{j}-1)
+\]
+すると
+\begin{align*}
+a_{k, N}
+&=
+\frac{\det(A_{k})}{\det(A)}\\
+&=
+\frac{\prod_{i<j, i\neq k, j\neq k}(b_{j}-b_{i})
+\prod_{j<k}(1-b_{j})\prod_{k<j}(b_{j}-1)
+}{\prod_{i<j, i\neq k, j\neq k}(b_{j}-b_{i})
+\prod_{j<k}(b_{k}-b_{j})\prod_{k<j}(b_{j}-b_{k})
+}\\
+&=
+\frac{
+\prod_{j<k}(1+2^{j})\prod_{k<j}(-2^{j}-1)
+}{
+\prod_{j<k}(-2^{k}+2^{j})\prod_{k<j}(-2^{j}+2^{k})
+}\\
+&=
+\prod_{j=0}^{k-1}\frac{(1+2^{j})}{2^{j}-2^{k}}
+\prod_{i=k+1}^{N}
+\frac{1+2^{j}}{2^{j}-2^{k}}
+\end{align*}
+となる．
+今ここで
+$\beta_{k}$を
+\[
+\beta_{k}=\prod_{j=0}^{k-1}\frac{1+2^{j}}{2^{j}-2^{k}}
+\]
+とし，
+$\gamma_{k, N}$を
+\[
+\gamma_{k, N}=
+\prod_{j=k+1}^{N}\frac{1+2^{j}}{2^{j}-2^{k}}
+\]
+とすると
+\[
+a_{k, N}=\beta_{k}\cdot \gamma_{k, N}
+\]
+である．
+さて，$a_{k}$
+を$a_{k}=\lim_{N\to \infty}a_{k, N}$
+と定義したいのだが，この極限が存在することを確かめよう．
+今から$\beta_{k}$と
+$\gamma_{k, N}$
+を上から評価する．
+まず$j\in \{0, \dots, k-1\}$のとき，
+$2^{j}\le 2^{k}$なので
+\[
+|2^{j}-2^{k}|=2^{k}-2^{j}\ge 2^{k-1}
+\]
+なので
+\begin{align*}
+|\beta_{k}|&\le \prod_{j=0}^{k-1}(1+2^{j})2^{-(k-1)}
+\le \prod_{j=0}^{k-1}2^{j+1-(k-1)}
+=\prod_{j=0}^{k-1}2^{j+2-k}
+=2^{\sum_{j=0}^{k-1}(j+2-k)}\\
+&=
+2^{\frac{k(k-1)}{2}+(2-k)k}
+=2^{\frac{-k^{2}+3k}{2}}
+\end{align*}
+次に$\gamma_{k, N}$を評価する．
+$\gamma_{k, N}$の各因子について
+\[
+\frac{1+2^{j}}{2^{j}-2^{k}}=\frac{1+2^{k}+2^{j}-2^{k}}{2^{j}-2^{k}}=
+1+\frac{1+2^{k}}{2^{j}-2^{k}}
+\]
+となる$j\ge k+1$のとき
+$2^{j}-2^{k}\ge 0$に注意しよう．
+$x\ge 0$のとき
+$\log(1+x)\le x$に注意すると
+\begin{align*}
+\log(\gamma_{k, N})
+&=
+\sum_{j=k+1}^{N}\log\left(1+\frac{1+2^{k}}{2^{j}-2^{k}}\right)\le 
+\sum_{j=k+1}^{N}\frac{1+2^{k}}{2^{j}-2^{k}}
+\le 
+(1+2^{k})\sum_{j=k+1}^{N}2^{-(j-1)}\\
+&\le 
+(1+2^{k})\sum_{j=k+1}^{\infty}2^{-(j-1)}
+=(1+2^{k})2^{-k+1}\le 4
+\end{align*}
+となる．
+つまり$k$を固定したとき$\gamma_{k, N}$
+は有界でその絶対値は上から$e^{4}$で抑えられる.
+そして$N$が増加するごとに$1$より大きい因子がかけられていくので$\gamma_{k, N}$は$N$が増加するとき単調増加する．つまり$\gamma_{k, N}$は$N\to \infty$のとき収束する．$\beta_{k}$は$N$に依存しないので
+$\lim_{N\to \infty}a_{k, N}$は存在する．
+さらに上での評価から
+\begin{align}
+|a_{k}|\le e^{4}2^{\frac{-k^{2}+3k}{2}}
+\end{align}
+という不等式を得る．
+ここで$b_{k}=-2^{k}$なので
+各$n\in \zz_{\ge 0}$について
+\[
+\sum_{k=0}^{\infty}|a_{k}||b_{k}|^{n}
+\]
+は有限の値に収束する．
+$N\le k$のときには$a_{k, N}=0$と暫定的に置いてやると
+$a_{k, N}$の定義から各$n\in \zz_{\ge 0}$について
+\[
+\sum_{k=0}a_{k, N}b_{k}^{n}=1
+\]
+が成り立つ.
+$|a_{k, N}|\le |a_{k}|$
+なので優収束定理が使えて
+\[
+\sum_{k=0}a_{k}b_{k}^{n}=1
+\]
+となる．
+よって
+数列$\{a_{k}\}_{k\in \zz_{\ge 0}}$
+と$\{b_{k}\}_{k\in\zz_{\ge 0}}$は条件を満たす．
+\end{proof}
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+集合$S_{+}^{n}$
+を
+\[
+S_{+}^{n}=\rr^{n}\times (0, \infty)
+\]
+と定義し，
+$D_{+}^{n}$を
+$f\in C^{\infty}(S_{+}^{n})$
+であって，その任意階数の導関数
+は$\rr^{n}\times [0, \infty)$
+上に連続関数として拡張できるもの全体とする．
+\end{df}
+\begin{thm}
+$n\in \zz_{\ge 1}$とする．
+数列$\{a_{i}\}_{i\in \zz_{\ge 0}}$
+と$\{b_{i}\}_{i\in \zz_{\ge 0}}$
+を補題\ref{lem:seq}で存在が保証される数列とする．
+そして
+$\phi: \rr\to \rr$
+を$C^{\infty}$関数であって
+$t\le 1$のとき$\phi(t)=1$で
+$2\le t$のとき$\phi(t)=0$となるものとする．
+このとき
+$f\in D_{+}^{n}$に対して$f$は$\rr^{n}\times [0, \infty)$
+上に連続関数として拡張できるのでその拡張を同じ記号$f$で表すことにして
+\[
+E(f)(x, t)=
+\begin{cases}
+f(x, t) & \text{$t\ge 0$}\\
+\displaystyle \sum_{i=0}^{\infty}a_{i}\phi(b_{i}t)f(x, b_{i}t)
+& \text{$0<t$}
+\end{cases}
+\]
+と定義すると$E(f)$は$\rr^{n+1}$上で$C^{\infty}$関数で
+$E(f)|_{S_{+}^{n}}=f$である．
+\end{thm}
+\begin{proof}
+
+各$\alpha\in \zz_{\ge 0}^{n+1}$
+について$\lim_{t\to +0}\partial_{\alpha}f(x, t)$
+を$G_{\alpha}(x)$とする．また，
+$\partial_{\alpha}f(x, 0)=G_{\alpha}$
+と考える．そして
+各$\alpha\in \zz_{\ge 0}^{n+1}$
+について$E_{\alpha}(f)\colon \rr^{n+1}\to \rr$を
+\[
+E_{\alpha}(f)(x, t)=
+\begin{cases}
+\partial_{\alpha}f(x, t) & \text{$t\ge 0$}\\
+\displaystyle \sum_{i=0}^{\infty}a_{i}
+\partial_{\alpha}(
+\phi(b_{i}t)f(x, b_{i}t))
+& \text{$0<t$}
+\end{cases}
+\]
+と定義する．
+$E_{0}=E$に注意しよう．
+
+$r\in (0, \infty)$とし，
+$B(r)=\{\, (x, t)\mid 
+\text{$\|x\|\le r$ and  $|t|\le r$}\, \}$
+とする．
+$\alpha\in \zz_{\ge 0}^{n+1}$を固定する．このとき
+\begin{align*}
+\partial_{\alpha}\phi(b_{i}t)f(x, b_{i}t)
+&=\sum_{\beta+\gamma=\alpha, \beta\le \alpha, \gamma\le \alpha}b_{i}^{|\beta|}(\partial_{\beta}\phi)(b_{i}t)
+\cdot b_{i}^{|\gamma|}(\partial_{\gamma}f)(x, b_{i}t)\\
+&=b_{i}^{|\alpha|}
+\sum_{\beta+\gamma=\alpha, 
+\beta\le \alpha, \gamma\le \alpha}
+(\partial_{\beta}\phi)(b_{i}t)
+(\partial_{\gamma}f)(x, b_{i}t)
+\end{align*}
+である．
+さて$(x, t)\in B(r)$
+とすると$2\le b_{i}t$ならば
+$\phi$の定義から$\partial_{\beta}\phi(b_{i}t)=0$
+となる．
+よって$b_{i}\to -\infty$なので
+$(x, t)\in B(r)$
+ならば，
+$i$に依存しない定数$M_{\alpha, r}\in (0, \infty)$
+が存在して
+$|\partial_{\alpha}(\phi(b_{i}t)f(x, b_{i}t))|\le M_{\alpha, r}$
+となる．
+よって$(x, t)\in B(r)$ならば
+$|\sum_{i}a_{i}\partial_{\alpha}(\phi(b_{i}t)f(x, b_{i}t))|
+\le M_{\alpha, r}\sum_{i}a_{i}b_{i}^{|\alpha|}<\infty$
+なので，
+$\sum_{i}a_{i}\partial_{\alpha}(\phi(b_{i}t)f(x, b_{i}t))$
+は広義一様収束する．
+
+上の議論から優収束定理が使えて，$\sum_{i=0}^{\infty}a_{i}b_{i}^{m}=1$なので
+\begin{align*}
+&\lim_{t\to-0}\sum_{i=0}^{\infty}a_{i}
+\partial_{\alpha}(\phi(b_{i}t)f(x, b_{i}t))
+=\sum_{i=0}^{\infty}\lim_{t\to -0}
+a_{i}
+\partial_{\alpha}(\phi(b_{i}t)f(x, b_{i}t))\\
+&=\sum_{i=0}a_{i}b_{i}^{|\alpha|}\lim_{t\to -0}\partial_{\alpha}f(x, b_{i}t)
+=\sum_{i=0}a_{i}b_{i}^{|\alpha|}G_{\alpha}(x)
+=G_{\alpha}(x)
+\end{align*}
+を得る．
+ここで$\rr^{n+1}\times [0, \infty)$上の関数$U_{\alpha}$
+を
+\[
+U_{\alpha}(x, t)=
+\begin{cases}
+\partial_{\alpha}f(x, t) & \text{$t>0$}\\
+G_{\alpha}(x) & \text{$t=0$}
+\end{cases}
+\]
+と定義する．
+$D_{+}^{n}$の定義から$U_{\alpha}$
+は連続関数である．
+また$\rr^{n}\times (-\infty, 0]$上の関数$L_{\alpha}$
+を
+\[
+L_{\alpha}(x, t)
+=
+\begin{cases}
+E_{\alpha}(f)(x, t) & \text{$t<0$}\\
+G_{\alpha}(x) & \text{$t=0$}
+\end{cases}
+\]
+と定義する．優収束定理より$L_{\alpha}$
+は定義域の上で連続となる．
+すると定義域の共通点では同じ値を取るので，
+$t\ge 0$では$U(x, t)$, $t\le 0$では
+$L(x, t)$と定義するとこれは$\rr^{n+1}$上の関数として連続になる．
+そして命題 \ref{prop:sumsum}を帰納的に適応すると
+$\partial_{\alpha}(E(f))=E_{\alpha}(f)$
+であることがわかり，これで定理の証明が終わる．
+\end{proof}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+$M$をハウスドルフ空間であって，
+各点において$M$は$\rr^{n}\times [0, \infty)$
+の開集合と同相な開近傍をもつとする．
+このとき
+以下の条件を「条件(B1)」と呼ぶことにする：
+開被覆$\{U_{i}\}_{i\in I}$
+と同相写像
+$\phi_{i}\colon U_{i}\to U_{i}^{\sharp}
+\subset \rr^{n+1}\times [0, \infty)$
+が存在して
+任意の$i, i'\in I$について
+$F_{i, i'}=\phi_{i'}\circ \phi_{i}^{-1}$は$\rr^{n}\times [0, \infty)$
+の開集合$\phi_{i}(U_{i}\cap U_{i'})$で定義された関数であり，尚且つ$F_{i, i'}$は
+$U_{i, i'}^{\circ}=\phi_{i}(U_{i}\cap U_{i'})\setminus \rr^{n}\times \{0\}$
+上では$C^{\infty}$であり，
+$F_{i, i'}|_{U_{i, i'}^{\circ}}$
+とその任意階数の微分は
+$\phi_{i}(U_{i}\cap U_{i'})$
+上へ連続な拡張を持つ．
+
+また以下の条件を「条件(B2)」と呼ぶことにする：
+開被覆$\{U_{i}\}_{i\in I}$
+と同相写像
+$\phi_{i}\colon U_{i}\to U_{i}^{\sharp}\subset 
+\rr^{n+1}\times [0, \infty)$
+が存在して任意の$i, i'\in I$について
+$F_{i, i'}=\phi_{i'}\circ \phi_{i}^{-1}$は$\rr^{n}\times [0, \infty)$
+の開集合$\phi_{i}(U_{i}\cap U_{i'})$で定義された関数であり，尚且つ
+$\phi_{i}(U_{i}\cap U_{i'})$
+を含む$\rr^{n+1}$上の開集合$V_{i, i'}$
+とその上の$C^{\infty}$級写像$G_{i, i'}:V_{i, i'}\to \rr^{n+1}$が存在して
+$G_{i, i'}$
+を$\phi_{i}(U_{i}\cap U_{i'})$に制限すると$F_{i, i'}$になり
+$G_{i, i'}$
+は滑らかな埋め込みになる．
+\end{df}
+
+
+
+\begin{cor}
+$n\in \zz_{\ge 1}$とする．
+$M$をハウスドルフ空間であって，
+各点において$M$は$\rr^{n}\times [0, \infty)$
+の開集合と同相な開近傍をもつとする．
+このとき
+条件(B1)と条件(B2)は同値である.
+\end{cor}
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{E}
+E. Bierstone, 
+\textit{Differentiable functions}, 
+Bull. Braz. Math. Soc., 11 (2) (1980), 139--189.  
+\bibitem{Se}
+R. T. Seeley, 
+\textit{
+Extension of $C^{\infty}$ functions defined in a half space}, 
+ Proc. Amer. Math. Soc., 15 (1964), 625--626. 
+
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
