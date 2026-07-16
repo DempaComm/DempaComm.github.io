@@ -32,6 +32,7 @@ DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=n
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
 """
+LATEXMKRC_BY_ENGINE = {"platex": DEFAULT_LATEXMKRC}
 MATH_SECTIONS = (
     "代数・組合せ",
     "位相・距離・幾何",
@@ -136,6 +137,11 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     build = manifest["build"]
     if not isinstance(build, dict) or not isinstance(build.get("enabled"), bool):
         raise PaperToolError(f"{path}: build.enabled is required")
+    if build.get("engine") not in LATEXMKRC_BY_ENGINE:
+        raise PaperToolError(
+            f"{path}: build.engine must be one of: "
+            + ", ".join(sorted(LATEXMKRC_BY_ENGINE))
+        )
     if build["enabled"] and "root" not in build:
         raise PaperToolError(f"{path}: build.root is required when build is enabled")
     if build["enabled"]:
@@ -745,6 +751,7 @@ def command_import(args: argparse.Namespace) -> None:
         "tags",
         "keywords",
         "files",
+        "build_engine",
     )
     missing = [key for key in required if key not in spec]
     if missing:
@@ -794,9 +801,15 @@ def command_import(args: argparse.Namespace) -> None:
                 }
             )
         build_enabled = bool(spec.get("build_enabled", True))
+        build_engine = str(spec["build_engine"])
+        if build_engine not in LATEXMKRC_BY_ENGINE:
+            raise PaperToolError(
+                "build_engine must be one of: "
+                + ", ".join(sorted(LATEXMKRC_BY_ENGINE))
+            )
         latexmkrc = destination / ".latexmkrc"
         if build_enabled and not latexmkrc.exists():
-            latexmkrc.write_text(DEFAULT_LATEXMKRC, encoding="utf-8")
+            latexmkrc.write_text(LATEXMKRC_BY_ENGINE[build_engine], encoding="utf-8")
         manifest = {
             "schema_version": 1,
             "slug": slug,
@@ -813,9 +826,13 @@ def command_import(args: argparse.Namespace) -> None:
             "tags": list(spec["tags"]),
             "keywords": list(spec["keywords"]),
             "build": (
-                {"enabled": True, "root": str(spec.get("build_root", "main.tex"))}
+                {
+                    "enabled": True,
+                    "root": str(spec.get("build_root", "main.tex")),
+                    "engine": build_engine,
+                }
                 if build_enabled
-                else {"enabled": False}
+                else {"enabled": False, "engine": build_engine}
             ),
             "files": manifest_files,
             "approved_changes": [],

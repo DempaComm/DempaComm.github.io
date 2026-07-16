@@ -10,6 +10,7 @@
 - 原稿名は公開日と同日内の公開順から `YYYY-MM-DD-NN` とする。
 - 電波通信の既存タグは原表記のまま `tags` に保存し、追加検索語は `keywords` に分ける。
 - `keywords.txt` は `paper.json` から自動生成し、手作業では編集しない。
+- TeXエンジンは `paper.json` の `build.engine` に記録する。現在対応している値は `platex`。
 
 ## 新しい原稿の取り込み
 
@@ -31,6 +32,8 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json
 既存PDFを原稿と一緒に保存するだけの試験公開では、取り込み仕様の `build_enabled` を `false` にし、完成PDFを `published.pdf` として保護対象へ含める。この場合は原稿を自動コンパイルせず、保存されたPDFを公開時に `main.pdf` として配置する。
 
 既存の保存先がある場合は上書きせず停止する。
+
+取り込み仕様では `math_section` に数学記事総覧での主分類を、`build_engine` にTeXエンジンを指定する。現在の `build_engine` は `platex` のみ対応する。自動コンパイルしない場合も、元原稿の想定エンジンとして `build_engine` を記録する。
 
 ## 検証と監査
 
