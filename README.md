@@ -23,6 +23,7 @@
 python3 scripts/paper_tool.py verify
 python3 scripts/paper_tool.py audit
 python3 scripts/paper_tool.py catalog --check
+python3 scripts/migration_ledger.py check
 python3 scripts/paper_tool.py stage _site
 python3 scripts/paper_tool.py check-links _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
@@ -34,5 +35,9 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 サイトマップは `sitemap.xml` で公開します。
 
 使い方の詳細は `docs/MIGRATION.md` を参照してください。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
+
+電波通信の記事とMyBlog原稿の対応、未移行・検査中・公開済みの状態は
+`ledger/migration-ledger.csv` で管理します。使い方は
+`docs/MIGRATION_LEDGER.md` にまとめています。
 
 はてなブログのMT形式バックアップ原本は、このリポジトリの外で保管します。検査・変換済みの公開用データだけを配置します。
