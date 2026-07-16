@@ -23,6 +23,15 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.pdf
 
 TeXでは著者、メール、所属などの候補を報告する。PDFでは文字・メタデータの抽出を試み、全ページをPNG画像にする。フォント欠落などで文字が画像から消える可能性がある場合は検査不合格になる。自動検出には限界があるため、報告と原稿、PDFの全ページ画像を人間が確認する。確認後だけ `--privacy-reviewed` を指定できる。検査済みファイルと取り込み時のSHA-256が異なる場合は取り込みを拒否する。
 
+検査で警告や描画失敗が出ても、別の手段ですべて確認して公開すると判断した場合は、理由を必須として強制取り込みできる。
+
+```sh
+python3 scripts/paper_tool.py import-pdf manuscript.pdf \
+  --privacy-override "別のPDF閲覧環境で全ページと著者表示を確認済み"
+```
+
+検査自体を一度も実行していないファイルは強制取り込みできない。強制判断の理由、対象SHA-256、検査成否、記録日時は `paper.json` の `privacy_review` に残る。
+
 TeXファイル1本だけから、コンパイル成否に左右されない最低限の記事を作る場合は次を使う。
 
 ```sh

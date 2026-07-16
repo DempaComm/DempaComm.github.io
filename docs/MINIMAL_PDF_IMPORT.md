@@ -22,6 +22,15 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.pdf
 
 フォント欠落や文字描画失敗が報告されたPDFは、画像から個人情報が消えて見える危険があるため検査不合格になる。別の正常に表示できる環境で確認するか、公開対象から外す。警告を無視して `report.json` を手作業で作ってはいけない。
 
+別の正常なPDF閲覧環境などで全ページを確認し、それでも公開すると判断した場合は理由を記録して強制取り込みできる。
+
+```sh
+python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf \
+  --privacy-override "別環境で全ページと著者欄を確認済み"
+```
+
+`inspect-file` を一度も実行していないファイルには使えない。理由は `paper.json` に公開判断の監査記録として残る。
+
 確認が終わった場合だけ、リポジトリの最上位ディレクトリで次を実行する。
 
 ```sh

@@ -22,6 +22,15 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 
 表示された `.privacy-review/.../report.txt` を読み、`author`、メールアドレス、所属、住所などの候補を確認する。自動検出で何も出なくても安全とは限らないため、原稿自体も目視する。
 
+検査に警告が出ても、該当情報が公開してよいものだと確認できた場合は、理由を記録して強制取り込みできる。
+
+```sh
+python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex \
+  --privacy-override "著者欄は公開用の筆名であることを確認済み"
+```
+
+`inspect-file` 未実行のファイルには使えず、理由は `paper.json` に残る。
+
 確認が終わった場合だけ、リポジトリの最上位ディレクトリで次を実行する。
 
 ```sh

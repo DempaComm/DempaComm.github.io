@@ -956,8 +956,27 @@ def command_inspect_file(args: argparse.Namespace) -> None:
         text, notes = optional_pdf_text(source)
         try:
             rendered_pages = render_pdf_review(source, output)
-        except Exception:
-            shutil.rmtree(output, ignore_errors=True)
+        except PaperToolError as error:
+            failure_report = {
+                "schema_version": 1,
+                "sha256": sha256(source),
+                "source_name": source.name,
+                "file_type": file_type,
+                "findings": privacy_findings(text, file_type),
+                "notes": notes,
+                "rendered_pages": [],
+                "manual_review_required": True,
+                "inspection_status": "failed",
+                "inspection_error": str(error),
+            }
+            write_json(output / "report.json", failure_report)
+            (output / "extracted.txt").write_text(text, encoding="utf-8")
+            (output / "report.txt").write_text(
+                f"File: {source}\nSHA-256: {failure_report['sha256']}\n"
+                f"Inspection failed: {error}\n"
+                "Import is blocked unless --privacy-override with a reason is used.\n",
+                encoding="utf-8",
+            )
             raise
         (output / "extracted.txt").write_text(text, encoding="utf-8")
     findings = privacy_findings(text, file_type)
@@ -970,6 +989,7 @@ def command_inspect_file(args: argparse.Namespace) -> None:
         "notes": notes,
         "rendered_pages": [page.name for page in rendered_pages],
         "manual_review_required": True,
+        "inspection_status": "completed",
     }
     write_json(output / "report.json", report)
     report_lines = [
@@ -998,7 +1018,9 @@ def command_inspect_file(args: argparse.Namespace) -> None:
     print("MANUAL REVIEW REQUIRED before using --privacy-reviewed")
 
 
-def require_privacy_review(source: Path, acknowledged: bool) -> None:
+def require_privacy_review(
+    source: Path, acknowledged: bool, override_reason: str | None
+) -> dict[str, Any]:
     review_dir = privacy_review_path(source)
     report_path = review_dir / "report.json"
     if not report_path.is_file():
@@ -1015,6 +1037,26 @@ def require_privacy_review(source: Path, acknowledged: bool) -> None:
         or report.get("manual_review_required") is not True
     ):
         raise PaperToolError("privacy review report is invalid; run inspect-file again")
+    reason = (override_reason or "").strip()
+    if override_reason is not None and not reason:
+        raise PaperToolError("--privacy-override requires a non-empty reason")
+    if acknowledged and override_reason is not None:
+        raise PaperToolError(
+            "use either --privacy-reviewed or --privacy-override, not both"
+        )
+    if reason:
+        return {
+            "status": "overridden",
+            "reason": reason,
+            "source_sha256": report["sha256"],
+            "inspection_status": str(report.get("inspection_status", "unknown")),
+            "recorded_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        }
+    if report.get("inspection_status") != "completed":
+        raise PaperToolError(
+            "privacy inspection failed; rerun in a working environment or use "
+            "--privacy-override \"reason\""
+        )
     if expected_type == "pdf":
         pages = report.get("rendered_pages")
         if (
@@ -1034,6 +1076,13 @@ def require_privacy_review(source: Path, acknowledged: bool) -> None:
             "manual privacy review is required; after reviewing the report and every "
             "PDF page, rerun with --privacy-reviewed"
         )
+    return {
+        "status": "reviewed",
+        "reason": "",
+        "source_sha256": report["sha256"],
+        "inspection_status": "completed",
+        "recorded_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+    }
 
 
 def command_import_tex(args: argparse.Namespace) -> None:
@@ -1043,7 +1092,9 @@ def command_import_tex(args: argparse.Namespace) -> None:
         raise PaperToolError(f"TeX file does not exist: {source}")
     if source.suffix.casefold() != ".tex":
         raise PaperToolError(f"expected a .tex file: {source}")
-    require_privacy_review(source, args.privacy_reviewed)
+    privacy_review = require_privacy_review(
+        source, args.privacy_reviewed, args.privacy_override
+    )
     try:
         source_text = source.read_text(encoding="utf-8", errors="replace")
     except OSError as error:
@@ -1104,6 +1155,7 @@ def command_import_tex(args: argparse.Namespace) -> None:
                 }
             ],
             "approved_changes": [],
+            "privacy_review": privacy_review,
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
@@ -1129,7 +1181,9 @@ def command_import_pdf(args: argparse.Namespace) -> None:
         raise PaperToolError(f"PDF file does not exist: {source}")
     if source.suffix.casefold() != ".pdf":
         raise PaperToolError(f"expected a .pdf file: {source}")
-    require_privacy_review(source, args.privacy_reviewed)
+    privacy_review = require_privacy_review(
+        source, args.privacy_reviewed, args.privacy_override
+    )
     try:
         with source.open("rb") as stream:
             if stream.read(5) != b"%PDF-":
@@ -1190,6 +1244,7 @@ def command_import_pdf(args: argparse.Namespace) -> None:
                 }
             ],
             "approved_changes": [],
+            "privacy_review": privacy_review,
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
@@ -1417,6 +1472,9 @@ def parser() -> argparse.ArgumentParser:
     import_tex_parser.add_argument("--sequence", type=int)
     import_tex_parser.add_argument("--original-url")
     import_tex_parser.add_argument("--privacy-reviewed", action="store_true")
+    import_tex_parser.add_argument(
+        "--privacy-override", metavar="REASON", help="force import and record why"
+    )
     import_tex_parser.add_argument("--no-catalog", action="store_true")
     import_tex_parser.set_defaults(func=command_import_tex)
 
@@ -1429,6 +1487,9 @@ def parser() -> argparse.ArgumentParser:
     import_pdf_parser.add_argument("--sequence", type=int)
     import_pdf_parser.add_argument("--original-url")
     import_pdf_parser.add_argument("--privacy-reviewed", action="store_true")
+    import_pdf_parser.add_argument(
+        "--privacy-override", metavar="REASON", help="force import and record why"
+    )
     import_pdf_parser.add_argument("--no-catalog", action="store_true")
     import_pdf_parser.set_defaults(func=command_import_pdf)
 

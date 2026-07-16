@@ -50,6 +50,7 @@ def add_review_receipt(root: Path, source: Path) -> None:
                 "file_type": file_type,
                 "manual_review_required": True,
                 "rendered_pages": rendered_pages,
+                "inspection_status": "completed",
             }
         ),
         encoding="utf-8",
@@ -197,6 +198,52 @@ class SourceOnlyImportTest(unittest.TestCase):
             )
             self.assertNotEqual(0, stale.returncode)
             self.assertIn("run inspect-file first", stale.stderr)
+
+    def test_failed_inspection_can_be_overridden_with_a_reason(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environment = prepare_root(root)
+            source = root / "reviewed-manually.tex"
+            source.write_text("\\author{Known Public Name}\n", encoding="utf-8")
+            digest = hashlib.sha256(source.read_bytes()).hexdigest()
+            review = root / ".privacy-review" / digest
+            review.mkdir(parents=True)
+            (review / "report.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "sha256": digest,
+                        "file_type": "tex",
+                        "manual_review_required": True,
+                        "rendered_pages": [],
+                        "inspection_status": "failed",
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            imported = subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "import-tex",
+                    str(source),
+                    "--privacy-override",
+                    "著者名は公開名として本人確認済み",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertIn("IMPORTED", imported.stdout)
+            manifest_path = next((root / "papers").glob("*/paper.json"))
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual("overridden", manifest["privacy_review"]["status"])
+            self.assertEqual(
+                "著者名は公開名として本人確認済み",
+                manifest["privacy_review"]["reason"],
+            )
 
 
 if __name__ == "__main__":
