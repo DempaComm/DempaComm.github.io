@@ -85,7 +85,7 @@ git diff -- . ':!papers/YYYY-MM-DD-NN/source.tex'
 - `slug`: `公開日-sequence` と一致させる
 - `year`: 公開年
 - `order`: `YYYYMMDDNN` 形式の並び順
-- `kind`: 原稿の種類
+- `kind`: 取り込み方法を記録する内部管理用の種類（公開ページには表示されない）
 - `summary`: 説明
 - `original_url`: 元記事URL。なければ空文字でよい
 - `tags`: 電波通信の元タグ

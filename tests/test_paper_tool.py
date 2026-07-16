@@ -123,11 +123,13 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertIn("新着原稿", home)
             self.assertIn('href="archive/"', home)
             self.assertEqual(1, home.count('class="paper-card"'))
+            self.assertNotIn("<span>TeX原稿</span>", home)
             archive = (output / "archive" / "index.html").read_text(
                 encoding="utf-8"
             )
             self.assertIn("全原稿アーカイブ", archive)
             self.assertIn("絞り込みを解除", archive)
+            self.assertNotIn("<span>TeX原稿</span>", archive)
             math_home = (output / "math" / "index.html").read_text(
                 encoding="utf-8"
             )
@@ -138,6 +140,11 @@ class SourceOnlyImportTest(unittest.TestCase):
             ).read_text(encoding="utf-8")
             self.assertIn("その他", math_other)
             self.assertIn("Emergency Paper", math_other)
+            self.assertNotIn("<span>TeX原稿</span>", math_other)
+            self.assertNotIn(
+                "<span>TeX原稿</span>",
+                (staged / "index.html").read_text(encoding="utf-8"),
+            )
 
             checked = subprocess.run(
                 [sys.executable, str(TOOL), "check-links", str(output)],

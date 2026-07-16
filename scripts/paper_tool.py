@@ -432,7 +432,6 @@ def page_head(
 def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
-    kind = html.escape(manifest["kind"])
     summary = html.escape(manifest["summary"])
     published_date = str(manifest["published_at"])[:10]
     year = int(manifest["year"])
@@ -440,7 +439,6 @@ def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
         [
             manifest["title"],
             manifest["summary"],
-            manifest["kind"],
             published_date,
             *manifest["tags"],
             *manifest["keywords"],
@@ -469,7 +467,6 @@ def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
         <div class="paper-meta">
           <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>
-          <span>{kind}</span>
         </div>
         <h3><a href="{prefix}papers/{slug}/">{title}</a></h3>
         <p>{summary}</p>
@@ -713,7 +710,6 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
     published_date = html.escape(str(manifest["published_at"])[:10])
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
-    kind = html.escape(manifest["kind"])
     year = int(manifest["year"])
     tag_chips = "\n".join(
         f'            <a class="paper-tag" href="../{quote(tag, safe="")}/">'
@@ -727,7 +723,7 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
         original_url = html.escape(manifest["original_url"], quote=True)
         actions.append(f'            <a href="{original_url}">元の記事</a>')
     return f"""        <article class="tag-page-paper">
-          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span><span>{kind}</span></div>
+          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span></div>
           <h3><a href="../../papers/{slug}/">{title}</a></h3>
           <p>{summary}</p>
           <div class="paper-tags" aria-label="電波通信のタグ">
@@ -948,7 +944,6 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
     published_date = html.escape(str(manifest["published_at"])[:10])
-    kind = html.escape(manifest["kind"])
     year = int(manifest["year"])
     tag_chips = "\n".join(
         f'          <a class="paper-tag" href="../../tags/{quote(tag, safe="")}/">'
@@ -985,7 +980,6 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
     <article class="paper-detail">
       <div class="paper-meta">
         <span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
-        <span>{kind}</span>
         <span>原稿番号 {slug}</span>
       </div>
       <section aria-labelledby="files-title">
