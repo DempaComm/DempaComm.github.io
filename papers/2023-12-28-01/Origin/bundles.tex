@@ -1,0 +1,994 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{mathrsfs}
+
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+
+
+
+\newcommand{\myomp}{\mathrm{OMP}}
+\newcommand{\myequiv}{\bowtie}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{位相空間上のバンドルについて}
+\author{ナンブ キトラ}
+\date{\today}
+			
+			\begin{document}
+\maketitle
+バンドルとか難しいけど1-チェックコサイクルとみなして扱ったら割かしわかりやすかったという話。
+
+バンドルとはコサイクルが付いた開被覆のことであることを主張するための文章がこれである\footnote{フーズモラーなどはグロタンディークに倣ってすべての写像はバンドルであることを主張している本なので、この文章はまだ穏当であると言える。}。
+
+繊維束を商空間として徹底的に取り扱いたい文章であるところのものである。
+
+一般に商空間の話は難しいので、バンドルの話も難しい。
+
+もともとは多様体の間の写像の空間のホイットニートポロジーを記述するためにジェットバンドルを定義したかっただけなのだが話がやたら膨らんでしまった。
+
+この文章では
+位相空間$X$と位相群$G$に対して
+\textbf{$X$上の$G$-抽象束}、（もしくは\textbf{$X$上の$G$-コサイクル付き開被覆}）を定義して、ファイバー束との関係を見る。
+
+\section{準備}
+
+位相空間$X$の開集合系を$\mathfrak{O}(X)$と書くことにする。
+
+開被覆による連続性の判定[張り合わせ]を紹介する。
+\begin{prop}位相空間$X,Y$と
+写像$f;X\to Y$について、任意の$U\in \mathcal{U}$で$f|U:U\to Y$が連続関数であるような$X$の開被覆$\mathcal{U}$が存在すれば、$f$は$X$上でも連続である。
+\end{prop}
+\begin{proof}
+各$U\in \mathcal{U}$上で$f|U$が連続なので、任意の$U\in \mathcal{U}$と
+任意の$Y$の開集合$O$について、$f^{-1}(O)\cap U$は$U$の開集合である。また、$U$は$X$の開集合なので$f^{-1}(O)\cap U$は$X$の開集合でもある。そして$\mathcal{U}$が被覆を成すことから
+\[
+f^{-1}(O)=\bigcup_{U\in \mathcal{U}}(f^{-1}(O)\cap U)
+\]
+が成り立ち、この式の右辺は$X$の開集合であるから、$f^{-1}(O)$は$X$の開集合である。$O$は$Y$の任意の開集合であったから$f:X\to Y$は$X$上連続である。
+\end{proof}
+
+関数$f,g,:X\to G$についてその積$fg$が定義される。
+
+\begin{df}[添え字付き開被覆]
+集合$A$から$\mathfrak{O}(X)$への写像$U:A\to \mathfrak{O}(X)$が
+\[
+X=\bigcup_{a\in A}U(a)
+\]
+を充たすとき、$U$を添え字付き開被覆といい、$A$のことを添え字という。
+$U$の$a\in A$における値$U(a)$を$U_a$と書いたりする。また、
+なまぐさをして$U$のことを$U=\{U_a\}_{a\in A}$とか書いたりする。
+\end{df}
+集合として同じでも添え字が違う場合は別のものとして扱いたいので添え字付き開被覆を用いる。
+大げさだが、つぎのように定義する。
+\[
+OMP(X,G)=\bigcup_{P\in \mathfrak{O}(X)}Map(P, G)
+\]
+つまり$OMP(X)$は$X$の開集合から$G$への写像を全部集めた集合である。
+また集合$A$に対して$A^2$で$A\times A$を表すことにする。
+\begin{df}[変換関数]
+$U$を$X$の添え字付き開被覆とし、その添え字を$A$とする。$g:A\times A:\to OMP(X,G)$が$U$に付随する変換関数であるとは次の条件を充たすときに言う。\footnote{以下では$g(b,a)$を$g_{ba}$と書くことにする。}
+\begin{enumerate}
+\item $g_{ba}$の定義域は$U_{b}\cap U_{a}$である。
+\item $g_{ba}: U_b\cap U_a\to G$は連続写像である。
+\item $\forall x\in U_c\cap U_b\cap U_a\quad g_{cb}(x)g_{ba}(x)=g_{ca}(x)$ （コサイクル条件）
+\end{enumerate}
+\end{df}
+\begin{cau}
+$U_b\cap U_a=\O$のとき$g_{ba}$は空写像である。また、$U_c\cap U_b\cap U_a=\O$のとき条件$(3)$は真になることに注意しよう。
+\end{cau}
+\begin{cau}
+コサイクル条件から$U_a\neq \O$のとき$g_{aa}\equiv 1_G$となることや、
+$U_b\cap U_a\neq \O$のとき$g_{ba}=(g_{ab})^{-1}$が成り立つことなどがわかる。
+\end{cau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{抽象束、または変換関数付き開被覆、または1-チェックコサイクル。}
+
+\begin{df}
+位相空間$X$と位相群$G$に対して、
+$X$と$G$、添え字集合$A$と$A$を添え字に持つ$X$上の添え字付き開被覆$U$, および$U$に付随する変換関数$g$の五つ組$(X, G, A, U, g)$のことを\textbf{$X$上の$G$-抽象束}（もしくは\textbf{$X$上の$G$-変換関数付き開被覆}、または\textbf{$X$の$(G, 1)$-チェックコサイクル}）と呼ぶ。
+$X$を底空間、$G$をこの束の構造群と呼ぶ。
+$X$上の$G$-抽象束全体を$\mathscr{C}(X,G)$と書く。\footnote{$\mathscr{C}$はcocycleのcである。}
+\end{df}
+\begin{cau}
+抽象束にはファイバーがないことに注意せよ。
+\end{cau}
+\begin{exam}
+任意の位相空間$X$と位相群$G$を与える。添え字付き開被覆$U:\{1\}\to \mathfrak{O}(X)$を$U(1)=X$と定義し、変換関数$g:\{1\}^2\to OMP(X)$を$g_{11}\equiv1_G$と定義する\footnote{$X=\emptyset$の場合には$g_{11}$は空写像と定義する。}と$(X, G, \{1\}, U, g)$は抽象束になる。この束のことを自明束という。
+\end{exam}
+どんな位相空間と位相群$G$についても
+$\mathscr{C}(X,G)\neq \emptyset$である。これは$G$上の自明束が常に存在するからである。
+
+以下では抽象束をフラクトゥールの一文字で表す。
+%%%%%%%
+\subsection{抽象束の束同値}
+二つの$G$-抽象束が束同値であるということを定式化する。
+\begin{df}
+$\mathfrak{A},\mathfrak{B}\in \mathscr{C}(X,G)$について
+\[
+\mathfrak{A}=(X, G, A, U, g),\ \mathfrak{B}=(X, G, B, V, h)
+\]
+とする。任意の$(a, b)\in A\times B$について連続関数
+\[
+p_{ba}:V_b\cap U_a\to G,\ q_{ab}: U_a\cap V_b\to G
+\]
+が存在して、以下の条件を充たすとき$\mathfrak{A}$と$\mathfrak{B}$は束同値であるという。
+\begin{enumerate}
+\item $\forall (a,b,c)\in A\times A\times B\ \forall x\in  V_c\cap U_b\cap U_a\ p_{cb}(x)g_{ba}(x)=p_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times A\ \forall x\in  U_c\cap V_b\cap U_a\ q_{cb}(x)p_{ba}(x)=g_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times A\ \forall x\in  U_c\cap U_b\cap V_a\ g_{cb}(x)q_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times B\times A\ \forall x\in  U_c\cap V_b\cap V_a\ q_{cb}(x)h_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times B\ \forall x\in  V_c\cap U_b\cap V_a\ p_{cb}(x)q_{ba}(x)=h_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times B\ \forall x\in  V_c\cap V_b\cap U_a\ h_{cb}(x)p_{ba}(x)=p_{ca}(x) $
+\end{enumerate}
+$\mathfrak{A}$と$\mathfrak{B}$が束同値であることを
+\[
+\mathfrak{A}\bowtie \mathfrak{B}
+\]
+と表す。
+\end{df}
+\begin{cau}
+$p$は$\mathfrak{A}$から$\mathfrak{B}$への変換で、$q$は$\mathfrak{B}$から$\mathfrak{A}$への変換であり、
+\[
+p_{ba}=(q_{ab})^{-1}
+\]
+を充たす。
+\end{cau}
+さすがにファイバーがないと束同士の写像は定義できない。
+\begin{prop}
+$\mathfrak{A}\in \mathscr{C}(X,G)$について
+\[
+\mathfrak{A}\bowtie\mathfrak{A}
+\]
+\end{prop}
+\begin{proof}
+$p_{ba}=g_{ba}, q_{ba}=g_{ba}$と定義すればわかる。
+\end{proof}
+\begin{prop}
+$\mathfrak{A}, \mathfrak{B}\in \mathscr{C}(X,G)$について
+\[
+\mathfrak{A}\bowtie \mathfrak{B}\To \mathfrak{B}\bowtie \mathfrak{A}
+\]
+\end{prop}
+\begin{proof}
+束同値の定義は対象になっているのでわかる。
+\end{proof}
+\begin{prop}
+$\mathfrak{A}, \mathfrak{B}, \mathfrak{C}\in \mathscr{C}(X,G)$について
+\[
+\mathfrak{A}\bowtie \mathfrak{B},\ \mathfrak{B}\bowtie \mathfrak{C}\To \mathfrak{A}\bowtie \mathfrak{C}
+\]
+\end{prop}
+\begin{proof}
+超めんどいけど頑張る。
+\par
+\[
+\mathfrak{A}=(X, G, A, U, g),\quad \mathfrak{B}=(X, G, B, V, h), \quad \mathfrak{C}=(X, G, C, W, k)
+\]
+とする。
+\par
+$\mathfrak{A}\bowtie \mathfrak{B}$なので
+任意の$(a, b)\in A\times B$について連続関数
+\[
+p_{ba}:V_b\cap U_a\to G,\ q_{ab}: U_a\cap V_b\to G
+\]
+が存在して、以下の条件を充たす
+\begin{enumerate}
+\item $\forall (a,b,c)\in A\times A\times B\ \forall x\in  V_c\cap U_b\cap U_a\ p_{cb}(x)g_{ba}(x)=p_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times A\ \forall x\in  U_c\cap V_b\cap U_a\ q_{cb}(x)p_{ba}(x)=g_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times A\ \forall x\in  U_c\cap U_b\cap V_a\ g_{cb}(x)q_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times B\times A\ \forall x\in  U_c\cap V_b\cap V_a\ q_{cb}(x)h_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times B\ \forall x\in  V_c\cap U_b\cap V_a\ p_{cb}(x)q_{ba}(x)=h_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times B\ \forall x\in  V_c\cap V_b\cap U_a\ h_{cb}(x)p_{ba}(x)=p_{ca}(x) $
+\end{enumerate}
+そして$\mathfrak{B}\bowtie \mathfrak{C}$なので
+任意の$(a, b)\in B\times C$について連続関数
+\[
+s_{ba}:W_b\cap V_a\to G,\ t_{ab}: V_a\cap W_b\to G
+\]
+が存在して、以下の条件を充たす
+\begin{enumerate}
+\item $\forall (a,b,c)\in B\times B\times C\ \forall x\in  W_c\cap V_b\cap V_a\ s_{cb}(x)h_{ba}(x)=s_{ca}(x) $
+\item $\forall (a,b,c)\in B\times C\times B\ \forall x\in  V_c\cap W_b\cap V_a\ t_{cb}(x)s_{ba}(x)=h_{ca}(x) $
+\item $\forall (a,b,c)\in C\times B\times B\ \forall x\in  V_c\cap V_b\cap W_a\ h_{cb}(x)t_{ba}(x)=t_{ca}(x) $
+\item $\forall (a,b,c)\in C\times C\times B\ \forall x\in  V_c\cap W_b\cap W_a\ t_{cb}(x)k_{ba}(x)=t_{ca}(x) $
+\item $\forall (a,b,c)\in C\times B\times C\ \forall x\in  W_c\cap V_b\cap W_a\ s_{cb}(x)t_{ba}(x)=k_{ca}(x) $
+\item $\forall (a,b,c)\in B\times C\times C\ \forall x\in  W_c\cap W_b\cap V_a\ k_{cb}(x)s_{ba}(x)=s_{ca}(x) $
+\end{enumerate}
+さて、任意の$(a,b)\in A\times C$に対して$v_{ba}:W_b\cap U_a\to G$以下のように定義する。
+各$x\in W_b\cap U_a$に対して$x\in V_{\omega}$となる$\omega\in B$を取る。そして
+\[
+v_{ba}(x)=s_{b\omega}(x)p_{\omega a}(x)
+\]
+と定義する。この$v_{ba}$について最初はこの定義がwell-defined、即ち$\omega\in B$の取り方によらないことを示そう。
+別の$\Omega\in B$が$x\in V_{\Omega}$を充たしているとする。このとき$(1)-(6)$の条件から
+\[
+s_{b\omega}p_{\omega a}=s_{b\Omega}(x)h_{\Omega \omega}(x)p_{\omega a}(x)=s_{b\Omega}(x)p_{\Omega a}(x)
+\]
+となるので、$v_{ba}(x)$は$\omega\in B$の取り方によらないことがわかった。
+また、$\{W_b\cap U_a\cap V_{i}\}_{i\in B}$は$W_b\cap U_a$の被覆であり、$v_{ba}$は各$W_b\cap U_a\cap V_{i}$上で連続なので$v_{ba}:W_b\cap V_a\to G$は連続である。
+\par
+同様にして任意の$(a,b)\in A\times C$に対して$w_{ab}:U_a\cap W_b\to G$を$w_{ab}=v_{ba}^{-1}$と定義する。この$w_{ab}$は$x\in V_{\omega}$となる$\omega\in B$をとれば
+\[
+w_{ab}(x)=q_{a\omega}(x)t_{\omega b}(x)
+\]
+と表される。
+\par
+ここからはこの$v_{ba}$と$w_{ab}$が束同値の定義にある$(1)-(6)$を充たすことを見ていこう。
+\par
+$(1)$\ $\forall (a,b,c)\in A\times A\times C\ \forall x\in  W_c\cap U_b\cap U_a\ v_{cb}(x)g_{ba}(x)=v_{ca}(x)$を証明しよう。各$x\in  W_c\cap U_b\cap U_a$に対して$x\in V_{\omega}$となる$\omega\in B$を取る。すると
+\[
+v_{cb}(x)g_{ba}(x)=s_{c\omega }(x)p_{\omega b}(x)g_{ba}(x)=s_{c\omega}(x)p_{\omega a}(x)=v_{ca}(x)
+\]
+となるので$(1)$は証明された。他の$(2)$から$(6)$も同様に証明される。
+\end{proof}
+
+
+
+以上をまとめて以下を得る。
+\begin{thm}
+束同値$\bowtie$は$\mathscr{C}(X,G)$上の同値関係である。
+\end{thm}
+
+被覆が同じ抽象束同士の束同値の判定には次の命題が簡便である。
+\begin{prop}
+$\mathfrak{A}, \mathfrak{B}\in \mathscr{C}(X,G)$とし、
+\[
+\mathfrak{A}=(X, G, A, U, g), \quad \mathfrak{B}=(X, G, A, U, h)
+\]
+とする。
+即ち$\mathfrak{A}$と$\mathfrak{B}$は同じ添え字付き被覆を持つとする。
+このとき
+$\mathfrak{A}\bowtie \mathfrak{B}$と次のことは同値である。
+\par
+各$a\in A$について連続関数$\lambda_a:U_a\to G$が存在して
+\[
+h_{ba}(x)=\lambda_b(x) g_{ba}(x) \lambda_{a}^{-1}(x)
+\]
+が$U_a\cap U_b$上で成り立つ。
+\end{prop}
+\begin{proof}
+まず$\mathfrak{A}\bowtie \mathfrak{B}$を仮定する。
+束同値の定義に出てくる各$(a,b)\in A^2$について連続関数$p_{ba}:U_b\cap U_a\to G$と
+$q_{ab}:U_a\cap U_b\to G$が存在しほげ。
+このとき、$U_a\cap U_b$上でで以下のことが成り立つ。
+\begin{align*}
+p_{bb}g_{ba}=p_{ba}\\
+h_{ba}p_{aa}=p_{ba}
+\end{align*}
+よって
+\[
+h_{ba}p_{aa}=p_{bb}g_{ba}
+\]
+が$U_a\cap U_b$上で成り立つ。そこで
+$\lambda_a(x)=p_{aa}(x)$と定義すればよい。
+（$p_{aa}$は$U_a$上の$G$に値を取る連続関数であることに注意せよ。）
+\par
+逆に各$a\in A$について連続関数$\lambda_a:U_a\to G$が存在して
+\[
+h_{ba}(x)=\lambda_b(x) g_{ba}(x) \lambda_{a}^{-1}(x)
+\]
+が$U_a\cap U_b$上で成り立つと仮定しよう。
+このとき$p_{ba}=\lambda_b\lambda^{-1}_a$とし、$q_{ab}=p^{-1}_{ba}$と定義すれば
+$\mathfrak{A}\bowtie \mathfrak{B}$がわかる。
+\end{proof}
+
+被覆の細分と束同値。
+\begin{df}[細分]
+$X$の添え字付き被覆$V:B\to \mathfrak{O}(X)$が同じく$X$の添え字付き被覆$U:A\to \mathfrak{O}(X)$の細分であるとは任意の$b\in B$についてある$a\in A$が存在して$V_b\subset U_a$が成り立つことである。
+\end{df}
+細分について
+\begin{prop}
+$\mathfrak{A}, \mathfrak{B}\in \mathscr{C}(X,G)$とし、
+\[
+\mathfrak{A}=(X, G, A, U, g), \quad \mathfrak{B}=(X, G, B, V, h)
+\]
+とし、$V$は$U$の細分になっているとする。
+もし$\phi:B\to A$が存在して
+\[
+V_{b}\subset U_{\phi(b)}
+\]
+及び
+\[
+h_{ba}=g_{\phi(b)\phi(a)}|_{V_b\cap V_a}
+\]
+が成り立つとき\footnote{$g_{\phi(b)\phi(a)}|_{V_b\cap V_a}$は$U_{\phi(b)}\cap U_{\phi(a)}$上の関数$g_{\phi(b)\phi(a)}$を$V_b\cap V_a$に制限した関数という意味である。}、$\mathfrak{A}\bowtie \mathfrak{B}$が成り立つ。
+\end{prop}
+\begin{proof}
+$p_{ba}:V_b\cap U_a\to G$を$p_{ba}=g_{\phi(b)a}|_{V_b\cap U_a}$と定義し、
+$p_{ba}:U_b\cap V_a\to G$を$q_{ba}=g_{b\phi(a)}|_{U_b\cap V_a}$
+と定義する。すると$\mathfrak{A}\bowtie \mathfrak{B}$がわかる。
+\end{proof}
+この命題から$X$がパラコンパクトな時にその上の抽象束は局所有限な座標被覆を持つとしても一般性を失わないことがわかる。さらに$X$がコンパクトな場合にはその上の抽象束は有限個の座標被覆から構成されていると仮定してもよい。
+また、$X$の開基$\mathcal{B}$を一つ固定して、$X$上の束の座標被覆は$\mathcal{B}$の元からなりったているとしてもよい。
+\par
+以下の定義などはちょっとしたおまけである。
+$X$上の二つの添え字付き開被覆$U:A\to \mathfrak{O}(X)$と$V:B\to \mathfrak{O}(X)$について
+$U*V:A\sqcup B\to \mathfrak{O}(X)$を$a\in A$のときに$U*V(a)=U(a)$、$b\in B$のときに$U*V(b)=V(b)$とていぎすればこれも$X$上の添え字付き開被覆である。
+\par
+以下の定義は束同値がどういうものかということかを教えてくれる。
+\begin{prop}
+$\mathfrak{A}=(X, G, A, U, g), \mathfrak{B}=(X, G, B, V, h)$とする。このとき$\mathfrak{A}\bowtie \mathfrak{B}$は以下のことと同値である。
+$X$上の$G$-抽象束$\mathfrak{C}$が存在して、
+\[
+\mathfrak{C}=(X, G, A\sqcup B, U*V, k)
+\]
+であり$k:A\sqcup B\to OMP(X)$は$k|_{A^2}=g$かつ$k|_{B^2}=h$を充たす。
+\end{prop}
+\begin{proof}
+定義から明らか。
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{抽象束の$F$-切断}
+\subsection{切断片}
+\begin{df}[切断片]
+$\{s_{\alpha}\}_{\al\in A}$ $s_{\al}:U_{\al}\to F$が$\mathfrak{A}$の切断片であるとは
+\[
+s_b(x)=g_{ba}s_a(x)
+\]
+を充たすときに言う。
+\end{df}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{準同型から誘導される写像}
+二つの位相群$H,G$間の
+連続準同型$\rho:G\to H$があるときに
+\[
+\rho_{*}:\mathscr{B}(X,G)\to \mathscr{B}(X,H)
+\]
+が以下のように誘導される。
+\[
+\mathfrak{A}=(X, G, A, U, g)
+\]
+としたとき
+\[
+\rho_{*}(\mathfrak{A})=(X, G, A, U, h)
+\]
+である。ここで$h$は$(a,b)\in A^2$に対して
+\[
+h_{ba}(x)=\rho(g_{ba}(x))
+\]
+という写像$h_{ba}:U_b\cap U_a\to H$を対応させる変換関数である。
+$\rho$の準同型性と$g$がコサイクル条件を充たすことから$h$もコサイクル条件を充たすことがわかる。
+%%%%%%%%%%%%%%%%
+\subsection{構造群の縮約}
+
+$H$を位相群$G$の部分群とする。もちろん自然に$H$も位相群になる。
+$\iota : H\to G$を包含写像とする。
+このとき写像
+\[
+\iota:\mathscr{B}(X,H)\to \mathscr{B}(X,G)
+\]
+が誘導される。
+
+$G$-抽象束$\mathfrak{A}\in \mathscr{B}(X,G)$の構造群が$H$に縮約されるとは
+ある$\mathfrak{B}\in \mathscr{B}(G,H)$が存在して
+\[
+\mathfrak{A}\bowtie \iota_{*}(\mathfrak{B})
+\]
+となることである。
+
+抽象束の構造群が自明群$\{*\}$に縮約されることと、その抽象束が自明束と束同値になることは同値である。
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{自明束になるための条件}
+抽象束が自明束と束同値なとき、その抽象束は自明であるという。
+束が自明かどうかの判定が大事である。
+\begin{cor}
+$\mathfrak{A}=(X, G, A, U, g)\in \mathscr{C}(X,G)$が自明であることと次のことは同値である。
+\par
+各$a\in A$について$\lambda_a:U_a\to G$が存在して
+\[
+g_{ba}=\lambda_b\lambda_{a}^{-1}
+\]
+が成り立つ。
+\end{cor}
+
+\begin{cor}
+$\mathfrak{A}=(X, G, A, U, g)\in \mathscr{C}(X,G)$が自明であることと、$\mathfrak{A}$が$\mathfrak{B}=(X, G, \{*\}, \{X\}, g)$となる束と同値になることは同値である。
+\end{cor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{抽象束の引き戻し}
+連続写像$f:X\to Y$から$G$-抽象束の引き戻し
+\[
+f^{*}:\mathscr{B}(Y,G)\to \mathscr{B}(X,G)
+\]
+が以下のように誘導される。\footnote{これは連続写像からコホモロジーに誘導される準同型と同じもののはずである。}
+\[
+\mathfrak{A}=(Y, G, A, U, g)
+\]
+としたとき
+\[
+f^{*}(\mathfrak{A})=(X, G, A, f^{*}U, f^{*}g)
+\]
+を以下のように定義する。
+$f^{*}:A\to OMP(X)$は各$a\in A$について$f^{*}U(a)=f^{-1}(U_a)$で定義される$X$上の添え字付き開被覆である。
+変換関数$f^{*}g$は$(a,b)\in A^2$に対して
+\[
+(f^{*}g)_{ba}=g_{ba}\circ f
+\]
+つまり$x\in f^{-1}(U_b)\cap f^{-1}(U_a)$について
+\[
+(f^{*}g)_{ba}(x)=g_{ba}(f(x))
+\]
+で定義される$(f^{*}g)_{ba}:f^{-1}(U_b)\cap f^{-1}(U_a)\to G$を対応させる変換関数である。
+引き戻しの反変函手性
+\begin{prop}
+
+\end{prop}
+\subsection{抽象束同士の積}
+\[
+\mathscr{C}(X,G)\times \mathscr{C}(X,H)\to \mathscr{C}(X, G\times H)
+\]
+
+\[
+\mathfrak{A}=(X, G, A, U, g),\ \mathfrak{B}=(X, G, B, V, h)
+\]
+から新しい束$\mathfrak{A}\times \mathfrak{B}$を
+\[
+\mathfrak{A}\times \mathfrak{B}=(X, G, A\times B, U\times V, k)
+\]
+を以下のように定義する。
+$U\times V: A\times B\to \mathfrak{O}(X)$は各$(a, b)\in A\times B$に対して$U\times V((a, b))=U_a\cap V_b$
+で定義される添え字付き被覆である。
+$k:(A\times B)^2\to OMP(X)$は
+\[
+k_{(c,d)(a,b)}:(U_c\cap V_d)\cap (U_a\cap V_b)\to G;\  p_{(c,d)(a,b)}(x)=(g_{ca}(x), h_{db}(x))
+\]
+で定義される変換関数である。
+この束を$\mathfrak{A}\times \mathfrak{B}$と書くことにする。
+\subsection{抽象束の例}
+このセクションでは具体的な空間と構造群に対して抽象束の同値類がどのくらいあるかというのをいくつか決定する。
+即ち$\mathscr{C}(X,G)/\!\bowtie$の大きさを調べるということである。
+
+\begin{lem}
+区間のあれ
+\end{lem}
+
+\begin{prop}
+単位閉区間$I=[0,1]$と任意の位相群$G$について、
+\[
+\card(\mathscr{C}(I,G)/\!\bowtie)=1
+\]
+つまり$I$上の抽象束はすべて自明束である。
+\end{prop}
+\begin{proof}
+$\mathfrak{A}$を$I$上の抽象束とする。
+この束の被覆は$[a_0, b_0), (a_1, b_1), \dots , (a_{n-1}, b_{n-1}), (a_n, b_n]$という形で、
+\[
+a_0=0,\  b_n=1, \ a_{i-1}<a_i<b_{i-1}<b_i
+\]
+を充たすとしてよい。さて$c_1, c_2,\dots c_n$、$d_0, d_2\dots d_{n-1}$を
+\[
+[c_i, d_{i-1}]\subset (a_i, b_{i-1})
+\]
+となるようにとる。
+
+$\mathfrak{A}\bowtie \mathfrak{B}$である。
+
+
+$s_0:[a_0, b_0)\to G$を$s_0\equiv 1$
+
+$x\in (a_i, b_i)$のとき（$i=n$のときは$x\in (a_n, b_n]$）
+$s_i(x)=g_{i,i-1}(t(x))s_{i-1}|_{(a_i,b_{i-1})}(t(x))$と定義する。$(c_i, d_{i-1})$上では$s(x)=g_{i,i-1}(x)s_{i-1}(x)$
+なので$(c_i, d_{i-1})$の上で$s_{i}s_{i-1}^{-1}=g_{i,i-1}$なので$\mathfrak{B}$は自明である。よって$\mathfrak{A}$も自明である。
+\end{proof}
+
+\begin{prop}
+任意の$\mathfrak{A}\in \mathscr{C}(X,G)$は添え字集合が二元である抽象束と束同値である。
+\end{prop}
+
+\begin{prop}
+$\card(\mathscr{C}(S^1, \zz/2\zz)/\!\bowtie)=2$
+\end{prop}
+この命題は$H^1(S^1, \zz/2\zz)\cong \zz/2\zz$と同じことである。
+
+\begin{prop}
+準同型$\pi:\rr^{\times}\to \zz/2\zz$から誘導される写像
+\[
+[\pi_*]:\mathscr{C}(X,\rr^{\times })/\!\bowtie \to \mathscr{C}(X,\zz/2\zz)/\!\bowtie
+\]
+は全単射である。
+\end{prop}
+
+\begin{prop}
+$\card(\mathscr{C}(S^1, \rr^{\times})/\!\bowtie)=2$
+\end{prop}
+
+\begin{cau}
+$\mathscr{C}(S^1, \rr^{\times})/\!\bowtie$の二元のうち一つは自明束である。もう一つの元はいわゆるメビウスバンドルに対応する抽象束である。
+\end{cau}
+
+\begin{cau}
+恐らく定義から手計算で抽象束が分類できるのは$S^1$と$I$の二つが限界のように思う。
+\end{cau}
+
+\section{$(G,F)$-抽象ファイバー束、または、$F$-ファイバーと$G$コサイクル付き開被覆}
+連続作用$G\curvearrowright F$があるとき$\mathfrak{A}\in \mathscr{B}(X,G)$と$F$の組
+\[
+(\mathfrak{A}, F)
+\]
+を$(G,F)$-抽象ファイバー束、もしくは$F$-ファイバーと$G$コサイクル付き開被覆と呼ぶ。
+$X$上の$(G,F)$-抽象束全体を$\mathscr{F}(X,G,F)$で表す。
+
+$X$上のファイバー束の間の写像
+$\Phi=\{\phi_{a\to b}(U_a\cap V_b)\times F\to F\}_{(a,b)\in A\times B}$
+が$\mathfrak{A}$から$\mathfrak{B}$への束写像であるとは
+任意の$(a,b,\alpha, \beta)\in A\times B\times A\times B$について
+\[
+\phi_{\alpha\to \beta}(x,u)=h_{\beta b}(x)\phi_{a\to b}(x, g_{\alpha, a }(x)u)
+\]
+を充たすときに言う。
+
+連続写像$f:X\to Y$について、
+$\Phi=\{\phi_{a\to b}(U_a\cap f^{-1}(V_b))\times F\to F\}_{(a,b)\in A\times B}$
+が$f$の上の$\mathfrak{A}$から$\mathfrak{B}$束写像であるとは
+任意の$(a,b,\alpha, \beta)\in A\times B\times A\times B$について
+\[
+\phi_{\alpha\to \beta}(x,u)=h_{\beta b}(f(x))\phi_{a\to b}(x, g_{\alpha, a }(x)u)
+\]
+\[
+(x,u)\to (f(x), \phi_{a\to b}(x,u))
+\]
+
+
+AAAAAAAAAAAAAAAAAAAAAAa
+
+\[
+f_{\al}: U_{\al}\times F\to U_{\al}\times F; (x, u)\mapsto (x, \phi_{\al}(x,u))
+\]
+ 
+ AAAAAAAAAAAAAAAAAAAAA
+ 
+ファイバー束の間の写像（$Homeo(F)$にいい感じの位相が入っている場合。）
+\[
+\phi_{\al}:U_{\al}\times F\to F; (x,u)\mapsto \phi_{\al}(x).u
+\]
+
+aaaaAaaAAAAAAAAAAAAAAAAAAAAAaa
+
+\begin{df}
+$G$束のバンドル写像としては、
+\[
+\phi_{a\to b}(x, u)=P_{ab}(x).u
+\]
+
+$P_{ab}\in G$. 
+\end{df}
+
+
+
+\section{束のホモトピー不変性}
+
+
+次の補題は基本的である。
+\begin{lem}
+$\mathfrak{A}=(X\times [a, b), G, A, \{X\times [a,b)\}, g)$, 
+$\mathfrak{A}=(X\times (c,d ], G, B, \{X\times (c,d]\}, h)$, 
+は自明束で $a<c<b<d$とする。このとき
+$\mathfrak{C}=(X\times [a,d], G, A\cup B, \{X\times[a,b), X\times (c,d], u\})$も自明である。
+\end{lem}
+\begin{proof}
+
+\end{proof}
+
+\begin{df}[numerable cover]
+単位の分割が存在する被覆のこと。
+\end{df}
+
+
+
+
+\begin{fact}
+$X$を$T_4$空間とする。このとき以下は同値である。
+\begin{enumerate}
+\item $X$はパラコンパクト
+\item $X$の任意の開被覆には$\sigma$疎な局所有限開細分が存在する。
+\end{enumerate}
+\end{fact}
+
+\begin{prop}
+$X$をパラコンパクトハウスドルフ空間とする。
+$X\times I$上の束は$\{U_i\times I\}_{i\in\nn}$という形の添え字付き被覆を持つ抽象束と束同値である。
+\end{prop}
+\begin{proof}
+
+\end{proof}
+
+以下の定理は束のホモトピー同値性と呼ばれる定理である。
+\begin{thm}
+$P,Q:X\to Y$は$P\simeq Q$であるとする。このとき$Y$上の任意の抽象束$\mathfrak{A}$に対して
+\[
+P^*(\mathfrak{A})\bowtie Q^*(\mathfrak{A})
+\]
+が成り立つ。
+\end{thm}
+\begin{proof}
+$(a,b).g=agb^{-1}$と作用している$G^2\curvearrowright G$で、$X\times [0,1]$上の$G^2$-抽象束の$G$-切断であって、
+\[
+s(x,t)=s(x,0)
+\]
+を充たすものの存在が言えればよい。←ちょっと違う
+\end{proof}
+\begin{cor}
+可縮なパラコンパクトハウスドルフ空間の上の抽象束は（$G$に依らず）すべて自明束である。
+\end{cor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+
+
+\section{$GL(n, \mathbb{K})$-抽象束─``ベクトル束''─}
+
+この章では体$\mathbb{K}$上の線群の上の抽象束に関する構成を紹介する。
+$GL(n, \mathbb{K})$には係数体$\mathbb{K}$に応じて適切に位相が入っているとする。
+特に$\mathbb{K}=\rr, \cc$の場合が身近で分かりやすいと思う。
+以下では抽象束はすべて同じ添え字付き開被覆$U:A\to \mathfrak{O}(X)$でサポートされているとする。
+
+\begin{df}[双対束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$とし、
+\[
+\mathfrak{E}=(X, G, A, U, g)
+\]
+とする。このとき
+\[
+(X, G, A, U, {}^tg^{-1})
+\]
+を$(X, G, A, U, g)$の双対束といい、$\mathfrak{E}^{*}$で表す。
+\end{df}
+\begin{df}[直和束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$と$\mathfrak{F}\in \mathscr{C}(X, GL(m,\mathbb{K}))$に対し
+$\rho:GL(n,\mathbb{K})\times GL(m, \mathbb{K})\to GL(n+m, \mathbb{K})$
+\[
+\rho_{*}(\mathfrak{E}\times \mathfrak{F})
+\]
+を$\mathfrak{E}$と$\mathfrak{F}$の直和束といい、
+\[
+\mathfrak{E}\oplus \mathfrak{F}
+\]
+と書く。
+\[
+\bigoplus_{i=1}^n\mathfrak{E}_i
+\]
+\end{df}
+\begin{df}[テンソル束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$と$\mathfrak{F}\in \mathscr{C}(X, GL(m,\mathbb{K}))$に対し
+\[
+(X, GL(nm. \mathbb{K}), A, U, g\otimes h)
+\]
+で定義される束を$\mathfrak{E}$と$\mathfrak{F}$のテンソル束といい
+\[
+\mathfrak{E}\otimes \mathfrak{F}
+\]
+と書く。
+\[
+\bigotimes_{i=1}^n\mathfrak{E}_i
+\]
+\end{df}
+
+\begin{df}[外積束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$と$\mathfrak{F}\in \mathscr{C}(X, GL(m,\mathbb{K}))$に対し
+\[
+(X, GL(nm. \mathbb{K}), A, U, g\wedge h)
+\]
+で定義される束を$\mathfrak{E}$と$\mathfrak{F}$の外積束といい
+\[
+\mathfrak{E}\wedge \mathfrak{F}
+\]
+と書く。
+\[
+\bigwedge_{i=1}^n\mathfrak{E}_i
+\]
+\end{df}
+
+\begin{df}[向き束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$とし、
+\[
+\mathfrak{E}=(X, G, A, U, g)
+\]
+とする。このとき
+\[
+(X, G, A, U, sgn\det(g))
+\]
+を$\mathfrak{E}$の向き束という。向き束は$\zz/2\zz$-束である。向き束が自明でであるとき、$\mathfrak{E}$は向き付け可能であるという。
+
+\[
+Or(\mathfrak{E})
+\]
+
+\end{df}
+$GL(n,\mathbb{K})$-抽象束は$GL^+(n, \mathbb{K})$-束に縮約できるとき、向き付け可能であるという。
+
+
+\begin{df}[行列式束]
+$\mathfrak{E}\in \mathscr{C}(X, GL(n,\mathbb{K}))$とし、
+\[
+\mathfrak{E}=(X, G, A, U, g)
+\]
+とする。このとき
+\[
+(X, G, A, U, \det(g))
+\]
+\[
+\bigwedge_{i=1}^n\mathfrak{E}=\bigwedge^n\mathfrak{E}=\mathfrak{E}^{\wedge n}
+\]
+を$(X, G, A, U, g)$の行列式束という。$\det(\mathfrak{E})$で表す。
+ちなみに
+\[
+\det(\mathfrak{E})\bowtie \det(\mathfrak{E}^{*})\bowtie \bigwedge^n\mathfrak{E}
+\]
+\end{df}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$(G,F)$-抽象ファイバー束、または、$F$-ファイバーと$G$コサイクル付き開被覆}
+連続作用$G\curvearrowright F$があるとき$\mathfrak{A}\in \mathscr{B}(X,G)$と$F$の組
+\[
+(\mathfrak{A}, F)
+\]
+を$(G,F)$-抽象ファイバー束、もしくは$F$-ファイバーと$G$コサイクル付き開被覆と呼ぶ。
+$X$上の$(G,F)$-抽象束全体を$\mathscr{F}(X,G,F)$で表す。
+
+$X$上のファイバー束の間の写像
+$\Phi=\{\phi_{a\to b}(U_a\cap V_b)\times F\to F\}_{(a,b)\in A\times B}$
+が$\mathfrak{A}$から$\mathfrak{B}$への束写像であるとは
+任意の$(a,b,\alpha, \beta)\in A\times B\times A\times B$について
+\[
+\phi_{\alpha\to \beta}(x,u)=h_{\beta b}(x)\phi_{a\to b}(x, g_{\alpha, a }(x)u)
+\]
+を充たすときに言う。
+
+連続写像$f:X\to Y$について、
+$\Phi=\{\phi_{a\to b}(U_a\cap f^{-1}(V_b))\times F\to F\}_{(a,b)\in A\times B}$
+が$f$の上の$\mathfrak{A}$から$\mathfrak{B}$束写像であるとは
+任意の$(a,b,\alpha, \beta)\in A\times B\times A\times B$について
+\[
+\phi_{\alpha\to \beta}(x,u)=h_{\beta b}(f(x))\phi_{a\to b}(x, g_{\alpha, a }(x)u)
+\]
+
+
+
+\[
+f_{\al}: U_{\al}\times F\to U_{\al}\times F; (x, u)\mapsto (x, \phi_{\al}(x,u))
+\]
+ファイバー束の間の写像（$Homeo(F)$にいい感じの位相が入っている場合。）
+\[
+\phi_{\al}:U_{\al}\times F\to F; (x,u)\mapsto \phi_{\al}(x).u
+\]
+
+%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{抽象束の空間的実現、ファイバー束}
+
+\subsection{空間的ファイバー束}
+
+抽象的ファイバー束と空間的ファイバー束の同値性
+
+
+
+
+
+ファイバー束が商空間という話。
+
+
+\subsection{ファイバー束の具体例}
+主に可微分多様体上の束について紹介する。
+\begin{df}
+位相多様体$M$の$C^r$-級可微分構造とはほげ
+\end{df}
+\begin{exam}[接束]
+\[
+TM
+\]
+\[
+J_{ba}(x)=J(\phi_{b}\circ \phi_{a}^{-1})(\phi_a(x))
+\]
+\end{exam}
+
+\begin{exam}[余接束]
+\[
+(TM)^{*}
+\]
+は
+\[
+T^{*}M
+\]
+と書く慣習がある。
+\end{exam}
+
+\begin{exam}[高次の余接束]
+\[
+\bigwedge^kT^{*}M
+\]
+\end{exam}
+
+\begin{exam}[向き束]
+$M$の向き束$Or(M)$とは
+\[
+Or(TM)
+\]
+で定義する。
+
+\end{exam}
+
+\begin{exam}[$\zz/2\zz$-束、即ち二重被覆]
+$M$が向き付け不可能な多様体の時に連結な向き付け可能多様体$N$と写像$p:N\to M$が存在してこれらが$\zz/2\zz$-束であることを証明しよう。
+\end{exam}
+
+
+\begin{exam}[密度束]
+$M$の密度束とは
+\[
+\left(\bigwedge^nT^{*}M\right)\otimes Or(M)
+\]
+のことである。
+
+\end{exam}
+
+\begin{exam}[ジェット束]
+
+\end{exam}
+
+
+\section{細分束・細分関係}
+
+\section{おまけ─0-コサイクル付き被覆─}
+可微分多様体の微分構造は$0$-コサイクル付き開被覆、つまり0-チェックコサイクルと考えることができる。
+しかしながらその「係数」が何であるか、そして何であるべきかはよくわからない。一説にはそれは\textbf{擬群(pseudo-group)}であると云う。
+そしておそらく抽象束の係数も位相群$G$ではなく$G$を含むようなより大きいものが「本来の束構造」の係数である気がする。実際ここまで述べてきた抽象束は（一般には非可換な）層を係数として考えたほうが自然に思える。
+実際$G$に値を取る関数の層と、$G$に値に取る局所定数層とでは、そこから誘導される束がだいぶ違ったりするのでそいう違いが計れるので便利。しかしそうした（一般には非可換な）層が一番良い係数なのかは判断しかねる。
+また$2$-コサイクルに対応する位相空間上の構造物もあるらしいがよくわからない。
+高次のコサイクルはなんかもうよく知らん。非可換コホモロジーとかいうものが関係しているらしい。
+\begin{thebibliography}{9}
+\bibitem{1}フーズモラー
+\bibitem{2}スティーンロッド
+
+\bibitem{3}Dold, 
+\textit{Partition of unity in the theory of fibrations}
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+

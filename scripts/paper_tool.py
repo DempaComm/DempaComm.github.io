@@ -1964,6 +1964,7 @@ def command_import(args: argparse.Namespace) -> None:
         manifest = {
             "schema_version": 2,
             "slug": slug,
+            "migration_record_id": str(spec.get("migration_record_id", "")).strip(),
             "legacy_slugs": list(spec.get("legacy_slugs", [])),
             "title": spec["title"],
             "published_at": spec["published_at"],

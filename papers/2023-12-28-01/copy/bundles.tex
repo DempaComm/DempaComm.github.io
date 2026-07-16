@@ -1,0 +1,496 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{mathrsfs}
+
+\usepackage{enumitem}
+
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+
+
+
+\newcommand{\myomp}{\mathrm{OMP}}
+\newcommand{\myequiv}{\bowtie}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{数学的失敗とその教訓：ファイバーバンドル}
+\author{ナンブ キトラ}
+\date{\today}
+			
+			\begin{document}
+\maketitle
+
+この文章ではファイバーバンドルの理論を
+被覆の言葉だけで記述しようとした場合に起こった大失敗を
+紹介する．
+
+経緯を述べると6年くらい前に
+ファイバーバンドルの理論を勉強しようと思ったのだが，
+なんか難しくって，聞くところによるとバンドルの理論というのは被覆の言葉で書き直せるとのことであった．
+被覆の方が私に馴染みがあったし，
+またバンドルを被覆の言葉で記述した場合，
+(確か一次の)非可換(チェック)コホモロジー
+と見做せるのでそのように記述した方が都合がいいと思って
+ファイバーバンドルの理論を被覆の言葉で書き直したPDF
+を用意していた．
+しかしながら，
+プルバックのホモトピー不変性を証明するに至って，
+あまりにも証明が書き直せないことから6年くらい塩漬けになっていた．勉強も塩漬けになっていた．
+
+最近年末の大掃除をしている時に
+塩漬けになっているのを再発見して
+なんとかプルバックのホモトピー不変性
+を証明できないかと唸っていたところ，
+おそらく成功したので，また将来の私が困らないように
+メモとして残しておく．
+成功したかどうかよくわからないが，
+アイデアの方向性はあっていると思うのでメモを残して
+これ以上この方向で進むのをやめろという警告とする．
+
+証明が精密でなくとも，この方向でやろうとするのはやめろという警告程度にはなるだろう．
+
+\textbf{端的に言って，バンドルの理論は写像の言葉で行った方が
+とても良い．}
+
+元々の未完成のPDFをこの文章の後にくっつけておく．
+完成する予定だったのでうまくいったとか書いているが，
+完成してないしうまくもいっていない．
+
+
+\section{何を定義したのか？}
+まずオリジナル版では添字付きの被覆を定義し，変換関数を
+導入する．
+元々電波通信はやぼったいほど基礎的なことを書き込み方針だったのだ．
+\begin{df}[添え字付き開被覆]
+集合$A$から$\mathfrak{O}(X)$への写像$U:A\to \mathfrak{O}(X)$が
+\[
+X=\bigcup_{a\in A}U(a)
+\]
+を充たすとき、$U$を添え字付き開被覆といい、$A$のことを添え字という。
+$U$の$a\in A$における値$U(a)$を$U_a$と書いたりする。また、
+なまぐさをして$U$のことを$U=\{U_a\}_{a\in A}$とか書いたりする。
+\end{df}
+集合として同じでも添え字が違う場合は別のものとして扱いたいので添え字付き開被覆を用いる。
+大げさだが、つぎのように定義する。
+\[
+OMP(X,G)=\bigcup_{P\in \mathfrak{O}(X)}Map(P, G)
+\]
+つまり$OMP(X)$は$X$の開集合から$G$への写像を全部集めた集合である。
+また集合$A$に対して$A^2$で$A\times A$を表すことにする。
+\begin{df}[変換関数]
+$U$を$X$の添え字付き開被覆とし、その添え字を$A$とする。$g:A\times A:\to OMP(X,G)$が$U$に付随する変換関数であるとは次の条件を充たすときに言う。\footnote{以下では$g(b,a)$を$g_{ba}$と書くことにする。}
+\begin{enumerate}
+\item $g_{ba}$の定義域は$U_{b}\cap U_{a}$である。
+\item $g_{ba}: U_b\cap U_a\to G$は連続写像である。
+\item $\forall x\in U_c\cap U_b\cap U_a\quad g_{cb}(x)g_{ba}(x)=g_{ca}(x)$ （コサイクル条件）
+\end{enumerate}
+\end{df}
+\begin{cau}
+$U_b\cap U_a=\O$のとき$g_{ba}$は空写像である。また、$U_c\cap U_b\cap U_a=\O$のとき条件$(3)$は真になることに注意しよう。
+\end{cau}
+\begin{cau}
+コサイクル条件から$U_a\neq \O$のとき$g_{aa}\equiv 1_G$となることや、
+$U_b\cap U_a\neq \O$のとき$g_{ba}=(g_{ab})^{-1}$が成り立つことなどがわかる。
+\end{cau}
+
+ついで
+\textbf{抽象束}
+なる概念を位相空間の上の被覆と変換関数の集まりで定義する．
+\begin{df}
+位相空間$X$と位相群$G$に対して、
+$X$と$G$、添え字集合$A$と$A$を添え字に持つ$X$上の添え字付き開被覆$U$, および$U$に付随する変換関数$g$の五つ組$(X, G, A, U, g)$のことを\textbf{$X$上の$G$-抽象束}（もしくは\textbf{$X$上の$G$-変換関数付き開被覆}、または\textbf{$X$の$(G, 1)$-チェックコサイクル}）と呼ぶ。
+$X$を底空間、$G$をこの束の構造群と呼ぶ。
+$X$上の$G$-抽象束全体を$\mathscr{C}(X,G)$と書く。\footnote{$\mathscr{C}$はcocycleのcである。}
+\end{df}
+\begin{cau}
+抽象束にはファイバーがないことに注意せよ。
+\end{cau}
+\begin{exam}
+任意の位相空間$X$と位相群$G$を与える。添え字付き開被覆$U:\{1\}\to \mathfrak{O}(X)$を$U(1)=X$と定義し、変換関数$g:\{1\}^2\to OMP(X)$を$g_{11}\equiv1_G$と定義する\footnote{$X=\emptyset$の場合には$g_{11}$は空写像と定義する。}と$(X, G, \{1\}, U, g)$は抽象束になる。この束のことを自明束という。
+どんな位相空間と位相群$G$についても
+$\mathscr{C}(X,G)\neq \emptyset$である。これは$G$上の自明束が常に存在するからである。
+\end{exam}
+
+
+バンドルの理論の教科書などに書いている通り，
+このような「抽象束」
+というのはファイバーバンドルと同じのはずであり
+(ファイバーを指定していないので主束と同じのような気がする)，
+ファイバーバンドルの理論をこの「抽象束」
+の言葉で書き換えることができてしかるべきである．
+
+次に束同士の同値性について定義するのである．
+
+以下では抽象束をフラクトゥールの一文字で表す。
+%%%%%%%
+\subsection{抽象束の束同値}
+二つの$G$-抽象束が束同値であるということを定式化する。
+\begin{df}
+$\mathfrak{A},\mathfrak{B}\in \mathscr{C}(X,G)$について
+\[
+\mathfrak{A}=(X, G, A, U, g),\ \mathfrak{B}=(X, G, B, V, h)
+\]
+とする。任意の$(a, b)\in A\times B$について連続関数
+\[
+p_{ba}:V_b\cap U_a\to G,\ q_{ab}: U_a\cap V_b\to G
+\]
+が存在して、以下の条件を充たすとき$\mathfrak{A}$と$\mathfrak{B}$は束同値であるという。
+\begin{enumerate}
+\item $\forall (a,b,c)\in A\times A\times B\ \forall x\in  V_c\cap U_b\cap U_a\ p_{cb}(x)g_{ba}(x)=p_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times A\ \forall x\in  U_c\cap V_b\cap U_a\ q_{cb}(x)p_{ba}(x)=g_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times A\ \forall x\in  U_c\cap U_b\cap V_a\ g_{cb}(x)q_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times B\times A\ \forall x\in  U_c\cap V_b\cap V_a\ q_{cb}(x)h_{ba}(x)=q_{ca}(x) $
+\item $\forall (a,b,c)\in B\times A\times B\ \forall x\in  V_c\cap U_b\cap V_a\ p_{cb}(x)q_{ba}(x)=h_{ca}(x) $
+\item $\forall (a,b,c)\in A\times B\times B\ \forall x\in  V_c\cap V_b\cap U_a\ h_{cb}(x)p_{ba}(x)=p_{ca}(x) $
+\end{enumerate}
+$\mathfrak{A}$と$\mathfrak{B}$が束同値であることを
+\[
+\mathfrak{A}\bowtie \mathfrak{B}
+\]
+と表す。
+\end{df}
+\begin{cau}
+$p$は$\mathfrak{A}$から$\mathfrak{B}$への変換で、$q$は$\mathfrak{B}$から$\mathfrak{A}$への変換であり、
+\[
+p_{ba}=(q_{ab})^{-1}
+\]
+を充たす。
+\end{cau}
+さすがにファイバーがないと束同士の写像は定義できない。
+
+オリジナルのPDFでは単位区間のバンドルが全て自明であることを証明しようとした痕跡がある．
+
+「区間のあれ」
+と書かれている補題は，
+単位閉区間にルベーグ数の存在とかを適応して
+被覆度が高々$2$の被覆で細分できることを示したかったのだと思う．
+\begin{lem}
+区間のあれ
+\end{lem}
+
+区間上の束が自明であることを証明するために
+変換関数を頑張って引き伸ばすことをしている．
+
+\begin{prop}
+単位閉区間$I=[0,1]$と任意の位相群$G$について、
+\[
+\card(\mathscr{C}(I,G)/\!\bowtie)=1
+\]
+つまり$I$上の抽象束はすべて自明束である。
+\end{prop}
+\begin{proof}
+$\mathfrak{A}$を$I$上の抽象束とする。
+この束の被覆は$[a_0, b_0), (a_1, b_1), \dots , (a_{n-1}, b_{n-1}), (a_n, b_n]$という形で、
+\[
+a_0=0,\  b_n=1, \ a_{i-1}<a_i<b_{i-1}<b_i
+\]
+を充たすとしてよい。さて$c_1, c_2,\dots c_n$、$d_0, d_2\dots d_{n-1}$を
+\[
+[c_i, d_{i-1}]\subset (a_i, b_{i-1})
+\]
+となるようにとる。
+
+$\mathfrak{A}\bowtie \mathfrak{B}$である。
+
+
+$s_0:[a_0, b_0)\to G$を$s_0\equiv 1$
+
+$x\in (a_i, b_i)$のとき（$i=n$のときは$x\in (a_n, b_n]$）
+$s_i(x)=g_{i,i-1}(t(x))s_{i-1}|_{(a_i,b_{i-1})}(t(x))$と定義する。$(c_i, d_{i-1})$上では$s(x)=g_{i,i-1}(x)s_{i-1}(x)$
+なので$(c_i, d_{i-1})$の上で$s_{i}s_{i-1}^{-1}=g_{i,i-1}$なので$\mathfrak{B}$は自明である。よって$\mathfrak{A}$も自明である。
+\end{proof}
+
+\section{束同値に関する注意}
+上で定義した束同値だが，同型として強すぎる．
+二つの主束$B$と$C$があったときにこれらの局所自明開被覆を全く同じように取れるかどうかは全く自明ではない．
+というか成り立たない．
+よって
+束同値は主束の話だと思うと，
+$B$と$C$に\textbf{共通の局所自明開被覆が取れて}尚且つ同型というかなりきつい同型になっている．
+なので通常の意味での主束の同型を被覆の言葉で書きたいのであれば，二つの抽象束\textbf{それぞれの細分が存在して}それが上の意味での束同値という風に修正しなければならない．
+このことに気が付かなかったのが
+オリジナルの文書の執筆を滞らせる一因になっていた．
+
+
+\section{何を証明したかったのか？}
+以下のような命題が証明したかったはずである．
+この命題は
+大まかには
+ファイバーバンドルのプルバックの
+ホモトピー不変性である．
+\begin{thm}\label{thm:8888}
+$X$をパラコンパクトハウスドルフ空間とし，
+$\mathfrak{T}$
+を
+$X\times [0, 1]$
+上の
+抽象束とする．
+このとき$\mathfrak{T}|_{X\times \{0\}}$
+と
+$\mathfrak{T}|_{X\times\{1\}}$
+は束同値である．
+\end{thm}
+全く証明できなかった．
+色々頑張ると次のようなことは証明できる．
+
+\begin{prop}\label{prop:9}
+$X$をパラコンパクトハウスドルフ空間とする。
+$X\times I$上の束は$\{U_i\times I\}_{i\in\nn}$という形の添え字付き被覆を持つ抽象束と束同値である。
+\end{prop}
+この命題はつまり局所自明な被覆として
+$\{U_i\times I\}_{i\in\nn}$という形のものが取れるということである．
+
+
+\section{定理\ref{thm:8888}の証明? 大体こういう感じでできると思う}
+今から$\mathfrak{T}$の被覆は常に
+命題\ref{prop:9}のようなものとする．
+さらに局所有限とする．
+そして$\mathfrak{A}=\mathfrak{T}|_{X\times \{0\}}$
+とする．
+
+$V\in \mathfrak{A}$
+と$\supp f\subset V$となる
+$f\colon X\to [0, 1]$に対して
+$\mathfrak{A}=\{O_{i}\}$の
+$(V, f)$-変形
+$\mathfrak{A}(V, f)$を以下のように定義する．
+$\mathfrak{A}(V, f)=\{O_{i}\setminus \supp f\}\cup 
+\{V\}$
+で変換関数は$g_{ab}(x, f(x))$
+とする．ただし$O_{i}$に$V$
+は含まれていないとする．
+このとき$\mathfrak{A}(V, f)$
+は$\mathfrak{A}$
+と同値である．
+なぜなら$O_{i}\setminus \supp f$
+しているからである．
+また$\mathfrak{T}(V, f)$
+を$X\times [0, 1]$
+上の束で変換関数が
+$g_{ab}(x, f(x)+t)$
+となるものとする．
+
+
+一般に有限個の$V_{j_{1}}, \dots V_{j_{n}}\in \mathfrak{A}$
+と
+$\supp f_{j}\subset V_{j}$で
+$\sum_{j}f_{j}(x)\in [0, 1]$とような
+$\{f_{j}\}$について
+$(\{V_{j}\}, f_{j})$-変形
+$\mathfrak{A}((\{V_{j}\}, f_{j}))$
+を
+以下のように定義する．
+$\mathfrak{A}^{\prime}=\{O_{i}\setminus \bigcup_{j} (\supp f_{j})\}\cup \{V_{j}\setminus 
+\bigcup_{j<k}\supp f_{k}\}$で
+変換関数は
+$g_{ab}\left(x, \sum_{j}f_{j}(x)\right)$
+とする．
+このとき
+これは元の被覆と同値である．
+なぜなら
+2枚の場合を考えるとそれは
+$(V_{1}, f_{1})$-変形$\mathfrak{A}(V_{1}, f_{1})$と
+$\mathfrak{T}(V_{1}, f_{1})$
+に対する
+変形なので
+$\mathfrak{A}$
+は$\mathfrak{A}(V_{1}, f_{1})$
+に同型で，
+$\mathfrak{A}(V_{1}, f_{1})$
+は$\mathfrak{A}(\{V_{1}, V_{2}\}, \{f_{1}, f_{2}\})$に同型なので
+結局同型である．
+この議論はようは
+$\mathfrak{A}(V_{1}, f_{1})(V_{2}, f_{2})
+=\mathfrak{A}(\{V_{1}, V_{2}\}, \{f_{1}, f_{2}\})$
+ということである．
+
+
+
+ついで
+一般の$V_{j}$と$f_{j}$について
+$(\{V_{j}\}, f_{j})$-変形を
+定義する．まず添字集合は整列されているとして，
+$\mathfrak{A}(\{V_{j}\}, f_{j})=\{O_{i}\setminus \bigcup_{j} (\supp f_{j})\}\cup \{V_{j}\setminus 
+\bigcup_{j<k}\supp f_{k}\}$で
+変換関数は
+$g_{ab}\left(x, \sum_{j}f_{j}(x)\right)$
+とする．
+ただし$O_{i}$
+たちには$V_{j}$は含まれていないとする．
+まず被覆になっていることを示す．
+点$p$をとる．
+$p\in V_{j}$となるものが存在しない時は
+$p\in O_{i}$をとると
+$p\in O_{i}\setminus \bigcup_{j}\supp f_{j}$
+である．
+$p\in V_{j}$となるものが存在するときは局所有限なので
+$V_{j_{n}}, \dots V_{j_{n}}$
+が存在して これらしか
+$p$を含まない．
+$j_{n}$が一番大きいとすると
+$p\in V_{j_{n}}\setminus \bigcup_{j_{n}<k}\supp f_{k}$
+なので被覆である．
+これはもとの被覆と同値である．
+$p$の周りを考えると有限回の反復なので
+有限の場合の話から大丈夫．
+つまり$p$の局所有限性を体現する近傍$U_{p}$
+を取り$U_{p}$
+による被覆
+$\{U_{p}\}_{p\in X}$で$\mathfrak{A}$
+を細分してその上で議論をするとわかると思う．
+よって$g_{ab}(x, 0)$を変換関数とする
+$\mathfrak{T}|_{X\times \{0\}}$
+と
+と$g_{ab}(x, 1)$を変換関数とする
+$\mathfrak{T}|_{X\times \{1\}}$が同値であることがわかった．たぶん．
+
+大人しく写像の話でバンドルを議論した方がよい．
+
+
+
+
+
+
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{dimdim.bib}
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+

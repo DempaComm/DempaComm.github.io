@@ -27,6 +27,14 @@ class MigrationLedgerTest(unittest.TestCase):
             pdf = source_dir / "sample.pdf"
             tex.write_bytes(b"original tex")
             pdf.write_bytes(b"%PDF original")
+            component_dir = myblog / "2022" / "11__20" / "ar11" / "component"
+            component_dir.mkdir(parents=True)
+            component_tex = component_dir / "component.tex"
+            component_pdf = component_dir / "component.pdf"
+            component_bib = component_dir / "component.bib"
+            component_tex.write_bytes(b"component tex")
+            component_pdf.write_bytes(b"%PDF component")
+            component_bib.write_bytes(b"component bibliography")
             private_copy = myblog / "MyBlogCOPY" / "private"
             private_copy.mkdir(parents=True)
             (private_copy / "private.tex").write_bytes(b"do not list")
@@ -36,6 +44,12 @@ class MigrationLedgerTest(unittest.TestCase):
             manifest = {
                 "schema_version": 2,
                 "slug": "2022-09-10-01",
+                "migration_record_id": (
+                    "source:"
+                    + hashlib.sha256(
+                        b"2022/11__20/ar11/sample"
+                    ).hexdigest()[:16]
+                ),
                 "title": "Published title",
                 "published_at": "2022-09-10T23:42:49+09:00",
                 "sequence": 1,
@@ -49,6 +63,21 @@ class MigrationLedgerTest(unittest.TestCase):
                     },
                     {
                         "original_sha256": hashlib.sha256(pdf.read_bytes()).hexdigest()
+                    },
+                    {
+                        "original_sha256": hashlib.sha256(
+                            component_tex.read_bytes()
+                        ).hexdigest()
+                    },
+                    {
+                        "original_sha256": hashlib.sha256(
+                            component_pdf.read_bytes()
+                        ).hexdigest()
+                    },
+                    {
+                        "original_sha256": hashlib.sha256(
+                            component_bib.read_bytes()
+                        ).hexdigest()
                     },
                 ],
             }
@@ -67,15 +96,19 @@ class MigrationLedgerTest(unittest.TestCase):
             csv_path = root / "ledger" / "migration-ledger.csv"
             with csv_path.open(encoding="utf-8", newline="") as stream:
                 rows = list(csv.DictReader(stream))
-            self.assertEqual(1, len(rows))
-            self.assertEqual("published", rows[0]["status"])
-            self.assertEqual("2022-09-10-01", rows[0]["target_slug"])
-            self.assertEqual("sample.tex", rows[0]["tex_files"])
-            self.assertEqual("unique", rows[0]["duplicate_status"])
-            self.assertNotIn(str(Path(temporary)), rows[0]["source_dir"])
-            self.assertNotIn("MyBlogCOPY", rows[0]["source_dir"])
+            self.assertEqual(2, len(rows))
+            by_name = {Path(row["source_dir"]).name: row for row in rows}
+            self.assertEqual("published", by_name["sample"]["status"])
+            self.assertEqual(
+                "source_found", by_name["component"]["status"]
+            )
+            self.assertEqual("2022-09-10-01", by_name["sample"]["target_slug"])
+            self.assertEqual("sample.tex", by_name["sample"]["tex_files"])
+            self.assertEqual("unique", by_name["sample"]["duplicate_status"])
+            self.assertNotIn(str(Path(temporary)), by_name["sample"]["source_dir"])
+            self.assertNotIn("MyBlogCOPY", by_name["sample"]["source_dir"])
 
-            rows[0]["notes"] = "manual note"
+            by_name["sample"]["notes"] = "manual note"
             with csv_path.open("w", encoding="utf-8", newline="") as stream:
                 writer = csv.DictWriter(stream, fieldnames=rows[0].keys())
                 writer.writeheader()
@@ -89,7 +122,10 @@ class MigrationLedgerTest(unittest.TestCase):
             )
             with csv_path.open(encoding="utf-8", newline="") as stream:
                 rescanned = list(csv.DictReader(stream))
-            self.assertEqual("manual note", rescanned[0]["notes"])
+            rescanned_by_name = {
+                Path(row["source_dir"]).name: row for row in rescanned
+            }
+            self.assertEqual("manual note", rescanned_by_name["sample"]["notes"])
 
             checked = subprocess.run(
                 [sys.executable, str(TOOL), "check"],
@@ -104,9 +140,9 @@ class MigrationLedgerTest(unittest.TestCase):
                     encoding="utf-8"
                 )
             )
-            self.assertEqual(1, generated["record_count"])
+            self.assertEqual(2, generated["record_count"])
             self.assertEqual(1, generated["status_counts"]["published"])
-            self.assertEqual(1, generated["duplicate_counts"]["unique"])
+            self.assertEqual(2, generated["duplicate_counts"]["unique"])
 
     def test_duplicate_groups_prefer_published_and_keep_versions_distinct(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

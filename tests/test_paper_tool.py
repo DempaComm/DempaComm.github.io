@@ -348,6 +348,7 @@ class SourceOnlyImportTest(unittest.TestCase):
                 "title": "Reviewed Article",
                 "published_at": "2026-07-16T12:00:00+09:00",
                 "sequence": 1,
+                "migration_record_id": "source:0123456789abcdef",
                 "kind": "複数ファイル原稿",
                 "summary": "検査済み原稿です。",
                 "original_url": "",
@@ -408,6 +409,9 @@ class SourceOnlyImportTest(unittest.TestCase):
             manifest_path = root / "papers" / "2026-07-16-01" / "paper.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             self.assertEqual(2, manifest["schema_version"])
+            self.assertEqual(
+                "source:0123456789abcdef", manifest["migration_record_id"]
+            )
             self.assertEqual(
                 {"source.tex", "published.pdf"},
                 {review["path"] for review in manifest["privacy_reviews"]},

@@ -950,6 +950,23 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
     assigned_slugs: set[str] = set()
     for slug, manifest in manifests.items():
         expected = manifest_hashes(manifest)
+        preferred_record_id = str(manifest.get("migration_record_id", "")).strip()
+        if preferred_record_id:
+            preferred = next(
+                (row for row in rows if row["record_id"] == preferred_record_id),
+                None,
+            )
+            if preferred:
+                source_hashes = candidate_hashes.get(preferred["source_dir"], set())
+                if not expected & source_hashes:
+                    raise LedgerError(
+                        f"{slug}: migration_record_id {preferred_record_id} "
+                        "does not match any protected source hash"
+                    )
+                apply_manifest(preferred, manifest)
+                assigned_sources.add(preferred["source_dir"])
+                assigned_slugs.add(slug)
+                continue
         scored = sorted(
             (
                 (len(expected & hashes), source_dir)
