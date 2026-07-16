@@ -14,10 +14,19 @@
 
 ## 新しい原稿の取り込み
 
+TeXまたはPDFを取り込む前に、必ず個人情報検査を行う。
+
+```sh
+python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
+python3 scripts/paper_tool.py inspect-file /path/to/manuscript.pdf
+```
+
+TeXでは著者、メール、所属などの候補を報告する。PDFでは文字・メタデータの抽出を試み、全ページをPNG画像にする。フォント欠落などで文字が画像から消える可能性がある場合は検査不合格になる。自動検出には限界があるため、報告と原稿、PDFの全ページ画像を人間が確認する。確認後だけ `--privacy-reviewed` を指定できる。検査済みファイルと取り込み時のSHA-256が異なる場合は取り込みを拒否する。
+
 TeXファイル1本だけから、コンパイル成否に左右されない最低限の記事を作る場合は次を使う。
 
 ```sh
-python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex
+python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex --privacy-reviewed
 ```
 
 原稿はバイト単位で同一の `source.tex` として保存され、PDFのないソースのみの記事ページになる。題名は単純な `\title{...}` またはファイル名から、公開日時と同日内番号は実行時点から補う。詳しい指定方法と、一般的なAIに渡せる手順は `docs/MINIMAL_TEX_IMPORT.md` にある。
@@ -25,7 +34,7 @@ python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex
 PDFファイル1本だけから最低限の記事を作る場合は次を使う。
 
 ```sh
-python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf
+python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf --privacy-reviewed
 ```
 
 PDFはバイト単位で同一の `published.pdf` として保存され、公開時には `main.pdf` として配置される。題名はPDFのファイル名から、公開日時と同日内番号は実行時点から補う。詳しい指定方法と、一般的なAIに渡せる手順は `docs/MINIMAL_PDF_IMPORT.md` にある。

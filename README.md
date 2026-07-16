@@ -26,6 +26,7 @@
 python3 scripts/paper_tool.py verify
 python3 scripts/paper_tool.py audit
 python3 scripts/paper_tool.py catalog --check
+python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
 
 使い方の詳細は `docs/MIGRATION.md` を参照してください。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。

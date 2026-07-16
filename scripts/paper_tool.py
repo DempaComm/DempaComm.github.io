@@ -10,6 +10,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -23,6 +24,9 @@ ROOT = Path(
 PAPERS_DIR = ROOT / "papers"
 INDEX_PATH = ROOT / "index.html"
 SEARCH_SCRIPT_PATH = ROOT / "search.js"
+PRIVACY_REVIEW_DIR = Path(
+    os.environ.get("PAPER_PRIVACY_REVIEW_DIR", ROOT / ".privacy-review")
+).resolve()
 START_MARKER = "<!-- GENERATED:PAPERS:START -->"
 END_MARKER = "<!-- GENERATED:PAPERS:END -->"
 TAGS_START_MARKER = "<!-- GENERATED:TAGS:START -->"
@@ -48,6 +52,17 @@ SITE_TITLE_ATTRIBUTE = "私と放電"
 
 class PaperToolError(RuntimeError):
     pass
+
+
+PRIVACY_TEX_COMMANDS = (
+    "author",
+    "email",
+    "affiliation",
+    "institute",
+    "address",
+    "thanks",
+)
+EMAIL_PATTERN = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE)
 
 
 def sha256(path: Path) -> str:
@@ -808,6 +823,219 @@ def next_sequence_for_date(published: datetime) -> int:
     return max(used, default=0) + 1
 
 
+def privacy_review_path(source: Path) -> Path:
+    return PRIVACY_REVIEW_DIR / sha256(source)
+
+
+def privacy_findings(text: str, file_type: str) -> list[str]:
+    findings: list[str] = []
+    for email in sorted(set(EMAIL_PATTERN.findall(text))):
+        findings.append(f"email candidate: {email}")
+    if file_type == "tex":
+        for command in PRIVACY_TEX_COMMANDS:
+            pattern = re.compile(rf"\\{command}\s*\{{([^{{}}]*)\}}", re.IGNORECASE)
+            for value in pattern.findall(text):
+                compact = " ".join(value.split())
+                findings.append(f"\\{command} candidate: {compact or '(empty)'}")
+    else:
+        metadata_pattern = re.compile(
+            r"^(Author|Creator|Subject|Keywords):\s*(.+)$", re.MULTILINE | re.IGNORECASE
+        )
+        for key, value in metadata_pattern.findall(text):
+            findings.append(f"PDF metadata {key}: {' '.join(value.split())}")
+    for label in ("氏名", "著者", "所属", "住所", "電話", "連絡先"):
+        if label in text:
+            findings.append(f"personal-information label found: {label}")
+    return list(dict.fromkeys(findings))
+
+
+def optional_pdf_text(source: Path) -> tuple[str, list[str]]:
+    notes: list[str] = []
+    collected: list[str] = []
+    pdfinfo = shutil.which("pdfinfo")
+    if pdfinfo:
+        completed = subprocess.run(
+            [pdfinfo, str(source)],
+            check=False,
+            capture_output=True,
+            text=True,
+            errors="replace",
+        )
+        if completed.returncode == 0:
+            collected.append(completed.stdout)
+        else:
+            notes.append("pdfinfo could not read metadata")
+    pdftotext = shutil.which("pdftotext")
+    if pdftotext:
+        completed = subprocess.run(
+            [pdftotext, str(source), "-"],
+            check=False,
+            capture_output=True,
+            text=True,
+            errors="replace",
+        )
+        if completed.returncode == 0:
+            collected.append(completed.stdout)
+            return "\n".join(collected), notes
+        notes.append("pdftotext could not extract text")
+    try:
+        from pypdf import PdfReader  # type: ignore[import-not-found]
+
+        reader = PdfReader(source)
+        metadata = reader.metadata or {}
+        metadata_text = "\n".join(
+            f"{key}: {value}" for key, value in metadata.items() if value
+        )
+        page_text = "\n".join(page.extract_text() or "" for page in reader.pages)
+        collected.extend([metadata_text, page_text])
+        return "\n".join(collected), notes
+    except Exception:
+        if not collected:
+            notes.append("PDF text and metadata extraction were unavailable")
+        else:
+            notes.append("PDF page text extraction was unavailable")
+        return "\n".join(collected), notes
+
+
+def render_pdf_review(source: Path, output: Path) -> list[Path]:
+    pdftoppm = shutil.which("pdftoppm")
+    if not pdftoppm:
+        raise PaperToolError(
+            "PDF privacy review requires pdftoppm (Poppler) to render every page"
+        )
+    prefix = output / "page"
+    completed = subprocess.run(
+        [pdftoppm, "-png", "-r", "120", str(source), str(prefix)],
+        check=False,
+        capture_output=True,
+        text=True,
+        errors="replace",
+    )
+    pages = sorted(output.glob("page-*.png"))
+    unsafe_render_messages = (
+        "missing language pack",
+        "unknown font",
+        "no font in show",
+        "couldn't find a font",
+        "fontconfig error",
+    )
+    render_log = f"{completed.stdout}\n{completed.stderr}".casefold()
+    if any(message in render_log for message in unsafe_render_messages):
+        raise PaperToolError(
+            "PDF rendering reported missing fonts; generated images may omit personal "
+            "information, so privacy review cannot be approved"
+        )
+    if completed.returncode != 0 or not pages:
+        raise PaperToolError(
+            "PDF page rendering failed; the file must be reviewed visually before import"
+        )
+    return pages
+
+
+def command_inspect_file(args: argparse.Namespace) -> None:
+    source = Path(args.file).expanduser().resolve()
+    if not source.is_file():
+        raise PaperToolError(f"file does not exist: {source}")
+    suffix = source.suffix.casefold()
+    if suffix not in {".tex", ".pdf"}:
+        raise PaperToolError("inspect-file supports only .tex and .pdf files")
+    output = privacy_review_path(source)
+    if output.exists():
+        shutil.rmtree(output)
+    output.mkdir(parents=True)
+    notes: list[str] = []
+    rendered_pages: list[Path] = []
+    if suffix == ".tex":
+        text = source.read_text(encoding="utf-8", errors="replace")
+        file_type = "tex"
+    else:
+        with source.open("rb") as stream:
+            if stream.read(5) != b"%PDF-":
+                raise PaperToolError(f"file does not have a PDF header: {source}")
+        file_type = "pdf"
+        text, notes = optional_pdf_text(source)
+        try:
+            rendered_pages = render_pdf_review(source, output)
+        except Exception:
+            shutil.rmtree(output, ignore_errors=True)
+            raise
+        (output / "extracted.txt").write_text(text, encoding="utf-8")
+    findings = privacy_findings(text, file_type)
+    report = {
+        "schema_version": 1,
+        "sha256": sha256(source),
+        "source_name": source.name,
+        "file_type": file_type,
+        "findings": findings,
+        "notes": notes,
+        "rendered_pages": [page.name for page in rendered_pages],
+        "manual_review_required": True,
+    }
+    write_json(output / "report.json", report)
+    report_lines = [
+        f"File: {source}",
+        f"SHA-256: {report['sha256']}",
+        f"Type: {file_type}",
+        "",
+        "Automatic findings:",
+        *(f"- {finding}" for finding in findings),
+    ]
+    if not findings:
+        report_lines.append("- none detected (this does not prove the file is safe)")
+    report_lines.extend(f"- note: {note}" for note in notes)
+    report_lines.extend(
+        [
+            "",
+            "Manual review is mandatory.",
+            "For PDF, inspect every page PNG in this directory.",
+            "Check author names, real names, email, affiliation, address, and metadata.",
+        ]
+    )
+    (output / "report.txt").write_text("\n".join(report_lines) + "\n", encoding="utf-8")
+    print(f"PRIVACY REVIEW FILES: {output}")
+    for finding in findings:
+        print(f"WARN {finding}")
+    print("MANUAL REVIEW REQUIRED before using --privacy-reviewed")
+
+
+def require_privacy_review(source: Path, acknowledged: bool) -> None:
+    review_dir = privacy_review_path(source)
+    report_path = review_dir / "report.json"
+    if not report_path.is_file():
+        raise PaperToolError(
+            f"run inspect-file first: python3 scripts/paper_tool.py inspect-file {source}"
+        )
+    report = load_json(report_path)
+    if report.get("sha256") != sha256(source):
+        raise PaperToolError("privacy review is stale; run inspect-file again")
+    expected_type = source.suffix.casefold().removeprefix(".")
+    if (
+        report.get("schema_version") != 1
+        or report.get("file_type") != expected_type
+        or report.get("manual_review_required") is not True
+    ):
+        raise PaperToolError("privacy review report is invalid; run inspect-file again")
+    if expected_type == "pdf":
+        pages = report.get("rendered_pages")
+        if (
+            not isinstance(pages, list)
+            or not pages
+            or any(
+                not isinstance(page, str)
+                or not (review_dir / safe_relative_path(page)).is_file()
+                for page in pages
+            )
+        ):
+            raise PaperToolError(
+                "PDF privacy review images are missing; run inspect-file again"
+            )
+    if not acknowledged:
+        raise PaperToolError(
+            "manual privacy review is required; after reviewing the report and every "
+            "PDF page, rerun with --privacy-reviewed"
+        )
+
+
 def command_import_tex(args: argparse.Namespace) -> None:
     """Create a guaranteed-publishable source-only paper from one TeX file."""
     source = Path(args.tex_file).expanduser().resolve()
@@ -815,6 +1043,7 @@ def command_import_tex(args: argparse.Namespace) -> None:
         raise PaperToolError(f"TeX file does not exist: {source}")
     if source.suffix.casefold() != ".tex":
         raise PaperToolError(f"expected a .tex file: {source}")
+    require_privacy_review(source, args.privacy_reviewed)
     try:
         source_text = source.read_text(encoding="utf-8", errors="replace")
     except OSError as error:
@@ -900,6 +1129,7 @@ def command_import_pdf(args: argparse.Namespace) -> None:
         raise PaperToolError(f"PDF file does not exist: {source}")
     if source.suffix.casefold() != ".pdf":
         raise PaperToolError(f"expected a .pdf file: {source}")
+    require_privacy_review(source, args.privacy_reviewed)
     try:
         with source.open("rb") as stream:
             if stream.read(5) != b"%PDF-":
@@ -1165,6 +1395,12 @@ def parser() -> argparse.ArgumentParser:
     stage_parser.add_argument("output")
     stage_parser.set_defaults(func=command_stage)
 
+    inspect_parser = subparsers.add_parser(
+        "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"
+    )
+    inspect_parser.add_argument("file")
+    inspect_parser.set_defaults(func=command_inspect_file)
+
     import_parser = subparsers.add_parser(
         "import-paper", help="copy a new paper byte-for-byte from a JSON spec"
     )
@@ -1180,6 +1416,7 @@ def parser() -> argparse.ArgumentParser:
     import_tex_parser.add_argument("--published-at")
     import_tex_parser.add_argument("--sequence", type=int)
     import_tex_parser.add_argument("--original-url")
+    import_tex_parser.add_argument("--privacy-reviewed", action="store_true")
     import_tex_parser.add_argument("--no-catalog", action="store_true")
     import_tex_parser.set_defaults(func=command_import_tex)
 
@@ -1191,6 +1428,7 @@ def parser() -> argparse.ArgumentParser:
     import_pdf_parser.add_argument("--published-at")
     import_pdf_parser.add_argument("--sequence", type=int)
     import_pdf_parser.add_argument("--original-url")
+    import_pdf_parser.add_argument("--privacy-reviewed", action="store_true")
     import_pdf_parser.add_argument("--no-catalog", action="store_true")
     import_pdf_parser.set_defaults(func=command_import_pdf)
 

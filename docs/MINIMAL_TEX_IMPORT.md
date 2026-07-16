@@ -14,10 +14,18 @@ PDFファイル1本だけの場合は `docs/MINIMAL_PDF_IMPORT.md` を使う。
 
 ## 最短の取り込み
 
-リポジトリの最上位ディレクトリで次を実行する。
+最初に個人情報検査を実行する。
 
 ```sh
-python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex
+python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
+```
+
+表示された `.privacy-review/.../report.txt` を読み、`author`、メールアドレス、所属、住所などの候補を確認する。自動検出で何も出なくても安全とは限らないため、原稿自体も目視する。
+
+確認が終わった場合だけ、リポジトリの最上位ディレクトリで次を実行する。
+
+```sh
+python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex --privacy-reviewed
 ```
 
 この操作は次を自動的に行う。
@@ -36,7 +44,8 @@ python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex \
   --title "原稿の題名" \
   --published-at "2026-07-16T12:00:00+09:00" \
   --sequence 1 \
-  --original-url "https://example.com/original"
+  --original-url "https://example.com/original" \
+  --privacy-reviewed
 ```
 
 同じ保存先がすでにある場合は上書きせず停止する。

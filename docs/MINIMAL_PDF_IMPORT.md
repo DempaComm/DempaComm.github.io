@@ -12,10 +12,20 @@
 
 ## 最短の取り込み
 
-リポジトリの最上位ディレクトリで次を実行する。
+最初に個人情報検査を実行する。
 
 ```sh
-python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf
+python3 scripts/paper_tool.py inspect-file /path/to/manuscript.pdf
+```
+
+`.privacy-review/.../` に検査報告、抽出文字、全ページのPNG画像が作られる。`report.txt` を読み、すべてのページ画像を実際に開いて、著者名、本名、メール、所属、住所、PDFメタデータを確認する。文字抽出は日本語や数式を正しく読めない場合があるため、画像確認を省略してはいけない。
+
+フォント欠落や文字描画失敗が報告されたPDFは、画像から個人情報が消えて見える危険があるため検査不合格になる。別の正常に表示できる環境で確認するか、公開対象から外す。警告を無視して `report.json` を手作業で作ってはいけない。
+
+確認が終わった場合だけ、リポジトリの最上位ディレクトリで次を実行する。
+
+```sh
+python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf --privacy-reviewed
 ```
 
 この操作は次を自動的に行う。
@@ -34,7 +44,8 @@ python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf \
   --title "原稿の題名" \
   --published-at "2026-07-16T12:00:00+09:00" \
   --sequence 1 \
-  --original-url "https://example.com/original"
+  --original-url "https://example.com/original" \
+  --privacy-reviewed
 ```
 
 PDFの内部メタデータは不正確なことがあるため、非常用取り込みでは題名の自動採用に使わない。同じ保存先がすでにある場合は上書きせず停止する。
