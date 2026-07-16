@@ -16,4 +16,16 @@
 - 大規模原稿: `papers/urysohn-universal-spaces/`
 - BibTeX: `papers/power-series-notes/`
 
+## 原稿保護と移行
+
+各原稿の `paper.json` に原本と現在承認済みのSHA-256を記録しています。通常の移行では原稿をバイト単位でコピーし、明示的な変更指示がある場合だけ承認履歴を追加します。
+
+```sh
+python3 scripts/paper_tool.py verify
+python3 scripts/paper_tool.py audit
+python3 scripts/paper_tool.py catalog --check
+```
+
+使い方の詳細は `docs/MIGRATION.md` を参照してください。
+
 はてなブログのMT形式バックアップ原本は、このリポジトリの外で保管します。検査・変換済みの公開用データだけを配置します。

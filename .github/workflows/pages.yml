@@ -21,29 +21,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Verify protected source files and catalog
+        run: |
+          python3 scripts/paper_tool.py verify
+          python3 scripts/paper_tool.py catalog --check
+
       - name: Build PDF with pLaTeX
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: |
-            papers/infinitude-of-primes/main.tex
-            papers/sphere-fundamental-group/main.tex
-            papers/urysohn-universal-spaces/main.tex
-            papers/power-series-notes/main.tex
+          root_file: papers/*/main.tex
           work_in_root_file_dir: true
           args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Prepare public site
-        run: |
-          mkdir -p \
-            _site/papers/infinitude-of-primes \
-            _site/papers/sphere-fundamental-group \
-            _site/papers/urysohn-universal-spaces \
-            _site/papers/power-series-notes
-          cp index.html styles.css _site/
-          cp papers/infinitude-of-primes/{main.tex,main.pdf,README.md} _site/papers/infinitude-of-primes/
-          cp papers/sphere-fundamental-group/{main.tex,main.pdf,README.md,Figures.pdf} _site/papers/sphere-fundamental-group/
-          cp papers/urysohn-universal-spaces/{main.tex,main.pdf,README.md} _site/papers/urysohn-universal-spaces/
-          cp papers/power-series-notes/{main.tex,main.pdf,README.md,ps.bib,myplaindoidoi.bst} _site/papers/power-series-notes/
+        run: python3 scripts/paper_tool.py stage _site
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
