@@ -33,6 +33,7 @@ $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
 """
 LATEXMKRC_BY_ENGINE = {"platex": DEFAULT_LATEXMKRC}
+DEFAULT_BUILD_ENGINE = "platex"
 MATH_SECTIONS = (
     "代数・組合せ",
     "位相・距離・幾何",
@@ -89,7 +90,6 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         "sequence",
         "year",
         "kind",
-        "math_section",
         "summary",
         "original_url",
         "order",
@@ -108,7 +108,10 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         raise PaperToolError(f"{path}: slug does not match directory name")
     if not isinstance(manifest["sequence"], int) or manifest["sequence"] < 1:
         raise PaperToolError(f"{path}: sequence must be a positive integer")
-    if manifest["math_section"] not in MATH_SECTIONS:
+    math_section = manifest.get("math_section", "")
+    if not isinstance(math_section, str):
+        raise PaperToolError(f"{path}: math_section must be a string")
+    if math_section.strip() and math_section.strip() not in MATH_SECTIONS:
         raise PaperToolError(
             f"{path}: math_section must be one of: {', '.join(MATH_SECTIONS)}"
         )
@@ -137,7 +140,10 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     build = manifest["build"]
     if not isinstance(build, dict) or not isinstance(build.get("enabled"), bool):
         raise PaperToolError(f"{path}: build.enabled is required")
-    if build.get("engine") not in LATEXMKRC_BY_ENGINE:
+    engine = build.get("engine", "")
+    if not isinstance(engine, str):
+        raise PaperToolError(f"{path}: build.engine must be a string")
+    if engine.strip() and engine.strip() not in LATEXMKRC_BY_ENGINE:
         raise PaperToolError(
             f"{path}: build.engine must be one of: "
             + ", ".join(sorted(LATEXMKRC_BY_ENGINE))
@@ -449,7 +455,8 @@ def rendered_math_index_item(manifest: dict[str, Any]) -> str:
 def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     grouped: dict[str, list[dict[str, Any]]] = {section: [] for section in MATH_SECTIONS}
     for _, manifest in selected:
-        grouped[manifest["math_section"]].append(manifest)
+        section = str(manifest.get("math_section", "")).strip() or "その他"
+        grouped[section].append(manifest)
     populated = [(section, papers) for section, papers in grouped.items() if papers]
     toc = "\n".join(
         f'        <a href="#section-{index}"><span>{html.escape(section)}</span>'
@@ -743,7 +750,6 @@ def command_import(args: argparse.Namespace) -> None:
     required = (
         "title",
         "kind",
-        "math_section",
         "summary",
         "original_url",
         "published_at",
@@ -751,7 +757,6 @@ def command_import(args: argparse.Namespace) -> None:
         "tags",
         "keywords",
         "files",
-        "build_engine",
     )
     missing = [key for key in required if key not in spec]
     if missing:
@@ -801,15 +806,18 @@ def command_import(args: argparse.Namespace) -> None:
                 }
             )
         build_enabled = bool(spec.get("build_enabled", True))
-        build_engine = str(spec["build_engine"])
-        if build_engine not in LATEXMKRC_BY_ENGINE:
+        build_engine = str(spec.get("build_engine", "")).strip()
+        if build_engine and build_engine not in LATEXMKRC_BY_ENGINE:
             raise PaperToolError(
                 "build_engine must be one of: "
                 + ", ".join(sorted(LATEXMKRC_BY_ENGINE))
             )
+        effective_engine = build_engine or DEFAULT_BUILD_ENGINE
         latexmkrc = destination / ".latexmkrc"
         if build_enabled and not latexmkrc.exists():
-            latexmkrc.write_text(LATEXMKRC_BY_ENGINE[build_engine], encoding="utf-8")
+            latexmkrc.write_text(
+                LATEXMKRC_BY_ENGINE[effective_engine], encoding="utf-8"
+            )
         manifest = {
             "schema_version": 1,
             "slug": slug,
@@ -819,7 +827,7 @@ def command_import(args: argparse.Namespace) -> None:
             "sequence": sequence,
             "year": published.year,
             "kind": spec["kind"],
-            "math_section": spec["math_section"],
+            "math_section": str(spec.get("math_section", "")).strip(),
             "summary": spec["summary"],
             "original_url": spec["original_url"],
             "order": int(f"{published:%Y%m%d}{sequence:02d}"),

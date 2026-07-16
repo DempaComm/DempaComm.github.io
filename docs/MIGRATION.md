@@ -10,7 +10,7 @@
 - 原稿名は公開日と同日内の公開順から `YYYY-MM-DD-NN` とする。
 - 電波通信の既存タグは原表記のまま `tags` に保存し、追加検索語は `keywords` に分ける。
 - `keywords.txt` は `paper.json` から自動生成し、手作業では編集しない。
-- TeXエンジンは `paper.json` の `build.engine` に記録する。現在対応している値は `platex`。
+- TeXエンジンは `paper.json` の `build.engine` に記録する。空欄または省略時は `platex` として処理する。
 
 ## 新しい原稿の取り込み
 
@@ -33,7 +33,7 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json
 
 既存の保存先がある場合は上書きせず停止する。
 
-取り込み仕様では `math_section` に数学記事総覧での主分類を、`build_engine` にTeXエンジンを指定する。現在の `build_engine` は `platex` のみ対応する。自動コンパイルしない場合も、元原稿の想定エンジンとして `build_engine` を記録する。
+取り込み仕様では `math_section` に数学記事総覧での主分類を、`build_engine` にTeXエンジンを指定できる。`math_section` が空欄または省略された原稿は総覧の「その他」に入り、`build_engine` が空欄または省略された場合は `platex` として処理する。明示的に指定できる `build_engine` は現在 `platex` のみ。
 
 ## 検証と監査
 
@@ -87,7 +87,7 @@ python3 scripts/paper_tool.py stage _site
 
 各原稿には `papers/<公開日-順番>/` 形式の個別ページを自動生成する。個別ページには原稿情報、公開ファイル、電波通信のタグ、検索キーワードをまとめ、トップページとタグ別ページの記事名からリンクする。
 
-`paper.json` の `math_section` は数学記事総覧での主分類を表す。公開時に `math/` へ全原稿の分野別目次を自動生成し、トップページと「数学」タグページから案内する。
+`paper.json` の `math_section` は数学記事総覧での主分類を表す。空欄または省略時は「その他」として扱う。公開時に `math/` へ全原稿の分野別目次を自動生成し、トップページと「数学」タグページから案内する。
 
 旧形式の原稿名が `legacy_slugs` に登録されている場合、公開時には旧URLにも同じファイルを配置する。改名後も既存リンクは維持される。
 
