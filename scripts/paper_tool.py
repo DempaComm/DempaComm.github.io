@@ -32,6 +32,12 @@ DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=n
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
 """
+MATH_SECTIONS = (
+    "代数・組合せ",
+    "位相・距離・幾何",
+    "解析・測度・確率",
+    "その他",
+)
 
 
 class PaperToolError(RuntimeError):
@@ -79,6 +85,7 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         "sequence",
         "year",
         "kind",
+        "math_section",
         "summary",
         "original_url",
         "order",
@@ -97,6 +104,10 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         raise PaperToolError(f"{path}: slug does not match directory name")
     if not isinstance(manifest["sequence"], int) or manifest["sequence"] < 1:
         raise PaperToolError(f"{path}: sequence must be a positive integer")
+    if manifest["math_section"] not in MATH_SECTIONS:
+        raise PaperToolError(
+            f"{path}: math_section must be one of: {', '.join(MATH_SECTIONS)}"
+        )
     try:
         published = datetime.fromisoformat(str(manifest["published_at"]))
     except ValueError as error:
@@ -370,6 +381,11 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
         for year, year_papers in sorted(by_year.items(), reverse=True)
     )
     escaped_tag = html.escape(tag)
+    directory_link = (
+        '      <a class="header-action" href="../../math/">数学記事総覧を見る</a>\n'
+        if tag == "数学"
+        else ""
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -385,11 +401,91 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
       <p class="eyebrow">TAG ARCHIVE</p>
       <h1>{escaped_tag}</h1>
       <p class="lead">電波通信でこのタグが付けられていた公開原稿、全{len(papers)}件。</p>
-      <a class="hatena-link" href="../../#tags-title">タグ索引へ戻る</a>
+      <nav class="header-links" aria-label="タグページの案内">
+{directory_link}        <a class="hatena-link" href="../../#tags-title">タグ索引へ戻る</a>
+      </nav>
     </div>
   </header>
   <main>
 {year_sections}
+  </main>
+  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+</body>
+</html>
+"""
+
+
+def rendered_math_index_item(manifest: dict[str, Any]) -> str:
+    slug = html.escape(manifest["slug"], quote=True)
+    title = html.escape(manifest["title"])
+    summary = html.escape(manifest["summary"])
+    published_date = html.escape(str(manifest["published_at"])[:10])
+    file_links = [f'<a href="../papers/{slug}/main.pdf">PDF</a>']
+    for entry in manifest["files"]:
+        if not entry["public"] or not entry["label"]:
+            continue
+        path = html.escape(entry["path"], quote=True)
+        label = html.escape(entry["label"])
+        file_links.append(f'<a href="../papers/{slug}/{path}">{label}</a>')
+    return f"""          <li class="math-index-item">
+            <h3><a href="../papers/{slug}/">{title}</a></h3>
+            <p>{summary}</p>
+            <div class="math-index-meta">
+              <time datetime="{published_date}">{published_date}</time>
+              <span>{' · '.join(file_links)}</span>
+            </div>
+          </li>"""
+
+
+def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    grouped: dict[str, list[dict[str, Any]]] = {section: [] for section in MATH_SECTIONS}
+    for _, manifest in selected:
+        grouped[manifest["math_section"]].append(manifest)
+    populated = [(section, papers) for section, papers in grouped.items() if papers]
+    toc = "\n".join(
+        f'        <a href="#section-{index}"><span>{html.escape(section)}</span>'
+        f"<span>{len(papers)}件</span></a>"
+        for index, (section, papers) in enumerate(populated, start=1)
+    )
+    sections = "\n".join(
+        f"""      <section class="math-index-section" aria-labelledby="section-{index}">
+        <div class="math-index-heading">
+          <h2 id="section-{index}">{html.escape(section)}</h2>
+          <span>{len(papers)}件</span>
+        </div>
+        <ul class="math-index-list">
+{chr(10).join(rendered_math_index_item(paper) for paper in papers)}
+        </ul>
+      </section>"""
+        for index, (section, papers) in enumerate(populated, start=1)
+    )
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>数学記事総覧 — 数学識電脳</title>
+  <meta name="description" content="数学識電脳で公開している数学記事と原稿の分野別総合目次です。">
+  <link rel="canonical" href="https://dempacomm.github.io/math/">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="math-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">MATHEMATICS DIRECTORY</p>
+      <h1>数学記事総覧</h1>
+      <p class="lead">数学識電脳で公開している全{len(selected)}原稿を、数学の分野ごとにまとめた総合目次です。</p>
+      <nav class="header-links" aria-label="総覧ページの案内">
+        <a class="hatena-link" href="../">トップページへ戻る</a>
+        <a class="hatena-link" href="../tags/%E6%95%B0%E5%AD%A6/">数学タグを見る</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <nav class="math-toc" aria-label="数学分野の目次">
+{toc}
+    </nav>
+{sections}
   </main>
   <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
 </body>
@@ -616,6 +712,11 @@ def command_stage(args: argparse.Namespace) -> None:
         (tag_dir / "index.html").write_text(
             rendered_tag_page(tag, papers), encoding="utf-8"
         )
+    math_dir = output / "math"
+    math_dir.mkdir()
+    (math_dir / "index.html").write_text(
+        rendered_math_page(selected), encoding="utf-8"
+    )
     print(f"STAGED {len(selected)} papers in {output}")
 
 
@@ -633,6 +734,7 @@ def command_import(args: argparse.Namespace) -> None:
     required = (
         "title",
         "kind",
+        "math_section",
         "summary",
         "original_url",
         "published_at",
@@ -701,6 +803,7 @@ def command_import(args: argparse.Namespace) -> None:
             "sequence": sequence,
             "year": published.year,
             "kind": spec["kind"],
+            "math_section": spec["math_section"],
             "summary": spec["summary"],
             "original_url": spec["original_url"],
             "order": int(f"{published:%Y%m%d}{sequence:02d}"),
