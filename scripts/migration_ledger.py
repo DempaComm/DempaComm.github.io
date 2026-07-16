@@ -28,6 +28,7 @@ LEDGER_DIR = ROOT / "ledger"
 CSV_PATH = LEDGER_DIR / "migration-ledger.csv"
 JSON_PATH = LEDGER_DIR / "migration-ledger.json"
 DEFAULT_METADATA_REVIEW_PATH = ROOT / ".privacy-review" / "metadata-review.html"
+PRIORITY_ARCHIVE_TAG = "断片ではないもの"
 
 FIELDS = (
     "record_id",
@@ -1144,6 +1145,12 @@ def metadata_review_records(
     include_duplicates: bool,
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
+    published_urls = {
+        row["original_url"] or row["metadata_original_url"]
+        for row in rows
+        if row["status"] == "published"
+        and (row["original_url"] or row["metadata_original_url"])
+    }
     for row in rows:
         if not row["metadata_match"]:
             continue
@@ -1153,6 +1160,12 @@ def metadata_review_records(
             continue
         if row["duplicate_status"] == "duplicate" and not include_duplicates:
             continue
+        metadata_tags = split_list(row["metadata_tags"])
+        candidate_url = row["metadata_original_url"]
+        priority_archive = (
+            PRIORITY_ARCHIVE_TAG in metadata_tags
+            and candidate_url not in published_urls
+        )
         records.append(
             {
                 "record_id": row["record_id"],
@@ -1179,14 +1192,16 @@ def metadata_review_records(
                     else None
                 ),
                 "metadata_original_url": row["metadata_original_url"],
-                "metadata_tags": split_list(row["metadata_tags"]),
+                "metadata_tags": metadata_tags,
                 "metadata_pdf_files": split_list(row["metadata_pdf_files"]),
                 "metadata_evidence": row["metadata_evidence"],
+                "priority_archive": priority_archive,
             }
         )
     order = {"exact": 0, "likely": 1, "ambiguous": 2, "unmatched": 3}
     records.sort(
         key=lambda value: (
+            not value["priority_archive"],
             order.get(value["metadata_match"], 9),
             value["metadata_published_at"] or "9999",
             value["source_dir"],
@@ -1374,6 +1389,11 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
         <option value="held">保留</option>
         <option value="rejected">却下</option>
       </select>
+      <select id="priority-filter" aria-label="アーカイブ優先度">
+        <option value="priority">優先アーカイブのみ</option>
+        <option value="all">全候補</option>
+        <option value="standard">通常候補のみ</option>
+      </select>
       <select id="year-filter" aria-label="公開年"><option value="all">全年</option></select>
       <button id="copy-command" type="button">採用分の確定コマンドをコピー</button>
       <button id="export-decisions" type="button">判定JSONを保存</button>
@@ -1393,6 +1413,7 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
     const query = document.getElementById("query");
     const matchFilter = document.getElementById("match-filter");
     const decisionFilter = document.getElementById("decision-filter");
+    const priorityFilter = document.getElementById("priority-filter");
     const yearFilter = document.getElementById("year-filter");
     const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, char => ({{
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -1439,6 +1460,9 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
       return (!query.value || text.includes(query.value.toLocaleLowerCase("ja")))
         && (matchFilter.value === "all" || record.metadata_match === matchFilter.value)
         && (decisionFilter.value === "all" || decisionOf(record) === decisionFilter.value)
+        && (priorityFilter.value === "all"
+          || (priorityFilter.value === "priority" && record.priority_archive)
+          || (priorityFilter.value === "standard" && !record.priority_archive))
         && (yearFilter.value === "all" || recordYear(record) === yearFilter.value);
     }}
     function card(record) {{
@@ -1456,6 +1480,7 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
         <div class="card-head">
           <h2>${{escapeHtml(record.metadata_title || record.local_title || record.source_dir)}}</h2>
           <div class="badges">
+            ${{record.priority_archive ? '<span class="badge">優先アーカイブ</span>' : ""}}
             <span class="badge">${{escapeHtml(record.metadata_match)}}</span>
             <span class="badge">score ${{score}}</span>
             <span class="badge">${{escapeHtml(decision)}}</span>
@@ -1521,7 +1546,7 @@ def metadata_review_html(records: list[dict[str, Any]]) -> str:
       option.textContent = year;
       yearFilter.appendChild(option);
     }});
-    [query, matchFilter, decisionFilter, yearFilter].forEach(element =>
+    [query, matchFilter, decisionFilter, priorityFilter, yearFilter].forEach(element =>
       element.addEventListener(element === query ? "input" : "change", render));
     document.getElementById("copy-command").addEventListener("click", async () => {{
       const accepted = records.filter(record =>
@@ -1599,6 +1624,67 @@ def command_render_metadata_review(args: argparse.Namespace) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(metadata_review_html(records), encoding="utf-8")
     print(f"WROTE metadata review page with {len(records)} records: {output}")
+
+
+def priority_archive_candidates(
+    rows: list[dict[str, str]],
+) -> list[tuple[dict[str, str], int]]:
+    published_urls = {
+        row["original_url"] or row["metadata_original_url"]
+        for row in rows
+        if row["status"] == "published"
+        and (row["original_url"] or row["metadata_original_url"])
+    }
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        candidate_url = row["metadata_original_url"]
+        if (
+            row["status"] == "published"
+            or row["duplicate_status"] == "duplicate"
+            or not candidate_url
+            or candidate_url in published_urls
+            or PRIORITY_ARCHIVE_TAG not in split_list(row["metadata_tags"])
+        ):
+            continue
+        grouped[candidate_url].append(row)
+    match_rank = {"exact": 0, "likely": 1, "ambiguous": 2, "unmatched": 3, "": 4}
+    candidates: list[tuple[dict[str, str], int]] = []
+    for members in grouped.values():
+        members.sort(
+            key=lambda row: (
+                match_rank.get(row["metadata_match"], 9),
+                -float(row["metadata_score"] or 0),
+                row["duplicate_status"] != "canonical",
+                row["source_dir"],
+            )
+        )
+        candidates.append((members[0], len(members)))
+    candidates.sort(
+        key=lambda item: (
+            item[0]["metadata_published_at"] or "9999",
+            item[0]["metadata_title"],
+        )
+    )
+    return candidates
+
+
+def command_archive_priority(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    validate_rows(rows, load_manifests())
+    candidates = priority_archive_candidates(rows)
+    print(
+        f"{len(candidates)} unpublished articles tagged {PRIORITY_ARCHIVE_TAG}"
+    )
+    for row, source_count in candidates:
+        alternatives = (
+            f" ({source_count} source candidates)" if source_count > 1 else ""
+        )
+        print(
+            f"{row['metadata_published_at'][:10]} "
+            f"{row['metadata_match']:9} {row['metadata_score'] or '-':>5} "
+            f"{row['record_id']} {row['metadata_title']}{alternatives}"
+        )
+        print(f"  {row['source_dir']}")
 
 
 def command_confirm_metadata(args: argparse.Namespace) -> None:
@@ -1707,6 +1793,12 @@ def parser() -> argparse.ArgumentParser:
     review_metadata.add_argument("--include-published", action="store_true")
     review_metadata.add_argument("--include-duplicates", action="store_true")
     review_metadata.set_defaults(func=command_render_metadata_review)
+
+    archive_priority = subparsers.add_parser(
+        "archive-priority",
+        help=f"list the best unpublished candidate for each {PRIORITY_ARCHIVE_TAG} article",
+    )
+    archive_priority.set_defaults(func=command_archive_priority)
 
     confirm_metadata = subparsers.add_parser(
         "confirm-metadata",

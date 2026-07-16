@@ -111,6 +111,7 @@ python3 scripts/migration_ledger.py render-metadata-review
 サイト生成の対象外です。標準では公開済み記事と複製候補を除いた候補だけを表示します。
 確認画面では次の操作ができます。
 
+- 「断片ではないもの」タグ付きの未公開候補を初期表示
 - 照合区分、公開年、判定状態、文字列による絞り込み
 - 原稿側と、はてな記事候補の題名・PDF名・タグ・公開日時の比較
 - `exact` と `likely` の採用、全候補の保留・却下
@@ -128,6 +129,14 @@ python3 scripts/migration_ledger.py render-metadata-review
 ```sh
 python3 scripts/migration_ledger.py render-metadata-review \
   --include-published --include-duplicates
+```
+
+「断片ではないもの」タグ付き記事の優先アーカイブキューは、記事URLごとに重複を
+まとめ、最も確度の高い原稿候補だけを表示します。すでに公開済みの元記事に対応する
+別版原稿は除外します。
+
+```sh
+python3 scripts/migration_ledger.py archive-priority
 ```
 
 判定は次の4段階です。

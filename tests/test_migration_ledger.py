@@ -227,6 +227,7 @@ class MigrationLedgerTest(unittest.TestCase):
                         "CATEGORY: 位相空間",
                         "CATEGORY: 数学",
                         "CATEGORY: 解析",
+                        "CATEGORY: 断片ではないもの",
                         "-----",
                         "BODY:",
                         (
@@ -271,7 +272,9 @@ class MigrationLedgerTest(unittest.TestCase):
                 "https://example.hatenablog.com/entry/2022/09/10/234249",
                 row["metadata_original_url"],
             )
-            self.assertEqual("位相空間|数学|解析", row["metadata_tags"])
+            self.assertEqual(
+                "位相空間|数学|解析|断片ではないもの", row["metadata_tags"]
+            )
             self.assertEqual("extupperhalf.pdf", row["metadata_pdf_files"])
             self.assertNotIn("dropbox.com", row["metadata_pdf_files"])
             self.assertNotIn("rlkey", row["metadata_pdf_files"])
@@ -296,9 +299,21 @@ class MigrationLedgerTest(unittest.TestCase):
             self.assertIn(row["record_id"], review_html)
             self.assertIn("extupperhalf.pdf", review_html)
             self.assertIn("採用分の確定コマンドをコピー", review_html)
+            self.assertIn("優先アーカイブのみ", review_html)
+            self.assertIn('"priority_archive": true', review_html)
             self.assertNotIn("dropbox.com", review_html)
             self.assertNotIn("rlkey", review_html)
             self.assertNotIn(str(Path(temporary)), review_html)
+
+            priority = subprocess.run(
+                [sys.executable, str(TOOL), "archive-priority"],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertIn("1 unpublished articles tagged 断片ではないもの", priority.stdout)
+            self.assertIn(row["record_id"], priority.stdout)
 
             subprocess.run(
                 [
