@@ -36,11 +36,26 @@ FIELDS = (
     "pdf_files",
     "bib_files",
     "bst_files",
+    "duplicate_status",
+    "duplicate_group",
+    "canonical_record_id",
+    "duplicate_basis",
     "target_slug",
     "math_section",
     "build_engine",
     "author_review",
     "notes",
+)
+LEGACY_FIELDS = tuple(
+    field
+    for field in FIELDS
+    if field
+    not in {
+        "duplicate_status",
+        "duplicate_group",
+        "canonical_record_id",
+        "duplicate_basis",
+    }
 )
 LIST_FIELDS = {"tags", "tex_files", "pdf_files", "bib_files", "bst_files"}
 EDITABLE_FIELDS = {
@@ -71,6 +86,8 @@ AUTHOR_REVIEW_STATES = {
     "legacy_unrecorded",
     "not_applicable",
 }
+DUPLICATE_STATES = {"unique", "canonical", "duplicate"}
+DUPLICATE_BASES = {"", "tex+pdf", "tex", "pdf"}
 MATH_SECTIONS = {
     "",
     "代数・組合せ",
@@ -128,9 +145,10 @@ def read_rows(path: Path = CSV_PATH) -> list[dict[str, str]]:
         return []
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
-        if tuple(reader.fieldnames or ()) != FIELDS:
+        header = tuple(reader.fieldnames or ())
+        if header not in {FIELDS, LEGACY_FIELDS}:
             raise LedgerError(
-                f"{path}: header must be exactly: {', '.join(FIELDS)}"
+                f"{path}: unsupported header; expected the current ledger fields"
             )
         return [
             {field: str(row.get(field, "") or "").strip() for field in FIELDS}
@@ -153,6 +171,8 @@ def validate_rows(
     record_ids: set[str] = set()
     target_slugs: dict[str, str] = {}
     original_urls: dict[str, str] = {}
+    rows_by_id: dict[str, dict[str, str]] = {}
+    duplicate_groups: dict[str, list[dict[str, str]]] = defaultdict(list)
     for line_number, row in enumerate(rows, start=2):
         label = f"row {line_number}"
         record_id = row["record_id"]
@@ -161,6 +181,7 @@ def validate_rows(
         elif record_id in record_ids:
             errors.append(f"{label}: duplicate record_id {record_id}")
         record_ids.add(record_id)
+        rows_by_id[record_id] = row
         if row["status"] not in STATUSES:
             errors.append(f"{label}: invalid status {row['status']!r}")
         if row["author_review"] not in AUTHOR_REVIEW_STATES:
@@ -169,6 +190,16 @@ def validate_rows(
             )
         if row["math_section"] not in MATH_SECTIONS:
             errors.append(f"{label}: invalid math_section {row['math_section']!r}")
+        if row["duplicate_status"] not in DUPLICATE_STATES:
+            errors.append(
+                f"{label}: invalid duplicate_status {row['duplicate_status']!r}"
+            )
+        if row["duplicate_basis"] not in DUPLICATE_BASES:
+            errors.append(
+                f"{label}: invalid duplicate_basis {row['duplicate_basis']!r}"
+            )
+        if row["duplicate_group"]:
+            duplicate_groups[row["duplicate_group"]].append(row)
         if row["sequence"]:
             try:
                 if int(row["sequence"]) < 1:
@@ -204,6 +235,49 @@ def validate_rows(
                 errors.append(
                     f"{label}: published target_slug has no paper.json: {target_slug}"
                 )
+    for line_number, row in enumerate(rows, start=2):
+        label = f"row {line_number}"
+        duplicate_status = row["duplicate_status"]
+        canonical_id = row["canonical_record_id"]
+        group = row["duplicate_group"]
+        basis = row["duplicate_basis"]
+        if duplicate_status == "unique":
+            if canonical_id or group or basis:
+                errors.append(
+                    f"{label}: unique record must not have duplicate metadata"
+                )
+            continue
+        if not canonical_id or not group or not basis:
+            errors.append(
+                f"{label}: {duplicate_status} record requires group, canonical, and basis"
+            )
+            continue
+        canonical = rows_by_id.get(canonical_id)
+        if not canonical:
+            errors.append(f"{label}: unknown canonical_record_id {canonical_id}")
+            continue
+        if canonical["duplicate_status"] != "canonical":
+            errors.append(f"{label}: canonical_record_id does not point to canonical")
+        if canonical["canonical_record_id"] != canonical_id:
+            errors.append(f"{label}: canonical record must point to itself")
+        if canonical["duplicate_group"] != group:
+            errors.append(f"{label}: canonical record belongs to another group")
+        if canonical["duplicate_basis"] != basis:
+            errors.append(f"{label}: canonical record has another duplicate_basis")
+        if duplicate_status == "canonical" and canonical_id != row["record_id"]:
+            errors.append(f"{label}: canonical record must point to itself")
+        if duplicate_status == "duplicate" and canonical_id == row["record_id"]:
+            errors.append(f"{label}: duplicate record cannot point to itself")
+    for group, members in duplicate_groups.items():
+        if len(members) < 2:
+            errors.append(f"duplicate group {group} has fewer than two records")
+        canonical_count = sum(
+            member["duplicate_status"] == "canonical" for member in members
+        )
+        if canonical_count != 1:
+            errors.append(
+                f"duplicate group {group} must have exactly one canonical record"
+            )
     missing = sorted(set(manifests) - set(target_slugs))
     if missing:
         errors.append(
@@ -228,10 +302,21 @@ def json_value(rows: list[dict[str, str]]) -> dict[str, Any]:
         records.append(record)
     counts = Counter(row["status"] for row in rows)
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "source_root_label": "MyBlog/Myblogstr",
         "record_count": len(records),
         "status_counts": {key: counts.get(key, 0) for key in sorted(STATUSES)},
+        "duplicate_counts": {
+            key: sum(row["duplicate_status"] == key for row in rows)
+            for key in sorted(DUPLICATE_STATES)
+        },
+        "duplicate_group_count": len(
+            {
+                row["duplicate_group"]
+                for row in rows
+                if row["duplicate_status"] == "canonical"
+            }
+        ),
         "records": records,
     }
 
@@ -257,7 +342,11 @@ def candidate_title(source_dir: str) -> str:
 
 def scan_candidates(
     myblog_root: Path, include_non_year: bool = False
-) -> tuple[list[dict[str, str]], dict[str, set[str]]]:
+) -> tuple[
+    list[dict[str, str]],
+    dict[str, set[str]],
+    dict[str, dict[str, tuple[str, ...]]],
+]:
     if not myblog_root.is_dir():
         raise LedgerError(f"Myblogstr root does not exist: {myblog_root}")
     supported = {".tex", ".pdf", ".bib", ".bst"}
@@ -265,6 +354,7 @@ def scan_candidates(
         lambda: {"tex": [], "pdf": [], "bib": [], "bst": []}
     )
     hashes: dict[str, set[str]] = defaultdict(set)
+    fingerprints: dict[str, dict[str, tuple[str, ...]]] = {}
     for path in sorted(myblog_root.rglob("*")):
         if not path.is_file() or path.suffix.casefold() not in supported:
             continue
@@ -282,6 +372,13 @@ def scan_candidates(
     rows: list[dict[str, str]] = []
     for source_dir in sorted(grouped):
         files = grouped[source_dir]
+        directory_path = myblog_root / source_dir
+        fingerprints[source_dir] = {
+            extension: tuple(
+                sorted(sha256(directory_path / name) for name in files[extension])
+            )
+            for extension in ("tex", "pdf")
+        }
         rows.append(
             {
                 "record_id": source_record_id(source_dir),
@@ -296,6 +393,10 @@ def scan_candidates(
                 "pdf_files": join_list(sorted(files["pdf"])),
                 "bib_files": join_list(sorted(files["bib"])),
                 "bst_files": join_list(sorted(files["bst"])),
+                "duplicate_status": "unique",
+                "duplicate_group": "",
+                "canonical_record_id": "",
+                "duplicate_basis": "",
                 "target_slug": "",
                 "math_section": "",
                 "build_engine": "",
@@ -303,7 +404,74 @@ def scan_candidates(
                 "notes": "",
             }
         )
-    return rows, hashes
+    return rows, hashes, fingerprints
+
+
+def canonical_rank(row: dict[str, str]) -> tuple[int, int, int, str]:
+    return (
+        0 if row["status"] == "published" else 1,
+        0 if row["tex_files"] and row["pdf_files"] else 1,
+        len(Path(row["source_dir"]).parts),
+        row["source_dir"],
+    )
+
+
+def apply_duplicate_group(
+    rows_by_source: dict[str, dict[str, str]],
+    sources: list[str],
+    basis: str,
+    signature: tuple[str, ...],
+) -> None:
+    selected = sorted((rows_by_source[source] for source in sources), key=canonical_rank)
+    canonical = selected[0]
+    group_seed = basis + "\0" + "\0".join(signature)
+    group = "dup:" + hashlib.sha256(group_seed.encode("ascii")).hexdigest()[:16]
+    for index, row in enumerate(selected):
+        row["duplicate_status"] = "canonical" if index == 0 else "duplicate"
+        row["duplicate_group"] = group
+        row["canonical_record_id"] = canonical["record_id"]
+        row["duplicate_basis"] = basis
+
+
+def classify_duplicates(
+    rows: list[dict[str, str]],
+    fingerprints: dict[str, dict[str, tuple[str, ...]]],
+) -> None:
+    rows_by_source = {row["source_dir"]: row for row in rows if row["source_dir"]}
+    for row in rows_by_source.values():
+        row["duplicate_status"] = "unique"
+        row["duplicate_group"] = ""
+        row["canonical_record_id"] = ""
+        row["duplicate_basis"] = ""
+    claimed: set[str] = set()
+
+    both_groups: dict[
+        tuple[tuple[str, ...], tuple[str, ...]], list[str]
+    ] = defaultdict(list)
+    for source_dir, value in fingerprints.items():
+        if value["tex"] and value["pdf"]:
+            both_groups[(value["tex"], value["pdf"])].append(source_dir)
+    for (tex_signature, pdf_signature), sources in sorted(both_groups.items()):
+        if len(sources) < 2:
+            continue
+        apply_duplicate_group(
+            rows_by_source,
+            sources,
+            "tex+pdf",
+            ("tex",) + tex_signature + ("pdf",) + pdf_signature,
+        )
+        claimed.update(sources)
+
+    for basis in ("tex", "pdf"):
+        groups: dict[tuple[str, ...], list[str]] = defaultdict(list)
+        for source_dir, value in fingerprints.items():
+            if source_dir not in claimed and value[basis]:
+                groups[value[basis]].append(source_dir)
+        for signature, sources in sorted(groups.items()):
+            if len(sources) < 2:
+                continue
+            apply_duplicate_group(rows_by_source, sources, basis, signature)
+            claimed.update(sources)
 
 
 def manifest_hashes(manifest: dict[str, Any]) -> set[str]:
@@ -349,7 +517,9 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
     manifests = load_manifests()
     old_rows = read_rows()
     old_by_source = {row["source_dir"]: row for row in old_rows if row["source_dir"]}
-    rows, candidate_hashes = scan_candidates(myblog_root, include_non_year)
+    rows, candidate_hashes, fingerprints = scan_candidates(
+        myblog_root, include_non_year
+    )
     for row in rows:
         preserve_edits(row, old_by_source)
 
@@ -391,6 +561,10 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
             "pdf_files": "",
             "bib_files": "",
             "bst_files": "",
+            "duplicate_status": "unique",
+            "duplicate_group": "",
+            "canonical_record_id": "",
+            "duplicate_basis": "",
             "target_slug": "",
             "math_section": "",
             "build_engine": "",
@@ -406,6 +580,8 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
             for field in EDITABLE_FIELDS:
                 row[field] = old[field]
         rows.append(row)
+
+    classify_duplicates(rows, fingerprints)
 
     def sort_key(row: dict[str, str]) -> tuple[str, str, str]:
         year = row["published_at"][:4]
@@ -458,8 +634,43 @@ def command_stats(args: argparse.Namespace) -> None:
         print(f"{status}: {counts.get(status, 0)}")
     with_tex = sum(bool(row["tex_files"]) for row in rows)
     with_pdf = sum(bool(row["pdf_files"]) for row in rows)
+    duplicate_counts = Counter(row["duplicate_status"] for row in rows)
+    group_count = sum(row["duplicate_status"] == "canonical" for row in rows)
     print(f"with_tex: {with_tex}")
     print(f"with_pdf: {with_pdf}")
+    print(f"canonical: {duplicate_counts.get('canonical', 0)}")
+    print(f"duplicate: {duplicate_counts.get('duplicate', 0)}")
+    print(f"unique: {duplicate_counts.get('unique', 0)}")
+    print(f"duplicate_groups: {group_count}")
+    print(f"review_candidates: {len(rows) - duplicate_counts.get('duplicate', 0)}")
+
+
+def command_duplicates(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    validate_rows(rows, load_manifests())
+    groups: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        if row["duplicate_group"]:
+            groups[row["duplicate_group"]].append(row)
+    for group in sorted(groups):
+        members = groups[group]
+        canonical = next(
+            row for row in members if row["duplicate_status"] == "canonical"
+        )
+        print(
+            f"{group} {canonical['duplicate_basis']} "
+            f"{len(members)} records; canonical={canonical['record_id']}"
+        )
+        for row in sorted(
+            members,
+            key=lambda value: (
+                value["duplicate_status"] != "canonical",
+                value["source_dir"],
+            ),
+        ):
+            marker = "C" if row["duplicate_status"] == "canonical" else "D"
+            published = f" [{row['target_slug']}]" if row["target_slug"] else ""
+            print(f"  {marker} {row['source_dir'] or '(source unmatched)'}{published}")
 
 
 def parser() -> argparse.ArgumentParser:
@@ -491,6 +702,11 @@ def parser() -> argparse.ArgumentParser:
 
     stats = subparsers.add_parser("stats", help="show migration progress counts")
     stats.set_defaults(func=command_stats)
+
+    duplicates = subparsers.add_parser(
+        "duplicates", help="list duplicate groups and their canonical candidates"
+    )
+    duplicates.set_defaults(func=command_duplicates)
     return result
 
 

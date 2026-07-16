@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from typing import Optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +71,7 @@ class MigrationLedgerTest(unittest.TestCase):
             self.assertEqual("published", rows[0]["status"])
             self.assertEqual("2022-09-10-01", rows[0]["target_slug"])
             self.assertEqual("sample.tex", rows[0]["tex_files"])
+            self.assertEqual("unique", rows[0]["duplicate_status"])
             self.assertNotIn(str(Path(temporary)), rows[0]["source_dir"])
             self.assertNotIn("MyBlogCOPY", rows[0]["source_dir"])
 
@@ -104,6 +106,101 @@ class MigrationLedgerTest(unittest.TestCase):
             )
             self.assertEqual(1, generated["record_count"])
             self.assertEqual(1, generated["status_counts"]["published"])
+            self.assertEqual(1, generated["duplicate_counts"]["unique"])
+
+    def test_duplicate_groups_prefer_published_and_keep_versions_distinct(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repo"
+            myblog = Path(temporary) / "Myblogstr"
+            environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
+
+            def add(
+                relative: str,
+                tex_bytes: Optional[bytes],
+                pdf_bytes: Optional[bytes],
+            ) -> tuple[Optional[Path], Optional[Path]]:
+                directory = myblog / relative
+                directory.mkdir(parents=True)
+                tex_path = directory / "main.tex" if tex_bytes is not None else None
+                pdf_path = directory / "main.pdf" if pdf_bytes is not None else None
+                if tex_path:
+                    tex_path.write_bytes(tex_bytes)
+                if pdf_path:
+                    pdf_path.write_bytes(pdf_bytes)
+                return tex_path, pdf_path
+
+            published_tex, published_pdf = add(
+                "2020/1__10/ar1/published", b"same tex", b"same pdf"
+            )
+            add("2020/1__10/ar2/exact-copy", b"same tex", b"same pdf")
+            add("2020/1__10/ar3/tex-a", b"shared tex", b"pdf a")
+            add("2020/1__10/ar4/tex-b", b"shared tex", b"pdf b")
+            add("2020/1__10/ar5/pdf-a", b"tex a", b"shared pdf")
+            add("2020/1__10/ar6/pdf-b", b"tex b", b"shared pdf")
+            add("2020/1__10/ar7/version-a", b"version one", b"version one pdf")
+            add("2020/1__10/ar8/version-b", b"version two", b"version two pdf")
+
+            paper_dir = root / "papers" / "2020-01-01-01"
+            paper_dir.mkdir(parents=True)
+            manifest = {
+                "schema_version": 2,
+                "slug": "2020-01-01-01",
+                "title": "Published",
+                "published_at": "2020-01-01T00:00:00+09:00",
+                "sequence": 1,
+                "original_url": "",
+                "tags": ["数学"],
+                "math_section": "",
+                "build": {"enabled": False, "engine": "platex"},
+                "files": [
+                    {
+                        "original_sha256": hashlib.sha256(
+                            published_tex.read_bytes()
+                        ).hexdigest()
+                    },
+                    {
+                        "original_sha256": hashlib.sha256(
+                            published_pdf.read_bytes()
+                        ).hexdigest()
+                    },
+                ],
+            }
+            (paper_dir / "paper.json").write_text(
+                json.dumps(manifest), encoding="utf-8"
+            )
+
+            subprocess.run(
+                [sys.executable, str(TOOL), "scan", str(myblog)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with (root / "ledger" / "migration-ledger.csv").open(
+                encoding="utf-8", newline=""
+            ) as stream:
+                rows = list(csv.DictReader(stream))
+            by_name = {Path(row["source_dir"]).name: row for row in rows}
+
+            exact_pair = [by_name["published"], by_name["exact-copy"]]
+            canonical = next(
+                row for row in exact_pair if row["duplicate_status"] == "canonical"
+            )
+            duplicate = next(
+                row for row in exact_pair if row["duplicate_status"] == "duplicate"
+            )
+            self.assertEqual("2020-01-01-01", canonical["target_slug"])
+            self.assertEqual("tex+pdf", canonical["duplicate_basis"])
+            self.assertEqual(
+                canonical["record_id"],
+                duplicate["canonical_record_id"],
+            )
+            self.assertEqual("tex", by_name["tex-a"]["duplicate_basis"])
+            self.assertEqual("tex", by_name["tex-b"]["duplicate_basis"])
+            self.assertEqual("pdf", by_name["pdf-a"]["duplicate_basis"])
+            self.assertEqual("pdf", by_name["pdf-b"]["duplicate_basis"])
+            self.assertEqual("unique", by_name["version-a"]["duplicate_status"])
+            self.assertEqual("unique", by_name["version-b"]["duplicate_status"])
 
 
 if __name__ == "__main__":
