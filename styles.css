@@ -117,7 +117,7 @@ main { padding: 64px 0 80px; }
 
 .paper-search-controls {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
+  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr) minmax(9rem, 0.7fr);
   gap: 0.75rem;
 }
 
@@ -217,26 +217,30 @@ main { padding: 64px 0 80px; }
   border-top: 1px solid var(--line);
 }
 
-.tag-directory {
+.tag-directory,
+.year-directory {
   margin-top: 72px;
   padding-top: 34px;
   border-top: 1px solid var(--line);
 }
 
-.tag-groups {
+.tag-groups,
+.year-groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
-.tag-group {
+.tag-group,
+.year-group {
   align-self: start;
   border: 1px solid var(--line);
   background: var(--paper);
   scroll-margin-top: 1rem;
 }
 
-.tag-group summary {
+.tag-group summary,
+.year-group summary {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -245,26 +249,31 @@ main { padding: 64px 0 80px; }
   font-weight: 700;
 }
 
-.tag-group summary span:last-child {
+.tag-group summary span:last-child,
+.year-group summary span:last-child {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 400;
 }
 
-.tag-group ul {
+.tag-group ul,
+.year-group ul {
   margin: 0;
   padding: 0 1rem 1rem 2.2rem;
 }
 
-.tag-group li + li {
+.tag-group li + li,
+.year-group li + li {
   margin-top: 0.45rem;
 }
 
-.tag-group a {
+.tag-group a,
+.year-group a {
   text-underline-offset: 3px;
 }
 
-.tag-group time {
+.tag-group time,
+.year-group time {
   color: var(--muted);
   font-size: 0.82rem;
 }
@@ -304,5 +313,6 @@ footer p { margin: 0; }
   .header-inner { padding: 52px 0 46px; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .workflow ol { grid-template-columns: 1fr; }
-  .tag-groups { grid-template-columns: 1fr; }
+  .tag-groups,
+  .year-groups { grid-template-columns: 1fr; }
 }

@@ -1,10 +1,11 @@
 (() => {
   const queryInput = document.querySelector("#paper-query");
   const tagSelect = document.querySelector("#paper-tag");
+  const yearSelect = document.querySelector("#paper-year");
   const count = document.querySelector("#paper-count");
   const cards = [...document.querySelectorAll(".paper-card")];
 
-  if (!queryInput || !tagSelect || !count || cards.length === 0) return;
+  if (!queryInput || !tagSelect || !yearSelect || !count || cards.length === 0) return;
 
   const tagsFor = (card) => JSON.parse(card.dataset.tags);
   const tags = [...new Set(cards.flatMap(tagsFor))]
@@ -18,11 +19,23 @@
     tagSelect.append(option);
   }
 
+  const years = [...new Set(cards.map((card) => card.dataset.year))]
+    .filter(Boolean)
+    .sort((left, right) => Number(right) - Number(left));
+
+  for (const year of years) {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = `${year}年`;
+    yearSelect.append(option);
+  }
+
   const normalize = (value) => value.normalize("NFKC").toLocaleLowerCase("ja").trim();
 
   function filterPapers() {
     const words = normalize(queryInput.value).split(/\s+/).filter(Boolean);
     const selectedTag = tagSelect.value;
+    const selectedYear = yearSelect.value;
     let visible = 0;
 
     for (const card of cards) {
@@ -30,7 +43,8 @@
       const cardTags = tagsFor(card);
       const matchesWords = words.every((word) => searchable.includes(word));
       const matchesTag = !selectedTag || cardTags.includes(selectedTag);
-      card.hidden = !(matchesWords && matchesTag);
+      const matchesYear = !selectedYear || card.dataset.year === selectedYear;
+      card.hidden = !(matchesWords && matchesTag && matchesYear);
       if (!card.hidden) visible += 1;
     }
 
@@ -39,16 +53,17 @@
 
   queryInput.addEventListener("input", filterPapers);
   tagSelect.addEventListener("change", filterPapers);
+  yearSelect.addEventListener("change", filterPapers);
 
-  function openTagFromHash() {
-    if (!window.location.hash.startsWith("#tag-")) return;
+  function openDirectoryFromHash() {
+    if (!/^#(?:tag-|year-)/.test(window.location.hash)) return;
     const target = document.querySelector(window.location.hash);
-    if (target instanceof HTMLDetailsElement && target.classList.contains("tag-group")) {
+    if (target instanceof HTMLDetailsElement) {
       target.open = true;
     }
   }
 
-  window.addEventListener("hashchange", openTagFromHash);
+  window.addEventListener("hashchange", openDirectoryFromHash);
   filterPapers();
-  openTagFromHash();
+  openDirectoryFromHash();
 })();

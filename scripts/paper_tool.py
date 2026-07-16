@@ -25,6 +25,8 @@ START_MARKER = "<!-- GENERATED:PAPERS:START -->"
 END_MARKER = "<!-- GENERATED:PAPERS:END -->"
 TAGS_START_MARKER = "<!-- GENERATED:TAGS:START -->"
 TAGS_END_MARKER = "<!-- GENERATED:TAGS:END -->"
+YEARS_START_MARKER = "<!-- GENERATED:YEARS:START -->"
+YEARS_END_MARKER = "<!-- GENERATED:YEARS:END -->"
 DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
@@ -250,7 +252,7 @@ def paper_card(manifest: dict[str, Any]) -> str:
     actions.append(f'          <a href="{original_url}">元の記事</a>')
     actions_html = "\n".join(actions)
     aria = html.escape(f"{manifest['title']}のファイル", quote=True)
-    return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}">
+    return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{int(manifest['year'])}">
         <div class="paper-meta">
           <span>初出 {published_date}</span>
           <span>{kind}</span>
@@ -299,6 +301,33 @@ def rendered_tag_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     return "\n\n".join(groups)
 
 
+def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    grouped: dict[int, list[dict[str, Any]]] = {}
+    for _, manifest in selected:
+        grouped.setdefault(int(manifest["year"]), []).append(manifest)
+
+    groups: list[str] = []
+    for year in sorted(grouped, reverse=True):
+        papers = grouped[year]
+        article_links = "\n".join(
+            "          <li>"
+            f'<a href="#paper-{html.escape(paper["slug"], quote=True)}">'
+            f'<time datetime="{html.escape(str(paper["published_at"])[:10], quote=True)}">'
+            f'{html.escape(str(paper["published_at"])[:10])}</time> '
+            f'{html.escape(paper["title"])}</a></li>'
+            for paper in papers
+        )
+        groups.append(
+            f"""      <details class="year-group" id="year-{year}">
+        <summary><span>{year}年</span><span>{len(papers)}件</span></summary>
+        <ul>
+{article_links}
+        </ul>
+      </details>"""
+        )
+    return "\n\n".join(groups)
+
+
 def replace_generated(source: str, start: str, end: str, content: str) -> str:
     if source.count(start) != 1 or source.count(end) != 1:
         raise PaperToolError(f"index.html must contain exactly one marker pair: {start}")
@@ -312,11 +341,17 @@ def rendered_index() -> str:
     selected = manifests()
     cards = "\n\n".join(paper_card(manifest) for _, manifest in selected)
     source = replace_generated(source, START_MARKER, END_MARKER, cards)
-    return replace_generated(
+    source = replace_generated(
         source,
         TAGS_START_MARKER,
         TAGS_END_MARKER,
         rendered_tag_groups(selected),
+    )
+    return replace_generated(
+        source,
+        YEARS_START_MARKER,
+        YEARS_END_MARKER,
+        rendered_year_groups(selected),
     )
 
 
