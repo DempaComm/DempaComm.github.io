@@ -100,10 +100,43 @@ class SourceOnlyImportTest(unittest.TestCase):
             staged = output / "papers" / "2026-07-16-01"
             self.assertTrue((staged / "source.tex").is_file())
             self.assertFalse((staged / "main.pdf").exists())
+            self.assertTrue((output / "archive" / "index.html").is_file())
+            self.assertTrue((output / "404.html").is_file())
+            self.assertTrue((output / "feed.xml").is_file())
+            self.assertTrue((output / "sitemap.xml").is_file())
+            self.assertTrue((output / "robots.txt").is_file())
             page = (staged / "index.html").read_text(encoding="utf-8")
             self.assertIn('class="primary-action" href="source.tex"', page)
             self.assertNotIn("main.pdf", page)
             self.assertNotIn('href=""', page)
+            home = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn("新着原稿", home)
+            self.assertIn('href="archive/"', home)
+            archive = (output / "archive" / "index.html").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("全原稿アーカイブ", archive)
+            self.assertIn("絞り込みを解除", archive)
+
+            checked = subprocess.run(
+                [sys.executable, str(TOOL), "check-links", str(output)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertIn("OK  links", checked.stdout)
+            (output / "broken.html").write_text(
+                '<a href="missing-page/">broken</a>', encoding="utf-8"
+            )
+            broken = subprocess.run(
+                [sys.executable, str(TOOL), "check-links", str(output)],
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertNotEqual(0, broken.returncode)
+            self.assertIn("missing target", broken.stderr)
 
     def test_one_pdf_file_can_be_staged_as_main_pdf(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

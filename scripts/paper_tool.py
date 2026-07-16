@@ -13,9 +13,12 @@ import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
+from email.utils import format_datetime
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urlsplit
+from xml.sax.saxutils import escape as xml_escape
 
 
 ROOT = Path(
@@ -29,10 +32,6 @@ PRIVACY_REVIEW_DIR = Path(
 ).resolve()
 START_MARKER = "<!-- GENERATED:PAPERS:START -->"
 END_MARKER = "<!-- GENERATED:PAPERS:END -->"
-TAGS_START_MARKER = "<!-- GENERATED:TAGS:START -->"
-TAGS_END_MARKER = "<!-- GENERATED:TAGS:END -->"
-YEARS_START_MARKER = "<!-- GENERATED:YEARS:START -->"
-YEARS_END_MARKER = "<!-- GENERATED:YEARS:END -->"
 DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
@@ -48,6 +47,8 @@ MATH_SECTIONS = (
 SITE_TITLE_TOP = "数識電収"
 SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
 SITE_TITLE_ATTRIBUTE = "私と放電"
+SITE_URL = "https://dempacomm.github.io"
+HOME_PAPER_LIMIT = 6
 LEGACY_PRIVACY_EXEMPT_SLUGS = {
     "2015-08-28-01",
     "2015-09-01-01",
@@ -365,7 +366,52 @@ def command_audit(args: argparse.Namespace) -> None:
         raise PaperToolError(f"audit failed with {len(errors)} error(s)")
 
 
-def paper_card(manifest: dict[str, Any]) -> str:
+def site_navigation(prefix: str, current: str = "") -> str:
+    home_href = prefix or "./"
+    links = (
+        ("home", home_href, "トップ"),
+        ("archive", f"{prefix}archive/", "全原稿"),
+        ("math", f"{prefix}math/", "数学記事総覧"),
+        ("tags", f"{prefix}archive/#tags-title", "タグ索引"),
+    )
+    rendered = []
+    for key, href, label in links:
+        current_attribute = ' aria-current="page"' if key == current else ""
+        rendered.append(
+            f'        <a href="{href}"{current_attribute}>{label}</a>'
+        )
+    rendered.append(
+        '        <a href="https://concious4410.hatenablog.com/">'
+        'はてなブログ <span aria-hidden="true">↗</span></a>'
+    )
+    return "\n".join(rendered)
+
+
+def page_head(
+    title: str,
+    description: str,
+    canonical_path: str,
+    stylesheet: str,
+) -> str:
+    escaped_title = html.escape(title, quote=True)
+    escaped_description = html.escape(description, quote=True)
+    canonical = f"{SITE_URL}{canonical_path}"
+    return f"""  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{escaped_title}</title>
+  <meta name="description" content="{escaped_description}">
+  <link rel="canonical" href="{canonical}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{SITE_TITLE_TOP}">
+  <meta property="og:title" content="{escaped_title}">
+  <meta property="og:description" content="{escaped_description}">
+  <meta property="og:url" content="{canonical}">
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" type="application/rss+xml" title="{SITE_TITLE_TOP} RSS" href="{SITE_URL}/feed.xml">
+  <link rel="stylesheet" href="{stylesheet}">"""
+
+
+def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     kind = html.escape(manifest["kind"])
@@ -387,22 +433,27 @@ def paper_card(manifest: dict[str, Any]) -> str:
         json.dumps(manifest["tags"], ensure_ascii=False), quote=True
     )
     tag_chips = "\n".join(
-        f'          <a class="paper-tag" href="{tag_href(tag)}">{html.escape(tag)}</a>'
+        f'          <a class="paper-tag" href="{tag_href(tag, prefix)}">{html.escape(tag)}</a>'
         for tag in manifest["tags"]
     )
-    actions = public_file_actions(manifest, f"papers/{slug}/", "          ")
-    actions.append(f'          <a href="papers/{slug}/keywords.txt">検索語</a>')
+    actions = public_file_actions(
+        manifest, f"{prefix}papers/{slug}/", "          "
+    )
+    actions.append(
+        f'          <a href="{prefix}papers/{slug}/keywords.txt">検索語</a>'
+    )
     if manifest["original_url"]:
         original_url = html.escape(manifest["original_url"], quote=True)
         actions.append(f'          <a href="{original_url}">元の記事</a>')
     actions_html = "\n".join(actions)
     aria = html.escape(f"{manifest['title']}のファイル", quote=True)
+    year_href = f"#year-{year}" if prefix else f"archive/#year-{year}"
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
         <div class="paper-meta">
-          <span>初出 <a class="paper-year-link" href="#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
+          <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>
           <span>{kind}</span>
         </div>
-        <h3><a href="papers/{slug}/">{title}</a></h3>
+        <h3><a href="{prefix}papers/{slug}/">{title}</a></h3>
         <p>{summary}</p>
         <div class="paper-tags" aria-label="電波通信のタグ">
 {tag_chips}
@@ -436,7 +487,9 @@ def rendered_tag_index(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     )
 
 
-def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_year_groups(
+    selected: list[tuple[Path, dict[str, Any]]], prefix: str = ""
+) -> str:
     grouped: dict[int, list[dict[str, Any]]] = {}
     for _, manifest in selected:
         grouped.setdefault(int(manifest["year"]), []).append(manifest)
@@ -446,7 +499,7 @@ def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
         papers = grouped[year]
         article_links = "\n".join(
             "          <li>"
-            f'<a href="papers/{html.escape(paper["slug"], quote=True)}/">'
+            f'<a href="{prefix}papers/{html.escape(paper["slug"], quote=True)}/">'
             f'<time datetime="{html.escape(str(paper["published_at"])[:10], quote=True)}">'
             f'{html.escape(str(paper["published_at"])[:10])}</time> '
             f'{html.escape(paper["title"])}</a></li>'
@@ -461,6 +514,180 @@ def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
       </details>"""
         )
     return "\n\n".join(groups)
+
+
+def rendered_home_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    newest = [manifest for _, manifest in selected[-HOME_PAPER_LIMIT:]][::-1]
+    cards = "\n\n".join(paper_card(manifest) for manifest in newest)
+    description = (
+        f"『{SITE_TITLE_TOP}』の数学原稿、PDF、TeXソースを保存・公開する"
+        "数学記事アーカイブです。"
+    )
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{page_head(f"{SITE_TITLE_TOP} — 数学原稿アーカイブ", description, "/", "styles.css")}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">MATHEMATICS ARCHIVE</p>
+      <h1>{SITE_TITLE_TOP}</h1>
+      <p class="subtitle"><span>{SITE_TITLE_FORMAL}</span><span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>
+      <p class="lead">数学記事の原稿と、原稿から生成したPDFを保存・公開するアーカイブです。</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("", "home")}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="portal-grid" aria-label="記事を探す">
+      <a class="portal-card portal-card-primary" href="archive/">
+        <span class="section-number">ALL PAPERS</span>
+        <strong>全原稿を検索</strong>
+        <span>{len(selected)}件の原稿を、語句・タグ・公開年から探せます。</span>
+      </a>
+      <a class="portal-card" href="math/">
+        <span class="section-number">MATHEMATICS</span>
+        <strong>数学記事総覧</strong>
+        <span>数学分野ごとの一ページ目次です。</span>
+      </a>
+      <a class="portal-card" href="archive/#years-title">
+        <span class="section-number">YEARS</span>
+        <strong>公開年から探す</strong>
+        <span>記事を初出年ごとにたどれます。</span>
+      </a>
+      <a class="portal-card" href="archive/#tags-title">
+        <span class="section-number">TAGS</span>
+        <strong>タグから探す</strong>
+        <span>電波通信の元タグを引き継いだ索引です。</span>
+      </a>
+    </section>
+
+    <section class="latest-papers" aria-labelledby="papers-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">LATEST</p>
+          <h2 id="papers-title">新着原稿</h2>
+        </div>
+        <p>公開日の新しいものから{len(newest)}件を表示しています。<a href="archive/">全{len(selected)}件を見る</a></p>
+      </div>
+      <div class="paper-list">
+{START_MARKER}
+{cards}
+    {END_MARKER}
+      </div>
+    </section>
+
+    <section class="archive-note" aria-labelledby="archive-note-title">
+      <p class="section-number">ABOUT</p>
+      <h2 id="archive-note-title">このアーカイブについて</h2>
+      <p>記事本文への入口に加えて、公開可能なTeX原稿、PDF、BibTeX、図版などを原稿単位で保存しています。元記事は引き続き、はてなブログ「電波通信」から参照できます。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>
+  </footer>
+</body>
+</html>
+"""
+
+
+def rendered_archive_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    cards = "\n\n".join(
+        paper_card(manifest, "../") for _, manifest in reversed(selected)
+    )
+    description = (
+        f"{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を検索し、"
+        "タグと公開年から絞り込める総合アーカイブです。"
+    )
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{page_head(f"全原稿アーカイブ — {SITE_TITLE_TOP}", description, "/archive/", "../styles.css")}
+</head>
+<body class="archive-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">COMPLETE ARCHIVE</p>
+      <h1>全原稿アーカイブ</h1>
+      <p class="lead">{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を横断検索できます。</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../", "archive")}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section aria-labelledby="papers-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">01</p>
+          <h2 id="papers-title">公開原稿を検索</h2>
+        </div>
+        <p>題名、説明、タグ、検索キーワード、公開年を横断検索します。</p>
+      </div>
+
+      <form class="paper-search" role="search" aria-label="公開原稿を絞り込む" onsubmit="return false">
+        <label for="paper-query">原稿を検索</label>
+        <div class="paper-search-controls">
+          <input id="paper-query" type="search" placeholder="タイトル・タグ・キーワード" autocomplete="off">
+          <select id="paper-tag" aria-label="電波通信のタグで絞り込む">
+            <option value="">すべてのタグ</option>
+          </select>
+          <select id="paper-year" aria-label="公開年で絞り込む">
+            <option value="">すべての年</option>
+          </select>
+          <button id="paper-reset" type="button">絞り込みを解除</button>
+        </div>
+        <p id="paper-count" class="paper-count" aria-live="polite"></p>
+        <div id="paper-empty" class="paper-empty" hidden>
+          <p>条件に一致する原稿はありません。</p>
+          <button type="button" data-reset-papers>絞り込みを解除</button>
+        </div>
+      </form>
+
+      <div class="paper-list">
+{cards}
+      </div>
+    </section>
+
+    <section class="year-directory" aria-labelledby="years-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">02</p>
+          <h2 id="years-title">公開年別記事一覧</h2>
+        </div>
+        <p>公開年ごとに原稿をまとめています。</p>
+      </div>
+      <div class="year-groups">
+{rendered_year_groups(selected, "../")}
+      </div>
+    </section>
+
+    <section class="tag-directory" aria-labelledby="tags-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">03</p>
+          <h2 id="tags-title">タグ索引</h2>
+        </div>
+        <p>タグを選ぶと、公開年ごとにまとめた専用ページへ移動します。</p>
+      </div>
+      <nav class="tag-index" aria-label="タグ索引">
+{rendered_tag_index(selected).replace('href="tags/', 'href="../tags/')}
+      </nav>
+    </section>
+  </main>
+
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <script src="../search.js"></script>
+</body>
+</html>
+"""
 
 
 def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
@@ -482,7 +709,7 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
         original_url = html.escape(manifest["original_url"], quote=True)
         actions.append(f'            <a href="{original_url}">元の記事</a>')
     return f"""        <article class="tag-page-paper">
-          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span><span>{kind}</span></div>
+          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span><span>{kind}</span></div>
           <h3><a href="../../papers/{slug}/">{title}</a></h3>
           <p>{summary}</p>
           <div class="paper-tags" aria-label="電波通信のタグ">
@@ -508,32 +735,25 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
         for year, year_papers in sorted(by_year.items(), reverse=True)
     )
     escaped_tag = html.escape(tag)
-    directory_link = (
-        '      <a class="header-action" href="../../math/">数学記事総覧を見る</a>\n'
-        if tag == "数学"
-        else ""
-    )
+    description = f"電波通信のタグ「{tag}」が付いた公開原稿の一覧です。"
     return f"""<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{escaped_tag}の記事 — {SITE_TITLE_TOP}</title>
-  <meta name="description" content="電波通信のタグ「{html.escape(tag, quote=True)}」が付いた公開原稿の一覧">
-  <link rel="stylesheet" href="../../styles.css">
+{page_head(f"{tag}の記事 — {SITE_TITLE_TOP}", description, f"/tags/{quote(tag, safe='')}/", "../../styles.css")}
 </head>
 <body class="tag-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="site-header">
     <div class="header-inner">
       <p class="eyebrow">TAG ARCHIVE</p>
       <h1>{escaped_tag}</h1>
       <p class="lead">電波通信でこのタグが付けられていた公開原稿、全{len(papers)}件。</p>
-      <nav class="header-links" aria-label="タグページの案内">
-{directory_link}        <a class="hatena-link" href="../../#tags-title">タグ索引へ戻る</a>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../../", "tags")}
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content">
 {year_sections}
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
@@ -592,26 +812,21 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     return f"""<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>数学記事総覧 — {SITE_TITLE_TOP}</title>
-  <meta name="description" content="{SITE_TITLE_TOP}で公開している数学記事と原稿の分野別総合目次です。">
-  <link rel="canonical" href="https://dempacomm.github.io/math/">
-  <link rel="stylesheet" href="../styles.css">
+{page_head(f"数学記事総覧 — {SITE_TITLE_TOP}", f"{SITE_TITLE_TOP}で公開している数学記事と原稿の分野別総合目次です。", "/math/", "../styles.css")}
 </head>
 <body class="math-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="site-header">
     <div class="header-inner">
       <p class="eyebrow">MATHEMATICS DIRECTORY</p>
       <h1>数学記事総覧</h1>
       <p class="lead">{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を、数学の分野ごとにまとめた総合目次です。</p>
-      <nav class="header-links" aria-label="総覧ページの案内">
-        <a class="hatena-link" href="../">トップページへ戻る</a>
-        <a class="hatena-link" href="../tags/%E6%95%B0%E5%AD%A6/">数学タグを見る</a>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../", "math")}
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content">
     <nav class="math-toc" aria-label="数学分野の目次">
 {toc}
     </nav>
@@ -647,26 +862,24 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
     return f"""<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title} — {SITE_TITLE_TOP}</title>
-  <meta name="description" content="{html.escape(manifest['summary'], quote=True)}">
-  <link rel="canonical" href="https://dempacomm.github.io/papers/{slug}/">
-  <link rel="stylesheet" href="../../styles.css">
+{page_head(f"{manifest['title']} — {SITE_TITLE_TOP}", manifest["summary"], f"/papers/{slug}/", "../../styles.css")}
 </head>
 <body class="paper-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="site-header">
     <div class="header-inner">
       <p class="eyebrow">PUBLIC MANUSCRIPT</p>
       <h1>{title}</h1>
       <p class="lead">{summary}</p>
-      <a class="hatena-link" href="../../#paper-{slug}">公開原稿一覧へ戻る</a>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../../")}
+      </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content">
     <article class="paper-detail">
       <div class="paper-meta">
-        <span>初出 <a class="paper-year-link" href="../../#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
+        <span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
         <span>{kind}</span>
         <span>原稿番号 {slug}</span>
       </div>
@@ -699,31 +912,8 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
 """
 
 
-def replace_generated(source: str, start: str, end: str, content: str) -> str:
-    if source.count(start) != 1 or source.count(end) != 1:
-        raise PaperToolError(f"index.html must contain exactly one marker pair: {start}")
-    before, remainder = source.split(start, 1)
-    _, after = remainder.split(end, 1)
-    return f"{before}{start}\n{content}\n    {end}{after}"
-
-
 def rendered_index() -> str:
-    source = INDEX_PATH.read_text(encoding="utf-8")
-    selected = manifests()
-    cards = "\n\n".join(paper_card(manifest) for _, manifest in selected)
-    source = replace_generated(source, START_MARKER, END_MARKER, cards)
-    source = replace_generated(
-        source,
-        TAGS_START_MARKER,
-        TAGS_END_MARKER,
-        rendered_tag_index(selected),
-    )
-    return replace_generated(
-        source,
-        YEARS_START_MARKER,
-        YEARS_END_MARKER,
-        rendered_year_groups(selected),
-    )
+    return rendered_home_page(manifests())
 
 
 def command_catalog(args: argparse.Namespace) -> None:
@@ -766,6 +956,176 @@ def rendered_keywords(manifest: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def rendered_not_found_page() -> str:
+    description = "指定されたページは見つかりませんでした。"
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{page_head(f"ページが見つかりません — {SITE_TITLE_TOP}", description, "/404.html", "styles.css")}
+</head>
+<body class="not-found-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">404 NOT FOUND</p>
+      <h1>ページが見つかりません</h1>
+      <p class="lead">URLが変更されたか、原稿がまだ公開されていない可能性があります。</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("", "")}
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="not-found-guide">
+      <p class="section-number">FIND A PAPER</p>
+      <h2>原稿を探す</h2>
+      <p><a class="primary-action" href="archive/">全原稿アーカイブを検索</a></p>
+    </section>
+  </main>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+</body>
+</html>
+"""
+
+
+def rendered_feed(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    items = []
+    for _, manifest in reversed(selected):
+        published = datetime.fromisoformat(str(manifest["published_at"]))
+        if published.tzinfo is None:
+            published = published.replace(tzinfo=timezone.utc)
+        slug = quote(str(manifest["slug"]), safe="")
+        url = f"{SITE_URL}/papers/{slug}/"
+        items.append(
+            f"""    <item>
+      <title>{xml_escape(str(manifest["title"]))}</title>
+      <link>{url}</link>
+      <guid isPermaLink="true">{url}</guid>
+      <pubDate>{format_datetime(published)}</pubDate>
+      <description>{xml_escape(str(manifest["summary"]))}</description>
+    </item>"""
+        )
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{SITE_TITLE_TOP}</title>
+    <link>{SITE_URL}/</link>
+    <description>{SITE_TITLE_TOP}で公開する数学原稿とPDFの更新情報</description>
+    <language>ja</language>
+{chr(10).join(items)}
+  </channel>
+</rss>
+"""
+
+
+def rendered_sitemap(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    urls: list[tuple[str, str | None]] = [
+        (f"{SITE_URL}/", None),
+        (f"{SITE_URL}/archive/", None),
+        (f"{SITE_URL}/math/", None),
+    ]
+    for tag in grouped_tags(selected):
+        urls.append((f"{SITE_URL}/tags/{quote(tag, safe='')}/", None))
+    for _, manifest in selected:
+        urls.append(
+            (
+                f"{SITE_URL}/papers/{quote(str(manifest['slug']), safe='')}/",
+                str(manifest["published_at"])[:10],
+            )
+        )
+    entries = []
+    for location, last_modified in urls:
+        lastmod = f"\n    <lastmod>{last_modified}</lastmod>" if last_modified else ""
+        entries.append(
+            f"""  <url>
+    <loc>{xml_escape(location)}</loc>{lastmod}
+  </url>"""
+        )
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{chr(10).join(entries)}
+</urlset>
+"""
+
+
+class LocalLinkParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.links: list[str] = []
+        self.ids: set[str] = set()
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        for key, value in attrs:
+            if key == "id" and value:
+                self.ids.add(value)
+        attribute = "href" if tag in {"a", "link"} else "src" if tag == "script" else ""
+        if not attribute:
+            return
+        for key, value in attrs:
+            if key == attribute and value:
+                self.links.append(value)
+
+
+def local_link_errors(site_root: Path) -> list[str]:
+    errors: list[str] = []
+    page_ids: dict[Path, set[str]] = {}
+    for page in sorted(site_root.rglob("*.html")):
+        parser = LocalLinkParser()
+        parser.feed(page.read_text(encoding="utf-8"))
+        page_ids[page.resolve()] = parser.ids
+        for raw_link in parser.links:
+            parsed = urlsplit(raw_link)
+            if parsed.scheme or parsed.netloc or raw_link.startswith(("mailto:", "tel:")):
+                continue
+            decoded_path = unquote(parsed.path)
+            if not decoded_path:
+                target = page
+            elif decoded_path.startswith("/"):
+                target = site_root / decoded_path.lstrip("/")
+            else:
+                target = page.parent / decoded_path
+            if decoded_path.endswith("/"):
+                target /= "index.html"
+            target = target.resolve()
+            try:
+                target.relative_to(site_root.resolve())
+            except ValueError:
+                errors.append(f"{page.relative_to(site_root)}: unsafe link {raw_link}")
+                continue
+            if not target.is_file():
+                errors.append(
+                    f"{page.relative_to(site_root)}: missing target {raw_link}"
+                )
+                continue
+            if parsed.fragment and target.suffix.casefold() == ".html":
+                target_ids = page_ids.get(target)
+                if target_ids is None:
+                    target_parser = LocalLinkParser()
+                    target_parser.feed(target.read_text(encoding="utf-8"))
+                    target_ids = target_parser.ids
+                    page_ids[target] = target_ids
+                fragment = unquote(parsed.fragment)
+                if fragment not in target_ids:
+                    errors.append(
+                        f"{page.relative_to(site_root)}: missing fragment {raw_link}"
+                    )
+    return errors
+
+
+def command_check_links(args: argparse.Namespace) -> None:
+    site_root = Path(args.site).resolve()
+    if not site_root.is_dir():
+        raise PaperToolError(f"site directory does not exist: {site_root}")
+    errors = local_link_errors(site_root)
+    if errors:
+        for error in errors:
+            print(f"ERR {error}", file=sys.stderr)
+        raise PaperToolError(f"link check failed with {len(errors)} error(s)")
+    print(f"OK  links in {site_root}")
+
+
 def command_stage(args: argparse.Namespace) -> None:
     selected = manifests()
     errors: list[str] = []
@@ -796,6 +1156,24 @@ def command_stage(args: argparse.Namespace) -> None:
     shutil.copy2(INDEX_PATH, output / "index.html")
     shutil.copy2(ROOT / "styles.css", output / "styles.css")
     shutil.copy2(SEARCH_SCRIPT_PATH, output / "search.js")
+    archive_dir = output / "archive"
+    archive_dir.mkdir()
+    (archive_dir / "index.html").write_text(
+        rendered_archive_page(selected), encoding="utf-8"
+    )
+    (output / "404.html").write_text(
+        rendered_not_found_page(), encoding="utf-8"
+    )
+    (output / "feed.xml").write_text(
+        rendered_feed(selected), encoding="utf-8"
+    )
+    (output / "sitemap.xml").write_text(
+        rendered_sitemap(selected), encoding="utf-8"
+    )
+    (output / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
+        encoding="utf-8",
+    )
 
     for manifest_path, manifest in selected:
         source_dir = manifest_path.parent
@@ -842,6 +1220,13 @@ def command_stage(args: argparse.Namespace) -> None:
     (math_dir / "index.html").write_text(
         rendered_math_page(selected), encoding="utf-8"
     )
+    link_errors = local_link_errors(output)
+    if link_errors:
+        for error in link_errors:
+            print(f"ERR {error}", file=sys.stderr)
+        raise PaperToolError(
+            f"refusing to publish a site with {len(link_errors)} broken link(s)"
+        )
     print(f"STAGED {len(selected)} papers in {output}")
 
 
@@ -1549,6 +1934,12 @@ def parser() -> argparse.ArgumentParser:
     stage_parser = subparsers.add_parser("stage", help="prepare the GitHub Pages directory")
     stage_parser.add_argument("output")
     stage_parser.set_defaults(func=command_stage)
+
+    links_parser = subparsers.add_parser(
+        "check-links", help="check local links in a staged site"
+    )
+    links_parser.add_argument("site")
+    links_parser.set_defaults(func=command_check_links)
 
     inspect_parser = subparsers.add_parser(
         "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"

@@ -21,6 +21,21 @@ body {
 
 a { color: inherit; }
 
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  color: var(--white);
+  background: var(--navy);
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 :focus-visible {
   outline: 3px solid var(--navy);
   outline-offset: 4px;
@@ -92,13 +107,25 @@ h1 {
   font-size: 1.05rem;
 }
 
-.hatena-link { text-underline-offset: 5px; }
+.hatena-link,
+.site-navigation a {
+  text-underline-offset: 5px;
+}
 
-.header-links {
+.header-links,
+.site-navigation {
   display: flex;
   flex-wrap: wrap;
   gap: 14px 24px;
   align-items: center;
+}
+
+.site-navigation a {
+  color: var(--white);
+}
+
+.site-navigation a[aria-current="page"] {
+  text-decoration-thickness: 3px;
 }
 
 .header-action {
@@ -110,6 +137,76 @@ h1 {
 }
 
 main { padding: 64px 0 80px; }
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 72px;
+}
+
+.portal-card {
+  display: grid;
+  gap: 8px;
+  min-height: 180px;
+  padding: clamp(24px, 5vw, 38px);
+  border: 1px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+}
+
+.portal-card:hover,
+.portal-card:focus-visible {
+  border-color: var(--navy);
+  box-shadow: 0 16px 40px rgb(23 33 43 / 9%);
+}
+
+.portal-card-primary {
+  color: var(--white);
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.portal-card-primary .section-number {
+  color: #f2c3b7;
+}
+
+.portal-card strong {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  font-weight: 500;
+}
+
+.portal-card > span:last-child {
+  color: var(--muted);
+}
+
+.portal-card-primary > span:last-child {
+  color: #dfe8f0;
+}
+
+.latest-papers,
+.archive-note {
+  scroll-margin-top: 1rem;
+}
+
+.archive-note {
+  max-width: 760px;
+  margin-top: 72px;
+  padding-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.archive-note h2,
+.not-found-guide h2 {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.archive-note p:last-child {
+  color: var(--muted);
+}
 
 .section-heading {
   display: grid;
@@ -149,12 +246,14 @@ main { padding: 64px 0 80px; }
 
 .paper-search-controls {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr) minmax(9rem, 0.7fr);
+  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr) minmax(9rem, 0.7fr) auto;
   gap: 0.75rem;
 }
 
 .paper-search input,
-.paper-search select {
+.paper-search select,
+.paper-search button,
+.paper-empty button {
   width: 100%;
   min-height: 2.75rem;
   padding: 0.65rem 0.75rem;
@@ -165,11 +264,38 @@ main { padding: 64px 0 80px; }
   font: inherit;
 }
 
+.paper-search button,
+.paper-empty button {
+  cursor: pointer;
+  color: var(--navy);
+  background: var(--white);
+}
+
+.paper-search button:hover,
+.paper-empty button:hover {
+  border-color: var(--navy);
+}
+
 .paper-count {
   min-height: 1.4em;
   margin: 0.65rem 0 0;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.paper-empty {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--accent);
+  background: #fff7f3;
+}
+
+.paper-empty p {
+  margin-bottom: 0.7rem;
+}
+
+.paper-empty button {
+  width: auto;
 }
 
 .paper-tags {
@@ -343,6 +469,10 @@ main { padding: 64px 0 80px; }
 }
 
 .tag-page h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+.archive-page h1 {
   font-size: clamp(2.5rem, 8vw, 5rem);
 }
 
@@ -561,6 +691,21 @@ footer .title-attribute {
   font-size: 0.82em;
 }
 
+.not-found-guide {
+  max-width: 680px;
+  padding: clamp(28px, 6vw, 52px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.not-found-guide .primary-action {
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--white);
+  background: var(--accent);
+  text-decoration: none;
+}
+
 @media (max-width: 680px) {
   .paper-search-controls {
     grid-template-columns: 1fr;
@@ -570,6 +715,7 @@ footer .title-attribute {
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .workflow ol { grid-template-columns: 1fr; }
   .tag-index,
-  .year-groups { grid-template-columns: 1fr; }
+  .year-groups,
+  .portal-grid { grid-template-columns: 1fr; }
   .math-toc { grid-template-columns: 1fr; }
 }

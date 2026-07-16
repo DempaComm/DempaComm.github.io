@@ -36,6 +36,9 @@ jobs:
       - name: Prepare public site
         run: python3 scripts/paper_tool.py stage _site
 
+      - name: Check public links
+        run: python3 scripts/paper_tool.py check-links _site
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 

@@ -3,6 +3,11 @@
   const tagSelect = document.querySelector("#paper-tag");
   const yearSelect = document.querySelector("#paper-year");
   const count = document.querySelector("#paper-count");
+  const empty = document.querySelector("#paper-empty");
+  const resetButtons = [
+    document.querySelector("#paper-reset"),
+    ...document.querySelectorAll("[data-reset-papers]"),
+  ].filter(Boolean);
   const cards = [...document.querySelectorAll(".paper-card")];
 
   if (!queryInput || !tagSelect || !yearSelect || !count || cards.length === 0) return;
@@ -49,11 +54,21 @@
     }
 
     count.textContent = `${cards.length}件中${visible}件を表示`;
+    if (empty) empty.hidden = visible !== 0;
   }
 
   queryInput.addEventListener("input", filterPapers);
   tagSelect.addEventListener("change", filterPapers);
   yearSelect.addEventListener("change", filterPapers);
+  for (const button of resetButtons) {
+    button.addEventListener("click", () => {
+      queryInput.value = "";
+      tagSelect.value = "";
+      yearSelect.value = "";
+      filterPapers();
+      queryInput.focus();
+    });
+  }
 
   function openDirectoryFromHash() {
     if (!window.location.hash.startsWith("#year-")) return;

@@ -5,6 +5,8 @@
 数学記事のTeX原稿と、自動生成したPDFを公開するGitHub Pagesリポジトリです。
 
 - 公開サイト: https://dempacomm.github.io/
+- 全原稿アーカイブ: https://dempacomm.github.io/archive/
+- 数学記事総覧: https://dempacomm.github.io/math/
 - はてなブログ: https://concious4410.hatenablog.com/
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
@@ -26,8 +28,14 @@
 python3 scripts/paper_tool.py verify
 python3 scripts/paper_tool.py audit
 python3 scripts/paper_tool.py catalog --check
+python3 scripts/paper_tool.py stage _site
+python3 scripts/paper_tool.py check-links _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
+
+トップページには新着6件だけを表示し、全件検索・タグ索引・公開年別一覧は
+`archive/` に自動生成します。RSSは `feed.xml`、サイトマップは
+`sitemap.xml` で公開します。
 
 使い方の詳細は `docs/MIGRATION.md` を参照してください。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
 
