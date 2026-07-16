@@ -1,0 +1,1312 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\DeclareMathOperator{\fa}{fac}
+\DeclareMathOperator{\ind}{ind}
+\title{ホイットニーの拡張定理}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章ではWhitneyの拡張定理を紹介する。
+この定理はユークリッド空間の閉集合の上で定義された（Whitneyの意味での）微分可能関数が実は
+ユークリッド空間の通常の意味での微分可能関数の制限であるということを述べている定理である。
+Whitneyの微分可能性はテイラーの定理をアナローグして得られる自然な閉集合上の微分概念である。
+その意味で微分可能性を閉集合の上へ一般化しても、既存の範疇を超えていないことを教えてくれる定理である。
+この定理はしばしば有用な応用を与える。
+例えばSardの定理の微分可能性の仮定を落とした場合の反例の構成に使える。
+応用はさておくとしてもこの定理は知っているだけでも大変ありがたいものであると私は考える。
+しかしながらこの定理の強力さに対してその証明が述べられているのは原論文だけであり、その論文は1935年に書かれたこともあって、現代的にはとても読みづらいものになってしまっている。
+そこでこの文章では原論文の証明をなぞりつつも、
+可能な限り読みやすい証明を提供する。
+その目的の一環がおまけの章にある微分のモデル代数である。
+この概念はこの文章だけのものなので他の場所で断りなく用いると
+恥ずかしい思いをするかもしれないが、それはさておき、
+微分のモデル代数は微分公式を可微分関数を用いて証明するのではなく抽象的な代数操作によって証明するために導入した。
+\section{Preliminaries}
+\subsection{多重指数記法}
+この文章では
+\[
+Z_n=\zz_{\ge 0}^n
+\]
+と定義する。
+各$k\in Z_n$に対して、その成分を$k=(k_1,k_2,\dots,k_n)$としたとき
+\[
+\sigma_k=k_1+k_2+\dots+k_n
+\]
+と定義し、
+\[
+\partial_k=\partial_{k_1}\partial_{k_2}\dots\partial_{k_n}
+\]
+と定義する。この文章では偏微分の順序を気にしない関数しか出てこないので、$\partial_k$の定義に出てくる偏微分の順序は我々も気にしないことにする。
+また、
+\[
+k!=k_1!k_2!\cdots k_n!
+\]
+と定義し、
+$x\in \rr^n$に対して
+\[
+x^k=x^{k_1}x^{k_2}\cdots x^{k_n}
+\]
+と定義する。
+
+$k,l\in Z_n$に対して
+\[
+k<l\iff \forall i\in \{1, 2, \dots, n\}\ k_i<l_i
+\]
+と定め、
+\[
+k\le l\iff \forall i\in \{1, 2, \dots, n\}\ k_i\le l_i
+\]
+とする。$k\le l$のとき、その二項係数を
+\[
+\binom{k}{l}=\binom{k_1}{l_1}\binom{k_2}{l_2}\cdots\binom{k_n}{l_n}
+\]
+と定義する。
+簡単にわかることだが、$\binom{k}{l}\le (\sigma_k!)^n$となる。
+また、$l\le k$のとき、
+\[
+k-l=(k_1-l_1,k_2-l_2, \dots, k_n-l_n)
+\]
+と定義する。このときちゃんと$k-l\in Z_n$となる。
+
+補助的に$m\in \zz_{\ge 0}\cup \{\infty\}$に対して
+\[
+Z_n(m)=\{k\in Z_n\mid \sigma_k\le m\}
+\]
+と定義する。もちろん$Z_n(\infty)=Z_n$である。
+多変数の場合のライプニッツ則は多重指数記号を用いると1変数の場合と同じように述べることができる。
+\begin{lem}
+$U$を$\rr^n$の開集合とする。
+二つの$C^m$級関数$f,g,U\to \rr$と$k\in Z_n(m)$について
+\[
+\partial_k(fg)=\sum_{l\le k}\binom{k}{l}(\partial_{k-l}f)(\partial_lg)
+\]
+が成り立つ。
+\end{lem}
+\subsection{その他基本的な定義}
+%\begin{lem}
+%$K, A\subset \rr^m$で、$K$はコンパクト、$A$は閉集合とする。このとき$d(K,A)>0$であり、
+%\[
+%d(k,a)=d(K,A)
+%\]
+%となる$k\in K, a\in A$が存在する。
+%\end{lem}
+%\begin{lem}
+%$K, A\subset \rr^m$で、$K$はコンパクト、$A$は閉集合とする。
+%このとき
+%\[
+%d(k,A)=d(K,A)
+%\]
+%となる$k$は$k\in \partial K$となる。
+%\end{lem}
+\emph{以下の補題は初等的に見えるが、拡張定理を証明する上で本質的である。}
+\begin{prop}\label{bibun}
+$J$を$\rr$の開区間とする。
+連続写像$w:J\to \rr$と$J$の閉集合$A\subset J$、$v\in \rr$、$a\in J$は以下を充たすとする。
+任意の$\ep$に対して$\delta>0$が存在して
+\begin{enumerate}
+\item $x\in A$かつ$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v\right|<\ep
+\]
+である。
+\item $x\in J\setminus A$かつ$|x-a|<\delta$ならば導関数$w^{\prime}(x)$が存在し、
+\[
+|w^{\prime}(x)-v|<\ep
+\]
+である。
+\par
+このとき$w$は$A$上の任意の点$a\in A$において微分可能で$w^{\prime}(a)=v$である。
+\end{enumerate}
+\end{prop}
+\begin{proof}
+任意の$a\in A$と
+任意の$\ep$に対して$\delta>0$が存在して任意の$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v\right|<\ep
+\]
+を示せばよい。
+話を簡単にするために$a\le x$とする。
+$x\in J\setminus A$のときに目的の式を示せばよい。
+ここで$p_x$を$p_x\in A$で、$A\cap (p_x, x)=\O$となるものとする。
+$A$が閉集合なのでこのような$p_x$は存在する。
+また、$a\le p_x$である。
+$(2)$から$w$は開区間$(p_x, x)$で微分可能なので中間値の定理から
+\[
+w(x)=w(p_x)+w^{\prime}(c)(x-p_x)
+\]
+となる$c\in (p_x, x)$が存在する。
+さてこのとき、
+\begin{align*}
+\frac{w(x)-w(a)}{x-a}
+&=
+\frac{w(x)-w(p_x)}{x-p_x}\frac{x-p_x}{x-a}+\frac{w(p_x)-w(a)}{p_x-a}\frac{p_x-a}{x-a}\\
+&=
+w^{\prime}(c)\frac{x-p_x}{x-a}+\frac{w(p_x)-w(a)}{p_x-a}\frac{p_x-a}{x-a}
+\end{align*}
+となり、また、
+\[
+v=v\frac{x-p_x}{x-a}+v\frac{p_x-a}{x-a}
+\]
+なので
+\begin{align*}
+\left|\frac{w(x)-w(a)}{x-a}-v \right|
+\le
+|w^{\prime}(c)-v|\left|\frac{x-p_x}{x-a}\right| +\left|\frac{w(p_x)-w(a)}{p_x-a}-v\right|\left|\frac{p_x-a}{x-a}\right|
+\end{align*}
+である。さて$p_x$及び$c$の定義から$|c-a|<\delta$、$|p_x-a|<\delta$なので$|w^{\prime}(c)-v|<\ep$かつ$\left|\frac{w(p_x)-w(a)}{p_x-a}-v\right|<\ep$である。また、$p_x$の定義から$|x-p_x|\le |x-a|$かつ$|p_x-a|\le |x-a|$なので
+結局$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v \right|<2\ep
+\]
+を得る。
+\end{proof}
+$A$を$\rr^n$の部分空間とする。
+\begin{df}
+$m\in \zz_{\ge 0}\cup\{\infty\}$とする。
+$f:A\to \rr$が$A$上Whitneyの意味で$C^m$級であるとは$A$上の関数列
+$\{f_k\}_{k\in Z_n(m)}$が存在して、$f_0=f$であり、任意の$k\in Z_n(m)$と
+$x,y\in A$について
+\[
+R_k(x;y)=f_k(x)-\sum_{\sigma_l\le m-\sigma_k}\frac{f_{k+l}(y)}{l!}(x-a)^l
+\]
+で定義される$R_k(x;y)$が次を充たすときにいう：
+任意に$A$の点$p$と任意に$\ep$を与えたときに$\delta>0$が存在して、$\|x-p\|<\delta$かつ$\|y-p\|<\delta$ならば
+\[
+|R_k(x;y)|\le \|x-y\|^{m-\sigma_k}\ep
+\]
+を充たす。
+
+このとき$\{f_k\}_{k\in Z_n(m)}$を、この文章では、Whitney導関数と呼ぶことにする。
+\end{df}
+\begin{cau}
+各$f_k$は連続であることに注意しよう。$f_k$の取り方は一意的でないことに注意しよう。
+\end{cau}
+
+
+\begin{df}
+関数$f:A\to \rr$はWhitneyの意味で$C^m$級であり、$\{f_k\}_{k\in Z_n(m)}$はそのWhitney導関数とする。
+このとき$k\in Z_n(m)$と$y\in A$と$x\in \rr^n$に対して
+\[
+\psi_k(x;y)=\sum_{\sigma_l\le m-\sigma_k}\frac{f_{k+l}(y)}{l!}(x-y)^l
+\]
+と定義する。
+\end{df}
+\begin{prop}\label{RRR}
+$x,y\in A$、$z\in \rr^n$とする。このとき
+\begin{align*}
+\psi_k(z, y)=\psi_k(z, x)+\sum_{\sigma_l\le m-\sigma_k}\frac{R_{k+l}(y;x)}{l!}(z-y)^l
+\end{align*}
+が成り立つ。
+\end{prop}
+\begin{proof}
+多項式に関するテイラー展開から
+\begin{align*}
+\psi_k(z, x)&=\sum_{\sigma_l\le m-\sigma_k}\frac{\psi_{k+l}(y,x)}{l!}(z-y)^l\\
+&=\sum_{\sigma_l\le m-\sigma_k}\frac{(z-y)^l}{l!}\sum_{\sigma_j\le m-\sigma_{k+l}}\frac{f_{k+l+j}(x)}{j!}(y-x)^j
+\end{align*}
+を得る。よって
+\begin{align*}
+\psi_k(z, y)=\psi_k(z, x)+\sum_{\sigma_l\le m-\sigma_k}\frac{R_{k+l}(y;x)}{l!}(z-y)^l
+\end{align*}
+が成り立つ。
+\end{proof}
+\begin{lem}\label{hoho}
+$R=(1+\delta)Q$とする。このとき任意の$y\in R$に対して$x\in Q$が存在して
+\[
+d(y,x)\le \delta\di(Q)
+\]
+となる。
+\end{lem}
+\begin{proof}
+$Q$の中心は$0$としてもよい。
+$R=(1+\delta)Q$なので$y\in R$に対して$y=(1+\delta)x$となる$x\in Q$が存在する。
+このとき
+\[
+d(y,x)=\delta|x|\le \delta\di(Q)
+\]
+である。
+\end{proof}
+
+%\begin{lem}
+%\[
+%F\di(R)\le d(R,A)\le G\di(R)
+%\]
+%ならば$x\in R$について
+%\[
+%F\di(R)\le d(x,A)\le (1+G)\di(R)
+%\]
+%\end{lem}
+%\begin{proof}
+%まず、左側の不等式は
+%\[
+%d(R,A)\le d(x,A)
+%\]
+%からわかる。
+%そして $d(a,y)=d(A, R)$となる$a\in A$と$y\in R$を取ると
+%\[
+%d(x,A)\le d(x,a)\le d(x,y)+d(y,a)\le \di(R)+d(A,R)
+%\]
+%となるので右側の不等式がわかる。
+%\end{proof}
+\section{Whitney Decomposition}
+\begin{df}[二進立方体]
+$\rr^n$の部分集合$Q$は$Q=\prod_{i}^n[a_i, b_i)$で、
+\[
+a_i=m_i2^{-l},\ b_i=(m_i+1)2^{-l}
+\]
+$m_i\in \nn$, $l\in \zz$
+と書けるものを二進立方体と呼び、$l$を$Q$の世代と呼ぶことにする。
+世代が$l$の二進立方体全体を$\mathbf{D}_l$で表すことにする。
+\end{df}
+
+\begin{prop}\label{daiji}
+$O$を$\rr^n$の開集合とすると、次のような二進立方体の高々可算な列$\{Q_i\}$が存在する。
+\begin{enumerate}
+\item $i\neq j\To Q_i\cap Q_j=\O$
+\item 
+\[
+\bigcup_{i\in \nn}Q_i=O
+\]
+\item 
+\[
+\sqrt{n}\ell(Q_i)\le d(Q_i, O^c)\le 4\sqrt{n}\ell(Q_i)
+\]
+\item $Q_i$と$Q_j$が隣あっていれば、
+\[
+4^{-1}\le \frac{\ell(Q_i)}{\ell(Q_j)}\le 4
+\]
+\item 各$Q_i$は高々$12^n$個の$\{Q_i\}$の元としかとなりあわない。
+\item $0<u<4^{-1}$とする。各$i$について$R_i$を$Q_i$と同じ中心を持ち、辺の長さが$(1+\ep)\ell(Q_i)$となる閉立法体とする。
+すなわち、$R_i=\cl((1+u)Q_i)$である。このとき$R_i$は高々$12^n$個のほかの$\{R_i\}$の元としか交わらない。
+\item $\frac{1-u}{1+u}\sqrt{n}\ell(R_i)\le d(R_i,O^c)\le \frac{4}{1+u}\sqrt{n}\ell(R_i)$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+任意の$k\in \zz$に対して
+\[
+O_k=\{x\in O\mid 2\sqrt{n}2^{-k}<d(x, O^c)\le 4\sqrt{n}2^{-k}\}
+\]
+と置く。すると
+\[
+O=\bigcup_{k\in \zz}O_k
+\]
+である。
+\[
+\mathbf{E}_k=\{Q\in \mathbf{D}_k\mid Q\cap O_k\neq \O\}
+\]
+とし、次に
+\[
+\mathbf{E}=\bigcup_{k\in\zz}\mathbf{E}_k
+\]
+と定める。
+$Q\in \mathbf{E}$に対して$(3)$と同じことが成り立つ。
+つまり、
+\[
+\sqrt{n}\ell(Q)\le d(Q, O^c)\le 4\sqrt{n}\ell(Q)
+\]
+が成り立つ。まずはこのことを示そう。
+$Q\in \mathbf{E}_k$とする。
+まず、$\di(Q)=\sqrt{n}\ell(Q)=\sqrt{n}2^{-k}$に注意しよう。
+そして$x\in O_k\cap Q$をとると
+\[
+\sqrt{n}2^{-k}\le d(x,O^c)-\di(Q)\le d(Q,O^c)\le d(x,O^c)\le 4\sqrt{n}2^{-k}
+\]
+なので上で今言ったことは成り立つ。
+
+$\mathcal{S}=\{\mathbf{S}\mid \mathbf{S}\subset \mathbf{E}, \text{$\mathbf{S}$は$(1)$を満たす。}\}$を考える。
+列$\{A_i\}\subset \mathbf{E}$について、$A_i\subsetneqq A_{i+1}$となるものは存在しないことに注意しよう。
+何故なら$Q\subset P$ならば$d(Q,O^c)\ge d(P,O^c)$なので$(3)$から
+\[
+\ell(P)\le 4\ell(Q)
+\]
+がわかる。よって$Q$を含む$\mathbf{E}$の元はたかだか有限個である。
+このことから、$\mathcal{S}$に包含関係を順序としてZornの補題が適用できる。
+$\mathcal{S}$の極大元を$\mathbf{T}=\{Q_i\}$としよう。これが条件を満たすことを示そう。
+
+まず$(1)$については$\mathcal{S}$の定義から明らかである。
+
+$(2)$については$\mathbf{E}$の定義と$\mathbf{T}$の極大性から直ちに従う。
+
+$(3)$は先ほど示した。
+
+$(4)$を示そう。$Q_i$と$Q_j$が隣り合っていれば$\cl(Q_i)\cap \cl(Q_j)\neq \O$に注意しよう。
+このとき、$(3)$から
+\begin{align*}
+\sqrt{n}\ell((Q_i))&=\sqrt{n}\ell(\cl(Q_i))\le d(\cl(Q_i),O^c)\le \di(\cl(Q_j))+d(\cl(Q_j),O^c)\\
+&\le \sqrt{n}\ell(\cl(Q_i))+4\sqrt{n}\ell(\cl(Q_j))=5\sqrt{n}\ell(Q_j)
+\end{align*}
+となる。比$\ell(Q_i)/\ell(Q_j)$は$2$の整数べきのはずなので
+$\ell(Q_i)/\ell(Q_j)\le 4$である。
+これから$(4)$が従う。
+
+$(5)$を示そう。$Q_i$を一つ固定する。$A=\{Q_k\in \mathbf{T}\mid Q_kはQ_iと隣り合う。\}$
+を考える。$Q\in A$について、
+\[
+4^{-1}\ell(Q_i)\le \ell(Q)\le 4\ell(Q_i)
+\]
+である。$B=\{Q\in \mathbf{D}\mid \ell(Q)=4^{-1}\ell(Q_i)\}$とすれば、
+\[
+\card(A)\le \card(B)
+\]
+である。また、$C=\{Q\in \mathbf{D}\mid \ell(Q)=\ell(Q_i)\}$とすると
+\[
+\card(B)=4^n\card(C)
+\]
+であり、また、$\card(C)=3^n-1$であるから$(5)$が従う。
+
+$(6)$を示そう。$R_i$の半径は$r(1+u)/2$で、$u\in (0,4^{-1})$なので、$R_i$と$R_j$が交わるならば、$Q_i$と$Q_j$は隣り合っている。
+
+最後に$(7)$を示そう。$Q_i\subset R_i$なので
+\[
+d(R_i,O^c)\le  d(Q_i,O^c)\le \sqrt{n}\ell(Q_i)
+\]
+である。
+補題\ref{hoho}より
+$y\in R_i$をとると$d(x,y)\le u\di(Q_i)$となる$x\in Q_i$が存在するので
+\[
+\sqrt{n}\ell(Q_i)\le d(Q_i,O^c)\le d(x, O^c)\le d(x,y)+d(y,O^c)\le u\di(Q_i)+d(R_i, O^c)
+\]
+からわかる。
+\end{proof}
+
+\begin{lem}\label{H}
+先の命題と同じ記号を用いる。このとき
+\[
+2^{-1}\di(R_i)\le d(R_i,O^c)\le 4\di(R_i)
+\]
+が成り立つ。
+\end{lem}
+\begin{proof}
+$\ep\in (0,4^{-1})$からわかる。
+\end{proof}
+
+\section{Whitney Partition of unity}
+この節ではWhitney decompositionを用いて、微分の大きさも制御できるような単位の分割を構成することが目的である。
+
+$\{Q_i\}$を$O$のWhitney分解であるとする。
+そして
+$Q=[-2^{-1}, 2^{-1}]^n$上で恒等的に$1$の値をとり、$R=\cl((1+u)Q)\ (u\in (0,4^{-1}))$の外では$0$の値をとるような$C^{\infty}$関数
+\[
+\tau:\rr^n\to [0,1]
+\]を考える。
+$Q_i$の中心を$c_i$として、
+\[
+\tau_i=\psi\left(\frac{x-c_i}{\ell(Q_i)}\right)
+\]
+と定義する。
+$\supp(\tau_i)\subset (1+u)Q_i$なので$\{\psi_i\}$は局所有限である。よって
+\[
+T(x)=\sum_{i\in \nn}\tau_i(x)
+\]
+と定義できる。
+そして
+\[
+\phi_i(x)=\frac{\tau_i(x)}{T(x)}
+\]
+と定義する。
+任意の$k\in Z_n$に対して
+$N_k=\max_{x\in \rr^n}|\partial_k\tau(x)|$とし、
+$H_m=\max_{k\in Z_n(m)}N_k$
+とする。
+
+$\{Q_i\}$は全て立方体であり、$Q_i$と隣り合う$\{Q_i\}$の元も$Q_i$の大きさで制御できることと、二進立方体$Q$に隣接する、$Q$と世代が高々二個しか違わない二進立方体の配置は有限個しかないので以下のことが成り立つ。
+\begin{lem}
+ある$M>1$が存在して、任意の$x\in O$に対して
+\[
+\frac{1}{M}\le T(x)
+\]
+が成り立つ。
+\end{lem}
+
+\emph{以下ではこの文章の一番最後の節に書いたおまけの節の結果を用いる。読むのが面倒な時は命題\ref{pou}を認めて次の説に進むのが良い。}
+
+おまけの節の結果に$d_i=\partial_{i}$、$v_0=T$を代入した結果を用いる。
+命題\ref{gyakusuu}から次のことがわかる。
+\begin{lem}$M$を先の補題にでてきたものとする。
+任意の$x\in R_i$と
+任意の$k\in Z_n$に対して
+\[
+\left|\partial_k\left(\frac{1}{T}\right)(x)\right|\le 
+\left(M^{\sigma_k+1}(12^n4H_{\sigma_k})^{\sigma_k}\sum_{s\in J(\sigma_k)}\Gamma_s\right)\ell(Q_i)^{-\sigma_k}
+\]
+\end{lem}
+\begin{proof}
+まず、
+$|\partial_k\tau_i|\le N_k\ell(Q_i)^{-\sigma_k}$がわかる。そして
+命題\ref{gyakusuu}より
+\[
+\left|\partial_k\left(\frac{1}{T}\right)\right|\le 
+\sum_{s\in I(\sigma_k+1,\sigma_k)}\Gamma_s|\Delta(s)|
+\]
+がわかるが、$I(\sigma_k+1, \sigma_k)$の定義より、
+\[
+\sum_{s\in I(\sigma_k+1,\sigma_k)}\Gamma_s|\Delta(s)|\le 
+M^{\sigma_k+1}\sum_{s\in I(\sigma_k+1, \sigma_k)}\Gamma_s|\Delta(s^{*})|
+\]
+となる。
+ここで、$s^{*}$は$s^{*}(0)=0$で、$k\in Z_n\setminus\{0\}$については$s^{*}(k)=s(k)$で定義される$C_n$の元である。
+$s\in I(\sigma_k+1,\sigma_k)$に対して
+$\supp(s^{*})=\{k(1), k(2), \dots, k(v)\}$とすると
+\[
+\Delta(s^*)=(\partial_{k(1)}T)^{s(k(1))}(\partial_{k(2)}T)^{s(k(2))}\dots (\partial_{k(v)}T)^{s(k(v))}
+\]
+となる。
+さらに$T(x)=\sum_{i=1}^w\tau_{\lambda(i)}\ (w\le 12^n)$とすると
+\[
+|\partial_l(T)(x)|\le \sum_{i=1}^w|\partial_l\tau_{\lambda(i)}|\le 12^n4N_l\ell(Q_i)^{-\sigma_l}
+\le 12^n4H_l\ell(Q_i)^{-\sigma_l}
+\]
+なので$s\in I(\sigma_k+1, \sigma_k)$について
+\[
+|\Delta(s^*)|\le (12^n4H_{\sigma_k})^{(\sum_{i=1}^vs(k(i)))}\ell(Q_i)^{-\sum_{i=1}^v\sigma_{k(i)}s(i)}
+\le (12^n4H_{\sigma_k})^{\sigma_k}\ell(Q_i)^{-\sigma_k}
+\]
+がわかる。
+これらのことから、補題が成り立つことがわかる。
+\end{proof}
+
+\begin{lem}
+任意の$k$に対してある$C_{k}$が存在して、任意の$i\in \nn$について
+\[
+|\partial_k\phi_i|\le C_k\cdot\ell(Q_i)^{-\sigma_k}
+\]
+\end{lem}
+\begin{proof}
+$\phi_i=\tau_i/T$なので
+\[
+\partial_k(\phi_i)=
+\partial_k\left(\frac{\tau_i}{T}\right)=
+\sum_{l\le k}\binom{k}{l}(\partial_{k-l}\tau_i)(\partial_l(T^{-1}))
+\]
+となる。先の補題から
+
+\begin{align*}
+&|\partial_k(\phi_i)|\le 
+\sum_{l\le k}\binom{k}{l}|(\partial_{k-l}\tau_i)||(\partial_l(T^{-1}))|\le\\
+&\sum_{l\le k} \binom{k}{l}N_{k-l}\ell(Q_i)^{-\sigma_{k}+\sigma_l}
+\left(M^{\sigma_l+1}(12^n4H_{\sigma_l})^{\sigma_l}\sum_{s\in I(\sigma_l+1,\sigma_l)}\Gamma_s\right)\ell(Q_i)^{-\sigma_l}\le \\
+&\left(M^{\sigma_k+1}(12^n4H_{\sigma_k})^{\sigma_k}\sum_{s\in I(\sigma_k+1,\sigma_k)}\Gamma_s\right)\left(N_k\sum_{l\le k}\binom{k}{l}\right)
+\ell(Q_i)^{-\sigma_k}
+\end{align*}
+よって、
+\[
+C_k=\left(M^{\sigma_k+1}(12^n4H_{\sigma_k})^{\sigma_k}\sum_{s\in I(\sigma_k+1,\sigma_k)}\Gamma_s\right)\left(N_k\sum_{l\le k}\binom{k}{l}\right)
+\]
+とおけば命題の主張は成り立つ。
+\end{proof}
+以上の議論をまとめると次のことがわかる。
+\begin{prop}\label{pou}
+$\{\phi_i\}$は先に定義された関数とする。このとき次のことが成り立つ。
+\begin{enumerate}
+\item 任意の$i\in \nn$について$\supp(\phi_i)\subset R_i$
+\item 
+\[
+\sum_{i\in \nn}\phi_i=\chi_O
+\]
+\item 任意の$k\in Z_n$に対してある$C_{k}$が存在して、任意の$i\in \nn$について
+\[
+|\partial_k\phi_i|\le C_k\cdot\ell(Q_i)^{-\sigma_k}
+\]が成り立つ。
+\end{enumerate}
+\end{prop}
+
+\section{Whitney Extension}
+この節ではWhitneyの拡張定理を証明する。まず最初に微分可能性の仮定が有限な場合を証明する。
+\begin{thm}\label{yuugen}
+$m\in \zz_{\ge 0}$で、$A$は$\rr^n$の閉集合とし、$f:A\to \rr$をWhitneyの意味で$C^m$級とし、$\{f_k\}_{k\in Z_n(m)}$を、そのWhitney導関数とする。
+このとき$C^m$級関数$g:\rr^n\to \rr$が存在して
+任意の$a\in A$と$k\in Z_n(m)$に対して
+\[
+\partial_kg(a)=f_k(a)
+\]
+が成り立ち、$\rr^n\setminus A$上で$g$は$C^{\infty}$級となる。
+\end{thm}
+\begin{proof}
+$g$を構成して、
+任意の$\ep>0$と任意の$a\in A$および任意の$k\in Z_n(m)$について、ある$\delta>0$が存在して、
+$x\in \rr^n\setminus A$が$\|x-a\|<\delta$を充たすならば
+\[
+|\partial_kg(x)-f_k(a)|<\ep
+\]
+を示せばよい。
+何故ならば、
+$g$を$\rr^n$の軸に平行な直線に制限して、
+命題\ref{bibun}を用いれば、
+任意の$k\in Z_n(m)$と$a\in A$について$\partial_kg(a)=f(a)$
+がわかるからである。
+\par
+まず$g$を構成する。
+$\{Q_i\}$を$\rr^n\setminus A$のWhitney分解とし、$\{\phi_i\}$をそのWhitneyの単位の分割とする。また、$R_i=\cl((1+u)Q_i)\ (u\in (0,4^{-1}))$とする。
+そして
+$a_i$を
+\[
+d(A, R_i)=d(a_i, R_i)
+\]
+となる$a_i\in A$とする。
+これらを用いて
+\[
+g(x)=
+\begin{cases}
+\sum_{i\in \nn}\phi_i(x)\psi(x;a_i) & \text{$x\in \rr\setminus A$}\\
+f(x) & \text{$x\in A$}
+\end{cases}
+\]
+と定義する。
+以下では、初めに述べた主張を示そう。
+$l\in Z_n$に対して$C_l$は命題\ref{pou}に現れる定数とする。
+さらに以下のように定数を定義する。
+\begin{align*}
+&C=\max_{\sigma_l\le m}C_l\\
+&E= \sup_{y\in B(a,2)\cap A}\sum_{\sigma_l\le m-\sigma_k, l\neq 0}\frac{|f_{k+l}(y)|}{l!}<\infty
+\end{align*}
+任意に$\ep>0$を与える。そして$\eta$を
+\[
+\eta=\frac{\ep}{4}\frac{1}{12^n((m+2)!)^n(20\sqrt{n})^m(C+1)}
+\]
+とおき、
+$\theta_1$を$\|y-a\|<\theta_1$ならば、$t\ (\sigma_t\le m)$について
+\[
+|R_t(y,a)|<\|y-a\|^{m-\sigma_t}\frac{\ep}{2^m6}
+\]
+を満たすように取り、
+$\theta_2$を、$\theta_2<1$で$\|y-a\|, \|z-a\|<\theta_2$ならば任意の$t\ (\sigma_t\le m)$について
+\[
+|R_t(y;z)|\le \|y-z\|^{m-\sigma_t}\eta
+\]
+を充たすように取る。
+そして$\delta$を
+%\[
+%\delta=\frac{1}{2}\min\left\{\frac{\theta_1}{2}, \frac{\theta_2}{2+H}, \frac{\ep}{18(E+1)}, \frac{1}{3}, \frac{1}{2(3+H)}\right\}
+%\]
+\[
+\delta=\frac{1}{2}\min\left\{\frac{\theta_1}{2}, \frac{\theta_2}{4}, \frac{\ep}{18(E+1)}, \frac{1}{10}\right\}
+\]
+
+と定義する。
+いまから$x\in \rr^n\setminus A$が$\|x-a\|<\delta$を充たすならば
+\[
+|\partial_kg(x)-f_k(a)|<\ep
+\]
+を示す。
+
+$D=d(x, A)$
+とし、$b\in A$を$D=d(x,b)$でかつ$b\in B(x, 1)$となるものとする。このような$b$は存在する。なぜなら$d(x,A)\le d(x, a)<\delta<1$だからである。$d(a,x)<\delta<1$より、$a\in B(x,1)$でもあるので上のような$b$は$b\in B(a,2)$も充たす。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+そして$\|x-b\|=d(x,A)\le d(x,a)$なので
+\[
+d(b,a)\le d(b,x)+d(x,a)\le 2\delta
+\]
+であるから、特に$d(b,a)<\theta_1$となり、
+\begin{align*}
+\|R_k(y,a)\|<\|b-a\|^{m-\sigma_k}\frac{\ep}{2^m6}\le (2\delta)^{m-\sigma_k}\frac{\ep}{2^m6}\le \frac{\ep}{6}
+\end{align*}
+がわかる。
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+さて
+\begin{align*}
+\psi_k(b;a)=\sum_{\sigma_l\le m-\sigma_k}\frac{f_{k+l}(a)}{l!}(b-a)^l
+=f_k(a)+\sum_{\sigma_l\le m-\sigma_k, l\neq 0}\frac{f_{k+l}(a)}{l!}(b-a)^l
+\end{align*}
+から
+\begin{align}\label{ba}
+|\psi_k(b;a)-f_k(a)|\le \sum_{\sigma_l\le m-\sigma_k, l\neq 0}\frac{|f_{k+l}(a)|}{l!}\| b-a\|^{\sigma_l}
+\end{align}
+がわかる。
+同様にして
+\begin{align}\label{xb}
+|\psi_k(x;b)-f_k(b)|\le \sum_{\sigma_l\le m-\sigma_k, l\neq 0}\frac{|f_{k+l}(b)|}{l!}\| x-b\|^{\sigma_l}
+\end{align}
+がわかる。
+さて、$2\delta<1$から$\|b-a\|<1$から
+$\|b-a\|^{\sigma_l}\le \|b-a\|$となる。よって、$(\ref{ba})$と$E$の定義を思い出すと、
+\[
+|\psi_k(b;a)-f_k(a)|\le E \|b-a\|\le 2E\delta<\ep/6
+\]
+となる。
+また、
+$d(x,b)\le d(x,a)+d(a,b)\le 3\delta<1$より、
+$\|x-b\|^{\sigma_l}\le \|x-b\|$であり、$E$の定義と$b\in B(a,2)$を思い出すと、$(\ref{xb})$から
+\begin{align}
+|\psi_k(x;b)-f_k(b)|\le E\|x-b\|\le 3E\delta<\ep/6
+\end{align}
+を得る。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+そして
+\begin{align}
+|f_k(b)-f_k(a)|\le |\psi_k(b,a)-f_k(a)|+|R_k(b;a)|
+\end{align}
+%%%%%%%%%%%%%%%%%%%%%%
+
+と以上の評価から結局
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{align*}
+|\psi_k(x;b)-f_k(a)|&\le |\psi_k(x;b)-f_k(b)|+|f_k(b)-f_k(a)|\\
+&\le |\psi_k(x;b)-f_k(b)|+|\psi_k(b,a)-f_k(a)|+|R_k(b;a)| < \ep/2
+\end{align*}
+となるので、
+\begin{align}\label{444}
+|\psi_k(x;b)-f_k(a)|<\ep/2
+\end{align}
+がわかる。
+%%%%%%%%%%%%%%
+
+さて、
+$x\in R_i$となる$i$を、番号付けて$\lambda(1), \lambda(2),\dots \lambda(s)\ (s\le 12^n)$とする。
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+ここで、$d(a_i,y_i)=d(a_i,R_i)=d(A,R_i)$となる$y_i$をとる。すると
+\[
+d(a,a_i)\le d(x,a)+d(x,a_i)\le d(a,x)+d(x,y_i)+d(y_i,a_i)\le d(a,x)+\di(R_i)+d(A,R_i)
+\]
+がわかる。ここで、$\di(R_i)\le 2d(A,R_i)\le 2d(a, R_i)\le 2d(a,x)$かつ、$d(A,R_i)\le d(a,x)$なので
+\[
+d(a,a_i)\le 4d(x,a)\le 4\delta<\theta_2
+\]
+で、また$d(a,b)<2\delta<\theta_2$なので
+結局、$d(a_i, a)<\theta_2$かつ$d(b,a)<\theta_2$であるから
+任意の$t\ (\sigma_t\le m)$について
+\begin{align}
+|R_t(a_i;b)|\le \|a_i-b\|^{m-\sigma_t}\eta
+\end{align}
+が成り立つ。
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+$\alpha_{i,k}(x)=\psi_k(x;a_i)-\psi_k(x;b)$と置く。
+このとき命題\ref{RRR}から
+\begin{align}
+|\alpha_{i;k}(x)|\le \sum_{\sigma_l\le m-\sigma_k}\frac{|R_{k+l}(a_i;b)|}{l!}\|x-a_i\|^{\sigma_l}
+\end{align}
+となる。
+%%%%%%%%%%%%%%%%%%%%%%
+
+$d(a_i,b)\le d(x, a_i)+d(x,b)=d(x,a_i)+d(x,A)\le 2d(x,a_i)$に注意しよう。
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\[
+g(x)=\psi(x;b)+\sum_{i_=1}^s\phi_{\lambda(i)}(x)\alpha_{\lambda(i);0}(x)
+\]
+を$k$階微分すると
+\[
+\partial_kg(x)=\psi_k(x;b)+\sum_{i_=1}^s\sum_{l\le k}\binom{k}{l}\partial_l\phi_{\lambda(i)}(x)\alpha_{\lambda(i);k-l}(x)
+\]
+を得る。
+$\sum_{\sigma_l\le m-\sigma_k}\frac{1}{l!}\le (m+1)^n$を踏まえて、
+\[
+|\alpha_{i;k}(x)|\le \sum_{\sigma_l\le 
+m-\sigma_k}\frac{|R_{k+l}(a_i;b)|}{l!}\|x-a_i\|^{\sigma_l}
+\le  \sum_{\sigma_l\le m-\sigma_k}2^{m-\sigma_{k+l}}\frac{1}{l!}\|x-a_i\|^{m-\sigma_k}\eta\le 2^m(m+1)^n\|x-a_i\|^{m-\sigma_k}\eta
+\]
+を得る。また、
+\begin{align*}
+d(x,a_i)\le d(x,y_i)+d(y_i,a_i)\le \di(R_i)+d(A,R_i)\le \di(R_i)+4\di(R_i)\\
+=5\di(R_i)=5(1+u)\di(Q_i)\le 10\sqrt{n}\ell(Q_i)
+\end{align*}
+と
+\[
+d(x,a_i)\le d(x,a)+d(a,a_i)\le 5d(x,a)<5\delta<2^{-1}
+\]
+が成り立つことに注意しよう。
+$s\le 12^n$であり、また
+$\binom{k}{l}\le (m!)^n$および
+$|\partial_l\phi_{\lambda(i)}(x)|\le C_l\cdot\ell(Q_i)^{-\sigma_l}$
+が成り立つことや、
+$C=\max_{l\le m}C_l$, 
+$\sum_{l\le k}1\le (m+1)^n$
+や、$(m+1)^{2n}(m!)^n\le ((m+2)!)^n$とかWhitneyの単位の分割の性質
+を踏まえると
+\begin{align*}
+|\partial_kg(x)-\psi_k(x;b)|
+&\le\sum_{i=1}^s\sum_{l\le k}\binom{k}{l}|\partial\phi_{\lambda(i)}(x)||\alpha_{\lambda(i);k-l}(x)|\\
+&\le\sum_{i=1}^s\sum_{l\le k}\binom{k}{l}C_l\cdot\ell(Q_i)^{-\sigma_l}\cdot 2^m(m+1)^n\|x-a_i\|^{m-\sigma_k+\sigma_l}\eta\\
+&\le \sum_{i=1}^s\sum_{l\le k}2^m(m!)^n(m+1)^n(10\sqrt{n})^{\sigma_l}C\|x-a_i\|^{-\sigma_l}\cdot \|x-a_i\|^{m-\sigma_k+\sigma_l}\eta\\
+&\le 2^m(m+1)^n(m+1)^n(m!)^nC(10\sqrt{n})^{m}\sum_{i_=1}^s\|x-a_i\|^{m-\sigma_k}\eta\\
+&\le 2^m12^n ((m+2)!)^n(10\sqrt{n})^m \left(\frac{1}{2}\right)^{m-\sigma_k}C\eta\\
+& < 2^m12^n ((m+2)!)^n(10\sqrt{n})^mC \eta \le \frac{\ep}{2}
+\end{align*}
+がわかる。この式と
+$(\ref{444})$から
+\[
+|\partial_kg(x)-f_k(a)|<\ep
+\]
+がわかる。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{equation}{0}
+\begin{thm}
+$A$を$\rr^n$の閉集合とし、$f:A\to \rr$をWhitneyの意味で$C^{\infty}$級とし、$\{f_k\}_{k\in Z_n}$を$f$のWhitney微分とする。このとき$\rr^n$上の$C^{\infty}$級関数$g:\rr^n\to \rr$が存在して
+任意の$a\in A$と任意の$k\in Z_n$について
+\[
+\partial_kg(a)=f_k(a)
+\]
+が成り立つ。
+\end{thm}
+\begin{proof}
+$p\in \nn$について
+\[
+\psi_{p, k}(x;y)=\sum_{\sigma_l\le p-\sigma_k}\frac{f_{k+l}(y)}{l!}(x-a)^l
+\]
+と定義する。
+$\{Q_i\}$を$\rr^n\setminus A$のWhitney分解とし、$\{\phi_i\}$をそのWhitneyの単位の分割とする。$R_i=(1+u)Q_i\ (u\in (0,4^{-1}))$とする。
+適当に$o\in A$を取り、$S_p=B(o, 2^p)$とする。
+そして各$p\in \nn$について
+\[
+L_p=\sup\{|f_k(x)|\mid x\in A\cap S_p\}
+\]
+\[
+C^{(p)}=\max\{C_k\mid \sigma_k\le p\}
+\]
+と定義する。ここで$C_k$は命題\ref{pou}で述べられている定数である。
+そしてさらに
+$\{\delta_p\}_{p\in \nn}$を
+\begin{align}
+&\delta_p<\frac{\delta_{p-1}}{4}\\
+&\ \delta_{p}<\frac{1}{2^{p}12^n3((p+2)!)^{n+1}(10\sqrt{n})^{p+1} C^{(p)}L_{p+1}}
+\end{align}
+の両方を充すような実数の列とする。
+
+各$i\in \nn$について
+\[
+\delta_{\gamma(i)+1}\le d(A, R_i)<\delta_{\gamma(i)}
+\]
+となる風に$\gamma(i)$を定める。
+そして
+$a_i$を
+\[
+d(A, R_i)=d(a_i, R_i)
+\]
+となる$a_i\in A$とし、関数$h:\rr^n\to \rr$を
+\begin{align*}
+h(x)=\begin{cases}
+\sum_{i\in \nn}\phi_i(x)\psi_{\gamma(i), 0}(x;a_i) & \text{$x\in \rr\setminus A$}\\
+f(x) & \text{$x\in A$}
+\end{cases}
+\end{align*}
+と定義する。
+
+また補助的に各$m\in \nn$について$g_m:\rr^n\to \rr$を
+\[
+g_m(x)=
+\begin{cases}
+\sum_{i\in \nn}\phi_i(x)\psi_{\sigma_k,0}(x;a_i) & \text{$x\in \rr\setminus A$}\\
+f(x) & \text{$x\in A$}
+\end{cases}
+\]
+と定義する。
+定理\ref{yuugen}の証明を見ればわかるように、
+このように構成された$g$は$C^m$級関数で、任意の$a\in A$と任意の$k\in Z_n(m)$に対して、
+\[
+\partial_kg_m(a)=f_k(a)
+\]
+を充す。
+
+定理を示すには、任意の$k\in Z_n$と任意の$\ep$と任意の$a\in A$を与えたときに$\delta>0$が存在して
+$\|x-a\|<\delta$ならば
+\[
+|\partial_kh(x)-\partial_kg_{\sigma_k}(x)|<\ep
+\]
+となることを示せばよい。
+以下ではこれを示してゆく。
+自然数$p\in\nn$を
+\begin{align}
+p\ge \sigma_k\\
+a\in S_p\\
+2^{-p}<\ep
+\end{align}
+を充たすものとする。
+$\delta$を$\delta=2^{-1}\min\{\delta_p, 5^{-1}\}$と取る。
+$\|x-a\|<\delta$としよう。
+
+$q$を
+\[
+\delta_{q+1}\le d(x, A)< \delta_{q}
+\]
+となるようにとる。すると$\delta_{q+1}\le \delta_p$なので$q\ge p$である。
+また、$x\in R_i$となる$i$について$\delta_{\gamma(i)}\le \delta_p$なので$\gamma(i)\ge p$でもある。
+そして$d(y,A)=d(R_i,A)$となる$y$をとれば
+\[
+d(x,A)\le d(x,y)+d(y,A)\le \di(R_i)+d(R_i, A)\le 3d(A,R_i)
+\]
+なので$\delta_{q+2}<\delta_{\gamma(i)}$となり$\gamma(i)\le q+1$がわかる。
+
+\[
+\beta_i(x)=\psi_{\gamma(i);0}(x;a_i)-\psi_{\sigma_k;0}(x;a_i)
+\]
+
+とすれば
+\[
+h(x)=g_{\sigma_k}(x)+\sum_{i=1}^s\phi_{\lambda(i)}\beta_{\lambda(i)}(x)
+\]
+である。
+さて$\gamma(i)\ge p\ge \sigma_k$に注意して
+\begin{align}
+\partial_j\beta_{i}(x)=\sum_{\sigma_l=\sigma_k-\sigma_j+1}^{\gamma(i)-\sigma_j}\frac{f_{j+l}(a_i)}{l!}(x-a_i)^{l}
+\end{align}
+を得る。
+$d(x,a_i)\le 5d(x,a)\le 5\delta<2^{-1}<1$
+および
+\[
+d(x,a_i)\le d(x,y_i)+d(y_i,a_i)\le \di(R_i)+d(A,R_i)\le 3d(A,R_i)\le 3d(x,A)\le 3\delta_q
+\]
+から
+\begin{align}
+|\partial_j\beta_{i}(x)|\le 3(q+1)^nL_{q+1}\|x-a_i\|^{\sigma_k-\sigma_j}\delta_q
+\end{align}
+を得る。ここで、
+\[
+\sum_{\sigma_l=\sigma_k-\sigma_j+1}^{\gamma(i)-\sigma_j}1\le 
+\sum_{l_i\le \gamma(i)}1\le (\gamma(i))^n\le (q+1)^n
+\]
+を用いた。
+命題\ref{pou}を思い出すと、任意の$t\in Z_n$について
+\[
+|\partial_t\phi_i(x)|\le C_t\ell(Q_i)^{-\sigma_t}\le C_t(10\sqrt{n})^t\|x-a_i\|^{-\sigma_t}
+\]
+となることがわかる。
+
+以上のことから
+\begin{align*}
+|\partial_kh(x)-\partial_kg_{\sigma_k}(x)|&\le 
+\sum_{i=1}^s\sum_{j}\binom{k}{j}|\partial_{k-j}\phi_{\lambda(i)}(x)||\partial_{j}\beta_{\lambda(i)}(x)|\\
+&\le 12^n (10\sqrt{n})^{\sigma_k}\sum_j\binom{k}{j}\|x-a_i\|^{-(\sigma_k-\sigma_j)}C^{(\sigma_k)}3(q+1)^nL_{q+1}\|x-a_i\|^{\sigma_k-\sigma_j}\delta_q\\
+&=12^n (10\sqrt{n})^{q+1}(q+1)^n\sum_j\binom{k}{j}C^{(\sigma_k)}3L_{q+1}\delta_q\\
+\end{align*}
+がわかる。
+ところで、
+$\sigma_k<p\le q$なので
+\[
+\sum_{j\le k}\binom{k}{j}\le\sum_{j\le k}(\sigma_k!)^n
+\le \sum_{j_i\le \sigma_k}(\sigma_k!)^n\le \sigma_k((\sigma_k)!)^{n}\le ((q+1)!)^{n+1}
+\]
+が成り立ち、また、
+\[
+(q+1)^n((q+1)!)^n\le ((q+2)!)^{n+1}
+\]
+なので
+\[
+|\partial_kh(x)-\partial_kg_{\sigma_k}(x)|\le 3\cdot12^n((q+2)!)^{n+1}(5\sqrt{n})^{q+1}C^{(q)} L_{q+1}\delta_q
+\]
+を得る。
+また、$\delta_q$の定義から
+\[
+3\cdot12^n((q+2)!)^{n+1}(5\sqrt{n})^{q+1}C^{(q)} L_{q+1}\delta_q<2^{-q}\le 2^{-p}<\ep
+\]
+なので結局
+\begin{align}
+|\partial_kh(x)-\partial_kg_{\sigma_k}(x)|<\ep
+\end{align}
+がわかる。
+\end{proof}
+
+
+%%%%5
+%%%%%%%%%%%%
+%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%
+
+
+以上の二つをまとめると以下のようになる。
+\begin{thm}
+$m\in \zz_{\ge 0}\cup \{\infty\}$とし、また、
+$A$は$\rr^n$の閉集合とする。
+関数$f:A\to \rr$はWhitneyの意味で$C^m$級で、$\{f_k\}_{k\in Z_n(m)}$はそのWhitney導関数とする。このとき$C^m$級関数$g:\rr^n\to \rr$が存在して
+任意の$a\in A$と任意の$k\in Z_n(m)$について
+\[
+\partial_kg(a)=f_k(a)
+\]
+が成り立ち、$\rr^n\setminus A$上で$g$は$C^{\infty}$級となる。
+\end{thm}
+この定理がいわゆるWhitneyの拡張定理である。
+Whitneyはより強く、$\rr^n\setminus A$上で$C^{\omega}$級になるような拡張を構成しているが、使わないので細かいことは省略する。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%5
+
+\section{応用: $1$より大きい指数でヘルダー連続になる関数}
+\begin{df}
+写像$f:X\to Y$が$\alpha$-H\"olderであるとはある$M$が存在して任意の$x,y\in X$に対して
+\[
+d_Y(f(x),f(y))\le (d_X(x,y))^{\alpha}
+\]
+を充すときにいう。
+\end{df}
+
+\begin{prop}
+$A$を$\rr^n$の閉集合とし、
+$\alpha\ge 1$として、さらに、
+写像$f:A\to \rr$は$\alpha$-H\"olderとする。
+そして、
+ 各$k\in Z_n(\lfloor \alpha \rfloor)$について、
+ $A$上の関数族を、$k\neq 0$ならば$f_k(x)\equiv 0$と定義し、$f_0=f$と定義する。
+このとき、$\{f_k\}_{k\in Z_n(\lfloor \alpha \rfloor)}$は、$f$のWhitney導関数になり、
+$f:A\to \rr$はWhitneyの意味で$C^{\lfloor\alpha \rfloor}$ 級関数になっている。
+
+\end{prop}
+\begin{proof}
+簡単に確かめられる。
+\end{proof}
+このことと、Whitneyの拡張定理から次のことがわかる。
+\begin{prop}
+閉集合$A\subset \rr^n$上で定義された$\alpha$-H\"older写像に対して、
+$\rr^n$上の $C^{\lfloor \alpha \rfloor}$級関数$F$で、
+任意の$k\in Z_n(\lfloor \alpha \rfloor)$について、
+\[
+\partial_kF=0
+\]
+となるものが存在して、
+\[
+F|A=f
+\]
+を充す。
+\end{prop}
+\begin{prop}[Sardの定理にまつわる例]
+写像$f:\rr^2\to \rr$で、$f(C_f)$が一次元ルベーグ測度で正になるものが存在する。
+\end{prop}
+\begin{proof}
+写像$f_0,f_1,f_2,f_3:\rr^2\to \rr$を
+\begin{align*}
+&f_0(x)=3^{-1}x\\
+&f_1(x)=3^{-1}x+(2^{-1}, 1/6)\\
+&f_2(x)=3^{-1}x+(2^{-1}, 2^{-1})\\
+&f_3(x)=3^{-1}x+(1/6, 2^{-1})
+\end{align*}
+と定義する。$f_i(Q)\subset Q$を充すことに注意しよう。
+$Q(n_1)=f_{n_1}(Q)\ (n_1\in \{0,1,2,3\})$と定め、
+一般に、$Q(n_1, n_2,\dots, n_{k})$が定義されたとき、
+$Q(n_1, n_2,\dots, n_k,n_{k+1})=f_{n_{k+1}}(Q(n_1, n_2,\dots, n_k))$
+と定義する。
+そして
+\[
+A_k=\bigcup_{i\in \{1,2,\dots, k\},\ n_i\in \{0,1,2,3\}}Q(n_1, n_2,\dots, n_k)
+\]
+と定義し、
+\[
+P=\bigcap_{k\in \nn} A_k
+\]
+とする。$P$はカントール集合と同相である。
+各$x\in P$に対して、$x\in Q(a_1, a_2,\dots, a_k)$かつ
+$x\in Q(b_1, b_2,\dots, b_l)$で$k\le l$ならば、
+任意の$i\in \{1,2,\dots, k\}$に対して$a_i=b_i$であるから、$x$に対して
+無限列$\{n_i(x)\}_{i\in \nn}$で
+\[
+\{x\}=\bigcap_{k\in \nn}Q(n_1(x), n_2(x),\dots, n_k(x))
+\]
+となるものがただ一つ定まる。これを用いて、
+写像$f:P\to \rr$を
+\[
+f(x)=\sum_{k=1}^{\infty}\frac{n_k(x)}{4^k}
+\]
+と定義する。
+さて、$x,y\in P$について、$k$番目で初めて$n_k(x)\neq n_k(y)$となったとすると、
+\[
+3^{-k}\le \|x-y\|
+\]
+となる。
+そして
+\[
+|f(x)-f(y)|\le \sum_{i=k}\frac{3}{4^i}\le \frac{1}{4^{k-1}}
+\]
+となるので、$s=\log 4/\log 3$として
+\[
+|f(x)-f(y)|\le 4^{-1} \|x-y\|^{s}
+\]
+が成り立つ。
+また、任意の無限列$\{n_i\}_{i\in \nn}\ (n_i\in \{0,1,2,3\})$に対して
+$n_i(x)=n_i$となる$x\in P$が存在するので、
+$f(P)=[0,1]$である。$s>1$なので、
+この$f$に先の命題を適用し、
+任意の$k\in Z_2(1)$と$x\in P$に対して
+\[
+\partial_kF(x)=0
+\]
+で
+$F|P=f$となる
+$F$を得ると、$P\subset C_F$なので、
+\[
+[0,1]\subset F(C_F)
+\]
+となり、$F$は$C^1$級で$F(C_F)$は正測度を持つ。
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%55
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{おまけ・微分公式と微分のモデル代数}
+この章では微分のモデル代数を導入し、ある特定の微分公式を証明する。
+これを導入する目的は文章の冒頭で述べたとおり、
+わかりやすさの担保であるが、もう一つの理由として
+微分公式に現れる係数が普遍的であることが簡単にわかるためである。
+例えば簡単な微分公式である
+\[
+(f+g)^{'}=f^{'}+g^{'}
+\]
+についても、$f,g$の選び方によっては
+$(f+g)^{'}=2f^{'}$であったり、$(f+g)^{'}=g$であったりするわけである。
+こういう曖昧さを避けるために微分操作を抽象化して微分公式を証明したいと思った。
+しかしながら以下で述べる微分の代数化、抽象化はむしろ万人がある種の微分公式を証明する時に無意識にやっているのだと私は思う。微分可能関数$f$を任意にとってもそれは「不定元」でしかないし、微分もライプニッツ則を充たす準同型でしかないわけである。
+だからと言って今から導入する概念が無駄かというと、（全否定もできないけれど）そうではないと思う。人が無意識に行う推論、操作を発見し具象を与えることもまた数学の営みの一つだと思うからだ。
+
+
+自然数$i\in \{1,2,\dots, n\}$に対して
+$[i]\in Z_n$をその第$j$成分が$\delta_{ji}$となるものと定義する。
+すなわち、$[i]$は第$i$成分が$1$でそれ以外の成分が$0$であるような$Z_n$の元である。
+
+\begin{df}
+
+$R_n=\rr(\{v_k\}_{k\in Z_n})$とする。即ち$k\in Z_n$を添え字とする不定元$v_k$全体から生成される$\rr$係数の有理式環のことである。また写像$d_i:R_n\to R_n\ (i=1,2,\dots, n)$を
+\[
+d_i(1)=0,\ d_i(v_k)=v_{k+[i]},\ d_i(fg)=d_i(f)g+fd_i(g)
+\]
+充たすものとして定義する。このような$d_i$は一意的に定まり、$d_id_j=d_jd_i$を充たす。
+このとき、組$(R_n, \{d_i\}_{i=1,2,\dots, n})$を$n$変数微分のモデル代数と呼ぶことにする。
+\end{df}
+\[
+C_n=\{s:Z_n\to \zz\}
+\]
+\[
+F_n=\{s\in C_n\mid \card(\supp(s))<\infty\}
+\]
+各$s\in F_n$に対して単項式$\Delta(s)\in R_n$を
+\[
+\Delta(s)=\prod_{k\in Z_n}(v_k)^{s(k)}
+\]
+と定義する。
+\[
+\supp(s)=\{k\in Z_n\mid s(k)\neq 0 \}=\{k(1), k(2), \dots, k(l)\}
+\]
+と置けば、
+\[
+\Delta(s)=(v_{k(1)})^{s(k(1))}(v_{k(2)})^{s(k(2))}\cdots (v_{k(l)})^{s(k(l))}
+\]
+と書くこともできる。
+$a, b\in \nn$に対して$F_n$の部分集合を
+\[
+I(a, b)=\left\{s\in F_n\mid 1\le -s(0)\le a, \  k\neq0\To s(k)\ge0,\ \sum_{k\neq 0}\sigma_ks(k)=b\right\}
+\]
+と定義する。
+また、$\{\Delta(s)\}_{s\in I(a,b)}$から生成される$\rr$線形空間を$S(a,b)$と書くことにする。各不定元$v_k$や不定元の冪らはもちろん線形独立なので、$\{\Delta(s)\}_{s\in I(a,b)}$から自由生成される$\rr$線形空間と$R_n$の中で$\{\Delta(s)\}_{s\in I(a,b)}$が張る$\rr$線形空間は標準的に同型になる。
+$s\in I(a,b)$について$\Delta(s)$はおよそ次のような形をしている。
+\[
+\frac{(v_{k_1})^{s(k_1)}(v_{k_2})^{s(k_2)}\cdots (v_{k_l})^{s(k_l)}}{v_0^{s(0)}}
+\]
+
+補助的に
+\[
+J(b)=\left\{s\in F_n\mid s(0)=0, \  k\neq0\To s(k)\ge0,\ \sum_{k\neq 0}\sigma_ks(k)=b\right\}
+\]
+と定義しておく。
+$I(a,b)$と$J(b)$は共に有限集合であることに注意しよう。
+\begin{lem}
+$t\in I(a,b)$とする。このとき任意の$i\in{1,2,\dots, n}$について
+\[
+d_i(\Delta(t))\in S(a+1, b+1)
+\]
+である即ち、$I(a+1, b+1)$で添え字つけられた、ある$\rr$の列$\{P_s\}_{s\in I(a+1, b+1)}$が存在して
+\[
+d_i(\Delta(t))=\sum_{s\in I(a+1, b+1)}P_s\cdot\Delta(s)
+\]
+となる。さらに各$P_s$は整数であり、一意的である。
+\end{lem}
+\begin{proof}
+$\Delta(t)$は次のように書ける
+\[
+\Delta(t)=\frac{v_{k(1)}v_{k(2)}\cdots v_{k(l)}}{v_0^{p}}
+\]
+ここで、$k(1),k(2), \dots, k(l)\in Z_n$は重複を許しており、$\sum_{i=1}^{l}\sigma_{k_l}=b$であり、$1\le p\le a$である。さて、
+\begin{align*}
+d_i(\Delta(t))
+&=d_i\left(\frac{v_{k_1}v_{k_2}\cdots v_{k_l}}{v_0^{p}}\right)\\
+&=\frac{d_i(v_{k_1}v_{k_2}\cdots v_{k_l})v_0^p-v_{k_1}v_{k_2}\cdots v_{k_l}d_i(v_0^p)}{v_0^{2p}}\\
+&=\frac{d_i(v_{k_1}v_{k_2}\cdots v_{k_l})v_0^p}{v_0^{2p}}-\frac{v_{k_1}v_{k_2}\cdots v_{k_l}d_i(v_0^p)}{v_0^{2p}}\\
+&=\frac{d_i(v_{k_1}v_{k_2}\cdots v_{k_l})}{v_0^{p}}-p\frac{v_{k_1}v_{k_2}\cdots v_{k_l}d_i(v_0)}{v_0^{p+1}}
+\end{align*}
+であり、また、
+\[
+\frac{d_i(v_{k_1}v_{k_2}\cdots v_{k_l})}{v_0^{p}}\in S(a+1,b+1)
+\]
+であることとその係数が整数であることは簡単に分かるので、定理は成り立つ。$P_s$の一意性は線形独立性から分かる。
+\end{proof}
+この補題を帰納的に用いることで次のことがわかる。
+\begin{prop}\label{gyakusuu}
+$k\in Z_n$は$\sigma_k=m$を充たすとする。このとき有理式
+\[
+(d_1)^{k_1}(d_2)^{k_2}\cdots (d_n)^{k_n}\left(\frac{1}{v_0}\right)
+\]
+は$S(m+1,m)$に属する。即ち、$I(m+1, m)$で添え字つけられた、$\rr$の列$\{\Gamma_s\}_{s\in I(m+1, m)}$が存在して
+\[
+(d_1)^{k_1}(d_2)^{k_2}\cdots (d_n)^{k_n}\left(\frac{1}{v_0}\right)=\sum_{s\in I(m+1, m)}\Gamma_s\cdot\Delta(s)
+\]
+となる。さらに各$\Gamma_s$は整数であり、一意的である。
+\end{prop}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{1}薮田公三,特異積分,岩波数学業書,2010.
+\bibitem{2}L. Grafakos, \textit{Classical fourier analysis}, Springer, GTM249, 2014.
+\bibitem{HH}H. Whitney, \textit{A function not constant on a connected set of critical points}, Duke. Math. J., vol.4(1935), pp514--517.
+\bibitem{H}H. Whitney, \textit{Analytic extension of differentiable functions defined in closed sets}, Trans. Amer. Math. Soc., vol.36, No.1(1934), pp63--89.
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+
