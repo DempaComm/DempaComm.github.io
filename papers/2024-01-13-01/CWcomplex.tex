@@ -1,0 +1,936 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+\usepackage{amscd}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\newcommand{\cl}{\mathrm{CL}}
+
+\title{CW 複体のパラコンパクト性}
+\author{ナンブ　電波通信　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+この文章では
+CW複体のパラコンパクト性
+を証明したいところだが，
+難しいので，歴史というか文献案内と
+簡単に解説できる程度のことについて
+サクッと
+散文的補足を
+行う．
+ブログ記事
+\cite{Den5}の書きなしと思ってもいいし，
+続きと思っても良い．
+
+
+\tableofcontents
+
+
+\section{歴史}
+
+CW複体の概念自体は1949年のWhiteheadの論文
+\cite{MR0030759}
+で与えられたものである．
+
+それでCW複体のパラコンパクト性の話題については，
+1951年の
+Miyazakiの
+論文
+\cite{MR0048793}
+が一番古い論文だと思う．
+この論文
+\cite{MR0048793}
+では弱位相が入った単体的複体について
+それがパラコンパクトであることを示している．
+また論文中において，
+CW複体がパラコンパクトかどうかわからないという旨の記述があるので，この当時の時点では
+CW複体のパラコンパクト性はよく知られてなかったことが窺い知れる．
+
+同じく1951年のBourginの論文
+論文
+\cite{MR0048794}
+でも単体的複体の弱位相はパラコンパクトであることが証明されている．
+
+翌年1952年のDugindjiの論文
+\cite{MR0048821}
+でも単体的複体の弱位相がパラコンパクトであるということを証明している．
+
+単体的複体の位相については
+1952年の
+\cite{dowker1952topology}
+も参照のこと．
+
+
+翌年1952年のMiyazakiの論文
+\cite{MR0054246}
+ではとうとうCW複体のパラコンパクト性が証明されている．
+
+1953--54にかけて発表された
+Morita(森田紀一)の二つの論文\cite{MR0062423}
+と\cite{MR0069478}
+では一般にパラコンパクト空間列からの弱位相を備えた空間はパラコンパクトであることが証明されており，
+CW複体のみならず
+もはや弱位相の一般論に昇華された．
+詳しく見ていこう．1953年のMoritaの論文
+\cite{MR0062423}では次のような弱位相の概念を考えている．
+位相空間
+$X$
+がその閉集合の族
+\textbf{$\{A_{\alpha}\}_{\alpha \in I}$
+に関するMorita弱位相を備えている}とは，
+以下の条件を満たすときにいう．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:mw1}
+この族の任意の部分族の和集合は閉集合である．
+\item\label{item:mw2}
+$X$
+の部分集合
+$U$
+が
+$X$
+の開集合であることと，
+任意の
+$\alpha$
+について
+$U\cap A_{\alpha}$
+が
+$A_{\alpha}$
+の開集合であることは同値である
+\end{enumerate}
+普通は
+\ref{item:mw2}の条件さえ満たせば弱位相と呼ぶので
+Moritaは条件\ref{item:mw1}の分だけ普通より強いものを考えている．
+
+このセッティングのもとで
+Moritaは
+各
+$A_{\alpha}$
+が距離化可能空間であれば
+$X$それ自体はパラコンパクトハウスドルフであることを示している．
+翌年1954年のMoritaの論文
+\cite{MR0069478}
+は上の論文
+\cite{MR0062423}
+の続きであるが，
+この中でMoritaは
+各
+$A_{\alpha}$
+がパラコンパクトハウスドルフであることと
+$X$
+それ自体もパラコンパクトハウスドルフが同値というふうに弱位相とパラコンパクト性の関係を改良して証明した．
+さらに，
+完全正規性，可算パラコンパクト性，
+遺伝的パラコンパクトや遺伝的完全正規なども調べられている．
+
+また$X$が$\{A_{\alpha}\}$からのMoritaの弱位相を備えているときに任意の局所コンパクトハウスドルフ空間$W$
+について$X\times W$は
+$\{A_{\alpha}\times W\}$
+からのMorita弱位相を備えていることが
+\cite{MR0062423}で証明されているし
+(商写像と局所コンパクトハウスドルフの直積が商写像であるというような現象自体は1948年の\cite[Lemma 4]{MR0029503}でも観察されていた)，
+Morita弱位相では正規性が被覆から全体に伝播することも証明されている．
+このことと玉野の定理から
+$X$
+がパラコンパクトであることが
+示される．
+
+ここで注意だが
+玉野の定理とは
+完全正則空間
+$X$
+が完全正則であるための
+必要十分条件が，
+任意の
+コンパクトハウスドルフ空間
+$K$
+との直積空間
+$X\times K$
+が常に
+正規であることを主張する定理である．
+この定理が証明されたのは
+1960年であるから，時間の隔たりを考えるに
+Moritaの論文では使いようがなかったことに
+さらに注意しよう．
+玉野の定理は
+\cite{Den4}
+でも紹介している．
+
+Moritaの弱位相は次の意味で
+閉写像の一般化と見做せる．
+空間
+$X$
+が
+$\{A_{\alpha}\}_{\alpha\in I}$
+に関する弱位相を持つことは次の写像から定まる
+商位相を$X$が備えていることと同値である．
+\[
+p\colon \coprod_{\alpha\in I}A_{\alpha}\to X
+\]
+ここで左辺は位相空間の直和である．
+Moritaの弱位相の条件は
+任意の部分集合
+$J\subset I$
+について
+$p\left(\coprod_{\alpha \in J}A_{\alpha}\right)
+=\bigcup_{\alpha\in J}A_{\alpha}$
+が
+$X$
+の閉集合となることを主張している．
+
+しかし一般には
+$p$
+は
+閉写像とは限らない．
+例えば
+$\rr^{\infty}=\varinjlim \rr^{n}$
+を考えるとこれは
+$\{\rr^{n}\}_{n\in \zz_{\ge 1}}$
+から誘導される
+Moritaの弱位相を持つが，
+各
+$n\in \zz_{\ge 1}$
+について
+$S_{n}=[2^{-n}, 1-2^{-n}]\subset \rr\subset \rr^{n}$
+を考えると
+$\coprod_{n\in \zz_{\ge 1}}S_{n}$
+は
+$\coprod_{n}\rr^{n}$のなかの閉集合であるが
+その像は
+$(0, 1) \subset \rr\subset  \rr^{\infty}$と
+なり閉集合ではない．
+無限次元の射影空間や球面でも同様なので，
+たとえ
+$X_{n}$がコンパクトというすごい綺麗な空間でも
+このMoritaの弱位相の空間へ都合のいい空間から閉写像
+が伸びることはあまり期待できそうにない．
+
+ただし，
+$\{A_{\alpha}\}$が
+局所有限な
+閉集合の族であれば上の商写像
+$p$は閉写像になっており，
+単純化された状況においては閉写像が現れるという
+意味でMoritaの弱位相は閉写像による商位相の一般化と見做せる．
+
+1957年の
+Michael の定理
+\cite{MR0087079}
+によればパラコンパクト空間の閉写像による像はパラコンパクトである．
+Michaelの論文
+以前にある意味で閉写像によるパラコンパクト性の保存のような現象を発見したのは大変興味深いと思う．
+ちなみに以上の論文はほとんど全てオープンアクセスだったと思うのでご家庭のインターネットでご覧できると思う．
+
+\section{散文的補足}
+
+\subsection{Morita弱位相の正規性}
+
+Morita弱位相が正規性を反映するという議論を紹介する．
+
+\begin{thm}\label{thm:mw}
+位相空間$X$は閉集合族
+$\{A_{i}\}_{i\in I}$
+から誘導される
+Morita弱位相を備えているとする．
+このときもしも各$A_{i}$
+が正規ハウスドルフならば
+$X$もそうである．
+\end{thm}
+\begin{proof}
+$X$は$\{A_{i}\}_{i\in I}$から誘導される弱位相を備えているので，特に$T_{1}$，つまり一点が閉集合であることがわかる．
+今からは
+$X$上でTietze--Urysohnの補題が成立することを示して
+$X$の正規性を証明する
+(正規性とTietze--Urysohnの補題の同値性についてはブログ記事\cite{Den1}でも紹介している)．
+つまり$X$の閉集合$F$とその上の連続関数
+$h\colon F\to [0, 1]$を任意に与えたときに
+連続関数$H\colon X\to [0, 1]$であって
+$H|_{F}=h$となるものを構成する．
+今$I$は基数$\kappa$と等しいとしても良い．
+超限帰納法を使って以下のような連続関数
+の族$h_{\alpha}\colon \bigcup_{\beta<\alpha}A_{\beta}\cup F\to  [0, 1]$を構成する：
+\begin{enumerate}
+\item 
+各
+$h_{\alpha}$
+は連続である．
+\item 
+$\alpha<\beta$のとき
+$h_{\beta}$は$h_{\alpha}$の
+拡張となっている．
+\end{enumerate}
+今$\gamma\le \kappa$を与えて
+$\alpha<\gamma$となる$\alpha$
+については上のような$h_{\alpha}$
+は構成できているとしよう．
+もしも$\gamma$が極限順序数のときは
+$h_{\gamma}\colon  \bigcup_{\beta<\gamma}A_{\beta}\cup F\to  [0, 1]$を
+$\bigcup_{\beta<\alpha}A_{\beta}$上では
+$h_{\alpha}$として定義するとうまく貼り合わされて
+$h_{\gamma}$はwell-definedとなる．
+このような写像の連続性は$X$が$\{A_{i}\}$
+からの弱位相を備えていることから従う．
+もしも$\gamma$が後続順序数，つまり
+$\gamma=\alpha+1$と書かれるときには
+以下のようにする．
+連続写像
+$h_{\alpha}\colon \bigcup_{\beta<\alpha}A_{\beta}\cup F\to  [0, 1]$
+はすでに構成されているわけだから，これをうまく使う．
+Morita弱位相の\ref{item:mw1}
+から
+$\bigcup_{\beta<\alpha}A_{\beta}\cup F$は
+$X$の
+閉集合である．よって
+$A_{\gamma}\cap 
+\left(\bigcup_{\beta<\alpha}A_{\beta}\cup F\right)$
+は$A_{\gamma}$の閉集合である．
+$A_{\gamma}$の正規性を用いて
+$h_{\alpha}|_{A_{\gamma}\cap 
+\left(\bigcup_{\beta<\alpha}A_{\beta}\cup F\right)
+}$
+を$A_{\gamma}$全体に拡張しそれを$g_{\gamma}$
+とする．
+このとき
+$h_{\gamma}\colon   \bigcup_{\beta<\gamma}A_{\beta}\cup F\to  [0, 1]$
+を$A_{\alpha}$上では$g_{\gamma}$
+としそれ以外では$h_{\alpha}$とすると
+うまく貼り合わされて連続写像となる．
+
+以上から$\kappa$まで$h_{\alpha}$を構成できて，
+$H=h_{\kappa}$とすると
+それは$h$の拡張となっている．
+以上で$X$の正規性がわかった．
+\end{proof}
+
+この定理と玉野の定理，そして
+コンパクト空間との直積で
+Morita弱位相が崩れないという話から
+パラコンパクト性が伝播するという話も従う．
+上の議論ではゼロ集合を保存できるように拡大できるので，
+完全正規性($T_{6}$)も伝播されることも従う
+(ゼロ集合と完全正規性の話は
+ブログ記事\cite{Den2}でも紹介した)．
+
+ちなみにMorita弱位相を備えた空間の開集合もMorita弱位相を
+備えているので，遺伝的正規性($T_{5}$)や遺伝的パラコンパクト性も伝播することがわかる
+(開集合と遺伝的正規の話は
+ブログ記事\cite{Den2}でも紹介した)．
+
+ちなみにある種の写像を拡張するという性質とパラコンパクト性が同値なので，上の写像を拡張する議論でパラコンパクト性
+が証明できたりする．Michaelの連続選択子の理論である．
+Michaelの論文
+\cite{MR0077107}などを参照のこと．
+ブログ記事
+\cite{yamyam}にもその方向性の議論による
+CW複体のパラコンパクト性の証明が載っている．
+ウェブページ
+\cite{mina}
+にもこの方針での証明が紹介されている．
+
+\subsection{Adjunction space}
+\begin{df}[Adjunction space]\label{df:adj}
+$\{H_{i}\}_{i\in I}$
+を位相空間の族とし，
+$A_{i}$を$H_{i}$の閉集合とする．
+さらに$Y$を位相空間とし，
+$g_{i}\colon A_{i}\to Y$
+を連続写像とする．
+このとき直和空間
+$W=Y\sqcup \coprod_{i\in I}H_{i}$
+を考えてこの上の同値関係$\sim$
+を$x\in A_{i}$と$y\in Y$については
+$x\sim y$を$g_{i}(x)=y$
+で$x\in A_{i}$と$y\in A_{j}$については
+$g_{i}(x)=g_{j}(x)$
+と定義し，上記以外については自明な同値関係になっているとする．
+このとき商空間$Z=W/\sim$
+を$\{H_{i}\}$を$g_{i}$で$Y$に貼り合わせた
+adjunction spaceという．
+このとき商写像を
+$p\colon W\to Z$
+と書くことにする．
+\end{df}
+
+1962年の
+Tsudaの
+論文
+\cite{MR0140085}
+では次の二つの補題が証明されている．
+証明は省略する．
+\begin{lem}\label{lem:adj1}
+記号は
+定義 
+\ref{df:adj}
+と同じとする．
+このときさらに各
+$g_{i}\colon A_{i}\to Y$
+を
+閉写像であると
+仮定する．
+このとき$\widetilde{g_{i}}\colon H_{i}\to Z$
+を$H_{i}\subset W$と考えたときに
+$\widetilde{g_{i}}=p|_{H_{i}}$
+定義する．
+さらに
+$\widetilde{g}\colon Y\to Z$
+を$Y\subset W$と考えたときに
+$\widetilde{g}=p|_{Y}$
+とする．
+このとき各$\widetilde{g_{i}}$
+と$\widetilde{g}$は閉写像であり，
+さらに$\widetilde{g}$は位相的埋め込みである．
+\end{lem}
+
+\begin{lem}
+補題
+\ref{lem:adj1}と同じ記号を使う．
+このとき族$\{\, \widetilde{g_{i}}(H_{i})\cup \widetilde{g}(Y)\mid i\in I\, \}$
+は$Z$の閉被覆であり，
+さらに$Z$の位相はこの族に関するMorita弱位相と一致する．
+\end{lem}
+\begin{rmk}
+空間$Z$の位相は族
+$\{\widetilde{g}(Y)\}\cup \{\, \widetilde{g_{i}}(H_{i})\mid i\in I\, \}$
+から誘導される通常の意味での弱位相と同じである．
+Morita弱位相の\ref{item:mw1}の条件を満たすようにするために$\widetilde{g_{i}}(H_{i})\cup \widetilde{g}(Y)$のようにしていると思われる．
+一般に$ \{\, \widetilde{g_{i}}(H_{i})\mid i\in I\, \}$の部分族の和は$Z$の閉集合とは限らないのだ．
+\end{rmk}
+
+CW複体の$n$次スケルトン$X_{n}$は
+$n-1$次スケルトン$X_{n-1}$から$n$次元cell
+$D^{n}$を貼り合わせるadjunction spaceとして得ることができる．このことは
+\cite[Theorem 2.4, p.47]{MR3822092}を参照のこと．
+\[
+  \begin{CD}
+     \coprod_{i\in I_{n}}\mathbb{S}^{n-1} @>>> \coprod_{i\in I_{n}}\mathbb{D}^{n} \\
+  @VVV    @VVV \\
+     X_{n-1}   @>>>  X_{n}
+  \end{CD}
+\]
+ここで$\mathbb{S}^{n-1}$
+はコンパクト距離空間なのでその上の連続写像は常に
+閉写像である．
+さら
+$\mathbb{D}^{n}$はコンパクト距離化可能空間である．
+コンパクト距離化可能空間の
+ハウスドルフ空間への連続像が再び
+コンパクト距離化可能ということ
+(この定理は\cite{Den3}でも紹介している)から
+$X_{n}$のなかの$\mathbb{D}^{n}$の像は
+コンパクト距離化可能空間である．
+よって$X_{n-1}$
+がパラコンパクトならば
+上での議論から$X_{n}$がパラコンパクトであることがわかる．
+CW複体は$X_{-1}\subset X_{0}\subset \dots \subset X_{n}\subset \dots $
+から誘導される通常の意味での弱位相を備えている．
+このことは
+\cite[Theorem 2.4, p.47]{MR3822092}を参照のこと．
+一般に可算でなおかつ包含について増大な閉集合の族による
+弱位相はMorita弱位相になる．なぜならその部分族の和は有限和か無限和しかないが，有限和は当たり前だが閉集合であり，
+無限和については，この$X_{n}$の族が
+増大という条件から全体空間に一致するので
+\ref{item:mw1}は満たされる．
+
+
+よって以上のことから$X_{-1}$がパラコンパクトであれば
+全体空間のCW複体はパラコンパクトである．
+
+
+以上の議論は$X_{-1}$が空である必要は全くないので，
+相対CW複体でも同じ議論が成立する．
+
+
+\subsection{弱位相が簡単な場合}
+空間$X$
+が可算個の閉集合の包含列
+$X_{0}\subset X_{1}\subset \dots X_{n}\subset \dots$
+からの弱位相を持ち，なおかつ各
+$X_{n}$が
+$\sigma$コンパクトで
+パラコンパクトハウスドルフのとき
+$X$がパラコンパクトであることの簡単な証明を紹介する．
+このような状況はファイバー束の理論を勉強するにあたって結構多いと思うので便利だと思う．
+
+位相空間の被覆$\{U_{i}\}_{i\in I}$が
+\textbf{星型有限}
+であるとは任意の$i\in I$について
+$|\{\, a\in I\mid U_{i}\cap U_{a}\neq \emptyset\, \}|<\infty$を満たすときに
+いう．
+つまり被覆それ自体が
+局所有限性を担保してくれるような被覆ということである
+位相空間が
+\textbf{強パラコンパクト}
+とはその任意の開被覆について，
+開集合からなる星型有限な細分
+が存在するときにいう．
+星型有限であれば局所有限なので，
+強パラコンパクトならば
+もちろんパラコンパクトである．
+
+\begin{lem}\label{lem:star}
+$X$を位相空間とし，
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+をその開被覆とする．
+また，別の開被覆
+$\{H_{i}\}_{i\in \zz_{\ge 0}}$と
+整数
+$M$
+と
+整数列
+$N_{i}$が存在して以下を満たすとする．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:star1}
+$i, j\in \zz_{\ge 0}$が
+$|i-j|\ge M$を満たすならば
+$H_{i}\cap H_{j}=\emptyset$である．
+\item\label{item:star2}
+任意の$i\in \zz_{\ge 0}$について
+$H_{i}\subset \bigcup_{i=0}^{N_{i}}U_{i}$
+である．
+\end{enumerate}
+このとき
+集合族
+$\{\, H_{i}\cap U_{a}\mid i\in \zz_{\ge 0}, 
+a\in \{0, \dots, N_{i}\}\, \}$
+は
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+の
+星型有限な
+細分であるような
+開集合からなる
+$X$の被覆である．
+\end{lem}
+\begin{proof}
+$\mathcal{C}=\{U_{i}\}_{i\in \zz_{\ge 0}}$ で
+$\mathcal{R}=\{\, H_{i}\cap U_{a}\mid i\in \zz_{\ge 0}, 
+a\in \{0, \dots, N_{i}\}\, \}$
+とおく．
+このとき
+$\mathcal{R}$
+が
+$\mathcal{C}$
+の細分であることは定義から直ちに従う．
+また開被覆であることもすぐわかる．
+
+
+次は
+$\mathcal{R}$
+が$X$の被覆であることを示そう．
+点
+$x\in X$を任意にとる．
+このとき$\{H_{i}\}_{i\in \zz_{\ge 0}}$
+が被覆という仮定から
+$x\in H_{i}$となる$i\in \zz_{\ge 0}$
+が存在する．
+そして
+条件
+\ref{item:star2}
+からある$a\in \{0, \dots, N_{i}\}$
+が存在して
+$x\in U_{a}$
+となる．
+つまり$x\in H_{i}\cap U_{a}$
+である．よって
+$\mathcal{R}$
+が被覆であることがわかった．
+最後に$\mathcal{R}$
+の星型有限性を示そう．
+任意に$H_{i}\cap U_{a}$をとる．
+ここで$i\in \zz_{\ge 0}$で
+$a\in \{0, \dots, N_{i}\}$である．
+このとき条件
+\ref{item:star1}
+から
+$H_{j}\cap U_{b}$
+が
+$H_{i}\cap U_{a}$
+と交わりを持つならば
+$|i-j|<M$
+でなければならない．
+よって$\mathcal{R}$
+の定義から
+交わりを持つような添字
+$(j, b)$
+は
+$j\in (i-M, i+M)\cap \zz_{\ge 0}$
+と
+$b\in \{0, \dots, N_{i+M}\}$
+を満たす．
+二つの集合$(i-M, i+M)\cap \zz_{\ge 0}
+=\{i-M+1, \dots, i, \dots, i+M-1\}$
+と
+$\{0, \dots, N_{i+M}\}$
+は有限集合なので
+$\mathcal{R}$
+の星型有限性がわかった．
+\end{proof}
+
+
+
+以下は
+Moritaの
+論文
+\cite[Theorem 3]{MR0026803}
+の結果である．
+
+\begin{thm}\label{thm:moritastar}
+位相空間$X$はリンデレフでなおかつ正規ハウスドルフであるとする．
+このとき
+$X$
+は強パラコンパクトである．
+\end{thm}
+\begin{proof}
+$X$の任意の開被覆
+$\{G_{a}\}_{a\in A}$
+に対して星型有限な細分が存在することを示せば良い．
+各$a\in A$
+と各点
+$x\in G_{a}$
+についてウリゾーンの補題を用いて
+連続関数
+$f_{x,a}\colon X\to [0, 1]$
+で
+$f_{x,a}(x)=1$で
+$X\setminus G_{a}$
+では
+$0$
+になるようなものが存在する．
+ここで
+被覆
+$\{f_{x, a}^{-1}((0, 1])\}_{x\in X, a\in A}$
+は
+$\{G_{a}\}$
+の細分となっている．
+よって
+$\{f_{x, a}^{-1}((0, 1])\}_{x\in X, a\in A}$
+に星型有限な細分が存在することを示せばよい．
+今$X$はリンデレフなので
+適当にこの開被覆から可算無限な部分族をとって
+$X$の開被覆となるようにできる．
+それを
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+と書くことにしよう．
+このとき定義からして各
+$i$
+について
+$f_{i}\colon X\to [0, 1]$
+が存在して
+$U_{i}=f_{i}^{-1}((0, 1])$
+となることに
+注意しよう．
+
+今から
+補題
+\ref{lem:star}
+を用いて
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+に星型有限な細分が存在することを示す．
+各$i\in \zz_{\ge 0}$
+と$a\in \zz_{\ge 0}$について
+$G(i, a)$を
+\[
+G(i, a)=f_{i}^{-1}((2^{-a}, 1])
+\]
+と定義すると，任意の$i$と$a$について
+\[
+\cl(G(i, a))\subset G(i, a+1)
+\]
+であり，
+\[
+G(i, a)\subset U_{i}
+\]
+であることに注意しよう．
+また
+\[
+U_{i}=\bigcup_{a\in \zz_{\ge 0}}G(i, a)
+\]
+に注意すると
+族
+$\{G(i, a)\}_{i, a\in \zz_{\ge 0}}$
+は$X$の開被覆になっていることに注意しよう．
+さて，各$n\in \zz_{\ge 0}$
+について
+\[
+S_{n}=\bigcup_{k=0}^{n}G(k, n)
+\]
+と定義すると
+$S_{n}$は開集合であり，以下を満たす．
+\begin{enumerate}[label=\textup(\arabic*)]
+\item
+任意の$n$について
+\[
+\bigcup_{n\in \zz_{\ge 0}}S_{n}=X
+\]
+\item
+$m<n$ならば
+\[
+\cl(S_{m})\subset S_{n}
+\]
+\item 
+任意の$n$について
+\[
+S_{n}\subset \bigcup_{k=0}^{n}U_{k}
+\]
+\end{enumerate}
+そこで今から族
+$\{H_{n}\}_{n\in \zz_{\ge 0}}$
+を以下のように定義する．
+\[
+H_{0}=S_{0}
+\]
+\[
+H_{1}=S_{1}
+\]
+として
+$n\ge 2$
+のとき
+$H_{n}$
+を
+\[
+H_{n}=S_{n+1}\setminus \cl(S_{n-1})
+\]
+と定義する．
+もちろん
+$H_{n}$
+は開集合である．
+ここで族
+$\{H_{n}\}_{n\in \zz_{\ge 0}}$
+が被覆であることを証明する．
+任意の
+$x\in X$
+に対して
+$x\in \cl(S_{n})$
+となる最小の
+$n$をとる．
+ここで
+$n=0, 1$
+の時は
+$x\in H_{0}\cup H_{1}$
+となることがわかるので
+(というか実は
+$H_{0}=\emptyset$
+なので
+$n=0$
+の場合は発生しない)，
+我々は
+$n\ge 2$
+と仮定してもよい．
+さて$n$
+の
+最小性から
+$x\not\in \cl(S_{n-1})$
+であり，
+また
+$x\in \cl(S_{n})\subset S_{n+1}$
+なので
+$x\in S_{n+1}\setminus \cl(S_{n-1})=H_{n}$
+がわかる．
+結局
+$\{H_{n}\}_{n\in \zz_{\ge 0}}$
+は被覆であることがわかる．
+
+さて $H_{n}\subset S_{n}$から次のことがわかる．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item $2\le |m-n|$ならば
+$H_{n}\cap H_{m}=\emptyset$
+である．
+\item 
+任意の$n$について
+\[
+H_{n}\subset \bigcup_{k=0}^{n}U_{k}
+\]
+\end{enumerate}
+よって$\{H_{i}\}_{i\in \zz_{\ge 0}}$
+は補題
+\ref{lem:star}
+の条件を満たすので，
+被覆
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+に星型有限な細分が存在することがわかった．
+\end{proof}
+\begin{rmk}
+上の証明は，
+「多様体の基礎」
+などに載っている
+$\sigma$コンパクトな
+局所コンパクトハウスドルフ空間が
+パラコンパクトであるという証明の
+一般化になっている．
+また，コゼロ被覆で細分するといいことがあるという
+「児玉・永見」に流れる考えの
+実践になっている．
+また，上の$H_{n}$
+の構成はドーナツを思い浮かべると良いだろう．
+\end{rmk}
+
+\begin{thm}\label{thm:parapara}
+$X$は閉集合の包含列
+$X_{0}\subset X_{1}\subset \dots \subset X_{n}\subset \dots$
+から誘導される
+(普通の意味の)
+弱位相を備えているとする．
+さらに各$X_{n}$は$\sigma$コンパクトで
+正規であるとする．
+このとき$X$はパラコンパクトである．
+実は強パラコンパクトということもわかる．
+\end{thm}
+
+\begin{proof}
+定理
+\ref{thm:mw}
+と同様に$X$の正規ハウスドルフ性が従う．
+各$X_{n}$が
+$\sigma$コンパクトなので
+空間
+$X$
+自体も
+$\sigma$コンパクト
+であることがわかる．
+特に
+$X$
+はリンデレフである．
+よって
+リンデレフ正規空間が
+パラコンパクトであることを示せば良い．
+それは
+定理
+\ref{thm:moritastar}
+で既にに示されている．
+強パラコンパクトもわかる．
+\end{proof}
+
+\begin{rmk}
+一般に
+$X$は閉集合の包含列
+$X_{0}\subset X_{1}\subset \dots \subset X_{n}\subset \dots$
+から誘導される
+(普通の意味の)
+弱位相を備えているとするときに
+各$X_{n}$
+がリンデレフ正則ならば
+$X$それ自体もリンデレフ正則であることが従う．
+証明の方針としては，
+まず正則リンデレフならば正規なので
+$X$の正規性がわかる．
+そして正規空間においては
+リンデレフ性
+と任意の開被覆に閉集合からなる可算な被覆
+が存在することが同値なので
+(パラコンパクト性と閉収縮を用いる)
+包含列が可算であることなどを使うとわかる．
+なので
+定理
+\ref{thm:parapara}
+の$\sigma$コンパクトの仮定は
+リンデレフでも良い．
+しかしながらそもそもMorita弱位相の話があるので，
+こんな細々としたバリアントを考える必要はないのだけれども．
+\end{rmk}
+
+\section*{参考文献}
+
+\renewcommand{\refname}{参考にしたウェブページ}
+	
+\begin{thebibliography}{99}
+\bibitem[トポいろ]{yamyam}
+トポロジーいろいろの記事「パラコンパクトPDF」
+\begin{verbatim}
+https://yamyamtopo.wordpress.com/2015/12/19/
+%e3%83%91%e3%83%a9%e3%82%b3%e3%83%b3%e3%83%91%e3%82%af
+%e3%83%88%e6%80%a7-pdf/
+\end{verbatim}
+
+
+
+\bibitem[Minazumi]{mina}
+みなずみ氏のウェブページの数学ノート
+位相幾何学命題2.4.33, 
+2024年1月12日閲覧, 
+\verb|https://minazumi.com/math/note/tgy/ch02sec04.html|
+
+
+
+\bibitem[電波通信1]{Den1}
+はてなブログ電波通信の記事
+「等高線と連続関数：ウリゾーンの補題とティーチェの拡張定理：正規空間その(-1)(修正あり)」
+https://concious4410.hatenablog.com/entry/2016/01/31/205017
+
+\bibitem[電波通信2]{Den2}
+はてなブログ電波通信の記事
+「遺伝的正規とか完全正規」
+https://concious4410.hatenablog.com/entry/2015/12/21/170256
+
+\bibitem[電波通信3]{Den3}
+はてなブログ電波通信の記事
+「閉写像云々とか固有写像とか」
+https://concious4410.hatenablog.com/entry/2015/11/06/205115
+
+
+\bibitem[電波通信4]{Den4}
+はてなブログ電波通信の記事
+「パラコンパクト性など：アドベントカレンダー2015」
+https://concious4410.hatenablog.com/entry/2015/12/11/205721
+
+
+\bibitem[電波通信５]{Den5}
+はてなブログ電波通信の記事
+「未完成（接着、帰納極限、CW複体）」
+https://concious4410.hatenablog.com/entry/2015/12/23/211121
+\end{thebibliography}
+
+\renewcommand{\refname}{一般の参考文献}
+
+
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{cw.bib}
+
+
+
+\end{document}

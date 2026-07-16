@@ -1,0 +1,177 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem{mon}[thm]{問題}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{児玉永見のゼロ集合に関する演習問題とその反例について}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{児玉永見の演習問題と反例について}
+
+位相空間$X$の部分集合$S$が\textbf{ゼロ集合}
+であるとは連続関数$f\colon X\to \rr$
+が存在して$S=f^{-1}(0)$
+となることである。
+
+児玉永見\cite{kodamanagami1}[p.45, 1.I, (6)]には以下の問題を示せという趣旨の演習問題がある。
+
+\begin{mon}\label{mon1}
+$X$を位相空間とし、$F$をそのゼロ集合とする。さらに$H$を$F$のゼロ集合とするとき、$H$は$X$のゼロ集合であることを示せ
+\end{mon}
+
+この問題\ref{mon1}には、反例がある。
+
+\begin{prop}\label{prop111}
+次の条件を満たす位相空間$X$が存在する。
+\begin{enumerate}
+\item\label{item111}
+$X$は完全正則空間である。
+\item\label{item222}
+$X$
+は可分である。
+\item\label{item333}
+$X$のゼロ集合$F$であって、連続体濃度の離散空間と同相なものが存在する。
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\cite{cex}[p.103, 反例番号84]
+ゾルゲンフライ平面$S\times S$と
+その部分集合$F=\{(x, y)\mid x+y=0\}$
+が該当する。
+また、
+\cite{cex}[p.100, 反例番号82]Niemytzkiの半平面とその部分集合の$x$軸$F=\{(x, y)\mid y=0\}$も該当する。
+\end{proof}
+
+\begin{rmk}
+上記の命題\ref{prop111}の条件\ref{item222}と\ref{item333}を同時に満たす正規空間
+$X$
+は存在しない。
+というのも、可分性から
+$X$から$\rr$への写像は高々連続体濃度しかないが、
+閉集合$F$上の連続関数全体は連続体濃度の冪と同じ濃度を持つからである。
+このときもしも
+$X$が正規だとティーチェの拡張定理から連続関数の個数が連続体濃度の冪と等しくなり、可分性と矛盾する。
+\end{rmk}
+
+\begin{thm}
+上の命題の位相空間$X$とそのゼロ集合
+$F$について、
+$F$のゼロ集合$H$
+であって、$X$のゼロ集合ではないものが存在する。
+\end{thm}
+\begin{proof}
+$X$と
+$F$を
+命題
+\ref{prop111}
+のものと同じとする。
+このとき
+上記の注意書きと同様の論法で$H$の存在を証明できる。
+今からそれを説明しよう。
+
+$X$の可分性から$X$のゼロ集合の個数は高々連続体濃度である。なぜならそれは実連続関数の引き戻しで表され、
+実連続関数の個数は高々連続体濃度だからである。
+
+$F$上のゼロ集合の個数について考えてみよう。
+$F$は
+離散空間なので、任意の部分集合が$F$のゼロ集合となる。
+そして$F$は連続体濃度を持つので、
+$F$上のゼロ集合の個数はちょうど連続体濃度の冪と同じ濃度になる。
+よって、濃度の大小関係から、
+$X$のゼロ集合ではないような$F$のゼロ集合$H$が存在する。
+\end{proof}
+
+\section{正規空間のときどうなるか}
+
+前の節では完全正則空間に対してゼロ集合の話をしたが、
+正規空間で反例になる空間が存在するのか気になるところである。実は$X$が正規空間の時にはゼロ集合のゼロ集合は元の空間$X$のゼロ集合となる。
+次の定理を利用するとすぐにわかる。
+証明は
+\cite[Corollary 2.1]{ka}と
+\cite[Theorem 1]{fr}
+を参照されたし。
+
+\begin{thm}
+$X$を正規空間とし、
+$F$をその閉集合とし、
+$H$を$X$
+の
+$G_{\delta}$閉集合とする。
+そして
+$\phi\colon A\to [0, 1]$を
+連続関数で
+$\phi^{-1}(0)=H\cap F$
+となるものとする。
+このとき、連続関数
+$\Phi\colon X\to [0, 1]$
+であって
+$\Phi|_{A}=\phi$と
+$\Phi^{-1}(0)=H$
+を満たすものが存在する。
+\end{thm}
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem[児玉・永見]{kodamanagami1}児玉之行,永見啓応,
+「位相空間論」,岩波書店,1974
+
+\bibitem[反例集]{cex}L.A.Steen and J.A.Seebch,\ {\it Counterexamples in Topology},\ Dover Publications,\ Inc.,New York,\ 1995
+
+
+
+\bibitem{fr}
+M. Frantz, 
+\textit{Controlling Tietze-Urysohn extensions}, Pacific J. Math. 169 (1995),
+no. 1, 53-73.
+
+\bibitem{ka} K. Yamazaki, 
+\textit{Controlling extensions of functions and C-embedding}, 
+Topology
+Proc. 26 (2001/02), no. 1, 323-341.
+
+\end{thebibliography}
+
+\end{document}

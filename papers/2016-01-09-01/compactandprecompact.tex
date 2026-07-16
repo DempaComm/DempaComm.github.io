@@ -1,0 +1,306 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\oo}{\omega}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}  } }
+\newcommand{\supp}{\text{  {\rm supp}  } }
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{コンパクト性と全有界性と完備性}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では
+$X$上の距離$d$に於ける$a$を中心とした半径$r$の開球を
+\[
+B(a,r;d)
+\]
+と書くことにする。つまり$B(a,r;d)=\{x\in X\ |\ d(a,x)<r\}$である。\par
+また$X$上の距離$d$に於ける$a$を中心とした半径$r$の閉球を
+\[
+C(a,r;d)
+\]
+と書くことにする。つまり$C(a,r;d)=\{x\in X\ |\ d(a,x)\le r\}$である。\par
+距離空間に於いて次のコンパクト性に関する基本的なことがよく知られている。
+\begin{fact}
+距離空間に於いて
+\[
+\mbox{コンパクト性$\iff$全有界かつ完備}
+\]
+\end{fact}
+この命題に対して次の２つの素朴な疑問が生まれるであろう。\par
+{\bf 問}：距離化可能空間$X$がその位相と両立する任意の距離に於いて全有界であるなら$X$はコンパクトであるか？
+
+{\bf 問}：距離化可能空間$X$がその位相と両立する任意の距離に於いて完備であるなら$X$はコンパクトであるか？
+
+この２つの疑問に関する応えはYesである。この文章ではそのことを示そうと思う。\par
+次の事実は距離空間に於いて点列コンパクト性とコンパクト性が同値になることから直ちに分かる。
+\begin{fact}\label{risan}
+ノンコンパクト距離空間$X$には可算閉離散集合が存在する。
+\end{fact}
+
+
+
+\begin{lem}\label{kansu}
+距離空間$(X,d)$と連続関数$f:X\to \rr$について
+\[
+e(x,y)=d(x,y)+|f(x)-f(y)|
+\]
+は距離となり、$e$の定める位相は$d$の定めるそれと同じになる。
+\end{lem}
+\begin{proof}$e$が距離になることは簡単に分かる。次に位相が一致することを見よう。
+$\ep>0$を任意に与える。
+$e$は明らかに$(X,d)$の直積位相空間$X\times X$上の連続関数になるので$a$を任意に与えそれを固定した時$e(a,x)$は$x$について連続関数である。よって$B(a,\ep;e)=\{x\ |\ e(a,x)<\ep\}$は$(X,d)$の開集合になる。$a\in B(a,\ep;e)$なので、ある$\delta>0$が存在して
+\[
+B(a,\delta;d)\subset B(a,\ep,e)
+\]
+となる。\par
+定義から明らかに
+\[
+d(x,y)\le e(x,y)
+\]
+なので
+\[
+B(a,\ep;e)\subset B(a,\ep;d)
+\]
+以上から$d$の定める位相と$e$の定める位相が一致することが分かる。
+\end{proof}
+
+
+
+\begin{lem}\label{iti}
+距離空間$(X,d)$について$d$と同じ位相を誘導する距離$e$で、
+\[
+e(x,y)\le1
+\]
+を充たすものが存在する。
+\end{lem}
+\begin{proof}
+$e(x,y)=\min\{d(x,y),1\}$と置けば良い。これが擬距離の公理を充たすことの証明は、読者へ委ねる。$0<\ep<1$のとき、$x$を中心とした$d$による$\ep$開球と$e$による$\ep$開球は同じ集合になるので$d$と$e$は同じ位相を誘導する。
+\end{proof}
+
+
+まず最初にひとつ目の問への回答を証明しよう。
+\begin{thm}
+距離化可能空間$X$がその位相と両立する任意の距離に於いて全有界であるなら$X$はコンパクトである
+\end{thm}
+\begin{proof}
+対偶を示そう。つまり、ノンコンパクトな距離化可能空間にはその位相と両立する全有界でない距離が存在することを示そう。\par
+$X$と両立する距離のひとつを$d$とする。そして$X$の可算閉離散集合を$D=\{x_i\ |\ i\in \zz_{\ge 0}\}$としよう。ここで番号付けは$i\neq j\To x_i\neq x_j$であるとする。さて$D$上の連続関数$f:D\to \rr$を
+\[
+f(x_n)=n
+\]
+で定義しよう。之は確かに連続である。そして$X$は距離化可能空間なので特に正規空間であるから、ティーチェの拡張定理より連続関数$F:X\to \rr$で$F|D=f$となるものが存在する。この$F$を用いて
+\[
+e(x,y)=d(x,y)+|F(x)-F(y)|
+\]
+と定義すると補題\ref{kansu}から$e$は$X$の位相と両立し、
+\[
+e(x_0,x_n)=d(x_0,x_n)+|F(x_0)-F(x_n)|\ge |0-n|=n
+\]
+なので$(X,e)$は非有界な距離空間である。よって特に全有界ではない。（全有界距離空間は有界である。）
+\end{proof}
+
+
+
+次の定理を証明するにあたって以下の重要な事実を思い出そう。
+\begin{fact}[Bing-長田-Smirnovの距離化可能定理]\label{dis}
+$T_3$空間$X$について以下は同値
+\begin{align}
+&\mbox{$X$は距離化可能}\\
+&\mbox{$X$は$\sigma$疎な開基を持つ}\\
+&\mbox{$X$は$\sigma$局所有限な開基を持つ}
+\end{align}
+\end{fact}
+\setcounter{equation}{0}
+\begin{thm}
+距離化可能空間$X$がその位相と両立する任意の距離に於いて完備であるなら$X$はコンパクトである
+\end{thm}
+\begin{proof}
+対偶を示そう。つまりノンコンパクトな距離化可能空間にはその位相と両立する完備でない距離が存在する事を示そう。\par
+$X$の位相と両立する距離のひとつを$d$とする。ここで$d\le 1$としてもよい
+（補題\ref{iti}）
+そして$X$の可算閉離散集合を$D=\{x_i\ |\ i\in \zz_{\ge 0}\}$としよう。ここで番号付けは$i\neq j\To x_i\neq x_j$であるとする。さて$D$上の連続関数$f:D\to \rr$を
+\[
+f(x_n)=n
+\]
+で定義しよう。之は確かに連続である。そして$X$は距離化可能空間なのでティーチェの拡張定理より連続関数$F:X\to \rr$で$F|D=f$となるものが存在する。この$F$を用いて
+\[
+e(x,y)=d(x,y)+|F(x)-F(y)|
+\]
+と定義すると補題\ref{kansu}から$e$は$X$の位相と両立し、$n>0$なら
+\begin{equation}
+n<e(x_0,x_n)\le n+1
+\end{equation}
+を充たす。さて、$X$に属さない点$\oo$を考え、各$i\in \zz_{\ge 0}$に対し、$\oo$の近傍として
+\[
+N_i=(X\setminus C(x_0,i;e))\cup\{\omega\}=\{x\in X\ |\ e(x,x_0)>i\}\cup \{\oo\}
+\]
+とし、$X$の点の近傍はそのままとして
+$Y=X\cup \{\oo\}$に位相を定義しよう。するとこの近傍の定め方はちゃんと位相を定め$Y$は$X$を開部分空間として含みさらに$Y$は$T_3$空間となる。さて事実\ref{dis}より存在が保証される$X$の$\sigma$局所有限な開基を$\mathcal{B}$とすると
+\[
+\mathcal{W}=\mathcal{B}\cup\{N_i\ |\ i\in \zz_{\ge 0}\}
+\]
+は$Y$の開基となる。さらに$\{N_i\ |\ i\in \zz_{\ge 0}\}$は高々可算な族なので$\mathcal{W}$は$\sigma$局所有限な開基となるので再び事実\ref{dis}より$Y$は距離化可能空間である。$Y$と両立する距離のひとつを$s$とする。このとき$(1)$より
+\[
+n>i\To x_n\in N_i
+\]
+なので$(Y,s)$に於いて
+\[
+\lim_{n\to \mgn} x_n= \oo
+\]
+であるので$(Y,s)$の部分距離空間$(X,s)$の中で$\{x_n\}$はコーシー列だが、収束しない（$\oo\not\in X$より）
+また距離空間$(X,s)$の位相は$X$の元々の位相と明らかに両立するので$X$にはその位相と両立する完備ではない距離が存在する。
+\end{proof}
+\begin{cau}
+この点$\oo$を付け加える操作は１点コンパクト化に似ている。
+\end{cau}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{engel}R,Engelking,{\it General Topology },PWN,1977
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,861 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+
+
+
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{kou}[thm]{考察}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Tonelli--Shanks Algorithm}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+この文章では，有限素体で平方剰余になっている元の平方根を求める
+アルゴリズムであるTonelli--Shanksのアルゴリズムと，
+このアルゴリズムの$n$乗根への一般化を解説する.
+
+
+\section{オイラーの規準}
+
+$p$を素数とし，
+$r\in \zz_{\ge 0}$とする．
+このとき$a\in \zz$が
+\emph{法$p$における$r$乗剰余}
+であるとは
+ある$b\in \zz$が存在して
+\[
+b^r\equiv a\ \mod p
+\]
+となるときにいう．
+$r=2, 3$のときはそれぞれ平方剰余
+と立方剰余と呼ばれる．
+
+このセクションでは法$p$において
+$a\in \zz$が$r$乗剰余になるための必要十分条件を
+与えるオイラーの規準を紹介する．
+
+まず重要なフェルマーの小定理を紹介する．
+証明は省略する．
+\begin{lem}
+$p$を素数とし，$a\in \zz$とする．このとき
+\[
+a^{p-1}\equiv 1\ \mod p
+\]
+が成り立つ．
+\end{lem}
+
+以下の命題がオイラーの規準である．
+通常は$r=2$の場合の命題をそのように呼ぶ．
+\begin{prop}\label{prop:Euler}
+$p$を素数とし，
+$r\in \zz_{\ge 0}$とする．
+このとき$a\in \zz$が法$p$における
+$r$乗剰余であることと，
+\[
+a^{\frac{p-1}{\gcd(p-1, r)}}\equiv 1\ \mod p
+\]
+が成り立つことは同値である．
+\end{prop}
+\begin{proof}
+まず最初に$a$が法$p$における$r$乗剰余であると仮定する．
+このとき$b^r\equiv a\ \mod p$となる$b\in \zz$
+が存在する．
+するとフェルマーの小定理より
+\[
+a^{\frac{p-1}{\gcd(p-1, r)}}\equiv b^{\frac{r}{\gcd(p-1,r)}(p-1)}
+\equiv 1\ \mod p
+\]
+が成り立ち，定理の前半が証明された．
+後半を示そう．
+
+まず最初に$\gcd(p-1, r)=1$
+の場合に証明をする．
+このとき
+$(p-1)/\gcd(p-1, r)=p-1$
+なのでフェルマーの小定理から，
+任意の$a\in \zz$が法$p$における$r$乗剰余であることを示せば良い．
+さて今の状況で
+$r$と$p-1$
+が互いに素なので，
+$h\in \zz_{\ge 0}$が存在して
+\[
+hr\equiv 1\ \mod p-1
+\]
+となる．
+このときフェルマーの小定理より$a^{h}$が
+法$p$における$a$の$r$乗根になる．
+
+次に$\gcd(p-1, r)\neq 1$の場合を証明する．
+$g$を法$p$における原始根とし，
+$k\in \{0, 1, \dots, p-1\}$を用いて
+$g^{k}\equiv a \ \mod p$
+となっているとする．
+このとき
+\[
+a^{\frac{p-1}{\gcd(p-1, r)}}\equiv 
+g^{k\frac{p-1}{\gcd(p-1, r)}}
+\equiv 1\ \mod p
+\]
+である．
+$g$の法$p$における位数は
+$p-1$なので，
+$k\frac{p-1}{\gcd(p-1, r)}$は
+$p-1$の倍数である．
+よって$m=\frac{k}{\gcd(p-1, r)}$
+は整数であり，特に$k=m\gcd(p-1, r)$とかける．
+さて，今$r/(\gcd(p-1, r))$
+は$p-1$と互いに素なので，
+ある$h\in\zz_{\ge 0}$
+が存在して$hr/(\gcd(p-1, r))\equiv 1\ \mod p-1$
+となる．
+上で得られた$m$と$h$を使って，
+$b=g^{mh}$と定義する．
+するとフェルマーの小定理から
+\[
+b^r\equiv g^{mhr}\equiv g^{m\gcd(p-1, r)\cdot h\frac{r}{\gcd(p-1, r)}}
+\equiv g^{k\cdot h\frac{r}{\gcd(p-1, r)}}
+\equiv 
+a^{ h\frac{r}{\gcd(p-1, r)}}
+\equiv a\ \mod p
+\]
+となるので，$b$が求めている
+$a$の法$p$における$r$乗根である．
+\end{proof}
+
+\begin{rmk}
+命題\ref{prop:Euler}の証明の後半は
+$a$の$r$乗根を求める手順になっている．
+しかし原始根を使っているので$p$が大きいときには
+(証明には使えるが)
+とても計算には使えない手順になっている．
+法$p$における冪乗根の計算では
+如何に原始根を用いずに計算するかが重要になっていくる．
+\end{rmk}
+
+\section{Tonelli--Shanksのアルゴリズム}
+このセクションでは
+有限素体における平方根を求めるアルゴリズムの一つである
+Tonelli--Shanksのアルゴリズムの理論的背景と，アルゴリズムを紹介する．
+
+以下の補題がTonelli-Shanksのアルゴリズムの理論的支柱である．
+\begin{lem}\label{lem:hodai}
+$p$を奇素数とし，$s\in \nn$と奇数$d$は$p-1=2^{s}d$を満たすとする．
+$z$を法$p$における平方非剰余とする．
+$ 1\le i< s$として，
+$t\in \zz$は法$p$における$1$の$2^{s-i}$乗根であり，
+なおかつ法$p$における$1$の$2^{s-i-1}$乗根ではないとする．
+このとき$b=z^{2^{i-1}d}$とすると
+$tb^2$は$1$の$2^{s-i-1}$乗根である．
+\end{lem}
+\begin{proof}
+$t$は法$p$における
+$1$の$2^{s-i}$乗根であるということは，
+$t^{2^{s-i-1}}$は法$p$における$1$の平方根である．
+仮定からこの値は法$p$で$-1$に合同である．
+今，オイラーの規準から，
+\[
+z^{\frac{p-1}{2}}\equiv z^{2^{s-1}d}\equiv -1\ \mod p
+\]
+であることに注意すると，
+\[
+(tb^2)^{2^{s-i-1}}\equiv 
+t^{2^{s-i-1}}z^{2^{s-1}d}
+\equiv
+(-1)(-1)
+\equiv 1\ \mod p
+\]
+なので，
+$tb^2$は法$p$で$1$の$2^{s-i-1}$乗根である．
+\end{proof}
+この補題\ref{lem:hodai}を用いて
+法$p$における平方剰余の平方根を求めるアルゴリズムが
+Tonelli--Shanksのアルゴリズムである．
+
+\begin{kou}
+$p$を素数とし，
+$a$を法$p$における平方剰余とする．
+このとき$a$の法$p$における平方根を求めたい．
+
+最初に$p-1=2^{s}d$となるような$s$と奇数$d$を求める．
+
+次に平方非剰余$z$を適当に取ってくる．
+$1$から$p-1$までの間にはこのような数は$(p-1)/2$個あるので，
+結構な確率で取ってこれる．
+
+次に$R=a^{\frac{1+d}{2}}$とおく．$d$は奇数なので
+$1+d/2$はちゃんと整数になっている．
+すると
+\[
+R^2=a^{1+d}=a\cdot a^{d}\ \mod p
+\]
+となる．
+$t=a^d$とおく．
+もしも$t\equiv 1\  \mod p$
+ならば
+$R$が$a$の法$p$における
+平方根
+になっている．
+しかし一般にはこういう風にはなっていない．
+一般の場合も$R$の値を修正して，$t\equiv 1$となる理想的な
+ケースを目指すことを考える．
+まず，$a$は平方剰余なので，オイラーの規準から
+\[
+t^{2^{s-1}}\equiv a^{\frac{p-1}{2}}\equiv 1\ \mod p
+\]
+なので，$t$は法$p$における$1$の$2^{s-1}$乗根になっている．
+$t$が法$p$における$1$の$2^{s-s}$乗根，すなわち$1$乗根
+ならば，$t$は$1$に合同なので，$R$が$a$の法$p$における
+平方根である．
+$t$がそうではないとすると，
+次のような$i$を見つけることができる:
+$1\le i<s$であり，$t$は法$p$における$1$の$2^{s-i}$乗根であるが，
+$2^{s-i-1}$乗根ではない．
+よって，補題\ref{lem:hodai}を適応することによって，
+$b=z^{2^{i-1}d}$とすると，
+$tb^{2}$は法$p$における$1$の$2^{s-i-1}$乗根である．
+よって，$R'=Rb$と値を修正すると，
+\[
+(R')^2\equiv a\cdot tb^2 \mod p
+\]
+となる．$t'=tb^2$とすると，
+$t'$は法$p$における$1$の$2^{s-i-1}$乗根になっている．
+
+
+以上の操作は
+$t$が法$p$における$1$の$2^{s-s}$乗根，すなわち，
+$t\equiv 1\ \mod p$となるまで続けることができ，
+そのときの$R$が$a$の法$p$における平方根である．
+
+\end{kou}
+\newpage 
+以上の操作を疑似コードにして表したのが次である．
+\begin{algorithm}
+\caption{Solving $x^2\equiv a\ \mod p$}
+\begin{algorithmic}
+\REQUIRE $a$:integer and $p$:prime 
+\IF{$p=2$}
+\RETURN $a$
+\ENDIF
+\STATE Take $s\ge 1$ and an odd number $d$ 
+with $p-1=2^sd$ 
+\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{2}}\not \equiv 1 \ \mod $
+\STATE $M\gets s$
+\STATE $R\gets a^{\frac{1+d}{2}}$
+\STATE $t\gets a^{d}$
+\STATE $c\gets z^d$
+\WHILE{$M\not =0$}
+\STATE Take the least $i\in \{1, \dots, s-1\}$ such that 
+$t^{2^{i}}\equiv 1\ \mod p$
+\STATE $b\gets c^{2^{M-i-1}}$ 
+\STATE $M\gets i$
+\STATE $c\gets b^2$
+\STATE $R\leftarrow Rb$
+\STATE  $t\leftarrow tb^2$
+\ENDWHILE
+\RETURN $R$
+\end{algorithmic}
+\end{algorithm}
+
+考察では$t^{2^{s-i}}\equiv 1$となる最大の$i$
+を取ってきたが，$t^{2^{i}}\equiv 1$となる最小の$i$を見つける方が
+計算量が少なくて済むのでそのように修正している．このコードはwikipediaの
+Tonelli--Shanksのページを大いに参考にした．
+
+以上で説明したアルゴリズムは
+ある種伝統的なアルゴリズムであったが，
+次の補題を利用しても
+平方根を求めることができる．
+\begin{lem}\label{lem:k}
+$p$を奇素数とし，
+$s\in \zz_{\ge 2}$と奇数$d$は$p-1=2^{s}d$を満たすとする．
+$z$を法$p$における平方非剰余とする．
+そして$a$を法$p$における平方剰余とする．
+このとき，$m\in \zz$が存在して
+$a^{d}z^{2md}\equiv 1\ \mod p$
+となる．
+この$m$を用いると，
+$a^{\frac{1+d}{2}}z^{md}$
+は法$p$における$a$の平方根の一つである．
+\end{lem}
+\begin{proof}
+補題の後半は自乗すれば直ちにわかる．
+前半を示す．
+もし$s=1$
+ならば，オイラーの規準より$m=0$とすれば条件を満たすので，
+以下では$s\ge 2$とする．
+$\{0, 1\}$に値をとる点列$\{c_i\}_{i=0}^{s-2}$
+を任意の$n\in \{0, 1, \dots, s-2\}$について
+\[
+a^{2^{s-n-2}d}\cdot z^{(2^{s-n-1}c_0+2^{s-n}c_1+\dots+ 2^{s-2}c_{n-1}+2^{s-1}c_n)d}
+\equiv 
+1\ 
+\mod p
+\]
+を満たすように帰納的に以下のように定める．
+まず，$c_0$を定義する．
+オイラーの規準から$a^{2^{s-1}d}\equiv 1\ \mod p$
+である．よって$a^{2^{s-2}d}$は$1$か$-1$に合同である．
+$a^{2^{s-2}d}$が$-1$に合同ならば$c_0=1$，
+そうでない時は$c_0=0$とする．
+
+一般に$n$に対して$n$以下の自然数に対して$c_{i}$が定義されたとしよう．
+このとき，帰納法の仮定から，
+\[
+a^{2^{s-n-1}d}\cdot z^{(2^{s-n}c_0+2^{s-n+1}c_1+\dots+ 2^{s-1}c_{n-1})d}
+\equiv 
+1\ 
+\mod p
+\]
+である．
+よって，その平方根である
+$a^{2^{s-n-2}d}z^{(2^{s-n-1}c_0+2^{s-n}c_1+\dots+ 2^{s-2}c_{n-1})d}$
+は$1$か$-1$に合同である．
+この値がが$-1$に合同ならば$c_n=1$, 
+そうでないときは$c_n=0$と定義する．
+
+以上によって$\{c_i\}_{i=1}^{s-2}$が得られたが，帰納法の仮定と，
+$c_{s-2}$の定義より，
+\[
+a^{d}z^{(2c_0+2^{2}c_1+\dots+ 2^{s-1}c_{s-2})d}\equiv 1\ \mod 1
+\]
+このとき，
+$m=c_0+2c_1+\dots+2^{s-2}c_{s-2}$とすると補題の条件を満たす．
+\end{proof}
+
+
+この補題を使ったアルゴリズムの
+疑似コードを以下に書く．このコードは\cite{2}を大いに参考にした．
+このアルゴリズムはプログラミングの初心者でも
+書きやすいという利点がある．
+
+\begin{algorithm}
+\caption{Solving $x^2\equiv a\ \mod p$}
+\begin{algorithmic}
+\REQUIRE $a$:integer and $p$:prime 
+\IF{$p=2$}
+\RETURN $a$
+\ENDIF
+\IF{$a^{\frac{p-1}{2}}\not\equiv 1\ \mod p$}
+\RETURN Error
+\ENDIF
+\STATE Take $z\in \{1, \dots, p-1\}$ s.t. $z^{\frac{p-1}{2}}\not \equiv 1 \ \mod p$
+\STATE  $apow\leftarrow p-1$
+\STATE  $zpow\leftarrow 0$
+\WHILE{$apow$ is even}
+\STATE $apow\leftarrow apow/2$
+\STATE $zpow\leftarrow zpow/2$
+\IF{$a^{apow}z^{zpow}\not\equiv 1\ \mod p$}
+\STATE $zpow\leftarrow zpow + (p-1)/2$
+\ENDIF
+\ENDWHILE
+\STATE $apow\leftarrow (apow+1)/2$
+\STATE  $zpow \leftarrow zpow/2$
+\RETURN $a^{apow}z^{zpow}$
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+\section{一般の冪根を求めるアルゴリズム(Adleman-Manders-Miler)}
+
+このセクションでは
+一般の$r\in \zz_{\ge 1}$に対して
+$\mathbb{F}_p$における$r$乗根を求めることを考える．
+まずフェルマーの小定理から次の命題がわかる．
+オイラーの規準の証明の中でも用いていた手法である．
+証明は省略する．
+\begin{prop}
+$p$を素数とし，$r\in \zz_{\ge 1}$とする．
+そして$\gcd(p-1, r)=1$と仮定する．
+このとき法$p-1$にける$r$の逆数を$h$とすると，
+任意の$a\in \zz$の法$p$における$r$乗根
+は$a^{h}$である．
+\end{prop}
+
+よって以下の考察では，$r$は$p-1$の素因数と仮定する命題が多くなる．
+
+
+
+\begin{lem}\label{lem:hodair}
+$p$を素数とし，$r$を$p-1$の素因数であるとする．
+$s\in \nn$と$r$で割り切れない数$d$は$p-1=r^{s}d$を満たすとする．
+$z$を法$p$における$r$乗非剰余とする．
+$ 1\le i< s$として，
+$t\in \zz$は法$p$における$1$の$r^{s-i}$乗根であり，
+なおかつ法$p$における$1$の$r^{s-i-1}$乗根ではないとする．
+$b=z^{r^{i-1}d}$とする．
+このときある$m\in \{0, 1, \dots, p-1\}$が存在して
+$tb^{mr}$が$1$の$r^{s-i-1}$乗根となる．
+\end{lem}
+\begin{proof}
+$t$が法$p$における
+$1$の$r^{s-i}$乗根であるということは，
+$t^{r^{s-i-1}}$は法$p$における$1$の$r$乗根である．
+今オイラーの規準から，
+$\gamma=z^{\frac{r^{s-1}}d}$は
+$1$とは異なる$1$の$r$乗根であり，
+$r$は素数なので，$\{\gamma^m\}_{m=0}^{r-1}$
+は$1$の$r$乗根を全て含む．
+よって，ある$m$が存在して
+\[
+t^{r^{s-i-1}}\cdot \gamma^m=1
+\]
+を満たす．よって
+\[
+(tb^{mr})^{r^{s-i-1}}\equiv 
+t^{r^{s-i-1}}z^{r^{s-1}md}
+\equiv
+t^{r^{s-i-1}}\cdot \gamma^{m}
+\equiv 1\ \mod p
+\]
+なので，
+$tb^{mr}$は法$p$で$1$の$r^{s-i-1}$乗根である．
+\end{proof}
+
+
+
+\begin{kou}
+$p$を素数とし，
+$r$を自然数とする．
+$a$を法$p$における$r$乗剰余とする．
+このとき$a$の法$p$における$r$乗根を求めたい．
+
+まず最初に，
+$r/\gcd(p-1, r)$の法$p-1$における逆数を$h$
+として$a^h$とするとこれは
+$a$の$r/\gcd(p-1, r)$乗根になっているので，
+$a^h$の$\gcd(p-1, r)$乗根を求めれば
+$a$の$r$乗根になる．
+よって以下では$r$を$p-1$の約数とする．
+
+
+次に$r$を素因数分解し，
+$r=q_1q_2\dots q_l$
+とする．ここで，$q_i$たちには重複があっても良い．
+このとき$a$の$q_1$乗根を求めそれを$f_1(a)$とする．
+そして$f_1(a)$の$q_2$乗根を$f_2(f_1)(a)$とすると，
+$a$の$r$乗根は$f_l\circ f_{l-1}\circ\dots f_2\circ f_1(a)$
+である．
+よって$a$の$r$乗根を求めるには$r$を素数としても良い．
+
+
+次に$p-1=r^{s}d$となるような$s$と$r$で割り切れない$d$を求める．
+$r$は$p-1$の素因数なので$s\ge 1$に注意せよ．
+
+次に$r$乗非剰余$z$を適当に取ってくる．
+$1$から$p-1$までの間にはこのような数は$(r-1)(p-1)/r$個あるので，
+結構な確率で取ってこれる．
+
+
+さて，次に平方根のときの同様に
+$R=a^{\frac{1+d}{r}}$とおきたいところだが，
+$d+1$が$r$の倍数とは全く限らない．
+そこで平方根の場合の議論ではなく，
+$\gcd(r, p-1)=1$の場合の議論を参考にして
+$R$の値を定める．
+つまり今の場合には
+$r$の法$d$における逆数を$h$として
+$R=a^h$とする．
+\[
+R^r=a^{rh}=a\cdot a^{rh-1}\ \mod p
+\]
+となる．
+$t=a^{rh-1}$とおく．
+もしも$t\equiv 1\  \mod p$
+なら$R$が$a$の法$p$における
+$r$乗根
+になっている．
+しかし一般にはこういう風にはなっていない．
+一般の場合も$R$の値を修正して，$t\equiv 1$となる理想的な
+ケースを目指すことを考える．
+
+$h$の定義から$rh-1$は$d$の倍数になっているので
+$r^{s-1}(rh-1)$が$\frac{p-1}{r}$の倍数になっていることに注意すると
+$a$は$r$乗剰余なので，
+オイラーの規準から
+$t^{r^{s-1}}\equiv a^{r^{s-1}(rh-1)}\equiv 1\ \mod p$
+がわかる．
+よって$t$は法$p$における$1$の$r^{s-1}$乗根になっている．
+$t$が法$p$における$1$の$r^{s-s}$乗根，
+すなわち$1$乗根
+ならば$t$は$1$に合同なので
+$R$が$a$の法$p$における
+平方根である．
+$t$がそうではないとすると，
+次のような$i$を見つけることができる:
+$1\le i<s$であり，$t$は法$p$における$1$の$r^{s-i}$乗根であるが，
+$r^{s-i-1}$乗根ではない．
+よって，補題\ref{lem:hodair}にあるような$m\in\{0, 1, \dots, p-1\}$
+を見つけることができる．
+$b=z^{r^{i-1}d}$とすると，
+$tb^{mr}$は法$p$における$1$の$r^{s-i-1}$乗根である．
+よって，$R'=Rb^m$と値を修正すると，
+\[
+(R')^r\equiv a\cdot tb^{mr} \mod p
+\]
+となる．$t'=tb^{mr}$とすると，
+$t'$は法$p$における$1$の$r^{s-i-1}$乗根になっている．
+
+
+以上の操作は
+$t$が法$p$における$1$の$r^{s-s}$乗根，すなわち，
+$t\equiv 1\ \mod p$となるまで続けることができ，
+そのときの$R$が$a$の法$p$における$r$乗根である．
+
+\end{kou}
+
+
+以上の操作を疑似コードにして表したのが次である．
+ここでは$r$は$p-1$の素因数で$a$は$r$乗剰余であることがわかっているとする．
+\begin{algorithm}
+\caption{Solving $x^r\equiv a\ \mod p$}
+\begin{algorithmic}
+\REQUIRE $a$:integer and $p$:prime 
+\STATE Take $s\ge 1$ and a number $d$ 
+s.t.  $p-1=r^sd$ and $\gcd(d, q)=1$ 
+\STATE Take $h$ s.t. $rh\equiv 1\ \mod d$
+\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{r}}\not \equiv 1 \ \mod $
+\STATE $M\gets s$
+\STATE $R\gets a^{h}$
+\STATE $t\gets a^{rh-1}$
+\STATE $c\gets z^d$
+\WHILE{$M\not =0$}
+\STATE Take the least $i\in \{1, \dots, s-1\}$ such that 
+$t^{r^{i}}\equiv 1\ \mod p$
+\STATE Take $m\in \{0, \dots, p-1\}$
+s.t. $t^{r^{i-1}}\left(z^{(p-1)/r}\right)^{m}\equiv 1\ \mod p$
+\STATE $b\gets c^{r^{M-i-1}}$ 
+\STATE $M\gets i$
+\STATE $c\gets b^r$
+\STATE $R\leftarrow Rb^m$
+\STATE  $t\leftarrow tb^{mr}$
+\ENDWHILE
+\RETURN $R$
+\end{algorithmic}
+\end{algorithm}
+
+ここでもやはり，
+$t^{r^{s-i}}\equiv 1$となる最大の$i$
+ではなく$t^{r^i}\equiv 1$
+となる最小の$i$を見つけるように修正をしている．
+また，アルゴリズムの中の``Take $m\in \{0, \dots, p-1\}$...''
+の部分は離散対数問題を解く必要があるので
+$r$が大きすぎると計算機でも時間がかかる計算になる．
+この一般の$r$乗根を求めるアルゴリズムはAdleman-Manders-Milerのアルゴリズムとして知られているようである．
+
+次の補題を利用しても
+$r$乗根を求めることができる．この補題は\cite{1}を大いに参考にした．
+\begin{lem}\label{lem:k2}
+
+$p$を素数とし，
+$r$を$p-1$の素因数とする．
+$s\in \nn$と$r$で割り切れない数$d$は
+$p-1=r^{s}d$を満たすとする．
+$z$を法$p$における$r$乗非剰余とする．
+そして$a$を法$p$における$r$乗剰余とする．
+$h$を法$d$における$r$の逆数とする．
+このとき，$m\in \zz$が存在して
+$a^{rh-1}z^{rmd}\equiv 1\ \mod p$
+となる．
+この$m$を用いると，
+$a^{h}z^{md}$
+は法$p$における$a$の$r$乗根の一つである．
+\end{lem}
+\begin{proof}
+補題の後半は$r$乗すれば直ちにわかる．
+前半を示す．
+もし$s=1$
+ならば，オイラーの規準より$m=0$とすれば条件を満たすので，
+以下では$s\ge 2$とする．
+仮定より$z$は$r$乗非剰余なので
+$\gamma=z^{r^{s-1}d}$とすると，
+$\gamma$は法$p$における$1$の
+$r$剰余でありなおかつ$1$とは異なることに注意せよ．
+また，$r$が素数なので$\{\gamma^k\}_{k=0}^{r-1}$
+は法$p$における$r$乗根を全て含んでいることに注意しよう．
+$\{0, 1, \dots, r-1\}$に値をとる点列$\{c_i\}_{i=0}^{s-2}$
+を任意の$n\in \{0, 1, \dots, s-2\}$について
+\[
+\left(a^{rh-1}\right)^{r^{s-n-2}}
+\cdot 
+z^{(r^{s-n-1}c_0+r^{s-n}c_1+\dots+ r^{s-2}c_{n-1}+r^{s-1}c_n)d}
+\equiv 
+1\ 
+\mod p
+\]
+を満たすように帰納的に以下のように定める．
+まず，$c_0$を定義する．
+オイラーの規準から
+$\left(a^{rh-1}\right)^{r^{s-1}}\equiv 1\ \mod p$
+である．
+よって$\left(a^{rh-1}\right)^{r^{s-2}}$は法$p$における
+$1$の$r$乗根である．
+ここで
+$c_0$を$\left(a^{rh-1}\right)^{r^{s-2}}\cdot \gamma^{c_0}\equiv 1$
+を満たすようにとる．
+一般に$n$に対して$n$以下の自然数に対して$c_{i}$が定義されたとしよう．
+このとき，帰納法の仮定から，
+\[
+\left(a^{rh-1}\right)^{r^{s-n-1}}
+\cdot z^{(r^{s-n}c_0+r^{s-n+1}c_1+\dots+ r^{s-1}c_{n-1})d}
+\equiv 
+1\ 
+\mod p
+\]
+である．
+よって，その$r$乗根である
+$\left(a^{rh-1}\right)^{r^{s-n-2}d}
+z^{(r^{s-n-1}c_0+r^{s-n}c_1+\dots+ r^{s-2}c_{n-1})d}$
+法$p$における$1$の$r$乗根である．
+$c_n$を
+$\left(a^{rh-1}\right)^{r^{s-n-2}d}
+z^{(r^{s-n-1}c_0+r^{s-n}c_1+\dots+ r^{s-2}c_{n-1})d}
+\cdot \gamma^{c_n}
+\equiv 1\ \mod p$
+となるように定義する．
+以上によって$\{c_i\}_{i=1}^{s-2}$が得られたが，帰納法の仮定より
+$a^{rh-1}z^{(rc_0+r^{2}c_1+\dots+ r^{s-1}c_{s-2})d}\equiv 1\ \mod p$
+が成り立つ．
+このとき，
+$m=c_0+rc_1+\dots+r^{s-2}c_{s-2}$とすると補題の条件を満たす．
+\end{proof}
+
+この補題を用いたアルゴリズムの
+疑似コードを書くと以下のようになる．
+ここでは$r$は$p-1$の素因数で$a$は$r$乗剰余であることがわかっているとする．
+\begin{algorithm}
+\caption{Solving $x^r\equiv a\ \mod p$}
+\begin{algorithmic}
+\REQUIRE $p$:prime, $r$:prime s.t. $r|p-1$, and $a$:integer s.t.  
+$a^{\frac{p-1}{r}}\equiv 1\ \mod p$
+\STATE Take $z\in \{1, \dots, p-1\}$ s.t. $z^{\frac{p-1}{r}}\not \equiv 1 \ \mod p$
+\STATE Take $s$ and $d$ s.t. $p-1=r^sd$ and $\gcd(r, d)=1$
+\STATE Take $h$ s.t. $rh\equiv 1\ \mod d$
+\STATE  $apow\leftarrow (rh-1)r^s$
+\STATE  $zpow\leftarrow 0$
+\WHILE{$apow\equiv 0\ \mod r$ }
+\STATE $apow\leftarrow apow/r$
+\STATE $zpow\leftarrow zpow/r$
+\IF{$a^{apow}z^{zpow}\not\equiv 1\mod p$}
+\STATE Take $m\in \{0, \dots, p-1\}$ s.t. 
+$\left(a^{apow}z^{zpow}\right)\cdot \left(z^{(p-1)/r}\right)^{m}\equiv 1\ \mod p$
+\STATE $zpow\leftarrow zpow + m(p-1)/r$
+\ENDIF
+\ENDWHILE
+\STATE $apow\leftarrow (apow+1)/r$
+\STATE  $zpow \leftarrow zpow/r$
+\RETURN $a^{apow}z^{zpow}$
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+一般の$r\in \zz_{\ge 1}$に対して$r$乗根を求めるプログラムは以下のようになる．
+以下に現れる$Solve\_Root\_prime(x, r, p)$
+は$r$が$p-1$の素因数のときの$x$の法$p$における$r$乗根を表すとする．
+このような値を求めるプログラムは既に上で記述している．
+
+
+\begin{algorithm}
+\caption{Solving $x^r\equiv a\ \mod p$}
+\begin{algorithmic}
+\REQUIRE $a$:integer, $r$:positive integer,  $p$:prime 
+\IF{$a^{(p-1)/\gcd(p-1, r)}\not\equiv 1\ \mod p$}
+\RETURN `$a$ is not an $r$-th residue.'
+\ENDIF
+\STATE $x\gets a$
+\IF{$\gcd(p-1, r)=1$}
+\STATE Take $v$ s.t. $vr\equiv 1\ \mod p-1$
+\RETURN $x^v$
+\ELSE
+\STATE Take $v$ s.t. $v\cdot \left(\frac{r}{\gcd(p-1, r)}\right)\equiv 1\ \mod p-1$
+\STATE $x\gets x^v$
+\ENDIF
+\STATE Take primes $q_1, \dots, q_l$ s.t. 
+$\gcd(p-1, r)=q_1\cdot q_2\cdots q_l$
+\FOR{$i\in \{1, \dots, l\}$}
+\STATE $x\gets Solve\_Root\_prime(x, q_i, p)$
+\ENDFOR
+\RETURN $x$
+\end{algorithmic}
+
+\end{algorithm}
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}Z. Cao, Q. Sha and X. Fan, 
+\textit{Adleman-Manders-Miler root extraction method revised}, 
+in Information Security and Cryptology (Chuan-Kun Wu, Moti Yung and 
+Dongdai Lin,  eds. ), 7th International Conference, Inscrypt 2011
+Beijing, China, November/December 2011
+Revised Selected Papers,
+(2012), pp77--85. 
+\bibitem{2}
+R. Kumar, \textit{A simple algorithm for finding square rot modulo $p$}, 
+(2020), arXiv:2008.11814 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

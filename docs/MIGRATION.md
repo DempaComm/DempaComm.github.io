@@ -28,6 +28,8 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json
 5. 標準の `.latexmkrc` がなければ生成する。
 6. `paper.json` から `keywords.txt` と `index.html` の原稿一覧を再生成する。
 
+既存PDFを原稿と一緒に保存するだけの試験公開では、取り込み仕様の `build_enabled` を `false` にし、完成PDFを `published.pdf` として保護対象へ含める。この場合は原稿を自動コンパイルせず、保存されたPDFを公開時に `main.pdf` として配置する。
+
 既存の保存先がある場合は上書きせず停止する。
 
 ## 検証と監査

@@ -1,0 +1,397 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+\DeclareMathOperator{\map}{Map}
+
+\title{アスコリ・アルツェラの定理}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+コンパクト性は位相空間の情報が有限開被覆で網羅できるほど小さい（コンパクト）という概念だが、その亜種である点列コンパクト性はどちらかというと位相空間の中の特別な元の存在を保証するために用いられることが多い。
+存在を保証したいものに似ている元を可算個作ってやれば、（まあ、運が良ければ）求めるものが得られるというわけである。
+そういうわけで位相空間が与えられたときにその部分集合が（点列）コンパクトであるかどうか判定できるととても便利である。
+特に写像の空間の部分集合のコンパクト性が判定できれば位相空間の間の特別な写像を構成する鍵になるので、コンパクト性の判定はより重要さを増す。
+この方法論は例えばリーマンの写像定理の証明や、微分方程式の解の存在を保証するために使われている。
+そういったコンパクト性の判定法のひとつとしてこの文章ではアスコリ・アルツェラの定理を紹介する。
+この定理はコンパクト一様収束の位相が入った写像の空間のコンパクト性の判定法と考えることができる。
+余談ではあるがチコノフの定理は各点収束の位相におけるコンパクト性判定法と考えることができる。
+
+\section{準備}
+\begin{df}
+集合$A,B$に対して
+\[
+\map(A,B)
+\]
+で$A$から$B$への写像全体の集合を表すことにする。
+\end{df}
+\begin{df}
+位相空間$X$、$Y$に対して
+\[
+C(X,Y)
+\]
+で$X$から$Y$への連続写像全体の集合を表す。
+\end{df}
+\begin{df}[評価写像]
+$e:C(X,Y)\times X\to Y$を
+$e(f,a)=f(a)$で定義する。また$\mathcal{F}\subset C(X,Y)$と$A\subset X$について
+\[
+e(\mathcal{F}, A)=\{f(a)\mid f\in \mathcal{F}, a\in A\}
+\]
+という表記をする。
+\end{df}
+\begin{df}
+距離空間$(M,d)$と$a\in M$および$r>0$について
+この文章では$U(a,r)$で$a$を中心とする$r$-開球を表すことにする。また$A\subset M$に対して
+\[
+U(A, r)=\bigcup_{a\in A}U(a,r)
+\]
+と定義する。$A$の$r$-開近傍である。
+\end{df}
+以下では、$X$と$Y$は常に距離空間であり、その距離をそれぞれ$d_X$と$d_Y$と書くことにする。
+有界閉集合が常にコンパクトになるような距離空間を固有距離空間と呼ぶ。
+\begin{df}[同程度連続]
+$\mathcal{F}\subset C(X,Y)$が点$a$で同程度連続であるとは
+\[
+\forall a\in X\ \forall \ep>0\ \exists \delta>0\ \forall f\in \mathcal{F}\ \forall x\in X,\ d_X(x,a)<\delta\To  d_Y(f(x),f(a))<\ep
+\]
+が成り立つことである。各点$a\in X$で同程度連続であるとき$\mathcal{F}$は$X$で同程度連続であるとかいう。
+\end{df}
+\begin{df}[同程度一様連続]
+$\mathcal{F}\subset C(X,Y)$が同程度一様連続であるとは
+\[
+\forall \ep>0\ \exists \delta>0\ \forall f\in \mathcal{F}\ \forall x,y\in X,\ d_X(x,y)<\delta\To d_Y(f(x),f(y))<\ep
+\]
+が成り立つことである。
+\end{df}
+\begin{df}[各点一様有界性]
+$\mathcal{F}\subset C(X,Y)$が各点一様有界であるとは任意の$a\in X$に対して$e(\mathcal{F}, a)=\{f(a)\mid f\in \mathcal{F}\}$が$Y$の有界集合であるときに言う。
+\end{df}
+
+\begin{df}[一様有界性]
+$\mathcal{F}\subset C(X,Y)$が一様有界であるとは$e(\mathcal{F}, X)=\{f(x)\mid f\in \mathcal{F}, x\in X\}$が$Y$の有界集合であるときに言う。
+\end{df}
+
+\begin{df}[一様全有界性]
+$\mathcal{F}\subset C(X,Y)$が一様全有界であるとは$e(\mathcal{F}, X)=\{f(a)\mid f\in \mathcal{F},x\in X\}$が$Y$の全有界集合であるときに言う。
+\end{df}
+
+\begin{df}[広義一様全有界性]
+$\mathcal{F}\subset C(X,Y)$が一様全有界であるとは$X$の任意のコンパクト部分集合$K$について
+$e(\mathcal{F}, K)=\{f(a)\mid f\in \mathcal{F},x\in K\}$が$Y$の全有界集合であるときに言う。
+\end{df}
+
+
+\begin{df}[ヘミコンパクト]
+位相空間$X$は、その可算個のコンパクト部分集合族$\{K_i\}_{i\in \nn}$で
+\[
+X=\bigcup_{i\in \nn}K_i\]
+\[
+\forall i\in \nn\ K_i\subset \nai(K_{i+1})
+\]
+を充たすものが存在するときヘミコンパクトと言う。
+\end{df}
+\section{本文}
+\begin{prop}
+$X$がコンパクトであるとき$\mathcal{F}\subset C(X,Y)$が同程度連続であることと、同程度一様連続であることは同値である。
+\end{prop}
+\begin{proof}[略証]$X$はコンパクトなのでルベーグ数が存在する。これを使う。
+\end{proof}
+\begin{prop}
+$X$がコンパクトで$\mathcal{F}\subset C(X,Y)$が同程度連続であるとき、$\mathcal{F}$が各点一様有界であることと$\mathcal{F}$が一様有界であることは同値である。
+\end{prop}
+\begin{proof}
+先の命題から$\mathcal{F}$は同程度一様連続である。
+$\ep=1$に対して$\mathcal{F}$の同程度一様連続性を担保する$\delta$を一つ取る。つまり
+\[
+\forall f\in \mathcal{F}\ \forall x,y\in X,\ d_X(x,y)<\delta\To d_Y(f(x),f(y))<1
+\]
+を成り立たせる$\delta$を一つ取る。$X$はコンパクトなのでその$\delta$-ネット$\{p_1,p_2,\dots, p_k\}$が存在する。さて任意に$x\in X$をとると$i$が存在して$d_X(x,p_i)<\delta$となる。よって任意の$f\in \mathcal{F}$について$d_Y(f(x),f(p_i))<1$となる。つまり
+\[
+e(\mathcal{F},X)\subset U(e(\mathcal{F},\{p_1,\dots,p_k\}),1)
+\]
+であり、$e(\mathcal{F},\{p_1,\dots,p_k\})$は有界集合なので$e(\mathcal{F},X)$は有界集合である。
+\end{proof}
+$X$をコンパクト距離空間とする。このとき$C(X,Y)$に$\sup$距離$D$が次のように定義できる。
+\[
+D(f,g)=\sup_{x\in X}d_Y(f(x), g(x))
+\]
+この距離に関する全有界を述べるのがアスコリ・アルツェラの定理である。
+\begin{thm}[アスコリ・アルツェラ]
+$X$をコンパクトとする。$\mathcal{F}\subset C(X,Y)$が同程度連続かつ一様全有界であることと、$\mathcal{F}$が$\sup$距離$D$について全有界であることは同値である。
+\end{thm}
+\begin{proof}
+まず$\mathcal{F}$が同程度連続であり、一様全有界と仮定して$\mathcal{F}$の全有界性を示す。
+$\ep>0$を任意に与える。$A=e(\mathcal{F},X)$は全有界なので$A$の$\ep/8$-ネット$\{y_1,y_2,\dots,y_n\}$が存在する。$X$がコンパクトなので$\mathcal{F}$が同程度一様連続であるが、$\ep/8$に対して$\mathcal{F}$の同程度一様連続性を担保する$\delta>0$を一つ取る。つまり
+\[
+ \forall f\in \mathcal{F}\ \forall x,y\in X,\ d_X(x,y)<\delta\To d_Y(f(x),f(y))<\ep/8
+\]
+が成り立たせる$\delta$のことである。$X$はコンパクトなので$\delta$-ネット$\{p_1,\dots,p_m\}$が存在する。ところで
+各$\phi\in \map(\{1,2,\dots, m\}, \{1,2,\dots, n\})$に対して
+\[
+S(\phi)=\{f\in \mathcal{F}\mid \forall i\in \{1,2,\dots, m\}\ f(p_i)\in U(y_{\phi(i)}, \ep/8)\}
+\]
+と定義する。そしてさらに
+\[
+I=\{\phi\in \map(\{1,2,\dots, m\}, \{1,2,\dots, n\})\mid S(\phi)\neq \O\}
+\]
+と定義する。$I$は$\map(\{1,2,\dots, m\}, \{1,2,\dots, n\})$の部分集合なので有限集合である。また、$\{y_1,\dots,y_n\}$がネットであることから$I\neq \O$がわかる。そこで各$\phi\in I$に対して$h_{\phi}\in S(\phi)$となる$h_{\phi}$を選んでおく。
+いまからこの$\{h_{\phi}\}_{\phi\in I}$が$\ep$-ネットであることを示そう。任意に$f\in \mathcal{F}$を取る。そしてこの$f$に対して$\psi\in \map(\{1,2,\dots, m\}, \{1,2,\dots, n\})$を各$i\in \{1,2,\dots, m\}$について
+\[
+f(p_i)\in U(y_{\psi(i)},\ep/8)
+\]
+となるように定義する。このような$\psi$が存在することは$\{y_1,\dots,y_n\}$がネットであることからわかる。
+$I$の定義から$\psi\in I$がわかる。$h_{\psi}$と$f$の距離を評価しよう。任意の$x\in X$について$d_X(x,p_i)<\delta$となる$p_i$を取る。このとき同程度一様連続性や$\psi$及び$S(\psi)$の定義などから
+\begin{align*}
+d_Y(f(x),h_{\psi}(x))&\le d_Y(f(x),f(p_i))+d_Y(f(p_i),y_{\psi(i)})+d_Y(y_{\psi(i)}, h_{\psi}(p_i))+d_Y(h_{\psi}(p_i),h_{\psi}(x))\\
+&\le \ep/8+\ep/8+\ep/8+\ep/8=\ep/2
+\end{align*}
+よって$D(f,h_{\psi})\le \ep/2<\ep$
+すなわち$\{h_{\phi}\}_{\phi\in I}$は$\ep$-ネットであり、$\mathcal{F}$が全有界であることがわかった。
+\par
+今度は逆を示そう。つまり$\mathcal{F}$が$D$について全有界であるならば、同程度連続かつ一様全有界であることを示す。まず最初に同程度連続であることを示そう。任意に点$a\in X$と$\ep>0$を与える。$\mathcal{F}$の全有界性から$\ep/3$-ネット$\{h_1,h_2,\dots, h_m\}$が存在する。$\delta>0$を適当に小さく選んで
+\[
+\forall i\in \{1,2,\dots, m\}\  \forall x\in  S\ d_X(x,a)<\delta\To d_Y(h_i(x),h_i(a))<\ep/3
+\]
+を成り立たせるようにする。このことは各$h_i$の連続性と、$\{h_1,h_2,\dots, h_m\}$が有限集合であることから可能である。さて、任意の$x\in X$が$d_X(x,a)<\delta$が成り立つと仮定する。
+そして任意の$f\in \mathcal{F}$について$D(f,h_i)<\ep/3$となるような$h_i$を取る。すると
+\begin{align*}
+d_Y(f(x),f(a))&\le d_Y(f(x),h_i(x))+d_Y(h_i(x),h_i(a))+d_Y(h_i(a),f(a))\\
+&\le d_Y(h_i(x),h_i(a))+2D(f,h_i)<\ep
+\end{align*}
+よって$\mathcal{F}$は同程度連続である。
+\par
+次に一様全有界性を示そう。任意に$\ep>0$を与える。そして$\mathcal{F}$の$\ep/2$-ネット$\{h_1,\dots,h_m\}$を取る。すると$X$のコンパクト性から各$e(h_i,X)=h_i(X)$はコンパクトであるから
+\[
+e(\{h_1,\dots,h_m\},X)=\bigcup_{i=1}^mh_i(X)
+\]
+もコンパクトである。
+よってこの集合の$\ep/2$-ネット$\{y_{1}, y_{2},\dots, y_{n}\}$が存在する。いまから$\{y_{1}, y_{2},\dots, y_{n}\}$が$e(\mathcal{F},X)$の$\ep$-ネットであることを示そう。任意に$f\in \mathcal{F}$と$a\in X$を与える。
+そして$D(f,h_i)<\ep/2$となる$h_i$を取り、さらに$d_Y(h_i(a),y_j)<\ep/2$となる$y_j$を取る。このとき
+\[
+d_Y(f(a), y_i)\le d_Y(f(a),h_i(a))+d_Y(h_i(a),y_j)\le D(f,h_i)+d_Y(h_i(a),y_j)<\ep
+\]
+となるので$\{y_{1}, y_{2},\dots, y_{n}\}$は$e(\mathcal{F},X)$の$\ep$-ネットである。
+\end{proof}
+$Y$に固有性を仮定すると次のように言い換えることもできる。
+\begin{cor}
+$X$をコンパクトとし、$Y$を固有距離空間とする。このとき$\mathcal{F}\subset C(X,Y)$が同程度連続かつ各点一様有界であることと、$\mathcal{F}$が$\sup$距離$D$で全有界であることは同値である。
+\end{cor}
+一般的によく見るのは次の形のアスコリ・アルツェラだと思う。
+\begin{thm}
+$X$をコンパクトとし、$Y$を固有距離空間とする。このとき$\mathcal{F}\subset C(X,Y)$が同程度連続かつ一様有界であることと、$\mathcal{F}$が$\sup$距離$D$で全有界であることは同値である。
+\end{thm}
+
+$X$がコンパクトじゃない場合にもある程度条件を課せばアスコリ・アルツェラ型の定理が成り立つ。それを述べるために広義一様収束のための距離を用意しよう。$X$を$\sigma$コンパクトとする。$X$の可算で増大なコンパクト部分集合族$\{K_i\}$で、$X$を被覆するものについて、
+$f,g\in C(X,Y)$に対し、
+\[
+D_i(f,g)=\sup_{x\in K_i}d_Y(f(x), g(x))
+\]
+と定義し、さらに
+\[
+E(f,g)=\sup_{i\in \nn}\left\{\frac{1}{2^i}\frac{D_i(f,g)}{1+D_i(f,g)}\right\}
+\]
+と定義する。$E$は$C(X,Y)$上の距離となり、$E$について収束することと、広義一様収束することは同値になる。
+\begin{thm}
+$X$を$\sigma$コンパクトとする。このとき$\mathcal{F}\subset C(X,Y)$が同程度連続で、広義一様全有界であるならば$\mathcal{F}$は$E$について全有界である。さらに$X$がヘミコンパクトならば、逆も成り立つ。
+\end{thm}
+\begin{proof}
+まず$\mathcal{F}$が同程度連続で、広義一様全有界であると仮定して全有界性を調べよう。
+$\ep>0$を任意に与える。$N$を十分大きくとって$N<i$ならば$2^{-i}<\ep/2$となるようにとる。
+そして
+\[
+\mathcal{G}=\{f|K_N\mid f\in \mathcal{F}\}
+\]
+と定義すると$\mathcal{G}\subset C(K_N,Y)$であり、また同程度連続で、一様全有界であることもわかる。よって先のアスコリ・アルツェラの定理から$\mathcal{G}$は$D_N$について全有界である。
+そこで$\mathcal{G}$の$\ep/2$-ネット$\{h_1,h_2,\dots, h_m\}$を取る。
+$j\le N$ならば$D_j(f,g)\le D_N(f,g)$であるから
+\[
+\frac{D_j(f,g)}{1+D_j(f,g)}\le \frac{D_N(f,g)}{1+D_N(f,g)}
+\]
+がわかる。任意に$f\in \mathcal{F}$を与え、$D_N(f,h_i)<\ep/2$となる$h_i$を取ると$j\le N$となる$j$について
+\[
+\frac{1}{2^j}\frac{D_j(f,h_i)}{1+D_j(f,h_i)}\le \frac{1}{2^j}\frac{D_N(f,h_i)}{1+D_N(f,h_i)}\le 
+\frac{1}{2^j}D_N(f,h_i)<\ep/2
+\]
+さらに$N<j$ならば$N$の取り方から
+\[
+\frac{1}{2^j}\frac{D_j(f,h_i)}{1+D_j(f,h_i)}<\ep/2
+\]
+となるので$E(f,h_i)<\ep$である。よって$\{h_1,h_2,\dots, h_m\}$は$\mathcal{F}$の$E$における$\ep$-ネットである。つまり$\mathcal{F}$は$E$について全有界である。
+\par
+次は$X$にヘミコンパクト性を課して逆を示そう。$a\in X$について$a\in \nai(K_i)$となる$i$が存在する。
+$E$の定義と$\mathcal{F}$が$E$について全有界であることから
+\[
+\mathcal{G}=\{f|K_i\mid f\in \mathcal{F}\}
+\]
+は$D_i$について全有界である。よって先のアスコリ・アルツェラの定理から$\mathcal{G}$は$a\in X$において$K_i$上で同程度連続である。ところで$x\in \nai(K_i)$なので結局$\mathcal{F}$が$a\in X$で$X$上同程度連続であることがわかる。また$X$のコンパクト集合$K$を与え、$K\subset K_j$となる$K_j$を取るとやはり$E$の定義と$\mathcal{F}$が$E$について全有界であることから
+\[
+\mathcal{G}=\{f|K_j\mid f\in \mathcal{F}\}
+\]
+は$D_j$について全有界である。よって先のアスコリ・アルツェラの定理から$\mathcal{G}$は$K_j$上一様全有界である。ゆえに$K$上でも$\mathcal{G}$は一様全有界である。つまり$\mathcal{F}$は広義一様全有界である。
+\end{proof}
+この定義域がノンコンパクトな場合のアスコリ・アルツェラの定理も$Y$が固有で広義各点一様有界な場合に特殊化できるが面倒なので述べない。
+またアスコリ・アルツェラ型の定理は一様空間の範疇まで一般化できるが、面倒なのでここでは述べない。
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}ケリー著児玉之宏訳, 位相空間論, 吉岡書店1968
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

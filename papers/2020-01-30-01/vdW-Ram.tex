@@ -1,0 +1,693 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\ram}{Ram}
+\DeclareMathOperator{\mram}{MRam}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{van der Waerden Theorem and Ramsey Theorem}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章ではvan der waerdenの定理とRamseyの定理を証明し，コンパクト性原理とも呼ばれるRadoの選択定理を紹介する．
+\section{van der Waerden's Theorem}
+このセクションでは特に断らない限りは，自然数$a, b$について$[a, b]=\{x\in \nn\mid a\le x\le b\}$とする．
+
+二つの$m$対
+$(x_i), ( y_i)\in [0, l]^m$が$l$-同値であるとは，値が$l$であるような最後の番号までこの二つが一致していることとする．つまり，
+
+\[
+\forall j\in \{n\mid x_n=l\}\cup \{n\mid y_n=l\}\ \forall i\le j\ x_i=y_i
+\]
+
+この同値類による代表元は$(*, *, \dots, *,  l, 0,0, \dots, 0)$という形のものを選べる．
+
+任意の$m, l\in \nn_{+}$に対して，次の主張を$S(l, m)$とかこう：
+任意の$r\in \nn_{+}$に対して$N(l, m, r)\in \nn$が存在して，
+任意の写像$[1, N(l, m, r)]\to [1, r]$
+に対して$a, d_1, d_2, \dots, d_m$が存在し，
+任意の$(x_i)\in [0, l]^m$に対して
+$a+\sum_{i=1}x_id_i\le N(l, m, r)$であり，かつ
+$C(a+\sum_{i=1}x_id_i)$は$l$-同値類上で定数となる．
+
+\begin{lem}
+$S(l, 1)$と$S(l, m)$が成立するならば，$S(l, m+1)$が成立する．
+\end{lem}
+\begin{proof}
+$r$を固定する．$M=N(l, m, r)$とし，$N=N(l, 1, r^M)$とする．
+そして，写像$C:[1, MN]\to [1, r]$が与えられているとする．
+さてこのとき，写像$D: [1, N]\to [1, r]^M\cong [1, r^M]$
+を以下のように定義する．$g,h\in [1, N]$について$D(g)=D(h)$とは
+ 任意の$j\in [0, M-1]$について
+\[
+C(gM-j)=C(hM-j)
+\]
+が成り立つこととする．
+$N$の定義から，ある$q, k\in \nn_{+}$が存在して
+任意の$x\in [0, l-1]$について
+$q+xk\le N$であり，
+$D(q+xk)$が定数となる．
+さて，$S(l, m)$を区間$[(q-1)M+1, qM]$
+に対して適応する．すると，ある$a, d_1, \dots, d_m\in \nn_+$
+が存在して，
+$a+\sum_{i=1}^mx_id_i\in [(q-1)M+1, qM]$であり，
+$C(a+\sum_{i=1}^mx_id_i)$は$l$-同値類上で定数になる．
+$q, k$の定義から
+任意の
+$x\in [0, l-1]$について
+\[
+D(q+xk)=D(q)
+\]
+が成り立ち，このことと$D$の定義から任意の$b\in [1, M]$について
+\[
+C((q-1)M+b+xkM)=C((q-1)M+b)
+\]
+が成り立つ．
+次に$d_{m+1}=kM$
+として，$a, d_1, \dots, d_m, d_{m+1}$が求める条件を満たすことを確めよう．任意に$(x_i)\in [0, l]^{m+1}$とすると，
+\[
+a+\sum_{i=1}^{m+1}x_id_i\le a+\sum_{i=1}^mx_id_i+x_{m+1}kd_{m+1}\le qM+lkM=(q+lk)M\le MN
+\]
+である．
+任意に$(x_i)\in [0, l]^{m+1}$をとる．
+
+Case1 $x_{m+1}<l$のとき，
+$a+\sum_{i=1}^mx_id_i\in [(q-1)M+1, qM]$と
+先に示したことから，
+\[
+C\left(a+\sum_{i=1}^mx_id_i+x_{m+1}d_{m+1}\right)=
+C\left(a+\sum_{i=1}^mx_id_i\right)
+\]
+となるので，$l$-同値類の上で定数となる．
+
+Case2 $x_{m+1}=l$のとき．このときは$(x_i)$の$l$-同値類は一個しかないから証明することは何もない．
+
+以上で補題が示された．
+\end{proof}
+
+
+
+
+
+
+
+
+以下では一般に$\sum_{i=1}^0f_i=0$であることに注意せよ．
+
+
+\begin{lem}
+任意の$ｍ$について$S(l, m)$が成立するならば，
+$S(l+1, 1)$が成立する．
+\end{lem}
+\begin{proof}
+$r$を固定する．
+簡単のために$N=N(l, r,r)$とする．
+さて，任意に$C:[1, 2N]\to [1, r]$をとる．
+すると，$a, d_1, \dots, d_r$が存在して
+任意の$(x_i)\in [0, l]^r$について
+$a+\sum_{i=1}^rx_id_i\le N$であり，
+$C(a+\sum_{i=1}^rx_id_i)$は$l$-同値類上で定数となる．
+
+$w\in [0,r]$について
+\[
+C\left(a+\sum_{i=1}^wld_i\right)
+\]
+を考えよう．彩色は$r$個で，$[0, r]$は$r+1$個あるので，ある
+$u, v\in [0, r]$が存在して$u<v$と
+\[
+C\left(a+\sum_{i=1}^uld_i\right)=C\left(a+\sum_{i=1}^vld_i\right)
+\]
+である．
+$x\in [0, l]$を任意に与える，$x<l$のときには
+$(l, \dots, l, x,\dots, x)$は$(l, \dots, l, 0\dots, 0)$と
+$l$-同値なので
+\[
+C\left(\left(a+\sum_{i=1}^uld_i\right)+x\left(\sum_{i=u+1}^vd_i\right)\right)=C\left(a+\sum_{i=1}^uld_i\right)
+\]
+また，
+$x=l$のときは
+$C(a+\sum_{i=1}^uld_i)=C(a+\sum_{i=1}^vld_i)$
+なので，
+$q=(a+\sum_{i=1}^uld_i)$, $k=(a+\sum_{i=1}^vld_i)$
+として，$S(l+1, 1)$の成立がわかる．
+\end{proof}
+
+以上の補題から次のことがわかる．
+\begin{thm}
+任意の$l,  m\in \nn_{+}$について，$S(l, m)$が成り立つ．
+\end{thm}
+
+van der Waerdenの定理とは次の主張のことである．
+\begin{thm}[van der Waerden theorem]
+任意の$l, r\in \nn_+$に対して$n(l, r)\in \nn_+$が存在して，
+任意の$C: [1, n(l, r)]\to [1, r]$
+に対してある$w\in [1, r]$が存在して，$C^{-1}(w)$は
+長さ$l$の等差数列を含む．
+\end{thm}
+このvan der Waerdenの定理は$\forall l\in \nn_+\  S(l, 1)$が成り立つというのと同値であるから，上の定理から成立がすぐにわかる．
+$m$という補助パラメーターを用いて，証明を簡略化しているのである．
+
+\begin{cor}[infinite van der Waerden theorem]
+任意の$r\in \nn_{+}$と任意の彩色$C:\nn_+\to [1, r]$
+についてある$w\in [1,r]$が存在して$C^{-1}(w)$
+は任意の長さの等差数列を含む．ここで，等差は一定でなくて良い．
+\end{cor}
+\begin{proof}
+彩色$C$に対して次のように集合を定義する．
+\[
+S=\{(l, n, w)\in \nn_{+}\times\nn_{+}\times  [1, r]\mid \text{$C^{-1}(w)\cap [1, n]$は長さ$l$の等差数列を含む}\}
+\]
+van der Weardenの定理より，任意の$l$について$(n, w)\in \nn_{+}\times [1, r]$
+が存在して$(l, n, w)\in S$である．特に$S$は無限集合である．
+また写像$p: S\to \nn_{+}; (l, n, w)\mapsto l$は全射である．
+そして写像$q: S\to [1, r]; (l, n, w)\mapsto w$
+を考えると，$S$が無限集合であることと，$p$が全射であることから
+ある$w\in [1, r]$について$p(q^{-1}(w))$は無限集合である．
+また，$(l, n, w)\in S$ならば$m<l$となる$m$
+について$(m, n, w)\in S$なので，
+$p(q^{-1}(w))$が無限集合となる$w\in [1, r]$について，
+$C^{-1}(w)$は任意の長さの等差数列を含む．
+\end{proof}
+
+\section{Ramsey's Theorem}
+集合$S$と基数$n$について$[S]^n$で$S$の濃度$n$の部分集合全体を表すことにする．
+
+基数$\kappa$, $n$, $c$, $\lambda$について，
+任意の彩色$\Gamma: [\kappa]^n\to c$について，濃度$\lambda$の$\kappa$の部分
+集合$M$が存在して，$\Gamma|_{[M]^n}$が定数となるという命題を
+$\kappa\to (\lambda)_c^n$で表すことにする．
+この文章では特に$\kappa$, $\lambda$が高々可算基数の場合を取り扱う．
+つまり古典的なラムゼーの定理である．
+
+\subsection{Infinite Ramsey Theorem}
+明らかに次がわかる．
+\begin{lem}
+$\aleph_{0}\to (\aleph_0)_c^1$
+\end{lem}
+まず最初に$n$について帰納法を回せることを示す．
+\begin{lem}
+$n\ge 2$について
+$\aleph_0\to (\aleph_0)_c^n$ならば
+$\aleph_0\to (\aleph_0)_c^{n+1}$
+\end{lem}
+
+\begin{proof}
+今
+$\aleph_0\to (\aleph_0)_c^n$
+が正しいとする．
+
+$A$を加算集合とする．$\Gamma:[A]^{n+1}\to c$を色付けとする．
+任意の$x$について，$\Gamma_x:[A\setminus \{x\}]^n\to c$を以下のように定義する．$S\in [A]^n$について
+\[
+\Gamma_x(S)=\Gamma(S\cup\{x\})
+\]
+
+ 帰納的に集合列$S_k$と列 $\{x_k\}$と
+ 関数列$v_k:k\to c$を構成していく．
+ まず
+ $S_0=A$とし，$x_0$は$A$の適当な元とする．$v_0$
+ は空写像である．
+ 
+
+一般に$k$まで$S_k$と$x_k$と$v_{k}$が定義されたときに
+$S_{k+1}$は$A\setminus \{x_k\}$の部分集合で
+$\Gamma_{x_k}$について同色なものとする．
+$x_{k+1}$は$S_{k+1}$の適当な元とし
+$v_{k+1}|_{k}=v_k$と定義し，
+$v_{k+1}(k)$は$S_{k+1}$の色とする．
+
+
+さて，$v:\omega_0\to c$を$v(k)=v_{k+1}(k)$
+と定義する．このとき$v$は$0, 1, \dots, c-1$の値のうちどちらを無限回とる．（これは$\aleph_0\to (\aleph_0)_c^1$ということでもある．）
+一般性を失うことなく$0$がそうであるとしてもよい．
+\[
+B=\{x_k\mid v(k)=0\}
+\]
+と定義する．$B$は加算集合である．
+ここで，$k_0<\dots, <k_n$を任意にとる．
+$S_{m}$の定義から，$x_{k_1}\dots, x_{k_n}\in S_{k+1}$
+であり，$v(k)=0$から
+\[
+\Gamma_{x_{k_0}}(\{x_{k_1},\dots x_{k_n}\})
+=\Gamma(\{x_{k_0},\dots x_{k_n}\})
+=0
+\]
+$k_0, \dots, k_{n}$は任意であったから
+つまり，$\Gamma$は$[B]^{n}$は$0$の値しか取らない．
+\end{proof}
+
+
+以上から次の定理がわかる．
+\begin{thm}[Ramsey's Theorem]
+$n,c\in \nn_+$とすると
+$\aleph_0\to (\aleph_0)_c^n$が成り立つ．
+\end{thm}
+
+\subsection{Finite Ramsey Theorem}
+
+任意の$n, c, a_0\dots, a_{c-1}\in \nn_+$について
+次の言明を$\mram_c^n( a_0, \dots, a_{c-1})$で表す．
+ある$r\in \nn_+$が存在して，$r\le N$となる任意の$N$と，
+任意の彩色$\Gamma:[N]^n\to c$に対して
+ある$i\in c$と$A\subset N$が存在して$a_i\le |A|$かつ
+$\Gamma([A]^n)=i$を満たす．
+
+
+任意の$n, c, a\in \nn_+$について
+次の言明を$\ram_{c}^n(a)$で表す．
+ある$r\in \nn_+$が存在して，$r\le N$となる任意の$N$と，
+任意の彩色$\Gamma:[N]^n\to c$に対して
+$A\subset N$が存在して$a\le |A|$かつ
+$\Gamma([A]^n)$は定数である．
+
+
+定義から直ちに次のことがわかる．
+\begin{lem}
+\[
+\forall n\  \forall c\ \forall a_0\dots \forall a_{c-1}\ 
+(\ram_{c}^n(\max\{a_0, \dots, a_{c-1}\})\To \mram_{c}^n(a_0, \dots, a_{c-1}))
+\]
+\end{lem}
+
+我々が示すべき命題は次である．
+
+\begin{thm}[Finite Ramsey Theorem]
+\[
+\forall n\  \forall c\ \forall a\ \ram_c^n(a)
+\]
+\end{thm}
+\begin{proof}
+$\aleph_0\to (\aleph_0)_c^n$の成立と
+背理法で示す．
+\[
+\exists\ n\ \exists c\ \exists a\ \lnot \ram_c^n(a)
+\]
+を仮定する．
+
+ここで，$\lnot R_c^n(a)$とは次の言明のことである．
+任意の$r\in \nn_+$に対して，ある$r\le N$と彩色
+$\Gamma:[N]^n\to c$が存在して，
+どんな$a<|A|$を満たす$A\subset N$も
+$\Gamma([A]^n)$は定数にならない．
+
+よって，次のような短調増加列$\{N_i\}_{i\in \nn}$と
+彩色$\Gamma_i:[N]^n\to c$が存在する．
+任意の$i$について，
+どんな$a<|A|$を満たす$A\subset N_i$も
+$\Gamma([A]^n)$は定数にならない．
+
+今全単射$z:\nn\to [\nn]^n$
+を考える．
+$\Gamma_i$たちのコドメインは有限集合なので
+次のような
+$\nn$の無限部分集合$\{m(i, 0)\}_j$が存在する．
+任意の$i$について$0\in N_{m(i,0)}$であり，
+$\Gamma_{m(i, 0)}(z(0))$
+は同じ値．
+
+帰納的に$\{m(i, k)\}$が構成されたときに
+その可算部分集合$\{m(i, k+1)\}$
+を以下を満たすものとして定義する．
+任意の$i$について$k+1\in m(i, k+1)$であり，
+$\Gamma_{m(i, k+1)}(z(k+1))$は単色．
+
+さて，$\Gamma:[\nn]^n\to c$
+を以下のように定義する．
+$e\in [\nn]^n$について
+$\Gamma(e)=\Gamma_{m(z^{-1}(e),z^{-1}(e))}(e)$
+と定義する．
+このとき$\aleph_0\to (\aleph_0)_c^n$が成立するので，
+ある無限集合$A\subset \nn$が存在して
+$\Gamma([A]^n)$は単色となる．
+有限集合$S\subset A$を$|S|=a$となるように適当に取る．
+そして，$m(i, i)$を$\max S< N_{m(i,i)}$となるように取る．
+$m(i, j)$の定義から，
+$\Gamma|_{N_{m(i,i)}}=\Gamma_{m(i, i)}$
+である．さて，$S$はその定義の仕方から$\Gamma_{m(i,i)}([S]^n)$
+が定数になり，$S\subset N_{m(i,i)}$となる．
+これは$Ni$の定義に反するので，背理法により定理が証明された．
+\end{proof}
+
+\section{Compactness Principle}
+上の方法と同じだが，
+このセクションではRadoの選択原理を用いて
+無限ラムゼーの定理から有限ラムゼーの定理を証明する．
+また，無限van der Waerdenの定理から有限版を導く．
+\begin{thm}[Rado's selection principle]
+族$\{A_i\}_{i\in I}$を有限集合の族とする．
+また，$\mathcal{P}\subset  [I]^{<\omega}$
+は任意の
+$J_1, J_2\in \mathcal{P}$に対してある$J_3\in \mathcal{P}$
+が存在して$J_1\cup J_2 \subset J_3$を満たすとする．
+各$J\in  \mathcal{P}$について
+$f_J\in \prod_{i\in J}A_i$が与えられているとする．
+このとき，$F\in \prod_{i\in I}A_i$が存在して，
+任意の$J\in \mathcal{P}$に対して$K\in \mathcal{P}$
+が存在して
+$J\subset K$と$F|J=f_K|J$
+を満たす．
+\end{thm}
+\begin{proof}
+チコノフの定理から$\prod_{i\in I}A_i$
+は離散空間の直積空間としてコンパクトである．
+各$J\in \mathcal{P}$について
+\[
+E_J=\{
+g\in \prod_{i\in \nn}A_i\mid \exists K\in [I]^{<\omega}\ 
+g|J=f_K|J
+\}
+\]
+と定義する．$E_J$
+は非空である．　
+これが閉集合であることを示そう．
+$g\not\in E_J$とする．このとき任意の$J\subset K$について
+$g|\neq f_K|J$である．
+さて，$O=\{h\in \prod_{i\in I}\mid f|J=g|J\}$
+とすると，$J$は有限集合なので$O$開集合である．
+定義から$O\cap E_J=\O$なので，$E_J$が閉集合であることがわかる．
+また，$J_1\cup J_2 \subset J_3$となる$\mathcal{P}$の元
+の三つ組に対して
+$E_{ J_3}\subset E_{J_1}\cap E_{J_2}$
+なので，$\{E_J\}$は有限交叉性を持ち，よってコンパクト性から
+$\bigcap_JE_J\neq \O$となる．
+$F\in \bigcap_J E_J$を取れば，これは求める性質を持つ．
+
+\end{proof}
+
+\begin{proof}[Proof  finite Ramsey theorems from infinite Ramsey theorem]
+背理法で示す．
+\[
+\exists\ n\ \exists c\ \exists a\ \lnot \ram_c^n(a)
+\]
+を仮定する．
+
+ここで，$\lnot \ram_c^n(a)$とは次の言明のことである．
+任意の$r\in \nn_+$に対して，ある$r\le N$と彩色
+$\Gamma:[N]^n\to c$が存在して，
+どんな$a<|A|$を満たす$A\subset N$も
+$\Gamma([A]^n)$は定数にならない．
+
+よって，次のような短調増加列$\{N_i\}_{i\in \nn}$と
+彩色$\Gamma_i:[N]^n\to c$が存在する．
+任意の$i$について，
+どんな$a\le |A|$を満たす$A\subset N_i$も
+$\Gamma([A]^n)$は定数にならない．
+
+$I=[\nn]^n$とし，
+$A_i=c$と定義し，
+$\mathcal{P}=\{[N_i]^n\mid i\in \nn\}$
+とする．このとき
+$f_{[N_i]^n}: [N_i]^n\to c$を
+$f_{[N_i]^n}(e)=\Gamma_{i}(e)$と定義する．
+するとRado's selection principle から
+$\Gamma:[\nn]^n\to c$が存在し，
+任意の$N_i$について，$N_k (i<k)$
+が存在し$\Gamma|[N_i]^n=\Gamma_k|[N_i]^n$
+が成り立つ．
+さて，$\aleph_0\to (\aleph_0)_c^n$が成り立つので，
+ある$S\subset \nn$が存在して$\Gamma([S]^n)$は定数になる．
+$S$の部分集合$A$を$a\le |A|$となるようにとる．
+次に$\max A< N_i$となる$N_i$をとる．
+すると，$\Gamma|[N_i]^n=\Gamma_k|[N_i]^n$
+なので，$[N_k]^n$の部分集合で，$\Gamma_k([A]^n)$
+が定数で，$a\le |A|$となるものは存在しないはずなので，これは矛盾である．よって有限Ramseyの定理が成り立つ．
+\end{proof}
+
+\begin{proof}[Proof  finite van der Waerden theorems from infinite one]
+無限van der Waerdenの定理を仮定して有限のそれを証明する．
+有限van der waerdenの定理が成り立たないとする．つまり，
+ある$l, r\in \nn_{+}$が存在して任意の$n\in \nn_{+}$に対してある彩色$C_n: [1, n]\to [1, r]$が存在してどんな$w\in [1, r]$についても$C_n^{-1}(w)$が長さ$l$の等差数列を含まないとする．
+$I=\nn_{+}$とし
+$\mathcal{P}=\{[1, n]\mid n\in \nn_{+}\}\subset [I]^{<\omega}$とおく．
+また，$i\in I$に対して$A_i=[1, r]$とする．
+各$[1, n]\in \mathcal{P}$について
+$f_{[1, n]}: [1, n]\to [1, r]=A_i$を
+$f_{[1, n]}=C_n\in \prod_{i\in [1, n]}A_i$と定義する．
+このときRado's selection principleより，ある$F\in \prod_{i\in I}A_i$つまり，
+写像$F: \nn_{+}\to [1, r]$が存在して
+任意の$[1, n]\in \mathcal{P}$に対して$[1, k]\in \mathcal{P}$が存在して
+$[1, n]\subset [1,k]$と$F|_{[1, n]}=f_{[1, k]}|_{[1, n]}=C_k|_{[1, n]}$
+が成り立つ．$F$は$\nn_{+}$の彩色なので，infinite van der Waerdenの定理から，ある $w\in [1, r]$が存在して$F^{-1}(w)$は任意の長さの等差数列を含む．
+特に長さ$l$の等差数列$\{a_i\}_{i=1}^l$を含む．
+$N$を$\{a_i\}_{i=1}^l\subset [1, N]$となるように大きくとると，
+$F$の取り方から$N\le K$となる$K$が存在して$F|_{[1, K]}=C_K|_{[1, N]}$
+となる．これは$C_K^{-1}(w)$が長さ$l$の等差数列を含むということだから矛盾する．よって有限van der Waerdenの定理が成り立つ．
+
+\end{proof}
+
+
+
+\section{ おまけ：帰納法による有限ラムゼーの定理の証明}
+
+\begin{df}
+任意の$n, c, a\in\nn_{+}$について，$R_c^n(a)$で，
+$R_c^n(a)\to (a)_c^n$を成り立たせる最小の正の自然数とする．
+もちろんまだ存在するかどうかは知らないとする．
+もし，$l\to (a)_c^n$ならば，$R_c^n(a)$は存在するし，
+$R_c^n(a)\le l$である．
+\end{df}
+鳩の巣原理から次がわかる．
+\begin{thm}
+任意の$n, c, a\in\nn_{+}$について
+$ac\to (a)_c^1$
+つまり$R_c^1(a)\le ac$. 
+\end{thm}
+
+\begin{lem}
+当たり前だが，$R_c^n(a)\ge a$である．
+\end{lem}
+
+\begin{thm}
+任意の$n, k, a\in \nn_{+}$について次がわかる．
+もし$R_k^n(a)$が存在し，
+かつ$R_2^n(R_k^n(a))$が存在するなら
+$R_{k+1}^n(a)$も存在し，
+$R_{k+1}^n(a)\le R_{2}^n(R_k^n(a))$
+を満たす．
+\end{thm}
+\begin{proof}
+$N\le R_{2}^n(R_k^n(a))$
+とし，
+$\Gamma: [N]^n\to k+1$を彩色とする．
+そして$r\in k+1$を適当にとり，新たに彩色$\Delta:N\to 2 $を
+\[
+\Delta(i)=
+\begin{cases}
+0 & \text{$\Gamma(i)\neq r$}\\
+1 & \text{$\Gamma(i)=r$}
+\end{cases}
+\]
+と定義する．
+$N\le R_{2}^n(R_k^n(a))$なので，
+ある$N$の部分集合$A$で $\Delta([A]^n)$が定数であって，$\card(A)=R_k^n(a)$
+となる．もし$\Delta([A]^n)$の値が$1$ならば，$\Gamma([A]^n)=\{r\}$で，
+$\card(A)=R_k^n(a)\ge a$なので，証明は終わる．
+もし$\Delta([A]^n)=0$ならば
+$\Gamma|_{[A]^n}: [A]^n\to k$とみなせるので，
+$\card(A)=R_k^n(a)$からさらに$A$の部分集合$B$で$\card(B)\ge a $であり，$\Gamma([B]^n)$が定数であるものが存在する．これで証明が終わる．
+\end{proof}
+
+\begin{thm}
+もし$n$を任意に与える．
+もし任意の$x\in \nn_{+}$について$R_2^n(x)$が存在するならば，
+$R_2^{n+1}(a)$も存在し，
+$R_2^{n+1}(a)\le (R_2^n)^{2a}(a)=R_2^n(R_2^n(\dots R_2^n(a)))$
+を満たす．
+\end{thm}
+\begin{proof}
+$(R_2^n)^{2a}(a)\le N$
+とする．
+帰納的に 
+$N_i$で$N_i\subset N$かつ$|N_i|\ge (2R_2^n)^{2a-i}(a)$, 
+$x_i\in N_i$と
+$v_i:i\to 2$
+ $(i\in 2a)$
+を構成しいていく．
+まず$N_0=N$とし，$x_0$は $N_0$の適当な元とする．
+そして，$v_0$は空写像である．
+$N_i$, $e_i$, $v_i$
+が構成された時に $N_{i+1}$, $e_i$, $v_i$を構成する．
+$|N_i|\ge  (2R_2^n)^{2a-i}(a)$なので，
+$\Gamma_{x_i}$をについて同色な部分集合$A$で，
+$A\le (R_2^n)^{2a-i-1}(a)$となる$A$が存在する．これを$N_{i+1}$とし，$v_{i+}(i+1)$は
+$[N_{i+1}]^{n}$の色とする．
+
+さて，$v_{2a-1}:2a\to 2$はについて，$|S|=a$で，$v_{2a-1}(S)$が等色になるものが存在する($2a\to (a)_2^1$が成り立つということでもある)．その値は$0$としても一般性を失わない．
+$M=\{x_i\mid i\in A\}$とする．
+もちろん$|M|=a$である．
+任意に$k_0<k_1\dots k_n$をとると，
+$x_{k_i}\in N_{k_0}$である．
+また，$v_{2a-1}(k_0)=0$なので
+\[
+\Gamma_{x_{k_0}}(\{x_{k_1}, \dots, x_{k_n}\})=\Gamma(\{x_{k_0},\dots x_{k_n}\})=0
+\]
+である．$k_*$は任意であったから，$\Gamma([M]^{n+1})=0$
+であり，等色である．
+\end{proof}
+
+\begin{thm}
+任意の$n, c, a\in \nn_{+}$について$R_c^n(a)$が存在する．つまり，
+任意の$n, c, a\in \nn_{+}$について十分大きい$N$が存在して
+\[
+N\to (a)_c^n
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+上の命題を帰納法で回すとわかる．
+\end{proof}
+
+\begin{thebibliography}{9}
+\bibitem{Gott}W. H. Gottschalk, \textit{Choice functions and Tychonoff's theorem}, Proc. Amer. Math. Soc. 2 (1951), 172. 
+\bibitem{1}R. L. Graham and B. L. Rothchild, \textit{A short proof of van der Waerden's theorem on arithmetic progressions}, Proc. Amer. Math. Soc. 42 (1974), 385--386. 
+\bibitem{Rado}R. Rado, \textit{Aximatic treatment of rank in infinite sets}, Canad. J. Math. 1 (1949), 337--343. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

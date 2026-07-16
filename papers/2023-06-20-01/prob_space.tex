@@ -1,0 +1,1256 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+\DeclareMathOperator{\mean}{\mathbb{E}}
+\DeclareMathOperator{\varian}{\mathbb{V}}
+
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{距離空間上の確率測度}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では，
+距離空間上の確率測度の基本的な性質や，
+確率測度からなる空間の話をする．
+\section{基本的な定義や定理など}
+基本的なことは
+\cite{hatena0}や\cite{hatena1}
+を参照しても良い．
+
+\begin{df}
+位相空間$X$に対して，$X$の開集合系から生成される
+完全加法族を$\mathfrak{B}(X)$と書くことにする．
+この集合族を\textbf{ボレル集合族}と呼ぶ．
+\end{df}
+
+\begin{df}
+測度空間
+$(X, \mathfrak{M})$
+上の測度
+$\mu$が
+\textbf{確率測度}であるとは，
+$\mu(X)=1$
+を満たすときにいう．
+$\mu$
+が確率測度であるとき，測度空間
+$(X, \mathfrak{M}, \mu)$を
+\textbf{確率空間}と呼び，
+$X$の元のことを
+\textbf{事象}と呼ぶ．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$から
+可測空間$(Y, \mathfrak{N})$への可測写像可測写像を
+\textbf{$(Y, \mathfrak{N})$-値確率変数}と呼ぶ．
+あるいは紛れがないときには単に
+\textbf{確率変数}と呼んだりもする．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$
+とその上の確率変数$f$について
+$\int_{X}f\ d\mu$を
+$\mean(f)$と書いたりする．
+特に
+$\mean(f)$を
+$f$の\textbf{期待値}と呼んだり，
+$f$の\textbf{平均値}と呼んだりする．
+そして$n\in \zz_{\ge 1}$に対して，
+$\mean(f^{n})$を$f$の$n$次モーメントと
+呼んだりする．
+$\mean(f^{n})<\infty$であるとき$f$は$L^{n}$
+関数とか言ったりするが，これは測度論と同じ言葉遣いである．
+また，
+$\varian(f)=\mean((f-\mean(f))^{2})$
+を$f$の\textbf{分散}と呼ぶ．
+簡単な式変形で
+$\varian(f)=\mean(f^{2})-(\mean(f))^{2}$
+となることがわかる．
+\end{df}
+
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき可測写像$\phi:X\to Y$に対して
+写像$\phi_{*}\mu: \mathfrak{N}\to [0, \infty]$
+を
+$\phi_{*}\mu(A)=\mu(\phi^{-1}(A))$
+と定義するとこれは
+$(Y, \mathfrak{N})$上の測度になる．
+この測度
+$\phi_{*}\mu$
+を$\phi$による$\mu$の押し出し測度と呼ぶ．
+\end{df}
+
+
+
+
+
+\begin{df}
+$X$を位相空間とする．
+このとき，可算個の$X$の開集合の共通部分で表される集合を
+$G_{\delta}$集合と呼ぶ．
+また，$X$の可算個の閉集合の和集合で表される集合を
+$F_{\sigma}$集合と呼ぶ．
+\end{df}
+
+\begin{df}
+$X$を位相空間とする．
+$X$上の
+ボレル集合族上で定義された測度を$X$上の
+\textbf{ボレル測度}と呼ぶ．
+\end{df}
+
+\begin{df}
+$X$を位相空間とし，
+$\mu$をその上の測度とする．
+このとき，$\mu$が\textbf{位相的$\sigma$有限}
+であるとは，開集合の可算列
+$\{O_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\mu(O_{i})<\infty$
+を満たすときにいう．
+\end{df}
+
+
+
+\begin{df}
+$X$を位相空間とし，
+$\mu$をその上のボレル測度とする．
+このとき$\mu$が\textbf{外部正則}であるとは
+任意のボレル集合$A$に関して
+$\mu(A)=\inf\{\mu(U)\mid A\subset U, \text{$U$は開集合}\}$
+となるときにいう．
+また
+\textbf{内部正則}であるとは
+$\mu(A)=\sup\{\mu(F)\mid F\subset A, \text{$F$は閉集合}\}$
+が成り立つときにいう．
+$\mu$が外部正則かつ外部正則であるとき，
+\textbf{正則}という．
+そして$\mu$が\textbf{コンパクト正則}であるとは
+$\mu(A)=\sup\{\mu(F)\mid F\subset A, \text{$F$はコンパクト}\}$
+が成り立つときにいう．
+またボレル集合$A$が上で述べた条件を満たすときに，
+$A$自体をそれぞれ外部正則，内部正則，コンパクト正則と呼ぶ．
+\end{df}
+
+\begin{rmk}
+ここでいうコンパクト正則という言葉は通常は内部正則と呼ばれるが，名前がかぶるので独自の用語を導入した．
+\end{rmk}
+
+\section{距離空間上の確率測度}
+この節では距離空間上の確率測度の正則性について紹介する．
+まず最初に外部正則性と内部正則性を紹介する．
+\begin{prop}\label{prop:regular}
+$\mu$を距離空間$X$上の位相的$\sigma$-有限なボレル測度とする．
+このとき
+$\mu$は正則測度である．
+つまり，
+任意の
+$A\in \mathfrak{B}(X)$
+に対して開集合$U$と閉集合$F$
+が存在して
+$F\subset A\subset U$
+と
+$\mu(U\setminus F)<\epsilon$
+が成り立つ．
+\end{prop}
+\begin{proof}
+まず最初に$\mu$
+が有限測度の場合に命題を証明する．
+定理が成り立つような
+$X$
+の部分集合全体を
+$\mathfrak{S}\subset \mathfrak{B}(X)$
+と置く．
+この
+$\mathfrak{S}$
+が
+$\mathfrak{B}(X)$
+と一致することを示す．
+まず任意の閉集合$F$について，$U_n=\{x\in S\mid d(x, F)<2^{-n}\}$
+とすると，$U_n$は開集合であり， 
+$U_{n+1}\subset U_n$
+でさらに
+$\bigcap_{n\in \nn}U_n=F$
+なので十分大きい$n$を取れば$\mu(U_n\setminus F)<\epsilon$
+である．これは$\mu$が有限測度であるから可能なことである．
+つまり$\mathfrak{S}$は$X$の閉集合を全て含んでいる．
+
+今から$\mathfrak{S}$が完全加法族であることを示そう．
+
+$\emptyset, X\in \mathfrak{S}$は$\mathfrak{S}$が$X$の閉集合を全て含んでいることからわかる．
+
+次に$A\in \mathfrak{S}$ならば$X\setminus A\in \mathfrak{S}$が成り立つことを示そう．
+$A\in \mathfrak{S}$ならば閉集合$F$と開集合$U$が存在して
+$F\subset A\subset U$で$\mu(U\setminus A)<\epsilon$となるが，
+このとき$X\setminus U\subset X\setminus A\subset X\setminus F$
+なので
+$\mu((X\setminus F)\setminus (X\setminus U))=\mu(U\setminus F)<\epsilon$となる．
+よって，
+$A\in \mathfrak{S}$ならば
+$X\setminus A\in \mathfrak{S}$である．
+
+次に
+$\mathfrak{S}$の
+完全加法性を示そう．
+$\{A_i\}_{i\in \nn}\subset \mathfrak{S}$
+とし，閉集合
+$F_i$と$U_i$を
+\[
+F_i\subset A_i\subset U_i
+\]
+と
+\[
+\mu(U_i\setminus F_i)<\epsilon/2^i
+\]
+を満たすもの
+とする．
+$U=\bigcup_iU_i$とし，
+$L_n=\bigcup_{i}^nF_i$
+とする．
+このとき
+$L_n\subset \bigcup_iA_i\subset U$
+であり，
+測度の有限性から
+$\lim_{n\to \infty}\mu(U\setminus L_n)=\mu(U\setminus L_{\infty})
+\le \sum_i\epsilon/2^i<\epsilon$
+が成り立つ．
+なので，十分大きい$n$を取れば
+$\mu(U\setminus L_n)<2\ep$となる．
+これは$\mu$が有限測度だから可能なことである．
+よって
+$\bigcup_{i}A_i\in \mathfrak{S}$であるから
+完全加法性が示された．
+
+
+さて$\mathfrak{S}$が完全加法族であることと，
+$\mathfrak{S}$が$X$の全ての閉集合族を含んでいることから
+$\mathfrak{S}=\mathfrak{B}(S)$
+がわかる．
+
+一般に$\mu$が位相的$\sigma$-有限の場合を考えよう．
+$\{S_{i}\}_{i\in \zz_{\ge 0}}$を$X$の開被覆で$\mu(S_i)<\infty$を満たすものとする．
+このとき
+$\mu_i=(\iota_{S_i})_*(\mu|_{S_i})$
+として上で述べた場合を使うと，
+ある開集合$U_i$が存在して
+$\mu_i(U_i\setminus A)=\mu((U_i\setminus A)\cap S_i)<\epsilon/2^i$
+となる．これはつまり
+$\mu(U_i\cap S_i\setminus A\cap S_i)<\epsilon/2^i$
+ということである．
+そして$U=\bigcup_{i}U_i\cap S_i$
+とおくとこれは開集合である．
+そして
+\[
+	\mu(U\setminus A)
+	\le 
+	\sum_i \mu(U_i\cap S_i\setminus A)
+	\le 
+	\sum_i \mu(U_i\cap S_i\setminus A\cap S_i)
+	\le 
+	\sum_{i}\epsilon/2^i
+	\le \epsilon
+\]
+である．
+$A_n=A\cap (S_{n+1}\setminus S_n)$に対して上の議論を適用すると
+閉集合$F_n$
+が存在して $F_n\subset A_n$
+と
+$\mu(F_n\setminus A_n)<\ep/2^n$
+を満たす．
+$F_n\subset S_{n+1}\setminus S_n$
+なので，$\{F_n\}$
+は局所有限な族なので，
+$F=\bigcup_nF_n$
+は閉集合であり，
+\[
+\mu(A\setminus F)\le \sum_n\mu(A_n\setminus F_n)\le \sum_n \epsilon/2^n\le \epsilon
+\]
+である．
+以上で定理が示された．
+\end{proof}
+
+
+次に完備可分距離空間上の確率測度のコンパクト正則性について述べる．
+\begin{prop}\label{prop:cptreg}
+$X$を完備可分距離空間とする．
+この時$X$上のボレル確率測度はコンパクト正則である．
+つまり，
+任意のボレル集合$A$と任意の
+$\epsilon>0$
+についてコンパクト集合$K$が存在して
+$\mu(A\setminus K)<\epsilon$
+である．
+\end{prop}
+\begin{proof}
+閉集合$F\subset X$が存在して$\mu(A\setminus F)<\epsilon$
+になる．
+$\{a_i\}$を$F$の可算稠密集合とする．
+$x$を中心とする半径$r$の閉球を$B(x, r)$と書くことにする．また，$B_{F}(x, r)=F\cap B(x, r)$と定義する．
+この時，任意の$k\in \nn$について
+\[
+\bigcup_{i=1}^{\infty}B_{F}(a_i, 1/k)=F
+\]
+である．
+$\mu(F)<\infty$なので，
+\[
+	\lim_{n\to \infty}
+	\mu\left(F\setminus \bigcup_{i=1}^{\infty}B_{F}(a_i, 1/k)\right)
+	=0
+\]
+である．
+よって十分大きい$N_k$が存在して
+\[
+\mu\left(F\setminus\bigcup_{i=1}^{N_k}B_{F}(a_i, 1/k) \right)<\epsilon/2^k
+\]
+が成り立つ．これは有限測度だから可能なことである．
+そこで
+\[
+K=\bigcap_{k=1}^{\infty}\bigcup_{i=1}^{N_k}B_{F}(a_i, 1/k)
+\]
+とすると， $X$の完備性から$K$はコンパクトである．
+また
+\[
+	\mu(F\setminus K)
+	\le 
+	\mu\left(\bigcup_{k}(F\setminus B_{F}(a_i, 1/k))\right)
+	\le
+	\sum_{k=1}\mu(F\setminus B_{F}(a_i, 1/k))
+	\le 
+	\sum_k\frac{\epsilon}{2^{k}}
+	=\epsilon 
+\]
+が成り立つ．
+故に
+\[
+\mu(A\setminus K)\le \mu(A\setminus F)+\mu(F\setminus K)<2\epsilon
+\]
+が成り立つ．これで命題は証明された．
+\end{proof}
+
+\section{確率測度からなる空間}
+この節では，確率測度からなる空間の性質について述べる．
+特に弱収束性などに関するものである．
+
+
+\subsection{確率測度の空間}
+
+%C_{b}^{*}の説明にRMKは必要．
+
+リースマルコフ角谷の定理については
+\cite{RMK1}や\cite{RMK2}を参照しても良い．
+\begin{df}
+$X$を局所コンパクトハウスドルフ空間とする．
+このとき$X$上の測度$\mu$がRMK測度であるとは以下の条件を満たすときにいう
+\begin{enumerate}
+\item $\mu$は$[0, \infty]$に値をとるボレル測度である．
+\item $X$の任意のコンパクト集合$K$について$\mu(K)<\infty$
+\item $X$の任意のボレル集合は外部正則である．つまり
+$\mu(E)=\inf\{\mu(V)\ |\ V\in \mathfrak{O}_X\ E\subset V\}$が成り立つ．ここで$\mathfrak{O}_X$は$X$の開集合系である．
+\item $E$が開集合もしくは$\mu(E)<\infty$ならば$E$は
+コンパクト正則である．つまり，
+$\mu(E)=\sup\{\mu(K)\ |\ K\in Cpt(X) \ K\subset E\}$
+が成り立つ．ここで$Cpt(X)$は$X$のコンパクト集合全体である．
+\end{enumerate}
+
+$X$上のRMK測度全体を$M(X)$と書くことにする
+$X$上の符号付き測度で二つのRMK測度の差で表されるもの全体を$S(X)$と書くことにする．
+\end{df}
+
+
+\begin{df}
+$X$を位相空間とする．
+このとき
+$C(X)$で$X$上の実連続関数全体の集合を表す・
+$C_{b}(X)$で$X$上の有界実連続関数全体の集合を表す．
+また，$X$が距離空間で距離関数$d$を備えているとき，
+$C_{u}(X)$で$X$上の($d$に関して)一様連続な実関数全体を表す．$d$を明示的に書いていないが，以下では紛れがないので心配は無用である．
+また，以下では$C_{b}(X)$には$\sup$ノルムが備わっているとする．
+\end{df}
+
+以下の定理はRiesz--Markov--Kakutaniの表現定理の一つの形態である．
+\begin{thm}\label{thm:rmkdual}
+$X$をコンパクトハウスドルフ空間とする．
+このとき
+\[
+C_b(X)^*=C(X)^*=S(X). 
+\]
+である．
+より詳しく述べると，$\mu\in C_{b}(X)^{*}$に対して
+二つのRMK測度$\alpha$と$\beta$が（差を除いて）一意的に対応して，
+任意の$f\in C_{b}(X)$に対して
+\[
+\mu(f)=\int_{X}f \ d\alpha -\int_{X}f\ d\beta
+\]
+が成り立つ．
+特に非負な$\mu\in C_{b}(X)^{*}$つまり
+$f\ge 0$ならば$\mu(f)\ge 0$を満たすような$\mu$
+は通常の意味での測度（非負の値しか取らない測度）
+に対応する．
+\end{thm}
+
+
+\begin{rmk}
+一般に位相空間$X$に関して，
+$C_b(X)\equiv C(\beta X)$である．ここで，$\beta X$は$X$の
+ストーンチェックコンパクト化である．
+よって，$C_b(X)^*$の元は$\beta X$上の
+RMK測度（の差で表される符号付測度）とみなすことができる．
+\end{rmk}
+
+
+
+\begin{df}
+$X$を位相空間とする．
+$X$上のボレル確率測度全体の集合を
+$\mathcal{P}(X)$で表すことにする．
+上の注意から，
+$\mathcal{P}(X)$は$C_{b}(\beta X)^{*}$の部分集合であり，さらに凸集合でもある．
+\end{df}
+
+\begin{df}
+$X$を位相空間とする．このとき
+$\mu\in C_{b}(X)^{*}$と$f\in C_{b}(X)$について
+$\langle f, \mu \rangle =\mu(f)$
+と定義する．
+特に$\mu$が二つのRMK測度$\alpha$と$\beta$の差に対応しているのならば，
+$\langle f, \mu\rangle =\int_{X}f\  d(\alpha-\beta)$
+である．
+\end{df}
+
+
+\begin{df}
+位相空間$X$上のボレル確率測度列$\{\mu_n\}$が
+$X$上のボレル確率測度$\mu\in \mathcal{P}(X)$に弱収束するとは，
+任意の$f\in C_b(X)$について
+\[
+\lim_{n\to \infty}\int_Xf\ d\mu_n=\int_{X} f\  d\mu
+\]
+が成り立つ時にいう．
+また，この時$\mu_n\To \mu$と表す．
+$\mathcal{P}(X)\subset C_{b}(X)^{*}$
+を踏まえると，この測度の弱収束は
+$\mathcal{P}(X)$上の汎弱位相と同じである．
+以下では$\mathcal{P}(X)$にはこの汎弱位相が定義されているものとする．
+\end{df}
+
+汎弱位相について以下の有名な定理がある．
+証明は適当な関数解析の本を読むと良い．
+\begin{thm}[Banach-Alaoglu]\label{thm:ba}
+$V$を実ノルム空間とする．このとき
+$V^{*}$の単位閉球体は汎弱位相についてコンパクトである．
+\end{thm}
+
+Banach-Alaogluの応用が次である．
+\begin{prop}\label{prop:cptcpt}
+$X$をコンパクトハウスドルフ空間とするとき，
+$\mathcal{P}(X)$はコンパクトハウスドルフ空間となる．
+さらに$X$がコンパクト距離化可能空間ならば，
+$\mathcal{P}(X)$も
+コンパクト距離化可能空間となる．
+\end{prop}
+\begin{proof}
+まずは前半を証明しよう．
+$C_{b}(X)$には$\sup$ノルムが備わっていることに注意しよう．
+このとき$\mu\in \mathcal{P}(X)$と任意の$f\in C_{b}(X)$
+に対して
+$|\langle f, \mu\rangle |
+=
+|\int_{X} f \ d\mu|
+\le \int_{X}|f|\ d\mu
+\le \|f\|_{\infty}
+$
+となるから任意の$\mu\in \mathcal{P}(X)$は
+$C_{b}(X)^{*}$の単位閉球体に含まれる．
+よってBanach-Alaogluの定理(定理 \ref{thm:ba})
+から$\mathcal{P}(X)$がコンパクトであることを示すには
+$\mathcal{P}(X)$が汎弱位相について閉集合であることを示せば良い．
+
+$\alpha\in C_{b}(X)^{*}$を
+$\mathcal{P}(X)$の閉包の元とする．
+今から$\alpha(X)=1$を示そう．
+恒等的に$1$をとる$X$上の関数$\chi_{X}\in C_{b}(X)$について，任意の$\epsilon \in (0, \infty)$を与えると，
+$\nu\in \mathcal{P}(X)$が存在して
+$|\langle \chi_{X}, \alpha \rangle -\langle \chi_{X}, \nu\rangle  |<\epsilon$となる．
+ところで，任意の
+$\mu\in \mathcal{P}(X)$に対して
+$\langle \chi_{X}, \mu \rangle =\mu(X)=1$であり，
+$\epsilon$は任意だったので，結局
+$\alpha(X)=1$となる．
+
+次に$\alpha$が測度として非負の値しか取らないことを示そう．
+$\alpha$は二つのRMK測度$\beta, \gamma$を用いて
+$\alpha=\beta- \gamma$とかくことができる．
+ここで$\beta$と$\gamma$は正則測度であることに注意しよう．これは$X$のコンパクト性とRMK測度の定義から従うとも考えられるし，もしくは命題 \ref{prop:regular}から従うとも考えても良い．
+ここで背理法のために$\alpha$は負の値もとると仮定しよう．
+するとボレル集合$S$が存在して
+$\alpha(S)<0$となる．
+つまり
+$\beta(S)-\gamma(S)<0$である．
+$\delta=\gamma(S)-\beta(S)/10>0$とおく．
+$\beta$と$\gamma$の正則性から
+閉集合$F_{1}, F_{2}$が存在して
+$F_{1}\subset S$，$F_{2}\subset S$と
+$\beta(S\setminus F_{1})<\delta$，
+$\gamma(S\setminus F_{2})<\delta$
+となる．ここで改めて$F=F_{1}\cup F_{2}$
+とおけば，
+$F\subset S$と
+$\beta(S\setminus F)<\delta$と
+$\gamma(S\setminus F)<\delta$
+を満たす．
+すると$\delta$の定義から
+\begin{align*}
+\beta(F)\le \beta(S)
+&=\beta(S)-\gamma(F)+\gamma(F)\\
+&\le 
+(\beta(S)-\gamma(F)+\gamma(S\setminus F)+\gamma(S\setminus F))+\gamma(F)\\
+&\le (\beta(S)-\gamma(S)+\gamma(S\setminus F))+\gamma(F)\\
+&<
+ (\beta(S)-\gamma(S)+\delta)+\gamma(F)
+ <\gamma(F)
+\end{align*}
+となる．つまり$\alpha(F)<0$である．
+$\eta=(\gamma(F)-\beta(F))/10$とおく．
+そしてさらに$\beta$の外部正則性を用いると，
+開集合$U$が存在して
+$F \subset U$と
+$\beta(U\setminus F)<\eta$
+を満たす．
+
+ここで$X$はコンパクトハウスドルフなので特に正規空間である．よってウリゾーンの補題より$g\in C_{b}(X)$が存在して
+$0\le g\le 1$と$g|_{F}=1$と$g_{X\setminus U}=0$
+を満たす．さてここで
+$\langle g, \alpha \rangle $
+を評価しよう．
+\begin{align*}
+\int_{X}g \ d\alpha
+&=\int_{X}g\ d\beta -\int_{X} g \ d\gamma
+\le \beta(U)-\gamma(F)
+=\beta(U)-\beta(F)+\beta(F)-\gamma(F)\\
+&=
+\beta(U\setminus F)+\beta(F)-\gamma(F)\\
+&\le \eta+\beta(F)-\gamma(F)<0
+\end{align*}
+つまり$\langle g, \alpha\rangle<0$である．ここで
+$\epsilon=-\langle g, \alpha\rangle/2 $
+とおく．$\alpha$は$\mathcal{P}(X)$の閉包の元なので，
+$\nu\in \mathcal{P}(X)$が存在して
+$|\langle g, \nu\rangle -\langle g, \alpha\rangle|<\epsilon$
+を満たす．特に
+$\langle g, \nu\rangle <\langle g, \alpha \rangle +\epsilon$である．
+これから
+$\langle g, \nu\rangle <\langle g, \alpha \rangle/2<0$
+がわかるが$0 \le g$なのでこの式は$\nu$が非負の値をとる測度であるということに矛盾する．よって
+背理法から$\alpha$も非負の値をとる測度である．
+
+以上のことから$\alpha\in \mathcal{P}(X)$
+であることがわかる．
+つまり，
+$\mathcal{P}(X)$
+はコンパクトハウスドルフ空間である．
+
+命題の後半は$X$がコンパクト距離化可能空間ならば
+$C_{b}(X)$は可分になることと，可分なノルム空間の
+双対空間に汎弱位相を入れると距離化可能になるという関数解析の事実から
+従う．
+\end{proof}
+
+
+
+\subsection{Potmanteauの定理}
+この節では，測度の弱収束性の同値な言い換えを述べた
+Portmanteauの定理を紹介する．
+
+\begin{lem}[Portmanteau theorem]\label{lem:port}
+$X$を距離化可能空間とする．この時以下は同値である．
+\begin{enumerate}
+	\item $\mu_n\To \mu$
+	\item $X$の位相と同じ位相を生成する距離関数$d$
+	を任意に固定する．以下では$C_{u}(X)$はこの距離関数に関するものとする．このとき
+		$\forall f\in C_u(X)\cap C_b(X)\ 
+		\langle f, \mu_n\rangle\to \langle f, \mu \rangle $
+	\item 
+		$X$の任意の閉集合$F$について
+		$\limsup_{n\to \infty}\mu_n(F)\le \mu(F)$
+	\item $X$の任意の開集合$U$について
+		$\liminf_{n\to \infty}\mu_n(U)\ge \mu(U)$
+			\item[\emph{(6)}] 任意の
+			$A\in \mathfrak{B}(X)$について 
+			$\mu(\partial A)=0$
+		ならば$\lim_{n\to \infty}\mu_n(A)=\mu(A)$. 
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+
+[$(1)\To (2)$の証明]
+
+条件$(2)$は$(1)$の定義よりも弱い条件である．
+
+[$(1)\To (2)$の証明終わり]
+
+[$(2)\To (3)$の証明]
+
+まず最初に
+\[
+r(t)=\begin{cases}
+1 & \text{$t\le 0$}\\
+1-t & \text{$t\in (0, 1]$}\\
+0 & \text{o.w.}
+\end{cases}
+\]
+と定義すると$r$は$\rr$上の一様連続関数になる．
+そして閉集合$F$について
+$f_k(x)=r(kd(x, F))$とすると
+$f_k\in C_u(S)\cap C_b(S)$
+である．
+また，$k\to \infty$のとき，各点収束の意味で$f_k\to \chi_{F}$であり，
+$\chi_F\le f_k$である．
+よって各$k$ごとに
+\[
+\limsup_{n\to \infty}\mu_n(F)=
+\limsup_{n\to \infty}\int_X \chi_F\ d\mu_n\le \lim_{n\to \infty}\int_X f_k\ d\mu_n=\int_X f_k\ d\mu
+\]
+がわかる．
+よって$k\to \infty$とすると，ルベーグの収束定理から，
+\[
+\limsup_{n\to \infty}\mu_n(F)\le \mu(F)
+\]
+がわかる．条件$(2)$では$C_{u}(X)$という距離$d$に依存するものが現れているが，他の条件は$d$には依存しない条件であることにとても
+注意しよう．
+
+[$(2)\To (3)$の証明終わり]
+
+
+[$(3)\To (1)$の証明]
+
+
+まず$f$を有界連続関数とする．このとき
+$0\le f<1$としても一般性を失わない．
+$k\in \nn$を固定して$0\le i\le k$に対して
+$F_i=\{x\in S\mid f(x)\ge i/k\}$
+と定義する．
+このとき
+$ F_{i+1}\subset F_i$である．
+すると，
+\[
+	\sum_{i=1}^{k}\frac{1}{k}\chi_{F_i}
+	\le 
+	f
+	\le
+	\sum_{i=0}^k\frac{1}{k}\chi_{F_{i}} 
+\]
+が成り立つので，ボレル確率測度$\nu$について
+\[
+	\sum_{i=1}^k\frac{1}{k}\nu(F_i)
+	\le
+	 \int_S f\ d\nu 
+	 \le 
+	\frac{1}{k}+ \sum_{i=1}^k\frac{1}{k}\nu(F_i)
+\]
+を得る．
+この不等式の右辺について，$\mu=\mu_n$とすると$(2)$から
+\[
+	\limsup_{n\to \infty}\int_S f\ d\mu_n
+	\le 
+	\frac{1}{k}+\sum_{i=1}^k\frac{1}{k}\mu(F_i)
+\]
+また，左辺について，$\nu=\mu$とすれば
+\[
+	\sum_{i=1}^k\frac{1}{k}\mu(F_i)
+	\le
+	 \int_S f\ d\mu 
+\]
+であるから，
+\[
+\limsup_{n\to \infty}\int_Sf \ d\mu_n\le \frac{1}{k}+\int_Sf\ d\mu
+\]
+を得るので，$k\to \infty$とすれば
+\[
+\limsup_{n\to \infty}\int_Sf \ d\mu_n\le \int_Sf\ d\mu
+\]
+を得る．$1-f$を考えると$\liminf$についても同様の式が得られるので，$(3)$を得る．
+
+[$(3)\To (1)$の証明終わり]
+
+以上で，$(1)$, $(2)$, $(3)$の同値性がわかった．
+
+[$(4)\iff (3)$の証明]
+
+$(4)$については，$(3)$の補集合を考えると同値であることがわかる．
+
+[$(4)\iff (3)$の証明終わり]
+
+[$(2)+(3)\To(5)$の証明]
+
+条件
+$(2)$と$(3)$を用いて$(5)$を示そう．
+$A\in \mathcal{B}(S)$について，$\nai(A)\subset A\subset \cl(A)$
+で，$\partial A=\cl(A)\setminus \nai(A)$なので
+\[
+\limsup_{n\to \infty}\mu_n(\cl(A))\le \mu(\cl(A))=\mu(A)
+\]
+かつ
+\[
+\liminf_{n\to \infty}\mu_n(\nai(A))\ge \mu(\nai(A))=\mu(A)
+\]
+であるから$\lim_{n\to \infty}\mu_n(A)=\mu(A)$である．
+
+[$(2)+(3)\To(5)$の証明終わり]
+
+[$(5)\To(3)$の証明]
+
+逆に$(5)$を仮定しよう．
+このとき閉集合$F$と$r\in  (0, \infty)$について，
+\[
+F_{r}=\{x\in S\mid d(x, F)\le r\}
+\]
+
+\[
+B_r=\{x\in \mid d(x, F)=r\}
+\]
+と定義する．
+このとき$\partial F_r\subset B_r$
+であり，$F\subset F_r$である．
+$\mu$は有限測度なので，$\mu(B_r)>0$となる
+$r$は高々可算個しかない．
+よって，$\mu(B_r)=0$となる$r$は稠密に存在するので，このような
+$r$について，
+\[
+\limsup_{n\to \infty}\mu_n(F)\le \lim_{n\to \infty}\mu(F_r)=\mu(F_r)
+\]
+である.
+$r\to 0$とすると，
+\[
+\limsup_{n\to \infty}\mu_n(F)\le \mu(F)
+\]
+がわかる．
+
+[$(5)\To(3)$の証明終わり]
+
+以上の場合分けから証明が終わる．
+\end{proof}
+
+\begin{thm}\label{thm:r6}
+補題 \ref{lem:port}において，
+$X=\rr$の場合には，次の\emph{(6)}も同値になる．
+\begin{enumerate}
+		\item[\emph{(6)}] $\mu_{n}$の分布関数を$F_{n}$で表し，
+		$\mu$の分布関数を$F$で表す．
+		このとき$F$の任意の連続点$x$について
+		$\lim_{n\to \infty}F_{n}(x)=F(x)$
+		が成り立つ．
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+
+[$(5)\To (6)$の証明]
+
+まず
+$F_{n}(x)=\mu_{n}((-\infty, x])$, 
+$F(x)=\mu((-\infty, x])$
+であることに注意しよう．
+$x$が$\mu$の連続点ならば$\mu(\{x\})=0$
+であることと，
+$\partial (-\infty, x]=\{x\}$
+なので，(5)より
+$\lim_{n\to \infty}F_{n}(x)=F(x)$
+となる．
+
+
+[$(5)\To (6)$の証明終わり]
+
+
+
+
+
+[$(6)\To (2)$の証明]
+
+実数
+$\epsilon\in (0, \infty)$
+を任意に与える．
+そして
+$f\in C_{u}(\rr)\cap C_{b}(\rr)$を任意に与える．
+$\delta\in (0, \infty)$
+を$|x-y|<\delta$ならば$|f(x)-f(y)|<\epsilon$となるものにする．これは$f\in C_{u}(\rr)$なので可能である．
+$M\in (0, \infty)$を$|f|\le M$となる定数とする．
+このような定数は$f\in C_{b}(\rr)$なので存在する．
+ところで$F$は単調増加関数なので，その不連続点は高々可算個である．よって$F$の連続点は$\rr$上で稠密なので，$F$の連続点のみからなる集合$\{a_{k}\}_{k\in \zz}$が存在して
+任意の$k\in \zz$に対して
+$a_{k}<a_{k+1}$および
+$|a_{k}-a_{k+1}|<\delta$となる．
+任意の$k\in \zz$に対して，
+$I_{k}=(a_{k}, a_{k+1}]$と定義する．
+ここで，$g:\rr\to \rr$を
+\[
+g(x)=\sum_{k\in \zz}f(a_{k+1})\cdot \chi_{I_{k}}
+\]
+と定義する．
+$f$が有界なので$g$も有界で，今考えている測度はどれも確率測度だから$g$は今考えているどの測度についても可積分であることに注意しよう．
+
+まず$\nu$を$\mu_{n}$か$\mu$のいずれかとする．このとき
+\begin{align*}
+|\langle f, \nu \rangle - 
+\langle g, \nu \rangle |
+&\le 
+\int_{\rr}|f(x)-g(x)|\ d\nu=
+\sum_{k\in \zz}\int_{I_{k}}|f(x)-f(a_{k+1})|\ d\nu(x)\\
+&\le 
+\epsilon \cdot \sum_{k\in \zz}\int_{I_{k}} \ d\nu
+=\epsilon\nu(\rr)=\epsilon. 
+\end{align*}
+を得る．
+次に
+$|\langle g, \mu \rangle - 
+\langle g, \mu_{n} \rangle |$
+を評価する．
+まず，$\mu$は確率測度なので，
+十分大きい$N\in \zz_{\ge 0}$を取ると，
+$\mu(\bigcup_{|k|>N}I_{k})<\epsilon$
+となる．
+$a_{N+1}$や$a_{-N-1}$は$F$の連続点なので，
+条件(6)より十分大きい$n$について
+$\mu_{n}(\bigcup_{|k|>N}I_{k})<2\epsilon$となる．
+すると
+\[
+|\langle g, \mu \rangle - 
+\langle g, \mu_{n} \rangle |
+\le 
+\sum_{k\in \zz}f(a_{k+1})|\mu(I_{k})-\mu_{n}(I_{k})|
+\le \sum_{|k|\le N}f(a_{k+1})|\mu(I_{k})-\mu_{n}(I_{k})|
++3M\epsilon
+\]
+となる．最右辺の第一項に注目しよう．
+条件(6)と$\{a_{k}\}_{k\in \zz}$が$F$の連続点の集合ということから各$|k|\le N$を満たす$k$に対して
+$|\mu(I_{k})-\mu_{n}(I_{k})|\to 0\  (n\to \infty)$となる．
+よって十分大きい$n$については
+\[
+|\langle g, \mu \rangle - 
+\langle g, \mu_{n} \rangle |
+\le \epsilon+3M\epsilon=(3M+1)\epsilon
+\]
+が成り立つ．
+
+今から$|\langle f, \mu \rangle - 
+\langle f, \mu_{n} \rangle |$
+を評価しよう．
+\begin{align*}
+|\langle f, \mu \rangle - 
+\langle f, \mu_{n} \rangle |
+\le 
+|\langle f, \mu \rangle - 
+\langle g, \mu \rangle |
++
+|\langle g, \mu \rangle - 
+\langle g, \mu_{n} \rangle |
++
+|\langle g, \mu_{n} \rangle - 
+\langle f, \mu_{n} \rangle |
+\end{align*}
+となるから，上での評価を使えば十分大きい$n$について
+\begin{align*}
+|\langle f, \mu \rangle - 
+\langle f, \mu_{n} \rangle |
+\le 3(M+1)\epsilon
+\end{align*}
+となるので，結局
+$\langle f, \mu \rangle \to 
+\langle f, \mu_{n} \rangle $
+である．よって(2)が成り立つ．
+
+[$(6)\To (2)$の証明終わり]
+\end{proof}
+
+
+
+
+\subsection{緊密性とProkhorovの定理}
+この節では確率測度の空間のコンパクト性と
+緊密性の同値性について紹介する．
+\begin{df}[緊密性]
+$X$を距離化可能空間とし，
+$\{\mu_i\}_{i\in I}\subset \mathcal{P}(X)$とする．
+この時
+$\{\mu_i\}_{i\in I}$が緊密であるとは，任意の
+$\ep>0$に対して
+$X$のコンパクト集合$K$
+が存在して
+\[
+\sup_{i\in I}\mu_i(X\setminus K)\le \ep
+\]
+を満たす時にいう．
+\end{df}
+
+\begin{thm}[Prokhorov]\label{thm:prokh}
+$X$を可分完備距離化可能空間とし，
+$\mathcal{S}\subset \mathcal{P}(X)$とする．
+このとき以下は同値である．
+\begin{enumerate}
+\item $\mathcal{S}$は相対コンパクトである．
+\item $\mathcal{S}$は緊密である．
+\end{enumerate}
+
+\end{thm}
+\begin{proof}
+
+[$(2)\To (1)$の証明]
+
+緊密ならば相対コンパクトを示そう．
+$X$に相対コンパクトな距離を入れて，その完備化を
+$Y$とする.
+$Y$はコンパクトであることに注意しよう．
+$i: X\to Y$を包含写像とする．
+$\mathcal{T}=\{i_*(\mu)\mid \mu\in \mathcal{S}\}$
+とする．
+命題 \ref{prop:cptcpt}
+から$\mathcal{P}(Y)$
+はコンパクト距離空間なので，
+$\mathcal{T}$は相対コンパクトである．
+よって列$\{\mu_n\}_n$
+が存在して
+$i_*\mu_n$は$\nu$に弱収束する．
+さて，$\mathcal{S}$は緊密なので，
+任意の$N\in \zz_{\ge 0}$について
+$X$のコンパクト集合$K_N$が存在して
+\[
+\mu_n(K_N)\ge 1-2^{-N}
+\]
+が成り立つ．
+$K_N$はコンパクトなので，$i(K_N)$もコンパクトであり，特に$Y$
+の閉集合となる．
+よって$n\to \infty$として，
+\[
+1-2^{-N}\le \limsup_{n\to \infty}i_*\mu_n(K_N)\le \nu(K_N)
+\]
+となる．
+従って$U=\bigcup_{N=1}K_N$とおけば
+$i(U)\in \mathfrak{B}(T)$であり，かつ$\nu(i(U))=1$
+である．
+$S$上の確率測度$\mu$を
+$A\in \mathfrak{B}(S)$について
+\[
+\mu(A)=\nu(i(A\cap U))
+\]
+とするとこれはボレル確率測度になっている．
+ここで，$A\in \mathfrak{B}(X)$について
+$i(A\cap U)\in \mathfrak{B}(Y)$
+となることを用いた．これは$\mathfrak{B}(S)$
+が閉集合から生成されていることと，$U$がコンパクト集合の可算和であることからわかる．
+
+さて，$f\in C_u(X)\cap C_b(X)$とすると，（主に一様連続性から）
+$f$の拡張$F\in C(Y)$が存在する．
+そして，
+\[
+\int_{X} f\ d\mu=\int_{U}f\ d\mu =\int_{Y} F\ d\nu
+\]
+が成り立つ．
+よって
+\[
+\int_{X} f\ d\mu_{n}=\int_{Y} F\ di_*\mu_n
+\to 
+\int_{Y}F\ d\nu=\int_{X}f \ d\mu
+\]
+なので，$\mu_n$は$\mu$に弱収束する．
+
+[$(2)\To (1)$の証明終わり]
+
+[$(1)\To (2)$の証明]
+
+逆は少し頑張る．
+$\{a_i\}_{\i\in \zz_{\ge 0}}$を$X$の稠密可算集合とする．
+このとき任意の$n$について
+$X=\bigcup_{i\in \zz_{\ge 0}}B(a_i, 2^{-i})$
+が成り立つ．
+ここで$B(x, r)$は$x$を中心とする半径$r$の$X$の開球である．
+今から
+\[
+	\forall n\in \nn\  
+	\forall \epsilon>0 \ 
+	\exists m\in \nn \ 
+	\forall \mu\in \mathcal{S}\
+	\mu\left(\bigcup_{k=1}^mU(a_i, 2^{-n})\right)\ge 1-\ep
+\]
+を示そう．
+
+背理法を使い，この示したい命題が成り立たないとする．
+すると
+ある$n\in \nn$と$\eta\in (0, \infty)$
+が存在して,
+任意の$m\in \nn$についてある$\mu\in \mathcal{S}$が存在して
+\[
+\mu\left(\bigcup_{k=1}^mU(a_i, 2^{-n})\right)< 1-\eta
+\]
+が成り立つ．
+各$m$に存在する測度を$\mu_m$とする．
+このとき$\mathcal{S}$の
+コンパクト性から，
+ある列$\{m_i\}_{i\in \zz_{\ge 0}}$と$\{\mu_i\}_{i\in\zz_{\ge 0}}$
+が存在して
+$m\le m_i$ならば
+\[
+\mu_i\left(\bigcup_{k=1}^{m}U(a_i, 2^{-n})\right)< 1-\eta
+\]
+が成り立ち，かつ
+$\mu_i\To \mu$として良い．
+すると，$m_i\to \infty$なので，補題 \ref{lem:port}から
+任意の$m$について
+\[
+	\mu\left(\bigcup_{k=1}^{m}U(a_i, 2^{-n})\right)
+	\le 
+	\liminf_{i\to \infty}\mu_{i}\left(\bigcup_{k=1}^{m}U(a_i, 2^{-n})\right)
+	\le 1-\eta
+\]
+となるが，$m\to \infty$とすると
+$\mu(X)\le 1-\eta<1$となるので，矛盾する．
+つまり，任意の$n$と任意の$\epsilon$について
+ある$m$が存在して
+任意の$\mu$について
+\[
+\mu\left(\bigcup_{k=1}^{m}U(a_i, 2^{-n})\right)\ge 1-\ep
+\]
+が成り立つ．
+各$n\in \zz_{\ge 0}$について
+整数
+$m_n$を
+\[
+\mu\left(\bigcup_{i=1}^{m_n}U(a_i, 2^{-n})\right)>1-\epsilon/2^n
+\]
+が成り立つものとしてとる．
+ここで，
+\[
+K=\bigcap_{n\in \nn}\bigcup_{i=1}^{m_n}B(a_i, 2^{-n})
+\]
+とすると
+$K$は完備距離化可能空間の全有界な閉集合なので，コンパクトである．
+任意の$\mu\in \mathcal{S}$に対して
+\begin{align*}
+\mu(X\setminus K)
+&\le 
+\sum_{n=1}^{\infty}
+\mu\left(X\setminus 
+\bigcup_{i=1}^{m_n}B(a_i, 2^{-n})
+\right)
+\le 
+\sum_{n=1}^{\infty}\left(1-\mu\left(
+\bigcup_{i=1}^{m_n}B(a_i, 2^{-n})\right)
+\right)\\
+&\le \epsilon\cdot \sum_{i=1}^{\infty}2^{-n}
+=\epsilon. 
+\end{align*}
+となるから
+緊密性の条件を満たす．
+
+[$(1)\To (2)$の証明終わり]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{99}
+\bibitem{hatena0}
+はてなブログ電波通信の記事
+「直積測度の構成について：確率論その０」, 
+https://concious4410.hatenablog.com/entry/2022/01/03/011245
+
+\bibitem{hatena1}
+はてなブログ電波通信の記事
+「大数の法則について：確率論その１」, 
+https://concious4410.hatenablog.com/entry/2022/01/16/233527
+
+\bibitem{RMK1}
+はてなブログ電波通信の記事
+「リース・マルコフ・角谷の表現定理の証明(入射角16.225°の測度論入門2)」, 
+https://concious4410.hatenablog.com/entry/2015/10/28/213025
+
+\bibitem{RMK2}
+はてなブログ電波通信の記事
+「Riesz-Markov-Kakutaniの表現定理II」, 
+https://concious4410.hatenablog.com/entry/2020/02/02/213341
+
+
+\bibitem{0}小谷眞一, 「測度と確率」, 2005　岩波書店．
+
+\bibitem{1}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+
+\bibitem{3}K. R. Parthasarathy,  Probability measures on metric spaces. 
+Academic Press. 
+\end{thebibliography}
+
+「知識は公共財」
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

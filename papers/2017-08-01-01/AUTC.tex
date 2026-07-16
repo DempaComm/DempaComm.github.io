@@ -1,0 +1,396 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gl}{GL}
+\DeclareMathOperator{\pgl}{PGL}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{正則同型の同定}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では複素平面$\cc$、リーマン球面$\hat{\cc}$及び単位開円盤$\Delta$の正則同型写像を同定する。
+\section{基本的な定義}
+この文章では$\cc$は複素平面を表し、$\hat{\cc}=\cc\cup \{\infty\}$である。
+また、$\Delta=\{z\in \cc\mid |z|<1\}$である。
+この節で述べることはとてもよく知られているので無視してかまわない。
+\begin{df}[メビウス変換、もしくは一次分数変換]
+$ad-bc\neq 0$を充たす$a,b,c,d\in \cc$を用いて$z$に
+\[
+\frac{az+b}{cz+d}
+\]
+を対応させる写像をメビウス変換、もしくは一次分数変換という。
+\end{df}
+
+\begin{cau}
+二つのメビウス変換の合成は再びメビウス変換になるし、メビウス変換は常に逆変換を持つことに注意せよ。
+つまりメビウス変換全体は群をなす。これをメビウス群とかメビウス変換群とかいう。
+また、開集合上で定義されたメビウス変換は正則関数になることに注意せよ。よって開集合上で定義されたメビウス変換は正則同型写像である。
+\end{cau}
+
+\begin{cau}
+メビウス群の合成や逆変換は行列と同様の方法で計算できる。
+即ち以下の写像は準同型である。
+\[
+\mathcal{M}:\gl(2,\cc)\to \{\text{メビウス変換全体}\}\ \ A\mapsto M_A
+\]
+ここで$M_A$の定義を述べる。
+\begin{equation*}
+A=
+\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}
+\end{equation*}
+としたとき$M_A$は
+\[
+M_A(z)=\frac{az+b}{cz+d}
+\]
+で表されるメビウス変換である。
+また、$\ker(\mathcal{M})=\{\lambda E\mid \lambda\neq 0\}$であることに注意せよ。
+すなわち$A$と$\lambda A\ (\lambda\neq0)$は同じメビウス変換に移る。
+\[
+\gl (2,\cc)/\ker(\mathcal{M})
+\]
+を$\pgl(2,\cc)$とか書くみたいである。
+\end{cau}
+\begin{df}
+$\hat{\cc}$の開集合$X$に対して
+\[
+\aut(X)=\{f:X\to X\mid \text{$f$は$X$の正則同型}\}
+\]
+と定義する。
+\end{df}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{準備}
+話の本題に移る前に複素関数論の基本的な結果をいくつか紹介する。ここでは証明は省く。証明が知りたい場合は複素関数論を学ぶとよいと思われる。
+\begin{lem}[開写像定理]
+正則関数は開写像である。
+\end{lem}
+\begin{lem}[Casorati-Weierstrass]\label{CW}
+点$a$の周りで定義された正則関数$f$について、$a$は$f$の真性特異点とする。このとき$a$の任意の近傍$N$について$N\setminus \{a\}$の$f$のよる像$f(N\setminus \{a\})$は$\cc$の中で稠密である。
+\end{lem}
+
+\begin{lem}[Schwarz]\label{S}
+$f$は$\Delta$上の正則関数とし、
+\[
+|f(z)|\le 1,\  f(0)=0
+\]
+を充たすとする。このとき$|f(z)|\le |z|$と$|f'(0)|\le 1$が成立する。\par
+更に$|f(z)|=|z|$となる$z\in \Delta$が存在するか、もしくは$|f'(0)|=1$を充たすならば
+ある$|a|=1$となる複素数$a$が存在して
+\[
+f(z)=az
+\]
+となる。
+\end{lem}
+\begin{lem}
+\[
+\frac{z-a}{\bar{a}z-1}\ \ (a\in \Delta )
+\]
+の形のメビウス変換をブラシュケ因子と呼ぶ。このメビウス変換は$\Delta$からそれ自身への正則同型になっている。
+\end{lem}
+
+\begin{lem}
+メビウス群の部分集合
+\[
+\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}
+\]
+は逆写像と合成で閉じている。つまりメビウス群の部分群である。
+\end{lem}
+
+\begin{lem}
+\[
+\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}=
+\left\{\frac{az+b}{\bar{b}z+\bar{a}}\middle| \ a,b\in \cc, |a|^2-|b|^2>0\right\}
+\]
+\end{lem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{本題}
+この節では
+複素平面$\cc$、リーマン球面$\hat{\cc}$及び単位開円盤$\Delta$の正則同型写像を同定する。
+まず$\cc$のそれを求めよう。
+\begin{lem}
+単射な正則関数$f:\cc\to \cc$は$az+b\ (a\neq 0)$に限る。
+\end{lem}
+\begin{proof}
+まず無限遠点$\infty$に於ける$f$の挙動を調べてみよう。すなわち関数
+\[
+g(z)=f\left(\frac{1}{z}\right)
+\]
+の$z=0$における振る舞いを調べよう。\par
+$g$が$z=0$で極を持つことを証明する。背理法を用いる。$g$が$z=0$で真性特異点を持つと仮定しよう。（$g$が$z=0$で零点を持ったり、もしくは$z=0$まで正則に拡張できたりはしない。このことを考えてみよ。これから$z=0$が$g$が真性特異点の場合のみに背理法を行えばよいことがわかる。）\par
+$0$と$1$の十分小さい近傍を選び、$0\in U$、$1\in V$、$U\cap V=\O$とする。
+このとき補題\ref{CW}から$g(U\setminus \{0\})$は$\cc$で稠密である。一方$g(V)$は開写像定理から$\cc$の開集合であるが、$f$が$\cc$上単射であることから
+\[
+g(U\setminus \{0\})\cap g(V)=g((U\setminus \{0\})\cap V)=\O
+\]
+となり、$g(U\setminus \{0\})$が$\cc$で稠密であることに反する。（稠密集合は非空な開集合と常に交わりを持つはずである。）
+
+よって$g$は$z=0$において極を持つ。その極の位数を$m$とする。
+さて$f$は$\cc$全体でマクローリン展開出来て、
+\[
+f(z)=\sum_{n=0}^{\infty}a_nz^n
+\]
+と書けるが、$g(z)=f(1/z)$が$z=0$で位数$m$の極を持つことから$k>m$について$a_k=0$とならなければならない。つまり
+\[
+f(z)=\sum_{n=0}^{m}a_nz^n
+\]
+となる。即ち$f$は多項式である。2次以上の複素係数の多項式は$\cc$上非単射なので$f$は１次以下の多項式で、
+定数ではありえないから
+\[
+f(z)=az+b\ (a\neq 0)
+\]
+
+となる。
+
+\end{proof}
+$az+b$は$\cc$上の正則同型なのですぐさま次のことがわかる
+\begin{thm}
+$\aut(\cc)=\{az+b\mid a,b\in \cc,\ a\neq 0\}$
+\end{thm}
+これを利用して$\aut(\hat{\cc})$を求めよう。
+
+\begin{thm}
+\[
+\aut(\hat{\cc})=(\text{メビウス変換全体})
+\]
+\end{thm}
+\begin{proof}
+$(\text{メビウス変換全体})\subset \aut(\hat{\cc})$は明らかである。逆を示そう。\par
+$f:\hat{\cc}\to \hat{\cc}$を正則同型とする。\par
+場合その１（$f(\infty)=\infty$の場合）：このとき先の定理から$\cc$上で$f(z)=az+b$となるので結局$\hat{\cc}$上で
+$f(z)=az+b$である。$az+b$はもちろんメビウス変換なのでこの場合の証明は終わる。\par
+場合その２（$f(\infty)\in \cc$の場合）：$f(\infty)=c$としてメビウス変換$g$を
+\[
+g(z)=\frac{1}{z-c}
+\]
+と定義する。このとき写像$h=g\circ f:\hat{\cc}\to \hat{\cc}$は$h(\infty)=\infty$を充たす$\hat{\cc}$の正則同型である。よって場合その１から
+\[
+h(z)=az+b
+\]
+と書ける。もちろんこれはメビウス変換である。そして$g^{-1}$もメビウス変換なので
+\[
+f=g^{-1}\circ h
+\]
+もメビウス変換である。
+\end{proof}
+
+最後に$\Delta$の正則同型を求めよう。
+\begin{thm}
+\[
+\aut(\Delta)=\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}=
+\left\{\frac{az+b}{\bar{b}z+\bar{a}}\middle| \ a,b\in \cc, |a|^2-|b|^2>0\right\}
+\]
+\end{thm}
+\begin{proof}
+\[
+\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}\subset \aut(\Delta)
+\]
+と
+\[
+\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}=
+\left\{\frac{az+b}{\bar{b}z+\bar{a}}\middle| \ a,b\in \cc, |a|^2-|b|^2>0\right\}
+\]
+の証明は終わっている。残りを示そう。\par
+$f:\Delta\to \Delta$を正則同型とする。\par
+場合その１（$f(0)=0$の場合）：このとき補題\ref{S}（Schwarzの補題）を$f$と$f^{-1}$の両方に適応すると
+\[
+|f'(0)|\le 1,\ \left|\frac{1}{f'(0)}\right|\le 1
+\]
+となるので$|f'(0)|=1$である。そして再び補題\ref{S}からある$\theta\in \rr$が存在して
+\[
+f(z)=e^{i\theta}z
+\]
+となるが、
+\[
+f(z)=e^{i\theta}z=-e^{i\theta}\frac{z-0}{\bar{0}z-1}=e^{i(\theta+\pi)}\frac{z-0}{\bar{0}z-1}
+\]
+なので
+\[
+f\in \left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}
+\]
+となる。\par
+場合その２（$f(0)\neq 0$の場合）$f(0)=c$するともちろん$c\in \Delta$である。ここで$g:\Delta\to \Delta$を
+\[
+g(z)=\frac{z-c}{\bar{c}z-1}
+\]
+と定義するとこれは$\Delta$の正則同型になっている。さて$h=g\circ f$と置くと$h(0)=0$を充たす$\Delta$の正則同型なので場合その１から
+\[
+h\in \left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}
+\]
+となる。このとき
+\[
+f=g^{-1}\circ h\in \left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in \rr, a\in \Delta \right\}
+\]
+でもあるので定理の証明は終わる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}野口潤次郎, 複素解析概論  第6版9刷, 裳華房 2011
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

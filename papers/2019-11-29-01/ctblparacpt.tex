@@ -1,0 +1,2295 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\newtheorem{conj}{予想}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\DeclareMathOperator{\cf}{cf}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{可算パラコンパクト空間}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+\section{準備}
+この章では基本的な概念を紹介する。
+
+この文章では，$\omega$で最初の可算順序数を表す．また，$[\omega]^{\omega}$は$\omega$の有限部分集合全体から成る集合を表す．
+
+\begin{df}[細分]$\mathfrak{A},\mathfrak{B}を$集合$X$の部分集合の族とする。このとき$\mathfrak{A}$が$\mathfrak{B}$の細分であるとは
+\[
+\forall A\in \mathfrak{A}\ \exists B\in \mathfrak{B}\ A\subset B
+\]
+となることである。
+\end{df}
+
+\begin{df}[点有限族]集合$X$の部分集合の族$\mathfrak{A}$が点有限であるとは$X$の任意の点$x$に対して$x\in A$となる$A\in \mathfrak{A}$が有限個しかないことである。
+
+\end{df}
+
+\begin{df}[局所有限族]位相空間$X$に於いて$X$の部分集合の族$\mathfrak{A}$が局所有限であるとは$X$の各点$x$について$x$の近傍$N$が存在して
+\[
+N\cap A\neq \emptyset となるA\in \mathfrak{A}は有限個
+\]
+を充たすことである。
+\end{df}
+\begin{prop}\label{heihou}
+$\mathfrak{A}$を位相空間$X$の局所有限な族とする。このとき
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)=\bigcup_{A\in \mathfrak{A}}CL(A)
+\]
+が成立する。\footnote{CLは閉包作用素である。}
+\end{prop}
+\begin{proof}
+明らかに
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)\supset \bigcup_{A\in \mathfrak{A}}CL(A)
+\]
+が成り立つ。逆向きの包含関係を示そう。$\dpst x\in \cl\left(\bigcup_{A\in \mathfrak{A}}A\right)$
+とする。$\mathfrak{A}$は局所有限なので$x$の近傍$N$が存在して
+\[
+N\cap A\neq \emptyset となるA\in \mathfrak{A}は有限個
+\]
+を充たす。$N$と交わる$\mathfrak{A}$の元を$A_1,A_2,\cdots A_n$とすると$\dpst x\in \cl\left(\bigcup_{A\in \mathfrak{A}}A\right)$から
+\[
+x\in \cl\left(\bigcup_{i=1}^nA_i\right)
+\]
+が成立する。しかし有限個の和集合については
+\[
+\cl\left(\bigcup_{i=1}^nA_i\right)=\bigcup_{i=1}^m\cl(A_i)
+\]
+が成り立つので結局
+\[
+x\in \bigcup_{A\in \mathfrak{A}}\cl(A)
+\]
+つまり
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)=\bigcup_{A\in \mathfrak{A}}\cl(A)
+\]
+\end{proof}
+
+
+\begin{df}[星形有限]
+位相空間$X$に於いて$X$の部分集合の族$\mathfrak{A}$が星形有限であるとは任意の$A\in \mathfrak{A}$に対して$A\cap B=\O$となる$B\in \mathfrak{A}$が有限個しかないときにいう。
+\end{df}
+
+\begin{rmk}
+星形有限な開被覆は局所有限である。
+\end{rmk}
+
+
+\begin{df}[ハイポコンパクト]位相空間がハイポコンパクトであるとは空間の任意の開被覆に対して星形有限でかつ開被覆であるような細分が存在することである。
+強パラコンパクトともいう。
+\end{df}
+
+\begin{df}[パラコンパクト]位相空間がパラコンパクトであるとは空間の任意の開被覆に対して局所有限でかつ開被覆であるような細分が存在することである。
+\end{df}
+
+\begin{df}[メタコンパクト]位相空間がメタコンパクトであるとは空間の任意の開被覆に対して点有限でかつ開被覆であるような細分が存在することである。
+\end{df}
+
+
+\begin{df}
+位相空間$X$に於いて$X$の部分集合族$\mathcal{A}$が疎であるとは$X$の各点$x$に対して$x$の近傍$N$が存在して
+\[
+\mbox{$N\cap A\neq \O$となる$A\in \mathcal{A}$が存在しないか、もしくは１個しか無い}
+\]
+を充たす時$\mathcal{A}$は疎であると言う。もちろん$\mathcal{A}$が疎であるとき$A,B\in \mathcal{A},A\neq B$ならば$A\cap B=\O$である。
+\end{df}
+
+\begin{df}[族正規]
+位相空間$X$が族正規であるとは$X$の閉集合からなる任意の疎な族$\mathcal{A}$に対して$A\subset U_A$となる開集合の族$\{U_{A}\ |\ A\in \mathcal{A}\}$が存在して
+\[
+A\neq B\To U_A\cap U_B=\O
+\]
+が成り立つことである。\footnote{$T_1$は要請しないことにする}明らかに族正規空間は正規である。
+\end{df}
+
+
+\begin{fact}
+$T_1$空間において、
+メタコンパクトでかつ族正規であることと、パラコンパクトであることは同値である。
+\end{fact}
+
+\begin{fact}$\kappa$を無限基数とする。
+$T_4$空間において、
+$\kappa$メタコンパクトでかつ$\kappa$族正規であることと、$\kappa$パラコンパクトであることは同値である。
+\end{fact}
+
+\begin{rmk}
+一般に、正規性と$\aleph_0$族正規が同値である。
+のちに述べる、$T_4$空間における可算メタコンパクトと可算パラコンパクト性の同値性はこのことと、上の事実の系と見ることもできる。
+\end{rmk}
+
+
+
+\section{正規性}
+この章では、被覆を用いた正規空間の特徴付けを紹介する。
+
+
+\begin{df}
+位相空間$X$が正規であるとは$X$の互いに素な二つの閉集合$A$,$B$に対して、互いに素な$X$の開集合$U,V$が存在して$A\subset U$, $B\subset V$を満たすときにいう。
+$X$が$T_4$とは$X$が正規でかつ$T_1$のときにいう。
+\end{df}
+
+
+
+\begin{df}[開収縮]位相空間$X$の開被覆$\mathcal{U}$に対して$\{V_U\ |\ U\in \mathcal{U}\}$が開収縮であるとは$\{V_U\ |\ U\in \mathcal{U}\}$が$X$の開被覆であって、任意の$U\in \mathcal{U}$について
+\[
+CL(V_U)\subset U
+\]
+を充たすこと。
+\end{df}
+
+\begin{df}[閉収縮]位相空間$X$の開被覆$\mathcal{U}$に対して$\{F_U\ |\ U\in \mathcal{U}\}$が閉収縮であるとは$\{F_U\ |\ U\in \mathcal{U}\}$が$X$の閉被覆であって、任意の$U\in \mathcal{U}$について
+\[
+F_{U}\subset U
+\]
+を充たすこと。
+\end{df}
+\setcounter{equation}{0}
+\begin{thm}\label{thm:normal}
+位相空間$X$について以下は同値である。
+\begin{align}
+&\mbox{正規性}\\ 
+&\mbox{点有限開被覆に開収縮が存在する}\\ 
+&\mbox{局所有限開被覆に開収縮が存在する}\\ 
+&\mbox{有限開被覆に開収縮が存在する}\\ 
+&\mbox{点有限開被覆に閉収縮が存在する}\\
+&\mbox{局所有限開被覆に閉収縮が存在する}\\  
+&\mbox{有限開被覆に閉収縮が存在する}
+\end{align}
+\end{thm}
+\begin{proof}
+以下の論理包含図式は明らかであろう。
+\[\xymatrix{
+& (2) \ar@{=>}[r]\ar@{=>}[d]& (3)\ar@{=>}[r]\ar@{=>}[d] & (4)\ar@{=>}[d] &\\ 
+& (5)\ar@{=>}[r] & (6) \ar@{=>}[r]& (7) & 
+}\]
+これらを踏まえて以下では
+\[
+(1)\To (2),\ (7)\To (1)
+\]
+を証明する。\par
+[$(1)\To(2)$の証明]\par
+$\{U_{i}\}_{i\in I}$を$X$の任意の点有限開被覆とし、$I$は整列しているとする。超限帰納法で
+\begin{align*}
+&(hoge1)\ CL(V_i)\subset U_i\\ 
+&(hoge2)\ \forall k\in I\ \{V_{i}\}_{i\le k}\cup\{U_i\}_{k<i}\mbox{が$X$の被覆を成している}
+\end{align*}
+となる$V_i$を構成する。$0$を$I$の最小元として、まず$V_0$を構成する。$F_0=X\setminus \bigcup_{k\neq0}U_k$と置くとこれは閉集合で$\{U_i\}_{i\in I}$が被覆を成すことから
+\[
+F_0\subset U_0
+\]
+となる。ここで$X$の正規性を用いると
+\[
+F_0\subset V\subset CL(V)\subset U_0
+\]
+となる開集合$V$が存在する。このような$V$の一つを$V_0$とおくと
+\[
+CL(V_0)\subset U_0
+\]
+を明らかに充たし
+更に$\{V_0\}\cup\{U_i\}_{i>0}$が$X$の被覆を成している。\par
+次に$i<k$となる任意の$i$については$(a),(b)$を充たす$V_i$が構成できているとしよう。このとき
+\[
+F_k=X\setminus \left(\bigcup_{i<k}V_i\cup \bigcup_{k<i}U_i\right)
+\]
+と定義する。さて
+\[
+F_k\subset U_k
+\]
+となることを見よう。もし$x\in F_k(X\setminus U_k)$が存在したとしよう。$\{U_i\}_{i\in I}$は点有限なので$x\in U_{a}$となる$a\in I$は有限個であり、このようなもの全体を$\{a_1,a_2,\cdots,a_n\}$としよう。そして$b=\max\{a_1,a_2\cdots ,a_n\}$と置くと$F_k$の定義と$x\in F_k$と$x\not\in U_k$より$b<k$であり、$b<i$となる$i$について$x\not\in U_i$であるので$b$に対する$(hoge2)$から$x\in \bigcup_{i\le b}V_b$であるが、$\bigcup_{i\le b}V_b\subset \bigcup_{i<k}V_i$と$F_k$の定義から$x\not\in F_k$になり、矛盾する。よって$F_k\subset U_k$\par
+さてさてここで$X$の正規性から
+\[
+F_k\subset V\subset CL(V)\subset U_k
+\]
+となる開集合$V$が存在するが、このような$V$のひとつを$V_k$としよう。このとき、$(hoge1),\ (hoge2)$が充たされることは見やすい。\par
+最後にこのように作られた$\{V_i\}_{i\in I}$が$X$の被覆になることを見よう。$x\in X$を任意に与える
+$\{U_i\}_{i\in I}$は点有限なので$x\in U_{a}$となる$a\in I$は有限個であり、このようなもの全体を$\{a_1,a_2,\cdots,a_n\}$としよう。そして$b=\max\{a_1,a_2\cdots ,a_n\}$と置くと$b<i$ならば$x\not\in U_i$なので$(hoge2)$から$x\in V_{j}$となる$V_j$が存在する。よって$\{V_i\}_{\in I}$は被覆となる。
+\par [$(1)\To(2)$の証明終わり]\par
+[$(7)\To(1)$の証明]\par
+$E,F$を交わらない２つの$X$の閉集合としよう。このとき$\{X\setminus E,X\setminus F\}$は$X$の有限開被覆なので$(9)$から閉収縮$\{A,B\}$が存在する。つまり$\{A,B\}$は
+\[
+A\subset X\setminus E,\ B\subset X\setminus F
+\]
+となる２つの閉集合である。このとき$U=X\setminus A,\ V=X\setminus B$と置くと、これらは開集合であり、更に$E\subset U,\ F\subset V$である。また$A\cup B=X$から
+\[
+U\cap V=X\setminus (A\cup B)=X\setminus X=\O
+\]
+なので結局$X$は正規である。
+\par [$(7)\To(1)$の証明終わり]\par
+\end{proof}
+
+\begin{fact}[ウリゾーンの補題]
+$(X,\mathfrak{O})$を正規空間とし、$F,G$をその互いに素な２つの閉集合とすると連続関数$f:X\rightarrow [0,1]$が存在し
+\[
+f|F=1,\ f|G=0
+\]
+を充す。
+つまり互いに素な２つの閉集合は関数で分離できる。
+\end{fact}
+
+\begin{df}
+$X$の部分集合$S$が$G_{\delta}$集合であるとは、$S$が可算個の$X$の開集合の共通部分で表せるときにいう。
+また、$S$が$F_{\sigma}$集合であるとは、$S$が可算個の$X$の閉集合の和集合で表せる時にいう。
+\end{df}
+
+次の命題は、ウリゾーンの補題の応用の一つであり、断りなく頻繁に使われる。
+\begin{prop}\label{FG}
+$X$を正規とする。$X$の閉集合$A$と開集合$U$は
+\[
+A\subset U
+\]
+を満たすとする。このとき$X$の$G_{\delta}$閉集合$T$と$F_{\sigma}$開集合$S$が存在して
+\[
+A\subset S\subset T\subset U
+\]
+となる。
+\end{prop}
+\begin{prop}
+ウリゾーンの補題から、連続関数$f:X\to [0,1]$が存在して、
+\[
+f|A=0,\ f|X\setminus U=1
+\]
+を満たす。ここで、$S=f^{-1}([0,1/2))$, $T=f^{-1}([0,1/2])$とすると、それぞれ開集合と閉集合であり、
+$A\subset S\subset T\subset U$を満たす。
+また、$S=\bigcup_{i\in \omega}f^{-1}([0,1/2-1/2^i])$なので、$S$は$F_{\sigma}$である。同様にして$T=\bigcap_{i\in\nn}f^{-1}([0,1/2+1/2^i))$なので、$T$は$G_{\delta}$である。
+
+\end{prop}
+
+
+\section{正規性が遺伝する部分集合}\label{sec:iden}
+改めて$F_{\sigma}$集合を定義する。
+\begin{df}
+位相空間の部分集合$S$が、$X$の$F_{\sigma}$集合であるとは、$S$が$X$の可算個の閉集合の和集合でかける時にいう。
+また、$X$の部分集合$S$が、$X$の$G_{\delta}$集合であるとは$S$が$X$の可算個の開集合の共通部分で書ける時に言う。
+\end{df}
+\begin{df}
+位相空間$X$のふたつの部分集合$A,B$が分離的であるとは、
+\[
+\cl(A)\cap B=A\cap \cl(B)=0
+\]
+を満たす時にいう。
+\end{df}
+正規空間において、ふたつの閉集合は分離できるが、一般に分離的なふたつの$F_{\sigma}$集合を開集合で分離することができる。この性質は見かけ上は正規性よりも強いことを主張しているが、正規性と同値である。
+\begin{prop}\label{efsigma}
+$X$を正規空間とし、$A$, $B$を$X$のふたつの$F_{\sigma}$集合で、分離的なものとする。このとき$X$の開集合$U$, $V$が存在して$U\cap V=\O$および、$A\subset U$, $B\subset V$を充す。
+\end{prop}
+\begin{proof}
+$X$の閉集合からなるふたつの可算族$\{S_i\}$, $\{T_i\}$は$S_i\subset S_{i+1}$, $T_i\subset T_{i+1}$および
+\[
+A=\bigcup_i S_i, \ B=\bigcup_i T_i
+\]
+を充すとする。
+開集合の可算族$\{U_i\}$, $\{V_i\}$を以下を充すものとする。
+\setcounter{equation}{0}
+\begin{align*}
+&S_i\subset U_i\subset \cl(U_i)\subset X\setminus(\cl(B)\cup \bigcup_{k<i}\cl(V_k)), \\
+&T_i \subset V_i\subset \cl(V_i)\subset X\setminus(\cl(A)\cup \bigcup_{k<i}\cl(U_k)), \\ 
+&\cl(U_i)\cap \cl(V_i)=\O
+\end{align*}
+このような族の存在は、$A$, $B$の分離性と空間の正規性、そして帰納法によりわかる。
+任意の$i,j$について、
+\[
+U_i\cap V_j=\O
+\]
+に注意しよう。
+そして、
+\[
+U=\bigcup_iU_i, \ V=\bigcup_iV_i
+\]
+とすると$A\subset U$, $B\subset V$
+で$U\cap V=\O$なので、これで命題が証明された。
+\end{proof}
+
+\begin{lem}
+$X$の$F_{\sigma}$集合$S$の閉部分集合は、$X$の$F_{\sigma}$集合である。
+\end{lem}
+
+\begin{cor}\label{cor:fs}
+正規空間の$F_{\sigma}$集合は正規である。
+\end{cor}
+
+\begin{df}
+位相空間$X$の部分集合$S$が一般化$F_{\sigma}$集合であるとは、任意の$X$の開集合$U$で$S\subset U$となるものに対して、$F_{\sigma}$集合$A$が存在して、$S\subset A\subset U$を満たす時にいう。
+\end{df}
+
+\begin{lem}
+$X$の一般化$F_{\sigma}$集合$S$の閉集合は$X$の一般化$F_{\sigma}$集合である。
+\end{lem}
+\begin{proof}
+$S$の閉集合を$A$とする。そして、$X$の開集合$U$は$A\subset U$を満たしているとする。ここで$A$は$S$の閉集合なので、$X$の閉集合$F$が存在して
+$S\cap F=A$を満たす。
+$V=U\cap (X\setminus F)$は$X$の開集合であり$S\subset V$を満たす。
+$S$は一般化$F_{\sigma}$集合であるから、$S\subset B\subset V$となる
+$X$の$F_{\sigma}$集合$B$が存在する。$B$は$F_{\sigma}$なので
+$B=\bigcup_{i}C_i$, $C_i$は$X$の閉集合、と表すことができる。
+そこで$D_i=C_i\cap F$とし、$E=\bigcup_i D_i$とおく。これはもちろん$F_{\sigma}$集合である。
+まず$A\subset E$ である。次に$D_i\subset V\cap F\subset F\cap (U\cap (X\setminus F))=U\cap F\subset U$なので、$E\subset U$である。以上から$A$が一般化$F_{\sigma}$集合であることがわかる。
+\end{proof}
+
+\begin{prop}
+$X$のふたつの分離された一般化$F_{\sigma}$集合$A$と$B$に対して、$X$の開集合$U$, $V$が存在して$A\subset U$、$B\subset V$と$U\cap V=\O$
+を満たす。
+\end{prop}
+\begin{proof}
+$A\subset X\setminus \cl(B)$なので、$A$が一般化$F_{\sigma}$集合であることを用いて$A\subset S\subset X\setminus \cl(B)$となる$F_{\sigma}$
+集合$S$が存在する。$R=\cl(A)\cap S$は$F_{\sigma}$集合である。
+また、同様に$B$と$X\setminus \cl(A)$に対して$F_{\sigma}$集合$T$
+が存在して$B\subset T\subset X\setminus \cl(A)$を満たす。
+そして$L=T\cap \cl(B)$と定義する。
+ここで$\cl(R)\subset \cl (A)$なので$\cl(R)\cap L\subset \cl(A)\cap T=\O$となる。同様に$\cl(L)\cap R=\O$となる。よって先の命題から$R$と$L$を分離する開集合が存在する。これは$A$と$B$も分離するので、これで証明が終わる。
+\end{proof}
+
+\begin{cor}\label{cor:gfs}
+正規空間$X$の一般化$F_{\sigma}$集合は正規である。
+\end{cor}
+
+\begin{thm}
+以下は同値である。
+\begin{enumerate}
+\item $X$は正規である。
+\item $X$の分離されたふたつの$F_{\sigma}$集合は開集合で分離可能である。
+\item $X$の分離されたふたつの一般化$F_{\sigma}$集合は開集合で分離可能である。
+\end{enumerate}
+\end{thm}
+
+
+
+\begin{rmk}
+距離空間の任意の部分集合や、$\omega_1$の定常集合などが、一般化$F_{\sigma}$集合となる。
+\end{rmk}
+
+
+
+
+\section{可算パラコンパクト性とDowkerの定理}
+この章ではDowkerによる可算パラコンパクト性の特徴付けを紹介する。
+以下に三つのコンパクト性の概念を導入する。
+\begin{df}[可算ハイポコンパクト]
+任意の可算開被覆が星形有限な開細分被覆を持つ時に可算ハイポコンパクトという。今日ではこの概念は可算強パラコンパクトと呼ばれることがとても多い。
+\end{df}
+\begin{df}[可算パラコンパクト]
+任意の可算開被覆が局所有限な開細分被覆を持つ時に可算パラコンパクトという。
+\end{df}
+
+\begin{df}[可算メタコンパクト]
+任意の可算開被覆が点有限な開細分被覆を持つ時に可算メタコンパクトという。
+\end{df}
+
+Dowkerの定理のために次の概念が必要である。
+\begin{df}
+$X$の可算単調被覆とは、可算被覆$\{U_i\}_{i<\omega}$で、
+\[
+U_{i}\subset U_{i+1}
+\]
+を満たすもののことをいう。
+また、閉集合の族$\{F_i\}_{i<\omega}$が単調減少とは
+\[
+F_{i+1}\subset F_i
+\]
+を満たす時にいう。
+\end{df}
+
+Dowkerの定理の前半部分を証明しよう。これはDowkerによる可算パラコンパクト性の特徴付けの中で、被覆による特徴付けに関する部分である。
+\begin{thm}\label{thm:Dowker1}
+$X$を$T_4$空間とする。このとき以下は同値である。
+\begin{enumerate}
+\item $X$は可算ハイポコンパクト　
+\item $X$は可算パラコンパクト
+\item $X$は可算メタコンパクト
+\item $X$の可算開被覆は開収縮を持つ。
+\item $X$の可算単調開被覆は開収縮を持つ。
+\item $X$の可算単調開被覆は閉収縮を持つ。
+\item $X$の任意の単調減少な閉集合族$\{F_i\}_{i\in\nn}$で、その共通部分が空なものに対して、開集合族$\{G_i\}$が存在して、$F_i\subset G_i$と$\bigcap_i G_i=0$を満たす。
+\item $X$の任意の単調減少な閉集合族$\{F_i\}_{i\in\nn}$で、その共通部分が空なものに対して、$G_{\delta}$な閉集合の族$\{A_i\}$が存在して、$F_i\subset A_i$と$\bigcap_i A_i=0$を満たす。
+\end{enumerate}
+
+\end{thm}
+\begin{proof}
+$(1)\To (2)\To (3)$, $(4)\To (5)\To (6)$はわかる。
+$(3)\To (4)$, $(7)\To (8)$, $(6)\To (7)$と$(8)\To (1)$を示す。
+
+[$(3)\To (4)$の証明]
+
+定理\ref{thm:normal}から直ちに従う。
+
+[$(3)\To (4)$の証明]
+
+
+
+[$(7)\To (8)$の証明]
+
+命題\ref{FG}から直ちに従う。
+
+[$(7)\To (8)$の証明終わり。]
+
+[$(6)\To (7)$の証明]
+
+$\{F_i\}_{i< \omega}$を単調減少な閉集合族で$\bigcap_i F_i=0$を満たすものとする。
+
+そして$U_i=X\setminus F_i$とすると、$\{G_i\}_{i< \omega}$は可算単調開被覆である。よって条件$(6)$から$A_i\subset U_i$を満たす閉被覆$\{A_i\}_{i< \omega}$が存在する。$G_i=X\setminus A_i$とすると、これは$F_i\subset G_i$を満たす開集合であり、$\{A_i\}$が被覆であることから$\bigcap_iG_i=0$を満たす。
+
+
+[$(6)\To (7)$の証明終わり]
+
+
+[$(8)\To (1)$の証明]
+
+$\{U_i\}_{i<\omega}$を可算開被覆とする。
+このとき$F_i=X\setminus \bigcup_{k\le i}U_k$は閉集合であり、$\{F_i\}$は単調減少である。$\{U_i\}$が被覆をなすことから$\bigcap_iF_i=0$である。
+このとき$(8)$から$G_{\delta}$な閉集合の可算族
+$\{A_i\}$が存在して$F_i\subset A_i$と$\bigcap_iA_i=0$を満たす。
+$X\setminus A_i$は$F_{\sigma}$な開集合である。よって閉集合族$\{B_{i, j}\}_{j<\omega}$を用いて
+\[
+X\setminus A_i=\bigcup_jB_{i,j}
+\]
+とかけるが、$X$が$T_4$であることから、
+\[
+B_{i, j}\subset \nai(B_{i, j+1})
+\]
+と仮定しても良い。
+
+$H_{i,j}=\nai(B_{i,j})$とする。
+もちろん
+\begin{equation}
+H_{i, j}\subset B_{i, j}\subset H_{i,j+1} \tag{a}
+\end{equation}
+であり、この式$(a)$から$X\setminus A_i=\bigcup_jH_{i, j}$
+がわかる。
+また、$F_i$と$A_i$, $B_{i,j}$の定義から
+\begin{equation}
+B_{i,j}\subset X\setminus A_i\subset X\setminus F_i=\bigcup_{k\le i}U_k\tag{b}
+\end{equation}
+がわかる。
+さて、
+
+\[
+G_n=\bigcup_{i+j=n}H_{i,j}
+\]
+と定義する。定義式の右側の和集合は有限個の開集合の和になっていることに注意しよう。
+すると、$G_n$の定義と式$(a)$と$(b)$から
+\begin{equation}
+\cl (G_n)\subset G_{n+1}\subset \bigcup_{k\le n+1}U_k\tag{c}
+\end{equation}
+がわかる。
+$\{X\setminus A_i\}_{i}$が$X$の被覆であることと、
+$X\setminus A_i=\bigcup_jH_{i,j}$から、$\{H_{i,j}\}_{i,j}$が$X$の被覆をなしていることがわかる。よって$G_n$の定義から
+\[
+\bigcup_nG_n=X
+\]
+が成り立つ。
+
+そして、$O_1=G_1$, $O_2=G_2$ と定義し、$n\ge 3$に対しては 
+\[
+O_n=G_n\setminus \cl(G_{n-2})
+\]
+と定義する。
+式$(c)$から
+$O_n\subset \bigcup_{k\le n}U_k$が成り立つので
+これに注意して集合族$\mathcal{U}$を
+
+\[
+\mathcal{U}=\{O_n\cap U_i\mid n<\omega, i=1,2,\dots, n\}
+\]
+と定義する。
+
+$\mathcal{U}$は開集合の族である。これが$\{U_i\}$の細分になっていることは定義から明らかである。
+
+
+まず$\mathcal{U}$ が被覆であることを示そう。
+$x\in G_n$となる最小の$n$を取る。すると$x\in O_n$である。さらに、
+$O_n\subset \bigcup_{k\le n}U_k$であるので、$x\in U_k$となる$k\le n$をとれば、$x\in O_n\cap U_k$である。よって$\mathcal{U}$は被覆である。
+
+最後に$\mathcal{U}$が星形有限であることを示そう。
+$O_n$の定義から、$j>n+2$ならば$O_j\cap O_n=0$に注意しよう。
+すると、$O_n\cap U_i$が交わりを持つ$\mathcal{U}$の元は$\{O_k\cap U_m\mid k=1, 2, \dots, n+2, m=1,2,\dots, n\}$の元のみであることがわかる。そしてこの集合は有限集合であるから
+$\mathcal{U}$は星形有限であることがわかる。
+
+
+
+[$(8)\To (1)$の証明終わり]
+\end{proof}
+
+次にDowkerの定理の後半を証明する。これは、コンパクト距離空間との直積に関する部分である。
+
+\begin{thm}\label{thm:Dowker2}
+位相空間$X$を$T_4$とする。このとき
+次の三つは同値である。
+\begin{enumerate}
+\item $X$は可算パラコンパクトである。
+\item 任意のコンパクト距離空間$Y$について$X\times Y$は$T_4$
+\item $X\times (\omega_0+1)$は$T_4$
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+$(2)\To (3)$は自明である。
+
+[$(1)\To (2)$の証明]
+
+$A$, $B$を$X\times Y$の交わらない二つの閉集合とする。今から$A\subset U$かつ$\cl_{X\times Y}(U)\cap B=0$となる$X\times Y$の開集合$U$を構成する。
+まず$\{G_i\}$を$Y$の可算開基とする。
+$s\in [\omega]^{<\omega}$について$H_s=\bigcup_{i\in s}G_i$と定義する。
+
+$x\in X$と$S\subset X\times Y$について、$S[x]$を$S$の$x$に関するスライスとする。つまり、
+\[
+S[x]=\{y\in Y\mid (x,y)\in S\}
+\]
+である。
+
+各$s\in [\omega]^{<\omega}$
+に対して
+$U_s=\{x\in X \mid A[x]\subset H_s\subset \cl_{Y}(H_s)\subset Y\setminus B[x]\}$とした時、
+$U_s$が開集合であることを示そう。
+まず
+$P=\{x\in X \mid A[x]\subset H_s\}$
+が開集合であることを示そう。
+$a\in P$を任意に固定する。
+$y\in Y\setminus H_s$を任意に取る。このとき
+$(x, y)\not\in A$なので、
+$a$, $y$の開近傍$N_y$, $M_y$が存在して
+$(x,y)\in N_y\times M_y\subset (X\times Y)\setminus A$
+となる
+$\{N_y\}$は$Y\setminus H_s$の開被覆なので、有限個の$y_1,\dots, y_k$が存在して，
+$\{N_{y_i}\}_{i=1}^k$で
+$Y\setminus H_s$を被覆できる。ここで$N=\bigcap_i N_{y_i}$
+とするとこれは$a$の開近傍である。
+さらに、
+$(N\times (Y\setminus H_s))\cap A=0$である。
+$b\in N$を任意に取り、
+$y\in A[b]$とする。
+つまり$(b, y)\in A$である。
+$b\in N$であり、
+$(x,y)\in A$なので、
+$(N\times (Y\setminus H_s))\cap A=0$から$y\in H_s$である。
+つまり$A[b]\subset H_s$なので、$b\in P$である。
+よって$P$は開集合である。
+$Q=\{x\in X \mid \cl_{Y}(H_s)\subset Y\setminus B[x]\}$も同様に開集合であることが示せる。
+結果として$U_s$は開集合であることがわかる。
+
+
+
+次に$\{U_s\}_{s\in [\omega]^{<\omega}}$が$X$の被覆であることを示そう。
+$x\in X$を任意に取る。このとき$\{G_i\}$が開基であることと、$A[x]$がコンパクトであることから$s\in[\omega]^{<\omega}$が存在して、
+$A[x]\subset H_s\subset \cl(H_s)\subset B[x]$
+となるので、$x\in U_s$である。つまり$\{U_s\}_{s\in [\omega]^{<\omega}}$は$X$の被覆となる。
+
+
+さて、$X$は可算パラコンパクトであり、先の定理から可算ハイポコンパクトであることがわかるので、
+$\{U_s\}$の星形有限な開被覆で$\cl_X(V_s)\subset U_s$を満たすものが存在する。
+これを用いて$U=\bigcup_{s}V_s\times H_{s}$と定義する。
+まず$A\subset U$を示そう。$(x,y)\in A$とする。
+$\{V_s\}$は$X$の被覆なので$x\in V_s$となる$s$が存在する。特に$x\in U_s$である。
+よって$x$は$A[x]\subset H_s\subset \cl(H_s)\subset Y\setminus B[x]$を満たす。$(x,y)$から$y\in A[x]$なので、$y\in H_s$がわかる。つまり$(x,y)\in V_s\times H_s$となる。従って$A\subset U$を得る。
+ 次に$\{V_s\times H_s\}_{s\in[\omega]^{<\omega}}$が$X\times Y$の局所有限な開集合族であることを証明しよう。$(x,y)\in X\times Y$を任意に取る。$\{V_s\}$は$X$の被覆なので、
+ $x\in V_s$となる$s$が存在する。$\{V_s\}$は星形有限なので、$V_s$と交わる$\{V_s\}$の元は、有限個であるから、それらを$V_{s(1)},V_{s(2)},\dots, V_{s(n)}$と表すことにしよう。この時$V_s\times Y$は$(x,y)$の近傍であり、$\{V_s\times H_s\}$のうち$V_{s(1)}\times H_{s(1)},\dots, V_{s(n)}\times H_{s(n)}$としか交わらない。よって$\{V_s\times H_s\}$は局所有限である。
+
+$\{V_s\times H_s\}$の局所有限性から
+\[
+\cl(U)=\bigcup_s\cl(V_s\times H_s)
+\]
+が成り立つ。
+さらに
+\[
+\cl(U)=\bigcup_s\cl(V_s\times H_s)=\bigcup_{s}\cl(V_s)\times \cl(H_s)\subset \bigcup_{s}U_s\times \cl(H_s)
+\]
+を満たし、
+$U_s$の定義から$(U_s\times H_s)\cap B=0$なので、
+$\cl(U)\cap B=0$である。よって$X\times Y$は$T_4$である。
+
+
+[$(1)\To (2)$の証明終わり]
+
+[$(3)\To (1)$の証明]
+
+
+$\{F_i\}$を$X$の単調減少な閉集合族で$\bigcap_iF_i=0$となるものとする。この集合族に対し、$F_i\subset G_i$で、$\bigcap G_i=0$となるものを構成する。
+
+$X\times (\omega_0+1)$の部分集合$A$を
+\[
+A=\bigcup_{i\in \omega_0}F_i\times \{i\}
+\]
+と定義する。この集合が閉集合であることを示そう。
+$(x,y)\not\in A$としよう。
+$y\in \omega_0$の時は、$(X\setminus F_y)\times \{y\}$が$A$と交わりを持たない開集合となる。
+
+$y=\omega_0$の時、十分大きい番号$N$をとれば$N\le n$のとき
+$x\not\in F_n$となるので、$(X\setminus  F_N)\times [N,\omega_0]$
+が$A$と交わりを持たない開集合となる。よって$A$は閉集合である。
+
+さて、$B=X\times \{\omega_0\}$とすると、$A$と$B$は交わりを持たない$X\times (\omega_0+1)$の閉集合であるから、$X\times (\omega+1)$の正規性から、交わりを持たない二つの$X\times (\omega+1)$の開集合$U,V$で
+\[
+A\subset U,\ B\subset V
+\]
+となるものが存在する。
+
+ここで$G_i=\{x\in X\mid(x, i)\in U\}=U[i]$と定義する。
+すると、$G_i$は開集合であり、$A\subset U$から$F_i\subset G_i$を満たす。
+また、$x\in X$を任意に取ると、
+$(x, \omega_0)\in B\subset V$なので、
+$x$の近傍$S$と$N\in \omega_0$が存在して、$S\times [N, \omega_0]\subset V$となる。$U\cap V=0$なので、特に$(x, N)\not\in U$である。つまり、$x\not\in G_N$である。よって$\bigcap_iG_i=0$がわかる。
+このことと先の定理から$X$が可算パラコンパクトであることがわかる。
+
+[$(3)\To (1)$の証明終わり]
+\end{proof}
+
+セクション\ref{sec:iden}において正規空間の一般化$F_{\sigma}$集合は正規であることを示した。同様にして、可算パラコンパクトかつ$T_4$も一般化$F_{\sigma}$集合に遺伝する。このことをコンパクト距離空間との直積を用いたDowkerによる可算パラコンパクト性の特徴づけ、つまり定理\ref{thm:Dowker2}を用いて証明しよう。その証明の中ではいわゆるTube lemmaと呼ばれる議論を用いる。
+まずはそのTube lemmaを紹介しよう。
+
+\begin{lem}[tube lemma]\label{lem:tube}
+$X$を位相空間、$Y$をコンパクト位相空間とする。更に$x\in X$と$X\times Y$の開集合$O$が
+\[
+\{x\}\times Y\subset O
+\]
+を充たしているとする。このとき$X$における$x$の開近傍$N$が存在して
+\[
+\{x\}\times Y\subset N\times Y\subset O
+\]
+を充たす。
+\end{lem}
+
+\begin{proof}$A=\{x\}\times Y$と置く
+\[
+\mathcal{O}=\{U\times V\ |\ A\cap (U\times V)\neq\O,\ U\times V\subset O,\ U,VはそれぞれX,Yの開集合\}
+\]
+と置くと、$\mathcal{O}$は開集合族で直積の開集合の定め方から
+\[
+A\subset \bigcup \mathcal{O}
+\]
+が成り立つので$\mathcal{O}$は$A$の開被覆である。$A$は$Y$と同相であるからコンパクトなので
+\[
+A\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+となる$\mathcal{O}$の有限部分族$\{P_i\times Q_i\}_{i=1}^n$が存在する。そして明らかに
+\[
+Y\subset \bigcup_{i=1}^nQ_i
+\]であり
+\[
+N=\bigcap_{i=1}^nP_i
+\]
+と置けば$x\in N$で
+\[
+A=\{x\}\times Y\subset N\times Y\subset N\times \bigcup_{i}^nQ_i=\bigcup_{i=1}^n(N\times Q_i)\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+が成り立つので証明が終わる。
+\end{proof}
+
+ちなみにTube lemmaが成り立つことと、$Y$がコンパクトであることは同値である。
+
+\begin{prop}\label{prop:c-gfs}
+可算パラコンパクト$T_4$空間の一般化$F_{\sigma}$集合は可算パラコンパクトである。
+\end{prop}
+\begin{proof}
+$X$を$T_4$空間とし、$S$をその一般化$F_{\sigma}$集合とする。
+まず最初に系\ref{cor:gfs}から$S$が$T_4$であることがわかる。
+よって定理\ref{thm:Dowker2}から、任意のコンパクト距離空間$Y$との直積$S\times Y$が正規になることが証明できればこの命題は証明される。
+そのために、$S\times Y$が$X\times Y$の一般化$F_{\sigma}$集合である
+ことを証明しよう。そうすれば、$X$の可算パラコンパクト性から$X\times Y$は正規なので$S\times Y$が正規であることもわかる。
+
+$U$を$X\times Y$の開集合で$S\times Y\subset U$となるものとする。
+さて、補題\ref{lem:tube}から任意の$x\in S$に対して$x$の$X$における開近傍$N_x$が存在して$N_x\times Y\subset U$を満たす。ここで$V=\bigcup_{x\in S}N_x$と定義するとこれは$X$の開集合であって、$V\times Y\subset U$を満たし、さらに$S\subset V$となる。ゆえに$S$が$X$の一般化$F_{\sigma}$集合であるから、$X$の$F_{\sigma}$集合$A$が存在して$S\subset A\subset V$を満たす。すると、$S\times Y\subset A\times Y\subset V\times Y\subset U$がわかり、$A\times Y$は明らかに$X\times Y$の$F_{\sigma}$集合なので$S\times Y$は$X\times Y$の一般化$F_{\sigma}$集合であることがわかる。
+\end{proof}
+
+
+\begin{cor}\label{cor:c-fs}
+可算パラコンパクト$T_4$空間の$F_{\sigma}$集合は可算パラコンパクトである。
+\end{cor}
+\begin{proof}
+命題\ref{prop:c-gfs}からもわかるが、$A$が$X$の$F_{\sigma}$集合のとき、任意の位相空間$Y$について$A\times Y$は$X\times Y$の$F_{\sigma}$集合になるため、このことからもわかる。この論法自体命題\ref{prop:c-gfs}の証明の中で使われている。
+\end{proof}
+この系を用いて、Dowkerの定理をほんのちょっとさらに拡張することができる。
+
+\begin{thm}\label{thm:Dowker3}
+$X$を$T_4$空間とする。このとき以下は同値である。
+\begin{enumerate}
+\item $X$は可算パラコンパクト
+\item  $X\times \rr$は$T_4$
+\item 任意の$\sigma$コンパクトな局所コンパクト距離空間$Y$に対して、$X\times Y$は正規
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$X$を可算パラコンパクトとすると$X\times [0,1]$が正規なので、その$F_{\sigma}$集合に同相である$X\times \rr$の正規である。また、逆に$X\times \rr$が正規ならその閉部分空間$X\times [0,1]$も正規である。
+これで$(1)$と$(2)$の同値性がわかる。コンパクト距離空間は、$\sigma$コンパクトな局所距離空間なので、$(3)$の条件から$X$の可算パラコンパクト性がわかる。逆に$Y$を$\sigma$コンパクトな局所コンパクト距離空間とすると$Y$の一点コンパクト化を$M$とすると、これはコンパクト距離化可能空間になるので、$X$の可算パラコンパクト性から$X\times M$は正規空間になる。
+$Y$は$M$の$F_{\sigma}$集合なので$X\times Y$は正規である。
+\end{proof}
+
+定理\ref{thm:Dowker1}, \ref{thm:Dowker2}, \ref{thm:Dowker3}をまとめると
+次の定理が得られる。
+\begin{thm}[Dowker]
+$X$を$T_4$空間とする。このとき以下は同値である。
+\begin{enumerate}
+\item $X$は可算ハイポコンパクト　
+\item $X$は可算パラコンパクト
+\item $X$は可算メタコンパクト
+\item $X$の可算開被覆は開収縮を持つ。
+\item $X$の可算単調開被覆は開収縮を持つ。
+\item $X$の可算単調開被覆は閉収縮を持つ。
+\item $X$の任意の単調減少な閉集合族$\{F_i\}_{i\in\nn}$で、その共通部分が空なものに対して、開集合族$\{G_i\}$が存在して、$F_i\subset G_i$と$\bigcap_i G_i=0$を満たす。
+\item $X$の任意の単調減少な閉集合族$\{F_i\}_{i\in\nn}$で、その共通部分が空なものに対して、$G_{\delta}$な閉集合の族$\{A_i\}$が存在して、$F_i\subset A_i$と$\bigcap_i A_i=0$を満たす。
+\item 任意のコンパクト距離空間$Y$について$X\times Y$は$T_4$
+\item $X\times (\omega_0+1)$は$T_4$
+\item $X\times [0,1]$ は$T_4$
+\item $X\times 2^{\omega_0}$は$T_4$
+\item $X\times [0,1]^{\omega_0}$は$T_4$
+\item 離散空間ではないコンパクト距離空間$Y$が存在して$X\times Y$は$T_4$
+\item 任意の$\sigma$コンパクトな局所コンパクト距離空間$Y$に対して、$X\times Y$は正規
+\item 離散空間ではない$\sigma$コンパクトな局所コンパクト距離空間$Y$が存在して、$X\times Y$は$T_4$
+\item $X\times \rr$は$T_4$
+\end{enumerate}
+
+\end{thm}
+
+\begin{rmk}
+$\sigma$コンパクトな局所コンパクト距離空間の一点コンパクト化は、
+$\sigma$コンパクト性から無限遠点が可算な基本近傍形を持つので、距離化可能である。ブルバキの位相空間論では$\sigma$コンパクトが「無限遠で可算」と呼ばれている。
+\end{rmk}
+
+
+\begin{prop}\label{prop:cptprod}
+$X$を可算パラコンパクト空間とし、$K$をコンパクト空間とする。
+このとき$X\times K$は可算パラコンパクトである。
+\end{prop}
+\begin{proof}
+$\{U_i\}_{i<\omega}$を$X\times K$の可算な開被覆とする。
+このとき、$s\in [\omega]^{<\omega}$に対して$O_s=\bigcup_{i\in s}U_i$とする。
+そして$X$の部分集合$H_s$を
+\[
+H_s=\{x\in X\mid \{x\}\times K\subset O_s\}
+\]
+と定義する。このとき補題\ref{lem:tube}によって、$H_s$は$X$の開集合である。ここで、$H_s$は空集合になることもあることに注意しよう。
+次に$\{H_s\}$は$X$の被覆になることを示そう。
+任意に$x$をとってくると、$K$はコンパクトなので、
+$\{x\}\times K$もコンパクトであることと$\{U_i\}$が$X\times K$の被覆をなしていることからある$s\in [\omega]^{<\omega}$が存在して$\{x\}\times K\subset O_s$となる。
+よって$x\in H_s$となる。
+よって$\{H_s\}$は$X$の開被覆なので$X$の可算パラコンパクト性より
+局所有限な開細分被覆$\{G_s\}$が存在する。ここで$G_s\subset H_s$としても一般性を失わない。
+今$\mathcal{U}=\{(G_s\times K)\cap U_i\mid i\in s \}$
+とすると、これは$\{U_i\}$の細分であり、局所有限な開被覆である。よって$X\times K$は可算パラコンパクトである。
+\end{proof}
+
+\begin{rmk}
+一般に可算ハイポコンパクト（可算メタコンパクト）空間とコンパクト空間の直積は可算ハイポコンパクト（可算メタコンパクト）となる。
+\end{rmk}
+
+\section{可算パラコンパクト性の十分条件}
+
+
+\begin{df}[monotonical normality]
+$X$を位相空間とし、
+\[
+\mathcal{F}=\{(A,B)\mid \text{$A$, $B$は$X$の閉集合で、$A\cap B=0$を満たす。}\}
+\]
+と定義する。また、この$\mathcal{F}$上に次のように順序$\prec$を定義する。
+$(A,B)\prec (C,D)$ $\iff$$A\subset C$かつ$(D\subset B)$
+
+
+この準備の下、単調正規性を定義する。
+$X$の開集合全体を$\mathfrak{O}(X)$と書くことにする。
+$X$が単調正規であるとは、$X$が$T_1$であって、写像$G:\mathcal{F}\to \mathfrak{O}(X)$が存在して次を満たすことである。
+\begin{enumerate}
+\item $A\subset G(A, B)\subset \cl(G(A,B))\subset X\setminus B$
+\item $(A,B)\prec (C,D)\To G(A,B)\subset G(C,D)$
+\end{enumerate}
+\end{df}
+
+\begin{df}[条件$(H)$]
+$X$を位相空間とし、
+\[
+\mathcal{H}=\{(A,B)\mid \text{$A$, $B$は$X$の部分集合で、$\cl(A)\cap B=0$と$\cl(B)\cap A=0$を満たす。}\}
+\]
+と定義する。また、この$\mathcal{H}$上に次のように順序$\prec$を定義する。
+$(A,B)\prec (C,D)$ $\iff$$A\subset C$かつ$(D\subset B)$
+
+$X$が条件$(H)$を満たすとは、$X$が$T_1$であって、
+写像$H:\mathcal{H}\to \mathfrak{O}(X)$が存在して次を満たすことである。
+\begin{enumerate}
+\item $A\subset H(A, B)\subset \cl(H(A,B))\subset X\setminus B$
+\item $(A,B)\prec (C,D)\To H(A,B)\subset H(C,D)$
+\end{enumerate}
+\end{df}
+
+この$G$を単調正規作用素という。
+\begin{df}[条件$(P)$]
+$X$を位相空間とし、
+\[
+\mathcal{P}=\{(p,B)\mid \text{$p$は$X$の点で、$B$は$X$の部分集合で、
+$p\not\in B$を満たす。}\}
+\]
+と定義する。また、この$\mathcal{P}$上に次のように順序$\prec$を定義する。
+$(p,B)\prec (q,D)$ $\iff$$p=q$かつ$(D\subset B)$
+
+$X$が条件$(H)$を満たすとは、$X$が$T_1$であって、
+写像$P:\mathcal{H}\to \mathfrak{O}(X)$が存在して次を満たすことである。
+\begin{enumerate}
+\item $p\in P(p, B)\subset \cl(P(p,B))\subset X\setminus B$
+\item $(p,B)\prec (p,D)\To P(p,B)\subset P(p,D)$
+\item $p\neq q$ならば$P(p, \{q\})\cap P(q,\{p\})$
+\end{enumerate}
+\end{df}
+
+\begin{prop}
+$T_1$位相空間$X$に対して以下は同値である。
+\begin{enumerate}
+\item $X$は単調正規
+\item $X$は条件$(H)$を満たす。
+\item $X$は条件$(P)$を満たす。
+\end{enumerate}
+\end{prop}
+\begin{proof}
+まず最初に単調正規性に関して、写像$G$に用いて$(A,B)\in \mathcal{F}$に対して$G'(A,B)=G(A,B)\setminus \cl(G(B,A))$と定義することにより$G'$は単調正規作用素になり、さらに$(A,B)\in \mathcal{F}$に対して$G'(A,B)\cap G'(B,A)=0$を満たす。よって最初から$G$は$G(A,B)\cap G(B,A)=0$を満たすと仮定しても良い。
+
+さて、$\mathcal{F}\subset \mathcal{H}$から$(2)\To (1)$は自明である。
+そして$(1)\To (3)$も、$(A,B)\in \mathcal{F}$に対して$G(A,B)\cap G(B,A)=0$
+となることから$P(p,C)=G(\{p\}, C)$と定義すればよい。
+
+最後に$(3)\To (2)$を示そう。$(A,B)\in \mathcal{H}$とする。このとき
+$H(A, B)=\bigcup_{p\in A}P(p, \cl(B))$と定義する。これが条件$(H)$の$(1), (2)$を満たしていることを確認しよう。
+$A\subset H(A, B)$は定義から明らかである。任意の$p\in A$、$q\in B$に対して
+$P(p, \cl(B))\subset P(q, \{p\})$および$P(q, \cl(A))\subset P(q,\{p\})$を満たす。$H(p, \{q\})\cap H(q,\{p\})=0$なので
+$H(A,B)\cap H(B, A)=0$である。$B\subset H(B,A)$で$H(B,A)$は開集合なので$\cl(H(A,B))\subset X\setminus B$である。条件$(H)$の$(1)$は確かめられた。
+$(A,B)\prec (C,D)$に対して$H(A,B)\subset H(C,D)$であることは、条件$(P)$の$(2)$から従う。
+\end{proof}
+
+\begin{rmk}
+以下では単調正規作用素$G$は$(A,B)\in \mathcal{F}$に対して$G(A,B)\cap G(B,A)=0$を満たすと仮定する。
+\end{rmk}
+
+\begin{prop}
+単調正規空間は遺伝的である。特に単調正規$T_1$空間は$T_5$である。
+\end{prop}
+\begin{proof}
+$T_1$を仮定するとき単調正規性が条件$(H)$と同値であることから直ちに従う。
+\end{proof}
+
+\begin{prop}
+単調正規空間は族正規である。
+\end{prop}
+\begin{proof}
+$X$を単調正規空間とし
+$\mathcal{C}$を疎な閉集合族とする。この時$A\in \mathcal{C}$に対して
+\[
+U_A=G\left(A, \ \bigcup_{B\in \mathcal{C}, B\neq A}B\right)
+\]
+と定義する。このとき$A\in \mathcal{C}$に対して$A\subset U_A$であり、$A\neq B$ならば$U_A\cap U_B\subset G(A,B)\cap G(B,A)=0$
+なので、$X$が族正規であることがわかる。
+\end{proof}
+
+\begin{lem}
+LOTSは単調正規
+\end{lem}
+\begin{proof}
+$X$をLOTSとして$\le $をその順序とする。また、この順序とは別に$X$に整列順序$W$を導入する。
+ 今から$X$が条件$(P)$を満たすことを証明する。
+ 
+ 一般にLOTSの部分集合$S$が凸集合であるとは$a,b\in S$の時$[a,b]\subset S$となるときにいう。
+ 
+ $p\in X$とし、$C$を$X$の閉集合で $p\not\in C$となるものとする。
+ このとき$Con(p,C)$を$X\setminus C$の部分集合であって$p$を含む極大な凸集合とする。$L(p,C)=Con(p,C)\cap(\gets, p)$、$R(p,C)=Con(p,C)\cap (p,\to)$と定義する。また、（それが存在する場合には）
+ \[
+ l(p, C)=\min_WL(p,C),\ r(p,C)=\min_WR(p,C)
+ \]
+ と定義する。ここで$\min_W$は整列順序$W$による最小値である。
+ 
+ さて
+ \begin{align*}
+ P(p, C)=
+ \begin{cases}
+ (l(p,C), r(p, C))& \text{$L(p,C)\neq 0$かつ$R(p, C)\neq 0$のとき}\\
+ [p, r(p, C)) & \text{$L(p,C)=0$かつ$R(p, C)\neq 0$のとき}\\
+ (l(p,C),p] &\text{$L(p,C)\neq 0$かつ$R(p, C)=0$のとき}\\
+ \{p\} &\text{$L(p,C)=R(p, C)=0$のとき}\\
+ \end{cases}
+ \end{align*}
+ と定義するとこれは条件$(P)$を満たすことがわかる。
+ 
+ まず条件$(P)$の$(1)$を満たすことは定義の仕方からわかる。
+ 
+ 次に条件$(P)$の$(2)$を満たすことを見よう。
+ $p\not\in C$で$D\subset C$としよう。
+ 定義から$Con(p, C)\subset Con(p, D)$がわかる。よって、
+ $L(p, C)\subset L(p, D)$と$R(p,C)\subset R(p, D)$がわかる。さらに、
+ $x\in L(p, D)\setminus L(p,C)$と$y\in L(p,C)$について$x<y$となることがわかる。
+ 同様に$x\in R(p, D)\setminus R(p,C)$と$y\in R(p,C)$について$y<x$がわかる。 
+ これらのことから$l(p, D)\le l(p,C)$と$r(p, C)\le l(p,D)$が従う。よって条件$(P)$の$(2)$が成り立つ。
+ 
+ 最後に条件$(P)$の$(3)$を示そう。互いに異なる$p, q\in X$をとる。
+ このとき$p<q$と仮定しても良い。
+ すると$L(p, \{q\})=(\gets,p)$, $R(p, \{q\})=L(q, \{p\})=(p,q)$, $R(q,\{p\})=(q,\to)$がわかるので条件$(P)$の$(3)$は成り立つ。 
+\end{proof}
+
+\begin{df}
+GO-spaceとはLOTSの部分空間と同相な空間のことである。
+Generalized Ordered spaceの略である。
+\end{df}
+
+\begin{cor}
+GO-spaceは単調正規
+\end{cor}
+
+
+
+\begin{prop}
+$T_1$単調正規空間は(遺伝的)可算パラコンパクトである。
+\end{prop}
+\begin{proof}
+$X$を単調正規空間とする。
+条件$(P)$を使う。
+$\mathcal{E}=\{(p, U)\mid p\in U\land U\in \mathfrak{O}(X)\}$
+と定義しする。この時
+$E:\mathcal{E}\to \mathfrak{O}(X)$を
+\[
+E(p, U)=P(p, X\setminus U)
+\]
+と定義する。
+この時$E$は次を満たすことに注意しよう。
+\begin{enumerate}
+\item $x\neq y$ $\To$ $E(x, X\setminus \{y\})\cap E(y, X\setminus \{x\})=0$, 
+\item $x\in U\subset V$ $\To $ $E(x, U)\subset E(x, V)$
+\end{enumerate}
+
+さて、$X$の単調減少な閉集合の族$\{D_i\}_{i<\omega}$で $\bigcap_{i}D_i=0$となるものを考える。
+このとき開集合族$\{U_i\}_{i<\omega}$が存在して$D_i\subset U_i$と$\bigcap_iU_i=0$を満たすものを構成していく。これは$T_4$空間においては可算パラコンパクト性と同値である。
+
+$x\in X$に対して、$i(x)=\min\{i\mid x\not\in D_i\}$と定義する。
+そして、$V_0(x)=E(x, X\setminus D_{i(x)})$と定義し、
+$i>0$に対しては帰納的に $V_i(x)=E(x, V_{i-1}(x))$と定義する。
+
+$\mathcal{S}$を次の条件を満たす集合$\{x_n\in X\mid n\in M\}$の全体とする。
+\begin{enumerate}
+\item $M$は$\omega$の無限部分集合
+\item $i(x_n)=n$
+\item 任意の$n\in M$と$m>n$となる任意の$m\in M$に対して
+$x_n\in V_{m-n}(x_m)$が成り立つ。
+\end{enumerate}
+また、$S\in \mathcal{S}$に対して$Q(S)$を
+\[
+Q(S)=\{x\in X\mid \forall n\in M\ n>i(x)\To\ x\in V_{n-i(x)}(x_n)\}
+\]
+と定義する。定義から、$S\subset Q(S)$であることに注意しよう。
+
+さらに$\mathcal{S}$を整列集合で単射的に添字づけして、
+$\mathcal{S}=\{S_{\alpha}\mid \alpha<\delta\}$とする。ここで$\delta$は順序数である。
+$\delta$の部分集合$L$を次のように定義する。
+$\beta<\delta$に対して、
+$L\cap \beta$はすでに定義されているとする。このとき、
+$\beta\in L$とは
+任意の$\alpha<\beta$となる$\alpha\in L$について$S_{\beta}\cap Q(S_{\alpha})=0$
+と定義する。
+
+これを用いて各$x\in X$に対して$W(x)$を次のように定義する。
+
+まず$x\in X\setminus \bigcup_{\alpha\in L}Q(S_{\alpha}) $のとき。
+このときは
+$W(x)=V_{i(x)}(x)$と定義する。このとき$x\in W(x)$に注意しよう。
+
+次に$x\in \bigcup_{\alpha\in L}Q(S_{\alpha})$のときには$x\in Q(S_{\alpha})$
+となる最小の$\alpha$を使って次のように定義する。$S_{\alpha}=\{x_n\mid n\in M\}$として、$W(x)=V_{i(x)}(x)\setminus \bigcup_{n<i(x)}\cl(V_0(x_n))$
+と定義する。$n<i(x)$と$x\in D_n$に注意すると$x\in W(x)$がわかる。
+
+この$W(x)$を用いて$U(x)=E(x,W(x))$と定義する。
+そして$U_i=\bigcup\{U(x)\mid x\in D_i\}$と定義する。
+このときもちろん$D_i\subset U_i$が成り立つ。
+今から$\bigcap_iU_i=0$を示す。
+
+$x\in \bigcap_iU_i$となる$x\in X$が存在すると仮定する。
+このとき$U_i$の定義から任意の$n<\omega$について$x\in U(p)$となる
+$p\in D_n$が存在する。このことと、
+$\bigcap_i D_i=0$から、
+$\omega$の無限部分集合$K$と列$\{p_k\in X\mid p_k\in K\}$が存在して、
+任意の$k\in K$について$i(p_k)=k$と、$x\in U(p_k)$を満たす。
+$C=\{p_k\in X\mid p_k\in K\}$と書くことにしよう。
+
+まず最初に$k, j\in K$について、$k<j$ならば$p_k\in W(p_j)$を証明しよう。
+このとき$i(p_l)=l$から、$p_j\in D_k$がわかる。
+そして、
+\[
+U(p_k)\subset W(p_k)\subset V_k(p_k)\subset E(p_k, X\setminus D_k)\subset E(p_k, X\setminus \{p_j\})
+\]
+がわかる。
+また、$U(p_j)\subset E(p_j, W(p_j))$である。
+ここでもしも$p_k\not\in W(p_j)$だったならば、
+$U(p_j)\subset E(p_k, X\setminus \{p_k\})$となり、
+\[
+U(p_k)\cap U(p_j)\subset E(p_k, X\setminus \{p_k\})\cap E(p_k, X\setminus \{p_j\})=0
+\]
+となるが、$x\in U(p_k)\cap U(p_j)$なのでこれはありえない。
+よって$p_k\in W(p_j)$である。
+
+
+次に$C\in \mathcal{S}$を示そう。
+$k, j\in K$について、$k<j$とする。このとき先ほど示したことから
+\[
+p_k\in W(p_j)\subset V_j(p_j)\subset V_{j-k}(p_j)
+\]
+となる。これは$C\in \mathcal{S}$と同値である。
+また、これは$C\subset Q(C)$であることも示している。
+
+
+ある$\alpha\in L$について$Q(S_{\alpha})\cap C\mathcal\neq 0$であることを示そう。
+$C=S_{\gamma}$と添字づけられているとする。
+$\alpha<\gamma$となる$\alpha$について、
+$Q(S_{\alpha})\cap S_{\gamma}\neq 0$となっている$\alpha$が存在するならば証明すべきことはない。
+もし$\alpha<\gamma$となる任意の$\alpha$について、
+$Q(S_{\alpha})\cap S_{\gamma}=0$となるならば、
+$L$の定義から$\gamma\in L$となり、$C\subset Q(C)$から、$\gamma$が求めるものになる。
+
+以上を踏まえて、$Q(S_{\alpha})\cap C\neq 0$となる最小の$\alpha\in L$をとる。
+そして$p_k\in Q(S_{\alpha})$となる$k\in K$をとる。
+今から、$k<j$となる$j\in K$については$p_j\in Q(S_{\alpha})$となることを示す。
+$S_{\alpha}=\{x_n\mid n\in M\}$とする。$j$に対して$j<n$となる$n\in M$をとる。
+このとき$x_n\in D_j$が成り立つ。このことと、$V_*(*)$の定義から
+\[
+V_{j-k}(p_j)\subset E(p_j, X\setminus D_j)\subset E(p_j, X\setminus \{x_n\})
+\]
+が成り立つ。
+また、$n-j<n-k$なので
+\[
+V_{n-k}(x_n)\subset E(x_n, V_{n-j}(x_n))
+\]
+が成り立つ。もしここで、$p_j\not\in V_{n-j}(x_n)$と仮定すると、
+\[
+V_{j-k}(p_j)\cap V_{n-k}(x_n)\subset E(p_j, X\setminus \{x_n\})\cap E(x_n, X\setminus \{p_j\})=0
+\]
+となるが、これは$p_k\in V_{j-k}(p_j)\cap V_{n-k}(x_n)$に反する。($p_k\in Q(S_{\alpha})$に注意しよう)
+よって$p_j \in V_{n-j}(x_n)$なので$p_j\in Q(S_{\alpha})$である。
+また、
+$\alpha$の取り方から、$p_j\in Q(S_{\beta})$となる$\beta$の最小値は$\alpha$となる。
+
+先ほどとった$k\in K$について考える。
+$k<m$となる$m\in M$をとる。さらに$m<j$となる$j\in K$をとる。
+すでに$p_k\in W(p_j)$であることは証明している。
+また、
+$p_k\in Q(S_{\alpha})$なので、$p_k\in V_{m-k}(x_m)\subset V_0(x_m)$
+となるので、$p_k\in W(p_j)\cap V_0(x_m)$である。
+しかし、$W(p_j)$の定義を思い返してみると、$p_j\in Q(S_{\alpha})$となる$\alpha$はこのような順序数のうち最小であり、$m<i(p_j)=j$なので、$W(p_j)\cap V_0(x_m)=0$となる。これは矛盾である。よって
+$\bigcap_iU_i=0$であり、$X$は可算パラコンパクトである。
+
+\end{proof}
+
+
+\begin{cor}
+LOTSは可算パラコンパクト
+\end{cor}
+
+\begin{cor}
+GO-spaceは可算パラコンパクト
+\end{cor}
+
+\begin{df}
+位相空間$X$が$T_6$であるとは、$X$が$T_4$であり、かつその空間の任意の閉集合が$G_{\delta}$になる時にいう。
+\end{df}
+
+
+\begin{cor}
+$T_6$空間は可算パラコンパクトである。
+\end{cor}
+
+
+\begin{thm}
+以下の空間は全て可算パラコンパクトである。
+\begin{enumerate}
+\item コンパクトハウスドルフ空間
+\item パラコンパクトハウスドルフ空間
+\item 距離空間
+\item LOTS
+\item GO-space
+\item 単調正規空間
+\item $T_6$空間
+\end{enumerate}
+\end{thm}
+
+\begin{rmk}
+族正規だが単調正規ではない空間の例としてRudinのDowker spaceがある。
+\end{rmk}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\section{可算パラコンパクト性にまつわる例}
+ここでは可算パラコンパクト性に関する反例を紹介していく。
+
+Greeverの論文\cite{Greever}にはいろんなコンパクト性の概念と、
+いろんな反例がたくさん載っている。
+\begin{exam}[$\omega_1$]
+空間$\omega_1$は可算コンパクトであるが、パラコンパクトではない$T_5$空間である。またこの空間は $T_6$ではない。加算コンパクトでパラコンパクトな空間はコンパクト空間になる．$\omega_1$はコンパクト空間ではないので，パラコンパクトではない．
+\end{exam}
+
+\begin{exam}[$\coprod_{i<\omega}\omega_1$]
+空間$\omega_1$の可算個の位相的直和は、可算コンパクトでなはなく、可算パラコンパクトな$T_5$空間である。もちろん$T_6$ではない。一般に加算パラコンパクト空間の可算個の直和は可算パラコンパクトになる．
+\end{exam}
+
+\begin{exam}[$\omega_1\times (\omega_1+1)$]
+$\omega_1\times (\omega_1+1)$は正規ではない$T_{3.5}$空間であり、可算ハイポコンパクト、可算パラコンパクト、可算メタコンパクトを満たす。証明略。これは命題\ref{prop:cptprod}に関係した例である。
+\end{exam}
+
+
+\begin{exam}[Arens' simplified plane](\cite{Counter})
+$T_3$ではないハウスドルフなメタコンパクト非パラコンパクト空間。
+$J=\{x\in \rr\ |\ 0<x<1\}$と置き、
+$X=J\times J\cup \{(0,0),\ (1,0)\}$と定義する。\par
+$n\in \nn$について
+\[
+L_n=\{(x,y)\in J\times J\ |\ 0<x<1/2,\ 0<y<1/n\}\cup \{(0,0)\}
+\]
+\[
+R_n=\{(x,y)\in J\times J\ |\ 1/2<x<1,\ 0<y<1/n\}\cup \{(1,0)\}
+\]
+と定義して$(0,0)$には$\{L_n\}_{n\in \nn}$を、$(1,0)$には$\{R_n\}_{n\in \nn}$を基本近傍系として、そして$J\times J$の元には普通の平面の部分集合としての近傍系を導入するとキチンと位相を導入出来る。この空間を$(X,\mathfrak{O})$と書こう。
+
+\begin{prop}
+$(X,\mathfrak{O})$はハウスドルフ空間である。
+\end{prop}
+\begin{proof}
+明らか
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は正則空間ではない。
+\end{prop}
+\begin{proof}
+\[
+\cl(L_n)=\{(x,y)\in J\times J\ |\ 0<x\le 1/2,\ 0<y\le 1/n\}\cup \{(0,0)\}
+\]
+\[
+\cl(R_n)=\{(x,y)\in J\times J\ |\ 1/2\le x<1,\ 0<y\le 1/n\}\cup \{(1,0)\}
+\]
+から分かる。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$はパラコンパクトではない。
+\end{prop}
+\begin{proof}
+パラコンパクトハウスドルフ空間は正則空間でなければならないからである。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$はメタコンパクトである。
+\end{prop}
+\begin{proof}
+まず$X$の部分空間として$J\times J$は普通の平面の部分空間としての位相と一致することを鑑みると、$J\times J$がパラコンパクトである事が分かる。さらに$J\times J$は$X$の開集合である。\par
+$X$の任意の開被覆$\mathcal{U}$についてこれを$J\times J$に制限する。つまり
+\[
+\mathcal{V}=\{U\cap (J\times J)\ |\ U\in \mathcal{U}\}
+\]
+を考える。$J\times J$はパラコンパクトなので$\mathcal{V}$の
+局所有限開細分被覆$\mathcal{P}$が存在する。そして$(0,0),\ (1,0)$を含む$\mathcal{U}$の元をひとつづつ選び$A,B$とすると
+\[
+\mathcal{Q}=\mathcal{P}\cup \{A,B\}
+\]は$\mathcal{U}$の点有限開細分被覆である。
+\end{proof}
+
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は$\sigma$コンパクトである。従ってリンデレフ空間である。
+\end{prop}
+\begin{proof}
+$X$の部分空間$J\times J$が$\sigma$コンパクトであり、$\{(0,0),(1,0)\}$もコンパクトだからである。
+\end{proof}
+
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は可算パラコンパクトではない。
+\end{prop}
+\begin{proof}
+リンデレフかつ可算パラコンパクトならばパラコンパクトでなければならないからである。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は第二可算公理を充たす。
+\end{prop}
+\begin{proof}
+$X$の部分空間$J\times J$が開部分空間であり、かつ第二可算で、$(0,0),(1,0)$はそれぞれ可算な基本近傍系を持つからである。
+\end{proof}
+
+
+
+以上から$(X,\mathfrak{O})$は可算パラコンパクトではないメタコンパクト$\sigma$コンパクトハウスドルフ空間である事が分かる。
+
+\end{exam}
+
+\begin{exam}[Heath's half plane: Vの字近傍の空間](\cite{H})
+$T_{3.5}$で非可算パラコンパクト、メタコンパクト空間。
+$X=\rr\times [0,\infty)$とし、$p\in \rr$に対して、
+\[
+N(p,n)=\{(x,y)\in X\mid y=x-p\land 0\le y\le 1/n\}\cup\{(x,y)\in X\mid y=-x+p\land 0\le y\le 1/n\}
+\]
+とする。この時、
+\[
+\mathcal{B}=\{\{(x,y)\}\mid y>0\}\cup\{N(p, n)\mid p\in \rr, n\in \nn\}
+\]
+と定義するとこれは$X$の開基になっている。つまり、この空間の点$(x,y)$の基本近傍は、$y>0$の時は$\{(x,y)\}$になり、$y=0$の時は$N(x,n)$という形になっている。
+\begin{lem}
+空間$X$は$T_{3.5}$空間である。
+\end{lem}
+\begin{proof}
+$0$次元なハウスドルフ空間なので、$T_{3.5}$を満たす。
+\end{proof}
+\begin{lem}
+空間$X$はメタコンパクトである。
+\end{lem}
+\begin{proof}
+$y>0$となる$(x,y)$に対して、$(x,y)\in N(z,n)$となるような$z$はふたつしかないからである。
+\end{proof}
+\begin{lem}
+空間$X$は可算パラコンパクトではない。
+\end{lem}
+\begin{proof}
+\[
+\mathcal{U}=\{N(p,1)\mid p\in \qq\}\cup \{X\setminus (\qq\times \{0\})\}
+\]
+が局所有限な開細分被覆を持たない可算な開被覆であることを示そう。
+$\mathcal{U}$の局所有限な開細分被覆$\mathcal{V}$が存在するとしよう。この時、
+\[
+\mathcal{V}=\{N(p,n(p))\mid p\in \qq\}\cup \{X\setminus (\qq\times \{0\})\}
+\]
+という形だとしても一般性を失わない。
+
+任意の$n\in \nn$と有限部分集合$M\subset \qq$に対して
+\[
+S_{n, M}=\{x\in \rr\mid \text{$N(x,n)$は$\{N(p, n(p))\mid p\in M\}$の元としか交わらない}\}
+\]
+と定義する。$\mathcal{V}$は局所有限なので、$\rr=\bigcup_{n,M}S_{n,M}$である。$\{S_{n,M}\}$は可算な族なので、ベールの範疇定理から、$n\in \nn$と有限部分集合$M\subset \qq$と$a<b$を満たすふたつの実数$a,b$が存在して、次を満たす：$(a,b)\cap S_{n,M}$は$(a,b)$の中で稠密である。
+$(a,b)$の中から$q\not\in M$となる$q\in \qq$をとると、$S_{n,M}$の定義と$(a,b)\cap S_{n,M}$の稠密性そして$N(x,n)$という近傍の形から$x\in S_{n,M}$が存在して$N(q,n(q))\cap N(x,n)\neq 0$となる。しかし、$N(x,n)$は$\{N(p, n(p))\mid p\in M\}$の元としか交わらないはずなのでこれは矛盾である。よって$X$は可算パラコンパクトではない。
+\end{proof}
+
+\begin{lem}
+空間$X$は$T_4$ではない．
+\end{lem}
+\begin{proof}
+$T_4$空間上では可算パラコンパクトと可算メタコンパクトは同値であるからである．
+\end{proof}
+
+この空間は、$T_4$がないと、可算メタコンパクトと可算パラコンパクトが同値でないことを示している。
+\end{exam}
+
+\begin{exam}[Bing's example G](\cite{Bing})
+メタコンパクトではなく，族正規でもない$T_5$な可算パラコンパクト空間が存在する．これはまた$T_6$ではない。
+
+$P$を非可算集合として，$Q=2^{P}$とする．すなわち$Q$は$P$の冪集合である．また， $Q$は$P$から$2=\{0, 1\}$への写像全体の集合とみなせる．
+そして，$F=2^{Q}$とし，各$p\in P$に対して$f_p\in F$を，
+$p\in q$ならば$f_p(q)=1$で，そうでないならば$f_p(q)=0$と定義する．
+これは，$p\in P$に関する$Q$上定義された評価関数とみなすことができる．
+そして$F_P=\{f_p\in 2^Q\mid p\in P\}$
+と定義する．
+$\tau$を$2^Q$の積位相として，
+$F$に
+$\tau\cup \{\{x\}\}\mid x\in F\setminus F_P\}$
+を開基とする位相を導入する．
+この空間$F$をBing's example Gと呼ぶ．
+ここで，$F$の中で$F_p$が離散空間であることに注意しよう．
+実際，$p\in P$に対して，$\{p\}$成分への射影$\pi_{\{p\}}:2^Q\to 2$を考える．
+そして，$\pi_{\{p\}}^{-1}(\{1\})$を考えるとこれは開集合で，$f_p$以外の$F_P$
+の元を含まない．
+\begin{lem}
+空間$F$は$T_5$である．
+\end{lem}
+\begin{proof}
+$F$が$T_1$であることは定義から簡単にわかる．
+次に正規であることを示そう．
+$A$, $B$を$F$の互いに離れた集合とする．
+つまり$\cl(A)\cap B=0$かつ$A\cap \cl(B)=0$を満たすとする．
+このとき，
+$A$と$B$のどちらか一方が$F\setminus F_P$
+に含まれるときには，それは開集合になるので，正規性の条件は満たされる．
+そうでないとき，つまり$A\cap F_P\neq 0$かつ$B\cap F_P\neq 0$
+のときを考える．
+そして
+\[
+q_1=\{p\in P\mid f_p\in A\}
+\]
+\[
+q_2=\{p\in P\mid f_p\in B\}
+\]
+と定義する．
+これを使って，
+$U_A=\pi_{q_1}^{-1}(\{1\})\cap \pi_{q_2}^{-1}(\{0\})$, 
+$U_B=\pi_{q_2}^{-1}(\{1\})\cap \pi_{q_1}^{-1}(\{0\})$
+と定義する．定義から$U_A$と$U_B$は$F$の開集合である．
+このとき$U_A\cap U_B=0$であり，
+$A\cap F_P\subset U_A$で$B\cap F_P\subset U_B$である．
+さて，
+$O_A=(U_A\cup (A\cap (F\setminus F_P)))\setminus \cl(B)$,
+$O_B=(U_B\cup (B\cap (F\setminus F_P)))\setminus \cl(A)$
+とすると，これらは$F$の開集合であり，$A\subset O_A$
+，$B\subset O_B$で，$O_A\cap O_B=0$を満たす．
+よって$F$は正規である．
+\end{proof}
+
+\begin{lem}
+$F$は族ハウスドルフではない．
+\end{lem}
+\begin{proof}
+$F_P$が$F$の中で閉集合であり，相対位相は離散位相であることを踏まえると，
+$F_P$は疎な点の族である．
+ここで，各$p\in P$について，$f_p\in O_p$となる
+互いに素な開集合の族$\{O_p\}_{p\in P}$が存在したとしよう．
+ここで，各$O_p$は$2^Q$の開集合としてもよい．
+$2^Q$はcccを満たすので，$P$が非可算であるとき，
+上で述べた$\{O_p\}_{p\in P}$は存在し得ない．
+よって$F$は族ハウスドルフではない．
+\end{proof}
+
+\begin{lem}
+$F$は$T_5$空間ではない．
+\end{lem}
+\begin{proof}
+$F$の位相の定め方から，$F$における$p\in F_P$の近傍系は
+$2^Q$と一致する．また$F$は$T_1$なので$\{p\}$は閉集合である．
+そして，$2^Q$は第一可算公理を満たさないので，$F$は$T_6$ではない．
+\end{proof}
+
+また，$F$がメタコンパクトであることも証明できる．
+\end{exam}
+
+
+
+\begin{exam}[Micahel line $\mathbb{M}$](\cite{Michael})
+パラコンパクトハウスドルフ空間だが、$\omega^{\omega}$との直積が正規にならない例 。また、$\mathbb{M}$は非リンデレフである。遺伝的パラコンパクトであり、$T_5$になる。しかし$T_6$ではない。
+
+台集合は$\mathbb{M}=\rr$とする。
+$\rr$の通常の位相を$\tau_{\rr}$として、$\mathbb{M}$の開基を次のように定める。
+\[
+\mathcal{B}=\tau_{\rr}\cup\{\{x\}\mid x\in \mathbb{P}\}
+\]
+ここで$\mathbb{P}=\rr\setminus \qq$である。
+
+まず$\mathbb{M}$はハウスドルフであることが定義から直ちにしたがう。
+
+\begin{prop}
+$\mathbb{M}$は遺伝的パラコンパクトである。よって$T_5$である。
+\end{prop}
+\begin{proof}
+$S\subset \mathbb{M}$とする。$\mathcal{U}$は$S\subset \bigcup\mathcal{U}$とする。また$\mathcal{U}\subset \mathcal{B}$としても一般性を失わない。$\mathcal{B}$の定義は$\mathbb{M}$の定義をみよ。
+そして$\mathcal{V}=\mathcal{M}\cap \tau_{\rr}$とする。$\rr$は距離空間なので遺伝的パラコンパクトである。よって$\mathcal{V}$に対して、
+細分$\mathcal{P}$が存在して、$x\in \bigcup\mathcal{V}$に対しては局所有限を担保する近傍が存在し、また、$\bigcup\mathcal{P}=\bigcup\mathcal{V}$となる。
+$\mathcal{U}\setminus \mathcal{V}$の元は全て一点集合なので、
+$\mathcal{Q}=\mathcal{P}\cup(\mathcal{U}\setminus \mathcal{V})$は$\mathcal{U}$の
+細分であって、$\bigcup\mathcal{Q}=\bigcup\mathcal{U}$であり、
+$x\in \bigcup\mathcal{Q}$については局所有限性を担保する開近傍が存在する。
+よって$S$はパラコンパクトである。結果として$\mathbb{M}$は遺伝的パラコンパクトである。パラコンパクトハウスドルフ空間は正規なので、遺伝的パラコンパクトハウスドルフ空間は$T_5$である。
+\end{proof}
+
+\begin{prop}
+$\mathbb{M}$のなかで$\qq$は$G_\delta$ではない閉集合である。よって$\mathbb{M}$は$T_6$ではない。
+\end{prop}
+\begin{proof}
+位相の定め方から$\qq$が閉集合であることは直ちにわかる。
+
+今$\qq$が可算個の$\mathbb{M}$の開集合$\{U_i\}$の共通部分になっているとしよう。
+さて各$U_i$と$p\in \qq$について$O(p, i)$を$U_i$に含まれる$p$のユークリッド開近傍の中で最大のものとする。
+このとき位相の定め方から$O(p,i)$は$\mathbb{M}$の開集合でもある。
+そして$V_i=\bigcup_{p\in \qq}O(p,i)$とするとこれは$\rr$の開集合でもあるし、$\mathbb{M}$の開集合でもある。
+また$V_i\subset U_i$なので$\qq=\bigcap_iV_i$である。
+つまり、$\qq$は$\rr$の$G_{\delta}$集合であることが導かれるが、よく知られた事実\footnote{$\qq$は完備距離づけ可能ではないからである。このことはベールの範疇定理からわかる。}として、$\qq$は$\rr$の$G_{\delta}$集合ではないのでこれは矛盾である。
+\end{proof}
+
+\begin{prop}
+$\mathbb{M}$は連続体濃度を持つ閉離散部分空間を持つ。よって$\mathbb{M}$はリンデレフではない。
+\end{prop}
+\begin{proof}
+$\qq=\{p_i\}_{i<\omega}$と添字づけをする。このとき$U_i$を中心が$p_i$で半径が$2^{-i}$の実数直線の開球とする。定義から各$U_i$は$\mathbb{M}$の開集合である。
+ここで測度を考慮に入れると、$U=\bigcup_iU_i$は$\rr$を被覆せず、
+$\rr\setminus U$の測度は正（無限大）であって、
+$\rr \setminus U\subset \mathbb{P}$である。$\rr\setminus U$は$\mathbb{M}$のなかで閉集合であり、$\mathbb{M}$の開集合の定め方から$\rr\setminus U$は離散部分空間となる。ルベーグ測度正の集合は連続体濃度を持つので命題は示された。
+\end{proof}
+
+\begin{prop}
+$\mathbb{M}\times \mathbb{P}$は正規ではない。
+ここで$\mathbb{P}$には$\rr$から誘導される通常の位相が入っているとする。
+\end{prop}
+\begin{proof}
+$\mathbb{M}\times \mathbb{P}$の部分集合$D$と$E$を以下のように定義する。
+\[
+D=\{(x,x)\mid x\in \mathbb{P}\},\ H=\qq\times \mathbb{P}
+\]
+ $H$が閉集合であることは直ちにわかる。$D$が閉集合であることも直ちにわかる。これは$\mathbb{M}$が$\rr$の位相より細かく、$\rr\times \mathbb{P}$の中で$D$が閉集合だからである。
+ もちろん$D$と$H$は交わらない。このふたつの閉集合が開集合で分離できないことを示そう。
+ $D\subset U$と$H\subset V$となるふたつの開集合を与えよう。
+ $p\in \mathbb{P}$と$n<\omega$に対して$B(p, n)$を$p$を中心とする半径$2^{-n}$のユークリッド開球と$\mathbb{P}$の共通部分とする。
+ $\{x\}\times B(x,n)$は$(x,x)\in D$の基本近傍系をなす。
+ 
+ 各$n<\omega$に対して
+ \[
+ S_n=\{x\in \mathcal{P}\mid \{x\}\times B(x, n)\subset U\}
+ \]
+ と定義する。$\{x\}\times B(x,n)$は$(x,x)\in D$の基本近傍系をなすので、
+ $\mathbb{P}=\bigcup_{n<\omega}S_n$となる。
+ よってベールの範疇定理からある$n<\omega$と$a,b\in\mathcal{P}$が存在して、$a<b$と
+ $(a,b)\cap S_n$は$(a,b)$の中で稠密になる。
+ $E=\bigcup_{x\in (a,b)\cap S_n}\{x\}\times B(x,n)$を考えると、
+ これは$E\subset U$を満たしているが、
+ $x\in (a,b)$と$x$に十分近い$p\in (a,b)\cap \qq$をとると、$(x,p)$の近傍は$E$と交わってしまうので、$U\cap V\neq 0$である。よって$\mathbb{M}\times \mathbb{P}$は正規ではない。
+\end{proof}
+
+
+$\mathbb{M}$の存在から、$\omega^{\omega}$を$F_{\sigma}$集合として含むコンパクト空間は存在しないことがわかる。
+$\mathbb{P}$は$\omega^{\omega}$に同相であることに注意せよ。
+\end{exam}
+
+\begin{rmk}
+森田紀一は任意の距離空間との直積が$T_4$になる空間$X$を、$X$の被覆に関する条件で内在的に特徴づけた。このような空間を(Morita's) P-spaceと呼ぶ。
+実は$T_6$空間は$P$-spaceになる。このことからも$\mathbb{M}$は$T_6$ではないことがわかる。
+\end{rmk}
+
+\begin{exam}[Sorgenfrey line $\mathbb{S}$]
+ゾルゲンフライ直線$\mathbb{S}$は正則かつ（遺伝的）リンデレフなので、パラコンパクトである。また、$T_5$であることもわかる。しかしながら$\mathbb{S}\times \mathbb{S}$は可算パラコンパクトではない。これは直積で可算パラコンパクト性が保たれないことを示している。
+\end{exam}
+
+
+
+
+
+
+\section{Dowker space}
+
+\begin{df}[Dowker space]
+可算パラコンパクトでない$T_4$空間をDowker spaceという。
+\end{df}
+
+\begin{df}
+基数$\kappa$について、$X$が$\kappa$-Dowker spaceとは、$X$が$T_4$であり、さらに
+単調減少な閉集合の族$\{D_i\}_{i<\kappa}$が存在して$\bigcap_{i<\kappa}D_i=0$を満たし、
+さらに次のことを満たす。$D_i\subset G_i$となる開集合の族$\{G_i\}$は
+\[
+\bigcap_{i<\kappa}G_i\neq 0
+\]
+を満たす時にいう。
+\end{df}
+
+\begin{prop}
+$\aleph_0$-Dowker spaceはDowker spaceである。
+\end{prop}
+\begin{proof}
+わかる。
+\end{proof}
+このことから、$\kappa$-Dowker spaceはDowker spaceの一般化になっていることがわかる。
+
+以下では与えられた無限基数$\kappa$に対して、$\kappa$-Dowker spaceを構成していく。
+
+
+\begin{prop}\label{prop:card}
+$\kappa$を無限基数とする。このとき
+基数の増大列$\{\lambda_i\}_{i<\kappa}$が存在して以下を満たす。
+\begin{enumerate}
+\item 任意の$i$について$\kappa^+ <\cf (\lambda_i)$
+\item 任意の$i$について$\lambda_i=\lambda_i^{\kappa}$
+\item $a<b$の時$\lambda_a<\cf(\lambda_b)$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+$\lambda_0=2^{\kappa^+}$とし、
+$\lambda_i=2^{\sup_{\beta<i}(\lambda_{\beta})}$
+とすると命題の条件を満たす。
+
+\end{proof}
+
+\begin{df}$\kappa$を無限基数とする。
+$\{\lambda_i\}_{i<\kappa}$を命題\ref{prop:card}で存在が保証される列とする。
+そして$\lambda=\sup_i\lambda_i$とする。
+そして
+\[
+F=\{f:\kappa\to \lambda\mid \forall \alpha < \kappa\ f(\alpha)\le \lambda_{\alpha}\}
+\]
+\[
+G=\{f:\kappa\to \lambda\mid \forall \alpha < \kappa\ f(\alpha)<\lambda_{\alpha}\}
+\]
+と定義し、これを用いて
+\[
+X=\{f\in F\mid \exists \beta <\kappa\ \forall \alpha<\kappa\ \kappa^+\le \cf(f(\alpha))\le \cf(\lambda_{\beta})\}
+\]
+と定義する。
+
+$f, g\in F$
+について$f<g$ (resp. $f\le g$)を任意の$i$について$f(i)<g(i)$(resp. $f(i)\le g(i)$)であることと定義する。
+
+そして
+$f<g$となる$f,g\in F$について
+\[
+U(f,g)=\{h\in X\mid f<h\le g\}
+\]
+と定義する。
+この形の集合全体は、$X$の開基となる。
+
+この開基によって生成される位相で$X$に位相を定義する。$X$はハウスドルフ空間であることが簡単にわかる。
+\end{df}
+
+以下では$X$が$\kappa$-Dowker spaceであることを示そう。
+
+
+\begin{prop}
+$i<\kappa$について
+\[
+D_i=\{f\in F\mid \forall \beta\le i\  f(\beta)=\lambda_{\beta}\}
+\]
+と定義する。
+このとき各$D_i$は閉集合であり、$D_i$は単調減少で
+\[
+\bigcap_{i<\kappa}D_i=0
+\]
+を満たす。
+\end{prop}
+\begin{proof}
+まず、共通部分が空であることは$X$の定義からわかる。また$i<j$ならば$D_{j}\subset D_i$もわかる。
+
+最後に$D_i$が閉集合であることを示そう。$x\not\in D_i$とする。
+すると、ある$\beta\le i$が存在して$x(\beta)<\lambda_{\beta}$がわかる。
+このとき$y\in U(0, x)$を取ると、やはり$y(\beta)\le x(\beta)<\lambda_{\beta}$
+なので、$y\not\in D_i$である。つまり$U(0,x)$は$D_i$と交わりを持たない$x$の開近傍で、$x$は任意であったので、$D_i$は閉集合である。
+
+\end{proof}
+
+以下では$D_i\subset U_i$を満たす開集合族は常に$\bigcap_iU_i\neq 0$となることを証明する。
+
+
+\begin{lem}\label{lem:kinouhou}
+$\{U_i\}$は$D_i\subset U_i$を満たす開集合族とする。このとき各$\alpha<\kappa$に対して$f\in G$が存在して、
+\[
+\{g\in G\cap X\mid f<g\}\subset U_{\alpha}
+\]
+\end{lem}
+\begin{proof}
+ $\alpha<\kappa$を固定する。
+
+$\{\lambda_i\}$は単調であり、
+$\lambda_{\alpha}=\lambda_{\alpha}^{\kappa}$を満たす。
+よって$\prod_{\beta\le \alpha}\lambda_{\beta}$の濃度も$\lambda_{\alpha}$であるから、
+族$\{h_{\delta}\}_{\delta<\lambda_{\alpha}}\subset \prod_{\beta\le \alpha}\lambda_{\beta}$を以下の条件を満たすように定義できる。
+\[
+\text{$\delta<\lambda_{\alpha}$と$h\in \prod_{\beta\le \alpha}\lambda_{\beta}$
+を任意に与えたときに$j\in \lambda_{\alpha}$が存在して$\delta<j$と$h=h_j$を満たす。}
+\]
+
+
+
+さて補題の条件を満たす$f$が存在しないと仮定しよう。
+帰納法によって各$i<\lambda_{\alpha}$に対して$f_{i}, g_i\in G$を定義する。
+各$j<i$について$f_{j}$が定義されたとしよう。
+このとき上の族$\{h_{\delta}\}_{\delta<\lambda_{\alpha}}$を用いて
+\[
+g_i(k)=
+	\begin{cases}
+	h_{i}(k) & \text{$k\le \alpha$}\\
+	\sup\{f_j(k)\mid j<i\} & \text{$\alpha<k$}
+	\end{cases}
+\]
+と定義する。命題\ref{prop:card}より$\alpha<k$
+の時は$\lambda_{\alpha}<\cf(\lambda_k)$なので、$g_i\in G$がわかる。$f_i$は$f_i\in (X\cap G)\setminus U_{\alpha}$と
+$g_i<f_i$を満たすものとする。
+
+さてここで$x\in F$を
+\[
+x(k)=
+	\begin{cases}
+	\lambda_{k} & \text{$k\le \alpha$}\\
+	\sup\{f_{i<\lambda_{\alpha}}(k)\} &\text{$\alpha<k$}
+	\end{cases}
+\]
+と定義する。命題\ref{prop:card}より$\alpha<k$
+の時は$\lambda_{\alpha}<\cf(\lambda_k)$なので、$x\in X$がわかる。
+
+定義から$f\in D_{\alpha}$であり従って$f\in U_{\alpha}$なので、$g\in F$が存在して、$g<x$と$U(g,x)\subset U_{\alpha}$を満たす。
+$k>\alpha$を満たす$k\in \kappa$について、$\{f_i(k)\}_{i\in \lambda_{\alpha}}$は狭義単調であるから、$g<x$から$g(k)<f_{m(k)}(k)$となる$m(k)<\lambda_{\alpha}$が存在する。
+$\kappa<\cf(\lambda_{\alpha})$なので$m=\sup_{k>\alpha}m(k)\in \lambda_{\alpha}$である。
+よって$\alpha<k$となる$k\in\kappa$について
+\[
+g(k)<f_m(k)
+\]
+となる。さて、$\{h_{\delta}\}$の作り方から$m<l$となる$l$が存在して
+$k\le \alpha$について
+\[
+h_l(k)=g(k)
+\]
+を満たす。
+$f_l$の定義から$k\le \alpha$について$g(k)=h_l(k)<f_l(k)$なので、結局
+$g<f_l$がわかる。また$f\le x$なので、
+\[
+f_l\in U(g, x)\subset U_{\alpha}
+\]
+だが、これは$f_{l}\not\in U_{\alpha}$に反する。
+\end{proof}
+
+\begin{prop}
+$\{U_i\}$は$D_i\subset U_i$となる開集合族とする。
+このとき$\bigcap_{i}U_i\neq 0$
+\end{prop}
+\begin{proof}
+補題\ref{lem:kinouhou}で保証される$f_i$を$U_i$ごとに取る。
+各$i<\kappa$に対して
+\[
+\sup_{k<\kappa}f_k(i)<\alpha_i< \lambda_{i}
+\]
+で
+$\cf(\alpha_i)=\kappa^{+}$となる$\alpha_i$をとる。これは、命題\ref{prop:card}から、$i<\kappa$ならば
+$\kappa^+<\cf(\lambda_i)$であるから可能である。
+そして$x(i)=\alpha_i$と定義する。もちろん$x\in G$である。
+そして
+\[
+\kappa^+\le \cf(x(i))=\cf(\alpha_i)\le \cf(\lambda_0)
+\]
+なので、$x\in X$である。また、
+\[
+x\in \{g\in G\cap X\mid f_i<g\}\subset U_{i}
+\]
+なので、
+$x\in \bigcap_iU_i$
+である。
+よって$\bigcap_iU_i\neq 0$
+
+\end{proof}
+
+
+以下では位相空間$X$が族正規であることを証明する。
+改めて族正規の定義をする。
+
+\begin{df}
+位相空間$X$に於いて$X$の部分集合族$\mathcal{A}$が疎であるとは$X$の各点$x$に対して$x$の近傍$N$が存在して
+\[
+\mbox{$N\cap A\neq \O$となる$A\in \mathcal{A}$が存在しないか、もしくは１個しか無い}
+\]
+を充たす時$\mathcal{A}$は疎であると言う。もちろん$\mathcal{A}$が疎であるとき$A,B\in \mathcal{A},A\neq B$ならば$A\cap B=\O$である。
+\end{df}
+\begin{df}[族正規]
+位相空間$X$が族正規であるとは$X$の閉集合からなる任意の疎な族$\mathcal{A}$に対して$A\subset U_A$となる開集合の族$\{U_{A}\ |\ A\in \mathcal{A}\}$が存在して
+\[
+A\neq B\To U_A\cap U_B=\O
+\]
+が成り立つことである。\footnote{$T_1$は要請しないことにする}明らかに族正規空間は正規である。
+\end{df}
+
+
+$\mathcal{H}$を$X$の疎な閉集合の族とし、以降は固定する。
+
+
+
+
+\begin{lem}\label{lem:gotcha}
+$\alpha<\kappa$とする。
+$t\in F$は任意の$\alpha<\kappa$について$\kappa^+\le \cf(t(\alpha))$を満たすものとする。
+\[
+U_{\alpha}=\{h\in X\mid h\le t\land  \forall i<\kappa\  \cf(h(i))\le \cf(\lambda_{\alpha})\}
+\]
+とする。
+
+このとき$f\in F$が存在して$f<t$であり、$\{h\in U_{\alpha}\mid f<h\}$は$\mathcal{H}$の元と高々一個としか交わらない。
+\end{lem}
+\begin{proof}
+$\alpha<\kappa$を固定する。
+
+まず最初に
+\[
+N=\{i<\kappa\mid \cf(t(i))\le \cf(\lambda_{\alpha})\},\ M=\{i<\kappa\mid \cf(\lambda_{\alpha})<\cf(t(i))\}
+\]
+と定義する。
+$N\cap M=0$であり$N\cup M=\kappa$である。
+
+命題\ref{prop:card}から
+$a<b$の時$\lambda_{a}<\cf(\lambda_b)$なので、
+$l<\alpha$と$p\le \lambda_{l}$について、
+\[
+\cf(p)\le\lambda_{l} < \cf(\lambda_{\alpha})
+\]
+が成り立つ。よって任意の$l<\alpha$について
+$t(l)\le \lambda_l$なので結局
+$[0, \alpha]\subset N$がわかる。
+
+$\lambda_{\alpha}^{\kappa}=\lambda_{\alpha}$であるから、族
+$\{g_{\delta}\}_{\delta<\lambda_{\alpha}}\subset \prod_{i\in N}t(i)$が存在して次を満たす。
+$g_{\delta}\in \prod_{i\in N}t(i)$
+任意の$\delta<\lambda_{\alpha}$と$g\in \prod_{i\in N}t(i)$について$j<\lambda_{\alpha}$が存在して$\delta<j$と
+\[
+g<g_j
+\]
+を満たす。
+
+さて、いま補題の条件を満たすような$f\in F$が存在しないと仮定しよう。
+このとき帰納法によって$\{h_{i}\}\subset U_{\alpha}$, $\{k_i\}\subset U_{\alpha}$, $\{f_i\}\subset F$ $(i<\lambda_{\alpha})$
+を以下のように構成する。
+$i$について$j<i$となる$j$について三つの列は定義されているとする。
+このとき$f_i$を
+\[
+f_i(n)=
+	\begin{cases}
+	g_i(n) &\text{$n\in N$}\\
+	\sup(\{h_j(n)\}_{j<i}\cup\{k_j(n)\}_{j<i}) &\text{$n\in M$}
+	\end{cases}
+\]
+と定義する。もちろん$f_i\in F$である。さてこのとき、背理法の仮定を$f_i$に適応して、$f_i<h_i$, $f_i<k_i$となる$h_i, k_i\in U_{\alpha}$を$\mathcal{H}$の異なる元に属しているものとする。
+以上により$\{h_i\}$, $\{k_i\}$, $\{f_i\}$が定義された。
+
+これらを用いて$x:\kappa\to \lambda$を以下のように定義する。
+\[
+x(n)=
+	\begin{cases}
+	t(n) &\text{$n\in N$}\\
+	\sup_{i<\lambda_{\alpha}}f_i(n)& \text{$n\in M$}
+	\end{cases}
+\]
+まず最初に$x\in F$を示そう。$n\in N$について$x(n)\le \lambda_{n}$はわかる。
+$[0,\alpha]\subset N$と$N\cap M=0$より
+$n\in M$の時$\alpha<n$なので、$\lambda_{\alpha}<\lambda_n$が成り立ち、
+$\lambda_{n}$内の$\lambda_{\alpha}$列は$\lambda_n$の中に上限を持つ。よって$x(n)\le \lambda_{n}$である。
+以上から$x\in F$がわかる。
+
+次に$x\in X$を示そう。
+$n\in M$の時
+$f_i(n)$は$i<\lambda_{\alpha}$について単調増加なので
+$n\in M$の時$\cf(x(n))=\cf(\lambda_{\alpha})$である。
+$n\in N$の時は
+$t$に関する仮定から、$\kappa^+\le \cf(x(n))\le \cf(\lambda_{\alpha})$がわかるので、
+結局任意の$n<\kappa$について
+\[
+\kappa^+\le \cf(x(n))\le \cf(\lambda_{\alpha})
+\]
+である。よって$x\in X$である。
+
+$\mathcal{H}$は疎なので、上で定義した$x$に対して、ある$p\in F$が存在して、$U(p, x)$は$\mathcal{H}$
+の高々一つの元としか交わりを持たない。
+
+さて、ある$m\in \lambda_{\alpha}$が存在して、$n\in M$の時$p(n)<f_m(n)$となる。
+さらに$p|N\in \prod_{i\in N}t(i)$から、ある$j$が存在して$m<j$と$p|N<g_j$がわかる。つまり、
+$p<f_j$がわかる。また$f\le x$なので、$f_j\in U(p, x)$となる。すると$h_j$と$k_j$の定義と$x$の定義から$h_j\le x$, $k_j\le x$となることがわかり、
+$h_j,k_j\in U(p, x)$となるが、
+これは$U(p,x)$が$\mathcal{H}$の高々一つの元としか交わらないということに反する。
+\end{proof}
+
+\begin{lem}\label{lem:ft}
+$t\in F$は$\kappa^+\le \cf(t(\alpha))$を満たすものとする。
+このとき$f\in F$が存在して$f<t$であり、$U(f,t)$は高々一個の$\mathcal{H}$の元としか交わらない。
+\end{lem}
+\begin{proof}
+各$\alpha<\kappa$に対して上の補題\ref{lem:gotcha}を用いて$g_{\alpha}\in F$を得る。
+そして$f=\sup_{i<\kappa}g_i\in F$と定義する。$f$が補題の条件を満たすことを示そう。まず$\kappa^+\le \cf(t(i))$なので、$f<t$がわかる。
+$h,k\in U(f,t)\cap(\bigcap\mathcal{H})$とする。
+すると$i, j<\kappa$が存在して$h\in U_i$, $k\in U_j$となる。
+$l=\max\{i,j\}$とすると、$h, k\in U_l$であり、
+\[
+g_l<h,\ g_l<k
+\]
+となる。よって$g_l$の定義から$h$, $k$は同じ$\mathcal{H}$の元に属する。
+\end{proof}
+
+
+
+\begin{df}
+$S\subset F$について
+\[
+t_S(i)=\sup\{f(i)\mid f\in S\}
+\]
+とする。もちろん$t_S\in F$であり、$S\subset T$ならば$t_S\le t_T$となる。
+\end{df}
+
+
+\begin{prop}\label{prop:ucover}
+$\mathcal{H}$のふたつ以上の元と交わりを持つ
+$X$の開集合$U$に対して、開集合族$\{O_i\}_{i\in I}$が存在して以下を満たす。
+\begin{enumerate}
+\item $\{O_i\}$は互いに素である。
+\item $\{O_i\}$は$U$の部分集合で$U\cap \bigcup\mathcal{H}$を被覆する。
+\item もし$O_i$が$\mathcal{H}$のふたつ以上の元と交わりを持つならば、
+$t_{O_i}\neq t_U$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+この証明の中では$t=t_U$と書くことにする。
+
+[Case1 ある$i<\kappa$について$\cf(t(i))\le \kappa$が成り立つ時。]
+
+このような$i$をひとつ固定しよう。
+この時$t(i)$が後続順序数でないことを示そう。$t(i)=A+1$とかけるとしよう。
+定義から任意の$x\in U\subset X$について$x(i)$は後続順序数ではない。
+よって$x\in U$については$x(i)<A+1$となるはずだが、これは$x(i)\le A$ということであり、$A+1=t(i)=\sup_{x\in U}x(i)$に矛盾する。
+
+以上のことから$\cf(t(i))$は無限基数である。
+$\{\alpha_{a}\}_{a<\cf(t(i))}\subset t(i)$を単調増大列で
+$\sup_{a}\alpha_a=\cf(t(i))$となるものとする。
+この時$O_{0}=\{x\in X\mid x(i)\le \alpha_0\}$と定義し、$a>0$に対しては
+\[
+O_{a}=\{x\in X\mid \alpha_{a}<x(i)\le \alpha_{a+1}\}
+\]
+と定義する。
+任意の$a<\cf(t(i))$に対して、$l_a, u_a\in F$を次のように定義する。
+\[
+l_a(b)=
+\begin{cases}
+0 &\text{$b\neq i$}\\
+\alpha_a &\text{$b=i$}
+\end{cases}
+\]
+\[
+u_a(b)=
+\begin{cases}
+\lambda_b &\text{$b\neq i$}\\
+\alpha_{a+1} &\text{$b=i$}
+\end{cases}
+\]
+この時
+\[
+O_a=U(l_a, u_{a})
+\]
+と書けるので、$O_a$は $X$の集合である。
+また、明らかに互いに素である。
+さて今
+もし、$x\in U$は任意の$a$について$\alpha_{a+1}<x(i)$となっていたとすると、
+$\alpha_{a+1}$の形の基数の集合は$t(i)$の中で共終的なので$x(i)=\cf(t(i))\le \kappa$となるが、これは$\kappa^+\le \cf(x(i))$に矛盾する。
+よって、各$x\in U$に対してある$a$が存在して
+\[
+x(i)\le \alpha_{a+1}
+\]
+を満たす。つまり、$U=\bigcup_aO_a$となるので$(2)$の条件も満たされる。また、$t_{O_a}(i)\le \alpha_{a+1}<t(i)$なので、
+（$O_a$が$\mathcal{H}$のふたつ以上の元と交わるか否かに関わらず）$(3)$の条件は満たされる。
+
+[Case2. 任意の$i<\kappa$について$\kappa^+\le \cf(t(i))$の時]
+
+補題\ref{lem:ft}の$f$をとる。
+
+任意の$M\subset \kappa$ごとに
+\[
+O_M=\{x\in X\mid \forall\ i\in M\ x(i)\le f(i)\land \forall i\in \kappa\setminus M\ f(i)<x(i)\}\cap U
+\]
+と定義する。そして
+$M\subset \kappa$ごとに$l_M, u_M\in F$を次のように定義する。
+\[
+l_M(i)=
+\begin{cases}
+0 &\text{$i\in M$}\\
+f(i) &\text{$i\not\in M$}
+\end{cases}
+\]
+\[
+u_M(i)=
+\begin{cases}
+f(i) &\text{$i\in M$}\\
+\lambda_i &\text{$i\not\in M$}
+\end{cases}
+\]
+この時$O_M=U(l_M,u_M)$とかけるので、$O_M$は開集合である。
+また定義から明らかに互いに素であり、$U=\bigcup_MO_M$でもあるから$(1)$, $(2)$が満たされる。
+もし$t_{O_M}=t$となるならば、$M=0$でしかありえないが、この時$f$のとりかたから$O_0$は$\mathcal{H}$の高々一個の元としか交わりを持たない。
+よって$(3)$が満たされる。
+
+\end{proof}
+
+命題\ref{prop:ucover}で$U$に対して存在が保証される被覆を$\mathcal{O}(U)$と書くことにしよう。
+
+
+\begin{prop}
+$X$の$\le\kappa$個の開集合の共通部分は開集合である。
+\end{prop}
+\begin{proof}
+$\{U_i\}_{i<\kappa}$を開集合の列とする。そして$x\in \bigcap_i U_i$とする。
+各$i$について
+\[
+U(f_i, x)\subset U_i
+\]
+となる$f_i\in F$が存在する。
+各$\alpha<\kappa$について$f_i(\alpha)<x(\alpha)\le \lambda_{\alpha}$であることと、$\kappa<\kappa^+<\cf(\lambda_{\alpha})$であることから、$\sup_if_i(\alpha)<\lambda_{\alpha}$である。
+よって、$f=\sup_if_i$と定義すれば、任意の$i$について$U(f, x)\in U_i$であるから、$\bigcap_iU_i$は開集合である。
+\end{proof}
+
+
+
+\begin{prop}
+$\bigcup\mathcal{H}$の被覆であるような互いに素な開集合族の列$\{\mathcal{J}_i\}_{i<\kappa^+}$が存在して以下を満たす。
+$i<j<\kappa$とする。任意の$P\in \mathcal{J}_j$について$Q\in \mathcal{J}_i$が存在して以下を満たす。
+\begin{enumerate}
+\item $P\subset Q$
+\item $P$が$\mathcal{H}$のふたつ以上の元と交わるならば$t_P\neq t_Q$である。
+\item $Q$が$\mathcal{H}$の高々一つの元と交わるならば$P=Q$
+\end{enumerate}
+
+\end{prop}
+
+
+\begin{proof}
+$\mathcal{J}_0=\{X\}$とする。
+
+$\beta<\alpha$となる$\beta$については$\mathcal{J}_{\beta}$は定義されているとする。
+
+[Case1 $\alpha$が後続順序数の時]
+
+$\alpha=\beta+1$と仮定する。この時
+\[
+\mathcal{J}_{\alpha}=\bigcup_{U\in \mathcal{J}_{\beta}}\mathcal{O}(U)
+\]
+と定義すると条件を満たす。
+
+[Case2 $\alpha$が極限順序数の時]
+
+$\beta<\alpha$と
+$f\in \bigcup\mathcal{H}$について
+$V(f, \beta)$を$f$を含む$\mathcal{J}_{\beta}$の唯一の元とする。
+この添字づけは一般に単射ではないことに注意しよう。
+そして、
+\[
+V(f)=\bigcap_{\beta\le \alpha}V(f,\beta)
+\]
+とする。
+$\card(\alpha)<\kappa^{+}$より$\card(\alpha)\le \kappa$なので、この集合は開集合である。
+条件を満たすことは簡単にわかる。
+
+\end{proof}
+
+\begin{lem}
+$I$を無限基数とする。
+$F$の中の列$\{s_i\}_{i<I}$は、任意の$i<j<I$と任意の$\alpha\in \kappa$について
+$s_{j}(\alpha)\le s_i(\alpha)$と$s_j\neq s_i$を満たしているとする。
+この時、$I\le \kappa$である。
+\end{lem}
+\begin{proof}
+順序数の降下列は有限列であることからわかる。
+\end{proof}
+
+\begin{prop}
+$X$の疎な閉集合の族$\mathcal{H}$に対して、
+互いに素な開集合の族$\{G_A\}_{A\in \mathcal{H}}$が存在して
+\[
+A\subset G_A
+\]
+を満たす。
+つまり$X$は族正規である。
+\end{prop}
+\begin{proof}
+$A$を任意に与える。$f\in A$をとり、$a_f< \kappa^+$は$V(f,a_f)$が$\mathcal{H}$の高々一個の元としか交わらないものとする。
+$F$の元の単調減少な下降列は高々$\kappa$個しかないからこのような$a_f$は常に存在する。
+そして
+\[
+G_A=\bigcup_{f\in A}V(f,a_f)
+\]
+と
+定義する。
+$A\subset G_A$はわかる。
+互いに素であることを示そう。
+$f,g$は$\mathcal{H}$の別の元に属しているとしよう。
+すると、$n=\max\{a_f, a_g\}$とすると、$\mathcal{J}$の性質から、
+$V(f,a_f)=V(f,n)$、$V(g, a_g)=V(g,n)$でありこの二つは交わらない。
+よって$\{G_A\}$は互いに素である。
+
+これで$X$が族正規であることがわかった。
+
+\end{proof}
+
+
+
+\begin{thm}
+任意の$\kappa$について、$\kappa$-Dowker spaceが存在する。特にDowker spaceは存在する。
+\end{thm}
+
+\begin{rmk}
+$\kappa=\omega_0$の時は$\lambda_n=\omega_n$として$X$を構成できる。
+\end{rmk}
+
+\subsection{応用}
+
+$\kappa$-Dowker spaceの存在から次のことがわかる。
+
+\begin{thm}[森田の第一予想の肯定的解決]
+位相空間$X$は$T_4$とする。
+任意の$T_4$空間$Y$との直積$X\times Y$が$T_4$ならば、$X$は離散空間である。
+\end{thm}
+以下ではこの予想を$\kappa$-Dowker spaceの存在から証明していこう。
+
+まず次の補題が必要になる。これはDowkerによる可算パラコンパクト性の特徴づけの類似である。
+\begin{lem}
+位相空間$Y$には濃度が$\kappa$の非閉な部分空間$Z=\{p_i\}_{i<\kappa}$が存在し、さらに$Y$の部分空間で濃度が$<\kappa$のものは全て閉集合であるとする。
+この時、もし$T_4$空間$X$と$Y$との直積$X\times Y$が正規ならば、$X$は $\kappa$-Dowker spaceではない。
+つまり、$\bigcap_{i<\kappa}D_i=0$を満たす任意の$X$の単調減少な閉集合の族$\{D_i\}_{i<\kappa}$に対して
+$D_i\subset G_i$となる開集合の族$\{G_i\}_{i<\kappa}$が存在して
+\[
+\bigcap_{i<\kappa}G_i=0
+\]を満たす。
+\end{lem}
+\begin{proof}
+
+$\{D_i\}_{i<\kappa}$を$X$の単調減少な閉集合族で$\bigcap_iD_i=0$となるものとする。この集合族に対し、$F_i\subset G_i$で、$\bigcap G_i=0$となるものを構成する。
+$X\times Y$の部分集合$A$を
+\[
+A=\bigcup_{i\in \kappa}D_i\times \{p_i\}
+\]
+と定義する。この集合が$X\times Y$の閉集合であることを示そう。
+$(x,y)\not\in A$としよう。
+
+[Case 1]
+
+$x\in D_0$のとき
+このとき$x\not\in D_N$となる最小の$N<\kappa$をとる。
+すると$j<N$となる$j$については$x\in D_j$なので、任意の$j<N$について、
+$y\neq p_j$である。
+$Y$の濃度$\kappa$以下の離散部分空間は閉集合だと仮定しているので、
+$\{p_j\mid  j<N\}$は閉集合である。よって
+$M_N=X\setminus \{p_j\mid j<N\}$は開集合であり、
+$(X\setminus  F_N)\times M_N$
+が$A$と交わりを持たない$(x,y)$の開近傍となる。
+
+[Case 2]
+
+$x\not\in D_0$の時
+このときには$(X\setminus D_0)\times Y$が$A$と交わらない$(x,y)$の開近傍になる。
+
+以上のことから$A$は閉集合である。
+
+$Z$の導集合のことを$D(Z)$と書くことにする。
+$q\in D(Z)$を適当に取る。
+
+さて、$B=X\times \{q\}$とすると、$A$と$B$は交わりを持たない
+$X\times Y$の閉集合であるから、$X\times Y$の正規性から、交わりを持たない二つの$X\times Y$の開集合$U,V$で
+\[
+A\subset U,\ B\subset V
+\]
+となるものが存在する。
+
+ここで$G_i=\{x\in X\mid(x, p_i)\in U\}=U[p_i]$と定義する。
+すると、$G_i$は開集合であり、$A\subset U$から$F_i\subset G_i$を満たす。
+また、$x\in X$を任意に取ると、
+$(x, q)\in B\subset V$なので、
+$x$の近傍$S$と$q$の近傍$M$が存在して、
+$S\times M\subset V$となる。
+$q\in D(Z)$なので$N<\kappa$が存在して$p_N\in M$となる。
+$U\cap V=0$なので、特に$(x, p_N)\not\in U$である。
+つまり、$x\not\in G_N$である。よって$\bigcap_iG_i=0$がわかる。
+これで証明が終わる。
+\end{proof}
+
+証明すべきことをもう一度のべる。
+
+
+\begin{thm}[森田の第一予想の肯定的解決]
+位相空間$X$は$T_4$とする。
+任意の$T_4$空間$Y$との直積$X\times Y$が$T_4$ならば、$X$は離散空間である。
+\end{thm}
+\begin{proof}
+位相空間$X$に対して基数関数を次のように定義する。
+\[
+nc(X)=\min\{\kappa\mid \text{$\kappa\le \card(X)$であり，$X$には濃度$\kappa$の非閉部分空間が存在する。}\}
+\]
+$\min$の中身が空集合の場合には$nc(X)=\infty$と書くことにする。
+$X$が$T_1$の時には$nc(X)$は有限の値を取らない。つまり$nc(X)$は無限基数かもしくは$\infty$の値をとる。また、$nc(X)=\infty$と$X$が離散空間であることは同値である。
+
+本題に入ろう。もし$T_4$空間$X$が離散でないとすると、$nc(X)$は無限基数となり、
+先の補題の対偶から$X$と$nc(X)$-Dowker space $D$との積は$T_4$ではない。しかし、$D$は$T_4$であるから、これは$X$の仮定に反する。よって$X$は離散空間である。
+\end{proof}
+
+森田の三つの予想はすでにZFC公理系の下で全て肯定的に解決されている。
+
+\section{補記：森田予想について}
+一般に以下のことが成り立つ。
+\begin{thm}
+$X$を$T_1$空間とする。
+任意の離散空間$Y$に対して$X\times Y$が$T_4$であるための必要十分条件は、$X$が$T_4$であることである。
+\end{thm}
+
+
+\begin{thm}
+$X$を$T_1$空間とする。
+任意の距離化可能空間$Y$に対して$X\times Y$が正規であるための必要十分条件は、$X$が$T_4$な$P$-spaceであることである。
+\end{thm}
+
+\begin{thm}
+$X$を距離化可能空間とする。
+任意の可算パラコンパクト$T_4$空間$Y$に対して$X\times Y$が$T_4$であるための必要十分条件は、$X$が$\sigma$-局所コンパクトな距離距離化可能空間であることである。
+\end{thm}
+
+これら三つの定理の「双対」が森田の三つの予想である。これは1976年に森田紀一によって提案された。
+
+\begin{conj}
+$X$を$T_1$空間とする。
+任意の$T_4$空間$Y$に対して$X\times Y$が$T_4$であるための必要十分条件は、$X$が離散空間であることである。
+\end{conj}
+
+\begin{conj}
+$X$を$T_1$空間とする。
+任意の$T_4$な$P$-space $Y$に対して$X\times Y$が$T_4$であるための必要十分条件は、$X$が距離化可能空間であることである。
+\end{conj}
+
+\begin{conj}
+$X$を$T_1$空間とする。
+任意の$\sigma$-局所コンパクトな距離化可能空間$Y$に対して$X\times Y$が$T_4$であるための必要十分条件は、$X$が可算パラコンパクトな$T_4$であることである。
+\end{conj}
+
+予想$1$はM. Atsujiによって$\kappa$-Dowker spaceの存在が予想$1$を解くことが指摘され、1978年にM. E. Rudinが$\kappa$-Dowker spaceを構成することによって(ZFCで)肯定的に解決された(\cite{2})。 
+Atsujiが前セクションであげた$\kappa$-Dowker spaceが存在すれば、森田の第一予想が解けると指摘して、Rudinがそれを構成したと\cite{2}に書いてある。Atsujiは直積空間が正規になるための必要十分条件の研究をしており、その研究結果からDowker spaceを一般化した$\kappa$-Dowker spaceの条件が予想$1$を解くことがわかったのだと思われる。
+
+1985年にA. Be\u{s}lagi\'{c}とM. E. Rudinは$V=L$の仮定の下で予想$2$, $3$を証明した。(\cite{BR})
+予想$3$は1998年にBaloghによって(ZFCで)肯定的に解決された。(\cite{B1})
+予想$2$は2001年にBaloghによって(ZFCで)肯定的に解決された。(\cite{B2})
+実は予想$2$の成立から予想$1$と$3$の成立が従うことが知られている。(\cite{danma})
+
+	
+\begin{thebibliography}{9}
+\bibitem{B1}Z. Balogh, \textit{Normality of product spaces and K. Morita’s third conjecture}, Topology Appl., Vol. 84(1998), 185-198.
+\bibitem{B2}Z. Balogh, \textit{Nonshrinking open covers and K. Morita's duality conjectures}, Topology Appl., Vol. 115(2001), 333-341.
+\bibitem{BR} A. Be\u{s}lagi\'{c} and M. E. Rudin, \textit{Set-theoric construction of non-shrinking open covers}, Topology Appl., Vol. 20(1985), 167-177.
+\bibitem{Bing} R. H. Bing, \textit{Metrization of topological spaces}, 
+Cana. J. Math., vol. 3 (1951), 175--186. 
+\bibitem{AA} C. H. Dowker \textit{On countably paracompact spaces}, Canad. J. Math. 3 (1951), 219-224.
+\bibitem{Greever} J. Greever, \textit{On some generalized compactness properties}, Publ. RIMS, Kyoto Univ. Ser. A, Vol. 4 (1968), 39--49. 
+\bibitem{H}R. W. Heath, \textit{Screenability, pointwise paracompactness and metrization of Moore spaces}, Canad. J. Math., vol. 16 (1964), 763--770. 
+\bibitem{Heath}R.W.Heath, D.J.Lutzer and P.L.zenor, \textit{Monotonically Normal spaces}, Trans. Amer. Math. Soc.178(1973), p481-493
+\bibitem{a} K. Is\'eki, \textit{A Note on countably paracompact spaces}, Proc. Japan Acad. 30 (1955), 350-351.
+\bibitem{Michael} E. Michael, \textit{The product of a normal space and a metric space need not be normal}, Bull. Amer. Math. Soc., vol 69 No. 3(1963), 375--376.
+\bibitem{1} M. E. Rudin, \textit{A Normal Space $X$ for which $X \times I$ is not Normal}, Fund. Math., 73 (1971),  179-486.
+\bibitem{mn} M.E. Rudin, Dowker spaces, in: K. Kunen and J.E. Vaughan, eds., Handbook of Set-Theoretic
+Topology (North-Holland, Amsterdam, 1984), 761-780.
+\bibitem{2} M. E. Rudin, \textit{$\aleph$-Dowker Spaces}, Czechoslovak Mathematical Journal, 28, No.2 (1978), 324-326.
+\bibitem{Counter}L.A.Steen and J.A.Seebch,{\it Counterexamples in Topology},Dover Publications,Inc.,New York,1995, pp100, Simplified Arens Square
+\bibitem{danma} Three conjecture of K Morita, in Dan Ma topology blog, Access in 2019/06/16, URL 
+[https://dantopology.wordpress.com/2018/08/28/three-conjectures-of-k-morita/]
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

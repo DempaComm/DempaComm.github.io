@@ -115,9 +115,12 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     if not isinstance(manifest["files"], list) or not manifest["files"]:
         raise PaperToolError(f"{path}: files must be a non-empty array")
     build = manifest["build"]
-    if not isinstance(build, dict) or "root" not in build:
-        raise PaperToolError(f"{path}: build.root is required")
-    safe_relative_path(str(build["root"]))
+    if not isinstance(build, dict) or not isinstance(build.get("enabled"), bool):
+        raise PaperToolError(f"{path}: build.enabled is required")
+    if build["enabled"] and "root" not in build:
+        raise PaperToolError(f"{path}: build.root is required when build is enabled")
+    if build["enabled"]:
+        safe_relative_path(str(build["root"]))
     seen: set[str] = set()
     for entry in manifest["files"]:
         if not isinstance(entry, dict):
@@ -133,8 +136,10 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
             value = entry[key]
             if not isinstance(value, str) or len(value) != 64:
                 raise PaperToolError(f"{path}: invalid {key} for {relative}")
-    if str(build["root"]) not in seen:
+    if build["enabled"] and str(build["root"]) not in seen:
         raise PaperToolError(f"{path}: build.root must appear in files")
+    if not build["enabled"] and "published.pdf" not in seen:
+        raise PaperToolError(f"{path}: archived papers must protect published.pdf")
 
 
 def manifests(slugs: Iterable[str] | None = None) -> list[tuple[Path, dict[str, Any]]]:
@@ -356,10 +361,13 @@ def command_stage(args: argparse.Namespace) -> None:
             target = target_dir / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source_dir / relative, target)
-        pdf = source_dir / "main.pdf"
-        if not pdf.is_file():
-            raise PaperToolError(f"generated PDF is missing: {pdf}")
-        shutil.copy2(pdf, target_dir / "main.pdf")
+        if manifest["build"]["enabled"]:
+            pdf = source_dir / "main.pdf"
+            if not pdf.is_file():
+                raise PaperToolError(f"generated PDF is missing: {pdf}")
+            shutil.copy2(pdf, target_dir / "main.pdf")
+        else:
+            shutil.copy2(source_dir / "published.pdf", target_dir / "main.pdf")
         for legacy_slug in manifest["legacy_slugs"]:
             legacy_dir = output / "papers" / legacy_slug
             if legacy_dir.exists():
@@ -437,8 +445,9 @@ def command_import(args: argparse.Namespace) -> None:
                     "sha256": source_hash,
                 }
             )
+        build_enabled = bool(spec.get("build_enabled", True))
         latexmkrc = destination / ".latexmkrc"
-        if not latexmkrc.exists():
+        if build_enabled and not latexmkrc.exists():
             latexmkrc.write_text(DEFAULT_LATEXMKRC, encoding="utf-8")
         manifest = {
             "schema_version": 1,
@@ -454,7 +463,11 @@ def command_import(args: argparse.Namespace) -> None:
             "order": int(f"{published:%Y%m%d}{sequence:02d}"),
             "tags": list(spec["tags"]),
             "keywords": list(spec["keywords"]),
-            "build": {"root": str(spec.get("build_root", "main.tex"))},
+            "build": (
+                {"enabled": True, "root": str(spec.get("build_root", "main.tex"))}
+                if build_enabled
+                else {"enabled": False}
+            ),
             "files": manifest_files,
             "approved_changes": [],
         }
