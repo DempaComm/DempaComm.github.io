@@ -1,0 +1,7446 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{mathrsfs}
+%\usepackage{showkeys}
+	%可換図式用
+	\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}[section]
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+%\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\cplt}{Cplt}
+\DeclareMathOperator{\lip}{Lip}
+\DeclareMathOperator{\kat}{k}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Urysohn universal spaces}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\newpage 
+この文章ではUrysohn普遍距離空間を構成する．
+本文に入る前に大まかにこの空間の歴史を見ていこう．
+Urysohn普遍距離空間は
+1925年に
+``Comptes Rendus de l'Acad\'{e}mie des Sciences''
+の180巻の803--806頁にある
+Urysohnの論文
+``Sur un espace m\'etrique universel''
+にてその構成が報告された (\cite{Ury1})．
+その後
+1927年に
+``Bulletin des Sciences Mathematique Series II''
+の51巻の43--64頁，そして74--90頁にある
+Urysohnの論文
+``Sur un espace m\'etrique universel''
+にて
+構成法と詳細な性質が記述された 
+(\cite{Ury2})．
+またこの論文の中では今日ではUrysohn sphereと呼ばれる空間も構成されている．
+この論文
+\cite{Ury2}
+の著者欄には
+``M\'{E}MOIR\'{E} POSTHUME DE PAUL URYSOHN, 
+R\'{E}DIG\'{E} PAR PAUL ALEXANDROFF''
+と記されており，
+1924年に死去した
+Urysohn
+の研究成果を
+Alexandroff
+が代理執筆と代理投稿をした旨が書かれている．
+
+
+
+その後この普遍空間に関する研究はしばらく
+鳴りを潜めるのだが，
+1986年に
+Kat\v{e}tov
+が
+論文
+\cite{Ka}
+にて関数空間を用いた
+Urysohn普遍距離空間の構成法を発表すると，
+この構成法をもとにした論文がだんだんと増え
+現在に至る．
+故にUrysohn普遍距離空間に関する論文は
+ここ30年近くに発表された論文が多いように感じる．
+
+幾何学者からしばしば
+``Gromov's Greenbook'', 
+もしくは単に
+``Greenbook''
+と呼ばれる本 
+\cite{Greenbook}
+の中で
+著者である
+Gromov
+は
+Kat\v{e}tov
+の構成法を簡略化し，
+$1$-Lipschitz関数の空間を用いて
+Urysohn
+普遍距離空間の新しい構成法を導入している．
+さらにはこのUrysohn
+普遍空間にまつわる問題を提議している．
+
+
+
+Urysohn
+普遍距離空間は強力な等質性を持つので
+それをもとに自己等長群の研究や
+力学系の研究が近年では盛んに行われている印象である．
+
+
+%5
+\newpage 
+\tableofcontents
+
+
+
+
+\newpage 
+\section{導入：大まかな話の流れ}\label{sec:intro1}
+\subsection{距離空間，そして入射性質}
+\begin{df}[距離空間]\label{df:intro:metric}
+$X$
+を集合とする．
+このとき関数
+$d\colon  X\times X\to \rr$
+が
+\textbf{$X$上の距離関数}
+であるとは以下の四つの条件を満たすときにいう．
+\begin{enumerate}
+\item 
+任意の
+$x, y\in X$
+について
+$d(x, y)\ge 0$
+である．
+\item 
+任意の
+$x, y\in X$
+について
+$d(x, y)=0$
+と
+$x=y$
+は同値である．
+\item 
+任意の
+$x, y\in X$
+について
+$d(x, y)=d(y, x)$
+である．
+\item 
+任意の
+$x, y, z\in X$
+について
+$d(x, y)\le d(x, z)+d(z, y)$
+である．
+\end{enumerate}
+$X$
+上の距離関数
+$d$
+と
+$X$
+の組
+$(X, d)$
+を
+\textbf{距離関数}
+と呼ぶ．
+また，
+\[
+\di(X, d)=\sup_{x, y\in X}d(x, y)
+\]
+を
+\textbf{$(X, d)$の直径}
+と呼ぶ．
+直径には
+$\infty$
+の値も許している．
+また空集合上にはただ一つの距離関数が存在することに注意せよ．
+このときの距離関数は空写像である．
+空集合の直径はこの文章では，定義しないことにする．
+\end{df}
+
+\begin{df}\label{df:intro:iso}
+$(X, d)$
+と
+$(Y, e)$
+を距離空間とする．
+このとき写像
+$f: X\to Y$
+が
+\textbf{等長的}，
+もしくは
+\textbf{等長埋め込み}
+であるとは
+任意の
+$x, y\in X$
+について
+\[
+d(x, y)=e(f(x), f(y))
+\]
+が成り立つときにいう．
+等長写像は常に単射であることに注意せよ．
+全射な等長埋め込み写像を
+\textbf{等長同型写像}と呼ぶ．
+考えている距離を明示するために
+写像
+$f\colon 
+ X\to Y$
+ を
+ $f\colon   (X, d)\to (Y, e)$
+という風にかくこともある．
+\end{df}
+
+
+
+\begin{rmk}
+以下では距離空間
+$(X, d)$
+の部分集合
+$A$
+に対してその
+相対距離関数を
+$d$
+と書くことにする．
+本来は
+$d|_{A^2}$
+などと書くべきだが，煩雑であるためこのようにする．
+\end{rmk}
+
+
+
+
+
+\textbf{以下で述べる距離空間の入射性というものが
+この文章における最重要概念である．とにかくこれを持つ空間を構成したいのである．}
+
+
+\begin{df}\label{df:intor:inj}
+$\mathscr{A}$
+を距離空間からなるクラスとする．
+このとき距離空間
+$(X, d)$
+が
+\textbf{$\mathscr{A}$-単射的}
+である，
+もしくは
+\textbf{$\mathscr{A}$-入射的}
+である，
+\textbf{$\mathscr{A}$-入射性質}
+を持つ
+とは
+任意の
+$(A, d_A), (B, d_B)\in \mathscr{A}$
+と
+任意の二つの等長写像
+$f\colon  (A, d_A)\to (B, d_B)$
+と
+$i\colon (A, d_A)\to (X, D)$
+に対して，
+等長写像
+$g\colon  (B, d_B)\to (X, d)$
+が存在して
+$g\circ f=i$
+となるときにいう．
+
+
+\[
+\xymatrix{
+B \ar@{.>}[dr]^{g} & \\
+A \ar[r]_i \ar[u]^f & X
+}
+\]
+\end{df}
+
+数学的帰納法を用いることにより以下のことがわかる．
+この補題
+\ref{lem:intro:kihon}
+がゆえに
+文章中で
+「距離空間の一点拡張」なる説明が多々出てくるのである．
+\begin{lem}\label{lem:intro:kihon}
+$\mathscr{A}$
+を距離空間からなるクラスとする．
+このとき空でない距離空間
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{A})$-入射的であること
+と
+$\mathscr{A}$
+に属する
+任意の有限距離空間
+$(A\sqcup\{z\}, e)$
+と等長埋め込み
+$\phi\colon  (A, e)\to (X, d)$
+について
+$\phi$
+の拡張になっている等長埋め込み
+$\Phi\colon  (A\sqcup\{z\}, e)\to (X, d)$
+が存在することは同値である．
+\end{lem}
+\textbf{この補題 \ref{lem:intro:kihon}は以下では特に明言せずに
+入射性質を証明するときに
+どんどん使用していく．}
+
+
+\begin{df}\label{df:intro:Urysohn}
+$\mathscr{A}$
+を距離空間からなるクラスとする．
+このとき記号
+$\mathscr{F}(\mathscr{A})$
+で
+$\mathscr{A}$
+に属する有限距離空間全体を表すとする．
+つまりその台集合が有限集合であるような距離空間のことである．
+このとき空集合も距離空間とみなす．
+
+$\mathscr{F}(\mathscr{A})$-単射的距離空間
+$(X, d)$
+は，
+$(X, d)\in \mathscr{A}$
+を満たすときに
+\textbf{pre-$\mathscr{A}$-Urysohn普遍距離空間}
+と呼ぶ．
+そしてさらに
+$(X, d)$
+が完備でもあるとき
+\textbf{$\mathscr{A}$-Urysohn普遍距離空間}
+と呼ぶ．
+\end{df}
+
+
+
+\begin{df}\label{df:intoro:cat}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+を満たすとする．
+このとき
+記号
+$\mathscr{M}(R)$
+で可分距離空間であり，
+その距離の値が
+$R$
+に入っているもの全体のクラスを表すことにする．
+$\mathscr{M}(R)=\mathscr{M}(R_{\ge 0})$
+であることに注意せよ．
+この種の記号の重複は，なまぐさをしているだけであり，
+それ以上の理由はない．
+\end{df}
+
+
+
+
+\begin{df}\label{df:intro:originalUrysohn}
+$\mathscr{M}(\rr)$-Urysohn普遍距離空間を
+ただ単に
+\textbf{Urysohn普遍距離空間}
+と呼ぶ．
+\end{df}
+
+
+この文章では次の三つの定理を
+様々な方法で証明することを目的とする．
+
+
+
+\begin{thm}\label{thm:intro:existpre}
+$G$
+を
+$\rr$の加法部分群で
+$\card(G)=\aleph_0$
+とする．
+このとき
+可算集合であるような
+$\mathscr{M}(G)$-pre-Urysohn普遍距離空間
+が等長同型を除いてただ一つ存在する．
+\end{thm}
+\begin{proof}
+この定理は
+Urysohn自身による古典的な方法で定理 
+\ref{thm:amal:exist}
+にて証明されている．
+唯一性については
+定理 \ref{thm:pp:doukeipre}
+で証明されている．
+\end{proof}
+
+
+
+\begin{rmk}
+定理 \ref{thm:intro:existpre}
+において実数の加法群が出てくるのは，
+そうでないと回らない構成法になっているからである．
+根源的な理由としては三角不等式に実数の加法が出てくる
+からであろう．
+\end{rmk}
+
+
+
+\begin{thm}\label{thm:intro:existpropUry}
+Urysohn普遍距離空間，
+すなわち
+$\mathscr{M}({\rr})$-Urysohn普遍距離空間が
+等長同型を除いてただ一つ存在する．
+\end{thm}
+\begin{proof}
+定理\ref{thm:amal:exist}で
+可算な
+$\mathscr{M}(\qq)$-pre-Urysohn普遍距離空間
+が存在することがわかれば，
+系 \ref{cor:katetov:compbecomesUrysohn}
+からUrysoh普遍距離空間の存在がわかる．
+もしくは直接的に
+命題 
+\ref{prop:func:envext}
+を基にして，
+Kat\v{e}tovによる方法 
+(系 \ref{cor:func:extG})
+とGromov による方法
+(系 \ref{cor:func:gromovUrysohn})
+でも直接的に証明することもできる．
+唯一性は系 
+\ref{cor:pp:doukeiury}
+で証明されている．
+\end{proof}
+
+
+\begin{thm}\label{thm:intro:existdiam}
+$L\in \rr$
+とする．このとき
+$\mathscr{M}([0, L])$-Urysohn普遍距離空間
+が等長同型を除いてただ一つ存在する．
+\end{thm}
+
+
+\begin{proof}
+Urysohn普遍距離空間の存在をもとにして
+補題 
+\ref{lem:diam:restrict}や
+補題 
+\ref{lem:diam:sphere}で
+その存在が証明されている．
+唯一性は
+系 
+\ref{cor:pp:doukeiury}
+で証明されている．
+\end{proof}
+
+
+以上の存在と唯一性をもとに以下の定義をするが，
+唯一性の証明がなされるまではあまり使われないであろう．
+
+
+
+\begin{df}\label{df:intro:preUrysohnspaces}
+$\rr$
+の可算な部分集合
+$Q$
+で
+$0\in Q$
+を満たすものについて
+可算な
+$\mathscr{M}(Q)$-pre-Urysohn普遍距離空間
+が存在するときにこの距離空間を
+$(Q\mathbb{U}, \rho)$
+という記号で表す．
+変な記号だが，
+伝統に従うとこのようになる．仕方がない．
+距離の記号も
+$Q$
+に依存していることを本当は明示すべきだが，
+基本的に紛れがないので同じ記号で表すことにする．
+特に
+$(\qq\mathbb{U}, \rho)$
+は
+\textbf{有理Urysohn普遍距離空間}
+と呼ばれる．
+\end{df}
+
+
+
+
+\begin{df}\label{df:intro:Urysohnspaces}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+を満たすものとする．
+$\mathscr{M}(R)$-Urysohn普遍距離空間
+が存在するときにこの距離空間を
+$(\mathscr{U}_{R}, \rho)$
+という記号で表す．
+距離の記号も
+$R$
+に依存していることを本当は明示すべきだが，
+基本的に紛れがないので同じ記号で表すことにする．
+特に
+$\mathscr{M}(\rr)$-Urysohn普遍距離空間
+を
+$(\mathbb{U}, \rho)$
+で表す．
+\end{df}
+
+
+
+
+また次のことに注意しよう．
+
+
+\begin{lem}\label{lem:intro:completeness}
+距離空間
+$(X, d)$
+について
+集合
+$d(X\times X)$
+の中で
+点
+$0$
+は触点になっていないとする．
+このとき
+$(X, d)$
+は
+完備である．
+\end{lem}
+\begin{proof}
+$0$
+が触点ではないので
+$r\in (0, \infty)$
+が存在して
+$d(X\times X)\cap [0, r]=\{0\}$
+である．
+よって
+$(X, d)$
+内のコーシー列は
+十分大きい番号で定数になるので
+$(X, d)$
+は完備である．
+\end{proof}
+
+
+\begin{thm}\label{thm:intro:integerUrysohn}
+$n\in \zz_{>0}$について
+$R=\{1, \dots, n\}$
+かもしくは
+$R=\zz$とする．
+このとき
+$\mathscr{M}(R)$-pre-Urysohn普遍距離空間は
+完備である．
+つまり
+$\mathscr{M}(R)$-pre-Urysohn普遍距離空間は
+$\mathscr{M}(R)$--Urysohn普遍距離空間である．
+特に
+$(\zz\mathbb{U}, \rho)=(\mathbb{U}_{\zz}, \rho)$である．
+\end{thm}
+
+\begin{thm}\label{thm:intro:existintegerUrysohn}
+$n\in \zz_{>0}$
+について
+$R=\{1, \dots, n\}$
+かもしくは
+$R=\zz$
+とする．
+このとき
+$\mathscr{M}(R)$-Urysohn普遍距離空間
+は等長同型を除いてただ一つ存在する．
+\end{thm}
+\begin{proof}
+$\zz\mathbb{U}$の存在は
+定理 
+\ref{thm:intro:existpre}
+からわかる．
+次に
+$R=\{1, \dots, n\}$
+としたときの
+$R\mathbb{U}$
+の存在についてだが，
+これは補題 
+\ref{lem:diam:restrict}
+からわかる．
+\end{proof}
+
+
+\begin{rmk}
+$\mathscr{M}(\{0, 1, 2\})$-Urysohn普遍距離空間
+はモデル理論で取り扱われる
+\textgt{ランダムグラフ}と等価である．
+定理 
+\ref{thm:rand:radograph}
+を参照のこと．
+\end{rmk}
+
+\section*{何はともあれとにかく必ずこの章は読むこと！$\Downarrow$}
+\subsection{とにかく必ずこの章は読むこと！：この文章のおおまかな構成}
+
+まずこの文章が書かれた動機について説明する．
+この文章は，執筆者が数学の研究から長期間離れた場合に備えて，復帰したいと思った時にすぐに研究に復帰できるよう，執筆当時に興味のあったトピックであるウリゾーン普遍距離空間の情報を「缶詰」にして長期間保管したかったのである．ついでにネットに公開すれば，少なくとも死蔵はされないし，みんなのお勉強にもなるかと思って公開している．つまり，執筆者が執筆者のために書いた文章で公開したのはおまけであるので読みづらい部分が多々見受けられるのは，この文章のモチベーションからして人に見せるように作られてなかったから自然なことである．何度かの改修を経て人様に読んでもらえるようにはある程度したつもりではある．
+この文章が読みずらい大きな点としては，通常のウリゾーン普遍空間とランダムグラフを扱うためにいささか無理をして抽象的，統一的に扱っているところがある．
+難しいようなら最初は$\rr$に対するウリゾーン普遍空間の構成を頭に叩き込んで，その後に離散的な場合をやれば良いと思う．逆でも良い．離散的な場合からやってもよい．
+
+
+この文章がどのような構成になっているのか説明しておく．
+
+
+セクション
+\ref{sec:intro1}
+はイントロであり，まさしく今のこの読まれている文章が属しているセクションである．ここではこの文章の主題であるウリゾーン普遍距離空間に対する目的意識をはっきり説明している．
+そう感じられなかったら力不足で申し訳ない．
+
+まずセクション
+\ref{sec:preliminaries}
+では
+距離関数にまつわる基本的な事柄を確認する．
+いわゆる
+preliminariesである．
+
+セクション
+\ref{sec:33333}
+をどこに配置するのかは迷うところではあった．
+このセクションでは，
+Kat\v{e}tov mapを導入している．
+この概念は「距離関数の一点拡張」
+という操作の表象の器となるような関数のことである．
+そしてその一般的な性質を
+追求した上で，入射性質の完備化も入射性を持つことを証明している
+(系\ref{cor:katetov:completion})．
+この主張はとても大事なものであるからなるべく早く紹介しておきたかった．
+Kat\v{e}tov mapは現代風にUrysohn普遍距離空間を学ぶには避けては通れない内容ではあるものの，いきなり３番目のセクションでやるにしては小難しい．しかし頑張ってほしい．
+\textbf{もしもこのセクションが唐突に感じられるのであれば
+とりあえず
+系
+\ref{cor:katetov:completion}を認めて後のセクションを読み進めてかまわない．}
+
+\textbf{Kst\v{e}tov mapに関する注意としては，この文書ではそのKat\v{e}tov mapが取りうる値は，実数の部分加法群$G$に制限していることである．以前の版では加法群$G$にあたいをとるのか，普通の実数の部分集合$R$に値を取るのかに関して誤植がたくさんあったが確認できる限り全て修正した．お気づきかもしれないが，この文章の命題の中では実数の加法部分群に対しては優先的に$G$という文字を用いて，特に構造を仮定せずに$0$を含むような実数の部分集合を$R$という文字で優先的に表している．}
+
+セクション
+\ref{sec:sechaku}
+はその一つ手前のセクションとの順番の配置に迷うものであった．このセクションではいささか
+Kat\v{e}tov
+mapを用いない方法で普遍距離空間を作っている．
+これは
+Fra\"{i}ss\'{e} limitと呼ばれる方法である．
+この方法自体は現代でも全然用いられるのだが，
+結局
+「入射性質を持つ空間の完備化も入射性質を持つ」
+という命題
+(系
+\ref{cor:katetov:completion})を経由しないとUrysohn普遍距離空間の存在を述べられないので，
+Kat\v{e}tov mapの話を先のセクションで行うことにした．
+ここら辺の事情がセクションの配置に迷った理由である．
+この「入射性質を持つ空間の完備化も入射性質を持つ」
+という命題(系\ref{cor:katetov:completion})も別に
+Kat\v{e}tov map
+なしでも証明できるようだが，
+Kat\v{e}tov mapって結局使わずにいられないので，
+同時にやっちゃうことにした．
+
+
+
+この文書の目的はUryoshn普遍距離空間の構成法の紹介であるが，
+それと同時にランダムグラフがUrysohn普遍距離空間の亜種であるということを紹介するという第二の目的がある．
+セクション
+\ref{sec:houraku}
+ではその目的を達成するために，
+統一的な方法での普遍距離空間を構成を志向して，「距離空間の包絡」というものを導入した．
+この概念はこの文書の中でしか通用しない概念だと思うので他所で使う時には注意されたい．
+距離空間
+$X$
+に対してそこから入射性質を得る
+空間を構成するためには
+$X$
+に埋め込みがある時に入射性を担保するような余分な点を追加して拡張空間
+$U(X)$
+を作れば良い．
+しかしこれはうまくいかない．
+なぜならば拡張空間
+$U(X)$
+それ自体に有限集合を埋め込んだ時にその埋め込みを拡張できるかどうかわからないからである．
+それならばもう一度拡張をして
+$U(U(X))$をつくればいいのだが，
+これも同様の問題を抱えている．
+この種の問題の解決法は数学一般では知られていて，
+その答えは可算回拡張をとる
+$U^{\omega}(X)$
+ということである．
+細かい話は当該セクションに書かれている．
+しかし，具体的な包絡の構成は後ろのセクションで行い，ここのセクションでは抽象的な話に甘んじることにする．
+
+
+
+上で仄めかした通り
+セクション
+\ref{sec:hourakuhouraku}では
+具体的な距離空間の包絡の構成を考える．
+これは結構難しいので，セクションをわざわざ分けている．
+Kat\v{e}tov map
+はその包絡の構成法の一つになっているのである！包絡の構成にもなっているし，上で述べた完備化の話
+(系
+\ref{cor:katetov:completion})にも使えるしなのでとても有益な概念なのである．
+またGromovによる，
+1-Lipschitz関数の空間を用いた包絡の構成法も紹介している．
+そこではアスコリ・アルツェラを用いるのであるが，
+本当にGromovはアスコリ・アルツェラが大好きなのだと思う．
+余談だがいずれの構成法でもmeagerな入射空間の構成法も紹介している．
+
+セクション
+\ref{sec:yuugen}
+では
+Urysohn普遍距離空間の亜種として，直径有限であるような普遍空間の構成を紹介する．
+
+
+
+セクション
+\ref{sec:uryunique}
+ではいわゆる
+back-and-forth argument (行ったり来たり論法)
+を用いてUrysoohn普遍距離空間の，
+等質性，普遍性，そして一意性を証明する．
+ここでいう「一意性」とは「考えているクラス毎に一意的」という意味である．あしからず．
+
+
+離散的なUrysohn普遍距離空間のために
+セクション
+\ref{sec:risan}
+を用意した．
+ランダムグラフと通常のUrysohn普遍距離空間との類似を見るための部位である．
+
+最後の
+セクション
+\ref{sec:shoukai}
+ではUrysohn普遍距離空間の研究をできる限り引用して紹介した．筆者の力不足ゆえに全く十分に紹介できていないのだが，せめて文献案内の役割を果たせることを望んでいる．
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{基本的な話}\label{sec:preliminaries}
+この節ではUrysohn
+普遍距離空間たちの構成に関わる基本的な話題を紹介していく．
+
+\subsection{$\rr$の加法部分群}
+まず最初に実数の加法に関する部分群の分類を紹介する．
+証明については例えば 
+\cite{Bourbaki}
+や，
+ブログ「電波通信」の「実数の閉部分群」
+(\cite{denpaGR})
+という記事を参照されたし．
+Urysohn普遍距離空間たちを構成するときには
+距離関数の取りうる値を
+$\rr$
+の加法群に制限しないと
+証明がうまく機能しない．
+このことは根源的には距離関数の定理に
+$\rr$
+の加法が現れているのが原因のように見える．
+
+
+
+\begin{thm}\label{thm:hanasi:gr}
+$G$
+を
+$\rr$
+の加法に関する
+部分群である．
+このとき次のいずれか一方のみが成り立つ．
+\begin{enumerate}
+\item 
+$G$
+は
+$\rr$
+の中で稠密である．
+
+
+\item 
+ある
+$h\in \rr$
+が存在して
+$G=h\zz$
+となる．
+\end{enumerate}
+\end{thm}
+以上で見たように
+$\rr$
+の加法部分群というものは
+稠密なものか，
+$\zz$
+と同型なものしかない．
+本論で取り扱う加法部分群は
+$\qq$
+のような可算で稠密なものか，
+$\zz$
+しか扱わない．
+非可算で稠密な部分群
+$G$
+に対して
+$\mathscr{M}(G)$-pre-Urysohnな空間が存在するのか，
+$\mathscr{M}(G)$-Urysohnなものが存在するのかどうかはよくわからない
+(\cite{Sau}
+も参照のこと)．
+
+\begin{rmk}
+$\rr$
+の加法に関する真部分群であってその濃度が非可算であるものはちゃんと存在する．
+例えばハメル基底から生成される部分群を考えればわかる．
+また，選択公理を用いずとも上で述べたような例は具体的に構成できる．
+例えば 
+\cite{Neumann}
+や
+\cite{Mathoverflaw}
+を
+参照のこと
+\end{rmk}
+
+
+\subsection{距離関数の話}
+この節では本論で取り扱う距離関数の
+基本的な定義や性質を紹介する．
+
+\begin{df}\label{df:hanasi:net}
+$(X, d)$
+を距離空間とし，
+$\epsilon \in (0, \infty)$
+とする．
+このとき
+$X$
+の部分集合
+$F$
+が
+$\epsilon$-netであるとは，
+$F$
+が有限集合であり，
+なおかつ
+任意の
+$x\in X$
+について
+$y\in F$
+が存在して
+$d(x, y)\le \epsilon$
+となるときにいう．
+\end{df}
+
+\begin{lem}\label{lem:hanasi:comp}
+$(X, d)$
+を距離空間とし，
+$A$
+をその部分空間とする．
+このときもしも
+$(A, d)$
+が完備ならば
+$A$
+は
+$X$
+の閉集合である．
+\end{lem}
+\begin{proof}
+距離空間の初歩的な演習問題なので解答省略．
+\end{proof}
+\begin{lem}\label{lem:hansi:minlem}
+実数
+$a, b, c\in \rr_{\ge 0}$
+は
+$a\le b+c$
+を満たすとする．
+このとき任意の
+$t\in \rr_{>0}$
+に対して
+\[
+\min\{a, t\}\le \min\{b, t\}+\min\{c, t\}
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$t\le a$
+の場合には，
+$\min\{a, t\}=t$
+であり，また
+$\min$
+の意味からして
+\[
+t\le \min\{b, t\}+\min\{c, t\}
+\]
+なので証明したい不等式は成り立つ．
+
+次に
+$a<t$
+の場合には，
+$\min\{a, t\}=a$
+となる．
+さらに場合わけを行う．
+$\min\{b, t\}=t$
+ もしくは
+ $\min\{c, t\}=t$
+ の場合には
+$a<t$
+なので不等式は成り立つ．
+$\min\{b, t\}=b$ 
+かつ
+$\min\{c, t\}=c$
+の場合には，
+仮定から
+$a\le b+c$
+が成り立つので，
+目的の不等式も成り立つ．
+\end{proof}
+
+\begin{cor}\label{cor:hanasi:mindis}
+$(X, d)$
+を距離空間とし，
+$t\in (0, \infty)$
+とする．このとき
+$e\colon  X\times X\to \rr$を
+$e(x, y)=\min\{d(x, y), t\}$
+と定義すると
+$e$
+は
+$X$
+上の距離関数であり，
+$d$
+が生成する位相と
+$e$
+が生成する位相は同じである．
+さらに
+$d$
+が完備距離空間ならば，
+$e$
+もそうである．
+\end{cor}
+\begin{proof}
+補題 
+\ref{lem:hansi:minlem}から，
+$e$
+が距離関数になることはわかる．
+$e$
+が
+$d$
+と同じ位相を生成することは，
+$d$
+と
+$e$
+の十分小さい半径の開球が同じ集合になることからわかる．
+完備性も同様の議論から従う．
+\end{proof}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kat\v{e}tov mapに関する一般論}\label{sec:33333}
+Kat\v{e}tov map
+とは「距離空間の一点拡張」を関数として表現した概念である．
+このセクションでは
+Kat\v{e}tov map
+というリプシッツ関数よりもさらに狭いクラスの
+関数を扱う．
+距離関数
+$(X, d)$
+を考えたとき，
+$(X, d)$
+上の
+Kat\v{e}tov map
+のクラスは
+「距離関数の
+一点拡張
+$(X\sqcup\{*\}, D)$
+を考えたときの関数
+$x\mapsto D(x, *)$」
+に対応する関数のクラスになっている．
+ゆえに入射性に関する議論を行う際に
+Kat\v{e}tov map
+の言葉に翻訳して議論することができる．
+この
+Kat\v{e}tov map
+はウリゾーン普遍距離空間を関数空間を通して構成する際に重要になる．
+また，ウリゾーン普遍距離空間自体を調べるにあたっても重要になる．
+特に近似入射性と完備化の操作を介して入射性を持つ空間，
+つまりウリゾーン普遍距離空間を構成するのには便利な概念である．
+
+
+
+
+
+\subsection{基本的な話}
+\begin{df}[Kat\v{e}tov map]\label{df:katetov:katetovmap}
+$G$
+を
+$\rr$
+の加法部分群とする．
+このとき
+距離空間
+$(X,d)\in \mathscr{M}(G)$
+上の実関数
+$f\colon X\to \rr$
+が
+\textbf{$G$-Kat\v{e}tov map}
+であるとは,
+\begin{enumerate}
+\item 
+任意の
+$x\in X$
+について
+$f(x)\in G$
+である．
+\item 
+任意の
+$x, y\in X$
+について
+\[
+|f(x)-f(y)|\le d(x,y)\le f(x)+f(y)
+\]
+\end{enumerate}
+を満たすこととする．
+$(X, d)$
+上の
+$G$-Kat\v{e}tov map
+全体の集合を
+$K(X, d, G)$
+で表すことにする。
+\end{df}
+
+\begin{lem}\label{lem:katev:katproperty}
+Kat\v{e}tov map 
+は常に連続であり, 
+常に非負の値をとる.
+\end{lem}
+\begin{proof}
+$(X, d)$
+を
+$\mathscr{M}(G)$
+に属する距離空間とし
+$f\in K(X, d, G)$
+をとる．
+まず連続性は
+$f$
+が
+$1$-Lipschitz, 
+つまり
+\[
+|f(x)-f(y)|\le d(x, y)
+\]
+であることからわかる．
+次に非負であることを示す．
+任意に
+$x, y\in X$
+を取る．
+$f(y)\le f(x)$
+とすると
+Kat\v{e}tov map
+の定義から
+\[
+f(x)-f(y)\le f(x)+f(y)
+\]
+から
+$f(x)\ge 0$
+がわかる．
+ここで$f(y)\le f(x)$
+なので
+$f(x)\ge 0$
+である．
+2点$x, y\in X$
+は任意だったので，
+関数
+$f$
+が非負関数であることがわかる．
+\end{proof}
+
+
+\begin{lem}\label{lem:katetov:onept}
+$G$を$\rr$の加法部分群とする．
+そして
+$(X,d)\in \mathscr{M}(G)$
+とする．
+もしも
+$f\in K(X, d, G)$
+がある点
+$a\in X$
+で
+$f(a)=0$
+となるならば
+任意の
+$x\in X$
+について
+$f(x)=d(x, a)$
+となる．
+\end{lem}
+\begin{proof}
+Kat\v{e}tov map 
+$f\in K(X, d, G)$
+が
+任意の
+$x \in X$について
+\[
+|f(x)-f(a)|\le d(x, a)\le f(x)+f(a)
+\]
+を満たすことから従う
+($f(a)=0$を代入せよ)．
+\end{proof}
+
+
+次に
+有限の台を持つ
+Kat\v{e}tov
+map
+を導入する．
+ウリゾーン普遍距離空間の構成法では，
+有限の台を持つ
+Kat\v{e}tov
+map
+を用いて関数空間の列を構成してその列のある種のsupremum
+として普遍空間を構成する．
+有限の台を持つKat\v{e}tov
+map
+は「距離空間の部分集合である``有限個の点を通して''一点拡張した距離関数」
+に対応しているものと思われる(定義\ref{df:amal:pushoutspace}を参照のこと)．
+\begin{df}\label{df:katetov:finitesupport}
+距離空間
+$(X, d)$と
+写像
+$f\colon X\to \rr$
+について
+$f$
+が
+\textbf{有限な台を持つ}
+とは，
+$X$
+の空でない有限集合
+$Y$
+が存在して
+\[
+f(x)=\min \{\, f(y)+d(x, y)\mid y\in Y\, \}
+\]
+とを満たすときにいう．
+$G$
+を
+$\rr$
+の加法部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+とする．
+記号
+$E(X, d, G)$
+で
+$(X, d)$
+上の有限な台をもつ
+$G$-Kat\v{e}tov map
+全体の集合とする.
+\end{df}
+
+
+次に距離空間
+$(X, d)$
+の部分集合
+$A$
+について
+$(A, d)$
+上の
+Kat\v{e}tov mapを全体空間に拡張する方法を紹介する．
+この構成法自体はLipschitz mapくらいでも可能である，
+というかこの拡張法はどちらかというとMcShane--Whitney extension という名前で知られていることが多いのではないかと思う．
+Kat\v{e}tov mapの場合はLipschitzより条件が強いので
+補題\ref{lem:katetov:McShane}のようなことが成り立つ．
+とにかく定義を見てみよう．
+
+\begin{df}\label{df:katetov:katext}
+$G$
+を
+$\rr$
+の加法部分群とする．
+$(X, d)\in \mathscr{M}(G)$
+とし
+$A\subset X$
+とする．
+このとき
+$A$
+上の関数
+$f\colon A\to \rr$について, 写像
+$\kat(f)\colon X\to \rr$を
+\[
+\kat(f)=\inf \{\, f(a)+d(x,a)\mid a\in A\, \}
+\]
+と定義する.
+この
+$\kat(f)$
+を
+\textbf{$f$の
+Kat\v{e}tov extension}と呼ぶ.
+もしも
+$A$
+が
+$X$
+の空でない有限部分集合であり，
+$f\in K(A, d, G)$である
+ならば
+$\kat(f)\in E(X, d, G)$
+が成り立つ．
+このことを次の
+補題
+\ref{lem:katetov:McShane}で示そう．
+\end{df}
+
+この補題
+\ref{lem:katetov:McShane}
+が
+$G$
+が加法部分群であることを有効に使っている部分である．
+
+
+\begin{lem}\label{lem:katetov:McShane}
+$G$
+を
+$\rr$
+の加法部分群で，
+$(X, d)\in \mathscr{M}(G)$
+を距離関数とし
+$A$
+を
+$X$
+の任意の空でない有限部分集合とする．
+このとき
+$f\in K(A, d, G)$
+ならば
+$\kat(f)\in E(X, d, G)$
+である.
+\end{lem}
+\begin{proof}
+まず，任意の
+$x\in X$
+について
+\[
+\kat(f)(x)=\min\{\, f(a)+d(a, x)\mid a\in A\, \}
+\]
+が成り立つので
+$G$
+が
+$\rr$
+の加法に関する部分群であることから
+任意の
+$x\in X$
+について
+$\kat(f)(x)\in G$である．
+任意の
+$x, y\in X$と
+任意の
+$\epsilon\in (0, \infty)$
+に対して
+$s, t\in A$
+でありなおかつ
+\[
+f(s)+d(s, x)-\epsilon  \le \kat(f)(x)\le f(s)+d(s, x)
+\]
+
+\[
+f(t)+d(t, y)-\epsilon \le \kat(f)(y)\le f(t)+d(t, y)
+\]
+となるものを取る．
+このとき
+$\kat(f)(x)\le f(t)+d(t, x)$
+なので
+\[
+\kat(f)(x)-\kat(f)(y)\le f(t)-f(t)+d(t, x)-d(t, y)+\epsilon\le d(t, x)-d(t, y)+\epsilon
+\le d(x, y)+\epsilon
+\]
+であり$\epsilon$は任意なので
+$\kat(f)(x)-\kat(f)(y)\le d(x, y)$
+を得る．
+$x$と$y$を入れ替えても同じことができるので，
+結局
+\[
+|\kat(f)(x)-\kat(f)(y)|\le d(x, y)
+\]
+を得る.
+
+そして
+\begin{align*}
+d(x, y)&\le d(x, s)+d(s, t)+d(t, y)\\
+&\le (f(s)+f(x, s))+(f(t)+f(y, t))\le \kat(f)(x)+\kat(f)(y)
+\end{align*}
+なので
+結局
+$\kat(f)\in K(X, d, R)$である．
+\end{proof}
+
+\begin{rmk}
+この
+Kat\v{e}tov extension
+の
+定義はMcShane 
+\cite{McShane}による
+Lipschitz関数の拡張法を参考に定義されている．
+\end{rmk}
+
+
+
+\begin{df}\label{df:katetov:pt}
+距離関数
+$(X, d)$と
+各
+$x\in X$
+に対して, 
+写像
+$p_{x}\colon X\to \rr$
+を
+$p_{x}(t)=d_{X}(x, t)$
+と定義する.
+\end{df}
+
+
+
+\begin{lem}\label{lem:katetov:embed}
+$G$
+を
+$\rr$
+の加法部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+とする．
+このとき
+任意の
+$x\in X$
+について
+$p_{x}\in E(X, d, G)$
+である.
+\end{lem}
+\begin{proof}
+各
+$x\in X$
+について
+$p_{x}$
+が
+$G$-Kat\v{e}tov map
+になることは，
+$d$
+の値が
+$G$
+に入ることと
+三角不等式からわかる.
+さて各
+$t\in X$
+について,
+\[
+p_{x}(t)=d(x, t)=\inf\{p_{x}(s)+d(x, t)\mid s\in \{x\}\}
+\]
+なので
+$p_{x}$
+は有限な台を持つ. 
+よって
+$p_{x}\in E(X, d, G)$
+である.
+\end{proof}
+この小節で行ったことは，空間の点をその上のKat\v{e}tov
+mapとして表すことである．
+
+\subsection{関数空間としてのKat\v{e}tov maps}
+
+\begin{lem}\label{lem:katetov:bounded}
+$G$
+を
+$\rr$
+の加法に関する部分群とする．
+$(X, d)\in \mathscr{M}(G)$
+であるとする．
+このとき任意の
+$f, g\in E(X, d, G)$
+について
+\[
+\sup_{x\in X}|f(x)-g(x)|<\infty
+\]
+である.
+よって
+$E(X, d, G)$
+上に
+$\sup$距離が定義できる.
+\end{lem}
+\begin{proof}
+二つの関数
+$f, g\in E(X, d, G)$
+を任意にとる. 
+そして
+$f, g$
+の有限な台をそれぞれ
+$Y$,  $Z$とすると, 
+$S=Y\cup Z$
+は有限集合であり，なおかつ
+$f$, $g$
+の共通の台となる. 
+つまり,
+任意の
+$x\in X$
+について
+\[
+f(x)=\min\{\, f(y)+d(x, y)\mid y\in S\, \}
+\]
+\[
+g(x)=\min\{\, g(z)+d(x, z)\mid z\in S\, \}
+\]
+が成り立つ. 
+さらに任意の
+$x\in X$
+に対して
+$y, z\in S$を
+\[
+f(x)=f(y)+d(x, y),
+\]
+\[ 
+g(x)=g(z)+d(x, z)
+\]
+となるようにとる．このとき
+\[
+|f(x)-g(x)|\le |f(y)-g(z)|+|d(x, y)-d(x, z)|\le |f(y)-g(z)|+d(y, z)
+\]
+となる．よって，
+\[
+|f(x)-g(x)|\le \max_{y, z\in S}|f(y)-g(z)|+\di(S, d)
+\]
+となるが，
+$S$
+が有限集合であるから右辺は有限であり
+$x$
+に依存しない．
+よって補題が成り立つ．
+\end{proof}
+
+
+\begin{df}\label{df:katetov:supmetric}
+$G$
+を
+$\rr$
+の加法部分群とする．
+$(X, d)\in \mathscr{M}(G)$
+とする．
+このとき
+$E(X, d, G)$
+上の
+$\sup$
+距離を
+$\theta$
+で表すことにする．
+つまり
+\[
+\theta(f, g)=\sup_{x\in X}|f(x)-g(x)|
+\]
+である．
+本来は
+$X$
+や
+$d$
+に依存していることを表したほうが良いが，
+基本的に紛れがないので
+$\theta$
+で表す．
+\end{df}
+
+
+以下の命題は
+$x\mapsto p_{x}$
+が等長埋め込みになっているという
+the 
+Kuratowski isometric embedding theorem 
+が元になっている．
+
+\begin{prop}[The argument on the Kuratowski embedding]\label{prop:katetov:Kuratowski}
+$G$
+を
+$\rr$
+の加法部分群とし，
+$(X, d)\in \mathscr{M}(G)$とする．
+任意の
+$x\in X$
+と
+$f\in E(X, d, G)$
+に対して
+\[
+\theta(f, p_x)=f(x)
+\]
+が成り立つ.
+とくに
+\[
+\theta(p_{x}, p_{y})=d(x, y)
+\]
+が成り立つ.
+\end{prop}
+\begin{proof}
+前半のみ示せばよい.
+まず，
+$f(x)=|f(x)|=|f(x)-p_{x}(x)|\le \theta(f, p_{x})$
+である.
+次に
+$f\in E(X, d, G)$であることから
+任意の$s\in X$について
+\[
+|f(s)-f(x)|\le d(x, s)=p_x(s)\le f(s)+f(x)
+\]
+である.
+よって
+左側の不等式から
+\[
+f(s)-p_{x}(s)\le f(x)
+\]
+がわかり,
+右側の不等式から
+\[
+p_{x}(s)-f(s)\le f(x)
+\]
+がわかるので, 
+結局
+\[
+|f(s)-p_{x}(s)|\le f(x)
+\]
+がわかる. 
+つまり, 
+$\theta(f, p_{x})\le f(x)$である．
+以上から
+\[
+\theta(f, p_{x})=f(x)
+\]
+がわかる.
+\end{proof}
+これらの議論から，
+空間の点がKat\v{e}tov mapとして表されることがわかった．
+
+
+
+次の命題はある意味で入射性があれば
+命題
+\ref{prop:katetov:Kuratowski}
+の逆が成り立つと述べているものである．
+\begin{prop}\label{prop:katetov:injandpt}
+$G$
+を
+$\rr$
+の加法に関する部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+とする．
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{M}(G))$-入射的であることと，
+$X$
+の任意の有限部分集合
+$A\subset X$
+と
+任意の
+$f\in E(A, d, G)$
+に対してある
+$y\in X$
+が存在して任意の
+$a\in A$に対して
+\[
+d(a, y)=f(a)
+\]
+が成り立つことは同値である．
+\end{prop}
+\begin{proof}
+まず
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{M}(G))$-入射的
+であると仮定しよう．
+命題 \ref{prop:katetov:Kuratowski}を使って
+$(A, d)$
+を自然に
+$(E(A, d, G), \theta)$
+の部分空間と見なすことにする．
+そして
+$(A\cup\{f\}, \theta)$
+を考える．
+$\theta|_{A^2}=d$
+であることに注意しよう．
+このとき
+$(X, d)$の
+$\mathscr{F}(\mathscr{M}(G))$-入射性質
+から
+等長埋め込み写像
+$\phi\colon A\cup\{f\}\to X$で
+$\phi|_A=A$となるものが存在する．
+$y=\phi(f)$とすれば，
+任意の$a\in A$について
+$d(a, y)=\theta(p_a, f)=f(a)$
+が成り立つ．これで前半が示された．
+
+
+逆を示そう．
+$(X, d)$
+が命題の中で述べられている条件を満たすとしよう．
+そして
+有限距離空間
+$(A\cup \{\omega\}, e)$
+と等長埋め込み写像
+$\phi\colon A\to X$
+を与える．
+$\phi(A)$上の関数
+$v\colon  \phi(A)\to G$
+を
+$v(p)=e(\phi^{-1}(p),\omega)$と定義すると, 
+$v\in E(\phi(A), d, G)$
+である.
+そして
+$\phi(A)\subset X$
+と
+$v\in E(\phi(A), d, G)$に対して命題の条件を用いると，
+ある
+$y\in X$
+が存在して任意の
+$a\in A$
+に対して
+\[
+d(\phi(a), y)=v(\phi(a))=e(a, \omega)
+\]
+が成り立つ．
+よって
+$\Phi$
+を
+$\Phi|A=\phi$
+で
+$\Phi(\omega)=y$
+と定義すれば
+$\Phi\colon A\cup\{\omega\}\to X$
+は等長写像になっている.
+つまり
+$(X, d)$
+は
+$\mathscr{F}(\mathscr{M}(G))$-入射的である．
+\end{proof}
+
+
+\subsection{近似入射性と稠密部分集合，そして完備化}
+
+イントロでは入射性によって，
+ウリゾーン普遍距離空間を定義したが，
+あれをそのまま証明しようと試みるのは少々辛いので，
+数学の常道に則って，
+$\epsilon$
+分の隙間を用意しよう．
+つまり，
+以下のように近似入射性を定義する．
+\begin{df}[近似入射性]\label{df:katetov:apprxinj}
+$G$
+を
+$\rr$
+に関する加法部分群とする．
+このとき
+距離空間
+$(X, d)\in \mathscr{M}(G)$
+が
+\textbf{$\mathscr{F}(\mathscr{M}(G))$-近似入射的}
+であるとは
+$X$
+の任意の有限部分集合
+$A$
+と任意の
+$\epsilon\in (0, \infty)$
+と
+任意の
+$f\in E(A, d, G)$
+に対してある
+$y\in X$
+が存在して任意の
+$a\in A$
+に対して
+\[
+|d(a, y)-f(a)|\le \epsilon 
+\]
+が成り立つことである。
+\end{df}
+
+
+\begin{rmk}
+$\mathscr{F}(\mathscr{M}(G))$-入射的な空間は
+$\mathscr{F}(\mathscr{M}(G))$-近似入射的である.
+\end{rmk}
+
+
+
+近似入射性と完備性が合わさると，
+我々が主眼に置いている入射性が得られることを示そう．
+\begin{prop}\label{prop:katetov:compapprxinj}
+$G$
+を
+$\rr$
+の加法に関する部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+でありさらに
+$(Y, e)$
+を
+$(X, d)$
+の完備化とする．
+このとき
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{M}(G))$-近似入射的
+ならば
+$(Y, e)$
+も
+$\mathscr{F}(\mathscr{M}(G))$-近似入射的
+である．
+\end{prop}
+\begin{proof}
+任意の
+$\epsilon \in (0, \infty)$
+と
+$Y$
+の任意の有限部分集合
+$A$
+を与える.
+そして,
+$(Y, e)$が
+$(X, d)$の完備化であることから
+$X$の有限部分集合
+$B$
+で以下の条件を満たすものが存在する．
+\begin{itemize}
+\item $A$の各点$a$に対し,
+$b\in B$で
+$d(a,b)\le \epsilon /3$となるものが存在する
+\end{itemize}
+任意の
+$f\in E(A, d, G)$
+をとると
+補題
+ \ref{lem:katetov:McShane}
+ より
+$\kat(f)\in E(A, d, G)$
+であり，
+さらに
+$\kat(f)|_{B}\in E(B, d, G)$である．
+距離空間
+$(X, d)$
+の
+$\mathscr{F}(\mathscr{M}(R))$-近似入射性質
+を
+関数
+$\kat(f)|_{B}$
+に用いて, 
+任意の
+$b\in B$に対して
+\[
+|d(b,y)-\kat(f)(b)|\le \epsilon/3
+\]
+となる
+$y\in X$をとる.
+このとき
+$A$の各点
+$a\in A$
+に対して,
+$d(a,b)\le \epsilon/3$となる$b$をとると,
+\begin{align*}
+|d(a, y)-f(a)|&\le |d(a, y)-d(b, y)|+|d(b,y)-\kat(f)(b)|+|\kat(f)(b)-f(a)|\\
+&\le d(a, b)+|d(b,y)-\kat(f)(b)|+|\kat(f)(b)-f(a)|
+\le \epsilon
+\end{align*}
+となり,
+$(Y, e)$
+が
+$\mathscr{F}(\mathscr{M}(G))$-近似入射性質
+を持つことがわかる.
+\end{proof}
+
+
+
+
+\begin{prop}\label{prop:katetov:compinj}
+$G$
+を
+$\rr$
+の加法に関する部分群とする．
+$\mathscr{M}(G)$
+に属する距離空間
+$(X, d)$
+が完備でかつ, 
+$\mathscr{F}(\mathscr{M}(G))$-近似入射的
+ならば，
+$(X, d)$は
+$\mathscr{F}(\mathscr{M}(G))$-入射的である.
+\end{prop}
+\begin{proof}
+$X$
+の有限部分集合
+$A=\{x_1,x_2,\dots, x_n\}$
+と
+$f\in E(A, d, G)$
+を任意に与える．
+ここで，任意の
+$x\in A$
+について
+$f(x)>0$
+と仮定しても良い．
+なぜなら
+$f(a)=0$
+となる点
+$a\in A$
+が存在すれば
+補題 
+\ref{lem:katetov:onept}から
+任意の
+$x\in A$
+について
+$d(x, a)=f(x)$
+となり命題が成り立つことが直ちにわかるからである．
+さて
+$\delta=\min_{x\in A}\{f(x)\}$
+とおくと
+$\delta\in (0, \infty)$
+である．
+今から次のような
+$X$
+の点列
+$\{z_p\}_{p\in \nn}$
+を帰納的に構成して行く．
+\begin{align}
+&\forall p\in \nn\ \forall x\in A\ |d(z_p,x)-f(x)|\le \delta2^{-p}\\
+&\forall p\in \nn\ d(z_p, z_{p+1})\le \delta2^{1-p}
+\end{align}
+まず
+$(X, d)$の
+$\mathscr{F}(\mathscr{M}(R))$-近似入射性
+から条件
+$(1)$
+を満たすような
+$z_{1}$
+の存在がわかる．
+そして条件
+$(1)$
+と
+$(2)$
+を満たす有限点列
+$z_{1},\dots, z_{m}$
+がすでに構成されたとしよう．
+このとき条件
+$(1)$
+と
+$\delta$
+の定義から
+$z_{m}\not\in A$
+がわかる．
+そして
+$f_{m}\in E(A, d, G)$
+を$f_{m}(x)=d(z_{m}, x)$
+と定義する．
+すると帰納法の条件
+$(1)$から
+\[
+\theta(f_m, f)\le \delta2^{-m}
+\]
+である．ここで
+$\theta$
+は
+$E(A, d, G)$
+上の
+$\sup$
+距離である．
+関数
+$g_{m}\colon A\sqcup \{z_{m}\}\to \rr$を以下のように定義する．
+\[
+g_{m}(x)=
+\begin{cases}
+f(x)\  (=\theta(p_x, f)) & \text{if $x\in A$}\\
+\theta(f_m, f) & \text{if $x=z_{m}$}
+\end{cases}
+\]
+すると
+$g_{m}\in E(A\sqcup\{z_m\}, d, G)$
+である．
+なぜなら
+$g_{m}$
+は
+$(E(A, d, G), \theta)$
+のなかでの
+$f$
+との距離を表す関数だからである．
+さて，
+$(X, d)$
+の
+$\mathscr{F}(\mathscr{M}(G))$-近似有限単射性
+から，
+ある
+$z\in X$
+が存在して，
+任意の
+$y\in A\sqcup\{z_{m}\}$
+について
+\[
+|g_{m}(y)-d(z, y)|\le \delta2^{-(m+1)}
+\]
+となるようなものが存在する．
+この不等式において
+$y=x\in A$
+とすると
+$g_{m}$の定義から
+\[
+|f(x)-d(z,x)|\le \delta2^{-(m+1)}
+\]
+がわかりまた
+$y=z_{m}$
+とすると
+\[
+d(z_{m}, z)\le g_{m}(z_{m})+\delta2^{-(m+1)}\le \delta2^{-m}+\delta2^{-(m+1)}
+\le\delta 2^{1-m}
+\]
+がわかるので，
+$z_{m+1}=z$とおけばこれは条件
+$(1)$と$(2)$を充たす．
+以上で
+$\{z_{p}\}_{p\in\nn}$の存在が分かった．
+ところで，
+$\{z_{p}\}_{p\in \nn}$
+は
+$(2)$
+の条件からコーシー列なので収束値
+$y\in X$を持つ．
+すると
+$(1)$
+において
+$p\to \infty$として
+\[
+\forall x\in A\ |d(y, x)-f(x)|=0
+\]
+を得る．
+このことから
+$(X, d)$
+の
+$\mathscr{F}(\mathscr{M}(G)$-入射性質
+がわかる．
+\end{proof}
+
+
+$\mathscr{F}(\mathscr{M}(G))$-入射的な空間は
+$\mathscr{F}(\mathscr{M}(G))$-近似入射的であることと，
+命題 \ref{prop:katetov:compapprxinj},  \ref{prop:katetov:compinj}から次の系が従う．
+%
+\begin{cor}\label{cor:katetov:completion}
+$G$
+を
+$\rr$の加法に関する部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+でありさらに
+$(Y, e)$
+を
+$(X, d)$の完備化とする．
+このとき
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{M}(G))$-入射的
+ならば
+$(Y, e)$
+も
+$\mathscr{F}(\mathscr{M}(G))$-入射的である。
+\end{cor}
+
+
+$Q$
+は
+$\rr$
+の稠密部分集合とする．
+今から
+Kat\v{e}tov mapの空間において，
+「$Q$に値をとるKat\v{e}tov map全体」
+が稠密になることを示したい．
+これは色々な論文では自明のように使われていることだが，以下で見るように多少苦労する事柄である．
+
+
+
+
+\begin{lem}\label{lem:katetov:kinjidaiji}
+$Q$
+を
+$\rr$
+の稠密部分集合とし，
+$n\in \zz_{>0}$
+とする．
+このとき
+任意の
+$\epsilon\in (0, \infty)$と
+$n$
+項からなる任意の正の実数列
+$x_{1}, \dots, x_{n}$
+に対して
+$n$項からなる
+$Q_{>0}$
+内の列
+$r_{1}, \dots, r_{n}$
+が存在して以下を満たす．
+\begin{enumerate}
+\item 
+任意の
+$i, j\in \{1, \dots, n\}$
+に対して
+$|r_{i}-r_{j}|\le |x_{i}-x_{j}|$
+\item 
+$i, j\in \{1, \dots, n\}$
+について，
+$x_{i}\neq x_{j}$
+が成り立つならば
+$|r_{i}-r_{j}|<|x_{i}-x_{j}|$
+\item 
+任意の
+$i\in \{1, \dots, n\}$
+に対して
+$x_{i}<r_{i}$
+\item 
+任意の
+$i\in \{1, \dots, n\}$
+に対して
+$|r_{i}-x_{i}|<\epsilon$
+\end{enumerate}
+
+\end{lem}
+\begin{proof}
+
+
+まず，
+$x_{1}, \dots, x_{n}$
+が定数列であるとき，
+すなわち
+任意の
+$i\in \{1, \dots, n\}$
+について
+$x_{i}=x_{1}$
+のときは
+$r_{1}$
+をなんでもいいので
+$(x_{i}, x_{i}+\epsilon)\cap Q_{>0}$
+の元
+とし，
+任意の
+$i\in \{1, \dots, n\}$
+について$r_{i}=r_{1}$
+と定義すれば主張の条件を満たす．
+
+以降では
+$x_{1}, x_{2}, \dots, x_{n}$は定数列ではないとする．
+すると集合
+$\{\, |x_{i}-x_{j}| \mid r_{i}\neq r_{j}\, \}$
+は空集合ではないので最小値が定義できる：
+\[
+\delta=\min\{\, |x_{i}-x_{j}| \mid r_{i}\neq r_{j}\, \}
+\]
+とおくと
+$\delta\in (0, \infty)$
+である．
+そして
+\[
+\eta=\min\{\delta, \epsilon \}
+\]
+とおく．
+
+
+$x_{1}, \dots, x_{n}$の番号を付け替えて
+\[
+x_{n}\le x_{n-1}\le,  \dots, \le x_{2}\le x_{1}
+\]
+を満たすと仮定しても良い．
+
+$m$に関する帰納法で
+$r_{1}, \dots, r_{m}\in Q_{>0}$であって以下を満たすものを帰納的に定義していく．
+\begin{enumerate}
+\item 
+任意の$i, j\in \{1, \dots, m\}$に対して
+$|r_{i}-r_{j}|\le |x_{i}-x_{j}|$
+\item 
+$i, j\in \{1, \dots, m\}$について，
+$x_i\neq x_j$が成り立つならば
+$|r_{i}-r_{j}|<|x_{i}-x_{j}|$
+\item 
+任意の
+$i\in \{1, \dots, m\}$
+に対して
+$  x_{i}<r_{i}$
+\item 
+任意の
+$i\in \{1, \dots, m\}$
+に対して
+$|r_{i}-x_{i}|<2^{i-n}\eta$
+\end{enumerate}
+
+
+まず$r_{1}$
+はなんでもいいので
+$(x_{i}, x_{i}+2^{1-n}\eta)\cap Q_{>0}$
+とする．
+そして，
+$r_{1}, \dots, r_{m}$
+が構成されたとして
+$r_{m+1}$
+を構成する．
+
+
+
+もしも
+$x_{m}=x_{m+1}$
+ならば
+$r_{m+1}=r_{m}$
+とする．
+$2^{m-n}\le 2^{m+1-n}$
+なので
+ちゃんと帰納法の条件をすべて満たす．
+
+次に$x_{m+1}<x_{m}$
+の場合を考える．
+いま，
+$\eta$
+と
+$\delta$
+の定義から
+$\eta\le|x_{m+1}-x_{m}|$
+なので
+\[
+(x_{m+1}+2^{m-n}\eta, \  x_{m+1}+2^{m+1-n}\eta)
+\]
+の元は全て
+$x_{m}$
+よりも小さい．
+さて
+$r_{m+1}$
+を
+なんでもいいので
+\[
+(x_{m+1}+2^{m-n}\eta, \  x_{m+1}+2^{m+1-n}\eta)\cap Q_{>0}
+\]
+の
+元とする．
+このとき任意の
+$i\in \{1, \dots, m\}$
+について
+$r_{m+1}<x_{m}\le x_{i}\le r_{i}$
+であり，
+帰納法の仮定から
+$|r_{i}-x_{i}|\le 2^{i-n}\eta$
+なので
+\begin{align*}
+|r_{m+1}-r_{i}|
+&=
+r_{i}-r_{m+1}
+< r_{i} - x_{m+1}-2^{m-n}\eta
+< x_{i}+2^{i-n}\eta-x_{m+1}-2^{m-n}\eta\\
+&=|x_{i}-x_{m+1}|+(2^i-2^{m})2^{-n}\eta
+\le |x_{i}-x_{m+1}|
+\end{align*}
+となるので，
+$|r_{i}-r_{m+1}|<|x_{i}-x_{m+1}|$
+がわかる．
+以上のことから
+$r_{1}, \dots, r_{m}, r_{m+1}$
+は
+\begin{enumerate}
+\item 
+任意の
+$i, j\in \{1, \dots, m+1\}$
+に対して
+$|r_{i}-r_{j}|\le |x_{i}-x_{j}|$
+\item 
+$i, j\in \{1, \dots, m+1\}$
+について，
+$x_{i}\neq x_{j}$が成り立つならば
+$|r_{i}-r_{j}|<|x_{i}-x_{j}|$
+も成り立つ．
+
+\item 
+任意の
+$i\in \{1, \dots, m+1\}$
+に対して
+$x_{i}<  r_{i}$
+\item 
+任意の
+$i\in \{1, \dots, m+1\}$
+に対して
+$|r_{i}-x_{i}|<2^{i-n}\eta$
+\end{enumerate}
+を満たす．
+よって帰納法によって得られた
+$r_{1}, \dots, r_{n}$
+は主張の条件を満たす．
+\end{proof}
+
+
+
+\begin{cor}\label{cor:katetov:dense}
+$Q$
+は
+$\rr$
+の稠密部分集合とする．
+このとき
+任意の
+$(A, a)\in \mathscr{F}(\mathscr{M}(\rr))$
+に対して
+$E(A, a, \rr)$
+の部分集合
+\begin{align*}
+\{\, &f\in E(A, a, \rr)\mid \text{$\forall x\in A\ f(x)\in Q_{>0}$かつ}\\
+&\text{
+任意の
+$x, y\in A$について
+$a(x, y)<f(x)+f(y)$で}\\
+&\text{
+$x\neq y$
+ならば
+$|f(x)-f(y)|<a(x, y)$
+}
+\, \}
+\end{align*}
+は
+$(E(A, a, \rr), \theta)$
+の中で稠密である．
+\end{cor}
+
+
+
+近似入射性，
+そしてそれと完備性と入射性の関係，
+稠密性の議論を上で行ったので，
+以下の系が得られる．
+我々がどのようにして普遍空間を得ようとしているのか示唆的ではないだろうか．
+
+\begin{cor}\label{cor:katetov:compbecomesUrysohn}
+$Q$
+は
+$\rr$
+の稠密部分集合で
+$0\in Q$
+とする．
+$(U, D)$
+を
+$\mathscr{F}(\mathscr{M}(Q))$-入射的距離空間
+とする（存在しない場合もあるかもしれないが，その場合でもこの系自体は真である）．
+このとき
+$(U, D)$
+の完備化は
+$\mathscr{F}(\mathscr{M}(\rr))$-入射的距離空間になる．
+\end{cor}
+\begin{proof}
+$(X, d)$
+を
+$(U, D)$
+の完備化とする．
+$\epsilon\in (0, \infty)$
+を任意にとる．
+$A=\{a_{1}, \dots, a_{n}\}$
+を
+$(X, d)$
+の任意の有限部分集合とする．
+$f\in E(A, d, \rr)$
+とする．
+このとき
+系
+\ref{cor:katetov:dense}から
+$g\in E(A, d, \rr)$
+で以下の三つの条件を満たすものが存在する．
+\begin{enumerate}
+\item 
+任意の
+$i\in \{1, \dots, n\}$
+について
+$f(a_i)\in Q_{>0}$
+である．
+\item 
+任意の
+$i\in \{1, \dots, n\}$
+について
+\[
+|f(a_i)-g(a_i)|\le \epsilon/2
+\]
+が成り立つ．
+\item 
+任意の
+$i, j\in \{1, \dots, n\}$
+について
+\[
+d(a_{i}, a_{j})<g(a_{i})+g(a_{j})
+\]
+でなおかつ
+$i\neq j$ならば
+\[
+|g(a_{i})-g(a_{j})|<d(a_{i}, a_{j})
+\]
+が成り立つ．
+
+\end{enumerate} 
+
+
+ここで
+\[
+\delta=\min_{i\neq j}\{d(a_{i}, a_{j})-|g(a_{i})-g(a_{j})|\}
+\]
+\[
+\gamma=\min_{i, j\in \{1, \dots, n\}}\{ 
+g(a_{i})+g(a_{j})-d(a_{i}, a_{j})
+\}
+\]
+とすると
+$\delta, \gamma\in (0, \infty)$である．
+さらに
+\[
+\alpha=\min_{i\neq j}\{d(a_{i}, a_{j})\}
+\]
+とおき，
+そして
+\[
+\eta=\frac{1}{2}\min\{\alpha, \delta, \gamma, \epsilon \}
+\]
+とする．
+
+
+
+このとき
+$U$
+の部分集合
+$B=\{b_{1}, \dots, b_{n}\}$
+であって
+任意の
+$i\in \{1, \dots, n\}$
+について
+$d(a_{i}, b_{i})\le \eta/2$
+となるものを取ると，
+任意の
+$i, j\in \{1, \dots, n\}$について
+\[
+|d(a_{i}, a_{j})-D(b_{i}, b_{j})|\le \eta
+\]
+を満たす．
+よって，
+$\eta< \delta$と$\eta< \gamma$
+と
+$g\in E(A, d, \rr)$から，
+任意の
+$i, j\in \{1, \dots, n\}$
+について
+\[
+|g(a_{i})-g(a_{j})|\le d(b_{i}, b_{j})\le g(a_{i})+g(a_{j})
+\]
+が成り立つ．
+よって
+$h\colon  B\to Q$
+を
+$h(b_i)=g(a_i)$
+と定義すると
+$h\in E(B, d, \rr)$
+である．
+よって
+$(U, D)$
+の
+$\mathscr{F}(\mathscr{M}(R))$-入射性
+から
+$z\in U$が存在して
+$D(z, b_{i})=h(b_{i})$
+となる．
+$h(b_{i})=g(a_{i})$
+などを使って
+この
+$z\in U$
+について，
+\begin{align*}
+|d(a_{i}, z)-f(a_{i})|&\le |d(a_{i}, z)-D(b_{i}, z)|+|D(b_{i}, z)-f(a_{i})|\\
+&\le d(a_{i}, b_{i})+|h(b_{i})-f(a_{i})|= d(a_{}i, b_{i})+|g(a_{i})-f(a_{i})|\\
+&\le \epsilon/2+\epsilon/2=\epsilon
+\end{align*}
+を得るので
+$(X, d)$
+は
+$\mathscr{F}(\mathscr{M}(\rr))$-近似入射的
+である．
+このことと
+$(X, d)$
+が完備であることから
+命題 
+\ref{prop:katetov:compinj}
+を用いて
+$(X, d)$
+が
+$\mathscr{F}(\mathscr{M}(\rr))$-入射的
+であることがわかる．
+\end{proof} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{距離関数の接着による普遍空間の構成}\label{sec:sechaku}
+この節ではUrysohnによる普遍空間の構成を紹介する．
+そのためにまず距離空間同士をくっつける距離空間の接着補題という議論について紹介する．
+このセクションは他のセクションに比べて独立度が高い．
+正直なところ，
+このセクションの存在理由は，
+主に歴史に敬意を払っているのである．
+この文章がやや長くなっている理由の一つである．
+
+
+
+最近は
+Kat\v{e}tovの方法が主流なので，歴史的議論をしっかり読んでおきたいというのでなければ別にこのセクションは読み飛ばして構わない．
+\subsection{距離関数の接着補題}
+
+
+
+%%%%%
+以下の距離関数の接着に関する議論は 
+\cite[Theorem 2.1]{Bo2002}
+などに見られるが，
+Urysohnの普遍空間の論文
+ \cite{Ury1}
+ や
+  \cite{Ury2}などでも同様の議論があるので，
+folkloreのように見える．
+\begin{lem}\label{lem:amal:pushout1}
+$G$
+を
+$\{0\}$
+ではない
+$\rr$
+の加法に関する部分群とする．
+そして
+$(X, d), (Y, e)\in \mathscr{F}(\mathscr{M}(G))$
+とし，
+$X\cap Y\neq \emptyset$
+でなおかつ
+任意の
+$a, b\in X\cap Y$について
+\[
+d(a, b)=e(a, b)
+\]
+が成り立つ
+と仮定する．
+このとき関数
+$k\colon  (X\cup Y)^2\to \rr$
+を
+\begin{align*}
+	w(x, y)=
+		\begin{cases}
+		d_{X}(x, y) & \text{if $x, y\in X$;}\\
+		d_{Y}(x, y) & \text{if $x, y\in Y$;}\\
+		\min_{z\in X\cap Y}(d_{X}(x, z)+d_{Y}(z, y)) & \text{if $(x, y)\in X\times Y$. }
+		\end{cases}
+\end{align*} 
+と定義すると
+$w$
+は
+$X\cup Y$
+上の距離関数であり，以下を満たす．
+\begin{enumerate}
+\item $w|_{X^2}=d_{X}$; 
+	\item 
+	$w|_{Y^2}=d_{Y}$. 
+	
+	
+	\item 
+	$(X\cup Y, w)\in \mathscr{F}(\mathscr{M}(G))$. 
+\end{enumerate}
+
+
+
+
+\end{lem}
+\begin{proof}
+まず
+$d_{X}|_{(X\cap Y)^2}=d_{Y}|_{(X\cap Y)^2}$
+という仮定から
+$w$
+がwell-definedであることがわかる．
+
+
+最初に
+$x, y\in X$ 
+かつ
+$z\in Y$
+の場合を考える．
+このとき
+$w$
+の定義から
+$a, b\in X\cap Y$
+であって
+$w(x, z)=d_{X}(x, a)+d_{Y}(a, z)$
+と
+$w(y, z)=d_{X}(y, b)+d_{Y}(b, z)$
+を満たすものが取れる．
+そして
+\begin{align*}
+	w(x, y)&=
+	d_{X}(x, y)\le d_{X}(x, a)+d_{X}(a, b)+d_{X}(b, y)
+	=d_{X}(x, a)+d_{Y}(a, b)+d_{X}(b, y)\\
+	&\le (d_{X}(x, a)+d_{Y}(a, z))+(d_{Y}(z, b)+d_{X}(b, y))
+	=w(x, z)+w(z, y). 
+\end{align*}
+がわかるので， 
+$w(x, y)\le w(x, z)+w(z, y)$
+である．
+
+
+
+次に
+$x, z\in  X$
+かつ
+$y\in Y$
+の場合を考える．
+$w$
+の定義から
+$a\in X\cap Y$
+であって
+$w(z, y)=d_{X}(z, a)+d_{Y}(a, y)$
+となるものが存在する．
+よって
+\begin{align*}
+	w(x, y)
+	&\le
+	 d_{X}(x, a)+d_{Y}(a, y)
+	\le 
+	d_{X}(x, z)+d_{X}(z, a)+d_{Y}(a, y)
+	=w(x, z)+w(z, y). 
+\end{align*}
+なので
+$w(x, y)\le w(x, z)+w(z, y)$
+となることがわかる．
+$X$
+と
+$Y$
+の役割を入れ替えると，
+起こりうる全ての場合について
+三角不等式が証明されたことになるので，
+結局
+$w$ 
+は
+$X\cup Y$
+上の距離関数である．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:amal:pushout2}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とする．
+そして
+$(X, d), (Y, e)\in \mathscr{F}(\mathscr{M}(R))$
+とし，
+$X\cap Y=\emptyset$と仮定する．
+そして
+$r$
+を
+$\max\{\di(X, d), \di(Y, e)\}\le 2r$
+を満たす実数とする．
+このとき関数
+$h\colon (X\cup Y)^2\to \rr$
+を
+\begin{align*}
+	h(x, y)=
+		\begin{cases}
+		d_{X}(x, y) & \text{if $x, y\in X$;}\\
+		d_{Y}(x, y) & \text{if $x, y\in Y$;}\\
+		r & \text{otherwise.}
+				\end{cases}
+\end{align*} 
+と定義すると
+$h$
+は
+$X\cup Y$
+上の距離関数であり，以下を満たす．
+\begin{enumerate}
+\item $h|_{X^2}=d_{X}$; 
+	\item $h|_{Y^2}=d_{Y}$. 
+	\item $(X\cup Y, h)\in \mathscr{F}(\mathscr{M}(R))$. 
+\end{enumerate}
+\end{lem}
+\begin{proof}
+$h$
+が三角不等式を満たすことがわかれば
+$(1)$, 
+$(2)$, 
+$(3)$
+がわかるので，
+以下ではそれを示す．
+
+
+
+まず最初に
+$x, y\in X$ 
+であり
+$z\in Y$
+である
+場合を考える．
+すると$h$の定義から
+\begin{align*}
+	h(x, y)=d_{X}(x, y)\le \di(X, d)\le 2r=h(x, z)+h(z, y). 
+\end{align*}
+がわかるので
+$h(x, y)\le h(x, z)+h(z, y)$を得る．
+次に
+$x, z\in  X$ 
+かつ 
+$y\in Y$
+の場合を考える．
+このとき
+\begin{align*}
+	h(x, y)&=r \le d_{X}(x, z)+r =h(x, z)+h(z, y). 
+\end{align*}
+なので
+$h(x, y)\le h(x, z)+h(z, y)$である．
+
+$X$
+と
+$Y$
+の役割を入れ替えることによって，
+起こりうる全ての場合に三角不等式を証明できたことになるので
+結局
+$h$
+が三角不等式を満たすことがわかる．
+\end{proof}
+
+
+
+
+\begin{df}\label{df:amal:pushoutspace}
+$G$
+を
+$\rr$
+の加法に関する部分群で
+$\{0\}$
+ではないとする．
+$(X, d), (Y, e)\in \mathscr{F}(\mathscr{M}(G))$
+とし，
+等長埋め込み
+$f\colon (A, l)\to (X, d)$
+$g\colon  (A, l)\to (Y, e)$
+が与えられているとする．
+そして
+$X\cap Y=\emptyset$
+となるように台集合をとり直す．
+このとき
+記号
+\[
+X\coprod_{A, l, f, g}Y
+\]
+で
+$X$
+と
+$Y$
+の点
+$x\in X, y\in Y$
+のうち
+$x=f(a), y=g(a)$
+となる
+$a\in A$
+が存在するものを同一視した集合を表すとする．
+このとき
+$f\colon  A\to f(A)\subset X\coprod_{A, l, f, g}Y
+$
+と
+$g\colon  A\to g(A)\subset X\coprod_{A, l, f, g}Y
+$
+は全単射である．
+以下では
+$A$
+と
+$f(A)$
+と
+$g(A)$
+を同一視する．
+すると
+$f$
+と
+$g$
+から誘導されるの同一視の元で，
+$X\cap Y=A$
+となる．
+今
+$A\neq \emptyset$
+とする．
+このとき
+記号
+\[
+d\coprod_{A, l, f, g}e
+\]
+で補題 
+\ref{lem:amal:pushout1}
+を使って得られる距離関数とする．
+そして
+$A=\emptyset$
+のときには
+$r=\max\{\di(X, d), \di(Y, e)\}$
+として
+補題
+ \ref{lem:amal:pushout2}
+ で構成される距離関数を表すとする．
+基本的に
+$X\coprod_{A, l, f, g}Y$
+には以上で述べた距離しか入れない
+ので，
+$X\coprod_{A, l, f, g}Y$
+上のカノニカルな距離といったら
+$d\coprod_{A, l, f, g}e$
+にのことを指すことにする．
+
+$l, f, g$
+が明記しなくてもわかる場合には単に
+\[
+X\coprod_{A}Y
+\]
+などと書くことにする．
+
+この空間を
+\textbf{$(X, d)$と$(Y, e)$を$A, f, g$で張り合わせた接着空間}
+と呼ぶ．
+もしくは単に
+\textbf{接着空間}
+や
+\textbf{pushout}
+とか呼ぶ．
+
+  \[
+   \xymatrix@ur{
+A \ar[r]^f \ar[d]_g & X \ar@{.>}[d] \\
+Y \ar@{.>}[r] & X\coprod_{A, l, f, g}Y
+ & }
+\]
+
+
+\end{df}
+
+\subsection{Urysohnによる方法}
+この節ではUrysohnによる普遍空間の構成を紹介する．
+この方法はモデル理論における
+Fra\"{i}ss\'{e} limit
+の一種とみなすことができる．
+モデル理論における
+Fra\"{i}ss\'{e} limit
+については例えば
+\cite{Hodges}などを参照のこと．
+
+
+今から
+$\rr$
+の可算な加法部分群
+$G$
+に対して
+可算な
+$\mathscr{M}(G)$-pre-Urysohn
+普遍空間を構成する．
+以下の構成法は
+ \cite{Ury1}
+ と 
+ \cite{Ury2}
+で述べられている方法を現代風に書き出したものである．
+\begin{thm}\label{thm:amal:exist} 
+$G$
+を
+$\rr$
+の加法に関する部分群で
+$\card(G)=\aleph_0$
+とする．
+このとき
+可算な
+$\mathscr{M}(G)$-pre-Urysohn
+普遍空間が存在する．
+\end{thm}
+\begin{proof}
+$\mathscr{F}(\mathscr{M}(G))$
+を等長写像で割ると可算なクラスになる．
+その完全代表系を
+$\mathcal{W}$
+とする．
+すなわち，
+$\mathcal{W}$
+は以下を満たす．
+\begin{enumerate}
+\item 
+$\mathcal{W}$
+は可算集合である．
+\item 
+$\mathcal{W}$
+の元は
+$\mathscr{F}(\mathscr{M}(G))$に属している．
+\item 
+任意の
+$(F, d)\in \mathscr{F}(\mathscr{M}(G))$
+に対して，
+$(F, d)$
+と等長同型になる有限距離空間が
+$\mathcal{W}$
+に存在する．
+\item 
+$\mathcal{W}$
+の元同士は互いに等長同型ではない．
+\end{enumerate}
+
+
+
+さて番号付けされた
+$\mathcal{W}$
+の元とその部分集合の組
+\[
+\{((A_i, d_i, B_i)\}_{i\in \nn}
+\]
+を次を満たすように構成できる．
+\begin{enumerate}
+\item 
+任意の
+$i\in \nn$
+に対して
+$B_{i}\subset A_{i}$
+である．
+\item 
+任意の
+$(A, d)\in \mathscr{F}(\mathscr{M})(G)$
+と任意の
+$B\subset A$
+について
+$\{i\in \nn\mid (A, B, d)\sim((A_i, B_i, d_i))\}$
+が無限集合になる．
+ここで
+$(A, B, d)\sim((A_{i}, B_{i}, d_{i})$
+は等長同型写像
+$f\colon  (A, d)\to (A_{i}, d_{i})$
+が存在し
+$f(B)=B_{i}$
+となることを意味する．
+\end{enumerate}
+
+
+今から有限距離空間の列
+$\{(M_{n}, e_{n})\}_{n\in \nn}$
+で以下の条件を満たすものを帰納的に構成する．
+\begin{enumerate}
+\item 任意の$n\in \nn$について
+$(M_{n}, e_{n})$
+の中で
+$(B_{n}, d_{n})$
+と等長な任意の部分空間
+$(P, e_{n})$
+と等長同型写像
+$\phi\colon  (B_{n}, d_{n})\to (P, e_{n})$
+について等長埋め込み
+$\Phi\colon  (A_{n}, d_{n})\to (M_{n}, d_{n})$
+で
+$\phi_{B_{n}}=\phi$
+となるものが存在する．
+\end{enumerate}
+$n=1$のとき
+$M_{1}=A_{1}$で
+$e_{1}=d_{1}$
+とする．
+$(M_{n}, e_{n})$
+が構成されたとして
+$(M_{n+1}, e_{n+1})$
+を構成する．
+$(M_{n}, e_{n})$
+に
+$(A_{n+1}, B_{n+1}, d_{n+1})$
+を貼り付ける構成法である．
+$(B_{n+1}, d_{n+1})$
+と等長な
+$(M_{n}, e_{n})$
+の
+部分空間を全て書き出して
+\[
+C_{n, 1}, \dots, C_{n, m}
+\]
+とする．
+そのような部分空間が全く存在しないときには
+$m=1$で$C_{n, 1}=\emptyset$
+とする．
+そして
+\[
+M_{n+1, 1}=M_{n}\coprod_{C_{n, 1}}B_{n+1}
+\]
+とし帰納的に
+\[
+M_{n+1, i+1}=M_{n+1, i}\coprod_{C_{n, i+1}}B_{n+1}
+\]
+と定義する．
+
+そして
+\[
+M_{n+1}=M_{n+1, m}
+\]
+と定義する．
+距離
+$e_{n+1}$
+は接着空間のカノニカルな距離とする．
+以上で有限距離空間の列
+$\{(M_n, e_n)\}_{n\in \nn}$
+の構成が終わった．
+
+
+
+
+そして
+$(M_{n}, e_{n})$
+を
+$(M_{n+1}, e_{n+1})$
+の部分距離空間とみなして
+\[
+M=\bigcup_{n\in \nn}M_{n}
+\]
+と定義し
+$M$
+上の距離
+$e$
+を
+$x, y\in M$
+に対して
+$x, y\in M_{n}$
+となる
+$n\in \nn$
+を取り，
+\[
+e(x, y)=e_n(x, y)
+\]
+とすると
+$e$
+はwell-definedである．
+今からこの
+$(M, e)$
+が可算な
+$\mathscr{M}(G)$-pre-Urysohn
+空間
+となっていることを示そう．
+まず
+$M$
+が可算集合なのは各
+$M_{n}$
+が有限集合であることからわかる．
+次に入射性について考えよう．
+有限集合
+$F\subset M$
+を任意に与える．
+$G=H\sqcup \{p\}$
+は有限距離空間で
+$H$
+と
+$F$
+は等長であるとする．
+このとき
+$k$
+を十分大きく取れば
+$A_{k}=F$
+となるので，
+$F\subset M_{k+1}$となる．
+また，十分大きい
+$n$
+をとると
+$k<n$
+となり，
+$A_{n+1}$
+は
+$G$
+に等長で
+$B_{n+1}$
+が
+$F$
+に等長である．
+そして
+$M$
+の定義から
+\[
+M_{n}\coprod_{F}B_{n+1}\subset M_{n+1}
+\]
+である．
+よって等長写像
+$G\to M$
+が構成できたので
+$M$
+は可算な
+$\mathscr{M}(G)$-Urysohn空間である．
+\end{proof}
+
+$\qq$
+が
+$\rr$
+の加法部分群であることと，
+系 
+\ref{cor:katetov:compbecomesUrysohn}
+と
+定理 
+\ref{thm:amal:exist} 
+から次のことがわかる．
+\begin{cor}\label{cor:amal:existUrysohn}
+$\mathscr{M}(\rr)$-Urysohn
+普遍距離空間が存在する．そしてそれは
+可算な
+$\mathscr{M}(\qq)$-pre-Urysohn
+普遍距離空間の完備化として得られる．
+\end{cor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newpage
+\section{距離空間の包絡}\label{sec:houraku}
+この節ではUrysohn普遍距離空間を構成するのに有効な
+距離空間の包絡という概念を導入し，
+それを用いた
+普遍空間の構成を紹介する．
+この距離空間の包絡という概念は
+この文章独自のものなので注意されたし．
+ただし手法自体は
+論文 
+\cite{Ka}
+や 
+\cite{Greenbook}
+に同様の方法が見られる．
+例えば 
+\cite{Greenbook}
+にある
+$K_{d}$-extension
+という概念はここで定義する
+包絡の参考になった．
+命題 
+\ref{prop:func:envext}, 
+\ref{prop:func:envlimittedext}
+は
+論文 
+\cite{Ka}
+や 
+\cite{Greenbook}
+に見られる
+普遍空間の構成法をもとに定式化した．
+セクション
+ \ref{sec:sechaku}で述べた
+距離空間の接着による普遍空間の構成も
+包絡による構成に結びつけれらるような気もするが，
+命題 
+\ref{prop:func:envext}, 
+\ref{prop:func:envlimittedext}
+と同様の形でまとめれらるようには見えない．
+
+
+\subsection{説明}
+
+\begin{df}\label{df:func:envelope}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となるものとする．
+距離空間
+$(X, d)\in \mathscr{M}(R)$
+について
+距離空間
+$(Y, e)\in \mathscr{M}(R)$
+と
+写像
+$I\colon  X\to Y$
+の組
+$((Y, e), I)$
+が
+$(X, d)$の$\mathscr{M}(R)$-包絡
+であるとは以下の条件を満たすときにいう．
+\begin{enumerate}
+\item 
+$I\colon  (X, d)\to (Y, e)$
+は等長埋め込み写像である．
+\item 
+任意の距離空間
+$(A\sqcup \{\omega\}, a)\in \mathscr{F}(\mathscr{M}(G, L))$
+と等長埋め込み写像
+$f\colon  (A, a)\to (X, d)$
+に対して
+等長写像
+$F\colon  (A\sqcup \{\omega\}, a)\to (Y, e)$
+が存在し
+$F|_A=(I\circ f)|_{A}$
+を満たす．
+\end{enumerate}
+\end{df}
+
+
+
+
+\begin{prop}\label{prop:func:envext}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とする．
+このとき任意の
+$(X, d)\in\mathscr{M}(R)$
+に対して
+$\mathscr{M}(R)-$包絡対
+が存在すると仮定し，
+$(U(X), U(d))$
+を
+$(X, d)$
+の
+$\mathscr{M}(R)$-包絡
+とし，
+付随する等長写像を使って一般に
+$(X, d)$
+を
+$(U(X), U(d))$
+の部分空間とみなす．
+そして帰納的に
+$U^{n+1}(X)=U(U^{n}(X))$
+$U^{n+1}(d)=U(U^{n}(d))$
+と定義し，
+
+$U^{\omega}(X)$
+を
+\[
+U^{\omega}(X)=\bigcup_{i\in \nn}U^{i}(X)
+\]
+と定義し，
+$U^{\omega}(X)$
+上の距離
+$U^{\omega}(d)$
+を
+$x, y\in U^{\omega}(X)$
+に対して
+$x, y\in U^{n}(X)$
+となる
+$n$
+を適当に取って
+\[
+U^{\omega}(d)(x, y)=
+U^n(d)(x, y)
+\]
+と定義する．
+このとき
+任意の
+$(X, d)\in \mathscr{M}(R)$
+に対して
+$U^{\omega}(d)$
+はwell-definedであり，
+なおかつ
+$(U^{\omega}(X), U^{\omega}(d))$
+は
+$\mathscr{M}(R)$-pre-Urysohn
+普遍距離空間
+である．
+\end{prop}
+\begin{proof}
+まず最初に
+$U^{\omega}(d)$のwell-definedness
+を示そう．
+一般に距離空間
+$(A, e)\in \mathscr{M}(R)$
+は
+$(U(A), U(e))$
+の部分距離空間になっているので
+この
+$U^{\omega}(d)$
+はwell-definedである．
+
+
+
+
+任意の
+$n\in \nn$
+に対して
+$(U^{n}(X), U^{n}(d))$
+は
+$(U^{\omega}(X), U^{\omega}(d))$
+の部分距離空間であることに注意しよう．
+
+
+
+次に
+$(U^{\omega}(X), U^{\omega}(d))$
+が
+$\mathscr{F}(\mathscr{M}(R))$-入射性質
+を満たすことを示そう．
+今任意の有限距離空間
+$(A\sqcup\{z\}, e)\in \mathscr{M}(R)$
+と等長埋め込み
+$\phi\colon  A\to U^{\omega}(X)$
+が与えられているとする．
+このとき十分大きい
+$n$
+を取れば
+$\phi(A)\subset U^{n}(X)$
+である．
+よって
+$U^{n+1}(X)$
+の包絡性から
+等長埋め込み
+$\Phi\colon  A\to U^{n+1}(X)$
+で
+$\phi$
+の拡張になっているものが存在する．
+さらに
+$U^{n+1}(X)\subset U^{\omega}(X)$
+なので
+$(U^{\omega}(X), U^{\omega}(d))$
+が
+$\mathscr{F}(\mathscr{M}(R))$-入射的
+であることがわかる．
+
+
+
+最後に
+$U^{\omega}(X)$
+は可分距離空間の可算和集合なので
+可分である．
+よって
+$(U^{\omega}(X), U^{\omega}(d))$
+は
+$\mathscr{M}(R)$-pre-Urysohn
+普遍距離空間となる．
+\end{proof}
+
+
+
+\begin{prop}\label{prop:func:envlimittedext}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+を満たすとする．
+$\rr$
+の部分集合の列$\{R_i\}_{i\in \nn}$
+は
+\begin{enumerate}
+\item 
+$0\in R_{1}$
+\item 
+任意の
+$i\in \nn$
+について
+$R_{i}\subset R_{i+1}$である．
+\item 
+\[
+R=\bigcup_{i\in \nn}R_{i}
+\]
+\end{enumerate}
+を満たす
+とする．
+$\mathscr{S}_{i}$
+を
+$\mathscr{M}(R_{i})$
+の空ではない部分クラスとする．
+このとき
+任意の
+$i\in \nn$
+と
+任意の
+$(X, d)\in\mathscr{S}_{i}$
+に対して
+$\mathscr{M}(R_{i+1})$-包絡
+$(Y, e, I)$
+で
+あって
+$(Y, e)\in \mathscr{S}_{i+1}$
+となるもの
+が存在すると仮定する．
+任意の
+$i\in \nn$
+について
+$(U_{i}(X), U_{i}(d))$
+を
+$(X, d)\in \mathscr{S}_{i}$
+の
+$\mathscr{M}(R_{i+1})$-包絡
+とし，
+付随する等長写像を使って
+$(X, d)$
+を
+$(U_{i}(X), U_{i}(d))$
+の部分空間とみなす．
+そして
+帰納的に
+\[
+W^{n+1}(X)=U_{i+1}(W^{n}(X))
+\]
+で
+\[
+W^{n+1}(d)=U_{i+1}(W^{n}(d))
+\]
+と定義する．
+そして
+$W^{\omega}(X)$を
+\[
+W^{\omega}(X)=\bigcup_{i\in \nn}W^{i}(X)
+\]
+と定義し，
+$W^{\omega}(X)$
+上の距離
+$W^{\omega}(d)$
+を
+$x, y\in W^{\omega}(X)$
+に対して
+$x, y\in W^{n}(X)$
+となる
+$n$
+を適当に取って
+\[
+W^{\omega}(d)(x, y)=
+W^{n}(d)(x, y)
+\]
+と定義する．
+
+
+
+
+このとき任意の
+$(X, d)\in \mathscr{S}_{1}$
+について
+$W^{\omega}(d)$
+はwell-definedであり，
+なおかつ
+$(W^{\omega}(X), W^{\omega}(d))$
+は
+$\mathscr{M}(R)$-pre-Urysohn普遍距離空間
+である．
+\end{prop}
+
+\begin{proof}
+一般に距離空間
+$(A, e)\in \mathscr{S}_{i}$
+は
+$(U_{i+1}(A), U_{i+1}(e))$
+の部分距離空間になっているので
+この
+$U^{\infty}(d)$
+の定義はwell-definedである．
+そして任意の
+$n\in \nn$
+に対して
+$(W^{n}(X), W^{n}(d))$
+は
+$(W^{\omega}(X), W^{\omega}(d))$
+の部分距離空間である．
+そして
+命題 
+\ref{prop:func:envext}
+と同じ議論で
+$(W^{\omega}(X), W^{\omega}(d))$
+が
+$\mathscr{M}(R)$-pre-Urysohn
+普遍距離空間となることがわかる．
+\end{proof}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+\section{関数空間を用いた包絡の構成}\label{sec:hourakuhouraku}
+このセクションでは
+関数空間を用いた距離空間の包絡の構成を紹介する．
+先のセクションで述べたように
+包絡が存在すれば普遍空間も構成できるので，
+結局Urysohn普遍距離空間が構成できるという
+道筋である．
+
+
+\subsection{Kat\v{e}tovによる方法}
+
+このサブセクションでは
+Kat\v{e}tovの論文 
+\cite{Ka}
+による距離空間の包絡，
+および普遍距離空間の構成を紹介する．
+Kat\v{e}tov map
+の概念自体はUrysohnの論文
+ \cite{Ury1}
+ や
+  \cite{Ury2}
+にもその原型が現れている．
+Kt\v{e}tov
+の方法の特徴的な点は
+Urysohn普遍距離空間の性質をあれこれできる
+Kat\v{e}tov map
+自体を使って
+Urysohn普遍距離空間を構成できることである．
+これは例えば距離空間の完備化，
+つまりコーシー列が収束するような空間を構成するためにコーシー列の空間を考えるという方法論に近いと思う．
+
+
+
+
+まず最初に
+$\mathscr{M}(\rr)$-pre-Urysohn
+空間を構成する．
+\begin{prop}\label{prop:func:separable}
+$G$
+を
+$\rr$
+の加法に関する部分群であるとする．
+$(X, d)\in \mathscr{M}(G)$とする．
+このとき
+$(E(X, d, G), \theta)$
+も可分であり，
+$\mathscr{M}(G)$
+に属する．
+\end{prop}
+\begin{proof}
+まず
+$X$
+が有限集合の場合に証明する.
+$X=\{1,2,\dots, m\}$
+として良い.
+この時
+$E(X, d, G)$
+は
+\[
+\{(x_{1},x_{2},\dots, x_{m})\in G^{m}\mid\forall i, j\  
+|x_{i}-x_{j}|\le d(i, j)\le x_{i}+x_{j}\}\subset \rr^{m}
+\]
+と同相になるので，
+$(E(X, d, G), \theta)$
+は可分になる．
+\par
+一般の場合を示そう．
+$(X, d)$
+は可分なので稠密な可算集合が存在する．
+その一つを
+$A$
+とする．
+そして
+$A$
+の有限部分集合
+$S$
+に対して，
+$(E(S, d, G), \theta)$
+の稠密可算集合を一つ選び，
+$W_{S}$とする．
+そして
+\[
+Q=\left\{\kat(h)\colon X\to \rr\mid h\in \bigcup_{S\in \mathcal{F}(A)}W_{S}\right\}
+\]
+とする．
+つまり
+$Q$
+の元は
+$\bigcup_{S\in \mathcal{F}(A)}W_{S}$
+の元を
+Kat\'etov extensionした関数である．
+ここで，
+$\mathcal{F}(A)$
+は
+$A$
+の有限部分集合全体の族である．
+集合
+$Q$
+は可算集合であることが簡単にわかる．
+以下では
+$Q$
+が
+$E(X, d, G)$
+のなかで稠密であることを示そう．
+
+
+
+任意に
+$\epsilon \in (0, \infty)$
+と
+$f\in E(X, d, G)$
+を与える．
+そして有限集合
+$Y=\{y_1,y_2,\dots, y_m\}$
+を
+$f$
+の台とする.
+さらに
+$A\subset X$
+の稠密性から各
+$y_{i}$
+に対して
+$|y_{i}-z_{i}|<\epsilon/3$となる
+$z_{i}\in A$
+が見つかる．
+$Z=\{z_{1}, z_{2},\dots, z_{m}\}$
+とする．
+もちろん
+$Z\in \mathcal{F}(A)$
+である．
+さて，
+$W_Z\subset E(Z, d, G)$
+は稠密なので
+$f|_{Z}\in E(Z, d, G)$
+に対して，
+$\theta(f|_{Z}, h)<\epsilon/3$
+となる
+$h\in W_{Z}$
+が見つかる．
+$g=k(h)\colon X\to \rr$
+としよう．
+まず
+$g\in Q$
+がわかる．
+任意の
+$x\in X$
+に対して
+$y_{i}\in Y$
+と
+$z_{j}\in Z$
+が存在して
+\[
+f(x)=f(y_{i})+d(x, y_{i}),\ g(x)=h(z_{j})+d(x,z_{j})
+\]
+となる．
+まず，
+$g$
+は
+$Z$
+を台に持つので
+\[
+g(x)=h(z_{j})+d(x, z_{j})\le h(z_{i})+d(x, z_{i})
+\]
+となる．
+よって
+\begin{align*}
+g(x)-f(x)
+&\le
+ h(z_{i})-f(y_{i})+d(x, z_{i})-d(x, y_{i})\\
+&\le 
+h(z_{i})-f(z_{i})+f(z_{i})-f(y_{i})+d(z_{i}, y_{i})\\
+&\le 
+\theta(h, f)+2d(z_{i}, y_{i}) <\epsilon
+\end{align*}
+となる．
+同様に
+$f(x)-g(x)<\epsilon$
+がわかる．
+つまり
+$|f(x)-g(x)|<\epsilon$
+である．ゆえに
+$\theta(f, g)\le \epsilon$
+がわかるので
+$Q$
+が
+$E(X, d, G)$
+のなかで稠密であることがわかった．
+\end{proof}
+
+
+\begin{prop}\label{prop:func:injE}
+$G$
+を
+$\rr$
+の加法に関する部分群とし，
+$(X, d)\in \mathscr{M}(G)$
+とする．
+このとき
+$(E(X, d, G), \theta)$
+と
+$p\colon  X\to E(X, d, G); x\mapsto p_{x}$
+の組
+は
+$(X, d)$
+の
+$\mathscr{M}(G)$-包絡
+である．
+\end{prop}
+\begin{proof}
+
+$(A\sqcup\{ \omega\},e)$
+を
+$\mathscr{M}(G)$
+に属する有限距離空間とする．
+このとき等長埋め込み写像
+$\phi\colon  A \to X$
+は等長埋め込み写像
+\[
+\Phi\colon A\sqcup \{\omega\}\to E(X, d, G)
+\]
+に拡張されることを示せば良い．
+写像
+$u\colon A\to \rr$
+を
+$u(x)=e(x,\omega)$
+とし,
+$w$
+を
+$u\circ \phi^{-1}$
+の
+Kat\v{e}tov extensionとする．
+つまり
+$w=\kat(u\circ \phi^{-1})\colon X\to \rr$
+とする.
+このとき
+$w\in E(X, d, G)$である．
+$\Phi$
+を
+$\Phi(\omega)=w$と定義する．
+すると
+命題 
+\ref{prop:katetov:Kuratowski}
+から
+\[
+\theta(\Phi(x), \Phi(\omega))=\theta(p_{\phi(x)}, w)=w(\phi(x))=u(x)=d(x,\omega)
+\]
+なので
+$\Phi$
+は
+$\phi$
+の拡張であり，
+かつ等長的である．
+\end{proof}
+
+この命題
+ \ref{prop:func:injE}
+ と
+ 命題 \ref{prop:func:envext}
+ より次のことがわかる．
+\begin{cor}\label{cor:func:extG}
+$G$
+を
+$\rr$
+の加法に関する部分群であるとする．
+このとき
+$\mathscr{M}(G)$-pre-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+\begin{proof}
+任意の
+$(X, d)\in \mathscr{M}(G)$
+について
+$E(X)$
+を
+$E(X, d, G)$
+とし，
+ $E(d)$
+ を
+ $E(X, d, G)$
+ 上の
+ $\sup$
+ 距離とする．
+命題 
+\ref{prop:func:separable}
+より
+$(E(X), E(d))$
+は可分なので，
+$(E(X), E(d))\in \mathscr{M}(G)$
+なので
+命題 
+\ref{prop:func:injE}から
+$\mathscr{M}(G)$-pre-Urysohn
+普遍距離空間が存在する．
+以下では
+$E$
+を使った具体的な構成を見ていこう．
+命題 
+\ref{prop:func:injE}の焼き直しである．
+
+
+
+
+\[
+E^{1}(X)=E(X, d, \rr),\ E^{n+1}(X)=E(E^{n}(X), \theta, \rr)
+\]
+とし，以下では自然に
+$E^{n}(X)$
+を
+$E^{n+1}(X)$
+の部分空間とみなす．
+そして
+\[
+E^{\infty}(X)=\bigcup_{i\in \nn}E^{i}(X)
+\]
+と定義する．
+このとき
+$E^{\infty}(X)$
+に
+$E^{\infty}(X)$
+上の距離
+$D$
+を
+$x, y\in E^{\infty}(X)$
+に対して
+$x, y\in E^{n}(X)$
+となる
+$n$
+を適当に取って
+\[
+D(x, y)=
+\theta_{n}(x, y)
+\]
+と定義する．
+ここで
+$\theta_{n}$
+は
+$E^{n}(X)$
+上の
+$\sup$
+距離である．
+一般に距離空間
+$(A, e)\in \mathscr{M}(R)$
+は
+$(U(A), U(e))$
+の部分距離空間になっているので
+この
+$D$
+はwell-definedである．
+
+
+
+
+命題 
+\ref{prop:func:envext}
+より距離空間
+$(E^{\infty}(X), D)$
+は
+$\mathscr{F}(\mathscr{M}(R))$-入射的であり，
+各
+$E^n(X)$
+は可分なので
+$(E^{\infty}(X), D)$
+は
+$\mathscr{M}(G)$-pre-Urysohn
+普遍距離空間である．
+\end{proof}
+
+\begin{rmk}
+この命題によって
+$\mathscr{M}(\qq)$-pre-Urysohn
+普遍距離空間の存在がわかるが，
+Kat\v{e}tov
+の構成法で得られるこの空間は可算集合である保証がなく，
+有理Urysohn普遍距離空間であるとは限らない．
+\end{rmk}
+
+
+
+定理 
+\ref{thm:intro:integerUrysohn}
+から
+$\mathscr{M}(\zz)$-pre-Urysohn
+普遍距離空間は
+$\mathscr{M}(\zz)$-Urysohn
+普遍距離空間なので次のことがわかる．
+\begin{cor}\label{cor:ext-z}
+$\mathscr{M}(\zz)$-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+
+命題 
+\ref{prop:katetov:compinj}から
+Urysohn普遍距離空間の存在もわかる．
+\begin{cor}\label{cor:kat-ury}
+Urysohn普遍距離空間，
+すなわち
+$\mathscr{M}(\rr)$-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+\begin{proof}
+系 
+\ref{cor:func:extG}から
+$\mathscr{M}(\rr)$-Urysohn
+普遍距離空間が存在する．
+系 
+\ref{cor:katetov:completion}からその完備化は
+$\mathscr{M}(\rr)$-Urysohn
+普遍距離空間になっている．
+\end{proof}
+
+\subsubsection{完備ではない普遍空間}
+次に完備でない
+$\mathscr{M}(\rr)$-pre-Urysohn
+普遍距離空間が存在するかどうか考察しよう．
+これは 
+\cite{Ury2}
+で提議され，
+\cite{Ka}
+でそのような空間が存在することが示された．
+この点についても
+Kat\v{e}tovの
+論文 
+\cite{Ka}
+は第二の金字塔的論文と言えるのかもしれない．
+Gromovの本 
+\cite{Greenbook}
+にはなぜかOpen problemとしてこの問題が載っている．
+まあとにかく次のことが成り立つ．
+\begin{prop}\label{peop:naitennasi}
+任意の
+$(X, d)\in \mathscr{M}(\rr)$
+に対して
+$(X, d)$
+を
+$(E(X, d, \rr), \theta)$
+の部分距離空間とみなしたとき
+$X$
+は
+$E(X, d, \rr)$
+の中で内点を持たない．
+\end{prop}
+\begin{proof}
+$p\colon X\to E(X, d, \rr)$
+を
+ $x\mapsto p_{x}$
+ で定義される等長埋め込みとする．
+命題を示すには，
+任意の
+$a\in X$
+について
+$p_{a}$
+の任意の近傍に
+$E(X, d, \rr)\setminus p(X)$
+の元があることを示せば良い．
+$\epsilon\in \rr_{>0}$
+に対して
+$f\colon X\to \rr$を
+\[
+f(x)=\epsilon+d(x, a)
+\]
+と定義すると
+$f(x)=\min_{y\in \{a\}}(f(y)+d(x, y))$
+なので
+$f\in E(X, d, \rr)$
+であり，
+なおかつ任意の
+$x\in X$について
+$f(x)>0$
+である．
+つまり
+$f\in E(X, d, \rr)\setminus p(X)$
+である．
+また，
+$\theta(f, p_a)=f(a)=\epsilon$
+なので，
+結局
+$p_{a}$
+の任意の近傍には
+$E(X, d, \rr)\setminus p(X)$
+の元があることがわかるから
+$X$
+は
+$E(X, d, \rr)$
+の中で内点を持たない集合である．
+\end{proof}
+
+
+
+
+
+\begin{cor}\label{cor:func:noncomp}
+完備ではない
+$\mathscr{M}(\rr)$-pre-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+\begin{proof}
+系
+ \ref{cor:func:extG}の証明の中と同じ記号を用いる．
+任意の距離空間
+$(X, d)\in \mathscr{M}(\rr)$
+について
+$(E^{\infty}(X), D)$
+を考える．
+
+
+
+
+\[
+E^{\infty}(X)=\bigcup_{n\in \nn}E^{n}(X)
+\]
+であり，
+各
+$E^{n}(X)$
+は
+$E^{n+1}(X)$
+のなかで内点の無い集合になっている．
+また，
+$E^{n}(X)$
+は完備なので
+$E^{n+1}(X)$
+のなかで閉集合でもある．
+よって各
+$E^{n}((X)$
+は
+$E^{\infty}(X)$
+のなかで内点のない閉集合になっている．
+よってBaireの範疇定理から
+$(E^{\infty}(X), D)$は
+完備距離空間ではない．
+\end{proof}
+\begin{rmk}
+系 
+\ref{cor:func:noncomp}
+が述べているのはUrysohn
+普遍距離空間の定義には完備性が必要ということである．
+\end{rmk}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gromovによる方法}
+このサブセクションでは
+Gromov 
+\cite{Greenbook}
+による
+距離空間の包絡とUrysohn普遍距離空間の構成を紹介する．
+Gromovの方法の特徴は
+$1$-Lipschits mapという古典的な対象で以って
+距離空間の包絡と普遍距離空間を構成している点である．
+確かに言われてみればKat\v{e}tov mapは
+$1$-Lipschitzなので
+$1$-Lipschitz map
+の空間でも代用できそうという気づきがある．
+ただし可分性の議論が
+Kat\v{e}tov mapと同様にとはいかないのだが，
+可分性を保証するためにはAscoli--Arzelaの定理を用いるのである．いつも思うのだが，Gromovは
+Ascoli--Arzelaの定理がお気に入りのようである．
+
+
+
+\begin{df}\label{df:func:Lip}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とし
+$L\in \rr_{>0}$
+とする．
+このとき距離空間
+$(X, d)$
+に対して
+$(X, d)$
+から
+$R\cap [0, L]$
+への関数のうち
+$1$-Lipschitz
+になっているもの全体を
+$\lip(X, d,  R, L)$
+と書くことにし，
+この集合の上の
+$\sup$
+距離を
+$\sigma$
+と書くことにする．
+この距離空間
+$(\lip(X, d, R, L), \sigma)$
+を
+$(X, d)$
+の
+$K_{L}$-extension
+と呼ぶ 
+(\cite{Greenbook}を参照のこと)．
+\end{df}
+
+
+今から
+Ascoli--Arzela
+の定理を紹介する．
+$C(X, Y)$
+という記号で
+$X$
+から
+$Y$
+への連続写像全体を表すとする．
+\begin{df}[同程度連続]
+部分集合
+$\mathcal{F}\subset C(X,Y)$
+が点
+$a$
+で同程度連続であるとは
+\[
+\forall a\in X\ \forall \epsilon>0\ \exists \delta>0\ \forall f\in \mathcal{F}\ \forall x\in X,\ d_{X}(x, a)<\delta\To  d_{Y}(f(x),f(a))<\epsilon 
+\]
+が成り立つことである.
+各点
+$a\in X$
+で同程度連続であるとき
+$\mathcal{F}$
+は
+$X$
+で同程度連続であるとかいう．
+\end{df}
+
+\begin{rmk}
+$1$-Lipschitz
+関数の集合は同程度連続であることに注意しよう．
+\end{rmk}
+
+
+\begin{df}[一様有界性]
+$\mathcal{F}\subset C(X,Y)$
+が一様有界であるとは集合
+$\{f(x)\mid f\in \mathcal{F}, x\in X\}$
+が
+$Y$
+の有界集合であるときに言う．
+\end{df}
+
+\begin{df}
+距離空間
+$(X, d)$
+が全有界であるとは任意の
+$\epsilon\in (0, \infty)$
+に対して
+$X$の
+$\epsilon$-net
+が存在するときに言う．
+完備化
+するとコンパクトになる空間と言っても良い．
+\end{df}
+
+次の定理がAscoli-Arzelaの定理の一つの形である．証明などについては例えば
+\cite{denpaAA}
+などを参照されたし．
+\begin{thm}\label{thm:func:aa}
+$X$
+をコンパクト位相空間とする．
+このとき
+$\mathcal{F}\subset C(X, \rr)$
+が
+同程度連続かつ一様有界であることと，
+$\mathcal{F}$
+が
+$\sup$
+距離で全有界であることは同値である.
+\end{thm}
+
+この
+Ascoli--Arzela
+の定理から次がわかる．
+\begin{cor}\label{cor:func:totbd}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となるものとし，
+$L\in \rr_{>0}$
+とする．
+$(X, d)$
+を全有界距離空間とする．
+このとき
+$(\lip(X, d, R, L), \sigma)$
+は全有界である.
+\end{cor}
+\begin{proof}
+$(X, d)$
+の完備化を
+$(Y, e)$
+とする．
+このとき
+$f\in \lip(X, d, R, L)$
+と
+$y\in Y$
+に対して
+$X$
+内の
+点列
+$\{a_{i}\}_{i\in \nn}$
+で
+$a_{i}\to y$
+となるものを取ると，
+$1$-Lipschits
+性から
+$\{f(a_{i})\}_{i\in \nn}$
+は
+$\rr$
+の
+Cauchy
+列でありこの収束先は
+$\{a_{i}\}_{i\in\nn}$
+の取り方によらない．
+この拡張された写像を
+$I(f)\colon  Y\to \rr$
+と書くことにする．
+$T$
+を
+$R\cap [0, L]$
+の
+$\rr$
+の中での閉包とする．
+このとき
+\[
+I(\lip(X, d, R, L))
+=\{\, I(f)\mid f\in \lip(X, d, R, L)\,\}
+\subset \lip(Y, d, T, L)
+\]
+である．
+さらに
+$X$
+が
+$Y$
+のなかで稠密であることから
+$I$
+は等長埋め込みになっている．
+よって
+$(\lip(X, d, R, L), \sigma)$
+は
+$(\lip(Y, d, T, L), \sigma)$
+の部分距離空間とみなせる．
+さて，
+定理 
+\ref{thm:func:aa}から
+$(\lip(Y, d, T, L), \sigma)$
+は全有界である．
+全有界空間の部分空間も全有界なので結局
+$(\lip(X, d, R, L), \sigma)$
+も全有界である．
+\end{proof}
+
+
+
+
+\begin{cor}\label{cor:func:sep}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+で
+$L\in \rr_{>0}$
+とする．
+全有界な距離空間
+$(X, d)\in \mathscr{M}(R\cap[0, L])$
+に対して
+$(\lip(X, d, R, L), \sigma)$
+は可分である．
+\end{cor}
+\begin{proof}
+全有界な距離空間は可分である．
+\end{proof}
+
+
+この系
+ \ref{cor:func:totbd}，
+  \ref{cor:func:sep}
+  と
+命題 
+\ref{prop:func:envlimittedext}
+より次のことがわかる．
+\begin{cor}
+$G$
+を
+$\rr$
+の加法部分群でありなおかつ閉集合とする．
+このとき
+$\mathscr{M}(G)$-pre-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+\begin{proof}
+命題 
+\ref{prop:func:envlimittedext}
+を適用することを考える．
+各
+$n\in \nn$について
+$\mathscr{M}(G\cap [0, n])$
+に属する距離空間のうち，
+全有界なもの全体からなるクラスを
+$\mathscr{S}_{n}$で
+表す．
+すると
+$(X, d)\in \mathscr{S}_{n}$
+に対して
+$W_{n}(X)=\lip(X, d, G, n+1)$とし，
+$W_{n}(d)$
+をこの空間の上の
+$\sup$
+距離とする．
+このとき系 
+\ref{cor:func:sep}
+から
+$(W_{n}, W_{n}(d))$
+は可分である．
+また，
+$x, y\in G\cap [0, n]$
+に対して
+$|x-y|\in G\cap [0, n+1]$
+であることと
+$\sup$
+距離の定義，
+そして
+$G$
+が閉集合であることから
+$(W_{n}(X), W_{n}(d))\in \mathscr{S}_{n+1}$
+がわかる．
+よって
+命題 
+\ref{prop:func:envlimittedext}
+より
+$\mathscr{M}(G)$-pre-Urysohn
+普遍距離空間が存在する．
+\end{proof} 
+
+
+まず
+$G=\zz$
+とすると次がわかる．
+\begin{cor}\label{cor:func:gromovint}
+$\mathscr{M}(\zz)$-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+
+
+そして
+$G=\rr$
+とすると次がわかる．
+\begin{cor}\label{cor:func:gromovUrysohn}
+Urysohn普遍距離空間
+が存在する．
+\end{cor}
+
+
+\begin{rmk}
+Gromovの方法の良いところは，
+複数あり，
+それは，
+$\sup$
+ノルムが定義できることや可分性が自明に分かることであり，さらに
+$1$-Lipschitz
+写像というわかりやすい対象を扱っていることがよくわかる点である．また包絡の可分性も
+Ascoli-Arzela
+という古典的な定理から従うことがわかるのも特徴である．
+\end{rmk}
+
+\begin{rmk}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とし，
+$L\in R$
+とする．
+そして
+$(X, d)\in \mathscr{M}(R)$
+とする．
+このとき
+$E(X, d, R\cap [0, L])$
+は
+$\lip(X, d, R, L)$
+の部分集合であり，
+しかもこの包含写像は
+$\sup$
+距離に関して
+等長埋め込み写像である．
+このことを使って
+$E(X, d, R\cap [0, L])$
+の可分性を
+Ascoli--Arzela
+から証明したり，
+$\lip(X, d, R, L)$
+の包絡性を
+$E(X, d, R\cap [0, L])$
+のそれから証明できたりする．
+\end{rmk}
+
+
+
+\subsubsection{完備ではない普遍空間}
+
+
+\begin{lem}\label{lem:func:naitenL}
+$L\in \rr_{>0}$
+とする．
+任意の
+$(X, d)\in \mathscr{M}(\rr)$
+に対して
+$(X, d)$
+を
+$(\lip(X, d, \rr, L), \theta)$
+の部分距離空間とみなしたとき
+$X$
+は
+$\lip(X, d, \rr, L)$
+の中で内点を持たない．
+\end{lem}
+\begin{proof}
+$p\colon  X\to E(X, d, \rr)$
+を
+$x\mapsto p_{x}$
+で定義される等長埋め込みとする．
+命題を示すには，
+任意の
+$a\in X$
+について
+$p_{a}$
+の任意の近傍に
+$\lip(X, d, \rr, L)\setminus p(X)$
+の元があることを示せば良い．
+$\epsilon \in (0, L]$
+に対して
+$f\colon  X\to \rr$を
+\[
+f(x)=\min\{\epsilon +d(x, a), L\}
+\]
+と定義すると
+$f\in \lip(X, d, \rr, L)$であり，
+なおかつ任意の
+$x\in X$について
+$f(x)>0$である．
+つまり
+$f\in \lip(X, d, \rr, L)\setminus p(X)$
+である．
+また，
+$\sigma(f, p_a)\le f(a)=\epsilon$
+なので，
+結局
+$p_{a}$
+の任意の近傍には
+$\lip(X, d, \rr, L)\setminus p(X)$
+の元があることがわかるから
+$X$
+は
+$\lip(X, d, \rr, L)$の中で内点を持たない集合である．
+\end{proof}
+
+
+
+この補題
+ \ref{lem:func:naitenL}を用いても
+ 系 
+ \ref{cor:func:noncomp}
+の証明ができる．
+証明は系 \ref{cor:func:noncomp}と同じである．
+\begin{cor}\label{cor:noncomp2}
+完備ではない
+$\mathscr{M}(\rr)$-pre-Urysohn
+普遍距離空間が存在する．
+\end{cor}
+
+
+\begin{lem}\label{lem:func:Lenv}
+$R$
+を
+$\rr$
+の閉部分集合で
+$0\in R$
+とし，
+$L\in R$
+とする．
+このとき全有界な距離空間
+$(X, d)\in \mathscr{M}(R)$
+に対して
+$((L(X, d, R, L), \sigma))$
+と
+$p\colon  X\to \lip(X, d, R, L)$
+の組は
+は
+$\mathscr{M}(R)$-包絡である．
+さらに
+$((L(X, d, R, L), \sigma))$
+は全有界な距離空間になる．
+\end{lem}
+\begin{proof}
+$(A\sqcup\{z\}, e)$
+を有限部分集合とし，
+等長埋め込み
+$\phi\colon  A\to X$が与えられているとする．
+$f(x)=e(x, z)$
+とすると
+$f\in L(X, d, R, L)$
+である．
+よってクラトフスキー埋め込みの議論 
+(命題 
+\ref{prop:katetov:Kuratowski})
+と
+$\sigma$
+が
+$\sup$
+距離であることから
+$\sigma(p_{x}, f)=e(x, z)$
+となるので，
+$\phi$
+を
+$\phi(z)=f$
+と拡張すれば
+$\mathscr{M}(R)$-包絡
+であることがわかる．
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{直径が有限なUrysohn普遍距離空間の構成}\label{sec:yuugen}
+\subsection{説明}
+このセクションでは直径が有限な場合のUrysohn普遍距離空間の構成について見ていく．具体的にどのようなことをやるのかというと，
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間が存在するときに
+その空間から
+$\mathscr{M}(R\cap [0, L])$
+という直径が
+$L$
+以下の距離空間について入射性を持つ直径が
+$L$
+以下の空間を作る方法を紹介する．
+とは言っても単純に
+系 
+\ref{cor:hanasi:mindis}
+を適応するだけである．
+
+
+
+\begin{lem}\label{lem:diam:restrict}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+を満たすとし，
+$L\in \rr_{>0}$
+とする．
+そして
+$(U, d)$
+を
+$\mathscr{F}(\mathscr{M}(R))$-入射的距離空間とし，
+$e=\min\{d, L\}$とする．
+このとき距離空間
+$(U, e)$は
+$\mathscr{F}(\mathscr{M}(R\cap [0, L]))$-入射的距離空間
+である．
+特に
+$(U, d)$
+が
+$\mathscr{M}(R)$-pre-Urysohn
+普遍距離空間なら
+$(U, e)$
+は
+$\mathscr{M}(R\cap [0, L]))$-pre-Urysohn
+普遍距離空間であり，
+$(U, d)$
+が
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間なら
+$(U, e)$
+も
+$\mathscr{M}(R\cap [0, L]))$-Urysohn
+普遍距離空間
+である．
+\end{lem}
+\begin{proof}
+前半さえ示せば後半はそこから従う．
+$(U, e)$
+が
+$\mathscr{F}(\mathscr{M}(R\cap [0, L]))$-入射的
+であることを示す．
+任意の有限距離空間
+$(A\sqcup\{z\}, h)\in \mathscr{F}(
+\mathscr{M}(R\cap [0, L]))$
+と
+任意の等長埋め込み
+$\phi\colon  (A, h)\to (U,  e)$
+を考える．
+$\di(A, h)\le L$
+なので
+この
+$\phi$
+は
+$(U, d)$
+への等長写像でもある．
+ここで
+$(U, d)$
+の
+$\mathscr{F}(\mathscr{M}(R\cap [0, L]))$-入射性質
+を用いると，
+$\phi$の拡張になっている等長写像
+$\Phi\colon  (A\sqcup\{z\}, h)\to (U, d)$
+が存在する．
+$\di(A\sqcup\{z\}, h)\le L$
+なのでこの
+$\Phi$
+は
+$(U, e)$
+への等長写像にもなっている．
+\end{proof}
+
+
+以上で直径が有限な場合の構成は記述し終わっているのだが，
+\cite{Ury2}
+に載っている古典的な構成法を紹介しよう．
+ただし一般性は少し損なわれる．
+
+\begin{lem}\label{lem:diam:sphere}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものする．
+$L\in R_{>0}$
+とし，さらに
+$L/2\in R$
+とする．
+$(U, d)$
+を
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間とし，
+ $o\in U$
+ とする．
+このとき部分距離空間
+$S(o, L/2)=\{\,x\in U  \mid d(o, x)=L/2\, \}$
+は
+$\mathscr{M}(R\cap [0, L])$-Urysohn
+普遍空間である．
+\end{lem}
+\begin{proof}
+$S=S(o, L/2)$
+とおく．この空間
+$({S}, d)$
+が
+$\mathscr{M}(R\cap[0,  L])$-入射性質
+を持つことを示せば良い．
+任意の有限距離空間
+$(A\sqcup\{z\}, e)$
+と
+任意の等長埋め込み
+$\phi: (A, e)\to ({S}, d)$
+を考える．
+このとき
+$p\not\in A\sqcup \{z\}$
+となる
+$p$
+を取り，
+$(A\sqcup\{p, z\})^{2}$
+上の対称関数を
+\[
+w(x, y)=
+\begin{cases}
+ e(x, y) & \text{if $x, y\in A\sqcup\{z\}$}\\
+ \frac{L}{2} & \text{if $x=p$ or $y=p$}. 
+\end{cases}
+\]
+と定義すると接着補題 
+\ref{lem:amal:pushout2}から
+$w$
+は
+$A\sqcup\{p, z\}$
+上の距離になる．
+そして
+$\phi\colon  A\to {S}$
+を拡張して
+\[
+\psi(x)=
+\begin{cases}
+\psi(x) & \text{$x\in A$}\\
+o & \text{$x=p$}
+\end{cases}
+\]
+と定義すると
+$\psi$
+は等長埋め込みになっている．
+すると
+$(U, d)$
+の入射性質から
+$\Psi\colon  A\sqcup \{p, z\}\to U$
+で
+$\Psi|_{A\sqcup\{p\}}=\psi$
+となるものが存在する．
+$d(\Psi(z), o)=d(\Psi(z), \Psi(p))=L/2$
+なので
+$\Psi$
+の像は
+${S}$
+に入っており，
+$\Phi=\Psi|_{A\sqcup\{z\}}$
+とすれば
+${S}$
+が入射性質を持つことがわかる．
+\end{proof}
+
+
+\begin{rmk}
+上で述べた
+$S(o, L/2)$
+はUrysohn universal sphereなどと呼ばれたりする．
+\end{rmk}
+
+\begin{rmk}
+すぐ次の節で述べることだが，
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間は存在すれば等長同型をのぞいて
+一意的
+である 
+(系 
+\ref{cor:pp:doukeiury})．
+よって例えば
+$(U, d)$
+をUrysohn普遍距離空間
+とすると，
+奇怪なことだが，
+$(U, \min\{d, 1\})$
+と
+$S(o, L/2)=\{\,x\in U  \mid d(o, x)=1/2\, \}$
+は等長同型になるのである．
+\end{rmk}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newpage
+\section{Urysohn普遍空間たちの等質性，普遍性，そして一意性}\label{sec:uryunique}
+
+この節ではUrysohn普遍空間の唯一性や普遍性，
+そして等質性に関する基本的な
+話題を紹介する．
+どちらの話題にしてもback-and-forth argument
+の一言で済んでしまうのだが，
+全く省略せずに全て証明を記述する．
+この文章が長くなっている原因の一つである．
+ここら辺がわかる人は証明は読み飛ばして良い．
+
+\subsection{等質性}
+まず等質性と普遍性を厳密に定義する．
+
+\begin{df}[$\omega$-homogeneity]\label{df:pp:hom}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+このとき距離空間
+$(X, d)\in \mathscr{M}(R)$
+が
+\textbf{$\mathscr{M}(R)$-$\omega$-homogeneous}
+であるとは
+任意の有限部分集合
+$A, B\subset  X$と
+等長写像
+$f\colon  A\to B$
+に対して
+$F\colon X\to X$
+が存在して
+$F|_{A}=f$
+となるときに言う．
+\end{df}
+$\omega$-homogeneity
+という名前は変な気がするが，こ
+れは濃度が
+$<\omega$となる集合に関する
+homogeneity
+があるという意味である．
+つまり有限集合に対する等質性ということである．
+
+
+
+
+
+\begin{df}[strongly $\omega$-universal]\label{df:pp:univ}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+このとき距離空間
+$(X, d)\in \mathscr{M}(R)$
+が
+\textbf{strongly $\mathscr{M}(R)$-$\omega$-universal}
+であるとは
+任意の
+$(S, e)\in \mathscr{M}(R)$
+に対して等長埋め込み
+$f\colon S\to X$
+が存在するときにいう．
+\end{df}
+
+
+\begin{rmk}
+上で述べた
+$\mathscr{M}(R)$-$\omega$-homogeneity
+と
+strong 
+$\mathscr{M}(R)$-$\omega$-universality
+の概念は 
+Kat\v{e}tovの論文
+ \cite{Ka}
+で導入された
+$\omega$-homogeneityと
+strong 
+$\omega$-universality
+を
+$\mathscr{M}(R)$
+に特殊化した概念である．
+\end{rmk}
+
+
+
+\begin{thm}\label{thm:pp:doukeipre}
+$Q$
+を
+$\rr$
+の可算な部分集合で
+$0\in Q$
+とする. 
+$(X, d)$
+と
+$(Y, e)$
+を
+任意の可算な
+$\mathscr{M}(Q)$-pre-Urysohn
+普遍距離空間とし，
+$A$, 
+$B$
+をそれぞれ
+$X$
+と
+$Y$
+の有限部分空間とする．
+そして等長写像
+$\phi\colon (A, d)\to (B, e)$
+が与えられているとする．
+このとき等長写像
+$F\colon (X, d)\to (Y, e)$
+が存在して
+$F|_{A}=\phi$
+を満たす．
+特に任意の可算な
+$\mathscr{M}(Q)$-pre-Urysohn
+普遍距離空間
+は
+$\mathscr{M}(Q)$-$\omega$-homogeneous
+である．
+\end{thm}
+\begin{proof}
+二つの距離空間
+$(X, d)$, 
+$(Y, e)$
+は可算な
+$\mathscr{M}(G, L)$-pre-Urysohn
+普遍距離空間とする. 
+このとき
+$X=\{a_{n}\}_{n\in \nn}$,
+$Y=\{b_{n}\}_{n\in \nn}$
+と番号付けされているとする．
+このとき
+$n\in \nn\sqcup\{0\}$
+に関する帰納法で
+以下の性質を満たす
+$C_{n}\subset X$と$D_{n}\subset Y$
+と写像
+$f_{n}\colon  C_{n}\to D_{n}$
+を構成する．
+\begin{enumerate}
+\item 
+$C_{0}=A$
+\item 
+$D_{0}=B$
+\item 
+任意の
+$n\in \nn\sqcup\{0\}$
+について
+$\{a_{1}, \dots a_{n}\}\cup A\subset C_{n}$
+\item 
+任意の$n\in \nn\sqcup\{0\}$について
+$\{b_{1}, \dots, b_{n}\}\cup B\subset D_{n}$
+\item 
+$f_0=\phi$
+\item 
+任意の
+$n\in \nn\sqcup\{0\}$
+について
+$f_{n}\colon  (C_{n}, d)\to (D_{n}, e)$
+は等長同型写像である．
+\end{enumerate}
+まず
+$n=0$
+のとき，
+$C_{0}=A$
+で
+$D_{0}=B$
+で
+$f_{0}=\phi$
+と定義する．
+さて
+$n$
+まで構成されたとして
+ $C_{n+1}$, 
+ $D_{n+1}$, 
+ $f_{n+1}$
+ を構成していく．
+ 
+まず
+$a_{n+1}\not\in C_{n}$
+のときを考える．
+$(C_{n}\sqcup\{a_{n+1}\}, d)$
+と
+$f_{n}\colon  C_n\to Y$
+に
+$(Y, e)$
+の
+$\mathscr{F}(\mathscr{M}(R))$-入射性質
+を使うと
+$z\in Y$が存在し，
+写像
+$h\colon  C_{n}\sqcup \{a_{n+1}\}\to D_{n}\sqcup \{z\}$を
+\[
+h(x)=
+\begin{cases}
+	f_{n}(x) & \text{if $x\in C_{n}$}\\
+	z & \text{if $x=a_{n+1}$}. 
+\end{cases}
+\]
+と定義したときに
+$h\colon  (C_{n}\sqcup \{a_{n+1}\}, d)\to (D_{n}\sqcup \{z\}, e)$
+は全単射等長写像になる．
+そして
+$S=C_{n}\sqcup \{a_{n+1}\}$, 
+$T=D_{n}\sqcup\{z\}$とする．
+
+次に
+$a_{n+1}\in C_{n}$
+の時は
+$S=C_{n}$, 
+$T=D_{n}$, 
+$h=f_{n}$
+とする．
+
+
+
+
+次に集合
+$T$
+を拡張することを考える．
+まず
+$b_{n+1}\not\in T$
+のとき，
+$(T\sqcup\{b_{n+1}\}, e)$
+と
+$h^{-1}\colon  T\to X$に
+$(X, d)$
+の
+$\mathscr{F}(\mathscr{M}(R))$-入射性質
+を使うと
+$w\in X$
+が存在し，
+写像
+$g: T\sqcup\{b_{n+1}\}\to S\sqcup\{w\}$を
+\[
+g(x)=
+\begin{cases}
+	h^{-1}(x) & \text{if $x\in D_{n}$}\\
+	w & \text{if $x=b_{n+1}$}. 
+\end{cases}
+\]
+と定義すれば
+この
+$g\colon  (T\sqcup \{b_{n+1}\}, e)\to (S\sqcup\{w\}, d)$は全単射等長写像である．
+そして
+$C_{n+1}=S\sqcup \{w\}$, 
+$D_{n+1}=T\sqcup \{b_{n+1}\}$
+$f_{n+1}=g^{-1}$
+と定義すると帰納法の仮定を満たす．
+
+
+そして
+$b_{n+1}\in T$
+ならば
+$C_{n+1}=S$, 
+$D_{n+1}=T$
+で$f_{n+1}=h$
+と定義する．
+
+
+
+
+以上で帰納的に任意の
+$n\in \nn$
+について
+$C_{n}$, 
+$D_{n}$, 
+$f_{n}$
+が構成できた．
+さて，帰納法に関する仮定から
+$X=\bigcup_{n\in \nn}C_{n}$, 
+$Y=\bigcup_{n\in \nn}D_{n}$
+であり
+$f\colon  X\to  Y$
+を各
+$x\in C$
+に対して
+$x\in C_{n}$
+となる
+$n$
+をとり
+$f(x)=f_{n}(x)$
+と定義するとwell-definedであり，
+$f$は
+等長同型写像になる．
+よって定理が証明された．
+\end{proof}
+\begin{rmk}
+上の定理の証明にあるような
+定義域と値域を行ったり来たりして
+帰納法で写像を
+構成する手法を
+The back-and-forth argument
+と呼ぶ．
+\end{rmk}
+
+定理 \ref{thm:pp:doukeipre}
+において
+$A=B=\emptyset$
+とすると次を得る．
+\begin{cor}\label{cor:pp:douekipre}
+$Q$
+を
+$\rr$
+の可算な部分集合で
+$0\in Q$
+とする. 
+このとき
+任意の可算な
+$\mathscr{M}(Q)$-pre-Urysohn
+普遍距離空間は
+互いに等長同型である．
+\end{cor}
+
+
+
+
+
+\begin{thm}\label{thm:pp:hom}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とする．
+$(X, d)$
+と
+$(Y, e)$
+を
+任意の$\mathscr{M}(R)$-Urysohn
+普遍距離空間とし，
+$M$, 
+$N$
+をそれぞれ
+$X$
+と
+$Y$
+の有限部分集合とする．
+そして等長同型写像
+$\phi\colon  M\to Y$
+が与えられているとする．
+このとき等長同型写像
+$F\colon  (X, d)\to (Y, e)$
+であって
+$F|_{M}=N$を満たすものが存在する．
+特に
+$\mathscr{M}(R)$-Urysohn普遍距離空間
+は$\mathscr{M}(R)$-$\omega$-homogenous
+である．
+\end{thm}
+\begin{proof}
+二つの距離空間
+$(X, d)$, 
+$(Y, e)$
+は可分完備で有限単射的な距離空間とする. 
+このとき稠密な可算集合
+$A\subset X, B\subset Y$
+をとり，
+$A=\{a_{n}\}_{n\in \nn}$,
+$B=\{b_{n}\}_{n\in \nn}$
+と番号付けされているとする．
+自然数
+$n\in \nn\cup\{0\}$に関する帰納法で
+以下の性質を満たす
+$C_{n}\subset X$
+と
+$D_{n}\subset Y$
+と写像
+$f_{n}\colon C_{n}\to D_{n}$を構成する．
+\begin{enumerate}
+\item 
+$C_{0}=M$
+\item 
+$D_{0}=N$
+\item 
+任意の$n\in \nn$について
+$\{a_{1}, \dots a_{n}\}\cup M\subset C_{n}$
+\item 
+任意の
+$n\in \nn$について
+$\{b_{1}, \dots, b_{n}\}\cup N\subset D_{n}$
+\item 
+$f_0=\phi$
+\item 
+任意の
+$n\in \nn$
+について
+$f_{n}\colon  (C_{n}, d)\to (D_{n}, e)$
+は全射な等長写像である．
+\end{enumerate}
+まず
+$n=0$
+のとき，
+$C_{0}=M$で
+$D_{0}=N$で
+$f_{0}=\phi$と定義する．
+さて
+$n$
+まで構成されたとして
+ $C_{n+1}$, 
+ $D_{n+1}$, 
+ $f_{n+1}$
+ を構成していく．
+ 
+ 
+ 
+ 
+まず
+$a_{n+1}\not\in C_{n}$のときを考える．
+$(C_{n}\sqcup\{a_{n+1}\}, d)$と
+$f_{n}\colon  C_{n}\to Y$
+に$(Y, e)$の入射性質を使うと
+$z\in Y$が存在し，
+写像
+$h\colon  C_{n}\sqcup \{a_{n+1}\}\to D_{n}\sqcup \{z\}$
+を
+\[
+h(x)=
+\begin{cases}
+	f_{n}(x) & \text{if $x\in C_{n}$}\\
+	z & \text{if $x=a_{n+1}$}. 
+\end{cases}
+\]
+と定義したときに
+$h\colon  (C_{n}\sqcup \{a_{n+1}\}, d)\to (D_{n}\sqcup \{z\}, e)$を
+は全単射等長写像になる．
+そして
+$S=C_{n}\sqcup \{a_{n+1}\}$, 
+$T=D_{n}\sqcup\{z\}$とする．
+
+次に
+$a_{n+1}\in C_{n}$
+の時は
+$S=C_{n}$, 
+$T=D_{n}$, 
+$h=f_{n}$
+とする．
+
+
+次に集合
+$T$
+を拡張することを考える．
+まず
+$b_{n+1}\not\in T$のとき，
+$(T\sqcup\{b_{n+1}\}, e)$
+と
+$h^{-1}\colon  T\to X$に
+$(X, d)$
+の入射性質を使うと
+$w\in X$
+が存在し，
+写像
+$g\colon  T\sqcup\{b_{n+1}\}\to S\sqcup\{w\}$を
+\[
+g(x)=
+\begin{cases}
+	h^{-1}(x) & \text{if $x\in D_{n}$}\\
+	w & \text{if $x=b_{n+1}$}. 
+\end{cases}
+\]
+と定義すれば
+この
+$g\colon  (T\sqcup \{b_{n+1}\}, e)\to (S\sqcup\{w\}, d)$
+は全単射等長写像である．
+そして
+$C_{n+1}=S\sqcup \{w\}$, 
+$D_{n+1}=T\sqcup \{b_{n+1}\}$
+$f_{n+1}=g^{-1}$
+と定義すると帰納法の仮定を満たす．
+
+
+そして
+$b_{n+1}\in T$
+ならば
+$C_{n+1}=S$,
+ $D_{n+1}=T$
+で$f_{n+1}=h$
+と定義する．
+
+
+
+
+以上で帰納的に任意の
+$n\in \nn$
+について
+$C_{n}$, 
+$D_{n}$, 
+$f_{n}$
+が構成できた．
+さて，
+$C=\bigcup_{n\in \nn}C_{n}$, 
+$D=\bigcup_{n\in \nn}D_{n}$
+とし
+$f\colon  C\to  D$
+を各
+$x\in C$
+に対して
+$x\in C_{n}$
+となる
+$n$
+をとり
+$f(x)=f_{n}(x)$
+と定義すると
+well-defined
+であり，
+$f$
+は全射な
+等長写像になる．
+
+
+
+
+さていま
+$A\subset C$, 
+$B\subset D$
+であり，
+$f\colon  C\to D$
+は全単射で等長写像である．
+
+
+
+
+この写像
+$f$
+の定義域を
+$X$
+まで拡張することを考えよう．
+集合
+$C$
+は稠密なので任意の
+$x\in X$
+に対して
+$C$
+内の点列
+$\{s_{i}\}_{i\in \nn}$で
+$x$
+に収束するものが存在する．
+等長性から
+$\{f(s_{i})\}_{i\in \nn}$
+は
+$(Y, e)$
+のCauchy列になるので
+$(Y, e)$
+の完備性から収束先が存在する．
+その収束先を
+$F(x)$
+と定義すると，
+$f$
+の等長性から
+$F(x)$
+はwell-definedであり，
+このように定義された写像
+$F\colon  X\to Y$
+は
+$F|_{C}=f$
+であり等長写像である．
+ところで，
+$f\colon  C\to D$
+の全射性から
+$D\subset F(X)$
+であり，
+$(X, d)$
+の完備性から
+$F(X)$
+は
+$Y$
+の閉集合になるので
+$D$
+の稠密性から
+$F(X)=Y$
+である．
+よって
+$F\colon (X, d)\to (Y, e)$
+は等長同型写像である．
+さらに定義から
+$F|_{M}=\phi$
+なので定理が示された．
+\end{proof}
+
+
+
+
+定理 \ref{thm:pp:hom}
+において
+$M=N=\emptyset$
+とおくと次がわかる．
+\begin{cor}\label{cor:pp:doukeiury}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+とする．このとき
+任意の
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間は
+等長同型である．
+\end{cor}
+
+
+\begin{prop}\label{prop:pp:universal}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+$(U, \rho)$
+を
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間とし，
+$(X, d)\in \mathscr{M}(R)$
+とする．
+$A$
+を
+$X$
+の有限部分集合とし，
+$p\colon  A\to U$
+を等長埋め込みとする．
+このとき
+$p$
+は等長埋め込み
+$q\colon  X\to U$
+に拡張できる．
+\end{prop}
+\begin{proof}
+距離空間
+$(X, d)$
+は可分なので
+稠密な可算集合
+$A\subset X$
+をとり，
+$A=\{a_{n}\}_{n\in \nn}$
+と番号付けされているとしても良い．
+自然数
+$n\in \nn\sqcup\{0\}$
+に関する帰納法で
+以下の性質を満たす
+$C_{n}\subset X$
+と
+$D_{n}\subset U$
+と写像
+$f_{n}\colon  C_{n}\to D_{n}$
+を構成する．
+\begin{enumerate}
+\item 
+$C_{0}=A$
+\item 
+$f_{0}|_{C_{0}}=p$
+\item 
+任意の
+$n\in \nn\sqcup\{0\}$
+について
+$\{a_{1}, \dots a_{n}\}\cup A\subset C_{n}$
+\item 
+任意の$n\in \nn\sqcup\{0\}$について
+$f_{n}\colon  (C_{n}, d)\to (D_{n}, e)$
+は等長同型写像である．
+\end{enumerate}
+まず
+$n=0$
+のとき，
+$C_{0}=A$
+で
+$D_{0}=p(A)$
+で
+$f_{0}=p$
+と定義する．
+さて
+$n$
+まで構成されたとして
+ $C_{n+1}$, 
+ $D_{n+1}$, 
+ $f_{n+1}$
+ を構成していく．
+ 
+まず
+$a_{n+1}\not\in C_{n}$
+のときを考える．
+$(C_{n}\sqcup\{a_{n+1}\}, d)$
+と
+$f_{n}\colon  C_{n}\to Y$
+に
+$(U, \rho)$
+の入射性質を使うと
+$z\in Y$
+が存在し，
+写像
+$h\colon  C_{n}\sqcup \{a_{n+1}\}\to D_{n}\sqcup \{z\}$を
+\[
+h(x)=
+\begin{cases}
+	f_{n}(x) & \text{if $x\in C_{n}$}\\
+	z & \text{if $x=a_{n+1}$}. 
+\end{cases}
+\]
+と定義したときに
+$h\colon (C_{n}\sqcup \{a_{n+1}\}, d)\to (D_{n}\sqcup \{z\}, e)$を
+は全単射等長写像になる．
+そして$C_{n+1}=C_{n}\sqcup \{a_{n+1}\}$, 
+$D_{n+1}=D_n\sqcup\{z\}$
+$f_{n+1}=h$
+とする．
+
+次に
+$a_{n+1}\in C_n$
+の時は
+$C_{n+1}=C_{n}$, 
+$D_{n+1}=D_{n}$, 
+$f_{n+1}=f_{n}$
+とする．
+
+以上で帰納的に任意の
+$n\in \nn$について
+$C_{n}$, 
+$D_{n}$, 
+$f_{n}$
+が構成できた．
+さて，
+$C=\bigcup_{n\in \nn}C_{n}$, 
+$D=\bigcup_{n\in \nn}D_{n}$
+とし
+$f\colon  C\to  D$
+を各
+$x\in C$
+に対して
+$x\in C_{n}$
+となる
+$n$
+をとり
+$f(x)=f_{n}(x)$
+と定義するとwell-definedであり，
+$f$は
+等長埋め込み写像になる．
+
+
+
+
+さていま
+$A\subset C$
+であり，
+$f\colon  C\to D$
+は全単射で等長写像である．
+
+
+
+この写像
+$f$
+の定義域を
+$X$
+まで拡張することを考えよう．
+集合
+$C$
+は稠密なので任意の
+$x\in X$
+に対して
+$C$
+内の点列
+$\{s_{i}\}_{i\in \nn}$
+で
+$x$
+に収束するものが存在する．
+等長性から
+$\{f(s_{i})\}_{i\in \nn}$
+は
+$(U, \rho)$
+のCauchy列になるので
+$(U, \rho)$
+の完備性から収束先が存在する．
+その収束先を
+$q(x)$
+と定義すると，
+$f$の等長性から
+$q(x)$
+はwell-definedであり，
+このように定義された写像
+$q\colon  X\to U$
+は
+$q|_{C}=f$
+であり等長写像である．
+ところで，
+$q|_{C_1}=f_{1}|_{C_1}=p$
+なので
+$F\colon  (X, d)\to (U, \rho)$
+は定理の主張にあった等長埋め込み写像である．
+\end{proof}
+
+
+命題 \ref{prop:pp:universal}において
+$A=\emptyset$
+とおくと次を得る．
+
+\begin{cor}\label{cor:pp:omegauniversality}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+このとき
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間は
+strongly 
+$\mathscr{M}(R)$-universal
+である．
+\end{cor}
+
+
+
+また命題 
+\ref{prop:pp:universal}から次のこともわかる．
+
+\begin{cor}\label{cor:pp:connected}
+$(U, d)$を
+Urysohn普遍距離空間とする．
+このとき
+$(U, d)$
+は測地空間である．
+特に弧連結空間でもある．
+\end{cor}
+\begin{proof}
+任意の二点
+$x, y, \in U$
+を取り
+$t=\rho(x, y)$
+とおく．
+このときユークリッド距離を持つ直線の部分距離空間
+$([0, t], e)$
+の部分集合
+$\{0, t\}$
+から
+$U$
+への写像
+$p$
+を
+$p(0)=x$, 
+$p(t)=y$
+と定義すると
+$p$は等長埋め込み写像である．
+よって上の命題から等長埋め込み写像
+$q: ([0, t], e)\to (U, \rho)$
+であって
+$q(0)=x$で
+$q(t)=y$
+となるものが存在する．
+よって
+$(U, \rho)$
+は
+測地空間である．
+\end{proof}
+
+
+Urysohn型の普遍空間であることと，
+$\omega$-homogeneity
+と
+strong 
+$\omega$-universality
+について
+次の同値性がある．
+\begin{thm}\label{thm:pp:equiv}
+$R$
+を
+$\rr$
+の
+部分集合で
+$0\in R$
+となっているものとする．
+$(X, d)\in \mathscr{M}(R)$
+を完備距離空間とする．
+このとき
+$(X, d)$
+が
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間であることと，
+$(X, d)$
+が
+$\mathscr{M}(R)$-$\omega$-homogeneous
+でかつ
+strongly $\mathscr{M}(R)$-$\omega$-universal
+であることは同値である．
+\end{thm}
+\begin{proof}
+$(X, d)$
+が
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間である
+ときに
+$\mathscr{M}(R)$-$\omega$-homogeneous
+でかつ
+strongly $\mathscr{M}(R)$-$\omega$-universal
+であること
+は定理 
+\ref{thm:pp:hom}と
+系
+ \ref{cor:pp:omegauniversality}
+からわかる．
+
+逆を示そう．
+$(A\sqcup\{z\}, e)$
+を有限距離空間で
+$\mathscr{M}(R)$
+に入っているとし等長埋め込み
+$\phi\colon  A\to X$
+が与えられているとする．
+このとき
+$(X, d)$が
+strongly 
+$\mathscr{M}(R)$-$\omega$-universal
+であること
+から，
+等長埋め込み
+$f\colon  A\sqcup \{z\}\to X$
+が存在する．
+そして，
+$g\colon  f(A)\to \phi(A)$
+を
+$g=\phi\circ f^{-1}$
+と定義すると等長同型になっている．
+よって
+$\mathscr{M}(R)$-$\omega$-homogeneous
+より
+$g$
+の拡張になっている等長同型写像
+$G\colon  X\to X$
+が存在する．
+すると
+$(A\sqcup \{z\}, e)$
+と
+$(\phi(A)\sqcup\{G\circ f(a)\})$
+は等長同型なので
+$(X, d)$
+が
+$\mathscr{M}(R)$-入射的
+であることがわかる．
+\end{proof}
+
+
+
+
+次にUrysohn普遍距離空間のcompact homogeneityについて考察する．
+つまり，Urysohn普遍距離空間
+$(U, d)$
+のコンパクト部分空間
+$A, B$
+と等長同型写像
+$f\colon  A\to B$
+が
+$(U, d)$
+の自己等長同型に拡張できることを証明する．
+次の補題が肝である．
+\begin{lem}\label{lem:pp:cpthom}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+$(U, \rho)$
+は
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間とする．
+$(X\sqcup\{a\}, d)$
+は
+$\mathscr{M}(R)$
+に属するコンパクト距離空間で
+$d(X, a)>0$
+とする．
+このとき
+任意の等長埋め込み写像
+$f\colon  (X, d)\to(U, \rho)$
+は等長埋め込み写像
+$F\colon  (X\sqcup \{a\}, d)\to (U, \rho)$
+へと拡張される．
+\end{lem}
+\begin{proof}
+$\epsilon =d(X, a)>0$とする．
+ここで
+$d(X, a)>0$
+なので
+$(X, d)$
+もコンパクト距離空間であることに注意しよう．
+
+
+
+
+今から帰納法により
+以下を満たす
+$X$
+の部分集合列
+$\{K_{n}\}_{n\in \nn}$
+と
+$g_{n}\colon  K_{n}\sqcup\{a\}\to U$を構成する．
+\begin{enumerate}
+\item 
+任意の
+$n\in \nn$
+に対して
+$K_{n}$
+は
+$X$
+の
+$(2^{-n}\cdot\epsilon)$-netである．
+\item 
+任意の
+$n\in \nn$
+に対して
+$K_{n}\subset K_{n+1}$である．
+\item 
+$g_{n}\colon  (K_{n}\sqcup\{a\}, d)\to (U, \rho)$
+は等長埋め込み写像であり，
+$g_{n}|_{K_n}=f|_{K_{n}}$である．
+\item 
+任意の
+$n\in \nn$
+について
+$\rho(g_{n}(a), g_{n+1}(a))\le 2^{-n+1}\cdot \epsilon$
+である．
+\end{enumerate}
+まず
+$n=1$
+のとき，
+$K_{1}$
+は
+$(X, d)$
+の
+$\epsilon/2$-net
+とし，
+$g_{1}=f|_{K_{1}\sqcup\{a\}}$とする．
+
+さて，
+$n$
+まで列が構成されたとして，
+$n+1$
+のとき．
+$K_{n+1}$
+は
+$(X, d)$の
+$\epsilon 2^{-(n+1)}$-net
+で
+$K_{n}\subset K_{n+1}$
+を満たすものとする．
+このとき
+$b\not\in X\sqcup\{a\}$
+を取ってきて
+写像$h\colon  K_{n+1}\sqcup\{b\}\to U$を
+\[
+h(x)=
+\begin{cases}
+f(x) & \text{if $x\in K_{n+1}$}\\
+g_{n}(a) & \text{if $x=b$}
+\end{cases}
+\]
+と定義し，
+さらに
+$K_{n+1}\sqcup\{a\}\sqcup\{b\}$
+上の対称関数
+$r$
+を以下のように定義する．
+\[
+r(x, y)=
+\begin{cases}
+	d(x, y) & \text{if $x, y\in X\sqcup\{a\}$}\\
+	\rho(h(x), h(y)) & \text{if $x, y\in X\sqcup\{b\}$}\\
+	\epsilon 2^{-n+1}
+\end{cases}
+\]
+とする．
+今から
+$r$
+が距離関数であることを証明する．
+三角不等式を証明すれば十分である．
+任意の
+$x, y\in X$
+に対して帰納法の仮定より
+$d(x, y)=\rho(g_{n}(x), g_{n}(y))$
+なので，
+任意の
+$x\in K_{n+1}$
+と
+$a, b$
+に対して三角不等式が成り立つことを確かめれば良い．
+まず
+\[
+r(a, b)=\epsilon 2^{-n+1}\le \epsilon  \le d(a, x)\le d(a, x)+\rho(h(x), h(y))
+=r(a, x)+r(x, b)
+\]
+なので
+$r(a, b)\le r(a, x)+r(x, b)$
+がわかる．
+
+
+
+
+次に
+$d(x, y)\le \epsilon 2^{-n}$
+となる
+$y\in K_{n}$
+をとる．
+すると
+\begin{align*}
+r(a, x)&=d(a, x)\le d(a, y)+d(y, x)
+\le \rho(h(b), h(y))+ \epsilon2^{-n}\\
+&\le \rho(h(b), h(x))+\rho(h(x), h(y)) + \epsilon2^{-n}
+\le r(b, x)+\epsilon2^{-n}+\epsilon2^{-n}\\
+&\le \epsilon 2^{-n+1}+r(b, x)=r(a, b)+r(b, x)
+\end{align*}
+であるから
+$r(a, x)\le r(a, b)+r(b, x)$である．
+同様に
+\begin{align*}
+r(b, x)&=\rho(h(b), h(x))\le \rho(h(b), h(y))+\rho(h(y), h(x))\le 
+d(a, y)+ \epsilon 2^{-n}\\
+&\le  d(a, x)+d(x, y)+\epsilon2^{-n}
+\le r(a, x) +\epsilon 2^{-n}+\epsilon 2^{-n}\\
+&= \epsilon 2^{-n+1}+r(a, x)=r(b, a)+r(a, x)
+\end{align*}
+なので
+$r(b, x)\le r(b, a)+r(a, x)$
+である．
+よって$r$が距離関数であることがわかった．
+$h\colon  (K_{n+1}\sqcup\{b\}, r)\to (f(K_{n+1})\sqcup \{f_{n}(a)\}, \rho)\subset (U, \rho)$
+は等長埋め込みなので，
+$(U, \rho)$
+の
+入射性質を使って
+等長埋め込み
+$H\colon  (K_{n+1}\sqcup\{a\}\sqcup\{b\}, r)\to (U, \rho)$
+で
+$H|_{K_{n+1}\sqcup\{b\}}=h$
+となるものが存在する．
+そして
+$g_{n+1}=H|_{K_{n+1}\sqcup\{a\}}$
+と定義すると帰納法の仮定を満たす．
+
+さて，任意の
+$n$
+について
+$\rho(g_{n}(a), g_{n+1}(a))\le 2^{-n+1}\cdot \epsilon$
+であるから
+$\{g_{n}(a)\}$
+の収束先が存在する．
+それを
+$c$
+とする．
+
+
+
+そして
+$\bigcup_{n\in \nn}K_{n}$
+が
+$(X, d)$
+の中で稠密であることと
+$f_{n}$
+の定義から，
+$F\colon  X\sqcup \{a\}\to U$を
+\[
+F(x)=
+\begin{cases}
+	f(x) & \text{if $x\in X$}\\
+	c & \text{ if $x=a$}
+\end{cases}
+\]
+と定義すれば
+$F$
+は等長埋め込みになっている．
+\end{proof}
+
+
+\subsection{コンパクト部分集合に関する等質性}
+補題 
+\ref{lem:pp:cpthom}を用いて，
+命題 
+\ref{prop:pp:universal}と
+定理 
+\ref{thm:pp:hom}
+と同じ議論をすると以下のふたつがわかる．
+
+\begin{thm}\label{thm:pp:cptext}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+$(U, \rho)$
+は
+$\mathscr{M}(R)$-Urysohn普遍距離空間
+とする．
+$X$
+を
+$U$
+のコンパクト部分集合とし，
+$f\colon  (X, \rho)\to (U, \rho)$
+を等長埋め込みとする．
+このとき等長同型写像
+$F\colon  U\to U$
+が存在して
+$F|_{X}=f$
+となる．
+\end{thm}
+
+
+
+\begin{thm}\label{thm:pp:cptuniv}
+$R$
+を
+$\rr$
+の部分集合で
+$0\in R$
+となっているものとする．
+$(U, \rho)$
+は
+$\mathscr{M}(R)$-Urysohn
+普遍距離空間とする．
+$(X, d)$
+を
+$\mathscr{M}(R)$
+に属する可分距離空間とし
+$A$
+を
+$X$
+のコンパクト部分集合とする．そして
+$f\colon  (A, d)\to (U, \rho)$
+を等長埋め込みとする．
+このとき等長埋め込み写像
+$F\colon  (X, d)\to (U, \rho)$
+が存在して
+$F|_{X}=f$
+となる．
+\end{thm}
+
+\subsection{普遍性から従う系}
+
+
+\begin{df}\label{df:pp:lengthspace}
+$(X, d)$
+を距離空間とする．
+このとき
+$(X, d)$
+が
+\textbf{測地空間}
+であるとは
+任意の点
+$x, y\in X$
+に対して，
+$\rr$
+の区間
+$[0, d(x, y)]$
+から
+$X$
+への等長埋め込み写像
+$p$
+で
+$p(x)=0$
+かつ
+$p(d(x, y))=y$
+となるものが存在するときにいう．
+また，距離空間
+$(X, d)$
+が
+\textbf{弧連結}
+であるとは
+任意の2点を結ぶ道で単射なものが存在するときにいう．
+定義から測地空間は弧連結であり，
+弧連結空間は弧状連結である．
+弧状連結空間は2点間を結ぶ道の単射性
+を要求していないことに注意せよ．
+また弧状連結なHausdrff空間は弧連結であることが
+Hahn--Mazurkiewiczの定理によりわかる．
+\end{df}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newpage
+\section{ランダムグラフと離散Urysohn普遍空間}\label{sec:risan}
+このセクションでは，
+離散的なUrysoh普遍距離空間の議論をする．
+\subsection{通常の離散空間はUrysohn普遍距離空間の仲間}
+まず記号を簡単にするために以下の定義をする．
+\begin{df}\label{df:rand:numb}
+自然数
+$n\in \nn$
+に対して記号
+$\breve{n}$
+を
+\[
+\breve{n}=\{0, 1, \dots, n-1\}
+\]
+と定義する．
+\end{df}
+この節では
+$\mathbb{U}_{\breve{n}}$
+などの離散的なUrysohn普遍空間と
+ランダムグラフの関係について見ていく．
+
+
+\begin{thm}\label{thm:rand:risan}
+$(\mathbb{U}_{\breve{2}}, \rho)$
+について
+\[
+\rho(x, y)=
+\begin{cases}
+1 & \text{if $x\neq y$}\\
+0 & \text{ if $x=y$}
+\end{cases}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+主張の中にあるように距離を可算集合の上に定義すると明らかに
+$\mathscr{M}(\{0, 1\})$-入射性質を満たすので
+$(\mathbb{U}_{\breve{2}}, \rho)$に等長的である．
+\end{proof}
+
+
+\subsection{ランダムグラフはUrysohn普遍距離空間の仲間}
+この部分では，ランダムグラフがUrysohn普遍距離空間の
+仲間であることを説明する．ところでここでいうランダムグラフとは，
+あとで定義が出てくるが，
+英語では
+``The random graph''
+と呼ばれているもので，
+冠詞の
+``the''
+がついているのが大事である．
+最近のグラフ理論及び近隣分野の発展に伴い，
+グラフがランダムに現れるというような意味での，
+冠詞なしの
+``Random graph(s)''
+も普通にあるようなので，
+情報伝達を行う際に気をつけよう．
+\begin{df}[単純グラフ]\label{df:rand:graph}
+$V$
+を集合とし
+$E$
+を
+$V\times V$
+の部分集合で
+以下を満たすとする．
+\begin{enumerate}
+\item 
+$(x, y)\in E$
+ならば
+$(y, x)\in E$
+\item 
+任意の
+$x\in V$
+について
+$(x, x)\not\in E$
+である．
+\end{enumerate}
+このとき組
+$(V, E)$
+を
+\textbf{単純グラフ}
+と呼び，
+$V$
+を
+\textbf{頂点集合}，
+$E$
+を
+\textbf{辺の集合}
+と呼ぶ．
+$V$
+の元を頂点，
+$E$
+の元を辺と呼ぶ．
+この文章では単純グラフ以外は出てこないので
+単に
+\textbf{グラフ}
+と呼ぶことにする．
+二つの頂点
+$a, b\in V$
+が
+\textbf{隣接している}
+とは
+$(a, b)\in E$
+となるときに言う．
+\end{df}
+
+
+\begin{df}[ランダムグラフ]\label{df:rand:randomgraph}
+グラフ
+$(V, E)$
+は次の条件を満たすとき
+\textbf{ランダムグラフ}，
+もしくは
+\textbf{Rado graph}
+という．
+任意の
+$m, n\in \nn$
+に対して，
+$a_{1}, \dots, a_{n}$
+と
+$b_{1}, \dots, b_{m}$
+を
+$V$
+の互いに異なる
+$m+n$
+個の
+頂点とする．
+このとき
+$c\in V$
+が存在して，
+$c$
+は
+$a_{1}\dots, a_{n}$
+達とは隣接しているが，
+$b_{1}, \dots, b_{n}$
+とはどれとも隣接していない．
+\end{df}
+
+\begin{thm}\label{thm:rand:radograph}
+$(\mathbb{U}_{\breve{3}}, \rho)$
+は可算ランダムグラフと等価である．
+\end{thm}
+\begin{proof}
+いま
+$(\mathbb{U}_{\breve{3}}, \rho)$
+からランダムグラフを構成する．
+頂点集合
+$V$
+を
+$V=\mathbb{U}_{3}$
+とする．
+そして辺の集合
+$E$
+を
+\[
+E=\{\, (x, y)\in V\times V\mid \rho(x, y)=1\, \}
+\]
+と定義する．
+今から
+$(V, E)$
+がランダムグラフであることを証明しよう．
+
+
+
+$A, B\subset \mathbb{U}_{3}$
+を有限集合で
+で
+$A\cap B=\emptyset$
+とし
+$\omega$
+を
+$\omega\not\in A\sqcup B$
+とする．
+$A\sqcup \{\omega\}$
+上に
+$A$
+上では
+$\rho$
+と等しく，
+$\omega$
+と
+$A$
+の元の間の距離は
+$1$
+と定めることによって距離が定まる．
+このとき
+$A\sqcup \{\omega\}$
+と
+$A\sqcup B$
+の接着空間
+\[
+M=(A\sqcup\{\omega\})\coprod_{A}(A\sqcup B)
+\]
+を考える．
+$w$
+を
+$M$
+のカノニカルな距離とし，
+$M$
+上の距離
+$e$
+を
+$e=\min\{w, 2\}$
+と定める．
+すると
+$\omega$
+と
+$B$
+の元との
+$e$
+による距離はちょうど
+$2$
+という値をとる．
+このとき
+$(M, e)$
+は
+$\mathbb{U}_{\breve{3}}$
+への等長埋め込みがあるので，
+$\omega$
+の行き先を
+$c$
+とおくと，この
+$c$
+は
+$A$
+との距離が
+$1$
+で
+$B$
+との距離が
+$2$
+なので
+$A$
+の元とは隣接しており
+$B$
+の元とは隣接していない．
+よって
+$(V, E)$
+はランダムグラフであることがわかる．
+
+そして逆に可算ランダムグラフ
+$(V, E)$
+が与えられたときに
+$V$
+上の距離
+$d$
+を
+\[
+d(x, y)=
+\begin{cases}
+	1 & \text{$x$と$y$が隣接している}\\
+	2 & \text{$x$と$y$が隣接していない}\\
+	0 & \text{$x=y$}
+\end{cases}
+\]
+と定義すると距離関数になっている．
+
+
+有限距離空間
+$(A\sqcup\{z\}, e)$
+等長埋め込み
+$f\colon  (A, e)\to (V, d)$
+が与えられたとする．
+このとき
+$A_{1}=\{\, x\in A\mid d(x, z)=1\, \}$, 
+$A_{2}=\{\, x\in A\mid d(x, z)=2\, \}$
+とおく．
+そしてランダムグラフの性質を使うと
+$c\in V$
+であって
+$A_{1}$
+と隣接しているが
+$A_{2}$
+の元とは隣接していないものが取れる．
+$f$
+を拡張して
+$f(a)=c$
+とすれば
+$(V, d)$
+が入射性質を持つことがわかるので
+$(V, d)$
+はUrysohn普遍距離空間である．
+よって
+$(\mathbb{U}_{\breve{3}}, \rho)$
+と等長同型である．
+
+
+
+
+以上でランダムグラフと
+$(\mathbb{U}_{\breve{3}}, \rho)$が
+等価であることがわかった．
+\end{proof}
+
+\begin{rmk}
+$(\mathbb{U}_{\zz}, \rho)$
+でも同じようにグラフを誘導することができるが，
+頂点同士を結ぶ頂点の道の長さを制御できる強いランダムグラフになっている．
+\end{rmk}
+
+\begin{rmk}
+この観点から，Urysohn普遍距離空間とはランダムグラフの一般化と見なすことができる．もちろん歴史的な順序は前後するが．
+\end{rmk}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+\section{Urysohn普遍距離空間に関する研究の紹介}\label{sec:shoukai}
+
+この節ではUrysohn普遍距離空間に関する研究論文を筆者の可能であるかぎり解説する．
+せいぜいアブストラクトを読んだりした程度の理解しかないが，
+研究の流れを把握することの一助になればよいと思う．
+また筆者は数学の分野をあまねく把握しているわけではないので
+所々フワフワした解説になっていることをあらかじめ断っておく．
+\subsection{構成法について}
+Urysohn普遍距離空間の構成については
+Urysohnの原論文 
+\cite{Ury1}, 
+\cite{Ury2}
+を見るのも楽しいと思う．
+Joiner 
+\cite{J}
+ではUrysohnの元々の構成法を英語で紹介している．
+Urysohnの構成法は現代的には
+Fra\"{i}ss\'{e} limit
+の一種とみなすことができる．
+このことから
+Urysohn
+普遍距離空間
+とモデル理論の関わりを調べる研究が多数あり，
+非常に興味深い発展を見せている
+( \cite{CT}, 
+\cite{conantthesis}, 
+\cite{conant},
+\cite{conant2}, 
+\cite{CL}, 
+\cite{Hub}, 
+\cite{KT}, 
+\cite{TZ}
+などを参照されたし). 
+一般的な
+Fra\"{i}ss\'{e} limit
+については
+ \cite{Hodges}
+ などを参考にされたし．
+
+
+
+
+Kat\v{e}tov
+の論文 
+\cite{Ka}
+はUrysohn普遍距離空間の
+扱いやすい構成法を与えた第二の金字塔と言える論文である．
+Kubi\'{s}
+と
+Ma\v{s}ulovi\'{c} 
+\cite{KM}
+は
+Kat\v{e}tov
+の
+構成法を圏論的に扱う研究を行った．
+関連する論文として 
+\cite{Gre}
+も参考にされたし．
+
+
+
+単位閉区間
+$[0, 1]$
+上の連続関数の空間
+$C([0, 1])$
+には任意の可分距離空間が等長に埋め込める 
+(証明については例えば  
+\cite{Hei}を参照のこと)．
+これはBanachの結果である．
+この結果からUrysohn普遍距離空間も
+$C([0, 1])$
+に内在しているが，
+Holmes 
+\cite{Holmos}
+は
+$C([0, 1])$
+の部分距離空間として
+Urysohn普遍距離空間を構成する方法を与えた．
+またHolmesは論文 
+\cite{Holmes2}
+において，
+Urysohn普遍距離空間から
+$C([0, 1])$
+への埋め込み方がある意味で一つしかないことを示した．
+
+
+
+Hausdorff
+ \cite{Ha}
+ は未発表の原稿の中に距離行列を用いたUrsohn普遍距離空間の構成法を記していた．
+Hu\v{s}ek
+ \cite{Hu}
+ は
+ Urysohn, Kat\v{e}tov,
+  Hausdorffの
+  三つの構成法を解説している．
+
+
+
+
+冒頭でも述べたように
+Gromov 
+\cite{Greenbook}
+も
+Kat\v{e}tovの構成法を簡略化し，
+$1$-Lipschits関数の空間を使って
+Urysohn普遍距離空間を構成している．
+
+
+
+
+\subsection{幾何学的・位相的性質について}
+
+Urysohn普遍距離空間の一般的性質は
+Urysohnの原論文 
+\cite{Ury1}, 
+\cite{Ury2}や，
+最近の論文では
+\cite{Mell2007}
+や
+\cite{Mell2008}
+が構成法も含めて詳しく解説している．
+
+
+
+Urysohn普遍距離空間はその自己等長群の著しい性質で特徴付けれらるので，
+この空間を調べる際に自己等長群を調べるのは当然とも言えるが，
+幾何学と変換群の関係について述べたエルランゲンプログラム
+に則った試みとみなすこともできるかもしれない．
+そういった意味で幾何学性質と自己等長群の研究を混同すると，
+\cite{Mell2007}, 
+\cite{Mell2008},
+ \cite{GK}などに
+Urysohn普遍距離空間の幾何学的性質が述べられている．
+Uspenskij 
+\cite{Usp}
+はUrysohn普遍距離空間の自己等長群に各点収束の位相を入れた空間に任意の第二可算な位相群を埋め込めることを示した．
+
+本論中の補題
+ \ref{lem:pp:cpthom}や
+ 定理 
+ \ref{thm:pp:cptext}, 
+\ref{thm:pp:cptuniv}
+などの
+Urysohn普遍距離空間
+の
+compact homogeneity
+について記さねばならない
+歴史が幾ばくかあるようである．
+Urysohn普遍距離空間の
+compact homogeneityは
+1955年に
+Huhunai\v{s}ivili
+ \cite{huhu}
+ によって証明されている．
+しかしこの論文はあまり知れ渡らなかったようである．
+これはUrysohn普遍距離空間がどうやらあまり注目されていなかったことと，
+冷戦も関係があるのかもしれない．
+1970年代の初めには
+Joiner 
+\cite{J}が
+$\{0\}\cup\{1/n\mid n\in \nn\}$
+と同相なコンパクト距離空間に対してcompact homogeneityを証明している．
+もちろんこれは
+Huhunai\v{s}ivil
+iの結果よりも弱いものである．
+ちなみにこの
+Huhunai\v{s}ivili
+と
+Joiner
+の論文は
+Kat\v{e}tovの論文 \cite{Ka}
+以前に書かれた珍しい
+Urysohn普遍距離空間に関する論文である．
+1999年のGromovの
+``Greenbook'' \cite{Greenbook}
+にはUrysohn普遍距離空間の
+compact homogeneity
+がエクササイズとして
+載っている．
+2002年にBogatyi 
+\cite{Bogatyi}は
+Urysohn普遍距離空間の
+compact homogeneity
+を証明した論文を
+参考文献なしで発表しており，
+おそらく
+compact homogeneityを
+再発見したものと思われる．
+
+
+論文 \cite{Nie}では
+実直線上の
+Kat\v{e}tov
+関数の積分表示を用いて
+Urysohn
+普遍距離空間へ特殊な部分空間として埋め込める
+空間の特徴付けをしている．
+
+
+Vershik
+は
+一論の論文
+ \cite{Ver0}, 
+ \cite{Ver2002}, 
+  \cite{Ver}
+  で
+はUrysohn普遍距離空間と同様の普遍性を持つ距離関数の
+測度論的分布について研究している．
+
+2004年に
+Uspenskij  
+\cite{Usp2004}は
+Urysohn普遍空間が可分Hilbert空間と同相であることを証明している．
+これは位相的重みが等しい二つのBanach空間が同相であるという無限次元トポロジーの成果の一つの一般化とみなせる．
+Niemiec
+ \cite{Nie2011}
+ は無限次元多様体論を用いて
+Uspenskijの結果の別証明を与えた．
+Niemiec 
+\cite{Nie2013}
+は
+Urysohn普遍距離空間上に
+位相群の構造があることを用いて
+Uspenskijの結果の再証明をしている．
+
+
+\subsection{力学系について}
+先ほども述べたようにUrysohn普遍距離空間はその自己等長変換で特徴づけられている．
+あまり力学系に詳しくないのでふわふわしたことしか言えないが，
+Urysohn普遍距離空間が巨大な自己等長群を持つことから
+無限次元の力学系という観点から興味深いらしい．
+例えば 
+\cite{Mell2008},
+ \cite{LS},  
+ \cite{Sau2}, 
+ \cite{Pestov1}, 
+ \cite{Pesrov2}
+ を参照されたし.
+
+
+
+\subsection{Urysohn普遍距離空間上の代数構造について}
+ CameronとVershik
+ \cite{CV}
+ は有理Urysohn普遍距離空間の自己等長群を研究することで，
+ Urysohn普遍距離空間上に可換位相群構造があることを証明した．
+ Niemiec 
+ \cite{Niefun}
+ はすべての元の位数が(高々) 
+ $2$
+ であるようなUrysohn普遍距離空間の可換位相群構造は一つしかないことを証明した．
+ これまで見てきた結果は可換群構造に関するものだが，Doucha 
+ \cite{Doucha}
+ はUrysohn普遍距離空間の上に
+ 非可換群構造が存在することを証明した．
+
+
+\subsection{Urysohn普遍空間に似た空間もしくは一般化}
+Urysohn普遍距離空間に似ている，
+つまり同様の普遍性を持つような空間の
+研究も盛んに行われている．
+既に名前がついている概念の中にもUrysohn型と呼べるものがある．
+例えばランダムグラフ
+(しばしばRado graph
+や
+Erd\H{o}s--R\'{e}nyi graph
+とも呼ばれる)
+も
+Urysohn型の空間とみなすことができる．
+他にもGurarij空間は有限次元線形空間
+に対してUrysohn普遍空間と
+同様な入射性質を持つBanach空間である．
+
+
+Sauer \cite{Sau}
+は
+$[0, \infty)$
+ の部分集合
+ $R$
+ で
+ $0\in R$
+ を満たすものについて，
+可算な
+$\mathscr{M}(R)$-入射的
+な空間や
+$(\mathbb{U}_R, \rho)$
+が存在するための必要条件が
+the 
+$4$-point condition
+ であることを証明した．
+the 
+$4$-point condition 
+とは
+$\mathscr{F}(\mathscr{M}(R))$
+に属する二つの三点距離空間であって
+二点の共通部分を持つものについて
+$R$
+に値をとる接着距離関数が存在するという条件である．以下の図を参照のこと．
+
+
+  \[
+   \xymatrix{
+\bullet \ar@{.}[rrrr]\ar@{-}[rrdd] \ar@{-}[rrd] &  &  & & \bullet\ar@{-}[lldd]\ar@{-}[lld] \\
+ &  & \bullet\ar@{-}[d]&  &  &\\
+ &  & \bullet  &  & 
+ }
+\]
+
+
+
+
+GaoとShao 
+\cite{GS}
+は
+取りうる値が可算集合であるような非アルキメデス的距離に関する
+Urysohn普遍距離空間を存在を証明し，複数の構成法を紹介している．
+関連する研究として
+Wan 
+\cite{Wan}
+のGromov--Hausdrff ultrametricを用いた
+非アルキメデス的距離空間に関数Urysohn普遍距離空間の構成がある．
+
+
+
+Bryant, Nies, Tupper 
+\cite{BNT}
+は diversity spaces という点だけではなく部分集合にも距離の概念を導入したような距離空間を一般化した空間に対してUrysohn型の普遍空間を構成した．
+
+
+
+先ほどの小節で述べたようにNiemiecおよびDouchaはUrysohn普遍距離空間上の
+群構造の研究をしているが，その発展として
+Niemiec
+ \cite{Nie2013}
+は普遍的な付値可換群を構成した．
+そしてこれらの結果を踏まえて
+Doucha 
+\cite{Doucha17}
+は距離付き可換群に対して普遍性をもつ距離付き可換群を構成した．
+
+
+Conant 
+は一連の論文
+\cite{conantthesis}, 
+\cite{conant}, 
+\cite{conant2}
+において，
+距離空間を一般化した概念を導入し，
+そのUrysohn型の普遍空間を
+Fra\"{i}ss\'e limit
+などで構成し
+モデル理論的に研究している．
+
+
+
+Hechler
+の論文 
+\cite{Hechler}
+は
+Kat\v{e}tov 
+\cite{Ka}
+以前に発表された
+珍しいUrysohn普遍距離空間に関する論文である．
+この論文では基数
+$\kappa$
+に対して
+$\kappa$-superuniversality
+という入射性質の一般化を導入し
+$\kappa$がある種の特殊な基数の場合に
+この性質を持つ距離空間を構成し，
+なおかつ唯一性を証明している．
+Kat\v{e}tov 
+\cite{Ka}は
+$\kappa$-homogeneous
+な距離空間を構成しその唯一性を証明した．
+Bielas \cite{Bielas}
+は
+$\kappa$-superuniversal
+だが
+$\kappa$-homogeneous
+ではない空間として，
+自己等長写像が一つしかないような
+$\kappa$-superuniversalな距離空間を構成した．
+
+
+Greb\'{i}k \cite{Gre}
+はUrysohn型の普遍性を持つにもかかわらず，
+その自己等長写像が一つしかない距離空間を構成した．
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+
+\begin{thebibliography}{99}
+\bibitem{AIb}
+A. G. Aksoy and Z. Ibragimov, 
+\textit{Finite ball intersection property of the Urysohn universal space}, 
+preprint, arXiv:1309.7381v3. 
+
+
+\bibitem{Ant}
+S. A. Antonyan, 
+\textit{The Gromov--Hausdorff hyper space of a Euclidean space}, 
+Adv. Math. 363 (2020), 106977.
+
+
+\bibitem{BLMS}
+F. Baudier, G. Lancien, 
+P. Motakis, 
+and 
+T. Schlumprecht, 
+\textit{Coarse and Lipschitz universality}, 
+To apper in Fund. Math., 
+arXiv:2004.04806. 
+
+
+\bibitem{Be}
+V. N. Berestovskii, 
+\textit{On Urysohn's $\rr$-tree}, 
+Siberian Math. J. 60  (2019), 10--19. 
+
+\bibitem{BDKP}
+V. Bilet, 
+O. Dovgoshey, 
+M. K\"{u}\c{c}\"{u}kaslan, and 
+E. Petrov, 
+\textit{Minimal universal metric spaces}, 
+Ann. Acad. Sci. Fenn. Math.,   42 (2017), 
+1019--1064. 
+
+
+
+
+\bibitem{Bielas}
+W. Bielas, 
+\textit{An example of a rigid $\kappa$-superuniversal metric space}, 
+Topology Appli. 208 (2016), 127--142.  
+
+
+\bibitem{Bogatyi}
+S. A. Bogatyi, 
+\textit{Compact homogeneity of 
+Urysohn's universal metric space}, 
+Russ. Math. Surv. 55 (2000), 332-333. 
+
+
+\bibitem{Bo2002}
+S. A. Bogatyi, 
+\textit{Metrically homogeneous spaces}, 
+Russ. MAth. Surv. 57 (2002), 221--240. 
+
+
+\bibitem{BLPS}
+A. Bonanto, C. Laflamme, 
+M. Pawliuk, 
+and N. Sauer, 
+\textit{Distinguishing number of universal homogeneous Urysohn metric spaces}, 
+preprint, arXiv:1811.06023v3. 
+
+
+\bibitem{Bourbaki}
+N. Bourbaki, \textit{General topology}, 
+Chap. 1-4. Berlin Heidelberg New York: Springer 1989. 
+
+\bibitem{BNT}
+D. Bryant, A. Nies, and 
+P. Tupper, 
+\textit{A universal separable diversity}, 
+Anal. Geom. Metric Spaces 5 (2017), 
+138--151. 
+
+
+\bibitem{CV}
+P. J. Cameron and A. M. Vershik, 
+\textit{Some isometry groups of the Urysohn space}, 
+Ann. Pure Appli. Logic, 143 (2006), 
+70--78. 
+
+\bibitem{CT}
+G. Conant and 
+C. Terry, 
+\textit{Model theoretic property of the Urysohn sphere}, 
+Ann. Pure Appli. Logic 167 (2016), 49--72. 
+
+\bibitem{conantthesis}
+G. Conant, 
+\textit{Model theory and combinatorics of homogeneous metric spaces}, 
+PhD thesis, 2015. 
+
+
+\bibitem{conant}
+G. Conant, 
+\textit{Distance structures for generalized metric spaces}, 
+Ann. Pure Appli. Logic 168 (2017), 622--650. 
+
+
+\bibitem{conant2}
+G. Conant, 
+\textit{Neostability in countable homogeneous metric spaces}, 
+Ann. Pure Appli. Logic 168 (2017), 1442--1471. 
+
+
+\bibitem{CL}
+S. Coskey and M. Lupini, 
+\textit{A L\'{o}pez--Escobar theorem for metric structures, and the topological Vaught conjecture}, 
+preprint, arXiv:1405.2859. 
+
+\bibitem{DLPS}
+C. Delhomm\'e, C. Laflamme, 
+M. Pouzet, and 
+N. Sauer, 
+\textit{Divisibility of countable metric spaces}, 
+European J. Combin. 28 (2007), 1746--1769. 
+
+
+\bibitem{Doucha}
+M. Doucha, 
+\textit{Non-abelian group structure on the Urysohn universal space}, 
+Fund.  Math. 228 (2015), 251--263. 
+
+
+\bibitem{Doucha2017}
+M. Doucha, 
+\textit{Universal and homoegeneous structures on the Urysohn and Gurarij spaces}, 
+Israel J. Math. 218 (2017), 299--330. 
+
+\bibitem{Doucha17}
+M. Doucha, 
+\textit{Metrically universal Abelian groups}
+Trans. Amer. Math. Soc. 
+369, no.3,   (2017), 5981--5998. 
+
+\bibitem{GreThesis}
+J. Greb\'{i}k, 
+\textit{Between homogeneity and rigidity}, 
+2016, PhD Thesis. 
+
+
+\bibitem{Gre}
+J. Greb\'{i}k
+\textit{A rigid Urysohn-like metric space}, 
+Proc. Amer. Math. Soc. 
+145 (2017), 4049--4060. 
+
+\bibitem{Gre2018}
+J. Greb\'{i}k, 
+\textit{An example of a Fra\"{i}ss\'{e} class without a Kat\v{e}tov functor}, 
+Appl. Categor. Struct. 26 (2018), 1--6. 
+
+\bibitem{GK}
+S. Gao and A. S. Kechris, 
+\textit{On the classification of Polish metric spaces up to isometry}, 
+Mem. Amer. Math. Soc. 766 (2003). 
+
+\bibitem{GS}
+S. Gao and C. Shao, 
+\textit{Polish ultrametric Urysohn spaces and their isometry group}, 
+Topology Appli. 158 (2011), 492--508. 
+
+
+\bibitem{Greenbook}
+M. Gromov, 
+\textit{Metric structures for Riemannian and non-Riemannian spaces}, 
+Progress in Mathematics, vol. 152, 
+Birkh\"{a}user Boston, Inc., 
+MA, 1999, 
+Based on the 1981 French original, 
+With 
+appendices by 
+M. Katz, P. Pansu,
+and 
+S. Semmes, 
+Translated 
+from the 
+French 
+by 
+Sean Michael Bates. 
+
+
+\bibitem{Ha}
+F. Hausdorff, 
+\textit{Der metrische separable uiniversalraum}, 
+1924, pp 762--769,  (commented by H. Herrlich, Hu\v{s}ek,  and G. Preuss), 
+  in Felix Hausdorff Gesammelte Werke, Band III (Mengenlehre, Deskriptive Mengenlehre und Topologie), Springer Verlag Berlin, 2008. 
+
+
+\bibitem{Hechler}
+S. H. Hechler, 
+\textit{Large superuniversal metric spaces}, 
+Israel J. Msth. 14 (1973), 115--148. 
+
+\bibitem{Hei}J. Heinonen, \textit{Geometric Embedding of metric spaces}, http://www.math.jyu.fi/research/reports/rep90.pdf , 2018/10/14.
+\bibitem{Hodges}
+W. Hodges, 
+\textit{Model theory}, 
+Cambridge Univ. Press, 
+Encyclopedia of mathematics and its applications vol. 42, 
+(1993). 
+
+\bibitem{Holmos}M. R. Holmes, 
+\textit{The universal separable metric space of Urysohn 
+and isometric embeddings thereof in Banach spaces}, 
+Fund. Math. 140 (1992), 199--223. 
+
+
+\bibitem{Holmes2}
+M. R. Holmes, 
+\textit{The Urysohn space embeds in Banach spaces in just one way}, 
+Topology Appli. 
+155 (2008), 1479--1482. 
+
+\bibitem{Hub}
+J. Hubi\v{c}ka and J. Ne\v{s}et\v{r}il, 
+\textit{A finite presentation of the rational Urysohn space}, 
+Topology Appli. 155 (2008), 1483--1492. 
+
+
+\bibitem{huhu}
+G. E. Huhunai\v{s}vili, 
+\textit{On a property of Urysohn's  universal spaces}, 
+Dokl. Akad. SSSR, 101 (1955), 607--610 (in Russian). 
+
+\bibitem{Hu}M. Hu\v{s}ek, \textit{Urysohn universal space, its development and Hausdorff's approach}, 
+Topology Appli. 155 (2008), 1493--1501. 
+
+
+\bibitem{J}
+C. Joiner, 
+\textit{On Urysohn's separable metric space}, 
+Fund. Math. 73 (1971/72), 51--58. 
+
+\bibitem{KT}
+Z. Kabluchko and K. Tent, 
+\textit{Universal-homogeneous structures are generic}, 
+preprint, 2017, arXiv: 1710.06137. 
+
+
+\bibitem{Ka}
+M. Kat\v{e}tov, 
+\textit{On universal metric spaces}, 
+General topology its relations to modern analysis and algebra VI 
+(Prague, 1986), Res. Exp. Math., vol. 16, Heldermann, 
+Berlin, 1988, pp. 323--330. 
+
+
+\bibitem{Kubis}
+W. Kubis, 
+\textit{Extension and reconstruction theorems for the Urysohn universal metric space}, 
+Czechoslovak Mathematical Journal 60 (2010), 
+1-29. 
+
+\bibitem{Kubis}
+W. Kubis, 
+\textit{Universal homogeneous structures (lecture notes)}, 
+lecture note, 
+\verb|https://users.math.cas.cz/~kubis/pdfs/FLimits_course_ver1.pdf|
+
+
+\bibitem{KM}
+W. Kubi\'{s} and D. Ma\v{s}ulovi\'{c}, 
+\textit{Kat\v{e}tov functors}, 
+Appli. Categor. Struct. 25 (2017), 569--602. 
+
+
+\bibitem{L}
+D. Le\v{s}nik, 
+\textit{Constructive Urysohn universal metric space}, 
+Journal of Universal Computer Science, 15 (2009), 
+1236--1263. 
+
+\bibitem{LS}
+Lionel Nguyen Van Th\'{e} and N. W. Sauer, 
+\textit{The Urysohn sphere is oscillation stable}, 
+Geom. Funct. Anal., 
+19 (2009), 536--557.  
+
+\bibitem{McShane}
+E. J. McShane, 
+\textit{Extension of range of functions}, 
+Bull. Amer. Math. Soc., 40 (1934), 837--842. 
+
+\bibitem{Mell2006}
+J. Melleray, 
+\textit{Stabilizers of closed sets in the Urysohn space}, 
+Fund. Math. 189 (2006), 53--60. 
+
+
+\bibitem{Mell2007}
+J. Melleray, 
+\textit{On the geometry of Urysohn's universal metric space}, 
+Topology Appli. 154 (2007), 384--403. 
+
+
+\bibitem{Mell2008}J. Melleray, \textit{Some geometric and dynamical properties of the Urysohn metric spaces}, Topology and its application, vol. 155(14), 1531--1560, 2008. 
+
+\bibitem{Mell2016}
+J. Melleray, 
+\textit{Polish groups and Baire category methods}, 
+Confluentes Math. 
+8 (2016), 89--164. 
+
+
+\bibitem{MV}
+J. Melleray,  F. V. Petrov, 
+and A. M. Vershik, 
+\textit{Linearly rigid metric spaces and the embedding problem}, 
+Fund. Math. 199 (2008), 177--194. 
+
+
+\bibitem{Neumann}
+J. v. Neumann, 
+\textit{Ein system algebraisch unabh\"{a}ngiger zahlen}, 
+Math. Ann. 99 (1928), 134--141. 
+
+
+\bibitem{Nie}P. Niemiec, 
+\textit{Central subsets of Urysohn universal spaces}, 
+Comment. Math. Univ. Carolin. 50 (2009) 445--461. 
+
+
+
+\bibitem{Niefun}
+P. Niemiec, 
+\textit{Urysohn universal spaces as metric groups of exponent $2$}, 
+Fund. Math. 204 (2009), 1--6. 
+
+\bibitem{Nie2011}
+P. Niemiec, 
+\text{Topological structure of Urysohn universal spaces}, 
+Topology Appli. 158 (2011), 352--359. 
+
+\bibitem{Niecat}
+P. Niemiec, 
+\textit{Functor of extension of contractions on Urysohn Universal spaces}, 
+Appli. Categor. Struct. 19 (2011), 959--967. 
+
+
+\bibitem{Nie2013}
+P. Niemiec, 
+\textit{A note on ANR's}, 
+Topology Appli. 
+159 (2012), 315--321. 
+
+
+\bibitem{Nie2013}
+P. Niemiec, 
+\textit{Universal valued Abelian group}, 
+Adv.  Math. 235 (2013), 398--449. 
+
+
+\bibitem{Pestov1}
+V. G. Pestov, 
+\textit{Ramsey--Milman phenomenon, Urysohn metric space, and extremely amenable groups}, 
+Israel J.  Math.  127 (2002), 
+317--358. 
+Corrigendum, ibid., 145 (2005), 375--379. 
+
+
+
+
+\bibitem{Pesrov2}
+V. Pestov, 
+\textit{Dynamics of infinite-dimensional groups: The Ramsey--Dvoretzky--Milman phenomenon}, 
+University Lecture Series vol.40, 
+Amer. Math, Soc. Providence. 2006. 
+
+\bibitem{Pestov3}
+V. G. Pestov, 
+\textit{A theorem of Hrushovski--Solecki--Vershik applied to uniform 
+and coarse embeddings of the Urysohn metric space}, 
+Topology Appli. 155 (2008), 1561--1575. 
+
+
+
+
+\bibitem{Sau}
+N. W. Sauer, 
+\textit{Distance sets of Urysohn metric spaces}, 
+Canad. J. MAth. 65 (2013), 222--240. 
+
+\bibitem{Sau2}
+N. Sauer, 
+\textit{Oscillation of Urysohn type spaces}, Asymptotic Geometric Analysis, 
+Fields Institute Communications 68 (2013), 247--270. 
+
+
+\bibitem{TZ}
+K. Tent and M. Ziegler, 
+\textit{On the isometry group of the Urysohn space}, 
+J. London Math. Soc. 87 (2013), 289--303. 
+
+
+\bibitem{Ury1}
+P. Urysohn, 
+\textit{Sur un espace m\'etrique universel}, 
+C. R. Acad. Sci. Paris 180 (1925), 
+803--806. 
+
+
+\bibitem{Ury2}
+P. Urysohn, 
+\textit{Sur un espace m\'etrique universel}, 
+Bull. Sci. Math. Ser. II,  51 (1927), 
+43--64 and 74--90. 
+
+
+\bibitem{Usp}
+V. V. Uspenskij, 
+\textit{On the group of isometries of the Urysohn universal metric space}, 
+Comment. Math. Univ. Carolinae, 
+31 (1990), 181--182. 
+
+
+\bibitem{Usp2004}
+V. V. Uspenskij, 
+\textit{The Urysohn universal space is homeomorphic to a Hilbert space}, 
+Topology Appli. 139 (2004), 145--149. 
+
+
+\bibitem{Ver0}
+A. M. Vershik, 
+\textit{The universal Urysohn space, Gromov metric triple and random metrics on the natural numbers}, 
+Russ. Math. Surv. 53 (1998), 921--928. 
+
+
+\bibitem{Ver2002}
+A. Vershik, 
+\textit{Distance matrics, random metrics and Urysohn space}, 
+arXiv:math/0203008v1.
+
+\bibitem{Ver}
+A. M. Vershik, 
+\textit{Random metric spaces and universality}, 
+Russ. Math. Surv. 59 (2004), 259--295. 
+
+\bibitem{Wan}
+Z. Wan, 
+\textit{A novel construction of Urysohn universal ultrametric space via the Gromov--Hausdorff ultrametric}, preprint, 2020,  arXiv:2007.08105.
+
+
+\bibitem{Mathoverflaw}
+mathoverflawへ投稿されたOwen Sizemoreの質問``Construction of a proper uncountable subgroup of $\rr$ without Choice''とその回答，
+\begin{verbatim}
+https://mathoverflow.net/questions/35970/construction-of-
+a-proper-uncountable-subgroup-of-mathbbr-without-choice
+\end{verbatim}
+
+\bibitem{denpaGR}
+はてなブログ「電波通信」の記事「実数の閉部分群」, 
+\verb|http://concious4410.hatenablog.com/entry/2016/04/29/163931|
+
+
+
+\bibitem{denpaAA}
+はてなブログ「電波通信」の記事「アスコリアルツェラの定理」,
+ \verb|http://concious4410.hatenablog.com/entry/2018/03/29/154157|
+
+
+\end{thebibliography}
+
+
+\medskip
+\begin{center}
+「知識は公共財」
+\end{center}
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

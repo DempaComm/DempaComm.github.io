@@ -1,0 +1,92 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- Power Series ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+以下の論文はおそらく他変数の解析関数を勉強しようとして集めた論文だと思う．
+
+論文
+\cite{di1857note}
+は合成関数$f\circ g$
+の$n$階微分
+の公式を与えた論文である．
+この公式はこの論文にちなんで
+Faa di Brunoの公式
+(Formula of Faa di Bruno)
+と呼ばれる．
+論文
+\cite{MR0602839}
+はumbral calculas 
+というものを用いて
+Faa di Brunoの公式を
+証明する論文である．
+
+
+論文
+\cite{MR0021131}, 
+\cite{MR0021977}, 
+\cite{MR0704536}
+は他変数の冪級数の収束について調べようとして
+集めたのだと思う．
+しかし最近は他変数冪級数の収束は
+大体絶対収束で考えて解析関数を考えるので，
+正直これらの論文はちょっとよくわかんなかった．
+論文\cite{MR0021977}はZornの論文なので
+珍しがって印刷したのかもしれない．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{ps.bib}
+
+
+
+\end{document}

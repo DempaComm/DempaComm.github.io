@@ -7,4 +7,11 @@
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
 
+## 試験公開中の原稿
+
+- 単純なTeX: `papers/infinitude-of-primes/`
+- 図・相互参照: `papers/sphere-fundamental-group/`
+- 大規模原稿: `papers/urysohn-universal-spaces/`
+- BibTeX: `papers/power-series-notes/`
+
 はてなブログのMT形式バックアップ原本は、このリポジトリの外で保管します。検査・変換済みの公開用データだけを配置します。
