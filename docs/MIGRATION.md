@@ -22,6 +22,14 @@ python3 scripts/paper_tool.py import-tex /path/to/manuscript.tex
 
 原稿はバイト単位で同一の `source.tex` として保存され、PDFのないソースのみの記事ページになる。題名は単純な `\title{...}` またはファイル名から、公開日時と同日内番号は実行時点から補う。詳しい指定方法と、一般的なAIに渡せる手順は `docs/MINIMAL_TEX_IMPORT.md` にある。
 
+PDFファイル1本だけから最低限の記事を作る場合は次を使う。
+
+```sh
+python3 scripts/paper_tool.py import-pdf /path/to/manuscript.pdf
+```
+
+PDFはバイト単位で同一の `published.pdf` として保存され、公開時には `main.pdf` として配置される。題名はPDFのファイル名から、公開日時と同日内番号は実行時点から補う。詳しい指定方法と、一般的なAIに渡せる手順は `docs/MINIMAL_PDF_IMPORT.md` にある。
+
 複数ファイル、既存PDF、自動ビルド設定まで一度に登録する通常の取り込みでは、次の仕様JSONを使う。
 
 まず、リポジトリ外に取り込み仕様JSONを作る。仕様例は `examples/paper-import.example.json` にある。

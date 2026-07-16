@@ -893,6 +893,91 @@ def command_import_tex(args: argparse.Namespace) -> None:
     print(f"IMPORTED {slug} as a source-only paper with byte-identical TeX")
 
 
+def command_import_pdf(args: argparse.Namespace) -> None:
+    """Create a publishable paper from one byte-protected PDF file."""
+    source = Path(args.pdf_file).expanduser().resolve()
+    if not source.is_file():
+        raise PaperToolError(f"PDF file does not exist: {source}")
+    if source.suffix.casefold() != ".pdf":
+        raise PaperToolError(f"expected a .pdf file: {source}")
+    try:
+        with source.open("rb") as stream:
+            if stream.read(5) != b"%PDF-":
+                raise PaperToolError(f"file does not have a PDF header: {source}")
+    except OSError as error:
+        raise PaperToolError(f"cannot read PDF file: {source}: {error}") from error
+
+    if args.published_at:
+        try:
+            published = datetime.fromisoformat(args.published_at)
+        except ValueError as error:
+            raise PaperToolError("--published-at must be ISO 8601") from error
+        published_at = args.published_at
+    else:
+        published = datetime.now().astimezone().replace(microsecond=0)
+        published_at = published.isoformat()
+    sequence = args.sequence or next_sequence_for_date(published)
+    if sequence < 1:
+        raise PaperToolError("--sequence must be a positive integer")
+    slug = f"{published:%Y-%m-%d}-{sequence:02d}"
+    destination = PAPERS_DIR / slug
+    if destination.exists():
+        raise PaperToolError(f"destination already exists: {destination}")
+
+    title = (args.title or source.stem).strip() or "無題のPDF原稿"
+    target_name = "published.pdf"
+    try:
+        destination.mkdir(parents=True)
+        target = destination / target_name
+        shutil.copy2(source, target)
+        source_hash = sha256(source)
+        if sha256(target) != source_hash:
+            raise PaperToolError(f"copy verification failed: {source}")
+        manifest = {
+            "schema_version": 1,
+            "slug": slug,
+            "legacy_slugs": [],
+            "title": title,
+            "published_at": published_at,
+            "sequence": sequence,
+            "year": published.year,
+            "kind": "PDF原稿",
+            "math_section": "",
+            "summary": "PDF原稿を公開しています。",
+            "original_url": args.original_url or "",
+            "order": int(f"{published:%Y%m%d}{sequence:02d}"),
+            "tags": ["数学"],
+            "keywords": [title],
+            "build": {"enabled": False, "engine": ""},
+            "files": [
+                {
+                    "path": target_name,
+                    "role": "published-pdf",
+                    "label": "",
+                    "public": True,
+                    "original_sha256": source_hash,
+                    "sha256": source_hash,
+                }
+            ],
+            "approved_changes": [],
+        }
+        manifest_path = destination / "paper.json"
+        write_json(manifest_path, manifest)
+        (destination / "keywords.txt").write_text(
+            rendered_keywords(manifest), encoding="utf-8"
+        )
+        validate_manifest(manifest, manifest_path)
+        errors = verify_one(manifest_path, manifest)
+        if errors:
+            raise PaperToolError("; ".join(errors))
+    except Exception:
+        shutil.rmtree(destination, ignore_errors=True)
+        raise
+    if not args.no_catalog:
+        command_catalog(argparse.Namespace(check=False))
+    print(f"IMPORTED {slug} with a byte-identical published PDF")
+
+
 def command_import(args: argparse.Namespace) -> None:
     spec_path = Path(args.spec).resolve()
     spec = load_json(spec_path)
@@ -1097,6 +1182,17 @@ def parser() -> argparse.ArgumentParser:
     import_tex_parser.add_argument("--original-url")
     import_tex_parser.add_argument("--no-catalog", action="store_true")
     import_tex_parser.set_defaults(func=command_import_tex)
+
+    import_pdf_parser = subparsers.add_parser(
+        "import-pdf", help="create a paper from one published PDF file"
+    )
+    import_pdf_parser.add_argument("pdf_file")
+    import_pdf_parser.add_argument("--title")
+    import_pdf_parser.add_argument("--published-at")
+    import_pdf_parser.add_argument("--sequence", type=int)
+    import_pdf_parser.add_argument("--original-url")
+    import_pdf_parser.add_argument("--no-catalog", action="store_true")
+    import_pdf_parser.set_defaults(func=command_import_pdf)
 
     approve_parser = subparsers.add_parser(
         "approve-change", help="record an explicitly requested source-file change"

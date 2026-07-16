@@ -28,6 +28,6 @@ python3 scripts/paper_tool.py audit
 python3 scripts/paper_tool.py catalog --check
 ```
 
-使い方の詳細は `docs/MIGRATION.md` を参照してください。TeXファイル1本しかない場合の非常用取り込みと、一般的なAIへ渡す作業指示は `docs/MINIMAL_TEX_IMPORT.md` にまとめています。
+使い方の詳細は `docs/MIGRATION.md` を参照してください。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
 
 はてなブログのMT形式バックアップ原本は、このリポジトリの外で保管します。検査・変換済みの公開用データだけを配置します。
