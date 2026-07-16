@@ -25,6 +25,7 @@ python3 scripts/paper_tool.py audit
 python3 scripts/paper_tool.py catalog --check
 python3 scripts/migration_ledger.py check
 python3 scripts/migration_ledger.py metadata
+python3 scripts/migration_ledger.py render-metadata-review
 python3 scripts/paper_tool.py stage _site
 python3 scripts/paper_tool.py check-links _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex

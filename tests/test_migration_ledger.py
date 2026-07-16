@@ -278,6 +278,28 @@ class MigrationLedgerTest(unittest.TestCase):
             self.assertEqual("1", row["metadata_sequence"])
             self.assertEqual("source_found", row["status"])
 
+            review_path = root / ".privacy-review" / "metadata-review.html"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "render-metadata-review",
+                    str(review_path),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            review_html = review_path.read_text(encoding="utf-8")
+            self.assertIn("メタデータ候補確認", review_html)
+            self.assertIn(row["record_id"], review_html)
+            self.assertIn("extupperhalf.pdf", review_html)
+            self.assertIn("採用分の確定コマンドをコピー", review_html)
+            self.assertNotIn("dropbox.com", review_html)
+            self.assertNotIn("rlkey", review_html)
+            self.assertNotIn(str(Path(temporary)), review_html)
+
             subprocess.run(
                 [
                     sys.executable,

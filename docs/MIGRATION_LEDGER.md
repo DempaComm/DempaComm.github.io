@@ -101,6 +101,35 @@ python3 scripts/migration_ledger.py metadata --list ambiguous
 python3 scripts/migration_ledger.py metadata --list unmatched
 ```
 
+候補をブラウザで比較するための非公開ページも生成できます。
+
+```sh
+python3 scripts/migration_ledger.py render-metadata-review
+```
+
+生成先は `.privacy-review/metadata-review.html` です。このフォルダはGit管理と公開用
+サイト生成の対象外です。標準では公開済み記事と複製候補を除いた候補だけを表示します。
+確認画面では次の操作ができます。
+
+- 照合区分、公開年、判定状態、文字列による絞り込み
+- 原稿側と、はてな記事候補の題名・PDF名・タグ・公開日時の比較
+- `exact` と `likely` の採用、全候補の保留・却下
+- 判定のブラウザ内自動保存
+- 判定JSONの保存と再読み込み
+- 採用した候補を一括確定するコマンドのコピー
+
+`ambiguous` と `unmatched` は誤確定を防ぐため、確認画面から採用できません。別の
+候補を手作業で特定してから台帳を修正します。ブラウザ内の判定だけでは台帳は変化
+しません。「採用分の確定コマンドをコピー」で得たコマンドを実行した時点で、候補が
+確認済み欄へ反映されます。
+
+公開済み記事や複製候補も参考表示する場合は、明示的に指定します。
+
+```sh
+python3 scripts/migration_ledger.py render-metadata-review \
+  --include-published --include-duplicates
+```
+
 判定は次の4段階です。
 
 - `exact`: 確認済み元URL、または記事内PDFファイル名が完全一致
