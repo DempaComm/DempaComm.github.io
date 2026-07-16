@@ -102,6 +102,62 @@ main { padding: 64px 0 80px; }
   gap: 22px;
 }
 
+.paper-search {
+  margin: 0 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.paper-search > label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+
+.paper-search-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
+  gap: 0.75rem;
+}
+
+.paper-search input,
+.paper-search select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.paper-count {
+  min-height: 1.4em;
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.paper-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+}
+
+.paper-tag {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.paper-card[hidden] {
+  display: none;
+}
+
 .paper-card {
   padding: clamp(28px, 6vw, 52px);
   background: var(--white);
@@ -182,6 +238,9 @@ footer {
 footer p { margin: 0; }
 
 @media (max-width: 680px) {
+  .paper-search-controls {
+    grid-template-columns: 1fr;
+  }
   .header-inner { padding: 52px 0 46px; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .workflow ol { grid-template-columns: 1fr; }

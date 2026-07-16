@@ -11,14 +11,14 @@
 
 ## 試験公開中の原稿
 
-- 単純なTeX: `papers/infinitude-of-primes/`
-- 図・相互参照: `papers/sphere-fundamental-group/`
-- 大規模原稿: `papers/urysohn-universal-spaces/`
-- BibTeX: `papers/power-series-notes/`
+- 単純なTeX: `papers/2015-08-28-01/`
+- 大規模原稿: `papers/2018-10-14-01/`
+- BibTeX: `papers/2024-01-03-01/`
+- 図・相互参照: `papers/2024-01-08-01/`
 
 ## 原稿保護と移行
 
-各原稿の `paper.json` に原本と現在承認済みのSHA-256を記録しています。通常の移行では原稿をバイト単位でコピーし、明示的な変更指示がある場合だけ承認履歴を追加します。
+各原稿は `YYYY-MM-DD-NN` で保存します。`paper.json` に電波通信のタグ、検索キーワード、原本と現在承認済みのSHA-256を記録し、`keywords.txt` とサイトの検索一覧を自動生成します。通常の移行では原稿をバイト単位でコピーし、明示的な変更指示がある場合だけ承認履歴を追加します。
 
 ```sh
 python3 scripts/paper_tool.py verify

@@ -20,6 +20,7 @@ ROOT = Path(
 ).resolve()
 PAPERS_DIR = ROOT / "papers"
 INDEX_PATH = ROOT / "index.html"
+SEARCH_SCRIPT_PATH = ROOT / "search.js"
 START_MARKER = "<!-- GENERATED:PAPERS:START -->"
 END_MARKER = "<!-- GENERATED:PAPERS:END -->"
 DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
@@ -67,12 +68,17 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     required = (
         "schema_version",
         "slug",
+        "legacy_slugs",
         "title",
+        "published_at",
+        "sequence",
         "year",
         "kind",
         "summary",
         "original_url",
         "order",
+        "tags",
+        "keywords",
         "build",
         "files",
         "approved_changes",
@@ -84,6 +90,28 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         raise PaperToolError(f"{path}: unsupported schema_version")
     if path.parent.name != manifest["slug"]:
         raise PaperToolError(f"{path}: slug does not match directory name")
+    if not isinstance(manifest["sequence"], int) or manifest["sequence"] < 1:
+        raise PaperToolError(f"{path}: sequence must be a positive integer")
+    try:
+        published = datetime.fromisoformat(str(manifest["published_at"]))
+    except ValueError as error:
+        raise PaperToolError(f"{path}: published_at must be ISO 8601") from error
+    expected_slug = f"{published:%Y-%m-%d}-{manifest['sequence']:02d}"
+    if manifest["slug"] != expected_slug:
+        raise PaperToolError(
+            f"{path}: slug must match published date and sequence ({expected_slug})"
+        )
+    for field in ("legacy_slugs", "tags", "keywords"):
+        values = manifest[field]
+        if not isinstance(values, list) or any(
+            not isinstance(value, str) or not value.strip() for value in values
+        ):
+            raise PaperToolError(f"{path}: {field} must be an array of non-empty strings")
+        if len(values) != len(set(values)):
+            raise PaperToolError(f"{path}: {field} contains duplicates")
+    for legacy_slug in manifest["legacy_slugs"]:
+        if str(safe_relative_path(legacy_slug)) != legacy_slug or "/" in legacy_slug:
+            raise PaperToolError(f"{path}: invalid legacy slug: {legacy_slug}")
     if not isinstance(manifest["files"], list) or not manifest["files"]:
         raise PaperToolError(f"{path}: files must be a non-empty array")
     build = manifest["build"]
@@ -183,6 +211,25 @@ def paper_card(manifest: dict[str, Any]) -> str:
     kind = html.escape(manifest["kind"])
     summary = html.escape(manifest["summary"])
     original_url = html.escape(manifest["original_url"], quote=True)
+    published_date = str(manifest["published_at"])[:10]
+    search_terms = " ".join(
+        [
+            manifest["title"],
+            manifest["summary"],
+            manifest["kind"],
+            published_date,
+            *manifest["tags"],
+            *manifest["keywords"],
+        ]
+    )
+    search_attribute = html.escape(search_terms.casefold(), quote=True)
+    tags_attribute = html.escape(
+        json.dumps(manifest["tags"], ensure_ascii=False), quote=True
+    )
+    tag_chips = "\n".join(
+        f'          <span class="paper-tag">{html.escape(tag)}</span>'
+        for tag in manifest["tags"]
+    )
     actions = [
         f'          <a class="primary-action" href="papers/{slug}/main.pdf">PDFを読む</a>'
     ]
@@ -192,16 +239,20 @@ def paper_card(manifest: dict[str, Any]) -> str:
         relative = html.escape(entry["path"], quote=True)
         label = html.escape(entry["label"])
         actions.append(f'          <a href="papers/{slug}/{relative}">{label}</a>')
+    actions.append(f'          <a href="papers/{slug}/keywords.txt">検索語</a>')
     actions.append(f'          <a href="{original_url}">元の記事</a>')
     actions_html = "\n".join(actions)
     aria = html.escape(f"{manifest['title']}のファイル", quote=True)
-    return f"""      <article class="paper-card">
+    return f"""      <article class="paper-card" data-search="{search_attribute}" data-tags="{tags_attribute}">
         <div class="paper-meta">
-          <span>初出 {int(manifest['year'])}</span>
+          <span>初出 {published_date}</span>
           <span>{kind}</span>
         </div>
         <h3>{title}</h3>
         <p>{summary}</p>
+        <div class="paper-tags" aria-label="電波通信のタグ">
+{tag_chips}
+        </div>
         <nav class="paper-actions" aria-label="{aria}">
 {actions_html}
         </nav>
@@ -222,12 +273,40 @@ def command_catalog(args: argparse.Namespace) -> None:
     rendered = rendered_index()
     current = INDEX_PATH.read_text(encoding="utf-8")
     if args.check:
+        stale_keywords: list[str] = []
+        for manifest_path, manifest in manifests():
+            target = manifest_path.parent / "keywords.txt"
+            if not target.is_file() or target.read_text(encoding="utf-8") != rendered_keywords(manifest):
+                stale_keywords.append(manifest["slug"])
         if rendered != current:
             raise PaperToolError("index.html is not synchronized with paper.json files")
+        if stale_keywords:
+            raise PaperToolError(
+                "keywords.txt is not synchronized for: " + ", ".join(stale_keywords)
+            )
         print("OK  index.html catalog")
         return
     INDEX_PATH.write_text(rendered, encoding="utf-8")
-    print("WROTE index.html")
+    for manifest_path, manifest in manifests():
+        (manifest_path.parent / "keywords.txt").write_text(
+            rendered_keywords(manifest), encoding="utf-8"
+        )
+    print("WROTE index.html and keywords.txt files")
+
+
+def rendered_keywords(manifest: dict[str, Any]) -> str:
+    lines = [
+        "# タイトル",
+        manifest["title"],
+        "",
+        "# 電波通信のタグ",
+        *manifest["tags"],
+        "",
+        "# 検索キーワード",
+        *manifest["keywords"],
+        "",
+    ]
+    return "\n".join(lines)
 
 
 def command_stage(args: argparse.Namespace) -> None:
@@ -241,6 +320,15 @@ def command_stage(args: argparse.Namespace) -> None:
         raise PaperToolError("refusing to stage files that failed verification")
     if rendered_index() != INDEX_PATH.read_text(encoding="utf-8"):
         raise PaperToolError("refusing to stage a stale index.html")
+    for manifest_path, manifest in selected:
+        keyword_path = manifest_path.parent / "keywords.txt"
+        if (
+            not keyword_path.is_file()
+            or keyword_path.read_text(encoding="utf-8") != rendered_keywords(manifest)
+        ):
+            raise PaperToolError(
+                f"refusing to stage stale keywords.txt for {manifest['slug']}"
+            )
 
     output = Path(args.output).resolve()
     if output == ROOT or output in ROOT.parents:
@@ -250,12 +338,14 @@ def command_stage(args: argparse.Namespace) -> None:
     output.mkdir(parents=True)
     shutil.copy2(INDEX_PATH, output / "index.html")
     shutil.copy2(ROOT / "styles.css", output / "styles.css")
+    shutil.copy2(SEARCH_SCRIPT_PATH, output / "search.js")
 
     for manifest_path, manifest in selected:
         source_dir = manifest_path.parent
         target_dir = output / "papers" / manifest["slug"]
         target_dir.mkdir(parents=True)
         shutil.copy2(manifest_path, target_dir / "paper.json")
+        shutil.copy2(source_dir / "keywords.txt", target_dir / "keywords.txt")
         readme = source_dir / "README.md"
         if readme.is_file():
             shutil.copy2(readme, target_dir / "README.md")
@@ -270,6 +360,11 @@ def command_stage(args: argparse.Namespace) -> None:
         if not pdf.is_file():
             raise PaperToolError(f"generated PDF is missing: {pdf}")
         shutil.copy2(pdf, target_dir / "main.pdf")
+        for legacy_slug in manifest["legacy_slugs"]:
+            legacy_dir = output / "papers" / legacy_slug
+            if legacy_dir.exists():
+                raise PaperToolError(f"legacy slug collision: {legacy_slug}")
+            shutil.copytree(target_dir, legacy_dir)
     print(f"STAGED {len(selected)} papers in {output}")
 
 
@@ -285,21 +380,27 @@ def command_import(args: argparse.Namespace) -> None:
     spec_path = Path(args.spec).resolve()
     spec = load_json(spec_path)
     required = (
-        "slug",
         "title",
-        "year",
         "kind",
         "summary",
         "original_url",
-        "order",
+        "published_at",
+        "sequence",
+        "tags",
+        "keywords",
         "files",
     )
     missing = [key for key in required if key not in spec]
     if missing:
         raise PaperToolError(f"import spec missing fields: {', '.join(missing)}")
-    slug = str(safe_relative_path(str(spec["slug"])))
-    if "/" in slug:
-        raise PaperToolError("slug must be one directory name")
+    try:
+        published = datetime.fromisoformat(str(spec["published_at"]))
+    except ValueError as error:
+        raise PaperToolError("spec.published_at must be ISO 8601") from error
+    sequence = int(spec["sequence"])
+    if sequence < 1:
+        raise PaperToolError("spec.sequence must be a positive integer")
+    slug = f"{published:%Y-%m-%d}-{sequence:02d}"
     source_dir = resolve_source_dir(spec_path, spec)
     if not source_dir.is_dir():
         raise PaperToolError(f"source_dir does not exist: {source_dir}")
@@ -342,18 +443,26 @@ def command_import(args: argparse.Namespace) -> None:
         manifest = {
             "schema_version": 1,
             "slug": slug,
+            "legacy_slugs": list(spec.get("legacy_slugs", [])),
             "title": spec["title"],
-            "year": int(spec["year"]),
+            "published_at": spec["published_at"],
+            "sequence": sequence,
+            "year": published.year,
             "kind": spec["kind"],
             "summary": spec["summary"],
             "original_url": spec["original_url"],
-            "order": int(spec["order"]),
+            "order": int(f"{published:%Y%m%d}{sequence:02d}"),
+            "tags": list(spec["tags"]),
+            "keywords": list(spec["keywords"]),
             "build": {"root": str(spec.get("build_root", "main.tex"))},
             "files": manifest_files,
             "approved_changes": [],
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
+        (destination / "keywords.txt").write_text(
+            rendered_keywords(manifest), encoding="utf-8"
+        )
         validate_manifest(manifest, manifest_path)
         errors = verify_one(manifest_path, manifest)
         if errors:
