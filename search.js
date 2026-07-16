@@ -39,5 +39,16 @@
 
   queryInput.addEventListener("input", filterPapers);
   tagSelect.addEventListener("change", filterPapers);
+
+  function openTagFromHash() {
+    if (!window.location.hash.startsWith("#tag-")) return;
+    const target = document.querySelector(window.location.hash);
+    if (target instanceof HTMLDetailsElement && target.classList.contains("tag-group")) {
+      target.open = true;
+    }
+  }
+
+  window.addEventListener("hashchange", openTagFromHash);
   filterPapers();
+  openTagFromHash();
 })();

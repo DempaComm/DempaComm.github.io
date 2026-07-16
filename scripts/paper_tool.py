@@ -23,6 +23,8 @@ INDEX_PATH = ROOT / "index.html"
 SEARCH_SCRIPT_PATH = ROOT / "search.js"
 START_MARKER = "<!-- GENERATED:PAPERS:START -->"
 END_MARKER = "<!-- GENERATED:PAPERS:END -->"
+TAGS_START_MARKER = "<!-- GENERATED:TAGS:START -->"
+TAGS_END_MARKER = "<!-- GENERATED:TAGS:END -->"
 DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
@@ -232,7 +234,7 @@ def paper_card(manifest: dict[str, Any]) -> str:
         json.dumps(manifest["tags"], ensure_ascii=False), quote=True
     )
     tag_chips = "\n".join(
-        f'          <span class="paper-tag">{html.escape(tag)}</span>'
+        f'          <a class="paper-tag" href="#{tag_id(tag)}">{html.escape(tag)}</a>'
         for tag in manifest["tags"]
     )
     actions = [
@@ -248,7 +250,7 @@ def paper_card(manifest: dict[str, Any]) -> str:
     actions.append(f'          <a href="{original_url}">元の記事</a>')
     actions_html = "\n".join(actions)
     aria = html.escape(f"{manifest['title']}のファイル", quote=True)
-    return f"""      <article class="paper-card" data-search="{search_attribute}" data-tags="{tags_attribute}">
+    return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}">
         <div class="paper-meta">
           <span>初出 {published_date}</span>
           <span>{kind}</span>
@@ -264,14 +266,58 @@ def paper_card(manifest: dict[str, Any]) -> str:
       </article>"""
 
 
+def tag_id(tag: str) -> str:
+    digest = hashlib.sha1(tag.encode("utf-8")).hexdigest()[:12]
+    return f"tag-{digest}"
+
+
+def rendered_tag_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for _, manifest in selected:
+        for tag in manifest["tags"]:
+            grouped.setdefault(tag, []).append(manifest)
+
+    groups: list[str] = []
+    for tag in sorted(grouped):
+        papers = grouped[tag]
+        article_links = "\n".join(
+            "          <li>"
+            f'<a href="#paper-{html.escape(paper["slug"], quote=True)}">'
+            f'<time datetime="{html.escape(str(paper["published_at"])[:10], quote=True)}">'
+            f'{html.escape(str(paper["published_at"])[:10])}</time> '
+            f'{html.escape(paper["title"])}</a></li>'
+            for paper in papers
+        )
+        groups.append(
+            f"""      <details class="tag-group" id="{tag_id(tag)}">
+        <summary><span>{html.escape(tag)}</span><span>{len(papers)}件</span></summary>
+        <ul>
+{article_links}
+        </ul>
+      </details>"""
+        )
+    return "\n\n".join(groups)
+
+
+def replace_generated(source: str, start: str, end: str, content: str) -> str:
+    if source.count(start) != 1 or source.count(end) != 1:
+        raise PaperToolError(f"index.html must contain exactly one marker pair: {start}")
+    before, remainder = source.split(start, 1)
+    _, after = remainder.split(end, 1)
+    return f"{before}{start}\n{content}\n    {end}{after}"
+
+
 def rendered_index() -> str:
     source = INDEX_PATH.read_text(encoding="utf-8")
-    if source.count(START_MARKER) != 1 or source.count(END_MARKER) != 1:
-        raise PaperToolError("index.html must contain exactly one generated-paper marker pair")
-    before, remainder = source.split(START_MARKER, 1)
-    _, after = remainder.split(END_MARKER, 1)
-    cards = "\n\n".join(paper_card(manifest) for _, manifest in manifests())
-    return f"{before}{START_MARKER}\n{cards}\n    {END_MARKER}{after}"
+    selected = manifests()
+    cards = "\n\n".join(paper_card(manifest) for _, manifest in selected)
+    source = replace_generated(source, START_MARKER, END_MARKER, cards)
+    return replace_generated(
+        source,
+        TAGS_START_MARKER,
+        TAGS_END_MARKER,
+        rendered_tag_groups(selected),
+    )
 
 
 def command_catalog(args: argparse.Namespace) -> None:

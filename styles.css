@@ -148,10 +148,18 @@ main { padding: 64px 0 80px; }
 }
 
 .paper-tag {
+  display: inline-block;
   padding: 0.2rem 0.55rem;
   border: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.78rem;
+  text-decoration: none;
+}
+
+.paper-tag:hover,
+.paper-tag:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .paper-card[hidden] {
@@ -209,6 +217,58 @@ main { padding: 64px 0 80px; }
   border-top: 1px solid var(--line);
 }
 
+.tag-directory {
+  margin-top: 72px;
+  padding-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.tag-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tag-group {
+  align-self: start;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  scroll-margin-top: 1rem;
+}
+
+.tag-group summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tag-group summary span:last-child {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.tag-group ul {
+  margin: 0;
+  padding: 0 1rem 1rem 2.2rem;
+}
+
+.tag-group li + li {
+  margin-top: 0.45rem;
+}
+
+.tag-group a {
+  text-underline-offset: 3px;
+}
+
+.tag-group time {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .workflow ol {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -244,4 +304,5 @@ footer p { margin: 0; }
   .header-inner { padding: 52px 0 46px; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .workflow ol { grid-template-columns: 1fr; }
+  .tag-groups { grid-template-columns: 1fr; }
 }
