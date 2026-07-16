@@ -1,0 +1,103 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{素数の無限性}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+この文章では素数の無限性を証明する．
+\begin{df}
+$n, m\in \zz_{\ge 1}$とする．
+$n=km$となる$k\in \zz_{\ge 1}$が存在するときに$m$は$n$の\textbf{約数}という．
+$p\in \zz_{\ge 1}$が\textbf{素数}であるとは$p\neq 1$であり尚且つ$p$が$1$と自分自身以外の正の約数を持たないときにいう．\textbf{$n$の素因数}とは素数であり$n$を割り切れる数のことである．そして
+$n\in \zz_{\ge 1}$に対して$1<a, b<n$を満たす
+$a, b\in \zz_{\ge 1}$が存在して$n=ab$を満たすならば
+$n$を\textbf{合成数}と呼ぶ．
+\end{df}
+合成数の定義から次がわかる．
+\begin{prop}\label{nab}
+$n$が合成数であることと$n\neq 1$で尚且つ$n$が素数でないことは同値である．
+\end{prop}
+
+\begin{prop}\label{soinsuu}
+$n\in \zz_{\ge 1}$が$n\neq 1$を満たすならば$n$は素因数を持つ．
+\end{prop}
+\begin{proof}
+まず
+$A =\{\,  n\in \mathbb{N} 
+\mid 
+\text{
+ $n\neq1$かつnは素因数を持たない}
+ \, \}$
+とおく．
+命題は$A= \emptyset$と同値である.
+今
+$A\neq \emptyset$と仮定すると$A$の最小元が存在する．$a=\min A$と置く．
+$a\in A$なので$a\neq 1$であり，$a$は素数ではない．よって命題 \ref{nab}より$a$は合成数である．
+ゆえに$a=xy\ (1<x,y<a)$と書ける．
+$a$の最小性から$x,y\not\in A$である．よって$x,y$は素因数をつことから$a$も素因数を持つことになり矛盾する．
+\end{proof}
+
+
+\begin{thm}
+素数は無限に存在する．
+\end{thm}
+\begin{proof}
+任意の$n>1$に対してそれよりも大きい素数が存在することを言えば良い．
+$n!$を$1$から$n$までの間の自然数の積とする．このとき
+$n!+1$は命題\ref{soinsuu}より素因数を持つ．
+その素因数の一つを$p$とする．
+$(n!+1)-n!=1$なので，
+もしも$p$が$n!$の約数だとすると$p$は$1$を割り切ることになり
+$p=1$となる．これは$p$が素数であることに矛盾する．よって$p$は$n!$の約数ではないので，$n!$の定義から$n<p$である.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
