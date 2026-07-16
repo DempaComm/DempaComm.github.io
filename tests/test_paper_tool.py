@@ -124,6 +124,9 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertIn('href="archive/"', home)
             self.assertEqual(1, home.count('class="paper-card"'))
             self.assertNotIn("<span>TeX原稿</span>", home)
+            self.assertIn("Shippori+Mincho+B1", home)
+            self.assertIn("Zen+Kaku+Gothic+New", home)
+            self.assertIn("Zen+Kurenaido", home)
             archive = (output / "archive" / "index.html").read_text(
                 encoding="utf-8"
             )
