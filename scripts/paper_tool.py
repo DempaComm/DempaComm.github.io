@@ -44,6 +44,24 @@ MATH_SECTIONS = (
     "解析・測度・確率",
     "その他",
 )
+MATH_SECTION_DETAILS = {
+    "代数・組合せ": {
+        "slug": "algebra-combinatorics",
+        "description": "代数、数論、有限体、組合せ論などの記事をまとめています。",
+    },
+    "位相・距離・幾何": {
+        "slug": "topology-geometry",
+        "description": "位相空間、距離空間、幾何、代数的トポロジーなどの記事をまとめています。",
+    },
+    "解析・測度・確率": {
+        "slug": "analysis-probability",
+        "description": "解析、複素解析、測度論、確率論などの記事をまとめています。",
+    },
+    "その他": {
+        "slug": "other",
+        "description": "上の三分野に収まらない数学記事をまとめています。",
+    },
+}
 SITE_TITLE_TOP = "数識電収"
 SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
 SITE_TITLE_ATTRIBUTE = "私と放電"
@@ -552,7 +570,7 @@ def rendered_home_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
       <a class="portal-card" href="math/">
         <span class="section-number">MATHEMATICS</span>
         <strong>数学記事総覧</strong>
-        <span>数学分野ごとの一ページ目次です。</span>
+        <span>数学分野ごとの独立した総覧へ案内します。</span>
       </a>
       <a class="portal-card" href="archive/#years-title">
         <span class="section-number">YEARS</span>
@@ -762,57 +780,86 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
 """
 
 
-def rendered_math_index_item(manifest: dict[str, Any]) -> str:
+def rendered_math_index_item(
+    manifest: dict[str, Any], prefix: str = "../"
+) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
     published_date = html.escape(str(manifest["published_at"])[:10])
     file_links = (
-        [f'<a href="../papers/{slug}/main.pdf">PDF</a>'] if has_pdf(manifest) else []
+        [f'<a href="{prefix}papers/{slug}/main.pdf">PDF</a>']
+        if has_pdf(manifest)
+        else []
     )
     for entry in manifest["files"]:
         if not entry["public"] or not entry["label"]:
             continue
         path = html.escape(entry["path"], quote=True)
         label = html.escape(entry["label"])
-        file_links.append(f'<a href="../papers/{slug}/{path}">{label}</a>')
+        file_links.append(f'<a href="{prefix}papers/{slug}/{path}">{label}</a>')
+    tag_links = "\n".join(
+        f'              <a class="paper-tag" href="{prefix}tags/{quote(tag, safe="")}/">'
+        f"{html.escape(tag)}</a>"
+        for tag in manifest["tags"]
+    )
     return f"""          <li class="math-index-item">
-            <h3><a href="../papers/{slug}/">{title}</a></h3>
+            <h3><a href="{prefix}papers/{slug}/">{title}</a></h3>
             <p>{summary}</p>
             <div class="math-index-meta">
               <time datetime="{published_date}">{published_date}</time>
               <span>{' · '.join(file_links)}</span>
             </div>
+            <div class="math-index-tags" aria-label="電波通信のタグ">
+{tag_links}
+            </div>
           </li>"""
 
 
-def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def grouped_math_sections(
+    selected: list[tuple[Path, dict[str, Any]]],
+) -> dict[str, list[dict[str, Any]]]:
     grouped: dict[str, list[dict[str, Any]]] = {section: [] for section in MATH_SECTIONS}
     for _, manifest in selected:
         section = str(manifest.get("math_section", "")).strip() or "その他"
         grouped[section].append(manifest)
-    populated = [(section, papers) for section, papers in grouped.items() if papers]
-    toc = "\n".join(
-        f'        <a href="#section-{index}"><span>{html.escape(section)}</span>'
-        f"<span>{len(papers)}件</span></a>"
-        for index, (section, papers) in enumerate(populated, start=1)
-    )
-    sections = "\n".join(
-        f"""      <section class="math-index-section" aria-labelledby="section-{index}">
-        <div class="math-index-heading">
-          <h2 id="section-{index}">{html.escape(section)}</h2>
-          <span>{len(papers)}件</span>
-        </div>
-        <ul class="math-index-list">
-{chr(10).join(rendered_math_index_item(paper) for paper in papers)}
-        </ul>
-      </section>"""
-        for index, (section, papers) in enumerate(populated, start=1)
+    return grouped
+
+
+def representative_math_tags(papers: list[dict[str, Any]]) -> list[str]:
+    counts: dict[str, int] = {}
+    for paper in papers:
+        for tag in paper["tags"]:
+            if tag == "数学":
+                continue
+            counts[tag] = counts.get(tag, 0) + 1
+    return [
+        tag
+        for tag, _ in sorted(
+            counts.items(), key=lambda item: (-item[1], item[0])
+        )[:5]
+    ]
+
+
+def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    grouped = grouped_math_sections(selected)
+    directory_cards = "\n".join(
+        f"""      <a class="math-directory-card" href="{MATH_SECTION_DETAILS[section]['slug']}/">
+        <span class="section-number">{index:02d}</span>
+        <strong>{html.escape(section)}</strong>
+        <span>{html.escape(MATH_SECTION_DETAILS[section]['description'])}</span>
+        <span class="math-directory-count">{len(grouped[section])}件</span>
+        <span class="math-directory-tags">{
+            " · ".join(html.escape(tag) for tag in representative_math_tags(grouped[section]))
+            or "記事の追加待ち"
+        }</span>
+      </a>"""
+        for index, section in enumerate(MATH_SECTIONS, start=1)
     )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
-{page_head(f"数学記事総覧 — {SITE_TITLE_TOP}", f"{SITE_TITLE_TOP}で公開している数学記事と原稿の分野別総合目次です。", "/math/", "../styles.css")}
+{page_head(f"数学記事総覧 — {SITE_TITLE_TOP}", f"{SITE_TITLE_TOP}の数学記事を分野別総覧へ案内する総合目次です。", "/math/", "../styles.css")}
 </head>
 <body class="math-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -820,17 +867,75 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     <div class="header-inner">
       <p class="eyebrow">MATHEMATICS DIRECTORY</p>
       <h1>数学記事総覧</h1>
-      <p class="lead">{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を、数学の分野ごとにまとめた総合目次です。</p>
+      <p class="lead">分野別総覧への入口です。現在公開している全{len(selected)}原稿を、四つの主分類からたどれます。</p>
       <nav class="site-navigation" aria-label="主要ページ">
 {site_navigation("../", "math")}
       </nav>
     </div>
   </header>
   <main id="main-content">
-    <nav class="math-toc" aria-label="数学分野の目次">
-{toc}
+    <nav class="math-directory-grid" aria-label="数学分野別総覧">
+{directory_cards}
     </nav>
-{sections}
+    <section class="archive-note" aria-labelledby="math-guide-title">
+      <p class="section-number">GUIDE</p>
+      <h2 id="math-guide-title">分類について</h2>
+      <p>各原稿は主分類を一つ持ちます。分野別ページでは公開年ごとの一覧と、電波通信から引き継いだタグを併記しています。</p>
+    </section>
+  </main>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+</body>
+</html>
+"""
+
+
+def rendered_math_section_page(
+    section: str, papers: list[dict[str, Any]]
+) -> str:
+    details = MATH_SECTION_DETAILS[section]
+    by_year: dict[int, list[dict[str, Any]]] = {}
+    for paper in papers:
+        by_year.setdefault(int(paper["year"]), []).append(paper)
+    if by_year:
+        year_sections = "\n".join(
+            f"""      <section class="math-index-section" aria-labelledby="year-{year}">
+        <div class="math-index-heading">
+          <h2 id="year-{year}">{year}年</h2>
+          <span>{len(year_papers)}件</span>
+        </div>
+        <ul class="math-index-list">
+{chr(10).join(rendered_math_index_item(paper, "../../") for paper in reversed(year_papers))}
+        </ul>
+      </section>"""
+            for year, year_papers in sorted(by_year.items(), reverse=True)
+        )
+    else:
+        year_sections = """      <section class="math-empty">
+        <p>この分野には、まだ公開原稿がありません。</p>
+        <a href="../../archive/">全原稿アーカイブを見る</a>
+      </section>"""
+    description = str(details["description"])
+    slug = str(details["slug"])
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{page_head(f"{section}の記事総覧 — {SITE_TITLE_TOP}", description, f"/math/{slug}/", "../../styles.css")}
+</head>
+<body class="math-page math-section-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">MATHEMATICS SECTION</p>
+      <h1>{html.escape(section)}</h1>
+      <p class="lead">{html.escape(description)} 現在{len(papers)}件です。</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../../", "math")}
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <p class="directory-back"><a href="../">数学記事総覧へ戻る</a></p>
+{year_sections}
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
 </body>
@@ -1024,6 +1129,9 @@ def rendered_sitemap(selected: list[tuple[Path, dict[str, Any]]]) -> str:
         (f"{SITE_URL}/archive/", None),
         (f"{SITE_URL}/math/", None),
     ]
+    for section in MATH_SECTIONS:
+        section_slug = MATH_SECTION_DETAILS[section]["slug"]
+        urls.append((f"{SITE_URL}/math/{section_slug}/", None))
     for tag in grouped_tags(selected):
         urls.append((f"{SITE_URL}/tags/{quote(tag, safe='')}/", None))
     for _, manifest in selected:
@@ -1220,6 +1328,12 @@ def command_stage(args: argparse.Namespace) -> None:
     (math_dir / "index.html").write_text(
         rendered_math_page(selected), encoding="utf-8"
     )
+    for section, papers in grouped_math_sections(selected).items():
+        section_dir = math_dir / str(MATH_SECTION_DETAILS[section]["slug"])
+        section_dir.mkdir()
+        (section_dir / "index.html").write_text(
+            rendered_math_section_page(section, papers), encoding="utf-8"
+        )
     link_errors = local_link_errors(output)
     if link_errors:
         for error in link_errors:

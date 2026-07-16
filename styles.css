@@ -577,28 +577,57 @@ main { padding: 64px 0 80px; }
   color: var(--white);
 }
 
-.math-toc {
+.math-directory-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   margin-bottom: 64px;
 }
 
-.math-toc a {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.9rem 1rem;
+.math-directory-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 230px;
+  padding: clamp(26px, 5vw, 42px);
   border: 1px solid var(--line);
   background: var(--white);
   text-decoration: none;
 }
 
-.math-toc a:hover {
+.math-directory-card:hover,
+.math-directory-card:focus-visible {
   border-color: var(--ink);
+  box-shadow: 0 16px 40px rgb(23 33 43 / 9%);
 }
 
-.math-toc a span:last-child,
+.math-directory-card strong {
+  padding-right: 3.5rem;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 500;
+}
+
+.math-directory-card > span:nth-of-type(2) {
+  color: var(--muted);
+}
+
+.math-directory-count {
+  position: absolute;
+  top: clamp(26px, 5vw, 42px);
+  right: clamp(26px, 5vw, 42px);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.math-directory-tags {
+  align-self: end;
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .math-index-heading > span,
 .math-index-meta {
   color: var(--muted);
@@ -659,6 +688,31 @@ main { padding: 64px 0 80px; }
   gap: 6px 18px;
 }
 
+.math-index-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 12px;
+}
+
+.directory-back {
+  margin-bottom: 36px;
+}
+
+.directory-back a {
+  text-underline-offset: 4px;
+}
+
+.math-empty {
+  padding: clamp(28px, 6vw, 52px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.math-empty a {
+  text-underline-offset: 4px;
+}
+
 .workflow ol {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -717,5 +771,5 @@ footer .title-attribute {
   .tag-index,
   .year-groups,
   .portal-grid { grid-template-columns: 1fr; }
-  .math-toc { grid-template-columns: 1fr; }
+  .math-directory-grid { grid-template-columns: 1fr; }
 }

@@ -101,6 +101,10 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertTrue((staged / "source.tex").is_file())
             self.assertFalse((staged / "main.pdf").exists())
             self.assertTrue((output / "archive" / "index.html").is_file())
+            self.assertTrue((output / "math" / "index.html").is_file())
+            self.assertTrue(
+                (output / "math" / "other" / "index.html").is_file()
+            )
             self.assertTrue((output / "404.html").is_file())
             self.assertTrue((output / "feed.xml").is_file())
             self.assertTrue((output / "sitemap.xml").is_file())
@@ -117,6 +121,16 @@ class SourceOnlyImportTest(unittest.TestCase):
             )
             self.assertIn("全原稿アーカイブ", archive)
             self.assertIn("絞り込みを解除", archive)
+            math_home = (output / "math" / "index.html").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("分野別総覧への入口", math_home)
+            self.assertIn('href="other/"', math_home)
+            math_other = (
+                output / "math" / "other" / "index.html"
+            ).read_text(encoding="utf-8")
+            self.assertIn("その他", math_other)
+            self.assertIn("Emergency Paper", math_other)
 
             checked = subprocess.run(
                 [sys.executable, str(TOOL), "check-links", str(output)],

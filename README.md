@@ -34,8 +34,9 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
 
 トップページには新着6件だけを表示し、全件検索・タグ索引・公開年別一覧は
-`archive/` に自動生成します。RSSは `feed.xml`、サイトマップは
-`sitemap.xml` で公開します。
+`archive/` に自動生成します。`math/` は数学分野別総覧への入口となり、
+各分野の記事一覧を `math/<分野>/` に生成します。RSSは `feed.xml`、
+サイトマップは `sitemap.xml` で公開します。
 
 使い方の詳細は `docs/MIGRATION.md` を参照してください。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
 
