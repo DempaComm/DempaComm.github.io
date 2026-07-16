@@ -258,7 +258,7 @@ def paper_card(manifest: dict[str, Any]) -> str:
           <span>初出 {published_date}</span>
           <span>{kind}</span>
         </div>
-        <h3>{title}</h3>
+        <h3><a href="papers/{slug}/">{title}</a></h3>
         <p>{summary}</p>
         <div class="paper-tags" aria-label="電波通信のタグ">
 {tag_chips}
@@ -302,7 +302,7 @@ def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
         papers = grouped[year]
         article_links = "\n".join(
             "          <li>"
-            f'<a href="#paper-{html.escape(paper["slug"], quote=True)}">'
+            f'<a href="papers/{html.escape(paper["slug"], quote=True)}/">'
             f'<time datetime="{html.escape(str(paper["published_at"])[:10], quote=True)}">'
             f'{html.escape(str(paper["published_at"])[:10])}</time> '
             f'{html.escape(paper["title"])}</a></li>'
@@ -343,7 +343,7 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
     actions.append(f'            <a href="{original_url}">元の記事</a>')
     return f"""        <article class="tag-page-paper">
           <div class="paper-meta"><span>初出 {published_date}</span><span>{kind}</span></div>
-          <h3><a href="../../#paper-{slug}">{title}</a></h3>
+          <h3><a href="../../papers/{slug}/">{title}</a></h3>
           <p>{summary}</p>
           <div class="paper-tags" aria-label="電波通信のタグ">
 {tag_chips}
@@ -388,6 +388,86 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
   </header>
   <main>
 {year_sections}
+  </main>
+  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+</body>
+</html>
+"""
+
+
+def rendered_paper_page(manifest: dict[str, Any]) -> str:
+    slug = html.escape(manifest["slug"], quote=True)
+    title = html.escape(manifest["title"])
+    summary = html.escape(manifest["summary"])
+    published_date = html.escape(str(manifest["published_at"])[:10])
+    kind = html.escape(manifest["kind"])
+    tag_chips = "\n".join(
+        f'          <a class="paper-tag" href="../../tags/{quote(tag, safe="")}/">'
+        f"{html.escape(tag)}</a>"
+        for tag in manifest["tags"]
+    )
+    keyword_chips = "\n".join(
+        f'          <span class="keyword-chip">{html.escape(keyword)}</span>'
+        for keyword in manifest["keywords"]
+    )
+    actions = ['          <a class="primary-action" href="main.pdf">PDFを読む</a>']
+    for entry in manifest["files"]:
+        if not entry["public"] or not entry["label"]:
+            continue
+        path = html.escape(entry["path"], quote=True)
+        label = html.escape(entry["label"])
+        actions.append(f'          <a href="{path}">{label}</a>')
+    actions.append('          <a href="keywords.txt">検索語テキスト</a>')
+    original_url = html.escape(manifest["original_url"], quote=True)
+    actions.append(f'          <a href="{original_url}">電波通信の元記事</a>')
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title} — 数学識電脳</title>
+  <meta name="description" content="{html.escape(manifest['summary'], quote=True)}">
+  <link rel="canonical" href="https://dempacomm.github.io/papers/{slug}/">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body class="paper-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">PUBLIC MANUSCRIPT</p>
+      <h1>{title}</h1>
+      <p class="lead">{summary}</p>
+      <a class="hatena-link" href="../../#paper-{slug}">公開原稿一覧へ戻る</a>
+    </div>
+  </header>
+  <main>
+    <article class="paper-detail">
+      <div class="paper-meta">
+        <span>初出 {published_date}</span>
+        <span>{kind}</span>
+        <span>原稿番号 {slug}</span>
+      </div>
+      <section aria-labelledby="files-title">
+        <p class="section-number">FILES</p>
+        <h2 id="files-title">公開ファイル</h2>
+        <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}の公開ファイル">
+{chr(10).join(actions)}
+        </nav>
+      </section>
+      <section aria-labelledby="paper-tags-title">
+        <p class="section-number">TAGS</p>
+        <h2 id="paper-tags-title">電波通信のタグ</h2>
+        <div class="paper-tags">
+{tag_chips}
+        </div>
+      </section>
+      <section aria-labelledby="keywords-title">
+        <p class="section-number">KEYWORDS</p>
+        <h2 id="keywords-title">検索キーワード</h2>
+        <div class="keyword-list">
+{keyword_chips}
+        </div>
+      </section>
+    </article>
   </main>
   <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
 </body>
@@ -516,6 +596,9 @@ def command_stage(args: argparse.Namespace) -> None:
             shutil.copy2(pdf, target_dir / "main.pdf")
         else:
             shutil.copy2(source_dir / "published.pdf", target_dir / "main.pdf")
+        (target_dir / "index.html").write_text(
+            rendered_paper_page(manifest), encoding="utf-8"
+        )
         for legacy_slug in manifest["legacy_slugs"]:
             legacy_dir = output / "papers" / legacy_slug
             if legacy_dir.exists():

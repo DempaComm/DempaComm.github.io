@@ -191,6 +191,10 @@ main { padding: 64px 0 80px; }
   font-weight: 500;
 }
 
+.paper-card h3 a {
+  text-underline-offset: 7px;
+}
+
 .paper-card > p { max-width: 620px; color: var(--muted); }
 
 .paper-actions {
@@ -349,6 +353,51 @@ main { padding: 64px 0 80px; }
   color: var(--muted);
 }
 
+.paper-page h1 {
+  max-width: 900px;
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  line-height: 1.25;
+}
+
+.paper-page .hatena-link {
+  color: var(--white);
+}
+
+.paper-detail {
+  padding: clamp(28px, 6vw, 52px);
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: 0 16px 40px rgb(23 33 43 / 7%);
+}
+
+.paper-detail > section + section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.paper-detail h2 {
+  margin-bottom: 18px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword-chip {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .workflow ol {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -382,6 +431,7 @@ footer p { margin: 0; }
     grid-template-columns: 1fr;
   }
   .header-inner { padding: 52px 0 46px; }
+  .paper-meta { flex-wrap: wrap; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .workflow ol { grid-template-columns: 1fr; }
   .tag-index,
