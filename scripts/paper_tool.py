@@ -38,6 +38,10 @@ MATH_SECTIONS = (
     "解析・測度・確率",
     "その他",
 )
+SITE_TITLE_TOP = "数識電収"
+SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
+SITE_TITLE_ATTRIBUTE = "私と放電"
+SITE_TITLE_FULL = f"{SITE_TITLE_FORMAL} {SITE_TITLE_ATTRIBUTE}"
 
 
 class PaperToolError(RuntimeError):
@@ -391,7 +395,7 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{escaped_tag}の記事 — 数学識電脳</title>
+  <title>{escaped_tag}の記事 — {SITE_TITLE_TOP}</title>
   <meta name="description" content="電波通信のタグ「{html.escape(tag, quote=True)}」が付いた公開原稿の一覧">
   <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -409,7 +413,7 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
   <main>
 {year_sections}
   </main>
-  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FULL}</p></footer>
 </body>
 </html>
 """
@@ -464,8 +468,8 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>数学記事総覧 — 数学識電脳</title>
-  <meta name="description" content="数学識電脳で公開している数学記事と原稿の分野別総合目次です。">
+  <title>数学記事総覧 — {SITE_TITLE_TOP}</title>
+  <meta name="description" content="{SITE_TITLE_TOP}で公開している数学記事と原稿の分野別総合目次です。">
   <link rel="canonical" href="https://dempacomm.github.io/math/">
   <link rel="stylesheet" href="../styles.css">
 </head>
@@ -474,7 +478,7 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     <div class="header-inner">
       <p class="eyebrow">MATHEMATICS DIRECTORY</p>
       <h1>数学記事総覧</h1>
-      <p class="lead">数学識電脳で公開している全{len(selected)}原稿を、数学の分野ごとにまとめた総合目次です。</p>
+      <p class="lead">{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を、数学の分野ごとにまとめた総合目次です。</p>
       <nav class="header-links" aria-label="総覧ページの案内">
         <a class="hatena-link" href="../">トップページへ戻る</a>
         <a class="hatena-link" href="../tags/%E6%95%B0%E5%AD%A6/">数学タグを見る</a>
@@ -487,7 +491,7 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     </nav>
 {sections}
   </main>
-  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FULL}</p></footer>
 </body>
 </html>
 """
@@ -524,7 +528,7 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title} — 数学識電脳</title>
+  <title>{title} — {SITE_TITLE_TOP}</title>
   <meta name="description" content="{html.escape(manifest['summary'], quote=True)}">
   <link rel="canonical" href="https://dempacomm.github.io/papers/{slug}/">
   <link rel="stylesheet" href="../../styles.css">
@@ -568,7 +572,7 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
       </section>
     </article>
   </main>
-  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FULL}</p></footer>
 </body>
 </html>
 """
