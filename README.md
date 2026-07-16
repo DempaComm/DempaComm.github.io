@@ -1,6 +1,6 @@
-# 電波通信 — 数学原稿アーカイブ
+# ありあまる富 — 数学原稿アーカイブ
 
-はてなブログ「電波通信」のTeX原稿と、自動生成したPDFを公開するGitHub Pagesリポジトリです。
+数学記事のTeX原稿と、自動生成したPDFを公開するGitHub Pagesリポジトリです。
 
 - 公開サイト: https://dempacomm.github.io/
 - はてなブログ: https://concious4410.hatenablog.com/
