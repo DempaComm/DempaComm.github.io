@@ -13,6 +13,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.parse import quote
 
 
 ROOT = Path(
@@ -236,7 +237,7 @@ def paper_card(manifest: dict[str, Any]) -> str:
         json.dumps(manifest["tags"], ensure_ascii=False), quote=True
     )
     tag_chips = "\n".join(
-        f'          <a class="paper-tag" href="#{tag_id(tag)}">{html.escape(tag)}</a>'
+        f'          <a class="paper-tag" href="{tag_href(tag)}">{html.escape(tag)}</a>'
         for tag in manifest["tags"]
     )
     actions = [
@@ -268,37 +269,27 @@ def paper_card(manifest: dict[str, Any]) -> str:
       </article>"""
 
 
-def tag_id(tag: str) -> str:
-    digest = hashlib.sha1(tag.encode("utf-8")).hexdigest()[:12]
-    return f"tag-{digest}"
-
-
-def rendered_tag_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def grouped_tags(
+    selected: list[tuple[Path, dict[str, Any]]],
+) -> dict[str, list[dict[str, Any]]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for _, manifest in selected:
         for tag in manifest["tags"]:
             grouped.setdefault(tag, []).append(manifest)
+    return grouped
 
-    groups: list[str] = []
-    for tag in sorted(grouped):
-        papers = grouped[tag]
-        article_links = "\n".join(
-            "          <li>"
-            f'<a href="#paper-{html.escape(paper["slug"], quote=True)}">'
-            f'<time datetime="{html.escape(str(paper["published_at"])[:10], quote=True)}">'
-            f'{html.escape(str(paper["published_at"])[:10])}</time> '
-            f'{html.escape(paper["title"])}</a></li>'
-            for paper in papers
-        )
-        groups.append(
-            f"""      <details class="tag-group" id="{tag_id(tag)}">
-        <summary><span>{html.escape(tag)}</span><span>{len(papers)}件</span></summary>
-        <ul>
-{article_links}
-        </ul>
-      </details>"""
-        )
-    return "\n\n".join(groups)
+
+def tag_href(tag: str, prefix: str = "") -> str:
+    return f"{prefix}tags/{quote(tag, safe='')}/"
+
+
+def rendered_tag_index(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+    grouped = grouped_tags(selected)
+    return "\n".join(
+        f'      <a class="tag-index-item" href="{tag_href(tag)}">'
+        f"<span>{html.escape(tag)}</span><span>{len(papers)}件</span></a>"
+        for tag, papers in sorted(grouped.items(), key=lambda item: (-len(item[1]), item[0]))
+    )
 
 
 def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
@@ -328,6 +319,82 @@ def rendered_year_groups(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     return "\n\n".join(groups)
 
 
+def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
+    slug = html.escape(manifest["slug"], quote=True)
+    published_date = html.escape(str(manifest["published_at"])[:10])
+    title = html.escape(manifest["title"])
+    summary = html.escape(manifest["summary"])
+    kind = html.escape(manifest["kind"])
+    tag_chips = "\n".join(
+        f'            <a class="paper-tag" href="../{quote(tag, safe="")}/">'
+        f"{html.escape(tag)}</a>"
+        for tag in manifest["tags"]
+    )
+    actions = [
+        f'            <a class="primary-action" href="../../papers/{slug}/main.pdf">PDFを読む</a>'
+    ]
+    for entry in manifest["files"]:
+        if not entry["public"] or not entry["label"]:
+            continue
+        path = html.escape(entry["path"], quote=True)
+        label = html.escape(entry["label"])
+        actions.append(f'            <a href="../../papers/{slug}/{path}">{label}</a>')
+    original_url = html.escape(manifest["original_url"], quote=True)
+    actions.append(f'            <a href="{original_url}">元の記事</a>')
+    return f"""        <article class="tag-page-paper">
+          <div class="paper-meta"><span>初出 {published_date}</span><span>{kind}</span></div>
+          <h3><a href="../../#paper-{slug}">{title}</a></h3>
+          <p>{summary}</p>
+          <div class="paper-tags" aria-label="電波通信のタグ">
+{tag_chips}
+          </div>
+          <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}のファイル">
+{chr(10).join(actions)}
+          </nav>
+        </article>"""
+
+
+def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
+    by_year: dict[int, list[dict[str, Any]]] = {}
+    for paper in papers:
+        by_year.setdefault(int(paper["year"]), []).append(paper)
+    year_sections = "\n".join(
+        f"""      <section class="tag-year-section" aria-labelledby="year-{year}">
+        <h2 id="year-{year}">{year}年 <span>{len(year_papers)}件</span></h2>
+        <div class="tag-page-papers">
+{chr(10).join(rendered_tag_page_paper(paper) for paper in year_papers)}
+        </div>
+      </section>"""
+        for year, year_papers in sorted(by_year.items(), reverse=True)
+    )
+    escaped_tag = html.escape(tag)
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{escaped_tag}の記事 — 数学識電脳</title>
+  <meta name="description" content="電波通信のタグ「{html.escape(tag, quote=True)}」が付いた公開原稿の一覧">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body class="tag-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">TAG ARCHIVE</p>
+      <h1>{escaped_tag}</h1>
+      <p class="lead">電波通信でこのタグが付けられていた公開原稿、全{len(papers)}件。</p>
+      <a class="hatena-link" href="../../#tags-title">タグ索引へ戻る</a>
+    </div>
+  </header>
+  <main>
+{year_sections}
+  </main>
+  <footer><p>数学識電脳 — 数学識電脳界溢出部位封神蔵収 ありあまる富</p></footer>
+</body>
+</html>
+"""
+
+
 def replace_generated(source: str, start: str, end: str, content: str) -> str:
     if source.count(start) != 1 or source.count(end) != 1:
         raise PaperToolError(f"index.html must contain exactly one marker pair: {start}")
@@ -345,7 +412,7 @@ def rendered_index() -> str:
         source,
         TAGS_START_MARKER,
         TAGS_END_MARKER,
-        rendered_tag_groups(selected),
+        rendered_tag_index(selected),
     )
     return replace_generated(
         source,
@@ -454,6 +521,15 @@ def command_stage(args: argparse.Namespace) -> None:
             if legacy_dir.exists():
                 raise PaperToolError(f"legacy slug collision: {legacy_slug}")
             shutil.copytree(target_dir, legacy_dir)
+
+    for tag, papers in grouped_tags(selected).items():
+        if tag in {".", ".."} or "/" in tag or "\0" in tag:
+            raise PaperToolError(f"tag cannot be used as a page path: {tag!r}")
+        tag_dir = output / "tags" / tag
+        tag_dir.mkdir(parents=True)
+        (tag_dir / "index.html").write_text(
+            rendered_tag_page(tag, papers), encoding="utf-8"
+        )
     print(f"STAGED {len(selected)} papers in {output}")
 
 

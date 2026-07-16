@@ -56,7 +56,7 @@
   yearSelect.addEventListener("change", filterPapers);
 
   function openDirectoryFromHash() {
-    if (!/^#(?:tag-|year-)/.test(window.location.hash)) return;
+    if (!window.location.hash.startsWith("#year-")) return;
     const target = document.querySelector(window.location.hash);
     if (target instanceof HTMLDetailsElement) {
       target.open = true;
