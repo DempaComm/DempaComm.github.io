@@ -30,7 +30,7 @@ python3 scripts/paper_tool.py import-pdf manuscript.pdf \
   --privacy-override "別のPDF閲覧環境で全ページと著者表示を確認済み"
 ```
 
-検査自体を一度も実行していないファイルは強制取り込みできない。強制判断の理由、対象SHA-256、検査成否、記録日時は `paper.json` の `privacy_review` に残る。
+検査自体を一度も実行していないファイルは強制取り込みできない。強制判断の理由、対象SHA-256、検査成否、記録日時は `paper.json` の `privacy_reviews` にファイル別で残る。
 
 TeXファイル1本だけから、コンパイル成否に左右されない最低限の記事を作る場合は次を使う。
 
@@ -53,8 +53,12 @@ PDFはバイト単位で同一の `published.pdf` として保存され、公開
 まず、リポジトリ外に取り込み仕様JSONを作る。仕様例は `examples/paper-import.example.json` にある。
 
 ```sh
-python3 scripts/paper_tool.py import-paper /path/to/import-spec.json
+python3 scripts/paper_tool.py import-paper /path/to/import-spec.json --privacy-reviewed
 ```
+
+通常取り込みでも、`files` のうち `public: true` である全TeX・PDFに対して、あらかじめ `inspect-file` を実行する必要がある。公開BibTeX、BST、図版なども取り込み前に一覧表示されるが、現在の自動検査対象はTeXとPDFである。検査済み指定はコマンドの `--privacy-reviewed` または仕様JSONの `privacy_reviewed: true` に書ける。
+
+全対象を別環境で確認して強制する場合は、コマンドの `--privacy-override "理由"` または仕様JSONの `privacy_override` を使う。同じ理由でも、監査記録は対象ファイルごとに保存される。
 
 この操作は次を行う。
 
@@ -127,4 +131,6 @@ python3 scripts/paper_tool.py stage _site
 
 旧形式の原稿名が `legacy_slugs` に登録されている場合、公開時には旧URLにも同じファイルを配置する。改名後も既存リンクは維持される。
 
-したがって、新しい `paper.json` を追加すれば、検索情報、記事一覧、PDF生成対象、Pagesへの配置へ自動的に反映される。
+新しい取り込みで生成される `paper.json` は `schema_version: 2` となり、公開TeX・PDFすべての検査記録を必須とする。GitHub Actionsの `verify` でも検査対象の不足とハッシュ不一致を検出する。既存の移行済み16原稿だけは `schema_version: 1` のまま維持され、免除対象のslugはツール内で固定されている。新規原稿に旧スキーマを指定して検査を回避することはできない。
+
+したがって、検査済みの新しい `paper.json` を追加すれば、検索情報、記事一覧、PDF生成対象、Pagesへの配置へ自動的に反映される。

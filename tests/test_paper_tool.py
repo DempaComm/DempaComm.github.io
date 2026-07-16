@@ -239,10 +239,118 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertIn("IMPORTED", imported.stdout)
             manifest_path = next((root / "papers").glob("*/paper.json"))
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            self.assertEqual("overridden", manifest["privacy_review"]["status"])
+            review_record = manifest["privacy_reviews"][0]
+            self.assertEqual("overridden", review_record["status"])
             self.assertEqual(
                 "著者名は公開名として本人確認済み",
-                manifest["privacy_review"]["reason"],
+                review_record["reason"],
+            )
+
+    def test_import_paper_requires_reviews_for_every_public_tex_and_pdf(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environment = prepare_root(root)
+            source_dir = root / "incoming"
+            source_dir.mkdir()
+            tex = source_dir / "article.tex"
+            pdf = source_dir / "finished.pdf"
+            bib = source_dir / "refs.bib"
+            tex.write_text("\\title{Reviewed Article}\n", encoding="utf-8")
+            pdf.write_bytes(b"%PDF-1.4\n%%EOF\n")
+            bib.write_text("@book{x,title={Reference}}\n", encoding="utf-8")
+            spec = root / "spec.json"
+            spec_value = {
+                "title": "Reviewed Article",
+                "published_at": "2026-07-16T12:00:00+09:00",
+                "sequence": 1,
+                "kind": "複数ファイル原稿",
+                "summary": "検査済み原稿です。",
+                "original_url": "",
+                "tags": ["数学"],
+                "keywords": ["Reviewed Article"],
+                "source_dir": str(source_dir),
+                "build_enabled": False,
+                "files": [
+                    {
+                        "source": "article.tex",
+                        "path": "source.tex",
+                        "role": "manuscript",
+                        "label": "TeXソース",
+                        "public": True,
+                    },
+                    {
+                        "source": "finished.pdf",
+                        "path": "published.pdf",
+                        "role": "published-pdf",
+                        "label": "",
+                        "public": True,
+                    },
+                    {
+                        "source": "refs.bib",
+                        "path": "refs.bib",
+                        "role": "bibliography",
+                        "label": "BibTeX",
+                        "public": True,
+                    },
+                ],
+            }
+            spec.write_text(json.dumps(spec_value), encoding="utf-8")
+
+            blocked = subprocess.run(
+                [sys.executable, str(TOOL), "import-paper", str(spec)],
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertNotEqual(0, blocked.returncode)
+            self.assertIn("run inspect-file first", blocked.stderr)
+            add_review_receipt(root, tex)
+            add_review_receipt(root, pdf)
+            imported = subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "import-paper",
+                    str(spec),
+                    "--privacy-reviewed",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertIn("PUBLIC FILES TO IMPORT", imported.stdout)
+            manifest_path = root / "papers" / "2026-07-16-01" / "paper.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual(2, manifest["schema_version"])
+            self.assertEqual(
+                {"source.tex", "published.pdf"},
+                {review["path"] for review in manifest["privacy_reviews"]},
+            )
+
+            manifest["privacy_reviews"].pop()
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            invalid = subprocess.run(
+                [sys.executable, str(TOOL), "verify"],
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertNotEqual(0, invalid.returncode)
+            self.assertIn("invalid privacy review coverage", invalid.stderr)
+
+            manifest["schema_version"] = 1
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            legacy_bypass = subprocess.run(
+                [sys.executable, str(TOOL), "verify"],
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertNotEqual(0, legacy_bypass.returncode)
+            self.assertIn(
+                "schema 1 privacy exemption is limited to migrated legacy papers",
+                legacy_bypass.stderr,
             )
 
 

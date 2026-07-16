@@ -48,6 +48,24 @@ MATH_SECTIONS = (
 SITE_TITLE_TOP = "数識電収"
 SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
 SITE_TITLE_ATTRIBUTE = "私と放電"
+LEGACY_PRIVACY_EXEMPT_SLUGS = {
+    "2015-08-28-01",
+    "2015-09-01-01",
+    "2016-01-09-01",
+    "2017-08-01-01",
+    "2018-03-29-01",
+    "2018-10-14-01",
+    "2019-11-29-01",
+    "2020-01-30-01",
+    "2021-01-28-01",
+    "2022-01-03-01",
+    "2023-06-20-01",
+    "2024-01-03-01",
+    "2024-01-08-01",
+    "2024-01-13-01",
+    "2025-12-28-01",
+    "2026-04-21-01",
+}
 
 
 class PaperToolError(RuntimeError):
@@ -118,8 +136,15 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     missing = [key for key in required if key not in manifest]
     if missing:
         raise PaperToolError(f"{path}: missing fields: {', '.join(missing)}")
-    if manifest["schema_version"] != 1:
+    if manifest["schema_version"] not in {1, 2}:
         raise PaperToolError(f"{path}: unsupported schema_version")
+    if (
+        manifest["schema_version"] == 1
+        and manifest.get("slug") not in LEGACY_PRIVACY_EXEMPT_SLUGS
+    ):
+        raise PaperToolError(
+            f"{path}: schema 1 privacy exemption is limited to migrated legacy papers"
+        )
     if path.parent.name != manifest["slug"]:
         raise PaperToolError(f"{path}: slug does not match directory name")
     if not isinstance(manifest["sequence"], int) or manifest["sequence"] < 1:
@@ -189,6 +214,56 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         raise PaperToolError(
             f"{path}: source-only papers must not use main.tex; use source.tex"
         )
+    if manifest["schema_version"] == 2:
+        reviews = manifest.get("privacy_reviews")
+        if not isinstance(reviews, list):
+            raise PaperToolError(f"{path}: schema 2 requires privacy_reviews")
+        expected = {
+            entry["path"]: entry["sha256"]
+            for entry in manifest["files"]
+            if entry["public"] and Path(str(entry["path"])).suffix.casefold() in {".tex", ".pdf"}
+        }
+        reviewed: dict[str, str] = {}
+        for review in reviews:
+            if not isinstance(review, dict):
+                raise PaperToolError(f"{path}: privacy review must be an object")
+            for key in (
+                "path",
+                "status",
+                "reason",
+                "source_sha256",
+                "inspection_status",
+                "recorded_at",
+            ):
+                if key not in review:
+                    raise PaperToolError(f"{path}: privacy review missing {key}")
+            relative = str(safe_relative_path(str(review["path"])))
+            if relative in reviewed:
+                raise PaperToolError(f"{path}: duplicate privacy review for {relative}")
+            if review["status"] not in {"reviewed", "overridden"}:
+                raise PaperToolError(f"{path}: invalid privacy status for {relative}")
+            if review["status"] == "overridden" and not str(review["reason"]).strip():
+                raise PaperToolError(f"{path}: privacy override reason is empty for {relative}")
+            source_hash = review["source_sha256"]
+            if not isinstance(source_hash, str) or len(source_hash) != 64:
+                raise PaperToolError(f"{path}: invalid privacy hash for {relative}")
+            reviewed[relative] = source_hash
+        if reviewed != expected:
+            missing_reviews = sorted(set(expected) - set(reviewed))
+            extra_reviews = sorted(set(reviewed) - set(expected))
+            mismatched = sorted(
+                relative
+                for relative in set(expected) & set(reviewed)
+                if expected[relative] != reviewed[relative]
+            )
+            details = []
+            if missing_reviews:
+                details.append("missing: " + ", ".join(missing_reviews))
+            if extra_reviews:
+                details.append("extra: " + ", ".join(extra_reviews))
+            if mismatched:
+                details.append("hash mismatch: " + ", ".join(mismatched))
+            raise PaperToolError(f"{path}: invalid privacy review coverage ({'; '.join(details)})")
 
 
 def has_pdf(manifest: dict[str, Any]) -> bool:
@@ -1085,6 +1160,10 @@ def require_privacy_review(
     }
 
 
+def privacy_review_for_path(review: dict[str, Any], target: Path) -> dict[str, Any]:
+    return {"path": str(target), **review}
+
+
 def command_import_tex(args: argparse.Namespace) -> None:
     """Create a guaranteed-publishable source-only paper from one TeX file."""
     source = Path(args.tex_file).expanduser().resolve()
@@ -1129,7 +1208,7 @@ def command_import_tex(args: argparse.Namespace) -> None:
         if sha256(target) != source_hash:
             raise PaperToolError(f"copy verification failed: {source}")
         manifest = {
-            "schema_version": 1,
+            "schema_version": 2,
             "slug": slug,
             "legacy_slugs": [],
             "title": title,
@@ -1155,7 +1234,7 @@ def command_import_tex(args: argparse.Namespace) -> None:
                 }
             ],
             "approved_changes": [],
-            "privacy_review": privacy_review,
+            "privacy_reviews": [privacy_review_for_path(privacy_review, Path(target_name))],
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
@@ -1218,7 +1297,7 @@ def command_import_pdf(args: argparse.Namespace) -> None:
         if sha256(target) != source_hash:
             raise PaperToolError(f"copy verification failed: {source}")
         manifest = {
-            "schema_version": 1,
+            "schema_version": 2,
             "slug": slug,
             "legacy_slugs": [],
             "title": title,
@@ -1244,7 +1323,7 @@ def command_import_pdf(args: argparse.Namespace) -> None:
                 }
             ],
             "approved_changes": [],
-            "privacy_review": privacy_review,
+            "privacy_reviews": [privacy_review_for_path(privacy_review, Path(target_name))],
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
@@ -1295,19 +1374,39 @@ def command_import(args: argparse.Namespace) -> None:
     if destination.exists():
         raise PaperToolError(f"destination already exists: {destination}")
 
+    reviewed_flag = bool(args.privacy_reviewed or spec.get("privacy_reviewed", False))
+    override_value = (
+        args.privacy_override
+        if args.privacy_override is not None
+        else spec.get("privacy_override")
+    )
+    if override_value is not None and not isinstance(override_value, str):
+        raise PaperToolError("privacy_override must be a string")
+    prepared_files: list[tuple[dict[str, Any], Path, Path]] = []
+    privacy_reviews: list[dict[str, Any]] = []
+    print("PUBLIC FILES TO IMPORT:")
+    for entry in spec["files"]:
+        source_relative = safe_relative_path(str(entry["source"]))
+        target_relative = safe_relative_path(str(entry["path"]))
+        source = (source_dir / source_relative).resolve()
+        try:
+            source.relative_to(source_dir)
+        except ValueError as error:
+            raise PaperToolError(f"source escapes source_dir: {source}") from error
+        if not source.is_file():
+            raise PaperToolError(f"source file does not exist: {source}")
+        is_public = bool(entry.get("public", True))
+        if is_public:
+            print(f"- {target_relative} ({entry.get('role', 'file')})")
+        if is_public and target_relative.suffix.casefold() in {".tex", ".pdf"}:
+            review = require_privacy_review(source, reviewed_flag, override_value)
+            privacy_reviews.append(privacy_review_for_path(review, target_relative))
+        prepared_files.append((entry, source, target_relative))
+
     manifest_files: list[dict[str, Any]] = []
     try:
         destination.mkdir(parents=True)
-        for entry in spec["files"]:
-            source_relative = safe_relative_path(str(entry["source"]))
-            target_relative = safe_relative_path(str(entry["path"]))
-            source = (source_dir / source_relative).resolve()
-            try:
-                source.relative_to(source_dir)
-            except ValueError as error:
-                raise PaperToolError(f"source escapes source_dir: {source}") from error
-            if not source.is_file():
-                raise PaperToolError(f"source file does not exist: {source}")
+        for entry, source, target_relative in prepared_files:
             target = destination / target_relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, target)
@@ -1338,7 +1437,7 @@ def command_import(args: argparse.Namespace) -> None:
                 LATEXMKRC_BY_ENGINE[effective_engine], encoding="utf-8"
             )
         manifest = {
-            "schema_version": 1,
+            "schema_version": 2,
             "slug": slug,
             "legacy_slugs": list(spec.get("legacy_slugs", [])),
             "title": spec["title"],
@@ -1363,6 +1462,7 @@ def command_import(args: argparse.Namespace) -> None:
             ),
             "files": manifest_files,
             "approved_changes": [],
+            "privacy_reviews": privacy_reviews,
         }
         manifest_path = destination / "paper.json"
         write_json(manifest_path, manifest)
@@ -1460,6 +1560,10 @@ def parser() -> argparse.ArgumentParser:
         "import-paper", help="copy a new paper byte-for-byte from a JSON spec"
     )
     import_parser.add_argument("spec")
+    import_parser.add_argument("--privacy-reviewed", action="store_true")
+    import_parser.add_argument(
+        "--privacy-override", metavar="REASON", help="force import and record why"
+    )
     import_parser.add_argument("--no-catalog", action="store_true")
     import_parser.set_defaults(func=command_import)
 
