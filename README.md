@@ -33,7 +33,7 @@ python3 scripts/paper_tool.py check-links _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
 
-トップページには新着6件だけを表示し、全件検索・タグ索引・公開年別一覧は
+トップページには新着3件だけを表示し、全件検索・タグ索引・公開年別一覧は
 `archive/` に自動生成します。`math/` は数学分野別総覧への入口となり、
 各分野の記事一覧を `math/<分野>/` に生成します。RSSは `feed.xml`、
 サイトマップは `sitemap.xml` で公開します。

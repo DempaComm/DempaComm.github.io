@@ -66,7 +66,7 @@ SITE_TITLE_TOP = "数識電収"
 SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
 SITE_TITLE_ATTRIBUTE = "私と放電"
 SITE_URL = "https://dempacomm.github.io"
-HOME_PAPER_LIMIT = 6
+HOME_PAPER_LIMIT = 3
 LEGACY_PRIVACY_EXEMPT_SLUGS = {
     "2015-08-28-01",
     "2015-09-01-01",
