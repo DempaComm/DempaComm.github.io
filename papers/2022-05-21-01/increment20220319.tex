@@ -1,0 +1,2755 @@
+ \documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\newtheorem*{hihi}{論評}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\pr}{pr}
+
+\DeclareMathOperator{\rank}{rank}
+
+\DeclareMathOperator{\dini}{D_{+}}
+
+\newcommand{\ddd}{\mathbf{D}}
+
+\newcommand{\bibun}[1]{#1^{\prime}}
+\newcommand{\bbb}[2]{#1^{(#2)}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\newcounter{mycnt}%                       カウンター定義
+\newcommand{\outcnt}{%                    コマンド定義
+  \the\value{mycnt}%                      カウンター出力
+  \ifnum\value{mycnt}>100 (over 100)\fi%  100以上の場合
+  \stepcounter{mycnt}%                    mycnt++
+}
+\setcounter{mycnt}{1}
+
+\title{
+コラム：
+中間値の定理，有限増分の定理，平均値の定理，テイラーの定理
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+\section{とりあえず平均値の定理の証明}
+この文章ではまず普通の平均値の定理を知っていることを前提とする．
+この文章では紙面の都合というものを考えなくて良いから，
+もうここでとりあえず主張を述べ，さらに証明をしておく．
+本当はロルの定理を独立に証明しておいてその応用として示すのが
+数学的に効率的なのだが，とりあえずの証明なので一つの証明に全部丸め込んでしまう．
+なぜ事前に平均値の定理の主張が必要なのかというと，
+この文章での実用的面では少なくとも
+中間値の定理の章での
+Darbouxの定理で用いるからだけ
+なのだが，
+有限増分の定理と「平均値の定理不要論」に触れるためには
+平均値の定理を事前に知っておいた方が良いとも思う．
+
+以下の定理はFermatの定理とも言われている．
+\begin{prop}[極小値・極大値と微分係数の消失]\label{prop:vanish}
+$f: [a, b]\to \rr$
+を可微分な連続関数とし，
+点$c$は$(a, b)$内の極小点，もしくは
+極大点とする．このとき
+$\bibun{f}(c)=0$
+が成り立つ．
+\end{prop}
+\begin{proof}
+$f(c)$が極大値である場合にのみ証明をしても，
+$-f$を考えれば極小値の場合も極大値の場合
+に還元できるので，
+一般性を失わない．
+
+このとき$x<c$となる十分$c$に近い任意の$x$について，
+$f(c)$が極大値であることから
+\[
+\frac{f(x)-f(c)}{x-c}\ge  0
+\]
+である．つまり$\bibun{f}(c)\ge 0$である．
+また$c<x$となる$c$に十分近い$x$については
+\[
+\frac{f(x)-f(c)}{x-c}\le 0
+\]
+なので$\bibun{f}(c)\le 0$である．
+以上から$\bibun{f}(c)=0$である．
+\end{proof}
+
+
+\begin{thm}[平均値の定理]
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$(a, b)$上で可微分とする．
+このとき$c\in (a, b)$が存在して
+\[
+\frac{f(b)-f(a)}{b-a}=\bibun{f}(c)
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+まず関数$F: [a, b]\to \rr$を
+\[
+F(x)=(f(x)-f(a))(b-a)-(f(b)-f(a))(x-a)
+\]
+と定義する．このとき
+$F$は$[a, b]$上連続であり，
+$F(b)=F(a)=0$である．
+また$(a, b)$上$F$は可微分である．
+今から$\bibun{F}(c)=0$となる$c\in (a, b)$
+が存在することを示す．
+
+最大値最小値の原理から$F$は$[a, b]$
+上に最大値と最小値をもつ．
+もしもそれらが一致する場合には$F$は定数となるので
+$(a, b)$上常に$\bibun{F}=0$である．
+
+次に$F$の最大値と最小値が異なる場合を考えよう．
+$F(a)=F(b)$なので，最大値と最小値のいずれかは
+$F(a)(=F(b))$とは異なる．$-F$を考えれば最大値と最小値は入れ替わるので，
+最大値が$F(a)(=F(b))$と異なるとしても一般性を失わない．
+つまり$F$は$c\in (a, b)$となる点で最大値$F(c)$をとる．
+このとき命題\ref{prop:vanish}から$\bibun{F}(c)=0$である．
+
+以上で$\bibun{F}(c)=0$となる$c\in (a, b)$存在がわかった．
+そして
+\[
+\bibun{F}(c)
+=\bibun{f}(c)(b-a)-(f(b)-f(a))
+\]
+なので移項して整理すると
+\[
+\frac{f(b)-f(a)}{b-a}=\bibun{f}(c)
+\]
+がわかる．
+\end{proof}
+
+
+\section{準備}
+
+\subsection{ノルムとノルム空間}
+
+ノルム空間のことは知っているとする．
+この文章では実ノルム空間しか扱わない．
+また，ノルム空間$V$上のノルムを
+$|\cdot|_{V}$と表すことにする．
+混乱がないと思われる場合にはただ単に$|\cdot|$
+と表すことにする．
+ノルム空間の間の線型写像の空間をノルム空間にする方法を紹介する．
+
+\begin{lem}
+$V$, $W$をノルム空間とする．
+そして$A: V\to W$
+を線型写像とする．このとき
+以下は同値である．
+\begin{enumerate}
+\item 
+$A$は$0\in V$において連続である．
+\item 
+$A$は連続である．
+\item 
+$M>0$が存在して
+任意の$x\in V$について
+$|Ax|_{W}\le M|x|$が成り立つ．
+
+\item 
+$M>0$が存在して
+任意の$x\in V$について$|x|_{V}\le 1$が成り立つならば
+$|Ax|_{W}\le M|x|$が成り立つ．
+
+\item 
+$M>0$が存在して
+任意の$x\in V$について$|x|_{V}= 1$が成り立つならば
+$|Ax|_{W}\le M$が成り立つ．
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+(3)--(5)が同値なのは簡単にわかる．
+(1)と(2)が同値なのは
+$|Ax-Ay|=|A(x-y)|$が成り立つことからわかる．
+(3)から(2)が導かれるのは簡単にわかる．
+(1)から(5)を示そう．
+(1)からある$\delta>0$
+が存在して
+$|x|\le \delta$
+を満たす任意の$x$について
+$|Ax|<1$を満たす．
+(5)を今から示していく．
+任意に$x$を取り$|x|=1$
+を満たすとする．
+このとき$y=\delta\cdot x$
+は$|y|\le \delta$
+なので先に行ったように
+$|Ay|<1$
+が成り立つ．
+よって$|Ax|<\delta^{-1}$
+が成り立つので(5)が示された．
+\end{proof}
+
+連続線型写像のことを有界作用素などと言ったりする．
+
+\begin{df}
+$V$, $W$をノルム空間とし，
+$V$から$W$への連続な線形写像の全体の集合
+を$L(V, W)$と書くことにする．
+$A\in L(V, W)$
+を線型写像とする．
+この時$A$の作用素ノルムを
+\[
+|A|_{L(V, W)}=\sup_{x\in \rr^{k}, x\neq 0}\frac{|Ax|_{W}}{|x|_{V}}
+\]
+と定義する．
+このノルムの良いところは
+$|Ax|_{W}\le |A|_{L(V, W)}\cdot |x|_{V}$が成り立つところである.
+
+\end{df}
+
+\begin{lem}
+$V$をノルム空間とする．
+このとき$L(\rr, V)$
+は$V$
+の間の写像$A$を$f\in L(\rr, V)$について
+$Af=f(1)$と定義する．
+このとき$A$は$L(\rr, V)$と$V$の間の
+ノルム空間としての同型を与える．
+つまり$A$は全単射な線形写像であって任意の$x$について$|Ax|=x$
+が成り立ち$A^{-1}$も同じく全単射で連続な線形写像である．
+\end{lem}
+この補題をもとに$L(\rr, V)$と$V$を同一視する．
+
+
+\subsection{可微分性}
+
+\begin{df}
+$E$, $F$をバナッハ空間とし，
+とし，$U\subset E$を開集合とする．
+そして$f: U\to F$とする．
+このとき$f$が$a\in U$で
+\textbf{全微分可能}
+であるとは
+線型写像
+$A\in L(E, F)$
+が存在し
+\[
+\lim_{x\to a, x\neq a}
+\frac{|f(x)-f(a)-A(x-a)|_{F}}{|x-a|_{E}}
+\]
+が成り立つときにいう．
+この$A$のことを\textbf{$f$の導関数}であるとか
+\textbf{ヤコビ行列}だとか呼ぶ．
+ここで
+$f=(f_{1}, \dots, f_{l})$と定義する．
+そしてこの$A$をこの文章では
+$A=(\ddd f)(a)$と表す．
+\end{df}
+
+
+
+
+\subsection{有限次元の場合}
+
+
+
+
+
+\begin{df}
+$A: \rr^{k}\to \rr^{l}$
+を行列とする．
+この時$A$の作用素ノルムを
+\[
+|A|=\sup_{x\in \rr^{k}, x\neq 0}\frac{|Ax|}{|x|}
+\]
+と定義する．
+このノルムの良いところは
+$|Ax|\le |A|\cdot |x|$が成り立つところである.
+
+\end{df}
+
+\begin{df}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき$f$が$a\in U$で
+\textbf{全微分可能}
+であるとは
+線型写像\footnote{本来は接空間の間の線型写像$A: T_{a}U\to T_{f(a)}\rr^{l}$と書くべきかもしれないが，解析学だとユークリッド空間とその接空間を同一視する．また線型写像ではなく，行列と言ってもよい．なぜなら有限次元空間の間の線型写像は行列と同一視されるからである．}
+$A: \rr^{k}\to \rr^{l}$
+が存在し
+\[
+\lim_{x\to a, x\neq a}
+\frac{|f(x)-f(a)-A(x-a)|}{|x-a|}
+\]
+が成り立つときにいう．
+このとき$f$は点$a$において
+任意の方向に偏微分可能であり，さらに
+$A$は行列として
+\[
+A=\left(\frac{\partial f_{j}}{\partial x_{i}}(a)\right)_{i=1, \dots, k, j=1, \dots, l}
+\]
+と表される．
+この$A$のことを\textbf{$f$の導関数}であるとか
+\textbf{ヤコビ行列}だとか呼ぶ．
+ここで
+$f=(f_{1}, \dots, f_{l})$と定義する．
+そしてこの$A$をこの文章では
+$A=(\ddd f)(a)$と表す．
+\end{df}
+
+
+初等的な事実として以下が成り立つ．
+\begin{thm}
+$k, l\in \zz_{ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき
+$f$を$C^{1}$級ならば
+$f$は$U$内の任意の点で全微分可能である．
+またこのとき$\ddd f: U\to \rr^{k\times l}$; 
+$x\to (\ddd f)(x)$
+は連続写像である．
+\end{thm}
+
+\begin{df}
+一変数の可微分写像に関しては
+$\ddd f$を$\frac{d}{dx}f$
+とか$\bibun{f}$
+とか書くことにする．
+\end{df}
+\section{中間値の定理}
+このセクションでは中間値の定理に関する話をする．
+そもそも中間値の定理とは連結位相空間の連続像が
+連結であるというより一般的な定理（この定理も中間値の定理と呼ばれたりする）
+と実数の連結部分集合は区間に限るという特徴付けを合わせただけのことであるが，連続でなくても可微分関数の導関数になりうる関数も同様の性質を持つので
+一変数関数特有の現象もあるにはある．
+\subsection{本文}
+
+\begin{thm}[一般の中間値の定理]\label{thm:ippanninter}
+$X$を連結位相空間とする．
+そして$Y$を位相空間とし
+$f: X\to Y$を全射連続写像とする．
+このとき$Y$は連結である．
+\end{thm}
+\begin{proof}
+$Y$の開集合$U$, $V$が
+$U\cap V=\emptyset$
+と$Y=U\cup V$を満たしているとする．
+このとき$A=f^{-1}(U)$
+と$B=f^{-1}(V)$は開集合であり，$A\cap B=\emptyset$
+と$X=A\cup B$を満たす．
+よって$X$の連結性から$A=\emptyset$かもしくは$B=\emptyset$
+である．
+つまり$U=\emptyset$かもしくは$V=\emptyset$
+である．
+ゆえに$Y$は連結である．
+\end{proof}
+
+\begin{prop}\label{prop:kukann}
+$\rr$の連結部分集合は区間のみである．
+\end{prop}
+\begin{proof}
+区間ならば連結であることはわかる．
+
+逆に連結部分集合ならば区間であることを示そう．
+$X\subset \rr$を連結集合とすると，
+連結性から以下が成り立つ．
+\begin{itemize}
+\item[(a)]
+任意の$x, y\in X$
+について$x\le y$ならば$[x, y]\subset X$を満たす．
+\end{itemize}
+ここで$a=\inf X$, 
+$b=\sup X$と定義しよう．
+すると$a\in [-\infty, \infty)$であり，
+$b\in (-\infty, \infty]$である．
+ここで$a, b$が$X$に属しているか属していないかに応じて，
+性質 (a) より$X$
+は以下の集合のいずれかと一致する．
+\begin{enumerate}
+\item $(a, b]$
+\item $(a, b)$
+\item $[a, b]$
+\item $[a, b)$
+\end{enumerate}
+よって$X$は$\rr$の区間となる．
+\end{proof}
+
+\begin{thm}[中間値の定理]
+$a, b\in \rr$とし，
+$a<b$とする．
+そして$f: [a, b]\to \rr$
+は連続写像とする．
+そして$\alpha=\min_{x\in [a, b]}f(x)$, 
+$\beta=\max_{x\in [a, b]}f(x)$とおく．
+任意の$\gamma\in [\alpha, \beta]$
+について$c\in [a, b]$が存在し，
+$f(c)=\gamma$
+を満たす．
+\end{thm}
+\begin{proof}[\textbf{証明その１}]
+定理 \ref{thm:ippanninter}と
+命題 \ref{prop:kukann}からわかる．
+\end{proof}
+\begin{proof}[\textbf{証明その２}]
+まず最初に
+$\alpha=\beta$が成り立つならば$\gamma=\alpha$であるから
+例えば$c=a$とすれば
+$f(c)=\gamma$となる．
+
+以下では$\alpha<\beta$とする．
+また，最大値最小値の定理から
+$\gamma=\alpha$もしくは$\gamma=\beta$
+の時は定理は成り立つ．
+よって以下では$\alpha<\gamma<\beta$
+と仮定する．
+\[
+S=\{\, x\in [a, b]\mid f(x)\le \gamma\, \}
+\]
+と定義する．$f(p)=\alpha$となる$p$をとれば
+$p\in S$なので$S\neq \emptyset$
+である．そこで$c=\sup S$と定義する．
+このとき，$f$は連続なので$f(c)\le \gamma$
+となる．
+ここでもしも$f(c)<\gamma$だとすると，
+$f$の連続性から十分小さい$\delta>0$
+が存在して任意の$x\in (c-\delta, c+\delta)$
+について$f(x)<\gamma$となるが
+これは$c=\sup S$に矛盾する．
+よって$f(c)=\gamma$である．
+\end{proof}
+
+\subsection{単射ならば単調関数}
+一変数の中間値の定理の有用な応用を紹介しよう．
+記事
+\cite{denden}と内容は重複する．
+\begin{thm}
+$I$を$\rr$の区間とし，
+そして$f: I\to \rr$
+は単射連続写像とする．
+このとき$f$は狭義の単調増加かもしくは
+狭義の単調減少である．
+\end{thm}
+\begin{proof}
+まず
+\[
+D=\{\, 
+(x, y)\in I\times I\mid 
+x<y
+\, \}
+\]
+と定義する．このとき$I$の連結性から$D$も連結になる．
+そして$F: D\to \rr$を
+\[
+F(x, y)=(f(y)-f(x))(y-x)
+\]
+と定義する．
+$D$の定義から$y-x\neq 0$であり，
+$f$の単射性から$f(y)-f(x)\neq 0$である．
+よって$D$上で$F(x, y)\neq 0$である．
+$D$は連結なので$F(x, y)$の符号は$D$上で常に正かもしくは
+$D$上で常に負である．前者の場合には$f$が狭義の単調増加であることが従い，
+後者の場合には$f$が狭義単調減少であることが従う．
+\end{proof}
+
+\subsection{Darbouxの定理}
+
+\begin{thm}\label{thm:darboux}
+
+$a, b\in \rr$
+は$a<b$を満たすとし
+$f: (a, b)\to \rr$は$(a, b)$上連続でさらに可微分であるとする．
+このとき$\bibun{f}$による$(a, b)$
+の像は連結である．
+特に
+任意の$c, d\in (a, b)$
+について
+$\alpha=\min\{\bibun{f}(c), \bibun{f}(d)\}$, 
+$\beta=\max\{\bibun{f}(c), \bibun{f}(d)\}$
+と定義するとき任意の$\gamma\in [\alpha, \beta]$
+について$p\in [c, d]$
+が存在し
+$\bibun{f}(p)=\gamma$
+を満たす．
+
+\end{thm}
+\begin{proof}[\textbf{証明その１}]
+まず古典的な証明をする．
+最初に$\gamma=\alpha$かもしくは
+$\gamma=\beta$の時はそれぞれ
+$p=c$, $p=d$とすればよい．
+
+次に$\gamma\in (\alpha, \beta)$の時を考える．
+関数$F: (a, b)\to \rr$を
+\[
+F(x)=f(x)-\gamma x
+\]
+と定義する．
+このとき$\gamma\in (\alpha, \beta)$
+なので
+$\bibun{F}(c)>0$かつ$\bibun{F}(d)<0$かもしくは
+$\bibun{F}(c)<0$かつ$\bibun{F}(d)>0$
+が成り立つ．このとき$p\in (c, d)$が存在し
+$\bibun{F}(p)=0$となることを示そう．
+
+まず$\bibun{F}(c)>0$かつ$\bibun{F}(d)<0$の時，
+$F(c)$は$[c, d]$上の$F$の最大値ではない．
+もし最大値であるとしたならば，任意の$c<x$となる$x$について
+\[
+\frac{f(x)-f(c)}{x-c}\le 0
+\]
+なので$\bibun{F}(c)\le 0$となり矛盾する．
+よって$F(c)$は$[c, d]$上の最大値ではない．
+同様に$F(d)$も最大値ではないので，最大値はある$p\in (c, d)$
+を用いて$F(p)$とかける．
+このとき命題 \ref{prop:vanish}から$\bibun{F}(p)=0$である．
+
+$\bibun{F}(c)<0$かつ$\bibun{F}(d)>0$
+の場合はある$p\in (c, d)$
+が存在して$[c, d]$上の$F$の最小値は$F(c)$
+と書けるので
+命題\ref{prop:vanish}
+より$\bibun{F}(p)=0$となる．
+
+いずれにせよ$\bibun{F}(p)=0$となる
+$p\in (c, d)$が存在する．
+よって$\bibun{f}(p)=\gamma$が成り立つ．
+\end{proof}
+\begin{proof}[\textbf{証明その２}]
+平均値の定理を用いた賢い証明を紹介する．
+最初に$\gamma=\alpha$かもしくは
+$\gamma=\beta$のときは
+$p=c$または$p=d$とすればよい．
+
+次に$\gamma\in (\alpha, \beta)$の時を考える．
+このとき
+二つの関数$F_{0}, F_{1}: [c, d]\to \rr$
+を
+\[
+F_{0}(x)=
+\begin{cases}
+\bibun{f}(c) & \text{$x=c$}\\
+\displaystyle \frac{f(x)-f(c)}{x-c} & \text{$x\neq c$.}
+\end{cases}
+\]
+で
+\[
+F_{1}(x)=
+\begin{cases}
+\bibun{f}(d) & \text{$x=c$}\\
+\displaystyle \frac{f(x)-f(d)}{x-d} & \text{$x\neq d$.}
+\end{cases}
+\]
+と定義すると$F_{0}$と$F_{1}$は連続関数である．
+$\theta=\frac{f(c)-f(d)}{c-d}$とすると
+$F_{0}(d)=F_{1}(c)=\theta$である．
+そして
+$\gamma$は$\bibun{f}(c)$と$\theta$
+を端点とする区間かもしくは$\bibun{f}(d)$と$\theta$
+を端点とする区間のいずれかに属する．
+前者であると仮定しても一般性を失わない．
+$F_{0}$の像は$\bibun{f}(c)$と$\theta$
+を端点とする区間なので
+中間値の定理から$q\in (c, d)$が存在し
+$F_{0}(q)=\gamma$となる．
+さらに
+\[
+F_{0}(q)=\frac{f(q)-f(c)}{q-c}
+\]
+なので平均値の定理から
+$F_{0}(q)=\bibun{f}(p)$となる
+$p\in (c, d)$が存在する．
+よって$\bibun{f}(p)=\gamma$
+なので定理が示された．
+\end{proof}
+\begin{proof}[\textbf{証明その３}]
+最初に$\gamma=\alpha$かもしくは
+$\gamma=\beta$のときは
+$p=c$または$p=d$とすればよい．
+
+次に$\gamma\in (\alpha, \beta)$の時を考える．
+このとき$m=(c+d)/2$
+として$s, d: [c, d]\to [c, d]$を
+\[
+s(x)=
+\begin{cases}
+2x-c & \textit{$c\le x\le m$}\\
+d & \textit{$m\le x\le d$}
+\end{cases}
+\]
+で
+\[
+t(x)=
+\begin{cases}
+c & \textit{$c\le x\le m$}\\
+2x-d & \textit{$m\le x\le d$}
+\end{cases}
+\]
+と定義する．
+ここで任意の$x\in (c, d)$について
+$s(x)\neq t(x)$
+であることと
+$s(c)=t(c)=c$で$s(d)=t(d)=d$に注意しよう．
+に注意しよう．
+そして$F: [c, d]\to \rr$を
+\[
+F(x)=
+\begin{cases}
+\bibun{f}(c) &\text{$x=c$}\\
+\bibun{f}(d) & \text{$x=d$}\\
+\displaystyle \frac{f(s(x))-f(t(x))}{s(x)-t(x)} & \text{$x\in (c, d)$}
+\end{cases}
+\]
+と定義すると
+$F$は連続であり，$\gamma$は$F(c)$と$F(d)$
+を端点とする区間に含まれるので中間値の定理から
+$F(q)=\gamma$となる$q\in (c, d)$
+が存在する．
+また，
+\[
+F(q)=\frac{f(s(q))-f(t(q))}{s(q)-t(q)} 
+\]
+で$s(q), t(q)\in [c, d]$なので
+平均値の定理から
+$F(q)=\bibun{f}(p)$となる$p\in (c, d)$
+が存在する．
+よって$\bibun{f}(p)=\gamma$
+となる．
+\end{proof}
+
+
+このDarbouxの定理を見て，可微分関数の導関数になるような
+関数では一変数関数の基本的な性質が成り立つのではないかと
+思うのは比較的スタンダードな数学的直感である．
+以下に示す例は可微分関数の導関数になる関数について最大値最小値の定理が成り立たない例である．
+\cite[p.165]{tazi}
+閉区間$[-3^{-1}, 3^{-1}]$上で$f$を
+\[
+f(x)=
+\begin{cases}
+\displaystyle x^{3}\sin\left(\frac{1}{x}+3x\right) & \text{$x\neq 0$}\\
+0 & \text{$x=0$}
+\end{cases}
+\]
+
+また，可微分関数の導関数はリーマン可積分とは限らない．
+Volterraの反例
+
+可微分関数の導関数はルベーグ可積分とは限らない．
+
+
+
+
+\begin{rmk}
+以上のことから可微分関数の導関数になる関数についてはせいぜい中間値の定理
+ぐらいしか一変数の連続関数と共通する性質はないであろうことがわかる．
+
+一般に中間値の定理を満たす関数のことをDarboux 関数と呼ぶ．
+至る所不連続だが，どの区間でも中間値の定理を満たす（それどころかどの区間でも全射になる）関数が構成されている．
+Conway 13 base functionで調べてみよ．
+\end{rmk}
+
+
+\section{有限増分の定理}
+
+\subsection{可算個の除外点がある有限増分の定理}
+\begin{thm}[有限増分の定理その１]\label{thm:incre}
+$a, b\in \rr$を$a<b$を満たす実数とし，
+$E$をバナッハ空間とする．
+そして
+$f: [a, b]\to E$, 
+$g: [a, b]\to \rr$
+を連続関数とする．
+このとき$[a, b]$の可算部分集合$N=\{p_{i}\}_{i\in \zz_{\ge 0}}$が存在し，任意の$x\in [a, b]\setminus N$について
+$f$と$g$は微分可能であり，
+$\|\bibun{f}(x)\|_{E}\le \bibun{g}(x)$
+を満たすならば，
+\[
+\|f(b)-f(a)\|_{E}\le g(b)-g(a)
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$\epsilon\in (0, \infty)$を固定し，
+$\{w_{i}\}_{i\in \zz_{\ge 0}}\subset (0, \infty)$
+を$\sum_{i=0}^{\infty}w_{i}=\epsilon$
+を満たす数列とする．
+定理を証明するためにまず
+\begin{align}\label{al:mokuteki}
+\|f(b)-f(a)\|_{E}\le g(b)-g(a)+\epsilon(b-a)+\sum_{p_{i}<b}w_{i}
+\end{align}
+が成り立つことを示す．この式が示されれば，$\epsilon\to 0$として定理の結論を得る．
+さて，
+\[
+S=\left\{\, 
+x\in [a, b]
+\, \middle |\, 
+\|f(x)-f(a)\|_{E}\le g(x)-g(a)+\epsilon(x-a)+
+\sum_{p_{i}<x}w_{i}
+\, \right\}
+\]
+とおく．
+まず，$\sum_{p_{i}<a}w_{i}=0$なので，
+$a\in S$がわかる．
+特に$S$は空ではない．
+今$c=\sup S$とする．
+$c=b$がわかれば 式 (\ref{al:mokuteki})
+が成り立つことがわかる．
+まず最初に$c\in S$を示す．
+$c$の定義から$\{x_{k}\}_{k\in \zz_{\ge 0}}\subset S$
+で$x_{k}\le c$と$\lim_{k\to \infty}x_{k}=c$
+が成り立つものが存在する．
+このとき$S$の定義より任意の$k$について
+\[
+\|f(x_{k})-f(a)\|_{E}\le g(x_{k})-g(a)+\epsilon(x_{k}-a)+
+\sum_{p_{i}<x_{k}}w_{i}
+\]
+が成り立つ．今$x_{k}\le c$より
+\[
+\sum_{p_{i}<x_{k}}w_{i}\le \sum_{p_{i}<c}w_{i}
+\]
+が成り立つので任意の$k$について
+\[
+\|f(x_{k})-f(a)\|_{E}\le g(x_{k})-g(a)+\epsilon(x_{k}-a)+
+\sum_{p_{i}<c}w_{i}
+\]
+が成り立つ．$k\to \infty$とすれば，$f$と$g$の連続性と
+$\lim_{k\to \infty}x_{k}=c$から
+\[
+\|f(c)-f(a)\|_{E}\le g(c)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}
+\]
+が成り立つ．つまり$c\in S$である．
+
+さて矛盾を導き出すために
+$c<b$と仮定しよう．
+
+Case 1 ($c=p_{k}$となる$k$が存在するとき):
+$f$と$g$の連続性から十分小さい$\eta>0$
+を取ると，任意の$t\in (c, c+\eta)$について
+$\|f(c)-f(t)\|_{E}\le w_{k}/2$と
+$|g(c)-g(t)|\le w_{k}/2$
+が成り立つ．
+すると任意の$t\in (c, c+\eta)$について
+\begin{align*}
+\|f(t)-f(a)\|_{E}
+&\le 
+\|f(t)-f(c)\|_{E}+\|f(c)-f(a)\|_{E}
+\\
+&\le \frac{w_{k}}{2}+
+g(c)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}
+\end{align*}
+が成り立つ．
+そして
+\begin{align*}
+g(c)-g(a)
+&=
+g(c)-(a)+g(t)-g(c)-(g(t)-g(c))\\
+&\le 
+g(t)-g(a)+|g(t)-g(c)|
+\le 
+g(t)-g(a)+w_{k}/2
+\end{align*}
+が成り立つ．
+\textbf{(ここで$g(t)-g(c)\ge 0$であることを用いてはいないことに注意しよう．可算個の点を除いて微分が正ならば非減少関数であるが，それを用いると循環論法に陥る．)}
+よって, $c-a\le t-a$を用いて結局
+\begin{align*}
+\|f(t)-f(a)\|_{E}
+\le 
+g(t)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}+w_{k}
+\end{align*}
+を得るが，$c<t$なので，
+$\sum_{p_{i}<c}w_{i}+w_{k}\le \sum_{p_{i}<t}w_{i}$
+となるので，
+\begin{align*}
+\|f(t)-f(a)\|_{E}
+\le 
+g(t)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<t}w_{i}
+\end{align*}
+となる．つまり$t\in S$であり，
+$c<t$であるから$c=\sup S$に矛盾する．
+よってこの場合には$c=b$がわかる．
+
+Case2 ($c\not\in N$の場合)：
+この場合，点$c$で微分可能であるから
+十分小さい$\eta>0$について
+任意の$t\in (c, c+\eta)$について
+\[
+\|f(t)-f(c)-f^{(1)}(c)(t-c)\|_{E}\le \frac{\epsilon}{2} (t-c)
+\]
+\[
+\left|\frac{g(t)-g(c)}{t-c}-g^{(1)}(c)\right|\le \frac{\epsilon}{2}
+\]
+である．
+よって
+\[
+\|f(t)-f(c)\|_{E}\le\|f^{(1)}(c)\|_{E}\cdot (t-c) +\frac{\epsilon}{2} (t-c)\le g^{(1)}(c)(t-c)+
+\frac{\epsilon}{2}(t-c)
+\]
+であり，
+$-\frac{\epsilon}{2}
+\le \frac{g(t)-g(c)}{t-c}-g^{(1)}(c)\le 
+\frac{\epsilon}{2}$
+から
+\[
+g^{(1)}(c)(t-c)\le g(t)-g(c)+ 
+\frac{\epsilon}{2}(t-c)
+\]
+を得る．
+以上の不等式から
+\begin{align*}
+&\|f(t)-f(a)\|_{E}
+\le 
+\|f(t)-f(c)\|_{E}+\|f(c)-f(a)\|_{E}\\
+&\le 
+g^{(1)}(c)(t-c)+\frac{\epsilon}{2}(t-c)
++
+ g(c)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}
+\\
+&\le 
+ g(t)-g(c)+ 
+\frac{\epsilon}{2}(t-c)
++\frac{\epsilon}{2}(t-c)
++
+ g(c)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}\\
+&=g(t)-g(a)+
+\epsilon(t-a)+
+\sum_{p_{i}<c}w_{i}
+\le 
+g(t)-g(a)+
+\epsilon(t-a)+
+\sum_{p_{i}<t}w_{i}
+\end{align*}
+よって$t\in S$
+となる．
+ここで$c<t$なので
+$c=\sup S$に反する．
+これで矛盾が導かれたので
+$c=b$がわかる．
+
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{thm}[高階の有限増分の定理その１]\label{thm:increkokai}
+$a, b\in \rr$を$a<b$を満たす実数とし，
+$E$をバナッハ空間とする．
+そして
+$f: [a, b]\to E$, 
+$g: [a, b]\to \rr$
+を連続関数とする．
+$k\in \zz_{\ge 1}$
+とする．
+このとき$[a, b]$の可算部分集合$N=\{p_{i}\}_{i\in \zz_{\ge 0}}$が存在し，任意の$x\in [a, b]\setminus N$について
+$f$と$g$は$k$階微分可能であり，
+任意の$i\in \{1, \dots, k\}$について
+$\bbb{f}{i}(a)=0$で$\bbb{g}{i}(a)=0$
+であり，任意の$x\in (a, b)$について
+$\|\bbb{f}{k}(x)\|_{E}\le \bbb{g}{k}(x)$
+を満たすならば，任意の$x\in [a, b]$について
+\[
+\|f(x)-f(a)\|_{E}\le g(x)-g(a)
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+もしも
+$\|\bbb{f}{i}(x)\|_{E}\le \bbb{g}{i}(x)$
+ならば$\bbb{f}{i-1}(a)=0$で$\bbb{g}{i-1}(a)=0$
+なので
+定理 \ref{thm:incre}を$\bbb{f}{i}$と$\bbb{g}{i}$
+と$[a, x]$に適応して
+$\|\bbb{f}{i-1}(x)\|\le \bbb{g}{i-1}(x)$
+が成り立つ．任意の$x\in (a, b)$について
+$\|\bbb{f}{k}(x)\|_{E}\le \bbb{g}{k}(x)$が成り立つので，
+これを$k$回繰り返し，
+\[
+\|f(x)-f(a)\|_{E}\le g(x)-g(a)
+\]
+を得る．
+\end{proof}
+
+\begin{thm}[高階の有限増分の定理その２]\label{thm:increkokai2}
+$a, b\in \rr$を$a<b$を満たす実数とし，
+$E$をバナッハ空間とする．
+そして
+$f: [a, b]\to E$, 
+$g: [a, b]\to \rr$
+を連続関数とする．
+$k\in \zz_{\ge 1}$
+とする．
+このとき$[a, b]$の可算部分集合$N=\{p_{i}\}_{i\in \zz_{\ge 0}}$が存在し，任意の$x\in [a, b]\setminus N$について
+$f$と$g$は$k$階微分可能であり，
+任意の$i\in \{1, \dots, k\}$について
+$\bbb{f}{i}(b)=0$で$\bbb{g}{i}(b)=0$
+であり，任意の$x\in (a, b)$について
+$\|\bbb{f}{k}(x)\|_{E}\le (-1)^k\bbb{g}{k}(x)$
+を満たすならば，任意の$x\in [a, b]$について
+\[
+\|f(b)-f(x)\|_{E}\le g(b)-g(x)
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+もしも
+$\|\bbb{f}{i}(x)\|_{E}\le (-1)^{i}\bbb{g}{i}(x)$
+ならば$\bbb{f}{i-1}(b)=0$で$\bbb{g}{i-1}(b)=0$
+なので
+定理 \ref{thm:incre}を$\bbb{f}{i}$と$\bbb{g}{i}$
+と$[x, b]$に適応して
+$\|\bbb{f}{i-1}(x)\|\le(-1)^{i-1} \bbb{g}{i-1}(x)$
+が成り立つ．任意の$x\in (a, b)$について
+$\|\bbb{f}{k}(x)\|_{E}\le (-1)^{k}\bbb{g}{k}(x)$が成り立つので，
+これを$k$回繰り返し，
+\[
+\|f(b)-f(x)\|_{E}\le g(b)-g(x)
+\]
+を得る．
+\end{proof}
+
+
+
+
+\subsection{除外点が端点のみの有限増分の定理}
+\begin{lem}[有限増分の定理]\label{lem:increment}
+$l\in \zz_{\ge 1}$
+とし，$[a, b]\subset \rr$とする．
+$\eta>0$とする．
+そして$f: [a, b]\to \rr^{l}$は
+$(a, b)$上で全微分可能であるとする．
+このときもしも$M>0$が任意の$x\in (a, b)$について
+$|\ddd f(x)|\le M$を満たすならば
+\[
+|f(b)-f(a)|_{E}\le M(b-a)
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+今から任意の$x\in [a, b]$と$\epsilon>0$について
+\[
+|f(x)-f(a)|_{E}\le (M+\epsilon)(x-a)+\epsilon
+\]
+が成り立つことを示す．
+$\epsilon>0$を固定する．
+背理法を用いるために
+\begin{align}\label{al:jkjk}
+|f(x)-f(a)|> (M+\epsilon)(x-a)+\epsilon
+\end{align}
+を満たすような$x$全体の集合を$U$
+とし，$U$は空でないと仮定する．
+$U$は$[a, b]$の開集合であることに注意せよ．
+そして$c=\inf U$とする．
+$\epsilon>0$であることと
+$f$の連続性から$c\neq a$である．
+つまり$a<c$である．
+さらにもしも$c=b$ならば
+$U=\{b\}$となるので$U$が$[a, b]$
+の開集合であるということに矛盾する．
+よって$c<b$である．
+以上から$a<c<b$である．
+そして$U$が開集合であることから
+$x\in U$ならば$x$に十分近い点は全て
+式 (\ref{al:jkjk})を満たすので
+$c\not \in U$である．
+関数$f$は$(a, b)$上で全微分可能なので
+特に$c$で全微分可能である．
+よって
+$\delta>0$
+を十分小さくとれば，
+任意の$t\in (c, c+\delta)$について
+$|f(t)-f(c)-(\ddd f)(c)(t-c)|\le \epsilon (t-c)$
+となる．
+そして$c\not\in U$から
+$|f(c)-f(a)|\le (M+\epsilon)(c-a)+\epsilon$
+である．以上を踏まえると
+任意の$t\in (c, c+\delta)$について
+\begin{align*}
+|f(t)-f(a)|&\le 
+|f(t)-f(c)|+|f(c)-f(a)|
+\\
+&\le |(\ddd f)(c)(t-c)|+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+\\
+& \le M(t-c)+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+ =(M+\epsilon)(t-a)+\epsilon
+\end{align*}
+が成り立つ．
+つまり任意の$t\in (c, c+\delta)$について
+$t\not \in U$なので$c=\inf U$に反する．
+これで矛盾が導かれたので$U=\emptyset$である．
+つまり
+任意の$x\in [a, b]$と$\epsilon>0$について
+\[
+|f(x)-f(a)|\le (M+\epsilon)(x-a)+\epsilon
+\]
+が成り立つので，$x=b$として$\epsilon\to 0$
+とすれば
+\[
+|f(b)-f(a)|\le M(b-a)
+\]
+が成り立つ．
+\end{proof}
+\begin{proof}[\textbf{別証明}]
+今から任意の$x\in [a, b]$と$\epsilon>0$について
+\begin{align}\label{al:mokumoku}
+|f(x)-f(a)|\le (M+\epsilon)(x-a)+\epsilon
+\end{align}
+が成り立つことを示す．
+式 (\ref{al:mokumoku})
+が成り立つような$x\in [a, b]$全体を
+$S$とおく．$\epsilon>0$から
+$a\in S$がわかるので$S$は空ではない．
+そして$c=\sup S$とおく．
+$f$の連続性から$c\in S$である．
+よって
+$c=b$を示すことができれば補題の証明は終わる．
+矛盾を導くために$c<b$と仮定する．
+
+Case 1. $c=a$の場合：
+この場合，$f$の連続性から十分小さい$\eta>0$
+を取れば$t=a+\eta$について
+$|f(t)-f(a)|\le \epsilon$が成り立つ．
+このとき$0<(M+\epsilon)(t-a)$なので
+\[
+|f(t)-f(a)|\le \epsilon
+\le (M+\epsilon)(t-a)+\epsilon
+\]
+がわかる．
+つまり$t\in S$であるが，$a<t$なので$a=c=\sup S$
+に矛盾する．
+
+Case 2. $a<c$の場合：
+関数$f$は$(a, b)$上で全微分可能なので
+特に$c$で全微分可能である．
+よって
+$\eta>0$
+を十分小さくとれば，$t=c+\eta$について
+\[
+|f(t)-f(c)-(\ddd f)(c)(t-c)|\le \epsilon (t-c)
+\]
+となる．
+そして$c\in S$から
+$|f(c)-f(a)|\le (M+\epsilon)(c-a)+\epsilon$
+である．以上を踏まえると
+\begin{align*}
+|f(t)-f(a)|&\le 
+|f(t)-f(c)|+|f(c)-f(a)|
+\\
+&\le |(\ddd f)(c)(t-c)|+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+\\
+& \le M(t-c)+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+ =(M+\epsilon)(t-a)+\epsilon
+\end{align*}
+が成り立つ．
+つまり$t\in S$であるが，
+ここで$c<t$
+なので$c=\sup S$矛盾する．
+
+以上のいずれの場合分けでも矛盾が導かれたので，$c=b$
+である．つまり
+\[
+|f(b)-f(a)|\le (M+\epsilon)(b-a)+\epsilon
+\]
+が成り立つので，$\epsilon\to 0$
+とすれば
+\[
+|f(b)-f(a)|\le M(b-a)
+\]
+が成り立つ．
+\end{proof}
+
+
+\subsection{一変数関数の右微分可能性に係る有限増分の定理}
+\begin{thm}
+$a, b\in \rr$を$a<b$を満たす実数とする．
+そして
+$f: [a, b]\to E$
+を連続関数とする．
+このとき$[a, b]$の可算部分集合
+$N=\{p_{i}\}_{i\in \zz_{\ge 0}}$が存在し，任意の$x\in [a, b)\setminus N$について
+$f$には有限な右側微分が存在し，
+$\dini f(x)=0$
+を満たすならば，
+$f$は定数である．
+\end{thm}
+
+
+\begin{proof}
+$\epsilon\in (0, \infty)$を固定し，
+$\{w_{i}\}_{i\in \zz_{\ge 0}}\subset (0, \infty)$
+を$\sum_{i=0}^{\infty}w_{i}=\epsilon$
+を満たす数列とする．
+定理を証明するために任意の$x$について
+\begin{align}\label{al:mokuteki}
+|f(x)-f(a)|\le \epsilon(x-a)+\sum_{p_{i}<x}w_{i}
+\end{align}
+が成り立つことを示す．この式が示されれば，$\epsilon\to 0$とすると$f(x)=f(a)$がわかるので定理の結論を得る.
+
+さて，
+\[
+S=\left\{\, 
+t\in [a, b]
+\, \middle |\, 
+\forall x\in [a, t], \ 
+|f(x)-f(a)|\le \epsilon(x-a)+
+\sum_{p_{i}<x}w_{i}
+\, \right\}
+\]
+とおく．
+まず，$\sum_{p_{i}<a}w_{i}=0$なので，
+$a\in S$がわかる．
+特に$S$は空ではない．
+今から$S$が閉集合であることを証明する．
+$S$の定義から
+点列$\{x_{n}\}_{n\in \zz_{\ge 0}}\subset S$が
+$x_{n}<x_{n+1}$かつ$\lim_{n\to \infty}x_{n}=l$
+ならば$l\in S$が成り立つことを示せば$S$が閉集合であることがわかる．
+このとき$S$の定義より任意の$k$について
+\[
+|f(x_{k})-f(a)|\le\epsilon(x_{k}-a)+
+\sum_{p_{i}<x_{k}}w_{i}
+\]
+が成り立つ．今$x_{k}\le l$より
+\[
+\sum_{p_{i}<x_{k}}w_{i}\le \sum_{p_{i}<l}w_{i}
+\]
+が成り立つので任意の$k$について
+\[
+|f(x_{k})-f(a)|\le \epsilon(x_{k}-a)+
+\sum_{p_{i}<l}w_{i}
+\]
+が成り立つ．$k\to \infty$とすれば，$f$の連続性と
+$\lim_{k\to \infty}x_{k}=l$から
+\[
+|f(l)-f(a)|\le \epsilon(c-a)+
+\sum_{p_{i}<l}w_{i}
+\]
+が成り立つ．つまり$l\in S$であるので，
+$S$は閉集合になる．
+
+今$c=\sup S$とする．
+$c=b$がわかれば
+任意の$x\in [a, b]$について 式 (\ref{al:mokuteki})
+が成り立つことがわかる．
+$S$が閉集合なので$c\in S$を示す．
+$x=c$について式 (\ref{al:mokuteki})が成り立つことを示せば良い．
+$c$の定義から$\{x_{k}\}_{k\in \zz_{\ge 0}}\subset S$
+で$x_{k}\le c$と$\lim_{k\to \infty}x_{k}=c$
+が成り立つものが存在する．
+
+
+さて矛盾を導き出すために
+$c<b$と仮定しよう．
+
+Case 1 ($c=p_{k}$となる$k$が存在するとき):
+$f$の連続性から十分小さい$\eta>0$
+を取ると，任意の$t\in (c, c+\eta)$について
+$|f(c)-f(t)|\le w_{k}$
+が成り立つ．
+すると任意の$t\in (c, c+\eta)$について
+\begin{align*}
+|f(t)-f(a)|
+&\le 
+|f(t)-f(c)|
++|f(c)-f(a)|
+\\
+&\le w_{k}+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}
+\end{align*}
+が成り立つ．
+よって, $c-a\le t-a$を用いて結局
+\begin{align*}
+|f(t)-f(a)|
+\le 
+\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}+w_{k}
+\end{align*}
+を得るが，$c<t$なので，
+$\sum_{p_{i}<c}w_{i}+w_{k}\le \sum_{p_{i}<t}w_{i}$
+となるので，
+\begin{align*}
+|f(t)-f(a)|
+\le 
+g(t)-g(a)+\epsilon(c-a)+
+\sum_{p_{i}<t}w_{i}
+\end{align*}
+となる．つまり$t\in S$であり，
+$c<t$であるから$c=\sup S$に矛盾する．
+よってこの場合には$c=b$がわかる．
+
+Case2 ($c\not\in S$の場合)：
+この場合，点$c$で微分可能であるから
+十分小さい$\eta>0$について
+任意の$t\in (c, c+\eta)$について
+\[
+|f(t)-f(c)-\dini f(c)(t-c)|
+\le \epsilon(t-c)
+\]
+である．
+よって$\dini f(c)=0$より
+\[
+|f(t)-f(c)|
+\le
+\epsilon(t-c)
+\]
+を得る．
+以上の不等式から
+\begin{align*}
+&|f(t)-f(a)|
+\le 
+|f(t)-f(c)|+|f(c)-f(a)|\\
+&\le 
+\epsilon(t-c)
++\epsilon(c-a)+
+\sum_{p_{i}<c}w_{i}
+\\
+&
+\le 
+\epsilon(t-a)+
+\sum_{p_{i}<t}w_{i}
+\end{align*}
+よって$t\in S$
+となる．
+ここで$c<t$なので
+$c=\sup S$に反する．
+これで矛盾が導かれたので
+$c=b$がわかる．
+
+以上で証明が終わる．
+\end{proof}
+
+
+
+以上で用いた論法は「連続帰納法」とか
+呼ばれているようだ．
+以下の定理はある程度の仮定があれば
+必ず右端に到達するということを述べているが，
+その定理の「形」はZornの補題と同じである．
+そしてZornの補題には順序数（超限帰納法）
+を使った証明があるが，
+この命題にも$\omega_{1}$までの
+超限再帰を用いた証明がある．
+\begin{prop}[連続帰納法]
+$a\in \rr$で$b\in \rr\cup\{\infty\}$
+で$a<b$とする．
+$I=[a, b]\cap \rr$とする．
+$H$をその部分集合で以下の条件
+を満たすものとする．
+\begin{enumerate}
+\item 
+$a\in H$. 
+\item 
+もしも$x\in H$かつ$x<b$
+ならば$y\in I$
+が存在して$x<y$と$[x, y)\subset H$
+を満たす. 
+\item 
+もしも$x\in I$が$x<b$と
+$[a, x)\subset H$を満たすならば
+$x\in H$が成り立つ． 
+\end{enumerate}
+このとき$H=I$である．
+\end{prop}
+\begin{proof}[\textbf{証明その１}]
+$F=\{\, x\in I\mid [a, x]\subset H\, \}$とおく．
+$a\in H$なので$a\in F$であるから$F\neq \emptyset$である．
+そこで
+$s=\sup F$とおく．条件(3)より
+$s\in F$である．
+ここで$s<b$と仮定して矛盾を導く．
+$s<b$より$y\in H$が存在して
+$s<y$から$[s, y]\subset H$
+が成り立つ．よって
+$y\in F$だがこれは$s=\sup F$に矛盾する．
+\end{proof}
+\begin{proof}[\textbf{証明その２}]
+$F=\{\, x\in I\mid [a, x]\subset H\, \}$とおく．
+まず条件(3)から$F$が$I$の閉集合であることがわかる．
+$F$が開集合であることを証明するために任意に$x\in F$をとる．もしも$x=b$ならば$[a, b]\subset H$であり
+$[a, b]\subset F$が従い，また$[a, b]$は$I$における$b$の近傍だから$x=b$は$F$
+の内点である．
+$x<b$のときには条件(2)より
+$y\in I$が存在して$x<y$と$[x, y)\subset H$
+を満たす．$x\in F$から$[a, x]\subset H$
+なので結局$[a, y)\subset H$がわかる．
+任意に$z\in [a, y)$を取るともちろん$[a, z)\subset H$
+なので$[a, y)\subset F$がわかる．そして$[a, y)$
+は$x$の$I$における近傍なので$x$は$F$の内点であることがわかる．
+さて$a\in H$より$a\in F$なので特に$F\neq \emptyset$
+である．
+よって$I$の連結性から$F=I$がわかる．
+\end{proof}
+\begin{proof}[\textbf{証明その３}]
+$F=\{\, x\in I\mid [a, x]\subset H\, \}$とおく．
+すると$F$も条件(1), (2), (3)を満たす．
+$D$を$I$の可算稠密部分集合で$a, b\in D$
+を満たすものとする．
+このとき写像
+$f: \omega_{1}\to D\cap F$で
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\item 
+$\alpha<\gamma<\omega_{1}$ならば
+$f(\alpha)\le f(\gamma)$が成り立つ．
+\item 
+$f(\alpha)<b$かつ$\alpha<\gamma<\omega_{1}$ならば
+$f(\alpha)<f(\gamma)$
+が成り立つ．
+
+\end{enumerate}
+以下のように超限再帰で定義する．
+
+まず
+$f(0)=a$と定義する. 
+
+そして
+$\alpha<\omega_{1}$に対して
+$\beta<\alpha$となる任意の$\beta$
+について$f(\beta)$が定義されているとしたする．
+このとき$\alpha$が孤立順序数か極限順序数かで場合分けをして$f$を定義する．
+
+Case1. $\alpha$が孤立順序数のとき，$\alpha=\beta+1$
+となる$\beta$が存在する．
+$f(\beta)=b$のときは$f(\alpha)=b$と定義する．
+$f(\beta)<b$のときは
+条件(2)から
+$[f(\beta), y)\subset H$となる$y\in I$
+が存在するので適当に$f(\alpha)\in (f(\beta), y)\cap D$
+と定義する．このときちゃんと$f(\alpha)\in F\cap D$である．
+
+Case2. $\alpha$が極限順序数のとき，
+$\alpha$の共終数は$\omega_{0}$
+なので$\{\beta_{n}\}_{n\in \zz_{\ge 0}}$
+が存在して$\beta_{n}<\alpha$
+と$\beta_{n}<\beta_{n+1}$と$\sup_{n}\beta_{n}=\alpha$
+が成り立つ．
+$s=\sup_{n}f(\beta_{n})$とおく．
+もしも$s=b$ならば$f(\alpha)=b$
+と定義する．
+もしも$s<b$ならば条件(2), 
+(3)を用いて$y\in I$であって$[s, y)\in H$
+を満たすものが存在するので
+適当に$f(\alpha)\in (s, y)\cap D$
+と定義する．このときちゃんと$f(\alpha)\in F\cap D$である．
+
+さて，$D\cap F$は高々可算で$\omega_{1}$
+は非可算なので順序を保つ写像$f: \omega_{1}\to D\cap F$
+は単射ではない．よってある$\theta<\omega_{1}$
+が存在して$\theta<\eta<\omega_{1}$ならば
+$f(\theta)=f(\eta)$
+となる．
+よって$f(\theta)=b$である．
+つまり$b\in F$ということなので
+$F$の定義から$H=[a, b]$がわかる．
+\end{proof}
+
+
+\subsection{有限増分の定理の応用}
+
+\begin{prop}
+$D$を$\rr$か$\cc$
+の開集合とする．
+$f: D\to E$を可微分関数であるとする．
+そして関数$G: D\times D\to E$を
+\[
+G(x, y)=
+\begin{cases}
+\displaystyle\frac{f(x)-f(y)}{x-y} & \text{$x\neq y$のとき，}\\
+ f^{\prime}(x) & \text{$x=y$のとき}
+\end{cases}
+\]
+と定義する．
+任意の$a\in D$について\[
+\lim_{(x, y)\to (a, a), x\neq y}|G(x, y)-\bibun{f}(a)|_{E}=0
+\]
+となる．
+\end{prop}
+\begin{proof}
+$\epsilon$を任意に与え，
+$a$の凸な開近傍$N$
+を十分小さく取り以下が成り立つようにする．
+\begin{enumerate}
+\item 
+任意の$x, y\in N$に対して
+任意の$t\in [0, 1]$について$tx+(1-t)y\in D$が成り立つ．
+\item 
+任意の$z_{1}, z_{2}\in N$について
+$|f(z_{1})-f(z_{2})|\le \epsilon$
+が成り立つ．
+\end{enumerate}
+$x, y\in D$を任意にとる．
+集合$\{\, (x, x)\mid x\in D\, \}$
+上では$G$が連続なのは仮定から従う．よって
+$x\neq y$と仮定してもよい．
+そして
+$F: [0, 1] \to E$を
+\[
+F(t)=f(y+t(x-y))-\bibun{f}(a)\cdot (y+t(x-y))
+\]
+と定義する．
+このとき
+\[
+\bibun{F}(t)=(\bibun{f}(y+t(x-y))-\bibun{f}(a))\cdot (x-y)
+\]
+となる．さて
+\[
+M_{x, y}=\sup_{t\in [0, 1]}|(\bibun{f}(y+t(x-y))-(\bibun{f}(a))|
+\]
+とおくと
+補題 \ref{lem:increment}より
+\[
+|F(1)-F(0)|\le |x-y|M_{x, y}
+\]
+である．よって
+\begin{align*}
+|G(x, y)-\bibun{f}(a)|&=
+\left|\frac{f(x)-f(y)}{x-y}-\bibun{f}(a)\right|
+=
+\frac{1}{|x-y|}
+|f(x)-f(y)-\bibun{f}(a)(x-y)|
+\\
+&=
+\frac{|F(1)-F(0)|}{|x-y|}\le 
+M_{x, y}
+\end{align*}
+である．
+ここで$N$の取り方の$(2)$から
+$M_{x, y}\le \epsilon$である．ゆえに
+\[
+|G(x, y)-\bibun{f}(a)|\le M_{x,y}\le \epsilon
+\]
+が成り立つ．よって$(a, a)$で$G$は連続である．
+以上から$G$が$D$上で連続であることがわかる．
+\end{proof}
+
+\begin{prop}
+$D$を$\rr$か$\cc$
+の開集合とする．
+$f: D\to E$を可微分関数であり，
+その微分係数は連続であるとする．
+そして関数$G: D\times D\to E$を
+\[
+G(x, y)=
+\begin{cases}
+\displaystyle\frac{f(x)-f(y)}{x-y} & \text{$x\neq y$のとき，}\\
+ f^{\prime}(x) & \text{$x=y$のとき}
+\end{cases}
+\]
+と定義する．
+このとき$G$は$D\times D$
+上で連続である.
+\end{prop}
+
+\section{平均値の定理}
+\subsection{ロルの定理}
+
+\begin{thm}[ロルの定理]\label{thm:rolle}
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続であり，
+$(a, b)$上で可微分であるとする．
+このとき
+もし$f(a)=f(b)$ならば
+$c\in (a, b)$が存在して
+$\bibun{f}(c)=0$を満たす．
+\end{thm}
+\begin{proof}
+最大値最小値の定理から$f$には最大値と最小値が存在する．
+それをそれぞれ$\alpha$と$\beta$としよう．
+
+まず最初に$\alpha=\beta$の場合を考える．
+このとき$f$は定数関数となるので適当に$c\in (a, b)$
+を取れば$\bibun{f}(c)=0$を満たす．
+
+$\alpha\neq \beta$の場合には
+$\alpha$と$\beta$の少なくとも一方は
+$c\in (a, b)$を使って$f(c)$と表すことができる．
+というのも
+$f(a)=f(b)$で$\alpha\neq \beta$だからである．
+$\alpha$と$\beta$のどちらかが$f(c)$と
+表されようとも，
+$f(c)$はもちろん極小値か
+もしくは極大値
+なので命題 \ref{prop:vanish}より
+$\bibun{f}(c)=0$が成り立つ．
+\end{proof}
+
+\subsection{Lagrangeの平均値の定理}
+
+
+\begin{thm}[Lagrangeの平均値の定理]
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$(a, b)$上で可微分とする．
+このとき$c\in (a, b)$が存在して
+\[
+\frac{f(b)-f(a)}{b-a}=\bibun{f}(c)
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+
+まず関数$F: [a, b]\to \rr$を
+\begin{align*}
+F(x)&=(f(x)-f(a))(b-a)-(f(b)-f(a))(x-a)\\
+&=
+\begin{vmatrix}
+f(x)-f(a) & x-a\\
+f(b)-f(a) & b-a
+\end{vmatrix}. 
+\end{align*}
+と定義する．このとき
+$F$は$[a, b]$上連続であり
+$(a, b)$上$F$は可微分である．
+また，定義から$F(a)=F(b)=0$となるので
+定理 \ref{thm:rolle} (ロルの定理)
+から点$c\in (a, b)$で
+$\bibun{F}(c)=0$を満たすものが存在する．
+ここで
+\[
+\bibun{F}(c)=\bibun{f}(c)(b-a)
+-(f(b)-f(a))
+\]
+である．
+よって移項して整理すれば
+\[
+\frac{f(b)-f(a)}{b-a}=f^{\prime}(c)
+\]
+を得る．
+\end{proof}
+
+\subsection{Cauchyの平均値の定理}
+
+\begin{thm}[Cauchyの平均値の定理]
+連続関数関数$f,g:[a,b]\to \rr$は開区間
+$(a, b)$で微分可能であり，以下の条件のうちどれか一つを満たすとする．
+\begin{enumerate}
+\item 
+$\bibun{f}$と$\bibun{g}$は$(a, b)$上で同時には$0$にならないとし，
+$g$は$g(a)\neq g(b)$を充たす．
+\item 
+$g(a)\neq g(b)$かつ任意の$x\in (a, b)$について$\bibun{g}(x)\neq 0$
+を満たす．
+\item 
+任意の$x\in (a, b)$について$\bibun{g}(x)\neq 0$
+を満たす．
+\end{enumerate}
+
+このとき，
+$g(a)\neq g(b)$でありさらに，
+$c\in (a, b)$が存在して
+$\bibun{g}(c)\neq 0$と
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f^{\prime}(c)}{g^{\prime}(c)}
+\]
+を満たす．
+\end{thm}
+\begin{proof}[\textbf{証明その1}]
+
+まず関数$F: [a, b]\to \rr$を
+\begin{align*}
+F(x)&=(f(x)-f(a))(g(b)-g(a))-(f(b)-f(a))(g(x)-g(a))\\
+&=
+\begin{vmatrix}
+f(x)-f(a) & g(x)-g(a)\\
+f(b)-f(a) & g(b)-g(a)
+\end{vmatrix}. 
+\end{align*}
+と定義する．このとき
+$F$は$[a, b]$上連続であり
+$(a, b)$上$F$は可微分である．
+また，定義から$F(a)=F(b)=0$となるので
+定理 \ref{thm:rolle} (ロルの定理)
+から点$c\in (a, b)$で
+$\bibun{F}(c)=0$を満たすものが存在する．
+ここで
+\[
+\bibun{F}(c)=\bibun{f}(c)(g(b)-g(a))
+-(f(b)-f(a))\bibun{g}(c)
+\]
+である．ここで仮定(1)が成り立つ場合には$\bibun{f}$と$\bibun{g}$
+は同時には$0$にならないし，
+$g(b)-g(a)\neq 0$なので
+$\bibun{g}(c)\neq 0$である．
+(2), (3)の時は仮定の時点で$\bibun{g}(c)\neq 0$である．
+よって移項して整理すれば
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f^{\prime}(c)}{g^{\prime}(c)}
+\]
+を得る．
+\end{proof}
+\begin{proof}[\textbf{証明その}]
+ここではLagrangeの平均値の定理からCauchyの平均値の定理を導く．
+ちなみにCauchyのそれからLagrangeのそれが導かれることは当然である．
+
+\end{proof}
+
+
+
+\begin{rmk}[平均値の定理に出てくる補助関数について]
+\cite{Tong}を参照せよ．
+平均値の定理の証明では，$f$に対して補助的な関数$F$
+を構成し，$F(a)=F(b)$から$F$に対してロルの定理を適応して
+$F^{\prime}(c)=0$となる点を見出して，そこから$f$
+の平均に関する式に変形するという証明をする．
+上で述べられている証明では
+$F(x)=(f(x)-f(a))(b-a)-(f(b)-f(a))(x-a)$を用いているが，
+他の関数でも同様の証明が可能である．例をいくつか挙げる．
+\begin{enumerate}
+\item
+上と同じ$F$， 
+\begin{align*}
+F(x)&=(f(x)-f(a))(b-a)-(f(b)-f(a))(x-a)\\
+&=
+\begin{vmatrix}
+f(x) & x & 1\\
+f(b) & b & 1\\
+f(a) & a & 1
+\end{vmatrix}. 
+\end{align*}
+
+\item $G$として
+\begin{align*}
+G(x)&=f(x)(b-a)-(f(b)-f(a))x\\
+&=
+\begin{vmatrix}
+f(x) & x & 0\\
+f(b) & b & 1\\
+f(a) & a & 1
+\end{vmatrix}. 
+\end{align*}
+\item 
+$H$として
+\begin{align*}
+H(x)&=f(x)(b-a)-(f(b)-f(a))\left(x-\frac{a+b}{2}\right)\\
+&=
+\begin{vmatrix}
+f(x)+\frac{f(a)+f(b)}{2} & x & 1\\
+f(b) & b & 1\\
+f(a) & a & 1
+\end{vmatrix}. 
+\end{align*}
+\end{enumerate}
+である．
+これらは微分すると同じ値になることに注意しよう．
+\[
+F^{\prime}(x)=G^{\prime}(x)
+=H^{\prime}(x)
+=
+\begin{vmatrix}
+f^{\prime}(x) & 1 & 0\\
+f(b) & b & 1\\
+f(a) & a & 1
+\end{vmatrix}. 
+\]
+コーシーの平均値の定理についても同様の準備関数を考えることができる．
+\end{rmk}
+
+LagrangeとCauchyの平均値の定理をさらに一般化するものとして
+以下のPeanoの平均値の定理がある．
+\begin{thm}[Peanoの平均値の定理]
+$a, b\in \rr$は$a<b$を満たすとし，
+$f, g, h: [a, b]\to \rr$は$[a, b]$上で連続で
+$(a, b)$上で可微分とする．
+このとき$c\in (a, b)$が存在して
+\[
+\begin{vmatrix}
+\bibun{f}(c) & \bibun{g}(c)& \bibun{h}(c)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+=0
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+まず$F: [a, b]\to \rr$を
+\[
+F(x)=
+\begin{vmatrix}
+f(x) & g(x)& h(x)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+\]
+とおくと
+\[
+F(a)=
+\begin{vmatrix}
+f(a) & g(a)& h(a)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+=0
+\]
+であり，
+\[
+F(b)=
+\begin{vmatrix}
+f(b) & g(b)& h(b)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+=0
+\]
+なので$F(a)=F(b)=0$となる．
+よって
+定理 \ref{thm:rolle} (ロルの定理)
+から点$c\in (a, b)$で
+$\bibun{F}(c)=0$を満たすものが存在する．
+ここで$\bibun{F}$が何なのか考えると行列式の定義を思い出すと
+\[
+\bibun{F}(x)=
+\begin{vmatrix}
+\bibun{f}(x) & \bibun{g}(x)& \bibun{h}(x)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+\]
+となる．\footnote{一般に多重線形な関数についての微分公式がある．\cite{Dieu}を参照のこと}
+よって
+\[
+\bibun{F}(c)=
+\begin{vmatrix}
+\bibun{f}(c) & \bibun{g}(c)& \bibun{h}(c)\\
+f(b) & g(b) & h(b)\\
+f(a) & g(a) & h(a)
+\end{vmatrix}
+=0
+\]
+が成り立つ．
+\end{proof}
+
+
+\subsection{その他}
+
+
+命題 \ref{prop:vanish}
+の系として以下がわかる．
+\begin{cor}
+$f: [a, b]\to \rr$
+を可微分な連続関数とし，
+点$c$は$(a, b)$内の
+点で
+$\bibun{f}(c)\neq 0$
+を満たすならば
+$c$は$f$の
+極小点でも
+極大点でもない．
+\end{cor}
+
+
+
+
+
+以下の定理群 \ref{thm:fl}, \ref{thm:fl2}, 
+\ref{prop:fl3}, \ref{prop:fl4}は
+Flettの平均値の定理とか呼ばれるものである．
+\begin{thm}\label{thm:fl}
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$[a, b]$上で可微分とする．
+さらに$\bibun{f}(a)=\bibun{f}(b)$
+と仮定する．
+このとき$c\in (a, b)$が存在して
+\[
+\bibun{f}(c)=\frac{f(c)-f(a)}{c-a}
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+必要ならば$f$を$f(x)-\bibun{f}(a)x$に変更して
+$\bibun{f}(a)=0$と仮定しても一般性を失わない．
+$g: [a, b]\to \rr$
+を
+\[
+g(x)
+=
+\begin{cases}
+\displaystyle \frac{f(x)-f(a)}{x-a} & \text{$x\neq a$}\\
+\bibun{f}(a) & \text{$x=a$.}
+\end{cases}
+\]
+と定義すると$[a, b]$上で連続であり，
+$(a, b)$上微分可能である．
+さらに$x\in (a, b]$に関して
+\[
+\bibun{g}(x)=
+-\frac{f(x)-f(a)}{(x-a)^2}+\frac{\bibun{f}(x)}{x-a}
+\]
+である．
+今から$\bibun{g}(c)=0$となる$c\in (a, b)$の存在を示す．
+ここでもしも$g(b)=0$ならばロルの定理から
+$\bibun{g}(c)=0$となる$c\in (a, b)$が存在する．
+もしも$g(x)>0$ならば，
+\[
+\bibun{g}(b)=
+-\frac{f(b)-f(a)}{(b-a)^2}+\frac{\bibun{f}(b)}{b-a}
+=-\frac{g(b)}{(b-a)^2}<0
+\]
+となる．もしも$g(b)$が最大値だとすると
+$x<b$となる$x$について
+\[
+\frac{g(x)-g(b)}{x-b}>0
+\]
+なので$\bibun{g}(b)\ge 0$となるので$\bibun{g}(b)<0$
+に矛盾するので$g(b)$は最大値ではない．さらに$g(b)>0=g(a)$
+なので$g(a)$も最大値ではない．
+よって最大値は$c\in (a, b)$が存在して$g(c)$と表すことができる．
+さらに命題 \ref{prop:vanish}がより$\bibun{g}(c)=0$
+となる．
+$g(b)<0$のときも同様なのでいずれにせよ
+$\bibun{g}(c)=0$
+となる$c\in (a, b)$が存在する．
+このとき
+\[
+\bibun{g}(c)=
+-\frac{f(c)-f(a)}{(c-a)^2}+\frac{\bibun{f}(c)}{c-a}=0
+\]
+なので
+\[
+\bibun{f}(c)=\frac{f(c)-f(a)}{c-a}
+\]
+が成り立つ．
+\end{proof}
+
+
+\begin{thm}\label{thm:fl2}
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$[a, b]$上で可微分とする．
+さらに$\bibun{f}(a)=\bibun{f}(b)$
+と仮定する．
+このとき$c\in (a, b)$が存在して
+\[
+\bibun{f}(c)=\frac{f(b)-f(c)}{b-c}
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+$g: [-b, -a]\to \rr$
+を
+$g(x)=f(-x)$
+と定義し$g$と$[-b, -a]$
+に対して定理 \ref{thm:fl}
+を適応すればわかる．
+\end{proof}
+
+\begin{prop}\label{prop:fl3}
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$(a, b)$上で可微分とする．
+このとき$c\in (a, b)$が存在して
+\[
+\bibun{f}(c)=\frac{f(b)-f(c)}{c-a}
+\]
+を満たす．
+\end{prop}
+\begin{proof}
+関数$g: [a, b]\to \rr$を
+$g(x)=xf(b)-(x-a)f(x)$
+と定義する．このとき
+$g(a)=af(b)$で
+$g(b)=bf(b)-(b-a)f(b)=af(b)$
+となるからロルの定理により
+$\bibun{g}(c)=0$となる$c\in (a, b)$
+が存在する．
+このとき
+\[
+\bibun{g}(x)=f(b)-f(x)-(x-a)\bibun{f}(x)
+\]
+なので移項すれば
+\[
+\bibun{f}(c)=\frac{f(b)-f(c)}{c-a}
+\]
+が成り立つ．
+\end{proof}
+
+
+\begin{prop}\label{prop:fl4}
+$a, b\in \rr$は$a<b$を満たすとし，
+$f: [a, b]\to \rr$は$[a, b]$上で連続で
+$(a, b)$上で可微分とする．
+このとき$c\in (a, b)$が存在して
+\[
+\bibun{f}(c)=\frac{f(c)-f(a)}{b-c}
+\]
+を満たす．
+\end{prop}
+\begin{proof}
+$g(x)=xf(a)+(b-x)f(x)$
+を用いて命題\ref{prop:fl3}
+と同様にすれば良い．
+\end{proof}
+
+
+論文\cite{TB}では
+平均値の定理の逆について述べられている．
+つまり$f^{\prime}(c)$
+が与えれらときに$(a_{1}, b_{1})\subset (a, b)$
+となる$a_{1}$と$b_{1}$
+が存在して
+\[
+f^{\prime}(c)=\frac{f(b_{1})-f(a_{1})}{b_{1}-a_{1}}
+\]
+が成り立つための条件を調べている．つまり以下の定理が成り立つ．
+証明は省略する．
+\begin{thm}
+
+\begin{enumerate}
+\item $\bibun{f}(c)$が
+最大値でも最小値でもないとすると
+$x, y\in (a, b)$
+が存在して
+\[
+\bibun{f}(c)=\frac{f(x)-f(y)}{x-y}
+\]
+が成り立つ．
+\item
+$\bibun{f}(c)$が
+極大値でも極小値でもなく，
+$c$が$A(c)=\{\, 
+x\in (a, b)\mid 
+\bibun{f}(x)=\bibun{f}(c)
+\, \}$
+の集積点ではないとする．
+このとき
+$x, y\in (a, b)$
+が存在して
+$c\in (x, y)$と
+\[
+\bibun{f}(c)=\frac{f(x)-f(y)}{x-y}
+\]
+が成り立つ．
+
+\end{enumerate}
+\end{thm}
+
+
+
+\section{テイラーの定理}
+
+\subsection{漸近記号}
+
+\begin{df}
+$\rr^n$上の部分集合$E$上で定義された関数$g:E\to \rr$は、ある$\delta>0$が存在して
+\[
+U(a,\delta)\cap E=U(a, \delta)\setminus \{a\}
+\]
+を充たすとき、\textbf{点$a$の十分近くで定義されている}という。
+点$a$の十分近くで定義されている関数全体を$S(a)$
+で表す。
+\end{df}
+\begin{df}
+$g\in S(a)$とする。このとき\textbf{集合}$o(g(x))(x\to a)$を
+\[
+o(g(x))(x\to a)
+:=
+\left\{\, 
+f\in S(a)
+\, \middle| \, 
+ \lim_{x\to a}\frac{f(x)}{g(x)}=0
+\, \right\}
+\]
+と定義する。
+\end{df}
+\begin{rmk}
+$f=o(g(x))(x\to a)$を$f$を変数とする一階の述語だと思えば、$o(g(x))(x\to a)$を集合で定義する必要はない。
+また、一階の述語と集合の間にはそれなりの関係がつけられるし、本質的に間違いでもないと思う。
+しかしながらこのようにランダウの記号を集合として定義したのは、しばしば
+$f=o(g(x))(x\to a)$という等号の濫用によって無用の混乱が起こるのが嫌だからである。
+\end{rmk}
+
+以下では
+記号を簡潔にするため，
+\[
+\frac{d}{dx}f
+\]
+を$d_xf$と略記する．
+
+
+
+$f:(l,r)\to \rr$を$m-1$階微分可能関数とし, 
+$a\in (l,r)$、$k\le m$とする．
+また，$f$は点$a$において$m$階微分可能であるとする．
+このとき$x$を変数とする関数$R_k(f, x;a):(l,r)\to \rr$を
+\[
+R_k(f,a;x)=f(x)-\sum_{i=0}^{k}\frac{f^{(i)}(a)}{i!}(x-a)^i
+\]
+と定義する．
+任意の$k\le m$について$R_k(f,x;a)$は$m-1$階微分可能で，さらに
+$i\le k$について
+\[
+\frac{d^i}{dx^i}R_k(f, a; x)|_{x=a}=0
+\]
+であり，任意の$i>k$について
+\[
+\frac{d^i}{dx^i}R_k(f, a;x)=\bbb{f}{i}(x)
+\]
+である．
+また
+\[
+\frac{d^{m-1}}{dx^{m-1}}R_k(f, a;x)=\bbb{f}{m-1}(x)-\bbb{f}{m-1}(a)
+\]
+そして$R_m(f,x,;a)$は点$a$で$m$階微分可能で，
+$x=a$におけるその$m$階微分係数は$0$であることに注意しよう．
+
+\textbf{以下のGon\c{c}alvesのテイラーの定理はおそらく筆者が今回の調査で知った剰余項の中でも一番洗練されているものであろう．}
+\begin{thm}[Gon\c{c}alvesのテイラーの定理]\label{thm:gon}
+$m\in \zz_{\ge 2}$
+$f$を$a$の十分近くで定義された$m-1$階微分可能関数とする．
+このとき$a$と$x$の間にある$c$が存在して
+\[
+R_{m-1}(f, a; x)=\frac{(x-a)^{m}}{m!}
+\frac{\bbb{f}{m-1}(c)-\bbb{f}{m-1}(a)}{c-a}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}[\textbf{Cauchyの平均値の定理を使った証明}]
+さて
+$x$に関する関数$g:(l.r)\to \rr$を$g(x)=(x-a)^m$と定義する．
+ところで
+\[
+R_{m-1}(f,a;a)=g(a)=0
+\]
+であるので
+Cauchyの平均値の定理を$R_{m-1}(f,x;a)$と$g$，そして区間$[a,x]$，または$[x,a]$に用いると（$a$と$x$の大小関係によってどちらの区間をを使うかが変わる．）
+\[
+\frac{R_{m-1}(f, a; x)}{g(x)}=\frac{d_{x}R_{m-1}(f, a; c_1)}{d_{x}g(c_1)}
+\]
+となる$c_1$が$a$と$x$の間に存在することがわかる．
+$d_xR_{m-1}(f,a;a)=0$であることを用いて，
+$c_1$と$a$に対して再びCauchyの平均値の定理を適用し
+\[
+\frac{R_{m-1}(f, a; x)}{g(x)}=\frac{d_x R_{m-1}(f, a; c_1)}{d_x g(c_1)}=\frac{d_x^2R_{m-1}(f, a; c_2)}{d_{x}^{2} g(c_2)}
+\]
+となる$c_2$が$c_1$と$a$の間に存在することがわかる．
+繰り返し$m-1$回Cauchyの平均値の定理を用いて
+\begin{align*}
+&\frac{R_{m-1}(f, a;x)}{(x-a)^m}=
+\frac{d_x^{m-1}(R_{m-1}(f, a; c))}{d_x^{m-1}g(c)}\\
+&=\frac{d_x^{m-1}R_{m-1}(f, a; c)}{m!(c-a)}
+=\frac{d_x^{m-1}R_{m-1}(f, a; c)-d_x^{m-1}R_{m-1}(f,a;a)}{m!(c-a)}
+\end{align*}
+となる$c$が$x$と$a$の間に存在することがわかる．
+
+ここで$d_x^{m-1}R_{m-1}(f,a;a)=0$であり
+\[
+d_x^{m-1}R_{m-1}(f, a; c)
+=\bbb{f}{m-1}(c)-\bbb{f}{m-1}(a)
+\]
+なので結局
+\[
+R_{m-1}(f, a; x)
+=\frac{(x-a)^{m}}{(m+1)!}\frac{\bbb{f}{m-1}(c)-\bbb{f}{m-1}(a)}{c-a}
+\]
+を得る．
+\end{proof}
+
+
+
+
+以下は有限増分型のテイラーの定理と言えそうである．
+\begin{prop}[Peano型のテイラーの定理]
+$f$を$a$の十分近くで定義された$m$階微分可能関数としよう．このとき
+$R_m(f, a; x)\in o(|x-a|^m)(x\to a)$
+が成り立つ．
+\end{prop}
+\begin{proof}[\textbf{有限増分の定理を使った証明}]
+$R_{m}(f, a; x)$は点$a$で$m$階微分可能で
+点$a$での$m$階微分係数は$0$である．
+よって任意に$\epsilon>0$を与えると
+$a$に十分近い$x$について
+\[
+\left|\frac{d_{x}^{m-1}R(f, a; x)-d_{x}^{m-1}R(f, a; a)}{x-a}-0\right|\le m!\epsilon
+\]
+が成り立つ．$d_{x}^{m-1}R(f, a; a)=0$
+を用いると
+\[
+\left|\frac{d_{x}^{m-1}R(f, a; x)}{x-a}\right|\le m!\epsilon
+\]
+がわかる．
+$a<x$ならば定理 \ref{thm:increkokai}を
+$R(f, a; x)$と$g(x)=(x-a)^{m}$に用いて, 
+$x<a$ならば
+$R(f, a; x)$と$g(x)=(a-x)^{m}$に用いて, 
+\[
+|R(f, a; x)|\le \epsilon|x-a|^{m}
+\]
+を得る．
+$\epsilon$は任意だったので
+$R_m(f, a; x)\in o(|x-a|^m)(x\to a)$
+ である．
+\end{proof}
+\begin{proof}[\textbf{Cauchyの平均値の定理を使った証明}]
+さて
+$x$に関する関数$g:(l.r)\to \rr$を$g(x)=(x-a)^m$と定義する．
+ところで
+\[
+R_m(f,a;a)=g(a)=0
+\]
+であるので
+Cauchyの平均値の定理を$R_m(f,x;a)$と$g$，そして区間$[a,x]$，または$[x,a]$に用いると（$a$と$x$の大小関係によってどちらの区間をを使うかが変わる．）
+\[
+\frac{R_m(f, a; x)}{g(x)}=\frac{d_{x}R_{m}(f, a; c_1)}{d_{x}g(c_1)}
+\]
+となる$c_1$が$a$と$x$の間に存在することがわかる．
+$d_xR_{m}(f,a;a)=0$であることを用いて，
+$c_1$と$a$に対して再びCauchyの平均値の定理を適用し
+\[
+\frac{R_m(f, a; x)}{g(x)}=\frac{d_xR_{m}(f, a; c_1)}{d_xg(c_1)}=\frac{d_x^2R_{m}(f, a; c_2)}{d_x^2g(c_2)}
+\]
+となる$c_2$が$c_1$と$a$の間に存在することがわかる．
+繰り返し$m-1$回Cauchyの平均値の定理を用いて
+\begin{align*}
+&\frac{R_m(f, a;x)}{(x-a)^m}=\frac{d_x^{m-1}(R_m(f, a; c))}{d_x^{m-1}g(c)}\\
+&=\frac{d_x^{m-1}R_{m}(f, a; c)}{m!(c-a)}
+=\frac{d_x^{m-1}R_m(f, a; c)-d_x^{m-1}R_{m}(f,a;a)}{m!(c-a)}
+\end{align*}
+となる$c$が$x$と$a$の間に存在することがわかる．
+ここで$x\to a$とすると$c\to a$となり，
+$R_m(f,x;a)$の$a$における$m$階微分係数が$0$であることから
+\[
+\lim_{x\to a}\frac{R_m(f,x;a)}{(x-a)^n}=\frac{d^m}{dx^m}(R_m(f,x;a))|_{x=a}=0
+\]
+よって$R_m(f, x;a)\in o(|x-a|^m)(x\to a)$である．
+\end{proof}
+\begin{proof}[\textbf{Gon\c{c}alvesの剰余項（定理 \ref{thm:gon}）を使った証明}]
+まず定理 \ref{thm:gon}より$x$と$a$の間にある点$c$が存在して
+\[
+R_{m-1}(f, a; x)=\frac{(x-a)^{m}}{m!}\frac{\bbb{f}{m-1}(c)-\bbb{f}{m-1}(a)}{c-a}
+\]
+が成り立つ．
+$R_{m}(f, a; x)=R_{m-1}(f, a; x)-\frac{(x-a)^m}{m!}\bbb{f}{m}(a)$
+なので
+\[
+|R_{m}(f, a; x)|
+\le 
+\frac{|x-a|^m}{m!}
+\left|
+\frac{\bbb{f}{m-1}(c)-\bbb{f}{m-1}(a)}{c-a}
+-
+\bbb{f}{m}(a)
+\right|
+\]
+である．$x$が$a$の十分近ければ$c$もそうなので
+\[
+|R_{m}(f, a; x)|
+\le 
+\frac{|x-a|^m}{m!}\epsilon
+\]
+とできる．
+よって
+$R_m(f, x;a)\in o(|x-a|^m)(x\to a)$である．
+\end{proof}
+
+
+\begin{thm}[Lagrange型のテイラーの定理]
+$f:(l,r)\to \rr$を$m$階微分可能関数とし、$a\in (l,r)$とする。このとき任意の$x\in (l,r)$について
+$a$と$x$の間の点$\theta$が存在して
+\[
+f(x)=\sum_{i=0}^{m-1}\frac{f^{(i)}(a)}{i!}(x-a)^i+\frac{f^{(m)}(\theta)}{m!}(x-a)^m
+\]
+を充たす。つまり、
+\[
+R_{m-1}(f, x;a)=\frac{f^{(m)}(\theta)}{m!}(x-a)^m
+\]
+である。
+\end{thm}
+\begin{proof}[\textbf{Gon\c{c}alvesの剰余項（定理 \ref{thm:gon}）を使った証明}]
+まず定理 \ref{thm:gon}より$x$と$a$の間にある点$\gamma$が存在して
+\[
+R_{m-1}(f, a; x)=\frac{(x-a)^{m}}{m!}\frac{\bbb{f}{m-1}(\gamma)-\bbb{f}{m-1}(a)}{\gamma-a}
+\]
+が成り立つ．
+さらに平均値の定理から$a$と$\gamma$の間にある$c$が存在して
+\[
+\frac{\bbb{f}{m-1}(\gamma)-\bbb{f}{m-1}(a)}{\gamma-a}
+=\bbb{f}{m}(c)
+\]
+が成り立つ．$c$は$x$と$a$の間の点でもあるので
+これで証明が終わる．
+\end{proof}
+\begin{proof}[\textbf{Cauchyの平均値の定理を使った証明}]
+繰り返しCauchyの平均値の定理を用いて
+\begin{align*}
+\frac{R_{m-1}(f, a; x)}{g(x)}=
+\frac{d_x^{m}(R_{m-1}(f, a; c))}{d_x^{m}g(c)}=
+\frac{f^{(m)}(c)}{m!}
+\end{align*}
+となる$c$が存在することがわかる。よって定理は示された。
+\end{proof}
+\begin{proof}[\textbf{Rolleの定理を使った証明}]
+$x=a$ならばもちろん定理は成り立つので
+$x\neq a$とする．
+$x$を固定して，$M$を
+\[
+f(x)=\sum_{i=0}^{m-1}\frac{\bbb{f}{i}(a)}{i!}(x-a)^{i}
++\frac{M(x-a)^{m}}{m!}
+\]
+を満たす（ $x$に依存する）定数である．
+そして$g: (l, r)\to \rr$を$t$の関数として
+\[
+g(t)=\sum_{i=0}^{m-1}\frac{\bbb{f}{i}(a)}{i!}(t-a)^{i}
++\frac{M(t-a)^{m}}{m!}
+-f(t)
+\]
+とする．
+このとき
+$g(a)=\bbb{g}{1}(a)=\dots =\bbb{g}{m-1}(a)=0$
+である．
+そして$g(x)=0$なのでロルの定理から
+$\bibun{g}{1}(c_{1})=0$となる．点が存在する．
+$\bbb{g}{1}(a)=0$なので再びロルの定理が使える．
+これを$m$回繰り返すと$\bbb{g}{m}(c)=0$となる$c$が$a$と$x$
+の間に存在する．
+さて
+\[
+\bbb{g}{m}(t)=M-\bbb{f}{m}(t)
+\]
+なので
+$t=c$として
+$M=\bbb{g}{m}(c)+\bbb{f}{m}(c)=\bbb{f}{m}(c)$
+である．$M$の定義から
+\[
+f(x)=\sum_{i=0}^{m-1}\frac{\bbb{f}{i}(a)}{i!}(x-a)^{i}
++\frac{\bbb{f}{m}(c)}{m!}(x-a)^{m}
+\]
+となることがわかる．
+\end{proof}
+
+
+
+\begin{thm}[積分形のテイラーの定理]
+$f$を$a$の十分近くで定義された$C^{m}$級関数とする．
+\[
+R_{m-1}(f, a; x)=
+\frac{1}{(m-1)!}\int_{a}^{x}\bbb{f}{m}(t)(x-t)^{m-1}\ dt
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+\[
+I_{k}=\frac{1}{(k-1)!}\int_{a}^{x}\bbb{f}{k}(t)(x-t)^{k-1}\ dt
+\]
+とおく．
+まず，微分積分の基本定理より
+\[
+R_{0}(f, a; x)=f(x)-f(a)=\int_{a}^{x}\bbb{f}{1}(t)\ dt=I_{1}
+\]
+を得る．
+まず$R_{k-1}(f, a; x)=I_{k}$が成り立っているとする．このとき
+部分積分の公式より
+\begin{align*}
+I_{k}&=\frac{1}{(k-1)!}\int_{a}^{x}\bbb{f}{k}(t)(x-t)^{k-1}\ dt\\
+&=
+\frac{1}{k!}
+\left[
+-
+\bbb{f}{k}(t)(x-t)^{k}
+\right]_{t=a}^{t=x}
++\frac{1}{k!}\int_{a}^{x}\bbb{f}{k+1}(t)(x-t)^{k}\ dt\\
+&=\frac{\bbb{f}{k}(a)}{k!}(x-a)^{k}
++\frac{1}{k!}\int_{a}^{x}\bbb{f}{k+1}(t)(x-t)^{k}\ dt\\
+&=
+\frac{\bbb{f}{k}(a)}{k!}(x-a)^{k}+I_{k+1}
+\end{align*}
+なので$R_{k-1}(f, a; x)=I_{k}$を踏まえると
+\[
+R_{k}(f, a; x)=I_{k+1}
+\]
+を得る．
+このことと
+帰納法から
+\[
+R_{m-1}(f, a; x)=
+\frac{1}{(m-1)!}\int_{a}^{x}\bbb{f}{m}(t)(x-t)^{m-1}\ dt
+\]
+がわかる．
+\end{proof}
+以下の命題は$C^m$級関数がWhitneyの意味で$C^m$級であることを示している。
+\begin{prop}$f:(l,r)\to \rr$は$C^m$級関数とする。このとき任意の$k\le m$と
+任意の点$p\in (l,r)$と任意の$\ep>0$についてある$\delta>0$が存在して$|x-p|<\delta$、$|y-p|<\delta$ならば
+\[
+|R_{m-k}(f^{(k)}, x;y)|\le|x-y|^{m-k}\ep
+\]
+を充たす。
+\end{prop}
+\begin{proof}
+\begin{align*}
+R_{m-k}(f^{(k)},x;y)=f^{(k)}(x)-\sum_{i=0}^{m-k}\frac{f^{(k+i)}(y)}{i!}(x-y)^i
+\end{align*}
+であることに注意しよう。このときLagrangeのテイラーの定理から
+\[
+f^{(k)}(x)=\sum_{i=0}^{m-k-1}\frac{f^{(k+i)}(y)}{i!}(x-y)^i+\frac{f^{(m)}(\theta)}{(m-k)!}(x-y)^{m-k}
+\]
+となる$\theta$が$x$と$y$の間に存在する。
+よって
+\[
+|R_{m-k}(f^{(k)},x;y)|\le \frac{|x-y|^{m-k}}{(m-k)!}\left|f^{(m)}(y)-f^{(m)}(\theta)\right|
+\]
+が成り立つ。命題の主張は$f^{(m)}$の連続性から直ちに従う。
+
+
+
+
+\section{多変数の場合}
+\subsection{多重指数記法}
+\[
+Z_n=\zz_{\ge 0}^n
+\]
+とする。$k\in Z_n$に対して
+\[
+\sigma_k=k_1+k_2+\dots+k_n
+\]
+と定義する。
+また、$k,l\in Z_n$に対して
+\[
+k!=k_1!k_2!\cdots k_n!
+\]
+\[
+\binom{k}{l}=\binom{k_1}{l_1}\binom{k_2}{l_2}\cdots\binom{k_n}{l_n}
+\]
+とし、
+\[
+x^k=x^{k_1}x^{k_2}\cdots x^{k_n}
+\]
+と定義する。
+\subsection{定理}
+
+\begin{thm}[多変数のテイラーの定理（Lagrange）]
+$U\subset \rr^n$とし、$f:U\to \rr$を$U$上の$m-1$階微分可能関数で点$a\in U$で$m$階微分可能なものとする。
+このとき$U$の中で$a$と直線を結べる$x$に対して、その直線上の点$\theta$が存在して
+\[
+f(x)=\sum_{\sigma_l\le m-1}\frac{f_l(a)}{l!}(x-a)^l+\sum_{\sigma_l=m}\frac{f(\theta)}{l!}(x-a)^l
+\]
+となる。つまり
+\[
+R_{m-1}(f,x;a)=\sum_{\sigma_l=m}\frac{f(\theta)}{l!}(x-a)^l
+\]
+\end{thm}
+\begin{proof}
+$F(t)=f(a+t(x-a))$と$t=0,1$にLagrangeのテイラーの定理を適用すればよい。
+\end{proof}
+
+以下の命題は$C^m$級関数がWhitneyの意味で$C^m$級であることを示している。
+\begin{prop}
+任意の点$p\in U$と任意の$\ep>0$についてある$\delta>0$が存在して$\|x-p\|<\delta$、$\|y-p\|<\delta$ならば
+\[
+\|R_{m-k}(f^{(k)},x;y)\|\le \|x-y\|^{m-k}\ep
+\]
+を充たす。
+\end{prop}
+\begin{proof}
+Lagrangeのテイラーの定理と$\delta$近傍の凸性から直ちに従う。
+\end{proof}
+
+
+多変数の場合にもペアノ型のテイラーの定理は適当な仮定の下に成り立つがここでは省略する。
+
+
+
+
+\end{proof}
+
+
+日本語の文献は適当に並べている．
+日本語でない参考文献はカテゴリーごとにアルファベット順に並んでいる．
+\begin{thebibliography}{999}
+\bibitem[\textbf{\large 日本語のwebサイトの文献}]{a}
+
+\bibitem{denden}
+はてなブログ「電波通信」の記事「実数直線上の単射連続写像について」, 
+\url{https://concious4410.hatenablog.com/entry/2015/09/13/195426}. 
+\bibitem{hako}
+箱さんのwebサイトの「微分のノート」, 
+\url{
+https://o-ccah.github.io/docs/differentiation.html}, 
+2022/03/12閲覧．
+
+\bibitem[\textbf{\large 日本語の文献}]{ab}
+\bibitem{ju}
+ユルゲン・ヨスト著, 
+小谷元子訳,
+ポストモダン解析学, 
+シュプリンガー・フェアラーク東京, 
+2000. 
+
+\bibitem{matsu}
+松本幸夫，
+多様体の基礎, 
+東京大学出版会, 
+1988. 
+\bibitem{sugi}
+杉浦光夫, 
+解析入門II, 
+東京大学出版会, 
+1985. 
+
+\bibitem{tazi}
+田島一郎, 
+解析入門, 
+岩波全書325, 
+岩波書店, 1981. 
+
+\bibitem{yoshida}
+吉田洋一,
+ルベグ積分入門,
+ちくま学芸文庫, 2015, 
+(オリジナル：培風館, 1965). 
+
+\bibitem[\textbf{\large 参考数学洋書}]{sankou}
+
+\bibitem{cartan}
+H. Cartan, 
+\textit{Cours de Calcul Diff\'{e}rentiel}, 
+Hermann, 1967. 
+\bibitem{Dieu}
+J. Dieudonn\'{e}, 
+\textit{Foundation of modern analysis}, 
+Academic Press, 1960. 
+
+
+\bibitem[\textbf{\large 中間値の定理に関する論文}]{a}
+
+\bibitem{Nad}
+S. B. Nadler, Jr. 
+\textit{A proof of Darboux's theorem}, 
+Amer. Math. Monthly, 
+117 (2) (2010), 174--175. 
+\bibitem{Ol}
+L. Olsen, 
+\textit{
+A new proof of Darboux's theorem}, 
+Amer. Math. Monthly, 
+111 (8) (2004), 
+713--715. 
+
+
+\bibitem[\textbf{\large 平均値の定理に関する論文}]{a}
+ \bibitem{A}
+ R. Almeida, 
+ \textit{An elementary proof of a converse mean value theorem}, 
+ Internat. J. Math. Ed. Sci.Tech., 39 (8) (2008), 1110--1111.
+\bibitem{Bo}
+R. P. Boas, Jr.
+\textit{Lhospital's rule without mean-value theorems}, 
+Amer. Math. Monthly, 
+76 (9) (1969), 1051--1053. 
+
+
+\bibitem{CT}
+D. \c{C}akmak
+and 
+A. Tiryaki, 
+\textit{
+Mean value theorem for holomorphic functions}, 
+Electron. J. Differ. Equ., Vol. 2012 (34) (2012), 1--6. 
+
+
+\bibitem{Cam}
+A. P. Camargo, 
+\textit{
+A new proof of the equivalence of the Cauchy mean value theorem and the mean value theorem}, 
+Amer. Math. Monthly, 
+127 (5) (2020), 460.
+
+
+
+\bibitem{EF}
+J. -CI Evard and 
+F. Jafari, 
+\textit{
+complex Rolle's theorem}, 
+99 (9) (1992), 858--861. 
+
+
+\bibitem{Fla}
+T. M. Flatt, 
+\textit{
+A mean value theorem}, 
+Math. Gaz. 42 (1958), 
+38--39. 
+
+
+
+
+
+\bibitem{LC}
+G. Lozada-Cruz, 
+\textit{Some variants of Lagrange's mean value theorem}, 
+Sel. Mat. 7(1) (2020), 
+144-150. 
+
+
+\bibitem{LC}
+G. Lozada-Cruz, 
+\textit{Some application 
+ of Cauchy's mean value theorem}, 
+Asia Pac. J. Math.  7 (30) (2020), 
+1-9.  
+
+
+
+
+\bibitem{Pa}
+Z. P\'{a}les, 
+\textit{
+A general mean value theorem}, 
+Publ. Math. Debrecen, 
+89 (1--2) (2016), 
+161--172. 
+
+
+\bibitem{Po}
+M. J. Poliferno, 
+\textit{
+A natural auxiliary function for the mean value theorem}, 
+Amer. Math. Monthly, 
+69 (1) (1962), 45--47. 
+
+\bibitem{My}
+R. E. Myers, 
+\textit{
+Some elementary results related to mean value theorem}, 
+Two-Year Coll. Math. J., 
+8 (1) (1977), 
+51--53. 
+
+\bibitem{Tong}
+J. -C. Tong, 
+\textit{
+A new auxiliary function 
+for the mean value theorem}, 
+J. North Carolina Acad. Sci., 
+121 (4) (2005), 174--176. 
+
+
+\bibitem{TB}
+J. Tong and P. A. Braza, 
+\textit{A converse of the mean value theorem}, Amer. Math. Monthly 106 (10) (1997), 939--942.
+
+\bibitem{Wa}
+E. Wachnicki, 
+\textit{
+Une variante
+du 
+Th\'{e}or\`{e}me 
+de Cauhy
+de la 
+valeur
+moyenne}, 
+Demonstr. Math. 
+33 (4) (2000), 737--740. 
+
+
+\bibitem[\textbf{\large Taylorの定理に関する参考文献}]{aaa}
+
+
+\bibitem{Ag}
+J. F. Aguirre, 
+\textit{A note on Taylor's theorem}, 
+Amer. Math. Monthly, 
+96 (3) (1989), 
+244--247. 
+
+
+
+\bibitem{Fo}
+G. B. Folland, 
+\textit{Remainder 
+estimates in Taylor's theorem}, 
+Amer. Math. Monthly, 
+97 (3) (1990), 233--235. 
+
+
+
+
+\bibitem{PRW}
+L. -E. Persson, 
+H. Rafeiro, 
+and 
+P. Wall
+\textit{
+Historical synopsis of the 
+Taylar remainder}, 
+Note Mat. 
+37 (2017) (1), 
+1--21. 
+
+
+\bibitem{PR}
+L. -E. Persson and 
+H. Rafeiro, 
+\textit{
+On a Taylar remainder}, 
+Acta Math. Acad. Paedagog. Nyhazi., 
+33 (2017), 195--198. 
+
+
+
+
+\bibitem{Wo}
+J. Wolfe 
+\textit{A proof of Taylor's formular}, 
+Amer. Math. Monthly, 
+60 (6) (1953), 415.
+
+\end{thebibliography}
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+
