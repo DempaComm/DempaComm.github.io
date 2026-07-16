@@ -424,7 +424,18 @@ def page_head(
   <meta property="og:title" content="{escaped_title}">
   <meta property="og:description" content="{escaped_description}">
   <meta property="og:url" content="{canonical}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="{SITE_URL}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="数識電収の電波と放電を表す紋章">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{SITE_URL}/og-image.png">
+  <meta name="theme-color" content="#17324d">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="{SITE_TITLE_TOP} RSS" href="{SITE_URL}/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1268,6 +1279,17 @@ def command_stage(args: argparse.Namespace) -> None:
     shutil.copy2(INDEX_PATH, output / "index.html")
     shutil.copy2(ROOT / "styles.css", output / "styles.css")
     shutil.copy2(SEARCH_SCRIPT_PATH, output / "search.js")
+    for asset in (
+        "favicon.ico",
+        "favicon-16.png",
+        "favicon-32.png",
+        "apple-touch-icon.png",
+        "icon-192.png",
+        "icon-512.png",
+        "og-image.png",
+        "site.webmanifest",
+    ):
+        shutil.copy2(ROOT / asset, output / asset)
     archive_dir = output / "archive"
     archive_dir.mkdir()
     (archive_dir / "index.html").write_text(

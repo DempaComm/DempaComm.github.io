@@ -31,6 +31,19 @@ def prepare_root(root: Path) -> dict[str, str]:
     )
     (root / "styles.css").write_text("", encoding="utf-8")
     (root / "search.js").write_text("", encoding="utf-8")
+    for asset in (
+        "favicon.ico",
+        "favicon-16.png",
+        "favicon-32.png",
+        "apple-touch-icon.png",
+        "icon-192.png",
+        "icon-512.png",
+        "og-image.png",
+    ):
+        (root / asset).write_bytes(b"test image placeholder")
+    (root / "site.webmanifest").write_text(
+        '{"name":"Test","start_url":"/"}', encoding="utf-8"
+    )
     return {**os.environ, "PAPER_REPO_ROOT": str(root)}
 
 
@@ -109,6 +122,10 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertTrue((output / "feed.xml").is_file())
             self.assertTrue((output / "sitemap.xml").is_file())
             self.assertTrue((output / "robots.txt").is_file())
+            self.assertTrue((output / "favicon.ico").is_file())
+            self.assertTrue((output / "apple-touch-icon.png").is_file())
+            self.assertTrue((output / "site.webmanifest").is_file())
+            self.assertTrue((output / "og-image.png").is_file())
             not_found = (output / "404.html").read_text(encoding="utf-8")
             self.assertIn('href="/styles.css"', not_found)
             self.assertIn('href="/archive/"', not_found)
@@ -127,6 +144,10 @@ class SourceOnlyImportTest(unittest.TestCase):
             self.assertIn("Shippori+Mincho+B1", home)
             self.assertIn("Zen+Kaku+Gothic+New", home)
             self.assertIn("Zen+Kurenaido", home)
+            self.assertIn('rel="icon" href="/favicon.ico"', home)
+            self.assertIn('rel="manifest" href="/site.webmanifest"', home)
+            self.assertIn('property="og:image"', home)
+            self.assertIn('name="theme-color" content="#17324d"', home)
             archive = (output / "archive" / "index.html").read_text(
                 encoding="utf-8"
             )
