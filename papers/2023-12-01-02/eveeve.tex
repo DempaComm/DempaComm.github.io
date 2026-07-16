@@ -1,0 +1,2171 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+
+\theoremstyle{definition}
+\newtheorem{df}[thm]{定義}
+\newtheorem{con}[thm]{構成}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{Card}}
+
+\newcommand{\myco}{2^{\aleph_{0}}}
+\newcommand{\mycoco}{2^{2^{\aleph_{0}}}}
+
+\newcommand{\mystar}{($\bigstar$)}
+\newcommand{\myhh}{($\heartsuit$)}
+
+\newcommand{\mysei}{\textup{(Crisp)}}
+\newcommand{\myseial}{C}
+\newcommand{\mysq}{\textup{(Fragile)}}
+\newcommand{\mysqal}{F}
+\newcommand{\mysw}{\textup{(Spathic)}}
+\newcommand{\myswal}{S}
+
+
+\newcommand{\myhv}{\boldsymbol{h}}
+\newcommand{\myav}{\boldsymbol{a}}
+\newcommand{\mybv}{\boldsymbol{b}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{エブリシング・エブリウェア・\\オール・アット・ワンス・関数
+\large{\\--- A function of E.E.A.A.O.  ---}
+}
+\author{電波通信 ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+この文書では
+関数$f\colon \rr\to \rr$
+であり，
+次の性質：
+\begin{enumerate}[label=\textup{\mystar}]
+\item\label{item:main1}
+任意の空でない開集合$U$に対して
+$f(U)=\rr$
+\end{enumerate}
+を満たすものの構成と，
+サーベイを紹介する．
+
+この性質\ref{item:main1}
+を満たす関数$f\colon \rr\to \rr$
+というものは，
+$\rr$上のあらゆる場所で
+$\rr$のあらゆる値を一度に取る関数ということである．
+
+
+セクション
+\ref{sec:1}
+では
+この
+\ref{item:main1}
+を満たす関数の存在を問われたときの，
+この文書の筆者が閃いた
+理屈を紹介する．
+セクション
+\ref{sec:2}
+では
+性質\ref{item:main1}
+を満たす関数と人類の歴史について紹介する．
+セクション\ref{sec:3}
+は注釈である．
+
+
+%この文書のタイトルは映画「エブリシング・エブリウェア・オール・アット・ワンス」と，上で述べた関数の性質にちなんで名付けられている．
+
+
+\section{基本的な話}\label{sec:1}
+まず最初に述べてしまうのだが，
+\textbf{性質
+\ref{item:main1}
+を満たす関数は存在する．}
+
+構成に入る前にまずはこのような関数の性質について
+紹介しておく．
+\begin{prop}\label{prop:basic}
+$f\colon \rr\to \rr$
+は性質\ref{item:main1}
+を満たすとする．
+このとき以下が成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$f$は至る所不連続である．
+\item 
+$f$は開写像である．
+\item 
+$f$は中間値の定理の結論を満たす．つまり
+二つの異なる任意の$a, b\in \rr$について
+$f$は$a$と
+$b$を端点とする閉区間上で
+$f(a)$と$f(b)$の間にある値を全て取ることができる．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+全て
+性質
+\ref{item:main1}
+から従う．
+\end{proof}
+
+
+性質
+\ref{item:main1}
+を満たす関数の構成のために
+以下の定義
+\ref{df:c}, 
+\ref{df:f}, 
+そして
+\ref{df:s}
+で紹介するような
+$\rr$の
+特殊な
+稠密部分集合族
+を用いる．
+
+
+
+
+\begin{df}\label{df:c}
+$\rr$の部分集合の族
+$\{C_{i}\}_{i\in I}$が以下の条件を満たすとき，
+この族は
+\textbf{性質\mysei を満たす}という．
+\begin{enumerate}[label=\textup{(\myseial\arabic*)}]
+\item\label{item:pp1}
+$\card(I)=\myco$
+\item\label{item:pp3}
+任意の$i\in I$と
+$\rr$
+の任意の空でない開集合$U$
+について
+$\card(C_{i}\cap U)=\myco$
+\item\label{item:pp4}
+任意の$i_{0}, i_{1}\in I$
+について
+$i_{0}\neq i_{1}$ならば
+$C_{i_{0}}\cap C_{i_{1}}=\emptyset$
+\item\label{item:pp6}
+$\bigcup_{i\in I}C_{i}=\rr$である．
+\end{enumerate}
+条件
+\ref{item:pp3}
+から各$C_{i}$
+は$\rr$の中で稠密であることに注意せよ．
+つまり
+$\{C_{i}\}_{i\in I}$
+というのは，大まかには
+$\rr$
+を連続体濃度個の連続体濃度をもつ互いに交わらない稠密な
+部分集合への分割ということである
+(ただし\ref{item:pp3}に注意)．
+\end{df}
+
+\begin{df}\label{df:f}
+$\rr$の部分集合の族
+$\{F_{j}\}_{j\in J}$が以下の条件を満たすとき，
+この族は
+\textbf{性質\mysq を満たす}という．
+\begin{enumerate}[label=\textup{(\mysqal\arabic*)}]
+\item\label{item:qq1}
+$\card(J)=\aleph_{0}$
+\item\label{item:qq3}
+任意の$j\in J$と
+$\rr$
+の任意の空でない開集合$U$
+について
+$\card(F_{j}\cap U)=\myco$
+\item\label{item:qq4}
+任意の$j_{0},  j_{1}\in I$
+について
+$j_{0}\neq j_{1}$
+ならば
+$F_{j_{0}}\cap F_{j_{1}}=\emptyset$
+\item\label{item:qq6}
+$\bigcup_{j\in J}F_{j}=\rr$である．
+\end{enumerate}
+性質\mysei
+と
+性質\mysq
+の違いは
+添字集合$I$, 
+$J$の
+濃度だけである．
+\end{df}
+
+
+
+\begin{df}\label{df:s}
+$\rr$の部分集合の族
+$\{S_{k}\}_{k\in K}$が以下の条件を満たすとき，
+この族は
+\textbf{性質\mysw を満たす}という．
+\begin{enumerate}[label=\textup{(\myswal\arabic*)}]
+\item\label{item:ss1}
+$\card(K)=\myco$
+\item\label{item:ss3}
+任意の$k\in K$と
+$\rr$
+の任意の空でない開集合
+$U$
+について
+$\card(S_{k}\cap U)=\aleph_{0}$
+\item\label{item:ss4}
+任意の$k_{0}, k_{1}\in K$
+について
+$k_{0}\neq k_{1}$ならば
+$S_{k_{0}}\cap S_{k_{1}}=\emptyset$
+\item\label{item:ss6}
+$\bigcup_{k\in K}S_{k}=\rr$である．
+\end{enumerate}
+性質
+\ref{item:ss3}
+は各$A_{i}$
+が可算で稠密であるということと同値であることに注意しよう．
+性質\mysw
+が言っているのは
+$\rr$
+は互いに交わらない連続体濃度の
+可算稠密集合に
+分割できるということである．
+性質
+\mysei
+との違いに注意しよう．
+\end{df}
+
+
+\begin{prop}\label{prop:333}
+以下の三つの命題は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem:2:1}
+性質\ref{item:main1}
+を満たす関数が存在する．
+
+\item\label{item:lem:2:2}
+性質
+\mysei
+を満たす
+$\{A_{i}\}_{i\in I}$
+が存在する．
+
+\item\label{item:lem:2:3}
+性質
+\mysq
+を満たす
+$\{A_{i}\}_{i\in I}$
+が存在する．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+
+
+[$\ref{item:lem:2:1}\to \ref{item:lem:2:2}$の証明]
+性質\ref{item:main1}を満たす関数
+$g$をとる．
+そして関数$h\colon \rr\to \rr$
+であって任意の$a\in \rr$について
+$\card(h^{-1}(a))=\myco$
+となる関数をとる．このような$h$
+は$\rr$と
+$\rr^{2}$の濃度が等しいことから
+存在が保証される．
+またこのような$h$は全射であることに注意せよ．
+そして$f\colon \rr\to \rr$
+を
+$f=h\circ g$とする．
+関数
+$h$
+が全射で
+$g$が
+性質
+\ref{item:main1}
+を満たすことから
+$f$も
+性質
+\ref{item:main1}
+を満たす．また，
+$h$の取り方から
+任意の$a$
+について
+$\card(f^{-1}(a))=\myco$
+である．
+ここで
+$I=\rr$
+で
+$C_{i}=f^{-1}(i)$とする．
+今から
+$\{C_{i}\}_{i\in I}$
+は性質
+\mysei
+を満たすことを示そう．
+条件\ref{item:pp1}は$I=\rr$
+からわかる．
+条件\ref{item:pp3}を示そう．
+任意に$i\in I$
+と空でない$\rr$
+の開集合$U$
+を取る．
+各$a\in h^{-1}(i)$
+について，$g(U)=\rr$という性質から
+$g(z_{a})=a$となる$z_{a}\in U$
+が存在する．
+すると，
+$\card(h^{-1}(i))=\myco$
+であることから
+$E=\{\, z_{a}\mid a\in h^{-1}(i)\, \}$
+の濃度は連続体であり，
+さらに$E$は
+$U\cap C_{i}$の部分集合である．
+よって
+条件\ref{item:pp3}は成り立つ．
+
+条件\ref{item:pp4}
+は$C_{i}=f^{-1}(i)$
+という定義からわかる．
+
+
+条件\ref{item:pp6}
+は$f$の定義域が$\rr$全体であることから従う．
+
+[$\ref{item:lem:2:1}\to \ref{item:lem:2:2}$の証明終わり]
+
+
+[$\ref{item:lem:2:2}\to \ref{item:lem:2:3}$の証明]
+
+性質
+\mysei
+を満たす族
+$\{C_{i}\}_{i\in I}$
+を取る．
+適当に可算集合
+$J$
+をとって(例えば$J=\zz$)
+全射$p\colon I\to J$
+を考える．
+$\card(I)=\myco$
+で
+$\card(J)=\aleph_{0}$
+なのでこのような全射は常に存在する．
+そして$j\in J$に対して
+$F_{j}=\bigcup_{i\in p^{-1}(j)}B_{i}$
+と定義すれば
+族$\{F_{i}\}_{i\in I}$
+は
+性質
+\mysq
+を満たす．
+
+[$\ref{item:lem:2:2}\to \ref{item:lem:2:3}$の証明終わり]
+
+[$\ref{item:lem:2:2}\to \ref{item:lem:2:1}$の証明]
+性質
+\mysq
+を満たす
+$\{F_{j}\}_{j\in J}$
+を考える．
+ここで
+$J=\zz_{\ge 0}$
+というふうに同一視する．
+$\rr$は第二可算なので，
+適当に可算な開基
+$\{U_{n}\}_{n\in \zz_{\ge 0}}$
+をとってくる．
+このとき
+性質\ref{item:main1}
+を満たす関数を構成するのに
+次の性質
+\ref{item:llstar}
+を満たす関数
+$f\colon \rr\to \rr$
+を構成すれば良い：
+\begin{enumerate}[label=\textup{\myhh}]
+\item\label{item:llstar}
+任意の$n\in \zz_{\ge 0}$
+について
+$f(U_{n})=\rr$. 
+\end{enumerate}
+さて任意の$j\in \zz_{\ge 0}$
+について
+$\card(U_{i}\cap F_{j})=\myco$
+なので
+全単射
+$\phi_{j}\colon U\cap A_{i}\to \rr$
+を取ることができる．
+そして関数
+$f\colon \rr\to \rr$
+を以下のように定義する
+\[
+f(x)
+=\begin{cases}
+\phi_{j}(x) & \text{ある$j\in \zz_{\ge 0}$について$x\in U_{j}\cap A_{j}$のとき}\\
+0 & \text{上記以外の場合}
+\end{cases}
+\]
+このとき，
+条件
+\ref{item:qq4}
+からこの$f$
+はwell-defined
+であり，
+性質
+\ref{item:llstar}
+を満たす．
+
+[$\ref{item:lem:2:2}\to \ref{item:lem:2:1}$の証明終わり]
+\end{proof}
+
+以上で
+性質
+\ref{item:main1}
+を満たす関数を構成する準備が整った．
+要は
+\mysq
+を満たす
+集合族を構成すれば良いわけである．
+
+\begin{lem}\label{lem:fragile}
+条件
+\mysq
+を満たす族
+$\{A_{i}\}_{i\in I}$
+が存在する．
+\end{lem}
+\begin{proof}
+複数の証明を紹介する．
+
+\textbf{[証明その１]}
+
+$\rr/\qq$の濃度が連続体であることを使った証明を紹介する．
+適当に互いに交わらない$\rr$の部分集合の可算個の族
+$\{E_{i}\}_{i\in \zz_{\ge 0}}$
+であって
+$\card(E_{i})=\myco$
+であって
+$\bigcup_{i\in \zz_{\ge 0}}E_{i}$
+が$\rr/\qq$の完全代表系になっているものを取る．
+$\rr/\qq$の濃度が連続体なので
+こういうことは可能である．
+そして
+\[
+A_{i}=\bigcup_{a\in _{E_{i}}}(a+\qq)
+\]
+と定義すると
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+は性質
+\mysq
+を満たす．
+上の証明では
+$\rr/\qq$
+の濃度が連続体であることを用いたが，
+$\rr$の$\qq$線型空間としての
+基底(ハメル基底)の濃度が
+連続体であること使ってもいいし，
+$\rr$の$\qq$上の超越次数が連続体である
+ことを使っても同様の証明ができる．
+
+\textbf{[証明その１終わり]}
+
+\textbf{[証明その２]}
+
+
+$\rr$が第二可算なので
+適当に可算な
+開基$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+を取る．
+帰納的に
+次のような族$\{T_{i}\}_{i\in \zz_{\ge 0}}$
+を構成する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+各$T_{i}$はカントール集合と同相である．
+\item 
+任意の$i, j\in \zz_{\ge 0}$
+について$i\neq j$ならば
+$T_{i}\cap T_{j}=\emptyset$である．
+\item 
+任意の$i\in \zz_{\ge 0}$
+について
+$T_{i}\subset U_{i}$
+\end{enumerate}
+どうやって帰納的に構成するのか説明する．
+$T_{0}, \dots, T_{n}$まで構成されたとする．
+このとき
+$E=U_{n+1}\setminus \left(\bigcup_{i=1}^{n}T_{i}\right)$
+を考える．
+各$T_{i}$がカントール集合に同相であるからコンパクトである．
+よって
+特に
+$T_{i}$は
+$\rr$の閉集合であるから，
+$E$は
+$\rr$の開集合である．
+次に
+$E$が空ではないことを示そう．
+各
+$T_{i}$がカントール集合に同相であることから
+各
+$T_{i}$は内点を持たない．
+そして
+$T_{i}$たちは互いに交わらないので
+$\bigcup_{i=1}^{n}T_{i}$も内点を持たない．
+このことから
+$S$は空集合ではない．
+あるいはベールの範疇定理からも
+$E\neq \emptyset$
+がわかる．
+もしくは$\bigcup_{i=1}^{n}T_{i}$がカントール集合に同相
+であることからも
+$E\neq \emptyset$
+がわかるが，カントール集合の位相的特徴付けを用いるので
+ちょっと難しいかもね
+(\cite{Den1}もしくは\cite{wa2}参照のこと)．
+
+
+以上から
+$E$は
+空ではない開集合であることがわかったので
+特に
+$E$
+は開区間を含む．開区間を含むということは，
+カントール集合と同相な部分集合も含む
+(普通のカントール集合は$\rr$の部分集合で，開区間というものは$\rr$と同相なのでこのことがわかる)．
+それを$T_{n+1}$とすると，
+上で挙げた全ての条件を満たす．
+
+さて，カントール集合(と同相な空間)$X$
+に対してその部分集合の可算族
+$\{W_{n}\}_{n\in \zz_{\ge }}$であって
+$\card(W_{n})=\myco$, 
+$W_{n}\cap W_{m}=\emptyset$ ($n\neq m$), 
+そして
+$\bigcup_{n\in \zz_{\ge 0}}W_{n}=X$
+となるものが存在する．
+このような族が存在することは，
+$X$が$\{0, 1\}^{\aleph_{0}}$
+であることからもわかるし，
+普通のカントール集合を見つめることによってもわかる．
+さて，各
+$T_{i}$
+は$X$と同相なので，
+適当に同相写像を使って$T_{i}$
+の部分集合族$\{H_{i, n}\}_{n\in\zz_{\ge 0}}$
+であって，$\card(H_{i, n})=\myco$, 
+$H_{i, n}\cap H_{i, m}=\emptyset$ ($n\neq m$), 
+そして
+$\bigcup_{n\in \zz_{\ge 0}}H_{i, n}=T_{i}$
+を満たす．
+そこで各$j\in \zz_{\ge 1}$について
+\[
+B_{j}=\bigcup_{i\in \zz_{\ge 0}}H_{i, j}
+\]
+として
+\[
+F_{0}=B_{0}\cup \left(\rr\setminus \bigcup_{i=1}B_{i}\right)
+\]
+で$j>0$のとき
+\[
+F_{j}=B_{j}
+\]
+とすれば
+$\{F_{j}\}_{j\in \zz_{\ge 0}}$
+は性質
+\mysq
+を満たす．
+条件
+\ref{item:qq3}
+だけ確かめてみよう．
+任意の空でない開集合
+$U$
+について
+$U\cap F_{j}$
+の濃度を調べたいところだが，
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が
+開基になっているので
+$U_{i}\cap A_{j}$
+の濃度だけ考えればいい．
+$A_{j}$の定義から
+$H_{i, j}\subset U_{i}\cap A_{j}$
+でありなおかつ
+$H_{i, j}$は連続体濃度をもつので
+\ref{item:qq3}が成り立つ．
+
+\textbf{[証明その２終わり]}
+
+\textbf{[証明その３]}
+
+
+まず次の主張
+\ref{item:spsp}
+を証明(紹介)する．
+\begin{enumerate}[label=\textup{($\spadesuit$)}]
+\item\label{item:spsp}
+条件
+\mysw
+を満たす
+族
+$\{S_{k}\}_{k\in K}$
+が存在する．
+
+\end{enumerate}
+
+この主張
+\ref{item:spsp}
+は
+$\myco$
+に関する
+超限帰納法を使って証明できる．
+諸事情により細かい話は省略する．
+実数直線$\rr$が第二可算であることと，
+不等式$\aleph_{0}<\myco$
+を使うと超限帰納法が
+うまく回せて証明が完了する．
+そして
+$\card(K)=\myco$
+なので
+適当に
+可算集合
+$J$
+をとると
+$K$
+の
+部分集合族
+$\{E_{j}\}_{j\in J}$
+が存在して 
+$\card(E_{j})=\myco$
+を満たす．
+そして
+各$j\in J$について
+$F_{j}=\bigcup_{k\in E_{j}}S_{k}$
+とすれば
+$\{F_{j}\}_{j\in J}$
+は条件
+\mysei
+を満たす．
+
+\textbf{[証明その３終わり]}
+
+以上で証明を終えることにする．
+\end{proof}
+
+
+
+命題
+\ref{prop:333}
+と
+\ref{lem:fragile}
+から
+次のことがわかる．
+\begin{thm}\label{thm:main1}
+性質\ref{item:main1}
+を満たす関数$f\colon \rr\to \rr$
+が存在する．
+\end{thm}
+
+補題
+\ref{lem:fragile}の
+\textbf{[証明その2]}から次のこともわかる．
+\begin{thm}\label{thm:main2}
+ほとんど至る所定数であるような，
+ボレル可測関数$f\colon \rr\to \rr$
+であって，
+性質\ref{item:main1}
+を満たすものが存在する．
+\end{thm}
+\begin{proof}
+\textbf{[証明その２]}の$T_{i}$は
+零集合として選べるので，
+$f$がほとんど至る所定数という話がわかる
+(一般に正測度を持つカントール集合が存在する
+\cite{Den2})．
+ボレル可測の話について，
+$W_{i}$はボレル集合
+として選べて
+(というかこのような$W_{i}$は$T_{i}$の閉集合として選べる)，
+なおかつ
+$\phi_{i}$もボレル同型として選べるので
+(\cite{Den3})，
+写像
+$f$がボレル可測
+として選べることがわかる．
+細かい話は省略する．
+\end{proof}
+
+ちなみに上で述べた構成をちょこっと変更すると以下のような関数も構成できる．
+\begin{thm}\label{thm:borel}
+関数$f\colon \rr\to \rr$であって以下の条件
+\ref{item:club}を満たすものが
+存在する：
+\begin{enumerate}[label=\textup{($\clubsuit$)}]
+\item\label{item:club}
+$\rr$の非可算な任意のボレル集合$A$について
+$f(A)=\rr$となる．
+\end{enumerate}
+さらに$f$はほとんど至る所$0$に等しくなるように
+選べる．
+\end{thm}
+\begin{proof}
+$\rr$のであってカントール集合と同相なものは
+連続体濃度個存在する．
+そして超限帰納法を使うと
+性質
+\mysei
+を満たす族
+$\{C_{i}\}_{i\in I}$
+であって，
+任意の$i\in I$と
+$\rr$の任意のカントール部分集合$T$について
+$C_{i}\cap T\neq \emptyset$
+となるものが存在する．
+ベルンシュタイン集合の構成とかを思い出そう．
+今$I=\rr$と同一視して
+そして$f\colon\rr\to \rr$を
+$x\in C_{i}$のとき
+$f(x)=i$となるように定義する．
+そして$\rr$の非可算濃度をもつボレル集合$A$
+はカントール集合を含んでいると言うことを使うと
+$f$が性質
+\ref{item:club}
+を満たすことがわかる．
+後半は上の話で$T$
+を測度$0$になるようなカントール集合としても話が回るので
+わかる．
+\end{proof}
+
+\section{関連する論文}\label{sec:2}
+このセクションでは
+性質
+\ref{item:main1}
+を満たす関数が
+これまででのように構成され，
+そしてどのように再発見されてきたのか文献を引いて
+説明する．
+性質
+\ref{item:main1}
+に関するあらゆる場所と時間において書かれた
+論文を全て一気に一堂に会させようというのがこのセクションである．
+
+まず最初におすすめの論文を紹介する．
+論文
+\cite{MR0104770}, 
+\cite{MR3815388}
+と
+\cite{MR3293811}
+は，
+性質
+\ref{item:main1}を満たす
+関数に関するよいサーベイである．
+とりあえず
+この現在の文章を読んで一番注意を払い記憶に留めるべきは，
+これらの論文\cite{MR0104770}, 
+\cite{MR3815388}
+と
+\cite{MR3293811}であろう．
+また，
+論文
+\cite{bernardi2017graphs}
+や
+\cite{MR3641696}
+も性質
+\ref{item:main1}
+に関するサーベイを含んでいる．
+
+
+
+性質
+\ref{item:main1}
+を満たす
+関数を誰が一番最初に構成したのかは
+この文章の筆者には
+わからないが，
+あの
+アンリ・ルベーグの
+1904年の博士論文
+\cite{PHDLebesgue}
+に性質
+\ref{item:main1}
+の関数の構成が記述されている．
+この構成は，
+この文書の筆者が調べることが
+できたものの中で
+一番古い．
+
+
+
+\begin{con}[1904, ルベーグ\text{\cite[p. 90]{PHDLebesgue}}, \cite{MR0104770}]\label{con:le}
+関数
+$g\colon \rr\to \rr$
+を以下のように構成する．
+$x\in \rr$
+を十進進展開してその小数点以下
+は
+``$. a_{1}a_{2}\dots a_{n}\dots$''
+となっているとしよう．
+ただし，
+小数表示は途切れない方の表示を選ぶことにする．
+つまり，
+例えば
+$1$
+については
+$0. 99999\dots$
+という表示を選ぶ
+(まあ正直十進数表示が二種類あるような数全体というのは
+「$10$進有理数全体」
+のことで，これは
+せいぜい可算なので，
+以下の構成を見るに適当に
+もう値を決めちゃって無視してしまっても構わない)．
+さて，
+もしもこの小数表示から奇数の番号を取って誘導される小数
+$0. a_{1}a_{3}\dots$
+が循環していないならば
+$g(x)=0$
+と定義する．
+そして，
+$0. a_{1}a_{3}\dots$
+が循環しているのであれば，
+$a_{2n-1}$
+をその循環が終わる最初の節だとして，
+$g(x)$を
+$g(x)=0. a_{2n}a_{2n+1}a_{2n+4}\dots$
+と定義する．
+このように定義したとき，
+$\rr$
+の任意の空でない開集合
+$U$
+について
+$g(U)=[0, 1]$
+となることが確かめられる．
+$[0, 1]$
+と
+$\rr$
+は同じ濃度をもつので，
+結局性質
+\ref{item:main1}
+を満たす関数が得られたことになる．
+特に注意すべきなのは
+$a\neq 0$
+ならば
+集合
+$g^{-1}(a)$
+は可算集合になることである．
+また，
+$g(x)\neq 0$
+となるような
+$x$
+全体，
+つまり
+小数表示した時に奇数番目が循環しているもの全体のことだが，
+この集合は零集合になる．
+実際適当に並行移動すると，
+十進表示の奇数番目が全て
+$0$になっている
+$[0, 1]$
+の元全体の測度を求める話に帰着されるのだが，
+こういう集合が零集合であることは
+普通のカントール集合が零集合であるということの証明とだいたい同様に確かめることができる．
+結局
+$f$は
+ほとんど至る所
+$0$
+である．
+\end{con}
+
+\begin{con}[1949, シェルピンスキー, 
+\cite{MR0031222}]\label{con:sie0}
+セクション\ref{sec:1}
+で見たように，
+性質
+\ref{item:main1}
+を満たす関数を与えることと，
+$\rr$を稠密部分集合へ分割することは同じことである．
+シェルピンスキーは論文
+\cite{MR0031222}
+で次のことを証明した：
+$M$を距離化可能空間で，
+その任意の空でない開集合の濃度は
+$\mathfrak{m}(\ge \aleph_{0})$
+と同じか上回るとする．
+このとき，
+$M$は
+$\mathfrak{m}$
+個の互いに交わらない
+稠密部分集合の
+和集合であって，これらの稠密部分集合と
+$M$
+の任意の空でない開集合との
+共通部分の濃度は
+$\mathfrak{m}$
+と等しいかそれ以上である．
+つまりは距離化可能空間でも開集合の濃度に関する条件があれば
+性質
+\mysei
+と同様の性質を持つ稠密部分集合による
+分割が得られるということである．
+この定理から，
+もちろん，
+$\rr$
+が
+性質
+\mysei
+を持つ族を持つことがわかる．
+このシェルピンスキーの
+論文
+\cite{MR0031222}
+はのちに
+Ceder
+\cite{MR0163279}
+によって
+位相空間の
+resolvability
+の概念として発展した．
+\end{con}
+
+\begin{con}[1953, シェルピンスキー, \cite{MR0064126}]\label{con:sie}
+エルデシュの論文
+\cite{MR0197631}
+の記述によれば，
+シエルピンスキーの論文
+\cite{MR0064126}
+において性質
+\ref{item:main1}
+を満たす関数が構成されているらしいが，
+この文章の筆者は
+未確認である．
+また，この論文は
+\textbf{Darbouxの性質}
+を持つ
+関数についてのものらしい．
+関数がDarbouxの性質を満たすとは，
+中間値の定理の結論を満たすことである．
+連続関数ならばそのまま中間値の定理によって
+Darbouxの性質が満たされるが，
+逆にDarbouxの性質から連続性が導かれるのかという
+問題意識が
+大昔に存在したらしい
+(ここでいう大昔は大体100年以上前のことである)．
+性質
+\ref{item:main1}
+を満たす関数
+はもちろん
+Darbouxの性質を満たすし同時に至る所で不連続であるため，
+関数が
+Darbouxの性質を持っているということだけから連続性は導かれないことがわかる．
+\end{con}
+
+
+\begin{con}[1959, Halperin \cite{MR0104770}]\label{con:hal}
+論文\cite{MR0104770}
+はDarbouxの性質を持つ
+不連続関数の構成に関するサーベイのようである．
+論文\cite{MR0104770}
+で紹介されている最もエレガントな例を紹介しよう．
+関数
+$f\colon \rr\to \rr$
+を以下のように構成する．
+まず
+$\rr$
+のハメル基底，
+つまり
+$\qq$
+上の線型空間
+$\rr$
+の基底
+$H$
+をとる．
+そして
+$H$
+を適当に分割して
+$H$
+の
+二つの互いに交わらない部分集合
+$A$
+と
+$B$
+で
+$\card(A)=\card(B)=\myco$
+となるものを取る．
+さらにこれらの集合を
+$\myco$
+で添字づけて
+$H=\{\myhv_{\alpha}\}_{\alpha<\myco}$, 
+$A=\{\myav_{\alpha}\}_{\alpha<\myco}$, 
+そして
+$B=\{\mybv_{\alpha}\}_{\alpha<\myco}$
+と表す．
+もしも
+$x\in \rr$
+が有限個を除いて
+$0$
+となるような二つの
+有理数の列
+$\{r_{\alpha}\}_{\alpha<\myco}$
+と
+$\{s_{\alpha}\}_{\alpha<\myco}$
+を用いて
+\[
+x=\sum_{\alpha}r_{\alpha}\myav_{\alpha}
++\sum_{\alpha}s_{\alpha}\mybv_{\alpha}
+\]
+と表されている場合には
+\[
+f(x)=\sum_{\alpha}r_{\alpha}\myhv_{\alpha}
+\]
+と定義する．
+ここで基底が切り替わっていることに注意しよう．
+この
+$f$
+というのはある意味で
+$\rr$
+の中の
+$\rr$
+と
+$\qq$
+線型空間として同型な線型空間への射影である．
+射影した後に
+$\rr$
+と同型であることを使って
+$\rr$
+への写像にしているということである．
+それでこの関数が
+\ref{item:main1}
+を満たすことが論文
+\cite{MR0104770}
+で証明されている．
+さらにこの関数はコーシーの関数方程式を満たすことに注意しよう(なぜならこれは実質的に線型空間の射影だからである)．
+つまり任意の
+$x, y\in \rr$
+について
+$f(x+y)=f(x)+f(y)$
+が成り立つ．
+ちなみにコーシーの関数方程式を満たすような関数というのは，ルベーグ可測であれば一次関数になるし
+(フレシェの論文
+\cite{frechet1913pri}で証明されたらしいが未確認，というかこの論文多分エスペラントで書かれているので結局読めない．
+それはそれとしてわかりやすい証明が
+論文
+\cite{alexiewicz1945remarque}
+にある)，
+ある一点で連続であれば一次関数になる
+(\cite{darboux1875composition})
+(コーシーの関数方程式の解が綺麗になるための条件の話は\cite[第２章, 2.2]{wa1}に詳しい．
+変な関数に関する本として
+\cite{MR2067444}
+と
+\cite{MR3645463}
+が
+ありこれにも記述がある．
+和書\cite{wa3}
+にもハメル基底の記述がある)．
+上で構成した
+$f$
+はどう見ても一次関数ではないので，
+$f$
+はルベーグ可測でもないし，
+至る所不連続であるということがわかる(性質
+\ref{item:main1}
+を満たすルベーグやらボレルやら可測関数が存在することはこれまでに見ての通りである)．
+\end{con}
+
+
+
+
+\begin{con}[1964, エルデシュ\cite{MR0197631}]\label{con:er}
+論文\cite{MR0185058}に答える形で
+エルデシュ
+も性質
+\ref{item:main1}
+に関する論文を書いている．
+まず
+$A$, 
+$B$, 
+$C_{\alpha} (\alpha<\myco)$ 
+を可算集合で，互いに素な
+$\rr$
+の稠密部分集合で和集合すると
+$\rr$
+全体になるものを取る．
+つまり
+性質
+\mysw
+を満たす族をとって番号を付け替えただけである．
+こういう族の存在はそんなに自明ではないのだが，
+エルデシュは論文の中で特に断りなくこの族をとっている．
+自明ではないとは言っても超限帰納法をぶん回すだけなので，
+帰納法が得意な
+エルデシュにとっては特に断りを入れる必要のない事柄だったのかもしれない．
+さて，
+$(0, 1)$を
+$\myco$で
+添字付けして
+$(0, 1)=\{x_{\alpha}\}_{\alpha<\myco}$
+とする．
+そして
+関数$f\colon \rr\to \rr$
+を
+\[
+f(x)=
+\begin{cases}
+1 & \text{$x\in A$のとき，}\\
+0 & \text{$x\in B$のとき，}\\
+x_{\alpha}& \text{$x\in C_{\alpha}$のとき．}
+\end{cases}
+\]
+と定義すると
+任意の空でない
+$\rr$
+の開集合
+$U$について
+$f(U)=[0, 1]$
+となる．
+集合
+$[0, 1]$
+と
+$\rr$は同じ濃度なので
+結局性質
+\ref{item:main1}
+を満たす関数が構成されたことになる．
+エルデシュはこの関数
+$f$を
+Marcus 
+\cite{MR0177072}の証明した定理の連続性の仮定を外せるかどうかという
+Question 
+に反例として答える形で
+構成したようである．
+詳しい話は当該論文を参照のこと．
+\end{con}
+
+\begin{con}[1964, Gelbaum and Olmsted \text{\cite[Chapter 8, Example 27, pp.104--105]{MR1996162}}]\label{con:counter}
+この数学書
+\cite{MR1996162}
+は解析学に関する反例を集めた本である．
+補題
+\ref{lem:fragile}
+の
+\textbf{[証明その2]}のように
+カントール集合の可算列を構成するやり方で
+性質\ref{item:main1}
+を満たす関数を構成している．
+構成の中でカントールの悪魔の階段と呼ばれる関数を使っているのも見所だ．
+\end{con}
+
+\begin{con}[Pambuccian, 1989, \cite{MR1033359}]\label{con:pam}
+論文\cite{MR1033359}
+では，$\rr$の加法部分群$H$
+であって，第一類集合でなおかつ零集合で，さらに
+$\card(H)=\myco$
+となるものを使って
+性質
+\mysei
+を満たす族を構成して
+性質
+\ref{item:main1}
+を満たす関数を構成している．
+ちなみにこのような$H$としては
+以下の集合
+\[
+\left\{\, 
+x\in \rr\ \middle|\  x=\sum_{i=0}^{\infty}\frac{a_{i}}{(2i)!}, 
+0\le a_{i}<2i
+\, \right\}
+\]
+から生成される加法群がそうであると指摘されている．
+この例自体は
+エルデシュ, キューネン, マウルディンの論文
+\cite{MR0641304}
+から引用されている．
+また，
+この論文\cite{MR1033359}はAmerican  Mathematical  Monthlyに掲載されているものだが，
+この論文\cite{MR1033359}に記述された情報によると，
+この論文が掲載されている
+同じ号
+126 (2016)の``Solution to Problem 6505'', p.560. 
+に別の構成法が載っているらしいが，手元に
+この月刊誌がないのでこの文章の筆者はこのことについて未確認である．
+また，
+\cite[Ch. I, Example 1.2 and Thm. 3.4]{MR0507448}(1978)
+にもそういう例が載っている旨の記述があるが，
+この文章の筆者は未確認である．
+\end{con}
+
+
+\begin{con}[2004, Aron, Gurariy, and Seoane, \cite{MR2113929}]\label{con:ags}
+論文
+\cite{MR2113929}
+は
+\underline{lineability
+の理論}
+を性質
+\ref{item:main1}
+を満たす関数への適応を試みた論文である．
+($\rr$上の)線形空間$V$
+の部分集合
+$M$が
+\textbf{lineable}(可線形とでも訳そうか)
+とは
+$M\cup\{0\}$
+が無限次元の線形空間を含んでいることである．
+より詳細に，
+基数$\mu$
+について，
+$M$が
+\textbf{$\mu$-lineable}
+とは
+$M\cup \{0\}$
+が次元$\mu$
+の線形空間を含んでいることである．
+ここでの線形空間というのは
+$V$
+の部分線形空間のことである．
+論文
+\cite{MR2113929}
+において著者たちは
+記号
+$\mathcal{F}(\rr)$
+で
+性質\ref{item:main1}
+を満たす
+関数
+$f\colon \rr\to \rr$全体の集合を表して，
+この集合が
+$\mycoco$-linable
+であることを証明している．
+ここで$\mathcal{F}(\rr)$
+は，
+「$\rr$から
+$\rr$への関数全体」という
+(巨大な)線形空間の部分集合であることに注意しよう．
+この定理が述べていることは
+$\mathcal{F}(\rr)$
+は次元が
+$\mycoco$
+になるような
+線形空間を部分集合として含んでいるということであり，
+性質\ref{item:main1}
+を満たす関数がある意味で豊富に存在することを示している．
+特に性質\ref{item:main1}を満たす関数は
+$\mycoco$
+濃度個存在する．
+ただし，
+この論文の主定理は
+性質\ref{item:main1}
+を満たす関数の存在を前提にした上で正当化されているので，
+性質\ref{item:main1}
+を満たす関数の存在性
+をこの主定理を使って示すことはできていないことに注意しよう．
+\end{con}
+
+\begin{con}[2007, Aron and Seoane-Sep\'{u}lveda, 
+\cite{MR2327324}]\label{con:asese}
+論文
+\cite{MR2327324}
+は，
+論文
+\cite{MR2113929}
+を踏まえた上で，
+\underline{lineability
+の理論}
+を
+\underline{algebrabilityの理論}
+へと展開することを
+試みた論文である．
+$\cc$-代数$R$
+の
+部分集合
+$A$が
+\textbf{algebrable}
+であるとは，
+$A\cup \{0\}$
+が$\cc$-代数
+$B$($R$の部分$\cc$-代数)
+を含みさらに$B$
+の最小濃度をもつ極小生成系
+は無限濃度をもつときにいう．
+より詳しく，基数
+$\alpha$, $\beta$について
+$A$が
+\textbf{$(\alpha, \beta)$-algebrable}
+であるとは，
+$A\cup \{0\}$
+が$\cc$-代数
+$B$($R$の部分$\cc$-代数)
+を含みさらに
+$B$の$\cc$上の線形空間としての次元
+は$\alpha$で，
+$B$の極小生成系の最小濃度が$\beta$
+であるときにいう．
+記号$T$で
+$\cc$上の$\cc$に値をとる関数
+$f\colon\cc\to \cc$
+であって，$\cc$の任意の空でない開集合$U$
+について
+$f(U)=\cc$
+を満たすもの全体とする．
+論文
+\cite{MR2327324}
+では，
+$T$がalgebrable
+であることを示している．
+ここで$T$は「$\cc$から$\cc$への写像全体」
+という$\cc$-代数の部分集合であることに注意しよう．
+この主定理も$T$
+が
+空でないことを利用していることに注意しよう．
+この内容は2010年の論文
+\cite{MR2731374}
+に発展した．
+\end{con}
+
+\begin{con}[2008,  Garc\'{\i}a-Pacheco, Rambla-Barreno and Seoane-Sep\'{u}lveda, \cite{MR2420685}]\label{con:gprbss}
+論文
+\cite{MR2420685}
+はliniablity
+の理論に$\qq$-線形写像の集合の
+考察を付け加えたものである．
+記号
+$L$, 
+$S$, 
+そして
+$D$
+という記号でそれぞれ
+関数$\rr$から$\rr$への写像であって，
+$\qq$-線形なもの，
+性質\ref{item:main1}
+を満たすもの，
+そして
+グラフが平面内で稠密なもの
+全体を表すことにする．
+このとき論文
+\cite{MR2420685}
+では
+$D\setminus (S\cup L)$, 
+$S\setminus L$, 
+$S\cap L$, 
+$(D\cap L)\setminus S$
+が
+$\mycoco$-lineable
+であることを証明している．
+この論文に含まれる興味深い定理を紹介しよう：
+$\qq$-線形写像$f\colon \rr\to \rr$について以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item $f$
+は性質
+\ref{item:main1}を満たす．
+\item 
+$f$
+は全射であり，なおかつ単射ではない．
+\end{enumerate}
+この定理は
+構成
+\ref{con:hal}
+の一般化とみなせる．
+この定理を用いると
+性質
+\ref{item:main1}
+を満たす関数が結構たくさんあることがわかると思う．
+なぜなら無限次元線形空間の自己線形写像の中に
+全射だが単射ではないものが存在するのは
+まあそれはそうだろうと思うからである．
+もうちょっと詳しくいうと，
+$\qq$線型空間として
+$\rr$と
+$\rr\times \rr$
+の次元は等しいのでこれら二つは
+$\qq$線型同型である．
+その同型写像
+$g\colon \rr\to \rr\times \rr$
+と第一成分への射影
+$\pi\colon \rr\times \rr\to \rr$
+を合成した写像
+$f=\pi\circ g\colon \rr\to \rr$
+は
+$\qq$線形写像で
+全射でなおかつ単射ではない．
+よって
+$f$は
+性質
+\ref{item:main1}
+を満たす．
+さらにはコーシーの関数方程式も満たす．
+\end{con}
+
+\begin{con}[2010, G\'{a}mez-Merino, Mu\~{n}oz-Fern\'{a}ndez, S\'{a}nchez,  Seoane-Sep\'{u}lveda,\text{\cite{MR2679609}}]\label{con:gmmfsss}
+\quad
+この論文もlineablityの理論に関するものである．
+この論文\cite[Examples 2.1 and 2.2]{MR2679609}では
+性質
+\ref{item:main1}
+を満たす関数
+よりももっと変な関数について調べている：
+関数$f\colon \rr\to \rr$
+が
+\textbf{perfectly everywhere surjective}
+であるとは，
+$\rr$の任意の完全集合$P$(空ではなく，孤立点を持たない閉集合)
+と任意の$p\in \rr$について
+集合$P\cap f^{-1}(p)$
+が常に濃度
+$\myco$
+をもつときにいう．
+ところで性質\ref{item:main1}
+を満たす関数は\textbf{everywhere surjective}
+とも呼ばれることに注意しよう．
+もちろんperfectly everywhere surjective 
+な関数は性質
+\ref{item:main1}
+を満たす．
+論文\cite{MR2679609}
+では，超限帰納法を用いて
+perfectly everywhere surjective 
+な関数を構成している．
+セクション\ref{sec:1}
+の定理\ref{thm:borel}
+の関数もこの性質を満たすことに注意しよう．
+また，
+補題
+\ref{lem:fragile}
+の
+\textbf{[証明その2]}や
+構成
+\ref{con:counter}のような
+帰納的にカントール集合を構成するようなやり方で，
+perfectly everywhere surjective ではないが，
+性質\ref{item:main1}
+を満たす関数を構成している．
+\end{con}
+
+
+\begin{con}[2014, Oman (Conway?)\cite{MR3293811}]\label{con:om}
+論文
+\cite{MR3293811}
+も
+Darbouxの性質を満たす
+不連続関数のサーベイである．
+この中で
+Conway's base-13 function 
+と呼ばれているものも
+性質
+\ref{item:main1}
+を満たす．
+構成に入る前に余談：
+この関数が論文で初めて紹介されたのは
+調べた限り
+\cite{MR3293811}だが，
+この当該論文ではConwayがいつどの媒体で
+この関数を構成したのか書いていないし，
+ネットで探しても見つからないのでこの関数が
+実際に
+Conwayによるものなのか，それともそうであるとされているだけなのかは，
+この文章の著者には判断がつかなかった．
+しかし
+Stackexchangeの質問\cite{70657}
+によれば，
+くだんの関数というのは，
+Conwayが教育活動を通して
+構成した関数であるらしい．
+なので何かしらの著作などに現れているというわけではなく，
+Conwayの学生や知り合いなどによって口伝によって広まっているようだ．
+それはさておき，
+くだんの
+関数を定義しよう．
+$x\in [0, 1)$をとってきて
+これを
+を13進数表示する．
+13進数表示は誰もあんまりやらないかもしれないから注意しておくが，
+$0$
+から
+$9$
+までの数字の他に
+$10$, 
+$11$,
+ $12$
+ を表す単一の文字たち
+ $A$, 
+$B$, 
+$C$を加えた
+13種類の文字を用いて数を表す方法である．
+この
+$10$
+っていうのは十進数表示で書かれていて複数の文字で書かれているから十より大きい進数表示をするときは
+単一の文字
+$A$
+とかで置き換えるのである．
+さてそれで
+$x$
+を13進数表示したとき，
+その小数表示を
+$0. a_{1}a_{2}\dots$
+とする．ただし，有限桁で打ち切られる方の表し方は(もしもあるのならば)
+採用しないことにする．
+このときこの表示の仕方は
+以下の3つのクラスのうちどれかひとつの形になる：
+\begin{enumerate}[label=\textup{(クラス\arabic*)}, leftmargin=*]
+\item\label{item:class1}
+適当な番号$r$が存在して，
+$a_{r}a_{r+1}\dots$は次の形をしている：
+\[
+Bx_{1}x_{2}\dots x_{n}Ay_{1}y_{2}\dots
+\]
+ここで$x_{i}$と$y_{i}$たちは$0$から$9$の数字である．
+\item\label{item:class2} 
+適当な番号$r$が存在して，
+$a_{r}a_{r+1}\dots$は次の形をしている：
+\[
+Cx_{1}x_{2}\dots x_{n}Ay_{1}y_{2}\dots
+\]
+ここで$x_{i}$と$y_{i}$たちは$0$から$9$の数字である．
+\item\label{item:class3}
+上記以外
+\end{enumerate}
+ここで
+\ref{item:class1}
+と
+\ref{item:class2}
+についてはこのような表し方は一通りしかないこと
+に注意しよう．
+なぜならば今回の取り決めにおける１３進数表示は一意的だからである．
+さてこのとき関数$f\colon [0, 1)\to \rr$
+を以下のように定義する(小数点の位置に注意)．
+\[
+f(x)=
+\begin{cases}
+x_{1}x_{2}\dots x_{n}. y_{1}y_{2}\dots  & \text{$x$が\ref{item:class1}に属する，}\\
+- x_{1}x_{2}\dots x_{n}. y_{1}y_{2} \dots& \text{$x$が\ref{item:class2}に属する，}\\
+0 & \text{上記以外．}
+\end{cases}
+\]
+ここで定義式は十進数表示として書いていることに注意されたい．
+するとこの関数は$[0, 1)$の任意の空でない開集合
+$U$について
+$f(U)=\rr$
+を満たす．
+集合$(0, 1)$は$\rr$
+と同相なので，
+結局
+性質
+\ref{item:main1}
+を満たす関数が
+構成できたことになる．
+この関数の定義について何かコメントを残そう．
+コンピュータというのは数字を扱う場合には
+$0$と
+$1$
+の列で記述して頑張っているそうだが，
+そんなコンピュータの中で負の数を
+表す方法として，
+ビットの一つを符号に割りてて，
+例えば先頭のビットが
+$0$なら正の数で
+$1$なら負の数と言うふうにしたりするそうである
+(実際のところはこの方法よりは「補数」を使った取り扱いの方が好まれているように見える)．
+これと同様の考えで
+上で構成した$f$は小数表示の先頭が$B$なら正の数
+で，$C$なら負の数を割り当てる関数である．
+記号$B$と$A$，もしくは$C$と$A$に囲まれた$x_{i}$たちは行き先の「整数部分」を表していると言うことである．
+つまりは１３進表示の$A$, 
+$B$, 
+$C$の
+記号の代わりに
+小数点の記号``$.$'', 
+プラス記号``$+$'', 
+そして
+マイナス記号``$-$''
+を使って，
+10進法の数として解釈できる部分が現れたらそれを$f$
+の行き先とするのである．
+上の構成を見てわかる通り，
+10進法に対して文字を三つ増やして１３進数を使ったのだから
+２進数に対して５進数を使っても上と同様の構成ができる．
+また，集合
+$\{\, x\mid f(x)\neq  0 \, \}$
+はボレル集合(というか$F_{\sigma}$)で零集合であることが
+構成
+\ref{con:le}
+と同様の考えでわかる
+(実はこの集合は連続体濃度でもある)．
+よって$f$はボレル可測で，なおかつほとんど至る所
+$0$に一致する．
+\end{con}
+
+
+
+\begin{con}[2016, ラドクリフ\cite{MR3453542}]\label{con:rad}
+
+論文
+\cite{MR3453542}
+で記述された
+とても具体的な構成を紹介しよう．
+関数
+$f\colon \rr\to \rr$
+を以下のように定義する．
+もしも
+$\lim_{n\to \infty}\tan(n!\pi x)$
+が存在しないのならば$f(x)=0$とし，
+この極限が存在する場合には
+$f(x)=\lim_{n\to \infty}\tan(n!\pi x)$
+と定義する．
+論文
+\cite{MR3453542}では以下のことが示されている．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:10:0}
+任意の$q\in \qq$ について
+$q$は
+$f$の周期である．
+つまり，任意の$x\in \rr$
+について
+$f(x+q)=f(x)$である．
+
+\item\label{item:10:1}
+$f$は全射である．
+つまり
+$f(\rr)=\rr$が成り立つ．
+
+\item\label{item:10:2}
+$f$
+は性質
+\ref{item:main1}
+を満たす．
+\end{enumerate}
+論文ではまず
+性質
+\ref{item:10:1}
+と
+\ref{item:10:2}
+を証明し，
+その系として
+性質
+\ref{item:main1}
+を証明している．
+\end{con}
+
+
+\begin{con}[De Marco, 2018 \cite{MR3756332}]\label{con:dem}
+論文\cite{MR3756332}
+ではラドクリフ
+\cite{MR3453542}
+の関数を修正して
+ほとんど至る所$0$で
+性質
+\ref{item:main1}
+を満たすものを構成しているらしいが，
+論文が手元にないため
+この文章の筆者は未確認である．
+\end{con}
+
+
+\begin{con}[2019, Ho and Zimmerman, \cite{MR4022760}]\label{con:hz}
+セクション\ref{sec:1}
+の
+命題
+\ref{prop:333}
+で見たように
+性質
+\ref{item:main1}
+を満たす関数が存在すること
+と，
+実数直線
+$\rr$
+を連続体濃度個の稠密連続体濃度の集合に分割することは同値である．
+論文
+\cite{MR4022760}
+では
+性質
+\ref{item:main1}
+を満たす関数を構成しているわけではないが，
+$\rr$の分割を構成しているので
+この論文も紹介する．
+当該論文では
+$\rr$
+の部分集合族
+族
+$\{A(r)\}_{r\in I}$
+であって，以下の条件を満たすものを
+選択公理を
+使わずに構成している．
+具体的な構成は省略する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$I=[0, 1)$
+\item $\rr$の任意の空でない開集合
+$U$について
+$U\cap A(r)$は連続体である
+(論文ではただ単に非可算と言っているが実際は
+連続体濃度になる．連続体仮説との兼ね合いがあるので，
+こういう話をするときは「非可算」と「連続体濃度」を書き分けて，連続体濃度だとわかるときはその旨をはっきり書き記してほしいところである)．
+ちなみにこの条件から$A(r)$
+が稠密であることがわかる．
+\item 
+異なる$r_{0}, r_{1}\in I$について
+$A(r_{0})\cap A(r_{1})=\emptyset$
+\item 
+各$A(r)$
+は零集合である．
+\item 
+$B=\rr\setminus \left(\bigcup_{r\in I}A(r)\right)$とおく．
+このとき$B$は空ではなく，
+$\rr$の任意の空でない開集合$U$
+について
+$B\cap U$
+は連続体濃度をもつ．
+\end{enumerate}
+ちなみに
+この文書の筆者が
+セクション\ref{sec:1}
+の内容を思いついたのは，
+この論文
+\cite{MR4022760}の内容を
+をすでに知っていたからである．
+また
+この論文
+\cite{MR4022760}
+の前身として同じ著者たちの
+\cite{MR3779220}(2018年)
+があり，そこでは
+連続体濃度個の分割ではなく，
+有限個の分割を扱っている．
+論文
+\cite{MR3418216}
+では孤立点がない距離空間を可算個の
+稠密部分集合に分割する方法が載っているらしい．
+また2023年の論文
+\cite{MR4573491}
+では上で述べた
+$\rr$
+の分割の他の方法が記述されている．
+%論文\cite{Ishiki2023sr}にも似たような直線の分割が構成されている．
+\end{con}
+
+
+\section{注釈}\label{sec:3}
+このセクションではこれまでの話に注釈をつけていく．
+
+\subsection{カントール集合}
+補題
+\ref{lem:fragile}
+の\textbf{[証明その２]}, 
+構成
+\ref{con:counter}, 
+\cite[Sec.3]{MR3293811}
+そして構成
+\ref{con:gmmfsss}
+においてカントール集合が出てくるが，
+これは別に模倣をしたのではなく，
+カントール集合が実数の位相や構造を考える際に
+とても
+基本的
+な集合
+であること，
+そして位相的に扱いやすいことや，
+$\{0,1 \}^{\nn}$に
+同相なので扱いやすい，
+などのこと
+に起因するという
+数学的にはっきりとした根拠がある．
+このような話に
+興味がある場合には
+「記述集合論」
+(Descriptive set theory)
+などの本を読むと良いだろう
+(\cite{MR1321597}, 
+\cite{MR1619545})．
+
+
+
+\subsection{変な関数}
+変な関数を知りたい場合は
+数学書
+\cite{MR2067444}
+と
+\cite{MR3645463}
+をおすすめする．
+
+
+\subsection{約50年}
+セクション\ref{sec:2}
+を見てみると，
+ルベーグの1904年の構成から
+シェルピンスキーの構成の1949年,あるいは
+1953年まで約50年の間が空いているので，
+この期間中に誰かが
+性質\ref{item:main1}を満たす関数を構成していてもおかしくない．
+しかしながら，この20世紀の前半の間の期間の論文ってなんかちょっと調べづらいので今回はもうやめておく．
+また，
+論文
+\cite{MR0393377}
+にも性質
+\ref{item:main1}
+を満たす関数の構成が載っている可能性が
+あるが，
+この文章の筆者は未確認である．
+
+
+\subsection{Lineabilityの理論}
+構成
+\ref{con:ags}, 
+\ref{con:asese}, 
+\ref{con:gprbss}, 
+そして
+\ref{con:gmmfsss}
+などに現れているLinability
+の理論というのは，
+興味深い．
+変な性質を持つ奴らが方に存在することを証明するためには，
+大抵の場合はBaireの範疇定理にまつわる理論などを使うと思うが，
+そういうので対応できない場合に，
+このような巨大な線形空間を含むという定式化で
+変な性質の遍在性を明らかにしようと試みているのだと思う．
+この理論にまつわる話題として，
+閉区間
+$[0, 1]$
+上の連続関数の空間
+$C[0, 1]$
+のなかの
+至る所不連続な関数全体がlineableでさらには
+これに
+任意の可分距離空間が埋め込めるという話も関連性が
+あると思う．
+Lineabilityの理論はバナッハ空間論の一つの枝を
+成しているようだ．
+詳しくは
+\cite{MR3119823}, 
+\cite{MR2643865}
+や
+\cite{MR2113929}
+など
+を参照のこと．
+この方面の成書として
+\cite{MR3445906}
+がある．
+
+
+\subsection{一般の空間と性質\ref{item:main1}}
+
+
+構成\ref{con:asese}
+でしれっとeverywhere surjectiveな
+関数$f\colon\cc\to\cc$を出しているが，
+このような関数が存在できる空間は結構たくさんある
+(\cite[Sec.5]{MR3293811}も参照のこと)．
+\begin{thm}
+$X$を以下のような空間とするとき，
+写像$f\colon X\to X$
+であって$X$の任意の空でない開集合
+$U$について$f(U)=\rr$となるようなものが存在する．
+特に$X$がちょうど連続体濃度をもつ場合には
+関数$f\colon X\to \rr$
+であって$X$の任意の空でない開集合
+$U$について$f(U)=\rr$となるようなものが存在する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item
+ $X=\qq$
+ (\cite[Sec.2]{MR3815388})
+ \item 
+ $X=\rr\setminus \qq$
+ \item 
+ $X$はカントール集合
+\item 
+$X$はバナッハ空間 
+(このとき可分性は仮定しなくてもよい)
+\item 
+$X=\qq_{p}$, 
+ここで$p$は素数
+\item 
+$X$は次元が正の可分でパラコンパクトな位相的多様体
+(次元が正で距離化可能な可分位相多様体と言い換えてもいい)．
+\item 
+$X$は距離化可能空間で任意の空でない開集合
+$U$について$X$と
+$U$の濃度が等しい
+(この条件は上のすべての場合を含んでいる．またこの条件が満たされる場合，$X$に孤立点は存在しないことにも注意しよう)．
+\end{enumerate}
+\end{thm}
+この定理で述べられている以外の空間でくだんの性質を満たすものももちろんある．
+例えばゾルゲンフライ直線など．
+上の定理の証明は省略するが，結局
+命題
+\ref{prop:333}
+のようなことをするとわかる．
+つまり上の$X$の条件というのは
+性質
+\mysei, 
+\mysq, 
+そして
+\mysw
+を満たすような稠密部分集合の族が存在するための
+十分条件ということである．
+実はこのような稠密部分集合による分割ができるような
+空間は一般位相空間論において，
+\textbf{Resolvable spaces}として研究されている．
+この概念を
+導入したのは
+Ceder \cite{MR0163279}
+であるが，
+空間を稠密部分集合に互いに素になるように分割できるという現象自体は
+シェルピンスキー
+\cite{MR0031222}
+によってすでに報告されていて
+(構成\ref{con:sie0})，
+これを一般化する形で導入されたのだ．
+Resolvable spacesのサーベイとして
+\cite{MR1425934}
+がある．
+Darbouxの性質のサーベイ
+論文
+\cite{MR3293811}
+にも
+この位相的概念に関する記述が幾許かある．
+実数直線
+$\rr$
+は
+$\myco$-resolvable 
+であり，この事実から
+セクション
+\ref{sec:1}
+の内容はほぼ従う．
+というか
+セクション
+\ref{sec:1}
+の内容は実数直線
+$\rr$
+が
+$\myco$-resolvable 
+であるということを検証しているものとみなせる．
+
+
+
+\subsection{太陽の下に新しきもの無し\ldots\ldots 況や人目に触れざるものをや}
+%Every new discovery is just a reminder that we are small and stupid
+セクション\ref{sec:2}の内容を見て貰えばわかるように，
+まるでベーグルの輪のように
+性質
+\ref{item:main1}
+を満たす関数が再発見され続けている．
+これは別に
+性質
+\ref{item:main1}
+を満たす関数だけに限った話ではなく，
+他の数学的な定理や議論についても同様なので，
+これはもうそういうもん，
+\textbf{みんなも覚悟しよう}
+(サーベイとかで重複を指摘されても快く受け入れようということ，もちろん自分で気付くのが一番である)．
+特に
+論文
+\cite{MR1033359}, 
+\cite{MR3453542}, 
+\cite{MR3756332}, 
+\cite{MR4022760}
+は全てAmerican Mathematical Monthly 
+に掲載されたものであり，
+同じ種類の話が同じ媒体で繰り返されているし，互いに引用とかもそんなにしていない．
+Amer. Math. Monthly はそういうところある．
+これはもうこういうもん．
+ゆえに図書館などでこの月刊誌を通読をしてみると，
+もっと色々な発見があって楽しいと思う．
+
+
+\subsection{実数直線の分割}
+セクション\ref{sec:1}の
+命題\ref{prop:333}
+で見たように，
+性質
+\ref{item:main1}
+を満たす関数を与えることと，
+実数の分割を与えることは同値である．
+構成\ref{con:hz}で述べられている
+ような実数の分割は例えば
+ルベーグの構成\ref{con:le}
+の関数$f$
+を使った$\{f^{-1}(a)\}_{a\in [0, 1]}$
+なども該当するし，
+構成
+\ref{con:om}
+のConway's base13 function 
+$f$を使った
+$\{\zz+ f^{-1}(a)\}_{a\in \rr}$
+も該当する．
+これらの関数の構成には選択公理を使っていないことに注意しよう．
+ただし，
+性質\mysw 
+を満たす族を選択公理なしで構成できるかどうかについては，筆者は
+あまり自信がない．
+無理そうな感じがする．
+しかし証明をする能力が足りていない．
+
+
+\subsection{関数の逆像を制御すること}
+関数$f\colon \rr\to\rr$について
+性質\ref{item:main1}を満たすことは
+次の条件に言い換えることができる：
+任意の$a\in \rr$について
+逆像$f^{-1}(a)$
+は$\rr$の中で稠密である．
+この条件を満たす関数はもちろん不連続であるが，
+連続関数に対しては逆像というものはどの
+程度
+エキゾチックになるのか
+ということが疑問に浮かぶ．
+実は次のことが知られている．
+\begin{thm}[\text{\cite[Theorem 3.3]{MR0476939}}]
+記号$C$で，
+$[0, 1]$から$\rr$への\underline{連続}写像
+全体にsupノルムを導入したバナッハ空間とする．
+そして$A$は以下の条件を満たす$f\in C$
+の全体とする：$\alpha$を$f$の最小値
+で$\beta$を最大値とする．
+このとき$(\alpha, \beta)$
+の可算稠密部分集合$E$が存在して以下を満たす：
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$c\not \in E\cup \{\alpha, \beta\}$
+については
+$f^{-1}(c)$は完全集合になる(つまり孤立点を持たない)．
+\item
+$f^{-1}(\alpha)$と
+$f^{-1}(\beta)$
+はそれぞれ一点集合である．
+\item 
+$c\in E$
+のときは
+$f^{-1}(c)$
+はただ一つの孤立点を持つ．つまり完全集合とそれに
+含まれない一点との和集合である．
+
+\end{enumerate}
+このとき，
+集合
+$A$
+は
+$C$の中で
+comeager である．
+つまり$A$
+は第一類集合の補集合である．
+言い換えるならば，
+$C$の元というのは一般的(generic)には$A$
+に属するということである．
+\end{thm}
+この定理が述べているのは，
+$[0, 1]$
+上の連続関数というのは実は，
+区間$[0, 1]$
+を二点と，完全集合の連続体濃度の族と
+孤立点を一つしか持たない可算族の互いに交わらない
+分割を与えるようなもので
+(位相的，あるはBaireの理論の意味で)ほとんど尽くされるということである．
+この定理は
+論文
+\cite{MR1260171}, 
+\cite{MR3709302}, 
+\cite{MR2317072},
+\cite{MR3190768}, 
+\cite{MR3076817}
+などに発展した．
+論文
+\cite{MR0396870}や
+\cite{MR0367124}
+も参照のこと．
+
+
+\subsection{開写像が連続になるための条件}
+開写像が連続になるための条件は
+\cite{MR0292041}
+で扱われている．
+
+
+\section*{参考文献}
+
+
+
+\renewcommand{\refname}{タイトルの参考にした映画}
+	
+\begin{thebibliography}{99}
+ダニエル・クワン監督，ダニエル・シャイナート監督，
+「エブリシング・エブリウェア・
+     オール・アット・ワンス」，
+スタジオA24配給, 
+2022年(日本では2023年)．
+\end{thebibliography}
+
+\renewcommand{\refname}{はてなブログ「電波通信」}
+	
+\begin{thebibliography}{99}
+\bibitem[電波通信1]{Den1}
+はてなブログ電波通信の記事
+「基本的な0次元距離空間の特徴づけの話」, https://concious4410.hatenablog.com/entry/2016/11/13/181103
+\bibitem[電波通信2]{Den2}
+はてなブログ電波通信の記事
+「リーマン体積確定集合と太ったカントール集合」, 
+https://concious4410.hatenablog.com/entry/2016/08/23/173328
+\bibitem[電波通信3]{Den3}
+はてなブログ電波通信の記事
+「ボレル同型と確率空間の同型：確率論その３」, 
+https://concious4410.hatenablog.com/entry/2023/07/02/131316
+\end{thebibliography}
+
+\renewcommand{\refname}{和文参考文献}
+
+\begin{thebibliography}{99}
+\bibitem[和1]{wa1}
+風巻紀彦
+「凸関数論」，
+横浜図書, 2005. 
+
+\bibitem[和2]{wa2}
+北田 韶彦
+「位相空間とその応用」, 
+現代基礎数学12, 朝倉書店，
+2007. 
+\bibitem[和3]{wa3}
+佐々木浩宣
+「ヘンテコ関数雑記帳」, 
+共立出版, 
+2021. 
+\end{thebibliography}
+
+
+
+\renewcommand{\refname}{一般の参考文献}
+%READ!
+%myplain is the same to amsplain style. 
+%\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{wef.bib}
+%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\end{document}
