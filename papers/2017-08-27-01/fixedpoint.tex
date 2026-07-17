@@ -1,0 +1,349 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+\DeclareMathOperator{\dm}{diam}
+\newcommand{\hh}{\mathcal{H}}
+\newcommand{\hd}{\dim_H}
+\newcommand{\LL}{\mathcal{L}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ブラウワーの不動点定理}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+ここでは$B^n=\{x\in \rr^n\mid \|x\|\le 1\}$、$S^{n}=\{x\in \rr^n\mid \|x\|= 1\}$とする。
+この文章の目的は連続写像$f:B^n\to B^n$は常に不動点を持つことを主張するブラウワーの不動点定理を証明することである。
+\begin{df}[レトラクト]
+位相空間$X$の部分集合$A$が$X$のレトラクトであるとは連続写像$f:X\to A$が存在して任意の$x\in A$について$f(x)=x$となることをいう。このような$f:X\to A$をレトラクションという。
+\end{df}
+
+\begin{prop}
+次の二つの主張は同値である。
+\begin{enumerate}
+\item （ブラウワーの不動点定理）任意の連続写像$f:B^n\to B^n$は不動点を持つ。
+\item （No retraction theorem）$S^{n-1}$は$B^n$のレトラクトではない。
+\end{enumerate}
+\end{prop}
+
+\begin{proof}\par
+[$(1)\To (2)$の証明]\par
+対偶を示す。$S^{n-1}$が$B^n$のレトラクトとして$f:B^n\to S^{n-1}$をレトラクションとする。
+そして$g(x)=-f(x)$と定義する。この$g$には不動点が存在しない。実際$g(B^n)=S^{n-1}$なので不動点$p$が存在するならば$p\in S^{n-1}$でなければならない。しかし$g(p)=-p$も成り立つので矛盾する。\par
+[$(1)\To (2)$の証明終了]\par
+[$(2)\To (1)$の証明]\par
+対偶を証明する。不動点を持たない連続写像$f:B^n\to B^n$が存在すると仮定する。
+即ち$x\in B^n$について$f(x)\neq x$ということである。
+さて$e(x)=x-f(x)$と定義すると$e:B^n\to \rr^n$は連続である。
+さらに$L:B^n\times \rr\to \rr^n$を$L(x,t)=f(x)+te(x)$と定義すればこれもやはり連続である。
+今、$t$に関する二次方程式$\|L(x,t)\|^2=1$を考える。つまり方程式
+\begin{equation}\label{hou}
+\|e(x)\|^2t^2+2\langle f(x), e(x)\rangle t+\|f(x)\|^2-1
+\end{equation}
+を考える。係数が$x$の関数になってることに注意しよう。いまはこれを$t$の方程式として見ている。また、(\ref{hou})の解は$x$に依存することに注意せよ。
+そして、この二次方程式の二つの解は
+\[
+\frac{1}{\|e(x)\|^2}\left(-\langle f(x), e(x)\rangle\pm\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\right)
+\]
+である。さていま、$\|f(x)\|\le 1$が常に成り立つので、$-\|e(x)\|^2(\|f(x)\|^2-1)\ge 0$である。よって
+\[
+\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\ge |\langle f(x),e(x)\rangle|
+\]
+なので、方程式(\ref{hou})の解は実数解であり、非負の解と非正の解を持つ。そのうち、非負の解を$T(x)$としよう。$T(x)$は明示的に
+\[
+T(x)=\frac{1}{\|e(x)\|^2}\left(-\langle f(x), e(x)\rangle+\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\right)
+\]と書ける。この式から分かるように、写像$T:B^n\to \rr$は連続である。
+さて、$x\in S^{n-1}$のとき、$L(x,1)=x$なので$T(x)=1$である。
+以上から、$g:B^n\to S^{n-1}$を$g(x)=L(x,T(x))$と定義するとこれは連続写像で、$x\in S^{n-1}$のとき
+$g(x)=L(x,T(x))=L(x,1)=x$となり、レトラクションになっている。つまり$S^{n-1}$は$B^n$のレトラクトになっている。
+
+
+\par
+[$(2)\To (1)$の証明終了]
+\end{proof}
+
+この命題からブラウワーの不動点定理を示すためには$S^{n-1}$が$B^n$のレトラクトではないことを示せばよい。
+この主張をさらに換言する。
+\begin{prop}
+レトラクション$f:B^n\to S^{n-1}$が存在するならば、
+滑らかなレトラクション$g:B^n\to S^{n-1}$が存在する。ここで$g$が$B^n$で滑らかというのは、$B^n$の十分小さい開近傍で$g$が滑らかという意味である。
+\end{prop}
+\begin{proof}
+$u(x)=f(x)-x$と定義する。
+$\|u(x)\|\le 2$に注意しよう。
+$f|S^{n-1}=1_{S^{n-1}}$なので$u|S^{n-1}=0$なのである$\delta\in(3/4,1)$が存在して
+\[
+\delta\le \|x\|\le 1\To \|u(x)\|<4^{-1}
+\]
+となる。
+また、ワイエルストラスの多項式近似定理から各成分が多項式であるような写像$P:\rr^n\to \rr^n$が存在して
+\[
+\|x\|\le 1\To \|P(x)-u(x)\|<4^{-1}
+\]
+となる。また多項式$Q:\rr\to \rr$で
+\begin{align*}
+&r\in [0,\delta]\To 3/4\le Q(r^2)\le 1\\
+&r\in [\delta, 1]\To \|Q(r^2)\|\le 1\\
+&Q(1)=0
+\end{align*}
+を充たすものが存在する。
+さて、$v(x)=x+Q(\|x\|^2)P(x)$と定義すると$g:B^n\to \rr^n$は連続で、$B^n$で滑らかである。
+更に$\|x\|\in[0,\delta]$ならば
+\begin{align*}
+\|v(x)\|=\|x+Q(\|x\|^2)P(x)\|=\|x+f(x)-f(x)+Q(\|x\|^2)P(x)\|
+=\|f(x)-(f(x)-x)+Q(\|x\|^2)P(x)\|=\\
+\|f(x)-(f(x)-x)+Q(\|x\|^2)(f(x)-x)-Q(\|x\|^2)(f(x)-x)+Q(\|x\|^2)P(x)\|=\\
+\|f(x)-(f(x)-x)+Q(\|x\|^2)(P(x)-f(x)+x)+(Q(\|x\|^2)-1)(f(x)-x)\|\ge\\
+\|f(x)\|-|Q(\|x\|^2)|\|P(x)-(f(x)-x)\|-|1-Q(\|x\|^2)|\|f(x)-x\|
+\end{align*}
+となる。$\|P(x)-(f(x)-x)\|<1/4$、$\|f(x)\|=1$、$|Q(\|x\|^2)|\le 1$であり、
+$\|x\|\in[0,\delta]$ならば$3/4\le Q(\|x\|^2)\le 1$なので$0\le 1-Q(\|x\|^2)\le 1/4$である。よって
+\begin{align*}
+\|v(x)\|\ge \|f(x)\|-|Q(\|x\|^2)|\|P(x)-(f(x)-x)\|-|1-Q(\|x\|^2)|\|f(x)-x\|\ge1-\frac{1}{4}-\frac{2}{4}=\frac{1}{4}
+\end{align*}
+つまり$\|v(x)\|\ge 1/4$\par
+一方、$\|x\|\in[\delta,1]$ならば
+\begin{align*}
+\|v(x)\|=\|x+Q(\|x\|^2)P(x)\|=\|x+Q(\|x\|^2)P(x)+Q(\|x\|^2)(f(x)-x)-Q(\|x\|^2)(f(x)-x)\|\\
+\ge \|x+Q(\|x\|^2)(P(x)-(f(x)-x))+Q(\|x\|^2)(f(x)-x)\|\\
+\ge \|x\|-|Q(\|x\|^2)|(\|P(x)-(f(x)-x)\|+\|f(x)-x\|)
+\end{align*}
+となる。$|Q(\|x\|^2)|\le 1$、$\|P(x)-(f(x)-x)\|\le 1/4$であり$\|x\|\in[\delta,1]$なので$\|f(x)-x\|\le 1/4$である。よって
+\begin{align*}
+\|v(x)\|\ge \|x\|-|Q(\|x\|^2)|(\|P(x)-(f(x)-x)\|+\|f(x)-x\|)\\
+\ge \delta-(\frac{1}{4}+\frac{1}{4})\ge \frac{3}{4}-\frac{2}{4}=\frac{1}{4}
+\end{align*}
+つまり$\|v(x)\|\ge 1/4$である。
+以上のことから$x\in B^n$ならば$\|v(x)\|\neq0$であるから$g:B^n\to S^{n-1}$を
+\[
+g(x)=\frac{v(x)}{\|v(x)\|}
+\]
+と定義でき、これは$B^n$上で滑らかである。$x\in S^{n-1}$ならば$Q(\|x\|^2)=Q(1)=0$なので$v(x)=x$、
+つまり$g(x)=x$となり$g:B^n\to S^{n-1}$は求めるものになる。
+\end{proof}
+
+\begin{thm}
+滑らかな関数$f:B^n\to S^{n-1}$で$f|S^{n-1}=1_{S^{n-1}}$となるものは存在しない。
+\end{thm}
+\begin{proof}
+そのような関数が存在したとして矛盾を導く。$g(x)=f(x)-x$と置く。
+\[
+F(x,t)=x+tg(x)=x+t(f(x)-x)=(1-t)x+tf(x)
+\]
+という連続関数を考えるとこれは$S^{n-1}$を固定する、$1_{B^n}$と$f$をの間のホモトピーである。この$F(x,t)$は$x$と$f(x)$を結ぶ直線の内分点である。さて$B^n$はコンパクトで$g$はなめらかなので$g(x)=f(x)-x$は特にリプシッツである。$g$のリプシッツ性を担保する定数を$L>0$とすると、$F(x,t)=F(y,t)$を仮定したときに$x-y=t(g(y)-g(x))$なので
+\[
+\|x-y\|\le t\|g(y)-g(x)\|\le tL\|x-y\|
+\]
+となる。よって$0\le t< L^{-1}$ならば$F_t(x)$は単射である。さて$F(x,t)$の$x$についてのヤコビ行列を考えると
+\[
+J_x(F_t(x))=E_n+tJ_x(g(x))
+\]
+となる。$\det$は連続関数なので$t_0$を十分小さくとれば$t\in [0,t_0]$のとき$\det J_x(F(x,t))>0$が成立する。$t_0< L^{-1}$と取っておく。
+さていまから$t\in [0,t_0]$のとき$F(x,t)$が$x$について全単射になっていることを証明しよう。$U$を$B^n$の内点、つまり
+\[
+U=\{x\in \rr^n\mid \|x\|<1\}
+\]
+とする。逆関数定理から$F_t(U)$は$\rr^n$の開集合である。
+さていま$a\not\in F_t(U)$となる$B^n$の点を任意に取る。
+これの逆像の存在が言えればよい。
+$b\in F_t(U)$となる$B^n$の点を適当に取る。
+すると$F_t(U)\subset B^n$から$a$と$b$を結ぶ線分$[a,b]$は$B^n$の中に入っており、$[a,b]$が連結であることから$[a,b]\cap\bd(F_t(U))\neq \O$である。この集合の中から$c$を取る。$F_t(B^n)$はコンパクトで、特に閉集合であるから
+\[
+\bd(F_t(U))\subset \cl(F_t(U))\subset  F_t(B^n)
+\]
+となるので$c=F_t(x)$となる$x\in B^n$が存在する。$c\not\in F_t(U)$であるから$x\in S^{n-1}$となる。ゆえに$F_t$が$S^{n-1}$を動かさないことから$c=F_t(x)=x$となる。つまり$c\in S^{n-1}$が分かる。
+$F_t(U)$が$\rr^n$の開集合であるから$\bd(F_t(U))\cap F_t(U)=\emptyset$なので、特に$c\neq b$である。
+そして$c\in [a,b]$と$c\in S^{n-1}$から$a=c$がわかり、結局$a=F_t(x)$がわかるので$F_t$は全射である。
+そして
+\[
+I(t)=\int_{B^n}\det(F(x,t))dx_1dx_2\cdots dx_n
+\]
+と定義すると、$F_t(B^n)=B^n$と変数変換公式から$t\in [0,t_0]$のとき$I(t)=\LL^n(B^n)>0$
+である。ところで$I(t)$は$t$の多項式であり、しかも$I(t)$は$[0,t_0]$上で定数なので、$[0,1]$上で定数である。
+つまり$t\in [0,1]$上で
+\begin{equation}\label{aaa}
+I(t)=\LL(B^n)>0
+\end{equation}
+となる。
+しかしながら$F_1(x)=f(x)\in S^{n-1}$から
+\[
+\langle f,f\rangle =1
+\]
+が分かるので
+\[
+\langle\frac{\partial f}{\partial x_i}, f\rangle=0
+\]
+である。つまり$f(x)$は$J_x(f)(x)$の転置行列の固有値が$0$の固有ベクトルになっている。$0$を固有値にもつ行列の行列式は$0$なので
+\[
+\det (J_x(f)(x))=0
+\]
+つまり$I(1)=0$となるがこれは(\ref{aaa})に矛盾する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}C. A. Rogers,\ \textit{A Less Strange Version of Milnor's Proof of Brouwer's Fixed-Point Theorem},\ Amer. Math. Monthly
+Vol. 87,\ No. 7 (1980),\ pp. 525-527
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

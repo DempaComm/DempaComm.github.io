@@ -1,0 +1,142 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- Bing ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+R H Bing っていう，すげぇ超おもしれー数学をやる数学者がいたんだけどそのお仕事の一端のお話．
+
+むかしむかし，どれくらい昔かというと
+``$\mathbb{X}$''
+が
+``Twitter''
+と呼ばれていて青い鳥もいてbotも普通に動いていた時代，
+「トポロ沢さん」
+という位相空間の問題を出すbotアカウントが
+あったのだがその問題のうち私が解けなかった問題が，
+位相空間$X$で$X\times \rr$が$\rr^{4}$
+に同相なものは存在するか？という問題だった．
+この問題を解くためには「ビング的なトポロジー」を勉強する必要が
+ありこの問題に関する論文を
+集めたのが今回の論文の束だと思う．
+
+
+
+時系列順に並べるとこんな感じ．
+
+1957： \cite{MR0092961}
+
+この論文ではMoore decomposition 
+とかいうupper semi-continuous decomposition 
+(USCD 今ふうにいうと確か閉同値関係による分割)
+を$\rr^{3}$で考えて，
+その商空間が
+$\rr^{3}$
+に同相でないものを構成しているようだ．
+ちなみに$\rr^{2}$だと
+$\rr^{2}$に同相というのが
+それこそMooreによって示されているようだ．
+
+1957 ：
+\cite{MR0092963}
+
+この論文は上の論文を受けての
+論文だと思う．
+
+1957：
+\cite{MR0092962}
+
+この論文ではユークリッド空間の
+いい感じの同相写像の構成をやっている．
+この論文の結果からBing の商空間は
+$\rr^{4}$に埋め込めるということがわかるようだ．
+
+1958：\cite{MR0097034}
+
+この論文は
+\cite{MR0107228}の
+アナウンスのような気がする．
+
+1959：
+\cite{MR0107228}
+
+この論文では一番上の論文で構成した
+商空間$B$について
+$B\times \rr$が
+$\rr^{4}$に同相であることを証明している．
+
+1959：
+\cite{MR0102817}
+
+なんか色々やっている．
+$\rr^{4}$の部分3次元多様体$M$で
+$H_{1}(M)=0$だが
+$\pi_{1}(M)\neq 0$
+になるようなものを構成している．
+また一番上の論文で構成された商空間$B$
+が各点でユークリッド的でないにも関わらず
+$3$次元のホモトピー多様体であることを証明している．
+
+1961：
+\cite{MR0123303}
+
+論文の出だしが
+``We are learning strange things about cartesian products''なのが面白い．
+内容はちょっとよくわかんなかった．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{Bingsp.bib}
+
+
+
+\end{document}

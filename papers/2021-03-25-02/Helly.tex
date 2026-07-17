@@ -1,0 +1,354 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Helly spaceとHellyの選出定理}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では，Helly spaceの基本性質と，Hellyの選出定理を紹介する．
+
+\begin{df}
+関数$f: \rr\to\rr$
+が非減少関数であるとは，任意の$x<y$について
+$f(x)\le f(y)$を満たすときにいう．
+$\rr$上で定義され$[0, 1]$に値を取る非減少関数全体を$H$で表すことにし，
+位相を直積空間$[0, 1]^{\rr}$から誘導される相対位相を定義する．
+位相空間$H$を
+\emph{Helly space}と呼ぶ．
+\end{df}
+
+\begin{rmk}
+$[0, 1]^{\rr}$の直積位相は$[0, 1]^{\rr}$の元を関数と見たときの各点収束の位相に一致する．つまり，Helly spaceとは
+非減少関数に各点収束の位相を定義した空間なのである．
+\end{rmk}
+
+\begin{prop}
+空間$H$は$[0, 1]^{\rr}$の閉部分集合である．特に
+$H$はコンパクト空間である．
+\end{prop}
+\begin{proof}
+$x<y$となる任意の実数の組$(x, y)$について
+$A_{(x, y)}=\{f\in [0, 1]^{\rr}\mid f(x)\le f(y)\}$
+は$[0, 1]^\rr$の閉部分集合である．
+そして
+\[
+H=\bigcap_{x<y}A_{(x, y)}
+\]
+なので$H$は$[0, 1]^{\rr}$の閉部分集合である．
+チコノフの定理から$[0, 1]^{\rr}$はコンパクトなので
+$H$もコンパクトである．
+\end{proof}
+
+\begin{lem}
+任意の$f\in H$について，
+$f$の不連続点は高々可算個しかない．
+\end{lem}
+\begin{proof}
+初等的に証明できる．証明略
+\end{proof}
+
+\begin{df}
+任意の$t\in \rr$
+に対して
+$\pi_t: [0, 1]^{\rr}\to [0, 1]$
+を第$t$座標への射影とする．
+つまり
+$f\in [0, 1]^{\rr}$に対して
+$\pi_t(f)=f(t)$
+である．
+$[0, 1]^{\rr}$の直積位相，つまり各点収束の位相は
+$\{\pi_t\}_{t\in \rr}$
+が連続となるような最弱の位相であることに注意しよう．
+\end{df}
+
+
+\begin{thm}
+ 空間$H$は第一可算である．
+\end{thm}
+\begin{proof}
+任意の$x\in [0, 1]$と$r\in (0, \infty)$に対して
+\[
+U(x, r)=(x-r, x+r)\cap [0, 1]
+\]
+と定義する．
+定理を証明するためには任意の
+$f\in H$について
+$f$の基本近傍系で濃度が高々可算な物を構成すれば良い．
+$f$の不連続点全体の集合を$D$とし，
+$T=D\cup \qq$
+と定義する．
+そして$f$の近傍からなる集合族
+$\mathcal{N}$を
+$\pi_{t}^{-1}(U(f(t), 2^{-n}))$, 
+$(t\in T, n\in \nn)$の形の集合の有限個の共通部分で表される
+$f$の近傍全体からなるものとして定義する．
+この$\mathcal{N}$が基本近傍系になることをみよう．
+そのためには，
+任意の$x\in X$と$\ep\in (0, \infty)$
+に対して
+$\pi_{x}^{-1}(U(f(x), \ep))$という形の集合に
+含まれる$\mathcal{N}$の元が存在することを示せば良い．
+
+[Case1 $x\in T$の場合]
+このときは$2^{-n}<\ep$となる$n\in \nn$を取れば
+定義から
+$\pi_x(U(f(x, 2^{-n})))\in \mathcal{N}$で
+あることがわかる．
+そして$U(f(x), 2^{-n})\subset U(f(x), \ep)$
+であるから
+\[
+\pi_x(U(f(x), 2^{-n})))\subset \pi_x(U(f(x), \ep)))
+\]
+を得るので示したいことは成り立つ．
+
+[Case2 $x\not\in T$の場合]
+このとき$x$は$f$の連続点である．
+よってある$\delta$が存在して，$z\in \rr$が$|x-z|<\delta$を満たすならば
+$|f(x)-f(z)|<\ep/2$となる．
+よって$a, b\in \qq$を$a\in (x, x+\delta)$, $b\in (x-\delta, x)$となるようにとり，
+$n\in \nn$を$2^{-n}<\ep/2$と取ると，
+任意の$g\in \pi_{a}^{-1}(U(f(a), 2^{-n}))$
+について$g\in H$の非減少性から
+\[
+g(x)\le g(a)<f(a)+2^{-n}<f(x)+2^{-n}+\ep/2<f(x)+\ep
+\]
+と
+\[
+g(x)\ge g(b)>f(b)-2^{-n}> f(x)-2^{-n}-\ep/2>f(x)-\ep
+\]
+がわかるので$g\in \pi_{x}^{-1}(U(f(x), \ep))$
+がわかる．
+つまり
+\[
+\pi_a^{-1}(U(f(a), 2^{-n})))\cap \pi_b^{-1}(U(f(b), 2^{-n})))\subset \pi_x^{-1}(U(f(x), \ep))
+\]
+を得るので示したいことは成り立つ．
+
+以上から$H$が第一可算であることがわかった．
+\end{proof}
+
+第一可算なコンパクト空間は
+点列コンパクトなので次がわかる．
+\begin{cor}\label{daiji}
+空間$H$は点列コンパクトである．
+\end{cor}
+
+\begin{rmk}
+空間$H$はコンパクトで第一可算であり，さらに可分であることも証明できるが，距離化不可能である．
+\end{rmk}
+
+この系\ref{daiji}を詳しく言い換えたものが次である．
+\begin{thm}\label{daiji2}
+$\{F_n\}_{n\in \nn}$を$[0, 1]$に値をとる非減少関数の列とする．このとき部分列$\{F_{\phi(n)}\}$とある非減少関数$F$が存在して各$x\in \rr$毎に
+\[
+\lim_{n\to \infty}F_{\phi(n)}(x)=F(x)
+\]
+を満たす．
+\end{thm}
+
+定理\ref{daiji2}もHellyの選出定理と呼べると思うが，
+確率論では特に右連続な非減少関数に対する次の定理 \ref{daiji3}がHellyの選出定理と呼ばれている．右連続性を仮定せずとも以下の定理の主張は成り立つが，主に確率変数の分布関数に対してこの選出定理
+が用いられるため，
+このように述べられることが多いように思われる．
+\begin{thm}\label{daiji3}
+$\{F_n\}_{n\in \nn}$を$[0, 1]$に値をとる右連続な非減少関数の列とする．このとき部分列$\{F_{\phi(n)}\}$とある右連続な非減少関数$F$が存在して$F$の連続点$x\in \rr$毎に
+\[
+\lim_{n\to \infty}F_{\phi(n)}(x)=F(x)
+\]
+を満たす．
+\end{thm}
+\begin{proof}
+任意の非減少関数$F$に対して，$F$の連続点で$F$と一致する
+右連続な非減少関数が存在するので，主張は定理\ref{daiji2}から従う．
+\end{proof}
+
+\begin{rmk}
+Hellyの選出定理を用いて，確率測度のなす空間の相対コンパクトな部分集合を特徴付けすることができる．
+\end{rmk}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{k}
+J. Kelly著，児玉之宏訳, 
+位相空間論, 
+1968, 吉岡書店
+\bibitem{1}
+L. A. Steen and J. A. Seebach, Jr, 
+\textit{Counterexamples in topology}, 
+1978, 
+Springer-Verlag New York. 
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,588 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\ff}{\mathbb{F}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+\newcommand{\leg}[2]{\left(\frac{#1}{#2}\right)}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{平方剰余の相互法則}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では
+平方剰余の補充則と
+相互法則の可能な限り代数的な証明を
+紹介する．
+
+
+まず最初に
+\TeX で
+\[
+a\equiv b \mod p
+\]
+という式を入力するのがとても面倒だと思ったので，
+この文章では，この式を
+\[
+a=_{p} b
+\]
+と書くことにする．
+$x\in \zz$と素数$p$に対して
+$x=_pa^2$となる
+$a$が存在する時$x$を$p$の平方剰余という．
+平方剰余でない数を平方非剰余と呼ぶ．
+
+可換環$R$に対して$R^{\times}$で，
+$R$の可逆元全体からなる群を表す．
+
+素数$p$に対して
+$\ff_p$で$\zz/p\zz$を表す．
+商写像
+$\zz\to \ff_p$を
+$\pi_p$で表す．
+$\ff_p$は標数が$p$の体のになる．
+また$\ff_p^{\times}$は巡回群になる．
+この巡回群の生成元を$p$の原始根という．
+
+写像
+$s:\ff_p^{\times}\to \ff_p^{\times}$を
+$s(x)=x^2$で定義する．
+$\ff_p^{\times}$は可換なので，
+$f$は準同型になる．
+よって特に$s(\ff_p^{\times})$
+は$\ff_p^{\times}$の部分群になる．
+この群を$S_p$と書くことにする．
+乗法群
+$\ff_p^{\times}$は可換なので
+もちろん
+$S$は正規部分群である．
+$p\neq 2$
+ならば，
+体の一般論から
+$a\in \ff_p$に対して
+$x^2=a$
+となる
+$x\in \ff_p$
+はちょうど2つあるので，
+$S$
+の位数は
+$(p-1)/2$である．
+よって
+$p\neq 2$のとき，
+剰余群
+$\ff_p^{\times}/S_p$
+は位数が2の
+群になる．
+位数が$2$の群は全て同型なので，
+同型写像
+$e_p:\ff_p^{\times}/S_p\to \{1, -1\}$
+をとる．
+このとき
+$a\in \zz$
+に対してルジャンドル記号を
+$(a|p):=e_p\circ s\circ \pi_p(a)$
+と定義する．
+$\dpst \left (\frac{a}{p}\right)$
+は
+$(a|p)$
+と同じ意味であると約束する．
+ルジャンドル記号は次のように明示できる．
+\[
+\left(\frac{a}{p}\right)=
+\begin{cases}
+1 & \text{$a$は$p$の平方剰余，}\\
+-1 & \text{$a$は$p$の平方非剰余．}
+\end{cases}
+\]
+
+つまり平方剰余が
+$1$であるか$-1$であるかに応じて平方剰余かそうでないかがわかる．
+
+
+定義から次のことがわかる．
+\begin{prop}
+任意の$a\in \zz$に対して，
+\[
+\left(\frac{a}{p}\right)=\left(\frac{a+p}{p}\right)=\left(\frac{a-p}{p}\right)
+\]
+が成り立つ．
+\end{prop}
+
+
+今からルジャンドル記号の計算方法を説明してゆく．
+まず次のオイラーの基準が基本的である．
+\begin{prop}
+$p$を奇素数とする．
+このとき任意の
+$a\in \zz$に対して
+\[
+\leg{a}{p}=_p a^{\frac{p-1}{2}}
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+最初に注意するが，
+$p$が奇数なので
+$\frac{p-1}{2}$は整数である．
+まずフェルマーの小定理から任意の
+$x\in \ff_{p}^{\times}$に対して
+\[
+x^{p-1}=1
+\]
+が成り立つ．
+つまり任意の
+$a\in \ff_p^{\times}$
+は多項式
+$x^{p-1}-1$
+の根になっている．
+さらに
+\begin{equation}\label{eq:siki}
+x^{p-1}-1=\left(x^{\frac{p-1}{2}}-1\right)\left(x^{\frac{p-1}{2}}+1\right)
+\end{equation}
+と因数分解できる．
+さて$S_p=\{y^2\mid y\in \ff_p^{\times}\}$
+でに注意すると
+任意の$x\in S_p$に対して
+$x=y^2$となる$y\in \ff_p$が存在する．
+再びフェルマーの小定理から
+$x^{\frac{p-1}{2}}=y^{p-1}=1$なので，
+$x^{\frac{p-1}{2}}-1=0$である．
+体の一般論から多項式
+$x^{\frac{p-1}{2}}-1$の根は高々$\frac{p-1}{2}$個であり
+$\card(S_p)=\frac{p-1}{2}$なので
+\begin{equation}\label{eq:siki2}
+S_p=\{x\mid x^{\frac{p-1}{2}}-1=0\}
+\end{equation}
+である.
+任意の$x\in \ff_p\setminus S_p$は平方非剰余の剰余類だが，
+$x^{p-1}-1=0$を満たすということと
+式(\ref{eq:siki}), (\ref{eq:siki2})から，
+$x^{\frac{p-1}{2}}+1=0$
+を満たさなければならない．（体には零因子は$0$しかない．）
+よってオイラーの基準が示された．
+\end{proof}
+
+
+このオイラーの基準を使って直ちに平方剰余の相互法則の第一補充則がわかる．
+\begin{prop}
+奇素数$p$と整数について，
+\[
+\leg{-1}{p}=(-1)^{\frac{p-1}{2}}
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+オイラーの基準から，
+$(a|p)=_p(-1)^{\frac{p-1}{2}}$
+である．
+この両辺は
+$1$か
+$-1$の値しか取らず，
+また$p$が奇素数であることから
+$2\neq_p0$なので実際の等式として
+$(a|p)=(-1)^{\frac{p-1}{2}}$を得る．
+\end{proof}
+
+平方剰余の相互法則の第二補充則は次のものである．
+\begin{prop}
+奇素数$p$に対して
+\[
+\leg{2}{p}=(-1)^{\frac{p^2-1}{8}}
+\]
+\end{prop}
+\begin{proof}
+$A= \{1, \dots, \frac{p-1}{2}\}$とおく．
+任意の$a\in A$についてもちろん
+\[
+a=((-1)^{a}a)(-1)^a
+\]
+が成り立つ．
+よって
+\begin{align*}
+\prod_{a\in A}a&=\prod_{a\in A}((-1)^aa)(-1)^a\\
+&=\prod_{a\in A}((-1)^aa)\prod_{a\in A}(-1)^a=(-1)^{\sum_{a\in A}a}\prod_{a\in A}((-1)^aa)\\
+&=(-1)^{\frac{p^2-1}{8}}\prod_{a\in A}((-1)^aa)
+\end{align*}
+ここで等差数列の和の公式から
+$\sum_{a\in A}=\frac{p^2-1}{8}$
+であることを用いている．
+\[
+B=\{2i\mid 0<2i\in A, i\in \zz\}, 
+\]
+でなおかつ
+ $C=A\setminus B$とおく．
+ $B$は$A$に属する偶数全体の集合で
+ $C$は$A$
+ に属する奇数の集合である．
+ もちろん
+ $A=B\sqcup C$である．
+$D=\{2i\mid \frac{p}{2}<2i<p, i\in \zz\}$
+とおく．
+$D$は$\frac{p}{2}$より大きく
+$p$
+よりも小さい偶数全体の集合である．
+簡単にわかることだが，
+任意の
+$d\in D$
+に対して，
+$c\in C$
+がただ一つ存在して
+$p-c=d$となる．
+よって
+$D$と
+$C$の濃度は等しいことに注意しよう．
+よって，
+\[
+\prod_{a\in B}(-a)=_p \prod_{2i\in D}2i=2^{\card{C}}\prod_{\frac{p}{4}<i<\frac{p}{2}}i
+\]
+となる．
+また，
+\[
+\prod_{a\in B}a=\prod_{2i\in B}2i=2^{\card{B}}\prod_{0<i<\frac{p}{4}}i
+\]
+となる．よって，
+\begin{align*}
+\prod_{a\in A}((-1)^aa)&=_p\left(2^{\card{C}}\prod_{\frac{p}{4}<i<\frac{p}{2}}i\right)
+\left(2^{\card{B}}\prod_{0<i<\frac{p}{4}}i\right)\\
+&=_p 2^{\card(B)+\card(C)}\prod_{0<i<\frac{p}{2}}i\\
+&=_p 2^{\card(A)}\prod_{a\in A}a=_p2^{\frac{p-1}{2}}\prod_{a\in A}a
+\end{align*}
+よって
+以上の式を合わせて，
+\[
+\prod_{a\in A}a=_p(-1)^{\frac{p^2-1}{8}}2^{\frac{p-1}{2}}\prod_{a\in A}a
+\]
+を得る．
+$\prod_{a\in A}a$
+は
+$\ff_p$の中で$0$
+ではないので，
+\[
+2^{\frac{p-1}{2}}=_p(-1)^{\frac{p^2-1}{8}}
+\]
+よってオイラーの基準から，
+\[
+\leg{2}{p}=_p(-1)^{\frac{p^2-1}{8}}
+\]
+を得るが，
+両辺はそれぞれ$1$か$-1$の値しか取らず，
+$2\neq_p0$なので，
+結局
+\[
+\leg{2}{p}=(-1)^{\frac{p^2-1}{8}}
+\]
+を得る．
+これが示すべき等式であった．
+\end{proof}
+
+平方剰余の相互法則は次のものである．
+\begin{prop}
+2つの異なる奇素数$p,q$に対して，
+\[
+\leg{p}{q}\leg{q}{p}=(-1)^{\frac{p-1}{2}\frac{q-1}{2}}
+\]
+\end{prop}
+\begin{proof}
+中国剰余定理を用いた証明を紹介する．
+$p, q$は異なる奇素数なので，
+特に互いに素である．
+よって中国剰余定理から可逆元の間の同型
+\[
+(\zz/pq\zz)^{\times}\cong (\zz/p\zz)^{\times}\times (\zz/q\zz)^{\times}
+\]
+を得る．
+さらに詳しくいうと，
+写像
+\[
+\delta：（\zz/pq\zz)^{\times}\to (\zz/p\zz)^{\times}\times (\zz/q\zz)^{\times}; [k]_{pq}\mapsto ([k]_p, [k]_q)
+\]
+はwell-defined だし，同型写像であるということである．
+さて，
+\[
+A=\{[a]_{pq}\in (\zz/pq\zz)\mid 0<a<pq/2\}, 
+\]
+でなおかつ
+\[
+B=\{([a]_p, [b]_q)\in  (\zz/p\zz)^{\times}\times (\zz/q\zz)^{\times} \mid a\in \zz, 0<b<q/2\}
+\]
+とする．
+任意の
+$(a, b)\in  B$
+に対して
+$k\in A$
+が存在して
+$\delta(k)=(a, b)$
+かもしくは
+$\delta(k)=-(a, b)$
+のどちらか一方のみが成り立つ．
+よって，
+ある$\epsilon\in \{1, -1\}$
+が存在して．
+\[
+\prod_{(x, y)\in B}(x, y)=\epsilon\prod_{k\in A}\delta(k)
+\]
+が成り立つ．
+さて，
+\begin{align*}
+\prod_{(x, y)\in B}(x, y)&=\prod_{0<a<p, 0<b<q/2}([a]_p, [b]_q)
+=\prod_{0<b<q/2}\prod_{0<a<p}([a]_p, [b]_q)
+\\
+&=\prod_{0<b<q/2}([(p-1)!]_p, [b^{p-1}]_q)
+=\left(\left[((p-1)!)^{\frac{q-1}{2}}\right]_p, \left[\left((\frac{q-1}{2})!\right)^{p-1}\right]_q\right)
+\end{align*}
+である．
+ここでウィルソンの定理から$[(p-1)!]_p=[-1]_p$であり，
+\[
+\left(\left(\frac{q-1}{2}\right)!\right)^2=_q(q-1)!(-1)^{\frac{q-1}{2}}=_q(-1)(-1)^{\frac{q-1}{2}}
+\]
+なので，
+\begin{equation}\label{eq:daiji}
+\prod_{(x, y)\in B}(x, y)=
+\left(\left[(-1)^{\frac{q-1}{2}}\right]_p, 
+\left[(-1)^{\frac{p-1}{2}}(-1)^{\frac{p-1}{2}\frac{q-1}{2}}\right]_q\right)
+\end{equation}
+である．
+そして
+\begin{align*}
+\prod_{k\in A}k&=\prod_{1\le k<pq/2, gcd(k, pq)=1}k\\
+&=\left(\prod_{1\le k<pq/2, p\not| k}k\right)\cdot 
+\left(\prod_{1\le k<pq/2,\ q|k}k\right)^{-1}\\
+&=\left(\prod_{0<k<p}k\right)\left(\prod_{p<k<2q}\right)\cdots \left(\prod_{(Q-1)p<k<Qp}k\right)\left(\prod_{Qp<k<pq/2}k\right)\left(\prod_{1\le k<pq/2, q|k}k\right)^{-1}
+\end{align*}
+今からこの量の$p$を法とした値を考える．
+\[
+\prod_{(i-1)p<k<ip}k=_p (p-1)!=_p-1
+\]
+であり，
+$\{k\in \zz\mid Qp<k<pq/2 \}=\{k\in \zz\mid Qp+1\le k\le (pq-1)/2\}=\{Qp+1, Qp+2, \dots, Qp+P\}$
+なので
+\[
+\prod_{Qp<k<pq/2}k=_pP!
+\]
+また，
+$\{k\in \zz\mid 1\le k<pq/2\}=\{k\in \zz\mid 1\le k\le (pq-1)/2\}
+=\{1,2,\dots, (pq-1)/2\}$
+であるから，
+$\{k\in \zz\mid 1\le k<pq/2\}=\{q, 2q, \dots, Pq\}$
+なので
+\[
+\prod_{1\le k<pq/2, q|k}k=\prod_{1\le i\le P}(qi)=q^{P}P!
+\]
+となる．
+よって，
+\[
+\prod_{k\in A}k=_p\frac{(-1)^Q\cdot P!}{q^{P}P!}
+\]
+であるが，
+オイラーの基準から
+\[
+\prod_{k\in A}k=_p(-1)^Q\leg{q}{p}
+\]
+
+今の議論を，
+$p$と
+$q$
+の役割を入れ替えて適用すると，
+同様にして
+\[
+\prod_{k\in A}k=_q(-1)^P\leg{p}{q}
+\]
+よって(\ref{eq:daiji})と比較すると，
+\[
+(-1)^Q\leg{q}{p}=_p\epsilon(-1)^{Q}
+\]
+と
+\[
+(-1)^P\leg{p}{q}=_q\epsilon(-1)^P(-1)^{PQ}
+\]
+これら二式の両辺のそれぞれの量も
+$1$
+か
+$-1$
+のどちらかの値しか取らず，
+$2\neq_p0$でなおかつ
+ $2\neq_q0$なので，
+ 実際の等式として
+ \[
+ \leg{q}{p}=\epsilon
+ \]
+ と
+ \[
+ \leg{p}{q}=(-1)^{PQ}
+ \]
+ を得る．
+ この二式から，
+ \[
+ \leg{p}{q}\leg{q}{p}=(-1)^{\frac{p-1}{2}\frac{q-1}{2}}
+ \]
+ を得る．
+ これが示したい等式であった．
+\end{proof}
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{K}
+S. Y. Kim, \textit{An elementary proof of the quadratic reciprocity law}, 
+Amer. Math. Soc. 111 (2004), no. 1, 48--50. 
+\bibitem{R} 
+G. Rousseau, \textit{On the quadratic reciprocity law}, 
+J. Austral. Math. Soc. (Series A), 51 (1991), 423--425. 
+\bibitem{Ex}
+Stack Exchangeの質問「Legendre symbol. second supplementary law」に対する回答, 
+\begin{verbatim}https://math.stackexchange.com/questions/
+180002/legendre-symbol-second-supplementary-law/180022#180022
+\end{verbatim}
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

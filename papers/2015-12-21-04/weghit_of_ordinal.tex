@@ -1,0 +1,203 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\al}{\alpha}
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{順序数の位相的重み}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+順序数の重さを評価する。一般に位相空間$X$の重み$w(X)$とは$X$の開基の最小濃度のことである。そして$I(X)$で$X$の孤立点全体の集合を表すことにする。また順序集合には開区間から定まる標準的な位相を常に考える事にする。
+\begin{prop}\label{1}
+位相空間$X$とその部分空間$S$について
+\[
+w(S)\le w(X)
+\]
+\end{prop}
+\begin{proof}
+証明は明らかであろう。
+\end{proof}
+
+\begin{prop}\label{2}
+位相空間$X$について
+\[
+\card(I(X))\le w(X)
+\]
+\end{prop}
+\begin{proof}
+$x\in I(X)$ならば$\{x\}$が開集合であり$\{x\}$は$x$しか元を含まないことから$X$の任意の開基$\mathcal{B}$について$\{x\}\in \mathcal{B}$でなければならないからである。
+\end{proof}
+
+\begin{prop}\label{3}
+順序数$\alpha,\beta$について
+\[
+\alpha+1=\beta+1\To \alpha=\beta
+\]
+\end{prop}
+{\proof 明らか。}
+
+\begin{prop}\label{4}
+$\mathcal{N}$を順序集合$X$の開区間全体の集合としよう。このとき
+\[
+\card (\mathcal{N})\le \card(X\times X)
+\]
+\end{prop}
+{\proof 開区間は$(a,b)\ (a<b)$の形をしているので明らか。}
+
+
+\begin{thm}
+順序数$\al$について
+\[
+w(\al)=\card(\al)
+\]
+\end{thm}
+
+\begin{proof}$\al$が有限の時は明らかなので以下$\al$は無限集合とする。
+$\kappa=\card(\al)$と置くと$\kappa \le\al$なのでつまり$\kappa \subset \al$なので命題\ref{1}から
+\[
+w(\kappa)\le w(\al)
+\]
+であり、$\kappa$は極限数なので
+\[
+suc:\kappa\to \kappa;x\mapsto x+1
+\]
+が定義でき、命題\ref{3}から$suc$は単射である。また、$x+1$の形をした順序数は$\kappa$の孤立点になるので
+命題\ref{2}から
+\[
+\kappa \le \card(I(\kappa))
+\]
+そして$\mathcal{N}$を$\al$の開区間全体とすると命題\ref{4}と$\al$は無限集合であることから
+\[
+w(\al)\le \card(\mathcal{N})\le \card(\al)=\kappa\times \kappa =\kappa
+\]
+以上から
+\[
+w(\al)=\kappa=\card(\al)
+\]
+を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,379 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{ascmac}
+\usepackage{tcolorbox}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem{fact}[thm]{事実}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}  } }
+\newcommand{\supp}{\text{  {\rm supp}  } }
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{距離化可能定理：近傍}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章ではある種の条件を満たす近傍の存在から分かる距離化可能定理を紹介していく。
+%Frink,Nagata
+\section{本文}
+この文章では以下の定理を元に距離化可能定理の証明を進めていく。
+\begin{fact}[Alexandroff-Urysohn-Tukey]\label{AUT}
+$T_0$空間$X$が距離化可能性であるためには、
+$X$の正規列$\{\mathcal{U}_n\}_{n\in \nn}$が存在し、各$x\in X$について
+$\{S(x,\mathcal{U}_n)\}_{n\in \nn}$が$x$の基本近傍系になる事が必要十分である。
+\end{fact}
+
+\subsection{Frink's Metrization Theorem}
+
+\begin{thm}[Frink]\label{frink}
+$T_0$空間$X$が距離化可能であるための必要十分条件は各$x\in X$に基本近傍系を成す$x$の近傍からなる列$\{V_n(x)\}_{n\in \nn}$が存在し、次の条件を充たすことである。\par
+任意の$x\in X$と任意の$n\in \nn$に対して$m\in \nn$が存在して
+\[
+V_m(y)\cap V_m(x)\neq\O\To V_m(y)\subset V_n(x)
+\]
+が成り立つ。
+\end{thm}
+\begin{proof}
+与えられた条件が距離化可能性の必要条件となることは$2^{-n}$近傍などを考えれば明らかである。十分条件であることを示そう。\par
+まず、条件に現れる$\{V_n(x)\}_{n\in \nn}$はすべて開近傍であり、
+\[
+V_{n+1}(x)\subset V_n(x)
+\]
+を充たすと仮定しても良く、$x\in X$と$n\in \nn$に対して存在する$m$は$m>n$としてもよい。（なぜか?）\par
+また、条件に現れる$x\in X$と$n\in \nn$に対して存在する$m$をひとつ選択し、それを$q(x,n)$と書こう。このとき$q(x,n)\ge n$に注意いしよう。そして$\phi:X\times \nn\to \nn$を
+\[
+\phi(x,1)=1,\ \phi(x,k+1)=q(x,\phi(x,k))
+\]
+と帰納的に定義し、各$n\in \nn$について$\mathcal{U}_n$を
+\[
+\mathcal{U}_n=\{V_{\phi(x,n)}(x)\}_{x\in X}
+\]
+と定義する。このとき$\{\mathcal{U}_n\}_{n\in \nn}$が事実\ref{AUT}の条件を充たすことを見よう。
+\par
+$\{\mathcal{U}_n\}_{n\in \nn}$が正規列であること：$a\in X$を任意に与え、$N\in \nn$を
+\[
+N=\min\{\phi(x,n)\ |\ a\in V_{\phi(x,n)}(x)\in \mathcal{U}_n\}
+\]
+とし、$b\in X$を$N=\phi(b,n)$を充たすものとする。すると$a\in V_{\phi(x,n)}(x)$の$V_{\phi(x,n)}(x)\subset V_N(x)$から
+\[
+V_N(b)\cap V_N(x)\neq=\O
+\]
+であり、$N=\phi(b,n)=q(b,\phi(b,n-1))$なので
+\[
+V_{\phi(x,n)}(x)\subset V_N(x)\subset V_{\phi(b,n-1)}(b)
+\]
+となるからして
+\[
+S(a,\mathcal{U}_n)\subset V_{\phi(b,n-1)}(b)\in \mathcal{U}_{n-1}
+\]
+であるから$\{\mathcal{U}_n\}_{n\in \nn}$は正規列となる。\par
+次に$\{S(x,\mathcal{U}_n)\}_{n\in \nn}$が$x$の基本近傍系となること：$\{V_n(x)\}_{n\in \nn}$が$x$の基本近傍系を成していることを利用しよう。\par
+任意に$x\in X$と$n\in \nn$を与え$k=q(x,n)$とすると上と同様の議論により、$b\in X$が存在して
+\[
+s(x,\mathcal{U}_{k+1})\subset V_{\phi(b,k)}
+\]
+となる。そして$\phi$の定義から$\phi(x,k)\ge k$なので単調性から
+$x\in V_{\phi(b,k)}\subset V_k(b)$なので
+\[
+V_k(x)\cap V_k(b)\neq\O
+\]
+であり、$k=q(x,n)$なので
+\[
+V_{\phi(b,k)}\subset V_k(b)\subset V_n(x)
+\]
+つまり
+\[
+s(x,\mathcal{U}_{k+1})\subset V_n(x)
+\]
+であり、$\{V_n\}_{n\in \nn}$は$x$の基本近傍系になるから$\{S(x,\mathcal{U}_n)\}_{n\in \nn}$は$x$の基本近傍系となる\par
+以上から事実\ref{AUT}により$X$は距離化可能となる。
+\end{proof}
+
+
+\subsection{Nagata's  \ ``Contribution'' Theorems of Metrizablity}
+
+位相空間$X$について以下の４つの条件を与えよう。
+
+{\bf 条件(T)}[Triple Sequences Condition]\par
+各$x\in X$に$x$の近傍からなる３つの列$\{A_n(x)\}_{n\in \nn}, \{B_n(x)\}_{n\in \nn},\ \{C_n(x)\}_{n\in \nn}$が存在して
+\begin{align}
+&\mbox{$\{A_n(x)\}_{n\in \nn}$は$x$における基本近傍系を成す。}\\
+&y\not\in A_n(x)\To C_n(y)\cap B_n(x)=\O\\
+&y\in B_n(x)\To C_n(y)\subset A_n(x)
+\end{align}
+を充たす。
+
+
+\setcounter{equation}{0}
+{\bf 条件(D)}[Double Sequences Condition]\par
+各$x\in X$に$x$の近傍からなる2つの列$\{S_n(x)\}_{n\in \nn}, \{T_n(x)\}_{n\in \nn}$が存在して
+\begin{align}
+&\mbox{$\{S_n(x)\}_{n\in \nn}$は$x$における基本近傍系を成す。}\\
+&y\not\in S_n(x)\To T_n(y)\cap T_n(x)=\O\\
+&y\in T_n(x)\To T_n(y)\subset S_n(x)
+\end{align}
+を充たす。
+
+
+
+
+\setcounter{equation}{0}
+{\bf 条件(S)}[Single Sequence Condition]\par
+各$x\in X$に$x$の近傍からなる列$\{U_n(x)\}_{n\in \nn}$が存在して
+\begin{align}
+&\mbox{$\{U_n(x)\}_{n\in \nn}$は$x$における基本近傍系を成す。}\\
+&y\not\in U_n(x)\To U_{n+1}(y)\cap U_{n+1}(x)=\O\\
+&y\in U_{n+1}(x)\To U_{n+1}(y)\subset U_n(x)
+\end{align}
+を充たす。
+
+\setcounter{equation}{0}
+{\bf 条件(Z)}[Zero Sequences Condition]\par
+各$x\in X$に$x$の近傍からなる列$\{N_n(x)\}_{n\in \nn}$が存在して、
+任意の$x\in X$と$x$の任意の近傍$U$について$x$の近傍$V$と$m\in \nn$が存在して
+\begin{align}
+&y\not\in U\To N_{m}(y)\cap V=\O\\
+&y\in V\To N_{m}(y)\subset U
+\end{align}
+を充たす。
+
+
+\setcounter{equation}{-1}
+J.Nagataによる次の定理が成り立つ
+\begin{thm}[Nagata]
+$T_0$空間$X$について以下は同値。
+\begin{align}
+&\mbox{$X$は距離化可能}\\
+&\mbox{$X$は{\bf 条件(T)}を充たす}\\
+&\mbox{$X$は{\bf 条件(D)}を充たす}\\
+&\mbox{$X$は{\bf 条件(S)}を充たす}\\
+&\mbox{$X$は{\bf 条件(Z)}を充たす}
+\end{align}
+\end{thm}
+\begin{proof}
+$(0)$から他の条件が従うのは$2^{-n}$近傍などを考えればわかる。\par
+以下$(3)\To(4)\To (1)\To(2)\To(0)$の順に証明する。\par
+\begin{comment}
+[$(2)\To (3)$の証明]\par
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%修正の必要アリ
+まず、$S_{n+1}\subset S_n(x),\ T_{n+1}(x)\subset T_n(x)$を仮定してもよい（なぜか？）\par
+さて$\al:X\times \nn\to \nn$を
+\begin{align*}
+&\al(x,n)\ge n\\
+&S_{\al(x,n+1)}(x)\subset T_{\al(x,n)}(x)
+\end{align*}
+を充たすように取る。$\{S_n(x)\}_{n\in \nn}$が$x$での基本近傍系になるからこのような$\al$の存在は保証される。そして$U_n(x)=S_{\al(x,n)(x)}$と定義するとき、$\{U_n\}_{n\in \nn}$が{\bf 条件(S)}を充たすことを見よう。\par
+まず$\al(x,n)\le n$という条件と$\{S_n(x)\}_{n\in \nn}$が基本近傍系を成していることと、これの単調性から$\{U_n(x)\}_{n\in \nn}$が$x$の基本近傍系になることが分かる。\par
+次に{\bf 条件(S)の$(2)$}が成り立つことを見よう。$y\not\in U_{n}(x)$とする。つまり$y\not\in S_{\al(xn)}(x)$とすると$T_{\al(x,n)}(y)\cap T_{\al(x,n)}(x)=\O$\par
+$y\in U_{\al(x,n)}$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par [$(2)\To (3)$の証明終わり]\par
+\end{comment}
+[$(3)\To (4)$の証明]\par
+$N_n(x)=U_n(x)$とし、任意の$x$と$x$の任意の近傍$U$について$U_k(x)\subset U$となる$k$を選び$m=k+1$とし、$V=U_m(x)$とすれば{\bf 条件(Z)}が成り立つことは分かる。
+\par [$(3)\To (4)$の証明終わり]\par
+[$(4)\To (1)$の証明]\par
+まず、{\bf 条件(Z)の(2)}から$\{N_n(x)\}_{n\in \nn}$が$x$の基本近傍系になることが分かる。あとは簡単である。
+\par [$(4)\To (1)$の証明終わり]\par
+[$(1)\To (2)$の証明]\par
+$S_n(x)=A_n(x),\ T_n(x)=B_n(x)\cap C_n(x)$とすれば簡単にわかる。
+\par [$(1)\To (2)$の証明終わり]\par
+
+[$(2)\To (0)$の証明]\par
+定理\ref{frink}を援用しよう。まず、$S_{n+1}\subset S_n(x),\ T_{n+1}(x)\subset T_n(x)$を仮定してもよい（なぜか？）\par
+最初に$\{T_i(x)\}_{i\in \nn}$が$x$の基本近傍系であることを示そう。しかしこれは{\bf 条件(D)の(1)と(3)}からすぐに分かる。\par
+$\{T_i(x)\}_{i\in\nn}$が定理\ref{frink}の仮定をみたすことを言おう。\par
+任意の$x\in X$と任意の$n\in \nn$について$\{S_i(x)\}_{i\in \nn}$が基本近傍系であることを用いると$k>n$でかつ
+\[
+S_k(x)\subset T_n(x)
+\]
+となる$k\in \nn$が存在する。さらに$m>k$でかつ
+\[
+S_m(x)\subset T_{k}(x)
+\]
+となる$m\in \nn$が存在する。そして今、
+\[
+T_m(y)\cap T_m(x)\neq \O
+\]
+を仮定すると{\bf 条件(D)の(2)}から$y\in S_m(x)$となる。そして$S_m(x)\subset T_k(x)$から$y\in T_k(x)$であるので{\bf 条件(D)の(3)}から$T_k(y)\subset S_k(x)$であり、$S_k(x)\subset T_n(x)$でかつ$T_m(y)\subset T_k(y)$なので
+\[
+T_m(y)\subset T_n(x)
+\]
+となり定理\ref{frink}の仮定が充たされるので$X$が距離化可能であることが分かる。
+\par[$(2)\To (0)$の証明終わり]
+
+\end{proof}
+
+
+
+\section{おまけ}
+一様空間の距離化可能性
+
+\setcounter{equation}{0}
+\begin{thm}
+可算な基本近縁系を持つ$T_0$一様空間は距離化可能である。
+\end{thm}
+\begin{proof}
+定理の仮定を充たす一様空間を$X$とする。このとき、基本近縁系$\{U_n\}_{n\in \nn}$を
+\begin{align}
+&U_n^{-1}=U_n\\
+&U_{n+1}\circ U_{n+1}\subset U_n
+\end{align}
+を充たすように取ることが出来る。このとき、$\{U_n(x)\}_{n\in \nn}$が{\bf 条件(S)}を充たす事を見よう。
+まずこれが基本近傍系であることはわかる。さて、$U_{n+1}(y)\cap U_{n+1}(x)\neq\O$と仮定し、
+$z\in U_{n+1}(y)\cap U_{n+1}(x)$としよう。すると$(z,y),(z,x)\in U_{n+1}$なので${U_n}$の取り方から$(y,x)\in U_{n}$となるので$y\in U_n$が分かる。これで{\bf 条件(S)の(2)の対偶}が示された。\par
+次に$y\in U_{n+1}(x)$と仮定し、$z\in U_{n+1}(y)$を任意に与えると$(y,x),(z,y)\in U_{n+1}$なので
+$(z,x)\in U_n$となる。よって$z\in U_{n}(x)$つまり$U_{n+1}(y)\subset U_{n}(x)$となるので{\bf 条件(S)の(3)}が充たされる。よって以上から$X$が距離化可能空間であることが分かる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{F}A.H.Frink {\it Distance functions and the metrization problem}, Bull. Amer. Math. Soc.
+Vol. 43, No. 2 (1937), pp133-142.
+
+\bibitem{M}H.W.Martin, {\it A note on the Frink metrization theorem}, Rocky Mountain J. Math.
+Vol. 6, No. 1 (1976), pp155-158.
+
+\bibitem{Na}J.Nagata, {\it A contribution to the theory of metrization}, J. Inst. Polytech. Osaka City Univ. Ser. A
+Vol. 8, No. 2 (1957), pp185-192.
+
+\bibitem{AAA}V.Pambuccian, {\it A Simple Proof of Metrization Theorem}, Mathematical Chronicle Vol.13 (1984) pp71-72
+
+\bibitem{1}S.Willard,{\it General Topology},Dover Publications,2004,pp174,Problem 23G
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

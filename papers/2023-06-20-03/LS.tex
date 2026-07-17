@@ -1,0 +1,761 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Lebesgue--Stieltjes Measure}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+
+この文章ではLebesgue--Stieltjes測度を構成してゆく．
+つまり以下の定理を証明する．
+\begin{thm}
+$\phi:\rr\to \rr$を右連続な非減少関数とする．このとき，
+$\rr$上の測度$\mu_{\phi}$で，
+任意の$a, b\in [-\infty, \infty]$で$a<b$を満たすものに対して
+\[
+\mu_{\phi}((a, b])=\phi(b)-\phi(a)
+\]
+となるものが存在する．
+\end{thm}
+
+
+\section{Riesz--Markov--Kakutaniによる方法}
+
+以下の内容については\cite{RMK1}や
+\cite{RMK2}を読んでも良い．
+
+\begin{df}
+$X$を局所コンパクトハウスドルフ空間とする．
+このとき$X$上の測度$\mu$がRMK測度であるとは以下の条件を満たすときにいう
+\begin{enumerate}
+\item $\mu$は$[0, \infty]$に値をとるボレル測度である．
+\item $X$の任意のコンパクト集合$K$について$\mu(K)<\infty$
+\item $X$の任意のボレル集合は外部正則である．つまり
+$\mu(E)=\inf\{\mu(V)\ |\ V\in \mathfrak{O}_X\ E\subset V\}$が成り立つ．ここで$\mathfrak{O}_X$は$X$の開集合系である．
+\item $E$が開集合もしくは$\mu(E)<\infty$ならば$E$は
+コンパクト正則である．つまり，
+$\mu(E)=\sup\{\mu(K)\ |\ K\in Cpt(X) \ K\subset E\}$
+が成り立つ．ここで$Cpt(X)$は$X$のコンパクト集合全体である．
+\end{enumerate}
+
+$X$上のRMK測度全体を$M(X)$と書くことにする
+$X$上の符号付き測度で二つのRMK測度の差で表されるもの全体を$S(X)$と書くことにする．
+\end{df}
+
+
+\begin{df}
+$X$を位相空間とする．
+このとき
+$C(X)$で$X$上の実連続関数全体の集合を表す・
+$C_{b}(X)$で$X$上の有界実連続関数全体の集合を表す．
+また，$X$が距離空間で距離関数$d$を備えているとき，
+$C_{u}(X)$で$X$上の($d$に関して)一様連続な実関数全体を表す．$d$を明示的に書いていないが，以下では紛れがないので心配は無用である．
+また，以下では$C_{b}(X)$には$\sup$ノルムが備わっているとする．
+\end{df}
+
+以下の定理はRiesz--Markov--Kakutaniの表現定理の一つの形態である．
+\begin{thm}\label{thm:rmkdual}
+$X$をコンパクトハウスドルフ空間とする．
+このとき
+\[
+C_b(X)^*=C(X)^*=S(X). 
+\]
+である．
+より詳しく述べると，$\mu\in C_{b}(X)^{*}$に対して
+二つのRMK測度$\alpha$と$\beta$が（差を除いて）一意的に対応して，
+任意の$f\in C_{b}(X)$に対して
+\[
+\mu(f)=\int_{X}f \ d\alpha -\int_{X}f\ d\beta
+\]
+が成り立つ．
+特に非負な$\mu\in C_{b}(X)^{*}$つまり
+$f\ge 0$ならば$\mu(f)\ge 0$を満たすような$\mu$
+は通常の意味での測度（非負の値しか取らない測度）
+に対応する．
+\end{thm}
+
+
+
+\begin{df}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+このとき，
+任意の$n\in \nn$に対して
+$L_{\phi, n}:C_{c}(\rr)\rr$
+を以下のように定義する．
+\[
+L_{\phi, n}(f)=\sum_{i=-\infty}^{\infty}f\left(\frac{i}{2^n}\right)\left(\phi\left(\frac{i}{2^n}\right)-\phi\left(\frac{i-1}{2^n}\right)\right)
+\]
+と定義する．$f$の台がコンパクトなので，これは有限和である．
+\end{df}
+
+\begin{lem}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+任意の$f\in C_c(\rr)$に対して
+$\lim_{n\to \infty}L_{\phi, n}(f)$が存在する．
+\end{lem}
+\begin{proof}
+$M>0$を$\supp (f)\subset [-M, M]$を満たすものとし，
+$C=\phi(2M)-\phi(-2M)$とする．
+任意に$\ep>0$を与える．
+このとき$f$は一様連続なので，ある$\delta$
+が存在して，
+$|x-y|<\delta$ならば$|f(x)-f(y)|<\ep/C$を満たす．
+$N\in \nn$を$2^{-N}<\delta$とすると，
+$N<m<n$をみたす$n, m\in \nn$について，
+$\{a_i\}\subset \rr$
+を
+$0\le k<2^{n-m}$ならば
+$a_{i+k}=a_i$
+とし，$a_{k(2^{n-m})}=k$
+と定義すると，
+\[
+L_{\phi, m}(f)
+\sum_{i=-\infty}^{\infty}f\left(\frac{a_i}{2^n}\right)
+\left(\phi\left(\frac{i}{2^n}\right)-\phi\left(\frac{i-1}{2^n}\right)\right)
+\]
+となるから，
+\begin{align*}
+|L_{\phi, n}(f)-L_{\phi, m}(f)|
+&=
+\sum_{i=-\infty}^{\infty}
+\left|f\left(\frac{i}{2^n}\right)-f\left(\frac{a_i}{2^{-n}}\right)\right|
+\left(\phi\left(\frac{i}{2^n}\right)-\phi\left(\frac{i-1}{2^n}\right)\right)\\
+&<
+\frac{\ep}{C}\sum_{i=-\infty}^{\infty}\left(\phi\left(\frac{i}{2^n}\right)-\phi\left(\frac{i-1}{2^n}\right)\right)
+\le 
+\ep
+\end{align*}
+を得る．
+つまり，$\{L_{\phi, n}(f)\}_{n\in \nn}$
+はコーシー列なので，
+$\lim_{n\to \infty}L_{\phi, n}(f)$が存在する．
+\end{proof}
+
+
+\begin{df}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+このとき，
+$L{\phi}: C_c(\rr)\to \rr$を
+\[
+L_{\phi}(f)=\lim_{n\to \infty}L_{\phi, n}(f)
+\]
+と定義する．
+\end{df}
+
+
+\begin{lem}\label{lem:senkei}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+このとき$L_{\phi}$
+は正値線形形式である．
+\end{lem}
+\begin{proof}
+各$L_{\phi, n}$が正値線形形式だからその極限で定義される
+$L_{\phi}$もそうである.
+
+\end{proof}
+
+\begin{df}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+上の補題 \ref{lem:senkei} とRMKから，
+$L_{\phi}$に対応する
+RMK測度が存在する．
+これを$\mu_{\phi}$と書くことにする．
+もちろん
+\[
+L_{\phi}(f)=\int_{\rr}f \ d\mu_{\phi}
+\]
+が成り立つ．
+\end{df}
+
+
+\begin{prop}
+$\phi:\rr\to \rr$を右連続な非減少関数とする.
+このとき
+任意の$a, b\in [-\infty, \infty]$で$a<b$を満たすものに対して
+\[
+\mu_{\phi}((a, b])=\phi(b)-\phi(a)
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+まず最初に, $a, b$が
+$s, t\in \zz$で$N\in \zz_{\ge 0}$
+を使って
+$a=s/2^N$, 
+$b=t/2^N$
+と表される場合に等式を証明する．
+$n\in \zz_{\ge 0}$を$N<n$として，
+$c_n=(s2^{n-N}+1)/2^N$, 
+$d_n=(t2^{n-N}+1)/2^N$
+とおく．
+このとき$f_n\in C_c(\rr)$を以下のように定義する．
+\begin{align*}
+f_n(x)=
+\begin{cases}
+\frac{1}{c_n-a}(x-a) & \text{if $x\in [a, c_n]$}\\
+1 & \text{if $x\in [c_n, b]$}\\
+\frac{-1}{d_n-b}(x-d_n) & \text{if $x\in [b, d_n]$}\\
+0 & \text{o. w. }
+\end{cases}
+\end{align*}
+すると，$n\to \infty$のとき$f_n\to \chi_{(a, b]}$
+なので，
+\[
+\mu_{\phi}((a, b])=\lim_{n\to \infty}\int_{\rr}f_n\ d\mu_{\phi}
+=
+\lim_{n\to \infty}L_{\phi}(f_n)
+\]
+である．
+$m>n$として，
+$L_{\phi, m}(f_n)$を計算する．
+\[
+|L_{\phi, m}(f_n)-(\phi(b)-\phi(a))|\le (\phi(d_n)-\phi(b))+(\phi(c_n)-\phi(a))
+\]
+となるので特に
+\[
+|L_{\phi}(f_n)-(\phi(b)-\phi(a))|\le (\phi(d_n)-\phi(b))+(\phi(c_n)-\phi(a))
+\]
+である．
+$\phi$は右連続なので，$n\to \infty$のとき右辺は$0$に近づくから，
+\[
+\lim_{n\to \infty}L_{\phi}(f_n)=\phi(b)-\phi(a)
+\]
+よって
+\[
+\mu_{\phi}((a, b])=\phi(b)-\phi(a)
+\]
+がわかる．$a, b$が一般の場合には，測度論を使えばわかる．
+つまり，
+$a_{n}$と$b_{n}$を$s/2^{N}$ $(s\in \zz, N\in \zz_{\ge 0})$の形で表される数で
+$a<a_{n}$と$b<b_{n}$を満たし
+$\lim_{n\to \infty}a_{n}=a$と
+$\lim_{n\to \infty}b_{n}=b$
+を満たすものとする．
+すると
+$\bigcup_{n\in \zz_{\ge 0}}\bigcap_{m\in \zz_{\ge 0}}(a_{n}, b_{m}]=(a, b]$
+なので，有限測度に関する極限公式と$\phi$の右連続性を使えば
+$\mu_{\phi}((a, b])=\phi(b)-\phi(a)$
+がわかる．
+\end{proof}
+
+\section{分位関数を使う方法}
+この節では，
+Lebesgue--Stieltjes測度の存在を
+Quantile function（分位関数）を使って証明する．
+ただし，通常のLebesgue測度の存在は前提とする点には注意しよう．
+
+\begin{df}
+$\phi$を$\rr$上の右連続な単調増加関数とする．
+このとき，
+$I_{\phi}=[\inf\phi, \sup\phi]\cap \rr$と定義する
+（ここでわざわざ$\rr$との共通部分をとっているのは，
+$\sup$や$\inf$が$\infty$や$-\infty$の値を取る場合を見越してのことであり，そうでない場合には余計なものである）．
+$\phi$の\textbf{分位関数}$Q_{\phi}: I_{\phi}\to \rr$を以下のように定義する．
+\[
+Q_{\phi}(w)=\inf\{\, x\in \rr\mid w\le \phi(x)\, \}
+\]
+分位関数のことを\textbf{一般化した逆関数}と呼んだりもする．
+\end{df}
+
+
+
+\begin{lem}
+任意の$w\in I_{\phi}$と$x\in \rr$について
+$w\le \phi(x)$と$Q_{\phi}(w)\le x$
+は同値である．
+\end{lem}
+\begin{proof}
+まず$w\le \phi(x)$を仮定する．
+このとき$Q_{\phi}$の定義から
+$Q_{\phi}(w)\le x$である．
+
+逆に$Q_{\phi}(w)\le x$を仮定する．
+このとき$\phi$の右連続性から
+$\{\, z\in \rr\mid w\le \phi(z)\, \}$
+は閉集合であるから
+この集合の$\inf$である$Q_{\phi}(w)$も
+この集合に属する．よって
+$w\le \phi(Q_{\phi}(w))$である．
+今，$Q_{\phi}(w)\le x$と仮定しているので，
+$\phi$の単調性から$w\le \phi(x)$である．
+\end{proof}
+
+\begin{cor}
+$x\in \rr$を固定すると
+\[
+\{\, w\in I_{\phi}\mid Q_{\phi}(w)\le x\, \}
+=\{\, w\in I_{\phi}\mid w\le \phi(x)\, \}
+\]
+が成り立つ．
+\end{cor}
+
+
+
+\begin{lem}
+$\phi$を$\rr$上の右連続な単調増加関数とする．
+このとき任意の$y\in I_{\phi}$について
+$y\le \phi(Q_{\phi}(y))$が成り立つ．
+また，任意の$x\in \rr$について
+$Q_{\phi}(\phi(x))\le x$が成り立つ．
+\end{lem}
+\begin{proof}
+まず当然$Q_{\phi}(y)\le Q_{\phi}(y)$なので
+先の補題から$y\le \phi(Q_{\phi}(y))$が成り立つ．
+また，当然$\phi(x)\le \phi(x)$なので，当然
+$Q_{\phi}(\phi(x))\le x$が成り立つ．
+\end{proof}
+
+\begin{lem}
+$\phi$を$\rr$上の右連続な単調増加関数とする．
+このとき
+$Q_{\phi}$は右連続な単調増加関数
+である．
+\end{lem}
+\begin{proof}
+記述を簡単にするために$Q=Q_{\phi}$と書くことにする．
+$Q$の単調性は定義から従う．
+
+$w$を任意に固定する．
+$\sup_{y<w}Q(w)=x$とおく．
+すると
+$x\le Q(w)$である．
+$y<w$となる$y$を任意にとる．
+今$x<Q(w)$と仮定して
+$\epsilon=(Q(w)-x)/2$とする．
+ここで，もしも$w\le \phi(x-\epsilon)$
+とすると$Q(w)\le x-\epsilon<x$となるがこれは仮定に反するので$\phi(x-\epsilon)<w$である．
+さらに，$Q(y)\le Q(w)$より，
+$Q(y)+\epsilon\le x-\epsilon$が成り立つ．
+よって
+$y\le  \phi(Q(y))\le \phi(Q(y)+\epsilon)
+\le 
+\phi(x-\epsilon)<w$である．
+ゆえに$w\le \phi(x-\epsilon)<w$となって矛盾する．
+つまり$Q(w)=x$であり，$Q$の左連続性が示された．
+\end{proof}
+
+まず最初に$\phi$が有界な場合にLebesgue--Stieltjes測度を構成する.
+\begin{thm}
+$\phi:\rr\to \rr$を右連続な非減少関数とする．
+さらに$\phi$は有界であると仮定する．
+このとき，
+$\rr$上の測度$\mu_{\phi}$で，
+任意の$a, b\in [-\infty, \infty]$で$a<b$を満たすものに対して
+\[
+\mu_{\phi}((a, b])=\phi(b)-\phi(a)
+\]
+となるものが存在する．
+\end{thm}
+\begin{proof}
+$I_{\phi}$上の通常のルベーグ測度を
+$\nu$と書くことにする．
+そして$\mu=(Q_{\phi})_{*}\nu$と書くことにしよう．
+ここで$Q_{\phi}$は左連続だから特にボレル可測であることに注意しよう．
+この$\mu$が求めている測度であることを以下で証明しよう．
+まず任意の$x\in \rr$について
+$\mu((-\infty, x])=
+\nu(Q_{\phi}^{-1}((-\infty, x]))
+$
+であるが，
+\[
+Q_{\phi}^{-1}((-\infty, x])
+=
+\{\, w\in I_{\phi}\mid Q_{\phi}(w)\le x\, \}
+=\{\, w\in I_{\phi}\mid w\le \phi(x)\, \}
+\]
+であるから，
+$\mu((-\infty, x])=\phi(x)-\inf \phi$である．
+$\phi$が有界なので，この値は有限の値であることに注意しよう．
+よって
+\[
+\mu((a, b])=\phi(b)-\phi(a)
+\]
+となる．
+\end{proof}
+
+次に$\phi$が一般の場合にLebesgue--Stieltjes測度を構成しよう．
+\begin{thm}
+$\phi:\rr\to \rr$を右連続な非減少関数とする．
+このとき，
+$\rr$上の測度$\mu_{\phi}$で，
+任意の$a, b\in [-\infty, \infty]$で$a<b$を満たすものに対して
+\[
+\mu_{\phi}((a, b])=\phi(b)-\phi(a)
+\]
+となるものが存在する．
+\end{thm}
+\begin{proof}
+各$n$について$\phi_{n}i: \rr\to \rr$を
+$\phi_{n}(s)=\min \{\max\{\phi(s), -n\}, n\}$と定義する．
+これは
+\[
+\phi_{n}(s)=
+\begin{cases}
+n & \text{$n\le \phi(s)$のとき}\\
+\phi(s) & \text{$-n\le \phi(s)<n$のとき}\\
+-n & \text{$\phi(s)< -n$のとき}
+\end{cases}
+\]
+と書いても同じことである．
+この関数$\phi_{n}$は有界で右連続な単調関数になっている．
+よって先の定理から
+各$n$について
+\[
+\mu_{n}((a, b])=\phi_{n}(b)-\phi_{n}(a)
+\]
+となる測度$\mu_{n}$が存在する．
+$\phi_{n}$は右連続なので二つの集合
+$\{\, s\in \rr\mid n\le \phi(s)\, \}$
+と
+$\{\, s\in \rr\mid -n\le \phi(s)\, \}$
+には最小元が存在する．
+$\phi$は単調増加なので
+$m_{n}\le M_{n}$である．
+それをそれぞれ
+$M_{n}$, $m_{n}$と書くことにする．
+まず
+任意の$n$と$A\in \mathfrak{B}(\rr)$について
+$\mu_{n}(A)=\mu_{n}(A\cap [m_{n}, M_{n}])$が成り立つことを示そう．
+この式が成り立つ$A$全体を$\mathfrak{S}$とおく．
+すると$\mathfrak{S}$は$(a, b]$の形の集合を全て含んでいる．
+$\mathfrak{S}$が$\lambda$系であることを示そう．
+$X\in \mathfrak{S}$ $(\lambda1)$と
+$\mathfrak{S}$が単調な族について閉じている$(\lambda2)$
+ことは簡単にわかる．
+$\mu_{n}(B\setminus A)=\mu_{n}(B)-\mu_{n}(A)=
+\mu_{n}(B\cap [m_{n}, M_{n}])-\mu_{n}(A\cap [m_{n}, M_{n}])=
+\mu_{n}((B\setminus A)\cap [m_{n}, M_{n}])$
+なので$(\lambda 3)$も成り立つ．
+よって$\pi$-$\lambda$定理によって，
+$\mathfrak{S}=\mathfrak{B}(\rr)$となることがわかる．
+
+同様にして，
+任意の$n$と$A\in \mathfrak{B}(\rr)$について
+\[
+\mu_{n}(A\cap I_{n})=\mu_{n+1}(A\cap I_n)
+\]
+となることがわかる．
+
+次に任意の$n$と$A\in \mathcal{B}(\rr)$について
+$\mu_{n}(A)\le \mu_{n+1}(A)$
+となることを示す．
+まず$I_{n}=[m_{n}, M_{n}]$と置くと，定義から
+$I_{n}\subset I_{n+1}$となることがわかる．
+よって
+$\mu_{n}(A)=\mu_{n}(A\cap I_n)=
+\mu_{n+1}(A\cap I_n)
+\le 
+\mu_{n+1}(A\cap I_n)+\mu_{n+1}(A\cap (I_{n+1}\setminus I_{n}))
+=
+\mu_{n+1}(A\cap I_{n+1})$
+なので成り立つ．
+
+関数
+$\mu: \mathfrak{B}(\rr)\to [0, \infty]$
+を
+$\mu(A)=\lim_{n\to \infty}\mu_{n}(A)$と定義する．
+$\mu_{n}$の単調性からこの極限は存在する．
+この$\mu$があの式を満たすことは$\phi_{n}$
+が$\phi$に各点収束することからわかる．
+$\mu$が測度であることを示そう．完全加法性を示せば良い．
+$\sum$に関する単調収束定理，つまり数え上げ測度に関する
+単調収束定理から
+\begin{align*}
+\mu\left(\coprod_{i\in \zz_{\ge 0}}A_{i}\right)
+&=\lim_{n\to \infty}\mu_{n}\left(\coprod_{i\in \zz_{\ge 0}}A_{i}\right)
+=
+\lim_{n\to \infty}\sum_{i=0}^{\infty}\mu_{n}\left(A_{i}\right)
+=
+\sum_{i=0}^{\infty}\lim_{n\to \infty}\mu_{n}\left(A_{i}\right)\\
+&=
+\sum_{i=0}^{\infty}\mu\left(A_{i}\right)
+\end{align*}
+よって$\mu$は完全加法的である．
+以上で一般の$\phi$に対しても
+Lebesgue--Stieltjes測度が存在することがわかった．
+\end{proof}
+
+
+\section{おまけ：$\rr$についてのProkhorovの定理}
+$\rr$に対するProkhovの定理はHellyの選出定理を使えば比較的簡単に示せるので，おまけとして紹介する．
+
+以下の定理の証明は\cite{Helly}などを参考にしても良い．
+\begin{thm}[Hellyの選出定理]\label{daiji3}
+$\{F_n\}_{n\in \nn}$を$[0, 1]$に値をとる右連続な非減少関数の列とする．このとき部分列$\{F_{\phi(n)}\}$とある右連続な非減少関数$F$が存在して$F$の連続点$x\in \rr$毎に
+\[
+\lim_{n\to \infty}F_{\phi(n)}(x)=F(x)
+\]
+を満たす．
+\end{thm}
+
+
+\begin{thm}[$\rr$についてのProkhorovの定理]
+$\mathcal{S}\subset \mathcal{P}(\rr)$とする．
+このとき以下は同値である．
+\begin{enumerate}
+\item $\mathcal{S}$は相対コンパクトである．
+\item $\mathcal{S}$は緊密である．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+相対コンパクト性から緊密性を示す．
+\[
+	\ \forall \epsilon\in (0, 1)
+	\ \exists m\in \nn
+	\ \forall \mu\in \mathcal{S}\ 
+	\mu((-m, m))\ge 1-\epsilon
+\]
+を示そう．
+背理法による．
+\[
+	\ \exists \epsilon\in (0, 1)
+	\ \forall m\in \nn
+	\ \exists \mu\in \mathcal{S}\ 
+	\mu((-m, m))< 1-\epsilon
+\]
+を仮定する．
+各$m\in \nn$について対応する測度を$\mu_m$
+とかく．
+このとき，$\mathcal{S}$のコンパクト性から，
+部分列$\{m_i\}$と$\{\mu_i\}$
+が存在して$x\le m_i$ならば
+\[
+\mu_i((-x, x))<1-\epsilon
+\]
+と
+\[
+\mu_i\To \mu
+\]
+が成り立つ．
+そして弱収束していることと$m_i\to \infty$から
+任意の$x\in \rr$について
+\[
+\mu((-x, x))\le \liminf_{i\to \infty}\mu_i((-x. x))\le 1-\epsilon
+\]
+が成り立つが，$x\to \infty$とすると，
+$1\le 1-\epsilon$となるので矛盾する．
+
+今度は逆を示そう．
+$\mathcal{S}$
+は緊密であるとする．このとき
+\[
+	\forall N\in \nn\ \exists M_N\in \nn\ \forall \mu\in \mathcal{S}\ 
+	\mu([-M_N, M_N])\ge 1-2^{-N}\land M_N\ge N
+\]
+が成り立つ．
+$\mathcal{S}$内の部分列$\{\mu_n\}_{n\in \nn}$をとる．
+$\mu_n$の分布関数を$F_n$と書くことにする．
+このとき，
+Hellyの選出定理から
+$F_n$の部分列と単調非減少関数$F$で，
+$F$の連続点について
+各点収束する．
+緊密性から，$M_N\le x$を満たす$x$について
+\[
+1\ge F_n(x)-F_n(-x)\ge 1-2^{-N}
+\]
+であり，$F$の不連続点は高々可算個しかないので，
+$x$を連続点として$n\to \infty$とすると，
+\[
+1\ge F(x)-F(-x)\ge 1-2^{-N}
+\]
+が成り立つ．$x\to \infty$
+とすると，
+\[
+\lim_{x\to \infty}(F(x)-F(-x))=1
+\]
+が成り立つ．
+また，$\lim_{x\to \infty}F(-x)=0$は$F_n$の収束先であることからすぐわかるので，
+この文章の前半で頑張って示した内容から
+$F$はある確率測度$\mu$の分布関数になる．
+つまり，$\mu_n\To \mu$となるので，$\mathcal{S}$が相対コンパクトであることがわかる．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{Helly}
+はてなブログ電波通信の記事
+「Helly空間とHellyの選出定理」,
+https://concious4410.hatenablog.com/entry/2021/03/25/100947
+
+
+\bibitem{RMK1}
+はてなブログ電波通信の記事
+「リース・マルコフ・角谷の表現定理の証明(入射角16.225°の測度論入門2)」, 
+https://concious4410.hatenablog.com/entry/2015/10/28/213025
+
+\bibitem{RMK2}
+はてなブログ電波通信の記事
+「Riesz-Markov-Kakutaniの表現定理II」, 
+https://concious4410.hatenablog.com/entry/2020/02/02/213341
+
+
+\bibitem{Ito}伊藤清三，「ルベーグ積分入門」，
+1963年，
+裳華房．
+
+\bibitem{Hu}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

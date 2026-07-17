@@ -1,0 +1,446 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{enumitem}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+
+\newcommand{\card}{\mathrm{Card}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+\newcommand{\myomega}{\omega_{0}}
+\newcommand{\mypow}[1]{\mathfrak{P}(#1)}
+
+\title{独立集合族}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{導入}
+この文章ではいわゆるindependent family(独立集合族)を構成する．
+この文章では，独立集合族とほとんど交わらない集合族が互いに翻訳可能であるということを示す．
+そのためにこの間を補完する概念として，
+弱独立性，弱弱独立性，弱弱弱独立性を導入する．
+もちろんこれらの概念は集合族に対する適切な変換を通じて互いに翻訳可能である(定理\ref{thm:10}を参照のこと)．
+
+自然数の集合$\myomega$上には濃度が連続体であるような独立集合族が(ZFにおいて)存在することが知られている．これはここで紹介する最後の定理\ref{thm:10}の系でもある．
+
+
+\section{準備}
+まず記法について述べる．
+記号$\myomega$で非負整数全体の集合を表す．
+また${}^{\myomega}2$という記号でカントール集合を表す．
+つまりこの集合は$\{0, 1\}$に値を取る可算点列全体の集合ということである．
+集合$S$に対して$[S]^{<\myomega}$
+で$S$の有限部分集合全体を表すことにする．
+
+今から定理を述べるのに必要な集合族の概念を導入する．
+\begin{df}
+集合$S$の部分集合からなる集合族$\mathcal{F}$
+が\textbf{独立}であるとは，
+$\mathcal{F}$の任意の二つの有限部分族
+$\mathcal{A}$と$\mathcal{B}$
+について$\mathcal{A}\cap \mathcal{B}=\emptyset$
+を満たすならば
+集合
+\[
+\bigcap_{A\in \mathcal{A}}A\cap \bigcap_{B\in \mathcal{B}}(S\setminus B)
+\]
+が常に無限集合になるときにいう．
+\end{df}
+この集合族の独立という言葉は線形独立性と関係がある．
+実際，独立集合族は一番最初
+(\cite[p.~80]{FK})には
+関数空間の中の(代数的に)独立なベクトルを構成するのに用いられた．
+
+\begin{df}
+集合$S$の部分集合からなる集合族$\mathcal{F}$
+が\textbf{弱独立}であるとは，
+$\mathcal{F}$の元
+$A$と任意の有限部分族$\mathcal{B}$
+について$A\not \in \mathcal{B}$
+を満たすならば
+集合
+\[
+A\cap \bigcap_{B\in \mathcal{B}}(S\setminus B)
+\]
+が常に無限集合になるときにいう．
+\end{df}
+
+
+\begin{df}
+集合$S$の部分集合からなる集合族$\mathcal{F}$
+が\textbf{弱弱独立}であるとは，
+$\mathcal{F}$の元
+$A$と任意の有限部分族$\mathcal{B}$
+について$A\not\in \mathcal{B}$を満たすならば
+\[
+A\cap \bigcap_{B\in \mathcal{B}}(S\setminus B)\neq \emptyset
+\]
+となるときにいう．
+\end{df}
+
+
+
+\begin{df}
+集合$S$の部分集合からなる集合族$\mathcal{F}$
+が\textbf{弱弱弱独立}であるとは，
+$\mathcal{F}$の任意の二つの元
+$A$と$B$
+について$A\neq B$を満たすならば
+\[
+A\cap (S\setminus B)\neq \emptyset
+\]
+となるときにいう．
+\end{df}
+
+\begin{rmk}
+弱独立性，弱弱独立性，弱弱弱独立性はこの文章のみで通用するものである．
+ブログなんだしふざけた名前でも勘弁して．
+\end{rmk}
+
+
+\begin{df}
+集合$S$の部分集合からなる集合族$\mathcal{F}$
+が\textbf{ほとんど交わらない}とは，
+$\mathcal{F}$の任意の異なる二つの元
+$A$と$B$
+について
+$A\cap B$
+が有限集合となるときに
+いう．
+\end{df}
+
+
+
+\section{本文}
+
+まず最初に弱弱弱独立な集合族からほとんど交わらない集合族を構成する方法を述べる．
+\begin{thm}\label{thm:jjj}
+$S$を可算無限集合とし，
+$\mathcal{F}$を弱弱弱独立集合族とする．
+このとき$\mathcal{F}$と同じ濃度を持つ
+ほとんど交わらない集合族$\mathcal{G}$が存在する．
+さらに$\mathcal{F}$が無限集合のみからなるのならば$\mathcal{G}$もそのように取れる．
+\end{thm}
+\begin{proof}
+適当に$S$と$\omega$を同一視する．
+各$A\in \mathcal{F}$と
+$n\in \zz_{\ge 0}$に対して
+$g_{n}(A)=[0, n]\cap A$
+とし，
+$G(A)=\{\, g_{n}(A)\mid n\in \zz_{\ge 0}\, \}$
+とする．
+このとき集合族$\{\, G(A)\mid A\in \mathcal{F}\, \}$
+は$[S]^{<\myomega}$の部分集合からなる集合族である．
+
+今から$\mathcal{G}$がほとんど交わらないことを示す．
+任意に異なる$G(A)$と$G(B)$を取る．このとき
+$A\cap (S\setminus B)\neq \emptyset$
+なので要素$k$をこの集合から取る．
+すると$k<n, m$となる$n, m$について
+$k\in g_{n}(A)$であるが
+$k\not \in g_{m}(B)$なので
+$g_{n}(A)\neq g_{m}(B)$である．
+よって
+$G(A)\cap G(B)$は集合
+$\{\, g_{n}(A)\mid 0\le n\le k\, \}\cup \{\, g_{n}(B)\mid 0\le n\le k\, \}$
+に含まれる．
+つまり$G(A)\cap G(B)$
+は有限集合であるから$\mathcal{G}$
+はほとんど交わらない集合族である．
+
+また以上の議論から$A, B\in \mathcal{F}$
+が異なるならば$G(A)$と$G(B)$も異なるので
+$\mathcal{G}$と$\mathcal{F}$の濃度は等しい．
+最後に$S$と$[S]^{<\myomega}$
+の濃度は等しいので，適当に同一視すれば
+$S$の上に$\mathcal{F}$と同じ濃度の
+ほとんど交わらない集合族が構成できた．
+\end{proof}
+
+ほとんど交わらない集合族の要素は無限集合と仮定しても良いことを述べるのが次である．
+\begin{thm}\label{thm:ad}
+$S$を可算無限集合とし，
+$\mathcal{F}$をほとんど交わらない集合族とする．
+このとき$\mathcal{F}$と同じ濃度を持ち，
+無限集合族だけからなる
+ほとんど交わらない集合族$\mathcal{G}$が存在する．
+\end{thm}
+\begin{proof}
+$\mathcal{J}=\{\, A\in \mathcal{F}\mid \card(A)<\aleph_{0}\, \}$とおく．
+このとき
+$\mathcal{J}$は
+$[S]^{<\myomega}$の部分集合で
+$S$は無限集合なので$\mathcal{J}$の濃度は$S$以下である．今$o\not\in \mathcal{J}$を適当に見繕って，
+各$A\in \mathcal{F}$に対して$K(A)$を
+$A$が有限集合のときは$K(A)=A\times \{o\}\cup S\times \{A\}$とし，$A$が無限集合のときは$K(A)=A\times \{o\}$
+と定義する．
+このとき各$K(A)$
+は無限集合である．
+さらに
+任意の$A, B\in \mathcal{F}$に対して$K(A)\cap K(B)=(A\cap B)\times \{o\}$が成り立つ．
+特にさらに$A\neq B$ならば$K(A)\neq K(B)$ということがわかる．
+また$\mathcal{F}$がほとんど交わらないということから
+集合族
+$\mathcal{G}=\{\, K(A)\mid A\in \mathcal{F}\, \}$
+が
+$S\times \mathcal{J}$の無限部分集合からなるほとんど交わらないということがわかる．
+適当に$S$と$S\times \mathcal{J}$を同一視すれば
+欲しかった集合族を得ることができる．
+\end{proof}
+
+無限集合から成るほとんど交わらない集合族から独立集合族が構成できる．
+以下で述べる構成法は K. P. Hartによるものらしいのだが
+(\cite{Ge}, \cite{Th})，原論文を見つけられなかった．
+\begin{thm}\label{thm:hart}
+$S$を可算無限集合とし，
+$\mathcal{F}$を$S$の無限集合から成るほとんど交わらない集合族とする．
+このとき$\mathcal{F}$と同じ濃度を持つ
+独立集合族$\mathcal{G}$が存在する．
+\end{thm}
+\begin{proof}
+各$A\in \mathcal{F}$に対して
+\[
+H(A)=\{\, C\in [S]^{<\myomega}\mid C\cap A\neq \emptyset \, \}
+\]
+と定義する．つまり$H(A)$は$A$と交わる$S$の部分集合全体の集合である．
+ここで$A\neq B$ならば$H(A)\neq H(B)$に注意しよう．
+そして$\mathcal{G}=\{\, H(A)\mid A\in \mathcal{F}\, \}$
+とおく．
+今から$\mathcal{G}$
+が独立集合族であることを示そう．
+集合族$\mathcal{G}$の有限な部分集合族$\mathcal{A}$
+と$\mathcal{B}$で$\mathcal{A}\cap \mathcal{B}=\emptyset$を満たすものをとる．
+ここで$\mathcal{F}$の二つの有限部分集合族
+$\mathcal{M}$と$\mathcal{N}$をとって
+$\mathcal{A}=\{\, H(A)\mid A\in \mathcal{M}\, \}$
+かつ
+$\mathcal{B}=\{\, H(B)\mid B\in \mathcal{N}\, \}$
+と表されてるとしても良い．
+集合族$\mathcal{F}$がほとんど交わらないことを使って
+各$A\in \mathcal{M}$と$B\in \mathcal{N}$
+に対して$r(A, B)$を$r(A, B)\in A$で$r(A, B)\not \in B$
+となるものとする．これは$A\neq B$($\mathcal{A}\cap \mathcal{B}=\emptyset$より)，
+$A$が無限集合，$A\cap B$が有限集合であるなどの事実から存在性がわかる．
+ここで$E=\{\, r(A, B)\mid A\in \mathcal{M}, B\in \mathcal{N}\, \}$
+とすると$E$は有限集合であり，
+任意の$A\in \mathcal{M}$について$E\cap A\neq\emptyset$であり，
+任意の$B\in \mathcal{N}$について$E\cap B=\emptyset$
+である. 
+とくに$E$を含む有限集合$T$であって$B$と交わらない
+ものは無限個存在し
+$T\in \bigcap_{A\in \mathcal{M}}H(A)\cap 
+\bigcap_{B\in \mathcal{N}}H(B)$
+となるので
+$\mathcal{G}$は独立集合族となる. 
+\end{proof}
+
+集合
+$\omega$上では弱弱弱独立集合をかなり具体的に構成できる．
+
+\begin{thm}\label{thm:omega}
+$\omega$の部分集合からなる集合族$\mathcal{F}$で
+弱弱弱独立であり連続体濃度を持つものが，ZFのもとで存在する．
+また$\mathcal{F}$は無限集合のみを元とするように取れる．
+\end{thm}
+\begin{proof}
+各$x=(x_{i})_{i\in \zz_{\ge 0}}\in {}^{\myomega}2$
+に対して
+$E_{x}=\{\, (x_{i}+2)^{i}\mid  i\in \zz_{\ge 0}\, \}$
+とする．つまり$x_{i}=0$のときは$2^{i}$が，$x_{i}=1$
+のときは$3^{i}$が$E_{x}$に属する．
+そして$\{E_{x}\mid x\in {}^{\myomega}2\}$
+とするとこれが求める集合族になっている．
+ここで$a, b\in \{0, 1\}$と$i, j\in \zz_{\ge 0}$について$(a+2)^{i}=(b+2)^{j}$ならば$a=b$かつ$i=j$に注意しよう．
+\end{proof}
+
+%上の定理では性質``$a, b\in \{0, 1\}$と$i, j\in \zz_{\ge 0}$について$(a+2)^{i}=(b+2)^{j}$ならば$a=b$かつ$i=j$''
+%が本質的な部分であった．可算以外の無限基数でもこのような性質を持つ写像を適当に見繕ってやれば以下の定理を得る．
+%\begin{thm}\label{thm:kappa}
+%$\kappa$を無限基数とする．
+%このとき
+%$\kappa$の部分集合からなる集合族$\mathcal{F}$で
+%弱弱弱独立であり濃度$2^{\kappa}$を持つものが存在する．
+%また$\mathcal{F}$は無限集合のみを元とするように取れる．
+%\end{thm}
+
+
+最後に以下の定理がわかる．
+\begin{thm}\label{thm:10}
+$S$を可算集合とし，$\mathcal{F}$は$S$の部分集合族からなる
+集合であって，以下の条件のどれか一つを満たすとする．
+\begin{enumerate}[label=\textup{(\Alph*)}]
+\item 独立性
+\item 弱独立性
+\item 弱弱独立性
+\item 弱弱弱独立性
+\item ほとんど交わらない
+\item 各元は無限集合であり，なおかつほとんど交わらない
+\end{enumerate}
+このときこのとき上の条件それぞれに対してそれを満たす集合族であって$\mathcal{F}$と同じ濃度を持つものが存在する．
+さらに，以下のことが成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:1}
+$S=\myomega$のときは，
+各性質に対して連続体濃度を持つ集合族でその性質を持つものがZFにおいて構成できる．
+%\item\label{item:2}
+%$S$が無限基数$\kappa$の場合には，
+%各性質に対して濃度$2^{\kappa}$を持つ集合族でその性質を持つものが存在する．
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+前半は上で述べた諸定理\ref{thm:jjj}, 
+\ref{thm:ad}, そして\ref{thm:hart}から従う．
+後半の\ref{item:1}は
+$[\myomega]^{<\myomega}$と$\myomega$
+の間に具体的に全単射が作れることと，
+定理\ref{thm:omega}からわかる．
+\end{proof}
+
+
+\subsection{独立集合系の構成}
+この節では，上で述べたことは無視して可算集合の上に
+連続体濃度をもつ独立集合系が存在することを証明する．
+というか上で述べた構成法を一気にやったのが以下の通りである．
+\begin{thm}
+$\omega$上に独立集合系$\mathcal{F}$が存在する．
+\end{thm}
+\begin{proof}
+集合$S$を
+$S=\myomega\times [\myomega]^{\myomega}$
+と定義する．
+つまり
+\[
+S=\{\, (n, A)\mid n\in \omega, A\in [\myomega]^{<\myomega}\, \}
+\]
+である．もちろん$S$は可算集合である．
+今から$S$の元をアルファベット$s$で表すとき
+$s=(n_{s}, A_{s})$というふうに表示することにする．
+ここで$\myomega$の互いに素な無限部分集合からなる可算族
+$\{T_{s}\}_{s\in S}$であって
+$\coprod_{s\in S}T_{s}=\myomega$
+とする．
+ここで$K\in \mypow{\myomega}$
+と$s=(n_{s}, A_{s})$に対して
+\[
+H(K, s)=
+\begin{cases}
+T_{s} & \text{$K\cap [0, n_{s}]\in A_{s}$のとき:}\\
+\emptyset & \textit{それ以外のとき．}
+\end{cases}
+\]
+と定義する．
+さらに写像$M\colon \mypow{\myomega}\to \mypow{\myomega}$
+を
+$M(K)=\bigcup_{s\in S}H(K, s)$
+と定義する．
+まず$M$は単射である事を見よう．
+$K, L\in \mypow$が$K\neq L$を満たすとする．
+このとき$n\in \myomega$が存在して
+$K\cap [0, n]\neq L\cap [0, n]$
+となる．$A=\{K\cap [0, n]\}$として
+$s=(n, A)$とすると$s\in S$であり，
+$T_{s}\subset M(K)$かつ
+$T_{s}\cap M(L)=\emptyset$
+となる．
+よって$M(K)\neq M(L)$であり，単射である．
+
+次に
+$\mathcal{F}=\{\,M(K)\mid K\in \mypow{\myomega} \, \}$
+が独立集合系であることを証明しよう．
+$\mathcal{A}$と$\mathcal{B}$を$\mathcal{F}$の
+有限な部分集合族とし
+$\mathcal{A}\cap \mathcal{B}=\emptyset$
+となるものとする．
+そして$\mypow{\myomega}$
+の有限部分集合$P$と$Q$によって
+$\mathcal{A}=\{\, M(K)\mid K\in P\, \}$
+で
+$\mathcal{B}=\{\, M(L)\mid L\in Q\, \}$
+と表されているとしても良い．
+もちろん$P$, $Q$は有限集合であり，$P\cap Q=\emptyset$を満たす．
+さて，$P$と$Q$は有限集合なので
+$n\in \myomega$
+が存在して任意の$K\in P$
+と
+$L\in Q$に対して
+$K\cap [0, n]\neq L\cap [0, n]$
+を満たす．
+そして
+$A=\{\, K\cap [0, n]\mid K\in \mathcal{A}\, \}$
+と定義し$s=(n, A)$とすると
+$s\in S$である．
+そして
+任意の$K\in P$に対して
+$T_{s}\subset M(K)$
+でなおかつ任意の$L\in Q$について
+$T_{s}\cap M(L)$である．
+よって
+集合$\left(\bigcap_{A\in \mathcal{A}}A\right)\cap 
+\left(\bigcap_{B\in \mathcal{B}}(S\setminus B)\right)$
+は無限集合である．
+以上で連続体濃度をもつ$\myomega$上の
+独立集合系が存在する．
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+\bibitem{FK}
+G. Fichtenholz, L. Kantorovitch, 
+\textit{Sur les op\'{e}rations lin\'{e}aires dans l'espace des fonctions born\'{e}es}. Studia Math.  5 (1935), pp. 69-98.
+
+\bibitem{Ge}
+S. Geschke, 
+\textit{Almost disjoint and independent families}, 
+数理解析研究所講究録第1790巻, 2012, 1--9. 
+
+\bibitem{Th}
+M. J. Perron, 
+\textit{On the Structure of Independent Families}, 
+PhD. Thesis, 
+Ohio univ., 
+68 pages, 
+2017. 
+\end{thebibliography}
+
+
+
+
+
+
+
+
+\end{document}

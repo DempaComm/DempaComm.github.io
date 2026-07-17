@@ -1,0 +1,688 @@
+\documentclass[leqno, 12pt, a4paper]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+
+\newcommand{\ind}{\text{{\rm Ind}}}
+
+\newcommand{\img}{\sqrt{-1}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{コーシーの積分定理の証明}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書ではDixon (\cite{3})
+によるコーシーの積分定理の簡潔な証明
+ を紹介する．
+ この文書を通して
+ $a\in \cc$と$R\in (0, \infty)$について
+\[
+\Delta(a;R):=\{z\in \cc\ | \ |z-a|<R\}
+\]
+と定義する.
+また曲線自体とその像を区別せずに書く．
+つまりは，
+$z$が曲線$\gamma:[a,b]\to \cc$の像に属してる事を単に$z\in \gamma$と書く．
+その否定も同様の記号で簡潔に書く．
+また
+準備で述べる事実の証明は参考文献\cite{1}（Ahlfors）を参照されたし．
+\par
+また，つまらない例外を除くために以下に登場する閉曲線は恒等的に一点\textbf{ではない}とし，
+かつ区分的に$C^1$級であるとする．
+
+
+
+
+
+
+
+\section{準備}
+このセクションに書いてあることはほとんど証明しないが,
+簡単にわかることは証明する.
+
+\begin{thm}[開円板に対するコーシーの積分定理]\label{thm1}
+$a\in \cc$とし，$R\in (0, \infty)$とする．そして
+$f$を$\Delta(a;R)$上正則な関数とする.
+このとき任意の閉曲線$\gamma\subset \Delta(a;R)$について
+\[
+\int_{\gamma}f(z)\ dz=0
+\]
+が成り立つ．
+\end{thm}
+
+
+\begin{thm}[リウビルの定理]
+$\cc$上で正則な有界関数は定数に限る．
+\end{thm}
+
+\begin{df}[回転数]
+$\cc$内の曲線$\gamma$と$a\in \cc$について，
+$a\in\cc$に対する$\gamma$の回転数$\ind(\gamma; a)$
+を
+\[
+\ind(\gamma; a)=
+\frac{1}{2\pi \img}\int_{\gamma}\frac{dz}{z-a}
+\]
+と定義する．
+これは整数になる（参考文献 \cite{1} を参照のこと）.
+
+\end{df}
+
+
+\begin{fact}\label{fact1}
+$\cc$内の曲線$\gamma$について，
+$\cc\setminus \gamma $は開集合となるが，
+その連結成分の上で$\gamma$の回転数
+$\ind(\gamma; z)$は一定である.
+とくに非有界な連結成分での回転数は$0$となる．
+\end{fact}
+
+\begin{df}[回路]
+$\cc$内の曲線全体から自由生成される整数係数加群の元を
+\textbf{回路}と呼ぶ．
+\textbf{通常は閉曲線の形式和を回路と呼ぶのだが，この文章では曲線の形式和とする．}
+特に閉曲線からなる回路を
+\textbf{閉回路}と呼ぶことにする．
+つまり回路とは$a_1,\dots a_{n-1},a_n$を整数として形式的な和
+$``+"$を用いて表される
+\[
+a_{1}\gamma_{1}+\dots+a_{n-1}\gamma_{n-1}+a_{n}
+\gamma_{n}
+\]
+のことである．
+ここで曲線
+$\gamma_{1},\dots \gamma_{n-1},\gamma_{n}$がすべて集合
+$D\subset \cc$
+の中に入っているとき，
+この回路は$D$の中にあるというとか，$D$内にあるとかいう．
+回路全体の集合には和，差，整数倍
+が自然な方法で定義される．
+ここで和の記号$+$は本当に形式的なものであり，
+具体的に何か意味を持つものではない．
+気になる読者は自由生成加群などと言う言葉で調べると良いであろう．さて上のように表される回路について，
+少なくとも回路の象の和集合の上で定義される関数$f:\bigcup_{i=1}\gamma_{i}\to \cc$についての回路上の積分を
+\[
+\int_{a_{1}\gamma_{1}+\dots+a_{n-1}\gamma_{n-1}+a_{n}\gamma_{n}}\!\!\!\!\!f(z)\ dz
+=
+a_{1}\int_{\gamma_{1}}\!\!f(z)\ dz+
+\dots +a_{n-1}\int_{\gamma_{n-1}}\!\!\!\!\!\!
+f(z)\ dz
++
+a_{n}\int_{\gamma_{n}}\!\!f(z)\ dz\
+\]
+と定義する．
+回路上の積分が定義されたことにより，回路の回転数
+が以下のように定義される．
+\begin{align*}
+&\ind(a_1\gamma_1+\dots+a_{n-1}\gamma_{n-1}+a_n\gamma_n;a)
+\\
+&=
+a_{1}\ind(\gamma_{1}, a)+\dots+
+a_{n-1}\ind(\gamma_{n-1};a)+
+a_{n}\ind(\gamma_{n}; a).
+\end{align*}
+\end{df}
+
+
+\begin{df}[ホモローグ]
+$\cc$の
+開集合$D$内の回路$\alpha$が
+$D$内で$0$にホモローグであるとは
+\[
+\forall x\in \cc\setminus D, \ \ind(\alpha;x)=0
+\]
+となることと定義する．
+また，
+$D$内の２つの閉回路$\alpha, \beta$に対して$\alpha$が
+$\beta$にホモローグであるとは
+$\alpha-\beta$が
+$0$にホモローグであることと定義する．
+これは
+\[
+\forall x\in \cc \setminus D, \ \ind(\alpha;x)=\ind(\beta;x)
+\]
+と明らかに同値である．
+\end{df}
+ホモローグの定義から以下の命題がわかる．
+\begin{prop}\label{prop:homhom}
+曲線$\gamma_{1}:[a_{1}, b_{1}]\to \cc$と
+$\gamma_{2}: [a_{2}, b_{3}]\to \cc$
+が$\gamma_{1}(b_{1})=\gamma_{2}(a_{2})$
+を満たすものとするとこの二つの曲線の座標を適当に変数変換して$\gamma_{1}$の終点と$\gamma_{2}$の始点を繋いで
+$\gamma_{3}: [a_{3}, b_{3}]$を得ることができる．
+すると，積分の変数変換の公式と$\gamma_{3}$の作り方から
+$\gamma_{3}$上の任意の連続関数$f: \gamma_{3}\to \cc$について
+\[
+\int_{\gamma_{3}} f(z)\ dz
+=\int_{\gamma_{1}}f(z)\ dz+
+\int_{\gamma_{2}}f(z)\ dz
+\]
+が成り立つ．
+つまり$\gamma_{3}$と$\gamma_{1}+\gamma_{2}$
+はホモローグである．
+つまり，回路の定義と回路上の積分の定義は
+曲線同士の繋ぎ合わせについて整合的になるということである．
+\end{prop}
+
+
+\begin{fact}\label{func}
+$\gamma$を$\cc$内の曲線とし，
+$\phi$は$\gamma$上の連続関数とすると
+$\displaystyle \Phi(z)=\int_{\gamma}\frac{\phi(w)}{w-z}dw$
+で定義される関数
+$\Phi: \cc\setminus \gamma\to \cc$は
+は$\cc \setminus \gamma$上で正則である．
+\end{fact}
+\begin{proof}
+証明は\cite{1}を参照してもよいが，
+ルベーグの収束定理からも
+この事実\ref{func}を証明することが出来る．
+\end{proof}
+\begin{thm}
+$D$を$\cc$の開集合とし
+$\gamma$は$D$内の回路とすると
+\[
+E=\{\, z\in \cc \ |\ z\not\in \gamma,\ \ind(\gamma;z)=0 \, \}
+\]
+は開集合となる．
+\end{thm}
+\begin{proof}
+事実\ref{fact1}からすぐわかる．
+\end{proof}
+
+
+\section{定理と証明}
+このセクションでは積分定理を証明する。
+
+\begin{lem}\label{alp}
+$D$を$\cc$の開集合として$f$をその上の正則関数とし，
+$\gamma$は$D$内の閉回路とする．
+このとき$p\in \gamma$となる任意の点$p$に対して$p\not\in \alpha$となる$D$内の閉回路$\alpha$が存在し
+\[
+\int_{\gamma}f(z)dz=\int_{\alpha}f(z)dz
+\]
+が成り立つ．
+\end{lem}\label{lem}
+\begin{proof}
+閉回路を構成している基底の個々を考えることにより$\gamma$を単に閉曲線としても一般性を失わない．
+閉曲線$\gamma$は$[0,1]$上定義されているとしても一般性を失わず，閉曲線の始点を適当に変えることにより，
+\[
+\gamma(0)=\gamma(1)\neq p
+\]
+と仮定してもよい．
+
+そしてコンパクト空間の上の連続関数は一様連続なので
+\[
+\forall \varepsilon>0, \ 
+\exists \delta>0, \ 
+\forall s,t\in [0,1], \ 
+|s-t|<\delta \Rightarrow |\gamma(s)-\gamma(t)|<\varepsilon
+\]
+が成り立つ．
+対偶をとって
+\[
+\forall \varepsilon>0, \ 
+\exists \delta>0, \ 
+\forall s,t\in [0,1], \ 
+|\gamma(s)-\gamma(t)|\ge\varepsilon \Rightarrow |s-t|\ge \delta
+\]
+を得る．
+さて$\varepsilon>0$を十分小さくとり
+\[
+\Delta(p; 2\varepsilon)\subset D
+\]
+及び
+\[
+\gamma(0)=\gamma(1)\not\in \Delta(p;\varepsilon)
+\]
+が成り立つように出来る．
+このようにすると
+\[
+0,1\not\in\gamma^{-1}(\Delta(p; \varepsilon))
+\]
+となる．
+そして，$\gamma$の連続性から
+$\gamma^{-1}(\Delta(p; \varepsilon))$は
+$[0,1]$
+の開集合であり，
+$0$と$1$を含んでいないので，
+その連結成分は$(a_i,b_i)$と言う形をしている．
+\par
+さてこの連結成分の内，
+その集合の$\gamma$による像に$p$を含むもの，
+同じことだが，
+連結成分のうち$\gamma^{-1}(p)$と共通部分を持つものを考える．
+このときそのような連結成分のひとつを$(a, b)$と書き，
+$c\in (a,b)$について$\gamma(c)=p$となっているとする．
+\par
+ところで$\gamma$の連続性から点
+$\gamma(a)$及び点$\gamma(b)$は
+$\Delta(p;\varepsilon)$の境界
+$\{\, z\in \cc\ |\ |z-p|=\ep \, \}$に属する．
+よって
+\[
+|\gamma(c)-\gamma(a)|=
+|p-\gamma(a_i)|=|\gamma(c)-\gamma(b)|=|p-\gamma(b_i)|=
+\varepsilon
+\]
+となる．
+よってうえで述べた一様連続性の対偶から
+$c-a\ge \delta$と
+$b-c\ge \delta$
+を得る．そしてこれら二つを足し合わせて
+\[
+b-a\ge 2\delta
+\]
+を得る．
+連結成分同士は互いに交わらず，
+当たり前だが$[0,1]$は有限の長さしか無いので，
+$\gamma^{-1}(\Delta(p; \varepsilon))$の連結成分の内
+$\gamma$による像に$p$を含むものは有限個しか無いことがわかる．\par
+この事から
+$\gamma^{-1}(\Delta(p;\varepsilon))$の連結成分の内
+$\gamma$による像に$p$を含むものを番号付けして
+\[
+(a_1,b_1),\ (a_2,b_2),\ \dots,\ (a_i,b_i),\dots,(a_N,b_N)
+\]
+と置くことにしよう．
+（ここで$N\in \nn$である．）
+各$i$について$\gamma(a_i)$及び，
+$\gamma(b_i)$は
+$\{\, z\in \cc\ |\ |z-p|=\ep \, \}$に属することを再び注意する．\par
+このとき，
+二点
+$\gamma(a_i),\ \gamma(b_i)$
+を結ぶ曲線で$\Delta(p; 2\ep)$内にあり，
+かつ$p$を通らないものが存在する．\footnote{例えば$\{z\in \cc\ |\ |z-p|=\ep \}$の円弧などがあげられる。とにかく$p$を通らず、$C^1$級で$\Delta(p;2\ep)$内にあれば何でもよい。}それを$\beta_{i}$としよう．
+\par
+さて曲線$\gamma$の，$\gamma([a_i,b_i])$の部分を
+$\beta_{i}$にすげ替えた曲線を$\alpha$とする．
+すると，$\alpha$は区分的に$C^1$級で$p$を通らない．
+また$\alpha$は$D$内の曲線である．
+\footnote{今，$\Delta(p;2\ep)\subset D$としていることに注意せよ．}
+\par
+そして
+$\gamma-\alpha$は$\Delta(p; 2\ep)$内の閉曲線からなる
+閉回路にホモローグになる (命題 \ref{prop:homhom}参照のこと)．つまり
+$\gamma-\alpha$上での$f$の線積分は$\Delta(p;2\ep)$内の閉回路上の積分になるので\footnote{図を描いてみよ．また，$\Delta(p;\ep)$と$\Delta(p;2\ep)$の違いにも注意せよ．}，
+定理\ref{thm1} (円板に対するコーシー積分定理)を
+$f$と
+$\Delta(p;2\varepsilon)$に対して用いると
+\[
+\int_{\gamma}f\ dz -\int_{\alpha}f\ dz=\int_{\gamma-\alpha}f\ dz=0
+\]
+となるので補題は証明された。（
+$\gamma$を修正して$\alpha$を得ているが，もしも修正する区間が有限個でなければ区分的に$C^1$級であるかどうかは分からないし，積分も定義してないので，それらが有限個であるという議論は必要である．）
+\end{proof}
+
+
+\begin{thm}
+複素平面$\cc$の開集合$D$とその$D$の中で
+$0$にホモローグな$D$内の閉回路$\gamma$が与えられたとき，$D$上で定義されたの任意の正則関数$f: D\to \cc$に対し
+\[
+\int_{\gamma}f(z)\ dz=0
+\]
+が成立する．これは俗に言うコーシーの積分定理である．
+そしてさらに$\gamma$上にない点$a\in D$に対して
+\[
+\frac{1}{2\pi \img}\int_{\gamma}\frac{f(z)}{z-a}\ dw=
+f(a)\cdot \ind(\gamma;a)
+\]
+が成り立つ．
+これは俗に言う
+コーシーの積分公式である．
+\end{thm}
+\begin{proof}
+まず最初にコーシーの積分公式を証明し，
+それを用いてコーシーの積分定理を示す．
+いきなりだが$D\times D$上で
+\begin{equation*}
+g(z,w):=   
+   \begin{cases}
+     \displaystyle{\frac{f(z)-f(w)}{z-w}} & \text{$z\neq w$}\\
+
+
+    f'(z) & \text{$z=w$}
+   \end{cases}
+\end{equation*}
+と関数$g:D\times D\to \cc$
+を定義しよう．
+この関数$g$は$z$を固定する毎に$w$に対して正則である．
+よって各$z$毎に積分
+\[
+{\int_{\gamma}g(z,w) dw}
+\]
+が出来て，これは有限の値になる．\footnote{どうやら$D\times D$で連続であるようだが，この文章を書き終えた時点での筆者には証明出来なかった．しかしそのことを使わずとも証明は完遂できるの心配しなくてもよい．ちなみにこの連続性は有限増分の定理を利用すれば示すことができる．}
+\par
+
+集合$E=\{\, 
+z\in \cc \ |\ z\not\in \gamma,\ \ind(\gamma;z)=0 
+\, \}$について事実\ref{fact1}から
+\[
+\cc\setminus D\subset E
+\]
+である．
+さて$G:\cc\to \cc$を
+\begin{equation}
+G(z):=\begin{cases} 
+     \displaystyle{\int_{\gamma}g(z,w) dw} & \text{$z\in D$}\\
+\\
+     \displaystyle{\int_{\gamma}\frac{f(w)}{w-z}}dw & \text{$z\in E$}
+   \end{cases}
+\end{equation}
+と定義する．
+この定義がwell-definedかどうか調べてみよう．
+まず$z\in D\cap E$とすると$E$の定義から
+$\dpst \int_{\gamma}\frac{dw}{z-w}
+=-2\pi \img\cdot \ind(\gamma;z)=0$なので
+\[
+\int_{\gamma}g(z,w) dw=\int_{\gamma}\frac{f(z)-f(w)}{z-w}=f(z)\int_{\gamma}\frac{1}{z-w}dw-\int_{\gamma}\frac{f(w)}{z-w}dw=\int_{\gamma}\frac{f(w)}{w-z}dw
+\]
+となり，
+$ \displaystyle{\int_{\gamma}g(z,w) dw}$
+と
+$     \displaystyle{\int_{\gamma}\frac{f(w)}{w-z}}dw$
+は
+$D\cap E$
+で一致するから
+$G$は$\cc=D\cup E$できちんと定義されている．つまりwell-definedである．
+\par
+次に$G: \cc\to \cc$の正則性を示そう．
+\par
+まず$z\not\in \gamma$のとき
+\[
+G(z)=\int_{\gamma}g(z,w) dw=\int_{\gamma}\frac{f(z)-f(w)}{z-w}dw=f(z)\int_{\gamma}\frac{1}{z-w}dw-\int_{\gamma}\frac{f(w)}{z-w}dw
+\]
+が成り立つか
+もしくは
+\[
+G(z)={\int_{\gamma}\frac{f(w)}{w-z}}dw
+\]
+が成り立つが，
+事実\ref{func}などから$G$が正則となる事がわかる．
+\par
+
+次に$z\in \gamma$のとき，
+$\dpst G(z)=\int_{\gamma}g(z,w)\ dw$であるが，
+先の補題\ref{alp}から$z\not\in \alpha$かつ
+\[
+\int_{\gamma}g(z,w) dw=\int_{\alpha}g(z,w) dw
+\]
+となる$D$内の回路$\alpha$が存在する．
+よって先の$z\not\in \gamma$の場合と同様に$G(z)$の正則性がわかる．
+\par
+以上から$G$の正則性が分かった．
+\par
+次に
+\[
+\lim_{z \to \infty}G(z)=0
+\]
+が成り立つことを示そう．
+さて$|z|$の値を十分大きく取れば$z\in E$となることに注意しよう．
+今，$\gamma$上の$|w|$, $|f(w)|$の最大値をそれぞれ 
+$K$, 
+$M$とする（$\gamma$がコンパクトであることに注意せよ）．
+すると任意の$z\in \cc$について
+\[
+|G(z)|=\left|\int_{\gamma}\frac{f(w)}{w-z}dw \right|\le 
+\frac{M}{|z|}\int_{\gamma}\left|\frac{1}{\frac{w}{z}-1}\right||dw|
+\]
+が成り立つ．
+ここで$A>0$を
+\[
+0<1-\frac{K}{A}
+\]
+が成り立つように十分大きくとると，
+$A\le |z|$ならば
+三角不等式から
+\[
+0<1-\frac{K}{A}\le1-\frac{K}{|z|}\le 1-\left|\frac{w}{z}\right|= \left|1-\left|\frac{w}{z}\right|\right|\le \left|\frac{w}{z}-1\right|
+\]
+が成り立つので，$A\le |z|$となる$z\in \cc$について
+\[
+|G(z)|\le \frac{M}{|z|}\int_{\gamma}\left|\frac{1}{\frac{w}{z}-1}\right||dw|\le 
+\frac{M}{|z|}\int_{\gamma}\frac{1}{1-\frac{K}{A}}|dw|
+\]
+が成り立つ．
+ここで最右辺に現れる
+$\dpst\int_{\gamma}\frac{1}{1-\frac{K}{A}}|dw|$
+は$z$に依存しない定数なので，
+$|z|\rightarrow \infty$とすれば右辺は$0$に収束する．
+つまり
+\[
+\lim_{z \to \infty}G(z)=0
+\]
+が成り立つ．
+このことから$G$は$\cc$上正則かつ有界であることがわかり，
+リウビルの定理により$G$は定数関数となることがわかる．
+さらに$\dpst\lim_{z \to \infty}G(z)=0$なので
+$G$は恒等的に$0$に等しいことがわかる．
+すると$a\not\in \gamma$となる$a\in D$に対して
+\[
+G(a)=\int_{\gamma}g(a,w) dw=0
+\]
+なので$g(a,w)$が何であったかを思い出せば，この式から
+\begin{align*}
+0&=\int_{\gamma}\frac{f(a)-f(w)}{a-w}dw\\
+&=
+\int_{\gamma}\frac{f(a)}{a-w}dw-\int_{\gamma}\frac{f(w)}{a-w}dw\\
+&=f(a)\int_{\gamma}\frac{1}{a-w}dw-\int_{\gamma}\frac{f(w)}{a-w}dw\\
+&=-2\pi \img\cdot f(a)\cdot \ind(\gamma;a)-\int_{\gamma}\frac{f(w)}{a-w}dw
+\end{align*}
+が成り立ち，移項すれば
+コーシーの積分公式
+\[
+\frac{1}{2\pi \img}\int_{\gamma}\frac{f(w)}{w-a}dw
+=f(a)\cdot \ind(\gamma;a)
+\]
+を得る．
+\par
+次にコーシーの積分定理を示そう．
+点$a\in D$を$\gamma$上に無いものとして固定して$f(w)$の代わりに
+$F(w)=f(w)(w-a)$に対して
+上で得られたコーシーの積分公式を適用すれば，
+$F(a)=0$と
+\[
+\frac{F(w)}{w-a}=\frac{f(w)(w-a)}{w-a}=f(w)
+\]
+から
+\[
+\int_{\gamma}f(w)dw=0
+\]
+を得る（今は$w$を変数としてることに注意せよ）．
+これは示したいコーシーの積分定理である．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{2}高橋礼司, 
+複素解析,
+基礎数学8,
+第9版,
+東京大学出版会,
+2011．
+
+\bibitem{1}L.  V.  Ahrfols, 
+\text{Complex analysis},
+3rd ed., ,McGraw-Hill, 
+1979. 
+
+\bibitem{3}J.  D. Dixon,
+\textit{
+A brief proof of Cauchy's integral theorem},
+Proc. Amer. Math.  Soc. Vol. 29 (1971), 625-626. 
+\bibitem{4}P.  A. 
+Loeb, 
+\textit{A Note on Dixon's Proof of Cauchy's Integral Theorem}, Amer.  Math. 
+Monthly Vol.98, No.3 (Mar.,1991), 242-244. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

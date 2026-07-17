@@ -1,0 +1,133 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- その他もろもろ：
+層の話とか位相群の帰納極限の話 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+
+
+論文
+\cite{wa1}
+は
+一般位相空間論の研究者である
+児玉之宏による「層の理論」
+に関する解説である．
+おそらく一般位相空間論と
+(現代的な？)代数的トポロジーを結ぶ
+歴史的重要文献のような気がするが
+あんまりよくわかっていない．
+
+
+
+
+論文
+\cite{wa2}
+と
+\cite{wa3}
+は位相群の帰納的極限を考えると
+群にはなるのだが，
+その帰納極限としての
+位相は位相群になるとは限らないという話にまつわるものである．
+論文\cite{wa2}によればなんかミルナーの
+Introduction to algebraic K-theory 
+で$GL_{n}(\cc)$の
+帰納的極限を考える議論があるらしい
+(一応回避可能らしい)．
+しかし一般線形群ぐらいだと
+ちゃんと帰納極限が位相群になるともいう．
+論文\cite{wa3}に色々書いてあるらしい．
+
+
+\begin{thebibliography}{99}
+\bibitem{wa1}
+児玉之宏, 
+「Sheaf理論の位相空間への応用について」, 
+数理解析研究所講究録, 
+148 (1972), 
+8--19, 
+http://hdl.handle.net/2433/106767
+
+\bibitem{wa2}
+山崎愛一，
+「一般線形群の帰納極限について」, 
+数理解析研究所講究録, 
+1017 
+(1997), 
+92--103, 
+http://hdl.handle.net/2433/61637
+
+\bibitem{wa3}
+辰馬伸彦
+「位相群の帰納的極限の群位相」, 
+雑誌「数学」, 
+50 
+(4)
+(1998), 
+428--431, 
+DOI: 
+10.11429/sugaku1947.50.428
+
+\bibitem{wa4}
+平井 武 , 
+下村 宏彰, 
+ 辰馬 伸彦, 
+ 「位相空間の帰納的極限の位相」，
+表現論シンポジウム講演集, 
+1998, 
+63-86, 
+DOI：
+\verb|10.34508/repsympo.1998.0_63|
+
+\end{thebibliography}
+
+
+
+\end{document}

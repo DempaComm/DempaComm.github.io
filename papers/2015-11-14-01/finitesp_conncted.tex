@@ -1,0 +1,183 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{有限濃度の位相空間は連結ならば弧状連結}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\begin{lem}
+位相空間$X$に於いて１点$a$の閉包$\overline{\{a\}}$は弧状連結
+\end{lem}
+\begin{proof}まず最初に
+\[
+A=\overline{\{a\}}
+\]
+と置く。この時$A$の空でない開集合はすべて点$a$を含んでいる。もしそうでないのなら$a$の閉包が$A$よりも真に小さくなるからである。さて$x\in A$として$[0,1]$から$A$への写像として
+\[f(t)=
+\left\{
+\begin{array}{l}
+ a\ \ (t\in{[0,1)})\\
+x\ \ (t=1)
+\end{array}
+\right.
+\]
+とするとこれは連続写像になる。なぜなら$A$の空でない開集合$U$は必ず$a$を元として持つが、
+$x\in U$ならば$f^{-1}(U)=[0,1]$であり、$x\not\in U$ならば$f^{-1}(U)=[0,1)$となり$f$の開集合の逆像が$[0,1]$の開集合になるからである。ここで${\rm Im}f=\{a,x\}$に注意せよ。以上から$f$は$a$と$x$を結ぶ道となる。\\
+さて任意の$x,y\in A$について$x$と$a$を結ぶ道、$a$と$x$を結ぶ道を繋げれば$x$と$y$を結ぶ道となるので$A$は弧状連結であることがわかる。
+\end{proof}
+
+\begin{thm}
+台集合が有限集合である位相空間が連結ならばその空間は弧状連結である。
+\end{thm}
+{\bf 定理の証明の前にちょっとした定義}\\
+$X$の部分集合族$\mathfrak{M}$の２つの元$A,B$について、$\mathfrak{M}$の有限個の列$S_{1},\cdots,S{n}$が存在して\[S_{1}=A,S_{n}=B,S_{i}\cap S_{i+1}\neq\O\]となる時この２つの元$A,B$は$\mathfrak{M}$に於いて大路で結べると呼ぶ\\
+この定義はこの文書だけのものである。
+\begin{proof}
+今、台が有限で連結な位相空間を$X$として、まず次の事を示す。
+\[
+Xの任意の２点a,bについて\overline{\{a\}}と\overline{\{b\}}はXの部分集合族
+\{\overline{\{x\}}\ |\ x\in{X}\}に於いて大路で結べる。
+\]
+なぜなら、今、点$a$を取ると$\overline{\{a\}}$と交わる$\{\overline{\{x\}}\ |\ x\in{X}\}$の元で$\overline{\{a\}}$と異なる集合となるもの少なくともひとつは存在する。\\
+そのようなものが存在しないとすれば$X$が閉集合の直和として表されてしまい、連結性に反するからである。（ここで$X$の有限性が効いている）\\
+そして、この$\overline{\{a\}}$と交わる$\{\overline{\{x\}}\ |\ x\in{X}\}$の元を
+$\overline{\{y_{1}\}},\cdots,\overline{\{y_{k}\}}$
+とすると、$\overline{\{a\}}$と
+$\overline{\{y_{1}\}},\cdots,\overline{\{y_{k}\}}$
+は大路で結べるのである。そして集合
+\[
+A=\overline{\{a\}}\cup\overline{\{y_{1}\}}\cup\cdots\cup\overline{\{y_{k}\}}
+\]
+は閉集合であり、これ
+が全体と一致するならそれで終わりでよく、全体と一致しないなら先と同様にして$\overline{\{a\}}$及び$\overline{\{y_{1}\}},\cdots,\overline{\{y_{k}\}}$と一致しないような$\{\overline{\{x\}}\ |\ x\in{X}\}$の元で$A$と交わりを持つものが存在する。（もしそのようなものが存在しないのなら$X$の連結性に反する）
+もちろんその$A$と交わりを持つ$\{\overline{\{x\}}\ |\ x\in{X}\}$の元と$\overline{\{a\}}$は大路で結べるのである。\\
+そしてこの操作は高々$X$の元の個数と同じだけの回数で$\{\overline{\{x\}}|x\in{X}\}$のすべての元は尽くされて、つまり、$\overline{\{a\}}$と$\{\overline{\{x\}}\ |\ x\in{X}\}$の任意の元は$\{\overline{\{x\}}\ |\ x\in{X}\}$に於いて大路で結べてしまうのである。\\
+最後に$X$の任意の２点が道で結べることを示す。\\任意の２点$a,b$を取ってくると$\overline{\{a\}}$と$\overline{\{b\}}$は大路で結べて、そして大路の各因子が弧状連結で交わりを持つので、この交わりをたどっていけばこの２点$a,b$は道で結べる。よって定理が示された。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

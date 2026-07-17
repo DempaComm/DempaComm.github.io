@@ -1,0 +1,85 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{defnition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\renewcommand{\proofname}{証明}
+\newcommand{\cc}{\mathbb{C}}
+\title{代数学の基本定理}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+この文書では代数学の基本定理の初等的な証明を述べる。前提知識は特に必要ない。まずは次の補題を証明する。
+
+\begin{lemma}複素係数多項式$f$に対してその絶対値$|f|$は複素平面上で最小値を持つ。
+\end{lemma}
+\begin{proof}$f(z)=z^n+a_{n-1}z^{n-1}\dots+a_1z+a_0$という風に最高次係数が$1$（つまりモニックということ）と仮定しても良い。最初に$\displaystyle \lim_{z\rightarrow \infty}|f(z)|=\infty$を示そう。この式の意味は
+\[
+\forall K>0\ \exists R>0\ \forall z\in \cc\ R<|z|\Rightarrow K<|f(z)|
+\]である。$f(z)=z^n+a_{n-1}z^{n-1}+\dots+a_1z+a_0$を$z^n$でくくって
+\[
+f(z)=z^n\left(1+\frac{a_{n-1}}{z}+\dots +\frac{a_1}{z^{n-1}}+\frac{a_0}{z^n}\right)
+\]で明らかに
+\[
+\lim_{n\rightarrow \infty}\left(1+\frac{a_{n-1}}{z}+\dots +\frac{a_1}{z^{n-1}}+\frac{a_0}{z^n}\right)=1
+\]
+なので$\displaystyle \lim_{z\rightarrow \infty}|f(z)|=\infty$がわかる。さて$K=|f(0)|$として$R$を選べば、
+\[
+|z|>R\Rightarrow |f(0)|<|f(z)|
+\]
+となる。$\{z\in \cc\ |\ |z|\le R\}$はコンパクトなので$f$はこの上で最小値をとるが、$0\in \{z\in \cc\ |\ |z|\le R\}$で$|z|>R\Rightarrow |f(0)|<|f(z)|$なので、その最小値が$\cc$全体での$f$の最小値となる。
+\end{proof}
+
+\begin{lemma}定数でない複素係数多項式$f$について、$f(a)\neq0$ならば
+\[
+|f(b)|<|f(a)|
+\]
+となる$b$が$a$の十分小さい近傍に存在する。
+\end{lemma}
+\begin{proof}$f(a)\neq0$なので
+\[
+g(z)=\frac{f(z+a)}{f(a)}
+\]
+が定義できる。$\displaystyle g(0)=\frac{f(0+a)}{f(a)}=\frac{f(a)}{f(a)}=1$なので
+\[
+g(z)=1+b_1z+\dots + b_{n-1}z^{n-1}+b_nz^n
+\]
+と表せる。$b_1, \dots b_{n-1},b_n$が$0$とならない最小の番号を$k$として、（つまり$i<k$ならば$b_i=0$で、$b_k\neq0$ということ）$b_k(\neq 0)$を極座標表示して$b_k=r\exp(\sqrt{-1}\theta)$と書き表し、$M:=\max\{|b_{k+1}|,\dots|b_{n-1}|,|b_n|\}$とする。さて正の実数$u$を十分小さくとり
+\[
+u<1,\ 0<1-ru^k,\ 0<ru^k-M\frac{u^{k+1}}{1-u}<1
+\]と出来る。なぜなら
+\[
+\lim_{u\rightarrow 0}(1-ru^k)=1, \lim_{u\rightarrow 0}(r-M\frac{u}{1-u})=r
+\]
+だからである。さて$\displaystyle c:=u\exp(\frac{\pi-\theta}{k})$と置き、
+\[
+|g(c)|\le |1-ru^k|+M(u^{k+1}+\dots +u^{n-1}+u^{n})
+\]
+\[
+\le1-ru^k+M\frac{u^{k+1}}{1-u}<1
+\]
+を得る。
+よって$\displaystyle g(c)=\frac{f(c+a)}{f(a)}$より$b=c+a$とすれば
+\[
+|f(b)|<|f(a)|
+\]
+\end{proof}
+ここまで来たら後は簡単である。いよいよ本題に入ろう
+\begin{theorem}[代数学の基本定理]定数でない複素係数多項式$f$は$\cc$に零点を持つ。
+\end{theorem}
+\begin{proof}補題1より最小値$f(a)$が存在するが$f$に零点がないとすると$f(a)\neq0$なので補題2から
+\[
+|f(b)|<|f(a)|
+\]
+となる$b$が存在するがこれは最小性に矛盾するので$f$は零点を持つ。	
+\end{proof}
+\begin{thebibliography}{9}
+\bibitem{1}齋藤正彦『線形代数入門』(基礎数学1)東京大学出版会(1966)
+\end{thebibliography}
+\end{document}

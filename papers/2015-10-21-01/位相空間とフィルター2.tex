@@ -1,0 +1,468 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+%空集合は\Oで書くことにする
+\newcommand{\ff}{\mathfrak{F}}
+\newcommand{\GG}{\mathfrak{G}}
+\newcommand{\fil}{\mathfrak{Filter}}
+\newcommand{\aaa}{\mathfrak{A}}
+\newcommand{\fff}{\mathcal{F}}
+\newcommand{\s}{\mathcal{S}}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+
+\title{フィルターとコンパクト性}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+\begin{df}[フィルター]
+集合$X$の部分集合族$\mathfrak{F}$が$X$上のフィルターであるとは\\
+\begin{eqnarray}
+&X\in \mathfrak{F}\\
+&A\in \mathfrak{F}\ かつA\subset B \Rightarrow B\in \mathfrak{F}\\
+&A,B\in \mathfrak{F}\Rightarrow A\cap B\in \mathfrak{F}
+\end{eqnarray}
+を充たすことを言う。さらにフィルターが
+\begin{eqnarray}
+\O \not\in \mathfrak{F}
+\end{eqnarray}
+を充たすとき、そのフィルターを真フィルター\footnote{真はチェンジ!!とは読まない}だとか固有フィルターと言う。\\ 
+$(4)$の条件はフィルターが$X$の部分集合全体$2^X$にはならないための条件である。その場合を省くのは、つまらないからである。またこの$(4)$と$(3)$の条件から真フィルターの元は有限交叉性、つまり真フィルターの有限個の交わりは空にならないのである。また$X$上のフィルター全体の集合を
+\[
+\fil(X)
+\]
+で表すことにする。
+\end{df}
+このフィルターと言う命名はカメラのレンズの”絞り”から来ているらしい。本当なのかどうかは疑わしいが、段々とと小さくなっていく感覚を表していると思われる。
+条件$(2)$よりフィルターの何かしらの元を包含するような集合はそのフィルターの元になってしまうのである。フィルターの元は包含関係に関して小さいモノの方が本質的なのである。その本質的な部分を抜き出したのがフィルター基の概念である。
+\begin{df}[フィルター基]
+集合$X$の部分集合族$\mathfrak{B}$が$X$上のフィルター基底であるとは
+\setcounter{equation}{0}
+\begin{eqnarray}
+&\mathfrak{B}\neq \O\\
+&\forall B_1 , B_2\in \mathfrak{B}\ \exists B_3\in \mathfrak{B}\ B_3\subset B_1\cap  B_2 
+\end{eqnarray}が成立する事を言う。さらにフィルター基底が
+\begin{eqnarray}
+\O \notin \mathfrak{B}
+\end{eqnarray}
+うを充たすとき真フィルター基底と呼ぶ。
+フィルター基底
+$\mathfrak{B}$を用いて
+\[
+\mathfrak{F}=\{F\ |\ \exists B\in \mathfrak{B}\ B\subset F \}
+\]とすると$\mathfrak{F}$はフィルターとなる。これを$\mathfrak{B}$から生成されたフィルターという。条件$(3)$は$\mathfrak{B}$から生成されるフィルターが真フィルターになるための条件である。
+\end{df}
+フィルター基以外にもフィルターを生成する方法はある。つまりそれは只の集合族から生成されるフィルターである。しかしそれが真フィルターを定めるかどうかは分からない。真フィルターは有限交叉性を持つので最低限その集合族の有限交叉性は仮定しなければならぬ。つまり次の定理が成り立つ。
+\begin{thm}$Xの空でない部分集合族\mathfrak{M}についてこれが$
+\[
+\forall A,B\in \mathfrak{M}\ A\cap B\neq \O
+\]を充たすとする。このような族を{\bf 有限交叉族}という。このとき$\mathfrak{M}を含むフィルターで最小のものが存在する。つまりそれは\mathfrak{M}の元を有限回共通部分をとったような集合を含む$ような集合全体である。要するに
+\[
+\mathfrak{B}=\{\bigcap_{finite}B_{i}\ |\ B_{i}\in \mathfrak{M}\}
+\]がフィルター基となることを行っているのである。
+\end{thm}
+\begin{proof}[証明略]
+\end{proof}
+有限交叉族という言葉は今後断りなく自在に用いる。\\ 
+以フィルターの例を挙げる。
+\begin{exam}[近傍フィルター]位相空間$X$の点$a\in X$の近傍形全体$\mathfrak{N}(a)$は真フィルターとなっている。これは近傍系の性質より明らかである。
+
+\end{exam}
+
+
+\begin{exam}[切片フィルター]集合$X$の部分集合$A\subset X$について
+\[
+\ff_A=\{F\in 2^X\ |\ A\subset F\}
+\]はフィルターとなる。これは有限交叉族$\{A \}$から生成されるフィルターである。このフィルターを$A$を切片とするフィルターと言う。$A\neq \O$である限り、切片フィルターは真フィルターである。
+\end{exam}
+
+
+\begin{df}[フィルターの細粗]２つのフィルター$\ff,\GG\in \fil(X)$が
+\[
+\ff \subset \GG
+\]
+となっているとき$\ff$は$\GG$より粗い。または、$\GG$は$\ff$より細かいと言う。
+\end{df}
+詳しくは説明しないが、$\ff$より細かいフィルターは点列で言うところの部分列に対応している。
+
+
+\begin{df}[像フィルター]写像$f:X\to Y$と$\ff\in \fil(X)$が与えられたとき$f(A\cap B)\subset f(A)\cap f(B)$より
+\[
+\{f(F)\ |\ F\in\ff\}
+\]
+はフィルター基底となるがこれから生成されるフィルターを$\ff$の$f$による像フィルターと言い象徴的な記号
+\[
+f[\ff]
+\]
+で表す。
+\end{df}
+
+\begin{df}[フィルターの結び]\footnote{双対的にフィルターの交わりが定義されるが、特にこの文書で用いないので定義しない。定義はともかく結果的には
+\[
+\ff\land\GG=\ff\cap\GG
+\]
+となる。}
+$\fil(X)$に包含関係で順序を入れて順序集合と見た時（つまりフィルターの細粗という順序関係で見たとき）の二元集合$\{\ff,\GG\}$の最小上界、つまり$\sup\{\ff,\GG\}$を$\ff$と$\GG$の結びといい　
+\[
+\ff\vee \GG
+\]
+と書く。さて
+２つの真フィルター$\ff,\GG\in \fil(X)$が
+\[
+\forall F\in \ff\ \forall G\in \GG\ F\cap G\neq\O
+\]を充たすとき
+\[
+\{F\cap G\ |\ F\in \ff\ G\in \GG\}
+\]
+はフィルター基底となるが、これから生成される真フィルターは$\ff \vee\GG$となる。この条件が充たされないとき、
+\[
+\ff\vee \GG=2^X
+\]
+となる。当たり前だが$\ff\vee\GG$は$\ff$と$\GG$の両方より細かい。
+\end{df}
+
+\begin{df}[極大フィルター]真フィルター$\ff \in \fil(x)$が極大フィルターであるとは
+\[
+\forall \GG\in \fil(X)\ [\ff \subset \GG\subset 2^X\To (\ff=\GG)\lor (\GG= 2^X)] 
+\]
+となること。
+\end{df}
+\begin{cau}
+極大フィルターは必ず真フィルターであると定める。$2^X$を考えても仕方ないからである。
+\end{cau}
+
+\setcounter{equation}{0}
+\begin{thm}真フィルター$\ff \in \fil(X)$について以下は同値。
+\begin{eqnarray}
+&\ff は極大\\ 
+&\forall A\subset X\ [(\forall F\in \ff\  A\cap F\neq \O)\To A\in \ff]\\ 
+&\forall A\subset X\ (A\in \ff) \lor (X\setminus A\in \ff)\\ 
+&\forall A,B\subset X\ [A\cup B\in \ff \To (A\in \ff) \lor (B\in \ff)]
+\end{eqnarray}
+\end{thm}
+$(1)\To (2)\ (2)\To(3)\ (3)\To (4)\ (4)\To(3)\ (3)\To(1)$の順に証明する。
+\begin{proof}
+$((1)\To (2))$\\ 
+$\forall F\in \ff\  A\cap F\neq \O$を充たす$A$を任意に与える。すると$\ff\cup\{A\}$は有限交差族になっており、真フィルター生成する。そのフィルターを$\ff_A$
+と置くと条件から$\ff\subset \ff_A$で$A\in \ff_A,\O\not\in \ff_A$で$\ff_A$はフィルターとなっている。よって$\ff$の極大性から$\ff=\ff_A$よって特に$A\in \ff$\\ 
+$((2)\To(3))$\\ 
+任意の$A\subset X$について
+\[
+(\forall F\in \ff\ A\cap F\neq\O)\lor(\forall G\in \ff\ (X\setminus A)\cap G\neq\O)
+\]が成り立つことが言えれば$(2)$から$(3)$はすぐに従う。さてもしこれが成り立たないとすると
+\[
+(\exists F\in \ff\ A\cap F=\O)\land(\exists G\in \ff\ (X\setminus A)\cap F=\O)
+\]が成り立つが、このような$(F,G)$を一組固定すると
+\[
+F\subset X\setminus A,\ G\subset A
+\]
+となるが$F\cap G=\O$となり、これは$\ff$が真フィルターであることに反する。\\ 
+$((3)\To(4))$\\ 
+$(4)$の対偶を示す。
+\[
+A\not\in \ff \land B\not\in \ff
+\]
+とすると$(3)$から
+\[
+X\setminus A\in \ff,\ X\setminus B\in \ff
+\]なので
+\[
+X\setminus(A\cup B)=(X\setminus A)\cap(X\setminus B)\in\ff
+\]となり、$\ff$が真フィルターであることから$A\cup B\not\in \ff$つまり
+\[
+A,B\subset X\ [(A\not\in \ff) \land(B\not\in \ff)\To A\cup B\not\in \ff]
+\]
+が示されたので$(4)$が成り立つ。
+$((4)\To(3))$\\ 
+$(X\setminus A)\cup A=X$から明らか。\\ 
+$((3)\To(1))$\\ 
+真フィルター$\ff$が$(3)$を充たしフィルター$\GG$との間に
+\[
+\ff\subsetneq \GG
+\]
+の関係があるとしよう。このとき$G\in \GG\setminus \ff$となる$G$が存在するが$\ff$が$(2)$を満たしているので
+\[
+X\setminus G\subset \ff
+\]
+よって$X\setminus G\in \GG$がなりたち結局
+\[
+G\in\GG,\ X\setminus G\in \GG
+\]
+なので$\GG=2^X$。よって$\ff$は極大フィルターである。
+\end{proof}
+\begin{thm}[極大フィルターの補題]$X$上の真フィルターを任意に与えるとそれより細かい$X$上の極大フィルターが存在する。
+
+\end{thm}
+\begin{proof}Zornの補題を用いる。真フィルターを任意に与え$\mathfrak{A}$とし
+\[
+\mathcal{F}(\mathfrak{A})=\{\mathfrak{F}\in \fil(X)\ |\ \mathfrak{A}\subset \mathfrak{F}\ \mathfrak{F}は真フィルター\}
+\]
+と置くと$\mathfrak{A}$を含む
+極大フィルターは$(\mathcal{F}(\mathfrak{A}),\subset)$の極大元になってることに注意しよう。さて$\aaa\in \fff(\aaa)$なので$\fff(\aaa)$は空ではない。そして$\fff(\aaa)$の線型部分順序集合を任意に与え$\mathcal{S}$とする時$\bigcup\mathcal{S}\in \fff(\aaa)$を示そう。まず\[
+\bigcup\s\neq\O
+\]
+はすぐわかる。そして
+\[
+A\in\bigcup\s,A\subset B
+\]
+とすると、$A\in \mathfrak{X}$となる$\mathfrak{X}\in \bigcup\s$が存在し、$\mathfrak{X}$はフィルターなので$A\subset B$から
+\[
+B\in \mathfrak{X}
+\]
+を得る。\\ 
+次に
+\[
+A,B\in \bigcup\s
+\]
+とすると$A\in \mathfrak{X},\ B\in \mathfrak{Y}$となる$\mathfrak{X},\mathfrak{Y}\in \s$が存在する。$\s$は線型順序集合なので$\mathfrak{X}$と$\mathfrak{Y}$の間に大小関係があるが$\mathfrak{X}\subset\mathfrak{Y}$としても一般性を失わない。このとき$A,B\in \mathfrak{Y}$なので
+\[
+A\cap B\in \mathfrak{Y}
+\]
+よって$A\cap B\in \bigcup\s$\\ 
+$\s$の任意の元は$\O$を含んでいないので
+\[
+\O\not\in \bigcup\s
+\]以上より$\bigcup\s$は真フィルターであり、$\mathfrak{A}\subset\bigcup\s$なので$\bigcup\s\in\fff(\aaa)$よって$\s$には上界が存在するのでZornの補題から極大元を持つ。それが求める極大フィルターである。
+\end{proof}
+\begin{cau}
+よくこの命題を極大フィルターが存在するなどと手短に言うが、それは厳密には誤りである。なぜなら１点$\{x\}$の切片フィルターは極大フィルターなので、極大フィルターは必ず存在するからである。真フィルターを与えたときにそれより細かい極大フィルターが存在する事が大事である。
+\end{cau}
+
+\begin{thm}\label{abc}
+極大フィルターの像フィルターは極大である。
+\end{thm}
+\begin{proof}
+$X$の極大フィルターを$\ff$とし$f:X\to Y$による像フィルターを考える。
+$A\subset Y$を任意に与えると$\ff$が極大フィルターであることから
+\[
+(f^{-1}(A)\in \ff)\lor (X\setminus f^{-1}(A)\in \ff)
+\]
+が成り立つ。$f^{-1}(A)\in \ff$ならば$A\in f[\fff]$であり、$X\setminus f^{-1}(A)\in \ff$ならば
+$f^{-1}(Y\setminus A)=X\setminus f^{-1}(A)$なので$f^{-1}(X\setminus A)\in \ff$よって$X\setminus A\in f[\ff]$ここで$f(f^{-1}(S))\subset S$を用いた。以上から任意の$A\in Y$について
+\[
+(A\in f[\ff])\lor(Y\setminus A\in f[\ff])
+\]
+なので$f[\ff]$は極大フィルターである。
+\end{proof}
+
+\begin{df}[フィルターの収束]位相空間$X$上のフィルター$\ff$が$X$の点$a$に収束するとは
+\[
+\mathfrak{N}(a)\subset \ff
+\]
+が成り立つこと。ここで$\mathfrak{N}(a)$は$a$の近傍フィルターである。
+\end{df}
+\begin{df}[フィルターの接触点]
+位相空間$X$上のフィルター$\ff$の接触点とは
+\[
+\bigcap_{F\in\ff}\bar{F}
+\]
+に属する点のことである。
+\end{df}
+以下の命題からわかるようにフィルターの接触点とはそのフィルターが収束する「可能性」のある点である。
+\begin{prop}
+位相空間$X$上の真フィルター$\ff$が$\lim\ff=a$となるなら、$a$は$\ff$の接触点である。
+逆に$a$が$\ff$の接触点なら$\ff$より細かい真フィルター$\GG$が存在して$\lim\GG=a$となる。
+\end{prop}
+\begin{proof}
+前半は$\ff$が真フィルターであることと
+\[
+\lim\ff=a\iff \mathfrak{N}(a)\subset \ff
+\]
+から明らかである。後半は
+\[
+\GG=\ff\vee \mathfrak{N}(a)
+\]
+と置けば良い。
+\end{proof}
+%=====================================================
+\section*{フィルターとコンパクト性の特徴付け}
+
+\begin{df}[コンパクト空間]
+位相空間$X$がコンパクトであるとは$X$の任意の開被覆に有限部分被覆が存在すること
+\end{df}
+\newcommand{\uu}{\mathcal{U}}
+\begin{prop}\label{cpt}
+（$X$がコンパクト$）\iff$（$X$の閉集合からなる任意の集合族$\fff$が有限交叉族ならば$\dpst \bigcap\fff\neq \O$）
+\end{prop}
+\begin{proof}
+$(\To)$${}$\\ 
+$X$の閉集合からなる集合族$\fff$が
+\[
+\bigcap\fff=\O
+\]
+を満たすと仮定する。そして
+\[
+\uu=\{X\setminus F\ |\ F\in \ff\}
+\]
+と定義するとこの集合族の元は開集合で$\bigcap\fff=\O$より$\bigcup\uu=X$となる、つまり$\uu$は$X$の開被覆である。いま$X$はコンパクトであったから$\uu$の有限部分被覆
+\[
+\{U_1,U_2,\cdots U_n\}
+\]
+を持つ$\bigcup_{i=1}^nU_i=X$より$\bigcap_{i=1}^n(X\setminus U_i)=\O$となり、
+\[
+\{X\setminus U_1,X\setminus U_2,\cdots X\setminus U_n\}\subset \fff
+\]なので、結局、$\fff$の有限部分族で交叉が空となるものが存在する。つまり$X$がコンパクトなら
+（$X$の閉集合からなる任意の集合族$\fff$が有限交叉族ならば$\dpst \bigcap\fff\neq \O$）の対偶が成り立つということになるので定理の$(\To)$が示された。\\ 
+$(\Gets)$\\ 
+$\uu$を$X$の開被覆とする。このとき
+\[
+\fff=\{X\setminus U\ |\ U\in \uu\}
+\]
+と置くと$\bigcap\fff=\O$となる。ので（$X$の閉集合からなる任意の集合族$\fff$が有限交叉族ならば$\dpst \bigcap\fff\neq \O$）の対偶から$\fff$の有限部分族
+\[
+\{F_1,F_2,\cdots F_n\}
+\]
+が存在して$\bigcap_{i=1}^nF_i=\O$となる。そこで
+\[
+\{X\setminus F_1,X\setminus F_2,\cdots X\setminus F_n\}
+\]
+と置けばこれは$\uu$の有限部分族で$\bigcup_{i=1}^n(X\setminus F_i)=X$を充たす。つまり$X$はコンパクト。
+\end{proof}
+以下この命題\ref{cpt}を自在に断りなく用いる。
+	\setcounter{equation}{0}
+\begin{thm}[コンパクト性とフィルター]\label{aaa}
+以下は同値
+\begin{eqnarray}
+&Xはコンパクト\\ 
+&X上の任意の真フィルターに対し、それより細かい真フィルターで収束するものが存在する。\\
+&X上の任意の極大フィルターは収束する。
+\end{eqnarray}
+\end{thm}
+\begin{proof}$(1)\To (2),(2)\To(3),(3)\To(1)$の順に示す。\\ 
+$((1)\To(2))$\\ 
+$X$上の真フィルターを$\ff$とする。$\ff$は真フィルターなので特に有限交叉族であり、故に
+\[
+\{\bar{F}\ |\ F\in \ff\}
+\]
+は有限交叉族であるからコンパクト性から
+\[
+\bigcap_{F\in\ff}\bar{F}\neq\O
+\]ここから点$a$を適当にとると、$a$は各$F$の触点になってるから$a$の近傍フィルター$\mathfrak{N}(a)$は
+\[
+\forall F\in \ff\ \forall N\in \mathfrak{N}(a)\ F\cap N\neq\O
+\]を充たし、$\ff\vee \mathfrak{N}(a)$が定義できてこれは$\ff$より細かく$\mathfrak{N}(a)$より細かいので$a$に収束する。よって$(2)$が成立する。\\ 
+$((2)\To(3)$\\ 
+極大フィルターは真フィルターなので$(2)$からこれより細かい収束する真フィルターが存在するが、極大性よりそれはもとの極大フィルター一致しなければならず、最初に与えた極大フィルターは収束する。\\ 
+$((3)\To(1))$\\ 
+$\mathcal{F}$を閉集合からなる有限交叉族とし、これから生成される真フィルターを$\ff$とする。このとき$\ff$を含む極大フィルター$\GG$が存在し、$(3)$より$\GG$は収束する。このとき
+\[
+\bigcap\fff\supset\bigcap_{F\in\ff}\bar{F}\supset \bigcap_{G\in\GG}\bar{G}\ni a
+\]
+なので$\bigcap\fff\neq\O$よって$X$はコンパクト
+\end{proof}
+
+この定理\ref{aaa}を用いてチコノフの定理を証明する。
+\begin{thm}[チコノフの定理]
+コンパクト空間の族$\{X_{\la}\}_{\la\in \La}$の直積$\dpst \prod_{\la\in \La}X_{\la}$はコンパクト
+\end{thm}
+\begin{proof}
+$\dpst \prod_{\la\in \La}X_{\la}$の極大フィルターを任意に与えそれを$\ff$とする。このとき定理\ref{abc}から各$\la$について$\pi_{\la}[\ff]$は$X_{\la}$の極大フィルターである。各$X_{\la}$はコンパクトなので$\pi_{\la}[\ff]$は収束する。収束点の一つを$\la$毎に選んで$a_{\la}$とおく。$a_{\la}$の任意の開近傍を$N$とすると$\pi_{\la}[\ff]$が$A_{\la}$に収束してることから
+\[
+\exists F\in \ff\ \pi_{\la}(F)\subset N
+\]
+となる。よってこの$F$について
+\[
+F\subset \pi_{\la}^{-1}(N)
+\]となる。$\pi_{\la}^{-1}(O)\ (O\in \mathfrak{O}_{\lambda})$の形の開集合が$\dpst \prod_{\la\in \La}X_{\la}$の準開基となっているので結局
+\[
+\lim\ff=(a_{\la})_{\la\in\La}
+\]よって$\ff$は収束しその任意性から$\dpst \prod_{\la\in \La}X_{\la}$はコンパクトである。
+\end{proof}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{2}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{1}柴田敏男,集合と位相空間,共立数学講座8,共立出版,1978
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

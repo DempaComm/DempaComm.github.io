@@ -1,0 +1,106 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 不動点定理と経済学？ ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+
+以下の論文の束は角谷の不動点定理を調べた時に
+ついでに集めたものだと思う．
+経済学の話なのでマジでよくわかんない．
+
+
+シェルピンスキーの論文
+\cite{Sierpinski1924}
+もあるが，なぜこのラインナップに入っているのかは謎である．
+
+\begin{thebibliography}{99}
+\bibitem[和1]{1}
+中嶋眞澄
+「大数の強法則の初等的証明」, 
+鹿児島経済論集, 45 (1) (2004), 1--5. 
+
+\bibitem[和2]{2}
+中嶋眞澄
+「ゲーム理論におけるNashの定理の一般化」, 
+鹿児島経済論集, 45 (3) (2004), 213--230. 
+
+\bibitem[和3]{3}
+飯村卓也
+「離散不動点定理とその応用について」数理解析研究所講究録, 
+1371(2004),  140--151. 
+http://hdl.handle.net/2433/25481
+
+\bibitem[和4]{4}
+高橋渉
+「不動点定理をめぐる最近の結果」, 
+雑誌「数学」
+28 (3) (1976), 
+236--247, 
+DOI: 10.11429/sugaku1947.28.236
+
+\bibitem[和5]{5}
+入谷純, 加茂知幸
+「Arrow の不可能性定理と可換代数」，
+http://www.f.waseda.jp/mtoda/Nikaido/pdf/algebraic.pdf
+
+\end{thebibliography}
+
+
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{gameth.bib}
+
+
+
+\end{document}

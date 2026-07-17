@@ -1,0 +1,286 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\dm}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{カントールの区間縮小法と直径と反例}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+実直線上のカントールの区間縮小法は実数論において欠かせない役割を演じている。この手法は直線の有界閉区間の可算コンパクト性の現れとみることもできるが、完備距離空間に対して次の事実のような一般化が出来る。
+\begin{fact}[Cantorの区間縮小法]
+$(X,d)$を完備距離空間とし、$\{F_n\}_{n\in \nn}$を非空閉集合の族で、
+\[
+F_{n+1}\subset F_n
+\]
+及び
+\[
+\dm(F_n)\to 0\ (n\to +\mgn)
+\]
+を充たすとする。このとき、$\dpst \bigcap_{n\in \nn} F_n$は一点集合となる。
+\end{fact}
+この事実の主張の中にコンパクト性は現れていないことに注意せよ。また、$\dm$は、距離$d$の選び方にも依存することに注意せよ。\par
+上の事実の証明はさほど難しくはないのでここでは省略する。ここでの主題は、$\dm(F_n)\to 0$という仮定を落とした時にどういうことが起きるのかということである。\par
+$\dm(F_n)\to 0$の仮定を落とすと、定理の結論は必ずしも成り立たないことを例を挙げて観察してゆく。
+
+\begin{exam}[ヒルベルト空間]
+$(H,<,>)$を可分な無限次元ヒルベルト空間とする。この空間の距離は内積から誘導される自然な距離$d$が入っているとする。もちろんこのとき距離空間$(H,d)$は完備である。さて
+$\{e_n\}_{n\in \nn}$をこのヒルベルト空間のCONSとして
+\[
+F_n=\{e_k\ |\ n\le k\}
+\]
+とする。すると、
+\[
+d(e_i,e_j)=\sqrt{2}\ (i\neq j)
+\]
+なので、
+\[
+\dm(F_n)=\sqrt{2}
+\]
+がわかる。そして各$F_n$が閉集合であることは簡単にわかる。さらに明らかに
+\[
+\bigcap_{n\in \nn}F_n=\O
+\]
+が成り立つ。
+\end{exam}
+
+\begin{exam}[距離化可能なハリネズミ]
+上の例と同じことが出来る。
+\end{exam}
+
+
+\begin{exam}[修正された実直線]
+$(\rr,d)$を通常のユークリッド距離が入った距離空間とし、さらに
+\[
+e=\min\{d,1\}
+\]
+とすればこれは距離になり、$e$と$d$の定める位相は同じになり、$e$も完備距離になる。さて
+\[
+F_n=[n,+\mgn)
+\]
+とすれば明らかに各$F_n$は閉集合で
+\[
+\dm(F_n)=1
+\]
+であり、さらに
+\[
+\dpst \bigcap_{n\in \nn}F_n=\O
+\]
+となる。
+\end{exam}
+
+\begin{exam}[シエルピンスキー距離空間]
+$\nn$上に次のように距離$d$を定義する。
+\[
+d(i,j)=
+\begin{cases}
+		0 & \text{i=j}\\
+		1+\frac{1}{i+j} & \text{$i\neq j$}
+	\end{cases}
+\]
+この距離空間$(\nn,d)$において、
+\[
+d(x,y)<1\iff x=y
+\]
+から、完備性及び、この距離空間が離散位相を定めることがわかる。
+さていま、
+\[
+F_n=[n,+\mgn)\cap \nn
+\]
+と置けば
+\[
+F_n=1+\frac{1}{2n+1}\to 1\ (n\to +\mgn)
+\]
+となる。そしてもちろん
+\[
+\dpst \bigcap_{n\in \nn}F_n=\O
+\]
+となる。
+\end{exam}
+
+以上では
+\[
+\dpst \bigcap_{n\in \nn}F_n=\O
+\]
+となる例ばかり取り上げたが、$\dm(F_n)\to 0$という仮定を落とした時に、$\dpst \dpst \bigcap_{n\in \nn}F_n$が二点以上になるような例は実直線とかで簡単に作れるので割愛する。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{1}L.A.Steen and J.A.Seebch,\ {\it Counterexamples in Topology},\ Dover Publications,\ Inc.,New York,\ 1995
+\end{thebibliography}
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

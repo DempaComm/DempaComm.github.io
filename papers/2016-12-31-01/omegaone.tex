@@ -1,0 +1,529 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{$\omega_1$の位相的性質}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+LOTS、つまり線形順序位相空間は基本的な空間のクラスであり、その位相性質は古くから研究されてきた。
+ここではLOTSのなかでも特に基本的で、位相空間にしてはそれなりに特異なふるまいを見せる順序数、特に最小の非可算順序数$\omega_1$の位相的性質を紹介してゆく。
+なるべくDIYの精神で泥臭くても手に取って形がわかるような証明を心掛けたつもりである。それとあと、図を描いてみることを強く推奨する。
+\begin{df}
+任意の\textbf{可算}順序数$\al$について$\al\in \la$となる順序数$\la$のうち最小の順序数を$\omega_1$と定義する。
+\end{df}
+$\omega_1$は最小の非可算順序数と言っても同じことであるし、$\omega_1=\{\al\mid \text{$\al$は可算順序数}\}$としても同じことである。
+\begin{prop}\label{+1}
+任意の$\al\in \omega_1$について$\al+1\in \omega_1$
+\end{prop}
+以下、$\omega_1$には順序位相が定義されているものとする。\par
+有界性と非有界性は一般の順序集合についても定義できるのだが、ここで使う分だけ定義することにする。以下で定義される有界性は実は``上に有界"という概念なのだが、整列性から$\omega_1$の部分集合は常に下に有界なのでこれだけでよいのである。
+
+\begin{df}[有界と非有界]
+$\omega_1$の部分集合$S$についてある$\la\in \omega_1$が存在して
+\[
+\forall x\in S\ x\le \al
+\]
+を充たすとき$S$は有界であるという。$S$が有界でないとき、つまり任意の$y\in \omega_1$についてある$s\in S$が存在して$y\le s$を充たすとき$S$は非有界であるという。有界性の否定なので正確には$y<s$とするべきだが命題\ref{+1}を鑑みれば$y\le s$で非有界性を特徴づけしてもよい。
+\end{df}
+
+\begin{prop}\label{nei}
+$(\al,\be]\ (\al,\be\in\omega_1)$という形の集合は$\omega_1$の開集合である。さらに$x\in \omega_1$について
+\[
+\{(\al,x]\mid \al\in\omega_1\ \al<x\}
+\]
+は$x$の基本近傍系を成す。
+\end{prop}
+\begin{proof}
+前半は命題\ref{+1}から$\be+1\in \omega_1$であり、そして$(\al,\be]=(\al,\be+1)$となることからわかる。後半は明らかである。
+\end{proof}
+
+\begin{prop}
+$\omega_1$はclopenな開基を持つ。
+\end{prop}
+\begin{proof}
+分かる。
+\end{proof}
+
+\begin{prop}
+$w(\omega_1)=\aleph_1$である。ここで$w(X)$は空間$X$の位相的重み、つまり$X$の開基の最小濃度を表す。
+\end{prop}
+\begin{proof}
+やってみると結構わかる。
+\end{proof}
+
+\begin{prop}
+$\omega_1$は第一可算公理を充たす。
+\end{prop}
+\begin{proof}
+$\omega_1$の定義から
+$x\in\omega_1$について$\al<x$となる$\al$は高々可算なので先の定理と合わせればわかる。
+\end{proof}
+
+\begin{cau}
+一般に順序数のみを元として持つ集合$S$について$\sup S$が順序数として定義される。
+\end{cau}
+
+\begin{thm}
+$\omega_1$の可算部分集合集合は$\omega_1$内に$\sup$を持つ。
+\end{thm}
+\begin{proof}
+$\omega_1$の可算部分集合$A$について$\sup A$が順序数として定義されるが、$A$が可算であることから$\sup A$は可算順序数なので$\omega_1$の定義から$\sup A\in \omega_1$となる。
+\end{proof}
+
+
+\begin{prop}
+$\omega_1$の有界な集合は$\omega_1$の中に上限を持つ。
+\end{prop}
+\begin{proof}
+$S$を$\omega_1$の中の有界集合とすると$\sup S$は可算順序数になるので$\sup S\in \omega_1$
+\end{proof}
+
+
+\begin{prop}
+$\omega_1$はリンデレフでない。特に有界な開集合からなる$\omega_1$の開被覆可算部分被覆を持たない。
+\end{prop}
+\begin{proof}
+有界開集合の可算族$\mathcal{U}=\{U_i\}_{i\in \nn}$を任意に与える。各$U_i$は有界なので上限が$\omega_1$の中に存在する。$\al_i=\sup U_i$とすると
+$A=\{a_i\mid i\in \nn\}$は可算集合なので$\mu=\sup A\in \omega_1$である。よって
+\[
+\bigcup_{i\in \nn}U_i\subset [0,\mu]
+\]
+なので$\mathcal{U}$は$\omega_1$を被覆することはありない。
+\end{proof}
+
+
+\begin{prop}
+$\omega_1$はコンパクトでない。特に有界な開集合からなる$\omega_1$の開被覆有限部分被覆を持たない。
+\end{prop}
+
+以下の命題も本当は一般の順序数でもっと一般的なことが言えるのだが、ここで使う分だけ証明することにする。
+\begin{prop}\label{cl}
+$\omega_1$の部分集合$A$について以下は同値である。
+\begin{enumerate}
+\item $A$は閉集合である。
+\item 広義単調増加\footnote{任意の$i\in \nn$について$a_i\le a_{i+1}$ということである。}な$A$内の任意の点列$\{a_i\}_{i\in \nn}$について$\dpst \sup_{i\in \nn} a_i\in A$
+\end{enumerate}
+\end{prop}
+\begin{proof}\ 
+[$(1)\To (2)$]\par
+まず線形順序位相空間の一般論として$\sup_{i\in \nn}a_i\in \cl\{a_i\mid i\in \nn\}$が成り立つ。$\{a_i\}_{i\in \nn}$は$A$内の点列だと仮定しているし、$A$は閉集合であるから$\sup_{i\in \nn}a_i\in A$が成り立つ。\par
+[$(1)\To (2)$終わり]\par
+[$(2)\To (1)$]\par
+$\al\in \cl (A)$を任意に取る。$\omega_1$は第一可算であり、また命題\ref{nei}から$\al$の基本近傍系として$\{(y_n,\al]\mid n\in \nn\}$というものが選べて、更に$y_n\le y_{n+1}$と仮定してもよい。このとき$\sup_{i\in \nn}y_i=\al$となる。さてこの基本近傍系を使うと$\al\in \cl (A)$は
+\[
+\forall n\in \nn\ (y_n,\al]\cap A\neq \O
+\]
+と同値である。そこで、整列性から$a_0=\min\left((y_0,\al]\cap A\right)$とし、$a_n$まで定義されたときに
+\[
+a_{n+1}=\min ([a_n,\al]\cap (y_{n+1},\al]\cap A)
+\]
+と定義すれば$\{a_i\}_{i\in \nn}$は$A$内の広義単調増加な点列で、
+\[
+y_n\le a_n\le \al
+\]
+を充たすから$\sup_{i\in \nn}a_i=\sup_{i\in \nn}y_i=\al$となる。今$(2)$を仮定しているので$\al\in A$となる。よって$A=\cl(A)$が成りたち、つまり$A$は閉集合である。
+\end{proof}
+
+
+\begin{df}[club集合]\normalfont
+$\omega_1$の非空で非有界な閉集合をclub集合という。``club"とは \textbf{CL}osed \textbf{U}n\textbf{B}ounded という意味である。
+\end{df}
+$\omega_1$のclub集合の可算族は交わりを持つという著しい性質を持っている。そのことを証明するために以下の補題を準備しよう。
+\begin{lem}\label{lemma}\normalfont
+$A,B$を$\omega_1$のclub集合とするとき、$A\cap B$もclub集合になる。
+\end{lem}
+\begin{proof}$A\cap B$が閉集合であることは自明である。非有界性だけを示せばよい。\par
+任意に$\la\in \omega_1$を与えると非有界性から$[\la,\to)\cap A\neq \O$である。そこで$a_0=[\la,\to)\cap A$と定義する。次に$B$の非有界性から$[a_0,\to)\cap B\neq\O$である。そこで$b_0=\min [a_0,\to)\cap B$としよう。一般に$a_n$まで構成されたときに
+\[
+b_{n}=\min[a_n,\to)\cap B
+\]
+と定義し、$b_n$まで構成されたときに
+\[
+a_{n+1}=\min[b_n,\to)\cap A
+\]
+と定義する。このようにして$A$内の広義単調増加な点列$\{a_i\}_{i\in \nn}$と$B$内の広義単調増加な点列$\{b_i\}_{i\in\nn}$を得る。そして構成の仕方から
+\[
+a_n\le b_n\le a_{n+1}\le b_{n+1}
+\]
+なので$\dpst \sup_{i\in\nn}a_i=\sup_{i\in \nn}b_i$である。これを$\mu$と置こう。すると定義から$\la\le \mu$であり、また命題\ref{cl}から$\mu\in A$でかつ$\mu\in B$なので$\mu\in A\cap B$である。よって$A\cap B$は非有界である。
+\end{proof}
+この補題を帰納的に用いると次のことが分かる。
+\begin{cor}\label{cap}\normalfont
+有限個のclub集合$A_0,A_1\dots,A_m$について$\dpst \bigcap_{i=0}^mA_i$もclub集合である。
+\end{cor}
+
+\begin{prop}\label{daiji}\normalfont
+$\{A_i\}_{i\in \nn}$をclub集合の可算族とするとき、$\dpst \bigcap_{i\in \nn}A_i$もclub集合になる。
+\end{prop}
+\begin{proof}
+$\dpst \bigcap_{i\in \nn}A_i$が閉集合であることは自明である。以下では非有界性を示そう。\par
+$\la\in \omega_1$を任意に与える。すると$A_0$の非有界性から$[\la,\to)\cap A_0\neq\O$が分かる。そこで
+\[
+a_0=\min[\la,\to)\cap A_0
+\]
+と定義しよう。そして$a_n$まで構成されたときに
+\[
+a_{n+1}=\min[a_n,\to)\cap \bigcap_{i=0}^{n+1}A_i
+\]
+と定義しよう。系\ref{cap}から$[a_n,\to)\cap \bigcap_{i=0}^{n+1}A_i\neq\O$に注意せよ。こうして広義単調増加な点列$\{a_i\}_{i\in \nn}$を得る。さて、構成の仕方から$i\ge n\To a_i\in A_n$である。よって$\dpst \mu=\sup_{i\in \nn}a_i$と置くと、命題\ref{cl}と単調性から
+\[
+\forall n\in \nn \ \mu\in A_n
+\]
+を得る。つまり$\mu\in \bigcap_{i\in \nn}A_i$。さらに構成の仕方から$\la\le \mu$である。よって$\dpst \bigcap_{i\in \nn}A_i$が非有界であることが分かった。
+\end{proof}
+次の事実は電波通信のLOTSの記事で紹介されている。
+\begin{fact}
+順序数$\al$について$[0,\al]=\al+1$はコンパクトである。特に$\omega_1$の有界閉集合はコンパクトである。
+\end{fact}
+この事実と命題\ref{daiji}を用いて次の非常に重要な$\omega_1$の性質を証明しよう。
+\begin{thm}
+$\omega_1$は可算コンパクトである。
+\end{thm}
+\begin{proof}
+$\mathcal{U}=\{U_i\}_{i\in \nn}$を$\omega_1$の可算被覆としよう。$F_i=\omega_1\setminus U_i$と定義すると$F_i$は閉集合である。このときある$k\in \nn$が存在して$F_k$は有界集合になる。もしそうでなければ、任意の$i\in \nn$について$F_i$がclub集合になるが、命題\ref{daiji}から
+\[
+\omega_1\setminus\bigcup_{i\in \nn}U_i=\bigcap_{i\in\nn}(\omega_1\setminus U_i)=\bigcap_{i\in \nn}F_i\neq\O
+\]
+になるが、これは$\mathcal{U}$が$\omega_1$の被覆であることに反する。よってある$k\in \nn$が存在して$F_k$は有界集合になる。$F_k$の上界の一つを$\al\in \omega_1$と置くと、
+\[
+\omega_1=[0,\al+1]\cup U_k
+\]
+となり、$[0,\al+1]$はコンパクト集合なので、$\mathcal{U}$には有限部分被覆が存在する。よって$\omega_1$は可算コンパクトである。
+\end{proof}
+\begin{proof}[\textbf{別証明}]
+$\omega_1$の閉集合からなる有限交叉な可算族を任意に与え、それを$\mathcal{F}=\{F_i\}_{i\in \nn}$とする。もし$F_i$の中に有界集合があったなら、それはコンパクト集合でもあるので、有限交叉性から$\bigcap\mathcal{F}\neq\O$が成り立つ。もし$F_i$がすべて非有界、つまりすべてclub集合であるならば、命題\ref{daiji}からやはり$\bigcap\mathcal{F}\neq\O$となる。
+\end{proof}
+次の事実は電波通信の記事で紹介されているはずである。
+\begin{fact}
+可算コンパクト空間の点可算な開被覆は有限部分被覆を持つ。特にメタリンデレフで可算コンパクトである空間はコンパクトである。
+\end{fact}
+
+\begin{cor}
+$\omega_1$はメタリンデレフでない。より詳しく、$\omega_1$の有界開集合からなる
+\end{cor}
+
+次の定理は普通はフォドアの補題を利用して証明すると思うのだが、ここではそれを使わずに証明しよう。
+\begin{thm}\label{tail}
+連続関数$f\colon\omega_1\to \rr$に対し、$\al\in \omega_1$が存在し、$f$は$(\al,\to)=\{x\in \omega_1\mid \al<x\}$上で定数となる。
+\end{thm}
+\begin{proof}
+可算コンパクト集合の連続像は可算コンパクトであるから$f(\omega_1)$は可算コンパクトである。さらに距離空間においては可算コンパクト性とコンパクト性は同値なので$f(X)$は$\rr$の有界閉集合になる。$f(X)\subset [a,b]$としよう。$I_0=[a,b]$を二等分して二つの閉区間を作り、それを$L_1,R_1$としよう。つまり
+\[
+L_1=\left[a,\frac{a+b}{2}\right],\ R_1=\left[\frac{a+b}{2},b\right]
+\]
+である。今$f^{-1}(I_0)=\omega_1$はclub集合なので$f^{-1}(L_1)$と$f^{-1}(R_1)$のうちいづれかはclub集合になっているので、それを$I_1$と定義しよう。そして$I_1$を二等分して二つの閉区間$L_2, R_2$を作り、その$f$による逆像がclub集合になっているものを$I_2$とする。この構成を帰納的に繰り返し
+\begin{align}
+&I_0=[a,b]\\
+&I_{n+1}\subset I_n\\
+&\di(I_{n+1})=\frac{1}{2}\di(I_n)\\
+&\text{$\forall n\in \nn \ f^{-1}(I_n)$はclub集合}
+\end{align}
+を充たす$\rr$の有界閉区間の可算族$\{I_i\}_{i\in \nn}$を得る。この条件から$\dpst \bigcap_{i\in \nn}I_i=\{v\}$となる$v\in \rr$が存在する。そして
+\[
+f^{-1}(v)=f^{-1}\left(\bigcap_{i\in \nn}I_i\right)=\bigcap_{i\in \nn}f^{-1}(I_i)
+\]
+となるから、命題\ref{daiji}から$f^{-1}(v)$はclub集合であることが分かる。さて、
+\[
+J_n=\left[a,v-\frac{1}{2^n}\right]\cup \left[v+\frac{1}{2^n},b\right] 
+\]
+と定義すると$J_n$は$\rr$の閉集合で$v\not\in J_n$なので$f^{-1}(J_n)$は有界である。もしそうでないとしたら、$f^{-1}(J_n)$と$f^{-1}(v)$はともにclub集合となり、交わりを持つことになり、$v\in J_n$となって矛盾する。\par
+各$n$ごとに$f^{-1}(J_n)$の$\omega_1$における上界の一つを$\al_n$とし、
+\[
+\al=\sup_{i\in \nn}\al_i
+\]
+とするともちろん$\al\in \omega_1$であり、$\al<x$ならば任意の$n\in \nn$について$x\not\in f^{-1}(J_n)$なので
+\[
+\forall n\in \nn\ |f(x)-v|<\frac{1}{2^n}
+\]
+となる。つまり$\al<x$ならば$f(x)=v$である。これで定理は示された。
+\end{proof}
+\begin{cau}
+$f$の値域を$\rr$の代わりに距離空間で置き換えても定理\ref{tail}は成り立つ。
+\end{cau}
+
+\begin{cor}
+$\omega_1$は$T_6$ではない。
+\end{cor}
+\begin{proof}
+$L=\{x\in \omega_1\mid \text{$x$は極限順序数}\}$と定義する。すると$L$は$\omega_1$の閉集合であるが、定理\ref{tail}からゼロ集合にはならない。$L$が非有界で、なおかつ$x\in L\To x+1\not\in L$だからである。
+\end{proof}
+
+\begin{prop}
+$\omega_1$はハウスドルフである。
+\end{prop}
+\begin{proof}
+当たり前
+\end{proof}
+
+\begin{prop}\label{seiki}
+$\omega_1$は$T_4$である。
+\end{prop}
+\begin{proof}
+$A,B$を二つの交わらない$\omega_1$の閉集合とする。このとき補題\ref{lemma}から$A$と$B$がともに非有界となることはない。$A$を有界とし、
+$A\subset [0,\al]$と仮定しよう。このとき$[0,\al]=[0,\al+1)$なので$[0,\al]$はclopenであり、$\omega_1=[0,\al]\cup(\al,\to)$である。$[0,\al]$はコンパクトハウスドルフだから特に正規であり、$A$と$B\cap[0,\al]$は$[0,\al]$の開集合$O,P$で分離できる。そして$[0,\al]$の開集合は$\omega_1$の開集合でもあるので、$U=O,\ V=P\cup(\al,\to)$と置けばこれは$\omega_1$の開集合であり
+\[
+A\subset U,\ B\subset V,\ U\cap V=\O
+\]
+を充たす。これで証明は終わる。
+\end{proof}
+\begin{cau}\normalfont
+実はLOTSの一般論を使えば、任意のLOTSは単調正規なので$\omega_1$が正規なのは当たり前である。しかし後の$\omega_1$の直積空間の正規性の証明と定理\ref{seiki}の証明はアナロジカルなのでわざわざ証明を載せた。単調正規空間は遺伝的正規空間なので$\omega_1$は$T_5$でもある。単調正規性について詳しくは\\
+ R.W.Heath, D.J.Lutzer and P.L.zenor, \textit{Monotonically Normal spaces}, Trans.Amer.Math.Soc.178(1973), p481-493
+を参照のこと
+\end{cau}
+
+以降のセクションでは$\omega_1$の有限もしくは可算個数直積空間がどのような性質を充たすのかを見ていく。
+
+\begin{prop}
+$\omega_1^{\nn}$は可算コンパクトである。よって任意の$n\in \nn$について$\omega_1^n$は可算コンパクトである。
+\end{prop}
+\begin{proof}
+$\omega_1^{\nn}$の点列$\{a(i)\}_{i\in \nn}$を任意に与える。これらの成分を$a(i)=(a_n(i))_{n\in \nn}$という風に表示しよう。すると
+$A=\{a_n(i)\mid i,n\in \nn\}$は$\omega_1$の中の可算集合だから$\al=\sup A\in \omega_1$である。よって
+\[
+\{a(i)\}_{i\in \nn}\subset [0,\al]^{\nn}
+\]
+となる。$[0,\al]$はコンパクト空間なので$[0,\al]^{\nn}$もコンパクトである。よって$\{a(i)\}_{i\in \nn}$は$[0,\al]$内に集積点を持つが、この集積点は$\omega_1$から見ても集積点なので、結局$\{a(i)\}_{i\in \nn}$は$\omega_1^{\nn}$内に集積点をもつ。つまり$\omega_1^{\nn}$は集積コンパクトである。$T_1$空間において集積コンパクトと可算コンパクトは同値なので$\omega_1^{\nn}$が可算コンパクトであることが分かる。\par
+後半は、可算コンパクト性が閉集合に遺伝的であることと、$\omega_1^n$が$\omega_1^{\nn}$に閉集合として埋め込めるということからすぐにわかる。
+\end{proof}
+
+さて積空間の正規性の証明のために次のDowkerによる事実を用いる。
+
+
+\begin{fact}\label{dk}
+可算パラコンパクト$T_4$空間$X$とコンパクト距離空間$Y$との直積$X\times Y$は$T_4$空間である。
+\end{fact}
+
+\begin{thm}
+$\omega_1\times \omega_1$は正規である。
+\end{thm}
+\begin{proof}
+定理\ref{seiki}の証明と同様のことをする。
+補助的に、次のような語を用いる。$\omega_1\times\omega_1$の閉集合$A$は任意の$a\l,\be\in \omega_1$について
+\[
+A\cap \biggr((\al,\to)\times (\be,\to)\biggr)\neq \O
+\]
+を充たすとき$A$は「対角的に非有界」と呼ぶことにする。
+このとき補題\ref{lemma}と同様にして$\omega_1^{\nn}$の二つの「対角的に非有界」な閉集合$A,B$は交わりを持つことがわかる。よって$\omega_1\times \omega_1$の二つの交わらない閉集合$A,B$を任意に与えたとき、二つのうちいづれかは「対角的に非有界」ではない。$A$を「対角的に非有界」ではないとし、$\ga\in \omega_1$を
+\[
+A\cap \biggr((\ga,\to)\times (\ga,\to)\biggr)=\O
+\]
+を充たすものとする。さて$\omega_1\times \omega_1$は次のように直和分解できる。
+\[
+\omega_1\times \omega_1=\biggr([0,\ga]\times[0,\ga]\biggr)\cup \biggr([0,\ga]\times(\ga,\to)\biggr)\cup \biggr((\ga,\to)\times [0,\ga]\biggr)\cup \biggr((\ga,\to)\times (\ga,\to)\biggr)
+\]
+$(\ga,\to)=[\ga+1,\to),\ [0,\ga]=[0,\ga+1)$などを鑑みれば、それぞれの直和因子がclopenであることが分かる。更に$(\ga,\to)$は可算コンパクト$T_4$で、$[0,\ga]$はコンパクトな距離付け可能空間であるから事実\ref{dk}から$(\ga,\to)\times [0,\ga], [0,\ga]\times (\ga,\to)$は正規である。$[0,\ga]\times[0,\ga]$はそもそも距離付け可能なので正規である。よって、定理\ref{seiki}と同様の議論で$A,B$を開集合で分離することが出来る。
+\end{proof}
+同様にして$\omega_1^n$が正規であることが分かる。$\omega_1^{\nn}$も正規なのだが、面倒なので省略する。詳しくは[児玉・永見]を参照せよ。
+
+
+以下の定常集合とフォドアの補題について詳しくは\cite{1}などを参照せよ。
+
+\begin{df}[定常集合]
+$\omega_1$の部分集合$S$は$\omega_1$の任意のclub集合と交わりを持つとき、定常集合という。
+\end{df}
+
+以下のフォドアの補題の証明は省く。
+\begin{fact}[フォドアの補題]
+$S$を$\omega_1$の定常集合とし、$f\colon S\to \omega_1$は任意の$\al\in S$について$f(\al)<\al$を充たしているとする。このときある$\be\in f(S)$が存在して$f^{-1}(\be)$は定常集合になる。
+\end{fact}
+
+
+\begin{prop}
+$\omega_1^n\ (n\ge2)$及び$\omega_1^{\nn}$は$T_5$ではない。
+\end{prop}
+\begin{proof}
+$\omega_1^2$の部分空間で正規ではないものを構成すれば十分である。\par
+
+\begin{align*}
+&S=\{(x,y)\in \omega_1^2\mid x<y\}\\
+&A=\{(x,x+1)\in S\mid x\in L\}\\
+&B=\{(x,y)\in S\mid x\in \omega_1,\ y\in L\}=(\omega_1\times L)\cap S
+\end{align*}
+ここで$L=\{x\in \omega_1\mid \text{$x$は極限順序数}\}$である。このように定義すると$A,B$はともに$S$の閉集合であり、$A\cap B=\O$である。ここで$A$を含む任意の$S$の開集合$U$を取る。$\bigr\{(\al,x]\times \{x+1\}\mid \al<x\bigr\}$は$(x,x+1)$の基本近傍系を成すので各$x\in L$ごとに$f(x)$を選んで
+\[
+(f(x),x]\times \{x+1\}\subset U
+\]
+とできる。ここで$L$は定常集合（というかclub集合）なのでフォドアの補題からある$\be\in \omega_1$があって$f^{-1}(\be)\subset L$が定常集合になる。定常集合は特に非有界集合でもあるので点列$\{a_i\}_{i\in \nn}\subset f^{-1}(\be)$を取って
+\[
+\be+1<a_0,\ a_i<a_{i+1}
+\]
+とできる。$\gamma=\sup_{i\in \nn}a_i$としよう。$\be+1<\ga$であるから$(\be+1,\ga)\in S$である。もちろんこのとき$\gamma\in L$であるからより詳しく$(\be+1,\gamma)\in B$ということがわかる。
+$\bigr\{\{\be+1\}\times (a_i,\gamma]\mid i\in \nn\bigr\}$は$(\be+1,\gamma)$の近傍系を成す。ところで$a_i\in f^{-1}(\be)$なので
+\[
+(\be,a_i]\times \{a_i+1\}\subset U
+\]
+であるが、
+\[
+(\be+1,a_i+1)\in(\be,a_i]\times \{a_i+1\}
+\]
+でなおかつ
+\[
+(\be+1,a_i+1)\in \{\be+1\}\times (a_i,\gamma]
+\]
+でもあるので任意の$i\in \nn$について
+\[
+\biggr(\{\be+1\}\times (a_i,\gamma]\biggr)\cap U\neq\O
+\]
+であるから$\bigr\{\{\be+1\}\times (a_i,\gamma]\mid i\in \nn\bigr\}$は$(\be+1,\gamma)$の基本近傍系なので$(\be+1,\gamma)\in \cl(U)$である。つまり$B\cap \cl(U)\neq \O$なので$A$と$B$は開集合で分離できない。よって$S$は正規空間ではない。
+\end{proof}
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}寺澤順, 現代集合論の探求, 日本評論社(2013)
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,167 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- エルデシュ的な話：partition? ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+多分分割？の話の論文の束．
+
+論文
+\cite{MR0609665}
+は
+なんかカントール集合の
+分割に関してラムゼーぽい定理を証明している．
+
+論文
+\cite{MR0200172}
+はさらに集合論ぽくて
+なんかツリーの分割をやっているような気がする．
+上の話もツリーっぽいけど．
+
+
+
+論文
+\cite{MR0072928}
+はなんか平面を測度論的に難しい分割をしている．
+一般の直積空間についても考察をしている．
+
+論文
+\cite{MR1207473}
+では論文の出だしでシェルピンスキー
+の例の定理(コンパクトハウスドルフ空間は可算個の閉集合に分割できない)
+が引用されており好感が持ってしまう．
+この定理に対して，ZFCにおいてコンパクトハウスドルフ空間
+を$\aleph_{1}$個の閉集合に分割できるかどうかという問題が
+紹介されている．この問題に関する論文である．
+例えば$\omega_{1}+1$はそもそも点の個数が$\aleph_{1}$
+なのでそのように分割できるが，一般のコンパクトハウスドルフ空間はどうだろうか？他にも色々集合論的な分割の問題を紹介しいてる．
+この論文では$\rr$が$\aleph_{1}$-manyの疎な集合の和集合にならないという仮定のもとでこの問題が成り立たないコンパクトハウスドルフ空間を構成できることを証明している．
+連続体仮説の否定とマーティンの公理を仮定するとこの直線に関する仮定は正しいらしいので，
+この仮定はZFCの範疇をちょっと超えているが前進ではある．
+
+論文
+\cite{MR2071696}
+では実数を``小さい集合''で被覆するときの最小濃度を調べているような気がする．
+なんか$\mathrm{cov}(\mathcal{N})$とかが出てくる．
+この論文はDarji--Keletiの研究を踏まえてのものだそうで，
+Darji--Keletiは$\rr$の部分集合$C$
+に対して$P$が
+\textbf{$C$のwitness}
+であることを
+$P$が完全集合で
+$C$の任意の並行移動
+$C+x$について$(C+x)\cap P$
+が可算であるときにいうという定義をおいている．
+ここら辺被覆の話っぽい．
+それで
+Daiji--Keletiの結果としてコンパクト$C\subset \rr$のパッキング次元が
+$1$より小さいならば
+$C$のwitnessが存在することを証明したようだ．
+結果として，どんな連続体濃度より真に小さい実数の部分集合を持ってきてもそこから誘導される普通のカントール集合の並行移動たちでは実数を被覆できないことが従う．
+Daiji--Keletiのクエスチョンとして
+ルベーグ測度0のコンパクト集合についてwitnessが存在するのかというものがある．
+この論文の主定理として
+論文
+\cite{MR2071696}
+では，集合
+\[
+C_{0}=\left\{\, \sum_{i=2}^{\infty}\frac{d_{n}}{n!}
+\, \middle|\, 
+d_{n}\in \{0, \dots, n-2\}
+\, \right\}
+\]
+が
+Daiji--Keletiのクエスチョンの否定的な回答になっていることを証明している．
+つまり，任意の完全集合$P$
+に対して，$C_{0}$の並行移動
+$C_{0}+x$が存在して
+$(C_{0}+x)\cap P$
+が非可算になるものが存在することを証明している．
+
+
+論文
+\cite{MR3176143}
+では一般の位相群上の測度論の話をしている．
+ポーランド位相群$G$の部分集合$X$
+がHaar null であるとはボレル集合$B$
+と$G$上の確率ボレル測度$\mu$
+が存在して任意の$g, h\in G$について
+$\mu(gBh)=0$となることである．
+Christensenの結果として
+$G$を局所コンパクトポーランド位相群としたときに
+$X\subset G$が
+上の意味でHaar null 
+であることと，Haar測度で測度ゼロであることが同値ということを示したらしい．
+論文
+\cite{MR3176143}では上の定義にボレル集合必要なのかという疑問として，
+$X\subset \rr$がルベーグ測度0であることと
+あるボレル確率測度$\mu$が存在して任意の$t\in \rr$について
+$\mu(X+t)=0$
+かどうかという問題を考えているが，これには
+反例があることを証明している．
+他にもまあ色々．
+セクション１だけでも面白いので読むといいと思う．
+何やら
+$\{\,f\in C[0, 1]\mid \exists x  \exists f^{\prime}(x)\in \rr\, \}$がmeager でHaar null 
+であるとか
+$\{\,f\in C[0, 1]\mid \exists x  \exists f^{\prime}(x)\in [-\infty, \infty]\, \}$
+はmeager だがHaar null ではないことや
+無限対称群$S_{\infty}$
+の話とか色々先行研究が紹介されていて
+楽しい．
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{partition.bib}
+
+
+
+\end{document}

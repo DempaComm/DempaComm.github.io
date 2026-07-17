@@ -1,0 +1,541 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Radon-Nikodymの定理}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章ではRadon-Nikodymの定理を証明する．
+
+\begin{df}
+$(X, \mathfrak{M})$
+を測度空間とし，$\mu$
+をその上の測度とする．
+このとき
+$L^{p}(\mu)$
+で$\mu$に関する$L^{p}$関数全体を表す．
+つまり$f\in L^{p}(\mu)$であるとは
+$f: X\to \rr$であって可測であり，
+\[
+\int_{X} |f|^{p}\ d\mu<\infty
+\]
+を満たすもの全体である．
+
+空間$L^{2}(\mu)$はヒルベルト空間になることに注意しよう．
+\end{df}
+
+
+\begin{lem}\label{lem:lemlem}
+$(X, \mathfrak{M})$
+を測度空間とし，$\alpha$
+をその上の$\sigma$有限な測度とする．
+このとき可測関数$u: X\to (0, 1)$で
+$y\in L^{1}(\alpha)$
+を満たすものが存在する．
+\end{lem}
+\begin{proof}
+
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+を
+\begin{enumerate}
+\item 各$A_{i}$は可測
+\item 
+$\bigcup_{i\in \zz_{\ge 0}}A_{i}=X$
+\item $i\neq j$ならば$A_{i}\cap A_{j}=\emptyset$
+\item 
+と任意の$i$について$\alpha(A_{i})<\infty$
+\end{enumerate}
+を満たすものとする．
+そして$u: X\to (0, 1)$を
+\[
+u(x)=\sum_{n=1}^{\infty}\frac{\chi_{A_{n}}(x)}{2^{n}(1+\alpha(A_{n}))}
+\]
+と定義すれば求める条件は満たされる．
+\end{proof}
+
+\begin{df}
+$(X, \mathfrak{M})$
+を可測空間とし，$\alpha$, $\beta$
+をその上の測度とする．
+このとき$\alpha$が$\beta$に関して絶対連続であるとは，
+$\beta(A)=0$となる$A\in \mathfrak{M}$
+について$\alpha(A)=0$となることである．このとき
+$\alpha\ll \beta$と表し，
+$\alpha\ll\beta$かつ$\beta\ll\alpha$になるとき$\alpha \equiv \beta$と表す．この$\equiv$は同値関係になる．
+また，ある$A\in \mathfrak{M}$が存在して
+$\alpha(A)=0$と$\beta(X\setminus A)=0$
+を満たすときに$\alpha$は$\beta$について特異的であるといい，$\alpha \perp \beta$と書く．
+この$\perp$は同値関係になる．
+\end{df}
+
+\begin{lem}
+$(X, \mathfrak{M})$
+を測度空間とし，$\alpha, \beta, \gamma$
+をその上の測度とする．
+もしも$\alpha\equiv \beta$
+が成り立つならば以下が成り立つ．
+\begin{enumerate}
+\item 
+$\beta\ll \gamma$ならば
+$\alpha\ll \gamma$が成り立つ. 
+\item 
+$\gamma\ll \beta$
+ならば
+$\gamma\ll \alpha$が成り立つ. 
+\item 
+$\beta\perp \gamma$
+ならば
+$\alpha\perp \gamma$
+が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+証明は省略する．
+\end{proof}
+
+
+\begin{lem}\label{lem:hyougen}
+$(X, \mathfrak{M})$
+を測度空間とし，$\alpha$
+をその上の測度とし，
+$\phi\in L^{1}(\alpha)$とする．
+そして測度$\beta$を
+\begin{equation}\label{eq:1}
+\beta(E)=\int_{E}\phi\ d\alpha
+\end{equation}
+と定義すると，
+$\beta\ll \alpha$であり，
+任意の$f\in L^{1}(\beta)$について
+\[
+\int_{X}f\ d\beta
+=
+\int_{X}f\phi\ d\alpha
+\]
+が成り立つ．
+また測度$\beta$についてある$\phi$が存在して(\ref{eq:1})
+のように表されるのならば$\beta\ll \alpha$となる．
+\end{lem}
+\begin{proof}
+$\beta$の定義から任意の$E\in \mathfrak{M}$について
+\[
+\int_{X}\chi_{E}\ d\beta=\int_{X} \chi_{E}\phi\ d\alpha
+\]
+が成り立つ．
+つまり特性関数については補題の結論は成り立つ．
+このことから単関数についても成り立つし，
+単関数近似から一般の可測関数についても成り立つ．
+後半は明らかである．
+\end{proof}
+
+\begin{lem}[リースの表現定理]\label{lem:riesz}
+$(H, \langle \cdot, \cdot \rangle_{H})$をヒルベルト空間とする．
+このとき任意の連続な線形写像
+$f: H\to \rr$に対して$a\in H$ご存在して
+任意の$x\in H$について
+$f(x)=\langle x, a\rangle_{H}$が成り立つ．
+\end{lem}
+
+
+以下の定理がラドン・ニコディムの定理である．
+\begin{thm}
+$(X, \mathfrak{M})$
+を測度空間とし，$\mu$，$\nu$
+をその上の$\sigma$有限な測度とする．
+このとき$(X, \mathfrak{M})$
+上の測度$\nu_{a}$と
+$\nu_{s}$が存在して以下を満たす．
+\begin{enumerate}
+\item 
+$\nu_{s}\perp \mu$
+と$\nu_{a}\ll \mu$を満たす．
+\item 
+$(1)$のような分解は一意的である．
+\item 
+可測関数
+$D: X\to \rr$
+が存在して
+任意の$A\in \mathfrak{M}$について
+$\nu_{a}(A)=\int_{A}D\ d\mu$
+が成り立つ．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$(2)$はすぐにわかる．
+
+$(1)$を示そう．
+補題 \ref{lem:lemlem}から
+$s, t: X\to (0, 1)$を
+$s\in L^{1}(\mu)$
+で$t\in L^{1}(\nu)$
+を満たすものとする．
+そして$(X, \mathfrak{M})$上の
+測度$\lambda$, 
+$\theta$を
+\[
+\lambda(A)=
+\int_{A} s\ d\mu
+\]
+\[
+\theta(A)=
+\int_{A} t\ d\nu
+\]
+と定義する．
+$\lambda$, 
+$\theta$
+は有限測度であることに注意しよう．
+また
+\begin{align}
+\mu(A)=
+\int_{A} \frac{1}{s}\ d\lambda\\
+\nu(A)=
+\int_{A} \frac{1}{t}\ d\theta\label{al:4}
+\end{align}
+なので
+$\lambda\equiv \mu$と$\theta\equiv \nu$に注意しよう．
+$\phi=\lambda+\theta$と定義する．
+すると，コーシーシュワルツの不等式から
+$f\in L^{2}(\phi)$
+に対して
+\[
+\left|
+\int_{X}f\ d\theta
+\right|
+\le 
+\int_{X}|f|\ d\theta
+\le 
+\int_{X}|f|\ d\phi
+\le 
+\phi(X)\cdot 
+\sqrt{
+\int_{X}|f|^{2}\ d\phi}
+<\infty
+\]
+を得る．ここで$s\in L^{1}(\mu)$, $t\in L^{1}(\nu)$なので
+$\phi(X)=\lambda(X)+\theta(X)<\infty$
+であることを用いている．
+よって
+$f\in L^{2}(\phi)$
+に対して
+$\int_{X}f\ d\theta$
+と定義される線形形式は
+$L^{2}(\phi)$上の有界作用素となる．
+よって
+$L^{2}(\phi)$
+がヒルベルト空間であることから
+補題 \ref{lem:riesz}を使うと
+任意の$f\in L^{2}(\phi)$
+に対して
+\begin{equation}\label{eq:hyo}
+\int_{X}f\ d\theta
+=
+\int_{X}f g \ d\phi
+\end{equation}
+となる$g\in L^{2}(\phi)$
+が存在する．
+さて$\phi(E)>0$となる可測集合
+$E$について，$f=\chi_{E}$とすると
+\[
+\int_{E}g\ d\phi=\theta(E)
+\]
+となる．
+よって特に
+\begin{equation}\label{eq:hutou}
+0\le \frac{1}{\phi(E)}\int_{E}g\ d\phi\le 1
+\end{equation}
+となる．
+ここで，背理法のために$S=\{\, x\in X\mid 1<g(x)\, \}$
+が$\phi$に関して正の測度を持つと仮定しよう．
+$\epsilon$に対して
+$T_{\epsilon}=\{\, x\in X\mid 1+\epsilon<g(x)\, \}$
+と仮定すると
+\[
+S=\bigcup_{\epsilon \in \qq_{>0}}T_{\epsilon}
+\]
+が成り立つ．よって
+ある$\epsilon\in \qq_{>0}$
+が存在し，
+$T_{\epsilon}=\{\, x\in X\mid 1+\epsilon<g(x)\, \}$
+が$\phi$に関して正の測度をもつ．
+よって式 (\ref{eq:hutou})から
+\[
+1<1+\epsilon\le \frac{1}{\phi(T_{\epsilon})}\int_{T_{\epsilon}}g\ d\phi\le 1
+\]
+となり矛盾する．
+よってほとんど至る所$g\le 1$である．
+同様にほとんど至る所$0\le g$であることがわかる．
+つまりほとんど至る所$0\le g(x)\le 1$である．
+さて式 (\ref{eq:hyo})を変形して
+\begin{equation}\label{eq:hyo2}
+\int_{X}f(1-g)\ d\theta
+=
+\int_{X}f g \ d\lambda
+\end{equation}
+を得る．
+ここで
+$A=\{\, 
+x\in X\mid 
+0\le g(x)<1
+\, \}$, 
+$S=
+\{\, 
+x\in X\mid 
+g(x)=1
+\, \}
+$
+と定義して
+$\theta_{a}(E)=\theta(E\cap A)$, 
+$\theta_{s}(E)=\theta(E\cap S)$
+と定義する．
+式 (\ref{eq:hyo2})において
+$f=\chi_{S}$とすれば，$\lambda(S)=0$を得るので
+$\theta_{s}\perp \lambda$
+がわかる．
+さて，
+$h$を
+\[
+h(x)=
+\begin{cases}
+\frac{g(x)}{1-g(x)} & \text{if $x\in A$}\\
+0 & \text{その他 }
+\end{cases}
+\]
+と定義する．
+各$n\in \zz_{\ge 0}$, $E\in \mathfrak{M}$について
+式 (\ref{eq:hyo2})において
+$f=(1+g+\dots+g^{n})\chi_{E\cap A}$
+とおくと
+\[
+\int_{E\cap A}1-g^{n+1}\ d\theta
+=
+\int_{E\cap A}g(1+g+\dots+g^{n})\ d\lambda
+\]
+を得る．この式で
+$n\to \infty$とすれば
+\[
+\theta_{a}(E)=\theta(E\cap A)=\int_{E}h \ d\lambda
+\]
+を得る．よって$\theta_{a}\ll \lambda$である．
+ここで
+\[
+\nu_{a}(A)=\int_{A}\frac{1}{t}\ d\theta_{a}
+\]
+\[
+\nu_{s}(A)=\int_{A}\frac{1}{t}\ d\theta_{s}
+\]
+とすれば$\nu_{a}\equiv \theta_{a}$と
+$\nu_{s}\equiv \theta_{s}$であり
+式 (\ref{al:4})から$\nu_{a}+\nu_{s}=\nu$
+となり，$\lambda\equiv \mu$
+から$\nu_{a}\ll \mu$と$\nu_{s}\perp \mu$
+が成り立つ．
+
+
+
+
+$(3)$を示そう．
+今
+\[
+\nu(E)
+=
+\int_{E}\frac{1}{t}\ d\theta
+\]
+なので
+\[
+\nu_{a}(E)
+=
+\int_{E}\frac{1}{t}\ d\theta_{a}
+=\int_{E}\frac{h}{t}\ d\lambda
+=\int_{E}\frac{sh}{t}\ d\mu
+\]
+となるから
+\[
+D=
+\frac{sh}{t}
+\]
+とすれば良い．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}
+W. Rudin, 
+\textit{Real and complex analysis}, 
+3rd ed.,  McGRAW--Hill. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

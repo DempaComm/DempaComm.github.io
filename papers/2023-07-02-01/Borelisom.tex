@@ -1,0 +1,2093 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{enumitem}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\newtheorem*{prob}{問題}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+
+\DeclareMathOperator{\mean}{\mathbb{E}}
+\DeclareMathOperator{\varian}{\mathbb{V}}
+
+
+
+
+\newcommand{\myomega}{\omega_{0}}
+\newcommand{\mycantor}{{}^{\myomega}2}
+\newcommand{\mycantort}{{}^{<\myomega}2}
+\newcommand{\mybairetb}{{}^{<\myomega}\myomega}
+\newcommand{\mycantorb}{{}^{\myomega\times \myomega}2}
+\newcommand{\mybaire}{{}^{\myomega}\myomega}
+
+\newcommand{\mybb}[1]{\mathfrak{B}(#1)}
+\newcommand{\mypow}[1]{\mathfrak{P}(#1)}
+
+\newcommand{\myff}{\frown}
+
+\newcommand{\mypo}{\star}
+
+\newcommand{\myppp}[2]{#1_{\#}#2}
+
+\newcommand{\mynbd}[1]{N_{#1}}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ボレル同型の定理と確率空間の同型定理}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書ではボレル空間同士の同型，
+確率空間同士の同型，そしてボレル集合同士の同型定理を紹介する．
+
+
+ポーランド空間が絶対$G_{\delta}$であることは証明なしで使う．
+
+
+以下では$\myomega=\zz_{\ge 0}$
+とし離散位相が入っているものとする．
+
+
+$A$と
+$B$を集合とするとき記号${}^{A}B$で
+$A$から$B$への写像全体の集合を表すとする．
+この記法は$\mathrm{Map}(A, B)$を省略していると考えるとわかりやすいと思う．
+$A$の有限部分集合$S$を用いて$r\colon S\to B$
+と表される写像について$\mynbd{r}$で
+$f\in {}^{A}B$でなおかつ$f|_{S}=r$となる元全体の集合を表すとする．このとき$\mynbd{r}$全体の集合系は$B$に離散位相を導入した場合の
+${}^{A}B$の各点収束の位相を生成する．
+またこの位相は$B$に離散位相を入れて$\card(A)$個直積した直積位相と一致する．
+
+記号
+$\mycantor$
+は$\myomega$から$2=\{0, 1\}$への写像全体を表す．
+この空間に直積位相(写像としてみると各点収束の位相)
+を入れたものをカントール集合と呼ぶ．
+
+
+記号$\mybaire$は$\myomega$から$\myomega$への写像全体であり，そして直積位相が入っているとする．
+この空間はBaire空間とか無理数の空間とか呼ぶ．
+
+
+
+記号$\mybairetb$で，
+ある$n$を使って$s\colon n\to \myomega$と表すことのできる写像$s$全体を表すとする．
+ここで$n=\{0, \dots, n-1\}$である．
+またこのときこの$n$を$|s|$で表す．
+ここで$\emptyset\in \mycantor$に注意せよ．
+そして$s, t\in \mybairetb$について
+記号$s\le t$はある$n\le |t|$が存在して$t|_{n}=s$
+となることを意味する．
+そして$s\perp t$はある$i<\min\{|s|, |t|\}$について
+$s(i)\neq t(i)$を意味する．
+そして$s\in \mybairetb$と$i\in $に対して
+$s\myff i$
+は写像
+$s\myff 
+i\colon n+1\to \myomega$で
+$s\myff i|_{n}=s$
+で$s\myff i(n)=i$となるものを表すとする．
+$s\colon n\to \myomega$はその値を用いて
+$s(0)\myff s(1)\myff \dots\myff s(n-1)$と書かれることもあるのかも．
+
+
+記号$\mycantor$
+で，ある$n$を使って$s\colon n\to 2$と表すことのできる写像$s$全体を表すとする．ここで$n=\{0, \dots, n-1\}$である．
+これは$\mybairetb$の部分集合である．
+
+
+
+
+
+\section{ボレル空間のボレル同型}\label{sec:bb}
+この節では非可算なポーランド空間はどれもこれも
+互いにボレル同型であることを証明する．
+
+位相空間$X$の開集合から生成される$\sigma$-代数を
+$X$の\textbf{ボレル集合族}と呼び，
+その元を\textbf{ボレル集合}と呼ぶ．
+記号$\mybb{X}$という記号で$X$のボレル集合族を表す．
+写像$f\colon X\to Y$
+が\textbf{ボレル写像}であるとは
+任意の$B\in \mybb{Y}$
+に対して$f^{-1}(B)\in \mybb{X}$
+となることである．
+また，
+写像$f\colon X\to Y$
+が\textbf{余ボレル写像}であるとは任意の$A\in \mybb{X}$
+に対して$f(A)\in \mybb{Y}$
+となることをいう．
+写像$f$がボレルかつ余ボレルであるとき
+\textbf{双ボレル}であるという．
+双ボレルな単射を\textbf{双ボレル埋め込み}と呼ぶ．
+写像$f\colon X\to Y$
+は全単射でなおかつ双ボレルであるとき
+\textbf{ボレル同型写像}であるといい，
+$X$と$Y$は
+\textbf{ボレル同型}であるという．
+
+集合$S$に対して$\mypow{S}$
+で$S$の冪集合，つまり$S$の部分集合全体を表すことにする．
+
+この文書においては
+以下の定理を用いてボレル同型を構成する．
+\begin{thm}[双ボレル埋め込みに関するベルンシュタインの定理]\label{thm:bern}
+$X$と$Y$をポーランド空間とし，
+$f\colon X\to Y$と$g\colon Y\to X$を双ボレルな単射写像とする．
+このときボレル同型$h\colon X\to Y$
+が存在する．
+\end{thm}
+\begin{proof}
+証明は通常のベルンシュタインの定理と全く同じである．
+それがどのようなものであったのか思い出そう．
+写像$\Phi\colon \mypow{X}\to \mypow{X}$
+を$\Phi(A)=X\setminus g(Y\setminus f(A))$
+とする．この$\Phi$には不動点，すなわち
+$\Phi(E)=E$となる$E\in \mypow{X}$
+が存在すること，そしてそれがボレル集合として選べることを示そう．
+各$n\in \zz_{\ge 0}$集合$W_{n}$を以下のように帰納的に
+構成する．$W_{0}=\emptyset$
+であり，一般に$W_{n+1}=\Phi(W_{n})$と定義する. 
+そして$E=\bigcup_{n\in \zz_{\ge 0}}W_{n}$
+と定義する．このとき$f$と
+$g$が共に単射であることから
+$\Phi(E)=\bigcup_{n\in \zz_{\ge 0}}\Phi(W_{n})=E$
+となることがわかるので$E$は$\Phi$の不動点である．
+また$f$と$g$が共に双ボレルであることから
+$E$は$X$のボレル集合であることに注意しよう．
+写像$\Phi$の定義から
+\[
+X\setminus g(Y\setminus f(E))=E
+\]つまり
+\[
+g(Y\setminus f(E))=X\setminus E
+\]
+であり，
+\[
+g^{-1}(X\setminus E)=Y\setminus f(E)
+\]
+である．
+よって写像$h\colon X\to Y$を
+\[
+h(x)=
+\begin{cases}
+f(x) & \text{$x\in E$}\\
+g^{-1}(x) & \text{$x\not \in E$.}
+\end{cases}
+\]
+でと定義するとこれは全単射になっている．
+また$E$がボレルで$f$と
+$g$が双ボレルなので$h$も双ボレルであり，
+全単射なので$h$はボレル同型である．
+\end{proof}
+
+
+\subsection{可能な限り初等的な証明}\label{sec:ele}
+この節ではボレル同型定理の可能な限り初等的な証明を与える．
+\begin{thm}\label{thm:ctor}
+位相的埋め込み$t\colon \mycantor \to \rr$
+が存在する．$\mycantor$はコンパクトなので，
+この埋め込みには双ボレル埋め込みにもなっている．
+\end{thm}
+\begin{proof}
+写像
+$t\colon \mycantor\to \rr$を$x=(x_{i})_{i\in \zz_{\ge 0}}\in \mycantor$
+に対して
+\[
+t(x)=\sum_{i=0}^{\infty}\frac{x_{i}}{3^{i}}
+\]
+と定義する．$\mycantor$
+はコンパクトなので$t$が単射で連続であることを示せば位相的埋め込みであることがわかる．
+まず単射性を見よう．
+異なる二つの元$x, y\in \mycantor$をとる．
+そして$n$を$i\le n$ならば$x_{i}=y_{i}$
+で$x_{n+1}\neq y_{n+1}$
+となるものとする．
+このとき
+\[
+t(x)-t(y)=\sum_{i=n+1}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\]
+である．$x_{n+1}\neq y_{n+1}$
+なので$|x_{i}-y_{i}|\le 1$である．
+よって
+\begin{align*}
+|t(x)-t(y)|&=\left|\sum_{i=n+1}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}\right|
+=\left|\frac{x_{n+1}-y_{n+1}}{3^{n+1}}+
+\sum_{i=n+2}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\right|\\
+&\ge \frac{|x_{n+1}-y_{n+1}|}{3^{n+1}}
+-
+\left|
+\sum_{i=n+2}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\right|
+\ge \frac{1}{3^{n+1}}
+-\left|
+\sum_{i=n+2}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\right|
+\end{align*}
+となる．
+ここで
+\[
+\left|
+\sum_{i=n+2}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\right|
+\]
+を上から評価しよう．
+各$x_{i}$と$y_{i}$
+は$0$か$1$のどちらかの値しか取らないので
+$|x_{i}-y_{i}|\le 1$である．よって
+\[
+\left|
+\sum_{i=n+2}^{\infty}\frac{x_{i}-y_{i}}{3_{i}}
+\right|
+\le 
+\sum_{i=n+2}^{\infty}\frac{1}{3^{i}}
+\le \frac{3^{-n-2}}{1-3^{-1}}
+=\frac{3}{2}\cdot \frac{1}{3^{n+2}}=\frac{1}{2}\frac{1}{3^{n+1}}
+\]
+よって
+\[
+|t(x)-t(y)|
+\ge
+\frac{1}{3^{n+1}}-\frac{1}{2}\cdot \frac{1}{3^{n+1}}
+=\frac{1}{2}\cdot \frac{1}{3^{n+1}}>0. 
+\]
+よって$t(x)\neq t(y)$
+となるから単射である．
+次に連続性を見よう．
+$x\in \mycantor$とし，
+$n\in \myomega$を任意にとる．
+そして$y\in \mynbd{x|_{n}}$とする．
+このとき
+\[
+|t(x)-t(y)|
+\le 
+\sum_{i=n+1}^{\infty}\frac{|x_{i}-y_{i}|}{3^{i}}
+\le \sum_{i=n+1}^{\infty}\frac{1}{3^{i}}
+\le \frac{3}{2}\frac{1}{3^{n+1}}
+=\frac{1}{2}\frac{1}{3^{n+1}}
+\]
+となる．
+任意の$\epsilon$に対して$3^{-n-1}\le 2\epsilon$
+となるように$n$をとれば
+$t$が連続になることがわかる．
+\end{proof}
+
+
+\begin{thm}\label{thm:rtoc}
+双ボレル埋め込み
+$s\colon (0, 1)\to \mycantor$
+が存在する．
+\end{thm}
+\begin{proof}
+$x\in (0, 1)$に対して
+$s(x)$を$0$と$1$の列で$x$の
+2進数としての表示の係数を表すことにする．
+ただし二通りの表し方がある場合には$1$が無限に現れるものを採用する．
+まず$f\colon \mycantor\to [0, 1]$
+を$x$に対して$\sum_{i=0}^{\infty}x_{i}2^{-i}$
+を対応させる関数とする．
+このとき$f$は連続である．
+さらに
+$f\circ s=1_{(0, 1)}$である．
+よって
+$s$
+は単射である．
+写像
+$s$が双ボレルであることを示そう．
+ここで$x$が二進有理数なら$f^{-1}(x)$は二点であり
+そうでないならば$f^{-1}(x)$は一点になる．
+このことから$\mycantor$の任意の閉集合$K$について
+$f(K)$は閉集合であり
+可算集合$P$が存在して
+$f^{-1}(f(K))=K\cup P$
+となる．
+よって
+$f\circ s=1_{(0, 1)}$から$f(K)$を
+引き戻して
+$s^{-1}(f^{-1}(f(K))=f(K)$
+を得る．
+よって
+$s^{-1}(K\cup P)=f(K)$
+である．
+写像$s$は単射なので
+$s^{-1}(K)=s^{-1}(K\cup P)\setminus s^{-1}(P)
+=f(K)\setminus s^{-1}(P)$
+なので$s$はボレル写像である．
+さらに
+$(0, 1)$のコンパクト空間$L$に対して可算集合$Q$が存在して
+$s(L)=f^{-1}(L)\setminus  Q$となる．
+よって$s$が余ボレルであることがわかる．
+以上のことから$s$は双ボレルであることがわかる．
+
+多分$\sigma$コンパクトだとか双ボレルだとか適当な条件つけて，
+全射写像$f\colon X\to Y$
+が$Y$の可算個の点除いたら$f$が単射で除いた可算個の各店について$f$による引き戻しがたかだか可算だったら$Y$から$X$への双ボレル埋め込みが存在するというような定理があると思う．おそらくこれはKuratwski--Ryll-Nardzewski の選択子定理の雛形なのではないかと思う．
+\end{proof}
+
+
+\begin{cor}\label{cor:reqc}
+二つの空間
+$\rr$と
+$\mycantor$
+はボレル同型である．
+\end{cor}
+\begin{proof}
+定理 \ref{thm:ctor}と
+\ref{thm:rtoc}，そして
+定理 \ref{thm:bern}からわかる．
+\end{proof}
+
+\begin{thm}\label{thm:ctob}
+双ボレル埋め込み$s\colon \mycantor \to \mybaire$
+が存在する．
+\end{thm}
+\begin{proof}
+$\{0, 1\}$を$\myomega$に埋め込む写像から誘導される
+単射$s\colon \mycantor \to \mybaire$が位相的埋め込みになっている．$\mycantor$
+はコンパクトなのでこの埋め込みは双ボレルでもある．
+\end{proof}
+
+
+
+\begin{thm}\label{thm:btoc}
+双ボレル埋め込み$s\colon \mybaire \to \mycantor$
+が存在する．
+\end{thm}
+\begin{proof}
+$\mycantor$
+は$\mycantorb$
+と同相なので$\mybaire$
+を
+$\mycantorb$
+に位相的に埋め込むことを考える．
+$x\in \mybaire$
+に対して$(f_{x}(n, i))$
+を以下のように定義する．
+\[
+f_{x}(n, i)=
+\begin{cases}
+1 & \text{if $n\le x(i)$;}\\
+0 & \text{$x(i)<n$.}
+\end{cases}
+\]
+そして
+$F\colon \mybaire\to \mycantor$
+を
+$F(x)=(f_{x}(n, i))_{(n, j)\in \myomega\times \myomega}$
+これは単射であり，
+連続でもある．
+この写像が何なのか説明しよう．
+この写像$f_{x}(n, i)$は
+$\myomega\times \myomega$
+の第$i$行に$x(i)+1$個の$1$を$0$列目から連続して書き込んだ元であり，それ以降はずっと$0$になっているものである．
+
+位相的埋め込みであることを示すために
+$F(x_{m})$が$F(a)$に収束したとしよう．
+$k\in \zz_{\ge 0}$
+とし，$m_{k}=1+\max_{1\le i\le k}a_{i}$
+と定義する．
+写像$r\colon [0, m_{k}]\times [1, k]\to 2$
+を$r(n, i)=f_{a}(n, i)$と定義し，
+$V_{k}=\mynbd{r}$とする．
+この$V_{k}$は
+を$F(a)$の近傍であり，
+その元は$[0, m_{k}]\times [1, k]$
+の範囲で$F(a)$の成分と一致している
+ようなもの全体である．
+このとき
+十分大きい番号$n$で，
+$F(x_{m})\in V_{k}$
+であり$V_{k}$と$F$の定義から
+$x_{m}$と$a$の第$k$成分は一致しているので
+$x_{m}$と$a$が近いことがわかる．
+よって$n\to \infty$のとき
+$x_{m}\to a$となる．
+よって$F$は位相的埋め込みである．
+これも少し説明しよう．$F(a)$は
+と$F(x_{m})$が$V_{k}$の意味で近ければ，
+$f_{x_{m}}$は$f_{a}$の第$i(\le k)$行の初めて$0$が現れる
+列まで一致している．$f_{x_{m}}$の定義からして，
+初めて$0$が現れる列まで一致していると，第$i$列の$1$の個数を数えて
+$x_{m}(i)=a(i)$となることがわかるので
+$x_{m}$と$a$は$\mybaire$の直積位相で近いということがわかる．
+
+$F$が双ボレル埋め込みであることは$\mybaire$
+がポーランドであり，ゆえに絶対$G_{\delta}$
+であることからわかる．
+
+ところで，無理数の空間の位相的特徴付けを知っていれば，
+$\mycantor$から可算稠密部分集合を取り除くとそれは$\mybaire$に同相であることがわかる．
+\end{proof}
+
+
+\begin{cor}\label{cor:btoc}
+$\mybaire$
+と
+$\mycantor$
+はボレル同型である．
+\end{cor}
+\begin{proof}
+定理 \ref{thm:ctob}, 
+\ref{thm:btoc}に
+定理 \ref{thm:bern}
+を適用するとわかる．
+\end{proof}
+
+$\mybaire$から
+$\mycantor$への埋め込みは次の一般的な定理からもわかる．
+\begin{thm}[``$0$次元ウリゾーンの距離化可能定理'']
+\label{thm:0ury}
+$X$を可分距離空間とし，なおかつ$0$次元，
+つまりクロープンな集合からなる開基をもつとする．
+このとき$X$は$\mycantor$に埋め込み可能である．
+\end{thm}
+\begin{proof}
+$\{U_{i}\}$を$X$のクロープンな集合からなる開基であるとする．
+そして$f_{i}$を
+$U_{i}$の特製関数とする．つまり$x\in U_{i}$のとき$f_{i}(x)=1$でそれ以外の時$f_{i}(x)=0$とする．
+そして$F\colon X \mycantor$
+を$F(x)=(f_{i}(x))_{i\in \myomega}$
+とするとこれは位相的埋め込みになっている．
+\end{proof}
+
+\begin{thm}\label{thm:mainbb}
+以下の空間はボレル同型である．
+\begin{enumerate}
+\item 
+実数直線
+$\rr$
+\item 
+単位閉区間
+$[0, 1]$
+
+\item 
+単位開区間
+$(0, 1)$
+\item 
+無理数の空間，あるいはベール空間
+${}^{\myomega}\myomega$
+\item 
+カントール集合
+$\mycantor$
+\item 
+ヒルベルト立方体
+$[0, 1]^{\aleph_{0}}$
+\item 
+なんかでかい空間
+$\rr^{\aleph_{0}}$
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+まず$(0, 1)$
+と$[0, 1]$は互いに互いを位相的に埋め込めるので，
+ボレル同型になる．
+そして系 \ref{cor:reqc}から
+$\rr$, $\mycantor$がボレル同型であることがわかる．
+そして系 \ref{cor:btoc}から
+$\mycantor$と$\mybaire$
+がボレル同型でということがわかる．
+さらに$\rr$と$(0, 1)$が位相同型なので
+四つの空間
+$\rr$, $[0, 1]$, 
+$(0, 1)$, 
+$\mycantor$, 
+$\mybaire$
+は互いにボレル同型であることがわかる．
+ボレル同型写像$h\colon \rr\to \mybaire$
+をとり，
+$H\colon \rr^{\aleph_{0}}\to (\mybaire)^{\aleph_{0}}$
+を$H((x_{i}))=(h(x_{i}))$とするとこれはボレル同型になる．
+よって$\rr^{\aleph_{0}}$と
+$(\mybaire)^{\aleph_{0}}$はボレル同型である．
+そして明らかに$(\mybaire)^{\aleph_{0}}$
+と$\mybaire$は位相同型なので，
+$\rr^{\aleph_{0}}$
+と$\mybaire$はボレル同型である．
+$[0, 1]^{\aleph_{0}}$
+と他の空間とのボレル同型
+も同様に示せる．
+\end{proof}
+今から
+定理 \ref{thm:mainbb}の更なる拡張，
+つまり非可算なポーランド空間が全て同型であるということを証明を目指す．
+
+
+位相空間が完全であるとは孤立点を持たないことである．
+\begin{thm}[カントール・ベンディクソンの定理]
+\label{thm:cantorbedixon}
+任意のポーランド空間$X$について，
+$Q$を有限か可算集合になるような開近傍を持つ$X$の点全体とする．このとき$Q$は開集合でなおかつ可算集合になる．
+そして$X\setminus Q$
+は完全集合になる．
+\end{thm}
+\begin{proof}
+$Q$の各点
+$x$について$V_{x}$を$x$の可算な開近傍とする．
+このとき$Q=\bigcup_{x\in V_{x}}$である．
+この式から$Q$が開集合であることがわかる．
+今$X$がポーランドであることから特に可分であることがわかる．よってその部分空間である$Q$も可分である．
+ゆえに$Q$はリンデレフである．
+なので$\{V_{x}\}_{x\in Q}$から可算個の元を選んで$Q$を被覆するようにできる．各$V_{x}$は可算集合なので$Q$は可算集合である．最後に$X\setminus Q$
+が完全集合であることを示そう．
+任意の点$x\in X\setminus Q$
+を取ると任意の$x$の開近傍$V$について$V\cap (X\setminus Q)$は非可算なので$x$は孤立点ではない．
+よって$X\setminus Q$
+は完全集合である．
+\end{proof}
+
+\begin{thm}\label{thm:ctoX}
+$X$を非可算なポーランド空間とする．
+このとき位相的埋め込み$I\colon \mycantor\to X$
+が存在する．
+\end{thm}
+\begin{proof}
+定理 \ref{thm:cantorbedixon}
+より$X$を最初から完全集合であると仮定しても一般性を失わない．
+以下では$X$には完備な距離$d$
+が備わっているとする．
+カントールツリー$\mycantort$
+によって添字づけられた族
+$\{I(s)\}_{s\in \mycantort}$
+で以下を満たすものを構成する．
+\begin{enumerate}
+\item 
+各$I(s)$は$X$の非可算集合で閉な完全集合
+\item $s\le t$ならば$I(s)\subset I(t)$; 
+\item $s=t\myff 0$または$s=t\myff 1$ならば$
+\di I(s)\le 1/2\di I(t)$; 
+\item 
+任意の$s\in \mycantort$
+について$I(s\myff 0)\cap I(s\myff 1)=\emptyset$
+
+\end{enumerate}
+今からこのような族を構成していく．
+まず$\emptyset\in \mycantort$に対しては
+適当に$a\in X$をとって$I(\emptyset)=B(a, 1)$
+と定義する．
+次に$s\in \mycantort$に対して$I(s)$
+が構成されたとして$I(s\myff 0)$
+と$I(s\myff 1)$
+を構成する．
+今$I(s)$は完全集合で非可算なので
+適当に二点$a, b\in I(s)$
+と十分小さい$r\in (0, 2^{-100}\di I(s))$
+をとって$I(s\myff 0)=B(a, r)$
+$I(s\myff 1)=B(a, r)$
+とすれば条件は満たされる．
+さて，
+今$s\in \mycantor$とすると
+$\di (I(x|_{n}))\to 0$
+なので
+$X$の完備性から
+$\bigcap_{n\in \zz_{ge 0}} I(x_{n})$
+は一点集合となる．これを$f(x)$
+とし，写像$f\colon \mycantor\to X$
+を考えるとこれは連続で単射になっている．
+$\mycantor$はコンパクトなので
+$f$は位相的埋め込みになっている．
+\end{proof}
+
+\begin{thm}[``ウリゾーンの距離化可能定理'']
+\label{thm:ury}
+$X$を可分な距離化可能空間とする．
+このとき位相的埋め込み$I\colon X\to [0, 1]^{\aleph_{0}}$
+が存在する．
+さらに$X$がポーランドであるならば
+$I$は双ボレル埋め込みでもある．
+\end{thm}
+\begin{proof}
+証明を思い出すと埋め込みはわかる．
+後半はポーランド空間が絶対$G_{\delta}$
+であることからわかる．
+\end{proof}
+
+\begin{thm}\label{thm:XtoX}
+任意の二つの非可算なポーランド空間はボレル同型である．
+つまり任意のポーランド空間$X$は
+$\mycantor$とも同型だし，$\rr$とも同型である．
+\end{thm}
+\begin{proof}
+定理 \ref{thm:ury}から
+$X$は$[0, 1]^{\aleph_{0}}$
+に双ボレル埋め込みができる．
+定理 \ref{thm:ctoX}から
+$\mycantor$を
+$X$に位相的に埋め込めることができる．
+定理 \ref{thm:mainbb}から
+$\mycantor$
+と$[0, 1]^{\aleph_{0}}$
+とボレル同型なので
+$X$は$\mycantor$
+とボレル同型である．
+\end{proof}
+
+
+\subsection{ジェネトポわかってる人向けの証明}
+このサブセクションでは
+定理 \ref{thm:XtoX}のジェネトポの知識をふんだんに用いる証明を紹介する．
+\begin{thm}\label{thm:mainbb2}
+以下の空間はボレル同型である．
+\begin{enumerate}
+\item 
+カントール集合 $\mycantor$
+\item 
+無理数の空間$\mybaire$
+\item 
+$[0, 1]^{\aleph_{0}}$
+\item 
+任意の非可算ポーランド空間$X$
+\end{enumerate}
+\end{thm}
+\begin{proof}
+カントール・ベンディクソンの定理(定理 \ref{thm:ctoX}のことを指している)から$X$に
+カントール集合$\mycantor$が埋め込める．
+またウリゾーンの距離化可能定理(定理\ref{thm:ury})より，
+$X$は$[0, 1]^{\aleph_{0}}$
+に埋め込める．
+よって定理 \ref{thm:bern}を念頭に置くと$\mycantor$と$[0, 1]^{\aleph_{0}}$
+がボレル同型であることを示せば良いが，
+$\mycantor$とこれの可算直積は同相なので結局
+$\mycantor$と$[0, 1]$がボレル同型であることを示せば良い．
+これを遂行するためにこの二つの空間が無理数の空間
+$\mybaire$とボレル同型であることを示す．
+0次元ウリゾーンの距離化可能定理
+(定理 \ref{thm:0ury})より，
+$\mybaire$は$\mycantor$
+に位相的に埋め込める．$\mybaire$はポーランドなので
+この埋め込みは双ボレル埋め込みになっている．
+再びカントール・ベンディクソン
+(定理 \ref{thm:ctoX}のことを指している)より$\mybaire$
+にはカントール集合$\mycantor$
+が位相的に
+埋め込めるので
+定理 \ref{thm:bern}から$\mycantor$と$\mybaire$
+はボレル同型である．
+次に
+$[0, 1]$と$\mybaire$が同型であることを示そう．
+$A$を$[0, 1]$のなかの無理数全体とし，$B$を$[0, 1]$
+のなかの有理数全体とする．
+このとき無理数の空間の位相的特徴づけ(ジェネトポの知識)から
+$A$は$\mybaire$と同型である．この同相写像を$h\colon A\to \mybaire$とする．
+また$\mybaire$は可算離散空間を部分空間として含んでいるが，
+$A$に適当に番号をつけてこの$\mybaire$のなかの可算離散空間に移す写像を$r\colon B\to \mybaire$
+とする．
+もちろん$B$が可算であることから$r$は双ボレル埋め込みである．
+そして$\mybaire$の2個の
+位相的直和が$\mybaire$であることから以下のような単射写像
+$F\colon [0, 1]\to \mybaire$を構成できる．
+$F$は$A$上では位相的埋め込みであり，$A$上では$\mybaire$の可算離散空間に写像する．さらに$F(A)\cap F(B)\emptyset$である．
+具体的には$f\colon [0, 1]\to \{0\}\times \mybaire\sqcup \{1\}\times \mybaire$
+を$x\in A$のとき
+$f(x)=(0, h(x))$で$x\in B$のとき
+$f(x)=(1, r(x))$
+と定義して$\{0\}\times \mybaire\sqcup \{1\}\times \mybaire$と$\mybaire$の適当な同相写像を合成してやれば
+$F$が得られる．
+この$F$は双ボレル埋め込みである．
+また$A$と$\mybaire$
+が同相なので$\mybaire$は$[0, 1]$に位相的に埋め込めて
+$A$は$G_{\delta}$なので(というかポーランドなので絶対$G_{\delta}$である)この埋め込みは双ボレル
+でもある．
+よって
+定理 \ref{thm:bern}から$[0, 1]$
+と$\mybaire$
+はボレル同型である．
+以上で証明が終了する．
+\end{proof}
+\begin{rmk}
+以下の事実に注意しよう．
+\begin{enumerate}
+\item 
+位相空間$X$が$\mycantor$に同相
+であることは
+$X$がコンパクトで距離化可能で，なおかつ孤立点を持たないということと同値である．
+\item 
+位相空間$X$が$\mybaire$
+と同相であることは
+$X$は孤立点を持たず可分で距離化可能で，そして
+$X$の任意のコンパクト部分集合が内点を持たないことと同値である．
+
+\end{enumerate}
+\end{rmk}
+
+上で述べたボレル同型定理はいわば，ポーランド空間の中の
+非可算な$G_{\delta}$集合はどれもボレル同型ということを証明している．実は
+一般に濃度が等しいポーランド空間の中のボレル集合は$G_{\delta}$全てボレル同型である．このことはセクション\ref{sec:b3}で証明する．
+このセクションの次に直ちに
+セクション\ref{sec:b3}
+の内容をやってもいいのだが，
+初頭的な知識だけでここまでできるというものをお見せしたいのでこういう構成にしている．
+
+
+\section{確率空間の同型定理}\label{sec:pp}
+この節では非可算なポーランド空間に乗っかってる確率ボレル測度空間は同型を除いて一意的に定まってしまうことを証明する．
+
+ポーランド空間$X$上のボレル測度$\mu$の
+\textbf{台}
+$\supp \mu$
+とは包含関係について最大な開かつ零集合の補集合のことである．そのような最大な開集合が一意的に存在することは
+$X$が(遺伝的)リンデレフであることから従う．
+また，$\supp\mu$は閉集合であることに注意しよう．
+$\supp \mu=X$のとき，$\mu$
+は\textbf{フルサポート}であるという．
+一般の距離空間$X$とその上の確率ボレル測度$\mu$
+に関して極大な開零集合が取れることは
+\underline{\textbf{可測基数の非存在性}}
+とまあ大体おおよそ同値であるようだ．
+詳しくは\cite{colloq}を参照のこと．
+このことから$X$が可分と仮定した方が集合論的困難を考えずに済みそうだ．ただし\cite{colloq}を読めばわかるがseprability が$\aleph_{1}$
+ぐらいだったら極大な開零集合の存在は言えるようである
+(距離空間のパラコンパクト性を使ったりする)．
+これは$\aleph_{1}$が可測基数ではないという観察に基づいているようである．
+
+\textbf{以下では零集合といったら測度がゼロでなおかつボレルなものを指す．}
+
+
+\begin{lem}\label{lem:cptreg}
+$X$をポーランド空間とし，
+$\mu$をその上の確率測度とする．
+このとき任意のボレル集合$A$と
+任意の$\epsilon\in (0, \infty)$に対して
+コンパクト集合$K$が存在して
+$K\subset A$と
+$\mu(A\setminus K)<\epsilon$
+が成り立つ．
+
+\end{lem}
+\begin{proof}
+\cite{0}かもしくは
+\cite[命題 11]{hatena2}を参照のこと．
+\end{proof}
+
+(位相空間に乗っかってるとは限らない)
+測度空間$(X, \mu)$の\textbf{アトム}$A$とは，
+次の条件を満たす可測集合のことを言う．
+$\mu(A)>0$でなおかつ
+任意の可測集合
+$B\subset A$は
+$\mu(B)=0$
+かもしくは
+$\mu(B)=\mu(A)$
+である．
+一般にアトムは，極小でも一点集合とは限らないが
+(counting measureとか)(そもそも一般には一点集合が可測とは限らない)，
+ポーランド空間上の確率ボレル測度だと
+一点集合として選びなおせる．
+
+
+\begin{lem}\label{lem:atom}
+$X$をポーランド空間とし，$\mu$
+をその上の確率ボレル測度とする．
+そしてボレル集合$A$を$\mu$のアトムとする．
+このとき点$a\in A$
+が存在して$\mu(a)=\mu(A)$
+となる．
+\end{lem}
+\begin{proof}
+ポーランド空間の上の完備距離を一つ適当に固定する．
+ポーランド空間の上のボレル測度は
+（コンパクト集合を使う方の意味で）内部正則であるため
+(補題 \ref{lem:cptreg})
+コンパクト集合$K$が存在して$K\subset A$
+であり$\mu(K)>0$を満たす．
+このとき$A$がアトムなので
+$\mu(A)=\mu(K)$となる．
+帰納的に次のようなコンパクト集合の列$\{K_{i}\}_{i\in \zz_{\ge 0}}$
+を構成できる．
+\begin{enumerate}
+\item 
+$K_{0}=K$
+\item 
+$K_{i+1}\subset K_{i}$
+かつ$\mu(K_{i})=\mu(K_{i+1})$
+\item 
+$\di K_{i+1}\le 1/2\di K_{i}$
+\end{enumerate}
+コンパクト性を使うと構成できます．
+このとき$\bigcap K_{i}$
+は一点集合$\{a\}$になるが
+有限測度の収束公式から
+$\mu(a)=\lim\mu(K_{i})=\mu(A)$
+なので$a$が求めるものである．
+\end{proof}
+
+
+ポーランド空間$X$上の確率ボレル測度
+$\mu$が
+\textbf{連続}であるとは任意の$x\in X$
+に対して$\mu(\{x\})=0$
+となるときにいう．
+
+\begin{lem}\label{lem:dirac}
+ポーランド空間上の確率ボレル測度$\mu$
+は連続なボレル測度
+$\theta$と高々可算個の重み付きディラック測度の和でかける．
+\end{lem}
+\begin{proof}
+$P=\{\,a\in X\mid \mu(\{a\})>0 \, \}$
+とすれば$\mu$が有限測度だから$P$
+は可算集合になるので証明はいける．
+\end{proof}
+
+測度空間$(X, \mu)$と可測空間
+と$Y$，そして可測写像$f\colon X\to Y$
+に対して$f_{*}\mu$という記号で以下のように定義される$Y$
+上の測度を表すことにする．
+$\myppp{f}{\mu}(A)=\mu(f^{-1}(A))$. 
+この測度を$f$による
+$\mu$の押し出し測度と呼ぶ．
+
+
+\begin{lem}\label{lem:meaeq1}
+$(X, \mu)$
+を非可算なポーランド空間上の連続な確率ボレル測度空間とする．
+ボレル同型
+$f\colon X\to \mycantor$
+が存在して$\myppp{f}{\mu}$
+は連続になる．
+\end{lem}
+\begin{proof}
+ボレル同型$f\colon X\to \mycantor$
+が存在するのでこれを押し出せば良い．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:fulltheta}
+$\theta$を
+$\mycantor$上の連続確率ボレル測度とする．
+このとき$\mycantor$の零集合$A$と
+ボレル同型$f\colon \mycantor\setminus A\to [0, 1]$
+が存在して
+$\myppp{f}{\theta}$は$[0, 1]$上の連続でフルサポートな
+確率ボレル測度となる．
+\end{lem}
+\begin{proof}
+$K=\supp \theta$とする．
+このとき$\theta$が連続測度であることから$K$
+には孤立点が存在しない．
+そして$\mycantor$の閉集合なので
+$K$は距離化可能なコンパクト空間である．
+よって$K$はカントール集合と同相である．
+ゆえに
+補題は$\theta$が
+フルサポートの場合のみ証明すれば良いので以下ではそのように仮定する．
+$f$を
+カントール集合の元を二進実数として解釈する写像とする．
+そして$N$を十分大きい番号ではずっと$0$が続く
+$\mycantor$の元全体とすると
+$f$は
+$\mycantor\setminus N$
+と
+$[0, 1]$の間のボレル同型となる．
+また，$f$は連続であることに注意しよう．
+確率測度$\myppp{f}{\theta}$
+が連続でフルサポートであることを示そう．
+まず$f$が単射なので一点を
+$f$で引き戻したものは一点になる．
+よって$\theta$の連続性から
+$\myppp{f}{\theta}$
+も連続になる．
+また$[0, 1]$の開集合$U$を取ると，
+$f$の連続性から$f^{-1}(U)$は$\mycantor\setminus N$
+の開集合になる．
+測度$\theta$はフルサポートなので$f^{-1}(U)$
+は$\theta$に関して正の測度を持つ．
+よって$\myppp{f}{\theta}$
+はフルサポートである．
+\end{proof}
+
+
+
+
+記号$\lambda$は$[0, 1]$上のルベーグ測度を表すものとする．
+
+\begin{lem}\label{lem:01push}
+$\theta$を$[0, 1]$上のフルサポートな
+連続確率測度とする．
+このとき
+ボレル同型
+$g\colon [0, 1] \to 
+[0, 1] $
+が存在して
+$\myppp{g}{\theta}=\lambda$
+となる．
+\end{lem}
+\begin{proof}
+$F\colon [0, 1]\to [0, 1]$
+を
+$F(t)=\theta([0, t])$
+とするとこれは連続な単調増加関数になる．
+今$\theta$がフルサポートなので
+これは狭義単調増加関数になるので$F$は同相写像になる．
+$f=F^{-1}$とおく．
+今から$\myppp{f}{\lambda}=\theta$となることを示そう．
+半区間$(a, b]$を考える．
+このとき$f^{-1}((a, b])=(F(a), F(b)]$
+なので
+\[
+\myppp{f}{\lambda}((a, b])=
+\lambda(f^{-1}((a, b]))
+=
+\lambda((F(a), F(b)])
+=
+F(b)-F(a)=\theta((a, b])
+\]
+が成り立つ．
+ゆえに
+$\myppp{f}{\lambda}=\theta$
+である．
+よって$g=F$とおけば$g$は$f$の逆写像になるので
+$\myppp{g}{\theta}=\lambda$となる．
+\end{proof}
+
+
+
+
+\begin{thm}\label{thm:probeq0}
+$X$を非可算なポーランド空間とし，
+$\mu$をその上の連続確率ボレル測度とする．
+このとき
+ある$(X, \mu)$の零集合$A$
+と$([0, 1], \lambda)$と
+ボレル同型
+$f\colon X\setminus A\to [0, 1]$
+が存在して
+$\myppp{f}{\mu}=\lambda$
+である．
+\end{thm}
+\begin{proof}
+補題 \ref{lem:meaeq1}よりボレル同型
+$r\colon X\to \mycantor$によって
+押し出された測度$\myppp{r}{\mu}$
+は$\mycantor$上の連続測度である．
+$\beta=\myppp{r}{\mu}$とおく．
+補題 \ref{lem:fulltheta}
+から
+$(\mycantor, \beta)$の
+零集合$Z$とボレル同型$w\colon \mycantor\setminus Z \to [0, 1]$
+が存在して
+$\myppp{w}{\beta}$は$[0, 1]$上でフルサポートになる.
+今$\beta=\myppp{r}{\mu}$なので$r^{-1}(Z)$
+は$(X, \mu)$の零集合であることに注意しよう．
+ここで$\gamma=\beta$とおく．
+そして補題 \ref{lem:01push}から
+ボレル同型$q\colon [0, 1]\to [0, 1]$
+が存在して$\myppp{q}{\gamma}=\lambda$
+となる．よって
+$A=r^{-1}(Z)$で
+$f=q\circ w\circ r$とすれば，
+$f\colon X\setminus A\to [0, 1]$はボレル同型だし，
+$\myppp{f}{\mu}=\lambda$となる．
+\end{proof}
+
+
+
+
+単位閉区間$[0, 1]$
+上の確率ボレル測度$\nu$
+が
+\textbf{標準測度}
+であるとは，たかだか可算個の点$\{p_{i}\}_{i\in S}$
+と非負の重み$c$と$\{b_{i}\}_{i\in S}$
+が存在して
+$\nu=c\cdot \lambda+\sum_{i\in S}b_{i}\cdot \delta_{p_{i}}$
+とかける時にいう，
+ここで$\delta_{p}$は点$p$に台を持つ
+ディラック測度のことである．
+もちろんここで$c+\sum_{i\in S}b_{i}=1$である．
+
+\begin{thm}\label{thm:probeq}
+$X$を非可算なポーランド空間とし，
+$\mu$をその上の確率測度とする．
+このとき
+ある$(X, \mu)$の零集合$A$と
+ある標準測度$\nu$
+と$([0, 1], \nu)$
+ボレル同型
+$f\colon X\setminus A\to [0, 1]$
+が存在して
+$\myppp{f}{\mu}=\nu$
+である．
+\end{thm}
+\begin{proof}
+上で述べたことを組み合わせるとわかる．
+補題 \ref{lem:dirac}から
+$\mu$は連続な測度$\theta$と可算このディラック測度の重み付きの和で書くことができる．
+そのディラック測度の和の台を
+$P=\{p_{i}\}_{i\in \myomega}$として
+$Y=X\setminus P$とするとこれはポーランド空間$X$
+の$G_{\delta}$集合になるのでポーランド空間である．
+今$c=\theta(X)$として
+$\beta=\frac{1}{c}\theta$という測度を考えると
+これは$Y$上の連続確率ボレル測度になっている．
+よって定理 \ref{thm:probeq0}より
+$(Y, \beta)$零集合$E$とボレル同型
+$g\colon Y\setminus E\to [0, 1]$
+が存在して
+$\myppp{g}{\beta}=\lambda$
+となる．
+つまり$\myppp{g}{\theta}=c\lambda$
+となる．
+今$[0, 1]$の濃度が$P$と同じ集合$Q$をとる．
+$F=g^{-1}(Q)$とすると
+$g$は依然としてボレル同型
+$g\colon X\setminus (E\cup F)\to [0, 1]\setminus Q$
+を与えている．
+そして適当に全単射$h\colon P\to Q$をとり，
+ディラック測度の重み付き和$\gamma=\mu-\theta$を
+$h$で押し出した測度を$\rho$とし，
+$\nu=c\lambda+\rho$と定義するとこれは
+標準測度である．
+また写像$f\colon X\setminus (E\cup F)\to [0, 1]$
+を
+\[
+f(x)=
+\begin{cases}
+g(x) & \text{$x\in Y\setminus (E\cup F)$;}\\
+h(x) & \text{$x\in P$}
+\end{cases}
+\]
+と定義すれば
+$\myppp{f}(\mu)=\nu$
+となっている．
+\end{proof}
+\begin{rmk}
+この文章の定理 
+\ref{thm:probeq}
+の証明のいいところは
+補題
+\ref{lem:fulltheta}において
+測度のサポートを考えてそれがカントール集合であることを用いる点である．
+\end{rmk}
+
+定理 \ref{thm:probeq}の
+系として次の同型定理を得る．
+\begin{thm}\label{thm:probeqX}
+$(X, \mu)$と$(Y, \theta)$
+を二つの非可算ポーランド空間の上の確率空間とする．
+そして$\mu$と$\theta$は連続的とする．
+このとき
+$(X, \mu)$
+と$(Y, \nu)$は
+零集合を除いて同型である．
+\end{thm}
+
+	
+	
+\section{ボレル集合のボレル同型}\label{sec:b3}
+
+この節ではポーランド空間のボレル集合は濃度が等しければ全部同型であることを証明する．
+この定理の証明のためには，ポーランド空間の間の
+ボレル単射は実は余ボレルになることを用いる．これからは
+ポーランド集合の間の写像の質について調べる．
+
+
+まずはボレル集合族と完全加法族に関する以下の命題から始める．
+\begin{prop}\label{prop:setalgebra}
+$X$をポーランド空間
+とする．
+$\mathfrak{M}$は$X$部分集合族であって，
+交わらない可算部分集合族の和集合は$\mathfrak{M}$に属し，
+可算部分集合族の共通部分は$\mathfrak{M}$に属するとする．
+このとき以下が成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:m:1}
+$\mathfrak{D}=\{\, A\in \mathfrak{M}\mid X\setminus A\in \mathfrak{M}\, \}$とすると，この族の
+交わらない可算部分集合族の和集合は$\mathfrak{D}$に属し，
+可算部分集合族の共通部分は$\mathfrak{D}$に属するとする．
+\item\label{item:m:2}
+$\mathfrak{M}$が$X$の開集合を含んでいるとする．
+このとき
+$\mathfrak{D}$は完全加法族であり，
+$\mybb{X}\subset \mathfrak{D}$である．
+特に$\mybb{X}\subset\mathfrak{M}$
+である．
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+
+[\ref{item:m:1}の証明]
+
+まず
+$\mathfrak{D}$が可算部分集合族の共通部分族で閉じていることを証明する．
+$\{A_{i}\}_{i\in \myomega}$を
+$\mathfrak{D}$の可算個の集合とする．
+すると$A_{i}\in \mathfrak{M}$でもあるし
+$X\setminus A_{i}\in \mathfrak{M}$でもある．
+そして
+$B_{0}=X\setminus A_{0}$, 
+$B_{1}=(X\setminus A_{1})\cap A_{0}$, \dots
+$B_{i}=(X\setminus A_{i})\cap \bigcap_{k=0}^{i-1}A_{k}$,
+\dots,  
+と定義する．これらは互いに素である．
+各$i\in \myomega$について$B_{i}\in \mathfrak{M}$である．
+このとき
+$X\setminus \left(\bigcap_{i\in \myomega} A_{i}\right)
+=\coprod_{i\in \myomega}B_{i}$であり，
+$\coprod_{i\in \myomega}B_{i}\in \mathfrak{M}$である．
+よって$\bigcap_{i\in \myomega} A_{i}\in \mathfrak{D}$である．
+
+次に$\mathfrak{D}$が互いに素な可算集合族の
+和集合が$\mathfrak{D}$に属することを証明する．
+$\{A_{i}\}_{i\in \myomega}$
+を$\mathfrak{D}$の互いに交わらない可算部分集合族とする．
+このとき$X\setminus A_{i}\in \mathfrak{M}$なので
+仮定から
+$\bigcap_{i\in \myomega}(X\setminus A_{i})\in 
+\mathfrak{M}$である．
+そして
+$X\setminus \left(\coprod_{i\in \myomega}A_{i}\right)
+=\bigcap_{i\in \myomega}(X\setminus A_{i})$
+なので
+よって
+$\coprod_{i\in \myomega}A_{i}\in \mathfrak{D}$
+である．
+
+
+[\ref{item:m:1}の証明終わり]
+
+
+[\ref{item:m:2}の証明]
+
+最初に$\mathfrak{D}$が完全加法族になっていることを示そう．$A\in \mathfrak{D}$とする．
+このとき
+$X\setminus (X\setminus A)=A\in \mathfrak{M}$
+なので$X\setminus A\in \mathfrak{D}$である．
+よって$\mathfrak{D}$は完全加法族になっている．
+次に$\mybb{X}$が$\mathfrak{D}$の部分集合であることを示す．
+$X$の閉集合は全て$G_{\delta}$集合なので
+仮定から
+$\mathfrak{M}$は$X$の全ての閉集合を含む．
+よって
+$\mathfrak{M}$は
+$X$の全ての開集合と閉集合を含んでいる．
+よって
+$\mathfrak{D}$もそうである．
+以上のことから
+$\mathfrak{M}\cap \mathfrak{D}$
+は
+$X$の全ての開集合を含み，そして完全加法族になっている．
+よって
+$\mybb{X}\subset \mathfrak{D}$
+である．
+また
+以上のことから
+$\mybb{X}\subset \mathfrak{M}$
+である．
+
+
+[\ref{item:m:2}の証明の終わり]
+
+以上で証明が終わる．
+\end{proof}
+
+\begin{prop}\label{prop:ZtoA}
+$X$をポーランド空間とする．
+このとき任意のボレル集合$A$に対してポーランド空間$Z$
+と連続全単射$f\colon Z\to A$が存在する．
+\end{prop}
+\begin{proof}
+$\mathfrak{E}$を
+$X$の部分集合であってポーランド空間からの連続全単射が存在するもの全体とする．
+今から
+$\mathfrak{E}$が$X$のボレル集合を全て含んでいることを証明する．
+そのために$\mathfrak{E}$が
+命題 \ref{prop:setalgebra}の仮定を満たすことを証明する．
+
+まず$X$の任意の開集合はそれ自身ポーランド空間なので
+$\mathfrak{E}$
+は$X$の開集合を全て含んでいる．
+
+次に
+$\mathfrak{E}$の互いに素な可算集合族
+$\{A_{i}\}_{i\in \myomega}$
+を考える．
+このとき$\coprod_{i}A_{i}\in \mathfrak{E}$
+を示そう．
+
+各$i\in \myomega$についてポーランド空間$Z_{i}$
+と連続全単射
+$f_{i}\colon Z_{i}\to A_{i}$
+をとる．そして写像
+\[
+F\colon \coprod_{\in \myomega}Z_{i}
+\to \coprod_{i\in \myomega}A_{i}
+\]
+を$x\in Z_{i}$のとき$F(x)=f_{i}(x)$と定義すると
+これは連続全単射になる．
+また直和空間$\coprod_{i\in \myomega}Z_{i}$
+もポーランド空間である．
+よって$\{A_{i}\}_{i\in \myomega}$である．
+
+今から
+$\mathfrak{E}$の
+可算部分集合族$\{A_{i}\}_{i\in \myomega}$
+について考える．各$i\in \myomega$に対して
+ポーランド$Z_{i}$と連続全単射
+$f_{i}\colon Z_{i}\to A_{i}$
+をとる．
+そして写像
+\[
+F\colon \prod_{i\in \myomega}Z_{i}\to X^{\myomega}
+\]
+を$F(x)=(f_{i}(x_{i}))_{i\in \myomega}$と定義する．
+さて対角線集合
+\[
+D=\{\, (x_{i})_{i\in \myomega}\mid 
+\text{任意の$i, j\in \myomega$について$x_{i}=x_{j}$}\, \}
+\]
+は$X^{\myomega}$の閉集合である．
+$F$は連続写像なので
+集合$A=F^{-1}(D)$は
+$\prod_{i\in \myomega}Z_{i}$
+の閉集合なので$A$はポーランド空間である．
+そして写像$g\colon A\to X$
+を$g(x)=f_{0}(x_{0})$とすると$g$は連続である．
+すると$g(A)$は$\bigcap_{i\in \myomega}A_{i}$
+に一致するので
+$\bigcap_{i\in \myomega}A_{i}\in \mathfrak{E}$
+である．
+よって$\mathfrak{E}$は$X$の全てのボレル集合族
+を含む．よって$X$のボレル集合はポーランド空間の連続全単射の像になる．
+\end{proof}
+
+\begin{df}[ルジンスキーム]\label{df:lusin}
+$\mybairetb$によって添字づけられた集合$X$の
+部分集合族$\{A_{s}\}_{s\in \mybaire}$が
+\textbf{ルジンスキーム}であるとは
+以下の条件を満たすときにいう．
+\begin{enumerate}
+\item 
+$s\le t$ならば
+$A_{t}\subset A_{s}$;
+\item 
+$s\perp t$ならば
+$A_{s}\cap A_{t}=\emptyset$.
+
+
+\end{enumerate}
+\end{df}
+
+\begin{prop}\label{prop:inj}
+任意のポーランド空間$X$に対して
+$\mybaire$の閉集合$A$と連続全単射写像
+$f\colon A\to X$
+が存在する．
+\end{prop}
+\begin{proof}
+適当に$X$と同じ位相を生成する距離関数$d$
+で$\di (X)\le 1$となるものをとる．
+$X$のルジンスキーム$\{F_{s}\}_{s\in \mybaire}$
+であって以下の条件を満たすものを構成する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:l:0}
+$F_{\emptyset}=X$;
+\item\label{item:l:1}
+各$F_{s}$は$X$の
+$F_{\sigma}$集合である;
+\item\label{item:l:2}
+$s\le t$に対して
+$\cl(F_{t})\subset F_{s}$が成り立つ;
+\item\label{item:l:3}
+各$s\in \mybairetb$に対して
+$\di F_{x|_{n}}\le 2^{-|s|}$
+である;
+\item\label{item:l:4}
+各$s\in \mybairetb$に対して
+$F_{s}=\bigcup_{i\in \myomega}F_{s\myff i}$が成り立つ;
+\item\label{item:l:5}
+$s\perp t$ ならば
+$F_{s}\cap F_{t}=\emptyset$;
+\end{enumerate}
+$s\in \mybairetb$の長さ$|s|$に関する再帰を以て上で述べた族を構成する．
+今$|s|\le n$となる$s\in \mybairetb$については$F_{s}$
+が構成されたとし，
+$\di(F_{s})\le 2^{-|s|}$となっているとする．
+このとき各$i\in \mybairetb$について$F_{s*i}$を以下のように定義する．
+今$F_{s}$は$F_{\sigma}$集合なので可算個の閉集合$C_{i}$
+が存在して$F_{s}=\bigcup_{i\in \myomega}C_{i}$
+となる．$r=2^{-100}(\di (F_{s})+2^{-|s|})$と置く
+($r=2^{-100}\di (F_{s})$と定義したいところだが，これが$0$になる可能性もあるのでこのように定義している)．
+$X$は可分なので可算個の点$p_{i}$が存在して
+$F_{s}\subset \bigcup_{i\in \myomega}B(p_{i}, r)$となる．族$\{C_{i}\cap B(p_{j}, r)\}_{(i, j)\in \myomega^{2}}$を適当に番号を付け直して$\{H_{i}\}_{i\in \myomega}$とする．各$H_{i}$は閉集合であり，
+$\di(H_{i})\le 4^{-1}(\di (F_{s})+2^{-|s|})\le 2^{-|s|-1}$で
+$F_{s}=\bigcup_{i\in \myomega}H_{i}$となる．
+そして各$i\in \myomega$に対して
+$F_{s\myff i}$を
+$F_{s\myff i}=H_{i}\setminus H_{i-1}$と定義する．
+ここで$H_{-1}=\emptyset$と定義している．
+このとき$F_{s*i}$は$F_{\sigma}$であり，
+求められていた条件を満たす．
+ここで，$\mybaire$の集合$A$を
+以下の条件を満たす$x$全体の集合とする．任意の$n\in \myomega$について
+$F_{x|_{n}}\neq \emptyset$となる．
+今から$A$が閉集合であることを証明しよう．
+$x\not\in A$をとる．
+このときある$n\in \myomega$が存在して
+$F_{x|_{n}}=\emptyset$となる．
+そして任意の$y\in \mynbd{x|_{n}}$をとると
+$y|_{n}=x|_{n}$なので
+$F_{y|_{n}}=\emptyset$であるから
+$y\not\in A$
+である．よって$A$は閉集合である．
+条件
+\ref{item:l:2}と
+\ref{item:l:3}から各点$x\in A$について
+$\bigcap_{i\in \myomega}F_{x|_{n}}
+=\bigcap_{i\in \myomega}\cl(F_{x|_{n}})$であり，
+この集合は空集合ではなく，一点のみからなる．
+そしてその一点を$f(x)$と書くことにする．
+今からこの写像$f\colon A\to X$が連続全単射であることを証明しよう．
+条件\ref{item:l:5}から$f$の単射性がわかる．
+条件\ref{item:l:4}から$f$の全射性がわかる．
+連続性を示そう．まず
+\begin{align}\label{al:eq:op}
+f^{-1}(F_{s})=A\cap \mynbd{s}
+\end{align}
+となる．
+任意に$X$の開集合$U$について
+条件\ref{item:l:4}から$U$は適当な$I\subset \mybairetb$
+が存在して$U=\bigcup_{s\in I}F_{s}$となるので
+$f^{-1}(U)=\bigcup_{s\in I}f^{-1}(F_{s})$である．
+式(\ref{al:eq:op})から各$f^{-1}(F_{s})$
+は$A$の開集合であるので，
+$f$は連続である．
+\end{proof}
+
+
+
+
+
+\begin{cor}\label{cor:sur}
+任意のポーランド空間$X$に対して
+全射連続写像$f\colon \mybaire\to X$
+が存在する．
+\end{cor}
+\begin{proof}
+$\mybaire$の任意の閉集合は全体空間の
+レトラクトになるので定理は正しい．
+\end{proof}
+\begin{rmk}
+というか一般的に超距離空間の空でない閉集合は
+全体空間のレトラクトになっている．
+
+\end{rmk}
+
+
+\begin{prop}\label{prop:ppp}
+$X$をポーランド空間とする．以下が成り立つ．
+\begin{enumerate}
+\item 
+$A$を
+$X$のボレル集合とすると
+$\mybaire$
+の閉集合$E$と連続全単射$f\colon E\to A$
+が存在する．
+\item 
+$A$を
+$X$のボレル集合とすると
+連続全射$f\colon \mybaire\to A$
+が存在する．
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+命題 
+\ref{prop:ZtoA}, 
+\ref{prop:inj}と
+系 \ref{cor:sur}
+からわかる．
+\end{proof}
+
+\begin{rmk}
+定理 \ref{thm:ctoX}
+と命題 \ref{prop:ppp}
+からポーランド空間の非可算なボレル集合は
+カントール集合を部分空間として含むことがわかり，
+このことからさらに連続体濃度をもつことがわかる．
+\end{rmk}
+
+ポーランド空間の部分集合が
+\textbf{解析集合}
+であるとはそれが
+ポーランド空間の連続像になる時にいう．
+
+ポーランド空間の部分集合$A$と$B$
+が\textbf{ボレル分離可能}であるとはあるボレル集合
+$C$が存在して$A\subset C$で
+$C\cap B=\emptyset$
+となるときにいう．
+\begin{prop}\label{prop:bsep}
+$X$をポーランド空間とし，
+可算部分集合族
+$\{A_{i}\}_{i\in \myomega}$と
+$\{B\}_{i\in \myomega}$は
+各$n, m\in \myomega$について
+$A_{n}$と$B_{m}$
+はボレル分離可能であるとする．
+このとき
+$\bigcup_{i\in \myomega}A_{i}$
+と
+$\bigcup_{i\in \myomega}B_{i}$
+はボレル分離可能である．
+\end{prop}
+\begin{proof}
+各$n, m$について
+ボレル集合$C_{n, m}$
+が存在して$A_{n}\subset C_{n, m}$
+かつ$C_{n, m}\cap B_{m}=\emptyset$
+となる．
+今
+$D_{n}=\bigcap_{m\in \myomega}C_{n, m}$とする．
+このとき任意の$m\in \myomega$について
+$D_{n}\cap B_{m}=\emptyset$である．
+そして$E=\bigcup_{n\in \myomega}D_{n}$
+とすると
+$\bigcup_{i\in \myomega}A_{i}\subset E$
+である．
+よって$E$はボレル集合であり，
+$\bigcup_{i\in \myomega}A_{i}$
+と$\bigcup_{i\in \myomega}B_{i}$
+はボレル分離可能である．
+\end{proof}
+\begin{rmk}
+命題 \ref{prop:bsep}
+の証明は正則リンデレフ空間が正規であることの証明とパラレルである．ボレル集合の理論のいいところは
+開集合性だとか閉集合性だとかを
+崩すような操作も許容される点である．
+\end{rmk}
+
+\begin{thm}[分離定理]\label{thm:bsepp}
+$X$をポーランド空間とし，$A$, 
+$B$を交わらない二つの解析集合とする．
+このときボレル集合$C$が存在して
+$A\subset C$と$C\cap B=\emptyset$
+を満たす．
+\end{thm}
+\begin{proof}
+背理法による．
+今$A$と$B$はボレル分離可能ではない
+と仮定する．
+連続全射$f\colon \mybaire\to A$
+と$g\colon \mybaire \to B$
+をとる．
+各$s\in \mybairetb$について
+$A_{s}=f(\mynbd{s})$かつ
+$B_{s}=g(\mynbd{s})$
+と定義する．
+このとき
+以下のような$x, y\in \mybaire$
+を構成する．
+\begin{enumerate}
+\item 
+任意の$n\in \myomega$
+は
+$A_{x|_{n}}$と$B_{y|_{n}}$は
+ボレル分離可能ではない．
+\end{enumerate}
+実際，
+命題\ref{prop:bsep}から
+集合
+$A=\bigcup_{i\in \myomega}A_{i}$
+と
+$B=\bigcup_{i\in \myomega}B_{i}$
+は分離可能ではないのでということから，ある
+$i, j$が存在して$A_{i}$と$B_{j}$
+はボレル分離可能ではない．
+$x_{0}=i$かつ$y_{0}=j$
+とすれば良い．帰納的に$x$と$y$
+が構成できる．
+よって$f(x)\in A$かつ$g(y)\in B$
+である．$X$はもちろんハウスドルフなので
+$U$と$V$が存在して$f(x)\in U$, 
+$g(y)\in V$かつ$U\cap V=\emptyset$
+が成り立つ．
+よって$f$の連続性から十分大きい$n$をとると
+$f(N_{x|_{n}})\subset U$
+で$g(N_{y|_{n}})\subset V$
+となる．
+ゆえに$A_{x|_{n}}$と
+$B_{y|_{n}}$はボレル分離可能である．
+これは矛盾である．
+\end{proof}
+\begin{rmk}
+この分離定理から，ポーランド空間の解析かつ余解析であるような部分
+集合はボレル集合になることがわかるが，
+この文書は教科書ではないので省略する．
+\end{rmk}
+
+\begin{prop}\label{prop:bsep2}
+$X$をポーランド空間とし，
+$\{A_{i}\}_{i\in \myomega}$
+を互いに素な$X$の解析集合の族とする．
+このとき互いに素な$X$のボレル集合の族
+$\{C_{i}\}_{i\in \myomega}$
+が存在して$A_{i}\subset C_{i}$
+を満たす．
+\end{prop}
+\begin{proof}
+定理 \ref{thm:bsepp}から
+異なる$n, m\in \myomega$
+についてボレル集合$E_{n, m}$であって
+$A_{n}\subset E_{n, m}$で
+$E_{n, m}\cap A_{m}=\emptyset$
+となるものが存在する．
+このとき
+$R_{n}=\bigcap_{m\neq n}E_{n, m}$
+とするとこれはボレルであり
+$A_{n}\subset R_{n}$でなおかつ
+$n\neq m$ならば
+$R_{n}\cap A_{m}\neq \emptyset$である．
+よって
+$C_{n}=R_{n}\setminus \bigcap_{m\neq n}R_{m}$
+とすると$\{C_{i}\}_{i\in \mybaire}$
+が求めるものになっている．
+\end{proof}
+
+\begin{lem}\label{lem:injcb}
+$X$をポーランド空間とする．
+このとき$X$に部分集合$S$に関する以下の条件は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:cbcb1}
+あるポーランド空間$W$とそのボレル集合$A$そして連続写像
+$f\colon A\to S$であって$f(A)=S$であり
+$f$は$A$上で単射であるようなものが存在する．
+\item\label{item:cbcb2}
+あるポーランド空間$W$とそのボレル集合$A$そして
+ボレル写像
+$f\colon A\to S$であって
+$f(A)=S$であり
+$f$は$A$上で連続となるものが存在する．
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+まず\ref{item:cbcb1}から\ref{item:cbcb2}は
+連続写像がボレルであることから従う．
+逆を示そう．
+今$W\times X$の中の部分集合
+$G=\{\, (s, t)\in W\times X\mid t=f(s), s\in A\, \}$
+を考える．
+写像$F\colon W\times X\to W\times W$
+を$F(s, t)=(f(s), t)$とする．このとき$F$はボレル写像である．
+また対角線集合$D=\{\, (a, a)\mid a\in W\, \}$は
+閉集合なので$F^{-1}(D)$はボレル集合である．
+そして$G=F^{-1}(G)$なので$G$はボレル集合である．
+第二成分への射影$p\colon W\times X\to X$は連続であり，
+$f$が$A$上で単射なので$p$も
+$G$上では単射である．
+そして
+$p(G)=f(X)=S$なので補題は示された．
+\end{proof}
+
+\begin{prop}\label{prop:anb}
+$X$と$Y$を
+ポーランド空間とする．
+そして$f\colon X\to Y$
+はボレル写像であるとする．
+$X$のボレル集合$A$について
+$f$が$A$上単射であるなら$f(A)$
+は$Y$のボレル集合になる．
+\end{prop}
+\begin{proof}
+補題
+\ref{lem:injcb}から$f$は連続であるとしても良い．
+また命題
+\ref{prop:ppp}
+から
+$X=\mybaire$かつ$A$は$\mybaire$の閉集合としても良い．
+各$s\in \mybairetb$について
+$B_{s}=f(A\cap \mynbd{s})$とすると
+族$\{B_{s}\}_{s\in \mybairetb}$
+は解析集合からなるルジンスキームである．
+命題 \ref{prop:bsep2}から，
+ボレル集合族からなるルジンスキーム
+$\{C_{s}\}_{s\in \mybairetb}$であって
+$C_{\emptyset}=Y$で
+$B_{s}\subset C_{s}$となるものが存在する．
+さらに木の深さに関する帰納法で
+ボレル集合からなる
+ルジンスキーム$\{E_{s}\}_{s\in \mybairetb}$を以下のように構成する．
+$|s|=0$のときは
+\[
+E_{\emptyset}=Y
+\]
+とする．
+$|s|=1$のときは
+\[
+E_{i}=C_{i}\cap \cl(B_{i})
+\]
+とする．
+一般に$|s|=n$まで定義されたとき$s\myff i$については
+\[
+E_{s\myff i}=E_{s}\cap C_{s\myff i}\cap \cl(B_{s\myff i})
+\]
+と定義する．
+これでルジンスキーム$\{E_{s}\}_{s\in \mybairetb}$
+が定義できた．これは
+$B_{s}\subset E_{s}$を満たすことに注意しよう．
+今から
+\[
+f(A)=\bigcap_{k\in \myomega}\bigcup_{s\in\mybairetb, |s|=k}E_{s}
+\]
+を証明する．この右辺の集合を
+$W$とする．
+まず
+$f$の単射性から
+\[
+f(A)=\bigcap_{k\in \myomega}\bigcup_{s\in\mybairetb, |s|=k}B_{s}
+\]
+がわかり，$B_{s}\subset E_{s}$なので
+$f(A)\subset W$となる．
+
+逆の包含関係を示そう．
+任意の点
+$p\in W$をとると，
+$W$の定義から
+$\mybairetb$内の
+ある列$\{s_{n}\}_{i\in \myomega}$
+であって任意の$n\in \myomega$について
+以下の条件を満たすものが存在する．
+\begin{enumerate}
+\item $|s_{n}|=n$;
+\item 
+$x\in E_{s_{n}}$. 
+\end{enumerate}
+このとき
+$s_{n}\le s_{n+1}$
+となることを示そう．
+もしも$s_{n}\le s_{n+1}$ではないとすると
+ある$m<n$
+が存在して$s_{n}(m)\neq s_{n+1}(m)$
+となる．ここで$u=s_{n}|_{m+1}$で
+$v=s_{n+1}|_{m+1}$と定義しよう．
+このとき
+$\{E_{s}\}_{s\in \mybairetb}$
+がルジンスキームであることから，
+ルジンスキームの定義の最初の条件を使って
+$p\in E_{u}$かつ$p\in E_{v}$となることがわかる．
+そして二番目の条件を用いると
+$E_{u}\cap E_{v}=\emptyset$なのでこれは矛盾する．
+よって$s_{n}\le s_{n+1}$である．
+以上のことから$x\in \mybaire$
+が(一意的に)存在して任意の$k\in \myomega$について
+$p\in E_{x|_{k}}$が成り立つ．
+このとき$p\in \cl(B_{x|_{k}})$でもある．
+すると点列$A$内の$\{y_{i}\}_{i\in \myomega}$
+が存在して以下を満たす．
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item\label{item:lu:a}
+任意の$i$について
+$y_{i}\in \mynbd{x|_{k}}\cap A$
+\item\label{item:lu:b}
+任意の$i$について
+$d(f(y_{i}), p)\le 2^{-i}$である
+\end{enumerate}
+条件
+ \ref{item:lu:a}より
+ $i\to \infty$のとき
+ $y_{i}\to x$となる．
+ よって$x\in A$である．
+すると$f$の連続性
+と条件
+\ref{item:lu:b}
+から$f(x)=p$となるので
+$p\in f(A)$である．
+つまり$f(A)=W$であるので定理は証明された．
+\end{proof}
+\begin{rmk}
+この
+命題
+\ref{prop:anb}
+からボレル埋め込みの定義の余ボレルという条件は過剰であったことがわかる．しかしもちろん，この定理はその過剰な仮定のもとでの理論で証明されている．
+\end{rmk}
+
+
+\begin{thm}\label{thm:mainbbbb}
+$X$と$Y$を
+ポーランド空間とし，$A$と$B$はそれぞれ$X$と$Y$
+のボレル集合とする．
+このとき$A$と
+$B$の濃度が等しければ$A$と$B$はボレル同型である．
+\end{thm}
+\begin{proof}
+$A$と$B$が可算の場合はどの全単射もボレル同型になるから
+$A$と$B$の濃度が等しく，その濃度が非可算の場合を調べれば良い．
+命題
+\ref{prop:ppp}から$\mybaire$の閉部分集合
+$S$と
+$T$，および連続全単射
+$f\colon S\to A$
+と$g\colon T\to B$が存在する．
+命題 \ref{prop:anb}
+より$f$と$g$はボレル同型でもあるので，
+$S$と$T$がボレル同型であることが示れば定理の証明は終わる．
+さて
+$S$と$T$はそれ自体ポーランド空間で非可算なので
+定理\ref{thm:XtoX}より
+ボレル同型である．これで証明が終わる.
+\end{proof}
+
+
+\begin{thm}\label{thm:maineqppp}
+$X$を非可算なポーランド空間とし，$\mu$をその上の確率測度とする．このとき標準測度$\nu$
+とボレル同型$f\colon X\to [0, 1]$が存在して
+$\myppp{f}{\mu}=\nu$を満たす．
+\end{thm}
+\begin{proof}
+$\mu$が連続の場合に証明すれば良い．
+定理 
+\ref{thm:probeq}より
+$X$の零集合$A$とボレル同型
+$h\colon X\setminus A\to [0, 1]$
+が存在して
+がボレル同型で
+$\myppp{h}{\mu}=\lambda$
+となる．
+ここで$[0, 1]$の非可算な零集合$T$をとる．
+すると$S=h^{-1}(T)$も非可算な零集合となる．
+よって
+$h\colon X\setminus (A\cup S)\to 
+[0, 1]\setminus (T)$もボレル同型でなおかつ
+$\myppp{f}{\mu}=\lambda$である．
+さて今，
+定理
+\ref{thm:mainbbbb}$ 
+を使ってボレル同型
+g\colon A\cup S\to T$をとる．
+そして
+$f\colon X\to [0, 1]$
+を
+\[
+f(x)=
+\begin{cases}
+h(x) & \text{$x\in X\setminus (A\cup S)$;}\\
+g(x) & \text{$A\cup S$.}
+\end{cases}
+\]
+と定義すると$F$はボレル同型で
+$\myppp{f}{\mu}=\lambda$である．
+\end{proof}
+%この定理はmm-spaceの間のBox距離を定義する際の礎になっている．
+
+系として次を得る．
+
+\begin{cor}\label{cor:probeqX}
+$(X, \mu)$と$(Y, \theta)$
+を二つの非可算ポーランド空間の上の確率空間とする．
+そして$\mu$と$\theta$は連続的とする．
+このとき
+ボレル同型$f\colon X\to Y$
+が存在して$\myppp{f}{\mu}=\nu$
+となる．
+\end{cor}
+
+
+
+二点集合上の一様測度の可算直積測度はカントール集合
+$\mycantor$上の連続な確率測度となる．この測度を$\alpha$で表そう．この確率空間は裏と表が平等なコインによる無限コイン投げの空間としてとてもよく使われる．
+非可算なポーランド空間上の連続な確率ボレル測度は
+全部$(\mycantor, \alpha)$に同型なので
+この世の(連続)確率測度はまあおおよそ大体無限コイン投げと同じということである．
+
+\section{注記:一般の距離空間の上のサポートについて}
+
+その昔バナッハが次のような問題, Measure Problemを考えたらしい．
+\begin{prob}
+次の条件を満たす集合$S$は存在するか？
+$S$の冪集合$\mypow{S}$上で定義された(つまり任意の部分集合が可測)連続な確率測度$\mu$が存在する．
+これは$S$を離散空間とみなしたときに，この空間の上の確率ボレル測度であって連続なものが存在するような$S$が存在するかという問題と同等である．
+\end{prob}
+この問題は$S$の濃度にしか依存しないので，
+上の条件を満たす基数は存在するかという話になる．
+この問題に肯定的な解，つまり上の条件を満たす基数が存在すると，\textbf{可測基数}という巨大な基数が存在するか，もしくは\textbf{弱到達不能基数}の存在が示せる．
+ちなみに可測基数は到達不能基数になってこれも弱到達不能基数になるのでいずれにせよ弱到達不能基数の存在がわかる．
+ちなみに弱到達不能基数が存在するとZFCの(集合の)モデルが存在することになるので，ゲーデルの第二不完全性定理から，公理系「ZFC+``Measure Problemが肯定的に成り立つ''」が無矛盾であることは，もはやZFCの無矛盾性を仮定しても証明できないことになる．
+このような集合論の話の詳細は，webページだと
+\cite{konnsan}と\cite{dig}や，
+成書だと\cite{Je}や\cite{rings}を参照されたい．
+
+また，Measure Problemの解になっているような
+基数と確率測度については
+補題
+\ref{lem:cptreg}が成り立たず，また
+補題
+\ref{lem:atom}も成り立たない．
+つまり一点集合ではないようなアトムが存在し得るし，
+その場合$\{0, 1\}$に値をとる連続測度をもつ基数が存在する．
+
+まあそれはさておき，とにかく次のことが知られている．
+\begin{prop}
+$\omega_{1}$はMeasure Problemの解にはならない．
+\end{prop}
+この命題の証明はいわゆるウラム行列を用いてなされる．
+証明は省略する．
+
+測度のサポートについて
+次のことがなりたつ．
+\begin{lem}\label{lem:a1}
+$X$を距離化可能空間とし，$\mu$を有限ボレル測度とする．
+このとき部分集合
+$S_{X, \mu}=\{\, x\in X\mid \text{$x$の任意の開近傍は正の測度を持つ}\, \}$
+は可分である．
+\end{lem}
+\begin{proof}
+$X$の距離を適当に$d$として，
+$S_{X, \mu}$の
+$2^{-n}$ネットを$R_{n}$とする．
+$R_{n}$はネットなので互いに素な
+開集合の族$\{U_{x}\}_{x\in R_{n}}$
+が取れる．このとき$\mu$が有限測度であり，
+各$U_{x}$は正の測度を持つので
+$R_{n}$は高々可算でなければならない．
+よって$\bigcup_{n\in \myomega}R_{n}$
+は$S_{X, \mu}$の可算部分集合で稠密になる．
+よって$S_{X, \mu}$は可分である．
+\end{proof}
+上で定義した$S_{X, \mu}$をサポートと定義したいところだが，
+$\mu(S_{X, \mu})=\mu(X)$となる保証がないのである．
+ただし$X$のseparabilityつまり$X$の稠密部分集合の最小濃度がMeasure Problemの解ではないならば
+$S_{X, \mu}$の補集合が零集合であることが示せる．
+実際，
+$E=X\setminus S_{X, \mu}$は開集合であるような零集合で被覆できるが，$E$はパラコンパクトなので，
+その被覆の細分の可算族$\{\mathcal{V}_{i}\}_{i\in \myomega}$であって，
+$\bigcup_{i}\mathcal{V}_{i}$が$E$の局所有限な細分で
+$\mathcal{V}_{i}$が疎であるようなものが存在する．
+各$\mathcal{V}_{i}$は互いに交わらない測度がゼロになる開集合からなり，その濃度は$X$のseparability以下である．
+もしも$\mathcal{V}_{i}$の和集合が正の測度を持つならば$\mu$から誘導される
+$\mathcal{V}_{i}$の濃度上の自然な測度はMeasure Problemの解になっている．
+よってseparabilityがMeasure Problemの解ではないならば
+$\mathcal{V}_{i}$の和集合は零集合であり，
+$E$も零集合になるので測度のサポートが定義できるのである．
+特に補題\ref{lem:a1} から$X$のseparabilityが$\aleph_{1}$
+くらいだったらサポートがちゃんと定義できるというわけである．
+\cite{colloq}ではもっといろいろなことが議論されている
+と思う．
+\begin{thebibliography}{99}
+\bibitem{konnsan}
+ミスターコン氏のホームページの記事
+「Measure Problemと可測基数」, 
+https://konn-san.com/math/measurable-cardinals.html. 
+(2023年07月08日閲覧)
+
+\bibitem{dig}
+でぃぐ氏のホームページの記事「可測基数ノート」, 
+https://fujidig.github.io/202301-measurable-cardinals/measurable-cardinals.pdf. 
+(2023年07月10日閲覧)
+\bibitem{hatena0}
+はてなブログ電波通信の記事
+「直積測度の構成について：確率論その０」, 
+https://concious4410.hatenablog.com/entry/2022/01/03/011245
+
+\bibitem{hatena1}
+はてなブログ電波通信の記事
+「大数の法則について：確率論その１」, 
+https://concious4410.hatenablog.com/entry/2022/01/16/233527
+
+
+\bibitem{hatena2}
+はてなブログ電波通信の記事
+「距離空間上の測度：確率論その２」, 
+https://concious4410.hatenablog.com/entry/2023/06/20/232112.
+
+
+
+
+
+\bibitem{0}小谷眞一, 「測度と確率」, 2005　岩波書店．
+
+\bibitem{1}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+
+\bibitem{3}K. R. Parthasarathy,  
+\textit{Probability measures on metric spaces.} 
+Academic Press. 
+
+\bibitem{acourse}
+S. M. Srivastava,
+\textit{A Course on Borel Sets}, 
+1991, 
+vol. 180, GTM, Springer. 
+\bibitem{CDST}
+A. S. Kechris, 
+\textit{Classical Descriptive Set Theory}, 
+1991, 
+vol. 156, GTM, Springer. 
+
+\bibitem{Bogachev}
+V. I. Bogachev, 
+\textit{Measure Theory, volume 2}, 
+2007, Springer. 
+
+\bibitem{colloq}
+E. Marczewki and R. Sikorski, 
+\textit{Measures in non-separable metric space}, 
+Colloq. Math. vol. 1 (1948), 
+133--139.
+\bibitem{Je}
+T. Jech, 
+\textit{Set Theory}, 3rd ed., 
+2003. Springer. 
+
+\bibitem{rings}
+L. Gillman and M. Jerison, 
+\textit{Rings of Continuous Functions}, 
+The university series in high mathematics, 1960, Springer, 
+reissued as 
+GTM 43, 1973,  Springer,
+reissued in 
+Dover Books on Mathematics, 
+2008, 
+Dober Publications. 
+\end{thebibliography}
+
+「知識は公共財」
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

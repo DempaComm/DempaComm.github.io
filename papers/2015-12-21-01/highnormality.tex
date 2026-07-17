@@ -1,0 +1,398 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{遺伝的正規とか完全正規とか}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では正規という言葉は$T_1$を仮定しない意味で用いる。
+\begin{df}
+位相空間$X$の２つの集合$A,B$が{\bf 離れている}とは
+\[
+CL(A)\cap B=\O,\ A\cap CL(B)=\O
+\]
+を充たすことである。
+\end{df}
+%遺伝的正規
+\begin{df}[遺伝的正規]
+位相空間が正規でかつ、その任意の部分空間が正規であるときその空間を遺伝的正規という。遺伝的正規空間が$T_1$も充たすとき$T_5$空間という。
+\end{df}
+\begin{prop}
+以下は同値
+\begin{align}
+&\mbox{$X$は遺伝的正規}\\
+&\mbox{$X$の任意の開集合は部分空間として正規}\\
+&\mbox{$X$の離れた２つの集合は開集合で分離できる}
+\end{align}
+\end{prop}
+\begin{proof}
+$(1)\To (2)$は明らかである。\par
+[$(2)\To (3)$]\par
+$A,B$を$X$の離れた２つの集合として$C=CL_X(A)\cap CL_X(B)$と置くとこれは閉集合であり、$(2)$から$O=X\setminus C$は正規空間である。そして
+\[
+CL_O(A)=O\cap CL_X(A)=CL_X(A)\setminus C,\ CL_O(B)=O\cap CL_X(B)=CL_X(B)\setminus C
+\]
+なので
+\[
+CL_O(A)\cap CL_O(B)=\O
+\]
+であり、$CL_O(A),\ CL_O(B)$は$O$の閉集合で$O$は正規空間なので$O$の開集合$U,V$が存在して
+\[
+CL_O(A)\subset U,\ CL_O(B)\subset V,\ U\cap V=\O
+\]
+となる。$A,B$が離れていることから$A\subset CL_O(A),\ B\subset CL_O(B)$で$O$の開集合は$X$の開集合でもあるので結局離れている２つの集合$A,B$は開集合で分離できる。\par
+[$(2)\To(3)$の証明終わり]\par
+[$(3)\To (1)$]\par
+$S$を$X$の部分空間とし、$A,B\subset S$を$S$の交わらない閉集合の任意の組とする。さて
+\[
+A=CL_S(A)=S\cap CL_X(A),\ B=CL_S(B)=S\cap CL_X(B)
+\]
+であるから、$B\subset S$から
+\[
+CL_X(A)\cap B=CL_X(A)\cap S\cap B=CL_S(A)\cap B=A\cap B=\O
+\]
+であり、同様に$A\cap CL_X(B)=\O$である。よって$A,B$は離れている。よって$(3)$より$X$の開集合で分離できるが、相対位相の定義から$S$でも$A,B$は$S$の開集合で分離できる。よって$S$は正規空間。つまり$X$は遺伝的正規空間である。
+\end{proof}
+\setcounter{equation}{0}
+
+%完全正規
+\begin{df}[ゼロ集合]
+位相空間$X$の部分集合$A$がゼロ集合であるとはある連続関数$f:X\to[0,1]$が存在して
+\[
+A=f^{-1}(0)
+\]
+を充たすことである。
+\end{df}
+
+\begin{df}
+位相空間$X$の２つの閉集合$E,F$が関数で完全に分離されるとは連続関数$f:X\to [0,1]$が存在して
+\[
+f^{-1}(0)=E,\ f^{-1}(1)=F
+\]
+を充たすこと。
+\end{df}
+\begin{df}[完全正規]
+位相空間が正規でかつ、その任意の開集合が$F_{\sigma}$集合であるときその空間を完全正規空間という。完全正規空間が$T_1$も充たすとき$T_6$空間という。
+\end{df}
+
+\begin{prop}
+以下は同値
+\begin{align}
+&\mbox{$X$は完全正規}\\
+&\mbox{$X$の任意の閉集合は$G_{\delta}$集合}\\
+&\mbox{$X$の任意の閉集合はゼロ集合}\\
+&\mbox{$X$の交わらない２つの閉集合の任意の組$E,F$は連続関数で{\bf 完全に}分離できる}\\
+&\mbox{$X$の閉集合上の$[0,1]$への連続関数はゼロ集合を保ったまま$X$へ拡張できる}
+\end{align}
+\end{prop}
+\begin{proof}
+$F_{\sigma}$集合の補集合は$G_{\delta}$集合で逆も成り立つので$(1)\iff(2)$はすぐにわかる。\par
+[$(2)\iff (3)$]\par
+$F$を$X$の閉集合とするとこれは$G_{\delta}$集合であるから開集合の列$\{O_n\}_{n\in \nn}を用いて$$F=\cap_{n\in \nn}O_n$と書ける。さて各$i\in \nn$
+\[
+F\subset O_i
+\]
+なので正規性からウリゾーンの補題を用いて連続関数$f_i:X\to [0,2^{-i}]$が存在して
+\[
+f_{i}|F\equiv0,\ f_i|X\setminus O_i\equiv  2^{-i}
+\]
+となる。そこで
+\[
+g(x)=\sum_{i\in \nn}f_i(x)
+\]
+と置くと$|f_i|\le 2^{-i}$なので$g$は絶対収束するから$g$は連続関数である。そして
+\[
+g(x)=0\iff \forall i\in \nn\ f_i(x)=0
+\]
+なので
+\[
+g^{-1}(0)=\bigcap_{n\in \nn}O_n=F
+\]
+となることがわかり$F$はゼロ集合となることがわかる。逆に任意の閉集合$F$がゼロ集合とするとある連続関数$f:X\to [0,1]$が存在して
+\[
+F=f^{-1}(0)
+\]
+となる。そこで$O_n=f^{-1}([0,1/n))$
+とすると$F=\bigcap_{n\in \nn}O_n$となり任意の閉集合が$G_{\delta}$集合になる。\par
+[$(2)\iff (3)$の証明終わり]\par
+[$(3)\iff (4)$]\par
+まず$(4)\To(3)$は閉集合$F$と$\O$を完全に分離する連続関数$f:X\to [0,1]$を考えると
+\[
+f^{-1}(0)=F
+\]
+となることからわかる。逆を示そう。\par
+$E,F$を$X$の交わらない２つの閉集合の任意の組としよう。また、２つの連続関数$a,b:X\to [0,1]$が存在して
+\[
+a^{-1}(0)=E,\ b^{-1}(0)=F
+\]
+となる。今、$E,F$は互いに交わらないので$a+b>0$となる。そこで連続関数$f:X\to[0,1]$を
+\[
+f=\frac{a}{a+b}
+\]
+とおけば、
+\[
+f^{-1}(0)=E,\ f^{-1}(1)=F
+\]
+となる。よって$E,F$は完全に関数で分離される。\par
+[$(3)\iff (4)$の証明終わり]\par
+[$(5)\iff (1)$]\par
+$(5)$が成り立つとすれば、閉集合$A$上の連続関数$0$を$X$上までゼロ集合を保ったまま拡張できる。つまり$A$はゼロ集合となるので$(5)\To (3)\To(1)$となりわかる。逆を示そう。\par
+今までで、$(1)$から$(4)$までの同値性はわかっている。$A$を任意の閉集合として$f:A\to [0,1]$を任意の連続関数とする。$X$は正規なのでティーチェの拡張定理より$f$の拡張$g:X\to[0,1]$が得られる。また、$A$はゼロ集合なので連続関数$h:X\to[0,1]$が存在して$h^{-1}(0)=A$となる。そして
+\[
+k=\max\{g,h\}
+\]
+とおけばこれは連続関数$k:X\to[0,1]$で確かに
+\[
+k^{-1}(0)=f^{-1}(0)
+\]
+となる。\par
+[$(5)\iff (1)$の証明終わり]\par
+\end{proof}
+\begin{prop}
+完全正規空間の部分空間は遺伝的正規である。また、完全正規空間の任意の部分空間も完全正規である。
+\end{prop}
+\begin{proof}
+$X$の任意の開集合は$F_{\sigma}$集合であり、正規空間の任意の$F_{\sigma}$集合は部分空間として正規なので$X$は遺伝的正規である。また、
+$X$の任意の部分集合$S$について、$X$の開集合と$S$の共通部分は$S$の開集合っであり、$S$の開集合は全てこのように得られる。また$X$の$F_{\sigma}$集合と$S$との共通部分は$S$の$F_{\sigma}$集合なので$S$が完全正規であることがわかる。
+\end{proof}
+
+%遺伝的正規だが完全正規でない例
+\begin{exam}[遺伝的正規だが完全正規でない例]非加算離散空間の１点コンパクト化：
+非加算集合を$D$として離散位相を与えて、それを１点コンパクト化した空間を$Q=D\cup\{\mgn\}$とする。このとき$Q$は遺伝的正規である。なぜなら部分集合$S\subset Q$を任意に考える。$S\subset D$のとき$S$は離散空間なので$S$は正規空間である。また$\mgn\in S$のとき$S$はコンパクトハウスドルフ空間になるので$S$は正規である。よって$Q$は遺伝的正規である。しかし、$\mgn$の近傍は$\mgn$を含む補有限集合で$D$は非加算なので$\{\mgn\}$が$G_{\delta}$集合ではない。よって$Q$は完全正規ではない。
+\end{exam}
+
+%正規だが遺伝的正規でない例
+\begin{exam}[正規だが遺伝的正規でない例]非加算離散空間の１点コンパクトの２個の直積空間：
+上で定義した$Q$について$E=Q\times Q$を考えると之はコンパクトハウスドルフ空間なので正規であるが、$E$は遺伝的正規ではない。$E$の正規でない空間を見出そう。$X=E\setminus \{(\mgn,\mgn)\}$は正規でない。特に$A=Q\times \{\mgn\}\setminus  \{(\mgn,\mgn)\}=D\times \{\mgn\}$と$B=\{\mgn\}\times Q\setminus \{(\mgn,\mgn)\}=\{\mgn\}\times D$は両方共$X=E\setminus \{(\mgn,\mgn)\}$の閉集合であるが、$X$の開集合で分離できない。そのことを示そう。$N=\{a_n\ |\ n\in \nn\}$を$D$の可算部分集合とする。この時$\mgn\in CL_{Q}(N)$である。さて$U,V$を$X$の開集合で$A\subset U,\ B\subset V$としよう。そして$n\in \nn$について
+\[
+U_n=\{y\in X\ |\ (a_n,y)\in U\}
+\]
+と置く。すると$X$が$E$の開集合であることから$U$も$E$の開集合になるので$U_n$は$Q$の開集合になる。そして$\mgn \in U_n$である。そして上で見たように$\{\mgn\}$は$G_{\delta}$集合では無いので
+\[
+\{\mgn\}\subsetneqq \bigcap_{n\in \nn}U_n 
+\]である。$p\in \bigcap_{n\in \nn}U_n\setminus \{\mgn\}$を適当に選び、
+\[
+O=\{x\ |\ (x,p)\in V\}
+\]
+と置くとやはり$O$は$Q$の開集合であり、$p\neq \mgn$より$(\mgn,p)\in B$なので$\mgn\in O$である。また$\mgn\in CL_{Q}(N)$なので$n$を十分大きく取ると$a_n\in O$である。このとき$O$の定義から$(a_n,p)\in V$であり、$p$の定義から$(a_n,p)\in U$なので結局
+\[
+U\cap V\neq\O
+\]
+となり、$A,B$が分離できないことが分かった。よって$E$は遺伝的正規ではない。\footnote{一般に$X$に$G_{\delta}$集合でない閉集合が存在し、$Y$に閉集合でない可算集合が存在するとき、$X\times Y$は遺伝的正規ではない。\cite{a}を参照のこと。ちなみに\cite{a}ではこの空間$E$が遺伝的正規だとの記述があるが間違いである。}
+\end{exam}
+
+%完全正規だが第一可算でない例
+\begin{exam}[完全正規だが第一可算でない例]距離化可能でない方のハリネズミ（パリ）空間\footnote{距離化可能なハリネズミ（パリ）空間もある}
+$A$を非加算集合とし、$I=[0,1]$と置く。そして$I_a=I\times \{a\}$として位相的直和空間
+\[
+B=\coprod_{a\in A}I_a
+\]
+を考え更に$\coprod_{a\in A}\{(0,a)\}$を１点に潰した空間を$H$とする。つまりは$B$に$B$の$(0,a)$という形の元を全て同一視し、その他の元は放ったらかす同値関係を与えるのだが、このとき商写像$p:B\to H$は閉写像となる。$B$は距離空間なので\footnote{一般に距離空間の位相的直和は距離空間になる。}特に完全正規で、一般に完全正規空間の閉像は完全正規なので$H$は完全正規となる。しかし、よく知られているようにこの空間は$(0,a)$の同値類という点で、第一可算公理を充たさない。
+\end{exam}
+
+%第一可算で完全正規だが距離付け可能でない例
+\begin{exam}[第一可算で完全正規だが距離付け可能でない例]ゾルゲンフライ直線：まずゾルゲンフライ直線は正規空間である。ゾルゲンフライ直線の任意の開集合は$[a,b)$という形の集合の和集合だが、このような集合は高々可算個の点とユークリッド直線$\rr$の開集合の和集合として書けるが、$\rr$の任意の開集合は$F_{\sigma}$集合でゾルゲンフライ直線の位相は$\rr$のそれより細かいので結局ゾルゲンフライ直線の開集合は$F_{\sigma}$集合となる。よってゾルゲンフライ直線は完全正規である。ゾルゲンフライ直線が第一可算公理を充たすことと、距離化不可能であることは周知のとおりである。
+\end{exam}
+
+
+\section*{おまけ}
+\begin{lem}
+位相空間$X$について、互いに交わらない閉集合の任意の組$E,F$について開集合の列$\{G_n\}_{n\in\nn}$が存在して
+\[
+E\subset \bigcup_{n\in \nn}G_n,\ \forall n\in \nn \ CL_X(G_n)\cap F=\O
+\]を充たすならば、$X$は正規空間である。
+\end{lem}
+\begin{proof}
+互いに交わらない閉集合の任意の組$E,F$を与えると、２つの開集合の列$\{G_n\}_{n\in\nn}$と$\{H_n\}_{n\in\nn}$が存在して
+\[
+E\subset \bigcup_{n\in \nn}G_n,\ \forall n\in \nn \ CL_X(G_n)\cap F=\O
+\]
+及び
+\[
+F\subset \bigcup_{n\in \nn}H_n,\ \forall n\in \nn \ CL_X(H_n)\cap E=\O
+\]
+を充たす。そして任意の$n\in \nn$に対して
+\[
+U_n=G_n\setminus \bigcup_{i\le n}CL_X(H_i),\ V_n=H_n\setminus \bigcup_{i\le n}CL_X(G_i)
+\]
+として$U=\bigcup_{n\in \nn}U_n,\ V=\bigcup_{n\in \nn}V_n$と置くと$CL_X(G_n)\cap F=\O,\ CL_X(H_n)\cap E=\O$から
+\[
+E\subset U,\ F\subset V
+\]
+がわかる。また$U\cap V=\O$は$n,m\in \nn$について
+\[
+U_n\cap V_m=\O
+\]
+を示せば良いが、これは
+$U_n\subset CL_X(G_n),\ V_m\subset CL_X(H_m)$からすぐにわかる。
+\end{proof}
+\begin{prop}
+正則リンデレフ空間は正規
+\end{prop}
+\begin{proof}
+上の補題を用いよう。$E,F$を交わらない閉集合の任意の組とする。さて正則性から任意の$x\in E$について開集合$U_x$が存在して
+\[
+CL(U_x)\cap F=\O
+\]
+となる。この時$\{U_x\}_{x\in E}$は$E$を被覆し、$E$はリンデレフ空間の閉集合だから$E$自身もリンデレフなので高々可算個の$\{U_x\}_{x\in E}$の部分被覆$\{O_n\}_{n\in \nn}$が存在して
+\[
+CL(O_n)\cap F=\O
+\]
+と
+\[
+E\subset \bigcup_{n\in \nn}O_n
+\]
+とを充たす。よって先の補題から正則リンデレフ空間は正規であることがわかる。
+\end{proof}
+
+\begin{prop}
+正規空間の$F_{\sigma}$集合は正規
+\end{prop}
+\begin{proof}
+やはり上の補題を用いよう。$X$を正規空間とし$R$はその$F_{\sigma}$集合で閉集合の列$\{L_n\}_{n\in\nn}$の和集合でかけているとしよう。そして$E,F$を$R$の交わらない閉集合の任意の組とする。このとき$X$の閉集合$A,B$を用いて
+\[
+E=R\cap A,\ F=R\cap B
+\]
+と書ける。さて$A\cap L_n=E\cap L_n$と$B$は$X$の交わらない２つの閉集合である。なぜなら$L_n$が閉集合であり、$A\cap L_n\ \cap B\subset E\cap F=\O$だからである。よって$X$の正規性から$X$の開集合$U_n$が存在して
+\[
+E\cap L_n\subset U_n,\ CL_X(U_n)\cap B=\O
+\]
+と出来る。$U_n\cap R$を考えて先の補題を用いれば定理は明白である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{kodama}児玉之行,永見啓応,位相空間論,岩波書店,1974
+\bibitem{tera}寺澤 順,トポロジーへの招待,日本評論社,2012
+\bibitem{a}M.Kat$\check{{\rm e}}$tov,{\it Complete normality of cartesian products},Fund. Math. 35(1948) 271-274
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

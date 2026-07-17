@@ -1,0 +1,133 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 群の固有作用 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+以下の論文は群の固有作用について調べようとした痕跡だと思われる．
+
+位相空間$X$とそれに左から作用している位相群$G$に関して
+その群作用が\textbf{固有}であるというのは，
+まあ色々定義はあるけれども，
+群作用から誘導される写像
+$G\times X\to X\times X; (g, x)\mapsto (g.x, x)$
+が固有写像になっていることである．
+ここで固有写像というのはブルバキの意味である．
+つまり閉写像であって一点の引き戻しがコンパクトになる写像ということであり，これは今ふうに言えば\textbf{完全写像}のことであるが，そもそも今は完全写像とかあんまり聞かない．
+どうしてこうなった．
+$G$とか$X$が都合のいい位相を持つ場合には
+上の固有写像は今ふうな意味での固有写像で構わない．
+つまりコンパクト集合の逆像がコンパクトというよく見るアレである．
+こういう話は，ブルバキが発端で，ブルバキに色々書いてて，ブルバキ読めば勉強できると思うがとにかく固有作用の論文を紹介する．
+
+
+さて最初に固有作用の定義を掲げておいてなんだが，
+固有作用の概念は異なるものが複数あるようだ．
+Biller の論文
+\cite{MR2040583}においては
+Bourbakiによる固有作用，
+Palaisによる固有作用，
+そしてBaum--Connes--Higsonに
+よる固有作用の三つの差異を扱っている．
+Biller Cartan 作用
+(Cartan action)の概念をまず導入する．
+これは群のスタビライザーと
+$\sigma_{G}(A, B)=\{g\in G\mid g.A\cap B \neq \emptyset \}$という集合を使って定義される概念である．
+Billerは
+上で述べた
+Bourbaki, 
+Palais, 
+Baum--Connes--Higson
+の固有作用はそれぞれCartan作用のであって
+商空間がハウスドルフであるもの，
+正則であるもの，パラコンパクトであるものに対応していることを証明しているようである(詳細にはちょっと違うかも)．
+
+
+
+論文
+\cite{MR2661569}
+では固有作用による商空間の位相がどうなるのか調査したようである．
+一般的な予想として，
+$X$をパラコンパクトな位相空間で
+局所コンパクト群$G$が固有に作用しているときに
+$X/G$がパラコンパクトになるかどうかというものと，
+局所コンパクト群$G$が距離空間$X$に固有に作用しているときに$X/G$が$G$不変な距離で距離化可能かどうかというものを挙げている．
+それで，$X$を\textbf{位相群}
+として$G$その局所コンパクト部分群としたとき$X$には
+$X$それ自身の演算から誘導される群作用があるが，
+こういう状況で商空間の位相を調べているようである．
+こういう状況では実は群作用は固有に勝手になっちゃって，
+$X$がパラコンパクトなら$X/G$もパラコンパクトであることが示されている．他にもいろいろ．例えば$X$と
+$G$に適切な条件を仮定して
+$\dim(X)\le \dim(X/G)+\dim(G)$
+ということなどを示している．
+
+論文
+\cite{MR2825345}
+はよくわかんないけど，
+$G$が
+$X$に固有に作用しているときに
+$\dim(X)$
+や
+$\dim(X/G)$
+の値を
+$G$の部分群$H$で割った商空間
+$X/H$の次元などから
+計算する方法などを証明しているようだ．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{pact.bib}
+
+
+
+\end{document}

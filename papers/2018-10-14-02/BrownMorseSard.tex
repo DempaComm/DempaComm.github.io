@@ -1,0 +1,1062 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\DeclareMathOperator{\di}{diam}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+\DeclareMathOperator{\rank}{rank}
+
+\title{Brown-Morse-Sardの定理について}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\section{準備}
+
+\begin{df}[測度零]
+$\rr^n$の部分集合$S$が測度零であるとは、任意の$\ep$に対して$n$次元区間の列$\{I_i\}$が存在して、$S\subset \bigcup_{i}I_i$と
+\[
+\sum_{i}|I_i|<\ep
+\]
+を充たすときに言う。これは$S$のルベーグ測度が$0$であることと同値である。
+\end{df}
+
+\begin{df}[臨界点とか]$U$は$\rr^m$の開集合とする。そして
+写像$f:U\to \rr^n$は$C^1$級とする。
+このとき各点$p\in U$に対して$f$のヤコビ行列$Jf(p)$が$m\times n$型行列として定義される。
+関数$f$の臨界点とは$Jf(p)$の階数が$n$より真に小さくなる点$p$のことを言う。$C_f$を$f$の臨界点全体の集合とする。また、$f(C_f)$に属する点を臨界値と言う。
+\end{df}
+$B_{\delta}^n(p)$で中心を$p$とする半径$\delta$の$\rr^n$における開球を表すことにし、$p=0$のときは単に$B_{\delta}^{n}$と書くことにする。
+\section{Morseの補題}
+\begin{lem}\label{ori}
+$U$は$\rr^m$の開集合とする。
+そして
+実数値関数$f:U\to \rr$は$C^1$級とし、
+$C^1$級写像$\phi:B_{\delta}^{n}(p)\to \rr^m$
+は$\phi(B_{\delta}^{n}(p))\subset U$
+を充たすもので、
+$b:(0,R)\to [0,\infty)$は単調増加関数とする。
+さて固定された$y\in B_{\delta}^{n}(p)$が任意の$x\in B_{\delta}^{n}(p)$について
+$\|x-y\|<R$充たすとき常に
+\[
+\left|\frac{\partial f}{\partial x_i}(\phi(x))\right|\le b(\|x-y\|)\|x-y\|^{k-1}
+\]
+を充たすならば、
+$f$には依存しない$K>0$が存在して任意の$x\in B_{\delta}^{n}(p)$に対して
+\[
+|f(\phi(x))-f(\phi(y))|\le Kb(\|x-y\|)\|x-y\|^{k}
+\]
+が成り立つ。
+\end{lem}
+\begin{proof}
+$F(t)=f(\phi(y+t(x-y)))$とすると$F(1)=f(\phi(x))$かつ$F(0)=f(\phi(y))$が成り立つ。さて$t\in (0,1)$が存在して
+\[
+F(1)-F(0)=F^{(1)}(t)
+\]
+を充たす。また
+\[
+F^{(1)}(t)=\sum_{i=1}^m \frac{\partial f}{\partial x_i}(\phi(y+t(x-y))\frac{\partial \phi^i}{\partial x_j}(y+t(x-y))(x_j-y_j)
+\]
+であるので
+\[
+|F^{(1)}(t)|\le L\|x-y\|\left(\sum_{i=1}^m\left|\frac{\partial f}{\partial x_i}(\phi(y+t(x-y)) \right|\right)
+\]
+となる。
+さて仮定から
+\[
+\left|\frac{\partial f}{\partial x_i}(\phi(y+t(x-y)) \right|\le b(\|y+t(x-y)-y\|)\|y+t(x-y)-y\|^{k-1}
+\]
+が成り立ち、$t\in (0,1)$なので
+\[
+\left|\frac{\partial f}{\partial x_i}(\phi(y+t(x-y)) \right|\le b(\|x-y\|)\|x-y\|^{k-1}
+\]
+となる。
+よって$K=mL$と置けば
+\[
+|f(\phi(x))-f(\phi(y))|\le Kb(\|x-y\|)\|x-y\|^{k}
+\]
+となることがわかる。
+\end{proof}
+
+
+
+\begin{df}[$C^k$級球形分解]$A$は$\rr^m$の部分集合、$P$は$\rr^m$の開集合とし、$A\subset P$を充すとする。
+$A\subset \rr^m$と$k\ge 0$に対して集合$X\subset \rr^m$と$\rr^m$の部分集合族$\mathcal{Y}\subset 2^{\rr^m}$と
+写像の族$\Phi=\{\phi_Y:B_Y\to \rr^m\}_{Y\in \mathcal{Y}}$の三つ組$(X,\mathcal{Y},\Phi)$が$(A,P)$の$C^k$級球形分解であるとは以下を充たすこととする。
+\begin{enumerate}
+\item $X$は可算集合
+\item $\mathcal{Y}$は可算族で、任意の$Y\in \mathcal{Y}$は$Y\subset P$を充たす。
+\item $\phi_Y$の定義域$B_Y$は$n_Y$次元ユークリッド空間の$0$を中心とした半径$\delta_Y$の開球である。
+\item $A\subset X\cup \bigcup_{Y\in \mathcal{Y}}Y$
+\item $\phi_Y$は$B_Y$から$\rr^m$の中への$C^1$級の同相写像で$Y\subset \phi_Y(B_Y)$を充たす。
+\item $\forall x, y\in B_Y\ \|x-y\|\le \|\phi_Y(x)-\phi_Y(y)\|$
+\item $P$上で定義され、
+$A$上で$0$となる$C^k$級の任意の実数値関数$f$に対して、
+実数$R_{Y,f}>0$と、
+$(0,R_{Y,f})$を定義域とする単調増加関数$b_{Y,f}$が存在して
+$\lim_{\ep\to 0}b_{Y,f}(\ep)=0$を充たし、
+かつ、
+すべての$x\in B_Y$と$\phi_Y(y)\in Y$を充たす$y\in B_Y$に対して、
+$\|x-y\|< R_{Y,f}$ならば
+\[
+|f(\phi_Y(x))|\le b_{Y,f}(\|x-y\|)\|x-y\|^k
+\]
+が成り立つ。
+\end{enumerate}
+また、組$(A,P)$に$C^k$級球形分解が存在するときに、$(A,P)$は$C^k$級球形分解可能であるという。
+\end{df}
+\begin{cau}
+$b_{Y,f}$は連続でなくともよい。
+\end{cau}
+いまから任意の$m$と任意の$k$及び
+$A\subset P$を充たす任意の$A\subset \rr^m$と
+任意の$\rr^m$の開集合$P$
+について、
+任意の$(A,P)$は$C^k$級モース球形分解可能であることを示す。
+\begin{lem}\label{cups}
+$\{A_i\}_{i\in \nn}$を$\rr^m$の部分集合族とし、$\{P_i\}$を$\rr^m$の開集合族とする。
+このとき各$(A_i, P_i)$が$C^k$級球形分解可能ならば、
+$\left(\bigcup_{i\in \nn}A_i, \bigcup_{i\in \nn}P_i\right)$もそうである。
+\end{lem}
+\begin{proof}
+$A_i$の$C^k$級球形分解を$(X_i,\mathcal{Y}_i, \Phi_i)$とする。このとき
+\[
+\left(\bigcup_{i\in \nn}X_i, \bigcup_{i\in \nn}\mathcal{Y}_i, \bigcup_{i\in\nn}\Phi\right)
+\]
+が$\left(\bigcup_{i\in \nn}A_i, \bigcup_{i\in \nn}P_i\right)$の$C^k$級球形分解になっている。このことは簡単に確かめられる。
+\end{proof}
+
+\begin{lem}\label{push}
+$F:D \to \rr^m$はユークリッド空間の開集合$D$上で定義された$C^k$級写像で
+\[
+\|x-y\|\le \|F(x)-F(y)\|
+\]
+を充たすとする。このとき、$A\subset \rr^m$について
+$(F^{-1}(A), F^{-1}(P))$が$C^k$級球形分解$(X,\mathcal{Y}, \Phi)$を持つならば、
+$(F(X), F_*(\mathcal{Y}),F\circ \Phi)$は$(A,P)$の$C^k$級球形分解になっている。ここで、
+\begin{align*}
+& F_*(\mathcal{Y})=\{F(Y)\mid Y\in \mathcal{Y}\}\\
+& F\circ \Phi=\{F\circ \phi_Y\mid Y\in \mathcal{Y}\}
+\end{align*}
+である。
+\end{lem}
+\begin{proof}
+一番最後の条件以外は容易に確かめられる。
+その最後の条件を調べよう。
+いま$f$は$P$上の$C^k$級関数で$A$上で$0$になっているとする。
+このとき、$f\circ F$は$F^{-1}(A)$上で$0$になっている。
+よって
+$\lim_{\ep\to 0}b_{Y,f\circ F}(\ep)=0$となる単調関数$b_{Y, f\circ F}$が存在してすべての$x\in B_Y$と$\phi_Y(y)\in Y$を充たす$y\in B_Y$に対して
+\[
+|f\circ F(\phi_Y(x))|\le b_{Y, f\circ F}(\|x-y\|)\|x-y\|^k
+\]
+が成り立つ。これを書き直すと、すべての$x\in B_Y$と$F\circ \phi_Y(y)\in F(Y)$を充たす$y\in B_Y$に対して
+\[
+|f(F\circ \phi_Y(x))|\le b_{Y,f\circ F}(\|x-y\|)\|x-y\|^k
+\]
+が成り立つことがわかるので、$b_{F(Y),f}=b_{Y,f\circ F}$とすれば、$(F(X), F_*(\mathcal{Y}),F\circ \Phi)$は最後の条件を充たし、これが$(A,P)$の$C^k$級球形分解であることがわかる。
+\end{proof}
+
+\begin{lem}\label{k0}
+任意の$m$について任意の$(A,P)$の$C^0$級モース球形分解が存在する。
+\end{lem}
+\begin{proof}
+ユークリッド空間の局所コンパクト性から直ちに補題は従う。
+\end{proof}
+
+\begin{lem}\label{m1}
+任意の$k$について任意の$A\subset \rr$の$C^k$級モース球形分解が存在する。
+\end{lem}
+\begin{proof}
+集合$X$を$A$の孤立点全体とすると$X$はその相対位相において可分距離空間であり、また、離散空間でもあるので、$X$は可算集合である。そして$\mathcal{Y}\subset 2^{\rr}$を、相対コンパクトな開区間の可算族で、$A\setminus X$を被覆し、その閉包が$P$の部分集合になっているものとする。$A\setminus X$はリンデレフで、$P$は開集合なのでこのような集合族は存在する。次に各$Y\in \mathcal{Y}$について$\phi_Y$を平行移動
+\[
+\phi_Y:(-\di(Y)/2, \di(Y)/2)\to Y
+\]
+として定義する。このような平行移動$\phi_Y$は$Y$について一意的に決まることと、平行移動なので、
+\[
+|\phi_Y(x)-\phi_Y(y)|=|x-y|
+\]
+となることに注意せよ。$\di(Y)$は$Y$の直径である。
+このように定義された$(X,\mathcal{Y}, \Phi)$は分解の条件を充たすことがわかる。一番最後の条件を示そう。
+$f$を$A$上で$0$となる関数とする。このとき
+$A\setminus X$の点はすべて$A$の集積点なので、
+任意の$x\in A\setminus X$について
+\[
+f^{(1)}(x)=f^{(2)}(x)=\dots =f^{(k)}(x)=0
+\]
+となることが帰納的に分かる。
+さて$x,y\in A$と$f$にテイラーの定理を使うと
+\[
+f(y)=f^{(k)}(\xi)(y-x)^k+f(x)
+\]
+となる$\xi$が$x$と$y$の間に存在することがわかる。そして$Y\in \mathcal{Y}$に対して、$R_{Y,f}$を
+\[
+R_{Y,f}=\sup\{r>0\mid B(A\cap Y, r)\subset P\}
+\]
+と定義し、$b_{Y,f}:(0,R_{Y,f})$を
+\begin{align}\label{kk}
+b_{Y,f}(\ep)=\sup\{|f^{(k)}(x)|\mid x\in B(A\cap Y,\ep)\}
+\end{align}
+と定義する。$\cl(Y)\subset P$に注意して、
+$f^{(k)}$がコンパクト集合上で一様連続であることを用いると
+\[
+b_{Y,f}(\ep)\to 0 \ (\ep\to 0)
+\]がわかる。
+そして(\ref{kk})から$x,y\in Y$について
+\[
+|f(x)-f(y)|\le b_{Y,f}(|x-y|)|x-y|^k
+\]
+となることがわかる。このことと、$|\phi_Y(x)-\phi_Y(y)|=|x-y|$から、$(X,\mathcal{Y},\Phi)$が$(A,P)$の$C^k$級球形分解であることがわかる。
+\end{proof}
+
+\begin{lem}\label{nx}
+任意に$m$を与え、$A\subset \rr^m$で、$P$は$\rr^m$の開集合で、$A\subset P$する。
+このとき$k$について任意の組$(A,P)$の$C^k$級モース球形分解が存在する。
+\end{lem}
+\begin{proof}
+いまから$m+k$に関する帰納法で証明を行う。
+$m+k=1$の時は上の補題である。また、$m>1$、$k>0$として証明しても一般性を失わない。
+いま$l+q<m+k$となる組$(l,q)$に対しては任意の部分集合$B\subset \rr^l$と$B\subset Q$となる組$(B,Q)$の$C^q$級モース球形分解が存在するしよう。
+\par
+$A\subset \rr^m$を任意に与える。そして
+\[
+\Theta=\{u\in C^k\mid u|A=0\}
+\]
+\[
+S=\{x\in A\mid\forall u\in \Theta\ \forall i\in \{1,2,\dots, m\}\  \partial_iu (x)=0\}
+\]
+\[
+T=A\setminus S
+\]
+と定義しておく。
+帰納法の仮定から$(S,P)$に$C^{k-1}$級モース球形分解$(X,\mathcal{Y},\Phi)$が存在する。
+これが$C^{k}$級球形分解にもなっていることを示そう。
+この$b$の条件をを各$\partial_j f$に適応すると、各$i\in \nn$ごとに$\lim_{\ep\to 0}b_{ij}(\ep)=0$となる単調関数$b_{ij}$が存在して各$j\in \{1,2,\dots, m\}$に対してすべての$x\in B_{\ep_i}^{n_i}$と$\phi_i(y)\in E_i$を充たす$y\in B_{\ep_i}^{n_i}$に対して
+\[
+|\partial_jf(\phi_i(x))|\le b_{ij}(\|x-y\|)\|x-y\|^{k-1}
+\]
+となる。ここで
+\[
+b_i(\ep)=\max_{j\in \{1,2,\dots, m\}}b_{ij}(\ep)
+\]
+とすれば
+すべての$x\in B_{\ep_i}^{n_i}$と$\phi_i(y)\in E_i$を充たす$y\in B_{\ep_i}^{n_i}$
+および任意の$j\in \{1,2,\dots,m\}$に対して
+\[
+|\partial_jf(\phi_i(x))|\le b_{i}(\|x-y\|)\|x-y\|^{k-1}
+\]
+が成り立つ。
+そして補題\ref{ori}から$\phi_i$について$\phi_i(y)\in A^1_v$ならば
+\[
+|f(\phi_i(x))|\le b_i(\|x-y\|)\|x-y\|^k
+\]
+が成り立つ。つまり、$(X,\mathcal{Y},\Phi)$は$S$の$C^k$級モース球形分解になっている。
+\par
+次に$T$について考察しよう。
+任意の$p\in T$についてある関数$g$で$g|_A=0$で$\partial_i g(p)\neq 0$であるようなものが存在する。
+適当に番号を入れ替えて$\partial_mg(p)\neq 0$としてよい。
+このとき陰関数定理から$p$の近傍$N_p$と
+$C^k$級写像$h_p:B_{\delta_p}^{m-1}\to \rr$が存在して$N_p$の点$(x_1,x_2,\dots x_n)$で
+\[
+g((x_1,x_2,\dots x_n)=0
+\]
+を充たすものは$x_n=h_p(x_1,x_2,\dots x_{n-1})$と書ける。
+さらに
+\[
+N_p\subset P
+\]
+と仮定しても良い。
+ここで
+\[
+H_p:B_{\delta}^{m-1}\to \rr^m; (x_1,x_2,\dots x_n)\mapsto (x_1,x_2,\dots ,h_p(x_1,x_2,\dots, x_{n-1}))
+\]
+を考えると、これは$C^k$級で各$x,y\in B_{\delta}^{m-1}$について
+\[
+\|x-y\|\le\|H_p(x)-H_p(y)\|
+\]
+であり、
+\[
+N_p\cap A\subset H_p(B_{\delta}^{m-1})
+\]
+を充たす。
+さて、もちろん$p\in N_p$なので
+\[
+T\subset \bigcup_{p\in T}N_p
+\]
+であり、$T$はリンデレフなので可算個の点$\{p_v\}_{v\in \nn}$が存在して
+\[
+T\subset \bigcup_{v\in \nn}N_{p_v}
+\]
+となる。表記を簡潔にするために$N_v=N_{p_v}$、$h_v=h_{p_v}$、$H_v=H_{p_v}$、$\delta_v=\delta_{p_v}$と書くことにする。
+このとき各$v\in \nn$について
+\[
+N_v\cap A\subset H_v(B_{\delta}^{m-1})
+\]
+が成り立つことに注意しよう。
+
+ここで帰納法の仮定から$m-1$と$k$に対す
+る定理から$(H_v^{-1}(N_v\cap A), H_v^{-1}(P))$は$C^k$級球形分解$(Z_v,\mathcal{W}_v, \Psi_v)$が存在する。補題\ref{push}から、$(H_v(Z_v), (Z_v)_*(\mathcal{W}_v), H_v\circ \Psi_v)$は$(N_v\cap A,P)$の$C^k$級球形分解になっている。
+さらに補題\ref{cups}から$(\bigcup_v(N_v\cap A),P)$は$C^k$級球形分解可能であり、さらに$T\subset\bigcup_v(N_v\cap A)$なので$T$も$C^k$級球形分解可能である。
+\par
+以上のことから$S$と$
+T$に$C^k$級球形分解が存在し、$A=S\cup T$なので補題\ref{cups}から
+$(A,P)$にも$C^k$級球形分解が存在する。
+\end{proof}
+
+\begin{lem}[Morseの補題]\label{mor}
+$k\in \nn$とし$A$は$\rr^m$の部分集合で$P\subset \rr^m$は開集合とし、$A\subset P$とする。このとき$\{A_i\}_{i\in \nn}$が存在して次を充たす。
+\begin{enumerate}
+\item $A\subset \bigcup_{i}A_i\subset P$
+\item $A_0$は高々可算集合。
+\item $A\subset C_f$となる任意の$f\in C^k(P)$に対して非増加関数の列$\{b_i:(0,R_{i,f})\to \rr\}_{i\in \nn}$が存在して$b_i\to 0$及び
+任意の$x, y\in A_i\ (i\ge 1)$について
+\[
+|f(x)-f(y)|\le b_i(\|x-y\|)\|x-y\|^k
+\]
+が成り立つ。
+\end{enumerate}
+この補題で述べられる$\{A_i\}_{i\in \nn}$を$(A,P)$の$C^k$級モース分解と呼ぶことにする。
+\end{lem}
+\begin{proof}
+$(X,\mathcal{Y},\Phi)$を先の補題から得られる$(A,P)$の$C_k$級球形分割であるとする。
+$A_0=X$として、$\mathcal{Y}$を適当に番号付して、$\mathcal{Y}=\{A_i\}_{i\in \nn}$とし、またこの番号付に応じて、$\phi_{A_i}=\phi_i$、$B_{A_i}=B_i$と書くことにする。
+条件の$(1)$、$(2)$はすぐにわかる。$(3)$を確かめよう。
+
+各$r\in \{1,2,\dots, m\}$に対して$\partial_rf|A=0$なので、球形分解の定義の$(7)$から、各$i\in \nn$に対して$b_{i,r}:(0, R_{i,r})\to \rr$が存在し、
+$\lim_{\ep\to 0}b_{i,r}(\ep)=0$を充し、かつ、全ての$x\in B_i$と$\phi_i(y)\in A_i$を充す$y\in B_i$に対して$\|x-y\|<R_{i,r}$ならば
+\[
+|\partial_rf(\phi_i(x))|\le b_{i,r}(\|x-y\|)\|x-y\|^k
+\]
+を充たす。
+さて、$R_i=\min_rR_{i,r}$と定め、
+\[
+b_{i}:=\max_r b_{r,i}
+\]
+と定めれば、$b_i:(0,R_i)\to \rr$は
+$\lim_{\ep\to 0}b_{i}(\ep)=0$を充し、かつ、全ての$x\in B_i$と$\phi_i(y)\in A_i$を充す$y\in B_i$に対して$\|x-y\|<R_{i}$ならば
+任意の$r\in \{1,2,\dots, m\}$について
+\[
+|\partial_rf(\phi_i(x))|\le b_{i}(\|x-y\|)\|x-y\|^k
+\]
+を充たす。
+
+さて、$x,y\in A_i$に対して$\phi_r(s)=x, \phi_r(t)=y$となる$s,t\in B_i$を取る。これは$A_i\subset \phi_r(B_i)$から可能である。
+さて、$b_i$の性質と補題\ref{ori}から
+\[
+|f(\phi_i(s))-f(\phi_i(t))|\le b_i(\|s-t\|)\|s-t\|^k
+\]
+を得る。ところで
+\[
+\|s-t\| \le \|\phi_i(s)-\phi_i(t)\|=\|x-y\|
+\]
+なので
+\[
+|f(x)-f(y)|\le b_i(\|x-y\|)\|x-y\|^k
+\]
+がわかる。
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+次の定理がいわゆるSadの定理である。
+
+\section{Brown-Morse-Sardの定理}
+\begin{thm}[Brown-Morse-Sard]\label{bms}
+$U\subset \rr^m$
+$f:U\to \rr^n$, $f$は$C^r$級とする。もし
+\[
+r\ge 1+ \max({m-n, 0})
+\]
+ならば$f(C_f)$は測度零である。
+\end{thm}
+証明は場合分けで行う。
+\begin{prop}\label{bms1}
+$m<n$の場合に定理\ref{bms}は成り立つ。
+つまり、$m<n$であり、
+$U$が$\rr^m$の開集合で
+$f:U\to \rr^n$が$C^1$級関数
+ならば$f(C_f)$は測度零である。
+\end{prop}
+\begin{proof}
+$O=U\times \rr^{n-m}$とし、$F:O\to \rr^n$を
+\[
+F(x_1,x_2,\dots, x_m, x_{m+1},\dots, x_n)=f(x_1,x_2,\dots, x_m)
+\]
+と定義すると、$f$が$C^{1}$級関数であるから$F$もそうである。
+このことから$F$は局所リプシッツ関数であることがわかる。よって$F$は零集合を零集合に写す。$C_f\times\{0\}\subset O$は$O$の零集合であり、$F(C_f\times\{0\})=f(C_f)$であるから定理は示された。
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%ここから加筆
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\begin{prop}\label{bms2}
+$m=n$の場合に定理\ref{bms}は成り立つ。つまり、
+$m=n$であり、
+$U$が$\rr^m$の開集合で
+$f:U\to \rr^n$が$C^1$級ならば
+$f(C_f)$は測度零である。
+\end{prop}
+\begin{proof}
+$U$の中の有界閉立方体$A$に対して$f(A\cap C_f)$が零集合であることを示せばよい。
+まず、$f$は$A$上リプシッツであることに注意しよう。
+各$a\in A$に対して
+$T_a=(T_a^1,T_a^2,\dots,T_a^n):A\to \rr^n$を
+\[
+T_a^i(x)=f_i(a)+\sum_{j=1}^n\partial_j f_i(a)(x_j-a_j)
+\]
+と定義する。すると
+\[
+f_i(x)-T_a^i(x)=\sum_{j=1}^n(\partial_jf(z_i)-\partial_j f_i(a))(x_j-a_j)
+\]
+$\partial_i f(x)$は$A$上一様連続なので$\ep\to 0$のとき$b(\ep)\to 0$となる$b$が存在して
+\[
+\|f(x)-T_a(x)\|\le b(\|x-a\|)\|x-a\|
+\]
+となる。
+$a\in C_f$と仮定すると、この点では写像のランクが落ちてるので$T_a$によって$A$は$n-1$次元部分空間$P_a$に写像される。
+そして$\|x-a\|<\ep$とすると$\|f(x)-f(a)\|\le L\ep$で$P_a$から$f(x)$までの距離は$b(\ep)\ep$より小さい。
+体積は高々$2^nL^{n-1}\ep^nb(\ep)$となる。
+\par
+さて$A$を幅が$1/k$となる$k$個の立方体に分割する。
+臨界点$a$を含む立方体は$a$を中心とする半径$\sqrt{n}/k$の球体の中に含まれる。
+この球体の像の体積は高々$2^nL^{n-1}(\sqrt{n}/k)^nb(\sqrt{n}/k)$である。
+立方体の個数は高々$k^n$個なので$f(A\cap C_f)$の体積は高々
+\[
+k^n2^nL^{n-1}(\sqrt{n}/k)^nb(\sqrt{n}/k)=2^nL^{n-1}n^{n/2}b(\sqrt{n}/k)
+\]
+$k\to \infty$とすると$f(A\cap C_f)$の体積が$0$であることがわかる。
+\end{proof}
+
+$n<m$の場合を証明するために補題をいくつか用意する。
+\begin{lem}
+$U\subset \rr^m$は開集合とし、$m>n$とする。
+$g:U\to \rr^n$を$C^q$級とし$S$を$f$のランクが$0$になる点全体とする。このとき$q\ge m/n$ならば$f(S)$の測度はゼロである。
+\end{lem}
+\begin{proof}
+$\{S_i\}_{i\in \nn}$を$S$の$C^q$級モース分解とする。
+各$g(S_i)$が零集合であることを示せば良い。
+$g=(g_1,g_2,\dots, g_n)$と成分表示する。
+このとき、$S$は階数が$0$の点全体であることから、$x\in S$について
+$x$は各$g_i$の臨界点になっている。モース分解の性質からある$b_i$が存在して
+$x,y\in S_i$とすると$\|x-y\|<\ep$ならば任意の$j\in \{1,2,\dots, n\}$に対して
+\[
+|g_j(x)-g_j(y)|\le b_{i}(\ep)\ep^q
+\]
+となる。
+このことから、$x,y\in S_i$で$\|x-y\|<\ep$ならば
+\[
+\|g(x)-g(y)\|\le \sqrt{n}b_i(\ep)\ep^q
+\]
+となる。
+$C$を$U$に含まれる閉立方体として、$g(S_i\cap C)$が零集合であることを示せば良い。
+$C$の一辺の長さを$L$とし、$C$を一辺が$L/k\ (k\in \nn)$の閉立法体$\{C_l\}$に分割すると、$C_l$が半径$\frac{L\sqrt{m}}{k}$の球に含まれるので、
+$f(S_i\cap C_l)$は半径が
+\[
+\sqrt{mn}\cdot b_i\left(\frac{L\sqrt{m}}{k}\right)\left(\frac{L\sqrt{m}}{k}\right)^q
+\]
+の球に含まれる。$\{C_l\}$の個数は$k^m$個なので、
+$f(S_i\cap C)$の測度は、球体の体積に関連した定数$K$を用いて、上から
+\[
+K\cdot b_i\left(\frac{\sqrt{m}}{k}\right)k^{m-qn}
+\]
+と評価できる。この評価は任意の$k\in \nn$で成り立つので、$k\to \infty$とすると$f(S_i\cap C)$の測度が零になることがわかる。
+\end{proof}
+
+\begin{lem}
+$A$を$f$の階数が$r$の点全体とする。このときもし$q\ge \frac{m-r}{n-r}$ならば$f(A)$は測度零である。
+\end{lem}
+\begin{proof}
+$r=0$の時は先の補題である。$p\in A$とすると$p$の近傍$N$とその局所座標系、$f(p)$周りの局所座標系が存在して、
+\[
+f_i(u_1,u_2,\dots, u_m)=u_i\ (i=1,\dots, r)
+\]
+となるものが存在する。$u_1,\dots,u_r$を固定して写像
+\[
+\eta:\rr^{m-r}\to \rr^{n-r}; x=(u_{r+1}, \dots, u_{m})\mapsto \eta(u)=(f_{r+1}(u,x), \dots, f_{n}(u,x))
+\]
+を考えると階数は零である。
+$P_{(u_1,\dots,u_r)}$を最初の座標が$u_1,\dots,u_r$であるような$\rr^n$の中の$n-r$部分空間とするとき$r=0$の場合、つまり先の補題から$f(N\cap A)\cap P_{(u_1,\dots,u_r)}$は$P_{(u_1,\dots,u_r)}$の中で測度零である。よって$f( N\cap A)$は任意の$P_{(u_1,\dots,u_r)}$との交わりが零集合なのでフビニの定理から$f(N\cap A)$も測度零である。
+\end{proof}
+
+\begin{prop}\label{bms3}
+$n<m$とする。
+$U\subset \rr^m$
+$f:U\to \rr^n$, $f$は$C^r$級とする。もし
+\[
+r\ge m-n+1
+\]
+ならば$f(C_f)$は測度零である。
+\end{prop}
+\begin{proof}
+まず、各$i\ (0\le i\le n-1)$について
+\[
+A_i=\{x\in U\mid \rank Jf(x)=i\}
+\]
+と定義する。
+もちろん
+\[
+C_f=\bigcup_{i=0}^{n-1}A_i
+\]
+が成り立つ。
+そして$r\ge m-n+1$のとき任意の$0\le i\le n-1$に対して$r\ge \frac{m-i}{n-i}$なので
+先の補題から$f(A_i)$が零集合であることがわかり、結局$f(C_f)$は零集合であることがわかる。
+\end{proof}
+
+命題 \ref{bms1}、\ref{bms2}、\ref{bms3}から定理\ref{bms}が成り立つ事がわかる。
+
+
+\section{Sardの補題にまつわる反例}
+Sardの定理に置いて、$r$の微分可能性が$1+\max(m-n,0)$より小さい場合何が怒るのか調べることは有意義である。今から以下の命題の異なる三つの証明を紹介して行く。
+\begin{prop}
+$C^1$級関数$f:\rr^2\to \rr$で、$f(C_f)$が正測度を持つものが存在する。
+\end{prop}
+
+
+\subsection{Whitneyによる構成}
+次の形のWhitneyの拡張定理を用いる。
+\begin{prop}
+$A$を$\rr^n$の閉集合とし、$n-1<s<n$とする。このとき任意の$s$-Hoelder写像$f$についてその拡張$F:\rr^n\to \rr$が存在して$\sigma_k\le n-1$を充たす$k\in Z_n$が存在して$x\in A$について
+\[
+\partial_kF(x)=0
+\]
+となる。
+\end{prop}
+\begin{prop}\label{whitney}
+$C^1$級写像$f:\rr^2\to \rr$が存在して$f(C_f)$が正測度を持つものが存在する。
+\end{prop}
+\begin{proof}
+写像$f_0,f_1,f_2,f_3:\rr^2\to \rr$を
+\begin{align*}
+&f_0(x)=3^{-1}x\\
+&f_1(x)=3^{-1}x+(2^{-1}, 1/6)\\
+&f_2(x)=3^{-1}x+(2^{-1}, 2^{-1})\\
+&f_3(x)=3^{-1}x+(1/6, 2^{-1})
+\end{align*}
+と定義する。$f_i(Q)\subset Q$を充すことに注意しよう。
+$Q(n_1)=f_{n_1}(Q)\ (n_1\in \{0,1,2,3\})$と定め、
+一般に、$Q(n_1, n_2,\dots, n_{k})$が定義されたとき、
+$Q(n_1, n_2,\dots, n_k,n_{k+1})=f_{n_{k+1}}(Q(n_1, n_2,\dots, n_k))$
+と定義する。
+そして
+\[
+A_k=\bigcup_{i\in \{1,2,\dots, k\},\ n_i\in \{0,1,2,3\}}Q(n_1, n_2,\dots, n_k)
+\]
+と定義し、
+\[
+P=\bigcap_{k\in \nn} A_k
+\]
+とする。$P$はカントール集合と同相である。
+各$x\in P$に対して、$x\in Q(a_1, a_2,\dots, a_k)$かつ
+$x\in Q(b_1, b_2,\dots, b_l)$で$k\le l$ならば、
+任意の$i\in \{1,2,\dots, k\}$に対して$a_i=b_i$であるから、$x$に対して
+無限列$\{n_i(x)\}_{i\in \nn}$で
+\[
+\{x\}=\bigcap_{k\in \nn}Q(n_1(x), n_2(x),\dots, n_k(x))
+\]
+となるものがただ一つ定まる。これを用いて、
+写像$f:P\to \rr$を
+\[
+f(x)=\sum_{k=1}^{\infty}\frac{n_k(x)}{4^k}
+\]
+と定義する。
+さて、$x,y\in P$について、$k$番目で初めて$n_k(x)\neq n_k(y)$となったとすると、
+\[
+3^{-k}\le \|x-y\|
+\]
+となる。
+そして
+\[
+|f(x)-f(y)|\le \sum_{i=k}\frac{3}{4^i}\le \frac{1}{4^{k-1}}
+\]
+となるので、$s=\log 4/\log 3$として
+\[
+|f(x)-f(y)|\le 4^{-1} \|x-y\|^{s}
+\]
+が成り立つ。
+また、任意の無限列$\{n_i\}_{i\in \nn}\ (n_i\in \{0,1,2,3\})$に対して
+$n_i(x)=n_i$となる$x\in P$が存在するので、
+$f(P)=[0,1]$である。$s>1$なので、
+この$f$に先の命題を適用し、
+任意の$k\in Z_2(1)$と$x\in P$に対して
+\[
+\partial_kF(x)=0
+\]
+で
+$F|P=f$となる
+$F$を得ると、$P\subset C_F$なので、
+\[
+[0,1]\subset F(C_F)
+\]
+となり、$F$は$C^1$級で$F(C_F)$は正測度を持つ。
+\end{proof}
+
+\begin{cau}
+実際のWhitneyの構成はカントール集合集合上ではなく$\rr^2$内の弧に対して拡張定理を用いている。つまりWhitneyは弧$\gamma$上でその勾配が$0$だが定数でない関数を構成した。この構成はカントールの悪魔の階段の二次元版とも思える。
+\end{cau}
+\begin{cau}
+任意の$m,n\in \nn\ (m>n)$について$C^{m-n}$級関数$f:\rr^m\to \rr^n$で、$f(C_f)$が正測度であるものの存在も示せる。
+\end{cau}
+
+\subsection{Grinbergによる構成}
+次のよく知られた事実がある。証明は省略する。
+\begin{prop}\label{cc02}
+$C+C=[0,2]$
+\end{prop}
+Grinbergはこの命題\ref{cc02}を用いてSardの定理にまつわる反例を構成した。
+その第一段階は次に述べるような関数を構成することである。
+\begin{prop}\label{cfcf}
+$C^1$級の関数$f:\rr\to \rr$で$C\subset f(C_f)$となるものが存在する。
+\end{prop}
+\begin{proof}
+カントール集合$C$は単位区間を三等分し、その真ん中の開区間を取り除き、そしてまた残った区間をそれぞれ三等分し、そのそれぞれの真ん中の開区間を取り除き・・・とこの操作を繰り返して得られる集合である。$C$の一次元ルベーグ測度は$0$であることに注意しよう。$\mathcal{I}$を$C$を構成するときに取り除かれる開区間全体の集合とする。
+$\mathcal{I}$は開集合$[0,1]\setminus C$の連結成分全体と一致する。
+$C$ が零集合であることから任意の$a\in C$について
+\[
+a=\sum_{I\in \mathcal{I}, I\subset [0,a]}|I|
+\]
+が成り立つ。ここで$|I|$は$I$の一次元ルベーグ測度を表す。
+%\[
+%\sum_{n=1}^{\infty}2^{n-1}\frac{1}{3^n}=1
+%\]
+$\sigma=6/\pi^2$とすると
+\[
+\sum_{n=1}^{\infty}\frac{\sigma}{n^2}=1
+\]
+となる。
+ここで、この級数を元に通常のものとは異なるカントール集合を構成する。
+まず、単位区間の真ん中の点（つまり$1/2$）を中心とする長さが$\sigma/1^2$の開区間（つまり$1/2$を中心とする半径$\sigma/2$の開球と同じである）を取り除く。
+そして、次に残った二つの区間のそれぞれ真ん中の点を中心とする長さ$\frac{1}{2}\frac{\sigma}{2^2}$の開区間を取り除く。
+この操作を繰り返してゆく。一般にこの操作を$n$回行うと、$2^{n-1}$個の長さが同じ閉区間が残る。$n+1$回めの操作はこの残った$2^{n-1}$個の閉区間の真ん中の点を中心とする長さ$\frac{1}{2^{n-1}}\frac{\sigma}{n^2}$の開区間を取り除く操作になる。この操作を繰り返して得られる集合を$D$とする。（正確には$n$回目に残る集合を$D_n$としたとき、この$D_n$全ての共通部分が$D$である。）
+さて、$n$回目の操作で取り除かれる開区間の長さの総和は$2^{n-1}\frac{1}{2^{n-1}}\frac{\sigma}{n^2}$なので、全体として、取り除かれる開区間の長さの総和は
+\[
+\sum_{n=1}^{\infty}2^{n-1}\frac{1}{2^{n-1}}\frac{\sigma}{n^2}=\sum_{n=1}^{\infty}\frac{\sigma}{n^2}=1
+\]
+となるから、$D$は零集合である。$\mathcal{J}$を$[0,1]\setminus D$の連結成分全体、つまり$D$を定義するときに取り除かれた集合全体とする。$\mathcal{J}$は可算集合であるが、適当に番号をつけて$[0,1]\setminus D=\bigcup_{k\in \nn}(p_k,q_k)$とする。
+%\[
+%\frac{\frac{1}{3^n}}{\frac{1}{2^{n-1}}\frac{1}{n^2}}=\frac{n^22^{n-1}}{3^n}\to 0
+%\]
+
+連続関数$T:\rr\to \rr$ で 任意の$t\in (0,1)$について$T(t)>0$任意の$t\not \in (0,1)$に対して$\ T(t)=0$ そして $\int_{\rr} T\ dt=1$
+を充すものを一つ取る。そして、各$k$について$n(k)$は、「$n(k)$回目に$(p_k,q_k)$が取り除かれる。」を充すような自然数とする。（つまり$n(k)$は$(p_k,q_k)$の世代数とする。）そして
+\[
+h_{k}(x)=\frac{1}{\sigma}\frac{n(k)^22^{n(k)-1}}{3^{n(k)}}T\left(\frac{x-p_k}{\frac{1}{2^{n(k)-1}}\frac{\sigma}{n(k)^2}}\right)
+=\frac{1}{\sigma}\frac{n(k)^22^{n(k)-1}}{3^{n(k)}}T\left(\frac{n(k)^22^{n(k)-1}}{\sigma}(x-p_k)\right)
+\]
+と$h_k:\rr\to \rr$を定義する。この$h_k$は
+\[
+\int_{\rr} h_k(t)\ dt=\frac{1}{3^{n(k)}}
+\]
+および
+\[
+\supp (h_k)=[p_k,q_k]
+\]
+を充す。
+さてここで、$h=\sum_{k}h_k$と定義する。
+$h$の連続性を調べよう。
+$\{(p_k,q_k)\}$は互いに交わらないので、連続性は$D$の点のみで調べれば良い。
+$T$は$T(0)=T(1)=0$を充しているので、$t\in D$について$h(t)=0$である。
+そして、
+$\frac{n^22^{n-1}}{3^n}\to 0$なので$h$が連続であることがわかる。
+関数$f:\rr\to \rr$を 
+\[
+f(x)=\int_{0}^{x}h(t)\ dt=\sum_k\int_{0}^{x}h_k(t)\ dt
+\]
+と定義する。
+$h$は連続なので$f$は$C^1$級関数になる。
+
+$\mathcal{A}_n$を$C$を構成するときに現れる第$n$世代の閉区間全体とし、
+$\mathcal{B}_n$を$D$を定義するときに現れる第$n$世代の閉区間全体とする。
+また、$\mathcal{A}=\bigcup_n\mathcal{A}_n$、$\mathcal{B}=\bigcup_n\mathcal{B}_n$とする。
+各$n$について$\mathcal{A}_n$は互いに交わらない$2^{n-1}$個の閉区間の族である。
+$I,J\in \mathcal{A}_n$について、任意の$x\in I$と任意の$y\in J$について$x<y$となっているときに$I\prec J$と定義する。$\mathcal{B}_n$にも同様に順序$\prec$を導入する。さて$\mathcal{A}_n$上でも$\mathcal{B}_n$上でも$\prec$は全順序になっており、$\mathcal{A}_n$と$\mathcal{B}_n$は濃度が同じ有限集合なので一意的に順序を保つ全単射$s_n:\mathcal{A}_n\to \mathcal{B}_n$が存在する。
+そして$s:\mathcal{A}\to \mathcal{B}$を$I\in \mathcal{A}$が$A\in \mathcal{A}_n$ならば$s(I)=s_n(I)$として定義する。
+
+各$x\in C$に対して、列$\{I_k\}\subset \mathcal{A}$で、$I_k\in \mathcal{A}_k$で
+\[
+\bigcap_kI_k=\{x\}
+\]
+を充すものが存在する。このような列は複数あることに注意せよ。そして
+\[
+\bigcap_ks(I_k)=\{y\}
+\]
+となる$y$が存在する。この$y$は列$\{I_k\}$の選び方に依らず一意的に存在するので、
+写像$\alpha:C\to D$をこの$x$に$y$を対応させる写像として定義する。
+
+$\mathcal{I}_n$を$C$を構成するときに取り除かれる第$n$世代の開区間全体とし、
+$\mathcal{J}_n$を$D$を定義するときに取り除かれる第$n$世代の開区間全体となる。
+もちろんこのとき$\mathcal{I}=\bigcup_n\mathcal{I}_n$、$\mathcal{J}=\bigcup_n\mathcal{J}_n$とする。
+上と同様にして$\mathcal{I}_n$と$\mathcal{J}_n$には全順序$\prec$が定義され、順序を保つ全単射$r_n:\mathcal{I}_n\to \mathcal{J}_n$が存在する。
+そして写像$r:\mathcal{I}\to \mathcal{J}$を$A\in \mathcal{I}$が$\mathcal{I}_n$ならば$r(A)=r_n(A)$として定義する。
+このとき
+\[
+r(\{I\in \mathcal{I}\mid I\subset [0,x]\})=\{J\in \mathcal{J}\mid J\subset [0,\alpha(x)]\}
+\]
+が成り立つ。
+
+任意の$a\in C$をとり$b=\alpha(a)\in D$とする。このとき$f^{\prime}(b)=h(b)=0$であり、
+\[
+f(b)=\sum_{k}\int_0^{b}h_k(t)\ dt=\sum_{k\in \nn, (p_k,q_k)\subset [0,b]}\frac{1}{3^{n(k)}}=\sum_{I\in \mathcal{I}, I\subset [0,a]}|I|=a
+\]
+であるので、$C\subset  f(C_{f})$を得る。
+（ちなみにこの構成だと$C=f(C_f)$までわかる。）
+\end{proof}
+先に述べた命題を用いればSardの定理にまつわる反例が次のように構成できる。
+\begin{prop}
+$C^1$級関数$g:\rr^2\to \rr$で$g(C_g)$が正のルベーグ測度を持つものが存在する。
+\end{prop}
+\begin{proof}
+関数$f:\rr\to \rr$を命題\ref{cfcf}で述べられた関数とする。そして
+関数$g:\rr^2\to \rr$を
+\[
+g(x,y)=f(x)+f(y)
+\]
+と定義する。すると
+$g$は$C^1$級写像であり、また
+\[
+J(g)(x,y)=0\iff(\partial_xf)(x)=0,\ (\partial_yf)(y)=0
+\]
+が成り立つことがわかる。
+よって
+\[
+[0,2]=C+C\subset g(C_g)
+\]
+であるから$g$が求める関数である。
+\end{proof}
+
+\subsection{Kaufmanによる構成}
+次のWhitneyの補題を用いる。
+\begin{prop}
+$J$を$\rr$の開区間とする。
+連続写像$w:J\to \rr$と閉集合$A\subset J$、$v\in \rr$、$a\in J$は以下を充たすとする。
+任意の$\ep$に対して$\delta>0$が存在して
+\begin{enumerate}
+\item $x\in A$かつ$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v\right|<\ep
+\]
+である。
+\item $x\in J\setminus A$かつ$|x-a|<\delta$ならば導関数$w^{\prime}(x)$が存在し、
+\[
+|w^{\prime}(x)-v|<\ep
+\]
+である。
+\par
+このとき$w$は点$a\in A$において微分可能で$w^{\prime}(a)=v$である。
+\end{enumerate}
+\end{prop}
+\begin{proof}
+任意の$a\in A$と任意の$\ep$に対して$\delta>0$が存在して任意の$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v\right|<2\ep
+\]
+を示せばよい。
+話を簡単にするために$a\le x$とする。
+$x\in J\setminus A$のときに目的の式を示せばよい。
+ここで$p_x$を$p_x\in A$で、$A\cap (p_x, x)=\O$となるものとする。
+$A$が閉集合なのでこのような$p_x$は存在する。
+また、$a\le p_x$である。
+$(2)$から$w$は開区間$(p_x, x)$で微分可能なので中間値の定理から
+\[
+w(x)=w(p_x)+w^{\prime}(c)(x-p_x)
+\]
+となる$c\in (p_x, x)$が存在する。
+さてこのとき、
+\begin{align*}
+\frac{w(x)-w(a)}{x-a}
+&=
+\frac{w(x)-w(p_x)}{x-p_x}\frac{x-p_x}{x-a}+\frac{w(p_x)-w(a)}{p_x-a}\frac{p_x-a}{x-a}\\
+&=
+w^{\prime}(c)\frac{x-p_x}{x-a}+\frac{w(p_x)-w(a)}{p_x-a}\frac{p_x-a}{x-a}
+\end{align*}
+となり、また、
+\[
+v=v\frac{x-p_x}{x-a}+v\frac{p_x-a}{x-a}
+\]
+なので
+\begin{align*}
+\left|\frac{w(x)-w(a)}{x-a}-v \right|
+\le
+|w^{\prime}(c)-v|\left|\frac{x-p_x}{x-a}\right| +\left|\frac{w(p_x)-w(a)}{p_x-a}-v\right|\left|\frac{p_x-a}{x-a}\right|
+\end{align*}
+である。さて$p_x$及び$c$の定義から$|c-a|<\delta$、$|p_x-a|<\delta$なので$|w^{\prime}(c)-v|<\ep$かつ$\left|\frac{w(p_x)-w(a)}{p_x-a}-v\right|<\ep$である。また、$p_x$の定義から$|x-p_x|\le |x-a|$かつ$|p_x-a|\le |x-a|$なので
+結局$|x-a|<\delta$ならば
+\[
+\left|\frac{w(x)-w(a)}{x-a}-v \right|<2\ep
+\]
+を得る。
+\end{proof}
+上の補題から次がわかる。
+%%%%%%%%%%
+%この補題注意
+%%%%%
+\begin{lem}
+$U\subset \rr^m$ は開集合とし、
+孤立点を持たないコンパクト集合$A\subset U$は内点を持たないとする。
+連続関数$F:U\to \rr^n$について、$F$は$U\setminus A$において$C^1$級で任意の$a\in A$に対して
+\[
+\lim_{x\in U\setminus A, x\to a}JF(x)=0
+\]
+とし、さらに$a\in A$とについて
+\[
+\lim_{x\in A, x\to a}\frac{\|F(x)-F(a)\|}{\|x-a\|}=0
+\]
+が成り立っているとする。このとき$F$は$U$上すべての点で$C^1$級であり、$JF(a)=0$である。
+\end{lem}
+\begin{prop}
+$C^1$級全射関数$f:\rr^3\to \rr^2$で、各点$x\in \rr^3$で$\rank(f)(x)\le 1$となるものが存在する。
+\end{prop}
+\begin{proof}
+$\beta<1/2$とする。
+$I=\{x\in \rr^3\mid |x_i-c_i|\le L/2\}$という立法体を考える。
+$\{x\in \rr^3\mid |x_i-(c_i+\ep_i)L/4|\le \beta L/2\}\ (\ep_i\in \{1,-1\})$という形で書ける立法体を考える。（$\ep_i$の値の選び方でこの形に書ける立方体は8個ある。）$=\mathcal{E}(I)$
+この形で書ける立法体の間の距離は$L/2-\beta L$以上である。
+また、$I$の境界と先の形で書ける立方体との距離は$L/4-\beta L/2$以上である。
+
+今から$I=\{x\in \rr^3\mid |x|\le 1\}$で定義される立方体を８の小さい立方体に分割していってカントール集合を作る。
+$\mathcal{E}(I)$を適当に番号付けて、 $\mathcal{E}(I)=\{I(n_1)\mid n_i\in \{1,2,\dots, 8\}\}$とする。
+一般に$I(n_1, n_2, \dots, n_k)$が定義されたとき、$\mathcal{E}(I(n_1, n_2, \dots, n_k))$を適当に番号付けて、
+\[
+\mathcal{E}(I(n_1, n_2, \dots, n_k))=\{I(n_1, n_2, \dots, n_k, n_{k+1})\mid n_{k+1}\in \{1,2,\dots, 8\}\}
+\]
+として$I(n_1, n_2, \dots, n_k, n_{k+1})$を帰納的に定義する。
+世代が同じ$I(a_1, a_2, \dots, a_k)$と$I(b_1, b_2, \dots, b_k)$との距離は
+$\beta^{k-1}-2\beta^k$以上である。
+世代が異なる$I(a_1, a_2, \dots, a_k)$と$I(b_1, b_2, \dots, b_j)$（$k<j$）との関係は以下のようになる。
+もしこの二つが交わってなければ、この二つの立方体の間の距離は$\beta^{k-1}(1-2\beta)$以上になり、
+もし大きい方の立方体が小さい方を含んでいれば、大きい方の境界と、小さい立方体との距離は$\beta^k(1/2-\beta)$となる。
+
+$I$の境界を$B$、$I(n_1, n_2, \dots, n_k,)$の境界を$B(n_1, n_2, \dots, n_k)$
+で表すことにする。そして、
+\[
+C(\beta)=\bigcap_{k\in \nn}\left(\bigcup_{i\in \{1,2,\dots, k\},\ n_i\in \{1,2,\dots, 8\}}I(n_1, n_2, \dots, n_k)\right)
+\]
+とする。$C(\beta)$はカントール集合と同相である。
+以下$\beta^2>8^{-1}$を仮定する。
+$R$を$\rr^2$の任意の閉正方形とする。$k\in \nn$と
+$(n_1,n_2, \dots, n_k)\in \{1,2,\dots, 8\}$に対して閉長方形
+$R(n_1,n_2,\dots, n_k)$を帰納的に以下のように定義する。
+$R(n_1)$は$R$を$7$つの垂直な線分によって$8$個の相似な長方形に分割し、それを番号付けたものとして定義する。
+一般に$R(n_1,n_2,\dots, n_k)$が定義された時、
+もし、$k$が偶数ならば$R(n_1,n_2,\dots, n_k)$を$7$つの垂直な線分で$8$個の相似な長方形に分割し、それを番号付けたものとして$R(n_1,n_2,\dots, n_k, n_{k+1})$を定義し、
+もし$k$が奇数ならば$R(n_1,n_2,\dots, n_k)$を$7$つの水平な線分で$8$個の相似な長方形に分割し、それを番号付けたものとして$R(n_1,n_2,\dots, n_k, n_{k+1})$を定義する。ここで、ある$A>0$が存在して任意の$k\in \nn$について
+\[
+\di(R(n_1,n_2,\dots, n_k))\le A2^{-3k/2}
+\]
+となる。($k$が奇数であるときと偶数であるときに場合分けすれば証明出来る。)
+全射写像$\Phi:C(\beta)\to R$は
+$C(\beta)\cap I(n_1,n_2,\dots, n_k)$を$R(n_1,n_2,\dots, n_k)$に全射に写すとする。このような写像は存在する。
+以上の考察から、$M>0$が存在して$x,y\in C(\beta)$について
+\[
+|\Phi(x)-\Phi(y)|\le M|x-y|^{\lambda}
+\]
+となることがわかる。ここで$\lambda=-3\log2/2\log\beta>1$である。
+
+$f:[0,1]\to R$を$f(m/8)=a_m$および、$C^1$級で
+\[
+|f^{\prime}|\le 9\max|a_m-a_{m+1}|
+\]
+を充すものとする。
+$g:\rr^3\to \rr$で$\partial J_m$の近傍上で$g=m/8$となる$C^1$級写像とする。この時$g(\rr^3)\subset [0,1]$であり、$|Dg|\le N\beta^{-k}$を満たす。
+そして
+\[
+F=f\circ g
+\]
+と定義する。
+$F$は$I\setminus C(\beta)$上で$C^1$級である。
+境界上では$DF=0$であり、また、$I(n_1,n_2,\dots, n_k)\setminus C(\beta)$上で
+\[
+|DF|\le |Dg||f^{\prime}|\le H\beta^{-k}2^{-3k/2}\le H \beta^{-k}\beta^{\lambda k}
+\]
+なので、先の補題から$F$は$I$上全体で$C^1$級であり、$C(\beta)$上で$DF=0$
+である。
+$F$の定義の仕方から$F$の階数は全ての点で$1$以下である。
+\end{proof}
+\begin{cau}
+この命題における各点$x\in \rr^3$で$\rank(f)(x)\le 1$という条件は$f(C_f)$が正測度であるという条件よりも強いことに注意しよう。
+\end{cau}
+
+
+
+\section{多様体の間の写像のBrown-Morse-Sardの定理}
+\begin{df}
+$m$次元多様体$M$の部分集合$S$が測度零であるとは
+\end{df}
+
+
+\begin{thm}[多様体のBrown-Morse-Sardの定理]
+$M,N$をそれぞれ$m,n$次元$C^r$級可微分多様体とし、$f:M\to N$は$C^r$級とする。また、$M$はリンデレフであるとする。このときもし
+\[
+r\ge 1+ \max({m-n, 0})
+\]
+ならば$f(C_f)$は測度零である。
+\end{thm}
+\begin{proof}
+ここまで読んだらわかる。
+\end{proof}
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{4}スタンバーグ著,高橋恒郎訳「微分幾何学」吉岡書店, 数学業書(24), 1985.
+
+\bibitem{3} E. L. Grinberg, \textit{On the smooth hypothesis in Sard's theorem}, Amer. Math. Monthly, vol. 47(1985), 299-304.
+
+
+\bibitem{1} R. Kaufman, \textit{A singular map of a cube onto a square}, J. Differential Geom. vol 14, No. 4(1979), 593-594.
+
+\bibitem{S} A. Sard, \textit{The measure of the critical values of differential maps}, 
+Bull. Amer. Math. Soc. Vol. 48 (1942), 883-890 
+
+\bibitem{2} H. Whitney, \textit{A function not constant on a connected set of critical points}, Duke Math. J. Vol. 1, No. 4(1935), 514-517.
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

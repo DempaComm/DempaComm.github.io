@@ -1,0 +1,1287 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{Cl}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\map}{Map}
+\DeclareMathOperator{\mon}{Mon}
+\DeclareMathOperator{\cf}{cf}
+
+
+\newcommand{\mycal}[1]{\mathcal{#1}}
+\newcommand{\mydd}[1]{D(#1)}
+
+\newcommand{\mydn}[2]{\mathord{\downarrow}^{#1}(#2)}
+
+\newcommand{\mysen}[2]{\mathfrak{S}_{#1}(#2)}
+
+\newcommand{\myka}[3]{[#1, #2]_{#3}}
+
+\newcommand{\mybm}[3]{\mathrm{BM}(#1, #2, #3)}
+\newcommand{\mybmb}[3]{\mathrm{BM}^{\star}(#1, #2, #3)}
+
+\newcommand{\myac}[3]{\mathrm{AC}_{#1}^{#3}(#2)}
+
+\newcommand{\myom}{\omega}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Baire 空間}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章ではBaire spaceの基本的性質を紹介する．
+
+
+
+
+\section{基本事項}
+\begin{df}
+位相空間$X$がBaireであるとは，
+$X$の稠密可算開集合族$\{U_i\}_{i\i \nn}$
+について，その共通部分$\bigcap_{i\in \nn}U_i$
+が$X$の稠密部分集合になっているときにいう．
+\end{df}
+
+
+\begin{df}
+$X$の部分集合$A$が\textbf{疎}であるとは，
+$\nai(\cl(A))=\O$となることであある．
+
+
+\end{df}
+\begin{df}
+$X$の部分集合$A$が
+\textbf{第一類集合}であるとは，
+$X$の疎な集合列$\{Z_i\}$
+が存在して$A=\bigcup_{i\in \nn}Z_i$となることである．
+\end{df}
+
+\begin{df}
+$X$の部分集合$A$が
+\textbf{第二類集合}であるとは，$A$が第一類集合でないときにいう．これは，任意の集合列$\{Z_i\}$に対して，
+$A=\bigcup_{i\in \nn}Z_i$ならば，ある$n\in \nn$が存在して
+$\nai(\cl(Z_n))\neq \O$となることと同値である．
+\end{df}
+
+\begin{df}
+$X$の部分集合$A$
+が\textbf{comeager}であるとは
+それが第一類集合の補集合であることである．
+これは稠密開集合の可算族$\{U_{i}\}_{i\in \myom}$
+が存在して$A$が共通部分$\bigcap_{i\in \myom}U_{i}$を含んでいると言い換えてもいい．
+\end{df}
+
+\begin{lem}
+閉集合もしくは開集合の境界は疎な集合である．
+\end{lem}
+\begin{proof}
+$A$を閉集合とする．$\bd(A)$は閉集合であり，
+$\bd(A)\subset A$となることに注意せよ．
+もし開集合$V$が存在して，$V\subset \bd(A)$
+ならば，$V\subset \nai(A)$であり，これは$\bd(A)\cap \nai(A)=\O$
+に反する．
+よって$\bd(A)$は疎である．
+また，開集合$U$の境界$\bd(U)$については，
+$\bd(U)=\bd(X\setminus U)$なので，上の場合に帰着する．
+\end{proof}
+
+
+\begin{prop}
+$X$がBaire空間であることと，$X$の任意の非空な開集合が第二類集合であることは同値である．
+\end{prop}
+\begin{proof}
+$X$は第一類集合となる開集合が存在すると仮定し，$X$がBaireではないことを証明する．
+$U$を$X$の第一類の開集合とする．
+$U$は第一類なので，ある疎な集合の列$\{Z_i\}$
+が存在して，$U=\bigcup_{i\in \nn}Z_i$
+とかける．
+さて，$O_i=(X\setminus \bd(U))\cap (X\setminus\cl(Z_i))$
+と置くと，$X\setminus O_i=\bd(U)\cup \cl(Z_i)$は疎な閉集合なので，$O_i$は稠密な開集合である．
+$U=\bigcup_iZ_i$なので，$(\bigcap_{i\in \nn} O_i)\cap U=\O$
+である．$U$は開集合なので，特に$\bigcap_{i}O_i$は稠密ではない．
+つまり$X$はBaireではない．
+
+逆に$X$の任意の非空な開集合が第二類と仮定する．
+$X$の稠密開集合の列$U_i$を考える．
+$Z_i=X\setminus U_i$とすると，
+$Z_i$は疎な閉集合である．
+$X$の任意の開集合$O$をとると，これは第二類なので，
+特に$O\neq \bigcup_{i}(Z_i\cap O)$
+である．つまり，$O\setminus \bigcap_i Z_i\neq \O$
+ということなので，$O\cap \bigcap_iU_i\neq \O$である．
+つまり，$\bigcap_iU_i$は稠密なので$X$はBaireである．
+\end{proof}
+
+
+\begin{prop}
+$X$を
+Baire 空間とする．
+このとき$X$の空でない開集合$U$
+はそれ自体がBaire 空間である．
+\end{prop}
+\begin{proof}
+$U$の開集合は$X$の開集合でもあることから従う．
+\end{proof}
+
+\begin{prop}
+$X$を
+Baire 空間とする．
+このとき$X$の稠密な$G_{\delta}$集合$S$
+はそれ自体がBaire 空間である．
+\end{prop}
+\begin{proof}
+$S$の可算個の稠密開集合$\{U_{i}\}_{i\in \myom}$
+について$V_{i}\cap S=U_{i}$
+となる$X$の開集合$V_{i}$
+が存在する．
+このとき$V_{i}$は$X$の稠密部分集合である．
+よって
+$S\cap \bigcap_{i\in \myom}V_{i}
+=\bigcap_{i\in \myom}U_{i}$
+は$X$の可算個の
+稠密$G_{\delta}$集合の共通部分なので$X$がBaire
+であることからこれは$X$の中で稠密である．
+よって$\bigcap_{i\in \myom}U_{i}$
+は$S$でも稠密であるから$S$が
+Baire空間であることがわかる．
+\end{proof}
+
+
+
+\section{被覆とBaire空間}
+$X$の被覆$\mycal{U}$に対して
+\[
+\mydd{\mycal{U}}=\{x\in X\mid 
+\text{$\mycal{U}$は$x$において局所有限}\}
+\]
+と定義する．
+局所有限性の定義から，
+$\mydd{\mycal{U}}$は開集合である．
+\begin{thm}[\cite{Mc}]\label{thm:locfinite}
+$X$を位相空間とする．
+このとき
+以下は同値
+\begin{enumerate}
+\item 
+$X$はBaire
+\item 
+$X$の点有限被覆
+$\mycal{U}$について
+$\mydd{\mycal{U}}$は$X$において稠密
+\item 
+$X$の点有限な可算被覆
+$\mycal{U}$について
+$\mydd{\mycal{U}}$は$X$において稠密
+\end{enumerate}
+\end{thm}
+\begin{proof}
+
+[$(1)\To (2)$の証明]
+
+
+$X$の任意の非空な開集合
+$O$について
+$O\cap \mydd{\mycal{U}}
+\neq \emptyset$を示せば良い．
+任意の$n\in \nn$について，
+
+\[
+F_{n}=\{x\in O\mid \ord(x, \mycal{U})\le n \}
+\]
+と定義する．
+各$F_{n}$は閉集合である事を示そう．
+$x\not \in F_{n}$をとる．
+このとき
+$\ord(x, \mycal{U})\ge n+1$
+なので，$n+1$個の$\mathcal{U}$
+の元$U_{1}, \dots, U_{n+1}$
+が存在してこれらは全て$x$を含む．
+$P=\bigcap_{i=1}^{n+1}U_{i}$とすると
+任意の
+$y\in P$
+について
+$\ord(y, \mycal{U})\ge n+1$
+なので
+$y\not\in F_{n}$である．
+つまり
+$P\subset X\setminus F_{n}$であり
+$x\in X\setminus F_{n}$
+は任意であったから
+$F_{n}$
+は閉集合になる．
+さて
+$\mycal{U}$は点有限被覆なので，
+$O=\bigcup_{n\in \nn}F_{n}$である．
+$O$は開集合であり，
+$X$がBaireであることから，
+ある$n\in \nn$について，
+$F_{n}$は内点を持つ．
+$W=\int (F_{n})$としよう．
+次を満たす
+$y\in W$をとる．
+$\ord(y, \mycal{U})=
+\max\{\ord(x, \mycal{U}), x\in W\}$. 
+これは$F_{n}$の定義から可能である．
+
+$m=\ord(x, \mycal{U})$として，
+$U_{1}, U_{2}, \dots, U_{m}\in \mycal{U}$は
+$y$を含むとしよう．
+$V=W\cap \bigcap_{i=1}^mU_{i}$
+と置く．
+$m=\ord(y, \mycal{U})=
+\max\{\ord(x, \mycal{U}), x\in W\}$. 
+なので，
+$V$
+の元は
+$U_{1}, U_{2}, \dots, U_{m}$以外の
+$\mycal{U}$の元と交わらない．
+つまり，
+$y\in \mydd{\mycal{U}}$である．
+$y\in V \subset O$なので，
+$O\cap \mydd{\mycal{U}}\neq \emptyset$である．
+
+
+[$(1)\To (2)$の証明終わり]
+
+
+[$(2)\To (3)$の証明]
+
+自明
+
+
+[$(2)\To (3)$の証明終わり]
+
+
+[$(3)\To (1)$の証明]
+
+対偶を示す．
+$X$はBaireではないので，
+非空な開集合
+$U$が存在して，
+可算個の疎な集合
+$K_{i}$を用いて，
+$U=\bigcup_{i\in \nn}K_{i}$
+とかける．
+ここで，
+$K_{i}\subset K_{i+1}$と仮定しても良い．
+
+$U_{i}=U\setminus \cl(K_i)$
+と定義し，
+\[
+\mathcal{U}=\{X\}\cup \{U_{i}\}_{i\in \nn}
+\]
+と定義する．
+$\mycal{U}$
+は点有限な可算開集合族である．
+ここでもし，
+$U$
+の部分集合であるような開集合
+$O$が
+$\mycal{U}$
+の有限個の元としか交わりを持たないとすると，
+十分大きい番号
+$N$で
+$O\cap U_{N}=\emptyset $となる．
+集合
+$U_{N}$
+の定義から，
+$O\subset \cl(K_{N})$となるが，
+$K_{N}$
+は疎であるからこれは矛盾である．
+よって
+$\mydd{\mycal{U}}\cap U=\emptyset$. 
+特に
+$\mydd{\mycal{U}}$
+は稠密ではない．
+
+[$(3)\To (1)$の証明終わり]
+
+以上で定理の証明が終わる．
+\end{proof}
+\begin{rmk}
+定理
+\ref{thm:locfinite}
+は
+\cite{1}
+からの引用であるが，
+\cite{1}では
+$F_{n}=\{\, x\in O\mid \ord(x, \mycal{U})=n\, \}$
+として証明をしている．
+この場合は$F_{n}$が閉集合になるかどうかいまいち不明なので証明が少々煩雑になると思われる．
+\end{rmk}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Banach-Mazur gameとBaire空間}
+
+位相空間$X$の開集合からなる部分集合族
+$\mathcal{P}$
+が
+\textbf{$\pi$-基底}であるとは，
+$\emptyset\not\in \mathcal{A}$
+でありなおかつ
+任意の空ではない開集合
+$O$
+について
+$V\in \mathcal{P}$
+が存在して$V\subset O$となることである．
+\begin{df}[Language of Banach-Mazur game]
+$\mycal{A}$を $X$の$\pi$-基底とする．
+$n\in \omega$に対して
+\[
+\mydn{n}{\mathcal{A}}
+=
+\{(A_i)_{i\in n}\in \mathcal{A}^n\mid A_{i+1}\subset A_i\}
+\]
+とする．
+つまりこの集合というのは
+$\mycal{A}$
+の元からなる要素
+$n$
+個の減少列全体の集合である．
+Banach--Mazur game
+においては$\mydn{n}{\mathcal{A}}$
+の元というのは第$n$ターン目の
+盤面を表していると考えられる．
+特に
+$\mydn{0}{\mycal{A}}=\{\emptyset\}$
+である．
+また，$n\in \omega+1$に対して
+\[
+\mydn{<n}{\mathcal{A}}=
+\bigcup_{i\in n}
+\mydn{i}{\mycal{A}}
+\]
+と定義する．
+
+そして，$n\in \omega+1$に対して，
+\[
+\mysen{n}{\mycal{A}}
+=
+\{f\in
+ \map(\mydn{<n}{\mathcal{A}}, \mathcal{A})\mid
+ \forall h\in n\  \forall \sigma\in 
+ \mydn{h}{\mathcal{A}}\ 
+ f(\sigma)\subset \sigma(h-1)
+ \}
+\]
+と定義する．
+つまり
+$\mysen{n}{\mycal{A}}$
+の元というのは
+$\mydn{<n}{\mathcal{A}}$
+のそれぞれに対して一様に何かしらの
+$\mycal{A}$の
+元を選ぶ操作のことである．
+そしてその選び方というのは
+$\sigma\in 
+\mydn{h}{\mathcal{A}}$を拡張するように選ばれる，
+つまり
+$ f(\sigma)\subset \sigma(h-1)$
+を満たしていなければならない．
+
+集合
+$\mysen{\omega}{\mycal{A}}$の元を
+\textbf{戦略}と呼ぶ．
+
+二つの戦略の対$(f, g)$について，$[f, g]_i$を以下のように定義する．
+$i=0$のとき
+\[
+\myka{f}{g}{0}=f(\emptyset). 
+\]
+とし，
+$i>0$のときは以下のようにする．
+$i$が奇数のとき
+\[
+\myka{f}{g}{i}
+=
+g(\myka{f}{g}{0}, \dots, 
+\myka{f}{g}{i-1})
+\]
+で
+$i$が偶数の時
+\[
+\myka{f}{g}{i}
+=f(\myka{f}{g}{0}, \dots, \myka{f}{g}{i-1})
+\]
+と定義する．
+\end{df}
+
+\begin{df}[Banach-Mazur Game]
+今から位相的ゲームを定義するが，これは位相空間の
+部分集合をプレイヤー
+$\alpha$と
+$\beta$
+が交互に小さくなるように集合をとっていくある種の陣取りゲームである．このとき
+一般的にプレイヤー
+$\alpha$
+が勝つとはその集合列の共通部分が空でないことで，
+プレイヤー
+$\beta$が勝つとは，
+その共通部分が空のときである．
+
+$\mybm{X}{\mycal{A}}{\alpha}$
+を$X$を盤，$\mathcal{A}$を駒とした
+$\alpha$先行のBanach-Mazur gameという．
+
+
+$\mybm{X}{\mycal{A}}{\beta}$
+を$X$を盤，$\mathcal{A}$を駒とした
+$\beta$先行のBanach-Mazur gameという．
+
+
+
+「プレイヤー
+$\alpha$
+が
+$\mybm{X}{\mycal{A}}{\alpha}$
+において必勝戦略を持つ」とは，
+\[
+\exists f\in 
+\mysen{\myom}{\mycal{A}}
+\ \forall g\in 
+\mysen{\myom}{\mycal{A}}
+\ 
+\bigcap_{i\in \myom}\myka{f}{g}{i}\neq \emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\alpha$
+が
+$\mybm{X}{\mycal{A}}{\beta}$
+において必勝戦略を持つ」とは，
+\[
+\exists g\in 
+\mysen{\myom}{\mycal{A}}
+\ \forall f\in 
+\mysen{\myom}{\mycal{A}}
+\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}
+\neq \emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\beta$が
+$\mybm{X}{\mycal{A}}{\alpha}$
+において必勝戦略を持つ」とは，
+\[
+\exists g\in 
+\mysen{\myom}{\mycal{A}}
+\ \forall f\in 
+\mysen{\myom}{\mycal{A}}
+\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}
+=\emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\beta$
+が
+$\mybm{X}{\mycal{A}}{\beta}$
+において必勝戦略を持つ」とは，
+\[
+\exists f\in 
+\mysen{\myom}{\mycal{A}}
+\ \forall g\in 
+\mysen{\myom}{\mycal{A}}
+\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}
+=
+\emptyset
+\]
+が成り立つことである．
+
+
+必勝戦略を持つというのはとても強い条件である．
+というのも，
+何かしらの戦略，
+あるいはアルゴリズムといってもいいが，
+それに従ってさえいれば相手がどのように行動しようとも絶対勝てるという
+ある意味で一様な戦略が存在するという事を意味する．
+
+
+プレイヤー
+$\alpha$
+が必勝戦略を持たないとは，
+プレイヤー
+$\beta$
+が$\alpha$の戦略のそれぞれに対応した
+勝利戦略を取れるということであるともいえる．逆もしかり．
+
+
+
+\end{df}
+
+\begin{df}[Banach-Mazur* Game]
+位相空間$X$の
+$\pi$基底$\mycal{A}$
+について
+\[
+\mon(\mycal{A})=
+\{f\in \map(\mycal{A}, \mycal{A})\mid 
+\forall A\in \mycal{A}\ f(A)\subset A\}
+\]
+と定義する．
+このとき$f\in \mon(\mycal{A})$
+に対して戦略
+$J(f)\in \mysen{\myom}{\mycal{A}}$
+を第$n$ターン盤面$\sigma\in \mydn{n}{\mycal{A}}$
+に対して
+$J(f)(\sigma)=f(\sigma(n-1))$
+と定義する．
+この$J(f)$は$f$から誘導される自然な
+戦略である．
+
+このとき
+対$(f, g)\in \mon(\mathcal{A})^{2}$について，
+$\myka{f}{g}{i}$を
+$\myka{J(f)}{J(g)}{i}$として定義する．
+つまり$f$と$J(f)$を自然に同一視して定義するということである．
+
+Banach--Mazur gameにおいて
+戦略の取り方を$\mon(\mycal{A})$
+の元から誘導されるものだけに限定したゲームを
+Banach--Mazur* gameと呼ぶことにしよう．
+
+$\mybmb{X}{\mycal{A}}{\alpha}$
+を$X$を盤，
+$\mathcal{A}$を駒とした
+$\alpha$先行のBanach-Mazur* gameという．
+
+$\mybmb{X}{\mycal{A}}{\beta}$
+を$X$を盤，$\mathcal{A}$を駒とした
+$\beta$先行のBanach-Mazur* gameという．
+
+$\mathrm{BM}$と$\mathrm{BM^{*}}$の違いは，
+$\mathrm{BM}$が第$n$手においてそれ以前の全ての情報を使うことができるのに対して，
+$\mathrm{BM^{*}}$は相手の直前の$n-1$手の情報しか参照できない
+ところである．
+
+
+「プレイヤー
+$\alpha$が
+$\mybmb{X}{\mycal{A}}{\alpha}$
+において必勝戦略を持つ」とは，
+\[
+\exists f\in  \mon(\mycal{A})\ \forall g\in  \mon(\mycal{A})\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}\neq 
+\emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\alpha$が
+$\mybmb{X}{\mycal{A}}{\beta}$
+において必勝戦略を持つ」とは，
+\[
+\exists g\in  \mon(\mycal{A})\ \forall f\in  \mon(\mycal{A})\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}\neq
+\emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\beta$が
+$\mybmb{X}{\mycal{A}}{\alpha}$
+において必勝戦略を持つ」とは，
+\[
+\exists g\in  \mon(\mycal{A})\ \forall f\in  \mon(\mycal{A})\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}=
+\emptyset
+\]
+が成り立つことである．
+
+「プレイヤー
+$\beta$が
+$\mybmb{X}{\mycal{A}}{\beta}$
+において必勝戦略を持つ」とは，
+\[
+\exists f\in  \mon(\mycal{A})\ \forall g\in  \mon(\mycal{A})\ 
+\bigcap_{i\in \myom}
+\myka{f}{g}{i}
+=\emptyset
+\]
+が成り立つことである．
+
+プレイヤー
+$\alpha$
+が必勝戦略を持たないとは，
+プレイヤー
+$\beta$
+$\alpha$の戦略それぞれ
+に対応した勝利戦略を持つともいえる．逆もしかり．
+\end{df}
+
+\begin{df}
+$X$を位相空間とし
+$\mycal{A}$は
+その$\pi$-基底とする．そして
+$f\in 
+\mysen{\myom}{\mycal{A}}$
+と$n\in \myom$
+を
+とる．
+このとき列
+$\sigma\in \mydn{n}{\mycal{A}}$
+が$f$-適合的であるとは
+$\tau_{f, \sigma}$を
+\[
+\tau_{f, \sigma}(0)=f(\emptyset)
+\]
+と定義し，
+$i\in\{0, \dots, n\}$について
+\[
+\tau_{f, \sigma}(2i+1)=\sigma(i)
+\]
+かつ
+\[
+\tau_{f, \sigma}(2i)=f(\tau_{f, \sigma}(0), \dots, \tau_{f, \sigma}(2i-1))
+\]
+と定義したとき，
+$\tau_{f, \sigma}\in \mydn{2n+1}{\mycal{A}}$
+となるときにいう．
+$f$適合的な列全体を
+$\myac{f}{\mycal{A}}{n}$
+と書くことにする．
+\end{df}
+
+次の補題が基本的である．
+\begin{lem}\label{lem:dense}
+$X$を位相空間とし
+$\mycal{A}$は
+その$\pi$-基底とする．
+そして
+$f\in 
+\mysen{\myom}{\mycal{A}}$を任意にとる．
+以下のような族$\{\mycal{F}_{i}\}_{i\in \myom}$が存在する．
+\begin{enumerate}
+\item 
+$\mycal{F}_{i}$
+は$\myac{f}{\mycal{A}}{i}$
+の部分集合である．
+\item 
+各$\mycal{F}_{i}$の任意の異なる二元$\sigma$と
+$\gamma$
+について
+$\sigma(i)$と$\gamma(i)$
+は互いに交わらない．
+
+\item 
+各$i\in \myom$
+と任意の$\sigma\in \mycal{F}_{i+1}$
+について$\gamma\in \mycal{F}_{i}$
+が存在して
+$\sigma|_{i}=\gamma$となる．
+
+\item 
+各$i\in \myom$について
+\[
+U_{i}=\bigcup\{\, f(\tau_{f, \sigma})\mid \sigma
+\in \mycal{F}_{i}
+\, \}
+\]
+と定義する．このとき
+$U_{i+1}$は$U_{i}$の中で稠密である．
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+帰納的に構成する．
+$\mathcal{F}_{0}$
+は条件(1)と(2)を満たすような
+包含関係について極大な族とする．
+$i\in \myom$を固定し
+$\mycal{F}_{i}$がすでに構成されているとする．
+このとき$\mycal{F}_{i+1}$
+を構成しよう．
+$\mathcal{F}_{i+1}$
+は条件(1)--(3)を満たすもののうち，
+包含関係について
+極大なものとする．
+これはZornの補題から存在が示される．
+条件(4)を確かめよう．
+もしも
+$U_{i+1}$が$U_{i}$
+の中で稠密ではないとすると
+ある空ではない開集合$O$が存在して
+$O\subset U_{i}$と
+$O\cap U_{i+1}=\emptyset$
+を満たす．
+$U_{i}$の定義と
+$\mathcal{A}$
+が$\pi$-基底であることから$O$を小さく取り直して
+ある$\sigma\in \myac{f}{\mycal{A}}{i}$
+が存在して$O\subset f(\tau_{f, \sigma})$
+かつ
+$O\in \mathcal{A}$
+を満たすと仮定しても良い．
+そして$\gamma$を
+$\gamma=(\sigma(0), \dots, \sigma(i), O)$
+とすると$\gamma\in \myac{f}{\mycal{A}}{i+1}$
+であり$\mycal{F}_{i+1}\sqcup\{\gamma\}$
+は$\mycal{F}_{i+1}$
+を真部分集合として含み，
+(1)--(3)をすべて満たす．
+これは$\mycal{F}_{i+1}$
+の極大性に矛盾するので
+$U_{i+1}$
+は$U_{i}$の中で稠密である．
+\end{proof}
+
+
+
+\begin{thm}\label{thm:aaa}
+$X$を位相空間とし，
+$X$の$\pi$-基底を一つ固定し
+$\mycal{A}$とする．
+このとき以下は同値である．
+\begin{enumerate}
+\item 
+$X$はBaire空間である．
+\item 
+
+$\beta$は
+$\mybm{X}{\mycal{A}}{\beta}$
+において必勝戦略を持たない．
+\item 
+$\beta$
+は
+$\mybmb{X}{\mycal{A}}{\beta}$
+において必勝戦略を持たない．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+各々頑張って証明する．
+
+[$(1)\To (2)$]
+
+プレイヤー
+$\beta$
+が必勝戦略を
+持たないことを示すために
+$f\in \mysen{\myom}{\mycal{A}}$
+を任意にとる．
+これは$\beta$の戦略を任意に与えるということである．
+各$i\in \myom$について
+$U_{i}は$補題\ref{lem:dense}
+に述べられているものとする．
+すると補題\ref{lem:dense}から
+$U_{i}$は
+$U_{0}$
+の中で稠密であることがわかる．
+$X$がBaireなので
+$U_{0}$もBaireになり，
+$\bigcap_{i\in \myom}U_{i}$は
+$U_{0}$のなかで稠密である
+ことがわかる．
+適当に
+$x\in \bigcap_{i\in \myom} U_{i}$をとる．
+すると各
+$i\in \myom$
+について
+$\sigma_{i}\in \myac{f}{\mycal{A}}{i}$
+が存在して
+$x\in f(\tau_{f, \sigma})$
+である．
+ここで$U_{i}$
+の定義と補題\ref{lem:dense}
+の条件(3)から
+任意の$k\le i$について
+$\sigma_{i}(k)=\sigma_{i+1}(k)$
+となる.
+よってこれらから無限列
+$\Sigma(0),\dots, \Sigma(i), \dots$
+が決定される．
+この無限列を$\Sigma$とかこう．
+$g\in \mysen{\myom}{\mycal{A}}$
+を以下のように定義する．
+$\sigma\in \mydn{n}{\mycal{A}}$
+が$\tau_{f, \Sigma|_{i}}$の形をしているならば
+\[
+g(\sigma)=\Sigma(i+1)
+\]
+と定義し，その他の場合には
+\[
+g(\sigma)=\sigma(n-1)
+\]
+と定義すると$g$は
+ちゃんと
+$\mydn{<\myom}{\mycal{A}}$
+から
+$\mycal{A}$
+への写像になっている．
+この時，
+$\myka{f}{g}{i}$
+を並べた無限列は
+について，
+\[
+\myka{f}{g}{2i+1}=\Sigma(i)
+\]
+であるから
+\[
+x\in \bigcap_{i\in \myom}
+\myka{f}{g}{i}
+\]
+である．
+つまり
+プレイヤー
+$\beta$
+は必勝戦略を持たない．
+
+
+[$(1)\To (2)$の証明終わり]
+
+
+
+[$(2)\To (3)$]
+
+対偶を示そう．
+つまり$\beta$
+が$\mybmb{X}{\mycal{A}}{\beta}$
+で必勝戦略を持つならば
+$\mybm{X}{\mycal{A}}{\beta}$
+でも必勝戦略を持つことを示す．
+
+$\beta$が
+$\mybmb{X}{\mycal{A}}{\beta}$
+で必勝戦略になる$f\in \mon(\mathcal{A})$を持つとする．
+このとき$f$から
+$J(f)\in \mathfrak{S}_{\omega}(\mathcal{A})$
+が自然に誘導される．
+任意の
+$g\in \mathfrak{S}_{\omega}(\mathcal{A})$
+について，
+$h\in \mon(\mathcal{A})$
+を次のように定義する．
+$G\in \mathcal{A}$が$G=[J(f), g]_{2i}$の形をしている時には
+\[
+h(G)=[J(f), g]_{2i+1}
+\]
+その他の場合には$h(G)=G$と定義する．
+すると，任意の$i\in \myom$について
+$[J(f), g]_i=[f, h]_i$
+である．
+条件$(3)$の否定から，
+\[
+\bigcap_{i\in \myom}[f, h]_i\neq \O
+\]
+であるが，これは
+\[
+\bigcap_{i\in \myom}[J(f), g]_i\neq \O
+\]
+と同値なので，
+$J(f)$は
+$\mybm{X}{\mycal{A}}{\beta}$
+における
+$\beta$の必勝戦略になる．
+
+
+[$(2)\To (3)$の証明終わり]
+
+[$(3)\To (1)$]
+
+対偶を示そう．
+$X$がBaireでないとする．
+このとき，
+$X$がBaireでないことから存在が保証される第一類集合である開集合
+$U\in \mycal{A}$をとる．
+今から$\beta$の戦略$f\in \mysen{\myom}{\mycal{A}}$
+を定義する．
+$f(\emptyset)=U$と定義する．
+$U$は疎集合
+$Z_{i}$を使って
+$U=\bigcup_{i\in \myom}Z_{i}$
+と表されているとする．
+任意の
+$\sigma\in \mydn{n}{\mycal{A}}$について
+$G=\sigma(n-1)$とおいて
+$f(\sigma)\in \mycal{A}$を
+$f(\sigma)\subset  G\setminus \cl(\bigcup_{i\le n}Z_{i})$
+となるようにとる．
+ここで各$Z_{i}$
+は疎であるため$G\setminus \cl(\bigcup_{i\le n}Z_{i})\neq \emptyset$に注意しよう．
+すると，
+$f$はプレイヤー
+$\beta$の必勝戦略になる．
+
+
+[$(3)\To (1)$の証明終わり]
+
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{thm}\label{thm:bbb}
+位相空間$X$について以下は同値である．
+\begin{enumerate}
+\item 
+$X$はBaire空間である．
+\item 
+$X$のある$\pi$-基底$\mathcal{A}$について$\beta$は$BM(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\item 
+$X$のある$\pi$-基底$\mathcal{A}$について$\beta$は$BM^{*}(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+定理
+\ref{thm:aaa}において
+$\mathcal{A}$
+として$X$の空でない開集合全体を取ればわかる．
+\end{proof}
+
+\begin{thm}
+位相空間$X$について以下は同値である．
+\begin{enumerate}
+\item $X$はBaire空間である．
+\item $X$のある$\pi$-基底$\mathcal{A}$について$\beta$は$BM(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\item $X$のある$\pi$-基底$\mathcal{A}$について$\beta$は$BM^{*}(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\item $X$の任意の$\pi$-基底$\mathcal{A}$について$\beta$は$BM(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\item $X$の任意の$\pi$-基底$\mathcal{A}$について$\beta$は$BM^{*}(X, \mathcal{A}, \beta)$において絶対勝利戦略を持たない．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+上の定理 \ref{thm:aaa}と
+\ref{thm:bbb}から従う．
+\end{proof}
+
+\section{例}
+
+\begin{exam}[\cite{B}\cite{MM}]
+$[0, 1]$上の実連続関数の全体にsupノルムを入れた空間
+$C[0, 1]$は
+Baire空間になり，また
+$C[0, 1]$内の至る所微分不可能な
+連続関数全体は$C[0, 1]$内のcomeager
+集合になっている．このことから至るところ微分不可能な
+連続関数の存在が従う．
+
+\end{exam}
+
+\begin{exam}
+実数の中のリウビル数全体の集合は稠密$G_{\delta}$集合であることが知られている
+(\cite{aa}). 
+このことから超越数全体が実数の中でcomeagerになっていることがわかる．
+
+また，正規数全体の集合は第一類集合になっていることが知られている(\cite{salat})．
+ルベーグ測度に関してほとんど全ての実数は
+正規数であることが知られているので，
+この集合は零集合と第一類集合は似ているが，同じではないということの例になっている．
+\end{exam}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+	
+\begin{thebibliography}{99}
+
+\bibitem{1}Dan Ma topology blog, 
+``A Characterization of Baire spaces''
+\begin{verbatim}
+https://dantopology.wordpress.com/
+2012/08/16/a-characterization-of-baire-spaces/
+\end{verbatim}
+
+\bibitem{danma2}
+Dan Ma topology blog, 
+``The Banach--Mazur Game''
+\begin{verbatim}
+https://dantopology.wordpress.com/
+2012/06/08/the-banach-mazur-game/
+\end{verbatim}
+\bibitem{HM}
+R. C. Haworth and R. A. Mccoy, 
+\textit{Baire spaces}, 
+Warsawa, Panstwowe Wydawnictwo Naukowe, 1977. 
+
+\bibitem{AA}Anastasios Styliano, 
+\textit{A typical number is extremely non-normal}, 
+Unif. Distrib. Theory, 
+17 (1)
+(2022), 
+77-88, 
+DOI: 10.2478/udt-2022-0001
+
+\bibitem{Mc}
+R. A. Mccoy, 
+\textit{A Baire space extension}, 
+Proc Amer. Math. Soc. 
+33 (1) (1972), 
+199--202. 
+
+\bibitem{aa}
+J. C. 
+Oxtoby, \textit{Measure and category}, 
+1980, 
+GTM 2, Springer. 
+\cite{ox2}
+J. C. Oxtoby, 
+\textit{The Banach--Mazur game and Banach category 
+theorem}, 
+Contributions to the theory of games, 
+vol 3.  Ann. Math. Stud. 39 (1957), 
+143--163. 
+\bibitem{Jones}
+S. H. Jones, 
+\textit{Application of the Baire category theorem}, 
+Real Analysis Change, 23 (1997/8), 363--394. 
+
+%\bibitem{H}Hirche, Differential topology
+%\bibitem{GG}M. Golubitsky and 
+%V. Guillemin, 
+%\textit{Stable mappings and their singularities}
+\bibitem{salat}
+T. Salat, 
+\textit{A remark on normal numbers}, 
+Rev. Roumaine Math. Pures Appl. 11 (1966), 53--56. 
+\bibitem{B}
+S. Banach 
+\textit{\"{U}ber die Baire'sche kategoriw gewisser funktionenmengen}, 
+Stud. Math, 
+3 (1931), 128--132.
+\bibitem{MM}
+S. Mazurkiewicz, 
+\textit{Sur les fonctions non derivables}, 
+ Stud. Math. 3 (1931), 
+92--94. 
+\bibitem{Bru}
+A. M. Bruckner and K. M. Garg, 
+\textit{The level structure of a residual set of continuous functions}, 
+Trans. Amer. Math. Soc. 232 (1977), 307--321. 
+\bibitem{ON}T. C. O'Neil, 
+\textit{A local version of the projection theorem and other results in geometric measure theory}, 
+1994, Thesis (Ph.D.)-University of London, University College London (United Kingdom).
+
+\bibitem{CR}C. Chen and E. Rossi, 
+\textit{Locally rich compact sets}, 
+Illinois J. Math. 58 (2014), no. 3, 779-806.
+
+\bibitem{kato}
+H. Kato, 
+\textit{Higher-dimensional Bruckner-Garg type theorem}, Topology Appl. 154 (2007), no. 8, 1690-1702.
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,418 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{コンパクト集合の距離化可能性}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では対角$G_{\delta}$的なコンパクトハウスドルフ空間は距離付け可能であることを証明する。
+また、この文章ではコンパクト性にはハウスドルフ性を仮定せず、それを仮定するようなときにはコンパクトハウスドルフ空間ということにする。
+
+まずはコンパクト空間の基本的な性質を証明を省略したりしつつ述べて行く。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{事実}
+\begin{fact}
+ハウスドルフ空間においてコンパクト部分集合は閉集合である。
+\end{fact}
+
+\begin{fact}
+コンパクト空間の連続像はコンパクトである。
+\end{fact}
+
+上の二つの事実から次のことがわかる。
+\begin{prop}
+コンパクト空間からハウスドルフ空間への連続写像は閉写像である。
+\end{prop}
+
+これの系として次の便利な基準がある。
+\begin{cor}
+コンパクト空間からハウスドルフ空間への連続全単射写像は同相写像である。
+\end{cor}
+
+またこれの特別な場合として次のものがある。
+\begin{prop}\label{fact}
+開集合系$\mathfrak{O}$は集合$X$上にコンパクトな位相を定めるとし、開集合系$\mathfrak{P}$は$X$にハウスドルフな位相を定めるとし、さらに$\mathfrak{P}\subset \mathfrak{O}$であるとする。即ち$\mathfrak{O}$は$\mathfrak{P}$より細かい位相を$X$に定めているということである。さてこのとき$\mathfrak{O}=\mathfrak{P}$となる。つまり二つの位相は一致する。
+\end{prop}
+
+\begin{fact}
+コンパクトハウスドルフ空間は正規である。
+\end{fact}
+
+\begin{thm}[ウリゾーンの補題]
+$(X,\mathfrak{O})$を正規空間とし、$R,L$をその互いに素な２つの閉集合とすると連続関数$f:X\rightarrow [0,1]$が存在し
+\[
+f|R=1,\ f|L=0
+\]つまり互いに素な２つの閉集合は関数で分離できる。
+\end{thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{証明}
+\begin{thm}[$G_{\delta}$集合]
+位相空間の部分集合は、可算個の開集合の共通部分としてかけるときにが$G_{\delta}$集合と呼ばれる。
+\end{thm}
+
+\begin{exam}
+開集合は$G_{\delta}$集合である。
+\end{exam}
+
+\begin{exam}
+距離空間$(X,d)$の閉集合は常に$G_{\delta}$集合である。実際、閉集合$A$に対して
+\[
+G_i=\{x\in X\mid d(x,A)<2^{-i}\}
+\]
+と定義すれば
+\[
+A=\bigcap_{i\in \nn}G_i
+\]
+と書ける。\par
+\end{exam}
+
+\begin{exam}
+一般の位相空間において閉集合は$G_{\delta}$集合であるとは限らない。
+実際$T$を非可算な離散集合とし、$X=T\cup\{\infty\}$をその一点コンパクト化とする。
+このとき点$\infty$の近傍はこの点を含む$X$の補有限集合\footnote{補集合はが有限集合である集合を補有限集合と時として呼ぶ。}であるから$\{\infty\}$は可算個の開集合の共通部分で表すことはできない。（$T$が非可算なので）
+\end{exam}
+
+\begin{prop}\label{zero}
+正規空間$X$の$G_{\delta}$閉集合$A$について、実連続関数$f:X\to [0,1]$が存在し
+\[
+f(x)=0\iff x\in A
+\]
+が成り立つ。
+\end{prop}
+\begin{proof}
+開集合の列$\{G_i\}_{i\in \nn}$は
+\[
+A=\bigcap_{i\in \nn}G_i
+\]
+を充たすものとし、$f_i:X\to[0,1]$ を
+\[
+f_i|A=0, f_i|X\setminus G_i=1
+\]
+となる関数とする。このような関数の存在はウリゾーンの補題から保証される。そして$f:X\to [0,1]$
+\[
+f(x)=\sum_{i=1}2^{-i}f_i(x)
+\]
+と置くと、これは連続関数であり$x\in A$ならば$f(x)=0$が成り立つ。このことの逆を示そう。
+もし$x\not\in A$なら$x\not\in G_n$となる$n\in \nn$が存在する。このとき$f_n(x)=1$であるから$f(x)>0$である。
+よって$f(x)=0$ならば$x\in A$である。\footnote{対偶}
+\end{proof}
+
+\begin{df}
+集合$X$に対し、$X\times X$の部分集合$\Delta_{X}$を
+\[
+\Delta_{X}=\{(x,x)\in X\times X\mid x\in X\}
+\]
+と定義する。これを$X$の対角線や対角線集合と呼ぶ。
+\end{df}
+
+\begin{df}
+位相空間$X$の対角線集合が$X\times X$の$G_{\delta}$集合であるときに空間$X$は対角$G_{\delta}$的であるという。
+\end{df}
+
+次のtube lemma (a.k.a. いつものやつ) と呼ばれる定理は簡単だが、幅広い応用を持つ。
+\begin{thm}[tube lemma]
+$X$を位相空間、$Y$をコンパクト位相空間とする。更に$x\in X$と$X\times Y$の開集合$O$が
+\[
+\{x\}\times Y\subset O
+\]
+を充たしているとする。このとき$X$における$x$の開近傍$N$が存在して
+\[
+\{x\}\times Y\subset N\times Y\subset O
+\]
+を充たす。
+\end{thm}
+
+\begin{proof}$A=\{x\}\times Y$と置く
+\[
+\mathcal{O}=\{U\times V\ |\ A\cap (U\times V)\neq\O,\ U\times V\subset O,\ U,VはそれぞれX,Yの開集合\}
+\]
+と置くと、$\mathcal{O}$は開集合族で直積の開集合の定め方から
+\[
+A\subset \bigcup \mathcal{O}
+\]
+が成り立つので$\mathcal{O}$は$A$の開被覆である。$A$は$Y$と同相であるからコンパクトなので
+\[
+A\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+となる$\mathcal{O}$の有限部分族$\{P_i\times Q_i\}_{i=1}^n$が存在する。そして明らかに
+\[
+Y\subset \bigcup_{i=1}^nQ_i
+\]である。ここで
+\[
+N=\bigcap_{i=1}^nP_i
+\]
+と置けば$x\in N$となり、さらに
+\[
+A=\{x\}\times Y\subset N\times Y\subset N\times \bigcup_{i}^nQ_i=\bigcup_{i=1}^n(N\times Q_i)\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+が成り立つので証明が終わる。
+\end{proof}
+
+tube lemmaのもう一つの応用として、変数の片側がコンパクト空間になっている2変数の実関数に関する次の性質を証明しよう。これはある意味で関数の最大値が連続的に動く事を示している。
+\begin{cor}[連続関数のsupの連続依存性]\label{sup}
+位相空間$X$とコンパクト空間$Y$及び$X\times Y$上の実連続関数$f:X\times Y\to \rr$について
+\[
+F(x)=\sup_{y\in Y}f(x,y)
+\]
+で定義される$F:X\to \rr$は$X$上の実連続関数である。
+\end{cor}
+
+\begin{proof}
+$X$の任意の点$a$での連続性を示す。$\ep>0$を任意に与える。そして$A=\{a\}\times Y$とし、$S=f(A)\subset \rr$と置く。$Y$はコンパクトなので$A$はコンパクト集合である。そして$d$を$\rr$の距離とすると
+\[
+D:\rr\to \rr ;r\mapsto d(r,S)
+\]
+は連続関数なので$T=D\circ f:X\times Y\to \rr$は連続である。さて$T$の連続性から
+\[
+O=\{(x,y)\ |\ T(x,y)=D\circ f(x,y)=d(f(x,y),S)<\ep\}
+\]
+は$X\times Y$の開集合で明らかに$A\subset O$である。よってtube lemmaから$a$の開近傍$N$が存在して
+\[
+A\subset N\times Y\subset O
+\]
+となる。このとき任意の$x\in X$と$y,z\in Y$について$D$の定義と$O$の定義から$(a,y),(x,z)\in N\times Y$ならば、
+$f(a,x)\in S$なので
+\begin{equation}
+|f(a,y)-f(x,z)|\le d(f(x,z),S)<\ep
+\end{equation}
+が成り立つ。$Y$のコンパクト性から各$w\in X$について
+\[
+F(w)=\sup_{y\in Y}f(w,y)=f(w,p_w)
+\]
+となる$p_w$が存在するので、$(1)$において$y=p_a$, $z=p_x$とおけば、$x\in N$のとき
+\[
+|F(a)-F(x)|<\ep
+\]
+が成り立つので点$a$での連続性がわかる。$a$は任意なので結局$F$は$X$上連続である。
+\end{proof}
+
+\begin{thm}
+対角$G_{\delta}$的なコンパクトハウスドルフ空間は距離付け可能である
+\end{thm}
+\begin{proof}
+$X\times X$はもちろんコンパクトハウスドルフ空間なので特に正規空間である。
+よって定理\ref{zero}より連続関数$f:X\times X\to [0,1]$で
+\[
+p\in \Delta_X\iff f(p)=0
+\]
+を充たすものが存在する。さて$F:X\times X\times X\to [0,\infty)$を
+\[
+F(x,y,z)=|f(x,z)-f(y,z)|
+\]
+と定義する。もちろんこれは連続である。
+系\ref{sup}から
+\[
+d(x,y)=\sup_{z\in X}F(x,y,z)
+\]
+で定義される関数$d:X\times X\to [0,\infty)$は連続である。
+更にこれが対称律$d(x,ty)=d(y,x)$および三角不等式を充たすことは定義から明らかである。
+非退化性を示そう。$d(a,b)=0$とする。
+写像$F$は常に正なので任意の$z\in X$について$F(a,b,z)=0$である。$z=b$と置けば$f$は対角線$\Delta_X$上で$0$なので
+\[
+F(a,b,b)=|f(a,b)-f(b,b)|=f(a,b)=0
+\]
+となる。$f$の取り方から$(a,b)\in \Delta_X$となるから$a=b$である。
+よって$d$は$X$上の距離となる。
+さて$d$の開球
+\[
+B(a,r;d)=\{x\in X\mid d(a,x)<r\}
+\]
+は$d_a:X\to [0,\infty)\ x\mapsto d(a,x)$を用いて
+\[
+B(a,r;d)=d_a^{-1}([0,r))
+\]
+と書ける。$d$が$X\times X$上連続なので$d_a$もそれに従って$X$上連続であり、$[0,r)$は$[0,\infty)$の開集合であるから$B(a,r;d)$は$\mathfrak{O}$に属する。
+$X$の開集合系を$\mathfrak{O}$、$d$から誘導される$X$の位相を$\mathfrak{O}_d$と書くことにすれば、上のことは
+\[
+\mathfrak{O}_d\subset \mathfrak{O}
+\]
+を意味する。距離空間はもちろんハウスドルフ空間なので命題\ref{fact}から$\mathfrak{O}_d=\mathfrak{O}$がわかる。
+よって$X$は距離化可能である。
+	\end{proof}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{応用}
+先の定理を用いて他のコンパクトハウスドルフ空間の距離化可能定理を証明していこう。
+
+\begin{thm}[ウリゾーンの距離化可能定理\footnote{ウリゾーンはまずコンパクトハウスドルフ空間の場合に距離化可能定理を証明して、のちに一般の正規空間へと一般化したようである。}]
+第二可算なコンパクトハウスドルフ空間は距離化可能である。
+\end{thm}
+\begin{proof}
+$X$をコンパクトハウスドルフ空間とする。このとき直積空間$X\times X$も第二可算である(考えてみよ)。
+さて$X\times X$の高々可算な開基を$\mathcal{U}$とする。そして
+\[
+\mathcal{A}=\{O\mid \text{$\Delta_X\subset O$で、かつ$O$は$\mathcal{U}$の元の有限個の和集合}\}
+\]
+と定義しよう。すると$\mathcal{U}$が高々可算であることから$\mathcal{A}$も高々可算である。\par
+今から$\bigcap\mathcal{A}=\Delta_X$を証明しよう。まず定義から$\Delta_X\subset \bigcap\mathcal{A}$ がわかる。\par
+逆を示そう。今$x\neq y$となる$X\times X$の任意の点$(x,y)$を取る。さて$X\times X$はコンパクトハウスドルフ、特に正則空間であり、
+%%%%%%%%%%%%%%%%%%ここら辺要修正
+$(x,y)\not\in X\times X$なので$O\in \mathcal{U}$が存在して$\Delta_X\subset O$及び
+$(x,y)\not\in O$を充たす。この$O$は$\mathcal{A}$に属するので$(x,y)\not\in \bigcap\mathcal{A}$\par
+以上から$\bigcap\mathcal{A}=\Delta_A$となる。$\mathcal{A}$は高々可算なので$X$は$G_{\delta}$対角的である。よって$X$は距離化可能である。
+\end{proof}
+
+\begin{thm}[Kat$\check{e}$tovの距離化可能定理]
+コンパクトハウスドルフ空間$X$について$X\times X\times X$が遺伝的正規ならば$X$は距離化可能である。
+\end{thm}
+\begin{proof}
+Kat$\check{e}$tovの補題から$X\times X$が$T_6$になるので、特に$X$は$G_{\delta}$対角的である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

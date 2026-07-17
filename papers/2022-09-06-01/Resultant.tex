@@ -1,0 +1,467 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{graphics}
+\usepackage{fbox}
+%\usepackage{showkeys}
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+
+\newcommand{\myfi}{\mathbb{F}}
+
+
+\newcommand{\mysyl}{\mathrm{Syl}}
+
+\newcommand{\myres}{\mathrm{Res}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\newcommand{\orefrac}[2]{
+\begin{array}{@{}c @{}}%
+            \multicolumn{1}{c|}{#1}%
+            \\%
+            \hline%
+            \multicolumn{1}{|c}{#2}%
+        \end{array}%
+}
+
+
+
+
+
+\newcommand{\oreorefrac}[2]{
+{ #1\rotatebox{90}{\scalebox{1}[1.5]{|}}} 
+\over \left|{#2}\right.
+}
+
+
+\newcommand{\oofrac}[2]{
+\frame{#1}\atop \frame{#2}
+}
+\newcommand{\ooofrac}[2]{
+#1 \atop #2
+}
+
+
+\newdimen\height
+\setbox0=\hbox{\Huge Hello, World!}
+\height=\ht0 \advance\height by \dp0
+
+
+
+
+
+
+
+\title{終結式}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{終結式の話}
+
+
+この文章では共通因子を持つ多項式と終結式の関係を紹介する．
+その応用として
+固有値が全て相異なる行列が行列の空間の中で稠密開集合になっていることを紹介する．系として対角化可能な行列は行列の空間の中で第二類集合になっていることがわかる．
+
+終結式の話については
+参考文献 \cite{E}を大いに参考にした．
+また
+\cite{L}には集結式のみならず代数学の色々な事項がたくさん載っている．
+
+
+\begin{lem}\label{lem:1111}
+$\myfi$
+を体とする．
+$f, g$を$\myfi$上の定数ではない多項式とし，
+その次数はそれぞれ$m$, $n$とする．
+このとき$f$と$g$が定数ではない共通因子を持つための必要十分条件は
+多項式$u, v\in \myfi[x]$が存在して以下の三つの条件を満たすことである．
+\begin{enumerate}
+\item 
+$u$と$v$は共に$0$ではない．
+\item 
+$\deg(u)\le n-1$
+かつ$\deg(v)\le m-1$
+である．
+\item 
+$u(x)f(x)+v(x)g(x)=0$が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+まず$f$と$g$が定数ではない共通因子を持つと仮定する．
+つまりある定数ではない多項式$a, b, h\in \myfi[x]$が
+存在して$f(x)=a(x)h(x)$と$g(x)=b(x)h(x)$
+を満たす．このとき$h$は定数ではないので少なくともその次数は$1$より大きいことに注意しよう．
+すると$\deg(u)\le m-1$かつ$\deg(v)\le n-1$
+であり，$a$と$b$は$0$ではない．
+よって$v=a$で$u=-b$と置くと
+\[
+u(x)f(x)+v(x)g(x)=b(x)a(x)h(x)-a(x)b(x)h(x)
+=0
+\]
+となるのでこの$u$, $v$は補題の条件を満たす．
+
+今度は逆に補題の条件にあるような多項式
+$u, v\in \myfi[x]$が存在すると仮定する．
+このとき
+\[
+u(x)f(x)=-v(x)g(x)
+\]
+となる．
+もしも$g$の素因子が全て
+$f$を割り切らないとすると全て$u$を割り切ることになり，
+つまり$g$は$u$の因子になる．
+しかし$\deg(u)\le n-1$なのでこれはあり得ない．
+よって$f$と$g$は共通因子を持つ．
+\end{proof}
+
+
+\begin{df}\label{df:resultant}
+$f, g \in \myfi[x]$をそれぞれ定数ではない多項式とし
+その次数はそれぞれ$m$, $n$とする．
+そして
+\begin{align}
+f(x)&=a_{m}x^{m}+\dots+a_{1}x+a_{0}\\
+g(x)&=b_{n}x^{n}+\dots +b_{1}x+b_{0}
+\end{align}
+と表示されているとする．
+このとき$f$と$g$のシルベスター行列
+$\mysyl(f, g)$とは
+以下で定義される$m+n$次の正方行列である．
+\[
+\mysyl(f, g)=
+\begin{pmatrix}
+a_{m}    &         &     &     & b_{n}   &         &     &     &  \\
+a_{m-1} & a_{m}&     &     & b_{n-1}& b_{n} &     &    & \\
+a_{m-2} & a_{m-1}&  \ddots&     & b_{n-2} & b_{n-1}& \ddots &    &\\
+\vdots & \vdots &  \ddots& a_{m}&\vdots & \vdots&  \ddots& b_{n}&\\
+\vdots&\vdots&   &    a_{m-1}& \vdots & \vdots & & b_{n-1}& \\
+a_{0} & a_{1} & &  \vdots & b_{0} & b_{1} & &\vdots &  \\
+   & a_{0}  & \ddots & \vdots &  & b_{0}& \ddots& \vdots & \\
+   &   &\ddots & a_{1}&  & & \ddots& b_{1}&\\
+   & & & a_{0} & & & & b_{0}& 
+\end{pmatrix}
+\]
+また$f$と$g$の終結式 $\myres(f, g)$ とは
+$\mysyl(f, g)$の行列式のことである．
+つまり
+\[
+\myres(f, g)=
+\begin{vmatrix}
+a_{m}    &         &     &     & b_{n}   &         &     &     &  \\
+a_{m-1} & a_{m}&     &     & b_{n-1}& b_{n} &     &    & \\
+a_{m-2} & a_{m-1}&  \ddots&     & b_{n-2} & b_{n-1}& \ddots &    &\\
+\vdots & \vdots &  \ddots& a_{m}&\vdots & \vdots&  \ddots& b_{n}&\\
+\vdots&\vdots&   &    a_{m-1}& \vdots & \vdots & & b_{n-1}& \\
+a_{0} & a_{1} & &   \vdots& b_{0} & b_{1} & & \vdots&  \\
+   & a_{0}  & \ddots & \vdots &  & b_{0}& \ddots& \vdots & \\
+   &   &\ddots & a_{1}&  & & \ddots& b_{1}&\\
+   & & & a_{0} & & & & b_{0}& 
+\end{vmatrix}
+\]
+である．
+同じことだが
+\[
+\myres(f, g)=
+\begin{vmatrix}
+a_{m}& a_{m-1}& a_{m-2}& \dots & \dots & a_{1} & a_{0} & & \\
+ & a_{m}& a_{m-1}& a_{m-2}& \dots & \dots & a_{1} & a_{0} &\\
+  & &\ddots &\ddots & &  & \ddots &\ddots & \\
+  &&&a_{m}&  a_{m-1}& \dots&\dots &a_{1}& a_{0}\\
+  b_{n}& b_{n-1}& b_{n-2}& \dots & \dots & b_{1} & b_{0} & & \\
+ & b_{n}& b_{n-1}& b_{n-2}& \dots & \dots & b_{1} & b_{0} &\\
+  & &\ddots &\ddots & &  & \ddots &\ddots & \\
+  &&&b_{n}&  b_{n-1}& \dots&\dots &b_{1}& b_{0}
+\end{vmatrix}
+\]
+でもある．
+
+$f$を$2$次以上の多項式とするとき，
+$f$と$f$の微分$f^{\prime}$
+の終結式 $\myres(f, f^{\prime})$
+のことを判別式と呼ぶ．
+\end{df}
+
+
+\begin{prop}\label{prop:2222}
+$\myfi$
+を体とする．
+$f, g$を$\myfi$上の定数ではない多項式とし，
+その次数はそれぞれ$m$, $n$とする．
+このとき$f$と$g$が定数ではない共通因子を持つための必要十分条件は
+$\myres(f, g)=0$である．
+\end{prop}
+\begin{proof}
+\begin{align}
+f(x)&=a_{m}x^{m}+\dots+a_{1}x+a_{0}\\
+g(x)&=b_{n}x^{n}+\dots +b_{1}x+b_{0}
+\end{align}
+と表示されているとする．
+
+まず最初に$f$と$g$が共通因子を持っているとする．
+このとき補題  
+\ref{lem:1111}より$\deg(u)\le n-1$と$\deg(v)\le m-1$
+となる多項式で
+$u(x)f(x)+v(x)g(x)=0$
+となるものが存在する．
+ここで
+\begin{align}
+u(x)&=r_{n-1}x^{n-1}+\dots+r_{1}x+r_{0}\\
+v(x)&=l_{m-1}x^{m-1}+\dots +l_{1}x+l_{0}
+\end{align}
+と表す．ここで$r_{m-1}=0$の場合も含んでいることに注意しよう．
+$u(x)f(x)+v(x)g(x)=0$の係数を考えると
+$x^{k}$の係数は
+\[
+\sum_{i+j=k}a_{i}r_{j}+\sum_{i+j=k}b_{i}l_{j}=0
+\]
+である．
+これを連立方程式と見ると
+\[
+\begin{pmatrix}
+a_{m}    &         &     &     & b_{n}   &         &     &     &  \\
+a_{m-1} & a_{m}&     &     & b_{n-1}& b_{n} &     &    & \\
+a_{m-2} & a_{m-1}&  \ddots&     & b_{n-2} & b_{n-1}& \ddots &    &\\
+\vdots & \vdots &  \ddots& a_{m}&\vdots & \vdots&  \ddots& b_{n}&\\
+\vdots&\vdots&   &    a_{m-1}& \vdots & \vdots & & b_{n-1}& \\
+a_{0} & a_{1} & &  \vdots & b_{0} & b_{1} & &\vdots &  \\
+   & a_{0}  & \ddots & \vdots &  & b_{0}& \ddots& \vdots & \\
+   &   &\ddots & a_{1}&  & & \ddots& b_{1}&\\
+   & & & a_{0} & & & & b_{0}& 
+\end{pmatrix}
+\begin{pmatrix}
+r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}
+\end{pmatrix}
+=0
+\]
+となる．
+ベクトル
+\[
+\begin{pmatrix}
+r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}
+\end{pmatrix}
+\]
+はゼロベクトルではないので，行列$\mysyl(f, g)$
+の固有値$0$に対応する固有ベクトル
+になっている．特に$\mysyl(f, g)$
+は固有値$0$を持つのでその行列式は$0$になる．
+つまり
+$\myres(f, g)=0$である．
+
+逆に$\myres(f, g)=0$だとすると
+固有値$0$に対応する固有ベクトルを
+\[
+\begin{pmatrix}
+r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}
+\end{pmatrix}
+\]
+としてここから逆に多項式$u$, $v$を定義してやると
+$u(x)f(x)+v(x)g(x)=0$となる．
+ここで，$u$, $v$のいずれかは$0$ではないが，
+式$u(x)f(x)+v(x)g(x)=0$から他方も$0$ではないことがわかる．
+この式が成り立つので補題
+\ref{lem:1111}から$f$と$g$
+は共通因子を持つことがわかる．
+\end{proof}
+
+
+\begin{cor}\label{cor:5555}
+$\myfi$
+を代数閉体とする．
+$f, g$を$\myfi$上の定数ではない多項式とし，
+その次数はそれぞれ$m$, $n$とする．
+このとき$f$と$g$が
+共通の根を持つための必要十分条件は
+$\myres(f, g)=0$である．
+\end{cor}
+
+
+\begin{cor}\label{cor:6666}
+$\myfi$
+を代数閉体とする．
+$f$を$\myfi$上の$2$次以上の多項式とし，
+その次数はそれぞれ$m$, $n$とする．
+このとき$f$が
+重根を持つための必要十分条件は
+$\myres(f, f^{\prime})=0$である．
+\end{cor}
+
+\section{応用}
+終結式の応用として
+互いに異なる固有値を持つ複素行列全体が
+複素行列の空間の中で稠密開集合になることを示す．
+
+
+\begin{df}\label{df:mmmm}
+$\myfi$を体とする．
+このとき$M(n; \myfi)$
+を成分が$\myfi$に入っている$n$次正方行列の
+全体とする．もしも$\myfi$
+に位相が入っているなら$M(n, \myfi)$と$\myfi^{n\times n}$
+は自然に同一視できるので$M(n, \myfi)$
+に位相を導入することができる．
+\end{df}
+
+次の補題の証明は，例えば
+参考文献 \cite{D}などを参照せよ．
+もしくはただ単に多変数の解析関数の一致の定理からももちろん従う．
+
+\begin{thm}[多項式に関する一致の定理]
+\label{thm:poly}
+$p$を$n$変数の実係数多項式とする．
+もしも$p$の零点全体の集合$Z$が内点を持つならば
+$p$は恒等的に$0$となる．
+つまり$p$が定数$0$に等しくないならば
+$p(x)\neq 0$となる$x\in \rr^{n}$全体の集合は$\rr^{n}$
+のなかで稠密になる．
+\end{thm}
+
+
+\begin{thm}\label{thm:dense}
+$D$を$M(n, \cc)$
+の元で互いに異なる固有値を持つもの全体とする．
+このとき$D$は$M(n, \cc)$の
+稠密開集合である．
+\end{thm}
+\begin{proof}
+行列が$D$に属することはその行列の
+固有多項式が重根を持たないことと同値であることに注意しよう．
+$A$を$M(n, \cc)$の元としたときにその固有多項式$f_{A}$を
+\[
+f_{A}(x)=
+x^{n}+\alpha_{n-1}(A)x^{n-1}+\dots + \alpha_{0}(A)
+\]
+と表すと，各$\alpha_{i}$は特定の行列に依存しない，
+$A$の成分を変数とする($n\times n$変数の)(普遍的な)多項式となる．
+そして判別式$\myres(f_{A}, f_{A}^{\prime})$
+は$f_{A}$の係数の多項式になるので，
+結局$\myres(f_{A}, f_{A}^{\prime})$は$A$の成分を変数とする多項式になる．
+ところで$0$ではない多項式の0点は内点を持たない閉集合になるので (定理 \ref{thm:poly})，
+$\myres(f_{A}, f_{A}^{\prime})\neq 0$
+となる$A$全体は$M(n, \cc)$の中で
+稠密開集合となる．
+$\myres(f_{A}, f_{A}^{\prime})\neq 0$
+であることと$A$の固有値が互いに異なるということは同値なので，結局$D$が$M(n, \cc)$の中で稠密開集合となっていることがわかる．
+これで証明が終わる．
+\end{proof}
+
+
+\begin{cor}\label{cor:corcor}
+$E$を
+$M(n, \cc)$の元で対角化可能なもの全体とすると，
+$E$は$M(n, \cc)$の中で
+第二類集合となる．
+\end{cor}
+
+\begin{cau}
+実係数の行列については異なる固有値を持つものが稠密であるとは限らない．実際，$M(2, \rr)$において，その固有値が実数ではない複素数であるもの全体は内点を持つ．
+なぜなら実係数多項式の
+二次方程式の判別式が負であることと実数ではない複素数解を持つことは同値だからである．
+\end{cau}
+
+
+\begin{thebibliography}{9}
+\bibitem{E}
+H. Wppdy, 
+\textit{Polinomial Resultants}, 
+ \begin{verbatim}
+http://buzzard.ups.edu/courses/2016spring/projects
+/woody-resultants-ups-434-2016.pdf
+ \end{verbatim}
+ \bibitem{L}
+ S. Lang,  \textit{Algebra}, 
+GTM,  Vol. 211,  Springer, 2012.
+
+\bibitem{D}
+はてなブログ「電波通信」の記事
+「多項式に関する一致の定理」, 
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2022/03/12/160928
+\end{verbatim}
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,3310 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{CL}}
+
+\newcommand{\nai}{\mathrm{INT}}
+
+\newcommand{\bound}{\mathrm{Fr}}
+
+\newcommand{\myinv}[1]{#1^{\gets}}
+
+\newcommand{\mysm}[1]{#1_{?}}
+
+\newcommand{\myps}{\mathfrak{F}}
+
+\newcommand{\mycrset}[1]{\mathfrak{C}(#1)}
+
+\newcommand{\myopseta}[1]{W(#1)}
+\newcommand{\myopsetb}[1]{O(#1)}
+
+\newcommand{\mysha}[1]{\tau_{#1}}
+
+\title{
+花井--森田・ストーン
+の定理
+}
+\author{ナンブ　キトラ 電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+
+
+この文章では
+花井--森田・ストーンの定理を
+Bing--長田--Smirnovの距離化可能定理を事実として扱って証明してこの距離化可能定理
+以外の部分はなるべく自己完結的に記述する．
+なるべく．
+
+私は
+Bing--長田--Smirnovの距離化可能定理
+が基本的だと思っているのでこのような構成にしている．
+
+花井--森田・ストーンの定理とは，
+距離化可能空間の閉写像による像が
+距離化可能であるための必要十分条件を
+述べた定理である．
+この文章ではこの定理を証明するために
+まず距離化可能性が
+完全写像で保たれることを証明したのちに
+花井--森田・ストーンの定理を証明する．
+とりあえず主張を読みたい人は
+定理\ref{thm:hms}がそれなので
+読むといい．
+
+
+基本的に
+セクション
+\ref{sec:basis}
+から
+\ref{sec:paracpt}
+は読み飛ばしてわからなくなったら読み戻ると良いと思う．
+
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+\section{基本的な記号と定義}\label{sec:basis}
+
+
+\subsection{記号と概念}
+\begin{df}
+この文章では写像
+$f\colon X\to Y$
+による$Y$の部分集合
+$S$の\textbf{逆像}
+を
+$\myinv{f}(S)$
+と書くことにする．
+普通は
+$f^{-1}(S)$
+と書くところである．
+ただし$X$の部分集合$A$
+の$f$による像はただ単に
+$f(A)$と書くことにする．
+たまに
+$f_{\to}(A)$って書いたりするよね．
+\end{df}
+
+
+\begin{df}[疎な族]
+位相空間$X$
+の部分集合からなる族
+$\mathcal{A}=\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が\textbf{疎(discrete)}
+であるとは
+$X$
+の任意の点
+$x\in X$
+について
+その近傍
+$N$
+が存在して，
+$N$
+が空でない交わりを持つような
+$\mathcal{A}$
+の元はたかだか一個しかないとき
+にいう．
+また
+$\mathcal{A}$
+が\textbf{$\sigma$疎 ($\sigma$-discrete)}
+であるとは
+ある可算族$\mathcal{A}_{n}$
+が存在して
+$\mathcal{A}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{A}_{n}$
+でありなおかつ
+各$\mathcal{A}_{n}$
+は疎であるときにいう．
+\end{df}
+
+\begin{df}[局所有限族]
+位相空間
+$X$
+の部分集合族
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+が
+\textbf{局所有限}
+であるとは
+任意の
+$x\in X$
+についてある
+$x$の近傍
+$N$
+が存在して
+$N$と交わりを持つような
+$\mathcal{A}$
+の元が有限個しかない時にいう．
+つまり集合
+$\{\, i\in I\mid A_{i}\cap N\neq \emptyset\, \}$
+が有限集合ということである．
+またこの文章では
+局所有限な族
+$\mathcal{A}$
+と
+$x\in X$
+について
+\textbf{$\mathcal{A}$の局所有限性を担保する$x$の近傍$V$}
+という文言をしばしば用いるがこれは
+$x$の近傍$V$
+であって
+$\mathcal{A}$
+の有限個の元としか交わらないもの
+を指す．
+\end{df}
+
+\begin{df}[細分]
+位相空間
+$X$
+の部分集合族
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+と
+$\mathcal{B}=\{B_{t}\}_{t\in T}$
+について
+$\mathcal{B}$
+が
+$\mathcal{A}$
+の
+\textbf{細分}
+であるとは
+任意の$t\in T$
+に対して
+$i\in I$
+が存在して
+$B_{t}\subset A_{i}$
+となる時にいう．
+\end{df}
+
+\begin{df}[パラコンパクト]
+位相空間
+$X$
+が
+\textbf{パラコンパクト}
+であるとは
+$X$
+の任意の開被覆
+$\mathcal{A}=\{U_{i}\}_{i\in I}$
+に対して
+$\mathcal{A}$
+の細分であるような
+局所有限な開被覆
+$\mathcal{B}$
+が存在するときにいう．
+\end{df}
+
+\begin{df}
+位相空間$X$
+とその部分集合
+$S$について
+$S$の閉包を
+$\cl(S)$
+で表す．
+どの空間の閉包か強調するために
+$\cl_{X}(S)$
+表すときもある．
+\end{df}
+
+
+\begin{df}[閉写像] 
+位相空間$X$, $Y$
+の間の連続写像
+$f:X\to  Y$
+が
+\textbf{閉写像}
+であるとは
+$X$
+の閉集合の
+$f$
+による像が
+$Y$
+の閉集合に常になってることである．
+\end{df}
+
+ついでに完全写像も定義する．
+\begin{df}[完全写像]
+位相空間$X$, $Y$
+の間の連続写像
+$f:X\to  Y$
+が
+\textbf{完全写像}であるとは
+$f$が閉写像であり
+なおかつ
+任意の$y\in Y$
+について
+$\myinv{f}(y)$
+がコンパクトである時にいう．
+\end{df} 
+
+
+
+\subsection{基本的なテクニック}
+
+\begin{lem}\label{lem:sososo}
+$X$
+を位相空間とする．
+このとき$X$の部分集合
+からなる局所有限な族
+$\mathcal{A}$
+が疎であることと
+族$\{\, \cl(A)\mid A\in \mathcal{A}\, \}$
+が互いに素な族であって
+なおかつ
+局所有限であることは
+同値である．
+\end{lem}
+\begin{proof}
+簡単なので省略．
+
+一般に$\mathcal{A}$
+が互いに素で局所有限であることと
+$\mathcal{A}$
+が疎であることは同値ではない．
+閉包をとると交わりを持つような有限族を考えると簡単に
+反例になっている．
+閉包をとった時に互いに素としないといけない．
+はてなブログ
+電波通信の過去の記事ではこの間違いが含まれているが
+簡単に修正できるだろう．
+\end{proof}
+
+
+\begin{lem}\label{lem:clcup}
+$X$
+を位相空間とし
+$\mathcal{A}=\{\, A_{i}\, \}_{i\in I}$
+を
+$X$
+の部分集合からなる
+局所有限な
+族
+とする．
+このとき
+\[
+\cl\left(\bigcup_{i\in I}A_{i}\right)
+=
+\bigcup_{i\in I}\cl(A_{i})
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$\cl\left(\bigcup_{i\in I}A_{i}\right)
+\supset \bigcup_{i\in I}\cl(A_{i})$
+は当たり前である．
+逆を示そう．
+点$x\in X$
+は
+$\cl\left(\bigcup_{i\in I}A_{i}\right)$
+の元とする．
+このとき
+$\mathcal{A}$
+の局所有限性から
+$x$の開近傍
+$N$が存在して
+これは有限個の
+$\mathcal{A}$
+の元としか交わらない．
+ここで
+$S=\{\,i\in I\mid N\cap A_{i}\neq\emptyset\, \}$
+と定義する．もちろん$S$
+は有限集合である．
+このとき任意の
+$i\in I\setminus S$
+について
+$N\cap A_{i}=\emptyset$
+なので
+$x\not \in \cl\left(\bigcup_{i\in I \setminus S}A_{i}\right)$
+である．
+ここで
+閉包は有限個の和集合と可換なので
+\[
+\cl\left(\bigcup_{i\in I}A_{i}\right)
+=\bigcup_{s\in S}\cl(A_{s})\cup \cl\left(\bigcup_{i\in I \setminus S}A_{i}\right)
+\]
+が成り立つ．
+$x\not \in \cl\left(\bigcup_{i\in I \setminus S}A_{i}\right)$
+なので$x$は
+$x\in \bigcup_{s\in S}\cl(A_{s})$を満たす．
+よって特に
+$x\in \bigcup_{i\in I}\cl(A_{i})$
+である．
+\end{proof}
+
+
+\begin{lem}\label{lem:closurefin}
+$X$を位相空間とし
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+は
+$X$の部分集合族からなる
+局所有限な族とする．
+このとき族
+$\{\cl(A_{i})\}_{i\in I}$
+も局所有限である．
+\end{lem}
+\begin{proof}
+簡単なので省略する．
+\end{proof}
+
+\begin{lem}\label{lem:wwww}
+$X$
+を位相空間とし
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+は
+$X$
+の閉集合からなる
+局所有限な族とする．
+このとき
+$X$
+の部分集合
+$E$について
+\[
+W(E)=X\setminus \left(\bigcup_{i\in I, E\cap A_{i}=\emptyset}A_{i}\right)
+\]
+と定義すると
+これは開集合になり，
+$E\subset W(E)$
+を満たす．
+さらに
+$a\in I$が
+$W(E)\cap A_{a}\neq \emptyset$
+を満たすことと
+$A_{a}\cap E\neq \emptyset$
+は同値である．
+特に
+$E$が一点集合
+$\{x\}$
+の時には
+$W(\{x\})\cap A_{a}\neq \emptyset$
+であることと
+$x\in A_{a}$
+となることが同値になる．
+\end{lem}
+\begin{proof}
+$W(E)$
+が開集合になることは
+補題
+\ref{lem:clcup}
+からわかる．
+残りは定義を見ればわかる．
+\end{proof}
+\begin{rmk}
+この文章では
+この$W(E)$
+を使って手ずから構成した被覆が
+局所有限であることを示すことが多い．
+\end{rmk}
+
+
+
+\begin{lem}\label{lem:cptfin}
+$X$を位相空間とし，
+$K$をそのコンパクト部分集合とする．
+さらに
+$\{A_{i}\}_{i\in I}$
+を
+$X$の部分集合からなる
+局所有限な
+族とする．
+このとき$K$の
+近傍$U$が存在して
+$U$は
+$\{A_{i}\}_{i\in I}$
+の有限個の元としか交わらない．
+\end{lem}
+\begin{proof}
+$K$
+の各点について
+$\{A_{i}\}_{i\in I}$
+の局所有限性を担保するような
+開近傍を取り，
+$K$
+を被覆する．
+$K$
+のコンパクト性
+を用いてそれの有限被覆をとるとその有限被覆の
+和集合が求める
+$K$
+の近傍になっている．
+\end{proof}
+
+\begin{lem}\label{lem:onaji}
+$X$
+を位相空間とし，
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+をその疎な
+族とする．
+そして族$\mathcal{B}=\{B_{i}\}_{i\in I}$
+は
+$\mathcal{A}$と
+同じ添字
+$I$
+で添字付けされており，
+任意の
+$i\in I$
+について
+$B_{i}\subset A_{i}$
+を満たすとする．
+このとき
+$\mathcal{B}$
+も疎
+である．
+\end{lem}
+\begin{proof}
+補題
+\ref{lem:sososo}
+からわかる．
+直接的な証明ももちろんある．
+\end{proof}
+
+
+
+\section{正規性}\label{sec:normalccpt}
+
+
+\begin{df}[$\aleph_{0}$-族正規]
+位相空間$X$が
+\textbf{$\aleph_{0}$-族正規($\aleph_{0}$-collectionwise normal)}であるとは
+その任意の閉集合からなる疎な可算族
+$\mathcal{A}=\{A_{i}\}_{i\in \zz_{\ge 0}}$
+に対して開集合からなる疎な可算族
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して，任意の
+$i\in \zz_{\ge 0}$について
+$A_{i}\subset U_{i}$
+を満たす時にいう．
+\end{df}
+一般に族正規というのもあるがそれは族の濃度に制限を加えないものである．
+さて上で仰々しく定義したこの概念は実は
+ただの正規性と同値になってしまう．
+
+筆者がこのことを知ったのは
+\cite{dm1}
+が最初だと思う．
+これを最初に証明した原論文
+はおそらく
+\cite{MR0063018}だと思われる．
+
+\begin{thm}\label{thm:alephcn}
+位相空間$X$
+が正規であることと，
+$\aleph_{0}$-族正規であることは同値である．
+\end{thm}
+\begin{proof}
+$\aleph_{0}$-族正規ならば正規であるから
+$X$が正規のときにこれが
+$\aleph_{0}$-族正規であることを証明すれば十分である．
+可算族
+$\mathcal{A}=\{A_{i}\}_{i\in\zz_{\ge 0}}$
+は疎であり閉集合からなるとする．
+各$i\in \zz_{\ge 0}$
+に対して
+\[
+B_{i}=X\setminus \left(\bigcup_{j\in \zz_{\ge 0}, j\neq i}A_{j}\right)
+\]
+と定義すると
+$\mathcal{A}$
+が閉集合からなる
+疎な族であることから
+各
+$B_{i}$
+は開集合である．
+さらに各
+$i\in \zz_{\ge 0}$
+について
+\[
+A_{i}\subset B_{i}
+\]
+となることに注意しよう．
+このとき
+$X$の正規性から，
+各$i$について
+開集合
+$P_{i}$
+が存在して
+\[
+A_{i}\subset P_{i}\subset \cl(P_{i})\subset B_{i}
+\]
+となる．
+ここで
+$\cl(P_{i})\subset B_{i}$
+ということと，
+$B_{i}$
+の定義から，
+もしも
+$j\in\zz_{\ge 0}$
+が
+$j\neq i$を満たすならば
+\[
+A_{j}\cap \cl(P_{i})=\emptyset
+\]
+であることにも注意しよう．
+
+
+さて今，
+開集合
+$Q_{i}$
+を
+\[
+Q_{i}=P_{i}\setminus \left(\bigcup_{j\le i}\cl(P_{j})\right)
+\]
+と定義する．
+このとき各
+$Q_{i}$
+は開集合であるし，
+\[
+Q_{i}\subset P_{i}
+\]
+である．
+そして
+上の注意から
+\[
+A_{i}\subset  Q_{i}
+\]
+でもある．
+今から
+$\{Q_{i}\}$
+が互いに素であることを証明しよう．
+$i\neq k$
+と仮定する．
+このとき
+$i<k$
+と仮定しても良い．
+このとき
+$Q_{i}\subset P_{i}$
+と
+$Q_{k}$の定義から
+$Q_{i}\cap Q_{k}\neq \emptyset$
+となる．
+ここでさらに
+$X$
+の正規性を用いて
+\[
+\bigcup_{i\in \zz_{\ge 0}}A_{i}\subset W
+\subset \cl(W)
+\subset \bigcup_{i\in \zz_{\ge 0}}Q_{i}
+\]
+となる開集合
+$W$
+をとる．
+ここで
+$\mathcal{A}$
+が疎であることを使って
+$\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+が閉集合であるということを用いていることに注意しよう．
+そして
+各
+$i\in \zz_{\ge 0}$
+について
+\[
+U_{i}=W\cap Q_{i}
+\]
+と定義する．
+今から
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が疎な族
+であることを証明しよう．
+点
+$x\in X$
+を任意にとる．
+場合分けを行う．
+
+
+
+
+場合分けその1. 
+$x\in Q_{i}$
+となる
+$i\in \zz_{\ge 0}$
+が存在する場合．
+このとき
+族$\{Q_{i}\}_{i\in \zz_{\ge 0}}$
+が互いに素であることから
+族
+$\{U_{i}\}$も互いに素である．
+よって
+$Q_{i}$
+は
+$U_{i}$のみとしか交わらない．
+
+
+
+場合分けその２．
+どんな
+$i\in \zz_{\ge 0}$
+についても
+$x\not\in Q_{i}$
+であるとき．
+このとき
+$x\not \in \bigcup_{i\in \zz_{\ge 0}} Q_{i}$
+なので，
+特に
+$x\not\in \cl(W)$
+である．よって開集合
+$X\setminus \cl(W)$
+は
+$x$
+の近傍であると同時に
+いかなる
+$U_{i}$とも交わりを持たない．
+
+
+
+以上のことから
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が疎な族であることがわかった．
+$\mathcal{A}$
+は任意であったので，
+結局
+$X$が
+$\aleph_{0}$-族正規であることが証明された．
+\end{proof}
+
+
+以下の命題は
+\cite{Den4}
+などを参照のこと．
+\begin{fact}\label{fact:normal}
+位相空間
+$X$
+が正規であることと以下の
+命題は同値である．
+$X$の
+開集合からなる任意の局所有限被覆
+$\{U_{i}\}_{i\in I}$
+に対して
+開被覆$\{V_{i}\}_{i\in I}$
+が存在して，任意の$i\in I$
+について
+$\cl(V_{i})\subset U_{i}$
+が成り立つ．
+
+\end{fact}
+
+
+\section{可算コンパクト}
+
+このセクションは
+\cite{Den1}
+の引き写しである．
+
+\begin{df}[可算コンパクト]
+位相空間
+$X$
+が
+\textbf{可算コンパクト}
+であるとは，
+その任意の可算開被覆について
+有限な部分被覆を選べるときにいう．
+\end{df}
+
+\begin{df}[完全集積点]
+位相空間
+$X$の
+部分集合
+$A$について，
+$x\in X$
+が
+$A$
+の
+\textbf{完全集積点}
+であるとは，
+$x$
+の任意の開近傍
+$U$
+について
+\[
+\card(A)=\card(U\cap A)
+\]
+となるときにいう．
+\end{df}
+
+\begin{thm}\label{thm:ccpt}
+位相空間$X$について以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$X$
+は可算コンパクトである．
+\item 
+$X$
+の任意の可算部分集合
+$A$
+に完全集積点が存在する．
+\item 
+$X$
+の任意の無限部分集合
+$A$
+について点
+$a\in X$
+が存在して
+$a$
+の任意の近傍
+$N$について
+\[
+\card(A\cap N)\ge \aleph_{0}
+\]
+が満たされる．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$(2)$
+と
+$(3)$が同値であることはよくわかる．
+$(1)$
+と
+$(2)$が同値であることを示そう．
+対偶を証明する．
+
+[$\lnot (2)\To \lnot(1)$の証明]
+
+$\lnot(2)$より，
+完全集積点を持たない可算無限集合
+$A$
+が存在する．
+完全集積点を持たないので各点
+$x\in X$
+について
+$x$
+の近傍
+$U_x$
+が存在して
+$\card(U_x\cap A)<\aleph_{0}$
+となる．
+さて
+$A$
+の有限部分集合
+$S$
+について
+\[
+O_{S}=\bigcup\{U_x\mid U_x\cap A=S\}
+\]
+と定義しよう．
+$A$
+の有限部分集合全体
+$\mathcal{F}$
+は可算集合であるから，
+$\{O_{S}\}_{S\in \mathcal{F}}$
+は可算な族であり，
+$X$
+の開被覆である．
+しかし構成の仕方からわかるように
+$\{O_{S}\}_{S\in \mathcal{F}}$
+の有限部分被覆
+$\mathcal{U}$
+の和集合
+$\bigcup\mathcal{U}$
+と
+$A$
+について
+$(\bigcup\mathcal{U})\cap A$
+は有限集合である．
+よって
+$X\neq \bigcup\mathcal{U}$
+が成り立つ．
+つまり
+$\{O_{S}\}_{S\in \mathcal{F}}$
+は有限部分被覆を持たない
+$X$
+の可算開被覆である．
+ゆえに
+$X$は可算コンパクトでない．
+
+
+[$\lnot (2)\To \lnot(1)$終わり]
+
+
+
+[$\lnot (1)\To \lnot (2)$の証明]
+
+$X$
+は可算コンパクトでないから有限部分被覆を持たない可算開被覆
+$\mathcal{U}=\{U_i\}_{i\in \nn}$が存在する．
+そこで
+$\{a_i\}_{i\in \nn}$を
+\[
+a_n\not\in \bigcup_{i=0}^{n}U_{i}
+\]
+でかつ
+$n\neq m\To a_n\neq a_m$
+となるように選ぶ
+（これはちゃんと実行できる）．
+そして
+$A=\{a_n\}_{n\in \nn}$
+とすると
+$A$
+は可算無限集合である．
+これが完全集積点を持たないことを示そう．
+任意の
+$x\in X$
+について
+$x\in U_m$
+となる
+$\mathcal{U}$
+の元をとると，
+構成の仕方から
+$U_m$
+は高々
+$m+1$
+個の
+$A$
+の元としか交わらない．
+よって
+$x$
+は任意であったから
+$A$
+は完全集積点を持たない
+$X$の可算部分集合である．
+
+
+[$\lnot (1)\To \lnot (2)$終わり]
+\end{proof}
+
+\begin{cor}\label{cor:ccpt}
+$T_{1}$
+位相空間
+$X$
+が
+可算コンパクトでないとすると，
+$X$
+の閉集合であるような可算離散空間
+$A=\{p_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+特にこのような
+$\{\{p_{i}\}\}_{i\in \zz_{\ge 0}}$
+は疎な族でもある．
+\end{cor}
+\begin{proof}
+今
+$X$
+は可算コンパクトではないので
+定理
+\ref{thm:ccpt}
+から
+完全集積点を持たないような可算部分集合
+$A=\{p_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+今から
+$\{\{p_{i}\}\}_{i\in \zz_{\ge 0}}$
+が疎であることを証明しよう．
+どの点
+$x\in X$
+も
+$A$
+の完全集積点ではないので
+$x$
+の近傍
+$M$
+が存在して
+$\card(A\cap M)<\aleph_{0}$
+となる．
+今
+$X$
+は
+$T_{1}$
+と仮定しているので，
+有限集合
+$S=(A\cap M)\setminus \{x\}$
+は閉集合である．
+よって
+$N=M\setminus S$
+とすればこれは
+$\card(A\cap N)\le 1$
+を満たす．
+よって
+$\{p_{i}\}_{i\in \zz_{\ge 0}}$
+は疎な族である．
+このことから
+$A$
+が離散集合で閉集合であることもわかる．
+\end{proof}
+
+
+\section{閉写像(と完全写像)}
+
+このセクションは
+\cite{Den2}
+の引き写しである．
+
+次の良さのある命題が成り立つ．
+\begin{prop}[射影公式]\label{prop:yoi}
+写像
+$f:X\to Y$
+と
+$A\subset X,\ B\subset Y$
+について
+\[
+f(A\cap \myinv{f}(B))=f(A)\cap B
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+簡単なので省略
+\end{proof}
+\begin{cor}\label{cor:yosa}
+写像
+$f:X\to Y$
+と
+$A\subset X,\ B\subset Y$
+について
+\[
+A\cap \myinv{f}(B)=\emptyset\iff f(A)\cap B=\emptyset
+\]
+が成り立つ．
+\end{cor}
+\begin{proof}
+$f(\emptyset)=\emptyset$, 
+$\myinv{f}(\emptyset)=\emptyset$
+と射影公式からすぐにわかる．
+\end{proof}
+\begin{df}[小像（small image ）]$A\subset X$の写像
+$f:X\to Y$
+による
+\textbf{小像}
+とは
+\[
+\mysm{f}(A)=Y\setminus f(X\setminus A)
+\]
+のことである．
+\end{df}
+\begin{rmk}
+元の記事
+\cite{Den2}
+では
+小像は
+$f_{!}$って書いていたが
+元ネタがなんなのかわからなかったので
+とりあえず今回は
+$\mysm{f}$
+と書くことにした．
+おそらく
+層の理論の
+コンパクトサポートのやつのような気がするが
+何を思って
+この記号で書いたのかよくわからない．
+小像という名前も由来がわからない．
+圏論で
+逆像と順像が随伴で逆像には小像も随伴になっているので
+逆像はcup とcap
+が交換するみたいな話が元ネタだった気がするが
+どこで聞いたのかわからない．
+おそらく
+参考文献
+\cite{tog}
+あたりが元ネタかと思う．
+ちなみに
+順像
+$f(A)$
+は$\exists x\in A \ \varphi(x)$
+に対応していて
+小像
+$\mysm{f}(A)$は
+$\lnot \forall x\in A \lnot \varphi(x)$
+に対応しているような気がする．
+\end{rmk}
+小像は一見掴みどころが無いように見えるが、次の命題を見ればなにとなくわかると思う．
+\begin{prop}\label{prop:wakari}
+写像
+$f;X\to Y$
+と
+$A\subset X$
+について
+\[
+y\in \mysm{f}(A)\iff \myinv{f}(y)\subset A
+\]
+が成り立つ．特に$S\subset Y$について
+\[
+S\subset \mysm{f}(A)\iff \myinv{f}(S)\subset A
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+先の系を用いて
+\begin{eqnarray*}
+y\in \mysm{f}(A)\iff y\not\in f(X\setminus A)\iff \{y\}\cap f(X\setminus A)=\emptyset
+\\ 
+\iff \myinv{f}(y)\cap (X\setminus A)=\emptyset
+\iff \myinv{f}(y)\subset A
+\end{eqnarray*}
+となり前半が成り立つ．後半も同様．
+\end{proof}
+
+\begin{lem}\label{lem:inc}
+写像
+$f;X\to Y$
+と
+$A\subset X$
+について
+$\mysm{f}(A)\subset f(A)$
+が成り立つ．
+\end{lem}
+\begin{proof}
+当たり前．
+\end{proof}
+
+
+
+
+
+さて次の命題に移る前に位相空間
+$(X,\mathfrak{O})$
+について
+$A\subset X$
+の近傍とは
+$A\subset \nai (V)$
+となる集合
+$V$
+のことであったことを思い出そう．
+$A=\{x\}$のとき、
+$A=\{x\}$の近傍は点$x$の近傍と同じ意味である．
+
+次の便利な閉写像の特徴付けがある。
+\begin{thm}\label{thm:characlosed}
+位相空間
+$X$, 
+$Y$
+の間の連続写像
+$f:X\to  Y$
+について以下は同値
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item
+写像$f$は閉写像である．
+\item 
+写像$f$
+によるXの開集合の小像はYの開集合である．
+\item\label{item:used}
+任意の
+$S\subset  Y$
+と
+$\myinv{f}(S)$
+の任意の近傍
+$U$
+について
+$S$
+の近傍
+$V$
+が存在して
+\[
+f^{-1}(S)\subset f^{-1}(V)\subset U
+\]
+が成り立つ．
+\item\label{item:used2}
+任意の
+$y\in Y$
+と
+$\myinv{f}(y)$
+の任意の近傍
+$U$
+について
+$y$
+の近傍
+$V$
+が存在して
+\[
+\myinv{f}(y)\subset \myinv{f}(V)\subset U
+\]
+が成り立つ．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$(1)\To(2)$,
+$(2)\To(3)$,
+$(3)\To(4)$,
+$(4)\To(1)$
+の順番で証明する．
+
+[$(1)\To(2)$の証明]
+
+$U$を$X$の開集合とする．
+このとき
+$X\setminus U$
+は閉集合であるから
+$f$
+は閉写像なので
+$f(X\setminus U)$は$Y$の閉集合である．
+よって$\mysm{f}(U)=Y\setminus f(X\setminus U)$は開集合である．
+
+[$(1)\To(2)$の証明終わり]
+
+
+[$(2)\To(3)$の証明]
+
+$\myinv{f}(S)$
+の近傍
+$U$
+は開近傍としてもよい．
+条件$(2)$
+から
+$U$
+の小像
+$\mysm{f}(U)$
+は開集合で
+$\myinv{f}(S)\in U$
+より
+$S\subset  \mysm{f}(U)$
+である．
+$V=\mysm{f}(U)$
+とすれば
+\[
+S\subset  V=\mysm{f}(U)\subset f(U)
+\]
+なので
+$\myinv{f}(S)\subset \myinv{f}(V)\subset U$が成り立つ．
+
+[$(2)\To(3)$の証明終わり]
+
+
+[$(3)\To(4)$の証明]
+
+自明．
+
+[$(3)\To(4)$の証明終わり]
+
+[$(4)\To(1)$]の証明]
+
+$A$を$X$の閉集合とする．
+そして$y\not\in f(A)$を任意に取る．
+すると系\ref{yosa}より
+\[
+\{y\}\cap f(A)=\emptyset\iff \myinv{f}(y)\cap A=\emptyset
+\iff
+ \myinv{f}(y)\subset X\setminus A
+\]
+となる．
+$X\setminus A$
+は開集合なので
+条件
+$(3)$
+から
+$y$
+の開近傍
+$V$
+が存在して
+\[
+\myinv{f}(y)\subset \myinv{f}(V)\subset X\setminus A
+\]
+となる．
+ここで系\ref{cor:yosa}より
+\[
+\myinv{f}(V)\subset X\setminus A\iff \myinv{f}(V)\cap A=\emptyset\iff V\cap f(A)=\emptyset
+\]
+となり
+$y$
+は
+$y\not\in f(A)$
+となる任意の
+$Y$
+の元なので
+$Y\setminus f(A)$
+は開集合となり，
+結局$f(A)$が閉集合であることがわかる．
+ここで
+$A$
+は$X$の任意の閉集合であったので
+$f$は閉写像である．
+
+
+[$(4)\To(1)$]の証明終わり]
+
+以上で全ての証明が終わる．
+\end{proof}
+
+
+\begin{cor}\label{cor:closednormal}
+正規ハウスドルフ空間の閉像
+は正規ハウスドルフ．
+\end{cor}
+
+
+
+
+
+\section{パラコンパクト性}\label{sec:paracpt}
+
+このセクションでは
+パラコンパクト性に関する命題を証明する．
+
+
+
+以下の命題は
+\cite{MR0056905}
+のLemma 1
+が最初だと思う．
+\begin{thm}\label{thm:hei}
+$X$を正則ハウスドルフ空間とする．
+このとき$X$
+がパラコンパクトであることと
+$X$の任意の開被覆には
+その細分であるような
+$X$の閉集合からなる被覆が存在することが
+同値である．
+\end{thm}
+\begin{proof}
+まず最初に
+$X$
+がパラコンパクトであると仮定する．
+そして
+$\mathcal{A}=\{U_{i}\}_{i\in I}$
+を$X$の任意の開被覆とする．
+このとき
+$\mathcal{A}$
+の細分であるような開集合からなる
+局所有限な被覆
+$\mathcal{B}=\{V_{t}\}_{t\in T}$
+が存在する．
+パラコンパクトハウスドルフ空間は
+正規なので
+$X$
+は正規である．
+よって開集合からなる
+被覆$\mathcal{C}=\{O_{t}\}_{t\in T}$
+であって$\cl(C_{t})\subset V_{t}$
+となるものが存在する
+(事実
+\ref{fact:normal})．
+ここで
+$\mathcal{D}=\{\cl(C_{t})\}_{t\in T}$
+とおくとこれは
+$\mathcal{A}$
+の細分であって閉集合からなる
+局所有限な被覆になっている
+(補題\ref{lem:closurefin})．
+これで前半の証明が終わる．
+
+後半を示そう．
+つまり
+$X$
+の任意の開被覆には
+その細分であるような
+$X$の閉集合からなる被覆が存在すると仮定しよう．
+今から$X$がパラコンパクトであることを示す．
+
+空間
+$X$の任意の開被覆を
+$\mathcal{A}=\{U_{i}\}_{i\in I}$
+としよう．
+空間$X$に関する仮定から，
+族
+$\mathcal{A}$
+には
+その細分であるような
+閉集合からなる
+局所有限な
+被覆
+$\mathcal{B}=\{B_{t}\}_{t\in T}$
+が存在する．
+ここで
+各点
+$x\in X$
+について
+$Q_{x}$
+で
+$\mathcal{B}$
+の局所有限性を担保するような
+$x$の開近傍の一つを表すとする．
+このとき
+$\mathcal{C}=\{Q_{x}\}_{x\in X}$
+は
+$X$
+の開被覆であるから
+$X$
+に関する仮定から
+$\mathcal{C}$
+の細分であって
+閉集合からなる局所有限な細分
+$\mathcal{D}=\{D_{r}\}_{r\in R}$
+が存在する．
+今$X$の部分集合$A$
+について$W(A)$
+を以下のように定義する．
+\[
+W(A)=X\setminus \left(\bigcup_{l\in R, 
+A\cap D_{l}=\emptyset}D_{s, l}\right)
+\]
+族
+$\mathcal{D}$
+の局所有限性から
+$W(A)$
+は開集合でありさらに
+$A\subset W(A)$
+を満たす
+(補題\ref{lem:wwww})．
+
+
+今から
+$\{W(B_{t})\}_{t\in T}$
+が局所有限であることを証明する．
+任意に点
+$x\in X$
+をとる．
+ここで
+\[
+Z_{0}=\{\, r\in R\mid x\in D_{r} \, \}
+\]
+かつ
+\[
+Z_{1}=\{\, t\in T\mid r\in Z_{0}, B_{t}\cap D_{r}\neq \emptyset\, \}
+\]
+と定義する．
+族$\mathcal{D}$
+の局所有限性から
+$Z_{0}$
+が有限であることがわかる．
+さらに
+$Z_{0}$の有限性と
+$\mathcal{D}$が$\mathcal{C}$
+の細分であることから
+$Z_{1}$が有限であることがわかる．
+
+今ここで
+$t\in T$は
+$W(B_{t})\cap W(\{x\})\neq \emptyset$
+を満たすと仮定しよう．
+この交わりから点
+$y$をとる．
+族$\mathcal{D}$
+が被覆になっていることから
+$y\in D_{r}$となる
+$r\in R$
+が取れる．
+さて$W(\{x\})$
+の定義と$y\in W(\{x\})$
+であることから
+$x\in D_{r}$
+でもある．
+つまり
+$r\in Z_{0}$である．
+さらに
+$y\in W(B_{t})$
+と
+$W(B_{t})$
+の定義から
+$D_{r}\cap B_{t}\neq \emptyset$
+である．
+ここで$r\in Z_{0}$
+であったから
+$t\in Z_{1}$
+である．
+上で話したことから
+$Z_{1}$
+は
+有限集合であるから
+$W(\{x\})$
+は有限個の
+$W(B_{t})$としか交わらないことが従う．
+よって
+$\{W(B_{t})\}_{t\in T}$
+は局所有限である．
+
+
+各
+$t\in T$
+について
+記号
+$i(t)\in I$
+で
+$B_{t}\subset U_{i(t)}$
+となるようなものとする．
+このとき
+\[
+\mathcal{E}=\{W(B_{t})\cap U_{i(t)}\}_{t\in T}
+\]
+を考えるとこれは
+$\mathcal{A}$
+の細分であって局所有限である．
+さらに
+任意の
+$t\in T$
+について
+$B_{t}\subset W(B_{t})$
+でなおかつ
+$B_{t}\subset U_{i(t)}$
+なので，
+族
+$\mathcal{B}$
+が$X$の被覆であることから
+$\mathcal{E}$
+も
+$X$
+の被覆である．
+
+以上の議論から
+$X$はパラコンパクトである．
+\end{proof}
+
+
+完全写像と局所有限族に関して以下の補題は便利である．
+\begin{lem}\label{lem:perfectlocfin}
+$X$
+と
+$Y$
+を位相空間とし，
+$f\colon X\to Y$
+は完全写像とする．
+そして
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+は$X$の部分集合からなる局所有限な
+族とする．
+このとき
+$Y$の開集合からなる被覆
+$\{O_{t}\}_{t\in T}$
+であって，
+任意の$t\in T$
+について
+$\myinv{f}(V)$
+は有限個の
+$\mathcal{A}$
+の元としか交わらないようなものが存在する．
+\end{lem}
+\begin{proof}
+任意に点$y\in Y$をとる．
+集合
+$\myinv{f}(y)$
+がコンパクトであることと
+補題
+\ref{lem:cptfin}
+から
+$\myinv{f}(y)$
+の近傍
+$U$
+であって
+$U$
+は
+$\mathcal{A}$
+の有限個の元としか交わらないものが存在する．
+次に
+定理
+\ref{thm:characlosed}
+の
+条件
+\ref{item:used2}
+から
+$y$の開近傍
+$O_{y}$
+が存在して
+$\myinv{f}(O_{y})\subset U$
+となる．
+この包含関係から
+$\myinv{f}(O_{y})$
+も
+$\mathcal{A}$
+の有限個の元としか交わらない．
+点$y\in Y$は任意だったので，これで証明が終わる．
+\end{proof}
+
+以上のことを用いて
+パラコンパクト性が完全写像で保たれることを示そう．
+ただし実際には
+パラコンパクト性は
+閉写像だけでも保たれる
+(論文
+\cite{MR0087079}を参照のこと)．
+完全写像の場合は少々簡単に証明できるし
+せっかくなので証明しておく．
+\begin{thm}\label{thm:perfectpara}
+$X$をパラコンパクトハウスドルフ空間
+とし，
+$Y$を位相空間で
+$f\colon X\to Y$
+は全射な完全写像とする．
+このとき
+$Y$
+もパラコンパクトハウスドルフである．
+\end{thm}
+\begin{proof}
+まず
+$f$が閉写像であるから
+$Y$は正規ハウスドルフである．
+よって
+$Y$がパラコンパクトである
+ことを証明すれば良い．
+$Y$の任意の開被覆を
+$\mathcal{A}=\{U_{i}\}_{i\in I}$
+とする．
+このとき
+$\mathcal{B}=\{\myinv{f}(U_{i})\}_{i\in I}$
+は$X$の
+開被覆である．
+よって$X$
+のパラコンパクト性から
+$\mathcal{B}$
+の細分であるような閉集合からなる
+$X$の被覆
+$\mathcal{C}=\{C_{t}\}_{t\in T}$
+が
+存在する(定理\ref{thm:hei})．
+
+このとき
+$\mathcal{D}=\{f(C_{t})\}_{t\in T}$
+が
+$\mathcal{A}$
+の細分であるような閉集合からなる被覆であることを証明しよう．そうすると
+再び定理
+\ref{thm:hei}
+を用いて
+$Y$
+がパラコンパクトであることが従う．
+
+
+
+まず
+$\mathcal{B}$
+が
+$X$
+の
+被覆であることと
+$f$
+が全射であることから
+$\mathcal{D}$
+が
+$Y$
+の被覆であることはわかる．
+写像
+$f$
+が閉写像なので
+$\mathcal{D}$
+が閉集合からなることもわかる．
+
+
+
+次に
+$\mathcal{D}$
+が
+$\mathcal{A}$
+の細分であることを
+証明しよう．
+まず$\mathcal{C}$
+は$\mathcal{B}$
+の細分なので
+各$t\in T$
+について
+$i\in I$が存在して
+$C_{t}\subset \myinv{f}(U_{i})$
+を満たす．
+よって
+$f(C_{t})\subset U_{i}$
+である．
+これで$\mathcal{D}$
+が$\mathcal{A}$
+の細分であることがわかった．
+
+今から$\mathcal{D}$
+が
+局所有限であることを
+証明しよう．
+点$x\in Y$
+をとる．
+すると
+補題\ref{lem:perfectlocfin}
+から
+$x$
+の近傍
+$V$
+が存在して
+$\myinv{f}(V)$
+は
+$\mathcal{C}$
+の有限個の元としか交わらない．
+開集合$\myinv{f}(V)$と
+交わる
+$\mathcal{C}$の元を
+$C_{t_{1}}, \dots, C_{t_{m}}$
+と
+書こう．
+さて
+$f(C_{t})\cap V\neq \emptyset$
+であると仮定しよう．
+すると
+命題
+\ref{prop:yoi}
+から
+$f(C_{t}\cap \myinv{f}(V))=f(C_{t})\cap V$
+なので
+特に
+$f(C_{t}\cap \myinv{f}(V))\neq \emptyset$
+である．
+よって
+$C_{t}\cap \myinv{f}(V)\neq \emptyset$
+が従う．
+ゆえに，
+$C_{t_{1}}, \dots, C_{t_{m}}$
+の定義から
+ある$k\in \{1, \dots, m\}$が存在して
+$C_{t}=C_{t_{k}}$となる．
+つまり
+$V$と
+交わるような
+$\mathcal{D}$
+の元は
+せいぜい
+$f(C_{t_{1}}), \dots, f(C_{t_{m}})$
+だけである．
+よって
+$\mathcal{D}$
+は局所有限である．
+これで証明が終わる．
+\end{proof}
+
+パラコンパクト空間
+の開被覆には
+$\sigma$疎
+な細分が存在することを証明しよう．
+これは
+距離化可能性が
+完全写像で保たれるということの証明に用いる．
+このような性質はstrongly screenable 
+と呼ばれているようで
+(論文\cite{MR0070148}などを参照のこと)，
+実際には
+この性質は，空間の正則性を仮定した上で
+パラコンパクト性と同値である
+(論文
+\cite{MR0056905}などを参照のこと)．
+\begin{thm}\label{thm:sigmaso}
+$X$をハウスドルフ空間とする．
+このとき
+$X$がパラコンパクトであるならば
+$X$の任意の
+開被覆に対して
+その細分であって，
+開集合からなるような
+$\sigma$疎
+な被覆が存在する．
+\end{thm}
+%
+\begin{proof}
+族$\mathcal{A}=\{U_{i}\}_{i\in I}$
+を$X$の任意の開被覆とする．
+今から
+$\mathcal{A}$
+にその細分であって，
+開集合からなる被覆であって
+さらに
+$\sigma$疎
+なものが存在することを
+示そう．
+$X$
+をパラコンパクトとしているので
+$\mathcal{A}$
+は最初から局所有限と仮定しても良い．
+
+
+まず$X$
+はパラコンパクトハウスドルフなので
+正規である．
+そして
+正規性を用いると
+開集合の被覆$\{V_{i}\}_{i\in I}$
+であって任意の$i\in I$について
+$\cl(V_{i})\subset U_{i}$
+を満たすものが存在する
+(事実\ref{fact:normal})．
+再び正規性とウリゾーンの補題から連続関数
+$f_{i}\colon X\to [0, 1]$
+であって
+$\cl(V_{i})$上では$1$で
+$X\setminus U_{i}$上では
+$0$になるようなものが存在する．
+各$i\in I$と
+$n\in \zz_{\ge 0}$に対して
+\[
+G(i, n)=\myinv{f_{i}}((2^{-n-1}, 1])
+\]
+と定義すると
+以下の条件を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の
+$i\in I$
+と
+$n\in \zz_{\ge 0}$
+について
+$\cl(V_{i})\subset \cl(G(i, n))\subset G(i, n+1)\subset U_{i}$
+を満たす．
+\item 
+$n\in \zz_{\ge 0}$を固定すると
+$\{G(i, n)\}_{i\in I}$
+は$\mathcal{A}$の細分であって
+$X$の局所有限な開被覆になっている．
+
+\end{enumerate}
+
+この
+$G(i, n)$
+を利用して
+$\sigma$
+疎な族を構成しよう．
+整列可能定理から
+添字集合$I$は
+適当な順序$<$
+によって整列されているとしても良い．
+そして
+各$i\in I$と
+$n\in \zz_{\ge 0}$について
+\[
+O(i, n)=G(i, n)
+\setminus \left(\bigcup_{k<i}\cl(G(i, n+2)) \right)
+\]
+および
+\[
+L(i, n)=\cl(G(i, n))\setminus \left(\bigcup_{k<i}(G(i, n+1)) \right)
+\]
+と定義すると，
+族$\{G(i, n+2)\}_{i\in I}$
+の局所有限性から
+$O(i, n)$は開集合であり，
+さらに定義から
+$L(i, n)$は閉集合である．
+ここでさらに定義からして
+\[
+\cl(O(i, n))\subset L(i, n)
+\]
+が成り立つ．
+
+さて各
+$n\in \zz_{\ge 0}$について
+\[
+\mathcal{O}_{n}=\{\, O(i, n)\mid i\in I\, \}
+\]
+および
+\[
+\mathcal{L}_{n}=\{\, L(i, n)\mid i\in I\, \}
+\]
+と定義して
+\[
+\mathcal{O}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{O}_{n}
+\]
+かつ
+\[
+\mathcal{L}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{L}_{n}
+\]
+と定義する．
+今から
+$\mathcal{O}$が
+$\mathcal{A}$の細分であり，
+$\sigma$疎
+で$X$の開被覆であることを証明しよう．
+
+まず最初に
+$\mathcal{L}$
+が$\mathcal{A}$
+の細分であることはすぐにわかる．
+よって
+$\mathcal{O}$
+も
+$\mathcal{A}$
+の細分である．
+
+次に
+族$\mathcal{O}$が$X$の被覆であることを証明しよう．
+点
+$x\in X$
+を任意にとる．
+このとき
+$a\in I$を
+$x\in \bigcup_{n\in \zz_{\ge 0}}G(a, n)$となる
+最小の
+$a\in I$
+とする．
+そして
+$x\in G(a, m)$となる．
+$m\in \zz_{\ge 0}$
+を適当になんでもいいのでとる．
+さて
+$k<a$
+となる
+$k\in I$
+については，
+$a$の最小性から
+$x\not\in \bigcup_{n\in \zz_{\ge 0}}G(k, n)$
+なので特に
+$x\not \in G(k, m+3)$である．
+ここで
+$\cl(G(k, m+2))\subset G(k, m+3)$
+なので
+$x\not \in \cl(G(k, m+2))$
+がわかる．
+よって
+$x\in O(a, m)$
+となる．
+つまり$\mathcal{B}$
+は被覆になっている．
+さらに$\mathcal{O}$は$\mathcal{L}$
+の細分でもあるので,
+族$\mathcal{L}$
+も
+$X$の被覆であることがわかる．
+
+次に
+$n\in \zz_{\ge 0}$を固定して
+族
+$\mathcal{L}_{n}$
+が
+疎な族であることを示そう．
+族$\mathcal{L}_{n}$
+は閉集合からなる族なので，
+これが疎であることを示すには
+これが互いに素で
+なおかつ
+局所有限であることを示せば良い
+(補題
+\ref{lem:sososo})．
+
+最初に
+$\mathcal{L}_{n}=\{L(i, n)\}_{n\in \zz_{\ge 0}}$
+が互いに素であることを示そう．
+任意に異なる
+$i, a\in I$
+をとる．
+このとき
+$i<a$
+と仮定しても良い．
+すると
+$L(i, n)\subset \cl(G(i, n)) \subset G(i, n+1)$
+なので，
+$L(a, n)$
+の定義から
+$G(i, n+1)\cap L(a, n)=\emptyset$
+である．特に
+$L(i, n)\cap L(a, n)=\emptyset$
+である．
+これで互いに素であることが証明できた．
+
+次に
+$\mathcal{L}_{n}$
+が局所有限であることを示そう．
+任意に点$x\in X$
+をとる．さらに
+適当に$x\in G(a, m)$となる
+$a\in I$と
+$m\in \zz_{\ge 0}$
+をとる．
+ここで，
+$a$を固定したとき
+$\{G(a, b)\}_{b\in \zz_{\ge 0}}$
+は開集合の増大列になっているので,
+お望みであれば
+$m$を十分大きくとっても構わない．
+どれくらい
+大きくとるかというと
+$n+10<m$くらい取れば
+今回は十分である．
+そして集合
+$W_{x}$
+を
+\[
+W_{x}=X\setminus \left(\bigcup_{j\in I, x\not\in \cl(G(j, m)}
+\cl(G(j, m)))\right)
+\]
+と
+する(補題\ref{lem:wwww})．
+このとき
+族
+$\{G(i, m)\}_{i\in I}$
+が局所有限であることから
+$W_{x}$
+は
+$x$の開近傍になる．
+今から
+$W_{x}$と交わるような
+$\mathcal{L}_{n}$の
+元は有限個しかないことを示そう．
+添字$i\in I$
+は
+$W_{x}\cap L(i, n)\neq \emptyset$を満たすと
+しよう．
+すると
+$m$が十分大きいことから
+\[
+L(i, n)\subset\cl(G(i, n))\subset  G(i, m)
+\]
+となるので
+$W_{x}\cap G(i, m)\neq \emptyset$
+となる．
+集合$W_{x}$
+の定義から
+$x\in \cl(G(i, m))$
+でなければならない．
+族$\{\cl(G(i, k))\}_{k\in \zz_{\ge 0}}$
+の局所有限性からこのような
+$i$は有限個しかない．
+よって
+$W_{x}\cap L(i, n)\neq \emptyset$
+となるような
+$i\in I$は有限個しかない．
+つまり$n\in \zz_{\ge 0}$を固定したとき
+$\{L(i, n)\}_{n\in \zz_{\ge 0}}$
+は局所有限である．
+
+以上で$n$を固定したとき
+$\mathcal{L}_{n}$
+は疎な族であることがわかった．
+さて
+$\cl(O(i, n))\subset L(i, n)$
+が成り立つので
+$\mathcal{O}_{n}$
+も疎であることがわかる
+(補題\ref{lem:sososo}と補題\ref{lem:onaji})．
+
+以上で
+$\mathcal{O}$
+は$\mathcal{A}$
+の
+$\sigma$疎
+な細分であることがわかった．
+これで証明が終わる．
+\end{proof}
+\begin{rmk}
+以上の証明は，
+「コゼロ被覆で細分すると
+いいことがある」という
+「児玉・永見」
+に流れる考えの実践とみなすことができる．
+\end{rmk}
+
+
+以下の命題はこの文書では使わないと思うがせっかくなので証明する．
+この命題自体は
+陰に
+Stoneによるパラコンパクト性と
+fully normality
+の同値性の証明で表れていたと思う
+(\cite{MR0026802})．
+\begin{thm}
+$X$をハウスドルフ空間とする．このとき
+$X$がパラコンパクトであることと
+$X$の任意の
+開被覆に対して
+その細分であって，
+局所有限でなおかつ
+$\sigma$疎
+な開集合からなる被覆が存在することは
+同値である．
+\end{thm}
+%
+\begin{proof}
+まず$X$の
+任意の
+開被覆に対して
+その細分であって，
+局所有限でなおかつ
+$\sigma$疎
+な開集合からなる被覆が存在する
+と仮定する．
+局所有限な
+開集合の被覆で細分になっているものが取れているので
+$X$はパラコンパクトである．
+逆向きがこの定理の本質的な部分である．
+
+次に$X$をパラコンパクトと仮定しよう．
+そして
+$\mathcal{A}$
+をその
+任意の開被覆とする．
+このとき
+定理
+\ref{thm:sigmaso}
+から
+$\mathcal{A}$
+の細分であるような開集合からなる
+被覆$\mathcal{B}$であって$\sigma$疎
+なものが存在する．
+ここで$\mathcal{B}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{B}_{n}$と表して
+各$\mathcal{B}_{n}$
+は疎な集合族とする．
+
+さて
+各$n\in \zz_{\ge 0}$
+について
+\[
+P_{n}
+=\bigcup_{U\in \mathcal{B}_{n}}U
+\]
+と定義する．
+すると
+これは開集合でありさらに
+族
+$\mathcal{P}=\{P_{n}\}_{n\in \zz_{\ge 0}}$
+は
+$X$の開被覆となる．
+ここで
+$X$のパラコンパクト性を用いると
+局所有限な
+開被覆
+$\mathcal{W}=\{W_{n}\}_{n\in \zz_{\ge 0}}$
+であって
+$W_{n}\subset P_{n}$
+を満たすものが存在する．
+そして各$n\in \zz_{\ge 0}$
+について
+\[
+\mathcal{M}_{n}=\{\, W_{n}\cap U\mid U\in \mathcal{B}_{n} \, \}
+\]
+と定義する．
+この族は疎である．
+というのも任意の
+$U\in \mathcal{B}_{n}$について
+$W_{n}\cap U\subset U$
+であり，なおかつ
+$U, V\in \mathcal{B}_{n}$が
+$U\neq V$
+を満たすならば
+$(W_{n}\cap U)\cap V=\emptyset$
+が成り立つからである．これらの性質と
+$\mathcal{B}_{n}$
+が疎であることから
+$\mathcal{M}_{n}$
+が疎であることがわかる．
+さらに
+$\mathcal{W}$
+が開被覆であることから
+$\mathcal{M}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{M}_{n}$
+も
+$X$の開被覆になっていることに注意しよう．
+さらに
+$\mathcal{M}$
+は$\mathcal{A}$
+の細分でもある．
+
+今から族
+$\mathcal{M}$
+が局所有限であることを示そう．
+点$x\in X$
+を任意にとる．
+すると$x$の開近傍$O$
+が存在して
+$O$は有限個の$W_{m_{1}}, \dots, W_{m_{k}}$
+としか交わりを持たない．
+ここで各$m_{i}$, $i=1, \dots, k$について
+$\mathcal{B}_{n}$
+が疎
+であることを用いると
+十分小さい近傍
+$N$が存在して
+$N$は任意の$i=1, \dots, k$について
+$\mathcal{B}_{n}$の元とたかだか一個としか交わらない．
+よって
+$O\cap N$
+は$x$の開近傍で
+$\mathcal{M}$
+のたかだか$k$個の元としか交わらない．
+よって
+$\mathcal{M}$
+は局所有限である．
+以上で証明が終わる．
+\end{proof}
+
+
+
+\section{完全写像と距離化可能性}\label{sec:perfect}
+
+以下はBing--長田--Smirnovである．
+証明とか原論文
+などは
+\cite{Den3}
+で紹介されていると思う．
+\begin{fact}\label{fact:bns}
+正則ハウスドルフ空間
+$X$に関して，
+$X$が距離化可能であることと
+$X$に
+$\sigma$疎な
+開基が存在することは同値である．
+\end{fact}
+
+
+
+
+今から距離化可能性が
+完全像で保たれることを証明しよう．
+これが
+花井--森田・ストーンの定理の中で
+一番難しい部分だと思われる．
+
+\begin{thm}\label{thm:perper}
+$X$を距離化可能空間とする．そして
+$Y$
+を位相空間とし，
+写像
+$f\colon X\to Y$
+は全射連続でなおかつ完全写像
+とする．
+このとき
+$Y$
+は距離化可能である．
+
+\end{thm}
+
+\begin{proof}
+まず$f$が閉写像であることから
+$Y$が正規ハウスドルフになることに注意しよう．
+よって$Y$が$\sigma$疎な
+開基を持つことを示せば良い．
+また
+定理
+\ref{thm:perfectpara}
+から
+$Y$はパラコンパクトであることにも
+注意しよう．
+
+Bing--長田--Smirnovの定理
+(事実\ref{fact:bns})を用いて
+距離化可能空間
+$X$
+の
+$\sigma$
+疎な開基を
+$\mathcal{B}$
+とり，
+そして
+$\mathcal{B}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{B}_{n}$
+と表示して
+各
+$\mathcal{B}_{n}$
+は疎であるとする．
+
+
+
+
+自然数の集合
+$\zz_{\ge 0}$
+の空でない有限集合全体の集合を
+$\myps$
+と書くことにする．
+このとき$\myps$
+は可算無限集合であることに注意しよう．
+
+各
+$S\in \myps$
+について
+$\mathcal{B}_{S}$
+という記号で
+族
+$\bigcup_{i\in S}\mathcal{B}_{i}$
+を表すことにする．
+各$\mathcal{B}_{i}$
+が疎で,
+$S$が有限集合であることから
+$\mathcal{B}_{S}$
+は$X$の局所有限な族になっている．
+
+
+さて
+$S\in \myps$
+を任意に固定する．
+空間$X$
+の局所有限
+$\mathcal{B}_{S}$に
+補題
+\ref{lem:perfectlocfin}
+を適応すると
+$Y$の開被覆
+$\mathcal{Q}_{S}$
+であって
+任意の
+$O\in \mathcal{Q}_{S}$
+について
+$\myinv{f}(O)$
+は
+$\mathcal{B}_{S}$
+の有限個の元としか交わりを持たない．
+ここで$Y$はパラコンパクトハウスドルフ空間なので
+定理
+\ref{thm:sigmaso}
+を
+$\mathcal{Q}$
+に適応して
+これの細分になるような
+開被覆
+$\mathcal{V}_{S}$
+であって
+$\sigma$疎な
+ものが取れる．
+ここで
+\[
+\mathcal{V}_{S}=\bigcup_{n\in \zz_{\ge 0}}\mathcal{V}_{S, n}
+\]
+と表示して
+各
+$\mathcal{V}_{S, n}$
+は疎であるとする．
+この$\mathcal{V}_{S}$が$\mathcal{Q}_{S}$
+の細分であることから
+各$V\in \mathcal{V}_{S}$
+について
+$\myinv{f}(V)$は
+$\mathcal{B}_{S}$
+の有限個の元としか交わらない．
+
+
+
+さてここで各
+$S\in \myps$
+と
+$V\in \mathcal{V}_{S}$
+に対して
+集合
+\[
+\mycrset{V}
+\]
+を
+$\mathcal{B}_{S}$
+の元であって
+$\myinv{f}(V)$
+と交わるもの全体とする．
+もちろん
+$\mycrset{V}$
+は有限集合である．
+さらに
+各$V\in \mathcal{V}_{S}$に対して
+写像
+\[
+\mysha{V}\colon \mycrset{V}\to \zz_{\ge 0}
+\]
+を
+適当になんでもいいので単射な写像としてとり固定する．
+単射であればなんでもいい．これは
+$\mycrset{V}$
+が有限集合なので可能である．
+この写像
+$\mysha{V}$
+は
+$\mycrset{V}$の番号付けということである．
+さらに
+各
+$T\in \myps$
+について集合
+\[
+\mycrset{V; T}
+\]
+を
+$\mycrset{V}$
+の元$B$であって
+$\mysha{V}(B)\in T$
+となるもの全体とする．
+つまり
+$\mycrset{V; T}$
+とは
+$\mycrset{V}$
+の元であって
+その番号が$T$に属しているもの全体ということである．
+
+
+各
+$S\in \myps$
+と
+$V\in \mathcal{V}_{S}$, 
+そして
+$T\in \myps$について
+\[
+\myopseta{V, T}=\bigcup_{B\in \mycrset{V; T}}\myinv{f}(V)\cap B
+\]
+と定義する．
+これはただ単に
+$\mycrset{V; T}$の和集合と
+$\myinv{f}(V)$の交わりである．
+この$\myopseta{V, T}$は開集合であることに注意しよう．
+そして
+$V\in \mathcal{V}_{S, n}$について
+\[
+\myopsetb{V, T}=\mysm{f}\left(\myopseta{V, T}\right)
+\]
+と定義する．
+集合$\myopseta{V, T}$が$\myinv{f}(V)$
+の部分集合であったことから
+$\myopsetb{V, T}\subset V$
+であることに注意しよう．
+さらに一般に
+$\myopsetb{V, T}$
+は空集合になることもありうるが，
+別に空集合だとしても以下の議論には差し障りはないので
+そういうことはあまり気にしないことにする．
+
+
+各$S\in \myps$，
+$n\in \zz_{\ge 0}$
+と
+$T\in \myps$について
+\[
+\mathcal{C}_{S, n, T}
+=\{\, \myopsetb{V, T}\mid V\in \mathcal{V}_{S, n}\, \}
+\]
+と定義する．これは
+開集合からなる
+$Y$
+の族である．今から
+この
+$\mathcal{C}_{S, n, T}$
+が疎であることを確かめよう．
+まず
+任意の
+$V$について
+$\myopsetb{V, T}\subset V$である．
+よって
+$\mathcal{V}_{S, n}$
+が疎であることから
+$\mathcal{C}_{S, n, T}$も
+疎な族であることがわかる
+(補題\ref{lem:onaji})．
+
+ここで
+\[
+\mathcal{C}=\bigcup_{S\in \myps, n\in \zz_{\ge 0}, T\in \myps}\mathcal{C}_{S, n, T}
+\]
+と定義する．
+上で述べたことから
+各
+$\mathcal{C}_{S, n, T}$
+が疎であり，
+$\myps$と$\zz_{\ge 0}$
+が可算集合であることから
+$\mathcal{C}$
+は
+$\sigma$疎である．
+
+
+今から
+この
+$\mathcal{C}$
+が
+$Y$
+の開基に
+なっていることを証明しよう．
+点
+$y\in Y$
+と$Y$の開集合
+$U$を任意に取り
+$y\in U$
+を満たしているとしよう．
+今からある$C\in \mathcal{C}$
+が存在して
+$y\in C\subset U$
+となることを示そう．
+まず当たり前だが，
+$y\in U$から
+$\myinv{f}(y)\subset \myinv{f}(U)$
+となっている．
+今
+$\mathcal{B}$が開基であることと，
+$\myinv{f}(y)$
+がコンパクトであることから
+ある有限集合
+$S_{y}\in \myps$と
+有限族
+$\mathcal{E}\subset \mathcal{B}_{S_{y}}$
+が存在して
+\[
+\myinv{f}\subset \bigcup\mathcal{E}\subset \myinv{f}(V)\]
+が成り立つ．
+ここで以下の話を簡単にするために
+任意の
+$B\in \mathcal{E}$については
+$\myinv{f}(y)\cap B\neq \emptyset$
+となっていると仮定する．
+お望みであれば，こういうふうになるように
+$\mathcal{E}$
+を選び直せる．
+この時ある
+$n_{y}\in \zz_{\ge 0}$
+と
+$V\in \mathcal{V}_{S_{y}, n_{y}}$
+が存在して
+$y\in V$が成り立つ．
+すると
+$\myinv{f}(y)\subset \myinv{f}(V)$
+であることと，
+$\mathcal{E}$の元は$\myinv{f}(y)$
+と交わるように取っていることから
+$\mathcal{E}\subset \mycrset{V}$
+がわかる．
+そして
+$T_{y}\in \myps$
+を
+$T_{y}=\{\, \mysha{V}(B)\mid B\in \mathcal{E} \, \}$
+と定義する．
+写像$\mysha{V}$
+が単射であることから
+$\mycrset{V; T_{y}}=\mathcal{E}$
+がわかる．
+このとき
+\[
+\myopseta{V, T_{y}}=\myinv{f}(V)\cap \bigcup\mathcal{E}
+\]
+である．
+ゆえに
+$\myinv{f}(y)\subset \bigcup\mathcal{E}$
+であることと
+$y\in V$であることから
+\[
+\myinv{f}(y)\subset \myopseta{V, T_{y}}\subset \bigcup\mathcal{E}\subset \myinv{f}(U)
+\]
+である．
+この包含関係から
+\[
+y\in \myopsetb{V, T_{y}}\subset U
+\]
+がわかる
+(定理\ref{thm:characlosed}の条件\ref{item:used2})．
+そして集合
+$\myopsetb{V, T_{y}}$
+は
+族
+$\mathcal{C}_{S_{y}, n_{y}, T_{y}}$
+に属する．
+なので
+$y$と$U$
+が任意であったことから
+$\mathcal{C}$
+が開基であることがわかった．
+
+以上のことと
+Bing--長田--Smirnov
+の定理
+(事実\ref{fact:bns})
+から
+$Y$が距離化可能であることが証明された．
+\end{proof}
+
+
+
+
+\section{花井--森田・ストーン}\label{sec:hms}
+
+以下では，
+位相空間
+$X$
+の部分集合$A$について
+その境界を
+$\bound A$
+と書くことにする．
+
+おそらく花井--森田・ストーンの定理で
+本質的なのは閉写像に関する以下の現象である．
+この手の類の現象を初めて見出したのは
+\cite{vainstein1947closed}
+だと思われる．
+論文
+\cite{MR0177396}
+も参照のこと．
+
+\begin{thm}\label{thm:closedmapbound}
+$X$を$T_{1}$正規位相空間とし，
+$Y$を第一可算な位相空間とする．
+そして写像$f\colon X\to Y$
+は連続で閉写像であるとする．
+このとき
+任意の$y\in Y$
+について
+$\bound \myinv{f}(y)$
+は可算コンパクトである．
+
+\end{thm}
+\begin{proof}
+まず最初に
+$f$
+は全射であると仮定しても良い．
+そして$T_{1}$
+であることは
+閉写像によって保たれるので
+$Y$は
+$T_{1}$
+空間になる．
+
+定理は背理法によって証明する．
+つまり，
+ある
+$y\in Y$
+について
+$\bound \myinv{f}(y)$
+は可算コンパクトではないとする．
+
+ここで
+$Y$
+は
+$T_{1}$
+なので
+$\myinv{f}(y)$
+は閉集合であり
+特に
+$\bound \myinv{f}(y)\subset \myinv{f}(y)$
+であることに注意しよう．
+
+
+
+
+
+このとき
+系
+\ref{cor:ccpt}
+から
+$\bound \myinv{f}(y)$
+の閉な可算離散部分空間
+$A=\{p_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+定理の仮定から$Y$は第一可算なので
+$y$の可算な近傍系
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+定理
+\ref{thm:alephcn}
+から疎な開集合の族
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$p_{i}\in U_{i}$
+となる．
+ここで
+$\myinv{f}(y)\subset \myinv{f}(V_{i})$
+と$\myinv{f}(V_{i})$
+が開集合であること，
+そして
+$\bound \myinv{f}(y)\subset \myinv{f}(y)$
+を用いると，
+$U_{i}\cap \myinv{f}(V_{i})$
+は$p_{i}$の開近傍であり
+族
+$\{U_{i}\cap \myinv{f}(V_{i})\}_{i\in \zz_{\ge 0}}$
+は疎な開集合からなる族である．
+
+
+
+さてここで
+$p_{i}\in \bound \myinv{f}(y)$
+であることから，
+各$i\in \zz_{\ge 0}$
+について
+$q_{i}\in U_{i}\cap \myinv{f}(V_{i})$
+であってなおかつ
+$q_{i}\not \in \myinv{f}(y)$
+となる$q_{i}\in X$が存在する．
+族$\{U_{i}\}$
+が疎であることから
+$\{\{q_{i}\}\}_{i\in \zz_{\ge 0}}$
+も疎な族であり
+(補題\ref{lem:onaji})，
+集合$B=\{q_{i}\mid i\in \zz_{\ge 0}\}$
+は$X$の閉集合である
+(補題\ref{lem:clcup})．
+ここで$B\cap \myinv{f}(y)=\emptyset$
+に注意しよう．
+
+さて今$f\colon X\to Y$
+は閉写像なので
+$f(B)$も閉集合である．
+さらに$B\cap \myinv{f}(y)=\emptyset$
+であることから
+$y\not \in f(B)$
+なので
+$y\in Y\setminus f(B)$
+である．
+思い出して欲しいのだが
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+は$y$の基本近傍系であり，
+なおかつ
+$Y\setminus f(B)$
+は
+$y$
+を含む開集合なので
+$y\in V_{k}\subset Y\setminus f(B)$
+となる
+$k\in \zz_{\ge 0}$
+が存在する．
+
+
+
+
+集合$f(B)$は
+$Y$の閉集合であったから
+$Y\setminus f(B)$は
+$Y$の開集合である．
+よってその引き戻し
+$\myinv{f}(Y\setminus f(B))$
+は
+$X$
+の開集合である．
+ここで帰属関係及び包含関係
+\[
+y\in V_{k}\subset Y\setminus f(B)
+\]
+から
+\[\myinv{f}(y)\subset \myinv{f}(V_{k})\subset \myinv{f}(Y\setminus f(B))
+\]
+が従う．
+さて$q_{k}$の定義から
+$q_{k}\in \myinv{f}(V_{k})$
+であるが
+これは
+$q_{k}\in \myinv{f}(Y\setminus f(B))$
+を意味する．
+しかしこのことから
+$f(q_{k})\in Y\setminus f(B)$
+がわかるが，
+これは
+$q_{k}\in B$
+に矛盾する．
+
+以上の議論から
+任意の$y\in Y$
+について
+$\bound \myinv{f}(y)$
+は可算コンパクトである．
+\end{proof}
+
+
+距離化可能空間の閉像
+が距離化可能になるために
+必要十分条件
+を述べた
+以下の定理が
+花井--森田・ストーンの定理である．
+
+花井--森田による共著
+\cite{MR0087077}
+とストーンの論文
+\cite{MR0087078}
+が同時に
+発表されているのでこの名前で呼ばれる．
+
+\begin{thm}[Hanai--Morita, Stone]\label{thm:hms}
+$X$を距離化可能空間とし，
+$Y$を位相空間とし
+$f\colon X\to Y$
+は全射な連続閉写像であるとする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:hms1}
+$Y$は距離化可能である．
+\item\label{item:hms2}
+$Y$は第一可算である．
+\item\label{item:hms3}
+任意の$y\in Y$
+について
+$\bound f^{-1}(y)$
+はコンパクトである．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\ref{item:hms1} $\To$
+\ref{item:hms2}
+は自明である．
+そして定理
+\ref{thm:closedmapbound}
+から
+\ref{item:hms2}
+$\To$
+\ref{item:hms3}
+が従う．距離空間の部分集合について
+可算コンパクトであることとコンパクトであることは同値であることに注意しよう．
+以下では
+\ref{item:hms3}
+$\To$
+\ref{item:hms1}
+を証明する．
+
+写像
+$f$は全射なので
+各$y\in Y$
+について
+$\myinv{f}(y)$
+は空ではない．
+そこで適当に点
+$q_{y}\in \myinv{f}(y)$
+をとっておく．
+各
+$y\in Y$
+について
+$X$
+の開集合
+$O_{y}$
+を
+以下のように定義する．
+\[
+O_{y}
+=
+\begin{cases}
+\nai \myinv{f}(y) & \text{$\bound \myinv{f}(y)\neq \emptyset$のとき}\\
+\myinv{f}(y)\setminus \{p_{y}\} &
+\text{$\bound \myinv{f}(y)=\emptyset$のとき}
+\end{cases}
+\]
+ここで$\bound \myinv{f}(y)=\emptyset$のとき
+$\myinv{f}(y)$は開集合になっていることに注意しよう．
+一般に境界が空な集合は開集合である(閉集合でもある，つまり開かつ閉である)．
+そして
+$O=\bigcup_{y\in Y}O_{y}$
+として
+$L=X\setminus O$
+と定義する．
+このとき
+$L$は
+$X$の閉集合である．
+そして写像
+$g\colon L\to Y$
+を
+$g=f|_{L}$
+と定義する．
+集合$L$は
+$X$の閉部分集合であるから
+$f$が閉写像であることかた
+その制限である$g$
+も閉写像になっている．
+しかも
+$L$
+の定義から
+任意の
+$y\in Y$について
+\[
+\myinv{g}(y)=
+\begin{cases}
+\bound \myinv{f}(y)& \text{$\bound \myinv{f}(y)\neq \emptyset$}\\
+p_{y} &\text{$\bound \myinv{f}(y)=\emptyset$のとき}
+\end{cases}
+\]
+が成り立つ．
+写像
+$f$に関する
+$\bound \myinv{f}(y)$
+がコンパクトという
+仮定より
+$\myinv{g}(y)$はコンパクトである．
+よって
+$g$
+は完全写像となる．
+つまり
+$Y$は完全写像$g$による
+距離化可能空間$X$
+の像なので，
+定理
+\ref{thm:perper}
+から
+$Y$も距離化可能である．
+これで証明が終わる．
+\end{proof}
+
+\begin{rmk}
+上の花井--森田・ストーンの定理
+の以前に
+論文
+\cite{MR0064390}
+で
+花井
+は距離化可能空間の閉像が
+距離化可能であることを証明しているが，
+証明に誤りが
+ある．
+点$y\in Y$について
+$y$を含む開集合$U$に関して
+$X\setminus \myinv{f}(U)$
+を考えて，これと
+$\myinv{f}(y)$との距離を$d$
+としておりこれが正の数であることを用いて
+証明をしているが，
+一般にこの$d$は$0$になりうるのでここで証明が破綻している．
+ここで距離化可能空間の閉像が距離化可能ではない
+例をあげよう．
+$X$を単位閉区間$[0, 1]$
+の無限個の位相的直和
+とする．そしてそれぞれの成分の$0$
+を一点に同一視した空間を$Y$
+とする．ようはハリネズミ空間である．
+このとき商写像$f\colon X\to Y$
+は閉写像となるが，
+$Y$は同一視された点において
+第一可算性を満たさないので
+特に距離化可能ではない．
+おそらくこの誤りを修正するのが
+花井--森田の論文だろうと思われるので
+この閉像に関する間違いは
+「発見的失敗」
+と見なすことができるだろう．
+\end{rmk}
+
+以下の定理は
+\cite{MR0073157}
+によるものらしい．
+
+\begin{cor}
+$X$を距離化可能空間とし，
+$Y$を位相空間とする．
+もしも全射で閉写像かつ開写像であるような
+連続写像$f\colon X\to Y$
+が存在するならば
+$Y$も距離化可能である．
+\end{cor}
+\begin{proof}
+このような状況において
+$Y$
+は第一可算であることがわかる．
+よって
+定理
+\ref{thm:hms}
+から
+$Y$
+が距離化可能であることがわかる．
+\end{proof}
+
+
+\begin{rmk}
+論文
+\cite{MR0087077}
+と
+論文
+\cite{MR0087078}
+では
+花井--森田・ストーンの定理
+(定理
+\ref{thm:hms})
+を証明する際に
+Alexandroff--Urysohn--Tukey
+のような被覆列を用いた距離化可能定理や，
+Frinkによる近傍系を用いた距離化可能定理
+を用いている．
+長田の論文
+\cite{MR0097789}
+ではのちにdouble sequence theorem 
+などと呼ばれることになる
+近傍系を用いた距離化可能定理から既存の
+距離化可能定理を証明しており，
+その中の一つに
+花井--森田・ストーンの定理
+(定理
+\ref{thm:hms})
+がある．
+\end{rmk}
+
+
+
+\begin{rmk}
+距離化可能定理については
+\cite{MR0165490}
+や
+\cite{MR0370519}
+も参照のこと．
+\end{rmk}
+
+\section{完備距離化可能性}
+このセクションは説明不足である．
+特にストーンチェックコンパクト化の話が説明不足である．
+適当に参考文献で補ってほしい．
+このセクションでは
+完備距離化可能性が完全写像で保たれる
+ことを証明する．
+これは
+論文
+\cite{MR0388319}
+においてなんか知らんが
+Bing's shrinkability criterion 
+の話の延長
+として証明されているようだ．
+
+以下の事実は
+Willardの位相空間論の本
+\cite{MR2048350}
+のTheorem 24.13
+である．
+\begin{fact}\label{fact:gdgd}
+距離化可能空間
+$X$
+が完備距離化可能であることと
+$X$のストーンチェックコンパクト化
+$\beta X$の中で
+$X$
+が
+$G_{\delta}$
+であることが同値である．
+\end{fact}
+
+以下の命題の証明は
+\cite{MR1039321}
+のLemma 3.7.4
+を参考にした．
+\begin{prop}\label{prop:beta}
+位相空間$X$
+と
+$Y$
+は完全正則であるとし，
+連続写像
+$f\colon X\to Y$
+は完全写像とする．
+このとき
+$\beta f(\beta X \setminus X)\subset \beta Y\setminus Y$
+が成り立つ．
+さらに$f$が全射ならば
+$\beta f(\beta X \setminus X)= \beta Y\setminus Y$
+が成り立つ．
+\end{prop}
+\begin{proof}
+前半を示そう．
+背理法を行う．
+いま
+$\beta f(\beta X \setminus X)
+\not \subset \beta Y\setminus Y$
+と仮定する．
+すると
+ある
+$z\in Y$
+が存在して
+$\myinv{\beta f}(z)$
+が$\beta X\setminus X$
+と交わりを持つ．
+その交わりから元
+$u$を取ろう．
+
+今から
+$Z=X\sqcup \{u\}$
+とおき
+そして
+$g=\beta f |_{Z}$
+とおく．
+すると
+$f$が完全写像
+であり
+$Z$は
+$X$に一点を付け加えただけなので
+$g$
+も完全写像になる．
+さらに
+$g(Z)\subset Y$
+でもある．
+
+また，$Z$の中で
+$X$は稠密である．
+つまり$Z$の中で
+$X$の閉包をとると
+$u$を含む．
+
+以上の状況のもとで
+$\myinv{g}(z)=\myinv{f}(z)\sqcup \{u\}$
+である．
+$u\not\in X$なので
+特に
+$u\not \in \myinv{f}(z)$
+である．
+よって
+$\myinv{f}(z)$
+のコンパクト性から
+$Z$の
+開集合$U$と$V$
+であって
+$u\in U$，
+$\myinv{f}(z)\subset V$, 
+そして
+$U\cap V=\emptyset$
+を満たすものが存在する．
+ここで$u\not\in V$
+なので$V$は
+$X$の開集合でもある．
+さらに
+$X\setminus V$
+は
+$X$
+の閉集合である．
+
+
+以上のことと
+$f$
+が閉写像であることから
+$f(X\setminus V)$
+は
+$Y$
+の閉集合であり
+$\myinv{f}(z)\cap V=\emptyset$
+であるから
+$z\not \in f(X\setminus V)$
+である．
+ここで
+$g$
+は
+$f$
+の拡張であるから
+$\myinv{g}(f(X\setminus V))$
+は
+$X\setminus V$
+を含む
+$Z$の閉集合であり，
+$z\not \in f(X\setminus V)$
+なので
+$\myinv{g}(f(X\setminus V))=\myinv{f}(f(X\setminus V))$
+である．
+よって
+$\myinv{f}(f(X\setminus V))\subset X$
+から
+$\cl_{Z}(X\setminus V)\subset X$
+である．
+
+
+ところで
+$U\cap V=\emptyset$
+から
+$u\not \in \cl_{Z}(V)$
+である．故に
+$\cl_{Z}(V)\subset X$
+である．
+以上のことから
+$\cl_{Z}(X\setminus V)\cup \cl_{Z}(V)\subset X$
+である．
+
+また
+$X\subset (X\setminus V)\cup V\subset \cl_{Z}(X\setminus V)\cup \cl_{Z}(V)$
+なので結局
+$X=\cl_{Z}(X\setminus V)\cup \cl_{Z}(V)$
+がわかる．
+
+よって
+$X$
+は
+$Z$
+の閉集合となるが，
+これは
+$u\not \in X$
+という事実と，
+$X$
+が
+$Z(=X\sqcup\{u\})$
+の中で稠密であるということに矛盾する．
+つまり
+$\beta f(\beta X \setminus X)\subset \beta Y\setminus Y$
+が成り立つ．
+
+後半を示そう．
+空間$Y$
+は
+$\beta Y$
+の中で稠密である．
+今$f$が全射つまり
+$f(X)=Y$
+であるから
+$\beta f(\beta X)$
+は稠密部分集合
+$Y$を含むような
+$\beta Y$
+の閉集合であるから
+(コンパクト空間からハウスドルフ空間への連続写像)，
+$\beta f(\beta X)=\beta Y$
+である．
+そして前半の
+話から
+$\beta f(\beta X\setminus X)\subset 
+\beta Y\setminus Y$
+である．
+もしもこれが真の包含だとすると
+$\beta f(\beta X)=\beta Y$に矛盾するので
+$\beta f(\beta X\setminus X)= 
+\beta Y\setminus Y$
+が成り立つ．
+\end{proof}
+
+以下の定理に関しては
+論文
+\cite{MR0822451}
+も参照のこと．
+
+\begin{thm}\label{thm:perfectkanbi}
+距離化可能空間
+$X$
+は完備距離化可能とし，
+$Y$は位相空間で
+連続写像
+$f\colon X\to Y$
+は完全写像とする．
+このとき
+$Y$も完備距離化可能である．
+\end{thm}
+\begin{proof}
+今から
+$Y$
+が$\beta Y$の中で
+$G_{\delta}$
+であることを証明する．
+事実
+\ref{fact:gdgd}
+から
+$X$は
+$\beta X$
+の中で$G_{\delta}$
+である．
+つまり
+可算個の
+$\beta X$の
+開集合
+$\{O_{n}\}_{n\in \zz_{\ge 0}}$
+が
+存在して
+$X=\bigcap_{n\in \zz_{\ge 0}}O_{n}$
+が成り立つ．
+さて
+$\beta f\colon \beta X\to \beta Y$
+はコンパクト空間からハウスドルフ空間への
+連続写像なので特に閉写像である．
+よって任意の
+$n\in \zz_{\ge 0}$
+について
+$\mysm{(\beta f)}(O_{n})$
+は
+$\beta Y$
+の開集合になる
+(定理\ref{thm:characlosed})．
+ここで
+\begin{align*}
+\bigcap_{n\in \zz_{\ge 0}}\mysm{(\beta f)}(O_{n})
+&=
+\mysm{(\beta f)}\left(\bigcap_{n\in \zz_{\ge 0}}O_{n}\right)
+=
+\mysm{(\beta f)}(X)
+=\beta Y\setminus f(\beta X\setminus X)\\
+&=\beta Y \setminus (\beta Y\setminus Y)
+=Y
+\end{align*}
+なので
+(一般に小像は$\bigcap$と可換になる，なぜなら順像は$\bigcup$と可換だからである)，
+集合
+$Y$は可算個の
+$\beta Y$の開集合
+$\{\mysm{(\beta f)}(O_{n})\}_{n\in \zz_{\ge 0}}$
+の共通部分でかける．
+故に
+$Y$は
+$\beta Y$
+の$G_{\delta}$
+集合である．
+再び事実
+\ref{fact:gdgd}
+から
+$Y$
+が完備距離化可能であることがわかる．
+\end{proof}
+
+\begin{thm}
+定理
+\ref{thm:hms}
+と同じ記号を用いて同じ仮定をし，
+定理
+\ref{thm:hms}で述べられている三つの条件
+のいずれか一つ(結果として全て)が成り立つと仮定する．
+このときもしも
+$X$が完備距離化可能ならば
+$Y$も完備距離化可能である．
+\end{thm}
+\begin{proof}
+定理\ref{thm:hms}
+の証明によれば
+$Y$
+は
+$X$
+の閉部分集合$L$
+の完全像になる．
+集合$L$
+は完備距離化可能空間
+$X$
+の閉集合であるから
+$L$自体も
+完備距離化可能である．
+よって
+定理
+\ref{thm:perfectkanbi}
+から
+$Y$
+は完備距離化可能である．
+\end{proof}
+
+
+
+
+
+\section*{参考文献}\addcontentsline{toc}{section}{参考文献}
+
+
+\renewcommand{\refname}{参考にしたウェブページ}
+
+\begin{thebibliography}{99}
+\bibitem[Dan Ma]{dm1}
+Dan Ma's Topology Blog, 
+\textit{One way to find collectionwise normal spaces}, 
+https://dantopology.wordpress.com/2012/12/05/one-way-to-find-collectionwise-normal-spaces/
+
+
+\bibitem[alg-d]{tog}
+alg-dの
+togetter まとめ
+「\verb|f^-1と∪, ∩の交換と圏論について|」
+https://togetter.com/li/966701
+
+\bibitem[電波通信1]{Den1}
+はてなブログ電波通信の記事
+「点可算被覆と可算コンパクト性」
+https://concious4410.hatenablog.com/entry/2016/12/29/214356
+
+\bibitem[電波通信2]{Den2}
+はてなブログ電波通信の記事
+「閉写像云々とか固有写像とか」
+https://concious4410.hatenablog.com/entry/2015/11/06/205115
+
+\bibitem[電波通信3]{Den3}
+はてなブログ電波通信の記事
+「距離化可能定理 part $-1$:BNS」
+https://concious4410.hatenablog.com/entry/2016/01/22/132906
+
+
+\bibitem[電波通信4]{Den4}
+はてなブログ電波通信の記事
+「正規性の特徴付け」
+https://concious4410.hatenablog.com/entry/2015/12/21/170610
+
+
+\end{thebibliography}
+
+
+
+\renewcommand{\refname}{一般の参考文献}
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{MHS.bib}
+
+
+
+\end{document}

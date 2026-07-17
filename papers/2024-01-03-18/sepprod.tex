@@ -1,0 +1,108 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 可分性と直積 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+
+以下の論文はHewitt-Pondiczery-Marczewski
+の定理について調べようとしてほったらかしになった論文だと思う．
+この長い名前が連なっている定理は
+連続体濃度をもつ可分空間の族の直積も可分という定理である．
+
+論文
+\cite{MR0315649}
+では以下のことを証明している．
+\begin{thm}
+以下が成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$\mathfrak{m}$を基数とし
+$\{X_{i}\}_{i\in I}$を位相空間の族とする．
+もしも$|I|\le 2^{\mathfrak{m}}$
+で各$X_{i}$がたかだか濃度$\mathfrak{m}$
+の稠密部分集合を持つのならば
+$\prod_{i\in I}X_{i}$
+も濃度がたかだか$\mathfrak{m}$の稠密部分集合を持つ；
+\item 
+$D$を無限離散空間とすると
+\[
+|\beta D|=2^{2^{|D|}}
+\]
+が成り立つ．
+\end{enumerate}
+\end{thm}
+
+論文
+\cite{MR0221471}
+はちょっとよくわかんなかったので詳しい解説ができないが，
+添字集合$I$の濃度に制限をつけずに，
+可分空間の族
+$\{X_{i}\}_{i\in I}$
+の直積が可分になるための必要十分条件を，
+separation という概念を用いて記述している．
+
+思うに，このなんとかの定理というのは位相空間の定理というよりかは，集合論的な組み合わせ論の定理なのではないのだろうか．
+
+これら以外にも論文はあるが，
+そういうのは
+これらの論文が引用している論文や
+これらの論文を引用している論文を
+確かめられたい．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{sepprod.bib}
+
+
+
+\end{document}

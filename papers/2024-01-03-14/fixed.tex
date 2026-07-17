@@ -1,0 +1,141 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 不動点定理，主にCaristiの ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+以下の論文の束は
+Caristiの不動点定理を調べて印刷したものだと思う．
+Caristiの不動点定理というのはBanachの不動点定理の拡張で以下のようなものである．
+\begin{thm}
+$(X, d)$を完備距離空間とする．
+$T\colon X\to X$を単に写像とし，
+$f\colon X\to [0, \infty)$
+は下半連続関数とする．
+もしも任意の$x\in X$について
+\[
+d(x, T(x))\le f(x)-f(T(x))
+\]
+が成り立つのならば，
+$T$は不動点をもつ．
+つまり$T(x)=x$となる$x\in X$
+が存在する．
+\end{thm}
+
+論文\cite{MR0394329}, \cite{MR0399968}
+はいわゆる原論文である．
+
+
+論文
+\cite{MR0229101}
+はブラウワーとか角谷とかの不動点定理の話で
+上の不動点定理とは無関係だと思う．
+
+論文
+\cite{MR0237724} 
+と
+\cite{MR0236331}は
+$[0, 1]$からそれ自身への二つの写像
+$f$と$g$が可換つまり$f\circ g=g\circ f$
+であっても共通の不動点を持つとは限らない例を構成している．
+
+
+論文
+\cite{MR0458359}
+は下半連続関数を使って
+距離空間の完備性を
+特徴付けしている．
+
+文献\cite{1}, 
+\cite{2}, 
+\cite{3}
+は日本語で書かれた不動点定理の解説などである．
+
+
+
+\section*{参考文献たち}
+
+\renewcommand{\refname}{日本語の文献}
+	
+\begin{thebibliography}{99}
+\bibitem[和1]{1}
+鈴木智成, 
+「CARISTIの不動点定理の拡張定理の別証明」, 
+数理解析研究所講究録, 
+No. 1415 (2002), 146--151, 
+http://hdl.handle.net/2433/26259
+
+
+\bibitem[和2]{2}
+鈴木智成, 
+「距離空間における不動点定理の4つ の分類」
+数理解析研究所講究録, 
+No. 1753(2011),  52--57
+http://hdl.handle.net/2433/171179
+
+\bibitem[和3]{3}
+木島洋一
+「距離空間における不動点定理」, 
+横浜経営研究, 
+巻 18, 号 2, p. 99--102, 発行日 1997-09-01, 
+横浜国立大学経営学会, 
+http://hdl.handle.net/10131/758
+\end{thebibliography}
+
+\renewcommand{\refname}{英文参考文献}
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{fixed.bib}
+
+
+
+\end{document}

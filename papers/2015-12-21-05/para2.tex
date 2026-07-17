@@ -1,0 +1,617 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage[all]{xy}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{パラコンパクト等々2}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章ではパラコンパクト性の基本的な言い換えを紹介する。次いでBing-長田-Smirnovの距離化可能定理を証明する。最後にここで紹介したパラコンパクト性の言い換えを用いて距離空間のパラコンパクト性の別証明を与える。
+%疎の定義
+\begin{df}
+位相空間$X$に於いて$X$の部分集合族$\mathcal{A}$が疎であるとは$X$の各点$x$に対して$x$の近傍$N$が存在して
+\[
+\mbox{$N\cap A\neq \O$となる$A\in \mathcal{A}$が存在しないか、もしくは１個しか無い}
+\]
+を充たす時$\mathcal{A}$は疎であると言う。もちろん$\mathcal{A}$が疎であるとき$A,B\in \mathcal{A},A\neq B$ならば$A\cap B=\O$である。
+\end{df}
+\begin{prop}
+位相空間$X$に於いて$\mathcal{A}$が疎であるとき$\mathcal{A}$は局所有限であり、
+$\mathcal{B}=\{CL(A)\ |\ A\in \mathcal{A}\}$も疎である。
+\end{prop}
+\begin{proof}
+疎な族が局所有限であることは定義から明白である。$\mathcal{B}=\{CL(A)\ |\ A\in \mathcal{A}\}$が疎であることは局所有限の場合の対応する結果と同様の証明でわかる。
+\end{proof}
+%疎の同値命題
+
+\begin{prop}
+以下の命題は同値位相空間$X$の部分集合族$\mathcal{A}$について以下は同値
+\begin{align}
+&\mbox{$\mathcal{A}$は疎}\\
+&\mbox{$\mathcal{A}$は局所有限で$\mathcal{B}=\{CL(A)\ |\ A\in \mathcal{A}\}$の元は互いに交わらない。}
+\end{align}
+\end{prop}
+\setcounter{equation}{0}
+\begin{proof}
+$(1)\To(2)$は明らかである。$(2)\To(1)$を示そう。場合分けをする。\par
+$(i) \dpst x\notin \bigcup_{B\in \mathcal{B}}B$のとき、局所有限性から$\bigcup_{B\in \mathcal{B}}B$は閉集合であるから$\dpst U=X\setminus \bigcup_{B\in \mathcal{B}}B$は開集合であり、ひいては$x$の近傍であり$A\in \mathcal{A}$について$A\cap U=\O$となる。\par 
+$(ii) x$がある$C\in \mathcal{B}$に属してるとき、$\mathcal{B}$の元は互いに交わらないのでこのような$C$は唯一つしか存在しない。さて$\mathcal{A}$の局所有限性から$\mathcal{B}$も局所有限で特に$\dpst F=\bigcup_{B\neq C,B\in \mathcal{B}}B$は閉集合であり、$V=X\setminus F$は$x$の近傍で$\mathcal{B}$の元とはたった$C$としか交わらない。\par
+よって２つの場合から$\mathcal{A}$が疎であることが示された。
+\end{proof}
+%σなんとかの定義
+\begin{df}
+位相空間$X$の部分集合族$\mathcal{A}$が$\sigma$局所有限であるとは高々可算個の局所有限な族$\mathcal{U}_1,\ \mathcal{U}_2,\cdots\ \mathcal{U}_n\cdots$が存在して
+\[
+\mathcal{A}=\bigcup_{i\in \nn}\mathcal{U}_i
+\]
+となることである。\footnote{文脈的に明らかであろうが、$\mathcal{U}$の元の和集合を表す記号$\dpst \bigcup\mathcal{U}=\bigcup_{U\in \mathcal{U}}U$とは違うので注意せよ。紛らわしいが、文脈的にわかるはずなので今後もこういう書き方をする。$\bigcup\mathcal{U}$も使う。}\par
+同様に$\sigma$疎も定義する。
+\end{df}
+
+%族正規の定義
+\begin{df}[族正規]
+位相空間$X$が族正規であるとは$X$の閉集合からなる任意の疎な族$\mathcal{A}$に対して$A\subset U_A$となる開集合の族$\{U_{A}\ |\ A\in \mathcal{A}\}$が存在して
+\[
+A\neq B\To U_A\cap U_B=\O
+\]
+が成り立つことである。\footnote{$T_1$は要請しないことにする}明らかに族正規空間は正規である。
+\end{df}
+\begin{prop}\label{benri}
+族正規空間$X$に於いて上の族正規空間の定義に於いて$\{U_{A}\ |\ A\in \mathcal{A}\}$は疎であるように取る事が出来る。
+\end{prop}
+\begin{proof}
+$\dpst F=\bigcup\mathcal{A},\ O=\bigcup_{A\in \mathcal{A}}U_A$と置くと$F$は閉集合で$O$は開集合であり、$F\subset O$を充たす。族正規空間$X$は正規空間でもあるので
+\[
+F\subset P\subset CL(P)\subset O
+\]
+となる開集合$P$が存在する。$V_A=U_A\cap P$と置くと明らかに$A\subset V_A$で
+\[
+A\neq B\To V_A\cap V_B=\O
+\]
+である。$\{V_A\ |\ A\in \mathcal{A}\}$が疎であることを示そう。場合分けによる。\par
+$(i)$$x\not\in O$の場合。このとき$x\not\in CL(P)$なので$N=X\setminus CL(P)$は$x$の近傍で$\{V_A\ |\ A\in \mathcal{A}\}$のどの元とも交わりを持たない。
+$(ii)$$x\in O$のとき、つまりある$U_C$に$x$が属しているとき。このとき$U_C$は$x$の近傍である。$\{U_{A}\ |\ A\in \mathcal{A}\}$の元が互いに交わらないことと$V_A\subset U_A$であることから$U_C$は$V_C$ただこの一つとしか交わらない。\par 
+以上より$\{V_A\ |\ A\in \mathcal{A}\}$は疎である。
+\end{proof}
+
+\begin{thm}パラコンパクトハウスドルフ空間$X$は族正規
+\end{thm}
+\begin{proof}
+証明の方針はパラコンパクトハウスドルフ空間が正規であることの証明と同じである。\par
+$\mathcal{A}$を閉集合からなる疎な族であるとする。$F\in \mathcal{A}$と$x\in F$について
+$O_{x,F}$を$x\in O_{x,F}$で
+\[
+\dpst CL(O_{x,F})\cap\left(\bigcup_{A\neq F,A\in \mathcal{A}}A\right)=\O
+\]
+であるように取る。パラコンパクトハウスドルフ空間が正則であることと、$\mathcal{A}$が疎であることから$\bigcup_{A\neq F,A\in \mathcal{A}}A$が閉であることからこの様な$O_{x,F}$は確かに存在する。\par
+さてこのとき
+\[
+\mathcal{O}=\{X\setminus \bigcup\mathcal{A},\ O_{x,F}\}_{x\in F\in \mathcal{A}}
+\]
+は$X$の開被覆となるので局所有限な開被覆の細分が存在する。それを$\mathcal{U}$と書こう。そして$f\in \mathcal{A}$に対して
+\[
+D_F=\bigcup\{U\in \mathcal{U}\ |\ A\cap U\neq\O\}
+\]と置くと$F\subset D_F$で局所有限性から$\dpst CL(D_F)=\bigcup\{CL(U)\in \mathcal{U}\ |\ A\cap U\neq\O\}$よって$\mathcal{U}$が$\mathcal{O}$の細分であることから
+\[
+CL(D_F)\cap\left(\bigcup_{A\neq F,A\in \mathcal{A}}A\right)=\O
+\]
+が成り立つ。さて更に$F\in\mathcal{A}$に対して
+\[
+G_F=D_F\setminus \left(\bigcup_{F\neq A,A\in \mathcal{A}}CL(D_A)\right)
+\]と置けば$\mathcal{U}$の局所有限性からこれは開集合で先の記述から$F\subset G_F$でありさらに
+\[
+A\neq B\To G_A\cap G_B=\O
+\]
+である。以上からパラコンパクトハウスドルフ空間が族正規であることがわかる。
+\end{proof}
+
+
+%メタコンパクトの定義
+\begin{df}
+集合$X$の部分集合族$\mathcal{A}$と$X$の点$x$について$deg(x;\mathcal{A})$を
+\[
+deg(x;\mathcal{A})=\card\{A\in \mathcal{A}\ |\ x\in A\}
+\]
+と定義する。これを$\mathcal{A}$に対する$x$の度数という。
+\end{df}
+\begin{df}
+集合$X$の被覆$\mathcal{U}$について任意の点$x$について$deg(x;\mathcal{U})$が有限となるとき、$\mathcal{U}$を$X$の点有限被覆という。
+\end{df}
+\begin{df}
+位相空間$X$についてその任意の開被覆に点有限被覆となる開細分が存在するとき$X$をメタコンパクト、もしくは弱パラコンパクトと言う。明らかにパラコンパクト空間はメタコンパクトである。
+\end{df}
+
+
+%主定理
+\begin{thm}\label{pp}$T_3$空間に於いて
+以下は同値
+\begin{align}
+&\mbox{$X$はパラコンパクト}\\ 
+&\mbox{$X$の任意の開被覆は閉集合からなる局所有限な被覆によって細分される}\\
+&\mbox{$X$の任意の開被覆は（閉とも開とも限らない集合からなる）局所有限な被覆によって細分される}\\ 
+&\mbox{$X$の任意の開被覆は$\sigma$局所有限な開被覆で細分される}\\
+&\mbox{$X$の任意の開被覆は$\sigma$疎な開被覆で細分される。}\\
+&\mbox{$X$はメタコンパクトかつ族正規}
+\end{align}
+\end{thm}
+
+\begin{proof}
+$T_3$性から各点の閉近傍全体が基本近傍系を成してることから$(1)\To (2)$がわかる。また$(2)\To (3)$と$(1)\To (6)$は明らかで、疎な族は特に局所有限でもあるから$(5)\To (4)$もわかるよって以下の論理包含図式が得られる。
+\[
+(1)\To (2)\To (3)
+\]
+\[
+(1)\To (6),\ (5)\To (4)
+\]
+以下$(3)\To (1),\ (6)\To(5),\ (4)\To (3)$を示す。この3つが示されれば、提示された条件の同値性は漏れ無く証明される。\par
+[$(3)\To (1)$の証明]\par
+$\mathcal{V}$を$X$の開被覆とすると$(3)$から局所有限な（閉とも開とも限らない）被覆で細分されるそれを$\mathcal{A}$
+と置く。$\mathcal{A}$は局所有限なので各$x$毎に$\mathcal{A}$の局所有限性を担保する$x$の近傍$W_x$が存在する。ここで$T_3$性の仮定からより強く$CL(W_x)$は$\mathcal{A}$の有限個の元としか交わらないとしてもよい。すると$\mathcal{W}=\{W_x\}_{x\in X}$は$X$の開被覆なので再び$(3)$から$\mathcal{W}$の局所有限な被覆である細分$\mathcal{B}$が存在する。この$\mathcal{B}$は$\mathcal{W}$の細分なので$\mathcal{B}$の任意の元の閉包$CL(B)$は$\mathcal{A}$の有限個の元としか交わらない。更に
+\[
+\mathcal{C}=\{CL(B)\ |\ B\in \mathcal{B}\}
+\]
+と置くとこれは局所有限な閉被覆で$C\in\mathcal{C}$は$\mathcal{A}$の有限個の元としか交わらない。
+ここで$A\in \mathcal{A}$に対して
+\[
+U_A=X\setminus \bigcup\{C\ |\ C\cap A=\O\ C\in \mathcal{C}\}
+\]
+と定義すると$A\subset U_A$であり$\mathcal{C}$の局所有限性から$U_A$は開集合である。この時次が成り立つ。$C\in \mathcal{C}$について
+\[
+C\cap U_A\neq\O \iff C\cap A\neq\O
+\]
+なぜなら、$C\cap U_A\neq\O$とすると$U_A$の定義から$C\cap A\neq \O$でしかありえない。逆は明らか。
+対偶を取れば
+\[
+C\cap U_A=\O \iff C\cap A=\O
+\]
+も成り立つ。よって$\mathcal{C}$は$\{U_A\}_{A\in \mathcal{A}}$の有限個の元としか交わらない。\par
+$\{U_A\}_{A\in \mathcal{A}}$が局所有限であることを示そう。各点$x$について$\mathcal{C}$の局所有限性を担保する$x$の近傍$N$が存在する。$N$は$\mathcal{C}$の有限個の元
+$C_1,C_2,\cdots ,C_m$としか交わらず、$\mathcal{C}$が被覆を成すことから
+\[
+x\in N\subset \bigcup_{i=1}^mC_i
+\]
+となる。よって$\{U_A\}_{A\in \mathcal{A}}$の元が$N$と交われば$C_1,C_2,\cdots ,C_m$のいづれかと必ず交わっているが、$C_1,C_2,\cdots ,C_m$の各々は$\{U_A\}_{A\in \mathcal{A}}$の有限個の元とし交わらないので$N$も$\{U_A\}_{A\in \mathcal{A}}$の有限個の元としか交わらない。よって$\{U_A\}_{A\in \mathcal{A}}$は局所有限である。最後に$\mathcal{A}$が$\mathcal{V}$の細分を成していることから$A\in \mathcal{A}$毎に
+\[
+A\subset O_A 
+\]
+となる$O_A\in \mathcal{U}$を選び、
+\[
+\{U_A\cap O_A\}_{A\in \mathcal{A}}
+\]
+とすると、明らかに$\mathcal{V}$の細分で$A\subset U_A\cap O_A$で$\mathcal{A}$が被覆を成してることから$\{U_A\cap O_A\}_{A\in \mathcal{A}}$も被覆で$\{U_A\}_{A\in \mathcal{A}}$が局所有限であることから$\{U_A\cap O_A\}_{A\in \mathcal{A}}$も局所有限である。以上で$X$がパラコンパクトであることが示された。
+\par[$(3)\To (1)$の証明終わり]\par
+%こここここおおこここおおおｄｐｆｊｐｓ：いｆｐｇｊｇっれ
+[$(6)\To (5)$の証明]\par
+点有限な被覆に$\sigma$疎な開被覆である細分が存在する事を示せば良い。$\mathcal{U}$を点有限開被覆とし、$i\in \nn$に対して
+\[
+F_{i}=\{x\in X\ |\ deg(x;\mathcal{U})\le i\}
+\]
+と置けば$F_{i}\subset F_{i+1}$であり、点有限性から
+\[
+\bigcup_{i\in \nn}F_{i}=X
+\]
+が成り立つ。帰納的に$i\in \zz_{\ge 0}$に対して開集合からなる$\mathcal{U}$の細分である疎な族$\mathcal{V}_{i}$を構成するが、
+$V_i=\bigcup\mathcal{V}_i$と置いたときに、条件$({\rm hoge})$
+\begin{align}
+F_{n}\subset \bigcup_{i=1}^nV_i\tag{hoge}
+\end{align}
+が成り立つように構成する。\par 
+$i=0$のとき:$F_0=\O$であるから$\mathcal{V}_0=\{\O\}$とおけば条件$({\rm hoge})$は充たされる。\par
+$i=n$まで構成されたとして、$i=n+1$のとき、
+\[
+I=\{\ \{U_{1},U_{2},\cdots,U_{n+1}\}\ |\ \mbox{$\{U_{1},U_{2},\cdots,U_{n+1}\in \mathcal{U}$で$U_{1},U_{2},\cdots,U_{n+1}$は互いに異なる}\}
+\]
+と定義し、$T\in I$に対して
+\[
+A_{T}=\left(X\setminus \bigcup_{j=0}^nV_j \right)\cap \left(X\setminus \bigcup_{U\not\in T}U\right)
+\]
+と定義するとこれは閉集合であり、
+\[
+A_{T}\subset \bigcap_{U\in T}U
+\]
+が成り立つ。なぜなら$\mathcal{U}$が被覆であり、$\dpst A_T\subset \left(X\setminus \bigcup_{U\not\in T}U\right)$だからである。\par
+さて$\{A_T\}_{T\in I}$が疎であることを示そう。$x\in X$を任意に与える。\par 
+$deg(x;\mathcal{U})\le n$のとき：$x\in F_n\subset \bigcup_{j=0}^nV_j$で$\bigcup_{j=0}^nV_j$は$A_T$の定義から$\{A_T\}_{T\in I}$の元と交わらない。\par 
+$\deg(x;\mathcal{U})\ge n+2$のとき：$x$を含む$n+2$個の$\mathcal{U}$の元$U_1,U_2,\cdots,U_{n+2}$が存在しする。そこで$\dpst N=\bigcap_{i=1}^{n+2}U_{i}$と置けばどんな$T\in I$に対しても、この$U_1,U_2,\cdots,U_{n+2}$のいづれかひとつは$T$に属しないので$A_T$の定義から$N$は$\{A_T\}_{T\in I}$の元と交わらない。\par
+$deg(x;\mathcal{U})=n+1$のとき：ちょうど$n+1$個の$\mathcal{U}$の元$U_1,_U2,\cdots,U_{n+1}$が$x$を含む。$S=\{U_1,_U2,\cdots,U_{n+1}\}\in I$と置けば、$A_T$の定義から
+$\dpst N=\bigcap_{i=1}^{n+2}U_{i}$は$A_S$としか交わらない。\par 
+よって以上から$\{A_T\}_{T\in I}$は閉集合からなる疎な族である。$(6)$から$X$が族正規であることと命題\ref{benri}から疎な開集合の族$\{O_T\}_{T\in I}$が存在して$A_T\subset O_T$を充たす。これを用いて
+\[
+P_T=O_T\cap \bigcap_{U\in T}U
+\]
+と定義すると$\mathcal{V}_{n+1}=\{P_T\}_{T\in I}$は開集合からなる疎な族であり、$\mathcal{U}$の細分である。また、明らかに$A_T\subset P_{T}$。これが条件$({\rm hoge})$を充たすことをみよう。\par 
+まず帰納法の仮定から以下の包含関係が成り立つ。\footnote{一般に２つの集合$A,B$について$A\cup B=A\cup(B\setminus A)$であることに注意しよう。}
+\[
+F_{n+1}=F_n\cup F_{n+1}\subset \left(\bigcup_{j=0}^{n}V_j\right)\cup F_{n+1}= \left(\bigcup_{j=0}^{n}V_j\right)\cup \left(F_{n+1}\setminus \left(\bigcup_{j=0}^{n}V_j\right)\right)
+\]
+そこで$x\in F_{n+1}\setminus \left(\bigcup_{j=0}^{n}V_j\right)$を任意に与えると
+$deg(x:\mathcal{U})=n+1$であり、このときある$T\in I$が存在して
+\[
+x\in X\setminus \bigcup_{U\not\in T}U
+\]
+である。よって$x\not\in \bigcup_{j=0}^nV_j $であるから$x\in A_{T}\subset P_{T}$つまり
+\[
+F_{n+1}\setminus \left(\bigcup_{j=0}^{n}V_j\right)\subset V_{n+1}
+\]
+であるから結局
+\[
+F_{n+1}\subset \bigcup_{j=0}^{n+1}V_j
+\]
+よって$({\rm hoge})$が充たされ$\mathcal{V}_i$が任意の$i\in \zz_{\ge 0}$について構成できた。\par
+さてさて各$\mathcal{V}_i$が開集合からなる疎な族で$\mathcal{U}$の細分なので$\dpst \mathcal{W}=\bigcup_{i\in\zz_{\ge 0}}\mathcal{V}_i$は開集合からなる$\sigma$疎な族で$\mathcal{U}$の細分である。最後に$\mathcal{W}$が$X$の被覆であることを見よう。\par
+\[
+X=\bigcup_{n\in \nn}F_n
+\]
+で
+\[
+\bigcup\mathcal{W}=\bigcup_{j=0}^{\mgn}V_{j}
+\]
+であるから$({\rm hoge})$より$\mathcal{W}$が被覆となることがわかる。
+\par[$(6)\To (5)$の証明終わり]\par
+[$(4)\To (3)$の証明]\par
+$\mathcal{U}$を$X$の開被覆とすると$(4)$から$\sigma$局所有限な開被覆で細分されるそれを
+\[
+\mathcal{A}=\bigcup_{i\in \nn}\mathcal{B}_i\ (\mbox{$\mathcal{B}_i$は局所有限})
+\]
+と置く。そして
+\[
+G_i=\bigcup\mathcal{B}_i
+\]
+とするとこれは開集合である。更に
+\[
+D_1=G_1,\ D_i=G_i\setminus \left(\bigcup_{k=1}^{i-1} G_k\right)
+\]
+として$\{D_{i}\}_{i\in \nn}$を定義すると$n<i$ならば$G_n\cap D_i=\O$なので局所有限であり、$X$の被覆である。。そして最後に
+\[
+\mathcal{Q}=\{W\cap D_i\ |\ W\in \mathcal{B}_i\ i\in \nn\}
+\]
+と置く。明らかにこれは開被覆であり、$\mathcal{A}$が$\mathcal{U}$の細分であることから$\mathcal{Q}$も$\mathcal{U}$の細分である。$\mathcal{Q}$が局所有限であることを示そう。$x\in X$とするとある$n\in \nn$が存在して$x\in G_n$である。$G_n$は高々$D_1,D_2,\cdots D_n$としか交わらない。さて$\mathcal{B}_1,\mathcal{B}_2,\cdots,\mathcal{B}_n $それぞれに対してその局所有限性を担保する$x$の被覆が存在するが、その近傍をそれぞれ$N_1,N_2,\cdots ,N_n$と置く。すると
+\[
+G_n\cap N_1\cap N_2\cap \cdots \cap N_n
+\]
+は$x$の近傍で明らかに$\mathcal{Q}=\{W\cap D_i\ |\ W\in \mathcal{B}_i\ i\in \nn\}$の有限個の元としか交わらない。よって$\mathcal{U}$に（開とも閉とも限らないが）局所有限な細分が存在することがわかった。
+\par[$(4)\To (3)$の証明終わり]
+
+\end{proof}
+%壱より小さい距離
+\begin{prop}
+擬距離空間$(X,d)$について$d$と同じ位相を誘導する擬距離$e$で、
+\[
+e(x,y)\le1
+\]
+を充たすものが存在する。
+\end{prop}
+\begin{proof}
+$e(x,y)=\min\{d(x,y),1\}$と置けば良い。これが擬距離の公理を充たすことの証明は、読者へ委ねる。$0<\ep<1$のとき、$x$を中心とした$d$による$\ep$開球と$e$による$\ep$開球は同じ集合になるので$d$と$e$は同じ位相を誘導する。
+\end{proof}
+
+%ゲージ空間
+\begin{df}[ゲージ空間]
+空間$X$に擬距離の族$\mathfrak{D}=\{d_{i}\ |\ i\in I\}$が備わっている時、$(X,\mathfrak{D})$を$\mathfrak{D}$をゲージとするゲージ空間という。ゲージ空間$(X,\mathfrak{D})$には
+\[
+\{B(x,\ep;d_i)\ |\ x\in X,\ \ep\in (0,+\mgn), \ i\in I\}
+\]
+を準開基とした標準的な位相が定義される。ここで$B(x,\ep;d_i)$は$x$を中心としたは$d_i$による$\ep$開球である。また上の命題からゲージ空間$(X,\mathfrak{D})$に対して同じ位相を誘導するゲージ$\mathfrak{E}$で$e\in \mathfrak{E}$の大きさが$1$を超えないものが存在する。
+\end{df}
+%%可算個の
+\begin{prop}[ゲージ空間の擬距離距離付け可能性]\label{metric}
+ゲージ空間$(X,\{d_{i}\ |\ i\in I\})$に於いて$I$が高々可算のとき$X$は擬距離付け可能であり、任意の$x,y\in X,x\neq y$についてある$i\in I$が存在して
+\[
+d_i(x,y)\neq0
+\]
+が成り立つならば$X$は距離付け可能である。
+\end{prop}
+\begin{proof}
+$\ d_i\le 1$としても良く、$I$が高々可算なので$I\subset \nn$としてもよい。このとき
+\[
+D(x,y)=\sum_{i\in I}\frac{1}{2^{i}}d_i(x,y)
+\]
+とするとこれはどんな$x,y$についても有限の値になり、この級数は一様収束するので$(X,\{d_{i}\ |\ i\in I\})$上の連続関数である。。またこれが擬距離であることを見るのは容易い。この擬距離$D$がゲージ$\{d_{i}\ |\ i\in I\}$と同じ位相を誘導する事を見よう。$D$は$(X,\{d_{i}\ |\ i\in I\})$の連続関数なので擬距離空間$(X,D)$の開集合は$(X,\{d_{i}\ |\ i\in I\})$の開集合である。逆の事を示そう。任意の点$a\in X$について$D(a,x)<2^{-i}\ep$ならば$2^{-i}d_i(a,x)\le D(a,x)$なので$d(a,x)<\ep$つまり、
+\[
+B(a,2^{-i}\ep;D)\subset B(a,\ep;d_i)
+\]
+となる。よって$(X,\{d_{i}\ |\ i\in I\})$の開集合は$(X,D)$開集合となるので結局$(X,\{d_{i}\ |\ i\in I\})$は擬距離付け可能である。\par
+最後に$x,y\in X,x\neq y$についてある$i\in I$が存在して
+\[
+d_i(x,y)\neq0
+\]
+が成り立つとき$D(x,y)>0$となるので$D$は距離となる。
+\end{proof}
+\setcounter{equation}{0}
+\begin{thm}[Bing-長田-Smirnovの距離化可能定理]
+$T_3$空間$X$について以下は同値
+\begin{align}
+&\mbox{$X$は距離化可能}\\
+&\mbox{$X$は$\sigma$疎な開基を持つ}\\
+&\mbox{$X$は$\sigma$局所有限な開基を持つ}
+\end{align}
+\end{thm}
+\begin{proof}
+$(2)\To(3)$は明らかである。以下$(1)\To(2),\ (3)\To (1)$を示そう。\par
+[$(1)\To (2)$の証明]\par
+$B(x,r)$で$x$を中心とする$r$開球を表すことにする。
+すると各$i\in \nn$に対して
+\[
+S_i=\{B(x,2^{-i})\}_{x\in X}
+\]
+は$X$の開被覆でありかつ$\dpst \mathcal{B}=\bigcup_{i\in \nn}S_i$は$X$の開基を成している。
+前回までで距離空間のパラコンパクト性はわかっている。先の定理$(5)$より
+$S_i$には$\sigma$疎な開被覆である細分$E_i$が存在する。この時$\mathcal{W}=\bigcup_{i\in \nn }E_i$
+も$\sigma$疎である。$\mathcal{W}$が開基になることを示そう。ところで次の簡単な事実がある。\par
+\[
+(\star):\mbox{$x\in B(y,2^{-k-1})$ならば$B(y,2^{-k-1})\subset B(x,2^{-k})$}
+\]
+さて$\mathcal{B}$が開基なので$\mathcal{W}$が開基であることを示すには各点$x$と任意の$n\in \nn$についてある$W\in \mathcal{W}$が存在して
+\[
+x\in W\subset B(x,2^{-n})
+\]
+を示せば良いが、$E_{n+1}$は被覆であり$S_{n+1}$の細分であるから各点$x$に対して
+\[
+x\in W\subset B(y,2^{-n-1})
+\]
+となる$y\in X$が存在する。そして$(\star)$より$B(y,2^{-n-1})\subset B(x,2^{-n})$が成り立つ。よって
+\[
+x\in W\subset B(x,2^{-n})
+\]
+が成り立つ。よって$\mathcal{W}$が開基であることが示されたので$(2)$が成り立つ。
+\par[$(1)\To (2)$の証明終わり]\par
+%koajfiwef:ofnovoijdsidncfogrpighwingerogephgpa:nclngpo]wjgpinSK
+[$(3)\To (1)$の証明]\par
+$X$の開集合系を$\mathfrak{O}$とする。
+まず、条件$(3)$から$X$の任意の開被覆は被覆である$\sigma$疎な開細分をもつので定理\ref{pp}からパラコンパクトハウスドルフ空間である。よって特に$X$は正規である。\par
+次に$(X,\mathfrak{O})$の位相と同じ位相を誘導する高々可算個のゲージを構成しよう。$(3)$より$X$に基底$\mathcal{B}$として
+\[
+\mathcal{B}=\bigcup_{i\in \nn }\mathcal{B}_i\ \mbox{（各$\mathcal{B}_i$は局所有限）}
+\]
+となるものが選べる。これを用いて$\mu=(m,n)\in \nn$に対して擬距離を構成する。まず$U\in \mathcal{B}_n$に対して
+\[
+K(U)=\bigcup\{CL(W)\ |\ W\in \mathcal{B}_m,\ CL(W)\subset U\}
+\]
+と置くと$\mathcal{B}_m$の局所有限性から$K(U)$は閉集合であり、$K(U)\subset U$を充たす。そこで$X$の正規性からウリゾーンの補題を用いて
+\[
+f_{U}|K(U)\equiv 1,\ f_U|X\setminus U\equiv 0
+\]
+となる連続関数$f_U:X\to [0,1]$が存在する。これを用いて
+\[
+d_{\mu}(x,y)=\sum_{U\in \mathcal{B}_n}|f_{U}(x)-f_U(y)|
+\]
+と定義する。$x,y$それぞれの$\mathcal{B}_n$の局所有限性を表現する開近傍を$N_x,N_y$とすると、$N_x\times N_y$上では$d_{\mu}$は有限和になるのでこの上の連続関数である。よって$d_{\mu}$は$X\times X$上の連続関数である。\footnote{一般に写像$f;X\to Y$は任意の$U\in \mathcal{U}$で$f|U:U\to Y$が連続関数であるような$X$の開被覆$\mathcal{U}$が存在すれば、$f$は$X$上でも連続である。}よって$(X,\{d_{\mu}\}_{\mu\in \nn\times \nn})$の開集合は$(X,\mathfrak{O})$の開集合である。逆の事を示そう。$\mu=(m,n)\in \nn\times \nn,\ U\in \mathcal{B}_n$について$a\in K(U)$とすれば$d_{\mu}(a,y)<1$ならば
+\[
+|f_U(a)-f_U(y)|=|1-f_U(y)|\le d_{\mu}(a,y)<1
+\]
+なので$0<f_U(y)$で$f_U|X\setminus U\equiv 0$なので結局
+\[
+B(a,1;d_{\mu})\subset U
+\]
+となる。よって$\mathcal{B}$が$(X,\mathfrak{O})$の基底なので$(X,\mathfrak{O})$の開集合は$(X,\{d_{\mu}\}_{\mu\in \nn\times \nn})$の開集合でもあり、$X$は可算個のゲージで位相を付ける事ができる。よって命題\ref{metric}から
+$(X,\mathfrak{O})$は擬距離付け可能である。また、$\mathcal{B}$が開基であることと、元々$(X,\mathfrak{O})$がハウスドルフであることから$x\neq y$について$\mu \in \nn\times \nn$が存在して
+\[
+d_{\mu}(x,y)\neq 0
+\]
+となることを見るのは容易いので、最終的に$X$が距離付け可能であることがわかる。
+\par[$(3)\To (1)$の証明終わり]
+\end{proof}
+\setcounter{equation}{0}
+\begin{cor}[ウリゾーンの距離化可能定理]
+第二可算$T_3$空間は距離化可能
+\end{cor}
+\begin{proof}
+元を一つしか持たない族は明らかに疎であるから可算な族は$\sigma$疎である。この事からウリゾーンの距離化可能定理は明らかである。
+\end{proof}
+
+\begin{df}
+位相空間が$c.c.c.$を充たすとは、$X$の互いに交わらない開集合の族の濃度が高々可算になるときに言う。
+\end{df}
+\begin{cor}距離空間に於いて次は同値\footnote{この命題はわざわざBing-長田-Smirnovを使わずとも証明できる。そのことからわかることは、距離空間には何かしら内在的な「可算性」があるということである。（もちろん第一可算公理を充たすのだが、そういう局所的なことではなく大域的な性質としての話である。）それを暴いたのがBing-長田-Smirnovの定理である。}
+\begin{align}
+&\mbox{第二可算公理}\\
+&\mbox{可分}\\
+&\mbox{リンデレフ}\\
+&\mbox{c.c.c.}
+\end{align}
+\end{cor}
+\begin{proof}
+距離空間に限らず一般の位相空間で以下のよく知られた次の論理包含関係がある。
+\[\xymatrix{
+&  & \mbox{可分}\ar@{=>}[dr] &\\ 
+&\mbox{第二可算公理}\ar@{=>}[ur]\ar@{=>}[dr]&  & \mbox{c.c.c.}&\\
+&  & \mbox{リンデレフ}  &
+}\]
+よって距離空間において[$\mbox{リンデレフ$\To$可分}$]と[$\mbox{c.c.c.$\To$第二可算公理}$]を示せばよい。\par
+[$\mbox{c.c.c.$\To$第二可算公理}$の証明]
+Bing-長田-Smrnovの距離化可能定理から$X$には$\sigma$疎な開基が存在するが、$c.c.c.$なら疎な族の濃度は高々可算になる。よって$\sigma$疎な族の濃度も高々可算である。よって$\sigma$疎な開基は濃度が高々可算な開基になるので第二可算公理が成り立つ。\par
+[$\mbox{c.c.c.$\To$第二可算公理}$の証明終わり]\par
+[$\mbox{リンデレフ$\To$可分}$の証明]\par
+各$n\in \nn$毎に$2^{-n}$開球全体の族$S_n=\{B(x,2^{-n})\}_{x\in X}$は$X$の開被覆になるが、リンデレフ性から高々可算個の$2^{-n}$開球で$X$を被覆出来る。その可算個の$2^{-n}$開球の中心を$\{x_{i,n}\}_{i\in \nn}$と置く。この時
+\[
+D=\{x_{i,n}\ |\ i,n\in \nn\}
+\]
+は高々可算な集合であるが、これが$X$で稠密であることを言おう。各$x$について$B(x,2^{-k})$を考える。この時$\{x_{i,k}\}_{i\in \nn}$の各々を中心とする$2^{-k}$開球は$X$を被覆するのである$i\in \nn$が存在して$x\in B(x_{i,n},2^{-k})$であるが、もちろん$x_{i,n}\in B(x,2^{-k})$である。よってこの事から$X$の任意の開集合は$D$と共通部分を持つことがわかるので$D$は$X$で稠密である。\par
+[$\mbox{リンデレフ$\To$可分}$の証明終わり]
+\end{proof}
+\setcounter{equation}{0}
+\S おまけ Stoneの定理の別証明\par
+前回距離空間のパラコンパクト性は証明したが、定理\ref{pp}を用いた別証明が出来る。
+
+\begin{thm}[Stoneの定理]\footnote{この方法は\cite{bi}にはA.H.Stoneの論文\cite{stone}によるものと書いているが実際にその論文を読んでみると距離空間ではなく一般に全体正規空間のパラコンパクト性を証明している。その証明を距離を用いて手直しするとこのような証明になるのである。全体正規空間とは任意の開被覆に正規被覆列が存在する空間のことであるが、正規被覆列にはそれと「両立」する距離を誘導出来ることが\cite{stone}以前にTukeyによって知られていた。Stoneも最初は距離空間でやってみてその後抽象的に全体正規性から誘導される被覆の正規列でパラコンパクト性の証明を手直ししたのかもしれない。}
+距離空間の任意の開被覆は$\sigma$疎な開被覆で細分出来る。よって定理\ref{pp}から距離空間はパラコンパクト
+\end{thm}
+\begin{proof}$B(x,r)$で$x$を中心とする$r$開球を表すことにする。\par
+$\{U_{\alpha}\}_{\alpha \in A}$を距離空間$(X,d)$の開被覆とし、その添字集合$A$は整列しているとする。これの$\sigma$疎な細分で開被覆となるものを構成しよう。まず各$n\in \nn$に対して
+\[
+V_{\al,n}=\{x\in U_{\al}\ |\ d(x,X\setminus U_{\al})\ge 2^{-n}\}
+\]
+と定義する。すると
+\[
+V_{\al,n}\subset V_{\al,n+1},\ \bigcup_{n\in \nn}V_{\al,n}=U_{\al}
+\]
+が成り立つ。また次のことがわかる。
+\begin{equation}
+p\in V_{\al,n},\ q\not\in V_{\al,n+1}\To d(p,q)\ge2^{-n}
+\end{equation}
+なぜなら$V_{\al,n+1}$の定義から$q\not\in V_{\al,n+1}$ならば任意の$x\in X\setminus U_{\al}$に対して$d(q,x)<2^{-n-1}$
+であるから三角不等式を用いて$x\in X\setminus U_{\al}$に対して
+\[
+2^{-n}\le d(p,x)\le d(p,q)+d(q,x)\le d(p,q)+2^{-n-1}
+\]
+なので$d(p,q)\ge2^{-n}$となる。さて
+\[
+H_{\al,n}=V_{\al,n}\setminus\bigcup_{\be<\al}U_{\be,n+1}
+\]
+と定義しよう。このとき次の事が成り立つ。
+\begin{equation}
+\al\neq\be,\ p\in H_{\al,n},\ q\in H_{\be,n}\To d(p,q)\ge 2^{-n-1} 
+\end{equation}
+理由を説明しよう。今$\al>\be$と仮定しても一般性を失わない。このとき$H_{\al,n}$の定義から$p\in H_{\al,n},\ q\in H_{\be,n}$とすると$p\not\in U_{\be,n+1}$なので$(1)$から$d(p,q)\ge2^{-n-1}$がわかる。\par
+さてさて
+\[
+E_{\al,n}=\{x\in X\ |\ d(x,H_{\al,n})<2^{-n-3}=\bigcup_{c\in H_{\al,n}}B(c,2^{-n-3})
+\]
+と定義すると明らかに$E_{\al,n}$は開集合であり、$2^{-n-3}<2^{-n}$から$E_{\al,n}\subset U_{\al}$がわかる。この開集合について次の事が成り立つ。
+\begin{equation}
+\al\neq\be,\ p\in E_{\al,n},\ q\in E_{\be,n}\To d(p,q)\ge 2^{-n-2} 
+\end{equation}
+理由を説明しよう。$E_{\al,n},\ E_{\be,n}$の定義から$p\in E_{\al,n},\ q\in E_{\be,n}$とすると
+$s\in H_{\al,n},\ t\in H_{\be,n}$が存在して$p\in B(s,2^{-n-3}),\ q\in B(t,2^{-n-3})$
+となる。すると$(2)$と三角不等式から
+\[
+2^{-n-1}\le d(s,t)\le d(s,p)+d(p,q)+d(q,t)<2^{-n-3}+d(p,q)+2^{-n-3}=2^{-n-2}+d(p,q)
+\]
+よって$d(p,q)\ge 2^{-n-2} $が成り立つ。\par
+次の簡単な事実に注意しよう。
+\[
+p,q\in B(c,r)\To d(p,q)<2r
+\]
+この事実から各点$x\in X$について$B(x,2^{-n-4})$は族$\mathcal{E}_n=\{E_{\al,n}\}_{\al\in A}$の高々１個の元としか交わりを持たない。よって$\mathcal{E}_n=\{E_{\al,n}\}_{\al\in A}$は疎である。よって$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$は$\sigma$疎な$\{U_{\al}\}_{\al\in A}$の開細分である。最後に$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$が$X$の被覆になってることを言おう。\par 
+$x\in X$を任意に与え、$\al\in A$を$x\in U_{\al}$となる最小の$A$の元とする。このとき
+$\dpst \bigcup_{n\in \nn}V_{\al,n}=U_{\al}$からある$n\in\nn$について$x\in V_{\al,n}$であり$\al$の最小から$x\in H_{\al,n}$であり、$H_{\al,n}\subset E_{\al,n}$なので$x\in E_{\al,n}$つまり$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$は$X$の被覆である。
+\end{proof}
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{tera}寺澤 順,トポロジーへの招待,日本評論社,2012
+\bibitem{bi}R.H.Bing{\it Metrization of topological spaces },Canadian J. Math.3(1951) 175-186
+\bibitem{engel}R,Engelking,{\it General Topology },PWN,1977
+\bibitem{mi}E.Michael,{\it A note on paracompact spaces },Proc.Amer.Math Soc.4(1953) 831-838
+\bibitem{na}K.Nagami,{\it Paracompactness and strong screenability},Nagoya Math J.8(1955),83-88
+\bibitem{pear}A.R.Pears,{\it DIMENSION THEORY OF GENERAL SPACES},Cambridge Univ.Press,1975
+\bibitem{stone}A.H.Stone,{\it Paracompactness and product spaces},Bull,Amer.Math Soc. 54(1948),977-982
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

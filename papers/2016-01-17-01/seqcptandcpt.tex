@@ -1,0 +1,277 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}  } }
+\newcommand{\supp}{\text{  {\rm supp}  } }
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{例示：点列コンパクト性とかコンパクト性}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+\[\xymatrix{
+& &  & \mbox{集積コンパクト} &\\ 
+& \mbox{コンパクト}\ar@{=>}[r]&\mbox{可算コンパクト}\ar@{=>}[ur]\ar@{=>}[dr]&  \\
+&\mbox{点列コンパクト}\ar@{=>}[ur] &  & \mbox{擬コンパクト}  &
+}\]
+
+\begin{df}[可算コンパクト]
+位相空間$X$はその上の任意の可算開被覆に有限部分被覆が存在するとき可算コンパクトという。また、可算コンパクト性は空間$X$上の非空閉集合からなる任意の有限交叉的な可算族が非空な共通部分をもつことと同値である。またまた、可算個の非空閉集合からなる単調減少\footnote{つまり$F_{n}\supset F_{n+1}$ということ}な$\{F_n\}_{n\in \mathbb{N}}$族が非空な共通部分を持つことと可算コンパクト性は同値である。
+\end{df}
+\begin{df}
+位相空間$X$の部分空間$M$と点$x\in X$について$x$が部分集合$M$の集積点であるとは、
+\[
+x\in \cl(M\setminus\{x\})
+\]
+を充たすことである。つまり、$x$の任意の近傍$V$について、ある$m\in M$が存在して$m\in V$と$x\neq m$を充たすということである。
+\end{df}
+\begin{df}[集積コンパクト]
+位相空間$X$の任意の無限集合が集積点を持つとき、空間$X$は集積コンパクトであるという。無限集合は可算部分集合を持つので空間$X$が集積コンパクトであることと、$X$の任意の可算無限集合が集積点を持つことは同値である。
+\end{df}
+\begin{prop}
+$T_1$空間$X$において可算コンパクト性と集積コンパクト性は同値である。
+\end{prop}
+\begin{proof}\par
+[可算コンパクト$\Longrightarrow$集積コンパクトの証明]\par
+$X$の任意の可算集合に集積点があることを示せばよい。$\{a_n\}_{n\in \mathbb{N}}$を可算集合とする。添え字付けは単射であるとする。\footnote{つまり、$n\neq m\Longrightarrow a_n\neq a_m$ということである。}さて、
+\[
+F_n=\cl(\{a_i\ |\ i\ge n\})
+\]
+とすると、もちろん$F_n$は非空な閉集合で$F_n\supset F_{n+1}$を充たす。よって$X$の可算コンパクト性から
+\[
+\bigcap_{n\in \mathbb{N}}F_n\neq\O
+\]
+である。ここで$\displaystyle c \in \bigcap_{n\in \mathbb{N}}F_n$を取ろう。このとき$c$の任意の近傍$V$と任意の$n$について
+\[
+V\cap \{a_i\ |\ i\ge n\}\neq\O
+\]
+であり、$\{a_n\}_{n\in \mathbb{N}}$の添え字付けは単射なので$c$は$\{a_n\}_{n\in \mathbb{N}}$の集積点となる。よって$X$は集積コンパクトである。（実は$T_1$を用いていないことに注意しよう。$T_1$を使うのは逆を導くときということである。）\par
+[可算コンパクト$\Longrightarrow$集積コンパクトの証明終わり]\par
+[集積コンパクト$\Longrightarrow$可算コンパクトの証明]\par
+非空な閉集合なる単調減少な族$\{F_n\}_{n\in \mathbb{N}}$を考える。必要なら番号を付け替えて単調減少よりも強く
+\[
+F_n\supsetneq F_{n+1}
+\]
+としてもよい。（狭義の単調減少）
+さて$x_n$を
+\[
+x_n\in F_n\setminus F_{n+1}
+\]
+を充たすものとしよう。このとき$A=\{x_n\}_{n\in\mathbb{N}}$は添え字付けが単射なので可算集合である。そして$X$の集積コンパクト性から$A$には集積点$c$が存在する。もしこのときある$m\in \mathbb{N}$が存在して$c=x_m$となったとしよう。
+\par このとき$F_{m+1}$は閉集合であり$F_{m+1}\supset\{x_{i}\ |\ i>m\}$であるから$X\setminus F_{m+1}$は$c=x_m$を含み、$\{x_{i}\ |\ i>m\}$と交わらない開集合であり、また$T_1$性から$X\setminus \{x_1,x_2,\cdots ,x_{m-1}\}$は$c=x_m$を含み、$\{x_1,x_2,\cdots ,x_{m-1}\}$と交わらない開集合であるから、これら二つの開集合の共通部分を$O$とするとこれは$c=x_m$を含む開集合であり、$O\cap A=\{x_m\}$となり、$c$が$A$の集積点であることと矛盾する。よって任意の$m\in \mathbb{N}$について$c\neq x_m$である。\par
+以上のことを踏まえると任意の$m\in \mathbb{N}$について$X\setminus \{x_1,x_2,\cdots ,x_{m}\}$は$T_1$性から開集合であり、$c$を含む開集合である。このことから$c$は任意の$m\in \mathbb{N}$について$\{x_i\ |\ i>m\}$の集積点でもある。$x_n$の定義と$F_n$が閉集合であることから、特に任意の$n\in \mathbb{N}$について$c\in F_n$である。よって
+\[
+\bigcap_{n\in \mathbb{N}}F_n\ni c
+\]
+なので$\displaystyle \bigcap_{n\in \mathbb{N}}F_n\neq \O$がわかり、$X$の可算コンパクト性が分かった。
+\end{proof}
+\begin{df}[点列]
+位相空間$X$内の点列とは写像$\al:\nn\to X$のことである。
+\end{df}
+
+\begin{df}[部分列]
+$X$内の点列$\be$が点列$\al$の部分列であるとは狭義単調な写像$\phi:\nn\to \nn$が存在して\[
+\be=\al \circ \phi
+\]
+と表されることである。
+\end{df}
+
+\begin{df}[点列の収束]
+$X$内の点列$\al$が$X$の点$p$に収束するとは
+\[
+\forall V\in \mathfrak{N}(p)\ \exists N\in\nn\ \forall n\in \nn(n\ge N\To \al_n\in V)
+\]
+が成り立つことである。
+\end{df}
+
+\begin{df}[点列コンパクト]
+位相空間$X$が点列コンパクトであるとは$X$内の任意の点列に収束する部分列が存在する事を言う。
+\end{df}
+
+\begin{exam}[点列コンパクトだが、コンパクトでない例]
+最小の非可算順序数$\omega_1$\par
+$\omega_1$内の可算集合は$\omega_1$内に$\inf,\sup$を持つことを鑑みれば、$\omega_1$が点列コンパクトである事が分かる。\par
+しかし明らかに$\omega_1$はコンパクト空間ではない。
+\end{exam}
+
+
+\begin{exam}[コンパクトだが点列コンパクトでない例]
+離散二元空間$2=\{0,1\}$の非可算直積空間$2^{2^{\nn}}$\par
+$2^{2^{\nn}}$の元は$\nn$の冪集合$2^{\nn}$から$2=\{0,1\}$への写像である。またチコノフの定理よりコンパクトである。
+\par 次のような$2^{2^{\nn}}$の点列$\{\al_n\}_{n\in \nn}$を考える。
+\[
+\al_n(S)=
+\begin{cases}
+1 & \text{$n\in S$}\\ 
+0 & \text{$n\not\in S$}
+\end{cases}
+\]
+この点列に収束する部分列$\{\al_{\phi(n)}\}_{n\in \nn}$が存在すると仮定しよう。このとき
+\[
+Q=\{\phi(2k)\ |\ k\in \nn\}
+\]
+を考えると
+\[
+\al_{\phi(n)}(Q)=
+\begin{cases}
+1 & \text{$n$は偶数}\\ 
+0 & \text{$n$は奇数}
+\end{cases}
+\]
+となるので$\{\al_{\phi(n)}\}_{n\in \nn}$は収束し得ない。よって$2^{2^{\nn}}$は点列コンパクトではない。
+\end{exam}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}L.A.Steen and J.A.Seebch,{\it Counterexamples in Topology},Dover Publications,Inc.,New York,1995
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

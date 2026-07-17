@@ -1,0 +1,211 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}} }
+\newcommand{\supp}{\text{  {\rm supp}} }
+%なんか演算２
+\newcommand{\bd}{\text{  {\rm Bdry}} }
+\newcommand{\cl}{\text{  {\rm CL}} }
+\newcommand{\nai}{\text{  {\rm Int}} }
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{固有写像と完全写像の反例}
+\author{ナンブキトラ電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+\begin{df}[固有写像]
+連続写像$f:X\to Y$が固有、または固有写像であるとは$Y$の任意のコンパクト集合$K$について
+$f^{-1}(K)$が$X$のコンパクト集合となること。
+\end{df}
+
+\begin{df}連続関数$f:X\to Y$が次の条件を充たすとき$f$を完全写像と呼ぶ\footnote{完全写像に全射性を仮定する流儀もある。}
+\begin{center}
+任意の$y\in Y$について$f^{-1}(y)$は$X$のコンパクト集合かつ$f$は閉写像
+\end{center}
+\end{df}
+
+
+次の事実がある。
+\begin{fact}
+完全写像$f:X\to Y$は固有写像
+\end{fact}
+
+この事実の逆が成り立たない例をこの文章では紹介する。
+
+
+実数$\rr$上に$x\in \rr\setminus \{0\}$の近傍として$\{x\}$を与え、$0\in \rr$については$0$を含む補可算な集合つまり$x\in B$でかつ$\rr\setminus B$が高々可算となるような集合を全体を基本近傍系として与えると、きちんと位相を生成する。この位相空間を
+\[
+(\rr,\mathcal{E})
+\]
+と書くことにする。\par
+$(\rr,\mathcal{E})$のコンパクト集合を同定しよう。つまりこの空間のコンパクト集合$K$は必ず有限集合になることを示そう。そんなに難しくはない。
+\par
+コンパクト集合$K$が無限集合であるとしよう。すると
+$0\not\in K$の時は$\{\{x\}\}_{x\in K}$という開被覆を考えれば矛盾が導かれる。$0\in K$の時は$0$の近傍$B$と$K$内の可算集合$\{x_n\}_{n\in \nn}$を適当に選んで
+\[
+K\setminus B=\{x_n\}_{n\in \nn}
+\]
+とできるので結局矛盾する。よって$(\rr,\mathcal{E})$のコンパクト集合$K$は有限集合でなければならない。また、有限集合は必ずコンパクトなので$(\rr,\mathcal{E})$のコンパクト集合全体は有限集合全体に一致する。
+\par
+そして$\rr$に離散位相を定義した位相を$(\rr,\mathcal{T}_{\mgn})$とする。もちろんこの空間のコンパクト空間全体は有限集合全体と一致する。\par
+写像$f:(\rr,\mathcal{T}_{\mgn})\to (\rr,\mathcal{E})$を
+\[
+f(x)=x
+\]
+として定義する。このときこの写像は定義域が離散空間であるから明らかに連続である。この写像が固有であるが完全でないことを示そう。\par
+まず$(\rr,\mathcal{E})$のコンパクト集合$K$は有限集合なので$f^{-1}(K)$も有限集合であり、$f$が固有であることがわかる。\par
+次に$f$が完全でないことを示そう。そのために$f$が閉写像でない事を示すのである。$A=\rr\setminus \{0\}$は$(\rr,\mathcal{T}_{\mgn})$の閉集合だが、$(\rr,\mathcal{E})$の閉集合ではないことから$f$が閉写像でない事は明らかである。
+
+
+\begin{cau}
+$(\rr,\mathcal{E})$の$0$の近傍の定め方から、$(\rr,\mathcal{E})$の非可算集合は必ず$0$を触点に持つ。
+わざわざ$\rr$に位相を入れたが、非加算集合なら別に$\rr$でなくとも$\mathcal{E}$は定義できる。
+\par
+$\mathcal{E}$の位相の定め方は離散空間の１点コンパクト化の無限遠点の近傍を補可算にした構成である。
+\end{cau}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

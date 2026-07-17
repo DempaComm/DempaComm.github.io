@@ -1,0 +1,526 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}} }
+\newcommand{\supp}{\text{  {\rm supp}} }
+%なんか演算２
+\newcommand{\bd}{\text{  {\rm Bdry}} }
+\newcommand{\cl}{\text{  {\rm CL}} }
+\newcommand{\nai}{\text{  {\rm Int}} }
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{BNS}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+\setcounter{section}{-1}
+
+\section{ちょっとした準備}
+\begin{df}[擬距離]
+$d:X\times X\to \rr$が$X$上の擬距離であるとは
+\begin{align}
+&d(x,y)\ge 0\\
+&d(x,x)=0\\
+&d(x,y)=d(y,x)\\
+&d(x,y)\le d(x,z)+d(z,y)
+\end{align}
+が成り立つことである。ここで$x,y,z$は任意である。非退化性
+\[
+d(x,y)=0\To x=y
+\]
+を{\bf 仮定しないことに注意せよ。}擬距離は非退化性を仮定するとき、距離と呼ばれる。
+\par
+擬距離空間$(X,d)$に於いて
+\[
+B(a,r)=\{x\in X\ |\ d(a,x)<r\}
+\]
+と定義する。これを$a$を中心とする半径$r$の開球という。時には$d$による開球であることを強調して、
+\[
+B(a,r;d)
+\]
+と書くこともある。そして$(X,d)$上の位相を
+\[
+\{B(a,r)\ |\ a\in X,\ r\in (0,+\mgn)\}
+\]
+を開基として定義する。
+\end{df}
+\setcounter{equation}{0}
+%壱より小さい距離
+\begin{prop}
+擬距離空間$(X,d)$について$d$と同じ位相を誘導する擬距離$e$で、
+\[
+e(x,y)\le1
+\]
+を充たすものが存在する。
+\end{prop}
+\begin{proof}
+$e(x,y)=\min\{d(x,y),1\}$と置けば良い。これが擬距離の公理を充たすことの証明は、読者へ委ねる。$0<\ep<1$のとき、$x$を中心とした$d$による$\ep$開球と$e$による$\ep$開球は同じ集合になるので$d$と$e$は同じ位相を誘導する。
+\end{proof}
+
+%ゲージ空間
+\begin{df}[ゲージ空間]
+空間$X$に擬距離の族$\mathcal{D}=\{d_{i}\ |\ i\in I\}$が備わっている時、$(X,\mathcal{D})$を$\mathcal{D}$をゲージとするゲージ空間という。ゲージ空間$(X,\mathcal{D})$には
+\[
+\{B(x,\ep;d_i)\ |\ x\in X,\ \ep\in (0,+\mgn), \ i\in I\}
+\]
+を準開基とした標準的な位相が定義される。ここで$B(x,\ep;d_i)$は$x$を中心としたは$d_i$による$\ep$開球である。また上の命題からゲージ空間$(X,\mathcal{D})$に対して同じ位相を誘導するゲージ$\mathcal{E}$で$e\in \mathcal{E}$の大きさが$1$を超えないものが存在する。
+\end{df}
+%簡単な注意
+次の簡単で大事な注意を刮目せよ
+\begin{cau}{\bf
+位相空間$X$と$X\times X$上の連続関数$f:X\times X\to \rr$があるとき、$a\in X$と$r\in \rr$を固定するとき
+\[
+A(a,r)=\{x\in X\ |\ f(a,x)<r\}
+\]
+は$X$の開集合であることに注意しよう。なぜなら$g_{a}(x)=f(a,x)$は$X$上の連続関数で
+\[
+A(a,r)=g_a^{-1}((-\mgn,r))
+\]
+で連続関数による開集合の引き戻しは開集合だからである。}
+このことは以下度々強く用いられる。これを用いると、例えば位相空間$(X,\mathfrak{O})$上に距離関数$d$を定義して、さらに$d$が$X\times X$上で連続であることが分かると距離空間$(X,d)$の開集合は位相空間$(X,\mathfrak{O})$の開集合でもある事が分かる。
+\end{cau}
+%%可算個の
+\begin{prop}[ゲージ空間の擬距離距離付け可能性]\label{metric}
+ゲージ空間$(X,\{d_{i}\ |\ i\in I\})$に於いて$I$が高々可算のとき$X$は擬距離付け可能であり、さらに任意の$x,y\in X,x\neq y$についてある$i\in I$が存在して
+\[
+d_i(x,y)\neq0
+\]
+が成り立つならば$X$は距離付け可能である。
+\end{prop}
+\begin{proof}
+$\ d_i\le 1$としても良く、$I$が高々可算なので$I\subset \nn$としてもよい。このとき
+\[
+D(x,y)=\sum_{i\in I}\frac{1}{2^{i}}d_i(x,y)
+\]
+とするとこれはどんな$x,y$についても有限の値になり、この級数は一様収束するので$X\times X$上の連続関数である。またこれが擬距離であることを見るのは容易い。\par
+この擬距離$D$がゲージ$\{d_{i}\ |\ i\in I\}$と同じ位相を誘導する事を見よう。$D$は$X\times X$の連続関数なので擬距離空間$(X,D)$の開球$B(a,r;D)$は$(X,\{d_{i}\ |\ i\in I\})$の開集合である。よって$(X,D)$の開集合は$(X,\{d_{i}\ |\ i\in I\})$の開集合である。逆の事を示そう。任意の点$a\in X$について$D(a,x)<2^{-i}\ep$ならば$2^{-i}d_i(a,x)\le D(a,x)$なので$d(a,x)<\ep$つまり、
+\[
+B(a,2^{-i}\ep;D)\subset B(a,\ep;d_i)
+\]
+となる。よって$(X,\{d_{i}\ |\ i\in I\})$の開集合は$(X,D)$開集合となるので結局$(X,\{d_{i}\ |\ i\in I\})$は擬距離付け可能である。\par
+最後に$x,y\in X,x\neq y$についてある$i\in I$が存在して
+\[
+d_i(x,y)\neq0
+\]
+が成り立つとき$D(x,y)>0$となるので$D$は距離となる。
+\end{proof}
+\setcounter{equation}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{本題}
+BNSの証明に入る前に次の少々面倒な定理を証明しよう。
+
+
+\begin{lem}[Stoneの定理]\label{stone}\footnote{この方法は参考文献\cite{bi}にはA.H.Stoneの論文\cite{stone}によるものと書いているが実際にStoneの論文を読んでみると距離空間ではなく一般に全体正規空間のパラコンパクト性を証明している。その証明を距離を用いて手直しするとこのような証明になるのである。全体正規空間とは任意の開被覆に正規被覆列が存在する空間のことであるが、正規被覆列にはそれと「両立」する距離を誘導出来ることが\cite{stone}以前にTukeyによって知られていた。Stoneも最初は距離空間でやってみてその後抽象的に全体正規性から誘導される被覆の正規列でパラコンパクト性の証明を手直ししたのかもしれない。\par
+また、参考文献\cite{tera}に於いて、距離空間のパラコンパクト性を証明する前の口上として、A.H.Stoneの証明は難しく、数多の数学者の努力によってここまで簡単になった。いまから紹介する証明はM.E.Rudinによるものである。という旨のことを述べているが、紹介された証明はA.H.Stoneによる証明であった。M.E.Rudinによる簡明で直接的な証明は\cite{Rudin}を参照されたし。}
+距離空間の任意の開被覆は$\sigma$疎な開被覆で細分出来る。
+\end{lem}
+\begin{proof}$B(x,r)$で$x$を中心とする$r$開球を表すことにする。\par
+$\{U_{\alpha}\}_{\alpha \in A}$を距離空間$(X,d)$の開被覆とし、その添字集合$A$は整列されているとする。これの$\sigma$疎な細分で開被覆となるものを構成しよう。まず各$n\in \nn$に対して
+\[
+V_{\al,n}=\{x\in U_{\al}\ |\ d(x,X\setminus U_{\al})\ge 2^{-n}\}
+\]
+と定義する。すると
+\[
+V_{\al,n}\subset V_{\al,n+1},\ \bigcup_{n\in \nn}V_{\al,n}=U_{\al}
+\]
+が成り立つ。また次のことがわかる。
+\begin{equation}
+p\in V_{\al,n},\ q\not\in V_{\al,n+1}\To d(p,q)\ge2^{-n}
+\end{equation}
+なぜなら$V_{\al,n+1}$の定義から$q\not\in V_{\al,n+1}$ならば任意の$x\in X\setminus U_{\al}$に対して$d(q,x)<2^{-n-1}$
+であるから三角不等式を用いて$x\in X\setminus U_{\al}$に対して
+\[
+2^{-n}\le d(p,x)\le d(p,q)+d(q,x)< d(p,q)+2^{-n-1}
+\]
+なので$d(p,q)\ge2^{-n}$となる。さて
+\[
+H_{\al,n}=V_{\al,n}\setminus\bigcup_{\be<\al}U_{\be,n+1}
+\]
+と定義しよう。このとき次の事が成り立つ。
+\begin{equation}
+\al\neq\be,\ p\in H_{\al,n},\ q\in H_{\be,n}\To d(p,q)\ge 2^{-n-1} 
+\end{equation}
+理由を説明しよう。今$\al>\be$と仮定しても一般性を失わない。このとき$H_{\al,n}$の定義から$p\in H_{\al,n},\ q\in H_{\be,n}$とすると$p\not\in U_{\be,n+1}$なので$(1)$から$d(p,q)\ge2^{-n-1}$がわかる。\par
+さてさて
+\[
+E_{\al,n}=\{x\in X\ |\ d(x,H_{\al,n})<2^{-n-3}\}=\bigcup_{c\in H_{\al,n}}B(c,2^{-n-3})
+\]
+と定義すると明らかに$E_{\al,n}$は開集合であり、$2^{-n-3}<2^{-n}$から$E_{\al,n}\subset U_{\al}$がわかる。この開集合について次の事が成り立つ。
+\begin{equation}
+\al\neq\be,\ p\in E_{\al,n},\ q\in E_{\be,n}\To d(p,q)\ge 2^{-n-2} 
+\end{equation}
+理由を説明しよう。$E_{\al,n},\ E_{\be,n}$の定義から$p\in E_{\al,n},\ q\in E_{\be,n}$とすると
+$s\in H_{\al,n},\ t\in H_{\be,n}$が存在して$p\in B(s,2^{-n-3}),\ q\in B(t,2^{-n-3})$
+となる。すると$(2)$と三角不等式から
+\[
+2^{-n-1}\le d(s,t)\le d(s,p)+d(p,q)+d(q,t)<2^{-n-3}+d(p,q)+2^{-n-3}=2^{-n-2}+d(p,q)
+\]
+よって$d(p,q)\ge 2^{-n-2} $が成り立つ。\par
+次の簡単な事実に注意しよう。
+\[
+p,q\in B(c,r)\To d(p,q)<2r
+\]
+この事実から各点$x\in X$について$B(x,2^{-n-4})$は族$\mathcal{E}_n=\{E_{\al,n}\}_{\al\in A}$の高々１個の元としか交わりを持たない。よって$\mathcal{E}_n=\{E_{\al,n}\}_{\al\in A}$は疎である。よって$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$は$\sigma$疎な$\{U_{\al}\}_{\al\in A}$の開細分である。最後に$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$が$X$の被覆になってることを言おう。\par 
+$x\in X$を任意に与え、$\al\in A$を$x\in U_{\al}$となる最小の$A$の元とする。このとき
+$\dpst \bigcup_{n\in \nn}V_{\al,n}=U_{\al}$からある$n\in\nn$について$x\in V_{\al,n}$であり$\al$の最小から$x\in H_{\al,n}$であり、$H_{\al,n}\subset E_{\al,n}$なので$x\in E_{\al,n}$つまり$\dpst \bigcup_{n\in \nn}\mathcal{E}_n$は$X$の被覆である。
+\end{proof}
+
+
+いよいよBNSの証明に移る。
+\setcounter{equation}{0}
+\begin{thm}[Bing-長田-Smirnovの距離化可能定理]
+$T_3$空間$X$について以下は同値
+\begin{align}
+&\mbox{$X$は距離化可能}\\
+&\mbox{$X$は$\sigma$疎な開基を持つ}\\
+&\mbox{$X$は$\sigma$局所有限な開基を持つ}
+\end{align}
+\end{thm}
+\begin{proof}
+$(2)\To(3)$は明らかである。以下$(1)\To(2),\ (3)\To (1)$を示そう。\par
+[$(1)\To (2)$の証明]\par
+$B(x,r)$で$x$を中心とする$r$開球を表すことにする。
+すると各$i\in \nn$に対して
+\[
+\mathcal{A}_i=\{B(x,2^{-i})\}_{x\in X}
+\]
+は$X$の開被覆でありかつ$\dpst \mathcal{A}=\bigcup_{i\in \nn}\mathcal{A}_i$は$X$の開基を成している。先の補題\ref{stone}より各
+$\mathcal{A}_i$には$\sigma$疎な開被覆である細分$\mathcal{E}_i$が存在する。この時$\dpst \mathcal{W}=\bigcup_{i\in \nn }\mathcal{E}_i$
+も$\sigma$疎である。\par 
+$\mathcal{W}$が開基になることを示そう。ところで次の簡単な事実がある。\par
+\[
+(\star):\mbox{$x\in B(y,2^{-k-1})$ならば$B(y,2^{-k-1})\subset B(x,2^{-k})$}
+\]
+さて$\mathcal{B}$が開基なので$\mathcal{W}$が開基であることを示すには各点$x$と任意の$n\in \nn$についてある$W\in \mathcal{W}$が存在して
+\[
+x\in W\subset B(x,2^{-n})
+\]
+を示せば良いが、$\mathcal{E}_{n+1}$は被覆であり$\mathcal{A}_{n+1}$の細分であるから各点$x$に対して
+\[
+x\in W\subset B(y,2^{-n-1})
+\]
+となる$y\in X$が存在する。そして$(\star)$より$B(y,2^{-n-1})\subset B(x,2^{-n})$が成り立つ。よって
+\[
+x\in W\subset B(x,2^{-n})
+\]
+が成り立つ。よって$\mathcal{W}$が開基であることが示されたので$(2)$が成り立つ。
+\par
+[$(1)\To (2)$の証明終わり]\par
+%koajfiwef:ofnovoijdsidncfogrpighwingerogephgpa:nclngpo]wjgpinSK
+\setcounter{equation}{0}
+[$(3)\To (1)$の証明]\par
+$X$の開集合系を$\mathfrak{O}$とする。
+条件$(3)$から存在が保証される$X$の$\sigma$局所有な基底を$\mathcal{B}$とし、
+\[
+\mathcal{B}=\bigcup_{i\in \nn }\mathcal{B}_i\ \mbox{（各$\mathcal{B}_i$は局所有限）}
+\]\par
+としよう。\par
+まず最初に$X$が正規空間であることを示そう。$A,B$を交わらない２つの閉集合とする。そして各$i\in \nn$について
+\begin{align*}
+\mathcal{S}_i=\{U\in \mathcal{B}_i\ |\ \cl(U)\cap B=\O,\ U\cap A\neq \O\}\\
+\mathcal{T}_i=\{V\in \mathcal{B}_i\ |\ \cl(V)\cap A=\O,\ V\cap B\neq \O\}
+\end{align*}
+と開集合族$\mathcal{S}_i,\ \mathcal{T}_i$を定義し、さらに
+\[
+M_i=\bigcup_{U\in \mathcal{S}_i}U,\ N_i=\bigcup_{V\in \mathcal{T}_i}V
+\]
+と定義する。すると各$\mathcal{B}_i$が局所有限であることから
+\[
+\cl(M_i)=\bigcup_{U\in \mathcal{S}_i}\cl(U),\ \l(N_i)=\bigcup_{V\in \mathcal{T}_i}\cl(V)
+\]
+が成り立ち、$\mathcal{S}_i,\ \mathcal{T}_i$の定義から任意の$i\in \nn$について
+\begin{equation}
+\cl(M_i)\cap B=\O,\ \cl(N_i)\cap A=\O
+\end{equation}
+となる。さらに$X$が$T_3$であることと、$\mathcal{B}$が開基であることから
+\begin{equation}
+A\subset \bigcup_{i\in \nn}M_i,\ B\subset  \bigcup_{i\in \nn}N_i
+\end{equation}
+が成り立つ。そしてさらに$\{M_i\}_{i\in \nn}, \ \{N_i\}_{i\in \nn}$を用いて
+\[
+P_i=M_i\setminus \bigcup_{k\le i}\cl(N_k),\ Q_i=N_i\setminus \bigcup_{k\le i}\cl(M_k)
+\]
+と定義するとこれらは開集合であり、簡単に分かるように$m\neq n$ならば
+\begin{equation}
+P_m\cap Q_n=\O
+\end{equation}
+となる。
+また
+\[
+P=\bigcup_{i\in \nn}P_i,\ Q=\bigcup_{i\in \nn}Q_i
+\]
+と置くとやはりこれも開集合であり、
+$(1),(2)$から
+\[
+A\subset P,\ B\subset Q
+\]
+となるが、$(3)$から
+\[
+P\cap Q=\O
+\]
+となる。よって$X$は正規である。
+\par
+次に$(X,\mathfrak{O})$の位相と同じ位相を誘導する高々可算個のゲージを構成しよう。$\mathcal{B}$を用いて$\mu=(m,n)\in \nn$につき擬距離を構成する。まず$U\in \mathcal{B}_n$に対して
+\[
+K(U)=\bigcup\{CL(W)\ |\ W\in \mathcal{B}_m,\ CL(W)\subset U\}
+\]
+と置くと$\mathcal{B}_m$の局所有限性から$K(U)$は閉集合であり、$K(U)\subset U$を充たす。そこで$X$の正規性からウリゾーンの補題を用いて
+\[
+f_{U}|K(U)\equiv 1,\ f_U|X\setminus U\equiv 0
+\]
+となる連続関数$f_U:X\to [0,1]$が存在する。これを用いて
+\[
+d_{\mu}(x,y)=\sum_{U\in \mathcal{B}_n}|f_{U}(x)-f_U(y)|
+\]
+と定義する。$x,y$それぞれの$\mathcal{B}_n$の局所有限性を表現する開近傍を$N_x,N_y$とすると、$N_x\times N_y$上では$d_{\mu}$は有限和になるので$d_{\mu}$は$N_x\times N_y$上の連続関数である。故に$d_{\mu}$は$X\times X$上の連続関数である。\footnote{一般に写像$f;X\to Y$は任意の$U\in \mathcal{U}$で$f|U:U\to Y$が連続関数であるような$X$の開被覆$\mathcal{U}$が存在すれば、$f$は$X$上でも連続である。証明は容易だろうと思うが、一応おまけのセクションで証明する。}よって$(X,\{d_{\mu}\}_{\mu\in \nn\times \nn})$の開集合は$(X,\mathfrak{O})$の開集合である。逆の事を示そう。\par 
+$\mu=(m,n)\in \nn\times \nn,\ U\in \mathcal{B}_n$について$a\in K(U)$とすれば$d_{\mu}(a,y)<1$ならば
+\[
+|f_U(a)-f_U(y)|=|1-f_U(y)|\le d_{\mu}(a,y)<1
+\]
+なので$0<f_U(y)$であり、$f_U|X\setminus U\equiv 0$なので結局
+\[
+B(a,1;d_{\mu})\subset U
+\]
+となる。よって$\mathcal{B}$が$(X,\mathfrak{O})$の基底なので$(X,\mathfrak{O})$の開集合は$(X,\{d_{\mu}\}_{\mu\in \nn\times \nn})$の開集合でもあり、$X$は可算個のゲージで位相を付ける事ができる。よって命題\ref{metric}から
+$(X,\mathfrak{O})$は擬距離付け可能である。また、$\mathcal{B}$が開基であることと、元々$(X,\mathfrak{O})$がハウスドルフであることから$x\neq y$について$\mu \in \nn\times \nn$が存在して
+\[
+d_{\mu}(x,y)\neq 0
+\]
+となることを見るのは容易いので、最終的に$X$が距離付け可能であることがわかる。
+\par[$(3)\To (1)$の証明終わり]
+\end{proof}
+
+以下このBNSを用いた系を述べる。
+%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{equation}{0}
+\begin{cor}[ウリゾーンの距離化可能定理]
+第二可算$T_3$空間は距離化可能
+\end{cor}
+\begin{proof}
+元を一つしか持たない族は明らかに疎であるから可算な族は$\sigma$疎である。この事からウリゾーンの距離化可能定理は明らかである。
+\end{proof}
+
+\begin{df}
+位相空間が{\rm c.c.c.}を充たすとは、$X$の互いに交わらない開集合の族の濃度が高々可算になるときに言う。
+\end{df}
+\begin{cor}\label{kasan}距離空間に於いて次は同値\footnote{この命題はわざわざBNSを使わずとも証明できる。そのことからわかることは、距離空間には何かしら内在的な「可算性」があるということである。（もちろん第一可算公理を充たすのだが、そういう局所的なことではなく大域的な性質としての話である。）それを暴いたのがBNSである。}
+\begin{align}
+&\mbox{第二可算公理}\\
+&\mbox{可分}\\
+&\mbox{リンデレフ}\\
+&\mbox{c.c.c.}
+\end{align}
+\end{cor}
+\begin{proof}
+距離空間に限らず一般の位相空間で以下のよく知られた次の論理包含関係がある。
+\[\xymatrix{
+&  & \mbox{可分}\ar@{=>}[dr] &\\ 
+&\mbox{第二可算公理}\ar@{=>}[ur]\ar@{=>}[dr]&  & \mbox{c.c.c.}&\\
+&  & \mbox{リンデレフ}  &
+}\]
+よって距離空間において[$\mbox{リンデレフ$\To$可分}$]と[$\mbox{c.c.c.$\To$第二可算公理}$]を示せばよい。\par
+[$\mbox{c.c.c.$\To$第二可算公理}$の証明]
+Bing-長田-Smrnovの距離化可能定理から$X$には$\sigma$疎な開基が存在するが、c.c.c.なら疎な族の濃度は高々可算になる。よって$\sigma$疎な族の濃度も高々可算である。よって$\sigma$疎な開基は濃度が高々可算な開基になるので第二可算公理が成り立つ。\par
+[$\mbox{c.c.c.$\To$第二可算公理}$の証明終わり]\par
+[$\mbox{リンデレフ$\To$可分}$の証明]\par
+各$n\in \nn$毎に$2^{-n}$開球全体の族$S_n=\{B(x,2^{-n})\}_{x\in X}$は$X$の開被覆になるが、リンデレフ性から高々可算個の$2^{-n}$開球で$X$を被覆出来る。その可算個の$2^{-n}$開球の中心を$\{x_{i,n}\}_{i\in \nn}$と置く。この時
+\[
+D=\{x_{i,n}\ |\ i,n\in \nn\}
+\]
+は高々可算な集合であるが、これが$X$で稠密であることを言おう。各$x$について$B(x,2^{-k})$を考える。この時$\{x_{i,k}\}_{i\in \nn}$の各々を中心とする$2^{-k}$開球は$X$を被覆するのである$i\in \nn$が存在して$x\in B(x_{i,n},2^{-k})$であるが、もちろん$x_{i,n}\in B(x,2^{-k})$である。よってこの事から$X$の任意の開集合は$D$と共通部分を持つことがわかるので$D$は$X$で稠密である。\par
+[$\mbox{リンデレフ$\To$可分}$の証明終わり]
+\end{proof}
+
+
+\begin{df}[可算コンパクト]
+位相空間$X$はその上の任意の可算開被覆に有限部分被覆が存在するとき可算コンパクトという。また、可算コンパクト性は空間$X$上の閉集合からなる任意の有限交叉的な可算族が共通部分をもつことと同値である。
+\end{df}
+
+
+\begin{lem}\label{ccpt}
+可算コンパクト空間の疎な族は高々有限である。
+\end{lem}
+\begin{proof}対偶を示そう。
+$X$が無限個の集合からなる疎な族を持つとしよう。その疎な族から可算部分族を取れば、$X$は疎な可算族をもつ事がわかる。それを$\{A_i\}_{i\in \nn}$としよう。このとき$\{\cl(A_i)\}_{i\in \nn}$も疎な族である。そして$n\in \nn$について
+\[
+F_n=\bigcup_{k\ge n}\cl(A_k)
+\]
+と定義すれば各$F_n$は非空な閉集合であり、$F_{n+1}\subset F_n$を充たすので$\{F_n\}_{n\in \nn}$は有限交叉性をもつ閉集合の可算な族だが、明らかに
+\[
+\bigcap_{n\in \nn}F_n=\O
+\]
+なので$X$は可算コンパクトではない。
+\end{proof}
+
+\begin{cor}
+距離空間に於いて可算コンパクト性とコンパクト性は同値な概念である。\footnote{この定理は普通は点列コンパクト性を経由して証明するのが普通であるが、BNSを用いると直接証明出来る。}
+\end{cor}
+\begin{proof}コンパクト性から可算コンパクト性が出るのは明らかである。逆を示そう\par
+BNSと補題\ref{ccpt}から可算コンパクト距離空間$X$の$\sigma$疎な開基は高々可算な族になるので、$X$は第二可算公理を充たす。従ってとくにリンデレフなので$X$はコンパクトである。
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5555
+
+
+
+\section{おまけ}
+\begin{prop}位相空間$X,Y$と
+写像$f;X\to Y$について、任意の$U\in \mathcal{U}$で$f|U:U\to Y$が連続関数であるような$X$の開被覆$\mathcal{U}$が存在すれば、$f$は$X$上でも連続である。
+\end{prop}
+\begin{proof}
+各$U\in \mathcal{U}$上で$f|U$が連続なので、任意の$U\in \mathcal{U}$と
+任意の$Y$の開集合$O$について、$f^{-1}(O)\cap U$は$U$の開集合である。また、$U$は$X$の開集合なので$f^{-1}(O)\cap U$は$X$の開集合でもある。そして$\mathcal{U}$が被覆を成すことから
+\[
+f^{-1}(O)=\bigcup_{U\in \mathcal{U}}(f^{-1}(O)\cap U)
+\]
+が成り立ち、この式の右辺は開集合であるから、$f^{-1}(O)$は$X$の開集合である。$O$は$Y$の任意の開集合であったから$f:X\to Y$は$X$上連続である。
+\end{proof}
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{tera}寺澤 順,トポロジーへの招待,日本評論社,2012
+\bibitem{bi}R.H.Bing,{\it Metrization of topological spaces },Canadian J. Math.3(1951) 175-186
+\bibitem{pear}A.R.Pears,{\it DIMENSION THEORY OF GENERAL SPACES},Cambridge Univ.Press,1975
+\bibitem{Rudin}M.E.Rudin,{\it A New Proof that Metric Spaces are Paracompact},Proc.Amer.Math.Soc.vol20(1969),p603
+\bibitem{stone}A.H.Stone,{\it Paracompactness and product spaces},Bull,Amer.Math Soc. 54(1948),977-982
+\bibitem{1}S.Willard,{\it General Topology},Dover Publications,2004
+\end{thebibliography}
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,966 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\knus}{\mathbin{\uparrow\uparrow}}
+\newcommand{\knuss}{\mathbin{\uparrow\uparrow\uparrow}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 至る所微分不可能な連続関数 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+この文章では
+連続だが至る所微分不可能な関数に関する
+論文のメモである．
+
+このような関数について知りたい場合は
+大体
+\cite{johan2003}
+と
+\cite{MR3444902}
+を読めばいいと思う．
+日本語だと
+\cite{wa1}
+もとても良いと思う．
+
+この文章はほぼ論文に関するメモ書きなのだが
+数学っぽい議論を読みたい場合には
+セクション\ref{sec:app}
+を読んでも良い．
+微分不可能関数の構成を行なっている．
+
+\section{本文}
+
+
+\subsection{リーマンの関数}
+リーマンは関数
+\[
+f(x)=\sum_{n=1}^{\infty}\frac{\sin(n^{2}x)}{n^{2}}
+\]
+について
+至る所微分不可能と
+言ったらしいが，
+結局いくつかの点では微分可能であることが証明されているようだ．
+リーマンの関数に関する論文は多分以下の通りである．
+論文
+\cite{MR0864753}
+\cite{MR0640257}, 
+\cite{MR0276422}, 
+\cite{MR0308337}, 
+そして
+\cite{MR0715889}
+を参照のこと．
+
+\subsection{ワイエルストラスの関数}
+ワイエルストラスの関数は
+以下の関数である．
+\[
+f(x)=\sum_{n=0}^{\infty}a^{n}\cos(b^{n}\pi x). 
+\]
+ここで$a\in (0, 1)$
+であり，
+$b$は奇数である正の整数であり，
+さらに$ab>\frac{3}{2}\pi +1$
+を満たすものである．例えば
+$a=1/2$で$b=73$とすればこの条件を満たす．
+つまり
+\[
+f(x)=\sum_{n=0}^{\infty}\frac{\cos(73^{n}\pi x)}{2^{n}}
+\]
+は連続だが至る所部分不可能な関数である．
+ワイエルストラスの関数はなんか反例として
+よく出てくるが，別にワイエルストラスが最初に
+こういう例を構成したわけではないらしい(1875に論文発表)．
+例えば
+\cite{MR0202936}
+は1830年の論文でウィエルストラスより前らしい
+(今から数えると約200年前である)．
+数学書\cite{MR2049443}
+にはワイエルストラスの原論文と
+Kiesswetterの原論文
+の
+英訳が載っている．
+これ以外にもなんか色々あったような気がする．
+そういう細かい話は参考文献
+\cite{johan2003}
+と
+\cite{MR3444902}
+を参照のこと．
+
+論文
+\cite{MR2587578}
+ではフーリエ級数みたいなフレーバーでワイエルストラス関数の
+微分不可能性を
+証明しているようだ．
+論文
+\cite{MR1501044}
+ではワイエルストラスの関数の条件をちょっと改良したようだ．
+
+数学書
+\cite{MR3155290}
+にも証明が載っている．
+
+
+ワイエルストラス関数のグラフのハウスドルフ次元を計算する研究がある．
+例えば
+\cite{MR3558151}
+や
+\cite{MR1452806}
+などを参照のこと．
+
+論文
+\cite{wa5}
+にも原論文に沿った証明が紹介されている．
+
+
+\subsection{高木関数}
+今連続関数$s\colon \rr\to \rr$を
+$s(x)=\inf_{n\in \zz}|x-n|$と定義する．
+つまり$s(x)$は
+点$x$と集合$\zz$の距離である．
+このとき高木関数$t\colon \rr\to \rr$
+を
+\[
+t(x)=\sum_{n=0}^{\infty}\frac{s(2^{n}x)}{2^{n}}
+\]
+と定義する．
+高木貞治が構成したというこの
+至る所微分不可能な連続関数
+は大体以下の論文で
+触れられていると思う．
+論文\cite{Takagi1901}
+は高木の原論文で，
+有名な解析概論\cite{wa4}
+の付録で高木関数が紹介されている．
+
+\subsection{その他}
+\cite{cellerier1890note}
+でもそういう関数が扱われているようだがフランス語なので読めかった．
+論文
+\cite{MR1680194}
+では
+$\sum_{n=1}^{\infty}\frac{\exp(2\pi\sqrt{-1}n^{k}x)}{n^{\alpha}}$
+みたいな関数の可微分性やグラフの次元を考察しているようだ．
+
+論文
+\cite{wa3}
+では
+$\sum_{n=1}^{\infty}\frac{\cos(n!x)}{n!}$
+が至る所微分不可能という証明が載っているらしいことが
+\cite{wa1}に書いているが
+ちょっと入手困難だった．
+
+\subsection{空間充填曲線}
+空間充填曲線と可微分性は
+\cite{wa6}
+とか
+\cite{MR1124993}, 
+\cite{MR1160715}, 
+\cite{MR1299533}
+を読めばいいと思う．
+ザーガンの本
+\cite{wa6}によれば
+至る所微分可能な関数は
+空間充填曲線になり得ないことが証明されているらしい．
+また\cite{wa6}ではカントール集合を除いて微分可能な
+空間充填曲線が紹介されている．
+
+\subsection{範疇定理}
+至る所微分不可能な関数の存在性の
+範疇定理を使った証明は
+多分
+\cite{Banach1931}
+と
+\cite{Mazurkiewicz1931}
+が最初だと思う．
+
+論文
+\cite{Jarnik1933}, 
+\cite{MR3391364}, 
+\cite{MR0555048}
+なども参照のこと．
+
+多分
+\cite{Saks1932}
+も関係ある．
+
+有名な方法なので一般の数学書にも記述がある．
+数学書
+\cite{MR1411907}
+にも記述がある．
+
+
+\subsection{追記}
+論文
+\cite{MR1328375}
+では
+任意の可分距離空間を
+$C[0, 1]$内の至る所微分不可能な関数の集合に
+等長に埋め込めることが証明されている．
+論文
+\cite{MR1707147}
+も参照のこと．
+
+これ以外にも色々
+文献はあると思うが，
+これらの論文が引用している論文や，
+これらの論文を引用している論文を調べるといいと思う．
+
+
+\section{Appendix}\label{sec:app}
+せっかくだし実数上に連続だが
+微分不可能な関数が存在することを証明しよう．
+講究録
+\cite{wa5}や
+\cite{johan2003}に記述されている
+ワイエルストラスの方法などは
+可微分性に関してかなりギリギリを攻めているような嫌いがある．
+それは底が異なる指数関数の増大度を使って頑張っているということだが
+急増加数列を使って
+オリジナルの方法をゆるゆる
+にしてみたものが以下である．
+\begin{thm}[怠け者のためのワイエルストラス関数]\label{thm:app1}
+数列
+$\{r_{n}\}_{n\in \zz_{\ge 0}}$
+と
+$\{h_{n}\}_{n\in \zz_{\ge 0}}$
+は
+正の実数列とし，以下の条件を満たすとする．
+\begin{enumerate}[label=\textup{(A\arabic*)}]
+\item\label{item:sum} 
+以下の収束が成り立つ．
+\[
+\sum_{i=0}^{\infty}\frac{1}{r_{i}}<\infty
+\]
+\item\label{item:integer}
+各
+$h_{n}$は奇数であるような整数であり，なおかつ任意の$n$について
+$h_{n+1}$は$h_{n}$で割り切れる．
+特に，$m>n$のとき$h_{m}$は$h_{n}$の奇数倍である．
+\item\label{item:div}
+以下の発散が成り立つ．
+\[
+\lim_{k\to \infty}
+\left(
+\frac{2}{\pi}
+\frac{h_{k}}{r_{k}}
+-
+\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}
+\right)
+=\infty. 
+\]
+
+\end{enumerate}
+このとき
+以下で定義される関数$f\colon \rr\to \rr$
+は$\rr$上連続だが，全ての点において微分不可能である．
+\begin{align*}
+f(x)=\sum_{i=0}^{\infty}\frac{\cos(h_{n}x)}{r_{n}}. 
+\end{align*}
+\end{thm}
+\begin{proof}
+まず条件
+\ref{item:sum}
+と
+$M$テストから
+$f$が連続であることがわかる．
+
+今から$f$が至るところで
+可微分ではないことを
+証明しよう．
+点
+$p\in \rr$を任意に固定する．
+そして各$k\in \zz_{\ge 0}$
+に対して$L_{k}\in \zz_{\ge 0}$
+を
+$\frac{h_{k}p}{\pi}$
+に一番距離が近い整数とし，
+$u_{k}$は$\frac{h_{k}p}{\pi}-L_{k}$
+とする．このとき
+$L_{k}$の定義から
+$|u_{k}|\le 1/2$である．つまり
+\[
+h_{k}p=(L_{k}+u_{k})\pi
+\]
+と
+$|u_{n}|\le 1/2$
+が成り立つような$L_{k}$
+と
+$u_{n}$をとる．
+そして$x_{n}\in\rr$を
+\[
+x_{n}=\frac{1}{h_{n}}(L_{n}+1)\pi
+\]
+と定義する．
+もちろんこのとき
+\[
+h_{n}x_{n}=L_{n}\pi +\pi=(L_{n}+1)\pi
+\]
+が成り立つ．
+このとき$|u_{k}|\le 1/2$
+から$x_{k}\neq p$であることに注意しよう．
+また
+定義式から
+$n\to \infty$のとき
+$|x_{n}-a|\to 0$
+が成り立つ．
+
+今$k\in \zz_{\ge 0}$
+を任意に固定して
+\[
+S_{k}=\sum_{n=0}^{k-1}\frac{\cos(h_{n}x)-\cos(h_{n}a)}{r_{n}}
+\]
+\[
+T_{k}=\sum_{n=k}^{\infty}
+\frac{\cos(h_{n}x)-\cos(h_{n}a)}{r_{n}}
+\]
+と定義すると
+$f(x_{k})-f(a)=S_{k}+T_{k}$
+となる．
+これから$|S_{k}|$を上から評価し
+$|T_{k}|$
+を下から評価していこう．
+
+まずは$|S_{k}|$
+を評価する．
+平均値の定理と
+任意の$x\in \rr$に関する不等式$|\sin(x)|\le 1$を使うと
+関数$\cos(x)$は$1$-Lipschitz 
+であることがわかる．よって
+\begin{align*}
+|S_{k}|\le 
+\sum_{n=0}^{k-1}\frac{|\cos(h_{n}x_{k})-\cos(h_{n}p)|}{r_{i}} 
+\le 
+\sum_{n=0}^{k-1}\frac{|h_{n}x_{k}-h_{n}p|}{r_{i}} 
+=
+\sum_{n=0}^{k-1}\frac{h_{i}|x-p|}{r_{n}}
+\end{align*}
+が成り立つ．
+このことから
+\[
+\left|S_{k}\right|
+\le |x_{k}-p|\cdot \sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}, 
+\]
+を得る．
+つまり
+\[
+\frac{\left|S_{k}\right|}{|x_{k}-p|}\le 
+\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}
+\]
+がわかる．
+
+
+次に$|T_{k}|$を下から評価する．さて，
+$k\le n$となる$n\in \zz_{\ge 0}$について
+$I_{k}=h_{n}/h_{k}$
+とすると仮定
+\ref{item:integer}
+から$I_{n}$は奇数であるような整数になる．
+よって
+\[
+h_{n}p=I_{n}h_{k}p=I_{n}L_{k}\pi +I_{n}u_{k}\pi
+\]
+かつ
+\[
+h_{n}x_{k}=I_{n}h_{k}x_{k}=I_{n}(L_{k}+1)\pi
+\]
+である．
+ゆえに，
+加法定理と$I_{n}$が奇数であることから
+\begin{align*}
+\cos(h_{n}p)=(-1)^{L_{k}I_{n}}\cos(I_{n}u_{k}\pi)
+=(-1)^{L_{k}}\cos(I_{n}u_{k}\pi)
+\end{align*}
+かつ
+\begin{align*}
+\cos(h_{n}x_{k})=(-1)^{(L_{n}+1)I_{n}}\cos(0)=(-1)^{L_{n}+1}
+\end{align*}
+である．
+よって$k\le n$となる$n\in \zz_{\ge 0}$
+について
+\begin{align*}
+\frac{\cos(h_{n}x_{k})-\cos(h_{n}p)}{r_{n}}=
+\frac{(-1)^{L_{n}+1}-(-1)^{L_{n}}\cos(I_{n}u_{k}\pi)}{r_{n}}
+=
+(-1)^{L_{n}+1}\times \frac{1+\cos(I_{n}u_{k}\pi)}{r_{n}}
+\end{align*}
+である．
+このことと，
+任意の$x\in \rr$
+について
+$1+\cos(x)\ge 0$
+であることから
+\begin{align*}
+|T_{k}|
+=
+\left|(-1)^{L_{n}+1}\sum_{n=k}^{\infty}
+\frac{1+\cos(I_{n}u_{k}\pi)}{r_{n}}\right|
+=\sum_{n=k}^{\infty}\frac{1+\cos(I_{n}u_{k}\pi)}{r_{n}}
+\end{align*}
+となる(非負の数の和なので絶対値がちゃんと外れてくれる)．
+級数の各項は非負なのでさらに
+\begin{align*}
+\sum_{i=k}^{\infty}\frac{1+\cos((I_{n}u_{k}\pi)}{r_{n}}
+\ge 
+\frac{1+\cos(u_{k}\pi)}{r_{k}}
+\end{align*}
+を得る．
+ここで
+$|u_{k}|\le 1/2$なので
+$\cos(u_{k}\pi)\ge 0$となる．
+ゆえに
+\begin{align*}
+\frac{1+\cos(u_{k}\pi)}{r_{k}}\ge 
+\frac{1}{r_{k}}.  
+\end{align*}
+を得る．
+以上で述べた不等式から
+$|T_{k}|\ge 1/r_{k}$
+を導くことができる．
+ここで$|u_{k}|\le 1/2$
+なので
+\[
+|x_{h}-p|=\frac{1}{h_{n}}|u_{n}-1|\pi\le \frac{\pi}{2h_{k}}
+\]
+がわかる．
+よって
+\[
+\frac{|T_{k}|}{|x_{k}-p|}
+\ge 
+ \frac{2}{\pi}\frac{h_{k}}{r_{k}}
+\]
+がわかる．
+
+数$k\in \zz_{\ge 0}$
+の任意性，
+以上の$|S_{k}|$と
+$|T_{k}|$の評価と，
+三角不等式
+\[
+|f(x_{k})-f(p)|\ge |T_{k}|-|S_{k}|
+\]
+を用いると，任意の$k\in \zz_{\ge 0}$
+について
+\[
+\left|\frac{f(x_{k})-f(a)}{x_{k}-a}\right|\ge
+\frac{1}{|x_{k}-p|}(|T_{k}|-|S_{k}|)
+\ge  
+\frac{2}{\pi}\frac{h_{k}}{r_{k}}
+-
+\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}
+\]
+がわかる．
+仮定
+\ref{item:div}
+から
+$k\to \infty$
+のとき
+\[
+\left|\frac{f(x_{k})-f(p)}{x_{k}-p}\right|\to \infty
+\]
+がわかる．
+つまり$f$は
+$p$で微分不可能である．
+点
+$p$の任意性から
+$f$
+は至る所微分不可能であることがわかる．
+\end{proof}
+
+\begin{rmk}
+定理
+\ref{thm:app1}の
+仮定
+\ref{item:sum}, 
+\ref{item:integer}, 
+\ref{item:div}
+を満たす数列$h_{n}$
+と$r_{n}$は存在する．
+例えば以下のような例がある．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$r_{n}=(n+1)^{2}$, 
+$h_{n}=(2n+1)!!\times 3^{n}$
+\item 
+$r_{n}=(n+1)^{2}$, 
+$h_{n}=3^{3^{n}}$
+\item 
+$r_{n}=2^{n}$, 
+$h_{n}=5^{n^{2}}$, 
+ここで$2$と$5$というのは意味がある．
+これらの数字は$2\times 2<5$
+であることが重要である．
+\item 
+$h_{n}=3\knus (2n+1)$, 
+$r_{n}=3\knus (2n)$, 
+ここで$\knus$
+はクヌースの二重矢印である．
+\item 
+$r_{n}$を仮定\ref{item:sum}
+を満たす関数とし，
+$h_{n}=3^{3^{\lfloor r_{n}\rfloor}}$とする．
+\end{enumerate}
+よって連続関数で至る所微分不可能な関数が存在することがわかる．
+特に例えば
+\[
+\sum_{n=0}^{\infty}\frac{\cos\left(5^{n^{2}}x\right)}{2^{n}}
+\]
+などはそうである．
+\end{rmk}
+
+以上の定理
+\ref{thm:app1}
+では賢く$h_{n}$が奇数であることをたくみに用いて
+$T_{k}$の下からの評価をしており，すごいけどめんどくさい．よってもっとガバガバにしよう．
+
+\begin{thm}[ものぐさワイエルストラス関数]\label{thm:app2}
+正の実数からなる二つの数列
+$\{h_{n}\}_{n\in\zz_{\ge 0}}$と
+$\{r_{n}\}_{n\in \zz_{\ge 0}}$，
+及び正の実数$C$は以下の条件を満たすとする．
+\begin{enumerate}[label=\textup{(B\arabic*)}]
+\item\label{item:sum2}
+以下の収束が成り立つ
+\[
+\sum_{n=0}^{\infty}\frac{1}{r_{n}}<\infty.
+\]
+\item\label{item:partisum2}
+整数$N\in \zz_{\ge 0}$
+が存在して$k\ge N$ならば
+以下の不等式が成り立つ
+\[
+\frac{1}{r_{k}}-\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}
+\ge C\cdot \frac{1}{r_{k}}. 
+\]
+この不等式から$C$は結構小さい正の数であることがわかる．
+\item\label{item:div2}
+$k\to \infty$のとき
+\[
+\frac{C}{100}
+\frac{h_{k}}{r_{k}}
+-
+\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}\to \infty
+\]
+である．
+
+\end{enumerate}
+このとき
+以下で定義される関数$f\colon \rr\to \rr$
+は$\rr$上連続だが，全ての点において微分不可能である．
+\begin{align*}
+f(x)=\sum_{i=0}^{\infty}\frac{\cos(h_{n}x)}{r_{n}}. 
+\end{align*}
+\end{thm}
+\begin{proof}
+まず条件
+\ref{item:sum2}
+と
+$M$テストから
+$f$が連続であることがわかる．
+
+今から$f$が至るところで
+可微分ではないことを
+証明しよう．
+点
+$p\in \rr$を任意に固定する．
+そして各$k\in \zz_{\ge 0}$
+に対して$L_{k}\in \zz_{\ge 0}$
+を
+$\frac{h_{k}p}{2\pi}$
+に一番距離が近い整数とし，
+$u_{k}$は$\frac{h_{k}p}{2\pi}-L_{k}$
+とする．このとき
+$L_{k}$の定義から
+$|u_{k}|\le 1$である．つまり
+\[
+h_{k}p=2L_{k}\pi +2u_{k}\pi
+\]
+と
+$|u_{n}|\le 1$
+が成り立つような$L_{k}$
+と
+$u_{n}$をとる(定理\ref{thm:app1}と取り方が異なることに注意しよう)．
+
+さて今$q\in \rr$
+を固定して関数
+$g\colon \rr\to \rr$
+を$g(z)=|\cos(z)-\cos(q)|$
+と定義する．
+このとき
+$g(q)=0$
+で
+$g(0)=|1-\cos(q)|=1-\cos(q)$
+かつ
+$g(\pi)=|-1-\cos(p)|=1+\cos(p)$
+なので
+$\cos(q)$の符号がプラスか$0$の時は
+$g(\pi)\ge 1$
+で
+$\cos(q)$の符号がマイナスのときは
+$g(0)\ge 1$
+である．
+よって$g$が周期$2\pi$の関数であることを用いて
+さらに$g$に中間値の定理を適応すると点$z$であり
+$z\in [0, 2\pi]$を満たしなおかつ
+\[
+|\cos(z)-\cos(q)|=1
+\]
+となるものが存在する
+（こういうのはグラフを書くとなんでこんな点が存在するのかよくわかる）．
+
+上の主張を$q=h_{k}p$に適応すると，
+点
+$z_{k}\in [0, 2\pi]$であって
+\[
+|\cos(z_{k})-\cos(h_{k}p)|=1
+\]
+となるものを得る．
+そして$x_{n}\in\rr$を
+\[
+x_{n}=\frac{1}{h_{n}}(2L_{n}\pi+10\pi +z_{k})
+\]
+と定義する．
+もちろんこのとき
+\[
+h_{n}x_{n}=2L_{n}\pi +10\pi+z_{k}
+\]
+が成り立つ．
+さらに$z_{k}$の定義と$\cos$の周期が$2\pi$であることから
+\[
+|\cos(h_{k}x_{k})-\cos(h_{k}p)|=1
+\]
+となることに注意しよう．
+また$x_{k}$の定義と
+$|u_{k}|\le 1$
+から$x_{k}\neq p$であることに注意しよう
+(これを簡単に言うためにわざわざ$x_{k}$の定義式の中には$10\pi$が足されている)．
+また
+定義式および，
+$u_{k}$と$z_{k}$が有界であることから
+$n\to \infty$のとき
+$|x_{n}-a|\to 0$
+が成り立つ．
+特に$|u_{k}|\le 1$
+と$0\le z_{k}\le 2\pi$
+から，かなりどんぶり勘定で評価して
+\[
+0<|x_{k}-p|\le \frac{100}{h_{k}}
+\]
+となる．
+
+今
+\ref{item:partisum2}
+で述べられている$N\in \zz$
+を取り
+$k\ge N$となる
+$k\in \zz_{\ge 0}$
+を任意に固定して
+\[
+S_{k}=\sum_{n=0}^{k-1}\frac{\cos(h_{n}x)-\cos(h_{n}p)}{r_{n}}
+\]
+\[
+T_{k}=\sum_{n=k}^{\infty}
+\frac{\cos(h_{n}x)-\cos(h_{n}p)}{r_{n}}
+\]
+と定義すると
+$f(x_{k})-f(a)=S_{k}+T_{k}$
+となる．
+これから$|S_{k}|$を上から評価し
+$|T_{k}|$
+を下から評価していこう．
+
+まずは$|S_{k}|$
+を評価する．
+平均値の定理と
+任意の$x\in \rr$に関する不等式$|\sin(x)|\le 1$を使うと
+関数$\cos(x)$は$1$-Lipschitz 
+であることがわかる．よって
+\begin{align*}
+|S_{k}|\le 
+\sum_{n=0}^{k-1}\frac{|\cos(h_{n}x_{k})-\cos(h_{n}p)|}{r_{i}} 
+\le 
+\sum_{n=0}^{k-1}\frac{|h_{n}x_{k}-h_{n}p|}{r_{i}} 
+=
+\sum_{n=0}^{k-1}\frac{h_{i}|x-p|}{r_{n}}
+\end{align*}
+よって
+\[
+\left|S_{k}\right|
+\le |x_{k}-p|\cdot \sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}, 
+\]
+つまり
+\[
+\frac{\left|S_{k}\right|}{|x_{k}-p|}\le 
+\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}
+\]
+がわかる．
+
+
+次に$|T_{k}|$を下から評価する．さて，
+まず$x_{k}$の定義から
+\[
+\left|\frac{\cos(h_{k}x_{k})-\cos(h_{k}p)}{r_{k}}\right|
+=\frac{1}{r_{k}}
+\]
+である.
+さらに
+$k+1\le n$となる$n\in \zz_{\ge 0}$についての和について，
+$|\cos(z)|\le 1$の不等式を用いて
+\[
+\left|\sum_{n=k+1}^{\infty}\frac{\cos(h_{n}x_{k})-\cos(h_{n}p)}{r_{n}}\right|
+\le 
+\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}
+\]
+の評価を得る．
+よって
+仮定\ref{item:partisum2}
+と三角不等式を使って
+\[
+|T_{k}|
+\ge \frac{1}{r_{k}}-\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}
+\ge C\cdot \frac{1}{r_{k}}
+\]
+がわかる．
+つまり
+\[
+\frac{|T_{k}|}{|x_{k}-p|}
+\ge \frac{C}{100}\frac{h_{k}}{r_{k}}
+\]
+である．
+
+数$k\in \zz_{\ge 0}$
+の任意性，
+以上の$|S_{k}|$と
+$|T_{k}|$の評価と，
+三角不等式
+\[
+|f(x_{k})-f(p)|\ge |T_{k}|-|S_{k}|
+\]
+を用いると，$k\ge N$となる任意の$k\in \zz_{\ge 0}$
+について
+\[
+\left|\frac{f(x_{k})-f(a)}{x_{k}-a}\right|\ge
+\frac{1}{|x_{k}-p|}(|T_{k}|-|S_{k}|)
+\ge  
+\frac{C}{100}
+\frac{h_{k}}{r_{k}}
+-
+\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}
+\]
+がわかる．
+ゆえに
+仮定
+\ref{item:div2}
+から
+$k\to \infty$
+のとき
+\[
+\left|\frac{f(x_{k})-f(p)}{x_{k}-p}\right|\to \infty
+\]
+がわかる．
+つまり$f$は
+$p$で微分不可能である．
+点
+$p$の任意性から
+$f$
+は至る所微分不可能であることがわかる．
+\end{proof}
+\begin{rmk}
+定理\ref{thm:app2}
+の仮定
+\ref{item:sum2}, 
+\ref{item:partisum2}, 
+\ref{item:div2}を満たす数列
+$h_{n}$, $r_{n}$及び$C$は存在する．以下のような例がある(たぶん)．$C$は省略する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$h_{n}=2^{n!}$, 
+$r_{n}=n!$, 
+\item 
+$h_{n}=e^{e^{e^{n}}}$, 
+$r_{n}=e^{e^{n}}$, 
+$e$は自然対数の底．
+
+\item 
+$h_{n}=(n!)^{n!}$, 
+$r_{n}=n^{n}$, 
+ここで$0^{0}=1$
+とする．
+\item 
+$h_{n}=42^{n^{5}}$, 
+$r_{n}=3^{n^{2}}$
+
+\item 
+$h_{n}=2\knuss n$, 
+$r_{n}=2\knus n$, 
+矢印の個数に注意．
+クヌースの記法である．
+
+\end{enumerate}
+特に
+\[
+f(x)=\sum_{n=0}^{\infty}\frac{\cos\left(2^{n!}x\right)}{n!}
+\]
+は至る所微分不可能関数である．
+\end{rmk}
+
+
+定理
+\ref{thm:app2}
+の証明の議論ではもはや
+$\cos(x)$特有の性質，
+例えば加法定理などではなく，
+これが周期関数であること, 
+連続であること(中間値の定理), 
+リプシッツであること，
+などしか用いていないので
+以下のように一般化できる．
+
+\begin{thm}[難技者のワイエルストラス関数]\label{thm:app3}
+関数$w\colon \rr\to \rr$
+は周期関数でリプシッツ関数であり，
+そして定数関数ではないとする．
+このとき
+\textbf{適切に急増化する正の実数列
+$\{r_{n}\}_{n\in \zz_{\ge 0}}$
+と
+$\{h_{n}\}_{n\in \zz_{\ge 0}}$}
+が存在して
+以下で定義される関数$f\colon \rr\to \rr$
+は至る所連続だが至る所微分不可能である．
+\[
+f(x)=\sum_{n=0}^{\infty}\frac{w(h_{n}x)}{r_{n}}.
+\]
+\end{thm}
+\begin{proof}
+省略．
+定理\ref{thm:app2}
+と同様にできる．
+\end{proof}
+一つ注意点として
+$\rr$上のリプシッツ関数は
+ほとんど至る所微分可能であることに注意しよう．
+そういうある程度滑らかなものから
+微分不可能関数を作れるわけである．
+
+定理
+\ref{thm:app3}
+を適応できる関数で$w$であって$\cos x$
+以外のものは例えば
+$w(x)=\inf_{n\in \zz}|x-n|$
+がある．
+この$w$から定義される上のような微分不可能関数は
+Takagi-type の関数と呼ばれているようである．
+言うまでもないが高木の例は
+$\sum_{n=0}\frac{w(2^{n}x)}{2^{n}}$
+が微分不可能ということを述べており，
+上の定理より具体的だし，関数の外と内側で
+同じオーダーの数列を扱っているので
+高木の例の方が良い結果である．
+ワイエルストラスの例も同様である．
+
+\section*{参考文献たち}
+
+
+\renewcommand{\refname}{和文参考文献}
+
+\begin{thebibliography}{99}
+\bibitem[和1]{wa1}
+徳永秀也 and 鹿野健, 
+「微分不可能な連続関数をめぐっての小史」
+津田塾大学第 3 回数学史
+シンポジウム，1993, 
+65--76.
+
+\bibitem[和2]{wa2}
+河野敬雄, 
+「至る所微分不可能な連続関数を初めて理解した日本人は土木技術者だった」, 
+ 数理解析研究所講究録別冊 2023, B92: 57-76, 
+ http://hdl.handle.net/2433/284815
+ 
+ \bibitem[和3]{wa3}
+ 徳永秀也, 
+ 「Riemannの三角級数の数論的研究」, 
+ 岡山大学大学院理学研究科修士論文, 
+ 1990. 
+ \bibitem[和4]{wa4}
+ 高木貞治, 
+ 「定本 解析概論」, 
+ 2010, 
+ 岩波書店, 
+ 補遺の解説：黒田成俊.
+ 
+ \bibitem[和5]{wa5}
+ 小柴洋一, 
+『Weierstrass 論文「至る所微分不可能である連続関数の例」
+について』, 
+数理解析研究所講究録
+1195
+(2001), 
+62--66. 
+http://hdl.handle.net/2433/64842
+
+\bibitem[和6]{wa6}
+H. ザーガン著, 
+鎌田清一郎訳
+空間充填曲線とフラクタル, 
+シュプリンガー・
+フェアラーク東京，
+1998年
+\end{thebibliography}
+
+
+
+\renewcommand{\refname}{一般の参考文献}
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{weg.bib}
+%%%%%%%%%%%%%%%%
+
+
+
+\end{document}

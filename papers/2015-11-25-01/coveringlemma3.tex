@@ -1,0 +1,431 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\supp}{\text{{\rm supp}}}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{コンパクト集合とルベーグの被覆補題}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では距離空間及び位相群に於けるルベーグの被覆補題をパラレルに証明する。証明を見比べると距離空間と位相群が「似ている」ことがわかると思う。実はこの２つの概念であるを内包する{\bf 一様空間}という概念があり、ルベーグの被覆補題は一様空間で成り立つ定理なのである。この文章では一様空間を定義したりしないが、興味があれば参考文献\cite{2}や\cite{1}を参照する事をオススメする。選択公理を用いないような証明にした。
+\section{距離空間に対するルベーグの被覆補題}
+\begin{thm}[距離空間におけるルベーグの被覆補題]
+$(X,d)$を距離空間とし、$K\subset X$を$X$のコンパクト集合とし、$\mathcal{U}$を$K$の開被覆とする、つまり、$\mathcal{U}\subset \mathfrak{O}_{X}$で
+\[
+K\subset \bigcup \mathcal{U}
+\]
+である。このとき正の数$\ep$が存在して任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ B(x,\ep)\subset U
+\]
+となる。ここで$B(a,r)$は点$a$を中心とする半径$r$の開球のことである。
+\end{thm}
+
+\begin{proof}$X$の部分集合族$\mathcal{N}$
+\[
+\mathcal{N}=\{B(x,\frac{1}{2}r)\ |\ x\in K\ \exists U\in \mathcal{U}\ B(x,r)\subset U\}
+\]
+と置くと明らかに
+\[
+K\subset \bigcup \mathcal{N}
+\]
+なので$K$のコンパクト性から$\mathcal{N}$の有限部分集合$\{B(a_i,\frac{1}{2}r_i)\}_{i=1}^n$が存在して
+\begin{equation}
+K\subset \bigcup_{i=1}^{n}B\left(a_i,\frac{1}{2}r_i\right)
+\end{equation}
+となる。そして
+\[
+\ep=\frac{1}{2}\min(r_1,r_2,\cdots ,r_n)
+\]
+と置くこのとき任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ B(x,\ep)\subset U
+\]
+となることを示そう。$x\in K$について$(1)$からある$i$が存在して$x\in B(a_i,\frac{1}{2}r_i)$である。このとき
+$B(x,\ep)\subset B(a_i,r_i)$となることを示そう。$z\in B(x,\ep)$とすると三角不等式と$\ep$の定義から
+\[
+d(z,a_i)\le d(z,x)+d(x,a_i)<\ep+\frac{1}{2}r_i\le \frac{1}{2}r_i+\frac{1}{2}r_i=r_i
+\]
+よって$d(z,a_i)<r_i$なので
+\[
+B(x,\ep)\subset B(a_i,r_i)
+\]
+さて$\mathcal{N}$の定義から
+\[
+\exists U\in \mathcal{U}\ B(a_i,r_i)\subset U
+\]
+が成り立つので任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ B(x,\ep)\subset U
+\]
+となる。
+\end{proof}
+
+
+\begin{cor}
+距離空間$(X,d)$上の台がコンパクトな実連続関数$f$は一様連続である。つまり
+\[
+\forall \ep >0\ \exists \delta >0\ d(x,y)<\delta \To |f(x)-f(y)|<\ep
+\]
+\end{cor}
+\begin{proof}
+$\supp f=K$と置く。
+任意の$\ep$に対し各$a\in K$について
+\[
+U_a=\{x\in X\ |\ |f(a)-f(x)|<\frac{\ep}{2}\}
+\]
+と置くとこれは$X$の開集合であり、$a\in U_a$なので
+\[
+K\subset \bigcup_{a\in K}U_a
+\]
+となる。この開被覆族$\{U_a\}_{a\in K}$について先の定理を用いて正の数$\delta$を得る。このとき、
+\[
+d(x,y)<\delta \To |f(x)-f(y)|<\ep
+\]
+となる事を示そう。$x\in K$の場合、$\delta$の充たす条件からある$a\in K$が存在して
+\[
+B(x,\delta)\subset U_a
+\]
+となる。この事と$x,y\in B(x,\delta)$より
+\[
+|f(a)-f(x)|<\frac{\ep}{2},\ |f(a)-f(y)|<\frac{\ep}{2}
+\]よって
+\[
+|f(x)-f(y)|<\ep
+\]
+が成り立つ。$y\in K$の場合も同様。
+$x,y\not\in K$のときは$f(x)=f(y)=0$なので明らかに
+\[
+|f(x)-f(y)|<\ep
+\]が成り立つ。
+\end{proof}
+
+\section{位相群に対するルベーグの被覆補題}
+
+\begin{df}[位相群]
+群$G$が位相空間であり、かつ、その二項演算と単項演算が連続、すなわち、
+\[
+(binary):G\times G\rightarrow G\ (x,y)\mapsto xy\ \ (inverse):G\rightarrow G\ x\mapsto x^{-1}
+\]が連続である時、群Gを位相群と呼ぶ。
+\end{df}
+定義から明らかに写像
+\[
+a*:G\rightarrow G\ x\mapsto ax\ *b:G\rightarrow G\ x \mapsto xb 
+\]は同相写像である。よって$Oが開集合ならaO,Obも開集合であり、閉集合についても同様である。$
+さらに$各点xについてそ近傍は単位元eの近傍のみで完全に決定されてしまうという著しい性質がある。すなわち$
+\[
+\mathfrak{N}(x)=\{xU\ |\ U\in \mathfrak{N}(e)\}=\{Wx\ |\ W\in \mathfrak{N}(e)\}
+\]が成立する。$\mathfrak{N}(x)$は$x$の近傍系である。また一般に$G$の部分集合$A,B,C$について
+\[
+AB=\{ab\ |\ a\in A,b\in B\},\ C^{-1}=\{x\ |\ x^{-1}\in C\}
+\]
+と書くことにする。
+
+\begin{lem}
+任意の$V\in \mathfrak{N}(e)$についてある$N,M\in \mathfrak{N}(e)$が存在して
+\[
+NN\subset V,\ M^{-1}\subset V
+\]
+を充たす。
+\end{lem}
+\begin{proof}
+群演算と逆元を取る演算が連続なので明らかである。
+\end{proof}
+上の補題で存在がわかる$NN\subset V$となる$N$は$V$の「半分の大きさ」の近傍と考えることが出来る。そのことは距離空間のルベーグの被覆補題と位相群のルベーグの被覆補題の証明を見比べるとよくわかると思う。\par
+$S^{-1}=S$となる$G$の部分集合を対称であるという。さて、
+$V\in \mathfrak{N}(e)$について$V^{-1}\in \mathfrak{N}(e)$なので
+\[
+V\cap V^{-1}\in \mathfrak{N}(e)
+\]
+である。$(V\cap V^{-1})^{-1}=V\cap V^{-1}$なので、結局$e$の対称近傍全体は$e$の基本近傍系を成していることがわかる。
+
+
+\begin{thm}[位相群に於けるルベーグの被覆補題・左]
+$G$を位相群とし、$K\subset G$を$G$のコンパクト集合とし、$\mathcal{U}$を$K$の開被覆とする、つまり、$\mathcal{U}\subset \mathfrak{O}_{G}$で
+\[
+K\subset \bigcup \mathcal{U}
+\]
+である。このとき$G$の単位元$e$の近傍$V$が存在して任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ xV\subset U
+\]
+となる。
+\end{thm}
+
+\begin{proof}$X$の部分集合族$\mathcal{N}$
+\[
+\mathcal{N}=\{aM\ |\ x\in K\ Nは単位元の近傍\ \exists U\in \mathcal{U}\ aMM\subset U\}
+\]
+と置くと明らかに
+\[
+K\subset \bigcup \mathcal{N}
+\]
+
+であるから$K$のコンパクト性から$\mathcal{N}$の有限部分族$\{a_iM_i\}_{i=1}^n$が存在して
+\begin{equation}
+K\subset \bigcup_{i=1}^{n}a_iM_i
+\end{equation}
+となる。そして
+\[
+V=\bigcap_{i=1}^nM_i
+\]
+と置くと$V$は単位元の近傍である。このとき任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ xV \subset U
+\]
+となることを示そう。$x\in K$について$(1)$からある$i$が存在して$x\in a_iM_i$である。このとき
+$xV\subset aM_iM_i$となることを示そう。$z\in xV$とすると
+$a_i^{-1}x\in M_i,\ x^{-1}z\in V$及び$M_a$と$V$の定義から
+\[
+a_i^{-1}z= a_i^{-1}x\cdot x^{-1}z\in M_i\cdot V\subset M_iM_i
+\]
+よって$z\in a_iM_iM_i$なので
+\[
+xV\subset a_iN_{a_i}
+\]
+さて$\mathcal{N}$の定義から
+\[
+\exists U\in \mathcal{U}\ a_iM_iM_i\subset U
+\]
+なので任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ xV\subset U
+\]
+となる。
+\end{proof}
+\begin{cor}
+位相群$G$上の台がコンパクトな実連続関数$f$は左一様連続である。つまり
+\[
+\forall \ep >0\ \exists V\in \mathfrak{N}(e)\ x^{-1}y\in V \To |f(x)-f(y)|<\ep
+\]
+\end{cor}
+\begin{proof}
+$\supp f=K$と置く。
+任意の$\ep$に対し各$a\in K$について
+\[
+U_a=\{x\in X\ |\ |f(a)-f(x)|<\frac{\ep}{2}\}
+\]
+と置くとこれは$X$の開集合であり、$a\in U_a$なので
+\[
+K\subset \bigcup_{a\in K}U_a
+\]
+となる。この開被覆族$\{U_a\}_{a\in K}$について先の定理を用いて単位元の近傍$V$を得る。更に単元$e$の対称近傍全体は単位元$e$における基本近傍系を成すので、$V$は対称であるとしてもよい。このとき、
+\[
+x^{-1}y\in V \To |f(x)-f(y)|<\ep
+\]
+となる事を示そう。$x\in K$の場合、$V$の充たす条件からある$a\in K$が存在して
+\[
+xV\subset U_a
+\]
+となる。この事と$x,y\in xV$より
+\[
+|f(a)-f(x)|<\frac{\ep}{2},\ |f(a)-f(y)|<\frac{\ep}{2}
+\]よって
+\[
+|f(x)-f(y)|<\ep
+\]
+が成り立つ。$V$が対称なので$y\in K$の場合のときは$y^{-1}x\in V$なので$x\in K$の場合と同様に事が運ぶ。
+$x,y\not\in K$のときは$f(x)=f(y)=0$なので明らかに
+\[
+|f(x)-f(y)|<\ep
+\]が成り立つ。
+\end{proof}
+
+
+\begin{thm}[位相群に於けるルベーグの被覆補題・右]
+$G$を位相群とし、$K\subset G$を$G$のコンパクト集合とし、$\mathcal{U}$を$K$の開被覆とする、つまり、$\mathcal{U}\subset \mathfrak{O}_{G}$で
+\[
+K\subset \bigcup \mathcal{U}
+\]
+である。このとき$G$の単位元$e$の近傍$V$が存在して任意の$x\in K$について
+\[
+\exists U\in \mathcal{U}\ Vx\subset U
+\]
+となる。
+\end{thm}
+\begin{proof}
+上の左の場合と同様。
+\end{proof}
+
+\begin{cor}
+位相群$G$上の台がコンパクトな実連続関数$f$は右一様連続である。つまり
+\[
+\forall \ep >0\ \exists V\in \mathfrak{N}(e)\ x^{-1}y\in V \To |f(x)-f(y)|<\ep
+\]
+\end{cor}
+\begin{proof}
+上の左の場合と同様。
+\end{proof}
+
+
+
+\section{コンパクトハウスドルフ空間に対するルベーグの被覆補題}
+
+\begin{prop}
+$X$をコンパクトハウスドルフ空間とする．そして
+$\mathfrak{N}_X$を$\Delta_X=\{(x, x)\in X\times X\mid x\in X\}$の$X\times X$における近傍全体の集合とする．このとき，$\mathfrak{N}$は$X$の一様構造になり，逆に$X$の位相と同じ位相を生成する$X$の一様構造は$\mathfrak{N}_X$しかない．
+\end{prop}
+
+\begin{thm}[コンパクトハウスドルフ空間に対するルベーグの被覆補題]
+$X$をコンパクトハウスドルフ空間とし、
+$\mathcal{U}$を$X$の開被覆とする.
+このとき$E\in \mathfrak{N}_X$が存在して，任意の$x\in X$について
+$U\in \mathcal{U}$が存在して，
+\[
+E(x)\subset U
+\]
+となる。
+
+\end{thm}
+\begin{proof}
+$\mathfrak{S}$を$X$の対称な開近縁全体とする．
+$X$の部分集合族$\mathcal{N}$を
+\[
+\mathcal{N}=\{V(a)\ \mid a\in X\land V\in \mathfrak{S}\land  \ \exists U\in \mathcal{U}\ V\circ V(a)\subset U\}
+\]
+と置くと明らかに
+\[
+X= \bigcup \mathcal{N}
+\]
+なので，$X$のコンパクト性から$X$有限被覆$\{V_i(a_i)\}_{i=1}^m$が存在する．
+ここで，$E=\bigcap_{i=1}^m$ととおく．この$E$
+が所望の性質を満たすことを示そう．任意に$x\in X$を取ると，ある$i$が存在して
+$x\in V_i(a_i)$であり，この$i$に対して$U\in \mathcal{U}$が存在して
+$V_i\circ V_i(a_i)\subset U$が成り立つ．
+今，任意の$p\in E(x)$について$(x, p)\in E\subset V_i$であり，また，
+$i$の取り方から$(x, a_i)\in V_i$なので，$(p, a_i)\in V_i\circ V_i$である．
+つまり$p\in V_i\circ V_i(a_i)\subset U$である．
+これは
+$E(x)\subset U$を意味する．
+\end{proof}
+
+一葉連続性についても上の二つのものと同様のことが言えるが証明は省略する．
+
+
+
+\begin{thebibliography}{9}
+\bibitem{2}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{1}柴田敏男,集合と位相空間,共立数学講座8,共立出版,1978
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

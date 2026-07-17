@@ -1,0 +1,906 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%\usepackage[all]{xy}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}} }
+\newcommand{\cl}{\text{{\rm CL}} }
+\newcommand{\nai}{\text{{\rm Int}} }
+%差集合は\setminusで統一する。等号の否定は\n
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{等高線と連続関数}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では等高線という特定の条件を充たす開集合もしくは閉集合からなる族を定義し、それに付随する連続関数の存在を示す。この議論の応用として正規空間に於けるウリゾーンの補題、ティーチェの拡張定理を示す。
+ティーチェの拡張定理はウリゾーンの補題から、一様収束する関数の列を構成して証明する方法が一般的だが、
+ティーチェの拡張定理も、ウリゾーンの補題の証明のように、等高線の方法で証明できる。
+この文章では正規空間という語を$T_1$を仮定しない意味で用いる。また、等高線という語はこの文章で暫定的に定義したもので、他の数学の文章において一般的に用いられるものでは全くない。
+\section{等高線}
+\begin{df}[上半連続、下半連続]
+位相空間$(X,\mathfrak{O})$に対しその閉集合族を$\mathfrak{F}$と書こう。
+$a,b\in \rr$とする。
+このとき写像
+$f:X\rightarrow [a,b]$
+が上半連続とは
+\[
+\forall \ u\in [a,b]\ f^{-1}([u,b])\in \mathfrak{F}
+\]
+を充すこととし、
+また、$f$が下半連続とは
+\[
+\forall \ l\in [a,b]\ f^{-1}([a,l])\in \mathfrak{F}
+\]
+を充すこと
+と定義する。
+\end{df}
+
+明らかに上半連続かつ下半連続な関数は連続であり、連続な関数は上かつ下半連続である。もちろん$[a,b]$には標準的な位相を入れてその意味で連続と言っているのである。
+\begin{lem}\label{特性}
+$F$,$U$をそれぞれ位相空間$(X,\mathfrak{O)}$の閉集合、開集合とする。
+この時、特性関数
+\[
+\chi_{F},\ \chi_{U}:X\rightarrow [0,1]
+\]はそれぞれ上半連続、下半連続である。
+\end{lem}
+\begin{proof}
+特性関数は$0$か$1$しか値を取らないので証明は簡単である。
+\end{proof}
+
+\begin{thm}[半連続関数の上限と下限]\label{sup}
+$\{f_{\lambda}:[a,b]\to \rr\}_{\lambda\in \Lambda}$を上半連続（下半連続）な写像の族とする。
+このとき、$(\inf_{\lambda\in \Lambda}f_{\lambda}):[a,b]\to \rr$（$\sup_{\lambda\in \Lambda}f_{\lambda}$）も上半連続（下半連続）
+\end{thm}
+\begin{proof}
+任意の$x$について
+\[
+\inf_{\lambda\in \Lambda}f_{\lambda}(x)\ge u \Leftrightarrow \forall \lambda \in \Lambda\ f_{\lambda}(x)\ge u
+\]
+が成り立つので
+\[
+(\inf_{\lambda\in \Lambda}f_{\lambda})^{-1}([u, b])=\bigcap_{\lambda\in \Lambda}f_{\lambda}^{-1}([u,b])
+\]となり、$(\inf_{\lambda\in \Lambda}f_{\lambda})^{-1}([u, b])$が閉集合であることがわかるので
+$\displaystyle{\inf_{\lambda\in \Lambda}f_{\lambda}}$は上半連続である。下半連続の場合も同様である。
+\end{proof}
+
+
+%定義等高線
+\begin{df}[開等高線]
+位相空間$X$の開集合からなる部分集合族$\{V(d)\}_{d\in D}$が$X$の開等高線であるとは、添字集合$D$が$[0,1]$の稠密部分集合であり、更に$a,b\in D$について
+\[
+a<b\To \cl(V(a))\subset V(b)
+\]
+を充たすことである。
+\end{df}
+$D$としては、よく$[0,1]$内の有限桁の二進数全体が採用される。
+
+%等高線の存在と連続関数の存在の等価性
+\begin{thm}\label{func}
+位相空間$X$の等高線$\{V(d)\}_{d\in D}$に対して
+$D$を添え字とする二つの集合族$\{f_d\}_{d\in D}, \{g_d\}_{d\in D}$を
+\[
+f_d=\begin{cases}
+ d & \text{$x\in V(d)$} \\
+ 1 & \text{$x\in X\backslash V(d)$}
+\end{cases}\ \ 
+g_d=\begin{cases}
+ d & \text{$x\in X\backslash \cl(V(d))$} \\
+ 0 & \text{$x\in \cl(V(d))$}
+\end{cases}
+\]
+と定義し、
+\[
+f:=\inf_{d\in D}f_d
+\]
+\[
+g:=\sup_{d\in D}g_d
+\]
+と定義すると$f=g$であり、これは$X$から$[0,1]$への連続関数になる。
+\end{thm}
+
+\begin{proof}${}$\\ 
+まず、$0\le d \le1$を踏まえて補題\ref{特性}と同様に各$f_d$は上半連続、各$g_d$は下半連続となる。そして
+\[
+f:=\inf_{d\in D}f_d,\ 
+g:=\sup_{d\in D}g_d
+\]
+なので定理\ref{sup}より$f$は上半連続、$g$は下半連続となる。さて
+\begin{claim}
+\begin{align}
+x\in V(r)\Rightarrow f(x)\le r\\ 
+x\not\in V(s)\Rightarrow s\le f(x)\\ 
+x\not\in \cl(V(r))\Rightarrow r\le g(x)\\ 
+x\in \cl(V(s))\Rightarrow g(x)\le s
+\end{align}
+\end{claim}が成り立つ。\par
+[主張の証明]\par
+$(1)$について、$x\in V(r)$なら$f_r(x)=r$なので$f$の定義から明らかに$f(x)\le r$が成り立つ。\par
+$(2)$について、$\{V(d)\}_{d\in D}$の性質
+\[
+a,b\in D,\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]
+より$x\not\in V_s$を仮定すると$a\le s$となる$a\in D$について
+\[
+x\not\in V(a)
+\]
+となる。つまり
+\[
+\forall a\le s\ f_a(x)=1
+\]が成り立つ。ところで逆に$s<d$となる$d$については定義から明らかに
+\[
+\forall d>s\ \ f_d(x)\ge s
+\]
+が成り立ち、いづれにせよ結局
+\[
+\forall d\in D\ s\le f_{d}(x)
+\]
+が成り立ち、$f$の定義から$s\le f(x)$を得る。\par
+$(3)$について、$x\not\in \cl(V(r))$ならば$g_r(x)=r$なので$g$の定義から明らかに$r\le g(x)$\par 
+$(4)$について、$\{V(d)\}_{d\in D}$の性質
+\[
+a,b\in D,\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]
+より$x\in \cl(V(s))$を仮定するとき、$a\le s$となる$a\in D$について
+\[
+x\in \cl(V(a))
+\]
+となる。つまり
+\[
+\forall s\le a\ g_a(x)=0
+\]が成り立つ。ところで逆に$d<s$となる$d$については$g_d$の定義から明らかに
+\[
+\forall d<s\ g_d(x)\le s
+\]
+が成り立ち、いづれにせよ結局
+\[
+\forall d\in D\ g_{d}(x)\le s
+\]
+が成り立つ。
+よって$g$の定義から$g(x)\le s$を得る。\par
+[主張の証明終わり]\par
+上で示した主張の対偶をとり
+\begin{align}
+r<f(x)\Rightarrow x\not\in V(r)\\ 
+f(x)<s\Rightarrow x\in V(s) \\ 
+g(x)<r\Rightarrow x\in \cl(V(r))\\ 
+s<g(x)\Rightarrow x\not\in \cl(V(s))
+\end{align}
+を得る。これを使って$f=g$を示そう。\\ 
+もしある点$x$で$f(x)<g(x)$なら$D$が$[0,1]$で稠密なことから
+\[
+f(x)<s<g(x)
+\]
+となる$s\in D$が存在し上の$(6)$と$(8)$から$x\in V(s)$かつ$x\not\in \cl(V(s))$が成り立ってしまい矛盾する。\par
+もしある点$x\in X$で$g(x)<f(x)$なら$D$が$[0,1]$で稠密なことから
+\[
+g(x)<r<s<f(x)
+\]
+となる$r,s\in D$が存在し上の$(5)$と$s<f(x)$から$x\not\in V(s)$を得て、$(7)$と$g(x)<r$から
+$x\in \cl(V(r))$を得るが、$\cl(V(r))\subset V(s)$なので矛盾する。\par
+以上の議論から任意の点$x\in X$で$f(x)=g(x)$、つまり$f=g$であり
+、$f(=g)$は$X$で上半連続かつ下半連続なので$X$で連続である。
+\end{proof}
+
+
+開等高線以外にも色んな種類の等高線が考えられ、それぞれに応じた連続関数の存在が言える。しかし結局は開等高線に帰結出来るし、面倒なので開等高線に帰結出来ることを説明して連続関数の存在については定理や命題としては述べないが、後々の応用で用いる。
+
+\begin{df}[逆向き開等高線]\label{aa}
+位相空間$X$の開集合からなる部分集合族$\{V(d)\}_{d\in D}$が$X$の逆向き開等高線であるとは添字集合$D$が$[0,1]$の稠密部分集合であり、更に$a,b\in D$について
+\[
+a<b\To \cl(V(b))\subset V(a)
+\]
+を充たすことである。
+\[
+s_d=\begin{cases}
+ d & \text{$x\in X\backslash \cl(V(d))$} \\
+ 1 & \text{$x\in \cl(V(d))$}
+\end{cases}\ 
+t_d=\begin{cases}
+ d & \text{$x\in V(d)$} \\
+ 0 & \text{$x\in X\backslash V(d)$}
+\end{cases}\ \ 
+\]
+と定義すると$s_d$は上半連続であり、$t_d$は下半連続で、
+\[
+s:=\inf_{d\in D}s_d,\ 
+t:=\sup_{d\in D}t_d
+\]
+と定義すると$s=t$であり、これは$X$から$[0,1]$への連続関数になる。
+逆向き開等高線については$E=\{1-d\ |\ d\in D\}$として、
+$e\in E$について$U(e)=V(1-e)$と置けば$\{U_e\}_{e\in E}$は開等高線になる。
+$\{U(e)\}_{e\in E}$に付随する$f_e,\ g_e$と$s_d=1-g_{1-d},\ t_d=1-f_{1-d}$の関係があることを見れば$s,t$のこの性質は定理\ref{func}からよくわかる。
+
+\end{df}
+
+
+\begin{df}[閉等高線]\label{bb}
+位相空間$X$の閉集合からなる部分集合族$\{F(d)\}_{d\in D}$が$X$の閉等高線であるとは添字集合$D$が$[0,1]$の稠密部分集合であり、更に$a,b\in D$について
+\[
+a<b\To F(a)\subset \nai(F(b))
+\]
+を充たすことである。つまり$F(b)$は$F(a)$の閉近傍である。\par
+閉等高線に対しては
+\[
+v_d=\begin{cases}
+ d & \text{$x\in \nai(F(d))$} \\
+ 1 & \text{$x\not\in \nai(F(d))$}
+\end{cases}\ 
+w_d=\begin{cases}
+ d & \text{$x\not\in F(d)$} \\
+ 0 & \text{$x\in F(d)$}
+\end{cases}
+\]
+と定義すると$v_d$は上半連続で、$w_d$は下半連続であり、
+\[
+v:=\inf_{d\in D}v_d,\ 
+w:=\sup_{d\in D}w_d
+\]
+と定義すると$v=w$であり、これは$X$から$[0,1]$への連続関数になる。
+$\{X\setminus F(d)\}_{d\in D}$は逆向きの開等高線であり、この等高線に付随する定義\ref{aa}の$s_d,\ t_d$について$v_d=s_d,\ w_d=t_d$の関係があることから$v,w$のこの性質は簡単にわかる。
+\end{df}
+
+
+
+\begin{df}[逆向き閉等高線]
+位相空間$X$の開集合からなる部分集合族$\{F(d)\}_{d\in D}$が$X$の逆向き等閉高線であるとは添字集合$D$が$[0,1]$の稠密部分集合であり、更に$a,b\in D$について
+\[
+a<b\To F(b)\subset \nai(F(a))
+\]
+を充たすことである。つまり$F(a)$は$F(b)$の閉近傍である。\par
+\[
+i_d=\begin{cases}
+ d & \text{$x\not\in F(d)$} \\
+ 1 & \text{$x\in F(d)$}
+\end{cases}\ \ 
+j_d=\begin{cases}
+ d & \text{$x\in \nai(F(d))$} \\
+ 0 & \text{$x\not\in \nai(F(d))$}
+\end{cases}
+\]
+と定義すると$i_d$は上半連続で、$j_d$は下半連続であり、
+\[
+i:=\inf_{d\in D}i_d,\ 
+j:=\sup_{d\in D}j_d
+\]
+と定義すると$i=j$であり、これは$X$から$[0,1]$への連続関数になる。
+逆向きの閉等高線に対しては、$E=\{1-d\ |\ d\in D\}$として、$e\in E$について$L(e)=F(1-e)$と置けば$\{L(e)\}_{e\in E}$は閉等高線になる。
+この等高線に付随する定義\ref{bb}の$v_d,\ w_d$について$j_d=1-v_{1-d},\ i_d=1-w_{1-d}$の関係があることを見ればこの$i,\ j$の性質は簡単にわかる。
+
+
+\end{df}
+
+
+%応用
+\section{応用}
+
+%ウリゾーンの補題
+\begin{thm}[ウリゾーンの補題]
+$(X,\mathfrak{O})$を正規空間とし、$F,G$をその互いに素な２つの閉集合とすると連続関数$f:X\rightarrow [0,1]$が存在し
+\[
+f|F=1,\ f|G=0
+\]
+を充す。
+つまり互いに素な２つの閉集合は関数で分離できる。
+\end{thm}
+\begin{proof}
+$F,G$を$X$の交わらない２つの閉集合の任意の組とする。
+ウリゾーンの補題を示すにはまず、
+\[
+G\subset \bigcap_{d\in D}V(d),\ F\subset X\setminus \bigcup_{d\in D}V(d)
+\]
+を充たす開等高線$\{V(d)\}_{d\in D}$の存在を示そう。\par
+
+まず$G\subset X\backslash F$と正規性から
+\[
+G\subset O\subset \cl(O) \subset X\backslash F
+\]となる$O$が存在する。このような開集合のひとつ$O$と$X\backslash F$をそれぞれ$V(1),V(0)$とする。\\ 
+そして再び正規性を用いて
+\[
+\cl(V(0))\subset P\subset \cl(P) \subset V(1)
+\]
+となる$O$のひとつを$V(1/2)$として採用する。\\ 
+さらに$V(1/4),\ V(3/4)$を正規性から存在が保証される
+\[
+\cl(V(0))\subset A\subset \cl(A) \subset V(1/2)
+\]
+となる$A$のひとつを$V(1/4)$と定義し、
+\[
+\cl(V(1/2))\subset B\subset \cl(B) \subset V(1)
+\]
+となる$B$のひとつを$V(3/4)$として定義する。・・・ということを繰り返し開集合の族$\{V(d)\}_{d\in D}$が出来あがる。\\ \\ 
+この証明で十分な人はこれで証明が終わるが、より正確には
+$\displaystyle D_k=\{\frac{m}{2^{n}}\ |\ 0\le n\le k,m=0,1,\cdots 2^{n}\}$対する帰納法と選択公理を用いる。上で述べた方法を細かく正当化するだけだが、一応せっかくなので証明を付ける。それに当たり次の形の選択公理を使おう。\\ 
+選択公理：
+非空な集合を要素に持つ空でない集合族$\{X_{\lambda}\}_{\lambda\in \Lambda}$に対し、ある$C\subset \bigcup_{\lambda\in \Lambda}X_{\lambda}$が存在して 
+\[\forall\lambda\in \Lambda\ (C\cap X_{\lambda}は一元集合)
+\]を充たす。\\　\\ 
+さて、$\mathfrak{S}＝\{(A,B)\ |\ A,B\in \mathfrak{O},\ \cl(A)\subset B\}$と定義し、$(A,B)\in \mathfrak{S}$に対し、
+$\mathfrak{A}(A,B)=\{C\in \mathfrak{O}\ |\ \bar{A}\subset C\subset B\}$と定義すると正規性から$\mathfrak{A}(A,B)\neq \emptyset$がわかる。
+そして集合族
+$\{\mathfrak{A}(A,B)\}_{(A,B)\in \mathfrak{S}}$に対し選択公理を用いて、先の選択の条件を満たす集合$C$を得る。
+簡単のため$\mathfrak{A}(A,B)\cap C=\{C(A,B)\}$と書くことにする。この$C$を用いて
+\[
+a,b\in D_{k},\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]
+を充たす$\{V(d)\}_{d\in D_k}$を帰納的に構成していく。\\ 
+$k=0$の時、$D_{0}=\{0,1\}$であるが、これに対して正規性から
+$G\subset O\subset \cl(O) \subset X\backslash F$となる$O$が存在するのでこのような開集合のひとつ$O$を$V_1$と定義し、$V_0=X\backslash F$とする。この時もちろん
+\[
+a,b\in D_0\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]が成り立つ\\ 
+そして
+\[
+a,b\in D_k,\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]を充たす$\{V_d\}_{d\in D_{k}}$が$k=n$まで
+定義されとして$k=n+1$に対して構成する。
+$D_{n+1}\backslash D_n$の元は$\frac{2m+1}{2^{n+1}}$の形をしているので
+\[
+V\left(\frac{2m+1}{2^{n+1}}\right)=C\left(V\left(\frac{m}{2^n}\right),V\left(\frac{m+1}{2^n}\right)\right)
+\]とし、$d\in D_n$に対しては$V_d$が既に定義されているのでこれをそのまま用いて、任意の$d\in D_{n+1}$に対して$V_d$が定義され
+\[
+a,b\in D_{n+1},\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]を充たす。
+このようにして任意の$n$に対し
+$\{V(d)\}_{d\in D_{n}}$が定義され$\{V(r)\}_{r\in D_{n}}\subset \{V(r)\}_{r\in D_{n+1}}$を充たす。
+$D=\bigcup_{n\in \mathbb{N}}D_{n}$なので、これにより$\{V(d)\}_{d\in D}$が定義され
+\[
+a,b\in D,\ a<b\Rightarrow \cl(V(a))\subset V(b)
+\]を充たす。\par
+そして定理\ref{func}にある$\{f_d\}_{d\in D},\ \{g_d\}_{d\in D}$を考える。
+\[
+f_d=\begin{cases}
+ d & \text{$x\in V(d)$} \\
+ 1 & \text{$x\in X\backslash V(d)$}
+\end{cases}\ \ 
+g_d=\begin{cases}
+ d & \text{$x\in X\backslash \cl(V(d))$} \\
+ 0 & \text{$x\in \cl(V(d))$}
+\end{cases}
+\]
+と
+\[
+f=\inf_{d\in D}f_d,\ 
+g=\sup_{d\in D}g_d
+\]
+に注意しよう。さて
+\[
+\forall d\in D\ G\subset \cl(V(d))
+\]
+が成立することと$g_d$の定義から
+\[
+\forall d\in D\ x\in G\Rightarrow g_d(x)=0
+\]
+がわかり、
+よって
+\[
+g|G=f|G=0
+\]
+となる。そして
+\[
+\forall d\in D\ F\subset X\backslash V(d)
+\]
+が成立することと$f_d$の定義から
+\[
+\forall d\in D\ x\in F\Rightarrow f_d(x)=1
+\]
+なので
+\[
+f|F=g|F=1
+\]
+となる。以上から
+\[
+f|G=0\ f|F=1
+\]となり、定理\ref{func}から欲しかった関数が得られた。
+以上により、ウリゾーンの補題が証明された。
+\end{proof}
+以下では等高線の方法を用いてティーチェの拡張定理を証明する。
+以下で紹介する方法は基本的に\cite{o}によるものだが、その証明にはギャップがある。
+\cite{B}も等高線の方法を用いており、ギャップもない。
+\cite{B}の方法で\cite{o}の証明を修正したものを以下で展開する。
+そのためにいくつか補題を用意する。
+\begin{df}
+位相空間$X$の２つの集合$A,B$が分離的であるとは
+\[
+CL(A)\cap B=\O,\ A\cap CL(B)=\O
+\]
+を充たすことである。
+\end{df}
+
+\begin{df}
+位相空間の部分集合$S$が、$X$の$F_{\sigma}$集合であるとは、$S$が$X$の可算個の閉集合の和集合でかける時にいう。
+また、$X$の部分集合$S$が、$X$の$G_{\delta}$集合であるとは$S$が$X$の可算個の開集合の共通部分で書ける時に言う。
+\end{df}
+正規空間において、ふたつの閉集合は分離できるが、一般に分離的なふたつの$F_{\sigma}$集合を開集合で分離することができる。この性質は見かけ上は正規性よりも強いことを主張しているが、正規性と同値である。
+\begin{prop}\label{efsigma}
+$X$を正規空間とし、$A$, $B$を$X$のふたつの$F_{\sigma}$集合で、分離的なものとする。このとき$X$の開集合$U$, $V$が存在して$U\cap V=\O$および、$A\subset U$, $B\subset V$を充す。
+\end{prop}
+\begin{proof}
+$X$の閉集合からなるふたつの可算族$\{S_i\}$, $\{T_i\}$は$S_i\subset S_{i+1}$, $T_i\subset T_{i+1}$および
+\[
+A=\bigcup_i S_i, \ B=\bigcup_i T_i
+\]
+を充すとする。
+開集合の可算族$\{U_i\}$, $\{V_i\}$を以下を充すものとする。
+\setcounter{equation}{0}
+\begin{align}
+&S_i\subset U_i\subset \cl(U_i)\subset X\setminus(\cl(B)\cup \bigcup_{k<i}\cl(V_k)), \\
+&T_i \subset V_i\subset \cl(V_i)\subset X\setminus(\cl(A)\cup \bigcup_{k<i}\cl(U_k)), \\ 
+&\cl(U_i)\cap \cl(V_i)=\O
+\end{align}
+このような族の存在は、$A$, $B$の分離性と空間の正規性、そして帰納法によりわかる。
+任意の$i,j$について、
+\[
+U_i\cap V_j=\O
+\]
+に注意しよう。
+そして、
+\[
+U=\bigcup_iU_i, \ V=\bigcup_iV_i
+\]
+とすると$A\subset U$, $B\subset V$
+で$U\cap V=\O$なので、これで命題が証明された。
+\end{proof}
+
+ティーチェの拡張定理を等高線の概念を用いて証明するために
+閉部分集合上の等高線を空間全体に拡張できることを証明する。
+
+\begin{lem}\label{cc}
+$A,B$を正規空間$X$の閉集合とし、$U$を$B$の$X$に於ける開近傍とする。そして$C\subset A$を$A$に於ける$A\cap B$の閉近傍とし、$C\subset U\cap A$と仮定する。この時$B$の$X$に於ける閉近傍$Z$が存在して$Z\subset U$と$Z\cap A=C$を充たす。
+\end{lem}
+\begin{proof}
+まず$X$の正規性から$B$の閉近傍$L$が存在して$L\subset U$を充たす。そして
+$K=\cl_X(A\setminus C)$とすると$C$は$A\cap B$の$A$に於ける閉近傍であるので$K\cap B=\O$である。よって再び正規性から$B$の$X$に於ける閉近傍$H$が存在して$K\cap H=\O$を充たす。$K\cap H=\O$から$H\cap A\subset C$となる。よって$Z=(H\cap L)\cup C$と置けば求める性質を全て持つ。
+\end{proof}
+
+\begin{lem}\label{daiji}
+$A,B$を正規空間$X$の閉集合とし、$U$を$B$の$X$に於ける開近傍とする。そして$X$の部分集合$D, C$は以下を満たすとする。
+\begin{enumerate}
+\item $D\subset C$
+\item $D$は$A$の$F_{\sigma}$な開集合
+\item $C$は$A$の$G_{\delta}$な閉集合
+\item $A\setminus C$と$D$は($X$の中で)分離的である。
+\item $A\cap B\subset D$
+\item $C\subset U\cap A$
+\end{enumerate}
+この時$B$の$X$に於ける閉近傍$Z$が存在して$Z\subset U$と$Z\cap A=C$および、$D\subset \nai (Z)$を充たす。
+\end{lem}
+\begin{proof}
+$A$は$X$の閉集合なので、$A\setminus C$と$D$は$X$の中でも$F_{\sigma}$になっていることに注意しよう。
+$D\subset C\subset U$なので、$(X\setminus U)\cup(A\setminus C)$と$D$は$X$の中で分離的なふたつの$F_{\sigma}$集合であることに注意しよう。
+すると、命題\ref{efsigma}から、$X$の開集合$G$が存在して、
+\[
+D\subset G
+\]
+\[
+((X\setminus U)\cup(A\setminus C))\cap \cl_X(G)=\O
+\]
+を充す。
+特に2番目の条件から
+$\cl_X(G)\subset U$
+と
+$\cl_X(G)\cap A\subset C$
+がわかる。
+また、$C$に対して先の補題を用いて、$B$の閉近傍$P$で、
+$P\cap A=C$
+と$P\subset U$を充すものが存在する。
+そこで$Z=P\cup \cl_X(G)$と置く。するとこれは求める条件を全て充す。
+まず、$Z$が$Z\subset U$を充す$B$の閉近傍であることは明らかである。
+また、
+\[
+D\subset G\subset \nai (Z)
+\]
+であり、
+\[
+Z\cap A=(P\cap A)\cup (\cl_X(G)\cap A)=C
+\]
+もわかる。
+\end{proof}
+
+
+
+\setcounter{equation}{0}
+%%%ティーチェの拡張定理。
+\begin{thm}[Tietzeの拡張定理その1]
+正規空間$X$の閉集合$A$上の任意の連続関数$f:A\to [0,1]$に対して$X$上の連続関数$g:X\to [0,1]$が存在して
+\[
+g|A=f
+\]
+が成立する。
+\end{thm}
+\begin{proof}
+$\dpst D=\{\frac{m}{2^n}\ |\ n\in \nn\cup{0},\ 0\le m\le 2^n\ m\in \nn\cup{0}\}$と置くと$D$は$[0,1]$で稠密である。$d\in D$について閉集合$L_d$と開集合$M_d$を
+\[
+M(d)=f^{-1}([0,d))=\{x\in A\ |\ f(x)< d\}
+\]
+\[
+L(d)=f^{-1}([0,d])=\{x\in A\ |\ f(x)\le d\}
+\]
+と置き、以下
+\begin{align}
+&F(d)\cap A=L_d\\ 
+&M(d)\subset \nai(F_d)\\
+&a<b\To F_a\subset \nai(F(b))
+\end{align}
+を充たす$\{F(d)\}_{d\in D}$を構成する。\par 
+まず、$F(0)=L(0),\ F(1)=X$と置く。そして$F((k+1)2^{-n})$と
+$F(k2^{-n})$が既に構成されたとき、$F((2k+1)2^{-n-1})$を$F(k2^{-n})$の閉近傍で
+\setcounter{equation}{0}
+\begin{align}
+&A\cap F((2k+1)2^{-n-1})=L((2k+1)2^{-n-1})\\
+&M((2k+1)2^{-n-1})\subset \nai(F((2k+1)2^{-n-1}))\\
+&F((2k+1)2^{-n-1})\subset \nai(F((k+1)2^{-n}))
+\end{align}
+を充たすものとして構成する。
+そのために補題\ref{daiji}を用いる。
+まず、
+$M((2k+1)2^{-n-1})\subset L((2k+1)2^{-n-1})$である。
+そして、定義から$M((2k+1)2^{-n-1})$は$A$の$F_{\sigma}$な開集合であり、$L((2k+1)2^{-n-1})$は$A$の$G_{\delta}$な開集合である。
+次に$M((2k+1)2^{-n-1})$と$A\setminus L((2k+1)2^{-n-1})$が$X$の分離的であることを示そう。$A$が$X$の閉集合であることから$L((2k+1)2^{-n-1})$もそうであり、
+\[
+\cl_X(M((2k+1)2^{-n-1}))\subset L((2k+1)2^{-n-1})=f^{-1}([0, (2k+1)2^{-n-1}])
+\]
+が成り立つ。
+$A\setminus L((2k+1)2^{-n-1})=f^{-1}((2k+1)2^{-n-1}, 1])$
+に注意すると、同様にして
+\[
+\cl_X(A\setminus L((2k+1)2^{-n-1}))\subset f^{-1}([2k+1)2^{-n-1}, 1])
+\]
+がわかる。これらのことから、$M((2k+1)2^{-n-1})$と$L((2k+1)2^{-n-1})$が
+$X$の中で分離的であることがわかる。
+定義から直ちに
+\[
+F(k2^{-n})\cap A=L(k2^{-n})\subset M((2k+1)2^{-n-1})
+\]
+がわかる。
+そして、帰納法の仮定から、
+$M((k+1)2^{-n})\subset \nai(F((k+1)2^{-n}))$なので
+\[
+L((2k+1)2^{-n-1})\subset M((k+1)2^{-n})\subset \nai(F((k+1)2^{-n}))
+\]
+である。
+以上から、$A$, $F(k2^{-n})$, $L((2k+1)2^{-n-1})$, $M((2k+1)2^{-n-1})$が補題\ref{daiji}の仮定を満たすので、先に言った$F((2k+1)2^{-n-1})$の存在がわかる。
+こうして閉等高線$\{F(d)\}_{d\in D}$が得られた。\footnote{厳密にやりたいなら、ウリゾーンの補題の証明と同じく選択公理を適用して帰納的に構成していけば良い。}このとき定義\ref{bb}の連続関数$v(=w)$について$v|A=f$であることを示そう。\par
+まず、\[
+v_d=\begin{cases}
+ d & \text{$x\in \nai(F(d))$} \\
+ 1 & \text{$x\not\in \nai(F(d))$}
+\end{cases}\ 
+w_d=\begin{cases}
+ d & \text{$x\not\in F(d)$} \\
+ 0 & \text{$x\in F(d)$}
+\end{cases}
+\]
+および
+\[
+v:=\inf_{d\in D}v_d,\ 
+w:=\sup_{d\in D}w_d
+\]
+と定義されていて$v=w$であることを思い出そう。
+任意の$\ep>0$と任意の$x\in A$を与え、$f(x)=r$と置く。
+すると$D$の稠密性から$r-\ep <d<r$となる$d\in D$が存在し、$x\not\in L(d)$なので特に$x\not\in F(d)$であり、$w_d(x)=d$が成り立つ。
+よって$r-\ep<d\le w(x)$が成り立つ。
+$\ep$の任意性から$r\le w(x)$である。逆向きの不等号を示そう。$\ep>0$を任意にあたえ再び$D$の稠密性から$r<e<d<r+\ep$となる$d,e\in D$をとる。
+すると、$L(e)$の定義と$r<e$から$x\in L(e)\subset  F(e)$であり、そして$e<d$であるから$x\in \nai(F(d))$となる。よって$v_d(x)=d$となり、
+$v(x)\le d<r+\ep$となるので、$\ep$の任意性から$w(x)=v(x)\le r$となる。以上から$x\in A$について$v(x)=f(x)$となるので結局
+\[
+v|A=f
+\]
+となり、$v:X\to [0,1]$は連続関数であるから定理の証明が終わる。
+\end{proof}
+\begin{cau}
+拡張定理に於いて$f$のコドメインが$[0,1]$であることは本質的ではない。$\rr$の閉区間であれば常に拡張定理が成り立つ。$\rr$の任意の閉区間$I$と$[0,1]$の間に同相写像があることからこのことは明らかであろう。この事実はいかの定理でも断りなく用いられる。
+\end{cau}
+\begin{thm}[Tietzeの拡張定理その2]
+正規空間$X$の閉集合$A$上の任意の連続関数$f:A\to \rr$に対して$X$上の連続関数$g:X\to \rr$が存在して
+\[
+g|A=f
+\]
+が成立する。
+\end{thm}
+\begin{proof}
+$h:\rr\to (-1,1)$を同相写像とする。\footnote{同相写像ならばなんでも良い。}すると$h\circ f$は$A$から$(-1,1)$への連続関数だが、$A$から$[-1,1]$への連続関数と考える事もできる。そう考えたときに上の拡張定理を用いて$h\circ f$の$X$への拡張$F:X\to [-1,1]$が得られる。このとき$x\in A$について$F(x)\in (-1,1)$に注意すると$L=F^{-1}(\{-1,1\})$について$A\cap L=\O$である。よってウリゾーンの補題から連続関数$\phi:X\to [0,1]$が存在して
+\[
+\phi|A=1,\ \phi|L=0
+\]
+を充たす。すると連続関数$G=\phi \times F$と置けば\footnote{関数の各値で、$\rr$の掛け算を行なっているということである。}$\phi$の定義から$-1$と$1$の値を取らないのでこれは連続関数
+$G:X\to (-1,1)$と考える事が出来る。そして$g=h^{-1}\circ G$と置けば$g$は$f$の拡張となっている。
+\end{proof}
+
+
+\section{正規性の特徴付け}
+
+\begin{df}
+位相空間$X$について、$F$, $G$をその互いに素な任意の２つの閉集合とする
+このとき連続関数$f:X\rightarrow [0,1]$が存在し
+\[
+f|F=1,\ f|G=0
+\]
+を充すとき、$X$は条件 $(U)$を充すという。
+\end{df}
+
+\setcounter{equation}{0}
+\begin{df}
+位相空間$X$について、任意の$X$の閉集合$A$と$A$上の連続関数$f:A\to [0,1]$に対して、連続関数$g:X\to [0,1]$が存在して
+\[
+g|A=f
+\]
+を充たすとき$X$は条件$(T)$を充たすという。
+\end{df}
+
+\begin{df}
+位相空間$X$について、任意の$X$の閉集合$A$と$A$上の連続関数$f:A\to \rr$に対して、連続関数$g:X\to \rr$が存在して
+\[
+g|A=f
+\]
+を充たすとき$X$は条件$(R)$を充たすという。
+\end{df}
+
+\begin{thm}
+位相空間$X$について以下は同値である。
+\begin{align}
+&\mbox{正規性}\\ 
+&\mbox{条件$(U)$を充たす}\\ 
+&\mbox{条件$(T)$を充たす}\\
+&\mbox{条件$(R)$を充たす}
+\end{align}
+\end{thm}
+
+\begin{proof}
+$(1)\To (2),\ (1)\To (3),(1)\To(4)$は先のセクションで示されている。\par
+$(3)$を仮定したとき互いに交わらない２つの閉集合$E,F$について関数$f:E\cup F\to [0,1]$を$E$上で$0$、$F$上で$1$の値を取る関数とすればこれは連続関数で$(3)$を用いれば連続関数$g:X\to [0,1]$で$g|E\equiv 0,\ g|F\equiv 1$となる関数が得られるので$(2)$が成り立つ。\par
+$(4)$を仮定した時には上の$(3)\To(2)$と同じ議論だが、最後の$g$のコドメインが$[0,1]$か分からないが、$\min(1,\max(0,g))$という風に修正すれば$(4)\To(2)$がわかる。\par
+以上から$(3)\To(2),\ (4)\To (2)$が得られたので最後に$(2)\To(1)$を示せば良い\par
+交わらない２つの閉集合$E,F$について$f|E\equiv 0,\ f|F\equiv 1$となる連続関数$f:\to [0,1]$について、$U=f^{-1}([0,1/2)),\ V=f^{-1}((1/2,1])$を考えれば$U,V$は互いに交わらない開集合で$E\subset U,\ F\subset V$なので結局$(2)\To (1)$が成り立つ。
+\end{proof}
+
+\begin{df}[$\aleph_0$-族正規性もしくは可算族正規性]
+位相空間$X$が$\aleph_0$-族正規であるとは$X$の閉集合からなる任意の{\bf 可算で}疎な族$\mathcal{A}$に対して$A\subset U_A$となる開集合の族$\{U_{A}\ |\ A\in \mathcal{A}\}$が存在して
+\[
+A\neq B\To U_A\cap U_B=\O
+\]
+が成り立つことである。\footnote{$T_1$は要請しないことにする}明らかに$\aleph_0$-族正規空間は正規である。
+
+\end{df}
+\begin{thm}
+位相空間$X$に於いて正規性と$\aleph_0$-族正規性は同値
+\end{thm}
+\begin{proof}
+正規空間が$\aleph_0$-族正規であることを示せばいい。$\{A_n\}_{n\in \nn}$を閉集合からなる疎な族とする。ここで添字付について$n\ne m\To A_n\neq A_m$である。\par
+さて、
+\[
+f:\bigcup_{n\in \nn}A_n\to \rr
+\]
+を
+\[
+f|A_n=2n
+\]
+と定義しよう。$n,m$が異なれば$A_n$と$A_m$は交わらないのでこの定義はwell-definedであり、$\{A_n\}_{n\in \nn}$が疎であることから$\dpst \bigcup_{n\in \nn}A_n$は閉集合なのでティーチェの拡張定理その２から$f$の$X$への連続的な拡張$f$が存在する。そして
+\[
+U_n=f^{-1}((2n-1,2n+1))
+\]
+と置けば$A_n\subset U_n$で$\{U_n\}_{n\in \nn}$は互いに交わらないので正規空間$X$が$\aleph_0$-族正規であることがわかる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}松坂和夫,集合・位相入門,岩波書店,1968
+\bibitem{B}E. Bonan, \textit{Sur un lemme adapt\'e au th\'eor\`eme de Tietze-Urysohn}, C. R. Acad. Sci. Paris, Ser. A., 270 (1970), 1226-1228 .
+\bibitem{o} E. Ossa,{\it A simple proof of the Tietze-Urysohn extension theorem}, Arch. Math., vol.71(1998), pp331-332.
+\bibitem{2}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+\begin{comment}
+%タンジェントトポロジーの完全正則性
+\begin{df}[tangent harf plane]
+$H=\{(x,y)\in \rr^2\ |\ y\ge0\}$とし、この$H$に$S=\{(x,y)\in\rr^2 \ |\ y>0\}$の点には普通のユークリッド平面に於ける基本近傍系を、$L=\{(x,y)\in\rr^2 \ |\ y=0\}$の点$p\in L$には$S$内の$p$に接する開円板$U$について$U\cup\{p\}$全体を基本近傍系とする位相を定義する。この用に位相が定義できることは簡単に分かる。この$H$をtangent harf plane topology という
+\end{df}
+\begin{prop}
+位相空間$H$は完全正則
+\end{prop}
+\begin{proof}$a\in \rr$を適当な点とし、$U_r=\{z\in \rr^2\ |\ \|z-a\|<r\}$で$U_r\subset S$が成り立っているものとすし、$U_r$は点$p\in L$に接しているとする。このとき$B_r(p)=U_r\cup \{p\}$と置くと
+\[
+\cl(B_r(p))=\{z\in \rr^2\ |\ \|z-a\|\le r\}
+\]
+が成り立つ。この事の証明はそんなに難しくない。すると$s<t$ならば
+\[
+B_s(p)\subset B_r(p)
+\]
+が成り立つ。この事から十分小さい$\ep$を取ると連続関数$f:X\to [0,1]$が存在して
+\[
+f(p)=0,\ f|X\setminus B_{\ep}(p)=1
+\]
+が成り立つ。$p\in L$とこの点を含まない閉集合$A$について十分小さい$\ep$を取るともちろん
+\[
+B_{\ep}(p)\cap A=\O
+\]
+が成り立つので$p\in L$と$A$が関数で分離できる事がわかった。$p\in S$のときは明らかに$p$を含まない閉集合と分離できるので結局
+$H$が完全正則であることが分かる。
+\end{proof}
+
+
+
+%G/Hは完全正則
+\begin{thm}
+位相群$G$とその部分群$H$について$\qt{G}{H}$に商位相を定義する。このとき$\qt{G}{H}$は完全正則である。
+\end{thm}
+%一様空間は完全正則
+\begin{thm}
+一様空間は完全正則
+\end{thm}
+\begin{proof}
+一様空間$(X,\mathfrak{U})$の互いに素な一点$x$と閉集合Fについてある近縁$Uで$
+\[
+x \in U(x)\subset X\backslash F
+\]
+となるものが存在する。そして近縁の列$\{U_{n}\}_{n\in \mathbb{N}}$で
+\[
+U_{0}=U,\ U_{n+1}\circ U_{n+1}\subset U_{n}
+\]
+を充たすものが存在する。ところで、有限桁の２進数全体を$D$とする。$r\in D$は有限個の自然数$n_{1}<n_{2}\cdots <n_{k}$を用いて
+\[
+r=\sum_{i=1}^{k}\frac{1}{2^{n_{i}}}=\frac{1}{2^{n_{1}}}+\frac{1}{2^{n_{2}}}+\cdots+\frac{1}{2^{n_{k}}}
+\]
+と表される。そこでこの$r$について
+\[
+V_r=U_{n_{k}}\circ U_{n_{k-1}}\circ \cdots \circ U_{n_{1}}
+\]
+と定義する。($\{n_{i}\}の$向きに注意)このとき
+\[
+r,s\in D,r<s\Rightarrow V_r\subset V_s
+\]
+これよりすこし強く	
+\[
+\bar{V_r}(x)\subset V_s(x)
+\]
+が成立する。
+\end{proof}
+\end{comment}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

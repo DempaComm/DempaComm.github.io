@@ -1,0 +1,267 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{単位閉区間が非空な可算個の閉集合の直和で書けないこと。}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では単位閉区間が非空な閉集合からなる可算族の直和で書けないことを証明する。このことは連続体、つまり、連結ハウスドルフ空間に対するシェルピンスキーの定理の特別な場合である。
+\begin{thm}
+$I=[0,1]$は非空な開集合からなる可算族の直和で書けない。
+\end{thm}
+\begin{proof}
+背理法による。$\{A_n\}_{n\in \nn}$を非空な閉集合の可算族とし、更に互いに交わらないとして、$\dpst I=\coprod_{n\in \nn}A_n$となっているとする。
+ここで
+\[
+O=\coprod_{n\in \nn}\nai(A_n)
+\]
+とすると、これは開集合であり、$\{A_n\}$が互いに交わらないことから
+\[
+F=I\setminus O=\coprod_{n\in \nn}(A_n\setminus \nai A_n)=\coprod_{n\in \nn}\bd(A_n)
+\]
+は閉集合になる。ここで、
+\[
+\forall n\in\nn\  \nai_{F}(\bd A_n)=\O
+\]
+をこれから示そう。ここで$\nai_F$は$F$における内核を表す。このことを示すには、任意の$a\in \bd A_n$に対して
+\[
+\forall\ep>0\ \exists j\in \nn\ (j\neq n)\land((a-\ep,a+\ep)\cap\bd A_j\neq \O)
+\]
+を示せば良い。
+$a$は$A_n$の境界点で、$\{A_n\}_{n\in \nn}$は互いに素な$I$の被覆を成しているので、
+\[
+\forall\ep>0\ \exists j\in \nn\ (j\neq n)\land((a-\ep,a+\ep)\cap A_j\neq \O)
+\]
+が成り立つ。
+$y\in (a-\ep,a+\ep)\cap A_j$を取ろう。更に$y<a$と仮定する\footnote{このように仮定しても一般性を失わないのは以下の証明を見ればわかる。}。
+$y\in \bd A_j$ならば、何もすることはない。
+$y\not\in \bd A_j$、つまり$y\in \nai A_j$としよう。このとき
+\[
+[y,\delta)\subset A_j
+\]
+を充たす$\delta$全体の$\sup$を$\eta$としよう。つまり
+\[
+\eta=\sup\{\delta\ |\ [y,\delta)\subset A_j\}
+\]
+としよう。もちろん
+\[
+[y,\eta)\subset A_j
+\]
+も成り立つ。$\{A_n\}_{n\in \nn}$は互いに素であり、$y<a$と仮定しているので
+\[
+y<\eta<a
+\]
+でなければならない。そして
+\[
+a-\ep <y<\eta <a
+\]
+なので
+\[
+\eta\in (a-\ep,a+\ep)
+\]
+である。また、$\eta$の最大性から$\eta\in \bd A_j$なので、結局
+\[
+(a-\ep,a+\ep)\cap \bd A_j\neq \O
+\]
+である。
+よって以上から$\dpst F=\coprod_{n\in \nn}\bd(A_n)$において各$\bd A_n$は内点を持たないことがわかった。
+しかし、これはBaireの範疇定理に反する。\footnote{$F$は完備距離空間の閉集合なので完備距離空間であるから範疇定理が成り立つはずである。}
+\end{proof}
+上の定理から直ちに次のことが分かる。
+\begin{cor}
+可算な$T_1$空閑は弧状連結ではない。
+\end{cor}
+
+
+これに対して、連結ハウスドルフ可算空間は存在する。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

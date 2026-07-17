@@ -1,0 +1,201 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\newcommand{\bb}{\mathfrak{B}}
+\newcommand{\ccc}{\mathfrak{C}}
+\newcommand{\ff}{\mathfrak{F}}
+\newcommand{\card}{\text{{\rm card}}}
+
+\title{可分距離空間の閉集合全体の濃度}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+
+\begin{prop}[距離と閉包]
+\[
+x\in \bar{A}\iff d(x,A)=0
+\]
+\end{prop}
+
+\begin{proof}
+$d(x,A)$は$x$についての連続関数であるので、$S=\{x\in X\ |\ d(x,A)=0\}$は閉集合であり、$a\in A$ならば$d(a,A)=0$なので$A\subset S$であり、
+\[
+\bar{A}\subset S
+\]
+逆に$s\in S$について$d(s,A)=0$なので任意の$\varepsilon>0$について
+\[
+\exists a\in A\ d(s.a)<\varepsilon
+\]
+つまり
+\[
+\forall \varepsilon >0\  B(s,\varepsilon)\cap A\neq \emptyset
+\]であり
+\[
+S\subset \bar{A}
+\]
+が従う。
+\end{proof}
+
+\begin{fact}距離空間に於いて次は同値。
+
+\begin{eqnarray}
+&可分性\\ 
+&第二可算公理\\ 
+&リンデレフ性
+\end{eqnarray}
+
+\end{fact}
+\begin{cau}
+実は距離空間においてC.C.C.（可算鎖条件）もこれらと同値になる。
+\end{cau}
+
+以降可分距離空間と言った時には上の同値な条件を断りなく自由に用いる。
+
+\begin{thm}[可分距離空間の閉集合の濃度]
+可分距離空間の閉集合全体のの濃度は連続体を超えない。
+
+\end{thm}
+\begin{proof}考えるky理空間を$(X,d)$とし、その閉集合全体を$\ff$と書くことにする。$X$は第二可算なので高々可算な開基が存在するその一つを$\bb$とする。\\ 
+閉集合$A$のについて$A_n$を帰納的に以下のように定義する。\\ 
+$A_1$は$\bb$の元のうち、$A$と交わる直径が$1$以下のもの全体の和集合。\\ 
+$A_n$まで定義されたとして$A_{n+1}$を$\bb$の元のうち、$A_n$に含まれ$A$と共通部分を持つ直径が$\dfrac{1}{n+1}$以下のもの全体の和集合とする。この時命題1より
+\[
+\bigcap_{n\in \nn}A_n=A
+\]
+が成立する。いま
+\[
+\ccc=\{S\subset X\ |\ Sは\bb の元の高々可算個の和集合\}
+\]とすると$\ccc$は高々連続体濃度である。さて、
+$\bb$は高々可算な集合なので各$A_n$は$\bb$の元の高々可算な集合の和集合である。よって$A_n\in \ccc$
+ところで
+\[
+M: \ff \to \ccc^\nn 
+\]
+を$A\in \ff$にたいして最初に定義した可算個の集合の組$(A_n)_{n\in \nn}$に対応させる写像として定義する。この時この写像$M$は単射である。なぜなら$(A_n)=(B_n)$ならば、$\dpst \bigcap_{n\in \nn}A_n=\bigcap_{n\in \nn}B_n$だからである。さて$\ccc$が高々連続体であることから
+\[
+\card(\ccc^{\nn})=\card(\ccc)^{\aleph_0}\le \mathfrak{c}^{\aleph_0}=\mathfrak{c}
+\]
+なので$\ff$は高々連続体濃度である。
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+%\begin{thebibliography}{9}
+%\bibitem{1}
+
+%\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

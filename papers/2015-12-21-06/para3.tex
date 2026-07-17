@@ -1,0 +1,491 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage[all]{xy}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{パラコンパクト等々3}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+%閉包保存の定義
+\begin{df}[閉包保存]
+位相空間$X$の部分集合族$\mathcal{A}$が閉包保存であるとは任意の$\mathcal{B}\subset \mathcal{A}$について
+\[
+\bigcup_{B\in \mathcal{B}}CL(B)=CL(\bigcup_{B\in \mathcal{B}}B)
+\]
+を充たすこと。明らかに局所有限な族は閉包保存である。
+\end{df}
+
+%クッション細分の定義
+\begin{df}
+位相空間$X$の族$\{U_{\al}\}_{\al\in A}$についてその細分$\{E_{\be}\}_{\be\in B}$が$\{U_{\al}\}_{\al\in A}$のクッション細分であるとは、写像$f:B\to A$が存在して$E_{\be}\subset U_{f(\be)}$を充たし任意の$C\subset B$について
+\[
+CL(\bigcup_{\gamma\in C}E_{\gamma})\subset \bigcup_{\gamma\in C}U_{f(\gamma)}
+\]
+を充たすこと。
+\end{df}
+
+%indexed refinment
+\begin{prop}[indexed refinement]
+位相空間$X$の族$\{U_{\al}\}_{\al\in A}$にクッション細分が存在するとき添字が$A$と両立するクッション細分が存在する。すなわち$\{U_{\al}\}_{\al\in A}$のクッション細分$\{F_{\al}\}_{\al\in A}$で$F_{\al}\subset U_A$を充たし、任意の$I\subset A$について
+\[
+CL(\bigcup_{i\in I}F_{i})\subset \bigcup_{i\in I}U_i
+\]
+\end{prop}
+\begin{proof}
+$\{U_{\al}\}_{\al\in A}$にはクッション細分$\{E_{\be}\}_{\be\in B}$とそのクッション性を表す写像$f:B\to A$が存在するが、このとき$\al\in A$について
+\[
+F_{\al}=\bigcup_{f(\be)=\al}E_{\be}
+\]
+と置けば求めるクッション細分になっている。\footnote{$F_{\al}=\O$となる場合も十分にありえることに注意せよ。}以下ではクッション細分という時には必ずこの命題で保証される添字と両立するクッション細分を考えることにする。
+\end{proof}
+%σなんちゃら
+\begin{df}
+位相空間$X$の部分集合族$\mathcal{A}$が$\sigma$閉包保存であるとは高々可算個の閉包保存な族$\mathcal{U}_1,\ \mathcal{U}_2,\cdots\ \mathcal{U}_n\cdots$が存在して
+\[
+\mathcal{A}=\bigcup_{i\in \nn}\mathcal{U}_i
+\]
+となることである。\footnote{文脈的に明らかであろうが、$\mathcal{U}$の元の和集合を表す記号$\dpst \bigcup\mathcal{U}=\bigcup_{U\in \mathcal{U}}U$とは違うので注意せよ。紛らわしいが、文脈的にわかるはずなので今後もこういう書き方をする。$\bigcup\mathcal{U}$も使う。}\par
+同様に$\sigma$クッション細分も定義する。
+\end{df}
+
+%
+\begin{thm}
+$T_3$空間に於いて以下は同値である。
+\begin{align}
+&\mbox{$X$はパラコンパクト}\\
+&\mbox{$X$の任意の開被覆には被覆である閉包保存な開細分が存在する}\\
+&\mbox{$X$の任意の開被覆には被覆である閉包保存な閉細分が存在する}\\
+&\mbox{$X$の任意の開被覆には被覆である閉包保存な（開とも閉とも限らない）細分が存在する}\\
+&\mbox{$X$の任意の開被覆には被覆である開集合からなるクッション細分が存在する}\\
+&\mbox{$X$の任意の開被覆には被覆である閉集合からなるクッション細分が存在する}\\
+&\mbox{$X$の任意の開被覆には被覆である（開とも開とも限らない集合からなる）クッション細分が存在する}
+\end{align}
+\end{thm}
+\begin{proof}$T_3$を用いれば$(4)\To(7)$が簡単にわかるので、
+以下の論理包含関係は明らかであろう。
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+よって$(7)\To(1)$をだけを示せばこの定理の証明は終わる。以下$(7)$を仮定して$(1)$を示す。開被覆$\{U_a\}_{a\in A}$を任意に与えこれの$\sigma$局所有限な開細分被覆を構成すればよい。また、添字集合$A$は整列されているとする。\par
+step0：$X$は$T_4$である。\par
+$E,F$を素な$X$の２つの閉集合とする。このとき$\{X\setminus E,X\setminus F\}$は$X$の開被覆になっているのでそのクッション細分である被覆$\{N,M\}$が存在する。そのクッション性から
+\[
+CL(N)\subset X\setminus E,\ CL(M)\subset X\setminus F
+\]
+を充たす。さてこのとき$U=X\setminus CL(N),\ V=X\setminus CL(M)$とおけばこの２つは開集合で$E\subset U,\ F\subset V$であり$U\cap V=X\setminus (CL(N)\cup CL(M))=\O$なので結局$X$は正規である。
+\par step1:以下を充たす$\{U_\al\}_{\al\in A}$のクッション細分の列$\{C_{\al,i}\}_{\al\in A}\ (i\in \nn)$が存在する。
+\begin{align}
+\left(\bigcup_{\beta <\alpha }C_{\beta,i}\right)\cap C_{\alpha,i+1}=\O\tag{a}\\ 
+C_{\alpha , i}\cap\left(\bigcup_{\alpha <\beta}C_{\alpha,i+1}\right)=\O\tag{b}
+\end{align}
+帰納的に$\{C_{\al,i}\}_{\al\in A}$を構成しよう。\par
+$i=1$のとき：$\{C_{\al,1}\}_{\al\in A}$は特に条件を付けず、$(7)$から存在が保証される$\{U_\al\}_{\al\in A}$のクッション細分とする。
+$i=n$まで$\{C_{\al,i}\}_{\al\in A}$が構成されているとして$i=n+1$のとき：
+\[
+U_{\al.n+1}=U_{\al}\setminus CL\left(\bigcup_{\be<\al}C_{\be ,n}\right)
+\]
+として開集合の族$\{U_{\al,n+1}\}_{\al\in A}$を定義する。$x\in X$を任意に与え$\al$を$x\in U_{\al}$ととなる最小の$A$の元とすると
+\[
+CL\left(\bigcup_{\be<\al}C_{\be ,n}\right)\subset \left(\bigcup_{\be<\al}U_{\be }\right)
+\]
+から$x\in U_{\al,n+1}$なので$\{U_{\al,n+1}\}_{\al\in A}$は$X$の開被覆となる。$(7)$から$\{U_{\al,n+1}\}_{\al\in A}$のクッション細分である被覆$\{C_{\al,n+1}\}_{\al\in A}$が存在する。これが上に挙げた条件$({\rm a}),\ ({\rm b})$を充たすことを見よう。
+\[
+C_{\al,n+1}\subset U_{\al.n+1}=U_{\al}\setminus CL\left(\bigcup_{\be<\al}C_{\be ,n}\right)
+\]
+から$(a)$が成り立つのはよく分かる。\par
+$\be>\al$なら$U_{\al,n+1}$の定義から$C_{\al,n}\cap U_{\be,n+1}=\O$でありかつ、$\{C_{\al,n+1}\}_{\al\in A}$のクッション性から
+\[
+CL\left(\bigcup_{\al<\be }C_{\be,n+1}\right)\subset \bigcup_{\al<\be }U_{\be,n+1}
+\]
+なので確かに$(b)$が成立する。
+\par step2：以下の条件を充たす開被覆$\{V_{\alpha ,i}\ |\ \alpha\in A,i\in \nn\}$が存在する。
+\begin{align}
+\forall \al\in A\ V_{\alpha,i}\subset U_{\alpha}\tag{c}\\
+\alpha \neq \beta\To V_{\alpha,i}\cap V_{\beta,i}=\O\tag{d}
+\end{align}
+任意の$\al\in A$と$i\in \nn$について
+\[
+V_{\al,i}=X\setminus CL\left(\bigcup_{\be\neq\al}C_{\be,i}\right)
+\]
+と定義するとこれは開集合である。$i$毎に$\{C_{\al,i}\}_{\al\in A}$は$X$の被覆なので
+\[
+V_{\al,i}\subset C_{\al,i}\subset U_{\al}
+\]
+が成立する。この事から$({\rm c}),\ ({\rm d})$が成立することは見やすい。最後に$\{V_{\alpha ,i}\ |\ \alpha\in A,i\in \nn\}$が被覆であることを証明しよう。$x\in X$を任意に与えよう。そして$A$が整列集合であることを使って
+\[
+\al_{i}=\min\{\al\in A\ |\ x\in C_{\al,i}\}
+\]
+と定義しよう。そして自然数$k\in \nn$を
+\[
+\al_{k}=\min\{\al_{i}\ |\ i\in \nn\}
+\]
+を充たすようなものとしよう。このとき
+\[
+x\in V_{\al_{k},k+1}
+\]
+を証明しよう。まず定義から$x\in C_{\al_{k},k}$となることがわかる。このとき$(b)$から
+\begin{align}
+\ x\not\in CL\left(\bigcup_{\al_{k}<\al}C_{\al,k+1}\right)\tag{hoge}
+\end{align}
+である。再び$\al_k$の定義からある$\gamma\ge \al_{k}$について$x\in C_{\gamma,k+2}$が成り立つ。そして$(a)$から
+\[
+x\not\in CL\left(\bigcup_{\be<\gamma}C_{\be,k+1}\right)
+\]
+このとき$(hoge)$から$\{C_{\al,k+1}\}_{\al\in A}$が被覆を成していると言うことから$\gamma=\al_k$でなければならない。よって
+\[
+x\not\in CL\left(\bigcup_{\be<\al_{k}}C_{\be,k+1}\right)
+\]
+であり、確かに$x\in V_{\al_k,k+1}$である。
+\par step3:$\{U_{\alpha}\}_{\alpha\in A}$には$\sigma$局所有限な開被覆となる細分が存在する。
+step2で得られた$\{V_{\alpha ,i}\ |\ \alpha\in A,i\in \nn\}$に対して$(7)$を用いてこの被覆のクッション細分被覆$\{D_{\al,i}\ |\ \al\in A,\ i\in\nn\}$を得る。このとき$X$の正規性から各$i$について
+\[
+CL\left(\bigcup_{\al\in A}D_{\al,i}\right)\subset G_i\subset CL(G_i)\subset  \bigcup_{\al\in A}V_{\al,i}
+\]
+となる$G_i$を得る。この時$\mathcal{W}_i=\{V_{\al,i}\cap G_i\}$と置けば$\mathcal{W}_i$は開集合からなる疎な族となり、
+\[
+\bigcup_{i\in \nn}\mathcal{W}_i
+\]
+は開被覆で$\sigma$疎で$\{U_{\al}\}_{\al\in A}$の細分となっている。
+\par 結局任意の開被覆に$\sigma$局所有限な開被覆となる細分が存在する$T_3$空間はパラコンパクトなので結局$X$はパラコンパクトである。
+\end{proof}
+
+\begin{cor}
+パラコンパクトハウスドルフ空間の閉像はパラコンパクトハウスドルフ
+\end{cor}
+\begin{proof}
+全射閉写像$f:X\to Y$について$X$がパラコンパクトハウスドルフのとき$Y$がパラコンパクトハウスドルフである事を示そう。パラコンパクトハウスドルフ空間は$T_4$なのでその閉像である$Y$も$T_4$であり、特に$T_3$である。$Y$の任意の開被覆についてクッション細分被覆が存在することを言おう。$Y$の任意の開被覆$\{U_{\al}\}_{\al\in A}$を与える。この時$\{f^{-1}(U_{\al})\}_{\al\in A}$は$X$の開被覆であるので先の定理からこの被覆のクッション細分被覆$\{E_{\al}\}_{\al\in A}$が存在するさて任意の$B\subset A$について
+\[
+CL_X(\bigcup_{b\in B}E_{b})\subset \bigcup_{b\in B}f^{-1}(U_b)
+\]
+が成り立つ。\footnote{閉写像$f;X\to Y$について$f(CL_X(M))=CL_Yf(M)$となることに注意しよう。}よって$f$で写すと
+\[
+f\left(CL_X(\bigcup_{b\in B}E_{b})\right)=CL_Y\left(\bigcup_{b\in B}f(E_{b})\right)\subset \bigcup_{b\in B}U_b
+\]
+が成り立つ。故に$\{f(E_{\al})\}_{\al\in A}$は$\{U_{\al}\}_{\al\in A}$のクッション細分被覆になる。よって先の定理から$Y$はパラコンパクトである。
+\end{proof}
+
+
+\setcounter{equation}{0}
+\begin{thm}
+$T_3$空間に於いて以下は同値
+\begin{align}
+&\mbox{$X$はパラコンパクト}\\
+&\mbox{$X$の任意の開被覆には$\sigma$閉包保存な開細分被覆が存在する}\\
+&\mbox{$X$の任意の開被覆には$\sigma$クッション細分開被覆が存在する}
+\end{align}
+\end{thm}
+\begin{proof}
+$T_3$を用いれば$(2)\To (3)$がわかるので
+\begin{align*}
+(1)\To(2)\To(3)
+\end{align*}
+は明らかであろう。よって$(3)\To(1)$を示せば良い。任意の開被覆にクッション細分開被覆が存在する事を示す。\par
+$\mathcal{U}$を任意の被覆としその$\sigma$クッション細分開被覆を
+\[
+\mathcal{A}=\bigcup_{i\in \nn}\mathcal{B}_i\ \mbox{（各$\mathcal{B}_i$はクッション細分）}
+\]と書こう。そして$O_i=\bigcup\mathcal{B}_i$とし、$A_i$を帰納的に
+\[
+A_1=B_1,\ A_n=B_n\setminus \left(\bigcup_{i=1}^{n-1}B_i\right)
+\]
+と置くと$B_i$が開集合であることから$\{A_i\}_{i\in \nn}$は局所有限であり、$X$の被覆である。そして
+\[
+\mathcal{C}=\{A_i\cap B\ |\ B\in \mathcal{B}_i,\ i\in \nn\}
+\]とする。$\mathcal{C}$がクッション細分被覆であることを見よう。まず$X$を被覆することについては各$x\in X$について$x\in B_i$となる最小の$i$を選べば、$x\in A_i$であり、更にある$B\in \mathcal{B}_i$について$x\in B$であるから$x\in A_i\cap B$となるので確かに被覆であることがわかる。\par
+$\mathcal{C}$がクッション細分であることを見よう。$\mathcal{C}_i=\{A_i\cap B\ |\ B\in \mathcal{B}_i\}$と置けば
+\begin{align}
+\mathcal{C}=\bigcup_{i\in \nn}\mathcal{C}_i\tag{hogehoge}
+\end{align}
+であり、任意の$\mathcal{I}\subset \mathcal{C}$について、分解$({\rm hogehoge})$に応じて$\mathcal{I}=\bigcup_{i\in \nn}\mathcal{I}_i$と分解すると
+\[
+CL\left(\bigcup_{C\in \mathcal{I}}C\right)=CL\left(\bigcup_{i\in \nn}\bigcup_{C\in \mathcal{I}_i}C\right)
+\]
+であり、$\{A_i\}_{i\in \nn}$の局所有限生に由来して$\dpst \{\bigcup_{C\in \mathcal{I}_1}C,\bigcup_{C\in \mathcal{I}_2}C,\cdots,\bigcup_{C\in \mathcal{I}_n}C,\cdots\}$は局所有限であるから
+\[
+CL\left(\bigcup_{i\in \nn}\bigcup_{C\in \mathcal{I}_i}C\right)=\bigcup_{i\in \nn}CL\left(\bigcup_{C\in \mathcal{I}_i}C\right)\subset \bigcup_{i\in \nn}\bigcup_{C\in \mathcal{I}_i}U_C=\bigcup_{C\in I}U_C
+\]
+なので結局
+\[
+CL\left(\bigcup_{C\in \mathcal{I}}C\right)\subset \bigcup_{C\in I}U_C
+\]となり$\mathcal{C}$がクッション細分であることがわかる。
+\end{proof}
+
+\begin{fact}[shrinkage lemma]\label{normal}
+正規空間$X$の任意の局所有限開被覆$\mathcal{U}$について$X$の閉被覆$\{F_U\ |\ U\in \mathcal{U}\}$が存在して
+\[
+F_U\subset U
+\]
+を充たす。もちろんこのとき$\{F_U\ |\ U\in \mathcal{U}\}$は局所有限である。
+\end{fact}
+\begin{df}[星型集合]
+集合$X$とその部分集合族$\mathcal{A}$、及び$S\subset X$について
+\[
+St(S,\mathcal{A})=\bigcup\{A\ |\ A\in \mathcal{A},\ S\cap A\neq\O\}
+\]
+を$\mathcal{A}$による$S$を中心とする星型集合という。
+\end{df}
+\begin{df}[星型細分、$\Delta$細分]
+集合$X$の部分集合族$\mathcal{A}$について$\mathcal{B}$が$\mathcal{A}$の星型細分であるとは集合族\\$\{St(B,\mathcal{B})\ |\ B\in \mathcal{B}\}$が$\mathcal{A}$の細分となることである。\par
+また、集合$X$の部分集合族$\mathcal{A}$について$\mathcal{B}$が$\mathcal{A}$の$\Delta$細分であるとは集合族$\{St(x,\mathcal{B})\ |\ x\in X\}$が$\mathcal{A}$の細分となることである。
+\end{df}
+\setcounter{equation}{0}
+\begin{thm}[本来のStoneの定理]\label{stone}\footnote{Stoneの定理と言うと距離空間のパラコンパクト性のことであるが、それが証明されたA.H.Stoneの論文\cite{stone}ではfull normalityとパラコンパクト性が同値であると言う形でそれが示されていた。おまけで示すように距離空間はfully normalなのである。}
+以下は同値である。\footnote{今まで$T_3$であるという仮定を置いていたが、この命題の場合それは必要ない。勝手に$T_3$になってくれる。}
+\begin{align}
+&\mbox{$X$はパラコンパクトハウスドルフ}\\
+&\mbox{$X$は$T_1$で$X$の任意の開被覆には開被覆である$\Delta$細分が存在する（この条件をFully normalという）}\\
+&\mbox{$X$は$T_1$で$X$の任意の開被覆には開被覆である星型細分が存在する}
+\end{align}
+\end{thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}地道に示す。\par 
+[$(1)\To(2)$の証明]\par 
+$X$が$T_1$なのは明白である。Full normalityを示そう。局所有限開被覆に$\Delta$開細分被覆が存在することを言えば良い。$\mathcal{U}$を任意の局所有限開被覆としよう。事実\ref{normal}から存在が保証される閉被覆を$\{F_U\ |\ U\in \mathcal{U}\}$とし、各点$X\in X$について$\mathcal{U}$の局所有限性を担保する近傍を$V(x)$と、選択しておく。次に各点$x\in X$について
+\[
+A(x)=\{U\in \mathcal{U}\ |\ V(x)\cap U\neq \O\},\ B(x)=\{U\in \mathcal{U}\ |\ x\in U\},\ C(x)=\{U\in A(x)\ |\ x\not\in F_U\}
+\]
+と置くと、$F_U\subset U$から$A(x)=B(x)\cup C(x)$である。さて
+\[
+W(x)=V(x)\cap \bigcap_{S\in B(x)}S\cap \bigcap_{T\in C(x)}\left(X\setminus F_T\right)
+\]
+と定義すると、局所有限性から開集合であり、$x\in W(x)$なので$\mathcal{W}=\{W(x)\}_{x\in X}$は開被覆となっている。$\mathcal{W}$が$\mathcal{U}$の$\Delta$細分となることを見よう。まず任意に$y\in X$を与えると$\{F_U\ |\ U\in \mathcal{U}\}$が被覆なので$y\in F_{U}$となる$U\in \mathcal{U}$が存在する。このとき$U\in B(y)$なので
+\[
+W(y)\subset U
+\]
+である。さて$\mathcal{W}$が$\mathcal{U}$の細分であることを示すには、うえの$U$について
+\[
+y\in W(x)\To W(x)\subset U
+\]
+がわかれば良い。実際$y\in W(x)$ならば$W(x)\cap U\neq \O$なので$U\in A(x)$であるが、$W(x)\cap F_U\neq\O$でもあるので$U\not\in C(x)$となるから$U\in B(x)$である。よって定義から明らかに$W(x)\subset U$なので証明が完結した。
+\par[$(1)\To(2)$の証明終わり]\par
+\par[$(2)\To(3)$の証明]\par 
+$\mathcal{U}$の開被覆である$\Delta$細分を$\mathcal{A}$として、更に$\mathcal{A}$の開被覆である$\Delta$細分を$\mathcal{B}$とする。このとき$\mathcal{B}$が$\mathcal{U}$の星型細分であることを示そう。\par
+$V\in \mathcal{B}$について$x\in V$を適当に選ぶ。ところで$B\in \mathcal{B}$でかつ$V\cap B\neq \O$ならば$\mathcal{B}$が$\mathcal{A}$の$\Delta$細分であることから、ある$A\in \mathcal{A}$が存在して$V\cup B\subset A$となる。このとき$x\in A$であるので結局
+\[
+St(V,\mathcal{B})\subset St(x,\mathcal{A})
+\]
+である。この事と$\mathcal{A}$は$\mathcal{U}$の$\Delta$細分である事から$\mathcal{B}$は$\mathcal{U}$の星型細分である。
+\par[$(2)\To(3)$の証明終わり]\par
+[$(3)\To(1)$の証明]\par
+step0:$X$は正規である。\par
+$E,F$を$X$の交わらない２つの閉集合とする。このとき$\{X\setminus E,X\setminus F\}$は$X$の開被覆であるので$(3)$からこの被覆の、星型細分開被覆$\mathcal{V}$が存在する。さて
+\[
+P=St(E,\mathcal{V}),\ Q=St(F,\mathcal{V})
+\]と置くとこの２つは開集合で$E\subset P,F\subset Q$である。ここでもし$P\cap Q\neq \O$とするとある$A,B\in \mathcal{V}$が存在して$A\cap E\neq\O,\ B\cap F\neq \O$で$A\cap B\neq\O$となるが、同時に$St(A,\mathcal{V})\cap E\neq \O,\ St(B,\mathcal{V})\cap F\neq \O$となってしまい、$\mathcal{V}$が$\{X\setminus E,X\setminus F\}$の星型細分であることに反する。よって
+\[
+P\cap Q=\O
+\]
+であり、$X$が正規だとわかる。\par
+step1:$X$の任意の開被覆にはクッション細分が存在する。\par
+$\mathcal{U}$を$X$の任意の開被覆とし$\mathcal{V}$をその星型細分開被覆とする。星型細分なので、写像$f\mathcal{V}\to \mathcal{U}$が存在して$V\in \mathcal{V}$に対して
+\[
+St(V,\mathcal{V})\subset U_V
+\]
+を充たす。\footnote{こういう選択関数が存在するということである。}ここで$f(V)=U_V$と書いた。さて、このとき次が成立する。任意の$\mathcal{A}\subset \mathcal{V}$について
+\begin{align}
+CL\left(\bigcup_{V\in \mathcal{A}}V\right)\subset \bigcup_{V\in \mathcal{A}}U_V\tag{brabra}
+\end{align}つまり$\mathcal{V}$はクッション細分である。\par
+理由を説明しよう。$\dpst x\in CL\left(\bigcup_{V\in \mathcal{A}}V\right)$を任意に与えると$x\in W$となる$W\in \mathcal{V}$について\footnote{$\mathcal{V}$は被覆なのでこういう$W$はちゃんと存在する}
+\[
+W\cap \left(\bigcup_{V\in \mathcal{A}}V\right)\neq \O
+\]
+となるつまりある$A\in \mathcal{A}$が存在して$W\cap A\neq \O$となる。さてこの時
+\[
+x\in W\subset St(A,\mathcal{V})\subset U_A
+\]
+なので確かに$({\rm brabra})$は成り立つ。\par
+以上から$X$は$T_3$空間であり、任意の開被覆にクッション細分が存在するので$X$はパラコンパクトハウスドルフである。
+\par[$(3)\To(1)$の証明終わり]\par  
+\end{proof}
+
+\S おまけ:本来ではないStoneの定理の別証明\par
+前回までで距離空間のパラコンパクト性は証明されているが、定理\ref{stone}を用いた別証明が出来る。距離空間のFull normalityを証明すれば良いのである。
+\begin{thm}[Tukey]
+距離空間はFully normal
+\end{thm}
+\begin{proof}$d$を$X$の距離とし、
+$B(c,r)$で$c$を中心とした$r$開球を表す。
+まずは次の簡単な事実を思い出そう。
+\[
+(\star):a\in B(c,r)\To B(c,r)\subset B(a,2r)
+\]
+さて$\mathcal{U}$を任意の開被覆とする。各点$x\in X$に対して関数$e(x)\in \rr$と$\mathcal{U}$も元$U_x$を
+\[
+0<e(x)<1,\ B(x,6e(x))\subset U_x
+\]
+を充たすように定める。このような$e(x)$と$U_x$は確かに存在する。さてこのとき
+\[
+\mathcal{B}=\{B(x,e(x))\}_{x\in X}
+\]
+が$\mathcal{U}$の$\Delta$細分であることを示そう。まず各点$a\in X$に対して
+\[
+H_a=\{x\ |\ a\in B(x,e(x))\}
+\]
+と置こう。次に$b\in H_a$を
+\[
+e(b)>\frac{2}{3}\sup_{x\in H_a}e(x)
+\]
+を充たすように取る。このとき$(\star)$を用いて任意の$x\in H_a$について
+\[
+B(x,e(x))\subset B(a,2e(x))
+\]
+がわかり、$\dpst e(b)>\frac{2}{3}e(x)$なので
+\[
+B(a,2e(x))\subset B(a,3e(b))
+\]
+がわかり結局
+\[
+B(x,e(x))\subset B(a,3e(b))
+\]
+がわかる。$b\in H_a$なので$a\in B(b,e(b))$であるから$b\in B(a,e(b))$であり、特に$b\in B(a,3e(b))$なので再び$(\star)$を用いて
+\[
+B(a,3e(b))\subset B(b,6e(b))\subset U_b
+\]
+であるから結局任意の$x\in H_a$について
+\[
+B(x,e(x))\subset U_b
+\]
+である。よって
+\[
+St(a,\mathcal{B})=\bigcup_{x\in H_a}B(x,e(x))\subset U_b
+\]
+なので$\mathcal{B}$は$\mathcal{U}$の$\Delta$細分開被覆となるので距離空間はFully normalである。
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}森田紀一,位相空間論,岩波全書331,岩波書店1981
+\bibitem{mi}E.Michael,{\it Another note on paracompact spaces },Proc.Amer.J,Math. ,8(1957) 822-828
+\bibitem{mi}E.Michael,{\it Yet another note on paracompact spaces },Proc.Amer.Math.Soc.,10(1959) 309-314
+\bibitem{pear}A.R.Pears,{\it DIMENSION THEORY OF GENERAL SPACES},Cambridge Univ.Press,1975
+\bibitem{stone}A.H.Stone,{\it Paracompactness and product spaces},Bull,Amer.Math Soc. 54(1948),977-982
+\bibitem{Tukey}J.W.Tukey,{\it Convergence and uniformity in topology},Annals of Mathematics Studies, \par no.2,Princeton,1940
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+\
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

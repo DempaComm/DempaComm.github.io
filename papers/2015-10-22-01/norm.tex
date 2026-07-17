@@ -1,0 +1,232 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\prn}[1]{\|#1\|_p}
+\newcommand{\trn}[1]{\|#1\|_2}
+\newcommand{\mrn}[1]{\|#1\|_{\mgn}}
+
+
+\newcommand{\nor}{n}
+\title{有限次元ノルム空間}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+%ノルムの定義
+\begin{df}[ノルム]
+線形空間$X$から$\rr$への写像
+$\nor:X\to \rr$がノルムであるとは任意の$x,y \in X,a\in \rr$に対して
+\begin{eqnarray}
+&\nor(x)\ge0\\ 
+&\nor(x)=0\iff x=0\\ 
+&\nor(ax)=|a|n(x)\\ 
+&\nor(x+y)\le \nor(x)+\nor(y)
+\end{eqnarray}
+を充たすこと。
+\end{df}
+
+
+%ノルムの無限大ノルムやらpノルムやら
+\begin{exam}[$p$-ノルム]実数$p\in [1,+\mgn)$について$N$次元ユークリッド空間$\rr^N$上の$p$-ノルム$\|\bullet\|_p$を
+\[
+\prn{x}=\left(\sum_{i=1}^N|x_{i}|^p\right)^{\frac{1}{p}}
+\]
+と定義すると、これは$\rr^N$上のノルムになっている。ただし$x_i$は$x$の標準的な基底での第$i$成分である。ノルムであることの証明は略する。手頃な本を開けば載っていると思う。
+\end{exam}
+\begin{cau}
+$2$-ノルムは通常のユークリッドノルムであり、位相空間としての$(\rr^N,\trn{\bullet})$は通常のユークリッド位相空間である。
+\end{cau}
+
+\begin{exam}[$\mgn$-ノルム]$N$次元ユークリッド空間$\rr^N$上の$\mgn$-ノルムを
+\[
+\mrn{x}=\max_{i}|x_i|
+\]
+と定義するとこれは$\rr^N$上のノルムとなっている。ここで$i$は$1,2,\cdots N$の範囲を動き、$x_i$は$x$の標準的な基底での第$i$成分である。
+
+\end{exam}
+
+%ノルムの同値性
+\begin{df}線型空間$X$上の2つのノルム$\nor_{1},\nor_{2}$
+が同値であるとはある正の実数$A.B>0$が存在して
+\[
+\forall x\in X\ A\nor_{1}(x)\le \nor_{2}(x)\le B\nor_{1}(x)
+\]
+となることである。
+\end{df}
+\begin{cau}
+$\nor_{1},\nor_{2}$が同値であると言う関係を
+$\nor_{1}\sim \nor_{2}$で書くと$\sim$は同値関係になっている。確かめるのは容易いことである。\\ 
+また、$X$上の2つのノルム$\nor_{1},\nor_{2}$が同値であるとき、その$2$つのノルムが定める位相は同じ位相となる。
+\end{cau}
+
+
+%同値な例
+
+\begin{exam}
+任意の$p\in[1,+\mgn)$に対して$p$-ノルムと$\mgn$-ノルムは同値となる。実際
+\[
+|x_i|\le\mrn{x}
+\]
+より
+\[
+\prn{x}\le \left(\sum_{i=1}^N\mrn{x}^p\right)^{\frac{1}{p}}\le \sqrt[p]{N}\mrn{x}
+\]
+であり、また明らかに
+\[
+|x_i|\le\left(\sum_{i=1}^N|x_{i}|^p\right)^{\frac{1}{p}}=\prn{x}
+\]
+なので
+\[
+\mrn{x}\le\prn{x}\le \sqrt[p]{N}\mrn{x}
+\]となり、同値であることがわかる。\\ 
+ノルムの同値性は同値関係になるので$p$-ノルム同士は同値であり、更に同じ同値類に$\mgn$-ノルムが入っている。特に$2$-ノルムと$\mgn$-ノルムは同値なので$\mgn$-ノルムと$2$-ノルムが定める$\rr^N$の位相は同じ位相である。つまり位相空間としての$(\rr^N,\mrn{\bullet})$は通常のユークリッド位相空間である。
+\end{exam}
+
+上では$p$-ノルムと$\mgn$-ノルムが同値であることを示したが、実は$\rr^N$上の任意のノルムが$\mgn$-ノルムに同値であることを示そう。ノルムが同値であるとう言う関係は同値関係だったので、$\rr^N$上のノルムは全て同値であるということが、これからわかる。
+
+\begin{thm}$\rr^N$上の任意のノルム$\nor$は$\mgn$-ノルムと同値。
+
+\end{thm}
+
+\begin{proof}
+$\rr^N$の標準的な基底を$e_i$と書くことにする。そして
+\[
+C=\max_{i=1, \dots, N} \nor (e_i)
+\]
+と定義すると$C>0$である．
+ここで$\nor$がノルムであることから
+任意の$x\in \rr^{N}$について
+\[
+\nor(x)\le \nor\left(\sum_{i=1}^Nx_i e_{i}\right)
+\le \sum_{i=1}^{N}\nor(x_{i} e_{i})
+＝ \sum_{i=1}^{N}|x_{i}|\cdot \nor(e_{i})
+\le C\sum_{i=1}^N|x_i|\le NC\mrn{x}
+\]
+となる。
+ここで$x=\sum_{i=1}^{N}x_{i}e_{i}$であることを使った．
+さてノルムの三角不等式から
+$|\nor(x)-\nor(y)|\le \nor(x-y)$がわかり、
+\[
+|\nor(x)-\nor(y)|\le \nor(x-y)\le NC\mrn{x-y}
+\]
+を得る。このことからノルム$\nor$はノルム空間
+$(\rr^N,\mrn{\bullet})$上で連続であることがわかる。
+さて$\rr^N$の部分集合$K$を
+\[
+K=\{x\in \rr^N\ |\ \mrn{x}=1\}
+\]
+と置くと$2$-ノルムと$\mgn$-ノルムが同値であることから集合$K$は$\rr^N$の通常の距離における有界閉集合であることがわかる。よって$K$はコンパクトである。
+ノルム$\nor$はもちろん$K$上でも連続なので$K$のコンパクト性から$\nor$は$K$上で最小値と最大値を取る。これらをそれぞれ$m, M$とおくことにしよう.
+$0\not\in K$なので$M$, $m$は両方とも正の実数となる。任意の$x\in\rr^N$について
+\[
+\frac{x}{\ \mrn{x}}\in K
+\]
+なので，$M, m$の定義から
+\[
+m\le \nor\left(\frac{x}{\ \mrn{x}}\right)\le M
+\]
+が成り立つ．ゆえに
+\[
+m\mrn{x}\le \nor(x)\le M\mrn{x}
+\]
+となるので$\nor$と$\mrn{\bullet}$は同値である。
+\end{proof}
+
+\begin{cor}有限次元線形空間上のノルムは全て同値である。
+
+\end{cor}
+
+
+
+実はより強く局所コンパクトハウスドルフな位相線形空間は有限次元になるという定理があるのですが、それはまた別のお話。
+
+
+
+
+
+
+	
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

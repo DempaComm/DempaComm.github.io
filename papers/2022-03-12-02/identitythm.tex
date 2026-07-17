@@ -1,0 +1,508 @@
+ \documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\pr}{pr}
+
+\DeclareMathOperator{\rank}{rank}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\newcounter{mycnt}%                       カウンター定義
+\newcommand{\outcnt}{%                    コマンド定義
+  \the\value{mycnt}%                      カウンター出力
+  \ifnum\value{mycnt}>100 (over 100)\fi%  100以上の場合
+  \stepcounter{mycnt}%                    mycnt++
+}
+\setcounter{mycnt}{1}
+
+\title{
+多項式に関する一致の定理
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では多項式に関する一致の定理を証明する．
+つまり実係数多項式$p$の零点全体の集合が内点を持つならば
+恒等的に$0$に等しいことを証明する．
+
+まず最初に初等的な行列式の計算を行う．
+\begin{thm}[ファンデルモンドの行列式]
+$n\in \zz_{\ge 1}$とする．
+このとき任意の$x_{1}\dots, x_{n}\in \rr$
+に対して
+\[
+\begin{vmatrix}
+1 & x_{1} & x_{1}^{2} & \dots & x_{1}^{n-1}\\
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots\\
+1 & x_{n} & x_{n}^{2} & \dots & x_{n}^{n-1}
+\end{vmatrix}
+=\prod_{i<j}(x_{j}-x_{i})
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$n$に関する帰納法で証明する．
+$n+1$より小さい数では成り立つと仮定する．
+このとき第$1$行を各行から引くと
+\begin{align*}
+&
+\begin{vmatrix}
+1 & x_{1} & x_{1}^{2} & \dots & x_{1}^{n-1} & x_{1}^{n}\\
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1} & x_{2}^{n}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \vdots\\
+1 & x_{n} & x_{n}^{2} & \dots & x_{n}^{n-1} & x_{n}^{n}\\
+1 & x_{n+1} & x_{n+1}^{2} & \dots & x_{n+1}^{n-1} & x_{n+1}^{n}\\
+\end{vmatrix}
+\\
+&=
+\begin{vmatrix}
+1 & x_{1} & x_{1}^{2} & \dots & x_{1}^{n-1} & x_{1}^{n}\\
+0 & x_{2}-x_{1} & x_{2}^{2}-x_{1}^{2} & \dots & x_{2}^{n-1}-x_{1}^{n-1} & x_{2}^{n}-x_{1}^{n}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \vdots\\
+0 & x_{n}-x_{1} & x_{n}^{2} -x_{1}^{2}& \dots & x_{n}^{n-1}-x_{1}^{n-1} & x_{n}^{n}-x_{1}^{n}\\
+0 & x_{n+1} -x_{1}& x_{n+1}^{2}-x_{1}^{2} & \dots & x_{n+1}^{n-1} -x_{1}^{n-1}& x_{n+1}^{n}-x_{1}^{n}\\
+\end{vmatrix}
+\end{align*}
+となる．計算は次のページに続く
+
+さらに行列式の展開の性質から
+\begin{align*}
+=
+\begin{vmatrix}
+ x_{2}-x_{1} & x_{2}^{2}-x_{1}^{2} & \dots & x_{2}^{n-1}-x_{1}^{n-1} & x_{2}^{n}-x_{1}^{n}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \vdots\\
+ x_{n}-x_{1} & x_{n}^{2} -x_{1}^{2}& \dots & x_{n}^{n-1}-x_{1}^{n-1} & x_{n}^{n}-x_{1}^{n}\\
+ x_{n+1} -x_{1}& x_{n+1}^{2}-x_{1}^{2} & \dots & x_{n+1}^{n-1} -x_{1}^{n-1}& x_{n+1}^{n}-x_{1}^{n}\\
+\end{vmatrix}
+\end{align*}
+となる．
+ここで第$k$列の$-x_{1}$倍をを$k+1$列に足すと最後の両列式は
+\begin{align*}
+&=
+\begin{vmatrix}
+ x_{2}-x_{1} & x_{2}^{2}-x_{1}^{2} & \dots & x_{2}^{n-1}-x_{1}^{n-1} & x_{2}^{n}-x_{1}^{n}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \\
+ x_{n}-x_{1} & x_{n}^{2} -x_{1}^{2}& \dots & x_{n}^{n-1}-x_{1}^{n-1} & x_{n}^{n}-x_{1}^{n}\\
+ x_{n+1} -x_{1}& x_{n+1}^{2}-x_{1}^{2} & \dots & x_{n+1}^{n-1} -x_{1}^{n-1}& x_{n+1}^{n}-x_{1}^{n}\\
+\end{vmatrix}
+\\
+&=
+\begin{vmatrix}
+ x_{2}-x_{1} & x_{2}^{2}-x_{1}x_{2} & \dots & x_{2}^{n-1}-x_{1}x_{2}^{n-2} & x_{2}^{n}-x_{1}x_{n}^{n-1}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \\
+ x_{n}-x_{1} & x_{n}^{2} -x_{1}x_{n}& \dots & x_{n}^{n-1}-x_{1}x_{n}^{n-2} & x_{n}^{n}-x_{1}x_{n}^{n-1}\\
+ x_{n+1} -x_{1}& x_{n+1}^{2}-x_{1}x_{n} & \dots & x_{n+1}^{n-1} -x_{1}x_{n}^{n-2}& x_{n+1}^{n}-x_{1}x_{n}^{n-1}\\
+\end{vmatrix}
+\\
+&=
+\begin{vmatrix}
+ x_{2}-x_{1} & x_{2}(x_{2}-x_{1}) & \dots & x_{2}^{n-2}(
+ x_{2}-x_{1}) & x_{2}^{n-1}(x_{2}-x_{1})\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \\
+ x_{n}-x_{1} & x_{n}(x_{n} -x_{1})& \dots & x_{n}^{n-2}(x_{n}-x_{1}) & x_{n}^{n-1}(x_{n}-x_{1})\\
+ x_{n+1} -x_{1}& x_{n+1}(x_{n+1}-x_{1}) & \dots & x_{n+1}^{n-2}(x_{n+1} -x_{1})& x_{n+1}(x_{n+1}-x_{1})\\
+\end{vmatrix}
+\\
+&=
+\prod_{1<j}(x_{j}-x_{1})\cdot 
+\begin{vmatrix}
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1}\\
+1 & x_{3} & x_{3}^{2} & \dots & x_{3}^{n-1}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots\\
+1 & x_{n+1} & x_{n+1}^{2} & \dots & x_{n+1}^{n-1}
+\end{vmatrix}
+=\prod_{i<j}(x_{j}-x_{i})
+\end{align*}
+となるので証明が終わる．
+\end{proof}
+\begin{proof}[\textbf{別証明}]
+与えられた行列式を$p_{n}(x_{1}, \dots x_{n})$
+とするとこれは$x_{1}\dots, x_{n}$に関する多項式で
+しかも各$x_{i}$に関する最高次数は$n-1$である．
+さて，行列式の性質から$x_{i}=x_{j}$とすると
+$p_{n}=0$となる．
+ゆえに$p_{n}$は$x_{j}-x_{i}$を因数にもつ．
+よって多項式$q_{n}=\prod_{i<j}(x_{j}-x_{i})$
+によって$p_{n}$を割り切ることができる．ここで
+多項式$q_{n}$について各$x_{i}$の最高次数は$n-1$であるから
+$p_{n}$は$q_{n}$の定数倍であることがわかる．
+つまり$p_{n}=a_{n}q_{n}$となる$a_{n}\in \rr$が存在する．
+簡単に$a_{1}=1$がわかり，また
+$n+1$の場合に$x_{1}=0$とすると
+\begin{align*}
+p_{n+1}&=
+\begin{vmatrix}
+1 & 0 & 0 & \dots & 0 & 0\\
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1} & x_{2}^{n}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots & \vdots\\
+1 & x_{n} & x_{n}^{2} & \dots & x_{n}^{n-1} & x_{n}^{n}\\
+1 & x_{n+1} & x_{n+1}^{2} & \dots & x_{n+1}^{n-1} & x_{n+1}^{n}\\
+\end{vmatrix}
+=\prod_{j>1}x_{j}\cdot
+\begin{vmatrix}
+1 & x_{2} & x_{2}^{2} & \dots & x_{2}^{n-1}  \\
+\vdots & \vdots  &  \vdots & \dots &\vdots \\
+1 & x_{n} & x_{n}^{2} & \dots & x_{n}^{n-1} \\
+1 & x_{n+1} & x_{n+1}^{2} & \dots & x_{n+1}^{n-1} \\
+\end{vmatrix}
+\\
+&=
+\left(\prod_{j>1}x_{j}\right)\cdot
+p_{n}(x_{2}, \dots x_{n+1})
+\end{align*}
+となり，また
+\[
+q_{n+1}(0, x_{2}, \dots x_{n})
+=\left(\prod_{j>1}x_{j}\right)\cdot
+q_{n}( x_{2}, \dots x_{n})
+\]
+なので$a_{n+1}=a_{n}$がわかり，結局$a_{n}=1$
+がわかるので，定理は成り立つ．
+\end{proof}
+
+
+\begin{thm}[多項式に関する一致の定理]
+$p$を$n$変数の実係数多項式とする．
+もしも$p$の零点全体の集合$Z$が内点を持つならば
+$p$は恒等的に$0$となる．
+つまり$p$が定数$0$に等しくないならば
+$p(x)\neq 0$となる$x\in \rr^{n}$全体の集合は$\rr^{n}$
+のなかで稠密になる．
+\end{thm}
+
+
+
+\begin{proof}[\textbf{証明その\outcnt}]
+$n$に関する帰納法で証明する．$n+1$より小さい数では
+命題が成り立つと仮定する．
+$p(x_{1}, \dots, x_{n}, x_{n+1})$
+についてこれは多項式なので，
+$x_{n+1}$に関する最高次数を$m$として
+$x=(x_{1}, \dots, x_{n})$として以下のように表すことができる．
+\[
+p(x_{1}, \dots, x_{n}, x_{n+1})=
+\sum_{i=0}^{m}q_{i}(x)x_{n+1}^{i}
+\]
+ここで各$q_{i}$は$x$の多項式である．
+今$p$の零点全体を$Z$と書くと，
+$Z$は内点を持つので開集合$V\subset \rr^{n}$
+と開集合$U\subset \rr$が存在して
+$V\times U\subset Z$となる．
+$U$から相異なる点$t_{1}, \dots, t_{m+1}\in U$を取ると
+$k\in \{1, \dots, m+1\}$と$x\in V$について
+\[
+\sum_{i=0}^{m}q_{i}(x)t_{k}^{i}=
+p(x, t)=0
+\]
+となる．これは次のように書くことができる．
+\[
+\begin{pmatrix}
+1 & t_{1} & t_{1}^{2} & \dots & t_{1}^{m}\\
+1 & t_{2} & t_{2}^{2} & \dots & t_{2}^{m}\\
+\vdots & \vdots  &  \vdots & \dots &\vdots\\
+1 & t_{n} & t_{m}^{2} & \dots & t_{m+1}^{m}
+\end{pmatrix}
+\begin{pmatrix}
+q_{0}\\
+q_{1}\\
+\vdots\\
+q_{m}
+\end{pmatrix}
+=
+\begin{pmatrix}
+0\\
+0\\
+\vdots\\
+0
+\end{pmatrix}
+\]
+先の定理から左辺に出てくる行列は可逆であることがわかるので，結局任意の$x\in U$と$i\in \{1, \dots, m\}$について
+$q_{i}=0$がわかる．
+よって各$q_{i}$の零点全体は内点を持つことがわかったので
+帰納法の仮定より，
+各$q_{i}$は恒等的に$0$に等しい．
+よって$p$も恒等的に$0$に等しい．
+\end{proof}
+
+
+\begin{proof}[\textbf{証明その\outcnt}]
+上の証明と同じく帰納法で証明する．
+同じ記号を用いる．
+$Z$の元を$\rr^{n+1}\setminus Z$の元で近似できれば良い．
+$(x, t)\in Z\subset \rr^{n}\times \rr$とする．
+この時
+\[
+\sum_{i=0}^{m}q_{i}(x)t^{i}=0
+\]
+となる．
+
+Case1 : 
+ある$k\in \{0, \dots, m\}$について$q_{k}(x)\neq 0$
+の場合．
+このときは
+$p(x, t)$を$t$の多項式として見れば一変数なので
+一変数の場合から$t$に十分近い$t'\in \rr$であって
+$p(x, t')\neq 0$となるものが存在する．
+よって$(x, t')$が求める$\rr^{n+1}\setminus Z$の元である．
+
+
+Case2: 全ての$i\in \{1, \dots, m\}$について
+$x$が$q_{i}$の零点だった場合．
+このときには帰納法の仮定より$x$に十分近い各$q_{i}$の
+非零点になっているような$x'\in \rr^{n}$が存在する．
+$p(x', t)\neq 0$の場合は$(x', t)\in \rr^{n+1}\setminus Z$
+が求めるものになっている．
+$p(x', t)=0$の場合にはCase1に還元される．
+\end{proof}
+
+
+
+\begin{proof}[\textbf{証明その\outcnt}]
+$n=1$の時には$n$次多項式は高々$n$個の零点を持たないことから定理が成り立つことがわかる．
+次に一般の$n$について考える．
+$Z$の内点を$a$とする．
+このとき十分小さい$r\in \rr$が存在して
+開円盤$B=
+\{\, x\in \rr^{n}
+\mid 
+\|x-a\|_{2}<r
+\, \}$
+は$Z$の部分集合となる．
+ここで
+$u\in B$
+を任意にとり
+$q:\rr\to \rr$を$q(t)=p(a+u\cdot t)$
+と定義する．
+すると$q$は$t$に関する多項式であり，
+$p$が$B$上で$0$になることから$q$は
+$t\in (-1, 1)$の時$q(t)=0$となる．
+よって$1$変数の場合から$q$は恒等的に$0$
+になる．$u\in B$は任意だったので
+$p$は全空間で恒等的に$0$になる．
+\end{proof}
+
+
+\begin{proof}[\textbf{証明その\outcnt}]
+まず最初に$x\in \rr^{n}$, $y\in \rr$として
+多項式$P(x, y)$は$y$の一次式で割り算できることに注意しよう．
+さて，$p(x, y)$の零点が内点を持つとする.
+内点$(a, b)$について$p(x, b)$
+は$n$変数として見たときに内点をもつよって帰納法の，仮定より$p(x, b)$は恒等的に$0$になる．
+つまり$y=b$は$p(x, y)$の零点になるので
+$p(x, y)$は$(y-b)$を因数に持つ．
+$p(x, y)$の次数を$m$として
+相異なる点$b_{1}, \dots, b_{m+1}$を
+任意の$x$について$p(x, b_{i})=0$
+となるようにとる
+と
+$n$変数多項式$Q$が存在して
+$p(x, y)=(y-b_{1})\dots (y-b_{m})Q(x)$
+となる．ここで$y=b_{m+1}$とすると
+$0=(b_{m+1}-b_{1})\dots (b_{m+1}-b_{m})Q(x)$
+なので$Q$は恒等的に$0$になる．
+つまり$p$も恒等的に$0$
+になる．
+\end{proof}
+
+\begin{proof}[\textbf{証明その\outcnt}]
+多項式は解析関数だから解析関数の一致の定理から従う．
+解析関数に関する一致の定理は
+\cite{self}や\cite{hako}
+を参照のこと．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}
+StackExchangeの質問
+``The complement of a zero-set of a polynomial is dense'' 
+とその回答
+\begin{verbatim}
+https://math.stackexchange.com/questions/2025978/
+the-complement-of-a-zero-set-of-a-polynomial-is-dense
+\end{verbatim}
+
+\bibitem{2}
+StackExchangeの質問
+``Why if $p(x_{1}, \dots, x_{n})$ is 
+polynomial on $\rr^{n}$, 
+then $p(x)\neq 0$ is satisfied open dens set?
+'' 
+とその回答
+
+\begin{verbatim}
+https://math.stackexchange.com/questions/1731267/
+why-if-p-x-1-dots-x-n-is-polynomial-on-mathbbrn-then-p-x-neq-0/1731288
+\end{verbatim}
+
+\bibitem{self}
+はてなブログ「電波通信」の記事「実解析関数に関する逆関数定理」
+\url{
+https://concious4410.hatenablog.com/entry/2021/02/28/130208}
+\bibitem{hako}
+箱さんのwebページの「解析関数のノート」
+\url{https://o-ccah.github.io/docs/analytic-function.html}
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

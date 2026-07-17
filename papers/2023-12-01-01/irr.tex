@@ -1,0 +1,458 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{graphics}
+\usepackage{fbox}
+\usepackage{enumitem}
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\newcommand{\orefrac}[2]{
+\begin{array}{@{}c @{}}%
+            \multicolumn{1}{c|}{#1}%
+            \\%
+            \hline%
+            \multicolumn{1}{|c}{#2}%
+        \end{array}%
+}
+
+
+
+
+
+\newcommand{\oreorefrac}[2]{
+{ #1\rotatebox{90}{\scalebox{1}[1.5]{|}}} 
+\over \left|{#2}\right.
+}
+
+
+\newcommand{\oofrac}[2]{
+\frame{#1}\atop \frame{#2}
+}
+\newcommand{\ooofrac}[2]{
+#1 \atop #2
+}
+
+
+\newdimen\height
+\setbox0=\hbox{\Huge Hello, World!}
+\height=\ht0 \advance\height by \dp0
+
+
+
+
+
+
+
+\title{ニュートン法を用いた整数の平方根の無理性の証明
+\large{\\--- Proving irrationality by Newton method ---}
+}
+\author{電波通信 ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+この文章ではニュートン法を用いて，
+平方数ではない(正の)整数$a$に
+対して$\sqrt{a}$
+が無理数であることを証明する．
+
+最初に大事なことを伝えておくが，
+普通に証明したほうが早いし汎用性がある．
+
+\section{本文}
+まず最初にこの文章で用いる無理数の判定法を
+紹介する．
+
+\begin{lem}\label{lem:Cq}
+任意の有理数$x$について，定数$C>0$が存在して以下の条件を満たす：任意の整数$a$と$b$
+が$0<|a-xb|$を満たすとすると，
+$C\le |a-xb|$
+が成り立つ．
+\end{lem}
+\begin{proof}
+いま
+$x$は有理数なので整数$p$と正の整数$q$を用いて
+$x=p/q$と書くことができる．
+すると
+\[
+|a-xb|
+=\frac{|qa-pb|}{q}
+\]
+が成り立つ．そして$0<|a-xb|$という仮定から
+$0<|qa-pb|$がわかる．
+ここで
+$|qa-pb|$は整数なので
+$|qa-pb|\ge 1$である．よって
+\[
+|a-xb|\ge \frac{1}{q}
+\]
+がわかる．
+ゆえに$C=1/q$とすれば定理は成り立つ．
+\end{proof}
+
+\begin{prop}\label{prop:irr}
+$x$を実数とする．
+そして
+以下のような整数の列
+$\{A_{n}\}_{n\in \zz_{\ge 0}}$と
+$\{B_{n}\}_{n\in \zz_{\ge 0}}$が存在すると仮定する：
+任意の$n\in \zz_{\ge 0}$に対して
+$0<|A_{n}-B_{n}x|$かつ
+$\lim_{n\to \infty}|A_{n}-B_{n}x|=0$
+が成り立つ.
+このとき
+$x$は無理数である．
+\end{prop}
+\begin{proof}
+上の補題
+\ref{lem:Cq}からわかる．
+\end{proof}
+
+この補題にある
+無理数の判定法については，
+(その昔に)
+筆者は
+文献\cite[p.1]{shio}
+で初めて学習したと思う．
+
+次にニュートン法で得られる
+$\sqrt{a}$の近似列に関する基本事項を
+証明する．
+\begin{prop}\label{prop:kkk}
+$a\in \rr_{>0}$とする．
+そして，$x_{0}$を適当に選んで
+数列$\{x_{n}\}_{n\in \zz_{\ge 0}}$
+を
+\[
+x_{n+1}=x_{n}-\frac{x_{n}^{2}-a}{2x_{n}}
+=\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}}\right)
+\]
+と定義する．このとき以下が成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:11}
+もしも
+$x_{0}>0$ならば任意の$n\in \zz_{\ge 0}$について$x_{n}>0$
+が成り立つ．
+\item\label{item:22}
+任意の$n\in \zz_{\ge 0}$について
+\[
+x_{n+1}-\sqrt{a}=\frac{1}{2x_{n}}(x_{n}-\sqrt{a})^{2}
+\]
+が成り立つ．
+特に$x_{0}>0$ならば任意の$n\in \zz_{\ge 1}$
+について
+$\sqrt{a}<x_{n}$が成り立つ．
+\item\label{item:33}
+$x_{0}>0$とする．
+数列
+$\{P_{n}\}_{n\in \zz_{\ge 0}}$
+と
+$\{Q_{n}\}_{n\in \zz_{\ge 0}}$
+を以下のように定義する．
+\begin{enumerate}
+\item 
+$n=0$の時は適当に以下を満たすものとする．
+\[
+x_{0}=\frac{P_{0}}{Q_{0}}
+\]
+\item 
+$n>0$の時は
+\[
+P_{n+1}=aQ_{n}^{2}+P_{n}^{2}
+\]
+でなおかつ
+\item 
+\[
+Q_{n+1}=2P_{n}Q_{n}
+\]
+\end{enumerate}
+と定義する．
+このとき
+任意の$n\in \zz_{\ge 0}$について
+\[
+x_{n}=\frac{P_{n}}{Q_{n}}
+\]
+が成り立つ．
+\item\label{item:44}
+いま$a$を平方数にはならない正の整数と仮定する．
+このとき
+$x_{0}$を$\sqrt{a}$よりも大きい整数のうち最小のものとし，
+$P_{0}=x_{0}$, $Q_{0}=1$とする．さらに
+$\eta_{0}=x_{0}-\sqrt{a}$とし帰納的に
+$\{\eta_{n}\}_{n\in \zz_{\ge 0}}$を
+\[
+\eta_{n+1}=\eta_{n}^{2}
+\]
+と定義する．
+このとき任意の$n\in \zz_{\ge 0}$について
+$P_{n}$と$Q_{n}$は整数であり，
+\[
+|x_{n}-\sqrt{a}|\le \eta_{n}\frac{1}{Q_{n}}
+\]
+が成り立つ．
+
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+
+\ref{item:11}
+は定義からわかる．
+
+\ref{item:22}
+を示そう．
+\[
+x_{n+1}-\sqrt{a}
+=
+\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}}\right)
+-\sqrt{a}
+=\frac{1}{2x_{n}}
+\left(x_{n}^{2}-2x_{n}\sqrt{a}+a\right)
+=\frac{1}{2x_{n}}(x_{n}-\sqrt{a})^{2}
+\]
+なので成り立つ．
+
+\ref{item:33}
+を示す．
+今$n$について
+\[
+x_{n}=\frac{P_{n}}{Q_{n}}
+\]
+が成り立つと仮定する．
+この時
+\[
+x_{n+1}=\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}}\right)
+\]
+に
+$x_{n}=P_{n}/Q_{n}$を代入すると
+\[
+x_{n+1}=\frac{1}{2}\left(\frac{P_{n}}{Q_{n}}+\frac{aQ_{n}}{P_{n}}\right)
+=\frac{aQ_{n}^{2}+P_{n}^{2}}{2P_{n}Q_{n}}
+=\frac{P_{n+1}}{Q_{n+1}}
+\]
+なので成り立つ．
+
+
+\ref{item:44}を示す．
+まず$P_{n}$と$Q_{n}$
+が整数であることが$a$
+が整数と仮定されていることから帰納的にわかる．
+最後の不等式を示そう．帰納法による．$n=0$のときは定義からわかる．
+$n$までは成り立つとして$n+1$の場合を考える．
+このとき
+\ref{item:22}
+から
+\begin{align*}
+|x_{n+1}-{\sqrt{a}}|
+=
+\frac{1}{2x_{n}}|x_{n}-\sqrt{a}|^{2}
+\end{align*}
+が成り立つ．
+今$n$については
+$|x_{n}-\sqrt{a}|=\eta_{n}/Q_{n}$
+が成り立つと仮定しているので，
+\begin{align*}
+|x_{n+1}-{\sqrt{a}}|
+=\frac{1}{2x_{n}}|x_{n}-\sqrt{a}|^{2}
+\le 
+\frac{Q_{n}}{2P_{n}}\frac{1}{Q_{n}^{2}}\eta_{n}^{2}
+=
+\eta_{n+1}\frac{1}{Q_{n+1}}
+\end{align*}
+が成り立つ．
+よって
+\ref{item:44}
+が成立する．
+\end{proof}
+
+命題
+\ref{prop:kkk}
+の系として以下の定理を得る．
+\begin{thm}
+$a$を平方数にはならない正の整数とする．
+このとき$\sqrt{a}$は無理数である．
+\end{thm}
+\begin{proof}
+命題
+\ref{prop:kkk}の
+\ref{item:44}
+と同じく$x_{0}$
+を
+$\sqrt{a}$よりも真に大きい整数のうち最小のものとする．
+いま$a$
+は整数なので
+命題
+\ref{prop:kkk}の
+\ref{item:33}で定義した
+$P_{n}$と$Q_{n}$が整数であることが帰納的にわかる．
+さらに
+$|P_{n}-Q_{n}\sqrt{a}|$
+を考えると，
+命題
+\ref{prop:kkk}
+の\ref{item:22}から$\sqrt{a}<x_{n}$がわかる．
+よって特に，任意の$n\in \zz_{\ge 0}$について
+\[
+0<|P_{n}-Q_{n}\sqrt{a}|
+\]
+が成り立つことがわかる．
+また$a$は平方数にならないので，
+$\eta_{0}=x_{0}-\sqrt{a}$は
+$(0, 1)$に属する．
+命題
+\ref{prop:kkk}
+の
+\ref{item:44}
+から任意の$n\in \zz_{\ge 0}$
+について
+\[
+|P_{n}-Q_{n}\sqrt{a}|\le \eta_{n}
+\]
+である．
+さらに$\eta_{n}=\eta_{0}^{2^{n}}$
+であり$\eta_{0}\in (0, 1)$
+であることから
+$\lim_{n \to \infty}|P_{n}-Q_{n}\sqrt{a}|=0$
+が従う．
+よって
+命題\ref{prop:irr}から
+$\sqrt{a}$は無理数である．
+\end{proof}
+
+\section{解説}
+命題\ref{prop:irr}
+は無理数の判定のちょっとした有名な事実である．
+これを用いることで
+自然対数の底
+$e$
+が無理数であることが簡単にわかったりする．
+この
+命題
+\ref{prop:irr}
+の他の応用はないものかと考えた結果，
+ニュートン法から得られる$\sqrt{a}$
+に収束する点列に適応する応用を考えついた．
+詰まるところ
+命題\ref{prop:irr}
+を適応することありきで考察をしているので
+あんまり健康的ではないかもしれない
+(でもこういうのって楽しいと思う)．
+それで
+お分かりかもしれないが
+上で述べた$\{x_{n}\}_{n\in \zz_{\ge 0}}$
+の定義は$x^{2}-a$にニュートン法を適応して得られる
+$x^{2}-a$の零点に収束する点列である．
+ちなみにその昔Pythonを触っていたことがあって，
+ニュートン法で
+$\sqrt{2}$
+の小数点以下100桁とかを求めたりしていたので，
+上の$P_{n}$と$Q_{n}$を思いついたという経緯がある
+(Pythonのint型?ってなんか桁の制限がない?とかなんとかなのでこういう無茶なことができたりする)．
+それで二次多項式以外に三次多項式とかでも同様のことできないかと思ったが，なんだか二次方程式の場合だけうまくいって，他の場合は上で述べたのと同様の方法は適応できなさそうであった．$\sqrt{a}$の無理性の証明は普通に$a$の素因数の偶奇を考えたりした方が早いし汎用性あると思う．
+まあもしかしたらこの方針に何か面白いことが見つかるかもしれない
+ので一応ここにメモとして残しておく．
+
+私の知識の範囲においては
+無理数と超越数両方を扱った数学の和書は\cite{shio}が唯一である．POD版もある．
+タイトルの通り無理数のみならず超越数も扱っている．
+変わった感じの議論で何かしらの数の無理性を示す論文としては
+\cite{MM}なども面白いと思う．
+
+\section{追記}
+この文章を書き終わってから思いついたのだが，
+上で述べた方法がうまくいくのは，以下に基づくのではないかとなんとなく推測する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+おそらく奇跡的に$\sqrt{a}$のニュートン法による近似が
+連分数による$\sqrt{a}$の近似と同じになっており，
+それが最良近似?だから無理性を証明できるのではないだろうか？
+\item 
+そしてなぜニュートン法による近似と連分数による
+近似が奇跡的に一致しているのかというと，
+二次の代数的数の連分数表示は循環的という事実に由来するのではないか？
+\end{enumerate}
+しかし面倒だし，やる気とか時間の都合とかあるのでこれらを確かめるのは私はやらない．
+
+
+訳が分からない現象に対しても自分の知識から関連する現象を取り出して関連性を確かめようとするのは
+数学者と呼ばれる類の人たちの
+習慣なのではないかと思われる．
+たくさん論文を読んだり本を読んだりするといいよ．
+
+私がこれ以上このことを調べないことのお詫びと言ってはなんだが，連分数の和書を紹介しよう．とはいえ
+連分数を詳しく解説している和書はよく知らないのだが，
+最近出版された
+\cite{kind}は連分数の成書であり，
+数学セミナー2014年8月号\cite{sem}
+は連分数の特集で基本事項がまとまっていると思う．
+
+
+\begin{thebibliography}{99}
+\bibitem{sem}
+雑誌「数学セミナー2014年8月号」, 日本評論社．
+
+\bibitem{shio}
+塩川宇賢, 
+「無理数と超越数」, 
+森北出版, 
+1999. 
+\bibitem{kind}
+木田雅成, 
+ 「連分数」, 
+ 大学数学スポットライト・シリーズ第9巻, 
+ 2022年
+ 近代科学社．
+\bibitem{MM}
+M. R. Murty, and 
+V. K. Murty, 
+\textit{Irrational numbers arising from certain differential equations}, 
+Canad. Math. Bul. 20 (1) (1977), 117--120. 
+\end{thebibliography}
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- Symmetric product ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+位相空間のsymmetric product というのは
+$n$を固定して$X$のたかだか$n$点集合
+にヴィートリスだとハウスドルフ距離だとかいい感じの距離を入れたもののことである．おそらく$X^{n}$に
+対称群
+$\mathfrak{S}_{n}$
+を順番の入れ替えで群作用させた時の
+商空間がこれになる気がするのでsymmetric product と呼ばれているような気がする．
+
+論文
+\cite{MR1562283}
+はBorsuk とUlamの論文で
+(BorsukとUlamってすごいね．いにしえ)，
+symmetric product を定義した
+いわゆる原論文らしい．
+単位閉区間$I$のsymmetric product 
+$I(n)$についてその次元が$n$だとか
+$I(n)\setminus I(n-1)$
+が$\rr^{n}$の部分空間として実現できるとか，
+$n=1,2, 3$のとき$I(n)$
+は$I^{n}$に同相だが，$n\ge 4$の時は
+$I(n)$が$\rr^{n}$に埋め込めないことを証明しているようだ．
+
+
+論文
+\cite{MR1669815}
+では連続体のsymmetric product 
+を調べている．
+例えば$X$を有限次元の連続体として
+$X(2)$が$C(X)$に同相ならば$X$は
+$[0, 1]$に同相であることを示している．
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{symp.bib}
+
+
+
+\end{document}

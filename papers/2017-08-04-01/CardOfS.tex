@@ -1,0 +1,309 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ルベーグ測度正の集合の話}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書ではルベーグ測度が正のルベーグ可測集合の性質を紹介する。
+\section{準備}
+この文章では測度やルベーグ測度の厳密な定義は行わない。
+ただ測度が与えられたときに可測な集合と非可測な集合の二つがあることと基本的に可測集合しか扱わないこと、そしてただ実直線$\rr$の上にはこのセクションで紹介する性質をもつルベーグ測度と呼ばれる測度があると思っても不都合はないように思える。
+
+位相空間のボレル集合体とはその空間の開集合全体から生成される完全加法族のことであり、ボレル加法族に属する集合をボレル集合と呼ぶ。
+
+実直線$\rr$の開集合はすべてルベーグ可測であるから$\rr$のボレル集合はすべて可測である。
+
+また、ルベーグ可測集合全体は$\rr$のボレル集合体をルベーグ測度で完備化した集合体と一致することに注意しよう。
+
+この文章ではルベーグ測度を$m$で表す。
+
+\begin{fact}
+$\rr$の非空な開集合$U$について$0<m(U)$であり、
+$\rr$のコンパクト集合$K$について$m(K)<\infty$である。
+これらを合わせると内点をもつコンパクト集合$K$について$0<m(K)<\infty$である。
+\end{fact}
+
+\begin{fact}[平行移動不変性]
+任意のルベーグ可測集合$S$と任意の$x\in \rr$について
+\[
+m(x+S)=m(S)
+\]
+となる。ここで$x+S=\{x+s\mid s\in S\}$である。
+\end{fact}
+\begin{cau}
+実はこの平行移動不変性で「凡そ」ルベーグ測度は特徴づけできる。即ちハール測度の一意性である。
+\end{cau}
+
+\begin{fact}[内部正則性]
+$m(S)<\infty$を充たす任意のルベーグ可測集合$S$と任意の$\ep>0$についてコンパクト集合$K$が存在して
+\[
+K\subset S,\ m(S)<m(K)+\ep
+\]
+が成り立つ。
+\end{fact}
+
+\begin{cau}
+$m(S)=\infty$でも同様のことは成り立つが、今回は使わない。
+\end{cau}
+
+\begin{fact}[外部正則性]
+$m(S)<\infty$となる任意のルベーグ可測集合$S$と任意の$\ep>0$について開集合$U$が存在して
+\[
+S\subset U,\ m(U)<\ep+m(S)
+\]
+が成立する。
+\end{fact}
+\begin{cau}
+一般には
+任意のルベーグ可測集合$S$と任意の$\ep>0$について開集合$U$が存在して
+\[
+S\subset U,\ m(U\setminus S)<\ep
+\]
+が成立するが、ここでは上の外部正則性しか使わない。
+\end{cau}
+
+\section{本題}
+
+%まずは次の位相的な補題から始めよう。
+%\begin{lem}
+%\end{lem}
+
+\begin{thm}\label{t}
+正のルベーグ測度を持つルベーグ可測集合$S$について$S-S$は$0$を内点に持つ。
+ここで$S-S=\{s-t \mid s,t\in S\}$である。
+\end{thm}
+\begin{proof}
+$\rr$の$\sigma$-コンパクト性から$0<m(S)<\infty$と仮定してもよく、内部正則性から$S$はコンパクトと最初から仮定しても一般性を失わない。外部正則性から開集合$U$が存在して$S\subset U$及び
+\[
+m(U)<2m(S)
+\]
+を充たす。
+ここで
+\[
+R=d(S,X\setminus U)=\inf\{|a-b|\mid a\in S,\  b\in X\setminus U\}
+\]
+とすると$R>0$であり、任意の$s\in S$について
+\[
+(s-R,s+R)\subset U
+\]
+即ち
+\begin{equation}\label{1}
+S+(-R,R)\subset U 
+\end{equation}
+である。
+ここでもちろん$S+(-R,R)=\{s+r\mid s\in S, r\in (-R,R)\}$
+\par
+いまから$(-R,R)\subset S-S$を示そう。$|r|<R$となる$r$を任意に取ると(\ref{1})から
+\[
+r+S\subset U
+\]
+である。ここで$r+S=\{r+s\mid s\in S\}$である。さて、ここでもしも$(r+S)\cap S=\O$ならば、平行移動不変性と単調性及び$U$の定義から
+\[
+2m(S)=m(S\cup (r+S))\le m(U)<2m(S)
+\]
+となり矛盾する。
+よって$(r+S)\cap S\neq \O$である。即ち$s\in S$と$t\in S$が存在して$r+s=t$ということであり、つまり
+$r=s-t\in S-S$である。よって
+\[
+(-R,R)\subset S-S
+\]
+となる。これは$0$が$S-S$の内点であることを言っている。
+\end{proof}
+
+\begin{cor}\label{k}
+正のルベーグ測度を持つルベーグ可測集合は連続体濃度をもつ。
+\end{cor}
+\begin{proof}
+$S$を正のルベーグ測度を持つルベーグ可測集合とする。
+高々可算な集合は零集合であるから$S$は非可算集合である。特に無限集合である。ここで
+\[
+f:S\times S\to \rr
+\]
+を$f(x,y)=x-y$で定めると先の定理により$f(S\times S)$は内点を持つ。$\rr$の部分集合で内点を持つ集合は連続体濃度をもつ（開区間を含むから）。ゆえに集合$f(S\times S)$は連続体濃度を持つ。さて$S$は無限集合であるから
+$\card(S)=\card(S)\times \card(S)=\card(S\times S)$であるよって
+\[
+\card(S)=\card(S\times S)\ge \card(f(S\times S))=2^{\aleph_0}
+\]
+であり、もちろん$\card(S)\le 2^{\aleph_0}$なので
+\[
+\card(S)=2^{\aleph_0}
+\]
+\end{proof}
+
+\begin{cau}
+非可算なポーランド空間はカントール集合と同相な部分集合を含むことを主張するCantor-Bendixsonの定理を使えば定理\ref{t}を経由せずに、系\ref{k}を証明することができる。
+\end{cau}
+\begin{cau}
+系\ref{k}の逆は成り立たない。例えば通常のカントール集合$C$は零集合だが連続体濃度をもつ。
+\end{cau}
+\begin{cau}
+定理\ref{t}の逆は成り立たない。例えば通常のカントール集合$C$は零集合だが
+\[
+C-C=[-1,1]
+\]
+である。このことは例えば解析学の反例を集めた本Counterexamples in Analysis で紹介されている。
+\end{cau}
+\begin{cau}
+定理\ref{t}は一般にハール測度を備えた$\sigma$-コンパクト局所コンパクトハウスドルフ位相群に対して成り立つ。
+\end{cau}
+\begin{cau}
+通常のカントール集合$C$と位相同型だがルベーグ測度が正の$\rr$の部分集合が存在する。
+太ったカントール集合(A fat Cantor set)というやつである。\par
+同相写像$f:\rr\to \rr$で$f(C)$が太ったカントール集合になるものが存在する。
+このことが指し示すのは同相写像は零集合を常には零集合に移してはくれないということである。
+\end{cau}
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

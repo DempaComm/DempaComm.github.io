@@ -1,0 +1,637 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{パラコンパクトネス等々}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書ではパラコンパクトの概念を導入し、コンパクトハウスドルフ空間を用いた簡潔なパラコンパクトネスの特徴付けを紹介する。これを用いてCW複体のパラコンパクト性を証明できるが、それはまた別のお話。\par 
+この文章では正則、正規という言葉を$T_1$を{\bf 仮定しない}意味で用いて$T_3,T_4$を$T_1$を{\bf 仮定する}意味で用いる。また$T_{3.5}$空間とは$T_1$でかつ完全正則な空間のことである。
+
+\section{パラコンパクト性}
+
+\begin{df}[局所有限性]位相空間$X$に於いて$X$の部分集合の族$\mathfrak{A}$が局所有限であるとは$X$の各点$x$について$x$の近傍$N$が存在して
+\[
+N\cap A\neq \emptyset となるA\in \mathfrak{A}は有限個
+\]
+を充たすことである。
+\end{df}
+
+
+\begin{prop}\label{heihou}
+$\mathfrak{A}$を位相空間$X$の局所有限な族とする。このとき
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)=\bigcup_{A\in \mathfrak{A}}CL(A)
+\]
+が成立する。\footnote{CLは閉包作用素である。}
+\end{prop}
+\begin{prop}
+明らかに
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)\supset \bigcup_{A\in \mathfrak{A}}CL(A)
+\]
+が成り立つ。逆向きの包含関係を示そう。$\dpst x\in \cl\left(\bigcup_{A\in \mathfrak{A}}A\right)$
+とする。$\mathfrak{A}$は局所有限なので$x$の近傍$N$が存在して
+\[
+N\cap A\neq \emptyset となるA\in \mathfrak{A}は有限個
+\]
+を充たす。$N$と交わる$\mathfrak{A}$の元を$A_1,A_2,\cdots A_n$とすると$\dpst x\in \cl\left(\bigcup_{A\in \mathfrak{A}}A\right)$から
+\[
+x\in \cl\left(\bigcup_{i=1}^nA_i\right)
+\]
+が成立する。しかし有限個の和集合については
+\[
+\cl\left(\bigcup_{i=1}^nA_i\right)=\bigcup_{i=1}^m\cl(A_i)
+\]
+が成り立つので結局
+\[
+x\in \bigcup_{A\in \mathfrak{A}}\cl(A)
+\]
+つまり
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)=\bigcup_{A\in \mathfrak{A}}\cl(A)
+\]
+\end{prop}
+
+\begin{cor}
+位相空間$X$の局所有限な閉集合の族$\mathfrak{A}$について
+\[
+\bigcup_{A\in \mathfrak{A}}A
+\]
+は閉集合である。
+\end{cor}
+
+
+\begin{cor}
+位相空間$X$の局所有限な族$\mathfrak{A}$について$\{\cl(A)\}_{A\in \mathfrak{A}}$も局所有限である。
+\end{cor}
+
+\begin{df}[細分]
+$\mathfrak{A},\mathfrak{B}を$集合$X$の部分集合の族とする。このとき$\mathfrak{A}$が$\mathfrak{B}$の細分であるとは
+\[
+\forall A\in \mathfrak{A}\ \exists B\in \mathfrak{B}\ A\subset B
+\]
+となることである。
+\end{df}
+
+\begin{df}[パラコンパクト]位相空間がパラコンパクトであるとは空間の任意の開被覆に対して局所有限でかつ開被覆であるような細分が存在することである。
+\end{df}
+明らかにパラコンパクト空間の族の位相的直和はパラコンパクトになる。\par
+次の命題はコンパクトハウスドルフ空間が正規であることの証明のアナロジーと命題\ref{heihou}からの帰結である。
+
+
+\begin{prop}\footnote{より強くパラコンパクトハウスドルフ空間は族正規空間であることが示せるが、それはまた別の話である。}
+パラコンパクトハウスドルフ空間は$T_4$
+\end{prop}
+\begin{proof}
+考える空間を$X$とする。まず最初に$X$が正則であることを示そう。$X$の点$p$と$p$を含まない閉集合$C$の任意の組を考える。このとき任意の$x\in C$について$p\not\in CL(U_x)$となる。$x$の開近傍$U_x$が存在する。なぜなら$X$のハウスドルフ性から$p,x$を分離する開集合$O,U$が存在するが
+\[
+p\not\in X\setminus O\supset U
+\]\cl
+で$X\setminus O$は閉集合なので$p\not\in \cl(U)$となるのでこの$U$を$U_x$とすれば良い。そして
+\[
+\{X\setminus C,U_x\}_{x\in C}
+\]
+を考えるとこれは$X$の開被覆になっているのでパラコンパクト性からこの被覆の開細分で局所有限な$\mathcal{A}$が存在する。このとき$\mathcal{B}=\{ A\in \mathcal{A}\ |\ A \cap C\neq \O\}$を考えるとこの族の元$A\in \mathcal{B}$は細分性からある$x\in C$について
+\[
+A\subset U_x
+\]
+となる。$(A\in \mathcal{B}ならばA\cap C\neq\O なのでA\subset X\setminus Cとはならない。)$よって$A\in \mathcal{B}$ならば
+\[
+p\not\in \cl(A)
+\]
+さて$G=\bigcup\mathcal{B}$を考えると$C\subset G$であり、そして局所有限性から
+\[
+\cl(G)=\bigcup_{A\in \mathcal{B}}\cl(A)
+\]
+なので$p\not\in \cl(G)$よって
+\[
+X\setminus \cl(G),\ G
+\]
+が$p,C$を分離する開集合となる。\par
+次に正規性を証明しよう$A,B$を$X$の交わらない２つの閉集合の任意の組とする。上より$X$は正則なので各$a\in A$について$\cl(U_a)\cap B=\O$となる$a$の開近傍$U_a$が存在する。さて
+\[
+\{X\setminus A, U_a\}_{a\in A}
+\]
+を考えるとこれは$X$の開被覆となっているのでパラコンパクト性からこの開被覆の開細分である局所有限被覆$\mathcal{U}$が存在する。さらに
+\[
+\mathcal{V}=\{V\in \mathcal{U}\ |\ A\cap V\neq \O\}
+\]
+を考えると上と同様の議論で$V\in \mathcal{V}$ならば
+\[
+\cl(V)\cap B=\O
+\]
+よって$G=\bigcup\mathcal{V}$と$置くとA\subset G$局所有限性から
+\[
+\cl(G)=\bigcup_{V\in\mathcal{V}}\cl(V)
+\]
+なので$\cl(G)\cap B=\O$よって
+\[
+G,\ X\setminus \cl(G)
+\]
+が$A,B$を分離する開集合となる。
+\end{proof}
+
+\setcounter{equation}{0}明らかにコンパクト空間はパラコンパクトである。さらに
+パラコンパクトである空間の重要な例として距離空間がパラコンパクトであることを示そう。
+以下の定理の証明の中では$0\not\in \nn$とし、$B(x,r)$で擬距離空間の$x$を中心とする$r$開球を表すとする。
+\begin{thm}[Stone の定理]
+擬距離空間の任意の開被覆に対し局所有限でかつ$\sigma$疎であるような開細分が存在する。特に擬距離空間はパラコンパクトである。\footnote{擬距離とは非退化性$d(x,y)=0\To x=y$を仮定しない距離のことである。}
+\end{thm}
+\begin{proof}M.E.Rudinによる簡潔な証明\cite{5}を引用しよう。\par 
+$X$を考えている擬距離空間として
+$\{C_{\al}\}_{\al\in A}$を$X$の開被覆とする。ただし添字$A$は整列されているものとする。整列可能定理を用いればこのように仮定しても一般性を失わない。そして自然数$n\in \nn$に対して開集合の族$\mathcal{U}_n=\{D_{\al,n}\}_{\al\in A}$を$n$について帰納的に構成する。今、$n$より小さい自然数については構成が終わっているとして$I_{\al,n}\subset X$を次の３つの条件を充たす$X$の点$x$全体の集合として定義する。
+\begin{eqnarray}
+&&\al =\min \{\be \ |\ x\in C_\be \}\\
+&&\forall j<n\ x\not\in \bigcup_{\be \in A}D_{\be,j}\\ 
+&&B(x,3\cdot2^{-n})\subset C_{\al}
+\end{eqnarray}
+そして
+\[
+D_{\al,n}=\bigcup_{x\in I_{\al,n}}B(x,2^{-n})
+\]
+と定義する。こうして
+\[
+\mathcal{U}_n=\{D_{\al,n}\}_{\al\in A}
+\]
+が定義される。$n=1$のときでも$(2)$が空な条件となるだけで、$I_{\al,1}$が構成され$\mathcal{U}_1$がきちんと定義される。以上により帰納的に開集合の族の列
+\[
+\mathcal{U}_1,\mathcal{U}_2,\cdots ,\mathcal{U}_n,\cdots
+\]
+が構成される。そして
+\[
+\mathcal{U}=\{D_{\al,n}\}_{(\al,n)\in A\times \nn}
+\]
+と置く。明らかに$D_{\al,n}\subset C_{\al}$なので$\mathcal{U}$が$\{C_{\al}\}_{\al\in A}$の細分になってる事はすぐにわかる。\par 
+$\mathcal{U}$が$X$の被覆となることを見よう。$x\in X$について$x\in C_{\al}$となる最小の$\al$が存在する。そして$n\in\nn$を十分大きく取れば$B(x,3\cdot s^{-n})\subset C_{\al}$となる。この$n$についてもし
+\[
+\exists j<n\ x\in \bigcup_{\be \in A}D_{\be,j}
+\]
+ならばもちろん$x\in \bigcup \mathcal{U}$である。一方
+\[
+\forall j<n\ x\not\in \bigcup_{\be \in A}D_{\be,j}\\ 
+\]
+ならば$x\in I_{\al,n}$となるので$x\in B(x,2^{-n})\subset D_{\al,n}$つまり$x\in \bigcup\mathcal{U}$
+となる。いづれにせよ$x\in \bigcup\mathcal{U}$なので
+\[
+X=\bigcup\mathcal{U}
+\]
+となり、$\mathcal{U}$が$X$の開被覆であることがわかる。\par
+$\mathcal{U}$が局所有限である事を見よう。$x\in X$を任意に与えると$\mathcal{U}$が被覆なので
+$x\in D_{\al,n}$となる$D_{\al,n}\in \mathcal{U}$が存在し、$j\in \nn$を十分大きく取れば
+\[
+B(x,2^{-j})\subset D_{\al,n}
+\]
+となる。このとき次が成り立つ
+\begin{eqnarray*}
+&&(a):i\ge n+jならば任意の\be \in AについてB(x,2^{-n-j})はD_{\be,i}と交わらない。\\
+&&(b):i<n+jならばD_{\be,i}がB(x,2^{-n-j})と交わるような\be\in A は高々一個しか存在しない。
+\end{eqnarray*}
+この$(a),(b)$から$\mathcal{U}$の局所有限性はすぐに従う。またこの$(a),(b)$から$\mathcal{U}_{\al,n}$が疎であることもわかる。
+これらの証明をしよう。\par
+$(a)$の証明：$i\ge n+j$ならば特に$i>n$なので$I_{\be,i}$の定義の$(2)$から$y\in I_{\be,i}$ならば$y\not\in D_{\al,n}$そして$B(x,2^{-j})\subset D_{\al,n}$から$y\not\in B(x,2^{-j})$なので
+\[
+d(x,y)\ge 2^{-j}
+\]
+が成立する。いまここで$(a)$が成立しない、つまり$B(x,2^{-n-j})$が$D_{\be,i}$と交わると仮定すると
+\[
+D_{i,\be }=\bigcup_{y\in I_{i,\be}}B(y,2^{-i})
+\]
+よりある$y\in I_{i,\be}$について$z\in B(x,2^{-n-j})\cap B(y,2^{-i})$が存在するが、$i\ge n+j\ge n+1$及び$n+j\ge j+1$から$2^{-i}\le 2^{-j-1}$と$2^{-n-j}\le 2^{-j-1}$となるので
+\[
+2^{-j}\le d(x,y)\le d(x,z)+d(z,y)<2^{-n-j}+2^{-i}\le 2^{-j-1}+2^{-j-1}=2^{-j}
+\]
+がわかり$2^{-j}<2^{-j}$となるから矛盾。よって$(a)$が成立する。[$(a)$の証明終わり]\par
+$(b)$の証明：まず$\be\neq\ga,p\in D_{\be,i},q\in D_{\ga,i}$ならば$2^{-n-j+1}<d(p,q)$が成立することを示そう。$\be<\ga$と仮定しても一般性を失わない。$D$の定義から
+\[
+p\in B(y,2^{-i}),q\in B(z,2^{-i})
+\]
+となる$y\in I_{\be,i},z\in I_{\ga,i}$が存在する。さて$\be<\ga$より$I_{\ga,i}$の定義の$(1)$から$z\not\in C_{\be }$が成り立ち、$D_{\be,i}\subset C_{\be}$から
+\[
+z\not\in D_{\be,i}
+\]
+となる。
+よって$I_{\be,i}$の定義の$(3)$から$B(y,3\cdot 2^{-i})\subset D_{\be i}$なので、上と合わせて$z\not\in B(y,3\cdot 2^{-i})$であるから
+\[
+3\cdot 2^{-i}\le d(y,z)
+\]
+を得る。
+これと三角不等式から
+\[
+3\cdot 2^{-i}\le d(y,z)\le d(y,p)+d(p,q)+d(q,z)<2^{-i}+d(p,q)+2^{-i}=2\cdot 2^{-i}+d(p,q)
+\]
+なので結局
+\[
+2^{-i}<d(p,q)
+\]
+そして$i<n+j$から$i\le n+j-1$なので$2^{-i}\ge 2^{-n-j+1}$となり
+\[
+2^{-n-j+1}<d(p,q)
+\]が成り立つ。
+さてもし$(b)$が成り立たない、つまり$B(x,2^{-n-j})$が$D_{\be,i},D_{\ga,i}(\be\neq \ga)$の二つと交わるなら\\$p\in B(x,2^{-n-j})\cap D_{\be,i},\ q\in B(x,2^{-n-j})\cap D_{\ga,i}$となる$p,q$が存在するが
+\[
+d(p,q)\le d(p,x)+d(x,q)<2^{-n-j}+2^{-n-j}=2^{-n-j+1}
+\]
+となるが$2^{-n-j+1}<d(p,q)$なので矛盾する。よって$(b)$が成立する。[$(b)$の証明終わり]\par
+以上で証明は完結した。
+\end{proof}
+\setcounter{equation}{0}
+次のtube lemma と呼ばれる定理は簡単だが、幅広い応用を持つ。
+\begin{thm}[tube lemma]
+$X$を位相空間、$Y$をコンパクト位相空間とする。更に$x\in X$と$X\times Y$の開集合$O$が
+\[
+\{x\}\times Y\subset O
+\]
+を充たしているとする。このとき$X$における$x$の開近傍$N$が存在して
+\[
+\{x\}\times Y\subset N\times Y\subset O
+\]
+を充たす。
+\end{thm}
+
+\begin{proof}$A=\{x\}\times Y$と置く
+\[
+\mathcal{O}=\{U\times V\ |\ A\cap (U\times V)\neq\O,\ U\times V\subset O,\ U,VはそれぞれX,Yの開集合\}
+\]
+と置くと、$\mathcal{O}$は開集合族で直積の開集合の定め方から
+\[
+A\subset \bigcup \mathcal{O}
+\]
+が成り立つので$\mathcal{O}$は$A$の開被覆である。$A$は$Y$と同相であるからコンパクトなので
+\[
+A\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+となる$\mathcal{O}$の有限部分族$\{P_i\times Q_i\}_{i=1}^n$が存在する。そして明らかに
+\[
+Y\subset \bigcup_{i=1}^nQ_i
+\]であり
+\[
+N=\bigcap_{i=1}^nP_i
+\]
+と置けば$x\in N$で
+\[
+A=\{x\}\times Y\subset N\times Y\subset N\times \bigcup_{i}^nQ_i=\bigcup_{i=1}^n(N\times Q_i)\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+が成り立つので証明が終わる。
+\end{proof}
+
+
+
+一般にパラコンパクト性は直積で全くもって保たれないが、次の事が知られている。
+\begin{cor}\label{para}
+パラコンパクト空間$X$とコンパクト空間$Y$の直積$X\times Y$はパラコンパクト
+\end{cor}
+
+\begin{proof}
+$\mathcal{U}$を$X\times Y$の開被覆とする。そして
+\[
+\mathcal{N}=\{N\subset X\ |\ NはXの開集合でN\times Yは\mathcal{U}の有限個の元の和集合で被覆される\}
+\]
+と定義すると$Y$のコンパクト性とtube lemmaから
+\[
+X=\bigcup \mathcal{N}
+\]
+となる。$X$のパラコンパクト性から局所有限な$\mathcal{N}$の開細分$\{M_a\}_{a\in A}$
+が存在する。細分なので各$a$について$M_a\subset N$となる$N\in \mathcal{N}$が存在する。よって
+\[
+M_a\times Y\subset N\times Y
+\]
+となる。$\mathcal{N}$の定義から$N\times Y$は$\mathcal{U}$の有限個の元の和集合で被覆される。この$a$毎に存在する$N\times Y$を被覆する$\mathcal{U}$の有限個の元を
+\[
+\{U_b\}_{B(a)}\ B(a)は有限集合
+\]
+と書くことにすると
+\[
+M_a\times Y\subset \bigcup_{b\in B(a)}U_b
+\]
+が成立する。さて$X\times Y$の開集合の族
+\[
+\mathcal{G}=\{U_b\cap (M_a\times Y)\ |\ b\in B(a)\ a\in A\}
+\]
+が$\mathcal{U}$の細分であることは明白である。また$\{M_a\times Y\}_{a\in A}$が$X\times Y$の開被覆を成しているので$\{U_b\}_{B(a)}$の定め方から$\mathcal{G}$が開被覆であることがわかる。$\mathcal{G}$が局所有限であることを示そう。\par 
+$(x,y)\in X\times Y$とする。$\{M_a\}_{a\in A}$の局所有限性から$x$の近傍$V$が存在して$V$は$\{M_a\}_{a\in A}$の有限個の元としか交わらない。$V$と交わる$\{M_a\}_{a\in A}$の元を
+\[
+M_{a_1},M_{a_2},\cdots ,M_{a_n}
+\]
+と置く。このとき$N\times Y$は$(x,y)$の近傍であり、$N\times Y$は$\{M_a\times Y\}_{a\in A}$の有限個の元
+\[
+M_{a_1}\times Y,M_{a_2}\times Y,\cdots ,M_{a_n}\times Y
+\]としか交わらない。そして各$a_i$について$B(a_i)$は有限集合なので$N\times Y$は$\mathcal{G}=\{U_b\cap (M_a\times Y)\ |\ b\in B(a)\ a\in A\}$の有限個の元としか交わらない。よって$\mathcal{G}$は局所有限である。
+\end{proof}
+
+tube lemmaのもう一つの応用として次の変数の片側がコンパクト空間になっている2変数の実関数に関する性質を証明しよう。これはある意味で関数の最大値が連続的に動く事を示している。
+\begin{cor}[連続関数のsupの連続依存性]
+位相空間$X$とコンパクト空間$Y$及び$X\times Y$上の実連続関数$f:X\times Y\to \rr$について
+\[
+F(x)=\sup_{y\in Y}f(x,y)
+\]
+で定義される$F:X\to \rr$は$X$上の実連続関数である。
+\end{cor}
+
+\begin{proof}
+$X$の任意の点$a$での連続性を示す。$\ep>0$を任意に与える。そして$A=\{a\}\times Y$とし、$S=f(A)\subset \rr$と置く。$Y$はコンパクトなので$A$はコンパクト集合である。そして$d$を$\rr$の距離とすると
+\[
+D:\rr\to \rr ;r\mapsto d(r,S)
+\]
+は連続関数なので$T=D\circ f:X\times Y\to \rr$は連続である。さて$T$の連続性から
+\[
+O=\{(x,y)\ |\ T(x,y)=D\circ f(x,y)=d(f(x,y),S)<\ep\}
+\]
+は$X\times Y$の開集合で明らかに$A\subset O$である。よってtube lemmaから$a$の開近傍$N$が存在して
+\[
+A\subset N\times Y\subset O
+\]
+となる。このとき$D$の定義と$O$の定義から$(a,y),(x,z)\in N\times Y$について
+\begin{equation}
+|f(a,y)-f(x,z)|\le D(S,f(x,z))<\ep
+\end{equation}
+が成り立つ。$Y$のコンパクト性から各$x\in X$について
+\[
+F(x)=\sup_{y\in Y}f(x,y)=f(x,y_0)
+\]
+となる$y_0$が存在するので、$x\in N$ならば$(1)$から
+\[
+|F(a)-F(x)|<\ep
+\]
+となるので点$a$での連続性は示された。$a$は任意なので結局$F$は$X$上連続である。
+\end{proof}
+
+
+以上で得られた結果を用いて次のパラコンパクト性とコンパクトハウスドルフ空間の関係を語る定理を証明しよう。
+\setcounter{equation}{0}
+\begin{thm}\label{suge}
+$Y$をコンパクトハウスドルフ空間とし、$X\subset Y$について
+\[
+X\times Y
+\]が正規であるとする。このとき$X$はパラコンパクトである。
+\end{thm}
+\begin{proof}
+$\{U_i\}_{i\in I}$を$X$の開被覆とする。そして$Y$の開集合からなる族${O_i}_{i\in I}$を
+\[
+O_i\cap X=U_i
+\]
+となる$O_i$からなるものとする。そして$O=\bigcup_{i\in I}O_i$とし$H=X\times O$と置く。更に
+\[
+F=\{(x,y)\in X\times Y\ |\ x=y\}
+\]
+と置く。この集合は包含写像$X\hookrightarrow Y$のグラフとなっているので$Y$のハウスドルフ性から$X\times Y$の閉集合となり、明らかに
+\[
+F\subset H
+\]
+となる。そして$X\times Y$の正規性から$F$上で恒等的に$0$の値をとり$H$の補集合で恒等的に$1$の値を取る実連続関数$f:X\times Y\to [0,1]$が存在する。さて$F:X\times X\times Y\to \rr$を
+\[
+F(v,w,y)=|f(v,y)-f(w,y)|
+\]
+とすると明らかに連続関数であり、$Y$のコンパクト性から先の系により
+\[
+d(v,w)=\sup_{y\in Y}=|f(v,y)-f(w,y)|=\sup_{y\in Y}F(v,w,y)
+\]
+は$X\times X$の連続関数であり、$X$上の擬距離である。この事から$d$の$\ep$開球$X$の開集合であり、擬距離$d$から誘導される位相$\mathfrak{O}_d$は元々の$X$の位相$\mathfrak{O}$より粗い。つまり
+\[
+\mathfrak{O}_d\subset \mathfrak{O}
+\]
+が成り立つ。
+\[
+W_x=\{v\ |\ d(x,v)<\frac{1}{2}\}
+\]
+と置くと族$\{W_x\}_{x\in X}$は$(X,\mathfrak{O}_d)$の開被覆となり、擬距離空間はパラコンパクトであることから$(X,\mathfrak{O}_d)$における$\{W_x\}_{x\in X}$の局所有限開細分$\{G_j\}_{j\in J}$が存在する。この族は$\mathfrak{O}_d\subset \mathfrak{O}$から$(X,\mathfrak{O})$の局所有限開被覆でもある。また$x\in X$を任意に固定して$v\in W_x$について$f(v,v)=0$から
+\[
+f(x,v)=f(x,v)-f(v,v)\le |f(x,v)-f(v,v)|\le d(x,v)<\frac{1}{2}
+\]よって$Y$の中\footnote{$X\subset Y$であることを思い出そう}で
+\[
+W_x\subset\{y\in Y\ |\ f(x,y)\le \frac{1}{2}\}
+\]
+となる。$x$を固定するごとに$\{y\in Y\ |\ f(x,y)\le \frac{1}{2}\}$は$Y$の閉集合であるから
+\[
+W_x\subset \cl_Y(W_x)\subset\{y\in Y\ |\ f(x,y)\le \frac{1}{2}\}
+\]
+が成立する。$\cl_Y$は$Y$の中で閉包をとっているということである。更に$H=X\times O$で$f$が$H$の補集合では恒等的に$1$の値を取ることから
+\[
+\{y\in Y\ |\ f(x,y)\le \frac{1}{2}\}\subset O
+\]
+が従う。結局
+\[
+W_x\subset \cl_Y(W_x)\subset\{y\in Y\ |\ f(x,y)\le \frac{1}{2}\}\subset O
+\]
+が任意の$x$について成り立つ。
+そして$\{G_j\}_{j\in J}$が$\{W_x\}_{x\in X}$の細分であることから同様に
+\[
+G_j\subset \cl_Y(G_j)\subset O
+\]
+が成り立つ。
+さて$\cl_Y(G_j)$はコンパクト空間$Y$の閉集合であることからコンパクトである。よって$O=\bigcup_{i\in I}O_i$と$CL_Y(G_j)\subset O$から$j\in J$毎に$I$の有限部分集合$A(j)$が存在して$\{O_i\}_{i\in A(j)}$は$\cl_Y(G_j)$の被覆となる。そして
+\[
+\{G_j\cap O_i\ |\ j\in J\ i\in A(j)\}
+\]
+と置くとこの族は$X$の開被覆となり$G_j\subset X$から$G_j\cap O_i=G_j\cap U_i$となるので$\{U_i\}_{i\in I}$の細分となる。$\{G_j\}$は$(X,\mathfrak{O})$の局所有限細分でもあり、$A(j)$は有限集合であることから結局$\{G_j\cap O_i\ |\ j\in J\ i\in A(j)\}$は$\{U_i\}_{i\in I}$の局所有限細分となる。よって$X$はパラコンパクト。
+\end{proof}
+
+この定理の以下の系の証明は明らかであろう。
+\begin{cor}
+局所コンパクトハウスドルフ空間$X$とその１点コンパクト化$\alpha X$について
+\[
+X\times \alpha X
+\]が正規なら$X$はパラコンパクト
+\end{cor}
+
+\begin{cor}[玉野の定理]
+$T_{3.5}$空間$X$とそのストーン・チェックコンパクト化$\beta X$について
+\[
+X\times \beta X
+\]
+が正規なら$X$はパラコンパクト
+\end{cor}
+これらの結果を用いて次のパラコンパクト空間の便利な特徴付けを証明する。
+\begin{thm}\label{main}
+$T_{3.5}$空間$X$について以下は同値
+\begin{eqnarray}
+&&Xはパラコンパクト\\
+&&任意のコンパクトハウスドルフ空間ZについてX\times ZはT_4
+\end{eqnarray}
+\end{thm}
+\begin{proof}
+$(1)\To (2)$
+系\ref{para}よりコンパクトハウスドルフ空間$Z$について$X\times Z$はパラコンパクトハウスドルフ空間である。よって$T_4$である。\par
+$(2)\To (1)$定理\ref{suge}を踏まえると、$X$を部分空間として含むコンパクトハウスドルフ空間の存在を言えば良いが、今$X$は$T_{3.5}$だと仮定しているので、例えば$X$のストーンチェックコンパクト化$\beta X$や十分に冪の大きいチコノフキューブ$[0,1]^{\mathfrak{m}}$などが$X$を部分空間として含むので証明は完結する。\footnote{$T_{3.5}$空間は、コンパクトハウスドルフ空間の部分空間として実現できるが、逆にコンパクトハウスドルフ空間の部分空間は$T_{3.5}$空間になる。}
+\end{proof}
+定理\ref{main}を用いてパラコンパクト性の色々な性質を証明しよう。
+\begin{cor}
+パラコンパクトハウスドルフ空間の$F_{\sigma}$集合はパラコンパクト
+\end{cor}
+\begin{proof}$Y$をパラコンパクトハウスドルフ空間$X$の$F_{\sigma}$集合とすると任意のコンパクトハウスドルフ空間$Z$について$Y\times Z$は$X\times Z$の$F_{\sigma}$集合となり正規空間の$F_{\sigma}$集合は正規だから$Y\times Z$は$T_4$となり先の定理から$Y$がパラコンパクトであることがわかる。
+\end{proof}
+
+次の定理は補題\ref{para}の拡張である。
+\begin{cor}\label{hodai}\footnote{この定理の$\sigma$コンパクトをリンデレフに変更するともはや定理は成り立たない。例えばゾルゲンフライ直線同士の積などが反例になる。}
+パラコンパクトハウスドルフ空間と$\sigma$コンパクト$T_3$空間との直積はパラコンパクト
+\end{cor}
+\begin{proof}
+$X$をパラコンパクトハウスドルフ空間、$Y$を$\sigma$コンパクト$T_3$空間とする。$\sigma$コンパクト空間はリンデレフなので特に$Y$はリンデレフ$T_3$空間なので$T_4$空間であり、特に$T_{3.5}$空間である。よって$Y$はあるコンパクトハウスドルフ空間$Z$の部分集合として実現できる。（例えば$\be X$や十分に冪の大きいチコノフキューブの部分空間となる。）そして、補題\ref{para}より$X\times Z$はパラコンパクトハウスドルフ空間であり、$Y$の$\sigma$コンパクト性から$Y$は$Z$の$F_{\sigma}$集合となるので$X\times Y$はパラコンパクトハウスドルフ空間$X\times Z$の$F_{\sigma}$集合となるので、先の補題から$X\times Y$はパラコンパクトになる。
+\end{proof}
+
+
+\begin{cor}\label{sigma}\footnote{より一般に正規リンデレフ空間は強パラコンパクト、特にパラコンパクトであるが、これはまた別の話。}
+$\sigma $コンパクトな$T_3$空間はパラコンパクト
+\end{cor}
+\begin{proof}
+直前の補題に$X=\{*\}$のときを適用すればわかる。
+\end{proof}
+
+局所コンパクトハウスドルフ空間のパラコンパクト性について次の事実がある。
+\begin{fact}
+局所コンパクトハウスドルフ空間がパラコンパクトであるための必要十分条件は空間が$\sigma$コンパクトな局所コンパクトハウスドルフ空間の位相的直和となること。
+\end{fact}
+証明は例えば\cite{b}参照。この事実と系\ref{hodai}から次が知れる。
+\begin{cor}
+パラコンパクトハウスドルフ空間とパラコンパクト局所コンパクトハウスドルフ空間の直積はパラコンパクト。
+\end{cor}
+
+\section{おまけ}
+証明はかなり省く
+
+\begin{fact}
+正規$(T_4)$空間の可算包含列
+\[
+G_1\hookrightarrow G_2\hookrightarrow G_3\hookrightarrow \cdots \hookrightarrow G_n\hookrightarrow \cdots
+\]において$G_i$は$G_{i+1}$の閉集合となっているとする。このときこの列の帰納極限空間$\dpst X=\varinjlim G_i=\bigcup_{i\in \nn}G_i$は正規$(T_4)$
+\end{fact}
+証明は例えば\cite{4}参照
+\begin{thm}
+コンパクトハウスドルフ空間の包含列の帰納極限はパラコンパクト
+\end{thm}
+\begin{proof}コンパクトハウスドルフ空間が$T_4$空間であることと
+上の事実から$X=\varinjlim G_i=\bigcup_{i\in \nn}G_i$は$T_4$であり、さらに$\sigma$コンパクトである。ゆえに系\ref{sigma}よりパラコンパクトである。
+\end{proof}
+
+\begin{cor}
+無限次元射影空間はパラコンパクト
+\end{cor}
+
+\begin{thebibliography}{9}
+\bibitem{2}児玉之行,永見啓応,位相空間論,岩波書店,1974
+\bibitem{b}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{1}森田紀一,位相空間論,岩波全書331,岩波書店1981
+\bibitem{2.5}E.Michael,{\it A Note on Paracompact Spaces },Proc.Amer.Math.Soc.vol4(1953)
+\bibitem{3}K.Morita,{\it paracompactness and product spaces},Fund.Math.vol50(1962),pp.223-236
+\bibitem{4}K.Morita,{\it On spaces having the weak topology with respect to closed coverings},Proc.Japan Acad.Vol29 No.10(1953)
+\bibitem{5}M.E.Rudin,{\it A New Proof that Metric Spaces are Paracompact},Proc.Amer.Math.Soc.vol20(1969),p603
+\end{thebibliography}
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

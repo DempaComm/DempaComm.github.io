@@ -1,0 +1,165 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 固有写像 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+以下の論文の束は固有写像について
+調べた痕跡だと思われる．
+
+
+これは何回も同じようなことを書いていると思うが，
+固有写像という用語はブルバキによって
+閉写像でファイバーがコンパクトなやつとして
+導入された思うのだが，いや，普遍閉だったかも，
+まあとにかく，
+なぜか時代が進むとこの意味での固有写像は
+完全写像と呼ばれるようになり，
+固有写像というのはコンパクト集合の引き戻しが
+コンパクトという定義になった．
+この現代的な意味での固有写像と，完全写像つまり元々の固有写像の概念は一致しない．一般に完全写像ならば
+現代風の固有写像，つまりコンパクト集合の引き戻しがコンパクトになる．逆に考えている空間がk-spaceとかだと
+現代風の固有写像は完全写像になる．
+さらにブルバキでは完全写像(元々の固有写像)
+が普遍閉写像と一致するということが示されている．
+つまり写像$f\colon X\to Y$が完全写像であることと，
+任意の位相空間$Z$について
+写像$f\times 1_{Z}\colon X\times Z\to Y\times Z$
+が閉写像であることは同値である．
+固有写像って一体なんなんじゃいというのはみんな気になっているようである
+(斎藤毅「Proper射の謎」https://www.ms.u-tokyo.ac.jp/~t-saito/jd/proper.pdf)．
+ブルバキには代数幾何の人がすごいいると思うので，
+代数幾何学的に発見された概念をブルバキの
+位相の巻に付け加えたのかもしれない．
+まあとにかく不思議な定義であるし，まあ
+この定義自体はコンパクト性を写像の概念として落とし込もうとした結果とも見れなくない(空間の話を射の話に言い換えるあのアレね)，それで
+不思議な定義の変容を辿っている概念である．
+
+
+
+論文
+\cite{MR0254818}
+では
+k-spaceの上だと現代風の固有写像が閉写像になることを証明している．
+位相空間がcompactly closed 
+というのは二つのコンパクト部分集合の
+共通部分がコンパクトになることで
+k-spaceっぽい概念．
+
+\cite{MR0282347}
+では
+almost-open, 
+bi-quotient, 
+compact-covering, 
+compact-trace, 
+countably bi-quotient, 
+pseudo-open, 
+$P_{2}$, 
+quotient  maps
+などの性質を研究している．
+k-spaceも出てくる．
+
+Michaelの論文
+\cite{MR0275387}
+では次の定理の簡単な証明を与えている．
+\begin{thm}
+$f\colon X\to Y$
+を完全写像とし，
+$g\colon X\to Z$は連続写像で
+$Z$はハウスドルフとする．
+このとき$(f, g)\colon X\to Y\times Z$
+は完全写像である．
+\end{thm}
+\begin{proof}
+$(f, g)$を以下のように分解する．
+\[
+X\xrightarrow{(1_{X}, g)} X\times Z
+\xrightarrow{f\times 1_{Z}} Y\times Z
+\]
+ここで
+写像
+$(1_{X}, g)$
+は$X$と
+$g$のグラフを結ぶ同相写像であり，
+$Z$がハウスドルフであるから$g$のグラフは
+$X\times Z$の中で閉集合になる
+(ここがハウスドルフポイント)．
+よって$(1_{X}, g)$は
+閉写像になる．特に完全写像である．
+そして完全写像同士の直積写像は完全写像になる
+(ここがこの証明唯一の非自明ポイント．証明はブルバキに書いてある)ので
+$f\times 1_{Z}$は完全写像である．
+よってこれら二つの写像の合成である
+$(f, g)$も完全写像である．
+\end{proof}
+この定理からいろいろな既存の定理を系として導出している．
+
+
+論文
+\cite{MR0370471}
+では$Y$をハウスドルフ空間として
+開写像でもあるような(現代風の)固有写像$f\colon X\to Y$
+が全射になる
+必要十分条件を求めている．
+これ一体何をしているのかと言うと，
+被覆写像の話がしたいと言うことだと思う．
+なんかそう言う感じのことが書いてある．
+\cite{MR1966988}
+もそういう話．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{propermap.bib}
+
+
+
+\end{document}

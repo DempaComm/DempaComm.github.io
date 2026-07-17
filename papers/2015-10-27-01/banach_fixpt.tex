@@ -1,0 +1,188 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{バナッハの不動点定理}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+
+この文章ではバナッハの不動点定理を証明する。普通のバナッハの不動点定理のあとに、パラメータ付きのバナッハの不動点定理も証明する。
+
+\begin{df}
+距離空間$X$のコーシー列がすべて収束するとき距離空間$X$は完備であると言う。
+\end{df}
+
+%なんか級数がどうのこうのっていう命題
+\begin{prop}[M testもどき]
+距離空間$X$内の点列$\{a_n\}$が
+\[
+\sum_{n=0}^{\mgn}d(a_n,a_{n+1})<\mgn
+\]
+を充たすなら$\{a_n\}$はコーシー列であり、特に$X$が完備ならこの点列は収束する。
+\end{prop}
+\begin{proof}
+$n\le m$として三角不等式を繰り返し用いて
+\[
+d(a_n,a_m)\le d(a_n,a_{n+1})+d(a_{n+1}a_{n+2})+\cdots d(a_{m-1},a_m)=\sum_{k=n}^{m-1}d(a_k,a_{k+1})
+\]
+ここで
+\[
+\sum_{n=1}^{\mgn}d(a_n,a_{n+1})<\mgn
+\]
+なので任意に$\varepsilon>0$を与えると適当な$N\in \nn$があって
+\[
+N\le n,m\To \sum_{k=n}^{m-1}d(a_k,a_{k+1})<\varepsilon
+\]
+となるので点列$\{a_n\}$はコーシー列である。
+\end{proof}
+
+\begin{thm}[Banachの不動点定理]$(X,d)$を完備距離空間とし、写像$f:(X,d)\to (X,d)$が
+\[
+\exists q\in [0,1)\ \forall x,y \in X\ d(f(x),f(y))\le qd(x,y)
+\]
+を充たすとする。（これを充たす写像を縮小写像と言う）このとき。$f$には不動点が唯一存在する。
+\end{thm}
+\begin{proof}まずこの写像$f$が連続であることが直ちに分かる。\\ 
+$X$の点$x_0$を適当に選んで数列$\{x_n\}$を帰納的に
+
+\[
+x_{n+1}=f(x_n)
+\]
+と定義する。この時$X_{n+1}=f(x_n),x_n=f(x_{n-1})$より
+\[
+d(x_n,x_{n+1})=d(f(x_{n-1}),f(x_n))\le qd(x_{n-1},x_n)
+\]
+が成り立つことから帰納的に
+\[
+d(x_n,x_{n+1})\le q^{n}d(x_0,x_1)
+\]
+がわかる。$0\le q<1$より
+\[
+\sum_{n=1}^{\mgn}d(x_n,x_{n+1})\le d(x_0,x_1)\left(\sum_{n=0}^{\mgn}q^n\right)=d(x_0,x_1)\frac{1}{1-q}<\mgn
+\]
+なので補題により$\{x_n\}$はコーシー列で$X$は完備であるからこの数列は収束する。その収束値を$x$とすると$f$の連続性と
+\[
+x_{n+1}=f(x_n)
+\]
+及び
+\[
+\lim_{n\to \mgn}x_{n+1}=\lim_{n\to \mgn}x_n=x
+\]
+から
+\[
+f(x)=x
+\]
+がわかる。これで不動点の存在は示された。一意性は$x,y$を$f$の不動点とするともちろん$f(x)=x,f(y)=y$であるから
+\[
+d(x,y)=d(f(x),f(y))\le qd(x,y)
+\]
+で$0\le q<1$より$d(x,y)\le0$となり、$x=y$がわかるので$f$の不動点は唯一である。
+\end{proof}
+
+\begin{thm}[パラメータ付きの不動点定理]$X$を完備距離空間、$T$を位相空間とし写像
+$f:X\times T\to X$が連続であるとし、$f(x,t)=f_{t}(x)$と書くことにする。さらに
+\[
+\exists q\in [0,1)\ \forall x,y \in X\ \forall t\in T\ d(f_t(x),f_t(y))\le qd(x,y)
+\]を充たし（$q$が$t$に依存してないことに注意せよ。）
+\[
+\forall x\in X\ f_t(x)がtについて有界
+\]
+であるとする。（このとき$x$を固定して$f_t(x)$が$t$について有界で連続になる。）このとき先の命題から存在と唯一性が示される$t$毎の$f_t$の不動点を$h(t)$と書くことにし、写像$h(t):T\to X$とみなしたとき、$h(t)$は連続写像である。
+
+\end{thm}
+
+\begin{proof}先とほぼ同様の証明である。一意性などは省き連続性を証明する。
+$X$の点$x_0$を適当に選んで数列$\{x_n\}$を帰納的に
+
+\[
+x_0(t)\equiv x_0,\ x_{n+1}(t)=f_t(x_n(t))
+\]
+と定義する。また実数$M$を$\forall t\in T\ d(x_0,x_1(t))\le M$となる$M$とする。このような$M$は$x_1(t)$の有界性から存在する。さてこの時$x_{n+1}(t)=f_t(x_n(t)),x_n=f_t(x_{n-1}(t))$より
+\[
+d(x_n(t),x_{n+1}(t))=d(f_t(x_{n-1}(t)),f_t(x_n(t)))\le qd(x_{n-1}(t),x_n(t))\le d(x_0(t),x_1(t))q^n
+\]
+が成り立つことから帰納的に
+\[
+d(x_n(t),x_{n+1}(t))\le q^{n}d(x_0(t),x_1(t))\le Mq^n
+\]
+がわかる。$0\le q<1$より
+\[
+\sum_{n=1}^{\mgn}d(x_n(t),x_{n+1}(t))\le d(x_0(t),x_1(t))\left(\sum_{n=0}^{\mgn}q^n\right)=M\frac{1}{1-q}<\mgn
+\]
+なので補題より各$t\in T$について
+\[
+d(x_n(t),x_m(t))\le\varepsilon
+\]
+よって
+\[
+\sup_{t\in T}d(x_n(t),x_m(t))\le\varepsilon
+\]
+つまり$\{x_n(t)\}$を$x_n(t):T\to X$と見なしたときこの関数列は一様距離でコーシー列で$X$は完備であるからこの点列列は収束し。各$n$について$x_n(t)$が連続であることから。その一様極限たる$h(t)$も連続である。これが不動点であることとかは先と同様である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}ユルゲン・ヨスト著,小谷元子訳,ポストモダン解析学,シュプリンガー・フェアラーク東京,2000
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

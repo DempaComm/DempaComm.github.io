@@ -1,0 +1,500 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+\newcommand{\m}{\mathfrak{m}}
+%空集合は\Oを使う！！！！！！！！！！！！
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+
+
+\title{閉写像云々}
+\author{キトラナンブ電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では正規と言う言葉は$T_1$を仮定しない意味で用いて$T_1$かつ正規を$T_4$と呼称する。
+
+\section{閉写像}
+次の良さのある命題が成り立つ。
+\begin{prop}[射影公式]\label{yoi}
+写像$f:X\to Y$と$A\subset X,\ B\subset Y$について
+\[
+f(A\cap f^{-1}(B))=f(A)\cap B
+\]
+が成り立つ。
+\end{prop}
+\begin{proof}
+簡単なので省略
+\end{proof}
+\begin{cor}\label{yosa}
+写像$f:X\to Y$と$A\subset X,\ B\subset Y$について
+\[
+A\cap f^{-1}(B)=\O\iff f(A)\cap B=\O
+\]
+が成り立つ。
+\end{cor}
+\begin{proof}
+$f(\O)=\O,\ f^{-1}(\O)=\O$と射影公式からすぐにわかる。
+\end{proof}
+\begin{df}[小像（small image ）]$A\subset X$の写像
+$f:X\to Y$による小像とは
+\[
+f_!(A)=Y\setminus f(X\setminus A)
+\]
+のことである。
+\end{df}
+小像は一見掴みどころが無いように見えるが、次の命題を見ればなにとなくわかると思う。
+\begin{prop}\label{wakari}
+写像$f;X\to Y$と$A\subset X$について次が成立する。
+\[
+y\in f_!(A)\iff f^{-1}(y)\subset A
+\]
+である。特に$S\subset Y$について
+\[
+S\subset f_!(A)\iff f^{-1}(S)\subset A
+\]
+が成り立つ。
+\end{prop}
+\begin{proof}
+先の系を用いて
+\begin{eqnarray*}
+y\in f_!(A)\iff y\not\in f(X\setminus A)\iff \{y\}\cap f(X\setminus A)=\O
+\\ 
+\iff f^{-1}(y)\cap (X\setminus A)=\O\iff f^{-1}(y)\subset A
+\end{eqnarray*}
+となり前半が成り立つ。後半も同様。
+\end{proof}
+\begin{lem}
+写像$f;X\to Y$と$A\subset X$について次が成立する。
+$f_!(A)\subset f(A)$
+\end{lem}
+\begin{proof}
+当たり前
+\end{proof}
+
+いよいよ閉写像を定義する。
+\begin{df}[閉写像] 位相空間$X,Y$の間の連続写像$f:X\to  Y$が閉写像であるとは$X$の閉集合の$f$による像が$Y$の閉集合に常になってることである。
+\end{df}
+閉写像は常に連続であることに注意しよう。
+さて次の命題に移る前に位相空間$(X,\mathfrak{O})$について$A\subset X$の近傍とは
+$A\subset \nai (V)$となる集合$V$のことであったことを思い出そう。$A=\{x\}$のとき、$A=\{x\}$の近傍は点$x$の近傍と同じ意味である。\\ 
+次の便利な閉写像の特徴付けがある。
+\begin{thm}
+位相空間$X,Y$の間の連続写像$f:X\to  Y$について以下は同値
+\begin{enumerate}
+\renewcommand{\labelenumi}{\rm{(\arabic{enumi})}}
+\item$f$は閉写像 
+\item $f$によるXの開集合の小像はYの開集合
+\item 任意の$S\subset  Y$と$f^{-1}(S)$の任意の近傍$U$について$S$の近傍$V$が存在して
+\[
+f^{-1}(S)\subset f^{-1}(V)\subset U
+\]
+が成り立つ。
+\item 任意の$y\in Y$と$f^{-1}(y)$の任意の近傍$U$について$y$の近傍$V$が存在して
+\[
+f^{-1}(y)\subset f^{-1}(V)\subset U
+\]
+が成り立つ。
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$(1)\To(2),(2)\To(3),(3)\To(4),(4)\To(1)$の順番で証明する。\\
+$(1)\To(2):$$U$を$X$の開集合とする。このとき$X\setminus U$は閉集合であるから$f$は閉集合なので$f(X\setminus U)$は$Y$の閉集合、よって$f_!(U)=Y\setminus f(X\setminus U)$は開集合。\\ 
+$(2)\To(3):$$f^{-1}(S)$の近傍$U$は開近傍としてもよい。$(2)$から$U$の小像$f_!(U)$は開集合で$f^{-1}(S)\in U$より$S\subset  f_!(U)$である。$V=f_!(U)$とすれば
+\[
+S\subset  V=f_!(U)\subset f(U)
+\]
+なので$f^{-1}(S)\subset f^{-1}(V)\subset U$\\ 
+$(3)\To(4):$自明\\ 
+$(4)\To(1):$$A$を$X$の閉集合とする。そして$y\not\in f(A)$を任意に取る。すると系\ref{yosa}より
+\[
+\{y\}\cap f(A)=\O\iff f^{-1}(y)\cap A=\O\iff f^{-1}(y)\subset X\setminus A
+\]
+となる。$X\setminus A$は開集合なので$(3)$から$y$の開近傍$V$が存在して
+\[
+f^{-1}(y)\subset f^{-1}(V)\subset X\setminus A
+\]
+となる。ここで系\ref{yosa}より
+\[
+f^{-1}(V)\subset X\setminus A\iff f^{-1}(V)\cap A=\O\iff V\cap f(A)=\O
+\]
+となり$y$は$y\not\in f(A)$となる任意の$Y$の元なので$Y\setminus f(A)$は開集合となり結局$f(A)$が閉集合であることがわかる。$A$は$X$の任意の閉集合であったので$f$は閉写像である。
+\end{proof}
+\begin{lem}\label{seigen}閉写像$f:\to Y$と$Y$の部分空間$S$について
+\[
+f:f^{-1}(S)\to S
+\]
+は閉写像である。
+\end{lem}
+\begin{proof}
+$f^{-1}(S)$の閉集合は$X$の閉集合$A$を用いて$f^{-1}(S)\cap A$と書けるが、射影公式から
+\[
+f(f^{-1}(S)\cap A)=S\cap f(A)
+\]
+となる。$f:\to Y$は閉写像なので$f(A)$は$Y$の閉集合であるので$S\cap f(A)$は$S$の閉集合である、よって$f:f^{-1}(S)\to S$は閉写像である
+\end{proof}
+\subsection{閉写像で保たれる性質}
+位相空間の閉写像による像を閉像という。閉像にはドメインの性質が伝播することがしばしばある。これから先の閉写像の特徴付けを用いてそれらを示そう。閉像にはもちろんコドメインから相対位相が入っている。更にコドメインを制限することによって一般性を失うこと無く閉像を考える時は閉写像は全射であるとしてもよい。
+以下この\S 内では全射閉写像$f:X\to Y$を考えているものとする。
+\begin{thm}[$T_1$]\label{t1}
+$T_1$空間の閉像は$T_1$空間
+\end{thm}
+\begin{proof}
+$x\in X$について$\{x\}$が閉なので$f(\{x\})=\{f(x)\}$も閉となる。この事からすぐわかる。
+\end{proof}
+
+
+\begin{thm}[正規性]
+正規空間の閉像は正規
+\end{thm}
+\begin{proof}
+$A,B$を$f(X)$の互いに素な閉集合とする。このとき$f^{-1}(A),f^{-1}(B)$は$X$の互いに素な閉集合となる。さて$X$が正規であることから$f^{-1}(A)\subset U,f^{-1}(B)\subset V$で互いに素な開集合$U,V$が存在する。すると定理の$(4)$から
+\[
+f^{-1}(A)\subset f^{-1}(O)\subset U,\ f^{-1}(B)\subset f^{-1}(P)\subset V
+\]
+となる$A$の開近傍$O$と$B$の開近傍$P$が存在する。この時$O,P$は互いに素な開集合となるので結局$f(X)$は正規である。
+\end{proof}
+\begin{thm}[遺伝的正規性]
+遺伝的正規空間の閉像は遺伝的正規
+
+\end{thm}
+\begin{proof}
+$S$を$Y$の任意の部分空間とする。このとき$X$は遺伝的正規なので$X$の部分空間である$f^{-1}(S)$は正規である。よって補題\ref{seigen}から$S$は正規空間の閉像になるので上の定理から$S$は正規である。
+\end{proof}
+
+\begin{thm}[完全正規性]
+完全正規空間の閉像は完全正規
+\end{thm}
+\begin{proof}
+$U$を$Y$の開集合とする。これが$F_{\sigma}$集合であることを言えば良い。$f^{-1}(U)$は$X$の開集合であり、$X$の完全正規性から$f^{-1}(U)$は$X$の$F_{\sigma}$集合となる。この事と$f$が閉写像で全射であることを踏まえれば$U$が$Y$の$F_{\sigma}$集合となることがわかる。
+\end{proof}
+明らかに次の系がわかる。
+\begin{cor}\label{t4}
+$T_4$空間の閉像は$T_4$空間
+\end{cor}
+\begin{cor}
+$T_5$空間の閉像は$T_5$空間
+\end{cor}
+\begin{cor}
+$T_6$空間の閉像は$T_6$空間
+\end{cor}
+
+
+\begin{thm}[コンパクトハウスドルフ性]
+コンパクトハウスドルフ空間の閉像はコンパクトハウスドルフ
+\end{thm}
+\begin{proof}
+閉写像は連続なので閉像がコンパクトになることはすぐに分かる。あとは閉像のハウスドルフ性だが、コンパクトハウスドルフ空間が$T_4$であることと上の定理からすぐに分かる。
+\end{proof}
+
+
+\begin{thm}[コンパクト距離付け可能性]\label{kyori}
+コンパクト距離空間付け可能空間の閉像はコンパクト距離距離付け可能空間
+\end{thm}
+\begin{proof}
+ウリゾーンの距離化可能定理からわかる次の同値に注意しよう。
+\[
+Xがコンパクト距離付け可能\iff Xはコンパクトハウスドルフで第二可算
+\]
+また、系\ref{t4}から$f(X)$は$T_4$になるので、上の同値性を鑑みれば$f(X)$が第二可算であることを示せば良い。$\mathfrak{B}$を$X$の可算な開基とする。
+そして$\dpst \mathfrak{A}=\{\bigcup_{i=1}^n{B_i}\ |\ B_i\in \mathfrak{B}\}$とすると$\mathfrak{A}$も可算である。さらに
+\[
+\mathfrak{C}=\{f_!(O)\ |\ O\in \mathfrak{A}\}
+\]
+とすると$f$は閉写像であるから$f_!(O)$は$Y$の開集合である。$\mathfrak{C}$が$f(X)$の開基であることを言おう。$y\in f(X)$と$y\in U$となる任意の$Y$の開集合$U$を考える。このとき$f^{-1}(y)\subset f^{-1}(U)$であり先の定理\ref{t1}から$f(X)$は$T_1$であるから$y$は閉集合であり$f^{-1}(y)$は$X$の閉集合となる。特に$f^{-1}(y)$はコンパクトである。よって$\mathfrak{B}$が開基であることより$\mathfrak{B}$の有限個の元$B_1,B_2,\cdots ,B_n$が存在して
+\[
+f^{-1}(y)\subset \bigcup_{i=1}^nB_i\subset f^{-1}(U)
+\]
+となる。$\dpst B=\bigcup_{i=1}^nB_i$は$B\in \mathfrak{A}$であるから$f_!(B)\in \mathfrak{C}$である。更に命題\ref{wakari}と$f(f^{-1}(U))\subset U $より
+\[
+y\in f_!(B)\subset U 
+\]
+となる。之は$\mathfrak{C}$が$f(X)$の開基であることを示している。よって$f(X)$は第二可算なコンパクトハウスドルフ空間であり、距離付け可能である。
+\end{proof}
+\begin{cau}
+後に完全写像というものが出てくるが、この定理\ref{kyori}の証明を真似っ子すると全射完全写像$f:X\to Y$が存在するとき$w(Y)\le w(X)$がわかる。ここで$w(X)$は$X$の重みである。
+\end{cau}
+
+\begin{cor}
+$X$をコンパクト距離付け可能空間$Y$をハウスドルフ空間とし、$f:X\to Y$を連続写像とする。このとき$f$による$X$の像はコンパクト距離付け可能である。
+\end{cor}
+\begin{proof}
+コンパクト空間からハウスドルフ空間への連続写像は閉写像であることからわかる。
+\end{proof}
+
+\section{固有写像}
+この\S では固有写像についての性質を調べる。
+\begin{df}[固有写像]
+連続写像$f:X\to Y$が固有、または固有写像であるとは$Y$の任意のコンパクト集合$K$について
+$f^{-1}(K)$が$X$のコンパクト集合となること。
+\end{df}
+
+\begin{df}連続関数$f:X\to Y$が次の条件$(\star)$充たすとき$f$を完全写像と呼ぶ\footnote{完全写像に全射性を仮定する流儀もあるが、ここでは全射性は特に要求しないこととする。}
+\begin{description}
+\item[($\star$)]任意の$y\in Y$について$f^{-1}(y)$は$X$のコンパクト集合であり、かつ$f$は閉写像
+\end{description}
+\end{df}
+
+固有写像と完全写像について次の２つの命題が成り立つ。
+
+\begin{thm}
+完全写像$f:X\to Y$は固有
+\end{thm}
+\begin{proof}$K$を$Y$の任意のコンパクト集合とし
+$\mathfrak{U}$を$f^{-1}(K)$の任意の開被覆とする。このとき$\mathfrak{U}$は有限和について閉じているとしても一般性を失わないつまり$\mathfrak{U}$は
+\[
+U,V\in \mathfrak{U}\To U\cup V\in\mathfrak{U}
+\]
+を充たすとしても一般性を失わない。
+\[
+\mathfrak{V}=\{f_!(U)\ |\ V\in \mathfrak{U}\}
+\]
+とするとこれは$Y$の開集合族であり$f^{-1}(y)$がコンパクトであることと$\mathfrak{U}$が有限和について閉じていると言う仮定から$y\in K$について$f^{-1}(y)\subset U$となる$U\in \mathfrak{U}$が存在するので命題\ref{wakari}から$\mathfrak{V}$\footnote{$\mathfrak{V}$は$V$のフラクトゥールである。}
+は$K$の被覆となる。そして$K$はコンパクトなので$\mathfrak{V}$の有限個の元$\{f_!(U_1),f_!(U_2),\cdots ,f_!(U_n)\}$が選べて
+\[
+K\subset \bigcup_{i=1}^nf_!(U_i)
+\]
+と出来る。さて$x\in f^{-1}(K)$を取り、$y=f(x)$と置くと$x\in f^{-1}(y)$となる。$y\in K$と$K\subset \bigcup_{i=1}^nf_!(U_i)$よりある$i$で$y\in f_!(U_i)$となるが命題\ref{wakari}よりこの$i$について
+\[
+f^{-1}(y)\subset U_i
+\]
+となるので$x\in U_i$となる。結局
+\[
+f^{-1}(K)\subset \bigcup_{i=1}^nU_i
+\]
+となり$f^{-1}(K)$がコンパクトである事がわかる。
+\end{proof}
+
+この定理のある意味での逆が成り立つこと証明するがその前に必要な補題は述べておく。
+\begin{lem}\label{kk}
+局所コンパクトハウスドルフ空間$X$に於いて
+\[
+FがXの閉集合\iff Xの任意のコンパクト集合KについてK\cap FがKの閉集合
+\]
+が成り立つ。\footnote{これは局所コンパクトハウスドルフ空間の位相がそのコンパクト集合全体から誘導されるcoherent topologyと一致する事を示している。}
+\end{lem}
+\begin{proof}$(\To)$は明らかであるから$(\Gets)$を示せば良い。\\ 
+\begin{equation*}
+Xの任意のコンパクト集合KについてK\cap FがKの閉集合
+\end{equation*}
+が成り立っているとして$A=\cl_X(A)$を示せば良い。ここで$\cl_X$は$X$に於ける閉包を表す。一般に$A\subset \cl_X(A)$なので逆向きの包含関係を示す。$x\in \cl_X(A)$を取ると$X$が局所コンパクトハウスドルフであることから$x$のコンパクト近傍$N$が存在し条件から$A\cap N$は$N$の閉集合である。つまり
+\[
+A\cap N=\cl_N(A\cap N)=\cl_X(A)\cap N
+\]
+が成り立つ。$x\in \cl_X(A)\cap N$なので$x\in A\cap N\subset A$が成り立ち結局$x\in A$なので
+\[
+A=\cl_X(A)
+\]
+が成り立つ。
+\end{proof}
+
+\begin{thm}
+$Y$が局所コンパクトハウスドルフのとき
+固有写像$f:X\to Y$は完全写像
+\end{thm}
+\begin{proof}
+まず任意の$y\in Y$について$f^{-1}(y)$が$X$のコンパクト集合であることは$f$の固有性から明らかである。よって以下$f$が閉写像であることを示す。$A$を$X$の閉集合とし$K$を$Y$のコンパクト集合とすると定理\ref{yoi}の射影公式より
+\[
+f(f^{-1}(K)\cap A)=K\cap f(A)
+\]
+となるが$f$の固有性から$f^{-1}(K)$はコンパクトで$A$が閉集合であることから$f^{-1}(K)\cap A$はコンパクト集合の閉集合であるからこれ自体コンパクト集合となる。そしてその連続像である$K\cap f(A)$もコンパクトであり、$Y$のハウスドルフ性からこれは$Y$の閉集合である。そして$K$は任意で$Y$は局所コンパクトハウスドルフなので先の補題\ref{kk}$よりf(A)$が閉であることがわかる。
+\end{proof}
+\begin{cau}
+この証明の方針だと$Y$について
+\[
+(k)\ FがYの閉集合\iff Yの任意のコンパクト集合KについてK\cap FがKの閉集合
+\]
+及び
+\[
+(kc)\ Yの任意のコンパクト集合は閉
+\]\footnote{このような空間をKC-spaceと呼ぶようだ}
+が成り立ってさえいれば定理が成り立つことがわかる。面倒なのでここで注意するに留める。例えば第一可算なハウスドルフ空間や、条件$(k)$を充たし閉コンパクト集合で被覆される空間などがそうである。
+\[
+(k)\ FがYの閉集合\iff Yの任意のコンパクト集合KについてK\cap FがKの閉集合
+\]が成り立つ空間をk-spaceと呼んだりするがk-spaceと言うものは今や様々な同値ではない定義があるようだ。
+\end{cau}
+\begin{cor}\label{kei}
+$X$がハウスドルフ空間で$Y$が局所コンパクトハウスドルフ空間であるとき連続写像$f:X\to Y$に関する以下の２つの性質は同値
+\begin{eqnarray*}
+&Yの任意のコンパクト集合Kについてf^{-1}(K)はコンパクトハウスドルフ\\ 
+&fは完全写像
+\end{eqnarray*}
+そしてこの２つの内いづれか（つまり両方）を充たす$f:X\to Y$が存在するとき$X$は必然的に局所コンパクトハウスドルフ空間となる。
+\end{cor}
+\begin{proof}
+同値性は先の定理たちから明らかであろう。このような$f$の存在から$X$が局所コンパクトハウスドルフになることを言おう。局所コンパクト性から$Y$は相対コンパクトな開集合で被覆されるが、その被覆の$f$のよる引き戻しは固有性から$X$の相対コンパクトな開被覆となる。相対コンパクトな開被覆が存在するハウスドルフ空間は局所コンパクトハウスドルフ空間になる。
+\end{proof}
+
+\section{おまけ}
+このセクションで述べる命題について厳密な証明はやらない。やっつけ仕事で作った。
+\begin{df}[普遍閉写像（universally closed map）]
+連続写像$f:X\to Y$が普遍閉写像であるとは任意の位相空間$Z$に対して
+\[
+f\times id_Z:X\times Z\to Y\times Z
+\]
+が閉写像になることである。
+\end{df}
+\begin{fact}
+完全写像は普遍閉写像である。
+\end{fact}
+\begin{cor}
+局所コンパクトハウスドルフ空間の間の固有写像は普遍閉写像である。
+\end{cor}
+\begin{cau}
+ブルバキの数学原論ではむしろ普遍閉写像の事を固有写像（邦訳では適性写像）と読んでおり、今風の固有写像はこの文章で言う系\textrm{\ref{kei}}の形で局所コンパクトハウスドルフ空間に対する言い換えとして述べられていたのだが、いつの間にかそっちのほうが気に入られたのか使い勝手が良かったのか、コンパクト集合の引き戻しがコンパクトと言う定義に取って代わられてしまったようだ。\par
+実は条件$(\star)$は写像の普遍閉性と同値である。つまり完全写像と普遍閉写像は同値な概念である。証明は\cite{1}の適性写像の章をを参照のこと。ただし完全写像という言葉は用いられていない。
+\end{cau}
+\begin{prop}
+コンパクトハウスドルフ空間の間の連続写像は条件$(\star)$を充たす。特にそのような写像は固有であり、普遍閉である。
+\end{prop}
+\begin{proof}
+コンパクトハウスドルフ空間の間の連続写像なので当たり前。
+\end{proof}
+\setcounter{equation}{0}
+\begin{thm}$2=\{0,1\}$は以下では離散位相の入った二元集合を表し$C,I$はそれぞれカントール集合と単位閉区間を表すことにする。このとき
+位相空間$X$と任意の無限基数$\mathfrak{m}$について以下は同値
+\begin{eqnarray}
+&X\times 2^{\m}は正規\\ 
+&X\times C^{\m}は正規\\ 
+&X\times I^{\m}は正規\\ 
+&w(Y)\le \m となる任意のコンパクトハウスドルフ空間YについてX\times Y は正規
+\end{eqnarray}
+\end{thm}
+\begin{proof}
+$2^{\m}\approx C^{\m}$より$(1)\iff(2)$はわかる。\par
+$(2)\To(3)$は全射$C\to I$が存在することとコンパクトハウスドルフ空間の間の連続写像は常に普遍閉になることと正規空間の閉像が正規になることからわかる。\par
+$(3)\To (4)$は$w(Y)\le \m$となるコンパクトハウスドルフ空間は$I^{\m}$に埋め込めることと正規空間の閉集合は正規であることからわかる。\par
+$(4)\To(1)$は自明。
+\end{proof}
+\begin{cau}
+$w(X)$で位相空間の重みを表す。つまり位相空間$X$の開基の最小濃度である。\par
+この定理は実は$\mathfrak{m}$-Paracompactnessの特徴づけに使われる。
+\end{cau}
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{2}森田紀一,位相空間論,岩波全書331,岩波書店1981
+\bibitem{engel}R,Engelking,{\it General Topology },PWN,1977
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

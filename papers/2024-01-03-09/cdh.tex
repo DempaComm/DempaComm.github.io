@@ -1,0 +1,162 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- Countable dense homogeneity ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+この論文の束は
+位相空間のcountable dense homogeneity 
+(可算稠密等質性)
+を調べた時に集めたものだと思う．
+位相空間$X$が
+countably dense homogeneous 
+であるとは$X$の可算な稠密部分集合$A$と$B$
+に対して
+ある同相写像$f\colon X\to X$
+であって$f(A)=B$を満たすものが存在する時にいう．
+ユークリッド空間$\rr^{n}$の可算稠密等質性は
+はてなブログ電波通信でも紹介したことがある
+(https://concious4410.hatenablog.com/entry/2022/03/13/153112)．
+あの記事は
+有名な次元論の本
+\cite{MR0006493}
+で紹介されていた証明方法にギャップがあったので埋めたという記事である．
+ちなみに可算稠密等質性をもつ空間が普通の意味で等質性を満たすかどうかはどうやら微妙らしい．
+
+
+論文
+\cite{MR1580864}
+と
+\cite{MR1511557}
+は$\rr^{n}$の可算稠密等質性を証明した論文らしいことがメモとして本棚に残されていたが，
+フランス語とドイツ語なのでよくわかんなかった．
+
+論文
+\cite{MR0301711}
+はcountable dense homogeneity 
+を初めて定義した論文だと思う．
+位相空間$X$がstrongly locally homogeneous 
+とは任意の点$x\in X$
+とその任意の開近傍$U$
+についてある$x$の開近傍$V$で$V\subset U$
+となるもの
+が存在して
+任意の
+$y\in V$について同相写像$h\colon X\to X$
+が存在して$h(x)=y$であって，
+$h|_{X\setminus U}=1_{X}$
+を満たすものが存在する時にいう．
+ユークリッド空間とか， 
+カントール集合とかはこの性質を満たす．
+この時以下を示している．
+\begin{thm}
+$X$を局所コンパクトな可分距離空間で
+strongly locally homogeneous
+と仮定する．
+この時$X$は
+countable dense homogeneous 
+である．
+\end{thm}
+この定理から
+ユークリッド空間がcountable dense 
+homogeneous 
+であることがわかる．
+
+
+論文
+\cite{MR0203711}
+では$\rr^{n}$のCDHの同相写像$f$
+は任意に
+$\epsilon\in (0, \infty)$
+を与えたとして
+$\sup_{x\in \rr^{n}} |f(x)-x|<\epsilon$
+を満たすように取れることを証明している．
+
+論文
+\cite{MR0482626}
+では位相空間$X$に何か適切な条件をつけて
+可算稠密等質性から他の等質性を
+導くということをやっている．
+
+論文
+\cite{MR1141367}
+は可算稠密等質性と
+Baire性質について調べていると思うけど
+よくわかんなかったごめん!
+CHとかを仮定する話をしているので
+set-theoretic topology
+になると思う．
+
+
+論文\cite{MR2439024}
+ではポーランド空間であって，
+可算稠密等質性を持ちながら
+稠密開集合であってそれは自己同相写像が恒等写像
+しかないものを持つようなものを構成している．
+すごい変な空間．
+
+
+\cite{MR1020771}
+は等質性に関するサーベイである．
+可算稠密等質性も扱っている．
+可算稠密等質性についてまた調べたくなったら
+この論文が引用している論文や
+この論文を引用している論文に目を通せばいいと思う．
+
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{cdh.bib}
+
+
+
+\end{document}

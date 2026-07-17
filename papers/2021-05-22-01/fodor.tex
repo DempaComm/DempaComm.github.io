@@ -1,0 +1,341 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{scalerel}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+
+\DeclareMathOperator{\cf}{cf}
+\DeclareMathOperator*{\dic}{\scalerel*{\bigtriangleup}{\sum}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{対角的交叉とFodorの補題}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では対角的交叉の基本的性質とFodorの補題を証明する．
+
+
+\begin{df}[club集合]\normalfont
+$\kappa$を基数とする．
+$\kappa$の非空で非有界な閉集合をclub集合という．``club"とは \textbf{CL}osed \textbf{U}n\textbf{B}ounded という意味である．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とし，
+$\kappa$を基数とする．
+このとき$\kappa^n$の部分集合$A$が
+\textbf{対角的に非有界}であるとは
+任意の$\alpha_1, \al_2, \dots, \al_n< \kappa$について
+\[
+A\cap \prod_{i=1}^n[\alpha_i, \kappa )^n\neq \emptyset. 
+\]
+を満たすときにいう．
+\end{df}
+
+
+
+\begin{prop}\label{prop:dia}
+$n\in \zz_{\ge 1}$とし，
+$\kappa$を$\omega_0<\cf(\kappa)$を満たす基数とする．
+そして$A$と$B$を$\kappa^n$の対角的に非有界な閉部分集合とする．
+このとき$A\cap B$も対角的に非有界な閉集合である．
+\end{prop}
+\begin{proof}
+$A\cap B$が閉集合であることはわかるので対角的に非有界であることを示せば良い．
+任意に$\la\in \kappa$を与えると非有界性から
+$[\la,\kappa)^n\cap A\neq \O$である．
+そこで$a(0)\in [\la,\kappa)^n\cap A$をとる．
+$a(0)=(a_1(0), \dots, a_n(0))$と成分表示されているとする．
+次に$B$が対角的に非有界であることから
+$\left(\prod_{i=1}^n[a_i(0),\kappa)\right)\cap B\neq\O$であるのでここから元
+$b(0)$をとる．一般に$a(m)$まで構成されたときに
+\[
+b(m)\in \prod_{i=1}^n[a_i(m),\kappa)\cap B
+\]
+と定義し，$b(m)$まで構成されたときに
+\[
+a({m+1})\in \prod_{i=1}^n[b_i(m),\kappa)\cap A
+\]
+と定義する．
+このようにして$A$内の点列$\{a(m)\}_{m\in \nn}$と
+$B$内の点列$\{b(m)\}_{m\in\nn}$を得る．
+そして構成の仕方から
+各$i\in \{1, \dots, n\}$について
+\[
+a_i(m)\le b_i(m)\le a_i(m+1)\le b_i(m+1)
+\]
+なので任意の$i$について
+$\dpst \sup_{m\in\nn}a_i(m)=\sup_{m\in \nn}b_i(m)$である．
+これを$\mu_i$とおき，$\mu=(\mu_1, \dots, \mu_n)$と定義すると
+$\mu\in [\la, \kappa)^n$であり，
+また$\omega_0<\cf(\kappa)$から
+$\mu_i< \kappa$である．$A$と$B$が閉集合であることから
+$\mu\in A$でかつ$\mu\in B$なので$\mu\in A\cap B$である．よって$A\cap B$は非有界である．
+\end{proof}
+
+\begin{prop}\label{prop:close}
+$n\in \zz_{\ge 1}$とし，
+$\kappa$を基数とする．
+そして$\{F_{\alpha}\}_{\alpha<\kappa}$
+は$\kappa$で添字付けられた$\kappa$の閉集合族であり，
+任意の$\la\in \kappa$について
+\[
+F_{\la}=\bigcap_{\alpha<\la}F_{\alpha}
+\]
+を満たすとする．
+このとき$\kappa^2$の部分集合
+\[
+\bigcup_{\alpha<\kappa}\{\alpha\}\times F_{\alpha}
+\]
+は$\kappa^2$の閉集合である．
+\end{prop}
+\begin{proof}
+$S=\bigcup_{\alpha<\kappa}\{\alpha\}\times F_{\alpha}$
+とする．
+$(x, y)\not\in S$とすると$y\not\in F_x$である．仮定より
+\[
+y\not\in \bigcap_{\alpha<x}F_{\alpha}
+\]
+なので$\alpha<x$が存在して$y\not\in F_{\alpha}$である．
+よって$(\be, y]\cap F_{\alpha}=\emptyset$
+となる$\be$が存在する．
+このとき$\{F_{\alpha}\}_{\alpha<\kappa}$の単調減少性から
+任意の$\gamma\in [\alpha, x]$
+について
+$(\be, y]\cap F_{\gamma}=\emptyset$
+である．
+つまり$(\alpha, x]\times (\be, y]\cap S=\emptyset$
+となる．$x, y$は任意であったので$S$が閉集合であることがわかる．
+\end{proof}
+
+\begin{df}
+$\kappa$を基数とし，
+$\{X_{\alpha}\}_{\al<\kappa}$を$\kappa$の部分集合族とする．このとき
+\[
+\dic_{\al<\kappa}X_{\al}=\{\, \la\in \kappa\mid \forall \al<\la\ \la\in X_{\al}\, \}
+\]
+と定義する．この$\dic_{\al<\kappa}X_{\al}$を
+$\{X_{\al}\}_{\al<\kappa}$
+の\textbf{対角的交叉}と呼ぶ．
+\end{df}
+
+\begin{thm}\label{thm:dic}
+$\kappa$を正則基数とし，
+$\{X_{\al}\}_{\al<\kappa}$
+を$\kappa$のclub集合の族とする．このとき
+$\dic_{\al<\kappa}X_{\al}$
+は$\kappa$のclubである．
+\end{thm}
+\begin{proof}
+任意の$\la <\kappa$について
+\[
+F_{\la}=\bigcap_{\al<\la}X_{\al}
+\]
+と定義する．
+$\kappa$が正則であることと各$X_{\al}$がclubであることから
+各$F_{\al}$もclubである．
+このとき
+\[
+S=\bigcup_{\al<\kappa}\{\al\}\times F_{\al}
+\]
+とするとこれは命題\ref{prop:close}より$\kappa^2$の閉集合であり，
+さらに各$F_{\al}$がclubであることから$S$は対角的に非有界である．
+さて
+\[
+\bigtriangleup_{\kappa}=\{\, (x, x)\mid x<\kappa\, \}
+\]
+とすると$\bigtriangleup_{\kappa}$は明らかに$\kappa$の対角的に非有界な閉集合である．
+ここで$\pi_1: \bigtriangleup_{\kappa}\to \kappa; (x, x)\mapsto x$
+は同相写像であることに注意しよう．
+
+命題\ref{prop:dia}より$S\cap \bigtriangleup_{\kappa}$は対角的に非有界な閉集合であり，
+\[
+\pi_{1}(S\cap \bigtriangleup_{\kappa})=\dic_{\al<\kappa}X_{\al}
+\]
+なので$\dic_{\al<\kappa}X_{\al}$がclubであることがわかった．
+
+\end{proof}
+
+
+
+\begin{df}[定常集合]
+$\kappa$を基数とする．
+$\kappa$の部分集合$S$は$\kappa$の任意のclub集合と交わりを持つとき、定常集合という．
+\end{df}
+
+
+\begin{thm}[Fodor's lemma]
+$\kappa$を正則基数とする．
+$S$を$\kappa$の定常集合とし，$f\colon S\to \kappa$は任意の$\al\in S$について$f(\al)<\al$を充たしているとする．このときある$\be\in f(S)$が存在して$f^{-1}(\be)$は定常集合になる．
+\end{thm}
+\begin{proof}
+背理法による．
+各$\al\in f(S)$
+に対して$f^{-1}(\alpha)$
+が定常集合ではないとしよう．
+このとき$\kappa$のclub集合$X_{\al}$が存在して
+$X_{\al}\cap f^{-1}(\al)=\emptyset$
+となる．
+$\al\not\in f(S)$に対しては$X_{\al}=\kappa$と定義することにする．
+さて定理\ref{thm:dic}より
+$\dic_{\al<\kappa}X_{\al}$
+はclubになる．よって
+$\be\in \dic_{\al<\kappa}X_{\al}\cap S$をとることができる．
+$\gamma=f(\be)$とおくと仮定より$\gamma<\be$
+である．$\be\in \dic_{\al<\kappa}X_{\al}$より
+$\be\in X_{\gamma}$であるが，
+$\be\in f^{-1}(\gamma)$でもあるので，$X_{\gamma}$
+の定義に反する．よって定理が成り立つ．
+\end{proof}
+	
+\begin{thebibliography}{9}
+\bibitem{1}寺澤順, 現代集合論の探求, 日本評論社(2013)
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,110 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- なにこれ？ ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+なぜこれらの論文が同じ束に入っていたのかは謎である．
+もしかするとFund. Math.のサイトを見て66年くらいの論文で面白そうなのを適当に印刷したのかもしれない．
+
+論文
+\cite{MR0202117}
+では逆極限空間の写像が近似できるとかホモトピックとか
+そういう連続体論的な話をしているようだ．
+
+
+
+論文
+\cite{MR0200910}
+は
+ちょっとよくわかんなかった．
+Moore decomposition 
+の話が載っていて，
+これは特殊なUpper semi-continuous decomposition (USCD)である
+(ケリーにUSCD載ってるよ．今ふうにいうと確か閉同値関係による分割だったと思う)．
+こういうのはなんか見たことがあるので
+そこら辺からこの論文に辿り着いたのかもしれない．
+
+
+論文
+\cite{MR0180956}
+は有名な長田の$n$次元距離化可能空間の特徴づけというやつで，距離化可能空間$X$が$\dim X\le n$であるための必要十分条件は$X$の位相と両立する距離関数$\rho$があって，
+任意の$n+3$点$x, y_{1}, \dots, y_{n}, y_{n+1}$
+に対してある異なる番号$i, j$が存在して
+$\rho(y_{i}, y_{j})\le \rho(x, y_{j})$
+を満たすことであると証明している．
+この定理の前身として長田自身の似たような定理や
+de Groot の可分な場合の上の定理などがあり，
+それらを踏まえて一般的に証明したようだ．
+論文
+\cite{MR2666207}
+と
+\cite{MR1906836}
+も参照のこと．
+さらに論文
+\cite{MR0982791}
+\cite{MR0086284}
+\cite{MR0180957}
+\cite{MR0164320}
+なども参考に．
+
+
+
+
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{hatena.bib}
+
+
+
+\end{document}

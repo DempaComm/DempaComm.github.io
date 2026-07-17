@@ -1,0 +1,288 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{積分の変数変公式の証明の概略}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では積分の変数変換の公式の証明の概略を与える。ここでいう積分とはルベーグ積分である。\par
+リーマン積分に関する変数変換の公式の証明はいくつかの文献に見られるが、そのどれもが煩雑でとても信用できないと私は思ったのでルベーグ積分で変換公式の証明をして見ようと思ったきっかけである。そもそも高次元のリーマン積分、特に広義積分は定義自体が煩雑で、これをわざわざ教えるくらいならさっさとルベーグ積分教えたほうが効率的なのでは？と思っている。この文章もその現れなのかもしれない。
+\begin{thm}[Radon-Nikodym]
+可測空間$(X,\mathfrak{M})$上で定義された二つの正値$\sigma-$有限測度$\mu$と$\la$について$\la$は$\mu$について絶対連続、つまり$\la\ll \mu$であるとする。このとき$(X,\mathfrak{M})$上の可測関数$f$が存在し、すべての$A\in \mathfrak{A}$について
+\[
+\la(A)=\int_Af\ d\mu
+\]
+を充たす。この$f$を$\la$の$\mu$に対するラドン・ニコディム微分という。
+\end{thm}
+
+\begin{lem}\label{ho}
+可測空間$(X,\mathfrak{M})$上で定義された二つの正値$\sigma-$有限測度$\mu$と$\la$について$(X,\mathfrak{M})$上の可測関数$f$が存在し、すべての$A\in \mathfrak{A}$について
+\[
+\la(A)=\int_Af\ d\mu
+\]が成り立っているとする。このとき$(X,\mathfrak{M},\la)$上の可積分関数$\phi$について
+\[
+\int_{X}\phi\ d\la=\int_{X}\phi f\ d\mu
+\]
+となる。
+\end{lem}
+
+以下では$m$でルベーグ測度を表す。\par
+以下に述べるルベーグの微分定理は今ではHardy-Littlewoodの極大関数の弱評価を用いて証明する方法が有名になっているが極大関数を用いない証明もある。いづれにせよVitaliの被覆定理などの被覆定理を援用しなければならないようである。
+\begin{thm}[Lebesgueの微分定理その１]\label{les}
+$f\in L_{loc}^1(\rr^N)$について殆ど至る所の$x\in \rr^N$で
+\[
+\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}f(y)\ dm(y)=f(x)
+\]
+が成り立つ。ここで$B(x,r)$は中心が$x$で半径$r$の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）
+\end{thm}
+この微分定理から次の二つの微分定理が得られるが、本文とは関係ない。
+
+
+\begin{thm}[Lebesgueの微分定理その２]
+$f\in L_{loc}^1(\rr^N)$について殆ど至る所の$x\in \rr^N$で
+\[
+\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}|f(y)-f(x)|\ dm(y)=0
+\]
+が成り立つ。ここで$B(x,r)$は中心が$x$で半径$r$の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）
+\end{thm}
+
+\begin{thm}[Lebesgueの微分定理その3（$L^p版$）]\label{p}$1\le p<\mgn$としたとき任意の
+$f\in L_{loc}^p(\rr^N)$について殆ど至る所の$x\in \rr^N$で
+\[
+\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}|f(y)-f(x)|^p\ dm(y)=0
+\]
+が成り立つ。ここで$B(x,r)$は中心が$x$で半径$r$の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）
+\end{thm}
+この定理\ref{p}は$\mgn\ge p>N$のとき$W^{1,p}(\rr^N)$の元は殆ど至る所微分可能というCalder$\acute{\textrm{o}}$nの定理の証明でMorreyの不等式と合わせて効果的に用いられる。（このCalder$\acute{\textrm{o}}$nの定理はリプシッツ関数が殆ど至る所微分可能であることを語るRademacherの定理の拡張になっている。）詳細な証明については\cite{2}参照
+
+
+\begin{thm}\label{det}
+$U,V\subset \rr^N$を$\rr^N$の開集合とし、$\Phi:U\to V$を$C^1$球の微分同相写像とする。このとき
+\[
+\lim_{r\to 0}\frac{m(\Phi(B(x,r)))}{m(B(x,r))}=|\det J\Phi(x)|
+\]
+が成り立つ。ここで$J\Phi(x)$とは点$x$における$\Phi$のヤコビ行列である。
+\end{thm}
+
+\begin{lem}
+ユークリッド空間の間の局所リプシッツ写像によるルベーグ測度に関する零集合の像はルベーグ測度に関する零集合である。
+\end{lem}
+
+\begin{thm}[変数変換公式]
+$U,V\subset \rr^N$を$\rr^N$の開集合とし、$\Phi:U\to V$を$C^1$球の微分同相写像とする。このとき$U$上の測度$\mu$を
+\[
+\mu(A)=m(\Phi(A))
+\]
+で定めると、$\mu$は$U$上のルベーグ測度$m$に関して絶対連続となり、そのラドン・ニコディム微分は$|\det J\Phi(x)|$となる。従って$V$上の可積分関数$f$に対して
+\[
+\int_{V}f(y)\ dm(y)=\int_{U}f(\Phi(x))d\mu(x)=\int_{U}f(\Phi(x))|\det J\Phi(x)|\ dm(x)
+\]
+が成り立つ。最左辺の$m$は$V$上のルベーグ測度である。
+\end{thm}
+\begin{proof}
+先の補題から$\mu$が$m$に関して絶対連続であることはすぐにわかる。（ところで$\mu$及び$m$は$\sigma$有限なのでラドン・ニコディムの定理を適応できる。）ラドン・ニコディム微分を求めるには定理\ref{det}と定理\ref{les}を用いれば良い。最後の公式は単関数近似と単調収束定理を用いれば$f$が特性関数の場合に証明すればよいことが分かる。さて、集合$A\subset V$について
+\[
+\chi_A(\Phi(x))=\chi_{\Phi^{-1}(A)}(x)
+\]
+が簡単にわかる。そして
+\begin{align*}
+\int_{V}\chi_{A}\ dm(y)=m(A)=m(\Phi(\Phi^{-1}(A)))=\mu(\Phi^{-1}(A))=\int_{U}\chi_{\Phi^{-1}(A)}(x)\ d\mu(x)\\
+=\int_{U}\chi_{A}(\Phi(x))\ d\mu(x)
+\end{align*}
+がわかり、あとは補題\ref{ho}から変換公式が従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{-1}竹之内脩,ルベーグ積分,培風館,現代数学レクチャーズB-7,1980
+\bibitem{0}ユルゲン・ヨスト著,小谷元子訳,ポストモダン解析学,シュプリンガー・ジャパン,2009
+\bibitem{2}J.Heinonen,Lectures on Analysis on Metric Spces,springer,UTX,2001
+\bibitem{1}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[積分平均]
+\dashint 
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

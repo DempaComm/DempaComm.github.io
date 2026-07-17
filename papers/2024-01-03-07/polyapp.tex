@@ -1,0 +1,127 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{論文メモ
+\large{\\--- 多項式近似 ---}
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．
+
+以下の論文は多項式近似について調べているときに集めた論文だと思う．同じファイルに入っていた．
+
+論文
+\cite{MR2587018}
+はワイエルストラスの近似定理のサーベイである．
+これ読めば大体オッケーじゃない?
+
+論文
+\cite{MR0133676}
+はストーン・ワイエルストラスの定理の
+一般化でこれはBishopの定理として知られているようだが
+なんかよくわかんなかった．anti-symmetric という概念が大事らしい．
+
+論文
+\cite{MR0126738}
+ではバナッハ代数の中でストーン・ワイエルストラスの性質を研究している．
+
+
+論文
+\cite{MR0757664}
+はそのBishopによるストーン・ワイエルストラスの一般化の
+短い初等的な証明を与えているようだ．short proof や
+elementary proof は見たことたくさんあるが，
+short elementary proof は全然見たことない．
+この論文のラインナップからすると，
+ストーンワイエルストラスの定理のあの初等的な証明の論文があって然るべきだが，なかった→
+Brosowski and Deutsch, \textit{An elementary proof of 
+the Stone--Weierstrass theorem}, Proc AMS, 81 (1981), 89--92.
+
+論文
+\cite{MR0109975}
+では
+$(-\infty, \infty)$で定義された連続関数に関して
+かなり具体的な多項式近似を与えている．
+具体的には$f\colon \rr\to \rr$
+を連続関数とし$\Theta\in (0, 2^{-1})$を任意に与える．
+このとき$n\in \zz_{\ge 0}$に対して
+\[
+L(x; f)=\sqrt{\frac{n}{\pi}}\int_{-1}^{1}f(n^{\Theta}t)
+\left(1-\left(t-\frac{x}{n^{\Theta}}\right)^{2}\right)^{n}\ dt
+\]
+というふうに定義すると
+$L_{n}(x; f)$は$x$の多項式だし，
+$L_{n}(x; f)$は$f(x)$に各点収束するし，
+任意の有界閉集合上で一様収束になっているということを証明している．こういう具体的なのいいと思う．
+
+
+論文
+\cite{MR0427639}
+ではルンゲの定理の
+short proof を与えている．
+
+論文
+\cite{MR0103874}
+はカントールが導入したカントール積に関する論文である．
+カントールによると，$x>1$は適当に正の整数列
+$\{q_{n}\}$を取ると
+\[
+x=\prod_{n}\left(1+\frac{1}{q_{n}}\right)
+\]
+と表すことができるようだ．
+この積を$1$じゃなくて途中から始めた無限積を考えて
+その確率論的振る舞いを考察しているようである．
+なんでこの論文がこのラインナップの中に入っているのかよくわからない．多項式近似には確率論的アプローチもあるから何か関係性を見出せそうではあるけれども，多分紛れ込んじゃったんだと思う．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{papp.bib}
+
+
+
+\end{document}

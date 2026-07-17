@@ -1,0 +1,512 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+\newcommand{\s}{\mathcal{S}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\T}{\mathcal{T}}
+\DeclareMathOperator{\col}{Colimit}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\cl}{CL}
+\newcommand{\kk}{\mathbb{K}}
+\title{Riesz-Markov-Kakutaniの表現定理II}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では
+Riesz-Markov-Kakutaniの定理
+を関数空間$C_c(X; \mathbb{K})$
+の双対空間の言葉で書き直す．
+ここで$X$は局所コンパクトハウスドルフ空間であり，
+$\mathbb{K}$は$\rr$もしくは$\cc$である．
+
+\section{帰納極限空間として$C_{c}(X;\mathbb{K})$}
+記号$\mathbb{K}$で$\rr$か$\cc$を表すとする．
+$X$を局所コンパクトハウスドルフ空間とするとき，
+連続写像$f: X\to \mathbb{K}$が
+の\emph{台}$\supp(f)$とは
+\[
+\supp(f)=\cl\{x\in X\mid f(x)\neq 0\}
+\]
+のことである．ここで$\cl$は閉包を表す．
+$\supp(f)$がコンパクトである関数$f$はコンパクト台を持つという．
+$X$上の$\mathbb{K}$に値を持ち，
+コンパクト台を持つ関数全体を$C_c(X; \mathbb{K})$
+で表す．
+また，$X$上のコンパクト集合$K$について，
+\[
+D(K; \mathbb{K})=\{f\in C_c(X; \mathbb{K})\mid \supp(f)\subset K\}
+\]
+と定義する．このとき
+$f\in D(X; \mathbb{K})$について
+$p_K(f)=\sup_{x\in X}|f(x)|$と定義すると$p_K$は$D(K; \mathbb{K})$
+上のノルムとなり，このノルムについて$D(X; \mathbb{K})$はバナッハ空間になる．
+$K\subset L$の時，
+$D(K; \mathbb{K})\subset D(L; \mathbb{K})$
+であり，包含写像は等長写像になっている．
+そして
+$C_c(X;\mathbb{K})=\bigcup_{K: compact}D(K; \mathbb{K})$
+であるから，$C_c(X; \mathbb{K})$は集合として帰納極限
+$C_0(X;\mathbb{K})=\col_{K:cpt} C(K; \mathbb{K})$
+とみなせるが，$C_c(X; \mathbb{K})$にこの帰納極限空間
+としての位相構造を与える．
+つまり，$U\subset C_c(X; \kk)$が開集合である
+ためには，
+$X$の任意のコンパクト集合$K$について
+$U\cap D(K; \kk)$が$D(X; \kk)$の開集合であることが必要十分である．
+
+また$X$がコンパクトハウスドルフ空間のときには$C_c(X; \kk)$はバナッハ空間
+$C(X; \kk)$と同型になる．
+
+\section{線形形式}
+帰納極限位相の定義から，写像$f: C_c(X; \kk)\to \kk$
+が連続であるためには
+$X$の任意のコンパクト集合$K$について
+$f|_{D(K;\kk)}: D(K; \kk)\to \kk$が連続であることが必要十分である．
+$D(K; \kk)$はノルム$p_K$についてバナッハ空間であったから特に$f$が線形写像である場合について次を得る．
+\begin{prop}
+線形写像
+$\Lambda:C_c(X;\mathbb{K})\to \kk$が連続であるためには
+任意のコンパクト集合$K\subset X$に対して
+ある$M\in (0, \infty)$
+が存在し，
+任意の$f\in D(K; \mathbb{K})$について
+\[
+\Lambda(f)\le Mp_K(f)
+\]
+となることが必要十分である．
+\end{prop}
+
+$C_c(X; \rr)$上の線形形式の中でも重要なクラスを定義する．
+\begin{df}
+写像$\Lambda: C_c(X; \mathbb{K})$が正値線形写像であるとは，$f\in C_0(X; \rr)$でかつ$f\ge 0$となる$f$について
+\[
+\Lambda(f)\ge 0
+\]
+となることである．
+\end{df}
+
+\begin{lem}
+$C(X; \rr)$上の
+正値線形写像は連続である．
+\end{lem}
+\begin{proof}
+任意にコンパクト集合$K\subset X$を与える．
+そして，連続関数$u: X\to [0, 1]$で
+$u|_K=1$で，
+$\supp(u)$がコンパクトなものを取る．
+任意の
+$f\in D(K; \mathbb{K})$
+について
+$F=p_K(f)u$とおく，
+このとき$F-f\ge 0$
+なので，
+\[
+\Lambda(f)\le \Lambda(F)=p_K(f)\Lambda(u)
+\]
+となるので，$M=\Lambda(u)$と
+すれば命題1から$\Lambda$は連続であることがわかる．
+\end{proof}
+
+$C(X; \rr)$上の
+連続線型形式について実数値測度のHahn分解のようなことができる．
+補助的に$C_c^+(X)=\{f\in C_c(X; \rr)\mid f\ge 0\}$
+と定義する．
+\begin{prop}\label{daiji}
+連続線形形式$\Lambda\: C_0(X; \rr)\to \rr$について
+正値線形形式$\alpha$と$\beta$が存在して
+\[
+\Lambda=\alpha-\beta
+\]
+を満たす．
+\end{prop}
+\begin{proof}
+まず$f\in C_c^+(X)$について
+\[
+\alpha(f)=\sup_{u\in C_c^+(X), 0\le u\le f}\Lambda(u)
+\]
+と定義する．
+$0\le u\le f$ならば$p_K(u)\le p_K(f)$
+なので，$\Lambda$が連続であることから
+$\alpha$は有限値でちゃんと定義できる．
+定義から$\alpha(0)=0$であり，
+$f, g\in C_c^+(X)$
+について$f\le g$ならば
+$\alpha(f)\le \alpha(g)$であることがわかる．
+
+まず最初に任意の$f, g\in C_c^+(X)$について
+$\alpha(f+g)=\alpha(f)+\alpha(g)$を示そう．
+$u, v\in C_c^+(X)$について，$u\le f$かつ$v\le g$
+ならば$u+v\le f+g$
+なので
+\[
+\alpha(f)+\alpha(g)\le \alpha(f+g)
+\]
+がわかる．
+そして$u\le f+g$となる$u\in C_c^+(X)$について
+$u\le \min\{u, f\}+g$である．特に$u-\min\{u, f\}\in C_c^+(X)$であり，
+$u-\min\{u, f\}\le g$がわかるので，
+\[
+\Lambda(u)-\Lambda(\min\{u, f\})=\Lambda(u-\min\{u, f\})\le \alpha(g)
+\]
+がわかる．
+また，$\min\{u, f\}\le f$なので
+\[
+\Lambda(u)\le \Lambda(\min\{u, f\})+\alpha(g)\le \alpha(f)+\alpha(g)
+\]
+であるから，結局
+\[
+\alpha(f+g)\le \alpha(f)+\alpha(g)
+\]
+が成り立つ．
+
+そして一般の$f\in C_c(X; \kk)$については
+$f=g-h$となる$g, h\in C_c^+(X)$
+を用いて
+\[
+\alpha(f)=\alpha(h)-\alpha(g)
+\]
+と定義する．
+このような$g, h$の取り方は無数にあるが，
+$f, g\in C_c^+(X)$について
+$\alpha(f+g)=\alpha(f)+\alpha(g)$
+となるので，well-defined である．
+まず
+$\alpha$が正値線形形式であることを示そう．
+$f\ge 0$ならば$0\in C_0(X; \rr)$なので
+$\alpha(f)\ge 0$である．
+次に線形性について調べよう．
+定義と$C_c^+(X)$の場合から鑑みて
+$f, g\in C_c(X; \rr)$について
+\[
+\alpha(f+g)=\alpha(f)+\alpha(g)
+\]
+となることはわかる．
+スカラー倍についても定義を見れば成り立つことがわかる．
+以上で，正値線形形式$\alpha$が得られた．
+$\beta=\alpha-\Lambda$とすると$\alpha$の定義から
+$\beta$も正値線形形式であることがわかるのでこれで定理が証明された．
+\end{proof}
+次に$\cc$に値を取る場合について都合のいい線形形式の分解があることを示そう．
+\begin{prop}
+任意の連続線形形式$\Lambda\in C_c(X; \cc)\to \cc$について
+連続線形形式$\mu, \nu: C_c(X; \cc)\to \cc$で
+任意の $f\in C_c(X; \cc)$について
+\[
+\Lambda(f)=\mu(f)+\sqrt{-1}\nu(f)
+\]
+であり，任意の$f\in C(X; \rr)$について
+$\mu(g), \nu(g)\in \rr$と
+$\mu(\sqrt{-1}g)=\sqrt{-1}\mu(g)$と
+$\nu(\sqrt{-1}g)=\sqrt{-1}\nu(g)$
+を満たすものが存在する．
+\end{prop}
+\begin{proof}
+まず$f\in C_c(X; \rr)$に対して，
+\[
+\mu(f)=\frac{\Lambda(f)+\bar{\Lambda(f)}}{2}
+\]
+\[
+\nu(f)=\frac{\Lambda(f)-\bar{\Lambda(f)}}{2\sqrt{-1}}
+\]
+と定義し，$f\in C_c(X; \rr)$について
+$\mu(\sqrt{-1}f)=\sqrt{-1}\mu(f)$と
+$\nu(\sqrt{-1}f)=\sqrt{-1}\nu(f)$
+と線形に拡張する．
+すると$\mu$も$\nu$も複素線形形式である．
+また，任意の$h\in C_c(X; \rr)$について，
+\[
+\Lambda(\sqrt{-1}h)=-\frac{\Lambda(h)-\bar{\Lambda(h)}}{2\sqrt{-1}}
++\sqrt{-1}\frac{\Lambda(h)+\bar{\Lambda(h)}}{2}
+\]
+なので，
+任意の $f\in C_c(X; \cc)$について
+\[
+\Lambda(f)=\mu(f)+\sqrt{-1}\nu(f)
+\]
+である．
+$f\in C(X; \rr)$と$\sqrt{-1}f$の時で$\mu$及び$\nu$の定義が違うことに気をつけよう．
+
+連続性を示そう．
+$h\in D(K; \rr)$とすると，
+ \[
+ |\mu(h)|=\frac{|\Lambda(f)+\bar{\Lambda(f)}|}{2}\le
+ \frac{|\Lambda(f)|+|\bar{\Lambda(f)}|}{2}  = |\Lambda(f)|\le Mp_K(h)
+ \]
+ がなり立つ．
+そして任意の$h\in D(X; \cc)$について$f, g\in D(X; \rr)$を使って
+$h=f+\sqrt{-1}g$と表そう．
+この時上の評価から
+\[
+|\mu(h)|=\sqrt{|\mu(f)|^2+|\mu(g)|^2}\le \sqrt{2}M(p_K(f)+p_K(g))\le 2\sqrt{2}Mp_K(h)
+\]
+が成り立つので，$\mu$は連続である．
+ $\nu$についても同様．
+\end{proof}
+上の命題群を合わせて次を得る．
+\begin{cor}\label{daiji2}
+任意の連続線形形式$\Lambda: C_c(X; \cc)\to \cc$について
+$C_c(X; \cc)$の連続線形形式$\alpha$，$\beta$, 
+$\gamma$，$\delta$が存在して
+$C_c(X; \rr)$に制限すると$\rr$に値をとりさらに正値線形形式になり，
+\[
+\Lambda=(\alpha-\beta)+\sqrt{-1}(\gamma-\delta)
+\]
+を満たす．
+\end{cor}
+
+\section{$C_c(X; \kk)$の双対空間を明らかにするものとしての表現定理}
+\begin{df}
+$\rr_+$-可換モノイド$S$とは
+二つの演算$+: S\times S\to S$と$\cdot: [0, \infty)\times S\to S$と単位元$0$をもち次の公理を満たすものをいう．
+\begin{enumerate}
+\item $+$は可換であり，結合法則を満たす．
+\item 任意の$x\in S$について$x+0=x$. 
+\item 任意の$x\in S$について$1\cdot x=x$. 
+\item 任意の$x$について$0\cdot x=0$．
+ここで左辺は$0\in [0\infty)$と$x$のスカラー積を表し，右辺の$0$は$S$の単位元である．
+\item 任意の$r, s\in (0, \infty)$と$x\in S$について
+$(r+s)x=rx+sx$
+\end{enumerate}
+\end{df}
+
+\begin{df}
+$\rr_+$-可換モノイド$(S, +, 0)$について，
+その線形空間化
+$(K(S), +, 0)$を次のように定義する．
+ まず$S\times S$上の関係$R$を次のように定義する．
+  $(a, b)R(c, d)$とは$a+d=b+c$である．
+  すると$R$は$S\times S$上の同値関係となる．
+  そして$K(S)=S\times S/R$
+  とし，演算を$[a, b]+[c, d]=[a+c, b+d]$と定義する．
+ この演算について$K(S)$は可換群になっている．
+ 単位元は$[0, 0]$であり，$[a, b]$
+ の逆元
+ は$[b, a]$である．
+ また，$r\in [0, \infty)$について
+ \[
+ r[a, b]=[ra, rb]
+ \]
+ と定義し，$r<0$の場合には
+ \[
+ r[a, b]=[|r|b, |r|a]
+ \]
+ と定義すると，$K(S)$は先ほど定義した$+$とこのスカラー倍について
+ $\rr$上の線形空間になる．
+ \end{df}
+
+\begin{cau}
+$K(S)$は加法について見れば$S$のグロタンディーク群とみなせるが，
+この文章では$\rr_+$-可換モノイドを$\rr$上の線形空間にするために
+スカラー倍という付加的な構造が乗っかっている．
+\end{cau}
+
+
+\begin{df}
+$X$を局所コンパクトハウスドルフ空間とする．
+このとき$X$上の測度$\mu$がRMK測度であるとは以下の条件を満たすときにいう
+\begin{enumerate}
+\item $\mu$は$[0, \infty]$に値をとるボレル測度である．
+\item $X$の任意のコンパクト集合$K$について$\mu(K)<\infty$
+\item $X$の任意のボレル集合は外部正則である．つまり
+$\mu(E)=\inf\{\mu(V)\ |\ V\in \mathfrak{O}_X\ E\subset V\}$が成り立つ．ここで$\mathfrak{O}_X$は$X$の開集合系である．
+\item $E$が開集合もしくは$\mu(E)<\infty$ならば$E$は内部正則である．つまり，
+$\mu(E)=\sup\{\mu(K)\ |\ K\in Cpt(X) \ K\subset E\}$
+が成り立つ．ここで$Cpt(X)$は$X$のコンパクト集合全体である．
+\end{enumerate}
+
+$X$上のRMK測度全体を$M(X)$と書くことにする．また，
+$X$上の有限RMK測度全体の集合を$F(X)$と書くことにする．
+もちろん$X$がコンパクトハウスドルフ空間のときには$M(X)=F(X)$である．
+
+$X$上の符号付き測度で二つのRMK測度の差で表されるもの全体を$S(X)$と書くことにする．
+また，$X$上の複素測度で，$\mu, \nu\in S(X)$を用いて
+$\mu+\sqrt{-1}\nu$の形で表されるもの全体を$H(X)$と書くことにする．
+\end{df}
+$\rr$線形空間$V$について$V\times_{\cc} V$で次のようなスカラー倍が定義された$\cc$線形空間を表すことにする．
+$a, b\in \rr$について，
+\[
+(a+\sqrt{-1}b)(x, y)=(ax-by, ay+bx)
+\]
+と複素係数のスカラー倍を定義する．
+もちろん和の演算は各成分ごとにするものとする．
+このとき$\cc$線形空間としての同型$V\times_{\cc}V\cong \cc\otimes_{\rr}V$
+が成り立つ．
+
+
+
+\begin{lem}
+$X$を局所コンパクトハウスドルフ空間とするとき，以下が成り立つ．
+\begin{enumerate}
+\item $M(X)$と$F(X)$は$\rr_{+}$-可換モノイドである．
+\item $S(X)$は$\rr$-線形空間であり，$\rr$-線形空間としての同型$S(X)\cong K(F(X))$が成り立つ．
+\item $H(X)$は$\cc$-線形空間であり，$\cc$-線形空間としての同型
+$H(X)\cong S(X)\times_{\cc}S(X)\cong \cc\otimes_{\rr}S(X)$が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+証明略
+\end{proof}
+
+\begin{cau}
+一般に二つの測度$\mu$と$\nu$の差の測度$\mu-\nu$は定義できない．
+これは$\infty-\infty$が定義できないためである．
+これらの理由から$M(X)$から単純に実数倍や引き算をするだけでは$\rr$-線型空間は生成できない．なので代わりにグロタンディーク群（グロタンディーク線形空間？）$K(M(X))$を考えるのである．
+また，$\mu$と$\nu$が有限測度ならばその差$\mu-\nu$は符号付き測度になるし
+，Hahnの分解定理から符号付き測度は常に（正値）有限測度の差でかける．
+よって$S(X)$は差で閉じているのでこの集合だけで$\rr$-線型空間とみなせるのである．
+\end{cau}
+
+
+\begin{thm}[正値線形形式に対するRiesz-Markov-Kakutaniの表現定理]
+$X$を局所コンパクトハウスドルフ空間とする．
+このとき$C_c(X; \rr)$上の正値線形形式$\Lambda$に対して
+$\mu\in M(X)$が一意的に存在して任意の$f\in C_c(X; \rr)$に対して
+\[
+\int_Xf d\mu=\Lambda(f)
+\]
+を満たす．
+\end{thm}
+
+
+\begin{df}
+$C_c(X; \kk)$の双対空間，すなわち$C_c(X; \kk)$の連続線形形式全体を
+$C_c(X; \kk)^*$と書くことにする．
+\end{df}
+
+正値線形形式に対するRiesz-Markov-Kakutaniの表現定理
+と命題\ref{daiji}
+から次がわかる．
+\begin{thm}[実Riesz-Markov-Kakutani]
+$X$を局所コンパクトハウスドルフ空間とする．このとき$\rr$線形空間としての同型
+\[
+C_c(X; \rr)^*\cong K(M(X))
+\]
+が成り立つ．
+\end{thm}
+
+複素数値のコンパクト台関数に対しても表現定理が成り立つ．
+系\ref{daiji}と正値線形形式に対するRiesz-Markov-Kakutaniの表現定理から次がわかる．
+\begin{thm}[複素Riesz-Markov-Kakutani]
+$X$を局所コンパクトハウスドルフ空間とする．このとき複素線形空間としての同型
+\[
+C_c(X; \cc)^*\cong H(X) \cong S(X)\times_{\cc} S(X)\cong \cc\otimes_{\rr}S(X)
+\]
+が成り立つ．
+\end{thm}
+特に$X$がコンパクトハウスドルフ空間の場合には次の二つがわかる．
+\begin{thm}[実Riesz-Markov-Kakutani]
+$X$をコンパクトハウスドルフ空間とする．このとき
+$\rr$線形空間としての同型
+\[
+C(X; \rr)^*\cong K(F(X))
+\]
+が成り立つ．
+\end{thm}
+
+\begin{thm}[複素Riesz-Markov-Kakutani]
+$X$を局所コンパクトハウスドルフ空間とする．このとき
+$\cc$線形空間としての同型
+\[
+C(X; \cc)^*\cong H(X)\cong S((X)\times_{\cc}S(X) \cong\cc\otimes_{\rr}S(X)
+\]
+が成り立つ．
+\end{thm}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{1}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\bibitem{2}F. Tr\`eves, \textit{Topological Vector Spaces, Distributions and Kernels}, Dover, 2006. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

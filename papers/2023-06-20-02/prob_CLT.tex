@@ -1,0 +1,1659 @@
+\documentclass[leqno, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+
+\DeclareMathOperator{\mean}{\mathbb{E}}
+\DeclareMathOperator{\varian}{\mathbb{V}}
+
+
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{中心極限定理}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文書では
+中心極限定理の証明を紹介する．
+
+\section{基本事項}
+
+ここらへんのことは
+\cite{hatena0}や\cite{hatena1}
+を参照しても良い．
+\begin{df}
+位相空間$X$に対して，$X$の開集合系から生成される
+完全加法族を$\mathfrak{B}(X)$と書くことにする．
+この集合族を\textbf{ボレル集合族}と呼ぶ．
+\end{df}
+
+\begin{df}
+測度空間
+$(X, \mathfrak{M})$
+上の測度
+$\mu$が
+\textbf{確率測度}であるとは，
+$\mu(X)=1$
+を満たすときにいう．
+$\mu$
+が確率測度であるとき，測度空間
+$(X, \mathfrak{M}, \mu)$を
+\textbf{確率空間}と呼び，
+$X$の元のことを
+\textbf{事象}と呼ぶ．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$から
+可測空間$(Y, \mathfrak{N})$への可測写像可測写像を
+\textbf{$(Y, \mathfrak{N})$-値確率変数}と呼ぶ．
+あるいは紛れがないときには単に
+\textbf{確率変数}と呼んだりもする．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$
+とその上の確率変数$f$について
+$\int_{X}f\ d\mu$を
+$\mean(f)$と書いたりする．
+特に
+$\mean(f)$を
+$f$の\textbf{期待値}と呼んだり，
+$f$の\textbf{平均値}と呼んだりする．
+そして$n\in \zz_{\ge 1}$に対して，
+$\mean(f^{n})$を$f$の$n$次モーメントと
+呼んだりする．
+$\mean(f^{n})<\infty$であるとき$f$は$L^{n}$
+関数とか言ったりするが，これは測度論と同じ言葉遣いである．
+また，
+$\varian(f)=\mean((f-\mean(f))^{2})$
+を$f$の\textbf{分散}と呼ぶ．
+簡単な式変形で
+$\varian(f)=\mean(f^{2})-(\mean(f))^{2}$
+となることがわかる．
+\end{df}
+
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき可測写像$\phi:X\to Y$に対して
+写像$\phi_{*}\mu: \mathfrak{N}\to [0, \infty]$
+を
+$\phi_{*}\mu(A)=\mu(\phi^{-1}(A))$
+と定義するとこれは
+$(Y, \mathfrak{N})$上の測度になる．
+この測度
+$\phi_{*}\mu$
+を$\phi$による$\mu$の押し出し測度と呼ぶ．
+\end{df}
+
+\begin{lem}\label{lem:push}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき可測写像$\phi:X\to Y$と
+任意の可測関数$f: Y\to \rr$について
+\[
+\int_{X}f(\phi(x))\ d\mu
+=\int_{Y} f(y)\ d(\phi_{*}\mu)
+\]
+が成り立つ．
+\end{lem}
+
+\begin{df}
+$\rr$上の$\mathfrak{B}(\rr)$で定義された
+一次元ルベーグ測度を$\mathcal{L}^{1}$と書くことにする．
+\end{df}
+
+
+
+
+\begin{lem}
+$(X, \mathfrak{M}, \mu)$を確率空間とする．
+$\phi: X\to [0, \infty]$
+を$(X, \mathfrak{M})$上の可測関数とする．
+そして新しく$(X, \mathfrak{M})$上の測度$\nu$
+を
+\[
+\nu(A)=\int_{A}\phi\ d\mu
+\]
+と定義する．
+すると
+$X$上の可測関数$f$について
+\[
+\int_{X}f d\nu=\int_{X} f\phi \ d\mu
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+単関数近似を使うとわかる．
+\end{proof}
+
+以下の定理の証明は\cite{hatena2}を参考にしても良い．
+証明は省略する.
+
+\begin{thm}[Prokhorov]\label{thm:prokh}
+$X$を可分完備距離化可能空間とし，
+$\mathcal{S}\subset \mathcal{P}(X)$とする．
+このとき以下は同値である．
+\begin{enumerate}
+\item $\mathcal{S}$は相対コンパクトである．
+\item $\mathcal{S}$は緊密である．
+\end{enumerate}
+\end{thm}
+
+以下の二つの補題については
+\cite{hatenasekibun}
+を参考にしてもいい．
+証明は省く．
+
+\begin{lem}[ディリクレ積分]\label{lem:dint}
+以下が成り立つ．
+\[
+\lim_{R\to \infty}\int_0^{R}\frac{\sin x}{x}\ dx=\frac{\pi}{2}
+\]
+さらに
+\[
+\lim_{R\to \infty}
+\int_0^{R}\frac{\sin (ax)}{x}\ dx
+=
+	\begin{cases}
+		\frac{\pi}{2} & \text{if $a>0$}\\
+		-\frac{\pi}{2} & \text{if $a<0$}\\
+		0 & \text{if $a=0$}
+	\end{cases}
+\]
+が成り立つ．
+\end{lem}
+
+
+\begin{lem}
+
+
+$m\in [0, \infty)$で
+$\sigma\in (0, \infty)$
+とする．
+$f_{m, \sigma}: \rr\to [0, \infty)$を$N(m, \sigma)$
+の確率密度関数とする．
+つまり
+\[
+f_{m, \sigma}(x)=
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(x-m)^2}{2\sigma^2}\right)
+\]
+である．
+このとき
+\[
+F_{m, \sigma}(x)=\int_{\rr}f_{m, \sigma}(y)\exp(\sqrt{-1}xy)\ dy
+\]
+とおくことにする．
+このとき
+\[
+\int_{\rr}f_{m, \sigma}(y)\exp(\sqrt{-1}xy)\ dy
+=
+\exp\left(\sqrt{-1}mx-\frac{\sigma^2x^2}{2}\right)
+\]
+つまり
+\[
+F_{m, \sigma}(x)=\exp\left(\sqrt{-1}mx-\frac{\sigma^2x^2}{2}\right)
+\]
+となる．
+特に
+\[
+F_{0, \sigma}=\exp\left(-\frac{\sigma^2x^2}{2}\right)
+\]
+であり，
+\[
+F_{0, 1}=\exp\left(-\frac{x^2}{2}\right)
+\]
+である．
+
+\end{lem}
+
+
+
+\begin{df}
+
+$m\in [0, \infty)$で
+$\sigma\in (0, \infty)$
+とし，
+\[
+f_{m, \sigma}(x)=
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(x-m)^2}{2\sigma^2}\right)
+\]
+とする．
+
+$(\rr, \mathfrak{B}(\rr))$
+上の測度$\nu$
+を
+\[
+\nu(A)=\int_{A}f_{m, \sigma}\ d\mathcal{L}^{1}
+\]
+と定義する．
+この測度$\nu$を
+\textbf{平均が$m$で分散が$\sigma$の正規分布}
+と言ったりする．
+一般に確率空間$(X, \mathfrak{M}, \mu)$
+上の確率変数$f:X\to \rr$について，
+押し出し測度$f_{*}\mu$が平均が$m$で分散が$\sigma$の正規分布に一致するとき
+\textbf{$f$は平均が$m$で分散が$\sigma$の正規分布に従う}などと言ったりする．また，平均が$m$で分散が$\sigma$の正規分布を$N(m, \sigma)$で表し，
+\textbf{
+$f$は$N(m, \sigma)$に従う}と言ったりもする．
+\end{df}
+
+
+\begin{df}[分布関数]
+$(\rr, \mathfrak{B})$上の確率測度$\mu$に対して
+関数$F_{\mu}: \rr\to \rr$を
+$F_{\mu}(x)=\mu((-\infty, x])$
+と定義する．この$F_{\mu}$を
+\textbf{$\mu$の分布関数}と呼ぶ
+一般に確率空間
+$(X, \mathfrak{M}, \mu)$とその上の確率変数$f$に対して，
+$F_{f_{*}\mu}$を\textbf{$f$の分布関数}
+と言ったりする．分布関数のことを
+\textbf{累積分布関数}とも呼ぶ．
+\end{df}
+
+
+
+\begin{thm}\label{thm:ls}
+$(\rr, \mathfrak{B}(\rr))$上の二つの確率測度$\mu, \nu$に対して$F_{\mu}=F_{\nu}$
+ならば，$\mu=\nu$である．
+\end{thm}
+\begin{proof}
+任意の実数$a, b\in \rr$が$a<b$を満たすならば
+$\mu((a, b])=F_{\mu}(b)-F_{\nu}(a)$であり，
+また$\nu((a, b])=F_{\nu}(b)-F_{\nu}(a)$
+なので，$F_{\mu}=F_{\nu}$であることから集合族$\{\, (a, b]\mid a<b\, \}$
+の上で$\mu$と$\nu$
+は一致することがわかる．この集合族が生成する完全加法族は
+ボレル集合族に一致するので$\mu=\nu$である．
+\end{proof}
+
+\section{特性関数}
+この節では確率測度の特性関数の定義と基本的な性質を紹介する．
+
+\begin{df}
+$\mu$を
+$(\rr, \mathfrak{B}(\rr))$上の測度とする．
+このとき関数$\phi_{\mu}: \rr\to \rr$を
+\[
+	\phi_{\mu}(x)
+	=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot y)\ 
+	d\mu (y)
+\]
+と定義する．この関数を
+\textbf{$\mu$の特性関数}と呼ぶ．
+\end{df}
+
+\begin{thm}[L\'evyの反転公式]\label{thm:levy}
+$\mu\in \mathcal{P}(\rr)$
+とする．
+記述を簡単にするために
+$\phi=\phi_{\mu}$,
+$F=F_{\mu}$とおく，
+このとき
+$F_{\mu}$
+の任意の連続点$a, b$について
+$a<b$ならば
+\[
+	F_{\mu}(b)-F_{\mu}(a)=
+	\lim_{R\to \infty}
+	\frac{1}{2\pi}\int_{-R}^{+R}
+	\frac{\exp(-\sqrt{-1}xb)-\exp(-\sqrt{-1}xa)}{-\sqrt{-1}x}
+	\phi(x)\ 
+	d\mathcal{L}^1(x)
+\]
+が成り立つ．
+
+\end{thm}
+\begin{proof}
+まず，Fubini---Toneliの定理から
+任意の$R>0$について
+\begin{align*}
+	&\int_{-R}^{R}
+	\frac{\exp(-\sqrt{-1}xb)-\exp(-\sqrt{-1}xa)}{-\sqrt{-1}x}
+	\phi(x)\ 
+	d\mathcal{L}^1(x)
+	\\
+	&=
+	\int_{-R}^R
+	\int_{\rr}
+	\frac{\exp(\sqrt{-1}x(t-b))-\exp(\sqrt{-1}x(t-a))}{\sqrt{-1}x}
+	\ d\mu(t)\ d\mathcal{L}^1(x)
+	\\
+	&=
+	\int_{\rr}
+	\int_{-R}^R
+	\frac{\exp(\sqrt{-1}x(t-b))-\exp(\sqrt{-1}x(t-a))}{\sqrt{-1}x}
+	\ d\mathcal{L}^1(x)\ d\mu(t)
+\end{align*}
+が成り立つ．
+
+ここで，関数
+\[
+\frac{\cos(x(t-b))-\cos(x(t-a))}{x}
+\]
+は任意の$t, a, b$に対して$x$に
+関して奇関数なので（さらに$x$に関して連続にもなる）
+\[
+\int_{-R}^R\frac{\cos(x(t-b))-\cos(x(t-a))}{x}\ d\mathcal{L}^1(x)=0
+\]
+となる．ゆえに
+\begin{align*}
+	&\int_{-R}^R
+	\frac{\exp(\sqrt{-1}x(t-b))-\exp(\sqrt{-1}x(t-a))}{\sqrt{-1}x}
+	\ d\mathcal{L}^1(x)
+	\\
+	&=
+	\int_{-R}^R
+	\frac{\sin(x(t-a))-\sin(x(t-b))}{x}
+	\ d\mathcal{L}^1(x)
+\end{align*}
+が成り立つ．
+ここで，
+
+\[
+f_R(a)=\int_{0}^{R}\frac{\sin (ax)}{x}\ d\mathcal{L}^1(x)
+\]
+と定義すると
+\begin{align*}
+\int_{-R}^R
+	\frac{\sin(x(t-a))-\sin(x(t-b))}{x}
+	\ d\mathcal{L}^1(x)
+	=
+	2(f_R(t-a)-f_R(t-b))
+\end{align*}
+なので
+\begin{align*}
+&\int_{-R}^{R}
+	\frac{\exp(-\sqrt{-1}xb)-\exp(-\sqrt{-1}xa)}{-\sqrt{-1}x}
+	\phi(x)\ 
+	d\mathcal{L}^1(x)
+	\\
+	&=
+	2\int_{\rr}f_R(t-a)-f_R(t-b)\ d\mu(t)
+\end{align*}
+である．
+
+
+ディリクレ積分の式 (補題 \ref{lem:dint})
+\[
+\lim_{R\to \infty}f_R(a)=
+	\begin{cases}
+		\frac{\pi}{2} & \text{if $a>0$}\\
+		-\frac{\pi}{2} & \text{if $a<0$}\\
+		0 & \text{if $a=0$}
+	\end{cases}
+\]
+から，
+任意の$t, c\in \rr$に関して
+\[
+\lim_{R\to \infty}f_{R}(t-c)
+=\frac{\pi}{2}\left(\chi_{(c, \infty)}-\chi_{(-\infty, c)}\right)
+\]
+が成り立つ．
+よって，$\sup_{x}|f_R(x)|<\infty$と優収束定理から
+\begin{align*}
+	&\lim_{R\to \infty}
+	\int_{-R}^{R}
+	\frac{\exp(-\sqrt{-1}xb)-\exp(-\sqrt{-1}xa)}{-\sqrt{-1}x}
+	\phi(x)\ 
+	d\mathcal{L}^1(x)
+	\\
+	&=
+	\lim_{R\to \infty}2\int_{\rr}f_R(t-a)-f_R(t-b)\ d\mu(t)
+	\\
+	&=\pi\int_{\rr}
+	\chi_{(a, \infty)}(t)-\chi_{(-\infty, a)}(t)
+	-
+	\chi_{(b, \infty)}(t)+\chi_{(-\infty, b)}(t)\ d\mu(t)
+	\\
+	&=
+	\pi\int_{\rr}
+	\chi_{(a, b]}(t)+\chi_{[a, b)}(t)\ d\mu(t)\\
+	&=
+	\pi\int_{\rr}
+	\chi_{(a, b]}(t)+\chi_{(a, b]}(t)+\chi_{\{a\}}(t)-\chi_{\{b\}}(t)\ d\mu(t)
+	\\
+	&=
+	2\pi\int_{\rr}\chi_{(a, b]}(t)\ d\mu(t)
+	=2\pi(F(b)-F(a))
+\end{align*}
+ここで，
+$p$が$F$の連続点ならば
+$\int_{\rr}\chi_{\{p\}}(t)\ d\mu(t)=\mu(\{p\})=0$
+であることを用いた．
+これで証明が終わる．
+\end{proof}
+\begin{rmk}
+定理の主要な等式は以下である．
+\[
+	F_{\mu}(b)-F_{\mu}(a)=
+	\frac{1}{2\pi}
+	\lim_{R\to \infty}
+	\int_{-R}^{+R}
+	\frac{\exp(-\sqrt{-1}xb)-\exp(-\sqrt{-1}xa)}{-\sqrt{-1}x}
+	\phi(x)\ 
+	d\mathcal{L}^1(x)
+\]
+この式は
+\[
+	F_{\mu}(b)-F_{\mu}(a)
+	=
+	\frac{1}{2\pi}
+	\int_{a}^{b}
+	\int_{\rr}
+	\phi(x)\exp(-\sqrt{-1} x\cdot y)
+	\ d\mathcal{L}^1(x)d\mathcal{L}^{1}(y)
+\]
+とみなすことができる．
+特性関数とは$\mu$の``確率密度関数''のフーリエ変換
+であり，上の式はその特性関数をフーリエ逆変換してのちに$[a, b]$上で積分した量に等しいと考えることができるので，その値は$F(b)-F(a)$に等しいという観察ができる．
+しかし一般に特性関数は急減少関数などのフーリエ変換について良い振る舞いをする関数になるとは限らないので，
+\[
+	F_{\mu}(b)-F_{\mu}(a)
+	=
+	\frac{1}{2\pi}
+	\int_{a}^{b}
+	\int_{\rr}
+	\phi(x)\exp(-\sqrt{-1} x\cdot y)
+	\ d\mathcal{L}^1(x)d\mathcal{L}^{1}(y)
+\]
+が成り立つのかどうか，もしくはそもそも
+$\phi(x)$が$\rr$上で可積分かどうかすらわからないので，
+上の観察を少し修正して，上の定理の様に主値積分で累積分布関数の情報を引き出す必要があったわけである．
+\end{rmk}
+
+\begin{lem}
+以下の不等式が成り立つ．
+\[
+3<\pi<4
+\]
+特に$\pi/4<1$であり，$\sqrt{2}<\pi/2$
+である．
+\end{lem}
+\begin{proof}
+関数$f$を
+$f(t)=(1-t^2)^{-1/2}$と定義する．
+$t\in [0, 1/2]$
+のとき，
+$1\le f(t)\le 2/\sqrt{3}\le 4/3$
+である．
+さらに$1<f(t)<4/3$となる点$t\in [0, 1/2]$
+が存在する．例えば$t=1/4$においてこの不等式が成り立つ．
+関数$f(t)$は連続だから，
+\[
+	\frac{\pi}{6}
+	=
+	\int_{0}^{1/2}\frac{1}{\sqrt{1-t^2}}\ dt
+	>
+	\int_{0}^{1/2}\ dt
+	=
+	\frac{1}{2}
+\]
+なので，$3<\pi$がわかる．
+また，
+\[
+\frac{\pi}{6}
+	=
+	\int_{0}^{1/2}\frac{1}{\sqrt{1-t^2}}\ dt
+	<\int_{0}^{1/2}\frac{4}{3}\ dt
+	=
+	\frac{2}{3}
+\]
+なので
+$\pi<4$がわかる．
+これらの積分の不等式において
+真の不等式が得られるのは
+$f$が連続であり，
+$1<f(t)<4/3$となる$t$が存在するからである．
+\end{proof}
+
+\begin{lem}
+実数$a$が
+$|a|\ge 1$を満たすならば，
+\[
+|\sin a|\le |a|\sin (1)
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+$0\le a$のときだけ証明すれば良い．
+$f(x)=x\sin (1)-\sin x$とおく．
+$x\in [\pi/4, \pi/2]$のとき
+$f'(x)=\sin (1)  -\cos x$
+の符号を調べる．
+$\pi/4<1$
+なので，$1/\sqrt{2}<\sin 1$
+であり， $ [\pi/4, \pi/2]$
+上では$\cos x$は単調減少なので
+$f'(x)=\sin (1) -\cos x>0$
+である．
+そして$f(1)=0$なので，
+$x\in [1, \pi/2]$
+のとき
+$0<f(x)$である．
+$\frac{1}{\sin (1)}<\sqrt{2}<\frac{\pi}{2}$
+なので，特に$\pi/2<x$ならば，$x\sin 1>1$
+であるから，この場合も$0<f(x)$
+が成り立つ．
+よって$1\le x$ならば$\sin x\le x\sin (1)$
+である．
+\end{proof}
+
+
+\begin{prop}\label{prop:equality}
+任意の
+$\mu, \nu\in \mathcal{P}(\rr)$
+について
+$\phi_{\mu}=\phi_{\nu}$
+ならば$\mu=\nu$
+である．
+\end{prop}
+\begin{proof}
+定理 \ref{thm:levy}より
+$\phi_{\mu}=\phi_{\nu}$
+ならば，可算個の点を除いた
+全ての$x, a\in \rr$について
+$F_{\mu}(x)-F_{\mu}(a)=F_{\nu}(x)-F_{\nu}(a)$である．
+$a\to -\infty$とすると$F_{\mu}$も$F_{\nu}$
+も$0$に限りなく近づくので可算個の点を除いた全ての
+$x\in \rr$で$F_{\mu}(x)=F_{\nu}(x)$である．
+分布関数は右連続な単調関数なので，
+結局すべての点$x\in \rr$で
+$F_{\mu}(x)=F_{\nu}(x)$となる．
+ゆえに定理 \ref{thm:ls}
+より$\mu=\nu$となる．
+\end{proof}
+
+
+\begin{prop}
+点列
+$\{\mu_n\}_{n\in \zz_{\ge 0}}\subset \mathcal{P}(\rr)$
+と$\mu\in \mathcal{P}(\rr)$
+について
+$\mu_n\To \mu$
+と$\phi_{\mu_n}\to \phi_{\mu}$ （各点収束）
+は同値である．
+\end{prop}
+\begin{proof}
+弱収束
+$\mu_n\To \mu$
+が成り立つ
+ならば
+$\phi_{\mu_n}\to \phi_{\mu}$ （各点収束）
+となること
+は定義からすぐにわかる．
+逆を示そう．
+記述を簡単にするために
+$\phi=\phi_{\mu}$，
+$\phi_{n}=\phi_{\mu_{n}}$
+とおくことにする．
+まず$\{\mu_n\}$の緊密性を示そう．
+$M\in (0, \infty)$とする．
+今から
+\[
+\mu_n(\{x\in \rr\mid |x|\ge M\})
+\]
+を評価する．
+任意の$\epsilon\in (0, \infty)と$十分大きい$M$と十分大きい
+$N\in \zz_{\ge 0}$
+について$n>N$ならば
+$\mu_n(\{x\in \rr\mid |x|\ge M\})\le \epsilon$
+を満たすことを示せれば
+$\{\mu_{n}\}_{n\in \zz_{\ge 0}}$
+が緊密であることがわかる．
+$|x|\ge M$
+について
+$|x|/M\ge 1$なので補題から，
+$\sin(|x|/M)\le |x|/M\sin (1)$
+であるから，
+\[
+1\le \frac{1}{1-\frac{1}{\sin (1)}}\left(1-\frac{\sin(x/M)}{x/M}\right)
+\]
+が成り立つ．
+$c=(1-1/\sin (1))^{-1}$
+と置くと，
+\[
+1\le c\left(1-\frac{\sin(x/M)}{x/M}\right)
+\]
+となる．
+よって，
+\[
+\chi_{\{|x|\ge M\}}\le c\left(1-\frac{\sin(x/M)}{x/M}\right)
+\]
+なので，
+任意の$n\in \nn$について
+\[
+	\mu_n(\{x\in \rr\mid |x|\ge M\})
+	\le
+	 c\int_{\rr}\left(1-\frac{\sin(x/M)}{x/M}\right)\ d\mu_n
+\]
+を得る．
+さて，
+$x\in \rr$のとき，
+\[
+	\frac{1}{2}\int_{-1}^{1}\exp(\sqrt{-1}xy)\ d\mathcal{L}^{1}(y)=
+	\left[
+	\frac{1}{2\sqrt{-1}x}\exp(\sqrt{-1}xy)
+	\right]_{y=-1}^{y=1}
+	=
+	\frac{\sin x}{x}
+\]
+が成り立つので，
+\begin{align*}
+	\int_{\rr}\left(1-\frac{\sin(x/M)}{x/M}\right)\ d\mu_n(x)
+	&=
+	\int_{\rr}
+	\left(1-\frac{1}{2}\int_{-1}^{1}\exp\left(\sqrt{-1}\frac{x}{M}y\right)\ 
+	d\mathcal{L}^{1}(y)\right)\ d\mu_n(x)
+	\\
+	&=
+	\mu_{n}(\rr)-\frac{1}{2}\int_{-1}^{1}\phi_n\left(\frac{y}{M}\right)\ d\mathcal{L}^{1}(y) 
+	\\
+	&=
+	1-\frac{M}{2}
+	\int_{-1/M}^{1/M}\phi_n\left(y\right)\ d\mathcal{L}^{1}(y) 
+\end{align*}
+がわかる．
+ここで
+\[
+I(M)=1-\frac{M}{2}\int_{-1/M}^{1/M}\phi\left(y\right)\ dy 
+\]
+\[
+J_n(M)=\frac{M}{2}\int_{-1/M}^{1/M}\phi(y)-\phi_n\left(y\right)\ dy 
+\]
+とおけば，
+\[
+\mu_n(\{x\in \rr\mid |x|\ge M\})\le 
+c\cdot I(M)+c\cdot J_n(M)
+\]
+である．
+さて，$\phi$は
+$\phi(0)=1$であり連続だから，積分の平均値の定理から
+$I(M)\to 0\ (M\to \infty)$となる．つまり，
+任意の$\ep$に対して，
+$\delta$が存在して，
+$|x|<\delta$ならば$|\phi(x)-1|<\ep/2c$
+となる．このことから$M$を
+$\delta^{-1}<M$を満たすように大きくとれば，
+\[
+|I(M)|\le \ep/2
+\]
+が成り立つ．
+
+次に$J_n(M)$を評価する．
+$M$を固定して考える．
+$\phi_n$は$\phi$
+に各点収束している．
+また，各$\mu_{n}$が確率測度であることと，
+特性関数の定義から
+$[-1/M, 1/M]$
+上では$\{\phi_n\}$
+は一様有界である（特に$n$によらず定数$1$で上から抑えられる）．
+有界収束定理から，
+\[
+\int_{-1/M}^{1/M}\phi_{n}(y)\ dy\to \int_{-1/M}^{1/M}\phi(y)\ dy
+\]
+が成り立つので，$N$を十分大きく取れば$n>N$のとき
+$J_n(M)<\ep/2c$となる．
+以上から十分大きい
+$M$と$N\in \nn$
+を取れば，
+$n>N$となる$n$について
+$\mu_{n}(\rr\setminus [-M, M])\le\ep$
+となるから，
+列$\{\mu_n\}_{n\in \nn}$
+は緊密になる．
+Prokhorovの定理（定理 \ref{thm:prokh}）から，$\{\mu_n\}_{n\in \nn}$
+は弱収束の位相について
+相対コンパクトである．
+さて，$\{\mu_n\}_{n\in \nn}$
+の任意の部分列$\{\mu_{n_k}\}$をとると，これもやはり相対コンパクトなので，
+収束する部分列が取れる．
+その部分列の収束先を$\nu\in \mathcal{P}(X)$
+とすると，仮定から
+$\phi_{\nu}=\phi_{\mu}$
+がわかる．
+命題 \ref{prop:equality}から，$\nu=\mu$
+が結論されるので，結局$\{\mu_n\}_{n\in \nn}$
+の任意の部分列は収束する部分列が存在し，その収束先は全て$\mu$
+である．よって元の列$\{\mu_n\}_{n\in \nn}$
+は$\mu$に収束する．
+\end{proof}
+
+応用として正規分布の再生性などを証明する．
+\begin{thm}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$f$をその上の確率変数で
+$N(m, \sigma^2)$
+に従うとする．
+このとき$af+b$は
+$N(am+b, a^{2}\sigma^{2})$
+に従う．
+\end{thm}
+\begin{proof}
+$g=af+b$とおく．
+すると
+\begin{align*}
+\phi_{g}(x)
+&=
+\int_{\rr}
+	\exp(\sqrt{-1}x\cdot y)\ 
+	dg_{*}\mu (y)
+	=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot g(t))\ 
+	d\mu (t)\\
+	&=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot (af(t)+b))\ 
+	d\mu (t)\\
+	&=
+	\exp(\sqrt{-1}xb)
+	\int_{\rr}
+	\exp(\sqrt{-1}ax\cdot f(t))\ 
+	d\mu (t)\\
+	&=
+	\exp(\sqrt{-1}xb)
+	\int_{\rr}
+	\exp(\sqrt{-1}(ax)\cdot y)\ 
+	df_{* }\mu (y)\\
+	&=
+	\exp(\sqrt{-1}xb)
+	\int_{\rr}
+	\exp(\sqrt{-1}(ax)\cdot y)\ 
+	df_{* }\mu (y)\\
+	&=
+		\exp(\sqrt{-1}xb)\cdot
+	\exp\left(\sqrt{-1}amx-\frac{a^2\sigma^2x^2}{2}\right)\\
+	&=
+	\exp\left(\sqrt{-1}(am+b)x-\frac{a^2\sigma^2x^2}{2}\right)
+\end{align*}
+となる．
+これは$N(am+b, a^{2}\sigma^{2})$
+の特性関数なので，定理が成り立つことがわかる．
+\end{proof}
+
+
+\begin{thm}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$f, g$をその上の独立な確率変数で
+それぞれ
+$N(m_{1}, \sigma_{1}^2)$
+と
+$N(m_{2}, \sigma_{2}^2)$
+に従うとする．
+このとき$f+g$は
+$N(m_{1}+m_{2}, \sigma_{1}^2+\sigma_{2}^{2})$
+に従う．
+\end{thm}
+\begin{proof}
+$h=f+g$とおくすると
+\begin{align*}
+\phi_{g}(x)
+&=
+\int_{\rr}
+	\exp(\sqrt{-1}x\cdot y)\ 
+	dh_{*}\mu (y)
+	=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot h(t))\ 
+	d\mu (t)\\
+	&=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot (f(t)+g(t)))\ 
+	d\mu (t)\\
+	&=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot f(t))\cdot 
+	\exp(\sqrt{-1}x\cdot g(t))\ 
+	d\mu (t)\\
+	&=
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot f(t))\ d\mu(t)\cdot 
+	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot g(t))\ 
+	d\mu (t)\\
+	&=
+	\phi_{f}(x)\cdot \phi_{g}(x)
+	=
+	\exp\left(\sqrt{-1}m_{1}x-\frac{\sigma_{1}^2x^2}{2}\right)
+	\cdot 
+	\exp\left(\sqrt{-1}m_{2}x-\frac{\sigma_{2}^2x^2}{2}\right)
+	\\
+	&=
+	\exp\left(\sqrt{-1}(m_{1}+m_{2})x-\frac{(\sigma_{1}^2+\sigma_{2}^2)x^2}{2}\right)
+\end{align*}
+これは
+$N(m_{1}+m_{2}, \sigma_{1}^2+\sigma_{2}^{2})$
+の特性関数なので，定理が従う．
+\end{proof}
+
+
+
+
+\section{中心極限定理}
+このセクションでは
+中心極限定理を証明する．
+
+まずは次の初等的な補題を示そう．
+\begin{lem}\label{lem:elem}
+$0$でない$a\in \cc$に収束する
+数列$\{a_n\}\subset \cc$と
+$0$に収束する数列$\{b_n\}\subset \cc$
+について，$\lim_{n\to \infty}a_{n}^{n}$が存在するならば，
+\[
+\lim_{n\to \infty}\left(a_n+\frac{b_n}{n}\right)^n=\lim_{n\to \infty}a_n^n
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+$a\neq 0$なので
+$a_n$は十分大きい番号で$a_n\neq 0$である．
+これを使って
+\[
+\left(a_n+\frac{b_n}{n}\right)^n=a_n^n\left(1+\frac{b_n/a_n}{n}\right)^n
+\]
+が成り立つので
+$a_n$が恒等的に$1$の場合に補題を証明すれば良い．
+二項定理により
+\[
+	\left(1+\frac{b_n}{n}\right)^n-1
+	=
+	\sum_{k=1}^n\binom{n}{k}\frac{b_n^k}{n^k}
+\]
+である．
+ところで，各$k$について
+\[
+	\binom{n}{k}\frac{|b_n|^k}{n^k}
+	\le
+	 \frac{n\cdot (n-1)\cdots (n-k+1)}{1\cdot 2\cdots k}\frac{|b_n|^k}{n^k}
+	 \le 
+	 \frac{|b_n|^k}{k!}
+\]
+である．
+ここで，$\exp(x)-1$と$|b_n|$, $0$に対してテイラーの定理を用いると，
+$c_n\in (0, |b_n|)$が存在して
+\[
+\exp(|b_n|)-1=\sum_{i=1}^n\frac{|b_n|^k}{k!}+\frac{|b_n|^{n+1}}{(n+1)!}\exp(c_n)
+\]
+であるから，
+\[
+	\left|\left(1+\frac{b_n}{n}\right)^n-1\right|
+	\le
+	\sum_{k=1}^n\binom{n}{k}\frac{|b_n|^k}{n^k}
+	\le 
+	\sum_{k=1}^n\frac{|b_n|^k}{k!}
+	\le  -(\exp(|b_n|)-1)+\frac{|b_n|^{n+1}}{(n+1)!}\exp(c_n)
+\]
+である．ここで，$n\to \infty$のとき$|b_n|\to 0$, 
+$\exp(|b_n|)\to 1$と$1/(n!)\to 0$なので，
+\[
+-(\exp(|b_n|)-1)+\frac{|b_n|^{n+1}}{(n+1)!}\exp(c_n)\to 0
+\]
+がわかる．このことから補題が示された．
+\end{proof}
+
+中心極限定理は以下の定理である．
+\begin{thm}
+$(X, \mathfrak{M}_X, \mu)$
+を確率空間とする．
+そして$\{f_n\}_{n\in \nn}$
+をこの確率空間上の独立な可測関数で，
+同分布に従い，$m=\mean(f_1)<\infty$
+$v=\varian(f_1)<\infty$
+とする．
+このとき，
+\[
+Z_n=\frac{\sum_{i=1}^n(f_i-m)}{\sqrt{vn}}
+\]
+で定義される可測関数列$\{Z_n\}_{n\in \nn}$
+は$N(0, 1)$に法則収束する．
+\end{thm}
+\begin{proof}
+最初から$m=0$で$v=1$としても良い．
+$\phi_n$を$(f_n)_*\mu$の特性関数とする．
+このとき$f_i$達は同分布に従うので
+$\phi_n=\phi_1$である．
+この関数を単に$\phi$で表すことにする．
+$v<\infty$なので
+各$f_i$は$L^2$であるから，優収束定理から
+$\phi$は$C^2$級関数であり，
+\[
+\phi(0)=1, \ \frac{d}{dx}\phi(0)=0, \ \frac{d^2}{dx^2}\phi(0)=-1
+\]
+が満たされる．
+よって
+テイラーの定理から
+任意の$x\in \rr$について，$|t(x)|\le |x|$となる$t(x)$が
+存在して
+\[
+\phi(x)=1+\frac{1}{2}x^2\phi''(t(x))
+\]
+を満たす．
+$(Z_{n})_{*}\mu$の特性関数を$\phi_{Z_{n}}$
+で表すことにする．すると
+\begin{align*}
+\phi_{Z_n}(x)
+&=
+ 	\int_{\rr}
+	\exp(\sqrt{-1}x\cdot y)\ 
+	d((Z_{n})_{*}\mu) (y)
+	=
+	\int_{X}
+	\exp(\sqrt{-1}x\cdot Z_{n}(t))\ 
+	d\mu (t)\\
+	&=
+	\int_{X}
+	\exp\left(\sqrt{-1}x\cdot \frac{\sum_{i=1}^nf_{i}(t)}{\sqrt{n}}\right)\ 
+	d\mu (t)\\
+	&=
+	\int_{X}
+	\prod_{i=1}^{n}\exp\left(\sqrt{-1}x\frac{f_{i}(t)}{\sqrt{n}}\right)
+	\ d\mu(t)
+\end{align*}
+となる．
+$f_{i}$達の独立性から各$x$について
+$\exp\left(\sqrt{-1}x f_{i}(t)\right)$達も独立になるので
+\begin{align*}
+	\int_{X}
+	\prod_{i=1}^{n}\exp\left(\sqrt{-1}x\frac{f_{i}(t)}{\sqrt{n}}\right)
+	\ d\mu(t)
+	&=
+	\prod_{i=1}^{n}\int_{X}
+	\exp\left(\sqrt{-1}\frac{x}{\sqrt{n}}f_{i}(t)\right)
+	\ d\mu(t)\\
+	&=
+	\prod_{i=1}^{n}\int_{\rr}
+	\exp\left(\sqrt{-1}\frac{x}{\sqrt{n}}y\right)
+	\ d((f_{i})_{*}\mu)(y)\\
+	&=
+	\left(\phi\left(\frac{x}{\sqrt{n}}\right)\right)^{n}
+\end{align*}
+となる．
+まとめると
+\[
+\phi_{Z_n}(x)=\left(\phi\left(\frac{x}{\sqrt{n}}\right)\right)^n
+\]
+である．
+ここで$t(x/\sqrt{n})=t(x, n)$と書くことにすると，
+\[
+	\phi_{Z_n}(x)=\left(1+\frac{1}{2n}x^2\cdot\phi''(t(x, n))\right)^n
+	=
+	\left(1-\frac{1}{2}x^2+\frac{1}{2n}x^2(\phi''(t(x, n))+1)\right)^n
+\]
+と表すことができる．
+点
+$x\in \rr$を固定する．
+このとき
+$|t(x, n)|\le x/\sqrt{n}$であるから
+$\lim_{n\to \infty}t(x, n)= 0$となる．
+すると
+$a_n=1-\frac{1}{2n}x^2$,
+$b_n=\frac{1}{2}x^2(\phi''(t(x, n)+1)$と考えて
+先の補題 \ref{lem:elem}を適応できて，
+\[
+	\lim_{n\to \infty}
+	\left(
+	1-\frac{1}{2n}x^2+\frac{1}{2n}x^2(\phi''(t(x, n))+1)
+	\right)^n
+	=
+	\lim_{n\to \infty}
+	\left(
+	1-\frac{1}{n}\frac{x^2}{2}
+	\right)^n
+	=\exp\left(-\frac{1}{2}x^2\right)
+\]
+を得る．
+$\exp\left(-\frac{1}{2}x^2\right)$
+は正規分布$N(0, 1)$の特性関数であるから
+この式は
+$\phi_{Z_n}$
+は正規分布$N(0, 1)$の特性関数に各点収束することを意味する．
+よって，$Z_n$は$N(0, 1)$に法則収束する．
+\end{proof}
+
+
+
+
+
+\section{中心極限定理の別証明}
+
+
+この節では中心極限定理の特性関数を使わない別証明を紹介する．
+
+
+\subsection{与えられた確率変数列と同じ分布を持つ独立確率変数の存在と構成}
+
+確率論においては，確率空間そのものよりも確率変数を主体と考えて
+確率空間を明記せず確率変数を扱うことが多い．これは確率変数を考えるにおいて
+それが定義されている確率空間の確率測度ではなくそれを確率変数によって押し出しをした$\rr$上の測度，つまり確率変数の分布を主に扱うためであろう．
+確率変数の定義されている確率空間の測度が何であろうと，結局$\rr$に押し出して考えるので，
+確率変数と$\rr$上の確率測度を集中して扱えば良いというわけである．
+こうした考え方はある種の利点であるとも考えられるのだが，
+普段は確率論や統計学以外の数学を扱っている人物に関してはこうした取り扱いというものは，命題の中で具体的に何を扱っているのかという事象の把握において
+それなりの不安感を与えるものになるだろう．
+例えば，中心極限定理の仮定に出てくる同分布独立な確率変数などがそうである．
+しかしそうした不安というものはやろうと思えば数学的にきちんと処理できるものである（なのであんまり気にしなくて良いという考え方もある）．
+この節ではまず最初に同分布独立な確率変数の存在，もしくは構成を数学的な意味で厳密にとり行う．
+
+
+\begin{thm}
+$(X, \mathfrak{M}, \mu)$を
+確率空間とする．
+$I, J$を可算集合かもしくは有限集合とする．
+$\{f_{i}\}_{i\in I}$を
+$(X, \mathfrak{M}, \mu)$
+上の独立な確率変数とする．
+$\alpha$を$\rr$上の確率ボレル測度とする．
+このとき確率空間
+$(Y, \mathfrak{N}, \nu)$
+とこの上の二つの確率変数の列
+$\{\phi_{i}\}_{i\in I}$
+と
+$\{\psi_{j}\}_{j\in J}$，
+そして可測写像
+$\pi: X\to Y$が存在して
+以下を満たす．
+\begin{enumerate}
+\item $\{\phi_{i}\}_{i\in I}$は独立である．
+\item 
+$\{\psi_{j}\}_{j\in J}$は独立である．
+
+\item $\{\phi_{i}, \psi_{j}\}_{i\in I, j\in J}$
+は独立である．
+\item 
+$\pi_{*}\mu=\nu$
+\item 
+任意の$i\in I$について
+$\phi_{i}\circ \pi=f_{i}$
+が成り立つ．
+\item 任意の$i\in I$
+について$(f_{i})_{*}(\mu)=(\phi_{i})_{*}(\nu)$
+が成り立つ．
+\item 
+任意の$j\in J$について
+$(\psi_{j})_{*}(\nu)=\alpha$が成り立つ．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$Y=X\times \prod_{j\in J}\rr$
+とおき，
+$\mathfrak{N}=\mathfrak{M}\otimes \bigotimes\mathfrak{B}(\rr)$として
+$(Y, \mathfrak{N})$上の測度を
+\[
+\nu=\mu\otimes \bigotimes_{j\in I}\alpha
+\]
+と定義する．
+
+$\phi_{i}: Y\to \rr$を
+$(x, (r_{j})_{j\in J})\in Y=X\times \prod_{j\in J}\rr$に対して
+$\phi_{i}((x, (r_{j})_{j\in J}))=f_{i}(x)$
+と定義する．
+
+$\psi_{j}: Y\to \rr$を$Y$から第$j$成分への射影とする．
+つまり$\psi_{j}(x, (r_{k})_{k\in J})=r_{j}$とする．
+
+$\pi$を$Y$から$X$への射影とする．
+
+まず(1)を証明しよう．
+$\phi_{i}$の定義から任意の$A\in \mathfrak{B}(\rr)$
+について
+$\phi_{i}^{-1}(A)=f_{i}^{-1}(A)\times \prod_{j\in J}\rr$
+なので，$f_{i}$達の独立性から$\{\phi_{i}\}_{i\in I}$
+の独立性がわかる．
+
+(2)を示そう．
+$A\in \mathfrak{B}(\rr)$に対して
+$\psi_{j}^{-1}(A)=X\times A\times \prod_{k\in J, k\neq j}\rr$
+なので，直積測度の定義から独立性がわかる．
+
+(3)を示そう．
+$\phi_{i}^{-1}(A)=f_{i}^{-1}(A)\times \prod_{j\in J}\rr$と
+$\psi_{j}^{-1}(A)=X\times A\times \prod_{k\in J, k\neq j}\rr$，
+そして直積測度の定義からわかる
+
+(4)は直積測度の定義からわかる．
+
+(5)は$\phi_{i}$の定義からわかる．
+
+(6)は
+$\phi_{i}^{-1}(A)=f_{i}^{-1}(A)\times \prod_{j\in J}\rr$
+からわかる．
+
+(7)は$\psi_{j}$が射影であることと，
+直積測度の定義からわかる.
+
+
+\end{proof}
+
+上の定理で特に$I=\emptyset$とした場合に次の系が得られる．
+\begin{cor}
+$\alpha$を$(\rr, \mathfrak{B}(\rr))$上の
+確率測度とする．$J$を可算集合か有限集合とする．
+このとき
+確率空間$(X, \mathfrak{M}, \mu)$
+とこの上の確率変数の列$\{h_{j}\}_{j\in J}$
+が存在して，この列は独立同分布でその分布は
+$\alpha$に等しい．
+\end{cor}
+
+\subsection{中心極限定理の別証明}
+\begin{lem}
+$\{(X_{n}, \mathfrak{M}_{n}, \mu_{n})\}_{n\in \zz_{\ge 0}}$を確率空間として，
+$\phi_{n}$は$(X_{n}, \mathfrak{M}_{n})$
+上の確率変数とする．
+$\psi$は$(\rr, \mathfrak{B}(\rr))$
+上の確率変数とする．
+$S$を$(C_{b}(\rr, \rr), \|*\|_{\infty})$の稠密部分集合とする．
+を満たす．
+このとき
+任意の$f\in S$に対して
+\[
+\lim_{n\to \infty}\mean(f(\phi_{n}))
+=
+\mean(f(\psi))
+\]
+が成り立つならば$\phi_{n}$
+は$\psi$に法則収束する．
+\end{lem}
+\begin{proof}
+$\epsilon\in (0, \infty)$
+を任意に与える．
+$\nu=\psi_{*}\mathcal{L}^1$
+とおく．
+任意に$f\in C_{b}(\rr, \rr)$
+を与える．
+仮定から$\|f-g\|<\epsilon$
+となる$g\in S$
+が存在する．
+このことから
+任意の$n$について
+$|\mean(f(\phi_{n}))-\mean(g(\phi_{n}))|\le \epsilon$
+と
+$|\mean(f(\psi))-\mean(g(\psi))|\le \epsilon$
+が成り立つ．
+また仮定より，十分大きい$n$について
+$|\mean(g(\phi_{n}))-\mean(g(\psi))|<\epsilon$
+となる．
+よって
+\begin{align*}
+|\mean(f(\phi_{n}))-\mean(f(\psi))|\le 3\epsilon
+\end{align*}
+となる．
+以上から$\phi_{n}$は$\psi$に法則収束することがわかる．
+\end{proof}
+
+
+\begin{thm}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，$f_{n}$を
+その上の独立同分布な確率変数の列で
+平均値が$0$，分散が$1$とする．
+このとき新たに確率変数の列$\theta_{n}$
+を
+\[
+\theta_{n}=\frac{f_{1}+\dots +f_{n}}{\sqrt{n}}
+\]
+と定義する．
+すると$\theta_{n}$は正規分布に法則収束する．
+\end{thm}
+\begin{proof}
+補題を用いて$\phi_{n}$
+と，正規分布に従う確率変数の列$\psi_{n}$
+をとる．
+そして新たに確率変数を
+\[
+\zeta_{n, i}
+=
+\frac{\phi_{1}+\dots +\phi_{i-1}+\psi_{i+1}+\dots+\psi_{n}}{\sqrt{n}}
+\]
+\[
+\eta_{n, i}=\frac{\phi_{1}+\dots +\phi_{i}+\psi_{i+1}+\dots+\psi_{n}}{\sqrt{n}}
+\]
+と定義する．
+ここで$\zeta_{n, i}$の定義に$\phi_{i}$が含まれていないのは誤植ではなく，
+そういう定義である．後程$\zeta_{n, i}$と$\phi_{i}$が
+独立であることを使う．
+さて正規分布の再生性から$\eta_{n, 0}$が
+正規分布に従うことに注意しよう．
+証明の方針としては$\eta_{n, n}$が$\eta_{n,  0}$
+に法則収束することを示すのだが，
+そのために$\eta_{n, i}$が$\eta_{n, i-1}$に法則収束することを
+$\zeta_{n, i}$をうまく利用して証明する．これを$n$段階繰り返せば
+中心極限定理が証明できるわけである．
+$S$を$C_{b}(\rr, \rr)$の$C^{\infty}$級関数全体とする．
+$S$は$C_{b}(\rr, \rr)$の中で稠密になっていることに注意しよう（軟化子を使う）．
+任意の$f\in S$について
+$\mean(f(\eta_{n, n}))$が$\mean(f(\eta_{n, 0}))$
+に収束することを示せばよい．
+まず確率変数を
+\begin{align*}
+\kappa_{n, i}=
+f(\eta_{n, i})-f(\zeta_{n, i})-\frac{f^{(1)}(\zeta_{n, i})\cdot \phi_{i}}{\sqrt{n}}
+-\frac{f^{(2)}(\zeta_{n, i})\cdot \phi_{i}^2}{2n}
+\end{align*}
+と定義する．
+二階微分に関するテイラーの定理からある$\tau_{n, i}$
+が存在して
+\[
+\kappa_{n, i}=
+\frac{(f^{(2)}(\tau_{n, i})-f^{(2)}(\zeta_{n, i}))\cdot \phi_{i}^2}{2n}
+\]
+が成り立つ．この式は実際は各$y\in Y$に対して$\kappa_{n, i}(y)$
+と書くべきだが，省略して書いている．
+任意に$\epsilon\in (0, \infty)$を与える．
+すると$f^{(3)}$は有界なのである $\delta$が存在して
+$\delta\cdot \sup_{t\in \rr}|f^{(3)}(t)|<\epsilon$
+となる．
+すると$|x-y|<\delta$ならば
+$|f^{(2)}(x)-f^{(2)}(y)|<\epsilon$
+となる．
+$A=\{\, x\in Y\mid |\phi_{i}(y)|\le \delta\sqrt{n}\, \}$
+とする．
+このとき
+\[
+\mean(|\kappa_{n, i}|\cdot \chi_{A})
+\le \frac{\epsilon}{2n}\mean(\phi_{i}^2)= \frac{\epsilon}{2n}
+\]
+となる．また，
+$M=\sup|f^{(2)}|$
+とおくと
+\[
+\mean(|\kappa_{n, i}|\cdot \chi_{Y\setminus A})
+\le 
+\frac{M}{n}\mean(|\phi_{i}|\cdot \chi_{Y\setminus A})
+\]
+となる．
+$A$は$n$に依存しているが，
+$n\to \infty$とすると$\chi_{Y\setminus A}\to 0$
+となる．
+十分大きい$n$を取れば
+$\mean(|\phi_{i}|\cdot \chi_{Y\setminus A})\le\epsilon/2(M+1)$
+となる．
+また
+\begin{align*}
+f(\eta_{n, i})-f(\zeta_{n, i})-\frac{f^{(2)}(\zeta_{n, i})\cdot \phi_{i}^2}{2n}
+=
+\kappa_{n, i}+
+\frac{f^{(1)}(\zeta_{n, i})\cdot \phi_{i}}{\sqrt{n}}
+\end{align*}
+なので，
+\begin{align*}
+\left|
+\mean\left(
+f(\eta_{n, i})\right)
+-
+\mean(f(\zeta_{n, i}))
+-
+\mean\left(\frac{f^{(2)}(\zeta_{n, i})\cdot \phi_{i}^2}{2n}
+\right)
+\right|
+&\le 
+|\mean(\kappa_{n, i})|
++
+\left|
+\mean\left(
+\frac{f^{(1)}(\zeta_{n, i})\cdot \phi_{i}}{\sqrt{n}}
+\right)
+\right|
+\\
+&\le 
+\frac{\epsilon}{n}
++
+\left|\mean
+\left(
+\frac{f^{(1)}(\zeta_{n, i})}{\sqrt{n}}
+\right)\right|\cdot \mean\left(\phi_{i}\right)\\
+&=
+\frac{\epsilon}{n}
+\end{align*}
+を得る．
+同じ論法が$\eta_{n, i-1}$
+と$\zeta_{n, i}$
+にも適応できるので
+\begin{align*}
+\left|
+\mean\left(
+f(\eta_{n, i-1})\right)
+-
+\mean(f(\zeta_{n, i}))
+-
+\mean\left(\frac{f^{(2)}(\zeta_{n, i})\cdot \phi_{i}^2}{2n}
+\right)
+\right|
+\le 
+\frac{\epsilon}{n}
+\end{align*}
+となる．
+よって，
+\begin{align*}
+\left|
+\mean(
+f(\eta_{n, i-1}))
+-
+\mean(f(\eta_{n, i}))
+\right|
+\le 
+\frac{2\epsilon}{n}
+\end{align*}
+を得る．
+ゆえに
+\[
+\left|
+\mean(
+f(\eta_{n, 0}))
+-
+\mean(f(\eta_{n, n}))
+\right|
+\le 2\epsilon
+\]
+となるので，中心極限定理が示された．
+\end{proof}
+
+\section{注釈}
+
+\subsection{動的概念と静的概念}
+まず結論から話すと，理由は知らないが，まあとにかく数学は静的概念しか扱えないということである．
+言いたいことがあんまり纏まってないので，確率変数が出てくるところから読むといいと思います．
+
+
+ここからの文章で用いる「動的概念」とは何かしらの一連の動きや働きそのものを指し示す概念付けのことを指す．
+例えば物体の運動というものも運動という一連の動きを指し示すものとして概念付けされている．
+一方で「静的概念」とは動的概念ではないもののことである．
+我々の世界は時間変化するので，この静的概念の具体例を挙げるのはとても難しいのだが，1+1=2は静的概念であるし，
+何かしらの留保はつくかも知れないが，りんごは赤色であるという言及もまあ多分静的概念である．このように例示をすると，
+そもそも静的概念というのは観念の中にしかないものであるから，一番最初に言った結論が成り立つのは当然のことなのかも知れない．どちらかというと，静的概念がどうなっているのかということよりは，動的概念がどうなっているのかということがこれからの作用点になる．
+動的概念は現実世界だけではなく，我々の頭の中，観念の中にも現れる．ここからやっと数学の話になります．
+高校数学においては極限の定義は以下のように行う．
+つまり，数列$a_{0}, a_{1}, \dots, a_{n}, \dots$
+が$a$に収束するとは番号$i$を大きくして行ったときに
+$a_{i}$がどんどん$a$に近づくときにいう．
+他方で大学などでは以下のように定義する．
+つまり数列$\{a_{i}\}_{i\in \zz_{\ge 0}}$
+が$a$に収束するとは，
+任意の$\epsilon>0$に対して$N\in \zz_{\ge 0}$
+が存在して任意の$n\in \zz_{\ge 0}$
+が$n\ge N$を満たすならば
+$|a_{n}-a|<\epsilon$
+を満たすという定義になる．
+この二つの概念はそれぞれ動的概念と静的概念になっている．
+前者はどんどん近づくという定義付けをしている．
+なぜかは知らないがこの定義の仕方だと厳密に扱えないみたいなので，大学では後者のように静的に定義する．
+後者においてはどんどん近づくという観念は身を潜め，
+何か$\epsilon$を与えたら十分大きい番号全てで
+$|a_{n}-a|<\epsilon$という言い方になっている．
+どんどん近づくという言い方をせずに十分大きい番号
+\textbf{すべて}で$a_{n}$と$a$の差が与えられた$\epsilon$
+の範囲に収まるという言い換えをすることによって動的概念を排除している．さて一番最初に話に戻るが，この収束の話において，「収束の概念を\textbf{厳密に}扱うためにはイプシロンデルタ論法」が必要という言い方がされるが，
+これは確かに正しいのだけど，「厳密に扱うこと」，
+「数学的に扱うこと」，「動的概念を排除すること」，これらが全て同じことを指しているように見える．
+そしてその理由は不明である．とにかく，
+何かしらのことを数学的に扱おうとすると，動的概念を排除するように定義をするとなんだかうまくいくと思う．
+そうするとなぜか数学的に扱えるようになる．逆に言えば数学は静的概念しか取り扱えないということでもある．(しかしこれは「数学は数学的概念しか扱えない」ということと同じでないだろうか)．
+
+それはさておき，この文書は確率論を扱うためのものなので，
+確率論に現れる動的概念と静的概念の対立が顕著なものを説明しよう．
+それは\textbf{確率変数}である．
+世の中には測度論的ではない確率論もあるようで，測度論的確率論が確率論の全てではないのだけど，この文章では数学的な確率論とは測度論的確率論ということになっているので，以下ではそのつもりで記述している．
+数学的に厳密ではない(と\textbf{言われている})
+確率変数の取り扱いはおそらく以下のようなものになるのではないのだろうか？確率変数$X$とは，刻一刻と値をさまざまに\textbf{ランダム}に取り続ける変数のことである．
+つまり$X$は放っておくと$X=1$だったり，
+$X=10!$とか勝手に値がランダムに変わる変数のことである．
+これは動的概念である．
+ちなみに
+静的には(数学的には)確率変数とはただ単に確率空間
+$(\Omega, \mu)$上の(大抵の場合は)実数値を取る可測関数のことである．
+確率変数を可測関数と思ってない人は上で述べたように確率変数を認知しているのだと思うし，おそらくこれは人類がプリミティブに認知した確率変数の定義である．この説明において
+確率変数の分布とは$X$の取る値を観察したときの値の
+分布である．つまり$X$は刻一刻と値を変化させるけれども，
+$X=a$となる瞬間を記録して十分長い時間観察すれば
+$X=a$となる確率がわかるということである．
+可測関数として見ると$\mu(\{\, \omega\mid X(\omega)=a\, \})$
+のことである．「刻一刻」の刻が$\omega$に対応していて，
+($X$が刻一刻と値を変えるということを数学的に表現するのは
+なんというかとても難しいのだが，)
+コルモゴロフはそこらへんに目をつけて静的に定義することに成功したんじゃないのだろうかと思う．
+
+動的概念を静的概念に変換するのは
+「数学というフォーマット」に乗せるための手続きでしかなく，動的概念としての定義付けもそれはそれとして(数学というフォーマットの外側で)有効であり続けると
+個人的には思う．
+(集合論の公理系ZFCは現代数学を「実装」することができる(だろう)けど，別にZFC全然知らなくても全然数学できるし数学の論文全然書けるしというのと類似の事柄だと思う．)
+
+\subsection{確率変数の向きを逆に}
+数学的に確率変数とは確率空間$(\Omega, \mathfrak{M}, \mu)$上の
+実数値可測関数$X\colon \Omega \to \rr$である．
+多分，双対圏やらを考えて矢印の向きが$X\colon \Omega\gets \rr$と考えた方がいい気がする．
+なぜなら，確率変数を考える際に$\Omega$
+は結構どうでもいいからである．これは通常の数学において，
+写像の値域は結構どうでもいいことに相似している．
+こういうこと言うとそんなことないと言われそうだけど，
+写像$f\colon X\to Y$に対して$X\to Y\times Z; x\to (f(x), o)$
+みたいなのを考えるときにめんどくさいしおんなじ記号で書いちゃうことはよくあるのでこういうことです．
+実際，確率変数の方を適当に無限直積を取って独立な確率変数を得る方法とかは，確率変数の取り扱いにおいて定義域の方がどうでもいいということをよく利用していると思う．
+この矢印逆にすると言うのは先に述べたプリミティブな
+確率変数の定義にも合致すると思う．
+なぜなら$X$を刻一刻と勝手に値が変わる変数として見ると，
+$X=a$となる瞬間を観察してそこから$X=a$となる確率の方が大事だったりするので$a\in \rr$に対して``$X=a$となる事象''を対応させているので$X$は$\rr$から$\Omega$の方に矢印が伸びてると考えた方が便利なのである．
+このことは
+$X^{-1}\colon \mathfrak{B}(\rr)\to \mathfrak{M}$
+の方が大事ということを指し示していると見ることもできる．
+おそらく確率変数を可測関数として見出した人は，
+``$X=a$という事象''の全体を抽象的に確率空間$\Omega$として
+用意してあげて，確率変数$X$を改めて可測関数
+$X\colon \Omega\to \rr$
+というふうに見立てて，数学的に，静的に，
+確率変数を定義することに成功したのだと思う．
+確率変数の定義域は結構どうでもいいので，
+フワーっと$\Omega$をこさえてやっても適宜直積取ったりなんなりすればいいのでこの定義はうまく行ったと思う
+(この定義にしたから定義域がどうでもよくなったのか，定義域がどうでも良いからこの定義になったのかはよくわからない)．
+ただし動的概念を扱う人と静的概念を扱う人との間で
+齟齬が生まれるようになった，というのが現代のこの世界である．
+携帯電話の良いところはいつでもどこでも電話をかけられるところで，悪いところはいつでもどこでも電話がかかってくるところである(過程を省くが結論だけ述べると仲良くしなさいという意味)．
+
+	
+	
+	
+\begin{thebibliography}{99}
+\bibitem{hatena0}
+はてなブログ電波通信の記事
+「直積測度の構成について：確率論その０」, 
+https://concious4410.hatenablog.com/entry/2022/01/03/011245
+
+\bibitem{hatena1}
+はてなブログ電波通信の記事
+「大数の法則について：確率論その１」, 
+https://concious4410.hatenablog.com/entry/2022/01/16/233527
+
+
+\bibitem{hatena2}
+はてなブログ電波通信の記事
+「距離空間上の測度：確率論その２」, 
+https://concious4410.hatenablog.com/entry/2023/06/20/232112.
+
+\bibitem{hatenasekibun}
+はてなブログの記事「特殊な積分を求めること」,
+https://concious4410.hatenablog.com/entry/2021/03/25/100050
+
+
+
+
+\bibitem{0}小谷眞一, 「測度と確率」, 2005　岩波書店．
+
+\bibitem{1}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+
+\bibitem{woo}
+C. W. Chin, 
+\textit{A short elementary proof of the central limit theorem by individual swapping}, 
+arXiiv:2106.00871
+\bibitem{3}K. R. Parthasarathy,  
+\textit{Probability measures on metric spaces.} 
+Academic Press. 
+\end{thebibliography}
+
+「知識は公共財」
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

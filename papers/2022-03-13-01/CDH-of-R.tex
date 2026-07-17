@@ -1,0 +1,530 @@
+ \documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\pr}{pr}
+
+\DeclareMathOperator{\rank}{rank}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\newcounter{mycnt}%                       カウンター定義
+\newcommand{\outcnt}{%                    コマンド定義
+  \the\value{mycnt}%                      カウンター出力
+  \ifnum\value{mycnt}>100 (over 100)\fi%  100以上の場合
+  \stepcounter{mycnt}%                    mycnt++
+}
+\setcounter{mycnt}{1}
+
+\title{ユークリッド空間の可算稠密推移性}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章ではユークリッド空間の
+可算稠密推移性を紹介する．
+つまり，$n$次元ユークリッド空間$\rr^{n}$
+の可算稠密集合$A$, $B$
+が与えられたときに同相写像$f: \rr^{n}\to \rr^{n}$
+が存在して$f(A)=B$
+が成り立つことを証明する．
+
+\section{準備：$n=1$の場合}
+以下の定理の証明は \cite{denq}を参照のこと．
+\begin{thm}\label{thm:qqq}
+最大値及び最小値を持たない可算で自己稠密な線形順序集合は互いに順序同型である。特に有理数と順序同型である。
+\end{thm}
+
+
+
+\begin{lem}
+$A$, $B$を
+$\rr$の可算稠密集合とする．
+このときそして全単射
+$f: A\to B$は順序を保つ写像とする．
+このとき$f$は連続写像になる．
+\end{lem}
+\begin{proof}
+$A$と$B$の番号付けを
+$A=\{a_{i}\}$, 
+$B=\{b_{i}\}$として
+さらに$f(a_{i})=b_{i}$
+が成り立つようにする．($A$の番号付けを先に与えて，
+$f(a_{i})=b_{i}$によって$B$の番号付けを定義すれば良い)
+任意に$\epsilon>0$をとり，
+任意に$a_{n}\in A$を与える．
+このとき$f(a_{n})=b_{n}$であり，
+$B$の稠密性から
+$b_{N}, b_{M}\in B$が存在して
+\begin{align}\label{al:koko}
+b_{n}-\epsilon<b_{N}<b_{n}<b_{M}<b_{n}+\epsilon
+\end{align}
+が成り立つ．
+このとき$f$が順序を保つことから
+集合$A\cap (a_{N}, a_{M})$は$a_{n}$の開近傍
+になる．
+そして$x\in A\cap (a_{N}, a_{M})$
+について式 (\ref{al:koko})と
+$f$が順序を保つことから$|f(x)-b_{n}|<\epsilon$
+となるので，$f$は$a_{n}$で連続である．
+よって$f$は$A$上連続である．
+\end{proof}
+
+\begin{lem}
+$A$を$\rr$の稠密可算集合とし，
+$S\subset A$は最大元を持たず，
+$u, v\in A$が
+$v\in S$と$u<v$を満たす
+ならば$u\in S$を満たすときある$y\in \rr$
+が存在して
+$S=A\cap (-\infty, y)$を満たす．
+このとき$A\setminus S=A\cap [y, \infty)$
+である．
+\end{lem}
+\begin{proof}
+$y=\sup S$とすれば良い．
+\end{proof}
+
+\begin{thm}\label{thm:daiji}
+$A$と$B$を$\rr$の可算稠密部分集合とする．
+このとき
+順序を保つ写像
+$f: A\to B$は
+同相写像$f: \rr\to \rr$で
+$f(A)=B$
+を満たすものに拡張される．
+\end{thm}
+\begin{proof}
+$A, B$を$\rr$の稠密可算集合とすると、
+これらは$\qq$と同型である.
+よって特に$A$と$B$は順序同型なので
+その順序同型写像を$f: A\to B$とする．
+適当に$A$, $B$を番号付けして
+$f: A\to B$を
+$f(a_{i})=b_{i}$と定義したときに順序同型になるようにする．
+今からこの写像を$\rr$全体に拡張することを考えよう．
+$x\in \rr$について
+$R_{x}=(-\infty, x)$, $L_{x}=[x, \infty)$
+とする．このとき$f$は順序を保つなので
+$S_{x}=f(A\cap R_{x})$, $T_{x}=(A\cap L_{x})$
+とおくと
+$S_{x}$は$u, v$が$u<v$かつ$v\in S_{x}$を満たすならば
+$u\in S_{x}$を満たし，$S_{x}$には最大元が存在しないのである$y\in \rr$が存在し
+$S_{x}=B\cap (-\infty, y)$となる．
+同様に$T_{x}=B\cap [y, \infty)$
+となる．そこでこの$y$を用いて$f(x)=y$と定義する．
+ここでもし$x=a_{i}$ならば$y=b_{i}$になることに注意しよう．
+この$f: \rr\to \rr$が連続であることを証明しよう．
+まず，$f$が順序を保つことを証明しよう．つまり
+$x<y$ならば$f(x)<f(y)$である．これを証明するためにまず
+$x<a_{n}<y$という$a_{n}\in A$
+が$A$の稠密性から存在することに注意しよう．
+すると$b_{n}\not\in S_{f(x)}$
+と$b_{n}\in S_{f(y)}$が成り立つことからわかる．
+特に$b_{n}\in T_{f(x)}$なので
+$f(x)\le b_{n}<f(y)$なので$f$が順序を保つことがわかる．
+このことから特に$f$は単射である．
+任意に$\epsilon>0$と$x\in \rr$を取る．
+すると$B$の稠密性から$b_{N}$と$b_{M}$
+が存在して
+\begin{align}\label{al:hoho}
+f(x)-\epsilon <b_{N}<f(x)<b_{M}<f(x)+\epsilon
+\end{align}
+が成り立つ．
+写像$f$が順序を保つことから$a_{N}<x<a_{M}$
+がわかる．つまり$(a_{N}, a_{M})$
+は$x$の開近傍となる．任意の$z\in (a_{N}, a_{M})$
+を取ると$f$が順序を保つことと式　
+(\ref{al:hoho})から
+$|f(z)-f(x)|<\epsilon$
+がわかるので$f$が連続であることがわかる．
+さて，$f^{-1}: A\to B$も同じように拡張を施して
+連続写像$g: B\to A$を得る．
+このとき任意の$n\in \zz_{\ge 0}$
+について
+$g(f(a_{n}))=a_{n}$と
+$f(g(b_{n}))=b_{n}$
+がわかるので$f$と$g$の連続性から
+任意の$x\in \rr$について
+$f(g(x))=x$と$g(f(x))=x$
+がわかるので$f$,
+ $g$は互いに逆写像であるから
+ $f$が同相写像であることがわかる．
+$f$の定義から$f(A)=B$なので定理が示された．
+\end{proof}
+
+
+\section{本文：一般の場合}
+\begin{lem}
+$n\in \zz_{\ge 1}$として
+$s\in \rr^{n}$とする．
+そして$v=(x_{1}, \dots, x_{n})\in \rr^{n\times n}$
+と$i\in \{\, 
+1, \dots, m
+\, \}$
+および$a\in \rr^{n}$に対して
+$Sp(v, i, a)$
+を$\{x_{k}\}_{k\neq i}$と$a$から生成される$\rr^{n}$
+の線形部分空間とする．
+このとき集合
+\[
+T_{a, i}=
+\{\, (x_1, \dots, x_n)\in \rr^{n\times n}\mid
+\rank Sp(v, i, a)=n
+\, \}
+\]
+は$\rr^{n\times n}$のなかで稠密開集合である．
+\end{lem}
+\begin{proof}
+$v=(x_{1}, \dots, x_{n})\in \rr^{n\times n}$
+に対して
+$f(v)$を行列$(x_{1}, \dots, x_{n})$
+の第$i$列を$a$に変えた行列の行列式を表すことにする．
+すると$f$は$n\times n$次多項式であり，恒等的に$0$ではない．
+よって$f(v)\neq 0$となる$v$は稠密に存在し
+(多項式に関する一致の定理, \cite{denden}を参照のこと)，
+またこのような$v$全体は開集合をなす．
+そして$\rank Sp(v, i, a)=n$と$f(v)\neq 0$
+は同値なのでこれで証明が終わる．
+\end{proof}
+
+$v=(x_{1}, \dots, x_{n})\in GL(n)$と$a\in \rr^{n}$
+に対して$\pr_{v, i}(a)$で
+基底$x_{1}, \dots, x_{n}$に関する$a$の第$i$成分を表すとする．
+つまり$a=\sum_{i=1}^{n}\pr_{v, i}(a)x_{i}$である．
+
+\begin{thm}\label{thm:bairebaire}
+$n\in \zz_{>0}$
+とする．
+$S$を$\rr^n$の可算な部分集合で$0\not\in S$とする．
+このとき
+基底$v=(x_1, \dots, x_n )\in \rr^n$
+が存在して，
+任意の$x\in S$について
+$\pr_i(x)\neq 0$となるものが存在する．
+\end{thm}
+\begin{proof}
+$GL(n)$は$\rr^{n\times n}$
+の稠密開集合であることに注意しよう．
+そして
+\[
+T=GL(n)\cap \bigcap_{a\in A}\bigcap_{i=1}^{n}T_{a, i}
+\]
+と定義する．
+すると各$T_{a, i}$は稠密開集合なので
+ベールの範疇定理から$T$は$\rr^{n}$の稠密集合となる．
+よって$(x_{1}, \dots, x_{n})\in S$をとれば求める基底になる．なぜならばもしもそうでないとするとある$i$と$a\in S$について
+$\pr_{v, i}(a)=0$となるが，これは$\{x_{k}\}_{k\neq i}$
+が張る線型空間に$a$が属していることを意味し，
+それは$\rank Sp(v, i, a)<n$を導く．これは$v\in T_{a, i}$
+に反するので定理が従う．
+\end{proof}
+
+
+以下では
+$\pr_{v, i}(x)$を単に$x_{i}$や$(x)_{i}$などと書いたりする．
+\begin{df}
+$(x_1,x_2)\in  \rr^n\times \rr^n$が
+\textbf{一般の位置にある}とは、任意の$i\in \{1,\dots, 
+n\}$について
+\[
+(x_1)_i-(x_2)_i\neq0
+\]
+を満たすことである。集合$A \subset \rr^n$が一般の位置にあるとは、任意の組$(x,y)\in A\times A$が一般の位置にある時に言う。
+\end{df}
+
+\begin{df}
+一般の位置にある二つの組$(x_1,x_2), (y_1, y_2)\in \rr^n\times \rr^n$
+が
+\textbf{共鳴的に場所取り}しているとは、
+任意の$i\in \{1,\dots, n\}$について、
+$(x_1)_i-(x_2)_i$と$(y_1)_i-(y_2)_i$が同じ符号を持つ時に言う。
+\end{df}
+\begin{df}
+番号付された二つの高々可算な、有限の場合には同じ濃度を持つ集合$A=\{a_i\},B=\{b_i\}\subset \rr^n$が
+\textbf{共鳴的に位置取り}
+しているとは、
+任意の組$(i,j)\in \nn^2$について、$(a_i,a_j)$と$(b_i,b_j)$が共鳴的に位置取りしている時に言う。
+\end{df}
+
+\begin{lem}
+$A$を$\rr^n$の可算部分集合とする。この時、$\rr^n$の基底$(v_1,v_2,\dots, v_n)$で、これによる座標系において$A$が一般の位置になるものが存在する。
+\end{lem}
+\begin{proof}
+$S=\{\, 
+x-y\mid x, y\in A
+\, \}\setminus \{0\}$
+に対して
+定理\ref{thm:bairebaire}を適応すれば
+定理は従う．
+\end{proof}
+
+\begin{prop}
+$A$,$B$を$\rr^n$の可算な稠密集合で、それぞれ一般の位置にあるとする。
+この時$A,B$が共鳴的に位置取りするように番号付けできる。
+\end{prop}
+\begin{proof}
+帰納的に$\{c_i\}=A$, $\{d_i\}=B$という列を以下のように作っていく．
+まず、$c_1=a_1$, $d_1=b_1$, $d_2=b_2$と定義する。
+次に$i$を$(c_1,a_i)$と$(d_1,d_2)$が共鳴的に位置取りするような最小の自然数とする。そして、$c_2=a_i$と定義する。$A$が稠密であることから、このような$i$は存在する。
+一般に偶数番まで$c_i$と$d_i$が構成されたとしよう。つまり、
+$c_1, c_2, \dots, c_{2j}$と$d_1,d_2,\dots, d_{2j}$が構成されたとしよう。
+この時$c_{2j+1}$と$d_{2j+1}$を以下のように構成する。
+自然数$s$を、$c_1,c_2,\dots, c_{2j}$に属さない$a_i$の番号の一番小さいものとする。この時$c_{2j+1}=a_s$と定義する。
+次に自然数$t$を$c_1,c_2,\dots, c_{2j}, c_{2j+1}$と$d_1, d_2, \dots, d_{2j}, d_{t}$が共鳴的に位置取りする番号の一番小さいものとする。そして$d_{2j+1}=b_t$と定義する。
+
+さらに$c_{2j+2}$と$d_{2_j+2}$を以下のように構成する。
+自然数$p$は$d_1, d_2, \dots, d_{2j+1}$に含まれない$b_p$の一番小さい番号とする。そして$d_{2j+2}=d_q$と定義する。
+次に、自然数$q$を$c_1, c_2, \dots, c_{2j+1}, a_q$と$d_1, d_2, \dots, d_{2j+1}, d_{2j+2}$が共鳴的に位置取りしているようになる$a_q$のうち最小の番号とする。そして$c_{2j+2}=a_q$と定義する。
+
+以上の帰納的構成は、$A,B$が共に稠密であることから可能である。
+\end{proof}
+
+\begin{thm}
+$A,B$を$\rr^n$の可算稠密集合とする。
+この時、同相写像$f:\rr^n\to \rr^n$が存在して、
+\[
+f(A)=B
+\]
+を充たす。
+\end{thm}
+\begin{proof}
+適当に基底と番号を取り替えて、$A=\{a_{i}\}$, $B=\{b_{i\}}$は共鳴的に位置取りしており，$A$と$B$は共に一般の位置にあるとしても良い．
+一般に$a_{i}=(a_{i, 1}, \dots a_{i, n})$, 
+一般に$a_{i}=(b_{i, 1}, \dots b_{i, n})$
+と表すことにする．$A$と$B$が一般の一になるように座標をとっているので
+$i\neq j$ならば任意の$k\in \{1, \dots, n\}$
+について
+$a_{i, k}\neq a_{j, k}$かつ$b_{i, k}\neq b_{j, k}$
+となる．
+今
+$k\in \{1, \dots, n\}$
+に対して
+$A_{k}=\pi_{k}(A)$, 
+$B_{k}=\pi_{k}(B)$
+とする．ここで$\pi_{k}$は$k$番目の座標の射影である．
+すると$A_{k}$と$B_{k}$
+は$\rr$の可算稠密部分集合でさらに共鳴的に番号付けされていることから$f_{k}(a_{i, k})=b_{i, k}$
+で定義すると$f_{k}$は順序を保つ同型写像になる．(もし$A$と$B$が一般の位置になければ潰れる番号もあるので，このように$f$を定義しても順序同型にならないし，そもそも$f$が定義できなかったりする．)
+ここで定理 \ref{thm:daiji}より，
+$f_{k}$は同相写像$f_{k}: \rr\to \rr$で
+$f_{k}(A_{k})=B_{k}$
+になるものに拡張できる．
+いま
+$f: \rr^{n}\to \rr^{n}$
+を
+$f(x)=(f_{1}(x_{1}), \dots, f_{n}(x_{n}))$
+と定義しよう．
+このとき$a_{i}=(a_{i, 1}\dots, a_{i, n})$
+について
+$f(a_{i})=
+(f_{1}(a_{i, 1}), \dots, f_{n}(a_{i, n}))
+=(b_{i, 1}\dots, b_{i, n})$
+なので$f(A)=B$である．
+$g(x)=(f^{-1}(x_{1}), \dots, f^{-1}(x_{n}))$
+とすれば$g$は$f$の逆写像になる．
+よって$f$は同相写像である．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+
+
+\bibitem{denq}
+はてなブログ「電波通信」の記事「有理数の順序集合としての特徴付け」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2017/05/07/013312
+\end{verbatim}
+\bibitem{denden}
+はてなブログ「電波通信」の
+記事「多項式に関する一致の定理」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2022/03/12/160928
+\end{verbatim}
+\bibitem{1}
+W. Hurewicz and H. Wallman, 
+\textit{Dimension theory}, Princeton University Press. 1948. 
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

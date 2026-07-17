@@ -1,0 +1,471 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+
+\newcommand{\ff}{\mathfrak{F}}
+
+\newcommand{\kk}{\kappa}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{The Proofs of Kuratowski-Mr\'owka's Theorem}
+\author{一色三良}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\begin{thm}\label{sugoi}
+位相空間$X$に対して以下は同値。
+\begin{eqnarray}
+&Xはコンパクト\\ 
+&任意の位相空間Yについて射影\ \pi: X\times Y\to Yは閉写像。
+\end{eqnarray}
+\end{thm}
+この定理の$(1)\To(2)$はTube lemma(a.k.aいつものアレ)からすぐに従う。
+この文章では$(2)\To(1)$の５通りの証明を与える。\par
+また、一色による証明と、Mr\'owkaによる証明以外の証明には選択公理が用いられていないことにも注意せよ。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{冬くんの証明}
+まず最初に冬(fuyu\_atsusugi\_\_)君による証明を紹介する。
+\begin{proof}[{\bf 冬くんによる証明}]
+$X$の開被覆を$\{U_{\la}\}_{\lil}$とする。仮定から射影
+\[
+\pi:X\times \rr^{\La}\to \rr^{\La}
+\]
+は閉写像である。
+さてここで$\rr^{\La}$の開集合$V_{\la}$を
+\[
+V_{\la}=(-1,1)\times \times \rr^{\La\setminus \{\la\}}
+\]
+と定義し、
+\[
+O=\bigcup_{\lil}(U_{\la}\times V_{\la})
+\]
+として、
+\[
+F=(X\times \rr^{\La})\setminus O
+\]
+と定義する。もちろん$F$は$X\times\rr^{\la} $の閉集合である。
+このとき
+\[
+0\not\in \pi(F)\subset \rr^{\La}
+\]
+であり、$\pi(F)$は閉集合なので$0$の基本近傍$P=\dpst (\prod_{\mu\in M}N_{\mu})\times \rr^{\La\setminus M}$が存在して
+\[
+P\cap \pi(F)=\O
+\]を充たす。ここで、$M$は$\La$の有限部分集合であり、各$N_{\mu}$は開集合であり、$N_{\mu}\subsetneqq\rr $としてもよい。このとき次の主張が成り立つ。
+\begin{claim}
+\[
+X=\bigcup_{\mu\in M}U_{\mu}
+\]
+\end{claim}
+\begin{proof}[\textbf{主張の証明}]
+各$x\in X$に対し、
+\[
+\La(x)=\{\lil\ |\ x\in U_{\la}\}
+\]
+とする。このとき
+\[
+\{x\}\times (\bigcup_{\la \in \La(x)}V_{\la})\supset \{x\}\times (\prod_{\mu\in M}N_{\mu})\times \rr^{\La\setminus M}
+\]
+が成り立つ。\par
+さてここで、$\dpst \bigcup_{\mu\in M}U_{\mu}\subsetneqq X$と仮定しよう。そして$y\in X\setminus \bigcup_{\mu\in M}U_{\mu}$とすると、$\La(y)$の定義から$\La(y)\subset \La\setminus M$が成り立つが、
+\[
+\{y\}\times (\bigcup_{\la \in \La(y)}V_{\la})\supset \{y\}\times (\prod_{\mu\in M}N_{\mu})\times \rr^{\La\setminus M}
+\]
+という式を$\rr^{\La(y)}$へと射影すると、$V_{\la}$の定義から
+\[
+\bigcup_{\la\in \La(y)}((-1,1)\times \rr^{\La(y)\setminus \{\la\}})\supset \rr^{\La(y)}
+\]
+が成り立つが、
+\[
+(1)_{\la\in\La(y)}\not\in \bigcup_{\la\in \La(y)}((-1,1)\times \rr^{\La(y)\setminus \{\la\}})
+\]
+なので矛盾する。よって\[
+X=\bigcup_{\mu\in M}U_{\mu}
+\]が成り立つ。[主張の証明終]\end{proof}
+[定理の証明の続き]
+$M$は有限集合なので、$X$がコンパクトであることが分かる。
+\end{proof}
+冬くんは$\rr$を用いてこの定理を証明したが、$\rr$以外の空間を用いても証明することが出来る。
+
+\begin{proof}[\textbf{\cite{saito}による証明}]
+上の証明で、$\rr$の代わりにシエルピンスキー空間$S=\{0,1\}$（開集合系は$\{\O,\{1\},S\}$）という空間）を考え、$V_{\la}$の代わりに、
+\[
+\rm{pr}_{\la}^{-1}(\{1\})
+\]
+を使った証明が与えられている。
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{一色による証明}
+
+冬くんは本格的な証明を見せる前に$X$がリンデレフの場合の証明をみせて、証明のアイデアを伝えてくれた。上の証明でいうと$\la=\aleph_0$の場合である。このとき$\rr^{\aleph}$の代わりに$\rr$、$V_{\la}$の代わりに$\dpst (-\frac{1}{n},\frac{1}{n})$を用いた証明ができる。冬くんはそれを見せてくれたのだが、知っての通り、$\dpst \{0\}\cup\{\frac{1}{n}\}_{n\in \nn}$は順序の向きを逆にして$\omega_0+1$と順序同型であるが、そのことから、一般の場合も基数を用いて証明できるのではないかと思って一色が考えたのが以下の証明である。（\cite{fuyu}参照）
+\begin{proof}[\textbf{一色による証明}]
+$(2)\To(1)$の対偶を示す。つまりノンコンパクトな空間$X$に対して$\pi: X\times Y\to Y$が閉写像とならないような$Y$を構成する。\par
+今、$X$がノンコンパクトなので有限部分被覆を持たない開被覆$\mathcal{C}$が存在する。さてこの$\mathcal{C}$について基数$\kk$を
+\[
+\kk =\min\{ \card(\mathcal{U})\ | \ \mathcal{U}\subset \mathcal{C}\ かつ\mathcal{U} は X の被覆\}
+\]
+と定義する。ここで$\card(A)$で集合$A$の基数を表す。$\mathcal{C}$の取り方から$\kk$は無限基数である。
+$\kk$は
+\[
+\{ \card(\mathcal{U})\ | \ \mathcal{U}\subset \mathcal{C}\ かつ\mathcal{U} は X の被覆\}
+\]
+の最小値であるので
+\[
+\kk=\card(\mathcal{U})
+\]
+となるものが存在する。これを$\kk$で添字付けて
+\[
+\mathcal{U}=\{U_\al \}_{\al < \kk}
+\]
+と置く。
+さて、
+\[
+Y=[0,\kk]=\kk +1
+\]
+と置き、$Y$の開集合系$\{V_{\al}\}_{\al <\kk}$を
+\[
+V_{\al}=(\al,\to)=(\al,\kk]
+\]
+と
+定義する。そして$X\times Y$の部分集合$O$を
+\[
+O=\bigcup_{\al<\kk}U_{\al}\times V_{\al}
+\]
+と定義する。定義から
+\[
+\forall \al <\kk\ \kk\in V_{\al}
+\]で$\{U_{\al}\}_{\al <\kk}$は被覆を成してるので
+\[
+ \forall x\in X\ (x,\kk)\in O
+\]
+が成り立つ。そして
+$O$は明らかに$X\times Y$の開集合であるので
+\[
+F=(X\times Y) \setminus O
+\]
+は$X\times Y$の閉集合となり。
+\[
+\forall x\in X\ (x,\kk)\not\in F
+\]が成り立つ。$\forall x\in X\ (x,\kk)\not\in F$なので射影$\pi: X\times Y\to Y$による像は
+\[
+\kk \not\in \pi(F)
+\]
+を充たす。この$\pi(F)$について次の主張が成り立つ。
+\begin{claim}
+\[
+\pi(F)=Y\setminus \{\kk\}
+\]
+\end{claim}
+\begin{proof}[\textbf{主張の証明}]$\be \in \kk$を任意に与える。
+\[
+\card(\{U_{\al}\}_{\al<\be})= \card([0,\be))<\kk
+\]
+なので$\kk$の定義より$\{U_{\al}\}_{\al<\be+1}$は$X$の被覆でない。そこで$x\in X\setminus \bigcup_{\al<\be}U_{\al}$を取る。このとき
+\[
+(x,\be)\not\in \bigcup_{\al<\be}U_{\al}\times V_{\al}
+\]
+で$\be\le\al$なら$\be\not\in V_{\al}=(\al,\kk]$なので
+\[
+(x,\be) \not\in \bigcup_{\be\le \al <\kk}U_{\al}\times V_{\al}
+\]
+となる。よって
+\[
+(x,\be)\not\in O
+\]
+が成り立ちつまり
+\[
+(x,\be)\in F
+\]だから
+\[
+\be\in \pi(F)
+\]
+となる。$\be<\kk$は任意で$\kk \not\in \pi(F)$だったので
+\[
+\pi(F)=Y\setminus \{\kk\}
+\]
+[主張の証明終]\end{proof}
+[定理の証明の続き]$\kk$は無限基数なので極限数である。つまり$Y=[0,\kk]$の中で$\kk$は集積点となっており、特に$\{\kk\}$は開集合ではない。よって$\pi(F)=Y\setminus \{\kk\}$は閉集合ではない。つまり
+射影$\pi: X\times Y\to Y$は閉写像でない。
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mr\'owkaによる証明}
+Mr\'owkaが\cite{m}で与えたオリジナルの証明を紹介する前に少し準備をする。
+\begin{df}[完全集積点]\footnote{この完全集積点という言葉は、complete accumulation point の訳語である。\cite{algd}では完備集積点と訳されているが、ここでは\cite{pon}に倣って完全集積点とした。}
+位相空間$X$の部分集合$A$について、$x\in X$が$A$の完全集積点であるとは、$x$の任意の開近傍$U$について
+\[
+\card(A)=\card(U\cap A)
+\]
+となること。
+\end{df}
+以下の事実の証明は\cite{algd}もしくは\cite{pon}を参照のこと
+\begin{fact}\label{ff}
+位相空間$X$がコンパクトであることと、$X$の任意の無限部分集合が完全集積点を持つことは同値である。
+\end{fact}
+\begin{proof}[\textbf{Mr\'owkaによる証明}]
+$(2)\To(1)$の対偶を示す。つまりノンコンパクトな空間$X$に対して$\pi: X\times Y\to Y$が閉写像とならないような$Y$を構成する。\par
+$X$をノンコンパクトとすると、事実\ref{ff}から完全集積点を持たない無限部分集合$Z$が存在する。$\card(Z)=\kk$とし,$Z=\{y_{\al}\}_{\al<\kk}$と添え字付けられているとしよう。ただし、個の添え字付けは単射であるとする。そして$X\times [0,\kk]$の部分空間$A$を
+\[
+A=\{(y_{\al}, \al)\}_{\al<\kk}
+\]
+と定義する。$A$の$X\times [0,\kk]$における閉包$T$が任意の$x\in X$について$(x,\kk)$という形の元を\textbf{含んでいない}ことを示そう。\par
+$x$は$Z$の完全集積点ではないから$x$の開近傍$U$が存在して
+\[
+\card(U\cap Z)<\card(Z)=\kk
+\]
+を充たす。よって、
+\[
+B=\{\al\in \kk\ |\ y_{\al}\in U\cap Z \}
+\]
+を考えると$B\subset \kk$であり、$\kk$が基数であることから$\al<\kk$ならば$\card(\al)<\kk$であることと、$\card(U\cap Z)<\kk$から
+\[
+\sup B=\be<\kk
+\]
+がわかる。このとき、$\be<\al<\kk$ならば$y_{\al}\not\in U$である。。このとき、
+\[
+U\times (\be,\kk]
+\]
+は$(x,\kk)$の開近傍であり、$A$と交わらない。よって、任意の$x\in X$について$(x,\kk)\not\in T$であるから、
+\[
+\pi(T)=[0,\kk)
+\]
+であり、$\{\kk\}$は開集合ではありえないので結局$\pi$は閉写像ではない、
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ブルバキによる証明}
+ブルバキによる定理の証明は簡潔で無駄がなく、一番綺麗な証明といえるだろう。\par
+以下の事実の証明は電波通信の「フィルターとコンパクト性」の記事を参照のこと
+\begin{fact}[コンパクト性とフィルター]\label{cptfilter}
+以下は同値
+\begin{align*}
+&\text{Xはコンパクト}\\ 
+&\text{$X$上の任意の真フィルター$\ff$について$\bigcap_{F\in \ff}\cl(F)\neq\O$}
+\end{align*}
+\end{fact}
+\begin{proof}[\textbf{ブルバキによる証明}]事実\ref{aaa}を用いて$(2)\To(1)$を直接証明する。\par
+$\mathfrak{F}$を$X$上の任意の真フィルターとする。
+$\omega$を$X$には\textbf{属していない}点として、$Y=X\cup\{\omega\}$に$x\in X$の近傍を$\{x\}$、$\omega$の近傍系を
+$\{\omega\}\cup M\ (M\in \ff)$として位相を定めることが出来る。このとき$X\subset Y$は$Y$の中で稠密であることに注意しよう。
+さて、
+\[
+\Delta=\{(x,x)\ |\ x\in X\}
+\]
+とし、$F=\cl_{X\times Y}(\Delta)$と定義する。\par
+$X\subset\pi(F)$であり、
+$X\subset Y$は$Y$の中で稠密で、$\pi$が閉写像であることから$\omega \in \pi(F)$がわかる。よって
+ある$x\in X$が存在して$(x,\omega)\in F$となる。\par
+$F$は$\Delta$の閉包であるから、このことを言い換えると、
+$x$の任意の近傍$V$と任意の$M\in \mathfrak{F}$について
+\[
+(V\times M)\cap \Delta\neq\O
+\]
+が成り立っている。これはつまり、
+\[
+V\cap M\neq \O
+\]
+ということであるので
+\[
+x\in \bigcap_{M\in \mathfrak{F}}\cl_{X}(F)
+\]
+であるから先の事実\ref{cptfilter}から$X$はコンパクトであることが分かる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{fuyu}冬(fuyu\_atsusugi\_\_)くんとのPrivate Comunication, 2015, 10月
+\bibitem{algd}壱大整域のAlexandroff-Urysohn-コンパクトのpage, http://alg-d.com/math/ac/auc.html , 2016年7月閲覧
+\bibitem{isiki}電波通信の「フィルターとコンパクト性」,http://blog.hatena.ne.jp/concious4410/concious4410.hatenablog.com/ edit?entry=6653458415125359892, 2016年7月閲覧
+\bibitem{saito}斉藤毅, 集合と位相, 大学数学の入門, 東京大学出版会, 2009
+\bibitem{bour}ブルバキ、数学原論、位相1
+\bibitem{pon}ポントリャーギン著、柴岡泰光・杉浦光夫・宮崎功 共役, 連続群論 上, 岩波書店,第28版, 2009, 
+\bibitem{k}Kuratowski, Evaluation de la classe bor\'elienne ou projective d'un ensemble de points \'a l'aide des symboles logiques, Fund.Math, vol 17, 1931,pp249-272
+\bibitem{m}S. Mr\'owka, Compactness and product spaces, Colloq.Math. Vol 7, No.1, 1949, pp19-22
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+
