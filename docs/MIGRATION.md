@@ -91,17 +91,89 @@ python3 scripts/paper_tool.py audit
 
 `original` は原本と同一、`approved-modified` は明示的な変更が記録済みであることを表す。ハッシュが承認値と一致しないファイルは、どちらの操作でもエラーになる。
 
-## 明示的に指示された書き換え
+## VS Codeで保護されたTeX・PDFを更新する
 
-原稿を指示どおり編集した後、変更理由と対象ファイルを明示して承認記録を作る。
+`paper.json` の `files` にあるTeX・PDFはSHA-256で保護されている。VS Codeで意図的に更新する場合は、本文を保存しただけでpushせず、個人情報の再検査と承認記録を作る。
+
+以下では `2018-10-14-01` の `main.tex` を例にする。最初にリポジトリのルートへ移動し、ほかの未完了変更がないことを確認する。
 
 ```sh
-python3 scripts/paper_tool.py approve-change SLUG \
-  --reason "依頼された誤植修正" \
-  --file main.tex
+cd /Users/yoshitoishiki/Documents/Codex/dempa/DempaComm.github.io
+git pull --ff-only
+git status
 ```
 
-この操作は原稿を書き換えない。変更後ハッシュを承認値として記録し、原本ハッシュは保持する。
+VS Codeで `papers/2018-10-14-01/main.tex` を編集して保存したら、変更後のファイルを検査する。
+
+```sh
+python3 scripts/paper_tool.py inspect-file papers/2018-10-14-01/main.tex
+```
+
+表示された検査報告を読み、著者名、実名、メール、所属、住所などを確認する。PDFの場合は、報告先に生成された全ページのPNG画像とPDFメタデータも確認する。
+
+問題がなければ、変更理由、記事のslug、対象ファイルを指定して承認する。
+
+```sh
+python3 scripts/paper_tool.py approve-change 2018-10-14-01 \
+  --reason "最新版へ差し替え" \
+  --file main.tex \
+  --privacy-reviewed
+```
+
+複数の保護ファイルを同時に変更した場合は、各TeX・PDFを個別に `inspect-file` したうえで、`--file` を繰り返す。
+
+```sh
+python3 scripts/paper_tool.py approve-change 2023-12-01-02 \
+  --reason "原稿と文献データを最新版へ差し替え" \
+  --file eveeve.tex \
+  --file wef.bib \
+  --privacy-reviewed
+```
+
+`approve-change` は原稿本文を書き換えない。変更後のSHA-256を現在の承認値として記録し、最初に取り込んだ原本SHA-256と、変更前後のSHA-256を履歴として保持する。公開TeX・PDFでは、変更後ファイルの個人情報検査記録も同時に更新する。BibTeX、BST、図版など、現在自動検査対象でない保護ファイルだけを変更した場合は `--privacy-reviewed` は不要である。
+
+通常の検査を完了できないが、別の方法で全内容を確認して公開すると判断した場合だけ、理由付きの強制承認を使う。
+
+```sh
+python3 scripts/paper_tool.py approve-change 2018-10-14-01 \
+  --reason "最新版へ差し替え" \
+  --file main.tex \
+  --privacy-override "別の閲覧環境で名義と全内容を確認済み"
+```
+
+`--privacy-override` でも、先に `inspect-file` を一度実行する必要がある。
+
+承認後に、対象記事とサイト全体を検査する。
+
+```sh
+python3 scripts/paper_tool.py verify 2018-10-14-01
+python3 scripts/paper_tool.py audit 2018-10-14-01
+python3 scripts/paper_tool.py catalog --check
+python3 scripts/migration_ledger.py check
+python3 -m unittest discover -s tests
+```
+
+TeXのビルドも手元で確認する場合は、対象フォルダでGitHub Actionsと同じ形式のコマンドを実行する。
+
+```sh
+cd papers/2018-10-14-01
+latexmk -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode main.tex
+cd ../..
+```
+
+最後に差分を確認して、予定したファイルと `paper.json` だけをコミットする。
+
+```sh
+git status
+git diff -- papers/2018-10-14-01/paper.json
+git add papers/2018-10-14-01/main.tex papers/2018-10-14-01/paper.json
+git commit -m "ウリゾーン原稿を更新"
+git push origin main
+```
+
+ファイル名が `paper.json` の `files` に登録されていない場合、`approve-change` は停止する。これは既存ファイルの更新ではなく新しい公開ファイルの追加なので、個人情報検査後に `paper.json` へファイル情報とSHA-256を新規登録する必要がある。判断に迷う場合は、未登録ファイルを先にpushしない。
+
+`verify` がSHA不一致で止まる場合は、未承認の変更が残っている。`paper.json` のSHAを手入力で上書きせず、意図した変更だけを `approve-change` で承認する。
 
 ## 記事一覧と公開物
 

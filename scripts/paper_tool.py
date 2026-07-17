@@ -2042,6 +2042,7 @@ def command_approve(args: argparse.Namespace) -> None:
                 f"unapproved change exists outside requested files: {entry['path']}"
             )
     changes: list[dict[str, str]] = []
+    privacy_updates: dict[str, dict[str, Any]] = {}
     for value in requested:
         relative = safe_relative_path(value)
         target = manifest_path.parent / relative
@@ -2051,6 +2052,12 @@ def command_approve(args: argparse.Namespace) -> None:
         new_hash = sha256(target)
         if old_hash == new_hash:
             continue
+        entry = entries[value]
+        if entry["public"] and target.suffix.casefold() in {".tex", ".pdf"}:
+            review = require_privacy_review(
+                target, args.privacy_reviewed, args.privacy_override
+            )
+            privacy_updates[value] = privacy_review_for_path(review, relative)
         entries[value]["sha256"] = new_hash
         changes.append({"path": value, "from_sha256": old_hash, "to_sha256": new_hash})
     if not changes:
@@ -2062,6 +2069,14 @@ def command_approve(args: argparse.Namespace) -> None:
             "files": changes,
         }
     )
+    if privacy_updates:
+        existing_reviews = {
+            str(review["path"]): review
+            for review in manifest.get("privacy_reviews", [])
+        }
+        existing_reviews.update(privacy_updates)
+        manifest["privacy_reviews"] = list(existing_reviews.values())
+    validate_manifest(manifest, manifest_path)
     write_json(manifest_path, manifest)
     print(f"APPROVED {len(changes)} explicitly requested change(s) for {args.slug}")
 
@@ -2149,6 +2164,11 @@ def parser() -> argparse.ArgumentParser:
     approve_parser.add_argument("slug")
     approve_parser.add_argument("--reason", required=True)
     approve_parser.add_argument("--file", dest="files", action="append", required=True)
+    approve_privacy = approve_parser.add_mutually_exclusive_group()
+    approve_privacy.add_argument("--privacy-reviewed", action="store_true")
+    approve_privacy.add_argument(
+        "--privacy-override", metavar="REASON", help="approve after an alternate review"
+    )
     approve_parser.set_defaults(func=command_approve)
     return result
 

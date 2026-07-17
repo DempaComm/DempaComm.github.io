@@ -71,6 +71,74 @@ def add_review_receipt(root: Path, source: Path) -> None:
 
 
 class SourceOnlyImportTest(unittest.TestCase):
+    def test_approve_change_refreshes_privacy_review_for_changed_tex(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environment = prepare_root(root)
+            incoming = root / "incoming.tex"
+            incoming.write_text("\\author{Public Name}\\n", encoding="utf-8")
+            add_review_receipt(root, incoming)
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "import-tex",
+                    str(incoming),
+                    "--published-at",
+                    "2026-07-16T12:00:00+09:00",
+                    "--privacy-reviewed",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            paper_dir = root / "papers" / "2026-07-16-01"
+            source = paper_dir / "source.tex"
+            source.write_text("\\author{Updated Public Name}\\n", encoding="utf-8")
+            add_review_receipt(root, source)
+
+            blocked = subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "approve-change",
+                    "2026-07-16-01",
+                    "--file",
+                    "source.tex",
+                    "--reason",
+                    "requested update",
+                ],
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            self.assertNotEqual(0, blocked.returncode)
+            self.assertIn("--privacy-reviewed", blocked.stderr)
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "approve-change",
+                    "2026-07-16-01",
+                    "--file",
+                    "source.tex",
+                    "--reason",
+                    "requested update",
+                    "--privacy-reviewed",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            manifest = json.loads((paper_dir / "paper.json").read_text(encoding="utf-8"))
+            digest = hashlib.sha256(source.read_bytes()).hexdigest()
+            self.assertEqual(digest, manifest["files"][0]["sha256"])
+            self.assertEqual(digest, manifest["privacy_reviews"][0]["source_sha256"])
+            self.assertEqual(1, len(manifest["approved_changes"]))
+
     def test_one_tex_file_can_be_staged_without_pdf(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
