@@ -12,6 +12,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from datetime import datetime, timezone
 from email.utils import format_datetime
 from html.parser import HTMLParser
@@ -117,6 +118,11 @@ def safe_relative_path(value: str) -> Path:
     return path
 
 
+def nfc_path(value: str) -> str:
+    """Use the portable Unicode form stored by Git for public paths."""
+    return unicodedata.normalize("NFC", value)
+
+
 def write_json(path: Path, value: dict[str, Any]) -> None:
     path.write_text(
         json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -211,7 +217,10 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     if build["enabled"] and "root" not in build:
         raise PaperToolError(f"{path}: build.root is required when build is enabled")
     if build["enabled"]:
-        safe_relative_path(str(build["root"]))
+        root = str(build["root"])
+        if root != nfc_path(root):
+            raise PaperToolError(f"{path}: build.root must use NFC Unicode")
+        safe_relative_path(root)
     seen: set[str] = set()
     for entry in manifest["files"]:
         if not isinstance(entry, dict):
@@ -219,7 +228,12 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         for key in ("path", "role", "label", "public", "original_sha256", "sha256"):
             if key not in entry:
                 raise PaperToolError(f"{path}: file entry missing {key}")
-        relative = str(safe_relative_path(str(entry["path"])))
+        raw_relative = str(entry["path"])
+        if raw_relative != nfc_path(raw_relative):
+            raise PaperToolError(
+                f"{path}: file path must use NFC Unicode: {raw_relative}"
+            )
+        relative = str(safe_relative_path(raw_relative))
         if relative in seen:
             raise PaperToolError(f"{path}: duplicate file entry: {relative}")
         seen.add(relative)
@@ -1912,7 +1926,7 @@ def command_import(args: argparse.Namespace) -> None:
     print("PUBLIC FILES TO IMPORT:")
     for entry in spec["files"]:
         source_relative = safe_relative_path(str(entry["source"]))
-        target_relative = safe_relative_path(str(entry["path"]))
+        target_relative = safe_relative_path(nfc_path(str(entry["path"])))
         source = (source_dir / source_relative).resolve()
         try:
             source.relative_to(source_dir)
@@ -1980,7 +1994,7 @@ def command_import(args: argparse.Namespace) -> None:
             "build": (
                 {
                     "enabled": True,
-                    "root": str(spec.get("build_root", "main.tex")),
+                    "root": nfc_path(str(spec.get("build_root", "main.tex"))),
                     "engine": build_engine,
                 }
                 if build_enabled

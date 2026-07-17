@@ -337,7 +337,9 @@ class SourceOnlyImportTest(unittest.TestCase):
             environment = prepare_root(root)
             source_dir = root / "incoming"
             source_dir.mkdir()
-            tex = source_dir / "article.tex"
+            tex_name = "article-ウリゾーン.tex"
+            normalized_tex_name = "article-ウリゾーン.tex"
+            tex = source_dir / tex_name
             pdf = source_dir / "finished.pdf"
             bib = source_dir / "refs.bib"
             tex.write_text("\\title{Reviewed Article}\n", encoding="utf-8")
@@ -358,8 +360,8 @@ class SourceOnlyImportTest(unittest.TestCase):
                 "build_enabled": False,
                 "files": [
                     {
-                        "source": "article.tex",
-                        "path": "source.tex",
+                        "source": tex_name,
+                        "path": tex_name,
                         "role": "manuscript",
                         "label": "TeXソース",
                         "public": True,
@@ -413,9 +415,10 @@ class SourceOnlyImportTest(unittest.TestCase):
                 "source:0123456789abcdef", manifest["migration_record_id"]
             )
             self.assertEqual(
-                {"source.tex", "published.pdf"},
+                {normalized_tex_name, "published.pdf"},
                 {review["path"] for review in manifest["privacy_reviews"]},
             )
+            self.assertTrue((manifest_path.parent / normalized_tex_name).is_file())
 
             manifest["privacy_reviews"].pop()
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
