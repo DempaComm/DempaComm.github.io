@@ -602,6 +602,7 @@ def rendered_home_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 <html lang="ja">
 <head>
 {page_head(f"{SITE_TITLE_TOP} — 数学原稿アーカイブ", description, "/", "styles.css")}
+  <meta name="google-site-verification" content="7hjNDoj7EFF3W9aH81po0C0Sk38Uf9vIh2161O2aCDs" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">本文へ移動</a>
