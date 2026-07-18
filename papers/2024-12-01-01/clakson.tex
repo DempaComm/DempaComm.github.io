@@ -1,0 +1,742 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{クラークソンの不等式(未完成)}
+\author{電波通信 ナンブ キトラ }
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文書は，
+$L^{p}$空間の一様凸性の証明に用いられるクラークソンの不等式を，
+三線定理を用いて証明することを目的とする．
+
+
+%%%
+\section{三線定理とか}
+この章の話
+\cite{miya}を大いに参考にした．
+この章で領域といったら
+$\cc$
+の連結な開集合のことを指すことにする．
+まずは基本的な複素関数論をする．
+正則関数といったら複素関数論の正則関数とする．
+\begin{prop}
+領域
+$D$
+上で定義された
+正則関数
+$f$
+について，
+$|f|$
+が
+$D$
+上で最大値をとるならば，
+$f$
+は定数関数である．
+\end{prop}
+%%proof
+\begin{proof}
+$|f|$ 
+は点$a\in D$で最大値を達成するとする．
+この時十分小さい$r>0$
+を取り，
+$B(a, r)\subset D$とする．
+この時
+$B(a,r)$
+上で
+$f$
+のテイラー展開は収束するので，
+$B(a,r)$
+上で以下のような等式が成り立つ．
+\[
+f(z)=\sum_{i=0}c_i(z-a)^i. 
+\]
+これを用いると，$z$を
+($a$を中心とする)
+極座標で書いたときに
+\[
+|f(a+re^{i\theta})|^2=\sum_{n,m}c_n\bar{c}_me^{i(n-m)\theta}r^{n+m}
+\]
+が成り立つ．
+よって
+\[
+\frac{1}{2\pi}\int_{0}^{2\pi}|f(a+re^{i\theta})|^2\ d\theta=\sum_{i}|c_i|^2r^{2i}
+\]
+である．
+ここで
+\[
+\frac{1}{2\pi}\int_{0}^{2\pi}|f(a+re^{i\theta})|^2\ d\theta\le |f(a)|=|c_0|^2
+\]
+なので
+\[
+\sum_{i}|c_i|^2r^{2i}\le |c_0|^2
+\]
+である．
+よって
+$i\ge 1$
+ならば
+$c_{1}=0$
+である．
+故に$f$は局所定数であることがわかり，
+正則関数の剛性から
+$f$
+が定数であることがわかる．
+\end{proof}
+
+
+上記の最大値原理から以下の系を得る．
+%%%%
+\begin{cor}
+$D$
+を
+$\cc$
+内の領域とし，
+$f$
+は
+$\cl(D)$
+上の定数でない連続関数で，
+$D$
+上で正則であるとする．
+このとき
+$f$
+が
+$\cl(D)$
+上で最大値をとるならば，
+$\partial D$上で最大値をとる．
+\end{cor}
+%%%
+
+
+次の定理がこの章の目的である三線定理と呼ばれるものである．
+\begin{thm}[三線定理]
+$a$, 
+$b$を実数とする．
+そして
+$S=\{z\in \cc\mid a\le \re z\le b \}$とする．
+さらに
+$f$
+を
+$S$
+上の有界な連続関数で，
+$\nai (S)$上で正則な関数とする．
+また，
+$a\le c\le b$
+となる
+$c$
+について
+\[
+M(c)=\sup_y|f(c+iy)|<\infty
+\]
+とする．
+このとき
+\[
+M((1-t)a+tb)\le M(a)^{1-t}M(b)^{t}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+適当にアフィン変換することにより，
+$a=0$, $b=1$としても良い．
+
+まず最初に$M(0)$と$M(1)$が共に正の時に定理を示す．
+このとき
+\[
+f(z)M(0)^{-(1-z)}M(1)^{-z}
+\]
+を考えることによって、$M(0)=M(1)=1$としても良い
+（正の実数$R$に対して$|R^z|=R^{\re(z)}$なので）．
+
+ここで
+\[
+f_n(z)=f(z)\exp(z(z-1)/n)
+\]
+とする．
+このとき$z(z-1)=x(x-1)-y^2+i(2xy-1)$
+なので
+\[
+|\exp(z(z-1)/n)|\le \exp(x(x-1))\exp(-y^2)\le \exp(-y^2)
+\]
+である．
+よって
+$f_n$は $\re z=0,1$を満たす$z$について$|f_n(z)|\le 1$を満たす．
+さらに
+\[
+\lim_{R\to \infty}\sup_{|\im z|=R}|f_n(z)|=0
+\]
+が成り立つ．
+よって，
+$|f_n(z)|$
+は
+$S$
+上で最大値を持つ．
+最大値原理より，それは境界上で最大値をとるので，
+任意の
+$z\in S$
+について
+$|f_n(z)|\le 1$
+である．
+ここで，
+点$z$を固定するごとに
+$f_n(z)\to f(z)\ (n\to \infty)$が成り立つので，
+任意の$z\in S$について$|f(z)|\le 1$である．
+これが求める不等式である．
+
+次に
+$M(0)\times M(1)=0$
+の時を考察しよう．
+数
+$\ep>0$
+を十分小さくとると
+(具体的には，$M(1)$,$M(0)$がともにはゼロでない時には$\ep<\max\{M(0),M(1)\}$
+と取れば良い．両方ともゼロなら特に制限はない．)，
+$f+\ep$について
+$M(0)$
+と
+$M(1)$
+が正になる．
+そして$\ep\to 0$とすれば求める不等式が出てくる．
+\end{proof}
+
+測度空間
+$(X, \mu)$
+について，
+$L^0(X, \mu)$
+で
+$(X, \mu)$
+上の可測関数を表す．
+\begin{thm}[Riesz--Thorinの定理]
+$(X,\mathcal{A},\mu)$と$(Y,\mathcal{B}, \nu)$
+を測度空間とする。
+そして
+$p_{0}, q_{0}, p_{1},q_{1} \in [1,\infty] $で
+$\theta\in [0,1]$とする。
+この時
+\[
+\frac{1}{p}=\frac{1-\theta}{p_0}+\frac{\theta}{p_1}
+\]
+と
+\[
+\frac{1}{q}=\frac{1-\theta}{q_0}+\frac{\theta}{q_1}
+\]
+が成り立つ
+とする．
+このとき線形写像
+\[
+T\colon L^0(X,\mu)\to L^0(Y,\nu)
+\]
+と
+$(X,\mathcal{A}, \mu)$
+の単関数
+$f$
+と
+$(Y,\mathcal{B}, \nu)$
+の単関数
+$g$
+について，
+\[
+\left|\int_{Y}gTf\ d\nu \right|
+\le \|T\|_{p_0, q_0}^{1-\theta}\|T\|_{p_1.q_1}^{\theta}\|f\|_p\|g\|_r
+\]
+が成り立つ．
+ここで$r$は$q$の共役指数である．
+\end{thm}
+\begin{proof}
+まず
+$\|f\|_p=\|g\|_r=1$
+としても一般性を失わない．
+そして
+\[
+f(x)=\sum_{j=1}^na_j\chi_{A_i}(x)
+\]
+とおく．
+ここで，
+各$j$について
+$a_j\in \cc$
+で
+族$\{A_{j}\}$
+は互いに交わらない可測集合とする．
+同様に
+\[
+g(y)=\sum_{l=1}^mb_l\chi_{B_l}(y)
+\]
+とおく．
+ここで，
+各
+$l$について
+$b_{l}\in \cc$で，
+族$\{B_{l}\}$は互いに交わらない可測集合とする．
+この状況において
+\[
+\|f\|_p^p=\sum_{j=1}^n|a_j|^p\mu(A_j)=1
+\]
+と
+\[
+\|g\|_r^r=\sum_{l=1}^m|b_l|^r\nu(B_l)=1
+\]
+に注意せよ．
+ここで関数$p$を
+\[
+\frac{1}{p(z)}=\frac{1-z}{p_0}+\frac{z}{p_1}
+\]
+と定義する。
+さらに
+$r_0$, $r_1$を$q_0$, $q_1$の共役指数として
+関数$r$を
+\[
+\frac{1}{r(z)}=\frac{1-z}{r_0}+\frac{z}{r_1}
+\]
+と定義する．
+そして$f_{z}$と
+$g_{z}$を以下のように定義する．
+\[
+f_z(x)=|f(x)|^{\frac{p}{p(z)}}\frac{f(x)}{|f(x)|}
+\]
+\[
+g_z(y)=|g(x)|^{\frac{r}{r(z)}}\frac{g(x)}{|g(x)|}. 
+\]
+すると，
+\[
+f_z(x)=\sum_{j=1}^n|a_j|^{\frac{p}{p(z)}}\frac{a_j}{|a_j|}\chi_{A_j}(x)
+\]
+及び
+\[
+g_z(y)=\sum_{j=l1}^m|b_l|^{\frac{r}{r(z)}}\frac{b_l}{|b_l|}\chi_{B_l}(y)
+\]
+と表すことができる．
+そして
+\[
+I(z)=\int_{Y}g_zTf_z\ d\nu
+\]
+と定義する．
+すると
+\[
+I(z)=\sum_{j=1}^n\sum_{l=1}^m|a_j|^{\frac{p}{p(z)}}\frac{a_j}{|a_j|}|b_l|^{\frac{r}{r(z)}}\frac{b_l}{|b_l|}
+\]
+が成り立つ．
+もちろんこれは
+$\{z\in \zz\mid 0\le \re z\le 1\}$
+上で有界かつ連続で，その内部で正則関数である．
+$c\in [0,1]$に対して
+\[
+M(c)=\sup_{y\in \rr}|I(c+iy)|
+\]
+と定義すれば，三線定理から
+\[
+M(c)\le M(0)^{1-c}M(1)^c
+\]
+である．
+$M(0)$と$M(1)$の評価をしていこう．
+任意の$y\in \rr$に対して
+\[
+|I(iy)|=\left|\int_Yg_{iy}Tf_{iy}\ d\nu\right|\le \|Tf_{iy}\|_{q_0}\|g\|_{r_0}
+\le \|T\|_{p_0, q_0}\|f_{iy}\|_{p_0}\|g_{iy}\|_{r_0}
+\]
+を得る．
+ここで
+\[
+\|f_{iy}\|_{p_0}^{p_0}=\sum_{j=1}^n\left||a_j|^{\frac{p}{p(iy)}}\right|^{p_0}\mu(A_j)=\sum_{j=1}^n|a_j|^{\frac{p}{p(iy)}p_0}\mu(A_j)=1
+\]
+\[
+\|g_{iy}\|_{r_0}^{r_0}=\sum_{l=1}^m\left||b_l|^{\frac{r}{r(iy)}}\right|^{r_0}\nu(B_l)=\sum_{l=1}^n|b_l|^{\frac{r}{r(iy)}r_0}\nu(B_l)=1
+\]
+であるから，
+\[
+M(0)\le \|T\|_{p_0,q_0}
+\]
+を得る．
+同様にして．
+\[
+M(1)\le \|T\|_{p_1, q_1}
+\]
+を得る．
+よって
+\[
+\left|\int_{Y}gTf\ d\nu \right|
+\le \|T\|_{p_0, q_0}^{1-\theta}\|T\|_{p_1.q_1}^{\theta}
+\]
+を得る．
+$p_0=q_0=\infty$などの場合は、$f_z=f$と定義すれば良い．
+\end{proof}
+
+これの系として以下の定理がある。
+\begin{thm}[Riesz--Thorin]
+$(X,\mathcal{A},\mu)$と$(Y,\mathcal{B}, \nu)$を測度空間とする。
+そして$p_0, q_0, p_1,q_1 \in [1,\infty] $で
+$\theta\in [0,1]$とする。
+この時
+\[
+\frac{1}{p}=\frac{1-\theta}{p_0}+\frac{\theta}{p_1}
+\]
+\[
+\frac{1}{q}=\frac{1-\theta}{q_0}+\frac{\theta}{q_1}
+\]
+とする。
+このとき線形写像
+\[
+T:L^0(X,\mu)\to L^0(Y,\nu)
+\]
+について
+\[
+\|T\|_{p,q}\le \|T\|_{p_0, q_0}^{1-\theta}\|T\|_{p_1.q_1}^{\theta}
+\]
+が成り立つ。
+\end{thm}
+
+
+
+
+\section{クラークソンの不等式と一様凸性}
+
+\begin{thm}[Clarkson's inequality]
+$p\in (1, 2]$で $1/p+1/q=1$とする。このとき
+任意の$x,y\in \cc$に対して
+\[
+(|x+y|^q+|x-y|^q)^{\frac{1}{q}}\le 2^{\frac{1}{q}}(|x|^p+|y|^p)^{\frac{1}{p}}
+\]
+が成り立つ．
+\end{thm}
+$2$次正方行列
+$A$を
+\begin{proof}
+\[
+A = \left(
+    \begin{array}{cc}
+      1 & 1  \\
+      1 & -1 
+    \end{array}
+  \right)
+\]
+と定義する．
+すると
+\[
+\|A(x,y)\|_2^2=|x+y|^2+|x-y|^2=2(|x|^2+|y|^2)=2\|(x,y)\|_2^2
+\]
+なので
+\[
+\|A\|_{2,2}=2^{1/2}
+\]
+であり，また
+\[
+\|A(x,y)\|_{\infty}\le |x|+|y|=\|(x,y)\|_1
+\]
+であり，
+\[
+\|A(1,0)\|_{\infty}=\|(1,0)\|
+\]
+なので
+\[
+\|A\|_{\infty,1}=1
+\]
+である．
+ここで，$p\in (1,2]$より，
+\[
+\frac{1}{p}=\frac{1-\theta}{2}+\frac{\theta}{1}
+\]
+となる$\theta$が存在する．
+よって
+\[
+\frac{1}{q}=\frac{1-\theta}{2}+\frac{\theta}{\infty}
+\]
+である．
+よって，
+\[
+\|A\|_{q,p}\le (2^{1/2})^{1-\theta}1^{\theta}
+=2^{(1-\theta)/2}=2^{1/q}
+\]
+となる．
+これは求める不等式と同値である．
+\end{proof}
+
+
+\section{以下未完成}
+\begin{prop}
+$a, b$を非負の実数とする．このとき
+$(a^p+b^p)^{\frac{1}{p}}\le 2^{\frac{2-p}{p}}(a^q+b^q)^{\frac{1}{q}}$
+\end{prop}
+が成り立つ．
+\begin{proof}
+ヘルダーの不等式から従う。
+\end{proof}
+
+\begin{prop}[逆ミンコフスキーの不等式]
+$k\in (0,1)$とする。このとき
+$f, g\in L^{k}(X)$に対して
+\[
+\left(\int_X|f+g|^k d\ \mu\right)^{\frac{1}{k}}>\left(\int_X|f|^k \ d\mu\right)^{\frac{1}{k}}+\left(\int_X|g|^k \ d\mu\right)^{\frac{1}{k}}
+\]
+が成り立つ．
+\end{prop}
+
+\begin{thm}[Clarkson's inequality]
+$p\in (1, 2]$で $1/p+1/q=1$とする。このとき$f,g\in L^p$に対して
+\[
+(\|f+g\|_p^q+\|f-g\|_p^q)^{\frac{1}{q}}\le 2^{\frac{1}{q}}(\|f\|_p^p+\|g\|_p^p)^{\frac{1}{p}}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$\frac{p}{q}<1$に注意しよう。
+\[
+\|f+g\|_p^q+\|f-g\|_p^q=\left(\int_X(|f+g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{q}{p}}+\left(\int_X(|f-g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{p}{q}}
+\]
+よって
+\[
+\left(\int_X(|f+g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{q}{p}}+
+\left(\int_X(|f-g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{p}{q}}
+\le 
+\left(\int_X(|f+g|^q+|f-g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{q}{p}}
+\]
+である。
+ここで、
+\[
+(|f+g|^q+|f-g|^q)^{\frac{p}{q}} \le 2^{\frac{p}{q}}(|f|^p+|g|^p)
+\]
+なので
+\[
+\left(\int_X(|f+g|^q+|f-g|^q)^{\frac{p}{q}} \ d\mu\right)^{\frac{q}{p}}
+\le 2^{\frac{p}{q}}\int_X|f|^p\ d\mu+\int_X|g|^p\ d\mu
+=2^{\frac{p}{q}}(\|f\|_p^p+\|g\|_p^p)
+\]
+よって最初に挙げた不等式は成り立つ。
+\end{proof}
+
+
+\begin{thm}
+$2\le p$で $1/p+1/q=1$とする。このとき$f,g\in L^p$に対して
+\[
+(\|f+g\|_p^p+\|f-g\|_p^p)^{\frac{1}{p}}\le 2^{\frac{1}{p}}(\|f\|_p^q+\|g\|_p^q)^{\frac{1}{q}}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$\frac{q}{p}<1$に注意しよう。
+
+\[
+\|f+g\|_p^p+\|f-g\|_p^p=\int_X|f+g|^p\ d\mu+\int_X|f-g|^p\ d\mu=
+\int_X (|f+g|^p+|f-g|^p)\ d\mu
+\]
+ここで
+\[
+|f+g|^p+|f-g|^p\le 2(|f|^q+|g|^q)^{\frac{p}{q}}
+\]
+なので
+\[
+\int_X (|f+g|^p+|f-g|^p)\ d\mu
+\le 2\int_X(|f|^q+|g|^q)^{\frac{p}{q}}\ d\mu
+\]
+ミンコフスキーに不等式から
+\[
+\left(\int_X(|f|^q+|g|^q)^{\frac{p}{q}}\ d\mu\right)^{\frac{q}{p}} \le
+\left(\int_X|f|^p\ d\mu\right)^{\frac{q}{p}}+\left(\int_X|g|^p\ d\mu\right)^{\frac{q}{p}}=\|f\|_p^q+\|g\|_p^q
+\]
+よって
+\[
+\|f+g\|_p^p+\|f-g\|_p^p\le 2(\|f\|_p^q+\|g\|_p^q)^{\frac{p}{q}}
+\]
+を得る。これは先に挙げた不等式に等しい。
+\end{proof}
+
+\begin{cor}
+$L_p$は一様凸である。
+\end{cor}
+
+\section{追記}
+
+1936年に
+クラークソン
+\cite{MR1501880}
+はクラークソンの不等式を用いて
+$L^{p}$空間や
+$\ell^{p}$の一様凸性を証明した．
+
+1940年にBoas
+\cite{MR0001456}
+は``線形写像のリースの凸性定理''
+を用いてクラークソンの定理を証明しているが，
+多分これは今ふうにいうとリースソリンのことだと思う．
+
+1956年に
+Henner
+\cite{MR0077087}
+はクラークソンの不等式の拡張を，
+なんか頑張って不等式評価して証明している．
+
+
+1959年に
+Morawetz
+\cite{MR0256149}
+は
+$L^{p}$空間の一様凸性の証明に使うことのできる
+新しい不等式を証明している．
+
+
+1976年に
+Ramaswamy
+\cite{MR0492135}
+は実数に関するクラークソンの不等式を用いるのではなく，
+ラーデマッヒャー関数を用いて積分のクラークソンの不等式を
+直接証明している．
+
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{cl.bib}
+
+
+
+	
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+
+\begin{enumerate}
+  \item 
+\end{enumerate}

@@ -1,0 +1,1178 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{url}
+
+%
+\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+%\usepackage{}
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{\partial}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\newcommand{\ind}{\mathrm{ind}}
+
+\newcommand{\lind}{\mathrm{Ind}}
+
+\newcommand{\yodim}{\mathrm{dim}}
+
+\DeclareMathOperator{\emb}{Emb}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+
+\DeclareMathOperator{\rank}{rank}
+
+\newcommand{\yoddim}{\mathrm{DDim}}
+
+\newcommand{\yodeg}{\mathrm{Cdeg}}
+\newcommand{\yoemph}[1]{\textbf{#1}}
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\yodisc}[1]{\mathbf{D}^{#1}}
+\newcommand{\yosphere}[1]{\mathbf{S}^{#1}}
+\newcommand{\yocube}[1]{\mathbf{I}^{n}}
+\newcommand{\yocubesidep}[2]{\mathbf{I}^{#1, #2}_{+}}
+\newcommand{\yocubesidem}[2]{\mathbf{I}^{#1, #2}_{-}}
+
+\newcommand{\yocubebd}[1]{\partial\mathbf{I}^{#1}}
+
+\newcommand{\yocovf}[1]{\mathcal{#1}}
+\newcommand{\myhl}[2]{H_{#2}(#1)}
+\newcommand{\yosupmet}[1]{\widehat{#1}}
+
+\newcommand{\yostset}[1]{\mathrm{St}(#1)}
+\newcommand{\yofuncsp}[2]{\mathrm{C}(#1, #2)}
+\newcommand{\yofsusm}[1]{\mathrm{E}(#1)}
+\newcommand{\yoaff}[1]{\mathrm{Aff}(#1)}
+
+\newcommand{\yoavoid}[1]{\mathrm{Avoid}(#1)}
+
+\newcommand{\yoemb}[2]{\mathrm{Emb}(#1, #2)}
+\newcommand{\yonebsp}[1]{\mathrm{N}_{#1}^{2#1+1}}
+%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{section}
+
+\usepackage[dvipdfmx]{hyperref}
+%\usepackage{pxjahyper} % (u)pLaTeX
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+
+
+
+\title{
+可分距離化可能空間，
+被覆次元と埋め込み，関数空間
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\tableofcontents
+
+
+
+\section{準備}
+
+\begin{df}
+$l\in \zz_{\ge 1}$
+とする．
+ユークリッド空間
+$\rr^{l}$
+内の
+有限個の点
+$e_{1}, \dots, e_{m}$
+が
+\yoemph{アフィン的独立である}とは
+$t_{1}, \dots, t_{m}\in \rr$
+が
+$\sum_{i=1}^{m}t_{i}=0$
+と
+$\sum_{i=1}^{m}t_{i}\cdot e_{i}=0$
+を満たしているならば，
+$t_{1}=\dots =t_{m}=0$
+を満たす時にいう．
+これは
+$e_{2}-e_{1}, \dots, e_{m}-e_{1}$
+が線型独立であることと同値である．
+また，
+$\rr^{l}$内の有限個の点
+$w_{1}, \dots, w_{m}$
+の
+\yoemph{アフィン結合}とは
+$m$この実数
+$t_{1}, \dots, t_{m}\in \rr$
+であって
+$\sum_{i=1}t_{i}=1$
+を満たすものを使って
+$\sum_{i=1}^{m}t_{i}\cdot w_{i}$
+と表される
+点のことである．
+もしも
+$w_{1}, \dots, w_{m}$
+がアフィン的独立であるのならば
+これらのアフィン結合の係数は一意的である
+ことに注目しよう．
+また
+$w_{1}, \dots, w_{m}$
+が張る
+\yoemph{アフィン部分空間
+$\yoaff{w_{1}, \dots, w_{m}}$}
+とは，
+$w_{1}, \dots, w_{m}$のアフィン結合
+全体の集合のことである．
+$\yoaff{w_{1}, \dots, w_{m}}$
+は
+$w_{2}-w_{1}, \dots, w_{m}-w_{1}$
+で張られる線型空間$W$を使うと
+$\yoaff{w_{1}, \dots, w_{m}}=e_{1}+W$
+と表されることに注目しておこう．
+特に
+$m\le l$のとき
+$\yoaff{w_{1}, \dots, w_{m}}$
+は$\rr^{l}$
+の閉集合であり，さらに内点を持たない．
+\end{df}
+
+\begin{df}
+$l\in \zz_{\ge 1}$
+とする．
+このとき
+部分集合
+$S\subset \rr^{l}$
+が
+\yoemph{一般の位置にある}
+とは
+任意の$i\in \{1, \dots, l+1\}$
+について
+$S$
+の
+$i$
+個の
+異なる元は
+アフィン的独立であるときにいう．
+\end{df}
+
+\begin{prop}\label{prop:densegp}
+$l\in \zz_{\ge 1}$
+を任意に与え，
+$O\subset \rr^{l}$
+を稠密開集合とする．
+そして
+$C\subset O$
+を高々可算な
+一般の位置にある集合とする．
+このとき
+可算な稠密
+集合
+$S\subset O$で
+$C\cup S$が一般の位置にあり
+$C\cap S=\emptyset$となるものが存在する．
+\end{prop}
+\begin{proof}
+$\rr^{l}$の
+可算稠密集合を適当にとり
+$E$
+とする．
+そして
+$E\times \qq_{>0}$
+を適当に番号付して
+$E\times \zz_{\ge 0}=\{(q_{k}, r_{k})\}_{k\in \zz_{\ge 0}}$
+とおく．
+帰納法により
+次のような列
+$e_{1}, \dots, e_{k}$
+を構成する：
+$C\cup \{e_{1}, \dots, e_{k}\}$は一般の位置にあり，
+任意の$i\in \{1, \dots, k\}$について
+$\lVert e_{i} - q_{i}\lVert < r_{i}$を満たす．
+帰納法により$e_{1}, \dots, e_{k}$
+まで構成できたとして
+$e_{k+1}$を構成する．
+まず
+$C\cup \{e_{1}, \dots, e_{k}\}$
+の任意の有限部分集合
+$I$で$\card(I)\le l$となるもの
+について
+$A(I)=\yoaff{I}$
+と定義し，
+$A$をそのような$A(I)$全体の和集合とする．
+このとき各$A(I)$は閉集合で内点を持たなく，
+$A$はそのような集合の可算個の和集合なので，
+Baireの範疇定理により$A$自体も内点を持たない．
+よって
+$O\setminus A$
+は稠密である．
+さらに$C$
+も高々可算なので
+$O\setminus (A\cup C)$
+も稠密である．
+よって
+$e_{k+1} \in O\setminus (A\cup C)$
+でなおかつ
+$\lVert e_{k} - q_{k+1}\lVert < r_{k+1}$
+を満たすものが取れる．
+ここで
+$C\cup \{e_{1}, \dots, e_{k}\}$
+の任意の有限部分集合
+$I$で$\card(I)\le l$となるもの
+について
+$e_{k+1}\not \in A(I)$
+となるので
+$C\cup \{e_{1},\dots, e_{k}, e_{k+1}\}$
+は一般の位置にあることがわかる．
+\end{proof}
+
+\begin{prop}\label{prop:n+1inde}
+$n, l\in \zz_{\ge 1}$
+とする．
+$e_{1}, \dots, e_{m}\in \rr^{l}$
+は
+$\rr^{l}$
+の一般の位置にある列とする．
+このときもしも
+$2n+1\le l$ならば，
+集合$\{1, \dots, m\}$の
+濃度高々$n+1$の部分集合$I$
+を台に持つ
+アフィン結合
+$\sum_{i=1}^{m}s_{i}\cdot e_{i}$
+の係数は一意的である．
+ここで$I$を台に持つとは
+$i\in I$
+のとき，そしてその時に限り
+$s_{i}=0$
+となるということである．
+\end{prop}
+\begin{proof}
+$I$
+とは異なる
+濃度が高々
+$n+1$
+の$\{1, \dots, m\}$
+の部分集合
+$J$
+を台にもつ
+アフィン結合
+$\sum_{i=1}^{m}t_{i}\cdot e_{i}$
+が$\sum_{i=1}^{m}s_{i}\cdot e_{i}$
+と等しいと
+しよう．
+このとき
+\begin{align}
+\sum_{i\in I\setminus J}s_{i}\cdot e_{i}
++
+\sum_{i\in J\setminus I}(-t_{i})\cdot e_{i}
++
+\sum_{i\in J\cap I}(s_{i}-t_{i})\cdot e_{i}
+=0
+\end{align}
+であり，
+その係数を見ると
+\begin{align}
+\sum_{i\in I\setminus J}s_{i}
++
+\sum_{i\in J\setminus I}(-t_{i})
++
+\sum_{i\in J\cap I}(s_{i}-t_{i})
+=0
+\end{align}
+である．ここで
+$I\cup J$
+の濃度が高々
+$2n+2$
+であり，
+$l$
+は
+$2n+1\le l$，
+つまり
+$2n+2\le l+1$
+を満たすので
+$e_{1}\dots, e_{m}$
+が一般の位置にあることから
+$\{e_{i}\}_{i\in I\cup J}$
+はアフィン独立である．
+よって
+$I\setminus J$上で
+$s_{i}=0$
+かつ
+$J\setminus I$
+上で
+$t_{i}=0$
+かつ
+$I\cap J$
+上で
+$s_{i}=t_{i}$
+となるが，
+$s_{i}$と
+$t_{i}$がそれぞれ
+$I$
+と$J$
+を台にもつので
+$I=J$でなければならず
+このとき
+$I=J=I\cap J$
+なので
+$s_{i}=t_{i}$
+が$I$
+上で成り立ち，
+係数の一意性が成り立つ．
+\end{proof}
+
+
+\section{関数空間と埋め込み}
+\begin{df}
+$X$
+を位相空間とする．
+そして
+$(H,  d)$
+を距離空間とする．
+この文章では
+$\yofuncsp{X}{H}$
+という記号で
+$X$から
+$H$
+への連続写像全体で，
+次の意味で有界なもの全体を表す：
+任意の$f\in \yofuncsp{X}{H}$について
+ある点
+$p\in H$
+と
+$M\in (0, \infty)$が存在して
+任意の
+$x\in X$
+について
+$d(p, f(x))\le M$
+となる．
+そして
+$d$から誘導される
+$\yofuncsp{X}{H}$
+上のsup距離関数
+を
+$\yosupmet{d}$
+で表す．つまり
+$\yosupmet{d}(f, g)=\sup_{x\in X}d(f(x), g(x))$
+である．
+今回の
+$\yofuncsp{X}{H}$
+の定義から$\yosupmet{d}$
+はちゃんと有限の値を取ることに注意しよう．
+\end{df}
+
+次の命題の証明は省略する．いつものやつである．
+\begin{prop}\label{prop:funccomp}
+$X$
+を位相空間とし
+$(H, d)$
+は完備距離空間とする．
+このとき
+$(\yofuncsp{X}{H}, \yosupmet{d})$
+は完備である．
+\end{prop}
+
+\begin{df}
+位相空間
+$X$
+の被覆
+$\yocovf{U}$
+について
+写像
+$f\in \yofuncsp{X}{H}$
+が
+$\yocovf{U}$-map
+(あるは$\yocovf{U}$-small)
+であるとは
+任意の$z\in H$
+についてある
+$z$の近傍$N$と
+$U\in \yocovf{U}$
+が存在し
+$f^{-1}(N)\subset U$
+を満たすことである．
+この文書では
+$\yofsusm{\yocovf{U}}$
+で
+$\yofuncsp{X}{H}$
+内の
+$\yocovf{U}$-map
+全体を表すとする．
+\end{df}
+
+\begin{prop}\label{prop:smallopen}
+$X$
+を位相空間とし
+$\yocovf{U}$
+はその被覆で
+$(K, d)$
+を
+コンパクト距離空間とする．
+このとき
+$\yofsusm{\yocovf{U}}$
+は$\yofuncsp{X}{K}$
+の開集合である．
+\end{prop}
+\begin{proof}
+$f\in \yofsusm{\yocovf{U}}$
+を任意にとる．
+各点
+$z\in K$
+について
+$N_{z}$
+を$z$の開近傍である
+$U\in \yocovf{U}$
+が存在し
+$f^{-1}(N_{z})\subset U$
+となるものとする．
+このとき
+$\{N_{z}\}_{z\in K}$
+は$K$
+の被覆で
+$K$
+はコンパクトだから
+$\{N_{z}\}_{z\in K}$のルベーグ数
+$r\in (0, \infty)$
+が存在する．
+ここで
+$g$
+を
+$\yosupmet{d}(f, g)<2^{-3}r$
+となる任意の
+$g\in \yofuncsp{X}{K}$
+とする．
+任意に
+$z\in K$
+を取る．
+そして
+$M=U(z, 2^{-3}r; d)$，
+つまり
+$M$
+を
+$z$
+を中心とする
+半径$2^{-3}r$
+の$d$による開球とする．
+そして
+$p(z)\in Z$
+を
+$U(z, r; d)\subset N_{p(z)}$
+となるものとする．
+さて,
+任意に
+$x\in g^{-1}(M)$
+を取る．
+このとき
+$g(x)\in M$
+である．
+つまり
+$d(z, g(x))\le 2^{-3}r$
+である．
+また
+$\yosupmet{d}(g, f)<2^{-3}r$
+から
+$d(g(x), f(x))<2^{-3}r$
+である．
+よって$f(x)\in U(z, r; d)$
+なので
+$f(x)\in N_{p(z)}$
+である．
+$N_{p(z)}$
+の定義より
+$f^{-1}(N_{p(z)})\subset U$
+となる
+$U\in \yocovf{U}$
+が存在する．
+このとき
+$x\in f^{-1}(N_{p(z)})$
+より
+$x\in U$
+である．
+ここで$x\in g^{-1}(M)$
+は任意であったから
+$g^{-1}(M)\subset U$
+である．
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{prop}\label{prop:smalldense}
+$X$
+を距離空間とし，
+$\yodim X\le n$
+で，
+$\yocovf{U}$
+を$X$
+の有限被覆とする．
+そして
+$l\in \zz_{\ge 1}$
+は$2n+1\le l$を満たすとし
+$K$は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+このとき
+$\yofsusm{\yocovf{U}}$
+は
+$\yofuncsp{X}{K}$
+のなかで稠密である．
+\end{prop}
+\begin{proof}
+任意の$f\in \yofuncsp{X}{K}$
+を取る．
+そして
+任意の$\eta\in (0, \infty)$
+を与える．
+このとき
+$K$
+を直径が
+$2^{-10}\eta$
+以下の有限個の開集合
+$O_{1}, \dots, O_{q}$で覆うことができる．
+そして
+$\{U\cap f^{-1}(O_{i})\mid U\in \yocovf{U}, i=1, \dots, q\}$
+を考えるとこれは
+$X$の有限被覆でであり，
+故に
+$\yodim X\le n$
+なのでこの被覆
+の細分であるような有限被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\yodeg(\yocovf{V})\le n+1$
+を満たす．
+適当にゼロ集合が$V_{i}$
+に一致するような関数
+$w_{i}\colon X\to [0, 1]$
+をとり適当に話を取って割ったりして
+$\sum_{i=1}^{r}w_{i}=1$
+を満たすとしても良い(
+例えば$w_{i}(x)=d(x, X\setminus V_{i})$など)．
+このとき
+$f(V_{i})$の直径は
+$2^{-10}\eta$以下であることに注意しよう．
+命題
+\ref{prop:densegp}
+を稠密部分集合
+$\rr^{l}$
+と
+$C=\emptyset$
+に用いて
+稠密な一般の位置にある集合
+$E\subset \rr^{l}$
+を取る．
+そして
+$i\in \{1, \dots, r\}$
+について
+$e_{i}\in E\cap \nai K$
+を
+$d(f(V_{i}), w_{i})<2^{-5}\eta$
+を満たすようにとる．
+これは$\cl(\nai K)=K$
+であるから可能である．
+そして写像
+$g\colon X\to K$
+を
+$g(x)=\sum_{i=1}^{r}w_{i}(x)\cdot e_{i}$
+と定義する．
+このとき任意の$x\in X$について
+\begin{align*}
+d(f(x), g(x))&=\left\lVert f(x)-  \sum_{i=1}^{r}w_{i}(x)\cdot e_{i}\right\rVert
+=
+\left\lVert \sum_{i=1}^{r}w_{i}(x)\cdot f(x)-  \sum_{i=1}^{r}w_{i}(x)\cdot e_{i}\right\rVert\\
+&\le 
+ \sum_{i=1}^{r}w_{i}(x)\cdot \left\lVert f(x)-  e_{i}\right\rVert
+\end{align*}
+であり
+$w_{i}(x)>0$となる$i$については
+$f(x)$と
+$e_{i}$
+の距離は
+$2^{-5}\eta$
+なので
+$\yosupmet{d}(f, g)<\eta$がわかる．
+ここで
+$g$
+が$\yofsusm{\yocovf{U}}$
+に属することを示そう．
+$e_{1}, \dots, e_{m}$
+の高々$n+1$個の元のアフィン結合で表される集合を
+$R$とすると
+これは$n+1$単体と同相な有限個の集合の和集合であるからコンパクトである．そして$g$の像は$R$に含まれている．
+よって$R$に含まれない
+$z\in K$については
+$R$の補集合を$N_{z}$と取れば
+$g^{-1}(N_{z})=\emptyset$なので
+条件は満たされる．
+$z\in R$
+としよう．
+ここで
+$z=\sum_{i\in I}c_{i}\cdot e_{i}$
+で
+$I$は$\card(I)\le n+1$となるような
+$\{1, \dots, m\}$
+の部分集合とし
+$c_{i}\neq 0$
+とする．
+ここで
+アフィン結合の定義から
+$I\neq \emptyset$
+である．
+十分小さい$\epsilon\in (0, \infty)$
+を取れば
+任意の$y\in U(z, \epsilon; d)\cap R$
+については$y=\sum_{i}a_{i}\cdot e_{i}$
+と表したとき$i\in I$について
+$a_{i}\neq 0$となる．
+これは
+命題
+\ref{prop:n+1inde}
+から可能である．
+もしも
+$g$の像が$U(z, \epsilon; d)$
+と共通部分を持たない場合には
+$g$による$U(z, \epsilon; d)$の引き戻しは空集合なので
+$\yocovf{U}$-mapの条件は満たされている．
+集合$N=U(z, \epsilon; d)$と
+$g$の像が共通部分を持つとしよう．
+このとき$g(x)\in N$となる
+$x\in X$について
+$i\in I$を適当に取ると
+$\epsilon$の取り方から
+$w_{i}(x)>0$
+なので
+$x\in V_{i}$
+である．
+つまり
+$g^{-1}(N)\subset V_{i}$
+である．
+以上で
+$g\in \yofsusm{\yocovf{U}}$
+がわかった．
+よって
+$\yofsusm{\yocovf{U}}$
+は
+$\yofuncsp{X}{K}$
+のなかで稠密である．
+\end{proof}
+
+
+位相空間
+$X$
+の被覆
+$\yocovf{U}$
+と
+$x\in X$
+について
+$\yostset{x, \yocovf{U}}=\bigcup\{U\in \yocovf{U}\mid x\in U\}$
+と定義する．
+
+位相空間
+$X$
+の有限被覆の列
+$\yocovf{U}_{0}\dots, \yocovf{U}_{n}, \dots$
+が
+\yoemph{被覆の基本列}
+であるとは
+任意の$x\in X$
+について
+$\{\yostset{x, \yocovf{U}_{n}}\}_{n\in \zz_{\ge 0}}$
+が
+$x$の基本近傍系になるときにいう．
+
+\begin{lem}\label{lem:kihonretu}
+$X$
+を可分距離化可能空間とする．
+このとき
+$X$
+には被覆の基本列
+が存在する．
+\end{lem}
+\begin{proof}
+$X$は可分距離化可能空間であるから
+$[0, 1]^{\aleph_{0}}$
+に位相的に埋め込める(ウリゾーンの距離化可能定理)．
+よって
+$X$と同じ位相を生成する距離
+$d$
+で
+$(X, d)$
+が全有界であるもの
+が存在する．
+このとき
+$\yocovf{U}_{n}$
+を
+$X$を被覆する
+半径$2^{-n}$以下の開球
+の有限集合とする．
+このような取り方ができるのは
+$(X, d)$が全有界だからである．
+すると
+$\{\yocovf{U}_{n}\}_{n\in \zz_{\ge0}}$
+は被覆の基本列になっている．
+\end{proof}
+
+
+\begin{prop}\label{prop:umekomi}
+$X$
+を距離化可能空間とし，
+$(H, d)$
+を
+距離空間とする．
+そして
+$\{\yocovf{U}_{i}\}_{i\in \zz_{\ge0}}$
+は被覆の基本列とする．
+このとき
+$\bigcap_{i\in \zz_{\ge 0}}\yofsusm{\yocovf{U}_{i}}$
+の任意の元は
+位相的埋め込みになっている．
+\end{prop}
+\begin{proof}
+$f\in \bigcap_{i\in \zz_{\ge 0}}\yofsusm{\yocovf{U}_{i}}$
+を任意にとる．
+今からこれが埋め込みになることを示そう．
+まず単射性を示そう．
+$x\neq y$とする．
+このとき被覆の基本列の定義から
+ある$i\in \zz_{\ge 0}$
+が存在して
+$y\not \in \yostset{x, \yocovf{U}_{i}}$
+となる．そして
+$f\in \yofsusm{\yocovf{U}_{i}}$
+であるから
+$f(x)$の近傍
+$N$が存在して
+$f^{-1}(N)\subset U$
+となる
+$U\in \yocovf{U}_{i}$
+が存在する．
+今$y\not \in \yostset{x, \yocovf{U}_{i}}$
+なので $y\not \in U$であり
+$f(y)\not \in N$が従う．
+特に$f(x)\neq f(y)$である．
+次に$f$が位相的埋め込みであることを示そう．
+点$x\in N$を任意に与え，その近傍
+$V$も任意に与える．
+このとき被覆の基本列の定義から
+ある$i\in \zz_{\ge 0}$
+が存在して
+$\yostset{x, \yocovf{U}_{i}}\subset V$
+である．
+そして
+$f\in \yofsusm{\yocovf{U}_{i}}$
+であるから
+$f(x)$の近傍
+$N$が存在して
+$f^{-1}(N)\subset U$
+となる
+$U\in \yocovf{U}_{i}$
+が存在する．
+このとき
+$f^{-1}(N)\subset \yostset{x, \yocovf{U}_{i}}\subset V$
+である．
+よって$f^{-1}$が$f(x)$
+で連続であることが証明された．
+これで証明が終わる．
+\end{proof}
+
+$X$
+から
+$K$
+への位相的埋め込み全体
+を$\yoemb{X}{K}$
+と書くことにする．
+
+\begin{thm}\label{thm:umekomidense}
+$X$
+を可分距離空間とし，
+$\yodim X\le n$
+で
+$l\in \zz_{\ge 1}$
+は$2n+1\le l$を満たすとし
+$K$は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+このとき
+$X$
+から
+$K$
+への位相的埋め込み全体
+$\yoemb{X}{K}$
+は
+$\yofuncsp{X}{K}$
+のなかで$G_{\delta}$
+かつ稠密である．
+特に
+有限次元の可分距離化可能空間は
+ユークリッド空間に埋め込み可能である．
+\end{thm}
+\begin{proof}
+上記の定理群を全て合わせるとわかる．
+\end{proof}
+
+\section{普遍空間}
+
+次に高々$n$次元の
+可分距離化可能空間を全て埋め込めるような
+コンパクト距離空間を構成しよう．
+
+$l\in \zz_{\ge 0}$
+で
+$X$を位相空間とし，
+$\rr^{l}$
+の部分集合
+$K$, および
+$\rr^{l}$
+の部分アフィン空間
+$M$
+について
+$\yoavoid{M}$
+で
+$\yofuncsp{X}{K}$
+の元で
+$\cl (f(X))\cap M=\emptyset$
+となるもの全体とする．
+\begin{prop}
+$X$
+を距離空間とし，
+$\yodim X\le n$
+で，
+$\yocovf{U}$
+を$X$
+の有限被覆とする．
+そして
+$l\in \zz_{\ge 1}$
+は$2n+1\le l$を満たすとし
+$K$は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+このとき
+$\rr^{l}$
+の任意の
+高々$n$次元のアフィン部分空間
+$M$
+について
+$\yoavoid{M}$
+は稠密かつ
+開集合である．
+\end{prop}
+\begin{prop}
+まず$\yoavoid{M}$が開集合であることを示そう．
+任意に$h\in \yoavoid{M}$
+を取る．
+このとき
+$\cl(h(X))\cap M$
+であり，
+$K$がコンパクトであることから
+$\cl(h(X))$
+もコンパクトである．
+よって十分小さい
+$\eta$
+を取れば
+$\cl(h(X))$と$M$
+の距離は$\eta$以上になる．
+そして
+$\yosupmet{d}(f, h)<2^{-1}\eta$
+のとき
+$f$は
+$\cl(f(X))\cap M=\emptyset$を満たす．
+よって
+$\yoavoid{M}$
+は開集合である．
+次に稠密性を示そう．
+任意に
+$f\in \yofuncsp{X}{K}$
+を取る．
+ここで
+アフィン空間$M$
+を張る
+アフィン的独立な元
+$c_{1}, \dots, c_{q}$
+を取る．
+このとき
+$q\le n+1$
+であることに注意せよ．
+そして
+$C=\{c_{1}, \dots, c_{q}\}$
+に対して
+命題
+\ref{prop:densegp}
+を適応して
+一般の位置にある稠密可算集合
+$E\subset \rr^{l}$
+で$C\cup E$も一般の位置にあり，
+$C\cap E=\emptyset$
+となるものをとる．
+ここで
+命題
+\ref{prop:smalldense}
+の証明
+と同じ構成をして
+$g(x)=\sum_{i=1}^{r}w_{i}(x)\cdot e_{i}$
+を構成する．
+異なるのは
+$E$
+の取り方のみである．
+この
+$g$
+が
+$f$
+を近似することは
+命題
+\ref{prop:smalldense}
+の証明と同様である．
+今から
+$g\in \yoavoid{M}$
+を証明しよう．
+$e_{1}, \dots, e_{m}$
+の高々$n+1$個の元のアフィン結合で表される集合を
+$R$とすると
+これは$n+1$単体と同相な有限個の集合の和集合であるからコンパクトである．
+そして
+$g$
+の像は
+$R$
+に含まれている．
+このとき
+命題\ref{prop:n+1inde}
+と
+$E\cap C=\emptyset$
+より
+$R\cap M=\emptyset$
+である．
+よって
+$\cl(g(X))\cap M=\emptyset$
+であり
+$g\in \yoavoid{M}$
+がわかる．
+これで証明が終わる．
+\end{prop}
+
+$n\in \zz_{\ge 0}$
+を任意に与える．
+このとき
+記号
+$\yonebsp{n}$
+で
+$[0, 1]^{2n+1}$
+の部分空間で
+その点の
+座標のうち
+有理数であるものの個数が
+高々$n$個であるもの
+全体を表すとする．
+この空間は
+N\"{o}beling space
+と呼ばれることもあるようである．
+この空間が
+$n$次元の可分距離空間の
+普遍空間であることを証明しよう．
+\begin{thm}
+$n\in \zz_{\ge 0}$
+とし
+$X$
+を
+可分距離化可能空間で
+$\yodim X\le n$
+とする．
+このとき
+$X$
+から
+$\yonebsp{n}$
+への位相的埋め込みが存在する．
+\end{thm}
+\begin{proof}
+$\{1, \dots, 2n+1\}$
+の濃度が$n+1$
+の部分集合
+$I$
+と
+$q=(q_{1}, \dots, q_{n+1})\in \qq^{n+1}$
+について
+\begin{align}
+M(I; q)=\{x\in \rr^{2n+1}\mid \forall i\in I, \ x_{i}=q_{i}\}
+\end{align}
+と定義する．
+このとき
+$M(I; q)$
+は
+$n$次元
+アフィン部分空間である．
+このとき
+$\yonebsp{n}$
+の定義から
+$[0, 1]^{2n+1}\setminus \yonebsp{n}=\bigcup_{I, q}M(I; q)$
+である．ここで
+$I$の動く範囲は有限だし
+$q$の動く範囲は可算である．
+さて
+命題
+\ref{prop:funccomp}, 
+定理
+\ref{thm:umekomidense}, 
+そして
+命題
+\ref{prop:umekomi}
+より
+\begin{align}
+\yoemb{X}{[0, 1]^{2n+1}}\cap\bigcap_{I, q}\yoavoid{M(I; q)}
+\end{align}
+は
+稠密かつ
+$G_{\delta}$
+である．
+よって
+$X$から
+$\yonebsp{n}$
+への位相的埋め込みが存在する．
+\end{proof}
+
+
+ユークリッド空間の次元がその線型空間としての次元と等しいということと，
+ちょっとした計算をすると
+$\yonebsp{n}$
+の次元が$n$
+であることが示せる．
+すると以下のことがわかる．
+\begin{cor}
+$n\in \zz_{\ge 0}$
+とし
+$X$
+を
+可分距離化可能空間で
+$\yodim X\le n$
+とする．
+このとき
+$X$のコンパクト化
+$Y$
+であって距離化可能かつ
+$\yodim X=\yodim Y$
+となるものが存在する．
+\end{cor}
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{dempafx}
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+
+
+\bibitem{dempa}
+
+電波通信, 「次元論ショートコース：0次元から始める位相次元」, 
+https://concious4410.hatenablog.com/entry/2022/03/12/161532
+
+
+\bibitem{dempa2}
+電波通信, 「不動点定理と同値な命題」, 
+https://concious4410.hatenablog.com/entry/2026/04/05/181441
+
+\bibitem{dempa3}
+電波通信，
+「次元論からの領域不変性定理の証明」，
+https://concious4410.hatenablog.com/entry/2026/04/15/220550
+
+\bibitem{chara}
+M. G. Charalambous, 
+\textit{Dimension theory. A selection of theorems and counterexamples} Springer/Atlantis Press (2019). 
+
+\bibitem{HW}W. Hurewicz and H. Wallman,\textit{Dimension Theory},Princeton Univ. Press,1948
+
+\bibitem{pears}
+ A. R. 
+ Pears,
+ \textit{Dimension theory of general spaces}, 
+ {Cambridge} {University} {Press}
+1975. 
+
+\bibitem{Morita}
+K. Morita, 
+\textit{On the dimension of normal spaces, I. }, 
+Japanese journal of mathematics :transactions and abstracts, 
+vol 20
+(1950), 
+pp. 5--36, 
+DOI: 
+10.4099/JJM1924.20.0\_5
+
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+

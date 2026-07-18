@@ -1,0 +1,1736 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{url}
+
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+%
+\usepackage{}
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{\partial}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\newcommand{\ind}{\mathrm{ind}}
+
+\newcommand{\lind}{\mathrm{Ind}}
+
+\DeclareMathOperator{\emb}{Emb}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+
+\DeclareMathOperator{\rank}{rank}
+
+
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\mydisc}[1]{\mathbf{D}^{#1}}
+\newcommand{\mysphere}[1]{\mathbf{S}^{#1}}
+\newcommand{\mycube}[1]{\mathbf{I}^{n}}
+\newcommand{\mycubesidep}[2]{\mathbf{I}^{#1, #2}_{+}}
+\newcommand{\mycubesidem}[2]{\mathbf{I}^{#1, #2}_{-}}
+
+\newcommand{\mycubebd}[1]{\partial\mathbf{I}^{#1}}
+
+
+\newcommand{\myhl}[2]{H_{#2}(#1)}
+
+
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{section}
+
+\usepackage[dvipdfmx]{hyperref}
+%\usepackage{pxjahyper} % (u)pLaTeX
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+
+
+
+
+\title{
+次元論からの領域不変性定理の証明
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+この文書は
+\cite{dempa}の続きであるが，
+電波通信の記事\cite{dempa}は独自の定義で次元論をやっているので，この文書では繰り返しをためらうことなく
+最初から説明をする．見返してみたら結構ガバガバでびっくりした．
+
+\tableofcontents
+
+\section{前回までのあらすじ1・次元の定義}
+\begin{df}
+$\dim_{T} X=-1$
+であるとは$X=\emptyset$
+と定義する．
+\end{df}
+
+\begin{df}
+位相空間$X$の部分集合$S$が
+\textbf{clopen}であるとは，$S$
+が開かつ閉集合であるときにいう．
+\end{df}
+
+\begin{df}
+$X$を可分距離化可能空間とする．
+このとき$X$が$0$次元であるとは
+$X$が空集合ではなく
+$X$のclopen集合からなる開基
+が存在する時にいう．
+このとき$\dim_{T} X=0$と表す．
+\end{df}
+
+
+\begin{df}
+$n\in \zz_{\ge 0}$とし，
+$X$を可分距離化可能空間とする．
+このとき整数$\dim_{T}X$を
+以下を満たす最小の整数$m$で定義する．
+$X$の$m+1$個の部分空間$X_{0}\dots, X_{m}$
+が存在して$\dim_{T}X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{m}X_{i}$
+を満たす．
+この定義のもと，$\dim_{T}X\le n$とは
+$X$の$n+1$個の部分空間$X_{0}\dots, X_{n}$
+で$\dim_{T}X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{n}X_{i}$
+を満たすものが存在することを意味する．
+また，$\dim_{T}$は位相不変量であることがわかる．
+\end{df}
+
+$\dim_{T}$の定義から直ちに次の二つのことがわかる．
+\begin{lem}
+$X$を可分距離化可能空間とし，
+$S\subset X$とする．この時
+$\dim_{T}S\le \dim_{T}X$
+が成り立つ．
+\end{lem}
+
+\begin{lem}\label{lem:plpl}
+$X$を可分距離化可能空間とし，
+$A, B\subset X$とする．この時
+$\dim_{T}A\le n$かつ$\dim_{T}B\le 0$ならば
+$\dim_{T}A\cup B\le n+1$
+が成り立つ．
+\end{lem}
+
+
+
+\begin{lem}\label{lem:toridashi}
+$X$を可分距離化可能空間とする．
+$\mathcal{B}$を$X$の開基とする．
+このとき$\mathcal{B}$
+の部分集合
+$\mathcal{A}$で開基になりさらに$\card(\mathcal{A})\le \aleph_{0}$を満たすものが存在する．
+\end{lem}
+\begin{proof}
+$X$は可分距離化可能空間なのでその部分集合も
+可分距離化可能である．
+よって$X$の任意の部分集合はリンデレフである．
+$X$の可算な開基$\mathcal{C}$を取る．
+任意の$U\in \mathcal{C}$に対して
+$\mathcal{B}$が開基であることと，$U$がリンデレフである
+ことから可算集合$\mathcal{A}_{U}\subset \mathcal{B}$
+で$\bigcup_{V\in  \mathcal{A}_{U}}V=U$となるものが存在する．
+そして
+\[
+\mathcal{A}=\bigcup_{U\in \mathcal{C}}\mathcal{A}_{U}
+\]
+とおけば$\mathcal{A}$が求めるものになっている．
+\end{proof}
+
+
+\begin{cor}
+$X$を可分距離化可能空間とする．
+このとき$\dim_{T}\le 0$であることと，
+可算開基であってclopenな集合からなるものが存在することは同値である．
+\end{cor}
+
+\begin{lem}\label{lem:ultranormal}
+$X$を可分距離化可能空間とするこのとき
+$\dim_{T}X\le 0$であることと
+任意の$X$内の交わらない二つの閉集合$G, H$に対して
+clopen集合$O$が存在して
+$G\subset O$と$H\cap O=\emptyset$
+を満たすことは同値である．
+\end{lem}
+\begin{proof}
+後半の条件から$\dim_{T} X\le 0$
+が導かれるのは明らかなので逆を示す．
+
+今
+$\dim_{T}X\le 0$
+なので
+各点に可算な近傍形でclopenなものからなるものが存在する．
+そのようなものを$p\in G$について$\mathcal{N}_{p}$
+と表すことにする．さらに$H$が閉集合であることから任意の
+$V\in \mathcal{N}_{p}$について$V\cap H=\emptyset$
+と仮定してもよい(必要なら$\{S\cap (X\setminus H)\}_{S\in \mathcal{N}_{p}}$と置き換えれば良い)．
+そして$X\setminus G$も次元が$0$以下なので
+clopenな集合からなる開基$\mathcal{B}$が存在する．
+このとき集合族
+\[
+\bigcup_{p\in G}\mathcal{N}_{p}\cup \mathcal{B}
+\]
+は$X$の開基になるので補題 \ref{lem:toridashi}
+からこの集合族の部分族で
+可算な開基$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．ここで$U_{i}\cap G\neq \emptyset$ならば
+$U_{i}\cap H=\emptyset$に注意しよう．
+そして$V_{0}=U_{0}$で
+$V_{i}=U_{i}\setminus \bigcup_{j=1}^{i-1}U_{i}$
+と定義する．すると各$V_{i}$
+は開集合で$X=\bigcup_{i}V_{i}$となる．
+そして
+\[
+O=\bigcup_{V_{i}\cap G\neq \emptyset}V_{i}
+\]
+とすると
+\[
+X\setminus O=\bigcup_{V_{i}\cap G= \emptyset}V_{i}
+\]
+なので$O$はclopenであり，$G\subset O$を満たす．
+さらに$V_{i}$について$V_{i}\cap G\neq \emptyset$
+ならば$V_{i}\cap H=\emptyset$なので
+$H\subset X\setminus O$
+となるから$O$は求める集合になっている．
+\end{proof}
+
+
+\begin{prop}\label{prop:sumn=0}
+$X$を空でない可分距離化可能空間とする．
+もしも可算個の閉集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+で$\dim_{T}A_{i}\le 0$
+と$X=\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+を満たすならば
+$\dim_{T} X= 0$である．
+\end{prop}
+\begin{proof}
+$X$が
+補題 \ref{lem:ultranormal}
+の条件を満たすことを証明しよう．
+$X$の交わらない二つの閉集合
+$G$, $H$を与える．
+帰納的に$P_{i}$と$Q_{i}$, $R_{i}$, $L_{i}$
+を構成する．
+まず
+$G\cap A_{0}$
+と$H\cap A_{0}$
+は$A_{0}$
+のなかの交わらない閉集合である．
+$A_{0}$は$0$次元空間なので
+補題 \ref{lem:ultranormal}より
+$A_{0}$の中のあるclopen集合
+$P_{0}$
+と$Q_{0}$が存在して
+\begin{enumerate}
+\item $G\cap A_{0}\subset P_{0}$
+\item $H\cap A_{0}\subset Q_{0}$
+\item $P_{0}\cap Q_{0}=\emptyset$
+\item $P_{0}\cup Q_{0}=A_{0}$
+\end{enumerate}
+を満たす．
+
+さて$A_{0}$は閉集合だから$P_{0}$と$Q_{0}$
+は$X$の閉集合でもあるし，
+$G\cup P_{0}$と$H\cup Q_{0}$
+は$X$の交わらない閉集合である．
+ここで
+$X$の正規性\footnote{距離化可能空間は常に正規である．}を用いて
+以下を満たす$X$二つの開集合$R_{0}$と$L_{0}$
+を得る．
+\begin{enumerate}
+\item $G\cup P_{0}\subset R_{0}$
+\item $H\cup Q_{0}\subset L_{0}$
+\item $\cl (R_{0})\cap \cl(L_{0})=\emptyset$
+\end{enumerate}
+
+一般に$P_{i}$, $Q_{i}$
+$R_{i}$, $L_{i}$を帰納的に
+以下を満たすように定義する．
+\begin{enumerate}
+\item $P_{i}$と$Q_{i}$
+は$A_{i}$のclopen集合
+\item 
+$\cl(R_{i-1})\cap A_{i}\subset P_{i}$
+\item 
+$\cl(L_{i-1})\cap A_{i}\subset Q_{i}$
+\item 
+$P_{i}\cap Q_{i}=\emptyset$
+\item $P_{i}\cup Q_{i}=A_{i}$
+\item $R_{i}$, $L_{i}$
+は$X$の開集合
+\item 
+$\cl(R_{i-1})\cup P_{i}\subset R_{i}$
+
+\item 
+$\cl(L_{i-1})\cup Q_{i}\subset L_{i}$
+\item 
+$\cl(R_{i})\cap \cl(L_{i})=\emptyset$
+
+\end{enumerate}
+このように構成できることは
+各$A_{i}$がclopenであることと$X$の正規性からわかる．
+このとき以下が満たされる
+\begin{enumerate}
+\item $A_{i}\subset R_{i}\cup L_{i}$
+\item 
+$\cl(R_{i-1})\subset R_{i}$
+
+\item 
+$\cl(L_{i-1})\subset L_{i}$
+\end{enumerate}
+そして$R=\bigcup_{i}R_{i}$, 
+$L=\bigcup_{i}L_{i}$
+とすると$R$と$L$は開集合である．
+そして
+$X=\bigcup_{i}A_{i}\subset R\cup L$
+なので$X=R\cup L$である．
+また矛盾を導き出すために$x\in R\cap L$となる$x$がもしも存在したとすると
+$x\in R_{i}$と$x\in L_{j}$となる$i, j$
+が存在するが$k=\max\{i, j\}$
+とすると
+$x\in R_{k}\cap L_{k}=\emptyset$
+となり矛盾する．
+つまり$R\cap L=\emptyset$である. 
+$R$と$L$は交わらない開集合で定義から
+$G\subset R$と$H\subset L$
+を満たす．そして$R\cup L=X$
+なので$R$と$L$は閉集合でもある．
+このことは補題 \ref{lem:ultranormal}から$\dim_{T}X=0$を意味する．
+\end{proof}
+
+
+\begin{df}
+$X$を位相空間とする．
+$X$の部分集合$S$
+が$F_{\sigma}$
+であるとは
+$S$が$X$内の可算個の閉集合の和集合として表される時に
+いう．
+\end{df}
+
+\begin{cor}
+可分距離空間が$0$次元であるような可算個の$F_{\sigma}$
+集合の和集合で表されるのならば全体空間も$0$次元である．
+\end{cor}
+
+
+\begin{thm}\label{thm:sumsum}
+$n\in \zz_{\ge 0}$
+とする．
+$X$を可分距離空間とする．
+このとき
+$X$の可算個の$F_{\sigma}$集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し$\dim_{T}A_{i}\le n$と
+$X=\bigcup_{i}A_{i}$を満たすならば
+$\dim_{T}X\le n$である．
+\end{thm}
+\begin{proof}
+$n$に関する帰納法で証明する．
+$n=0$の時は既に
+命題\ref{prop:sumn=0}で
+証明されている．
+$n+1$より小さい数では定理が成り立つとする．
+このとき
+可算個の閉集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し$\dim_{T}A_{i}\le n+1$と
+$X=\bigcup_{i}A_{i}$を満たすと仮定してもよい．
+このとき$B_{0}=A_{0}$, 
+$B_{i}=A_{i}\setminus \bigcup_{j=0}^{i-1}A_{j}$
+と定義する．
+すると各$B_{i}$
+は$F_{\sigma}$集合であり$\dim_{T}B_{i}\le n+1$
+を満たしさらに$B_{i}$たちは交わらず$X=\bigcup_{i}B_{i}$
+が成り立つ．
+さて$\dim_{T}\le n+1$の定義から
+各$i$について$B_{i}$の部分集合$M_{i}$と$N_{i}$
+で$\dim_{T}M_{i}\le n$と$\dim_{T}N_{i}=0$
+となる．$M=\bigcup_{i}M_{i}$
+と$N=\bigcup_{i}N_{i}$と定義する．
+各$M_{i}$は互いに交わらないので
+$M_{i}=M\cap B_{i}$となる．
+よって
+$M_{i}$は$M$のなかで$F_{\sigma}$集合である．
+よって帰納法の仮定より$\dim_{T}M\le n$
+となる．同様に$\dim_{T}N=0$である．
+$X$は$M$と$N$の和集合なので，補題 \ref{lem:plpl}から
+$\dim_{T}X\le n+1$
+が成り立つ．
+\end{proof}
+さて今から
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+を証明する．
+ここで，
+$\mathbb{S}^{n}$とは$n$次元球面である．
+
+\begin{lem}\label{lem:qq00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$\qq^{n}$
+は$0$次元である．
+\end{lem}
+\begin{proof}
+一点集合は閉集合でなおかつ$0$次元なので
+命題 \ref{prop:sumn=0}からわかる．
+\end{proof}
+
+
+\begin{lem}\label{lem:pp00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$(\rr\setminus \qq)^{n}$
+は$0$次元である．
+\end{lem}
+\begin{proof}
+点$x=(x_{1}, \dots, x_{n})\in (\rr\setminus \qq)^{n}$
+をとる．任意に$\epsilon >0$をとり，
+各$i\in \{1, \dots, n\}$について
+$\eta_{i}, \kappa_{i}>0$
+を
+\begin{enumerate}
+\item 各$i$について
+$\eta_{i}<\epsilon$かつ$\kappa_{i}<\epsilon$
+\item $(x_{1}-\eta_{1}, \dots, x_{n}-\eta_{n})\in \qq^{n}$
+\item $(x_{1}+\kappa_{1}, \dots, x_{n}+\kappa_{n})\in \qq^{n}$
+\end{enumerate}
+を満たすようにとる．
+$(2), (3)$の条件を満たす$\eta_{i}, \kappa_{i}$
+が存在するのは$\qq$が$\rr$の中で
+が稠密だからである．
+$U=\prod_{i=1}^{n}(x_{i}-\eta_{i}, x_{i}+\kappa_{i})$
+かつ
+$C=\prod_{i=1}^{n}[x_{i}-\eta_{i}, x_{i}+\kappa_{i}]$
+とおく．これらの集合について
+$U\cap(\rr\setminus \qq)^{n}=C\cap (\rr\setminus \qq)^{n}$
+なので$U\cap(\rr\setminus \qq)^{n}$
+は$(\rr\setminus \qq)^{n}$のclopen集合であり，
+$x$の近傍でもある．
+$\epsilon$は任意なので各点$x$について$(\rr\setminus \qq)^{n}$内の
+clopenな近傍系が存在することがわかった．
+よって$\dim_{T}(\rr\setminus \qq)^{n}=0$
+である．
+\end{proof}
+
+\begin{lem}\label{lem:nnn}
+$n\in \zz_{\ge 0}$とする．
+このとき
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つ．
+\end{lem}
+\begin{proof}
+$k\in \{0, \dots, n\}$
+について
+$E_{k}\subset \rr^{n}$
+を$\rr^{n}$の部分集合で
+高々$k$個の座標が有理数になっている点全体とする．
+今から$\dim_{T}E_{k}= 0$
+を証明する．
+今$E_{n}=\qq^{n}$かつ$E_{0}=(\rr\setminus \qq)^{n}$
+なので補題 \ref{lem:qq00}, \ref{lem:pp00}
+から$\dim_{T}E_{n}=\dim_{T}E_{0}=0$
+がわかる．
+よって$k\in \{1, \dots, n-1\}$について
+$\dim_{T}E_{k}= 0$
+を証明する．
+$Z(k)$を$\{1, \dots, k\}$の濃度がちょうど$k$個の
+部分集合全体とする．
+そして$\sigma=\{i_{1}, \dots, i_{k}\}\in Z(n, k)$
+と$v=(v_{1}\dots, v_{k})\in \qq^{n}$
+について$A(\sigma, v)$を
+任意の$j\in \{1, \dots, k\}$について
+第$i_{j}$座標が$v_{j}$になるような
+$\rr^{n}$の点全体とし，
+$B(\sigma, v)$を
+任意の$j\in \{1, \dots, k\}$について
+第$i_{j}$座標が$v_{j}$になり，それ以外の座標が無理数に属するような$\rr^{n}$の点全体の集合とする．
+このとき
+$E_{k}$の定義から任意の$\sigma=\{i_{1}, \dots, i_{k}\}\in Z(n, k)$
+と$v=(v_{1}\dots, v_{k})\in \qq^{k}$
+について$E_{k}\cap A(\sigma, v)=B(\sigma, v)$
+となる．ゆえに$B(\sigma, v)$は$E_{k}$
+の閉集合である．さらに$B(\sigma, v)$
+は$(\rr\setminus \qq)^{n-k}$と同相なので
+$0$次元である．
+さて$E_{k}$の定義から
+\[
+E_{k}=\bigcup_{\sigma\in Z(n, k)}\bigcup_{v\in \qq^{k}}
+B(\sigma, v)
+\]
+が成り立ち，各$B(\sigma, v)$は$E_{k}$の閉集合かつ$0$次元で$Z(n, k)$と$\qq^{n-k}$
+は高々可算集合なので命題 \ref{prop:sumn=0}から
+$\dim_{T}E_{k}=0$
+が従う．
+さらに明らかに$\rr^{n}=\bigcup_{k=0}^{n}E_{k}$
+なので$\dim_{T}\rr^{n}\le n$がわかる．
+次に$\mathbb{S}^{n}$について考えよう．
+は$\rr^{n}$の一点コンパクト化であり，
+$\mathbb{S}^{n}=(E_{0}\cup\{\infty\})\cup \bigcup_{k=1}^{n}E_{k}$
+である．
+そして命題 \ref{prop:sumn=0}から
+$\dim_{T}(E_{0}\cup\{\infty\})= 0$
+なので，
+$\dim_{T}\mathbb{S}^{n}\le n$
+がわかる．
+\end{proof}
+\begin{rmk}
+一般に$\dim_{T}\rr^{n}=\dim_{T}\mathbb{S}^{n}=n$
+が示せるが，証明は面倒である．
+しかしこの文章で証明を行う．
+\end{rmk}
+
+\section{前回までのあらすじ改・大きいのと小さい帰納的次元}
+
+\begin{df}
+$X$を位相空間とする．
+$S\subset X$とする．
+このとき$S$の境界集合を$\partial_{X}S$
+で表す．
+$x\in \partial_{X}S$であるとは
+任意の$x$の近傍$H$について
+$H\cap S\neq \emptyset$かつ
+$H\setminus S\neq \emptyset$
+を意味する．
+一般に$\partial_{X}S=\cl_{X}S\setminus \nai_{X}S$
+である．ここで$\cl_{X}$, $\nai_{X}$は$X$における閉包と
+開核を表す．
+\end{df}
+
+\begin{lem}\label{lem:par}
+$X$を位相空間とし，
+$A\subset S\subset X$とする．このとき
+$\partial_{S} A\subset S\cap \partial_{X}A$
+が成り立つ．
+\end{lem}
+\begin{proof}
+一般に位相空間$T$と$M\subset T$について
+$P\subset M\subset H$となる開集合$O$と閉集合$C$
+について$\partial_{T}M\subset H\setminus P$
+であり，$\partial_{T}M=\cl_{T}(A)\setminus \nai_{T}(A)$
+に注意しよう．
+
+さて，$O=\nai_{X}A$で$C=\cl_{X}A$とおく．
+すると$O\cap S$と$C\cap S$はそれぞれ
+$S$の開集合と閉集合で$O\cap S\subset A\subset C\cap S$を満たす．
+よって
+$\partial_{S}A\subset (C\cap S)\setminus (O\cap S)$
+を満たす．
+ここで
+$(C\cap S)\setminus (O\cap S)=
+(C\setminus O)\cap S=(\cl_{X}A\setminus \nai_{X}A)\cap S=\partial_{X}S$
+となる．
+これは
+$\partial_{S}A\subset \partial_{X}S$を意味する．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:partial}
+$X$を位相空間とし，$N\subset A\subset X$とする．
+すると
+$N$が$A$の開集合であるとき
+$\partial_{A} N=A\cap (\cl_{X}(N)\setminus N)$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$\partial_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)$
+である．
+ここで$N$は$A$の開集合なので
+$\nai_{A}N=N$である．
+そして
+$\cl_{A}(N)=A\cap \cl_{X}N$
+なので\footnote{この等式は一般に成り立つ}
+すると
+$\partial_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)
+=A\cap \cl_{X}N\setminus N=A\cap (\cl_{X}N\setminus N)$
+が成り立つ．
+\end{proof}
+
+
+
+
+\begin{lem}\label{lem:jojo111}
+$X$を可分距離化可能空間とし，
+$A$を
+$A\subset X$で
+$\dim_{T}A=0$とする．
+そして$K$を
+$X$の閉集合とし$X$の開集合
+$U$は$K\subset U$
+を満たしているとする．
+このとき$X$内の
+開集合$W$が存在して
+$K\subset W\subset U$と
+$A\cap \partial_{X} W=\emptyset$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$X$の正規性から開集合
+$V$であって
+$K\subset V$
+と$\cl_{X}(V)\subset U$
+となるものをとる．
+そして$L=\cl_{X}(V)$とおく．
+ここで
+$\dim_{T}A=0$より
+$K\cap A$の
+近傍
+$N\subset A$で
+$L\cap A\subset N\subset U\cap A$
+となるものが存在する．
+ここで
+$\partial_{A}N=\emptyset$に注意しよう．
+いま
+$N$と$A\setminus \cl_{X}(N\cup L)$について考える．
+明らかに
+\[
+\cl_{X}(N)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset
+\]
+であり
+\begin{align*}
+&\cl_{X}(K)\cap (A\setminus \cl_{X}(N\cup L))\\
+&\subset
+\cl_{X}(K)\cap (A\setminus \cl_{X}(N))
+ \\
+&\subset \cl_{X}(K)\cap (A\setminus (L\cap A))\\
+&\subset \cl_{X}(K)\cap(A\setminus (K\cap A))\\
+&=K\cap (A\setminus (K\cap A))\\
+&=(K\cap A)\setminus (K\cap A)\\
+&=\emptyset
+\end{align*}
+であるから
+$\cl_{X}(N\cup K)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset$
+である．
+さらに
+\begin{align*}
+&N\cap 
+\cl_{X}(A\setminus \cl_{X}(N\cup L))\\
+&\subset N\cap 
+\cl_{X}(A\setminus \cl_{X}(N))\\
+&=
+N \cap A\cap \cl_{X}(A\setminus \cl_{X}(N))
+\\
+&=
+N\cap A\cap \cl_{A}(A\setminus (A\cap \cl_{X}(N)))
+\\
+&=
+N\cap 
+A\cap \cl_{A}(A\setminus \cl_{A}(N))\\
+&=
+N\cap 
+\cl_{A}(A\setminus \cl_{A}(N))
+\\
+&=
+N\cap (
+(A\setminus \cl_{A} N)\cup \partial_{A} N)
+\\
+&=
+N\cap (A\setminus \cl_{A} N)=\emptyset
+\end{align*}
+である．
+また
+$K\subset V$であることと$X\setminus V$が閉集合であることから
+\begin{align*}
+&K\cap 
+\cl_{X}((A\setminus \cl_{X}(N\cup L))\\
+&\subset K\cap \cl_{X}(A\setminus \cl_{X}(L))\\
+&=
+K\cap \cl_{X}(A\setminus L)\\
+&\subset K\cap \cl_{X}(X\setminus L)\\
+&\subset K\cap \cl_{X}(X\setminus V)\\
+&\subset K\cap (X\setminus V)\\
+&\subset V\cap (X\setminus V)\\
+&=\emptyset
+\end{align*}
+がわかる．
+故に
+$(N\cup K)\cap \cl_{X}(A\setminus \cl_{X}(N))=\emptyset$
+である．
+以上のことから$N\cup K$と$A\setminus \cl_{X}(N\cup L)$
+は互いにもう一方の閉包と交わらない．
+よって$X$の完全正規性から$X$の開集合$W$が存在して
+$N\cup K\subset W$と
+$\cl_{X}(W)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset$を満たす．
+後半の条件から
+\[
+A\cap \cl_{X}W\subset A\cap \cl_{X}(N\cup L)
+\]がわかる．
+ここで$\cl_{X}(N\cap L)=\cl_{X}N\cup \cl_{X}L=\cl_{X}N\cup L$であり，$L\cap A\subset N$なので
+\[
+A\cap \cl_{X}W\subset A\cap \cl_{X}N
+\]
+がわかる．
+必要なら$W$を$V\cap W$に置き換えて$W\subset V$としてもよい．
+さて以上と補題 \ref{lem:partial}を踏まえると
+\begin{align*}
+A\cap 
+\partial_{X} W
+&=
+A\cap (\cl_{X}(W)\cap (X\setminus W))
+\subset 
+A\cap \cl_{X}(N)\cap (X\setminus N)
+\\
+&=A\cap (\cl_{X}(N)\setminus N)
+=\partial_{A}N=\emptyset
+\end{align*}
+を得る．
+ゆえに$A\cap \partial_{X} W=\emptyset$がわかる．
+\end{proof}
+
+
+\begin{thm}\label{thm:boundary2222}
+$n\in \zz_{\ge 0}$とし$X$を可分距離化可能空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:26len}
+$\dim_{T} X\le n$である．
+\item\label{item:26largeind}
+$X$の任意の閉集合$K$と任意の開集合$U$が
+$K\subset U$を満たしているならば
+開集合$V$が存在して
+$K\subset V\subset \cl_{X}V\subset U$
+かつ$\dim_{T}\partial_{X}V\le n-1$
+\item\label{item:26smallind}
+$X$の開基$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して$\dim_{T}\partial_{X} V_{i}\le n-1$
+である．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+[$\ref{item:26len}\To \ref{item:26largeind}$の証明]: 
+\ref{item:26len}，つまり$\dim_{T} X\le n$
+という仮定から
+$X$の部分集合$A_{0}, \dots, A_{n}$
+が存在して
+$\dim_{T}A_{i}\le 0$
+と$\bigcup_{i=0}^{n}A_{i}=X$
+を満たす．
+ここで$X$の
+$X$の任意の閉集合$K$と任意の開集合$U$が
+$K\subset U$を満たしているとしよう．
+すると
+補題 \ref{lem:jojo111}より，
+$X$の開集合$V$が存在して
+$K\subset V$
+と
+$\cl_{X}V\subset U$と
+$A_{0}\cap \partial_{X}V=\emptyset$
+を満たす．
+すると$\dim_{T}$の定義より$\dim_{T}\partial_{X}V\le n-1$となる．
+これで
+ \ref{item:26largeind}が示された．
+
+[$\ref{item:26largeind}\To \ref{item:26smallind}$の証明]: 
+$X$の可算開基$\mathcal{B}=\{B_{i}\}_{i\in \zz_{\ge 0}}$
+をとる．
+そして
+\[
+\mathcal{C}=\{\, (B_{i}, B_{k})\mid B_{i}, B_{k}\in\mathcal{B},   \cl(B_{i})\subset B_{k}\, \}
+\]
+と定義する．
+このとき$\mathcal{C}$はたかだか可算集合であることに注意しよう．
+そして
+$(B_{i}, B_{k})\in \mathcal{C}$となる$B_{i}$と$B_{k}$について
+$\cl_{X}(B_{i})$と$B_{k}$に
+条件\ref{item:26largeind}を適応して
+開集合$V_{i, k}$で
+$\cl_{X}(B_{i})\subset V_{i, k}$と
+$\cl(V_{i, k})\subset B_{k}$
+そして$\dim_{T}\partial_{X}V_{i, k}\le n-1$
+となるものが存在する．
+このとき$\{V_{i, k}\}$は
+$X$の開基になるので
+\ref{item:26smallind}が示された．
+
+[$\ref{item:26smallind}\To \ref{item:26len}$の証明]: 
+今$X$の開基$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して$\dim_{T}\partial_{X} V_{i}\le n-1$
+を満たすとする．
+このとき定理 \ref{thm:sumsum}
+より$S=\bigcup_{i\in \zz_{\ge 0}}\partial_{X}V_{i}$
+は$\dim_{T}S\le n-1$を満たす．
+さらに$A=X\setminus S$とおくと，
+$\{A\cap V_{i}\}_{i\in \zz_{\ge 0}}$
+は$A$の開基になる．
+そして補題 \ref{lem:par}より
+$\partial_{A}V_{i}\subset A\cap \partial_{X}V_{i}=\emptyset$
+なので$\dim_{T}A\le 0$がわかる．
+そして$X=S\cup A$なので補題 \ref{lem:plpl}
+より$\dim_{T} X\le n$がわかる．
+\end{proof}
+
+
+
+\begin{df}[小さい帰納次元]
+空間$X$の小さい帰納次元を帰納的$\ind X$に次のように定義する。\par
+$\ind X=-1\iff X=\O$とし、$n-1$まで定義されたとして\par
+$\ind X\le n\iff$$X$の任意の点$x$と$x$の任意の近傍$U$に対して$x$の近傍$N$が存在して$\ind (\bd N)\le n-1$かつ$N\subset U$を充たす。\par
+と定義する。ちなみに$\ind X=n$とは$\ind X\le n$かつ$n-1<\ind X$である。
+\end{df}
+
+伝統的な
+小さい帰納次元と大きい帰納次元の定義を紹介する．
+\begin{df}[小さい帰納次元]
+空間$X$の小さい帰納次元を帰納的$\ind X$に次のように定義する。\par
+$\ind X=-1\iff X=\O$とし、$n-1$まで定義されたとして\par
+$\ind X\le n\iff$$X$の任意の点$x$と$x$の任意の近傍$U$に対して$x$の近傍$N$が存在して
+$\ind (\bd N)\le n-1$かつ$N\subset U$を充たす。\par
+と定義する。ちなみに$\ind X=n$とは$\ind X\le n$かつ$n-1<\ind X$である。
+\end{df}
+\begin{df}[大きい帰納次元]
+空間$X$の大きい帰納次元を帰納的
+$\lind X$に次のように定義する。\par
+$\lind X=-1\iff X=\emptyset$とし、$n-1$まで定義されたとして\par
+$\lind X\le n\iff$$X$の
+閉集合$K$と開集合$U$で
+$K\subset U$を満たすものについて
+開集合$V$が存在して
+$K\subset V$と
+$\cl V\subset U$そして
+$\lind\partial V\le n-1$
+を満たす．
+\par
+と定義する。ちなみに$\lind X=n$とは$\lind X\le n$かつ$n-1<\lind X$である。
+\end{df}
+
+
+定理\ref{thm:boundary2222}から次のことが従う．
+\begin{cor}\label{cor:inddim}
+可分距離化可能空間$X$について
+$\ind X=\lind X=\dim_{T}X$
+\end{cor}
+
+\begin{rmk}
+本来は$\ind$を定義したのちに
+$\ind \le n$ならば$n+1$個の$0$
+次元空間の和集合としてかけることを証明するのだが，
+この文章では逆にそちらを位相次元の定理にしている．
+\end{rmk}
+
+
+
+\begin{lem}\label{lem:nnn}
+$n\in \zz_{\ge 0}$とする．
+このとき
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つ．
+\end{lem}
+\begin{proof}[\textbf{$\ind$を使った別証明}]
+$m\in \zz_{\ge 1}$とする．
+$\rr^{m+1}$と$\mathbb{S}^{m+1}$
+はともに境界が$\mathbb{S}^{m}$
+となる開集合からなる開基を持つ．
+よって$\dim_{T}\rr^{m+1}\le \dim_{T}\mathbb{S}^{m}$
+と
+$\dim_{T}\mathbb{S}^{m+1}\le \dim_{T}\mathbb{S}^{m}$
+が成り立つ．
+$\mathbb{S}^{1}$
+は境界が2点になるような開集合からなる開基を持つから
+$\dim_{T}\mathbb{S}^{1}\le 1$
+である．もしくは$\rr$が有理数と無理数という二つの$0$
+次元集合の和であることと$\mathbb{S}^{1}$
+が$\rr$の一点コンパクト化であることを用いても
+$\dim_{T}\mathbb{S}^{1}\le 1$
+であることがわかる．
+よって帰納的に
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つことがわかる．
+\end{proof}
+
+
+\section{今回のお話}
+
+\begin{prop}[ウリゾーンの補題のちょっと良い版]\label{prop:zerosetfunc}
+$X$を距離化可能空間とし，
+$F$と$H$をその閉集合とし，$F\cap H=\emptyset$
+と仮定する．
+このとき
+連続写像$f\colon X\to [0, 1]$
+で
+$f^{-1}(\{0\})=F$かつ
+$f(H)\subset \{1\}$
+となるものが存在する．
+\end{prop}
+\begin{proof}
+$X$の位相を生成する距離関数を
+$h$とする．
+必要なら$\min\{h, 1\}$と取り替えることによって
+最初から
+$h\le 1$と仮定しても良い．
+さてウリゾーンの補題から
+連続写像
+$g\colon X\to [0, 1]$
+であって
+$g(F)\subset \{0\}$
+かつ
+$g(H)\subset \{1\}$
+を満たすものが
+存在する．
+このとき
+$d\colon X\times X\to [0, \infty)$
+を
+$d(x, y)=\max\{h(x, y), |g(x)-g(y)|\}$
+と定義する．
+すると
+$g$の連続性から
+$h$の位相に関する仮定から
+$d$も$X$と同じ位相を生成する．
+このとき$g$の取り方から
+$d(F, H)=1$になることに注意せよ(一般に交わらない閉集合同志の距離が$0$になることがある．そういう状況を避けるために上記のような距離の修正をしている)．
+そして$f\colon X\to [0, 1]$を
+$f(x)=d(x, F)$と定義すると
+この$f$は求める条件を全て満たす．
+\end{proof}
+\begin{rmk}
+実際は
+距離空間であることを用いると
+$F=f^{-1}(\{0\})$
+かつ
+$H=f^{-1}(\{1\})$
+となる連続写像の存在が示せるが，
+そこまで強い性質の写像の存在は以下では使わない．
+どうやって構成するかというと，
+命題
+\ref{prop:zerosetfunc}を$F$と
+$H$に２回適応して適当にアフィン変換を噛ませて$g\colon X\to [0, 1]$
+と$u\colon X\to [1/2, 1]$
+で$F=g^{-1}(\{0\})$, $H\subset g^{-1}(\{1\})$, 
+$F\subset u^{-1}(\{1/2\})$, 
+$H=u^{-1}(\{1\})$
+となるものを得る．
+そして
+$f\colon X\to [0, 1]$
+を
+$f(x)=g(x)\cdot u(x)$
+と定義すると，
+$F=f^{-1}(\{0\})$
+かつ
+$H=u^{-1}(\{1\})$
+となる．
+このようなことは一般的には
+$X$が正規空間で
+$F$
+と$H$が
+ともに$G_{\delta}$閉集合であるときに成り立つ．
+\end{rmk}
+
+
+\begin{df}
+$X$を位相空間とし
+$A$, $B$, $C$をその部分集合とする．
+$A\cap B=\emptyset$と仮定する．
+このとき\textbf{$C$が$A$と$B$を分離する}
+とは開集合$U$と$V$が存在して
+$A\subset U$, $B\subset V$, 
+$U\cap V=\emptyset$そして
+$X\setminus C=U\coprod V$
+を満たす時にいう．
+この時必然的に$C$は閉集合になることに注意しよう．
+\end{df}
+
+\begin{prop}\label{prop:zeroset2f}
+$X$を距離空間とし，
+$A$と$B$, $L$はその閉部分集合で
+$L$は$A$と$B$を分離しているとする．
+このとき連続写像
+$f\colon X\to [-1, 1]$
+で$f(A)\subset\{-1\}$, 
+$L=f^{-1}(\{0\})$, 
+$f(B)\subset \{1\}$
+を満たすものが存在する．
+\end{prop}
+\begin{proof}
+開集合$U$と$V$を
+$X\setminus L=U\cup V$
+で
+$U\cap V=\emptyset$, 
+$A\subset U$と$B\subset V$
+を満たすものとする．
+命題\ref{prop:zerosetfunc}
+を$U\cup L$と$V\cup L$にそれぞれ適応して
+連続写像
+$g\colon U\cup L\to [-1, 0]$
+と$h\colon V\cup L\to [0, 1]$
+で$g(A)\subset \{-1\}$, 
+$L=g^{-1}(\{0\})$, 
+$h(B)\subset \{1\}$, 
+$L=h^{-1}(\{0\})$
+を満たすものをとる．
+さてここで写像$f\colon X\to [-1, 1]$を
+\[
+f(x)=
+\begin{cases}
+g(x) & \text{$x\in U\cup L$}\\
+h(x) & \text{$x\in V\cup L$}
+\end{cases}
+\]
+と定義する．
+このとき
+$(U\cup L)\cap (V\cap L)=L$
+で$L$上では$g$と$h$が同じ値を取るので
+$f$が貼り合わさって，ちゃんと定義され，
+さらに連続写像になることがわかる．
+この$f$が求める条件を満たすのは$g$と$h$の満たす条件から従う．
+\end{proof}
+
+
+
+
+\begin{thm}\label{thm:n+1capset}
+$n\in \zz_{\ge 0}$とし，
+$X$を可分距離化可能空間で
+$\dim_{T}X\le n$を満たすものとする．
+そして
+$n+1$個の閉集合の組み
+$(A_{0}, B_{0})$\dots, 
+$(A_{n}, B_{n})$
+は
+$A_{i}\cap B_{i}=\emptyset$
+を満たすとする．
+このとき$n+1$個の$X$
+の閉集合$L_{0}$, \dots, $L_{n}$
+が存在して
+$L_{i}$は$A_{i}$と$B_{i}$を分離し，
+$\bigcap_{i=0}^{n}L_{i}=\emptyset$
+を満たす．
+\end{thm}
+\begin{proof}
+$\dim_{T}X\le n$なので，
+$R_{0}$, \dots, $R_{n}$が存在して
+$\dim_{T}R_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{n}R_{i}$
+を満たす．
+各$i$について
+$A_{i}$と$X\setminus B_{i}$
+と$R_{i}$に
+補題\ref{lem:jojo111}を適応して
+$X$の開集合$V_{i}$であって
+$A_{i}\subset V_{i}$
+と
+$\cl_{X}V_{i}\subset X\setminus B_{i}$
+そして$R_{i}\cap \partial_{X}V_{i}=\emptyset$
+を満たす．
+このとき
+$L_{i}=\partial_{X}V_{i}$
+とおけば
+$L_{i}$は
+$A_{i}$と
+$B_{i}$を分離し
+$R_{i}\cap L_{i}=\emptyset$
+である．
+このとき
+$R_{i}\cap \bigcap_{k=0}^{n}L_{k}\subset R_{i}\cap L_{i}=\emptyset$なので
+$\bigcap_{i=0}^{n}L_{i}=\emptyset$
+である．
+\end{proof}
+
+
+
+
+
+\begin{thm}\label{thm:n+1funczero}
+$n\in \zz_{\ge 0}$とし，
+$X$を可分距離化可能空間で
+$\dim_{T}X\le n$を満たすものとする．
+そして
+$n+1$個の閉集合の組み
+$(A_{0}, B_{0})$\dots, 
+$(A_{n}, B_{n})$
+は
+$A_{i}\cap B_{i}=\emptyset$
+を満たすとする．
+このとき各$i$ごとに
+連続写像$f\colon X\to [-1, 1]$が存在して
+$A_{i}\subset f^{-1}(\{-1\})$と
+$B_{i}\subset f^{-1}(\{1\})$
+そして
+$\bigcap_{i=0}^{n}f_{i}^{-1}(\{0\})=\emptyset$
+を満たす．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:n+1capset}
+より
+$n+1$個の閉集合
+$L_{0}$, 
+\dots, 
+$L_{n}$
+が存在して
+$L_{i}$は
+$A_{i}$と$B_{i}$を分離し，
+$\bigcap_{i=0}^{n}L_{i}=\emptyset$
+を満たすものが存在する．
+そして
+命題 
+\ref{prop:zeroset2f}
+より
+連続写像
+$f_{i}\colon X\to [-1, 1]$であって，
+$A_{i}\subset f^{-1}(\{-1\})$
+と
+$B_{i}\subset f^{-1}(\{1\})$
+および
+$f^{-1}(\{0\})=L_{i}$を満たすものが存在する．
+このとき$L_{i}$の性質から
+$\bigcap_{i=0}^{n}f^{-1}(\{0\})=\emptyset$
+となる．
+\end{proof}
+
+\begin{df}
+$n\in \zz_{\ge 0}$
+とする．
+位相空間$X$上の二つの連続写像$f_{0}, f_{1}\colon X\to \rr^{n}$について
+連続写像$H\colon X\times [0, 1]\to \rr^{n}$
+が\textbf{$f_{0}$と$f_{1}$を結ぶ一様ホモトピー}であるとは
+$H(x, 0)=f_{0}(x)$, $H(x, 1)=f_{1}(x)$を満たしそして
+任意の$\epsilon\in (0, \infty)$についてある$\delta\in (0, \infty)$が存在して
+$s, t\in [0, 1]$が$|s-t|$を満たすならば
+任意の$x\in X$について
+$\lVert H(x, s)-H(x, t)\rVert<\epsilon$
+が成り立つときにいう．
+このような$H$が存在するときに
+$f_{0}$と$f_{1}$は
+\textbf{一様ホモトピック}と呼ぶことにする．
+\end{df}
+
+
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+このとき
+$\mydisc{n}=\{\, x\in \rr^{n}\mid \lVert x \rVert\le 1\, \}$
+とし
+$\mysphere{n-1}=\{\, x\in \rr^{n}\mid \lVert x \rVert=1\, \}$
+と定義する．ここでノルム$\lVert *\rVert$は通常の内積から誘導されるノルムとする．つまり
+$\mydisc{n}$は$n$次元閉球体で
+$\mysphere{n-1}$はその境界である$n-1$次元球面である．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とし，
+$i\in \{1, \dots, n\}$
+とする．
+このとき
+$\mycube{n}=[-1, 1]^{n}$
+と定義し
+$\mycubesidep{n}{i}=\{\, x\in \mycube{n}\mid x_{i}=1\, \}$
+で
+$\mycubesidep{n}{i}=\{\, x\in \mycube{n}\mid x_{i}=-1\, \}$
+と定義する．
+さらに
+$\mycubebd{n}$を$\mycube{n}$の境界集合
+とする．
+このとき
+$\mycubebd{n}=\bigcup_{i=1}^{n}\mycubesidep{n}{i}\cup \mycubesidem{n}{i}$
+であることに注意しよう．
+また
+$\mycube{n}$
+は$\mydisc{n}$に同相であり，
+$\mycubebd{n}$は
+$\mysphere{n-1}$
+に同相であることにも注意しよう．
+\end{df}
+
+
+
+\begin{prop}\label{prop:26homotopy}
+$n\in \zz_{\ge 0}$
+とし$X$を
+$T_{1}$正規空間とし
+$A$をその閉集合とする．
+このとき二つの写像
+$f_{0}\colon A\to \mysphere{n}$と
+$f_{1}\colon A\to \mysphere{n}$
+が一様ホモトピックであるとする．
+このとき$f_{0}$が$X$への拡張
+$g_{0}\colon X\to \mysphere{n}$
+を持つならば
+$f_{1}$も拡張
+$g_{1}\colon X\to \mysphere{n}$
+を持つ．
+\end{prop}
+\begin{proof}
+連続写像$H\colon A\times [0, 1]\to \rr^{n+1}$
+を$f_{0}$と$f_{1}$を結ぶ一様ホモトピーとする．
+このとき一様ホモトピーの定義から
+適切に$[0, 1]$の有限点列$r_{0}\dots, r_{m}$をとれば
+任意の$x\in X$と$i\in\{0, \dots, m-1\}$について
+$\lVert H(x, r_{i})-H(x, r_{i+1})) \rVert<1$
+が成り立つ．
+よって$f_{0}$と$f_{1}$が一様ホモトピックであるという仮定の代わりに
+$\lVert f_{0}(x)-f_{1}(x)\rVert<1$を満たすという仮定の元で
+定理を証明すれば上記の$H(x, r_{i})$を使って帰納的に
+定理を証明することができる．以下では$\lVert f_{0}(x)-f_{1}(x)\rVert<1$の仮定の元$f_{1}$の拡張を構築する．
+
+まずティーチェの拡張定理を使って
+$f_{1}$の拡張となる連続関数
+$g\colon X\to \rr^{n+1}$
+を得る．
+そして
+\[
+V=\{\, x\in X\mid \lVert g_{0}(x)-g(x) \rVert<1\, \}
+\]
+と定義すると$V$は開集合である．
+ここで$A$上で
+$\lVert f_{0}(x)-f_{1}(x)\rVert <1$となるという仮定から
+$A\subset V$である．
+さてウリゾーンの補題から
+連続写像$\phi\colon X\to [0, 1]$
+で
+$A$上で$1$を常にとり$X\setminus V$上で
+恒等的に$0$となるものが存在する．
+ここで$h\colon X\times [0, 1]\to \rr^{n+1}$
+を
+\[
+h(x, t)=(1-t)g_{0}(x)+tg(x)
+\]
+と定義するとこれは連続写像になる．
+今から$h(x, \phi(x))$が任意の$x\in X$
+についてノンゼロであることを証明しよう．
+
+まず$x\in V$については$g_{0}$の値域は
+$\mysphere{n}$なので
+任意の$t\in [0, 1]$について
+以下の計算を得る．
+\begin{align*}
+\lVert h(x, t)\rVert&\ge 
+\lVert g_{0}(x)\lVert -\lVert g_{0}(x)-h(x, t) \rVert\\
+&=\lVert g_{0}(x)\lVert -\lVert tg_{0}(x)-tg(x) \rVert\\
+&=\lVert g_{0}(x)\lVert -t\lVert g_{0}(x)-g(x) \rVert\\
+&\ge \lVert g_{0}(x)\lVert -1\cdot \lVert g_{0}(x)-g(x) \rVert\\
+&>\lVert g_{0}(x)\lVert -1\\
+&=0
+\end{align*}
+つまり
+$h(x, t)\neq 0$
+である．
+特に$h(x, \phi(x))\neq 0$である．
+
+次に$x\not \in V$の時は$\phi(x)$が$0$の値を取り続けることから
+恒等的に$h(x, \phi(x))=g_{0}(x)$
+である．特に$h(x, \phi(x))\neq 0$
+である．
+以上から任意の$x\in X$
+で$h(x, \phi(x))\neq 0$となることがわかった．
+そこで$g_{1}\colon X\to \mysphere{n}$
+を
+\[
+g_{1}(x)=\frac{h(x, \phi(x))}{\lVert h(x, \phi(x))\rVert}
+\]
+と定義すれば
+$x\in A$上では確かに$f_{1}$と一致する．
+これで証明が終わる．
+\end{proof}
+
+\begin{thm}\label{thm:sphereext}
+$n\in \zz_{\ge 0}$とする．
+そして$X$を可分距離化可能空間で
+$\dim_{T}X\le n$を満たしているとする．
+このとき任意の閉集合$A$上の
+任意の連続関数
+$f\colon A\to \mysphere{n}$は
+$X$上への拡張となる連続関数
+$g\colon X\to \mysphere{n}$
+を持つ．
+\end{thm}
+\begin{proof}
+位相的には同じなので
+$\mysphere{n}$と$\mycubebd{n+1}$
+を同一視する．
+よって$f$は$f\colon A\to \mycubebd{n+1}$である．
+そして$f=(f_{1}, \dots, f_{n+1})$
+とし
+\[
+K_{i}=\{\, x\in A\mid f_{i}(x)=-1\, \}
+\]
+\[
+L_{i}=\{\, x\in A\mid f_{i}(x)=1\, \}
+\]
+とすると
+$K_{i}$と$L_{i}$
+は$X$の閉集合でなおかつ$K_{i}\cap L_{i}=\emptyset$
+を満たしさらに
+\[
+A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})
+\]
+となる．
+ここで
+定理
+\ref{thm:n+1funczero}
+から各$i$について
+連続写像$u_{i}\colon X\to [-1, 1]$
+が存在して
+$K_{i}\subset u_{i}^{-1}(\{-1\})$, 
+$L_{i}\subset u_{i}^{-1}(\{1\})$
+を満たしさらに
+$\bigcap_{i=1}^{n+1}u_{i}^{-1}(\{0\})=\emptyset$
+となるものが存在する．
+ここで
+\[
+u\colon X\to [-1, 1]^{n+1}
+\]
+を$u=(u_{1}, \dots, u_{n})$
+と定義する．
+ここで
+$A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})$と
+$u_{i}$の性質から$x\in A$のとき
+$u(x)$は$\mycubebd{n+1}$
+への写像になる．ここで
+$v=u|_{A}\colon A\to \mycubebd{n+1}$とおく．
+そして$H\colon [0, 1]\to \rr^{n+1}$
+を
+\[
+H(x, t)=(1-t)v(x)+tf(x)
+\]
+と定義する．
+この$H$が一様ホモトピーとなることを見よう．
+任意の$s, t\in [0, 1]$に対して
+\[
+\lVert H(x, s)-H(x, t)\rVert=|s-t|\cdot \lVert v(x)-f(x) \rVert
+\]
+となる．$v$と$f$の値域はともに$\mycubebd{n+1}$であるから適切な実数$M>0$が存在して
+任意の$x\in A$について$\lVert v(x)-f(x)\rVert<M$
+であるから$H$は$v$と$f$を結ぶ一様ホモトピーである．
+
+ここで$v$が$X$上へ拡張できることを見よう．
+関数$v$は$u$の制限であった．
+そして
+$\bigcap_{i=1}^{n+1}u_{i}^{-1}(\{0\})=\emptyset$であるから$u$の像には$0$を含んでいないので，$0$から
+$u(x)$へ直線を伸ばして$\mycubebd{n+1}$との交点を
+$w(x)$と定義するとこれは$A$上では$v$に一致する
+連続関数$w\colon X\to \mycubebd{n+1}$である．
+よって$v$は$X$への拡張$w\colon X\to \mycubebd{n+1}$
+を持つ．
+よって一様ホモトピー$H$の存在から
+命題\ref{prop:26homotopy}
+より
+$f$は拡張
+$g\colon X\to \mysphere{n}$
+を持つ．
+\end{proof}
+
+
+
+\begin{rmk}
+実はこれらの性質は正規空間上での被覆次元の特徴づけになっているのだが，ここではその話は省略する．長いので．
+被覆次元の話も省略する．もしかしたらこの文章の続きを書く可能性がなくもない．
+\end{rmk}
+
+
+
+\section{領域不変性定理}
+
+以下の定理により
+ユークリッド空間内のコンパクト部分集合$K$の境界点は
+$K$の位相的言明のみで特徴付できることがわかる．
+これが領域不変性定理の肝である．
+\begin{thm}\label{thm:26junbidaiji}
+$n\in \zz_{\ge 1}$
+とし
+$K$を$\rr^{n}$
+のコンパクト部分集合とする．
+このとき$p\in \partial_{\rr^{n}} K$
+となるための必要十分条件は
+$p$の$K$内の任意の近傍
+$N$について
+$p$
+の$K$内の開近傍$U$
+であって$U\subset N$を満たしかつ
+任意の連続写像
+$f\colon K\setminus U\to \mysphere{n-1}$
+は連続な拡張$g\colon K\to \mysphere{n-1}$
+を持つようなものが存在することである．
+\end{thm}
+\begin{proof}
+まず最初に$p\in \partial K$を仮定して定理の条件を導く．
+$N$を$p$の任意の近傍とする．
+そして$B$を$p$を中心とする十分小さい半径を持つ開球で
+$K\cap B\subset N$
+を満たすものとする．
+このとき$U=K\cap B$
+が条件を満たすことを見よう．
+ここで$L=\partial B$とすると$L$は
+$\mysphere{n-1}$
+と同相である．
+今ここで任意の連続写像
+$f\colon K\setminus U\to \mysphere{n-1}$
+を考える．
+ここで$K\setminus U$は
+$K$の閉集合である．
+特に$\rr^{n}$の閉集合でもある．
+ここで
+$\dim_{T}L\le n-1$
+なので
+$\dim_{T}(K\cap L)\le n-1$
+である．
+ここで$L\cap K\subset K\setminus U$
+に注意して
+定理
+\ref{thm:sphereext}
+から連続写像
+$f|_{L\cap K}\colon L\cap K\to \mysphere{n-1}$
+の拡張である連続写像
+$u\colon L\to \mysphere{n-1}$
+を得る．
+さて$L$と$K\setminus U$の共通部分は$L\cap K$
+で，この上では$u$と$f$は同じ値を取るので写像が貼り合わさって連続写像
+$h\colon (K\setminus U)\cup L\to \mysphere{n-1}$
+を得る．
+そして$p$が$K$
+の境界なので
+$B$の点であって$K$に属さないもの$q$を取ることができる．
+任意の点$x\in K$について
+$q$から$x\in K$へ伸ばした直線と
+$L$との交点を$b(x)$とする．
+このとき$b\colon X\to L$
+は連続写像である．
+そして$g\colon X\to \mysphere{n-1}$を
+\begin{align*}
+g(x)
+=
+\begin{cases}
+h(b(x)) & \text{$x\in U\cup (L\cap K)$}\\
+f(x) & \text{$x\in K\setminus U$}
+\end{cases}
+\end{align*}
+と定義すると
+これら二つの関数$h(b(x))$と$f(x)$は$L\cap K$上で値が一致するのでちゃんと張り合って連続関数になる．
+この$g$はちゃんと$f$の拡張になっている．
+
+逆に$p\in K$が
+定理の条件を満たすとしよう．
+背理法のために$p\in K$は$K$
+の内点であるとする．
+ここで$p$を中心とする十分小さい半径を持つ
+開球$B$で$\cl B\subset K$となるものを考える．
+すると定理の仮定より$p$の開近傍$U$で
+$U\subset B$
+で任意の連続関数$f\colon K\setminus U\to \mysphere{n-1}$が$K$上に拡張するものが存在する．
+ここで写像
+$f\colon K\setminus U\to \mysphere{n-1}$
+を以下のように定義する．
+点$p$から$x\in K\setminus U$へと直線を伸ばし
+$\partial B$との交点を$f(x)$とする．
+これは連続写像で$\partial B$は$\mysphere{n-1}$
+と同相なので
+ちゃんと連続写像
+$f\colon K\setminus U\to \mysphere{n-1}$
+を得る．このとき
+$f$は$\partial B$上で恒等写像になることに注意しよう．
+すると定理の条件より
+連続写像$g\colon K\to \mysphere{n-1}$
+が存在する．
+さて$\cl B\subset K$であった．
+このとき$g|_{\cl B}\colon \cl B\to \partial B$
+を考えると
+$g|_{\cl B}$
+は$\cl B$から
+$\partial B$
+へのレトラクトになる．
+これはNo retract theorem に矛盾するので
+$p\in K$は境界点でなければならない．
+\end{proof}
+
+\begin{rmk}
+上記の定理において非自明な部分は
+球面への写像を拡張する
+定理
+\ref{thm:sphereext}
+と
+No retract Theorem である．
+さらに
+定理
+\ref{thm:sphereext}は
+$X=\mysphere{n-1}$
+に対するものだけを用いているし，
+$\mysphere{n-1}$を南と北の半球に分ければ，
+結局利用しているのは
+$n-1$次元円盤$\mydisc{n-1}$
+(あるいは$n-1$次元立方体)
+に対する定理
+\ref{thm:sphereext}
+のみである．
+なので，No retract Theorem は楽に証明する方法は特にないが(せいぜい積分の変数変換を使う方法など)，円盤に対する定理
+\ref{thm:sphereext}は
+簡単に証明できる可能性があり，
+領域不変性定理もある程度楽になる可能性がある．
+\end{rmk}
+
+
+いよいよ領域不変性定理を証明する．
+\begin{thm}[領域不変性定理]\label{thm:maininvdomain}
+$n\in \zz_{\ge 1}$
+とし
+$U$は$\rr^{n}$
+の開集合とする．
+そして
+$f\colon U\to \rr^{n}$
+を連続単射とする．
+このとき$f(U)$
+は$\rr^{n}$の開集合である．
+\end{thm}
+\begin{proof}
+任意の$p\in U$について
+$f(p)$が$f(U)$の内点であることを証明すれば良い．
+$p$の十分小さい近傍$N$で$\cl N$がコンパクトで
+$\cl N \subset U$であるものをとる．
+このとき$f|_{\cl N}$を考えると
+$f$はコンパクト集合からハウスドルフ空間への
+連続単射なので位相的埋め込みになる．
+定理\ref{thm:26junbidaiji}より
+点$p$が境界点かどうかは$\cl N$の内在的な位相的条件で特徴づけられる．つまり$p$は$\cl N$の内点であるから
+$f(p)$は$f(\cl N)$の内点になる．
+よって特に$f(p)$は$f(U)$の内点である．
+\end{proof}
+
+
+\begin{cor}
+$M$と$N$を同じ次元の境界つき多様体とし
+$f\colon M\to N$を同相写像とする．
+このとき$f$は$\partial M$を$\partial N$に移す．
+\end{cor}
+\begin{proof}
+もしも$f$が$p\in \partial M$を$N\setminus \partial N$
+に移すと，$f^{-1}$を考えることによって局所的には
+ユークリッド空間の内点が$p$に写っていることになるが，
+$p$は上半平面の境界点なので領域不変性定理に矛盾する．
+\end{proof}
+
+
+\section{ユークリッド空間の次元}
+
+電波通信
+\cite{dempa2}で
+以下のことを証明した．
+
+\begin{thm}\label{thm:zenkaidouchi}
+$n\in \zz_{\ge 1}$について以下は同値であり，
+また，\ref{item:noret}もしくは
+\ref{item:fixedpt}は成り立つことがよく知られているので，
+以下のすべての主張は正しい．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+
+\item\label{item:noret}(No retraction theorem)
+レトラクション
+$r\colon \mydisc{n}\to \mysphere{n-1}$
+は存在しない．
+
+\item\label{item:fixedpt}(Brouwer's fixed point theorem)
+任意の連続写像
+$f\colon \mydisc{n}\to \mydisc{n}$
+は不動点を持つ．
+
+\item\label{item:ccc}
+$i\in \{1, \dots, n\}$を添字とする
+閉集合$C_{i}\subset \mycube{n}$
+の族が$\mycubesidep{n}{i}$
+と$\mycubesidem{n}{i}$
+を分離するならば
+$\bigcap_{i=1}^{n}C_{i}\neq \emptyset$
+を成り立つ．
+
+
+\item\label{item:pm}(the Poincar\'{e}-Miranda theorem)
+$i\in \{1, \dots, n\}$を添字とする連続写像の族
+$f_{i}\colon \mycube{n}\to \rr$が
+$f_{i}(\mycubesidep{n}{i})\subset [0, \infty)$
+と
+$f_{i}(\mycubesidem{n}{i})\subset (-\infty, 0]$
+を満たすならば，
+ある点$p\in \mycube{n}$
+が存在して
+$f_{i}(p)=0$が成り立つ．
+つまり共通零点が存在する．
+\end{enumerate}
+\end{thm}
+
+この定理
+\ref{thm:zenkaidouchi}
+の\ref{item:ccc}，もしくは\ref{item:pm}と
+定理\ref{thm:n+1capset}
+の対偶
+あるいは
+定理
+\ref{thm:n+1funczero}
+の対偶
+を使うと以下の定理を得る．
+
+\begin{thm}\label{jigen}
+$n\in \zz_{\ge 1}$
+とする．
+このとき
+$\mydisc{n}$と
+$\rr^{n}$の次元はちょうど$n$である．
+\end{thm}
+
+\begin{cor}\label{cor:mnonaji}
+$n, m\in \zz_{\ge 1}$とする．
+もしも$\rr^{m}$と$\rr^{n}$
+が同相ならば$m=n$
+である．
+\end{cor}
+\begin{cor}
+$n, k\in \zz_{\ge 0}$とする．
+$\rr^{n}$の部分集合
+$A_{1}\dots, A_{k}$
+は$\dim_{T} A_{i}\le 0$
+と
+$\rr^{n}=\bigcup_{i=1}^{k}A_{i}$
+が成り立っているとする．
+このとき$n+1\le k$である．
+\end{cor}
+
+
+定理
+\ref{thm:zenkaidouchi}
+定理\ref{thm:maininvdomain}
+系 \ref{cor:mnonaji}はなんだか
+同値っぽい感じがする．
+もちろん正しい命題はすべて同値になるのだが，もうちょっと深い意味で同値のような感じがする．
+実際\cite{kihara}では，この同値っぽさを逆数学の上で論じている．逆数学に詳しくないので私は深くは解説できないのだ．
+
+
+ところで次元論を仲介しない領域不変性定理の証明は
+テレンス・タオ\cite{tao}がブログで証明しているようだ．
+この証明に対して伝統的な証明はなんなんだと興味を持ったのがこの文書を書くきっかけになった．
+
+\begin{thebibliography}{99}
+
+\bibitem{dempafx}
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+
+
+\bibitem{dempa}
+
+電波通信, 「次元論ショートコース：0次元から始める位相次元」, 
+https://concious4410.hatenablog.com/entry/2022/03/12/161532
+
+
+\bibitem{dempa2}
+電波通信, 「不動点定理と同値な命題」, 
+https://concious4410.hatenablog.com/entry/2026/04/05/181441
+
+\bibitem{chara}
+M. G. Charalambous, 
+\textit{Dimension theory. A selection of theorems and counterexamples} Springer/Atlantis Press (2019). 
+
+\bibitem{HW}W. Hurewicz and H. Wallman,\textit{Dimension Theory},Princeton Univ. Press,1948
+
+
+\bibitem{kihara}
+T. Kihara, 
+\textit{The Brouwer invariance theorems in reverse mathematics},
+Forum of Mathematics, Sigma,
+vol.8,  2020, 
+ doi: 10.1017/fms.2020.52. 
+ 
+ \bibitem{kurat}
+ C. Kuratowski, 
+ \textit{Une M\'{e}thode de Prolongement des Ensembles Relativement Ferm\'{e}s ou Ouverts}, Colloq. Math. 1 (1948), 273-278, 
+doi:10.4064/cm-1-4-273-278. 
+\bibitem{Kul}
+W. Kulpa, 
+\textit{The Poiancr\'{e}--Miranda Theorem}, 
+Amer. Math. Monthly 104, No. 6, 545--550 (1997)
+doi: 10.2307/2975081
+
+\bibitem{tao}
+T. Tao, 
+\textit{Brouwer’s fixed point and invariance of domain theorems, and Hilbert’s fifth problem}, 
+https://terrytao.wordpress.com/2011/06/13/brouwers-fixed-point-and-invariance-of-domain-theorems-and-hilberts-fifth-problem/
+\bibitem{pears}
+ A. R. 
+ Pears,
+ \textit{Dimension theory of general spaces}, 
+ {Cambridge} {University} {Press}
+1975. 
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+

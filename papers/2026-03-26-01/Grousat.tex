@@ -1,0 +1,770 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\edmor}{End}
+%\newcommand{\pp}{\varpi}
+
+%\DeclareMathOperator{\sg}{SG}
+
+
+
+\DeclareMathOperator{\im}{im}
+
+%\DeclareMathOperator{\nsg}{NSG}
+
+
+
+%%%%%%%%%%%%%%%%
+
+
+
+
+
+\newcommand{\myproja}[1]{(\exists)#1}
+\newcommand{\myprojb}[1]{#1(\exists)}
+
+
+
+\newcommand{\mysliceb}[2]{#1\langle #2\rangle}
+\newcommand{\myslicea}[2]{\langle #2\rangle#1}
+
+
+
+\newcommand{\myqq}[2]{\mathrm{Q}(#1, #2)}
+\newcommand{\mynsg}[1]{\mathrm{NSG}(#1)}
+\newcommand{\mysg}[1]{\mathrm{SG}(#1)}
+
+
+
+
+\newcommand{\myqqo}[3]{\mathrm{Q}_{#3}(#1, #2)}
+\newcommand{\mynsgo}[2]{\mathrm{NSG}_{#2}(#1)}
+\newcommand{\mysgo}[2]{\mathrm{SG}_{#2}(#1)}
+
+\newcommand{\mymapl}{L}
+\newcommand{\mymapr}{R}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Goursat's lemma}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+大昔に書いていた残骸を発見したが，これがなんの文献の記述によった物なのかわからなくなってしまった．
+
+\section{本文}
+\begin{df}
+二つの集合$A, B$の直積
+$A\times B$の部分集合$S$に対して，
+\[
+\myprojb{S}=\{a\in A\mid \exists b\in B\ (a, b)\in S\}
+\]
+\[
+\myproja{S}=\{b\in B\mid \exists a\in A\ (a, b)\in S\}
+\]
+と定義する．
+つまり，
+$\myprojb{S}$は第一成分への射影で，
+$\myproja{S}$は第二成分への射影である．
+\begin{rmk}
+とんでもないノーテーションである．
+\end{rmk}
+また，$a\in A$と$b\in B$に対して
+
+\[
+\mysliceb{S}{b}=\{a\in A\mid (a,b)\in S\}
+\]
+\[
+\myslicea{S}{a}=\{b\in B\mid (a, b)\in S\}
+\]
+と定義する．つまり，スライスのことである．
+\end{df}
+
+以下では，
+\begin{df}
+群$G$に対して，
+$\mysg{G}$，
+$\mynsg{G}$で
+$G$の部分群全体の集合，$G$の正規部分群全体の集合を表す．
+\end{df}
+\begin{df}
+二つの群$A, B$について，
+\begin{align*}
+&\myqq{A}{B}=\\
+&
+\{\, (U, V, T, Y, \theta)\mid V\in \mysg{A}, U\in \mynsg{V}, Y\in \mysg{B}, T\in \mynsg{B}, \theta:V/U\overset{\simeq}{\to} Y/T\, \}
+\end{align*}
+と定義する．
+\end{df}
+
+\begin{lem}
+群$A$と$B$について
+写像
+$\mymapl\colon \mysg{A\times B}\to \myqq{A}{B}$を以下のように定義する．
+$G\in \mysg{A\times B}$について，
+\[
+L(G)=(\mysliceb{G}{1_{B}}, \myprojb{G}, 
+\myslicea{G}{1_{A}},  \myproja{G}, \theta_{G})
+\]
+と定義する．ここで，
+$\mysliceb{G}{1_{B}}$
+は
+$\myprojb{G}$の正規部分群，
+$\myslicea{G}{1_{A}}$
+は
+$\myproja{G}$の正規部分群であることに注意せよ．
+さらに
+$\theta_{G}\colon \myprojb{G}/\mysliceb{G}{1_{B}}
+\to \myproja{G}/\myslicea{G}{1_{A}}$は以下で定義される写像である:
+$[a]\in \myprojb{G}/\mysliceb{G}{1_{B}}$に対して，
+$(a, b)\in G$となる$b$を選び，
+$\theta_G([a])=[b]$と定義する．
+このとき$\theta_{G}$はwell-defined であり，
+さらに同型写像である．
+よって$\mymapl$はちゃんと定義されている．
+\end{lem}
+\begin{proof}
+$\theta_G([a])=[b]$が$b$の選び方によらないことを示そう．
+もし，
+$(a, b), (a, c)\in G$
+ならば，
+$(1_A, bc^{-1})\in G$
+なので，
+$bc^{-1}\in \myslicea{G}{1_{A}}$
+であるから，$[b]=[c]$であり，
+選び方によらない．
+よって$\theta_{G}$はwell-definedである．
+次に$\theta_{G}$が全単射であることを示そう．
+まず$\myproja{G}$の定義から，
+$\theta_{G}$が全射であることがわかる．
+単射性を示そう．
+$(a, b)\in G$について
+$\theta_{G}(a)=[b]=[1_{B}]$ならば，
+$b\in \myslicea{G}{1_{A}}$なので，$(1_A, b)\in G$である．
+よって，$(a, b)(1_A, b)^{-1}=(a, 1_B)\in G$だが，
+これは$a\in \mysliceb{G}{1_{B}}$ということなので，
+$[a]=[1_A]$となる．よって$\theta_{G}$のカーネルが自明なので$\theta_{G}$は単射である．
+\end{proof}
+
+\begin{df}
+$\mymapr\colon \myqq{A}{B}\to \mysg{A\times B}$を以下のように定義する．
+$q=(U, V, T, Y, \theta)\in \myqq{A}{B}$に対して
+$\widetilde{G}_{\theta}=\{\, (x, \theta(x))\in V/U\times Y/T \mid x\in V/U\, \}$
+とする．
+そして，
+$p\colon V\times Y\to V/U\times Y/T$を自然な全射として
+$\mymapr(q)=p^{-1}\left(\widetilde{G}_{\theta}\right)$
+と定義する．
+このとき
+$\mymapr(q)$は$A\times B$の部分群になっていることに注意しよう．
+\end{df}
+
+
+\begin{thm}[Goursat's lemma]\label{thm:main0}
+写像
+$\mymapl:\mysg{A\times B}\to \myqq{A}{B}$と
+$\mymapr\colon \myqq{A}{B}\to \mysg{A\times B}$
+は互いに逆写像である．
+\end{thm}
+\begin{proof}
+最初に
+$\mymapr\circ \mymapl=id$を示そう．
+$G\in \mysg{A\times B}$を任意にとる．
+すると
+\[
+\mymapl(G)=(\mysliceb{G}{1_{B}}, \myprojb{G}, \myslicea{G}{1_{A}}, \myproja{G}, \theta_{G})
+\]
+である．
+このとき
+\[
+H=\{\, (x, \theta_{G}(x))
+\in \myprojb{G}/\mysliceb{G}{1_{B}}\times \myproja{G}/\myslicea{G}{1_{A}}
+\mid x\in \myprojb{G}/\mysliceb{G}{1_{B}} \,  \}
+\]
+とし
+$p=\myprojb{G}\times \myproja{G}\to 
+\myprojb{G}/\mysliceb{G}{1_{B}}\times \myproja{G}/\myslicea{G}{1_{A}}
+$
+を自然な全射とする．
+このとき
+$R(L(G))=p^{-1}(H)$
+である．今から
+$G=p^{-1}(H)$を示そう．
+まず$(a, b)\in G$とすると
+$\theta_{G}$の定義から
+$([a], [b])\in \myprojb{G}/\mysliceb{G}{1_{B}}\times \myproja{G}/\myslicea{G}{1_{A}}
+$である．
+よって
+$(a, b)\in p^{-1}(H)$である．
+逆に
+$(a, b)\in p^{-1}(H)$とすると
+$([a], [b])=([a], \theta_{G}([a]))\in\myprojb{G}/\mysliceb{G}{1_{B}}\times \myproja{G}/\myslicea{G}{1_{A}}
+$
+である．よって$(a, c)\in G$となる$c$を用いて
+$\theta_{G}([a])=[c]$である．
+このとき$[c]=[b]$であるから$s\in A$で$(s, b)\in G$となるものをとると$(a, c)\cdot (s, b)^{-1}=(as^{-1}, cb^{-1})\in 
+\myslicea{G}{1_{A}}$である．
+つまり$a=s$となる．よって$(a, b)\in G$である．
+以上から$\mymapr\circ \mymapl=id$がわかった．
+
+次に$\mymapl\circ \mymapr=id$を示そう．
+$q=(U, V, T, Y, \theta)\in \myqq{A}{B}$を任意にとる．
+今から$\mymapl\circ \mymapr(q)=q$を示す．
+まず$\widetilde{G}_{\theta}=\{\, (x, \theta(x))\in V/U\times Y/T \mid x\in V/U\, \}$
+とし
+そして，
+$p\colon V\times Y\to V/U\times Y/T$を自然な全射として
+$\mymapr(q)=p^{-1}\left(\widetilde{G}_{\theta}\right)$
+で定義されている．ここで
+$Z=p^{-1}\left(\widetilde{G}_{\theta}\right)$とおこう．
+すると
+$\mymapl(Z)=(\mysliceb{Z}{1_{B}}, \myprojb{Z}, 
+\myslicea{Z}{1_{A}},  \myproja{Z}, \theta_{Z})$
+である．
+ここで
+$\mysliceb{Z}{1_{B}}=p^{-1}(\{\, x\in V/U\mid \theta(x)=[1_{B}]\, \})$
+であるが$\theta$が同型であることから
+$\{\, x\in V/U\mid \theta(x)=[1_{B}]\, \}=\{[U]\}$
+であり$p$の定義を鑑みると
+$\mysliceb{Z}{1_{B}}=U$である．
+さらに
+$a\in \myprojb{Z}$を任意にとると
+$(a, b)\in Z\subset V\times Y$となる$b$が存在する．
+特に$a\in V$である．
+逆に$a\in V$とすると$[b]=\theta([a])$となる$b\in Y$
+をとれば$(a, b)\in p^{-1}(\widetilde{G}_{\theta})$なので
+$a\in \myprojb{Z}$である．つまり$\myprojb{Z}=V$である．
+同様にして
+$\myslicea{Z}{1_{A}}=T$
+かつ
+$\myproja{Z}=Y$
+である．
+$\theta([a])=\theta_{Z}([a])$
+を示そう．
+$[a]\in \myprojb{Z}/\mysliceb{Z}{1_{B}}$
+に対して$(a, b)\in Z$となる$b$を
+用いて$\theta_{Z}([a])=[b]$と定義するのであった．
+さて$(a, b)\in Z$となる$b$とは定義からして
+$\theta([a])=[b]$となる
+$[b]$なので
+$\theta([a])=\theta_{G}([a])$
+がわかる．
+以上から
+$\mymapl\circ \mymapr(q)=q$が示された．
+\end{proof}
+
+
+
+\section{作用域を持つ群}
+\begin{df}
+$G$を群とする．
+$\Omega$を集合とする．
+$G$と写像$l\colon \Omega\to \edmor(G)$の組を
+作用域$\Omega$を持つ群$G$と呼ぶ．
+写像$l$はほぼ省略される．
+$\omega\in \Omega$による作用を
+$g^{\omega}$と書くことにする．
+\end{df}
+\begin{df}
+$G$
+$G^{\prime}$を作用域
+$\Omega$を持つ群とする．
+準同型
+$f\colon G\to G^{\prime}$が
+$\Omega$-準同型であるとは，
+\[
+\forall g\in G\ \forall \omega\in \Omega\ f(g^{\omega})=f(g)^{\omega}
+\]
+が成り立つときにいう．
+\end{df}
+
+\begin{df}
+部分集合
+$H\subset G$が$G$の$\Omega$-部分群であるとは，
+$\forall g\in H\ \forall \omega\in \Omega \ g^{\omega}\in H$
+となる時にいう．
+
+$\Omega$-正規部分群は，$\Omega$-部分群でかつ正規部分群なものをいう．
+
+$\mysgo{G}{\Omega}$で$G$の$\Omega$-部分群全体を表す．
+
+\end{df}
+
+\begin{df}
+$\myqqo{A}{B}{\Omega}$
+は，
+$\myqq{A}{B}$の定義の中の，
+部分群，正規部分群，同型をそれぞれ
+$\Omega$-部分群，
+$\Omega$-正規部分群，
+$\Omega$-同型に置き換えたものとする．
+この時二つの$\Omega$-群$A, B$について
+\end{df}
+写像$\mymapl\colon \mysg{A\times B}{\Omega}\to \myqqo{A}{B}{\Omega}$
+と
+$\mymapr\colon \myqqo{A}{B}{\Omega}\to \mysgo{A\times B}{\Omega}$
+は前節と同様に定義する．
+このとき以下の定理が同様の証明で成り立つ．
+
+
+\begin{thm}[$\Omega$-Goursat's lemma]\label{thm:main1}
+$A$と$B$を$\Omega$を作用域とする二つの群とする．
+このとき
+写像$\mymapl\colon \mysgo{A\times B}{\Omega}\to \myqqo{A}{B}{\Omega}$
+と
+$\mymapr \colon \myqqo{A}{B}{\Omega}\to \mysgo{A\times B}{\Omega}$
+は互いに逆写像である．
+\end{thm}
+\begin{proof}
+定理\ref{thm:main0}
+と全く同様に証明できる．
+\end{proof}
+
+\section{同型定理}
+Goursatの補題を用いて色々な同型定理を導いていく．
+以下では全て$\Omega$を作用域にしているとする．
+\begin{thm}
+$G, H$を群とする．
+$f:G\to H$を群準同型とする．このとき
+\[
+G/\ker(f)\cong \im (f)
+\]
+\end{thm}
+\begin{proof}
+$I\in \mysgo{G\times H}{\Omega}$を
+\[
+I=\{(x, f(x))\mid x\in G\}
+\]
+と定義する．
+$f$が準同型であることから
+ちゃんと$I\in \mysgo{G\times H}{\Omega}$になることがわかる．
+あとはGoursatの補題からわかる．
+$\myprojb{I}=G$, 
+$\mysliceb{I}{1_{H}}=\ker(f)$
+となるのがポイントである．
+\end{proof}
+
+\begin{prop}[第二同型定理]
+$G$を群とし
+$H\in \mynsgo{G}{\Omega}$, 
+ $S\in \mysgo{G}{\Omega}$とする．
+ このとき$HS$は群であり，
+ 同型
+ \[
+ HS/H\cong S/H\cap S
+ \]
+ が成り立つ．
+\end{prop}
+\begin{proof}
+$I\subset G\times G$を
+\[
+I=\{(hs, s)\mid h\in H\ s\in S\}
+\]
+とする．
+$(hs, s), (vt, t)\in I$について積を考えると
+$(hs, s)\cdot (vt, t)=(hsvt, st)$となるが，
+$H$は$G$の正規部分群なので
+$svs^{-1}=u$となる$u\in H$が存在する．
+つまり$sv=us$なので
+$(hsvt, st)=(hust, st)$で$hu\in H$なので
+$(hs, s)\cdot (vt, t)\in I$
+がわかり$I$が$G\times G$の部分群であることがわかる．
+定義から
+$\myprojb{I}=HS$, 
+$\mysliceb{I}{1}=H$がわかる．
+また
+$\myproja{I}=S$で
+$\myslicea{I}{1}=H\cap S$
+なので
+同型がGoursatの補題からわかる．
+\end{proof}
+
+\begin{prop}[第三同型定理]
+$G$を群とする．
+$A, B\in \mynsgo{G}{\Omega}$で，$
+A\in \mysgo{B}{\Omega}$
+とする．このとき
+同型
+\[
+(G/A)/(B/A)\cong G/B
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+$I\subset G/A\times G$を
+\[
+I=\{([bg]_A, g)\mid g\in G, b\in B\}
+\]
+と定義する．
+$I$が群なのは$A$と$B$がともに$G$
+の正規部分群であることが効いてわかる．
+$B$が$G$の部分群であることから
+$\myprojb{I}=G/A$がわかる．
+また$\mysliceb{I}{1}=B/A$もわかる．
+そして
+$\myproja{I}=G$であり
+$\myslicea{I}{[1]_{A}}=B$
+なので同型は
+あとはGoursatの定理から従う．
+\end{proof}
+
+\begin{thm}[胡蝶の定理：Zassenhaus' lemma]
+$G$と$H$を群$F$の部分群とする．
+$A\in \mynsgo{G}{\Omega}$, 
+$B\in \mynsgo{H}{\Omega}$
+とする．このとき
+\[
+A(G\cap B)\unlhd A(G\cap H)
+\]
+\[
+B(A\cap H)\unlhd B(G\cap H)
+\]
+であり，同型
+\[
+\frac{A(G\cap H)}{A(G\cap B)}\cong \frac{ B(G\cap H)}{B(A\cap H)}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$I\subset F\times F$
+\[
+I=\{(ax, bx)\mid a\in A, b\in B, x\in G\cap H\}
+\] 
+とする．
+$A$と$B$が正規部分群であることと
+$G\cap H$が$G$と$H$の両方に含まれていることから$I$が$F\times F$の群であることがわかる．
+$\myprojb{I}=A(G\cap H)$である．
+$\mysliceb{I}{1}=A(G\cap B)$である．
+同様に
+$\myproja{I}=B(G\cap H)$
+かつ
+$\myslicea{I}{1}=B(A\cap H)$
+である．
+あとはGoursatの補題からわかる．
+\end{proof}
+
+\begin{rmk}
+Goursatの定理の良いところは，
+直積の部分群を与えたらそれの射影やスライスを計算するだけで同型定理が得られるというところである．
+\end{rmk}
+
+\section{組成列とか}
+
+胡蝶の定理から群の部分群の列に関する基本的な定理を証明することができる．
+
+\begin{df}[$\Omega$-正規列($\Omega$-subnormal series)]
+群$G$について
+部分群の有限列
+\[
+\{1\}=G_{0}\le G_{1}\le \dots \le G_{m}=G
+\]
+で尚且つ
+$G_{i}\trianglelefteq G_{i+1}$
+を満たすものを
+\textbf{$\Omega$-正規列}と呼ぶ．
+\end{df}
+\begin{df}
+群$G$について
+$\Omega$-正規列
+\[
+\{1\}=G_{0}\le G_{1}\le \dots \le G_{m}=G
+\]
+の\textbf{細分}とは
+$\Omega$-正規列
+\[
+\{1\}=H_{0}\le H_{1}\le \dots \le H_{u}=G
+\]
+であって，狭義の単調増加列
+$r\colon \{0, \dots, m\}\to \{0, \dots, u\}$
+が存在して
+$H_{r(i)}=G_{i}$となる時にいう．
+\end{df}
+
+\begin{df}
+$G$の二つの正規列を考える．
+\[
+\{1\}=G_{0}\le G_{1}\le \dots \le G_{m}=G
+\]
+\[
+\{1\}=H_{0}\le H_{1}\le \dots \le H_{u}=G
+\]
+この時
+これらが同値であるとは
+$m=u$であり，
+全単射$r\colon \{1, \dots, m\}\to \{1, \dots, m\}$
+が存在して
+\[
+G_{i+1}/G_{i}\cong H_{r(i)+1}/H_{r(i)}
+\]
+が成り立つときに言う．
+
+\end{df}
+
+\begin{thm}[Schreierの定理]\label{thm:sch}
+$\Omega$-群$G$が正規列を持つとする．このとき
+二つの
+$\Omega$-正規列のそれぞれの細分であって同値なものを持つ．
+\end{thm}
+\begin{proof}
+$G$の二つの$\Omega$-正規列を考える．
+\begin{align}\label{al:aseries}
+\{1\}=A_{0}\le A_{1}\le \dots \le A_{m}=G
+\end{align}
+\begin{align}\label{al:bseries}
+\{1\}=B_{0}\le B_{1}\le \dots \le B_{n}=G
+\end{align}
+
+まず$A_{i+1}$を$B$の列を使って細分する．
+$B$の列があるので，それに$A_{i}$との交わりをとる．
+\[
+\{1\}=B_{0}\cap A_{i+1}\le \dots \le B_{j}\cap A_{i+1}\le \dots \le B_{n}\cap A_{i+1}=A_{i+1}
+\]
+ここにさらに$A_{i}$を掛ける．すると
+\[
+A_{i}=A_{i}(B_{0}\cap A_{i+1})\le \dots \le
+A_{i}( B_{j}\cap A_{i+1})
+\le \dots \le
+A_{i}(B_{n}\cap A_{i+1})=A_{i+1}
+\]
+となる．
+ここで
+$U_{i, j}=A_{i}(B_{j}\cap A_{i+1})$
+とすると胡蝶の定理の前半から以下の列は$\Omega$-正規列となる．
+\[
+\{1\}=U_{0, 0}\le U_{0, 1}\le \dots\le U_{0, n}\le \dots
+\le U_{i, j}\le \dots \le U_{n, m}=G
+\]
+同様に
+$A$と$B$を入れ替えて
+$V_{j, i}=B_{j}(A_{i}\cap B_{j+1})$とすれば
+以下の正規列を得る．
+\[
+\{1\}=V_{0, 0}\le V_{0, 1}\le \dots\le V_{0, m}\le \dots
+\le V_{j, i}\le \dots \le V_{m, n}=G
+\]
+これら二つの列に関して剰余群を考えよう．
+胡蝶の定理から以下の同型を得る．
+\[
+U_{i, j+1}/U_{i, j}=\frac{A_{i}(B_{j+1}\cap A_{i+1})}{A_{i}(B_{j}\cap A_{i+1})}\cong 
+\frac{B_{j}(A_{i+1}\cap B_{j+1})}{B_{j}(A_{i}\cap B_{j+1})}
+=V_{j, i+1}/V_{j, i}
+\]
+これから後半の話が出てくる．
+\end{proof}
+
+
+\begin{df}[$\Omega$-組成列($\Omega$-composition  series)]
+$\Omega$-正規列であって
+因子群$G_{i+1}/G_{i}$
+が単純群であるものを組成列と呼ぶ．
+\end{df}
+
+\begin{thm}[Jordan-H\"olderの定理]\label{thm:jhjh}
+$\Omega$-群$G$には組成列が存在すると仮定する．このとき
+二つの組成列は同値である．
+(細分を取らずに同値というのがポイントである．)
+\end{thm}
+\begin{proof}
+シュライアーの定理(定理\ref{thm:sch})から
+二つの組成列は長さが等しい細分を持つ．
+ところで$G_{i+1}/G_{i}$
+が単純群なので細分と元の組成列は一致する．
+よって元々の二つの組成列の長さは等しい．
+またシュライアーの定理(定理\ref{thm:sch})から因子群は並べ替えをすれば一致
+する．
+\end{proof}
+クルルシュミットなどもこの文脈でいけるだろうかと試してみたが，なんか無理そうだったのでやめた．
+
+\begin{comment}
+\begin{thm}[Krull-Remak-Scmidtの定理]
+$\Omega$-主組成列を持つ群は直規約群の直積に分解する．
+\end{thm}
+\begin{proof}
+$\widetilde{\Omega}=\Omega\coprod \mathrm{Inn}(G)$
+とすれば
+$\Omega$-主組成列とは
+$\widetilde{\Omega}$-組成列のことである．
+\end{proof}
+\end{comment}
+
+
+
+
+論文
+\cite{comtemporary}
+にはこの文章で紹介したような，準同型から直積の部分群を作るのと直積の部分群から準同型を作る操作が逆操作になっている
+というのを紹介しているのでこれを参考にしたかもしれない.
+論文
+\cite{lam}では一般的な代数構造の上でGoursat's lemmaを考察しているようだ．Lambekは一般的な代数構造とGoursat's lemmaの話をよくしているようなので調べてみると面白いかもしれない．
+\begin{thebibliography}{9}
+\bibitem{sasaki}
+佐々木隆二, 
+\textit{代数学の基礎}, 
+https://www2.math.cst.nihon-u.ac.jp/sasaki/wp/wp-content/uploads/2014/12/fa75a316529d0ac746d8f50958ba66ed.pdf
+
+\bibitem{comtemporary}
+D. D. Anderson and 
+V. Camillo,
+\textit{Subgroups of direct products of groups, ideals and subrings of direct products of rings, and Goursat’s lemma}, 
+ Contemp. Math. 480, 1--12, 
+ 2009, 
+ doi: 
+10.1090/conm/480/09364
+
+
+\bibitem{lam}
+J. Lambek, 
+\textit{Goursat’s theorem and the Zassenhaus lemma}, 
+Can. J. Math. 10, 45--56 (1958), 
+doi: 10.4153/CJM-1958-005-6
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

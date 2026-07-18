@@ -1,0 +1,1517 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{url}
+
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+%\usepackage{}
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{\partial}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\newcommand{\ind}{\mathrm{ind}}
+
+\newcommand{\lind}{\mathrm{Ind}}
+
+\newcommand{\yodim}{\mathrm{dim}}
+
+\DeclareMathOperator{\emb}{Emb}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+
+\DeclareMathOperator{\rank}{rank}
+
+\newcommand{\yoddim}{\mathrm{DDim}}
+
+\newcommand{\yodeg}{\mathrm{Cdeg}}
+\newcommand{\yoemph}[1]{\emph{#1}}
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\yodisc}[1]{\mathbf{D}^{#1}}
+\newcommand{\yosphere}[1]{\mathbf{S}^{#1}}
+\newcommand{\yocube}[1]{\mathbf{I}^{n}}
+\newcommand{\yocubesidep}[2]{\mathbf{I}^{#1, #2}_{+}}
+\newcommand{\yocubesidem}[2]{\mathbf{I}^{#1, #2}_{-}}
+
+\newcommand{\yocubebd}[1]{\partial\mathbf{I}^{#1}}
+
+
+\newcommand{\myhl}[2]{H_{#2}(#1)}
+
+
+%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{section}
+
+\usepackage[dvipdfmx]{hyperref}
+%\usepackage{pxjahyper} % (u)pLaTeX
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+
+
+
+\title{
+可分距離空間上の
+被覆次元と帰納次元
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\tableofcontents
+
+この文書では正規空間の被覆次元にまつわる基本的な命題を紹介していく．
+特におまけの球面の拡張問題の話は興味深いと思う．
+この文書の内容は
+\cite{Morita}
+を大いに参考にした．
+基本的な命題を述べた後に，
+可分距離化可能空間において，
+被覆次元で帰納的次元が上から抑えられることを証明する．
+
+\section{位相的準備}
+
+
+\begin{lem}[被覆の収縮補題]\label{lem:shrink}
+正規空間$X$
+の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について，開被覆
+$\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\cl V_{i}\subset U_{i}$
+が満たされる．
+\end{lem}
+\begin{proof}
+帰納法によって証明できる．
+詳細は省略する．
+\end{proof}
+
+
+集合族の相似という概念を導入する．
+
+$I$
+を添字集合とする．
+集合
+$X$
+の部分集合族
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+と
+$\mathcal{B}=\{B_{i}\}_{i\in I}$
+が
+\yoemph{相似}であるとは
+$I$の任意の部分集合$S$
+について
+$\bigcap_{s\in S}A_{s}=\emptyset$
+と
+$\bigcap_{s\in S}B_{s}=\emptyset$
+が同値になることである．
+同じことだが
+$\bigcap_{s\in S}A_{s}\neq \emptyset$
+と
+$\bigcap_{s\in S}B_{s}\neq\emptyset$
+が同値になるということでもある．
+
+位相空間論では特に
+特に
+$B_{i}\subset A_{i}$
+などの包含関係が存在して
+$A_{i}$
+や
+$B_{i}$
+が開集合だったり
+閉集合だったりするような状況において
+相似な集合族を構成できるかどうかに興味がある．
+この文章では一般的な話は行わず
+有限集合族の場合に限って話を進めるということにする．
+
+\begin{lem}\label{lem:souji}
+$X$を
+正規空間とする．
+そして
+$\{F_{1}, \dots, F_{m}\}$
+と
+$\{U_{1}, \dots, U_{m}\}$
+を
+それぞれ
+閉集合族と開集合族で
+$F_{i}\subset U_{i}$
+を満たしているとする
+($X$を被覆しているなどの条件はつけない)．
+このとき
+開集合族集合族
+$\{W_{1}, \dots, W_{m}\}$
+が存在して
+$F_{i}\subset W_{i}$
+と
+$\cl W_{i}\subset U_{i}$
+を満たしさらに
+$\{F_{1}, \dots, F_{m}\}$
+と
+$\{\cl W_{1}, \dots, \cl W_{m}\}$
+は相似である．
+\end{lem}
+\begin{proof}
+帰納法によって証明する．
+自然数$k$について
+族
+$\{W_{1}, \dots, W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+が
+$\{F_{1}, \dots, F_{m}\}$
+と相似であり
+$F_{j}\subset W_{j}$
+かつ
+$\cl W_{j}\subset U_{j}$
+を
+$j=1, \dots, k$で満たしているとする．
+今から
+$W_{k+1}$を構成する．
+今
+$\{\cl W_{1}, \dots, \cl W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+の有限個の共通部分で表される集合のうち
+$F_{k+1}$と交わらないものを
+$\mathcal{K}$とかく．
+そして
+$H=\setminus \bigcup\mathcal{K}$
+と定義すると，
+$\mathcal{K}$
+は有限集合であるから
+$H$
+は
+$X$
+の開集合であり
+$F_{k+1}\subset H$
+を満たす．
+ここで
+$X$
+の正規性を用いて
+$W_{k+1}$
+を
+$F_{k+1}\subset W_{k}$
+かつ
+$\cl W_{k}\subset H\cap U_{k+1}$
+となる開集合とする．
+このとき
+$\mathcal{K}$
+の定義から
+$\{\cl W_{1}, \dots, \cl W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+と
+$\{\cl W_{1}, \dots, \cl W_{k+1}\}\cup \{F_{k+2}, \dots, F_{m}\}$
+は相似である．
+以上で証明が終わる．
+\end{proof}
+
+
+
+
+
+
+\section{被覆次元}
+
+集合
+$X$の
+集合族
+$\mathcal{U}$
+と
+$x\in X$について
+$\yodeg(\mathcal{U}; x)$
+を
+$x$を含む
+$\mathcal{U}$
+の個数とする．
+そして
+$\yodeg({\mathcal{U}})$
+を
+$\sup \yodeg(\mathcal{U}; x)$
+と定義する．
+
+さて位相空間$X$
+と$n\in \zz_{\ge 0}$
+について
+$\yodim X\le n$であるとは
+$X$の任意の有限開被覆
+$\mathcal{U}$
+について，
+その細分となる開被覆
+$\mathcal{V}$
+が存在して
+$\yodeg(\mathcal{V})\le n+1$
+となることである．
+また
+$n<\yodim X$
+とは
+$\yodim X\le n$の否定が成り立つときにそう書く．
+
+
+\begin{lem}\label{lem:hihukudim}
+$X$
+を正規空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem:dimn} 
+$\yodim X\le n$
+\item\label{item:lem:degn+2} 
+
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ
+$\yodeg(\mathcal{V})\le n+1$
+が成り立つ．
+\item\label{item:lem:n+20} 
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ$\{1, \dots, m\}$
+の濃度が$n+2$の部分集合$J$
+について
+$\bigcap_{j\in J}V_{j}=\emptyset$
+が成り立つ．
+\item\label{item:lem:n+2n+2} 
+$X$の
+濃度が$n+2$の
+任意の開被覆
+$\{U_{1}, \dots, U_{n+2}\}$
+について
+開被覆
+$\mathcal{V}=\{V_{1}, \dots, V_{n+2}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ
+$\bigcap_{j=1}^{n+2}V_{j}=\emptyset$
+が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+同値性
+$[\ref{item:lem:degn+2} \iff \ref{item:lem:n+20}]$
+は自明である．
+また
+$[\ref{item:lem:degn+2}\To \ref{item:lem:dimn}]$
+と
+$[ \ref{item:lem:n+20}\To \ref{item:lem:n+2n+2}]$
+も自明である．
+
+
+$[\ref{item:lem:dimn}\To \ref{item:lem:degn+2}]$
+の証明：
+開被覆
+$\{U_{1}, \dots, U_{m}\}$
+に対してその細分となる開被覆
+$\mathcal{G}=\{G_{1}, \dots, G_{k}\}$
+で$\yodeg(\mathcal{G})\le n+1$
+となるものが存在する．
+ここで
+$l\colon \{1, \dots, k\}\to \{1, \dots, m\}$
+を
+$l(a)$
+を
+$G_{a}\subset U_{b}$
+となる最小の$b$
+として定義する．
+そして各$i=1, \dots,  m$
+について
+$V_{i}=\bigcup_{l(a)=i}G_{a}$
+と定義し
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+とすれば
+$\mathcal{V}$は
+$X$の開被覆であり，
+$\yodeg(\mathcal{G})\le n+1$から
+$\yodeg(\mathcal{V})\le n+1$
+を満たす．
+
+$[\ref{item:lem:n+2n+2}\To \ref{item:lem:n+20}]$
+の証明：
+$X$の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+を任意に与える．
+もしも
+$m<n+2$のときは適当に空集合を付加して
+やって$n+2\le m$と仮定しても良い．
+そして$\mathcal{A}$
+を集合$\{1, \dots, m\}$
+の$n+2$個の部分集合の直和分割全体の集合とする．
+つまり$\mathcal{A}$の元は$\{I_{1}, \dots I_{n+2}\}$
+であって各$I_{k}$は$\{1, \dots, n+2\}$の空でない部分集合で
+$a\neq b$の時$I_{a}\cap I_{b}=\emptyset$
+で$\bigcup_{k}I_{k}=\{1, \dots, n+2\}$
+である．
+$\mathcal{A}$は有限集合なので
+番号をつけて
+$\{A_{1}, \dots, A_{r}\}$
+とする．
+以下の操作を帰納的に繰り返して
+$X$の開被覆
+$\{G_{l, 1}, \dots, G_{l, m}\}$
+$(l=0, 1, \dots, r+1)$
+を構成する．
+まず
+$G_{0, i}=U_{i}$とする．
+そして
+$\{G_{l, 1}, \dots, G_{l, m}\}$
+が構成されたとき
+$G_{l+1, i}$を構成する．
+$A_{l}=\{I_{1}, \dots, I_{n+2}\}$
+として$k=1, \dots, n+2$について
+$O_{k}=\bigcup_{j\in I_{k}}G_{l, j}$
+とする．
+すると
+$\{O_{1}, \dots, O_{n+2}\}$
+は
+$X$
+の開被覆になるので
+\ref{item:lem:n+2n+2}を用いて
+その細分となる開被覆
+$\{P_{1}, \dots, P_{n+2}\}$
+で$\bigcap_{i=1}^{n+2}P_{i}=\emptyset$
+となるものが存在する．
+ここで
+$i=1, \dots, m$について
+$G_{l+1, i}=P_{k(i)}\cap G_{l, i}$
+と定義する．ここで$k(i)$は
+$i\in I_{k(i)}$となる$k(i)\in \{1, \dots, n+2\}$
+である．
+今
+$G_{l+1, i}\subset G_{l, i}$
+に注意しよう．
+ここで
+$V_{i}=G_{r+1, i}$
+で
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$と定義する．
+今から$\yodeg(\mathcal{V})\le n+1$を示そう．
+$\{1, \dots, m\}$
+の濃度が$n+2$の任意の部分集合$K$
+について$K=\{a_{1}, \dots, a_{n+2}\}$
+として
+$I_{1}=a_{1}, \dots, I_{n+1}=\{a_{n+1}\}$
+として$I_{n+2}$は余った$\{1, \dots, m\}$
+の元全部とする．
+そして
+$A_{l}=\{I_{1}, \dots, I_{n+2}\}$とする．
+上で構成したのと同じ記号を用いる．
+任意の
+$a_{i}\in K$について
+\begin{align}
+V_{a_{i}}=G_{r+1, a_{i}}\subset G_{l+1, a_{i}}\subset G_{l, a_{i}}\cap P_{i}
+\end{align}
+であり，
+$\bigcap_{i=1}^{n+2}P_{i}=\emptyset$
+なので
+$\bigcap_{a\in K}V_{a}=\emptyset$
+である．
+よって
+\ref{item:lem:n+20}が成り立つ．
+
+以上で証明が終わる．
+\end{proof}
+
+\begin{lem}\label{lem:hihukudim2}
+$X$
+を正規空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem2:dimn} 
+$\yodim X\le n$
+\item\label{item:lem2:degn+2shrink} 
+
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\cl V_{i}\subset U_{i}$
+かつ
+$\yodeg(\mathcal{V})\le n+1$
+が成り立つ．
+
+
+\item\label{item:lem2:n+2n+2} 
+$X$の
+濃度が$n+2$の
+任意の開被覆
+$\{U_{1}, \dots, U_{n+2}\}$
+について
+閉被覆
+$\mathcal{V}=\{F_{1}, \dots, F_{n+2}\}$
+が存在して
+$F_{i}\subset U_{i}$
+かつ
+$\bigcap_{j=1}^{n+2}F_{j}=\emptyset$
+が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+
+$[\ref{item:lem2:dimn}\iff \ref{item:lem2:degn+2shrink}]$
+は補題
+\ref{lem:shrink}からわかる．
+また
+$[\ref{item:lem2:degn+2shrink}\To\ref{item:lem2:n+2n+2}]$
+は自明である．
+
+$[\ref{item:lem2:n+2n+2}\To \ref{item:lem2:dimn}]$
+は補題
+\ref{lem:souji}
+から従う．
+\end{proof}
+
+
+被覆の境界のdegreeによって
+被覆次元を特徴付けることができる．
+
+\begin{prop}\label{prop:hihukudim3}
+$X$
+を正規空間とする．
+このとき以下は同値である
+(以下の条件において，被覆とは仮定していないことに注意せよ)．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:prop:dimn} 
+$\yodim X\le n$
+
+
+\item\label{item:prop:bdm} 
+
+$X$の任意の有限開集合族
+$\{U_{1}, \dots, U_{m}\}$
+と閉集合族
+$\{F_{1}, \dots, F_{m}\}$
+について
+開集合族
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$F_{i}\subset V_{i}$と
+$\cl V_{i}\subset U_{i}$
+を満たし
+かつ
+$\yodeg(\{\bd V_{1}, \dots, \bd V_{m}\})\le n$
+が成り立つ．
+
+
+\item\label{item:prop:fatbdm} 
+$X$の任意の有限開集合族
+$\{U_{1}, \dots, U_{m}\}$
+と閉集合族
+$\{F_{1}, \dots, F_{m}\}$
+について
+開集合族
+$\mathcal{V}=\{W_{1}, \dots, W_{m}\}$
+と
+$\mathcal{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$F_{i}\subset V_{i} \subset \cl V_{i}\subset W_{i}$と
+$\cl W_{i}\subset U_{i}$
+を満たし
+$\yodeg(\{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus  V_{m}\})\le n$
+が成り立つ．
+
+\item\label{item:prop:bdn+1} 
+$X$の
+濃度が$n+1$の
+任意の開集合族
+$\{U_{1}, \dots, U_{n+1}\}$
+と
+閉集合族
+$\{F_{1}, \dots, F_{n+1}\}$で
+$F_{i}\subset U_{i}$
+となるもの
+について
+開集合族
+$\mathcal{V}=\{V_{1}, \dots, V_{n+1}\}$
+が存在して
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たし
+かつ
+$\bigcap_{j=1}^{n+1}\bd V_{j}=\emptyset$
+が成り立つ．
+
+
+
+
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+$[\ref{item:prop:dimn}\To \ref{item:prop:bdm}]$の証明：
+$\mathcal{H}$
+を
+$\{U_{1}, \dots, U_{m}\}\cup \{X\setminus F_{1}, \dots, X\setminus F_{m}\}$
+の濃度が$m$の部分集合族の共通部分で表される集合全体
+とする．
+このとき仮定から
+$\mathcal{H}$
+は
+$X$
+の開被覆となる．
+よって
+\ref{item:prop:dimn}
+から
+degreeが$\le n+1$
+であるような
+開被覆
+$\{W_{1}, \dots W_{q}\}$
+で$\mathcal{H}$
+の細分になるものが存在する．
+さらに
+閉被覆
+$\{K_{1}, \dots, K_{q}\}$
+で$K_{r}\subset W_{r}$
+となるものをとる．
+ここで
+$r=1, \dots, q$
+に対して
+$N_{r}$
+を
+$F_{i}\cap W_{r}\neq \emptyset$
+となるような
+$i=1, \dots, m$
+の集合全体とする．
+そして
+補題
+\ref{lem:shrink}
+から
+各
+$i\in N_{r}$
+について
+$V_{i, r}$
+を
+$K_{r}\subset V_{i, r}\subset \cl V_{i, r}\subset W_{r}$
+となるようにとる．
+ここで，$i, j\in N_{r}$
+が$i<j$を満たすならば$\cl V_{i, r}\subset V_{j, r}$
+となるようにとる．
+さて，
+$i=1, \dots, m$
+について
+\begin{align}
+V_{i}=\bigcup\{V_{i, r}\mid i\in N_{r}\}
+\end{align}
+と定義する．
+このとき
+$F_{i}\subset V_{i}$
+が成り立つ．
+というのも，
+$x\in F_{i}$
+かつ
+$x\in K_{r}$
+となる$i, r$が存在するので
+$x\in V_{i, r}\subset V_{i}$
+となるからである．
+また
+$N_{r}$の定義と
+$\mathcal{H}$の定義から
+$i\in N_{r}$なら
+$W_{r}\subset U_{i}$であり，
+$V_{i}$を定義する式は有限和であるから
+$\cl V_{i}\subset U_{i}$
+となることがわかる．
+最後に背理法のために
+濃度が$n+1$の$\{1, \dots, m\}$の部分集合$I$
+が存在し
+$\bigcap_{i\in I}\bd V_{i}\neq \emptyset$
+となるとしよう．
+点
+$x\in \bigcap_{i\in I}\bd V_{i}$をとる．
+さて
+$x\in \bd V_{i}$
+であるから
+$x\in \bigcup_{i\in N_{r}}\bd V_{i, r}$
+である．
+ここで各$i$について
+$r(i)$
+を
+$x\in \bd V_{i, r(i)}$
+満たすものとして定義しよう．
+このとき$i\ne j$ならば
+$r(i)\ne qr(j)$である．
+というのも，$i<j$と仮定して
+もしも$r(i)=r(j)$ならば，
+$\cl V_{i, r(i)}\subset V_{j, r(i)}$
+なので
+$x\not \in \bd V_{i}$
+となり矛盾するからである．
+さて
+$x\in \bd V_{i, r(i)}$
+なので
+特に
+$x\not \in V_{i, r(i)}$
+である．
+ここで
+$x\in K_{r(n+2)}$
+となる番号
+$r(n+2)$
+をとる．
+$\{K_{r}\}$
+は被覆なのでこれは可能である．
+さて
+$x\not \in V_{i, r(i)}$なので
+$r(n+2)$
+は$r(i)$たちとは異なる．
+よって$\bd V_{i}\subset W_{r(i)}$
+より
+$x\in \bigcap_{i=1}^{n+2}W_{r(i)}$
+となるが，
+これは
+$\yodeg(\{W_{1}, \dots, W_{m}\})\le n+1$
+に矛盾する．
+よって
+$\yodeg(\{\bd V_{1}, \dots,  \bd V_{m}\})\le n$
+である．
+
+
+$[\ref{item:prop:bdm}\To \ref{item:prop:fatbdm}]$の証明：
+\ref{item:prop:bdm}から
+開集合族
+$\{V_{1}, \dots, V_{m}\}$
+で
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たしかつ
+$\yodeg\{\bd V_{1}, \dots, \bd V_{m}\}\le n$
+となるものが存在する．
+このとき
+$\bd V_{i}\subset U_{i}$
+であるから
+補題\ref{lem:souji}
+から
+開集合族$\{P_{1}, \dots, P_{m}\}$
+で
+$\{\cl P_{1}, \dots, \cl P_{m}\}$
+と
+$\{\bd V_{1}, \dots, \bd V_{m}\}$
+が相似なもので
+$\bd V_{i}\subset P_{i}\subset U_{i}$
+となるものが存在する．
+ここで
+$W_{i}=V_{i}\cup P_{i}$
+と定義すると，$\cl V_{i}\subset W_{i}$
+であり
+$\bd V_{i} \subset \cl W_{i}\setminus V_{i}$
+かつ
+$\cl W_{i}\setminus V_{i}\subset \cl P_{i}$
+なので
+$\{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus V_{m}\}$
+は
+$\{\bd V_{1}, \dots, \bd V_{m}\}$
+と相似である．
+よって
+$\yodeg \{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus V_{m}\}\le n$
+である．
+
+
+$[\ref{item:prop:fatbdm}\To \ref{item:prop:bdn+1}]$の証明：
+自明である．
+
+$[\ref{item:prop:bdn+1} \To \ref{item:prop:dimn}]$
+の証明：
+$X$の
+$n+2$枚の開集合からなる開被覆
+$\{O_{1}, \dots, O_{n+2}\}$
+を任意に与える．
+補題
+\ref{lem:shrink}
+から
+閉被覆$\{A_{1}\dots, A_{n+2}\}$
+が存在して
+$A_{i}\subset O_{i}$を満たす．
+ここで
+$\{O_{1}, \dots O_{n+1}\}$
+と
+$\{F_{1}, \dots F_{n+1}\}$
+に対して
+\ref{item:prop:bdn+1}
+を用いて
+開集合族
+$\{H_{1}, \dots, H_{n+1}\}$
+で
+$F_{i}\subset H_{i}$
+と
+$\cl H_{i}\subset U_{i}$
+を満たし
+$\bigcap_{i=1}^{n+1}\bd H_{i}=\emptyset$
+を満たすものが存在する．
+そして
+ここで閉集合
+$i=1, \dots, n+2$について
+閉集合$L_{i}$
+を$i=1, \dots, n+1$のとき
+$L_{i}=\cl H_{i}\setminus \bigcup_{k<i} H_{k}$
+で
+$L_{n+2}=F_{n+2}\setminus \bigcup_{k=1}^{n+1}H_{k}$
+と定義する．
+このとき$\{L_{1}, \dots, L_{n+2}\}$は$X$の閉被覆である．
+というのも任意の$x\in X$について
+$x\in H_{i}$となる$i$が存在しなければ
+$x\in L_{n+2}$
+であり，
+$x\in H_{i}$となる添字が存在するなら値が最小のそれを
+$j$として$x\in L_{j}$
+となるからである．
+さらに$L_{i}\subset O_{i}$
+である．
+さて
+\begin{align}
+\bigcap_{i=1}^{n+2}L_{i}
+=L_{n+2}\cap \bigcap_{i=1}^{n+2}\left(\cl H_{i}\setminus \bigcup_{k<i} H_{k}\right)
+\subset L_{n+2}\cap \bigcap_{i=1}\bd H_{i}=\emptyset
+\end{align}
+となるから
+補題
+\ref{lem:hihukudim2}から
+$\yodim X\le n$
+が従う．
+\end{proof}
+
+
+
+\begin{thm}\label{thm:countablefam}
+$n\in \zz_{\ge 0}$
+とし，
+$X$
+を
+$\yodim X\le n$
+である正規空間とし，
+$\{F_{i}\}_{i\in \zz_{\ge 0}}$
+と
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+をそれぞれ閉集合族，
+開集合族
+で
+$F_{i}\subset U_{i}$
+を満たすとする．
+このとき
+開集合族
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+であって
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たしかつ
+$\yodeg(\{\bd V_{i}\}_{i\in \zz_{\ge 0}})\le n$
+を満たすものが存在する．
+\end{thm}
+\begin{proof}
+まず
+$\zz_{\ge 0}$
+の部分集合であって
+濃度が
+$n+1$
+のもの全体を考える．
+そのような集合は高々可算個しかないので，
+番号をつけて列挙して
+$\Gamma_{1}, \Gamma_{2}, \dots, \Gamma_{i}, \dots$
+とする．
+そして
+今から帰納法により，
+$k\in \zz_{\ge 0}$によって添字付られた
+以下のような開集合の列の列
+$\{P_{i}(k)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k)\}_{i\in \zz_{\ge 0}}$
+で
+任意の$i\in \zz_{\ge 0}$
+について
+$F_{i}\subset P_{i}(k)$
+と
+$\cl Q_{i}(k)\subset U_{i}$
+を満たしかつ
+任意の
+$l\in \{1, \dots, k\}$
+について
+$\yodeg(\{\cl (Q_{a}(k))\setminus P_{a}(k)\mid a\in \Gamma_{l}\})\le n$
+が成り立つ
+ものを構成する．
+今$k$までは上記の列が構成できたとする．
+今から$\{P_{i}(k+1)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k+1)\}_{i\in \zz_{\ge 0}}$
+を構成する．
+まず
+$a\in \Gamma_{k+1}$
+については
+$\{\cl P_{a}(k)\}_{a\in \Gamma_{k+1}}$
+と
+$\{Q_{a}(k)\}_{a\in \Gamma_{k+1}}$
+について
+命題
+\ref{prop:hihukudim3}
+を用いて
+$\cl P_{a}(k)\subset P_{a}(k+1)\subset Q_{a}(k+1)$
+かつ
+$\cl Q_{a}(k+1)\subset Q_{a}(k)$
+で
+$\yodeg(\{\cl Q_{a}(k+1)\setminus P_{a}(k+1)\}_{a\in \Gamma_{k+1}})\le n$
+となる
+$\{Q_{a}(k+1)\}_{a\in \Gamma_{k+1}}$
+と$\{P_{a}(k+1)\}_{a\in \Gamma_{k+1}}$
+をとる．
+$b\in \zz_{\ge 0}\setminus \Gamma_{k+1}$
+については
+$P_{b}(k+1)=P_{b}(k)$
+かつ
+$Q_{b}(k+1)=Q_{b}(k)$
+と定義する．
+ここで任意の$i\in \zz_{\ge 0}$について
+$\cl Q_{i}(k+1)\setminus P_{i}(k+1)\subset \cl Q_{i}(k)\setminus P_{i}(k)$
+なので，
+任意の$l$
+について
+について
+$\yodeg(\{\cl (Q_{a}(k))\setminus P_{a}(k)\mid a\in \Gamma_{l}\})\le n$
+が成り立つ．
+さて，この
+$k\in \zz_{\ge 0}$によって添字付られた
+列
+$\{P_{i}(k)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k)\}_{i\in \zz_{\ge 0}}$
+を用いて，
+任意の$i\in \zz_{\ge 0}$について
+$V_{i}=\bigcup_{k\in \zz_{\ge 0}}P_{i}(k)$
+と定義する．もちろん
+$F_{i}\subset V_{i}\subset \cl V_{i}\subset U_{i}$
+は満たされる．
+また任意の$k$について
+$P_{i}(k)\subset V_{i}$
+かつ
+$\cl V_{i}\subset Q_{i}(k)$
+なので
+$\bd V_{i}\subset \cl(Q_{i}(k))\setminus P_{i}(k)$
+である．
+よって
+$\Gamma_{k}$について
+$\yodeg(\{\bd V_{a}\mid a\in \Gamma_{k}\})\le n$
+となる．
+これで証明が終わる．
+\end{proof}
+
+
+
+
+\section{可分距離空間}
+\begin{thm}\label{thm:bundaryn-1}
+$n\in \zz_{\ge 0}$
+とする．
+そして
+$X$
+を
+$\yodim X \le n$を満たす
+可分距離化可能空間とする．
+さらに$X$の閉集合
+$F$と開集合
+$U$
+は
+$F\subset U$
+を満たしているとする．
+このとき開集合
+$V$が存在して
+$F\subset V$
+と
+$\cl V \subset U$
+を満たし
+さらに
+$\yodim \bd V\le n-1$
+を満たす．
+\end{thm}
+\begin{proof}
+$X$に全有界な距離関数$d$で$X$と同じ位相を生成するのもを与える．これは$X$が完備距離化可能であることから
+$[0, 1]^{\aleph_{0}}$に位相的に埋め込み可能であることから
+とってこれる．
+適当に正の有理数全体を番号付して
+$\{r_{k}\}_{k\in \zz_{\ge 0}}$
+とし
+空間$X$の可算稠密部分集合を
+$\{q_{s}\}_{s\in \zz_{\ge 0}}$
+とする．
+そして
+$(k, s)\in \zz_{\ge 0}^{2}$について
+$F_{k, s}$
+を半径が$r_{k}$で
+中心が$q_{s}$
+$d$に関する閉球
+とし，
+$U_{k, s}$
+を
+を半径が$2r_{k}$で
+中心が$q_{s}$
+$d$に関する
+開球
+とする．
+もちろん
+$F_{k, s}\subset U_{k, s}$
+である．
+今
+二つの可算族
+$\{F\}\cup \{F_{k, s}\}_{k, s\in \zz_{\ge 0}}$
+と
+$\{U\}\cup \{U_{k, s}\}_{k, s\in \zz_{\ge 0}}$
+に対して
+定理
+\ref{thm:countablefam}
+を用いて
+$F\subset V$
+かつ
+$\cl V\subset U$
+となる開集合$U$
+と
+$F_{k, s}\subset V_{k, s}$
+かつ
+$\cl V_{k, s}\subset U_{k, s}$
+となる開集合$V_{k, s}$
+であって
+$\yodeg(\{\bd V\}\cup \{V_{k, s}\}_{k, s\in \zz_{\ge 0}})\le n $
+となるものをとる．
+このとき
+$\yodim \bd V\le n-1$
+であることを示そう．
+閉集合族
+$\{C_{1}, \dots, C_{n}\}$
+と開集合族
+$\{O_{1}, \dots, O_{n}\}$
+は
+$C_{i}\subset O_{i}$
+と
+$C_{i}\cap \bd V\neq \emptyset$
+を満たすとする．
+さて$X$は
+$d$に関して全有界であるから
+開被覆$\{X\setminus A_{1}, \dots, X\setminus A_{n}\}\cup \{O_{1}, \dots, O_{n}\}$
+にはルベーグ数
+$\eta$
+が存在する．
+$2r_{k}<\eta$
+となる$k\in \zz_{\ge 0}$
+をとる．
+再び全有界性から
+有限集合$H\subset \zz_{\ge 0}$
+が存在して
+$\{F_{k, q_{h}}\}_{h\in H}$
+が$X$を被覆する．
+ここで，
+$H$を$m$個数の部分集合
+$H_{1}, \dots, H_{n}$に
+と
+\underline{直和分割}してさらに
+$i=1, \dots, n$
+について
+各$H_{i}$
+は
+$U_{k, q_{h}}\subset O_{i}$となる
+ようにする．
+ここで適当に$H$に有限個の元を追加することにより
+任意の$i\in \{1, \dots, n\}$について
+$H_{i}\neq \emptyset$
+としても良い．
+これは
+$2r_{k}<\eta$なので可能である．
+そして
+$S_{i}=\bigcup_{h\in H_{i}}V_{k, q_{h}}$
+と定義すると$i\in \{1, \dots, n\}$について
+$A_{i}\subset S_{i}\subset O_{i}$
+である．
+これは$2r_{k}<\eta$からの帰結である．
+ここで
+$\bd_{\bd V} S_{i}\subset \bd S_{i}\subset \bigcup_{h\in H_{i}}\bd V_{k, q_{h}}$
+であることから
+$\yodeg(\{\bd V\}\cup \{V_{k, s}\}_{k, s\in \zz_{\ge 0}})\le n $
+を用いて
+\begin{align}
+\bd V\cap \bigcap_{i=1}^{n}\bd S_{i}
+\subset 
+\bd V\cap 
+\bigcap_{i=1}^{n}\bigcup_{h\in H_{i}}\bd V_{k, q_{h}}
+=\bigcup_{a_{1}\in H_{1}, \dots, a_{n+1}\in H_{n+1}}
+\bd V\cap \bigcap_{i=1}^{n}\bd V_{k, q_{a_{i}}}=\emptyset
+\end{align}
+となる．
+よって
+\ref{prop:hihukudim3}
+より
+$\yodim \bd V\le n-1$
+である．
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{lem}\label{lem:zerozero}
+$X$
+を正規空間で
+$\yodim X\le 0$
+を満たしているとする．
+このとき
+$X$
+はclopen 
+な開基を持つ．
+つまり
+$\ind X\le 0$
+である．
+\end{lem}
+\begin{proof}
+点
+$x\in X$
+をとる．
+そして$O$
+を
+$x$の
+開近傍とする．
+ここで
+開被覆
+$\{O, X\setminus \{x\}\}$
+を考える．
+$\yodim X\le 0$
+より
+$P\subset O$
+かつ
+$Q\subset X\setminus \{x\}$
+で
+$P\cup Q=X$となる
+開集合
+$P, Q$
+であって
+$\yodeg(\{P, Q\})\le 1$
+を満たすものが存在する．
+この条件から
+$P\cap Q=\emptyset$
+である．
+そして$P\cup Q=X$
+より
+$P$と
+$Q$はclopenである．
+このとき
+$x\in P\subset O$
+であるから
+$X$
+にclopenな開基が存在することがわかった．
+\end{proof}
+
+
+\begin{thm}
+$X$
+を可分距離空間とする．
+このとき
+$\ind X\le \yodim X$
+である．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:bundaryn-1}
+と
+補題
+\ref{lem:zerozero}
+と帰納法を用いるとわかる．
+\end{proof}
+
+\section{おまけ:球面への写像の拡張問題が被覆次元を特徴付けること}
+
+
+\begin{thm}[Borsukのホモトピー拡張定理]\label{thm:borsukhomotopy}
+$n\in \zz_{\ge 0}$
+で
+$X$
+を可算パラコンパクトな正規空間とし
+$A$をその閉集合とする．
+連続写像
+$H\colon A\times [0, 1]\to \yosphere{n}$
+について
+$H(x, 0)=f(x)$で$H(x, 1)=g(x)$
+とおく．
+このときもしも
+$F\colon X\to \yosphere{n}$
+で
+$F|_{A}=f$
+となるものが存在するならば
+$G\colon X\to \yosphere{n}$
+で
+$G|_{A}=g$となるものが存在する．
+さらに
+$G$は$F$とホモトピックに選べる．
+つまり，空間全体に
+拡張されるという性質は
+(球面に値をとるホモトピーに関して)ホモトピー
+不変ということである．
+\end{thm}
+\begin{proof}
+$X$が可算パラコンパクトなので
+$X\times [0, 1]$は正規である．
+定理の仮定にある$F$を用いて写像
+$H\colon A\times [0, 1]\to \yosphere{n}$を
+拡張子て
+$H\colon X\times \{0\}\cup  A\times [0, 1]\to\yosphere{n} $とみなす．
+もちろん$X\times \{0\}$上で
+$H$は$F$に一致するということである．
+さらにこの$H$を
+$\rr^{n+1}$への写像とみなして
+Tietze-Urysohn
+の拡張定理を適応すると
+$H$の拡張
+$P\colon X\times [0, 1]\to \rr^{n+1}$
+を得る．
+そして
+$W=P^{-1}(\rr^{n+1}\setminus \{0\})$
+とし，
+$Q\colon W\to \yosphere{n}$
+を
+\begin{align}
+Q(x, t)=\frac{P(x, t)}{\lVert P(x, t)\rVert}
+\end{align}
+と定義すると
+$Q$は$W$上連続である．
+もちろん
+$X\times \{0\}\cup  A\times [0, 1]\subset W$
+であり
+$Q|_{X\times \{0\}\cup A\times [0, 1]}=P$
+である
+(以上の議論は$\yosphere{n}$がANR(正規空間)ということをこの言葉を用いずに証明したものである)．
+そして
+$X$の
+開集合
+$U$
+を
+$p\in X$であってある近傍$p$の$N$が存在し
+$N\times [0, 1]\subset W$となるもの全体
+とする．
+すると
+Tube Lemma 
+と
+$A\times [0, 1]\subset W$
+から
+$A\subset U$
+そして
+$X$の正規性から
+ある連続写像
+$u\colon X\to [0, 1]$
+で$u(A)=1$かつ
+$u(X\setminus U)=\{0\}$
+となるものが取れる．
+そこで
+$L\colon X\times [0, 1]\to \yosphere{n}$を
+\begin{align}
+L(x, t)=
+Q(x,  t\cdot u(x))
+\end{align}
+と定義する．
+もちろんこれは連続であり
+$G(x)=L(x, 1)$は$g$の拡張になっていて，
+$G$は$F$とホモトピックである．
+\end{proof}
+
+
+\begin{thm}
+$X$
+を正規空間とする．
+このとき
+$\yodim X\le n$
+であることと以下の条件は同値である．
+$X$の任意の閉集合
+$A$と
+連続写像$f\colon A\to \yosphere{n}$
+に対して連続写像
+$F\colon X\to \yosphere{n}$
+が存在し$F|_{A}=f$を満たす．
+\end{thm}
+\begin{proof}
+位相的には同じなので
+$\yosphere{n}$と$\yocubebd{n+1}$
+を同一視する．
+まず最初に
+$\yodim X\le n$
+を仮定する．
+このとき写像$f$は
+写像$f\colon A\to \yocubebd{n+1}$である．
+そして$f=(f_{1}, \dots, f_{n+1})$
+と成分表示し
+\[
+K_{i}=\{\, x\in A\mid f_{i}(x)=-1\, \}
+\]
+\[
+L_{i}=\{\, x\in A\mid f_{i}(x)=1\, \}
+\]
+とすると
+$K_{i}$と$L_{i}$
+は
+$X$
+の閉集合でなおかつ
+$K_{i}\cap L_{i}=\emptyset$
+を満たしさらに
+\[
+A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})
+\]
+となる．
+ここで
+定理
+\ref{prop:hihukudim3}
+を
+$\{K_{i}\}_{i=1}^{n+1}$
+と
+$\{X\setminus L_{i}\}_{i=1}^{n+1}$
+に適応し
+各
+$i$
+について
+開集合$P_{i}$
+と
+$Q_{i}$
+で
+$A_{i}\subset P_{i}$
+と
+$P_{i}\subset Q_{i}$
+$\cl Q_{i}\subset X\setminus L_{i}$
+でなおかつ
+$\bigcap_{i=1}^{n+1}(\cl Q_{i}\setminus P_{i})=\emptyset$
+を満たすものが存在する．
+ここでTietze-Urysohnの拡張定理から
+各
+$i$について
+連続写像$u_{i}\colon X\to [-1, 1]$
+であって
+$u_{i}(\cl P_{i})=-1$
+かつ
+$u_{i}(X\setminus Q_{i})=1$
+となるものが存在する．
+このとき
+$u_{i}^{-1}(0)\subset Q_{i}\setminus \cl P_{i}\subset \cl Q_{i}\setminus P_{i}$
+なので
+$\bigcap_{i=1}^{n+1}u_{i}^{-1}(\{0\})=\emptyset$
+となる．
+もちろん
+各$i$について
+$K_{i}\subset u_{i}^{-1}(\{-1\})$, 
+$L_{i}\subset u_{i}^{-1}(\{1\})$
+を満たすことに注意せよ．
+ここで
+\[
+u\colon X\to [-1, 1]^{n+1}
+\]
+を$u=(u_{1}, \dots, u_{n})$
+と定義する．
+ここで
+$A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})$と
+$u_{i}$の性質から$x\in A$のとき
+$u(x)$は$\yocubebd{n+1}$
+への写像になる．ここで
+$v=u|_{A}\colon A\to \yocubebd{n+1}$とおく．
+そして
+$h\colon [0, 1]\to \rr^{n+1}$
+を
+\[
+h(x, t)=(1-t)v(x)+tf(x)
+\]
+と定義する．
+$A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})$
+であることと
+$K_{i}$, $L_{i}$
+$u_{i}$の定義から
+$h(x, t)$は常にその成分のいずれかは絶対値が$1$
+である．
+つまり$\lVert h(x, t)\lVert_{\infty}\neq 0$である．
+ここで
+$\lVert*\rVert_{\infty}$
+は$\ell^{\infty}$-ノルムである．
+つまり$H\colon X\times [0, 1]\to \yocubebd{n+1}$
+を
+\[
+H(x, t)=\frac{h(x, t)}{\lVert h(x, t)\lVert_{\infty}}
+\]
+と定義できる．
+ここで
+$H(x, 0)=v(x)$
+で
+$H(x, 1)=f(x)$
+に注意せよ．
+この$H$
+は$v$と
+$f$を結ぶホモトピーであり，
+$v$は$X$全体への連続拡張
+$u$
+を持つから
+Borsukのホモトピー拡張定理
+(定理\ref{thm:borsukhomotopy})から
+$f$は拡張$F\colon X\to \yocubebd{n+1}$
+を持つ．
+
+逆に拡張問題が常に解けるとして，
+$X$の次元の評価をしよう．
+$X$の
+濃度が$n+1$の
+任意の開集合族
+$\{U_{1}, \dots, U_{n+1}\}$
+と
+閉集合族
+$\{F_{1}, \dots, F_{n+1}\}$で
+$F_{i}\subset U_{i}$
+となるもの
+を考える．
+今
+$H_{i}=X\setminus U_{i}$
+として
+$A=\bigcup_{i=1}^{n+1}(F_{i}\cup H_{i})$
+とする．
+そして
+各$u_{i}\colon A\to [-1, 1]$
+を
+$u_{i}(F_{i})=-1$かつ
+$u_{i}(H_{i})=1$
+を満たすものとする．
+このとき$u=(u_{1}, \dots, u_{n+1})$
+は
+$\yocubebd{n+1}$
+への写像になっている．
+さて，定理の仮定から
+連続写像
+$g=(g_{1}, \dots g_{n+1})\colon X\to \yocubebd{n+1}$
+で$g|_{A}=u$
+となるものが存在する．
+そして
+$V_{i}=g_{i}^{-1}([-1, 0))$
+とすると
+$\cl V_{i}\subset g_{i}^{-1}([-1, 0])$
+で
+$F_{i}\subset V_{i}\subset \cl V_{i}\subset U_{i}$
+を満たす．
+さらに
+$\bd V_{i}\subset g_{i}^{-1}(\{0\})$
+なので$g$が$\yocubebd{n+1}$
+への写像であることから
+$\bigcap_{i=1}^{n+1}\bd V_{i}=\emptyset$
+である．
+よって
+命題
+\ref{prop:hihukudim3}
+から
+$\yodim X\le n$
+である．
+\end{proof}
+
+
+
+
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{dempafx}
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+
+
+\bibitem{dempa}
+
+電波通信, 「次元論ショートコース：0次元から始める位相次元」, 
+https://concious4410.hatenablog.com/entry/2022/03/12/161532
+
+
+\bibitem{dempa2}
+電波通信, 「不動点定理と同値な命題」, 
+https://concious4410.hatenablog.com/entry/2026/04/05/181441
+
+\bibitem{dempa3}
+電波通信，
+「次元論からの領域不変性定理の証明」，
+https://concious4410.hatenablog.com/entry/2026/04/15/220550
+
+\bibitem{chara}
+M. G. Charalambous, 
+\textit{Dimension theory. A selection of theorems and counterexamples} Springer/Atlantis Press (2019). 
+
+\bibitem{HW}W. Hurewicz and H. Wallman,\textit{Dimension Theory},Princeton Univ. Press,1948
+
+\bibitem{pears}
+ A. R. 
+ Pears,
+ \textit{Dimension theory of general spaces}, 
+ {Cambridge} {University} {Press}
+1975. 
+
+\bibitem{Morita}
+K. Morita, 
+\textit{On the dimension of normal spaces, I. }, 
+Japanese journal of mathematics :transactions and abstracts, 
+vol 20
+(1950), 
+pp. 5--36, 
+DOI: 
+10.4099/JJM1924.20.0\_5
+
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+

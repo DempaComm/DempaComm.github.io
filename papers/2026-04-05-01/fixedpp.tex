@@ -1,0 +1,574 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{url}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\newcommand{\ind}{\text{{\rm ind}}}
+
+\DeclareMathOperator{\emb}{Emb}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+
+\DeclareMathOperator{\rank}{rank}
+
+
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\mydisc}[1]{\mathbf{D}^{#1}}
+\newcommand{\mysphere}[1]{\mathbf{S}^{#1}}
+\newcommand{\mycube}[1]{\mathbf{I}^{n}}
+\newcommand{\mycubesidep}[2]{\mathbf{I}^{#1, #2}_{+}}
+\newcommand{\mycubesidem}[2]{\mathbf{I}^{#1, #2}_{-}}
+
+\newcommand{\mycubebd}[1]{\partial\mathbf{I}^{n}}
+
+
+\newcommand{\myhl}[2]{H_{#2}(#1)}
+
+
+%%%%%%%%%%%%%%%%%%
+
+
+\title{
+ブラウワーの不動点定理と同値な命題
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文書ではブラウワーの不動点定理と同値な命題を紹介する．
+同値性しか紹介しないので，実際にこれらを使って楽に不動点定理を証明できるとかそういう効能はない．
+一応閉球体からその境界へのレトラクトが存在しないことをホモロジーを用いて紹介している．
+これらの命題はおいおいユークリッド空間の位相次元を計算する記事だとか領域不変性定理の記事だとかで用いられる予定だとかである．
+
+\section{本文}
+
+\begin{df}
+$X$を位相空間とし
+$A$, $B$, $C$をその部分集合とする．
+$A\cap B=\emptyset$と仮定する．
+このとき\textbf{$C$が$A$と$B$を分離する}
+とは開集合$U$と$V$が存在して
+$A\subset U$, $B\subset V$, 
+$U\cap V=\emptyset$そして
+$X\setminus C=U\coprod V$
+を満たす時にいう．
+この時必然的に$C$は閉集合になることに注意しよう．
+\end{df}
+
+まずは次の準備補題から始めよう．
+\begin{lem}\label{lem:kisokiso}
+$A$を
+$[-1, 1]$の閉集合で尚且つ
+$\{-1\}$
+と
+$\{1\}$
+を分離しているとする．
+そして
+$[-1, 1]\setminus A=U\coprod V$とし
+$1\in V$とする．
+このとき$V$の任意の元$x$について
+\[
+|x-d(x, A)|\le 1
+\]である．
+\end{lem}
+\begin{proof}
+まず最初に
+$0\le x-d(x, A)$
+のときを考える．
+このとき$0\le d(x, A)$なので
+$|x-d(x, A)|\le x-d(x, A)\le x\le 1$
+がわかる．
+次に$0\le d(x, A)-x$のときを考える．
+このとき$c=\min A$について，
+$A$が$\{-1\}$と$\{1\}$
+を分離することから
+$-1<c$である．
+また$U$と$V$の定義と$1\in V$であることから
+$c<x$である．
+よって
+$d(x, A)\le |x-c|=x-c$となる．
+すると
+$|x-d(x, A)|=d(x, c)-x=x-c-x=-c<1$
+となる．
+\end{proof}
+
+
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+このとき
+$\mydisc{n}=\{\, x\in \rr^{n}\mid \lVert x \rVert\le 1\, \}$
+とし
+$\mysphere{n-1}=\{\, x\in \rr^{n}\mid \lVert x \rVert=1\, \}$
+と定義する．ここでノルム$\lVert *\rVert$は通常の内積から誘導されるノルムとする．つまり
+$\mydisc{n}$は$n$次元閉球体で
+$\mysphere{n-1}$はその境界である$n-1$次元球面である．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とし，
+$i\in \{1, \dots, n\}$
+とする．
+このとき
+$\mycube{n}=[-1, 1]^{n}$
+と定義し
+$\mycubesidep{n}{i}=\{\, x\in \mycube{n}\mid x_{i}=1\, \}$
+で
+$\mycubesidep{n}{i}=\{\, x\in \mycube{n}\mid x_{i}=-1\, \}$
+と定義する．
+さらに
+$\mycubebd{n}$を$\mycube{n}$の境界集合
+とする．
+このとき
+$\mycubebd{n}=\bigcup_{i=1}^{n}\mycubesidep{n}{i}\cup \mycubesidem{n}{i}$
+であることに注意しよう．
+また
+$\mycube{n}$
+は$\mydisc{n}$に同相であり，
+$\mycubebd{n}$は
+$\mysphere{n-1}$
+に同相であることにも注意しよう．
+\end{df}
+
+
+この文書の主定理は以下である．
+
+\begin{thm}
+$n\in \zz_{\ge 1}$について以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+
+\item\label{item:noret}(No retraction theorem)
+レトラクション
+$r\colon \mydisc{n}\to \mysphere{n-1}$
+は存在しない．
+
+\item\label{item:fixedpt}(Brouwer's fixed point theorem)
+任意の連続写像
+$f\colon \mydisc{n}\to \mydisc{n}$
+は不動点を持つ．
+
+\item\label{item:ccc}
+$i\in \{1, \dots, n\}$を添字とする
+閉集合$C_{i}\subset \mycube{n}$
+の族が$\mycubesidep{n}{i}$
+と$\mycubesidem{n}{i}$
+を分離するならば
+$\bigcap_{i=1}^{n}C_{i}\neq \emptyset$
+を成り立つ．
+
+
+\item\label{item:pm}(the Poincar\'{e}-Miranda theorem)
+$i\in \{1, \dots, n\}$を添字とする連続写像の族
+$f_{i}\colon \mycube{n}\to \rr$が
+$f_{i}(\mycubesidep{n}{i})\subset [0, \infty)$
+と
+$f_{i}(\mycubesidem{n}{i})\subset (-\infty, 0]$
+を満たすならば，
+ある点$p\in \mycube{n}$
+が存在して
+$f_{i}(p)=0$が成り立つ．
+つまり共通零点が存在する．
+\end{enumerate}
+\end{thm}
+\begin{proof}\ 
+[$\ref{item:noret}\To \ref{item:fixedpt}$]
+いつものやつである．
+不動点を持たない連続写像
+$f\colon \mydisc{n}\to \mydisc{n}$
+が存在するとしよう．
+このとき
+このとき$f(x)$から
+$x$へと線分を伸ばして
+$\mysphere{n-1}$と交わる点を$r(x)$と定義すると，
+これは$\mysphere{n-1}$上では$r(x)=x$を満たす．
+また$x$と$y$が十分近いときに
+$(1-t)f(x)+tx$と$(1-t)f(y)+ty$も十分近いという事実から
+$r$の連続性も従う(凸な基本近傍形が取れるなどの事実も使うのだろう)．
+あるいは$(1-t)f(x)+tx$のノルムが$1$になる$t>0$を二次方程式を解いて具体的に記述するのでも良い．
+とにかく連続なレトラクション
+$r\colon \mydisc{n}\to \mysphere{n-1}$
+が存在するので\ref{item:noret}に反し，
+背理法により
+\ref{item:fixedpt}が成り立つ．
+
+[$\ref{item:fixedpt}\To \ref{item:ccc}$]
+各$i\in \{1, \dots, n\}$
+に対して
+$\mycube{n}$
+の開集合$P_{i}$, 
+$N_{i}$を
+$\mycube{n}\setminus C_{i}=N_{i}\coprod P_{i}$
+で
+$\mycubesidep{n}{i}\subset P_{i}$かつ
+$\mycubesidem{n}{i}\subset N_{i}$
+を満たすものをとってくる．
+このような開集合の組みは複数個あり得るかもしれないがとにかく一つとってくる($C_{i}$の補集合の連結成分が二つより大きいことがあり得るからである)．
+そして
+写像$m_{i}\colon \mycube{n}\to \rr$
+を
+\[
+m_{i}(x)=
+\begin{cases}
+d(x, C_{i}) & \text{$x \in C_{i}\cup P_{i}$}\\
+-d(x, C_{i}) & \text{$x\in C_{i} \cup N_{i}$}
+\end{cases}
+\]
+と定義する．
+このとき
+$C_{i}\cup P_{i}$
+と
+$ C_{i}\cup N_{i}$
+はともに閉集合で，
+これらの共通部分である
+$C_{i}$上では
+$d(x, C_{i})$
+と
+$-d(x, C_{i})$は同じ値$0$を取り，
+$C_{i}\cup P_{i}$
+と
+$ C_{i}\cup N_{i}$上ではもちろん連続なので
+貼り合わさって
+$m_{i}$はちゃんと定義され連続になる．
+そして
+$f_{i}\colon \mycube{n}\to \rr$
+を
+\[
+f_{i}(x)=x_{i}-m_{i}(x)
+\]
+と定義する．
+このとき
+$|f_{i}(x)|\le 1$
+となることを今から証明しよう．
+$x\in P_{i}$のときのみ証明する．他の場合は同様に証明できる．
+このとき$f_{i}(x)=x_{i}-d(x, C_{i})$である．
+まず
+$0\le x_{i}-d(x, C_{i})$
+のときは$0\le d(x, C_{i})$なので
+\[
+|f_{i}(x)|=x_{i}-d(x, C_{i})\le x_{i}\le 1
+\]
+であるから求める結果が成り立つ．
+次に$0\le d(x, C_{i})-x_{i}$の場合を調べる．
+このとき
+$x$を通る直線で
+$\mycubesidep{n}{i}$
+と$\mycubesidem{n}{i}$に垂直なもの，つまり
+$L=\{\, z\in \mycube{n}\mid z_{k}=x_{k},   k\neq i\, \}$
+を考える．そして$a$を$L\cap\mycubesidep{n}{i}$を構成する唯一の点とし
+同様に$b$を$L\cap \mycubesidem{n}{i}$を構成するただ唯一の点とする．つまり$a$は$i$成分が$1$でそれ以外が
+$x$と同じ成分であり，$b$は$i$成分が$-1$でそれ以外が
+$x$と一致するものである．
+すると$L\cap C_{i}$は$L$の部分集合として
+$a$と$b$を分離する．
+今$L$と$[-1, 1]$を同一視すれば
+補題\ref{lem:kisokiso}が適応できて
+$|x_{i}-d(x, L\cap C_{i})|\le 1$となる．
+さて$|f_{i}(x)|$を計算しよう．
+\[
+|f_{i}(x)|=d(x, C_{i})-x_{i}
+\le d(x, L\cap C_{i})-x_{i}=|d(x, L\cap C_{i})-x_{i}|\le 1
+\]
+以上の計算より求める不等式を得る．
+上の議論からどんな状況においても
+$|f_{i}(x)|\le 1$が成り立つことがわかった．
+ここで写像$f\colon \mycube{n}\to \mycube{n}$
+を$f=(f_{1}, \dots, f_{n})$で定義する．さっき証明した不等式から$f$の地域はちゃんと$\mycube{n}$
+になっている．
+よって\ref{item:fixedpt}から不動点$p$が存在する．
+$f$の定義からこの$p$は
+$d(p, C_{i})=0$を満たす．
+つまり$p\in \bigcap_{i=1}^{n}C_{i}$
+なので$\bigcap_{i=1}^{n}C_{i}\neq \emptyset$
+がわかるので
+\ref{item:ccc}が成り立つ．
+
+
+
+[$\ref{item:ccc}\To \ref{item:pm}$]
+各$i\in \{1, \dots, n\}$
+と$k\in\zz_{\ge 0}$について
+$L_{i, k}=\{\, x\in \mycube{n}\mid |x_{i}|\le 1-2^{-k}\, \}$
+とおく．
+そして
+写像
+$w_{i, k}\colon\mycube{n}\to \mycube{n}$
+を
+\[
+w_{i, k}(x)=
+x_{i}\cdot d(x, L_{i, k})
+\]
+と定義する．
+そして$g_{i}\colon \mycube{n}\to \mycube{n}$
+を
+$g_{i, k}(x)=f_{i}(x)+w_{i, k}(x)$
+と定義する．
+この時常に
+$g_{i, k}(\mycubesidep{n}{i})\subset (0, \infty)$
+で$g_{i, k}(\mycubesidem{n}{i})\subset (-\infty, 0)$
+である．
+よって
+$C_{i, k}=g^{-1}(\{0\})$
+は$\mycubesidep{n}{i}$と
+$\mycubesidem{n}{i}$
+を分離する閉集合である．
+故に
+\ref{item:ccc}から
+$\bigcap_{i=1}^{n}C_{i, k}\neq \emptyset$
+である．この集合から点$p_{k}$をとる．
+このとき$\mycube{n}$
+のコンパクト性から収束する部分列$\{p_{\phi(k)}\}_{k\in \zz_{\ge 0}}$が存在する．その収束先を$p$とする．
+さて$g_{i, k}$は$f_{i}$に一様収束するので，
+$k\to \infty$のとき
+$g_{i, \phi(k)}(p_{\phi(k)})\to f_{i}(p)$
+である．
+よって任意の$i\in \{1, \dots, n\}$
+について$f_{i}(p)=0$となる．
+つまり
+\ref{item:pm}
+が成り立つ．
+
+
+[$\ref{item:pm}\To \ref{item:noret}$]
+まず$\mycube{n}$と
+$\mydisc{n}$, 
+そして
+$\mysphere{n-1}$
+と$\mycubebd{n}$
+を同一視する．
+背理法のためにレトラクション
+$r\colon \mycube{n}\to \mycubebd{n}$
+が存在すると仮定する．
+このとき$r$の各成分$r_{i}$はもちろん
+$r_{i}(\mycubesidep{n}{i})\subset [0, \infty)$
+と
+$r_{i}(\mycubesidem{n}{i})\subset (-\infty, 0]$
+を満たすので，\ref{item:pm}からある$p\in \mycube{n}$
+が存在して$r(p)=0$を満たす．
+しかしこれは
+$r$の値域が
+$\mycubebd{n}$
+であることに反するので
+上記のようなレトラクションは存在しえない．
+よって
+\ref{item:noret}
+が成り立つ．
+\end{proof}
+
+
+上の定理だけだと，同値性しか証明していないので，
+不動点定理が実際に正しいのかどうかは判断できない．
+しかし以下のことが知られているので，上で述べたすべての命題は正しいことがわかる．
+\begin{thm}
+任意の$n\in \zz_{\ge 1}$について
+レトラクション$r\colon \mydisc{n}\to \mysphere{n-1}$
+は存在しない.
+\end{thm}
+\begin{proof}
+$n=1$のときは中間値の定理からレトラクションの不存在がわかる．以下では$1<n$とする．
+また
+$\myhl{*}{i}$でホモロジー群の関手を表すとする．
+上記のようなレトラクションが存在したとしよう．
+このとき$\iota$を$\mysphere{n-1}$から
+$\mycube{n}$への包含写像として
+$r\circ  \iota = 1_{\mysphere{n}}$
+が成り立つので，$n-1$について
+\[
+\myhl{r}{n-1}\circ \myhl{\iota}{n}=\myhl{1_{\mysphere{n}}}{n-1}=1_{\myhl{\mysphere{n-1}}{n-1}}
+\]
+となる．
+故に$\myhl{\iota}{n-1}\colon \myhl{\mysphere{n-1}}{n-1}\to \myhl{\mydisc{n}}{n-1}$
+は単射になる．
+ところで
+$\myhl{\mydisc{n}}{n-1}\cong \{0\}$
+で
+$\myhl{\mysphere{n-1}}{n-1}\cong\zz$
+なので，
+単射$\myhl{\iota}{n-1}$の存在はあり得ない．
+よって
+レトラクション$r$は存在しえない．
+\end{proof}
+\begin{rmk}
+一応ホモロジーなどの結構高等な概念を使わずに，
+逆関数定理や積分の変数変換公式を使って
+ブラウワーの不動点定理を証明できる．
+電波通信の記事\cite{dempa}を参照のこと．
+\end{rmk}
+
+球面や球体の
+ホモロジーの計算などは
+\cite{minazumi}などに載っている．
+
+
+
+	
+\begin{thebibliography}{99}
+
+\bibitem{minazumi}
+みなずみ, 
+webページ
+数学ノート$\mid$単純思考
+「切除定理」, 
+\url{https://minazumi.com/math/note/tgy/ch02sec02.html}
+
+\bibitem{dempa}
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+\bibitem{HW}W.Hurewicz and H.Wallman,\textit{Dimension Theory},Princeton Univ. Press,1948
+
+\bibitem{Kul}
+W. Kulpa, 
+\textit{The Poiancr\'{e}--Miranda Theorem}, 
+Am. Math. Mon. 104, No. 6, 545--550 (1997)
+doi: 10.2307/2975081
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

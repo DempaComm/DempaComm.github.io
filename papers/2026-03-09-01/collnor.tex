@@ -1,0 +1,797 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{族正規と写像の拡張}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+この文章では，
+Dowkerの論文
+\cite{dow}に基づいて族正規のバナッハ空間への写像の拡張を使った特徴付けを証明する．
+
+
+\section{基本的なこと}
+位相空間$X$
+の部分集合族$\mathcal{A}$
+が\textbf{疎}
+であるとは
+位相空間$X$の任意の点$p$
+について$p$の近傍
+$N$であって，
+$\mathcal{A}$の元の高々一個としか交わらないものが存在する時にいう．
+つまり$\card(\{A\in \mathcal{A}\mid A\cap N\neq \emptyset\})\le 1$
+となるときと言うことである．
+
+疎な集合族に関して以下のことが知られている．
+\begin{lem}
+位相空間$X$の
+部分集合族$\mathcal{A}$
+について，これが疎であることと，
+$\{\cl(A)\mid A\in \mathcal{A}\}$
+が互いに素で局所有限である．
+\end{lem}
+\begin{proof}
+略．位相の練習にちょうど良い．
+\end{proof}
+
+
+$\mathfrak{m}$
+を無限基数とする．
+この時
+位相空間$X$が
+\textbf{$\mathfrak{m}$-族正規}
+であるとは，
+$X$の任意の疎な閉部分集合族$\mathcal{A}$
+であって$\card(\mathcal{A})\le \mathfrak{m}$
+となるものについて，
+互いに素な開部分集合
+族$\{U_{A}\mid A\in \mathcal{A}\}$
+で$A\subset U_{A}$となるもの
+が存在する時にいう．
+
+また，任意の$\mathfrak{m}$に対して
+$X$が$\mathfrak{m}$-族正規であるときに
+$X$を単に
+\textbf{族正規}
+と呼ぶ．
+
+当たり前だが，$\mathfrak{m}$-族正規空間は
+正規空間である．
+より詳しく以下のことが知られている．
+
+
+\begin{lem}
+$X$が正規空間であることと
+$X$が
+$\aleph_{0}$-族正規であることは同値である．
+よって特に無限基数$\mathfrak{m}$
+について$\mathfrak{m}$-族正規であるような空間は正規である．
+\end{lem}
+\begin{proof}
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+を疎な閉部分集合族とする．
+そして関数$f\colon \coprod_{i\in \zz_{\ge 0}}A_{i}\to \rr$
+を$x\in A_{i}$の時に$f(x)=i$
+と定義する．
+この時$\mathcal{A}$
+が疎であることから$f$は$X$の閉集合$\coprod_{i\in \zz_{\ge 0}}A_{i}$上で連続である．
+よってティーチェの拡張定理から
+連続関数$F\colon X\to \rr$
+で$\coprod_{i\in \zz_{\ge 0}}A_{i}$上では$f$に一致するものが存在する．
+ここで
+$U_{i}=F^{-1}(i-1/2, i+1/2)$
+とすると$\{U_{i}\mid i\in \zz_{\ge 0}\}$
+は互いに素な開集合の族で$A_{i}\subset U_{i}$
+となる．
+\end{proof}
+
+以下の補題は特に断りなく以下で用いるであろう．
+\begin{lem}
+$\mathbf{m}$を無限基数とし，
+$X$を$\mathbf{m}$-族正規とする．
+このとき$X$の疎な部分集合族$\{A_{i}\}_{i\in I}$
+に対して疎な開集合の族$\{U_{i}\}_{i\in I}$
+であって$A\subset U_{A}$
+となるものが存在する．
+\end{lem}
+\begin{proof}
+$X$の$\mathbf{m}$の族正規性から
+互いに素な開集合の族$\{O_{i}\}_{i\in I}$
+であって，$A_{i}\subset O_{i}$
+となるものが存在する．
+すると開集合$\bigcup_{i\in I}O_{i}$
+は閉集合$\bigcup_{i\in I}A_{i}$
+を含むので，ウリゾーンの補題から
+連続写像$f\colon X\to [0, 1]$
+で$\bigcup_{i\in I}A_{i}$上で$0$
+で$\bigcup_{i\in I}O_{i}$の外で$1$となるようなものが存在する．
+そこで$U_{i}=O_{i}\cap f^{-1}([0, 1/2))$
+とし，$W=f^{-1}((1/2,  1])$とする．
+今から族$\{U_{i}\}_{i\in I}$
+が疎であることを示そう．$x\in X$
+を任意にとる．もしも$x\in O_{i}$となる$i$が存在すれば，
+$O_{i}$は$\{U_{i}\}_{i\in I}$のうち$U_{i}$としか交わりを持たない．もしもそのような$i$がなければ，
+$f(x)=1$なので$x\in W$である．そして$W$はどんな
+$U_{i}$とも交わりを持たない．
+以上から$\{U_{i}\}_{i\in I}$
+が疎であることがわかる．
+\end{proof}
+
+
+
+
+\textbf{擬距離}とは，非退化性を満たすとは限らない距離関数のことである．
+擬距離空間は異なる2点間の距離が$0$
+になりうることがあるだけで大まかには距離関数と同じ性質を持つ．位相も距離関数と同じ方法で入れる．
+
+族正規空間の重要な例として，擬距離空間がある．
+一般に擬距離空間$(X, d)$
+とその部分集合$S$について
+$d(x, S)=\inf_{s\in S}d(x, s)$と定義する．
+これは$x$に関する連続関数になっている．
+\begin{prop}\label{prop:aoao}
+$(X, d)$
+を擬距離空間とする．
+このとき$(X, d)$
+は族正規である．
+\end{prop}
+\begin{proof}
+$\{A_{i}\}_{i\in I}$
+を$X$の族正規空間とする．
+そして
+$S_{i}=\bigcup_{k\in I, k\neq i}A_{k}$
+とするとこれは閉集合で$A_{i}\cap S_{i}=\emptyset$
+となる．
+ここで，
+\[
+U_{i}=\left\{\, x\in X\middle|\frac{d(x, A_{i})}{d(x, A_{i})+d(x, S_{i})}<\frac{1}{4}\, \right\}
+\]
+とおく．$\{U_{i}\}_{i\in I}$が互いに素な族であることを示そう．
+$x\in X$を任意にとる．もしも異なる$i, k\in I$
+について$x\in U_{i}$かつ$x\in U_{k}$となっていたとすると，$U_{i}$の定義から
+まず$x\not \in A_{i}$かつ$x\not \in A_{k}$
+がわかる．
+そして$U_{i}$の定義から
+\[
+3<\frac{d(x, S_{i})}{d(x, A_{i})}\le \frac{d(x, A_{k})}{d(x, A_{i})}
+\]
+がわかる．
+そして
+同様に
+\[
+3<\frac{d(x, S_{k})}{d(x, A_{k})}\le \frac{d(x, A_{i})}{d(x, A_{k})}
+\]
+がわかるがこれらは両立し得ないので，矛盾する．
+よって
+$\{U_{i}\}_{i\in I}$
+は互いに素な族である．
+\end{proof}
+
+
+
+局所有限開被覆に従属する単位の分割が存在することと正規性は同値である．このことはウリゾーンの補題の系であるが，証明は省略する．
+ちなみにどんな開被覆にも単位の分割が存在するのがパラコンパクト性と同値であり，この見方からすると，パラコンパクト性はある種の分離公理と見做せなくもない．
+\begin{thm}
+$X$を位相空間とする．
+このとき$X$が正規空間であることと，
+$X$上の任意の局所有限な開被覆に対して
+それに従属する単位の分割が存在することは同値である．
+\end{thm}
+\begin{proof}
+\cite[Corollary 11.9]{nor}や\cite{dempa}を参照のこと．
+\end{proof}
+
+\section{本文}
+族正規性があると，閉集合上の局所有限被覆をある意味で拡張できることをまずは示そう．
+\begin{thm}\label{thm:saibun}
+$\mathfrak{m}$
+を無限基数とし，$X$
+を$\mathfrak{m}$-族正規で$A$を$X$の閉集合とする．
+そして$\{U_{\alpha}\}_{\alpha\in I}$
+を$A$の部分集合族で($A$の中で)局所有限なものとし，
+$\card(I)\le \mathfrak{m}$とする．
+このとき$X$の局所有限な開被覆
+$\{V_{\alpha}\}_{\alpha\in I}$
+が存在して
+$A\cap V_{\alpha}\subset U_{\alpha}$
+が任意の$\alpha\in I$で成り立つ．
+\end{thm}
+\begin{proof}
+添字集合$I$は整列されているとして良い．
+今$A$は正規空間なので，
+$F_{\sigma}$開集合の被覆
+$\{W_{\alpha}\}_{\alpha\in I}$
+が存在して
+$W_{\alpha}\subset U_{\alpha}$
+を任意の$\alpha$で満たす．
+ここで，$\{W_{\alpha}\}_{\alpha\in I}$
+も局所有限であることに注意しよう．
+そして$C_{\alpha}$を超限帰納的に
+\[
+C_{\alpha}=W_{\alpha}\cap\left(A\setminus \bigcup_{\beta<\alpha}W_{\beta}\right)
+\]
+と定める．
+すると，$W_{\alpha}$は$F_{\sigma}$集合であり，
+$A\setminus \bigcup_{\beta<\alpha}W_{\beta}$は閉集合なので，それらの共通部分である$C_{\alpha}$
+も($A$の)$F_{\sigma}$集合である．
+よって，可算個の閉集合$C_{\alpha, r} (r\in \zz_{\ge 0})$
+を使って
+\[
+C_{\alpha}=\bigcup_{r\in \zz_{\ge 0}}C_{\alpha, r}
+\]
+と表すことができる．
+さて，$C_{\alpha}\subset W_{\alpha}$と，
+$C_{\alpha}$の定義から，$\{C_{\alpha}\}_{\alpha\in I}$
+は互いに素な集合族である．さらに
+\[
+\bigcup_{\alpha\in I}C_{\alpha}=\bigcup_{\alpha\in I}W_{\alpha}=A
+\]
+となることがわかる．
+さて，$\{W_{\alpha}\}_{\alpha\in I}$
+は冒頭で注意した通り局所有限である．
+そして 
+\[
+C_{\alpha, r}\subset C_{\alpha}\subset W_{\alpha}
+\]
+なので，
+$r$を固定したとき
+$\{C_{\alpha, r}\}_{\alpha\in I}$
+は互いに素な($X$の)閉集合の局所有限族である．つまり，疎な族となる．ここで$\card(I)\le \mathfrak{m}$
+から$X$の$\mathfrak{m}$-族正規性を使って，
+疎な開集合の族$\{G_{\alpha, r}\}_{\alpha\in I}$
+が存在して
+\[
+C_{\alpha, r}\subset G_{\alpha, r}
+\]
+が成り立つ．
+ここで，ウリゾーンの補題より，
+各$G_{\alpha, r}$
+は$F_{\sigma}$開集合としても良い．
+さらに，各$C_{\alpha, r}$
+は
+\[
+C_{\alpha, r}\subset G_{\alpha, r}\cap (X\setminus (A\setminus U_{\alpha}))
+\]
+となることに注意しておこう．
+ここで
+\[
+G=\bigcup_{\alpha\in I, r\in \zz_{\ge 0}}G_{\alpha, r}
+\]
+とするとこれは開集合で
+\[
+A= \bigcup_{\alpha\in I}\bigcup_{r\in \zz_{\ge 0}}C_{\alpha, r}\subset G
+\]
+を満たす．
+故に，ウリゾーンの補題から
+$F_{\sigma}$開集合
+$G_{\omega}$が存在して
+\[
+X\setminus G\subset G_{\omega}\subset 
+X\setminus A
+\]
+を満たす．
+ここで，適当に$G_{\alpha, r}$を選んで，$G_{\omega}$をわ集合する．例えば，$\alpha_{0}=\min I$として
+$G_{\alpha_{0}, 0}$を新たに$G_{\alpha_{0}, 0}\cup H$とする．
+このとき，再びウリゾーンの補題を用いて
+$F_{\sigma}$開集合の族$\{L_{\alpha, r}\}_{\alpha\in I, r\in \zz_{\ge 0}}$で
+\[
+\bigcup_{\alpha\in I, r\in \zz_{\ge 0}}L_{\alpha, r}=X
+\]
+かつ
+\[
+C_{\alpha, r}\subset L_{\alpha, r}\subset X\setminus (A\setminus U_{\alpha})
+\]
+を満たすものが取れ，さらに，
+各$r\in \zz_{\ge 0}$
+について
+$\{L_{\alpha, r}\}_{\alpha\in I}$
+は局所有限である．
+ここで各$r\in \zz_{\ge 0}$
+に対して
+\[
+L_{r}=\bigcup_{r\in \zz_{\ge 0}}L_{\alpha, r}
+\]
+と定義すると，$\{L_{\alpha, r}\}_{\alpha\in I, r\in \zz_{\ge 0}}$
+の局所有限性から
+各$L_{r}$は$F_{\sigma}$開集合になる．
+
+さて，今から$L_{r}$を局所有限な開被覆で細分しよう．
+ウリゾーンの補題から各$r$について
+閉集合の族$\{F_{r, n}\}_{n\in \zz_{\ge 0}}$
+と開集合の族$\{O_{r, n}\}_{n\in \zz_{\ge 0}}$
+が存在して
+\[
+L_{r}=\bigcup_{n\in \zz_{\ge 0}}F_{r, n}=\bigcup_{n\in \zz_{\ge 0}}F_{r, n}
+\]
+と
+\[
+F_{r, n}\subset O_{r, n}\subset F_{r, n+1}
+\]
+を満たす．
+そして各$r\in \zz_{\ge 0}$について
+\[
+V_{r}=L_{r}\cap \left(X\setminus \bigcup_{s<r}F_{s, r}\right)
+\]
+と定義すると
+$\{V_{r}\}_{r\in \zz_{\ge 0}}$
+は局所有限な被覆になる．
+というのも，被覆であることは$x$について$x\in L_{r}$となる最小の$r$をとれば$x\in V_{r}$となることがわかるし，
+局所有限性は$x$について$x\in O_{r, n+r}$となる$r$, $n$
+をとれば(取れる)，$n+r<N$となる$N\in \zz_{\ge 0}$について$V_{N}\cap F_{r, N}=\emptyset$なので
+$V_{N}\cap O_{r, n+r}=\emptyset$がわかるからである．
+(実は同じような状況において，星型有限な細分が取れるというのが森田紀一の初期の結果である．)
+
+
+ここで
+\[
+V_{r}\subset L_{r}
+\]
+に注意せよ．
+
+さて，
+\[
+V_{\alpha, r}=L_{\alpha, r}\cap V_{r}
+\]
+と定義し
+\[
+V_{\alpha}=\bigcup_{r\in \zz_{\ge 0}}V_{\alpha, r}
+\]
+と定義する．
+今からこの$\{V_{\alpha}\}_{\alpha\in I}$
+が求める族になっていることを証明しよう．
+まず，これが被覆になっていることを示す．
+$x\in X$
+を任意にとる．このとき
+$\{V_{r}\}_{r\in \zz_{\ge 0}}$
+が被覆なので$x\in V_{r}$
+となる$r\in \zz_{\ge 0}$が存在する．
+そして$x\in V_{r}\subset L_{r}$であり，
+$L_{r}$の定義から$x\in L_{\alpha, r}$となる$\alpha$が存在する．よって$x\in V_{\alpha, r}$であり，
+特に$x\in V_{\alpha, r}$である．これで被覆であることがわかった．
+
+次に局所有限性を証明しよう．$x\in X$を任意にとる．
+$\{V_{r\in \zz_{\ge 0}}\}$の局所有限性から
+$x$の近傍$N_{0}$と$m\in \zz_{\ge 0}$と$r(1)\dots, r(m)\in \zz_{\ge 0}$
+が存在して$N_{0}$は$V_{r(1)}\dots, V_{r(m)}$としか交わらない．ここで各$i\in \{1, \dots, m\}$
+について$\{L_{\alpha, r(i)}\}_{\alpha\in I}$
+の局所有限性から$x$の近傍$N_{i}$が存在して，
+$N_{i}$は$\{L_{\alpha, r(i)}\}_{\alpha\in I}$の有限個の元としか交わらない．
+さて，$N=N_{0}\cap N_{1}\cap\dots\cap N_{m}$とすると
+これは$x$の近傍であり，前述のことから，
+$N$は$\{L_{\alpha, r(i)}\}_{\alpha\in I, i\in \{1, \dots, m\}}$の有限個の元としか交わらない．
+よって，$N$は$\{V_{\alpha, r}\}_{\alpha\in I, r\in \zz_{\ge 0}}$
+の有限個の元としか交わらないので，結局
+$N$は
+$\{V_{\alpha}\}_{\alpha\in I}$の有限個の元としか交わらない．つまり，$\{V_{\alpha}\}_{\alpha\in I}$
+は局所有限である．
+
+次に$A\cap V_{\alpha}\subset U_{\alpha}$
+を証明しよう．
+ここで
+\[
+V_{\alpha}\subset \bigcup_{r\in \zz_{\ge 0}}L_{\alpha, r}\subset X\setminus (A\setminus U_{\alpha})
+\]
+である．
+よって$x\in A\cap V_{\alpha}$
+をとると
+$x\in X\setminus (A\setminus U_{\alpha})$かつ$x\in A$
+である．つまり$x\not\in (A\setminus U_{\alpha})$かつ
+$x\in A$なので
+$x\in U_{\alpha}$
+となる．よって
+\[
+A\cap V_{\alpha}\subset U_{\alpha}
+\]
+が成り立つ．
+これで証明が終わる．
+\end{proof}
+
+
+位相空間$X$の\textbf{稠密度}とは，稠密部分集合の最小濃度のことである．つまり$\min\{\, \card(A)\mid \text{$A$は$X$の稠密部分集合}\, \}$のことである．
+無限基数$\mathbf{m}$について，この稠密度が$\mathfrak{m}$かそれ以下のとき，空間
+$X$の稠密度は$\le \mathbf{m}$
+であるということにする．
+
+次が示したい定理である．
+論文\cite{dow}
+においてDowkerは被覆から定まる複体(脈体?)を用いてこの定理を証明したが，現代的には単位の分割を使ったほうが良いだろうと思ったのがこの文書を書くきっかけになった．
+
+\begin{thm}\label{thm:main}
+$\mathfrak{m}$
+を無限基数とする．
+このとき$X$が$\mathfrak{m}$-族正規であることと以下の性質は同値である：
+任意のバナッハ空間$B$で稠密度が$\le \mathfrak{m}$であるもの，$X$の任意の閉集合$A$とその上の任意の
+連続関数$f\colon A\to B$に対して連続関数
+$F\colon X\to B$であって$F|_{A}=f$
+となるものが存在する．
+\end{thm}
+\begin{proof}
+$B$のノルムから誘導される距離を$\rho$と書くことにする．
+今から帰納的に以下のような連続写像の列
+$\{g_{n}\colon X\to B\}_{n\in \zz_{\ge 0}}$を構成する．
+\begin{enumerate}
+\item\label{item:aa}
+任意の$n\in \zz_{\ge 0}$に対して
+\[
+\rho(g_{n}(x), g_{n+1}(x))<2^{-n+2}
+\]が成り立つ．
+
+\item\label{item:bb}
+任意の$x\in A$について
+\[
+\rho(g_{n}(x), f(x))<2^{-n}
+\]
+が成り立つ．
+\end{enumerate}
+以上のような列が構成されれば，極限$F(x)=\lim_{n\to\infty}g_{n}(x)$が存在して，それが連続であって$F|_{A}=f$を満たすことは, $B$がバナッハ空間，つまり完備であることからすぐにわかる．
+
+早速構成しよう．
+まず$g_{0}$を構成する．
+バナッハ空間
+$B$
+は距離関数なので，
+特にパラコンパクトである．
+よって
+$\rho$
+に関して半径
+$1/2$
+の開球からなる被覆の局所有限細分が存在する．
+それを
+$\{U_{\alpha}\}_{\alpha\in I}$
+とする．
+ここで
+$B$
+は稠密度が
+$\le \mathfrak{m}$
+なので，
+添字集合$I$
+の濃度は
+$\le \mathfrak{m}$としても良い．
+そして
+$\{f^{-1}(U_{\alpha})\}_{\alpha\in I}$
+は
+$f$
+の連続性から
+$A$
+の局所有限な開集合の被覆である．
+すると
+定理
+\ref{thm:saibun}から
+$X$の局所有限な開被覆
+$\{V_{\alpha}\}_{\alpha\in I}$
+が存在して
+\[
+V_{\alpha}\cap A\subset f^{-1}(U_{\alpha})
+\]
+を満たす．
+さて，
+$X$
+の正規性から，
+$\{V_{\alpha}\}_{\alpha\in I}$
+に従属する単位の分割
+$\{u_{\alpha}\}$が存在する．
+$p_{\alpha}\in U_{\alpha}$
+を選んで，
+$g_{0}\colon X\to B$を
+\[
+g_{0}(x)=\sum_{\alpha\in I}p_{\alpha}\cdot u_{\alpha}(x)
+\]
+と定義する．
+$\{u_{\alpha}\}_{\alpha\in I}$
+の局所有限性からこれは連続である．
+今\ref{item:bb}番の条件を確認しよう．
+$x\in X$を任意にとる．
+すると，
+$u_{\alpha}(x)>0$となる
+$\alpha\in I$
+について$f(x), p_{\alpha}\in U_{\alpha}$なので，
+$\|f(x)-p_{\alpha}\|<1$であることを用いて
+\begin{align*}
+\rho(f(x), g_{0}(x))&=\left\|\sum_{\alpha\in I}f(x)
+\cdot u_{\alpha}(x)-
+\sum_{\alpha\in I}p_{\alpha}\cdot u_{\alpha}(x)\right\|
+\le \sum_{u_{\alpha}(x)>0}\|f(x)-p_{\alpha}\|u_{\alpha}(x)\\
+&<\sum_{u_{\alpha}(x)>0} 1\cdot  u_{\alpha}(x)=
+\sum_{\alpha\in I} u_{\alpha}(x)=1
+\end{align*}
+よって\ref{item:bb}の評価は成り立つ．
+
+さて，$g_{n}$まで構成できたとして，
+$g_{n+1}$を構成しよう．
+$B$のパラコンパクト性から，
+局所有限な$B$の開被覆で各々の元の直径が
+$<2^{-n-3}$になるものが存在する．
+それを$\{U_{\alpha}\}_{\alpha\in I}$
+とする．
+定理
+\ref{thm:saibun}
+を$\{f^{-1}(U_{\alpha})\}_{\alpha\in I}$に適応して
+局所有限被覆
+$\{R_{\alpha}\}_{\alpha\in I}$で
+$R_{\alpha}\subset f^{-1}(U_{\alpha})$となるものを得る．
+そして$\{R_{\alpha}\cap g_{n}^{-1}(U_{\beta})\}_{
+(\alpha, \beta)\in I\times I}$
+を考えるとこれは$X$の局所有限な開被覆になっている．
+$J=I\times I$と置くことにする．
+この被覆を
+$\{W_{\gamma}\}_{\gamma\in J}$
+と書くことにする，
+そしてこれに従属する単位の分割を
+$\{v_{\gamma}\}_{\gamma\in J}$とする．
+さて今から$g_{n+1}$を定義したい．
+$W_{\gamma}\cap A=\emptyset$の時は，
+適当に$z_{\gamma}\in W_{\gamma}$を選んで
+$q_{\gamma}=g_{n}(z_{\gamma})$
+とする．
+$W\cap A\neq \emptyset$
+の時は$z_{\gamma}\in W_{\gamma}$
+を選んで
+$q_{\gamma}=f(z_{\gamma})$とする．
+そして
+$g_{n+1}\colon X\to B$
+を
+\[
+g_{n+1}(x)=\sum_{\gamma\in J} q_{\gamma}\cdot v_{\gamma}(x)
+\]
+と定義する．これは連続写像である．
+
+今から条件\ref{item:aa}を満たすことを確認しよう．
+\begin{align*}
+&\rho(g_{n+1}(x), g_{n}(x))
+=
+\left\|\sum_{\gamma\in J} (q_{\gamma}-g_{n}(x))\cdot v_{\gamma}(x)\right\|
+\le 
+\sum_{\gamma\in J} \left\|(q_{\gamma}-g_{n}(x))\right\|\cdot v_{\gamma}(x)
+\\
+&
+=
+\sum_{W_{\gamma}\cap A\neq \emptyset}\|q_{\gamma}-g_{n}(x)\|\cdot v_{\gamma}(x)+\sum_{W_{\gamma}\cap A=\emptyset}\|q_{\gamma}-g_{n}(x)\|\cdot v_{\gamma}(x)\\
+&=
+\sum_{W_{\gamma}\cap A\neq \emptyset}\|f(z_{\gamma})-g_{n}(x)\|\cdot v_{\gamma}(x)+\sum_{W_{\gamma}\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}(x)\|\cdot v_{\gamma}(x)\\
+&\le 
+\sum_{W_{\gamma}\cap A\neq \emptyset}(\|f(z_{\gamma})-g_{n}(z_{\gamma})\|+\|g_{n}(z_{\gamma})-g_{n}(x)\|)\cdot v_{\gamma}(x)\\
+&+\sum_{W_{\gamma}\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}(x)\|\cdot v_{\gamma}(x)
+\end{align*}
+を得る．
+ここで，
+帰納法の仮定から$g_{n}$は条件\ref{item:bb}を$n$について満たすので
+\[
+\|f(z_{\gamma})-g_{n}(z_{\gamma})\|<2^{-n}
+\]
+である．
+そして
+\[
+z_{\gamma}, x\in W_{\gamma}=R_{\alpha}\cap g_{n}^{-1}(U_{\beta})
+\]
+なので，
+$\|g_{n}(z_{\gamma})-g_{n}(x)\|<2\cdot 2^{-n-3}$
+となる．
+よって
+\begin{align*}
+&
+\sum_{W_{\gamma}\cap A\neq \emptyset}(\|f(z_{\gamma})-g_{n}(z_{\gamma})\|+\|g_{n}(z_{\gamma})-g_{n}(x)\|)\cdot v_{\gamma}(x)+\sum_{W_{\gamma}\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}(x)\|\cdot v_{\gamma}(x)\\
+&
+\le 2^{-n}+2^{-n-2}+2^{-n-2}=2^{-n}+2^{-n-1}<2^{-n+1}=2^{-(n+1)+2}
+\end{align*}
+よって条件
+\ref{item:aa}
+が$n+1$
+に対して成り立つ．
+
+次に
+\ref{item:bb}番の条件を確認する．
+$x\in A$とすると，
+$x\in W_{\gamma}$となる$W_{\gamma}$
+は$A\cap W_{\gamma}\neq\emptyset$となり，
+$z_{\gamma}, x\in W_{\gamma}\subset R_{\alpha}$
+なので，
+\begin{align*}
+&\rho(g_{n+1}(x), f(x))=
+\left\|\sum_{\gamma\in J}(q_{\gamma}-f(x))v_{\gamma}(x)\right\|
+=\left\|\sum_{\gamma\in J}(f(z_{\gamma})-f(x))v_{\gamma}(x)\right\|\\
+&\le 
+\sum_{\gamma\in J}\left\|f(z_{\gamma})-f(x)\right\|v_{\gamma}(x)
+< 2\cdot 2^{-n-3}\cdot \sum_{\gamma\in J}v_{\gamma}(x)=2^{-n-2}<2^{-(n+1)}
+\end{align*}
+という評価を得る．
+よって条件\ref{item:bb}が$n+1$に対して成り立つ．
+以上で証明が終わる．
+\end{proof}
+
+\section{応用}
+
+$\gamma$を無限基数とする．このとき
+位相空間$X$の部分集合$S$が\textbf{$P^{\gamma}$-embedded}であるとは，$S$上の稠密度が$\le \gamma$である連続擬距離$d$に対して
+$X$上の稠密度が$\le \gamma$である連続擬距離$e$が存在して$e|_{S\times S}=d$
+となることである．
+
+族正規性を$P^{\gamma}$-embeddedが特徴づけることを証明しよう．
+
+その前に擬距離空間上の有界連続関数の空間の稠密度を計算しよう．
+\begin{thm}[Stone-Weierstrassの定理]
+$X$をコンパクトハウスドルフ空間とし
+$A$を$C(A, \rr)$の部分環とし，さらに定数関数を含むとする．
+このとき任意の異なる２点$x, y\in X$
+に対して$f\in A$が存在して$f(x)\neq f(y)$
+となるならば$A$は$C(X, \rr)$の中で稠密である．
+\end{thm}
+\begin{proof}
+略．この定理の名前で検索すると証明が出てくる．
+\end{proof}
+\begin{prop}
+$\mathbf{m}$
+を無限基数とし
+$(X, d)$
+を稠密度が$\le \mathbf{m}$
+であるような擬距離空間とする．
+そして$B$を$X$上の実有界連続関数の集合に
+supノルムを入れたバナッハ空間とする．
+このとき$B$の稠密度は$\le \mathbf{m}$である．
+\end{prop}
+\begin{proof}
+$B$と$C(\beta X, \rr)$が同型になることを利用しよう．
+ここで$\beta X$は$X$のストーンチェックコンパクト化である．
+$X$の稠密度が$\le \mathbf{m}$
+であることから
+$\beta X$の稠密度も$\le \mathbf{m}$
+である．そして濃度が$\le \mathbf{m}$
+となる$\beta X$の稠密部分集合を$H$として，
+異なる2点$x, y\in H$に対して
+$f_{x, y}$を$f_{x, y}(x)\neq f_{x, y}(y)$となるものを選ぶ．
+そして$A$を$C(\beta X, \rr)$
+の部分環で$1$と$f_{x, y}$たちで生成されるものとする．
+すると$H$の稠密性と先のStone-Weierstrassの定理から
+$A$は稠密である．
+ところで$A$の任意の元$a$はに対して$\rr$係数の多変数多項式$g$が存在して$a$は$g$に生成元を代入したものに等しい．この$g$の係数を十分よく近似する有理数に変えたものを$u$とし，$a$の時と同じ生成元を代入したものを$b$
+とすると，$a$と$b$は十分に近い．
+つまり，$A$と同じ生成元から生成される$\qq$係数の
+$C(\beta X, \rr)$の部分環$Q$は$C(\beta X, \rr)$
+の中で稠密である．
+$Q$の濃度は高々$\mathbf{m}$であるから
+$C(\beta X, \rr)$
+の稠密度が$\le \mathbf{m}$
+であることがわかる．
+\end{proof}
+
+以下の定理を証明して文書を終わろう．
+この定理自体は
+\cite[Theorem 15.6]{nor}である．
+\begin{thm}
+$X$を位相空間とし，$\mathbf{m}$を無限基数とする．
+このとき$X$が$\mathbf{m}$-族正規であることと
+$X$の任意の閉集合が$P^{\mathbf{m}}$-embeddedであることは同値である．
+\end{thm}
+\begin{proof}
+まず最初に$X$を$\mathbf{m}$-族正規と仮定しよう．
+そして閉集合$A$とその上の稠密度が$\le \mathbf{m}$である連続擬距離$d$を考える．$A$は空でないとしても良い．
+今からこれを$X$上に拡張しよう．
+まず
+$B$を$(A, d)$上の実有界連続関数全体のなす集合とし，
+supノルムを入れる．すると$B$はバナッハ空間であり，
+稠密度は$\le \mathbf{m}$になる．
+そして$p\in A$を固定し$f\colon A\to B$
+を$f(x)=d(x, \bullet)-d(p, \bullet)$とする．$\bullet$は引数が入るところである．するとこれは
+$d(x, y)=\|f(x)-f(y)\|$という意味で等長になっており特に連続である．擬距離だと点が潰れたりするので$f$は単射にならない．さて，$X$が$\mathbf{m}$-族正規であることから定理\ref{thm:main}
+より
+連続写像$F\colon X\to B$であって
+$F|_{A}=f$となるものが存在する．
+この$F$を用いて$X$上の擬距離$e$を
+$e(x, y)=\|F(x)-F(y)\|$と定義すれば
+これは$e|_{A\times A}=d$を満たすので，
+$A$が$P^{\mathbf{m}}$-embedded
+であることがわかる．
+
+次に
+閉集合
+$A$
+が$P^{\mathbf{m}}$-embedded
+であると仮定しよう．
+そして
+$\{L_{\alpha}\}_{\alpha<\lambda}$$(\lambda\le \mathbf{m})$
+を$X$の疎な閉集合の族とする．
+ここで閉集合$A$を
+$A=\bigcup_{\alpha<\lambda}L_{\alpha}$と定義し
+$A$上の擬距離を
+\[
+d(x, y)=
+\begin{cases}
+0 & \text{$x\in L_{\alpha}$, $y\in L_{\beta}$, $\alpha\neq \beta$}\\
+1  & \text{$x, y\in L_{\alpha}$}
+\end{cases}
+\]
+と定義する．
+すると，$d$は連続であり，
+$(A, d)$の稠密度は$\le \lambda$，特に
+$\le \mathbf{m}$
+である．
+よって$X$上の
+擬距離$e$であって
+稠密度が$\le \mathbf{m}$
+で
+$e|_{A\times A}=d$
+となるものが存在する.
+そして
+命題
+\ref{prop:aoao}から
+$(X, e)$
+は$\mathbf{m}$-族正規なので，
+$\{L_{\alpha}\}_{\alpha<\lambda}$
+を分離する$(X, e)$
+の開集合が存在する．
+$e$は連続なので，そのような開集合は特に
+$X$自体でも開集合になり，
+結局$X$が$\mathbf{m}$-族正規
+であることがわかった．
+\end{proof}
+
+
+$P^{\gamma}$-embedded-nessの詳しい話は
+\cite{nor}などを参照のこと．
+
+
+\begin{thebibliography}{99}
+
+\bibitem{dempa}
+はてなブログ電波通信, 
+「正規性の特徴付け」, 
+https://concious4410.hatenablog.com/entry/2015/12/21/170610
+
+\bibitem{dow} 
+C. H. Dowker, 
+\textit{On a theorem of Hanner}, 
+Ark. Mat. 2, 307--313 (1952), 
+doi:
+10.1007/BF02591500. 
+
+
+\bibitem{nor}
+R. A. Alo and H. L. Shapiro, 
+\textit{Normal topological spaces}, 
+Reprint of the 1974 hardback ed. Cambridge: Cambridge University Press (2009). 
+\end{thebibliography}
+
+
+
+\end{document}

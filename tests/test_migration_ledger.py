@@ -167,6 +167,47 @@ class MigrationLedgerTest(unittest.TestCase):
             self.assertEqual("ready", article["status"])
             self.assertEqual("approved", article["author_review"])
             self.assertIn("名義と全ページを確認済み。", article["notes"])
+            slug = "2024-01-02-01"
+            manifest_dir = root / "papers" / slug
+            manifest_dir.mkdir()
+            (manifest_dir / "paper.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 2,
+                        "slug": slug,
+                        "migration_record_id": article["record_id"],
+                        "title": article["title"],
+                        "published_at": article["published_at"],
+                        "sequence": 1,
+                        "math_section": article["math_section"],
+                        "original_url": article["original_url"],
+                        "tags": article["tags"].split("|") if article["tags"] else [],
+                        "build": {"enabled": False, "engine": ""},
+                        "files": [],
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "record-publication",
+                    article["record_id"],
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            article = next(
+                row for row in rows if row["title"] == "外部で見つかった記事"
+            )
+            self.assertEqual("published", article["status"])
+            self.assertEqual(slug, article["target_slug"])
 
     def test_article_inventory_adds_unmigrated_article_and_asset_states(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

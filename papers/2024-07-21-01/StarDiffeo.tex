@@ -1,0 +1,951 @@
+\documentclass[leqno, a4paper, 12pt, dvipdfmx]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\supp}{\mathrm{supp}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{$\rr^{n}$内の星型領域は
+$\rr^{n}$に微分同相}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+この文書では
+$\rr^{n}$内の星型領域が
+$\rr^{n}$
+に微分同相であることを証明する．
+
+この定理はBott--Tuにある
+``Good cover''
+の存在証明に利用されるはずである．
+本来はGood coverの存在証明をはてなブログ
+「電波通信」で行う予定であったが，
+その目的はいまだに未達成である．
+
+\tableofcontents
+
+\section{本文}
+\begin{df}[下半連続関数]
+距離空間$(X, d)$
+上の，
+$-\infty$の値も取りうる関数
+$f\colon X\to [-\infty, \infty)$
+が\textbf{下半連続関数}であるとは
+任意の$x\in X$と
+任意の
+$\epsilon\in (0, \infty)$
+に対して
+ある
+$\delta\in (0, \infty)$
+が存在し，
+任意の$y$が$d(x, y)<\delta$
+を満たすのであれば，
+$f(x)-\epsilon <f(y)$
+を満たすときにいう．
+論理式でわざわざ書くと
+\[
+\forall x\in X\ \forall \epsilon\in (0, \infty)\ 
+\exists \delta \in (0, \infty) 
+\ 
+\forall y\ (d(x, y)<\delta\To f(x)-\epsilon<f(y))
+\]
+ということである．
+このことは，
+任意の$a\in \rr$について
+$f^{-1}((a, \infty))$が
+$X$の開集合であることと同値であるし，
+さらに
+任意の
+$a\in \rr$
+について
+$f^{-1}([-\infty, a])$
+が$X$の閉集合であることとも同値である．
+\end{df}
+
+
+%stattebegin
+\begin{prop}\label{prop:approxconti}
+$(X, d)$を距離空間とし，
+実数$s\in (0, \infty)$と
+下半連続関数$f\colon X\to [-\infty, \infty)$
+を与え，
+任意の$x\in X$について
+$s\le f(x)$
+を満たすと仮定する．
+このとき，
+$X$上の実連続関数の列
+$\{f_{n}\colon X\to \rr\}_{n\in \zz_{\ge 0}}$
+が
+存在して以下を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の$n\in \zz_{\ge 0}$
+と任意の$x\in X$
+について
+$s\le  f_{n}(x)\le f(x)$
+が成り立つ．
+\item 
+任意の$n\in \zz_{\ge 0}$
+と
+任意の$x\in X$
+について
+$f_{n}(x)\le f_{n+1}(x)$
+が成り立つ．
+\item 
+任意の$x\in X$
+について
+$\lim_{n\to \infty}f_{n}(x)=f(x)$
+が成り立つ．
+つまり，
+$f$は
+$\{f_{n}\}$
+の各点収束極限である．
+\end{enumerate}
+\end{prop}
+%
+%proof
+\begin{proof}
+各
+$f_{n}$は具体的に定義できる．
+実際
+\begin{align}
+f_{n}(x)=\inf_{p\in X}\{f(p)+n\cdot d(x, p)\}\tag{D1}\label{al:deffn}
+\end{align}
+と定義する．
+これが命題の条件を満たすことを見ていこう．
+
+Step 1: 
+定義式
+\eqref{al:deffn}
+において$p=x$とすれば
+$f_{n}(x)\le f(x)$がわかる．
+
+Step 2: 
+任意の$p\in X$
+と
+任意の$x\in X$, 
+そして
+任意の$n\in\zz_{\ge 0}$
+について
+\[
+f(p)+n\cdot d(x, p)\le 
+f(p)+(n+1)\cdot d(x, p)\
+\]
+が成り立つので，
+$f_{n}(x)\le f_{n+1}(x)$
+がわかる．
+
+Step 3: 
+任意の
+$x, p\in X$について
+もちろん
+$d(x, p)\ge 0$
+なので，
+任意の$n\in \zz_{\ge 0}$
+について
+\[
+s\le f(p)\le f(p)+n\cdot d(x, p)
+\]
+が成り立つので
+$s\le f_{n}(x)$
+がわかる．
+
+Step 4: このステップでは
+各$f_{n}$
+の連続性を証明する．
+$x, y\in X$を任意に与える．
+このとき
+$\epsilon\in (0, \infty)$
+を任意に与えると
+$f_{n}(x)$の定義式
+\eqref{al:deffn}
+から
+$q\in X$が存在して
+\[
+f(q)+n\cdot d(q, x)<f_{n}(x)+\epsilon
+\]
+となる．
+また，$f_{n}(y)$の定義から
+\[
+f_{n}(y)\le f(q)+n\cdot d(q, y)
+\]
+が成り立つ．
+これらの式を辺々引くと三角不等式から
+\[
+f_{n}(y)-f_{n}(x)\le 
+n\cdot (d(q, y)-d(q, x))-\epsilon
+\le n\cdot d(x, y)+\epsilon
+\]
+となる．
+ここで
+$\epsilon$
+は任意であったので
+\[
+f_{n}(y)-f_{n}(x)\le n\cdot d(x, y)
+\]
+を得る．
+そして$x$と$y$の対称性から
+\[
+|f_{n}(y)-f_{n}(x)|\le n\cdot d(x, y)
+\]
+が得られる．よって
+各$f_{n}$
+は連続である(実際はより強くリプシッツ連続である．ただしこのことはこの文書では使わないけれども)．
+
+Step 5: このステップでは
+$f$が$f_{n}$の各点収束極限であることを証明する．
+点$x\in X$
+を任意に与える．
+このとき
+$f$の下半連続性から
+任意の$\epsilon\in (0, \infty)$
+についてある
+$\delta\in (0, \infty)$
+が存在して
+任意の$y\in X$が
+$d(x, y)<\delta$
+を満たすならば
+$f(x)-\epsilon<f(y)$
+が成り立つ．
+さて，
+$p\in X$
+についてまず，
+$d(p, x)<\delta$
+と仮定すると
+上のことから
+\[
+f(x)-\epsilon
+<f(p)
+\le 
+f(p)+n\cdot d(p, x)
+\]
+となる．
+次に
+$\delta\le d(p, x)$
+ならば
+$N\in \zz_{\ge 0}$
+を十分大きく取り，
+\[
+f(x)-\epsilon\le N\cdot \delta
+\]
+が成り立つようにすると，
+$n\ge N$ならば
+\[
+f(x)-\epsilon
+\le n\cdot d(p, x)
+\le f(p)+n\cdot d(p, x)
+\]
+がわかる．
+上記のことから$N$を十分大きく取れば
+$n\ge N$ならば任意の$p\in X$について
+\[
+f(x)-\epsilon\le 
+f(p)+n\cdot d(x, p)
+\]
+が成り立つ．
+つまり十分大きい
+$n$については
+$f(x)-\epsilon\le f_{n}(x)\le f(x)$
+が成り立つので，
+$f_{n}\to f(x)$
+がわかる．
+\end{proof}
+
+\begin{prop}\label{prop:pou}
+$M$
+をコンパクト可微分多様体とし，
+$f\colon M\to \rr$
+を連続写像とする．
+このとき$f$を
+滑らかな関数によって
+一様近似することができる．
+\end{prop}
+\begin{proof}
+任意に
+$\epsilon\in (0, \infty)$
+を与える．
+そして
+各点$a\in M$
+について
+\[
+U_{a}=\{x\in M\mid |f(x)-f(a)|<\epsilon\}
+\]
+と定義する．
+このとき
+$a\in U_{a}$
+であり，
+$M=\bigcup_{a\in M}U_{a}$
+となる．
+よって
+$M$
+のコンパクト性から
+有限の点
+$a_{1}, \dots, a_{n}$
+がとれて
+\[
+M=\bigcup_{i=1}^{n}U_{a_{i}}
+\]
+とできる．
+さてこのとき，
+滑らかな単位の分割
+$\{\lambda_{i}\}_{i=1}^{n}$
+が存在して
+\[
+\supp(\lambda_{i})\subseteq U_{i}
+\]
+を満たす．
+そして$g\colon M\to \rr$
+を
+\[
+g(x)=\sum_{i=1}^{n}f(a_{i})\cdot \lambda_{i}(x)
+\]
+と定義しよう．
+このとき$g$は滑らかな関数である．
+今からこれが$f$の一様近似になっていることを示そう．
+任意の
+$x\in X$
+について
+\begin{align*}
+|f(x)-g(x)|&=
+\left|\sum_{i=1}^{n}f(x)\cdot \lambda_{i}(x)-g(x)\right|
+=\left|\sum_{i=1}^{n}(f(x)-f(a_{i}))\cdot \lambda_{i}(x)\right|\\
+&
+\le \sum_{x\in U_{a_{i}}}|f(x)-f(a_{i})|\cdot \lambda_{i}(x)
+<\epsilon \cdot \sum_{i=1}^{n}\lambda_{i}(x)
+=\epsilon. 
+\end{align*}
+つまり，
+$\sup_{x\in M}|f(x)-g(x)|\le \epsilon$
+である．
+\end{proof}
+
+
+\begin{prop}\label{prop:kabibunn}
+$M$
+をコンパクト可微分多様体とし，
+$f\colon M\to \rr$
+を下半連続関数で，ある実数
+$s\in (0, \infty)$が存在して
+任意の$x\in M$について
+$s\le f(x)$とする．
+このとき
+十分大きい$N\in \zz_{\ge 0}$
+と滑らかな関数の列
+$\{g_{i}\colon M\to \rr\}_{i=N}^{\infty}$
+が存在して(番号が$N$から始まっていることに注意)
+以下を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の$n\in \zz_{\ge 0}$
+と
+任意の$x\in X$
+について
+\[
+\frac{1}{2n(n+1)}<g_{n+1}(x)-g_{n}(x)
+\]
+が満たされる．
+ここで
+$\frac{1}{2n(n+1)}=\frac{1}{2}(\frac{1}{n}-\frac{1}{n+1})$
+に注意せよ(あとで使う)．
+
+\item 
+任意の$n\in \zz_{\ge 0}$
+と
+$x\in X$について
+$g_{n}(x)< g_{n+1}(x)$
+が成り立つ．
+
+\item 
+$g_{n}$は$f$に各点収束する．
+
+\item 
+任意の$n\in\zz_{\ge 0}$
+と任意の$x\in M$について
+$s/2<g_{n}(x)< f(x)$
+が成り立つ．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+まず，コンパクト可微分多様体は距離空間にできることに注意しよう．それこそウリゾーンの距離化可能定理を用いれば良い．
+そうすると命題
+\ref{prop:approxconti}
+より
+連続関数列
+$\{f_{n}\colon X\to \rr\}$
+が存在して
+$f$
+に単調増加で各点収束し，
+$s\le f_{n}$を満たす．
+そして
+\[
+F_{n}=f_{n}-\frac{1}{n}
+\]
+と定義する．
+ここで
+$N\in \zz_{\ge 0}$
+を
+\[
+\frac{4}{s}<N
+\]
+と取る．
+すると
+$n\ge N$ならば
+\begin{align*}
+F_{n}=f_{n}-\frac{1}{n}\ge s-\frac{1}{N}
+=\frac{3}{4}s
+\end{align*}
+が成り立つ．
+つまり
+$\frac{3}{4}s<F_{n}$が成り立つ．
+さらに
+\[
+F_{n+1}-F_{n}
+=(f_{n+1}-f_{n})-\frac{1}{n+1}+\frac{1}{n}
+\ge -\frac{1}{n+1}+\frac{1}{n}=\frac{1}{n(n+1)}
+\]
+なので
+\[
+F_{n+1}-F_{n}\ge \frac{1}{n(n+1)}
+\]
+を得る．
+そして
+命題
+\ref{prop:pou}
+より滑らかな関数$g\colon M\to \rr$
+が存在して
+\[
+\sup_{x\in X}|F_{n}(x)-g_{n}|<\frac{1}{4n(n+1)}
+\]
+が成り立つ．
+これをもってして
+$\{g_{i}\}_{i=N}^{\infty}$
+を定義しよう．
+このとき$g_{n}$が$f$に各点収束することはよくわかる．
+残りの条件を確かめよう．
+まず最初に二つの式
+\[
+\sup_{x\in X}|F_{n}(x)-g_{n}|<\frac{1}{4n(n+1)}
+\]
+と
+\[
+\sup_{x\in X}|F_{n+1}(x)-g_{n+1}|<\frac{1}{4(n+1)(n+2)}
+\]
+から以下を計算できる．
+\begin{align*}
+g_{n+1}-g_{n}&>
+F_{n+1}-\frac{1}{4(n+1)(n+2)}-F_{n}-\frac{1}{4n(n+1)}\\
+&=(F_{n+1}-F_{n})-\frac{1}{4(n+1)(n+2)}-\frac{1}{4n(n+1)}
+\\
+&\ge \frac{1}{n(n+1)}-\frac{1}{4(n+1)(n+2)}-\frac{1}{4n(n+1)}
+\\
+&
+\ge \frac{1}{n(n+1)}-2\cdot \frac{1}{4n(n+1)}
+=\frac{1}{2n(n+1)}. 
+\end{align*}
+よって，$g_{n+1}-g_{n}>\frac{1}{2n(n+1)}$
+である．
+ここで，
+$\frac{1}{4(n+1)( n+2)}\le \frac{1}{4n(n+1)}$
+を使った．
+さて，さらに
+\[
+g_{n}>F_{n}-\frac{1}{4n(n+1)}
+>\frac{3}{4}s-\frac{1}{n}>\frac{3}{4}s-\frac{1}{4}s
+=\frac{1}{2}s
+\]
+なので，
+\[
+g_{n}>\frac{1}{2}s
+\]
+がわかる．
+ここで
+$n\ge N\ge \frac{4}{s}$に注意せよ．
+また，
+$\frac{1}{4n(n+1)}\le \frac{1}{n}$
+を用いた．
+次に
+$g_{n}(x)\le f(x)$
+を示そう．
+\begin{align*}
+g_{n}(x)&< F_{n}(x)+\frac{1}{4n(n+1)}
+\le f_{n}(x)-\frac{1}{n}+\frac{1}{4n(n+1)}\\
+&
+=f_{n}(x)+\frac{-4n-3}{4n(n+1)}
+< f_{n}(x)\le f(x)
+\end{align*}
+なので，
+$g_{n}(x)< f(x)$もわかる．
+\end{proof}
+
+
+\begin{prop}\label{prop:eee}
+集合$E$を
+\[
+E=\left\{\, (a, b, c, d)\in \rr^{4}\mid a<b,\  c<d, \ \frac{b-a}{2}<d-c\, \right\}
+\]
+と定義する．
+このとき$E$は$\rr^{4}$
+の開部分多様体になる．
+このとき滑らかな関数
+\[
+h\colon \rr\times E\to \rr
+\]
+が存在して以下を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$\partial_{r}h>0$が成り立つ．
+ここで$r$というのは$\rr\times E$の$\rr$の方の変数である．
+\item 
+$h([a, b], ab, c, d)=[c, d]$
+つまり，$a, b, c, d$を固定した上(そうすると変数が$r$だけになる)で，区間$[a, b]$
+の像を考えるとそれは
+$[c, d]$に一致するということである．
+
+\item 
+$\delta=\frac{b-a}{4}$
+とする．
+もしも$r<a+\delta$ならば
+$h(r, a, b, c, d)=\frac{1}{2}(r-a)+c$であり，
+もしも
+$b-\delta<r$ならば
+$h(r, a, b, c, d)=\frac{1}{2}(r-b)+d$
+である．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+滑らかな関数
+$\psi\colon \rr\to \rr$
+を以下の条件を満たすものとしてとってくる．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の$x\in \rr$について
+$0\le \psi(x)\le 1$である; 
+
+
+\item 
+$x\le 1/4$ならば
+$\psi(x)=1$; 
+
+\item 
+$1/4<x<3/4$
+ならば
+$\frac{d\psi}{dx}<0$である; 
+
+\item 
+$3/4\le x$ならば
+$\psi(x)=0$である．
+\end{enumerate}
+このような$\psi$
+が存在することは多様体の基礎を知っていればよくわかる．
+このような$\psi$
+を用いて
+\[
+h(r, a, b, c, d)
+=
+\left(\frac{1}{2}(r-a)+c\right)\cdot \psi\left(\frac{r-a}{b-a}\right)
++
+\left(\frac{1}{2}(r-a)+d\right)\cdot \left(1-\psi\left(\frac{r-a}{b-a}\right)\right)
+\]
+と定義すると，
+これは命題の条件を満たす．
+\end{proof}
+
+
+\includepdf[pages={3}]{mei.pdf}
+
+\includepdf[pages={4}]{mei.pdf}
+
+\includepdf[pages={5}]{mei.pdf}
+
+ユークリッド空間
+$\rr^{n}$
+内の
+$2$点$a, b\in \rr^{n}$
+について
+\[
+\overline{ab}
+=\{\,ta+(1-t)b\mid t\in [0, 1] \, \}
+\]
+と定義する．
+\begin{df}[星型集合]
+$\rr^{n}$
+内の部分集合$A$が
+\textbf{星型集合}
+であるとは
+ある点$c\in A$
+が存在して任意の$x\in X$
+について
+$\overline{cx}\subseteq A$
+を満たすこととする．
+上のような$c$を
+\textbf{$A$の星の中心}
+と呼ぶことにする．
+\end{df}
+
+
+
+\begin{df}[星型領域]
+$\rr^{n}$
+内の部分集合
+$A$
+は
+星型であり，なおかつ開集合であるときに
+星型領域と呼ぶ．
+\end{df}
+
+以下，
+星型領域を
+$\rr^{n}$
+の開部分多様体とみなして
+話を進める．
+
+また，以下では，
+\[
+U(x, r)
+\]
+で$x$を中心とする$r$-開球で，
+記号
+\[
+B(x, r)
+\]
+で$x$を中心とする$r$-閉球を表すことにする．
+
+
+
+\begin{thm}\label{thm:main1}
+ユークリッド空間
+$\rr^{n}$内の
+星型領域は
+$\rr^{n}$
+に微分同相である．
+\end{thm}
+\begin{proof}
+$C$を$\rr^{n}$
+の星型領域とする．
+適当に並行移動させることにより，
+$C$の星の中心は原点$0$
+としても良い．
+また，動径しか変えない微分同相
+$\rr^{n}\cong U(0, 1)$
+の存在から
+$C$は誘拐であると改訂しても一般性を失わない．
+
+また，
+$C$は開集合なので
+$0$
+の十分小さい近傍を含む．
+なので適当に$\rr^{n}$
+全体をスカラー倍して
+\[
+U(0, 2)\subseteq C
+\]
+となると仮定しても良い．ここで，この操作で$C$の有界性
+が崩れないことに注意しよう．
+
+さて，
+\[
+\mathbb{S}^{n-1}=\{\, x\in \rr^{n}\mid \|x\|_{2}=1 \, \}
+\]
+とし，
+写像
+\[
+f\colon \mathbb{S}^{n-1}\to \rr
+\]
+を
+\[
+f(x)=\sup\{\, \lambda\in [0, \infty)\mid \lambda\cdot x\in C\, \}
+\]
+と定義する．
+このとき次のことが成立する．
+\begin{enumerate}
+\item 
+任意の$x\in \mathbb{S}^{n-1}$について
+$1\le f(x)$である．これは
+$U(0, 2)\subseteq C$だからである．
+\item 
+$f$は下半連続である．
+\end{enumerate}
+\end{proof}
+
+
+写像
+$f$が下半連続であることを証明しよう．
+$x\in \mathbb{S}^{n-1}$
+と
+$\epsilon\in (0, \infty)$
+を任意に与える．
+すると
+$f$の定義から
+ある$\lambda\in (0, \infty)$
+がとれて，
+$\lambda\cdot x\in C$
+かつ
+$f(x)-\epsilon<\lambda$
+を満たす．
+いま，
+$\lambda\cdot x\in C$
+なので，
+$C$が開集合であることから
+ある$\delta\in (0, \infty)$
+が存在して
+$B(\lambda\cdot x, \delta)\subseteq C$
+を満たす．
+ここで
+\[
+V=U\left(x, \frac{\lambda}{\delta}\right)\cap \mathbb{S}^{n-1}
+\]
+とおくと
+$V$は$\mathbb{S}^{n-1}$
+の開集合である．
+もしも$y\in V$
+ならば
+$\|x-y\|<\frac{\delta}{\lambda}$
+なので
+\[
+\|\lambda x-\lambda y\|=\lambda\|x-y\|
+<\frac{\delta}{\lambda}\lambda=\delta
+\]
+であり，
+$U(\lambda x, \delta)\subseteq C$
+から$\lambda y\in C$
+がわかる．
+これは
+$\lambda\le f(y)$
+が成り立つことを意味している．
+つまり，以上の議論から
+$y\in V$ならば
+$f(x)-\epsilon <f(y)$
+がわかる．
+つまり
+$f$は下半連続である．
+写像$f$
+はいわば$C$に関する動径の関数である．
+この
+$f$に対して
+命題
+\ref{prop:kabibunn}
+を適応してそこで述べられている
+滑らかな関数列
+$\{g_{n}\}_{n=N}^{\infty}$
+をとる．
+ここで，もしも
+$N\le 1$のときは
+$N\ge 2$になるように取り直すことにする．
+このようにしても$g_{n}$には影響はない．
+すると
+\[
+g_{n+1}-g_{n}>\frac{1}{2}\left(\frac{1}{n}-\frac{1}{n+1}\right)
+\]
+であり，
+\[
+g_{n}>\frac{s}{2}=\frac{1}{2}>\frac{1}{2}\left((1-\frac{1}{N})-0\right)
+\]
+となる．
+つまり，
+\[
+g_{N}-0>\frac{1}{2}\left((1-\frac{1}{N})-0\right)
+\]
+である．
+以上を踏まえて，
+命題
+\ref{prop:eee}
+の関数$h$を用いて
+関数
+$\Phi\colon U(0, 1)\to C$
+を以下のように定義する．
+もしも$x$が
+$x\in B\left(0, 1-\frac{1}{N}\right)$
+を満たすのであれば，
+\begin{align*}
+\Phi(x)=
+\displaystyle
+\frac{x}{\|x\|}\cdot h\left(\|x\|, 0, 1-\frac{1}{N}, 0, 
+g_{N}\left(\frac{x}{\|x\|}\right)\right)
+\end{align*}
+と定義する．
+もしもある$n\ge N$が存在して$x$が
+$x\in B\left(0, 1-\frac{1}{n+1}\right)\setminus U\left(0, 1-\frac{1}{n}\right)$
+を満たすのであれば
+\begin{align*}
+\Phi(x)&=
+\displaystyle
+\frac{x}{\|x\|}\cdot h
+\left(\|x\|, 1-\frac{1}{n}, 1-\frac{1}{n+1}, 
+g_{n}\left(\frac{x}{\|x\|}\right), 
+g_{n+1}\left(\frac{x}{\|x\|}\right)\right)
+\end{align*}
+と定義する．
+このとき
+$\Phi$
+が全単射であることはよくわかる．
+$\Phi$
+が微分同相であることを示そう．
+$\det J\Phi\neq 0$
+が任意の点で言えれば良い．
+
+
+極座標を使えば，
+$x\neq 0$
+ならば
+\begin{align*}
+(J\Phi)_{x}
+=
+\left(
+\begin{array}{c|cccc}
+\frac{x}{\|x\|}\partial_{r}h & * & * & \dots & *\\
+\hline
+0                                    & 1 &   &          & \\
+0                                    &  &  1 &          & \\
+\vdots                             &  &   &  \ddots        &\\
+0                             &  &   &          &1\\
+\end{array}
+\right)
+\end{align*}
+となる．
+右下は単位行列のつもりである．
+なので，$\partial_{r}h>0$
+なので，$\det J\Phi\neq 0$がわかる．
+また，$0$の十分近くでは
+$\Phi(x)=\frac{1}{2}x$
+なので，結局
+$\Phi$は微分同相である．
+$U(0, 1)$
+と$\rr^{n}$
+は微分同相なので，
+結局$C$
+は$\rr^{n}$
+と微分同相であることがわかる．
+
+
+
+
+
+
+\includepdf[pages={30}]{zu.pdf}
+
+
+
+
+\includepdf[pages={31}]{zu.pdf}
+
+
+
+\includepdf[pages={32}]{zu.pdf}
+
+
+\section{この定理の参考文献にまつわる謎}
+
+この文書はもともと2016年に，
+はてなブログ「電波通信」
+にて，手書きの原稿として公開された
+\cite{Dempa1}．
+それを\TeX に落とし込んだのがこの文書である．
+この文書の
+の議論自体は
+2015年10月に閲覧したという，ドイツ語の解析学の講義ノートらしい
+\cite{none}
+を頑張って読んだものだと思われる．
+この文献の存在自体は
+\cite{4516}
+から知ったと思われる．
+ドイツ語の文献
+\cite{none}
+は現在閲覧不可能であり，
+作者が他のドメインで公開しているかどうかということも不明である．よもやドイツ語の講義ノートの証明を，どこかの誰かが日本語にして流布しているとは，この講義ノートの著者は思いもしなかったと思う．
+とにかく，以上の証明方法について何か元ネタがあるのかどうか探索したところ，
+Mathoverflowの二つの質問
+\cite{4468}
+と
+\cite{198882}
+を見つけた．
+質問
+\cite{198882}
+は
+この文書の主定理の引用可能な文献はないかと問うているが，
+なかなかないようである．
+一応\cite{MR0161319}が候補として挙げられているが，
+少々趣が違うようである．
+この論文自体は
+Brownによる論文
+\cite{MR0126835}
+の発展のような内容であり，
+それでは
+Brown\cite{MR0126835}が何を証明しているのかというと，
+$n$-cellの和になる位相空間が$n$-cellに同相になることを証明している．我々の議論だと，$C$の境界を下から滑らかな関数で近似することによって増大する開集合の可算列で$C$を表現することによって定理を証明している．
+つまり，我々の論法の元ネタは
+Brown\cite{MR0126835}である可能性が高い．ただしBrownの論文は連続写像でしか話をしていないことに注意しよう．
+このBrownの論文の発展については
+Mathoverflowの質問
+\cite{117475}の回答に色々ある．
+おそらく誰かが
+Brown\cite{MR0126835}の議論を可微分写像の圏でやり直したのかもしれない．
+強いて言えばそれが「笑い男のオリジナル」
+ということである．
+
+
+また，下半連続関数が（リプシッツ）連続関数の増加列の
+各点収束極限になることはBaire関数の文脈でよく知られているようであり，
+命題\ref{prop:approxconti}
+で行った構成法は，いわば「いつものやつ」
+のようである．
+ここら辺の話は
+\cite[Theorem 2.1]{MR4103879}
+などに，今のこの文書の話とは関係なく，一般の話として紹介されている．
+
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{star.bib}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

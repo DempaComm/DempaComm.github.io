@@ -1470,6 +1470,44 @@ def command_decide_privacy_review(args: argparse.Namespace) -> None:
     print(f"PRIVACY REVIEW {args.decision.upper()} {len(found)} records")
 
 
+def command_record_publication(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    if not rows:
+        raise LedgerError("ledger CSV does not exist or is empty")
+    manifests = load_manifests()
+    manifests_by_record: dict[str, dict[str, Any]] = {}
+    for manifest in manifests.values():
+        record_id = str(manifest.get("migration_record_id", "")).strip()
+        if not record_id:
+            continue
+        if record_id in manifests_by_record:
+            raise LedgerError(f"multiple manifests use migration_record_id {record_id}")
+        manifests_by_record[record_id] = manifest
+    requested = set(args.record_ids)
+    rows_by_record = {row["record_id"]: row for row in rows}
+    missing_rows = sorted(requested - set(rows_by_record))
+    if missing_rows:
+        raise LedgerError("unknown record_id: " + ", ".join(missing_rows))
+    missing_manifests = sorted(requested - set(manifests_by_record))
+    if missing_manifests:
+        raise LedgerError(
+            "paper.json with matching migration_record_id is missing: "
+            + ", ".join(missing_manifests)
+        )
+    for record_id in requested:
+        row = rows_by_record[record_id]
+        if row["status"] not in {"ready", "published"}:
+            raise LedgerError(
+                f"{record_id}: publication can be recorded only from ready "
+                f"(current: {row['status']})"
+            )
+        apply_manifest(row, manifests_by_record[record_id])
+    validate_rows(rows, manifests)
+    write_rows(rows)
+    write_json(rows)
+    print(f"PUBLISHED {len(requested)} records")
+
+
 def command_unmigrated(args: argparse.Namespace) -> None:
     rows = read_rows()
     validate_rows(rows, load_manifests())
@@ -2258,6 +2296,13 @@ def parser() -> argparse.ArgumentParser:
     )
     decide_privacy_review.add_argument("record_ids", nargs="+")
     decide_privacy_review.set_defaults(func=command_decide_privacy_review)
+
+    record_publication = subparsers.add_parser(
+        "record-publication",
+        help="mark ready records published from matching paper.json manifests",
+    )
+    record_publication.add_argument("record_ids", nargs="+")
+    record_publication.set_defaults(func=command_record_publication)
 
     unmigrated = subparsers.add_parser(
         "unmigrated", help="list articles that are not yet published on this site"

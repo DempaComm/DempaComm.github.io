@@ -1,0 +1,1372 @@
+\documentclass[leqno, a4paper, 12pt, dvipdfmx]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{tikz-cd}
+
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{pullback と 完全写像\\ \large ---Describing perfect maps with pullback---}
+
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+この文章では
+\cite{com}
+に沿ってpullbackによって完全写像の特徴付けを記述していく．
+よくわからなかったところは
+\cite{sta}も参考にした．
+
+\section{pullback}
+
+可換図式の説明は省略する．
+
+
+位相空間$X, Y, Z$と
+写像$f\colon X\to Z$
+と
+$g\colon X\to Z$を考える．
+
+\[
+\begin{tikzcd}
+ & X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+このとき
+位相空間$P$と二つの写像
+$g^{\prime}\colon P\to X$
+と
+$f^{\prime}\colon P\to Y$
+が上の図式に対する
+\textbf{pullback}
+であるとは以下の図式が可換であり
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] 
+& X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+
+尚且つ図式を果敢にする他の
+$T$, 
+$b\colon T\to X$, 
+$a\colon T\to  Y$
+が与えられた時に
+以下の図式を可換にする$u$が一意的に存在するときにいう．
+
+
+\[
+\begin{tikzcd}
+T \arrow[ddr, "a"'] \arrow[drr, "b"] \arrow[dr, dashed, "u"] & & \\
+& P \arrow[r] \arrow[d] & X \arrow[d,"f"] \\
+& Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}
+P \arrow[r] \arrow[d] & X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+
+
+$P$がpullbackであることを示すために以下のように直角記号を書く．
+
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+
+また$f^{\prime}$をbase changeなどと言ったりする．
+
+
+pullback$P$を
+$X\times_{Z, f, g} Y$や
+$X\times_{Z} Y$と書いたりする．
+
+以上の定義からpullbackは存在するならば同型を除いて一意的であることがわかる．
+今から位相空間のpullbackに関する幾つかの基本事項を確認しよう．
+
+\begin{thm}
+位相空間の圏において，pullbackは常に存在する．つまり上で述べた状況において，pullback $P$は常に存在する．
+さらにpullbackの具体的表示として$P=\{\, (x, y)\in X\times Y\mid f(x)=g(y) \, \}$で，$f^{\prime}$と$g^{\prime}$は射影であるように取れる．
+\end{thm}
+\begin{proof}
+具体的に表示を与えているので可換性と普遍性を調べるだけである．せかせか手を動かせばわかる．
+\end{proof}
+
+位相空間のpullbackは上記のように具体的に書けるのだが，
+特殊な状況においてそれが何と同一視できるのかが大事だと思われる．
+
+\begin{prop}\label{prop:hom}
+以下の命題群が成り立つ．
+\begin{enumerate}[label=\textup{(A\arabic*)}]
+\item\label{item:onpt}
+以下の図式において
+$f^{-1}(x)$はpullbackになっている．
+つまり，写像$f\colon X\to Z$
+に対して，一点$y\colon \{*\}\to Z$を考えたとき，
+$f$のbase changeは一般化ファイバー$f^{-1}(y)$
+になっている．
+\[
+\begin{tikzcd}
+f^{-1}(y) \arrow[r] \arrow[d] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+\{*\} \arrow[r,"y"] & Y
+\end{tikzcd}
+\]
+
+\item\label{item:times}
+
+連続写像$f\colon X\to Y$
+と位相空間$S$について以下の図式はpullbackである．
+
+\[
+\begin{tikzcd}
+X\times S \arrow[r] \arrow[d, "f\times 1_{S}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y\times S \arrow[r,"pr"] & Y
+\end{tikzcd}
+\]
+
+連続写像$f\colon X\to Y$と$Y$の部分集合$B$について以下の図式はpullbackである．ここで$\iota\colon B\to Y$
+は包含写像である．
+
+\item\label{item:preim}
+\[
+\begin{tikzcd}
+f^{-1}(B) \arrow[r] \arrow[d] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+B \arrow[r,"\iota"] & Y
+\end{tikzcd}
+\]
+
+
+\item\label{item:jimei}
+連続写像$f\colon X\to Y$
+について以下の自明なpullback図式が成り立つ．
+\[
+\begin{tikzcd}
+X \arrow[r, "1_{X}"] \arrow[d, "f"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y \arrow[r,"1_{Y}"] & Y
+\end{tikzcd}
+\]
+
+
+\item\label{item:times2}
+以下の図式がpullbackとする．
+\[
+\begin{tikzcd}
+P \arrow[r, "h"] \arrow[d, "v"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+このとき任意の位相空間$S$について
+以下の図式もpullbackとなる．
+\[
+\begin{tikzcd}
+P \times S\arrow[r, "h\times 1_{S}"] \arrow[d, "v\times 1_{S}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \times S\arrow[d,"f\times 1_{S}"] \\
+Y \times S\arrow[r,"g\times 1_{S}"] & Z\times S
+\end{tikzcd}
+\]
+
+
+
+\end{enumerate}
+
+\end{prop}
+\begin{proof}
+\ref{item:onpt}の証明:
+上の状況で
+$X\times_{Z}\{*\}=\{\, (x, *)\in X\times \{*\}\mid f(x)=y\, \}$
+なので，$X\times_{Z}\{*\}$と
+$f^{-1}(y)$は同相になる．
+
+\ref{item:times}の証明:
+普遍性をせかせか計算するとわかる．
+
+
+\ref{item:preim}
+の証明:
+$P=X\times_{Y}B=\{\, (x, b)\in X\times B\mid f(x)=\iota(b)\, \}$
+である．
+$\alpha\colon f^{-1}(B)\to P$
+を$\alpha(x)=(x, f(x))$
+と定義する．
+$\beta\colon P\to f^{-1}(B)$
+を$\beta(x, b)=x$
+と定義する．
+これらは互いに逆写像になっているので
+$P$と$f^{-1}(B)$
+が同相であることがわかる．
+
+\ref{item:jimei}の証明:
+普遍性を計算するとわかる．
+
+
+\ref{item:times2}の証明：
+普遍性をせかせか計算するとわかる．
+
+一般にpullbackと極限は交換する．特にpullbackと直積は交換するので，二つのpullhack図式を直積するとpullbackになる．
+
+
+ここら辺で証明を終わろう．
+\end{proof}
+
+
+
+
+pullback同士を連結させてもpullbackになる．
+\begin{thm}\label{thm:yoko}
+以下の可換図式の状況を考える．
+
+
+
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] & X \arrow[d,"f=v^{\prime}"]  \arrow[r, "h^{\prime}"]\arrow[dr, phantom, "\lrcorner", very near start] & A \arrow[d, "v"]\\
+Y \arrow[r,"g"] & Z \arrow[r, "h"]& B
+\end{tikzcd}
+\]
+
+つまり右側の図式において$X$は$A$と$Z$の$B$上のpullbackとする．
+このとき$P$が左側の図式のpullbackになっていることと，
+$P$は一番外側の大きい図式のpullbackになっていること
+つまり
+
+
+\[
+\begin{tikzcd}
+P \arrow[r, "h^{\prime}\circ g^{\prime}"] \arrow[d, "f^{\prime}"]& A \arrow[d,"v"] \\
+Y \arrow[r,"h\circ g"] & B
+\end{tikzcd}
+\]
+がpullback図式になっていることは同値である．
+\end{thm}
+\begin{proof}
+まず$P$が小さい図式のpullbackになっているとする.
+大きい図式の
+普遍性を示すために位相空間$T$から
+図式が可換になるような連続写像$p\colon T\to A$
+と
+$q\colon T\to Y$
+が伸びてるとする．
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T \arrow[drrr, bend left, "p"] \arrow[ddr,"q"'] & & & \\
+& P \arrow[r,"g'"] \arrow[d,"f'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& X \arrow[d,"f=v'"] 
+\arrow[r,"h'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& A \arrow[d,"v"] \\
+& Y \arrow[r,"g"] & Z \arrow[r,"h"] & B
+\end{tikzcd}
+\]
+すると
+$p\colon T\to A$
+と
+$g\circ q\colon T\to Z$
+は
+$v\colon A\to B$と
+$h\colon Z\to B$からなる図式を可換にする．
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T \arrow[drrr, bend left, "p"] \arrow[ddr, bend right,  "q"'] \arrow[ddrr, bend right, "g\circ q"{pos=0.3}]& & & \\
+& P \arrow[r,"g'"'] \arrow[d,"f'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& X \arrow[d,"f=v'"] 
+\arrow[r,"h'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& A \arrow[d,"v"] \\
+& Y \arrow[r,"g"'] & Z \arrow[r,"h"] & B
+\end{tikzcd}
+\]
+よって$X$がpullbackであることから一意的に写像
+$r\colon T\to X$が存在して図式を可換にする．
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T \arrow[drrr, bend left, "p"] \arrow[drr,"r"]\arrow[ddr,"q"'] & & & \\
+& P \arrow[r,"g'"] \arrow[d,"f'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& X \arrow[d,"f=v'"] 
+\arrow[r,"h'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& A \arrow[d,"v"] \\
+& Y \arrow[r,"g"] & Z \arrow[r,"h"] & B
+\end{tikzcd}
+\]
+そして$r\colon T\to X$と$q\colon T\to Y$
+に対して$P$の普遍性を用いて一意的な写像$l\colon T\to P$
+を得る．
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T \arrow[drrr, bend left, "p"] \arrow[drr, bend left, "r"]\arrow[dr,"l"]\arrow[ddr,"q"'] & & & \\
+& P \arrow[r,"g'"] \arrow[d,"f'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& X \arrow[d,"f=v'"] 
+\arrow[r,"h'"] 
+\arrow[dr,phantom,"\lrcorner",very near start]
+& A \arrow[d,"v"] \\
+& Y \arrow[r,"g"] & Z \arrow[r,"h"] & B
+\end{tikzcd}
+\]
+以上の図式は全て可換なので以下の図式も可換になる．
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T \arrow[dr,dashed,"l"] \arrow[drr, bend left, "p"] \arrow[ddr,"q"'] & & \\
+& P \arrow[r,"h'\circ g'"] \arrow[d,"f'"] & A \arrow[d,"v"] \\
+& Y \arrow[r,"h\circ g"] & B
+\end{tikzcd}
+\]
+一意性も$r$や$l$の一意性からわかる(なぜか?)．
+以上から$P$が$A\times_{B} Y$であることがわかった．
+逆を示すのは省略する．今やった操作を逆に辿ればきっとできるよ．
+\end{proof}
+
+図式を縦にすることで以下のこともわかる．
+
+\begin{thm}\label{thm:tate}
+以下の可換図式の状況を考える．
+
+
+
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] & X \arrow[d,"f"] & \\
+Y  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"g=h^{\prime}"] \arrow[d,"v^{\prime}"] & Z \arrow[d,"v"] \\
+A\arrow[r,"h"] &  B
+\end{tikzcd}
+\]
+
+このとき$P$が小さい四角のpullbackになっていることと一番外側の大きい図式のpullbackになっていることは同値である．
+
+
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "v^{\prime}\circ f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& A \arrow[d,"v\circ f"] \\
+Y \arrow[r,"h"] & B
+\end{tikzcd}
+\]
+
+\end{thm}
+
+
+
+
+
+\section{完全写像}
+
+まず最初に埋め込みのbase changeは埋め込みなることを説明する．
+\begin{prop}\label{prop:cloimm}
+以下のpullback図式を考える．
+\[
+\begin{tikzcd}
+P \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+このとき$f$が埋め込みならば$f^{\prime}$もそうである．
+さらに$f$が閉埋め込みならば$f^{\prime}$もそうである．
+\end{prop}
+\begin{proof}
+$X$は埋め込みなので$Z$の部分集合と見なしても良い．
+命題\ref{prop:hom}
+の\ref{item:preim}
+より$P$は$g^{-1}(X)$である．
+つまり
+\[
+\begin{tikzcd}
+g^{-1}(X) \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y \arrow[r,"g"] & Z
+\end{tikzcd}
+\]
+である．$f^{\prime}$は$Y$への包含写像である．
+特に埋め込みである．
+また$f$が閉埋め込みであるとき
+$X$が$Z$の閉集合であることから$g^{-1}(X)$
+は$Y$の閉集合である．つまり$f^{\prime}$
+は閉埋め込みである．
+これで証明が終わる．
+\end{proof}
+
+
+
+
+
+
+\begin{prop}\label{prop:immgraph}
+$X, Y$を位相空間とし，
+$f\colon X\to Y$を連続写像とする．
+このとき以下が成り立つ．
+\begin{enumerate}[label=\textup{(T\arabic*)}]
+\item\label{item:t2}
+$X$がハウスドルフであることと対角写像$\Delta_{X}\colon X\to X\times X$が閉埋め込みであるは同値である．
+
+\item\label{item:graph}
+$Y$がハウスドルフならば，
+グラフへの写像$\Gamma_{f}\colon X\to X\times Y; x\mapsto (x, f(x))$は閉埋め込みである．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\ref{item:t2}の証明: 対角線が閉集合であることと
+$X$が$T_{2}$であることが同値ということからすぐに従う．
+
+\ref{item:graph}の証明: 
+次の可換図式からわかる．
+\[
+\begin{tikzcd}
+X \arrow[r, "\Gamma_{f}"] \arrow[d, "f"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X\times Y \arrow[d,"f\times 1_{Y}"]  \arrow[r, "pr"]\arrow[dr, phantom, "\lrcorner", very near start] & X \arrow[d, "f"]\\
+Y \arrow[r,"\Delta_{X}"] & Y\times Y \arrow[r, "pr"]& Y
+\end{tikzcd}
+\]
+ここで
+命題\ref{prop:hom}の\ref{item:jimei}から一番外側の四角が
+pullbackであることと
+同じく命題\ref{prop:hom}の\ref{item:times}から右側の図式がpullbackになることに注意しよう．すると
+定理\ref{thm:yoko}から
+左側の四角がpullbackになることがわかる．
+このとき
+命題\ref{prop:cloimm}と
+$\Delta_{X}$が閉埋め込みであることを用いて，
+それの
+base change である$\Gamma_{f}$も閉埋め込みであることを用いた．おわり．
+\end{proof}
+
+
+\begin{df}
+連続写像$f\colon X\to Y$
+が\textbf{完全写像}であるとは
+$f$が閉写像であり，任意の$y\in Y$
+について$f^{-1}(y)$
+がコンパクトになる時にいう．
+\end{df}
+
+\begin{prop}\label{prop:compper}
+以下のことが成り立つ．
+
+\begin{enumerate}[label=\textup{(K\arabic*)}]
+\item\label{item:daiji1} 
+$X$をコンパクトとし，$Y$をハウスドルフとすると
+任意の連続写像$f\colon X\to Y$は完全写像である．
+
+
+\item\label{item:daiji2}
+空間
+$K$
+がコンパクトであることと
+一点への写像$K\to \{*\}$
+が完全写像であることは同値である．
+\item\label{item:daiji3}
+空間$K$がコンパクトであることと
+任意の位相空間$S$について
+射影$pr\colon S\times K\to S$
+が閉写像であることは同値である．
+
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+コンパクトハウスドルフ性
+から\ref{item:daiji1}や\ref{item:daiji2}は従う．
+そしてtube lemma(\cite{dempa1}などを参照のこと)を使うと\ref{item:daiji3}のうち射影が閉写像であることがわかる．
+射影が閉であることからコンパクト性を証明する話は
+\cite{dempa2}で解説されている．
+\end{proof}
+
+
+今から完全写像の性質をpullbackで記述していく．
+
+\begin{thm}\label{thm:main1}
+$X$と$Y$
+を位相空間とし，
+$f\colon X\to Y$
+を連続写像とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(P\arabic*)}]
+\item\label{item:perfectmain1}
+$f$は完全写像である．
+\item\label{item:uniper}
+任意の空間$Z$について
+$f\times 1_{Z}\colon X\times Z\to Y\times Z$
+は完全写像である．
+
+\item\label{item:bcper}
+どんな$g\colon Y^{\prime}\to Y$についても
+base change $f^{\prime}\colon X^{\prime}\to X$
+は完全写像である．
+
+
+\[
+\begin{tikzcd}
+X^{\prime} \arrow[r, "g^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y^{\prime} \arrow[r,"g"] & Y
+\end{tikzcd}
+\]
+
+
+
+\item\label{item:uniclo}
+任意の空間$Z$について
+$f\times 1_{Z}\colon X\times Z\to Y\times Z$
+は閉写像である．
+
+\item\label{item:bcclo}
+どんな$g\colon Y^{\prime}\to Y$についても
+base change $f^{\prime}\colon X^{\prime}\to X$
+は閉写像である．
+\[
+\begin{tikzcd}
+X^{\prime} \arrow[r] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+Y^{\prime} \arrow[r,"g"] & Y
+\end{tikzcd}
+\]
+
+
+
+
+
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+
+以下のように証明する．
+
+\[
+\begin{tikzcd}
+& & \ref{item:bcclo}  \arrow[dr, Rightarrow]& &\\
+\ref{item:perfectmain1} \arrow[r, Rightarrow] & \ref{item:bcper}  \arrow[ur, Rightarrow]\arrow[r, Rightarrow] & \ref{item:uniper}
+\arrow[r, Rightarrow] & \ref{item:uniclo} \arrow[r, Rightarrow]& \ref{item:perfectmain1} 
+\end{tikzcd}
+\]
+
+
+$\ref{item:perfectmain1}\To \ref{item:bcper}$の証明:
+
+
+まずファイバーがコンパクトであることを示そう．
+以下の図式を考える．
+$p\in Y^{\prime}$
+を任意にとる．
+そして$q=g(p)\in Y$とする．
+一番外側の図式は命題\ref{prop:hom}の\ref{item:onpt}
+からpullbackとなり，
+右側の図式は
+\ref{item:perfectmain1}の仮定からpullbackである．
+
+\[
+\begin{tikzcd}
+f^{-1}(q) \arrow[dr, phantom, "\lrcorner", very near start] \arrow[r] \arrow[d] & X^{\prime} \arrow[r] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+ & X \arrow[d, "f"]\\
+\{*\} \arrow[r, hook, "p" ]
+\arrow[rr, bend right, "q"' ]
+& Y^{\prime} \arrow[r, "g"] & Y
+\end{tikzcd}
+\]
+よって
+定理 
+\ref{thm:yoko}
+から右側の四角がpullbackになっている．
+このpullbackは$(f^{\prime})^{-1}(p)$のはずなので
+$(f^{\prime})^{-1}(p)$と$f^{-1}(q)$が同相であることがわかる．よって
+$f^{\prime}$
+のファイバーがコンパクトであることがわかる．
+
+
+次に$f^{\prime}$
+が閉写像であることを示す．
+完全写像の話のここは
+ジェネトポパワーでなんとかする．
+\[
+X^{\prime}=\{\, (x, a)\in X\times Y^{\prime}\mid f(x)=g(a)\, \}
+\]
+であることと
+$f^{\prime}\colon X\to Y^{\prime}$が射影であることに注意しよう．
+$A$を$X^{\prime}$の閉集合とする．
+そして
+$p\not \in f^{\prime}(A)$をとる．
+$p \in Y^{\prime}$に注意しよう．
+このとき
+任意の$(f^{-1}(g(p))\times \{p\})\cap A=\emptyset$
+である．というのも，交わりを持った場合，
+$p\not \in f^{\prime}(A)$に反するからである．
+ここで$f$が完全であることから
+$f^{-1}(g(p))$はコンパクトであるので，特に
+$f^{-1}(g(p))\times \{p\}$
+もコンパクトである．
+するとtube lemmaから
+開集合
+$V\subset X$と
+$W\subset Y^{\prime}$が存在して
+$(V\times W)\cap A=\emptyset$
+かつ
+$f^{-1}(g(p))\times \{p\}\subset V\times W$
+となる．
+さて
+$f$が閉写像であることから，
+$O=Y\setminus f(X\setminus V)$とおくとこれは$Y$の開集合で
+ある(この操作についてのより詳しい解説は\cite{dempa3}を参照のこと)．
+そして$P=g^{-1}(O)\subset Y^{\prime}$とし，
+$G=P\cap W$とする．
+今から$G$が$p$の近傍であり$f^{\prime}(A)$と交わらないことを証明しよう．まず
+$P$が$p$の近傍であることを示そう．
+$f^{-1}(g(p))\in V$なので$f^{-1}(g(p))\cap  X\setminus V=\emptyset$である．よって
+そして$g(p)\not \in f(X\setminus V)$である．
+故に$g(p)\in Y\setminus f(X\setminus V)$
+なので$p\in g^{-1}(Y\setminus f(X\setminus V))=P$
+である．
+これで$G$が$p$の近傍であることがわかった．
+次に
+$G\cap f^{\prime}(A)=\emptyset$を示そう．
+$q\in G$について$q\in W$かつ
+$g(q)\in Y\setminus f(X\setminus V)$
+である．
+故に
+$g(q)\not \in f(X\setminus V)$であるから
+$f^{-1}(g(q))\cap (X\setminus V)=\emptyset$
+である．
+つまり$f^{-1}(g(q))\subset V$
+である．
+つまり
+$f^{-1}(g(q))\times \{q\}\subset V\times W$
+であり
+$(V\times W)\cap A=\emptyset$
+だから$q\not \in f^{\prime}(A)$である．
+よって$G$と$f(A)$が交わりを持たないことがわかった．
+そして$p$の任意性から
+$f^{\prime}(A)$の補集合が開集合であることがわかったので，
+$f^{\prime}(A)$は閉集合である．
+すなわち
+$f^{\prime}$は閉写像である．
+
+
+
+
+
+
+
+$\ref{item:bcper}\To \ref{item:uniper}$の証明:
+以下の図式を考える．
+命題\ref{prop:hom}の
+\ref{item:times}から
+これはpullbackである．
+よって
+\ref{item:bcper}から
+$f\times 1_{Z}$が完全写像であることが従う．
+
+
+\[
+\begin{tikzcd}
+& X\times Z \arrow[d,"f\times 1_{Z}"]  \arrow[r, "pr"]\arrow[dr, phantom, "\lrcorner", very near start] & X \arrow[d, "f"]\\
+& Y\times Z \arrow[r, "pr"]& Y
+\end{tikzcd}
+\]
+
+
+
+
+
+$\ref{item:uniper}\To \ref{item:uniclo}$: 自明．
+
+
+$\ref{item:bcper}\To \ref{item:bcclo}$: 自明.
+
+
+
+$\ref{item:bcclo}\To \ref{item:uniclo}$の証明:
+$\ref{item:bcper}\To \ref{item:uniper}$の証明と同様である．つまり
+以下の図式を考える．
+命題\ref{prop:hom}の
+\ref{item:times}から
+これはpullbackである．
+よって
+\ref{item:bcclo}から
+$f\times 1_{Z}$が閉写像であることが従う．
+
+
+\[
+\begin{tikzcd}
+& X\times Z \arrow[d,"f\times 1_{Z}"]  \arrow[r, "pr"]\arrow[dr, phantom, "\lrcorner", very near start] & X \arrow[d, "f"]\\
+& Y\times Z \arrow[r, "pr"]& Y
+\end{tikzcd}
+\]
+
+
+
+
+
+
+
+$\ref{item:uniclo}\To \ref{item:perfectmain1}$の証明:
+$Z=\{*\}$
+とすることで$f$が閉写像であることがわかる．
+次に$f^{-1}(p)$がコンパクトであることを証明しよう．
+$S$を任意の位相空間とする
+
+\[
+\begin{tikzcd}
+& f^{-1}(p) \arrow[d,""]  \arrow[r, ""]\arrow[dr, phantom, "\lrcorner", very near start] & X \arrow[d, "f"]\\
+& \{*\} \arrow[r, "\text{$p$}"]& Y
+\end{tikzcd}
+\]
+上の図式
+はpullbackなので
+以下の図式もpullbackになる(命題\ref{prop:hom}の\ref{item:times2})．
+
+\[
+\begin{tikzcd}
+& f^{-1}(p)\times S \arrow[d,"v"]  \arrow[r, "h"]\arrow[dr, phantom, "\lrcorner", very near start] & X\times S \arrow[d, "f\times 1_{S}"]\\
+& S \arrow[r, "\text{$(p, 1_{S})$}"]& Y\times S
+\end{tikzcd}
+\]
+
+命題\ref{prop:cloimm}と
+$(p, 1_{S})$が閉埋め込みであることから
+$h$も閉埋め込みである．
+さらに
+\ref{item:uniclo}から
+$f\times 1_{S}$も閉写像である．
+今から$v$が閉写像であることを示そう．
+$A$を左上の空間の閉集合とすると
+$\{p\}\times v(A)=(f\times 1_{S})(h(A))$
+となる．今まで積み重ねてきたことから右辺は閉集合である．
+よって$\{p\}\times  v(A)$は部分空間$\{p\}\times S$の閉集合となる．よって$v(A)$は$S$の閉部分集合となり
+$v$が閉写像であることが従う．
+すると
+$S$の任意性と
+命題\ref{prop:compper}の\ref{item:daiji3}から
+$f^{-1}(p)$はコンパクトになる．
+よって$f$が完全写像であることがわかる．
+以上で証明を終わる．
+\end{proof}
+
+\begin{cor}\label{cor:seigen}
+$f\colon X\to Y$を完全写像とする．
+このとき$Y$の任意の部分集合$B$について
+$f|_{f^{-1}(B)}\colon f^{-1}(B)\to B$
+は完全写像である．
+\end{cor}
+\begin{proof}
+以下の図式を考える．ここで$v=f|_{f^{-1}(B)}$
+である．
+
+\[
+\begin{tikzcd}
+& f^{-1}(B) \arrow[d,"v"]  \arrow[r, "h^{\prime}"]\arrow[dr, phantom, "\lrcorner", very near start] & X \arrow[d, "f"]\\
+& B \arrow[r, "\text{$h$}"]& Y
+\end{tikzcd}
+\]
+
+するとこの図式がpullbackであることから
+$v$は完全写像である．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:percompp}
+$f\colon X\to Y$と
+$g\colon Y\to Z$
+を完全写像とする．
+このとき
+$g\circ f\colon X\to Z$
+も完全である．
+\end{lem}
+\begin{proof}
+任意に$h\colon A\to Z$を考えて
+以下の図式を考える．
+\[
+\begin{tikzcd}
+P \arrow[r, "u^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+Q  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"u"] \arrow[d, "g^{\prime}"] & Y \arrow[d, hook, "g"] \\
+A\arrow[r,"h"] &  Z
+\end{tikzcd}
+\]
+すると定理\ref{thm:main1}
+の\ref{item:bcclo}
+から
+$f^{\prime}$
+と
+$g^{\prime}$
+は閉写像である．
+よってそれらの合成
+$g^{\prime}\circ f^{\prime}$も閉写像である．
+
+よってpullbackの図式
+\[
+\begin{tikzcd}
+P \arrow[r, "u^{\prime}"] \arrow[d, "g^{\prime}\circ f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"g\circ f"] & \\
+Q \arrow[r,"u"]  & Z
+\end{tikzcd}
+\]
+において$g^{\prime}\circ f^{\prime}$が常に閉写像になるから再び
+\ref{thm:main1}より
+$g\circ f$が完全であることがわかる．
+\end{proof}
+
+
+\begin{cor}\label{cor:precon}
+$f\colon X\to Y$
+を完全写像とし，
+$K$を$Y$のコンパクト集合とする．
+このとき$f^{-1}(K)$
+は$X$のコンパクト集合である．
+\end{cor}
+\begin{proof}
+$g=f|_{f^{-1}(K)}\colon f^{-1}(K)\to K$
+とおく．
+これは
+系\ref{cor:seigen}より完全写像である．
+そして
+$K\to \{*\}$は
+命題\ref{prop:compper}の
+\ref{item:daiji2}より完全写像である．
+そして
+補題
+\ref{lem:percompp}より
+これら二つの写像の合成$f^{-1}(K)\to \{*\}$
+は完全である．
+よって再び
+命題\ref{prop:compper}の
+\ref{item:daiji2}より
+$f^{-1}(K)$
+がコンパクトであることがわかる．
+\end{proof}
+
+
+\begin{thm}[\text{\cite[Theorem 1.1]{mic}}]\label{thm:mic1}
+$X, Y$を位相空間とし，
+$Z$をハウスドルフ空間とする．
+そして$f\colon X\to Y$を完全写像とし
+$g\colon X\to Z$
+を連続写像とする．
+このとき$(f, g)\colon X\to Y\times Z$
+は完全写像である．
+\end{thm}
+\begin{proof}
+
+$(1_{X}, g)\colon X\to X\times Z$は$Z$がハウスドルフであることから閉埋め込みである(命題\ref{prop:immgraph})．特に完全である．
+さらに$f\times 1_{Z}\colon X\times Z\to Y\times Z$
+は完全写像である(定理\ref{thm:main1}の\ref{item:uniper})．
+よってこれら二つの合成である$(f, g)$も完全写像である
+(補題\ref{lem:percompp})．
+\end{proof}
+
+\begin{thm}[\text{\cite[Corollary 1.4]{mic}}]\label{thm:mic2}
+$A, B,  C$を位相空間とし，
+$B$はハウスドルフとする．
+そして$\alpha\colon A\to B$は連続写像で
+$\beta\colon B\to C$は完全射像とする．
+もしも$\beta\circ \alpha\colon A\to C$
+が完全写像ならば$\alpha$も完全写像である．
+\end{thm}
+\begin{proof}
+pullbackを使う証明が思いつかなかったので普通に証明する．
+$\gamma=(\alpha, \beta\circ \alpha)\colon A\to B\times C$
+とすると$B$がハウスドルフであることから
+$\gamma$は完全写像となる(定理\ref{thm:mic1})．
+$G_{\beta}\subset B\times C$を$\beta$のグラフとする．
+このとき
+$pr\colon G_{\beta}\to B$
+は同相写像である．特に完全である．
+$\gamma(A)\subset G_{\beta}$
+で$\alpha=pr\circ \gamma$
+なので$\alpha$が完全であることが従う．
+\end{proof}
+
+
+
+
+
+この文章で
+完全正則空間といったら
+$T_{1}$を仮定する方の意味である．
+また$\beta X$で位相空間$X$の
+ストーンチェックコンパクト化を表すとする．
+
+
+\begin{thm}\label{thm:main3}
+$X$と$Y$
+を完全正則空間とし
+$f\colon X\to Y$
+を連続写像とする．
+このとき以下は同値である．
+
+\begin{enumerate}[label=\textup{(Q\arabic*)}]
+\item\label{item:0perfect}
+
+$f$は完全写像である．
+
+\item\label{item:comp}
+あるコンパクト空間$K$と閉埋め込み$i\colon X\to Y\times K$が存在して
+$f=pr\circ i$
+が成り立つ．
+ここで$pr\colon Y\times K\to Y$である．
+
+\item\label{item:0pullback}
+以下の図式がpullback
+になる．ここで$g$と$g^{\prime}$
+は自然な埋め込みである．
+\[
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "g^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& Y\arrow[d,"g"] \\
+ \beta X \arrow[r,"\beta f"] & \beta Y
+\end{tikzcd}
+\]
+
+\item \label{item:1pullback}
+$Y$の任意のコンパクト化を$\eta Y$と書くこのとき以下の図式がpullbackになる．
+\[
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "g^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& Y\arrow[d,"g"] \\
+ \beta X \arrow[r,"\beta f"] & \eta Y
+\end{tikzcd}
+\]
+
+\item \label{item:2pullback}
+$\gamma X$と$\eta Y$はそれぞれ$X$と$Y$
+のコンパクト化であって尚且つ以下の図式を可換にするものとする．このとき以下の図式はpullbackになる．
+\[
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "g^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& Y\arrow[d,"g"] \\
+ \gamma X \arrow[r,"\gamma f"] & \eta Y
+\end{tikzcd}
+\]
+
+\item\label{item:0jouyo}
+条件\ref{item:0pullback}と同じ状況で
+$(\beta f)^{-1}(Y)=X$が成り立つ．
+
+\item\label{item:1jouyo}
+条件\ref{item:1pullback}と同じ状況下で
+$(\beta f)^{-1}(Y)=X$が成り立つ．
+
+\item\label{item:2jouyo}
+条件\ref{item:2pullback}と同じ状況下で
+$(\gamma f)^{-1}(Y)=X$が成り立つ．
+
+
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+
+$\ref{item:0perfect}\To \ref{item:comp}$の証明：
+以下の可換図式を考える．
+
+
+\[
+\begin{tikzcd}
+X \arrow[r, hook, "\Delta"] \arrow[dr, "f^{\prime}\circ \Delta"']& X\times \beta X \arrow[r, "pr"] \arrow[d, "f^{\prime}=f\times 1_{\beta X}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] \\
+& Y\times \beta X \arrow[r,"pr"] & Y
+\end{tikzcd}
+\]
+$X$から$X$に伸びる射は合成すると恒等写像になる．
+よって$K=\beta X$ととれば
+\ref{item:comp}が満たされる．
+
+
+$\ref{item:comp}\To \ref{item:0perfect}$の証明:
+命題\ref{prop:compper}の\ref{item:daiji3}と
+補題\ref{lem:percompp}から従う．
+
+$\ref{item:0pullback}\lor \ref{item:1pullback}\lor \ref{item:2pullback}\To \ref{item:0perfect}$の証明: 
+$\beta f$, $\gamma f$などはコンパクトハウスドルフ空間の間の連続写像なので完全写像である．このことと
+定理
+\ref{thm:main1}の
+\ref{item:bcper}から従う．
+
+
+
+
+
+
+
+$\ref{item:0perfect}\To \ref{item:0pullback}\land \ref{item:1pullback}\land \ref{item:2pullback}$の証明:
+
+$\ref{item:2pullback}\To \ref{item:0pullback}\land\ref{item:1pullback}$
+なので，
+$\ref{item:0perfect}\To \ref{item:2pullback}$
+を証明する．
+
+
+
+以下の図式を考える．
+$Q$を作った後に$P$を作る．
+\[
+\begin{tikzcd}
+P \arrow[r, "h^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+Q  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"h"] \arrow[d, hook, "u^{\prime}"] & Y \arrow[d, hook, "g"] \\
+\gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+ここで$g\colon Y\to \eta Y$が埋め込みであることから
+$Q$は$(\gamma f)^{-1}(Y)$と同相である．
+よって以下の図式を得る．
+\[
+\begin{tikzcd}
+P \arrow[r, "h^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+(\gamma f)^{-1}(Y)  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"h"] \arrow[d, hook, "u^{\prime}"] & Y \arrow[d, hook, "g"] \\
+\gamma X\arrow[r,"\gamma f"] &  \beta Y
+\end{tikzcd}
+\]
+ここで$u^{\prime}$は包含写像である．
+
+先の定理
+\ref{thm:main1}の
+\ref{item:bcper}より，
+$f^{\prime}$は完全である．
+また同様に$\gamma f$は完全なので
+$h$も完全であり，また$h^{\prime}$
+も完全になる．
+
+自明な埋め込み
+$v^{\prime}\colon X\to \beta X$があるので以下の図式が成り立つ．
+
+\[
+\begin{tikzcd}
+X \arrow[drr,  "1_{X}", bend left] \arrow[dddr, bend right, "v^{\prime}"']& & \\
+ & P \arrow[r, "h^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+& (\gamma f)^{-1}(Y) \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"h"] \arrow[d, hook, "u^{\prime}"] & Y \arrow[d, hook, "g"] \\
+& \gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+よって$Q$の普遍性から$r\colon X\to Q$が一意的に存在する．
+
+\[
+\begin{tikzcd}
+X \arrow[drr, bend left,  "1_{X}"] \arrow[dddr, bend right, "v^{\prime}"'] \arrow[ddr,  "r"]& & \\
+ & P \arrow[r, "h^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+& (\gamma f)^{-1}(Y)  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"h"] \arrow[d, hook, "u^{\prime}"] & Y \arrow[d, hook, "v"] \\
+& \gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+さらに$P$の普遍性から$l\colon X\to P$
+が一意的に存在する．
+
+
+\[
+\begin{tikzcd}
+X \arrow[drr, bend left,  "1_{X}"] \arrow[dddr, bend right, "v^{\prime}"'] \arrow[ddr,  "r"]
+\arrow[dr,  "l"]& & \\
+ & P \arrow[r, "h^{\prime}"] \arrow[d, "f^{\prime}"] \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d,"f"] & \\
+& (\gamma f)^{-1}(Y)  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"h"] \arrow[d, hook, "u^{\prime}"] & Y \arrow[d, hook, "v"] \\
+& \gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+ここで$g^{\prime}\circ l=1_{X}$で，
+$g^{\prime}$と$1_{X}$は完全写像なので，
+定理
+\ref{thm:mic2}から
+$l$も完全写像になる．
+さらに$r=f^{\prime}\circ l$なので
+$r$も完全写像である．
+
+ところで$X\subset (\gamma f)^{-1}(Y)$なので
+包含写像$X\to (\beta f)^{-1}(Y)$があるが，
+これは$(\beta f)^{-1}(Y)$の図式の$r$と入れ替えても可換図式を満たす．よって$r$の一意性より$r$は
+包含写像$X\to (\gamma f)^{-1}(Y)$である．
+$X$は$\gamma X$の中で稠密なので特に
+$(\gamma f)^{-1}(Y)$の中でも稠密である．
+今$r$が完全写像で，特に閉写像であることがわかっているので$X$は$(\gamma f)^{-1}(Y)$の中で閉集合ということになる．
+稠密性から$X=(\gamma f)^{-1}(Y)$となり，結局
+$r$は恒等写像であったことがわかる．
+さらに図式の可換性から$h=f$がわかるので結局以下の図式がわかる．
+
+
+\[
+\begin{tikzcd}
+X  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"f"] \arrow[d, hook, ""] & Y \arrow[d, hook, ""] \\
+\gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+
+
+これは
+\ref{item:2pullback}が成り立つということである．
+
+$\ref{item:2pullback}\To \ref{item:0jouyo}\land \ref{item:1jouyo}\land \ref{item:2jouyo}$の証明: 
+$\ref{item:2jouyo}\To \ref{item:1jouyo}\land \ref{item:2jouyo}$が成り立つので
+$\ref{item:2pullback}\To \ref{item:2jouyo}$
+を証明すれば良い．
+上述の
+$\ref{item:0perfect}\To \ref{item:2pullback}$の証明と似たようなもんだが，めんどくさがらず一応説明する．
+\[
+\begin{tikzcd}
+X  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"f"] \arrow[d, hook, ""] & Y \arrow[d, hook, ""] \\
+\gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+がpullbackであることと
+
+\[
+\begin{tikzcd}
+(\gamma f)^{-1}(Y)  \arrow[dr, phantom, "\lrcorner", very near start]\arrow[r,"(\gamma f|_{f-^{1}(Y)})"] \arrow[d, hook, ""] & Y \arrow[d, hook, ""] \\
+\gamma X\arrow[r,"\gamma f"] &  \eta Y
+\end{tikzcd}
+\]
+がpullbackであることから
+$X=(\gamma f)^{-1}(Y)$が従う．
+
+
+$\ref{item:0jouyo}\lor \ref{item:1jouyo}\lor \ref{item:2jouyo}\To \ref{item:0perfect}$の証明:
+$\beta f$や$\gamma f$が完全写像であることと，系\ref{cor:seigen}
+から$f$が完全写像であることが従う．
+
+
+
+
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{rmk}
+定理 \ref{thm:main3}
+の
+\ref{item:0jouyo},  \ref{item:1jouyo}, \ref{item:2jouyo}
+の条件はそれぞれ
+$\beta f(\beta X\setminus X)=\cl_{\beta Y}(f(X))\setminus f(X)$, 
+$\beta f(\beta X\setminus X)=\cl_{\eta Y}(f(X))\setminus f(X)$, 
+$\gamma f(\gamma X \setminus X)=\cl_{\eta Y}(f(X))\setminus f(X)$
+と同値になる．
+$f$が全射の時は
+$\beta f(\beta X\setminus X)=\beta Y\setminus Y$, 
+$\beta f(\beta X\setminus X)=\eta Y\setminus Y$, 
+$\gamma f(\gamma X \setminus X)=\eta Y\setminus Y$
+となる．
+つまり，コンパクト化の剰余の像が行き先の剰余に等しいということである．
+\end{rmk}
+
+
+
+\section{おまけ}
+
+連続写像$f$が
+\textbf{固有写像}であるとは$f$によるコンパクト集合の引き戻しがコンパクトになるときにいう．
+
+空間$X$が\textbf{$k$-空間}であるとは
+$X$の部分集合$A$が閉集合であることと，
+任意のコンパクト部分集合$K$について
+$K\cap A$が$K$の閉集合であることが同値になるときにいう．つまり写像の族$\{\iota_{K}\colon K\to X\}_{\text{$K$:cpt in $X$}}$
+による商位相と$X$自体の位相が一致するということである．
+この空間のことを\textbf{コンパクト生成}であるともいう．
+
+位相空間$X$が\textbf{弱ハウスドルフ}であるとは，任意のコンパクト部分集合が閉集合になるときにいう．
+\begin{prop}\label{prop:koyuperfect}
+$X$を位相空間とし，
+$Y$をコンパクト生成弱ハウスドルフ空間とする．
+このとき連続写像$f\colon X\to Y$
+が完全写像であることと固有写像であることは同値である．
+\end{prop}
+\begin{proof}
+まず$f$が完全であると仮定する．このとき
+系
+\ref{cor:precon}より
+$f$は固有写像になる．
+逆に$f$が固有であると仮定しよう．
+このとき固有写像の定義から$f$の各ファイバーは
+コンパクトになる．今から$f$が閉写像になることを示そう．
+$A$を$X$の任意の閉集合とする．
+このとき$f(A)$が$Y$の中で閉集合であると言えれば良い．
+$Y$の任意のコンパクト部分集合を
+$K$とする．このとき
+$f(A)\cap K=f(A\cap f^{-1}(K))$が成り立つ(この式は射影公式と呼ばれ，集合間の写像とその部分集合についていつでも成り立つ)．
+ここで$f$が固有であることから$f^{-1}(K)$はコンパクト集合であり
+$A$は$X$の閉集合なので
+$A\cap f^{-1}(K)$は$f^{-1}(K)$の閉集合である．
+特にコンパクトである．
+故に$f(A\cap f^{-1}(K))$もコンパクトである．
+つまり$f(A)\cap K$は$Y$のコンパクト部分集合である．
+よって$Y$が弱ハウスドルフであることから
+$f(A)\cap K$は閉集合である．$K$の任意性と
+$Y$が$k$-空間であることから
+$f(A)$は閉集合である．
+よって$f$が閉写像，ひいては完全写像であることがわかった．
+\end{proof}
+
+
+\begin{rmk}
+\cite{com}においては全て完全正則空間で考えて，完全写像をpullbackで記述していた．
+もしかしたら完全正則空間の圏はスキームっぽさがあるのかもしれない．今回の文書では，筆者が手を加えて最後の定理以外ではなるべく一般の位相空間で証明が済むようになっている．
+結果として\ref{thm:main1}の証明が一つずつ証明をするようなものになってけったいなものなったかもしれない．
+
+定理\ref{thm:main3}
+の
+\ref{item:comp}
+は，文献\cite{mic}によれば，
+\cite[Theorem 1]{nag}と\cite[Theorem, p.21]{van}で見出されたものらしい．
+定理
+\ref{thm:main3}の\ref{item:0pullback}
+は文献\cite{the}
+によれば
+\cite[Lemma 1.5]{duk}
+で見出されたものらしい．
+
+\end{rmk}
+
+次の定理は使うかもと思って準備したが使わなかった．
+
+$3\times 3$の図式のpullbackについても考えよう．
+\begin{thm}\label{thm:3by3}
+以下の可換図式において小さい正方形の図式の左上はpullbackになっているとする．このとき$A^{\prime}$
+は一番大きい外側のpullbackにもなっている．
+
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A' \arrow[r] \arrow[d] 
+\arrow[dr, phantom, "\lrcorner", very near start]
+& B' \arrow[r] \arrow[d] 
+\arrow[dr, phantom, "\lrcorner", very near start]
+& C' \arrow[d] \\
+A \arrow[r] \arrow[d] 
+\arrow[dr, phantom, "\lrcorner", very near start]
+& B \arrow[r] \arrow[d] 
+\arrow[dr, phantom, "\lrcorner", very near start]
+& C \arrow[d] \\
+A_0 \arrow[r] & B_0 \arrow[r] & C_0
+\end{tikzcd}
+\]
+\end{thm}
+\begin{proof}
+縦に分割したり，横に分割したりして
+定理
+\ref{thm:yoko}や
+定理\ref{thm:tate}
+を使うと証明できる．
+\end{proof}
+
+
+
+
+
+\begin{thebibliography}{99}
+
+
+\bibitem{com}
+A private communication with yujitomo. 
+2024年7月14日．
+
+\bibitem{dempa1}
+はてなブログ電波通信, 
+「未完成(tube lemma)」, 
+https://concious4410.hatenablog.com/entry/2015/12/04/204115
+
+
+\bibitem{dempa2}
+はてなブログ電波通信, 
+「コンパクト性と閉射影:Kuratowski--Mr\'{o}wka's Thoerem」, 
+https://concious4410.hatenablog.com/entry/2016/06/23/151341
+
+\bibitem{dempa3}
+はてなブログ電波通信, 
+「閉写像云々とか固有写像とか」
+https://concious4410.hatenablog.com/entry/2015/11/06/205115
+
+\bibitem{sta}
+Stack Project, 5.17 Characterizing proper maps, 
+https://stacks.math.columbia.edu/tag/005M
+
+
+
+\bibitem{duk}
+M. Henriksen and J. R. Isbell, 
+\textit{Some properties of compactifications}, 
+Duke Math. J. 25, 83--105 (1958), 
+doi: 10.1215/S0012-7094-58-02509-2. 
+
+\bibitem{the}
+D. Holgate,  
+\textit{The pullback closure, perfect morphisms and completions},  (1995), PhD Thesis, University of Cape town, 
+https://open.uct.ac.za/server/api/core/bitstreams/c3824df1-0075-4bb1-a4a2-9aecdb5a7f5f/content
+
+
+\bibitem{nag}
+J. Nagata, 
+\textit{A note on M-space and topologically complete space}, Proc. Japan
+Acad. 45 (1969), 541-543, 
+doi: 10.3792/pja/1195520664. 
+
+\bibitem{mic}
+E. Michael, 
+\textit{A theorem on perfect maps}, 
+Proc. Am. Math. Soc., 
+(1971) 28, 
+633--634,
+doi:10.2307/2038028. 
+
+\bibitem{van}
+ J. van der Slot, 
+ \textit{Some properties related to compactness, Mathematical Center}, 
+Tracts 19, Amsterdam, 1966.
+
+\end{thebibliography}
+
+
+
+\end{document}

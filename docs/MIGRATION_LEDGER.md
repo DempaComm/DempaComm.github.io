@@ -251,6 +251,17 @@ python3 scripts/migration_ledger.py decide-privacy-review \
 
 `blocked` は `author_review=blocked` としますが、`status=privacy_review` のままにします。
 
+`ready` の原稿を `paper_tool.py import-paper` で取り込んだ後は、`paper.json` の
+`migration_record_id` と台帳番号を照合して公開済みにします。
+
+```sh
+python3 scripts/migration_ledger.py record-publication \
+  article:0123456789abcdef article:fedcba9876543210
+```
+
+対応する `paper.json` がない場合、または台帳が `ready` でない場合は停止します。
+成功すると `status=published` と保存先slugが台帳へ反映されます。
+
 ## 著者情報の確認状態
 
 - `pending`: 未確認

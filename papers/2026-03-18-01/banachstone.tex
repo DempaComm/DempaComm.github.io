@@ -1,0 +1,869 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+
+\newcommand{\myre}{\mathrm{Re}}
+
+\newcommand{\myextreme}[1]{\partial_{ext}(#1)}
+\newcommand{\mycco}[1]{\overline{\mathrm{co}}(#1)}
+
+\newcommand{\myprob}[1]{\mathcal{P}r(#1)}
+
+\newcommand{\mydiracset}[1]{\Delta(#1)}
+
+\newcommand{\mydiracsetq}[2]{\Delta(#1)_{#2}}
+
+\newcommand{\mygenf}{\mathbb{F}}
+
+\newcommand{\mydirac}[1]{\delta_{#1}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{バナッハ・ストーンの定理:おまけ}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+別のpdfのおまけとして書いていたが，やたら複雑な議論
+をやっていたので，独立した文書として残す．
+
+
+『この文書では
+コンパクトハウスドルフ空間$K$
+上の
+関数空間$C(K)$
+の等長類が$K$の位相的情報を
+持っているということを述べた
+Banach--Stoneの定理を紹介する．
+双対空間の有界閉集合のextreme pointがディラック測度になっていることを使って証明するという方針は聞いていたので，実際にやってみたら自力で証明できたので文書として残しておく．』
+ということになっていたが証明が間違っていたので頑張って修正する．
+コンウェイの関数解析の教科書\cite{con}
+などを参考にした．
+
+
+\section{準備}
+
+
+\begin{df}[extreme point]
+局所凸空間$E$の凸集合$L$
+の点$p\in L$
+が\textbf{extreme point}
+であるとは，
+任意の$x, y\in L$
+についてもしも$t\in (0, 1)$が存在して
+$tx+(1-t)y=p$ならば
+$p=x=y$となるときにいう．
+凸集合$L$
+のextreme point 全体の集合を
+$\myextreme{L}$
+と書くことにする．
+\end{df}
+
+
+\begin{df}
+コンパクトハウスドルフ空間
+$X$
+に対して
+$C(X; \rr)$ $(C(X; \cc))$
+でその上の実(複素)連続関数の全体を表すとする．
+ノルムとして$\sup$ノルムを導入すると
+$C(X; \rr)$$(C(X; \cc))$
+は実(複素)バナッハ空間になる．
+\end{df}
+
+
+
+\section{測度に関する準備}
+この節の詳しい解説は
+\cite{dempa1}と\cite{dempa2}を参照のこと．
+\begin{df}
+$X$を局所コンパクトハウスドルフ空間とする．
+このとき$X$上の測度$\mu$がRMK測度であるとは以下の条件を満たすときにいう
+\begin{enumerate}
+\item $\mu$は$[0, \infty]$に値をとるボレル測度である．
+\item $X$の任意のコンパクト集合$K$について$\mu(K)<\infty$
+\item $X$の任意のボレル集合は外部正則である．つまり
+$\mu(E)=\inf\{\mu(V)\ |\ V\in \mathfrak{O}_X\ E\subset V\}$が成り立つ．ここで$\mathfrak{O}_X$は$X$の開集合系である．
+\item $E$が開集合もしくは$\mu(E)<\infty$ならば$E$は内部正則である．つまり，
+$\mu(E)=\sup\{\mu(K)\ |\ K\in Cpt(X) \ K\subset E\}$
+が成り立つ．ここで$Cpt(X)$は$X$のコンパクト集合全体である．
+\end{enumerate}
+
+$X$上のRMK測度全体を$M(X)$と書くことにする．また，
+$X$上の有限RMK測度全体の集合を$F(X)$と書くことにする．
+もちろん$X$がコンパクトハウスドルフ空間のときには$M(X)=F(X)$である．
+
+$X$上の符号付き測度で二つのRMK測度の差で表されるもの全体を$S(X)$と書くことにする．
+また，$X$上の複素測度で，$\mu, \nu\in S(X)$を用いて
+$\mu+\sqrt{-1}\nu$の形で表されるもの全体を$H(X)$と書くことにする．
+\end{df}
+
+
+\begin{df}
+$\rr_+$-可換モノイド$(S, +, 0)$について，
+その線形空間化
+$(K(S), +, 0)$を次のように定義する．
+ まず$S\times S$上の関係$R$を次のように定義する．
+  $(a, b)R(c, d)$とは$a+d=b+c$である．
+  すると$R$は$S\times S$上の同値関係となる．
+  そして$K(S)=S\times S/R$
+  とし，演算を$[a, b]+[c, d]=[a+c, b+d]$と定義する．
+ この演算について$K(S)$は可換群になっている．
+ 単位元は$[0, 0]$であり，$[a, b]$
+ の逆元
+ は$[b, a]$である．
+ また，$r\in [0, \infty)$について
+ \[
+ r[a, b]=[ra, rb]
+ \]
+ と定義し，$r<0$の場合には
+ \[
+ r[a, b]=[|r|b, |r|a]
+ \]
+ と定義すると，$K(S)$は先ほど定義した$+$とこのスカラー倍について
+ $\rr$上の線形空間になる．
+ \end{df}
+
+\begin{cau}
+$K(S)$は加法について見れば$S$のグロタンディーク群とみなせるが，
+この文章では$\rr_+$-可換モノイドを$\rr$上の線形空間にするために
+スカラー倍という付加的な構造が乗っかっている．
+\end{cau}
+
+
+\begin{thm}[実Riesz-Markov-Kakutani]
+$X$をコンパクトハウスドルフ空間とする．このとき
+$\rr$線形空間としての同型
+\[
+C(X; \rr)^*\cong K(F(X))
+\]
+が成り立つ．
+\end{thm}
+
+\begin{thm}[複素Riesz-Markov-Kakutani]
+$X$をコンパクトハウスドルフ空間とする．このとき
+$\cc$線形空間としての同型
+\[
+C(X; \cc)^*\cong H(X)\cong S(X)\times_{\cc}S(X) \cong\cc\otimes_{\rr}S(X)
+\]
+が成り立つ．
+\end{thm}
+
+
+
+\begin{df}
+位相空間$X$上のボレル測度$\mu$
+が
+\textbf{ラドン測度}であるとは
+$\mu$についてコンパクト部分集合は常に有限の値を持ち
+さらに，内部正則性，
+つまり任意のボレル集合についてその測度はそれに含まれるコンパクト集合の測度の上限に一致するときにいう．
+リースマルコフ角谷で得られる測度は微妙にラドン測度ではないのだが(\cite{dempa1}\cite{dempa2})，確率測度などの有限測度に話を限れば，ラドン測度になる．
+\end{df}
+
+
+
+\begin{prop}
+$\mu$を
+局所コンパクトハウスドルフ空間上の
+RMK複素測度とする．
+このとき全変動$|\mu|$
+もRMK測度になる．
+\end{prop}
+\begin{proof}
+せかせかやるとわかる．
+\end{proof}
+
+
+\begin{prop}
+$\mu\in C(K; \cc)$とする．
+このとき
+$\mu$の作用素ノルムは
+全変動$|\mu|$の作用素ノルムに等しい．
+\end{prop}
+\begin{proof}
+ラドンニコディム微分
+$\frac{d\mu}{d|\mu|}$はほとんど至るところ
+絶対値が1の複素数であった．
+このことと(下からの)単関数近似および
+$K$が正規であることを用いるとわかる．
+\end{proof}
+
+
+
+
+
+\section{本文}
+\begin{df}
+実でも複素でもバナッハ空間$V$の双対空間を
+$V^{*}$で表すことにする．
+\end{df}
+
+\begin{df}
+$\mygenf$を$\rr$か$\cc$のどちらかとする．
+このとき
+$\mydiracsetq{K}{\mygenf}$
+を
+集合
+$\{\, w \cdot \mydirac{x}\mid w\in \mygenf, |w|=1, x\in K\, \}$
+と定義する．
+\end{df}
+
+\begin{prop}
+$\mygenf$を$\rr$か$\cc$のどちらかとする．
+$K$をコンパクトハウスドルフ空間とする．
+$B$を$C(K; \mygenf)$
+の$0$を中心とする半径$1$の閉球体とする．
+このとき
+$\myextreme{B}=\mydiracsetq{K}{\mygenf}$
+が成り立つ．
+\end{prop}
+\begin{proof}
+まず
+$\mydiracsetq{K}{\mygenf}\subset \myextreme{B}$
+を示そう．
+任意の$w\cdot \mydirac{p}\in \mydiracset{K}$
+をとる．
+そして
+$\mu, \nu\in B$が
+\[
+w\cdot \delta_{p}=\frac{1}{2}\mu+\frac{1}{2}\nu
+\]
+を満たしている
+と仮定する．今から$\mu=\nu=w\mydirac{p}$を示したいが，
+ここで$w=1$としても良い．
+つまり
+\[
+\mydirac{p}=\frac{1}{2}\mu+\frac{1}{2}\nu
+\]
+と仮定する．
+ここで$K$上のボレル測度$\alpha$
+を
+$\alpha=\mu-\mu(\{p\})\mydirac{p}$
+とすると
+$\alpha(\{p\})=0$であり，
+$r, l\in \cc$を用いて
+$\mu=r\mydirac{p}+\alpha$
+かつ
+$\nu=l\mydirac{p}-\alpha$
+とかける．ここで
+$r+l=2$である．
+背理法のために$|r|>1$と仮定しよう．
+測度$\alpha$および全変動$|\alpha|$もRMK測度なので
+$\alpha(\{p\})=0$と外部正則性
+から$\epsilon \in (0, \infty)$
+と$p$の十分小さい開近傍$N$で
+$|\alpha|(N)<\epsilon$かつ
+$|r|-\epsilon>1$となるものが存在する．
+すると$K$の正規性そして
+から
+連続写像
+$f\colon K\to [0, 1]$
+で$f(p)=1$となり
+$N$の外では$0$になるものが存在する
+このとき$\mu(f)\ge |r|-|\alpha|(f)>|r|-\epsilon \ge 1$
+となるがこれは$|\mu(f)|\le 1$に反する．
+よって$|r|\le 1$である．
+同様に$|l|\le 1$である．
+このような$r, l\in \cc$が
+$r+l=2$となるためには$r=1$かつ$l=1$でなければならない．つまり
+$\mu=\mydirac{p}+\alpha$
+かつ
+$\nu=\mydirac{p}-\alpha$
+である．
+さてもしも$\alpha$
+がゼロ測度でなければ
+$|\alpha|(A)\neq 0$
+となるボレル集合
+$A$が存在する．
+ここで$\epsilon\in (0, \infty)$
+を任意にとる．
+内部正則性から
+コンパクト集合$L$が存在して
+$|\alpha|(L)\neq 0$かつ
+$p\not \in L$である．
+よって再び$K$の正規性やら外部正則性などを用いて
+$p$の十分小さい近傍$N$と
+$L$の十分小さい近傍$V$が存在して
+$N\cap V=\emptyset$
+で$|\mu|(N)<\epsilon$かつ$|\alpha|(V\setminus L)< \epsilon$とできる．
+そして$K$の正規性から
+$f, g\colon K\to [0, 1]$が存在して
+$f$は$f(p)=1$で$N$の外では$0$
+そして$g$は$L$
+上で$1$をとり
+$V$の外では$0$となるようにする．
+このとき
+$|\mu(f+g)|$
+$\mu(f)=1-\epsilon$かつ
+$\mu(g)\ge \alpha(L)-\epsilon$
+で$f$と$g$のサポートは交わらないようにできる．
+さて
+\[
+c=\frac{\overline{\alpha(L)}}{|\alpha(L)|}
+\]とし
+以下の計算をする．
+\begin{align*}
+&|\mu(f+cg)|=\left|\int_{K}f+cgd\mu\right|
+=\left|\int_{\{p\}}f\ d\mu +\int_{L}cg\ d\mu+
+\int_{N\setminus \{p\}}f\ d\mu+\int_{V\setminus L}gd\mu\right|
+\\
+&\ge 
+\left|\int_{\{p\}}f\ d\mu +\int_{L}cg\ d\mu\right|
+-\left|\int_{N\setminus \{p\}}f\ d\mu\right|
+-\left|\int_{V\setminus L}|c||g|d|\mu|\right|
+\\
+&\ge 
+|1+c\alpha(L)|-2\epsilon
+=1+|\alpha(L)|-2\epsilon 
+\end{align*}
+以上から
+$\|\mu\|\ge |\mu(f+g)|\ge 1+|\alpha(L)|-2\epsilon$
+となり$\epsilon$の任意性から
+$\|\mu\|\ge 1+1+|\alpha(L)|>1$となるが
+これは
+$\|\mu\|\le 1$に反する．
+よって
+$\alpha$はゼロ測度である．
+つまり
+$\mu=\mydirac{p}=\nu$である．
+よって
+$w\cdot \mydirac{p}\in \myextreme{\myprob{K}}$
+である．
+
+
+次に$\mu\in \myextreme{B}$をとろう．
+まず$B$は$-1$をかける操作で閉じているので
+$0$はextreme pointではない．
+よって
+$\mu$は特にゼロ測度ではない．
+故に$|\mu|$のサポートは空でない閉集合である．
+ここで，$\mu$のサポートとは，
+$|\mu|$の零集合となる開集合全ての和集合の補集合である．
+点$p$を$|\mu|$のサポートから取ろう．
+今から$|\mu|$のサポートが
+$\{p\}$であることを証明する．
+背理法のために
+$p$を含まないボレル集合
+$S$であって
+$|\mu(S)|\neq 0$となるものが存在すると仮定しよう．
+ここで内部正則性から$S$は
+コンパクトとしても良い．
+すると
+外部正則性と$p\not \in S$，そして$K$の正規性から
+$p$の十分小さい開近傍$V$と$N$で
+$\cl(V)\subset N$で
+$|\mu|(K\setminus N)\neq 0$
+となるものが存在する．
+よって再び$K$の正規性から
+$f\colon K\to [0, 1]$であって
+$\cl(V)$で１をとり$N$の外で$0$になるものが存在する．
+ここで
+\[
+c=\int_{K}f\ d|\mu|
+\]
+とおく．
+このとき
+$c\le \||\mu|\|=\|\mu\|\le 1$
+である．
+また
+$V$は開集合で$|\mu|$のサポートと交わっているので
+$|\mu|(V)>0$となる．
+よって
+$c\ge |\mu|(\cl(V))>0$
+である．
+さらに
+\[
+1-c=\int_{K}(1-f)\ d|\mu|\ge |\mu|(K\setminus N)>0
+\]
+が成り立つので
+$c\in (0, 1)$である．
+そして
+$\alpha(B)=\int_{B}f\ d\mu$
+かつ
+$\beta(B)=\int_{B}(1-f)\ f\mu$
+とすると
+$\frac{\alpha}{c}$と
+$\frac{\beta}{1-c}$は
+$B$に属しさらに
+\[
+\mu=c\left(\frac{\alpha}{c}\right)+(1-c)
+\left(\frac{\beta}{1-c}\right)
+\]
+となるので
+$\mu$
+はextreme pointにならない．
+これは矛盾である．
+よって
+$|\mu|$の測度正な集合は
+$\{p\}$と交わりを必ずもつ．
+この状況で測度$\mu$は$w\cdot \mydirac{p}$
+の形をしており，
+extreme pointであるという仮定から
+$|w|=1$でなければならないので
+$\mu\in \mydiracsetq{K}{\mygenf}$
+が成り立つ．
+\end{proof}
+\begin{rmk}
+実はボレル測度のサポートの補集合となる開集合が零集合になるかどうかは集合論的に決定不可能な問題を含んでいる．
+上の議論はそんなことを用いてないので問題ない．
+\end{rmk}
+
+\begin{thm}\label{thm:bsbs}
+$K$と$L$をコンパクトハウスドルフ空間とする．
+そして
+$f\colon C(K; \cc)\to C(L; \cc)$を
+等長全単射写像とする．
+このとき
+同相写像$h\colon L\to K$と$a\in C(L; \cc)$
+で$|a(x)|=1$となるものおよび
+$b\in C(L; \cc)$が存在して
+$f(s)(y)=a(y)\cdot s(h(y))+b(y)$
+となる．
+特に
+$C(K)$と$C(L)$
+が等長同型ならば
+$K$と$L$
+は同相である．
+\end{thm}
+\begin{proof}
+まずMazur--Ulamの定理(定理\ref{thm:mumu})から
+$f$はアフィン写像となる．
+よって以下では$f$は線型写像としても良い．
+$f$は等長なので
+等長写像$f^{*}\colon C(L; \cc)^{*}\to C(K; \cc)^{*}$
+を誘導する．
+今$B_{K}$と$B_{L}$
+でそれぞれ
+$C(K; \cc)$と$C(L; \cc)$
+の$0$を中心とする単位閉球体を表すとする．
+$f^{*}(0)=0$なので
+$f^{*}(B_{L})=B_{K}$となる．
+さらに$f$の線形性から
+$f^{*}(\myextreme{B_{L}})=\myextreme{B_{k}}$
+となる．
+よって
+任意の
+$p\in L$について
+$f^{*}(\mydirac{p})=a(p)\cdot \mydirac{h(p)}$
+となる$a(p)\in U(1)=\{\, q\in \cc\mid |q|=1\, \}$
+と写像$h\colon L\to K$が存在する．
+今から$a\colon L\to \cc$と
+$h\colon L\to K$
+が連続であることを証明しよう．
+
+本題に入る前に
+$\tau_{L}\colon L\to C(K; \cc)^{*}_{w^{*}}$
+と
+$\tau_{K}\colon K\to C(L; \cc)^{*}_{w^{*}}$
+をディラック測度で埋め込む写像とする．
+この時コンパクトハウスドルフ空間が完全正則であることから
+これらの写像は位相的埋め込みになっていることに注意しよう．
+
+まず最初に$f^{*}$は汎弱位相の間の同相写像
+$f^{*}\colon C(K; \cc)^{*}_{w^{*}}\to C(L; \cc)^{*}_{w^{*}}$
+でもあることに注意しよう．
+このことと
+$\tau_{L}\colon L\to C(K; \cc)^{*}_{w^{*}}$が位相的埋め込みであることから
+$1$を噛ませて
+$a(y)=f^{*}(\tau_{L}(y))(1)$となる．
+$w^{*}$位相で$f^{*}$は連続なので
+$f^{*}(\tau_{L}(y))(1)$も連続である．
+故に$a(y)$の
+連続性がわかる．
+
+$h$の連続性を考えよう．上の議論で$a(y)$が連続であることがわかったので
+$a(y)^{-1}f^{*}(\tau_{L}(y))$も連続である．
+これは集合$\mydiracset{K}$に属するので
+$h(y)=\tau_{K}^{-1}(a(y)^{-1}f^{*}(\tau_{L}(y)))$
+も連続である．
+次に$h$の単射性を考察しよう．
+$x, y\in L$について
+$h(y)=h(x)$と仮定しよう．
+このとき
+\[
+\tau_{K}^{-1}(a(y)^{-1}f^{*}(\tau_{L}(y)))
+=\tau_{K}^{-1}(a(x)^{-1}f^{*}(\tau_{L}(x)))
+\]
+となる．よって
+\[
+a(y)^{-1}f^{*}(\tau_{L}(y))
+=a(x)^{-1}f^{*}(\tau_{L}(x))
+\]
+となる.さらに$f^{*}$は線形なので
+\[
+f^{*}(a(y)^{-1}\tau_{L}(y)
+=f^{*}(a(x)^{-1}\tau_{L}(x)
+\]
+となり$f^{*}$
+は単射なので
+\[
+a(y)^{-1}\tau_{L}(y)=a(x)^{-1}\tau_{L}(y)
+\]
+となる．
+ここでもしも$x\neq y$ならば
+$L$は完全正則なので特に
+異なる2点$x, y\in L$に対して
+$|u(x)|< |u(y)|$となる$u\in C(L; \cc)^{*}$
+が存在する．
+この$u$から上の式を用いて
+\[
+a(y)^{-1}u(y)=a(x)^{-1}u(x)
+\]
+となるがこれは
+$|u(x)|<|u(y)|$
+に矛盾するので
+$x=y$でなければならない．
+よって$h$は単射である．
+次に全射性を考えよう．
+任意の$k\in K$を任意にとる．
+このとき$f^{*}(\mydirac{p})=a(p)\cdot \mydirac{h(p)}$だから$\mydirac{k}$について
+$f^{*}(w\mydirac{y})=\mydirac{k}$となる
+$y\in L$が存在する．
+このとき
+$f^{*}(\mydirac{y})=w^{-1}\mydirac{k}$
+なので$h$の定義から
+$k=h(y)$となる．
+よって$h$は全射である．
+$h$はコンパクトハウスドルフ空間同士の間の連続写像であるから特に同相である．
+
+任意の$s\in C(K; \cc)$について
+$f^{*}(\mydirac{y})=a(y)\mydirac{h(y)}$
+であるから
+$s$を噛ませると
+$\mydirac{y}(f(s))=a(y)s(h(y))$
+つまり
+$f(s)(y)=a(y)s(h(y))$
+となる．
+
+\end{proof}
+
+
+\section{Mazur--Ulamの定理}
+
+\begin{thm}\label{thm:mumu}
+$X$と$Y$をバナッハ空間とする．
+このとき
+等長同型$f\colon X\to Y$
+はアフィン写像である．
+\end{thm}
+\begin{proof}
+省略：\cite{nica} や\cite{vai}を参照のこと．
+気が向いたら追加する可能性がなくもない．
+\end{proof}
+
+
+
+\section{間違っていた方の証明の風味を残した節}
+
+\begin{df}
+コンパクトハウスドルフ空間
+$K$
+について
+$\myprob{K}$
+で
+$K$上のラドン測度であって
+確率測度になっているもの全体を表すことにする．
+また
+$\mydiracset{K}$
+で$K$上のディラック測度全体を表すことにする．
+\end{df}
+
+
+\begin{prop}[リース・マルコフ・角谷の定理の応用]
+$K$をコンパクトハウスドルフ空間とする．
+そして$S$を$C(K)^{*}$
+の部分集合であって$\mu(1)=1$(ここで左辺の$1$は$K$上の定数関数である)かつ任意の$f\in C(K)$について$f\ge 0$ならば
+$\mu(f)\ge 0$となるもの全体とする．
+すると
+$S$は$\myprob{K}$と自然に同一視できる．
+この同一視のもと
+$\myprob{K}$は$C(K)^{*}$の閉有界凸集合である．
+\end{prop}
+\begin{proof}
+前半の証明というか，どのように同一視するかの説明である．
+$\mu\in S$
+にリース・マルコフ・角谷の定理(\cite{dempa1})を適応して
+$K$上のラドン測度$\mu$を得る(ものぐさで同じ記号で書くことにする)．これが確率測度であることは
+$\mu(1)=1$から従う．
+逆に$\mu\in \myprob{K}$
+について$\mu(f)=\int_{K}f\ d\mu$を対応させる(ものぐさで同じ記号で書く)と$\mu\in S$となる．
+次に$\myprob{K}$が$C(K)^{*}$
+の閉有界凸集合であることを示そう．
+まず凸集合であることは確率測度の線型結合が確率測度であるから大丈夫．有界性は$|\mu(f)|\le \int |f|\ d\mu\le \|f\|$
+から$\|\mu\|\le 1$になるからわかる．
+閉集合であることを示そう．
+$S$と$\myprob{K}$を同一視しているので$S$が閉集合であることを示せば良い．
+これは$S$の条件が極限で保たれることから従う．
+\end{proof}
+
+
+\begin{prop}\label{prop:equqlboundary}
+$K$をコンパクトハウスドルフ空間とする．
+このとき$\myextreme{\myprob{K}}=\mydiracset{K}$
+が成り立つ．
+\end{prop}
+\begin{proof}
+まず$\mydiracset{K}\subset \myextreme{\myprob{K}}$
+を示そう．
+任意の$\mydirac{p}\in \mydiracset{K}$
+をとる．
+ここで$\mu, \nu\in \myprob{K}$について
+$t\in (0, 1)$が存在して
+$\mydirac{p}=t\mu+(1-t)\nu$
+としよう．
+このとき$U=K\setminus \{p\}$
+について測度をとると
+$0=t\mu(U)+(1-t)\nu(U)$
+となる．
+つまり$\mu(U)=\nu(U)=0$
+がわかるので
+$\mu=\nu=\mydirac{p}$
+である．よって
+$\mydirac{p}\in \myextreme{\myprob{K}}$
+である．
+
+逆の包含関係を示そう．
+$\mu\in \myprob{K}$
+をとる．
+背理法のために
+$K$のボレル集合$A,B$で
+$A\cap B=\emptyset$かつ
+$A\cup B=K$であるものが存在して
+$0<\mu(A)$かつ$0<\mu(B)$
+となると仮定する．
+このとき
+$\alpha=\frac{1}{\mu(A)}(\iota_{A})_{*}\mu|_{A}$
+かつ
+$\beta=\frac{1}{\mu(B)}(\iota_{B})_{*}\mu|_{B}$
+とすると$\mu\neq \alpha$かつ$\mu\neq \beta$
+で
+\[
+\mu=\mu(A)\alpha+(1-\mu(A))\beta
+\]
+である．ここで$\mu(A)+\mu(B)=1$に注意せよ．
+以上から
+$\mu$はextreme pointではない．これは矛盾である．
+
+よって以下の主張が成り立つ．
+\begin{enumerate}[label=\textup{(Cl)}]
+\item\label{item:claim}
+任意の
+$K$のボレル集合$A,B$が$A\cap B=\emptyset$かつ
+$A\cup B=K$を満たすならば
+$\mu(A)=0$か$\mu(B)=0$
+を満たす．
+\end{enumerate}
+ここで
+$\mathcal{N}$を$K$のコンパクト集合で
+$\mu$について正の測度をもつものとする．
+$\mathcal{N}$の有限個の元$K_{1}, \dots, K_{m}$
+について背理法のために
+$\bigcap_{i=1}^{m}K_{i}=\emptyset$
+と仮定する．
+このとき
+$\bigcup_{i=1}^{m}K\setminus K_{i}=K$
+なので，ある$j$について
+$K\setminus K_{j}$は正の測度をもつ．
+これは主張\ref{item:claim}に矛盾するので
+$\bigcap_{i=1}^{m}K_{i}\neq\emptyset$
+である．
+つまり
+$\mathcal{N}$は有限交差性をもつので
+$L=\bigcap_{H\in N}H\neq \emptyset$
+である．
+ここでもし$L$が測度ゼロなら
+$\mu$がラドン測度であることから
+測度正のコンパクト集合を含むので
+矛盾する．
+よって
+$\mu(L)>0$である．
+ここで点$p\in L$をとる．もしも$\{p\}$が測度ゼロならば
+$\mu$がラドン測度であることを用いて
+$A\cap \{p\}=\emptyset$で
+$\mu(A)>0$となるコンパクト集合$A$
+がとってこれるが，$A\in \mathcal{N}$
+と$p\not \in A$は矛盾するので
+$\{p\}$は測度正になる．
+よって$L=\{p\}$
+がわかる．
+さらに先ほどの主張\ref{item:claim}から$K\setminus \{p\}$は測度ゼロになるので
+$\mu=\mydirac{p}$
+である．
+これで$\mu\in \mydiracset{K}$
+がわかるので
+$\myextreme{\myprob{K}}=\mydiracset{K}$
+となる．
+\end{proof}
+
+\begin{prop}\label{prop:homeoboundary}
+$K$と
+$\myextreme{\myprob{K}}$
+は同相である．
+ここで
+$\myprob{K}$
+には$w^{*}$位相を入れて考えている．
+\end{prop}
+\begin{proof}
+$K$が完全正則空間であることから従う．
+\end{proof}
+
+
+
+
+
+以下の定理で$f(1)=1$をつけずに証明をしていたのが前のバージョンのこの文書の間違いであった．
+\begin{thm}[廉価版Banach--Stoneの定理]\label{thm:main0}
+$K$と$L$はコンパクトハウスドルフ空間とする．
+このとき線形等長同型写像
+$f\colon C(K)\to C(L)$
+が存在し，$f(1)=1$(ここで定数関数としての$1$である)
+を満たすならば
+$K$と$L$
+は同相である．
+\end{thm}
+\begin{proof}
+定理の$fから$線形等長同型
+$f^{*}\colon C(K)^{*}\to C(L)^{*}$
+が誘導される．
+さらに線形な同型写像
+$f^{*}\colon C(K)^{*}_{w^{*}}\to C(L)^{*}_{w^{*}}$
+が誘導される．
+ここで$f^{*}$は
+$f^{*}(1)=1$を満たすので
+$\myprob{K}$を$\myprob{L}$
+に移す．さらに$f^{*}$は線形なので
+$\myextreme{\myprob{K}}$
+を
+$\myextreme{\myprob{L}}$
+に移す．
+よって
+$K$と$L$
+が同相であることが従う．
+\end{proof}
+
+\begin{rmk}
+実は一般にバナッハ空間の間の等長同型はアフィンであることがわかる(Mazur--Ulamの定理(\cite{nica}\cite{vai}))ので，
+定理\ref{thm:main0}の$f$が線形という仮定は不要である．
+さらにFullのBanach--Stoneの定理は等長写像の具体的な形まで決定するものなので，定理\ref{thm:main0}
+は廉価版でしかない．
+ところで上の定理\ref{thm:main0}にはコンパクト性を用いていないように見えるし，命題\ref{prop:homeoboundary}では完全正則性しか使っていない．よって一般に完全正則空間$X$に対してその有界な実連続関数$C_{b}(X)$でも同様のことが成り立ちそうに見える．しかし実は命題
+\ref{prop:equqlboundary}でコンパクト性を用いており，さらにコンパクト性がなければ成り立たないのである．
+実際一般に完全正則空間$X$について
+$C_{b}(X)$は$C(\beta X)$と等長同型になるので，
+$C_{b}(X)$と$C_{b}(Y)$が同型であるだけだと
+$\beta X$と$\beta Y$が同相であることしかわからないのである．ところで実は$X$と$Y$が第一可算な完全正則空間だと
+$\beta X$と$\beta Y$が同相であることから$X$と$Y$
+が同相になることが導出できるので(\cite[p.273]{rings}, \cite[21.5系, 116ページ]{kodamanagami})，
+一応定理\ref{thm:main0}をノンコンパクトな場合に拡張することはできる．
+特に$X$と$Y$
+が距離化可能空間の時に
+$C_{b}(X)$と$C_{b}(Y)$
+が等長同型であるならば
+$X$と$Y$
+は同相である．
+\end{rmk}
+
+
+
+%%%%%
+
+\begin{thebibliography}{99}
+
+
+\bibitem{dempa1}
+はてなブログ電波通信, 
+「リース・マルコフ・角谷の表現定理の証明（入射角16.225°の測度論入門2）」, 
+https://concious4410.hatenablog.com/entry/2015/10/28/213025
+
+\bibitem{dempa2}
+はてなブログ電波通信, 
+「Riesz-Markov-Kakutaniの表現定理II」, 
+https://concious4410.hatenablog.com/entry/2020/02/02/213341
+
+
+
+\bibitem{kodamanagami}
+児玉之行,永見啓応,
+位相空間論
+,岩波書店,
+1974
+
+
+
+\bibitem{miya}
+宮島静雄, 
+関数解析, 
+横浜図書, 2005. 
+
+
+\bibitem{rings}
+L. Gillman and M. Jerison, 
+\textit{Rings of continuous functions}. Reprint of the 1960 original published by Van Nostrand Company. Mineola, NY: Dover Publications. 
+
+
+\bibitem{nica}
+B. Nica, 
+\textit{The Mazur-Ulam theorem}, 
+Expo. Math. 30, No. 4, 397--398 (2012; Zbl 1267.46023)
+ doi: 10.1016/j.exmath.2012.08.010
+
+\bibitem{vai}
+J. V\"{a}is\"{a}l\"{a}, 
+\textit{A proof of the Mazur-Ulam theorem}, 
+Am. Math. Mon. 110, No. 7, 633--635, 
+doi: 10.2307/3647749
+
+\bibitem{con}
+J. B. Conway, 
+\textit{A course in functional analysis}, 
+ 2nd ed. 1990, GTM 96, Springer-Verlag. 
+
+
+\end{thebibliography}
+
+
+
+\end{document}

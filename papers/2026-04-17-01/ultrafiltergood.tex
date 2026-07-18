@@ -1,0 +1,1003 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage[mathscr]{eucal}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+
+\newcommand{\mycp}[1]{\mathrm{C_{p}}(#1)}
+
+
+
+\newcommand{\myfinset}[1]{[#1]^{<\omega_{0}}}
+
+\newcommand{\myfil}[1]{\mathcal{#1}}
+\newcommand{\myfam}[1]{\mathscr{#1}}
+
+\newcommand{\mymap}[2]{\mathrm{Map}(#1, #2)}
+
+
+\newcommand{\mycf}[1]{cf(#1)}
+\newcommand{\mypowset}[1]{\mathcal{P}(#1)}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{
+善良超フィルターの存在証明
+}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+この文章では
+Kunen
+\cite{kunen}の方法によって善良超フィルター(good ultrafilter)の存在を証明する．
+よくわかんないところは
+学士論文
+\cite{bach}
+を参考にした．
+
+善良超フィルターの存在証明といえば
+数学書「超積と超準解析」
+\cite{saito}に記述がある．
+しかしこの本
+が2026年現在
+入手困難で，
+善良超フィルターの存在が記述された日本語の文書も見かけないことからこの文書を書くことにした．
+とりあえず善良超フィルターの存在がわかれば
+飽和モデルの構成の難しい部分が解消できて，
+超準解析の部分は色々な本に記述があるので絶版本を
+無理して購入する必要がなくなるのではないかと思われなくもない．
+ところでこの本は国会図書館デジタルコレクションで閲覧可能であるらしい．
+
+\section{準備: ケーニヒの補題}
+基数に関する
+K\"{o}nigの補題が必要になったので，急いで証明する．
+
+\begin{thm}\label{thm:koniglemma}
+基数$\mu$によって添字づけられた
+基数の二つの族$\{\kappa_{\alpha}\}_{\alpha<\mu}$
+と$\{\lambda_{\alpha}\}_{\alpha<\mu}$
+は任意の$\alpha<\mu$について
+\[
+\kappa_{\alpha}< \lambda_{\alpha}
+\]
+を満たすとする．
+このとき以下の不等式が成り立つ．
+\[
+\sum_{\alpha<\mu}\kappa_{\alpha}<\prod_{\alpha<\mu}\lambda_{\alpha}. 
+\]
+\end{thm}
+\begin{proof}
+二つの集合族
+$\{K_{\alpha}\}_{\alpha<\mu}$
+と
+$\{L_{\alpha}\}_{\alpha<\mu}$
+は
+$\alpha<\mu$
+について
+$\card(K_{\alpha})=\kappa_{\alpha}$,
+$\card(L_{\alpha})=\lambda_{\alpha}$, 
+を満たし，
+そして$\alpha\neq \beta$の時
+$K_{\alpha}\cap K_{\beta}=\emptyset$
+と
+$L_{\alpha}\cap L_{\beta}=\emptyset$
+を満たすとする．このような族は常に取ることが出来る．
+このとき
+$\card\left(\coprod_{\alpha<\mu}K_{\alpha}\right)=\sum_{\alpha<\mu}\kappa_{\alpha}$
+であり
+$\card\left(\prod_{\alpha<\mu}L_{\alpha}\right)=\prod_{\alpha<\mu}L_{\alpha}$
+である．
+まず最初に
+$\coprod_{\alpha<\mu}K_{\alpha}$
+から
+$\prod_{\alpha<\mu}L_{\alpha}$
+への単射を構成しよう．
+適当に各$\alpha<\mu$に対して
+単射$f_{\alpha}\colon K_{\alpha}\to L_{\alpha}$
+をとってくる．
+$\kappa_{\alpha}<\lambda_{\alpha}$
+なので，
+$f_{\alpha}$は絶対に全射ではない．
+よって$f_{\alpha}$の像に含まれない元を一つとり
+$p_{\alpha}$とする．
+このとき写像
+$h\colon \coprod_{\alpha<\mu}K_{\alpha}\to \prod_{\alpha<\mu}L_{\alpha}$
+を
+$x\in K_{\alpha}$のとき
+$h(x)$の第$\alpha$成分が$f_{\alpha}(x)$
+でそれ以外の$\beta$成分は$p_{\beta}$
+となるように定義する．
+この$h$が単射となることを見よう．
+$f_{\alpha}$の単射性から各$K_{\alpha}$上では
+単射である．$\alpha\neq \beta$で$x\in K_{\alpha}$かつ$y\in K_{\beta}$のときには
+$h(x)$の第$\alpha$成分は$f_{\alpha}(x)$
+であり，
+$h(y)$のそれは$p_{\alpha}$である．
+$p_{\alpha}$は$f_{\alpha}$の像には含まれないから
+$f_{\alpha}(x)\neq p_{\alpha}$
+であるから
+$h(x)\neq h(y)$
+である．
+以上で$h$が単射であることがわかった．
+つまり
+$\sum_{\alpha<\mu}\kappa_{\alpha}\le \prod_{\alpha<\mu}\lambda_{\alpha}
+$がわかった．
+次にこれが真の不等式になることを示す．
+そのために任意の
+写像$f\colon \coprod_{\alpha<\mu}K_{\alpha}\to \prod_{\alpha<\mu}L_{\alpha}$
+が全射ではないことを示せば良い．
+写像$f$を成分表示して
+$f=(f_{\alpha})_{\alpha<\mu}$
+とする．
+このとき$\kappa_{\alpha}<\lambda_{\alpha}$
+なので写像
+$f_{\alpha}|_{K_{\alpha}}\colon K_{\alpha}\to L_{\alpha}$
+は全射ではないので
+これの像に含まれない元$p_{\alpha}$を取ることが出来る．
+そして点$p\in \prod_{\alpha<\mu}L_{\alpha}$
+を第$\alpha$成分が$p_{\alpha}$となる点とする．
+今から$p$が$f$の像に含まれないことを証明しよう．
+そのためには任意の$\alpha<\mu$について
+$p$が$f(K_{\alpha})$に属していないことを示せば良い．
+なんとなれば$f(K_{\alpha})$の$L_{\alpha}$への射影は
+$f_{\alpha}|_{K_{\alpha}}$の像であるから
+$p_{\alpha}$はこれに含まれない．
+よって$p$は$f(K_{\alpha})$
+に含まれない．
+これで$f$が絶対に全射ではないことがわかった．
+つまり目的の不等式が成り立つ．
+\end{proof}
+
+
+\begin{cor}\label{cor:cf}
+基数$\kappa$について
+$\kappa<\kappa^{\mycf{\kappa}}$
+が成り立つ．
+\end{cor}
+\begin{proof}
+列
+$\{\theta_{\alpha}\}_{\alpha<\mycf{\kappa}}$
+を$\sup_{\alpha<\mycf{\kappa}}\theta_{\alpha}=\kappa$かつ
+$\theta_{\alpha}<\kappa$を満たすものとしてとってくる．
+定数列$\{\kappa\}_{\alpha<\mycf{\kappa}}$
+と上記の列に対して定理\ref{thm:koniglemma}
+を適応すると
+$\kappa<\kappa^{\mycf{\kappa}}$
+を得る．
+\end{proof}
+
+\begin{cor}\label{cor:powercf}
+基数$\kappa$について
+$\kappa<\mycf{2^{\kappa}}$
+が成り立つ．
+\end{cor}
+\begin{proof}
+もしも$\mycf{2^{\kappa}}\le \kappa$だとすると
+\begin{align*}
+(2^{\kappa})^{\mycf{2^{\kappa}}}\le (2^{\kappa})^{\kappa}=2^{\kappa\times \kappa}=2^{\kappa}
+\end{align*}
+となり
+系\ref{cor:cf}
+に矛盾する．
+\end{proof}
+
+
+\section{本文}
+フィルターの定義は省略する．
+特に断りのない限り，
+フィルターといえば真のフィルターとする．
+
+
+$X$を集合とするとき
+$\myfinset{X}$
+で$X$の有限部分集合全体の集合を表すとする．
+そして
+$\mypowset{X}$
+で$X$の冪集合を表すとする．
+\begin{df}[単調写像, 準同型]
+$X$を集合とする．
+写像$p\colon \myfinset{X}\to \mypowset{X}$
+が単調であるとは
+$a, b\in \myfinset{X}$
+についてもしも
+$a\subset b$ならば
+$p(b)\subset p(a)$
+となるときにいう．
+そして$h\colon \myfinset{X}\to \mypowset{X}$
+が準同型であるとは
+任意の$a, b\in \myfinset{X}$
+について
+$h(a\cup b)=h(a)\cap h(b)$
+を満たすときにいう．
+準同型ならば単調であることに注意しよう．
+そして二つの写像
+$f, g\colon \myfinset{X}\to \mypowset{X}$
+について$f\le g$とは
+任意の$a\in \myfinset{X}$について
+$f(a)\subset g(a)$
+と定義する．
+\end{df}
+\begin{df}[善良超フィルター(good ultrafilter)]
+$X$を集合とし
+$\myfil{F}$
+をその上のフィルターとする．
+このとき$\myfil{F}$が
+\textbf{善良超フィルター(good ultrafilter)}
+であるとは
+任意の単調写像
+$p\colon \myfinset{X}\to \myfil{F}$
+について
+準同型写像$h\colon \myfinset{X}\to \myfil{F}$
+が存在して$h\le p$となることである．
+\end{df}
+
+
+集合$X$, $Y$
+について
+$\mymap{X}{Y}$
+で$X$から
+$Y$への写像全体の集合を表すとする．
+\begin{df}[large oscillation family]
+$X$を集合とし
+$\myfil{F}$
+をその上の($\mypowset{X}$も含めた)フィルターとする．
+このとき$\mymap{X}{X}$
+の部分集合
+$\myfam{S}$
+が\textbf{large oscillation family mod $\myfil{F}$}
+であるとは
+有限個の任意の$\myfam{S}$の元$f_{1}, \dots f_{m}\in \myfam{S}$と同じ個数の任意の有限個の$X$の元
+$v_{1}, \dots, v_{m}\in X$について
+\[
+X\setminus \{\, x\in X\mid \forall i\in \{1, \dots, m\} \ f_{i}(x)=v_{i}\, \}\not\in \myfil{F}
+\]
+が成り立つことである．
+\end{df}
+\begin{rmk}
+Kunenの論文
+\cite{kunen}
+では上記概念はindependent set mod
+ $\myfil{F}$
+と名付けられている．
+論文\cite{com}
+によれば\cite{kunen}のプレプリントの段階では
+large oscillation family という名前が用いられていたらしく，
+\cite{com}ではlarge oscillation family という名前が使われている．
+independent setはすでに他の名前に使われているというか
+\cite{kunen}では三つくらい異なるindependent setの概念が出てくる(互いに関係があるが)のでややこしいから
+large oscillation family という名前の方がいいと思う．
+\end{rmk}
+
+\begin{lem}\label{lem:iikae}
+$X$を集合とし
+$\myfil{F}$
+をその上のフィルターとする．
+このとき$\mymap{X}{X}$
+の部分集合
+$\myfam{S}$
+が
+large oscillation family mod $\myfil{F}$
+であることと
+有限個の任意の$\myfam{S}$の元$f_{1}, \dots f_{m}\in \myfam{S}$と同じ個数の任意の有限個の$X$の元
+$v_{1}, \dots, v_{m}\in X$, 
+そして任意の$A\in \myfil{F}$について
+\[
+A\cap \{\, x\in X\mid \forall i\in \{1, \dots, m\} \ f_{i}(x)=v_{i}\, \}\neq\emptyset
+\]
+が成り立つことは同値である．
+\end{lem}
+\begin{proof}
+まず$\myfam{S}$
+がlarge oscillation family mod $\myfil{F}$と仮定し，
+有限個の任意の$\myfam{S}$の元$f_{1}, \dots f_{m}\in \myfam{S}$と同じ個数の任意の有限個の$X$の元
+$v_{1}, \dots, v_{m}\in X$, 
+そして任意の$A\in \myfil{F}$をとってくる．
+ここで
+$Z= \{\, x\in X\mid \forall i\in \{1, \dots, m\} \ f_{i}(x)=v_{i}\, \}$とおく．
+すると
+\[
+X\setminus Z\not\in \myfil{F}
+\]
+である．
+もしも$Z\cap A=\emptyset$
+だとすると
+$A\subset X\setminus Z$なので
+$\myfil{F}$
+がフィルターであることから
+$X\setminus Z\in \myfil{F}$
+が成り立ち矛盾する．
+よって$Z\cap A\neq \emptyset$
+であり，補題の条件が成り立つ．
+
+逆に補題の条件が成り立つとしよう．
+そして
+有限個の任意の$\myfam{S}$の元$f_{1}, \dots f_{m}\in \myfam{S}$と同じ個数の任意の有限個の$X$の元
+$v_{1}, \dots, v_{m}\in X$をとってくる．
+ここで
+$Z= \{\, x\in X\mid \forall i\in \{1, \dots, m\} \ f_{i}(x)=v_{i}\, \}$とおく．
+ここでもしも
+$X\setminus Z\in \myfil{F}$
+だとすると
+補題の条件から
+$Z\cap (X\setminus Z)\neq \emptyset$
+でなければならないが
+これはありえない．
+よって
+$X\setminus Z\not\in \myfil{F}$
+である．
+つまり$\myfam{S}$は
+large oscillation family mod $\myfil{F}$である．
+\end{proof}
+
+さて以下の命題を考えるにあたって
+$\{X\}$は$X$上のフィルターであることに注意しよう．
+\begin{prop}\label{prop:oscexists}
+$\kappa$を基数とし
+$X$を濃度$\kappa$の集合とする．
+このとき
+large oscillation family mod $\{X\}$
+となるような
+$\myfam{S}$
+であって
+$\card(\myfam{S})=2^{\kappa}$
+となるものが存在する．
+\end{prop}
+\begin{proof}
+集合$K=\{\, (s, r)\mid s\in \myfinset{X}, r\in \mymap{\mypowset{s}}{X}\, \}$
+の濃度は$\kappa$である．
+そこでこれを$X$で添字づけして
+$\{(s_{x}, r_{x})\}_{x\in X}$
+とする．
+そして
+各$A\in \mypowset{X}$
+について
+$f_{A}\colon X\to X$
+を
+$f_{A}(x)=r_{x}(A\cap s_{x})$
+と定義する．
+このとき
+$\myfam{S}=\{f_{A}\}_{A\in \mypowset{X}}$
+が条件を満たすことを見よう．
+相異なる$A_{1}, \dots, A_{m}$
+と$X$の元$v_{1}, \dots, v_{m}$
+を任意にとってくる．
+このとき
+$A_{1}, \dots, A_{m}$は相異なるから
+有限集合$t\in \myfinset{X}$
+が存在して
+$A_{1}\cap t, \dots, A_{m}\cap t$
+が相異なる．
+そして関数$l\colon \mypowset{t}\to X$
+を$l(A_{i}\cap t)=v_{i}$と定義する．
+これは$A_{1}\cap t, \dots, A_{m}\cap t$が相異なることから可能である．
+ここで$Z=\{\, x\in X\mid \forall i\in \{1, \dots, m\}\ f_{A_{i}}=v_{i}\, \}$
+とする．
+そして$(s_{a}, r_{a})=(t, l)$
+となる$a\in X$をとってくると
+$a\in Z$
+なので
+$Z$は空ではない．
+よって
+$X\setminus Z\neq X$
+であるから
+$X\setminus Z\not\in \{X\}$
+なので
+族$\myfam{S}$は
+large oscillation family mod 
+$\{X\}$
+である．
+また$\myfam{S}$
+は$\mypowset{X}$
+で添字づけられており，この添字づけが単射であることが
+上の議論からわかるから
+$\card(\myfam{S})=2^{\kappa}$
+である．
+\end{proof}
+
+\begin{prop}\label{prop:sagesage}
+$X$を集合とし
+$\myfil{F}$
+をその上のフィルター，
+そして
+$\myfam{S}$
+をlarge oscillation family mod $\myfil{F}$
+とし
+$A\in \mypowset{X}$
+とする．
+このとき
+$X$上のフィルター$\myfil{G}$
+と
+$\myfam{T}\subset \mymap{X}{X}$
+が存在して以下を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$\myfil{F}\subset \myfil{G}$
+\item 
+$\myfam{T}$
+はlarge oscillation family mod $\myfam{G}$
+であり，
+$\myfam{T}\subset \myfam{S}$
+と
+$\card(\myfam{S}\setminus \myfam{T})<\aleph_{0}$
+を満たす．
+\item 
+$A$と$X\setminus A$
+のどちらかは
+$\myfil{G}$
+に属する．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+場合わけで証明する．
+$\myfil{F}\cup \{A\}$
+から生成される
+（$\mypowset{X}$も含めた）フィルターを
+$\myfil{H}$
+とする．
+
+最初に$\myfam{S}$
+がlarge oscillation family mod $\myfil{H}$
+である場合を考えよう．
+このとき
+$\myfil{H}$は真のフィルターであり
+$A\in \myfil{H}$である．
+ここで$\myfil{G}=\myfil{H}$, 
+$\myfam{T}=\myfam{S}$
+とおけば命題の条件をすべて満たす．
+
+次に
+$\myfam{S}$
+がlarge oscillation family mod $\myfil{H}$
+でない場合を考えよう．
+すると補題\ref{lem:iikae}からある$f_{1}, \dots, f_{m}\in \myfam{S}$
+と$v_{1}, \dots, v_{m}$が存在し，
+さらに
+$F\in \myfil{F}$が存在して
+\[
+A\cap F\cap \{\, x\in X\mid \forall i\in \{1, \dots, m\} f_{i}(x)=v_{i}\, \}=\emptyset
+\]
+である．
+ここで$Z=\{\, x\in X\mid \forall i\in \{1, \dots, m\} f_{i}(x)=v_{i}\, \}$とおこう．
+すると$A\cap F\cap Z=\emptyset$
+である．
+ここで$\myfil{F}\cup \{Z\}$
+から生成されるフィルターを
+$\myfil{G}$
+とする．このとき補題\ref{lem:iikae}
+から$\myfil{G}$は真のフィルターになっている．
+そして$A\cap F\cap Z=\emptyset$
+から
+$F\cap Z\subset X\setminus A$なので
+$X\setminus A\in \myfil{G}$である．
+そして
+$\myfam{T}=\myfam{S}\setminus\{f_{1}, \dots, f_{m}\}$
+とする．
+この$\myfam{T}$がlarge oscillation family mod
+$\myfil{G}$であることを見よう．
+$\myfam{T}$から$g_{1}, \dots, g_{k}$
+と$X$から$u_{1}, \dots, u_{k}$
+をとってくる．
+そして
+$W=\{\, x\in X\mid \forall i\in \{1, \dots, k\} g_{i}(x)=u_{i}\, \}$
+とする．
+このとき
+\[
+W\cap Z=\{\, x\in X\mid \forall i\in \{1, \dots, m\}f_{i}(x)=v_{i}\text{かつ}\forall j\in \{1, \dots, k\} g_{j}(x)=u_{j}\, \}
+\]
+なので，$\myfam{S}$がlarge oscillation family mod 
+$\myfil{F}$であることから
+補題\ref{lem:iikae}
+から
+任意の$F\in \myfil{F}$
+から
+$W\cap Z\cap F\neq \emptyset$
+である．
+これは
+$W$が$\myfil{G}$
+の任意の元と交わりを持つということを示している．
+よって
+再び補題\ref{lem:iikae}から
+$\myfam{T}$
+がlarge oscillation family 
+mod $\myfil{G}$
+であることが従う．
+\end{proof}
+
+\begin{prop}\label{prop:sagesecond}
+$X$を集合とし
+$\myfil{F}$
+をその上のフィルター，
+そして
+$\myfam{S}$
+をlarge oscillation family mod $\myfil{F}$
+とし
+$p\colon \myfinset{X}\to \myfil{F}$
+を単調写像
+とする．
+このとき
+$X$上のフィルター$\myfil{G}$
+と
+$\myfam{T}\subset \mymap{X}{X}$
+が存在して以下を満たす．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+$\myfil{F}\subset \myfil{G}$
+\item 
+$\myfam{T}$
+はlarge oscillation family mod $\myfam{G}$
+であり，
+$\myfam{T}\subset \myfam{S}$
+と
+$\card(\myfam{S}\setminus \myfam{T})<\aleph_{0}$
+を満たす．
+\item 
+準同型$h\colon \myfinset{X}\to \myfil{G}$
+が存在して
+$h\le p$
+を満たす．
+\end{enumerate}
+\end{prop}
+\begin{proof}
+適当に$g\in \myfam{S}$
+をとってくる．
+そして
+$\myfam{T}=\myfam{S}\setminus \{g\}$
+とおく．
+そして
+各$t\in \myfinset{X}$
+に対して
+$q_{t}\colon \myfinset{X}\to \mypowset{X}$を
+\[
+q_{t}(s)
+=\begin{cases}
+\emptyset & \textit{$s\not\subset t$}\\
+p(t) & \textit{$s\subset t$}
+\end{cases}
+\]
+と定義する．
+そして
+$\{t_{x}\}_{x\in X}$
+を$\myfinset{X}$
+の添字づけとする．
+そして
+$q\colon \myfinset{X}\to \mypowset{X}$
+を
+\[
+q(s)=\bigcup_{x\in X}\left(q_{t_{x}}(s)\cap g^{-1}(\{x\})\right)
+\]
+と定義する．
+さらに
+$\myfil{G}$を
+$\myfil{F}\cup \bigcup_{s\in \myfinset{X}}q(s)$
+から生成される
+($\mypowset{X}$を含めた)フィルターとする．
+まず$q$が準同型であることを見よう．
+任意に$a, b\in \myfinset{X}$
+をとる．
+ここで
+一般に$w\in \myfinset{X}$について
+\begin{align*}
+q(w)&=\bigcup_{x\in X}(q_{t_{x}}(w)\cap g^{-1}(x))
+=
+\bigcup_{x\in X, w\subset t_{x}}(p(t_{x})\cap g^{-1}(x))
+\end{align*}
+となることに注意しよう．
+この観察のもと
+以下の式変形をする．
+\begin{align*}
+q(a)\cap q(b)&=
+\left(\bigcup_{x\in X, a\subset t_{x}}(p(t_{x})\cap g^{-1}(x))\right)
+\cap 
+\left(\bigcup_{y\in X, b\subset t_{y}}(p(t_{y})\cap g^{-1}(y))\right)\\
+&=
+\bigcup_{x\in X, y\in X, a\subset t_{x}, b\subset t_{y}}
+p(t_{x})\cap g^{-1}(x)\cap p(t_{y})\cap g^{-1}(y)\\
+&=
+\bigcup_{x\in X, y\in X, a\subset t_{x}, b\subset t_{y}}
+p(t_{x})\cap p(t_{y})\cap g^{-1}(x)\cap g^{-1}(y). 
+\end{align*}
+ここで，$x\neq y$なら$g^{-1}(x)\cap g^{-1}(y)=\emptyset$となるから
+\begin{align*}
+&\bigcup_{x\in X, y\in X, a\subset t_{x}, b\subset t_{y}}
+p(t_{x})\cap p(t_{y})\cap g^{-1}(x)\cap g^{-1}(y)\\
+&=
+\bigcup_{x\in X a\subset t_{x}, b\subset t_{x}}
+p(t_{x})\cap g^{-1}(x)=
+\bigcup_{x\in X a\cup b\subset t_{x}}
+p(t_{x})\cap g^{-1}(x)\\
+&=q(a\cup b)
+\end{align*}
+となるから
+$q(a\cup b)=q(a)\cap q(b)$となる．
+よって
+$q$が準同型であることがわかる．
+
+
+次に$\myfil{G}$
+が真のフィルターであることを見てみよう．
+写像$q$が準同型であることから
+任意の$s\in \myfinset{X}$
+と
+任意の$F\in \myfil{F}$について
+$F\cap q(s)\neq \emptyset$
+であることを証明すれば良い．
+ここで$t_{x}=s$となる$x\in X$
+をとる．
+すると$g\in \myfam{S}$
+で$\myfam{S}$
+がlarge oscillation family mod $\myfil{F}$
+であることと$p$の像が$\myfil{F}$
+であることから
+$F\cap p(t_{x})\cap g^{-1}(x)\neq \emptyset$
+となる．$s=t_{x}$なので
+$p(t_{x})\cap g^{-1}(x)\subset q(s)$
+であり，
+$F\cap q(s)\neq \emptyset$
+を得る．
+これで$\myfil{G}$
+が真のフィルターであることがわかった．
+
+ここで
+$q\le p$を証明しよう．任意の$w\in \myfinset{X}$
+をとる．
+このとき
+\begin{align*}
+q(w)&=\bigcup_{x\in X, w\subset t_{x}}(p(t_{x})\cap g^{-1}(x))
+\end{align*}
+である．
+写像$p$
+は単調であったので，
+$w\subset t_{x}$となる$x$について
+$p(t_{x})\subset p(w)$である．
+故に
+\begin{align*}
+q(x)=
+\bigcup_{x\in X, w\subset t_{x}}(p(t_{x})\cap g^{-1}(x))
+\subset 
+\bigcup_{x\in X, w\subset t_{x}}p(t_{x})
+\subset p(w)
+\end{align*}
+となるので
+$q\le p$
+が従う．
+
+最後に$\myfam{T}$
+が
+large oscillation family mod $\myfil{G}$
+であることを証明しよう．
+任意の$f_{1}, \dots, f_{m}\in \myfam{S}$
+と$v_{1}, \dots, v_{m}\in X$をとる．
+そして
+\[
+Z=\{\, z\in X\mid \forall i\in \{1, \dots, m\} f_{i}(z)=v_{i}\, \}
+\]
+とおく．このとき任意の$w\in \myfinset{X}$と
+任意の$F\in \myfil{F}$
+をとる．そして
+$t_{x}=w$となる$x\in X$をとる．
+このとき$\myfam{S}$
+がlarge oscillation family mod $\myfil{F}$
+であることと$p(w)\in \myfil{F}$であることから
+$(F\cap p(w))\cap(Z\cap g^{-1}(x))\neq \emptyset$
+である．
+ここで$p(w)\cap g^{-1}(x)=p(t_{x})\cap g^{-1}(x)\subset q(w)$なので
+$(F\cap q(w))\cap Z\neq \emptyset$
+がわかる．
+フィルター$\myfil{G}$は$F\cap q(w)$という形の集合から生成されるから
+$\myfam{T}$が
+large oscillation family mod 
+$\myfam{G}$
+であることがわかる．
+これで証明が終わる．
+\end{proof}
+
+
+\begin{df}
+集合
+$X$
+上のフィルター
+$\myfil{F}$
+が\textbf{可算非完備}
+であるとは
+ある可算列$\{A_{n}\}_{n\in \zz_{\ge 0}}$
+が存在して
+$A_{n}\in \myfil{F}$と
+$\bigcap_{n\in \zz_{\ge 0}}A_{n}=\emptyset$
+を満たすときにいう．
+\end{df}
+\begin{thm}[Kunen]
+$\kappa$を無限基数とし
+$X$を濃度が$\kappa$
+であるような集合とする．
+このとき$X$上に
+可算非完備な善良超フィルターが存在する．
+\end{thm}
+\begin{proof}
+冪集合$\mypowset{X}$の濃度は$2^{\kappa}$
+であるから
+この集合を$2^{\kappa}$で全単射に添字づけして
+$\{A_{\alpha}\}_{\alpha<2^{\kappa}}$
+とする．
+そして
+$\card(\myfinset{X})=\kappa$
+と$\card(\mypowset{X})=2^{\kappa}$
+から
+$\mymap{\myfinset{X}}{\mypowset{X}}$
+の濃度は$(2^{\kappa})^{\kappa}=2^{\kappa\times \kappa}=2^{\kappa}$
+である．
+よって
+$\mymap{\myfinset{X}}{\mypowset{X}}$の部分集合である
+単調な写像全体を全射に添字づけしてそれを
+$\{p_{\alpha}\}_{\alpha<2^{\kappa}}$
+とする．
+ただしここで，各単調写像$p\colon \myfinset{X}\to \mypowset{X}$
+について
+$p=p_{\alpha}$となる$\alpha$
+は$2^{\kappa}$個あるように添字づけする．
+これは$2^{\kappa}\times 2^{\kappa}=2^{\kappa}$
+であるから可能である．
+
+今から超限再帰によって以下のような
+列$\{\myfil{F}_{\alpha}\}_{\alpha<2^{\kappa}}$
+と$\{\myfam{S}_{\alpha}\}_{\alpha<2^{\kappa}}$
+を構成する．
+\begin{enumerate}[label=\textup{(K\arabic*)}]
+\item\label{item:11}
+各$\alpha<2^{\kappa}$
+について
+$\myfil{F}_{\alpha}$
+は$X$上の真のフィルターであり
+$\myfam{S}_{\alpha}$
+はlarge oscillation family mod 
+$\myfil{F}_{\alpha}$
+である．
+
+\item\label{item:22}
+任意の$\alpha<2^{\kappa}$
+について
+$\card(\myfam{S}_{\alpha})=2^{\kappa}$
+である．
+
+\item\label{item:33}
+もしも
+$\gamma<2^{\kappa}$
+が極限順序数であるときには
+$\myfil{F}_{\gamma}=\bigcup_{\alpha<\gamma}\myfil{F}_{\alpha}$
+と
+$\myfam{S}_{\gamma}=\bigcap_{\alpha<\gamma}\myfam{S}_{\alpha}$
+が成り立つ．
+
+\item\label{item:44}
+任意の$\alpha<2^{\kappa}$について
+$\myfam{S}_{\alpha}\setminus \myfam{S}_{\alpha+1}$
+は有限集合である．
+
+\item\label{item:55}
+$\myfil{F}_{0}$
+は可算非完備である．
+
+\item\label{item:66}
+任意の$\alpha<2^{\kappa}$
+について
+$A_{\alpha}$か$X\setminus A_{\alpha}$
+のいずれか一方は
+$\myfil{F}_{\alpha+1}$
+に属する．
+
+
+\item\label{item:77}
+任意の$\alpha <2^{\kappa}$
+について
+$p_{\alpha}\colon \myfinset \to \mypowset{X}$が
+$p_{\alpha}(\myfinset{X})\subset \myfil{F}_{\alpha}$を満たすとき準同型
+$q\colon \myfinset{X}\to \myfil{F}_{\alpha+1}$
+が存在して
+$q\le p_{\alpha}$
+を満たす．
+
+\end{enumerate}
+まず
+$\myfam{S}_{0}$と
+$\myfil{F}_{0}$
+の構成をしよう．
+命題
+\ref{prop:oscexists}
+で保証されるlarge oscillation family mod $\{X\}$
+を$\myfam{S}_{-1}$
+とする．
+そして
+$f\in \myfam{S}_{-1}$
+をとる．そして
+$\myfam{S}_{0}=\myfam{S}_{-1}\setminus \{f\}$
+とする．ここで
+$X$の空でない部分集合の可算族$\{J_{n}\}_{n\in \zz_{\ge 0}}$
+であって, 
+$J_{n}\neq X$, 
+$J_{n+1}\subset J_{n}$かつ
+$\bigcap_{n\in \zz_{\ge 0}}J_{n}=\emptyset$
+となるものをとり
+$\{f^{-1}(J_{n})\}_{n\in \zz_{\ge 0}}$から生成されるフィルターを
+$\myfil{F}_{0}$とする．このとき$\myfil{F}_{0}$
+はもちろん可算非完備である．
+族$\myfam{S}_{-1}$が
+large oscillation family mod $\{X\}$であることから
+$\myfam{S}_{0}$がlarge oscillation family mod 
+$\myfil{F}_{0}$であることがわかる．
+すると
+命題\ref{prop:sagesage}
+と命題\ref{prop:sagesecond}
+から上記の性質を満たす
+$\{\myfil{F}_{\alpha}\}_{\alpha<2^{\kappa}}$
+と$\{\myfam{S}_{\alpha}\}_{\alpha<2^{\kappa}}$
+が構成できる．
+このとき
+\[
+\myfil{F}=\bigcup_{\alpha<2^{\kappa}}\myfil{F}_{\alpha}
+\]
+と定義する．
+各$\myfil{F}_{\alpha}$
+が真のフィルターなのでそのいずれも$\emptyset$
+を含んでいない．
+よって$\myfil{F}$も$\emptyset$を含んでおらず
+これが真のフィルターであることがわかる．
+条件\ref{item:66}から
+任意の$A\in \mypowset{X}$
+について
+$A$と$X\setminus A$
+のいずれか一方は
+$\myfil{F}$に属するので
+$\myfil{F}$は超フィルターである．
+また$\myfil{F}_{0}$が可算非完備であるから
+$\myfil{F}$もそうである．
+このフィルター$\myfil{F}$
+が善良であることを示すために
+任意の$p\colon \myfinset{X}\to \myfil{F}$
+を考える．
+系\ref{cor:powercf}から$\kappa<\mycf{2^{\kappa}}$
+であり
+$\myfinset{X}$の濃度は$\kappa$
+なので
+$\myfil{F}$の定義から
+$p$の像は十分大きい番号$\beta<2^{\kappa}$を持つ
+$\myfil{F}_{\beta}$に含まれる．
+添字づけ$\{p_{\alpha}\}_{\alpha<2^{\kappa}}$
+はダブりが$2^{\kappa}$回起こるようにとったので
+十分大きい$\beta<\gamma$となる$\gamma<2^{\kappa}$
+について$p=p_{\gamma}$となる．
+すると$p_{\gamma}$は単調写像$p_{\gamma}\colon \myfinset{X}\to \myfil{F}_{\gamma}$
+となるので，
+条件\ref{item:77}から
+準同型$q\colon \myfinset{X}\to \myfil{F}_{\gamma+1}$
+が存在し$q\le p$を満たす．
+よって$\myfil{F}$が善良であることがわかる．
+これで証明が終わる．
+\end{proof}
+
+\begin{rmk}
+上記の証明において$\myfil{F}_{0}$
+の定義をうまく変えることによって
+$X$上の善良超フィルター全体の濃度が
+$2^{2^{\kappa}}$となることがわかる．
+今からそれを見よう．
+記号は流用する．
+部分族
+$\Theta\subset \myfam{S}_{-1}$
+で
+$\card(\Theta)=2^{\kappa}$
+かつ$\card(\myfam{S}_{-1}\setminus \Theta)=2^{\kappa}$となるものと
+$\theta\in \myfam{S}_{-1}\setminus \Theta$を
+任意にとって固定する．
+ところでこのような$\Theta$は$2^{2^{\kappa}}$個あることに注意しよう($2^{\kappa}+2^{\kappa}+2^{\kappa}=2^{\kappa}$から当濃度で3分割して一つの成分の部分集合と他の成分の和集合を考えれば良い)．
+そして
+$G(\Theta)=\{\theta^{-1}(J_{n})\}_{n\in\zz_{\ge 0}}\cup \{X\setminus f^{-1}(J_{0})\}_{f\in \Theta}$
+から生成されるフィルターを$\myfil{F}_{0}$
+とし，$\myfam{S}_{0}=\myfam{S}_{-1}\setminus \Theta$
+とする．
+作り方から$\myfil{F}_{0}$が
+可算非完備なのはわかる．
+また
+$J_{0}\neq \emptyset$と
+$J_{0}\neq X$
+そして
+$\myfam{S}_{-1}$
+がlarge oscillation family mod 
+$\{X\}$であることから
+$G(\Theta)$
+が有限交差性を持つことがわかる．
+よって
+$\myfil{F}_{0}$は真のフィルターであることがわかる．
+ここでもしも$\Theta_{0}\neq \Theta_{1}$
+と仮定する．
+ここで対称性から$h\in \Theta_{0}\setminus \Theta_{1}$
+が取れるとしても一般性を失わない．
+このとき$h^{-1}(J_{0})$は$G(\Theta_{0})$
+の元と空な交わりをもつ．
+そして$h^{-1}(J_{0})$は$G(\Theta)$と空でない交わりを常に持つ．
+よって$\Theta$ごとの$\myfil{F}_{0}$およびそれを含む超フィルターは$\Theta$ごとに絶対に相異なる．
+そして$\Theta$の選び方は$2^{2^{\kappa}}$
+個あるので善良超フィルター全体が$2^{2^{\kappa}}$
+の濃度を持つことがわかる．
+\end{rmk}
+
+
+\begin{thebibliography}{99}
+
+\bibitem{saito}
+齋藤正彦, 
+超積と超準解析, 
+東京図書, 1972. 
+
+\bibitem{com}
+W. W. Comfort　 and S.  Negrepontis, 
+\textit{On families of large oscillation}, 
+Fund. Math., 
+75 (1972), 
+275--290, 
+ doi: 10.4064/fm-75-3-275-290
+
+
+
+\bibitem{bach}
+G. Montagna, 
+\textit{Good ultrafilter and saturated models}, 
+Bacheler Thesis, 
+2019, 
+Delft University of Technology, 
+Netherland. 
+https://repository.tudelft.nl/record/uuid:f5cc2f93-556f-46b6-9833-a2d08b33538e
+\bibitem{kunen}
+K. Kunen, 
+\textit{Ultrafilters and independent sets}, 
+Trans. Am. Math. Soc. 172, 299--306 (1973)
+ doi: 10.2307/1996350. 
+ 
+ 
+
+
+\end{thebibliography}
+
+
+
+\end{document}

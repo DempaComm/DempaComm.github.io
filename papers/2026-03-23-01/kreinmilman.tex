@@ -1,0 +1,742 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+
+\newcommand{\myre}{\mathrm{Re}}
+
+\newcommand{\myextreme}[1]{\partial_{ext}(#1)}
+\newcommand{\mycco}[1]{\overline{\mathrm{co}}(#1)}
+
+\newcommand{\myco}[1]{\mathrm{co}(#1)}
+\newcommand{\myprob}[1]{\mathcal{P}r(#1)}
+
+\newcommand{\mydiracset}[1]{\Delta(#1)}
+\newcommand{\mydirac}[1]{\delta_{#1}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{クラインミルマンの定理}
+\author{ナンブ　キトラ}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+この文章では，主に\cite{phe}に沿って
+Krein--Milmanの定理を紹介する．
+応用としてextreme pointを使った議論によってBernsteinの定理を証明する．
+この文章で局所凸空間といったら局所凸線形位相空間のことであり，さらにハウスドルフな物だけ考える．
+また，局所凸空間の線形形式といったら連続な物だけ考えることにする．係数は基本的に$\cc$で考えているが，
+以下の議論は全て$\rr$でも成り立つので，応用編では断りなく係数$\rr$の話をしている．
+\section{本文}
+\begin{thm}[Hahn--Banachの定理の一つの形，使う分だけ]\label{thm:hbhb}
+$E$を局所凸線型空間とし，
+$A$をその空でない凸コンパクト空間,
+$p\in E$は点で$p\not \in A$
+とする．
+このとき連続な線型写像$f\colon E\to \cc$が存在して
+$\sup_{x\in A}\myre f(x)<\myre f(p)$
+となる．
+\end{thm}
+\begin{proof}
+定理の名前で調べると証明が出てくる．省略．
+\end{proof}
+
+
+
+\begin{df}[extreme point]
+局所凸空間$E$の凸集合$L$
+の点$p\in L$
+が\textbf{extreme point}
+であるとは，
+任意の$x, y\in L$
+についてもしも$t\in (0, 1)$が存在して
+$tx+(1-t)y=p$ならば
+$p=x=y$となるときにいう．
+凸集合$L$
+のextreme point 全体の集合を
+$\myextreme{L}$
+と書くことにする．
+\end{df}
+
+\begin{lem}
+局所凸空間$E$の凸集合$L$とその点$p$について以下の二つは
+同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lemext} 点$p$は$L$のextreme point である．
+
+\item\label{item:lemtyuu}
+任意の$x, y\in L$についてもしも$p=\frac{1}{2}x+\frac{1}{2}y$が成り立つならば$x=y=p$となる．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+$\ref{item:lemext}\To \ref{item:lemtyuu}$はわかる．
+$\ref{item:lemtyuu}\To \ref{item:lemext}$
+を示そう．任意の$x, y\in L$について
+$t\in (0, 1)$が存在して$p$が$p=t\cdot x+(1-t)y$となるとしよう．
+ここで$s\in (0, 1)$について$l(s)=sx+(1-s)y$とおく．
+このとき$\epsilon\in (0, \min\{t, 1-t\})$となる$\epsilon$について
+$t_{\epsilon, +}=t+\epsilon$で$t_{\epsilon, -}=t-\epsilon$
+としたとき，$p=\frac{1}{2}(l(t_{\epsilon, +})+l(t_{\epsilon, -}))$である．よって$p=l(t_{\epsilon, +})=l(t_{\epsilon, -})$
+である．
+よって$(t+\epsilon)x+(1-t-\epsilon)y=(t-\epsilon)x+(1-t+\epsilon)y$であるから式変形して
+$x=y$がわかる．よって$p=x=y$も従う．
+\end{proof}
+
+\begin{df}[閉凸包]
+局所凸空間$E$
+の部分集合$S$について
+$S$の\textbf{凸包}とは
+$S$を含む全ての凸集合の共通部分のことである．
+これを
+$\myco{S}$
+と書く事にする．
+また
+$S$の\textbf{閉凸包}とは
+$S$を含む全ての閉凸集合の共通部分のことである．
+$S$を含む閉凸集合のうち最小のものと言っても良い．
+$S$の閉凸包のことを
+$\mycco{S}$
+と書くことにする．
+\end{df}
+
+\begin{lem}\label{lem:totutotu}
+局所凸空間$E$
+の部分集合$S$について
+$\mycco{S}$
+は$\myco{S}$の閉包に等しい．
+\end{lem}
+\begin{proof}
+局所凸空間において
+凸集合の閉包が凸集合であることから
+まず
+$\mycco{S}\subset \cl(\myco{S})$
+がわかる．
+また
+$\mycco{S}$は凸集合なので
+$\myco{S}\subset \mycco{S}$
+がわかるから
+$\myco{S}\subset \mycco{S}$
+が従う．
+\end{proof}
+
+\begin{df}[Face]
+局所凸空間$E$
+の空でない集合$S$の
+部分集合$F$が
+$S$の
+\textbf{face}
+であるとは
+もしも$x, y\in S$について
+$t\in (0, 1)$が存在して
+$tx+(1-t)y\in F$となっているならば
+$x, y \in F$
+となるときにいう．
+ここで$S$が凸集合の状況で一点集合$\{p\}$がfaceになっていることと
+$p$がextreme point であることは
+同値であることに注意しよう．
+\end{df}
+
+\begin{lem}\label{lem:uuuuu}
+局所凸空間$E$
+の凸集合$S$の
+部分集合$F_{0}$
+と$F_{1}$について
+$F_{0}$が$L$のfaceで
+$F_{1}$が$F_{0}$のfaceならば
+$F_{1}$は$L$のfaceである．
+\end{lem}
+\begin{proof}
+任意の$x, y\in L$について
+ある$t\in (0, 1)$が存在して
+$tx+(1-t)y\in F_{1}$
+となっているとしよう．
+このとき$F_{1}\subset F_{0}$
+であるから
+$tx+(1-t)y\in F_{0}$である．
+よって$F_{0}$
+が$L$のfaceであることから
+$x, y\in F_{0}$
+である．
+よって
+$F_{1}$が$F_{0}$
+のfaceであることから
+$x, y\in F_{0}$
+である．
+\end{proof}
+
+\begin{lem}\label{lem:intface}
+局所凸空間$E$
+の凸集合$S$の
+faceの族$\{F_{i}\}_{i\in I}$
+について$\bigcap_{i\in I}F_{i}$
+は$S$のfaceである．
+\end{lem}
+\begin{proof}
+明らか．
+\end{proof}
+
+\begin{lem}\label{lem:supface}
+局所凸空間
+$E$と線形形式$f$を与える．
+このとき$E$の部分集合$S$
+と$S$のface
+$F$
+について
+集合
+$A=\{\, p\in F \mid \myre f(p)= \sup_{a\in F}\myre f(a)\, \}$が空でないならば
+$A$は$S$のfaceである．
+\end{lem}
+\begin{proof}
+補題 \ref{lem:uuuuu}
+より
+$A$が$F$のfaceであることを示せば良い．
+$A$が空でないので特に$F$も空でない．
+そこで
+$M=\sup_{a\in F}\myre f(a)$とおく．
+任意の
+$x, y\in F$について
+ある$t\in (0, 1)$が存在して
+$tx+(1-t)y\in A$となっているとする．
+このとき
+$M=\myre f(tx+(1-t)y)=\myre (tf(x)+(1-t)f(y))=t\myre f(x)+(1-t)\myre f(y)\le t\max\{\myre f(x), \myre f(y)\}+(1-t)\max\{\myre f(x), \myre f(y)\}\le =tM+(1-t)M\le M$となる．よって$\max\{\myre f(x), \myre f(y)\}=M$である．
+対称性から$f(x)=M$としても良い．すると
+$t\myre f(x)+(1-t)\myre f(y)=M$から
+$f(y)=M$も成り立つ．
+よって$x, y\in A$となるから
+$A$は$F$のfaceである．
+\end{proof}
+
+
+
+Krein--Milmannの定理を証明しよう．
+以下の\ref{item:co}が通常，Krein--Milmanの定理と呼ばれる．
+\begin{thm}[Krein--Milmanの定理: 幾何形]
+$E$を局所凸線型空間とする．
+そして$K$を
+空でない
+凸コンパクト空間とする．
+このとき
+以下が成り立つ．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:nonempty}
+$K$の閉集合であるような任意の空でないface $F$について$F$に属するextreme point が存在する．特に
+$\myextreme{K}\neq \emptyset$が成り立つ．
+\item\label{item:co}
+$K=\mycco{\myextreme{K}}$
+が成り立つ．
+\end{enumerate}
+\end{thm}
+\begin{thm}
+$E$上の連続な線形形式全体を適当に添字付けして
+$\{f_{\alpha}\}_{\alpha<\kappa+1}$とおきさらに
+$f_{\kappa}$は$0$としておこう．
+例えば$\kappa$は線形形式全体の濃度にすれば良い．
+ここで添字付けは全射になっていることに注意しよう(単射性は特に必要ない)．
+ここで超限再帰によって
+$K$の部分集合
+$F_{\alpha}$を以下のように定義する．
+$\beta<\alpha$となる$\beta$については
+$F_{\beta}$が定義されているとして，
+$C_{\alpha}=\bigcap_{\beta<\alpha}F_{\beta}$
+かつ$C_{0}=F$
+と定義して
+\[
+F_{\alpha}
+=
+\begin{cases}
+C_{\alpha} & \text{$C_{\alpha}=\emptyset$のとき}\\
+\{\, x\in C_{\alpha}\mid \myre f_{\alpha}(x)=\sup_{p\in C_{\alpha}}\myre f(p)\, \} & \text{$C_{\alpha}\neq\emptyset$のとき}
+\end{cases}
+\]
+と定義する．
+このようにして$K$の閉部分集合の列
+$\{F_{\alpha}\}_{\alpha<\kappa+1}$を得る．
+今から任意の$\alpha<\kappa+1$について
+$F_{\alpha}\neq \emptyset$を証明しよう．
+まず
+$C_{0}=F$
+であり
+$F$のコンパクト性から
+$\myre f_{0}(x)=\sup_{p\in C_{0}}\myre f(p)$
+となる
+$x$
+は存在するから
+$F_{0}\neq \emptyset$である．
+そして一般に$\beta<\alpha$となる$\beta$について$F_{\beta}\neq \emptyset$だとすると
+$K$のコンパクト性から$C_{\alpha}\neq \emptyset$
+となる．よって$C_{\alpha}$自体もコンパクトとなるから
+$F_{\alpha}\neq \emptyset$となる．
+以上から任意の$F_{\alpha}$について
+$F_{\alpha}\neq\emptyset$となる．
+次に$F_{\kappa}$が一点のみからなることを証明しよう．
+任意の2点$e, q\in F_{\kappa}$をとる．
+このとき任意の$\alpha<\kappa+1$について
+$e, q\in F_{\gamma}$であることから
+$\sup_{{u\in C_{\alpha}}}\myre f_{\alpha}(u)=\myre f_{\alpha}(e)=\myre f_{\alpha}(q)$である．
+つまり任意の線形形式について
+$e$と$q$は同じ値をとる．
+よってHahn--Banachの定理
+(定理\ref{thm:hbhb})から
+$e=q$となる．
+つまり
+$F_{\kappa}=\{e\}$
+である．
+補題\ref{lem:intface}から
+任意の$C_{\alpha}$は$K$のfaceであり
+また定義と
+補題\ref{lem:supface}から任意の$F_{\alpha}$は
+$K$のfaceであることがわかる．特に$F_{\kappa}=\{e\}$
+は$K$のfaceなので$e$が$K$のextreme point であることが従う．
+
+
+
+次に
+主張\ref{item:co}を示す．つまり$K=\mycco{\myextreme{K}}$
+を示そう．$L=\mycco{\myextreme{K}}$とおく．
+まず$L\subset K$がわかる．
+そして任意の$p\in K$をとる．
+このとき$E$上の任意の線形形式$f$について
+$M_{f}=\sup_{k\in K}\myre f(k)$とおく．
+$S_{f}=\{\, x\in K\mid \myre f(x)=M_{f}\, \}$
+は$K$の閉集合かつfaceである．よって
+extreme point $a_{f}\in S_{f}$が存在する．
+ここで$a_{f}\in L$なので特に
+$\sup_{l\in L}\myre f(l)= M_{f}$
+である．故に$M_{f}$の定義から
+$\myre f(p)\le \sup_{l\in L}\myre f(l)$となる．
+よって
+Hahn--Banachの定理
+(定理\ref{thm:hbhb})より
+$p\in L$でなければならない．
+よって
+$K=\mycco{\myextreme{K}}$である．
+\end{thm}
+\begin{rmk}
+手で操作してる感じが欲しかったので超限帰納法による証明にしてみた．
+\end{rmk}
+
+
+\begin{rmk}
+局所凸空間$E$
+の空でないコンパクト部分集合$A$
+とその点$x\in A$, 
+$A$上のラドン確率測度$\mu$
+について，
+\textbf{$\mu$が$x$を表現する}, あるいは，
+\textbf{$\mu$の重心が$x$
+である}とは
+$E$上の任意の線形形式
+$L$について
+$L(x)=\mu(L)$となるときにいう．
+ここで$\mu(L)=\int_{A}L\ d\mu$という意味である．
+\end{rmk}
+
+\begin{prop}\label{prop:repxco}
+局所凸空間$E$の空でないコンパクト部分集合$T$
+と$x\in E$について
+$x\in \mycco{T}$が成り立つことと
+$T$上のラドン確率測度$\mu$が存在して
+$x$が$\mu$の重心になることは同値である．
+\end{prop}
+\begin{proof}
+後半から前半を示そう．
+$x$を表現する$T$上の確率測度$\mu$
+があったとき任意の線形形式$f$について
+\[
+\myre f(x)=\myre \mu(f)= \myre \int_{A}f(a)\ d\mu
+=\int_{A}\myre f(a)\ d\mu\le 
+\int_{A}\sup_{a\in A} \myre f(a)\ d\mu=\sup_{a\in A} \myre f(a)
+\]
+なので，Hahn--Banachの定理
+(定理\ref{thm:hbhb})から
+$x\in \mycco{T}$である．
+今度は前半から後半を示そう．
+$x\in \mycco{T}$であることから
+$\myco{T}$のフィルター基底$\mathcal{F}$
+であって$E$上で$\mathcal{F}\to x$となるものが存在する．
+このとき$\myco{T}$の元は$T$上のディラック測度の有限凸結合であるから特に$T$上のラドン確率測度と見做せる．
+写像$\iota\colon \myco{T}\to \myprob{T}(\subset C(T)^{*}_{w^{*}})$
+をそのようにみなす写像とする．
+ここでバナッハ・アラオグルの定理から
+$\myprob{T}$は$w^{*}$位相についてコンパクトである．
+つまりこの上の全ての極大イデアルは収束する．
+よって$\iota\mathcal{F}$を含む極大イデアル$\mathcal{A}$
+はある確率測度$\mu\in \myprob{K}$に収束する．
+$C(T)^{*}$の$w^{*}$位相とは$g\in C(T)$を$C(T)^{**}$の元とみなして$g$を連続とする$C(T)^{*}$上の最弱の位相のことであったから任意の$g\in C(T)$について
+$g\mathcal{A}\to g(\mu)=\mu(g)=\int_{T}g\ d\mu$である．
+特$g(\mu)\in \cc$の任意の近傍$V$についてある$W\in \mathcal{F}$と$A\in \mathcal{A}$が存在して
+$g(\iota(W)\cap A)\in V$となる．
+ここで$g$が線形形式$f$の$T$への制限になっている時を考えよう．
+$\epsilon\in (0, \infty)$を任意にとる．このとき
+上記の$V$を$g(\mu)=f(\mu)$の$\epsilon$近傍とする．
+さて$f(x)$の$\epsilon$近傍を$U$とし，
+$f$の$x$での連続性を担保する$\delta$近傍を$N$とする．
+ここで上記の$W\in \mathcal{F}$を十分小さく取り追加で$x$の$\delta$近傍$N$
+について$W\subset N$となるようにできる．
+特に$f(W)\subset f(N)\subset U$である．
+
+ここで$g(\iota(W)\cap A)\subset  V$となることから
+$\iota p\in A$となる$p\in W$をとる．
+さて
+$p=\sum_{i=1}^{m}\lambda_{i}y_{i}$\ $(y_{i}\in T, \lambda_{i}\in [0, 1], \sum_{i}\lambda_{i}=1)$となっているとする．ついで$\iota p=\sum_{i=1}^{m}\lambda_{i}\mydirac{y_{i}}$に注意せよ．
+すると
+$f(p)=\sum_{i=1}^{m}\lambda_{i}f(y_{i})=
+(\iota p)(f)=f(\iota p)=g(\iota p)$
+なので
+$f(p)\in f(N)\cap g(\iota(W)\cap A)\subset U\cap V$である．
+よって$U$と$V$は共通部分を持つので$f(x)$と
+$f(\mu)=\mu(f)$の距離は$2\epsilon$以下である．
+$\epsilon$は任意であったから
+$\mu(f)=f(x)$である．
+よって$\mu$は$x$を表現する測度である．
+\end{proof}
+\begin{rmk}
+ネットは使いづらいのでフィルターを用いた証明にした．
+\end{rmk}
+
+\begin{thm}[Krein--Milmanの定理: 積分形]\label{thm:main2}
+$E$を局所凸空間とし，
+$K$
+をその空ではないコンパクト凸集合とする．
+すると$K$
+の任意の点は$\cl(\myextreme{K})$
+に台を持つラドン確率測度の重心である．
+\end{thm}
+\begin{proof}
+$K=\mycco{\myextreme{K}}$であるから
+特に$K=\mycco{\cl(\myextreme{K})}$
+でもある．よって
+命題
+\ref{prop:repxco}
+から$K$の任意の点は
+$\cl(\myextreme{K})$
+に台を持つ確率測度$\mu$
+によって
+表現される．
+\end{proof}
+\begin{rmk}
+逆に積分形から幾何形を導くことができる．
+なぜならば一般に集合$S$について
+$\mycco{S}=\mycco{\cl(S)}$が成り立つからである．
+なんとなればまず$\mycco{S}\subset \mycco{\cl(S)}$は自明であり，
+$\cl(S)\subset \mycco{S}$であることから
+$\mycco{\cl(S)}\subset \mycco{S}$が従う．
+\end{rmk}
+
+
+
+\section{応用：Bernstein functions}
+以下では線型空間は$\rr$係数である．
+\begin{df}
+関数$f\colon (0, \infty)\to \rr$が
+\textbf{completely monotonic}であるとは
+$f$が$C^{\infty}$級であり
+任意の$n\in \zz_{\ge 0}$と
+任意の$x\in (0, \infty)$について
+$(-1)^{n}f^{(n)}(x)\ge 0$
+が成り立つときにいう．
+\end{df}
+
+Krein--Milmanの定理を用いてBernsteinの定理を証明していく．
+つまり次の定理を証明する：
+$f$を有界なcompletely monotonic 関数とする．
+このとき$[0, \infty]$上のラドン測度
+$\mu$が一意的に存在して
+$\mu([0, \infty])=\lim_{x\to +0}f(x)$かつ
+\[
+f(x)=\int_{[0, \infty]}\exp(-\alpha x)\ d\mu(\alpha)
+\]
+を満たす．
+また，$f$がこの結論のように表されることと，
+$f$が有界かつcompletely monotonicであることは同値である．
+
+この定理は$[0, \infty]$上の有限測度のラプラス変換の値になるような関数の特徴づけを与えている．
+
+
+このセクションでは
+$E$を$(0, \infty)$上の$C^{\infty}$有界関数全体であって，
+位相はその導関数の広義一様収束とする．
+$E$上のセミノルム$p_{m, n}$を
+\[
+p_{m, n}(f)=\sup_{x\in [2^{-m}, 2^{m}]}\max_{0\le k\le n}
+\left|f^{(k)}(x)\right|
+\]
+とすれば$\{p_{m, n}\}_{m, n\in \zz_{\ge 0}}$
+は$E$の位相を生成するセミノルムの族となる．
+可算個のセミノルムによって位相が生成されているので
+$E$は距離づけ可能であることに注意しよう．
+そして
+$K$を$f(+0)\le 1$となる$f\in E$全体とする．
+\begin{lem}\label{lem:ueue}
+$K_{n}=\{\, (-1)^{n}f^{(n)}\mid f\in K\, \}$
+とする．
+このとき
+任意の$n\in \zz_{\ge 0}$
+と任意の$a\in (0, \infty)$について$[a, \infty)$
+上で
+$K_{n}$の各元は上から
+$a^{-n}2^{(n+1)(n/2)}$
+で抑えることができる．
+\end{lem}
+\begin{proof}
+$n$に関する帰納法で証明する．
+まず$n=0$のときは$K$は上から$1$で抑えられているので大丈夫である．
+$n$において上の命題が成り立つと仮定する．
+$n+1$のときを考えよう．
+$f^{(n)}$に対して$[a/2, a]$上で
+平均値の定理を用いて
+$c\in [a/2, a]$であって
+$(a/2)f^{(n+1)}(c)=f^{(n)}(a)-f^{(n)}(a/2)$が成り立つものが存在する．
+$(-1)^{n}f^{(n+1)}$の導関数を考えると
+$(-1)^{n}f^{(n+2)}=(-1)^{n+2}f^{(n+2)}\ge 0$なので
+$(-1)^{n}f^{(n+1)}$は広義の単調増加である．
+つまり
+$(-1)^{n+1}f^{n+1}$は広義の単調減少である．
+よって任意の$x\in [a, \infty)$
+について
+\begin{align*}
+&(-1)^{n+1}f^{(n+1)}(x)\le 
+(-1)^{n+1}f^{(n+1)}(a)\le 
+(-1)^{n+1}f^{(n+1)}(c)\\
+&
+\le \frac{2}{a}((-1)^{n}f^{(n)}(a/2)-(-1)^{n}f^{(n)}(a))
+\le \frac{2}{a}(-1)^{n}f^{(n)}(a/2)
+\le \frac{2}{a}(a/2)^{-n}2^{(n+1)(n/2)}\\
+&=a^{-(n+1)}2^{(n+1)(n/2)+n+1}
+=a^{-(n+1)}2^{(n+2)(n+1)/2}
+\end{align*}
+よって帰納法が回って補題が正しいことがわかる．
+\end{proof}
+
+\begin{prop}
+$K$は$E$の空でないコンパクト凸集合である．
+\end{prop}
+\begin{proof}
+$1\in K$なので空ではない．
+凸性もわかる．
+コンパクト性は
+補題 
+\ref{lem:ueue}
+とアスコリアルツェラの定理，
+そして$E$が距離化可能であることからコンパクト性と点列コンパクト性が同値になることからわかる．
+\end{proof}
+
+
+以下では$\alpha=\infty$のとき
+$\exp(-\alpha x)$は定数関数$0$
+と思うことにする．
+\begin{prop}\label{prop:extext}
+$K$のextreme pont全体は
+$\{\, x\mapsto\exp(-\alpha x)\mid \alpha \in [0, \infty]\, \}$に一致する．
+\end{prop}
+\begin{proof}
+$f\in \myextreme{K}$
+をとり$p\in (0, \infty)$
+を任意にとる．
+そして
+$u(x)=f(x+p)-f(x)f(p)$
+とおく．
+今から$f\pm u\in K$を証明する．
+$f(p)\in [0, 1]$であることに注意せよ．
+このとき
+$f(+0)+u(+0)=f(+0)+f(p)-f(p)f(+0)=(1-f(p))f(+0)+f(p)\le (1-f(p))+f(p)=1$
+であり，
+$f(+0)-u(+0)=f(+0)-f(p)+f(p)f(+0)=f(+0)+f(p)(f(+0)-1)\le f(+0)\le 1$
+である．
+さらに任意の$n$について$(-1)^{n}f^{n}$が単調減少であることを用いると以下を得る．
+\begin{align*}
+&(-1)^{n}(f+u)^{(n)}(x)=(-1)^{n}f^{(n)}(x)+(-1)^{n}f^{(n)}(x+p)-(-1)^{n}f(p)f^{(n)}(x)\\
+&=(-1)^{n}(1-f(p))f^{(n)}(x)+(-1)^{n}f^{(n)}(x+p)
+\ge 0
+\end{align*}
+かつ
+\begin{align*}
+&(-1)^{n}(f-u)^{(n)}(x)=
+(-1)^{n}f^{(n)}(x)-(-1)^{n}f^{(n)}(x+p)+(-1)^{n}f(p)f^{(n)}(x)
+\\
+&\ge (-1)^{n}f^{(n)}(x+p)-(-1)^{n}f^{(n)}(x+p)+(-1)^{n}f(p)f^{(n)}(x)=(-1)^{n}f(p)f^{(n)}(x)\ge 0
+\end{align*}
+が成り立つ．
+よって
+$f\pm u\in K$
+である．
+このことと
+$f=\frac{1}{2}((f+u) +(f-u))$，
+そして$f$が extreme pointであることから
+$f=f+u=f-u$がわかる．
+これはつまり$u=0$ということである．
+よって
+$f(x+p)=f(x)f(p)$
+がわかる．これはコーシーの関数方程式の乗法版であり，
+$f$が連続であることから
+$f=0$かもしくは
+$f(x)=\exp(-\alpha x)$$\alpha \in \rr$と表される．
+ところで$f^{(1)}(x)\le 0$なので$\alpha\in [0, \infty)$
+である．
+これでextreme pointになっている関数は求める形になっていることがわかった．
+逆に$\exp(-\alpha x)$はextreme point になっているだろうか?
+ここで$r\in (0, \infty)$
+に対して$T_{r}\colon E\to E$
+を$T_{r}(f)(x)=f(rx)$で定義すると
+これは連続な全単射線形作用素で
+$T_{r}(K)=K$となる．
+線形性から
+$T_{r}(\myextreme{K})=\myextreme{K}$もわかる．
+ところで$K$は空でないコンパクト凸集合であることから，
+Krein--Milmanの定理から
+$K=\mycco{\myextreme{K}}$である．
+$K$はもちろん定数でない関数も含んであるので，
+$\myextreme{K}$も定数でない関数を含んでいなければならない．よって定数でないextreme point $p(x)=\exp(-\gamma x)$$(\gamma\in (0, \infty))$が存在する．
+上の議論から
+$T_{r}(p)(x)=\exp(-r\gamma x)$もextreme point である．
+$r$の任意性から$\exp(-\alpha x)$$(\alpha \in (0, \infty))$
+がextreme point になることが従う．
+定数関数$0$と$1$がextreme point になることは，
+$f\in K$が$0\le f\le 1$となることから従う．
+\end{proof}
+
+\begin{thm}[Bernstein]
+$f$は有界なcompletely monotonic 関数とする．
+このとき$[0, \infty]$上のラドン測度
+$\mu$が一意的に存在して
+$\mu([0, \infty])=f(+0)$かつ
+\[
+f(x)=\int_{[0, \infty]}e^{-\alpha x}\ d\mu(\alpha)
+\]
+を満たす．
+
+また，$f$がこの結論のように表されることと，
+$f$が有界かつcompletely monotonicであることは同値である．
+\end{thm}
+\begin{proof}
+写像$H\colon [0, \infty]\to \myextreme{K}$
+を$H(\alpha)(x)=\exp(-\alpha x)$と定義する．
+このとき$H$は連続になり，さらに$[0, \infty]$
+はコンパクトなので$H$は同相写像になる．
+さて$f$をcompletely monotonic な関数とする．
+このとき$f/f(+0)$を考えれば，問題は
+$f(+0)=1$のときに帰着されるから最初からそのように仮定しても良い．
+Krein--Milmanの定理より，
+$f$に対して$\mu$が存在して
+任意の線形形式$L$について
+\[
+L(f)=\int_{\myextreme{K}}L(p) \ dm(p) 
+\]
+となる．
+特に
+\[
+f(x)=\int_{\myextreme{K}}\mydirac{x}(p)\ dm(p) 
+\]
+である．
+同相写像$H\colon [0, \infty]\to \myextreme{K}$
+により
+右辺を変数変換する．
+$p=H(\alpha)$とすると$\alpha=H^{-1}(p)$なので
+\[
+\int_{\myextreme{K}}\mydirac{x}(p)\ dm(p)
+=\int_{\myextreme{K}}H(\alpha)(x)\ dm 
+=\int_{[0, \infty]}H(\alpha)(x)\ d\mu (\alpha)
+=\int_{[0, \infty]}\exp(-\alpha x) \ d\mu(\alpha)
+\]
+となる．ここで$\mu=(H^{-1})_{*}m$である．
+これで測度の存在性がわかる．
+一意性を考えよう．
+$[0, \infty]$上の確率測度
+$\mu_{0}, \mu_{1}$が
+\[
+f(x)=\int_{[0, \infty]}\exp(-\alpha x) \ d\mu_{0}(\alpha)
+\]
+\[
+f(x)=\int_{[0, \infty]}\exp(-\alpha x) \ d\mu_{1}(\alpha)
+\]
+を満たしているとする．
+このとき族$\{\alpha \mapsto \exp(-\alpha x)\}_{x\in [0, \infty]}$
+を考える．
+ここで$\alpha$の関数と見て，$x$はパラメーターと見ている事に注意せよ．
+するとこの族
+$\{\exp(-\alpha x)\}_{x\in [0, \infty]}$は乗法について閉じている．故に$A$をこの族$\{\exp(-\alpha x)\}_{x\in [0, \infty]}$で生成された
+$C([0, \infty])$の部分代数とすると，
+$A$の任意の元$a$は$\{\exp(-\alpha x)\}_{x\in [0, \infty]}$に属する有限個の元の多変数多項式で表されるが，
+$\{\exp(-\alpha x)\}_{x\in [0, \infty]}$が情報で閉じていることから$a$はただ単に$\{\exp(-\alpha x)\}_{x\in [0, \infty]}$に属する有限個の元の線型結合で表される．
+$A$上で$\mu$と$\nu$が等しいことを示したいが，上記のことから$\exp(-\alpha x)$における値が等しいことを確かめれば良い．仮定から$\mu(\exp(-\alpha x))=f(x)=\nu(\exp(-\alpha x))$なので
+$\mu$と$\nu$は$A$上で等しい．
+ところで$A$の元は$[0, \infty]$の任意の2点を分離することからストーン・ワイエルストラスの定理より
+$A$は$C([0, \infty])$の中で稠密である．
+故に$\mu=\nu$であるから一意性が示された．
+
+後半の話は優収束定理などから従う．
+\end{proof}
+
+\begin{thebibliography}{99}
+
+
+\bibitem{miya}
+宮島静雄, 
+関数解析, 
+横浜図書, 2005. 
+
+\bibitem{phe}
+R. R. Phelps, 
+\textit{Lectures on Choquet's Theorem}, 
+2nd ed., 
+2001, 
+Lecture Note in Mathematics 1757, 
+Springer-Verlag. 
+
+\bibitem{fff}
+K.  R. Davidson, 
+\textit{Functional
+Analysis
+and Operator
+Algebras}, 
+2025, 
+Springer-Verlag. 
+
+
+
+\end{thebibliography}
+
+
+
+\end{document}
