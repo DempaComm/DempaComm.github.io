@@ -1444,6 +1444,12 @@ def command_decide_privacy_review(args: argparse.Namespace) -> None:
     rows = read_rows()
     if not rows:
         raise LedgerError("ledger CSV does not exist or is empty")
+    manifests = load_manifests()
+    manifests_by_record = {
+        str(manifest.get("migration_record_id", "")).strip(): manifest
+        for manifest in manifests.values()
+        if str(manifest.get("migration_record_id", "")).strip()
+    }
     requested = set(args.record_ids)
     found: set[str] = set()
     for row in rows:
@@ -1457,14 +1463,18 @@ def command_decide_privacy_review(args: argparse.Namespace) -> None:
             )
         row["author_review"] = args.decision
         if args.decision == "approved":
-            row["status"] = "ready"
+            manifest = manifests_by_record.get(row["record_id"])
+            if manifest:
+                apply_manifest(row, manifest)
+            else:
+                row["status"] = "ready"
         reason = args.reason.strip()
         if reason and reason not in row["notes"]:
             row["notes"] = " ".join(part for part in (row["notes"], reason) if part)
     missing = sorted(requested - found)
     if missing:
         raise LedgerError("unknown record_id: " + ", ".join(missing))
-    validate_rows(rows, load_manifests())
+    validate_rows(rows, manifests)
     write_rows(rows)
     write_json(rows)
     print(f"PRIVACY REVIEW {args.decision.upper()} {len(found)} records")

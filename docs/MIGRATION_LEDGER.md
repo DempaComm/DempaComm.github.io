@@ -239,8 +239,9 @@ python3 scripts/migration_ledger.py decide-privacy-review \
 ```
 
 `approved` は `author_review=approved`、`status=ready` として取り込み可能な状態へ
-進めます。公開できない情報や別名義との結び付きが疑われる場合は、原稿を書き換えず
-台帳に理由を残して停止します。
+進めます。すでに同じ台帳番号を持つ `paper.json` が作成済みなら、そのまま
+`status=published` と保存先slugまで反映します。公開できない情報や別名義との結び付きが
+疑われる場合は、原稿を書き換えず台帳に理由を残して停止します。
 
 ```sh
 python3 scripts/migration_ledger.py decide-privacy-review \

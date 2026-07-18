@@ -1,0 +1,3470 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage[mathscr]{eucal}
+
+
+
+\numberwithin{equation}{section}
+\usepackage{enumitem}
+%\usepackage{showkeys}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{cl}}
+
+\newcommand{\mycp}[1]{\mathrm{C_{p}}(#1)}
+
+
+
+\newcommand{\myfinset}[1]{[#1]^{<\omega_{0}}}
+
+\newcommand{\myfil}[1]{\mathcal{#1}}
+\newcommand{\myfam}[1]{\mathscr{#1}}
+
+\newcommand{\mymap}[2]{\mathrm{Map}(#1, #2)}
+
+
+\newcommand{\mycf}[1]{cf(#1)}
+\newcommand{\mypowset}[1]{\mathcal{P}(#1)}
+
+%%%%%this manuscript 
+
+\newcommand{\yocov}[1]{\mathrm{cov}(#1)}
+
+
+\newcommand{\yocovq}[1]{\widetilde{\mathrm{cov}}(#1)}
+
+\newcommand{\yocovfont}[1]{\mathscr{#1}}
+
+\newcommand{\yofine}{\prec}
+
+\newcommand{\yost}[1]{\mathrm{St}(#1)}
+
+\newcommand{\yostfine}[1]{#1^{*}}
+
+\newcommand{\yostfined}[1]{#1^{\Delta}}
+
+\newcommand{\yostfinedd}[1]{#1^{\Delta\Delta}}
+
+
+
+
+\newcommand{\yoellsp}[1]{\ell^{1}(#1)}
+\newcommand{\yoelldis}[1]{\|#1\|_{\ell^{1}}}
+
+%space of met with lebesgue numbers
+\newcommand{\yoles}[1]{\mathrm{L}(#1)}
+
+\newcommand{\youles}[2]{\mathrm{UL}(#1; #2)}
+
+
+\newcommand{\yobasis}{\mathbf{e}}
+
+\newcommand{\yomapl}[2]{\mathrm{C}(#1, #2)}
+
+\newcommand{\yonbset}[2]{\mathrm{B}(#1, #2)}
+
+\newcommand{\yonbsetq}[3]{\mathrm{N}(#1, #2; #3)}
+\newcommand{\yonbsetqc}[3]{\overline{\mathrm{N}}(#1, #2; #3)}
+
+\newcommand{\yosupmet}[1]{\hat{#1}}
+
+\newcommand{\yocbmet}[1]{\mathrm{ConPsMetr}_{bd}(#1)}
+\newcommand{\yocbamet}[1]{\mathrm{AdMetr}_{bd}(#1)}
+\newcommand{\yocbacmet}[1]{\mathrm{AdComMetr}_{bd}(#1)}
+
+
+
+\newcommand{\yodiam}{\mathrm{diam}}
+
+
+\newcommand{\yoball}[3]{V(#1, #2; #3)}
+\newcommand{\yoballfam}[2]{\yocovfont{O}(#1; #2)}
+
+\newcommand{\yoemb}[2]{\mathrm{ClEmb}(#1, #2)}
+
+\newcommand{\yocmaps}[3]{\mathrm{E}(#1, #2; #3)}
+
+
+\newcommand{\yomapnhset}[1]{\mathrm{NeHomeo}(#1)}
+
+\newcommand{\yomaphset}[1]{\mathrm{Homeo}(#1)}
+
+
+\newcommand{\yosmim}[1]{#1^{\dagger}}
+
+
+\newcommand{\yomesh}{\mathrm{mesh}}
+
+\newcommand{\yometcl}[2]{(\!(#1)\!)_{#2}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{
+関数空間のlimitation topologyと\\
+Bing's shrinking criterion
+}
+\author{電波通信\!\!\!\!\!\!\!\!\!\!\!\!\rule{10mm}{2mm}ナンブ\rule{5mm}{5mm}キトラ\!\!\rule{30mm}{5mm}}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+
+この文章では
+Bing's shrinking criterion 
+を証明する．
+このcriterion
+は距離化可能空間
+$X$
+とその商空間
+$X/R$
+が同相になるための
+条件の
+研究の結果見出されたものである．
+なぜそのようなものを研究していたのかというと，
+「三次元球面内の二次元球面の埋め込み像によって
+二分される領域は常に
+三次元球体に同相というわけではない」という，
+Jordanの曲線定理の高次元化は無条件に成り立たないという
+J. W. Alexanderの研究(角付き球面)の続きをBingが行った結果らしい
+(\cite{zbMATH03078238}や
+\cite{zbMATH03128022}).
+この研究が元となり，非多様体であるような
+距離化可能空間
+$X$
+で
+$X\times \rr$
+が
+$\rr^{4}$
+に同相であるものが構成されたりしているらしい．
+現在では
+無限次元空間の研究に
+このcriterionが応用されているようである
+(cf. \cite{zbMATH01612786}
+\cite{MR3099433}, 
+\cite{MR4179591})．
+
+\tableofcontents
+
+
+\section{パラコンパクト性などの準備}
+
+被覆に関する名称や記号などは
+\cite{kiiti}
+を参考にした．
+
+位相空間
+$X$
+について，
+その部分集合の族
+$\yocovfont{A}$
+が
+$X$
+の
+\textbf{被覆}
+であるとは
+$\bigcup_{A\in \yocovfont{A}}A=X$
+が成り立つことである．
+位相空間
+$X$
+の
+被覆全体の集合を
+$\yocovq{X}$
+とかき，
+$X$
+の
+\underbar{開集合}からなる被覆
+全体の集合を
+$\yocov{X}$
+と書くことにする．
+もちろん
+$\yocov{X}\subset \yocovq{X}$である．
+位相空間
+$X$
+の二つの部分集合族
+$\yocovfont{A}$
+と
+$\yocovfont{B}$
+について
+\textbf{$\yocovfont{A}$が$\yocovfont{B}$の細分である}
+とは
+任意の
+$A\in \yocovfont{A}$
+についてある
+$B\in \yocovfont{B}$
+が存在して
+$A\subset B$
+となるときにいう．
+このとき
+$\yocovfont{A}\yofine \yocovfont{B}$
+と書く．
+この文章では主に
+$\yocov{X}$
+の元についてその細分などを考えることになるだろう．
+
+
+
+
+
+\begin{df}[パラコンパクト]
+位相空間
+$X$
+がパラコンパクトであるとは
+$X$
+の任意の開被覆
+$\yocovfont{U}\in \yocov{X}$
+について
+局所有限な開被覆
+$\yocovfont{V}\in \yocov{X}$
+が存在して
+$\yocovfont{V}\yofine \yocovfont{U}$
+が成り立つときにいう．
+\end{df}
+位相空間
+$X$
+の部分集合
+$S$
+と
+部分集合族
+$\yocovfont{A}$
+について
+$\yost{S, \yocovfont{A}}$
+を
+\[
+\yost{S, \yocovfont{A}}
+=
+\bigcup\{A\in \yocovfont{A}\mid A\cap S\neq \emptyset\}
+\]
+と定義する．
+$S=\{x\}$
+のときは
+$\yost{x, \yocovfont{A}}$
+と略記する．
+
+
+位相空間
+$X$
+の部分集合族
+$\yocovfont{A}$
+について
+$\yostfine{\yocovfont{A}}$
+という記号で部分集合の族
+$\{\yost{A, \yocovfont{A}}\mid A\in \yocovfont{A}\}$
+という集合族を表す．
+もちろん
+$\yostfine{\yocovfont{A}}\yofine\yocovfont{A}$
+である．
+また，
+$\yostfined{\yocovfont{A}}$
+という記号で部分集合の族
+$\{\yost{x, \yocovfont{A}}\mid x\in X\}$
+という集合族を表す．
+
+
+
+\begin{df}[星形細分]
+位相空間
+$X$
+の部分集合族
+$\yocovfont{U}$
+と
+$\yocovfont{V}$
+について
+$\yocovfont{V}$
+が
+$\yocovfont{U}$
+の
+\textbf{星形細分}
+であるとは
+$\yostfine{\yocovfont{V}}\yofine\yocovfont{U}$
+が成り立つときにいう．
+\end{df}
+
+\begin{df}[星形細分]
+位相空間
+$X$
+の部分集合族
+$\yocovfont{U}$
+と
+$\yocovfont{V}$
+について
+$\yocovfont{V}$
+が
+$\yocovfont{U}$
+の
+\textbf{$\Delta$細分}
+であるとは
+$\yostfined{\yocovfont{V}}\yofine\yocovfont{U}$
+が成り立つときにいう．
+\end{df}
+一般に
+$\yostfine{\yocovfont{A}}\yofine{\yostfinedd{\yocovfont{A}}}$
+が成り立つことに注意しよう．
+ここで
+${\yostfinedd{\yocovfont{A}}}$
+は
+$\yostfined{(\yostfined{\yocovfont{A}})}$
+という意味である．
+
+
+
+一般の位相空間の上でも
+距離関数のように点同士の近さを測ることができれば
+便利である．
+ここではそのようなものとして
+\textbf{擬距離}
+を用いる．
+空間
+$X$
+に対して
+関数
+$d\colon X\times X\to [0, \infty)$
+が
+\textbf{$X$上の擬距離関数}
+であるとは
+$d$
+が対称性と三角不等式を満たすときにいう．
+非退化性は成り立たないことに注意しよう．
+一般的な空間で距離関数を扱う代償として
+異なる2点
+$x, y\in X$
+について
+$d(x, y)=0$
+が起こりうることも許容するのである．
+擬距離関数
+$d$
+と
+$r\in (0, \infty)$
+に対して
+$\yoball{x}{r}{d}$
+で
+$x$
+を中心とする
+半径
+$r$
+の開球を表すことにする．
+
+
+
+位相空間
+$X$
+に対して
+$\yocbmet{X}$
+で
+$X$
+上の連続で有界な擬距離関数全体を表すことにする．
+ここで連続性は
+写像
+$d\colon X\times X\to [0, \infty)$
+としての連続性という意味である．
+有界性も
+$d$
+の像が
+$[0, \infty)$
+の中で有界な集合になっているという常識的な意味で使う(この文書では有界な擬距離しか扱わない．
+なぜならlimitation topologyを記述するのにはそれしか用いないからである)．
+また
+$d$
+が連続であるとき
+$\yoball{x}{r}{d}$
+は
+$X$
+の開集合になることに注意しよう
+(開球全体が開基になると距離化可能性が同値である．つまり一般的な状況においてこれらが開基になることは期待できないということである)．
+また
+$\yocbamet{X}$
+で
+$X$
+上の有界な距離関数であって
+$X$
+と同じ位相を生成するもの全体を表すことにする．
+もちろんこれは空集合になることもある．
+一般に
+$X$
+が\underline{距離化可能}
+であることと
+$\yocbamet{X}\neq \emptyset$
+が同値であることに注意しよう．ここで距離化可能性から\textbf{有界}
+な距離関数の存在が言えるのかどうか気になった人もいるかもしれないが，
+$X$
+と同じ位相を生成する距離関数
+$d$
+に対して
+$\min\{d, 1\}$
+も
+$X$
+と同じ位相を生成する距離関数になるので大丈夫である．試みられよ．
+またこの集合の記号はAdmissible Metrics という意味である．
+そして
+$\yocbacmet{X}$
+で
+$X$
+と同じ位相を生成する
+\underline{完備}距離関数
+全体を表すことにする．
+$X$
+が距離化可能であったとしても
+$\yocbacmet{X}$
+は空集合になりうる．
+一般に
+$X$
+が
+\underline{完備距離化可能}
+であることと
+$\yocbacmet{X}\neq \emptyset$
+が同値である．
+上で似たような注意をしたが，
+$d$
+が
+$X$
+と同じ位相を生成する完備距離関数のときに
+$\min\{d, 1\}$
+も同じ位相を生成する有界な完備距離関数になることに注意しよう．
+試みられよ．
+また
+$\yoballfam{r}{d}=\{\, \yoball{x}{r}{d}\mid x\in X\, \}$
+と定義しておく．
+
+
+
+以下の命題はパラコンパクトハウスドルフ空間の
+被覆の話をする場合に擬距離の有用性を物語る．
+
+この定理自体は
+\cite[Theorem 7.4]{MR0002515}, 
+ \cite[Remark 4]{MR3099433}, 
+  \cite[Theorem 14]{MR0170323}, 
+  \cite[Metrization Lemma 12, p.185]{MR0370454}, 
+  \cite[Theorem 2.1]{zbMATH08044756}, 
+  \cite[定理16.4]{kodamanagami}
+  などで証明が知られている．
+
+
+\begin{prop}\label{prop:covpmet}
+$X$
+をパラコンパクトハウスドルフ空間とする．
+このとき
+任意の
+$\yocovfont{U}\in \yocov{X}$
+に対して
+$d\in \yocbamet{X}$
+が存在して
+$\yoballfam{1}{d}=\{\,\yoball{x}{1}{d}\mid x\in X\, \}$
+が
+$\yocovfont{U}$
+を細分する．
+\end{prop}
+\begin{proof}
+今から
+$X$
+上の連続な擬距離関数
+$d$
+であって
+$\yocovfont{W}=\yoballfam{1}{d}=\{\yoball{x}{1}{d}\mid x\in X\}$
+が
+$\yocovfont{U}$
+を細分するものを構成する．
+$X$
+はパラコンパクトであるから
+単位の分割
+$\{g_{a}\colon X\to [0, 1]\}_{a\in A}$
+が存在して
+$\{g_{a}^{-1}((0, 1])\mid a\in A\}$が
+局所有限かつ
+$\yocovfont{U}$
+を細分するものが存在する
+(\cite[系, p56]{bourbaki4}, 
+\cite[定理7.44]{miyajima}
+  \cite[Proposition 2]{MR0056905}, 
+  \cite[Corollary 2.7.3]{MR3099433})．
+この
+$g_{a}^{-1}((0, 1])$
+を
+$g_{a}$の
+\textbf{サポート}と呼ぶ．
+そして
+$\phi\colon X\to (0, 1]$
+を
+$\phi(x)=\sup_{a\in A}g_{a}(x)$
+と定義すると
+$g_{a}$
+の
+サポートが局所有限であることから
+$\phi$
+は
+$X$
+上連続である．
+ここで各
+$a\in A$
+について
+$f_{a}\colon X\to (0, 1]$
+を
+ \begin{align}
+f_{a}(x)=\frac{2}{\phi(x)}\cdot \min
+\left\{g_{a}(x), \frac{\phi(x)}{2}
+\right\}. 
+ \end{align}
+ と定義する．
+ すると
+ $f_{a}$
+ は連続であり，以下の性質を満たす．
+ \begin{enumerate}[label=\textup{(A\arabic*)}]
+
+
+%1
+\item\label{item:p1}
+$f_{a}$
+のサポート全体の族
+$\{f_{a}^{-1}((0, 1])\}_{a\in A}$
+は
+$X$
+の局所有限な開集合族で被覆でありさらに 
+$\yocovfont{U}$
+の細分となっている．
+
+%3
+\item\label{item:p2}
+族
+$\{f_{a}^{-1}(\{1\})\}_{a\in A}$
+は
+$X$
+の被覆になっている．
+ \end{enumerate}
+上記の性質が成り立つのを少し確認しよう．
+まず定義から
+$f_{a}^{-1}((0, 1])=g_{a}^{-1}((0, 1])$
+が成り立つので
+\ref{item:p1}
+は成り立つ．
+そして
+$x\in X$
+に対して
+$\phi(x)=g_{p}(x)$
+となる
+$p\in A$
+を取れば
+$f_{p}(x)=1$
+となるので
+\ref{item:p2}
+も成り立つ．
+さて
+$\yoellsp{A}$
+という記号で
+写像
+$w\colon A\to \rr$
+であって
+ $\sum_{a\in A}|w(a)|<\infty$
+ となるもの全体を表すことにする．
+ そして
+ $\yoelldis{*}$
+ で
+ $\yoellsp{A}$
+ 上の
+ $\ell^{1}$
+ ノルムを表すことにする．
+各
+$a\in A$
+について
+  $\yobasis_{a}$
+   という記号で
+  $\yoellsp{A}$
+  の元で
+   $\yobasis_{a}(p)=1$
+   ($p=a$のとき); 
+   上記以外のとき
+    $\yobasis_{a}(p)=0$
+    となるものを表すことにする．
+    写像 
+    $\psi\colon X\to \yoellsp{A}$
+    を
+      $\psi(x)=\sum_{a\in A}f_{a}(x)\cdot \yobasis_{a}$
+      と定義する．
+      \ref{item:p1}
+      より
+      $f_{a}$
+      のサポート全体が局所有限なので
+      $\psi$
+      はwell-definedで尚且つ連続であることがわかる．
+      そして
+      $d\colon X\times X\to [0, \infty)$
+を
+  $d(x, y)=\yoelldis{\psi(x)-\psi(y)}$
+  と定義すれば
+  $\psi$の
+  連続性から
+  $d$
+  も
+  $X\times X$
+  上で 
+  連続であることがわかる．
+  今から
+  $\yocovfont{W}=\yoballfam{1}{d}=\{\yoball{x}{1}{d}\mid x\in X\}$
+が
+$\yocovfont{U}$
+の細分になっていることを証明しよう．
+任意の
+$x\in X$
+をとる．
+そして
+\ref{item:p2}を用いて
+$f_{b}(x)=1$
+となる
+$b\in A$
+をとる．
+そして
+$y\in \yoball{x}{1}{d}$
+について
+ $|f_{b}(y)-f_{b}(x)|\le \yoelldis{\psi(x)-\psi(y)}=d(x, y)<1$
+ が成り立つ．
+ よって
+ $|f_{b}(y)-f_{b}(x)|<1$と
+ $f_{b}(x)=1$, 
+ を組み合わせると
+   $f_{b}(y)>0$
+   がわかる．
+   よって
+   $U(x, 1; d)\subset f_{b}^{-1}((0, 1])$
+   である．再び\ref{item:p1}より
+   ある
+   $U\in \yocovfont{U}$
+   が存在して
+   $f_{b}^{-1}((0, 1])\subset U$
+   なので
+   $\yoball{x}{1}{d}\subset U$
+   である．
+   よって
+   $\yocovfont{W}=\yoballfam{1}{d}=\{\yoball{x}{1}{d}\mid x\in X\}$
+は
+$\yocovfont{U}$
+の細分になっている．
+
+ところで
+$d$
+が有界じゃない可能性もあるが，
+その場合は
+$\min\{d, 2\}$
+で置き換えれば良い．
+中心が
+$x$
+で半径
+$1$
+の開球は
+$d$
+でも
+$\min\{d, 2\}$
+でも同じ集合になる．
+\end{proof}
+
+\begin{prop}\label{prop:deltafine}
+位相空間
+$X$
+はパラコンパクトであるとする．
+このとき
+任意の開被覆
+$\yocovfont{U}\in \yocov{X}$
+についてこれの
+星形細分
+$\yocovfont{V}\in \yocov{X}$
+が存在する．
+\end{prop}
+\begin{proof}
+命題
+\ref{prop:covpmet}
+で保証される
+$d\in \yocbamet{X}$
+をとる．
+そして
+$\yocovfont{W}=\yoballfam{1}{d}=\{\yoball{x}{1}{d}\mid x\in X\}$
+で
+$\yocovfont{V}=\yoballfam{1/3}{d}=\{\yoball{x}{1/3}{d}\mid x\in X\}$
+と定義すると
+三角不等式から
+$\yostfine{\yocovfont{V}}\yofine \yocovfont{W}$
+であり，
+命題
+\ref{prop:covpmet}
+からわかる
+$\yocovfont{W}\yofine \yocovfont{U}$
+と合わせると
+$\yostfine{\yocovfont{V}}\yofine \yocovfont{U}$
+が成り立つ．
+これで証明が終わる．
+\end{proof}
+\begin{proof}[別証明(\cite{MR0026802})]
+任意の開被覆
+$\yocovfont{U}$
+に
+$\Delta$細分が存在することを示せば，
+２回
+$\Delta$細分を取ることで
+星形細分を得ることができる．
+空間
+$X$
+はパラコンパクトなので
+最初から
+$\yocovfont{U}$
+は局所有限であると仮定しても良い．
+この
+局所有限開被覆に
+$\Delta$開細分被覆が存在することを言えば良い．
+空間
+$X$
+の正規性と
+$\yocovfont{U}$
+の局所有限性から
+閉被覆
+$\{F_{U}\ |\ U\in \yocovfont{U}\}$
+が存在し
+$F_{U}\subset U$
+を満たす．
+各点
+$x\in X$
+について
+$\yocovfont{U}$
+の局所有限性を担保する近傍の一つを
+$V(x)$
+とする．
+次に各点
+$x\in X$
+について
+\begin{align*}
+&A(x)=\{\, U\in \yocovfont{U}\ |\ V(x)\cap U\neq \emptyset\, \},\\
+&B(x)=\{\, U\in \yocovfont{U}\ |\ x\in U\, \},\\
+&C(x)=\{\, U\in A(x)\ |\ x\not\in F_{U}\, \}
+\end{align*}
+と置く．
+すると
+$F_{U}\subset U$
+から
+$A(x)=B(x)\cup C(x)$
+である．
+さて
+\[
+W(x)=V(x)\cap \bigcap_{S\in B(x)}S\cap \bigcap_{T\in C(x)}\left(X\setminus F_{T}\right)
+\]
+と定義すると, 
+$\{F_{U}\}$
+や
+$\yocovfont{U}$
+の局所有限性から
+$W(x)$
+は開集合である．
+そして
+$x\in W(x)$
+なので
+$\yocovfont{W}=\{W(x)\}_{x\in X}$
+は開被覆となっている．
+$\yocovfont{W}$
+が
+$\yocovfont{U}$
+の
+$\Delta$細分となることを見よう．
+まず任意に
+$p\in X$
+を与えると
+$\{F_{U}\ |\ U\in \yocovfont{U}\}$
+が被覆なので
+$p\in F_{U}$
+となる
+$U\in \yocovfont{U}$
+が存在する．
+このとき
+$U\in B(p)$
+なので
+\[
+W(p)\subset U
+\]
+である．
+さて
+$\yocovfont{W}$
+が
+$\yocovfont{U}$
+の
+$\Delta$細分であることを示すには，
+うえで取った
+$U$
+について
+\[
+p\in W(x)\To W(x)\subset U
+\]
+がわかれば良い．
+実際
+$p\in W(x)$
+ならば
+$W(p)\cap U\neq \emptyset$
+なので
+$U\in A(x)$
+である．
+そして
+$p\in W(x)$
+かつ
+$p\in F_{U}$
+なので
+$W(x)\cap F_{U}\neq\emptyset$
+でもある．
+よって
+$U\not\in C(x)$
+となるから
+$U\in B(x)$
+である．
+そして
+$W(x)$
+の定義から
+$W(x)\subset U$
+なので
+$\yocovfont{W}$
+が
+$\yocovfont{U}$
+の
+$\Delta$細分であることがわかる．
+\end{proof}
+
+
+
+\section{関数空間のlimitation topology}
+
+ここでは
+\cite{zbMATH03734780}
+に則って，
+関数空間の
+limitation topology
+を導入して基本的な性質を明らかにしていこう．
+文献
+\cite{MR3099433}, 
+\cite{MR4179591}, 
+\cite{McAuley1979SHRINKABLEDC}, 
+\cite{arXiv:2103.02977}, 
+\cite{zbMATH04128043}, 
+\cite{zbMATH03994517}, 
+\cite{zbMATH06863960}
+も参考にした．
+
+
+
+\begin{df}
+$X$
+と
+$Y$
+を位相空間とする．
+このとき
+$\yomapl{X}{Y}$
+で
+$X$
+から
+$Y$
+への連続写像全体を表すとする．
+次に
+$\yocovfont{U}\in \yocov{Y}$
+と
+$f, g\in \yomapl{X}{Y}$
+に対して
+\textbf{$f$と$g$が$\yocovfont{U}$-closeである}
+とは
+高々
+$2$
+点集合の族
+$\{\, \{f(x), g(x)\}\mid x\in X\, \}$
+が
+$\yocovfont{U}$
+の細分になっているときにいう．
+つまり任意の
+$x\in X$
+について
+$U\in \yocovfont{U}$
+が存在して
+$\{f(x), g(x)\}\subset U$
+となるということである．
+また
+$\yocovfont{U}\in \yocov{Y}$
+と
+$f\in \yomapl{X}{Y}$
+に対して
+$\yonbset{f}{\yocovfont{U}}$
+を
+$f$
+に
+$\yocovfont{U}$-close 
+な
+$g\in \yomapl{X}{Y}$
+全体の集合とする．
+\end{df}
+
+\begin{df}
+位相空間
+$X$, 
+$Y$
+と
+$d\in \yocbmet{Y}$
+について
+$\yosupmet{d}$
+を
+$f, g\in\yomapl{X}{Y}$
+に対して
+$\yosupmet{d}(f, g)=\sup_{x\in X}d(f(x), g(x))$
+と定義する．
+さて
+$f\in \yomapl{X}{Y}$, 
+$r\in (0, \infty)$, 
+$d\in \yocbmet{Y}$
+について
+$\yonbsetq{f}{r}{d}$
+を
+$g\in \yomapl{X}{Y}$
+であって
+$\yosupmet{d}(f, g)<r$
+となるもの全体とする．
+\end{df}
+
+
+\begin{prop}\label{prop:bbopbasisaaa}
+$X$
+を位相空間とし，
+$Y$
+をパラコンパクトハウスドルフ空間とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbsetq{f}{1}{d}\mid f\in \yomapl{X}{Y}, 
+d\in \yocbmet{Y}\, \}$
+は開基の条件を満たす．
+\end{prop}
+\begin{proof}
+任意に
+$f, g\in \yomapl{X}{Y}$
+と
+$d, e\in \yocbmet{Y}$
+を与える．
+そして今から任意の
+$h\in \yonbsetq{g}{1}{e}\cap\yonbsetq{f}{1}{d}$
+に対して
+ある
+$q$
+が存在して
+$\yonbsetq{h}{1}{q}\subset  \yonbsetq{g}{1}{e}\cap\yonbsetq{f}{1}{d}$
+となることを証明する．
+まず
+$\alpha=1-\yosupmet{e}(h, g)>0$
+かつ
+$\beta=1-\yosupmet{d}(h, f)>0$
+とおく．そして
+\[
+q=\alpha^{-1}e+\beta^{-1}d
+\]とする．
+そして
+$w\in \yonbsetq{h}{1}{q}$
+を任意にとる．
+このとき
+$\yosupmet{q}(w, h)<1$
+であるから
+$q$
+の定義から特に
+$\yosupmet{e}(w, h)<\alpha $でもある．
+すると
+\begin{align*}
+\yosupmet{e}(w, g)\le \yosupmet{e}(w, f)+\yosupmet{e}(f, g)<\alpha+\yosupmet{e}(f, g)\le 1
+\end{align*}
+であるから
+$w\in \yonbsetq{g}{1}{e}$
+である．
+同様に
+$w\in \yonbsetq{f}{1}{d}$
+である．
+以上で主張の中の族が開基の条件を満たすことがわかった．
+\end{proof}
+
+
+
+\begin{prop}\label{prop:bbopbasis}
+$X$
+を位相空間とし，
+$Y$
+をパラコンパクトハウスドルフ空間とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbset{f}{\yocovfont{U}}\mid f\in \yomapl{X}{Y}, \yocovfont{U}\in \yocov{Y}\, \}$
+は
+$\{\, \yonbsetq{f}{1}{d}\mid f\in \yomapl{X}{Y}, 
+d\in \yocbmet{Y}\, \}$
+と同じ位相を生成する．
+\end{prop}
+\begin{proof}
+任意に
+$f\in \yomapl{X}{Y}$
+と
+$\yocovfont{U}\in \yocov{Y}$
+を取る．
+今から
+$d\in \yocbmet{Y}$が存在して
+$\yonbsetq{f}{1}{d}\subset \yonbset{f}{\yocovfont{U}}$
+を示そう．
+命題
+\ref{prop:covpmet}
+より
+$d\in \yocbmet{Y}$
+が存在して
+$\{\, U(x, 1; d)\mid x\in X\, \}$
+が
+$\yocovfont{U}$
+の細分となる．
+任意に
+$g\in \yonbsetq{f}{1}{d}$
+をとる．
+このとき
+$\yosupmet{d}(f, g)<1$
+であることから
+任意の
+$x\in X$
+について
+$g(x)\in \yoball{f(x)}{1}{d}$
+となることが導かれる．
+このとき
+$d$
+の取り方からある
+$U\in \yocovfont{U}$
+が存在して
+$\yoball{f(x)}{1}{d}\subset U$
+となる．
+つまり
+$\{f(x), g(x)\}\subset U$
+となる．
+よって
+$f$
+と
+$g$
+は
+$\yocovfont{U}$-close
+であるから
+$g\in \yonbset{f}{\yocovfont{U}}$
+となる．
+つまり
+$\yonbsetq{f}{1}{d}\subset \yonbset{f}{\yocovfont{U}}$
+である．
+
+
+今度は
+$d\in \yocbmet{Y}$
+を任意に与えて
+これに対して
+$\yocovfont{U}\in \yocov{Y}$
+が存在して
+$\yonbset{f}{\yocovfont{U}}\subset \yonbsetq{f}{1}{d}$
+を満たすことを見よう．
+今
+$\yocovfont{U}=\yoballfam{1/100}{d}=
+\{\, \yoball{x}{1/100}{d}\mid x\in X\, \}$
+としよう．
+すると任意の
+$g\in \yonbset{f}{\yocovfont{U}}$
+と
+$x\in X$
+に対して
+$p\in  X$
+が存在して
+$f(x), g(x)\in \yoball{p}{1/100}{d}$
+が成り立つ．
+よって任意の
+$x\in X$
+について
+$d(f(x), g(x))<1/2$
+なので特に
+$\yosupmet{d}(f, g)<1$
+である．
+つまり
+$g\in \yonbsetq{f}{1}{d}$
+となる．
+これは
+$\yonbset{f}{\yocovfont{U}}\subset \yonbsetq{f}{1}{d}$
+ということである．
+以上から命題の主張が成り立つことがわかった．
+\end{proof}
+
+
+\begin{df}
+以上の命題
+\ref{prop:bbopbasisaaa}
+にて言及されている族
+(あるいは同じことだが命題
+\ref{prop:bbopbasis}の族)
+によって生成される位相を
+$\yomapl{X}{Y}$
+の
+\textbf{limitation topology}と呼ぶ(制約位相?和定訳は無いようである)．
+この文書では関数空間にはこの位相しか考えないので他の位相とまぎれない．
+\end{df}
+
+
+また，
+このlimitation topologyの開基は複数あるので，
+紹介しよう．
+
+\begin{prop}\label{prop:basis2}
+$X$
+を位相空間とし，
+$Y$
+をパラコンパクトハウスドルフ空間とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbsetq{f}{r}{d}\mid f\in \yomapl{X}{Y}, 
+d\in \yocbmet{Y}, r\in (0, \infty)\, \}$
+は
+$\yomapl{X}{Y}$
+の開基になる．
+\end{prop}
+\begin{proof}
+一般に
+$ \yonbsetq{f}{r}{d}= \yonbsetq{f}{1}{r^{-1}\cdot d}$
+が成り立つのでわかる．
+\end{proof}
+
+
+\begin{lem}\label{lem:inc}
+$X$
+を位相空間とし，
+$Y$
+をパラコンパクトハウスドルフ空間とする．
+そして
+$f\in \yomapl{X}{Y}$, 
+$d, e\in \yocbamet{Y}$
+とする．
+このとき以下が成り立つ．
+\begin{align}\label{item:lem:inc}
+\yonbsetq{f}{1}{d+e}\subset \yonbsetq{f}{1}{d}\cap \yonbsetq{f}{1}{e}
+\end{align}
+\end{lem}
+\begin{proof}
+この包含
+\eqref{item:lem:inc}
+は
+$d\le d+e$
+と
+$e\le d+e$
+から従う．
+\end{proof}
+
+
+\begin{prop}\label{prop:basis3}
+$X$
+を位相空間とし，
+$Y$
+を距離化可能空間とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbsetq{f}{r}{d}\mid f\in \yomapl{X}{Y}, 
+d\in \yocbamet{Y}, r\in (0, \infty)\, \}$
+は
+$\yomapl{X}{Y}$
+の開基になる．
+\end{prop}
+\begin{proof}
+補題
+\ref{lem:inc}
+と，任意の
+$d\in \yocbmet{Y}$
+と
+$e\in \yocbamet{Y}$
+について
+$d+e\in \yocbamet{Y}$
+となることから従う．
+\end{proof}
+
+
+
+\begin{prop}\label{prop:basis4}
+$X$
+を位相空間とし，
+$Y$
+を完備距離化可能空間とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbsetq{f}{r}{d}\mid f\in \yomapl{X}{Y}, 
+d\in \yocbacmet{Y}, r\in (0, \infty)\, \}$
+は
+$\yomapl{X}{Y}$
+の開基になる．
+\end{prop}
+\begin{proof}
+補題
+\ref{lem:inc}
+と，任意の
+$d\in \yocbmet{Y}$
+と
+$e\in \yocbacmet{Y}$
+について
+$d+e\in \yocbacmet{Y}$
+となることから従う．
+\end{proof}
+
+
+$f$の
+閉近傍を
+$\yonbsetqc{f}{r}{d}=\{\, g\in \yomapl{X}{Y}\mid 
+\yosupmet{d}(f, g)\le r\, \}$
+と定義する．
+\begin{prop}\label{prop:nbbasis}
+$X$
+を位相空間とし，
+$Y$
+を
+パラコンパクトハウスドルフ空間とする．
+そして
+$f\in \yomapl{X}{Y}$
+とする．
+このとき
+$\yomapl{X}{Y}$
+の部分集合族
+$\{\, \yonbsetqc{f}{r}{d}\mid
+d\in \yocbacmet{Y}, r\in (0, \infty)\, \}$
+と
+$\{\, \yonbsetqc{f}{1}{d}\mid 
+d\in \yocbacmet{Y}, r\in (0, \infty)\, \}$
+は
+$\yomapl{X}{Y}$
+における
+$f$
+の基本近傍系になる．
+\end{prop}
+\begin{proof}
+わかる．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+$X$, 
+$Y$
+を位相空間とし，
+$d\in \yocbmet{Y}$
+で
+$F\subset \yomapl{X}{Y}$
+とする．
+このとき
+$\yometcl{F}{d}$
+で
+上限距離
+$\yosupmet{d}$
+による
+$F$
+の閉包を表すことにする．
+つまり
+$F$
+の元の
+$d$
+から誘導される一様収束極限全体の集合ということである．
+
+
+以下では
+limitation topology 
+のBaire性を証明する
+(cf. \cite{zbMATH03768633})．
+
+\begin{thm}\label{thm:limtopbaire}
+$X$
+を位相空間とし，
+$Y$
+を完備距離空間とする．
+そして
+$\rho\in \yocbamet{Y}$
+とする．
+さらに
+$F$
+を
+$\yomapl{X}{Y}$
+の部分集合とする．
+族
+$\{U_{n}\}_{n\in \zz_{\ge 0}}$
+は
+$\yomapl{X}{Y}$
+の開集合からなるとし，
+各
+$n$
+について
+$U_{n}\cap F$
+が
+$F$
+の中で稠密であるとする．
+このとき
+$F$
+は
+$\yometcl{F}{\rho}\cap \bigcap_{n\in \zz_{\ge 0}}U_{n}$
+の閉包に含まれる．
+特に
+$\yomapl{X}{Y}$
+はBaireである．
+\end{thm}
+\begin{proof}
+$H=\yometcl{F}{\rho}\cap \bigcap_{n\in \zz_{\ge 0}}U_{n}$
+とおく．
+任意に
+$a\in F$
+をとる．
+そして任意に
+$d\in \yocbmet{Y}$
+をとる．
+今から
+$\yonbsetq{a}{1}{d}$
+が
+$H$
+と共通部分を持つことを証明する．
+
+今
+$U_{n}$
+たちは
+$U_{0}=X$
+と
+$U_{n+1}\subset U_{n}$
+を満たしているとしても
+一般性を失わない．
+適当に
+$w\in \yocbacmet{Y}$
+をとって
+$e=\rho+w$
+とする．
+各
+$n\in \zz_{\ge 0}$
+について
+$r_{n}\in (0, \infty)$
+と
+$b_{n}\in \yomapl{X}{Y}$, 
+$t_{n}\in \yocbmet{Y}$を
+以下の条件を満たすように帰納的に定義する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+
+\item\label{item:n:0000}
+$b_{0}=a$, 
+$r_{0}=1/2$, 
+$t_{0}=0$
+(恒等的に$0$の値を取る擬距離関数). 
+
+
+\item\label{item:n:1}
+$b_{n+1}\in \yonbsetq{b_{n}}{r_{n}}{e+t_{n}}\cap (U_{n+1}\cap F)$
+
+
+
+\item\label{item:n:2}
+$r_{n+1}\le \min \{2^{-n}, r_{n}\}$
+
+
+\item\label{item:n:3}
+$\yonbsetqc{b_{n+1}}{r_{n+1}}{e+t_{n+1}}\subset \yonbsetq{b_{n}}{r_{n}}{e+t_{n}}\cap U_{n+1}$
+\end{enumerate}
+ここで注意だが，
+各
+$n\in \zz_{\ge 0}$
+について
+$U_{n}\cap F$
+が
+$F$
+の中で稠密であるから
+$b_{n+1}\in \yonbsetq{b_{n}}{r_{n}}{e+s_{n}}\cap U_{n}\cap F$
+が取れる．
+このとき
+$\{b_{n}\}$
+は
+$\yosupmet{e}$
+に関してコーシー列になっている．
+$\yosupmet{e}$
+は完備距離なので極限
+$v$
+が存在する．
+このとき
+$\yometcl{F}{e}\subset \yometcl{F}{\rho}$
+であるから
+$v\in \yometcl{F}{\rho}$である．
+そして任意の
+$n\in \zz_{\ge 0}$
+について
+$v\in \yonbsetqc{b_{n}}{r_{n}}{e+t_{n}}$
+なので
+$v\in U_{n}$
+である．
+さらに
+$v\in \yonbsetqc{a}{1/2}{d}\subset \yonbsetq{a}{1}{d}$
+である．
+これで証明が終わる．
+\end{proof}
+
+
+\begin{df}
+$X$, 
+$Y$
+を空間とし，
+$\yocovfont{A}\in \yocov{X}$
+とする．
+このとき
+$f\in \yomapl{X}{Y}$
+が
+$\yocovfont{A}$-map
+であるとは
+ある
+$\yocovfont{U}\in \yocov{Y}$
+が存在して
+$f^{-1}(\yocovfont{U})\yofine \yocovfont{A}$
+が成り立つことである．
+ここで
+$f^{-1}(\yocovfont{U})=\{\, f^{-1}(U)\mid U\in \yocovfont{U}\, \}$
+である．
+また
+$\yocovfont{A}$-map
+全体を
+$\yocmaps{X}{Y}{\yocovfont{A}}$
+と書くことにする．
+\end{df}
+
+
+\begin{prop}\label{prop:amaps}
+$X$, 
+$Y$
+をパラコンパクト空間とし
+$\yocovfont{A}\in \yocov{X}$
+とする．
+このとき
+$\yomapl{X}{Y}$
+の元で
+$\yocovfont{A}$-map
+であるもの全体の集合
+$\yocmaps{X}{Y}{\yocovfont{A}}$
+は
+$\yomapl{X}{Y}$
+の開集合である．
+\end{prop}
+\begin{proof}
+任意の
+$f\in \yocmaps{X}{Y}{\yocovfont{A}}$
+をとる．
+すると
+$\yocovfont{A}$
+の定義から
+ある
+$\yocovfont{U}\in \yocov{Y}$
+が存在して
+$f^{-1}(\yocovfont{U})\yofine \yocovfont{A}$
+となる．
+ここで
+$\yocovfont{U}$
+の星形細分
+$\yocovfont{V}$
+を取る．
+そして
+$g\in \yonbset{f}{\yocovfont{V}}$
+を取る．
+任意の
+$V\in \yocovfont{V}$
+と任意の
+$x\in g^{-1}(V)$
+を取る．
+このときある
+$V_{x}\in \yocovfont{V}$
+が存在して
+$\{f(x), g(x)\}\subset V_{x}$
+である．
+$\yocovfont{V}$
+は
+$\yocovfont{U}$
+の星形細分なので
+ある
+$U\in \yocovfont{U}$
+が存在して
+$V\cup \bigcup_{x\in g^{-1}(V)}V_{x}\subset U$
+である．
+特に
+$g^{-1}(V)\in f^{-1}(U)$
+となる．
+そして
+$f^{-1}(\yocovfont{U})\yofine \yocovfont{A}$
+であるからある
+$A\in \yocovfont{A}$
+が存在して
+$f^{-1}(U)\subset A$
+なので
+$g^{-1}(V)\subset A$
+となる．
+つまり
+$g^{-1}(\yocovfont{V})\subset \yocovfont{A}$
+である．
+これは
+$g\in \yocmaps{X}{Y}{\yocovfont{A}}$
+という意味である．
+よって
+$\yonbset{f}{\yocovfont{V}}\subset \yocmaps{X}{Y}{\yocovfont{A}}$
+である．
+故に
+$\yocmaps{X}{Y}{\yocovfont{A}}$
+は
+$\yomapl{X}{Y}$
+の開集合である．
+\end{proof}
+
+
+
+$X$, 
+$Y$
+を空間とする．
+このとき
+$\yoemb{X}{Y}$
+という記号で
+$\yomapl{X}{Y}$
+の部分集合で，
+閉写像でなおかつ位相的埋め込みになっているもの全体の集合を表すとする．
+この集合はもちろん，
+空集合になることも起きうる．
+
+$X$
+を距離化可能空間とし
+$d\in \yocbamet{X}$
+とする．そして
+$\yocovfont{A}\in \yocov{X}$
+について
+$\yomesh_{d}(\yocovfont{A})$
+を
+$\sup_{A\in \yocovfont{A}_{n}}\yodiam_{d}(A)$
+として定義する．
+この量を扱う場合には
+$\yodiam_{d}\emptyset=0$
+と約束しておく．
+\begin{prop}\label{prop:clembeddings}
+$X$
+は完備距離化可能空間，
+$Y$
+を距離化可能空間とし
+$d \in \yocbacmet{X}$
+とする．
+そして
+$\{\yocovfont{A}_{n}\}_{n\in \zz_{\ge 0}}\subset \yocov{X}$
+を
+$\lim_{n\to \infty}\yomesh_{d}(\yocovfont{A}_{n})\to 0$
+となるものとする．
+このとき
+$f\in \yomapl{X}{Y}$
+が位相的閉埋め込みであるための必要十分条件は
+$f$
+が任意の
+$n\in \zz_{\ge 0}$
+について
+$f$
+が
+$\yocovfont{A}_{n}$-map
+であることである．
+結果として，
+$\yomapl{X}{Y}$
+の元で位相的閉埋め込みであるもの全体の集合
+$\yoemb{X}{Y}$
+は
+$\yomapl{X}{Y}$
+の中で
+$G_{\delta}$
+集合になっている．
+\end{prop}
+\begin{proof}
+まず最初に
+$f\in \yomapl{X}{Y}$
+が
+位相的埋め込みであると仮定する．
+そして任意に
+$n\in \zz_{\ge 0}$
+を固定する．
+このとき
+$f$
+が位相的埋め込みであることから，
+任意の
+$A\in \yocovfont{A}_{n}$
+についてある
+$Y$
+の開集合
+$O_{A}$
+が存在して
+$f(A)=f(X)\cap O_{A}$
+となる．
+ここで
+$\yocovfont{U}_{n}=\{\, O_{A}\mid A\in \yocovfont{A}_{n}\, \}\cup \{Y\setminus f(X)\}$
+とすると
+$\yocovfont{U}_{n}$
+は
+$Y$
+の開被覆であり，
+$f^{-1}(\yocovfont{U}_{n})\yofine\yocovfont{A}_{n}$
+が成り立つ．
+ここで
+$f$
+が閉写像であることから
+$Y\setminus f(X)$
+が開集合であることを使った．
+よって
+$f\in \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+である．
+
+逆に
+$f\in \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+としよう．
+各
+$n\in \zz_{\ge 0}$
+について
+$\yocovfont{U}_{n}\in \yocov{Y}$
+で
+$f^{-1}(\yocovfont{U}_{n})\yofine \yocovfont{A}_{n}$
+となるものを取る．
+まず単射性を見よう．
+任意に異なる2点
+$a, b\in X$
+を
+とる．
+そして
+$n$
+を十分大きく取って
+$\yomesh_{d}(\yocovfont{A}_{n})<d(a, b)$
+とする．
+このときもしも
+$f(a)=f(b)$
+ならば
+$f(a)\in U$
+となる
+$U\in \yocovfont{U}_{n}$
+を取り
+$a, b\in f^{-1}(U)$
+となる．
+しかし
+$f^{-1}(\yocovfont{U}_{n})\yofine \yocovfont{A}_{n}$
+から
+$\yodiam_{d}(f^{-1}(U))<d(a,b)$
+なので矛盾する．
+よって
+$f$
+は単射である．
+次に
+$f$
+が閉埋め込みであることを証明しよう．
+空間
+$f(X)$
+内の点列
+$\{f(x_{i})\}_{i\in \zz_{\ge 0}}$
+は
+$z\in Y$
+に収束しているとする．
+このとき各
+$n\in \zz_{\ge 0}$
+毎に
+$U_{n}\in \yocovfont{U}_{n}$
+で
+$z\in U_{n}$
+となるものを取る．
+すると
+$f(x_{i})\to z$
+から十分おおきい番号から先の
+$i$
+全てについて
+$x_{i}\in  f^{-1}(U_{n})$
+が成り立つ．
+$\yomesh_{d}(\yocovfont{A}_{n})\to 0$
+なので
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+は
+$(X, d)$
+のコーシー列であるから
+極限
+$p\in X$
+が存在する．
+このとき
+$f(p)=z$
+である．
+このことから
+$f$
+が閉埋め込みであることが従う．
+\end{proof}
+
+
+
+
+\section{Bing's shrinking criterion}
+Bing's shrinking criterion 
+についての歴史などは
+\cite{McAuley1979SHRINKABLEDC}
+や
+\cite{arXiv:2103.02977}
+を参照のこと．
+
+$X$
+と
+$Y$
+を位相空間とする．
+このとき
+連続写像
+$f\colon X\to Y$
+が
+\textbf{near-homeomorphism}
+であるとは
+$\yomapl{X}{Y}$
+内の
+$f$
+の
+任意の
+近傍
+に同相写像
+$h\colon X\to Y$
+が存在するときにいう．
+もちろんnear-homeomorphismが存在すれば，
+$X$
+と
+$Y$
+は同相である．
+
+
+位相空間
+$Z$
+に対して
+$\yomaphset{Z}$
+で同相写像
+$f\colon Z\to Z$
+全体の集合を表す．
+そして
+$\yomaphset{Z}$
+でnear-homeomorphism
+$Z\to Z$
+全体の集合を表す．
+
+
+$X$
+と
+$Y$
+を位相空間とし，
+$f\colon X\to Y$
+を連続写像，
+$d\in \yocbmet{Y}$
+とする．
+このとき
+$f^{*}d\in \yocbmet{X}$
+を
+$f^{*}d(x, y)=d(f(x), f(y))$
+と定義する．
+
+以下の定理の形のcriterion
+はおそらく最も一般的な形であり，
+論文
+\cite{zbMATH03734780}
+で導入された．
+論文
+\cite{zbMATH03932021}
+も参照のこと．
+このshrinkability
+の概念は
+\cite{McAuley1979SHRINKABLEDC}
+の中の
+tightly shrinkable
+に相当すると思われる．
+
+\begin{thm}\label{thm:main1}
+$X$
+と
+$Y$
+を完備距離化可能空間とする．
+そして
+$\pi \colon X\to Y$
+をその間の連続写像とする．
+このとき以下の主張は同値である．
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:thm1:1}
+$\pi$
+はnear-homeomorphismである．
+
+\item\label{item:thm1:2}
+$\pi(X)$
+が
+$Y$
+の中で稠密であり尚且つ以下の条件が満たされる．
+\begin{enumerate}[label=\textup{(Bing)}, leftmargin=*]
+\item\label{item:bingcondition}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$\yocovfont{W}\in \yocov{Y}$
+と
+$f\in \yomapnhset{X}$
+が存在して
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+
+\item\label{item:thm1:3}
+$\pi(X)$
+が
+$Y$
+の中で稠密であり尚且つ以下の条件が満たされる．
+\begin{enumerate}[label=\textup{(Bing-$*$)}, leftmargin=*]
+\item\label{item:bingconditionstar}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$\yocovfont{W}\in \yocovfont{W}$と
+$f\in \yomaphset{X}$
+が存在して
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$[\ref{item:thm1:1}\To \ref{item:thm1:3}]$
+まず最初に
+$\pi$
+がnear-homeoであると仮定しよう．
+このとき
+$\pi(Z)$
+が
+$Z$
+の中で稠密であることはすぐにわかる(試みられよ)．
+ここで
+$a\in \yocbmet{X}$
+を
+$\yoballfam{1}{a}\yofine \yocovfont{A}$
+となるものとする．
+さらに
+$m\in \yocbmet{Y}$
+を
+$\yoballfam{1}{m}\yofine \yocovfont{U}$
+となるものとする．
+そして
+\[
+\yocovfont{R}=\yoballfam{10^{-2}}{m}
+\]
+と定義する．
+このとき
+$\pi$
+がnear-homeoであることから
+$u\in \yonbsetq{\pi}{10^{-2}}{m}$
+であるような同相写像
+$u\colon X\to Y$
+が存在する．
+そして
+$s=(u^{-1})^{*}a$,
+$t=u^{*}m$
+として
+$l\in \yocbmet{Y}$
+を
+\begin{align}
+l
+=s+ t+m 
+\end{align}
+と定義する．
+次いで同相写像
+$v\in \yonbsetq{\pi}{10^{-5}}{l}$
+を取る．
+そして
+$f=u^{-1}\circ v$
+とする．
+今からこの
+$f$
+が求める
+同相写像になっていることを証明しよう．
+ここで
+$\yocovfont{W}=\yoballfam{10^{-10}}{l}$
+とする．
+任意に 
+$W=\yoball{z}{10^{-10}}{l}\in \yocovfont{W}$
+を
+とり，任意に
+$x\in \pi^{-1}(W)$
+をとる．
+まず
+$l(z, \pi(x))<10^{-10}$
+である．さらに
+$\yosupmet{l}(\pi, v)<10^{-5}$
+であるから
+$l(\pi(x), v(x))<10^{-5}$
+でもある．
+よって
+$l(z, v(x))<2\cdot 10^{-5}$
+がわかる．
+点$x\in \pi^{-1}(W)$
+は任意であったから
+\begin{align}\label{al:vwl}
+v(\pi^{-1}(W))\subset \yoball{z}{10^{-4}}{l}
+\end{align}
+が従う．
+
+次に
+任意の
+$x\in \yoball{z}{10^{-4}}{l}$
+について
+$l(x, z)<10^{-4}$
+から
+$s(x, z)<10^{-4}$
+がわかる．
+よって
+$a(u^{-1}(x), u^{-1}(z))<10^{-4}$
+である．
+つまり
+$u^{-1}(\yoball{z}{10^{-4}}{l})\subset 
+\yoball{u^{-1}(z)}{10^{-4}}{a}$
+である．
+ここで
+擬距離関数
+$a$
+の取り方から
+ある
+$A\in \yocovfont{A}$
+が存在して
+$\yoball{u^{-1}(z)}{10^{-4}}{a}\subset A$
+となる．
+故に
+$u^{-1}(\yoball{z}{10^{-4}}{l})\subset A$
+がわかる．
+つまり
+\begin{align}\label{al:zua}
+\yoball{z}{10^{-4}}{l}\subset u(A)
+\end{align}
+となる．
+式
+\eqref{al:vwl}
+と
+\eqref{al:zua}
+を合わせて
+$v(\pi^{-1}(W))\subset u(A)$
+を得る．
+定義から$f=u^{-1}\circ v$なので
+$f(\pi^{-1}(W))\subset A$
+がわかる．
+集合
+$W\in \yocovfont{W}$
+は任意に取ったので
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が結論できる．
+
+次に
+$\pi\circ f$
+と
+$f$
+が
+$\yocovfont{U}$-close
+であることを示す．
+任意の
+$x\in X$
+を取る．
+このとき
+$v$
+の取り方から
+$l(\pi(x), v(x))<10^{-5}$
+である．
+つまり
+\begin{align}
+v(x)\in \yoball{\pi(x)}{10^{-5}}{l}\subset \yoball{\pi(x)}{10^{-5}}{m}
+\end{align}
+が従う．
+また
+$m(u(x), \pi(x))<10^{-2}$
+であるから
+$u(x)\in \yoball{\pi(x)}{10^{-2}}{m}$
+でもある．
+以上から
+$\{u(x), v(x)\}\in \yoball{\pi(x)}{10^{-2}}{m}$
+である．
+よって
+\begin{align}\label{al:xfx}
+\{x, f(x)\}\subset u^{-1}(\yoball{\pi(x)}{10^{-2}}{m})
+\end{align}
+となる．
+ここで
+記号入力の手間を省くのと，見やすさのために
+$E=\yoball{\pi(x)}{10^{-2}}{m}$
+とおこう．今から上記式
+$\{x, f(x)\}\subset u^{-1}(E)$
+と組み合わせたい式を導出する．
+任意の
+$z\in u^{-1}(E)$
+について
+$u$
+の定義から
+$m(\pi(z), u(z))<10^{-2}$
+が成り立ち，
+$E$
+の定義から
+$m(u(z), \pi(x))<10^{-2}$
+が成り立つ．
+よって
+$m(\pi(z), \pi(x))<2\cdot 10^{-2}$
+がわかる．
+故に
+$\pi(z)\in \yoball{\pi(x)}{2\cdot 10^{-2}}{m}$
+である．
+このことから
+\begin{align}\label{al:uemm}
+\pi(u^{-1}(E))\subset  \yoball{\pi(x)}{2\cdot 10^{-2}}{m}
+\end{align}
+が従う．
+さて
+\eqref{al:xfx}
+と
+上記
+\eqref{al:uemm}
+を組み合わせると
+\begin{align}\label{al:pixpifx}
+\{\pi(x), \pi\circ f(x)\}\subset  \yoball{\pi(x)}{2\cdot 10^{-2}}{m}
+\end{align}
+がわかる．
+擬距離関数
+$m$
+の取り方から
+ある
+$U\in \yocovfont{U}$
+が存在して
+$ \yoball{\pi(x)}{2\cdot 10^{-2}}{m}\subset U$
+となる．
+すると結局
+$\{\pi(x), \pi\circ f(x)\}\subset U$
+が従う．
+よって
+$\pi\circ f$
+と
+$\pi$
+は
+$\yocovfont{U}$-closeである．
+
+
+
+
+
+
+$[\ref{item:thm1:3}\To \ref{item:thm1:1}]$
+今から
+$\pi$
+に十分近い同相写像を構成する．
+まず
+$e\in \yocbamet{X}$
+と
+$d\in \yocbamet{Y}$
+を取る．
+被覆の族
+$\{\yocovfont{A}_{n}\}_{n\in \zz_{\ge 0}}\subset \yocov{X}$
+で
+$\lim_{n\to \infty}\yomesh_{e}(\yocovfont{A}_{n})\to 0$
+となるもの
+を取る．
+そして
+\[
+F=\{\, \pi\circ h\mid h\in \yomaphset{X}\, \}
+\]
+とする．
+今から任意に
+$n\in \zz_{\ge 0}$
+を固定して
+$F\cap \yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の閉包が
+$F$
+を含むことを証明しよう．
+つまり
+任意
+の点
+$\pi\circ h\in F$
+の任意の近傍に
+$F\cap \yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の元が含まれることを示す．
+そこで
+任意に
+$\yocovfont{U}\in \yocov{Y}$
+を取る．
+今から
+$\yonbset{\pi\circ h}{\yocovfont{U}}$
+と
+$F\cap \yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+が共通部分を持つことを示す．
+さて
+$b\in \yocbmet{Y}$
+で
+$\yoballfam{1}{b}\yofine \yocovfont{U}$
+を満たすものをとる．
+さて
+条件
+\ref{item:bingconditionstar}
+を
+$\yonbset{\pi}{\yoballfam{10^{-5}}{b}}\in \yocov{Y}$
+と
+$h(\yocovfont{A}_{n})\in \yocov{X}$
+に適応して，
+写像
+$f\in \yomaphset{X}$
+で
+$\pi\circ f\in \yonbset{\pi}{\yoballfam{10^{-5}}{b}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine h(\yocovfont{A}_{n})$
+が成り立つものをとる．
+条件
+$\pi\circ f\in \yonbset{\pi}{\yoballfam{10^{-5}}{b}}$
+から
+$\pi \circ f\in \yonbsetq{\pi}{10^{-4}}{b}$
+である．
+つまり任意の
+$x$
+について
+$b(\pi(x), \pi\circ g(x))<3\cdot 10^{-4}$
+ということである．
+ここで
+$f$
+が同相であるということを用いて
+$x=f^{-1}(y)$
+とすると
+\begin{align}
+b(\pi\circ f^{-1}(y), \pi(y))=b(\pi(x), \pi\circ g(x))<10^{-4}
+\end{align}
+なので
+$\pi\circ f^{-1}\in \yonbsetq{\pi}{10^{-3}}{b}$
+であることに注意しよう．すぐにこれを使う．
+次に
+$f(\pi^{-1}(\yocovfont{W}))\yofine h(\yocovfont{A}_{n})$
+が成り立つの
+で
+$h^{-1}(f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}_{n}$
+である．
+これは
+\begin{align}
+(\pi\circ f^{-1}\circ h)^{-1}(\yocovfont{W})\yofine 
+\yocovfont{A}_{n}
+\end{align}
+ということである．
+ここで$f^{-1}\circ h\in \yomaphset{X}$を踏まえると
+$\pi\circ f^{-1}\circ h\in F\cap \yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+がわかる．
+さらに
+$\pi\circ f^{-1}\in \yonbsetq{\pi}{10^{-3}}{b}$
+なので
+$h\colon X\to X$
+が同相であることを用いると
+$\yosupmet{b}(\pi\circ f^{-1}\circ h, \pi\circ h)<10^{-3}$
+である．
+これと
+$\yoballfam{1}{b}\yofine \yocovfont{U}$
+を組み合わせると
+$\pi\circ f^{-1}\circ h\in \yonbset{\pi\circ h}{\yocovfont{U}}$
+がわかる．
+ここで
+$\yocovfont{U}$
+は任意であったので
+$F$は
+$F\cap \yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の閉包に含まれることがわかった．
+以上の議論から
+定理\ref{thm:limtopbaire}
+を適応することに
+より
+$\yometcl{F}{d}\cap \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の閉包は$F$を含み，
+とくに$\pi$はその閉包に含まれている
+ことが従う．
+ところで$s$を$\yometcl{F}{d}\cap \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+から取ってくると
+$F$
+の元の像は稠密な像を持つから，
+その
+$d$
+による一様極限である
+$s$
+も稠密な像を持つ
+(意外と簡単にわかるので証明を試みられよ)．
+ここで
+$s$
+は閉埋め込みである
+(定理\ref{prop:clembeddings})
+から
+全射になり，特に同相写像である．
+以上から
+$\pi$
+は
+$\yometcl{F}{d}\cap \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の元でいくらでも
+近似できることがわかったので
+$\pi$
+がnear-homeomorphismであることが結論できる．
+
+
+
+$[\ref{item:thm1:3}\To \ref{item:thm1:2}]$
+$\yomaphset{X}\subset \yomapnhset{X}$
+なので直ちに従う．
+
+
+$[\ref{item:thm1:2}\To \ref{item:thm1:3}]$
+条件
+\ref{item:bingcondition}
+から
+\ref{item:bingconditionstar}
+を導こう．
+任意に
+$\yocovfont{A}\in \yocov{X}$
+と
+$\yocovfont{U}\in \yocov{Y}$
+を取る．
+そして 
+$r\in \yocbmet{X}$
+と
+$b\in \yocbmet{Y}$
+で
+$\yoballfam{1}{r}\yofine \yocovfont{A}$
+かつ
+$\yoballfam{1}{b}\yofine \yocovfont{U}$
+となるものをとる．
+条件
+\ref{item:bingcondition}
+からある
+$f\in \yomapnhset{Y}$
+が存在して
+$\pi\circ f\in \yonbset{\pi}{\yoballfam{10^{-5}}{b}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yoballfam{10^{-5}}{r}$
+が成り立つ．
+そして
+\[
+l=r+\pi^{*}b\in \yocbmet{X}
+\]
+と定義する．
+また
+$f\colon X\to X$
+がnear-homeoであることから
+$g\in \yomaphset{X}$
+が存在して
+$g\in \yonbsetq{f}{10^{-5}}{l}$
+が成り立つ．
+さて任意の
+$x\in X$
+について
+$l(f(x), g(x))<10^{-5}$
+で
+\begin{align}\label{al:1055}
+\{\pi(x), \pi\circ f(x)\}\subset \yoball{z}{10^{-5}}{b}
+\end{align}
+がすでにわかっている．
+ついで
+$l(f(x), g(x))<10^{-5}$
+から
+$b(\pi\circ f(x), \pi\circ g(x))<10^{-5}$
+がわかり，
+\eqref{al:1055}
+と組み合わせて
+$b(\pi(x), \pi\circ g(x))<3\cdot 10^{-5}<10^{-4}$
+がわかる．
+つまり
+$\pi\circ g\in \yonbset{\pi}{\yoballfam{10^{-4}}{b}}$
+である．
+このこと
+と
+$\yoballfam{1}{b}\yofine \yocovfont{U}$
+から
+\begin{align}
+\pi\circ g\in \yonbset{\pi}{\yocovfont{U}}
+\end{align}
+が従う．
+次に
+任意の
+$E=\pi^{-1}(W)\in \pi^{-1}(\yocovfont{W})$
+を取る．
+そして
+$x\in E$
+の時
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yoballfam{10^{-5}}{r}$
+からある$z\in Y$が存在して
+$f(x)\in \yoball{z}{10^{-5}}{r}$がわかり，
+$g$
+の定義から
+$l(f(x), g(x))<10^{-5}$
+が成り立つ．
+故に
+$g(x)\in \yoball{f(x)}{3\cdot 10^{-5}}{r}$
+となる．
+これは
+$g(\pi^{-1}(\yocovfont{W}))\yofine \yoballfam{10^{-4}}{r}$
+を意味する．
+擬距離関数
+$r$
+は
+$\yoballfam{1}{r}\yofine \yocovfont{A}$
+を満たすので
+\begin{align}
+g(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}
+\end{align}
+が導かれる．
+以上から
+$g\in \yomaphset{Y}$
+と
+$\yocovfont{W}\in \yocov{Y}$
+が存在して
+$\pi\circ g\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$g(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が成り立つことがわかる．
+これは
+\ref{item:bingconditionstar}
+の成立を意味する．
+
+以上で全ての証明が終わる．
+\end{proof}
+
+
+$X$
+と
+$Y$
+を集合とする.
+写像
+$f\colon X\to Y$
+と
+$X$
+の部分集合
+$A\subset X$
+について
+\textbf{$A$の$f$による小像(small image)
+$\yosmim{f}(A)$}
+とは以下で定義される
+$Y$
+の部分集合である．
+\[
+\yosmim{f}(A)=Y\setminus f(X\setminus A)
+\]
+
+多少の計算をすることによって，
+$X$
+と
+$Y$
+が位相空間のときに
+$f$
+が閉写像であることと
+$X$
+の任意の閉集合
+$A$
+について
+$\yosmim{f}(A)$
+が開集合
+であることが同値になることがわかるであろう．
+この概念についての詳しい性質は例えば
+\cite{alg-d1}
+や
+\cite{dempa1}
+を参照のこと．
+
+
+以下の形は
+\cite{zbMATH03734780}
+でも注意されている．
+
+
+
+\begin{thm}[閉写像版]\label{thm:main2}
+$X$
+と
+$Y$
+を完備距離化可能空間とする．
+そして
+$\pi \colon X\to Y$
+をその間の
+\underline{閉連続写像}とする．
+このとき以下の主張は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:thmcl:1}
+$\pi$
+がnear-homeomorphismである．
+
+
+\item\label{item:thmcl:2}
+$\pi(X)=Y$
+であり尚且つ以下の条件が満たされることである．
+\begin{enumerate}[label=\textup{(Bing-C)}, leftmargin=*]
+\item\label{item:bingconditioncl}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$f\in \yomapnhset{X}$
+が存在して
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+
+
+\item\label{item:thmcl:3}
+$\pi(X)=Y$
+であり尚且つ以下の条件が満たされることである．
+\begin{enumerate}[label=\textup{(Bing-$*$C)}, leftmargin=*]
+\item\label{item:bingconditionclstar}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$f\in \yomaphset{X}$
+が存在して
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:main1}
+を使ってみよう．
+小像を使って
+$\yocovfont{W}$
+を頑張って作る．
+
+条件\ref{item:bingconditioncl}
+から
+定理
+\ref{thm:main1}
+の条件
+\ref{item:bingcondition}
+を導く．残りの部分はアナロジーだったり自明だったりするので省略する．
+条件\ref{item:bingconditioncl}
+から
+\ref{item:bingcondition}
+を導くにあたっては，
+条件
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+から
+$\yocovfont{W}\in \yocov{Y}$
+で
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+となるものを構成できれば良い．
+任意の
+$A\in \yocovfont{A}$
+について
+\begin{align}
+W_{A}=\yosmim{\pi}(f^{-1}(A))
+\end{align}
+と定義する．
+そして
+$\yocovfont{W}=\{\, W_{A}\mid A\in \yocovfont{A}\, \}$
+と定義する．
+このとき
+$\pi$
+が閉写像であることから
+$W_{A}$
+は
+$Y$
+の開集合である．
+また
+条件
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+と
+$\pi$
+の全射性から
+$\yocovfont{W}$
+は
+$Y$
+の被覆になる．
+今から
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+を証明しよう．
+任意に
+$W_{A}\in \yocovfont{W}$
+を取る．
+そして任意に
+$y\in f(\pi^{-1}(W_{A}))$
+を取る．
+このとき
+$y=f(x)$
+となる
+$x\in \pi^{-1}(W_{A})$
+が取れる．
+このとき
+$\pi(x)\in W_{A}$
+である．
+小像の定義から
+$\pi(x)\not\in \pi(X\setminus f^{-1}(A))$
+である．
+つまり
+$x\in f^{-1}(A)$
+であり
+$y=f(x)\in A$
+がわかる．
+これは
+$f(\pi^{-1}(W_{A}))\subset A$
+を意味する．
+以上で証明が終わる．
+\end{proof}
+
+
+二つの位相空間
+$X$
+と
+$Y$
+の間の
+連続写像
+$q\colon X\to Y$
+が
+\textbf{固有}
+であるとは
+それが閉写像であってなおかつ
+任意の
+$y\in Y$
+について
+$\pi^{-1}(y)$
+がコンパクトであるときにいう．
+ちなみに距離空間の間の写像についてはよく知られている
+コンパクト集合の引き戻しがコンパクトという固有写像の定義と
+上の定義は同値になる(一般にコンパクト生成空間だと同値になる)．
+以下の形のcriterionは
+\cite{zbMATH03511213}
+に現れている．
+\begin{thm}[よく知られてる版]\label{thm:main3}
+$X$
+と
+$Y$
+を完備距離化可能空間とする．
+そして
+$\pi \colon X\to Y$
+をその間の
+\underline{全射固有連続写像}
+とする．
+このとき
+以下の主張は同値である．
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:thmproper:1}
+$\pi$
+がnear-homeomorphismである．
+
+\item\label{item:thmproper:2}
+以下の条件が成り立つ．
+\begin{enumerate}[label=\textup{(Bing-P)}, leftmargin=*]
+\item\label{item:bingconditionp}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$f\in \yomapnhset{X}$
+が存在して
+任意の
+$y\in Y$
+について
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+かつ
+$f$
+と
+$1_{X}$
+が
+$(\pi^{-1}(\yocovfont{U}))$-close
+である．
+\end{enumerate}
+
+\item\label{item:thmproper:3}
+以下の条件が成り立つ．
+\begin{enumerate}[label=\textup{(Bing-$*$P)}, leftmargin=*]
+\item\label{item:bingconditionpstar}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$f\in \yomaphset{X}$
+が存在して
+任意の
+$y\in Y$
+について
+$\{\, f(\pi^{-1}(y))\mid y\in Y\, \}\yofine \yocovfont{A}$
+かつ
+$f$
+と
+$1_{X}$
+が
+$(\pi^{-1}(\yocovfont{U}))$-close
+である．
+\end{enumerate}
+
+
+
+
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:main2}から
+すぐにわかる．
+試みられよ．
+\end{proof}
+
+\begin{rmk}
+定理
+\ref{thm:main3}
+は
+$\pi$
+の条件が厳しくなっているだけで
+定理
+\ref{thm:main2}
+よりも真に弱い定理である．
+なぜ
+定理
+\ref{thm:main3}
+がよく知られている形なのかコメントした方がいいと思う．
+その昔，
+商空間を考える際に
+同値関係による分割として便利な
+上半連続分解というものが考えられていた
+(\cite{kelly}などに名残が見られる)．
+こういうのの源流はWhyburnの論文
+\cite{zbMATH02527213}とかを読むとわかるかも?
+昔は商空間を考えるときに同値関係を与えるより空間の直和分割をそのまま扱ったりしていた．
+まあ別にどっちが先でも``数学的には''変わらないのだが．
+上半連続分解というのそういう直話分解のうち特殊なもので，今風の言葉で言うと商写像
+$p\colon X\to X/R$
+が閉写像になるもので
+$X/R$
+が
+$T_{1}$
+になるものことである．
+ここで
+$T_{1}$
+という条件は直話分割の各分割が
+$X$
+の閉集合になっているという条件に対応する．
+さらに先人たちは分割に強い条件，
+直話分解の
+各成分がコンパクトなものを盛んに研究していた，
+ようである．
+これは今風の言葉で言うと
+$T_{1}$
+空間
+$Y$
+と固有写像
+$f\colon X\to Y$
+を考えるのと同義である．
+というのも，
+距離化可能空間
+(resp.完備距離化可能)
+の固有像は距離化可能
+(resp.完備距離化可能)で，
+考えるクラスが閉じるので都合が良かったのである
+(つまり
+定理
+\ref{thm:main3}
+の
+$Y$
+が完備距離化可能であるという仮定は過剰である, 
+cf. \cite{zbMATH03118918},
+\cite{zbMATH03122181},  
+\cite[Supplementary results]{zbMATH03511213},
+\cite{dempa2})．
+そのようなわけで
+定理
+\ref{thm:main3}
+は昔から知られた
+Bing's shrinking criterion 
+の形というわけである．
+ただし
+この
+criterion
+の研究の中には
+criterion
+の条件としてこの文書で挙げたものではなく
+homeo(near-homeo)
+$f$が
+恒等写像と
+isotorpic
+であるという条件を課している事があるので，
+見かけ上異なる場合があることに注意した方が良いであろう，
+\cite{zbMATH03511213}など．
+\end{rmk}
+
+
+
+
+コンパクトの場合にはBingの条件はさらに使いやすい形になる．
+\begin{thm}[コンパクト版]\label{thm:main4}
+$X$
+と
+$Y$
+をコンパクトな距離化可能空間と
+し
+$d\in \yocbamet{X}$
+$e\in \yocbamet{Y}$
+とする．
+そして
+$\pi \colon X\to Y$
+をその間の
+全射連続写像とする．
+このとき
+以下の主張は同値である．
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:thmk:1}
+$\pi$
+がnear-homeomorphismである．
+
+\item\label{item:thmk:2}
+以下の条件が満たされる．
+\begin{enumerate}[label=\textup{(Bing-K)}, leftmargin=*]
+\item\label{item:bingconditionk}
+任意の
+$\epsilon\in (0, \infty)$
+について, 
+$f\in \yomapnhset{X}$
+が存在して
+$\yodiam_{d}(f(\pi^{-1}(y))<\epsilon$
+と
+$\pi\circ f\in \yonbsetq{\pi}{\epsilon}{e}$
+が成り立つ．
+\end{enumerate}
+
+\item\label{item:thmk:3}
+
+以下の条件が満たされる．
+\begin{enumerate}[label=\textup{(Bing-$*$K)}, leftmargin=*]
+\item\label{item:bingconditionkstar}
+任意の
+$\epsilon\in (0, \infty)$
+について, 
+$f\in \yomaphset{X}$
+が存在して
+$\yodiam_{d}(f(\pi^{-1}(y))<\epsilon$
+と
+$\pi\circ f\in \yonbsetq{\pi}{\epsilon}{e}$
+が成り立つ．
+\end{enumerate}
+
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:main2}
+と
+ルベーグ数の存在からわかる．
+試みられよ．
+\end{proof}
+
+
+
+部分集合上の情報を加味した相対版のcriterionもある．
+\begin{thm}[部分集合]\label{thm:mainsub1}
+$X$
+と
+$Y$
+を完備距離化可能空間とする．
+そして
+$\pi \colon X\to Y$
+をその間の連続写像とし，
+$S$
+を
+$X$
+の部分集合とする．
+ここで
+$\pi(X)$
+が
+$Y$
+の中で稠密であり尚且つ以下の条件が満たされる
+とする．
+\begin{enumerate}[label=\textup{(Bing-sub)}, leftmargin=*]
+\item\label{item:bingconditionsub}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$\yocovfont{W}\in \yocov{Y}$
+と
+$f\in \yomaphset{X}$
+が存在して，
+$f|_{S}=1_{S}$, 
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+このとき
+$\pi$
+はnear-homeomorphic 
+でありなおかつ
+$\pi$を近似する
+同相写像
+$g$として
+$g|_{S}=\pi|_{S}$
+を満たすものが選べる．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:main1}
+の$[\ref{item:thm1:3}\To \ref{item:thm1:1}]$
+の証明を修正すると
+定理
+\ref{thm:mainsub1}
+の証明が得られる．
+実際
+$F=\{\, \pi\circ h\mid h\in \yomaphset{X}, h|_{S}=1_{S}\, \}$
+と修正すると，
+条件
+\ref{item:bingconditionsub}
+の$f$
+が$f|_{S}=1_{S}$
+を満たすことを使って
+定理
+\ref{thm:main1}
+の$[\ref{item:thm1:3}\To \ref{item:thm1:1}]$
+の証明と同様に
+定理\ref{thm:limtopbaire}
+を適応することに
+より
+$\yometcl{F}{d}\cap \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の閉包は
+$F$
+を含み，
+とくに
+$\pi$
+はその閉包に含まれている
+ことが従う．
+そして
+$F$
+の定義から
+$\yometcl{F}{d}\cap \bigcap_{n\in \zz_{\ge 0}}\yocmaps{X}{Y}{\yocovfont{A}_{n}}$
+の元は
+$S$
+上で
+$\pi$
+と一致するので証明が終わる．
+\end{proof}
+
+
+完備じゃない版を書いてみたらなんかとても容量が大きくなってしまった．
+\begin{thm}[完備じゃない版]\label{thm:mainincomp}
+$X$
+と
+$Y$
+を単に距離化可能空間とする．
+そして
+$\pi \colon X\to Y$
+をその間の連続写像とし，
+$K$を$X$の閉部分集合
+として
+$L=\pi(K)$
+と書く事にする．
+そして
+$\pi(X)=Y$
+であり尚且つ以下の条件が満たされる
+とする．
+\begin{enumerate}[label=\textup{(Bing-incomp)}, leftmargin=*]
+\item\label{item:bingconditionincomp}
+任意の
+$\yocovfont{A}\in \yocov{X}$
+と
+任意の
+$\yocovfont{U}\in \yocov{Y}$
+について, 
+$\yocovfont{W}\in \yocov{Y}$
+と
+$f\in \yomaphset{X}$
+が存在して
+任意の$x\in K\cup (X\setminus \pi^{-1}(\yost{L, \yocovfont{U}}))$
+について$f(x)=x$であり，
+$\pi\circ f\in \yonbset{\pi}{\yocovfont{U}}$
+と
+$f(\pi^{-1}(\yocovfont{W}))\yofine \yocovfont{A}$
+が成り立つ．
+\end{enumerate}
+このとき
+$\pi$
+はnear-homeomorphismであり，
+さらに
+$\pi$
+を近似する同相写像$g$
+は
+任意の$x\in K\cup (X\setminus \pi^{-1}(\yost{L, \yocovfont{U}}))$
+について
+$g(x)=\pi(x)$
+を満たすようにとれる．
+\end{thm}
+\begin{proof}
+今までのように関数空間の理論が使えないようで手作業で頑張って
+$\pi$に近い同相写像を構成するしかない．
+
+まず
+$d\in \yocbamet{X}$
+と
+$e\in \yocbamet{Y}$
+で
+$\yoballfam{1}{d}\yofine \yocovfont{A}$
+かつ
+$\yoballfam{1024}{e}\yofine \yocovfont{U}$
+となるものを取る．
+帰納法を用いて
+任意の
+$n\in \zz_{\ge 0}$
+について以下の条件を満たす
+$f_{n}\in \yomaphset{X}$, 
+$\yocovfont{W}_{n}\in \yocov{Y}$, 
+$u_{n}\in \yomaphset{X}$
+を構成する．
+\begin{enumerate}[label=\textup{(A\arabic*)}]
+\item\label{item:A:shoki}
+ $f_{0}=1_{X}$, 
+$\yocovfont{W}_{0}=\yoballfam{1/2}{e}$
+
+
+\item\label{item:A:mesh}
+$\yomesh_{e}\yocovfont{W}_{n}\le 2^{-n-1}$
+
+\item\label{item:A:piclose}
+$\pi \circ u_{n}\in \yonbset{\pi, \yocovfont{W}_{n}}$, 
+つまりは
+$u_{n}$と
+$1_{X}$
+は
+$\pi^{-1}(\yocovfont{W}_{n})$-closeである．
+
+
+
+\item\label{item:A:shrink}
+$u_{n}(\pi^{-1}(\yocovfont{W}_{n+1}))\yofine f_{n}^{-1}(\yoballfam{2^{-n-10}}{d})$
+
+\item\label{item:A:refine}
+$\yocovfont{W}_{n+1}\yofine \yocovfont{W}_{n}$
+
+
+\item\label{item:A:identity}
+任意の
+$x\in K\cup (X\setminus \pi^{-1}(\yost{L, \yocovfont{W}_{n}}))$
+について
+$u_{n}(x)=x$
+
+
+\item\label{item:A:deff}
+$f_{n+1}=f_{n}\circ u_{n}$
+
+\end{enumerate}
+つまり，
+$u_{n}$と
+$\yocovfont{W}_{n+1}$は
+条件
+\ref{item:bingconditionincomp}
+を
+$\yocovfont{W_{n}}\in \yocov{X}$
+と
+$f_{n}(\yoballfam{2^{-n-10}}{d})$
+に適応して得られる同相写像
+と被覆である．
+必要なら$\yoballfam{2^{-n-10}}{e}$
+と$\yocovfont{W}_{n+1}$
+と
+$\yocovfont{W}_{n}$
+の共通被覆をとって
+$\yomesh_{e}\yocovfont{W}_{n+1}\le 2^{-n-2}$かつ
+$\yocovfont{W}_{n+1}\yofine \yocovfont{W}_{n}$
+とする．
+
+このとき以下の条件が満たされる．
+\begin{enumerate}[label=\textup{(B\arabic*)}]
+
+
+\item\label{item:B:shrink}
+$\yomesh_{d}{f_{n+1}(\pi^{-1}(\yocovfont{W}_{n+1}))}\le 2^{-n-2}$
+
+\item\label{item:B:ff}
+$\yosupmet{d}(f_{n+1}, f_{n})\le 2^{-n-1}$
+
+\item\label{item:B:pfpf}
+$\yosupmet{e}(\pi\circ f_{n+1}^{-1}, \pi\circ f_{n}^{-1})\le 2^{-n-1}$
+
+
+\item\label{item:B:identity}
+任意の
+$x\in K\cup (X\setminus \pi^{-1}(\yost{L, \yocovfont{W}_{n}}))$
+について
+$f_{n+1}(x)=f_{n}(x)$
+
+
+
+\end{enumerate}
+というのも，
+まず
+\ref{item:A:shrink}
+から直ちに
+\ref{item:B:shrink}
+が従う．
+そして
+\ref{item:B:shrink}
+の$n$の場合を考えると
+$\yomesh_{d}f_{n}(\pi^{-1}(\yocovfont{W}_{n}))\le 2^{-n-1}$
+であり，
+\ref{item:A:piclose}
+から任意に$x\in X$
+を考えると
+ある$W\in \yocovfont{W}_{n}$
+が存在して
+$\{u_{n}(x), x\}\in \pi^{-1}(W)$
+である．
+以上から
+$d(f_{n}\circ u_{n}(x), f_{n}(x))<2^{-n-1}$
+がわかるので
+\ref{item:B:ff}
+が成立する．
+
+条件
+\ref{item:A:mesh}
+と
+\ref{item:A:piclose}
+から
+任意の$x\in X$
+について
+$e(\pi\circ u_{n}(x), \pi(x))\le 2^{-n-1}$
+がわかる．
+写像
+$u_{n}$が同相であることから
+任意の
+$x$について
+$e(\pi(x), \pi\circ u_{n}^{-1}(x))\le 2^{-n-1}$
+が従う．
+さらに$f_{n}$が同相写像であることから
+$e(\pi\circ f_{n}^{-1}(x), \pi\circ u_{n}^{-1}\circ f_{n}^{-1}(x))\le 2^{-n-1}$
+が従う．
+これは
+$e(\pi\circ f_{n}^{-1}(x), \pi\circ f_{n+1}^{-1}(x))\le 2^{-n-1}$
+を意味する．
+つまり
+\ref{item:B:pfpf}
+が成立する．
+
+
+条件
+\ref{item:A:deff}と
+\ref{item:A:identity}
+から
+\ref{item:B:identity}
+が従う．
+
+
+今，
+$\{f_{n}\}$
+と
+$\{\pi\circ f_{n}^{-1}\}$
+は一様収束の意味でコーシーに
+なっている．
+しかし
+$X$
+と
+$Y$
+は完備とは仮定していないので，
+一様コーシー性から$f_{n}$と
+$\pi\circ f_{n}^{-1}$
+の収束性などはわからない．
+だがしかし，
+今回の場合には，各点$x\in X$
+について
+$\{f_{n}(x)\}$と
+$\{\pi\circ f_{n}(x)\}$
+の収束が言えるのである．
+今から示そう．
+まず
+$\{f_{n}(x)\}$
+の話をしよう．
+点$x\in X$
+を任意にとる．
+もしも
+$x\in X\setminus \pi(L)$
+であるのならば，
+条件\ref{item:A:mesh}
+から
+十分大きい番号
+$n$
+について
+$\pi(x)\not \in \yost{L, \yocovfont{W}_{n}}$
+なので
+$x\in X\setminus \pi^{-1}(\yost{L, \yocovfont{W}_{n}})$
+であり，
+$f_{n}(x)=f_{n+1}(x)$
+である．つまり十分大きい番号以降は定数列になっているので
+収束する．
+もしも
+$x\in \pi^{-1}(L)$
+であるならば
+ある
+$p\in K$が存在して
+$\pi(p)=\pi(x)$
+となる．
+そして$W_{n}\in \yocovfont{W}_{n}$を
+$\pi(x)\in W_{n}$となるものだとすると
+$\{p, x\}\in \pi^{-1}(W_{n})$であり，
+条件\ref{item:A:identity}, 
+\ref{item:A:shoki}, 
+\ref{item:A:deff}から
+$f_{n}(p)=p$なので
+$\{p, f_{n}(x)\}\in f_{n}^{-1}(W_{n})$
+である．
+条件
+\ref{item:B:shrink}
+から
+$f_{n}(x)\to p$
+がわかる．つまり収束する．
+
+次に
+$\{\pi\circ f_{n}^{-1}(x)\}$
+の話をしよう．
+任意の
+$x\in X$
+を与える．
+もしも
+$x\in K$
+の時には
+$f_{n}(x)=x$
+から
+$\pi\circ f_{n}^{-1}(x)=\pi(x)$
+がわかるので
+収束する．
+次に
+$x\in X\setminus K$
+の場合を考えよう．
+この時
+$2^{-m-1}<d(x, K)$
+となる
+$m\in \zz_{\ge 0}$
+がとれる．
+さて，
+$y=f_{m}^{-1}(x)$と置いたとき
+背理法のために
+$y\in \pi^{-1}(\yost{L, \yocovfont{W}_{m}})$
+であると仮定しよう．
+するとこの仮定から
+$W\in \yocovfont{W}_{m}$
+と$a\in K$であって
+$\{\pi(y), \pi(a)\}\subset W$
+となるものがとれる．
+このとき
+条件
+\ref{item:B:shrink}から
+\begin{align*}
+&d(x, a)=d(f_{m}(y), f_{m}(a))\le 
+\yodiam_{d}(f(\pi^{-1}(W)))
+\\
+&\le 
+\yomesh_{d}(f(\pi^{-1}(\yocovfont{W}_{m})))
+\le 2^{-m-1}<d(x, A)
+\end{align*}
+がわかるが，
+これは
+$d(x, A)\le d(x, a)$
+に矛盾する．
+よって
+$y\in X\setminus \pi^{-1}(\yost{L, \yocovfont{W}_{m}})$
+である．
+条件
+\ref{item:A:refine}
+から$m\le n$となる$n$について
+\begin{align}
+y\in X\setminus \pi^{-1}(\yost{L, \yocovfont{W}_{n}})
+\end{align}
+である．
+このとき
+条件\ref{item:A:identity}
+と
+\ref{item:A:shoki}から
+$f_{n}(x)=x$
+である．
+よって
+収束する．
+
+以上の議論から，
+条件
+\ref{item:bingconditionincomp}
+が結構強い要請であるという理由により，
+完備性の仮定なく
+$f_{n}$の一様極限$f$
+と
+$\pi\circ f_{n}^{-1}$の一様極限
+$g$
+の存在がわかった．
+今から
+$g$
+の連続逆写像を構成することで
+$g$
+が同相であることを示そう．
+$g$
+の定義から
+$g$
+の逆関数は
+``$f_{n}\circ \pi^{-1}$''
+の極限である可能性が高い．
+実際
+$y\in Y$
+を取ると，
+$\pi$
+の全射性から
+$\pi^{-1}(y)\neq \emptyset$なので特に
+$f_{n}(\pi^{-1}(y))\neq \emptyset$
+である．
+さらに
+\ref{item:B:shrink}
+から
+$f(\pi^{-1}(y))$
+の直径は
+$0$
+であり，
+一点集合である．
+これを
+$h(y)$
+と置く事にする．
+つまり，
+$y\in Y$に対して
+$p_{y}\in \pi^{-1}(y)$を適当に選んで
+$h(y)=\lim_{n\to \infty}f_{n}(p_{y})$
+と定義するのである．
+収束は\ref{item:B:shrink}から従う．
+連続性を見よう．
+任意に$\epsilon$をとり，
+$n$を$2^{-n-10}\le \epsilon$
+とし
+点$y\in Y$に対して
+$y\in W$となる$W\in \yocovfont{W}_{n}$
+をとって
+$z\in W$
+を任意に考える．
+すると$p_{y}, p_{z}\in \pi^{-1}(W)$
+であり，
+\ref{item:B:shrink}
+から
+$\yodiam_{d}\{f_{n}(p_{y}), f_{n}(p_{z})\}\le 
+\yodiam_{d}f(\pi^{-1}(W))\le 2^{-n-1}\le \epsilon$なので
+$n\to \infty$として
+$d(h(y), h(z))\le \epsilon$がわかる．
+これで$h$の連続性が従う．
+
+ところで
+写像$f$は同相写像の極限だが，単射性などは
+わからない事に注意しよう．
+
+ここで条件\ref{item:B:pfpf}から
+$n\le m$となる$m, n$について，
+等比数列の和の公式などを使うと大雑把に
+\begin{align}
+\yosupmet{e}(\pi\circ f_{n}^{-1}, \pi\circ f_{m}^{-1})\le 2^{-n+10}
+\end{align}
+である．
+よって$f_{m}$が同相であることから
+\begin{align}
+\yosupmet{e}(\pi\circ f_{n}^{-1}f_{m}, \pi)\le 2^{-n+10}
+\end{align}
+であるから
+$m\to \infty$
+として
+\begin{align}
+\yosupmet{e}(\pi\circ f_{n}^{-1}f, \pi)\le 2^{-n+10}
+\end{align}
+となる．
+さらに$n\to \infty$とすると
+\begin{align}
+\yosupmet{e}(g\circ f, \pi)=0
+\end{align}
+である．
+つまり
+\begin{align}
+g\circ f =\pi
+\end{align}
+である．
+よって
+\begin{align}
+g\circ h\circ \pi=g\circ f=\pi
+\end{align}
+が従う．
+写像
+$\pi$
+の全射性を再び使うと
+\begin{align}\label{item:key1}
+g\circ h=1_{Y}
+\end{align}
+がわかる．
+
+式
+\eqref{item:key1}
+と$h$の定義を使って
+\begin{align}\label{item:key2}
+h\circ g\circ f= h\circ \pi =f
+\end{align}
+がわかる．
+写像$f$
+は全射(というか同相)$f_{n}$の一様極限
+なので特に$f$自身も全射である．
+よって
+\eqref{item:key2}
+から
+\begin{align}\label{item:key2}
+h\circ g=1_{X}
+\end{align}
+となる．
+以上から
+$g$が同相であることがわかった．
+
+
+条件\ref{item:A:shoki}
+と
+\ref{item:B:pfpf}
+から
+\begin{align}
+\yosupmet{e}(g, \pi)=\sum_{n\in \zz_{\ge}}
+\yosupmet{e}(\pi\circ f_{n+1}^{-1}, \pi\circ f_{n^{-1}})
+\le\sum_{n\in \zz_{\ge 0}}2^{-n-1}\le 1024
+\end{align}
+がわかる．
+これと
+$\yoballfam{1024}{e}\yofine \yocovfont{U}$
+から
+$g$が$\pi$に$\yocovfont{U}$-closeであることがわかる．
+
+以上で証明が終わる．
+\end{proof}
+
+
+
+
+\section{応用編(省略)}
+工事中．めんご．おいおいね．
+
+
+criterionの条件を満たすかどうかは結構難しい．
+criterionの条件を満たすような空間の分割の研究は
+ \cite{zbMATH01307859}
+ などがある．
+ \cite{arXiv:2103.02977}
+ にもいろいろ載っている．
+ 
+ Bing's shrinking criterion
+ を使って
+多様体の管状近傍定理を証明したり\cite{arXiv:2103.02977}，
+一般化されたシェーンフリースの定理を証明できたりするようだ\cite[Theorem 2.7.7]{MR4179591}．
+
+ 
+
+\section{参考文献}
+BibTeXで日本語と非日本語文献を混ぜたくないので，
+別々で列挙する．
+
+
+
+{\renewcommand{\refname}{日本語の参考文献}   
+\begin{thebibliography}{99}
+
+\bibitem[alg-d1]{alg-d1}
+alg-d, 
+【圏論】逆像写像が良い性質を持つ理由【Kan拡張】, 
+https://www.youtube.com/watch?v=QjYN9MAtpvI
+\bibitem[電波通信1]{dempa1}
+電波通信, 
+閉写像云々とか固有写像とか, 
+https://concious4410.hatenablog.com/entry/2015/11/06/205115
+
+\bibitem[電波通信2]{dempa2}
+電波通信, 
+距離化可能定理part3:花井--森田・ストーンの定理, 
+https://concious4410.hatenablog.com/entry/2024/01/23/201558
+\bibitem[ケリー]{kelly}
+ケリー, 
+位相空間論, 
+1968, 
+丸善. 
+
+\bibitem[児玉-永見]{kodamanagami}
+永見啓応
+と
+児玉之宏, 
+位相空間論,
+岩波書店 
+1974. 
+
+\bibitem[ブルバキ位相1]{bourbaki1}
+ブルバキ, 
+数学原論 位相 1, 
+東京図書, 
+1968. 
+
+\bibitem[ブルバキ位相4]{bourbaki4}
+ブルバキ, 
+数学原論 位相 4, 
+東京図書, 
+1969. 
+
+
+\bibitem[宮島関数解析]{miyajima}
+宮島静雄, 
+関数解析, 
+横浜図書, 
+2005. 
+
+\bibitem[森田位相空間論]{kiiti}
+森田紀一, 
+位相空間論, 
+岩波書店, 
+1981.
+
+
+
+\end{thebibliography}
+}
+
+
+
+{\renewcommand{\refname}{日本語以外の参考文献}   
+%\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{bibtexmet/bibmet.bib}
+}
+
+
+
+
+\end{document}
