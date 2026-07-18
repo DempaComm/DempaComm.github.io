@@ -1,0 +1,9661 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+
+
+
+%showkeys\usepackage{showkeys}
+
+%ams
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+\usepackage{comment}
+
+\usepackage{xurl}
+
+%mathscr
+\usepackage[mathscr]{eucal}
+%\usepackage{mathrsfs}
+%\usepackage{mathrsfs}
+
+%enuitem
+\usepackage{enumitem}
+
+%Plus
+
+
+
+
+
+
+
+
+%theoremstyles
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{clm}[thm]{Claim}
+\newtheorem*{thmf}{Theorem}
+
+
+%Definitionstyles
+\theoremstyle{definition}
+\newtheorem{df}{Definition}[section]
+\newtheorem{exam}{Example}[section]
+\newtheorem{assume}{Assumption}[section]
+% questions
+\newtheorem{ques}[thm]{Question}
+%conjecture
+\newtheorem{conj}[thm]{Conjecture}
+
+
+%remarkstyles
+\theoremstyle{remark}
+\newtheorem{rmk}{Remark}[section]
+%acnowledgement
+\newtheorem*{ac}{Acknowledgements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MyCommands
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%arrows
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%mathbb
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+
+%%%
+
+
+\DeclareMathOperator{\card}{\mathrm{card}}
+%\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\rank}{rank}
+
+\DeclareMathOperator{\bd}{\mathrm{Bdry}}
+\DeclareMathOperator{\cl}{\mathrm{CL}}
+\DeclareMathOperator{\nai}{\mathrm{Int}}
+\DeclareMathOperator{\yodiam}{\mathrm{diam}}
+
+
+
+%emph
+\newcommand{\yoemph}[1]{\textbf{#1}}
+
+
+%dimension
+\newcommand{\yoind}{\mathrm{ind}}
+\newcommand{\yolind}{\mathrm{Ind}}
+\newcommand{\yoddim}{\mathrm{D\hspace{-5.5pt}Dim}}
+\newcommand{\yodim}{\mathrm{dim}}
+
+%deg
+\newcommand{\yodeg}{\mathrm{deg}}
+\newcommand{\yocovf}[1]{\mathscr{#1}}
+%%%%%%%%%%%%%%%%%
+
+%%disccubesphere
+\newcommand{\yospfont}[1]{\mathbb{#1}}
+\newcommand{\yodisc}[1]{\yospfont{D}^{#1}}
+\newcommand{\yosphere}[1]{\yospfont{S}^{#1}}
+\newcommand{\yocube}[1]{\yospfont{I}^{#1}}
+\newcommand{\yocubesidep}[2]{\yospfont{I}^{#1, #2}_{+}}
+\newcommand{\yocubesidem}[2]{\yospfont{I}^{#1, #2}_{-}}
+
+\newcommand{\yocubebd}[1]{\bd\yospfont{I}^{#1}}
+
+
+%%%
+\newcommand{\myhl}[2]{H_{#2}(#1)}
+
+
+
+
+
+
+\newcommand{\yostset}[1]{\mathrm{St}(#1)}
+
+
+%%%%%func sp
+\newcommand{\yosupmet}[1]{\widehat{#1}}
+\newcommand{\yofuncsp}[2]{\mathrm{C}(#1, #2)}
+\newcommand{\yofsusm}[1]{\mathrm{E}(#1)}
+\newcommand{\yoaff}[1]{\mathrm{Aff}(#1)}
+
+\newcommand{\yoavoid}[1]{\mathrm{Avoid}(#1)}
+
+\newcommand{\yoemb}[2]{\mathrm{Emb}(#1, #2)}
+\newcommand{\yonebsp}[1]{\mathrm{N}_{#1}^{2#1+1}}
+\newcommand{\yoembsym}{\mathrm{Emb}}
+
+
+
+\newcommand{\yoglsp}[1]{\mathrm{GL}(#1)}
+
+\newcommand{\yospsp}[1]{\mathrm{Sp}(#1)}
+%\newcommand{\LL}{\mathcal{L}}
+\newcommand{\yoLL}{\mathcal{L}}
+
+\newcommand{\yoidmap}[1]{1_{#1}}
+
+\newcommand{\yolimset}[1]{L(#1)}
+
+
+
+\newcommand{\yoliftset}[1]{\mathfrak{B}(#1)}
+\DeclareMathOperator{\pr}{pr}
+
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+
+
+\newcommand{\yospspfont}{\mathscr}
+\newcommand{\yorrsp}[2]{\yospspfont{R}({#1}, {#2})}
+\newcommand{\yommsp}[2]{\yospspfont{M}({#1}, {#2})}
+\newcommand{\yollsp}[2]{\yospspfont{L}({#1}, {#2})}
+
+%%%%%
+
+\newcommand{\yoballfont}{\mathbf}
+\newcommand{\yometoball}[3]{\yoballfont{U}(#1, #2; #3)}
+\newcommand{\yometcball}[3]{\yoballfont{B}(#1, #2; #3)}
+
+
+%cases
+
+\newcommand{\yocase}[2]{Case #1.~[#2]:}
+
+
+
+%%%
+
+\numberwithin{equation}{section}
+
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ breaklinks=true, 
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+
+
+\begin{document}
+
+
+\title{
+可分距離化可能空間における次元論
+}
+
+
+%author
+
+\author{ナンブキトラ}
+
+
+%adress
+
+			
+
+\date{\today}
+
+%\subjclass[2020]{54E35, 54E50, 54E52, 54D20}
+
+%\keywords{Dimension}
+
+
+
+\maketitle
+\begin{abstract}
+本稿では
+可分距離化可能空間
+における次元論の
+基本的な定理を
+紹介することを目的としている．
+主に
+可分距離化可能空間において
+三つの次元，
+小さい帰納的次元，
+大きい帰納的次元，
+そして
+被覆次元の三つ
+の次元の基本的な事項，
+例えばこれら三つが一致することや，
+ユークリッド空間への埋め込みの存在，
+そしてユークリッド空間の次元の
+決定などを
+紹介する．
+また，本稿では
+0次元空間への分解に着目して
+分解次元というものを独自に導入することで
+上記三つの次元が一致するということを
+平易に説明しようと試みた．
+もちろんこの次元も可分距離化可能空間においては
+上記三つの次元と一致する．
+\end{abstract}
+
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+%\section{Introduction}
+\section{イントロ}\label{sec:intro}
+\subsection{背景など}\label{subsec:backgrounds}
+
+本稿では可分距離化可能空間に関する
+位相次元論を
+$0$
+次元空間を元にして
+構築する．
+次元とは何かという問いに
+答えるのは難しい．
+次元とは大まかには
+空間の自由度を表す整数
+であるが，今や数学においては
+多種多様な空間に対して
+様々な種類の次元が考えられており，
+これらを包括して説明するのは
+少々難しい．
+しかし
+こと位相空間
+において
+次元論とは，
+位相空間の
+連結性の
+さらに精密な
+分類のことであると述べることができるだろう．
+次元論においては
+空間の分かち難さを
+近傍系の境界(大小の帰納的次元)や
+被覆の細分の度数(被覆次元)などで
+測る．
+これらは一般的な状況においては
+異なる場合があるが
+可分距離化可能空間においては
+全て一致するというのが次元論の押さえておくべき
+基本的な定理の一つである．
+本稿の特徴は，
+上記の目的のために
+本稿では
+0次元空間への分解に着目して
+分解次元というものを独自に導入することで
+理解を容易にすることを試みた点である．
+もちろんこの次元も可分距離化可能空間においては
+上記三つの次元と一致する．
+
+本稿では
+次元論の古典的文献
+\cite{zbMATH02505166}
+の
+大まかな
+内容をカバーし，
+古い書物の内容を
+伝えることを目的にしている．
+具体的に述べると
+三つの次元の一致性
+(定理
+\ref{thm:sum:coincides})と，
+ユークリッド空間の次元の決定(定理
+\ref{thm:sum:jigen})，
+有限次元空間のユークリッド空間への埋め込み(定理
+\ref{thm:umekomidense})，
+そして領域不変性定理(定理
+\ref{thm:maininvdomain})
+である．
+多様体のユークリッド空間への埋め込み
+(定理
+\ref{thm:sum:whineyembedjigen})は
+現代人にとってニーズがあろうと思い
+記述した．
+
+次元論のより発展的な話題に関しては
+より
+時代の下ったものとして
+\cite{zbMATH00815279}
+や，
+可分距離化可能性よりも一般的な状況を
+扱っている書物
+\cite{zbMATH03488230}
+がある．
+またごく最近の
+次元論に関する書物として
+\cite{zbMATH07075997}
+があり，引用する際には
+入手性の高さから
+これ
+を参照するとよい．
+
+
+本稿の構成は以下のようになっている．
+セクション\ref{sec:intro}
+の残りでは，
+次元論で使う
+ジェネトポの基本事項を
+紹介し，
+その後球面などの特別な空間
+の本稿におけるノーテーションを
+提示する．
+
+セクション
+\ref{sec:dimensions}
+では
+可分距離化可能空間に対する次元論を展開する．
+まず分解次元と小さい帰納的次元，大きい帰納的次元，
+そして被覆次元を導入し
+その後小さい分解次元の基本事項を証明する．
+特に可算和定理が重要である．
+そもそも
+小さい帰納的次元に関する
+可算和定理の証明に
+触発されて，
+分解次元を導入した．
+分解次元は，空間を何個の
+$0$
+次元空間の和で表せるかという量である．
+この量自体は可分距離化可能空間において
+小さい帰納的次元に等しいことが古くから知られている．
+分解次元の定義における
+$0$
+次元部分空間
+は開集合や閉集合，あるいはボレル集合であることや
+ベール集合であることすら仮定されていない．
+このようなワイルドな可能性のある部分集合の和集合への分解
+の個数で次元が定義できることはとても興味深い．
+本稿においては，
+異なる次元関数が等しいことを証明するのに，
+考えている次元関数に関して，開基であってその境界が
+全体空間の次元より一つ小さい次元を持つということを
+基本戦略としている．
+被覆次元を上から抑えるとき以外はこの方法によって
+次元関数同士の評価を行なっている．
+また被覆次元
+を帰納的次元で上から抑える
+定理
+\ref{thm:main:covcov}
+の直接的な証明は分解次元を導入した一つの利点である．
+
+セクション
+\ref{sec:fxptthm}
+ではブラウワーの不動点定理の証明を行う．
+不動点定理はユークリッド空間の次元の決定に必要である．
+というのも
+大まかにはブラウワーの不動点定理と
+$n-1<\yodim \rr^{n}$
+が同値だからである．
+
+セクション
+\ref{sec:invdom}
+以降は次元論の応用であり，好きな順番で読むことができるだろう．
+セクション
+\ref{sec:invdom}
+ではユークリッド空間の
+開集合を同じ次元のユークリッド空間に
+単射連続写像で写すとその像も開集合であるという
+領域不変性定理を次元論の応用として証明する．
+
+セクション
+\ref{sec:interiorndim}
+では
+$n$次元ユークリッド空間の
+$n$次元部分空間は内点を持つことを証明する．
+これは次元論の応用というよりもユークリッド空間の
+可算稠密推移性の応用と見る方が適切である．
+
+セクション
+\ref{sec:embeddingdim}
+では
+$n$次元空間を
+$2n+1$次元の
+ユークリッド空間に埋め込めることを証明している．
+また，
+$n$次元空間の普遍空間についても言及している．
+
+
+セクション
+\ref{sec:mfdembedding}
+では多様体の分解次元が有限であるということのみを
+用いて多様体を可微分写像によって
+ユークリッド空間に埋め込んでいる．
+
+%\subsection{Fundamental statements on general topology}
+\subsection{ジェネトポの基本事項}\label{subsec:genetop}
+
+本稿では，正規性などの分離公理を仮定するときは
+常に
+$T_{1}$
+を仮定する．
+
+\begin{thm}[Urysohnの距離化可能定理]\label{thm:secpre:urysohnmet}
+$X$
+を第二可算な正規空間とする．
+このとき
+$X$
+は
+$[0, 1]^{\aleph_{0}}$
+に位相的に埋め込み可能である．
+結果的に
+$X$は距離化可能である．
+\end{thm}
+\begin{proof}
+証明は省略する．
+\end{proof}
+
+
+\begin{thm}[Tietze-Urysohnの拡張定理]\label{thm:secpre:tuext}
+$X$
+を正規空間とし,
+$A$
+をその閉部分集合，
+$f\colon A\to [0, 1]$
+を連続写像とする．
+このとき連続写像
+$F\colon X\to [0, 1]$
+が存在して
+$F|_{A}=f$
+を満たす．
+\end{thm}
+\begin{lem}[The tube lemma]\label{lem:tube}
+
+$X$
+を位相空間とし，
+$K$
+をコンパクト空間とする．
+そして
+$x\in X$
+とし
+$U$
+は
+$X\times K$
+の開集合とする．
+もしも
+$\{x\}\times K\subset U$
+が成り立つならば
+$x$
+の近傍
+$N$
+が存在して
+$N\times K\subset U$
+を満たす．
+\end{lem}
+\begin{proof}
+$K$
+はコンパクトで
+$U$
+は開集合なので
+$x$
+の開近傍
+$O_{1}, \dots, O_{n}$
+と
+$K$
+の
+開集合の族
+$V_{1}, \dots, V_{n}$
+が存在して
+以下が成り立つ．
+\begin{align}
+\{x\}\times K\subset \bigcup_{i=1}^{n}O_{i}\times V_{i}\subset U. 
+\end{align}
+ここで
+$N=\bigcap_{i=1}^{n}O_{i}$
+とすれば証明が終わる．
+\end{proof}
+
+\begin{df}[開収縮]
+位相空間
+$X$の開被覆
+$\yocovf{U}$
+に対して
+$\{\, V_{U} \mid  U\in \yocovf{U}\,  \}$
+が
+\yoemph{開収縮}であるとは，本稿では
+$\{\, V_{U} \mid  U\in \yocovf{U} \, \}$
+が
+$X$
+の開被覆であって，
+任意の
+$U\in \yocovf{U}$
+について
+\begin{align}
+\cl (V_{U})\subset U
+\end{align}
+を満たすこととする．
+\end{df}
+
+
+
+
+
+\begin{lem}[被覆の収縮補題]\label{lem:intro:shrink}
+正規空間$X$
+の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について，開被覆
+$\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\cl V_{i}\subset U_{i}$
+が満たされる．
+つまり
+正規空間の
+有限開被覆には
+開収縮が存在するということである．
+\end{lem}
+\begin{proof}
+帰納法によって証明する．
+各$l\in \{1, \dots, m\}$
+について
+以下の条件を満たす列
+$V_{1}, \dots, V_{l}$
+を構成する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:secpre:lem:shrinkbase}
+任意の
+$i\in \{1, \dots, l\}$について
+$\cl V_{i}\subset U_{i}$が成り立つ; 
+\item\label{item:secpre:lem:shrink}
+$\{V_{1}, \dots, V_{l}, U_{k+1}, \dots, U_{m}\}$
+は
+$X$
+の被覆である．
+\end{enumerate}
+今
+$l=k$
+まで上記の列が構成できたとして
+集合$V_{k+1}$
+を構成しよう．
+さて
+$A$
+を以下のように定義する．
+\begin{align}
+A=\left(\bigcap_{i=1}^{k}X\setminus V_{i}\right)\cap 
+\left(\bigcap_{i=k+1}^{m}X\setminus U_{i}\right). 
+\end{align}
+このとき
+$A$は閉集合である．
+条件
+\ref{item:secpre:lem:shrink}
+から
+$A\subset U_{k+1}$
+が従う．
+そして
+$X$
+の正規性から
+$X$
+の開集合
+$V_{k+1}$
+であって
+$A\subset V_{k+1}$
+かつ
+$\cl V_{k+1}\subset U_{k+1}$
+を満たすものが存在する．
+これは条件
+\ref{item:secpre:lem:shrinkbase}
+と
+\ref{item:secpre:lem:shrink}
+の
+$l=k+1$
+の場合を満たす．
+よって
+$l=m$の時を考えれば
+証明が終わる．
+\end{proof}
+
+
+集合族の相似という概念を導入する．
+\begin{df}
+$I$
+を添字集合とする．
+集合
+$X$
+の部分集合族
+$\mathcal{A}=\{A_{i}\}_{i\in I}$
+と
+$\mathcal{B}=\{B_{i}\}_{i\in I}$
+が
+\yoemph{相似}であるとは
+$I$の任意の部分集合$S$
+について
+$\bigcap_{s\in S}A_{s}=\emptyset$
+と
+$\bigcap_{s\in S}B_{s}=\emptyset$
+が同値になることである．
+同じことだが
+$\bigcap_{s\in S}A_{s}\neq \emptyset$
+と
+$\bigcap_{s\in S}B_{s}\neq\emptyset$
+が同値になるということでもある．
+\end{df}
+
+位相空間論では特に
+特に
+$B_{i}\subset A_{i}$
+などの包含関係が存在して
+$A_{i}$
+や
+$B_{i}$
+が開集合だったり
+閉集合だったりするような状況において
+相似な集合族を構成できるかどうかに興味がある．
+本稿では一般的な話は行わず，
+差し当たり必要な
+有限集合族の場合に限って話を進めるということにする．
+
+\begin{lem}\label{lem:souji}
+$X$を
+正規空間とする．
+そして
+$\{F_{1}, \dots, F_{m}\}$
+と
+$\{U_{1}, \dots, U_{m}\}$
+を
+それぞれ
+閉集合族と開集合族で
+$F_{i}\subset U_{i}$
+を満たしているとする
+($X$を被覆しているなどの条件はつけない)．
+このとき
+開集合族集合族
+$\{W_{1}, \dots, W_{m}\}$
+が存在して
+$F_{i}\subset W_{i}$
+と
+$\cl W_{i}\subset U_{i}$
+を満たしさらに
+$\{F_{1}, \dots, F_{m}\}$
+と
+$\{\cl W_{1}, \dots, \cl W_{m}\}$
+は相似である．
+\end{lem}
+\begin{proof}
+帰納法によって証明する．
+自然数
+$l\in \{1, \dots, m\}$
+について以下の条件を満たす
+$W_{1},  \dots, W_{l}$
+を構成する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item
+族
+$\{W_{1}, \dots, W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+が
+$\{F_{1}, \dots, F_{m}\}$
+と相似である;
+\item 
+任意の
+$j\in \{1, \dots, l\}$について
+$F_{j}\subset W_{j}$
+かつ
+$\cl W_{j}\subset U_{j}$
+を満たす．
+\end{enumerate}
+$F_{j}\subset W_{j}$
+かつ
+$\cl W_{j}\subset U_{j}$
+今から
+$l=k$まで上記の列が構成できたとして
+$W_{k+1}$を構成する．
+今
+$\{\cl W_{1}, \dots, \cl W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+の有限個の共通部分で表される集合のうち
+$F_{k+1}$と交わらないものを
+$\mathcal{K}$とかく．
+そして
+$H=X \setminus \bigcup\mathcal{K}$
+と定義すると，
+$\mathcal{K}$
+は有限集合であるから
+$H$
+は
+$X$
+の開集合であり
+$F_{k+1}\subset H$
+を満たす．
+ここで
+$X$
+の正規性を用いて
+$W_{k+1}$
+を
+$F_{k+1}\subset W_{k+1}$
+かつ
+$\cl W_{k+1}\subset H\cap U_{k+1}$
+となる開集合とする．
+このとき
+$\mathcal{K}$
+の定義から
+$\{\cl W_{1}, \dots, \cl W_{k}\}\cup \{F_{k+1}, \dots, F_{m}\}$
+と
+$\{\cl W_{1}, \dots, \cl W_{k+1}\}\cup \{F_{k+2}, \dots, F_{m}\}$
+は相似である．
+よって帰納法の仮定から
+$\{F_{1}, \dots, F_{m}\}$
+と
+$\{\cl W_{1}, \dots, \cl W_{k+1}\}\cup \{F_{k+2}, \dots, F_{m}\}$
+は相似である．
+これで
+$W_{k+1}$
+が構成できた．
+そこで$l=m$
+とすれば
+証明が終わる．
+\end{proof}
+
+
+\begin{lem}\label{lem:toridashi}
+$X$
+を可分距離化可能空間とする．
+$\mathcal{B}$
+を
+$X$
+の開基とする．
+このとき
+$\mathcal{B}$
+の部分集合
+$\mathcal{A}$
+で開基になりさらに
+$\card(\mathcal{A})\le \aleph_{0}$
+を満たすものが存在する．
+\end{lem}
+\begin{proof}
+$X$
+は可分距離化可能空間なので
+その任意の部分集合も
+可分かつ距離化可能である．
+よって
+$X$
+の任意の部分集合はリンデレフである．
+今
+$X$
+の可算な開基
+$\mathcal{C}$を取る．
+任意の
+$U\in \mathcal{C}$
+に対して
+$\mathcal{B}$
+が開基であることと，
+$U$がリンデレフである
+ことから可算集合
+$\mathcal{A}_{U}\subset \mathcal{B}$
+で
+$\bigcup_{V\in  \mathcal{A}_{U}}V=U$
+となるものが存在する．
+そして以下のように
+$\mathcal{A}$
+を定義する．
+\[
+\mathcal{A}=\bigcup_{U\in \mathcal{C}}\mathcal{A}_{U}. 
+\]
+これ
+が求めるものになっている．
+\end{proof}
+
+
+
+\begin{df}
+$X$
+を位相空間とし
+$S\subset X$
+とする．
+このとき
+$S$
+の境界集合を
+$\bd_{X}S$
+で表す．
+$x\in \bd_{X}S$であるとは
+任意の
+$x$
+の
+近傍
+$H$
+について
+$H\cap S\neq \emptyset$
+かつ
+$H\setminus S\neq \emptyset$
+を意味する．
+一般に
+$\bd_{X}S=\cl_{X}S\setminus \nai_{X}S$
+である．ここで
+$\cl_{X}$, 
+$\nai_{X}$
+は
+$X$
+における閉包と
+開核を表す．
+全体空間が明らかな場合には
+ただ単に
+$\bd S$, 
+$\cl S$, 
+$\nai S$
+などと表す．
+\end{df}
+
+\begin{lem}\label{lem:par}
+$X$
+を位相空間とし，
+$A\subset S\subset X$
+とする．
+このとき
+$\bd_{S} A\subset S\cap \bd_{X}A$
+が成り立つ．
+\end{lem}
+\begin{proof}
+一般に位相空間
+$T$
+と
+$M\subset T$
+について
+$P\subset M\subset H$
+となる開集合
+$O$
+と閉集合
+$C$
+について
+$\bd_{T}M\subset H\setminus P$
+であり，
+$\bd_{T}M=\cl_{T}(A)\setminus \nai_{T}(A)$
+に注意しよう．
+
+さて，
+$O=\nai_{X}A$
+で$C=\cl_{X}A$とおく．
+すると
+$O\cap S$
+と
+$C\cap S$
+はそれぞれ
+$S$
+の開集合と閉集合で
+$O\cap S\subset A\subset C\cap S$
+を満たす．
+よって
+$\bd_{S}A\subset (C\cap S)\setminus (O\cap S)$
+を満たす．
+ここで
+$(C\cap S)\setminus (O\cap S)=
+(C\setminus O)\cap S=(\cl_{X}A\setminus \nai_{X}A)\cap S=S\cap \bd_{X}A$
+となる．
+これは
+$\bd_{S}A\subset S\cap \bd_{X}A$
+を意味する．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:partial}
+$X$を位相空間とし，
+$N\subset A\subset X$
+とする．
+すると
+$N$
+が
+$A$の開集合であるとき
+$\bd_{A} N=A\cap (\cl_{X}(N)\setminus N)$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$\bd_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)$
+である．
+ここで$N$は$A$の開集合なので
+$\nai_{A}N=N$である．
+そして
+$\cl_{A}(N)=A\cap \cl_{X}N$
+である
+(この等式は一般に成り立つ)．
+すると
+$\bd_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)
+=(A\cap \cl_{X}N)\setminus N=A\cap (\cl_{X}N\setminus N)$
+が成り立つ．
+\end{proof}
+
+
+\subsection{特定の空間のための記法}\label{subsec:notation}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+このとき
+$\yodisc{n}=\{\, x\in \rr^{n}\mid \lVert x \rVert\le 1\, \}$
+とし
+$\yosphere{n-1}=\{\, x\in \rr^{n}\mid \lVert x \rVert=1\, \}$
+と定義する．
+ここでノルム
+$\lVert *\rVert$
+は通常の内積から誘導されるノルムとする．つまり
+$\yodisc{n}$
+は
+$n$
+次元閉球体で
+$\yosphere{n-1}$はその境界である
+$n-1$
+次元球面である．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$
+とし，
+$i\in \{1, \dots, n\}$
+とする．
+このとき
+$\yocube{n}=[-1, 1]^{n}$
+と定義し
+$\yocubesidep{n}{i}=\{\, x\in \yocube{n}\mid x_{i}=1\, \}$
+で
+$\yocubesidem{n}{i}=\{\, x\in \yocube{n}\mid x_{i}=-1\, \}$
+と定義する．
+さらに
+$\yocubebd{n}$
+を
+$\yocube{n}$
+の境界集合
+とする．
+このとき
+$\yocubebd{n}=\bigcup_{i=1}^{n}\yocubesidep{n}{i}\cup \yocubesidem{n}{i}$
+であることに注意しよう．
+また
+$\yocube{n}$
+は
+$\yodisc{n}$
+に同相であり，
+$\yocubebd{n}$
+は
+$\yosphere{n-1}$
+に同相であることにも注意しよう．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$
+とする．
+このとき
+$k\in \{0, \dots, n\}$
+について
+$\yorrsp{n}{k}$
+で
+$\rr^{n}$
+の部分集合であって
+ちょうど
+$k$個の成分が有理数になっているものを表す．
+また
+$\yommsp{n}{k}$
+で
+$\rr^{n}$
+の点で
+その
+座標のうち有理数であるものの個数が高々
+$k$個であるもの全体を表す．
+そして
+$\yollsp{n}{k}$
+で
+$\rr^{n}$
+の点であって
+その
+座標のうち有理数であるものの個数が少なくとも
+$k$
+個であるもの全体を表す．
+\end{df}
+
+
+\begin{df}
+距離空間
+$(X, d)$
+と
+$x\in X$, 
+$r\in (0, \infty)$
+について
+$\yometoball{x}{r}{d}$
+で
+中心$x$
+で半径
+$r$
+の
+$r$
+による
+開球を表すとする．
+つまり
+$\yometoball{x}{r}{d}=\{\, a\in X\mid d(x, a)<r\, \}$
+である．
+同様に閉球を
+$\yometcball{x}{r}{d}=\{\, a\in X\mid d(x, a)\le r\, \}$
+と定義する．
+\end{df}
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+%\section{Dimensions}
+\section{次元}\label{sec:dimensions}
+本稿の本題である次元論
+を展開するのがこの章の目的である．
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Decomposition dimension}
+\subsection{次元の導入と分解次元}\label{subsec:ddim}
+
+まず最初に
+本稿
+で扱う
+次元を導入する．
+そのうち
+分解次元は
+本稿で
+三つの基本的な次元の一致性の証明を
+円滑にするために導入するものであり，一般的な概念ではない．
+ただし，可分距離化可能空間においては，結局その値は三つの次元と一致する．
+
+
+
+\begin{df}
+位相空間
+$X$
+の
+部分集合
+$S$
+が
+\yoemph{clopen}であるとは，
+$S$
+が開かつ閉集合であるときにいう．
+次に
+位相空間
+$X$
+が
+\yoemph{$0$次元である}
+とは
+$X$
+が空集合ではなく
+$X$
+のclopen集合からなる開基
+が存在するときにいう．
+この
+$0$
+次元というのは，
+この意味で用いる用語であり，
+特定の次元関数を指しているものではない．
+ただし，後にわかることだが，結局は
+本稿で紹介する次元関数のどれでも，
+それが
+$0$
+以下であることと，この
+$0$
+次元空間の概念は一致する．
+\end{df}
+
+
+
+\begin{df}
+$X$
+を可分距離化可能空間とする．
+このとき
+$X$
+の分解次元が
+$-1$，つまり
+$\yoddim X=-1$
+であるとは
+$X=\emptyset$
+と定義する．
+このとき
+$\yoddim X\le 0$
+と表す．
+さらに
+整数
+$\yoddim X$
+を
+以下を満たす最小の整数
+$m$
+で定義する．
+$X$
+の
+$m+1$
+個の部分空間
+$X_{0}, \dots, X_{m}$
+が存在して
+$\yoddim X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{m}X_{i}$
+を満たす．
+この定義のもと，
+$\yoddim X\le n$
+とは
+$X$の$n+1$
+個の部分空間
+$X_{0}, \dots, X_{n}$
+で
+$\yoddim X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{n}X_{i}$
+を満たすものが存在することを意味する．
+また，
+$\yoddim$は位相不変量であることがわかる．
+この次元
+$\yoddim X$
+を
+$X$
+の
+\yoemph{分解次元}
+と呼ぶことにする．
+\end{df}
+
+
+
+
+
+\begin{df}[小さい帰納次元]
+空間
+$X$
+の小さい帰納次元
+$\yoind X$
+を帰納的
+に次のように定義する．
+$\yoind X=-1$であるとは
+$X=\emptyset$
+であるとき，またその時に限りこのように定義する．
+そして
+$\yoind X\le n-1$が定義されたとして，
+$\yoind X\le n$
+というのを
+$X$
+の任意の点
+$x$
+と
+$x$
+の任意の近傍
+$U$
+に対して
+$x$
+の
+近傍
+$N$
+が存在して
+$\yoind (\bd N)\le n-1$
+かつ
+$N\subset U$
+を満たす
+以上のように定義する．
+ちなみに
+$\yoind X=n$
+とは
+$\yoind X\le n$
+が成り立ち
+かつ
+$\yoind X\le n-1$
+の否定が成り立つという意味である．
+\end{df}
+
+
+
+
+
+\begin{df}[大きい帰納次元]
+空間
+$X$
+の大きい帰納次元を帰納的
+$\yolind X$
+を次のように帰納的に定義する．
+$\yolind X=-1$
+とは
+$X=\emptyset$
+と同値であると定義する．
+そして
+$\yolind X \le n-1$まで定義されたとして
+$\yolind X\le n$
+とは
+$X$
+の
+閉集合
+$K$
+と開集合
+$U$
+で
+$K\subset U$
+を満たすものについて
+開集合
+$V$
+が存在して
+$K\subset V$
+と
+$\cl V\subset U$
+そして
+$\yolind\bd V\le n-1$
+を満たす．
+上記のように定義する．
+ちなみに
+$\yolind X=n$
+とは
+$\yolind X\le n$
+が成り立ち
+かつ
+$\yolind X\le n-1$
+の否定が成り立つということ
+を意味する．
+\end{df}
+
+
+
+
+最後に被覆次元を紹介する．
+集合
+$X$の
+集合族
+$\yocovf{U}$
+と
+$x\in X$について
+$\yodeg(\yocovf{U}; x)$
+を
+$x$を含む
+$\yocovf{U}$
+の個数とする．
+そして
+$\yodeg({\yocovf{U}})$
+を
+$\sup \yodeg(\yocovf{U}; x)$
+と定義する．
+
+
+
+
+\begin{df}
+位相空間
+$X$
+と
+$n\in \zz_{\ge 0}$
+について
+$\yodim X\le n$であるとは
+$X$の任意の有限開被覆
+$\yocovf{U}$
+について，
+その細分となる開被覆
+$\yocovf{V}$
+が存在して
+$\yodeg(\yocovf{V})\le n+1$
+となることである．
+また
+$n<\yodim X$
+とは
+$\yodim X\le n$
+の否定が成り立つときにそう書き，
+$\yodim X=n$
+とは
+$\yodim X\le n$
+かつ
+$n-1<\yodim X$
+を意味するとする．
+\end{df}
+
+
+
+ここからはまず，分解次元の基本的性質を紹介する．
+分解次元
+$\yoddim$の定義から直ちに次の二つのことがわかる．
+\begin{lem}\label{lem:ddim:monotone}
+$X$
+を可分距離化可能空間とし，
+$S\subset X$
+とする．
+この時
+$\yoddim S\le \yoddim X$
+が成り立つ．
+\end{lem}
+\begin{proof}
+$X=\bigcup_{i=0}^{n}A_{i}$
+となる
+$0$
+次元空間を取り
+$B_{i}=S\cap A_{i}$
+とすれば良い．
+$0$次元性は
+部分空間に遺伝するのである．
+\end{proof}
+
+\begin{lem}\label{lem:plpl}
+$X$
+を可分距離化可能空間とし，
+$A, B\subset X$
+とする．この時
+$\yoddim A\le n$
+かつ
+$\yoddim B\le 0$
+ならば
+$\yoddim (A\cup B)\le n+1$
+が成り立つ．
+\end{lem}
+\begin{proof}
+定義から直ちに従う．
+\end{proof}
+
+
+
+
+
+\begin{prop}
+$X$
+を可分距離化可能空間とする．
+このとき
+$\yoddim\le 0$
+であることと，
+可算開基であってclopenな集合からなるものが存在することは同値である．
+\end{prop}
+\begin{proof}
+補題
+\ref{lem:toridashi}
+から従う．
+\end{proof}
+
+\begin{lem}\label{lem:sum:0inda0ddim}
+可分距離化可能空間
+$X$
+について
+$\yoddim X\le 0$
+と
+$\yoind X\le 0$
+は同値である．
+\end{lem}
+
+\begin{lem}\label{lem:ultranormal}
+$X$
+を可分距離化可能空間とするこのとき
+$\yoddim X\le 0$
+であることと
+任意の
+$X$
+内の交わらない二つの閉集合
+$G, H$
+に対して
+clopen集合
+$O$
+が存在して
+$G\subset O$
+と
+$H\cap O=\emptyset$
+を満たすことは同値である．
+つまり，
+$\yoddim X\le 0$
+と
+$\yolind X\le 0$
+は同値である．
+\end{lem}
+\begin{proof}
+後半の条件から
+$\yoddim X\le 0$
+が導かれるのは明らかなので逆を示す．
+
+今
+$\yoddim X\le 0$
+なので
+各点に可算近傍系で
+clopenなものからなるものが存在する．
+そのようなものを
+各
+$p\in G$
+について
+$\mathcal{N}_{p}$
+と表すことにする．
+さらに
+$H$
+が閉集合であることから任意の
+$V\in \mathcal{N}_{p}$
+について
+$V\cap H=\emptyset$
+と仮定してもよい
+(必要なら
+$\{S\cap (X\setminus H)\}_{S\in \mathcal{N}_{p}}$
+と置き換えれば良い)．
+そして
+$\yoddim (X\setminus G)\le 0$
+が成り立つので，
+$X\setminus G$
+には
+$X\setminus G$
+の
+clopen
+な集合からなる開基
+$\mathcal{B}$
+が存在する．
+今
+$X\setminus G$
+は
+$X$
+の開集合なので
+$\mathcal{B}$
+の元は
+$X$
+のclopen集合でもある．
+さて以下の集合族を考える．
+\begin{align}
+\mathcal{B}\cup \bigcup_{p\in G}\mathcal{N}_{p}. 
+\end{align}
+これは
+は
+$X$
+の開基になるので，
+補題 
+\ref{lem:toridashi}
+からこの集合族の部分族で
+可算な開基
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+ここで
+$U_{i}\cap G\neq \emptyset$
+ならば
+$U_{i}\cap H=\emptyset$
+に注意しよう．
+そして
+$V_{0}=U_{0}$
+と定義し，
+$i>0$のときは
+$V_{i}=U_{i}\setminus \bigcup_{j=0}^{i-1}U_{j}$
+と定義する．
+すると
+任意の$i, j\in \zz_{\ge 0}$
+について
+$i\neq j$
+ならば
+$V_{i}\cap V_{j}=\emptyset$
+となる．
+また
+各
+$V_{i}$
+は開集合で
+$X=\bigcup_{i\in \zz_{\ge 0}}V_{i}$
+となる．
+そして以下のように
+$O$を定義する．
+\begin{align}
+O=\bigcup_{V_{i}\cap G\neq \emptyset}V_{i}
+\end{align}
+すると，
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が互いに素な族であることから次の等式が成り立つ．
+\[
+X\setminus O=\bigcup_{V_{i}\cap G= \emptyset}V_{i}. 
+\]
+故に
+$O$
+はclopenであり，
+$G\subset O$
+を満たす．
+さらに
+$V_{i}$
+について
+$V_{i}\cap G\neq \emptyset$
+ならば
+$V_{i}\cap H=\emptyset$
+なので
+$H\subset X\setminus O$
+となるから
+$O$
+は求める集合になっている．
+\end{proof}
+
+
+
+
+
+
+\begin{prop}\label{prop:sumn=0}
+$X$
+を空でない可分距離化可能空間とする．
+もしも可算個の閉集合の族
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が
+$\yoddim A_{i}\le 0$
+と
+$X=\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+を満たすならば
+$\yoddim X= 0$である．
+\end{prop}
+\begin{proof}
+$X$
+が
+補題 \ref{lem:ultranormal}
+の条件を満たすことを証明しよう．
+$X$
+の交わらない二つの閉集合
+$G$,
+ $H$を与える．
+ 今から
+帰納的に
+$i\in \zz_{\ge 0}$
+に対して
+$P_{i}$, 
+$Q_{i}$, 
+$R_{i}$, 
+そして
+$L_{i}$
+を構成する．
+まず
+$G\cap A_{0}$
+と
+$H\cap A_{0}$
+は
+$A_{0}$
+のなかの交わらない閉集合であることに注目しよう．
+集合
+$A_{0}$
+は
+$\yoddim A_{0}\le 0$
+を満たすので，
+補題 \ref{lem:ultranormal}
+より
+$A_{0}$
+の中のあるclopen集合
+$P_{0}$
+と
+$Q_{0}$が存在して以下の条件を満たす．
+\begin{align}
+&G\cap A_{0}\subset P_{0};\\
+&H\cap A_{0}\subset Q_{0};\\
+&P_{0}\cap Q_{0}=\emptyset;\\
+&P_{0}\cup Q_{0}=A_{0}. 
+\end{align}
+
+
+さて
+$A_{0}$
+は閉集合だから
+$P_{0}$
+と
+$Q_{0}$
+は
+$X$
+の閉集合でもあるし，
+$G\cup P_{0}$
+と
+$H\cup Q_{0}$
+は
+$X$
+の交わらない閉集合である．
+ここで
+$X$
+の正規性(距離化可能空間は常に正規である)を用いて
+以下を満たす
+$X$
+の
+二つの開集合
+$R_{0}$
+と
+$L_{0}$
+を得る．
+\begin{align}
+&G\cup P_{0}\subset R_{0};\\
+&H\cup Q_{0}\subset L_{0};\\
+&\cl (R_{0})\cap \cl(L_{0})=\emptyset. 
+\end{align}
+
+そして
+一般に
+$P_{i}$, 
+$Q_{i}$
+$R_{i}$, 
+$L_{i}$
+を帰納的に
+以下を満たすように定義する．
+\begin{align}
+&\text{$P_{i}$と$Q_{i}$
+は$A_{i}$のclopen集合};\\
+&\cl(R_{i-1})\cap A_{i}\subset P_{i};\\
+&\cl(L_{i-1})\cap A_{i}\subset Q_{i};\\
+&P_{i}\cap Q_{i}=\emptyset;\\
+&P_{i}\cup Q_{i}=A_{i};\\
+&\text{$R_{i}$, $L_{i}$
+は$X$の開集合};\\
+&\cl(R_{i-1})\cup P_{i}\subset R_{i};\\
+&\cl(L_{i-1})\cup Q_{i}\subset L_{i};\\
+&\cl(R_{i})\cap \cl(L_{i})=\emptyset. 
+\end{align}
+
+
+
+このように構成できることは
+各
+$A_{i}$
+がclopenであることと
+$X$
+の正規性から従う．
+このとき任意の
+$i\in \zz_{\ge 0}$
+について以下が満たされる
+\begin{align}
+&A_{i}\subset R_{i}\cup L_{i};\\
+&\cl(R_{i-1})\subset R_{i};\\
+&\cl(L_{i-1})\subset L_{i}. 
+\end{align}
+そして
+$R=\bigcup_{i}R_{i}$, 
+$L=\bigcup_{i}L_{i}$
+とすると
+$R$
+と
+$L$
+は
+$X$
+の開集合である．
+ここで
+$X=\bigcup_{i}A_{i}\subset R\cup L$
+なので
+$X=R\cup L$
+が得られる．
+矛盾を導き出すために
+$x\in R\cap L$
+が存在すると仮定しよう．
+すると
+$x\in R_{i}$
+と
+$x\in L_{j}$
+となる
+$i$, 
+$j$
+が存在するが
+$k=\max\{i, j\}$
+とおけば
+$x\in R_{k}\cap L_{k}=\emptyset$
+となり矛盾する．
+つまり
+$R\cap L=\emptyset$
+である. 
+集合
+$R$
+と
+$L$は交わらない開集合で定義から
+$G\subset R$
+と
+$H\subset L$
+を満たす．
+そして
+$R\cup L=X$
+なので
+$R$
+と
+$L$
+は閉集合でもある．
+このことは補題 
+\ref{lem:ultranormal}から
+$\yoddim X=0$
+を意味する．
+\end{proof}
+
+
+\begin{df}
+$X$
+を位相空間とする．
+$X$
+の部分集合
+$S$
+が
+$F_{\sigma}$
+であるとは
+$S$
+が
+$X$
+内の可算個の閉集合の和集合として表される時に
+いう．
+\end{df}
+
+\begin{cor}\label{cor:sum:0dimFsigma}
+可分距離空間が
+$0$
+次元であるような可算個の
+$F_{\sigma}$
+集合の和集合で表されるのならば全体空間も
+$0$
+次元である．
+\end{cor}
+
+
+\begin{thm}\label{thm:sum:sumsum}
+$n\in \zz_{\ge 0}$
+とする．
+$X$
+を可分距離空間とする．
+このとき
+$X$
+の可算個の
+$F_{\sigma}$
+集合
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し
+$\yoddim A_{i}\le n$
+と
+$X=\bigcup_{i}A_{i}$
+を満たすならば
+$\yoddim X\le n$
+である．
+\end{thm}
+\begin{proof}
+$n$
+に関する帰納法で証明する．
+$n=0$
+の時は既に
+命題
+\ref{prop:sumn=0}で
+証明されている．
+$n+1$
+より小さい数では定理が成り立つとする．
+このとき
+可算個の閉集合
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し
+$\yoddim A_{i}\le n+1$
+と
+$X=\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+を満たすと仮定してもよい．
+このとき
+$B_{0}=A_{0}$, 
+$B_{i}=A_{i}\setminus \bigcup_{j=0}^{i-1}A_{j}$
+と定義する．
+すると各
+$B_{i}$
+は
+$F_{\sigma}$
+集合であり
+$\yoddim B_{i}\le n+1$
+を満たしさらに
+$B_{i}$
+たちは交わらず
+$X=\bigcup_{i\in \zz_{\ge 0}}B_{i}$
+が成り立つ．
+さて
+$\yoddim\le n+1$
+の定義から
+各
+$i\in \zz_{\ge 0}$
+について
+$B_{i}$
+の部分集合
+$M_{i}$
+と
+$N_{i}$
+で
+$B_{i}=M_{i}\cup N_{i}$
+で
+$\yoddim M_{i}\le n$
+と
+$\yoddim N_{i}=0$
+となるものが存在する．
+次に
+$M=\bigcup_{i}M_{i}$
+で
+$N=\bigcup_{i}N_{i}$
+と定義する．
+各
+$M_{i}$
+は互いに交わらないので
+$M_{i}=M\cap B_{i}$
+となる．
+よって
+$M_{i}$
+は
+$M$
+のなかで
+$F_{\sigma}$
+集合である．
+よって帰納法の仮定より
+$\yoddim M\le n$
+となる．
+同様に
+$\yoddim N=0$である．
+$X$
+は
+$M$
+と
+$N$の和集合なので，
+補題 \ref{lem:plpl}から
+$\yoddim X\le n+1$
+が成り立つ．
+\end{proof}
+さて今から
+$\yoddim\rr^{n}\le n$
+と
+$\yoddim\yosphere{n}\le n$
+を証明する．
+
+\begin{lem}\label{lem:qq00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$\qq^{n}$
+は$0$次元である．
+\end{lem}
+\begin{proof}
+一点集合は閉集合でなおかつ
+$0$
+次元なので
+命題 
+\ref{prop:sumn=0}
+から導かれる．
+\end{proof}
+
+
+\begin{lem}\label{lem:pp00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$(\rr\setminus \qq)^{n}$
+は
+$0$
+次元である．
+\end{lem}
+\begin{proof}
+点
+$x=(x_{1}, \dots, x_{n})\in (\rr\setminus \qq)^{n}$
+をとる．
+任意に
+$\epsilon >0$
+をとり，
+各
+$i\in \{1, \dots, n\}$
+について
+$\eta_{i}, \kappa_{i}>0$
+を以下の条件を満たすようにとる.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem210:1}
+各
+$i$
+について
+$\eta_{i}<\epsilon$
+かつ
+$\kappa_{i}<\epsilon$; 
+\item\label{item:lem210:2}
+$(x_{1}-\eta_{1}, \dots, x_{n}-\eta_{n})\in \qq^{n}$; 
+\item\label{item:lem210:3}
+ $(x_{1}+\kappa_{1}, \dots, x_{n}+\kappa_{n})\in \qq^{n}$. 
+\end{enumerate}
+条件
+\ref{item:lem210:2}, \ref{item:lem210:3}
+を満たす
+$\eta_{i}, \kappa_{i}$
+が存在するのは
+$\qq$
+が
+$\rr$
+の中で
+が稠密だからである．
+$U=\prod_{i=1}^{n}(x_{i}-\eta_{i}, x_{i}+\kappa_{i})$
+かつ
+$C=\prod_{i=1}^{n}[x_{i}-\eta_{i}, x_{i}+\kappa_{i}]$
+とおく．
+これらの集合について
+$U\cap(\rr\setminus \qq)^{n}=C\cap (\rr\setminus \qq)^{n}$
+なので
+$U\cap(\rr\setminus \qq)^{n}$
+は
+$(\rr\setminus \qq)^{n}$
+のclopen集合であり，
+$x$
+の近傍でもある．
+$\epsilon$
+は任意なので各点
+$x$
+について
+$(\rr\setminus \qq)^{n}$
+内の
+clopenな近傍系が存在することがわかった．
+よって
+$\yoddim(\rr\setminus \qq)^{n}=0$
+である．
+\end{proof}
+
+\begin{lem}\label{lem:sum:rrsp}
+$n\in \zz_{\ge 1}$
+とし
+$k\in \{0, \dots, n\}$
+する．
+このとき
+$\yoddim \yorrsp{n}{k} =0$
+である．
+\end{lem}
+\begin{proof}
+$I(n, k)$
+を
+$\{1, \dots, n-1\}$
+の濃度がちょうど
+$k$
+個の
+部分集合全体とする．
+そして
+$\sigma=\{i_{1}, \dots, i_{k}\}\in I(n, k)$
+と
+$v=(v_{1}, \dots, v_{k})\in \qq^{k}$
+について
+$S(\sigma, v)$
+を
+任意の
+$j\in \{1, \dots, k\}$
+について
+第
+$i_{j}$
+座標が
+$v_{j}$
+になるような
+$\rr^{n}$
+の点全体とし，
+$T(\sigma, v)$
+を
+任意の
+$j\in \{1, \dots, k\}$
+について
+第
+$i_{j}$
+座標が
+$v_{j}$
+になり，
+それ以外の座標が無理数に属するような
+$\rr^{n}$
+の点全体の集合とする．
+このとき以下が成り立つ．
+\begin{align}
+\yorrsp{n}{k}=\bigcup_{\sigma\in I(n, k)}\bigcup_{v\in \qq^{k}}
+S(\sigma, v). 
+\end{align}
+さて
+各
+$S(\sigma, v)$
+は
+$\rr^{n}$
+の閉集合であり
+$(\rr\setminus \qq)^{n-k}$
+と同相なので
+$\yoddim (T(\sigma, v))=0$
+がわかる．
+故に
+$I(n, k)$
+と
+$\qq^{k}$
+は高々可算集合なので，
+命題 
+\ref{prop:sumn=0}
+から
+$\yoddim \yorrsp{n}{k}=0$
+が従う．
+\end{proof}
+
+\begin{lem}\label{lem:sum:mmspllsp}
+$n\in \zz_{\ge 1}$
+とし
+$k\in \{0, \dots, n\}$
+とする．
+このとき
+$\yoddim \yommsp{n}{k}\le k$
+と
+$\yoddim \yollsp{n}{k} \le n- k$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず以下が成り立つ．
+\begin{align}
+&\yommsp{n}{k}=\bigcup_{i=0}^{k}\yorrsp{n}{i}=\yorrsp{n}{0}\cup \yorrsp{n}{1} \cup \dots \cup \yorrsp{n}{k};\\
+&\yollsp{n}{k}=\bigcup_{i=k}^{n}\yorrsp{n}{i}
+=\yorrsp{n}{k}\cup \yorrsp{n}{k+1}\cup \dots \cup \yorrsp{n}{n}. 
+\end{align}
+よって
+補題
+\ref{lem:sum:rrsp}
+から
+$\yoddim \yommsp{n}{k}\le k$
+と
+$\yoddim \yollsp{n}{k}\le n- k$
+\end{proof}
+
+\begin{lem}\label{lem:sum:nnn}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$\yoddim\rr^{n}\le n$
+と
+$\yoddim\mathbb{S}^{n}\le n$
+が成り立つ．
+\end{lem}
+\begin{proof}
+明らかに
+$\rr^{n}=\bigcup_{k=0}^{n}\yorrsp{n}{k}$
+なので，
+補題
+\ref{lem:sum:rrsp}
+から
+$\yoddim\rr^{n}\le n$
+を得る
+(補題\ref{lem:sum:mmspllsp}からもわかる)．
+次に
+$\mathbb{S}^{n}$
+について考えよう．
+は
+$\rr^{n}$
+の一点コンパクト化であり，
+$\mathbb{S}^{n}=(E_{0}\cup\{\infty\})\cup \bigcup_{k=1}^{n}E_{k}$
+である．
+そして
+命題 
+\ref{prop:sumn=0}
+から
+$\yoddim(E_{0}\cup\{\infty\})= 0$
+なので，
+$\yoddim\mathbb{S}^{n}\le n$
+が導かれる．
+\end{proof}
+
+\begin{proof}[\textbf{$\yoind$を使った別証明}]
+$m\in \zz_{\ge 1}$とする．
+$\rr^{m+1}$
+と
+$\yosphere{m+1}$
+はともに境界が
+$\yosphere{m}$
+となる開集合からなる開基を持つ．
+よって
+$\yoddim\rr^{m+1}\le \yoddim\yosphere{m}+1$
+と
+$\yoddim\yosphere{m+1}\le \yoddim\yosphere{m}+1$
+が成り立つ．
+$\mathbb{S}^{1}$
+は境界が2点になるような開集合からなる開基を持つから
+$\yoddim\mathbb{S}^{1}\le 1$
+である．
+もしくは
+$\rr$
+が有理数と無理数という二つの
+$0$
+次元集合の和であることと
+$\mathbb{S}^{1}$
+が
+$\rr$の
+一点コンパクト化であることを用いても
+$\yoddim\yosphere{1}\le 1$
+であることがわかる．
+よって帰納的に
+$\yoddim\rr^{n}\le n$と
+$\yoddim\yosphere{n}\le n$
+が成り立つ．
+\end{proof}
+
+
+
+
+\begin{prop}\label{prop:sum:mfddimcoince}
+第二可算な
+$n$
+次元位相多様体
+$M$
+について
+$\yoddim M\le n$
+が成り立つ．
+
+\end{prop}
+\begin{proof}
+局所ユークリッド性と
+第二可算性と
+$\yoddim\rr^{n}\le n$と
+定理
+ \ref{thm:sum:sumsum}
+ から命題が成り立つことが従う．
+もしくは
+境界が
+$\yosphere{n-1}$
+と同相な開集合からなる開基が存在することと
+系
+\ref{cor:sum:inddimaaa}
+からもわかる．
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{帰納的次元と分解次元の一致}\label{subsec:inddim}
+
+
+
+\begin{lem}\label{lem:sum:jojo111}
+$X$
+を可分距離化可能空間とし，
+$A$
+を
+$X$
+の部分集合
+で
+$\yoddim A=0$
+をみたすとする．
+そして
+$K$
+を
+$X$
+の閉集合とし
+$X$
+の開集合
+$U$
+は
+$K\subset U$
+を満たしているとする．
+このとき
+$X$
+内の
+開集合
+$W$
+が存在して
+$K\subset W\subset U$
+と
+$A\cap \bd_{X} W=\emptyset$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$X$
+の正規性から開集合
+$V$
+であって
+$K\subset V$
+と
+$\cl_{X}(V)\subset U$
+となるものをとる．
+そして
+$L=\cl_{X}(V)$とおく．
+ここで
+$\yoddim A=0$
+より
+$L\cap A$
+の
+近傍
+$N\subset A$で
+$L\cap A\subset N\subset U\cap A$
+かつ
+$\bd_{A}N=\emptyset$
+となるものが存在する．
+今から
+$N\cup K$
+と
+$A\setminus \cl_{X}(N\cup L)$
+は互いにもう一方の閉包と交わらないことを証明する．
+最初に
+$N$
+と
+$A\setminus \cl_{X}(N\cup L)$
+について考える．
+明らかに
+\begin{align}
+\cl_{X}(N)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset. 
+\end{align}
+であり，また以下が成り立つ．
+\begin{align*}
+\cl_{X}(K)\cap (A\setminus \cl_{X}(N\cup L))&=
+K\cap (A\setminus \cl_{X}(N\cup L))\\
+&\subset
+K\cap (A\setminus \cl_{X}(N))
+ \\
+&\subset 
+K\cap (A\setminus (L\cap A))\\
+&\subset 
+K\cap(A\setminus (K\cap A))\\
+&=K\cap (A\setminus (K\cap A))\\
+&=(K\cap A)\setminus (K\cap A)\\
+&=\emptyset. 
+\end{align*}
+以上の計算を組み合わせると
+$\cl_{X}(N\cup K)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset$
+を得る．
+さらに$N=N\cap A$などを使って以下の計算をする．
+\begin{align*}
+N\cap 
+\cl_{X}(A\setminus \cl_{X}(N\cup L))
+&\subset N\cap 
+\cl_{X}(A\setminus \cl_{X}(N))\\
+&=
+N \cap A\cap \cl_{X}(A\setminus \cl_{X}(N))
+\\
+&=
+N\cap A\cap \cl_{A}(A\setminus (A\cap \cl_{X}(N)))
+\\
+&=
+N\cap 
+A\cap \cl_{A}(A\setminus \cl_{A}(N))\\
+&=
+N\cap 
+\cl_{A}(A\setminus \cl_{A}(N))
+\\
+&=
+N\cap (
+(A\setminus \cl_{A} N)\cup \bd_{A} N)
+\\
+&=
+N\cap (A\setminus \cl_{A} N)\\
+&=\emptyset. 
+\end{align*}
+また
+$K\subset V$であることと$X\setminus V$が閉集合であることから以下が従う．
+\begin{align*}
+K\cap 
+\cl_{X}(A\setminus \cl_{X}(N\cup L))
+&\subset K\cap \cl_{X}(A\setminus \cl_{X}(L))\\
+&=
+K\cap \cl_{X}(A\setminus L)\\
+&\subset K\cap \cl_{X}(X\setminus L)\\
+&\subset K\cap \cl_{X}(X\setminus V)\\
+&\subset K\cap (X\setminus V)\\
+&\subset V\cap (X\setminus V)\\
+&=\emptyset. 
+\end{align*}
+故に
+$K\cap 
+\cl_{X}(A\setminus \cl_{X}(N\cup L))
+=\emptyset$
+である．
+以上のことから
+$N\cup K$
+と
+$A\setminus \cl_{X}(N\cup L)$
+は互いにもう一方の閉包と交わらない．
+よって
+$X$
+が
+$T_{5}$
+であることから
+$X$
+の開集合
+$W$
+が存在して
+$N\cup K\subset W$
+と
+$\cl_{X}(W)\cap (A\setminus \cl_{X}(N\cup L))=\emptyset$
+を満たす．
+後半の条件から以下が導かれる．
+\begin{align}
+A\cap \cl_{X}W\subset A\cap \cl_{X}(N\cup L). 
+\end{align}
+ここで
+$\cl_{X}(N\cap L)=\cl_{X}N\cup \cl_{X}L=(\cl_{X}N)\cup L$
+であり，
+$L\cap A\subset N$なので以下の包含関係が得られる．
+\begin{align}
+A\cap \cl_{X}W\subset A\cap \cl_{X}N.
+\end{align}
+必要なら
+$W$
+を
+$V\cap W$に置き換えて
+$W\subset V$
+としてもよい．
+さて以上と
+補題 
+\ref{lem:partial}
+を踏まえると以下を得る．
+\begin{align*}
+A\cap 
+\bd_{X} W
+&=
+A\cap (\cl_{X}(W)\cap (X\setminus W))
+\subset 
+A\cap \cl_{X}(N)\cap (X\setminus N)
+\\
+&=A\cap (\cl_{X}(N)\setminus N)
+=\bd_{A}N=\emptyset. 
+\end{align*}
+ゆえに
+$A\cap \bd_{X} W=\emptyset$
+が導かれる．
+\end{proof}
+
+
+
+\begin{thm}\label{thm:boundary}
+$X$
+を可分距離化可能空間とする．
+この時
+$\yoddim X\le n$
+であることと
+$X$
+の開基
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\yoddim\bd_{X} V_{i}\le n-1$
+であることは同値である．
+\end{thm}
+\begin{proof}
+最初に
+$\yoddim X\le n$
+と仮定する．
+すると
+$X$
+の部分集合
+$A_{0}, \dots, A_{n}$
+が存在して
+$\yoddim A_{i}\le 0$
+と
+$\bigcup_{i=0}^{n}A_{i}=X$
+を満たす．
+補題
+ \ref{lem:sum:jojo111}
+ より，
+各
+$i$
+と各
+$p\in A$
+について
+$p$
+の
+$X$
+内の開近傍系
+$\mathcal{N}_{p, i}$
+が存在して，
+任意の
+$V\in \mathcal{N}_{p, i}$
+について
+$A_{j}\cap \bd_{X} V=\emptyset$
+を満たす．
+このとき
+$\bd_{X}V$
+は
+$A_{k}\cap \bd V$ 
+$(k\neq i)$
+の和集合なので
+$\yoddim\bd_{X}V\le n-1$
+である．
+そして
+以下の集合族を考える．
+\begin{align}
+\bigcup_{i=0}^{n}\bigcup_{p\in A_{i}}\mathcal{N}_{p, i}. 
+\end{align}
+これは
+$X$
+の開基になるので
+補題
+\ref{lem:toridashi}
+より可算な開基
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し
+$\yoddim\bd_{X} V_{i}\le n-1$
+を満たす．
+
+逆を示そう．
+今
+$X$
+の開基
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\yoddim\bd_{X} V_{i}\le n-1$
+を満たすとする．
+このとき
+定理 
+\ref{thm:sum:sumsum}
+より
+$S=\bigcup_{i\in \zz_{\ge 0}}\bd_{X}V_{i}$
+は
+$\yoddim S \le n-1$
+を満たす．
+さらに
+$A=X\setminus S$
+とおくと，
+$\{A\cap V_{i}\}_{i\in \zz_{\ge 0}}$
+は
+$A$
+の開基になる．
+そして
+補題 
+\ref{lem:par}
+より
+$\bd_{A}V_{i}\subset A\cap \bd_{X}V_{i}=\emptyset$
+なので
+$\yoddim A\le 0$
+を得る．
+そして
+$X=S\cup A$
+なので補題 \ref{lem:plpl}
+より
+$\yoddim X\le n$
+が従う．
+\end{proof}
+
+
+定理
+\ref{thm:boundary}
+から次のことが従う．
+\begin{cor}\label{cor:sum:inddimaaa}
+可分距離化可能空間
+$X$
+について
+$\yoind X=\yoddim X$
+が成り立つ．
+\end{cor}
+
+
+\begin{thm}\label{thm:boundary2222}
+$n\in \zz_{\ge 0}$
+とし
+$X$
+を可分距離化可能空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+
+
+\item\label{item:26len}
+$\yoddim X\le n$
+である．
+
+
+\item\label{item:26largeind}
+$X$
+の任意の閉集合
+$K$
+と任意の開集合
+$U$
+が
+$K\subset U$
+を満たしているならば
+開集合
+$V$
+が存在して
+$K\subset V\subset \cl_{X}V\subset U$
+かつ
+$\yoddim\bd_{X}V\le n-1$
+
+
+\item\label{item:26smallind}
+$X$
+の開基
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\yoddim\bd_{X} V_{i}\le n-1$
+である．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$[\ref{item:26len}\To \ref{item:26largeind}]$の証明: 
+条件\ref{item:26len}，
+つまり
+$\yoddim X\le n$
+という仮定から
+$X$
+の部分集合
+$A_{0}, \dots, A_{n}$
+が存在して
+$\yoddim A_{i}\le 0$
+と
+$\bigcup_{i=0}^{n}A_{i}=X$
+を満たす．
+ここで
+$X$
+の
+$X$
+の任意の閉集合
+$K$
+と任意の開集合
+$U$
+が
+$K\subset U$
+を満たしているとしよう．
+すると
+補題 
+\ref{lem:sum:jojo111}
+より，
+$X$
+の開集合
+$V$
+が存在して
+$K\subset V$
+と
+$\cl_{X}V\subset U$
+と
+$A_{0}\cap \bd_{X}V=\emptyset$
+を満たす．
+すると
+$\yoddim$
+の定義より
+$\yoddim\bd_{X}V\le n-1$
+となる．
+これで
+ \ref{item:26largeind}が示された．
+
+$[\ref{item:26largeind}\To \ref{item:26smallind}]$の証明: 
+$X$
+の可算開基
+$\mathcal{B}=\{B_{i}\}_{i\in \zz_{\ge 0}}$
+をとる．
+そして
+$\mathcal{C}$
+を以下で定義する．
+\begin{align}
+\mathcal{C}=\{\, (B_{i}, B_{k})\mid B_{i}, B_{k}\in\mathcal{B},   \cl(B_{i})\subset B_{k}\, \}. 
+\end{align}
+このとき
+$\mathcal{C}$
+はたかだか可算集合であることに注意しよう．
+そして
+$(B_{i}, B_{k})\in \mathcal{C}$
+となる
+$B_{i}$
+と
+$B_{k}$
+について
+$\cl_{X}(B_{i})$
+と
+$B_{k}$に
+条件\ref{item:26largeind}
+を適応して
+開集合
+$V_{i, k}$
+で
+$\cl_{X}(B_{i})\subset V_{i, k}$
+と
+$\cl(V_{i, k})\subset B_{k}$
+そして
+$\yoddim\bd_{X}V_{i, k}\le n-1$
+となるものが存在する．
+このとき
+$\{V_{i, k}\}$
+は
+$X$
+の開基になるので
+\ref{item:26smallind}が示された．
+
+$[\ref{item:26smallind}\To \ref{item:26len}]$の証明: 
+今
+$X$
+の開基
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\yoddim\bd_{X} V_{i}\le n-1$
+を満たすとする．
+このとき
+定理 
+\ref{thm:sum:sumsum}
+より
+$S=\bigcup_{i\in \zz_{\ge 0}}\bd_{X}V_{i}$
+は
+$\yoddim S\le n-1$
+を満たす．
+さらに
+$A=X\setminus S$
+とおくと，
+$\{A\cap V_{i}\}_{i\in \zz_{\ge 0}}$
+は
+$A$
+の開基になる．
+そして
+補題 
+\ref{lem:par}より
+$\bd_{A}V_{i}\subset A\cap \bd_{X}V_{i}=\emptyset$
+なので
+$\yoddim A\le 0$
+が得られる．
+そして
+$X=S\cup A$
+なので補題 \ref{lem:plpl}
+より
+$\yoddim X\le n$
+が従う．
+\end{proof}
+
+
+
+
+
+定理\ref{thm:boundary2222}から次のことが従う．
+\begin{cor}\label{cor:sum:lindinddim}
+可分距離化可能空間
+$X$
+について
+$\yoind X=\yolind X=\yoddim X$
+が成り立つ．
+\end{cor}
+
+
+
+
+
+
+
+
+
+
+
+
+
+帰納的次元の話の
+最後に帰納的次元と被覆次元の間の不等式を示そう．
+部分空間の開集合をもとの空間の開集合に持ち上げるための次の補題から始まる．
+
+\begin{lem}[\cite{zbMATH03057246}]\label{lem:lift:kuratowski}
+距離空間
+$(X, d)$
+の部分空間
+$A$
+の開集合
+$U$
+について
+$\yoliftset{U}$
+を以下のように定義する．
+\[
+\yoliftset{U}
+=
+\{\, x\in X \mid d(x,U)<d(x,A\setminus U)\, \}. 
+\]
+すると
+$\yoliftset{U}$
+は
+$X$
+の開集合であり，
+$\yoliftset{U}\cap A=U$
+を満たす．
+ここで
+$d$
+とは
+$X$
+の距離の一つである．
+さらに
+$A$
+の二つの開集合
+$U$, 
+$V$
+について
+$U\cap V=\emptyset$
+ならば
+$\yoliftset{U}\cap \yoliftset{V}=\emptyset$
+である．
+\end{lem}
+\begin{proof}
+まず
+$\yoliftset{U}$
+が開集合であることはすぐにわかる．
+次に
+$\yoliftset{U}\cap A=U$
+を示そう．
+点
+$x\in \yoliftset{U}\cap A$
+を任意にとる．
+このとき
+$0<d(x, A\setminus U)$
+が成り立つので
+$x\not \in A\setminus U$
+である．
+これと
+$x\in A$
+を組み合わせると
+$x\in U$
+が従う．
+逆に
+$x\in U$
+としよう．
+このとき
+$d(x, U)=0$
+であり，
+$U$が開集合であることから
+$d(x, A\setminus U)>0$
+である．
+故に
+$d(x, U)<d(x, A\setminus U)$
+が成り立つ．
+よって
+$x\in \yoliftset{U}\cap A$
+である．
+次に
+$A$
+の交わらない二つの
+開集合
+$U$
+と
+$V$
+を考える．
+このとき
+$V\subset A\setminus U$
+と
+$U\subset A\setminus V$
+が成り立つから
+任意の
+$x\in X$
+について
+$d(x, A\setminus U)\le d(x, V)$
+と
+$d(x, A\setminus V)\le d(x, U)$
+が成り立つ．
+故に
+$\yoliftset{U}\cap \yoliftset{V}=\emptyset$
+が成り立つ．
+\end{proof}
+
+\begin{thm}\label{thm:main:covcov}
+$X$
+は可分距離化可能空間で
+$\yoddim X\le n$
+を満たすとする．
+そして
+$\yocovf{U}$
+を空間
+$X$
+の開被覆とする．
+このとき
+$\mathcal{U}$
+の細分である
+$X$
+の局所有限な開被覆
+$\yocovf{V}$
+と開集合からなる（被覆とは限らない）
+$n+1$
+個の族
+$\yocovf{W}_{0},
+\yocovf{W}_{1},\dots,
+\yocovf{W}_{n}$
+が存在して
+各
+$i\in \{0, \dots, n\}$
+について
+$\yocovf{W}_{i}$
+は互いに素な族であり,
+以下が成り立つ
+\[
+\yocovf{V}=\yocovf{W}_{0}\cup
+\yocovf{W}_{1}\cup\cdots\cup\yocovf{W}_{n}. 
+\]
+\end{thm}
+\begin{proof}
+$X$
+は距離化可能空間であるから
+$X$
+と同じ位相を生成する距離を一つ固定して
+$d$
+とする．
+さらに
+$X$
+はパラコンパクト(一般に距離空間はパラコンパクトである．可分距離空間のパラコンパクト性は一般的なそれよりも容易に証明できる)であるので
+$\yocovf{U}$
+の細分である局所有限な開被覆である
+$\yocovf{C}$
+が存在する．
+ところで
+$X$
+は可分距離空間なので特に
+リンデレフ
+である．
+よって
+$\yocovf{C}$
+は可算であるとしても一般性を失わない．
+$\yocovf{C}=\{U_{k}\}_{k\in \zz_{\ge 0}}$
+とおこう．
+さて
+$\yoddim X\le n$
+から
+$n+1$
+個の高々
+$0$
+次元部分空間
+$\{A_{i}\}_{i=0}^{n}$
+が存在して
+$X=\bigcup_{i=0}^{n}A_{i}$を満たす．
+ここで各
+$i$
+について
+$A_{i}$
+上で
+$A_{i}$の被覆
+$\{A_{i}\cap U_{k}\}_{k\in \zz_{\ge 0}}$
+を考えよう．
+各
+$A_{i}$
+は
+$0$
+次元なので開かつ閉な開基を持つ．
+また可分でもあるので
+$\{A_i\cap U_{k}\}_{k\in \zz_{\ge 0}}$
+の細分で高々可算な開かつ閉な集合からなる
+$A_{i}$
+の被覆
+$\left\{O_{l}^{(i)}\right\}_{l\in \zz_{\ge 0}}$が存在する．
+これを用いて帰納的に以下のように定義する．
+\begin{align}
+G_{0}^{(i)}=O_{0}^{(i)},\ G_j^{(i)}=O_j^{(i)}\setminus \bigcup_{l<j}O_l^{(i)}\ (j\ge 2). 
+\end{align}
+すると
+$\left\{G_{j}^{(i)}\right\}_{j\in \zz_{\ge 0}}$
+は
+$A_{i}$の開集合からなる
+($A_i$の閉集合でもあるが，そのことは使わない)．
+そして
+$\left\{G_{j}^{(i)}\right\}_{j\in \zz_{\ge 0}}$
+は
+$A_i$
+の被覆で
+$\{A_i\cap U_{k}\}_{k\in \zz_{\ge 0}}$
+の細分になる．
+また定義から明らかに
+$a\neq b$
+ならば
+$G_{a}^{(i)}\cap G_b^{(i)}=\emptyset$
+であるので
+$\left\{G_{j}^{(i)}\right\}_{j\in \zz_{\ge 0}}$
+の元は互いに素である．
+そして
+$\left\{I_{a}^{(i)}\right\}_{a\in \zz_{\ge 0}}$
+を帰納的に定義する．
+まず
+$a=0$
+のとき以下のように定義する．
+\begin{align}
+I_{0}^{(i)}=\{\, j\in \zz_{\ge 0}\mid  G_{j}\subset U_{1}\, \}. 
+\end{align}
+そして
+$I_{0}^{(i)}, \dots, I_{m-1}^{(i)}$
+が定義されているとして
+$I_{m}^{(i)}$
+を
+帰納的に定義する:
+\begin{align}
+I_{m}^{(i)}=\{\, j\in\zz_{\ge 0}\mid  G_{j}\subset U_{m}\, \}\setminus \bigcup_{a=1}^{m-1}I_{a}^{(i)}. 
+\end{align}
+そしてこれを用いて
+$a\in \zz_{\ge 0}$
+について以下のように集合を定義する．
+\begin{align}
+P_{a}^{(i)}=\bigcup_{s\in I_a}G_s^{(i)}. 
+\end{align}
+するとこれは
+$A_{i}$
+の開集合であり，
+$\left\{P_{a}^{(i)}\right\}_{a\in \zz_{\ge 0}}$
+は
+$A_{i}$
+の被覆となり，
+定義から明らかに
+$\left\{P_{a}^{(i)}\right\}_{a\in \zz_{\ge 0}}$は互いに素な族である．
+さらにこれを用いて
+$Q_{m}^{(i)}=\yoliftset{P_{m}^{(i)}}\cap U_{m}$
+と定義しよう
+（補題\ref{lem:lift:kuratowski}参照）．
+このとき
+補題
+\ref{lem:lift:kuratowski}
+から
+$\{Q_{m}^{(i)}\}_{m\in \zz_{\ge 0}}$
+は互いに素な族となり，
+$A_{i}$を被覆する
+（ただし
+$Q_{m}^{(i)}$は空である場合もある）．
+また，
+$Q_m^{(i)}\subset U_{m}$
+から
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+の細分になっている．
+さて，
+任意の点
+$x\in X$
+について
+$\yocovf{C}$
+の局所有限性を担保する
+$x$
+の近傍を
+$N$
+とすると，一般に
+以下が成り立つ．
+\begin{align}
+N\cap Q_m^{(i)}\neq\emptyset
+\To N\cap U_m\neq\emptyset. 
+\end{align}
+このことから
+$\left\{Q_{m}^{(i)}\right\}_{m\in \zz_{\ge 0}}$
+は局所有限な族であることが分かる．
+ただし$X$の被覆であるとは限らない．
+各
+$i\in \{0,1,\dots, n\}$
+について
+$\yocovf{W}_{i}=\left\{Q_m^{(i)}\right\}_{m\in \zz_{\ge 0}}$
+と定義する．
+このとき
+$\yocovf{W}_{i}$
+は互いに素な族で，局所有限であり，
+かつ
+$\yocovf{C}=\{U_{k}\}_{k\in \zz_{\ge 0}}$
+の細分となっている．
+そして
+$\yocovf{V}=\yocovf{W}_{0}\cup\yocovf{W}_{1}\cup\cdots\cup\yocovf{W}_{n}$
+と置けば各
+$\yocovf{W}_{i}$
+が局所有限で
+$\yocovf{C}=\{U_{k}\}_{k\in \zz_{\ge 0}}$
+の細分であることから
+$\yocovf{V}$は局所有限であり，
+$\yocovf{C}=\{U_k\}_{k\in \zz_{\ge 0}}$
+の細分となる．
+また
+$A_{i}\subset \bigcup\yocovf{W}_{i}$
+で
+$X=\bigcup_{i=0}^{n}A_{i}$
+なので
+$\yocovf{V}$
+は
+$X$
+の被覆となる．
+$\yocovf{C}=\{U_{k}\}_{k\in \zz_{\ge 0}}$
+が
+$\yocovf{U}$
+の細分であることから
+$\yocovf{V}$
+は
+$\yocovf{U}$
+の細分である．
+以上で証明は終わった．
+\end{proof}
+
+
+\begin{thm}\label{thm:inq:covind}
+$X$
+を可分距離化可能空間とする．
+この時
+$\yodim X\le \yoind X$
+が成り立つ．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:main:covcov}
+から従う．
+\end{proof}
+後々本稿では
+この不等式が等式であることを証明する．
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{正規空間における被覆次元}\label{subsec:covdim}
+
+この節では
+まず一般的に
+正規空間の上で
+被覆次元の議論を行い
+最終的に可分距離化可能空間上の議論
+を行う．
+\begin{lem}\label{lem:hihukudim}
+$X$
+を正規空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem:dimn} 
+$\yodim X\le n$
+\item\label{item:lem:degn+2} 
+
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ
+$\yodeg(\yocovf{V})\le n+1$
+が成り立つ．
+\item\label{item:lem:n+20} 
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ$\{1, \dots, m\}$
+の濃度が$n+2$の部分集合$J$
+について
+$\bigcap_{j\in J}V_{j}=\emptyset$
+が成り立つ．
+\item\label{item:lem:n+2n+2} 
+$X$の
+濃度が
+$n+2$
+の
+任意の開被覆
+$\{U_{1}, \dots, U_{n+2}\}$
+について
+開被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{n+2}\}$
+が存在して
+$V_{i}\subset U_{i}$
+かつ
+$\bigcap_{j=1}^{n+2}V_{j}=\emptyset$
+が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+同値性
+$[\ref{item:lem:degn+2} \iff \ref{item:lem:n+20}]$
+は自明である．
+また
+$[\ref{item:lem:degn+2}\To \ref{item:lem:dimn}]$
+と
+$[ \ref{item:lem:n+20}\To \ref{item:lem:n+2n+2}]$
+も自明である．
+
+
+$[\ref{item:lem:dimn}\To \ref{item:lem:degn+2}]$
+の証明：
+開被覆
+$\{U_{1}, \dots, U_{m}\}$
+に対してその細分となる開被覆
+$\yocovf{G}=\{G_{1}, \dots, G_{k}\}$
+で
+$\yodeg(\yocovf{G})\le n+1$
+となるものが存在する．
+ここで
+$l\colon \{1, \dots, k\}\to \{1, \dots, m\}$
+を
+$l(a)$
+を
+$G_{a}\subset U_{b}$
+となる最小の
+$b$
+として定義する．
+そして各
+$i\in \{1, \dots,  m\}$
+について
+$V_{i}=\bigcup_{l(a)=i}G_{a}$
+と定義し
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+とすれば
+$\yocovf{V}$
+は
+$X$の開被覆であり，
+$\yodeg(\yocovf{G})\le n+1$
+から
+$\yodeg(\yocovf{V})\le n+1$
+を満たす．
+
+$[\ref{item:lem:n+2n+2}\To \ref{item:lem:n+20}]$
+の証明：
+$X$の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+を任意に与える．
+もしも
+$m<n+2$のときは適当に空集合を付加して
+やって
+$n+2\le m$
+と仮定しても良い．
+そして
+$\yocovf{A}$
+を集合
+$\{1, \dots, m\}$
+の
+$n+2$
+個の部分集合の直和分割全体の集合とする．
+つまり
+$\yocovf{A}$
+の元は
+$\{I_{1}, \dots,  I_{n+2}\}$
+であって各
+$I_{k}$
+は
+$\{1, \dots, n+2\}$
+の空でない部分集合で
+$a\neq b$
+の時
+$I_{a}\cap I_{b}=\emptyset$
+で
+$\bigcup_{k}I_{k}=\{1, \dots, n+2\}$
+である．
+$\yocovf{A}$
+は有限集合なので
+番号をつけて
+$\{A_{1}, \dots, A_{r}\}$
+とする．
+以下の操作を帰納的に繰り返して
+$X$
+の開被覆
+$\{G_{l, 1}, \dots, G_{l, m}\}$
+$(l=0, 1, \dots, r+1)$
+を構成する．
+まず
+$G_{0, i}$
+を以下のように定義する．
+\begin{align}
+G_{0, i}=U_{i}. 
+\end{align}
+そして
+$\{G_{l, 1}, \dots, G_{l, m}\}$
+が構成されたとき
+$G_{l+1, i}$
+次のように構成する．
+$A_{l}=\{I_{1}, \dots, I_{n+2}\}$
+と定義する．
+そして
+$k=1, \dots, n+2$について
+$O_{k}=\bigcup_{j\in I_{k}}G_{l, j}$
+とする．
+すると
+$\{O_{1}, \dots, O_{n+2}\}$
+は
+$X$
+の開被覆になるので
+\ref{item:lem:n+2n+2}を用いて
+その細分となる開被覆
+$\{P_{1}, \dots, P_{n+2}\}$
+で
+$\bigcap_{i=1}^{n+2}P_{i}=\emptyset$
+となるものが存在する．
+ここで
+$i\in \{1, \dots, m\}$
+について
+以下のように定義する．
+\begin{align}
+G_{l+1, i}=P_{k(i)}\cap G_{l, i}. 
+\end{align}
+ここで
+$k(i)$
+は
+$i\in I_{k(i)}$
+となる
+$k(i)\in \{1, \dots, n+2\}$
+である．
+今
+$G_{l+1, i}\subset G_{l, i}$
+に注意しよう．
+ここで
+$V_{i}=G_{r+1, i}$
+で
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+と定義する．
+今から
+$\yodeg(\yocovf{V})\le n+1$
+を示そう．
+$\{1, \dots, m\}$
+の濃度が
+$n+2$
+の任意の部分集合
+$K$
+について
+$K=\{a_{1}, \dots, a_{n+2}\}$
+として
+$I_{1}=a_{1}, \dots, I_{n+1}=\{a_{n+1}\}$
+として
+$I_{n+2}$
+は余った
+$\{1, \dots, m\}$
+の元全部とする．
+そして
+$A_{l}=\{I_{1}, \dots, I_{n+2}\}$
+とする．
+上で構成したのと同じ記号を用いる．
+任意の
+$a_{i}\in K$について以下が成り立つ．
+\begin{align}
+V_{a_{i}}=G_{r+1, a_{i}}\subset G_{l+1, a_{i}}\subset G_{l, a_{i}}\cap P_{i}. 
+\end{align}
+よって
+$\bigcap_{i=1}^{n+2}P_{i}=\emptyset$
+なので
+$\bigcap_{a\in K}V_{a}=\emptyset$
+である．
+よって
+\ref{item:lem:n+20}が成り立つ．
+
+以上で証明が終わる．
+\end{proof}
+
+\begin{lem}\label{lem:hihukudim2}
+$X$
+を正規空間とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:lem2:dimn} 
+$\yodim X\le n$
+\item\label{item:lem2:degn+2shrink} 
+
+$X$の任意の有限開被覆
+$\{U_{1}, \dots, U_{m}\}$
+について
+開被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\cl V_{i}\subset U_{i}$
+かつ
+$\yodeg(\yocovf{V})\le n+1$
+が成り立つ．
+
+
+\item\label{item:lem2:n+2n+2} 
+$X$の
+濃度が$n+2$の
+任意の開被覆
+$\{U_{1}, \dots, U_{n+2}\}$
+について
+閉被覆
+$\yocovf{V}=\{F_{1}, \dots, F_{n+2}\}$
+が存在して
+$F_{i}\subset U_{i}$
+かつ
+$\bigcap_{j=1}^{n+2}F_{j}=\emptyset$
+が成り立つ．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+
+$[\ref{item:lem2:dimn}\iff \ref{item:lem2:degn+2shrink}]$
+は補題
+\ref{lem:intro:shrink}から従う．
+また
+$[\ref{item:lem2:degn+2shrink}\To\ref{item:lem2:n+2n+2}]$
+は自明である．
+
+$[\ref{item:lem2:n+2n+2}\To \ref{item:lem2:dimn}]$
+は補題
+\ref{lem:souji}
+から従う．
+\end{proof}
+
+
+被覆の境界のdegreeによって
+被覆次元を特徴付けることができる．
+
+\begin{prop}\label{prop:hihukudim3}
+$X$
+を正規空間とする．
+このとき以下は同値である
+(以下の条件において，被覆とは仮定していないことに注意せよ)．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:prop:dimn} 
+$\yodim X\le n$
+
+
+\item\label{item:prop:bdm} 
+
+$X$の任意の有限開集合族
+$\{U_{1}, \dots, U_{m}\}$
+と閉集合族
+$\{F_{1}, \dots, F_{m}\}$
+について
+開集合族
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$F_{i}\subset V_{i}$と
+$\cl V_{i}\subset U_{i}$
+を満たし
+かつ
+$\yodeg(\{\bd V_{1}, \dots, \bd V_{m}\})\le n$
+が成り立つ．
+
+
+\item\label{item:prop:fatbdm} 
+$X$の任意の有限開集合族
+$\{U_{1}, \dots, U_{m}\}$
+と閉集合族
+$\{F_{1}, \dots, F_{m}\}$
+について
+開集合族
+$\yocovf{V}=\{W_{1}, \dots, W_{m}\}$
+と
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$F_{i}\subset V_{i} \subset \cl V_{i}\subset W_{i}$と
+$\cl W_{i}\subset U_{i}$
+を満たし
+$\yodeg(\{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus  V_{m}\})\le n$
+が成り立つ．
+
+\item\label{item:prop:bdn+1} 
+$X$の
+濃度が
+$n+1$
+の
+任意の開集合族
+$\{U_{1}, \dots, U_{n+1}\}$
+と
+閉集合族
+$\{F_{1}, \dots, F_{n+1}\}$で
+$F_{i}\subset U_{i}$
+となるもの
+について
+開集合族
+$\yocovf{V}=\{V_{1}, \dots, V_{n+1}\}$
+が存在して
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たし
+かつ
+$\bigcap_{j=1}^{n+1}\bd V_{j}=\emptyset$
+が成り立つ．
+
+
+
+
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+$[\ref{item:prop:dimn}\To \ref{item:prop:bdm}]$の証明：
+$\yocovf{H}$
+を
+$\{U_{1}, \dots, U_{m}\}\cup \{X\setminus F_{1}, \dots, X\setminus F_{m}\}$
+の濃度が
+$m$
+の部分集合族の共通部分で表される集合全体
+とする．
+このとき仮定から
+$\yocovf{H}$
+は
+$X$
+の開被覆となる．
+よって
+\ref{item:prop:dimn}
+から
+degreeが$\le n+1$
+であるような
+開被覆
+$\{W_{1}, \dots,  W_{q}\}$
+で
+$\yocovf{H}$
+の細分になるものが存在する．
+さらに
+閉被覆
+$\{K_{1}, \dots, K_{q}\}$
+で
+$K_{r}\subset W_{r}$
+となるものをとる．
+ここで
+$r\in \{1, \dots, q\}$
+に対して
+$N_{r}$
+を
+$F_{i}\cap W_{r}\neq \emptyset$
+となるような
+$i=1, \dots, m$
+の集合全体とする．
+そして
+補題
+\ref{lem:intro:shrink}
+から
+各
+$i\in N_{r}$
+について
+$V_{i, r}$
+を
+$K_{r}\subset V_{i, r}\subset \cl V_{i, r}\subset W_{r}$
+となるようにとる．
+ここで，$i, j\in N_{r}$
+が
+$i<j$
+を満たすならば
+$\cl V_{i, r}\subset V_{j, r}$
+となるようにとる．
+さて，
+$i\in \{1, \dots, m\}$
+について以下のように定義する．
+\begin{align}
+V_{i}=\bigcup\{V_{i, r}\mid i\in N_{r}\}. 
+\end{align}
+このとき
+$F_{i}\subset V_{i}$
+が成り立つ．
+というのも，
+$x\in F_{i}$
+かつ
+$x\in K_{r}$
+となる
+$i, r$
+が存在するので
+$x\in V_{i, r}\subset V_{i}$
+となるからである．
+また
+$N_{r}$の定義と
+$\yocovf{H}$
+の定義から
+$i\in N_{r}$
+なら
+$W_{r}\subset U_{i}$
+であり，
+$V_{i}$
+を定義する式は有限和であるから
+$\cl V_{i}\subset U_{i}$
+となることがわかる．
+最後に背理法のために
+濃度が
+$n+1$
+の
+$\{1, \dots, m\}$
+の部分集合
+$I$
+が存在し
+$\bigcap_{i\in I}\bd V_{i}\neq \emptyset$
+となるとしよう．
+点
+$x\in \bigcap_{i\in I}\bd V_{i}$
+をとる．
+さて
+$x\in \bd V_{i}$
+であるから
+$x\in \bigcup_{i\in N_{r}}\bd V_{i, r}$
+である．
+ここで各
+$i$
+について
+$r(i)$
+を
+$x\in \bd V_{i, r(i)}$
+満たすものとして定義しよう．
+このとき
+$i\ne j$
+ならば
+$r(i)\neq r(j)$である．
+というのも，
+$i<j$と仮定して
+もしも
+$r(i)=r(j)$
+ならば，
+$\cl V_{i, r(i)}\subset V_{j, r(i)}$
+より
+$x\not \in \bd V_{i}$
+となり矛盾するからである．
+
+さて
+$x\in \bd V_{i, r(i)}$
+なので
+特に
+$x\not \in V_{i, r(i)}$
+である．
+ここで
+$x\in K_{r(n+2)}$
+となる番号
+$r(n+2)$
+をとる．
+$\{K_{r}\}_{r=1}^{q}$
+は被覆なのでこれは可能である．
+今
+$x\not \in V_{i, r(i)}$
+なので
+$r(n+2)$
+は
+$r(i)$
+たちとは異なる．
+よって
+$\bd V_{i}\subset W_{r(i)}$
+より
+$x\in \bigcap_{i=1}^{n+2}W_{r(i)}$
+となるが，
+これは
+$\yodeg(\{W_{1}, \dots, W_{m}\})\le n+1$
+に矛盾する．
+よって
+$\yodeg(\{\bd V_{1}, \dots,  \bd V_{m}\})\le n$
+である．
+
+
+$[\ref{item:prop:bdm}\To \ref{item:prop:fatbdm}]$の証明：
+\ref{item:prop:bdm}から
+開集合族
+$\{V_{1}, \dots, V_{m}\}$
+で
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たしかつ
+$\yodeg(\{\bd V_{1}, \dots, \bd V_{m}\})\le n$
+となるものが存在する．
+このとき
+$\bd V_{i}\subset U_{i}$
+であるから
+補題
+\ref{lem:souji}
+から
+開集合族
+$\{P_{1}, \dots, P_{m}\}$
+で
+$\{\cl P_{1}, \dots, \cl P_{m}\}$
+と
+$\{\bd V_{1}, \dots, \bd V_{m}\}$
+が相似なもので
+$\bd V_{i}\subset P_{i}\subset U_{i}$
+となるものが存在する．
+ここで
+$W_{i}=V_{i}\cup P_{i}$
+と定義すると，
+$\cl V_{i}\subset W_{i}$
+であり
+$\bd V_{i} \subset \cl W_{i}\setminus V_{i}$
+かつ
+$\cl W_{i}\setminus V_{i}\subset \cl P_{i}$
+なので
+$\{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus V_{m}\}$
+は
+$\{\bd V_{1}, \dots, \bd V_{m}\}$
+と相似である．
+よって
+$\yodeg (\{\cl W_{1}\setminus V_{1}, \dots, \cl W_{m}\setminus V_{m}\})\le n$
+である．
+
+
+$[\ref{item:prop:fatbdm}\To \ref{item:prop:bdn+1}]$の証明：
+自明である．
+
+$[\ref{item:prop:bdn+1} \To \ref{item:prop:dimn}]$
+の証明：
+$X$の
+$n+2$
+枚の開集合からなる開被覆
+$\{O_{1}, \dots, O_{n+2}\}$
+を任意に与える．
+補題
+\ref{lem:intro:shrink}
+から
+閉被覆
+$\{A_{1}, \dots, A_{n+2}\}$
+が存在して
+$A_{i}\subset O_{i}$
+を満たす．
+ここで
+$\{O_{1}, \dots,  O_{n+1}\}$
+と
+$\{F_{1}, \dots,  F_{n+1}\}$
+に対して
+\ref{item:prop:bdn+1}
+を用いて
+開集合族
+$\{H_{1}, \dots, H_{n+1}\}$
+で
+$F_{i}\subset H_{i}$
+と
+$\cl H_{i}\subset U_{i}$
+を満たし
+$\bigcap_{i=1}^{n+1}\bd H_{i}=\emptyset$
+を満たすものが存在する．
+そして
+ここで閉集合
+$i\in \{1, \dots, n+2\}$
+について
+閉集合
+$L_{i}$
+を
+$i=1, \dots, n+1$のとき
+$L_{i}=\cl H_{i}\setminus \bigcup_{k<i} H_{k}$
+で
+$L_{n+2}=F_{n+2}\setminus \bigcup_{k=1}^{n+1}H_{k}$
+と定義する．
+このとき
+$\{L_{1}, \dots, L_{n+2}\}$
+は
+$X$
+の閉被覆である．
+というのも任意の
+$x\in X$
+について
+$x\in H_{i}$
+となる
+$i$
+が存在しなければ
+$x\in L_{n+2}$
+であり，
+$x\in H_{i}$
+となる添字が存在するなら値が最小のそれを
+$j$
+として
+$x\in L_{j}$
+となるからである．
+さらに
+$L_{i}\subset O_{i}$
+である．
+さて以下が成り立つ．
+\begin{align}
+\bigcap_{i=1}^{n+2}L_{i}
+=L_{n+2}\cap \bigcap_{i=1}^{n+2}\left(\cl H_{i}\setminus \bigcup_{k<i} H_{k}\right)
+\subset L_{n+2}\cap \bigcap_{i=1}\bd H_{i}=\emptyset. 
+\end{align}
+故に
+補題
+\ref{lem:hihukudim2}から
+$\yodim X\le n$
+が従う．
+\end{proof}
+
+
+\begin{prop}\label{prop:sum:sepn+10}
+$X$
+を正規空間とする．
+このとき以下は同値である
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:prop:sep:ndim}
+$\yodim X\le n$
+\item\label{item:prop:sep:ccap0} 
+交わらない
+二つの閉集合の
+$n+1$
+個の組み
+$(A_{1}, B_{1}), \dots, (A_{n+1}, B_{n+1})$
+について閉集合$C_{1}, \dots,  C_{n}$
+が存在し
+各
+$C_{i}$
+は
+$A_{i}$
+と
+$B_{i}$
+を分離し，
+$\bigcap_{i=1}^{n+1}C_{i}=\emptyset$
+が成り立つ．
+
+
+\end{enumerate}
+\end{prop}
+\begin{proof}
+$[\ref{item:prop:sep:ndim}\To \ref{item:prop:sep:ccap0}]$
+の証明：
+閉集合族
+$\{A_{1}, \dots, A_{n+1}\}$
+と
+開集合族
+$\{X\setminus B_{1}, \dots, X\setminus B_{n+1}\}$
+に対して
+命題
+\ref{prop:hihukudim3}
+を
+適応して
+開集合族
+$\{V_{1}, \dots, V_{n+1}\}$
+で
+$A_{i}\subset V_{i}$
+かつ
+$\cl V_{i}\subset U_{i}$
+を満たし
+$\bigcap_{i=1}^{n+1}\bd V_{i}=\emptyset$. 
+となるものが存在する．
+$C_{i}=\bd V_{i}$
+とすれば
+\ref{item:prop:sep:ccap0}
+が得られる．
+
+$[\ref{item:prop:sep:ccap0}\To \ref{item:prop:sep:ndim}]$
+の証明：
+閉集合族
+$\{F_{1}, \dots, F_{n+1}\}$
+と
+開集合族
+$\{U_{1}, \dots, U_{n+1}\}$
+で
+$F_{i}\subset U_{i}$
+となるものを与える．
+このとき
+$n+1$
+個の組
+$(F_{1}, X\setminus U_{1}), \dots, (F_{n+1}, X\setminus U_{n+1})$
+に対して
+条件
+\ref{item:prop:sep:ccap0}
+を適応して
+$F_{i}$
+と
+$X\setminus U_{i}$
+を分離する
+閉集合
+$C_{i}$
+で
+$\bigcap_{i=1}^{n+1}C_{i}=\emptyset$
+を満たすものを
+得る．
+このとき
+開集合
+$V_{i}$
+と
+$V_{i}^{\prime}$
+を
+$V_{i}\sqcup C_{i}\sqcup V_{i}^{\prime}=X$
+で
+$F_{i}\subset V_{i}$
+かつ
+$X\setminus U_{i}\subset V_{i}^{\prime}$
+となるものとする．
+すると
+$\bd V_{i}\subset C_{i}$
+かつ
+$\cl V_{i}\subset U_{i}$
+となり
+$\bigcap_{i=1}^{n+1}\bd V_{i}\subset \bigcap_{i=1}^{n+1}C_{i}=\emptyset$
+となる．
+よって
+命題
+\ref{prop:hihukudim3}
+から
+$\yodim X\le n$
+が導かれる．
+\end{proof}
+
+
+\begin{thm}\label{thm:countablefam}
+$n\in \zz_{\ge 0}$
+とし，
+$X$
+を
+$\yodim X\le n$
+である正規空間とし，
+$\{F_{i}\}_{i\in \zz_{\ge 0}}$
+と
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+をそれぞれ閉集合族，
+開集合族
+で
+$F_{i}\subset U_{i}$
+を満たすとする．
+このとき
+開集合族
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+であって
+$F_{i}\subset V_{i}$
+と
+$\cl V_{i}\subset U_{i}$
+を満たしかつ
+$\yodeg(\{\bd V_{i}\}_{i\in \zz_{\ge 0}})\le n$
+を満たすものが存在する．
+\end{thm}
+\begin{proof}
+まず
+$\zz_{\ge 0}$
+の部分集合であって
+濃度が
+$n+1$
+のもの全体を考える．
+そのような集合は高々可算個しかないので，
+番号をつけて列挙して
+\begin{align}
+\Gamma_{1}, \Gamma_{2}, \dots, \Gamma_{i}, \dots
+\end{align}
+とする．
+そして
+今から帰納法により，
+$k\in \zz_{\ge 0}$
+によって添字付られた
+以下のような開集合の列の列
+$\{P_{i}(k)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k)\}_{i\in \zz_{\ge 0}}$
+で
+任意の
+$i\in \zz_{\ge 0}$
+について
+$F_{i}\subset P_{i}(k)$
+と
+$\cl Q_{i}(k)\subset U_{i}$
+を満たしかつ
+任意の
+$l\in \{1, \dots, k\}$
+について以下が成り立つものを構成する．
+\begin{align}
+\yodeg(\{\cl (Q_{a}(k))\setminus P_{a}(k)\mid a\in \Gamma_{l}\})\le n. 
+\end{align}
+今
+$k$
+までは上記の列が構成できたとする．
+今から$\{P_{i}(k+1)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k+1)\}_{i\in \zz_{\ge 0}}$
+を構成する．
+まず
+$a\in \Gamma_{k+1}$
+については
+$\{\cl P_{a}(k)\}_{a\in \Gamma_{k+1}}$
+と
+$\{Q_{a}(k)\}_{a\in \Gamma_{k+1}}$
+について
+命題
+\ref{prop:hihukudim3}
+を用いて
+$\cl P_{a}(k)\subset P_{a}(k+1)\subset Q_{a}(k+1)$
+かつ
+$\cl Q_{a}(k+1)\subset Q_{a}(k)$
+で以下を満たす
+$\{Q_{a}(k+1)\}_{a\in \Gamma_{k+1}}$
+と$\{P_{a}(k+1)\}_{a\in \Gamma_{k+1}}$
+をとる．
+\begin{align}
+\yodeg(\{\cl Q_{a}(k+1)\setminus P_{a}(k+1)\}_{a\in \Gamma_{k+1}})\le n. 
+\end{align}
+次に
+$b\in \zz_{\ge 0}\setminus \Gamma_{k+1}$
+については
+$P_{b}(k+1)=P_{b}(k)$
+かつ
+$Q_{b}(k+1)=Q_{b}(k)$
+と定義する．
+ここで任意の
+$i\in \zz_{\ge 0}$
+について
+$\cl Q_{i}(k+1)\setminus P_{i}(k+1)\subset \cl Q_{i}(k)\setminus P_{i}(k)$
+なので，
+任意の
+$l$
+について以下が成り立つ．
+\begin{align}
+\yodeg(\{\cl (Q_{a}(k))\setminus P_{a}(k)\mid a\in \Gamma_{l}\})\le n. 
+\end{align}
+さて，この
+$k\in \zz_{\ge 0}$
+によって添字付られた
+列
+$\{P_{i}(k)\}_{i\in \zz_{\ge 0}}$, 
+$\{Q_{i}(k)\}_{i\in \zz_{\ge 0}}$
+を用いて，
+任意の
+$i\in \zz_{\ge 0}$
+について
+$V_{i}=\bigcup_{k\in \zz_{\ge 0}}P_{i}(k)$
+と定義する．もちろん
+$F_{i}\subset V_{i}\subset \cl V_{i}\subset U_{i}$
+は満たされる．
+また任意の
+$k$
+について
+$P_{i}(k)\subset V_{i}$
+かつ
+$\cl V_{i}\subset Q_{i}(k)$
+なので
+$\bd V_{i}\subset \cl(Q_{i}(k))\setminus P_{i}(k)$
+である．
+よって
+$\Gamma_{k}$について以下が成り立つ．
+\begin{align}
+\yodeg(\{\bd V_{a}\mid a\in \Gamma_{k}\})\le n. 
+\end{align}
+これで証明が終わる．
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{可分距離空間と被覆次元}\label{subsec:sepcovdim}
+
+
+
+\begin{thm}\label{thm:sum:alphabetagamma}
+$X$
+を可分距離化可能空間とし，
+$n\in \zz_{\ge 0}$
+とする．
+このとき以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \label{item:sum:gamma}
+$\yodim X\le n$
+が成り立つ．
+\item\label{item:sum:alphal}
+$X$
+には開基
+$\mathcal{B}$
+が存在して
+$\yodeg(\{\, \bd B\mid B\in \mathcal{B}\, \})\le n$
+を満たす．
+\item\label{item:sum:betal}
+$\yoind X\le n$
+が成り立つ．
+\end{enumerate}
+\end{thm}
+特に$\yoind X\le \yodim X$が成り立つ．
+\begin{proof}
+$[\ref{item:sum:gamma}\To \ref{item:sum:alphal}]$
+の証明:
+$X$
+の可算な
+閉集合族
+$\{F_{s}\}_{s \in \zz_{\ge 0}}$
+と
+$\{U_{s}\}_{s\in \zz_{\ge 0}}$
+であって
+$\{\nai F_{s}\}_{s\in \zz_{\ge 0}}$
+と
+$\{U_{s}\}_{s\in \zz_{\ge 0}}$
+が
+$X$の開基になり，
+任意の
+$s\in \zz_{\ge 0}$
+について
+$F_{s}\subset U_{s}$
+となるものとする．
+空間
+$X$
+が可分距離化可能空間であることから
+このような族は存在する．
+そして
+二つの可算族
+$\{F_{s}\}_{s\in \zz_{\ge 0}}$
+と
+$\{U_{s}\}_{s\in \zz_{\ge 0}}$
+に対して
+定理
+\ref{thm:countablefam}
+を用いて
+開集合の族
+$\{V_{s}\}_{s\in \zz_{\ge 0}}$
+であって
+任意の
+$s\in \zz_{\ge 0}$
+について
+$F_{s}\subset V_{s}$
+と
+$\cl V_{s}\subset U_{s}$
+を満たすもので，さらに
+以下の不等式を満たすものをとる．
+\begin{align}
+\yodeg(\{\bd V_{s}\}_{s\in \zz_{\ge 0}})\le n. 
+\end{align}
+任意の
+$s\in \zz_{\ge 0}$
+について
+$F_{s}\subset V_{s}$
+と
+$\cl V_{s}\subset U_{s}$
+を満たすことと
+$\{\nai F_{s}\}_{s\in \zz_{\ge 0}}$
+と
+$\{U_{s}\}_{s\in \zz_{\ge 0}}$
+が
+$X$の開基になること
+から
+$\{V_{s}\}_{s\in \zz_{\ge 0}}$
+も
+$X$
+の開基となる．
+よって
+\ref{item:sum:alphal}
+は成り立つ．
+
+
+
+
+$[\ref{item:sum:alphal} \To \ref{item:sum:betal}]$
+の証明：
+帰納法によって証明する．
+$n=0$のとき
+$[\ref{item:sum:alphal} \To \ref{item:sum:betal}]$
+は
+$\yoind$
+の定義から成り立つ．
+$n-1$
+までは
+$[\ref{item:sum:alphal} \To \ref{item:sum:betal}]$
+が成り立つとして
+$n$
+の場合を証明する．
+仮定\ref{item:sum:alphal}
+$X$
+で述べられている
+$X$の
+開基
+$\mathcal{B}$
+で以下を満たすものを取る．
+\begin{align}\label{al:sum:degvlen}
+\yodeg(\{\, \bd B\mid B\in \mathcal{B}\, \})\le n
+\end{align}
+任意に
+$A\in \mathcal{B}$
+を取る．
+このとき
+$\{\, B\cap \bd A \mid B\in \mathcal{B}\, \}$
+は
+$\bd A$
+の開基となる．
+補題
+\ref{lem:par}
+より以下が成り立つ．
+\begin{align}
+\bd_{\bd A}(B\cap \bd A)\subset \bd(B)\cap \bd A. 
+\end{align}
+よって
+相異なる
+$n$個
+の
+元
+$B_{1}, \dots, B_{n}\in \mathcal{B}\setminus \{A\}$
+を取ると，\eqref{al:sum:degvlen}より以下を得る．
+\begin{align}
+\bigcap_{i=1}^{n}\bd_{\bd A}(B_{i}\cap \bd A)
+\subset \bd A\cap \bigcap_{i=1}^{n}\bd B_{i}=\emptyset. 
+\end{align}
+よって，
+$S=\bd A$
+には
+開基
+$\mathcal{B}^{\prime}=\{\, B\cap S \mid B\in \mathcal{B}\, \}$であって
+$\yodeg(\{\, \bd_{S}B\mid B\in \mathcal{B}^{\prime}\, \})\le n-1$
+を満たすものが存在する．
+よって帰納法の仮定より，
+$n-1$の場合を考えると
+$\yoind \bd A\le n-1$
+が従う．
+ここで
+$A$
+は任意であり，
+$\mathcal{B}$
+は
+$X$の開基であったから
+$\yoind$の定義より
+$\yoind X\le n$
+がわかる．
+これで
+$n$
+のときにも
+\ref{item:sum:betal}
+が証明された．
+
+
+
+
+$[\ref{item:sum:betal}\To \ref{item:sum:gamma}]$
+の証明：
+定理
+\ref{thm:inq:covind}
+で既に証明している．
+\end{proof}
+
+
+
+
+
+\begin{thm}\label{thm:sum:coincides}
+$X$
+を可分距離化可能空間とする．
+このとき以下の等式が成り立つ．
+\begin{align}
+\yoind X =\yolind X =\yodim X =\yoddim X. 
+\end{align}
+\end{thm}
+\begin{proof}
+系
+\ref{cor:sum:lindinddim}
+と
+定理
+\ref{thm:inq:covind}
+および
+\ref{thm:sum:alphabetagamma}
+より従う．
+\end{proof}
+
+\subsection{球面への写像の拡張問題が被覆次元を特徴付けること：可算パラコンパクト性を仮定して}\label{subsec:boursuk}
+
+位相空間
+$X$
+が
+\yoemph{可算パラコンパクト}
+であるとは
+$X\times [0, 1]$
+が正規になることである．
+被覆を用いた特徴付けもあるが，
+今回使うのは
+$X\times [0, 1]$
+が正規であるという性質なので
+本節ではこの事実のみを用いる．
+当然だが
+距離化可能空間は
+可算パラコンパクトである．
+\begin{thm}[Borsukのホモトピー拡張定理]\label{thm:borsukhomotopy}
+$n\in \zz_{\ge 0}$
+で
+$X$
+を可算パラコンパクトな正規空間とし
+$A$
+をその閉集合とする．
+連続写像
+$H\colon A\times [0, 1]\to \yosphere{n}$
+について
+$H(x, 0)=f(x)$
+で
+$H(x, 1)=g(x)$
+とおく．
+このときもしも
+$F\colon X\to \yosphere{n}$
+で
+$F|_{A}=f$
+となるものが存在するならば
+$G\colon X\to \yosphere{n}$
+で
+$G|_{A}=g$
+となるものが存在する．
+さらに
+$G$
+は
+$F$
+とホモトピックに選べる．
+つまり，空間全体に
+拡張されるという性質は
+(球面に値をとるホモトピーに関して)ホモトピー
+不変ということである．
+\end{thm}
+\begin{proof}
+$X$
+が可算パラコンパクトなので
+$X\times [0, 1]$
+は正規である．
+定理の仮定にある
+$F$
+を用いて写像
+$H\colon A\times [0, 1]\to \yosphere{n}$を
+拡張して
+$H\colon X\times \{0\}\cup  A\times [0, 1]\to\yosphere{n} $
+とみなす．
+もちろん
+$X\times \{0\}$
+上で
+$H$
+は
+$F$
+に一致するということである．
+さらにこの
+$H$
+を
+$\rr^{n+1}$
+への写像とみなして
+Tietze-Urysohn
+の拡張定理を適応すると
+$H$
+の拡張
+$P\colon X\times [0, 1]\to \rr^{n+1}$
+を得る．
+そして
+$W=P^{-1}(\rr^{n+1}\setminus \{0\})$
+とし，
+$Q\colon W\to \yosphere{n}$
+を以下のように定義する．
+\begin{align}
+Q(x, t)=\frac{P(x, t)}{\lVert P(x, t)\rVert}. 
+\end{align}
+すると
+$Q$
+は
+$W$
+上連続である．
+もちろん
+$X\times \{0\}\cup  A\times [0, 1]\subset W$
+であり
+$Q|_{X\times \{0\}\cup A\times [0, 1]}=P$
+である
+(以上の議論は
+$\yosphere{n}$
+がANR(正規空間)ということをこの言葉を用いずに証明したものである)．
+そして
+$X$
+の
+開集合
+$U$
+を
+$p\in X$
+であってある近傍
+$p$
+の
+$N$
+が存在し
+$N\times [0, 1]\subset W$
+となるもの全体
+とする．
+すると
+Tube Lemma 
+と
+$A\times [0, 1]\subset W$
+から
+$A\subset U$
+そして
+$X$
+の正規性から
+ある連続写像
+$u\colon X\to [0, 1]$
+で
+$u(A)=1$
+かつ
+$u(X\setminus U)=\{0\}$
+となるものが取れる．
+そこで
+$L\colon X\times [0, 1]\to \yosphere{n}$
+を
+以下のように定義する．
+\begin{align}
+L(x, t)=
+Q(x,  t\cdot u(x))
+\end{align}
+もちろんこれは連続であり
+$G(x)=L(x, 1)$
+は
+$g$
+の拡張になっていて，
+$G$
+は
+$F$
+とホモトピックである．
+\end{proof}
+
+
+\begin{thm}\label{thm:ext:extsphere}
+$X$
+を
+\underline{可算パラコンパクト}な正規空間とする．
+このとき
+$\yodim X\le n$
+であることと以下の条件は同値である．
+$X$
+の任意の閉集合
+$A$
+と
+連続写像
+$f\colon A\to \yosphere{n}$
+に対して連続写像
+$F\colon X\to \yosphere{n}$
+が存在し
+$F|_{A}=f$
+を満たす．
+\end{thm}
+\begin{proof}
+位相的には同じなので
+$\yosphere{n}$
+と
+$\yocubebd{n+1}$
+を同一視する．
+まず最初に
+$\yodim X\le n$
+を仮定する．
+このとき写像
+$f$
+は
+写像
+$f\colon A\to \yocubebd{n+1}$
+である．
+そして
+$f=(f_{1}, \dots, f_{n+1})$
+と成分表示し
+以下のように
+$K_{i}$
+と
+$L_{i}$
+を定義する．
+\begin{align}
+K_{i}=\{\, x\in A\mid f_{i}(x)=-1\, \};
+\end{align}
+\begin{align}
+L_{i}=\{\, x\in A\mid f_{i}(x)=1\, \}. 
+\end{align}
+すると
+$K_{i}$
+と
+$L_{i}$
+は
+$X$
+の閉集合でなおかつ
+$K_{i}\cap L_{i}=\emptyset$
+を満たしさらに以下を満たす．
+\begin{align}
+A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i}). 
+\end{align}
+ここで
+定理
+\ref{prop:hihukudim3}
+を
+$\{K_{i}\}_{i=1}^{n+1}$
+と
+$\{X\setminus L_{i}\}_{i=1}^{n+1}$
+に適応し
+各
+$i$
+について
+開集合
+$P_{i}$
+と
+$Q_{i}$
+で
+$A_{i}\subset P_{i}$
+と
+$P_{i}\subset Q_{i}$
+$\cl Q_{i}\subset X\setminus L_{i}$
+でなおかつ
+$\bigcap_{i=1}^{n+1}
+(\cl Q_{i}\setminus P_{i})=\emptyset$
+を満たすものが存在する．
+さらにTietze-Urysohnの拡張定理から
+各
+$i$
+について
+連続写像
+$u_{i}\colon X\to [-1, 1]$
+であって
+$u_{i}(\cl P_{i})=-1$
+かつ
+$u_{i}(X\setminus Q_{i})=1$
+となるものが存在する．
+このとき
+$u_{i}^{-1}(0)\subset Q_{i}\setminus \cl P_{i}\subset \cl Q_{i}\setminus P_{i}$
+なので
+$\bigcap_{i=1}^{n+1}u_{i}^{-1}(\{0\})=\emptyset$
+となる．
+もちろん
+各
+$i$
+について
+$K_{i}\subset u_{i}^{-1}(\{-1\})$, 
+$L_{i}\subset u_{i}^{-1}(\{1\})$
+を満たすことに注意せよ．
+次に
+写像
+$u\colon X\to [-1, 1]^{n+1}$
+を
+$u=(u_{1}, \dots, u_{n})$
+と定義する．
+すると
+$A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})$
+と
+$u_{i}$
+の性質から
+$x\in A$
+のとき
+$u(x)$
+は
+$\yocubebd{n+1}$
+への写像になる．
+今
+$v=u|_{A}\colon A\to \yocubebd{n+1}$
+とおく．
+そして
+$h\colon A\times  [0, 1]\to \rr^{n+1}$
+を以下のように定義する．
+\begin{align}
+h(x, t)=(1-t)v(x)+tf(x). 
+\end{align}
+さて
+$A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})$
+であることと
+$K_{i}$, 
+$L_{i}$, 
+そして
+$u_{i}$
+の定義から
+$h(x, t)$
+は常にその成分のいずれかは絶対値が
+$1$
+である．
+例えば
+$x\in K_{i}$
+ならば
+$u_{i}(x)=f_{i}(x)=-1$
+なので
+$h(x, t)$
+の第
+$i$
+成分が
+$-1$
+ということである．
+つまり
+$\lVert h(x, t)\lVert_{\infty}\neq 0$
+である．
+ここで
+$\lVert*\rVert_{\infty}$
+は
+$\ell^{\infty}$-ノルムである．
+つまり
+連続写像
+$H\colon A\times [0, 1]\to \yocubebd{n+1}$
+を以下の式で定義することができる．
+\begin{align}
+H(x, t)=\frac{h(x, t)}{\lVert h(x, t)\lVert_{\infty}}. 
+\end{align}
+ここで
+$H(x, 0)=v(x)$
+で
+$H(x, 1)=f(x)$
+に注意せよ．
+この
+$H$
+は
+$v$
+と
+$f$
+を結ぶホモトピーであり，
+$v$
+は
+$X$
+全体への連続拡張
+$u/\lVert u\rVert_{\infty}$
+を持つから
+Borsukのホモトピー拡張定理
+(定理\ref{thm:borsukhomotopy})から
+$f$
+は拡張
+$F\colon X\to \yocubebd{n+1}$
+を持つ．
+
+逆に拡張問題が常に解けるとして，
+$X$
+の次元の評価をしよう．
+$X$
+の
+濃度が
+$n+1$
+の
+任意の開集合族
+$\{U_{1}, \dots, U_{n+1}\}$
+と
+閉集合族
+$\{F_{1}, \dots, F_{n+1}\}$
+で
+$F_{i}\subset U_{i}$
+となるもの
+を考える．
+今
+$H_{i}=X\setminus U_{i}$
+として
+$A=\bigcup_{i=1}^{n+1}(F_{i}\cup H_{i})$
+とする．
+そして
+各
+$u_{i}\colon A\to [-1, 1]$
+を
+$u_{i}(F_{i})=\{-1\}$
+かつ
+$u_{i}(H_{i})=\{1\}$
+を満たすものとする．
+このとき
+$u=(u_{1}, \dots, u_{n+1})$
+は
+$\yocubebd{n+1}$
+への写像になっている．
+さて，定理の仮定から
+連続写像
+$g=(g_{1}, \dots,  g_{n+1})\colon X\to \yocubebd{n+1}$
+で
+$g|_{A}=u$
+となるものが存在する．
+そして
+$V_{i}=g_{i}^{-1}([-1, 0))$
+とすると
+$\cl V_{i}\subset g_{i}^{-1}([-1, 0])$
+で
+$F_{i}\subset V_{i}\subset \cl V_{i}\subset U_{i}$
+を満たす．
+さらに
+$\bd V_{i}\subset g_{i}^{-1}(\{0\})$
+なので
+$g$
+が
+$\yocubebd{n+1}$
+への写像であることから
+$\bigcap_{i=1}^{n+1}\bd V_{i}=\emptyset$
+が従う．
+よって
+命題
+\ref{prop:hihukudim3}
+から
+$\yodim X\le n$
+である．
+\end{proof}
+\begin{rmk}
+定理
+\ref{thm:borsukhomotopy}
+は実は
+$X$
+に可算パラコンパクト性の仮定がなくても成り立つ
+(\cite{zbMATH03491867})．
+よって
+定理
+\ref{thm:ext:extsphere}
+も可算パラコンパクト性の仮定がなくても成り立つ．
+しかし
+本稿では
+$X$
+が距離化可能な場合にしか
+これらの結果を利用することはないので，
+可算パラコンパクト性を付加したとしても
+本稿の理論展開は損なわれない．
+\end{rmk}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{不動点定理}\label{sec:fxptthm}
+この節ではユークリッド空間の次元と不動点定理の関係を明らかにする．
+\subsection{不動点定理と同値な命題}\label{subsec:douchi}
+
+ブラウワーの不動点定理の証明を目的として，
+不動点定理と同値な命題を紹介する．
+\begin{df}
+$X$
+を位相空間とし
+$A$, 
+$B$, 
+$C$
+をその部分集合とする．
+$A\cap B=\emptyset$
+と仮定する．
+このとき
+\yoemph{$C$が$A$と$B$を分離する}
+とは開集合
+$U$
+と
+$V$
+が存在して
+$A\subset U$, 
+$B\subset V$, 
+$U\cap V=\emptyset$
+そして
+$X\setminus C=U\coprod V$
+を満たす時にいう．
+この時必然的に
+$C$
+は閉集合になることに注意しよう．
+\end{df}
+
+
+まずは次の準備補題から始めよう．
+\begin{lem}\label{lem:kisokiso}
+$A$を
+$[-1, 1]$
+の閉集合で尚且つ
+$\{-1\}$
+と
+$\{1\}$
+を分離しているとする．
+そして
+$[-1, 1]\setminus A=U\coprod V$
+とし
+$1\in V$
+とする．
+このとき
+$V$
+の任意の元
+$x$
+について以下が成り立つ．
+\[
+|x-d(x, A)|\le 1. 
+\]
+\end{lem}
+\begin{proof}
+まず最初に
+$0\le x-d(x, A)$
+のときを考える．
+このとき
+$0\le d(x, A)$
+なので
+$|x-d(x, A)|\le x-d(x, A)\le x\le 1$
+を得る．
+次に
+$0\le d(x, A)-x$
+のときを考える．
+このとき
+$c=\min A$
+について，
+$A$
+が
+$\{-1\}$
+と
+$\{1\}$
+を分離することから
+$-1<c$
+である．
+また
+$U$
+と
+$V$
+の定義と
+$1\in V$
+であることから
+$c<x$
+である．
+よって
+$d(x, A)\le |x-c|=x-c$
+となる．
+すると
+$|x-d(x, A)|= d(x, A)-x\le x-c-x=-c<1$
+となる．
+\end{proof}
+
+
+
+有名な
+ブラウワーの不動点定理と
+同値な命題が
+以下の通りである．
+
+\begin{thm}\label{thm:sum:douchifixedpoint}
+$n\in \zz_{\ge 1}$
+について以下は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+
+\item\label{item:noret}(No retraction theorem)
+レトラクション
+$r\colon \yodisc{n}\to \yosphere{n-1}$
+は存在しない．
+
+\item\label{item:fixedpt}(Brouwer's fixed point theorem)
+任意の連続写像
+$f\colon \yodisc{n}\to \yodisc{n}$
+は不動点を持つ．
+
+\item\label{item:ccc}
+$i\in \{1, \dots, n\}$
+を添字とする
+閉集合
+$C_{i}\subset \yocube{n}$
+の族が
+$\yocubesidep{n}{i}$
+と
+$\yocubesidem{n}{i}$
+を分離するならば
+$\bigcap_{i=1}^{n}C_{i}\neq \emptyset$
+が成り立つ．
+
+
+\item\label{item:pm}(the Poincar\'{e}-Miranda theorem)
+$i\in \{1, \dots, n\}$
+を添字とする連続写像の族
+$f_{i}\colon \yocube{n}\to \rr$
+が
+$f_{i}(\yocubesidep{n}{i})\subset [0, \infty)$
+と
+$f_{i}(\yocubesidem{n}{i})\subset (-\infty, 0]$
+を満たすならば，
+ある点
+$p\in \yocube{n}$
+が存在して
+$f_{i}(p)=0$
+が成り立つ．
+つまり共通零点が存在する．
+\end{enumerate}
+\end{thm}
+\begin{proof}\ 
+[$\ref{item:noret}\To \ref{item:fixedpt}$]の証明：
+不動点を持たない連続写像
+$f\colon \yodisc{n}\to \yodisc{n}$
+が存在するとしよう．
+即ち任意の
+$x\in \yodisc{n}$
+について
+$f(x)\neq x$
+ということである．
+さて
+$e(x)=x-f(x)$
+と定義すると
+$e\colon \yodisc{n}\to \rr^{n}$
+は連続である．
+さらに
+$L\colon \yodisc{n} \times \rr\to \rr^n$
+を
+$L(x, t)=f(x)+te(x)$
+と定義すればこれもやはり連続である．
+今，
+$t$
+に関する二次方程式
+$\|L(x,t)\|^2=1$
+を考える．
+つまり
+次の二次方程式を考える．
+\begin{equation}\label{hou}
+\|e(x)\|^2t^2+2\langle f(x), e(x)\rangle t+\|f(x)\|^2-1. 
+\end{equation}
+係数が
+$x$
+の関数になっていることに注意しよう．
+いまはこれを
+$t$
+の方程式として見ている．
+また，
+\eqref{hou}
+の解は
+$x$
+に依存することに注意せよ．
+そして，
+この二次方程式の二つの解は以下の式で表される．
+\begin{align}
+\frac{1}{\|e(x)\|^2}\left(-\langle f(x), e(x)\rangle\pm\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\right). 
+\end{align}
+さていま，
+$\|f(x)\|\le 1$
+が常に成り立つので，
+$-\|e(x)\|^2(\|f(x)\|^2-1)\ge 0$である．
+よって以下を得る．
+\begin{align}
+\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\ge |\langle f(x),e(x)\rangle|. 
+\end{align}
+故に
+方程式
+\eqref{hou}
+の解は実数解であり，
+非負の解と非正の解を持つ．
+そのうち，
+非負の解を
+$T(x)$
+としよう．
+$T(x)$
+は明示的に
+以下の式でかける．
+\begin{align}
+T(x)=\frac{1}{\|e(x)\|^2}\left(-\langle f(x), e(x)\rangle+\sqrt{\langle f(x),e(x)\rangle^2-\|e(x)\|^2(\|f(x)\|^2-1)}\right). 
+\end{align}
+この式から分かるように，
+写像
+$T\colon \yodisc{n}\to \rr$
+は連続である．
+さて，
+$x\in S^{n-1}$
+のとき，
+$L(x,1)=x$
+なので
+$T(x)=1$
+である．
+以上から，
+$g\colon \yodisc{n}\to \yosphere{n-1}$
+を
+$g(x)=L(x,T(x))$
+と定義するとこれは連続写像で，
+$x\in S^{n-1}$のとき
+$g(x)=L(x,T(x))=L(x,1)=x$となる．
+つまり
+$g$は
+レトラクションになっている．
+つまり$\yosphere{n-1}$
+は
+$\yodisc{n}$
+のレトラクトになっている．
+連続なレトラクション
+$g\colon \yodisc{n}\to \yosphere{n-1}$
+が存在するので
+\ref{item:noret}に反し，
+背理法により
+\ref{item:fixedpt}が成り立つ．
+
+[$\ref{item:fixedpt}\To \ref{item:ccc}$]の証明：
+各
+$i\in \{1, \dots, n\}$
+に対して
+$\yocube{n}$
+の開集合
+$P_{i}$, 
+$N_{i}$
+を
+$\yocube{n}\setminus C_{i}=N_{i}\coprod P_{i}$
+で
+$\yocubesidep{n}{i}\subset P_{i}$
+かつ
+$\yocubesidem{n}{i}\subset N_{i}$
+を満たすものを取る．
+このような開集合の組は複数存在し得るが，そのうち一つを選ぶ
+($C_{i}$の補集合の連結成分が二つより大きいことがあり得るからである)．
+そして
+写像
+$m_{i}\colon \yocube{n}\to \rr$
+を以下の式で定義する．
+\begin{align}
+m_{i}(x)=
+\begin{cases}
+d(x, C_{i}) & \text{$x \in C_{i}\cup P_{i}$};\\
+-d(x, C_{i}) & \text{$x\in C_{i} \cup N_{i}$}. 
+\end{cases}
+\end{align}
+このとき
+$C_{i}\cup P_{i}$
+と
+$ C_{i}\cup N_{i}$
+はともに閉集合で，
+これらの共通部分である
+$C_{i}$
+上では
+$d(x, C_{i})$
+と
+$-d(x, C_{i})$
+は同じ値
+$0$
+を取り，
+$C_{i}\cup P_{i}$
+と
+$ C_{i}\cup N_{i}$
+上ではもちろん連続なので
+貼り合わさって
+$m_{i}$
+はwell-defined であり連続になる．
+そして
+$f_{i}\colon \yocube{n}\to \rr$
+を次で定義する．
+\begin{align}
+f_{i}(x)=x_{i}-m_{i}(x).
+\end{align}
+このとき
+$|f_{i}(x)|\le 1$
+となることを今から証明しよう．
+$x\in P_{i}$
+のときのみ証明する．
+他の場合は同様に証明できる．
+このとき
+$f_{i}(x)=x_{i}-d(x, C_{i})$である．
+まず
+$0\le x_{i}-d(x, C_{i})$
+のときは
+$0\le d(x, C_{i})$
+なので
+\[
+|f_{i}(x)|=x_{i}-d(x, C_{i})\le x_{i}\le 1
+\]
+であるから求める結果が成り立つ．
+次に
+$0\le d(x, C_{i})-x_{i}$
+の場合を調べる．
+このとき
+$x$
+を通る直線で
+$\yocubesidep{n}{i}$
+と
+$\yocubesidem{n}{i}$
+に垂直なもの，
+つまり
+$L=\{\, z\in \yocube{n}\mid z_{k}=x_{k},   k\neq i\, \}$
+を考える．
+そして
+$a$
+を
+$L\cap\yocubesidep{n}{i}$
+を構成する唯一の点とし
+同様に
+$b$
+を
+$L\cap \yocubesidem{n}{i}$
+を構成するただ唯一の点とする．
+つまり
+$a$
+は
+$i$
+成分が
+$1$
+でそれ以外が
+$x$
+と同じ成分であり，
+$b$
+は
+$i$成分が
+$-1$でそれ以外が
+$x$
+と一致するものである．
+すると
+$L\cap C_{i}$
+は
+$L$の部分集合として
+$a$
+と
+$b$
+を分離する．
+今
+$L$
+と
+$[-1, 1]$
+を同一視すれば
+補題
+\ref{lem:kisokiso}
+が適応できて
+$|x_{i}-d(x, L\cap C_{i})|\le 1$
+となる．
+さて
+$|f_{i}(x)|$
+を計算しよう．
+\begin{align}
+|f_{i}(x)|=d(x, C_{i})-x_{i}
+\le d(x, L\cap C_{i})-x_{i}=|d(x, L\cap C_{i})-x_{i}|\le 1. 
+\end{align}
+以上の計算より求める不等式を得る．
+上の議論からどんな状況においても
+$|f_{i}(x)|\le 1$
+が成り立つことがわかった．
+ここで写像
+$f\colon \yocube{n}\to \yocube{n}$
+を
+$f=(f_{1}, \dots, f_{n})$
+で定義する．
+さっき証明した不等式から
+$f$
+の値域
+は
+$\yocube{n}$
+になっている．
+よって
+\ref{item:fixedpt}から不動点
+$p$
+が存在する．
+$f$
+の定義からこの
+$p$は
+$d(p, C_{i})=0$
+を満たす．
+つまり
+$p\in \bigcap_{i=1}^{n}C_{i}$
+なので
+$\bigcap_{i=1}^{n}C_{i}\neq \emptyset$
+がわかり
+\ref{item:ccc}が成り立つ．
+
+
+
+[$\ref{item:ccc}\To \ref{item:pm}$]
+の証明：
+各
+$i\in \{1, \dots, n\}$
+と
+$k\in\zz_{\ge 0}$
+について以下のように置く．
+\begin{align}
+L_{i, k}=\{\, x\in \yocube{n}\mid |x_{i}|\le 1-2^{-k}\, \}
+\end{align}
+そして
+写像
+$w_{i, k}\colon\yocube{n}\to \rr$
+を次の式で定義する．
+\begin{align}
+w_{i, k}(x)=
+x_{i}\cdot d(x, L_{i, k}). 
+\end{align}
+そして
+$g_{i, k}\colon \yocube{n}\to \rr$
+を
+$g_{i, k}(x)=f_{i}(x)+w_{i, k}(x)$
+と定義する．
+この時常に
+$g_{i, k}(\yocubesidep{n}{i})\subset (0, \infty)$
+で
+$g_{i, k}(\yocubesidem{n}{i})\subset (-\infty, 0)$
+である．
+よって
+$C_{i, k}=g_{i, k}^{-1}(\{0\})$
+は
+$\yocubesidep{n}{i}$と
+$\yocubesidem{n}{i}$
+を分離する閉集合である．
+故に
+\ref{item:ccc}から
+$\bigcap_{i=1}^{n}C_{i, k}\neq \emptyset$
+である．この集合から点
+$p_{k}$
+をとる．
+このとき
+$\yocube{n}$
+のコンパクト性から収束する部分列
+$\{p_{\phi(k)}\}_{k\in \zz_{\ge 0}}$
+が存在する．
+その収束先を$p$とする．
+さて
+$g_{i, k}$
+は
+$f_{i}$
+に一様収束するので，
+$k\to \infty$のとき
+$g_{i, \phi(k)}(p_{\phi(k)})\to f_{i}(p)$
+である．
+よって任意の
+$i\in \{1, \dots, n\}$
+について
+$f_{i}(p)=0$となる．
+つまり
+\ref{item:pm}
+が成り立つ．
+
+
+[$\ref{item:pm}\To \ref{item:noret}$]
+の証明：
+まず
+$\yocube{n}$と
+$\yodisc{n}$, 
+そして
+$\yosphere{n-1}$
+と$\yocubebd{n}$
+を同一視する．
+背理法のためにレトラクション
+$r\colon \yocube{n}\to \yocubebd{n}$
+が存在すると仮定する．
+このとき
+$r$
+の各成分
+$r_{i}$
+はもちろん
+$r_{i}(\yocubesidep{n}{i})\subset [0, \infty)$
+と
+$r_{i}(\yocubesidem{n}{i})\subset (-\infty, 0]$
+を満たすので，
+\ref{item:pm}
+からある
+$p\in \yocube{n}$
+が存在して
+$r(p)=0$
+を満たす．
+しかしこれは
+$r$
+の値域が
+$\yocubebd{n}$
+であることに反するので
+上記のようなレトラクションは存在しえない．
+よって
+\ref{item:noret}
+が成り立つ．
+\end{proof}
+
+
+\subsection{不動点定理の証明}\label{subsec:proofoffxptthm}
+
+定理
+\ref{thm:sum:douchifixedpoint}
+だけだと，
+同値性しか証明していないので，
+不動点定理が実際に正しいのかどうかは判断できない．
+しかし以下のことが知られているので，
+定理
+\ref{thm:sum:douchifixedpoint}
+で述べたすべての命題は正しいことがわかる．
+\begin{thm}
+任意の
+$n\in \zz_{\ge 1}$
+について
+レトラクション
+$r\colon \yodisc{n}\to \yosphere{n-1}$
+は存在しない.
+\end{thm}
+\begin{proof}
+まずはホモロジーを用いた証明を紹介する．
+$n=1$
+のときは中間値の定理からレトラクションの不存在がわかる．以下では
+$1<n$とする．
+また
+$\myhl{*}{i}$
+でホモロジー群の関手を表すとする．
+上記のようなレトラクションが存在したとしよう．
+このとき
+$\iota$
+を
+$\yosphere{n-1}$
+から
+$\yodisc{n}$
+への包含写像として
+$r\circ  \iota = \yoidmap{{\yosphere{n-1}}}$
+が成り立つので，
+$n-1$について以下の式を得る．
+\[
+\myhl{r}{n-1}\circ \myhl{\iota}{n-1}=\myhl{1_{\yosphere{n-1}}}{n-1}=\yoidmap{{\myhl{\yosphere{n-1}}{n-1}}}
+\]
+となる．
+故に
+$\myhl{\iota}{n-1}\colon \myhl{\yosphere{n-1}}{n-1}\to \myhl{\yodisc{n}}{n-1}$
+は単射になる．
+ところで
+$\myhl{\yodisc{n}}{n-1}\cong \{0\}$
+で
+$\myhl{\yosphere{n-1}}{n-1}\cong\zz$
+なので，
+単射
+$\myhl{\iota}{n-1}$
+の存在はあり得ない．
+よって
+レトラクション
+$r$
+は存在しえない．
+\end{proof}
+
+解析学を用いても
+$\yosphere{n-1}$
+が
+$\yodisc{n}$
+のレトラクトではないことを証明できる．
+以下では，滑らかなレトラクションに関する命題を用いてこれを証明する．
+\begin{prop}
+レトラクション
+$f\colon \yodisc{n}\to \yosphere{n-1}$
+が存在するならば，
+滑らかなレトラクション
+$g\colon \yodisc{n}\to \yosphere{n-1}$
+が存在する．
+ここで
+$g$
+が
+$\yodisc{n}$
+で滑らかというのは，
+$\yodisc{n}$
+を含むような開集合上で
+$g$
+が定義されさらに滑らかという意味である．
+\end{prop}
+\begin{proof}
+まず
+$u(x)=f(x)-x$
+と定義する．
+ここで
+$\|u(x)\|\le 2$
+に注意しよう．
+$f|_{\yosphere{n-1}}=\yoidmap{\yosphere{n-1}}$
+なので
+$u|_{\yosphere{n-1}}=0$
+である．
+故にある
+$\delta\in(3/4,1)$
+が存在して
+\begin{align}
+\delta\le \|x\|\le 1\To \|u(x)\|<4^{-1}
+\end{align}
+となる．
+また，
+ワイエルストラスの多項式近似定理から各成分が多項式であるような写像
+$P\colon \rr^{n}\to \rr^{n}$
+が存在して以下が満たされる．
+\begin{align}
+\|x\|\le 1\To \|P(x)-u(x)\|<4^{-1}. 
+\end{align}
+また多項式
+$Q\colon \rr\to \rr$
+で以下を満たすものが存在する．
+\begin{align}
+&r\in [0,\delta]\To 3/4\le Q(r^2)\le 1;\\
+&r\in [\delta, 1]\To \|Q(r^2)\|\le 1;\\
+&Q(1)=0. 
+\end{align}
+さて，
+$v(x)=x+Q(\|x\|^2)P(x)$
+と定義すると
+$g\colon \yodisc{n}\to \rr^n$
+は連続で，
+$\yodisc{n}$
+で滑らかである．
+更に
+$\|x\|\in[0,\delta]$
+のとき以下の計算を得る．
+\begin{align*}
+&\|v(x)\|=\|x+Q(\|x\|^2)P(x)\|=\|x+f(x)-f(x)+Q(\|x\|^2)P(x)\|
+\\
+&=\|f(x)-(f(x)-x)+Q(\|x\|^2)P(x)\|\\
+&=\|f(x)-(f(x)-x)+Q(\|x\|^2)(f(x)-x)-Q(\|x\|^2)(f(x)-x)+Q(\|x\|^2)P(x)\|\\
+&=\|f(x)+Q(\|x\|^2)(P(x)-f(x)+x)+(Q(\|x\|^2)-1)(f(x)-x)\|\\
+&\ge
+\|f(x)\|-|Q(\|x\|^2)|\|P(x)-(f(x)-x)\|-|1-Q(\|x\|^2)|\|f(x)-x\|
+\end{align*}
+今
+$\|P(x)-(f(x)-x)\|<1/4$，
+$\|f(x)\|=1$，
+かつ
+$|Q(\|x\|^2)|\le 1$であり，
+$\|x\|\in[0,\delta]$
+ならば
+$3/4\le Q(\|x\|^2)\le 1$
+なので
+$0\le 1-Q(\|x\|^2)\le 1/4$である．
+よって上記の計算と合わせて以下を得る．
+\begin{align*}
+\|v(x)\|&\ge \|f(x)\|-|Q(\|x\|^2)|\|P(x)-(f(x)-x)\|-|1-Q(\|x\|^2)|\|f(x)-x\|\\
+&\ge1-\frac{1}{4}-\frac{2}{4}=\frac{1}{4}. 
+\end{align*}
+つまり
+$\|v(x)\|\ge 1/4$
+である．
+
+一方，
+$\|x\|\in[\delta,1]$ならば以下の計算を得る．
+\begin{align*}
+\|v(x)\|&=\|x+Q(\|x\|^2)P(x)\|\\
+&=\|x+Q(\|x\|^2)P(x)+Q(\|x\|^2)(f(x)-x)-Q(\|x\|^2)(f(x)-x)\|\\
+&\ge \|x+Q(\|x\|^2)(P(x)-(f(x)-x))+Q(\|x\|^2)(f(x)-x)\|\\
+&\ge \|x\|-|Q(\|x\|^2)|(\|P(x)-(f(x)-x)\|+\|f(x)-x\|). 
+\end{align*}
+今
+$|Q(\|x\|^2)|\le 1$，
+かつ
+$\|P(x)-(f(x)-x)\|\le 1/4$
+であり
+$\|x\|\in[\delta,1]$
+なので
+$\|f(x)-x\|\le 1/4$
+である．
+よって
+上記計算と合わせて以下を得る．
+\begin{align*}
+\|v(x)\|&\ge \|x\|-|Q(\|x\|^2)|(\|P(x)-(f(x)-x)\|+\|f(x)-x\|)\\
+&\ge \delta-\left(\frac{1}{4}+\frac{1}{4}\right)\ge \frac{3}{4}-\frac{2}{4}=\frac{1}{4}. 
+\end{align*}
+つまり
+$\|v(x)\|\ge 1/4$
+である．
+
+以上のことから
+$x\in \yodisc{n}$
+ならば常に
+$\|v(x)\|\neq 0$
+である．
+故に$g\colon \yodisc{n}\to \yosphere{n-1}$
+を以下の式で定義することができる．
+\begin{align}
+g(x)=\frac{v(x)}{\|v(x)\|}. 
+\end{align}
+これは
+$\yodisc{n}$
+上で滑らかである．
+もしも
+$x\in \yosphere{n-1}$
+ならば
+$Q(\|x\|^2)=Q(1)=0$
+なので，
+$v(x)=x$
+つまり
+$g(x)=x$
+がわかる．
+よって
+$g\colon \yodisc{n}\to \yosphere{n-1}$
+は求めるレトラクションになる．
+\end{proof}
+
+\begin{thm}[\cite{zbMATH03699860}]
+滑らかな関数
+$f\colon \yodisc{n}\to \yosphere{n-1}$
+で
+$f|_{\yosphere{n-1}}=\yoidmap{\yosphere{n-1}}$
+となるものは存在しない．
+\end{thm}
+\begin{proof}
+そのような関数が存在したとして矛盾を導く．
+今
+$g(x)=f(x)-x$
+と置く．
+写像
+$F\colon \yodisc{n}\times [0, 1]\to \yodisc{n}$
+を以下で定義する．
+\begin{align}
+F(x,t)=x+tg(x)=x+t(f(x)-x)=(1-t)x+tf(x).
+\end{align}
+これは
+$\yosphere{n-1}$
+を固定する
+$\yoidmap{\yodisc{n}}$
+と
+$f$
+の間のホモトピーである．
+以下では
+ホモトピーであることを強調して
+$F(x, t)$
+を
+$F_{t}(x)$
+とも表記する．
+この
+$F(x, t)$
+は
+$x$
+と
+$f(x)$
+を結ぶ直線の内分点である．
+さて
+$\yodisc{n}$
+はコンパクトで
+$g$
+は滑らかなので
+$g(x)=f(x)-x$
+は特にリプシッツである．
+$g$
+のリプシッツ性を担保する定数を
+$L>0$
+とすると，
+$F(x, t)=F(y, t)$
+を仮定したときに
+$x-y=t(g(y)-g(x))$
+なので以下が成り立つ．
+\begin{align}
+\|x-y\|\le t\|g(y)-g(x)\|\le tL\|x-y\|. 
+\end{align}
+よって
+$0\le t< L^{-1}$
+ならば
+$F_t(x)$
+は単射である．
+さて
+$F(x,t)$
+の
+$x$
+についてのヤコビ行列を考えると
+以下の等式が成り立つ．
+\begin{align}
+J_{x}(F_{t}(x))=E_{n}+tJ_{x}(g(x)). 
+\end{align}
+ところで
+$\det$
+は連続関数なので
+$t_{0}$
+を十分小さくとれば
+$t\in [0, t_{0}]$
+のとき
+$\det J_x(F(x,t))>0$
+が成立する．
+さらに小さく
+$t_{0}< L^{-1}$
+と取っておく．
+さていまから
+$t\in [0, t_{0}]$
+のとき
+$F(x, t)$
+が
+$x$
+について全単射になっていることを証明しよう．
+集合
+$U$
+を
+$\yodisc{n}$
+の内核とする．
+つまり$U=\{x\in \rr^n\mid \|x\|<1\}$である．
+逆関数定理から
+$F_{t}(U)$
+は
+$\rr^{n}$
+の開集合である．
+さていま
+$a\not\in F_{t}(U)$
+となる
+$\yodisc{n}$
+の点を任意に取る．
+これの逆像の存在が言えれば
+$F_{t}$が全射であることがわかる．
+ここで
+$b\in F_{t}(U)$
+となる
+$\yodisc{n}$
+の点を適当に取る．
+すると
+$F_{t}(U)\subset \yodisc{n}$
+から
+$a$
+と
+$b$
+を結ぶ線分
+$[a, b]$
+は
+$\yodisc{n}$
+の中に入っており，
+$[a,b]$
+が連結であることから
+$[a, b]\cap\bd(F_{t}(U))\neq \emptyset$
+である．
+この集合の中から
+$c$
+を取る．
+$F_{t}(\yodisc{n})$
+はコンパクトで，
+特に閉集合であるから
+以下が導かれる．
+\begin{align}
+\bd(F_{t}(U))\subset \cl(F_{t}(U))\subset  F_{t}(\yodisc{n}). 
+\end{align}
+よって
+$c=F_{t}(x)$
+となる
+$x\in \yodisc{n}$
+が存在する．
+今
+$c\not\in F_t(U)$
+であるから
+$x\in \yosphere{n-1}$
+となる．
+ゆえに
+$F_{t}$
+が
+$\yosphere{n-1}$
+を動かさないことから
+$c=F_t(x)=x$となる．
+つまり
+$c\in \yosphere{n-1}$
+が成り立つ．
+集合
+$F_{t}(U)$
+が
+$\rr^n$
+の開集合であるから
+$\bd(F_t(U))\cap F_t(U)=\emptyset$
+である．
+特に
+$c\neq b$である．そして
+$c\in [a,b]$
+と
+$c\in \yosphere{n-1}$から
+$a=c$
+がわかり，
+結局
+$a=F_t(x)$
+を得る．
+結果として
+$F_{t}$
+は全射である．
+
+
+
+
+そして
+$I(t)$
+を以下で定義する．
+\begin{align}
+I(t)=\int_{\yodisc{n}}\det(J_{x}F(x, t))\ dx_{1}dx_{2}\cdots dx_{n}. 
+\end{align}
+すると
+$F_{t}(\yodisc{n})=\yodisc{n}$
+と変数変換公式から
+$t\in [0, t_{0}]$
+のとき
+$I(t)=\yoLL^{n}(\yodisc{n})>0$
+である．
+ここで
+$\yoLL^{n}(\yodisc{n})$
+は
+$\yodisc{n}$
+の
+$n$
+次元ルベーグ測度である．
+ところで
+$I(t)$
+は
+$t$
+の多項式であり，
+しかも
+$I(t)$
+は
+$[0, t_{0}]$
+上で定数なので，
+$[0,1]$
+上でも定数でなければならない．
+つまり
+任意の
+$t\in [0,1]$
+で以下が満たされるはずである．
+\begin{equation}\label{aaa}
+I(t)=\yoLL^{n}(\yodisc{n})>0. 
+\end{equation}
+しかしながら
+$F_{1}(x)=f(x)\in \yosphere{n-1}$
+から
+$\langle f,f\rangle =1$
+である．
+これを適当に変数
+$x_{i}$
+で微分して以下を得る．
+\begin{align}
+\left\langle\frac{\partial f}{\partial x_i}, f\right\rangle=0. 
+\end{align}
+つまり
+$f(x)$
+は
+$J_{x}(f)(x)$
+の転置行列の
+固有ベクトルで，
+その固有値は
+$0$となる．
+固有値に
+$0$
+を
+もつ行列の行列式は
+$0$
+なので
+$\det (J_{x}(f)(x))=0$
+が成り立つはずである．
+これは
+$I(1)=0$
+を意味するが，
+\eqref{aaa}に矛盾する．
+これで証明が終わる．
+\end{proof}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{Dimension of Euclidean spaces}
+\subsection{ユークリッド空間の次元の決定}
+ここではユークリッド空間の次元を決定する．
+
+\begin{thm}\label{thm:sum:jigen}
+$n\in \zz_{\ge 1}$
+で
+$k\in \{0, \dots, n\}$
+とする．
+このとき
+$\yodim \yodisc{n}=
+\yodim \rr^{n}=n$
+である．
+さらに
+$\yodim \yommsp{n}{k}=k$
+かつ
+$\yodim \yollsp{n}{k} = n- k$
+である．
+\end{thm}
+\begin{proof}
+不動点定理の
+正しさはすでに確かめられているとする．
+このとき
+定理
+\ref{thm:sum:douchifixedpoint}
+と
+命題
+\ref{prop:sum:sepn+10}
+から
+$n-1<\yodim \yocube{n}$
+が導かれる．
+このことと
+\ref{lem:sum:nnn}
+から
+$\yodim \rr^{n}=\yodim \yodisc{n}=n$
+がわかる．
+このことから
+$\yodim \yommsp{n}{k}=k$
+かつ
+$\yodim \yollsp{n}{k} = n- k$
+も従う．
+\end{proof}
+
+\begin{cor}\label{cor:sum:mnonaji}
+$n, m\in \zz_{\ge 1}$
+とする．
+もしも
+$\rr^{m}$
+と
+$\rr^{n}$
+が同相ならば
+$m=n$
+である．
+\end{cor}
+
+
+
+\begin{cor}\label{cor:sum:decomp333}
+$n, k\in \zz_{\ge 0}$
+とする．
+$\rr^{n}$
+の部分集合
+$A_{1}, \dots, A_{k}$
+は
+$\yoddim A_{i}\le 0$
+と
+$\rr^{n}=\bigcup_{i=1}^{k}A_{i}$
+が成り立っているとする．
+このとき$n+1\le k$である．
+\end{cor}
+
+
+定理
+\ref{thm:sum:douchifixedpoint}, 
+定理
+\ref{thm:maininvdomain}, 
+系 
+\ref{cor:sum:mnonaji}
+は歴史的経緯や，
+証明手法を鑑みると
+同値であると考えられる．
+もちろん正しい命題はすべて同値になるのだが，
+少し深い意味で同値のように感じられる．
+実際
+\cite{zbMATH07276287}
+では，
+テレンスタオ
+による領域不変性定理の証明
+\cite{tao2011brouwer}
+に触発されて，
+この同値である雰囲気を逆数学の上で論じているようだ．
+しかし筆者は逆数学に詳しくないのでこれ以上のことは解説できないのだ．
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Invariance of domain}
+\section{領域不変性定理}\label{sec:invdom}
+この節では
+次元論の
+応用の一つとして
+ブラウワーの領域不変性定理を証明する．
+この定理は
+$n$
+次元空間内の
+開集合
+$U$
+の
+$n$
+次元ユークリッド空間への
+単射連続像
+は
+開集合であることを述べる定理である．
+\subsection{領域不変性定理の証明}\label{subsec:prfinvdom}
+以下の定理により
+ユークリッド空間内のコンパクト部分集合
+$K$
+の境界点は
+$K$
+の位相的言明のみで特徴付けできることがわかる．
+これが領域不変性定理の肝である．
+\begin{thm}\label{thm:26junbidaiji}
+$n\in \zz_{\ge 1}$
+とし
+$K$を$\rr^{n}$
+のコンパクト部分集合とする．
+このとき
+$p\in \bd_{\rr^{n}} K$
+となるための必要十分条件は
+$p$
+の
+$K$
+内の任意の近傍
+$N$
+について
+$p$
+の
+$K$
+内の開近傍
+$U$
+であって
+$U\subset N$
+を満たしかつ
+任意の連続写像
+$f\colon K\setminus U\to \yosphere{n-1}$
+は連続な拡張
+$g\colon K\to \yosphere{n-1}$
+を持つようなものが存在することである．
+\end{thm}
+\begin{proof}
+まず最初に
+$p\in \bd K$
+を仮定して定理の条件を導く．
+$N$
+を
+$p$
+の任意の近傍とする．
+そして
+$B$
+を
+$p$
+を中心とする十分小さい半径を持つ開球で
+$K\cap B\subset N$
+を満たすものとする．
+このとき
+$U=K\cap B$
+が条件を満たすことを見よう．
+ここで
+$L=\bd B$
+とすると
+$L$
+は
+$\yosphere{n-1}$
+と同相である．
+今ここで任意の連続写像
+$f\colon K\setminus U\to \yosphere{n-1}$
+を考える．
+ここで
+$K\setminus U$
+は
+$K$
+の閉集合である．
+特に
+$\rr^{n}$
+の閉集合でもある．
+ここで
+$\yodim L\le n-1$
+なので
+$\yodim(K\cap L)\le n-1$
+である．
+ここで
+$L\cap K\subset K\setminus U$
+に注意して
+定理
+\ref{thm:ext:extsphere}
+から連続写像
+$f|_{L\cap K}\colon L\cap K\to \yosphere{n-1}$
+の拡張である連続写像
+$u\colon L\to \yosphere{n-1}$
+を得る．
+さて
+$L$
+と
+$K\setminus U$
+の共通部分は
+$L\cap K$
+で，
+この上では
+$u$
+と
+$f$
+は同じ値を取るので写像が貼り合わさって連続写像
+$h\colon (K\setminus U)\cup L\to \yosphere{n-1}$
+を得る．
+そして
+$p$
+が
+$K$
+の境界なので
+$B$
+の点であって
+$K$
+に属さないもの
+$q$
+を取ることができる．
+任意の点
+$x\in K$
+について
+$q$
+から
+$x\in K$
+へ伸ばした直線と
+$L$
+との交点を
+$b(x)$
+とする．
+このとき
+$b\colon K\to L$
+は連続写像である．
+そして
+$g\colon K\to \yosphere{n-1}$
+を以下の式で定義する．
+\begin{align*}
+g(x)
+=
+\begin{cases}
+h(b(x)) & \text{$x\in U\cup (L\cap K)$};\\
+f(x) & \text{$x\in K\setminus U$}. 
+\end{cases}
+\end{align*}
+すると
+定義内の二つの関数
+$h(b(x))$
+と
+$f(x)$
+は
+$L\cap K$
+上で値が一致するので張り合って
+$g$
+は連続関数になる．
+もちろん
+$g$
+は
+$f$
+の拡張になっている．
+
+逆に
+$p\in K$
+が
+定理の条件を満たすとしよう．
+背理法のために
+$p\in K$
+は
+$K$
+の内点であるとする．
+ここで
+$p$
+を中心とする十分小さい半径を持つ
+開球
+$B$
+で
+$\cl B\subset K$
+となるものを考える．
+すると定理の仮定より
+$p$
+の開近傍
+$U$
+で
+$U\subset B$
+で任意の連続関数
+$f\colon K\setminus U\to \yosphere{n-1}$
+が
+$K$
+上に拡張するものが存在する．
+ここで写像
+$f\colon K\setminus U\to \yosphere{n-1}$
+を以下のように定義する．
+点
+$p$
+から
+$x\in K\setminus U$
+へと直線を伸ばし
+$\bd B$との交点を
+$f(x)$
+とする．
+これは連続写像で
+$\bd B$
+は
+$\yosphere{n-1}$
+と同相なので
+連続写像
+$f\colon K\setminus U\to \yosphere{n-1}$
+を得る．
+このとき
+$f$
+は
+$\bd B$
+上で恒等写像になることに注意しよう．
+すると定理の条件より
+連続写像
+$g\colon K\to \yosphere{n-1}$
+が存在する．
+さて
+$\cl B\subset K$
+であった．
+このとき
+$g|_{\cl B}\colon \cl B\to \bd B$
+を考えると
+$g|_{\cl B}$
+は
+$\cl B$
+から
+$\bd B$
+へのレトラクトになる．
+これは
+No retraction theorem 
+(定理
+\ref{thm:sum:douchifixedpoint})
+に矛盾するので
+$p\in K$
+は境界点でなければならない．
+\end{proof}
+
+
+本節では領域不変性定理を証明する．
+\begin{thm}[領域不変性定理]\label{thm:maininvdomain}
+$n\in \zz_{\ge 1}$
+とし
+$U$
+は
+$\rr^{n}$
+の開集合とする．
+そして
+$f\colon U\to \rr^{n}$
+を連続単射とする．
+このとき
+$f(U)$
+は
+$\rr^{n}$
+の開集合である．
+\end{thm}
+\begin{proof}
+任意の
+$p\in U$
+について
+$f(p)$
+が
+$f(U)$
+の内点であることを証明すれば良い．
+$p$
+の十分小さい近傍
+$N$
+で
+$\cl N$
+がコンパクトで
+$\cl N \subset U$
+であるものをとる．
+このとき
+$f|_{\cl N}$
+を考えると
+$f$
+はコンパクト集合からハウスドルフ空間への
+連続単射なので位相的埋め込みになる．
+定理
+\ref{thm:26junbidaiji}
+より
+点
+$p$
+が境界点かどうかは
+$\cl N$
+の内在的な位相的条件で特徴づけられる．
+つまり
+$p$
+は
+$\cl N$
+の内点であるから
+$f(p)$
+は
+$f(\cl N)$
+の内点になる．
+よって特に
+$f(p)$
+は
+$f(U)$
+の内点である．
+\end{proof}
+
+
+\begin{cor}
+$M$
+と
+$N$
+を同じ次元の境界つき
+位相多様体とし
+$f\colon M\to N$
+を同相写像とする．
+このとき
+$f$
+は
+$\partial M$
+を
+$\partial N$
+に移す．
+\end{cor}
+\begin{proof}
+もしも
+$f$
+が
+$p\in \partial M$
+を
+$N\setminus \partial N$
+に移すと，
+$f^{-1}$
+を考えることによって局所的には
+ユークリッド空間の内点が
+$p$
+に写っていることになるが，
+$p$
+は上半平面の境界点なので領域不変性定理に矛盾する．
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{$n$次元ユークリッド空間内の$n$次元集合}\label{sec:interiorndim}
+この節では，
+次元論の応用の一つとして
+$n$
+ユークリッド空間
+内の
+$n$
+次元空間は
+内点を持つことを証明する．
+
+まずは，
+ユークリッド空間の
+可算稠密推移性と呼ばれる
+性質を証明する．
+$1$
+次元ユークリッド空間のその性質の証明のために有理数の
+順序的な構造に対する考察が必要となる．
+\subsection{有理数の順序論的特徴付けと直線の可算稠密推移性}\label{subsec:charaqq}
+
+まずは線型順序の定義から始める．
+\begin{df}[線形順序]
+集合
+$X$
+上の二項関係
+$\le$
+が線形順序であるとは以下の条件が満たされるときにいう．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の
+$a\in X$
+について
+$a\le a$
+が成り立つ．
+\item 
+任意の
+$a, b\in X$
+についてもしも
+$a\le b$
+かつ
+$b\le a$
+ならば
+$a=b$
+である．
+\item 
+任意の
+$a, b, c\in X$
+について
+もしも
+$a\le b$
+かつ
+$b\le c$
+ならば
+$a\le c$
+である．
+\item 
+任意の
+$a, b\in X$
+について
+$a\le b$
+か
+$b\le a$
+が成り立つ．
+\end{enumerate}
+また
+$a<b$
+を
+$a\le b$
+かつ
+$a\neq b$
+と定義する．
+\end{df}
+
+\begin{df}[自己稠密性]
+線形順序集合
+$(X, \le)$
+が
+\yoemph{自己稠密}であるとは
+$x<y$
+となる任意の
+$x,y\in X$について
+$x<s<y$
+となる
+$s\in X$
+が存在するときにいう．
+\end{df}
+集合
+$X$
+の上の順序を
+$\le_X$と書いたりするが，
+文脈上明らかな場合は省略して
+$\le$
+と書いてしまうことにする．
+
+\begin{lem}\label{lem:sum:junjoextefinite}
+$(X,\le_X)$, 
+$(Y,\le_Y)$
+を最大値及び最小値を持たない
+可算で自己稠密な二つの線形順序集合とする．
+さらに
+$S\subset X$, 
+$T\subset Y$
+はその有限部分集合とし，
+順序同型写像
+$h\colon S\to T$
+により
+$S$
+と
+$T$
+は順序同型であると仮定する．
+このとき任意の
+$x\in X\setminus S$
+について，
+ある
+$y\in Y\setminus T$
+が存在して
+$h$
+は順序同型写像
+$H\colon S\cup\{x\}\to T\cup \{y\}$
+へと拡張できる．
+\end{lem}
+\begin{proof}
+$S$,
+$T$
+の元の番号付け
+$S=\{s_{i}\}_{i=1}^{n}$,
+$T=\{t_{j}\}_{j=1}^{n}$
+は以下の条件を満たすとしても一般性を失わない．
+\begin{align}
+&s_{1}<s_{2}<\cdots <s_{n}; \\
+&h(s_{i})=t_{i}. 
+\end{align}
+そして三つに場合分けする．
+
+\yocase{1}{ある$i$について$s_{i}<x<s_{i+1}$のとき}
+このときには
+$Y$
+の自己稠密性から
+$t_{i}<y<t_{i+1}$
+となる
+$y$
+が存在するので，
+これを用いて
+$H(x)=y$
+かつ
+$H(s_{i})=t_{i}$
+と
+$H$
+を定義すれば，
+$H$
+は求めるものになっている．
+
+\yocase{2}{$s_n<x$のとき}
+このときやはり，
+$Y$
+の自己稠密性
+と最大値を持たないという仮定から
+$t_{n}<y$
+となる
+$y\in Y$
+が存在するので
+$H(x)=y$
+かつ
+$H(s_{i})=t_{i}$
+と定義すればよい．
+
+\yocase{3}{$x<s_1$のとき}
+
+
+上と同様である(最小値を持たないという仮定を用いる)．
+
+以上で補題は証明された．
+\end{proof}
+
+
+
+
+
+写像
+$f\colon A\to B$
+について
+$\dom f=A$
+で
+$\cod f =f(A)$
+と定義する．
+\begin{thm}\label{thm:sumbackforthproof}
+最大値及び最小値を持たない可算で自己稠密な線形順序集合は互いに順序同型である．
+特に有理数と順序同型である．
+\end{thm}
+\begin{proof}
+所謂back-and-forth argument 
+により帰納法によって証明する．
+
+$(A,\le_A), 
+(B,\le_B)$
+を最大値及び最小値を持たない可算で自己稠密な二つの順序集合とする．
+そして
+$A=\{a_i\}_{i\in \zz_{\ge 0}}, B=\{b_i\}_{i\in \zz_{\ge 0}}$
+と番号付けされていると仮定する．
+この番号付けを用いて関数の拡張列
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を以下の条件を満たすように帰納的に定義する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item
+$f_{n}$は順序を保つ全単射である．
+\item 
+$\dom f_{n}$は有限集合で，
+$\{a_0,\dots, a_{n}\}$を含む.
+\item $\cod f_{n}$
+は有限集合で$\{b_{0},\dots,b_{n}\,\}$
+を含む.
+\end{enumerate}
+
+Step 0 
+($f_{0}$の定義):
+$f_{0}$
+は
+$f_{0}\colon \{a_0\}\to \{b_0\}$
+で
+$f_{0}(a_{0})=b_{0}$という写像として定義する．
+
+Step 1 ($f_{n}$が構成されたとして$f_{n+1}$を構成する):
+補助的に
+$g_n$
+という順序同型写像を以下のように定義する．
+もし
+$a_{n+1}\in \dom(f_{n})$
+ならば，
+$g_{n}=f_{n}$
+とする．
+もし
+$a_{n+1}\not\in \dom(f_{n})$
+ならば，
+$f_{n}$と$a_{n+1}$，
+および
+$\cod(f_{n}), \dom(f_{n})$
+に
+補題
+\ref{lem:sum:junjoextefinite}
+を用いて
+$f_{n}$
+を
+$\dom(f_n)\cup \{a_{n+1}\}$
+まで拡張した順序同型写像を
+$g_{n}$
+とする．
+
+また更に補助的に
+$h_{n}$
+という順序同型写像を以下のように
+$g_{n}^{-1}$
+を拡張して定義する．
+もし
+$b_{n+1}\in \dom(g_{n}^{-1})=\cod(g_{n})$
+ならば
+$h_{n}=g_{n}^{-1}$
+とする．
+もし
+$b_{n+1}\not\in \dom(g_n^{-1})=\cod(g_{n})$
+の場合には，
+$g_{n}^{-1}$, 
+$b_{n+1}$
+に
+補題
+\ref{lem:sum:junjoextefinite}
+を用いて
+$g_{n}^{-1}$
+を
+$\dom(g_{n}^{-1})\cup\{b_{n+1}\}$
+まで拡張した写像を
+$h_{n}$
+とする．
+最後に
+$f_{n+1}=h_{n}^{-1}$
+と定義すれば帰納法の仮定をすべて満たす．
+
+Step 3: 
+以上で得られた順序同型写像の列
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を用いて，
+写像
+$F\colon A\to B$
+を
+$F(a_n)=f_{n}(a_n)$と定義する．
+列
+$\{f_n\}_{n\in \nn}$
+が写像の拡張列になっているので，
+この定義はwell-definedである．
+
+
+Step 4: 写像
+$F$
+が順序同型写像になっていることを示す．
+まず最初に
+$x, y\in A$
+について
+$x<y$
+ならば
+$F(x)<F(y)$
+であることを示す．
+これが分かれば，
+単射性と順序保存性を得られる．
+十分大きい
+$n$
+を取れば
+$x, y\in \dom(f_{n})$
+となるものが見つかる．
+写像
+$F$
+の定義と
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+が写像の拡張列であることから，
+$F(x)=f_{n}(x)$
+と
+$F(y)=f_{n}(y)$
+がわかる．
+さて
+$f_{n}$
+は順序同型であるから直ちに
+$F(x)<F(y)$
+を得る．
+最後に
+$F$
+が全射であることを示す．
+任意の
+$y\in B$
+に対して十分大きい
+$n$
+を取れば
+$y\in \cod(f_{n})$
+となる．
+写像
+$f_{n}$
+は順序同型なので，
+ある
+$x\in \dom(f_{n})$
+が存在して
+$f_{n}(x)=y$
+となる．
+つまり
+$F(x)=y$
+なので
+$F$
+は全射である．
+\end{proof}
+\begin{rmk}
+上の証明で
+$g_{n}$
+と
+$h_{n}$
+を構成する操作は
+$A$
+と
+$B$
+を往復（前後）している．
+これを指して
+back-and-forth
+(行ったり来たり)
+と呼んでいる．
+\end{rmk}
+
+\begin{exam}
+$\rr$
+の部分集合
+$(0,1)\cap \qq$
+は
+$\qq$
+と順序同型である．
+\end{exam}
+\begin{exam}
+集合
+$\{a+b\sqrt{2}\mid a,b\in \qq\}$
+は
+$\qq$
+と順序同型である．
+\end{exam}
+\begin{exam}
+二進表示で有限小数で表すことのできる数全体，
+つまり
+$\left\{\frac{m}{2^n}\ \middle|\  n,m\in \zz\right\}$
+は
+$\qq$と順序同型である．
+\end{exam}
+
+
+
+
+
+
+
+
+
+
+\begin{lem}\label{lem:sum:chumitusaidai}
+$A$
+を
+$\rr$の稠密可算集合とし，
+$S\subset A$
+は最大元を持たず，
+$u, v\in A$が
+$v\in S$
+と
+$u<v$
+を満たす
+ならば
+$u\in S$
+を満たすとする．
+このときある
+$y\in \rr$
+が存在して
+$S=A\cap (-\infty, y)$
+を満たす．
+さらにこの場合
+$A\setminus S=A\cap [y, \infty)$
+である．
+\end{lem}
+\begin{proof}
+$y=\sup S$とすれば良い．
+\end{proof}
+
+\begin{thm}\label{thm:sum:junjodaiji}
+$A$
+と
+$B$
+を
+$\rr$
+の可算稠密部分集合とする．
+このとき
+順序を保つ写像
+$f\colon  A\to B$は
+同相写像
+$f\colon  \rr\to \rr$で
+$f(A)=B$
+を満たすものに拡張される．
+\end{thm}
+\begin{proof}
+$A$, 
+$B$
+を
+$\rr$
+の稠密可算集合とすると，
+これらは
+定理
+\ref{thm:sumbackforthproof}
+の仮定を満たす．
+よって
+$A$
+と
+$B$
+は順序同型なので
+その順序同型写像を
+$f\colon  A\to B$
+とする．
+適当に
+$A$,
+ $B$
+ を番号付けして
+$f\colon  A\to B$を
+$f(a_{i})=b_{i}$
+と定義したときに順序同型になるようにする．
+今からこの写像を
+$\rr$
+全体に拡張することを考えよう．
+$x\in \rr$
+について
+$R_{x}=(-\infty, x)$, 
+$L_{x}=[x, \infty)$
+と定義する．
+そして
+$S_{x}=f(A\cap R_{x})$, 
+$T_{x}=f(A\cap L_{x})$
+とおく．
+このとき
+$f$
+は順序を保つので
+$S_{x}$
+は
+$u, v$
+が
+$u<v$
+かつ
+$v\in S_{x}$
+を満たすならば
+$u\in S_{x}$を満たす．
+さらに
+$S_{x}$
+には最大元が存在しない．
+よって
+補題
+\ref{lem:sum:chumitusaidai}
+より，
+ある
+$y\in \rr$
+が存在し
+$S_{x}=B\cap (-\infty, y)$となる．
+同様に
+$T_{x}=B\cap [y, \infty)$
+となる．
+そこでこの
+$y$
+を用いて
+$f(x)=y$
+と定義する．
+ここでもし
+$x=a_{i}$
+ならば
+$y=b_{i}$
+になることに注意しよう．
+この
+$f\colon  \rr\to \rr$
+が連続であることを証明しよう．
+まず，
+$f$
+が順序を保つことを証明しよう．
+つまり
+$x<y$ならば$f(x)<f(y)$を示す．
+そのためにまず，
+$A$
+の稠密性から
+$x<a_{n}<y$
+という
+$a_{n}\in A$
+が
+存在することに注意しよう．
+すると
+$b_{n}\not\in S_{f(x)}$
+と
+$b_{n}\in S_{f(y)}$
+が成り立つ．
+特に
+$b_{n}\in T_{f(x)}$
+なので
+$f(x)\le b_{n}<f(y)$である．
+故に
+$f$
+は順序を保つ．
+このことから特に
+$f$
+は単射である．
+連続性を証明するために
+任意に
+$\epsilon>0$
+と
+$x\in \rr$
+を取る．
+すると
+$B$
+の稠密性から
+$b_{N}$
+と
+$b_{M}$
+が存在して
+以下が成立する．
+\begin{align}\label{al:hoho}
+f(x)-\epsilon <b_{N}<f(x)<b_{M}<f(x)+\epsilon.
+\end{align}
+写像
+$f$
+が順序を保つことから
+$a_{N}<x<a_{M}$
+が従う．
+つまり$(a_{N}, a_{M})$
+は
+$x$
+の開近傍となる．
+任意の
+$z\in (a_{N}, a_{M})$
+を取ると
+$f$
+が順序を保つことと式
+\eqref{al:hoho}
+から
+$|f(z)-f(x)|<\epsilon$
+がわかる．
+よって
+$f$
+は連続である．
+さて，
+$f^{-1}\colon  B\to A$
+も同じように拡張を施して
+連続写像
+$g\colon  \rr\to \rr$
+を得る．
+このとき任意の
+$n\in \zz_{\ge 0}$
+について
+$g(f(a_{n}))=a_{n}$と
+$f(g(b_{n}))=b_{n}$
+が成り立つので
+$f$
+と
+$g$
+の連続性から
+任意の
+$x\in \rr$について
+$f(g(x))=x$
+と
+$g(f(x))=x$
+を得る．
+よって
+$f$と
+ $g$は互いに逆写像である．
+ 故に
+ $f$は同相写像である．
+ 写像
+$f$
+の定義から
+$f(A)=B$
+なので定理が示された．
+\end{proof}
+
+
+\subsection{ユークリッド空間の可算稠密推移性：一般の場合}\label{subsec:cdh}
+
+ここではユークリッド空間の
+可算稠密推移性を紹介する．
+つまり，
+$n$
+次元ユークリッド空間
+$\rr^{n}$
+の可算稠密集合
+$A$, 
+$B$
+が与えられたときに同相写像
+$f\colon  \rr^{n}\to \rr^{n}$
+が存在して
+$f(A)=B$
+が成り立つことを証明する．
+まず
+多項式に関する一致の定理から始める．
+
+\begin{thm}[多項式に関する一致の定理]\label{thm:sumpolynomialicchi}
+$p$
+を
+$n$
+変数の実係数多項式とする．
+もしも
+$p$
+の零点全体の集合
+$Z$
+が内点を持つならば
+$p$
+は恒等的に
+$0$
+となる．
+つまり
+$p$が定数
+$0$
+に等しくないならば
+$p(x)\neq 0$
+となる
+$x\in \rr^{n}$
+全体の集合は
+$\rr^{n}$
+のなかで稠密になる．
+\end{thm}
+\begin{proof}
+$n=1$
+の時には
+$k$
+次多項式は高々
+$k$
+個の零点しか
+持たないことから定理は成り立つ．
+次に一般の
+$n$
+について考える．
+$Z$
+の内点を
+$a$
+とする．
+このとき十分小さい
+$r\in \rr$
+が存在して
+開円盤
+$B=
+\{\, x\in \rr^{n}
+\mid 
+\lVert x-a\rVert<r
+\, \}$
+は
+$Z$
+の部分集合となる．
+ここで
+$u\in \yometcball{0}{1}{\lVert\cdot \rVert}$
+を任意にとり
+$q\colon \rr\to \rr$
+を
+$q(t)=p(a+u\cdot t)$
+と定義する．
+すると
+$q$
+は
+$t$
+に関する多項式であり，
+$p$
+が
+$B$
+上で
+$0$
+になることから
+$q$
+は
+$t\in (-r, r)$
+の時
+$q(t)=0$
+となる．
+よって
+$1$
+変数の場合から
+$q$
+は恒等的に
+$0$
+になる．
+ここで
+$u\in \yometcball{0}{1}{\lVert\cdot \rVert}$
+は任意だったので
+$p$
+は全空間で恒等的に
+$0$
+になる．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:sum:openrankdense}
+$n\in \zz_{\ge 1}$
+とする．
+そして
+$v=(v_{1}, \dots, v_{n})\in \rr^{n\times n}$
+と
+$i\in \{\, 
+1, \dots, n
+\, \}$
+および
+$a\in \rr^{n}$
+に対して
+$\yospsp{v, i, a}$
+を
+$\{v_{k}\}_{k\neq i}$
+と
+$a$
+から生成される
+$\rr^{n}$
+の線形部分空間とする．
+このとき集合
+\[
+T_{a, i}=
+\{\, v=(v_1, \dots, v_n)\in \rr^{n\times n}\mid
+\rank \yospsp{v, i, a}=n
+\, \}
+\]
+は
+$\rr^{n\times n}$
+のなかで稠密開集合である．
+\end{lem}
+\begin{proof}
+$v=(v_{1}, \dots, v_{n})\in \rr^{n\times n}$
+に対して
+$f(v)$
+を行列
+$(v_{1}, \dots, v_{n})$
+の第
+$i$
+列を
+$a$
+に変えた行列の行列式を表すことにする．
+すると
+$f$
+は
+$n\times n$
+次多項式であり，
+恒等的に$0$ではない．
+よって
+$f(v)\neq 0$
+となる
+$v$
+は稠密に存在し
+(定理
+\ref{thm:sumpolynomialicchi})，
+またこのような
+$v$
+全体は開集合をなす．
+そして
+$\rank \yospsp{v, i, a}=n$
+と
+$f(v)\neq 0$
+は同値なので，これで証明が終わる．
+\end{proof}
+
+記号
+$\yoglsp{n}$
+で
+$n$次正方行列
+で可逆なもの全体を表すことにする．
+このときベクトルの組
+$v=(v_{1}, \dots, v_{n})\in \yoglsp{n}$
+を考えると，
+これは$\rr^{n}$
+の基底になっている事に注目しよう．
+ベクトルの組
+$v=(v_{1}, \dots, v_{n})\in \yoglsp{n}$
+と
+$a\in \rr^{n}$
+に対して
+$\pr_{v, i}(a)$
+で
+基底
+$v_{1}, \dots, v_{n}$
+に関する
+$a$
+の第
+$i$
+成分を表すとする．
+つまり
+$a=\sum_{i=1}^{n}\pr_{v, i}(a)v_{i}$
+である．
+
+
+
+
+\begin{thm}\label{thm:bairebaire}
+$n\in \zz_{>0}$
+とする．
+$S$
+を
+$\rr^{n}$
+の可算な部分集合で
+$0\not\in S$
+とする．
+このとき
+基底
+$v=(v_{1}, \dots, v_{n})\in \rr^{n\times n}$
+が存在して，
+任意の
+$x\in S$
+について
+$\pr_i(x)\neq 0$
+となるものが存在する．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:sumpolynomialicchi}
+を
+$\rr^{n\times n}$
+と
+$\det$
+に適応すると
+$\yoglsp{n}$
+は
+$\rr^{n\times n}$
+の稠密開集合であることが導かれる．
+そして
+$T$
+を以下のように定義する．
+\begin{align}
+T=\yoglsp{n}\cap \bigcap_{a\in S}\bigcap_{i=1}^{n}T_{a, i}
+\end{align}
+すると各
+$T_{a, i}$
+は稠密開集合なので
+ベールの範疇定理から
+$T$
+は
+$\rr^{n}$
+の稠密集合となる．
+よって
+$v=(v_{1}, \dots, v_{n})\in T$
+をとれば求める基底になる．
+なぜならばもしもそうでないとすると，
+ある
+$i$
+と
+$a\in S$
+について
+$\pr_{v, i}(a)=0$
+となるが，
+これは
+$\{v_{k}\}_{k\neq i}$
+が張る線型空間に
+$a$
+が属していることを意味し，
+それは
+$\rank \yospsp{v, i, a}<n$
+を導く．
+これは
+$v\in T_{a, i}$
+に反するので定理が従う．
+\end{proof}
+
+
+以下では
+$\pr_{v, i}(x)$
+を単に
+$x_{i}$
+や
+$(x)_{i}$
+などと書いたりする．
+\begin{df}
+$(x_1,x_2)\in  \rr^n\times \rr^n$が
+\yoemph{差について一般の位置にある}とは，
+任意の
+$i\in \{1,\dots, 
+n\}$
+について
+\[
+(x_{1})_{i}-(x_{2})_{i}\neq 0
+\]
+を満たすことである．
+集合
+$A \subset \rr^{n}$
+が差について一般の位置にあるとは，
+任意の
+異なる組
+$(x, y)\in A\times A$
+が差について一般の位置にある時に言う．
+\end{df}
+
+
+
+\begin{lem}\label{lem:sum:cdh:59}
+$A$
+を
+$\rr^{n}$
+の可算部分集合とする．
+この時，
+$\rr^{n}$
+の基底
+$(v_{1},v_{2},\dots, v_{n})$で，
+これによる座標系において
+$A$
+が差について一般の位置になるものが存在する．
+\end{lem}
+\begin{proof}
+$S=\{\, 
+x-y\mid x, y\in A
+\, \}\setminus \{0\}$
+に対して
+定理
+\ref{thm:bairebaire}
+を適応すれば
+補題は従う．
+\end{proof}
+
+
+\begin{df}
+差について
+一般の位置にある二つの組
+$(x_{1}, x_{2}), (y_{1},  y_{2})\in \rr^{n}\times \rr^{n}$
+が
+\textbf{共鳴的に場所取り}
+しているとは，
+任意の
+$i\in \{1,\dots, n\}$について，
+$(x_1)_{i}-(x_2)_{i}$
+と
+$(y_1)_{i}-(y_2)_{i}$
+が同じ符号を持つ時に言う．
+番号付された二つの高々可算な，
+有限の場合には同じ濃度を持つ集合
+$A=\{a_{i}\}_{i\in \zz_{\ge 0}},B=\{b_{i}\}_{i\in \zz_{\ge 0}}\subset \rr^{n}$
+が
+\yoemph{共鳴的に位置取り}
+しているとは，
+任意の組
+$(i, j)\in \zz_{\ge 0}^{2}$
+について，
+$(a_{i}, a_{j})$
+と
+$(b_{i}, b_{j})$
+が共鳴的に位置取りしている時に言う．
+\end{df}
+
+\begin{prop}\label{prop:sum:cdh:510}
+$A=\{a_{i}\}_{i\in \zz_{\ge 0}}$,
+$B=\{b_{i}\}_{i\in \zz_{\ge 0}}$
+を
+$\rr^{n}$
+の可算な稠密集合で，
+それぞれ一般の位置にあるとする．
+この時
+$A$,
+$B$
+が共鳴的に位置取りするように番号付けできる．
+\end{prop}
+\begin{proof}
+帰納的に
+$\{c_{i}\}_{i\in \zz_{\ge 0}}=A$, 
+$\{d_i\}_{i\in \zz_{\ge 0}}=B$
+という列を以下のように作っていく．
+まず，
+$c_{0}=a_{0}$, 
+$d_{0}=b_{0}$, 
+$d_{1}=b_{1}$
+と定義する．
+次に
+$i$
+を
+$(c_{0},a_{i})$
+と
+$(d_{0},d_{1})$
+が共鳴的に位置取りするような最小の自然数とする．
+そして，
+$c_{1}=a_{i}$と定義する．
+集合
+$A$
+が稠密であることから，
+このような
+$i$
+は存在する．
+一般に
+奇数番まで
+$c_{i}$
+と
+$d_{i}$
+が構成されたとしよう．
+つまり，
+$c_{0}, c_{1}, \dots, c_{2j+1}$
+と
+$d_{0},d_{1},\dots, d_{2j+1}$
+が構成されたとしよう．
+この時
+$c_{2j+2}$
+と
+$d_{2j+2}$
+を以下のように構成する．
+自然数
+$s\in \zz_{\ge 0}$を，
+$c_{0},c_{1},\dots, c_{2j+1}$
+に属さない
+$a_{i}$の番号
+$i$
+のうち，
+番号の一番小さいものとする．
+この時
+$c_{2j+2}=a_{s}$
+と定義する．
+次に自然数
+$t$
+を
+$c_{0},c_{1},\dots, c_{2j}, c_{2j+1}$
+と
+$d_{0}, d_{1},  \dots, d_{2j}, b_{t}$
+が共鳴的に位置取りする番号の一番小さいものとする．
+そして
+$d_{2j+2}=b_{t}$
+と定義する．
+
+
+さらに
+$c_{2j+3}$
+と
+$d_{2j+3}$
+を以下のように構成する．
+自然数
+$p$
+は
+$d_{0}, d_{1}, \dots, d_{2j+2}$に含まれない
+$b_{p}$
+の一番小さい番号とする．
+そして
+$d_{2j+3}=b_{p}$
+と定義する．
+次に，
+自然数
+$q$
+を
+$c_{0}, c_{1}, \dots, c_{2j+2}, a_{q}$
+と
+$d_{0}, d_{1}, \dots, d_{2j+2}, d_{2j+3}$
+が共鳴的に位置取りしているようになる
+$a_q$
+のうち最小の番号とする．
+そして
+$c_{2j+3}=a_{q}$
+と定義する．
+
+以上の帰納的構成は，
+$A$
+と
+$B$
+が共に稠密であることから可能である．
+\end{proof}
+
+\begin{thm}\label{thm:sum:cdh:cdh}
+$A$,
+$B$
+を
+$\rr^{n}$
+の可算稠密集合とする．
+この時，
+同相写像
+$f\colon \rr^{n}\to \rr^{n}$
+が存在して，
+$f(A)=B$
+を満たす．
+\end{thm}
+\begin{proof}
+適当に基底と番号を取り替えて，
+$A=\{a_{i}\}_{i\in \zz_{\ge 0}}$, 
+$B=\{b_{i}\}_{i\in \zz_{\ge 0}}$
+は共鳴的に位置取りしており，
+$A$
+と
+$B$
+は共に一般の位置にあるとしても良い．
+一般に
+$a_{i}=(a_{i, 1}, \dots,  a_{i, n})$, 
+$b_{i}=(b_{i, 1}, \dots,  b_{i, n})$
+と表すことにする．
+集合
+$A$
+と
+$B$
+が差について一般の位置になるように座標をとっているので
+$i\neq j$
+ならば任意の
+$k\in \{1, \dots, n\}$
+について
+$a_{i, k}\neq a_{j, k}$
+かつ
+$b_{i, k}\neq b_{j, k}$
+となる．
+今
+$k\in \{1, \dots, n\}$
+に対して
+$A_{k}=\pi_{k}(A)$, 
+$B_{k}=\pi_{k}(B)$
+とする．
+ここで
+$\pi_{k}$
+は
+$k$
+番目の座標の射影である．
+すると
+$A_{k}$
+と
+$B_{k}$
+は
+$\rr$
+の可算稠密部分集合でさらに共鳴的に番号付けされていることから
+$f_{k}(a_{i, k})=b_{i, k}$
+で定義すると
+$f_{k}$
+は順序を保つ同型写像になる(もし
+$A$
+と
+$B$
+が差について一般の位置になければ，
+潰れる番号もあるので，
+このように
+$f$
+を定義しても順序同型にならないし，
+そもそも
+$f$
+が定義できない可能性もある)．
+ここで
+定理 
+\ref{thm:sum:junjodaiji}
+より，
+$f_{k}$は同相写像
+$f_{k}\colon  \rr\to \rr$で
+$f_{k}(A_{k})=B_{k}$
+になるものに拡張できる．
+いま
+$f\colon  \rr^{n}\to \rr^{n}$
+を
+$f(x)=(f_{1}(x_{1}), \dots, f_{n}(x_{n}))$
+と定義しよう．
+このとき
+$a_{i}=(a_{i, 1}, \dots, a_{i, n})$
+について
+$f(a_{i})=
+(f_{1}(a_{i, 1}), \dots, f_{n}(a_{i, n}))
+=(b_{i, 1}, \dots, b_{i, n})$
+なので
+$f(A)=B$
+である．
+$g(x)=(f_{1}^{-1}(x_{1}), \dots, f_{n}^{-1}(x_{n}))$
+とすれば
+$g$
+は
+$f$
+の逆写像になる．
+よって
+$f$
+は同相写像である．
+\end{proof}
+
+\begin{thm}\label{thm:sum:cdh:conclusion}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$\rr^{n}$
+の
+部分集合
+$S$
+が
+$\yodim S=n$
+を満たしているのならば
+$S$
+は
+内点を持つ．
+\end{thm}
+\begin{proof}
+背理法のために
+$S$
+は内点を持たないと仮定する．
+このとき
+$\rr^{n}\setminus S$
+は稠密である．
+よって
+$\rr^{n}$
+の可算稠密部分集合
+$A$
+で
+$A\cap S=\emptyset$
+を満たすものを取ることができる．
+このとき
+\ref{thm:sum:cdh:cdh}
+から
+同相写像
+$f\colon \rr^{n}\to \rr^{n}$
+で
+あって
+$f(A)=\qq^{n}$
+であるものが
+存在する．
+ここで
+$\rr^{n}\setminus \qq^{n}=\yommsp{n}{n-1}$
+であるから，
+補題
+\ref{lem:sum:mmspllsp}
+より
+$\yodim(\yommsp{n}{n-1})\le n-1$
+がわかる．
+故に
+$\yodim f(S)\le n-1$
+である．
+写像
+$f$
+は同相なので
+$\yodim S\le n-1$
+が従うが，
+これは
+$\yodim S=n$に矛盾する．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{有限次元空間の埋め込み定理}\label{sec:embeddingdim}
+この節では
+次元論の
+応用の一つとして，
+有限次元可分距離化可能空間は
+ユークリッド空間に
+位相的に埋め込めることを証明する．
+\subsection{アフィン結合や一般の位置}\label{subsec:preparation}
+
+\begin{df}
+$l\in \zz_{\ge 1}$
+とする．
+ユークリッド空間
+$\rr^{l}$
+内の
+有限個の点
+$e_{1}, \dots, e_{m}$
+が
+\yoemph{アフィン的独立である}とは
+$t_{1}, \dots, t_{m}\in \rr$
+が
+$\sum_{i=1}^{m}t_{i}=0$
+と
+$\sum_{i=1}^{m}t_{i}\cdot e_{i}=0$
+を満たしているならば，
+$t_{1}=\dots =t_{m}=0$
+を満たす時にいう．
+これは
+$e_{2}-e_{1}, \dots, e_{m}-e_{1}$
+が線型独立であることと同値である．
+また，
+$\rr^{l}$
+内の有限個の点
+$w_{1}, \dots, w_{m}$
+の
+\yoemph{アフィン結合}とは
+$m$
+個の実数
+$t_{1}, \dots, t_{m}\in \rr$
+であって
+$\sum_{i=1}^{m}t_{i}=1$
+を満たすものを使って
+$\sum_{i=1}^{m}t_{i}\cdot w_{i}$
+と表される
+点のことである．
+もしも
+$w_{1}, \dots, w_{m}$
+がアフィン的独立であるのならば
+これらのアフィン結合の係数は一意的である
+ことに注目しよう．
+また
+$w_{1}, \dots, w_{m}$
+が張る
+\yoemph{アフィン部分空間
+$\yoaff{w_{1}, \dots, w_{m}}$}
+とは，
+$w_{1}, \dots, w_{m}$
+のアフィン結合
+全体の集合のことである．
+$\yoaff{w_{1}, \dots, w_{m}}$
+は
+$w_{2}-w_{1}, \dots, w_{m}-w_{1}$
+で張られる線型空間
+$W$
+を使うと
+$\yoaff{w_{1}, \dots, w_{m}}=w_{1}+W$
+と表されることに注目しておこう．
+特に
+$m\le l$のとき
+$\yoaff{w_{1}, \dots, w_{m}}$
+は$\rr^{l}$
+の閉集合であり，さらに内点を持たない．
+\end{df}
+
+\begin{df}
+$l\in \zz_{\ge 1}$
+とする．
+このとき
+部分集合
+$S\subset \rr^{l}$
+が
+\yoemph{一般の位置にある}
+とは
+任意の
+$i\in \{1, \dots, l+1\}$
+について
+$S$
+の
+$i$
+個の
+異なる元は
+アフィン的独立であるときにいう．
+\end{df}
+
+\begin{prop}\label{prop:densegp}
+$l\in \zz_{\ge 1}$
+を任意に与え，
+$O\subset \rr^{l}$
+を稠密開集合とする．
+そして
+$C\subset O$
+を高々可算な
+一般の位置にある集合とする．
+このとき
+可算な稠密
+集合
+$S\subset O$
+で
+$C\cup S$
+が一般の位置にあり
+$C\cap S=\emptyset$
+となるものが存在する．
+\end{prop}
+\begin{proof}
+$\rr^{l}$
+の
+可算稠密集合を適当にとり
+$E$
+とする．
+そして
+$E\times \qq_{>0}$
+を適当に番号付して
+$E\times \qq_{> 0}=\{(q_{k}, r_{k})\}_{k\in \zz_{\ge 0}}$
+とおく．
+帰納法により
+次のような列
+$e_{1}, \dots, e_{k}$
+を構成する：
+$C\cup \{e_{1}, \dots, e_{k}\}$
+は一般の位置にあり，
+任意の
+$i\in \{1, \dots, k\}$
+について
+$\lVert e_{i} - q_{i}\lVert < r_{i}$
+を満たす．
+帰納法により
+$e_{1}, \dots, e_{k}$
+まで構成できたとして
+$e_{k+1}$
+を構成する．
+まず
+$C\cup \{e_{1}, \dots, e_{k}\}$
+の任意の有限部分集合
+$I$
+で
+$\card(I)\le l$
+となるもの
+について
+$A(I)=\yoaff{I}$
+と定義し，
+$A$
+をそのような
+$A(I)$
+全体の和集合とする．
+このとき各
+$A(I)$
+は閉集合で内点を持たなく，
+$A$
+はそのような集合の可算個の和集合なので，
+Baireの範疇定理により
+$A$
+自体も内点を持たない．
+よって
+$O\setminus A$
+は稠密である．
+さらに
+$C$
+も高々可算なので
+$O\setminus (A\cup C)$
+も稠密である．
+よって
+$e_{k+1} \in O\setminus (A\cup C)$
+でなおかつ
+$\lVert e_{k+1} - q_{k+1}\lVert < r_{k+1}$
+を満たすものが取れる．
+ここで
+$C\cup \{e_{1}, \dots, e_{k}\}$
+の任意の有限部分集合
+$I$
+で
+$\card(I)\le l$
+となるもの
+について
+$e_{k+1}\not \in A(I)$
+となるので
+$C\cup \{e_{1},\dots, e_{k}, e_{k+1}\}$
+は一般の位置にあることが従う．
+\end{proof}
+
+\begin{prop}\label{prop:n+1inde}
+$n, l\in \zz_{\ge 1}$
+とする．
+$e_{1}, \dots, e_{m}\in \rr^{l}$
+は
+$\rr^{l}$
+の一般の位置にある列とする．
+このときもしも
+$2n+1\le l$
+ならば，
+集合
+$\{1, \dots, m\}$
+の
+濃度高々
+$n+1$
+の部分集合
+$I$
+を台に持つ
+アフィン結合
+$\sum_{i=1}^{m}s_{i}\cdot e_{i}$
+の係数は一意的である．
+ここで
+$I$
+を台に持つとは
+$i\in I$
+のとき，
+そしてその時に限り
+$s_{i}\neq 0$
+となるということである．
+\end{prop}
+\begin{proof}
+$I$
+とは異なる
+濃度が高々
+$n+1$
+の
+$\{1, \dots, m\}$
+の部分集合
+$J$
+を台にもつ
+アフィン結合
+$\sum_{i=1}^{m}t_{i}\cdot e_{i}$
+が
+$\sum_{i=1}^{m}s_{i}\cdot e_{i}$
+と等しいと
+しよう．
+このとき以下を得る．
+\begin{align}
+\sum_{i\in I\setminus J}s_{i}\cdot e_{i}
++
+\sum_{i\in J\setminus I}(-t_{i})\cdot e_{i}
++
+\sum_{i\in J\cap I}(s_{i}-t_{i})\cdot e_{i}
+=0. 
+\end{align}
+この式の係数を見ると以下を得る．
+\begin{align}
+\sum_{i\in I\setminus J}s_{i}
++
+\sum_{i\in J\setminus I}(-t_{i})
++
+\sum_{i\in J\cap I}(s_{i}-t_{i})
+=0. 
+\end{align}
+ここで
+$I\cup J$
+の濃度が高々
+$2n+2$
+であり，
+$l$
+は
+$2n+1\le l$，
+つまり
+$2n+2\le l+1$
+を満たすので
+$e_{1}, \dots, e_{m}$
+が一般の位置にあることから
+$\{e_{i}\}_{i\in I\cup J}$
+はアフィン独立である．
+よって
+$I\setminus J$上で
+$s_{i}=0$
+かつ
+$J\setminus I$
+上で
+$t_{i}=0$
+かつ
+$I\cap J$
+上で
+$s_{i}=t_{i}$
+となるが，
+$s_{i}$
+と
+$t_{i}$
+がそれぞれ
+$I$
+と
+$J$
+を台にもつので
+$I=J$
+でなければならず
+このとき
+$I=J=I\cap J$
+なので
+$s_{i}=t_{i}$
+が
+$I$
+上で成り立ち，
+係数の一意性が成り立つ．
+\end{proof}
+
+
+\subsection{関数空間と埋め込み}\label{subsec:funcsp}
+\begin{df}
+$X$
+を位相空間とする．
+そして
+$(K,  d)$
+を
+コンパクト距離空間とする．
+本稿では
+$\yofuncsp{X}{K}$
+という記号で
+$X$から
+$K$
+への連続写像全体
+を表す．
+そして
+$d$
+から誘導される
+$\yofuncsp{X}{K}$
+上のsup距離関数
+を
+$\yosupmet{d}$
+で表す．つまり
+$\yosupmet{d}(f, g)=\sup_{x\in X}d(f(x), g(x))$
+である．
+ここで採用した
+$\yofuncsp{X}{K}$
+の定義から
+$\yosupmet{d}$
+は有限の値を取る．
+\end{df}
+
+標準的な議論により以下の命題を得る．
+証明は省略する．
+\begin{prop}\label{prop:funccomp}
+$X$
+を位相空間とし
+$(K, d)$
+はコンパクト距離空間とする．
+このとき
+$(\yofuncsp{X}{K}, \yosupmet{d})$
+は完備であり，
+特にベール空間である．
+\end{prop}
+
+\begin{df}
+位相空間
+$X$
+の被覆
+$\yocovf{U}$
+について
+写像
+$f\in \yofuncsp{X}{H}$
+が
+$\yocovf{U}$-map
+(あるいは
+$\yocovf{U}$-small)
+であるとは
+任意の
+$z\in H$
+についてある
+$z$
+の近傍
+$N$
+と
+$U\in \yocovf{U}$
+が存在し
+$f^{-1}(N)\subset U$
+を満たすことである．
+本稿では
+$\yofsusm{\yocovf{U}}$
+で
+$\yofuncsp{X}{H}$
+内の
+$\yocovf{U}$-map
+全体を表すとする．
+\end{df}
+
+\begin{prop}\label{prop:smallopen}
+$X$
+を位相空間とし
+$\yocovf{U}$
+はその被覆で
+$(K, d)$
+を
+コンパクト距離空間とする．
+このとき
+$\yofsusm{\yocovf{U}}$
+は$\yofuncsp{X}{K}$
+の開集合である．
+\end{prop}
+\begin{proof}
+$f\in \yofsusm{\yocovf{U}}$
+を任意にとる．
+各点
+$z\in K$
+について
+$N_{z}$
+を
+$z$
+の開近傍である
+$U\in \yocovf{U}$
+が存在し
+$f^{-1}(N_{z})\subset U$
+となるものとする．
+このとき
+$\{N_{z}\}_{z\in K}$
+は
+$K$
+の被覆で
+$K$
+はコンパクトだから
+$\{N_{z}\}_{z\in K}$のルベーグ数
+$r\in (0, \infty)$
+が存在する．
+ここで
+$g$
+を
+$\yosupmet{d}(f, g)<2^{-3}r$
+となる任意の
+$g\in \yofuncsp{X}{K}$
+とする．
+任意に
+$z\in K$
+を取る．
+そして
+$M=\yometoball{z}{2^{-3}r}{d}$，
+つまり
+$M$
+を
+$z$
+を中心とする
+半径
+$2^{-3}r$
+の
+$d$
+による開球とする．
+そして
+$p(z)\in K$
+を
+$\yometoball{z}{r}{d}\subset N_{p(z)}$
+となるものとする．
+さて,
+任意に
+$x\in g^{-1}(M)$
+を取る．
+このとき
+$g(x)\in M$
+である．
+つまり
+$d(z, g(x))\le 2^{-3}r$
+である．
+また
+$\yosupmet{d}(g, f)<2^{-3}r$
+から
+$d(g(x), f(x))<2^{-3}r$
+である．
+よって
+$f(x)\in \yometoball{z}{r}{d}$
+なので
+$f(x)\in N_{p(z)}$
+である．
+$N_{p(z)}$
+の定義より
+$f^{-1}(N_{p(z)})\subset U$
+となる
+$U\in \yocovf{U}$
+が存在する．
+このとき
+$x\in f^{-1}(N_{p(z)})$
+より
+$x\in U$
+である．
+ここで$x\in g^{-1}(M)$
+は任意であったから
+$g^{-1}(M)\subset U$
+である．
+以上で証明が終わる．
+\end{proof}
+
+
+\begin{prop}\label{prop:smalldense}
+$X$
+を距離空間とし，
+$\yodim X\le n$
+で，
+$\yocovf{U}$
+を$X$
+の有限被覆とする．
+そして
+$l\in \zz_{\ge 1}$
+は$2n+1\le l$を満たすとし
+$K$は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+そして
+$d$
+は
+$\rr^{l}$
+の標準的な内積から誘導される
+ノルムによる距離とする．
+このとき
+$\yofsusm{\yocovf{U}}$
+は
+$\yofuncsp{X}{K}$
+のなかで稠密である．
+\end{prop}
+\begin{proof}
+任意の$f\in \yofuncsp{X}{K}$
+を取る．
+そして
+任意の
+$\eta\in (0, \infty)$
+を与える．
+このとき
+$K$
+を直径が
+$2^{-10}\eta$
+以下の有限個の開集合
+$O_{1}, \dots, O_{q}$
+で覆うことができる．
+そして
+$\{U\cap f^{-1}(O_{i})\mid U\in \yocovf{U}, i=1, \dots, q\}$
+を考えるとこれは
+$X$
+の有限被覆であり，
+故に
+$\yodim X\le n$
+なのでこの被覆
+の細分であるような有限被覆
+$\yocovf{V}=\{V_{1}, \dots, V_{m}\}$
+が存在して
+$\yodeg(\yocovf{V})\le n+1$
+を満たす．
+適当にコゼロ集合が
+$V_{i}$
+に一致するような関数
+$w_{i}\colon X\to [0, 1]$
+を取り，適当に正規化して
+$\sum_{i=1}^{m}w_{i}=1$
+を満たすとしても良い(
+例えば
+$w_{i}(x)=d(x, X\setminus V_{i})$など)．
+このとき
+$f(V_{i})$
+の直径は
+$2^{-10}\eta$
+以下であることに注意しよう．
+命題
+\ref{prop:densegp}
+を稠密部分集合
+$\rr^{l}$
+と
+$C=\emptyset$
+に用いて
+稠密な一般の位置にある集合
+$E\subset \rr^{l}$
+を取る．
+そして
+$i\in \{1, \dots, m\}$
+について
+$e_{i}\in E\cap \nai K$
+を
+$d(f(V_{i}), e_{i})<2^{-5}\eta$
+を満たすようにとる．
+これは
+$\cl(\nai K)=K$
+であるから可能である．
+そして写像
+$g\colon X\to K$
+を
+$g(x)=\sum_{i=1}^{m}w_{i}(x)\cdot e_{i}$
+と定義する．
+このとき任意の
+$x\in X$
+について以下が導かれる．
+\begin{align*}
+d(f(x), g(x))&=\left\lVert f(x)-  \sum_{i=1}^{m}w_{i}(x)\cdot e_{i}\right\rVert
+=
+\left\lVert \sum_{i=1}^{m}w_{i}(x)\cdot f(x)-  \sum_{i=1}^{m}w_{i}(x)\cdot e_{i}\right\rVert\\
+&\le 
+ \sum_{i=1}^{m}w_{i}(x)\cdot \left\lVert f(x)-  e_{i}\right\rVert
+\end{align*}
+すると
+$w_{i}(x)>0$
+となる
+$i$
+については
+$f(x)$
+と
+$e_{i}$
+の距離は，
+$e_{i}$
+の定義
+と
+$f(V_{i})$の直径の評価から
+$(2^{-5}+2^{-10})\eta$
+以下
+と評価できる．
+よって上記式から
+$\yosupmet{d}(f, g)<\eta$
+が従う．
+次に
+$g$
+が$\yofsusm{\yocovf{U}}$
+に属することを示そう．
+列
+$e_{1}, \dots, e_{m}$
+の高々
+$n+1$
+個の元の凸結合で表される集合を
+$R$
+とすると
+これは
+高々$n$次元の
+単体と同相な有限個の集合の和集合であるからコンパクトである．
+そして
+$g$
+の像は
+$R$
+に含まれている．
+よって
+$R$
+に含まれない
+$z\in K$
+については
+$R$
+の補集合を
+$N_{z}$
+と取れば
+$g^{-1}(N_{z})=\emptyset$
+なので
+条件は満たされる．
+次に
+$z\in R$
+としよう．
+ここで
+$z=\sum_{i\in I}c_{i}\cdot e_{i}$
+で
+$I$
+は
+$\card(I)\le n+1$
+となるような
+$\{1, \dots, m\}$
+の部分集合とし
+$c_{i}\neq 0$
+とする．
+ここで
+アフィン結合の定義から
+$I\neq \emptyset$
+である．
+十分小さい
+$\epsilon\in (0, \infty)$
+を取れば
+任意の
+$y\in \yometoball{z}{\epsilon}{d}\cap R$
+については
+$y=\sum_{i}a_{i}\cdot e_{i}$
+と表したとき
+$i\in I$
+について
+$a_{i}\neq 0$
+となる．
+これは
+命題
+\ref{prop:n+1inde}
+から可能である．
+もしも
+$g$
+の像が
+$\yometoball{z}{\epsilon}{d}$
+と共通部分を持たない場合には
+$g$
+による
+$\yometoball{z}{\epsilon}{d}$
+の引き戻しは空集合なので
+$\yocovf{U}$-map
+の条件は満たされている．
+集合
+$N=\yometoball{z}{\epsilon}{d}$
+と
+$g$
+の像が共通部分を持つとしよう．
+このとき
+$g(x)\in N$
+となる
+$x\in X$
+について
+$i\in I$
+を適当に取ると
+$\epsilon$
+の取り方から
+$w_{i}(x)>0$
+なので
+$x\in V_{i}$
+である．
+つまり
+$g^{-1}(N)\subset V_{i}$
+である．
+以上で
+$g\in \yofsusm{\yocovf{U}}$
+がわかった．
+よって
+$\yofsusm{\yocovf{U}}$
+は
+$\yofuncsp{X}{K}$
+のなかで稠密である．
+\end{proof}
+
+
+位相空間
+$X$
+の被覆
+$\yocovf{U}$
+と
+$x\in X$
+について
+$\yostset{x, \yocovf{U}}=\bigcup\{U\in \yocovf{U}\mid x\in U\}$
+と定義する．
+
+位相空間
+$X$
+の有限被覆の列
+$\yocovf{U}_{0}, \dots, \yocovf{U}_{n}, \dots$
+が
+\yoemph{被覆の基本列}
+であるとは
+任意の$x\in X$
+について
+$\{\yostset{x, \yocovf{U}_{n}}\}_{n\in \zz_{\ge 0}}$
+が
+$x$
+の基本近傍系になるときにいう．
+
+\begin{lem}\label{lem:kihonretu}
+$X$
+を可分距離化可能空間とする．
+このとき
+$X$
+には被覆の基本列
+が存在する．
+\end{lem}
+\begin{proof}
+$X$
+は可分距離化可能空間であるから
+$[0, 1]^{\aleph_{0}}$
+に位相的に埋め込める(ウリゾーンの距離化可能定理)．
+よって
+$X$と同じ位相を生成する距離
+$d$
+で
+$(X, d)$
+が全有界であるもの
+が存在する．
+このとき
+$\yocovf{U}_{n}$
+を
+$X$を被覆する
+半径
+$2^{-n}$
+以下の開球
+の有限集合とする．
+このような取り方ができるのは
+$(X, d)$
+が全有界だからである．
+すると
+$\{\yocovf{U}_{n}\}_{n\in \zz_{\ge0}}$
+は被覆の基本列になっている．
+\end{proof}
+
+
+\begin{prop}\label{prop:umekomi}
+$X$
+を距離化可能空間とし，
+$(K, d)$
+を
+コンパクト距離空間とする．
+そして
+$\{\yocovf{U}_{i}\}_{i\in \zz_{\ge0}}$
+は被覆の基本列とする．
+このとき
+$\bigcap_{i\in \zz_{\ge 0}}\yofsusm{\yocovf{U}_{i}}$
+の任意の元は
+位相的埋め込みになっている．
+\end{prop}
+\begin{proof}
+$f\in \bigcap_{i\in \zz_{\ge 0}}\yofsusm{\yocovf{U}_{i}}$
+を任意にとる．
+今からこれが埋め込みになることを示そう．
+まず単射性を示そう．
+$x\neq y$
+とする．
+このとき被覆の基本列の定義から
+ある
+$i\in \zz_{\ge 0}$
+が存在して
+$y\not \in \yostset{x, \yocovf{U}_{i}}$
+となる．そして
+$f\in \yofsusm{\yocovf{U}_{i}}$
+であるから
+$f(x)$
+の近傍
+$N$
+が存在して
+$f^{-1}(N)\subset U$
+となる
+$U\in \yocovf{U}_{i}$
+が存在する．
+今
+$y\not \in \yostset{x, \yocovf{U}_{i}}$
+なので 
+$y\not \in U$
+であり
+$f(y)\not \in N$
+が従う．
+特に
+$f(x)\neq f(y)$
+である．
+次に
+$f$
+が位相的埋め込みであることを示そう．
+点
+$x\in X$
+を任意に与え，その近傍
+$V$
+も任意に与える．
+このとき被覆の基本列の定義から
+ある
+$i\in \zz_{\ge 0}$
+が存在して
+$\yostset{x, \yocovf{U}_{i}}\subset V$
+である．
+そして
+$f\in \yofsusm{\yocovf{U}_{i}}$
+であるから
+$f(x)$
+の近傍
+$N$
+が存在して
+$f^{-1}(N)\subset U$
+となる
+$U\in \yocovf{U}_{i}$
+が存在する．
+このとき
+$f^{-1}(N)\subset \yostset{x, \yocovf{U}_{i}}\subset V$
+である．
+よって
+$f^{-1}$
+が
+$f(x)$
+で連続であることが証明された．
+これで証明が終わる．
+\end{proof}
+
+$X$
+から
+$K$
+への位相的埋め込み全体
+を
+$\yoemb{X}{K}$
+と書くことにする．
+
+\begin{thm}\label{thm:umekomidense}
+$X$
+を可分距離空間とし，
+$\yodim X\le n$
+で
+$l\in \zz_{\ge 1}$
+は
+$2n+1\le l$
+を満たすとし
+$K$は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$
+は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+そして
+$d$
+は
+$\rr^{l}$
+の標準的な内積から誘導される
+ノルムによる距離とする．
+このとき
+$X$
+から
+$K$
+への位相的埋め込み全体
+$\yoemb{X}{K}$
+は
+$\yofuncsp{X}{K}$
+のなかで
+$G_{\delta}$
+かつ稠密である．
+特に
+有限次元の可分距離化可能空間は
+ユークリッド空間に埋め込み可能である．
+\end{thm}
+\begin{proof}
+命題
+\ref{prop:funccomp}, 
+\ref{prop:smallopen}, 
+\ref{prop:smalldense}, 
+補題
+\ref{lem:kihonretu}
+を
+組み合わせるとわかる．
+\end{proof}
+
+\subsection{普遍空間}\label{subsec:universalsp}
+
+次に高々
+$n$
+次元の
+可分距離化可能空間を全て埋め込めるような
+可分距離空間を構成しよう．
+
+$l\in \zz_{\ge 0}$
+で
+$X$を位相空間とし，
+$\rr^{l}$
+の部分集合
+$K$, 
+および
+$\rr^{l}$
+の部分アフィン空間
+$M$
+について
+$\yoavoid{M}$
+で
+$\yofuncsp{X}{K}$
+の元で
+$\cl (f(X))\cap M=\emptyset$
+となるもの全体とする．
+\begin{prop}\label{prop:sum:avoidopen}
+$X$
+を距離空間とし，
+$\yodim X\le n$
+で，
+$\yocovf{U}$
+を$X$
+の有限被覆とする．
+そして
+$l\in \zz_{\ge 1}$
+は
+$2n+1\le l$
+を満たすとし
+$K$
+は
+$\rr^{l}$
+のコンパクト部分集合で
+$\nai K$
+は凸で
+$\cl (\nai K)=K$
+を満たすとする．
+このとき
+$\rr^{l}$
+の任意の
+高々
+$n$
+次元のアフィン部分空間
+$M$
+について
+$\yoavoid{M}$
+は稠密かつ
+開集合である．
+\end{prop}
+\begin{proof}
+まず
+$\yoavoid{M}$
+が開集合であることを示そう．
+任意に
+$h\in \yoavoid{M}$
+を取る．
+このとき
+$\cl(h(X))\cap M=\emptyset$
+であり，
+$K$
+がコンパクトであることから
+$\cl(h(X))$
+もコンパクトである．
+よって十分小さい
+$\eta$
+を取れば
+$\cl(h(X))$と$M$
+の距離は
+$\eta$
+以上になる．
+そして
+$\yosupmet{d}(f, h)<2^{-1}\eta$
+のとき
+$f$
+は
+$\cl(f(X))\cap M=\emptyset$を満たす．
+よって
+$\yoavoid{M}$
+は開集合である．
+
+次に稠密性を示そう．
+任意に
+$f\in \yofuncsp{X}{K}$
+を取る．
+ここで
+アフィン空間
+$M$
+を張る
+アフィン的独立な元
+$c_{1}, \dots, c_{q}$
+を取る．
+このとき
+$q\le n+1$
+であることに注意せよ．
+そして
+$C=\{c_{1}, \dots, c_{q}\}$
+に対して
+命題
+\ref{prop:densegp}
+を適応して
+一般の位置にある稠密可算集合
+$E\subset \rr^{l}$
+で
+$C\cup E$
+も一般の位置にあり，
+$C\cap E=\emptyset$
+となるものをとる．
+ここで
+命題
+\ref{prop:smalldense}
+の証明
+と同じ構成をして
+$g(x)=\sum_{i=1}^{m}w_{i}(x)\cdot e_{i}$
+を構成する．
+異なるのは
+$E$
+の取り方のみである．
+この
+$g$
+が
+$f$
+を近似することは
+命題
+\ref{prop:smalldense}
+の証明と同様である．
+今から
+$g\in \yoavoid{M}$
+を証明しよう．
+列
+$e_{1}, \dots, e_{m}$
+の高々
+$n+1$
+個の元の凸結合で表される集合を
+$R$
+とすると
+これは
+高々
+$n$次元の
+単体と同相な有限個の集合の和集合であるからコンパクトである．
+そして
+$g$
+の像は
+$R$
+に含まれている．
+このとき
+命題\ref{prop:n+1inde}
+と
+$E\cap C=\emptyset$
+より
+$R\cap M=\emptyset$
+である．
+よって
+$\cl(g(X))\cap M=\emptyset$
+であり
+$g\in \yoavoid{M}$
+を得る．
+これで証明が終わる．
+\end{proof}
+
+$n\in \zz_{\ge 0}$
+を任意に与える．
+このとき
+記号
+$\yonebsp{n}$
+で
+$[0, 1]^{2n+1}$
+の部分空間で
+その点の
+座標のうち
+有理数であるものの個数が
+高々
+$n$
+個であるもの
+全体を表すとする．
+つまり
+$\yonebsp{n}=[0, 1]^{2n+1}\cap \yommsp{2n+1}{n}$
+とする．
+この空間は
+N\"{o}beling space
+と呼ばれることもあるようである．
+この空間が
+$n$
+次元の可分距離空間の
+普遍空間であることを証明しよう．
+\begin{thm}\label{thm:sum:nebspuniv}
+$n\in \zz_{\ge 0}$
+とし
+$X$
+を
+可分距離化可能空間で
+$\yodim X\le n$
+とする．
+このとき
+$X$
+から
+$\yonebsp{n}$
+への位相的埋め込みが存在する．
+\end{thm}
+\begin{proof}
+$\{1, \dots, 2n+1\}$
+の濃度が
+$n+1$
+の部分集合
+$I=\{u_{1}, \dots, u_{n+1}\}$
+と
+$q=(q_{1}, \dots, q_{n+1})\in \qq^{n+1}$
+について
+\begin{align}
+M(I; q)=\{x\in \rr^{2n+1}\mid \forall i\in \{1, \dots, n+1\}, \ x_{u_{i}}=q_{i}\}
+\end{align}
+と定義する．
+このとき
+$M(I; q)$
+は
+$n$次元
+アフィン部分空間である．
+このとき
+$\yonebsp{n}$
+の定義から
+$[0, 1]^{2n+1}\setminus \yonebsp{n}=
+[0, 1]^{2n+1}\cap \bigcup_{I, q}M(I; q)$
+である．ここで
+$I$
+の動く範囲は有限だし
+$q$
+の動く範囲は可算である．
+さて
+命題
+\ref{prop:funccomp}, 
+定理
+\ref{thm:umekomidense}, 
+そして
+命題
+\ref{prop:umekomi}
+より
+以下の集合は
+稠密かつ
+$G_{\delta}$
+である．
+\begin{align}\label{al:sum:gdeltasets}
+\yoemb{X}{[0, 1]^{2n+1}}\cap\bigcap_{I, q}\yoavoid{M(I; q)}.
+\end{align}
+よって
+$X$
+から
+$\yonebsp{n}$
+への位相的埋め込みが存在する．
+\end{proof}
+
+
+定理
+\ref{thm:sum:jigen}
+から
+$\yonebsp{n}$
+の次元が
+$n$
+であることが導かれる．
+このとき以下を得る．
+\begin{cor}\label{cor:sum:sptfyndim}
+$n\in \zz_{\ge 0}$
+とし
+$X$
+を
+可分距離化可能空間で
+$\yodim X\le n$
+とする．
+このとき
+$X$のコンパクト化
+$Y$
+であって距離化可能かつ
+$\yodim X=\yodim Y$
+となるものが存在する．
+\end{cor}
+\begin{proof}
+式
+\eqref{al:sum:gdeltasets}
+の集合から
+写像
+$f$
+を取ると
+$f$
+の像の閉包
+$Y$
+は
+$\yonebsp{n}$
+に含まれる．
+また
+$Y$
+は
+コンパクト空間
+$[0, 1]^{2n+1}$
+の閉部分集合
+なので
+コンパクトである．
+\end{proof}
+
+\begin{rmk}
+数学書
+\cite{zbMATH07075997}
+では
+系
+\ref{cor:sum:sptfyndim}
+を元に可分距離化可能空間の上の
+三つの次元が等しいこと
+(\ref{thm:sum:coincides})
+を
+証明している．
+\end{rmk}
+
+
+%\section{Embedding of manifolds into Euclidean spaces}
+\section{多様体のユークリッド空間への埋め込み}\label{sec:mfdembedding}
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+この節では
+次元論の応用の一つとして
+可微分多様体を
+可微分写像によって
+ユークリッド空間に埋め込めることを
+証明する．
+
+%\subsection{Preparation}
+\subsection{極限集合}\label{subsec:limsets}
+
+\begin{df}
+$X$
+を第二可算で局所コンパクトな距離化可能空間とする．
+このとき点列
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+について
+$x_{i}\to \infty$
+とは，
+任意のコンパクト集合
+$K$について
+$N\in \zz_{\ge 0}$
+が存在して
+$N\le n$
+となる任意の
+$n\in \zz_{\ge 0}$
+について
+$x_{n}\not \in K$
+が成り立つときにいう．
+これは
+$X$
+の一点コンパクト化
+において
+$x_{i}$
+が無限遠点
+$\infty$
+に収束するということと同値である．
+\end{df}
+\begin{df}
+第二可算で局所コンパクトな距離化可能空間
+$X$, 
+$Y$
+と
+連続写像
+$f\colon X\to Y$に対し
+\[
+\yolimset{f}=
+\{\, y\in Y\mid \text{$x_i\to \infty$となる$\{x_{i}\}_{i\in \zz_{\ge 0}}\subset X$が存在して$f(x_{i})\to y$となる．}\, \}
+\]
+と定義する．
+これを
+$f$
+の
+\yoemph{極限集合}
+と呼ぶ．
+\end{df}
+
+\begin{prop}\label{prop:sum:cpthemicpt0000}
+第二可算な局所コンパクトハウスドルフ空間
+$X$
+のコンパクト部分集合の列
+$\{K_{i}\}_{i\in \zz_{\ge 0}}$
+で以下の二つを満たすものが存在する．
+\begin{align}
+& X=\bigcup_{i\in \zz_{\ge 0}}K_{i};\\
+& K_{i}\subset \nai_X(K_{i+1})
+\end{align}
+またこのとき
+$X$
+の任意のコンパクト部分集合
+$K$
+についてある
+$m\in \zz_{\ge 0}$
+が存在して
+$K\subset K_{m}$
+となる．
+これは
+一点コンパクト化の中で無限遠点の
+可算な基本近傍系を取ることに対応する．
+\end{prop}
+
+\begin{rmk}
+この命題内の性質を満たす
+$\{K_i\}_{i\in \zz_{\ge 0}}$
+が存在する空間のことを
+\yoemph{Hemicompact}と呼ぶ．
+一般に
+$\sigma$
+コンパクトな局所コンパクトハウスドルフ空間は
+Hemicompactである．
+\end{rmk}
+
+
+
+命題
+\ref{prop:sum:cpthemicpt0000}
+の後半の注意からすぐに次のことがわかる．
+\begin{prop}\label{benri}
+$\{K_{i}\}_{i\in \zz_{\ge 0}}$
+を命題
+\ref{prop:sum:cpthemicpt0000}
+で述べられている
+$X$
+のコンパクト部分集合列としよう．
+このとき
+$x_{i}\to \infty$が成り立つことと
+以下が成り立つことが同値になる．
+任意の
+$m\in \zz_{\ge 0}$
+について
+$N\in \zz_{\ge 0}$
+が存在し
+$N\le i$
+を満たす任意の
+$i\in \zz_{\ge 0}$
+について
+$x_{i}\not \in K_{m}$
+が成り立つ．
+\end{prop}
+
+
+まず簡単に次のことがわかる．
+\begin{prop}
+第二可算で局所コンパクトな距離化可能空間
+$X$, 
+$Y$と
+連続写像
+$f\colon X\to Y$
+について
+集合
+$\yolimset{f}$
+は
+$Y$
+の閉集合
+である．
+\end{prop}
+\begin{proof}
+命題
+\ref{prop:sum:cpthemicpt0000}
+で述べられているコンパクト集合の列
+$\{K_{i}\}_{i\in \zz_{\ge 0}}$をとる．
+空間
+$Y$
+の位相と両立する距離の一つを
+$e$
+としよう．
+$Y$
+内の点列
+$\{y_{i}\}_{i\in \zz_{\ge 0}}$
+は
+$y_{i}\in \yolimset{f}$
+であり，
+$\{y_{i}\}$
+は
+$y\in Y$
+に収束しているとする．
+ここで，適当に部分列をとって
+$e(y_{i}, y)<2^{-i}$
+としても一般性を失わない．
+各
+$m\in \zz_{\ge 0}$
+毎に
+$y_{m}\in \yolimset{f}$
+なので，
+$X$
+内の点列
+$\{x_{i}^{(m)}\}_{i\in \zz_{\ge 0}}$
+が存在して，
+$x_{i}^{(m)}\to \infty$
+でかつ
+$\lim_{i\to \infty}f(x_{i}^{(m)})=y_{m}$
+となる．
+さてここで単調増加写像
+$\phi\colon \zz_{\ge 0}\to\zz_{\ge 0}$
+を
+$i\ge \phi(m)$
+ならば
+$x_{i}^{(m)}\not\in K_{m}$
+かつ 
+$e(y_{m},f(x_{i}^{(m)}))<2^{-m}$
+となるように定める．
+そして
+$z_{i}=x_{\phi(i)}^{(i)}$とする．
+$\phi$
+の定義から任意の
+$i$
+について
+$z_{i}=x_{\phi(i)}^{(i)}\not\in K_{i}$
+が成り立つ．
+今
+$K_{i} \subset K_{i+1}$
+なので，
+$n\ge N$
+ならば
+$z_n\not\in K_{N}$
+が成り立ち，
+命題
+\ref{benri}
+から
+$z_{i}\to \infty$
+が従う．
+そして，
+$e(y, f(z_{i}))\le e(y, y_{i})+e(y_{i}, f(z_{i}))\le 2^{-i+1}$
+が成り立つ．
+よって
+$f(z_{i})\to y$
+である．
+故に
+$y\in \yolimset{f}$
+となるから
+$\yolimset{f}$
+は閉集合である．
+\end{proof}
+
+\begin{prop}\label{ume}
+第二可算で局所コンパクトな距離化可能空間
+$X$, 
+$Y$
+と
+連続写像
+$f\colon X\to Y$
+について
+$f$
+を単射と仮定する．
+このとき
+$f$
+が
+位相的埋め込み
+であることと
+$\yolimset{f}\cap f(X)=\emptyset$
+が成り立つことは同値である．
+\end{prop}
+\begin{proof}
+まず最初に
+$f$
+が位相的埋め込みであると仮定しよう．
+そして
+背理法のために
+$\yolimset{f}\cap f(X)\neq\emptyset$
+を仮定する．
+今
+$y\in  \yolimset{f}\cap f(X)$
+を取ると
+$x_{i}\to \infty$
+かつ
+$f(x_{i})\to y$
+となる
+$X$
+内の点列
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し，
+また
+$y=f(x)$
+となる
+$x\in X$
+が存在する．
+$x_{i}\to \infty$
+であることから
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+$X$内のどの点にも収束しない．
+よって
+$Y$
+内の点列
+$\{f(x_{i})\}$
+は
+$f(x_{i})\to y$
+にも関らず，
+以下が成り立つ．
+\begin{align}
+\lim_{i\to \infty}f^{-1}(f(x_i))\neq f^{-1}(y)(=x). 
+\end{align}
+故に
+$f^{-1}\colon f(X)\to X$は連続ではない．
+よって特に
+$f$
+は埋め込みではない．
+これは矛盾するので
+$\yolimset{f}\cap f(X)=\emptyset$
+である．
+
+次に
+$ \yolimset{f}\cap f(X)=\emptyset$
+を仮定する．
+今から
+$f^{-1}\colon f(X)\to X$
+が連続であることを示す．
+つまり任意の
+$A\subset f(X)$
+について
+以下が成り立つことを証明する．
+\begin{align}
+f^{-1}(\cl_{f(X)}(A))\subset \cl_X(f^{-1}(A))
+\end{align}
+任意に
+$y\in \cl_{f(X)}(A)$
+を取る．
+すると
+$A$
+内の点列
+$\{y_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$y$
+に収束する．
+さて
+$x_{i}=f^{-1}(y_{i})$とする．
+$\yolimset{f}\cap f(X)=\emptyset$
+という仮定と
+$y\in f(X)$
+から
+$y\not\in \yolimset{f}$
+が従う．
+よって
+$x_{i}\not\to \infty$
+を得る．
+すなわち
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+は点列として集積点を持つ．
+よって収束する部分列
+$\{x_{\phi(i)}\}_{i\in \zz_{\ge 0}}$
+が存在する．
+点列
+$\{x_{\phi(i)}\}_{i\in \zz_{\ge 0}}$
+の収束点を
+$x\in X$
+とする．
+写像
+$f$
+の連続性から
+$f(x_{\phi(i)})\to f(x)$がわかり，
+さらに
+$f(x_{\phi(i)})=y_{\phi(i)}$
+であり，
+収束列の部分列は元の列の収束点に収束するので
+$f(x)=y$である．
+つまり
+$x=f^{-1}(y)$
+である．
+以上から
+$\{y_{i}\}_{i\in \zz_{\ge 0}}$
+の部分列を適当にとれば
+$f^{-1}(y_{\phi(i)})\to f^{-1}(y)$
+となることがわかった．
+ここで
+$\{f^{-1}(y_{\phi(i)})\}_{i\in \zz_{\ge 0}}$
+は
+$f^{-1}(A)$
+内の点列であるから
+$f^{-1}(\cl_{f(X)}(A))\subset \cl_X(f^{-1}(A))$
+が成り立つ．
+故に
+$f^{-1}$
+は連続である．
+\end{proof}
+
+\begin{prop}\label{hei}
+第二可算で局所コンパクトな
+距離空間
+$X$
+と
+$Y$，
+そして
+連続関数
+$f\colon X\to Y$
+について，
+$f(X)$
+が
+$Y$
+の閉集合であることと
+$\yolimset{f}\subset f(X)$
+が成り立つことが同値である．
+\end{prop}
+\begin{proof}
+$f(X)$
+が
+$Y$
+の閉集合のとき
+$\yolimset{f}\subset f(X)$
+となることは
+$\yolimset{f}$の定義から自明である．
+
+次に
+$\yolimset{f}\subset f(X)$
+を仮定して
+$f(X)$
+が
+$Y$
+の閉集合であることを示そう．
+集合
+$f(X)$
+内の点列
+$\{y_{i}\}_{i\in \zz_{\ge 0}}$
+は
+$y_{i}\to y$
+を満たすと仮定する．
+そして点列
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+を
+$x_{i}\in f^{-1}(y_{i})$
+となるように定義する．
+
+もし
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+が収束する部分列を持つならば
+$f$
+の連続性からその部分列の収束点
+$x$
+について
+$f(x)=y$
+になるので
+$y\in f(X)$
+を得る．
+
+
+
+もし
+$\{x_{i}\}_{i\in \zz_{\ge 0}}$
+が収束する部分列を持たない，
+すなわち
+$x_{i}\to \infty$
+ならば
+$y\in \yolimset{f}$
+であり，
+仮定から
+$\yolimset{f}\subset f(X)$
+なので
+$y\in f(X)$である．
+
+いずれにせよ
+$y\in f(X)$
+なので
+$f(X)$
+は
+$Y$
+の中で閉集合である．
+\end{proof}
+
+結果として次のことがわかる．
+\begin{cor}\label{cor:sum:keidaton8}
+$f\colon X\to Y$
+を単射と仮定する．
+このときもしも
+$\yolimset{f}=\emptyset$
+ならば
+$f$
+は閉写像でかつ埋め込みになっている．
+\end{cor}
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{Constructing an embedding}
+\subsection{埋め込みの構成}\label{subsec:constemb}
+
+
+二つの多様体
+$C^{r}$
+級
+可微分多様体
+$M, N$
+について
+$\yoembsym^{r}\left(M, N\right)$
+で
+$M$
+から
+$N$
+への
+$C^{r}$
+級の埋め込み写像全体
+の集合を表すとする．
+次に
+多様体のユークリッド空間への埋め込みの存在の証明をする．
+\begin{thm}\label{thm:sum:whineyembedjigen}
+$N$
+を
+$n$
+次元
+$C^r$
+級多様体とする．
+このとき
+$\yoembsym^{r}\left(N, \rr^{(n+1)^2}\right)\neq \emptyset$
+が成り立つ．
+\end{thm}
+\begin{proof}
+まず
+\ref{prop:sum:mfddimcoince}
+より
+$\yoddim N\le n$
+である
+(実際はこの不等式は等式であるがそこまで精密な評価は使わない)．
+すると
+$N$
+の相対コンパクトな局所座標系
+からなる
+$N$
+の被覆
+$\yocovf{A}$
+に対して
+定理
+\ref{thm:main:covcov}
+を用いて，
+$\yocovf{A}$
+の細分
+$\yocovf{B}$
+と開集合からなる（被覆とは限らない）
+$n+1$
+個の族
+$\yocovf{U}_{0},
+\yocovf{U}_{1},
+\dots,
+\yocovf{U}_{n}$
+が存在して
+各$i$について$\yocovf{U}_{i}$は互いに素な族であり，
+以下を満たす
+\[
+\yocovf{B}=\yocovf{U}_{0}\cup
+\yocovf{U}_{1}\cup\cdots\cup\yocovf{U}_{n}. 
+\]
+必要ならば，
+各
+$i$
+について
+$V, W\in \yocovf{U}_{i}$
+が異なるならば
+$\cl(V)\cap \cl(W)=\emptyset$
+と仮定しても良い．
+これは$N$
+が
+正規空間であるから可能である．
+適当に番号付して，
+$\yocovf{U}_{k}=\left\{U_{i}^{(k)}\right\}_{i\in \zz_{\ge 0}}$
+とする．
+また正規性に関する補題
+\ref{lem:intro:shrink}
+を用いて
+集合族の有限列
+$\{\yocovf{V}_k\}_{k=0}^{n}$
+を
+$\yocovf{V}_{k}=\{V_{i}^{(k)}\}_{i\in \zz_{\ge 0}}$
+と番号付されていてなおかつ
+$\cl\left(V_{i}^{(k)}\right)\subset U_{i}^{(k)}$
+を満たしかつ，
+$\yocovf{V}_{0}\cup \yocovf{V}_{1}\cup \dots \cup \yocovf{V}_{n}$
+が
+$N$
+の被覆になっているようなものとする．
+また，
+同様に集合族の有限列
+$\{\yocovf{W}_{k}\}_{k=0}^{n}$を
+$\yocovf{W}_{k}=\{W_{i}^{(k)}\}_{i\in \zz_{\ge 0}}$
+と番号付されていて
+$\cl\left(W_{i}^{(k)}\right)\subset V_{i}^{(k)}$
+を満たしかつ，
+$\yocovf{W}_{0}\cup \yocovf{W}_{1}\cup 
+ \dots \cup \yocovf{W}_{n}$
+ が
+ $N$
+ の被覆になっているようなものとする．
+
+さて，
+$A_{i}^{(k)}$
+を
+$\cl(V_{i}^{(k)})\subset A_{i}^{(k)}$
+となる
+$\yocovf{A}$
+の元とする．
+このとき
+$A_{i}^{(k)}$
+上の局所座標で以下を満たすものが存在する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+もしも
+$i\neq j$
+ならば
+$\phi_{i}^{(k)}(\cl(V_{i}^{(k)}))\cap \phi_{j}^{(k)}(\cl(V_{j}^{(k)}))=\emptyset$
+が成り立つ．
+\item 
+もしも
+$N$
+内の
+点列
+$\{x_{s}\}_{s\in \zz_{\ge 0}}$
+任意の
+$s\in \zz_{\ge 0}$
+について
+$x_{s}\in V_{i_{s}}^{(k)}$
+が成り立ち
+かつ
+$x_{s}\to \infty$
+を満たす
+ならば
+$\phi_{i_{s}}^{(k)}(x_{s})\to \infty$
+が成り立つ．
+\end{enumerate}
+これはユークリッド空間内の平行移動や，
+コンパクト集合は局所有限族の元の有限個のものとしか交わらないことなどを考えると存在性が保証される．
+
+そして
+$b_{i}^{(k)}\colon N\to \rr$
+を，非負の値を取り，
+$V_{i}^{(k)}$
+上で
+$1$
+の値をとり，
+$U_{i}^{(k)}$
+の外では
+$0$
+の値をとる
+$N$
+上の
+$C^{r}$
+級関数とする．
+これを用いて
+$\theta^{(k)}\colon N\to \rr^{n}$
+を以下のように定義する．
+\[
+\theta^{(k)}(x)=
+\begin{cases}
+b_{i}^{(k)}(x)\cdot \phi_{}^{(k)}(x)& \text{$x\in U_{i}^{(k)}$};\\
+0\in \rr^{n} & \text{$x\not  \in \bigcup_{i}U_{i}^{(k)}$}. 
+\end{cases}
+\]
+ここで
+$\theta^{(k)}|V_{i}^{(k)}=\phi_{i}^{(k)}$
+に注意しよう．
+
+今
+$\cl(W_{i}^{(k)})\subset V_{i}^{(k)}$
+なので次が従う．
+\begin{align}
+\phi_{i}^{(k)}\left(\cl\left(W_{i}^{(k)}\right)\right)\subset \phi_{i}^{(k)}\left(V_{i}^{(k)}\right). 
+\end{align}
+
+次に
+滑らかな関数
+$p_{i}^{(k)}\colon \rr^{n}\to \rr$
+を
+$\phi_{i}^{(k)}(W_{i}^{(k)})$
+上で
+$1$，
+$\phi_{i}^{(k)}(V_{i}^{(k)})$の外で
+$0$
+の値をとる関数とする．
+そして
+$\eta^{(k)}\colon N\to \rr$
+を次で定義する．
+\begin{align}
+\eta^{(k)}(x)=
+\begin{cases}
+p_{i}^{(k)}\circ \phi_{i}^{(k)}(x) & \text{$x\in V_{i}^{(k)}$};\\
+0 \in \rr& \text{$x\not\in \bigcup_{i}V_{i}^{(k)}$}. 
+\end{cases}
+\end{align}
+このとき
+$\eta^{(k)}$
+は
+$C^{r}$
+級である．
+
+
+
+
+さて
+$l=(n+1)^{2}$
+とおいて
+写像
+$\Phi\colon N\to \rr^{l}$
+を次で定義する．
+\begin{align}
+\Phi(x)=(\theta^{(0)}(x), \dots, \theta^{(n)}(x), 
+\eta^{(0)}(x), \dots, \eta^{(n)}(x)). 
+\end{align}
+
+
+今から
+$\Phi$
+は可微分な埋め込みであることを
+証明しよう．
+
+まず
+$\Phi$
+の微分のランクが退化していないことは，
+$V_{i}^{(k)}$たちが
+$N$を被覆することと
+$\theta^{(k)}$
+の定義から従う．
+
+
+
+次に単射性を調べよう．
+$\Phi(x)=\Phi(y)$
+とすると，
+$W_{i}^{(k)}$
+たちが
+$N$
+の被覆であるから
+ある
+$k\in \{0, \dots,  n\}$
+が存在して
+$0<\eta^{(k)}(x)=\eta^{(k)}(y)$
+が成り立つ．
+よって
+$x, y\in\bigcup_{i\in \zz_{\ge 0}}V_{i}^{(k)}$
+である．
+ここで
+$\Phi(x)=\Phi(y)$から
+$\theta^{(k)}(x)=\theta^{(k)}(y)$
+も導かれる．
+よって
+$b_{i}^{(k)}$
+の定義から
+ある
+$i\in \zz_{\ge 0}$
+について
+$\phi_{i}^{(k)}(x)=\phi_{i}^{(k)}(y)$
+が成り立つ．
+ここで
+$\phi_{i}^{(k)}$
+は座標系だったので
+$x=y$
+を得る．
+
+次に
+$\Phi$
+が位相的埋め込みであることを示そう．
+$\yolimset{\Phi}$を
+$\Phi$
+の極限集合として, 
+命題
+\ref{ume}から
+$\yolimset{\Phi}=\emptyset$
+を示せば
+$\Phi$
+が埋め込みであることが従う．
+空間
+$N$
+内の点列
+$\{x_{s}\}_{s\in \zz_{\ge 0}}$
+は
+$x_{s}\to \infty$
+を満たすとする．
+このとき適当に部分列をとればある
+$k\in \{0, \dots, n\}$
+に対して以下が成り立つと仮定しても一般性を失わない．
+\begin{align}
+x_{s}\in \bigcup_{i\in \zz_{\ge 0}}V_{i}^{(k)}. 
+\end{align}
+このとき局所座標
+$\phi_{i}^{(k)}$
+の定め方から
+$\theta^{(k)}(x_{s})\to \infty$となる．
+よって特に
+$\Phi(x_{s})\to \infty$
+である．
+これは
+$\yolimset{\Phi}=\emptyset$
+を意味する．
+\end{proof}
+
+\begin{rmk}
+この証明から
+$\Phi$
+は閉写像であることがわかる．
+また，Sardの定理を応用して
+$\yoembsym^{r}(N, \rr^{2n+1})\neq \emptyset$
+であること
+が証明でき，
+微分トポロジーの技法を用いると
+$2n+1\le l$
+ならば
+$\yoembsym^{r}(N, \rr^{l})$
+が可微分写像の空間の中で稠密であることを証明することができる．
+\end{rmk}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\phantomsection
+\addcontentsline{toc}{section}{和文資料}
+\renewcommand{\refname}{和文資料}
+\begin{thebibliography}{99}
+\bibitem[ブログyamyamtop]{yamayamtop}yamyamtopさんの次元論PDF,
+\url{https://yamyamtopo.wordpress.com/2015/01/10/次元論pdf/}, 
+2016年6月閲覧
+
+
+\bibitem[電波通信1]{dempa0}
+電波通信
+「不動点定理」
+\url{https://concious4410.hatenablog.com/entry/2017/08/27/182714}
+
+
+
+\bibitem[電波通信2]{dempa2}
+
+電波通信, 「次元論ショートコース：0次元から始める位相次元」, 
+\url{https://concious4410.hatenablog.com/entry/2022/03/12/161532}
+
+
+\bibitem[電波通信3]{dempa3}
+電波通信, 「不動点定理と同値な命題」, 
+\url{https://concious4410.hatenablog.com/entry/2026/04/05/181441}
+
+\bibitem[電波通信4]{dempa4}
+電波通信，「次元論からの領域不変性定理の証明」，
+\url{https://concious4410.hatenablog.com/entry/2026/04/15/220550}
+
+\bibitem[電波通信5]{dempa5}
+電波通信，
+「正規性の特徴付け」
+\url{https://concious4410.hatenablog.com/entry/2015/12/21/170610}
+
+\bibitem[電波通信6]{dempa6}
+電波通信，
+「極限集合の基本的性質の証明」
+\url{https://concious4410.hatenablog.com/entry/2017/11/16/170409}
+
+\bibitem[電波通信7]{dempa7}
+電波通信，
+「いわゆる志賀多様体における多様体の埋め込み定理のための次元論的な補題の証明」
+\url{https://concious4410.hatenablog.com/entry/2016/06/11/202249}
+
+\bibitem[電波通信8]{dempa8}
+電波通信，
+「ウリゾーンの距離化可能定理」
+\url{https://concious4410.hatenablog.com/entry/2015/09/13/190522}
+
+\bibitem[電波通信9]{dempa9}
+電波通信, 
+「有理数の順序集合としての特徴づけ」
+\url{https://concious4410.hatenablog.com/entry/2017/05/07/013312}
+
+\bibitem[電波通信10]{dempa10}
+電波通信, 
+「ユークリッド空間の可算稠密推移性」
+\url{https://concious4410.hatenablog.com/entry/2022/03/13/153112}
+
+\bibitem[志賀多様体]{shigatayotai}
+志賀浩二,多様体論,岩波書店,1976
+
+\end{thebibliography}
+
+
+\phantomsection
+\renewcommand{\refname}{参考文献}
+\addcontentsline{toc}{section}{参考文献}
+%\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{bibtexmet/bibmet.bib}
+
+
+
+
+
+
+
+
+			\end{document}
