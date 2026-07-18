@@ -229,7 +229,27 @@ python3 scripts/migration_ledger.py begin-privacy-review \
 
 この操作は `source_found` の候補だけを対象にし、原稿ファイル自体は変更しません。
 検査中の段階では `author_review=pending` のままです。名義と全ページの確認が済んだ
-後にだけ `approved` とし、取り込み可能な状態へ進めます。
+後にだけ、理由を添えて判定を記録します。
+
+```sh
+python3 scripts/migration_ledger.py decide-privacy-review \
+  --decision approved \
+  --reason "TeX・PDFの名義と全ページを確認済み。" \
+  article:0123456789abcdef
+```
+
+`approved` は `author_review=approved`、`status=ready` として取り込み可能な状態へ
+進めます。公開できない情報や別名義との結び付きが疑われる場合は、原稿を書き換えず
+台帳に理由を残して停止します。
+
+```sh
+python3 scripts/migration_ledger.py decide-privacy-review \
+  --decision blocked \
+  --reason "公開可否について本人判断待ち。" \
+  article:fedcba9876543210
+```
+
+`blocked` は `author_review=blocked` としますが、`status=privacy_review` のままにします。
 
 ## 著者情報の確認状態
 

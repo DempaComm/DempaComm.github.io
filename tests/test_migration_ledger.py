@@ -136,6 +136,37 @@ class MigrationLedgerTest(unittest.TestCase):
             )
             self.assertEqual("privacy_review", article["status"])
             self.assertEqual("MyBlog/2024/found", article["source_dir"])
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "decide-privacy-review",
+                    "--decision",
+                    "approved",
+                    "--reason",
+                    "名義と全ページを確認済み。",
+                    article["record_id"],
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            subprocess.run(
+                sync_command,
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            article = next(
+                row for row in rows if row["title"] == "外部で見つかった記事"
+            )
+            self.assertEqual("ready", article["status"])
+            self.assertEqual("approved", article["author_review"])
+            self.assertIn("名義と全ページを確認済み。", article["notes"])
 
     def test_article_inventory_adds_unmigrated_article_and_asset_states(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

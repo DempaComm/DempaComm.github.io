@@ -1440,6 +1440,36 @@ def command_begin_privacy_review(args: argparse.Namespace) -> None:
     print(f"PRIVACY REVIEW {len(found)} records")
 
 
+def command_decide_privacy_review(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    if not rows:
+        raise LedgerError("ledger CSV does not exist or is empty")
+    requested = set(args.record_ids)
+    found: set[str] = set()
+    for row in rows:
+        if row["record_id"] not in requested:
+            continue
+        found.add(row["record_id"])
+        if row["status"] != "privacy_review":
+            raise LedgerError(
+                f"{row['record_id']}: privacy review can be decided only from "
+                f"privacy_review (current: {row['status']})"
+            )
+        row["author_review"] = args.decision
+        if args.decision == "approved":
+            row["status"] = "ready"
+        reason = args.reason.strip()
+        if reason and reason not in row["notes"]:
+            row["notes"] = " ".join(part for part in (row["notes"], reason) if part)
+    missing = sorted(requested - found)
+    if missing:
+        raise LedgerError("unknown record_id: " + ", ".join(missing))
+    validate_rows(rows, load_manifests())
+    write_rows(rows)
+    write_json(rows)
+    print(f"PRIVACY REVIEW {args.decision.upper()} {len(found)} records")
+
+
 def command_unmigrated(args: argparse.Namespace) -> None:
     rows = read_rows()
     validate_rows(rows, load_manifests())
@@ -2215,6 +2245,19 @@ def parser() -> argparse.ArgumentParser:
     )
     begin_privacy_review.add_argument("record_ids", nargs="+")
     begin_privacy_review.set_defaults(func=command_begin_privacy_review)
+
+    decide_privacy_review = subparsers.add_parser(
+        "decide-privacy-review",
+        help="record an approved or blocked privacy-review decision",
+    )
+    decide_privacy_review.add_argument(
+        "--decision", choices=("approved", "blocked"), required=True
+    )
+    decide_privacy_review.add_argument(
+        "--reason", required=True, help="short audit note stored in the ledger"
+    )
+    decide_privacy_review.add_argument("record_ids", nargs="+")
+    decide_privacy_review.set_defaults(func=command_decide_privacy_review)
 
     unmigrated = subparsers.add_parser(
         "unmigrated", help="list articles that are not yet published on this site"

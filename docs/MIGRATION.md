@@ -98,7 +98,7 @@ python3 scripts/paper_tool.py audit
 以下では `2018-10-14-01` の `main.tex` を例にする。最初にリポジトリのルートへ移動し、ほかの未完了変更がないことを確認する。
 
 ```sh
-cd /Users/yoshitoishiki/Documents/Codex/dempa/DempaComm.github.io
+cd /path/to/DempaComm.github.io
 git pull --ff-only
 git status
 ```
