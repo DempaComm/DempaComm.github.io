@@ -6,6 +6,7 @@
 
 - `ledger/migration-ledger.csv`: 人が編集する正本
 - `ledger/migration-ledger.json`: CSVから生成する機械処理用データ
+- `ledger/unmigrated-articles.csv`: 未移行記事だけを抜き出した閲覧用台帳
 
 台帳に保存するMyBlogの場所は、`MyBlog/Myblogstr` からの相対パスです。利用者名を
 含む絶対パスは保存しません。台帳ファイルはGitHub Pagesの公開物には含めませんが、
@@ -62,7 +63,51 @@ python3 scripts/migration_ledger.py duplicates
 ```
 
 `check` は、重複した原稿番号・元記事URL、不正な状態、公開済み原稿の台帳漏れ、
-重複グループの不整合、古いJSONを検出します。GitHub Actionsでも公開前に実行します。
+重複グループの不整合、古いJSONと未移行記事台帳を検出します。GitHub Actionsでも
+公開前に実行します。
+
+## 電波通信の全記事を台帳へ同期
+
+MyBlog内で原稿が見つかった記事だけでなく、MTエクスポートにある全公開記事を台帳で
+追跡します。
+
+```sh
+python3 scripts/migration_ledger.py sync-articles \
+  /path/to/concious4410.hatenablog.com.export.txt
+```
+
+すでに `original_url` が公開済み原稿へ対応している記事はその行を使い、対応先がない
+記事だけを `source_missing` として追加します。再実行しても同じ記事は増殖しません。
+`scan` を再実行した場合も `article:` で始まる記事行は保持されます。
+
+未移行記事を端末で確認する場合は次を実行します。
+
+```sh
+python3 scripts/migration_ledger.py unmigrated
+```
+
+同じ内容は `ledger/unmigrated-articles.csv` にも出力されます。このCSVは公開日時、
+記事名、元URL、タグ、ローカル原稿の有無、元記事内PDFリンクの有無を含みます。
+
+## TeX・PDFの属性
+
+`local_assets` はMyBlog内で実際に確認できたローカルファイルを表します。
+
+- `tex_pdf`: TeXとPDFの両方あり
+- `tex_only`: TeXのみあり
+- `pdf_only`: PDFのみあり
+- `support_only`: BibTeXまたはBSTだけあり
+- `none`: 対応するローカルTeX・PDFなし
+
+`article_pdf` はMTエクスポートの記事本文にPDFリンクが残っているかを表します。
+
+- `linked`: PDFリンクまたはPDFファイル名あり
+- `none`: PDFリンクなし
+- `unknown`: 元記事との対応が未確定
+
+したがって `local_assets=none` かつ `article_pdf=linked` は「ローカル原稿は未発見だが、
+元記事にはPDFへの手掛かりがある」記事です。`none` と `none` の組合せは、現時点で
+TeX・PDFの手掛かりがない記事です。
 
 ## 重複情報
 
@@ -165,6 +210,7 @@ python3 scripts/migration_ledger.py confirm-metadata source:0123456789abcdef
 - `ready`: 必要情報と検査が揃い、取り込み可能
 - `published`: GitHub Pagesへ移行済み
 - `skipped`: 移行しないと判断
+- `source_missing`: 記事は存在するが対応するローカルTeX・PDFが未登録
 
 ## 著者情報の確認状態
 

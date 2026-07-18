@@ -8,6 +8,7 @@ import csv
 import hashlib
 import html
 import json
+import io
 import os
 import re
 import sys
@@ -27,6 +28,7 @@ PAPERS_DIR = ROOT / "papers"
 LEDGER_DIR = ROOT / "ledger"
 CSV_PATH = LEDGER_DIR / "migration-ledger.csv"
 JSON_PATH = LEDGER_DIR / "migration-ledger.json"
+UNMIGRATED_CSV_PATH = LEDGER_DIR / "unmigrated-articles.csv"
 DEFAULT_METADATA_REVIEW_PATH = ROOT / ".privacy-review" / "metadata-review.html"
 PRIORITY_ARCHIVE_TAG = "断片ではないもの"
 
@@ -43,6 +45,8 @@ FIELDS = (
     "pdf_files",
     "bib_files",
     "bst_files",
+    "local_assets",
+    "article_pdf",
     "duplicate_status",
     "duplicate_group",
     "canonical_record_id",
@@ -63,6 +67,9 @@ FIELDS = (
     "author_review",
     "notes",
 )
+PRE_ASSET_FIELDS = tuple(
+    field for field in FIELDS if field not in {"local_assets", "article_pdf"}
+)
 METADATA_FIELDS = {
     "metadata_match",
     "metadata_score",
@@ -76,6 +83,11 @@ METADATA_FIELDS = {
     "metadata_evidence",
 }
 PRE_METADATA_FIELDS = tuple(field for field in FIELDS if field not in METADATA_FIELDS)
+PRE_METADATA_ASSET_FIELDS = tuple(
+    field
+    for field in FIELDS
+    if field not in {*METADATA_FIELDS, "local_assets", "article_pdf"}
+)
 LEGACY_FIELDS = tuple(
     field
     for field in FIELDS
@@ -87,6 +99,9 @@ LEGACY_FIELDS = tuple(
         "duplicate_basis",
         *METADATA_FIELDS,
     }
+)
+LEGACY_ASSET_FIELDS = tuple(
+    field for field in LEGACY_FIELDS if field not in {"local_assets", "article_pdf"}
 )
 LIST_FIELDS = {
     "tags",
@@ -127,6 +142,7 @@ STATUSES = {
     "ready",
     "published",
     "skipped",
+    "source_missing",
 }
 AUTHOR_REVIEW_STATES = {
     "pending",
@@ -138,6 +154,21 @@ AUTHOR_REVIEW_STATES = {
 DUPLICATE_STATES = {"unique", "canonical", "duplicate"}
 DUPLICATE_BASES = {"", "tex+pdf", "tex", "pdf"}
 METADATA_MATCH_STATES = {"", "exact", "likely", "ambiguous", "unmatched"}
+LOCAL_ASSET_STATES = {"tex_pdf", "tex_only", "pdf_only", "support_only", "none"}
+ARTICLE_PDF_STATES = {"linked", "none", "unknown"}
+UNMIGRATED_FIELDS = (
+    "status",
+    "published_at",
+    "sequence",
+    "title",
+    "original_url",
+    "tags",
+    "local_assets",
+    "article_pdf",
+    "article_pdf_files",
+    "source_dir",
+    "notes",
+)
 MATH_SECTIONS = {
     "",
     "代数・組合せ",
@@ -175,6 +206,34 @@ def join_list(values: Iterable[str]) -> str:
     return "|".join(dict.fromkeys(value.strip() for value in values if value.strip()))
 
 
+def local_asset_state(row: dict[str, str]) -> str:
+    has_tex = bool(split_list(row.get("tex_files", "")))
+    has_pdf = bool(split_list(row.get("pdf_files", "")))
+    if has_tex and has_pdf:
+        return "tex_pdf"
+    if has_tex:
+        return "tex_only"
+    if has_pdf:
+        return "pdf_only"
+    if split_list(row.get("bib_files", "")) or split_list(row.get("bst_files", "")):
+        return "support_only"
+    return "none"
+
+
+def article_pdf_state(row: dict[str, str]) -> str:
+    if split_list(row.get("metadata_pdf_files", "")):
+        return "linked"
+    if row.get("metadata_match") or row.get("record_id", "").startswith("article:"):
+        return "none"
+    return "unknown"
+
+
+def refresh_asset_states(rows: Iterable[dict[str, str]]) -> None:
+    for row in rows:
+        row["local_assets"] = local_asset_state(row)
+        row["article_pdf"] = article_pdf_state(row)
+
+
 def safe_relative(value: str, field: str) -> None:
     if not value:
         return
@@ -203,22 +262,34 @@ def read_rows(path: Path = CSV_PATH) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
         header = tuple(reader.fieldnames or ())
-        if header not in {FIELDS, PRE_METADATA_FIELDS, LEGACY_FIELDS}:
+        if header not in {
+            FIELDS,
+            PRE_ASSET_FIELDS,
+            PRE_METADATA_FIELDS,
+            PRE_METADATA_ASSET_FIELDS,
+            LEGACY_FIELDS,
+            LEGACY_ASSET_FIELDS,
+        }:
             raise LedgerError(
                 f"{path}: unsupported header; expected the current ledger fields"
             )
-        return [
+        rows = [
             {field: str(row.get(field, "") or "").strip() for field in FIELDS}
             for row in reader
         ]
+        refresh_asset_states(rows)
+        return rows
 
 
 def write_rows(rows: list[dict[str, str]], path: Path = CSV_PATH) -> None:
+    refresh_asset_states(rows)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+    if path == CSV_PATH:
+        write_unmigrated_csv(rows)
 
 
 def validate_rows(
@@ -259,6 +330,14 @@ def validate_rows(
             errors.append(
                 f"{label}: invalid metadata_match {row['metadata_match']!r}"
             )
+        if row["local_assets"] not in LOCAL_ASSET_STATES:
+            errors.append(f"{label}: invalid local_assets {row['local_assets']!r}")
+        elif row["local_assets"] != local_asset_state(row):
+            errors.append(f"{label}: local_assets does not match file columns")
+        if row["article_pdf"] not in ARTICLE_PDF_STATES:
+            errors.append(f"{label}: invalid article_pdf {row['article_pdf']!r}")
+        elif row["article_pdf"] != article_pdf_state(row):
+            errors.append(f"{label}: article_pdf does not match metadata_pdf_files")
         if row["metadata_score"]:
             try:
                 score = float(row["metadata_score"])
@@ -329,6 +408,11 @@ def validate_rows(
                 errors.append(
                     f"{label}: published target_slug has no paper.json: {target_slug}"
                 )
+        if row["status"] == "source_missing":
+            if row["local_assets"] != "none":
+                errors.append(f"{label}: source_missing record must have no local assets")
+            if not row["original_url"]:
+                errors.append(f"{label}: source_missing record requires original_url")
     for line_number, row in enumerate(rows, start=2):
         label = f"row {line_number}"
         duplicate_status = row["duplicate_status"]
@@ -398,7 +482,7 @@ def json_value(rows: list[dict[str, str]]) -> dict[str, Any]:
         records.append(record)
     counts = Counter(row["status"] for row in rows)
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "source_root_label": "MyBlog/Myblogstr",
         "record_count": len(records),
         "status_counts": {key: counts.get(key, 0) for key in sorted(STATUSES)},
@@ -430,9 +514,53 @@ def write_json(rows: list[dict[str, str]]) -> None:
     JSON_PATH.write_text(rendered_json(rows), encoding="utf-8")
 
 
+def unmigrated_rows(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
+    selected: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if row["status"] in {"published", "skipped"} or not row["original_url"]:
+            continue
+        selected[row["original_url"]] = {
+            "status": row["status"],
+            "published_at": row["published_at"],
+            "sequence": row["sequence"],
+            "title": row["title"],
+            "original_url": row["original_url"],
+            "tags": row["tags"],
+            "local_assets": row["local_assets"],
+            "article_pdf": row["article_pdf"],
+            "article_pdf_files": row["metadata_pdf_files"],
+            "source_dir": row["source_dir"],
+            "notes": row["notes"],
+        }
+    return sorted(
+        selected.values(),
+        key=lambda row: (row["published_at"], int(row["sequence"] or 0)),
+    )
+
+
+def rendered_unmigrated_csv(rows: list[dict[str, str]]) -> str:
+    stream = io.StringIO(newline="")
+    writer = csv.DictWriter(stream, fieldnames=UNMIGRATED_FIELDS, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(unmigrated_rows(rows))
+    return stream.getvalue()
+
+
+def write_unmigrated_csv(rows: list[dict[str, str]]) -> None:
+    UNMIGRATED_CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
+    UNMIGRATED_CSV_PATH.write_text(
+        rendered_unmigrated_csv(rows), encoding="utf-8"
+    )
+
+
 def source_record_id(source_dir: str) -> str:
     digest = hashlib.sha256(source_dir.encode("utf-8")).hexdigest()[:16]
     return f"source:{digest}"
+
+
+def article_record_id(article_url: str) -> str:
+    digest = hashlib.sha256(article_url.encode("utf-8")).hexdigest()[:16]
+    return f"article:{digest}"
 
 
 def candidate_title(source_dir: str) -> str:
@@ -508,6 +636,8 @@ def scan_candidates(
                 "pdf_files": join_list(sorted(files["pdf"])),
                 "bib_files": join_list(sorted(files["bib"])),
                 "bst_files": join_list(sorted(files["bst"])),
+                "local_assets": "",
+                "article_pdf": "unknown",
                 "duplicate_status": "unique",
                 "duplicate_group": "",
                 "canonical_record_id": "",
@@ -683,6 +813,84 @@ def parse_mt_export(path: Path, blog_url: str) -> list[dict[str, Any]]:
         ):
             article["sequence"] = sequence
     return articles
+
+
+def article_inventory_row(article: dict[str, Any]) -> dict[str, str]:
+    pdf_files = join_list(article["pdf_files"])
+    return {
+        "record_id": article_record_id(article["url"]),
+        "status": "source_missing",
+        "published_at": article["published_at"],
+        "sequence": str(article["sequence"]),
+        "title": article["title"],
+        "original_url": article["url"],
+        "tags": join_list(article["tags"]),
+        "source_dir": "",
+        "tex_files": "",
+        "pdf_files": "",
+        "bib_files": "",
+        "bst_files": "",
+        "local_assets": "none",
+        "article_pdf": "linked" if pdf_files else "none",
+        "duplicate_status": "unique",
+        "duplicate_group": "",
+        "canonical_record_id": "",
+        "duplicate_basis": "",
+        "metadata_match": "exact",
+        "metadata_score": "100.0",
+        "metadata_candidate_count": "1",
+        "metadata_title": article["title"],
+        "metadata_published_at": article["published_at"],
+        "metadata_sequence": str(article["sequence"]),
+        "metadata_original_url": article["url"],
+        "metadata_tags": join_list(article["tags"]),
+        "metadata_pdf_files": pdf_files,
+        "metadata_evidence": "MT export article inventory; no linked local source",
+        "target_slug": "",
+        "math_section": "",
+        "build_engine": "",
+        "author_review": "not_applicable",
+        "notes": "MTエクスポートには公開記事がありますが、対応するローカルTeX・PDFは未登録です。",
+    }
+
+
+def sync_article_inventory(
+    rows: list[dict[str, str]], articles: list[dict[str, Any]]
+) -> list[dict[str, str]]:
+    retained = [row for row in rows if not row["record_id"].startswith("article:")]
+    claimed_urls = {row["original_url"] for row in retained if row["original_url"]}
+    claimed_urls.update(
+        row["metadata_original_url"]
+        for row in retained
+        if row["duplicate_status"] != "duplicate"
+        and row["metadata_match"] in {"exact", "likely"}
+        and row["metadata_original_url"]
+    )
+    old_by_url = {
+        row["original_url"]: row
+        for row in rows
+        if row["record_id"].startswith("article:") and row["original_url"]
+    }
+    for article in articles:
+        if article["url"] in claimed_urls:
+            continue
+        row = article_inventory_row(article)
+        old = old_by_url.get(article["url"])
+        if old:
+            for field in ("math_section", "author_review", "notes"):
+                if old[field]:
+                    row[field] = old[field]
+        retained.append(row)
+
+    def sort_key(row: dict[str, str]) -> tuple[str, str, str]:
+        year = row["published_at"][:4]
+        if not YEAR_PATTERN.match(year):
+            first = Path(row["source_dir"]).parts[0] if row["source_dir"] else ""
+            year = first if YEAR_PATTERN.match(first) else "9999"
+        return (year, row["published_at"] or "9999", row["source_dir"])
+
+    refresh_asset_states(retained)
+    return sorted(retained, key=sort_key)
 
 
 def tex_title(path: Path) -> str:
@@ -1001,6 +1209,8 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
             "pdf_files": "",
             "bib_files": "",
             "bst_files": "",
+            "local_assets": "none",
+            "article_pdf": "unknown",
             "duplicate_status": "unique",
             "duplicate_group": "",
             "canonical_record_id": "",
@@ -1022,7 +1232,16 @@ def merged_scan(myblog_root: Path, include_non_year: bool = False) -> list[dict[
                 row[field] = old[field]
         rows.append(row)
 
+    claimed_urls = {row["original_url"] for row in rows if row["original_url"]}
+    for old in old_rows:
+        if not old["record_id"].startswith("article:"):
+            continue
+        if old["original_url"] in claimed_urls:
+            continue
+        rows.append(old)
+
     classify_duplicates(rows, fingerprints)
+    refresh_asset_states(rows)
 
     def sort_key(row: dict[str, str]) -> tuple[str, str, str]:
         year = row["published_at"][:4]
@@ -1051,8 +1270,12 @@ def command_build(args: argparse.Namespace) -> None:
     if not rows:
         raise LedgerError("ledger CSV does not exist or is empty; run scan first")
     validate_rows(rows, load_manifests())
+    write_unmigrated_csv(rows)
     write_json(rows)
-    print(f"WROTE {JSON_PATH.relative_to(ROOT)}")
+    print(
+        f"WROTE {JSON_PATH.relative_to(ROOT)} and "
+        f"{UNMIGRATED_CSV_PATH.relative_to(ROOT)}"
+    )
 
 
 def command_check(args: argparse.Namespace) -> None:
@@ -1063,6 +1286,12 @@ def command_check(args: argparse.Namespace) -> None:
     expected = rendered_json(rows)
     if not JSON_PATH.is_file() or JSON_PATH.read_text(encoding="utf-8") != expected:
         raise LedgerError("migration-ledger.json is stale; run ledger build")
+    expected_unmigrated = rendered_unmigrated_csv(rows)
+    if (
+        not UNMIGRATED_CSV_PATH.is_file()
+        or UNMIGRATED_CSV_PATH.read_text(encoding="utf-8") != expected_unmigrated
+    ):
+        raise LedgerError("unmigrated-articles.csv is stale; run ledger build")
     print(f"OK  migration ledger ({len(rows)} records)")
 
 
@@ -1076,9 +1305,18 @@ def command_stats(args: argparse.Namespace) -> None:
     with_tex = sum(bool(row["tex_files"]) for row in rows)
     with_pdf = sum(bool(row["pdf_files"]) for row in rows)
     duplicate_counts = Counter(row["duplicate_status"] for row in rows)
+    asset_counts = Counter(row["local_assets"] for row in rows)
+    article_pdf_counts = Counter(row["article_pdf"] for row in rows)
+    tracked_articles = {row["original_url"] for row in rows if row["original_url"]}
     group_count = sum(row["duplicate_status"] == "canonical" for row in rows)
     print(f"with_tex: {with_tex}")
     print(f"with_pdf: {with_pdf}")
+    print(f"tracked_articles: {len(tracked_articles)}")
+    print(f"unmigrated_articles: {len(unmigrated_rows(rows))}")
+    for state in sorted(LOCAL_ASSET_STATES):
+        print(f"local_assets_{state}: {asset_counts.get(state, 0)}")
+    for state in sorted(ARTICLE_PDF_STATES):
+        print(f"article_pdf_{state}: {article_pdf_counts.get(state, 0)}")
     print(f"canonical: {duplicate_counts.get('canonical', 0)}")
     print(f"duplicate: {duplicate_counts.get('duplicate', 0)}")
     print(f"unique: {duplicate_counts.get('unique', 0)}")
@@ -1125,6 +1363,7 @@ def command_match_metadata(args: argparse.Namespace) -> None:
     if not articles:
         raise LedgerError("MT export contained no published articles")
     match_metadata_rows(rows, articles, myblog_root)
+    rows = sync_article_inventory(rows, articles)
     validate_rows(rows, load_manifests())
     write_rows(rows)
     write_json(rows)
@@ -1132,6 +1371,39 @@ def command_match_metadata(args: argparse.Namespace) -> None:
     print(f"MATCHED {len(rows)} ledger records against {len(articles)} articles")
     for state in ("exact", "likely", "ambiguous", "unmatched"):
         print(f"{state}: {counts.get(state, 0)}")
+
+
+def command_sync_articles(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    if not rows:
+        raise LedgerError("ledger CSV does not exist or is empty; run scan first")
+    articles = parse_mt_export(
+        Path(args.export_file).expanduser().resolve(), args.blog_url
+    )
+    if not articles:
+        raise LedgerError("MT export contained no published articles")
+    rows = sync_article_inventory(rows, articles)
+    validate_rows(rows, load_manifests())
+    write_rows(rows)
+    write_json(rows)
+    tracked = {row["original_url"] for row in rows if row["original_url"]}
+    print(
+        f"TRACKED {len(tracked)}/{len(articles)} published articles; "
+        f"unmigrated={len(unmigrated_rows(rows))}"
+    )
+
+
+def command_unmigrated(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    validate_rows(rows, load_manifests())
+    selected = unmigrated_rows(rows)
+    print(f"{len(selected)} unmigrated articles")
+    for row in selected:
+        print(
+            f"{row['published_at'][:10]} "
+            f"{row['local_assets']:12} {row['article_pdf']:7} {row['title']}"
+        )
+        print(f"  {row['original_url']}")
 
 
 def command_metadata(args: argparse.Namespace) -> None:
@@ -1770,6 +2042,7 @@ def command_confirm_metadata(args: argparse.Namespace) -> None:
         if row["status"] != "published":
             row["status"] = "metadata_ready"
         confirmed += 1
+    refresh_asset_states(rows)
     validate_rows(rows, manifests)
     write_rows(rows)
     write_json(rows)
@@ -1826,6 +2099,7 @@ def command_confirm_metadata_url(args: argparse.Namespace) -> None:
         if row["status"] != "published":
             row["status"] = "metadata_ready"
         confirmed += 1
+    refresh_asset_states(rows)
     validate_rows(rows, manifests)
     write_rows(rows)
     write_json(rows)
@@ -1877,6 +2151,21 @@ def parser() -> argparse.ArgumentParser:
         "--blog-url", default="https://concious4410.hatenablog.com"
     )
     match_metadata.set_defaults(func=command_match_metadata)
+
+    sync_articles = subparsers.add_parser(
+        "sync-articles",
+        help="add every unpublished MT-export article to the ledger",
+    )
+    sync_articles.add_argument("export_file")
+    sync_articles.add_argument(
+        "--blog-url", default="https://concious4410.hatenablog.com"
+    )
+    sync_articles.set_defaults(func=command_sync_articles)
+
+    unmigrated = subparsers.add_parser(
+        "unmigrated", help="list articles that are not yet published on this site"
+    )
+    unmigrated.set_defaults(func=command_unmigrated)
 
     metadata = subparsers.add_parser(
         "metadata", help="show metadata matching counts or candidate records"

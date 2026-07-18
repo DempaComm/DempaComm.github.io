@@ -17,6 +17,90 @@ TOOL = REPO_ROOT / "scripts" / "migration_ledger.py"
 
 
 class MigrationLedgerTest(unittest.TestCase):
+    def test_article_inventory_adds_unmigrated_article_and_asset_states(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repo"
+            myblog = Path(temporary) / "Myblogstr"
+            source_dir = myblog / "2022" / "1__10" / "ar1" / "known"
+            source_dir.mkdir(parents=True)
+            (source_dir / "known.tex").write_text(
+                r"\title{既知の記事}", encoding="utf-8"
+            )
+            (source_dir / "known.pdf").write_bytes(b"%PDF known")
+            (root / "papers").mkdir(parents=True)
+            environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
+            export = Path(temporary) / "hatena.export.txt"
+            export.write_text(
+                "\n".join(
+                    [
+                        "AUTHOR: example",
+                        "TITLE: 既知の記事",
+                        "BASENAME: 2022/01/01/120000",
+                        "STATUS: Publish",
+                        "DATE: 01/01/2022 12:00:00",
+                        "CATEGORY: 数学",
+                        "-----",
+                        "BODY:",
+                        '<a href="https://example.com/known.pdf">known.pdf</a>',
+                        "-----",
+                        "--------",
+                        "AUTHOR: example",
+                        "TITLE: 原稿が見つからない記事",
+                        "BASENAME: 2022/01/02/120000",
+                        "STATUS: Publish",
+                        "DATE: 01/02/2022 12:00:00",
+                        "CATEGORY: 数学",
+                        "-----",
+                        "BODY:",
+                        '<a href="https://example.com/missing.pdf">missing.pdf</a>',
+                        "-----",
+                        "--------",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, str(TOOL), "scan", str(myblog)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "match-metadata",
+                    str(export),
+                    str(myblog),
+                    "--blog-url",
+                    "https://example.hatenablog.com",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with (root / "ledger" / "migration-ledger.csv").open(
+                encoding="utf-8", newline=""
+            ) as stream:
+                rows = list(csv.DictReader(stream))
+            known = next(row for row in rows if row["source_dir"])
+            missing = next(row for row in rows if row["status"] == "source_missing")
+            self.assertEqual("tex_pdf", known["local_assets"])
+            self.assertEqual("linked", known["article_pdf"])
+            self.assertEqual("none", missing["local_assets"])
+            self.assertEqual("linked", missing["article_pdf"])
+            self.assertEqual("missing.pdf", missing["metadata_pdf_files"])
+            with (root / "ledger" / "unmigrated-articles.csv").open(
+                encoding="utf-8", newline=""
+            ) as stream:
+                unmigrated = list(csv.DictReader(stream))
+            self.assertEqual(
+                ["原稿が見つからない記事"],
+                [row["title"] for row in unmigrated],
+            )
+
     def test_scan_matches_published_source_and_preserves_notes(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repo"
