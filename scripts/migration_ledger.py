@@ -1409,6 +1409,37 @@ def command_sync_articles(args: argparse.Namespace) -> None:
     )
 
 
+def command_begin_privacy_review(args: argparse.Namespace) -> None:
+    rows = read_rows()
+    if not rows:
+        raise LedgerError("ledger CSV does not exist or is empty")
+    requested = set(args.record_ids)
+    found: set[str] = set()
+    for row in rows:
+        if row["record_id"] not in requested:
+            continue
+        found.add(row["record_id"])
+        if row["status"] not in {"source_found", "privacy_review"}:
+            raise LedgerError(
+                f"{row['record_id']}: privacy review can start only from "
+                f"source_found (current: {row['status']})"
+            )
+        if row["local_assets"] in {"none", "support_only"}:
+            raise LedgerError(
+                f"{row['record_id']}: privacy review requires TeX or PDF"
+            )
+        row["status"] = "privacy_review"
+        if row["author_review"] == "not_applicable":
+            row["author_review"] = "pending"
+    missing = sorted(requested - found)
+    if missing:
+        raise LedgerError("unknown record_id: " + ", ".join(missing))
+    validate_rows(rows, load_manifests())
+    write_rows(rows)
+    write_json(rows)
+    print(f"PRIVACY REVIEW {len(found)} records")
+
+
 def command_unmigrated(args: argparse.Namespace) -> None:
     rows = read_rows()
     validate_rows(rows, load_manifests())
@@ -2177,6 +2208,13 @@ def parser() -> argparse.ArgumentParser:
         "--blog-url", default="https://concious4410.hatenablog.com"
     )
     sync_articles.set_defaults(func=command_sync_articles)
+
+    begin_privacy_review = subparsers.add_parser(
+        "begin-privacy-review",
+        help="move manually selected source candidates into privacy review",
+    )
+    begin_privacy_review.add_argument("record_ids", nargs="+")
+    begin_privacy_review.set_defaults(func=command_begin_privacy_review)
 
     unmigrated = subparsers.add_parser(
         "unmigrated", help="list articles that are not yet published on this site"

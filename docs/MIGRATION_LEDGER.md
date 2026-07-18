@@ -219,6 +219,18 @@ python3 scripts/migration_ledger.py confirm-metadata source:0123456789abcdef
 - `skipped`: 移行しないと判断
 - `source_missing`: 記事は存在するが対応するローカルTeX・PDFが未登録
 
+原稿候補のTeX・PDFに対して `paper_tool.py inspect-file` を実行し、検査を開始した
+候補は台帳番号を明示して `privacy_review` へ進めます。
+
+```sh
+python3 scripts/migration_ledger.py begin-privacy-review \
+  article:0123456789abcdef article:fedcba9876543210
+```
+
+この操作は `source_found` の候補だけを対象にし、原稿ファイル自体は変更しません。
+検査中の段階では `author_review=pending` のままです。名義と全ページの確認が済んだ
+後にだけ `approved` とし、取り込み可能な状態へ進めます。
+
 ## 著者情報の確認状態
 
 - `pending`: 未確認
