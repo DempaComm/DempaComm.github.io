@@ -260,6 +260,8 @@ python3 scripts/migration_ledger.py record-publication \
 ```
 
 対応する `paper.json` がない場合、または台帳が `ready` でない場合は停止します。
+ただし `ブログ本文のみ` は、PDFリンクもローカル原稿もない `source_missing` の記事から
+直接確定できます。
 成功すると `status=published` と保存先slugが台帳へ反映されます。
 
 ## 著者情報の確認状態

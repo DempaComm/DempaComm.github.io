@@ -247,6 +247,17 @@ class MigrationLedgerTest(unittest.TestCase):
                         '<a href="https://example.com/missing.pdf">missing.pdf</a>',
                         "-----",
                         "--------",
+                        "AUTHOR: example",
+                        "TITLE: PDFリンクがない記事",
+                        "BASENAME: 2022/01/03/120000",
+                        "STATUS: Publish",
+                        "DATE: 01/03/2022 12:00:00",
+                        "CATEGORY: 数学",
+                        "-----",
+                        "BODY:",
+                        "<p>ブログ本文だけの記事です。</p>",
+                        "-----",
+                        "--------",
                     ]
                 ),
                 encoding="utf-8",
@@ -278,12 +289,65 @@ class MigrationLedgerTest(unittest.TestCase):
             ) as stream:
                 rows = list(csv.DictReader(stream))
             known = next(row for row in rows if row["source_dir"])
-            missing = next(row for row in rows if row["status"] == "source_missing")
+            missing = next(
+                row
+                for row in rows
+                if row["title"] == "原稿が見つからない記事"
+            )
+            blog_only = next(
+                row for row in rows if row["title"] == "PDFリンクがない記事"
+            )
             self.assertEqual("tex_pdf", known["local_assets"])
             self.assertEqual("linked", known["article_pdf"])
             self.assertEqual("none", missing["local_assets"])
             self.assertEqual("linked", missing["article_pdf"])
             self.assertEqual("missing.pdf", missing["metadata_pdf_files"])
+            self.assertEqual("source_missing", blog_only["status"])
+            self.assertEqual("none", blog_only["article_pdf"])
+            slug = "2022-01-03-01"
+            manifest_dir = root / "papers" / slug
+            manifest_dir.mkdir()
+            (manifest_dir / "paper.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 2,
+                        "slug": slug,
+                        "migration_record_id": blog_only["record_id"],
+                        "kind": "ブログ本文のみ",
+                        "title": blog_only["title"],
+                        "published_at": blog_only["published_at"],
+                        "sequence": 1,
+                        "original_url": blog_only["original_url"],
+                        "tags": ["数学"],
+                        "math_section": "その他",
+                        "build": {"enabled": False, "engine": ""},
+                        "files": [],
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "record-publication",
+                    blog_only["record_id"],
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with (root / "ledger" / "migration-ledger.csv").open(
+                encoding="utf-8", newline=""
+            ) as stream:
+                rows = list(csv.DictReader(stream))
+            blog_only = next(
+                row for row in rows if row["title"] == "PDFリンクがない記事"
+            )
+            self.assertEqual("published", blog_only["status"])
+            self.assertEqual(slug, blog_only["target_slug"])
             with (root / "ledger" / "unmigrated-articles.csv").open(
                 encoding="utf-8", newline=""
             ) as stream:

@@ -39,6 +39,7 @@ $pdf_mode = 3;
 """
 LATEXMKRC_BY_ENGINE = {"platex": DEFAULT_LATEXMKRC}
 DEFAULT_BUILD_ENGINE = "platex"
+BLOG_ONLY_KIND = "ブログ本文のみ"
 MATH_SECTIONS = (
     "代数・組合せ",
     "位相・距離・幾何",
@@ -201,8 +202,12 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
     for legacy_slug in manifest["legacy_slugs"]:
         if str(safe_relative_path(legacy_slug)) != legacy_slug or "/" in legacy_slug:
             raise PaperToolError(f"{path}: invalid legacy slug: {legacy_slug}")
-    if not isinstance(manifest["files"], list) or not manifest["files"]:
-        raise PaperToolError(f"{path}: files must be a non-empty array")
+    if not isinstance(manifest["files"], list):
+        raise PaperToolError(f"{path}: files must be an array")
+    if not manifest["files"] and manifest["kind"] != BLOG_ONLY_KIND:
+        raise PaperToolError(
+            f"{path}: files may be empty only for kind={BLOG_ONLY_KIND}"
+        )
     build = manifest["build"]
     if not isinstance(build, dict) or not isinstance(build.get("enabled"), bool):
         raise PaperToolError(f"{path}: build.enabled is required")
@@ -216,6 +221,13 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
         )
     if build["enabled"] and "root" not in build:
         raise PaperToolError(f"{path}: build.root is required when build is enabled")
+    if manifest["kind"] == BLOG_ONLY_KIND:
+        if build["enabled"]:
+            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} cannot enable a TeX build")
+        if manifest["files"]:
+            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} must not contain files")
+        if not str(manifest["original_url"]).strip():
+            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} requires original_url")
     if build["enabled"]:
         root = str(build["root"])
         if root != nfc_path(root):
@@ -328,6 +340,17 @@ def public_file_actions(
             primary_source_added = True
         actions.append(f'{indent}<a{primary} href="{prefix}{relative}">{label}</a>')
     return actions
+
+
+def original_article_action(
+    manifest: dict[str, Any], indent: str, primary: bool = False
+) -> str | None:
+    if not manifest["original_url"]:
+        return None
+    original_url = html.escape(manifest["original_url"], quote=True)
+    class_attribute = ' class="primary-action"' if primary else ""
+    label = "電波通信で読む" if manifest["kind"] == BLOG_ONLY_KIND else "元の記事"
+    return f'{indent}<a{class_attribute} href="{original_url}">{label}</a>'
 
 
 def manifests(slugs: Iterable[str] | None = None) -> list[tuple[Path, dict[str, Any]]]:
@@ -480,21 +503,30 @@ def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
         f'          <a class="paper-tag" href="{tag_href(tag, prefix)}">{html.escape(tag)}</a>'
         for tag in manifest["tags"]
     )
-    actions = public_file_actions(
-        manifest, f"{prefix}papers/{slug}/", "          "
-    )
+    actions = public_file_actions(manifest, f"{prefix}papers/{slug}/", "          ")
+    if manifest["kind"] == BLOG_ONLY_KIND:
+        original_action = original_article_action(manifest, "          ", primary=True)
+        if original_action:
+            actions.append(original_action)
     actions.append(
         f'          <a href="{prefix}papers/{slug}/keywords.txt">検索語</a>'
     )
-    if manifest["original_url"]:
-        original_url = html.escape(manifest["original_url"], quote=True)
-        actions.append(f'          <a href="{original_url}">元の記事</a>')
+    if manifest["kind"] != BLOG_ONLY_KIND:
+        original_action = original_article_action(manifest, "          ")
+        if original_action:
+            actions.append(original_action)
     actions_html = "\n".join(actions)
-    aria = html.escape(f"{manifest['title']}のファイル", quote=True)
+    aria_suffix = "ブログ記事へのリンク" if manifest["kind"] == BLOG_ONLY_KIND else "ファイル"
+    aria = html.escape(f"{manifest['title']}の{aria_suffix}", quote=True)
+    kind_badge = (
+        f"\n          <span>{BLOG_ONLY_KIND}</span>"
+        if manifest["kind"] == BLOG_ONLY_KIND
+        else ""
+    )
     year_href = f"#year-{year}" if prefix else f"archive/#year-{year}"
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
         <div class="paper-meta">
-          <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>
+          <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}
         </div>
         <h3><a href="{prefix}papers/{slug}/">{title}</a></h3>
         <p>{summary}</p>
@@ -747,17 +779,25 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
     actions = public_file_actions(
         manifest, f"../../papers/{slug}/", "            "
     )
-    if manifest["original_url"]:
-        original_url = html.escape(manifest["original_url"], quote=True)
-        actions.append(f'            <a href="{original_url}">元の記事</a>')
+    original_action = original_article_action(
+        manifest, "            ", primary=manifest["kind"] == BLOG_ONLY_KIND
+    )
+    if original_action:
+        actions.append(original_action)
+    kind_badge = (
+        f"<span>{BLOG_ONLY_KIND}</span>"
+        if manifest["kind"] == BLOG_ONLY_KIND
+        else ""
+    )
+    action_label = "ブログ記事へのリンク" if manifest["kind"] == BLOG_ONLY_KIND else "ファイル"
     return f"""        <article class="tag-page-paper">
-          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span></div>
+          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}</div>
           <h3><a href="../../papers/{slug}/">{title}</a></h3>
           <p>{summary}</p>
           <div class="paper-tags" aria-label="電波通信のタグ">
 {tag_chips}
           </div>
-          <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}のファイル">
+          <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}の{action_label}">
 {chr(10).join(actions)}
           </nav>
         </article>"""
@@ -822,6 +862,9 @@ def rendered_math_index_item(
         path = html.escape(entry["path"], quote=True)
         label = html.escape(entry["label"])
         file_links.append(f'<a href="{prefix}papers/{slug}/{path}">{label}</a>')
+    if manifest["kind"] == BLOG_ONLY_KIND and manifest["original_url"]:
+        original_url = html.escape(manifest["original_url"], quote=True)
+        file_links.append(f'<a href="{original_url}">電波通信で読む</a>')
     tag_links = "\n".join(
         f'              <a class="paper-tag" href="{prefix}tags/{quote(tag, safe="")}/">'
         f"{html.escape(tag)}</a>"
@@ -983,10 +1026,24 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
         for keyword in manifest["keywords"]
     )
     actions = public_file_actions(manifest, "", "          ")
+    if manifest["kind"] == BLOG_ONLY_KIND:
+        original_action = original_article_action(manifest, "          ", primary=True)
+        if original_action:
+            actions.append(original_action)
     actions.append('          <a href="keywords.txt">検索語テキスト</a>')
-    if manifest["original_url"]:
-        original_url = html.escape(manifest["original_url"], quote=True)
-        actions.append(f'          <a href="{original_url}">電波通信の元記事</a>')
+    if manifest["kind"] != BLOG_ONLY_KIND:
+        original_action = original_article_action(manifest, "          ")
+        if original_action:
+            actions.append(original_action)
+    eyebrow = "BLOG ARTICLE LINK" if manifest["kind"] == BLOG_ONLY_KIND else "PUBLIC MANUSCRIPT"
+    section_number = "ARTICLE" if manifest["kind"] == BLOG_ONLY_KIND else "FILES"
+    section_title = "ブログ記事へのリンク" if manifest["kind"] == BLOG_ONLY_KIND else "公開ファイル"
+    action_label = "ブログ記事へのリンク" if manifest["kind"] == BLOG_ONLY_KIND else "公開ファイル"
+    kind_badge = (
+        f"\n        <span>{BLOG_ONLY_KIND}</span>"
+        if manifest["kind"] == BLOG_ONLY_KIND
+        else ""
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -996,7 +1053,7 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
   <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="site-header">
     <div class="header-inner">
-      <p class="eyebrow">PUBLIC MANUSCRIPT</p>
+      <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p class="lead">{summary}</p>
       <nav class="site-navigation" aria-label="主要ページ">
@@ -1008,12 +1065,12 @@ def rendered_paper_page(manifest: dict[str, Any]) -> str:
     <article class="paper-detail">
       <div class="paper-meta">
         <span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
-        <span>原稿番号 {slug}</span>
+        <span>原稿番号 {slug}</span>{kind_badge}
       </div>
       <section aria-labelledby="files-title">
-        <p class="section-number">FILES</p>
-        <h2 id="files-title">公開ファイル</h2>
-        <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}の公開ファイル">
+        <p class="section-number">{section_number}</p>
+        <h2 id="files-title">{section_title}</h2>
+        <nav class="paper-actions" aria-label="{html.escape(manifest['title'], quote=True)}の{action_label}">
 {chr(10).join(actions)}
         </nav>
       </section>
@@ -1915,8 +1972,14 @@ def command_import(args: argparse.Namespace) -> None:
     if sequence < 1:
         raise PaperToolError("spec.sequence must be a positive integer")
     slug = f"{published:%Y-%m-%d}-{sequence:02d}"
-    source_dir = resolve_source_dir(spec_path, spec)
-    if not source_dir.is_dir():
+    files = spec["files"]
+    if not isinstance(files, list):
+        raise PaperToolError("spec.files must be an array")
+    blog_only = spec["kind"] == BLOG_ONLY_KIND
+    if not files and not blog_only:
+        raise PaperToolError(f"spec.files may be empty only for kind={BLOG_ONLY_KIND}")
+    source_dir = resolve_source_dir(spec_path, spec) if files else spec_path.parent
+    if files and not source_dir.is_dir():
         raise PaperToolError(f"source_dir does not exist: {source_dir}")
     destination = PAPERS_DIR / slug
     if destination.exists():
@@ -1932,8 +1995,11 @@ def command_import(args: argparse.Namespace) -> None:
         raise PaperToolError("privacy_override must be a string")
     prepared_files: list[tuple[dict[str, Any], Path, Path]] = []
     privacy_reviews: list[dict[str, Any]] = []
-    print("PUBLIC FILES TO IMPORT:")
-    for entry in spec["files"]:
+    if blog_only:
+        print(f"BLOG ARTICLE LINK TO IMPORT: {spec['original_url']}")
+    else:
+        print("PUBLIC FILES TO IMPORT:")
+    for entry in files:
         source_relative = safe_relative_path(str(entry["source"]))
         target_relative = safe_relative_path(nfc_path(str(entry["path"])))
         source = (source_dir / source_relative).resolve()
@@ -1971,7 +2037,7 @@ def command_import(args: argparse.Namespace) -> None:
                     "sha256": source_hash,
                 }
             )
-        build_enabled = bool(spec.get("build_enabled", True))
+        build_enabled = bool(spec.get("build_enabled", not blog_only))
         build_engine = str(spec.get("build_engine", "")).strip()
         if build_engine and build_engine not in LATEXMKRC_BY_ENGINE:
             raise PaperToolError(
@@ -2027,7 +2093,10 @@ def command_import(args: argparse.Namespace) -> None:
         raise
     if not args.no_catalog:
         command_catalog(argparse.Namespace(check=False))
-    print(f"IMPORTED {slug} with byte-identical protected files")
+    if blog_only:
+        print(f"IMPORTED {slug} as {BLOG_ONLY_KIND}")
+    else:
+        print(f"IMPORTED {slug} with byte-identical protected files")
 
 
 def command_approve(args: argparse.Namespace) -> None:

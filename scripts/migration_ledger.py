@@ -1496,12 +1496,21 @@ def command_record_publication(args: argparse.Namespace) -> None:
         )
     for record_id in requested:
         row = rows_by_record[record_id]
-        if row["status"] not in {"ready", "published"}:
+        manifest = manifests_by_record[record_id]
+        blog_only = str(manifest.get("kind", "")) == "ブログ本文のみ"
+        allowed_source_missing = (
+            blog_only
+            and row["status"] == "source_missing"
+            and row["local_assets"] == "none"
+            and row["article_pdf"] == "none"
+        )
+        if row["status"] not in {"ready", "published"} and not allowed_source_missing:
             raise LedgerError(
-                f"{record_id}: publication can be recorded only from ready "
+                f"{record_id}: publication can be recorded only from ready, or "
+                f"from a PDF-linkless source_missing article for ブログ本文のみ "
                 f"(current: {row['status']})"
             )
-        apply_manifest(row, manifests_by_record[record_id])
+        apply_manifest(row, manifest)
     validate_rows(rows, manifests)
     write_rows(rows)
     write_json(rows)

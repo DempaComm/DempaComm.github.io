@@ -71,6 +71,59 @@ def add_review_receipt(root: Path, source: Path) -> None:
 
 
 class SourceOnlyImportTest(unittest.TestCase):
+    def test_import_blog_only_article_without_public_files(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environment = prepare_root(root)
+            spec = root / "blog-only.json"
+            spec.write_text(
+                json.dumps(
+                    {
+                        "title": "PDFリンクのない記事",
+                        "published_at": "2017-02-04T21:49:57+09:00",
+                        "sequence": 1,
+                        "migration_record_id": "article:0123456789abcdef",
+                        "kind": "ブログ本文のみ",
+                        "math_section": "その他",
+                        "summary": "電波通信で公開したブログ本文のみの記事です。",
+                        "original_url": "https://example.hatenablog.com/entry/2017/02/04/214957",
+                        "tags": ["雑談"],
+                        "keywords": ["PDFリンクのない記事"],
+                        "build_enabled": False,
+                        "files": [],
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, str(TOOL), "import-paper", str(spec)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            slug = "2017-02-04-01"
+            manifest_path = root / "papers" / slug / "paper.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual("ブログ本文のみ", manifest["kind"])
+            self.assertEqual([], manifest["files"])
+            self.assertEqual([], manifest["privacy_reviews"])
+            staged = root / "staged"
+            subprocess.run(
+                [sys.executable, str(TOOL), "stage", str(staged)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            page = (staged / "papers" / slug / "index.html").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn('class="primary-action"', page)
+            self.assertIn("電波通信で読む", page)
+            self.assertNotIn("PDFを読む", page)
+
     def test_approve_change_refreshes_privacy_review_for_changed_tex(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
