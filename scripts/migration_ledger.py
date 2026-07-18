@@ -135,6 +135,19 @@ EDITABLE_FIELDS = {
     "metadata_pdf_files",
     "metadata_evidence",
 }
+ARTICLE_INVENTORY_WORKFLOW_FIELDS = (
+    "status",
+    "source_dir",
+    "tex_files",
+    "pdf_files",
+    "bib_files",
+    "bst_files",
+    "target_slug",
+    "math_section",
+    "build_engine",
+    "author_review",
+    "notes",
+)
 STATUSES = {
     "source_found",
     "metadata_ready",
@@ -877,9 +890,12 @@ def sync_article_inventory(
         row = article_inventory_row(article)
         old = old_by_url.get(article["url"])
         if old:
-            for field in ("math_section", "author_review", "notes"):
-                if old[field]:
-                    row[field] = old[field]
+            # An article-only inventory row can later acquire a manually verified
+            # source outside the normal Myblogstr scan root.  Keep that workflow
+            # decision across repeated MT-export synchronization while refreshing
+            # article-owned metadata such as the title, tags and linked PDF name.
+            for field in ARTICLE_INVENTORY_WORKFLOW_FIELDS:
+                row[field] = old[field]
         retained.append(row)
 
     def sort_key(row: dict[str, str]) -> tuple[str, str, str]:

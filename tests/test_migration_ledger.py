@@ -17,6 +17,100 @@ TOOL = REPO_ROOT / "scripts" / "migration_ledger.py"
 
 
 class MigrationLedgerTest(unittest.TestCase):
+    def test_article_sync_preserves_manually_found_external_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repo"
+            myblog = Path(temporary) / "Myblogstr"
+            source_dir = myblog / "2022" / "1__10" / "ar1" / "dummy"
+            source_dir.mkdir(parents=True)
+            (source_dir / "dummy.tex").write_text(
+                r"\title{ダミー}", encoding="utf-8"
+            )
+            (root / "papers").mkdir(parents=True)
+            environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
+            export = Path(temporary) / "hatena.export.txt"
+            export.write_text(
+                "\n".join(
+                    [
+                        "AUTHOR: example",
+                        "TITLE: 外部で見つかった記事",
+                        "BASENAME: 2024/01/02/120000",
+                        "STATUS: Publish",
+                        "DATE: 01/02/2024 12:00:00",
+                        "CATEGORY: 数学",
+                        "-----",
+                        "BODY:",
+                        '<a href="https://example.com/found.pdf">found.pdf</a>',
+                        "-----",
+                        "--------",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, str(TOOL), "scan", str(myblog)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            sync_command = [
+                sys.executable,
+                str(TOOL),
+                "sync-articles",
+                str(export),
+                "--blog-url",
+                "https://example.hatenablog.com",
+            ]
+            subprocess.run(
+                sync_command,
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            csv_path = root / "ledger" / "migration-ledger.csv"
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+                fields = list(rows[0])
+            article = next(
+                row for row in rows if row["title"] == "外部で見つかった記事"
+            )
+            article.update(
+                {
+                    "status": "source_found",
+                    "source_dir": "MyBlog/2024/found",
+                    "tex_files": "found.tex",
+                    "pdf_files": "found.pdf",
+                    "math_section": "位相・距離・幾何",
+                    "author_review": "pending",
+                    "notes": "MyBlog全体の調査で確認した候補。",
+                }
+            )
+            with csv_path.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(rows)
+            subprocess.run(
+                sync_command,
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            article = next(
+                row for row in rows if row["title"] == "外部で見つかった記事"
+            )
+            self.assertEqual("source_found", article["status"])
+            self.assertEqual("MyBlog/2024/found", article["source_dir"])
+            self.assertEqual("found.tex", article["tex_files"])
+            self.assertEqual("found.pdf", article["pdf_files"])
+            self.assertEqual("tex_pdf", article["local_assets"])
+            self.assertEqual("linked", article["article_pdf"])
+            self.assertEqual("pending", article["author_review"])
+
     def test_article_inventory_adds_unmigrated_article_and_asset_states(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repo"
