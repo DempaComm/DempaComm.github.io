@@ -1,0 +1,589 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+\newcommand{\mm}{\mathfrak{M}}
+\newcommand{\ffnn}{\{f_{n}\}_{n\in \nn}}
+\newcommand{\rrr}{\mathbb{E}}
+\newcommand{\s}{\sigma}
+
+\title{可測空間と可測写像}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文書では可測空間と可測写像の性質を調べる。
+\section{可測空間}
+
+\setcounter{equation}{0}
+\begin{df}[$\sigma$加法族と可測空間]集合$X$の部分集合族$\mm$が$\sigma$加法族であるとは
+\begin{eqnarray}
+&A\in \mm \To X\setminus A\in \mm\\ 
+&A,B\in\mm \To A\cap B\in \mm\\ 
+&\{A_n\}_{n\in \nn}\subset \mm \To \bigcup_{n\in\nn}A_n\in \mm 
+\end{eqnarray}
+を充たすこと。このとき組$(X,\mm)$を可測空間などと言う。また$\mm$に属する集合を可測空間$(X,\mm)$の可測集合など呼ぶ。
+\end{df}
+\begin{cau}
+$\{\mm_i\}_{i\in I}$を$\s$加法族の族とする。この時
+\[
+\bigcap_{i\in I}\mm_i
+\]
+も$\s$加法族である。証明は容易である。
+\end{cau}
+\begin{df}[加法族の生成]集合$X$上の部分集合族$\mathfrak{A}$についてそれを含む最小の$\s$加法族を$\mathfrak{A}$から生成された$\s$加法族という。$\s$加法族$\mm$についてその部分族$\mathfrak{A}\subset \mm$から生成される$\s$加法族が$\mm$に等しい時$\mathfrak{A}$は$\mm$を生成するという。
+\end{df}
+\begin{cau}任意の部分集合族$\mathfrak{A}$についてこれから生成される$\s$加法族は確かに存在する。なぜなら
+\[
+\bigcap_{\mathfrak{A}\subset \mm}\mm
+\]
+がそれになるからである。
+\end{cau}
+
+
+\begin{df}[ボレル集合族]位相空間$(X,\mathfrak{O})$上のボレル集合族とは開集合族$\mathfrak{O}$から生成される最小の$\sigma$加法族のことであり、その$\sigma$加法族に属する集合を位相空間$X$のボレル集合と呼ぶ。集合$X$のボレル集合族を$\mathfrak{B}(X)$で書く。特に文脈から明らかで紛れが無いときには$X$を省略して$\mathfrak{B}$と書くことにする。
+\end{df}
+\begin{cau}$\sigma$加法族の定義の条件$(1)$から$X$の閉集合族$\mathfrak{F}$から生成される最小の$\sigma$加法族と$X$のボレル加法族は一致する。
+また、$\mathfrak{B}$は$B$のフラクトゥールである。
+\end{cau}
+
+
+\begin{df}[可測写像]可測空間$(X,\mathfrak{M})$から可測空間$(Y,\mathfrak{N})$への写像
+\[
+f:(X,\mm)\to (Y,\mathfrak{N})
+\]が可測写像であるとは
+\[
+\forall N\in \mathfrak{N}\ f^{-1}(N)\in \mm
+\]
+を充たすこと。どこの可測空間で可測であるかを強調して$(\mm,\mathfrak{N})$可測写像と呼んだりもする。
+\end{df}
+$f$の逆像が和集合と共通部分を保つことから次の命題が成立する。
+\begin{prop}\label{kasoku}可測空間$(Y,\mathfrak{N})$について$\mathfrak{A}$が$\mathfrak{N}$を生成するとき
+\[
+f:(X,\mm)\to (Y,\mathfrak{N})
+\]
+が可測写像であることと
+\[
+\forall A\in \mathfrak{A}\ f^{-1}(A)\in \mm
+\]
+が成り立つことは同値である。
+\end{prop}
+\begin{proof}[証明略]
+\end{proof}
+
+
+次の命題は後ほど多々用いられる事になるだろう。
+\begin{prop}\label{gousei}
+\[
+f:(X,\mm)\to (Y,\mathfrak{N})
+\]を$X$から$Y$への可測写像、
+\[
+g:(Y,\mathfrak{N})\to (Z,\mathfrak{L})
+\]を$Y$から$Z$への可測写像とする。このとき$f$と$g$の合成
+\[
+g\circ f:(X,\mm)\to(Z,\mathfrak{L})
+\]
+は$X$から$Z$への可測写像である。
+\end{prop}
+\begin{proof}
+\[
+(g\circ f)^{-1}(A)=f^{-1}(g^{-1}(A))
+\]
+からすぐわかる。
+\end{proof}
+
+可測写像のうち、よく使われるものに名前をつける。最初はボレル関数から
+\begin{df}[ボレル関数]位相空間$X$から位相空間$Y$への写像
+\[
+f:X\to Y
+\]
+が$X$から$Y$へのボレル関数、あるいは単にボレル関数であるとは$f$が可測空間$(X,\mathfrak{B}(X))$から$(Y,\mathfrak{B}(Y))$への可測写像となってる事である。同じことだが、命題\ref{kasoku}から$Y$の開集合族を$\mathfrak{O}_{Y}$とするとき
+\[
+\forall O\in \mathfrak{O}_{Y}\ f^{-1}(O)\in \mathfrak{B}(X)
+\]
+が成り立つことと言っても良い。
+\end{df}
+\begin{cau}
+特に$X$から$Y$への連続写像は$X$から$Y$へのボレル関数になることに注意せよ。
+\end{cau}
+次に定義する可測関数（関数と写像の違いに注意せよ）は測度論の主役となる写像である。
+\begin{df}[可測関数]可測空間$(X,\mm)$から$(\rrr,\mathfrak{B}(\rrr))$への可測写像を可測関数と呼ぶ。同じことだが、
+\[
+\forall B\in \mathfrak{B}(\rrr)\ f^{-1}(B)\in \mm
+\]
+を充たすような$f$のことである。
+\end{df}
+\begin{cau}
+$\mathfrak{B}(\rrr)$は$\rrr$のボレル集合族、つまり$\rrr$の開集合族から生成される$\s$加法族であっであったことを思い出そう。\\ 
+値を$\mgn$しか取らないような関数も可測関数である。\\ 
+{\bf 可測関数と可測写像を見間違えないように注意せよ}
+\end{cau}
+
+\setcounter{equation}{0}
+\begin{lem}
+$A$を$\rr$で稠密な集合とする。以下に述べる$\rrr$の集合族は$\mathfrak{B}(\rrr)$を生成する。
+\begin{eqnarray}
+\{(a,+\mgn]\ |\ a\in \rr\}\\ 
+\{[b,+\mgn]\ |\ b\in \rr\}\\
+\{[-\mgn,c)\ |\ c\in \rr\}\\  
+\{[-\mgn,d]\ |\ d\in \rr\}\\
+\{(a,+\mgn]\ |\ a\in A\}\\ 
+\{[b,+\mgn]\ |\ b\in A\}\\
+\{[-\mgn,c)\ |\ c\in A\}\\  
+\{[-\mgn,d]\ |\ d\in A\}
+\end{eqnarray}
+\end{lem}
+\begin{proof}[証明のスケッチ]
+\[
+(a,+\mgn]=\rrr\setminus [-\mgn,a]=\bigcup_{n\in\nn}[a+\frac{1}{n},+\mgn]
+\]
+\[
+[a,+\mgn]=\rrr\setminus [-\mgn,a)=\bigcap_{n\in\nn}(a-\frac{1}{n},+\mgn]
+\]
+\[
+(a,b)=[-\mgn,b)\cap (a,+\mgn]
+\]
+\[
+[a,b]=[-\mgn,b]\cap [a,+\mgn]
+\]
+などからすぐわかる。
+\end{proof}
+
+この補題と命題\ref{kasoku}を利用した
+関数が可測であるかどうかを判定する便利な基準がある。
+
+\setcounter{equation}{0}
+\begin{prop}\label{aa}可測空間$(X,\mm)$から$\rrr$への写像について以下は同値。ただし$A$は$\rr$で稠密な集合とする。
+\begin{eqnarray}
+&fは可測\\ 
+&\forall a\in \rr\ f^{-1}((a,+\mgn])\in \mm\\ 
+&\forall b\in \rr\ f^{-1}([b,+\mgn])\in \mm\\
+&\forall c\in \rr\ f^{-1}([-\mgn,c))\in \mm\\
+&\forall d\in \rr\ f^{-1}([-\mgn,d])\in \mm\\ 
+&\forall a\in A\ f^{-1}((a,+\mgn])\in \mm\\ 
+&\forall b\in A\ f^{-1}([b,+\mgn])\in \mm\\
+&\forall c\in A\ f^{-1}([-\mgn,c))\in \mm\\
+&\forall d\in A\ f^{-1}([-\mgn,d])\in \mm
+\end{eqnarray}
+\end{prop}
+\begin{proof}補題と命題\ref{kasoku}からすぐわかる。
+\end{proof}
+この命題\ref{aa}は今後断りなく自在に使う。
+
+\setcounter{equation}{0}
+\begin{exam}$f$を可測空間$X$上の可測関数である時以下の集合は可測集合。
+\begin{eqnarray}
+&\{a<f<b\}:=f^{-1}((a,b))=\{x\in X\ |\ a<f(x)<b\}\\ 
+&\{a\le f<b\}:=f^{-1}([a,b))=\{x\in X\ |\ a\le f(x)<b\}\\ 
+&\{a<f\le b\}:=f^{-1}((a,b])=\{x\in X\ |\ a<f(x)\le b\}\\ 
+&\{a\le f\le b\}:=f^{-1}([a,b])=\{x\in X\ |\ a\le f(x)\le b\}\\ 
+&\{f=a\}:=f^{-1}(\{a\})=\{x\in X\ |\ f(x)=a\}\\ 
+&\{a<f\}:=\{a<f\le +\mgn\}\\ 
+&\{a\le f\}:=\{a\le f\le +\mgn\}\\ 
+&\{f< b\}:=\{-\mgn\le f<b\}\\ 
+&\{f\le b\}:=\{-\mgn \le f\le b\}\\ 
+&\{f< g\}:=\{x\in X\ |\ f(x)<g(x)\}\\ 
+&\{f\le g\}:=\{x\in X\ |\ f(x)\le g(x)\}\\ 
+&\{f=g\}:=\{x\in X\ |\ f(x)=g(x)\}
+\end{eqnarray}
+$(1)$から$(9)$までが可測集合なのは自明である。後ろの3つが可測集合なのは
+\[
+\{f<g\}=\bigcup_{r\in \qq}\Bigr(\{f<r\}\cap\{r<g\}\Bigr)
+\]
+\[
+\{f\le g\}=X\setminus \{f>g\}
+\]
+\[
+\{f=g\}=\{f\le g\}\cap\{f\ge g\}
+\]
+からすぐわかる。
+\end{exam}
+この$\{f\le b\}$などの記号は便利なので今後自在に用いる。
+
+\section{可測性を保つ演算}
+以下では可測関数同士の可測性を保つ演算を見ていく。まず最初に可測関数と極限の親和性を語る命題を示そう。
+\begin{prop}\label{sup}$(X,\mm)$上の可算な可測関数の族$\ffnn$について
+\[
+\sup_{n\in\nn}f_n,\ \inf_{n\in\nn}f_n
+\]
+も$(X,\mm)$上の可測関数となる。
+よって
+\[
+\limsup_{n\to\mgn} f_n,\ \liminf_{n\to\mgn} f_n
+\]
+も$(X,\mm)$上可測で各$x\in X$について$\dpst \lim_{n\to \mgn}f_n(x)$が存在するなら
+\[
+\lim_{n\to\mgn}f_n
+\]
+も$(X,\mm)$上の可測関数となる。
+\end{prop}
+\begin{proof}
+\begin{eqnarray*}
+\limsup_{n\to\mgn} f_n=\inf_{n\in\nn}(\sup_{k\ge n}f_k)\\ 
+\liminf_{n\to\mgn} f_n=\sup_{n\in\nn}(\inf_{k\ge n}f_k)
+\end{eqnarray*}
+なので前半を示せば後半はすぐに分かる。以下命題の後半を示す。\\ 
+数列の一般論として
+\[
+\sup_{n\in\nn} a_n\le M\iff \forall n\in \nn \  a_n\le M
+\]
+なので
+\[
+\{\sup_{n\in\nn}f_n \le b\}=\bigcap_{n\in \nn}\{f_n\le b\}
+\]
+で、$\mm$は可算個の共通部分で閉じてるので
+\[
+\{\sup_{n\in\nn}f_n \le b\}\in \mm
+\]
+よって$\dpst \sup_{n\in \nn}f_n$は可測関数である。$\dpst \inf_{n\in \nn}f_n$についても同様である。
+\end{proof}
+
+
+\begin{cor}\label{borel}
+位相空間$X$から$\rrr$への連続関数列$\ffnn$の極限関数
+\[
+\lim_{n\to \mgn}f_{n}
+\]
+が存在するならそれは$X$から$\rrr$へのボレル関数である。
+\end{cor}
+\begin{proof}
+証明は明らかであろう。
+\end{proof}
+
+
+\begin{prop}\label{oisii}$f_1,f_2\cdots f_N$を$X$上の$N$個の可測関数とする。このとき
+\[
+F=\prod_{i=1}^Nf_i:X\to \rrr^{N};x\mapsto(f_1(x),f_2(x),\cdots ,f_N(x))
+\]
+は$X$から$\rrr^N$への可測写像となる。特に、${\rm Im}f\subset U\subset \rrr^N$ならば
+$F$は$X$から$U$への可測写像になる。ただし$U$は$\rrr^N$からの相対位相を備え$(U.\mathfrak{B}(U))$という可測空間として考えている。
+\end{prop}
+\begin{proof}
+まず、
+\[
+I=[-\mgn,a_1]\times [-\mgn,a_2]\times \cdots \times [-\mgn,a_N]
+\]
+という形の集合は$\mathfrak{B}(\rrr^N)$を生成する。（各自確かめよ）そしてこの形をした$I$について
+\[
+F^{-1}(I)=\bigcap_{i=1}^Nf_i^{-1}([-\mgn,a_i])
+\]
+で仮定より各$\dpst f_i^{-1}([-\mgn,a_i])$は可測集合だから$F^{-1}(I)$も可測集合となり、$F$は可測写像である事がわかる。
+\end{proof}
+
+
+\begin{prop}$f$を$X$上の可測関数とし、$a\in \rrr$とする時
+$af$も可測関数となる。
+\end{prop}
+\begin{proof}$a=0$の時は明らか。$a\in (0,+\mgn)$のときは
+\[
+\{c<af\}=\{\frac{c}{a}<f\}\in\mm
+\]
+から分かる。$a\in(-\mgn,0)$のときも不等号の向きが変わるだけでこれと同様である。\\ 
+$a=+\mgn$のときは$af$は$-\mgn,0,+\mgn$の値しか取らず、
+\begin{eqnarray*}
+\{af=-\mgn\}=\{f<0\}\\ 
+\{af=0\}=\{f=0\}\\ 
+\{af=+\mgn\}=\{f>0\}
+\end{eqnarray*}
+なので可測性は明らか、$a=-\mgn$のときも同様。
+\end{proof}
+
+\begin{fact}写像
+\[
+\phi:\rrr\setminus \{0\}\to \rrr
+\]
+を
+\[
+\phi(x)=\frac{1}{x}
+\]
+と定義すると、$\phi$は連続写像である。
+\end{fact}
+
+\begin{prop}$f$を$X$上の可測関数とし、$\{f=0\}=\O$とする。このとき
+$\dpst \frac{1}{f}$も可測関数となる。
+\end{prop}
+\begin{proof}
+直近で述べた事実と命題\ref{gousei}[可測写像の合成は可測写像]からわかる。
+\end{proof}
+
+
+\begin{fact}$D=\rrr^2\setminus \{(-\mgn,+\mgn),(+\mgn,-\mgn)\}$と置き、
+\[
+\Phi:D\to \rrr
+\]を
+\[
+\Phi(x,y)=x+y
+\]
+と定義すると$\Phi$は連続関数である。
+\end{fact}
+
+
+
+\begin{prop}$f,g$を$X$上の可測関数とする時$f+g$は不定形な演算を行わない限りにおいて可測関数となる。
+\end{prop}
+\begin{proof}不定形な演算を行わないとは
+\[
+\{f=+\mgn\}\cap\{g=-\mgn\}=\O,\ \{f=-\mgn\}\cap\{g=+\mgn\}=\O
+\]
+となることであるつまり
+\[
+(f(x),g(x))\in D=\rrr^2\setminus \{(-\mgn,+\mgn),(+\mgn,-\mgn)\}
+\]
+なので直近の事実の$\Phi$と$f\Pi g$が合成できて、
+\[
+\Phi \circ(f\Pi g)=f+g
+\]
+であり、命題\ref{oisii}から$f\Pi g$は可測であり、命題\ref{gousei}[可測写像の合成は可測写像]からこれが可測関数であることがわかる。
+\end{proof}
+
+
+\begin{fact}[積演算はボレル関数]
+\[
+G:\rrr^2\to \rrr
+\]
+を
+\[
+G(x,y)=xy
+\]
+と定義すると、$G$は{\bf 連続ではない。}しかし、$\rrr^2$から$\rrr$への連続関数列$\{g_{n}\}_{n\in\nn}$が存在して、各点$(x,y)\in \rrr^2$毎に、
+\[
+\lim_{n\to+\mgn}g_{n}(x,y)=G(x,y)=xy
+\]
+と、各点収束する。つまり$G$は連続関数列の極限となるので、系\ref{borel}よりボレル関数である。
+\end{fact}
+
+
+\begin{prop}$f,g$を$X$上の可測関数とする時
+$fg$も可測関数となる。
+\end{prop}
+\begin{proof}直近の事実と命題\ref{gousei}[可測写像の合成は可測写像]と命題\ref{oisii}からすぐに分かる。
+\end{proof}
+
+
+\begin{prop}$E$を可測集合とするときにその特性関数
+\[
+\chi_{E}
+\]
+は可測関数である。
+\end{prop}
+\begin{proof}
+特性関数は$0$か$1$しか値を取り得ず$E$が可測集合なら$X\setminus E$も可測集合であることからわかる。
+\end{proof}
+
+
+
+\begin{prop}$f,g$を$X$の可測関数とする時$\max(f,g),\min(f,g)$も可測関数となる。
+\end{prop}
+\begin{proof}
+$\sup(f,g)=\max(f,g)$と命題\ref{sup}から明らか。$\min$も同様。
+\end{proof}
+\begin{proof}[{\bf 別証明}]
+\[
+A=\{f\le g\},\ B=\{f>g\}
+\]
+と置くとこれは可測集合であり、先の命題群から$g\cdot \chi_{A},f\cdot \chi_{B}$は可測関数である。そして、この２つは和を考えるとき不定形な演算をしないので
+\[
+g\cdot\chi_{A}+f\cdot \chi_{B}
+\]
+も可測関数である。定義から明らかにこれは$\max(f,g)$に等しいので命題は成り立つ。
+\end{proof}
+
+
+\begin{cor}[可測関数関数の分解]可測関数$f$について
+\[
+f_{+}=\max(f,0),\ f_{-}=\max(-f,0)
+\]
+と置くとき、
+\[
+f=f_{+}-f_{-}
+\]
+である。つまり一般の可測関数は非負可測関数の差として表すことが出来る。
+\end{cor}
+\begin{proof}
+自明
+\end{proof}
+
+以上で可測性を保つ演算の紹介は終わりである。
+\section{単関数と可測関数}
+
+\begin{df}[単関数]非負可測関数$s$が単関数であるとは$s$の像$s(X)$が$[0,+\mgn)$の中の有限集合となることである。\\ 
+取りうる値が有限個の実数しか無い非負可測関数と言っても良い
+\end{df}
+
+
+
+\begin{lem}
+単関数$s$は互いに交わらない有限個の可測集合$E_1,E_2\cdots E_n$と非負実数$a_1,a_2\cdots a_n$をつかって
+\[
+s=\sum_{k=1}a_k\chi_{E_k}
+\]
+と書ける。逆にこのように書ける関数は単関数である。
+\end{lem}
+\begin{proof}$s$が取りうる値を$\{a_1,a_2\cdots a_n\}$として
+各$\{s=a_k\}=s^{-1}(a_k)$は可測集合になるので$E_k=s^{-1}(a_k)$とすれば良い。逆は明らか。
+\end{proof}
+
+
+\begin{thm}
+任意の非負可測関数$f\ge0$について単調増加な単関数の族$\{s_n\}_{n\in\nn}$が存在して
+\[
+\lim_{n\to\mgn}s_n(x)=f(x)\ (各点収束)
+\]
+が成り立つ。ちなみに単調増加な関数族が$f$に各点収束してることを$s_n(x)\uparrow f(x)$とも書き表す。
+\end{thm}
+\begin{proof}各$n\in \nn$について
+\[
+E_{n,i}=\{\frac{i-1}{2^n}\le f<\frac{i}{2^n}\}
+\]
+\[
+F_n=\{n\le f\}
+\]
+と定義する。ただし$i$は$1\le i\le n2^n$の範囲を動く。そして$s_n$を
+\[
+s_n(x)=\sum_{i=1}^{n2^n}\frac{i-1}{2^n}\chi_{E_{n,i}}+n\chi_{F_n}
+\]と定義すると単調性がすぐわかり、明らかに$s_n\le f$そして$x\in \{f=+\mgn\}$なら$\forall n\in \nn\ x\in F_n$
+であるから$s_n(x)\to +\mgn$そして$x\in \{f<+\mgn\}$ならば$n$が十分大きいとき$x\in E_{n,i}$
+なので
+\[
+\frac{i-1}{2^n}\le f(x)<\frac{i}{2^n},\ s_n(x)=\frac{i-1}{2^n}
+\]
+であるからこのとき
+\[
+s_n(x)\ge f(x)-\frac{1}{2^n}
+\]
+なので$s_n(x)\to f(x)$である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\bibitem{2}伊藤清三,ルベーグ積分入門,数学選書4,裳華房,1963
+\bibitem{3}梅垣壽春・大矢雅則・塚田真,測度・積分・確率,共立出版,1987
+\bibitem{4}小谷眞一,測度と確率,岩波書店,2005
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

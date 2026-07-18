@@ -1,0 +1,365 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+\newcommand{\s}{\mathcal{S}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\T}{\mathcal{T}}
+
+\title{局所凸空間とセミノルムとLF空間}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+%セミノルムの定義とセミノルム空間の定義
+\begin{df}[セミノルム]
+線形空間$X$から$\rr$への写像$p:X\to \rr$がセミノルムであるとは任意の$x,y \in X,a\in \rr$に対して
+\begin{eqnarray}
+&p(x)\ge0\\ 
+&p(ax)=|a|p(x)\\ 
+&p(x+y)\le p(x)+p(y)
+\end{eqnarray}
+を充たすこと。
+\end{df}
+\begin{cau}
+ノルムとの違いは非退化性$p(x)=0\iff x=0$が仮定されてないというところである。セミノルムは退化していても構わないのである。また簡単にわかるように$p,q$を$X$上のセミノルムとし、$\al\be \in [0,+\mgn)$とすると
+\[
+\al p+\be q
+\]
+もセミノルムとなる。証明は容易であろう。
+\end{cau}
+
+
+\begin{df}[セミノルム空間]
+線形空間$X$とその上のセミノルムの族$\s$の組$(X,\s)$をセミノルム空間という。
+\end{df}
+\begin{cau}
+ノルム空間はそのノルムを$\|\bullet\|$として$\s=\{\|\bullet\|\}$とした時のセミノルム空間である。
+\end{cau}
+
+\begin{df}[セミノルム空間の位相]セミノルム空間$(X.\s)$のセミノルム$p\in \s$について
+\[
+U(p;a,\ep)=\{x\ |\ p(x-a)<\ep\}
+\]
+と定義する。このとき$X$の部分集合族
+\[
+\mathfrak{S}=\{U(p;a,\ep)\ |\ p\in \s,\ a\in X,\ \ep>0\}
+\]
+を{\bf 準開基}とする位相が定まる。この位相をセミノルム族$\s$から定まる位相という。
+\end{df}
+\begin{cau}
+一般に$\mathfrak{S}$は開基になり得ない。例えば$\rr^2$に２つのセミノルム
+\[
+p((x,y))=|x|,\ q((x,y))=|y|
+\]
+を与えたときを考えればよい。
+\end{cau}
+
+\begin{df}[両立するセミノルム]
+線形空間$X$上の２つセミノルムの族$\s,\mathcal{T}$が両立するとは
+$\s$の定める位相と$\mathcal{T}$の定める位相とが一致するときに言う。
+\end{df}
+
+$\s$が開基になる簡単な十分条件を与えよう。
+\setcounter{equation}{0}
+\begin{prop}\label{kaiki}セミノルム空間$(X,\s)$に於いて$\s$が和と非負のスカラー倍で閉じているとき、つまり
+\[
+\forall \al,\be\in [0,+\mgn)\ \forall p,q\in \s\ \al p+\be q \in \s
+\]
+が成り立つとき先に定義した$\mathfrak{S}$は開基になる。
+\end{prop}
+\begin{proof}
+$c\in U(p;a,\ep)\cap U(q;b,\de)$を任意に取る。つまりこの$c$は
+\[
+p(c-a)<\ep,\ q(c-b)<\de
+\]
+を充たす。そして$\al =\ep-p(c-a)>0,\be =\de-q(c-b)>0$と置くと$y\in U(c;p,\al)$ならば
+\[
+p(y-a)=p(y-c+c-a)\le p(y-c)+p(c-a)<\al+p(c-a)=\ep-p(c-a)+p(c-a)=\ep
+\]
+なので$y\in U(a;p,\ep)$がわかる。つまり
+\[
+U(c;p,\al)\subset U(p;a,\ep)
+\]
+同様に
+\[
+U(c;q,\be)\subset U(q;b,\de)
+\]
+がわかる。$c\in U(c;p,\al),\ c\in U(c;q,\be)$
+となので結局
+\[
+c\in U(c;p,\al)\cap U(c;q,\be)\subset U(p;a,\ep)\cap U(q;b,\de)
+\]
+が得られる。さてセミノルム$r$を
+\[
+r=\frac{p}{\al}+\frac{q}{\be}
+\]
+と置く。この時セミノルムが非負であることから$\dpst \frac{p}{\al}\le r,\ \frac{q}{\be}\le r$が成り立つことに注意せよ。そして$c\in U(c;r,1)$であり、$\dpst \frac{p}{\al}\le r,\ \frac{q}{\be}\le r$から$y\in U(c;r,1)$ならば
+\[
+\frac{p}{\al}(y-c)<1,\ \frac{q}{\be}(y-c)<1
+\]
+となり結局$y\in U(c;p,\al),\ y\in U(c;q,\be)$なので最終的に
+\[
+c\in U(c;r,1)\subset U(c;p,\al)\cap U(c;q,\be)\subset U(p;a,\ep)\cap U(q;b,\de)
+\]
+を得る。
+よって$\mathfrak{S}$は開基になる。
+\end{proof}
+
+
+%あれと之が両立する。
+\begin{cor}
+線形空間$X$に於いてその上のセミノルムの族$\s$と$\s$から誘導されるセミノルムの族
+\[
+<\s>=\{\sum_{i=1}^na_i p_i\ |\ a_i \in[0,+\mgn)\ p_i\in \s\}
+\]
+及び
+\[
+[\s]=\{p\ |\ \s\cup \{p\}と\s は両立する\}
+\]
+は両立する。そして$<\s>,[\s]$は非負実数によるスカラー倍と和で閉じている。$[\s]$は$\s$と両立する最大のセミノルム族である。明らかに
+\[
+\s\subset <\s>\subset [\s]
+\]
+が成り立つ。
+\end{cor}
+\begin{proof}
+上の命題から明らか。
+\end{proof}
+
+
+以下セミノルム空間を考えるときには$\s$は非負の実数のスカラー倍と和で閉じてるとしてもよい。このとき命題\ref{kaiki}から$\s$から誘導される準開基$\mathfrak{S}$は開基になっている。必要なら$\s$を$<\s>$や$[\s]$で置き換えても良い。そのようにしても位相を主とする場合には上の議論から一般性を失わない。
+
+
+\begin{lem}[線型形式の連続性と原点での連続性]
+$f:X\to Y$をセミノルム空間$(X,\s),(Y,\T)$の間の線型写像としよう。このとき以下は同値。
+\begin{eqnarray}
+&fは連続\\ 
+&fはXのある１点aで連続\\ 
+&fは0で連続
+\end{eqnarray}
+\end{lem}
+\begin{proof}[{\bf 証明のスケッチ}]
+セミノルム空間の位相の定め方からセミノルム空間の間の写像$f$が点$a$で連続であるとは
+\[
+\forall \ep >0\ \forall q\in \T\ \exists p\in \s\ \exists \de>0\ x\in U(a;p,\de)\To 
+f(x)\in U(f(a);q,\ep)
+\]
+が成り立つことである。そして
+\[
+a+E=\{a+x\ |\ x\in E\}
+\]
+とするときに
+\[
+a+U(c;p,\eta)=U(a+c;p,\eta)
+\]
+が成り立つ。これらのことと$f$が線型写像であることから３つの命題の同値性はすぐに分かる。
+\end{proof}
+\begin{cau}
+線形空間が別にセミノルムを備えて無くても位相線型空間ならこの命題は成り立つ。更に位相群の上でもこの類の命題は成り立つであろう。
+\end{cau}
+
+
+
+%線型形式の定義と0での連続性
+\begin{df}[線型形式]
+線形空間$X$上の線型形式とは線型写像$X\to \rr$のこと
+\end{df}
+
+
+%定理
+
+\begin{thm}
+線型形式$f$がセミノルム空間$(X,\s)$上で連続であるための必要十分条件は$(X,\s)$のセミノルム$q$が存在して
+\[
+\forall x\in X \ |f(x)|\le q(x)
+\]が成り立つことである。
+\end{thm}
+\begin{proof}
+$(X,\s)$のセミノルム$q$が存在して
+\[
+\forall x\in X \ |f(x)|\le q(x)
+\]が成り立つとき、$f$が連続なのは明らかである。次は逆に$f$が連続であるとしよう。
+$f$は$X$の原点$0$で連続なので$\mathfrak{S}$が開基を成すことから
+\[
+\forall \ep >0\ \exists p\in \s\ \exists \de>0\ x\in U(0;p,\de)\To |f(x)|<\ep
+\]
+が成り立つ。$\ep =1$すると、あるセミノルム$p\in \s$と$\de>0$が存在して
+\[
+x\in U(0;p,\de)\To |f(x)|<1
+\]
+が成り立つ。このようなセミノルムと$\de$を固定しておく。さて今$p(x)\neq 0$とすると
+\[
+p\left(\frac{\de}{2}\frac{x}{p(x)}\right)=\frac{\de}{2}p\left(\frac{x}{p(x)}\right)=\frac{\de}{2}\frac{p(x)}{p(x)}=\frac{\de}{2}<\de
+\]
+より
+\[
+\frac{\de}{2}\frac{x}{p(x)}\in U(0;p,\de)
+\]
+が成り立つので
+\[
+|f\left(\frac{\de}{2}\frac{x}{p(x)}\right)|<1
+\]
+を得る。つまり
+\[
+|f(x)|\le \frac{2}{\de}p(x)
+\]
+となる。まとめると$\dpst q=\frac{2}{\de}p(x)$
+と置いたときに
+\[
+p(x)\neq 0\To |f(x)|\le q(x)
+\]
+となることが分かったのである。
+次に
+$p(x)=0$とすると任意の$n\in \nn$について
+\[
+p(nx)=0
+\]
+が成り立つので
+\[
+nx\in U(0;p,\de)
+\]
+よって
+\[
+|f(nx)|<1
+\]
+となり、結局
+\[
+|f(x)|<\frac{1}{n}
+\]
+を得る。$n\in \nn$は任意だったので$f(x)=0$となる。以上から
+\[
+p(x)=0\To |f(x)|=0
+\]
+がわかる。ここで$\dpst q=\frac{2}{\de}p(x)$から
+\[
+p(x)=0\To q(x)=0
+\]
+でもあるから
+\[
+p(x)=0\To |f(x)|=0=q(x)
+\]
+である。いづれにせよ
+\[
+|f(x)|\le q(x)
+\]
+が成り立つ。
+\end{proof}
+
+上の定理はしばしば次の形を取る。
+
+
+\begin{thm}
+線型形式$f$がセミノルム空間$(X,\s)$上で連続であるための必要十分条件は$(X,\s)$のセミノルム$q$が存在して
+\[
+\exists M>0\ \forall x\in X \ |f(x)|\le Mq(x)
+\]が成り立つことである。
+\end{thm}
+
+これはただ単に$Mq$をそのまま書くか、$Mq$をセミノルムとしてひとまとめにして改めて$q$と書くかの違いである。
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}宮島静雄,関数解析,横浜図書,2005
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

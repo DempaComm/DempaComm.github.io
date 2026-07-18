@@ -1,0 +1,289 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}  } }
+\newcommand{\supp}{\text{  {\rm supp}  } }
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{距離関数の修正}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\begin{thm}\label{sub}
+写像$f:[0,+\mgn)\to [0,+\mgn)$
+が以下を充たすとする。
+\begin{align}
+&f(x)=0\iff x=0\\
+&\text{$f$は広義単調増加}\\
+&\text{$f$は$0$で連続}\\
+&f(x+y)\le f(x)+f(y)\ (\text{このような$f$を部分加法的という})
+\end{align}
+このとき距離空間$(X,d)$について$f\circ d$は距離関数で$(X,d)$と$(X,f\circ d)$は同じ位相を誘導する。
+\end{thm}
+\begin{proof}
+$e=f\circ d$とする。まず$e$が距離関数であることを示そう。明らかに$e\le 0$であり、条件$(1)$から
+\[
+e(x,y)=0\iff d(x,y)=0\iff x=y
+\]
+が分かる。また$e(x,y)=e(x,y)$は明らかである。三角不等式を示そう。まず、$x,y,z\in X$について
+\[
+d(x,y)\le d(x,z)+d(z,y)
+\]
+が成り立つ。そして$f$の単調性と部分加法性から
+\[
+f(d(x,y))\le f(d(x,z)+d(z,y))\le f(d(x,z))+f(d(z,y))
+\]
+となり、$e$が三角不等式を充たすことがわかった。\par
+最後に$d$と$e$の位相が両立することを見よう。$f$は$0$で連続なので$\ep$を任意に与えた時$\de$を適切に選べば
+\[
+0\le x< \de\To 0\le f(x)<\ep
+\]
+よって任意の$p\in X$について
+\[
+B(p,\de;d)\subset B(p,\ep;e)
+\]
+である。\par
+ところで$\ep>0$を任意に与え$\de =\dfrac{f(\ep)}{2}$と置くと条件$(1)$より$\de>0$である。ここでもし$f(x)<\de$かつ$\ep\le x$となる$x$が存在すると仮定すると単調性から$f(\ep)\le f(x)$となるので$f(x)<\de$に反する。よって
+\[
+f(x)<\de\To x<\ep
+\]
+であるので結局任意の$p\in X$について
+\[
+B(p,\de;e)\subset B(p,\ep;d)
+\]
+以上から$e$と$d$は同じ位相を誘導する。
+\end{proof}
+
+\begin{exam}\label{a}
+$a>0$に対して
+\[
+f(x)=\min\{x,a\}
+\]
+\end{exam}
+この例\ref{a}からどんな距離空間にも有界な距離で同じ位相を誘導するものが存在すると言える。
+
+\begin{exam}
+$a>0$に対して
+\[
+f(x)=ax
+\]
+\end{exam}
+
+
+\begin{exam}
+\[
+f(x)=\frac{x}{1+x}
+\]
+\end{exam}
+
+
+\begin{exam}\label{log}
+\[
+f(x)=\log(1+x)
+\]
+\end{exam}
+
+\begin{exam}\label{snow}
+$0<a<1$に対して
+\[
+f(x)=x^a
+\]
+\end{exam}
+\begin{proof}
+例\ref{log}及び\ref{snow}が定理の条件を充たすことを見よう。他の場合は読者に任せる。\par
+まず例\ref{log}について、条件$(4)$以外は自明である。まず$x,y\in [0,+\mgn)$について
+\[
+1+x+y\le 1+x+y+xy=(1+x)(1+y)
+\]
+が成り立ちよって対数を取って
+\[
+\log(1+x+y)\le \log(1+x)+\log(1+y)
+\]
+次に例\ref{snow}について、条件(4)以外は自明である。まず$x,y\in [0,\mgn)$について、まず
+\[
+\max\{x,y\}\le(x^a+y^a)^{1/a}
+\]
+が成り立つことに注意する。さて、
+\[
+x+y= x^{1-a}\cdot x^{a}+y^{1-a}\cdot y^a
+\]
+であり、$1-a>0$であるから
+\[
+x+y\le \max\{x, y\}^{1-a}\cdot(x^a+y^a)
+\]
+
+が分かる。そして最初の注意から
+\[
+\max\{x, y\}^{1-a}\le (x^a+y^a)^{\frac{1}{a}-1}
+\]
+となるので結局
+\[
+x+y\le (x^a+y^a)^{\frac{1}{a}}
+\]
+が分かるので、
+\[
+(x+y)^a\le x^a+y^a
+\]
+がわかる。これで条件$(4)$が成立ことが分かった。
+\end{proof}
+
+上で挙げた例はすべて連続であるが、ここで、定義\ref{sub}を充たす関数で、不連続なものは存在するのかという疑問が湧いてくる。結果からいうと、定義\ref{sub}の条件を満たす関数はすべて連続である。手法としては距離関数が連続であることの証明と大体同様である。さらに連続性だけではなく、一様連続性を持つこともわかる。まとめると次のことが成り立つ。
+\begin{thm}
+条件$(1),(2),(3),(4)$を充たす関数$f:[0,+\mgn)\to [0,+\mgn)$は一様連続である。
+\end{thm}
+\begin{proof}
+任意に$\ep>0$を与える。このとき$0$における連続性から$\delta>0$が存在し、
+\[
+0\le x<\delta\To f(x)<\ep
+\]
+を充たす。（定義域と地域がともに$[0,\mgn)$であることに注意せよ。)\par
+さて今、任意に点$a\in [0,+\mgn)$を与える。すると
+\[
+|x-a|<\delta\To |f(x)-f(a)|<\ep
+\]
+を充たす。（もちろんここで、上の式の$x$は$[0,+\mgn)$の元であることを仮定している。）\par
+実際、$a\le x$で、$|x-a|<\delta$を充たしているとすると単調性と部分加法性及び$x-a\in [0,+\mgn)$から
+\[
+|f(x)-f(a)|=f(x)-f(a)\le f(x-a)
+\]
+が分かり、$x-a<\delta$から$f(x-a)<\ep$となる。$x\le a$の場合も同様である。
+\end{proof}
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}ジョン・L・ケリー著,児玉之宏訳,位相空間論,吉岡書店,1968
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -374,6 +374,74 @@ class MigrationLedgerTest(unittest.TestCase):
             )
             self.assertEqual(confirmed["metadata_title"], confirmed["title"])
 
+    def test_metadata_can_be_confirmed_by_explicit_export_url(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repo"
+            myblog = Path(temporary) / "Myblogstr"
+            source_dir = myblog / "2017" / "1__10" / "ar2" / "source"
+            source_dir.mkdir(parents=True)
+            (source_dir / "source.tex").write_text(
+                r"\title{候補名とは一致しない原稿}", encoding="utf-8"
+            )
+            (root / "papers").mkdir(parents=True)
+            environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
+            export = Path(temporary) / "hatena.export.txt"
+            export.write_text(
+                "\n".join(
+                    [
+                        "AUTHOR: example",
+                        "TITLE: 手動で選んだ記事",
+                        "BASENAME: 2017/11/16/170409",
+                        "STATUS: Publish",
+                        "DATE: 11/16/2017 17:04:09",
+                        "CATEGORY: 数学",
+                        "-----",
+                        "BODY:",
+                        "本文",
+                        "-----",
+                        "--------",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, str(TOOL), "scan", str(myblog)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            csv_path = root / "ledger" / "migration-ledger.csv"
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                record_id = next(csv.DictReader(stream))["record_id"]
+            article_url = (
+                "https://example.hatenablog.com/entry/2017/11/16/170409"
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "confirm-metadata-url",
+                    str(export),
+                    f"{record_id}={article_url}",
+                    "--blog-url",
+                    "https://example.hatenablog.com",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            with csv_path.open(encoding="utf-8", newline="") as stream:
+                confirmed = next(csv.DictReader(stream))
+            self.assertEqual("metadata_ready", confirmed["status"])
+            self.assertEqual("手動で選んだ記事", confirmed["title"])
+            self.assertEqual(article_url, confirmed["original_url"])
+            self.assertEqual(
+                "manually confirmed by original URL",
+                confirmed["metadata_evidence"],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

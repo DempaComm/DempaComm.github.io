@@ -1,0 +1,237 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{局所閉と局所コンパクトハウスドルフ空間とコンパクト化}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+
+\begin{df}
+位相空間$X$の部分集合$S$が\textbf{局所閉}であるとは$S$の点$x\in S$について$x$の$X$における近傍$V$が存在して$S\cap V$が\textbf{$V$の中で}閉集合となることである。
+\end{df}
+
+\begin{thm}\label{1}位相空間$X$に於いて
+$S$が局所閉であることと、$X$の開集合$O$と$X$の閉集合$F$が存在して$S=O\cap F$と表されることは同値である。
+\end{thm}
+\begin{proof}
+まず最初に$S$が$X$の開集合$O$と閉集合$F$の共通部分であるときに$S$が局所閉であることは簡単にわかる。なぜなら$x\in S$について、$O$は$x$の$X$における近傍になっており$S\cap O=O\cap F$が$O$の閉集合であることは明らかだからである。以下では逆のことを示そう。\par
+$S$の各点$x\in S$について$V_x$を$S$の局所閉性によって存在が保証される、$S\cap V_x$が$V_x$の閉集合となるような$x$の$X$における開近傍とする。\footnote{$V_x$を開集合としてもよいことは簡単にわかる。}さて、$S\cap V_x$が$V_x$の閉集合であることから$V_x\setminus(S\cap V_x)=V_x\cap (X\setminus S)$は$V_x$の開集合である。$V_x$は$X$の開集合なので$V_x\cap (X\setminus S)$は$X$の開集合である。$U_x=V_x\cap (X\setminus S)$と置き、$\dpst O=\bigcup_{x\in S}V_x,\ U=\bigcup_{x\in S}U_x$とし、$F=X\setminus U$と置こう。
+ところで定義から$S\cap U_x=\O$であるから$S\cap U=\O$である。つまり$S\subset F$である。また定義から明らかに$S\subset O$である。よって
+\[
+S\subset O\cap F
+\]
+が成立する。さて$x\in O\cap F$とすると$x\in O$からある$y\in S$が存在して$x\in V_y$となる。また$x\in F$から$x\not\in U$なので任意の$z\in S$について $x\not\in U_z=V_z\cap(X\setminus S)$なので任意の$z\in S$について$x\in (X\setminus V_z)\cup S$である。ところで$x\in V_y$なので$x\not\in (X\setminus V_y)$であるから$x\in S$である。よって
+\[
+O\cap F\subset S
+\]
+である。つまり$S=O\cap F$であるから定理は示された。
+\end{proof}
+
+
+\begin{prop}\label{2}
+$X$をハウスドルフ空間として$Y$を$X$の部分空間で局所コンパクトであるとする。このとき$Y$は$X$の中で局所閉である。
+\end{prop}
+\begin{proof}
+$Y$は局所閉なので$Y$の任意の点$x$について$x$の$Y$におけるコンパクト近傍$N$が存在する。さて$Y$は$X$の部分空間なので$x$の$X$における近傍$V$が存在して$V\cap Y=N$となる。$X$がハウスドルフ空間であることから$V$もハウスドルフであり、コンパクト集合である$N$は$V$の中で閉集合なので結局$Y$は局所閉である。
+\end{proof}
+
+\begin{prop}
+$X$をハウスドルフ空間として$Y$を$X$の部分空間で局所コンパクトであり、$X$の中で稠密であるとする。このとき$Y$は$X$の中で開集合である。
+\end{prop}
+\begin{proof}
+定理\ref{2}から$Y$は局所閉なので定理\ref{1}から$X$の開集合$O$と閉集合$F$が存在して$Y=O\cap F$となる。さて$F$は閉集合で$Y\subset F$で$Y$は稠密なので$F=X$となる。つまり$Y=O$なので$Y$は開集合となる
+
+\end{proof}
+
+\begin{cor}
+局所コンパクトハウスドルフ空間はその任意のコンパクト化の中で開集合である。
+\end{cor}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{2}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{1}柴田敏男,集合と位相空間,共立数学講座8,共立出版,1978
+\end{thebibliography}
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

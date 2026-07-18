@@ -1,0 +1,286 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{実直線の閉部分群の分類}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書では集合$A$の集積点全体を$A^d$で表し、$A$の孤立点全体を$A^s$で表す。$\cl(A)=A^s\cup A^d$が成り立つことは位相空間論の初歩であろう。\par
+この文書では実数の部分集合しか出てこないので集積点、孤立点の定義をその限られた状況下で改めて述べておくと便利であろう。\par
+$A\subset\rr$について、$x\in \rr$が$A$の集積点であるとは、任意の$\ep>0$に対してある$a\in A$が存在して$a\in (x-\ep,x+\ep)$かつ$a\neq x$を充たすことである。\par
+また$x\in \rr$が$A$の孤立点であるとはある$\ep>0$が存在して$(x-\ep,x+\ep)\cap A=\{x\}$を充たすこと。\par
+定義から明らかに$A^s\subset A$となることに注意せよ。\par
+また以下の文章では$B(a,\ep)=\{x\in \rr\ |\ |a-x|<\ep\}=(a-\ep,a+\ep)$である。
+\begin{lem}\label{1}
+実数$\delta>0$について$A_{\delta}=\{n\delta\ |\ n\in \zz\}$と定義する。このとき$0<\delta<\ep$となる$\ep$と任意の$x\in \rr$に対して
+\[
+B(x,\ep)\cap A_{\delta}\neq \O
+\]
+が成立する。
+\end{lem}
+\begin{proof}
+まず
+\[
+\rr=\bigcup_{n\in \zz}[n\delta,(n+1)\delta]
+\]
+が成り立つことに注意しよう（なぜ成り立つか？）。このとき$x\in [k\delta,(k+1)\delta]$となる$k\in \zz$が存在する。そしてこのとき
+\[
+0\le x-k\delta\le(k+1)\delta-k\delta=\delta<\ep
+\]
+なので$k\delta\in B(x,\ep)$である。$k\delta\in A_{\delta}$なので
+\[
+B(x,\ep)\cap A_{\delta}\neq \O
+\]
+がわかる。
+\end{proof}
+
+\begin{lem}\label{2}
+$\rr$の部分群$G$について$G^{d}\neq \O$ならば$0\in G^d$である。
+\end{lem}
+\begin{proof}
+$a\in G^d$とすると任意の$\ep>0$に対して$s,t\in G$が存在して$s\neq t$かつ$|a-s|<\frac{\ep}{2},\ |a-t|<\frac{\ep}{2}$
+を充たす。
+
+すると$G$が加法群であることから$s-t\in G$であり$s-t\neq0$及び$|(s-t)-0|=|s-t|<\ep$となる。$\ep>0$は任意であったので$0$は$G$の集積点であることが分かる。
+\end{proof}
+
+\begin{prop}\label{dense}
+$\rr$の部分群$G$について$G^d\neq\O$ならば$G$は$\rr$で稠密である。
+\end{prop}
+\begin{proof}
+先の補題\ref{2}より$0\in G^d$であるから任意の$\ep>0$に対して$\delta\neq0$かつ$|\delta-0|<\ep$となる$\delta\in G$が存在する。$G$は$\rr$の部分加法群なので適当に符合を変えて$\delta>0$としてもよい。すると$0<\delta<\ep$である。\par
+さて補題\ref{1}から$A_{\delta}=\{n\delta\ |\ n\in \zz\}$とすると任意の$x\in \rr$に対して
+\[
+B(x,\ep)\cap A_{\delta}\neq\O
+\]
+であるが、$G$が加法群であることから$A_{\delta}\subset G$となり、結局
+\[
+B(x,\ep)\cap G\neq\O
+\]
+が成立し、$\ep>0$と$x\in \rr$は任意であったから$G$は$\rr$で稠密であることが分かる。
+\end{proof}
+
+
+\begin{prop}\label{disc}
+$\rr$の部分群$G$について$G^{d}=\O$ならば、ある$h\in \rr$を用いて$G=h\zz$と書ける。
+\end{prop}
+\begin{proof}
+$\cl (G)=G^s\cup G^d$であるが、今$G^d=\O$であり、$G^{s}\subset G$なので$\cl (G)=G$となる。つまり$G$は$\rr$の閉部分群となる。\par
+$G$の点はすべて孤立点なので十分小さい$\ep>0$をとれば
+\[
+B(0.\ep)\cap G=\{0\}
+\]
+である。\par
+\textbf{case1:$[\ep,\mgn)\cap G=\O$のとき;}\ このとき$G=\{0\}=0\zz$である。(なぜか？)\par
+\textbf{case 2;$[\ep,\mgn)\cap G\neq\O$のとき;}\ このとき実数の公理から
+\[
+h:=\inf [\ep,\mgn)\cap G
+\]
+が存在するが、$G$が閉であることから$h\in G$となる。以下$G=h\zz$となることを示そう。\par
+$x\in G$とし、$x\neq0$とする。適当に符合を変えて$x>0$としても一般性を失わない。$B(0.\ep)\cap G=\{0\}$なので
+\[
+x\in [\ep,\mgn)\cap G
+\]
+である。つまり$h\le x$である。ここで$n\in\zz$を$hn\le x$となる最大の整数とする。(このような整数は確かに存在する。なぜか？)すると$x-hn\ge 0$であり
+\[
+x-hn\in G
+\]
+である。もしここで$x-hn\neq 0$ならば$x-hn\in [\ep,\mgn)\cap G$である。よって$h \le x-hn$つまり$h(n+1)\le x$となるが、これは$n$の最大性に反する。従って$x-hn=0$つまり$x=hn$である。$x\in G$は任意であったので結局$G=h\zz$が示された。
+\end{proof}
+
+
+\begin{thm}
+$\rr$の閉部分群は
+\[
+\rr,\ h\zz\ (h>0),\ {0}
+\]
+の形のものしかない。
+\end{thm}
+\begin{proof}
+$G$を$\rr$の閉部分群とする。\par
+\textbf{case1：$G^d\neq\O$のとき；}\ 命題\ref{dense}より$G$は$\rr$の稠密集合となるが、$G$は閉なので$G=\rr$である。\par
+\text{case2：$G^d=\O$のとき；}\ 命題\ref{disc}から$G$は$h\in\rr$を用いて$G=h\zz$と書ける。$h=0$の場合が$G=\{0\}$であり、それ以外の場合には$G=h\zz\ (h>0)$と書けることは明らかである。
+\end{proof}
+
+\begin{cor}[クロネッカーの稠密性定理]
+無理数$d\in \rr$について集合$\{n+md\ |\ n,m\in \zz\}$は$\rr$で稠密である
+\end{cor}
+\begin{proof}
+$G=\{n+md\ |\ n,m\in \zz\}$と置くと$G$は$\rr$の部分群である。もし$G$が稠密でないとしたら命題\ref{dense}の対偶から$G^d=\O$なので命題\ref{disc}から$G=h\zz\ (h>0)$と書ける。$1\in G$なので$ha=1$となる$a\in \zz$が存在するので$h$は有理数である。しかし$d\in G$であり、$hb=d$となる$b\in \zz$が存在するので$h$は無理数になる。これは矛盾であるから$G$は$\rr$の稠密集合である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

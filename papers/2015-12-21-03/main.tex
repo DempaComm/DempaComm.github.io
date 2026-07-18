@@ -1,0 +1,183 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\zo}{\zz_{\ge 0}}
+\newcommand{\zp}{\zz_{+}}
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ヤバイ補題}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では$\zz_{\ge 0}=\{n\in\zz\ |\ n\ge 0\},\ \zz_{+}=\{n\in \nn \ |\ n>0\}$とする。また
+$A=(a_1,a_2,\cdots ,a_k),\ B=(b_1,b_2,\cdots ,b_k)$について
+\[
+[A,B]=\sum_{i=1}^ka_ib_i
+\]
+と書くことにする。
+\begin{thm}[The Horrible Lemma]
+$\zo^n$の任意の有限部分集合$F$に対して$w=(w_1,w_2,\cdots ,w_n)\in \zp^n$が存在して次を充たす。
+\begin{align}
+&w_n=1\\
+&p,q\in F,p\neq q\To [w,p]\neq[w,q]
+\end{align}
+\end{thm}
+\begin{proof}
+$\pi_i:\zo^n\to\zo$を第$i$成分への射影とする。さて
+\[
+G=\{\pi_i(a)\ |\ a\in F\ i=1,2,\cdots n\}
+\]
+と定義する。つまり$F$の元の成分全体の集合である。$F$が有限集合であるから$G$も有限集合である。今
+\[
+L=1+\max G
+\]
+と定義する。このとき
+\[
+w=(L^{n-1},L^{n-2},\cdots ,L^0)
+\]
+と置けば条件は充たされる。まず条件$(1)$に関しては明らかである。ところで$\zo^n$に辞書式順序$\prec$を導入するつまり
+\[
+(a_1,a_2,\cdots ,a_n)\prec (b_1,b_2,\cdots ,b_n)\iff \exists k\ a_1=b_1,a_2=a_2,\cdots,a_{k-1}=b_{k-1},a_{k}<b_{k}
+\]
+という順序である。よく知られているようにこの順序は線型順序である。\par
+$A=(a_1,a_2,\cdots ,a_n)\in F$に対して$L>\max G$であるから
+\[
+[w,A]=a_1L^{n-1}+a_2L^{n-2}+\cdots +a_n
+\]
+は$L$を底とした位取り進数表記になっている。よってよく知られているように、$A,B\in F,A\prec B$ならば
+\[
+[w,A]<[w,B]
+\]
+である。\footnote{要するに$L$進数は頭から位の大きい順に位毎に大きさを比べていけば大きさの大小がわかるということである。例えば10進数で4625と4689は一番大きい位から順に$4=4,6=6,2<8$となるので$4625<4689$という風に大小関係がわかるのである。3244と23は23を0023と考えれば$0<3$から$23<3244$がわかる。}$\prec$が線型順序であることを思い出せば$(2)$が充たされることはすぐわかる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

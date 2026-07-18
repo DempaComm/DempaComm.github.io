@@ -1,0 +1,285 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\newcommand{\kk}{K^{\times}}
+\newcommand{\ord}{\text{{\rm ord}}}
+\DeclareMathOperator{\lcm}{lcm}
+\title{体の乗法群の有限部分群について}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では体$K$の乗法群$K^{\times}$の有限部分群が巡回群であることを示す。この文章ではわかりやすさのために自然数の整除関係を$\preceq$と書くことにする。つまり$n$が$m$の約数の時に$n\preceq m$と書くのである。$\le$と$\preceq$の違いに注意せよ。また、この文書において体とは可換体を指すことに注意せよ。
+
+	\begin{comment}
+
+	\begin{fact}[ラグランジュの定理]
+	有限群$G$とその部分群$H$について
+	\[
+	|H|\preceq |G|
+	\]
+	となる。
+	\end{fact}
+
+	群$G$の元$a$の位数を$\ord(a)$と書くことにする。$a$の位数とは$a^n=e$となる最小の$n$であ			ることを一応書き記しておく。$e$は単位元である。
+	また$a^m=e$なら$\ord(a)\preceq m$となることも思い出されたい。
+	\begin{cor}
+	有限群$G$の元の位数は$G$の約数。
+	\end{cor}
+
+	\end{comment}
+
+\begin{df}群$G$の元$a$の位数$\ord(a)$を
+$a^n=e$となる最小の$n$として定義する。このような$n$が存在しない場合には$\ord(a)=\mgn$とする。
+\end{df}
+
+
+\begin{prop}
+群$G$の元$a$について$\ord(a)=n=xy$とすると
+\[
+\ord(a^x)=y
+\]
+となる。
+\end{prop}
+\begin{proof}
+まず、$(a^{x})^y=a^{xy}=e$なので、$y\preceq \ord(a^x)$である。
+そして、$a^{x\cdot\ord(a^x)}=(a^{x})^{\ord(a^x)}=e$なので$x\cdot\ord(a^x)\preceq n$となる。以上から$y\preceq \ord(a^x)\preceq y$なので$y=\ord(a^x)$である。
+\end{proof}
+
+準備のために次の整数に関する簡単な補題を証明する。
+\begin{lem}
+自然数$n,m$に対して$x,y,s,t$が存在して$n=sx$、$m=ty$、
+$\gcd(x,y)=1$、$xy=\lcm(n,m)$を充す。
+\end{lem}
+\begin{proof}
+自然数$n,m$に対して
+$k$個の素数$p_1,p_2,\dots, p_k$と
+$a_1, a_2, \dots, a_k\in \zz_{\ge0}$と
+$b_1, b_2, \dots, b_k \in \zz_{\ge 0}$が存在して
+\[
+n=p_1^{a_1}p_{2}^{a_2}\cdots p_{k}^{a_k}
+\]
+\[
+m=p_1^{b_1}p_{2}^{b_2}\cdots p_{k}^{b_k}
+\]
+と書ける。
+このとき
+\[
+\lcm(n,m)=p_1^{\max(a_1,b_1)}p_{2}^{\max(a_2,b_2)}\cdots p_{k}^{\max(a_k,b_k)}
+\]
+である。
+\begin{align*}
+c_i=
+	\begin{cases}
+	a_i & \text{$a_i=\max\{a_i,b_i\}$のとき}\\
+	0 & \text{$その他$}
+	\end{cases}
+\end{align*}
+とし
+\[
+d_i=c_i-x_i
+\]
+と定義する。そして
+\[
+e_i=
+	\begin{cases}
+	b_i & \text{$b_i>a_i$のとき}\\
+	0 & \text{$その他$}
+	\end{cases}
+\]
+で
+\[
+f_i=b_i-z_i
+\]
+とする。
+そして
+\begin{align*}
+x=p_1^{c_1}\cdots p_1^{c_2}\cdots p_k^{c_k}\\
+s=p_1^{d_1}\cdots p_2^{d_2}\cdots p_k^{d_k}\\
+y=p_1^{e_1}\cdots p_2^{e_2}\cdots p_k^{e_k}\\
+t=p_1^{f_1}\cdots p_2^{f_2}\cdots p_k^{f_k}
+\end{align*}
+と定義すると、明らかに$n=sx$、$m=ty$、
+$\gcd(x,y)=1$を満たし、また、定義から
+\[
+xy=(p_1^{c_1}\cdots p_1^{c_2}\cdots p_k^{c_k})(p_1^{e_1}\cdots p_2^{e_2}\cdots p_k^{e_k})=p_1^{\max(a_1,b_1)}p_{2}^{\max(a_2,b_2)}\cdots p_{k}^{\max(a_k,b_k)}=\lcm(n,m)
+\]
+を充す。
+\end{proof}
+
+\begin{thm}\label{aaa}
+群$G$の元$a,b$は$ab=ba$を充し、$\ord(a)=n,\ \ord(b)=m$とし、$l=\lcm (n,m)$とする。この時$c\in G$が存在して 
+\[
+\ord(c)=l
+\]
+となる。
+\end{thm}
+\begin{proof}
+まず$\gcd(n,m)=1$の時、$c=ab$とおき、$r=\ord(c)$とおくと$l=nm$よりと$a$と$b$の可換性より
+\[
+c^l=a^lb^l=ee=e
+\]
+なので$r\preceq l$でありまた
+\[
+e=c^{nr}=a^{nr}b^{nr}=eb^{nr}=b^{nr}
+\]
+より$m\preceq nr$ところで$n,m$は互いに素なので$m\preceq r$となる。同様に$n\preceq r$もわかるので結局$l\preceq r$（最小公倍数の性質である。）よって$\ord(c)=l$\\ 
+一般の場合は$n=sx,\ m=ty,\ g.c.d.(x,y)=1\ xy=l$と表せるので$a^s$と$b^t$を上の場合に当てはめれば結論が得られる。
+\end{proof}
+\begin{cau}
+また非可換な二元については定理\ref{aaa}は成り立たないことに注意せよ。例えば三次の対称群などを考えよ。
+\end{cau}
+
+定理\ref{aaa}をアーベル群に適用すると次のことがわかる。
+
+\begin{cor}
+有限可換群$G$の元の$\le$に関する最大値を$N$とすると、これは$G$の元が取りうる位数の中で$\preceq$に関しても最大値となっている。つまり有限可換群$G$のある元$x$が存在して
+\[
+\forall a\in G\ \ord(a)\preceq \ord(x)
+\]
+となるということである。
+\end{cor}
+\begin{proof}上の定理を$G$の元に次々に適用すればわかる。
+
+\end{proof}
+
+\begin{thm}
+体$K$の乗法群$\kk$の有限部分群は巡回群
+\end{thm}
+
+\begin{proof}
+$G$を$\kk$の有限部分群とする。$G$の最大位数を持つ元を$a$とし、$\ord(a)=N$と置く。$G$の任意の元$s$について$\ord(s)\preceq N$なので
+\[
+s^N=1
+\]
+となる。つまり$G$の任意の元は$K$上の多項式$x^N-1$の根である。$x^N-1$の根の個数は高々$N$個なので
+\[
+|G|\le N
+\]
+である。ところで$N\le |G|$でもあるから$N=|G|$よって$a$は$G$を生成する。つまり$G$は巡回群。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+%\begin{thebibliography}{9}
+%\bibitem{1}
+
+%\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

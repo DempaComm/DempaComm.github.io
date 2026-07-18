@@ -1,0 +1,893 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{一様空間・完全正則空間・ゲージ空間}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\tableofcontents
+
+\part{準備}
+準備の部では証明は全て省く。
+\section{フィルター}
+\begin{df}フィルター\\
+集合$X$の部分集合族$\mathfrak{F}$が$X$上のフィルターであるとは\\
+\begin{align*}
+&X\in \mathfrak{F}\\
+&A\in \mathfrak{F}\ かつA\subset B \Rightarrow B\in \mathfrak{F}\\
+&A,B\in \mathfrak{F}\Rightarrow A\cap B\in \mathfrak{F}\\
+&\O \notin \mathfrak{F}
+\end{align*}
+を充たすことを言う。$(4)$の条件はフィルターが$X$の部分集合全体にはならないための条件である。その場合を省くのは、つまらないからである。またこの$(4)$と$(3)$の条件からフィルターの元は有限交叉性、つまりフィルターの有限個の交わりは空にならないのである。\\このフィルターと言う命名はカメラのレンズの”絞り”から来ているらしい。だんだんと小さくなりゆくものを定式化したような概念である。
+\end{df}
+
+条件$(2)$よりフィルターの何かしらの元を含むような集合はそのフィルターの元になってしまうのである。フィルターの元は包含関係に関して小さいモノの方が本質的なのである。その本質的な部分を抜き出したのがフィルター基の概念である。
+\begin{df}[フィルター基]
+集合$X$の部分集合族$\mathfrak{B}$が$X$上のフィルター基であるとは
+\begin{align*}
+&\mathfrak{B}\neq \O\\
+&\O \notin \mathfrak{B}\\
+&\forall B_1 , B_2\in \mathfrak{B}\ \exists B_3\in \mathfrak{B}\ B_3\subset B_1\cap  B_2 
+\end{align*}
+が成立する事を言う。フィルター基
+$\mathfrak{B}$を用いて
+\[
+\mathfrak{F}=\{F\ |\ \exists B\in \mathfrak{B}B\subset F \}
+\]
+とすると$\mathfrak{F}$はフィルターとなる。これを$\mathfrak{B}$から生成されたフィルターという。
+\end{df}
+さてフィルターの本質などと抜かしたが、フィルター基以外にもフィルターを生成する方法はある。つまりそれは只の集合族から生成されるフィルターである。しかしフィルターは有限交叉性を持つので最低限その集合族の有限交叉性は仮定しなければならぬ。つまり次の定理が成り立つ。
+
+\begin{thm}$Xの空でない部分集合族\mathfrak{M}についてこれが$
+\[
+\forall A,B\in \mathfrak{M}\ A\cap B\neq \O
+\]を充たすとする。このような族を{\bf 有限交叉族}という。このとき$\mathfrak{M}を含むフィルターで最小のものが存在する。つまりそれは\mathfrak{M}の元を有限回共通部分をとったような集合を含む$ような集合全体である。要するに
+\[
+\mathfrak{B}=\{\bigcap_{finite}B_{i}\ |\ B_{i}\in \mathfrak{M}\}
+\]がフィルター基となることを行っているのである。
+\end{thm}
+\begin{proof}[証明略]
+\end{proof}
+有限交叉族という言葉は今後断りなく自在に用いる。\\ 
+以フィルターの例を挙げる。
+\begin{exam}[近傍フィルター]位相空間$X$の点$a\in X$の近傍形全体$\mathfrak{N}(a)$は真フィルターとなっている。これは近傍系の性質より明らかである。
+\end{exam}
+\section{位相空間}
+\begin{df}[位相空間]
+集合$X$上の開集合系とは$X$の部分集合族$\mathfrak{O}$であって
+\begin{align*}
+&\O,X\in \mathfrak{O}\\
+&U,V\in \mathfrak{O}\Rightarrow U\cap V\in \mathfrak{O}\\
+&\mathfrak{V}\subset \mathfrak{O} \Rightarrow \bigcup \mathfrak{V}\in \mathfrak{O}
+\end{align*}を持たすもののことをいうこの時、$\mathfrak{O}$の元を開集合、対$(X,\mathfrak{O})$を位相空間と言う
+\end{df}
+\begin{df}[閉集合]
+位相空間$(X,\mathfrak{O})$において補集合が開集合になる集合を閉集合という位相空間$(X,\mathfrak{O})$の閉集合全体を$\mathfrak{C}$で表すことにする。つまり、
+\[
+F\in \mathfrak{C}\Leftrightarrow X\backslash F\in \mathfrak{O}
+\]
+そして更に次が成り立つ。
+\begin{align*}
+&\O,X\in \mathfrak{C}\\
+&F,G\in \mathfrak{C}\Rightarrow F\cup G\in \mathfrak{C}\\
+&\mathfrak{G}\subset \mathfrak{C} \Rightarrow \bigcap \mathfrak{G}\in \mathfrak{C}
+\end{align*}
+\end{df}
+\begin{df}[近傍系]
+Xの空でない部分集合Aについて
+集合族\[\mathfrak{W}(A)=\{O\ |\ A\subset O\ O\in \mathfrak{O}\}\]はフィルター基を成す。このフィルター基から生成されるフィルターを$A$の近傍フィルター、もしくは近傍系といい$\mathfrak{N}(A)$などと表す。
+具体的に$\mathfrak{N}(A)$を書けば
+\[
+\mathfrak{N}(A)=\{N\ |\ \exists O\in \mathfrak{O}\ A\subset O\ O\subset N\}
+\]
+となる。また、このフィルター$\mathfrak{N}(A)$のフィルター基を$A$の基本近傍系などという。
+特に$A=\{x\}の時近傍フィルターを\mathfrak{N}(x)とかく$
+\end{df}
+\begin{thm}
+位相空間の点$x$の近傍フィルターについて次が成立する。
+\begin{align*}
+&X\in \mathfrak{N}(x)\\
+&\forall V\in \mathfrak{N}(x)\ x\in V\\
+&\forall V,U\in \mathfrak{N}(x)\ V\cap U\in \mathfrak{N}(x)\\
+&U\in \mathfrak{N}(x)\ U\subset W \Rightarrow W\in \mathfrak{N}(x)\\
+&\forall V\in \mathfrak{N}(x)\ \exists W\in \mathfrak{N}(x)\ \forall y\in W\ V\in\mathfrak{N}(y)
+\end{align*}これは近傍系の重要な性質である。
+\end{thm}
+開集合と近傍を結ぶ性質として次が成り立つ。
+\begin{thm}
+\[
+O\in \mathfrak{O}\Leftrightarrow \forall x\in O\ O\in \mathfrak{N}(x)
+\]
+\end{thm}
+知っての通り位相とは開集合系の事を指す言葉ではなく、”近さ”の情報の総体の事を指す言葉である。周知の通り開集合系ではなく、それ以外の”近さ”の情報を指定すれば位相は定まるのである。”近さ”の情報の指定の仕方はいろいろあるが、今回は開集合以外には近傍のみを紹介する。すなわち次の定理が成り立つ
+\begin{thm}集合$X$の各点$x$毎に$X$の部分集合族$\mathfrak{N}(x)$が定まり、
+\begin{align*}
+&X\in \mathfrak{N}(x)\\
+&\forall V\in \mathfrak{N}(x)\ x\in V\\
+&\forall V,U\in \mathfrak{N}(x)\ V\cap U\in \mathfrak{N}(x)\\
+&U\in \mathfrak{N}(x)\ U\subset W \Rightarrow W\in \mathfrak{N}(x)\\
+&\forall V\in \mathfrak{N}(x)\ \exists W\in \mathfrak{N}(x)\ \forall y\in W\ V\in\mathfrak{N}(y)
+\end{align*}
+を充たす時、これを近傍フィルターとする位相が唯一つ定まる。これらを近傍系の公理という。
+\end{thm}
+\begin{df}[関数による分離]
+位相空間$X$の互いに素な２つの部分集合$A,B$が関数で分離されるとは連続関数\[f:X\rightarrow [0,1]\]が存在して\[\forall a\in A\ f(a)=1,\ \forall b\in B\ f(b)=0\]
+が成立することである。
+\end{df}
+\section{分離公理}
+$
+(T_1)\ 異なる２点x,yについてxの近傍でyを含まないようなものが存在する。\\
+(T_2)\ 異なる２点x,yについてxの近傍U,yの近傍VでU\cap V=\O となるものが存在する。\\
+(正則)\ 互いに素なる一点xと閉集合Fについてxを含む開集合U,F\subset Vとなる開集合VでU\cap V=\O となるものが存在する。\\
+(完全正則)\ 互いに素なる１点と閉集合が関数で分離される。\\
+(正規)\ 互いに素な２つの閉集合が開集合で分離される\\
+(T_3)正則かつT_{1}\\
+(T_{3\frac{1}{2}})完全正則かつT_{1}\\
+(T_{4})正規かつT_{1}\\
+$
+\begin{thm}
+\[
+T_{4}\Rightarrow T_{3}\Rightarrow T_{2}\Rightarrow T_{1}
+\]
+\end{thm}
+
+
+\begin{thm}ウリゾーンの補題\\
+\[
+正規\Leftrightarrow 互いに素な閉集合が関数で分離される。
+\]
+\end{thm}
+
+
+\begin{exam}コンパクトハウスドルフ空間は$T_{4}空間$
+\end{exam}
+
+
+\section{位相群}
+\begin{df}[位相群]
+群$G$が位相空間であり、かつ、その二項演算と単項演算が連続、すなわち、
+\[
+binary:G\times G\rightarrow G\ (x,y)\mapsto xy\ \ inverse:G\rightarrow G\ x\mapsto x^{-1}
+\]が連続である時、群Gを位相群と呼ぶ。
+\end{df}
+\begin{thm}
+写像
+\[
+a*:G\rightarrow G\ x\mapsto ax\ *b:G\rightarrow G\ x \mapsto xb 
+\]は同相写像である。よって$Oが開集合ならaO,Obも開集合であり、閉集合についても同様である。$
+さらに$各点xについてそ近傍は単位元eの近傍のみで完全に決定されてしまうという著しい性質がある。すなわち$
+\[
+\mathfrak{N}(x)=\{xU\ |\ U\in \mathfrak{N}(e)\}=\{Wx\ |\ W\in \mathfrak{N}(e)\}
+\]が成立する。
+\end{thm}
+%もっと内容を追加する。
+
+\section{始位相}
+\begin{df}[始位相（Initial topology）]
+$Xを集合\{(Y_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}を位相空間の族とし、各\lambda 毎に写像$
+\[
+f_{\lambda}:X\rightarrow Y_{\lambda}
+\]が与えられているとするこの時$Xに写像族F=\{f_{\lambda}\}_{\lambda \in \Lambda}$をすべて連続にするような最弱の位相が存在する。それを$F=\{f_{\lambda}\}_{\lambda \in \Lambda}から誘導された始位相と呼ぶ。此処では記号\mathfrak{I}(F)$で表すことにする。
+\end{df}
+よく知られているように$\mathfrak{I}(F)$は$X$の部分集合族
+$\mathfrak{M}=\{f_{\lambda}^{-1}(U)\ |\ U\in \mathfrak{O}_{\lambda},\ \lambda\in \Lambda \}$
+を準開基とする開集合系である。
+
+\section{集合算}一様空間の定義のために、$X\times X$上の集合の演算を紹介する。
+\begin{df}[$X\times X$の部分集合の合成と逆]
+{\bf 逆}:$U$を$X\times X$の部分集合とするとき、$U$の逆、$U^{-1}$を
+\[
+U^{-1}=\{(x,y)\ |\ (y,x)\in U\ \}
+\]
+と定義する。\\
+{\bf 合成}:$U,V$を$X\times X$の部分集合とする時その合成$U\circ V$を
+\[
+U\circ V=\{(x,y)|\ \exists z\ (x,z)\in U,(z,y)\in V\ \}
+\]と定義する。
+\end{df}
+\begin{df}切端(slice)\\
+$X\times X$の部分集合$V$についてその$xによる$切端を
+\begin{eqnarray*}
+V(y)=\{x\ |\ (x,y)\in V\}\\
+(x)V=\{y\ |\ (x,y)\in V\}
+\end{eqnarray*}と定義する。$(x)V$はおそらく使うことは無いだろう。
+またより一般に$A\subset Xによる切端を$
+\begin{eqnarray*}
+V(A)=\bigcup_{a\in A}V(a)\\
+(A)V=\bigcup_{a\in A}(a)V
+\end{eqnarray*}
+と定義する。
+やは$り(A)Vは$使うことは無いだろう。
+\end{df}
+\begin{df}対角集合
+\[
+\Delta_{X}=\{(x,x)\ |\ x\in X\}
+\]
+\end{df}
+
+
+
+
+
+
+\newpage
+\part{一様空間}
+\section{一様空間の導入}
+\begin{df}[一様空間]
+集合$X$上の一様構造(uniform\ structure,unifomity)とは$X \times X$の部分集合族$\mathfrak{U}$で
+\begin{align*}
+&\forall U\in \mathfrak{U}\ \Delta_{X} \subset U\\
+&U,V\in \mathfrak{U}\Rightarrow U\cap V\in \mathfrak{U}\\
+&U\in \mathfrak{U},U\subset W\Rightarrow W\in \mathfrak{U}\\
+&\forall U\in \mathfrak{U}\ U^{-1}\in \mathfrak{U}\\
+&\forall U \in \mathfrak{U}\  \exists W\in \mathfrak{U}\  W\circ W\subset U
+\end{align*}
+を充たすものである。この時、$\mathfrak{U}$は$X\times X$
+上のフィルターとなる事がわかる。$\mathfrak{U}$の元を近縁といい、$X$と一様構造を合わせて考えた$(X,\mathfrak{U})$を一様空間という。また$\mathfrak{U}$を近縁フィルターとも言う
+\end{df}
+近縁Vについて$(x,y)\in V$となる時$x$と$y$は$V$程度に近いという。さながら距離が入っているかのような言い草である。\par
+$(2)$における$W$とは$V$の「半分」の大きさの近縁である。この意味は後にわかるだろう。
+\begin{df}[対称近縁]
+\[
+U=U^{-1}
+\]を充たす近縁を対称近縁という。近縁$VについてV\cap V^{-1}及びV\cup V^{-1}は対称近縁となる。よって任意の近縁VについてU\subset Vとなる対称近縁Uが存在する。$
+\end{df}
+\begin{df}基本近縁系\\
+一様空間$(X,\mathfrak{U})において一様構造\mathfrak{U}の部分集合\mathfrak{V}が\mathfrak{U}の基本近縁系であるとは$
+\begin{align*}
+&\mathfrak{V}\neq \O\\
+&\forall U\in \mathfrak{V}\ \Delta_{X} \subset U\\
+&\forall U,V\in \mathfrak{U}\ \exists W\in \mathfrak{W} \ W\subset U\cap V\\
+&\forall U\in \mathfrak{V}\ \exists V\in \mathfrak{V}\ V\subset U^{-1}\in \mathfrak{V}\\
+&\forall U \in \mathfrak{V}\  \exists W\in \mathfrak{V}\  W\circ W\subset U
+\end{align*}を充たすこと、逆に只の集合$Xに対してこのような\mathfrak{V}$が存在したなら、
+\[
+\mathfrak{U}=\{U\ |\ \exists V\in \mathfrak{V}\ V\subset U\}
+\]によって一様構造が誘導される。
+\end{df}
+\begin{exam}一様空間$(X,\mathfrak{U})上の対称近縁全体\mathfrak{S}は基本近縁系を成す。$
+\end{exam}
+
+一様空間には次のようにして自然な位相が定義される。
+\begin{thm}一様空間の位相\\
+一様空間$(X,\mathfrak{U})の各点xについて\mathfrak{N}(x)を$
+\[
+\mathfrak{N}(x)=\{V(x)\ |\ V\in \mathfrak{U} \}
+\]と定義するとこれは近傍の公理を充たし、位相が導入される。
+\end{thm}
+一般に異なる一様構造から同じ位相が得られることがある。一様構造はある意味で位相構造よりも細かい空間の分類を与えているのである。一様構造が異なるが同じ位相が入る例として$S^1から北極を除いたものに平面の普通の距離から定まる一様構造と\mathbb{R}に普通の１次元の距離を入れたものとがある。$
+\begin{exam}距離空間\\
+いま、距離空間$(X,d)と正の数\epsilon　について、$
+\[
+U_{\epsilon}=\{(x,y)\ |\ d(x,y)<\epsilon \}
+\]と定め、
+\[
+\mathfrak{D}=\{U_{\epsilon}\ |\ \epsilon>0\}
+\]とすると$\mathfrak{D}は基本近縁系の公理を充たす。よって距離空間には一様構造が付く。$
+\end{exam}
+\begin{exam}位相群\\
+$Gを位相群とするとき、各V\in \mathfrak{N}(e)について$
+\[
+L(V)=\{(x,y)\ |\ x^{-1}y\in V\ \}\ R(V)=\{(x,y)\ |\ xy^{-1}\in V\  \}
+\]と定義し
+\[
+\mathfrak{L}=\{L(V)\ |\ V\in \mathfrak{N}(e)\}\ \mathfrak{R}=\{R(V)\ | \ V\in \mathfrak{N}(e)\}
+\]とするとこれは一様構造となる。しかし、この２つの一様構造が同じものとは限らない。もちろんこの２つの一様構造から誘導される位相構造は同一のものとなる。もちろん可換群ならばこの２つの一様構造は一致する。
+\end{exam}
+\section{諸定理}
+この節では一様空間に関する基本的な定理を紹介する。
+\begin{thm}一様空間の正則性:一様空間は正則空間になる。
+\end{thm}
+\begin{proof}一様空間$(X,\mathfrak{U})$の互いに交わらない点$x$と閉集合$F$について$X\backslash F$は点$x$を含む開集合となる。よって一様空間の位相の定め方から
+\[
+U(x)\subset X\backslash F
+\]となる近縁$U$が存在する。更に一様構造の公理からこの$U$について
+\[
+W\circ W\subset U
+\]となる対称近縁$W$が存在する。ことの時、
+\[
+W(x)\cap W(F)=\O
+\]が成立する。なぜならもし$W(x)\cap W(F)\neq \O$ならば$z\in W(x)\cap W(F)を取ると、$
+\[
+(z,x)\in W,\ \exists a\in F\ (z,a)\in W
+\]が成り立ち$W$が対称近縁であることから$(a,z)\in W$なので$(a,x)\in W\circ W\subset U$すなわち$(a,x)\in U$つまり$a\in U(x)$となる。これは$U(x)\subset X\backslash F$に反する。\par
+以上から一様空間が正則であることがわかる。
+\end{proof}
+証明の感慨を述べよう。最初に互いに素な一点$x$と閉集合$F$を任意に取ってきて机に置いたわけだが、この２つを分離する開集合、ないしは近傍を構成すればいいのである。もちろんxは開集合$X\backslash F$に属しているわけだが位相の定め方から近縁$U$で$U(x)\subset X\backslash F$となるものが存在するわけだが、この$U$という近縁がある意味$x$と$F$との距離を測っているのである。砕けた言い方をするのであれば$x$と$F$は"$U$だけ離れている"のである。ともすれば、例えば距離空間のハウスドルフ性を証明した時と同じように"$U$だけ離れている"のであれば"$U$の半分"だけ$x$と$F$を膨らませれば$x$,$F$の近傍で交わらないものが存在すると我々の直観は教えてくれるのである。そして、ここが普通の位相空間との違いなのだが、$U$の"半分"の近縁Wが存在するのである。つまり、$W\circ W\subset U$となる$W$である。これがこの証明である。\\ 
+この証明の他にも、閉近縁全体が基本近縁系を成すことを示す証明もある。事実として述べておこう。
+\begin{prop}
+閉近縁全体は基本近縁系をなす。
+\end{prop}
+\begin{thm}
+一様空間$(X,\mathfrak{U})$に置いて次が成り立つ
+\[
+T_{1}\Leftrightarrow T_{2}\Leftrightarrow T_{3}\Leftrightarrow \bigcap_{U\in \mathfrak{U}}U=\Delta_{X} 
+\]
+（のちにわかるが$T_{1}\Leftrightarrow T_{3\frac{1}{2}}$）
+\end{thm}
+\begin{proof}
+\[
+T_{3}\Rightarrow T_{2}\Rightarrow T_{1}
+\]
+はわかる。次にまず
+\[
+T_{1}\Leftrightarrow \bigcap_{U\in \mathfrak{U}}U=\Delta_{X} 
+\]をしめそう。しかし明らかである。そしてそもそも一様空間は正則だから定理が成り立つ。
+\end{proof}
+\begin{thm}
+$一様空間(X,\mathfrak{U})とA\subset XについてU\in \mathfrak{S}及びV\in \mathfrak{U}について$
+\[
+\bar{A}\subset U(A),\ \bar{A}\subset V(A) 
+\]
+が成立する
+\end{thm}
+\begin{proof}
+後半は前半から明らかであるから後半のみ証明する
+$a\in \bar{A}$とすると閉包の定義から$a$の任意の近傍Nについて$A\cap N\neq \O$ が成立する　$N$として$U(a)$を取ると
+\[
+U(a)\cap A\neq\O
+\]
+となり、$b\in U(a)\cap A$とすると$(b,a)\in U$で$U$は対称なので$(a,b)\in U$で結局$a\in U(b)$そして
+\[
+U(b)\subset \bigcup_{x\in A}U(x)=U(A)
+\]
+より
+\[
+\bar{A}\subset U(A)
+\]
+\end{proof}
+\begin{thm}一様空間$(X,\mathfrak{U})$について次が成立する
+\[
+\bar{A}=\bigcap_{U\in \mathfrak{S}}U(A)=\bigcap_{V\in \mathfrak{U}}V(A)
+\]
+\end{thm}
+\begin{proof}
+$\mathfrak{S}$は$\mathfrak{U}$の基本系を成すので
+\[
+\bigcap_{U\in \mathfrak{S}}U(A)=\bigcap_{V\in \mathfrak{U}}V(A)
+\]
+は成立する。$\displaystyle \bar{A}=\bigcap_{U\in \mathfrak{S}}U(A)$を示そう。前定理より
+\[
+\bar{A}\subset \bigcap_{U\in \mathfrak{S}}U(A)
+\]はわかる。逆向きの包含関係を示そう。$\displaystyle x\in \bigcap_{U\in \mathfrak{S}}U(A)$をとると右辺の定義より
+\[
+\forall U\in \mathfrak{S}\ \exists a\in A\ x\in U(a)
+\]$U$の対称性より$a\in U(x)$なので
+\[
+\forall U\in \mathfrak{S}\  U(x)\cap A\neq\O
+\]$\{U(X)\}_{U\in \mathfrak{S}}$は$x$の基本近傍系を成すので$x\in \bar{A}$つまり
+\[
+\bigcap_{U\in \mathfrak{S}}U(A)\subset \bar{A}
+\]これで証明が終わる
+\end{proof}
+\begin{thm}一様空間$(X,\mathfrak{U})$において$\mathfrak{U}$の元はその一様構造から誘導される位相の直積空間$X\times X$の対角線$\Delta_{X}$の近傍になる。（逆は一般には言えない。）
+\end{thm}
+\begin{proof}
+任意の$V\in\mathfrak{U}$について$W\circ W\subset V$となる対称近縁$W\in \mathfrak{U}$が存在する。この$W$について$W(x)\times W(x)$は$(x,x)$の近傍になっているそして$(a,b)\in W(x)\times W(x)$とすると対称性から$(a,x),(x,b)\in W$よって$(a,b)\in W\circ W\subset V$より
+\[
+W(x)\times W(x)\subset V
+\]
+で$x$は任意だったから結局$V$は$\Delta_{X}$の近傍となる。
+\end{proof}
+
+\section{一様連続関数}
+\begin{df}[一様連続関数]
+今、２つの一様空間$(X,\mathfrak{U}),(Y,\mathfrak{V})$と写像\[
+f:X\rightarrow Y
+\]が与えられたとする。この時写像fが一様連続であるとは、
+\[
+\forall U\in \mathfrak{U}\ \exists V\in \mathfrak{V}\ (f\times f)(V)\subset U
+\]
+となること
+\end{df}
+つまり任意に近縁$V\in \mathfrak{V}を与えた時適切なU\in \mathfrak{U}を取ればU程度に近い任意の２点x,yについて、f(x)とf(y)がV程度に近くなるといううことである。xとyはU程度に近ければ任意である。普通の連続性との違いに注意して、$実関数が一様連続であることの定義を想起せよ。
+\section{始一様構造(Initial uniform structure)}
+\begin{thm}
+$Xを集合\{(Y_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}を一様空間の族とし、各\lambda 毎に写像$
+\[
+f_{\lambda}:X\rightarrow Y_{\lambda}
+\]が与えられているとするこの時$Xに写像族F=\{f_{\lambda}\}_{\lambda \in \Lambda}$をすべて一様連続にするようなX上の最弱の一様構造が存在する。
+\end{thm}
+\begin{proof}$
+\mathfrak{M}=\{(f_{\lambda}\times f_{\lambda})^{-1}(U_{\lambda})\ |\ U_{\lambda}\in \mathfrak{U}_{\lambda}\ \lambda\in \Lambda\}$は有限交叉性を持つからフィルターが生成できる。そのフィルターが求める近縁系である。
+\end{proof}
+\begin{df}始一様構造\\
+上の定理で存在が保証された一様構造を$F=\{f_{\lambda}\}_{\lambda \in \Lambda}から誘導された始一様構造と呼ぶ。$
+\end{df}
+
+
+
+\newpage
+\part{完全正則空間}
+\section{定義}完全正則空間の定義は準備で述べたが定義を再び載せる。
+\begin{df}完全正則空間\\
+位相空間の互いに素な点と閉集合が関数で分離できるときその位相空間を完全正則空間という。
+\end{df}
+簡単にわかることだが完全正則空間は正則空間となる。
+\section{始位相との関係}
+\begin{thm}完全正則空間$(X,\mathfrak{O})$について
+\[
+C(X,[0,1])=\{f\ |\ f:X\rightarrow [0,1],f:連続\ \}
+\]
+とする。この時、写像の族$C=C(X,[0,1])$から誘導される$X$の始位相$\mathfrak{I}(C)$について
+\[
+\mathfrak{I}(C)=\mathfrak{O}
+\]
+が成立する。逆にこれが成り立つような位相空間は完全正則空間になる。
+\end{thm}
+\begin{proof}
+$完全正則空間が\mathfrak{I}(C)=\mathfrak{O}を充たすことの証明:C(X,[0,1])は(X,\mathfrak{O})の連続写像全体であるから$\[\mathfrak{I}(C)\subset \mathfrak{O}\]は明らかに成り立つ。逆向きの包含関係を示そう。今、任意の$U\in\mathfrak{O}についてと任意のx\in Uに対してxとX\backslash Uは$互いに素である点と閉集合であるから完全正則性より\[f:X\rightarrow [0,1]\]が存在して\[f(x)=1,\ \forall y\in X\backslash U\ f(y)=0\]を充たす。そして\[
+x\in f^{-1}((0,1])\subset U
+\]となり、$xは任意であったからU\in \mathfrak{I}(C)となる。更にUは任意であったから$
+\[
+\mathfrak{I}(C)\supset \mathfrak{O}
+\]すなわち
+\[
+\mathfrak{I}(C)=\mathfrak{O}
+\]が成立する。\\
+$\mathfrak{I}(C)=\mathfrak{O}を充たす位相空間(X,\mathfrak{O})が完全正則となること:$この証明はやや煩雑である。$\mathfrak{I}(C)はXの部分集合族$\[
+\mathfrak{M}=\{f^{-1}(V)\ |\ f\in C(X,[0,1])\ V:[0,1]の開集合\}
+\]$を準開基とする開集合族である。[0,1]の位相をよくよく考えれ$ば\[
+\mathfrak{M}=\{f^{-1}(V)\ |\ f\in C(X,[0,1])\ Vは[0,a),(b,c),(d,1]の何れかの形の集合a,b,c,d\in(0,1)\}
+\]となる。今から次のことを示す。\[
+(i)\ \mathfrak{B}=\{f^{-1}((t,1])\ |\ f\in C(X,[0,1])\ t\in (0,1)\}は\mathfrak{I}(C)=\mathfrak{O}の開基を成す。
+\]$\mathfrak{M}の元にちょっとづつ修正を加えて最終的に\mathfrak{B}が開基となることをいう。$
+$\mathfrak{M}の元のうち、f^{-1}(d,1])の形のものはそのままでよくて、f^{-1}([0,a))の形の集合は$連続写像
+\[
+g=1-f:X\rightarrow [0,1]
+\]を考えれば、$g^{-1}([0,1-a))=f^{-1}([0,a))となると表される。f^{-1}((b,c))の集合の修正は面倒くさい。まず任意のs\in f^{-1}((b,c)をとり、そしてf(s)=rとおくとr\in (b,c)であるそして$連続写像
+\[
+h;X\rightarrow [0,1]
+\] を$h=1-f+rと定義し、\epsilon =min\{r-b,c-r\}とする$
+\[
+s\in h^{-1}((1-\epsilon ,1])\subset f^{-1}((b,c))
+\]となる$sは任意だったので結局f^{-1}((b,c))は h^{-1}((1-\epsilon ,1])の形の和集合で表されるから$
+\[
+\mathfrak{B}=\{f^{-1}(a,1])\ |\ f\in C(X,[0,1])\ a\in (0,1)\}
+\]は$\mathfrak{O}の準開基となる。$次にこの$\mathfrak{B}が開基となることを示す。すなわち次を示す。$
+\[
+\forall B_{1},B_{2}\in \mathfrak{B}\ \forall x \in B_{1}\cap B_{2}\ \exists B_{3}\in \mathfrak{B}\ x\in B_{3}\subset  B_{1}\cap B_{2} 
+\]が成立する事を証明すればイイ。今、$f^{-1}((a,1]),g^{-1}((b,1])\in \mathfrak{B}をとる。a\le bと仮定しても一般性を失わない。$$\displaystyle h=\frac{a}{b}gとするとh\in C(X,[0,1])であり、$
+\[
+h^{-1}((a,1])=g((b,1])
+\]となる。そして
+\[
+F=\min\{f,h\}
+\]と定義すると
+\[
+a<F(x)\Leftrightarrow a<f(x)かつa<h(x)
+\]となるから
+\[
+F^{-1}((a,1])=f^{-1}((a,1])\cap h^{-1}((a,1])
+\]
+となる。つまり
+\[
+\forall B_{1},B_{2}\in \mathfrak{B}\ \forall x \in B_{1}\cap B_{2}\ \exists B_{3}\in \mathfrak{B}\ x\in B_{3}\subset  B_{1}\cap B_{2} 
+\]が成立する(これよりも強いことを証明している)よって
+\[
+(i)\ \mathfrak{B}=\{f^{-1}((t,1])\ |\ f\in C(X,[0,1])\ t\in (0,1)\}は\mathfrak{I}(C)=\mathfrak{O}の開基を成す。
+\]が成立する。そしていよいよこの空間の完全正則性を示す。\\$いま互いに素な一点xと閉集合Fをとる。そしてx \in X\backslash FでX\backslash Fは開集合であるから上に定義した\mathfrak{B}が開基になることから$
+\[
+\exists f\in C(X,[0,1])\ \exists a\in(0,1)\ x\in f^{-1}((a,1]) \subset X\backslash F
+\]が成立する。そして
+\[
+g=\min\{a,f\}
+\]とするとこれは連続で
+\[
+\forall y\in F\ g(y)=a\ \ a\neq g(x)=f(x)
+\]となるこれを適当に修正すれば$xとF$が関数で分離されることが示される。
+\end{proof}
+%SCコンパクト化を追加する。
+
+
+\newpage
+\part{ゲージ空間}
+\section{定義}
+\begin{df}擬距離\\
+写像$d:X\times X\rightarrow \mathbb{R}がX上の擬距離であるとは$
+\begin{eqnarray*}
+&&d(x,y)\ge 0\\
+&&d(x,x)=0\\
+&&d(x,y)=d(y,x)\\
+&&d(x,y)\le d(x,z)+d(z,y)
+\end{eqnarray*}を充たすことを言う。距離との違いは非退化性
+\[
+d(x,y)=0\Rightarrow x=y
+\]を充たす必要が無いことである。つまり$x\neq yであってもd(x,y)=0となる場合もある。$
+\end{df}
+\begin{df}ゲージ空間\\
+$X上の擬距離の族$\[\mathfrak{G}=\{d_{\alpha} \}_{\alpha\in A}\]$をX上のゲージという。そして集合Xにゲージ\mathfrak{G}が定められた時、対(X,\mathfrak{G})をゲージ空間という。$
+\end{df}
+\section{位相}
+ゲージ空間$(X,\mathfrak{G})$には次のように自然な位相が定義される。\\
+$\mathfrak{G}=\{d_{\alpha} \}_{\alpha\in A} としてp\in X正の数\epsilon とAの有限部分集合Iについて$
+\[
+N_{\epsilon,I}(p)=\{x\ |\ \forall \alpha \in I\ d_{\alpha}(p,x)<\epsilon \}
+\]と定義し,
+\[
+\mathfrak{N}_{0}(p)=\{N_{\epsilon,I}(p)\ |\ \epsilon >0,I:Aの有限部分集合\}
+\]とするとこれは基本近傍系の公理を満たすから位相が定まる。\\
+これは距離空間の位相の定め方と全く同様である。
+\section{基本ゲージ}
+ものさしは少ないほうがいいというのが基本ゲージの基本的な発想である。
+\begin{df}[基本ゲージ]ゲージ空間$(X,\mathfrak{G})について\mathfrak{G}=\{d_{\alpha} \}_{\alpha\in A} として\mathfrak{G}部分集合\mathfrak{H}=\{d_{\beta} \}_{\beta\in B}がこの空間の基本ゲージであるとは $
+\[
+\forall \epsilon>0\ \forall I:Aの有限部分集合\ \exists \delta>0\  \exists J:Bの有限部分集合\ \forall \beta \in J\ d_{\beta}(x,y)<\delta \Rightarrow \forall \alpha \in I\ d_{\alpha}(x,y)<\epsilon
+\]を充たすこと。要するに$\mathfrak{H}だけを用いてつくった\mathfrak{N}_{0}(p)が元々の\mathfrak{G}全体を用いて作った\mathfrak{N}_{0}(p)	の基本近傍系になってるということである。$
+\end{df}
+\section{例}
+\begin{exam}距離空間\\
+明らかに距離空間はゲージ空間である。
+\end{exam}
+
+
+
+\newpage
+\part{３つの概念の一致}
+\section{一様空間、完全正則空間、擬距離族空間は”同じ”概念}
+\begin{thm}次が成立する。\\
+(1)一様空間は完全正則となる\\
+(2)一様空間にはその一様構造から誘導される位相構造と両立するゲージが存在する。\\
+(3)完全正則空間にはその位相と両立する一様構造が存在する。\\
+(4)完全正則空間にはその位相と両立するゲージが存在する。\\
+(5)ゲージ空間にはその位相と両立する一様構造が存在する。\\
+(6)ゲージ空間は完全正則
+\end{thm}
+この部で言いたいことは(1),(4),(5)だけ示せばよいが敢えて全部を直接的に示す。(1)と(2)がとても難儀であり、その他は簡単である。
+\begin{proof}(1)一様空間は完全正則となること\\
+一様空間$(X,\mathfrak{U})の互いに素な一点xと閉集合Fについてある近縁Uで$\[x \in U(x)\subset X\backslash F\]となるものが存在する。
+そして近縁$の列\{U_{n}\}_{n\in \mathbb{N}}$で
+\[
+U_{0}=U,\ U_{n+1}\circ U_{n+1}\subset U_{n}
+\]を充たすものが存在する。ところで、有限桁の２進数全体を$D$とする。$r\in D$は有限個の自然数$n_{1}<n_{2}\cdots <n_{k}$を用いて
+\[
+r=\sum_{i=1}^{k}\frac{1}{2^{n_{i}}}=\frac{1}{2^{n_{1}}}+\frac{1}{2^{n_{2}}}+\cdots+\frac{1}{2^{n_{k}}}
+\]と表される。そこで$このrについて$
+\[
+V_r=U_{n_{k}}\circ U_{n_{k-1}}\circ \cdots \circ U_{n_{1}}
+\]と定義する。($\{n_{i}\}の$向きに注意)このとき
+\[
+r,s\in D,r<s\Rightarrow V_r\subset V_s
+\]これよりすこし強く	
+\[
+\bar{V_r}(x)\subset V_s(x)
+\]が成立する。(ここまで来ればあとはウリゾーンの補題と同様である。)
+
+\end{proof}
+\begin{proof}(2)一様空間にはその一様構造から誘導される位相構造と両立するゲージが存在すること\\我々は今から一様構造に可算性を仮定して擬距離を構成する。一般の場合はこれのちょっとした応用である。この一様空間$(X,\mathfrak{U})に可算な基本近縁系があるとする。この時、一様構造から誘導される位相と両立する一つの擬距離が存在することを示そう。（擬距離一つで位相構造が両立できるという意味である。もちろん唯一性など無い。そしてつまり可算な基本系を持つ一様構造はゲージ空間なんて大層なものではなくて只の擬距離空間である）上の$状況の時$　対称近縁の列\{U_{n}\}_{n\in \mathbb{N}}$で
+\[
+\ U_{n+1}\circ U_{n+1}\circ U_{n+1}\subset U_{n}
+\]を充たし、この一様空間の基本形を成すものが一様空間の定義からたしかに存在する。(なぜか？)この$Uから定まる\{U_{n}\}_{n\in \mathbb{N}}から擬距離を構成しよう。まず$関数$gを$
+\begin{eqnarray*}
+g(x,y)=\left\{
+\begin{array}{rl}
+1 & \mbox{if $(x,y)\notin U_{0}$} \\
+\frac{1}{2^{n}} & \mbox{if $(x,y)\in U_{n}\backslash U_{n+1}$} \\
+0 & \mbox{if $\displaystyle (x,y)\in \bigcap_{n\in \mathbb{N}}U_{n}$}
+\end{array}
+\right.
+\end{eqnarray*}と定義する。$\{U_{n}\}_{n\in \mathbb{N}}の元は全て対称近縁なので$
+\[
+g(x,y)=g(y,x), \ g(x,x)=0
+\]を充たす。この関数は$一様空間の位相とはあまり関係がない。ただ(x,y)にちょっとした指標を与えているだけである。
+しかしここで$
+\[
+d(x,y)=\inf \sum_{k=0}^{n}g(z_{k},z_{k+1})
+\]と定義する。右辺の$\{z_{i}\}は$$x=z_{0} z_{n}=y$となる空間内の有限列にで下限はこのような有限列全体で取る。これは擬距離となる。なぜなら
+\[
+d(x,y)=d(y,x), \ d(x,x)=0
+\]は\[
+g(x,y)=g(y,x), \ g(x,x)=0
+\]からわかり、三角不等式は$有限列を賢くとって\inf の性質からからわかる。$擬距離となることは分かったが一様空間の位相とどのような関係があるのだろうか。
+\\ここまで来たところで次の不等式を示す。この不等式がこの擬距離と位相との関係を示すものである。
+\[
+\frac{1}{2}g(x,y)\le d(x,y)\le g(x,y)
+\]この不等式を証明するために次の補題
+\begin{lem}
+\[
+g(x,y)\le 2\max \{g(x,z),g(z,w),g(w,y)\}
+\]$(ただ$し$z,wは$任意の点$)$
+\end{lem}を証明する。\\右辺の３つの項のいずれかが$値1/2,ないしは1を取る時は不等式は明らかに成立している。そうでない時は(x,z),(z,w),(w,y)を含む\{U_{n}\}_{n\in \mathbb{N}}の内最小の番号を持つものをものをU_{k}とす$ると\[k\ge 1,\max \{g(x,z),g(z,w),g(w,y)\}\ge \frac{1}{2^{k}}\]となり、そして
+\[
+(x,y)\in U_{k}\circ U_{k}\circ U_{k}\subset U_{k-1}
+\]より\[g(x,y)\le \frac{1}{2^{k-1}}\]となる。評価をよく見ればこれで証明は完了している。
+さて
+\[
+\frac{1}{2}g(x,y)\le d(x,y)\le g(x,y)
+\]を証明しよう。
+\[
+d(x,y)\le g(x,y)
+\]は$dの定義式中に出てくる\inf の性質から明らかである。$
+\[
+\frac{1}{2}g(x,y)\le d(x,y)
+\]を示そう。この不等式はつまり任意の$nとx=z_{0},y=z_{n}を充たす任意の\{z_{i}\}について $
+\[
+\frac{1}{2}g(x,y)\le \sum_{k=0}^{n}g(z_{k},z_{k+1})
+\]が成立することを示せばいい。$n=1の時は明らかに成立する。そしてnより小さい数では不等式が成立しているとしてnのときを示す。$
+\[
+a= \sum_{k=0}^{n}g(z_{k},z_{k+1})
+\]とする。ここで$\displaystyle \frac{a}{2}<g(x,z_{2})かつ\frac{a}{2}<g(z_{n-1},y)と仮定するとg(x,z_{2}),g(z_{n-1},y)はa= \sum_{k=0}^{n}g(z_{k},z_{k+1})の右辺の項の一つであるから\frac{a}{2}+\frac{a}{2}=a<g(x,z_{2})+g(z_{n-1},y)\le aだから矛盾する。よってg(x,z_{2}),g(z_{n-1},y)のうちどちらかひとつは\ \le \frac{a}{2}である。g(x,z_{2})\le \frac{a}{2}と仮定しても一般性を失わない。$$ここで自然数hを$
+\[
+\sum_{k<i}g(z_{k},z_{k+1})\le \frac{a}{2}
+\]を充たす最大の$iとする。先の議論はこのiの存在のためのものである。hの定義からh+1について$
+\[
+\sum_{k<h+1}g(z_{k},z_{k+1})> \frac{a}{2}
+\]となる。そして帰納法の仮定と$\displaystyle \sum_{k<h}g(z_{k},z_{k+1})\le \frac{a}{2}
+$から
+\[
+\frac{1}{2}g(x,z_{h})\le \sum_{k<h}g(z_{k},z_{k+1})\le \frac{a}{2}
+\]であるから
+\[
+g(x,z_{h})\le a
+\]そして明らかに
+\[
+g(z_{h},z_{h+1})\le a
+\]さらにさらに
+\[
+a= \sum_{k=0}^{n}g(z_{k},z_{k+1})=\sum_{k<h+1}g(z_{k},z_{k+1})+\sum_{k\ge h+1}g(z_{k},z_{k+1})>\frac{a}{2}+\sum_{k\ge h+1}g(z_{k},z_{k+1})
+\]が成立するから帰納法の仮定より
+\[
+\frac{1}{2}g(z_{h+1},y)\le\sum_{k\ge h+1}g(z_{k},z_{k+1})<\frac{a}{2}
+\]より
+\[
+g(z_{h+1},y)\le a
+\]が成立する。これと補題の不等式$\displaystyle g(x,y)\le 2\max \{g(x,z),g(z,w),g(w,y)\}$から
+\[
+g(x,y)\le 2\max \{g(x,z_{h}),g(z_{h},z_{h+1}),g(z_{h+1
+},y)\} \le 2a=2\left(\sum_{k=0}^{n}g(z_{k},z_{k+1})\right)
+\]
+結局
+\[
+\frac{1}{2}g(x,y)\le \sum_{k=0}^{n}g(z_{k},z_{k+1})
+\]が成立するので
+\[
+\frac{1}{2}g(x,y)\le d(x,y)
+\]がきちんと成立する。
+\[
+N(d;\epsilon )=\{(x,y)\ |\ d(x,y)\le \epsilon \}
+\]と定義すると不等式
+\[
+\frac{1}{2}g(x,y)\le d(x,y)\le g(x,y)
+\]から
+\[
+U_{n+1}\subset N(d;\frac{1}{2^{n+1}})\subset U_{n}
+\]が成り立つ。不等式$\displaystyle \frac{1}{2}g(x,y)\le d(x,y)\le g(x,y)$はこれを証明するためのものである。この式からこの$dがこの一様空間から誘導される位相と両立していることがわかる。$
+\end{proof}
+\begin{proof}(3)完全正則空間にはその位相と両立する一様構造が存在すること\\
+$[0,1]は一様空間であり、C=C(X,[0,1])から誘導される始一様構造が存在する。完全正則空間の位相\mathfrak{O}は\mathfrak{I}(C)と一致する。これで証明が終わる。$
+\end{proof}
+\begin{proof}(4)完全正則空間にその位相と両立するゲージが存在すること\\
+$f\in C=C(X[0,1])に対して$
+\[
+d_{f}(x,y)=|f(x)-f(y)|
+\]とするとこれは擬距$離で\{d_{f}\}_{f\in C}はゲージとなる。このゲージから誘導される位相が元の位相と一致することはたやすく証明される。$
+\end{proof}
+\begin{proof}(5)ゲージ空間にはその位相と両立する一様構造が存在すること\\
+\[
+N_{\epsilon,B}=\{(x,y)\ |\ \forall \alpha \in B\ d_{\alpha}(x,y)<\epsilon \}
+\]として
+\[
+\mathfrak{N}_{0}=\{N_{\epsilon,B}\ |\ \epsilon >0,B:Aの有限部分集合\}
+\]と定義するとこれは基本近縁系の公理を充たす。よって証明が終わる。
+\end{proof}
+\begin{proof}(6)ゲージ空間は完全正則であること\\
+ゲージ空$(X,\{d_{\alpha} \}_{\alpha\in A})の互いに素な一点pと閉集合Fについて
+p\in X\backslash FでX\backslash Fは開集合でゲージ空間の位相の定め方から正の数\epsilon ,とAの有限部分集合Bが存在し$
+\[
+N_{\epsilon,B}(x)\subset X\backslash F
+\]となる。
+\[
+N_{\epsilon,B}(x)=\{y\ |\ \forall \alpha \in B\ d_{\alpha}(y,p)<\epsilon \}
+\]であるから
+\[
+\forall a\in F\ \exists \alpha \in B\ d_{\alpha}(a,p)\ge \epsilon 
+\]よって
+\[
+f(x)=\max_{\alpha\in B}\{d_{\alpha}(x,p)\}
+\]とすると$fは連続でg(p)=0,F上でf(x)\ge \epsilon$が成立する。
+\[
+g(x)=\min\{f(x),\epsilon \}
+\]と定義すれば$F上で定数\epsilon の値をとり、g(p)=0でこれを適当に修正すれば証明が終わる。$
+\end{proof}
+
+
+
+\newpage
+\part{応用}
+
+\begin{thm}
+一様空間$(X,\mathfrak{U})が距離付け可能であるための必要十分条件はこの空間が$
+\[
+\bigcap_{U\in \mathfrak{U}}U=\Delta_{X} 
+\]を充たし、かつ可算な基本近縁系をを持つこと。
+\end{thm}空間の一点が可算な基本近傍系を持つと位相の定め方と一様性から必然的に第一可算公理を充たす。そして先の定理から一つの擬距離が存在し、位相構造と両立する。さらに$\displaystyle \bigcap_{U\in \mathfrak{U}}U=\Delta_{X} $よりこの擬距離は実は距離になる。（ハウスドルフだから）必要性は明らかなので定理は示された。
+\begin{thm}
+ゲージ空間$(X,\mathfrak{G})が距離付け可能である必要十分条件は、
+この空間が高々可算な基本ゲージ\{d_{n}\}_{n\in \mathbb{N}}を持ちかつ$
+\[
+\forall x,y\in X\ \exists n\in \mathbb{N}\ x\neq y\Rightarrow d_{n}(x,y)\neq 0
+\]を充たすこと。
+\end{thm}
+\begin{proof}
+距離空間をひと通り勉強したものにとってこの証明は簡単である。今、
+\[
+D(x,y)=\sum_{n=0}^{\infty}\frac{1}{2^{n}}\frac{d_{n}(x,y)}{1+d_{n}(x,y)}
+\]とすればこれが求める距離である。必要性は明らかである。
+\end{proof}
+\begin{thm}
+コンパクトハウスドルフ空間にはその位相構造と両立する一様構造が付く
+\end{thm}
+\begin{proof}
+コンパクトハウスドルフ空間は完全正則だから当たり前である。
+\end{proof}
+\begin{thm}[制限されたウリゾーンの定理]
+第二可算公理を充たすコンパクトハウスドルフ空間は距離付け可能である。
+\end{thm}
+\begin{proof}
+先の定理群から自明
+\end{proof}
+コンパクトハウスドルフ空間と一様空間の関係についてより強いことがわかる
+\begin{thm}
+コンパクトハウスドルフ空間に付く一様構造は一意的であり、それは直積空間$X\times Xにおける対角線\Delta_{X}の近傍全体と一致する。$
+\end{thm}
+\begin{proof}コンパクトハウスドルフ空間につく一様構造の一つを$\mathfrak{U}$とおいてこの一様構造対角線の近傍全体と一致することが言えれば一意性の証明は終わる。一様構造から誘導された位相について$\mathfrak{U}$が直積空間$X\times X$の$\Delta_{X}$の近傍となることは先に述べた。つまり
+\[
+\mathfrak{U}\subset \mathfrak{N}(\Delta_{X})
+\]なので
+\[
+\mathfrak{U}\supset \mathfrak{N}(\Delta_{X})
+\]を示せば良い。ところで、一様空間の閉近縁全体$\mathfrak{B}$は基本近縁系を成す。ゆえに
+\[
+\bigcap_{F\in \mathfrak{B}}F=\Delta_{X}
+\]を充たす。ここで任意に$V\in \mathfrak{N}(\Delta_{X})$をとると
+\[
+\Delta_{X}\subset V
+\]である。そして$X$がコンパクトであることから$X\times X$もコンパクトであり、さらに
+$\{(X\times X)\setminus F\}_{F\in \mathfrak{B}}\cup \{V\}$は$X\times X$の被覆だから有限個の$\mathfrak{B}$の元と$V$で$X\times X$を被覆出来る。つまり
+\[
+(X\times X)\setminus F_{1}\cup (X\times X)\setminus F_{2}\cup \cdots \cup (X\times X)\backslash F_{n}\cup V=X\times X
+\]
+つまり
+\[
+\bigcup_{i=1}^{n}((X\times X)\setminus F_{i})\cup V=((X\times X)\setminus \bigcap_{i=1}^{n}F_{i})\cup V=X\times X
+\]
+よって
+\[
+\bigcap_{i=1}^{n}F_{i}\subset V
+\]が成立する。$\displaystyle \bigcap_{i=1}^{n}F_{i}\in \mathfrak{U}なのでV\in \mathfrak{U}これで定理が示された。$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+
+\bibitem{2}森毅,位相のこころ,ちくま学芸書房,2006
+\bibitem{1}ジョン・L・ケリー著,児玉之宏訳,位相空間論,吉岡書店,1968
+\bibitem{ブル}ニコラ・ブルバキ,数学原論 位相1
+\bibitem{しば}柴田敏男,集合と位相空間,共立数学講座8,共立出版,1978
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

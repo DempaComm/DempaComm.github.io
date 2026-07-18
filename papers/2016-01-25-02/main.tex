@@ -1,0 +1,284 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}} }
+\newcommand{\supp}{\text{  {\rm supp}} }
+%なんか演算２
+\newcommand{\s}{\text{{\rm St}}}
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{Simplified Arens Square}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+$J=\{x\in \rr\ |\ 0<x<1\}$と置き、
+$X=J\times J\cup \{(0,0),\ (1,0)\}$と定義する。\par
+$n\in \nn$について
+\[
+L_n=\{(x,y)\in J\times J\ |\ 0<x<1/2,\ 0<y<1/n\}\cup \{(0,0)\}
+\]
+\[
+R_n=\{(x,y)\in J\times J\ |\ 1/2<x<1,\ 0<y<1/n\}\cup \{(1,0)\}
+\]
+と定義して$(0,0)$には$\{L_n\}_{n\in \nn}$を、$(1,0)$には$\{R_n\}_{n\in \nn}$を基本近傍系として、そして$J\times J$の元には普通の平面の部分集合としての近傍系を導入するとキチンと位相を導入出来る。この空間を$(X,\mathfrak{O})$と書こう。
+
+\begin{prop}
+$(X,\mathfrak{O})$はハウスドルフ空間である。
+\end{prop}
+\begin{proof}
+明らか
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は正則空間ではない。
+\end{prop}
+\begin{proof}
+\[
+\cl(L_n)=\{(x,y)\in J\times J\ |\ 0<x\le 1/2,\ 0<y\le 1/n\}\cup \{(0,0)\}
+\]
+\[
+\cl(R_n)=\{(x,y)\in J\times J\ |\ 1/2\le x<1,\ 0<y\le 1/n\}\cup \{(1,0)\}
+\]
+から分かる。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$はパラコンパクトではない。
+\end{prop}
+\begin{proof}
+パラコンパクトハウスドルフ空間は正則空間でなければならないからである。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$はメタコンパクトである。
+\end{prop}
+\begin{proof}
+まず$X$の部分空間として$J\times J$は普通の平面の部分空間としての位相と一致することを鑑みると、$J\times J$がパラコンパクトである事が分かる。さらに$J\times J$は$X$の開集合である。\par
+$X$の任意の開被覆$\mathcal{U}$についてこれを$J\times J$に制限する。つまり
+\[
+\mathcal{V}=\{U\cap (J\times J)\ |\ U\in \mathcal{U}\}
+\]
+を考える。$J\times J$はパラコンパクトなので$\mathcal{V}$の
+局所有限開細分被覆$\mathcal{P}$が存在する。そして$(0,0),\ (1,0)$を含む$\mathcal{U}$の元をひとつづつ選び$A,B$とすると
+\[
+\mathcal{Q}=\mathcal{P}\cup \{A,B\}
+\]は$\mathcal{U}$の点有限開細分被覆である。
+\end{proof}
+
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は$\sigma$コンパクトである。従ってリンデレフ空間である。
+\end{prop}
+\begin{proof}
+$X$の部分空間$J\times J$が$\sigma$コンパクトであり、$\{(0,0),(1,0)\}$もコンパクトだからである。
+\end{proof}
+
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は可算パラコンパクトではない。
+\end{prop}
+\begin{proof}
+リンデレフかつ可算パラコンパクトならばパラコンパクトでなければならないからである。
+\end{proof}
+
+
+\begin{prop}
+$(X,\mathfrak{O})$は第二可算公理を充たす。
+\end{prop}
+\begin{proof}
+$X$の部分空間$J\times J$が開部分空間であり、かつ第二可算で、$(0,0),(1,0)$はそれぞれ可算な基本近傍系を持つからである。
+\end{proof}
+
+
+
+以上から$(X,\mathfrak{O})$は可算パラコンパクトではないメタコンパクト$\sigma$コンパクトハウスドルフ空間である事が分かる。
+
+
+\begin{df}
+集合$X$とその部分集合族$\mathcal{A}$、及び$p\in X$について
+\[
+\s(p,\mathcal{A})=\bigcup\{A\ |\ A\in \mathcal{A},\ p\in A\}
+\]
+を$\mathcal{A}$による$S$を中心とする星型集合という。
+\end{df}
+
+
+\begin{df}
+位相空間$X$の開被覆の列$\{\mathcal{U}_{n}\}_{n\in \nn}$が{\bf 展開列}であるとは任意の点$x\in X$について$\{\s(x,\mathcal{U}_{n})\}_{n\in \nn}$が$x$の基本近傍系になることである。位相空間に展開列が常に存在するとは限らない。\footnote{第一可算公理を充たさない空間を考えれば当たり前である。}
+\par
+そして展開列を持つ空間を{\bf 展開可能空間}という。
+\end{df}
+
+
+\begin{prop}
+位相空間$(X,\mathfrak{O})$は展開可能空間である。
+\end{prop}
+\begin{proof}
+$J\times J$のユークリッド距離での中心$p\in J\times J$の$r$開球を$B_r(p)$と置く。つまり
+\[
+B_r(p)=\{x\in J\times J\ |\ \|x-p\|<r\}
+\]
+である。$B_r(p)\subset J\times J$であることと$B_r(p)$が$X$の開集合であることに注意しよう。そして
+\[
+\mathcal{U}_n=\{B_{2^{-n}}(p)\ |\ p\in J\times J\}\cup \{L_n,R_n\}
+\]
+とおけばこれは開被覆になる。\par
+$p=(0,0)$のとき$\s(p,\mathcal{U}_n)=L_n$で$p=(1,0)$のときは
+$\s(p,\mathcal{U}_n)=R_n$である。
+また$p\in J\times J$について、$r>0$を任意にあたえて、$n$を十分大きく取れば$p\not\in L_n\cup R_n$と出来て、さらに$\s(p,\mathcal{U}_n)\subset B_r(p)$と出来るので$\{\mathcal{U}_n\}_{n\in \nn}$は展開列となる。
+\end{proof}
+
+
+
+
+\begin{cau}
+展開可能な$T_3$空間をムーア空間と言うのだが、空間$X$はムーア空間ではない展開可能空間の例ということである。
+\end{cau}
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}L.A.Steen and J.A.Seebch,{\it Counterexamples in Topology},Dover Publications,Inc.,New York,1995, pp100, Simplified Arens Square
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

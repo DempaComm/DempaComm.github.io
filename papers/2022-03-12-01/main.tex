@@ -1,0 +1,1080 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+\DeclareMathOperator{\rank}{rank}
+
+\newcommand{\ddd}{\mathbf{D}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{
+陰関数定理と逆関数定理
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+この文章では陰関数定理と逆関数定理を証明する．
+この文章では断りのない限り，ノルムの記号は絶対値と同じ記号で表してしまう．
+またユークリッド空間にはノルムが常に備わっているとするが，特に具体的になんのノルムであるかは断りがない限り明示しない.
+
+
+\section{準備}
+
+\begin{df}
+$A: \rr^{k}\to \rr^{l}$
+を行列とする．
+この時$A$の作用素ノルムを
+\[
+|A|=\sup_{x\in \rr^{k}, x\neq 0}\frac{|Ax|}{|x|}
+\]
+と定義する．
+このノルムの良いところは
+$|Ax|\le |A|\cdot |x|$が成り立つところである.
+
+\end{df}
+
+まず有限次元のノルムは全て同値であることを紹介する．
+証明は\cite{2}などを参照のこと．
+
+\begin{lem}
+$V$を有限次元実線型空間とする．
+この時$V$上のノルムは全て同値になる．つまり，
+そして$|\cdot|_{1}$と$|\cdot |_{2}$を$V$の上のノルムとするとある$N>0$が存在して任意の$x\in V$について
+\[
+N^{-1}|x|_{1}\le |x|_{2}\le N|x|_{1}
+\]
+が成り立つ．
+\end{lem}
+このことから以下で定義する全微分可能性は有限次元空間においてはどのノルムで定義しても同値であることがわかる．
+
+
+\begin{df}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき$f$が$a\in U$で
+\textbf{全微分可能}
+であるとは
+線型写像\footnote{本来は接空間の間の線型写像$A: T_{a}U\to T_{f(a)}\rr^{l}$と書くべきかもしれないが，解析学だとユークリッド空間とその接空間を同一視する．また線型写像ではなく，行列と言ってもよい．なぜなら有限次元空間の間の線型写像は行列と同一視されるからである．}
+$A: \rr^{k}\to \rr^{l}$
+が存在し
+\[
+\lim_{x\to a, x\neq a}
+\frac{|f(x)-f(a)-A(x-a)|}{|x-a|}
+\]
+が成り立つときにいう．
+このとき$f$は点$a$において
+任意の方向に偏微分可能であり，さらに
+$A$は行列として
+\[
+A=\left(\frac{\partial f_{j}}{\partial x_{i}}(a)\right)_{i=1, \dots, k, j=1, \dots, l}
+\]
+と表される．
+この$A$のことを\textbf{$f$の導関数}であるとか
+\textbf{ヤコビ行列}だとか呼ぶ．
+ここで
+$f=(f_{1}, \dots, f_{l})$と定義する．
+そしてこの$A$をこの文章では
+$A=(\ddd f)(a)$と表す．
+\end{df}
+
+初等的な事実として以下が成り立つ．
+\begin{thm}
+$k, l\in \zz_{ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$とする．
+このとき
+$f$を$C^{1}$級ならば
+$f$は$U$内の任意の点で全微分可能である．
+またこのとき$\ddd f: U\to \rr^{k\times l}$; 
+$x\to (\ddd f)(x)$
+は連続写像である．
+\end{thm}
+
+
+\begin{df}
+$k, l\in \zz_{ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$は$C^{1}$級とする．
+このとき関数$e: U\times U\to \rr^{l}$
+を
+\[
+e(x, y)=f(x)-f(y)-(\ddd f)(y)(x-y)
+\]
+と定義する．
+この関数は連続関数であることに注意しよう．
+そして
+$U\times U$上の
+関数$E: U\times U\to \rr^{l}$を
+\[
+E(x, y)=
+\begin{cases}
+\frac{e(x, y)}{|x-y|} & \text{$x\neq y$;}\\
+0 & \text{$x=y$}
+\end{cases}
+\]
+と定義する．
+\end{df}
+
+この定義のもと次が成り立つ．
+\begin{lem}\label{lem:1step}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$を$C^{1}$級とする．
+このとき任意の$a\in U$について
+\[
+\lim_{x\to a, x\neq a}\frac{e(x, a)}{|x-a|}
+=\lim_{x\to a}E(x, a)=0. 
+\]
+が成り立つ．
+
+\end{lem}
+\begin{proof}
+全微分可能性の定義から明らか．
+\end{proof}
+
+\begin{lem}[有限増分の定理]\label{lem:increment}
+$l\in \zz_{\ge 1}$
+とし，$[a, b]\subset \rr$とする．
+$\eta>0$とする．
+そして$f: [a, b]\to \rr^{l}$は
+$(a, b)$上で全微分可能であるとする．
+このときもしも$M>0$が任意の$x\in (a, b)$について
+$|\ddd f(x)|\le M$を満たすならば
+\[
+|f(b)-f(a)|\le M(b-a)
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+今から任意の$x\in [a, b]$と$\epsilon>0$について
+\begin{align}\label{al:mokumoku}
+|f(x)-f(a)|\le (M+\epsilon)(x-a)+\epsilon
+\end{align}
+が成り立つことを示す．
+式 (\ref{al:mokumoku})
+が成り立つような$x\in [a, b]$全体を
+$S$とおく．$\epsilon>0$から
+$a\in S$がわかるので$S$は空ではない．
+そして$c=\sup S$とおく．
+$f$の連続性から$c\in S$である．
+よって
+$c=b$を示すことができれば補題の証明は終わる．
+矛盾を導くために$c<b$と仮定する．
+
+Case 1. $c=a$の場合：
+この場合，$f$の連続性から十分小さい$\eta>0$
+を取れば$t=a+\eta$について
+$|f(t)-f(a)|\le \epsilon$が成り立つ．
+このとき$0<(M+\epsilon)(t-a)$なので
+\[
+|f(t)-f(a)|\le \epsilon
+\le (M+\epsilon)(t-a)+\epsilon
+\]
+がわかる．
+つまり$t\in S$であるが，$a<t$なので$a=c=\sup S$
+に矛盾する．
+
+Case 2. $a<c$の場合：
+関数$f$は$(a, b)$上で全微分可能なので
+特に$c$で全微分可能である．
+よって
+$\eta>0$
+を十分小さくとれば，$t=c+\eta$について
+\[
+|f(t)-f(c)-(\ddd f)(c)(t-c)|\le \epsilon (t-c)
+\]
+となる．
+そして$c\in S$から
+$|f(c)-f(a)|\le (M+\epsilon)(c-a)+\epsilon$
+である．以上を踏まえると
+\begin{align*}
+|f(t)-f(a)|&\le 
+|f(t)-f(c)|+|f(c)-f(a)|
+\\
+&\le |(\ddd f)(c)(t-c)|+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+\\
+& \le M(t-c)+\epsilon(t-c)+
+ (M+\epsilon)(c-a)+\epsilon
+ =(M+\epsilon)(t-a)+\epsilon
+\end{align*}
+が成り立つ．
+つまり$t\in S$であるが，
+ここで$c<t$
+なので$c=\sup S$矛盾する．
+
+以上のいずれの場合分けでも矛盾が導かれたので，$c=b$
+である．つまり
+\[
+|f(b)-f(a)|\le (M+\epsilon)(b-a)+\epsilon
+\]
+が成り立つので，$\epsilon\to 0$
+とすれば
+\[
+|f(b)-f(a)|\le M(b-a)
+\]
+が成り立つ．
+\end{proof}
+
+
+\begin{lem}\label{lem:conti}
+$k, l\in \zz_{\ge 1}$
+とし，$U\subset \rr^{k}$を開集合とする．
+そして$f: U\to \rr^{l}$を$C^{1}$級とする．
+すると$E: U\times U\to \rr^{l}$は$U\times U$上で連続である．
+\end{lem}
+\begin{proof}
+この証明では行列には作用素ノルムを導入して考える．
+$a\in U$をとる．$e(x, y)$は定義から$U\times U$上連続であるから
+このとき$\lim_{(x, y)\to (a, a)}|E(x, y)|=0$
+となることを示せば良い．
+そして
+$\epsilon$を任意に与え，
+$a$の凸な開近傍$N$
+を十分小さく取り以下が成り立つようにする．
+\begin{enumerate}
+\item 
+任意の$x, y\in N$に対して
+任意の$t\in [0, 1]$について$tx+(1-t)y\in U$が成り立つ．
+\item 
+任意の$z_{1}, z_{2}\in N$について
+$|f(z_{1})-f(z_{2})|\le \epsilon$
+が成り立つ．
+\end{enumerate}
+$x, y\in U$を任意にとる．ここで$x\neq y$と仮定してもよい．
+そして
+$F: [0, 1] \to \rr^{l}$を
+\[
+F(t)=f(y+t(x-y))-(\ddd f)(a)\cdot (y+t(x-y))
+\]
+と定義する．
+このとき
+\[
+\frac{d}{dt}F(t)=((\ddd f)(y+t(x-y))-(\ddd f)(y))\cdot (x-y)
+\]
+となる．さて
+\[
+M_{x, y}=\sup_{t\in [0, 1]}|((\ddd f)(y+t(x-y))-(\ddd f)(y))|
+\]
+とおくと
+補題 \ref{lem:increment}より
+\begin{align*}
+|e(x, y)|&=
+|f(x)-f(y)-(\ddd f)(y)(x-y)|
+\\
+&=
+|F(1)-F(0)|\le 
+|x-y|M_{x, y}
+\end{align*}
+である．
+ここで$N$の取り方の$(2)$から
+$M_{x, y}\le \epsilon$である．ゆえに
+\[
+|E(x, y)|\le M_{x,y}\le \epsilon
+\]
+が成り立つので$E$が連続であることがわかる．
+\end{proof}
+
+以下の事実を思い出そう．
+証明\cite{3}などを参照のこと．
+
+\begin{thm}[パラメータ付きの不動点定理]\label{thm:parabana}
+
+$(X, d)$を完備距離空間、$T$を位相空間とし写像
+$f:X\times T\to X$が連続であるとし、$f(x,t)=f_{t}(x)$と書くことにする。さらに
+\[
+\exists q\in [0,1), \ \forall x,y \in X, \ \forall t\in T, \ d(f_t(x),f_t(y))\le qd(x,y)
+\]を充たし（$q$が$t$に依存してないことに注意せよ。）
+\[
+\forall x\in X\ f_t(x)がtについて有界
+\]
+であるとする。（このとき$x$を固定して$f_t(x)$が$t$について有界で連続になる。）このとき通常のBanachの不動点定理から存在と唯一性が示される$t$毎の$f_t$の不動点を$h(t)$と書くことにし、写像$h(t):T\to X$とみなしたとき、$h(t)$は連続写像である。
+\end{thm}
+
+
+\section{陰関数定理}
+不動点定理(定理\ref{thm:parabana})を用いて陰関数定理を証明する．
+その前に$U\subset \rr^{n}\times \rr^{m}$
+として$F: U\to \rr^{m}$について
+$U$の$\rr^{n}$の成分($\rr^{n}$への射影)を$x$方向，
+$\rr^{m}$の成分($\rr^{m}$への射影)を$y$方向と呼ぶことに
+しよう．そして$z=(x, y)\in U$に対して
+\[
+(\ddd_{x} F)(z)=\left(
+\frac{\partial F_{j}}{\partial x_{i}}(z)
+\right)_{j=1, \dots, m, i=1, \dots, n}
+\]
+
+\[
+(\ddd_{y} F)(z)=\left(
+\frac{\partial F_{j}}{\partial y_{i}}(z)
+\right)_{i, j=1, \dots, m}
+\]
+と定義する．$(\ddd_{y} F)(z)$が正方行列であることに注意せよ．
+また，行列として
+\[
+(\ddd F)(z)=((\ddd_{x}F)(z)|(\ddd_{y}F)(z))
+\]
+が成り立つ．
+これをもとにして
+$(a, b)\in U$に対して$(\ddd F)(a, b)$を
+$(x, y)\in \rr^{{m+n}}$に作用すると
+\[
+(\ddd F)(a, b)(x, y)
+=(\ddd_{x}F)(a, b)x+(\ddd_{y}F)(a, b)y
+\]
+が成り立つ．
+すると$F$が$(a, b)$で全微分可能ならば
+\[
+F(x, y)
+=
+F(a, b)-(\ddd_{x}F)(a, b)x-(\ddd_{y}F)(a, b)y
++e
+\]
+となる．
+
+
+\begin{thm}\label{thm:implicit}
+$U\subset \rr^{n}\times \rr^{m}$
+は開集合で$F:U\to \rr^{m}$は点$(x_{0}, y_{0})\in U$
+で
+\[
+F(x_{0}, y_{0})=0
+\]
+と
+\[
+g(x_{0})=y_{0}
+\]
+と
+\[
+\det((\ddd_{y} F)(x_{0}, y_{0}))\neq 0
+\]
+を満たすとする．
+この時$x_{0}$の開近傍$O_{1}$
+と$y_{0}$の開近傍$O_{2}$と
+連続関数$g: O_{1}\to O_{2}$が存在して
+\[
+O_{1}\times O_{2}\subset U
+\]
+と
+\[
+\forall x\in O_{1}, F(x, g(x))=0. 
+\]
+を満たす．
+さらに$O_{1}$を十分小さくとれば
+$(\ddd_{y}F)(x, g(x))$が常に可逆行列になり，$g$は
+$C^{1}$級で
+\[
+(\ddd g)(x)=-(\ddd_{y} F)(x, g(x))^{-1}\cdot (\ddd_{x}F)(x, g(x))
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+まず行列$L$を
+$L=(\ddd_{y} F)(x_{0}, y_{0})$とおく．そして
+$H: U\to \rr^{m}$
+を
+\[
+H(x, y)=y-L^{-1}F(x, y)
+\]
+とおく．
+明らかに$H$は連続関数になる．
+以下では$H_{x}(y)=H(x, y)$
+と書くときもある．
+さて，
+$\alpha>0$に対して
+\[
+V_{\alpha}=\{\, 
+(x, y)\in U\mid |(x, y)-(x_{0}, y_{0})|<\alpha
+\, \}
+\]
+とおく．
+$\alpha>0$を十分小さく取り，
+$V_{\alpha}\subset U$となるようにする．
+このとき$(x, y_{1}), (x, y_{2})\in V_{\alpha}$を満たす$x, y_{1}, y_{2}$
+について
+\begin{align*}
+&|H_{x}(y)-H_{x}(y_{2})|=
+|y_{1}-L^{-1}F(x, y_{1})-y_{2}+L^{-1}F(x, y_{2})|\\
+&=
+|L^{-1}(F(x, y_{2})-F(x, y_{1})-L(y_{2}-y_{1}))|\\
+&\le 
+|L^{-1}|\cdot|(F(x, y_{2})-F(x, y_{1})-L(y_{2}-y_{1}))|\\
+&=
+|L^{-1}|\cdot |e((x, y_{2}), (x, y_{1}))|. 
+\end{align*}
+が成り立つ．ここで$|L^{-1}|$
+は$L^{-1}$の作用素ノルムとする．作用素ノルムでなくても，定数倍がかかるだけなので以下の議論には本質的に関係ない．
+まとめると，つまり$(x, y_{1}), (x, y_{2})\in V_{\alpha}$を満たす$x, y_{1}, y_{2}$
+について
+\begin{equation}\label{eq:hyouka}
+|H_{x}(y)-H_{x}(y_{2})|
+\le 
+|L^{-1}|\cdot |e((x, y_{2}), (x, y_{1}))|. 
+\end{equation}
+が成り立つ．
+$\epsilon>0$を任意に与えた時に
+$\alpha$を十分小さくとれば
+$(x, y_{1}), (x, y_{2})\in V_{\alpha}$ならば
+\[
+|e((x, y_{2}), (x, y_{1}))|
+\le \epsilon|(x, y_{1})-(x, y_{2})|=\epsilon|y_{1}-y_{2}|
+\]
+となる．
+ところで，$\delta_{1}>0$と$\eta>0$を十分小さくとれば
+$|x-x_{0}|<\delta_{1}$と
+$|y-y_{0}|\le \eta$を満たすならば
+$(x, y)\in V_{\alpha}$が成り立つようにできる（積位相の定義）．
+よって$\epsilon<\frac{1}{2|L^{-1}|}$ぐらいに十分小さくとれば，
+$|x-x_{0}|<\delta_{1}$と
+$|y_{1}-y_{0}|\le \eta$と
+$|y_{2}-y_{0}|\le \eta$
+が成り立つならば
+\[
+ |e((x, y_{2}), (x, y_{1}))|\le \frac{1}{2}|y_{1}-y_{2}|. 
+\]
+となる．
+さらに$H$は連続なので$\delta_{2}>0$を十分小さくとれば
+$x$が$|x-x_{0}|<\delta_{2}$を満たすとき
+\[
+|H(x, y_{0})-H(x_{0}, y_{0})|<\frac{\eta}{2}
+\]
+が成り立つ．
+よって$\delta=\min\{\delta_{1}, \delta_{2}\}$とおけば
+$x\in \rr^{n}$と
+$y_{1}, y_{2}\in \rr^{m}$が
+$|x-x_{0}|<\delta$と$|y_{1}-y_{0}|\le \eta$と
+$|y_{2}-y_{0}|\le \eta$が成り立つならば
+\[
+|H_{x}(y_{1})-H_{x}(y_{2})|\le \frac{1}{2}|y_{1}-y_{2}|
+\]
+と
+\[
+|H(x, y_{0})-H(x_{0}, y_{0})|<\frac{\eta}{2}. 
+\]
+が成り立つ．
+$O_{1}=\{x\in \rr^{n}\mid |x-x_{0}|<\delta\}$, 
+$O_{2}=\{y\in \rr^{m}\mid |y-y_{0}|<\eta\}$, 
+$A=\{y\in \rr^{m}\mid |y-y_{0}|\le\eta\}$
+とおく．
+必要なら$\delta$と$\eta$を十分小さく取り
+\[
+O_{1}\times A\subset U
+\]
+が成り立つとしてもよい．
+$H$の定義域を制限して
+\[
+H: O_{1}\times A\subset U\to \rr^{m}
+\]
+とする．
+$F(x_{0}, y_{0})=0$から$H(x_{0}, y_{0})=y_{0}$
+が成り立つことと
+$\delta, \eta$の取り方から
+\begin{align*}
+&|H_{x}(y)-y_{0}|=|H(x, y)-H(x_{0}, y_{0})|\\
+&\le |H(x, y)-H(x, y_{0})|+|H(x, y_{0})-H(x_{0}, y_{0})|\\
+&<\frac{1}{2}|y-y_{0}|+\frac{\eta}{2}\le \eta. 
+\end{align*}
+なので$H(O_{1}\times A)\subset A$であり，$H$は
+\[
+H: O_{1}\times A\to A
+\]
+とみなせる．
+さて，$A$はコンパクトであるから，
+有界で完備な距離空間なのでパラメーター付きのバナッハの不動点定理(定理 \ref{thm:parabana})の仮定を満たすので，
+連続関数$g: O_{1}\to A$で
+\[
+H_{x}(g(x))=g(x)
+\]
+を満たすものが存在することがわかる．
+
+$H(x, y)=y-L^{-1}F(x, y)$
+なので
+\[
+H_{x}(g(x))=g(x)\iff F(x, g(x))=0
+\]
+である．
+さらに
+\begin{align*}
+&|H_{x}(y)-y_{0}|=|H(x, y)-H(x_{0}, y_{0})|\\
+&\le |H(x, y)-H(x, y_{0})|+|H(x, y_{0})-H(x_{0}, y_{0})|\\
+&<\frac{1}{2}|y-y_{0}|+\frac{\eta}{2}\le \eta. 
+\end{align*}
+の計算から
+$|g(x)-y_{0}|<\eta$であるから
+$g$は$g: \to O_{1}\to O_{2}$とみなせて，このような関数は$O_{1}$上唯一存在する．
+不動点の唯一性から$g(x_{0})=y_{0}$もわかる．
+これで定理の前半が示された．
+
+後半の微分可能性について調べよう．
+集合
+$
+\{\, (x, y)\in U\mid \det((\ddd_{y}F)(x, y))\neq 0\, \}
+$
+は開集合
+なので$O_{1}$と$O_{2}$を小さくとれば
+$(\ddd_{y}F)(x, y)$が可逆になることがわかる．
+さて，
+$x_{1}\in O_{1}$を任意に与え，
+$y_{1}=g(x_{1})$
+とおき，
+\[
+A=(\ddd_{x} F)(x_{1}, y_{1})
+\]
+
+\[
+B=(\ddd_{y}F)(x_{1}, y_{1})
+\]
+とおく．
+$F(x_{1}, y_{1})=F(x_{1}, g(x_{1}))=0$であり，また
+$F$はもちろん$(x_{1}, y_{1})$で全微分可能であるから
+任意の$(x, y)\in U$について
+\begin{equation}\label{eq:zenbi}
+F(x, y)=A(x-x_{1})+B(y-y_{1})+e((x, y), (x_{1}, y_{1}))
+\end{equation}
+となり，また
+\begin{equation}
+\lim_{(x, y)\to (x_{1}, y_{1})}
+\frac{e((x, y), (x_{1}, y_{1}))}{|(x, y)-(x_{1}, y_{1})|}
+=0. 
+\end{equation}
+が成り立つ．
+さてここで，後出しだが，$\rr^{n}\times \rr^{m}$
+上のノルムは，
+$\rr^{n}$と$\rr^{m}$のノルムから誘導される$\max$ノルムであるとする．
+すなわち$|(a, b)|=\max\{|a|, |b|\}$ということである．
+他のノルムでもどうせ同値なのであるが，簡単なのでこのように定めておくことにする．また$\rr^{n}$と$\rr^{m}$のノルムは別になんでも構わない．
+式 (\ref{eq:zenbi})と$|(x, y)|\le |x|+|y|$から$\rho>0$を十分小さくとれば，
+$x, y$が$|x-x_{1}|\le \rho$と$|y-y_{1}|\le \rho$を満たすならば
+\begin{equation}\label{eq:elhyouka}
+|e((x, y), (x_{1}, y_{1}))|
+\le 
+\frac{1}{2|B^{-1}|}(|x-x_{1}|+|y-y_{1}|)
+\end{equation}
+である．
+式 (\ref{eq:zenbi})において$y=g(x)$とおき変形すると
+\begin{equation}\label{eq:henkei}
+g(x)-g(x_{1})=-B^{-1}A(x-x_{1})+B^{-1}e((x, g(x)), (x_{1}, g(x_{1})))
+\end{equation}
+であり
+式 (\ref{eq:elhyouka})から，$\rho>0$を十分小さくとれば
+$|x-x_{1}|\le \rho$を満たす$x$について
+\begin{equation}\label{eq:exhyouka}
+|e((x, g(x)), (x_{1}, g(x_{1})))|
+\le 
+\frac{1}{2|B^{-1}|}(|x-x_{1}|+|g(x)-g(x_{1})|)
+\end{equation}
+が成り立つ．
+そして
+式 (\ref{eq:henkei})から$\rho>0$を十分小さくとれば
+$|x-x_{1}|\le \rho$を満たす$x$について
+\begin{align*}
+&|g(x)-g(x_{1})|\le 
+|B^{-1}A||x-x_{1}|
++|B^{-1}||e((x, g(x)), (x_{1}, g(x_{1})))|\\
+&\le |B^{-1}A||x-x_{1}|+\frac{1}{2}|x-x_{1}|
++\frac{1}{2}|g(x)-g(x_{1})|
+\end{align*}
+なので，整理すると，
+$|x-x_{1}|\le \rho$を満たす$x$について
+\begin{equation}\label{eq:gg}
+|g(x)-g(x_{1})|\le M|x-x_{1}|
+\end{equation}
+となる．ここで$M=|B^{-1}A|+1$
+である．
+$\max$ノルムの定義と式 (\ref{eq:gg})
+から$|x-x_{1}|\le \rho$を満たす$x$について
+\[
+|(x, g(x))-(x_{1}, g(x_{1}))|\le M|x-x_{1}|
+\]
+が成り立つ．これを用いると
+\begin{align*}
+\lim_{x\to x_{1}}\frac{|e((x, g(x)), (x_{1}, g(x_{1})))|}{|x-x_{1}|}
+&\le \frac{1}{M}\lim_{x\to x_{1}}\frac{|e((x, g(x)), (x_{1}, g(x_{1})))|}{|(x, g(x))-(x_{1}, g(x_{1}))|}\\
+&=
+\frac{1}{M}\lim_{(x, y)\to (x_{1}, y_{1})}
+\frac{|e((x, y), (x_{1}, y_{1}))|}{|(x, y)-(x_{1}, y_{1})|}\\
+&=0. 
+\end{align*}
+となる．
+ゆえに
+式 (\ref{eq:henkei})から
+\[
+\lim_{x\to x_{1}}\frac{|g(x)-g(x_{1})+B^{-1}A(x-x_{1})|}{|x-x_{1}|}=0
+\]
+が成り立つ．これは$g$が$x_{1}$において全微分可能であり，
+\[
+(\ddd g)(x_{1})=-(\ddd_{x} F)(x_{1}, y_{1})\cdot (\ddd_{y}F)(x_{1}, y_{1})
+\]
+であることを意味している．
+これで証明が終わる．
+\end{proof}
+
+\begin{rmk}
+以上の証明において重要なのは$H$の定義であるが，このようにおくのが少し不明である．ただ，$H$の$y_{0}$のおける$y$方向の微分は$0$になるので，どんな小さいリプシッツ係数でも$y_{0}$の近くでリプシッツ条件を満たすようなるし，
+$H(x_{0}, y_{0})=y_{0}$にもなるので，このように定義したい気持ちを慮ることができる．
+\end{rmk}
+
+
+\section{逆関数定理}
+
+陰関数定理を用いると逆関数定理が比較的簡単に証明できる．
+実は逆関数定理を認めて用いれば陰関数定理も比較的簡単に証明できる．
+
+\begin{lem}\label{lem:tansha}
+$n\in \zz_{\ge 1}$とし，
+$U\subset \rr^{n}$は開集合とする．
+そして$f: U\to \rr^{n}$は$C^{1}$級関数とし，
+$f(a)=b$で，$(\ddd f)(a)$は可逆であるとする．
+このとき$a$の開近傍$V$が存在し，
+$V$上で$f$は単射になる．
+\end{lem}
+\begin{proof}
+$a$の開近傍$V$を十分小さく取り，以下が成り立つようにする．
+\begin{enumerate}
+\item 
+任意の$x\in V$について$\det((\ddd f)(x))\neq 0$である．
+\item $M>0$が存在して任意の$x\in V$について
+$|((\ddd f)(x))^{-1}|<M$が成り立つ．
+\item
+$\epsilon=1/M$として
+任意の$(x, y)\in V\times V$について$|E(x, y)|\le \epsilon$
+が成り立つ．(これは補題 \ref{lem:conti}から$E$が連続であることと$E(a, a)=0$から可能である)
+\end{enumerate}
+背理法で証明する．$f$が$V$上で単射ではないと仮定する．
+すると，$x, y\in V$が存在して
+$x\neq y$と
+$f(x)=f(y)$を満たす．
+$L=(\ddd f)(y)$とおく．
+このとき
+\[
+0=f(x)-f(y)=L(x-y)+e(x, y)
+\]
+となるので$E(x, y)\le \epsilon$から
+$|e(x, y)|\le \epsilon |x-y|$なので
+\[
+|x-y|\le |L^{-1}|\cdot |e(x, y)|\le \epsilon|L^{-1}|\cdot |x-y|
+\]
+が成り立つ．つまり
+\[
+1\le \epsilon|L^{-1}|< \frac{1}{M}M=1
+\]
+なので矛盾する．
+よって$f$は$V$上で単射である．
+\end{proof}
+
+
+\begin{thm}\label{thm:inv}
+$n\in \zz_{\ge 1}$とし，
+$U\subset \rr^{n}$は開集合とする．
+そして$f: U\to \rr^{n}$は$C^{1}$級関数とし，
+$f(a)=b$で，$(\ddd f)(a)$は可逆であるとする．
+このとき，$a$の開近傍$V_{1}\subset U$
+と$b$の開近傍$V_{2}\subset \rr^{n}$
+が存在して$f: V_{1}\to V_{2}$は
+$C^{1}$級微分同相である．つまり$C^{1}$級関数$g: V_{2}\to V_{1}$で$f$の逆関数になるものが存在する．
+そして$g$の微分に関して
+\[
+(\ddd g)(y)=((\ddd f)(g(y)))^{-1}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+補題 \ref{lem:tansha}を用いて
+$a$の開近傍$N$を十分小さく取り，
+$N$上で$f$は単射であるようにする．
+そして
+$F: N\times N\to \rr^{n}$を
+$F(y, x)=y-f(x)$
+と定義すると，
+$F(b, a)=0$で
+$(\ddd_{x} F)(a, b)=L$
+なので$(\ddd_{x} F)(a, b)$は可逆である．
+ゆえに
+陰関数定理より
+$a$の開近傍$V_{1}\subset U$
+と$b$の開近傍$V_{2}\subset \rr^{n}$
+と
+$C^{1}$級関数$g: V_{2}\to V_{1}$が存在して
+$F(y, g(y))=0$と$g(b)=a$が成り立つ．
+つまり任意の$y\in V_{2}$について
+$y=f(g(y))$である．
+これは$f: V_{1}\to V_{2}$が全射であることを意味する．
+証明の始まりで$f$の定義域を単射になるように小さくしたことを踏まえると$f: V_{1}\to V_{2}$は全単射である．よって
+(連続かどうかはわからないけれど)逆写像が存在する．
+このとき任意の$y\in O_{2}$について
+$y=f(g(y))$なので$f^{-1}(y)=g(y)$
+なので，$g$が$f$の逆写像であることがわかる．
+$g$の微分について合成の微分公式からわかる．
+\end{proof}
+
+
+\begin{rmk}
+陰関数定理と逆関数定理は適切に全微分を定義すればバナッハ空間に値をとる関数についても成り立つ．無限次元だとノルムの同値性など成り立たなくなるが，この文章の証明でノルムを恣意的に選んでいるのは直積に$\max$ノルムを採用している部分と
+$E$の連続性を証明するときに作用素ノルムを使っている部分
+なので，ほぼそのままの証明が適用できると思われる．
+\end{rmk}
+
+
+\section{応用}
+
+\begin{thm}[開写像定理]
+$m, n\in \zz_{\ge 1}$とする．
+$U\subset \rr^{m}\times \rr^{n}$を開集合とし
+$f: U\to \rr^{m}$
+は$C^{1}$級写像で点$a\in U$
+において
+$\rank(\ddd f)(a)=m$とする．
+このとき$f(a)$は$f(U)$の内点となる．
+\end{thm}
+\begin{proof}
+$m\times m$次行列$A$と
+$m\times n$次行列$B$
+を用いて
+$(\ddd F)(a)=(A\  B)$と
+表すことにする．
+適当に$U$の座標の順番を並べ替えて
+$A$が可逆行列であるとしてもよい．
+$F: U\times \rr^{n}\to \rr^{m}$
+を
+$F(x, y)=(f(x, y), y)$と定義する．
+このとき
+\[
+(\ddd F)(x, y)=
+\begin{pmatrix}
+(\ddd f)(x) \\
+0 \ \ \  E_{n} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+A & B\\
+0 & E_{n}
+\end{pmatrix}
+\]
+となる．
+いま，$A$が可逆行列なので
+$(\ddd F)(a)$は可逆になる．
+よって$F$に逆関数定理を適応できて，
+$a$の開近傍$M_{1}\times M_{2}$と
+$F(a)$の近傍$W$が存在して
+$F: M_{1}\times M_{2}\to W$は同相写像になる．
+開集合$V_{1}\subset \rr^{m}$と
+$V_{2}\subset \rr^{n}$を
+$V_{1}\times V_{2}$が$F(a)$の開近傍となり，
+$V_{1}\times V_{2}\subset W$
+となるようにとれば，$F$の定義から
+$V_{1}\times V_{2}\subset F(M_{1}\times M_{2})=f(M_{1})\times M_{2}$
+となる．この式から$V_{1}\subset f(M_{1})\subset f(U)$
+なので$f(a)$は$f(U)$の内点であることがわかる．
+\end{proof}
+
+
+\begin{prop}[沈め込み型の局所表示]
+$m, n\in \zz_{\ge 1}$とする．
+$U\subset \rr^{m}\times \rr^{n}$を開集合とし
+$f: U\to \rr^{m}$
+は$C^{1}$級写像で点$a\in U$
+において
+$\rank(\ddd f)(a)=m$とする．
+写像$\pi_{m}: \rr^{m}\times \rr^{n}\to \rr^{m}$
+は$\rr^{m}$への射影とする．
+このとき点$a$の開近傍$V$と
+開集合$O\subset \rr^{m}\times\rr^{n}$
+そして同相写像$\phi: O\to V$が存在して
+$f\circ \phi=\pi_{m}$となる．
+\end{prop}
+\begin{proof}
+$\phi_{1}: \rr^{m}\times \rr^{n}\to \rr^{m}\times \rr^{n}$
+を座標の番号の入れ替えとして，次の条件を満たすものとする．
+\begin{enumerate}
+\item 
+$g=f\circ \phi_{1}$とおいたときに
+$m\times m$次行列$A$と
+$m\times n$次行列$B$
+を用いて
+$(\ddd g)(a)=(A\  B)$と
+表すときに
+$A$が可逆行列である．
+\end{enumerate}
+線形代数の行列の階数の理論からこのような$\phi_{1}$
+は存在する．
+そして
+$F: \phi_{1}^{-1}(U)\times \rr^{n}\to \rr^{m}$
+を
+$F(x, y)=(g(x, y), y)$と定義する．
+このとき
+\[
+(\ddd F)(x, y)=
+\begin{pmatrix}
+(\ddd g)(x) \\
+0 \ \ \  E_{n} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+A & B\\
+0 & E_{n}
+\end{pmatrix}
+\]
+となる．
+いま，$A$が可逆行列なので
+$(\ddd F)(a)$は可逆になる．
+よって$F$に逆関数定理を適応できて，
+$a$の開近傍$M_{1}$と
+$F(a)$の開近傍$M_{2}$
+が存在して$F: M_{1}\to M_{2}$
+が同相写像になる．
+そして$\phi_{2}=F^{-1}$と定義すると
+$\pi_{m}\circ \phi_{2}^{-1}(x, y)=g(x, y)$
+なので
+$\pi_{m}\circ \phi_{2}=g$
+となるから
+$\phi=\phi_{1}\circ \phi_{2}$
+とおけば定理は証明される．
+\end{proof}
+
+
+\begin{prop}[埋め込み型の局所表示]
+$m, n\in \zz_{\ge 1}$とする．
+$U\subset \rr^{m}$を開集合とし
+$f: U\to \rr^{m}\times \rr^{n}$
+は$C^{1}$級写像で点$a\in U$
+において
+$\rank(\ddd f)(a)=m$とする．
+写像$\iota_{m}: \rr^{m}\to \rr^{m}\times \rr^{n}$
+は$\iota_{n}(x)=(x, 0)$で定義される埋め込みであるとする．
+このとき$f(a)$の開近傍$V$と開集合$O\subset \rr^{m}
+\times \rr^{n}$と
+同相写像$\phi: V\to O$が存在して，
+$f^{-1}(V)$上で
+$\phi\circ f=\iota_{n}$
+が成り立つ．
+\end{prop}
+\begin{proof}
+$\phi_{1}: \rr^{m}\times \rr^{n}\to \rr^{m}\times \rr^{n}$
+を座標の番号の入れ替えとして，次の条件を満たすものとする．
+\begin{enumerate}
+\item 
+$g= \phi_{1}\circ f$とおいたときに
+$m\times m$次行列$A$と
+$n\times m$次行列$B$
+を用いて
+\[
+(\ddd g)(a)=
+\begin{pmatrix}
+A\\
+B
+\end{pmatrix}
+\]と
+表すときに
+$A$が可逆行列である．
+\end{enumerate}
+線形代数の行列の階数の理論からこのような$\phi_{1}$
+は存在する．
+そして
+$F:U\times \rr^{n}\to \rr^{m}\times \rr^{n}$を
+$F(x, y)=(g(x), y)$と定義する．
+\[
+(\ddd F)(a, y)=
+\begin{pmatrix}
+A & 0\\
+B & E_{n}
+\end{pmatrix}
+\]
+である．
+このとき$A$の可逆性から
+$(\ddd F)(a, 0)$も可逆になるので逆写像定理より
+$(a, 0)$の十分小さい開近傍
+$N$と
+$(f(a), 0)$の十分小さい開近傍
+$M$をとれば$F: N\to M$は同相写像になる．
+そして$\phi_{2}=F^{-1}$と定義すると，
+$\phi_{2}\circ g(x, y)=
+F^{-1}\circ F(x, 0)=(x, 0)=\iota_{n}$
+なので定理は成り立つ．
+\end{proof}
+
+
+\begin{thebibliography}{9}
+\bibitem{1}
+ユルゲン・ヨスト著, 
+小谷元子訳,
+ポストモダン解析学, 
+シュプリンガー・フェアラーク東京, 
+2000. 
+
+\bibitem{matsu}
+松本幸夫，
+多様体の基礎, 
+東京大学出版会, 
+1988. 
+\bibitem{sugi}
+杉浦光夫, 
+解析入門II, 
+東京大学出版会, 
+1985. 
+\bibitem{2}
+はてなブログ「電波通信」の記事「有限次元ベクトル空間のノルムは全部同値」
+\verb|https://concious4410.hatenablog.com/entry/2015/10/22/170022|
+\bibitem{3}
+はてなブログ「電波通信」の記事「バナッハの不動点定理」
+\verb|https://concious4410.hatenablog.com/entry/2015/10/27/162651|
+
+\bibitem{cartan}
+H. Cartan, 
+\textit{Cours de Calcul Diff\'{e}rentiel}, 
+Hermann, 1967. 
+\bibitem{Dieu}
+J. Dieudonn\'{e}, 
+\textit{Foundation of modern analysis}, 
+Academic Press, 1960. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

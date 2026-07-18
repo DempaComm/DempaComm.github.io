@@ -1,0 +1,883 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{fact*}{事実}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\newcommand{\mm}{\mathfrak{M}}
+\newcommand{\ffnn}{\{f_{n}\}_{n\in \nn}}
+\newcommand{\rrr}{\bar{\mathbb{R}}}
+\newcommand{\s}{\sigma}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+
+
+\title{測度空間と積分そして収束定理}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+			
+	%%%%%%%複素微分と積分について書く
+\maketitle
+この文章では測度空間と測度による積分を定義し、収束定理を証明する。
+\section{測度空間}
+最初のセクションでは可測空間上に測度と呼ばれる集合関数を定義する。セクションの後半では測度の性質を次々述べていく。特に測度の$\s$加法性から導かれる測度の収束定理ともいうべき命題\ref{lim}は後の積分の収束定理の雛形となり、とても重要である。
+
+\begin{df}[測度]$\mu$が$X$上の$\sigma $加法族$\mm$上の測度であるとは
+ \[
+  \mu :\mm \rightarrow [0,\infty]
+ \]
+で
+\[
+\mu(\O)=0
+\]
+かつ,互いに交わらぬ$\mm$の部分集合$\{A_{n}\}_{n\in \nn}\subset \mm$に対して
+ \[
+  \mu \left(\coprod_{n\in \nn }{A_{n}}\right)=\sum_{n=0}^{\infty}\mu (A_{n})
+ \]
+を充たす時に言うこのとき三つ組$(X,\mm, \mu)$を測度空間とも言う。
+\end{df}
+\begin{cau}
+\[
+  \mu \left(\coprod_{n\in \nn }{A_{n}}\right)=\sum_{n=0}^{\infty}\mu (A_{n})
+ \]
+を完全加法性などと呼ぶ。
+\end{cau}
+
+以下では測度に対する便利な性質を証明していく。
+まず最初に包含関係に関する性質から。
+\setcounter{equation}{0}
+\begin{prop}\label{a}
+$(X,\mm,\mu)$を測度空間とするとき以下の事が成り立つ。
+\begin{align}
+&A,B\in \mm,A\cap B=\O\To\mu(A\cup B)=\mu(A)+\mu(B)\\ 
+&A,B\in \mm,\ A\subset B\To\mu(A)\le \mu(B)\\ 
+&A,B\in \mm,A\subset B,\mu(A)<\mgn \To \mu(B\setminus A)=\mu(B)-\mu(A)
+\end{align}
+\end{prop}
+\begin{proof}
+$(1)$について$\{A_n\}_{n\in\nn}$を
+\[
+A_1=A,\ A_2=B,\ A_n=\O\ (n\ge3)
+\]
+と定義すると$\{A_n\}_{n\in\nn}$は互いに交わらず$\{A_n\}_{n\in\nn}\subset\mm$なので
+\[
+\mu \left(\coprod_{n\in \nn }{A_{n}}\right)=\sum_{n=0}^{\infty}\mu (A_{n})
+\]
+が成り立つが$\coprod_{n\in \nn }{A_{n}}=A\cup B$で$\mu(\O)=0$なので
+\[
+\mu(A\cup B)=\mu(A)+\mu(B)
+\]
+が成り立つ。\\ 
+$(2)$について$B\setminus A\in \mm$で$B\setminus A$と$A$は互いに素で$A\subset B$より
+$(B\setminus A)\cup A=B$なので$(1)$より
+\[
+\mu(B)=\mu(B \setminus A)+\mu(A)
+\]
+そして$\mu(B \setminus A)\ge 0$より
+\[
+\mu(B)\ge\mu(A)
+\]
+を得る。\\ 
+$(3)$について$B\setminus A\in \mm$で$B\setminus A$と$A$は互いに素で$A\subset B$より
+$(B\setminus A)\cup A=B$なので$(1)$より
+\[
+\mu(B)=\mu(B \setminus A)+\mu(A)
+\]
+そして$\mu(A)<\mgn$より$\mu(A)$を左辺に移項できて
+\[
+\mu(B\setminus A)=\mu(B)-\mu(A)
+\]
+を得る。
+\end{proof}
+
+
+次に、単調な族とその測度の極限に関する性質を述べる。これらの性質は収束定理の礎になる大事な性質である。
+\setcounter{equation}{0}
+\begin{prop}\label{lim}
+$(X,\mm,\mu)$を測度空間とするとき以下の事が成り立つ。
+	\begin{align}
+	&\{A_n\}_{n\in \nn}\subset \mm\ A_n\subset A_{n+1}\To
+	\mu \left(\bigcup_{n\in \mathbb{N}} A_{n}\right)=
+	\lim_{n \to \infty}\mu (A_{n})\\ 
+	&\{A_n\}_{n\in \nn}\subset \mm,\ A_{n+1}\subset A_{n},\ \mu(A_1)<\mgn\To
+	 \mu \left(\bigcap_{n\in \mathbb{N}} A_{n}\right)=\lim_{n \to \infty}\mu (A_{n})
+	\end{align}
+\end{prop}
+\begin{proof}$(1)$について、まず任意の$n\in\nn$について$\mu(A_n)<\mgn$となる場合を考える。
+帰納的に$\{B_k\}_{k\in\nn}$を
+\[
+B_1=A_1,\ B_n=A_{n}\setminus A_{n-1}\ (n\ge2)
+\]
+と定義すると$\{B_k\}_{k\in\nn}$は互いに素で$\{B_k\}_{k\in\nn}\subset\mm$となりさらに
+\[
+\bigcup_{n\in\nn}A_n=\coprod_{k\in\nn}B_k
+\]
+となる。よって完全加法性から
+\[
+\mu\left(\bigcup_{n\in\nn}A_n\right)=
+\mu\left(\coprod_{k\in\nn}B_k\right)=
+\sum_{k=1}^{\mgn}\mu(B_k)=
+\lim_{n\to \mgn}\left(\sum_{k=1}^n\mu(B_k)\right)
+\]となるが、任意の$n\in\nn$について$\mu(A_n)<\mgn$なので命題\ref{a}の$(1)$より$\mu(B_n)=\mu(A_n)-\mu(A_{n-1})\ (n\ge 2)$であるので
+\[
+\sum_{k=1}^n\mu(B_k)=\mu(A_1)+\sum_{k=2}^n\left(\mu(A_{k})-\mu(A_{k-1})\right)=\mu(A_n)
+\]
+なので結局
+\[
+\mu \left(\bigcup_{n\in \mathbb{N}} A_{n}\right)=\lim_{n \to \infty}\mu (A_{n})
+\]
+を得る。ある$N\in\nn$について$\mu(A_N)=\mgn$のときは$N\le n$なら$\mu(A_n)=\mgn$なので
+\[
+\lim_{n\to\mgn}\mu(A_n)=+\mgn
+\]
+で
+$A_N\subset \bigcup_{n\in\nn}A_n$であるから命題\ref{a}の$(2)$より
+\[
+\mu\left(\bigcup_{n\in\nn}A_n\right)=+\mgn
+\]
+となるから確かに
+\[
+\mu \left(\bigcup_{n\in \mathbb{N}} A_{n}\right)=\lim_{n \to \infty}\mu (A_{n})
+\]
+は成立する。
+$(2)$について$\{B_k\}_{k\in\nn}$を
+\[
+B_k=A_1\setminus A_k
+\]
+と定義すると$B_k\subset B_{k+1}$で
+\[
+\bigcup_{k\in\nn}B_k=A_1\setminus \bigcap_{n\in \nn}A_n
+\]
+であるから$(1)$より
+\[
+\mu\left(A_1\setminus \bigcap_{n\in \nn}A_n\right)=
+\lim_{n\to\mgn}\mu(B_n)=\lim_{n\to\mgn}\mu(A_1\setminus A_n)
+\]
+となるが、$\mu(A_1)<\mgn$と単調減少性より$\mu(\bigcap_{n\in \nn}A_n)<\mgn,\mu(A_n)<\mgn$
+なので命題\ref{a}の$(3)$より
+\[
+\mu\left(A_1\setminus \bigcap_{n\in \nn}A_n\right)=
+\mu(A_1)-\mu(\bigcap_{n\in \nn}A_n)
+\]
+\[
+\mu(A_1\setminus A_n)=\mu(A_1)-\mu(A_n)
+\]なので
+\[
+\mu(A_1)-\mu\left(\bigcap_{n\in \nn}A_n\right)=\lim_{n\to\mgn}\mu(A_1)-\mu(A_n)=\mu(A_1)-\lim_{n\to\mgn}\mu(A_n)
+\]
+よって$\mu(A_1)<\mgn$より
+\[
+\mu \left(\bigcap_{n\in \mathbb{N}} A_{n}\right)=\lim_{n \to \infty}\mu (A_{n})
+\]
+を得る。
+\end{proof}
+
+
+最後に劣加法性を証明する。
+\begin{prop}[劣加法性]$(X,\mm,\mu)$を測度空間とし、
+$\{A_n\}_{n\in \nn}\subset \mm$のとき
+\[
+\mu\left(\bigcup_{n=1}^{\mgn}A_n\right)\le\sum_{n=1}^{\mgn}\mu(A_n)
+\]
+が成立する
+\end{prop}
+\begin{proof}
+まず
+\[
+\forall n\in \nn\ \ 
+\mu\left(\bigcup_{k=1}^nA_k\right)\le
+ \sum_{k=1}^n\mu(A_k)
+\]
+を示す。帰納法で示すが$n=2$の場合を示せば一般の場合はようにわかるので$n=2$の場合のみ示す。命題\ref{a}の$(1),(2)$と$A_1\cup A_2=(A_1\setminus A_2)\cup A_2$より
+\[
+\mu(A_1\cup A_2)=\mu(A_1\setminus A_2)+\mu(A_2)\le \mu(A_1)+\mu(A_2)
+\]
+となるから$n=2$の場合が示された。\\　
+さて定理\ref{lim}の$(1)$より
+\[
+\lim_{n\to\mgn}\mu\left(\bigcup_{k=1}^n\mu(A_k)\right)=
+\mu\left(\bigcup_{n\in\nn}A_n\right)
+\]
+なので$\dpst \forall n\in \nn\ \ \mu\left(\bigcup_{k=1}^nA_k\right)\le
+ \sum_{k=1}^n\mu(A_k)$において$n\to\mgn$とすると
+\[
+\mu\left(\bigcup_{n=1}^{\mgn}A_n\right)\le\sum_{n=1}^{\mgn}\mu(A_n)
+\]
+が従う。
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ココカラ
+\section{積分そして収束定理}
+このセクションでは積分を単関数のクラス、非負可測関数関数のクラス、一般の可測関数のクラスへと順次どんどん定義し拡張していく。その中で基本的だが強力な収束定理が証明されていく。
+
+\begin{df}[単関数の正規表示]
+単関数とは有限個の可測集合$E_1,E_2\cdots E_n$と非負実数$a_1,a_2\cdots a_n$をつかって
+\[
+s=\sum_{k=1}^ma_k\chi_{E_k}
+\]
+と書ける関数の事だったがこの表示は一意的ではない。このことは簡単に了解されると思う。単関数のこのような表示のうち、$s$の取りうる正の値を$a_1,a_2\cdots a_n$（$0$は除く）として
+\[
+s=\sum_{k=1}^{m}a_k\chi_{E_k} \ (E_k=\{s=a_k\})
+\]
+という表示がどんな単関数についても可能だが。このような表示を{\bf 正規表示}という。
+\end{df}
+
+\begin{df}[単関数の積分]単関数$s$の積分を$s$の正規表示$\displaystyle s=\sum_{k=1}^{m}a_k\chi_{E_k} \ (E_k=\{s=a_k\})$を用いて
+\[
+\int_{X}s\ d\mu=\sum_{k=1}^{m}a_k\mu(E_k)
+\]
+と定義する。また$X$の部分集合$E$上の積分を
+\[
+\int_{E}s\ d\mu=\int_{X}s\cdot \chi_{E}\ d\mu
+\]
+と定義する。
+\end{df}
+\begin{cau}
+単関数の積分の定義に現れる$E_k$は$(E_k=\{s=a_k\})$であることに注意しよう。特性関数の取り方が特殊なのである。単関数は特性関数の非負の係数による線型結合で表される関数だが、今の時点では積分は特性関数による表示の仕方によらないかどうかは全く不明なのである。
+\end{cau}
+
+
+\begin{lem}[単関数の積分の線形性]
+２つの可測関数$s,u$と$\al,\be\in [0,+\mgn)$
+\[
+\int_X (\al s +\be u)\ d\mu= \al \int_X s\ d\mu+\be \int_X u\ d\mu
+\]
+が成立する。
+\end{lem}
+\begin{proof}まず$\be=0$のとき、つまり
+\[
+\int_X \al s \ d\mu=\al \int_Xs\ d\mu
+\]
+は積分の定義からすぐにわかる。よって$\al=\be=1$のときつまり積分の加法性
+\[
+\int_X ( s + u)\ d\mu= \int_X s\ d\mu+\int_X u\ d\mu
+\]を示せば定理は示されたことになる。更に帰納法から
+\[
+s=\sum_{i=1}^na_i\chi_{A_i}\ u=b\chi_{B}
+\]
+の場合に積分の加法性を示せば一般の単関数の場合も積分の加法性が導かれる。ただし$s$は正規表示されているとする。まず$s+u$の積分
+を計算するために$s+u$の正規表示を調べよう。簡単にわかるように
+\[
+{\rm Im}(s+u)\subset \{0,b,a_1,a_2,\cdots ,a_n,a_1+b,a_2+b,\cdots ,a_n+b\}
+\]
+である。そして
+\[
+\{s+u=a_i+b\}=A_i\cap B
+\]
+なので$\dpst A=\coprod_{i=1}^nA_i$として
+\[
+\{s+u=a_i\}=A_i\setminus (A_i\cap B),\ \{s+u=b\}=B\setminus (A\cap B)
+\]
+である。これらから$s+u$の正規表示
+\[
+s+u=\sum_{i=1}^n(a_i+b)\chi_{A_i\cap B}+\sum_{i=1}^na_i\chi_{A_i\setminus (A_i\cap B)}+
+b\chi_{B\setminus (A\cap B)}
+\]
+が得られる。よって$s+u$の積分が計算できる。測度の加法性から
+\begin{eqnarray*}
+\int_{X}(s+u)\ d\mu&=&\sum_{i=1}^n(a_i+b)\mu(A_i\cap B)+\sum_{i=1}^na_i\mu(A_i\setminus (A_i\cap B))+
+b\mu(B\setminus (A\cap B))\\ 
+&=&\sum_{i=1}^na_i\mu(A_i\cap B)+\sum_{i=1}^na_i\mu(A_i\setminus (A_i\cap B))+
+\sum_{i=1}^nb\mu(A_i\cap B)+b\mu(B\setminus (A\cap B))\\ 
+&=&\sum_{i=1}^na_i(\mu(A_i\cap B)+\mu(A_i\setminus (A_i\cap B)))+
+b\mu(A\cap B)+b\mu(B\setminus (A\cap B))\\ 
+&=&\sum_{i=1}^na_i\mu(A_i)+b\mu(B)
+\end{eqnarray*}
+である。ここで
+\[
+\sum_{i=1}^n\mu(A_i\cap B)=\mu(B)
+\]を用いた。ところで定義から
+\[
+\int_X s\ d\mu=\sum_{i=1}^na_i\mu(A_i),\ \int_X u \ d\mu=b\mu(B)
+\]
+なので結局
+\[
+\int_X ( s + u)\ d\mu= \int_X s\ d\mu+\int_X u\ d\mu
+\]
+がわかる。
+\end{proof}
+
+
+この補題からすぐに次のことがわかる。
+\begin{cor}
+単関数$s$が$\dpst s=\sum_{k=1}^ma_k\chi_{E_k}$と表示されているとする。ただし正規表示じゃなくとも良い。このとき
+\[
+\int_{X}s\ d\mu=\sum_{k=1}^{m}a_k\mu(E_k)
+\]
+となる、また
+\[
+\int_{A}s\ d\mu=\int_{X}s\cdot \chi_{A}\ d\mu=\sum_{k=1}^{m}a_k\mu(E_k\cap A)
+\]
+\end{cor}
+\begin{proof}上の補題からすぐわかる。後半は特性関数について$\chi_A \cdot ^chi_B=\chi_{A\cap B}$であることからわかる。
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{lem}[単関数の積分の単調性]
+２つの可測関数$s,u$が$s\le u$を充たしてるとき
+\[
+\int_X s\ d\mu\le \int_X u\ d\mu
+\]
+が成立する。
+\end{lem}
+\begin{proof}$s,u$は正規表示で
+\[
+s=\sum_{i=1}^na_i\chi_{A_i},\ u=\sum_{j=1}^mb_j\chi_{B_j}
+\]
+と表示されてるとしよう。この時
+\[
+\int_X s\ d\mu=\sum_{i=1}^na_i\mu(A_i),\ \int_Xu\ d\mu=\sum_{j=1}^mb_j\mu(B_j)
+\]
+である。さて$\{A_i\},\{B_j\}$は正規正規の定義から共に互いに素な族である。そして
+\[
+A_i=\coprod_{j=1}^m A_i\cap B_j,\ B_j=\coprod_{i=1}^n B_j\cap A_i
+\]である。
+ここで$A_i\cap B_j\neq \O$のとき$s|A_i\equiv a_i,\ u|B_j\equiv b_j$と$s\le u$から
+\[
+a_i\le b_j
+\]
+である。よって
+\[
+a_i\mu(A_i\cap B_j)\le b_j\mu(A_i\cap B_j)
+\]がわかる。
+そして
+\begin{eqnarray*}
+\int_X s\ d\mu&=&\sum_{i=1}^na_i\mu(A_i)=
+\sum_{i=1}^na_i\left(\sum_{j=1}^m\mu(A_i\cap B_j)\right)\\ 
+&=&\sum_{i=1}^n\sum_{j=1}^ma_i\mu(A_i\cap B_j)
+\le \sum_{i=1}^n\sum_{j=1}^mb_j\mu(A_i\cap B_j)\\ 
+&=&\sum_{j=1}^m\sum_{i=1}^nb_j\mu(A_i\cap B_j)
+=\sum_{j=1}^mb_j\left(\sum_{i=1}^n\mu(A_i\cap B_j)\right)\\ 
+&=&\sum_{j=1}^mb_j\mu(B_j)=\int_Xu\ d\mu
+\end{eqnarray*}
+となり定理が示された。
+\end{proof}
+
+
+
+\begin{df}[非負値可測関数の積分]非負可測関数$f$に対して
+\[
+\int f \ d\mu := \sup \{\int s\ d\mu \ |\ sは単関数で0\le s\le fを充たす \}
+\]と定義する。
+また、
+\[
+\int_Ef\ d\mu=\int_X\chi_{E}f\ d\mu 
+\]
+と定義する。
+\end{df}
+
+単関数の積分の単調性から、単関数に対する積分と、この非負可測関数に対する積分は、単関数に対して一致する。\\ 
+非負可測関数の定義から明らかに次のことがわかる。
+\begin{prop}
+２つの非負可測関数$f,g$が$f\le g$を充たすならば
+\[
+\int_X f\ d\mu \le \int_{X}g\ d\mu
+\]
+\end{prop}
+\begin{proof}[{\bf 証明略}]
+\end{proof}
+
+
+\begin{cor}非負可測関数について
+\[
+\int_X f\ d\mu\ge 0
+\]
+\end{cor}
+
+
+\begin{prop}非負可測関数$f$と$a\in [0,+\mgn)$について次が成り立つ
+\[
+\int_X af\ d\mu =a\int_Xf\ d\mu
+\]
+\end{prop}
+\begin{proof}
+明らかであろう。
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{thm}[単調収束定理]$X$上の非負可測関数列
+$\ffnn$が
+ \[
+  f_{n}\le f_{n+1}
+ \]を充たすとし、$\displaystyle f(x):=\lim_{n\to \infty}f_{n}(x)$と置く、このとき$f$は可測であり、
+ \[
+  \lim_{n\to \infty}\int_X f\ d \mu =\int_X f\ d\mu
+ \] が成立する。
+\end{thm}
+\begin{proof}
+$\forall n\in \nn \ f_{n}\le f$より明らかに$\displaystyle \int_X f_{n}\ d\mu \le \int_X f\ d\mu$が成り立つので
+ \[
+  \lim_{n\to \infty}\int_X f_{n}\ d\mu \le \int_X f\ d\mu
+ \]よって以下逆向きの不等号を示す。\\
+$0\le s \le f$となる単関数$s$を任意に与え、互いに交わらぬ可測集合$\{S_k\}$を用いて$s$は
+ \[
+  s=\sum_{k=1}^{m}a_k\chi_{S_k}
+ \]
+という形とする。
+ $t\in [0,1)$を任意に固定し、そして$E_{n}:=\{x\ |\ 0\le ts(x) \le f_{n}(x)\}$と置くと関数列の単調性から$E_{n}\subset E_{n+1}$がわかり$t<1$から
+$\bigcup_{n\in \nn }E_{n}=X$を得る。そして
+ \[
+  \int_{X} f_{n}\ d\mu \ge \int_{E_{n}}f_{n}\ d\mu \ge t\int_{E_{n}} s\ d\mu
+ \]が成り立ち、単関数の積分の定義と命題\ref{lim}から
+ \[
+  \lim_{n\to \infty} \int_{E_{n}} s\ d\mu =\lim_{n\to \infty} \sum_{k=1}^ma_k\mu(S_k\cap E_n)
+=\sum_{k=1}^m\lim_{n \to \infty} a_k\mu(S_k\cap E_n)=\sum_{k=1}^ma_k\mu(S_k)=\int_{X}s\ d\mu
+ \]となりこれから
+ \[
+  \lim _{n\to \infty} \int_{X} f_{n}\ d\mu \ge t\int_{X} s\ d\mu
+ \]$t\uparrow 1$とし、
+ \[
+  \lim _{n\to \infty} \int_{X} f_{n}\ d\mu \ge \int_{X} s\ d\mu
+ \]
+$s$の上限をとり、
+ \[
+  \lim _{n\to \infty} \int_{X} f_{n}\ d\mu \ge \int_{X} f\ d\mu
+ \]を得る。
+\end{proof}
+\begin{prop}[非負可測関数の積分の加法性]
+非負可測関数$f,g$について次が成り立つ
+\[
+\int_X(f+g)\ d\mu=\int_Xf\ d\mu+\int_Xg\ d\mu
+\]
+\end{prop}
+\begin{proof}
+非負可測関数は下から単調に単関数で近似出来ることと単関数の積分の加法性と単調収束定理からすぐにわかる。
+\end{proof}
+
+
+
+\begin{thm}[Fatouの補題]\label{fatou}$X$上の非負関数族$\ffnn$について
+\[
+\int_X\liminf_{n\to \mgn}f_n\ d\mu\le \liminf_{n\to \mgn}\int_X f_n\ d\mu
+\]が成り立つ。
+\end{thm}
+
+\begin{proof}自然数$n\in \nn$に対して
+\[
+g_{n}(x)=\inf_{k\ge n}f_{k}(x)
+\]と関数列$\{g_n\}_{n\in \nn}$を定義するとこの関数族は可測でかつ単調増加で
+\[
+\lim_{n\to\mgn}g_{n}(x)=\liminf_{n\to \mgn}f_{n}(x)
+\]
+となるので単調収束定理より
+\[
+\int_X\liminf_{n\to \mgn} f_n\ d\mu =\int_X\lim_{n\to\mgn}g_n\ d\mu=\lim_{n\to\mgn}\int_Xg_n\ d\mu
+\]となる。さて$g_n$の定義より$k\ge n$ならば$g_n\le f_k$となるから$k\ge n$ならば
+\[
+\int_Xg_n\le \int_Xf_k\ d\mu
+\]が成り立つから
+\[
+\int_Xg_n\le \inf_{k\ge n}\left(\int_Xf_k\ d\mu\right)
+\]となり、$n\to\mgn$として
+\[
+\lim_{n\to\mgn}\int_Xg_n\le \lim_{n\to\mgn}\inf_{k\ge n}\left(\int_Xf_k\ d\mu\right)
+=\liminf_{n\to \mgn}\int_Xf_k\ d\mu
+\]
+が成り立つので
+\[
+\int_X\liminf_{n\to \mgn}f_n\ d\mu\le \liminf_{n\to \mgn}\int_X f_n\ d\mu
+\]
+\end{proof}
+\begin{cau}
+$\dpst \liminf_{n\to \mgn} a_n=\lim_{n\to\mgn}(\inf_{k\ge n}a_k)$に注意する
+\end{cau}
+
+\begin{df}[一般の可測関数の積分と可積関数]
+$f=f_{+}-f_{-}$と分解できるのでこれを用いて
+\[
+\int_X f\ d\mu=\int_X f_{+}\ d\mu-\int_X f_{-}\ d\mu
+\]と定義する。
+\end{df}
+
+
+
+\begin{lem}[積分の三角不等式]
+\[
+\left|\int_X f\ d\mu \right|\le \int_X |f|\ d\mu
+\]
+\end{lem}
+\begin{proof}
+\[
+\left|\int_X f\ d\mu \right|=\left|\int_X f_{+}\ d\mu-\int_X f_{-}\ d\mu \right|\le
+\int_X f_{+}\ d\mu+\int_X f_{-}\ d\mu=\int_X (f_{+}+f_{-})\ d\mu=\int_X |f|\ d\mu
+\]
+\end{proof}
+
+\begin{thm}[優収束定理、ルベーグの収束定理]$X$上の関数族$\ffnn$は$\displaystyle \lim_{n\to \infty}f_n=f$（各点収束）であるとし可積分関数$g$が存在して
+ \[
+  |f_n|\le g
+ \]
+を満たすとする。この時$f$も可積分であり
+ \[
+  \lim_{n\to \infty}\int_X f_n\ d\mu=\int_X f\ d\mu
+ \]が成立する。
+\end{thm}
+
+\begin{proof}
+仮定から
+\[
+|f|\le g
+\]
+がわかり
+\[
+|f-f_n|\le|f|+|f_n|\le 2g
+\]
+となるので
+\[
+2g-|f-f_n|\ge 0
+\]
+である。
+Fatouの補題から
+\[
+\int_X 2g\ d\mu\le \liminf_{n\to \mgn}\int_X 2g-|f-f_n|\ d\mu
+\]
+で
+\[
+\int_X 2g-|f-f_n|\ d\mu=\int_X 2g\ d\mu-\int_X |f-f_n|\ d\mu
+\]
+更に
+\[
+\liminf_{n\to \mgn}(-\int_X |f-f_n|\ d\mu)=-\limsup_{n\to \mgn}\int_X |f-f_n|\ d\mu
+\]
+なので
+\[
+\int_X 2g\ d\mu\le \liminf_{n\to \mgn}\int_X 2g-|f-f_n|\ d\mu=
+\int_X 2g\ d\mu-\limsup_{n\to \mgn}\int_X |f-f_n|\ d\mu
+\]
+よって
+\[
+\limsup_{n\to \mgn}\int_X |f-f_n|\ d\mu\le 0
+\]
+$\int_X |f-f_n|\ d\mu\ge 0$なので結局
+\[
+\lim_{n\to \mgn}\int_X |f-f_n|\ d\mu=0
+\]
+を得る。あとは積分の三角不等式を用いればわかる。
+\end{proof}
+
+\begin{cau}
+実は上で述べた優収束定理の証明は可測関数の引き算をしてるので不定形な演算をしてる可能性を除去しなければならないが$f$が可積関数なら$\mu(\{ f(x)=\mgn\})=0$なので適切に修正出来る。証明が長くなるのが面倒だったのでここで注意するに留める。\\ 
+また実数列$\{a_n\}$と実定数$r$について
+\[
+\liminf_{n\to \mgn}(r-a_n)=r-\limsup_{n\to\mgn}a_n
+\]
+となることにも注意せよ。（数列の上極限、下極限がそれぞれその数列の最大の集積点、最小の集積点であることを鑑みればすぐにわかる。）
+\end{cau}
+
+\begin{cor}[有界収束定理]測度空間$(X,\mm,\mu)$が$\mu(X)<\mgn$であり、
+$X$上の可測関数列$\{f_n\}_{n\in\nn}$が有界つまり
+\[
+\exists M>0\ \forall x\in X\ \forall n\in \nn\ |f_n(x)|\le M
+\]
+を充たすとき
+\[
+\lim_{n\to\mgn}\int_Xf_n\ d\mu=\int_X\lim_{n\to\mgn}f_n\ d\mu
+\]
+が成り立つ。
+\end{cor}
+\begin{proof}[証明略]
+\end{proof}
+
+
+\setcounter{equation}{0}
+次に述べる2つの定理は優収束定理の系だが、単に「優収束定理より」とだけ述べられて使われることが多い。
+\begin{thm}[優収束定理の系：極限]\label{abc}$(X,\mm,\mu)$を測度空間、$T$を距離空間とし、$a\in T$とする。そして写像$f:X\times T\to \rr$に対して$a\in T$の近傍$N$と可積分関数$\phi$が存在して
+\[
+\forall x\in X\ \forall t\in N\ |f(x,t)|\le \phi(x)
+\]を充たすとし、各$x\in X$に対して$\dpst \lim_{t\to a}f(x,t)$が存在すると仮定する。このとき、$a\in T$に対して
+\[
+\lim_{t\to a}\int_{X}f(x,t)\ d\mu(x)=\int_{X}\lim_{t\to a}f(x,t)\ d\mu(x)
+\]
+が成り立つ。
+\end{thm}
+\begin{proof}
+\[
+F(t)=\int_{X}f(x,t)\ d\mu
+\]
+と置くさて
+次の距離空間の極限に関する初等的な事実を思い出そう
+\begin{fact*}\label{jijitu}距離空間$X$から距離空間$Y$への写像$f:X\to Y$について以下は同値
+\begin{eqnarray}
+&\lim_{x\to a}f(x)=\al\\ 
+&\lim_{n\to \mgn}x_n=aかつ\forall n\in \nn\  x_n\neq aとなるX内の任意の点列\{x_n\}_{n\in \nn}について\lim_{n\to \mgn}f(x_n)=\al
+\end{eqnarray}
+\end{fact*}
+これを念頭に置いて$a$という値を取らない$a$に収束する点列$\{t_n\}_{n\in \nn}$を任意に与え、
+\[
+g_n(x)=f(x,t_n)
+\]
+と置く。すると十分大きい番号$N$について$n\ge N$ならば$t_n\in N$なので$n\ge N$ならば
+\[
+\forall x\in X\ \ |g_n(x)|\le \phi(x)
+\]
+なので優収束定理から
+\[
+\lim_{n\to \mgn}\int_{X}g_n(x)\ d\mu=\int_{X}\lim_{n\to \mgn}g_n(x)\ d\mu
+\]となるが$\dpst \lim_{n\to \mgn}g_n(x)=\lim_{t\to a}f(x,t)$なので
+\[
+\lim_{n\to \mgn}F(t_n)=\lim_{n\to \mgn}\int_{X}f(x,t_n)\ d\mu(x)=\int_{X}\lim_{t\to a}f(x,t)\ d\mu(x)
+\]
+$\{t_n\}$は任意であったから
+\[
+\lim_{t\to a}F(t)=\int_{X}\lim_{t\to a}f(x,t)\ d\mu(x)
+\]
+$F$に上で述べた事実を用いて結局
+\[
+\lim_{t\to a}\int_{X}f(x,t)\ d\mu(x)=\int_{X}\lim_{t\to a}f(x,t)\ d\mu(x)
+\]
+を得る。
+\end{proof}
+\begin{cau}
+\end{cau}
+
+
+\begin{cor}[優収束定理の系：連続性]$f$を上の定理と同じ仮定を充たすとし、更に各$x\in X$について
+\[
+\lim_{t\to a}f(x,t)=f(x,a)
+\]
+が成り立つとする。このとき
+\[
+\lim_{t\to a}\int_{X}f(x,t)\ d\mu(x)=\int_{X}f(x,a)\ d\mu(x)
+\]つまり関数
+\[
+F(t)=\int_{X}f(x,t)\ d\mu(x)
+\]
+は点$a\in T$で連続である。
+\end{cor}
+\begin{proof}定理\ref{abc}よりすぐに分かる。
+\end{proof}
+
+
+\begin{thm}[優収束定理の系：微分]$(X,\mm,\mu)$を測度空間、$I$をユークリッド空間$\rr$の開集合とし、$a\in I$とする。更に写像$f:X\times I\to \rr$は各$t\in I$について可積分で各$x\in X$を固定する毎に$f(x,t)$は$t$で偏微分可能であるとし、更に$\dpst \frac{\partial f}{\partial t}$に対して点$a\in I$の近傍$N$と可積分関数$\phi$が存在して
+\[
+\forall x\in X\ \forall t\in N\ \left|\frac{\partial f}{\partial t}(x,t)\right|\le \phi(x)
+\]を充たすとするこのとき、
+\[
+\frac{d}{dt}\biggl|_{t=a}\int_X f(x,t)\ d\mu(x)=\int_X \frac{\partial f}{\partial t}(x,a)\ d\mu(x)
+\]
+\end{thm}
+\begin{proof}
+\[
+F(t)=\int_X f(x,t)\ d\mu(x)
+\]
+と置くと仮定から$F:I\to \rr$である。（つまり無限大という値を取らない。）さて、$h\in \rr$が十分$0$に近いときに$a+h\in N$である。そして平均値の定理より
+\[
+\frac{f(x,a+h)-f(x,a)}{h}=\frac{\partial f}{\partial t}(x,a+\theta_xh)
+\]
+で$h$を十分小さく取れば$\forall x\in X\ a+\theta_xh\in N$なので結局$h$が十分小さいとき
+\[
+\forall x\in X\ \left|\frac{f(x,a+h)-f(x,a)}{h}\right|\le \phi(x)
+\]
+で$h\to 0$のとき$\dpst \frac{f(x,a+h)-f(x,a)}{h}\to \frac{\partial f}{\partial t}(x,a)$なので定理\ref{abc}より
+\begin{eqnarray*}
+\lim_{h\to 0}\frac{F(a+h)-F(a)}{h}=\lim_{h\to 0}\int_X\frac{f(x,a+h)-f(x,a)}{h}\ d\mu(x)\\ 
+=\int_X\lim_{h\to 0}\frac{f(x,a+h)-f(x,a)}{h}\ d\mu(x)=\int_X \frac{\partial f}{\partial t}(x,a)\ d\mu(x)
+\end{eqnarray*}
+であり、
+\[
+\lim_{h\to 0}\frac{F(a+h)-F(a)}{h}=\frac{d}{dt}\biggl|_{t=a}\int_X f(x,t)\ d\mu(x)
+\]
+なので定理がわかる。
+\end{proof}
+
+\section{零集合}
+このセクションでは零集合を定義し、その扱いを簡単に紹介する。
+
+{\df[零集合]
+測度空間$(X,\mm,\mu)$に置いて$N\subset X$が零集合であるとは
+\[
+\mu(N)=0
+\]
+となること。
+}
+
+
+\begin{prop}[零集合の可算和]測度空間$(X,\mm,\mu)$の部分集合族$\{A_i\}_{i\in \nn}\subset \mm$
+が零集合ばかりからなるとする。このとき$\dpst \bigcup_{i\in \nn}A_i$も零集合である。
+\end{prop}
+{\proof 測度の劣加法性から明らかである。}
+
+\begin{prop}[零集合上の積分]$N$を測度空間$(X,\mm,\mu)$の零集合とし、$f$を任意の可測関数とする。このとき
+\[
+\int_{N}f\ d\mu=0
+\]
+\end{prop}
+{\proof $f$が単関数の場合に示せば他の場合は積分の定義からすぐに分かる。}
+
+\begin{prop}[可積分関数と零集合]
+可積分関数$f$について
+\[
+\mu(\{f=+\mgn\})=\mu(\{f=-\mgn\})=0
+\]
+つまり$\{f=+\mgn\},\ \{f=-\mgn\}$は零集合である。
+\end{prop}
+\begin{proof}
+$\{|f|=+\mgn\}=\{f=+\mgn\}\cup\{f=-\mgn\}$なので$f\ge 0$のとき$\{f=+\mgn\}$が零集合であることを証明すれば良い。$E=\{f=+\mgn\}$と置く。任意の$n\in \nn$について
+\[
+n\cdot \chi_{E}\le f
+\]
+なので
+\[
+\mu(E)\le \frac{1}{n}\int_X f\ d\mu
+\]
+だが、$\dpst \int_X f\ d\mu<\mgn$なので$n\to \mgn$として$\mu(E)=0$を得る。
+\end{proof}
+
+\begin{df}[殆ど至る所等しい]
+測度空間$(X,\mm,\mu)$上の２つの可測関数$f,g$が殆ど至る所等しいとは集合$\{f\neq g\}$が零集合となることである。$f,g$が殆ど至る所等しいことを
+\[
+f=g \ a.e.\ \mu
+\]
+だとか、$\mu$を省略して
+\[
+f=g \ a.e.
+\]
+と書く。$a.e.$は"almost everywhere"の意味である。
+\end{df}
+
+\begin{thm}
+以上で述べた補題、命題、定理群を「零集合を除いた」形に出来る。
+\end{thm}
+
+実は可積分関数同士の和は零集合の概念を用いないと定義すらできない。なのでこのセクションを急造したわけである。
+
+
+\begin{prop}[積分の線形性]
+２つの可積分関数$f,g$と$\al,\be\in \rr$について
+\[
+\int_X(\al f +\be g)\ d\mu =\al \int_Xf\ d\mu+\be\int_X g\ d\mu
+\]
+\end{prop}
+\begin{proof}
+証明は明らかであろう。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9
+}\bibitem{1}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\bibitem{2}伊藤清三,ルベーグ積分入門,数学選書4,裳華房,1963
+\bibitem{3}梅垣壽春・大矢雅則・塚田真,測度・積分・確率,共立出版,1987
+\bibitem{4}小谷眞一,測度と確率,岩波書店,2005
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

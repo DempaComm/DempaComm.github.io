@@ -1,0 +1,547 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{極限集合の話}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では極限集合を定義し、その基本的な性質を紹介する(命題\ref{ume}、\ref{hei}、系\ref{kei})。この極限集合とその基本的な性質はホイットニーの埋め込み定理を証明する際によく利用されるが、証明を見たことがなかったので、証明をつけてみた。
+極限集合は多様体の間の写像の場合に利用されるところしか見たことがないのだが、厳密に証明すると写像の定義域が$\sigma$コンパクトな局所コンパクト距離化可能空間で、写像のコドメインが距離化可能空間である場合に証明できることがわかるのでそのように証明している。また、やろうと思えばもっと広いクラスの空間の間の写像で証明ができると思われる。
+しかしながらそのような一般化に意味があるかといえば特に意味はなく、ただ使われている道具がハッキリする程度の効能しかないように私は思うし、普通の多様体は距離化可能であるということを宣伝するためにも距離化可能空間程度の仮定にとどめておく。
+\par
+\emph{$\sigma$コンパクトな位相多様体は距離化可能であることを強く注意しておく。}\footnote{一般に位相多様体において、パラコンパクト性と距離化可能性は同値である。}このことはウリゾーンの距離化可能定理や、$\sigma$コンパクトな位相多様体には常にリーマン計量が存在することから分かる。\footnote{リーマン計量から多様体の位相と両立する距離がおなじみの方法で構成できる。}多様体の位相に関するとても強い性質なのだが、あまり注意されてないように思うので強く注意しておく。恐らくリーマン計量の存在性から従うことなのであまり強く注意しないのかもしれない。
+\par
+この文章の主要部分はセクション3である。基本事項がわかっている読者はここだけ読めばよい。
+\par
+この文章では位相空間$X$の点$a$の近傍系を$\mathfrak{N}(a)$で表し、$X$の部分集合$A$の閉包を$\cl_X(A)$、$A$の内核を$\nai_X(A)$で表す。
+\section{準備}
+
+\begin{df}[点列]
+位相空間$X$内の点列とは写像$\al:\nn\to X$のことである。この文書では簡単に$\{\al_i\}$などと書く。
+\end{df}
+
+\begin{df}[部分列]
+$X$内の点列$\be$が点列$\al$の部分列であるとは狭義単調な写像$\phi:\nn\to \nn$が存在して
+\[
+\be=\al \circ \phi
+\]
+と表されることである。すなわち$\{\beta_i\}$は$\{\al_{\phi(i)}\}$という形をしている。
+\end{df}
+
+
+\begin{df}[点列の収束]
+$X$内の点列$\al$が$X$の点$p$に収束するとは
+\[
+\forall N\in \mathfrak{N}(p)\ \exists M\in\nn\ \forall n\ge M\ (\al_n\in V)
+\]
+が成り立つことである。$\{\al_n\}$が$p$に収束することを$\lim_{n\to \infty}\al_n=p$と書いたり、$\al_n\to p$と書いたりする。
+\end{df}
+距離空間$(X,d)$においては$\al_n\to p$ in $X$と$d(\al_n,p)\to 0$ in $\rr$は同値である。
+
+\begin{df}
+位相空間$X$の部分集合$A$と点$p$について$p$が$A$の集積点であるとは
+\[
+\forall N\in \mathfrak{N}(p)\ (N\setminus \{p\})\cap A\neq \O
+\]
+が成り立つことである。$A$の集積点全体を$A^d$で表すことにする。
+\end{df}
+
+以下の二つの補題は距離空間の基本的な命題であるが、一応紹介しておく。証明は省略する。
+
+\begin{lem}\label{cl}
+距離空間$(X,d)$とその部分集合$A$について以下は同値である。
+\begin{enumerate}
+\item $A$は$(X,d)$の閉集合。
+\item $X$内の点列$\{a_n\}$が$a_n\in A$と$a_n\to a$をみたすならば$a\in A$
+\end{enumerate}
+\end{lem}
+
+\begin{lem}\label{cont}
+距離化可能空間の間の写像$g:X\to Y$について以下は同値である。
+\begin{enumerate}
+\item $g$は連続写像
+\item $X$内の点列$\{a_n\}$ついて$a_n\to a$ならば、$Y$内の点列$\{g(a_n)\}$は$g(a_n)\to g(a)$を充たす。
+\item $X$の部分集合$A$について$g(\cl_X(A))\subset \cl_Y(g(A))$
+\end{enumerate}
+\end{lem}
+
+\begin{cau}
+補題\ref{cont}について$(1)$と$(3)$は一般の位相空間の間の写像でも同値になる。
+\end{cau}
+
+\begin{df}
+連続写像$f:X\to Y$が\textbf{埋め込み}であるとは、$f:X\to f(X)$が同相写像となることをいう。
+つまり、$f$が単射で、$f^{-1}:f(X)\to X$が連続ということである。
+\end{df}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{点列の集積の概念について}
+まずは数列に関する二つの集積点の概念を紹介しよう。
+\par
+\textbf{このセクションでは$X$は距離化可能空間上で考えているものとする。}
+\begin{df}
+$\{x_i\}_{i\in \nn}$が「点列として集積点を持つ」とは
+\[
+\exists a\in X\ \forall N\in \mathfrak{N}(a)\ \card(\{i\in \nn\mid x_i\in N\})=\aleph_0
+\]
+が成り立つことである。
+\end{df}
+
+\begin{df}
+ちなみに$\{x_i\}_{i\in \nn}$が「集積点を持つ」とは
+\[
+\{x_i\mid i\in \nn\}^d\neq \O
+\]
+つまり集合として集積点を持つということである。
+\end{df}
+\begin{cau}
+以降では「点列として集積点を持つ」という概念しか使わず、集合として集積点を持つ方は使わない。
+点列が集積点を持つと言った場合には普通は「点列として集積点を持つ」という意味で解釈すると思うが、集合として集積点を持つ意味と紛らわしいので違いを強調するために一応両方ともに定義として紹介した。上の二つの定義はもちろん同値ではない。（考えてみよ。）
+\par
+また、点列として集積点を持つことは同相写像で保たれる性質であることに注意しよう。
+\end{cau}
+以下ではまず点列として集積点をもつことの必要十分条件を決定して行く。
+\begin{prop}\label{aaa}
+以下は同値である。
+\begin{enumerate}
+\item $\{x_i\}$が点列として集積点を持つ
+\item $\{x_i\mid i\in \nn\}^d\neq \O$または$\exists n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})=\aleph_0$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+まず$(1)\To (2)$を証明しよう。
+そのためには$(1)$と$\forall n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})<\aleph_0$を
+仮定して$\{x_i\mid i\in \nn\}^d\neq \O$を導けばよい。
+まず$(1)$から
+\[
+\exists a\in X\ \forall N\in \mathfrak{N}(a)\ \card(\{i\in \nn\mid x_i\in N\})=\aleph_0
+\]
+が成り立つ。
+この点$a\in X$は集合$\{x_i\mid i\in \nn\}$には属しない。
+なぜなら今は
+\[
+\forall n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})<\aleph_0
+\]
+を仮定しているからである。よって
+\[
+\forall N\in \mathfrak{N}(a)\ (N\setminus \{a\})\cap \{x_i\mid i\in \nn\}\neq \O
+\]
+である。即ち$a\in \{x_i\mid i\in \nn\}^d$なので$(2)$が導かれた。
+\par
+次に$(2)\To (1)$を証明しよう。
+まず、$\{x_i\mid i\in \nn\}^d\neq \O$ならば、$\{x_i\mid i\in \nn\}^d$から点$a\in X$を取ればこれは集合
+$\{x_i\mid i\in \nn\}$の集積点であることから
+\[
+\forall N\in \mathfrak{N}(a)\ \card(\{i\in \nn\mid x_i\in N\})=\aleph_0
+\]
+となることがわかる。
+\par
+次に$\exists n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})=\aleph_0$ならば$x_n$について、もちろん
+\[
+\forall N\in \mathfrak{N}(x_n)\ \card(\{i\in \nn\mid x_i\in N\})=\aleph_0
+\]
+となるのでいづれにせよ$(1)$が証明された。
+\end{proof}
+%%%%
+\begin{prop}
+$\{x_i\}$が点列として集積点を持つ$\iff$ $\{x_i\}$は収束する部分列を持つ。
+\end{prop}
+\begin{proof}
+まず、$\{x_i\}$が収束する部分列を持つとして点列として集積点を持つことを示そう。
+部分列$\{x_{\phi(i)}\}$は点$a\in X$に収束すると仮定する。ここで$\phi:\nn\to \nn$は狭義単調関数である。
+$a\in X$は$\{x_{\phi(i)}\}$の収束点なので
+\[
+\forall N\in \mathfrak{N}(a)\ \card(\{i\in \nn\mid x_{\phi(i)}\in N\})=\aleph_0
+\]
+よって特に
+\[
+\forall N\in \mathfrak{N}(a)\ \card(\{i\in \nn\mid x_{i}\in N\})=\aleph_0
+\]
+なのでつまり$\{x_i\}$は点列として集積点を持つ。
+\par
+逆を示そう。そのために定理\ref{aaa}を利用する。$X$の位相と両立する距離の一つを$d$とする。
+\par
+もし$\{x_i\mid i\in \nn\}^d\neq \O$ならばここから点$a\in X$をとって、$d(a,x_{\phi(i)})<1/i$となるように
+部分列$\{x_{\phi(i)}\}$を取れば、これは$a$に収束する。
+\par
+もし$\exists n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})=\aleph_0$ならば
+$x_{\phi(i)}=x_n$となる部分列$\{x_{\phi(i)}\}$（これは定数列である。）を取ればこれは点$x_n$に収束する。もちろん$\phi$は狭義単調増加関数である。
+\end{proof}
+
+\begin{prop}
+$\{x_i\}$が点列として集積点をもつ$\iff$
+\[
+\exists K:cpt\ \forall N\in \nn\ \exists n\ge N\ x_n\in K
+\]
+\end{prop}
+\begin{proof}
+（$\Longleftarrow$の証明）
+\par
+仮定から単調増加数列$\phi:\nn\to \nn$を$x_{\phi(i)}\in K$となるようにとることができる。
+$K$はコンパクトなので$\{x_{\phi(i)}\}$の部分列で収束するものが存在する。
+ところでそもそも$\{x_{\phi(i)}\}$は$\{x_i\}$の部分列なので$\{x_i\}$は収束する部分列を持つことが言えた。
+\par
+（$\Longrightarrow$の証明）
+\par
+$\{x_i\}$が点列として集積点をもつと、収束する部分列$\{x_{\phi(i)}\}$が存在する。ここで$\phi:\nn\to \nn$は単調増加写像である。
+この部分列$\{x_{\phi(i)}\}$の収束点を$a\in X$とし、
+\[
+K=\{x_{\phi(i)}\mid i\in \nn\}\cup \{a\}
+\]
+とすると$K$はコンパクトである。さらに任意の$n\in \nn$について$\phi(n)\ge n$なので
+\[
+\exists K:cpt\ \forall N\in \nn\ \exists n\ge N\ x_n\in K
+\]
+が成り立つ。
+\end{proof}
+以上を合わせて以下を得る
+\begin{prop}\label{ensemble}
+距離空間$(X,d)$内の点列$\{x_i\}$について以下は同値である。
+\begin{enumerate}
+\item $\{x_i\}$は点列として収束する。
+\item $\{x_i\mid i\in \nn\}^d\neq \O$または$\exists n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})=\aleph_0$
+\item $\{x_i\}$は収束する部分列を持つ。
+\item $\exists K:cpt\ \forall N\in \nn\ \exists n\ge N\ x_n\in K$
+\end{enumerate}
+\end{prop}
+次のセクションで利用するのは主に点列として収束することの否定である。次のように定義して用いる。
+\begin{df}
+$x_i\to \infty$を$\{x_i\}$が点列として集積点を持たないことと定義する。
+\end{df}
+$x_i\to \infty$は単に点列として集積点を持つことの否定なので、命題\ref{ensemble}から直ちに以下の同値性が従う。
+\begin{prop}
+距離空間$(X,d)$内の点列$\{x_i\}$について以下は同値である。
+\begin{enumerate}
+\item $x_i\to \infty$
+\item $\{x_i\mid i\in \nn\}^d= \O$かつ$\forall n\in \nn\ \card(\{i\in \nn\mid x_i=x_n\})<\aleph_0$
+\item $\{x_i\}$の任意の部分列は収束しない。
+\item $\forall K:cpt\ \exists N\in \nn\ \forall n\ge N\ x_n\not\in K$
+\end{enumerate}
+\end{prop}
+主に$(3)$と$(4)$を利用することになると思う。
+\begin{cau}
+定義を見ればわかるが、$x_i\to \infty$は$X$を一点コンパクト化したときに無限遠点に収束するのと同値である。
+\par
+また、$x_i\to\infty$は距離には依存せず、位相に依存する性質であることに注意しよう！
+\end{cau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{極限集合}
+
+\textbf{このセクションでは
+$X$を$\sigma$コンパクトかつ局所コンパクトな距離化可能空間とし、$Y$を距離化可能空間とする。}
+\begin{cau}
+このセクションで扱う極限集合は主に多様体の理論で利用されるし、その補完としてこの文章を書いている。
+この$X$と$Y$に関する仮定は$\sigma$コンパクトな位相多様体も満たすことに注意しよう。
+即ち、$\sigma$コンパクトな位相多様体は距離化可能である。$\sigma$コンパクト性の仮定が気になるかもしれないが、普通多様体論で扱われる多様体は$\sigma$コンパクトである。パラコンパクトの方が親しみがある人もいるかもしれないが、パラコンパクトな位相多様体は$\sigma$コンパクト位相多様体の直和になってるし、およそ、連結多様体やもしくは高々可算個の連結多様体の直和にしか興味がない場合が多いので$\sigma$コンパクト性が突飛な仮定というわけでもない。
+しかしながら$\sigma$コンパクトではないような連結位相多様体は存在するし、そういった連結位相多様体は距離化不可能であるといったことも注意しておこう。
+\end{cau}
+以下の命題の証明は省略する。
+\begin{prop}\label{cpt}
+$X$のコンパクト部分集合の列$\{K_i\}_{i\in \nn}$で
+\begin{align*}
+& X=\bigcup_{i\in \nn}K_i\\
+& \forall i\in \nn\ (K_i\subset \nai_X(K_{i+1}))
+\end{align*}
+の二つを充たすものが存在する。
+またこのとき$X$の任意のコンパクト部分集合$K$についてある$m\in \nn$が存在して$K\subset K_m$
+となることに注意しよう。
+\end{prop}
+\begin{cau}
+この命題内の性質を充たす$\{K_i\}_{i\in \nn}$が存在する空間のことを\emph{Hemicompact}と呼ぶ。
+一般に$\sigma$コンパクトな局所コンパクトハウスドルフ空間はHemicompactである。
+\end{cau}
+命題\ref{cpt}の後半の注意からすぐに次のことがわかる。
+\begin{prop}\label{benri}
+$\{K_i\}_{i\in \nn}$を命題\ref{cpt}で述べられている$X$コンパクト部分集合列としよう。このとき
+$x_i\to \infty$と
+\[
+\forall m\in \nn \ \exists N\in \nn\ \forall i\ge N\ x_i\not\in K_m
+\]
+が同値になる
+\end{prop}
+以下で定義する極限集合がこの文書の主役である。この集合の振る舞いを見ることで写像の性質がわかったりする。
+\begin{df}
+連続写像$f:X\to Y$に対し
+\[
+L(f)=\{y\in Y\mid \text{$x_i\to \infty$となる$\{x_i\}$が存在して$f(x_i)\to y$となる}\}
+\]
+と定義する。これを$f$の\emph{極限集合}と呼ぶ。
+\end{df}
+まず簡単に次のことがわかる。
+\begin{prop}
+$L(f)$は$Y$の閉集合
+\end{prop}
+\begin{proof}
+命題\ref{cpt}を用いて
+$X$のコンパクト集合の列$\{K_i\}_{i\in \nn}$で
+\begin{align*}
+& X=\bigcup_{i\in \nn}K_i\\
+& \forall i\in \nn\ (K_i\subset \nai_X(K_{i+1}))
+\end{align*}
+の二つを充たすものを取る。
+距離空間の部分集合の閉性を確かめる昔ながらの方法（補題\ref{cl}）を用いる。
+$Y$の位相と両立する距離の一つを$e$としよう。
+$Y$内の点列$\{y_i\}$は$y_i\in L(f)$であり、$\{y_i\}$は$y\in Y$に収束してるとする。ここで、適当に部分列をとって
+\[
+e(y_i,y)<2^{-i}
+\]
+としても一般性を失わない。
+各$m\in \nn$毎に$y_m\in L(f)$なので、$X$内の点列$\{x_i^m\}$が存在して、$x_{i}^m\to \infty$でかつ
+\[
+\lim_{i\to \infty}f(x_i^m)=y_m
+\]
+となる。
+さてここで単調増加写像$\phi:\nn\to\nn$を$i\ge \phi(m)$ならば
+\[
+x_{i}^m\not\in K_m,\ e(y_m,f(x_i^m))<2^{-m}
+\]
+となるように定める。このことはちゃんと可能である。
+そして$z_i=x_{\phi(i)}^{i}$とする。$\phi$の定義から任意の$i$について
+\[
+z_i=x_{\phi(i)}^{i}\not\in K_i
+\]
+が成り立つ。$K_i \subset K_{i+1}$なので、$n\ge N$ならば$z_n\not\in K_N$が成り立ち、命題\ref{benri}から$z_i\to \infty$がわかる。
+そして、
+\[
+e(y,f(z_i))\le e(y,y_i)+e(y_i,f(z_i))\le 2^{-i+1}
+\]
+なので$f(z_i)\to y$がわかる。よって$y\in L(f)$となるから、$L(f)$は閉集合である。
+\end{proof}
+
+\begin{prop}\label{ume}
+$f:X\to Y$を単射と仮定する。このとき
+\[
+fが埋め込み\iff L(f)\cap f(X)=\O
+\]
+\end{prop}
+\begin{proof}
+（$\Longrightarrow$の証明）
+\par
+対偶を証明しよう。即ち、$L(f)\cap f(X)\neq\O$を仮定して$f$が埋め込みでないことを示す。
+今、$y\in L(f)\cap f(X)$を取ると、
+$x_i\to \infty$かつ$f(x_i)\to y$となる$X$内の点列$\{x_i\}$が存在し、また、$y=f(x)$となる$x\in X$が存在する。
+$x_i\to \infty$であることから$\{x_i\}$は収束しない。
+よって$Y$内の点列$\{f(x_i)\}$は$f(x_i)\to y$にも関らず、
+\[
+\lim_{i\to \infty}f^{-1}(f(x_i))\neq f^{-1}(y)(=x)
+\]
+となるので$f^{-1}:f(X)\to X$は連続ではない。よって特に$f$は埋め込みではない。\par
+($\Longleftarrow$の証明)
+\par
+$L(f)\cap f(X)=\O$から$f^{-1}:f(X)\to X$が連続であることを示せばよい。つまり任意の$A\subset f(X)$について
+\[
+f^{-1}(\cl_{f(X)}(A))\subset \cl_X(f^{-1}(A))
+\]
+であることを証明する（補題\ref{cont}）。
+\par
+任意に$y\in \cl_{f(X)}(A)$を取る。すると
+$A$内の点列$\{y_i\}$が存在して$y$に収束する。
+さて$x_i=f^{-1}(y_i)$とする。$L(f)\cap f(X)=\O$という仮定と$y\in f(X)$から$y\not\in L(f)$がわかる。よって$x_i\not\to \infty$がわかる。すなわち$\{x_i\}$は点列として集積点を持つ。
+よって収束する部分列$\{x_{\phi(i)}\}$が存在する。$\{x_{\phi(i)}\}$の収束点を$x\in X$とする。
+写像$f$の連続性から$f(x_{\phi(i)})\to f(x)$がわかり、さらに$f(x_{\phi(i)})=y_{\phi(i)}$であり、収束列の部分列は元の列の収束点に収束するので、$f(x)=y$である。
+つまり$x=f^{-1}(y)$である。
+以上から$\{y_i\}$の部分列を適当にとれば$f^{-1}(y_{\phi(i)})\to f^{-1}(y)$となることがわかった。
+$\{f^{-1}(y_{\phi(i)})\}$は$f^{-1}(A)$内の点列であるから
+\[
+f^{-1}(\cl_{f(X)}(A))\subset \cl_X(f^{-1}(A))
+\]
+がわかるので$f^{-1}$は連続である。
+\end{proof}
+
+\begin{prop}\label{hei}
+連続関数$f:X\to Y$について
+\[
+f(X)がYの閉集合 \iff L(f)\subset f(X)
+\]
+\end{prop}
+\begin{proof}
+($\Longrightarrow$の証明)
+\par
+$L(f)$の定義から自明。
+\par
+($\Longleftarrow$の証明)
+\par
+$f(X)$内の点列$\{y_i\}$は$y_i\to y$を充たすと仮定する。
+そして点列$\{x_i\}$を$x_i\in f^{-1}(y_i)$となるように定義する。
+\par
+もし$\{x_i\}$が収束する部分列を持つならば$f$の連続性からその部分列の収束点$x$について$f(x)=y$になるので
+$y\in f(X)$がわかる。
+\par
+もし$\{x_i\}$が収束する部分列を持たない、
+すなわち$x_i\to \infty$ならば$y\in L(f)$であり、仮定から$L(f)\subset f(X)$なので$y\in f(X)$である。
+\par
+いづれにせよ$y\in f(X)$なので$f(X)$は$Y$の中で閉集合である。
+\end{proof}
+
+結果として次のことがわかる。
+\begin{cor}\label{kei}
+$f:X\to Y$を単射と仮定する。このとき\par
+$L(f)=\O$ならば$f$は閉写像でかつ埋め込みになっている。
+\end{cor}
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1} 志賀浩二, 多様体論I, 岩波書店,岩波講座基礎数学幾何学i, 1976
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,359 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\newcommand{\mm}{\mathfrak{M}}
+\newcommand{\ffnn}{\{f_{n}\}_{n\in \nn}}
+\newcommand{\rrr}{\mathbb{E}}
+\newcommand{\s}{\sigma}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+
+
+\title{拡張された実数}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+%拡張された実数を$\mathbb{E}$で書い直す。%
+この文書では拡張された実数を定義し、その性質を調べる。
+\begin{df}[拡張された直線]%演算位相順序全部やる
+実直線$\rr$に$\rr$に属さない異なる$2$点$-\mgn,+\mgn$を付け加えた集合を$\rrr$と書き、拡張された実数、または拡張された直線という。つまり、集合として
+\[
+\rrr=\rr\sqcup\{-\mgn\}\sqcup\{+\mgn\}
+\]
+である。この集合に順序、演算、位相を順次定義していく。
+\end{df}
+
+
+\begin{df}[$\rrr$の順序]
+$\rrr$の順序は任意の$a\in \rr$について$-\mgn<a<+\mgn$と直感通りに定義する。この順序により$\rrr$は最小値$-\mgn$、最大値$+\mgn$を備え、線型
+	\footnote{順序集合として線型であるということである。つまり任意の二元$a,b$について
+\[
+a<b,\ a=b,\ a>b
+\]のいずれかが成り立つということである。}
+で完備
+	\footnote{線型順序集合として完備ということである。つまり任意の部分集合に上限と下限が存在するということである。}
+な順序集合となる。この事を確かめるのは簡単な割に長くなるので省略する。この順序を根拠にして、
+\[
+\rrr=[-\mgn,+\mgn]
+\]
+と書いたりもする。
+\end{df}
+
+
+\begin{df}[$\rrr$の演算]
+$\rrr$の演算を、$\rr$の元同士の演算はそのままに
+まず和を
+\begin{eqnarray}
+&a\in \rr \To (\pm\mgn)+a=a+(\pm\mgn)+a=\pm\mgn\\ 
+&(+\mgn)+(+\mgn)=+\mgn\\ 
+&(-\mgn)+(-\mgn)=-\mgn
+\end{eqnarray}
+と拡張する。複合同順である。そして積を
+\begin{eqnarray}
+&[a\in \rrr\land a>0]\To (\pm \mgn )\times a=a\times(\pm\mgn)=\pm\mgn\\ 
+&[a\in \rrr\land a<0]\To (\pm\mgn)\times a=a\times(\pm\mgn)=\mp\mgn\\ 
+&(\pm\mgn)\times 0=0\times (\pm\mgn)=0
+\end{eqnarray}
+と拡張する。複合同順である。$(4),(5)$では$
+(+\mgn)\times (\pm\mgn)=(\pm\mgn)$なども主張していることに注意しよう。さて次に$a\in \rrr$に対して$\dpst \frac{1}{a}$という{\bf 新しい演算}を$a\in \rr\setminus \{0\}$なら$\dpst \frac{1}{a}=a^{-1}$と定義し、$a=\pm \mgn$ならば
+\begin{eqnarray}
+&\frac{1}{\pm\mgn}=0
+\end{eqnarray}と{\bf 定義}する。以上の拡張された演算に於いても
+$\dpst (+\mgn)+(-\mgn),\ \dfrac{+\mgn}{+\mgn},
+\frac{1}{0}$は{\bf 定義しない。}\footnote{\[\frac{+\mgn}{+\mgn}:=+\mgn\times \left(\frac{1}{+\mgn}\right)=+\mgn\times 0=0\]と定義しても良かったが、考えることが増えるので慣習通り未定義と言うことにした。}このような未定義な演算を不定形な演算と言う。
+\end{df}
+\begin{cau}
+$\dpst \frac{1}{\mgn}$は$\mgn$の逆数と言う{\bf 意味ではない}また、$\rrr$に於いてはもはや
+\[
+\frac{y}{x}=y\frac{1}{x}
+\]
+が成り立たないことに注意せよ。例えば$x=y=\mgn$のとき、そもそも左辺は定義されていない。
+\end{cau}
+
+
+
+\begin{df}[$\rrr$の位相]
+$\rrr$に位相を定義するのだが、先に定義した$\rrr$の順序を用いて順序位相を$\rrr$に定義する。つまり
+\[
+(\gets,a)=\{x\ |\ x<a\}=[-\mgn,a),\ (b,\to)=\{x\ |\ b<x\}=(b,+\mgn]\ (a,b\in\rrr)
+\]
+の形の集合全体からなる集合族を準開基とする位相である。同じ事だが
+\[
+(c,d)=\{x\ |\ c<x<d\}\ (a,b,c,d\in\rrr)
+\]
+として、
+\[
+(\gets,a),(b,\to),(c,d)\ (a,b,c,d\in\rrr)
+\]
+の形全体の集合
+	\footnote{開区間と呼ぶ}
+全体からなる集合族を開基とする位相である。
+\end{df}
+
+さて、以降はこの$\rrr$の性質を簡単に調べていく。
+\begin{thm}[$\rr$上の連続関数の$\rrr$への拡大]\label{kakudai}写像$f:(a,b)\to\rr$は連続であるとし、
+\[
+\lim_{x\to a}f(x)=\al,\ \lim_{x\to b}f(x)=\be\ (\al,\be\in \rrr)
+\]
+ならば、$F:[a,b]\to \rrr$を
+\[
+F(x)=
+\begin{cases}
+\al & \text{$x=a$}\\ 
+f(x) & \text{$x\in (a,b)$}\\ 
+\be & \text{$x=b$}
+\end{cases}
+\]
+と定義するとこれは連続である。また、$f$の拡張はこの関数に限る。
+\end{thm}
+\begin{proof}[{\bf 証明のスケッチ}]$a,b,\al,\be$がすべて$\rr$に属してるならこれは$\rr$の範囲で問題無く処理出来る。それ以外の場合、
+例えば$a\in \rr$で$\al=\mgn$のときつまり$\dpst \lim_{x\to a}f(x)=+\mgn$のとき、この式の意味は
+\[
+\forall K>0\ \exists \delta>0\ |x-a|<\delta \To K<f(x)
+\]
+だが、$(K,+\mgn]$という形の集合全体は$\rrr$に於いて$+\mgn$の基本近傍系を成してるので連続的に拡張出来ることはわかる。他の場合も同様である。
+\end{proof}
+
+
+\begin{thm}[$\rrr$の位相]
+$\rrr$は$\rr$の有界閉区間と位相同型である。よって$\rrr$はコンパクト距離空間である。
+\end{thm}
+\begin{proof}[{\bf 証明のスケッチ}]$\rr$の有界閉区間はどれも位相同型なので例えば$\rrr$と$[-1,+1]$が位相同型であることを示す。まず双曲線関数$\tanh:\rr\to(-1,+1)$は連続で、
+\[
+\tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}
+\]
+である。これから簡単に逆関数$g:(-1,+1)\to\rr$が存在する事がわかり、
+\[
+g(x)=\frac{1}{2}\log \left(\frac{1+x}{1-x}\right)
+\]
+である。さて
+\[
+\lim_{x\to -\mgn}h(x)=-1,\ \lim_{x\to +\mgn}h(x)=+1
+\]
+なので$h$は$H:\rr\to[-1,+1]$へと拡大する。
+そして、
+\[
+\lim_{x\to-1}g(x)=-\mgn,\ \lim_{x\to+1}g(x)=+\mgn
+\]
+なので$G:[-1,+1]\to \rrr$へと拡張する。簡単にわかるように$H,G$は互いに逆写像なので
+$\rrr$と$[-1,+1]$は同型である。
+\end{proof}
+
+
+\setcounter{equation}{0}
+以下、$\rrr$の演算と位相の関わりを見るのだが、
+距離空間の間の写像の連続性を点列で特徴付ける次の事実を思い出そう。
+\begin{fact}\label{jijitu}距離空間$X$から距離空間$Y$への写像$f:X\to Y$について以下は同値
+\begin{eqnarray}
+&fは点a\in Xで連続\\ 
+&\lim_{n\to \mgn}x_n=aとなるX内の任意の点列\{x_n\}_{n\in \nn}について\lim_{n\to \mgn}f(x_n)=f(a)
+\end{eqnarray}
+
+\end{fact}
+
+
+
+%逆数の連続性。
+\begin{prop}写像
+\[
+f:\rrr\setminus \{0\}\to \rrr
+\]
+を
+\[
+f(x)=\frac{1}{x}
+\]
+と定義すると、$f$は連続写像である。
+\end{prop}
+\begin{proof}
+\[
+\lim_{x\to -\mgn}f(x)=\lim_{x\to +\mgn}f(x)=0
+\]
+と定理\ref{kakudai}よりわかる。
+\end{proof}
+
+
+
+%足し算の連続性
+\begin{prop}$D=\rrr^2\setminus \{(-\mgn,+\mgn),(+\mgn,-\mgn)\}$と置き、
+\[
+F:D\to \rrr
+\]を
+\[
+F(x,y)=x+y
+\]
+と定義すると$F$は連続関数である。
+\end{prop}
+\begin{proof}
+事実\ref{jijitu}を用いる。$(x,y)\in \rr$についての連続性は明らかなので、$x,y$が無限大の値を取りうる場合を考える。\\ 
+$x=+\mgn,\ y\in \rr$の場合：$\dpst \lim_{n\to \mgn}x_n=+\mgn,\ \lim_{n\to\mgn}y_n=y\in\rr$となる点列を考えたとき、十分大きい番号で$\{y_n\}$は有界となる。つまり$n\ge N$ならば
+\[
+-M<y_n<M
+\]
+となる$M\in \rr$が存在するので
+\[
+x_n-M<x_n+y_n<x_n+M
+\]
+となり、$\dpst \lim_{n\to +\mgn}(x_n-M)=\lim_{n\to \mgn}(x_n+M)=+\mgn$なのでこの点での連続性がわかる。$[x=-\mgn,y\in \rr]$や$[x\in \rr,\ y=+\mgn]$そして$[x\in \rr,\ y=-\mgn]$の場合も同様である。$D$の定義から残るは$x=y=+\mgn$と$x=y=-\mgn$の場合だが、$\dpst \lim_{n\to\mgn}x_n=\lim_{n\to\mgn}y_n=+\mgn$ならば$\lim_{n\to \mgn}(x_n+y_n)=+\mgn$からわかる。
+\end{proof}
+\begin{cau}
+わざわざ定義域を$D=\rrr^2\setminus \{(-\mgn,+\mgn),(+\mgn,-\mgn)\}$としたのは
+\[
+(+\mgn)+(-\mgn)
+\]
+という不定形な演算を避けるためである。
+\end{cau}
+
+次に積について調べるが、積は連続にはならない、しかし連続関数で近似できると言う性質を持っている。
+以下の拡張された実数の積の性質の証明のために、実数の積の連続性を援用しよう。
+\begin{fact}[実数の積の連続性]\label{kakezan}
+$(x,y)\in \rr^2$に$xy\in \rr$を対応させる写像は連続
+\end{fact}
+
+拡張された実数の積は先の２つの場合と違って連続にはならないが、連続関数列の極限になっていると言う性質がある。いまだ定義されてない言葉を使うと、積はボレル写像なのである。
+%掛け算のボレル性
+\begin{prop}
+\[
+G:\rrr^2\to \rrr
+\]
+を
+\[
+G(x,y)=xy
+\]
+と定義すると、$G$は{\bf 連続ではない。}しかし、$\rrr^2$から$\rrr$への連続関数列$\{g_{n}\}_{n\in\nn}$が存在して、各点$(x,y)\in \rrr^2$毎に、
+\[
+\lim_{n\to+\mgn}g_{n}(x,y)=G(x,y)=xy
+\]
+となる。つまり$\{g_{n}\}_{n\in\nn}$は$G$に各点収束する。
+\end{prop}
+\begin{proof}
+$G$が連続出ないことは、$\dpst (1/n,n)\to (0,\mgn)$で$0\times \mgn=0$にもかかわらず$\dpst G(1/n,n)=1$であることからわかる。後半を示そう。まず$\rrr$から$\rr$への連続関数列$\ffnn$を
+\[
+f_n(x)=
+\begin{cases}
+-n & \text{$x\in [-\mgn,-n]$}\\ 
+x & \text{$x\in [-n,+n]$}\\ 
++n & \text{$x\in [+n,+\mgn]$}
+\end{cases}
+\]
+と定義するとこれは確かに連続で各点$x\in\rrr$を固定する毎に$\dpst \lim_{n\to \mgn}f_n(x)=x$となる。そして$\{g_n\}_{n\in \nn}$を
+\[
+g_n(x,y)=f_n(x)f_n(y)
+\]
+と定義すると、$\ffnn$は$\rr$の値しか取り得ないので事実\ref{kakezan}から$g_n$は連続関数となり、
+$\dpst \lim_{n\to \mgn}f_n(x)=x$なので各点$(x,y)\in \rrr^2$を固定する毎に
+\[
+G_n(x,y)=xy
+\]
+となる。これで命題の主張が全て示された。
+
+
+\end{proof}
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

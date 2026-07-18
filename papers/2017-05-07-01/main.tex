@@ -1,0 +1,278 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+\newcommand{\dom}{\text{{\rm dom}}}
+\newcommand{\cod}{\text{{\rm cod}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{有理数の順序型の特徴づけ}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+この文章では有理数の順序論的特徴づけを紹介する。すなわち次の定理を証明する。
+\begin{thm}\label{thm}
+最大値及び最小値を持たない可算で自己稠密な線形順序集合は互いに順序同型である。特に有理数と順序同型である。
+\end{thm}
+まずは定義から始める。
+\begin{df}[線形順序]
+集合$X$上の二項関係$\le$が線形順序であるとは
+\begin{enumerate}
+\item $\forall a\in X\ a\le a$
+\item $\forall a, b\in X\ a\le b\land b\le a\To a=b$
+\item $\forall a,b,c\in X\ a\le b\land b\le c\To a\le c$
+\item $\forall a,b\in X\ a\le b\lor b\le a$
+\end{enumerate}
+を充たすことを言う。
+\[
+a<b\iff a\le b \land a\neq b
+\]
+と定義する。
+\end{df}
+
+\begin{df}[自己稠密性]
+線形順序集合$(X,\le)$が自己稠密であるとは$x<y$となる任意の$x,y\in X$について
+\[
+x<s<y
+\]
+となる$s\in X$が存在することである。
+\end{df}
+集合$X$の上の順序を$\le_X$と書いたりするが、文脈上明らかな場合は省略して$\le$と書いてしまうことにする。
+定理\ref{thm}の証明のために以下の補題を用意する。
+\begin{lem}\label{lem}
+$(X,\le_X), (Y,\le_Y)$を最大値及び最小値を持たない可算で自己稠密な二つの線形順序集合とする。さらに
+$S\subset X, T\subset Y$はその有限部分集合とし、順序同型写像$h:S\to T$により$S$と$T$は順序同型であるとする。このとき任意の$x\in X\setminus S$について、ある$y\in Y\setminus T$が存在して$h$は順序同型写像
+\[
+H:S\cup\{x\}\to T\cup \{y\}
+\]
+へと拡張できる。
+\end{lem}
+\begin{proof}
+$S,T$の元の番号付け$S=\{s_i\}_{i=1}^n,\ T=\{t_j\}_{j=1}^n$は以下の条件を充たすとしても一般性を失わない。
+\begin{align}
+&s_1<s_2<\cdots <s_n \\
+&h(s_i)=t_i
+\end{align}
+そして三つに場合分けする。
+\begin{description}
+\item[場合分け(1)（$\exists i\  s_i<x<s_{i+1}$のとき。）]\mbox{}\\
+このときには$Y$の自己稠密性から$t_i<y<t_{i+1}$となるyが存在するので、これを用いて$H(x)=y, H(s_i)=t_i$と$H$を定義すれば、$H$は求めるものになっている。
+\item[場合分け(2)（$s_n<x$のとき。）]\mbox{}\\
+このときやはり$Y$の自己稠密性から$t_n<y$となる$y\in Y$が存在するので$H(x)=y, H(s_i)=t_i$と定義すればよい。\footnote{ここで最大値を持たないという仮定を用いている。}
+\item[場合分け(3)（$x<s_1$のとき。）]\mbox{}\\
+上と同様\footnote{最小値を持たないという仮定を用いる}。
+\end{description}
+以上で補題は証明された。
+\end{proof}
+さて定理\ref{thm}の証明に入る。
+\begin{proof}[\textbf{定理\ref{thm}の証明}]
+所謂back-and-forth argument により帰納法によって証明する。\par
+$(A,\le_A), (B,\le_B)$を最大値及び最小値を持たない可算で自己稠密な二つの順序集合とする。そして
+$A=\{a_i\}_{i\in \nn}, B=\{b_i\}_{i\in \nn}$と番号付けされていると仮定する。
+この番号付けを用いて関数の拡張列$\{f_n\}_{n\in \nn}$を以下の条件を満たすように帰納的に定義する。
+\begin{enumerate}
+\item $f_n$は順序を保つ全単射
+\item $\dom f_n$は有限集合で$\{\,a_0,\dots, a_{n}\,\}$を含む.
+\item $\cod f_n$は有限集合で$\{\,b_0,\dots,b_{n}\,\}$を含む.
+\end{enumerate}\par
+Step0:（$f_0$を定義する）
+$f_0$は$f_0:\{a_0\}\to \{b_0\}$で$f_0(a_0)=b_0$という写像として定義する。\par
+Step1:（$f_n$が構成されたとして$f_{n+1}$を構成する)補助的に$g_n$という順序同型写像を以下のように定義する。\par
+もし$a_{n+1}\in \dom(f_n)$ならば、$g_n=f_n$とし、
+$a_{n+1}\not\in \dom(f_n)$ならば$f_n$と$a_{n+1}$、および$\cod(f_n), \dom(f_n)$に
+補題\ref{lem}を用いて$f_n$を$\dom(f_n)\cup \{a_{n+1}\}$まで拡張した順序同型写像を$g_n$とする。\par
+また更に補助的に$h_n$という順序同型写像を以下のように$g_n^{-1}$を拡張して定義する。\par
+もし$b_{n+1}\in \dom(g_n^{-1})=\cod(g_n)$ならば$h_n=g_n^{-1}$とする。
+もし$b_{n+1}\not\in \dom(g_n^{-1})=\cod(g_n)$の時には、$g_n^{-1}$, $b_{n+1}$に補題\ref{lem}を用いて$g_n^{-1}$を$\dom(g_n^{-1})\cup\{b_{n+1}\}$まで拡張した写像を$h_n$とする。\par
+最後に$f_{n+1}=h_n^{-1}$と定義すれば帰納法の仮定をすべて充たす。\par
+Step3: 以上で得られた順序同型写像の列$\{f_n\}_{n\in \nn}$を用いて、写像$F:A\to B$を$F(a_n)=f_n(a_n)$と定義する。$\{f_n\}_{n\in \nn}$が写像の拡張列になっているので、この定義はwell-definedである。\par
+Step4: 写像$F$が順序同型写像になっていることを示す。
+まず最初に$x,y\in A$について
+\[
+x<y\To F(x)<F(y)
+\]
+が成り立つことを示す。これが分かれば、単射性と順序保存性がわかる。十分大きい$n$を取れば$x,y\in \cod(f_n)$となるものが見つかる。$F$の定義と$\{f_n\}_{n\in \nn}$が写像の拡張列であることから$F(x)=f_n(x),\ F(y)=f_n(y)$がわかる。さて$f_n$は順序同型であるから直ちに$F(x)<F(y)$を得る。\par
+最後に$F$が全射であることを示す。任意の$y\in B$に対して十分大きい$n$を取れば$y\in \cod(f_n)$となる。写像$f_n$は順序同型なので、ある$x\in \dom(f_n)$が存在して$f_n(x)=y$となる。つまり$F(x)=y$なので$F$は全射である。
+\end{proof}
+\begin{cau}
+上の証明で$g_n,\ h_n$を構成する操作は$A$と$B$を往復（前後）している。これを指してback-and-forthと呼んでいると思われる。
+\end{cau}
+
+\begin{exam}
+$\rr$の部分集合$(0,1)\cap \qq$は$\qq$と順序同型である。
+\end{exam}
+\begin{exam}
+集合$\{a+b\sqrt{2}\mid a,b\in \qq\}$は$\qq$と順序同型である。
+\end{exam}
+\begin{exam}
+二進表示で有限小数で表すことのできる数全体、つまり
+\[
+\left\{\frac{m}{2^n}\ \middle|\  n,m\in \zz\right\}
+\]
+は$\qq$と順序同型である。
+\end{exam}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

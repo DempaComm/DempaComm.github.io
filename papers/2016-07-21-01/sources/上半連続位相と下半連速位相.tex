@@ -1,0 +1,213 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\oo}{\mathfrak{O}}
+\newcommand{\uu}{\mathfrak{U}}
+\newcommand{\LL}{\mathfrak{L}}
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{$\rr$のある位相}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では半連続関数が$\rr$に標準的な位相でない位相を入れた時の連続関数とみなせることを紹介する。その後色々見逃せないおまけを付ける。まず
+実連続関数の半連続性について思い出そう。
+\begin{df}[上半連続、下半連続]
+位相空間$(X,\mathfrak{O})$に対しその閉集合族を$\mathfrak{F}$と書こう。このとき写像
+\[
+f:X\rightarrow \rr
+\]
+が上半連続とは
+\[
+\forall \ u\in \rr\ f^{-1}([u,+\mgn))\in \mathfrak{F}
+\]
+を充たすこと。同じことだが
+\[
+\forall \ u\in \rr\ f^{-1}((-\mgn,u))\in \mathfrak{O}
+\]
+が成り立つと言っても良い。
+また、$f$が下半連続とは
+\[
+\forall \ l\in \rr\ f^{-1}((-\mgn,l])\in \mathfrak{F}
+\]
+を充たすこと。同じことだが
+\[
+\forall \ l\in \rr\ f^{-1}((l,+\mgn))\in \mathfrak{O}
+\]
+が成り立つと入っても良い。
+\end{df}
+\begin{cau}
+上半連続関数のコドメインを$[-\mgn,+\mgn)$下半連続関数のコドメインを$(-\mgn,+\mgn]$とする流儀もある。おそらく上半連速関数の族$\{f_n\}{n\in\nn}$について$\inf_n f_{n}$が再び上半連続、下半連続関数の族$\{f_n\}{n\in\nn}$について$\sup_n f_n$が再び下半連続になることを見越してのことだろう。（このようにすると上限と下限が何の付加条件もなしに存在すると言える）しかし、この文章ではこの定理を述べないし、利用もしないのでコドメインを$\rr$とした。些末な違いである。
+\end{cau}
+
+{\df[上半連続位相、下半連続位相]
+$\rr$に次のように２つの部分集合族を定義する。
+\[
+\uu=\{(-\mgn,u)\ |\ u\in\rr\}
+\]
+\[
+\LL=\{(l,+\mgn)\ |\ l\in\rr\}
+\]
+このとき、$\uu,\LL$はそれぞれ開集合系の公理を充たし$\rr$上にそれぞれ位相を定義する。
+$(\rr,\uu)$を$\rr$の上半連続位相、$(\rr,\LL)$を$\rr$の下半連続位相と呼ぶ。$\uu$は$U$のフラクトゥールで$\LL$は$L$のフラクトゥールである。（UpperとLower）
+}
+
+この様に定義すれば確かに上半連続関数$f:X\to \rr$とは連続写像$f:(X,\oo)\to (\rr,\uu)$のことであり、下半連続関数$f:X\to \rr$とは連続写像$f:(X,\oo)\to (\rr,\LL)$のことである。\\ 
+さて以下おまけである。上、下半連続位相のコンパクト集合の性質を調べよう。
+
+{\prop
+上半連続位相$(\rr,\uu)$のコンパクト集合は必ず最大値を持つ。双対的に下半連続位相$(\rr,\LL)$のコンパクト集合は必ず最小値を持つ。
+}
+{\proof 上半連続位相についてのみ証明する。
+$K$を$(\rr,\uu)$のコンパクト部分集合とする。$K$が上に有界であることを見よう。何となれば
+\[
+\rr=\bigcup_{n\in \nn}(-\mgn,n)
+\]
+で$(-\mgn,n)\subset (-\mgn,n+1)$なので$K$のコンパクト性を用いれば
+\[
+\exists m\in\nn K\subset (-\mgn,m)
+\]
+となり、$(-\mgn,m)$が上に有界なので$K$も上に有界である。以上から$\sup K$が確かに存在する。この$\sup K$が$K$に属する事を見よう。$a=\sup K$置く。もし$a\not\in K$ならば$\forall x\in K\ x<a$で上限の性質から$x\in K\To \exists y\in K \ x<y<a$なので
+\[
+K\subset \bigcup_{x\in K}(-\mgn,x)
+\]
+であるが、$K$のコンパクト性から有限個の$K$の元$x_1x_2\cdot,x_n$が選べて$K$を$(-\mgn,x_i)$で被覆できてしまうが$X_i$の最大値を$b$と置くと$(-\mgn,x_i)$という形の集合の単調性から
+\[
+K\subset (-\mgn,b)
+\]
+だが、$b\not\in (-\mgn,b)$で$b\in K$なので矛盾する。よって$a=\sup K\in K$で$K$は最大値を持つ。
+}
+
+
+{\cor
+コンパクト空間上の実上半連続関数は最大値を持つ。双対的にコンパクト空間上の実下半連続関数は最小値を持つ。
+}
+
+
+{\prop[１点での半連続性]
+定義の言い換え
+}
+
+{\prop 
+距離空間上の半連続
+}
+
+{\thm
+距離空間上の下半連続関数は連続関数列の上限として書ける。
+}
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

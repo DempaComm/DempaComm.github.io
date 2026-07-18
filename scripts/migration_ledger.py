@@ -1776,6 +1776,62 @@ def command_confirm_metadata(args: argparse.Namespace) -> None:
     print(f"CONFIRMED metadata for {confirmed} record(s)")
 
 
+def command_confirm_metadata_url(args: argparse.Namespace) -> None:
+    """Confirm records against explicitly selected article URLs in an MT export."""
+    rows = read_rows()
+    manifests = load_manifests()
+    validate_rows(rows, manifests)
+    rows_by_id = {row["record_id"]: row for row in rows}
+    articles = parse_mt_export(
+        Path(args.export_file).expanduser().resolve(), args.blog_url
+    )
+    articles_by_url = {article["url"]: article for article in articles}
+    confirmed = 0
+    for selection in args.selections:
+        if "=" not in selection:
+            raise LedgerError(
+                "manual confirmation must use RECORD_ID=ARTICLE_URL"
+            )
+        record_id, article_url = selection.split("=", 1)
+        row = rows_by_id.get(record_id)
+        if not row:
+            raise LedgerError(f"unknown record_id: {record_id}")
+        article = articles_by_url.get(article_url)
+        if not article:
+            raise LedgerError(f"article URL not found in MT export: {article_url}")
+        if row["duplicate_status"] == "duplicate":
+            raise LedgerError(
+                f"{record_id}: confirm the canonical record "
+                f"{row['canonical_record_id']} instead"
+            )
+        row.update(
+            {
+                "published_at": article["published_at"],
+                "sequence": str(article["sequence"]),
+                "title": article["title"],
+                "original_url": article["url"],
+                "tags": join_list(article["tags"]),
+                "metadata_match": "exact",
+                "metadata_score": "100.0",
+                "metadata_candidate_count": "1",
+                "metadata_title": article["title"],
+                "metadata_published_at": article["published_at"],
+                "metadata_sequence": str(article["sequence"]),
+                "metadata_original_url": article["url"],
+                "metadata_tags": join_list(article["tags"]),
+                "metadata_pdf_files": join_list(article["pdf_files"]),
+                "metadata_evidence": "manually confirmed by original URL",
+            }
+        )
+        if row["status"] != "published":
+            row["status"] = "metadata_ready"
+        confirmed += 1
+    validate_rows(rows, manifests)
+    write_rows(rows)
+    write_json(rows)
+    print(f"CONFIRMED metadata by URL for {confirmed} record(s)")
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(
         description="Scan Myblogstr and maintain the migration ledger."
@@ -1862,6 +1918,17 @@ def parser() -> argparse.ArgumentParser:
     )
     confirm_metadata.add_argument("record_ids", nargs="+")
     confirm_metadata.set_defaults(func=command_confirm_metadata)
+
+    confirm_metadata_url = subparsers.add_parser(
+        "confirm-metadata-url",
+        help="confirm selected records against exact article URLs in an MT export",
+    )
+    confirm_metadata_url.add_argument("export_file")
+    confirm_metadata_url.add_argument("selections", nargs="+")
+    confirm_metadata_url.add_argument(
+        "--blog-url", default="https://concious4410.hatenablog.com"
+    )
+    confirm_metadata_url.set_defaults(func=command_confirm_metadata_url)
     return result
 
 

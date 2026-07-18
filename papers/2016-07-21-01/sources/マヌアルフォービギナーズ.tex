@@ -1,0 +1,462 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\clop}{\text{{\rm Clopen}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{注意書き}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+\tableofcontents
+\section{ひと目で開集合（閉集合）とわかる集合}
+
+連続写像に着目して、開集合と閉集合を見抜くという事を言いたいのである。
+\[
+x\in f^{-1}(S)\iff f(x)\in S
+\]
+に注意しよう。そして次の当たり前の事実を目の当たりにしよう。
+\begin{thm}
+連続写像$f:X\to Y$と$Y$の開集合$O$と$Y$の閉集合$F$について
+$f^{-1}(O)$は$X$の開集合で$f^{-1}(F)$は$X$の閉集合である。
+\end{thm}
+
+\subsection{例}
+\begin{prop}
+距離空間$(X,d)$と連続関数$f:X\to \rr$について
+\[
+A=\{x\in X\ |\ f(x)=0\}
+\]
+は$X$の閉集合
+\end{prop}
+\begin{proof}[{\bf 距離空間しか知らない人の証明}]
+$\{a_n\}_{n\in \nn}\subset A$で$a_n\to a$と仮定する。すると$f$の連続性から$f(a_n)\to f(a)$であり、任意の$n\in \nn$について$f(a_n)=0$なので$f(a)=0$つまり$a\in A$よって$A$は閉集合。
+\end{proof}
+\begin{proof}[{\bf 位相の講義の単位をとった人の証明}]
+$\{0\}$は$\rr$の閉集合であり、$A=f^{-1}(\{0\})$なので$f$の連続性から$A$は閉集合となる。
+\end{proof}
+
+流石にどんな人でも後者の証明をすると思うが、$f^{-1}(\{0\})$の引き戻されている集合が変わるとこれが出来ない人が多く出てくると思う。
+
+\begin{prop}
+位相空間$X$と連続関数$f:X\to \rr$、及び$r\in \rr$について
+\[
+U=\{x \ | \ f(x)<r\}は開集合。
+\]
+\end{prop}
+\begin{proof}
+$f^{-1}((-\mgn,r))=U$なので$f$の連続性から$U$は開集合
+\end{proof}
+この事から次のことがわかる。
+\begin{prop}
+距離空間$(X,d)$に於いて、$d:X\times X\to \rr$は連続であるが\footnote{このことは、三角不等式からの帰結である。}、
+\[
+B(a,r;d)=\{x\ |\ d(a,x)<r\}
+\]
+は開集合である。
+\end{prop}
+また別に$d$が位相空間$X$の位相を誘導しなくても、点$a\in X$で$X\to \rr;x\mapsto d(a,x)$が連続なら$a$を中心とした半径$r$の開球$B(a,r;d)$は$X$開集合となる。\par
+もし任意の点$a\in X$で$X\to \rr;x\mapsto d(a,x)$が連続なら、$d$から誘導される位相$\mathfrak{O}_d$と$X$の元の位相には$\mathfrak{O}$の間には
+\[
+\mathfrak{O}_d\subset \mathfrak{O}
+\]
+の関係があるという事が分かるのである。\par
+次の命題のように連続関数２つで開集合が定義されることもある。
+\begin{prop}
+位相空間$X$と連続関数$f,g:X\to \rr$について
+\[
+U=\{x\ |\ f(x)<g(x)\}
+\]
+は開集合である。
+\end{prop}
+\begin{proof}
+$h=f-g$と置くとこれは連続関数で$U=h^{-1}((-\mgn,0))$となるので$U$は開集合
+\end{proof}
+一般に連続関数$f,g$と実定数$\al\in \rr$について
+\[
+\al f,\ f+g,\ fg
+\]
+は連続関数になる。これは$\rr$の演算が連続であることに起因している。
+また
+\[
+|f|
+\]
+も連続であることに注意しよう。もちろんこれは$|x|$が連続であることからの帰結である。\par
+ここまでの説明を読めば、２つの連続関数$f,g:X\to \rr$について
+\[
+\{x\in X\ |\ f(x)=g(x)\},\ \{x\in X\ |\ f(x)\le g(x)\}
+\]
+が閉集合であることが一目でわかる。\par
+話は変わるが、次の集合も$\rr^{n\times n}$で開集合であることがひと目で分かる。
+\[
+GL(n,\rr)=\{x\in \rr^{n\times n}\ |\ \det x\neq 0\}
+\]
+なぜなら$\det:\rr^{n\times n}\to \rr$は連続関数であり、
+\[
+GL(n,\rr)=\det^{-1}(\rr\setminus \{0\})
+\]
+だからである。$\det$が連続である理由は第$(i,j)$成分への射影$p_{ij}:\rr^{n\times n}\to \rr;x\mapsto x_{ij}$が連続であり、$\det$はこの射影関数の有限個の掛け算や足し算で表され、$\rr$の掛け算や足し算が連続だからである。\par
+以下の集合が閉であるか開であるかはひと目見れば明らかだと思う。（どこの部分空間としてかは文脈で判断してください。）
+\begin{align}
+&\{(a,b,x,n)\in \rr\times \rr\times \rr\times \zz_{+}\ |\ \frac{a+b^n}{n}=x\}\\ 
+&\{x\in \rr^{n\times n}\ |\ xx^{t}=E_n\}\\
+&\{(a,b,c,d)\in \rr^{4}\ |\ a<b,\ c<d,\ d-c>\frac{b-a}{2}\}
+\end{align}
+一目見て分かるといったが、$(2)$は次のセクションでそれなりに詳しく扱う。
+
+\section{相対位相とか直積位相}
+
+\begin{df}[始位相]
+$X$を集合$\{(Y_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}$を位相空間の族とし、各$\lambda$ 毎に写像
+\[
+f_{\lambda}:X\rightarrow Y_{\lambda}
+\]が与えられているとするこの時$X$に写像族$F=\{f_{\lambda}\}_{\lambda \in \Lambda}$をすべて連続にするような最弱の位相が存在する。それを$F=\{f_{\lambda}\}_{\lambda \in \Lambda}$から誘導された始位相と呼ぶ。此処では記号$\mathfrak{I}(F)$で表すことにする。\footnote{$\mathfrak{I}$は$I$のフラクトゥールである。}この位相は準開基$\mathfrak{M}=\{f_{\lambda}^{-1}(U)\ |\ U\in \mathfrak{O}_{\lambda},\ \lambda\in \Lambda \}$により生成されている
+\end{df}
+始位相には次のようなありふれた例がある。
+\begin{exam}[直積位相]
+位相空間の族$\{(X_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}$の直積空間$\displaystyle \prod_{\lambda \in \Lambda}X_{\lambda}$の位相はその射影の族\\
+$\dpst \{\pi_{\lambda}:\prod_{\lambda \in \Lambda}X_{\lambda}\to X_{\lambda}\}_{\lambda \in \Lambda}$から定まる始位相である。
+\end{exam}
+
+\begin{exam}[相対位相]
+位相空間$(X,\mathfrak{O})$の部分集合$A$に$\{A\cap O\ |\ O\in \mathfrak{O}\}$を開集合系として定義する。この位相を$A$の$X$から誘導された相対位相という。
+\par さて、包含写像$i:A\to X$を考えると、$S\subset X$について$i^{-1}(S)=A\cap S$であるので
+相対位相は包含写像から定まる始位相である事が分かる。
+\end{exam}
+
+
+
+この始位相には次の便利な性質がある。証明はしない。
+\begin{thm}[始位相の普遍性]位相空間$Y$には$\{f_{\lambda}\}_{\lambda \in \Lambda}$から定まる始位相が入っているとしこの関数族の終域を$\{Z_{\lambda}\}_{\lambda \in \Lambda}$とするこの時位相空間$X$からの$Y$への写像$\phi$について
+\[
+\phi :X\rightarrow Yが連続\Leftrightarrow \forall \lambda\in \Lambda\ f_{\lambda}\circ \phi
+: X\rightarrow Z_{\lambda}が連続
+\]が成立する。
+\[\xymatrix{
+&X \ar[r]^{\phi}\ar[dr]_{f_{\lambda}\circ \phi}& Y\ar[d]^{f_{\lambda}}&\\ 
+& & Z_{\lambda}&
+}\]
+\end{thm}
+普遍性などとのたまっていかめしいので、直積位相と相対位相の場合にこの命題を言い換えよう。
+
+\begin{thm}[積位相の普遍性]\label{seki}
+位相空間$X$からの$\dpst \prod_{\lambda \in \Lambda}X_{\lambda}$への写像$\phi$について
+\[
+\phi :X\rightarrow \prod_{\lambda \in \Lambda}X_{\lambda}が連続\Leftrightarrow \forall \lambda\in \Lambda\ \pi_{\lambda}\circ \phi
+: X\rightarrow X_{\lambda}が連続
+\]が成立する。
+\[\xymatrix{
+&X \ar[r]^{\phi}\ar[dr]_{\pi_{\lambda}\circ \phi}&\dpst  \prod_{\lambda \in \Lambda}X_{\lambda}\ar[d]^{\pi_{\lambda}}&\\ 
+& & X_{\lambda}&
+}\]
+\end{thm}
+つまり直積空間への写像は各成分ごとに連続ならば連続と言えるのである。$\pi_{\lambda}\circ \phi$
+が写像$\phi$の第$\lambda$成分である。
+
+\begin{thm}[相対位相の普遍性]$Y$を$Z$の部分空間とし、$i:Y\hookrightarrow Z$を包含写像とする。このとき、
+位相空間$X$からの$Y$への写像$\phi$について
+\[
+\phi :X\rightarrow Yが連続\Leftrightarrow i\circ \phi
+: X\rightarrow Zが連続
+\]が成立する。
+\[\xymatrix{
+&X \ar[r]^{\phi}\ar[dr]_{i\circ \phi}& Y\ar@{^{(}-_>}[d]^{i}&\\ 
+& & Z&
+}\]
+
+\end{thm}
+$Y\subset Z$のとき、$Y$への写像は自然に$Z$への写像とみなせて、それは厳密に言うと
+$i\circ \phi$のことであるが、それが連続ならば$\phi$も連続であるといえるのである。
+
+\subsection{行列の積}
+$M(n,\rr)$を$n$次正方行列全体とすると、$M(n,\rr)=\rr^{n\times n}$とみなせるが、この同一視によって$M(n,\rr)$に位相を入れる。つまり$M(n,\rr)$の位相は$n^2$次元ユークリッド位相である。
+\par
+$M(n,\rr)$の積が連続であることを示そう。定理\ref{seki}を援用する。$X=(x_{ij}),\ Y=(y_{ij})$とすると、積演算$b:M(n,\rr)\times M(n,\rr)\to M(n,\rr)$は$b(X,Y)=(\sum_{k=1}^nx_{ik}y_{kj})$という写像であるが、この$b$という写像の第$(i,j)$成分
+\[
+\pi_{i,j}\circ b:M(n,\rr)\times M(n,\rr)\to \rr;(X,Y)\mapsto \sum_{k=1}^nx_{ik}y_{kj}
+\]
+は各$(i,j)$について連続であるので定理\ref{seki}から行列の積演算は連続である。
+
+\subsection{球面だとか}
+
+\subsection{グラフだとか}
+
+\section{連結性}
+位相空間$X$の開かつ閉な集合全体を$\clop(X)$と書けば
+$X$が連結であるとは
+\[
+\clop(X)=\{\O,X\}
+\]
+が成り立つことに他ならない。\par
+ある意味で空間の情報が一色に染まるのが連結性である。空間$X$について
+\[
+\forall x\in X\ P(x)
+\]
+を証明したいとする。このとき$A=\{x\in X\ |\ P(x)\}$とおき、$A$が開かつ閉で$A\neq\O$を示すのが一つの定石である。
+\subsection{例：一致の定理}
+例をひとつ見てみよう。以下$D$は$\cc$の領域(連結開集合のこと)であるとする。
+\begin{df}
+$f:D\to \cc$が解析的であるとは任意の点$\al\in D$についてある$\ep>0$が存在して$x\in B(a,\ep)$ならば
+\[
+f(x)=\sum_{n=0}^{+\mgn}a_n(x-\al)^n
+\]
+とテイラー展開出来る事を言う。ここでもちろん$a_n=\dfrac{f^{(n)}(\al)}{n!}$である。また明らかに解析的関数は$C^{+\mgn}$級、つまり任意の$n\in \zz_{\ge 0}$について$f^{(n)}$が連続であることに注意しよう。
+\end{df}
+\begin{prop}[一致の定理]
+解析的な関数$f:D\to \cc$についてある点$\al\in D$で$\forall n\in \zz_{\ge 0}\ f^{(n)}(\al)=0$ならば、$f\equiv 0$である。
+\end{prop}
+\begin{proof}
+$A=\{x\in D\ |\ \forall n\in \zz_{\ge 0}\ f^{(n)}(x)=0\}$と置く。すると
+\[
+A=\bigcap_{n\in \zz_{\ge 0}}(f^{(n)})^{-1}(\{0\})
+\]
+で各$(f^{(n)})^{-1}(\{0\})$は閉集合なので$A$も閉集合である。$A$が開集合でもあることを示そう。
+\par
+$\be \in A$を任意に取ると$f$が解析的であることから$x\in B(\be,\ep)$について
+\[
+f(x)=\sum_{n=0}^{+\mgn}a_n(x-\be)^n\ \ \ (a_n=\dfrac{f^{(n)}(\be)}{n!})
+\]
+である。ここで$\be\in A$なので任意の$n\in \zz_{\ge 0}$について$a_n=0$なので$B(\be,\ep)$上で$f\equiv 0$であり、$B(\be,\ep)\subset A$が分かる。$\be$は任意だったので$A$は開集合である。
+\par
+仮定から$A\neq\O$で$D$は連結なので$A=D$つまり、
+\[
+f\equiv 0
+\]が成り立つ。
+\end{proof}
+
+
+\section{$\max$ と$\min$}
+このセクションではただ単に
+\begin{align*}
+\max:\rr^2\to \rr;(x,y)\mapsto \max(x,y)\\
+ \min:\rr^2\to \rr;(x,y)\mapsto \min(x,y)
+\end{align*}
+が連続関数であることを言う。
+\[
+\max(x,y)=\frac{x+y+|x-y|}{2}
+\]
+\[
+\min(x,y)=\frac{x+y-|x-y|}{2}
+\]
+なのでこれらが連続であることはとても良く分かる。
+
+\section{写像の貼り合わせ}
+
+空間を幾つかのパーツに分けそのパーツ毎に連続写像を定義し、それを貼り合わせると言うことをしばしば行う。このとき我々は貼りあわせた写像が連続になるのかどうか不安と恐怖に煽られるわけである。
+\par
+このセクションでは簡単な基準を紹介しようと思う。（一般的には商位相、もしくは終位相の文脈で語るべきだが、面倒くさいので簡単でそれなりに現れる状況を詳解するに留める。）
+
+
+\begin{prop}位相空間$X,Y$と
+写像$f;X\to Y$について、任意の$U\in \mathcal{U}$で$f|U:U\to Y$が連続関数であるような$X$の開被覆$\mathcal{U}$が存在すれば、$f$は$X$上でも連続である。
+\end{prop}
+\begin{proof}
+各$U\in \mathcal{U}$上で$f|U$が連続なので、任意の$U\in \mathcal{U}$と
+任意の$Y$の開集合$O$について、$f^{-1}(O)\cap U$は$U$の開集合である。また、$U$は$X$の開集合なので$f^{-1}(O)\cap U$は$X$の開集合でもある。そして$\mathcal{U}$が被覆を成すことから
+\[
+f^{-1}(O)=\bigcup_{U\in \mathcal{U}}(f^{-1}(O)\cap U)
+\]
+が成り立ち、この式の右辺は開集合であるから、$f^{-1}(O)$は$X$の開集合である。$O$は$Y$の任意の開集合であったから$f:X\to Y$は$X$上連続である。
+\end{proof}
+
+\begin{lem}\label{heihou}
+$\mathfrak{A}$を位相空間$X$の局所有限な族とする。このとき
+\[
+\cl\left(\bigcup_{A\in \mathfrak{A}}A\right)=\bigcup_{A\in \mathfrak{A}}\cl(A)
+\]
+が成立する。\footnote{CLは閉包作用素である。}
+\end{lem}
+\begin{proof}
+みんなによく知られている。
+\end{proof}
+
+
+\begin{prop}位相空間$X,Y$と
+写像$f;X\to Y$について、任意の$A\in \mathcal{F}$で$f|A:A\to Y$が連続関数であるような$X$の閉集合からなる局所有限な被覆$\mathcal{F}$が存在すれば、$f$は$X$上でも連続である。
+\end{prop}
+\begin{proof}
+$F\subset Y$を$Y$の閉集合とする。そして各$A\in \mathcal{F}$について$f|A$が連続であることと$\mathcal{F}$が局所有限であることから$\{f{-1}(F)\cap A\}_{A\in \mathcal{F}}$も閉集合からなる局所有限な族である。よって前述の補題から
+\[
+f^{-1}(F)=\bigcup_{A\in \mathcal{F}}(f^{-1}(F)\cap A)
+\]
+は閉集合である。$F$は任意であるから$f$は連続であることがわかる。
+\end{proof}
+
+\begin{cor}
+位相空間$X,Y$と
+写像$f;X\to Y$について、任意の$A\in \mathcal{F}$で$f|A:A\to Y$が連続関数であるような$X$の閉集合からなる{\bf 有限被覆}$\mathcal{F}$が存在すれば、$f$は$X$上でも連続である。
+\end{cor}
+\begin{proof}
+前述の命題から明らか。
+\end{proof}
+
+
+\subsection{多様体の上での関数のゼロ拡張}
+多様体の開集合上で定義された関数のゼロ拡張。
+
+
+\subsection{単体写像}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

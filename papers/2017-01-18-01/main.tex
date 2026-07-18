@@ -1,0 +1,423 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{拡張定理}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章ではArens\cite{1}によるDugundjiの拡張定理を証明し、H. Toru\'nczyk\cite{2}によるDugundjiの拡張定理を用いたHasudorffの拡張定理の証明を紹介する。Dugundjiの拡張定理は距離空間の閉集合から局所凸空間への連続写像は空間全体に拡張できるという定理である。Arensは「きれいな」単位の分割を用いてこの定理を証明しているが、これはWhitneyの拡張定理の証明にに非常に酷似しているのでここでは「きれいな」単位の分割をWhitneyとDugundjiの寄与によるものとして扱う。Dugundji自身は単位の分割ではなく被覆から誘導される脈複体を用いて拡張定理を証明しているがやっていることは結局同じことである。Hausudorffの拡張定理は閉集合上の距離を空間全体に拡張できることを述べたとても強力な定理である。\par
+この文章では「埋め込み」という言葉が出てくるが、連続写像$f:X\to Y$が埋め込みであるとはコドメインを変更した写像$f:X\to f(X)$が同相写像になることである。「閉埋め込み」は閉写像でかつ埋め込みになっている写像のことである。例えば同相写像$g:S\to T$について、$g$を$S$の閉集合$C$に制限した写像$g|C:C\to T$は閉埋め込みになっている。
+\begin{lem}[Whitney-Dugundji's Partition of unity ]
+距離空間$(X,d)$とその閉集合$A$に対して$X\setminus A$の局所有限被覆$\mathcal{U}$と$\mathcal{U}$によって添え字付けられた$X$上の非負実数値連続関数の族$\{s_U\}_{U\in \mathcal{U}}$と$\mathcal{U}$によって添え字付けられた$A$の部分集合族$\{a_U\}_{U\in \mathcal{U}}$が存在して
+\begin{align}
+&\{x\in X\mid s_U(x)>0\}\subset U\\
+&\sum_{U\in \mathcal{U}}s_U(x)=
+\begin{cases}
+		1 & \text{$x\in X\setminus A$}\\
+		0 & \text{$x\in A$}
+\end{cases}\\
+&\forall x\in X\ \forall a\in A\ s_U(x)>0\To d(a,a_U)\le 3d(a,x)
+\end{align}
+を充たす。
+\end{lem}
+\begin{proof}
+各$x\in X\setminus A$について$\dpst r(x)=\frac{d(x,A)}{4}>0$とする。
+$\mathcal{B}=\dpst \{B(x,r(x))\}_{x\in X\setminus A}$は$X\setminus A$の開被覆である。さらに$X\setminus A$はパラコンパクトなので$\mathcal{B}$の局所有限な開細分$\mathcal{U}$が存在する。各$\mathcal{U}$について$x_U\in X\setminus A$を
+\[
+U\subset B(x_U, r(x_U))
+\]
+を充たすものとする。さて各$U\in \mathcal{U}$について$f_U:X\to [0,\mgn)$を$f_U(x)=d(x,X\setminus U)$と定義する。さらば、
+$\mathcal{U}$の局所有限性から
+\[
+F(x)=\sum_{U\in\mathcal{U}}f_U(x)
+\]
+は$X$上の連続関数となる。そして
+\[
+s_U(x)=\begin{cases}
+		f_U(x)/F(x) & \text{$x\in X\setminus A$}\\
+		0 & \text{$x\in A$}
+	\end{cases}
+\]
+と定義すれば、$s_U$は$X$上の非負実連続関数となり、
+\[
+s_U(x)>0\iff x\in U
+\]
+及び、
+\[
+\sum_{U\in \mathcal{U}}s_U(x)=
+\begin{cases}
+		1 & \text{$x\in X\setminus A$}\\
+		0 & \text{$x\in A$}
+\end{cases}
+\]
+を充たす。次に$a_U$を$d(x_U,a_U)\le \dfrac{5}{4}d(x_U,A)$を充たす$A$の元として定義する。\par
+今$s_U(x)>0$としよう。すると$x\in U$であり、更に$U\subset B(x_U, r(x_U))$なので、
+\[
+d(x,x_U)\le \frac{1}{4}d(x_U,A)
+\]
+となる。そして$a\in A$について
+\[
+d(a,a_U)\le d(a, x)+d(x,x_U)+d(x_U,a_U)\le d(a.x)+\frac{1}{4}d(x_U,A)+\frac{5}{4}d(x_U,A)=d(a,x)+\frac{3}{2}d(x_U,A)
+\]
+となり、さらに
+\[
+d(x_U,A)\le d(x_U,a)\le d(x_U,x)+d(x,a)\le \frac{1}{4}d(x_U,A)+d(x,a)
+\]
+より、
+\[
+d(x_U,A)\le \frac{4}{3}d(x,a)
+\]
+を得るので
+\[
+d(a,a_U)\le d(a,x)+\frac{3}{2}d(x_U,A)\le 3d(a,x)
+\]
+が分かる。
+\end{proof}
+
+\begin{thm}[Dugundjiの拡張定理]\label{d}
+距離空間$(X,d)$の閉集合$A$と局所凸型線形位相空間$L$の凸集合$C$及び連続写像$f:A\to C$について、連続写像$F:X\to C$が存在し、
+\[
+F|A=f
+\]
+を充たす。
+\end{thm}
+\begin{proof}
+$(X,d)$と$A$に対して先の補題から、$X\setminus A$の局所有限細分$\mathcal{U}$及び$\{s_U\}_{U\in \mathcal{U}}$、$\{a_U\}_{U\in \mathcal{U}}$が存在する。さて、今$F:X\to C$を
+\[
+F(x)=
+	\begin{cases}
+		f(x) & \text{$x\in A$}\\
+\\
+		\dpst \sum_{U\in \mathcal{U}}s_U(x)f(a_U) & \text{$x\in X\setminus A$}
+	\end{cases}
+\]
+と定義する。$C$が凸集合であることから、$F$は$C$に値を取る。$\mathcal{U}$が局所有限で$\{x\in X\mid s_U(x)>0\}\subset U$なので$F$はちゃんと定義されている。また、$C$が凸集合であることから、$F$は$C$に値を取る。そして局所有限性から$X\setminus A$上で$F$が連続であることは明らかである。$A$上の任意の点$a$で$F$が連続であることを示せば証明は終わる。\par
+$L$は局所凸線形位相空間なので、そのセミノルムの族から定まる位相である（ミンコフスキーゲージなどの議論を思い出せ）。セミノルムの正のスカラー倍などを考えれば結局、$L$上連続な任意のセミノルム$p$について、ある$\delta$が存在し、
+\[
+d(a,x)<\delta\To p(F(a)-F(x))<1
+\]
+が成り立つことを示せばよい。今、$L$上連続な$p$について、$f$は$A$上連続であったのである$r>0$が存在して
+\[
+d(a,y)<r\ and\ y\in A\To p(f(a)-f(y))<1
+\]
+が成り立つ。$\delta=\dfrac{1}{3}r$とせよ、すると$d(a,x)<\delta$となる$x\in X\setminus A$について$s_U(x)>0$となる$U$を$U_1,U_2,\cdots, U_m$
+とすると
+\[
+F(x)=\sum_{i=1}^ms_{U_i}(x)f(a_{U_i})
+\]
+となり、先の補題から$d(a.a_{U_i})\le 3d(a,x)<r$となり、$a_{U_i}\in A$なので
+\[
+p(f(a)-f(a_{U_i}))<1
+\]
+となる。よって
+\begin{align*}
+p(F(a)-F(x))&=p\left(\sum_{i=1}^ms_{U_i}(x)f(a)-\sum_{i=1}^ms_{U_i}(x)f(a_{U_i})\right)=p\left(\sum_{i=1}^ms_{U_i}(x)(f(a)-f(a_{U_i}))\right)\\
+&\le  \sum_{i=1}^ms_{U_i}(x)p(f(a)-f(a_{U_i}))<1
+\end{align*}
+これで$F$が$A$上で連続であることが分かった。
+\end{proof}
+
+\begin{cau}
+Dugundjiの拡張方法はより強く、次のような写像が存在するということも含意している。
+\[
+\Phi:C(A,C)\to C(X,C)
+\]
+で
+\[
+\Phi(f)|A=f
+\]
+$f_1,f_2\dots, f_n\in C(A,C)$及び$c_i\ge 0,\ \sum_{i=1}^nc_i=1$を充たすとき
+\[
+\Phi\left(\sum_{i=1}^mc_if_i\right)=\sum_{i=1}^mc_i\Phi(f_i)
+\]
+これは拡張が$f$に依存しない単位の分割によって行われているからである。
+\end{cau}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%ココカラ修正
+%%%%
+\begin{thm}\label{n}
+距離空間$(X,d)$はノルム空間$E$に閉集合として等長に埋め込める。さらに$(X,d)$が完備であるときは、バナッハ空間$F$に閉集合として等長に埋め込める。
+\end{thm}
+\begin{proof}
+\[
+Y=\{\,A\subset X\mid \text{$A$は有限集合}\,\}
+\]
+とする。すなわち$Y$は$X$の有限部分集合全体である。
+そして$Z=C_b(Y,\rr)$とし、$\sup$ノルムを与えると、これはノルム空間になっている。
+さて$X$の一点$p$を固定し各$x\in X$について$f_x:Y\to \rr$
+を$S\in Y$つまり$X$の有限集合$S$について
+\[
+f_x(S)=d(x,S)-d(p,S)
+\]
+という値を対応させる写像と定義する。
+そして、$g:X\to Z$を$g(x)=f_x$とする。これが等長埋め込みになっていることを示そう。
+\par
+まず
+\[
+|f_x(S)-f_y(S)|=|d(x,S)-d(y,S)|\le d(x,y)
+\]
+がわかり
+\[
+|f_x(\{x\})-f_y(\{x\})|=|d(x,\{x\})-d(p,\{x\})-d(y,\{x\})+d(p,\{x\})|=d(x,y)
+\]
+となるので$\|g(x)-g(y)\|=\|f_x-f_y\|=d(x,y)$となり$g$が等長的であることがわかる。そしていま、
+\[
+E=\textrm{span}_{\rr}(g(X))
+\]
+とする。\textbf{つまり$E$は$g(X)$の元で代数的に生成された$Z$の部分線形空間である。}
+$E\subset Z$なので、$Z$のノルムを$E$に制限することによって$E$は自然にノルム空間とみなすことができる。
+もちろんこのとき$g:X\to E$は等長的である。
+\par
+いまから
+$g(X)$が$E$の中で閉であることを示そう。即ち$g(X)$内の点列$\{y_i\}$が$a\in E$に収束するならば、$a\in g(X)$であることを示す。$\{y_i\}$を$g(X)$内の点列とすると、$X$内の点列$\{x_i\}$を用いて$y_i=g(x_n)$と書くことができる。
+$y_i\to a\in E\ (i\to +\mgn)$としよう。このとき$E$の定義から
+\[
+a=\sum_{i=1}^mc_ig(a_i)
+\]
+となるような$c_i\in \rr$と$a_i\in g(X)$が存在する。$S=\{a_1,a_2\dots, a_m,p\}$と置くと、$a(S)=0$なので、
+$y_n(S)\to 0$であるつまり、
+\[
+y_n(S)=g(x_n)(S)=f_{x_n}(S)=d(x_n, \{a_1,a_2\dots, a_m,p\})\to 0\ (n\to \mgn)
+\]
+なので$\{x_n\}$の部分列で$S$のいずれかの元に収束するものがとれる。それを$\{x_{\phi(n)}\}$とし、$x_{\phi(n)}\to b\in S$としよう。
+すると$g$はもちろん連続なので$g(x_{\phi(n)})\to g(b)$となるが、そもそも$g(x_n)\to a$であったので$a=g(b)$でなければならない。
+これはつまり、$a\in g(X)$ということなので、$g(X)$は$E$の中で閉集合である。
+\par
+定理の後半について述べよう。先までの議論から距離空間$(X,d)$をノルム空間$E$に等長に埋めるが、これはつまり$E$の完備化$F$にも等長に埋め込めるということである。（包含写像$E\to F$が等長的だからである。）距離空間の完備な部分空間は閉集合なので$X$はバナッハ空間$F$の閉集合となることがわかる。
+よって$(X,d)$はバナッハ空間に等長に閉集合として埋め込める。
+\end{proof}
+
+\begin{cau}
+一般に距離空間はバナッハ空間に閉集合として埋め込むことは出来ない。完備距離付け不可能な距離空間が存在するからである。（完備距離付け不可能な距離空間の例を一つ上げてみよ。）
+\end{cau}
+
+以下の定理は図を描けば自明に思える類の定理のである。
+\begin{lem}\label{lem}
+二つのノルム空間$E,F$とその閉部分空間$K\subset E,\ L\subset F$及び同相写像$f:K\to L$が与えられているとする。このとき$K\times\{0\}\subset E\times F,\ \{0\}\times L\subset E\times F$として、$f$から自然に同相写像$g:K\times\{0\}\to \{0\}\times L$が誘導される。このとき$g$の拡張となっているような同相写像$h:E\times F\to E\times F$が存在する。
+\end{lem}
+\begin{proof}
+$(x,0)\in K\times\{0\}$について$g(x,0)=(0,f(x))$であり、$(0,y)\in \{0\}\times L$について$g^{-1}(0,y)=(f^{-1}(y),0)$であることに注意しよう。\par
+定理\ref{d}を用いて$f:K\to L\subset F$を拡張して写像$\al:E\to F$を得る。そして$S:E\times F\to E\times F$を
+$S(x,y)=(x,y+\al(x))$
+と定義すると、$P(x,y)=(x,y-\al(x))$で定義される写像$P:E\times F\to E\times F$は$S$の逆写像になっているので、$S$は同相写像である。\par
+一方、$f^{-1}:L\to K\subset E$に定理\ref{d}を用いて拡張$\be:F\to E$を得て、$T:E\times F\to E\times F$を$T(x,y)=(x+\be(y),y)$で定義する。このとき$Q(x,y)=(x-\be(y),y)$で定義される$Q:E\times F\to E\times F$は$T$の逆写像になっているので$T$は同相である。\par
+いまここで$h=T^{-1}\circ S=Q\circ S:E\times F\to E\times F$と定義するとこれは同相写像で、$(x,0)\in K\times \{0\}$について$S(x,0)=(x,\al(x))=(x,f(x))$なので
+\[
+h(x,0)=Q(x,f(x))=(x-\be(f(x)),f(x))=(x-f^{-1}(f(x)),f(x))=(0,f(x))=g(x,0)
+\]
+となり、確かに$h$は$g$の拡張になっている。
+\end{proof}
+\begin{cau}
+次の定理に入る前に一つ注意をしておく。二つのノルム空間$(E,\|*\|_E),(F,\|*\|_F)$に対する直積空間$E\times F$のノルムのことである。この文章では一応$E\times F$のノルムを
+\[
+\|(x,y)\|_{E\times F}=\sqrt{\|x\|^2_{E}+\|y\|^2_F}
+\]
+で定義するが、以下の証明を見ればわかるように$E\times F$の位相と両立していて$\|(x,0)\|_{E\times F}=\|x\|_E,\ \|(0,y)\|_{E\times F}=\|y\|_F$
+を充たしさえすればなんでもよい。例えば上の定義の代わりに$\|(x,y)\|_{E\times F}$を$\|x\|_E+\|y\|_F$や、$\max\{\|x\|_E,\|y\|_F\}$と定義しても以下の証明には全く影響はない。
+\end{cau}
+\begin{thm}[Hausdorff's Metric Extension theorem0]\label{main}
+$X$を距離付け可能空間で$A$をその閉部分集合とし、$A$には$A$の位相と両立する距離$\rho$が与えられているとする。このとき$X$の位相と両立する$X$上の距離で、$A$上で$\rho$と一致するものが存在する。
+\end{thm}
+\begin{proof}
+$X$の距離を何か適当に$d$と置く。定理\ref{n}から等長埋め込み$i:(X,d)\to (E,\|*\|_E)$で$i(X)$が$E$の閉集合であるものが存在する。同様に$(A,\rho)$についても等長埋め込み$j:(A,\rho)\to (F,\|*\|_F)$が存在し、$j(A)$は$F$の閉集合となる。\par
+さて$i$が閉埋め込みであることと、$A$が$X$の閉集合であることから$i(A)$も$E$の閉集合であり、$i$と$j$は埋め込みであるから$i(A)$と$j(A)$は自然に同相である。つまり$j\circ i^{-1}$が同相写像を与える。この同相写像を$f:i(A)\to j(A)$として補題\ref{lem}を用いて
+$g:i(A)\times \{0\}\to \{0\}\times j(A); (i(a),0)\mapsto (0,j(a))$の拡張となる同相写像$h:E\times F\to E\times F$を得る。\par
+さて$k:E\to E\times\{0\}$を$k(x)=(x,0)$で与えられる自然な閉埋め込みだとして
+\[
+H=h\circ k\circ i:X\to E\times F
+\]
+を考えるとこれは埋め込みになっているので（実際には閉埋め込みであるが、閉であることは次の定理の証明でしか用いない）$X$上の距離関数$e$を
+\[
+e(x,y)=\|H(x)-H(y)\|_{E\times F}
+\]
+で定義すると、この$e$は$X$の位相と両立する。また$a\in A$について$H(a)=(0,j(a))$で$j:(A,\rho)\to (F,\|*\|_F)$が等長であることから$a\mapsto (0,j(a))$で定義される写像も等長なので、$e$は$A$上で$\rho$と一致する。
+\end{proof}
+\begin{thm}[Hausdorff's Metric Extension theorem1]
+$X$を完備距離付け可能空間で$A$をその閉部分集合とし、$A$には$A$の位相と両立する距離$\rho$が与えられているとし、更に$(A,\rho)$は完備であるとする。このとき$X$の位相と両立する$X$上の完備な距離で、$A$上で$\rho$と一致するものが存在する。
+\end{thm}
+\begin{proof}
+$X$か完備距離付け可能ならば先の定理の証明で$E$はバナッハ空間として選べる。$F$も同様にバナッハ空間を指定できる。このとき$E\times F$は完備距離空間で$H$は閉埋め込みであることから$H(X)$は$E\times F$の閉集合であるから$E\times F$から誘導される距離で完備になる。
+\end{proof}
+
+\begin{cor}
+距離付け可能空間$X$が、その位相と両立する任意の距離で完備になるならば、$X$はコンパクト空間である。
+\end{cor}
+\begin{proof}
+対偶を証明する。$X$がノンコンパクトな距離空間であるときに集積点を持たない可算集合$A=\{a_i\mid i\in \nn\}$が存在する。この$A$は$X$の閉集合である。さて$A$上の距離を
+\[
+\rho(a_i,a_j)=|2^{-i}-2^{-j}|
+\]
+とする。するとこの$\rho$は$A$の位相と両立する。この事は$A$と$\{2^{-i}\mid i\in \nn\}$がともに可算離散位相であり同相であるということに他ならない。さて定理\ref{main}から$\rho$の拡張となる$X$の位相と両立する$X$上の距離$d$が存在するが、この距離において$\{a_i\}_{i\in \nn}$はコーシー列を成すが、$A$が集積点を持たないことから$\{a_i\}_{i\in \nn}$は収束点を持たない。よって$(X,d)$は完備ではない。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}R.Arens, \textit{Extension of functions on fully normal spaces}, Paciffic J. Math.2(1952),p11-22
+\bibitem{2}H. Toru\'nczyk, \textit{A simple Proof of Hausdorff's Theorem on extending metrics}, Fund.Math.77(1972-1973),p191-193
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,272 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%なんか演算
+\newcommand{\card}{\text{  {\rm card}  } }
+\newcommand{\supp}{\text{  {\rm supp}  } }
+\newcommand{\s}{\text{  {\rm St}} }
+\newcommand{\bd}{\text{  {\rm Bdry}} }
+\newcommand{\uu}{\mathcal{U}}
+\newcommand{\vv}{\mathcal{V}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\dd}{\Delta}
+\newcommand{\pr}{\prec}
+\newcommand{\cl}{\text{  {\rm CL}} }
+\newcommand{\zp}{\zz_{+}}
+\newcommand{\zr}{\zz_{\ge0}}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{距離化可能性と閉像}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+
+\begin{df}[局所星型]
+位相空間$X$の開被覆$\uu$について、開被覆の列$\{\A_n\}_{n\in \nn}$が$\uu$に対して局所星型であるとは、各$x\in X$について$x$の近傍$V$と$n\in \nn$及び$U\in \uu$が存在して
+\[
+\s(V,\A_n)\subset U
+\]
+となることである。
+\end{df}
+
+\begin{thm}
+位相空間$X$がfully normal であることと、$X$の任意の開被覆$\uu$についてそれに対して局所星型である開被覆の列が存在することは同値である。
+\end{thm}
+\begin{proof}
+$X$がfully normal であるときに任意の開被覆に対してそれに対して局所星型であるような開被覆の列が存在するのは明らかである。(
+$\vv^{*}\pr\uu$となる$\vv$を取れば良い。)逆を示そう。\par
+$\uu$を任意に与え、$\uu$に重心細分が存在することを示せば良い。
+$\{\A_n\}_{n\in \nn}$を$\uu$に対して局所星型になる開被覆の列とする。
+さらに$\uu_{n+1}\pr\uu_n$と仮定しても良い。そして
+\[
+\B=\{V\ |\ \mbox{$V$は$X$の開集合でかつ、$\exists n\in \nn\ (\exists U\in \A_n\ V\subset U)$かつ$(\exists O\in \uu\ \s(V,\A_n)\subset O)$}\}
+\]
+と定義する。すると$\{\A_n\}_{n\in \nn}$が局所星型であることから$\B$は被覆となる。
+また$V\in \B$について$n(V)$を$n\in \nn\ (\exists U\in \A_n\ V\subset U)$かつ$(\exists O\in \uu\ \s(V,\A_n)\subset O)$を充たす$n$の最小値とする。そして$x\in X$
+\[
+n(x)=\min\{n(V)\ |\ x\in V\in \B\}
+\]
+と定義する。そして$P\in \B$を$n(x)=n(P)$となるものとする。$x\in V\in \B$とすると$n(x)\le n(V)$であり、$V\in \B$について$\exists U\in \A_{n(V)}\ V\subset U$なので
+\[
+\s(x,\B)\subset \bigcup_{i\ge n(x)}\{\s(x,\A_i)\}
+\]
+そして$\A_{n+1}\pr\A_n$なので
+\[
+\s(x,\B)\subset \s(x,\A_{n(x)})\subset \s(x,\A_{n(P)})\subset \s(P,\A_{n(P)})
+\]
+で$\B$と$n(P)$の定義からある$O\in \uu$が存在して$\s(P,\A_{n(P)})\subset O$なので結局
+\[
+\s(x,\B)\subset O
+\]
+なので$\B$は$\uu$の重心細分となる。
+\end{proof}
+
+
+
+
+\begin{thm}
+以下は同値
+\begin{enumerate}
+\item $X$は距離化可能
+\item $X$は$T_0$空間で局所有限閉被覆の列$\{\mathcal{F}_n\}_{n\in \nn}$が存在し、$x\in X$の任意の近傍$N$を与えると$n\in \nn$が存在して$\s(x,\mathcal{F}_n)\subset N$を充たす。
+\item $X$は$T_0$空間で開被覆の列$\{\uu_n\}_{n\in\nn }$が存在し、任意の$x\in X$と$x$の任意の近傍$N$について$x$の近傍$M$と$n\in\nn$が存在して$\s(M,\uu_n)\subset N$を充たす。
+\item $X$は$T_1$空間で任意の開被覆に対して局所星型となるような開被覆の列$\{\uu_n\}_{n\in \nn}$が存在する。
+\end{enumerate}
+\end{thm}
+
+
+
+\begin{thm}
+距離空間の完全像は距離化可能空間である。
+\end{thm}
+\begin{proof}
+
+\end{proof}
+
+
+
+
+\begin{thm}[Hanai-Morita-Stone]
+距離空間$X$と全射閉写像$f:X\to Y$について以下は同値
+\begin{align}
+&\mbox{$Y$は距離化可能}\\
+&\mbox{$Y$は第一可算公理を充たす。}\\
+&\mbox{各$y\in Y$について$\bd (f^{-1}(y))$はコンパクト}
+\end{align}
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{d}J.Dugundji,{\it Topology},William C Brown Pub ,1966
+\bibitem{mori}K.Morita,{\it A condition for the metrizability of topological spaces and for n-dimensionality},Science Reports of Tokyo Kyoiku Daigaku Sec. A,Vol 5, No.114(1955)
+\bibitem{morihana}K.Morita and S.Hanai,{\it Closed mappings and metric spaces},Proc.Japan Acad. vol 32.No.1(1956)
+\bibitem{stone}A.H.Stone,{\it Paracompactness and product spaces},Bull,Amer.Math Soc. 54(1948),977-982
+\bibitem{stone}A.H.Stone, {\it Metrizability of decomposition spaces},Proc. of Amer . Math. Soc., vol 54,No.4 (1956)
+\bibitem{stone2}A.H.Stone,{\it Sequences of coverings}, Paciffic J. Math. vol 10,No.2 (1960)
+\bibitem{Tukey}J.W.Tukey,{\it Convergence and uniformity in topology},Annals of Mathematics Studies, \par no.2,Princeton,1940
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,454 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{defnition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\newtheorem{fact}[theorem]{事実}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\supp}{\text{{\rm supp}}}
+\newcommand{\mgn}{\infty}
+\newcommand{\bms}{e^{i(k+\frac{1}{2})x}-e^{-i(k+\frac{1}{2})x}}
+\newcommand{\bmb}{e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}
+\newcommand{\hf}{\frac{1}{2}}
+\title{積分核と多項式近似}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+%補足を書けば終わり。
+
+この文書ではワイエルストラスの多項式近似定理を積分核を用いた方法で証明する。
+
+\begin{cau}[円周上の連続関数]
+$\mathbb{R}$の区間$[a,b]$の端点$a,b$を同一視した空間と円周$S^1$は位相同型である。この同型を根拠に$S^1$上の実数値連続関数と$[a,b]$上の実数値連続関数で$f(a)=f(b)$となる関数を同一視する。また、$S^1$上で行うべき積分を閉区間上の積分として処理する。\\ 
+以下の文章では$S^1$と$[0,1]$やら$[-\pi,+\pi]$やらがこの方法によって同一視される。
+\end{cau}
+
+\begin{defnition}[円周上もしくは直線上の関数の畳込み]
+$[a,b]$の$a$と$b$を同一視して得られる円周上の関数$f,g$に対して畳み込みを
+ \[
+  (f*g)(x)=\int_a^bf(x-y)g(y)dy
+ \]と定義する。$x$の値によっては$x-y$は$[a,b]$からはみ出してしまい$f(x-y)$の意味が不明瞭だが、これは$f$を$\mathbb{R}$まで周期的に拡張した関数として考え積分するのである。\\ 
+$\mathbb{R}$上の連続関数$f,g$に対してその畳込みを
+ \[
+  (f*g)(x)=\int_{-\infty}^{+\infty}f(x-y)g(y)dy
+\]
+と定義する。性質の良い関数$f,g$を選ばなければこの関数はwell-defindではないことに注意しよう。しかし後にこの畳込みを用いるときには都合の良い関数しか扱わないし、その時にちゃんと注意するので心配の必要はない。
+\end{defnition}
+\begin{cau}
+連続関数$f,g$について畳み込み$f*g$が定義されるとき、
+\[
+f*g=g*f
+\]
+となる。
+\end{cau}
+
+次に良い核を定義しよう。"良い核"という単語で一つの固有名詞である。
+\begin{defnition}[直線上もしくは円周上の良い核]円周上の関数列$\{K_n(t)\}$が$c\in(a,b)$に台を持つ良い核であるとは
+\begin{eqnarray}
+&\int_a^bK_n(t)dt=1\\ 
+&\exists M>0\ \forall n\in \mathbb{N}\  \int_a^b |K_n(t)|dt\le M\\ 
+&\exists \eta>0\ \forall \delta\in(0,\eta)\ \lim_{n\rightarrow \infty}\int_{|c-t|\ge \delta}|K_n(t)|dt=0
+\end{eqnarray}
+
+を充たすことである。\\ 
+上と同様に直線上の関数列$\{K_n(t)\}$が$c\in \mathbb{R}$に台を持つ良い核であるとは
+\setcounter{equation}{0}
+\begin{eqnarray}
+&\int_{-\infty}^{+\infty}K_n(t)dt=1\\ 
+&\exists M>0\ \forall n\in \mathbb{N}\  \int_{-\infty}^{+\infty}|K_n(t)|dt\le M\\ 
+&\forall \delta>0\ \lim_{n\rightarrow \infty}\int_{|c-t|\ge \delta}|K_n(t)|dt=0
+\end{eqnarray}
+を充たすことである。
+\end{defnition}
+
+\begin{theorem}[良い核と関数の近似]\label{daiji}
+$\{K_n\}$を円周上の$c$を台にもつ良い核とし、$f$を円周上の連続関数として
+\[
+H_n(x)=f*K_n(c+x)
+\]
+と置くこのとき
+\[
+\forall \varepsilon>0\ \exists N\in\mathbb{N}\ \forall n>N\ ||f-H_n||_{\infty}<\varepsilon
+\]が成り立つ。
+$\{K_n\}$を直線上の$c$を台にもつ良い核とし、$f$を直線上の$suppf$がコンパクトな連続関数とすると
+\[
+H_n(x)=f*K_n(c+x)
+\]
+と定義するとこの畳込みはwell-definedで
+\[
+\forall \varepsilon>0\ \exists N\in\mathbb{N}\ \forall n>N\ ||f-H_n||_{\infty}<\varepsilon
+\]が成り立つ。
+\end{theorem}
+
+\begin{proof}（円周上について）
+まず$C=\max\{M+1,\sup_{x\in[a,b]}|f(x)|+1\}$と定義し任意の正の数$\varepsilon$について、コンパクト空間上の連続関数は一様連続だから$\delta>0$が存在して
+\[
+|x-y|<\delta\Rightarrow |f(x)-f(y)|<\frac{\varepsilon}{2C}
+\]
+となる。ここで$\delta$を十分小さくとり$\delta<\eta$と仮定できる。\\ 
+更に$N$を十分大きく取り
+\[
+n>N\Rightarrow \int_a^b|K_n(t)|dt<\frac{\varepsilon}{4C}
+\]
+と出来る。
+そして$\int_a^bK(t)dt=1$より任意の$x\in [a,b]$に対して
+\[
+|H_n(x)-f(x)|=\left|\int_a^bK(y)f(c+x-y)-\int_a^bK_n(y)f(x)dy\right|=\left|\int_a^bK(y)(f(c+x-y)-f(x))dy\right|
+\]
+\[
+\le \int_a^b|K_n(y)||f(c+x-y)-f(x)|dy=\int_{|c-y|<\delta}|K_(y)||f(c+x-y)-f(x)|dy+\int_{|c-y|\ge \delta}|K_n(y)||f(c+x-y)-f(x)|dy
+\]
+ここで最後の式の初項について一様連続性から
+\[
+\int_{|c-y|<\delta}|K_(y)||f(c+x-y)-f(x)|dy<\frac{\varepsilon}{2C}\int_{|c-y|<\delta}|K(y)|\ dy\le\frac{\varepsilon}{2C}C=\frac{\varepsilon}{2}
+\]
+第二項について
+\[
+\int_{|c-y|\ge \delta}|K_n(y)||f(c+x-y)-f(x)|dy\le 2C\int_{|c-y|\ge \delta}|K_n(y)|<2C\frac{\varepsilon}{4C}=\frac{\varepsilon}{2}
+\]
+よって
+\[
+|H_n(x)-f(x)|<\varepsilon
+\]
+$N$は$x$に依存しないので結局
+\[
+||f-H_n||_{\infty}<\varepsilon
+\]
+なのでよって
+\[
+\forall \varepsilon>0\ \exists N\in\mathbb{N}\ \forall n>N\ ||f-H_n||_{\infty}<\varepsilon
+\]
+（直線上について）$\supp f$のコンパクト性から畳込みがwell-defined であることはすぐわかるし、$\supp f$がコンパクトであることから$f$の一様連続性がわかるので円周上の場合と同様である。
+\end{proof}
+
+しかし以降の文章では台が$0$となる核しか出てこない。また、パラメータが自然数$n$ではなく実数$a$で$a\to \mgn$の時に連続関数を近似したり、パラメータが$r\in (0,1)$で$r\to 1$のときに連続関数を近似したりするものが出てくるが、証明は同様である。
+
+\begin{defnition}
+$a>0$に対して
+$\displaystyle \int_{-\infty}^{+\infty}e^{-ax^2}=\sqrt{\frac{\pi}{a}}$に注意して
+\[
+W_{a}=\sqrt{\frac{a}{\pi}}e^{-ax^2}
+\]と定義しこれをワイエルストラス核と呼ぶ。定義域は$\rr$とする。
+\end{defnition}
+
+\begin{defnition}
+$c_n=(\int_{-1}^{-1}(1-x^2)^ndx)^{-1}$とし、
+\[
+L_n(x)=c_n(1-x^2)^n
+\]と定義する。これをランダウ核と呼ぶ。定義域は$[-1,+1]$
+\end{defnition}
+
+\begin{defnition}
+$\displaystyle a_n=(\int_{-\frac{\pi}{2}}^{+\frac{\pi}{2}}\cos^nx\ dx)^{-1}$とし、
+\[
+A_n(x)=a_n\cos^nx
+\]を$A$核と呼ぶことにする。定義域は$[-\frac{\pi}{2},+\frac{\pi}{2}]$
+\end{defnition}
+
+\begin{defnition}
+\[
+F_n(x)=\frac{1}{2\pi}\frac{1}{n+1}\left(\frac{\sin(\frac{(n+1)x}{2})}{\sin(\frac{x}{2})}\right)^2
+\]をフェイエル核という。定義域は$[-\pi,+\pi]$
+\end{defnition}
+
+\begin{defnition}
+\[
+P_r(x)=\frac{1}{2\pi}\frac{1-r^2}{1-2r\cos x+r^2}
+\]
+をポアソン核という。定義域は$[-\pi,+\pi]$
+\end{defnition}
+
+%ここを証明する＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+\begin{lemma}\label{f}
+$\displaystyle D_k(x)=\sum_{m=-k}^{k}e^{imx}$とするとき
+\begin{eqnarray*}
+&\int_{-\pi}^{+\pi}D_k(x)\ dx=2\pi\\ 
+&D_k(x)=\cfrac{\bms}{\bmb}=\frac{\sin\left((k+\frac{1}{2}\right)x)}{\sin(\frac{x}{2})}\\ 
+&F_n(x)=\frac{1}{2\pi}\frac{D_0(x)+D_1(x)+\dots +D_n(x)}{n+1}\\ 
+&P_r(x)=\frac{1}{2\pi}\sum_{n=-\infty}^{+\infty}r^{|n|}e^{inx}\ (0<r<1)（一様収束）
+\end{eqnarray*}
+が成立する。
+\end{lemma}
+
+\begin{proof}
+１番の式は
+\begin{equation*}
+\int_{-\pi}^{+\pi}e^{inx}\ dx=
+ \begin{cases}
+  2\pi & \text{$n=0$}\\
+  0 & \text{$n\neq 0$}
+ \end{cases}
+\end{equation*}からわかる。残りは等比級数の総和公式を使えばわかる。
+
+
+以上では$i$は虚数単位でオイラーの等式
+\[
+e^{ix}=\cos x+i\sin x
+\]
+を用いた。
+
+
+\end{proof}
+\begin{cau}
+$\frac{1}{2\pi}D_k$も良い核になりそうだが、これは良い核にはならない。このことを補うためにフーリエ級数論ではフェイエル核やポアソン核を用いる。
+\end{cau}
+%証明する＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+\begin{theorem}上の核は全てそれぞれの定義域の上で良い核となる。
+\end{theorem}
+
+\begin{proof}まず最初に上で述べた核は全て正なので良い核の条件2は条件1を示せば直ちに従うことに注意しよう。
+
+（ワイエルストラス核について）\\ 
+$\displaystyle \int_{-\infty}^{+\infty}e^{-ax^2}=\sqrt{\frac{\pi}{a}}$なので
+\[
+\int_{-\infty}^{+\infty}W_a(t)dt=1
+\]
+は明らかであるので条件1,及び条件2を充たす。そして
+\[
+\int_{\delta}^{+\infty}W_a(x)dx=\int_{\delta}^{+\infty}\sqrt{\frac{a}{\pi}}e^{-ax^2}dx=
+\sqrt{\frac{1}{\pi}}\int_{\sqrt a\delta}^{+\infty}e^{-ay^2}dy
+\]
+で
+\[
+\lim_{a\rightarrow \infty}\int_{\sqrt a\delta}^{+\infty}e^{-ay^2}dy=0
+\]
+と$W_a$が偶関数であることから
+\[
+\forall \delta>0\ \lim_{a\rightarrow \infty}\int_{|t|\ge \delta}W_a(t)dt=0
+\]
+がわかる。
+
+（ランダウ核について）定義から明らかに
+\[
+\int_{-1}^{+1}L_n(t)dt=1
+\]であるので条件1,2を充たす。また$(1-t^2)^n$が偶関数で$t\in [0,1]$のとき$1+t\ge 1$より
+\[
+\frac{1}{c_n}=\int_{-1}^{+1}(1-t^2)^ndt=
+2\int_{0}^{+1}(1-t^2)^ndt =2\int_{0}^{+1}(1-t)^n(1+t)^ndt 
+\]
+\[
+\ge 2\int_{0}^{+1}(1-t)^ndt=
+2\left[ -\frac{1}{n+1}(1-t)^n\right]_{0}^{1}=2(\frac{1}{n+1})
+\]
+よって
+\[
+c_n\le \frac{n+1}{2}
+\]そして
+
+\[
+\int_{|t|\le \delta}L_n(t)=\frac{2}{c_n}\int_{\delta}^{1}(1-t^2)^ndt\le 
+(n+1)\int_{\delta}^1(1-t^2)^ndt
+\]
+\[
+\le (n+1)\int_{\delta}^1(1-\delta^2)^ndt=(n+1)(1-\delta)(1-\delta^2)^n
+\]
+で$0<\delta<1$より$0<1-\delta^2<1$なので条件3がわかる。
+
+($A$核について)
+\[
+\int_{-\frac{\pi}{2}}^{+\frac{\pi}{2}}A_n(x)\ dx=1
+\]
+は定義より明らか。後半は所謂ウォリスの公式を導出する議論を用いる。
+$\displaystyle I_n=\int_{0}^{\frac{\pi}{2}}\cos x\ dx$とした時、
+\[
+I_n=\frac{n-1}{n}I_{n-2}
+\]
+が成り立つ。このことは高校生程度の知識があれば容易にわかると思う。さてこの式と$I_0=\frac{\pi}{2},I_1=1$から帰納的に次の事がわかる。
+\[
+I_{2n}\ge\frac{1}{2n},\ \ I_{2n-1}\ge \frac{1}{2n-1} \ (n\ge 1)
+\]つまり
+\[
+I_n\ge \frac{1}{n}\ (n\ge 1)
+\]
+よって$1/a_n=2I_n$より
+\[
+a_n\le n/2\le n
+\]故に
+\[
+\int_{|x|\ge \delta}A_n(x)\ dx\le n\int_{|x|\ge \delta}\cos^{n}x\ dx=n\int_{\delta}^{+\frac{\pi}{2}}\cos^nx \ dx\le n\cos^n(\delta) \int_{\delta}^{+\frac{\pi}{2}}\ dx=n(\frac{\pi}{2}-\delta)\cos^n(\delta)
+\]
+なので条件3が成立することがわかる。\\ 
+（フェイエル核について）補題\ref{f}より
+\[
+\int_{-\pi}^{+\pi}F_n(x)\ dx=\frac{1}{2\pi}\int_{-\pi}^{+\pi} \frac{D_0(x)+D_1(x)+\dots +D_n(x)}{n+1}\ dx=1
+\]なので条件1(ついでに2も)満たされる。\\ 
+条件3について
+
+\[
+\int_{\delta\le |x|\le \pi}2\pi F_n(x)\ dx=
+\int_{\delta\le |x|\le \pi}\frac{1}{n+1}\left(\frac{\sin(\frac{(n+1)x}{2})}{\sin(\frac{x}{2})}\right)^2\ dx=\frac{1}{n+1}\frac{1}{\sin^2(\frac{\delta}{2})}\int_{\delta\le |x|\le \pi}\sin^2(\frac{(n+1)x}{2})\ dx
+\]
+\[
+\le \frac{1}{n+1}\frac{1}{\sin^2(\frac{\delta}{2})}\int_{\delta\le |x|\le \pi}\ dx\le
+\frac{1}{n+1}\frac{1}{\sin^2(\frac{\delta}{2})}\int_{-\pi}^{+\pi}dx
+=\frac{1}{n+1}\frac{1}{\sin^2(\frac{\delta}{2})}(2\pi)
+\]
+より
+\[
+\int_{\delta\le |x|\le \pi}F_n(x)\ dx\le \frac{1}{n+1}\frac{1}{\sin^2(\frac{\delta}{2})}
+\]
+から後はわかる。
+
+（ポアソン核について）
+補題\ref{f}より
+\[
+\int_{-\pi}^{+\pi}P_r(x)\ dx=\int_{-\pi}^{+\pi}\frac{1}{2\pi}\frac{1-r^2}{1-2r\cos x+r^2}\ dx=\int_{-\pi}^{+\pi}\frac{1}{2\pi}\sum_{n=-\infty}^{+\infty}r^{|n|}e^{inx}\ dx=
+\frac{1}{2\pi}\sum_{n=-\infty}^{+\infty}r^{|n|}\int_{-\pi}^{+\pi}e^{inx}\ dx=1
+\]なので条件1(ついでに条件２も)満たされる。\\ 
+条件3について
+
+
+\[
+\int_{\delta\le |x|\le \pi}2\pi P_r(x)\ dx=\int_{\delta\le |x|\le \pi}\frac{1-r^2}{1-2r\cos x+r^2}\ dx
+\le \int_{\delta\le |x|\le \pi}\frac{1-r^2}{1-2r\cos \delta+r^2}\ dx
+\]
+\[
+\le\int_{-\pi}^{+\pi}\frac{1-r^2}{1-2r\cos \delta+r^2}\ dx
+=\frac{1-r^2}{1-2r\cos \delta+r^2}(2\pi)
+\]
+より
+\[
+\int_{\delta\le |x|\le \pi}P_r(x)\ dx\le \frac{1-r^2}{1-2r\cos \delta+r^2}
+\]
+なので$r\to 1$のとき右辺は$0$へ近づく
+\end{proof}
+
+
+
+\begin{fact}\label{kou}
+解析関数のテイラー展開は収束円板の中で広義一様収束する。
+\end{fact}
+\begin{lemma}\label{tak}
+$P$を多項式とし$f$を連続関数とすると畳み込み
+\[
+\int_{K}f(y)P(x-y)\ dy
+\]
+は$x$の多項式である。ただし$K$は円周か直線でこれが直線の場合には$f$はコンパクト台を持つとする。
+\end{lemma}
+\begin{proof}
+$P(x-y)$を展開すれば明らかである。
+\end{proof}
+さていよいよワイエルストラスの多項式近似定理を証明する。定理\ref{daiji}をが決め手である。
+
+%=============================================================================
+
+\begin{theorem}[ワイエルストラスの多項式近似定理]有界閉区間上の連続関数は多項式で一様に近似出来る。
+\end{theorem}
+{\bf 証明の前に注意}\\ 
+直線上の核を使う場合：有界閉区間$[a,b]$上の連続関数$f:[a,b]\to \rr$を任意に与えるとこの関数を$[a-1,b+1]$の外では$0$となるように$\rr$上の連続関数に拡張出来る。よって直線上のコンパクト台関数を多項式で一様に近似できれば多項式近似定理は証明される。\\ 
+円周上の核を使う場合：有界閉区間$[a,b]$上の連続関数$f:[a,b]\to \rr$を任意に与える。有界閉区間$[a,b]$は１次関数$\Phi$によって他の有界閉区間$[\alpha,\beta]$に対して$\Phi([a,b])=[c,d]\subset (\alpha,\beta)$となるように出来る。これによって$f$を$[a-\delta,b+\delta]$($\delta$は十分小さい)の外では$0$となるように$[\alpha,\beta]$へ拡張できる。更に多項式と１次関数の合成は多項式なので円周上の連続関数を多項式で一様に近似できれば多項式近似定理は証明される。
+%=======================================================
+
+\begin{proof}[{\bf 証明：ワイエルストラス核の場合}]指数関数の$n$次までのテイラー展開を$E_n$と置くとこれは多項式で指数関数に広義一様収束する。$G_{n,a}(x)=E_n(x^2)$とする。任意に$\varepsilon$を与え$a$を十分大きく取れば$H=f*W_a$について定理\ref{daiji}から
+\[
+||f-H||_{\rr,\mgn}<\varepsilon
+\]
+と出来る。$\supp f=K$として
+\[
+L=K-K=\{x-y\ |\ x,y\in K \}
+\]
+と置くとこれはコンパクトで$n$を十分大きくとり
+\[
+||W_a-G_{n,a}||_{\mgn,L}<\varepsilon
+\]
+と出来るこのとき$P=f*G_{n,a}$は多項式で$x\in K$のとき
+\begin{eqnarray*}
+|H(x)-P(x)|=|\int_{\rr}f(y)W_a(x-y)\ dy-\int_{\rr}f(y)G_{n,a}(x-y)\ dy|\\ 
+\le \int_{\rr}|f(y)||W_a(x-y)-G_{n,a}(x-y)|\ dy<\varepsilon \int_{\rr}|f(y)|\ dy
+\end{eqnarray*}
+ここで$\int_{\rr}|f(y)|\ dy$は定数なので$f$は多項式$P$で近似できる。よって定理は証明された。
+\end{proof}
+
+
+\begin{proof}[{\bf 証明：ランダウ核の場合}]補題\ref{tak}から$L_n$と連続関数との畳込みは多項式なので定理\ref{daiji}からすぐに結論を得る。またランダウ核の形から、連続関数を近似する多項式はのそれを構成する単項式の次数が偶数となるものを選べることがわかる。（特にこのことを何かに使うわけではないが）
+
+\end{proof}
+
+\begin{proof}[{\bf 証明：$A$核の場合}]$A_n$の形からすぐにわかるように$A_n$と連続関数との畳込みは
+$\sin^nx,\cos^mx$の形の関数の幾つかの線形結合となる。これらの関数は解析的である。（解析関数の積は解析的）よって事実\ref{kou}から結論が知れる。（三角関数の収束半径は$\mgn$）
+
+\end{proof}
+
+
+\begin{proof}[{\bf 証明：フェルエル核の場合}]フェイエル核と連続関数との畳込みは三角多項式となる。三角多項式は解析的なので結論がわかる。
+
+\end{proof}
+
+\begin{proof}[{\bf 証明：ポアソン核の場合}]ポアソン核と連続関数との畳込みは三角多項式の一様収束極限関数であるからフェイエル核の場合と同様に結論が知れる。
+
+\end{proof}
+
+%============================================================================
+\section*{補足}
+
+
+多項式近似定理の証明の前の注意について
+\begin{proposition}有界閉区間$[a,b]$上の連続関数$f:[a,b]\to \rr$を任意に与えるとこの関数を$[a-1,b+1]$の外では$0$となるように$\rr$上の連続関数に拡張出来る。
+\end{proposition}
+\begin{proof}
+$(a,f(a))$と$(a-1,0)$を通る1次関数と$(b,f(b))$と$(b+1,0)$を通る1次関数を$f$に繋げば良い。
+\end{proof}
+円周の場合の拡張についてもほとんど同様。\\ 
+省略した補題\ref{f}の証明
+\begin{proof}
+等比級数の総和公式しか使わない。計算が長いだけである。
+\begin{eqnarray*}
+D_k(x)&=&\sum_{m=-k}^{k}e^{imx}=\sum_{m=-k}^{-1}e^{imx}+1+\sum_{m=k}^ne^{imx}=
+\sum_{m=1}^{1}e^{-imx}+1+\sum_{m=k}^ne^{imx}\\ 
+&=&\frac{e^{-ix}(1-e^{-ikx})}{1-e^{-ix}}+\frac{e^{ix}(1-e^{ikx})}{1-e^{ix}}+1\\ 
+&=&
+\frac{e^{-i\frac{1}{2}x}}{e^{-i\frac{1}{2}x}} \frac{e^{-ix}(1-e^{-ikx})}{1-e^{-ix}}+
+\frac{e^{i\frac{1}{2}x}}{e^{i\frac{1}{2}x}} \frac{e^{ix}(1-e^{ikx})}{1-e^{ix}} +1\\ 
+&=&\frac{e^{-i\hf x}(1-e^{-ikx})}{e^{i\hf x}-e^{-i\hf x}}+\frac{e^{-i\hf x}(e^{ikx}-1)}{e^{i\hf x}-e^{-i\hf x}}+1\\ 
+&=&\frac{\bms-(e^{i\hf x}-e^{-i\hf x})}{e^{i\hf x}-e^{-i\hf x}}+1\\ 
+&=&\frac{\bms}{\bmb}\\ 
+&=&\frac{\sin\left((k+\frac{1}{2}\right)x)}{\sin(\frac{x}{2})}
+\end{eqnarray*}
+から第二式がわかる。ここで等比級数の総和公式を使った。
+また
+\[
+\sum_{k=0}^n e^{i(k+\hf )x}=e^{i \hf x}\sum_{k=0}^n e^{ikx}=e^{i\hf x}\frac{1-e^{i(n+1)x}}{1-e^{ix}}
+\]
+\[
+\sum_{k=0}^n e^{-i(k+\hf )x}=e^{-i \hf x}\sum_{k=0}^n e^{-ikx}=e^{-i\hf x}\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}
+\]
+より
+\begin{eqnarray*}
+(\bmb)\sum_{k=0}^n D_k(x)&=&\sum_{k=0}^n\left(e^{i(k+\hf )x}-e^{-i(k+\hf )x}\right) =e^{i\hf x}\frac{1-e^{i(n+1)x}}{1-e^{ix}}-
+e^{-i\hf x}\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}\\ 
+&=&\frac{1}{e^{-i\hf x}}\frac{1-e^{i(n+1)x}}{1-e^{ix}}-\frac{1}{e^{i\hf x}}\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}\\ 
+&=&\frac{1}{\bmb}\left(  (e^{i(n+1)x}-1)-(1-e^{-i(n+1)x})         \right)\\ 
+&=&\frac{1}{\bmb}\left(  e^{i(n+1)x}+e^{-i(n+1)x}-2         \right)\\ 
+&=&\frac{1}{\bmb}\left(   e^{i\frac{n+1}{2}x}-e^{-i\frac{n+1}{2}x}      \right)^2
+\end{eqnarray*}
+から第三式がわかる。
+そして
+\begin{eqnarray*}
+\sum_{n=-\mgn}^{\mgn}r^{|n|}e^{inx}&=&
+\sum_{k=-\mgn}^{-1}r^{|n|}e^{inx}+1+\sum_{k=1}^{\mgn}r^{n}e^{inx}\\ 
+&=&\sum_{k=1}^{\mgn}r^{n}e^{-inx}+1+\sum_{k=1}^{\mgn}r^{n}e^{inx}\\ 
+&=&\frac{re^{-ix}}{1-re^{-ix}}+\frac{re^{ix}}{1-re^{ix}}+1\\ 
+&=&\frac{re^{-ix}(1-re^{ix})+re^{ix}1-re^{-ix}}{(1-re^{-ix})(1-re^{ix})}+1\\ 
+&=&\frac{re^{-ix}-r^2+re^{ix}-r^2}{1-r(e^{ix}+e^{-ix})+r^2}+1\\ 
+&=&\frac{1-r^2}{1-2r\cos x+r^2}
+\end{eqnarray*}から第四式がわかる。
+\end{proof}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{1}伊藤清三,ルベーグ積分入門,数学選書4,裳華房,1963
+\bibitem{2}エアリス・M・スタイン、ラミ・シャカルチ著、新井仁之・杉本充・高木啓行・千原浩之訳、フーリエ解析（プリンストン解析学講義）,日本評論社,2007
+\bibitem{3}黒田成俊,関数解析,共立数学講座15,共立出版,1980
+\end{thebibliography}
+
+\end{document}

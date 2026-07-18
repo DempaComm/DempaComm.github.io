@@ -1,0 +1,1003 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem{stp}{{\bf step}}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\newcommand{\supp}{\text{{\rm supp}}}
+\newcommand{\mm}{\mathfrak{M}}
+\newcommand{\mf}{\mathfrak{M}_F}
+\newcommand{\pw}{\mathfrak{P}(X)}
+\newcommand{\la}{\Lambda}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\cpt}{{\rm Cpt}(X)}
+\newcommand{\oo}{\mathfrak{O}}
+\newcommand{\fnct}{C_c(X)}
+\newcommand{\praf}{C_c^{+}(X)}
+\newcommand{\al}{\alpha}
+\newcommand{\s}{\sigma}
+\newcommand{\N}{\mathfrak{N}}
+\newcommand{\cl}{\text{{\rm CL}} }
+
+\title{リース-マルコフ-角谷の表現定理}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+この文章では局所コンパクトハウスドルフ空間上の実数値関数の線型形式と測度の関係を物語るリース-マルコフ-角谷の表現定理を証明する。この文章では位相空間$(X,\oo)$のコンパクト集合全体を記号$\cpt$で表すことにする。$\oo$はもちろん開集合系である。また$\pw$で$X$の冪集合を表す。$\mathfrak{P}$は$P$のフラクトゥールである。Powerの$P$である。またこの文章では、$\nn$は$0$を含めないものとする。つまり$1$から始まる。しかし証明のstepは$-1$から始まる。悪しからず。\\ 
+証明は全部で16stepあるが各stepひとつひとつは難しくない。証明のアイデアはシンプルだが、証明がやたらに長いだけである。長さに心を脅かされないで欲しい。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{-2}
+\section{位相からの準備}
+%目標はコンパクト集合の上の１の分割
+\begin{df}[関数の台]
+位相空間$X$上の実連続関数$f:X\to \rr$について、$f$の台（サポート）$\supp f$を
+\[
+\supp f=\cl\{x\in X\ |\ f(x)\neq0\}
+\]
+と定義する。閉包をとっていることに注意しよう。台は常に閉集合である。\par
+台がコンパクトな関数はコンパクト台、もしくはコンパクトサポートを持つという。
+\end{df}
+\begin{thm}[局所コンパクトハウスドルフ空間上のウリゾーンの補題]\label{urysohn}
+局所コンパクトハウスドルフ空間の互いに交わらないコンパクト集合$K$と閉集合$F$は実連続関数で分離できる。更にその連続関数のコドメインは$[0,1]$に取れる。
+\end{thm}
+\begin{proof}
+空間を１点コンパクト化してもわかるし、一般に完全正則空間はこの性質をもつことからもわかる。局所コンパクトハウスドルフ空間は完全正則なのである。もしくは以下で述べる局所コンパクトハウスドルフ空間のコンパクト集合上の単位の分割からもわかる。
+\end{proof}
+
+以下の三つの単位の分割に関する定理はこの文章では証明しない。電波通信の該当する記事を見て欲しい。
+\begin{thm}[コンパクトハウスドルフ空間上の単位の分割]\label{pat}
+コンパクトハウスドルフ空間$X$の有限開被覆$\{U_k\}_{k=1,2,\cdots n}$
+について実連続関数の族$\{f_k\}_{k=1,2,\cdots n}$が存在して以下を充たす。
+\begin{eqnarray*}
+\supp f_k\subset U_k\\ 
+0\le f_k \le1\\ 
+\sum_{k=1}^{n}f_k\equiv 1
+\end{eqnarray*}
+\end{thm}
+
+定理\ref{pat}の系として次のものがある。
+\begin{cor}[局所コンパクトハウスドルフ空間のコンパクト集合上の単位の分割]\label{patu}
+局所コンパクトハウスドルフ空間$X$のコンパクト集合$K$と有限個の開集合の族
+$\{U_k\}_{k=1,2,\cdots n}$が
+\[
+K\subset \bigcup_{k=1}^nU_k
+\]を充たしてるとする。このとき実連続関数の族$\{f_k\}_{k=1,2,\cdots n}$が存在して以下を充たす。
+\begin{eqnarray*}
+&\supp f_k\subset U_k\\ 
+&0\le f_k \le1\\ 
+&\forall x\in K\ \sum_{k=1}^{n}f_k(x)\equiv 1
+\end{eqnarray*}
+このような関数族$\{f_k\}_{k=1,2,\cdots n}$を開被覆$\{U_k\}_{k=1,2,\cdots n}$に従属する$K$上の単位の分割という。
+\end{cor}
+
+また、系\ref{pat}を改良して単位の分割がコンパクト台を持つようにできる。
+\begin{thm}[局所コンパクトハウスドルフ空間のコンパクト集合上のコンパクトサポートな単位の分割]\label{ptofu}
+局所コンパクトハウスドルフ空間$X$のコンパクト集合$K$と有限個の開集合の族
+$\{U_k\}_{k=1,2,\cdots n}$が
+\[
+K\subset \bigcup_{k=1}^nU_k
+\]を充たしてるとする。このとき実連続関数の族$\{f_k\}_{k=1,2,\cdots n}$が存在して以下を充たす。
+\begin{eqnarray*}
+&\text{各$\supp f_k$はコンパクト}\\
+&\supp f_k\subset U_k\\ 
+&0\le f_k \le1\\ 
+&\forall x\in K\ \sum_{k=1}^{n}f_k(x)\equiv 1
+\end{eqnarray*}
+このような関数族$\{f_k\}_{k=1,2,\cdots n}$を開被覆$\{U_k\}_{k=1,2,\cdots n}$に従属する$K$上のコンパクト台を持つ単位の分割という。
+
+\end{thm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{定理と証明}
+\begin{df}局所コンパクトハウスドルフ空間上の台がコンパクトな実連続関数全体を
+\[
+\fnct
+\]
+で表す。更に$\fnct$の元の内、常に正の値を取る関数全体を
+\[
+\praf
+\]
+と表す。
+つまり
+\[
+\praf=\{f\ |\ f\in \fnct\ f\ge 0\}
+\]
+である。
+\end{df}
+
+
+\begin{df}[正値線型形式]
+$\fnct$上の線型形式とは線形写像
+\[
+\la :\fnct\to \rr
+\]
+のことであるが、線型形式のうち
+\[
+\forall f\in \praf\ \la f\ge 0
+\]
+を充たす$\la$を$X$上の正値線型形式という。また$g\ge f$なら$g-f\ge 0$から
+\[
+\la g=\la (f+g-f)=\la f+\la(g-f)\ge \la f
+\]
+つまり
+\[
+g\ge f\To \la g\ge \la f
+\]
+となるから正値線型形式とは単調な線型形式と言っても良い
+\end{df}
+
+\begin{df}[内部正則性、外部正則性]$(X,\oo)$が位相空間とし、更に
+測度空間$(X,\mm,\mu)$が$\oo\subset \mm$を充たすとする。この仮定のもと$X$の可測集合$E$が
+\[
+\mu(E)=\inf\{\mu(V)\ |\ V\in \oo\ E\subset V\}
+\]
+を充たすとき$E$は外部正則であるという。また$E$が
+\[
+\mu(E)=\sup\{\mu(K)\ |\ K\in \cpt\ K\subset E\}
+\]
+を充たすとき$E$は内部正則であるという。
+\end{df}
+
+
+\begin{thm}[Riesz-Markov-角谷の表現定理]
+局所コンパクトハウスドルフ空間$(X,\oo)$上の関数空間$\fnct$上のの正値線型形式$\la$が与えられたときこの$\la$に対して$X$上の$\s$加法族$\mm$と$(X,\mm)$上の測度$\mu$が存在して以下を充たす。
+\begin{eqnarray}
+&\mathfrak{B}(X)\subset \mm\\ 
+&\forall K\in \cpt\ \mu(K)<\mgn\\
+&\forall E\in \mm\ Eは外部正則つまり
+\end{eqnarray}
+\[\mu(E)=\inf\{\mu(V)\ |\ V\in \oo\ E\subset V\}\]
+\begin{eqnarray} 
+&\text{$E\in \mm$ が開集合、もしくは$\mu(E)<\mgn$ ならば　Eは内部正則}
+つまり
+\end{eqnarray} 
+\[\mu(E)=\sup\{\mu(K)\ |\ K\in \cpt \ K\subset E\}\]
+\begin{eqnarray}
+&E\in \mm\ F\subset E\ \mu(E)=0 ならばF\in \mm つまり測度空間(X,\mm,\mu)は完備\\ 
+&\forall f\in \fnct\ \la f= \int_Xf\ d\mu
+\end{eqnarray}
+ここで$\mathfrak{B}(X)$は位相空間$(X,\oo)$のボレル集合族を表す。さらに$(X,\mm)$上のこのような測度は一意的である。
+\end{thm}
+\proofname
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{stp}{-2}
+\begin{stp}[準備]\label{0}証明で用いる関数や集合を定義する。まず$f\in\praf$が
+\[
+f\le \chi_V
+\]
+を充たすとき
+\[
+f\prec V
+\]
+と書くことにする。更に$f\in \praf$が
+\[
+\chi_K\le f
+\]
+を充たすとき
+\[
+K\prec f 
+\]
+と書くことにする。$\prec$は普通の二項関係では無いことに注意しよう。ここで$\chi_A$で$A$の特性関数を表した。
+さて$V\in \oo$について
+\[
+\mu(V)=\sup\{\la f\ |\ f\prec V\ f\in\praf\}
+\]
+と定義する。$\mu$は写像$\mu:\oo\to [0,+\mgn]$であり、定義から明らかに
+\[
+U\subset V\To \mu(U)\le \mu(V)
+\]
+である。次のようにして$\mu$の定義域を$\pw$まで拡張する。$E\in \pw$について
+\[
+\mu(E)=\inf\{\mu(V)\ |\ V\in \oo\ E\subset V\}
+\]
+と定義する。$U,V\in\oo,\ U\subset V\To \mu(U)\le \mu(V)$から一般の$E\in \pw$で定義された$\mu$は$V\in \oo$に対する$\mu(V)$とちゃんと両立している。また、定義からすぐわかるように$E,F\in\pw$について
+\[
+E\subset F\To \mu(E)\le \mu(F)
+\]
+となる。これを$\mu$の\textbf{単調性}と呼ぼう。
+さて
+加法族や測度すら構成していないが呼び名が無いのも不便なので$E\in \pw$が
+\[
+\mu(E)=\sup\{\mu(K)\ |\ K\in \cpt\ K\subset E\}
+\]
+を充たしてるとき内部正則性を持つ、または内部正則であると言うことにしよう。この語は正式には加法族を定義した後に使うべきだが、証明の中で呼び名がないのが本当に不便なだけである。そして
+\[
+\mf=\{E\in\pw\ |\ \mu(E)<\mgn\ E は内部正則\}
+\]
+と定義し、この$\mf$を用いて
+\[
+\mm=\{E\in \pw\ |\ \forall K\in \cpt\ E\cap K\in \mf \}
+\]
+と定義する。$\mu$の単調性から$E\in\mm$のとき $F\subset E$で$\mu(E)=0$ならば$ F\in \mm$がわかる。よって定理の$(5)$の性質が確認された。
+\end{stp}
+
+
+\begin{stp}[{\bf step\ 1}のための主張:開集合に対する劣加法性]
+$\{V_i\}_{i\in\nn}\subset\oo$のとき
+\[
+\mu(\bigcup_{i=1}^{\mgn}V_i)\le\sum_{i=1}^{\mgn}\mu(V_i)
+\]
+\end{stp}
+\begin{proof}簡単のために$\dpst V=\bigcup_{i=1}^{\mgn}V_i$と置く。
+$\al<\mu(V)$となる任意の$\al$を取ると$\mu(V)$の定義から
+\[
+\al<\la f,\ f\prec V
+\]
+となる$f\in \praf$が存在する。さて$K=\supp f$と置くと$K\in\cpt$で$K\subset V$であるので$\{V_i\}_{i\in\nn}$の中から有限個選んで$K$を被覆できる。必要なら番号付けを変えて
+\[
+K\subset \bigcup_{i=1}^nV_i
+\]
+として良い。定理\ref{ptofu}[局所コンパクトハウスドルフ空間上の台がコンパクトな単位の分割]より$\{V_1,V_2.\cdots ,V_n\}$に従属する$K$上の台がコンパクトな1の分割$\{h_i\}_{i=1,2,\cdots ,n}$が存在する。これについて$h_i\prec V_i$と$0\le f\le 1$から
+\[
+f=\sum_{i=1}^nh_if
+\]
+及び\[
+h_if\le h_i
+\]
+\begin{comment}
+およびf\prec V$と$K=\supp f$から
+\[
+f\le \sum_{i=1}^nh_i
+\]
+\end{comment}
+が成り立つので、$h_i\prec V_i$と$\mu(V_i)$の定義とを合わせて
+\[
+\al <\la f=\sum_{i=1}^n\la (h_if) \le\sum_{i=1}^n\la h_i\le \sum_{i=1}^n\mu(V_i)\le \sum_{i=1}^{\mgn}\mu(V_i)
+\]
+を得る。つまり
+\[
+\al <\sum_{i=1}^{\mgn}\mu(V_i)
+\]なので$\al$の任意性から
+\[
+\mu(V)\le\sum_{i=1}^{\mgn}\mu(V_i)
+\]
+が分かる。
+\end{proof}
+
+
+%%step1
+\begin{stp}[劣加法性]\label{1}$\{E_i\}_{i\\n\nn}\subset \pw$に対し
+\[
+\mu(\bigcup_{i=1}^{\mgn}E_i)\le\sum_{i=1}^{\mgn}\mu(E_i)
+\]
+\end{stp}
+\begin{proof}ある番号$i$について$\mu(E_i)=\mgn$ならば$\mu$の単調性から
+\[
+\mu(\bigcup_{i=1}^{\mgn}E_i)=+\mgn,\ \sum_{i=1}^{\mgn}\mu(E_i)=+\mgn
+\]
+となるので不等式は成立する。\par
+$\forall i\in \nn \ \mu(E_i)<\mgn$のときを考えよう。このとき$\mu(E_i)$の定義から
+任意の$\ep>0$を与えたとき各$i$について
+\[
+\mu(V_i)<\mu(E_i)+\frac{\ep}{2^i}
+\]
+となる開集合$V_i$が存在する。そして
+\[
+\bigcup_{i=1}^{\mgn}E_i\subset\bigcup_{i=1}^{\mgn}V_i
+\]
+なので先の主張と$\mu$の単調性から
+\[
+\mu(\bigcup_{i=1}^{\mgn}E_i)\le \mu(\bigcup_{i=1}^{\mgn}V_i)\le
+ \sum_{i=1}^{\mgn}\mu(V_i)\le \sum_{i=1}^{\mgn}\mu(E_{i})+\sum_{i=1}^{\mgn}\frac{\ep}{2^i}
+=\sum_{i=1}^{\mgn}\mu(E_{i})+\ep
+\]を得て、$\ep$は任意であったので結局
+\[
+\mu(\bigcup_{i=1}^{\mgn}E_i)\le\sum_{i=1}^{\mgn}\mu(E_i)
+\]
+が成り立つ。
+\end{proof}
+
+
+%step2
+\begin{stp}[$\mf$ と$\cpt$ の関係]\label{2}
+$\forall K\in \cpt\ \mu(K)<\mgn$ が成り立つ。更に$\mu(K)=\inf\{\la f\ |\ f\in\praf\ K\prec f\}$が成り立ち、
+特に$K\in \mf$が成り立つ。つまり$\cpt\subset \mf$
+\end{stp}
+\begin{proof}
+$f\in \praf$を$K\prec f$とする。そして$1<\al$を任意に与え
+\[
+V_{\al}=\{x\ |\ 1<\al f(x)\}
+\]
+と定義すると$V_{\al}$は開集合で$K\subset V_{\al}$となる。ここで$\mu(V_{\al})$を使いたいがために$g\prec V_{\al}$となる$g\in \praf$を任意に与えるともちろん
+\[
+g(x)\le\chi_{V_{\al}}(x)
+\]
+であり、$V_{\al}$上$1<\al f$なので$\chi_{V_{\al}}< \al f$が成り立つので
+\[
+\forall x\in X\ g(x)<\al f(x)
+\]
+を得る。よって
+\[
+\la g\le \la (\al f)=\al \la f
+\]を得る。そして$g$は任意だったので、$\mu$の単調性と合わせて
+\[
+\mu(K)\le \mu(V_{\al})=\sup\{\la g\ |\ g\in \praf,\ g\prec V_{\al}\}\le \al \la f
+\]
+が分かる。
+ゆえに任意の$\al\in (1,+\mgn)$について
+\[
+\mu(K)\le \al \la f
+\]
+が成り立ち、$\al \downarrow 1$とすれば
+\[
+\mu(K)\le \la f
+\]
+を得て、$\la f<\mgn$なので、$\mu(K)<\mgn$ということが分かった。\par
+さて、$\mu(K)$は有限の値であることがわかったので$\ep>0$を任意に与えたとき$\mu$の定義から
+\[
+\mu(V)<\mu(K)+\ep,\ K\subset V
+\]
+となる開集合$V$が存在する。ウリゾーンの補題の補題から
+$K\prec f\prec V$となる$f$が存在するが、$\mu(V)$の定義から
+\[
+\la f\le \mu(V)<\mu(K)+\ep
+\]
+となる。結局
+\[
+\forall \ep >0 \ \exists f\in \praf\ (K\prec f )\land (\la f<\mu(K)+\ep)  
+\]
+が成立するが、これはつまり
+\[
+\mu(K)=\inf\{\la f\ |\ f\in\praf\ K\prec f\}
+\]
+が成り立つということである。
+\end{proof}
+
+
+%step3
+\begin{stp}[開集合の内部正則性]\label{3}
+$V\in \oo$ならば$V$は内部正則である。よって特に$\mu(V)<\mgn$ならば$V\in \mf$
+\end{stp}
+\begin{proof}
+$\al<\mu(V)$となる任意の$\al$を与えると$f\in \praf $が存在して
+\[
+f\prec V,\ \al <\la f\le \mu(V)
+\]
+となる。さて$K=\supp f$と置く。このとき$K\prec g$となる任意の$g\in\praf$について
+$f\le g$なので
+\[
+\la f\le \la g
+\]
+そして$K\prec g$となる$g$で下限を取ると先のstep\ref{2}[$\mf$と$\cpt$の関係]より
+\[
+\mu(K)=\inf\{\la g\ |\ g\in\praf\ K\prec g\}
+\]
+なので
+\[
+\al< \la f\le \mu(K)
+\]
+つまり
+\[
+\al<\mu(K)
+\]
+が成り立つ。そして
+$\al$は任意で$K\subset V$であったので結局
+\[
+\mu(V)=\sup\{\mu(K)\ |\ K\in \cpt,\ K\subset V\}
+\]
+が成立する。
+\end{proof}
+
+
+
+\begin{stp}[{\bf step\ \ref{4}}のための主張]\label{kahou}
+$K_1,K_2\in \cpt$が互いに素なとき
+\[
+\mu(K_1\cup K_2)=\mu(K_1)+\mu(K_2)
+\]が成立する。
+\end{stp}
+\begin{proof}
+step\ref{1}[劣加法性]より
+\[
+\mu(K_1\cup K_2)\le \mu(K_1)+\mu(K_2)
+\]
+である。
+以下逆向きの評価を示す。$K=K_1\cup K_2$と置き、step\ref{2}[$\mf$と$\cpt$の関係]を踏まえて$K\prec f$となる任意の$f\in \praf$を取る。$K_1\cap K_2=\O$と定理\ref{urysohn}[ウリゾーンの補題]から連続関数$g:X\to [0,1]$が存在して
+\[
+g|K_1\equiv 1,\ g|K_2\equiv 0,\ g\in\praf 
+\]
+を充たす。この$g$を用いると
+\[
+f=gf+(1-g)f,\ K_1\prec gf,\ K_2\prec (1-g)f
+\]
+となり、$f$がコンパクト台を持つことから、$gf$と$(1-g)f$もコンパクト台を持つ。そしてstep\ref{2}[$\mf$と$\cpt$の関係]より
+\[
+\la f =\la(gf)+\la((1-g)f)\ge \mu(K_1)+\mu(K_2) 
+\]
+つまり
+\[
+\la f\ge \mu(K_1)+\mu(K_2)
+\]
+であり、$f$の任意性と、再びstep\ref{2}[$\mf$と$\cpt$の関係]から
+\[
+\mu(K)\ge \mu(K_1)+\mu(K_2)
+\]
+が成り立つ。
+\end{proof}
+
+
+%step4
+\begin{stp}[$\mf$での完全加法性]\label{4}$\{E_i\}_{\in\nn}\subset \mf$が互いに素な族のとき
+\[
+\mu(\bigcup_{i\in \nn}E_i)=\sum_{i=1}^{\mgn}\mu(E_i)
+\]
+が成り立つ。そして特に$\dpst \mu(\bigcup_{i\in \nn}E_i)<\mgn$ならば$\dpst \bigcup_{i\in \nn}E_i\in\mf$である。
+\end{stp}
+\begin{proof}
+$\mu(E_i)<\mgn$に注意しよう。まず$E_i\in \mf$なので任意の$\ep>0$を与えると、内部正則性から各$E_i$毎に
+\[
+H_i\subset E_i\ \mu(H_i)>\mu(E_i)-\frac{\ep}{2^i}
+\]
+となる$H_i\in \cpt$が存在する。$\{E_i\}$が互いに素なので$\{H_i\}$も互いに素で
+$\dpst K_n=\bigcup_{i=1}^nH_i$と置くと先のstep\ref{kahou}を繰り返し用いて
+\[
+\mu(K_n)=\sum_{i=1}^n\mu(H_i)
+\]
+を得る。さて$K_n\subset E$なので、$\mu$の単調性から
+\begin{eqnarray*}
+\mu(E)\ge \mu(K_n)=\sum_{i=1}^n\mu(H_i)>\sum_{i=1}^n\mu(E_i)-\sum_{i=1}^n\frac{\ep}{2^i}
+>\sum_{i=1}^n\mu(E_i)-\ep
+\end{eqnarray*}つまり
+\[
+\mu(E)\ge \sum_{i=1}^n\mu(E_i)-\ep
+\]
+が任意の$n\in \nn$で成り立つ。
+$\ep$は任意なので
+\[
+\mu(E)\ge \sum_{i=1}^n\mu(E_i)
+\]
+が任意の$n\in \nn$で成り立つ。そして
+$n\to \mgn$として
+\[
+\mu(E)\ge \sum_{i=1}^{\mgn}\mu(E_i)
+\]
+を得る。
+逆向きの不等式はstep\ref{1}[劣加法性]から得られるので結局
+\[
+\mu(E)= \sum_{i=1}^{\mgn}\mu(E_i)
+\]
+が得られてこのstep\ref{4}の前半が示された。以下後半を示す。\par
+$\mu(E)<\mgn$ならば
+\[
+\mu(E)= \sum_{i=1}^{\mgn}\mu(E_i)=\lim_{n\to \mgn}\sum_{i=1}^{n}\mu(E_i)
+\]
+より、任意に$\ep>0$を与えたときに番号を十分大きく取れば,
+\[
+\mu(E)<\sum_{i=1}^n\mu(E_i)+\ep <\mu(K_n)+2\ep
+\]
+で\footnote{$\mu(E)=\mgn$ならばこの不等式は成り立たない}$K_n\subset E$かつ、$K_n$はコンパクトなので結局
+\[
+\mu(E)=\sup\{\mu(K)\ |\ K\in \cpt\ K\subset E\}
+\]
+が得られる。よって$E\in \mf$となる。
+\end{proof}
+
+
+%step5
+\setcounter{equation}{0}
+\begin{stp}[内側と外側からの近似]\label{5}
+以下は同値
+\begin{eqnarray}
+&E\in\mf\\ 
+&\forall \ep>0\ \exists K\in \cpt\ \exists V\in \oo\ (K\subset E\subset V)\land (\mu(V\setminus K)<\ep)
+\end{eqnarray}
+\end{stp}
+\begin{proof}\par
+[$(1)\To(2)$]\par 
+$\mu(E)$の定義から$\dpst \frac{\ep}{2}$に対して$E\subset V$となる$V\in \oo$が存在して
+\[
+\mu(V)-\frac{\ep}{2}<\mu(E)
+\]
+を充たす。ここで$\mu(V)<\mgn$に注意せよ。そして$E\in \mf$から内部正則性により$\dfrac{\ep}{2}$に対して$K\subset E$となる$K\in\cpt$が存在して
+\[
+\mu(E)<\mu(K)+\frac{\ep}{2}
+\]
+を充たす。$K\subset E\subset V$に注意せよ。
+そして$V\setminus K$は開集合で$\mu(V\setminus K)\le \mu(V)<\mgn$なのでstep\ref{3}[開集合の内部正則性]より$V\setminus K\in\mf$そしてstep\ref{2}[$\mf$と$\cpt$の関係]より$K\in \mf$なのでstep\ref{4}[$\mf$上の完全加法性]より
+\[
+\mu(V)=\mu(V\setminus K)+\mu(K)
+\]
+が成り立つ。つまり
+\[
+\mu(V\setminus K)=\mu(V)-\mu(K)
+\]
+である。そして$\mu(V)-\frac{\ep}{2}<\mu(E),\ \mu(E)<\mu(K)+\frac{\ep}{2}$より
+\[
+\mu(V\setminus K)=\mu(V)-\mu(K)<\frac{\ep}{2}+\mu(E)-\mu(E)+\frac{\ep}{2}<\ep
+\]なので$(2)$が結論される。\par
+[$(1)\To (2)$の証明終わり]\par
+[$(2)\To(1)$]\\ 
+$(2)$とstep\ref{1}[劣加法性]とstep\ref{2}[$\mu(K)$の有限性]から
+\[
+\mu(E)\le \mu(V)\le \mu(V\setminus K)+\mu(K)<\ep+\mu(K)<\mgn 
+\]
+が成立するので$\mu(E)<\mgn$そして任意に$\ep>0$を与えたとき$(2)$の条件を充たす$K,V$が存在してstep\ref{1}[劣加法性]と$\mu$の単調性から
+\[
+\mu(E)\le \mu(E\setminus K)+\mu(K)\le \mu(V\setminus K)+\mu(K)<\ep+\mu(K)
+\]
+が成り立つが、これは内部正則性
+\[
+\mu(E)=\sup\{\mu(K)\ |\ K\in \cpt\ K\subset E\}
+\]
+が成り立つことを示している。よって$E\in \mf$\par
+[$(2)\To (1)$の証明終わり]
+\end{proof}
+
+
+%step6
+\begin{stp}[$\mf$の有限加法性]\label{6}
+$A,B\in\mf\To A\setminus B,\ A\cup B,\ A\cap B\in\mf$
+\end{stp}
+\begin{proof}step\ref{5}[内側と外側からの近似]を利用する。$A,B\in \mf$とする。任意に$\ep>0$を与えたときにstep\ref{5}より
+\[
+K\subset A\subset U,\ \mu(U\setminus K)<\frac{\ep}{2}
+\]
+\[
+L\subset B\subset V,\ \mu(V\setminus L)<\frac{\ep}{2}
+\]
+となる$K,L\in\cpt$及び$U,V\in\oo$が存在する。
+さて
+$
+A\setminus B=A\cap B^{c}
+$
+なので
+\[
+K\cap V^{c}\subset A\setminus B\subset U\cap L^{c}
+\]
+となり
+$C=K\cap V^{c},\ O=U\cap L^{c}$と置くと$(C,O)\in \cpt\times \oo$でそして
+\begin{eqnarray*}
+O\setminus C=(U\cap L^{c})\setminus (K\cap V^{c})=(U\cap L^{c})\cap(K^{c}\cup V)\\ 
+=(U\cap L^{c}\cap K^{c})\cup (U\cap V\cap L^{c})
+\end{eqnarray*}
+ところで
+\[
+U\cap L^{c}\cap K^{c}\subset U\cap K^{c}=U\setminus K
+\]
+\[
+U\cap V\cap L^{c}\subset V\cap L^{c}=V\setminus L
+\]
+なので結局
+\[
+O\setminus C\subset (U\setminus K)\cup(V\setminus L)
+\]
+が成り立ち、そして
+step\ref{1}[劣加法性]より
+\[
+\mu(O\setminus C)\le \mu(U\setminus K)+\mu(V\setminus L)<\frac{\ep}{2}+\frac{\ep}{2}=\ep
+\]
+が分かる。
+故にstep\ref{5}[内側と外側からの近似]から$A\setminus B\in \mf$となる。さらに
+\[
+A\cup B=(A\setminus B)\cup B\ (直和)
+\]
+なので証明の前半とstep\ref{4}[$\mf$上の完全加法性]より$A\cup B\in \mf$がわかり、さらに
+\[
+A\cap B=A\setminus (A\setminus B)
+\]
+なので証明の前半より$A\cap B\in \mf$が分かる。
+\end{proof}
+
+
+%step7
+\begin{stp}[$\mf$と$\mm$の関係]\label{7}
+$\mf\subset\mm$が成立する。
+\end{stp}
+\begin{proof}
+$E\in\mf$とする。step\ref{2}[$\mf$と$\cpt$の関係]から$\cpt\subset \mf$なのでstep\ref{6}[$\mf$の有限加法性]より$E\cap K\in \mf$よって$\mm$の定義から
+$E\in \mm$つまり$\mf\subset \mm$
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ココカラ
+%step8
+\begin{stp}[$\mm$の$\s$加法性]\label{8}$\mm$は$\sigma$加法族
+\end{stp}
+\begin{proof}
+$A\in \mm$とすると任意の$K\in \cpt$について$A\cap K,K\in \mf$なのでstep\ref{6}[$\mf$の有限加法性]から
+$A^{c}\cap K=K\setminus (A\cap K)\in \mf$である。$K\in\cpt$は任意だったので
+$A^{c}\in \mm$つまり
+\[
+A\in \mm\To A^{c}\in \mm
+\]
+さて次に$\{A_n\}_{n\in\nn}\subset \mm$について$\dpst A=\bigcup_{n\in \nn}A_n$を考える。任意の$K\in \cpt$について、各$i\in \nn$につき、$A_i \cap K\in \mf$である。ここで$\{B_n\}_{n\in\nn}\subset \mf$を帰納的に
+\[
+B_1=A_1 \cap K,\ B_n=(A_n\cap K)\setminus (B_1\cup B_2\cup\cdots \cup B_{n-1} )
+\]
+と定義する。step\ref{6}[$\mf$の有限加法性]から確かに各$n$について$B_n\in \mf$である。そして定義から明らかに$\{B_n\}_{n\in\nn}$は互いに素な族で
+\[
+\coprod_{n\in \nn}B_n=A\cap K
+\]
+が成り立ち、$\mu$の単調性から$\mu(A\cap K)\le \mu(K)<\mgn$なのでstep\ref{4}[$\mf$上の完全加法性]から$A\cap K\in \mf$となる。よって$K\in \cpt$の任意性と$\mm$の定義から$A\in \mm$が分かり、つまり
+\[
+\{A_n\}_{n\in\nn}\subset \mm\To \bigcup_{n\in \nn}A_n\in \mm
+\]
+となる。以上から$\mm$は$\s$加法族であることがわかる。
+\end{proof}
+
+
+%step9
+\begin{stp}[Borel性]\label{9}
+$\mm$は$X$のボレル集合を全て含む。
+\end{stp}
+\begin{proof}$A$を$X$の任意の閉集合とすると任意の$K\in \cpt$について$A\cap K$はコンパクト集合である。よってstep\ref{2}[$\mf$と$\cpt$の関係]から$A\cap K\in \mf$となり$\mm$の定義から$A\in \mm$となる。以上から$\mm$は$X$の全ての閉集合を含んでいる。step\ref{8}より$\mm$は$\s$加法族なので$\mm$は$X$のボレル集合を全て含んでいる。
+\end{proof}
+
+
+
+%step10
+\begin{stp}[$\mf$の正体]\label{10}
+$\mf=\{E\in\pw\ |\ E\in\mm\ かつ\mu(E)<\mgn\}$
+\end{stp}
+\begin{proof}見やすくするために$\N=\{E\in\pw\ |\ E\in\mm\ かつ\mu(E)<\mgn\}$と置く。定義から明らかに$\N\subset \mm$となることに注意せよ。\par
+step\ref{7}[$\mf$と$\mm$の関係]より$\mf\subset \mm$で、$\mf$の定義から$E\in \mf$ならば$\mu(E)<\mgn$なので
+\[
+\mf\subset \N
+\]
+が分かる。
+以下逆向きの包含関係を示す。\par
+$E\in \N$ならば$\mu(E)<\mgn$であるので$\mu$の定義から$V\in\oo$が存在し、
+\[
+E\subset V,\ \mu(V)<\mu(E)+1
+\]
+を充たす。そして$\mu(E)<\mgn$より$\mu(V)<\mgn$なのでstep\ref{3}[開集合の内部正則性]より$V\in\mf$となる。さて$V\in \mf$とstep\ref{5}[内側と外側からの近似]から任意に$\ep>0$を与えると$K\in \cpt$が存在して
+\[
+K\subset V,\ \mu(V\setminus K)<\frac{\ep}{2}
+\]
+を充たす。そして$E\in \N\subset \mm$なので、$\mm$の定義からこの$K$について$E\cap K\in \mf$なので
+内部正則性から$L\in\cpt$が存在して
+\[
+L\subset E\cap K,\ \mu(E\cap K)<\mu(L)+\frac{\ep}{2}
+\]となる。
+さて、$E\subset V$より$E\setminus K\subset V\setminus K$なので
+\[
+E=(E\cap K)\cup (E\cap K^{c})\subset (E\cap K)\cup (V\setminus K)
+\]
+となり、
+\[
+\mu(E)\le \mu(E\cap K)+\mu(V\setminus K)<\mu(L)+\ep
+\]
+が従う。
+つまり
+\[
+\forall \ep>0\ \exists L\in \cpt\ \mu(E)<\mu(L)+\ep
+\]
+が成り立ち、
+これは$E$が内部正則となることを示している。よって$E\in \mf$つまり$\N\subset \mf$となる。\par
+以上から$\mf=\N$がわかる。
+\end{proof}
+
+
+%step11
+\begin{stp}[測度]\label{11}
+$\mu$は$\mm$上の測度である。
+\end{stp}
+\begin{proof}
+\[
+\mu(\O)=0
+\]
+は定義からすぐにわかる。完全加法性については、互いに素な族$\{E_i\}_{i\in\nn}\subset \mm$を考えるとき、
+ある番号$n$で$\mu(E_n)=\mgn$ならば明らかに
+\[
+\sum_{i=1}^{\mgn}\mu(E_i)=\mgn
+\]
+で$\dpst \bigcup_{i\in\nn}E_i\supset E_n$と$\mu$の単調性から
+\[
+\mu(E)=\mgn
+\]
+なので
+\[
+\mu(E)=\mgn=\sum_{i=1}^{\mgn}\mu(E_i)
+\]
+となる。すべての番号で$\mu(E_i)<\mgn$ならばstep\ref{10}[$\mf$の正体]から$\{E_i\}\subset \mf$であり、これとstep\ref{4}[$\mf$上の完全加法性]より
+\[
+\mu(E)=\sum_{i=1}^{\mgn}\mu(E_i)
+\]
+が成り立つので結局いづれにせよ$\mu$の完全加法性は示された。
+\end{proof}
+
+これまでのstepで$X$上に測度が構成された。あとは$\la$と両立することと、一意性を示せばよい。
+%step12
+\begin{stp}[$\la$と$\mu$の両立性]\label{12}
+$\dpst \forall f\in \fnct\ \la f=\int_Xf\ d\mu$が成立する。
+\end{stp}
+\begin{proof}
+\[
+\forall f\in \fnct\ \la f\le \int_Xf\ d\mu
+\]
+を示せば良い。なぜなら$f$の代わりに$-f$を当てはめれば線形性から逆向きの不等式が得られるからである。以下この不等式を示す。\\ 
+$f\in \fnct$と$\ep>0$を任意に与え$K=\supp f,\ \text{{\rm Im}}f\subset [a,b]$と置く。そしてこの$a,b$と$\ep$について
+\[
+y_0<a<y_1<\cdots <y_{n-1}<y_n=b,\ \forall i\ y_i-y_{i-1}<\ep
+\]
+となる点列$\{y_i\}_{i=0}^n$を適当に一つ固定する。更にこの点列に対応して
+\[
+E_i=\{x\in X\ |\ y_{i-1}<f(x)\le y_i\}\cap K
+\]
+と定義すると、$f$の連続性から$\{x\ |\ y_{i-1}<f(x)\le y_i\}$は$X$のボレル集合であるから各$E_i$もボレル集合であり、結局$E_i\in \mm$となる。\par
+また、定義から明らかに$\{E_i\}_{i=1}^n$は互いに素で
+$\dpst \coprod_{i=1}^nE_i=K$であること及び
+\[
+\mu(K)=\mu\left(\coprod_{i=1}^nE_i\right)=\sum_{i=1}^n\mu(E_i)
+\]
+が成り立つことに注意せよ。\par
+そして$E_i\subset K$なので$\mu(E_i)<\mgn$であり、$\mu$の定義から各$E_i$毎に$V_i\in\oo$が存在して
+\[
+E_i\subset V_i,\ \mu(V_i)<\mu(E_i)+\frac{\ep}{n}
+\]
+を充たす。$f$が連続関数であることから$\{x\ |\ f(x)<y_i+\ep\}$は開集合で、$E_i\subset \{x\in X\ |\ f(x)<y_i+\ep\}$となるから、
+必要なら$V_i$と$\{x\in X\ |\ f(x)<y_i+\ep\}$との共通部分を新たに$V_i$と名前を付け替えて、$V_i$は更に付け加えて
+\[
+E_i\subset V_i,\ \mu(V_i)<\mu(E_i)+\frac{\ep}{n},\ \forall x\in V_i\ f(x)<y_i+\ep
+\]
+を充たすとしてもよい。さて明らかに
+\[
+K\subset \bigcup_{i=1}^nV_i
+\]
+なので$X$が局所コンパクトハウスドルフ空間であることと定理\ref{ptofu}[局所コンパクトハウスドルフ空間上の台がコンパクトな単位の分割]から\textbf{台がコンパクトな}実連続関数の族$\{h_i\}_{i=1,2,\cdots n}$が存在して以下を充たす。
+\begin{eqnarray*}
+&\supp h_i\subset V_i\\ 
+&0\le h_i \le1\\ 
+&\forall x\in K\ \sum_{i=1}^{n}h_i(x)\equiv 1
+\end{eqnarray*}
+そしてこの性質から
+\[
+K\prec \sum_{i=1}^{n}h_i(x),\ \forall i \ h_i\prec V_i
+\]
+がわかり、step\ref{2}[$\mf$と$\cpt$の関係]から
+\[
+\mu(K)\le \la\left(\sum_{i=1}^{n}h_i\right)=\sum_{i=1}^n\la h_i
+\]
+がわかる。そして$\supp f=K$から簡単に
+\[
+f=\sum_{i=1}^nh_if
+\]
+が知れる。さらに
+$\forall x\in V_i\ f(x)<y_i+\ep$なので
+\[
+h_if\le (y_i+\ep)h_i
+\]
+がわかり、$y_i-y_{i-1}<\ep$から$\forall x\in E_i\ y_i-\ep <f(x)$なので
+\[
+(y_i-\ep)\chi_{E_i}\le \chi_{E_i}f(x)
+\]
+がわかる。つまり
+\[
+s:=\sum_{i=1}^n(y_i-\ep)\chi_{E_i}\le  f
+\]
+である。この$s$は単関数であり、
+\[
+\int_{X}s \ d\mu=\sum_{i=1}^n(y_i-\ep)\mu(E_i) 
+\]
+となる。そして$s\le f$なので積分の単調性から
+\[
+\int_X s\ d\mu \le \int_X f\ d\mu
+\]
+が分かり、以上を合わせて
+\[
+\sum_{i=1}^n(y_i-\ep)\mu(E_i)\le \int_X f\ d\mu
+\]
+となることに留意せよ。\par
+以上分かったことをふんだんに用いて目標の不等式を示す。
+まず$h_if\le (y_i+\ep)h_i$から
+\begin{eqnarray*}
+\la f=\sum_{i=1}^n \la (h_if)\le \sum_{i=1}^n(y_i+\ep)\la (h_i)=\sum_{i=1}^n(|a|+y_i+\ep)\la (h_i)-|a|\sum_{i=1}\la (h_i)
+\end{eqnarray*}
+がわかる。そして$\dpst \mu(K)\le \la\left(\sum_{i=1}^{n}h_i\right)=\sum_{i=1}^n\la h_i$から
+\begin{eqnarray*}\sum_{i=1}^n(|a|+y_i+\ep)\la (h_i)-|a|\sum_{i=1}\la (h_i)
+\le \sum_{i=1}^n(|a|+y_i+\ep)\la (h_i)-|a|\mu(K)
+\end{eqnarray*}
+と得る。次に$h_i\prec V_i$と開集合に対する$\mu$の定義から$\la h_i\le \mu(V_i)$なので$|a|+y_i+\ep\ge 0$に注意して
+\begin{eqnarray*}\sum_{i=1}^n(|a|+y_i+\ep)\la (h_i)-|a|\mu(K)
+\le \sum_{i=1}^n(|a|+y_i+\ep)\mu(V_i)-|a|\mu(K)
+\end{eqnarray*}
+を得る。$V_i$の取り方から$\dpst \mu(V_i)<\mu(E_i)+\frac{\ep}{n}$が分かり、これと$|a|+y_i+\ep\ge 0$と$\dpst \mu(K)=\sum_{i=1}^n\mu(E_i)$に注意して
+\begin{eqnarray*}
+&&\sum_{i=1}^n(|a|+y_i+\ep)\mu(V_i)-|a|\mu(K)
+\le \sum_{i=1}^n(|a|+y_i+\ep)(\mu(E_i)+\frac{\ep}{n})-|a|\mu(K)\\ 
+&=& |a|\sum_{i=1}^n\mu(E_i)+\sum_{i=1}^ny_i\mu(E_i)+\ep\sum_{i=1}^n\mu(E_i)+\frac{\ep}{n}\sum_{i=1}^n(|a|+y_i+\ep)-|a|\mu(K)\\ 
+&=&\sum_{i=1}^n(y_i-\ep)\mu(E_i)+2\ep\mu(K)+\frac{\ep}{n}\sum_{i=1}^n(|a|+y_i+\ep)
+\end{eqnarray*}
+を得る。ここまでをまとめると
+\[
+\la f\le\sum_{i=1}^n(y_i-\ep)\mu(E_i)+2\ep\mu(K)+\frac{\ep}{n}\sum_{i=1}^n(|a|+y_i+\ep) 
+\]
+である。この不等式の右辺を更に評価しよう。$y_i\le b$から$\dpst \sum_{i=1}^n(|a|+y_i+\ep)\le \sum_{i=1}^n(|a|+b+\ep)=n(|a|+b+\ep)$である。$|a|+b+\ep\ge 0$に注意せよ。そして留意しておいた$\dpst \sum_{i=1}^n(y_i-\ep)\mu(E_i)\le \int_X f\ d\mu$から
+\begin{eqnarray*}
+\sum_{i=1}^n(y_i-\ep)\mu(E_i)+2\ep\mu(K)+\frac{\ep}{n}\sum_{i=1}^n(|a|+y_i+\ep)
+\le\int_Xf\ d\mu +\ep(2\mu(K)+|a|+b+\ep)
+\end{eqnarray*}
+なので結局
+\[
+\la f \le \int_Xf\ d\mu +\ep(2\mu(K)+|a|+b+\ep)
+\]
+を得る。
+$\ep>0$は任意だったので結局
+\[
+\la f\le\int_Xf\ d\mu
+\]が分かる。
+\end{proof}
+
+
+%step13
+\begin{stp}[測度の一意性]\label{13}
+可測空間$(X,\mm)$上で定理の条件を充たす二つの測度$\mu,\nu$を与える。任意の$E\in \mm$は外部正則なので開集合の上で$\mu$と$\nu$が一致していれば$\mm$上でも一致するが、任意の開集合は内部正則なので、結局$\cpt$上で$\mu,\nu$が一致していれば$\mm$上一致する。以下$\cpt$上二つの測度が一致することを示す。\par
+$K\in \cpt $を任意に与える。すると外部正則性から任意に$\ep $を与えると
+\[
+K\subset V,\ \mu(V\setminus K)=\mu(V)-\mu(K)<\ep
+\]
+となる$V\in \oo$が存在する。そしてウリゾーンの補題から$K\prec f\prec V$となる関数$f\in \praf $が存在する。このとき$\chi_{K}\le f\le \chi_V$なので積分の単調性から
+\[
+\int_X f \ d\mu\le\int_{X}\chi_{V}d\mu=\mu(V)
+\]
+となり、$V$の取り方から$\mu(V)<\mu(K)+\ep$なので結局
+\[
+\int_X f \ d\mu<\mu(K)+\ep
+\]
+を得る。
+さて
+\[
+\int_X f\ d\mu =\la f=\int_X f\ d\nu
+\]
+なので$\chi_K\le f$から
+\[
+\nu(K)\le \int_X f\ d\nu=\la f
+\]
+が分かる。
+以上から
+\[
+\nu(K)\le \la f<\mu(K)+\ep
+\]
+を得るが$\ep>0$は任意だったので
+\[
+\nu(K)\le \mu(K)
+\]
+を得る。$\nu,\mu$の役割を入れ替えて逆向きの不等式も得られるので
+\[
+\forall K\in \cpt\ \nu(K)=\mu(K)
+\]
+がわかる。よって一意性が確かめられた。
+\end{stp}
+
+以上によりリース-マルコフ-角谷の表現定理の証明は終わった。$\square$
+
+\setcounter{equation}{0}
+\begin{cau}
+$\fnct$上の正値線形形式は$\praf$上だけで完全に決定されることに注意しよう。つまり$\praf$上の関数$I:\praf \to \rr$が
+\begin{eqnarray}
+&\forall f\in \praf\ If \ge 0\\ 
+&\forall f,g\in \praf\ I(f+g)=If+Ig\\ 
+&\forall a\in [0,+\mgn)\ \forall f\in \praf\ I(af)=aI(f)
+\end{eqnarray}
+を充たすならば$I$は$\fnct$上に正値線形形式に一意的に拡張されるのである。\par
+$f\in \fnct$について$f_{+}=\max(f,0),\ f_{-}=\max(-f,0)$としたときに$f=f_{+}-f_{-}$と書けるがこれを使って$I:\fnct \to \rr$を
+\[
+If=If_{+}-If_{-}
+\]
+と拡張すればよいし、線形に拡張するにはこのやり方しかないのもすぐにわかる。\par
+上のリース-マルコフ-角谷の表現定理を使って測度を構成する際には$\praf$上に
+\setcounter{equation}{0}
+\begin{eqnarray}
+&\forall f\in \praf\ If \ge 0\\ 
+&\forall f,g\in \praf\ I(f+g)=If+Ig\\ 
+&\forall a\in [0,+\mgn)\ \forall f\in \praf\ I(af)=aI(f)
+\end{eqnarray}
+を充たす関数が与えられさえすればよいのである。この方法は例えばハール測度を構成する際にも用いられる。
+\end{cau}
+
+
+\begin{thebibliography}{9}
+\bibitem{1}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\bibitem{3}梅垣壽春・大矢雅則・塚田真,測度・積分・確率,共立出版,1987
+\end{thebibliography}
+
+
+\end{document}
+
+\begin{comment}
+定理\ref{pat}から簡単に証明できるので一応証明を付けておく。
+\begin{proof}
+$X$の１点コンパクト化を$Y$と置くこの時$\{U_1,U_2,\cdots U_n,Y\setminus K\}$は$Y$の被覆となっている。都合のために$U_{n+1}=Y\setminus K$と置こう。$\{U_k\}_{k=1,2,\cdots n,n+1}$は$Y$の被覆を成してるので先の定理\ref{pat}より
+\begin{eqnarray*}
+&\supp f_k\subset U_k\\ 
+&0\le f_k \le1\\ 
+&\forall x\in K\ \sum_{k=1}^{n+1}f_k(x)\equiv 1
+\end{eqnarray*}
+を充たす実連続関数の族$\{f_k\}_{k=1,2,\cdots n,n+1}$が存在する。ここで
+\[
+\supp f_{n+1}\subset U_{n+1}=Y\setminus K
+\]
+より
+\[
+f_{n+1}|K\equiv0
+\]
+よって$\{f_k\}_{k=1,2,\cdots n,n+1}$から$f_{n+1}$を除いた$\{f_k\}_{k=1,2,\cdots n}$は明らかに
+\begin{eqnarray*}
+&\supp f_k\subset U_k\\ 
+&0\le f_k \le1\\ 
+&\forall x\in K\ \sum_{k=1}^{n}f_k(x)\equiv 1
+\end{eqnarray*}
+を充たす。
+\end{proof}
+\end{comment}
+
+\begin{comment}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+\setcounter{かんきょう}{n}
+で以下[かんきょう]がn+1からカウントされる。
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}

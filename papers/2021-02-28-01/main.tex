@@ -1,0 +1,1856 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{
+実解析関数入門および
+実解析関数に対する逆関数定理
+}
+\author{ナンブ　キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章では，
+多変数実解析関数の基礎を紹介し，
+そのあと実解析関数に対する逆関数定理を証明する．
+微分可能性が低めの場合や，滑らかな関数の場合と同様に
+逆関数定理が証明されれば陰関数定理も導くことができる．
+参考文献\cite{0}を大いに参考にして，
+足りない部分を適宜補った．
+\section{準備}
+\subsection{多重指数記法}
+この文章では
+\[
+Z_n=\zz_{\ge 0}^n
+\]
+と定義する。
+各$k\in Z_n$に対して、その成分を$k=(k_1,k_2,\dots,k_n)$としたとき
+\[
+\sigma_k=k_1+k_2+\dots+k_n
+\]
+と定義し、
+\[
+\partial_k=\partial_{k_1}\partial_{k_2}\dots\partial_{k_n}
+\]
+と定義する。この文章では偏微分の順序を気にしない関数しか出てこないので、$\partial_k$の定義に出てくる偏微分の順序は我々も気にしないことにする。
+また、
+\[
+k!=k_1!k_2!\cdots k_n!
+\]
+と定義し、
+$x=(x_1, \dots, x_n)\in \rr^n$に対して
+\[
+x^k=x_1^{k_1}x_2^{k_2}\cdots x_n^{k_n}
+\]
+と定義する。
+
+また
+\[
+(x)_\mu=\prod_{j=1}^n(x_j)_{\mu_j}=
+\prod_{j=1}^nx_j(x_j-1)\cdots (x_j-\mu_j+1)
+\]
+と定義する．
+ただし$(x)_0=1$とする．
+
+$k,l\in Z_n$に対して
+\[
+k<l\iff \forall i\in \{1, 2, \dots, n\}\ k_i<l_i
+\]
+と定め、
+\[
+k\le l\iff \forall i\in \{1, 2, \dots, n\}\ k_i\le l_i
+\]
+とする。$k\le l$のとき、その二項係数を
+\[
+\binom{k}{l}=\binom{k_1}{l_1}\binom{k_2}{l_2}\cdots\binom{k_n}{l_n}
+\]
+と定義する。
+簡単にわかることだが、$\binom{k}{l}\le (\sigma_k!)^n$となる。
+また、$l\le k$のとき、
+\[
+k-l=(k_1-l_1,k_2-l_2, \dots, k_n-l_n)
+\]
+と定義する。このときちゃんと$k-l\in Z_n$となる。
+
+補助的に$m\in \zz_{\ge 0}\cup \{\infty\}$に対して
+\[
+Z_n(m)=\{k\in Z_n\mid \sigma_k\le m\}
+\]
+と定義する。もちろん$Z_n(\infty)=Z_n$である。
+多変数の場合のライプニッツ則は多重指数記号を用いると1変数の場合と同じように述べることができる。
+\begin{lem}
+$U$を$\rr^n$の開集合とする。
+二つの$C^m$級関数$f,g,U\to \rr$と$k\in Z_n(m)$について
+\[
+\partial_k(fg)=\sum_{l\le k}\binom{k}{l}(\partial_{k-l}f)(\partial_lg)
+\]
+が成り立つ。
+\end{lem}
+
+\subsection{基本的な微分積分の定理}
+ご存知だとは思うが，平均値の定理の応用として得られるテイラーの定理
+は微分可能な関数を多項式と同様に扱えるようにする重要な道具立ての一つであり，
+もちろん解析的関数と重要な関わりを持つ．
+\begin{thm}
+$n\in \zz_{\ge 0}$で
+$I$を$\rr$の開区間とし
+$x, a\in I$とする．
+$f: I\to \rr$を
+$[a, x]\cup [x, a]$
+を含む開集合上で$n$階微分可能な
+関数とする．このとき
+$c\in [a, x]\cup [x, a]$
+が存在して
+\begin{align*}
+f(x)&=f(a)+\frac{f^{(1)}(a)}{1!}(x-1)+\frac{f^{(2)}(a)}{2!}(x-a)^2+
+\cdots +
+\frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}\\
+&+\frac{f^{(n)}(c)}{n!}(x-a)^n
+\end{align*}
+を満たす．
+\end{thm}
+多変数の解析的関数を扱うときには
+多変数のテイラーの定理が重用される．
+
+\begin{thm}
+$n, N\in \zz_{>0}$で
+$U$を$\rr^n$上の開集合とし，
+$a, x\in U$とする．
+$f: U\to \rr$は$U$上の$C^{N+1}$級関数とする．
+$a$と$x$を結ぶ直線が$U$の含まれているとき
+この直線上の点$\xi$が存在して以下を満たす．
+\begin{align*}
+f(x)=\sum_{\mu\in Z_n, |\mu|\le N}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
++\sum_{\mu\in Z_n, |\mu|=N+1}\frac{1}{\mu!}(\partial_{\mu}f)(\xi)(x-a)^{\mu}
+\end{align*}
+\end{thm}
+
+\subsection{総和について}
+\begin{lem}
+\[
+\left(\sum_{i=0}^{\infty}a_i\right)\left(\sum_{i=0}^{\infty}b_i\right)
+=\sum_{n=0}^{\infty}\left(\sum_{i+j=n}a_ib_j\right)
+=
+\sum_{(i, j)\in Z_n}a_ib_j
+\]
+\end{lem}
+\section{解析関数への入門}
+\begin{df}
+$n\in \zz_{>0}$とする．
+実数列$\{a_{\mu}\}_{\mu\in Z_n}$を
+$\zz_{\ge 0}^n$上の関数とみなして数え上げ測度で積分した値を
+\[
+\sum_{\mu\in Z_n}a_{\mu}
+\]
+と定義する．
+この値が有限の値に収束する場合にはこの級数は収束するといい，
+正や負の無限大の値になる場合には発散するという．
+この値が定義できない場合は定義できないという．
+数え上げ測度の定義から
+この級数が収束する場合には常に絶対収束する．つまり
+\[
+\sum_{\mu\in Z_n}|a_{\mu}|
+\]
+が有限の値に収束する．
+また積分の定義から級数が定義できる場合には話をとる順番に依らず同じ値に収束(発散)する．例えば
+\[
+\sum_{\mu\in Z_n}a_{\mu}=\sum_{N=0}^{\infty}\sum_{|\mu|=N}a_{\mu}
+\]
+が成り立つしフビニトネリの定理から
+\[
+\sum_{\mu\in Z_n}a_{\mu}=
+\sum_{k_1=0}^{\infty}\cdots\sum_{k_n=0}^{\infty}
+a_{k_1, k_2, \dots, k_n}
+\]
+が成り立つ．
+
+
+\end{df}
+\begin{df}
+$n\in \zz_{>0}$とし，
+$U$を$\rr^n$の開集合とする．
+$U$上の実数値関数$f: U\to \rr$
+が$U$上解析的であるとは，
+$U$の任意の点$a\in U$に対して$a$の近傍$N$
+と実数列$\{a_{\mu}\}_{\mu\in Z_n}$が存在して
+任意の$x\in N$に対して
+\[
+f(x)=\sum_{\mu\in Z_n}a_{\mu}(x-a)^{\mu}
+\]
+と表されるときにいう．
+この定義は
+級数$\sum_{\mu\in Z_n}a_{\mu}(x-a)^{\mu}$
+が有限の値に収束することを含んでいることに注意せよ．
+\end{df}
+
+
+\begin{lem}
+$n\in \zz_{>0}$とする．
+このとき$\|x\|_{\infty}<1$を満たす$x\in \rr^n$
+について
+\[
+\left(\sum_{\mu\in Z_n}x^{\mu}\right)-1=\prod_{i=1}^n\frac{x_i}{1-x_i}
+\]
+が成り立つ．
+特に
+$\prod_{i=1}^n\frac{x_i}{1-x_i}$
+は$U(0, 1)$で解析的である.
+
+
+\end{lem}
+
+積分と総和の可換性から次がわかる．
+
+\begin{prop}
+$n\in \zz_{>0}$とする．
+$\{a_{\mu}\}$を$Z_n$で添字つけられた非負実数列とし，
+$\{\{b_{j, \mu}\}_{\mu}\}_{j\in Z_{\ge 0}}$
+を$Z_n$上の非負関数の列とし，各$j$について
+$\{b_{j, \mu}\}_{\mu\in Z_n}$
+は総和可能とし，
+$a_{\mu}=\sum_{j=0}^{\infty}b_{j, \mu}$とする．
+このとき
+\[
+\sum_{j=0}^{\infty}\sum_{\mu\in Z_n}b_{n, \mu}=
+\sum_{\mu\in Z_n}\sum_{j=0}^{\infty}b_{n, \mu} =\sum_{\mu\in Z_n}a_{\nu}
+\]
+が成り立つ．
+\end{prop}
+
+
+
+
+\begin{prop}
+$f$を解析的関数で定義域内の点$a$の近傍$N$で
+\[
+f(x)=\sum_{\mu\in Z_n}c_{\mu}(x-a)^{\mu}
+\]
+と展開されているとすると
+$a$の十分小さい近傍上で
+級数
+$\sum_{\mu\in Z_n}c_{\mu}(x-a)^{\mu}
+$
+は$f(x)$に一様収束する．
+\end{prop}
+\begin{proof}
+$a$の十分小さい近傍上で
+$\sum_{\mu\in Z_n}|c_{\mu}||x-a|^{\mu}$
+が収束することと$M$テストからわかる．
+\end{proof}
+
+
+
+\begin{prop}
+$f$を解析的関数で定義域内の点$a$の近傍$N$で
+\[
+f(x)=\sum_{\mu\in Z_n}c_{\mu}(x-a)^{\mu}
+\]
+と展開されているとすると
+定数$C, R\in (0, \infty)$
+が存在して任意の$\mu\in Z_n$
+\[
+|c_{\mu}|\le \frac{C}{R^{|\mu|}}
+\]
+がなりたつ．
+\end{prop}
+\begin{proof}
+$R$をとり$U(a, R)\subset M$
+であるとする．
+$x=(a_1+R, \dots, a_n+R)$
+とし，
+$C=\sum_{\mu\in Z_n}|c_{\mu}|R^{|\mu|}$
+とする．
+すると，
+\[
+|c_{\mu}|R^{\mu}\le C
+\]
+なので命題が成り立つ．
+\end{proof}
+
+ルベーグの優収束定理から次の連続性と微分可能性がわかる．
+\begin{prop}
+$f$を解析的関数とすると，
+定義域内の各点で連続である．
+\end{prop}
+\begin{prop}
+$f$を解析的関数とすると，
+任意の$\mu\in Z_n$に関して
+$\partial_{\mu}f$は解析的である．
+\end{prop}
+\begin{proof}
+各$i=1, \dots, n$について$\partial_{i}f$が解析的であることが示されれば帰納的に命題が導かれる．
+$i=1$として証明しても構わない．
+\[
+|\mu_1a_{\mu}(x-a)^{\mu}|\le Cr^{|\mu|}
+\]
+故に
+微分と積分の交換定理から
+わかる．
+\end{proof}
+
+\begin{cor}
+$f$を関数としその定義域内の点$a$の近傍$N$で
+\[
+f(x)=\sum_{\mu\in Z_n}c_{\mu}(x-a)^{\mu}
+\]
+と展開されているとすると
+任意の$\mu\in Z_n$
+について
+\[
+\frac{1}{\mu!}(\partial_{\mu}f)(a)=a_{\mu}
+\]
+が成り立つ．
+\end{cor}
+
+\begin{prop}[一致の定理]
+$n\in \zz_{\ge 1}$
+として$U$を$\rr^{n}$の連結開集合とする．
+$f$$U$上で定義された解析関数とする．
+このとき$f^{-1}(\{0\})$が内点を持つならば
+$f$は恒等的に$0$である．
+\end{prop}
+\begin{proof}
+$G=\{\, 
+x\in U
+\mid 
+\forall \mu\in Z_{n}, \ 
+(\partial_{\mu}f)(x)=0
+\, \}$
+と定義すると仮定から$G\neq \emptyset$
+である．また解析関数の連続性から$G$
+は閉集合である．
+今から$G$が開集合であることを示そう．
+任意に$a\in U$を取ると，
+先の系から$a$の十分小さい近傍$N$上で
+\[
+f(x)=\sum_{\mu\in Z_n}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
+\]
+と表される．$a\in G$なので$(\partial_{\mu}f)(a)=0$だから
+$N\subset G$を得る．よって$G$は開集合である．
+今$U$は連結集合であり$G$はその空ではない開かつ閉な部分集合であるから$G=U$となる．
+つまり$f$は$U$上で恒等的に$0$となる．
+\end{proof}
+
+\begin{lem}
+$n\in \zz_{>0}$とし，
+$s, t\in \rr$は$|s|+|t|<1$
+を満たすとする．このとき
+\[
+\sum_{\mu\in Z_n}\sum_{\nu\in Z_n}\binom{\mu+\nu}{\nu}s^{|\mu|}t^{\nu}
+=\left(\frac{1}{1-s-t}\right)^n
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+\[
+\binom{\mu+\nu}{\nu}=\prod_{i=1}^n\binom{\mu_i+\nu_i}{\nu_i}
+\]
+なので$n=1$のとき示せば補題は証明される．
+まず二項定理より
+\[
+\sum_{k=0}^m\binom{m}{k}s^{k}t^{m-k}=(s+t)^{m}
+\]
+であり，$|s+t|<1$と等比数列の総和公式より
+\[
+\sum_{m=0}^{\infty}\sum_{k=0}^m\binom{m}{k}s^{k}t^{m-k}=
+\frac{1}{1-s-t}
+\]
+であるこれを整理すれば
+\[
+\sum_{k}\sum_{l}\binom{k+ l}{l}s^kt^l=\frac{1}{1-s-t}
+\]
+となるので定理が示された．
+\end{proof}
+
+\begin{prop}
+$f$を関数としその定義域内の点$a$の近傍$N$で
+\[
+f(x)=\sum_{\mu\in Z_n}c_{\mu}(x-a)^{\mu}
+\]
+と展開されているとすると
+任意の$b\in N$
+について
+$f$は解析的である．
+\end{prop}
+\begin{proof}
+$a=0$と仮定しても良い.
+各$\mu\in Z_n$
+で
+\[
+d_{\mu}=\frac{1}{\mu!}(\partial_{\mu}f)(0)
+\]
+とおいて
+$b$の十分近くで
+\[
+\sum_{\mu}d_{\mu}(x-b)^{\mu}
+\]
+が収束し，なおかつ
+$f(x)$に一致することを示す．
+まずは収束性から示す．
+$w\in \rr^n$の各成分を小さく取り，
+$0<|w_i|$で$|b_i|<|w_i|$
+でなおかつ
+$w\in N$
+となるようにする．
+そして
+$\epsilon$
+を十分小さく取り，
+\[
+r=\frac{\epsilon}{2}\min_{i=1, \dots, n}|w_{i}|
+\]
+について$U(b, r)\subset N$であり,
+$(1+\epsilon)w\in N$
+が成り立つようにする．
+そして$\{x\in N\mid |x_i|<|w_i|\}$
+が開集合であり，$b$を含むことから$\epsilon$
+を小さく取り直して任意の$x\in U(b, r)$について
+$|x_i|<|w_i|$が成り立つようにする．
+
+今$\nu\in Z_n$について
+\[
+d_{\mu}=\sum_{\mu}\frac{(\nu+\mu)_{\nu}}{\nu!}
+c_{\nu+\mu}b^{\mu}
+\]
+である．
+そして$(1+\epsilon)w\in N$
+なので
+\[
+\sum_{\mu\in Z_n}|c_{\mu}|(1+\epsilon)w|^{\mu}
+\]
+が収束するから，ある定数$C$が存在し，任意の$\mu\in Z_n$
+について
+\[
+c_{\mu}|(1+\epsilon)w|^{\mu}\le C
+\]
+である．
+\[
+s=\frac{1}{1+\epsilon}, \ t=\frac{\epsilon}{2(1+\epsilon)}
+\]
+と置くと
+$s+t<1$であり，
+各$\mu, \nu\in Z_n$と$x\in U(b, r)$について
+\begin{align*}
+|c_{\nu+\mu}||b|^{\mu}|x-b|^{\nu}&\le 
+\left(\frac{\epsilon}{2}\right)^{|\nu|}|c_{\nu+\mu}||w|^{|\mu|+|\nu|}
+\le
+\left(\frac{\epsilon}{2}\right)^{|\nu|}\frac{1}{(1+\epsilon)^{|\mu|+|\nu|}}
+\\
+&= 
+\frac{1}{(1+\epsilon)^{|\mu|}}\frac{\epsilon}{(2(1+\epsilon))^{|\nu|}}
+=s^{\mu}t^{\mu}
+\end{align*}
+が成り立つ．
+ここで，
+\[
+\sum_{\nu, \mu}\binom{\mu+\nu}{\nu}s^{\mu}t^{\mu}
+\]
+は総和可能なので，$M$テストから
+$x\in U(b, r)$
+となる$x$について
+\[
+\sum_{\mu}d_{\mu}(x-b)^{\mu}
+\]
+が収束することがわかった．
+さらに多変数のテイラーの定理から
+$x\in U(b,r)$に対して$x$と$b$を結ぶ直線上の点$\xi$
+が存在して
+\[
+f(x)-\sum_{|\nu|\le l}b_{\nu}(x-b)^{\nu}=
+\sum_{\nu\in Z_n, |\nu|=l+1}\frac{1}{\nu!}(\partial_{\nu}f)(\xi)(x-b)^{\nu}
+\]
+が成り立つ．ここで
+\[
+\frac{1}{\nu!}(\partial_{\nu}f)(\xi)=
+\sum_{\mu}\binom{\nu+\mu}{\nu}
+c_{\nu+\mu}\xi^{\mu}
+\]
+なので，$\xi\in U(b, r)$に注意すると
+\[
+\sum_{\nu\in Z_n, |\nu|=l+1}\frac{1}{\nu!}|(\partial_{\nu}f)(\xi)||x-b|^{\nu}
+=\sum_{\nu\in Z_n, |\nu|=l+1}\sum_{\mu}\binom{\nu+\mu}{\nu}
+c_{\nu+\mu}|\xi|^{\mu}|x-b|^{\nu}
+\]
+ここで，$\xi\in U(b, r)$なので
+$|\xi_|<|w_i|$であるよって
+\begin{align*}
+&\sum_{\nu\in Z_n, |\nu|=l+1}\sum_{\mu}\binom{\nu+\mu}{\nu}
+c_{\nu+\mu}|\xi|^{\mu}|x-b|^{\nu}
+\le\\ 
+&\sum_{\nu\in Z_n, |\nu|=l+1}\sum_{\mu}\binom{\nu+\mu}{\nu}
+\left(\frac{\epsilon}{2}\right)^{|\nu|}c_{\nu+\mu}|w|^{\mu}||w|^{\nu}
+\le 
+\sum_{\nu\in Z_n, |\nu|=l+1}\sum_{\mu}\binom{\nu+\mu}{\nu}
+s^{\mu}t^{\nu}
+\end{align*}
+となり$l\to \infty$
+のとき
+\[
+\sum_{\nu\in Z_n, |\nu|=l+1}\sum_{\mu}\binom{\nu+\mu}{\nu}
+s^{\mu}t^{\nu}
+\]
+は$0$に収束するので，
+結局$f(x)=\sum_{\nu}b_{\nu}(x-b)^{\nu}$
+である．
+\end{proof}
+
+
+
+
+解析関数の合成は解析関数になることを証明する．
+\begin{prop}
+$m, n\in \zz_{>0}$
+とし，
+$U, V$をそれぞれ$\rr^m, \rr^n$
+の空でない開集合とする．
+$g: U\to \rr$を$U$上の解析関数とし，
+$\{f_i: V\to \rr\}_{i=1}^m$
+を$V$上の解析関数とする．
+点$a\in V$について
+$(f_1(a), f_2(a), \dots, f_m(a))\in U$
+が成り立つとする．
+このとき
+点$a$の近傍で$g(f_1, f_2, \dots, f_m)$
+が定義されるが，この関数は点$a$
+において解析的である．
+\end{prop}
+\begin{proof}
+$u$を$m$変数の任意の形式的冪級数とし，
+$u(0)=0$とする．
+$v_1, \dots, v_m$を任意の$m$個の$n$変数
+形式的冪級数とし$v_i(0)=0$とする．
+このとき
+$u(v_1, \dots, v_m)$
+の$x^{\mu}$の係数を調べることをする．
+\[
+u=\sum_{\nu\in Z_m}s_{\nu}
+\]
+\[
+v_i=\sum_{\mu\in Z_n}t_{i, \mu}
+\]
+と表示して，$l\in \zz_{\ge 0}$
+に対して
+\[
+u_{sub, l}=\sum_{\mu\in Z_n, |\mu|\le l}s_{\mu}
+\]
+\[
+v_{sub, i, l}=\sum_{\mu\in Z_n, |\mu|\le l}t_{i, \mu}
+\]
+と置く．
+この時
+$u_{sub, l}(v_{sub, 1, l}, \dots, v_{sub, l, m})$
+が形式的冪級数であることがわかる．
+さらに
+$|\mu|\le l$の時
+$u_{l}(v_{sub, 1, l}, \dots, v_{sub, l, m})$
+の$x^{\mu}$係数は
+$v_i$の$l$次までの係数を使って定義され，
+$|\mu|\le l$かつ$|\mu|<l'$の時
+$u_{l}(v_{sub, 1, l}, \dots, v_{sub, l, m})$
+と
+$u_{l'}(v_{sub, 1, l'}, \dots, v_{sub, l', m})$
+の$x^{\mu}$の係数は同じ値である．
+このことから
+$u(v_1, \dots, v_m)$
+の$x^{\mu}$
+の係数はwell-definedであり，
+これも形式的冪級数であることがわかる．
+さて
+$\mu\in Z_n$に対して
+多項式$P_{0, \mu}$
+をゼロ多項式として定義する．
+そして
+任意の$l\in \zz_{> 0}$に対して
+\[
+u_{sub, N}(v_{sub, 1, N+1}(x), \dots, v_{sub, n, N+1}(x))-
+u_{sub, N}(v_{sub, 1, N}(x), \dots, v_{sub, n, N}(x))
+\]
+の$x^{\mu}$の係数を
+$P_{N+1, \mu}(\{s_{\nu}\}_{|\nu|\le |\mu|}, \{t_{i, \alpha}\}_{i, |\alpha|\le |\mu|})$
+とおく．
+$|\mu|<l$ならば$P_{l, \mu}\equiv0$であるし，
+有限個の$\mu$をのぞいて
+$P_{l, \mu}\equiv 0$
+となる．
+二項係数は全て非負実数であるから，
+任意の$l\in \zz_{\ge 0}$
+と
+$\mu\in Z_n$
+に対して
+$P_{l, \mu}\{s_{\nu}\}_{|\nu|\le |\mu|}, \{t_{i, \alpha}\}_{i, |\alpha|\le |\mu|})$
+は$s_{\nu}$と$t_{i, \alpha}$
+の多項式でなおかつその係数は
+$u$と$v_i$の取り方に依存しない
+普遍的な非負整数である．
+よって
+$P_{l, \mu}$
+が単調であることがわかる．
+つまり
+実数
+$s_{\mu}$, $t_{i, \alpha}$, $s'_{\mu}$, $t'_{i, \alpha}$
+が
+$|s_{\mu}|\le s'_{\mu}$
+と$|t_{i, \alpha}|\le t'_{i, \alpha}$
+を満たすならば
+\[
+|P_{l, \mu}(\{s_{\nu}\}, \{t_{i, \alpha}\})|
+\le 
+P_{l, \mu}(\{s'_{\nu}\}, \{t'_{i, \alpha}\})
+\]
+を満たす．
+また，
+$u(v_1, \dots, v_m)$
+の$x^{\mu}$の係数を
+$Q_{\mu}(\{s_{\nu}\}, \{t_{i, \alpha})$
+とおくとこれも
+$\{s_{\nu}\}, \{t_{i, \alpha}$の多項式で
+その係数は$u, v_i$
+の選び方によらない普遍的な非負整数である．
+よって単調性をもつ．
+さらに
+任意の$\mu\in Z_n$に対して
+\[
+Q_{\mu}(\{s_{\nu}\}, \{t_{i, \alpha})
+=\sum_{l=0}^{\infty}P_{l, \mu}(\{s_{\nu}\}, \{t_{i, \alpha})
+\]
+が成り立つ．ここで右辺は実は有限和である．
+以上の準備のもと命題を証明する．
+
+$0\in V$で$a=0$で各$i$について$f_i(a)=0$であり，$0\in U$でなおかつ
+$g(0)=0$と仮定しても良い．
+$0\in U$の十分小さい近傍$M$で$g$は
+\[
+g(y)=\sum_{\nu\in Z_m}b_{\nu}y^{\nu}
+\]
+と展開される．
+そして$M$上の関数$G$を
+\[
+G(y)=\sum_{\nu\in Z_m}|b_{\nu}|y^{\nu}
+\]
+と定義する．
+
+さて
+$0\in V$の十分小さい近傍$N$上で
+各$i=1, \dots, m$
+について
+\[
+f_i(x)=\sum_{\mu\in Z_n}a_{i, \mu}x^{\mu}
+\]
+と展開される．ここで仮定より$a_{i, 0}=0$であることに注意せよ．
+また$C, R\in (0, \infty)$が存在して
+任意の$\mu\in Z_n$に対して
+\[
+|a_{i, \mu}|\le \frac{C}{R^{|\mu|}}
+\]
+が成り立つ．
+適当に変数変換をして，
+\[
+|a_{i, \mu}|\le C
+\]
+が成り立つとしても良い．
+
+$N$上の関数として
+\[
+f_{sub, i, l}(x)=\sum_{\mu\in Z_n, |\mu|\le l}a_{i, \mu}x^{\mu}
+\]
+と定義する．
+
+$U(0, r)\subset \rr^n$上で関数$K$を
+\[
+K(x)=\prod_{i=1}^n\frac{x_i}{1-x_i}=\left(\sum_{\mu\in Z_n}x^{\mu}\right)-1
+\]
+と定義し，
+\[
+H(t)=K(C\cdot t, C\cdot t, \dots, C\cdot t)
+\]
+と置く．
+そして
+\[
+q_{\mu}=Q_{\mu}(|c_{\mu}|, C)
+\]
+\[
+w_{l, \mu}=P_{l, \mu}(|c_{\mu}|, C)
+\]
+と置く．この時
+$q_{\mu}$
+を係数にもつ冪級数が原点で解析的であることを示す．
+まず$w_{l, \mu}$と$P_{l, \mu}$の定義から任意の$l\in \zz_{\ge 0}$
+に対して
+$t=\|x\|_{\infty}$として
+\[
+\left|\sum_{\mu}w_{l+1, \mu}x^{\mu}\right|\le 
+\sum_{\mu}w_{l+1, \mu}t^{|\mu|}= 
+G_l(H_{l+1}(t), \dots, H_{l+1}(t))-G_l(H_{l}(t), \dots, H_{l}(t))
+\]
+となり，
+\begin{align*}
+&\sum_{l=1}^{\infty}(G_l(H_{l+1}(t), \dots, H_{l+1}(t))-G_l(H_{l}(t), \dots, H_{l}(t)))\\
+&=\lim_{k\to \infty}\sum_{l=1}^k(G_l(H_{l+1}(t), \dots, H_{l+1}(t))-G_l(H_{l}(t), \dots, H_{l}(t)))\\
+&=\lim_{k\to \infty}G_k(H_{k+1}(t), \dots, H_{k+1}(t))
+=G(H(t), \dots, H(t))
+\end{align*}
+であるから
+$\|x\|_{\infty}<1$
+の時
+$\sum_{l=0}^{\infty}\sum_{\mu}w_{l, \mu}x^{\mu}$
+は総和可能である．
+さて
+$c_{\mu}=Q_{\mu}(c_{\nu}, a_{\alpha})$で
+$d_{l, \mu}=P_{l, \mu}(c_{\nu}, a_{\alpha})$
+とおく．
+すると
+\[
+|c_{\mu}|\le q_{\mu}
+\]
+と
+\[
+|d_{l, \mu}|\le w_{l, \mu}
+\]
+が成り立つ．
+\begin{align*}
+&\left|g(f_1, \dots, f_m)-\sum_{\mu\in Z_n, |\mu|\le l}c_{\mu}x^{\mu}\right|
+\\
+&\le 
+|g(f_1, \dots, f_m)-g_{sub, l}(f_{sub, 1, l}, \dots, f_{sub, m, l})|
++
+\left|
+g_{sub, l}(f_{sub, 1, l}, \dots, f_{sub, m, l})-
+\sum_{\mu\in Z_n, |\mu|\le l}c_{\mu}x^{\mu}
+\right|
+\end{align*}
+
+$\rr^m$原点の十分小さい近傍で
+$g_{sub, l}$が
+$g$に一様収束することと，
+$\rr^n$の原点の十分小さい近傍で
+$f_{sub, i, l}$
+が$f_{i}$
+に一様収束することから
+$r$を十分小さく取り
+$r<1$であり
+任意の$\epsilon$に対して$L\in \zz{\ge 0}$
+が存在して
+$l>L$がならば任意の$x\in U(0, r)$に対して
+\[
+|g(f_1(x), \dots, f_m(x))-g_{sub, l}(f_{sub, 1, l}(x), \dots, f_{sub, m, l}(x))|
+\le \epsilon
+\]
+であるようにできる．
+
+そして
+\[
+\left|
+g_{sub, l}(f_{sub, 1, l}, \dots, f_{sub, m, l})-
+\sum_{\mu\in Z_n, |\mu|\le l}c_{\mu}x^{\mu}
+\right|
+\le \sum_{k>l}\sum_{\mu}|d_{k, \mu}|r^{|\mu|}
+\le \sum_{k>l}\sum_{\mu}w_{k, \mu}r^{|\mu|} 
+\]
+であり，$w_{k, \mu}r^{|\mu|}$
+は総和可能であるから，
+$r$を小さく取り直して
+任意の$\epsilon$に対して$L\in \zz_{\ge 0}$
+が存在して
+$l>L$となる$l$と任意の$x\in U(a, r)$
+に対して
+\[
+\sum_{k>l}\sum_{\mu}w_{k, \mu}x^{\mu}\le \epsilon
+\]
+が成り立つ．
+よって$x\in U(0, r)$
+に対して
+\[
+\left|
+g_{sub, l}(f_{sub, 1, l}, \dots, f_{sub, m, l})-
+\sum_{\mu\in Z_n, |\mu|\le l}c_{\mu}x^{\mu}
+\right|\le 2\epsilon
+\]
+なので，
+\[
+g(f_1(x), \dots, f_m(x))
+\]
+は原点で解析的であることがわかる．
+\end{proof}
+
+\subsection{解析関数の局所的振る舞い}
+\begin{df}
+$n\in \zz_{>0}$とし，
+$U$を$\rr^n$の開集合とする．
+$U$上の実数値関数$f: U\to \rr$
+が\textbf{条件$(A)$}を満たすとは
+任意の$a\in U$に対して$a$の近傍$N$が存在して
+ある$C\in (0, \infty)$と$R\in (0, \infty)$が存在して任意の$x\in N$と
+$\mu\in Z_n$に対して
+\[
+|(\partial_{\mu}f)(x)|\le C\cdot\frac{\mu!}{R^{|\mu|}}
+\]
+が成り立つときにいう．
+\end{df}
+以下では解析性と条件(A)が成り立つことが同値であることの証明を目標にして話を進めていく．
+\begin{lem}
+$n\in \zz_{>0}$で$m\in \zz_{\ge 0}$とする．
+このとき
+\[
+\card(\{\mu\in Z_n\mid |\mu|=m\})=\binom{n+m-1}{n-1}
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+公式
+\[
+\binom{a}{b}+\binom{a}{b+1}=\binom{a+1}{b+1}
+\]と
+帰納法によって証明する．
+$A_{n, m}=\{\mu\in Z_n\mid |\mu|=m\}$
+と定義すると，
+\[
+A_{n, m}=\{\mu\in A_{n, m}\mid \mu_1=0\}\sqcup\{\mu \in A_{n, m}\mid \mu_1>0\}
+\]
+と直和分解できる．
+$B_{n, m}=\{\mu\in A_{n, m}\mid \mu_1=0\}$
+と$C_{n, m}=\{\mu \in A_{n, m}\mid \mu_1>0\}
+$と置くことにする．
+ここで，
+\[
+B_{n, m}=\{0\}\times A_{n-1, m}
+\]
+であり，さらに
+\[
+C_{n, m}
+=(1, 0, \dots, 0)+A_{n, m-1}
+\]
+である．ここで，$x\in Z_n$と集合$S\subset Z_n$に対して
+\[
+x+S=\{x+s\mid s\in S\}
+\]
+である．
+今ここで，$n+m$の値に関する帰納法を用いると，
+$\card(B_{n, m})=\card(A_{n-1, m})=\binom{m+n-2}{n-2}$であり
+$\card(C_{n, m})=\card(A_{n, m-1})=\binom{m+n-2}{n-1}$
+であるから
+\begin{align*}
+\card(A_{n, m})&=\card(B_{n, m})+\card(C_{n, m})\\
+&=\binom{m+n-2}{n-2}+\binom{m+n-2}{n-1}=\binom{m+n-1}{n-1}
+\end{align*}
+である．
+\end{proof}
+
+\begin{lem}\label{lem:xxx}
+$\sum_{\mu\in Z_n}x^{\mu}$
+は$U(0, 1)$で条件$(A)$を満たす．つまり，
+$n\in \zz_{>0}$とする．
+このとき$l\in (0, 1)$と
+$M,, L\in (0, \infty)$が存在して
+任意の$x\in U(0, l)$と任意の$\nu\in Z_n$に対して
+\[
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}x^{\mu}\le \frac{M}{L^{|v|}}
+\]
+を満たす．
+\end{lem}
+\begin{proof}
+$L\in (0, 1)$を任意にとる．
+そして
+$l=1-L $とする．
+このとき
+\[
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}|x|^{\mu}
+=
+\frac{1}{\nu!}\prod_{i=1}^n\frac{1}{(1-|x_i|)^{\nu_i+1}}
+\]
+そして
+\[
+\frac{1}{(1-|x_i|)^{\nu_i+1}}
+\le \frac{1}{L}\frac{1}{L^{\nu_i}}
+\]
+なので
+\[
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}|x|^{\mu}\le 
+\left(\frac{1}{L}\right)^n\frac{1}{L^{|\nu|}}
+\]
+である．
+\end{proof}
+
+\begin{thm}
+$n\in \zz_{>0}$とし，
+$U$を$\rr^n$の開集合とする．
+$U$上の実数値関数$f: U\to \rr$
+が$U$上解析的であるための必要十分条件は
+任意の$a\in U$に対して$a$の近傍$N$が存在して
+ある$C\in (0, \infty)$と$R\in (0, \infty)$が存在して任意の$x\in N$と
+$\mu\in Z_n$に対して
+\[
+|(\partial_{\mu}f)(x)|\le C\cdot\frac{\mu!}{R^{|\mu|}}
+\]
+が成り立つことである．
+\end{thm}
+\begin{proof}
+まず最初に$f$が解析的であるとする．$a\in U$
+に対して$R\in (0, \infty)$が存在して$a$を中心とする半径$R$の閉球$B(a, R)$上で$a$を中心として$f$を冪級数展開ができる．
+つまり任意の$x\in B(a, R)$について
+\[
+f(x)=\sum_{\mu\in Z_n}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
+\]
+である．$B(a, R)$はコンパクトなので
+\[
+\sum_{\mu\in Z_n}\frac{1}{\mu!}|(\partial_{\mu}f)(a)||x-a|^{\mu}
+\]
+は$B(a, R)$上収束しさらに連続である．よってある$C\in (0, \infty)$
+が存在して
+\[
+\sum_{\mu\in Z_n}\frac{1}{\mu!}|(\partial_{\mu}f)(a)||x-a|^{\mu}\le C
+\]
+となる．任意の$r\in (0, R]$に対して$x=(r, \dots, r)+a$とすると
+\[
+|(\partial_{\mu}f)(a)|\le C\cdot\frac{\mu!}{r^{|\mu|}}
+\]
+となることがわかる．
+特に
+\[
+|(\partial_{\mu}f)(a)|\le C\cdot\frac{\mu!}{R^{|\mu|}}
+\]
+である．
+
+ここで$G: U(0, 1)\to \rr$を
+\[
+G(x)=\sum_{\mu\in Z_n}x^{\mu}
+\]
+と定義し，$l, M, L$を補題\ref{lem:xxx}で存在が示されたものとする．
+
+さて$t=l/2$とし，$r$を十分小さく取り，$tr<R$となるようにする．
+任意の$x\in U(a, r)$に対して
+\[
+f(x)=\sum_{\mu\in Z_n}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
+\]
+であるから任意の$\nu\in Z_n$に対して
+\[
+(\partial_{\nu}f)(x)=\sum_{\nu\le \mu}(\mu)_{\nu}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu-\nu}
+=\sum_{\mu\in Z_n}(\mu+\nu)_{\nu}\frac{1}{(\mu+\nu)!}(\partial_{\mu+\nu}f)(a)(x-a)^{\mu}
+\]
+が成り立つ．
+よって
+\begin{align*}
+&\left|\sum_{\mu\in Z_n}(\mu+\nu)_{\nu}\frac{1}{(\mu+\nu)!}(\partial_{\mu+\nu}f)(a)(x-a)^{\mu}\right|
+\le 
+\sum_{\mu\in Z_n}(\mu+\nu)_{\nu}\frac{1}{(\mu+\nu)!}
+|(\partial_{\mu+\nu}f)(a)|r^{|\mu|}\
+\\
+&\le \frac{\nu !}{r^{|\nu|}}
+\sum_{\mu\in Z_n}\frac{(\mu+\nu)_{\nu}}{v!}\frac{1}{(\mu+\nu)!}
+|(\partial_{\mu+\nu}f)(a)|r^{|\mu|+|\nu|}
+\le
+ C\cdot \frac{\nu !}{r^{|\nu|}}
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}\left(\frac{r}{R}\right)^{|\mu|+|\nu|}\\
+&\le 
+C\cdot \frac{\nu!}{R^{|\nu|}}
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}t^{|\mu|}
+\end{align*}
+となる．ここで
+$(1/\nu!)(\partial_{\nu}G)(t, t, \dots, t)=\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}t^{|\mu|}$
+なので，補題\ref{lem:xxx}より
+\[
+\sum_{\mu\in Z_n}\binom{\mu+\nu}{\nu}t^{|\mu|}\le \frac{M}{L^{|\nu|}}
+\]
+となる．
+結局$x\in U(a, r)$に対して
+\[
+|(\partial_{\mu}f)(x)|\le C'\cdot\frac{\mu!}{(RL)^{|\mu|}}
+\]
+が成り立つことがわかる．これで前半の証明が終わる．
+
+逆に主張の後半の条件が成り立っているとする．
+このとき任意に$a\in U$をとり，$r\in (0, \infty)$を十分小さく取り
+$C, R\in (0, \infty)$が存在して$2r<R$を見たし，さらに
+$U(a, r)$の任意の点$x\in U(a, r)$について
+\[
+|(\partial_{\mu}f)(a)|\le C\cdot\frac{\mu!}{R^{|\mu|}}
+\]
+が成り立つと仮定しても良い．
+今ここで，級数$\sum_{\mu\in Z_n}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}$
+が絶対収束することを証明しよう．任意の$\mu\in Z_n$について
+\[
+\frac{1}{\mu!}|(\partial_{\mu}f)(a)||x-a|^{\mu}\le 
+C\cdot 2^{-|\mu|}
+\]
+が成り立ち，
+\[
+\sum_{\mu\in Z_n}2^{-|\mu|}
+\]
+は収束するのでくだんの冪級数が$U(a, r)$上で絶対収束することがわかる．
+このとき任意の$x\in U(a, r)$についてテイラーの定理より
+$\xi\in U(a, r)$が存在して
+\[
+f(x)=\sum_{\mu\in Z_n, |\mu|\le N}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
++\sum_{\mu\in Z_n, |\mu|=N+1}\frac{1}{\mu!}(\partial_{\mu}f)(\xi)(x-a)^{\mu}
+\]
+が成り立つ．
+よって仮定よりこの剰余項について
+\[
+\left|\sum_{\mu\in Z_n, |\mu|=N+1}\frac{1}{\mu!}(\partial_{\mu}f)(\xi)(x-a)^{\mu}\right|
+\le C\cdot \binom{n+N}{n-1}2^{-(N+1)}\le 
+\frac{C}{n!}\frac{N^n}{2^{N+1}} 
+\]
+が成り立ち，$N\to \infty$のとき$\frac{N^n}{2^{N+1}}\to 0$
+なので
+\[
+f(x)=\sum_{\mu\in Z_n}\frac{1}{\mu!}(\partial_{\mu}f)(a)(x-a)^{\mu}
+\]
+が成り立つ．
+よって$U(a, r)$上で$f$は冪級数展開可能であり，
+ $a$は任意であったから定理が成り立つ．
+\end{proof}
+
+
+
+\section{特殊な準線形一階偏微分方程式の解法}
+$I$を$\rr$の開区間とし，
+$\{a_i:I\to \rr\}_{i=1}^n$を$C^{\infty}$級関数の族とする．
+$D$を$\rr^n$の領域とし，
+$u:D\to \rr$を未知関数とする準線形一階偏微分方程式
+\begin{equation}\label{eq:1}
+\sum_{i=1}^na_i(u)\partial_{i}u=0 
+\end{equation}
+の解放を考察する．
+一般に準線形といった場合には$a_i$は$u$のみならず$x_i$に依存している場合を含む．
+\begin{prop}
+$I$を$\rr$の開区間とし，
+$\{a_i:I\to \rr\}_{i=1}^n$を$C^{\infty}$級関数の族とする．
+関数の族
+$\{\beta_i: I\to \rr\}$は任意の$z\in I$について
+\begin{equation}\label{eq:beta0}
+\sum_{i=1}^na_i(z)\beta_i(z)=0 
+\end{equation}
+を満たすとする．
+$w: I\to \rr$を適当な微分可能関数として，
+$z$と$(x_1, x_2, \dots, x_n)\in U$に関する等式
+\begin{equation}\label{eq:30}
+w(z)=\sum_{i=1}^n\beta_i(z)\cdot x_i
+\end{equation}
+を考える．
+$U$の部分開集合$V$が$g: V\to I$が
+等式\ref{eq:30}の微分可能な陰関数，つまり
+任意の$x\in V$に関して
+\[
+w(g(x))=\sum_{i=1}^n\beta_i(g(x))\cdot x_i
+\]
+を満たすとし，さらに
+任意の$x\in V$に関して
+\[
+(\partial_zw)(g(x))-\sum_{i=1}^n(\partial_z\beta)(g(x))\cdot x_i\neq 0
+\]
+を満たすとすると，$g$は任意の$x\in V$に対して
+\[
+\sum_{i=1}^na_i(g(x))\partial_{i}g(x)=0 
+\]
+を満たす．つまり$g$は$V$上で
+準線形一階微分方程式(\ref{eq:1})
+の解になっている．
+\end{prop}
+\begin{proof}
+$F: U\times I\to \rr$を
+\[
+F(x_1, \dots, x_n, z)=w(z)-\sum_{i=1}^n\beta_i(z)\cdot x_i
+\]
+と定義すると$g: V\to I$は
+任意の$x\in V$に関して$F(x, g(x))=0$
+を満たしている．
+そして任意の$x\in V$について
+\[
+\partial_ig=\frac{\beta_i(g(x))}{(\partial_zF)(x, g(x))}
+\]
+なので，等式(\ref{eq:beta0})より
+\[
+\sum_{i=1}^na_i(g(x))\partial_{i}g(x)=
+\frac{1}{(\partial_zF)(x, g(x))}\sum_{i=1}^n a_i(g(x))\cdot \beta_i(g(x))=
+0
+\]
+となる．
+
+\end{proof}
+
+\section{さらに特殊な方程式}
+\begin{prop}
+$x\in \rr^m$
+に対して$\sigma(x)=\sum_{i=1}^mx_i$
+とおく．
+さらに$n\in \zz_{> 0}$
+で$R, C\in \rr_{>0}とする．$
+このとき$m+1$変数
+の実数値関数$v(x, y)$に関する
+初期値問題
+\begin{equation}\label{eq:44}
+\frac{\partial v}{\partial y}(x, y)=\frac{nC}{1-\frac{nv(x, y)}{R}}
+\sum_{i=1}^m\frac{\partial v}{\partial x_i}
+\end{equation}
+\[
+v(x, 0)=\frac{C\frac{\sigma(x)}{R}}{1-\frac{\sigma(x)}{R}}
+\]
+は原点の近傍で定義された解析関数の解を持つ．
+ここで，$m+1$番目の変数を$y$と表している．
+\end{prop}
+\begin{proof}
+\[
+\beta_y=\frac{mnC}{1-\frac{nv(x, y)}{R}}
+\]
+とし，$\beta_{x_i}=1$とおくと，先の命題の条件を満たす．
+さて，$w$も初期値問題を満たすように選ばなければならない．
+今の場合には$x$に対して
+\[
+w(v(x, 0))=\sum_{i=1}^m\beta_{x_i}x_i=\sigma
+\]
+とならなければならない．
+つまり
+\[
+w\left(\frac{C\frac{\sigma(x)}{R}}{1-\frac{\sigma(x)}{R}}
+\right)=\sigma
+\]
+である．
+このような$w$として
+\[
+w(z)=\frac{Rz}{C+z}
+\]
+を今回は用いる．
+このとき
+\[
+w(z)=\frac{mnC}{1-\frac{nz}{R}}y+\sigma
+\]
+を$z$についてといて，初期値の条件を満たす関数を見出す．
+この式を変形すると
+\[
+n(R-\sigma)z^2+(RmnCy+R\sigma-R^2-\sigma Cn)z+(RmnyC^2+R\sigma+R\sigma C)=0
+\]
+である．
+よって$\rr^{m+1}$の原点の十分小さい近傍$V\subset \rr^{m+1}$を十分小さく取って任意の$x\in V$
+について$R-\sigma>0$と
+\[
+(RmnCy+R\sigma-R^2-\sigma Cn)^2-4n(R-\sigma)(RmnyC^2+R\sigma+R\sigma C)>0
+\]
+となるようにすると
+$z(x, y)$の候補は二次方程式の解の公式から
+\begin{align*}
+&-\frac{1}{2n(R-\sigma)}\left(RmnCy+R\sigma-R^2-\sigma Cn\right)\\
+&\pm\frac{1}{2n(R-\sigma)}\sqrt{(RmnCy+R\sigma-R^2-\sigma Cn)^2-4n(R-\sigma)(RmnyC^2+R\sigma+R\sigma C)}
+\end{align*}
+である．この式で$y=0$とすると
+\begin{align*}
+&-\frac{1}{2n(R-\sigma)}\left(R\sigma-R^2-\sigma Cn\right)\\
+&\pm\frac{1}{2n(R-\sigma)}\sqrt{(R\sigma-R^2-\sigma Cn)^2-4n(R-\sigma)(RmnyC^2+R\sigma+R\sigma C)}
+\end{align*}
+であり，平方根の中身を整理すると
+\begin{align*}
+-\frac{1}{2n(R-\sigma)}\left(R\sigma-R^2-\sigma Cn\right)\pm
+|R^2-(R+Cn)\sigma|
+\end{align*}
+となる．ここで$V\subset \rr^{m+1}$の取り方から任意の$x\in V$について
+$R^2-(R+Cn)\sigma(x)>0$が成り立つので，
+\begin{align*}
+-\frac{1}{2n(R-\sigma)}\left(R\sigma-R^2-\sigma Cn\right)+
+(R^2-(R+Cn)\sigma)=
+\frac{C\frac{\sigma(x)}{R}}{1-\frac{\sigma(x)}{R}}
+\end{align*}
+が成り立つから
+$V$上で$z(x, y)$を
+\begin{align*}
+&-\frac{1}{2n(R-\sigma)}\left(RmnCy+R\sigma-R^2-\sigma Cn\right)\\
+&+\frac{1}{2n(R-\sigma)}\sqrt{(RmnCy+R\sigma-R^2-\sigma Cn)^2-4n(R-\sigma)(RmnyC^2+R\sigma+R\sigma C)}
+\end{align*}
+と定義すれば$z: V\to \rr$は原点の近傍で定義された
+偏微分方程式(\ref{eq:44})の解である
+今からこの$z$が解析的であることを確かめよう．
+まず分母にある$2n(R-\sigma)$は解析的であるから
+結局平方根の部分が解析的であることを示せば良い．
+平方根の中身は解析的であり，解析関数の合成が解析的であること，
+平方関数が$\rr_{>0}$で解析的であることを踏まえると，
+結局上で定義した$z$が解析的であることがわかる．
+\end{proof}
+
+\section{Cauchy--Kovalevkayaの定理の特殊な場合}
+\begin{prop}
+$n, m\in \zz_{>0}$
+とし，
+$\{\phi\}_{i=1}^n$
+は$\phi_i(0)=0$
+を満たす$0\in \rr^{m+1}$で$m+1$変数の解析的な関数とし
+$\{F_{i, j, k}\}_{i, j, k=1}^n$は
+$0\in \rr^n$で解析的な$n$変数関数とする．
+このとき準線形一階連立偏微分方程式の初期値問題
+\[
+\frac{\partial u_i}{\partial y}=\sum_{j, k}F_i(u_1, \dots, u_n)\frac{\partial u_j}{\partial x_k}
+\]
+\[
+u(x, 0)=\phi_i(x)
+\]
+を考えると，原点$0\in \nn^{m+1}$の近傍$N$が存在し，
+$N$上で定義された解析的関数がこの連立方程式の解であり
+$N$上での滑らかな解はただ一つしか存在しない．
+\end{prop}
+\begin{proof}
+$u_i$
+が冪級数展開できるとして
+その係数を
+$\phi_i$と$F_{i, j, k}$
+から計算することを考えると，
+普遍的な非負整数を係数にもつ多項式が存在して，
+$u_i$の係数はその多項式に
+$\phi_i$と$F_{i, j, k}$
+を代入することで得られる．
+解の唯一性はこのことから従う．
+よって$F_{i, j, k}$
+と$\phi_i$を
+それぞれの優関数に置き換えて
+考えている方程式
+の解が存在することがわかればその解
+は元の方程式の優関数になるので
+元の方程式の解が確かに存在することがわかる．
+$C, R\in (0, \infty)$
+を適当に選べば，
+$z\in \rr^{n}$に対して
+$s(z)=\sum_{i=1}^nz_i$と定義して
+\[
+G_{i, j, k}(z)=G(z)=\frac{nC}{1-\frac{s(z)}{R}}=C\sum_{l=0}^{\infty}\left(\frac{s(z)}{R}\right)^l
+\]
+で定義される関数は原点の近傍で
+$F_{i, j, k}$の優関数になっており，
+$x\in \in \rr^{m}$に対して
+$\sigma(x)=\sum_{i=1}^mx_i$
+と定義して
+\[
+\psi_i(x)=\psi(x)=\frac{C\frac{\sigma(x)}{R}}{1-\frac{\sigma(x)}{R}}
+=\sum_{l=1}^{\infty}\left(\frac{\sigma(x)}{R}\right)
+\]
+とするとこれは$\phi_i$の優関数になっている．
+よって
+$v_i=v$として
+初期値問題
+\begin{equation}\label{eq:44}
+\frac{\partial v}{\partial y}(x, y)=\frac{nC}{1-\frac{nv(x, y)}{R}}
+\sum_{i=1}^m\frac{\partial v}{\partial x_i}
+\end{equation}
+\[
+v(x, 0)=\frac{C\frac{\sigma(x)}{R}}{1-\frac{\sigma(x)}{R}}
+\]
+の解が存在すれば
+証明が終わるが，
+これの解析解が原点に存在することは既に証明しているので
+証明が終わる．
+
+\end{proof}
+
+次に項が付け加わった場合の解について考えよう．
+\begin{prop}\label{prop:ck}
+$n, m\in \zz_{>0}$
+とし，
+$\{\phi\}_{i=1}^n$
+は$\phi_i(0)=0$
+を満たす$0\in \rr^{m+1}$で$m+1$変数の解析的な関数とし
+$\{F_{i, j, k}\}_{i, j, k=1}^n$と$G$は
+$0\in \rr^n$で解析的な$n$変数関数とする．
+このとき準線形一階連立偏微分方程式の初期値問題
+\[
+\frac{\partial u_i}{\partial y}=\sum_{j, k}F_i(u_1, \dots, u_n)\frac{\partial u_j}{\partial x_k}+G(u_1, \dots, u_n)
+\]
+\[
+u(x, 0)=\phi_i(x)
+\]
+を考えると，原点$0\in \nn^{m+1}$の近傍$N$が存在し，
+$N$上で定義された解析的関数がこの連立方程式の解であり
+$N$上での滑らかな解はただ一つしか存在しない．
+
+\end{prop}
+\begin{proof}
+$x$の変数を一つ増やして$(x, z, y )\in \rr^{m+2}$
+とする．$m+1$番目の変数が$z$で，$m+2$番目が$y$とする．
+このとき
+$\{H_{i, j, k}\}$
+を$i, j, k\in \{1, \dots, n\}$の時
+\[
+H_{i, j, k}(u_1, \dots, u_n, u_{n+1})=F_{i, j, k}(u_1, \dots, u_n)
+\]
+で$1\le i\le n$の時
+\[
+H_{i, n+1, m+1}(u_1, \dots, u_n, u_{n+1})=G(u_1, \dots, u_n)
+\]
+とし，以上で述べた場合以外では恒等的に$0$と定義する．
+
+さらに$\psi(x, z)$を$1\le i\le n$に対して
+\[
+\psi_i(x, z)=\phi(x)
+\]
+で
+\[
+\psi_{n+1}(x, z)=z
+\]
+と定義する．
+このとき準線形一階連立偏微分方程式の初期値問題
+\[
+\frac{\partial v_i}{\partial y}=\sum_{j, k}H_i(v_1, \dots, v_n, v_{n+1})\frac{\partial u_j}{\partial x_k}
+\]
+\[
+u(x, z,  0)=\psi_i(x, z)
+\]
+を考えると，原点$0\in \nn^{m+2}$の近傍$N$が存在し，
+$N$上で定義された解析的関数がこの連立方程式の解であり
+$N$上での滑らかな解はただ一つしか存在しない．
+ここで$x_{m+1}=z$と考えていることに注意せよ．
+ここで$v_{n+1}$は
+\[
+v_{n+1}(x, z, 0)=z
+\]
+で
+\[
+\frac{\partial v_{n+1}}{\partial y}=0
+\]
+なので
+$v_{n+1}(x, z, y)=z$
+である．
+これを用いて方程式を書き直すと
+\[
+\frac{\partial v_{n+1}}{\partial z}=1
+\]
+なので
+\[
+\frac{\partial v_i}{\partial y}(x, z, y)=\sum_{j, k}F_i(v_1, \dots, v_n)\frac{\partial v_j}{\partial x_k}(x, z, y)+G(v_1, \dots, v_n)
+\]
+\[
+u(x, z,  0)=\phi_i(x, z)=\phi_i(x)
+\]
+である．
+よって
+$u_i(x, y)=v_i(x, 0, y)$
+と定義すれば$u_1, \dots, u_n$は
+\[
+\frac{\partial u_i}{\partial y}=\sum_{j, k}F_i(u_1, \dots, u_n)\frac{\partial u_j}{\partial x_k}+G(u_1, \dots, u_n)
+\]
+\[
+u(x, 0)=\phi_i(x)
+\]
+を満たす．
+(実際は$v_i$は$z$に依存しない．)
+\end{proof}
+
+
+\section{解析的逆関数定理}
+
+まず最初に一変数の場合の逆関数定理を証明する．
+そのために次の特殊な場合の陰関数定理を証明する．
+\begin{prop}
+$I$を$\rr$の開区間とし，
+$0\in I$とする．そして
+$f: I\to \rr$
+を$I$上の解析関数とし，
+$f(0)=0$で
+$f'(0)\neq 0$を満たすとする．
+そして
+$s\in \rr$に対して
+$F: I\times \rr\to \rr$
+ を
+ \[
+ F(x, y)=f(x)+sy
+ \]
+ と定義する．
+ このとき$0$の近傍
+ $J$
+ が存在し，$J$上で定義された
+ 解析関数$g: J\to \rr$が存在して
+ 任意の$y\in J$について
+ $F(g(y), y)=0$
+ を満たす．
+\end{prop}
+\begin{proof}
+$u$を一変数の形式的冪級数で
+\[
+u(x)=-x+\sum_{i=2}^{\infty}a_ix^i
+\]
+とする．
+このとき$s$を任意に固定した場合に
+形式的冪級数$v=\sum_{i=0}^{\infty}c_iy^i$を
+\[
+u(v)+sy=0
+\]
+を満たすように係数を定義したい．そのためには
+\[
+\sum_{i=0}^{\infty}c_iy^i=
+\sum_{i=2}^{\infty}a_i\left(\sum_{i=0}^{\infty}c_iy^i\right)^i+sy
+\]
+を満たすように$c_i$
+を定義すれば良い．
+両辺を比較すると
+$c_0=0$
+であり，任意の$n$について
+$c_n$は$\{a_i\}$と$s$と
+$c_0, c_1, \dots, c_{n-1}$
+の多項式であり，
+その係数は$s$や$u, v$の取り方に依存しない
+普遍的な非負整数である．
+ここで，各$c_0, c_1\dots, c_{n-1}$
+は帰納的に$\{a_i\}$と$s$
+の多項式で
+その係数は普遍的な非負整数であることがわかるので，
+結局$c_{n}$もそうである．
+つまり，任意の$n$について
+ある普遍的な非負整数係数の多項式$P_n$が存在して
+\[
+c_{n}=P_n(\{a_i\}, s)
+\]
+となる．
+非負整数を係数にもつので
+$|a_i|\le a'_i$
+$|s|\le s'$を満たすならば
+\[
+|P_n(\{a_i\}, s)|\le P_n(\{a'_i\}, s')
+\]
+が成り立つ．
+この多項式を用いて定理を証明しよう．
+
+適当に変数変換をして
+$f'(0)=-1$
+とする．
+そして$f$は原点の近くで
+\[
+f(x)=-x+\sum_{i=2}a_ix^i
+\]
+と展開されているとする．
+このとき
+$C, R\in (0, \infty)$
+が存在して任意の$n$について
+\[
+|a_n|\le \frac{C}{R^n}
+\]
+が成り立つ．
+よって目的の$g$
+を構成するためには
+$\sum_{i=0}P_n(\{a_i\}, s)y^i$
+が原点の近くで収束することを示せば良いが，
+\[
+|P_n(\{a_i\}, s)|\le P_n\left(\left\{\frac{C}{R^n}\right\}, |s|\right)
+\]
+なので，
+\[
+G(x, y)=-x+\sum_{i=2}^{\infty}\frac{C}{R^i}x^{i}+|s|y
+\]
+に対して
+$G(h(y), y)=0$
+となる原点の近くで定義された解析関数$h$を
+構成できれば$M$テストから
+定理が証明される．
+\[
+G(x, y)=-x+C\frac{\left(\frac{x}{R}\right)^2}{1-\frac{x}{R}}+|s|y
+\]
+なので$h$は
+\[
+\frac{1}{R}\left(1+\frac{C}{R}\right)x^{2}+\left(-1+\frac{|s|y}{R}\right)x+|s|y
+\]
+の$x$に関する解であるが，
+二次方程式の解の公式から
+$G(h(y), y)=0$を満たす原点の近くで定義された解析関数$h$
+が存在することがわかるので，
+命題は証明された．
+
+\end{proof}
+
+上の命題を使うと一変数に関する解析的逆関数定理がわかる．
+\begin{cor}
+$I$を$\rr$の開区間とし，
+$a\in I$とする．
+そして
+$f: I\to \rr$
+を$I$上の解析関数とし，
+$f'(a)\neq 0$を満たすとする．
+このとき$f(a)$の近傍$N$が存在し，$N$で定義された
+解析的関数$g:N\to \rr$
+が存在し， $g(N)\subset I$
+でなおかつ任意の$y\in N$について
+\[
+f(g(y))=y
+\]
+を満たす．
+\end{cor}
+
+多変数の逆関数定理を証明するために
+次の補題を証明する．
+\begin{lem}
+$n\in \zz_{>0}$
+で$n$変数の解析的陰関数定理が成り立つと仮定する．
+そして
+$\rr^{n+1}$の原点の近傍$N$で定義された解析関数
+$f: N\to \rr^{n+1}$
+は$(0)=0$
+をみたし，$\det((Jf)(0))\neq 0$
+であり，
+$f(\rr^{n}\times\{0\})\subset \rr^{n}\times \{0\}$
+を満たすとする．
+このとき$\rr^{n+1}$
+の原点の近傍$M$で定義された関数$g: M\to \rr^{n+1}$が存在し，
+任意の$y\in M$について
+\[
+f(g(y))=y
+\]
+を満たす．
+\end{lem}
+\begin{proof}
+$f=(f_1, \dots, f_{n+1})$
+と表示されているとする．
+適当に$n+1$次可逆行列$A$をかけて
+$A.f$を新たに$f$とすることによって，
+$1\le i\le n$の時$\partial_{i}f_{n+1}(0)=0$
+で
+$\partial_{n+1}f_{n+1}\neq 0$
+としてもよい．
+そして
+$\rr^{n}$の原点の近傍上で
+関数$h$を
+\[
+h(x_1, \dots, x_n)=( f_1(x_1, \dots, x_n, 0), \dots, f_n(x_1, \dots, x_n, 0))
+\]
+と定義する．
+すると
+$h$の$0$におけるヤコビアンは$0$
+でない．
+解析的逆関数定理に関する仮定より
+$0\in \rr^n$の近傍で定義された解析的関数$q$で
+あって$h$の逆関数になっているものが存在する．
+通常の$C^{\infty}$
+関数に関する逆関数定理から
+$0\in \rr^{n+1}$の近傍で定義された
+$C^{\infty}$関数$g$で
+$f$の逆関数になるものが存在する．
+$g=(u_1, \dots, u_{n+1})$
+と成分表示する．
+$h$と$q$の定義と$g$の定義より，
+任意の$y$に対して
+\[
+u_{i}(y_1, \dots, y_n, 0)=q(y_1, \dots, y_n)
+\]
+が成り立つ．
+そして合成関数の微分公式から，
+$g$の定義域内の点$y$について
+\[
+(Jg(y))(Jf(g(y)))=1_{n+1}
+\]
+多項式の比で書かれる関数$A_{i}$が存在して
+\[
+\partial_{n+1}u_i(y, \dots, y_n, y_{n+1})
+=
+A_{i}(\{\partial_{i}f_{j}(u_{1}, \dots, u_{n+1})\})
+\]
+を満たす．
+$A_i$は
+ヤコビ行列$JF$の逆行列の成分である．
+よって$u_i$たちは準線形連立一階偏微分方程式
+\[
+\partial_{n+1}u_i(y, \dots, y_n, y_{n+1})
+=
+A_{i}(\{\partial_{i}f_{j}(u_{1}, \dots, u_{n+1})\})
+\]
+\[
+u_{i}(y_1, \dots, y_n, 0)=q(y_1, \dots, y_n)
+\]
+を満たすので
+Cauchy--Kovalevskayaの定理の特殊な場合である
+命題\ref{prop:ck}から，
+$u_i$たちは原点の近傍で冪級数展開可能であることがわかり
+定理が証明される．
+\end{proof}
+
+この補題を使って
+多変数の逆関数定理を証明しよう．
+\begin{thm}
+$N$を$\rr^{n}$の開区間とし，
+$a\in N$とする．
+そして
+$f: N\to \rr$
+を$N$上の解析関数とし，
+$\det(Jf(a))\neq 0$を満たすとする．
+このとき$f(a)$の近傍$M$が存在し，$M$で定義された
+解析的関数$g:M\to \rr$
+が存在し， $g(M)= N$
+でなおかつ$g$は$f$の逆関数である．
+
+\end{thm}
+
+\begin{proof}
+$a=0$で $f(0)=0$
+と仮定しても良い．
+$f=(f_1, \dots, f_{n+1})$
+と表示されているとする．
+適当に$n+1$次可逆行列$A$をかけて
+$A.f$を新たに$f$とすることによって，
+$1\le i\le n$の時$\partial_{i}f_{n+1}(0)=0$
+で
+$\partial_{n+1}f_{n+1}\neq 0$
+としてもよい．
+そして
+$\rr^{n}$の原点の近傍上で
+関数$h$を
+\[
+h(x_1, \dots, x_n)=( f_1(x_1, \dots, x_n, 0), \dots, f_n(x_1, \dots, x_n, 0))
+\]
+と定義する．
+すると
+$h$の$0$におけるヤコビアンは$0$
+でない．
+解析的逆関数定理に関する仮定より
+$0\in \rr^n$の近傍で定義された解析的関数$q$で
+あって$h$の逆関数になっているものが存在する．
+ここで$0\in \rr^{n+1}$の近傍で定義された関数$H$
+を
+\[
+H(x)=
+(f_1(x), \dots, f_n(x), 
+f_{n+1}(x)-f_{n+1}(q(f_1(x), \dots, f_n(x), 0))
+)
+\]
+とする．
+この時$H$の定義域を$U$とすると
+$q$の定義から
+$H(U\cap (\rr^n\times \{0\}))\subset \rr^n\times \{0\}$
+を満たす．
+そして
+$1\le i\le n$と$1\le j\le n+1$
+を満たす$i, j$について
+\[
+\partial_{j}H_i(0)=\partial_{j}f_{i}(0)
+\]
+である．
+さらに$1\le j\le n$となる$j$について
+\[
+\partial_{j}H_{n+1}(0)=
+\partial_{j}f_{n+1}(0)-\sum_{k, l=1}^n\partial_{k}f_{n+1}(0)
+\partial_{l}q_k\partial_{j}f_{l}(0)=0
+\]
+であり，
+\[
+\partial_{n+1}H_{n+1}=
+\partial_{j}f_{n+1}(0)-\sum_{k, l=1}^n\partial_{k}f_{n+1}(0)
+\partial_{l}q_k\partial_{n+1}f_{l}(0)
+=
+\partial_{j}f_{n+1}(0)
+\]
+なので
+$\det(JF)(0)\neq 0$である．
+$n$変数の陰関数定理が成り立っているという帰納法の仮定と
+先の補題から
+$H$の解析的逆関数$P$が存在し$0\in \rr^{n+1}$の近傍で定義されている．
+今ここで，
+\[
+g(y)=P(y_1, \dots, y_n, y_{n+1}-f_{n+1}(q(y_1, \dots, y_n), 0))
+\]
+と定義するとこれが求める解析的逆関数になっている．
+\end{proof}
+
+逆関数定理から
+陰関数定理を導くのは
+結構簡単であるので証明は省略する．
+\begin{thm}
+$n, m\in \zz_{>0}$
+とし
+$U, V$をそれぞれ$\rr^n$と$\rr^m$
+の開集合とする．
+そして
+$G: U\times V\to \rr^{m}$
+を解析関数とし，
+$(a, b)\in U\times V$は
+$G(a, b)=0$を満たすとする．
+\[
+\det(J_{y}G)(a, b)\neq 0
+\]
+とする．
+この時$a$の近傍で定義された解析関数$f$が存在し
+$f(a)=b$を満たしなおかつ定義域内の任意の点$x$について
+$G(x, f(x))=0$
+を満たす．
+
+\end{thm}
+
+\begin{rmk}
+ 以上で述べた定理は
+ 複素係数でも正しい．
+\end{rmk}
+
+\begin{thebibliography}{99}
+\bibitem{hh}
+クーラン ヒルベルト 
+\bibitem{intro}
+G. B. Folland, 
+\textit{
+Introduction to partial differential 
+equations},
+Princeton Univ. Press, 1995.  
+
+\bibitem{2}X. Kang, X. Xu, and D. Zhang, 
+\textit{The Morse criticality revisited and some new applications to the Morse--Sard theorem}, 
+Manuscripta Math. 161 (2020), 467--485. 
+
+\bibitem{0}
+S. G. Krantz, and 
+H. R. Parks, 
+\textit{A primer of real analytic functions}, 
+Basler Lehrb\"{u}cher, aseries of advanced textbooks in mathematics, vol.4, 
+1992. 
+\bibitem{imp}
+S. G. Krantz, and 
+H. R. Parks, 
+\textit{The implicit function theorem: history, theory, and applications}, 
+Birkh\"auser Boston, 
+2002
+\bibitem{3}
+C. G. Moreira, and N. A. S. Ruas, 
+\textit{The curve selection lemma and the Morse--Sard theorem}, 
+Manuscripta Math. 129 (2009), 401--408. 
+\bibitem{conb}
+J. Riordan, \textit{An introduction to 
+combinatorial analysis}, 
+New York John Wiley and Sons, Inc. London, 2nd ed., 1964. 
+\bibitem{1}
+S. Roman, 
+\textit{The fomula of Faa di Bruno}, 
+Amer. Math. Monthly vol. 87 (1980), no.10, 805--809. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

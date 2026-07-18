@@ -1,0 +1,264 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{$L^1(\rr^N)$が畳込みの単位元を持たないこと}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+$L^1(\rr^N)$は畳込みを積として環をなしている。しかし、単位元を持たない。この文書ではそのことを簡単に説明する。
+
+\begin{prop}\label{1}
+$f\in L^1(\rr^N)$と$g\in L^{\mgn}(\rr^N)$について$f*g(x)$は\textbf{すべての$x\in \rr^N$で}有限確定であり、$f*g\in L^{\mgn}(\rr^N)$である。
+\end{prop}
+\begin{proof}
+\[
+f*g(x)=\int_{\rr^N}f(x-y)g(y)dy
+\]
+であることを思い出そう。さてすべての$x\in \rr^N$について
+\[
+|f(x-y)g(y)|\le |f(x-y)|\|g\|_{\mgn}
+\]
+であるので両辺を積分すると
+\[
+|f*g(x)|\le\int|f(x-y)g(y)|dy\le \|g\|_{\mgn}\int_{\rr^N}|f(x-y)|dy=\|g\|_{\mgn}\int_{\rr^N}|f(y)|dy=\|g\|_{\mgn}\|f\|_{1}<\mgn
+\]
+となる。ここでルベーグ測度が平行移動($x\mapsto x+a$)と反転($x\mapsto -x$)で不変であることを用いた。
+よってすべての$x\in \rr^N$で$f*g(x)$は有限確定であり、$f*g\in L^{\mgn}(\rr^N)$である。
+\end{proof}
+\begin{cau}
+一般に$f\in L^1(\rr^N)$と$g\in L^p(\rr^N)$の畳込みが定義できて$f*g\in L^p(\rr~N)$であるが、殆ど至る所の$x\in \rr^N$でしか$f*g(x)$が確定しないことに注意しよう。どうせ殆ど至る所等しいという同値関係で同値類を作るので殆ど至る所の$x$で$f*g(x)$が定義できればよいのである。
+\end{cau}
+\begin{cau}
+一般に$\dpst \frac{1}{p}+\frac{1}{q}=1$を充たす$p,q\in (1,\infty)$について$f\in L^p(\rr^N),g\in L^q(\rr^N)$ならば$f*g$が\textbf{すべての$x\in\rr^N$}で有限確定し$f*g\in L^{\mgn}(\rr^N)$であることが言える。これにはヤングの不等式と呼ばれる次の不等式を用いれば上の命題と同様の証明ができる。（ヤングの不等式と呼ばれる不等式は他にもある）\par
+$0\le a,b$と$\dpst \frac{1}{p}+\frac{1}{q}=1$を充たす$p,q$について
+\[
+ab\le \frac{a^p}{p}+\frac{b^q}{q}
+\]
+\end{cau}
+\begin{cau}
+もっと一般の$p,q$に対して$f\in L^p(\rr^N),g\in L^q(\rr^N)$の畳込みが定義できる。詳しくは畳込みに対するヤングの不等式などを調べられたし。
+\end{cau}
+\begin{prop}[平行移動の$L^p$連続性]\label{2}
+任意の$f\in L^p(\rr^N)$と任意の$a\in\rr^N$について
+\[
+\lim_{x\to a}\int_{\rr^N}|f(x-y)-f(a-y)|^pdy=0
+\]
+が成り立つ。
+\end{prop}
+\begin{proof}
+まず$C_c(\rr^N)$の元についてはこの命題が成り立っていることは一様連続性から簡単に言える。あとは$C_c(\rr^N)$が$L^p(\rr^N)$の中で稠密であることを用いればよい。
+\end{proof}
+
+さて次の命題のために命題\ref{1}を示したのである。
+\begin{prop}
+$f\in L^1(\rr^N)$と$g\in L^{\mgn}(\rr^N)$について、$f*g$は連続関数
+\end{prop}
+\begin{proof}
+任意の$a\in \rr^N$に対して
+\[
+|f*g(x)-f*g(a)|=\left|\int_{\rr^N}f(x-y)g(y)dy-\int_{\rr^N}f(a-y)g(y)dy\right|\le\|g\|_{\mgn}\int_{\rr^N}|f(x-y)-f(a-y)|dy
+\]
+なので命題\ref{2}から$f*g$の連続性がわかる。
+\end{proof}
+\begin{cau}
+一般に$\dpst \frac{1}{p}+\frac{1}{q}=1$を充たす$p,q$について$f\in L^p(\rr^N),g\in L^q(\rr^N)$ならば$f*g$が連続関数であることが言える。
+\end{cau}
+
+さて本題に入ろう。
+\begin{thm}
+$L^1(\rr^N)$には畳込みの単位元は存在しない。
+\end{thm}
+\begin{proof}
+畳込みの単位元が存在すると仮定すると、$L^1(\rr^N)\cap L^{\mgn}(\rr^N)$の元は（この空間の元は殆ど至る所等しいという同値関係による同値類である。）連続関数を同値類の代表元として持つことになるが、これはありえないので（例えば単位球の特性関数を考えてみよ）$L^1(\rr^N)$に単位元は存在しない。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}黒田成俊,関数解析,共立出版,共立数学講座（15）,1980
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

@@ -1,0 +1,351 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{LOTSの位相の基本}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+うろ覚えで書いたので標準的な用語と異なるかもしれません。
+\section{定義など}
+\begin{df}[線形順序]
+集合$X$上の二項関係$R$が線形順序であるとは
+\begin{enumerate}
+\item $\forall a\in X\ aRa$
+\item $\forall a, b\in X\ aRb\land bRa\To a=b$
+\item $\forall a,b,c\in X\ aRb\land bRc\To aRc$
+\item $\forall a,b\in X\ aRb\lor bRa$
+\end{enumerate}
+を充たすことを言う。慣例に従い線形順序を$\le$などと書き表すことにする。また、
+\[
+a<b\iff a\le b \land a\neq b
+\]
+と定義する。
+\end{df}
+
+\begin{df}[部分線形順序集合]
+線形順序集合$(X,\le)$の部分集合$S$について$\le$を$S$に制限した関係を$\le $の$S$のへの制限といい、$\le_S$と書いてみたりするが、しばしば同じ記号$\le$を流用してしまう。大体文脈で分かるので問題ないのだが、区別する必要がある場合もある。このとき$(S,\le_S)$を$(X.\le)$の部分線形順序集合という。
+\end{df}
+
+\begin{df}[順序稠密性、順序の意味で稠密性]
+線形順序集合$(X,\le )$の部分集合$A$が（順序の意味で）稠密であるとは$X$の任意の二元$a,b\in X$について$A$の元$c$が存在して
+\[
+a<c<b
+\]
+を充たすことを言う。これは順序位相における稠密性と同じことである。
+\end{df}
+\begin{df}
+線形順序集合$(X,\le )$の元$a$が$S$の上界であるとは
+\[
+\forall x\in S\ x\le a
+\]
+を充たすときに言う。\par
+線形順序集合$(X,\le )$の元$b$が$S$の下界であるとは
+\[
+\forall x\in S\ b \le x
+\]
+を充たすときに言う。
+\end{df}
+
+\begin{df}[$\sup, \inf, \max, \min$]
+線形順序集合$(X,\le )$の元$s$が$S$の上界でありかつ
+\[
+\forall y<s\ \exists x\in S\ y<x\le s
+\]
+を充たすとき$s$を$S$の上限といい$\sup S$などと書き表す。特に$\sup S\in S$のとき$\sup S$は$S$の最大元といい$\max S$などと表す。
+双対的に$\inf S$が定義される。\par
+$(X,\le)$の元$t$が$S$の下限であるとは$t$は$S$の下界で
+\[
+\forall y>t\ \exists x\in S\ t\le x<y
+\]
+が成り立つときに言い、$\inf S$などと書く。$\inf S\in S$のとき$\min S$だとか書く。\par
+上限と下限は常に存在するわけではないことに注意せよ。
+\end{df}
+
+\begin{cau}
+$\sup S$は$S$の上界の最小値であり、$\inf S$は$S$の下界の最大限である。
+\end{cau}
+
+\begin{df}[順序完備性]
+線形順序空間$(X,\le)$が順序完備であるとは、$X$の任意の非空な部分集合$S$について$\inf S$と$\sup S$が存在するときに言う。
+\end{df}
+
+\begin{df}[区間]
+線形順序集合$(X,\le)$と$a,b\in X$について
+\begin{align}
+(a,b)=\{x\in X\mid a<x<b\}\\
+(a,b]=\{x\in X\mid a<x\le b\}\\
+[a,b)=\{x\in X\mid a\le x<b\}\\
+[a,b]=\{x\in X\mid a\le x\le b\}
+\end{align}
+と定義する。それぞれ開区間、半開区間、閉区間という。また
+\begin{align}
+(a,\to)=\{x\in X\mid a<x \}\\
+(\gets,a)=\{x\in X\mid x<a\}\\
+[a\to),=\{x\in X\mid a\le x\}\\
+(\gets,a]=\{x\in X\mid x\le a \}
+\end{align}
+も無限開区間、無限閉区間などという。
+\end{df}
+
+\begin{cau}
+$b\le a$のとき、$(a,b)=\O$に注意せよ。
+\end{cau}
+
+\begin{df}
+線形順序集合$(X,\le)$について$(X,\le )$の開区間及び無限開区間全体の族は開基の公理を充たす。この開基から生成される位相を$(X,\le)$の順序位相といい、ここでは$\mathfrak{O}_{\le}$と書くことにしよう。何らかの線形順序集合の順序位相と同相になっている位相空間をLOTS(Linearly Ordered TopolTogical Space)（線形順序位相空間）という。
+\end{df}
+
+\section{性質}
+
+\begin{prop}
+LOTSはハウスドルフ空間である。
+\end{prop}
+\begin{proof}
+線形順序位相空間$(X,\le)$の二点$a,b$を任意に与える。このとき$a<b$としても一般性を失わない。\par
+Case1:$(a,b)\neq \O$のとき;$c\in (a,b)$をとると、$a\in (\gets, c),\ b\in(c,\to)$であるからわかる。\par
+Case2:$(a,b)=\O$のとき;この状況のもと、$(a,\to)=[b,\to), (\gets, b)=(\gets, a]$であるからわかる。
+\end{proof}
+\begin{cau}\normalfont
+実は一般にLOTSは単調正規という結構強めの分離公理を充たす。どのくらいの強さかというと、単調正規ならば遺伝的族正規であるくらいの強さである。詳しくは\\
+ R.W.Heath, D.J.Lutzer and P.L.zenor, \textit{Monotonically Normal spaces}, Trans.Amer.Math.Soc.178(1973), p481-493
+を参照のこと
+\end{cau}
+
+\begin{prop}
+LOTS$(X,\le)$の閉集合$A$に下限が存在するならば、$\inf A\in A$。上限についても同様。
+\end{prop}
+\begin{proof}
+下限の定義から、$\inf A$は$A$の触点になるのでわかる。
+\end{proof}
+
+\begin{thm}
+$(X,\le)$が順序完備であることと、$(X,\mathfrak{O}_{\le})$がコンパクトであることは同値である。
+\end{thm}
+\begin{proof}\ 
+[順序完備$\To$コンパクト]\par
+$\mathcal{U}$を$X$の任意の開被覆としよう。$X$には最小値と最大値が存在するので$a=\min X,\ b=\max S$しよう。そして
+\[
+S=\{x\in X\mid \text{$[a,x]$は$\mathcal{U}$の有限部分族で被覆される}\}
+\]
+とおく。$a\in S$なので$S\neq \O$である。また、$x\in S\To [a,x]\subset S$にも注意しよう。$\ s=\sup S$と置く。まずは$s\in S$を示そう。$[a,s)\subset S$となることはすぐにわかる。$s\in U$となる$U\in \mathcal{U}$を一つとる。そして$A=[a,s]\setminus U$は閉集合であるから$t=\sup A\in A$で$s\not\in A$より$t<s$が分かる。そして$t\in S$なので$[a,t]$は有限個の$\mathcal{U}$の元$V_1,V_2,\dots V_n$で被覆されるので結局$[a,s]$は$\mathcal{U}$の有限個の元$V_1,V_2,\dots V_n,U$で被覆されるから$s\in S$となる。\par
+今、$[a,s]$を被覆する$\mathcal{U}$の有限個の元を$U_1,U_2,\dots,U_m$とし、$B=[s,b]\setminus \bigcup_{i=1}^mU_i$と定義する。$B$は閉集合で$s\notin B$である。もし$B=\O$ならば$p=\inf B\in B$が存在するから$p$を含む$\mathcal{U}$の元$O$を選べば$U_1,U_2,\dots U_m, O$は$[a,p]$を被覆するので$p\in S$だが他方$s<p$となので$s=\sup S$に反する。よって$B=\O$つまり$s=\max X$なので$X$は$\mathcal{U}$の有限個の元で被覆される。\par
+[コンパクト$\To$順序完備]
+$S$を$X$の非空な部分集合とする。このとき$X$の閉集合族
+\[
+\{\cl(S)\}\cup\{[a,\to)\mid a\in S\}
+\]
+は$X$の有限交叉族であるので$X$のコンパクト性から
+\[
+\cl(S)\cap \bigcap_{a\in S} [a,\to)\neq \O
+\]
+となる。この集合から元$s$をとると、$s$は$\dpst \bigcap_{a\in S} [a,\to)$の元であることから$S$の上界になり、$\cl(S)$に属していることから任意の$y<s$について
+\[
+S\cap (y,\to)\neq\O
+\]
+だが、$s$は$S$の上界なのでこれは
+\[
+S\cap (y,s]\neq \O
+\]
+ということであり、これは$s=\sup S$ということと同値である。よって$\sup S$が存在する。$\inf S$が存在することも同様である。
+\end{proof}
+
+\begin{cor}
+順序数$\al$について$[0,\al]=\al+1$はコンパクトである。
+\end{cor}
+
+\section{部分集合について}
+$(X,\le)$の部分集合$S$には、$\le_S$から誘導される順序位相$\mathfrak{A}(S)$と、LOTS$(X,\le)$の部分空間としての位相$\mathcal{B}(S)$の二種類が考えられるが、一般にこの二つは\textbf{一致しない。}ただし、$\mathcal{B}$の位相は$\mathcal{A}$より細かいことはよくわかる。つまり$\mathcal{A}(S)\subset \mathcal{B}(S)$。これは、$\le_S$による開区間を$(a,b)_{S}$と書き、$X$における開区間を$(a,b)_{X}$と書いたときに、$a,b,\in S$について
+\[
+(a,b)_S=(a,b)_X\cap S
+\]
+が成り立つことからわかる。
+これら二つが一致する簡単な十分条件を二つ紹介しよう。
+
+\begin{prop}
+$S$が$X$の稠密な部分集合のとき、$\mathfrak{A}(S)=\mathfrak{B}(S)$
+\end{prop}
+\begin{proof}
+稠密性から任意の$a,b\in X$について
+\[
+(a,b)_X\cap S=\bigcup_{s,t\in (a,b)_X\cap S}(s,t)_S
+\]
+となるのでわかる。
+\end{proof}
+
+\begin{prop}
+$S$が$X$のコンパクト集合であるとき、$\mathfrak{A}(S)=\mathfrak{B}(S)$
+\end{prop}
+\begin{proof}
+$(S,\mathfrak{B}(S))$がコンパクトで$(S,\mathfrak{A}(S))$はハウスドルフでかつ$\mathfrak{A}(S)\subset \mathfrak{B}(S)$から$\mathfrak{A}(S)=\mathfrak{B}(S)$が分かる。
+\end{proof}
+
+\begin{prop}
+$S$が$X$の区間であるとき、$\mathfrak{A}(S)=\mathfrak{B}(S)$
+\end{prop}
+\begin{proof}
+わかる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

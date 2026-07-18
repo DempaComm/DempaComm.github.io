@@ -1,0 +1,725 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+\newcommand{\ddd}{\mathbf{D}}
+
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ルベーグの微分定理と積分の変数変換定理}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+\section{ルベーグの微分定理}
+以下では$\rr^{n}$にはノルム$\|\cdot \|$
+が備わっているとするが，特に断りのかぎり，具体的に指定しない．
+\begin{df}
+$B(a, r)=\{\, x\in \rr^{n}\mid \|x-a\|\le r\, \}$
+と定義する．
+\end{df}
+\begin{lem}[「5r被覆補題」]\label{lem:5r}
+ $\mathcal{F}\subset X\times (0, \infty)$とし，空集合ではないとする．
+そして
+\[
+\sup \pi_{2}(\mathcal{F})=\sup\{\,r\mid \exists x\in X\ (x, r)\in \mathcal{F} \, \}<\infty. 
+\] 
+が成り立つと仮定する．
+このとき，部分集合 $\mathcal{G}\subset \mathcal{F}$ が存在して以下を満たす．
+\begin{enumerate}
+\item 
+もしも $(x, r), (x', r')\in \mathcal{G}$ が
+$(x, r)\neq (x', r')$を満たすならば, 以下が成り立つ．
+\[
+B(x, r)\cap B(x', r')=\emptyset. 
+\]
+\item 
+以下が成り立つ．
+\[
+\bigcup_{(x, r)\in \mathcal{F}}B(x, r)\subset \bigcup_{(x, r)\in \mathcal{G}}B(x, 5r). 
+\]
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+Zornの補題を用いる．
+集合$\mathfrak{S}$を
+$\mathcal{F}$の部分集合$\mathcal{S}$で以下の条件を満たすものとする．
+\begin{enumerate}
+\item[(a)] もしも $(x, r), (x', r')\in \mathcal{S}$ が
+$(x, r)\neq (x', r')$を満たすならば, 以下が成り立つ．
+\[
+B(x, r)\cap B(x', r')=\emptyset. 
+\]
+\item[(b)] 
+もしも$(x, r)\in \mathcal{F}$が
+\[
+B(x, r)\cap 
+\left(\bigcup_{(y, l)\in \mathcal{S}}B(y, l)\right)
+\neq \emptyset. 
+\]
+を満たすならば
+$(x', r')\in \mathcal{S}$が存在して
+$B(x, r)\cap B(x', r')\neq \emptyset$と
+$r\le 2r'$が成り立つ．
+\end{enumerate}
+このとき$\mathfrak{S}$はZornian set(いわゆる帰納的集合)になることを示そう．
+まず$\mathfrak{S}$が空集合ではないことを示そう．
+$R=
+\sup\{\,r\mid \exists x\in X\ (x, r)\in \mathcal{F} \, \}<\infty$
+とおく．
+するとある
+$(y, l)\in \mathcal{S}$が存在して
+$R/2<r$が成り立つ．
+このとき$\{(y, l)\}$が$\mathfrak{S}$に属することを示そう．
+(b)の条件を確かめれば良いが，$R< 2r$なのでこの条件を満たすことは明らかである．
+
+また，$\mathfrak{C}\subset \mathfrak{S}$が鎖である時に
+$\bigcup\mathfrak{C}\in \mathfrak{S}$は簡単に確かめられる．
+以上から$\mathfrak{S}$がZornian setになることがわかり，
+Zornの補題から極大元$\mathcal{G}$が存在する．
+$\mathcal{G}$が補題の条件を満たすことを示そう．
+補題の(1)の条件を満たすことは$\mathfrak{G}$の条件からわかる．
+(2)の条件を示そう．
+まず背理法のためにある$(x, r)\in \mathcal{F}$
+が存在して$B(x, r)\cap 
+\left(\bigcup_{(y, l)\in \mathcal{S}}B(y, l)\right)
+= \emptyset. $を満たすとしよう．
+そして$\mathcal{A}=
+\{\, 
+(x, r)\in \mathcal{F}\mid 
+B(x, r)\cap 
+\left(\bigcup_{(y, l)\in \mathcal{S}}B(y, l)\right)
+= \emptyset. 
+\, \}$
+とおき，
+$L=\sup\{r\mid \exists x\in X, (x, r)\in \mathcal{A}\}$
+として$(a, w)\in \mathcal{A}$を$L/2< w$
+を満たすものとする．
+このとき$\mathcal{G}\cup\{(a, w)\}$は
+$\mathfrak{G}$の(a)の条件を満たす．
+ついで(b)の条件も満たす．というのも
+もしも$B(x, r)\cap \left(B(a, w)\cup \bigcup_{(y, l)\in \mathcal{S}}B(y, l)\right)\neq \emptyset
+$を満たすならば，
+$B(x, r)\cap B(a, w)\neq \emptyset$と$(x, r)\in \mathcal{A}$が同時に成り立つ場合以外は(b)の結論が成り立つことは$\mathcal{S}$が(b)を満たすことから従うが，
+この$B(x, r)\cap B(a, w)\neq \emptyset$と$(x, r)\in \mathcal{A}$が同時に成り立つ場合には$L\le 2w$からやはり
+$\mathcal{G}\cup\{(a, w)\}$も(b)の条件を満たすことがわかる．これは$\mathcal{G}$が極大であることに反するので，
+$\mathcal{A}=\emptyset$である．
+つまり，任意の$(x, r)\in \mathcal{F}$について
+\[
+B(x, r)\cap 
+\left(\bigcup_{(y, l)\in \mathcal{S}}B(y, l)\right)
+\neq \emptyset. 
+\]
+となる．
+すると(b)の条件から$(x', r')\in \mathcal{G}$
+が存在して
+$B(x, r)\cap B(x', r')\neq \emptyset$と
+$r\le 2r'$を満たす．
+このとき$B(x, r)\subset B(x', 5r')$を満たすので
+(2)の条件が満たされる．
+\end{proof}
+
+
+\begin{df}
+$n\in \zz_{\ge 0}$
+とする．
+$\mathcal{L}^{n}$は$n$次元ルベーグ測度を表すとする．
+\end{df}
+
+\begin{lem}
+$A\subset \rr^d$は$\rr^d$の球体の族$\mathcal{B}$に被覆されており、
+\[
+\sup\{\di(B)\mid B\in \mathcal{B}\}<\infty
+\]
+とする。
+このとき$\mathcal{A}\subset \mathcal{B}$
+が存在して以下を満たす。
+$\mathcal{A}=\{B_i\}_{i\in \nn}$の元は互いに交わらず、
+\[
+\mathcal{L}^{d}(A)\le 5^d\sum_{i\in \nn}\mathcal{L}^{n}(B_i)
+\]
+\end{lem}
+\begin{proof}
+補題 \ref{lem:5r}からわかる．
+\end{proof}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とし，
+$U\subset \rr^{n}$を
+開集合とする．
+このとき$L_{loc}^{1}(U)$
+を次の条件を満たす可測関数$f: U\to \rr$
+全体の集合とする：
+任意のコンパクト集合$K\subset U$について
+\[
+\int_{K}|f|\ d\mathcal{L}^{n}<\infty
+\]
+を満たす．
+\end{df}
+
+\begin{df}
+$n\in \zz_{\ge 1}$とする．
+$f\in L_{loc}^1(\rr^{n})$とする。このとき$x\in \rr^d$について
+\[
+Mf(x)=\sup_{r>0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}|f(t)|\ dt
+\]
+と定義する。
+可測関数の$\sup$は可測関数なので$Mf$は可測関数である。
+\end{df}
+
+
+\begin{prop}[weak estimation]
+$n\in \zz_{\ge 0}$とする．
+$f\in L^1(\rr^{n})$ならば任意の$a>0$に対して
+\[
+\mathcal{L}^{n}(\{\, 
+x\in \rr^n\mid Mf(x)>a
+\, \})\le \frac{A}{a}\|f\|_1
+\]
+が成り立つ。ここで$A$は次元にのみ依存する関数である。
+\end{prop}
+\begin{proof}
+$S=\{x\in \rr^n\mid Mf(x)>a\}$
+とする。
+$x\in S$に対して、
+$r_x>0$が存在して
+\[
+\int_{B(x,r_x)}|f(t)|\ dt> a\cdot \mathcal{L}^{n}(B(a,r_x))
+\]
+を満たす。
+\[
+\{B(x,r_x)\}_{x\in S}
+\]
+に先の被覆定理を用いて
+\begin{align*}
+\mathcal{L}^{n}(S)&\le 5^n\sum_{i=1}m(B(x_i,r_i))\le a5^n\sum_{i=1}\int_{B(x_i,r_i)}|f(t)|\ dt\le \frac{5^n}{a}\int_{\bigcup_iB(x_i,r_i)}|f(t)|\ dt\\
+&\le \frac{5^n}{a}\int_{\rr^n}|f(t)|\ dt=\frac{5^n}{a}\|f\|_1
+\end{align*}
+を得るので，$A=5^{n}$とすればよい．
+\end{proof}
+
+\begin{prop}\label{prop:hyouka}
+$n\in \zz_{\ge 1}$とする．
+$f\in L_{loc}^1$について
+ほとんど至るところの$x$について
+\[
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)} f(t)\ dt=f(x)
+\]
+\end{prop}
+
+\begin{proof}
+命題の主張は局所的なものなので適当にコンパクト集合に制限して最初から$f\in L^{1}(\rr^{n})$としてもよい．
+まず、連続関数については定理が成り立つことに注意しよう。（積分の平均値の定理）
+$a>0$について
+\[
+E_a=\left\{\, 
+x\in \rr^n\mid \limsup_{r\to 0}\left|\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}(f(t)-f(x))\ dt\right|>2a
+\, \right\}
+\]
+と定義する．
+コンパクト台を持つ連続関数は$L^{1}(\rr^{n})$のなかで稠密なので，
+コンパクト台の連続関数$g$で
+\[
+\|f-g\|_1<\ep
+\]
+となるものをとる。
+そして
+\begin{align*}
+&\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}(f(t)-f(x))\ dt\\
+&=
+\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(a,r)}(f(t)-g(t))\ dt+
+\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(a,r)}(g(t)-g(x))\ dt 
+\\
+&+(g(x)-f(x))
+\end{align*}
+から
+\[
+\limsup_{r\to 0}\left|\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}(f(t)-f(x))\ dt\right|\le 
+M(f-g)(x)+|f(x)-g(x)|
+\]
+が成り立つ．
+マルコフの不等式から
+\[
+\mathcal{L}^{n}(\{\, 
+x\in \rr^n\mid |f(x)-g(x)|>\ep\,  \})
+\le \frac{1}{a}\|f-g\|_1<\frac{1}{a}\ep
+\]
+を得る．
+そして
+\[
+\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}|f(t)-g(t)|\ dt\le M(f-g)(x)
+\]
+が成り立つことに注意しよう．
+そして被覆補題から
+\[
+\mathcal{L}^{n}(\{x\in \rr^n\mid a<M(f-g)(x)\})\le \frac{5^n}{a}\|f-g\|_1<\frac{5^n}{a}\ep
+\]
+が成り立つ．さて
+\[
+E_a\subset \{x\in \rr^n\mid |f(x)-g(x)|>a\}\cup \{x\in \rr^n\mid a<M(f-g)(x)\}
+\]
+が成り立つので上での議論から
+\[
+\mathcal{L}^{n}(E_a)\le \frac{5^n+1}{a}\ep
+\]
+が成り立つ．$\ep$は任意なので
+任意の$a>0$について$E_a$は零集合である．
+ここで
+\[
+S=\left\{\, 
+x\in \rr^n\mid \limsup_{r\to 0}\left|\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}(f(t)-f(x))\ dt\right|=0\, 
+\right\}
+\]
+とすると$(\rr^n\setminus S)\subset \bigcup_{n}E_{1/n}$
+なので，ほとんど至る所で
+\[
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)} f(t)\ dt=f(x)
+\]
+が成り立つ．
+\end{proof}
+
+
+\begin{prop}
+$n\in \zz_{\ge 1}$とする．
+$f\in L_{loc}^1(\rr^{n})$と
+ほとんどいたるところの$x\in \rr^n$について
+\[
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}|f(t)-f(x)|\ dt=0
+\]
+\end{prop}
+
+\begin{proof}
+任意の$q\in \qq$について、
+\[
+E_{q}=\left\{x\in \rr^n\mid 
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}|f(t)-q|\ dt=|f(x)-q|
+\right\}
+\]
+と置く。$S_{q}=\rr^n\setminus E_{q}$
+とすると$\mathcal{L}^{n}(S_{q})=0$となる．
+$S=\bigcup_{q\in \qq}S_{q}$
+とすると$\mathcal{L}^{n}(S)=0$である．
+任意の$x\in \rr^n\setminus S$について
+命題\ref{prop:hyouka}を用いて
+\begin{align*}
+&\limsup_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}|f(x)-f(t)|\ dt
+\\
+&\le 
+\limsup_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)}(
+|f(t)-q|+|f(x)-q|)\ dt\\
+&\le 2|f(x)-q|
+\end{align*}
+を得る．
+$q\in \qq$は任意なので$|f(x)-q|$は任意に小さくできる．つまり
+\[
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)} |f(t)-f(x)|\ dt=0
+\]
+となるから命題が成り立つ．
+\end{proof}
+
+\section{積分の変数変換公式}
+
+
+
+\begin{thm}\label{thm:jdet}
+$n\in \zz_{\ge 1}$とする．
+$U, V\subset \rr^{n}$を開集合とする．
+$f:U\to V$を同相写像とし、$a$で全微分可能であるとする。
+このとき
+\[
+\lim_{r\to 0}\frac{\mathcal{L}^{n}(f(B(a,r)))}{\mathcal{L}^{n}(B(a,r))}=|\det \ddd f(a)|
+\]
+でが成り立つ．
+\end{thm}
+
+\begin{proof}
+$f$が平行移動の場合か，
+$f$が基本行列$A$を用いて
+$f(x)=Ax$であるときに定理が成り立つことは
+$\mathcal{L}^{n}$が$n$個の$\mathcal{L}^{1}$
+の直積測度であることとFubiniの定理からわかる
+ (逐次積分)．
+ 可逆行列は基本行列のいくつかの積としてかけるので，
+ 以下では
+ 必要ならば$U$と$V$を可逆行列をかけて変数変換する操作を行って一般の場合を証明するし，
+ そうしても一般性を失わない．
+ また，$C=\mathcal{L}^{n}(B(0, r))$
+ とすると$B(x, r)=(r\cdot E_{n})\cdot B(0, r)+x$
+ なので
+ 上の議論から
+ $\mathcal{L}^{n}(B(x, r))=Cr^{n}$となる．
+ 
+必要ならば適当に$U$と$V$の座標を平行移動といくつかの基本行列をかけることによって変数変換して
+$a=f(a)=0$が成り立ち，
+$Jf(a)$は対角行列でその成分が$0$か$1$であるとしても良い(掃き出し法)．
+
+
+Case 1: まず最初に$\ddd f(a)$が単位行列の時を考える。
+
+$f$が$a=0$で全微分可能なので
+任意の$\ep>0$に対して
+十分小さい$r$と任意の$x\in B(0, r)$について
+\begin{align}\label{al:hutou}
+\|f(x)-x\|<\ep \|x\|
+\end{align}
+が成り立つ．
+$r>0$を
+$r<\delta$とする．
+ここで
+$\|f(x)\|\le (1+\ep)\|x\|$
+であるので
+\[
+f(B(x,r))\subset B(0, (1+\ep)r)
+\]
+が成り立つから
+\begin{align}\label{al:22}
+\mathcal{L}^{n}(f(B(0, r)))\le C(1+\ep)^{n}r^{n}
+\end{align}
+である．
+
+また$x\in B(0, r)$について (\ref{al:hutou})から
+\[
+(1-\ep)\|x\|< \|f(x)\|
+\]
+である．
+ここで$x\in \partial B(0, r)=
+\{\, x\in \rr^{n}\mid \|x\|=r\, \}$とすると
+\begin{align}\label{al:333}
+(1-\ep)r<\|f(x)\|
+\end{align}
+である．ここで$f$が同相写像であることから
+$f(\partial B(0, r))=\partial f(B(0, r))$なので
+\begin{align}\label{al:44}
+\partial f(B(0,r))\cap B(0,(1-\ep)r)=\emptyset
+\end{align}
+が成り立つ．
+また，
+$f(0)=0\in B(0,(1-\ep)r)$
+なので$B(0,(1-\ep)r)$の連結性と (\ref{al:44})から
+\[
+B(0,(1-\ep)r)\subset f(B(0,r))
+\]
+が成り立つ．よって
+\begin{align}\label{al:555}
+C(1-\ep)^{n}r^{n}\le \mathcal{L}^{n}(f(B(0,r)))
+\end{align}
+が成り立つ．
+(\ref{al:22})と(\ref{al:555})と$\mathcal{L}^{n}(B(0,r))=Cr^{n}$から
+\[
+(1-\ep)^n\le \frac{\mathcal{L}^{n}(f(B(0,r)))}
+{\mathcal{L}^{n}(B(0,r))}\le (1+\ep)^n
+\]
+を得る．ゆえに
+\[
+\lim_{r\to 0}\frac{\mathcal{L}^{n}(f(B(0,r)))}{\mathcal{L}^{n}(B(0,r))}=1
+\]
+が成り立つ．
+
+Case 2: 次に$Jf(0)$が単位行列でない時に証明する．
+
+$D=Jf(0)$とおく．行列$D$は
+$(1,1)$成分が$0$としても良い。
+
+この時$f$が$a=0$で全微分可能であることから
+十分小さい$r$と任意の$x\in B(0, r)$について
+\begin{align}\label{al:bibun}
+\|f(x)-Dx\|<\ep \|x\|
+\end{align}
+が成り立つ．
+$i\in \{1, \dots, n\}$について$D$の第$(i, i)$成分が
+$0$である場合には
+\[
+|f_{i}(x)|<\ep\|x\|\le \ep r
+\]
+が成り立つ．
+仮定から少なくとも$i=1$についてはこれが成り立つ．
+
+他の場合について
+\[
+|f_i(x)-x_i|\le \ep \|x\|\le \ep r
+\]
+を得る．
+ゆえに
+\[
+|f_i(x)|\le (1+\ep)r
+\]
+となる．
+
+
+以上の議論と$\ep r<(1+\ep)r$
+から
+\[
+\mathcal{L}^{n}(f(B(0,r)))\le C(1+\ep)^{n-1}\ep r^n
+\]
+である．よって
+\[
+\frac{\mathcal{L}^{n}(f(B(0,r)))}{\mathcal{L}^{n}(B(0,r))}\le (1+\ep)^{n-1}\ep
+\]
+を得て，$\ep$は任意であるから
+\[
+\frac{\mathcal{L}^{n}(f(B(0,r)))}{\mathcal{L}^{n}(B(0,r))}=0
+=|\det \ddd f(0)|
+\]
+となる．以上で証明が終わる．
+\end{proof}
+
+\begin{thm}\label{thm:henhen}
+$X, Y\subset \rr^n$開集合とし，
+$v$, $m$をそれぞれルベーグ測度を$X,Y$に制限したものとする．
+$f:X\to Y$を$C^{1}$級同相写像とし，
+$f$はいたるところ全微分可能で，
+$X$のゼロ集合を$Y$のゼロ集合に移すとする．
+このとき$X$上の測度$\mu$を
+$\mu(S)=m(f(S))$とすると（つまり
+$\mu=((f^{-1})_{*}m)$である）
+\[
+\mu(S)=\int_{S}|\det(\ddd f(x))| \ dv(x)
+\]
+がなりたつ
+\end{thm}
+\begin{proof}
+まず$f$はゼロ集合をゼロ集合に写すので
+$\mu\ll v$である．よってラドン・ニコディムの定理から
+\[
+\mu(S)=\int_{S}D(x)\ dv(x)
+\]
+となる可測関数$D: X\to \rr$が存在する．
+ここでルベーグの微分定理(命題 \ref{prop:hyouka})と
+定理 \ref{thm:jdet}から
+ほとんど至る所の$x$で
+\begin{align*}
+D(x)&=
+\lim_{r\to 0}\frac{1}{\mathcal{L}^{n}(B(x,r))}\int_{B(x,r)} D(t)\ dt=
+\lim_{r\to 0}\frac{\mu(B(x, r))}{\mathcal{L}^{n}(B(x,r))}
+\\
+&=
+\lim_{r\to 0}\frac{\mathcal{L}^{n}(f(B(x, r)))}{\mathcal{L}^{n}(B(x,r))}
+=|\det(\ddd f(x))|
+\end{align*}
+となる．
+よって
+\[
+\mu(S)=\int_{S}|\det(\ddd f(x))| \ dv(x)
+\]
+が成り立つ．
+\end{proof}
+
+\begin{thm}[変数変換公式]
+$X, Y\subset \rr^n$開集合とし，
+$v$, $m$をそれぞれルベーグ測度を$X,Y$に制限したものとする．
+$f:X\to Y$を同相写像とし，
+$f$はいたるところ全微分可能で，
+$X$のゼロ集合を$Y$のゼロ集合に移す.
+この時，$h\in L^1(m)$について
+\[
+\int_{X}(h\circ f)(x)|\det \ddd f(x)|\ dv(x)=\int_{Y}h(y)\ dm(y)
+\]
+\end{thm}
+\begin{proof}
+まず，
+$A$を$Y$の可測集合として
+$h=\chi_{A}$と書かれる場合に証明する．
+つまり
+\[
+\int_{X}(\chi_{A}\circ f)(x)|\det \ddd f(x)|\ dv(x)=\mathcal{L}^{n}(A)
+\]
+を示そう．
+$B=f^{-1}(A)$とおく．
+すると定理 \ref{thm:henhen}から
+\[
+\mathcal{L}^{n}(A)=\mathcal{L}^{n}(f(B))
+=\int_{B}|\det(\ddd f(x))|\ dv(x)
+=\int_{X}\chi_{B}(x)|\det(\ddd f(x))|\ dv(x)
+\]
+である．
+そして$\chi_{A}\circ f=\chi_{f^{-1}(A)}=\chi_{B}$なので，
+\[
+\int_{X}(\chi_{A}\circ f)(x)|\det \ddd f(x)|\ dv(x)=\mathcal{L}^{n}(A)
+\]
+が成り立つ．
+
+以上の場合を用いると，$h$が単関数の場合も導かれる．
+そして，単関数近似近似を用いれば$h$が一般の場合も証明できる．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+
+\bibitem{1}
+ユルゲン・ヨスト著, 
+小谷元子訳,
+ポストモダン解析学, 
+シュプリンガー・フェアラーク東京, 
+2000. 
+
+
+\bibitem{mizu}
+水谷義弘, 
+実解析入門，
+培風館, 
+1999. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

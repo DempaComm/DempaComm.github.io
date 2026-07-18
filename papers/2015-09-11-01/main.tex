@@ -1,0 +1,269 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{defnition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\newtheorem*{claim}{主張}
+\renewcommand{\proofname}{証明}
+\title{ウリゾーンの定理の証明}
+\author{ナンブキトラ}
+\date{\today}
+\begin{document}
+\maketitle
+この文章ではウリゾーンの補題を証明する。ウリゾーンの補題は抽象的な正規空間の上にある種の実連続関数の存在を示した定理であり、補題とは言うものの、これは大定理である。証明は\cite{2}に倣って上半連続と下半連続の概念を用いるものを採用した。この方法が証明が簡単になると思ったからである。等高線を次々作っていくというのが証明のアイディアである。またこの文章に於いて正規性という言葉には$T_1$を仮定しない意味で用いる。\cite{1}と異なるので注意せよ。また\cite{1}では余分に$T_1$を仮定してウリゾーンの補題を証明しているが、証明をよく読めば$T_1$を仮定しない意味での正規空間でウリゾーンの補題は成り立つ。
+\\ 
+
+\begin{defnition}
+位相空間$X$が正規であるとは交わらない二つの閉集合の任意の組$F,G$に対して開集合$U,V$が存在して
+\[
+F\subset U,\ G\subset V,\ U\cap V =\emptyset
+\]を充たすことである。
+\end{defnition}
+
+\begin{lemma}位相空間が正規であることと
+任意の閉集合$F$と開集合$U$について$F\subset U$ならばある開集合Oが存在し
+\[
+F\subset O\subset \bar{O}\subset U
+\]となることは同値である。つまり任意の閉集合の閉近傍全体は基本近傍系を成しているということである。
+\end{lemma}
+簡単な補題なので証明は省略する。また以下ではこの補題を明示せず、「正規性から」とだけ断って自在に用いる。
+
+\begin{defnition}[上半連続、下半連続]
+位相空間$(X,\mathfrak{O})$に対しその閉集合族を$\mathfrak{F}$と書こう。このとき写像
+\[
+f:X\rightarrow [a,b]
+\]
+が上半連続とは
+\[
+\forall \ u\in [a,b]\ f^{-1}([u,b])\in \mathfrak{F}
+\]
+また、$f$が下半連続とは
+\[
+\forall \ l\in [a,b]\ f^{-1}([a,l])\in \mathfrak{F}
+\]
+と定義する。
+\end{defnition}
+
+明らかに上かつ下半連続な関数は連続であり、連続な関数は上かつ下半連続である。もちろん$[a,b]$には標準的な位相を入れてその意味で連続と言っているのである。\\
+
+\begin{lemma}$F$,$U$をそれぞれ位相空間$(X,\mathfrak{O)}$の閉集合、開集合とする。
+この時、特性関数
+\[
+\chi_{F},\ \chi_{U}:X\rightarrow [0,1]
+\]はそれぞれ上半連続、下半連続である。
+\end{lemma}特性関数は$0$か$1$しか値を取らないので証明は簡単である。
+
+\begin{theorem}[半連続関数の上限と下限]
+$\{f_{\lambda}\}_{\lambda\in \Lambda}$を上半連続（下半連続）な写像の族とする。この時$\inf_{\lambda\in \Lambda}f_{\lambda}$（$\sup_{\lambda\in \Lambda}f_{\lambda}$）も上半連続（下半連続）
+\end{theorem}
+\begin{proof}任意の$x$について
+\[
+\inf_{\lambda\in \Lambda}f_{\lambda}(x)\ge u \Leftrightarrow \forall \lambda \in \Lambda\ f_{\lambda}(x)\ge u
+\]なので
+\[
+(\inf_{\lambda\in \Lambda}f_{\lambda})^{-1}([u, b])=\bigcap_{\lambda\in \Lambda}f_{\lambda}^{-1}([u,b])
+\]となり、$(\inf_{\lambda\in \Lambda}f_{\lambda})^{-1}([u, b])$が閉集合であることがわかるので
+$\displaystyle{\inf_{\lambda\in \Lambda}f_{\lambda}}$が上半連続であることがわかる。下半連続の場合も同様。
+\end{proof}
+
+\begin{lemma}
+$(X,\mathfrak{O})$を正規空間とする。この時
+$\displaystyle D=\{\frac{m}{2^{n}}\ |\ n\in\mathbb{N},m=0,1,\cdots 2^{n}\}$として、この時$D$を添え字とする$(X,\mathfrak{O})$の開集合の族$\{V_{d}\}_{r\in D}$が存在して
+\[
+a<b\Rightarrow \bar{V}_a\subset V_b
+\]を充たす。
+\end{lemma}
+\begin{proof}
+まず$G\subset X\backslash F$と正規生から
+\[
+G\subset O\subset \bar{O} \subset X\backslash F
+\]となる$O$が存在する。この開集合のひとつ$O$と$X\backslash F$をそれぞれ$V_{1},V_{0}$とする。\\ 
+そして再び正規性を用いて
+\[
+\bar{V_{0}}\subset P\subset \bar{P} \subset V_{1}
+\]
+となる$O$もひとつを$V_{1/2}$として採用する。\\ 
+さらに$V_{1/4},V_{3/4}$を正規性から存在が保証される
+\[
+\bar{V_{0}}\subset A\subset \bar{A} \subset V_{1/2}
+\]
+となる$A$のひとつを$V_{1/4}$と定義し、
+\[
+\bar{V_{1/2}}\subset B\subset \bar{B} \subset V_{1}
+\]
+となる$B$のひとつを$V_{3/4}$として定義する。・・・ということを繰り返し開集合の族$\{V_{d}\}_{d\in D}$が出来あがる。\\ \\ 
+これで十分な人は早速ウリゾーンの補題の証明を読めば良いが、より正確には
+$\displaystyle D_k=\{\frac{m}{2^{n}}\ |\ 0\le n\le k,m=0,1,\cdots 2^{n}\}$対する帰納法と選択公理を用いる。上で述べた方法を細かく正当化するだけだが、一応せっかくなので証明を付ける。それに当たり次の形の選択公理を使おう。\\ 
+選択公理：
+非空な集合を要素に持つ空でない集合族$\{X_{\lambda}\}_{\lambda\in \Lambda}$に対し、ある$C\subset \bigcup_{\lambda\in \Lambda}X_{\lambda}$が存在して 
+\[\forall\lambda\in \Lambda\ (C\cap X_{\lambda}は一元集合)
+\]を充たす。\\　\\ 
+さて、$\mathfrak{S}＝\{(A,B)\ |\ A,B\in \mathfrak{O},\ \bar{A}\subset B\}$と定義し、$(A,B)\in \mathfrak{S}$に対し、
+$\mathfrak{A}(A,B)=\{C\in \mathfrak{O}\ |\ \bar{A}\subset C\subset B\}$と定義すると正規性から$\mathfrak{A}(A,B)\neq \emptyset$そして集合族
+$\{\mathfrak{A}(A,B)\}_{(A,B)\in \mathfrak{S}}$に対し選択公理を用いて、先の選択の条件を満たす集合$C$を得る。簡単のため$\mathfrak{A}(A,B)\cap C=\{C(A,B)\}$と書くことにする。この$C$を用いて
+\[
+a,b\in D_{k},\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]
+を充たす$\{V_{d}\}_{d\in D_k}$を帰納的に構成していく。\\ 
+$k=0$の時、$D_{0}=\{0,1\}$であるが、これに対して正規性から
+$G\subset O\subset \bar{O} \subset X\backslash F$となる$O$が存在するのでこのような開集合のひとつ$O$を$V_1$と定義し、$V_0=X\backslash F$とする。この時もちろん
+\[
+a,b\in D_0\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]が成り立つ\\ 
+そして
+\[
+a,b\in D_k,\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]を充たす$\{V_d\}_{d\in D_{k}}$が$k=n$まで
+定義されとして$k=n+1$に対して構成する。
+$D_{n+1}\backslash D_n$の元は$\frac{2m+1}{2^{n+1}}$の形をしているので
+\[
+V_{\frac{2m+1}{2^{n+1}}}=C(V_{\frac{m}{2^n}},V_{\frac{m+1}{2^n}})
+\]とし、$d\in D_n$に対しては$V_d$が既に定義されているのでこれをそのまま用いて、任意の$d\in D_{n+1}$に対して$V_d$が定義され
+\[
+a,b\in D_{n+1},\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]を充たす。
+このようにして任意の$n$に対し
+$\{V_d\}_{d\in D_{n}}$が定義され$\{V_r\}_{r\in D_{n}}\subset \{V_r\}_{r\in D_{n+1}}$を充たす。
+$D=\bigcup_{n\in \mathbb{N}}D_{n}$なので、これにより$\{V_d\}_{d\in D}$が定義され
+\[
+a,b\in D,\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]を充たす。
+\end{proof}
+上に登場する集合$D$は$[0,1]$で稠密であることに注意せよ。\\ 
+準備が整ったのでウリゾーンの補題の証明に入ろう。
+\begin{theorem}[ウリゾーンの補題]
+$(X,\mathfrak{O})$を正規空間とし、$F,G$をその互いに素な２つの閉集合とすると連続関数$f:X\rightarrow [0,1]$が存在し
+\[
+f|F=1,\ f|G=0
+\]つまり互いに素な２つの閉集合は関数で分離できる。
+\end{theorem}
+
+\newpage
+
+\begin{proof}${}$\\ 
+$D$を添え字とする二つの集合族$\{f_d\}_{d\in D}, \{g_d\}_{d\in D}$を
+\[
+f_d=\begin{cases}
+ d & \text{$x\in V_d$} \\
+ 1 & \text{$x\in X\backslash V_d$}
+\end{cases}\ \ 
+g_d=\begin{cases}
+ d & \text{$x\in X\backslash \bar{V}_d$} \\
+ 0 & \text{$x\in \bar{V}_d$}
+\end{cases}
+\]
+と定義すると$0\le d \le1$を踏まえて補題４と同様に各$f_d$は上半連続、各$g_d$は下半連続となる。そして写像
+\[
+f,g:X \rightarrow [0,1]
+\]を
+\[
+f:=\inf_{d\in D}f_d\]
+\[g:=\sup_{d\in D}g_d
+\]と定義すれば定理より$f$は上半連続、$g$は下半連続となる。さて
+\begin{claim}
+\begin{eqnarray}
+x\in V_r\Rightarrow f(x)\le r\\ 
+x\not\in V_s\Rightarrow s\le f(x)\\ 
+x\not\in \bar{V}_r\Rightarrow r\le g(x)\\ 
+x\in \bar{V}_s\Rightarrow g(x)\le s
+\end{eqnarray}
+\end{claim}が成り立つ。\
+\begin{proof}${}$\\ 
+$(1)$について、$x\in V_r$なら$f_r(x)=r$なので$f$の定義から明らかに$f(x)\le r$が成り立つ。\\ 
+$(2)$について、$\{V_d\}_{d\in D}$の性質
+\[
+a,b\in D,\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]
+より$x\not\in V_s$を仮定する時
+\[
+a\le s,a\in D\Rightarrow x\not\in V_a
+\]
+となる。つまり
+\[
+\forall a\le s\ f_a(x)=1
+\]が成り立つ。ところで逆に$s<d$となる$d$については定義から明らかに
+\[
+\forall d>s\ \ f_d(x)\ge s
+\]
+が成り立ち、いづれにせよ結局
+\[
+\forall d\in D\ s\le f_{d}(x)
+\]よって$f$の定義から$s\le f(x)$を得る。\\ 
+$(3)$について、$x\not\in \bar{V}_r$ならば$g_r(x)=r$なので$g$の定義から明らかに$r\le g(x)$\\ 
+$(4)$について、$\{V_d\}_{d\in D}$の性質
+\[
+a,b\in D,\ a<b\Rightarrow \bar{V}_a\subset V_b
+\]
+より$x\in \bar{V}_s$を仮定する時
+\[
+s\le a,a\in D\Rightarrow x\in \bar{V}_a
+\]
+となる。つまり
+\[
+\forall s\le a\ g_a(x)=0
+\]が成り立つ。ところで逆に$d<s$となる$d$については$g_d$の定義から明らかに
+\[
+\forall d<s\ g_d(x)\le s
+\]
+が成り立ち、いづれにせよ結局
+\[
+\forall d\in D\ g_{d}(x)\le s
+\]よって$g$の定義から$g(x)\le s$を得る。\\ 
+
+\end{proof}
+上の主張に対して対偶をとり
+\begin{eqnarray}
+r<f(x)\Rightarrow x\not\in V_r\\ 
+f(x)<s\Rightarrow x\in V_s \\ 
+g(x)<r\Rightarrow x\in \bar{V}_r\\ 
+s<g(x)\Rightarrow x\not\in \bar{V}_s
+\end{eqnarray}を得る。これを使って$f=g$を示そう。\\ 
+もしある点$x$で$f(x)<g(x)$なら$D$が$[0,1]$で稠密なことから
+\[
+f(x)<s<g(x)
+\]
+となる$s\in D$が存在し上の$(6)$と$(8)$から$x\in V_s$かつ$x\not\in \bar{V}_s$が成り立ってしまい矛盾。\\ 
+もしある点$x$で$g(x)<f(x)$なら$D$が$[0,1]$で稠密なことから
+\[
+g(x)<r<s<f(x)
+\]
+となる$r,s\in D$が存在し上の$(5)$と$s<f(x)$から$x\not\in V_s$を得て、$(7)$と$g(x)<r$から
+$x\in \bar{V}_r$を得るが、$\bar{V}_r\subset V_s$なので矛盾。\\ 
+以上の議論から任意の点$x\in X$で$f(x)=g(x)$、つまり$f=g$よって$f(=g)$は$X$で上半連続かつ下半連続なので$X$で連続であり、また、
+\[
+\forall d\in D\ G\subset \bar{V}_d
+\]ｆが成立することと$g_d$の定義から
+\[
+\forall d\in D\ x\in G\Rightarrow g_d(x)=0
+\]よって
+\[
+g|G=f|G=0
+\]
+となる。そして
+\[
+\forall d\in D\ F\subset X\backslash V_d
+\]が成立することと$f_d$の定義から
+\[
+\forall d\in D\ x\in F\Rightarrow f_d(x)=1
+\]なので
+\[
+f|F=g|F=1
+\]
+となる。以上から
+\[
+f|G=0\ f|F=1
+\]となり、欲しかった関数が得られた。
+\end{proof}
+\begin{thebibliography}{9}
+\bibitem{1}松坂和夫,集合・位相入門,岩波書店,1968
+\bibitem{2}W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+\end{thebibliography}
+
+
+
+\end{document}

@@ -1,0 +1,524 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\newcommand{\card}{\text{{\rm card}}}
+\newcommand{\supp}{\text{{\rm supp}}}
+%なんか演算２
+\newcommand{\bd}{\text{{\rm Bdry}}}
+\newcommand{\cl}{\text{{\rm CL}}}
+\newcommand{\nai}{\text{{\rm Int}}}
+\newcommand{\di}{\text{{\rm diam}}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{商位相とハウスドルフ性、特に群作用の話}
+\author{電波通信}
+\date{\today}
+			\begin{document}
+\maketitle
+この文書では群作用による商空間とハウスドルフ性の関係を調べる。
+
+\section{商集合}
+$X\times X$の部分集合$R$が以下の三つを充たすとき$X$上の\emph{同値関係}と呼ぶ。
+\begin{align}
+&\forall x\in X\  (x,x)\in R\\
+&\forall x,y\in X\ (x,y)\in R\To (y,x)\in R\\
+&\forall x,y,z\in X\ (x,y)\in R\land (y,z)\in R\To (x,z)\in R
+\end{align}
+
+$(x,y)\in R$のことを$xRy$とも書く。この記法を使えば上の条件は
+\setcounter{equation}{0}
+\begin{align}
+&\forall x\in X\  xRx\\
+&\forall x,y\in X\ xRy\To yRx\\
+&\forall x,y,z\in X\ xRy\land yRz\To xRz
+\end{align}
+と書ける。
+
+集合$X$に同値関係$R$が与えられているとき、$a\in X$に対して\emph{$a$の同値類$[a]$}を
+\[
+[a]=\{\,x\in X\mid aRx\,\}
+\]
+と定義する。
+
+$R$の同値類全部の集合を$X$の$R$による商集合と言い、$X/R$で表す。即ち
+\[
+X/R=\{\,[x]\mid x\in X\,\}
+\]
+である。また$\pi(x)=[x]$で定義される写像$\pi:X\to X/R$のことを商写像という。
+
+位相空間$X$に同値関係$R$が与えられているときに$U\subset X/R$が$X/R$における開集合であることを$\pi^{-1}(U)$が$X$の開集合であることと定義すると、$X/R$に開集合系が定まる。この開集合系から誘導される位相を商位相という。
+$X/R$を商位相も込めて商空間などと言ったりする。
+商位相は$\pi:X\to X/R$を連続にするような$X/R$の最強の位相と一致する。
+\par
+$X$が充たしている分離公理を$X/R$も充たすといったような希望は持てない。
+以下では特に商空間のハウスドルフ性について基本的な二つの命題を述べよう。\footnote{ハウスドルフ性より高次の分離公理については一旦置いておくが、$T_4$より高次の分離公理は閉写像で保たれやすいのでそういった高次の分離性については商写像の閉性を問うた方がよい。}
+\begin{prop}
+商空間$X/R$がハウスドルフならば$R$は$X\times X$の閉集合である。
+\end{prop}
+\begin{proof}
+$R=(\pi\times \pi)^{-1}(\Delta_{X/R})$なので、命題は商写像$\pi:X\to X/R$の連続性から分かる。ここで
+\[
+\Delta_{X/R}=\{\,(x,x)\in X/R\times X/R\mid x\in X/R\,\}
+\]
+である。
+\end{proof}
+この命題の一種の逆が成り立つ。
+\begin{prop}\label{aaa}
+商写像$\pi:X\to X/R$が開写像でかつ$R$が$X\times X$の閉集合ならば$X/R$はハウスドルフである。
+\end{prop}
+\begin{proof}
+$[x]\neq [y]$となる$x,y\in X$をとる。仮定から$(x,y)\not\in R$である。$R$が$X\times X$の閉集合であるから$X$の開集合$U,V$が存在して
+\[
+(x,y)\in U\times V
+\]
+と
+\[
+(U\times V)\cap R=\O
+\]
+を充たす。
+さて$\pi$は開写像なので$\pi(U)$と$\pi(V)$は$X/R$の開集合で$[x]\in \pi(U)$と$[y]\in \pi(V)$を充たす。
+$(U\times V)\cap R=\O$なので
+\[
+\pi(U)\cap \pi(V)=\O
+\]
+である。よって$X/R$がハウスドルフであることがわかった。
+\end{proof}
+一般に$X$がハウスドルフで$R$が$X\times X$の閉集合であっても$X/R$はハウスドルフとは限らない。これは正則ではないハウスドルフ空間が存在することなどから反例は簡単に作れる。
+
+\section{群作用による商}
+このセクションではより限定して群作用による商に注目して商空間のハウスドルフ性を述べる。
+\begin{df}[位相群]
+群$G$が位相空間であり、かつ、その二項演算と単項演算が連続、すなわち、
+\[
+binary:G\times G\rightarrow G\ (x,y)\mapsto xy\ \ inverse:G\rightarrow G\ x\mapsto x^{-1}
+\]が連続である時、群Gを位相群と呼ぶ。この文章では位相群は常にハウスドルフであるとする。
+また、$AB=\{ab\in \mid a\in A,b\in B\}$や$A^{-1}=\{a^{-1}\mid a\in A\}$などの記号も以降断りなく使う。
+\end{df}
+\begin{df}
+位相群$G$と位相空間$X$について連続写像$f:G\times X\to X$が連続的な作用であるとは
+\setcounter{equation}{0}
+\begin{align}
+&f(1_G,x)=x\\
+&f(g,f(h,x))=f(gh,x)
+\end{align}
+を充たすときに言う。
+一般に$f$を省略しても紛れがあることはないように思うので以下では$f(g,x)$を$g.x$と書くことにする。
+ドットがついているのをよく見てほしい。
+すると上の条件は
+\setcounter{equation}{0}
+\begin{align}
+&1_G.x=x\\
+&g.(h.x)=gh.x
+\end{align}
+と書ける。
+この定義は一般に左作用と呼ばれるものだが、ここでは左作用しか扱わないので気にしないでほしい。
+以降では$A.S=\{a.s\mid a\in A, s\in S\}$や$g.S=\{g.s\mid s\in S\}$、$A.x=\{a.x\mid a\in A\}$などの記号を断りなく使う。
+\par
+各$g\in G$について、$f_g:X\to X; x\mapsto g.x$は同相写像になることに注意しよう。逆写像は$f_{g^{-1}}$である。
+このことから$X$の開集合$U$について$g.U$もまた$X$の開集合であることがわかる。閉集合についても同様である。
+\end{df}
+位相群$G$が位相空間$X$に連続的に作用しているとき、同値関係$R_G$を
+\[
+xR_Gy\iff \exists g\in G\ x=g.y
+\]
+で定義する。
+この同値関係による商空間$X/R_G$を象徴的に$X/G$と書くことにする\footnote{左作用なので$G\backslash X$と書くべきなのかもしれないが、右作用とかこの文章では使わないのでこう書く。}。
+ここでは$X$に$G$からのことなる二つの群作用がある場合は扱わないので紛れはないと思う\footnote{一般にそんな場合を扱う場面があるのかは知らない。}。
+
+以下では群の作用による商空間のハウスドルフ性について幾ばくかの命題を紹介してゆく。
+
+\begin{lem}
+群の連続な作用によって誘導される商写像は開写像である。
+\end{lem}
+\begin{proof}
+商位相の定義から$\pi:X\to X/G$が開写像であることを証明するためには$\pi^{-1}(\pi(U))$が$X$の開集合であることを示せばよい。ところで
+\[
+\pi^{-1}(\pi(U))=\bigcup_{g\in G}g.U
+\]
+であり、$g.U$は開集合であるから$\pi^{-1}(\pi(U))$は開集合である。
+\end{proof}
+
+
+\begin{prop}
+位相空間$X$に位相群$G$が連続に作用しているとする。もし
+$\{\,(x,g.x)\in X\times X\mid x\in X, g\in G\,\}$が$X\times X$の閉集合ならば$X/G$はハウスドルフである。
+\end{prop}
+\begin{proof}
+群作用から誘導される同値関係$R_G$について、
+\[
+R_G=\{\,(x,g.x)\in X\times X\mid x\in X, g\in G\,\}
+\]
+であるから$R_G$は$X\times X$の閉集合である。
+また群作用による商写像は常に開写像なので命題\ref{aaa}から$X/G$はハウスドルフである。
+\end{proof}
+
+次の話題に移る前に次のTube lemma及びBox Lemmaを紹介しよう\footnote{これらの命題は「いつもの」とも呼ばれる。}。
+\begin{lem}[Tube lemma]
+$X$、$Y$を位相空間、$B$を$Y$のコンパクト集合とする。更に$x\in X$と$X\times Y$の開集合$O$が
+\[
+\{x\}\times B\subset O
+\]
+を充たしているとする。このとき$X$における$x$の開近傍$N$と$Y$の開集合$M$が存在して、$B\subset M$及び
+\[
+\{x\}\times B\subset N\times M\subset O
+\]
+を充たす。
+\end{lem}
+\begin{proof}$S=\{x\}\times B$と置く
+\[
+\mathcal{O}=\{\,U\times V \mid S\cap (U\times V)\neq\O,\ U\times V\subset O,\ U,VはそれぞれX,Yの開集合\,\}
+\]
+と置くと、$\mathcal{O}$は開集合族で直積の開集合の定め方から
+\[
+S\subset \bigcup \mathcal{O}
+\]
+が成り立つので$\mathcal{O}$は$S$の開被覆である。$S$は$B$と同相であるからコンパクトなので
+\[
+S\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+となる$\mathcal{O}$の有限部分族$\{P_i\times Q_i\}_{i=1}^n$が存在する。そして明らかに
+\[
+B\subset \bigcup_{i=1}^nQ_i
+\]であり
+\[
+N=\bigcap_{i=1}^nP_i,\ M=\bigcup_{i=1}^nQ_i
+\]
+と置けば$x\in N$で
+\[
+S=\{x\}\times B\subset N\times M\subset N\times \bigcup_{i}^nQ_i=\bigcup_{i=1}^n(N\times Q_i)\subset \bigcup_{i=1}^n(P_i\times Q_i)\subset O
+\]
+が成り立つので証明が終わる。
+\end{proof}
+Tube lemmaのちょっとした拡張として次の補題も証明される。
+\begin{lem}[Box lemma]
+$X$、$Y$を位相空間、$A$、$B$をそれぞれ$X$、$Y$のコンパクト集合とする。更に$X\times Y$の開集合$O$が
+\[
+A\times B\subset O
+\]
+を充たしているとする。このとき$X$の開集合$U$と$Y$の開集合$V$が存在して$A\subset U$、$B\subset V$及び
+\[
+A\times B\subset U\times V\subset O
+\]
+を充たす。
+\end{lem}
+\begin{proof}
+各$a\in A$について$\{a\}\times B$にTube lemma を適用して$a$の開近傍$N_a$と$B$の開近傍$M_a$で
+\[
+\{a\}\times B\subset N_a\times M_a\subset O
+\]
+を充たすものを取る。このとき
+\[
+A\subset \bigcup_{a\in A}N_a
+\]
+なので$A$のコンパクト性から有限個の$a_1,\dots,a_n$が存在して
+\[
+A\subset \bigcup_{i=1}^nN_{a_i}
+\]
+が成立する。さて、
+\[
+U=\bigcup_{i=1}^nN_{a_i}\ V=\bigcap_{i=1}^nM_{a_i}
+\]
+と定義すれば$U$、$V$はそれぞれ$X$、$Y$の開集合で$A\subset N$、$B\subset V$を充たし、さらに
+\[
+A\times B\subset U\times V\subset \bigcup_{i=1}^n(N_{a_i}\times V)\subset \bigcup_{a\in A}(N_a\times M_a)\subset O
+\]
+なので補題の証明は終わる。
+\end{proof}
+Box lemma を応用して次の群作用に関する補題を得る。
+\begin{lem}
+位相群$G$が位相空間$X$に連続的に作用しているとする。$A$、$B$をそれぞれ$G$、$X$のコンパクト集合、$O$を$X$の開集合として
+\[
+A.B\subset O
+\]
+を充たすとする。このとき
+このとき$G$の開集合$U$と$X$の開集合$V$が存在して$A\subset U$、$B\subset V$及び
+\[
+A.B\subset U.V\subset O
+\]
+を充たす。
+\end{lem}
+\begin{proof}
+$G$から$X$への連続的な作用をちゃんと$f:G\times X\to X$と書くと、$A.B\subset O$から
+\[
+A\times B\subset f^{-1}(O)
+\]
+が導かれる。$f^{-1}(O)$は$G\times X$の開集合なのでBox lemmaから$G$の開集合$U$と$X$の開集合$V$が存在して$A\subset U$、$B\subset V$及び
+\[
+A\times B\subset U\times V\subset f^{-1}(O)
+\]
+を充たす。これを$f$で写せば
+\[
+A.B\subset U.V\subset O
+\]
+を得る。
+\end{proof}
+この補題の特殊な場合として次の補題が分かる。
+\begin{lem}\label{bb}
+位相群$G$が位相空間$X$に連続的に作用しているとする。$A$を$G$のコンパクト集合、$x$を$X$の点、$O$を$X$の開集合とし、$A.x\subset O$が成り立っているとする。このとき$x$の近傍$U$が存在して
+\[
+A.U\subset O
+\]
+が成立する。
+\end{lem}
+この補題を用いて次の基本的な命題を証明しよう。
+\begin{prop}
+位相群$G$が$X$に連続的に作用しているとする。
+$K$を$G$のコンパクト集合、$F$を$X$の閉集合とすると、集合$K.F$は$X$の閉集合である。
+\end{prop}
+\begin{proof}
+$x\not\in K.F$を任意にとる。このとき$(K^{-1}.x)\cap F=\O$である。$K^{-1}$はコンパクト集合なので補題\ref{bb}から$x$の近傍$U$が存在して
+\[
+(K^{-1}.U)\cap F=\O
+\]
+が成立する。つまり
+\[
+U\cap (K.F)=\O
+\]
+なので$K.F$は閉集合である。
+\end{proof}
+
+\begin{prop}\label{cpt}
+コンパクト位相群の連続な作用によるハウスドルフ空間の商空間はハウスドルフである。
+\end{prop}
+\begin{proof}
+コンパクト群$G$がハウスドルフ空間$X$に連続的に作用しているとする。この作用から新たに$G$の$X\times X$への作用を以下のように誘導する。
+\[
+g..(x,y)=(x,g.y)
+\]
+区別のために$X\times X$上の作用は二つのドット$..$で表した。
+このとき作用$G\times (X\times X)\to X\times X$は連続的な作用になる。
+$X$がハウスドルフ空間なので$\Delta_X=\{(x,x)\mid x\in X\}$は$X\times X$の閉集合である。
+$G$のコンパクト性と先の補題から
+$G..\Delta_X$は$X\times X$の閉集合である。さて、
+\[
+G..\Delta_X=\{\,(x,g.x)\in X\times X\mid x\in X, g\in G\,\}=R_G
+\]
+なので$X/R$はハウスドルフである。
+\end{proof}
+
+\begin{cor}
+射影空間とかはハウスドルフ。
+\end{cor}
+
+\section{おまけ・固有な群作用について}
+\begin{df}[固有写像]
+連続写像$f:X\to Y$が固有であるとは$Y$の任意のコンパクト部分集合$K$について、
+その逆像$f^{-1}(K)$が$X$のコンパクト集合になることである。
+\end{df}
+\begin{df}
+連続写像$f:X\to Y$が適性であるとは、$f$が閉集合であり、$Y$の任意の点$y$について、$f^{-1}(y)$
+が$X$のコンパクト集合になることである。
+\end{df}
+\begin{thm}
+$Y$が局所コンパクトハウスドルフであるとき、$f$が固有であることと適性であることは同値である。
+\end{thm}
+\begin{df}
+$G$が$X$に固有に作用しているとは
+\[
+\theta: G\times X\to X\times X; (g, x)\mapsto (x, g.x)
+\]
+が固有写像であるときにいう。
+\end{df}
+\begin{cau}
+$G\times X\to X; (g,x)\mapsto g.x$が固有という定義ではないことに注意せよ。
+\end{cau}
+
+\begin{df}
+$A, B\subset X$について
+\[
+[A,B]=\{\,g\in G\mid (g.A)\cap B\neq \O \,\}
+\]
+と定義する。
+\end{df}
+代数トポロジーの本などでは、コンパクト集合$K,L$について、$[K,L]$がコンパクトな時に作用が固有などどいったりするが、これは$\theta$の固有性と一致する。
+\begin{thm}
+$X$が局所コンパクトハウスドルフの時、以下は同値である。
+\renewcommand{\labelenumi}{\normalfont(\roman{enumi}).}
+\begin{enumerate}
+\item $G$は$X$に固有に作用する。
+\item $X$のコンパクト集合の任意の２対$(K,L)$について、$[K,L]$は$G$のコンパクト集合である。
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\setcounter{equation}{0}
+$\theta$の固有性に$[K,L]$という集合が出てくる理由を説明しよう。
+$X\times X$の$K\times L$（$K$、$L$は$X$のコンパクト集合）という簡単な形のコンパクト集合を考えよう。
+$\theta$による逆像$\theta^{-1}(K\times L)$を考えると、
+\begin{equation}
+\theta^{-1}(K\times L)\subset [K,L]\times K
+\end{equation}
+となる。さらに、$\pi_G:G\times X\to G$を$G$方向の射影とすると
+\begin{equation}
+\pi_G(\theta^{-1}(K\times L))=[K,L]
+\end{equation}
+となる。
+\par
+これを踏まえたうえで、
+$(i)\To (ii)$は$\theta$の固有性と$(2)$式から明らかである。
+$(ii)\To (i)$を示そうお。$X\times X$のコンパクト集合$M$について、$X$の局所コンパクト性から
+$M\subset K\times L$となる$X$のコンパクト集合$K,L$があり、
+\[
+\theta^{-1}(M)\subset \theta^{-1}(K\times L)
+\]
+となるので$\theta$の固有性の証明のためには結局$\theta^{-1}(K\times L)$という集合のコンパクト性さえわかればよい。
+しかしこのコンパクト性は$(ii)$という仮定と$(1)$式から明らかである。
+\end{proof}
+$X$が局所コンパクトハウスドルフで、$G$が$X$に固有に作用しているとき、
+$\theta(G\times X)=R_G$は閉集合になるので命題\ref{cpt}と同様に
+$X/G$はハウスドルフであることがわかる。（ついでに局所コンパクトである。）
+固有作用していると$X$の性質が$X/G$に受け継がれやすくなるのである。詳しくはブルバキ参照のこと。
+\begin{cau}
+適性も、固有もフランス語のpropreの訳語であるはずである。本来ならばここで定義されている適性写像こそが固有写像と呼ばれるべきものである。
+もともとブルバキにおいてはここで定義した適性写像がpropreと呼ばれ、
+ここで定義した固有写像は写像が局所コンパクトな場合の適性性を判定するための便利な条件の一つ程度の扱いであったように思うが、いつの間にか、
+ここでいう適性写像の概念は忘れられ、ここでいう固有写像が普及していったようだ（いまでは、ここでいう適性写像は完全写像(perfect map)という言葉でわずかながら伝承されている。）
+このことは恐らく数学の研究で、局所コンパクトハウスドルフな空間が台頭したことと関係があるのかもしれない。すなわち多様体論の隆盛に押されたのかもしれない。（ただ単にブルバキの言葉遣いが一般の数学者の言葉づかいから離れていただけの可能性もとても多いにある。）
+しかしながらブルバキの定義した意味での固有写像の概念は（もちろん考えている圏は違うけれど）代数幾何における固有射として伝承されているようだ。
+\end{cau}
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1} 二コラ・ブルバキ,位相1, 2
+\bibitem{2} Tammo tom Dieck, \textit{Topologie}, 1991, Walter de Gruyter. 
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

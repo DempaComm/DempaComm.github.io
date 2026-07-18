@@ -1,0 +1,149 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{defnition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\renewcommand{\proofname}{証明}
+\newcommand{\card}{{\rm card}}
+\title{始位相}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+この文書では始位相とその性質について紹介する。強く紹介したいのは定理\ref{main}である。この定理は筆者が位相空間論を初めて楽しく感じた定理である。始位相とはInitial topologyを訳したものだが逆位相とも呼ばれる。
+\begin{defnition}[始位相]
+$X$を集合$\{(Y_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}$を位相空間の族とし、各$\lambda$ 毎に写像
+\[
+f_{\lambda}:X\rightarrow Y_{\lambda}
+\]が与えられているとするこの時$X$に写像族$F=\{f_{\lambda}\}_{\lambda \in \Lambda}$をすべて連続にするような最弱の位相が存在する。それを$F=\{f_{\lambda}\}_{\lambda \in \Lambda}$から誘導された始位相と呼ぶ。此処では記号$\mathfrak{I}(F)$で表すことにする。この位相は準開基$\mathfrak{M}=\{f_{\lambda}^{-1}(U)\ |\ U\in \mathfrak{O}_{\lambda},\ \lambda\in \Lambda \}$により生成されている
+\end{defnition}$\mathfrak{I}$は$I$のフラクトゥールである。
+
+\begin{example}[直積位相]
+位相空間の族$\{(X_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}$の直積空間$\displaystyle \prod_{\lambda \in \Lambda}X_{\lambda}$の位相はその射影の族$\{\pi_{\lambda}\}_{\lambda \in \Lambda}$から定まる始位相である。
+\end{example}
+
+\begin{example}[相対位相]
+相対位相は包含写像から定まる始位相である。
+\end{example}
+
+\begin{example}[シェルピンスキー空間と位相空間]シェルピンスキー空間とは集合$2=\{0,1\}$に
+\[
+\{\O,\{1\},\{0,1\}\}
+\]
+を開集合族として位相を定義した空間である。$(X,\mathfrak{O})$を任意の位相空間とするとこの位相は$\mathfrak{O}$によって添字付けられた開集合の特性関数の関数の族
+\[
+\chi_{U}:X\rightarrow \{0,1\}
+\]によって定まる始位相である。より強く$(X,\mathfrak{O})$の開基の一つを$\mathfrak{B}$とするとこの空間の位相はシェルピンスキー空間への連続写像の族$\{\chi_{B}\}_{B\in \mathfrak{B}}$から定まる始位相である。証明は容易であろう。この事実は後で使う。
+\end{example}
+
+\begin{theorem}[始位相の普遍性]位相空間$Y$には$\{f_{\lambda}\}_{\lambda \in \Lambda}$から定まる始位相が入っているとしこの関数族の終域を$\{Z_{\lambda}\}_{\lambda \in \Lambda}$とするこの時位相空間$X$からの$Y$への写像$\phi$について
+\[
+\phi :X\rightarrow Yが連続\Leftrightarrow \forall \lambda\in \Lambda\ f_{\lambda}\circ \phi
+: X\rightarrow Z_{\lambda}が連続
+\]が成立する。
+\end{theorem}
+\begin{proof}
+$[\Rightarrow]$の部分は明らかである。$[\Leftarrow]$を証明しよう。$X$の位相は準開基$\mathfrak{M}=\{f_{\lambda}^{-1}(U)\ |\ U\in \mathfrak{O}_{\lambda},\ \lambda\in \Lambda \}$により生成されていることを思い出そう。すると任意の$\lambda$と任意の$U\in \mathfrak{O}_{\lambda}$に対して
+\[
+\phi^{-1}(f_{\lambda}^{-1}(U))=(f_{\lambda}\circ \phi)^{-1}(U)
+\]が開集合であることを示せば良いが、それは
+\[
+\forall \lambda\in \Lambda\ f_{\lambda}\circ \phi: X\rightarrow Z_{\lambda}が連続
+\]であることから直ちに分かる。
+\end{proof}
+
+
+\begin{theorem}[始位相の埋め込み定理]\label{main}位相空間$(X,\mathfrak{O})$には$\{f_{\lambda}\}_{\lambda \in \Lambda}$から定まる始位相が入っているとしこの関数族の終域を$\{(Y_{\lambda},\mathfrak{O}_{\lambda})\}_{\lambda \in \Lambda}$とするこのとき関数
+\[
+\phi=\prod_{\lambda\in \Lambda}f_{\lambda}:X\rightarrow \prod_{\lambda\in \Lambda}Y_{\lambda \in \Lambda}
+\]について$\mathfrak{I}(F)=\mathfrak{I}(\phi)$が成立する。
+また$\phi$が単射ならばこれは埋め込みになっているつまり$(X,\mathfrak{O})$は$\prod_{\lambda\in \Lambda}Y_{\lambda \in \Lambda}$の部分空間$\phi(X)$と同相となる。
+\end{theorem}
+\begin{proof}${}$[前半]始位相の普遍性（直積位相ｎ普遍性を用いる）から$\phi$は$(X,\mathfrak{I}(F))$上$\phi$は連続なので最小性から
+\[
+\mathfrak{I}(\phi)\subset \mathfrak{I}(F)
+\]そして$\pi_{\lambda}\circ \phi=F_{\lambda}$なので$f_{\lambda}$はに$(X,\mathfrak{I}(\phi)$上で連続なので始位相の最小性から
+\[
+\mathfrak{I}(F)\subset \mathfrak{I}(\phi)
+\]
+よって$\mathfrak{I}(F)=\mathfrak{I}(\phi)$が成り立つ。\\ ${}$
+[後半]後半は$X$の位相が準開基
+$\mathfrak{M}=\{f_{\lambda}^{-1}(U)\ |\ U\in \mathfrak{O}_{\lambda},\ \lambda\in \Lambda \}$
+により生成されていることと今は$\phi$が単射であるから$\phi$の直像は交わりを保つ。よって$\phi(f_{\lambda}^{-1}(U))$が$\phi(X)$の開集合であることを示せばいい。此処で$f_{\lambda}=\pi _{\lambda}\circ \phi$を用いると
+\[
+f_{\lambda}^{-1}(U)=\phi^{-1}(\pi ^{-1}(U))
+\]
+と書くことができ、$\phi$の単射性を用いて
+\[
+\phi(f_{\lambda}^{-1}(U))=\phi(\phi^{-1}(\pi ^{-1}(U)))=\pi^{-1}(U)\cap \phi(X)
+\]
+を得て、直積位相と相対位相の定義から$\pi^{-1}(U)\cap \phi(X)$は$\phi(X)$の開集合である。これで証明が終わる。
+\end{proof}
+\begin{example}[$T_{0}$空間]$T_{0}$空間はシェルピンスキー空間の直積に埋め込み可能である。これは開基$\mathfrak{B}に対して$\\
+\[
+\prod_{U\in \mathfrak{B}}\chi_{U}が単射\Leftrightarrow (X,\mathfrak{O})がT_{0}
+\]が成立するからである。
+\end{example}
+[$\displaystyle{\prod_{U\in \mathfrak{B}}\chi_{U}が単射\Leftrightarrow (X,\mathfrak{O})がT_{0}}$]の証明.\\ 
+まず$T_0$とは\\ $(T_0)$\  異なる２点$x,y$について$x$の近傍で$y$を含まないようなものが存在するか、もしくは$y$の近傍で$x$を含まないようなものが存在する\\ 
+であることを思い出そう。この定義の「近傍」を開基$\mathfrak{B}$の元としても良い。（開基なので）\\ 今、$n\neq y$と仮定すると$T_0$から($x$と$y$を適宜入れ替えて)$B\in \mathfrak{B}$が存在して$x\in B,\ y\not\in B$としても一般性を失わない。このとき
+\[
+\chi_B(x)=1,\ \chi_B(y)=0
+\]なので
+\[
+\prod_{U\in \mathfrak{B}}\chi_{U}(x)\neq \prod_{U\in \mathfrak{B}}\chi_{U}(y)
+\]よって
+\[
+x\neq y\Rightarrow \prod_{U\in \mathfrak{B}}\chi_{U}(x)\neq \prod_{U\in \mathfrak{B}}\chi_{U}(y)
+\]なので$\prod_{U\in \mathfrak{B}}\chi_{U}$は単射。逆はこの証明を下から読めばわかる。
+$\square$
+
+\begin{defnition}[位相空間の重み]位相空間$X$の開基の最小濃度を位相空間$X$の重みと言い、$w(X)$で表す。つまり
+\[
+w(X)=\min\{\card(\mathfrak{B})\ |\ \mathfrak{B}はXの開基\}
+\]
+である。
+\end{defnition}
+この位相空間の重みを用いて、位相空間それ自体の濃度が評価出来る。
+\begin{corollary}$T_0$空間に対して
+\[
+\text{\card$(X)$}\le2^{w(X)}
+\]
+\end{corollary}
+\begin{proof}
+$X$はシェルピンスキー空間の直積$\prod_{U\in \mathfrak{B}}\{0,1\}$に埋め込まれ、
+\[
+\text{card$(\prod_{U\in \mathfrak{B}}\{0,1\})$}=2^{\text{card$(\mathfrak{B})$}}
+\]となるので、$\mathfrak{B}$を$\text{card$(\mathfrak{B})$}=w(X)$となるものとして選べば
+\[
+\text{card$(X)$}\le2^{w(X)}
+\]が成り立つ。
+\end{proof}
+直ちに次のことがわかる。
+\begin{corollary}第二可算公理を充たす$T_0$空間にたいして
+\[
+\card(X)\le \mathfrak{c}
+\]
+
+\end{corollary}
+
+\begin{thebibliography}{9}
+\bibitem{1}森田紀一,位相空間論,岩波全書331,岩波書店1981
+\bibitem{2}M.G.Murdeshwar,general topology,Wiley Eastern Limited,1983
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+\end{document}

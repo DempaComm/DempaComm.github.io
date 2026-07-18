@@ -1,0 +1,193 @@
+\documentclass{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+\title{ストーン-ワイエルストラスの定理}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文章ではStone-Weierstrassの定理を証明する。まずはコンパクト空間上の実数値関数に関する主張を証明し、そのあと局所コンパクトハウスドルフ空間への一般化を行い最後に複素形を証明する。
+
+
+\section*{準備}
+言葉の定義
+
+
+\section{定理とその証明}
+
+
+
+ \begin{thm}[弱いStone-Weierstrassの定理]
+コンパクトハウスドルフ空間の実関数環$C(X)$の部分代数$A$が次を充たすとする。
+
+
+  \begin{enumerate}
+   \item $1\in A$
+   \item $X$の任意の元は$A$の元で分離できる。
+　　\item $A$は二項演算$\max,\min$で閉じている。
+  \end{enumerate}
+
+
+この時$A$は上限ノルムで$C(X)$に於いて稠密。
+\end{thm}
+\begin{proof}$f\in C(X)$を任意に与え、
+$(a,b)\in X\times X$に対して$F_{a,b}\in A$を以下のように定める。
+\[
+F_{a,b}(x)=(f(b)-f(a))\frac{g(x)-g(a)}{g(b)-g(a)}+f(a)
+\]
+\[
+F_{aa}(x)\equiv f(a)
+\]
+$b$を任意に固定して
+\[
+U_{a,b}=\{x\in X\ |\ F_{a,b}(x)<f(x)+\varepsilon\}
+\]
+$a\in U_{a,b}$
+\[
+X=\bigcup_{a\in X}U_{a,b}
+\]
+\[
+X=\bigcup_{i=1}^n U_{a(i),b}
+\]
+ここで
+\[
+G_b=\min_{i}F_{a(i),b}
+\]とすると
+\[
+G_b(x)<f(x)+\varepsilon
+\]
+\[
+V_b=\{x\in X\ |\ f(x)-\varepsilon <G_b(x)\}
+\]
+\[
+X=\bigcup_{k=1}^m V_{b(k)}
+\]
+\[
+H=\max_{k}G_{b(k)}
+\]
+
+\[
+||f-H||<\varepsilon
+\]
+\end{proof}
+
+
+
+\begin{lem}[Dini]
+
+コンパクトハウスドルフ空間上の実数値連続関数の族$\{f_{n}\}_{n\in \mathbb{N}}$と実数値連続関数$f$が次を充たすとする
+
+  \begin{enumerate}
+    \item $f_{n}\le f_{n+1}$
+  \item $\{f_{n}\}_{n\in \mathbb{N}}$は$f$に各点収束している。
+  \end{enumerate}
+　この時$\{f_{n}\}_{n\in \mathbb{N}}$は$f$に一様収束する。
+\end{lem}
+\begin{proof}
+まず$f_n\le f$に注意しよう。
+\end{proof}
+
+\begin{thm}
+多項式の族$\{P_{n}(t)\}_{n\in \mathbb{N}}$で定数項が$0$で$[0,1]$区間上 $R(t)=\sqrt{t} $に一様収束するものが存在する。
+
+\end{thm}
+\begin{proof}[具体的に列を得る方法]  $\{P_{n}(t)\}_{n\in \mathbb{N}}$を帰納的に
+\[
+P_{0}(t)\equiv 0,  P_{n+1}=P_{n}(t)+\frac{1}{2}(t-P_{n}(t)^2)
+\]
+と定義する。
+\end{proof}
+\begin{proof}[証明：多項式近似定理を用いる方法]
+ワイエルストラスの多項式近似定理より$R(t)$は$[0,1]$上一様に近似出来る。
+よって
+\[
+||R-Q||<\frac{\varepsilon}{2}
+\]となる多項式$Q$が存在するが、$P(t)=Q(t)-Q(0)$	と置くとこれは定数項を持たない多項式で$R(0)=\sqrt{0}=0$より
+\[
+|Q(0)|=|R(0)-Q(0)|\le||R-Q||<\frac{\varepsilon}{2}
+\]で
+\[
+||R-P||\le ||R-Q||+||Q(0)||<\varepsilon
+\]
+となるので$R$は定数項が$0$の多項式で$[0,1]$上一様に近似出来る。そして適当に$\varepsilon=\frac{1}{n}$に対応するそれを選べば求める多項式列が得られる。
+
+\end{proof}
+
+ \begin{thm}[Stone-Weierstrass]
+コンパクトハウスドルフ空間の実関数環$C(X)$の部分代数$A$が次を充たすとする。
+
+
+  \begin{enumerate}
+   \item $1\in A$
+   \item $X$の任意の元は$A$の元で分離できる。
+  \end{enumerate}
+
+
+この時$A$は上限ノルムで$C(X)$に於いて稠密。
+\end{thm}
+\begin{proof}
+
+\end{proof}
+
+\begin{thm}[局所コンパクトハウスドルフ空間に於けるStone-Weierstrassの定理]$C_0(X)$
+  \begin{enumerate}
+   \item $X$の任意の元は$A$の元で分離できる。
+   \item 任意の$x\in X$について$f(x)\neq 0$となる$f\in A$が存在する。
+  \end{enumerate}
+\end{thm}
+
+
+ \begin{thm}[Stone-Weierstrassの複素形]
+コンパクトハウスドルフ空間の複素数値連続関数環$C(X)$の部分代数$A$が次を充たすとする。
+
+\begin{enumerate}
+   \item $1\in A$
+   \item $X$の任意の元は$A$の元で分離できる。
+   \item $A$は関数の複素共役を取る演算で閉じている。
+  \end{enumerate}
+
+この時$A$は上限ノルムで$C(X)$に於いて稠密。
+\end{thm}
+
+\begin{thm}[局所コンパクトハウスドルフ空間に於けるStone-Weierstrassの定理の複素形]$C_0(X)$
+  \begin{enumerate}
+   \item $X$の任意の元は$A$の元で分離できる。
+   \item 任意の$x\in X$について$f(x)\neq 0$となる$f\in A$が存在する。
+   \item $A$は関数の複素共役を取る演算で閉じている。
+  \end{enumerate}
+\end{thm}
+
+\end{document}

@@ -1,0 +1,181 @@
+\documentclass[leqno]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\mm}{\mathfrak{M}}
+\newcommand{\ffnn}{\{f_{n}\}_{n\in \nn}}
+\newcommand{\rrr}{\bar{\mathbb{R}}}
+\newcommand{\s}{\sigma}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\Sup}{\text{{\rm ess.sup}}}
+
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{ルベーグ空間}
+\author{一色三良(concious77)}
+\date{\today}
+			\begin{document}
+\maketitle
+ルベーグ空間の話
+
+{\df[$p$乗可積分]測度空間$(X,\mm,\mu)$上の可測関数$f$が$p\in [1,+\mgn)$乗可積分であるとは
+\[
+\int_X|f|^p\ d\mu<\mgn
+\]
+となることである。$(X,\mm,\mu)$上$p$乗可積分関数全体を$L^p(X,\mm,\mu)$と書き表すことにする。$X$や$\mm,\mu$などが何であるか明らかなときには単に$L^p(X)$や$L^p$と書いたりもする。
+}
+{\cau
+$1$乗可積分関数とは単に可積分関数のことである。
+}
+
+{\df[本質的有界]
+測度空間$(X,\mm,\mu)$上の可測関数$f$が本質的有界とは
+}
+
+{\df[空間$L^{\mgn}$]
+a
+}
+
+$L^p$を全部まとめてルベーグ空間とか言ったりする。
+
+{\df[ルベーグ空間のノルム]
+a
+}
+
+{\lem
+ヤングの不等式
+}
+
+{\prop
+三角不等式
+}
+
+{\thm
+完備性
+}
+
+{\thm
+$X$が有界な場合のルベーグ空間同士の関係
+}
+
+
+
+{\bf 余談}\\ 
+後々、いつになるかはわからないが、リーマン積分からルベーグ測度と呼ばれる測度を定義する。ルベーグ測度は測度論の由来となった測度である。\\ 
+ルベーグ測度だとか測度論だとか名前のついた本を開くとルベーグ測度の偉大さみたいなものが書かれていたりする。ルベーグ測度は何やら”一般の図形”の”面積”が測れたりするのが大事なのでは無い。それでは何が重要なのかというと、収束定理を使って計算が楽になるというのも一つの考え方だが、上で述べられたルベーグ空間が完備性を持つという事が重大度が高いと私は思想する。\\ 
+未だ定義してないのだがルベーグ測度に於いて$L^p$空間を定義するにはルベーグ測度自体は必要なくリーマン積分を用いて$C_c(\rr^N)$に$L^p$ノルムを定義して距離空間として完備化すれば（結果的には）$L^p$空間が得られるのである。しかしそのように定義された$L^p$空間は例えばコーシー列を同値類で割るなどの方法で完備化が得られてるとすると、空間の元は関数ですらなくなりとても扱いづらいものになっていしまう。そこに測度という概念を一つ噛ませてやれば$L^p$空間の元は関数であり、直感的にとてもわかりやすくなるのである。まるで一般の図形の面積が測れるから大事という風な口調で書かれた文書は嫌いである。
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{1}
+
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

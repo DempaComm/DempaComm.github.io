@@ -1,0 +1,216 @@
+\documentclass{jsarticle}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{df}{定義}
+\newtheorem{example}{例}
+\newtheorem{claim}{性質}
+\newcommand{\cl}{\text{{\rm CL}}}
+\renewcommand{\proofname}{証明}
+\title{可算離散位相の直積に関するStoneの定理}
+\author{電波通信}
+\date{\today}
+\begin{document}
+\maketitle
+この文章では可算離散位相の非加算個の直積が非正規であるという定理を証明する。一般にStone定理と言えば「距離空間はパラコンパクト」という定理のことだが、この距離空間のパラコンパクト性を証明した参考文献１の後半で示されている定理がこの可算離散位相の非加算直積に対する定理である。参考文献１は初めて距離空間のパラコンパクト性を証明したことで有名だが、後半の定理はあまり有名になってない気がするのでこの文章で紹介することにしてみた。また正規という言葉は$T_1$を積極的には仮定しない意味で使うが、以下の前半のセクションで出てくる空間はハウスドルフ空間ばかりなので$T_1$を仮定するかしないかで差異が出てくることのは後半のセクションからである。
+\section{定理}
+このセクションではStoneの定理を証明する。まず最初に証明で用いる用語などを定義する。
+\begin{df}
+位相空間$X$が正規であるとは交わらない二つの閉集合の任意の組$F,G$に対して開集合$U,V$が存在して
+\[
+F\subset U,\ G\subset V,\ U\cap V =\emptyset
+\]を充たすことである。
+\end{df}つまり、空間の非正規性を証明するには、互いに素な２つの閉集合で開集合で分離できない物の存在を示せば良いのである。\\ 
+以下で使う定義
+\begin{df}
+$\mathbb{N}$は\textgt{$0$を含めない自然数全体}とし、\textgt{以下常に離散位相を入れて考える。}
+\end{df}
+
+そして
+\begin{df}$\Lambda$を添え字集合として位相空間$T$を
+\[
+T=\prod_{\lambda \in \Lambda} \mathbb{N}=\mathbb{N}^\Lambda
+\]
+と定義する。もちろん$T$には直積位相をいれて考える。
+\end{df}
+\begin{df}
+\textgt{$T$の基本開集合}とは
+$U=\prod_{\lambda}U_{\lambda}$と書き表される集合で、有限個の$\lambda$について$U_{\lambda}$は１点集合で、それ以外の$\lambda$について$U_\lambda=\mathbb{N}$となるような$T$の部分集合のことである。
+\end{df}
+$T$には直積位相が入っており$\mathbb{N}$には離散位相が入っているので基本開集合全体は$T$の開基となる。\\ 
+\begin{df}基本開集合$U$について
+\[
+\mathfrak{R}(U)=\{\lambda \in \Lambda\ |\ \pi_{\lambda}(U)が1元集合\}
+\]
+と定義する。もちろん$\pi_{\lambda}$は第$\lambda$成分への射影である。つまり$\mathfrak{R}(U)$は基本開集合$U$の一個の値しか取らない座標$\lambda$の全体の集合である。基本開集合の定義から$\mathfrak{R}(U)$は有限集合である。
+\end{df}
+\begin{df}各$k\in \mathbb{N}$に対して
+\[
+A_k=\{x=\{\xi_{\lambda}\} \in T\ |\ k以外のn\in \mathbb{N} について\xi_{\lambda}=nとなる\lambda は高々ひとつしか存在しない\}
+\]
+と定義する。
+\end{df}この$A_k$を用いて定理を証明するのだがその前に$A_k$の性質を２つ紹介して定理に備えよう。\\ 
+$A_k$について次が成り立つ。
+\begin{claim}各$k\in \mathbb{N}$について$A_k$は閉集合
+\end{claim}
+\begin{proof}$\alpha=\{a_{\lambda}\}\in T\backslash A_k$とすると、$A_k$の定義からある$k$とは異なる$n\in \mathbb{N}$と$i\neq j,\ i,j\in \Lambda$が存在して
+\[
+a_i=a_j=n
+\]となる。ここで$T$の開集合$U=\prod_{\lambda}U_{\lambda}$を
+\[
+U_i=U_j=\{n\},\ U_{\lambda}=\mathbb{N}\ (\lambda\neq i,j)
+\]
+と定義すると明らかに$a\in U$と$U\cap A_k=\emptyset$がわかり、$A_k$が開集合であることがわかる。
+\end{proof}
+\begin{claim}$\Lambda$が非可算のとき$i\neq j$ならば$A_i\cap A_j=\emptyset$
+\end{claim}証明は明らかである。
+いよいよ定理を述べよう。
+\begin{theorem}[Stoneの定理]\label{stone}$\Lambda$が非可算集合の時、$T$は非正規
+\end{theorem}
+\begin{proof}先の性質1,2より、$A_1$と$A_2$は交わらない閉集合の組である。今、
+$A_1 \subset U, A_2\subset V$となる任意の開集合の組$U,V$を考え、$U\cap V$の元を構成する。この元の存在と開集合の組の任意性から$T$が非正規であることがわかる。
+
+今から可算列$\{x_n\}\subset A_1$と$x_n\in A_1 \subset U_n$となる基本開集合の可算列$\{U_n\}$、正の整数の狭義単調増加列$\{M(n)\}$及び
+$\{\lambda_{n}\}\subset \Lambda$を帰納的に構成していく。\\ 
+$n=1$の時、$x_1$は全ての座標が$1$である$T$の元とする。つまり$x_1=\{\xi_{\lambda}\}$としたとき
+\[
+\xi_{\lambda}=1\ (\forall\lambda\in\Lambda)
+\]明らかに$x_1\in A_1 \subset U$であり、基本開集合$U_1$が存在して$x_1 \in U_1 \subset U$となる。この時の$\mathfrak{R}(U_1)$の元の個数を$M(1)$とし$\mathfrak{R}(U_1)$の元に適当に番号をつけて$\mathfrak{R}(U_1)=\{\lambda_1 \dots \lambda_{M(1)}\}$とする。\\ 
+$n$まで諸々が構成されたとして$n+1$の時、$x_{n+1}=\{\xi_{\lambda}\}$を
+\[
+\xi_{\lambda}=
+\begin{cases}
+k & \text{ $\lambda=\lambda_{k},1\le k\le M(n)$のとき} \\
+1 & \text{その他}
+\end{cases}
+\]
+と定義する。明らかに$x_{n+1}\in A_1\subset U$である。この時やはり基本開集合$U_{n+1}$が存在して$x_{n+1}\in U_{n+1}\subset U$となる。近傍を小さく取り直して
+$\mathfrak{R}(U_{n})\subsetneqq \mathfrak{R}(U_{n+1})$と仮定しても良く、$\mathfrak{R}(U_{n+1})$の元の個数を$M(n+1)$とし、
+$\mathfrak{R}(U_{n+1})\smallsetminus \mathfrak{R}(U_{n})$の元を$\{\lambda_{M(n)+1}\dots \lambda_{M(n+1)}\}$とする。（$M(n)+1$と$M(n+1)$の違いに注意せよ）\\ 
+上で得られた可算列を用いて$y=\{\eta_{\lambda}\}$を
+\[
+\eta_{\lambda}=
+\begin{cases}
+k & \text{ $\lambda=\lambda_{k}$のとき} \\
+2 & \text{その他の場合}
+\end{cases}
+\]
+と定義する。
+明らかに$y\in A_2\subset V$である。この時基本開集合$V_0$が存在して
+$y\in V_0\subset V$となる。$\mathfrak{R}(V_0)$は有限なので
+\[\exists n\in\mathbb{N}\ k>M(n)\Rightarrow \lambda_{k}\in \Lambda \smallsetminus \mathfrak{R}(V_0)\]
+となる。この$n$を用いて$z=\{\zeta_{\lambda}\}$を
+\[
+\zeta_{\lambda}=
+\begin{cases}
+k & \text{$\lambda=\lambda_{k},1\le k\le M(n)$のとき} \\
+1 & \text{$M(n)<k\le M(n+1)$のとき} \\
+2 & \text{その他の場合}
+\end{cases}
+\]
+
+と定義する。$V_0=\prod_{\lambda}V_{\lambda}$（$V_{\lambda}$は一元集合か$\mathbb{N}$）と書けるが、$z$の定義から$V_{\lambda}$が１元集合であるような座標では$z$と$y$の値は一致してるので
+\[
+z\in V_0
+\]
+そして同様に$U_{n+1}=\prod_{\lambda}U_{\lambda}$（$U_{\lambda}$は一元集合か$\mathbb{N}$）と書けるが、$z$の定義から$U_{\lambda}$が１元集合となる座標では$z$と$x_{n+1}$の値は一致するので
+\[
+z\in U_{n+1}
+\]
+よって
+$z\in U_{n+1}\cap V_0\subset U\cap V$となり、$U\cap V\neq \emptyset$が分かった。
+結論として$T$は非正規である。
+\end{proof}
+
+\begin{corollary}$\{X_{\lambda}\}_{\lambda\in \Lambda}$はノンコンパクト距離空間の非加算な族とする。$($各$X_{\lambda}$は異なっても良い$)$\\ 
+この時、
+$\displaystyle{\prod_{\lambda\in \Lambda}X_{\lambda}}$は非正規である。
+\end{corollary}
+\begin{proof}正規空間の閉集合は正規空間となることと、ノンコンパクトな距離空間は可算離散空間を閉集合として持つ（なぜか？）ことからわかる。
+\end{proof}
+位相群は必ず完全正則となる事がよく知られているが、では常に正規なのだろうかというう疑問が起こる。ストーンの定理を用いるとこの疑問に対し反例を容易に作る事ができる。
+\begin{corollary}[完全正則だが正規ではない位相群の例]位相群の直積が直積位相に対して位相群になってることを使うと、$\Lambda$を非可算集合として
+\[
+\mathbb{Z}^{\Lambda}
+\]は完全正則だが正規でない位相群であることがわかる。
+
+\end{corollary}
+
+\section{応用}
+このセクションではStoneの定理からわかる重要なひとつの応用を述べる。
+\begin{df}[可算コンパクト]
+位相空間$X$はその上の任意の可算開被覆に有限部分被覆が存在するとき可算コンパクトという。また、可算コンパクト性は空間$X$上の非空閉集合からなる任意の有限交叉的な可算族が非空な共通部分をもつことと同値である。またまた、可算個の非空閉集合からなる単調減少\footnote{つまり$F_{n}\supset F_{n+1}$ということ}な$\{F_n\}_{n\in \mathbb{N}}$族が非空な共通部分を持つことと可算コンパクト性は同値である。
+\end{df}
+\begin{df}
+位相空間$X$の部分空間$M$と点$x\in X$について$x$が部分集合$M$の集積点であるとは、
+\[
+x\in \cl(M\setminus\{x\})
+\]
+を充たすことである。つまり、$x$の任意の近傍$V$について、ある$m\in M$が存在して$m\in V$と$x\neq m$を充たすということである。
+\end{df}
+\begin{df}[集積コンパクト]
+位相空間$X$の任意の無限集合が集積点を持つとき、空間$X$は集積コンパクトであるという。無限集合は可算部分集合を持つので空間$X$が集積コンパクトであることと、$X$の任意の可算無限集合が集積点を持つことは同値である。
+\end{df}
+\begin{proposition}
+$T_1$空間$X$において可算コンパクト性と集積コンパクト性は同値である。
+\end{proposition}
+\begin{proof}\par
+[可算コンパクト$\Longrightarrow$集積コンパクトの証明]\par
+$X$の任意の可算集合に集積点があることを示せばよい。$\{a_n\}_{n\in \mathbb{N}}$を可算集合とする。添え字付けは単射であるとする。\footnote{つまり、$n\neq m\Longrightarrow a_n\neq a_m$ということである。}さて、
+\[
+F_n=\cl(\{a_i\ |\ i\ge n\})
+\]
+とすると、もちろん$F_n$は非空な閉集合で$F_n\supset F_{n+1}$を充たす。よって$X$の可算コンパクト性から
+\[
+\bigcap_{n\in \mathbb{N}}F_n\neq\O
+\]
+である。ここで$\displaystyle c \in \bigcap_{n\in \mathbb{N}}F_n$を取ろう。このとき$c$の任意の近傍$V$と任意の$n$について
+\[
+V\cap \{a_i\ |\ i\ge n\}\neq\O
+\]
+であり、$\{a_n\}_{n\in \mathbb{N}}$の添え字付けは単射なので$c$は$\{a_n\}_{n\in \mathbb{N}}$の集積点となる。よって$X$は集積コンパクトである。（実は$T_1$を用いていないことに注意しよう。$T_1$を使うのは逆を導くときということである。）\par
+[可算コンパクト$\Longrightarrow$集積コンパクトの証明終わり]\par
+[集積コンパクト$\Longrightarrow$可算コンパクトの証明]\par
+非空な閉集合なる単調減少な族$\{F_n\}_{n\in \mathbb{N}}$を考える。必要なら番号を付け替えて単調減少よりも強く
+\[
+F_n\supsetneq F_{n+1}
+\]
+としてもよい。（狭義の単調減少）
+さて$x_n$を
+\[
+x_n\in F_n\setminus F_{n+1}
+\]
+を充たすものとしよう。このとき$A=\{x_n\}_{n\in\mathbb{N}}$は添え字付けが単射なので可算集合である。そして$X$の集積コンパクト性から$A$には集積点$c$が存在する。もしこのときある$m\in \mathbb{N}$が存在して$c=x_m$となったとしよう。
+\par このとき$F_{m+1}$は閉集合であり$F_{m+1}\supset\{x_{i}\ |\ i>m\}$であるから$X\setminus F_{m+1}$は$c=x_m$を含み、$\{x_{i}\ |\ i>m\}$と交わらない開集合であり、また$T_1$性から$X\setminus \{x_1,x_2,\cdots ,x_{m-1}\}$は$c=x_m$を含み、$\{x_1,x_2,\cdots ,x_{m-1}\}$と交わらない開集合であるから、これら二つの開集合の共通部分を$O$とするとこれは$c=x_m$を含む開集合であり、$O\cap A=\{x_m\}$となり、$c$が$A$の集積点であることと矛盾する。よって任意の$m\in \mathbb{N}$について$c\neq x_m$である。\par
+以上のことを踏まえると任意の$m\in \mathbb{N}$について$X\setminus \{x_1,x_2,\cdots ,x_{m}\}$は$T_1$性から開集合であり、$c$を含む開集合である。このことから$c$は任意の$m\in \mathbb{N}$について$\{x_i\ |\ i>m\}$の集積点でもある。$x_n$の定義と$F_n$が閉集合であることから、特に任意の$n\in \mathbb{N}$について$c\in F_n$である。よって
+\[
+\bigcap_{n\in \mathbb{N}}F_n\ni c
+\]
+なので$\displaystyle \bigcap_{n\in \mathbb{N}}F_n\neq \O$がわかり、$X$の可算コンパクト性が分かった。
+[集積コンパクト$\Longrightarrow$可算コンパクトの証明終わり]
+\end{proof}
+
+\begin{proposition}
+$X$が$T_1$空間でかつ\textbf{可算コンパクトではない}とすると$X$はその相対位相が離散位相である可算な閉部分集合を持つ。
+\end{proposition}
+\begin{proof}
+先の命題からこのような$X$には集積点を持たない可算集合$M$が存在するが、これはつまり$M$と$M$の孤立点全体が一致しているということであり、$M$は閉集合である。$M$は孤立点からのみ成るということから$M$がその相対位相で閉集合であることは直ちに従う、
+\end{proof}
+\begin{theorem}
+非空な$T_1$位相空間の族$\{X_{\lambda}\}_{\lambda\in \Lambda}$に於いて$\displaystyle \prod_{\lambda\in \Lambda}X_{\lambda}$が正規\footnote{このとき自動的に$T_4$にもなる。}なら$\Lambda$の高々可算な元を除いて$X_{\lambda}$は可算コンパクトである。
+\end{theorem}
+\begin{proof}
+もし	非可算個の$\lambda\in \Lambda$について$X_{\lambda}$が\textbf{可算コンパクトではない}とすると先の命題からそのような$X_{\lambda}$は可算な閉集合でその相対位相が離散位相になるようなものが存在するが、ともすると$\displaystyle \prod_{\lambda\in \Lambda}X_{\lambda}$はその相対位相が可算離散位相の非可算直積位相空間と同相になるような閉部分空間が存在することになる。その閉集合は定理\ref{stone}（Stoneの定理）から非正規であるが、正規空間の閉部分集合は正規になるので、これは矛盾である。よって背理法から定理の証明は終わる。
+\end{proof}
+
+
+\begin{thebibliography}{9}
+\bibitem{1}A.H.Stone,Paracompactness and product spaces,Bull. Amer. Math. Soc. 54(1948),977-983
+\end{thebibliography}
+
+
+\end{document}
