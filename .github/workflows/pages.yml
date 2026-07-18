@@ -27,10 +27,20 @@ jobs:
           python3 scripts/paper_tool.py catalog --check
           python3 scripts/migration_ledger.py check
 
+      - name: Select manifest-approved TeX roots
+        id: latex-roots
+        run: |
+          {
+            echo 'files<<EOF'
+            python3 scripts/paper_tool.py build-roots
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
       - name: Build PDF with pLaTeX
+        if: steps.latex-roots.outputs.files != ''
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: papers/*/main.tex
+          root_file: ${{ steps.latex-roots.outputs.files }}
           work_in_root_file_dir: true
           args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
 

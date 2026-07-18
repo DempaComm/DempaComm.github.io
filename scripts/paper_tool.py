@@ -1068,6 +1068,15 @@ def command_catalog(args: argparse.Namespace) -> None:
     print("WROTE index.html and keywords.txt files")
 
 
+def command_build_roots(args: argparse.Namespace) -> None:
+    """List only TeX roots whose manifests explicitly enable compilation."""
+    for manifest_path, manifest in manifests():
+        if not manifest["build"]["enabled"]:
+            continue
+        root = safe_relative_path(str(manifest["build"]["root"]))
+        print((manifest_path.parent / root).relative_to(ROOT))
+
+
 def rendered_keywords(manifest: dict[str, Any]) -> str:
     lines = [
         "# タイトル",
@@ -2100,6 +2109,11 @@ def parser() -> argparse.ArgumentParser:
     catalog_parser = subparsers.add_parser("catalog", help="generate index.html cards")
     catalog_parser.add_argument("--check", action="store_true")
     catalog_parser.set_defaults(func=command_catalog)
+
+    build_roots_parser = subparsers.add_parser(
+        "build-roots", help="list manifest-approved TeX roots for CI compilation"
+    )
+    build_roots_parser.set_defaults(func=command_build_roots)
 
     stage_parser = subparsers.add_parser("stage", help="prepare the GitHub Pages directory")
     stage_parser.add_argument("output")
