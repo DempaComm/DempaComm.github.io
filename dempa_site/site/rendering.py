@@ -6,6 +6,7 @@ import html
 from pathlib import Path
 from urllib.parse import quote
 
+from dempa_site.catalog.metadata import grouped_math_sections, grouped_tags
 from dempa_site.config import (
     BLOG_ONLY_KIND,
     HOME_PAPER_LIMIT,
@@ -26,16 +27,6 @@ from dempa_site.site.cards import (
     tag_href,
 )
 from dempa_site.site.layout import page_head, site_navigation
-
-
-def grouped_tags(
-    selected: list[tuple[Path, Paper]],
-) -> dict[str, list[Paper]]:
-    grouped: dict[str, list[Paper]] = {}
-    for _, manifest in selected:
-        for tag in manifest["tags"]:
-            grouped.setdefault(tag, []).append(manifest)
-    return grouped
 
 
 def rendered_tag_index(selected: list[tuple[Path, Paper]]) -> str:
@@ -367,16 +358,6 @@ def rendered_math_index_item(
 {tag_links}
             </div>
           </li>"""
-
-
-def grouped_math_sections(
-    selected: list[tuple[Path, Paper]],
-) -> dict[str, list[Paper]]:
-    grouped: dict[str, list[Paper]] = {section: [] for section in MATH_SECTIONS}
-    for _, manifest in selected:
-        section = str(manifest.get("math_section", "")).strip() or "その他"
-        grouped[section].append(manifest)
-    return grouped
 
 
 def representative_math_tags(papers: list[Paper]) -> list[str]:

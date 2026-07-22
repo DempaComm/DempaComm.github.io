@@ -10,11 +10,9 @@ import shutil
 import subprocess
 import sys
 from datetime import datetime
-from html.parser import HTMLParser
 from json import JSONDecodeError
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import unquote, urlsplit
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -24,9 +22,8 @@ from dempa_site.config import (  # noqa: E402
     BLOG_ONLY_KIND,
     DEFAULT_BUILD_ENGINE,
     LATEXMKRC_BY_ENGINE,
-    MATH_SECTION_DETAILS,
-    SITE_URL,
 )
+from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.dates import (  # noqa: E402
     local_now_seconds,
     parse_iso_datetime,
@@ -44,20 +41,9 @@ from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     safe_relative_path as shared_safe_relative_path,
 )
-from dempa_site.site.cards import has_pdf  # noqa: E402
-from dempa_site.site.feeds import rendered_feed  # noqa: E402
-from dempa_site.site.rendering import (  # noqa: E402
-    grouped_math_sections,
-    grouped_tags,
-    rendered_archive_page,
-    rendered_home_page,
-    rendered_math_page,
-    rendered_math_section_page,
-    rendered_not_found_page,
-    rendered_paper_page,
-    rendered_tag_page,
-)
-from dempa_site.site.sitemap import rendered_sitemap  # noqa: E402
+from dempa_site.site.links import local_link_errors  # noqa: E402
+from dempa_site.site.rendering import rendered_home_page  # noqa: E402
+from dempa_site.site.staging import stage_site  # noqa: E402
 
 
 PATHS = RepositoryPaths.from_environment("PAPER_REPO_ROOT", __file__)
@@ -196,87 +182,6 @@ def command_build_roots(args: argparse.Namespace) -> None:
         print((manifest_path.parent / root).relative_to(ROOT))
 
 
-def rendered_keywords(manifest: Paper) -> str:
-    lines = [
-        "# タイトル",
-        manifest["title"],
-        "",
-        "# 電波通信のタグ",
-        *manifest["tags"],
-        "",
-        "# 検索キーワード",
-        *manifest["keywords"],
-        "",
-    ]
-    return "\n".join(lines)
-
-
-class LocalLinkParser(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__()
-        self.links: list[str] = []
-        self.ids: set[str] = set()
-
-    def handle_starttag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
-        for key, value in attrs:
-            if key == "id" and value:
-                self.ids.add(value)
-        attribute = "href" if tag in {"a", "link"} else "src" if tag == "script" else ""
-        if not attribute:
-            return
-        for key, value in attrs:
-            if key == attribute and value:
-                self.links.append(value)
-
-
-def local_link_errors(site_root: Path) -> list[str]:
-    errors: list[str] = []
-    page_ids: dict[Path, set[str]] = {}
-    for page in sorted(site_root.rglob("*.html")):
-        parser = LocalLinkParser()
-        parser.feed(page.read_text(encoding="utf-8"))
-        page_ids[page.resolve()] = parser.ids
-        for raw_link in parser.links:
-            parsed = urlsplit(raw_link)
-            if parsed.scheme or parsed.netloc or raw_link.startswith(("mailto:", "tel:")):
-                continue
-            decoded_path = unquote(parsed.path)
-            if not decoded_path:
-                target = page
-            elif decoded_path.startswith("/"):
-                target = site_root / decoded_path.lstrip("/")
-            else:
-                target = page.parent / decoded_path
-            if decoded_path.endswith("/"):
-                target /= "index.html"
-            target = target.resolve()
-            try:
-                target.relative_to(site_root.resolve())
-            except ValueError:
-                errors.append(f"{page.relative_to(site_root)}: unsafe link {raw_link}")
-                continue
-            if not target.is_file():
-                errors.append(
-                    f"{page.relative_to(site_root)}: missing target {raw_link}"
-                )
-                continue
-            if parsed.fragment and target.suffix.casefold() == ".html":
-                target_ids = page_ids.get(target)
-                if target_ids is None:
-                    target_parser = LocalLinkParser()
-                    target_parser.feed(target.read_text(encoding="utf-8"))
-                    target_ids = target_parser.ids
-                    page_ids[target] = target_ids
-                fragment = unquote(parsed.fragment)
-                if fragment not in target_ids:
-                    errors.append(
-                        f"{page.relative_to(site_root)}: missing fragment {raw_link}"
-                    )
-    return errors
-
-
 def command_check_links(args: argparse.Namespace) -> None:
     site_root = Path(args.site).resolve()
     if not site_root.is_dir():
@@ -291,123 +196,9 @@ def command_check_links(args: argparse.Namespace) -> None:
 
 def command_stage(args: argparse.Namespace) -> None:
     selected = manifests()
-    errors: list[str] = []
-    for manifest_path, manifest in selected:
-        errors.extend(verify_one(manifest_path, manifest))
-    if errors:
-        for error in errors:
-            print(f"ERR {error}", file=sys.stderr)
-        raise PaperToolError("refusing to stage files that failed verification")
-    if rendered_index() != INDEX_PATH.read_text(encoding="utf-8"):
-        raise PaperToolError("refusing to stage a stale index.html")
-    for manifest_path, manifest in selected:
-        keyword_path = manifest_path.parent / "keywords.txt"
-        if (
-            not keyword_path.is_file()
-            or keyword_path.read_text(encoding="utf-8") != rendered_keywords(manifest)
-        ):
-            raise PaperToolError(
-                f"refusing to stage stale keywords.txt for {manifest['slug']}"
-            )
-
     output = Path(args.output).resolve()
-    if output == ROOT or output in ROOT.parents:
-        raise PaperToolError("stage output must not be the repository or one of its parents")
-    if output.exists():
-        shutil.rmtree(output)
-    output.mkdir(parents=True)
-    shutil.copy2(INDEX_PATH, output / "index.html")
-    shutil.copy2(ROOT / "styles.css", output / "styles.css")
-    shutil.copy2(SEARCH_SCRIPT_PATH, output / "search.js")
-    for asset in (
-        "favicon.ico",
-        "favicon-16.png",
-        "favicon-32.png",
-        "apple-touch-icon.png",
-        "icon-192.png",
-        "icon-512.png",
-        "og-image.png",
-        "site.webmanifest",
-    ):
-        shutil.copy2(ROOT / asset, output / asset)
-    archive_dir = output / "archive"
-    archive_dir.mkdir()
-    (archive_dir / "index.html").write_text(
-        rendered_archive_page(selected), encoding="utf-8"
-    )
-    (output / "404.html").write_text(
-        rendered_not_found_page(), encoding="utf-8"
-    )
-    (output / "feed.xml").write_text(
-        rendered_feed(selected), encoding="utf-8"
-    )
-    (output / "sitemap.xml").write_text(
-        rendered_sitemap(selected), encoding="utf-8"
-    )
-    (output / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
-        encoding="utf-8",
-    )
-
-    for manifest_path, manifest in selected:
-        source_dir = manifest_path.parent
-        target_dir = output / "papers" / manifest["slug"]
-        target_dir.mkdir(parents=True)
-        shutil.copy2(manifest_path, target_dir / "paper.json")
-        shutil.copy2(source_dir / "keywords.txt", target_dir / "keywords.txt")
-        readme = source_dir / "README.md"
-        if readme.is_file():
-            shutil.copy2(readme, target_dir / "README.md")
-        for entry in manifest["files"]:
-            if not entry["public"]:
-                continue
-            relative = safe_relative_path(entry["path"])
-            target = target_dir / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source_dir / relative, target)
-        if manifest["build"]["enabled"]:
-            pdf = source_dir / "main.pdf"
-            if not pdf.is_file():
-                raise PaperToolError(f"generated PDF is missing: {pdf}")
-            shutil.copy2(pdf, target_dir / "main.pdf")
-        elif has_pdf(manifest):
-            shutil.copy2(source_dir / "published.pdf", target_dir / "main.pdf")
-        (target_dir / "index.html").write_text(
-            rendered_paper_page(manifest), encoding="utf-8"
-        )
-        for legacy_slug in manifest["legacy_slugs"]:
-            legacy_dir = output / "papers" / legacy_slug
-            if legacy_dir.exists():
-                raise PaperToolError(f"legacy slug collision: {legacy_slug}")
-            shutil.copytree(target_dir, legacy_dir)
-
-    for tag, papers in grouped_tags(selected).items():
-        if tag in {".", ".."} or "/" in tag or "\0" in tag:
-            raise PaperToolError(f"tag cannot be used as a page path: {tag!r}")
-        tag_dir = output / "tags" / tag
-        tag_dir.mkdir(parents=True)
-        (tag_dir / "index.html").write_text(
-            rendered_tag_page(tag, papers), encoding="utf-8"
-        )
-    math_dir = output / "math"
-    math_dir.mkdir()
-    (math_dir / "index.html").write_text(
-        rendered_math_page(selected), encoding="utf-8"
-    )
-    for section, papers in grouped_math_sections(selected).items():
-        section_dir = math_dir / str(MATH_SECTION_DETAILS[section]["slug"])
-        section_dir.mkdir()
-        (section_dir / "index.html").write_text(
-            rendered_math_section_page(section, papers), encoding="utf-8"
-        )
-    link_errors = local_link_errors(output)
-    if link_errors:
-        for error in link_errors:
-            print(f"ERR {error}", file=sys.stderr)
-        raise PaperToolError(
-            f"refusing to publish a site with {len(link_errors)} broken link(s)"
-        )
-    print(f"STAGED {len(selected)} papers in {output}")
+    report = stage_site(PATHS, selected, output)
+    print(f"STAGED {report.paper_count} papers in {report.destination}")
 
 
 def resolve_source_dir(spec_path: Path, spec: dict[str, Any]) -> Path:

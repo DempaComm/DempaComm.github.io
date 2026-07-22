@@ -222,6 +222,11 @@ python3 scripts/paper_tool.py stage _site
 python3 scripts/paper_tool.py check-links _site
 ```
 
+`stage` は公開物を一時領域へ生成し、SHA検査、ページ生成、ファイル配置、RSS・
+サイトマップ生成、追加機能、リンク検査がすべて成功した場合だけ `_site` を置き換える。
+途中で失敗した場合は一時領域を削除し、すでにある `_site` はそのまま残る。追加機能は
+必須と任意を区別し、任意の変換に失敗してもPDF・TeXと基本記事ページを公開できる。
+
 トップページには新着3件と主要な入口だけを表示する。全原稿の検索欄、件数付きタグ索引、公開年別記事一覧は `archive/` に生成する。検索欄では、題名、説明、タグ、検索キーワードを横断検索でき、元タグと公開年による絞り込みもできる。タグごとの記事一覧は `tags/<タグ名>/` に公開年別で自動生成する。
 
 公開時には `404.html`、`feed.xml`、`sitemap.xml`、`robots.txt` も生成する。`stage` とGitHub Actionsの `check-links` は、公開HTML内のローカルリンク切れを検出して公開を止める。

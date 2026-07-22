@@ -6,9 +6,9 @@ from pathlib import Path
 from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
+from dempa_site.catalog.metadata import grouped_tags
 from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, SITE_URL
 from dempa_site.manifests.model import Paper
-from dempa_site.site.rendering import grouped_tags
 
 
 def rendered_sitemap(selected: list[tuple[Path, Paper]]) -> str:
@@ -42,4 +42,3 @@ def rendered_sitemap(selected: list[tuple[Path, Paper]]) -> str:
 {chr(10).join(entries)}
 </urlset>
 """
-
