@@ -14,9 +14,9 @@ LuaLaTeX、HTML、Typst、全文検索、原稿関係図、読書経路などを
 - 公開記事は191件。
 - `scripts/paper_tool.py` は約320行の互換CLIとなり、HTML生成、公開配置、SHA保護、
   個人情報検査、変更承認、四種の取り込みを専用モジュールへ分離済みである。
-- `scripts/migration_ledger.py` は約2,000行となり、433行の確認ページ生成を分離済み
-  である。台帳、候補照合、CLIは第7段階で隔離する。
-- 自動テストは50件あり、手元では成功している。
+- `scripts/migration_ledger.py` は18行の互換窓口となり、約2,000行の台帳本体と
+  非公開確認ページを `tools/legacy_migration/` へ隔離済みである。
+- 自動テストは52件あり、手元では成功している。
 - 191記事のSHA検査、カタログ検査、台帳231件の検査、公開サイト生成、リンク検査は
   成功している。
 - GitHub Actionsは単体テスト、SHA、カタログ、台帳、公開サイトの基準スナップ
@@ -387,12 +387,31 @@ CLIは従来どおり `inspect-file`、`import-tex`、`import-pdf`、`import-pap
 全記事の移行が完了しているため、台帳実装を `tools/legacy_migration/` へ移し、通常の
 サイト生成から切り離す。
 
-- `scripts/migration_ledger.py` は互換CLIとして残す。
-- 台帳検査はCIで継続する。
-- 433行の確認ページを専用テンプレートへ移す。
-- 新機能側から台帳CSV・JSONを直接参照しない。
+進捗：
+
+- [x] 約2,000行の台帳、候補走査、MT照合、検査、CLI本体を
+  `tools/legacy_migration/cli.py` へ移す。
+- [x] 非公開メタデータ確認ページを `tools/legacy_migration/review.py` へ移す。
+- [x] `scripts/migration_ledger.py` を18行の互換窓口として残す。
+- [x] `LEDGER_REPO_ROOT` によるテスト用ルート差し替えを維持する。
+- [x] GitHub Actionsの既存台帳検査コマンドを維持する。
+- [x] 通常サイトのモジュールが台帳・legacy実装を参照しないことをテストする。
+- [x] 互換窓口が台帳処理を持たないことを構造テストする。
+- [x] 既存台帳コマンド、全52テスト、191記事、リンク、公開物の一致を確認する。
+
+実装後も、互換CLIとCIの台帳検査は維持する。約430行の確認ページはlegacy専用生成器で
+管理し、新機能側から台帳CSV・JSONを直接参照しない。
 
 台帳を全面的に作り直すのではなく、凍結後も必要時に保守できる状態を目指す。
+
+利用者向けコマンドと台帳ファイルの場所は変更しない。既存のREADME、手順書、
+GitHub Actionsは引き続き `python3 scripts/migration_ledger.py ...` を使用する。互換窓口が
+legacy実装の `main` を呼び出すため、過去の操作例を修正せず利用できる。
+
+`dempa_site/` 以下は `migration_ledger`、`legacy_migration`、`ledger/` を参照しない。
+したがって、通常の原稿取り込み、カタログ生成、公開サイト生成、新機能追加は台帳の
+CSV・JSON形式や候補照合の内部処理に依存しない。台帳検査だけは移行記録の監査として
+CIで継続する。
 
 完了条件：通常のサイト生成が台帳内部実装に依存せず、既存台帳コマンドも動く。
 

@@ -15,7 +15,6 @@ from dempa_site.site.rendering import (
     rendered_paper_page,
     rendered_tag_page,
 )
-from dempa_site.site.review import metadata_review_html
 from dempa_site.site.sitemap import rendered_sitemap
 
 
@@ -108,24 +107,6 @@ class PublicRenderingTest(unittest.TestCase):
             "https://dempacomm.github.io/tags/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93/",
             sitemap,
         )
-
-    def test_private_metadata_review_renderer_escapes_embedded_json(self) -> None:
-        page = metadata_review_html(
-            [
-                {
-                    "record_id": "fixture:1",
-                    "local_title": "</script><script>alert(1)</script>",
-                    "metadata_match": "unmatched",
-                    "metadata_published_at": "",
-                    "source_dir": "fixture",
-                    "priority_archive": False,
-                }
-            ]
-        )
-        self.assertIn("メタデータ候補確認", page)
-        self.assertIn("<\\/script><script>alert(1)<\\/script>", page)
-        self.assertIn('content="noindex,nofollow,noarchive"', page)
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,4 @@
-"""Render the private migration metadata review page."""
+"""Render the private legacy-migration metadata review page."""
 
 from __future__ import annotations
 
