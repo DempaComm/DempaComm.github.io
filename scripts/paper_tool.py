@@ -30,6 +30,7 @@ from dempa_site.protection.privacy import inspect_file  # noqa: E402
 from dempa_site.site.links import local_link_errors  # noqa: E402
 from dempa_site.site.rendering import rendered_home_page  # noqa: E402
 from dempa_site.site.staging import stage_site  # noqa: E402
+from tools.check_all import complete_check_steps, run_check_suite  # noqa: E402
 
 
 PATHS = RepositoryPaths.from_environment("PAPER_REPO_ROOT", __file__)
@@ -142,6 +143,15 @@ def command_stage(args: argparse.Namespace) -> None:
     print(f"STAGED {report.paper_count} papers in {report.destination}")
 
 
+def command_check_all(args: argparse.Namespace) -> None:
+    output = Path(args.output)
+    if not output.is_absolute():
+        output = ROOT / output
+    output = output.resolve()
+    steps = complete_check_steps(PROJECT_ROOT, output)
+    run_check_suite(steps, ROOT)
+
+
 def command_inspect_file(args: argparse.Namespace) -> None:
     source = Path(args.file).expanduser().resolve()
     result = inspect_file(source, PRIVACY_REVIEW_DIR)
@@ -247,6 +257,17 @@ def parser() -> argparse.ArgumentParser:
     )
     links_parser.add_argument("site")
     links_parser.set_defaults(func=command_check_links)
+
+    check_all_parser = subparsers.add_parser(
+        "check-all", help="run every routine check and prepare the local site"
+    )
+    check_all_parser.add_argument(
+        "--output",
+        default="_site",
+        metavar="DIR",
+        help="staged site directory (default: _site)",
+    )
+    check_all_parser.set_defaults(func=command_check_all)
 
     inspect_parser = subparsers.add_parser(
         "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"
