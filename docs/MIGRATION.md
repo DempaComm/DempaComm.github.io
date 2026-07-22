@@ -139,7 +139,7 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json --privacy-r
 2. 指定ファイルをその保存先へコピーする。
 3. コピー元とコピー先のSHA-256が一致することを確認する。
 4. 原本SHA-256と現在承認済みSHA-256が同一の `paper.json` を作る。
-5. 標準の `.latexmkrc` がなければ生成する。
+5. 選択したTeXエンジン用の標準 `.latexmkrc` がなければ生成する。
 6. `paper.json` から `keywords.txt` と `index.html` の原稿一覧を再生成する。
 
 取り込み処理は保存先を新規作成してから、すべてのコピー、SHA確認、`paper.json` の
@@ -151,7 +151,12 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json --privacy-r
 
 既存の保存先がある場合は上書きせず停止する。
 
-取り込み仕様では `math_section` に数学記事総覧での主分類を、`build_engine` にTeXエンジンを指定できる。`math_section` が空欄または省略された原稿は総覧の「その他」に入り、`build_engine` が空欄または省略された場合は `platex` として処理する。明示的に指定できる `build_engine` は現在 `platex` のみ。
+取り込み仕様では `math_section` に数学記事総覧での主分類を、`build_engine` にTeXエンジンを指定できる。`math_section` が空欄または省略された原稿は総覧の「その他」に入り、`build_engine` が空欄または省略された場合は `platex` として処理する。明示的に指定できる値は `platex`、`uplatex`、`pdflatex`、`lualatex`、`xelatex` である。通常取り込みは選択したエンジンに対応する `.latexmkrc` を自動生成し、GitHub Actionsは `paper.json` の実効エンジンごとにビルドルートを分けてlatexmkを実行する。
+
+既存原稿のエンジンを変更する場合は、`paper.json` の `build.engine` と原稿フォルダの
+`.latexmkrc` を同じエンジンへそろえる。一括変換は行わず、原稿ごとに手元でビルドして
+PDF、数式、参照、図版を確認する。TeX自体を変更する必要が生じた場合は、本書の
+「VS Codeで保護されたTeX・PDFを更新する」に従って個人情報の再検査とSHA承認を行う。
 
 ## 検証と監査
 
@@ -237,6 +242,14 @@ TeXのビルドも手元で確認する場合は、対象フォルダでGitHub A
 cd papers/2018-10-14-01
 latexmk -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode main.tex
 cd ../..
+```
+
+上の例はpLaTeXおよびupLaTeX用である。ほかのエンジンでは `-pdfdvi` をそれぞれ
+`-pdf`（pdfLaTeX）、`-lualatex`（LuaLaTeX）、`-xelatex`（XeLaTeX）へ置き換える。
+CIが選ぶ対象を事前確認するには、たとえば次を実行する。
+
+```sh
+python3 scripts/paper_tool.py build-roots --engine lualatex
 ```
 
 最後に差分を確認して、予定したファイルと `paper.json` だけをコミットする。

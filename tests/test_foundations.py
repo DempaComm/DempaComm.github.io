@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from dempa_site.config import (
     DEFAULT_BUILD_ENGINE,
+    LATEXMK_ARGS_BY_ENGINE,
     LATEXMKRC_BY_ENGINE,
     MATH_SECTIONS,
     MATH_SECTION_DETAILS,
@@ -96,6 +97,33 @@ class SharedFoundationTest(unittest.TestCase):
         self.assertEqual({"", *MATH_SECTIONS}, set(VALID_MATH_SECTIONS))
         self.assertIn(DEFAULT_BUILD_ENGINE, LATEXMKRC_BY_ENGINE)
         self.assertIn("platex", LATEXMKRC_BY_ENGINE[DEFAULT_BUILD_ENGINE])
+        self.assertEqual(
+            {"platex", "uplatex", "pdflatex", "lualatex", "xelatex"},
+            set(LATEXMKRC_BY_ENGINE),
+        )
+        self.assertEqual(set(LATEXMKRC_BY_ENGINE), set(LATEXMK_ARGS_BY_ENGINE))
+        for engine, latexmkrc in LATEXMKRC_BY_ENGINE.items():
+            with self.subTest(engine=engine):
+                self.assertIn(engine, latexmkrc)
+                self.assertTrue(LATEXMK_ARGS_BY_ENGINE[engine].startswith("-"))
+
+    def test_pages_workflow_routes_every_supported_latexmk_engine(self) -> None:
+        workflow = (
+            Path(__file__).parents[1] / ".github" / "workflows" / "pages.yml"
+        ).read_text(encoding="utf-8")
+        declared = workflow.split("for engine in ", 1)[1].split("; do", 1)[0].split()
+
+        self.assertEqual(set(LATEXMKRC_BY_ENGINE), set(declared))
+        for engine in LATEXMKRC_BY_ENGINE:
+            with self.subTest(engine=engine):
+                self.assertIn(f"steps.latex-roots.outputs.{engine}", workflow)
+        for mode in ("-pdfdvi", "-pdf"):
+            with self.subTest(mode=mode):
+                self.assertIn(
+                    f"args: {mode} -file-line-error -halt-on-error ", workflow
+                )
+        self.assertIn("latexmk_use_lualatex: true", workflow)
+        self.assertIn("latexmk_use_xelatex: true", workflow)
 
 
 if __name__ == "__main__":

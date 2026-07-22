@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from dempa_site.config import LATEXMKRC_BY_ENGINE
 from dempa_site.errors import PaperToolError
 from dempa_site.files import sha256_file, write_json
 from dempa_site.importing.paper import import_paper
@@ -86,30 +87,36 @@ class NormalImportPreflightTest(unittest.TestCase):
         }
 
     def test_build_enabled_import_uses_the_validated_root(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            paths = RepositoryPaths(root)
-            paths.papers.mkdir()
-            incoming = root / "incoming"
-            incoming.mkdir()
-            (incoming / "source.tex").write_text(
-                "\\documentclass{article}\n", encoding="utf-8"
-            )
-            spec_path = root / "import.json"
-            write_json(spec_path, self._base_spec(incoming))
+        for engine, expected_latexmkrc in LATEXMKRC_BY_ENGINE.items():
+            with self.subTest(engine=engine), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                paths = RepositoryPaths(root)
+                paths.papers.mkdir()
+                incoming = root / "incoming"
+                incoming.mkdir()
+                (incoming / "source.tex").write_text(
+                    "\\documentclass{article}\n", encoding="utf-8"
+                )
+                spec_path = root / "import.json"
+                value = self._base_spec(incoming)
+                value["build_engine"] = engine
+                write_json(spec_path, value)
 
-            result = import_paper(
-                paths=paths,
-                review_root=root / ".privacy-review",
-                spec_file=str(spec_path),
-                privacy_reviewed=False,
-                privacy_override=None,
-                emit=lambda _line: None,
-            )
+                result = import_paper(
+                    paths=paths,
+                    review_root=root / ".privacy-review",
+                    spec_file=str(spec_path),
+                    privacy_reviewed=False,
+                    privacy_override=None,
+                    emit=lambda _line: None,
+                )
 
-            destination = paths.papers / result.slug
-            self.assertTrue((destination / "main.tex").is_file())
-            self.assertTrue((destination / ".latexmkrc").is_file())
+                destination = paths.papers / result.slug
+                self.assertTrue((destination / "main.tex").is_file())
+                self.assertEqual(
+                    expected_latexmkrc,
+                    (destination / ".latexmkrc").read_text(encoding="utf-8"),
+                )
 
     def test_duplicate_targets_are_rejected_before_destination_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

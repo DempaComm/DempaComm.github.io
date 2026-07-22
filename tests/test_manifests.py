@@ -188,6 +188,29 @@ class ManifestModelTest(unittest.TestCase):
                 with self.assertRaisesRegex(DempaSiteError, expected):
                     load_manifest(path)
 
+    def test_supported_build_engines_are_validated(self) -> None:
+        for engine in ("platex", "uplatex", "pdflatex", "lualatex", "xelatex"):
+            value = tex_manifest()
+            value["build"] = {
+                "enabled": True,
+                "engine": engine,
+                "root": "source.tex",
+            }
+            with self.subTest(engine=engine), tempfile.TemporaryDirectory() as temporary:
+                paper = load_manifest(self.write_manifest(Path(temporary), value))
+                self.assertEqual(engine, paper.build.effective_engine)
+
+        value = tex_manifest()
+        value["build"] = {
+            "enabled": True,
+            "engine": "unknowntex",
+            "root": "source.tex",
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            path = self.write_manifest(Path(temporary), value)
+            with self.assertRaisesRegex(DempaSiteError, "build.engine must be one of"):
+                load_manifest(path)
+
     def test_privacy_review_must_cover_current_public_tex_hash(self) -> None:
         value = tex_manifest()
         value["privacy_reviews"][0]["source_sha256"] = "b" * 64

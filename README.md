@@ -3,6 +3,8 @@
 **数学識電脳界溢出部位封神蔵収 私と放電**
 
 数学記事のTeX原稿と、自動生成したPDFを公開するGitHub Pagesリポジトリです。
+自動コンパイルはlatexmkで管理し、原稿ごとにpLaTeX、upLaTeX、pdfLaTeX、
+LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 
 - 公開サイト: https://dempacomm.github.io/
 - 全原稿アーカイブ: https://dempacomm.github.io/archive/

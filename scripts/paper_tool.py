@@ -14,6 +14,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
+from dempa_site.config import LATEXMKRC_BY_ENGINE  # noqa: E402
 from dempa_site.errors import PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
@@ -120,6 +121,8 @@ def command_build_roots(args: argparse.Namespace) -> None:
     """List only TeX roots whose manifests explicitly enable compilation."""
     for manifest_path, manifest in manifests():
         if not manifest.build.enabled:
+            continue
+        if args.engine and manifest.build.effective_engine != args.engine:
             continue
         root = safe_relative_path(str(manifest.build.root))
         print((manifest_path.parent / root).relative_to(ROOT))
@@ -248,6 +251,11 @@ def parser() -> argparse.ArgumentParser:
 
     build_roots_parser = subparsers.add_parser(
         "build-roots", help="list manifest-approved TeX roots for CI compilation"
+    )
+    build_roots_parser.add_argument(
+        "--engine",
+        choices=sorted(LATEXMKRC_BY_ENGINE),
+        help="list only roots using this effective TeX engine",
     )
     build_roots_parser.set_defaults(func=command_build_roots)
 

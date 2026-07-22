@@ -10,13 +10,15 @@
 - サイトマップの取得成功後、トップページ、`/archive/`、`/math/` のインデックス登録をリクエストする。
 - 非公開バックアップZIPをiCloudまたは外付け媒体にも複製する。
 
-## 機能追加候補
+## 完了した追加機能
 
-- LuaLaTeXによる自動ビルドに対応する。
-  - `paper.json` の `build.engine` で `lualatex` を選択可能にする。
-  - LuaLaTeX用の `.latexmkrc` とGitHub Actionsのビルド分岐を追加する。
-  - pLaTeX原稿は一括変換せず、原稿ごとに互換性を確認する。
-  - TeX・PDFを変更した場合は、個人情報の再検査とSHA-256承認更新を行う。
+- [x] latexmkの複数TeXエンジン対応。
+  - `paper.json` の `build.engine` でpLaTeX、upLaTeX、pdfLaTeX、LuaLaTeX、XeLaTeXを選択できる。
+  - エンジン別の `.latexmkrc` とGitHub Actionsのビルド分岐を追加した。
+  - 既存pLaTeX原稿は変更せず、一括変換もしない。
+  - TeX・PDFを変更する場合は、従来どおり個人情報の再検査とSHA-256承認更新を行う。
+
+## 機能追加候補
 - TeX原稿から閲覧用HTMLを生成する機能を検討する。
   - ライセンスが明確なLaTeXMLを第一候補として、代表的な原稿数本で試験する。
   - 日本語文書クラス、独自マクロ、TikZ、BibTeX・独自BSTの変換結果を確認する。

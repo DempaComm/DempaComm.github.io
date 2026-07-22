@@ -33,19 +33,55 @@ jobs:
       - name: Select manifest-approved TeX roots
         id: latex-roots
         run: |
-          {
-            echo 'files<<EOF'
-            python3 scripts/paper_tool.py build-roots
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
+          for engine in platex uplatex pdflatex lualatex xelatex; do
+            {
+              echo "${engine}<<EOF"
+              python3 scripts/paper_tool.py build-roots --engine "$engine"
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+          done
 
       - name: Build PDF with pLaTeX
-        if: steps.latex-roots.outputs.files != ''
+        if: steps.latex-roots.outputs.platex != ''
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: ${{ steps.latex-roots.outputs.files }}
+          root_file: ${{ steps.latex-roots.outputs.platex }}
           work_in_root_file_dir: true
           args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Build PDF with upLaTeX
+        if: steps.latex-roots.outputs.uplatex != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.latex-roots.outputs.uplatex }}
+          work_in_root_file_dir: true
+          args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Build PDF with pdfLaTeX
+        if: steps.latex-roots.outputs.pdflatex != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.latex-roots.outputs.pdflatex }}
+          work_in_root_file_dir: true
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Build PDF with LuaLaTeX
+        if: steps.latex-roots.outputs.lualatex != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.latex-roots.outputs.lualatex }}
+          work_in_root_file_dir: true
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          latexmk_use_lualatex: true
+
+      - name: Build PDF with XeLaTeX
+        if: steps.latex-roots.outputs.xelatex != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.latex-roots.outputs.xelatex }}
+          work_in_root_file_dir: true
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          latexmk_use_xelatex: true
 
       - name: Prepare public site
         run: python3 scripts/paper_tool.py stage _site

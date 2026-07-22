@@ -39,11 +39,38 @@ MATH_SECTION_DETAILS = {
 }
 VALID_MATH_SECTIONS = frozenset(("", *MATH_SECTIONS))
 
-DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
+PLATEX_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $pdf_mode = 3;
 """
-LATEXMKRC_BY_ENGINE = {"platex": DEFAULT_LATEXMKRC}
+UPLATEX_LATEXMKRC = """$latex = 'uplatex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
+$dvipdf = 'dvipdfmx %O -o %D %S';
+$pdf_mode = 3;
+"""
+PDFLATEX_LATEXMKRC = """$pdflatex = 'pdflatex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
+$pdf_mode = 1;
+"""
+LUALATEX_LATEXMKRC = """$lualatex = 'lualatex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
+$pdf_mode = 4;
+"""
+XELATEX_LATEXMKRC = """$xelatex = 'xelatex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
+$pdf_mode = 5;
+"""
+LATEXMKRC_BY_ENGINE = {
+    "platex": PLATEX_LATEXMKRC,
+    "uplatex": UPLATEX_LATEXMKRC,
+    "pdflatex": PDFLATEX_LATEXMKRC,
+    "lualatex": LUALATEX_LATEXMKRC,
+    "xelatex": XELATEX_LATEXMKRC,
+}
+LATEXMK_ARGS_BY_ENGINE = {
+    "platex": "-pdfdvi",
+    "uplatex": "-pdfdvi",
+    "pdflatex": "-pdf",
+    "lualatex": "-lualatex",
+    "xelatex": "-xelatex",
+}
+DEFAULT_LATEXMKRC = PLATEX_LATEXMKRC
 DEFAULT_BUILD_ENGINE = "platex"
 
 LEGACY_PRIVACY_EXEMPT_SLUGS = frozenset(

@@ -16,6 +16,85 @@ from tests.support import (
 
 
 class SourceOnlyImportTest(unittest.TestCase):
+    def test_build_roots_can_be_selected_by_effective_engine(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environment = prepare_root(root)
+            slug = "2026-07-22-01"
+            paper_dir = root / "papers" / slug
+            paper_dir.mkdir()
+            source = paper_dir / "main.tex"
+            source.write_text("\\documentclass{article}\n", encoding="utf-8")
+            digest = hashlib.sha256(source.read_bytes()).hexdigest()
+            (paper_dir / "paper.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 2,
+                        "slug": slug,
+                        "migration_record_id": "fixture:build-root",
+                        "legacy_slugs": [],
+                        "title": "LuaLaTeX原稿",
+                        "published_at": "2026-07-22T12:00:00+09:00",
+                        "sequence": 1,
+                        "year": 2026,
+                        "kind": "単純なTeX",
+                        "math_section": "その他",
+                        "summary": "エンジン別ビルドルートの検査です。",
+                        "original_url": "",
+                        "order": 2026072201,
+                        "tags": ["数学"],
+                        "keywords": ["LuaLaTeX"],
+                        "build": {
+                            "enabled": True,
+                            "engine": "lualatex",
+                            "root": "main.tex",
+                        },
+                        "files": [
+                            {
+                                "path": "main.tex",
+                                "role": "manuscript",
+                                "label": "TeX原稿",
+                                "public": False,
+                                "original_sha256": digest,
+                                "sha256": digest,
+                            }
+                        ],
+                        "approved_changes": [],
+                        "privacy_reviews": [],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            selected = subprocess.run(
+                [sys.executable, str(TOOL), "build-roots", "--engine", "lualatex"],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            excluded = subprocess.run(
+                [sys.executable, str(TOOL), "build-roots", "--engine", "platex"],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            compatible = subprocess.run(
+                [sys.executable, str(TOOL), "build-roots"],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+
+            self.assertEqual(f"papers/{slug}/main.tex\n", selected.stdout)
+            self.assertEqual("", excluded.stdout)
+            self.assertEqual(selected.stdout, compatible.stdout)
+
     def test_import_blog_only_article_without_public_files(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
