@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from pathlib import Path
 from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
@@ -11,7 +12,7 @@ from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, SITE_URL
 from dempa_site.manifests.model import Paper
 
 
-def rendered_sitemap(selected: list[tuple[Path, Paper]]) -> str:
+def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
     urls: list[tuple[str, str | None]] = [
         (f"{SITE_URL}/", None),
         (f"{SITE_URL}/archive/", None),

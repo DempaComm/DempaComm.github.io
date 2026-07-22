@@ -95,8 +95,8 @@ class StagingPipelineTest(unittest.TestCase):
     def test_publication_stages_can_be_run_and_checked_independently(self) -> None:
         validate_stage_sources(self.paths, self.selected)
         catalog = collect_metadata(self.selected)
-        self.assertEqual([self.paper], catalog.tags["試験"])
-        self.assertEqual([self.paper], catalog.math_sections["その他"])
+        self.assertEqual((self.paper,), catalog.tags["試験"])
+        self.assertEqual((self.paper,), catalog.math_sections["その他"])
 
         working = self.root / "working"
         working.mkdir()
@@ -123,6 +123,17 @@ class StagingPipelineTest(unittest.TestCase):
         self.assertTrue((working / "sitemap.xml").is_file())
         check_generated_links(context)
         self.assertEqual([], local_link_errors(working))
+
+    def test_catalog_given_to_features_is_deeply_read_only(self) -> None:
+        selected = list(self.selected)
+        catalog = collect_metadata(selected)
+        selected.clear()
+
+        self.assertEqual((self.selected[0],), catalog.selected)
+        with self.assertRaises(TypeError):
+            catalog.tags["new"] = ()
+        with self.assertRaises(TypeError):
+            catalog.tags["試験"][0] = self.paper
 
     def test_optional_feature_failure_keeps_the_basic_site(self) -> None:
         destination = self.root / "_site"

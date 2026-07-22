@@ -42,7 +42,14 @@ class CompleteCheckSuiteTest(unittest.TestCase):
 
         def successful(command, **_kwargs):
             calls.append(command)
-            return subprocess.CompletedProcess(command, 0, "very noisy output", "")
+            output = (
+                "very noisy output\n"
+                "FEATURES generated=1 failed=1 disabled=0\n"
+                "WARN feature failed: html [paper] (optional, generation): unavailable\n"
+                if command == ("first-command",)
+                else "more noisy output"
+            )
+            return subprocess.CompletedProcess(command, 0, output, "")
 
         times = iter((1.0, 1.25, 2.0, 2.5))
         output = io.StringIO()
@@ -57,7 +64,10 @@ class CompleteCheckSuiteTest(unittest.TestCase):
         self.assertEqual([("first-command",), ("second-command",)], calls)
         self.assertEqual(["first", "second"], [result.key for result in results])
         self.assertNotIn("very noisy output", output.getvalue())
-        self.assertIn("ALL OK  2項目", output.getvalue())
+        self.assertNotIn("more noisy output", output.getvalue())
+        self.assertIn("FEATURES generated=1 failed=1 disabled=0", output.getvalue())
+        self.assertIn("WARN feature failed: html", output.getvalue())
+        self.assertIn("ALL OK  2項目の確認が完了しました（警告1件）", output.getvalue())
 
     def test_failed_check_shows_details_and_stops_following_checks(self) -> None:
         steps = (

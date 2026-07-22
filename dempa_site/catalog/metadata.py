@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping
+from types import MappingProxyType
+from typing import Any
 
 from dempa_site.config import MATH_SECTIONS
 from dempa_site.manifests.model import Paper
@@ -17,12 +19,12 @@ PaperSource = tuple[Path, Paper]
 class SiteCatalog:
     """The validated papers and their derived navigation groupings."""
 
-    selected: list[PaperSource]
-    tags: dict[str, list[Paper]]
-    math_sections: dict[str, list[Paper]]
+    selected: tuple[PaperSource, ...]
+    tags: Mapping[str, tuple[Paper, ...]]
+    math_sections: Mapping[str, tuple[Paper, ...]]
 
 
-def grouped_tags(selected: list[PaperSource]) -> dict[str, list[Paper]]:
+def grouped_tags(selected: Sequence[PaperSource]) -> dict[str, list[Paper]]:
     grouped: dict[str, list[Paper]] = {}
     for _, paper in selected:
         for tag in paper.tags:
@@ -30,7 +32,7 @@ def grouped_tags(selected: list[PaperSource]) -> dict[str, list[Paper]]:
     return grouped
 
 
-def grouped_math_sections(selected: list[PaperSource]) -> dict[str, list[Paper]]:
+def grouped_math_sections(selected: Sequence[PaperSource]) -> dict[str, list[Paper]]:
     grouped: dict[str, list[Paper]] = {section: [] for section in MATH_SECTIONS}
     for _, paper in selected:
         section = paper.math_section.strip() or "その他"
@@ -38,12 +40,21 @@ def grouped_math_sections(selected: list[PaperSource]) -> dict[str, list[Paper]]
     return grouped
 
 
-def collect_metadata(selected: list[PaperSource]) -> SiteCatalog:
-    """Build all groupings once for the later publication stages."""
+def collect_metadata(selected: Sequence[PaperSource]) -> SiteCatalog:
+    """Build immutable groupings once for publication and feature stages."""
+    selected_tuple = tuple(selected)
+    tags = {
+        tag: tuple(papers)
+        for tag, papers in grouped_tags(selected_tuple).items()
+    }
+    math_sections = {
+        section: tuple(papers)
+        for section, papers in grouped_math_sections(selected_tuple).items()
+    }
     return SiteCatalog(
-        selected=selected,
-        tags=grouped_tags(selected),
-        math_sections=grouped_math_sections(selected),
+        selected=selected_tuple,
+        tags=MappingProxyType(tags),
+        math_sections=MappingProxyType(math_sections),
     )
 
 

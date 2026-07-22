@@ -15,6 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.errors import PaperToolError  # noqa: E402
+from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
 from dempa_site.importing.pdf import import_pdf  # noqa: E402
 from dempa_site.importing.tex import import_tex  # noqa: E402
@@ -141,6 +142,8 @@ def command_stage(args: argparse.Namespace) -> None:
     output = Path(args.output).resolve()
     report = stage_site(PATHS, selected, output)
     print(f"STAGED {report.paper_count} papers in {report.destination}")
+    for line in feature_result_lines(report.feature_results):
+        print(line)
 
 
 def command_check_all(args: argparse.Namespace) -> None:

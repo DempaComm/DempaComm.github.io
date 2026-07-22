@@ -36,6 +36,11 @@ python3 scripts/paper_tool.py check-all
 その項目の詳しい出力を表示して後続処理を行わない。したがって、SHAやカタログが不正な
 状態で公開サイト生成へ進むことはない。
 
+追加機能が登録されている場合、公開サイト生成の後に `FEATURES` として生成成功、失敗、
+無効の件数を表示する。任意機能の失敗は基本サイトの公開を止めないが、`WARN feature failed`
+として機能名、対象原稿slug、検査または生成の失敗段階、理由を表示する。`ALL OK` に
+警告件数が付いた場合は基本サイトの安全検査は完了しているが、該当する派生機能を確認する。
+
 別の確認用フォルダを使う場合は `--output` を指定できる。
 
 ```sh
@@ -119,6 +124,10 @@ PDFはバイト単位で同一の `published.pdf` として保存され、公開
 ```sh
 python3 scripts/paper_tool.py import-paper /path/to/import-spec.json --privacy-reviewed
 ```
+
+仕様JSONはコピー開始前に `ImportSpec` と `ImportFileSpec` へ変換し、必須文字列、公開日時、
+正の連番、文字列配列、真偽値、各ファイルのコピー元・公開先・役割を一括検査する。文字列の
+`"false"` を真偽値として扱うなどの暗黙変換は行わず、不正な仕様では保存先を作る前に停止する。
 
 通常取り込みでも、`files` のうち `public: true` である全TeX・PDFに対して、あらかじめ `inspect-file` を実行する必要がある。公開BibTeX、BST、図版なども取り込み前に一覧表示されるが、現在の自動検査対象はTeXとPDFである。検査済み指定はコマンドの `--privacy-reviewed` または仕様JSONの `privacy_reviewed: true` に書ける。
 

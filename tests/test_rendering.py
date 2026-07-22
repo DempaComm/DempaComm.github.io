@@ -108,5 +108,14 @@ class PublicRenderingTest(unittest.TestCase):
             sitemap,
         )
 
+    def test_compatibility_renderer_remains_a_thin_page_module_index(self) -> None:
+        rendering = (
+            Path(__file__).parents[1] / "dempa_site" / "site" / "rendering.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertLess(len(rendering.splitlines()), 80)
+        self.assertIn("dempa_site.site.pages.home", rendering)
+        self.assertNotIn("<html", rendering)
+
 if __name__ == "__main__":
     unittest.main()

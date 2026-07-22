@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from datetime import timezone
 from email.utils import format_datetime
 from pathlib import Path
@@ -13,7 +14,7 @@ from dempa_site.dates import parse_iso_datetime
 from dempa_site.manifests.model import Paper
 
 
-def rendered_feed(selected: list[tuple[Path, Paper]]) -> str:
+def rendered_feed(selected: Sequence[tuple[Path, Paper]]) -> str:
     items = []
     for _, manifest in reversed(selected):
         published = parse_iso_datetime(manifest["published_at"])
@@ -41,4 +42,3 @@ def rendered_feed(selected: list[tuple[Path, Paper]]) -> str:
   </channel>
 </rss>
 """
-

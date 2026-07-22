@@ -28,6 +28,7 @@ class CheckResult:
     key: str
     label: str
     elapsed_seconds: float
+    notices: tuple[str, ...] = ()
 
 
 CommandRunner = Callable[..., subprocess.CompletedProcess[str]]
@@ -101,6 +102,15 @@ def _show_failure_output(
         print(stderr, file=output)
 
 
+def _success_notices(
+    completed: subprocess.CompletedProcess[str],
+) -> tuple[str, ...]:
+    lines = "\n".join((completed.stdout or "", completed.stderr or "")).splitlines()
+    return tuple(
+        line for line in lines if line.startswith(("FEATURES ", "WARN "))
+    )
+
+
 def run_check_suite(
     steps: Sequence[CheckStep],
     repository: Path,
@@ -112,6 +122,7 @@ def run_check_suite(
     """Run checks in order, hiding successful noise and stopping on failure."""
     destination = output if output is not None else sys.stdout
     results: list[CheckResult] = []
+    warning_count = 0
     total = len(steps)
     for number, step in enumerate(steps, start=1):
         print(f"CHECK {number}/{total}  {step.label}", file=destination, flush=True)
@@ -147,8 +158,16 @@ def run_check_suite(
                 f"一括確認を「{step.label}」で停止しました"
                 f"（終了コード {completed.returncode}）"
             )
+        notices = _success_notices(completed)
+        warning_count += sum(line.startswith("WARN ") for line in notices)
         print(f"OK    {step.label} ({elapsed:.1f}秒)", file=destination)
-        results.append(CheckResult(step.key, step.label, elapsed))
+        for notice in notices:
+            print(notice, file=destination)
+        results.append(CheckResult(step.key, step.label, elapsed, notices))
 
-    print(f"ALL OK  {total}項目の確認が完了しました", file=destination)
+    warning_suffix = f"（警告{warning_count}件）" if warning_count else ""
+    print(
+        f"ALL OK  {total}項目の確認が完了しました{warning_suffix}",
+        file=destination,
+    )
     return tuple(results)
