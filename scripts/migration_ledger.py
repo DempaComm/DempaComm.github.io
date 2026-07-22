@@ -5,26 +5,43 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import html
-import json
 import io
-import os
 import re
 import sys
-import unicodedata
 from collections import Counter, defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
+from json import JSONDecodeError
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Optional
 from urllib.parse import unquote, urlsplit
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-ROOT = Path(
-    os.environ.get("LEDGER_REPO_ROOT", Path(__file__).resolve().parents[1])
-).resolve()
-PAPERS_DIR = ROOT / "papers"
+from dempa_site.config import VALID_MATH_SECTIONS  # noqa: E402
+from dempa_site.dates import local_now_isoformat  # noqa: E402
+from dempa_site.errors import LedgerError  # noqa: E402
+from dempa_site.files import (  # noqa: E402
+    compact_json,
+    json_text,
+    normalize_nfkc_casefold,
+    read_json,
+    sha256_file,
+    sha256_text,
+    write_json as write_json_file,
+)
+from dempa_site.paths import (  # noqa: E402
+    RepositoryPaths,
+    is_safe_relative_path,
+)
+
+
+PATHS = RepositoryPaths.from_environment("LEDGER_REPO_ROOT", __file__)
+ROOT = PATHS.root
+PAPERS_DIR = PATHS.papers
 LEDGER_DIR = ROOT / "ledger"
 CSV_PATH = LEDGER_DIR / "migration-ledger.csv"
 JSON_PATH = LEDGER_DIR / "migration-ledger.json"
@@ -182,13 +199,7 @@ UNMIGRATED_FIELDS = (
     "source_dir",
     "notes",
 )
-MATH_SECTIONS = {
-    "",
-    "代数・組合せ",
-    "位相・距離・幾何",
-    "解析・測度・確率",
-    "その他",
-}
+MATH_SECTIONS = VALID_MATH_SECTIONS
 YEAR_PATTERN = re.compile(r"^(19|20)\d{2}$")
 PDF_NAME_PATTERN = re.compile(
     r"""(?ix)
@@ -199,16 +210,7 @@ PDF_NAME_PATTERN = re.compile(
 TEX_TITLE_PATTERN = re.compile(r"\\title\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}", re.S)
 
 
-class LedgerError(RuntimeError):
-    pass
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+sha256 = sha256_file
 
 
 def split_list(value: str) -> list[str]:
@@ -250,8 +252,7 @@ def refresh_asset_states(rows: Iterable[dict[str, str]]) -> None:
 def safe_relative(value: str, field: str) -> None:
     if not value:
         return
-    path = Path(value)
-    if path.is_absolute() or ".." in path.parts:
+    if not is_safe_relative_path(value):
         raise LedgerError(f"{field} must be a safe relative path: {value}")
 
 
@@ -259,8 +260,8 @@ def load_manifests() -> dict[str, dict[str, Any]]:
     manifests: dict[str, dict[str, Any]] = {}
     for path in sorted(PAPERS_DIR.glob("*/paper.json")):
         try:
-            value = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
+            value = read_json(path)
+        except (OSError, JSONDecodeError) as error:
             raise LedgerError(f"cannot read {path}: {error}") from error
         slug = str(value.get("slug", "")).strip()
         if not slug:
@@ -519,12 +520,12 @@ def json_value(rows: list[dict[str, str]]) -> dict[str, Any]:
 
 
 def rendered_json(rows: list[dict[str, str]]) -> str:
-    return json.dumps(json_value(rows), ensure_ascii=False, indent=2) + "\n"
+    return json_text(json_value(rows))
 
 
 def write_json(rows: list[dict[str, str]]) -> None:
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-    JSON_PATH.write_text(rendered_json(rows), encoding="utf-8")
+    write_json_file(JSON_PATH, json_value(rows))
 
 
 def unmigrated_rows(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
@@ -567,12 +568,12 @@ def write_unmigrated_csv(rows: list[dict[str, str]]) -> None:
 
 
 def source_record_id(source_dir: str) -> str:
-    digest = hashlib.sha256(source_dir.encode("utf-8")).hexdigest()[:16]
+    digest = sha256_text(source_dir)[:16]
     return f"source:{digest}"
 
 
 def article_record_id(article_url: str) -> str:
-    digest = hashlib.sha256(article_url.encode("utf-8")).hexdigest()[:16]
+    digest = sha256_text(article_url)[:16]
     return f"article:{digest}"
 
 
@@ -684,7 +685,7 @@ def apply_duplicate_group(
     selected = sorted((rows_by_source[source] for source in sources), key=canonical_rank)
     canonical = selected[0]
     group_seed = basis + "\0" + "\0".join(signature)
-    group = "dup:" + hashlib.sha256(group_seed.encode("ascii")).hexdigest()[:16]
+    group = "dup:" + sha256_text(group_seed, "ascii")[:16]
     for index, row in enumerate(selected):
         row["duplicate_status"] = "canonical" if index == 0 else "duplicate"
         row["duplicate_group"] = group
@@ -740,7 +741,7 @@ def normalized_text(value: str) -> str:
         if decoded == value:
             break
         value = decoded
-    value = unicodedata.normalize("NFKC", value).casefold()
+    value = normalize_nfkc_casefold(value)
     value = re.sub(r"\\[a-zA-Z]+", " ", value)
     value = value.replace("infty", "∞")
     return "".join(character for character in value if character.isalnum() or character == "∞")
@@ -1637,8 +1638,8 @@ def metadata_review_records(
 
 
 def metadata_review_html(records: list[dict[str, Any]]) -> str:
-    payload = json.dumps(records, ensure_ascii=False).replace("</", "<\\/")
-    generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
+    payload = compact_json(records).replace("</", "<\\/")
+    generated_at = local_now_isoformat()
     return f"""<!doctype html>
 <html lang="ja">
 <head>

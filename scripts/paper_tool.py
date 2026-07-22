@@ -4,71 +4,66 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import html
-import json
 import os
 import re
 import shutil
 import subprocess
 import sys
-import unicodedata
 from datetime import datetime, timezone
 from email.utils import format_datetime
 from html.parser import HTMLParser
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import quote, unquote, urlsplit
 from xml.sax.saxutils import escape as xml_escape
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-ROOT = Path(
-    os.environ.get("PAPER_REPO_ROOT", Path(__file__).resolve().parents[1])
-).resolve()
-PAPERS_DIR = ROOT / "papers"
-INDEX_PATH = ROOT / "index.html"
-SEARCH_SCRIPT_PATH = ROOT / "search.js"
-PRIVACY_REVIEW_DIR = Path(
-    os.environ.get("PAPER_PRIVACY_REVIEW_DIR", ROOT / ".privacy-review")
-).resolve()
-START_MARKER = "<!-- GENERATED:PAPERS:START -->"
-END_MARKER = "<!-- GENERATED:PAPERS:END -->"
-DEFAULT_LATEXMKRC = """$latex = 'platex -synctex=1 -halt-on-error -interaction=nonstopmode %O %S';
-$dvipdf = 'dvipdfmx %O -o %D %S';
-$pdf_mode = 3;
-"""
-LATEXMKRC_BY_ENGINE = {"platex": DEFAULT_LATEXMKRC}
-DEFAULT_BUILD_ENGINE = "platex"
-BLOG_ONLY_KIND = "ブログ本文のみ"
-MATH_SECTIONS = (
-    "代数・組合せ",
-    "位相・距離・幾何",
-    "解析・測度・確率",
-    "その他",
+from dempa_site.config import (  # noqa: E402
+    BLOG_ONLY_KIND,
+    DEFAULT_BUILD_ENGINE,
+    END_MARKER,
+    HOME_PAPER_LIMIT,
+    LATEXMKRC_BY_ENGINE,
+    MATH_SECTION_DETAILS,
+    MATH_SECTIONS,
+    SITE_TITLE_ATTRIBUTE,
+    SITE_TITLE_FORMAL,
+    SITE_TITLE_TOP,
+    SITE_URL,
+    START_MARKER,
 )
-MATH_SECTION_DETAILS = {
-    "代数・組合せ": {
-        "slug": "algebra-combinatorics",
-        "description": "代数、数論、有限体、組合せ論などの記事をまとめています。",
-    },
-    "位相・距離・幾何": {
-        "slug": "topology-geometry",
-        "description": "位相空間、距離空間、幾何、代数的トポロジーなどの記事をまとめています。",
-    },
-    "解析・測度・確率": {
-        "slug": "analysis-probability",
-        "description": "解析、複素解析、測度論、確率論などの記事をまとめています。",
-    },
-    "その他": {
-        "slug": "other",
-        "description": "上の三分野に収まらない数学記事をまとめています。",
-    },
-}
-SITE_TITLE_TOP = "数識電収"
-SITE_TITLE_FORMAL = "数学識電脳界溢出部位封神蔵収"
-SITE_TITLE_ATTRIBUTE = "私と放電"
-SITE_URL = "https://dempacomm.github.io"
-HOME_PAPER_LIMIT = 3
+from dempa_site.dates import (  # noqa: E402
+    local_now_seconds,
+    parse_iso_datetime,
+    utc_now_seconds,
+)
+from dempa_site.errors import PaperToolError  # noqa: E402
+from dempa_site.files import (  # noqa: E402
+    compact_json,
+    normalize_nfc,
+    read_json,
+    sha256_file,
+    write_json,
+)
+from dempa_site.paths import (  # noqa: E402
+    RepositoryPaths,
+    safe_relative_path as shared_safe_relative_path,
+)
+
+
+PATHS = RepositoryPaths.from_environment("PAPER_REPO_ROOT", __file__)
+ROOT = PATHS.root
+PAPERS_DIR = PATHS.papers
+INDEX_PATH = PATHS.index
+SEARCH_SCRIPT_PATH = PATHS.search_script
+PRIVACY_REVIEW_DIR = Path(
+    os.environ.get("PAPER_PRIVACY_REVIEW_DIR", PATHS.privacy_review)
+).resolve()
 LEGACY_PRIVACY_EXEMPT_SLUGS = {
     "2015-08-28-01",
     "2015-09-01-01",
@@ -89,10 +84,6 @@ LEGACY_PRIVACY_EXEMPT_SLUGS = {
 }
 
 
-class PaperToolError(RuntimeError):
-    pass
-
-
 PRIVACY_TEX_COMMANDS = (
     "author",
     "email",
@@ -104,36 +95,21 @@ PRIVACY_TEX_COMMANDS = (
 EMAIL_PATTERN = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE)
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+sha256 = sha256_file
 
 
 def safe_relative_path(value: str) -> Path:
-    path = Path(value)
-    if path.is_absolute() or not path.parts or ".." in path.parts:
-        raise PaperToolError(f"unsafe relative path: {value}")
-    return path
+    return shared_safe_relative_path(value, PaperToolError)
 
 
 def nfc_path(value: str) -> str:
-    """Use the portable Unicode form stored by Git for public paths."""
-    return unicodedata.normalize("NFC", value)
-
-
-def write_json(path: Path, value: dict[str, Any]) -> None:
-    path.write_text(
-        json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    return normalize_nfc(value)
 
 
 def load_json(path: Path) -> dict[str, Any]:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as error:
+        value = read_json(path)
+    except (OSError, JSONDecodeError) as error:
         raise PaperToolError(f"cannot read JSON {path}: {error}") from error
     if not isinstance(value, dict):
         raise PaperToolError(f"JSON root must be an object: {path}")
@@ -183,7 +159,7 @@ def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
             f"{path}: math_section must be one of: {', '.join(MATH_SECTIONS)}"
         )
     try:
-        published = datetime.fromisoformat(str(manifest["published_at"]))
+        published = parse_iso_datetime(manifest["published_at"])
     except ValueError as error:
         raise PaperToolError(f"{path}: published_at must be ISO 8601") from error
     expected_slug = f"{published:%Y-%m-%d}-{manifest['sequence']:02d}"
@@ -497,7 +473,7 @@ def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
     )
     search_attribute = html.escape(search_terms.casefold(), quote=True)
     tags_attribute = html.escape(
-        json.dumps(manifest["tags"], ensure_ascii=False), quote=True
+        compact_json(manifest["tags"]), quote=True
     )
     tag_chips = "\n".join(
         f'          <a class="paper-tag" href="{tag_href(tag, prefix)}">{html.escape(tag)}</a>'
@@ -1192,7 +1168,7 @@ def rendered_not_found_page() -> str:
 def rendered_feed(selected: list[tuple[Path, dict[str, Any]]]) -> str:
     items = []
     for _, manifest in reversed(selected):
-        published = datetime.fromisoformat(str(manifest["published_at"]))
+        published = parse_iso_datetime(manifest["published_at"])
         if published.tzinfo is None:
             published = published.replace(tzinfo=timezone.utc)
         slug = quote(str(manifest["slug"]), safe="")
@@ -1731,7 +1707,7 @@ def require_privacy_review(
             "reason": reason,
             "source_sha256": report["sha256"],
             "inspection_status": str(report.get("inspection_status", "unknown")),
-            "recorded_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "recorded_at": utc_now_seconds().isoformat(),
         }
     if report.get("inspection_status") != "completed":
         raise PaperToolError(
@@ -1762,7 +1738,7 @@ def require_privacy_review(
         "reason": "",
         "source_sha256": report["sha256"],
         "inspection_status": "completed",
-        "recorded_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "recorded_at": utc_now_seconds().isoformat(),
     }
 
 
@@ -1787,12 +1763,12 @@ def command_import_tex(args: argparse.Namespace) -> None:
 
     if args.published_at:
         try:
-            published = datetime.fromisoformat(args.published_at)
+            published = parse_iso_datetime(args.published_at)
         except ValueError as error:
             raise PaperToolError("--published-at must be ISO 8601") from error
         published_at = args.published_at
     else:
-        published = datetime.now().astimezone().replace(microsecond=0)
+        published = local_now_seconds()
         published_at = published.isoformat()
     sequence = args.sequence or next_sequence_for_date(published)
     if sequence < 1:
@@ -1878,12 +1854,12 @@ def command_import_pdf(args: argparse.Namespace) -> None:
 
     if args.published_at:
         try:
-            published = datetime.fromisoformat(args.published_at)
+            published = parse_iso_datetime(args.published_at)
         except ValueError as error:
             raise PaperToolError("--published-at must be ISO 8601") from error
         published_at = args.published_at
     else:
-        published = datetime.now().astimezone().replace(microsecond=0)
+        published = local_now_seconds()
         published_at = published.isoformat()
     sequence = args.sequence or next_sequence_for_date(published)
     if sequence < 1:
@@ -1966,7 +1942,7 @@ def command_import(args: argparse.Namespace) -> None:
     if missing:
         raise PaperToolError(f"import spec missing fields: {', '.join(missing)}")
     try:
-        published = datetime.fromisoformat(str(spec["published_at"]))
+        published = parse_iso_datetime(spec["published_at"])
     except ValueError as error:
         raise PaperToolError("spec.published_at must be ISO 8601") from error
     sequence = int(spec["sequence"])
@@ -2143,7 +2119,7 @@ def command_approve(args: argparse.Namespace) -> None:
         raise PaperToolError("no hash changes to approve")
     manifest["approved_changes"].append(
         {
-            "approved_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "approved_at": utc_now_seconds().isoformat(),
             "reason": reason,
             "files": changes,
         }

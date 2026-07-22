@@ -4,31 +4,26 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
-import json
-import os
 import sys
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Any
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-ROOT = Path(
-    os.environ.get("PAPER_REPO_ROOT", Path(__file__).resolve().parents[1])
-).resolve()
-PAPERS_DIR = ROOT / "papers"
+from dempa_site.errors import SiteSnapshotError  # noqa: E402
+from dempa_site.files import read_json, sha256_file, write_json  # noqa: E402
+from dempa_site.paths import RepositoryPaths  # noqa: E402
+
+
+PATHS = RepositoryPaths.from_environment("PAPER_REPO_ROOT", __file__)
+ROOT = PATHS.root
+PAPERS_DIR = PATHS.papers
 DEFAULT_BASELINE = ROOT / "tests" / "fixtures" / "site-baseline.json"
 
-
-class SiteSnapshotError(RuntimeError):
-    pass
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+sha256 = sha256_file
 
 
 def generated_pdf_paths() -> set[str]:
@@ -36,8 +31,8 @@ def generated_pdf_paths() -> set[str]:
     paths: set[str] = set()
     for manifest_path in sorted(PAPERS_DIR.glob("*/paper.json")):
         try:
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
+            manifest = read_json(manifest_path)
+        except (OSError, JSONDecodeError) as error:
             raise SiteSnapshotError(f"cannot read {manifest_path}: {error}") from error
         if not manifest.get("build", {}).get("enabled", False):
             continue
@@ -83,10 +78,10 @@ def snapshot(site_root: Path) -> dict[str, Any]:
 
 def load_baseline(path: Path) -> dict[str, Any]:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = read_json(path)
     except FileNotFoundError as error:
         raise SiteSnapshotError(f"baseline does not exist: {path}") from error
-    except (OSError, json.JSONDecodeError) as error:
+    except (OSError, JSONDecodeError) as error:
         raise SiteSnapshotError(f"cannot read baseline {path}: {error}") from error
     if not isinstance(value, dict) or value.get("schema_version") != 1:
         raise SiteSnapshotError(f"unsupported baseline format: {path}")
@@ -117,9 +112,7 @@ def file_map(value: dict[str, Any], label: str) -> dict[str, str | None]:
 def write_baseline(site_root: Path, baseline_path: Path) -> None:
     value = snapshot(site_root)
     baseline_path.parent.mkdir(parents=True, exist_ok=True)
-    baseline_path.write_text(
-        json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    write_json(baseline_path, value)
     ignored = len(value["hash_policy"]["ignored_paths"])
     print(
         f"WROTE {baseline_path} ({len(value['files'])} files; "
