@@ -3,9 +3,11 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from dempa_site.catalog.metadata import collect_metadata, rendered_keywords
 from dempa_site.errors import PaperToolError
+from dempa_site.features import FunctionFeature
 from dempa_site.files import sha256_file, write_json
 from dempa_site.manifests.model import Paper
 from dempa_site.paths import RepositoryPaths
@@ -141,8 +143,8 @@ class StagingPipelineTest(unittest.TestCase):
             destination,
             [
                 StageFeature(
-                    "html-conversion",
-                    failing_optional,
+                    name="html-conversion",
+                    generate=failing_optional,
                     paper_slug=self.paper.slug,
                 )
             ],
@@ -185,6 +187,117 @@ class StagingPipelineTest(unittest.TestCase):
             [],
             list(self.root.glob("._site.required-index-*")),
             "failed feature directories must be removed",
+        )
+
+    def test_disabled_feature_does_not_block_basic_or_other_features(self) -> None:
+        destination = self.root / "_site"
+
+        def must_not_run(_catalog, _output: Path) -> None:
+            self.fail("a disabled feature must not be generated")
+
+        def active_feature(_catalog, output: Path) -> None:
+            target = output / "extras" / "active.txt"
+            target.parent.mkdir(parents=True)
+            target.write_text("active", encoding="utf-8")
+
+        report = stage_site(
+            self.paths,
+            self.selected,
+            destination,
+            [
+                FunctionFeature("disabled-index", must_not_run, enabled=False),
+                FunctionFeature("active-index", active_feature),
+            ],
+        )
+
+        self.assertTrue((destination / "index.html").is_file())
+        self.assertEqual(
+            "active",
+            (destination / "extras" / "active.txt").read_text(encoding="utf-8"),
+        )
+        self.assertEqual(
+            ["disabled", "generated"],
+            [result.status for result in report.feature_results],
+        )
+
+    def test_normal_stage_uses_the_central_feature_registry(self) -> None:
+        destination = self.root / "_site"
+
+        def registered_feature(_catalog, output: Path) -> None:
+            (output / "registered.txt").write_text("registered", encoding="utf-8")
+
+        with patch(
+            "dempa_site.site.staging.configured_features",
+            return_value=(FunctionFeature("registered", registered_feature),),
+        ):
+            report = stage_site(self.paths, self.selected, destination)
+
+        self.assertEqual(
+            "registered",
+            (destination / "registered.txt").read_text(encoding="utf-8"),
+        )
+        self.assertEqual("generated", report.feature_results[0].status)
+
+    def test_optional_validation_failure_does_not_run_or_block_next_feature(
+        self,
+    ) -> None:
+        destination = self.root / "_site"
+
+        def reject_catalog(_catalog) -> None:
+            raise ValueError("missing relation metadata")
+
+        def rejected_generator(_catalog, _output: Path) -> None:
+            self.fail("generation must not run after failed validation")
+
+        def fallback_generator(_catalog, output: Path) -> None:
+            (output / "fallback.txt").write_text("ok", encoding="utf-8")
+
+        report = stage_site(
+            self.paths,
+            self.selected,
+            destination,
+            [
+                FunctionFeature(
+                    "relation-graph",
+                    rejected_generator,
+                    validator=reject_catalog,
+                ),
+                FunctionFeature("fallback", fallback_generator),
+            ],
+        )
+
+        failed, generated = report.feature_results
+        self.assertEqual(("failed", "validation"), (failed.status, failed.phase))
+        self.assertIn("missing relation metadata", failed.error)
+        self.assertEqual("generated", generated.status)
+        self.assertEqual("ok", (destination / "fallback.txt").read_text())
+
+    def test_optional_feature_cannot_replace_basic_site_files(self) -> None:
+        destination = self.root / "_site"
+
+        def colliding_feature(_catalog, output: Path) -> None:
+            (output / "index.html").write_text("replacement", encoding="utf-8")
+
+        def independent_feature(_catalog, output: Path) -> None:
+            (output / "independent.txt").write_text("ok", encoding="utf-8")
+
+        report = stage_site(
+            self.paths,
+            self.selected,
+            destination,
+            [
+                FunctionFeature("collision", colliding_feature),
+                FunctionFeature("independent", independent_feature),
+            ],
+        )
+
+        self.assertNotEqual(
+            "replacement", (destination / "index.html").read_text(encoding="utf-8")
+        )
+        self.assertEqual("ok", (destination / "independent.txt").read_text())
+        self.assertEqual(
+            ["failed", "generated"],
+            [result.status for result in report.feature_results],
         )
 
 

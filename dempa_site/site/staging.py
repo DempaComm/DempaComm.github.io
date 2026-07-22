@@ -7,7 +7,7 @@ import tempfile
 import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Iterable
+from typing import Iterable
 
 from dempa_site.catalog.metadata import (
     PaperSource,
@@ -17,6 +17,14 @@ from dempa_site.catalog.metadata import (
 )
 from dempa_site.config import MATH_SECTION_DETAILS, SITE_URL
 from dempa_site.errors import PaperToolError
+from dempa_site.features import (
+    FeatureResult,
+    FunctionFeature,
+    SiteFeature,
+    configured_features,
+    run_site_features,
+)
+from dempa_site.features.base import FeatureGenerator
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
@@ -46,26 +54,22 @@ STATIC_ASSETS = (
 )
 
 
-FeatureGenerator = Callable[[SiteCatalog, Path], None]
+class StageFeature(FunctionFeature):
+    """Compatibility adapter for the Phase 5 ``generate=`` constructor."""
 
-
-@dataclass(frozen=True)
-class StageFeature:
-    """An isolated additional generator whose output is merged on success."""
-
-    name: str
-    generate: FeatureGenerator
-    required: bool = False
-    paper_slug: str = ""
-
-
-@dataclass(frozen=True)
-class FeatureResult:
-    name: str
-    required: bool
-    paper_slug: str
-    status: str
-    error: str = ""
+    def __init__(
+        self,
+        name: str,
+        generate: FeatureGenerator,
+        required: bool = False,
+        paper_slug: str = "",
+    ) -> None:
+        super().__init__(
+            name=name,
+            generator=generate,
+            required=required,
+            paper_slug=paper_slug,
+        )
 
 
 @dataclass
@@ -205,70 +209,18 @@ def generate_discovery_files(context: StageContext) -> None:
     )
 
 
-def _merge_feature_output(source: Path, destination: Path) -> None:
-    files = [path for path in source.rglob("*") if path.is_file()]
-    collisions = [
-        path.relative_to(source)
-        for path in files
-        if (destination / path.relative_to(source)).exists()
-    ]
-    if collisions:
-        raise PaperToolError(
-            "feature output must not replace basic site files: "
-            + ", ".join(str(path) for path in collisions)
-        )
-    copied: list[Path] = []
-    try:
-        for source_file in files:
-            relative = source_file.relative_to(source)
-            target = destination / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source_file, target)
-            copied.append(target)
-    except Exception:
-        for target in reversed(copied):
-            target.unlink(missing_ok=True)
-        raise
-
-
 def generate_additional_features(
-    context: StageContext, features: Iterable[StageFeature]
+    context: StageContext, features: Iterable[SiteFeature]
 ) -> None:
     """Run each feature in isolation and record required/optional outcomes."""
-    for feature in features:
-        scratch = Path(
-            tempfile.mkdtemp(
-                prefix=f".{context.destination.name}.{feature.name}-",
-                dir=context.working_output.parent,
-            )
+    context.feature_results.extend(
+        run_site_features(
+            context.catalog,
+            context.working_output,
+            context.working_output.parent,
+            features,
         )
-        try:
-            feature.generate(context.catalog, scratch)
-            _merge_feature_output(scratch, context.working_output)
-        except Exception as error:
-            result = FeatureResult(
-                name=feature.name,
-                required=feature.required,
-                paper_slug=feature.paper_slug,
-                status="failed",
-                error=str(error),
-            )
-            context.feature_results.append(result)
-            if feature.required:
-                raise PaperToolError(
-                    f"required site feature failed: {feature.name}: {error}"
-                ) from error
-        else:
-            context.feature_results.append(
-                FeatureResult(
-                    name=feature.name,
-                    required=feature.required,
-                    paper_slug=feature.paper_slug,
-                    status="generated",
-                )
-            )
-        finally:
-            shutil.rmtree(scratch, ignore_errors=True)
+    )
 
 
 def check_generated_links(context: StageContext) -> None:
@@ -315,7 +267,7 @@ def stage_site(
     paths: RepositoryPaths,
     selected: list[PaperSource],
     destination: Path,
-    features: Iterable[StageFeature] = (),
+    features: Iterable[SiteFeature] | None = None,
 ) -> StageReport:
     """Run the complete publication pipeline and adopt only a complete site."""
     destination = destination.resolve()
@@ -334,11 +286,12 @@ def stage_site(
         )
     )
     context = StageContext(paths, destination, working_output, catalog)
+    selected_features = configured_features() if features is None else features
     try:
         generate_static_pages(context)
         copy_public_files(context)
         generate_discovery_files(context)
-        generate_additional_features(context, features)
+        generate_additional_features(context, selected_features)
         check_generated_links(context)
         promote_staged_site(working_output, destination)
     except Exception:
