@@ -95,6 +95,11 @@ python3 scripts/paper_tool.py import-paper /path/to/import-spec.json --privacy-r
 5. 標準の `.latexmkrc` がなければ生成する。
 6. `paper.json` から `keywords.txt` と `index.html` の原稿一覧を再生成する。
 
+取り込み処理は保存先を新規作成してから、すべてのコピー、SHA確認、`paper.json` の
+検査までを一つの処理として行う。コピー不一致、個人情報検査漏れ、manifest不正などで
+失敗した場合は作成途中の保存先を削除する。既存の原稿フォルダを削除または上書きする
+ことはない。
+
 既存PDFを原稿と一緒に保存するだけの試験公開では、取り込み仕様の `build_enabled` を `false` にし、完成PDFを `published.pdf` として保護対象へ含める。この場合は原稿を自動コンパイルせず、保存されたPDFを公開時に `main.pdf` として配置する。`build_enabled` が `false` で `published.pdf` もない場合は、PDFリンクを出さず公開ソースへのリンクを主ボタンにする。
 
 既存の保存先がある場合は上書きせず停止する。

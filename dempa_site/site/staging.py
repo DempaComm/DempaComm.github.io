@@ -17,8 +17,8 @@ from dempa_site.catalog.metadata import (
 )
 from dempa_site.config import MATH_SECTION_DETAILS, SITE_URL
 from dempa_site.errors import PaperToolError
-from dempa_site.files import sha256_file
 from dempa_site.paths import RepositoryPaths, safe_relative_path
+from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
@@ -90,19 +90,7 @@ def validate_stage_sources(
     """Reject changed protected files and stale generated catalog metadata."""
     errors: list[str] = []
     for manifest_path, paper in selected:
-        source_dir = manifest_path.parent
-        for entry in paper.files:
-            relative = safe_relative_path(entry.path, PaperToolError)
-            target = source_dir / relative
-            if not target.is_file():
-                errors.append(f"{paper.slug}/{relative}: missing")
-                continue
-            actual = sha256_file(target)
-            if actual != entry.sha256:
-                errors.append(
-                    f"{paper.slug}/{relative}: SHA-256 mismatch "
-                    f"(expected {entry.sha256}, got {actual})"
-                )
+        errors.extend(protected_file_errors(manifest_path, paper, PaperToolError))
     if errors:
         details = "\n".join(f"ERR {error}" for error in errors)
         raise PaperToolError(
