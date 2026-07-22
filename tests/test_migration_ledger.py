@@ -16,6 +16,44 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 TOOL = REPO_ROOT / "scripts" / "migration_ledger.py"
 
 
+def complete_manifest(value: dict) -> dict:
+    """Fill ledger-focused fixtures to the public paper.json contract."""
+    result = dict(value)
+    published_at = result["published_at"]
+    sequence = result["sequence"]
+    files = []
+    for index, entry in enumerate(result.get("files", []), start=1):
+        original = entry["original_sha256"]
+        files.append(
+            {
+                "path": entry.get("path", f"fixture-{index}.bin"),
+                "role": entry.get("role", "supporting-file"),
+                "label": entry.get("label", ""),
+                "public": entry.get("public", False),
+                "original_sha256": original,
+                "sha256": entry.get("sha256", original),
+            }
+        )
+    result.update(
+        {
+            "legacy_slugs": result.get("legacy_slugs", []),
+            "year": result.get("year", int(published_at[:4])),
+            "kind": result.get(
+                "kind", "TeX・PDF" if files else "ブログ本文のみ"
+            ),
+            "summary": result.get("summary", "台帳テスト用manifestです。"),
+            "order": result.get(
+                "order", int(published_at[:10].replace("-", "") + f"{sequence:02d}")
+            ),
+            "keywords": result.get("keywords", [result["title"]]),
+            "files": files,
+            "approved_changes": result.get("approved_changes", []),
+            "privacy_reviews": result.get("privacy_reviews", []),
+        }
+    )
+    return result
+
+
 class MigrationLedgerTest(unittest.TestCase):
     def test_article_sync_preserves_manually_found_external_source(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -172,7 +210,7 @@ class MigrationLedgerTest(unittest.TestCase):
             manifest_dir.mkdir()
             (manifest_dir / "paper.json").write_text(
                 json.dumps(
-                    {
+                    complete_manifest({
                         "schema_version": 2,
                         "slug": slug,
                         "migration_record_id": article["record_id"],
@@ -184,7 +222,7 @@ class MigrationLedgerTest(unittest.TestCase):
                         "tags": article["tags"].split("|") if article["tags"] else [],
                         "build": {"enabled": False, "engine": ""},
                         "files": [],
-                    },
+                    }),
                     ensure_ascii=False,
                 ),
                 encoding="utf-8",
@@ -309,7 +347,7 @@ class MigrationLedgerTest(unittest.TestCase):
             manifest_dir.mkdir()
             (manifest_dir / "paper.json").write_text(
                 json.dumps(
-                    {
+                    complete_manifest({
                         "schema_version": 2,
                         "slug": slug,
                         "migration_record_id": blog_only["record_id"],
@@ -322,7 +360,7 @@ class MigrationLedgerTest(unittest.TestCase):
                         "math_section": "その他",
                         "build": {"enabled": False, "engine": ""},
                         "files": [],
-                    },
+                    }),
                     ensure_ascii=False,
                 ),
                 encoding="utf-8",
@@ -422,7 +460,7 @@ class MigrationLedgerTest(unittest.TestCase):
                 ],
             }
             (paper_dir / "paper.json").write_text(
-                json.dumps(manifest), encoding="utf-8"
+                json.dumps(complete_manifest(manifest)), encoding="utf-8"
             )
             environment = {**os.environ, "LEDGER_REPO_ROOT": str(root)}
 
@@ -542,7 +580,7 @@ class MigrationLedgerTest(unittest.TestCase):
                 ],
             }
             (paper_dir / "paper.json").write_text(
-                json.dumps(manifest), encoding="utf-8"
+                json.dumps(complete_manifest(manifest)), encoding="utf-8"
             )
 
             subprocess.run(

@@ -50,6 +50,12 @@ from dempa_site.files import (  # noqa: E402
     sha256_file,
     write_json,
 )
+from dempa_site.manifests.loader import (  # noqa: E402
+    load_manifest_directory,
+    load_schema,
+)
+from dempa_site.manifests.model import Paper  # noqa: E402
+from dempa_site.manifests.validation import validate_manifest_data  # noqa: E402
 from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     safe_relative_path as shared_safe_relative_path,
@@ -64,26 +70,6 @@ SEARCH_SCRIPT_PATH = PATHS.search_script
 PRIVACY_REVIEW_DIR = Path(
     os.environ.get("PAPER_PRIVACY_REVIEW_DIR", PATHS.privacy_review)
 ).resolve()
-LEGACY_PRIVACY_EXEMPT_SLUGS = {
-    "2015-08-28-01",
-    "2015-09-01-01",
-    "2016-01-09-01",
-    "2017-08-01-01",
-    "2018-03-29-01",
-    "2018-10-14-01",
-    "2019-11-29-01",
-    "2020-01-30-01",
-    "2021-01-28-01",
-    "2022-01-03-01",
-    "2023-06-20-01",
-    "2024-01-03-01",
-    "2024-01-08-01",
-    "2024-01-13-01",
-    "2025-12-28-01",
-    "2026-04-21-01",
-}
-
-
 PRIVACY_TEX_COMMANDS = (
     "author",
     "email",
@@ -117,185 +103,18 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def validate_manifest(manifest: dict[str, Any], path: Path) -> None:
-    required = (
-        "schema_version",
-        "slug",
-        "legacy_slugs",
-        "title",
-        "published_at",
-        "sequence",
-        "year",
-        "kind",
-        "summary",
-        "original_url",
-        "order",
-        "tags",
-        "keywords",
-        "build",
-        "files",
-        "approved_changes",
-    )
-    missing = [key for key in required if key not in manifest]
-    if missing:
-        raise PaperToolError(f"{path}: missing fields: {', '.join(missing)}")
-    if manifest["schema_version"] not in {1, 2}:
-        raise PaperToolError(f"{path}: unsupported schema_version")
-    if (
-        manifest["schema_version"] == 1
-        and manifest.get("slug") not in LEGACY_PRIVACY_EXEMPT_SLUGS
-    ):
-        raise PaperToolError(
-            f"{path}: schema 1 privacy exemption is limited to migrated legacy papers"
-        )
-    if path.parent.name != manifest["slug"]:
-        raise PaperToolError(f"{path}: slug does not match directory name")
-    if not isinstance(manifest["sequence"], int) or manifest["sequence"] < 1:
-        raise PaperToolError(f"{path}: sequence must be a positive integer")
-    math_section = manifest.get("math_section", "")
-    if not isinstance(math_section, str):
-        raise PaperToolError(f"{path}: math_section must be a string")
-    if math_section.strip() and math_section.strip() not in MATH_SECTIONS:
-        raise PaperToolError(
-            f"{path}: math_section must be one of: {', '.join(MATH_SECTIONS)}"
-        )
-    try:
-        published = parse_iso_datetime(manifest["published_at"])
-    except ValueError as error:
-        raise PaperToolError(f"{path}: published_at must be ISO 8601") from error
-    expected_slug = f"{published:%Y-%m-%d}-{manifest['sequence']:02d}"
-    if manifest["slug"] != expected_slug:
-        raise PaperToolError(
-            f"{path}: slug must match published date and sequence ({expected_slug})"
-        )
-    for field in ("legacy_slugs", "tags", "keywords"):
-        values = manifest[field]
-        if not isinstance(values, list) or any(
-            not isinstance(value, str) or not value.strip() for value in values
-        ):
-            raise PaperToolError(f"{path}: {field} must be an array of non-empty strings")
-        if len(values) != len(set(values)):
-            raise PaperToolError(f"{path}: {field} contains duplicates")
-    for legacy_slug in manifest["legacy_slugs"]:
-        if str(safe_relative_path(legacy_slug)) != legacy_slug or "/" in legacy_slug:
-            raise PaperToolError(f"{path}: invalid legacy slug: {legacy_slug}")
-    if not isinstance(manifest["files"], list):
-        raise PaperToolError(f"{path}: files must be an array")
-    if not manifest["files"] and manifest["kind"] != BLOG_ONLY_KIND:
-        raise PaperToolError(
-            f"{path}: files may be empty only for kind={BLOG_ONLY_KIND}"
-        )
-    build = manifest["build"]
-    if not isinstance(build, dict) or not isinstance(build.get("enabled"), bool):
-        raise PaperToolError(f"{path}: build.enabled is required")
-    engine = build.get("engine", "")
-    if not isinstance(engine, str):
-        raise PaperToolError(f"{path}: build.engine must be a string")
-    if engine.strip() and engine.strip() not in LATEXMKRC_BY_ENGINE:
-        raise PaperToolError(
-            f"{path}: build.engine must be one of: "
-            + ", ".join(sorted(LATEXMKRC_BY_ENGINE))
-        )
-    if build["enabled"] and "root" not in build:
-        raise PaperToolError(f"{path}: build.root is required when build is enabled")
-    if manifest["kind"] == BLOG_ONLY_KIND:
-        if build["enabled"]:
-            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} cannot enable a TeX build")
-        if manifest["files"]:
-            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} must not contain files")
-        if not str(manifest["original_url"]).strip():
-            raise PaperToolError(f"{path}: {BLOG_ONLY_KIND} requires original_url")
-    if build["enabled"]:
-        root = str(build["root"])
-        if root != nfc_path(root):
-            raise PaperToolError(f"{path}: build.root must use NFC Unicode")
-        safe_relative_path(root)
-    seen: set[str] = set()
-    for entry in manifest["files"]:
-        if not isinstance(entry, dict):
-            raise PaperToolError(f"{path}: every files entry must be an object")
-        for key in ("path", "role", "label", "public", "original_sha256", "sha256"):
-            if key not in entry:
-                raise PaperToolError(f"{path}: file entry missing {key}")
-        raw_relative = str(entry["path"])
-        if raw_relative != nfc_path(raw_relative):
-            raise PaperToolError(
-                f"{path}: file path must use NFC Unicode: {raw_relative}"
-            )
-        relative = str(safe_relative_path(raw_relative))
-        if relative in seen:
-            raise PaperToolError(f"{path}: duplicate file entry: {relative}")
-        seen.add(relative)
-        for key in ("original_sha256", "sha256"):
-            value = entry[key]
-            if not isinstance(value, str) or len(value) != 64:
-                raise PaperToolError(f"{path}: invalid {key} for {relative}")
-    if build["enabled"] and str(build["root"]) not in seen:
-        raise PaperToolError(f"{path}: build.root must appear in files")
-    if not build["enabled"] and "published.pdf" not in seen and "main.tex" in seen:
-        raise PaperToolError(
-            f"{path}: source-only papers must not use main.tex; use source.tex"
-        )
-    if manifest["schema_version"] == 2:
-        reviews = manifest.get("privacy_reviews")
-        if not isinstance(reviews, list):
-            raise PaperToolError(f"{path}: schema 2 requires privacy_reviews")
-        expected = {
-            entry["path"]: entry["sha256"]
-            for entry in manifest["files"]
-            if entry["public"] and Path(str(entry["path"])).suffix.casefold() in {".tex", ".pdf"}
-        }
-        reviewed: dict[str, str] = {}
-        for review in reviews:
-            if not isinstance(review, dict):
-                raise PaperToolError(f"{path}: privacy review must be an object")
-            for key in (
-                "path",
-                "status",
-                "reason",
-                "source_sha256",
-                "inspection_status",
-                "recorded_at",
-            ):
-                if key not in review:
-                    raise PaperToolError(f"{path}: privacy review missing {key}")
-            relative = str(safe_relative_path(str(review["path"])))
-            if relative in reviewed:
-                raise PaperToolError(f"{path}: duplicate privacy review for {relative}")
-            if review["status"] not in {"reviewed", "overridden"}:
-                raise PaperToolError(f"{path}: invalid privacy status for {relative}")
-            if review["status"] == "overridden" and not str(review["reason"]).strip():
-                raise PaperToolError(f"{path}: privacy override reason is empty for {relative}")
-            source_hash = review["source_sha256"]
-            if not isinstance(source_hash, str) or len(source_hash) != 64:
-                raise PaperToolError(f"{path}: invalid privacy hash for {relative}")
-            reviewed[relative] = source_hash
-        if reviewed != expected:
-            missing_reviews = sorted(set(expected) - set(reviewed))
-            extra_reviews = sorted(set(reviewed) - set(expected))
-            mismatched = sorted(
-                relative
-                for relative in set(expected) & set(reviewed)
-                if expected[relative] != reviewed[relative]
-            )
-            details = []
-            if missing_reviews:
-                details.append("missing: " + ", ".join(missing_reviews))
-            if extra_reviews:
-                details.append("extra: " + ", ".join(extra_reviews))
-            if mismatched:
-                details.append("hash mismatch: " + ", ".join(mismatched))
-            raise PaperToolError(f"{path}: invalid privacy review coverage ({'; '.join(details)})")
+    validate_manifest_data(manifest, path, load_schema(), PaperToolError)
 
 
-def has_pdf(manifest: dict[str, Any]) -> bool:
+def has_pdf(manifest: Paper) -> bool:
     """Return whether staging will provide main.pdf for this paper."""
-    if manifest["build"]["enabled"]:
+    if manifest.build.enabled:
         return True
-    return any(entry["path"] == "published.pdf" for entry in manifest["files"])
+    return any(entry.path == "published.pdf" for entry in manifest.files)
 
 
 def public_file_actions(
-    manifest: dict[str, Any], prefix: str, indent: str
+    manifest: Paper, prefix: str, indent: str
 ) -> list[str]:
     """Render PDF/source actions, making a source primary when no PDF exists."""
     actions: list[str] = []
@@ -305,13 +124,13 @@ def public_file_actions(
             f'{indent}<a class="primary-action" href="{prefix}main.pdf">PDFを読む</a>'
         )
     primary_source_added = False
-    for entry in manifest["files"]:
-        if not entry["public"] or not entry["label"]:
+    for entry in manifest.files:
+        if not entry.public or not entry.label:
             continue
-        relative = html.escape(entry["path"], quote=True)
-        label = html.escape(entry["label"])
+        relative = html.escape(entry.path, quote=True)
+        label = html.escape(entry.label)
         primary = ""
-        if not pdf_available and not primary_source_added and entry["role"] == "manuscript":
+        if not pdf_available and not primary_source_added and entry.role == "manuscript":
             primary = ' class="primary-action"'
             primary_source_added = True
         actions.append(f'{indent}<a{primary} href="{prefix}{relative}">{label}</a>')
@@ -319,48 +138,34 @@ def public_file_actions(
 
 
 def original_article_action(
-    manifest: dict[str, Any], indent: str, primary: bool = False
+    manifest: Paper, indent: str, primary: bool = False
 ) -> str | None:
-    if not manifest["original_url"]:
+    if not manifest.original_url:
         return None
-    original_url = html.escape(manifest["original_url"], quote=True)
+    original_url = html.escape(manifest.original_url, quote=True)
     class_attribute = ' class="primary-action"' if primary else ""
-    label = "電波通信で読む" if manifest["kind"] == BLOG_ONLY_KIND else "元の記事"
+    label = "電波通信で読む" if manifest.kind == BLOG_ONLY_KIND else "元の記事"
     return f'{indent}<a{class_attribute} href="{original_url}">{label}</a>'
 
 
-def manifests(slugs: Iterable[str] | None = None) -> list[tuple[Path, dict[str, Any]]]:
-    wanted = set(slugs or [])
-    found: list[tuple[Path, dict[str, Any]]] = []
-    for manifest_path in sorted(PAPERS_DIR.glob("*/paper.json")):
-        manifest = load_json(manifest_path)
-        validate_manifest(manifest, manifest_path)
-        if wanted and manifest["slug"] not in wanted:
-            continue
-        found.append((manifest_path, manifest))
-    if wanted:
-        missing = wanted - {manifest["slug"] for _, manifest in found}
-        if missing:
-            raise PaperToolError(f"unknown paper slug(s): {', '.join(sorted(missing))}")
-    if not found:
-        raise PaperToolError("no paper manifests found")
-    return sorted(found, key=lambda item: (item[1]["order"], item[1]["slug"]))
+def manifests(slugs: Iterable[str] | None = None) -> list[tuple[Path, Paper]]:
+    return load_manifest_directory(PAPERS_DIR, slugs, PaperToolError)
 
 
-def verify_one(manifest_path: Path, manifest: dict[str, Any]) -> list[str]:
+def verify_one(manifest_path: Path, manifest: Paper) -> list[str]:
     errors: list[str] = []
     paper_dir = manifest_path.parent
-    for entry in manifest["files"]:
-        relative = safe_relative_path(entry["path"])
+    for entry in manifest.files:
+        relative = safe_relative_path(entry.path)
         target = paper_dir / relative
         if not target.is_file():
-            errors.append(f"{manifest['slug']}/{relative}: missing")
+            errors.append(f"{manifest.slug}/{relative}: missing")
             continue
         actual = sha256(target)
-        if actual != entry["sha256"]:
+        if actual != entry.sha256:
             errors.append(
-                f"{manifest['slug']}/{relative}: SHA-256 mismatch "
-                f"(expected {entry['sha256']}, got {actual})"
+                f"{manifest.slug}/{relative}: SHA-256 mismatch "
+                f"(expected {entry.sha256}, got {actual})"
             )
     return errors
 
@@ -372,7 +177,7 @@ def command_verify(args: argparse.Namespace) -> None:
         paper_errors = verify_one(manifest_path, manifest)
         errors.extend(paper_errors)
         if not paper_errors:
-            print(f"OK  {manifest['slug']}")
+            print(f"OK  {manifest.slug}")
     if errors:
         for error in errors:
             print(f"ERR {error}", file=sys.stderr)
@@ -384,13 +189,13 @@ def command_audit(args: argparse.Namespace) -> None:
     errors: list[str] = []
     for manifest_path, manifest in selected:
         errors.extend(verify_one(manifest_path, manifest))
-        for entry in manifest["files"]:
+        for entry in manifest.files:
             state = (
                 "original"
-                if entry["sha256"] == entry["original_sha256"]
+                if entry.sha256 == entry.original_sha256
                 else "approved-modified"
             )
-            print(f"{state:17} {manifest['slug']}/{entry['path']}")
+            print(f"{state:17} {manifest.slug}/{entry.path}")
     if errors:
         for error in errors:
             print(f"ERR {error}", file=sys.stderr)
@@ -456,7 +261,7 @@ def page_head(
   <link rel="stylesheet" href="{stylesheet}">"""
 
 
-def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
+def paper_card(manifest: Paper, prefix: str = "") -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
@@ -516,9 +321,9 @@ def paper_card(manifest: dict[str, Any], prefix: str = "") -> str:
 
 
 def grouped_tags(
-    selected: list[tuple[Path, dict[str, Any]]],
-) -> dict[str, list[dict[str, Any]]]:
-    grouped: dict[str, list[dict[str, Any]]] = {}
+    selected: list[tuple[Path, Paper]],
+) -> dict[str, list[Paper]]:
+    grouped: dict[str, list[Paper]] = {}
     for _, manifest in selected:
         for tag in manifest["tags"]:
             grouped.setdefault(tag, []).append(manifest)
@@ -529,7 +334,7 @@ def tag_href(tag: str, prefix: str = "") -> str:
     return f"{prefix}tags/{quote(tag, safe='')}/"
 
 
-def rendered_tag_index(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_tag_index(selected: list[tuple[Path, Paper]]) -> str:
     grouped = grouped_tags(selected)
     return "\n".join(
         f'      <a class="tag-index-item" href="{tag_href(tag)}">'
@@ -539,9 +344,9 @@ def rendered_tag_index(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 
 
 def rendered_year_groups(
-    selected: list[tuple[Path, dict[str, Any]]], prefix: str = ""
+    selected: list[tuple[Path, Paper]], prefix: str = ""
 ) -> str:
-    grouped: dict[int, list[dict[str, Any]]] = {}
+    grouped: dict[int, list[Paper]] = {}
     for _, manifest in selected:
         grouped.setdefault(int(manifest["year"]), []).append(manifest)
 
@@ -567,7 +372,7 @@ def rendered_year_groups(
     return "\n\n".join(groups)
 
 
-def rendered_home_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_home_page(selected: list[tuple[Path, Paper]]) -> str:
     newest = [manifest for _, manifest in selected[-HOME_PAPER_LIMIT:]][::-1]
     cards = "\n\n".join(paper_card(manifest) for manifest in newest)
     description = (
@@ -648,7 +453,7 @@ def rendered_home_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 """
 
 
-def rendered_archive_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_archive_page(selected: list[tuple[Path, Paper]]) -> str:
     cards = "\n\n".join(
         paper_card(manifest, "../") for _, manifest in reversed(selected)
     )
@@ -742,7 +547,7 @@ def rendered_archive_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 """
 
 
-def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
+def rendered_tag_page_paper(manifest: Paper) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     published_date = html.escape(str(manifest["published_at"])[:10])
     title = html.escape(manifest["title"])
@@ -780,8 +585,8 @@ def rendered_tag_page_paper(manifest: dict[str, Any]) -> str:
         </article>"""
 
 
-def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
-    by_year: dict[int, list[dict[str, Any]]] = {}
+def rendered_tag_page(tag: str, papers: list[Paper]) -> str:
+    by_year: dict[int, list[Paper]] = {}
     for paper in papers:
         by_year.setdefault(int(paper["year"]), []).append(paper)
     year_sections = "\n".join(
@@ -822,7 +627,7 @@ def rendered_tag_page(tag: str, papers: list[dict[str, Any]]) -> str:
 
 
 def rendered_math_index_item(
-    manifest: dict[str, Any], prefix: str = "../"
+    manifest: Paper, prefix: str = "../"
 ) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
@@ -833,11 +638,11 @@ def rendered_math_index_item(
         if has_pdf(manifest)
         else []
     )
-    for entry in manifest["files"]:
-        if not entry["public"] or not entry["label"]:
+    for entry in manifest.files:
+        if not entry.public or not entry.label:
             continue
-        path = html.escape(entry["path"], quote=True)
-        label = html.escape(entry["label"])
+        path = html.escape(entry.path, quote=True)
+        label = html.escape(entry.label)
         file_links.append(f'<a href="{prefix}papers/{slug}/{path}">{label}</a>')
     if manifest["kind"] == BLOG_ONLY_KIND and manifest["original_url"]:
         original_url = html.escape(manifest["original_url"], quote=True)
@@ -861,16 +666,16 @@ def rendered_math_index_item(
 
 
 def grouped_math_sections(
-    selected: list[tuple[Path, dict[str, Any]]],
-) -> dict[str, list[dict[str, Any]]]:
-    grouped: dict[str, list[dict[str, Any]]] = {section: [] for section in MATH_SECTIONS}
+    selected: list[tuple[Path, Paper]],
+) -> dict[str, list[Paper]]:
+    grouped: dict[str, list[Paper]] = {section: [] for section in MATH_SECTIONS}
     for _, manifest in selected:
         section = str(manifest.get("math_section", "")).strip() or "その他"
         grouped[section].append(manifest)
     return grouped
 
 
-def representative_math_tags(papers: list[dict[str, Any]]) -> list[str]:
+def representative_math_tags(papers: list[Paper]) -> list[str]:
     counts: dict[str, int] = {}
     for paper in papers:
         for tag in paper["tags"]:
@@ -885,7 +690,7 @@ def representative_math_tags(papers: list[dict[str, Any]]) -> list[str]:
     ]
 
 
-def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_math_page(selected: list[tuple[Path, Paper]]) -> str:
     grouped = grouped_math_sections(selected)
     directory_cards = "\n".join(
         f"""      <a class="math-directory-card" href="{MATH_SECTION_DETAILS[section]['slug']}/">
@@ -934,10 +739,10 @@ def rendered_math_page(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 
 
 def rendered_math_section_page(
-    section: str, papers: list[dict[str, Any]]
+    section: str, papers: list[Paper]
 ) -> str:
     details = MATH_SECTION_DETAILS[section]
-    by_year: dict[int, list[dict[str, Any]]] = {}
+    by_year: dict[int, list[Paper]] = {}
     for paper in papers:
         by_year.setdefault(int(paper["year"]), []).append(paper)
     if by_year:
@@ -987,7 +792,7 @@ def rendered_math_section_page(
 """
 
 
-def rendered_paper_page(manifest: dict[str, Any]) -> str:
+def rendered_paper_page(manifest: Paper) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
@@ -1105,13 +910,13 @@ def command_catalog(args: argparse.Namespace) -> None:
 def command_build_roots(args: argparse.Namespace) -> None:
     """List only TeX roots whose manifests explicitly enable compilation."""
     for manifest_path, manifest in manifests():
-        if not manifest["build"]["enabled"]:
+        if not manifest.build.enabled:
             continue
-        root = safe_relative_path(str(manifest["build"]["root"]))
+        root = safe_relative_path(str(manifest.build.root))
         print((manifest_path.parent / root).relative_to(ROOT))
 
 
-def rendered_keywords(manifest: dict[str, Any]) -> str:
+def rendered_keywords(manifest: Paper) -> str:
     lines = [
         "# タイトル",
         manifest["title"],
@@ -1165,7 +970,7 @@ def rendered_not_found_page() -> str:
 """
 
 
-def rendered_feed(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_feed(selected: list[tuple[Path, Paper]]) -> str:
     items = []
     for _, manifest in reversed(selected):
         published = parse_iso_datetime(manifest["published_at"])
@@ -1195,7 +1000,7 @@ def rendered_feed(selected: list[tuple[Path, dict[str, Any]]]) -> str:
 """
 
 
-def rendered_sitemap(selected: list[tuple[Path, dict[str, Any]]]) -> str:
+def rendered_sitemap(selected: list[tuple[Path, Paper]]) -> str:
     urls: list[tuple[str, str | None]] = [
         (f"{SITE_URL}/", None),
         (f"{SITE_URL}/archive/", None),
@@ -1824,7 +1629,7 @@ def command_import_tex(args: argparse.Namespace) -> None:
             rendered_keywords(manifest), encoding="utf-8"
         )
         validate_manifest(manifest, manifest_path)
-        errors = verify_one(manifest_path, manifest)
+        errors = verify_one(manifest_path, Paper.from_dict(manifest, manifest_path))
         if errors:
             raise PaperToolError("; ".join(errors))
     except Exception:
@@ -1913,7 +1718,7 @@ def command_import_pdf(args: argparse.Namespace) -> None:
             rendered_keywords(manifest), encoding="utf-8"
         )
         validate_manifest(manifest, manifest_path)
-        errors = verify_one(manifest_path, manifest)
+        errors = verify_one(manifest_path, Paper.from_dict(manifest, manifest_path))
         if errors:
             raise PaperToolError("; ".join(errors))
     except Exception:
@@ -2062,7 +1867,7 @@ def command_import(args: argparse.Namespace) -> None:
             rendered_keywords(manifest), encoding="utf-8"
         )
         validate_manifest(manifest, manifest_path)
-        errors = verify_one(manifest_path, manifest)
+        errors = verify_one(manifest_path, Paper.from_dict(manifest, manifest_path))
         if errors:
             raise PaperToolError("; ".join(errors))
     except Exception:
@@ -2081,7 +1886,8 @@ def command_approve(args: argparse.Namespace) -> None:
     if not reason:
         raise PaperToolError("approval reason must not be empty")
     selected = manifests([args.slug])
-    manifest_path, manifest = selected[0]
+    manifest_path, typed_manifest = selected[0]
+    manifest = typed_manifest.to_dict()
     requested = list(dict.fromkeys(args.files))
     requested_set = set(requested)
     entries = {entry["path"]: entry for entry in manifest["files"]}

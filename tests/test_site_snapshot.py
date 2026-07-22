@@ -20,9 +20,34 @@ class SiteSnapshotTest(unittest.TestCase):
         (paper / "paper.json").write_text(
             json.dumps(
                 {
+                    "schema_version": 2,
                     "slug": "2026-07-22-01",
+                    "migration_record_id": "fixture:site-snapshot",
                     "legacy_slugs": ["legacy-paper"],
-                    "build": {"enabled": True},
+                    "title": "Snapshot fixture",
+                    "published_at": "2026-07-22T12:00:00+09:00",
+                    "sequence": 1,
+                    "year": 2026,
+                    "kind": "TeX原稿",
+                    "math_section": "その他",
+                    "summary": "公開物スナップショットのテスト用原稿です。",
+                    "original_url": "",
+                    "order": 2026072201,
+                    "tags": ["数学"],
+                    "keywords": ["Snapshot fixture"],
+                    "build": {"enabled": True, "engine": "", "root": "main.tex"},
+                    "files": [
+                        {
+                            "path": "main.tex",
+                            "role": "manuscript",
+                            "label": "TeX原稿",
+                            "public": False,
+                            "original_sha256": "0" * 64,
+                            "sha256": "0" * 64,
+                        }
+                    ],
+                    "approved_changes": [],
+                    "privacy_reviews": []
                 }
             ),
             encoding="utf-8",

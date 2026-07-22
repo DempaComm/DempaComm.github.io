@@ -15,6 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from dempa_site.errors import SiteSnapshotError  # noqa: E402
 from dempa_site.files import read_json, sha256_file, write_json  # noqa: E402
+from dempa_site.manifests.loader import load_manifest  # noqa: E402
 from dempa_site.paths import RepositoryPaths  # noqa: E402
 
 
@@ -30,13 +31,10 @@ def generated_pdf_paths() -> set[str]:
     """Return staged PDFs whose bytes can vary between TeX environments."""
     paths: set[str] = set()
     for manifest_path in sorted(PAPERS_DIR.glob("*/paper.json")):
-        try:
-            manifest = read_json(manifest_path)
-        except (OSError, JSONDecodeError) as error:
-            raise SiteSnapshotError(f"cannot read {manifest_path}: {error}") from error
-        if not manifest.get("build", {}).get("enabled", False):
+        manifest = load_manifest(manifest_path, SiteSnapshotError)
+        if not manifest.build.enabled:
             continue
-        slugs = [manifest.get("slug", ""), *manifest.get("legacy_slugs", [])]
+        slugs = [manifest.slug, *manifest.legacy_slugs]
         for slug in slugs:
             if not isinstance(slug, str) or not slug:
                 raise SiteSnapshotError(f"{manifest_path}: invalid slug")

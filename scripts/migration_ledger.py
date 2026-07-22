@@ -12,7 +12,6 @@ import sys
 from collections import Counter, defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
-from json import JSONDecodeError
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Optional
 from urllib.parse import unquote, urlsplit
@@ -28,11 +27,12 @@ from dempa_site.files import (  # noqa: E402
     compact_json,
     json_text,
     normalize_nfkc_casefold,
-    read_json,
     sha256_file,
     sha256_text,
     write_json as write_json_file,
 )
+from dempa_site.manifests.loader import load_manifest  # noqa: E402
+from dempa_site.manifests.model import Paper  # noqa: E402
 from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     is_safe_relative_path,
@@ -256,17 +256,11 @@ def safe_relative(value: str, field: str) -> None:
         raise LedgerError(f"{field} must be a safe relative path: {value}")
 
 
-def load_manifests() -> dict[str, dict[str, Any]]:
-    manifests: dict[str, dict[str, Any]] = {}
+def load_manifests() -> dict[str, Paper]:
+    manifests: dict[str, Paper] = {}
     for path in sorted(PAPERS_DIR.glob("*/paper.json")):
-        try:
-            value = read_json(path)
-        except (OSError, JSONDecodeError) as error:
-            raise LedgerError(f"cannot read {path}: {error}") from error
-        slug = str(value.get("slug", "")).strip()
-        if not slug:
-            raise LedgerError(f"{path}: missing slug")
-        manifests[slug] = value
+        paper = load_manifest(path, LedgerError)
+        manifests[paper.slug] = paper
     return manifests
 
 
@@ -307,7 +301,7 @@ def write_rows(rows: list[dict[str, str]], path: Path = CSV_PATH) -> None:
 
 
 def validate_rows(
-    rows: list[dict[str, str]], manifests: dict[str, dict[str, Any]]
+    rows: list[dict[str, str]], manifests: dict[str, Paper]
 ) -> None:
     errors: list[str] = []
     record_ids: set[str] = set()
@@ -1486,7 +1480,7 @@ def command_record_publication(args: argparse.Namespace) -> None:
     if not rows:
         raise LedgerError("ledger CSV does not exist or is empty")
     manifests = load_manifests()
-    manifests_by_record: dict[str, dict[str, Any]] = {}
+    manifests_by_record: dict[str, Paper] = {}
     for manifest in manifests.values():
         record_id = str(manifest.get("migration_record_id", "")).strip()
         if not record_id:

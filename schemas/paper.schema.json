@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dempacomm.github.io/schemas/paper.schema.json",
+  "title": "数識電収 paper.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "slug",
+    "legacy_slugs",
+    "title",
+    "published_at",
+    "sequence",
+    "year",
+    "kind",
+    "summary",
+    "original_url",
+    "order",
+    "tags",
+    "keywords",
+    "build",
+    "files",
+    "approved_changes"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "enum": [1, 2]},
+    "slug": {"type": "string", "minLength": 1},
+    "migration_record_id": {"type": "string"},
+    "legacy_slugs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "title": {"type": "string", "minLength": 1},
+    "published_at": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "year": {"type": "integer"},
+    "kind": {"type": "string", "minLength": 1},
+    "math_section": {"type": "string"},
+    "summary": {"type": "string"},
+    "original_url": {"type": "string"},
+    "order": {"type": "integer"},
+    "tags": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "keywords": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "build": {"$ref": "#/$defs/build"},
+    "files": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/file"}
+    },
+    "approved_changes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/approved_change"}
+    },
+    "privacy_reviews": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/privacy_review"}
+    },
+    "history": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/history_event"}
+    },
+    "corrections": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/correction"}
+    },
+    "statements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "relations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/relation"}
+    },
+    "license": {"type": "string"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "[0-9a-f]{64}"
+    },
+    "build": {
+      "type": "object",
+      "required": ["enabled", "engine"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "engine": {"type": "string"},
+        "root": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "file": {
+      "type": "object",
+      "required": [
+        "path",
+        "role",
+        "label",
+        "public",
+        "original_sha256",
+        "sha256"
+      ],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "label": {"type": "string"},
+        "public": {"type": "boolean"},
+        "original_sha256": {"$ref": "#/$defs/sha256"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "approved_change_file": {
+      "type": "object",
+      "required": ["path", "from_sha256", "to_sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "from_sha256": {"$ref": "#/$defs/sha256"},
+        "to_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "approved_change": {
+      "type": "object",
+      "required": ["approved_at", "reason", "files"],
+      "properties": {
+        "approved_at": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/approved_change_file"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "privacy_review": {
+      "type": "object",
+      "required": [
+        "path",
+        "status",
+        "reason",
+        "source_sha256",
+        "inspection_status",
+        "recorded_at"
+      ],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "enum": ["reviewed", "overridden"]},
+        "reason": {"type": "string"},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "inspection_status": {"type": "string", "minLength": 1},
+        "recorded_at": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "history_event": {
+      "type": "object",
+      "required": ["recorded_at", "kind", "summary"],
+      "properties": {
+        "recorded_at": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "summary": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "correction": {
+      "type": "object",
+      "required": ["recorded_at", "summary"],
+      "properties": {
+        "recorded_at": {"type": "string", "minLength": 1},
+        "summary": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "statement": {
+      "type": "object",
+      "required": ["identifier", "kind", "title", "anchor"],
+      "properties": {
+        "identifier": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "anchor": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "relation": {
+      "type": "object",
+      "required": ["target_slug", "kind", "label"],
+      "properties": {
+        "target_slug": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "label": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
