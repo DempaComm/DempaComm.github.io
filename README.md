@@ -13,7 +13,7 @@
 
 ## 収録状況
 
-現在は2015年から2026年までの17原稿を収録しています。元のTeXと当時の完成PDFは無改変で保存し、再現可能な原稿だけを自動コンパイルの対象にします。`paper.json` の `kind` は取り込み方法を記録する内部管理項目で、公開ページには表示しません。
+現在は2015年から2026年までの191記事を収録しています。TeX・PDF付き、PDFのみ、TeXのみ、ブログ本文のみの記事が含まれます。保存している元のTeXと当時の完成PDFは無改変で維持し、再現可能な原稿だけを自動コンパイルの対象にします。`paper.json` の `kind` は取り込み方法を記録する内部管理項目で、公開ページには表示しません。
 
 ## 原稿保護と移行
 
@@ -29,6 +29,7 @@ python3 scripts/migration_ledger.py render-metadata-review
 python3 scripts/migration_ledger.py archive-priority
 python3 scripts/paper_tool.py stage _site
 python3 scripts/paper_tool.py check-links _site
+python3 scripts/site_snapshot.py check _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
 

@@ -16,11 +16,11 @@ LuaLaTeX、HTML、Typst、全文検索、原稿関係図、読書経路などを
   取り込み、HTML生成、公開配置、リンク検査、CLIを担当している。
 - `scripts/migration_ledger.py` は約2,400行で、台帳、候補照合、確認ページ、CLIを
   担当している。
-- 自動テストは13件あり、手元では成功している。
+- 自動テストは15件あり、手元では成功している。
 - 191記事のSHA検査、カタログ検査、台帳231件の検査、公開サイト生成、リンク検査は
   成功している。
-- GitHub ActionsはSHA、カタログ、台帳を検査しているが、現時点では単体テストを
-  実行していない。
+- GitHub Actionsは単体テスト、SHA、カタログ、台帳、公開サイトの基準スナップ
+  ショットを検査する。
 - 移行は完了しているため、台帳機能は今後のサイト機能から隔離できる。
 
 ## 絶対に守る条件
@@ -103,7 +103,15 @@ tools/
 
 ## 第0段階：安全網の強化
 
-コードを移動する前に、GitHub Actionsへ次を追加する。
+コードを移動する前に、GitHub Actionsへ次の安全網を設ける。
+
+進捗：
+
+- [x] GitHub Actionsで単体テストを実行する。
+- [x] SHA、カタログ、台帳、サイト生成、リンクを検査する。
+- [x] READMEの記事数と記事種別を現状へ合わせる。
+- [x] 公開物のファイル一覧とSHAを基準スナップショットで検査する。
+- [ ] この一連の変更をpushし、GitHub Pagesのデプロイ成功を確認する。
 
 - `python3 -m unittest discover -s tests`
 - 191記事のSHA検査
@@ -112,8 +120,23 @@ tools/
 - `_site` の生成
 - 公開HTMLのリンク検査
 
-現在の公開物について、ファイル一覧とSHA一覧を比較できる検査も用意する。
-READMEなどの手書き文書に古い記事数が残っていれば修正する。
+現在の公開物は `tests/fixtures/site-baseline.json` にファイル一覧とSHA-256を保存し、
+次の操作で比較する。
+
+```sh
+python3 scripts/paper_tool.py stage _site
+python3 scripts/site_snapshot.py check _site
+```
+
+意図した公開変更を確認した後だけ、次の操作で基準を更新する。
+
+```sh
+python3 scripts/site_snapshot.py write _site
+```
+
+TeX環境によってビルド情報が変わり得る自動生成PDFは、ファイルの存在を検査するが
+SHA比較から除外する。原稿、既存PDF、HTML、JSON、CSS、JavaScript、画像などは
+SHAで比較する。READMEなどの手書き文書に古い記事数が残っていれば修正する。
 
 完了条件：テスト失敗時にデプロイが開始されず、現在のサイトが正常にデプロイされる。
 
