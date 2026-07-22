@@ -1,0 +1,2 @@
+"""Public-site rendering components."""
+
