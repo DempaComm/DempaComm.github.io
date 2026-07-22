@@ -1,5 +1,9 @@
 # やるべきこと
 
+保守性と機能追加のための段階的な再構成は、
+[`REFACTORING_PLAN.md`](REFACTORING_PLAN.md) にまとめている。新機能を大きく
+追加する前に、同文書の第0段階と第1段階から進める。
+
 ## 近日中
 
 - Google Search Consoleで `sitemap.xml` の取得状態を再確認する。
