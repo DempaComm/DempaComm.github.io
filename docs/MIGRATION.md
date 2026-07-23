@@ -176,6 +176,11 @@ python3 scripts/paper_tool.py audit
 
 ## VS Codeで保護されたTeX・PDFを更新する
 
+通常の修正では、検査と完了処理をまとめた `review-change`、`finish-change` を使用できる。
+記事番号・ファイル名・理由だけを書き換えてコピーできる短い手順は
+[`EDITING_WORKFLOW.md`](EDITING_WORKFLOW.md) にまとめている。以下は各処理を個別に行う
+場合と、問題発生時の詳しい手順である。
+
 `paper.json` の `files` にあるTeX・PDFはSHA-256で保護されている。VS Codeで意図的に更新する場合は、本文を保存しただけでpushせず、個人情報の再検査と承認記録を作る。
 
 以下では `2018-10-14-01` の `main.tex` を例にする。最初にリポジトリのルートへ移動し、ほかの未完了変更がないことを確認する。

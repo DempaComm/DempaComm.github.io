@@ -54,7 +54,11 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 各分野の記事一覧を `math/<分野>/` に生成します。RSSは `feed.xml`、
 サイトマップは `sitemap.xml` で公開します。
 
-使い方の詳細は `docs/MIGRATION.md` を参照してください。VS Codeで保護されたTeX・PDFを更新するときの再検査、`approve-change`、検証、pushの手順も同書の「VS Codeで保護されたTeX・PDFを更新する」にまとめています。ファイル1本だけからの非常用取り込みと、一般的なAIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
+普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
+できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は
+`docs/MIGRATION.md` にまとめています。ファイル1本だけからの非常用取り込みと、一般的な
+AIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を
+`docs/MINIMAL_PDF_IMPORT.md` にまとめています。
 
 電波通信の記事とMyBlog原稿の対応、未移行・検査中・公開済みの状態は
 `ledger/migration-ledger.csv` で管理します。使い方は

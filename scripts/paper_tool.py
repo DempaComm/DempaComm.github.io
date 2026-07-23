@@ -15,7 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.config import LATEXMKRC_BY_ENGINE  # noqa: E402
-from dempa_site.errors import PaperToolError  # noqa: E402
+from dempa_site.errors import DempaSiteError, PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
 from dempa_site.importing.pdf import import_pdf  # noqa: E402
@@ -27,11 +27,23 @@ from dempa_site.paths import (  # noqa: E402
     safe_relative_path as shared_safe_relative_path,
 )
 from dempa_site.protection.approval import approve_changes  # noqa: E402
+from dempa_site.protection.change_workflow import (  # noqa: E402
+    allowed_public_changes,
+    changed_protected_files,
+    review_changes,
+    resumable_change_count,
+    unexpected_public_differences,
+)
 from dempa_site.protection.hashes import protected_file_errors  # noqa: E402
 from dempa_site.protection.privacy import inspect_file  # noqa: E402
 from dempa_site.site.links import local_link_errors  # noqa: E402
 from dempa_site.site.rendering import rendered_home_page  # noqa: E402
 from dempa_site.site.staging import stage_site  # noqa: E402
+from dempa_site.site.snapshot import (  # noqa: E402
+    check_baseline,
+    snapshot_differences,
+    write_baseline,
+)
 from tools.check_all import complete_check_steps, run_check_suite  # noqa: E402
 
 
@@ -229,6 +241,71 @@ def command_approve(args: argparse.Namespace) -> None:
     print(f"APPROVED {count} explicitly requested change(s) for {args.slug}")
 
 
+def command_review_change(args: argparse.Namespace) -> None:
+    manifest_path, paper = manifests([args.slug])[0]
+    reviewed = review_changes(
+        manifest_path, paper, PRIVACY_REVIEW_DIR, args.files
+    )
+    for result in reviewed:
+        if result.report_directory is None:
+            print(f"REVIEW {result.path}: automatic privacy inspection not required")
+            continue
+        print(f"PRIVACY REVIEW FILES: {result.report_directory}")
+        for finding in result.findings:
+            print(f"WARN {result.path}: {finding}")
+    print("MANUAL REVIEW REQUIRED before using finish-change --privacy-reviewed")
+
+
+def command_finish_change(args: argparse.Namespace) -> None:
+    if not args.accept_public_change:
+        raise PaperToolError(
+            "finish-change requires --accept-public-change after reviewing the "
+            "local PDF, source, and privacy report"
+        )
+    manifest_path, paper = manifests([args.slug])[0]
+    allowed = allowed_public_changes(paper, args.files)
+    if changed_protected_files(manifest_path, paper):
+        count = approve_changes(
+            manifest_path,
+            paper,
+            PRIVACY_REVIEW_DIR,
+            args.reason,
+            args.files,
+            args.privacy_reviewed,
+            args.privacy_override,
+        )
+    else:
+        resumed = resumable_change_count(paper, args.files, args.reason)
+        if resumed is None:
+            raise PaperToolError(
+                "no unapproved hash changes and the latest approval does not match "
+                "this finish-change request"
+            )
+        count = resumed
+        print("RESUMING the latest matching approved change")
+    output = Path(args.output)
+    if not output.is_absolute():
+        output = ROOT / output
+    output = output.resolve()
+    steps = complete_check_steps(PROJECT_ROOT, output)[:-1]
+    run_check_suite(steps, ROOT)
+
+    baseline = ROOT / "tests" / "fixtures" / "site-baseline.json"
+    differences = snapshot_differences(output, PAPERS_DIR, baseline)
+    for difference in differences:
+        print(f"PUBLIC {difference}")
+    unexpected = unexpected_public_differences(differences, allowed)
+    if unexpected:
+        raise PaperToolError(
+            "refusing to approve unrelated public differences: "
+            + "; ".join(unexpected)
+        )
+    write_baseline(output, PAPERS_DIR, baseline)
+    check_baseline(output, PAPERS_DIR, baseline)
+    print(f"FINISHED {count} protected change(s) for {args.slug}")
+    print("NEXT git status, then commit and push the intended files")
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(
         description="Manage byte-protected LaTeX papers and the generated catalog."
@@ -339,6 +416,38 @@ def parser() -> argparse.ArgumentParser:
         "--privacy-override", metavar="REASON", help="approve after an alternate review"
     )
     approve_parser.set_defaults(func=command_approve)
+
+    review_change_parser = subparsers.add_parser(
+        "review-change",
+        help="inspect changed protected files before final approval",
+    )
+    review_change_parser.add_argument("slug")
+    review_change_parser.add_argument(
+        "--file", dest="files", action="append", required=True
+    )
+    review_change_parser.set_defaults(func=command_review_change)
+
+    finish_change_parser = subparsers.add_parser(
+        "finish-change",
+        help="approve a reviewed change, run checks, and update the public baseline",
+    )
+    finish_change_parser.add_argument("slug")
+    finish_change_parser.add_argument("--reason", required=True)
+    finish_change_parser.add_argument(
+        "--file", dest="files", action="append", required=True
+    )
+    finish_privacy = finish_change_parser.add_mutually_exclusive_group()
+    finish_privacy.add_argument("--privacy-reviewed", action="store_true")
+    finish_privacy.add_argument("--privacy-override", metavar="REASON")
+    finish_change_parser.add_argument(
+        "--accept-public-change",
+        action="store_true",
+        help="accept only public paths belonging to the requested paper and files",
+    )
+    finish_change_parser.add_argument(
+        "--output", default="_site", metavar="DIR"
+    )
+    finish_change_parser.set_defaults(func=command_finish_change)
     return result
 
 
@@ -347,7 +456,7 @@ def main() -> int:
         args = parser().parse_args()
         args.func(args)
         return 0
-    except PaperToolError as error:
+    except DempaSiteError as error:
         print(f"paper-tool: {error}", file=sys.stderr)
         return 1
 

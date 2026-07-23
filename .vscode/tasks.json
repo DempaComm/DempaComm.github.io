@@ -19,6 +19,70 @@
         "panel": "dedicated",
         "clear": true
       }
+    },
+    {
+      "label": "数識電収: 原稿修正を検査",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "scripts/paper_tool.py",
+        "review-change",
+        "${input:paperSlug}",
+        "--file",
+        "${input:paperFile}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "数識電収: 原稿修正を承認して全確認",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "scripts/paper_tool.py",
+        "finish-change",
+        "${input:paperSlug}",
+        "--reason",
+        "${input:changeReason}",
+        "--file",
+        "${input:paperFile}",
+        "--privacy-reviewed",
+        "--accept-public-change"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "paperSlug",
+      "type": "promptString",
+      "description": "記事番号（例: 2015-08-28-01）"
+    },
+    {
+      "id": "paperFile",
+      "type": "promptString",
+      "description": "修正したファイル名",
+      "default": "main.tex"
+    },
+    {
+      "id": "changeReason",
+      "type": "promptString",
+      "description": "修正理由"
     }
   ]
 }

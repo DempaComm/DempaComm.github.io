@@ -12,6 +12,10 @@
 
 ## 完了した追加機能
 
+- [x] 原稿修正支援コマンドとVS Code入力タスク。
+  - `review-change` が変更対象を限定して個人情報報告を生成する。
+  - `finish-change` がSHA承認、全検査、対象記事だけの公開物基準更新をまとめる。
+  - 記事番号・ファイル名・理由だけを書き換えるコピー用手順書を用意した。
 - [x] latexmkの複数TeXエンジン対応。
   - `paper.json` の `build.engine` でpLaTeX、upLaTeX、pdfLaTeX、LuaLaTeX、XeLaTeXを選択できる。
   - エンジン別の `.latexmkrc` とGitHub Actionsのビルド分岐を追加した。
