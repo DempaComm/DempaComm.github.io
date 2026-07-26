@@ -22,6 +22,7 @@ from dempa_site.paths import safe_relative_path
 
 
 ALLOWED_PUBLIC_SUFFIXES = {".html", ".css", ".png", ".jpg", ".jpeg", ".svg", ".webp"}
+IGNORED_TRIAL_FILES = {"LaTeXML.cache"}
 UNSAFE_HTML_PATTERNS = (
     re.compile(r"<script\b", re.IGNORECASE),
     re.compile(r"<iframe\b", re.IGNORECASE),
@@ -81,7 +82,9 @@ def _public_pdf_href(paper: Paper) -> str:
     return ""
 
 
-def _integrate_site_html(source: str, paper: Paper, source_path: str) -> str:
+def _integrate_site_html(
+    source: str, paper: Paper, source_path: str, *, automatically_published: bool
+) -> str:
     if any(pattern.search(source) for pattern in UNSAFE_HTML_PATTERNS):
         raise PaperToolError("LaTeXML HTMLに公開を許可しない動的要素があります")
     _, unsafe_svg_findings = svg_findings(source)
@@ -111,10 +114,19 @@ def _integrate_site_html(source: str, paper: Paper, source_path: str) -> str:
     tex_href = _public_source_href(paper, source_path)
     pdf_link = f'    <a href="{pdf_href}">PDFを読む</a>\n' if pdf_href else ""
     tex_link = f'    <a href="{tex_href}">TeXソース</a>\n' if tex_href else ""
+    if automatically_published:
+        eyebrow = "AUTOMATIC HTML VERSION"
+        description = (
+            f"{title}のLaTeXML自動変換版です。自動検査には合格していますが、"
+            "元PDFとの目視比較は未実施です。正本はPDF・TeXです。"
+        )
+    else:
+        eyebrow = "EXPERIMENTAL HTML VERSION"
+        description = f"{title}のLaTeXML版です。正本はPDF・TeXです。"
     navigation = f"""<a class="skip-link" href="#main-content">本文へ移動</a>
 <header class="html-version-header">
-  <p class="eyebrow">EXPERIMENTAL HTML VERSION</p>
-  <p>{title}のLaTeXML版です。正本はPDF・TeXです。</p>
+  <p class="eyebrow">{eyebrow}</p>
+  <p>{description}</p>
   <nav class="paper-actions" aria-label="HTML版の案内">
     <a class="primary-action" href="../">原稿ページへ戻る</a>
 {pdf_link}{tex_link}    <a href="../../../">{html.escape(SITE_TITLE_TOP)}トップ</a>
@@ -131,7 +143,11 @@ def _integrate_site_html(source: str, paper: Paper, source_path: str) -> str:
 
 
 def publish_latexml_trial(
-    *, root: Path, paper: Paper, trial_output: Path
+    *,
+    root: Path,
+    paper: Paper,
+    trial_output: Path,
+    automatically_published: bool = False,
 ) -> LaTeXMLPublication:
     root = root.resolve()
     paper_dir = paper.source_path.parent.resolve()
@@ -156,7 +172,13 @@ def publish_latexml_trial(
     ]
     log_relative = safe_relative_path(result["log"], PaperToolError)
     expected_log = trial_output / log_relative
-    unexpected = [path for path in all_files if path not in public_files and path != expected_log]
+    unexpected = [
+        path
+        for path in all_files
+        if path not in public_files
+        and path != expected_log
+        and path.name not in IGNORED_TRIAL_FILES
+    ]
     if not public_files or unexpected:
         raise PaperToolError("LaTeXML試験出力に公開対象外のファイルがあります")
 
@@ -170,12 +192,20 @@ def publish_latexml_trial(
             target = temporary / source_file.name
             if source_file.name == "index.html":
                 transformed = _integrate_site_html(
-                    source_file.read_text(encoding="utf-8"), paper, result["source"]
+                    source_file.read_text(encoding="utf-8"),
+                    paper,
+                    result["source"],
+                    automatically_published=automatically_published,
                 )
                 target.write_text(transformed, encoding="utf-8")
             else:
                 shutil.copy2(source_file, target)
 
+        html_label = (
+            "HTML版を読む（自動変換・未目視）"
+            if automatically_published
+            else "HTML版を読む（試験）"
+        )
         files = []
         for target in sorted(temporary.iterdir()):
             relative = f"html/{target.name}"
@@ -183,7 +213,7 @@ def publish_latexml_trial(
                 {
                     "path": relative,
                     "role": "derived-html" if target.name == "index.html" else "derived-asset",
-                    "label": "HTML版を読む（試験）" if target.name == "index.html" else "",
+                    "label": html_label if target.name == "index.html" else "",
                     "public": True,
                     "original_sha256": sha256_file(target),
                     "sha256": sha256_file(target),
@@ -196,14 +226,14 @@ def publish_latexml_trial(
         manifest["files"].extend(files)
         reviewed_at = local_now_seconds().isoformat(timespec="seconds")
         manifest["html_version"] = {
-            "status": "approved",
+            "status": "automatic" if automatically_published else "approved",
             "generator": "LaTeXML",
             "generator_version": report["version"],
             "generated_at": report["generated_at"],
             "source_path": result["source"],
             "source_sha256": result["source_sha256"],
             "path": "html/index.html",
-            "label": "HTML版を読む（試験）",
+            "label": html_label,
             "reviewed_at": reviewed_at,
         }
         validate_manifest_data(manifest, manifest_path, load_schema(), PaperToolError)

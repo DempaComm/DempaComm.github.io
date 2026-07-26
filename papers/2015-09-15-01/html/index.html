@@ -1,0 +1,864 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>コーシーの積分定理の証明</title>
+<!--Generated on Sun Jul 26 16:26:39 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2015-09-15-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>コーシーの積分定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../Cauchy-Dixon.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">コーシーの積分定理の証明</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書ではDixon (<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>)
+によるコーシーの積分定理の簡潔な証明
+を紹介する．
+この文書を通して
+<math id="p1.m1" class="ltx_Math" alttext="a\in\mathbb{C}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℂ</mi></mrow></math>と<math id="p1.m2" class="ltx_Math" alttext="R\in(0,\infty)" display="inline"><mrow><mi>R</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>について</p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="\Delta(a;R):=\{z\in\mathbb{C}\ |\ |z-a|&lt;R\}" display="block"><mrow><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>;</mo><mi>R</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>R</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する.
+また曲線自体とその像を区別せずに書く．
+つまりは，
+<math id="p1.m3" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>が曲線<math id="p1.m4" class="ltx_Math" alttext="\gamma:[a,b]\to\mathbb{C}" display="inline"><mrow><mi>γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>の像に属してる事を単に<math id="p1.m5" class="ltx_Math" alttext="z\in\gamma" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>γ</mi></mrow></math>と書く．
+その否定も同様の記号で簡潔に書く．
+また
+準備で述べる事実の証明は参考文献<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>（Ahlfors）を参照されたし．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">また，つまらない例外を除くために以下に登場する閉曲線は恒等的に一点<span class="ltx_text ltx_font_bold">ではない</span>とし，
+かつ区分的に<math id="p2.m1" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級であるとする．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>準備</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">このセクションに書いてあることはほとんど証明しないが,
+簡単にわかることは証明する.</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(開円板に対するコーシーの積分定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="a\in\mathbb{C}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℂ</mi></mrow></math><span class="ltx_text ltx_font_italic">とし，<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="R\in(0,\infty)" display="inline"><mrow><mi>R</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>とする．そして
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\Delta(a;R)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>;</mo><mi>R</mi><mo stretchy="false">)</mo></mrow></mrow></math>上正則な関数とする.
+このとき任意の閉曲線<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="\gamma\subset\Delta(a;R)" display="inline"><mrow><mi>γ</mi><mo>⊂</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>;</mo><mi>R</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\int_{\gamma}f(z)\ dz=0" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 2</span></span><span class="ltx_text ltx_font_bold"> </span>(リウビルの定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math><span class="ltx_text ltx_font_italic">上で正則な有界関数は定数に限る．</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold"> </span>(回転数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math><span class="ltx_text ltx_font_italic">内の曲線<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>と<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="a\in\mathbb{C}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℂ</mi></mrow></math>について，
+<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="a\in\mathbb{C}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℂ</mi></mrow></math>に対する<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>の回転数<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="\text{{\rm Ind}}(\gamma;a)" display="inline"><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\text{{\rm Ind}}(\gamma;a)=\frac{1}{2\pi\sqrt{-1}}\int_{\gamma}\frac{dz}{z-a}" display="block"><mrow><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mfrac><mrow><mi>d</mi><mo>⁢</mo><mi>z</mi></mrow><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow></mfrac></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+これは整数になる（参考文献 <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite> を参照のこと）.</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_fact">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">事実 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math><span class="ltx_text ltx_font_italic">内の曲線<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>について，
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="\mathbb{C}\setminus\gamma" display="inline"><mrow><mi>ℂ</mi><mo>∖</mo><mi>γ</mi></mrow></math>は開集合となるが，
+その連結成分の上で<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>の回転数
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="\text{{\rm Ind}}(\gamma;z)" display="inline"><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>は一定である.
+とくに非有界な連結成分での回転数は<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となる．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold"> </span>(回路)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math><span class="ltx_text ltx_font_italic">内の曲線全体から自由生成される整数係数加群の元を
+<span class="ltx_text ltx_font_bold">回路</span>と呼ぶ．
+<span class="ltx_text ltx_font_bold">通常は閉曲線の形式和を回路と呼ぶのだが，この文章では曲線の形式和とする．</span>
+特に閉曲線からなる回路を
+<span class="ltx_text ltx_font_bold">閉回路</span>と呼ぶことにする．
+つまり回路とは<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="a_{1},\dots a_{n-1},a_{n}" display="inline"><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>,</mo><msub><mi>a</mi><mi>n</mi></msub></mrow></math>を整数として形式的な和
+<math id="Thmthm5.p1.m3" class="ltx_Math" alttext='``+"' display="inline"><mrow><mrow><mi mathvariant="normal">`</mi><mo>⁢</mo><mi mathvariant="normal">`</mi></mrow><mo>+</mo><mi mathvariant="normal">"</mi></mrow></math>を用いて表される</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="a_{1}\gamma_{1}+\dots+a_{n-1}\gamma_{n-1}+a_{n}\gamma_{n}" display="block"><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><msub><mi>γ</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>+</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>γ</mi><mi>n</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">のことである．
+ここで曲線
+<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\gamma_{1},\dots\gamma_{n-1},\gamma_{n}" display="inline"><mrow><msub><mi>γ</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>,</mo><msub><mi>γ</mi><mi>n</mi></msub></mrow></math>がすべて集合
+<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="D\subset\mathbb{C}" display="inline"><mrow><mi>D</mi><mo>⊂</mo><mi>ℂ</mi></mrow></math>
+の中に入っているとき，
+この回路は<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>の中にあるというとか，<math id="Thmthm5.p1.m7" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内にあるとかいう．
+回路全体の集合には和，差，整数倍
+が自然な方法で定義される．
+ここで和の記号<math id="Thmthm5.p1.m8" class="ltx_Math" alttext="+" display="inline"><mo>+</mo></math>は本当に形式的なものであり，
+具体的に何か意味を持つものではない．
+気になる読者は自由生成加群などと言う言葉で調べると良いであろう．さて上のように表される回路について，
+少なくとも回路の象の和集合の上で定義される関数<math id="Thmthm5.p1.m9" class="ltx_Math" alttext="f:\bigcup_{i=1}\gamma_{i}\to\mathbb{C}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.111em">:</mo><mrow><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></msub><msub><mi>γ</mi><mi>i</mi></msub></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>についての回路上の積分を</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\int_{a_{1}\gamma_{1}+\dots+a_{n-1}\gamma_{n-1}+a_{n}\gamma_{n}}\!\!\!\!\!f(z)%
+\ dz=a_{1}\int_{\gamma_{1}}\!\!f(z)\ dz+\dots+a_{n-1}\int_{\gamma_{n-1}}\!\!\!%
+\!\!\!f(z)\ dz+a_{n}\int_{\gamma_{n}}\!\!f(z)\ dz\ " display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><msub><mi>γ</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>+</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>γ</mi><mi>n</mi></msub></mrow></mrow></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mn>1</mn></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow><mo>+</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mi>n</mi></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+回路上の積分が定義されたことにより，回路の回転数
+が以下のように定義される．</span></p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\displaystyle\text{{\rm Ind}}(a_{1}\gamma_{1}+\dots+a_{n-1}\gamma_{n-1}+a_{n}%
+\gamma_{n};a)" display="inline"><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><msub><mi>γ</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>+</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>γ</mi><mi>n</mi></msub></mrow></mrow><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex7.m1" class="ltx_Math" alttext="\displaystyle=a_{1}\text{{\rm Ind}}(\gamma_{1},a)+\dots+a_{n-1}\text{{\rm Ind}%
+}(\gamma_{n-1};a)+a_{n}\text{{\rm Ind}}(\gamma_{n};a)." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>γ</mi><mn>1</mn></msub><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>γ</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>γ</mi><mi>n</mi></msub><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(ホモローグ)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math><span class="ltx_text ltx_font_italic">の
+開集合<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の回路<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が
+<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内で<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>にホモローグであるとは</span></p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="\forall x\in\mathbb{C}\setminus D,\ \text{{\rm Ind}}(\alpha;x)=0" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mi>ℂ</mi><mo>∖</mo><mi>D</mi></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo>;</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となることと定義する．
+また，
+<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の２つの閉回路<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\alpha,\beta" display="inline"><mrow><mi>α</mi><mo>,</mo><mi>β</mi></mrow></math>に対して<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が
+<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>にホモローグであるとは
+<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="\alpha-\beta" display="inline"><mrow><mi>α</mi><mo>−</mo><mi>β</mi></mrow></math>が
+<math id="Thmthm6.p1.m11" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>にホモローグであることと定義する．
+これは</span></p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="\forall x\in\mathbb{C}\setminus D,\ \text{{\rm Ind}}(\alpha;x)=\text{{\rm Ind}%
+}(\beta;x)" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mi>ℂ</mi><mo>∖</mo><mi>D</mi></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo>;</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>β</mi><mo>;</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と明らかに同値である．</span></p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">ホモローグの定義から以下の命題がわかる．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">曲線<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="\gamma_{1}:[a_{1},b_{1}]\to\mathbb{C}" display="inline"><mrow><msub><mi>γ</mi><mn>1</mn></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>と
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="\gamma_{2}:[a_{2},b_{3}]\to\mathbb{C}" display="inline"><mrow><msub><mi>γ</mi><mn>2</mn></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><msub><mi>b</mi><mn>3</mn></msub><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>
+が<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\gamma_{1}(b_{1})=\gamma_{2}(a_{2})" display="inline"><mrow><mrow><msub><mi>γ</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>γ</mi><mn>2</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たすものとするとこの二つの曲線の座標を適当に変数変換して<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="\gamma_{1}" display="inline"><msub><mi>γ</mi><mn>1</mn></msub></math>の終点と<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="\gamma_{2}" display="inline"><msub><mi>γ</mi><mn>2</mn></msub></math>の始点を繋いで
+<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="\gamma_{3}:[a_{3},b_{3}]" display="inline"><mrow><msub><mi>γ</mi><mn>3</mn></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>3</mn></msub><mo>,</mo><msub><mi>b</mi><mn>3</mn></msub><mo stretchy="false">]</mo></mrow></mrow></math>を得ることができる．
+すると，積分の変数変換の公式と<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="\gamma_{3}" display="inline"><msub><mi>γ</mi><mn>3</mn></msub></math>の作り方から
+<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="\gamma_{3}" display="inline"><msub><mi>γ</mi><mn>3</mn></msub></math>上の任意の連続関数<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="f:\gamma_{3}\to\mathbb{C}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>γ</mi><mn>3</mn></msub><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>について</span></p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="\int_{\gamma_{3}}f(z)\ dz=\int_{\gamma_{1}}f(z)\ dz+\int_{\gamma_{2}}f(z)\ dz" display="block"><mrow><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mn>3</mn></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mn>1</mn></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo rspace="0.055em">+</mo><mrow><msub><mo>∫</mo><msub><mi>γ</mi><mn>2</mn></msub></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．
+つまり<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="\gamma_{3}" display="inline"><msub><mi>γ</mi><mn>3</mn></msub></math>と<math id="Thmthm7.p1.m11" class="ltx_Math" alttext="\gamma_{1}+\gamma_{2}" display="inline"><mrow><msub><mi>γ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>γ</mi><mn>2</mn></msub></mrow></math>
+はホモローグである．
+つまり，回路の定義と回路上の積分の定義は
+曲線同士の繋ぎ合わせについて整合的になるということである．</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_fact">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">事実 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>内の曲線とし，
+<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>は<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>上の連続関数とすると
+<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="\displaystyle\Phi(z)=\int_{\gamma}\frac{\phi(w)}{w-z}dw" display="inline"><mrow><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math>
+で定義される関数
+<math id="Thmthm8.p1.m6" class="ltx_Math" alttext="\Phi:\mathbb{C}\setminus\gamma\to\mathbb{C}" display="inline"><mrow><mi mathvariant="normal">Φ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>ℂ</mi><mo>∖</mo><mi>γ</mi></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>は
+は<math id="Thmthm8.p1.m7" class="ltx_Math" alttext="\mathbb{C}\setminus\gamma" display="inline"><mrow><mi>ℂ</mi><mo>∖</mo><mi>γ</mi></mrow></math>上で正則である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">証明は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>を参照してもよいが，
+ルベーグの収束定理からも
+この事実<a href="#Thmthm8" title="事実 8. ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>を証明することが出来る．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>の開集合とし
+<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>は<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の回路とすると</span></p>
+<table id="S1.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex11.m1" class="ltx_Math" alttext="E=\{\,z\in\mathbb{C}\ |\ z\not\in\gamma,\ \text{{\rm Ind}}(\gamma;z)=0\,\}" display="block"><mrow><mi>E</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mi>z</mi><mo>∉</mo><mi>γ</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">は開集合となる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">事実<a href="#Thmthm4" title="事実 4. ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>からすぐわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>定理と証明</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">このセクションでは積分定理を証明する。</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>の開集合として<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>をその上の正則関数とし，
+<math id="Thmthm10.p1.m4" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>は<math id="Thmthm10.p1.m5" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の閉回路とする．
+このとき<math id="Thmthm10.p1.m6" class="ltx_Math" alttext="p\in\gamma" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>γ</mi></mrow></math>となる任意の点<math id="Thmthm10.p1.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>に対して<math id="Thmthm10.p1.m8" class="ltx_Math" alttext="p\not\in\alpha" display="inline"><mrow><mi>p</mi><mo>∉</mo><mi>α</mi></mrow></math>となる<math id="Thmthm10.p1.m9" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の閉回路<math id="Thmthm10.p1.m10" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が存在し</span></p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="\int_{\gamma}f(z)dz=\int_{\alpha}f(z)dz" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>α</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">閉回路を構成している基底の個々を考えることにより<math id="S2.p2.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>を単に閉曲線としても一般性を失わない．
+閉曲線<math id="S2.p2.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>は<math id="S2.p2.m3" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>上定義されているとしても一般性を失わず，閉曲線の始点を適当に変えることにより，</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\gamma(0)=\gamma(1)\neq p" display="block"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi>p</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と仮定してもよい．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">そしてコンパクト空間の上の連続関数は一様連続なので</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0,\ \exists\delta&gt;0,\ \forall s,t\in[0,1],\ |s-t|&lt;\delta%
+\Rightarrow|\gamma(s)-\gamma(t)|&lt;\varepsilon" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo rspace="0.667em">,</mo><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>s</mi><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⇒</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>ε</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+対偶をとって</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0,\ \exists\delta&gt;0,\ \forall s,t\in[0,1],\ |\gamma(s)-%
+\gamma(t)|\geq\varepsilon\Rightarrow|s-t|\geq\delta" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo rspace="0.667em">,</mo><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>ε</mi><mo stretchy="false">⇒</mo><mrow><mo stretchy="false">|</mo><mrow><mi>s</mi><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+さて<math id="S2.p3.m1" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を十分小さくとり</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="\Delta(p;2\varepsilon)\subset D" display="block"><mrow><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>D</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">及び</p>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="\gamma(0)=\gamma(1)\not\in\Delta(p;\varepsilon)" display="block"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo>∉</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つように出来る．
+このようにすると</p>
+<table id="S2.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex18.m1" class="ltx_Math" alttext="0,1\not\in\gamma^{-1}(\Delta(p;\varepsilon))" display="block"><mrow><mrow><mn>0</mn><mo>,</mo><mn>1</mn></mrow><mo>∉</mo><mrow><msup><mi>γ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+そして，<math id="S2.p3.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>の連続性から
+<math id="S2.p3.m3" class="ltx_Math" alttext="\gamma^{-1}(\Delta(p;\varepsilon))" display="inline"><mrow><msup><mi>γ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は
+<math id="S2.p3.m4" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>
+の開集合であり，
+<math id="S2.p3.m5" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>と<math id="S2.p3.m6" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>を含んでいないので，
+その連結成分は<math id="S2.p3.m7" class="ltx_Math" alttext="(a_{i},b_{i})" display="inline"><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></math>と言う形をしている．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">さてこの連結成分の内，
+その集合の<math id="S2.p4.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>による像に<math id="S2.p4.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を含むもの，
+同じことだが，
+連結成分のうち<math id="S2.p4.m3" class="ltx_Math" alttext="\gamma^{-1}(p)" display="inline"><mrow><msup><mi>γ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>と共通部分を持つものを考える．
+このときそのような連結成分のひとつを<math id="S2.p4.m4" class="ltx_Math" alttext="(a,b)" display="inline"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></math>と書き，
+<math id="S2.p4.m5" class="ltx_Math" alttext="c\in(a,b)" display="inline"><mrow><mi>c</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></math>について<math id="S2.p4.m6" class="ltx_Math" alttext="\gamma(c)=p" display="inline"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>p</mi></mrow></math>となっているとする．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">ところで<math id="S2.p5.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>の連続性から点
+<math id="S2.p5.m2" class="ltx_Math" alttext="\gamma(a)" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>及び点<math id="S2.p5.m3" class="ltx_Math" alttext="\gamma(b)" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></math>は
+<math id="S2.p5.m4" class="ltx_Math" alttext="\Delta(p;\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow></math>の境界
+<math id="S2.p5.m5" class="ltx_Math" alttext="\{\,z\in\mathbb{C}\ |\ |z-p|=\varepsilon\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>z</mi><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>ε</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></math>に属する．
+よって</p>
+<table id="S2.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex19.m1" class="ltx_Math" alttext="|\gamma(c)-\gamma(a)|=|p-\gamma(a_{i})|=|\gamma(c)-\gamma(b)|=|p-\gamma(b_{i})%
+|=\varepsilon" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mi>p</mi><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mi>p</mi><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+よってうえで述べた一様連続性の対偶から
+<math id="S2.p5.m6" class="ltx_Math" alttext="c-a\geq\delta" display="inline"><mrow><mrow><mi>c</mi><mo>−</mo><mi>a</mi></mrow><mo>≥</mo><mi>δ</mi></mrow></math>と
+<math id="S2.p5.m7" class="ltx_Math" alttext="b-c\geq\delta" display="inline"><mrow><mrow><mi>b</mi><mo>−</mo><mi>c</mi></mrow><mo>≥</mo><mi>δ</mi></mrow></math>
+を得る．そしてこれら二つを足し合わせて</p>
+<table id="S2.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex20.m1" class="ltx_Math" alttext="b-a\geq 2\delta" display="block"><mrow><mrow><mi>b</mi><mo>−</mo><mi>a</mi></mrow><mo>≥</mo><mrow><mn>2</mn><mo>⁢</mo><mi>δ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+連結成分同士は互いに交わらず，
+当たり前だが<math id="S2.p5.m8" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>は有限の長さしか無いので，
+<math id="S2.p5.m9" class="ltx_Math" alttext="\gamma^{-1}(\Delta(p;\varepsilon))" display="inline"><mrow><msup><mi>γ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の連結成分の内
+<math id="S2.p5.m10" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>による像に<math id="S2.p5.m11" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を含むものは有限個しか無いことがわかる．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">この事から
+<math id="S2.p6.m1" class="ltx_Math" alttext="\gamma^{-1}(\Delta(p;\varepsilon))" display="inline"><mrow><msup><mi>γ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の連結成分の内
+<math id="S2.p6.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>による像に<math id="S2.p6.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を含むものを番号付けして</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="(a_{1},b_{1}),\ (a_{2},b_{2}),\ \dots,\ (a_{i},b_{i}),\dots,(a_{N},b_{N})" display="block"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><mo rspace="0.667em">,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><msub><mi>b</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><mo rspace="0.667em">,</mo><mi mathvariant="normal">…</mi><mo rspace="0.667em">,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>N</mi></msub><mo>,</mo><msub><mi>b</mi><mi>N</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と置くことにしよう．
+（ここで<math id="S2.p6.m4" class="ltx_Math" alttext="N\in\mathbb{N}" display="inline"><mrow><mi>N</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>である．）
+各<math id="S2.p6.m5" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について<math id="S2.p6.m6" class="ltx_Math" alttext="\gamma(a_{i})" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>及び，
+<math id="S2.p6.m7" class="ltx_Math" alttext="\gamma(b_{i})" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>は
+<math id="S2.p6.m8" class="ltx_Math" alttext="\{\,z\in\mathbb{C}\ |\ |z-p|=\varepsilon\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>z</mi><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>ε</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></math>に属することを再び注意する．</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">このとき，
+二点
+<math id="S2.p7.m1" class="ltx_Math" alttext="\gamma(a_{i}),\ \gamma(b_{i})" display="inline"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を結ぶ曲線で<math id="S2.p7.m2" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>内にあり，
+かつ<math id="S2.p7.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を通らないものが存在する．<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>例えば<math id="footnote1.m1" class="ltx_Math" alttext="\{z\in\mathbb{C}\ |\ |z-p|=\varepsilon\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>z</mi><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>ε</mi></mrow><mo stretchy="false">}</mo></mrow></math>の円弧などがあげられる。とにかく<math id="footnote1.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を通らず、<math id="footnote1.m3" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級で<math id="footnote1.m4" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>内にあれば何でもよい。</span></span></span>それを<math id="S2.p7.m4" class="ltx_Math" alttext="\beta_{i}" display="inline"><msub><mi>β</mi><mi>i</mi></msub></math>としよう．</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">さて曲線<math id="S2.p8.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>の，<math id="S2.p8.m2" class="ltx_Math" alttext="\gamma([a_{i},b_{i}])" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の部分を
+<math id="S2.p8.m3" class="ltx_Math" alttext="\beta_{i}" display="inline"><msub><mi>β</mi><mi>i</mi></msub></math>にすげ替えた曲線を<math id="S2.p8.m4" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>とする．
+すると，<math id="S2.p8.m5" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>は区分的に<math id="S2.p8.m6" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級で<math id="S2.p8.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を通らない．
+また<math id="S2.p8.m8" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>は<math id="S2.p8.m9" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の曲線である．
+<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>今，<math id="footnote2.m1" class="ltx_Math" alttext="\Delta(p;2\varepsilon)\subset D" display="inline"><mrow><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>D</mi></mrow></math>としていることに注意せよ．</span></span></span></p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">そして
+<math id="S2.p9.m1" class="ltx_Math" alttext="\gamma-\alpha" display="inline"><mrow><mi>γ</mi><mo>−</mo><mi>α</mi></mrow></math>は<math id="S2.p9.m2" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>内の閉曲線からなる
+閉回路にホモローグになる (命題 <a href="#Thmthm7" title="命題 7. ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>参照のこと)．つまり
+<math id="S2.p9.m3" class="ltx_Math" alttext="\gamma-\alpha" display="inline"><mrow><mi>γ</mi><mo>−</mo><mi>α</mi></mrow></math>上での<math id="S2.p9.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の線積分は<math id="S2.p9.m5" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>内の閉回路上の積分になるので<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>図を描いてみよ．また，<math id="footnote3.m1" class="ltx_Math" alttext="\Delta(p;\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mi>ε</mi><mo stretchy="false">)</mo></mrow></mrow></math>と<math id="footnote3.m2" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の違いにも注意せよ．</span></span></span>，
+定理<a href="#Thmthm1" title="定理 1 (開円板に対するコーシーの積分定理). ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> (円板に対するコーシー積分定理)を
+<math id="S2.p9.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と
+<math id="S2.p9.m7" class="ltx_Math" alttext="\Delta(p;2\varepsilon)" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>ε</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>に対して用いると</p>
+<table id="S2.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex22.m1" class="ltx_Math" alttext="\int_{\gamma}f\ dz-\int_{\alpha}f\ dz=\int_{\gamma-\alpha}f\ dz=0" display="block"><mrow><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo rspace="0.055em">−</mo><mrow><msub><mo>∫</mo><mi>α</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mi>γ</mi><mo>−</mo><mi>α</mi></mrow></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので補題は証明された。（
+<math id="S2.p9.m8" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>を修正して<math id="S2.p9.m9" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>を得ているが，もしも修正する区間が有限個でなければ区分的に<math id="S2.p9.m10" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級であるかどうかは分からないし，積分も定義してないので，それらが有限個であるという議論は必要である．）
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">複素平面<math id="Thmthm11.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>の開集合<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>とその<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>の中で
+<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>にホモローグな<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の閉回路<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>が与えられたとき，<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>上で定義されたの任意の正則関数<math id="Thmthm11.p1.m8" class="ltx_Math" alttext="f:D\to\mathbb{C}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>D</mi><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>に対し</span></p>
+<table id="S2.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex23.m1" class="ltx_Math" alttext="\int_{\gamma}f(z)\ dz=0" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>z</mi></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成立する．これは俗に言うコーシーの積分定理である．
+そしてさらに<math id="Thmthm11.p1.m9" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>上にない点<math id="Thmthm11.p1.m10" class="ltx_Math" alttext="a\in D" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>D</mi></mrow></math>に対して</span></p>
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex24.m1" class="ltx_Math" alttext="\frac{1}{2\pi\sqrt{-1}}\int_{\gamma}\frac{f(z)}{z-a}\ dw=f(a)\cdot\text{{\rm
+Ind%
+}}(\gamma;a)" display="block"><mrow><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><mtext>Ind</mtext></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．
+これは俗に言う
+コーシーの積分公式である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">まず最初にコーシーの積分公式を証明し，
+それを用いてコーシーの積分定理を示す．
+いきなりだが<math id="S2.p10.m1" class="ltx_Math" alttext="D\times D" display="inline"><mrow><mi>D</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>D</mi></mrow></math>上で</p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex25.m1" class="ltx_Math" alttext="g(z,w):=\begin{cases}\displaystyle{\frac{f(z)-f(w)}{z-w}}&amp;z\neq w\\
+f^{\prime}(z)&amp;z=w\end{cases}" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>≠</mo><mi>w</mi></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>=</mo><mi>w</mi></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と関数<math id="S2.p10.m2" class="ltx_Math" alttext="g:D\times D\to\mathbb{C}" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>D</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>D</mi></mrow><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>
+を定義しよう．
+この関数<math id="S2.p10.m3" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>は<math id="S2.p10.m4" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を固定する毎に<math id="S2.p10.m5" class="ltx_Math" alttext="w" display="inline"><mi>w</mi></math>に対して正則である．
+よって各<math id="S2.p10.m6" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>毎に積分</p>
+<table id="S2.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex26.m1" class="ltx_Math" alttext="{\int_{\gamma}g(z,w)dw}" display="block"><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が出来て，これは有限の値になる．<span id="footnote4" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note">4</span>どうやら<math id="footnote4.m1" class="ltx_Math" alttext="D\times D" display="inline"><mrow><mi>D</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>D</mi></mrow></math>で連続であるようだが，この文章を書き終えた時点での筆者には証明出来なかった．しかしそのことを使わずとも証明は完遂できるの心配しなくてもよい．ちなみにこの連続性は有限増分の定理を利用すれば示すことができる．</span></span></span></p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">集合<math id="S2.p11.m1" class="ltx_Math" alttext="E=\{\,z\in\mathbb{C}\ |\ z\not\in\gamma,\ \text{{\rm Ind}}(\gamma;z)=0\,\}" display="inline"><mrow><mi>E</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mi>z</mi><mo>∉</mo><mi>γ</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mtext>Ind</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>について事実<a href="#Thmthm4" title="事実 4. ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>から</p>
+<table id="S2.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex27.m1" class="ltx_Math" alttext="\mathbb{C}\setminus D\subset E" display="block"><mrow><mrow><mi>ℂ</mi><mo>∖</mo><mi>D</mi></mrow><mo>⊂</mo><mi>E</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+さて<math id="S2.p11.m2" class="ltx_Math" alttext="G:\mathbb{C}\to\mathbb{C}" display="inline"><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℂ</mi><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>を</p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E1.m1" class="ltx_Math" alttext="G(z):=\begin{cases}\displaystyle{\int_{\gamma}g(z,w)dw}&amp;z\in D\\
+\\
+\displaystyle{\int_{\gamma}\frac{f(w)}{w-z}}dw&amp;z\in E\end{cases}" display="block"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>∈</mo><mi>D</mi></mrow></mtd></mtr><mtr><mtd></mtd><mtd></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>∈</mo><mi>E</mi></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+この定義がwell-definedかどうか調べてみよう．
+まず<math id="S2.p11.m3" class="ltx_Math" alttext="z\in D\cap E" display="inline"><mrow><mi>z</mi><mo>∈</mo><mrow><mi>D</mi><mo>∩</mo><mi>E</mi></mrow></mrow></math>とすると<math id="S2.p11.m4" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の定義から
+<math id="S2.p11.m5" class="ltx_Math" alttext="\displaystyle\int_{\gamma}\frac{dw}{z-w}=-2\pi\sqrt{-1}\cdot\text{{\rm Ind}}(%
+\gamma;z)=0" display="inline"><mrow><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mstyle displaystyle="true"><mfrac><mrow><mi>d</mi><mo>⁢</mo><mi>w</mi></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle></mrow><mo>=</mo><mrow><mo>−</mo><mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mtext>Ind</mtext></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>なので</p>
+<table id="S2.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex28.m1" class="ltx_Math" alttext="\int_{\gamma}g(z,w)dw=\int_{\gamma}\frac{f(z)-f(w)}{z-w}=f(z)\int_{\gamma}%
+\frac{1}{z-w}dw-\int_{\gamma}\frac{f(w)}{z-w}dw=\int_{\gamma}\frac{f(w)}{w-z}dw" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mn>1</mn><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo rspace="0.055em">−</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となり，
+<math id="S2.p11.m6" class="ltx_Math" alttext="\displaystyle{\int_{\gamma}g(z,w)dw}" display="inline"><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></math>
+と
+<math id="S2.p11.m7" class="ltx_Math" alttext="\displaystyle{\int_{\gamma}\frac{f(w)}{w-z}}dw" display="inline"><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></math>
+は
+<math id="S2.p11.m8" class="ltx_Math" alttext="D\cap E" display="inline"><mrow><mi>D</mi><mo>∩</mo><mi>E</mi></mrow></math>
+で一致するから
+<math id="S2.p11.m9" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は<math id="S2.p11.m10" class="ltx_Math" alttext="\mathbb{C}=D\cup E" display="inline"><mrow><mi>ℂ</mi><mo>=</mo><mrow><mi>D</mi><mo>∪</mo><mi>E</mi></mrow></mrow></math>できちんと定義されている．つまりwell-definedである．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p12.m1" class="ltx_Math" alttext="G:\mathbb{C}\to\mathbb{C}" display="inline"><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℂ</mi><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>の正則性を示そう．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p13.m1" class="ltx_Math" alttext="z\not\in\gamma" display="inline"><mrow><mi>z</mi><mo>∉</mo><mi>γ</mi></mrow></math>のとき</p>
+<table id="S2.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex29.m1" class="ltx_Math" alttext="G(z)=\int_{\gamma}g(z,w)dw=\int_{\gamma}\frac{f(z)-f(w)}{z-w}dw=f(z)\int_{%
+\gamma}\frac{1}{z-w}dw-\int_{\gamma}\frac{f(w)}{z-w}dw" display="block"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mn>1</mn><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo rspace="0.055em">−</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>z</mi><mo>−</mo><mi>w</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つか
+もしくは</p>
+<table id="S2.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex30.m1" class="ltx_Math" alttext="G(z)={\int_{\gamma}\frac{f(w)}{w-z}}dw" display="block"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つが，
+事実<a href="#Thmthm8" title="事実 8. ‣ 1 準備 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>などから<math id="S2.p13.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>が正則となる事がわかる．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p14.m1" class="ltx_Math" alttext="z\in\gamma" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>γ</mi></mrow></math>のとき，
+<math id="S2.p14.m2" class="ltx_Math" alttext="\displaystyle G(z)=\int_{\gamma}g(z,w)\ dw" display="inline"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math>であるが，
+先の補題<a href="#Thmthm10" title="補題 10. ‣ 2 定理と証明 ‣ コーシーの積分定理の証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>から<math id="S2.p14.m3" class="ltx_Math" alttext="z\not\in\alpha" display="inline"><mrow><mi>z</mi><mo>∉</mo><mi>α</mi></mrow></math>かつ</p>
+<table id="S2.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex31.m1" class="ltx_Math" alttext="\int_{\gamma}g(z,w)dw=\int_{\alpha}g(z,w)dw" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>α</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる<math id="S2.p14.m4" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>内の回路<math id="S2.p14.m5" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が存在する．
+よって先の<math id="S2.p14.m6" class="ltx_Math" alttext="z\not\in\gamma" display="inline"><mrow><mi>z</mi><mo>∉</mo><mi>γ</mi></mrow></math>の場合と同様に<math id="S2.p14.m7" class="ltx_Math" alttext="G(z)" display="inline"><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>の正則性がわかる．</p>
+</div>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p">以上から<math id="S2.p15.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>の正則性が分かった．</p>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p">次に</p>
+<table id="S2.Ex32" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex32.m1" class="ltx_Math" alttext="\lim_{z\to\infty}G(z)=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>z</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つことを示そう．
+さて<math id="S2.p16.m1" class="ltx_Math" alttext="|z|" display="inline"><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></math>の値を十分大きく取れば<math id="S2.p16.m2" class="ltx_Math" alttext="z\in E" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>E</mi></mrow></math>となることに注意しよう．
+今，<math id="S2.p16.m3" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>上の<math id="S2.p16.m4" class="ltx_Math" alttext="|w|" display="inline"><mrow><mo stretchy="false">|</mo><mi>w</mi><mo stretchy="false">|</mo></mrow></math>, <math id="S2.p16.m5" class="ltx_Math" alttext="|f(w)|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></math>の最大値をそれぞれ
+<math id="S2.p16.m6" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>,
+<math id="S2.p16.m7" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>とする（<math id="S2.p16.m8" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>がコンパクトであることに注意せよ）．
+すると任意の<math id="S2.p16.m9" class="ltx_Math" alttext="z\in\mathbb{C}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow></math>について</p>
+<table id="S2.Ex33" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex33.m1" class="ltx_Math" alttext="|G(z)|=\left|\int_{\gamma}\frac{f(w)}{w-z}dw\right|\leq\frac{M}{|z|}\int_{%
+\gamma}\left|\frac{1}{\frac{w}{z}-1}\right||dw|" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo>|</mo><mrow><msub><mo lspace="0em">∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>z</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo>|</mo></mrow><mo>≤</mo><mrow><mfrac><mi>M</mi><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mfrac><mo>⁢</mo><mrow><msub><mo rspace="0em">∫</mo><mi>γ</mi></msub><mrow><mrow><mo>|</mo><mfrac><mn>1</mn><mrow><mfrac><mi>w</mi><mi>z</mi></mfrac><mo>−</mo><mn>1</mn></mrow></mfrac><mo>|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+ここで<math id="S2.p16.m10" class="ltx_Math" alttext="A&gt;0" display="inline"><mrow><mi>A</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を</p>
+<table id="S2.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex34.m1" class="ltx_Math" alttext="0&lt;1-\frac{K}{A}" display="block"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mi>K</mi><mi>A</mi></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つように十分大きくとると，
+<math id="S2.p16.m11" class="ltx_Math" alttext="A\leq|z|" display="inline"><mrow><mi>A</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mrow></math>ならば
+三角不等式から</p>
+<table id="S2.Ex35" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex35.m1" class="ltx_Math" alttext="0&lt;1-\frac{K}{A}\leq 1-\frac{K}{|z|}\leq 1-\left|\frac{w}{z}\right|=\left|1-%
+\left|\frac{w}{z}\right|\right|\leq\left|\frac{w}{z}-1\right|" display="block"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mi>K</mi><mi>A</mi></mfrac></mrow><mo>≤</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mi>K</mi><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mfrac></mrow><mo>≤</mo><mrow><mn>1</mn><mo>−</mo><mrow><mo>|</mo><mfrac><mi>w</mi><mi>z</mi></mfrac><mo>|</mo></mrow></mrow><mo>=</mo><mrow><mo>|</mo><mrow><mn>1</mn><mo>−</mo><mrow><mo>|</mo><mfrac><mi>w</mi><mi>z</mi></mfrac><mo>|</mo></mrow></mrow><mo>|</mo></mrow><mo>≤</mo><mrow><mo>|</mo><mrow><mfrac><mi>w</mi><mi>z</mi></mfrac><mo>−</mo><mn>1</mn></mrow><mo>|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つので，<math id="S2.p16.m12" class="ltx_Math" alttext="A\leq|z|" display="inline"><mrow><mi>A</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mrow></math>となる<math id="S2.p16.m13" class="ltx_Math" alttext="z\in\mathbb{C}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow></math>について</p>
+<table id="S2.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex36.m1" class="ltx_Math" alttext="|G(z)|\leq\frac{M}{|z|}\int_{\gamma}\left|\frac{1}{\frac{w}{z}-1}\right||dw|%
+\leq\frac{M}{|z|}\int_{\gamma}\frac{1}{1-\frac{K}{A}}|dw|" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mfrac><mi>M</mi><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mfrac><mo>⁢</mo><mrow><msub><mo rspace="0em">∫</mo><mi>γ</mi></msub><mrow><mrow><mo>|</mo><mfrac><mn>1</mn><mrow><mfrac><mi>w</mi><mi>z</mi></mfrac><mo>−</mo><mn>1</mn></mrow></mfrac><mo>|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mfrac><mi>M</mi><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mfrac><mi>K</mi><mi>A</mi></mfrac></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+ここで最右辺に現れる
+<math id="S2.p16.m14" class="ltx_Math" alttext="\displaystyle\int_{\gamma}\frac{1}{1-\frac{K}{A}}|dw|" display="inline"><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mfrac><mi>K</mi><mi>A</mi></mfrac></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></math>
+は<math id="S2.p16.m15" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>に依存しない定数なので，
+<math id="S2.p16.m16" class="ltx_Math" alttext="|z|\rightarrow\infty" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>とすれば右辺は<math id="S2.p16.m17" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に収束する．
+つまり</p>
+<table id="S2.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex37.m1" class="ltx_Math" alttext="\lim_{z\to\infty}G(z)=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>z</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+このことから<math id="S2.p16.m18" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は<math id="S2.p16.m19" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>上正則かつ有界であることがわかり，
+リウビルの定理により<math id="S2.p16.m20" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は定数関数となることがわかる．
+さらに<math id="S2.p16.m21" class="ltx_Math" alttext="\displaystyle\lim_{z\to\infty}G(z)=0" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>z</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>なので
+<math id="S2.p16.m22" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は恒等的に<math id="S2.p16.m23" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に等しいことがわかる．
+すると<math id="S2.p16.m24" class="ltx_Math" alttext="a\not\in\gamma" display="inline"><mrow><mi>a</mi><mo>∉</mo><mi>γ</mi></mrow></math>となる<math id="S2.p16.m25" class="ltx_Math" alttext="a\in D" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>D</mi></mrow></math>に対して</p>
+<table id="S2.Ex38" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex38.m1" class="ltx_Math" alttext="G(a)=\int_{\gamma}g(a,w)dw=0" display="block"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="S2.p16.m26" class="ltx_Math" alttext="g(a,w)" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>が何であったかを思い出せば，この式から</p>
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex39"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex39.m1" class="ltx_Math" alttext="\displaystyle 0" display="inline"><mn>0</mn></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex39.m2" class="ltx_Math" alttext="\displaystyle=\int_{\gamma}\frac{f(a)-f(w)}{a-w}dw" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex40"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex40.m1" class="ltx_Math" alttext="\displaystyle=\int_{\gamma}\frac{f(a)}{a-w}dw-\int_{\gamma}\frac{f(w)}{a-w}dw" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex41"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex41.m1" class="ltx_Math" alttext="\displaystyle=f(a)\int_{\gamma}\frac{1}{a-w}dw-\int_{\gamma}\frac{f(w)}{a-w}dw" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex42"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex42.m1" class="ltx_Math" alttext="\displaystyle=-2\pi\sqrt{-1}\cdot f(a)\cdot\text{{\rm Ind}}(\gamma;a)-\int_{%
+\gamma}\frac{f(w)}{a-w}dw" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><mrow><mrow><mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>f</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><mtext>Ind</mtext></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>γ</mi></msub></mstyle><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>a</mi><mo>−</mo><mi>w</mi></mrow></mfrac></mstyle><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立ち，移項すれば
+コーシーの積分公式</p>
+<table id="S2.Ex43" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex43.m1" class="ltx_Math" alttext="\frac{1}{2\pi\sqrt{-1}}\int_{\gamma}\frac{f(w)}{w-a}dw=f(a)\cdot\text{{\rm Ind%
+}}(\gamma;a)" display="block"><mrow><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><mtext>Ind</mtext></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>γ</mi><mo>;</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．</p>
+</div>
+<div id="S2.p17" class="ltx_para">
+<p class="ltx_p">次にコーシーの積分定理を示そう．
+点<math id="S2.p17.m1" class="ltx_Math" alttext="a\in D" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>D</mi></mrow></math>を<math id="S2.p17.m2" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>上に無いものとして固定して<math id="S2.p17.m3" class="ltx_Math" alttext="f(w)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>の代わりに
+<math id="S2.p17.m4" class="ltx_Math" alttext="F(w)=f(w)(w-a)" display="inline"><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>w</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して
+上で得られたコーシーの積分公式を適用すれば，
+<math id="S2.p17.m5" class="ltx_Math" alttext="F(a)=0" display="inline"><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>と</p>
+<table id="S2.Ex44" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex44.m1" class="ltx_Math" alttext="\frac{F(w)}{w-a}=\frac{f(w)(w-a)}{w-a}=f(w)" display="block"><mrow><mfrac><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>w</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>w</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">から</p>
+<table id="S2.Ex45" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex45.m1" class="ltx_Math" alttext="\int_{\gamma}f(w)dw=0" display="block"><mrow><mrow><msub><mo>∫</mo><mi>γ</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>w</mi></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る（今は<math id="S2.p17.m6" class="ltx_Math" alttext="w" display="inline"><mi>w</mi></math>を変数としてることに注意せよ）．
+これは示したいコーシーの積分定理である．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">高橋礼司,
+複素解析,
+基礎数学8,
+第9版,
+東京大学出版会,
+2011．
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">L. V. Ahrfols,
+Complex analysis,
+3rd ed., ,McGraw-Hill,
+1979.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">J. D. Dixon,
+<span class="ltx_text ltx_font_italic">
+A brief proof of Cauchy’s integral theorem</span>,
+Proc. Amer. Math. Soc. Vol. 29 (1971), 625-626.
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">P. A.
+Loeb,
+<span class="ltx_text ltx_font_italic">A Note on Dixon’s Proof of Cauchy’s Integral Theorem</span>, Amer. Math.
+Monthly Vol.98, No.3 (Mar.,1991), 242-244.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:26:39 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

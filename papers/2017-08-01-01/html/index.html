@@ -1,0 +1,553 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>正則同型の同定</title>
+<!--Generated on Sun Jul 26 16:32:32 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2017-08-01-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>正則同型の同定のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../AUTC.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">正則同型の同定</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では複素平面<math id="p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>、リーマン球面<math id="p1.m2" class="ltx_Math" alttext="\hat{\mathbb{C}}" display="inline"><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></math>及び単位開円盤<math id="p1.m3" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>の正則同型写像を同定する。</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>基本的な定義</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">この文章では<math id="S1.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>は複素平面を表し、<math id="S1.p1.m2" class="ltx_Math" alttext="\hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}" display="inline"><mrow><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo>=</mo><mrow><mi>ℂ</mi><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>である。
+また、<math id="S1.p1.m3" class="ltx_Math" alttext="\Delta=\{z\in\mathbb{C}\mid|z|&lt;1\}" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℂ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>である。
+この節で述べることはとてもよく知られているので無視してかまわない。</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(メビウス変換、もしくは一次分数変換)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="ad-bc\neq 0" display="inline"><mrow><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>d</mi></mrow><mo>−</mo><mrow><mi>b</mi><mo>⁢</mo><mi>c</mi></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">を充たす<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="a,b,c,d\in\mathbb{C}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi></mrow><mo>∈</mo><mi>ℂ</mi></mrow></math>を用いて<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>に</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\frac{az+b}{cz+d}" display="block"><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>d</mi></mrow></mfrac></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を対応させる写像をメビウス変換、もしくは一次分数変換という。</span></p>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">二つのメビウス変換の合成は再びメビウス変換になるし、メビウス変換は常に逆変換を持つことに注意せよ。
+つまりメビウス変換全体は群をなす。これをメビウス群とかメビウス変換群とかいう。
+また、開集合上で定義されたメビウス変換は正則関数になることに注意せよ。よって開集合上で定義されたメビウス変換は正則同型写像である。</span></p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">メビウス群の合成や逆変換は行列と同様の方法で計算できる。
+即ち以下の写像は準同型である。</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\mathcal{M}:\operatorname{GL}(2,\mathbb{C})\to\{\text{メビウス変換全体}\}\ \ A\mapsto M%
+_{A}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mrow><mi>GL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">{</mo><mtext class="ltx_mathvariant_italic">メビウス変換全体</mtext><mo stretchy="false">}</mo></mrow></mrow><mspace width="1em"></mspace><mrow><mi>A</mi><mo stretchy="false">↦</mo><msub><mi>M</mi><mi>A</mi></msub></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ここで<math id="Thmcaux2.p1.m1" class="ltx_Math" alttext="M_{A}" display="inline"><msub><mi>M</mi><mi>A</mi></msub></math>の定義を述べる。</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="A=\begin{pmatrix}a&amp;b\\
+c&amp;d\end{pmatrix}" display="block"><mrow><mi>A</mi><mo>=</mo><mrow><mo>(</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd><mi>a</mi></mtd><mtd><mi>b</mi></mtd></mtr><mtr><mtd><mi>c</mi></mtd><mtd><mi>d</mi></mtd></mtr></mtable><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">としたとき<math id="Thmcaux2.p1.m2" class="ltx_Math" alttext="M_{A}" display="inline"><msub><mi>M</mi><mi>A</mi></msub></math>は</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="M_{A}(z)=\frac{az+b}{cz+d}" display="block"><mrow><mrow><msub><mi>M</mi><mi>A</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>d</mi></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">で表されるメビウス変換である。
+また、<math id="Thmcaux2.p1.m3" class="ltx_Math" alttext="\ker(\mathcal{M})=\{\lambda E\mid\lambda\neq 0\}" display="inline"><mrow><mrow><mi>ker</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>λ</mi><mo>⁢</mo><mi>E</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>λ</mi><mo>≠</mo><mn>0</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>であることに注意せよ。
+すなわち<math id="Thmcaux2.p1.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と<math id="Thmcaux2.p1.m5" class="ltx_Math" alttext="\lambda A\ (\lambda\neq 0)" display="inline"><mrow><mi>λ</mi><mo>⁢</mo><mi>A</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>≠</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は同じメビウス変換に移る。</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\operatorname{GL}(2,\mathbb{C})/\ker(\mathcal{M})" display="block"><mrow><mrow><mi>GL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>/</mo><mrow><mi>ker</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を<math id="Thmcaux2.p1.m6" class="ltx_Math" alttext="\operatorname{PGL}(2,\mathbb{C})" display="inline"><mrow><mi>PGL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>とか書くみたいである。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="\hat{\mathbb{C}}" display="inline"><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></math><span class="ltx_text ltx_font_italic">の開集合<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に対して</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\operatorname{Aut}(X)=\{f:X\to X\mid f\text{は}X\text{の正則同型}\}" display="block"><mrow><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>X</mi><mo>∣</mo><mrow><mi>f</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">は</mtext><mo>⁢</mo><mi>X</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">の正則同型</mtext></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>準備</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">話の本題に移る前に複素関数論の基本的な結果をいくつか紹介する。ここでは証明は省く。証明が知りたい場合は複素関数論を学ぶとよいと思われる。</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold"> </span>(開写像定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">正則関数は開写像である。</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 4</span></span><span class="ltx_text ltx_font_bold"> </span>(Casorati-Weierstrass)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">点<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の周りで定義された正則関数<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>について、<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の真性特異点とする。このとき<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の任意の近傍<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>について<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="N\setminus\{a\}" display="inline"><mrow><mi>N</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow></mrow></math>の<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>のよる像<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="f(N\setminus\{a\})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>N</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>の中で稠密である。</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 5</span></span><span class="ltx_text ltx_font_bold"> </span>(Schwarz)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">は<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>上の正則関数とし、</span></p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="|f(z)|\leq 1,\ f(0)=0" display="block"><mrow><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすとする。このとき<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="|f(z)|\leq|z|" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mrow></math>と<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="|f^{\prime}(0)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>が成立する。</span></p>
+</div>
+<div id="Thmthm5.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">更に<math id="Thmthm5.p2.m1" class="ltx_Math" alttext="|f(z)|=|z|" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow></mrow></math>となる<math id="Thmthm5.p2.m2" class="ltx_Math" alttext="z\in\Delta" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></math>が存在するか、もしくは<math id="Thmthm5.p2.m3" class="ltx_Math" alttext="|f^{\prime}(0)|=1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math>を充たすならば
+ある<math id="Thmthm5.p2.m4" class="ltx_Math" alttext="|a|=1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>a</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math>となる複素数<math id="Thmthm5.p2.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>が存在して</span></p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="f(z)=az" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる。</span></p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\frac{z-a}{\bar{a}z-1}\ \ (a\in\Delta)" display="block"><mrow><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac><mspace width="1em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">の形のメビウス変換をブラシュケ因子と呼ぶ。このメビウス変換は<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>からそれ自身への正則同型になっている。</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">メビウス群の部分集合</span></p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}" display="block"><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">は逆写像と合成で閉じている。つまりメビウス群の部分群である。</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}=\left\{\frac{az+b}{\bar{b}z+\bar{a}}\middle|\ a,b\in\mathbb{C},%
+|a|^{2}-|b|^{2}&gt;0\right\}" display="block"><mrow><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow><mo>=</mo><mrow><mo>{</mo><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mrow><mrow><mover accent="true"><mi>b</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mover accent="true"><mi>a</mi><mo>¯</mo></mover></mrow></mfrac><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>ℂ</mi></mrow><mo>,</mo><mrow><mrow><msup><mrow><mo stretchy="false">|</mo><mi>a</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>&gt;</mo><mn>0</mn></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>本題</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">この節では
+複素平面<math id="S3.p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>、リーマン球面<math id="S3.p1.m2" class="ltx_Math" alttext="\hat{\mathbb{C}}" display="inline"><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></math>及び単位開円盤<math id="S3.p1.m3" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>の正則同型写像を同定する。
+まず<math id="S3.p1.m4" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>のそれを求めよう。</p>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">単射な正則関数<math id="Thmthm9.p1.m1" class="ltx_Math" alttext="f:\mathbb{C}\to\mathbb{C}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℂ</mi><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>は<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="az+b\ (a\neq 0)" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mrow><mi>b</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>≠</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に限る。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">まず無限遠点<math id="S3.p2.m1" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>に於ける<math id="S3.p2.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の挙動を調べてみよう。すなわち関数</p>
+<table id="S3.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex12.m1" class="ltx_Math" alttext="g(z)=f\left(\frac{1}{z}\right)" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mn>1</mn><mi>z</mi></mfrac><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">の<math id="S3.p2.m3" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>における振る舞いを調べよう。</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p"><math id="S3.p3.m1" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が<math id="S3.p3.m2" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>で極を持つことを証明する。背理法を用いる。<math id="S3.p3.m3" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が<math id="S3.p3.m4" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>で真性特異点を持つと仮定しよう。（<math id="S3.p3.m5" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が<math id="S3.p3.m6" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>で零点を持ったり、もしくは<math id="S3.p3.m7" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>まで正則に拡張できたりはしない。このことを考えてみよ。これから<math id="S3.p3.m8" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>が<math id="S3.p3.m9" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が真性特異点の場合のみに背理法を行えばよいことがわかる。）</p>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p"><math id="S3.p4.m1" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>と<math id="S3.p4.m2" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の十分小さい近傍を選び、<math id="S3.p4.m3" class="ltx_Math" alttext="0\in U" display="inline"><mrow><mn>0</mn><mo>∈</mo><mi>U</mi></mrow></math>、<math id="S3.p4.m4" class="ltx_Math" alttext="1\in V" display="inline"><mrow><mn>1</mn><mo>∈</mo><mi>V</mi></mrow></math>、<math id="S3.p4.m5" class="ltx_Math" alttext="U\cap V=\O" display="inline"><mrow><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><mo>=</mo><mi>Ø</mi></mrow></math>とする。
+このとき補題<a href="#Thmthm4" title="補題 4 (Casorati-Weierstrass). ‣ 2 準備 ‣ 正則同型の同定" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>から<math id="S3.p4.m6" class="ltx_Math" alttext="g(U\setminus\{0\})" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S3.p4.m7" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>で稠密である。一方<math id="S3.p4.m8" class="ltx_Math" alttext="g(V)" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow></math>は開写像定理から<math id="S3.p4.m9" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>の開集合であるが、<math id="S3.p4.m10" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が<math id="S3.p4.m11" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>上単射であることから</p>
+<table id="S3.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex13.m1" class="ltx_Math" alttext="g(U\setminus\{0\})\cap g(V)=g((U\setminus\{0\})\cap V)=\O" display="block"><mrow><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となり、<math id="S3.p4.m12" class="ltx_Math" alttext="g(U\setminus\{0\})" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="S3.p4.m13" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>で稠密であることに反する。（稠密集合は非空な開集合と常に交わりを持つはずである。）</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">よって<math id="S3.p5.m1" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>は<math id="S3.p5.m2" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>において極を持つ。その極の位数を<math id="S3.p5.m3" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>とする。
+さて<math id="S3.p5.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は<math id="S3.p5.m5" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>全体でマクローリン展開出来て、</p>
+<table id="S3.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex14.m1" class="ltx_Math" alttext="f(z)=\sum_{n=0}^{\infty}a_{n}z^{n}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><msup><mi>z</mi><mi>n</mi></msup></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と書けるが、<math id="S3.p5.m6" class="ltx_Math" alttext="g(z)=f(1/z)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>/</mo><mi>z</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が<math id="S3.p5.m7" class="ltx_Math" alttext="z=0" display="inline"><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow></math>で位数<math id="S3.p5.m8" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>の極を持つことから<math id="S3.p5.m9" class="ltx_Math" alttext="k&gt;m" display="inline"><mrow><mi>k</mi><mo>&gt;</mo><mi>m</mi></mrow></math>について<math id="S3.p5.m10" class="ltx_Math" alttext="a_{k}=0" display="inline"><mrow><msub><mi>a</mi><mi>k</mi></msub><mo>=</mo><mn>0</mn></mrow></math>とならなければならない。つまり</p>
+<table id="S3.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex15.m1" class="ltx_Math" alttext="f(z)=\sum_{n=0}^{m}a_{n}z^{n}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi>m</mi></munderover><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>⁢</mo><msup><mi>z</mi><mi>n</mi></msup></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。即ち<math id="S3.p5.m11" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は多項式である。2次以上の複素係数の多項式は<math id="S3.p5.m12" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>上非単射なので<math id="S3.p5.m13" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は１次以下の多項式で、
+定数ではありえないから</p>
+<table id="S3.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex16.m1" class="ltx_Math" alttext="f(z)=az+b\ (a\neq 0)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mrow><mi>b</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>≠</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">となる。</p>
+</div>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p"><math id="S3.p8.m1" class="ltx_Math" alttext="az+b" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow></math>は<math id="S3.p8.m2" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>上の正則同型なのですぐさま次のことがわかる</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="\operatorname{Aut}(\mathbb{C})=\{az+b\mid a,b\in\mathbb{C},\ a\neq 0\}" display="inline"><mrow><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>ℂ</mi></mrow><mo rspace="0.667em">,</mo><mrow><mi>a</mi><mo>≠</mo><mn>0</mn></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</div>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p">これを利用して<math id="S3.p9.m1" class="ltx_Math" alttext="\operatorname{Aut}(\hat{\mathbb{C}})" display="inline"><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow></mrow></math>を求めよう。</p>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<table id="S3.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex17.m1" class="ltx_Math" alttext="\operatorname{Aut}(\hat{\mathbb{C}})=(\text{メビウス変換全体})" display="block"><mrow><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mtext class="ltx_mathvariant_italic">メビウス変換全体</mtext><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p10" class="ltx_para">
+<p class="ltx_p"><math id="S3.p10.m1" class="ltx_Math" alttext="(\text{メビウス変換全体})\subset\operatorname{Aut}(\hat{\mathbb{C}})" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mtext>メビウス変換全体</mtext><mo stretchy="false">)</mo></mrow><mo>⊂</mo><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は明らかである。逆を示そう。</p>
+</div>
+<div id="S3.p11" class="ltx_para">
+<p class="ltx_p"><math id="S3.p11.m1" class="ltx_Math" alttext="f:\hat{\mathbb{C}}\to\hat{\mathbb{C}}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo stretchy="false">→</mo><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></mrow></mrow></math>を正則同型とする。</p>
+</div>
+<div id="S3.p12" class="ltx_para">
+<p class="ltx_p">場合その１（<math id="S3.p12.m1" class="ltx_Math" alttext="f(\infty)=\infty" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>の場合）：このとき先の定理から<math id="S3.p12.m2" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>上で<math id="S3.p12.m3" class="ltx_Math" alttext="f(z)=az+b" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow></mrow></math>となるので結局<math id="S3.p12.m4" class="ltx_Math" alttext="\hat{\mathbb{C}}" display="inline"><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></math>上で
+<math id="S3.p12.m5" class="ltx_Math" alttext="f(z)=az+b" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow></mrow></math>である。<math id="S3.p12.m6" class="ltx_Math" alttext="az+b" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow></math>はもちろんメビウス変換なのでこの場合の証明は終わる。</p>
+</div>
+<div id="S3.p13" class="ltx_para">
+<p class="ltx_p">場合その２（<math id="S3.p13.m1" class="ltx_Math" alttext="f(\infty)\in\mathbb{C}" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>ℂ</mi></mrow></math>の場合）：<math id="S3.p13.m2" class="ltx_Math" alttext="f(\infty)=c" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>c</mi></mrow></math>としてメビウス変換<math id="S3.p13.m3" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>を</p>
+<table id="S3.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex18.m1" class="ltx_Math" alttext="g(z)=\frac{1}{z-c}" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mi>z</mi><mo>−</mo><mi>c</mi></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。このとき写像<math id="S3.p13.m4" class="ltx_Math" alttext="h=g\circ f:\hat{\mathbb{C}}\to\hat{\mathbb{C}}" display="inline"><mrow><mrow><mi>h</mi><mo>=</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>f</mi></mrow></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover><mo stretchy="false">→</mo><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></mrow></mrow></math>は<math id="S3.p13.m5" class="ltx_Math" alttext="h(\infty)=\infty" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>を充たす<math id="S3.p13.m6" class="ltx_Math" alttext="\hat{\mathbb{C}}" display="inline"><mover accent="true"><mi>ℂ</mi><mo>^</mo></mover></math>の正則同型である。よって場合その１から</p>
+<table id="S3.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex19.m1" class="ltx_Math" alttext="h(z)=az+b" display="block"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と書ける。もちろんこれはメビウス変換である。そして<math id="S3.p13.m7" class="ltx_Math" alttext="g^{-1}" display="inline"><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>もメビウス変換なので</p>
+<table id="S3.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex20.m1" class="ltx_Math" alttext="f=g^{-1}\circ h" display="block"><mrow><mi>f</mi><mo>=</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>h</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">もメビウス変換である。
+∎</p>
+</div>
+</div>
+<div id="S3.p14" class="ltx_para">
+<p class="ltx_p">最後に<math id="S3.p14.m1" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>の正則同型を求めよう。</p>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<table id="S3.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex21.m1" class="ltx_Math" alttext="\operatorname{Aut}(\Delta)=\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ %
+\theta\in\mathbb{R},a\in\Delta\right\}=\left\{\frac{az+b}{\bar{b}z+\bar{a}}%
+\middle|\ a,b\in\mathbb{C},|a|^{2}-|b|^{2}&gt;0\right\}" display="block"><mrow><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow><mo>=</mo><mrow><mo>{</mo><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mrow><mrow><mover accent="true"><mi>b</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mover accent="true"><mi>a</mi><mo>¯</mo></mover></mrow></mfrac><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>ℂ</mi></mrow><mo>,</mo><mrow><mrow><msup><mrow><mo stretchy="false">|</mo><mi>a</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>&gt;</mo><mn>0</mn></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p15" class="ltx_para">
+<table id="S3.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex22.m1" class="ltx_Math" alttext="\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}\subset\operatorname{Aut}(\Delta)" display="block"><mrow><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow><mo>⊂</mo><mrow><mi>Aut</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と</p>
+<table id="S3.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex23.m1" class="ltx_Math" alttext="\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}=\left\{\frac{az+b}{\bar{b}z+\bar{a}}\middle|\ a,b\in\mathbb{C},%
+|a|^{2}-|b|^{2}&gt;0\right\}" display="block"><mrow><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow><mo>=</mo><mrow><mo>{</mo><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mi>b</mi></mrow><mrow><mrow><mover accent="true"><mi>b</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>+</mo><mover accent="true"><mi>a</mi><mo>¯</mo></mover></mrow></mfrac><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>ℂ</mi></mrow><mo>,</mo><mrow><mrow><msup><mrow><mo stretchy="false">|</mo><mi>a</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>&gt;</mo><mn>0</mn></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">の証明は終わっている。残りを示そう。</p>
+</div>
+<div id="S3.p16" class="ltx_para">
+<p class="ltx_p"><math id="S3.p16.m1" class="ltx_Math" alttext="f:\Delta\to\Delta" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi mathvariant="normal">Δ</mi><mo stretchy="false">→</mo><mi mathvariant="normal">Δ</mi></mrow></mrow></math>を正則同型とする。</p>
+</div>
+<div id="S3.p17" class="ltx_para">
+<p class="ltx_p">場合その１（<math id="S3.p17.m1" class="ltx_Math" alttext="f(0)=0" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>の場合）：このとき補題<a href="#Thmthm5" title="補題 5 (Schwarz). ‣ 2 準備 ‣ 正則同型の同定" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>（Schwarzの補題）を<math id="S3.p17.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="S3.p17.m3" class="ltx_Math" alttext="f^{-1}" display="inline"><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>の両方に適応すると</p>
+<table id="S3.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex24.m1" class="ltx_Math" alttext="|f^{\prime}(0)|\leq 1,\ \left|\frac{1}{f^{\prime}(0)}\right|\leq 1" display="block"><mrow><mrow><mrow><mo stretchy="false">|</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mo>|</mo><mfrac><mn>1</mn><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので<math id="S3.p17.m4" class="ltx_Math" alttext="|f^{\prime}(0)|=1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math>である。そして再び補題<a href="#Thmthm5" title="補題 5 (Schwarz). ‣ 2 準備 ‣ 正則同型の同定" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>からある<math id="S3.p17.m5" class="ltx_Math" alttext="\theta\in\mathbb{R}" display="inline"><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>が存在して</p>
+<table id="S3.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex25.m1" class="ltx_Math" alttext="f(z)=e^{i\theta}z" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mi>z</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるが、</p>
+<table id="S3.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex26.m1" class="ltx_Math" alttext="f(z)=e^{i\theta}z=-e^{i\theta}\frac{z-0}{\bar{0}z-1}=e^{i(\theta+\pi)}\frac{z-%
+0}{\bar{0}z-1}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mi>z</mi></mrow><mo>=</mo><mrow><mo>−</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mn>0</mn></mrow><mrow><mrow><mover accent="true"><mn>0</mn><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>θ</mi><mo>+</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mn>0</mn></mrow><mrow><mrow><mover accent="true"><mn>0</mn><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので</p>
+<table id="S3.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex27.m1" class="ltx_Math" alttext="f\in\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}" display="block"><mrow><mi>f</mi><mo>∈</mo><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。</p>
+</div>
+<div id="S3.p18" class="ltx_para">
+<p class="ltx_p">場合その２（<math id="S3.p18.m1" class="ltx_Math" alttext="f(0)\neq 0" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>の場合）<math id="S3.p18.m2" class="ltx_Math" alttext="f(0)=c" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>c</mi></mrow></math>するともちろん<math id="S3.p18.m3" class="ltx_Math" alttext="c\in\Delta" display="inline"><mrow><mi>c</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></math>である。ここで<math id="S3.p18.m4" class="ltx_Math" alttext="g:\Delta\to\Delta" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi mathvariant="normal">Δ</mi><mo stretchy="false">→</mo><mi mathvariant="normal">Δ</mi></mrow></mrow></math>を</p>
+<table id="S3.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex28.m1" class="ltx_Math" alttext="g(z)=\frac{z-c}{\bar{c}z-1}" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>c</mi></mrow><mrow><mrow><mover accent="true"><mi>c</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義するとこれは<math id="S3.p18.m5" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>の正則同型になっている。さて<math id="S3.p18.m6" class="ltx_Math" alttext="h=g\circ f" display="inline"><mrow><mi>h</mi><mo>=</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>f</mi></mrow></mrow></math>と置くと<math id="S3.p18.m7" class="ltx_Math" alttext="h(0)=0" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>を充たす<math id="S3.p18.m8" class="ltx_Math" alttext="\Delta" display="inline"><mi mathvariant="normal">Δ</mi></math>の正則同型なので場合その１から</p>
+<table id="S3.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex29.m1" class="ltx_Math" alttext="h\in\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in\mathbb{R},a\in%
+\Delta\right\}" display="block"><mrow><mi>h</mi><mo>∈</mo><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。このとき</p>
+<table id="S3.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex30.m1" class="ltx_Math" alttext="f=g^{-1}\circ h\in\left\{e^{i\theta}\frac{z-a}{\bar{a}z-1}\middle|\ \theta\in%
+\mathbb{R},a\in\Delta\right\}" display="block"><mrow><mi>f</mi><mo>=</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>h</mi></mrow><mo>∈</mo><mrow><mo>{</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>θ</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>a</mi></mrow><mrow><mrow><mover accent="true"><mi>a</mi><mo>¯</mo></mover><mo>⁢</mo><mi>z</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo lspace="0em" rspace="0.500em" stretchy="true">|</mo><mrow><mrow><mi>θ</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi></mrow></mrow><mo>}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">でもあるので定理の証明は終わる。
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">野口潤次郎, 複素解析概論 第6版9刷, 裳華房 2011
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:32:32 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

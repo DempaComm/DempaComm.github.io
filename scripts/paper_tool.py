@@ -15,12 +15,16 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.config import LATEXMKRC_BY_ENGINE  # noqa: E402
-from dempa_site.conversion.latexml import run_latexml_trial  # noqa: E402
+from dempa_site.conversion.latexml import (  # noqa: E402
+    run_latexml_trial,
+    unconverted_tex_slugs,
+)
 from dempa_site.conversion.latexml_publication import (  # noqa: E402
     publish_latexml_trial,
 )
 from dempa_site.errors import DempaSiteError, PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
+from dempa_site.files import write_json  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
 from dempa_site.importing.pdf import import_pdf  # noqa: E402
 from dempa_site.importing.tex import import_tex  # noqa: E402
@@ -216,6 +220,73 @@ def command_publish_latexml(args: argparse.Namespace) -> None:
     print(
         f"PUBLISHED LATEXML {paper.slug} files={publication.file_count} "
         f"html={publication.html_path}"
+    )
+
+
+def command_latexml_batch(args: argparse.Namespace) -> None:
+    selected = manifests()
+    candidates, without_tex, already_converted = unconverted_tex_slugs(selected)
+    if not candidates:
+        raise PaperToolError("一括変換できる未変換TeX原稿がありません")
+    output = Path(args.output)
+    if not output.is_absolute():
+        output = ROOT / output
+
+    def show_progress(position: int, total: int, item: dict) -> None:
+        print(
+            f"LATEXML [{position:03}/{total:03}] {item['status']:23} {item['slug']}",
+            flush=True,
+        )
+
+    print(
+        f"LATEXML BATCH candidates={len(candidates)} without_tex={len(without_tex)} "
+        f"already_converted={len(already_converted)}",
+        flush=True,
+    )
+    report = run_latexml_trial(
+        root=ROOT,
+        papers=selected,
+        output=output,
+        requested_slugs=candidates,
+        timeout=args.timeout,
+        progress=show_progress,
+    )
+    publications = []
+    publication_failures = []
+    by_slug = {paper.slug: paper for _, paper in selected}
+    for item in report["results"]:
+        if not item["automatic_checks_passed"]:
+            continue
+        paper = by_slug[item["slug"]]
+        try:
+            publication = publish_latexml_trial(
+                root=ROOT,
+                paper=paper,
+                trial_output=output,
+                automatically_published=True,
+            )
+        except PaperToolError as error:
+            publication_failures.append({"slug": paper.slug, "error": str(error)})
+            print(f"PUBLISH failed {paper.slug}: {error}", flush=True)
+            continue
+        publications.append(paper.slug)
+        print(f"PUBLISH automatic {paper.slug} files={publication.file_count}", flush=True)
+
+    report["batch_publication"] = {
+        "mode": "automatic-passing-only",
+        "published": publications,
+        "publication_failures": publication_failures,
+        "skipped_without_tex": list(without_tex),
+        "skipped_already_converted": list(already_converted),
+    }
+    write_json(output / "report.json", report)
+    if publications:
+        command_catalog(argparse.Namespace(check=False))
+    blocked = len(report["results"]) - len(publications)
+    print(
+        f"LATEXML BATCH DONE published={len(publications)} blocked={blocked} "
+        f"publication_failed={len(publication_failures)} report={output / 'report.json'}",
+        flush=True,
     )
 
 
@@ -447,6 +518,25 @@ def parser() -> argparse.ArgumentParser:
         help="confirm that the HTML was compared with the PDF and approved",
     )
     publish_latexml_parser.set_defaults(func=command_publish_latexml)
+
+    batch_parser = subparsers.add_parser(
+        "latexml-batch",
+        help="convert every unconverted TeX paper and publish automatic passes",
+    )
+    batch_parser.add_argument(
+        "--output",
+        default="_experiments/latexml-all",
+        metavar="DIR",
+        help="empty batch output directory (default: _experiments/latexml-all)",
+    )
+    batch_parser.add_argument(
+        "--timeout",
+        type=int,
+        default=180,
+        metavar="SECONDS",
+        help="per-paper LaTeXML timeout (default: 180)",
+    )
+    batch_parser.set_defaults(func=command_latexml_batch)
 
     inspect_parser = subparsers.add_parser(
         "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"

@@ -14,6 +14,7 @@ from dempa_site.conversion.latexml import (
     _normalize_nocite_all,
     _normalize_quotient_relation,
     run_latexml_trial,
+    unconverted_tex_slugs,
     svg_findings,
 )
 from dempa_site.errors import PaperToolError
@@ -291,6 +292,12 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertNotIn("ltx_missing_image", converted)
         self.assertTrue((output / self.paper.slug / "figure-01-page-2.png").is_file())
         self.assertEqual(tex, source.read_text(encoding="utf-8"))
+
+    def test_batch_candidates_skip_existing_html_and_papers_without_tex(self) -> None:
+        candidates, without_tex, converted = unconverted_tex_slugs(self.papers)
+        self.assertEqual((self.paper.slug,), candidates)
+        self.assertEqual((), without_tex)
+        self.assertEqual((), converted)
 
 
 if __name__ == "__main__":

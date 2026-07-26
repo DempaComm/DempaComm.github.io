@@ -1,0 +1,550 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>ブラウワーの不動点定理と同値な命題</title>
+<!--Generated on Sun Jul 26 16:40:14 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-04-05-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>不動点定理と同値な命題のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../fixedpp.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">
+ブラウワーの不動点定理と同値な命題
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブキトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書ではブラウワーの不動点定理と同値な命題を紹介する．
+同値性しか紹介しないので，実際にこれらを使って楽に不動点定理を証明できるとかそういう効能はない．
+一応閉球体からその境界へのレトラクトが存在しないことをホモロジーを用いて紹介している．
+これらの命題はおいおいユークリッド空間の位相次元を計算する記事だとか領域不変性定理の記事だとかで用いられる予定だとかである．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>本文</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を位相空間とし
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>, <math id="Thmthm1.p1.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>, <math id="Thmthm1.p1.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>をその部分集合とする．
+<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="A\cap B=\emptyset" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><mi>B</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>と仮定する．
+このとき<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_bold">が<math id="Thmthm1.p1.m7" class="ltx_Math" alttext="A" display="inline"><mi mathvariant="normal">A</mi></math>と<math id="Thmthm1.p1.m8" class="ltx_Math" alttext="B" display="inline"><mi mathvariant="normal">B</mi></math>を分離する</span>
+とは開集合<math id="Thmthm1.p1.m9" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>と<math id="Thmthm1.p1.m10" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>が存在して
+<math id="Thmthm1.p1.m11" class="ltx_Math" alttext="A\subset U" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>U</mi></mrow></math>, <math id="Thmthm1.p1.m12" class="ltx_Math" alttext="B\subset V" display="inline"><mrow><mi>B</mi><mo>⊂</mo><mi>V</mi></mrow></math>,
+<math id="Thmthm1.p1.m13" class="ltx_Math" alttext="U\cap V=\emptyset" display="inline"><mrow><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>そして
+<math id="Thmthm1.p1.m14" class="ltx_Math" alttext="X\setminus C=U\coprod V" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>C</mi></mrow><mo>=</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo>∐</mo><mi>V</mi></mrow></mrow></mrow></math>
+を満たす時にいう．
+この時必然的に<math id="Thmthm1.p1.m15" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は閉集合になることに注意しよう．</span></p>
+</div>
+</div>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">まずは次の準備補題から始めよう．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">を
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="[-1,1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>の閉集合で尚且つ
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\{-1\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="\{1\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></math>
+を分離しているとする．
+そして
+<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="[-1,1]\setminus A=U\coprod V" display="inline"><mrow><mrow><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo>∖</mo><mi>A</mi></mrow><mo>=</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo>∐</mo><mi>V</mi></mrow></mrow></mrow></math>とし
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="1\in V" display="inline"><mrow><mn>1</mn><mo>∈</mo><mi>V</mi></mrow></math>とする．
+このとき<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>の任意の元<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="|x-d(x,A)|\leq 1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">まず最初に
+<math id="S1.p2.m1" class="ltx_Math" alttext="0\leq x-d(x,A)" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mi>x</mi><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+のときを考える．
+このとき<math id="S1.p2.m2" class="ltx_Math" alttext="0\leq d(x,A)" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので
+<math id="S1.p2.m3" class="ltx_Math" alttext="|x-d(x,A)|\leq x-d(x,A)\leq x\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mi>x</mi><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>1</mn></mrow></math>
+がわかる．
+次に<math id="S1.p2.m4" class="ltx_Math" alttext="0\leq d(x,A)-x" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>x</mi></mrow></mrow></math>のときを考える．
+このとき<math id="S1.p2.m5" class="ltx_Math" alttext="c=\min A" display="inline"><mrow><mi>c</mi><mo>=</mo><mrow><mi>min</mi><mo lspace="0.167em">⁡</mo><mi>A</mi></mrow></mrow></math>について，
+<math id="S1.p2.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が<math id="S1.p2.m7" class="ltx_Math" alttext="\{-1\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></math>と<math id="S1.p2.m8" class="ltx_Math" alttext="\{1\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></math>
+を分離することから
+<math id="S1.p2.m9" class="ltx_Math" alttext="-1&lt;c" display="inline"><mrow><mrow><mo>−</mo><mn>1</mn></mrow><mo>&lt;</mo><mi>c</mi></mrow></math>である．
+また<math id="S1.p2.m10" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>と<math id="S1.p2.m11" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>の定義と<math id="S1.p2.m12" class="ltx_Math" alttext="1\in V" display="inline"><mrow><mn>1</mn><mo>∈</mo><mi>V</mi></mrow></math>であることから
+<math id="S1.p2.m13" class="ltx_Math" alttext="c&lt;x" display="inline"><mrow><mi>c</mi><mo>&lt;</mo><mi>x</mi></mrow></math>である．
+よって
+<math id="S1.p2.m14" class="ltx_Math" alttext="d(x,A)\leq|x-c|=x-c" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>c</mi></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mi>x</mi><mo>−</mo><mi>c</mi></mrow></mrow></math>となる．
+すると
+<math id="S1.p2.m15" class="ltx_Math" alttext="|x-d(x,A)|=d(x,c)-x=x-c-x=-c&lt;1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>x</mi></mrow><mo>=</mo><mrow><mi>x</mi><mo>−</mo><mi>c</mi><mo>−</mo><mi>x</mi></mrow><mo>=</mo><mrow><mo>−</mo><mi>c</mi></mrow><mo>&lt;</mo><mn>1</mn></mrow></math>
+となる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">とする．
+このとき
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\mathbf{D}^{n}=\{\,x\in\mathbb{R}^{n}\mid\lVert x\rVert\leq 1\,\}" display="inline"><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo fence="true" lspace="0em" rspace="0em">∥</mo><mi>x</mi><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mo lspace="0.1389em">≤</mo><mn>1</mn></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+とし
+<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\mathbf{S}^{n-1}=\{\,x\in\mathbb{R}^{n}\mid\lVert x\rVert=1\,\}" display="inline"><mrow><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo fence="true" lspace="0em" rspace="0em">∥</mo><mi>x</mi><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mo lspace="0.1389em">=</mo><mn>1</mn></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+と定義する．ここでノルム<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="\lVert*\rVert" display="inline"><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">∗</mo><mo fence="true" lspace="0em">∥</mo></mrow></math>は通常の内積から誘導されるノルムとする．つまり
+<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="\mathbf{D}^{n}" display="inline"><msup><mi>𝐃</mi><mi>n</mi></msup></math>は<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>次元閉球体で
+<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>はその境界である<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="n-1" display="inline"><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></math>次元球面である．</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">とし，
+<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+とする．
+このとき
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="\mathbf{I}^{n}=[-1,1]^{n}" display="inline"><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></math>
+と定義し
+<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}=\{\,x\in\mathbf{I}^{n}\mid x_{i}=1\,\}" display="inline"><mrow><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+で
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}=\{\,x\in\mathbf{I}^{n}\mid x_{i}=-1\,\}" display="inline"><mrow><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+と定義する．
+さらに
+<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="\partial\mathbf{I}^{n}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math>を<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>の境界集合
+とする．
+このとき
+<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="\partial\mathbf{I}^{n}=\bigcup_{i=1}^{n}\mathbf{I}^{n,i}_{+}\cup\mathbf{I}^{n,%
+i}_{-}" display="inline"><mrow><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow><mo rspace="0.111em">=</mo><mrow><mrow><msubsup><mo>⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></mrow><mo>∪</mo><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></mrow></mrow></math>
+であることに注意しよう．
+また
+<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>
+は<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="\mathbf{D}^{n}" display="inline"><msup><mi>𝐃</mi><mi>n</mi></msup></math>に同相であり，
+<math id="Thmthm4.p1.m11" class="ltx_Math" alttext="\partial\mathbf{I}^{n}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math>は
+<math id="Thmthm4.p1.m12" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>
+に同相であることにも注意しよう．</span></p>
+</div>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">この文書の主定理は以下である．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">について以下は同値である．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">(No retraction theorem)
+レトラクション
+</span><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="r\colon\mathbf{D}^{n}\to\mathbf{S}^{n-1}" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は存在しない．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">(Brouwer’s fixed point theorem)
+任意の連続写像
+</span><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="f\colon\mathbf{D}^{n}\to\mathbf{D}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐃</mi><mi>n</mi></msup></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は不動点を持つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">を添字とする
+閉集合</span><math id="S1.I1.i3.p1.m2" class="ltx_Math" alttext="C_{i}\subset\mathbf{I}^{n}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>⊂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">
+の族が</span><math id="S1.I1.i3.p1.m3" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}" display="inline"><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math><span class="ltx_text ltx_font_italic">
+と</span><math id="S1.I1.i3.p1.m4" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{-}" display="inline"><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math><span class="ltx_text ltx_font_italic">
+を分離するならば
+</span><math id="S1.I1.i3.p1.m5" class="ltx_Math" alttext="\bigcap_{i=1}^{n}C_{i}\neq\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>C</mi><mi>i</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">
+を成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">(the Poincaré-Miranda theorem)
+</span><math id="S1.I1.i4.p1.m1" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">を添字とする連続写像の族
+</span><math id="S1.I1.i4.p1.m2" class="ltx_Math" alttext="f_{i}\colon\mathbf{I}^{n}\to\mathbb{R}" display="inline"><mrow><msub><mi>f</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">が
+</span><math id="S1.I1.i4.p1.m3" class="ltx_Math" alttext="f_{i}(\mathbf{I}^{n,i}_{+})\subset[0,\infty)" display="inline"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S1.I1.i4.p1.m4" class="ltx_Math" alttext="f_{i}(\mathbf{I}^{n,i}_{-})\subset(-\infty,0]" display="inline"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+を満たすならば，
+ある点</span><math id="S1.I1.i4.p1.m5" class="ltx_Math" alttext="p\in\mathbf{I}^{n}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S1.I1.i4.p1.m6" class="ltx_Math" alttext="f_{i}(p)=0" display="inline"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．
+つまり共通零点が存在する．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">[<math id="S1.p4.m1" class="ltx_Math" alttext="\ref{item:noret}\Longrightarrow\ref{item:fixedpt}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i1" title="item (1) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i2" title="item (2) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext></mrow></math>]
+いつものやつである．
+不動点を持たない連続写像
+<math id="S1.p4.m2" class="ltx_Math" alttext="f\colon\mathbf{D}^{n}\to\mathbf{D}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐃</mi><mi>n</mi></msup></mrow></mrow></math>
+が存在するとしよう．
+このとき
+このとき<math id="S1.p4.m3" class="ltx_Math" alttext="f(x)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>から
+<math id="S1.p4.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>へと線分を伸ばして
+<math id="S1.p4.m5" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>と交わる点を<math id="S1.p4.m6" class="ltx_Math" alttext="r(x)" display="inline"><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>と定義すると，
+これは<math id="S1.p4.m7" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>上では<math id="S1.p4.m8" class="ltx_Math" alttext="r(x)=x" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>を満たす．
+また<math id="S1.p4.m9" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>と<math id="S1.p4.m10" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>が十分近いときに
+<math id="S1.p4.m11" class="ltx_Math" alttext="(1-t)f(x)+tx" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></math>と<math id="S1.p4.m12" class="ltx_Math" alttext="(1-t)f(y)+ty" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>t</mi><mo>⁢</mo><mi>y</mi></mrow></mrow></math>も十分近いという事実から
+<math id="S1.p4.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の連続性も従う(凸な基本近傍形が取れるなどの事実も使うのだろう)．
+あるいは<math id="S1.p4.m14" class="ltx_Math" alttext="(1-t)f(x)+tx" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></math>のノルムが<math id="S1.p4.m15" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>になる<math id="S1.p4.m16" class="ltx_Math" alttext="t&gt;0" display="inline"><mrow><mi>t</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を二次方程式を解いて具体的に記述するのでも良い．
+とにかく連続なレトラクション
+<math id="S1.p4.m17" class="ltx_Math" alttext="r\colon\mathbf{D}^{n}\to\mathbf{S}^{n-1}" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math>
+が存在するので<a href="#S1.I1.i1" title="item (1) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>に反し，
+背理法により
+<a href="#S1.I1.i2" title="item (2) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>が成り立つ．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">[<math id="S1.p5.m1" class="ltx_Math" alttext="\ref{item:fixedpt}\Longrightarrow\ref{item:ccc}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i2" title="item (2) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i3" title="item (3) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext></mrow></math>]
+各<math id="S1.p5.m2" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+に対して
+<math id="S1.p5.m3" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>
+の開集合<math id="S1.p5.m4" class="ltx_Math" alttext="P_{i}" display="inline"><msub><mi>P</mi><mi>i</mi></msub></math>,
+<math id="S1.p5.m5" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>を
+<math id="S1.p5.m6" class="ltx_Math" alttext="\mathbf{I}^{n}\setminus C_{i}=N_{i}\coprod P_{i}" display="inline"><mrow><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo>∖</mo><msub><mi>C</mi><mi>i</mi></msub></mrow><mo>=</mo><mrow><msub><mi>N</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo>∐</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></mrow></math>
+で
+<math id="S1.p5.m7" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}\subset P_{i}" display="inline"><mrow><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo>⊂</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>かつ
+<math id="S1.p5.m8" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{-}\subset N_{i}" display="inline"><mrow><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo>⊂</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>
+を満たすものをとってくる．
+このような開集合の組みは複数個あり得るかもしれないがとにかく一つとってくる(<math id="S1.p5.m9" class="ltx_Math" alttext="C_{i}" display="inline"><msub><mi>C</mi><mi>i</mi></msub></math>の補集合の連結成分が二つより大きいことがあり得るからである)．
+そして
+写像<math id="S1.p5.m10" class="ltx_Math" alttext="m_{i}\colon\mathbf{I}^{n}\to\mathbb{R}" display="inline"><mrow><msub><mi>m</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="m_{i}(x)=\begin{cases}d(x,C_{i})&amp;x\in C_{i}\cup P_{i}\\
+-d(x,C_{i})&amp;x\in C_{i}\cup N_{i}\end{cases}" display="block"><mrow><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき
+<math id="S1.p5.m11" class="ltx_Math" alttext="C_{i}\cup P_{i}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S1.p5.m12" class="ltx_Math" alttext="C_{i}\cup N_{i}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>
+はともに閉集合で，
+これらの共通部分である
+<math id="S1.p5.m13" class="ltx_Math" alttext="C_{i}" display="inline"><msub><mi>C</mi><mi>i</mi></msub></math>上では
+<math id="S1.p5.m14" class="ltx_Math" alttext="d(x,C_{i})" display="inline"><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+と
+<math id="S1.p5.m15" class="ltx_Math" alttext="-d(x,C_{i})" display="inline"><mrow><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は同じ値<math id="S1.p5.m16" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>を取り，
+<math id="S1.p5.m17" class="ltx_Math" alttext="C_{i}\cup P_{i}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S1.p5.m18" class="ltx_Math" alttext="C_{i}\cup N_{i}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>上ではもちろん連続なので
+貼り合わさって
+<math id="S1.p5.m19" class="ltx_Math" alttext="m_{i}" display="inline"><msub><mi>m</mi><mi>i</mi></msub></math>はちゃんと定義され連続になる．
+そして
+<math id="S1.p5.m20" class="ltx_Math" alttext="f_{i}\colon\mathbf{I}^{n}\to\mathbb{R}" display="inline"><mrow><msub><mi>f</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を</p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="f_{i}(x)=x_{i}-m_{i}(x)" display="block"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき
+<math id="S1.p5.m21" class="ltx_Math" alttext="|f_{i}(x)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+となることを今から証明しよう．
+<math id="S1.p5.m22" class="ltx_Math" alttext="x\in P_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>のときのみ証明する．他の場合は同様に証明できる．
+このとき<math id="S1.p5.m23" class="ltx_Math" alttext="f_{i}(x)=x_{i}-d(x,C_{i})" display="inline"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>である．
+まず
+<math id="S1.p5.m24" class="ltx_Math" alttext="0\leq x_{i}-d(x,C_{i})" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+のときは<math id="S1.p5.m25" class="ltx_Math" alttext="0\leq d(x,C_{i})" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="|f_{i}(x)|=x_{i}-d(x,C_{i})\leq x_{i}\leq 1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であるから求める結果が成り立つ．
+次に<math id="S1.p5.m26" class="ltx_Math" alttext="0\leq d(x,C_{i})-x_{i}" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mrow></math>の場合を調べる．
+このとき
+<math id="S1.p5.m27" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を通る直線で
+<math id="S1.p5.m28" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}" display="inline"><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math>
+と<math id="S1.p5.m29" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{-}" display="inline"><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math>に垂直なもの，つまり
+<math id="S1.p5.m30" class="ltx_Math" alttext="L=\{\,z\in\mathbf{I}^{n}\mid z_{k}=x_{k},k\neq i\,\}" display="inline"><mrow><mi>L</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msub><mi>z</mi><mi>k</mi></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo>,</mo><mrow><mi>k</mi><mo>≠</mo><mi>i</mi></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+を考える．そして<math id="S1.p5.m31" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を<math id="S1.p5.m32" class="ltx_Math" alttext="L\cap\mathbf{I}^{n,i}_{+}" display="inline"><mrow><mi>L</mi><mo>∩</mo><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></mrow></math>を構成する唯一の点とし
+同様に<math id="S1.p5.m33" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>を<math id="S1.p5.m34" class="ltx_Math" alttext="L\cap\mathbf{I}^{n,i}_{-}" display="inline"><mrow><mi>L</mi><mo>∩</mo><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></mrow></math>を構成するただ唯一の点とする．つまり<math id="S1.p5.m35" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="S1.p5.m36" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>成分が<math id="S1.p5.m37" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>でそれ以外が
+<math id="S1.p5.m38" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>と同じ成分であり，<math id="S1.p5.m39" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>は<math id="S1.p5.m40" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>成分が<math id="S1.p5.m41" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>でそれ以外が
+<math id="S1.p5.m42" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>と一致するものである．
+すると<math id="S1.p5.m43" class="ltx_Math" alttext="L\cap C_{i}" display="inline"><mrow><mi>L</mi><mo>∩</mo><msub><mi>C</mi><mi>i</mi></msub></mrow></math>は<math id="S1.p5.m44" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>の部分集合として
+<math id="S1.p5.m45" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>と<math id="S1.p5.m46" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>を分離する．
+今<math id="S1.p5.m47" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>と<math id="S1.p5.m48" class="ltx_Math" alttext="[-1,1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>を同一視すれば
+補題<a href="#Thmthm2" title="補題 2. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>が適応できて
+<math id="S1.p5.m49" class="ltx_Math" alttext="|x_{i}-d(x,L\cap C_{i})|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>L</mi><mo>∩</mo><msub><mi>C</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>となる．
+さて<math id="S1.p5.m50" class="ltx_Math" alttext="|f_{i}(x)|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></math>を計算しよう．</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="|f_{i}(x)|=d(x,C_{i})-x_{i}\leq d(x,L\cap C_{i})-x_{i}=|d(x,L\cap C_{i})-x_{i}%
+|\leq 1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><mo>≤</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>L</mi><mo>∩</mo><msub><mi>C</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>L</mi><mo>∩</mo><msub><mi>C</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">以上の計算より求める不等式を得る．
+上の議論からどんな状況においても
+<math id="S1.p5.m51" class="ltx_Math" alttext="|f_{i}(x)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>が成り立つことがわかった．
+ここで写像<math id="S1.p5.m52" class="ltx_Math" alttext="f\colon\mathbf{I}^{n}\to\mathbf{I}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></mrow></math>
+を<math id="S1.p5.m53" class="ltx_Math" alttext="f=(f_{1},\dots,f_{n})" display="inline"><mrow><mi>f</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>で定義する．さっき証明した不等式から<math id="S1.p5.m54" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の地域はちゃんと<math id="S1.p5.m55" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>
+になっている．
+よって<a href="#S1.I1.i2" title="item (2) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>から不動点<math id="S1.p5.m56" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が存在する．
+<math id="S1.p5.m57" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の定義からこの<math id="S1.p5.m58" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>は
+<math id="S1.p5.m59" class="ltx_Math" alttext="d(p,C_{i})=0" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>を満たす．
+つまり<math id="S1.p5.m60" class="ltx_Math" alttext="p\in\bigcap_{i=1}^{n}C_{i}" display="inline"><mrow><mi>p</mi><mo rspace="0.111em">∈</mo><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>C</mi><mi>i</mi></msub></mrow></mrow></math>
+なので<math id="S1.p5.m61" class="ltx_Math" alttext="\bigcap_{i=1}^{n}C_{i}\neq\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>C</mi><mi>i</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+がわかるので
+<a href="#S1.I1.i3" title="item (3) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>が成り立つ．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">[<math id="S1.p6.m1" class="ltx_Math" alttext="\ref{item:ccc}\Longrightarrow\ref{item:pm}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i3" title="item (3) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i4" title="item (4) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext></mrow></math>]
+各<math id="S1.p6.m2" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+と<math id="S1.p6.m3" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について
+<math id="S1.p6.m4" class="ltx_Math" alttext="L_{i,k}=\{\,x\in\mathbf{I}^{n}\mid|x_{i}|\leq 1-2^{-k}\,\}" display="inline"><mrow><msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">|</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>k</mi></mrow></msup></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+とおく．
+そして
+写像
+<math id="S1.p6.m5" class="ltx_Math" alttext="w_{i,k}\colon\mathbf{I}^{n}\to\mathbf{I}^{n}" display="inline"><mrow><msub><mi>w</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></mrow></math>
+を</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="w_{i,k}(x)=x_{i}\cdot d(x,L_{i,k})" display="block"><mrow><mrow><msub><mi>w</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>x</mi><mi>i</mi></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+そして<math id="S1.p6.m6" class="ltx_Math" alttext="g_{i}\colon\mathbf{I}^{n}\to\mathbf{I}^{n}" display="inline"><mrow><msub><mi>g</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></mrow></math>
+を
+<math id="S1.p6.m7" class="ltx_Math" alttext="g_{i,k}(x)=f_{i}(x)+w_{i,k}(x)" display="inline"><mrow><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>w</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+と定義する．
+この時常に
+<math id="S1.p6.m8" class="ltx_Math" alttext="g_{i,k}(\mathbf{I}^{n,i}_{+})\subset(0,\infty)" display="inline"><mrow><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+で<math id="S1.p6.m9" class="ltx_Math" alttext="g_{i,k}(\mathbf{I}^{n,i}_{-})\subset(-\infty,0)" display="inline"><mrow><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math>
+である．
+よって
+<math id="S1.p6.m10" class="ltx_Math" alttext="C_{i,k}=g^{-1}(\{0\})" display="inline"><mrow><msub><mi>C</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>=</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+は<math id="S1.p6.m11" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{+}" display="inline"><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math>と
+<math id="S1.p6.m12" class="ltx_Math" alttext="\mathbf{I}^{n,i}_{-}" display="inline"><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup></math>
+を分離する閉集合である．
+故に
+<a href="#S1.I1.i3" title="item (3) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>から
+<math id="S1.p6.m13" class="ltx_Math" alttext="\bigcap_{i=1}^{n}C_{i,k}\neq\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>C</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．この集合から点<math id="S1.p6.m14" class="ltx_Math" alttext="p_{k}" display="inline"><msub><mi>p</mi><mi>k</mi></msub></math>をとる．
+このとき<math id="S1.p6.m15" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>
+のコンパクト性から収束する部分列<math id="S1.p6.m16" class="ltx_Math" alttext="\{p_{\phi(k)}\}_{k\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>が存在する．その収束先を<math id="S1.p6.m17" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>とする．
+さて<math id="S1.p6.m18" class="ltx_Math" alttext="g_{i,k}" display="inline"><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub></math>は<math id="S1.p6.m19" class="ltx_Math" alttext="f_{i}" display="inline"><msub><mi>f</mi><mi>i</mi></msub></math>に一様収束するので，
+<math id="S1.p6.m20" class="ltx_Math" alttext="k\to\infty" display="inline"><mrow><mi>k</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき
+<math id="S1.p6.m21" class="ltx_Math" alttext="g_{i,\phi(k)}(p_{\phi(k)})\to f_{i}(p)" display="inline"><mrow><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+である．
+よって任意の<math id="S1.p6.m22" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+について<math id="S1.p6.m23" class="ltx_Math" alttext="f_{i}(p)=0" display="inline"><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>となる．
+つまり
+<a href="#S1.I1.i4" title="item (4) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>
+が成り立つ．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">[<math id="S1.p7.m1" class="ltx_Math" alttext="\ref{item:pm}\Longrightarrow\ref{item:noret}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i4" title="item (4) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i1" title="item (1) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext></mrow></math>]
+まず<math id="S1.p7.m2" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>と
+<math id="S1.p7.m3" class="ltx_Math" alttext="\mathbf{D}^{n}" display="inline"><msup><mi>𝐃</mi><mi>n</mi></msup></math>,
+そして
+<math id="S1.p7.m4" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>
+と<math id="S1.p7.m5" class="ltx_Math" alttext="\partial\mathbf{I}^{n}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math>
+を同一視する．
+背理法のためにレトラクション
+<math id="S1.p7.m6" class="ltx_Math" alttext="r\colon\mathbf{I}^{n}\to\partial\mathbf{I}^{n}" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐈</mi><mi>n</mi></msup><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></mrow></mrow></math>
+が存在すると仮定する．
+このとき<math id="S1.p7.m7" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の各成分<math id="S1.p7.m8" class="ltx_Math" alttext="r_{i}" display="inline"><msub><mi>r</mi><mi>i</mi></msub></math>はもちろん
+<math id="S1.p7.m9" class="ltx_Math" alttext="r_{i}(\mathbf{I}^{n,i}_{+})\subset[0,\infty)" display="inline"><mrow><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>+</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+と
+<math id="S1.p7.m10" class="ltx_Math" alttext="r_{i}(\mathbf{I}^{n,i}_{-})\subset(-\infty,0]" display="inline"><mrow><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>𝐈</mi><mo>−</mo><mrow><mi>n</mi><mo>,</mo><mi>i</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></mrow></math>
+を満たすので，<a href="#S1.I1.i4" title="item (4) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>からある<math id="S1.p7.m11" class="ltx_Math" alttext="p\in\mathbf{I}^{n}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math>
+が存在して<math id="S1.p7.m12" class="ltx_Math" alttext="r(p)=0" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>を満たす．
+しかしこれは
+<math id="S1.p7.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の値域が
+<math id="S1.p7.m14" class="ltx_Math" alttext="\partial\mathbf{I}^{n}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mi>n</mi></msup></mrow></math>
+であることに反するので
+上記のようなレトラクションは存在しえない．
+よって
+<a href="#S1.I1.i1" title="item (1) ‣ 定理 5. ‣ 1 本文 ‣ ブラウワーの不動点定理と同値な命題" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>
+が成り立つ．
+∎</p>
+</div>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">上の定理だけだと，同値性しか証明していないので，
+不動点定理が実際に正しいのかどうかは判断できない．
+しかし以下のことが知られているので，上で述べたすべての命題は正しいことがわかる．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math>について
+レトラクション<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="r\colon\mathbf{D}^{n}\to\mathbf{S}^{n-1}" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math>
+は存在しない.</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p"><math id="S1.p9.m1" class="ltx_Math" alttext="n=1" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow></math>のときは中間値の定理からレトラクションの不存在がわかる．以下では<math id="S1.p9.m2" class="ltx_Math" alttext="1&lt;n" display="inline"><mrow><mn>1</mn><mo>&lt;</mo><mi>n</mi></mrow></math>とする．
+また
+<math id="S1.p9.m3" class="ltx_Math" alttext="H_{i}(*)" display="inline"><mrow><msub><mi>H</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">)</mo></mrow></mrow></math>でホモロジー群の関手を表すとする．
+上記のようなレトラクションが存在したとしよう．
+このとき<math id="S1.p9.m4" class="ltx_Math" alttext="\iota" display="inline"><mi>ι</mi></math>を<math id="S1.p9.m5" class="ltx_Math" alttext="\mathbf{S}^{n-1}" display="inline"><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>から
+<math id="S1.p9.m6" class="ltx_Math" alttext="\mathbf{I}^{n}" display="inline"><msup><mi>𝐈</mi><mi>n</mi></msup></math>への包含写像として
+<math id="S1.p9.m7" class="ltx_Math" alttext="r\circ\iota=1_{\mathbf{S}^{n}}" display="inline"><mrow><mrow><mi>r</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>ι</mi></mrow><mo>=</mo><msub><mn>1</mn><msup><mi>𝐒</mi><mi>n</mi></msup></msub></mrow></math>
+が成り立つので，<math id="S1.p9.m8" class="ltx_Math" alttext="n-1" display="inline"><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></math>について</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="H_{n-1}(r)\circ H_{n}(\iota)=H_{n-1}(1_{\mathbf{S}^{n}})=1_{H_{n-1}(\mathbf{S}%
+^{n-1})}" display="block"><mrow><mrow><mrow><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">∘</mo><msub><mi>H</mi><mi>n</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ι</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mn>1</mn><msup><mi>𝐒</mi><mi>n</mi></msup></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mn>1</mn><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+故に<math id="S1.p9.m9" class="ltx_Math" alttext="H_{n-1}(\iota)\colon H_{n-1}(\mathbf{S}^{n-1})\to H_{n-1}(\mathbf{D}^{n})" display="inline"><mrow><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ι</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+は単射になる．
+ところで
+<math id="S1.p9.m10" class="ltx_Math" alttext="H_{n-1}(\mathbf{D}^{n})\cong\{0\}" display="inline"><mrow><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>𝐃</mi><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>≅</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></math>
+で
+<math id="S1.p9.m11" class="ltx_Math" alttext="H_{n-1}(\mathbf{S}^{n-1})\cong\mathbb{Z}" display="inline"><mrow><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>𝐒</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><mo>≅</mo><mi>ℤ</mi></mrow></math>
+なので，
+単射<math id="S1.p9.m12" class="ltx_Math" alttext="H_{n-1}(\iota)" display="inline"><mrow><msub><mi>H</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ι</mi><mo stretchy="false">)</mo></mrow></mrow></math>の存在はあり得ない．
+よって
+レトラクション<math id="S1.p9.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は存在しえない．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">一応ホモロジーなどの結構高等な概念を使わずに，
+逆関数定理や積分の変数変換公式を使って
+ブラウワーの不動点定理を証明できる．
+電波通信の記事<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>を参照のこと．</span></p>
+</div>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">球面や球体の
+ホモロジーの計算などは
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>などに載っている．</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+みなずみ,
+webページ
+数学ノート<math id="bib.bib1.m1" class="ltx_Math" alttext="\mid" display="inline"><mo>∣</mo></math>単純思考
+「切除定理」,
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://minazumi.com/math/note/tgy/ch02sec02.html</span>
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">W.Hurewicz and H.Wallman,<span class="ltx_text ltx_font_italic">Dimension Theory</span>,Princeton Univ. Press,1948
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+W. Kulpa,
+<span class="ltx_text ltx_font_italic">The Poiancré–Miranda Theorem</span>,
+Am. Math. Mon. 104, No. 6, 545–550 (1997)
+doi: 10.2307/2975081
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:40:14 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

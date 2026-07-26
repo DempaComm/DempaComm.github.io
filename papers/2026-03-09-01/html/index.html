@@ -1,0 +1,1130 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>族正規と写像の拡張</title>
+<!--Generated on Sun Jul 26 16:37:56 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-03-09-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>族正規と写像の拡張のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../collnor.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">族正規と写像の拡張</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では，
+Dowkerの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>に基づいて族正規のバナッハ空間への写像の拡張を使った特徴付けを証明する．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>基本的なこと</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">位相空間<math id="S1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の部分集合族<math id="S1.p1.m2" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+が<span class="ltx_text ltx_font_bold">疎</span>
+であるとは
+位相空間<math id="S1.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の点<math id="S1.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>
+について<math id="S1.p1.m5" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の近傍
+<math id="S1.p1.m6" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>であって，
+<math id="S1.p1.m7" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>の元の高々一個としか交わらないものが存在する時にいう．
+つまり<math id="S1.p1.m8" class="ltx_Math" alttext="\mathrm{card}(\{A\in\mathcal{A}\mid A\cap N\neq\emptyset\})\leq 1" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>A</mi><mo>∩</mo><mi>N</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+となるときと言うことである．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">疎な集合族に関して以下のことが知られている．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+部分集合族<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+について，これが疎であることと，
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\{\mathrm{cl}(A)\mid A\in\mathcal{A}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow><mo stretchy="false">}</mo></mrow></math>
+が互いに素で局所有限である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">略．位相の練習にちょうど良い．
+∎</p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p"><math id="S1.p4.m1" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>
+を無限基数とする．
+この時
+位相空間<math id="S1.p4.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が
+<math id="S1.p4.m3" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math><span class="ltx_text ltx_font_bold">-族正規</span>
+であるとは，
+<math id="S1.p4.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の疎な閉部分集合族<math id="S1.p4.m5" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+であって<math id="S1.p4.m6" class="ltx_Math" alttext="\mathrm{card}(\mathcal{A})\leq\mathfrak{m}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>𝔪</mi></mrow></math>
+となるものについて，
+互いに素な開部分集合
+族<math id="S1.p4.m7" class="ltx_Math" alttext="\{U_{A}\mid A\in\mathcal{A}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>A</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow><mo stretchy="false">}</mo></mrow></math>
+で<math id="S1.p4.m8" class="ltx_Math" alttext="A\subset U_{A}" display="inline"><mrow><mi>A</mi><mo>⊂</mo><msub><mi>U</mi><mi>A</mi></msub></mrow></math>となるもの
+が存在する時にいう．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">また，任意の<math id="S1.p5.m1" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>に対して
+<math id="S1.p5.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S1.p5.m3" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規であるときに
+<math id="S1.p5.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を単に
+<span class="ltx_text ltx_font_bold">族正規</span>
+と呼ぶ．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">当たり前だが，<math id="S1.p6.m1" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規空間は
+正規空間である．
+より詳しく以下のことが知られている．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">が正規空間であることと
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\aleph_{0}" display="inline"><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></math>-族正規であることは同値である．
+よって特に無限基数<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>
+について<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規であるような空間は正規である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p"><math id="S1.p7.m1" class="ltx_Math" alttext="\{A_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を疎な閉部分集合族とする．
+そして関数<math id="S1.p7.m2" class="ltx_Math" alttext="f\colon\coprod_{i\in\mathbb{Z}_{\geq 0}}A_{i}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.111em">:</mo><mrow><mrow><msub><mo>∐</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を<math id="S1.p7.m3" class="ltx_Math" alttext="x\in A_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>A</mi><mi>i</mi></msub></mrow></math>の時に<math id="S1.p7.m4" class="ltx_Math" alttext="f(x)=i" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>i</mi></mrow></math>
+と定義する．
+この時<math id="S1.p7.m5" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+が疎であることから<math id="S1.p7.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は<math id="S1.p7.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合<math id="S1.p7.m8" class="ltx_Math" alttext="\coprod_{i\in\mathbb{Z}_{\geq 0}}A_{i}" display="inline"><mrow><msub><mo>∐</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></math>上で連続である．
+よってティーチェの拡張定理から
+連続関数<math id="S1.p7.m9" class="ltx_Math" alttext="F\colon X\to\mathbb{R}" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+で<math id="S1.p7.m10" class="ltx_Math" alttext="\coprod_{i\in\mathbb{Z}_{\geq 0}}A_{i}" display="inline"><mrow><msub><mo>∐</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></math>上では<math id="S1.p7.m11" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に一致するものが存在する．
+ここで
+<math id="S1.p7.m12" class="ltx_Math" alttext="U_{i}=F^{-1}(i-1/2,i+1/2)" display="inline"><mrow><msub><mi>U</mi><mi>i</mi></msub><mo>=</mo><mrow><msup><mi>F</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>i</mi><mo>−</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow><mo>,</mo><mrow><mi>i</mi><mo>+</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とすると<math id="S1.p7.m13" class="ltx_Math" alttext="\{U_{i}\mid i\in\mathbb{Z}_{\geq 0}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+は互いに素な開集合の族で<math id="S1.p7.m14" class="ltx_Math" alttext="A_{i}\subset U_{i}" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+となる．
+∎</p>
+</div>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">以下の補題は特に断りなく以下で用いるであろう．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math><span class="ltx_text ltx_font_italic">を無限基数とし，
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規とする．
+このとき<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の疎な部分集合族<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="\{A_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+に対して疎な開集合の族<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+であって<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="A\subset U_{A}" display="inline"><mrow><mi>A</mi><mo>⊂</mo><msub><mi>U</mi><mi>A</mi></msub></mrow></math>
+となるものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p"><math id="S1.p9.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の<math id="S1.p9.m2" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>の族正規性から
+互いに素な開集合の族<math id="S1.p9.m3" class="ltx_Math" alttext="\{O_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+であって，<math id="S1.p9.m4" class="ltx_Math" alttext="A_{i}\subset O_{i}" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>
+となるものが存在する．
+すると開集合<math id="S1.p9.m5" class="ltx_Math" alttext="\bigcup_{i\in I}O_{i}" display="inline"><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>O</mi><mi>i</mi></msub></mrow></math>
+は閉集合<math id="S1.p9.m6" class="ltx_Math" alttext="\bigcup_{i\in I}A_{i}" display="inline"><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></math>
+を含むので，ウリゾーンの補題から
+連続写像<math id="S1.p9.m7" class="ltx_Math" alttext="f\colon X\to[0,1]" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+で<math id="S1.p9.m8" class="ltx_Math" alttext="\bigcup_{i\in I}A_{i}" display="inline"><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></math>上で<math id="S1.p9.m9" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+で<math id="S1.p9.m10" class="ltx_Math" alttext="\bigcup_{i\in I}O_{i}" display="inline"><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>O</mi><mi>i</mi></msub></mrow></math>の外で<math id="S1.p9.m11" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>となるようなものが存在する．
+そこで<math id="S1.p9.m12" class="ltx_Math" alttext="U_{i}=O_{i}\cap f^{-1}([0,1/2))" display="inline"><mrow><msub><mi>U</mi><mi>i</mi></msub><mo>=</mo><mrow><msub><mi>O</mi><mi>i</mi></msub><mo>∩</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+とし，<math id="S1.p9.m13" class="ltx_Math" alttext="W=f^{-1}((1/2,1])" display="inline"><mrow><mi>W</mi><mo>=</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする．
+今から族<math id="S1.p9.m14" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が疎であることを示そう．<math id="S1.p9.m15" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+を任意にとる．もしも<math id="S1.p9.m16" class="ltx_Math" alttext="x\in O_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>となる<math id="S1.p9.m17" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>が存在すれば，
+<math id="S1.p9.m18" class="ltx_Math" alttext="O_{i}" display="inline"><msub><mi>O</mi><mi>i</mi></msub></math>は<math id="S1.p9.m19" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>のうち<math id="S1.p9.m20" class="ltx_Math" alttext="U_{i}" display="inline"><msub><mi>U</mi><mi>i</mi></msub></math>としか交わりを持たない．もしもそのような<math id="S1.p9.m21" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>がなければ，
+<math id="S1.p9.m22" class="ltx_Math" alttext="f(x)=1" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>なので<math id="S1.p9.m23" class="ltx_Math" alttext="x\in W" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>W</mi></mrow></math>である．そして<math id="S1.p9.m24" class="ltx_Math" alttext="W" display="inline"><mi>W</mi></math>はどんな
+<math id="S1.p9.m25" class="ltx_Math" alttext="U_{i}" display="inline"><msub><mi>U</mi><mi>i</mi></msub></math>とも交わりを持たない．
+以上から<math id="S1.p9.m26" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が疎であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">擬距離</span>とは，非退化性を満たすとは限らない距離関数のことである．
+擬距離空間は異なる2点間の距離が<math id="S1.p10.m1" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+になりうることがあるだけで大まかには距離関数と同じ性質を持つ．位相も距離関数と同じ方法で入れる．</p>
+</div>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">族正規空間の重要な例として，擬距離空間がある．
+一般に擬距離空間<math id="S1.p11.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>
+とその部分集合<math id="S1.p11.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について
+<math id="S1.p11.m3" class="ltx_Math" alttext="d(x,S)=\inf_{s\in S}d(x,s)" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">inf</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>と定義する．
+これは<math id="S1.p11.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>に関する連続関数になっている．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math><span class="ltx_text ltx_font_italic">
+を擬距離空間とする．
+このとき<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>
+は族正規である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p"><math id="S1.p12.m1" class="ltx_Math" alttext="\{A_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+を<math id="S1.p12.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の族正規空間とする．
+そして
+<math id="S1.p12.m3" class="ltx_Math" alttext="S_{i}=\bigcup_{k\in I,k\neq i}A_{k}" display="inline"><mrow><msub><mi>S</mi><mi>i</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mrow><mi>k</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>k</mi><mo>≠</mo><mi>i</mi></mrow></mrow></msub><msub><mi>A</mi><mi>k</mi></msub></mrow></mrow></math>
+とするとこれは閉集合で<math id="S1.p12.m4" class="ltx_Math" alttext="A_{i}\cap S_{i}=\emptyset" display="inline"><mrow><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>S</mi><mi>i</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．
+ここで，</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="U_{i}=\left\{\,x\in X\middle|\frac{d(x,A_{i})}{d(x,A_{i})+d(x,S_{i})}&lt;\frac{1}%
+{4}\,\right\}" display="block"><mrow><msub><mi>U</mi><mi>i</mi></msub><mo>=</mo><mrow><mo rspace="0.170em">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mrow><mfrac><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac><mo>&lt;</mo><mfrac><mn>1</mn><mn>4</mn></mfrac></mrow><mo lspace="0.170em">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とおく．<math id="S1.p12.m5" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>が互いに素な族であることを示そう．
+<math id="S1.p12.m6" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>を任意にとる．もしも異なる<math id="S1.p12.m7" class="ltx_Math" alttext="i,k\in I" display="inline"><mrow><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow><mo>∈</mo><mi>I</mi></mrow></math>
+について<math id="S1.p12.m8" class="ltx_Math" alttext="x\in U_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>かつ<math id="S1.p12.m9" class="ltx_Math" alttext="x\in U_{k}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>U</mi><mi>k</mi></msub></mrow></math>となっていたとすると，<math id="S1.p12.m10" class="ltx_Math" alttext="U_{i}" display="inline"><msub><mi>U</mi><mi>i</mi></msub></math>の定義から
+まず<math id="S1.p12.m11" class="ltx_Math" alttext="x\not\in A_{i}" display="inline"><mrow><mi>x</mi><mo>∉</mo><msub><mi>A</mi><mi>i</mi></msub></mrow></math>かつ<math id="S1.p12.m12" class="ltx_Math" alttext="x\not\in A_{k}" display="inline"><mrow><mi>x</mi><mo>∉</mo><msub><mi>A</mi><mi>k</mi></msub></mrow></math>
+がわかる．
+そして<math id="S1.p12.m13" class="ltx_Math" alttext="U_{i}" display="inline"><msub><mi>U</mi><mi>i</mi></msub></math>の定義から</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="3&lt;\frac{d(x,S_{i})}{d(x,A_{i})}\leq\frac{d(x,A_{k})}{d(x,A_{i})}" display="block"><mrow><mn>3</mn><mo>&lt;</mo><mfrac><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>≤</mo><mfrac><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+そして
+同様に</p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="3&lt;\frac{d(x,S_{k})}{d(x,A_{k})}\leq\frac{d(x,A_{i})}{d(x,A_{k})}" display="block"><mrow><mn>3</mn><mo>&lt;</mo><mfrac><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>≤</mo><mfrac><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>A</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかるがこれらは両立し得ないので，矛盾する．
+よって
+<math id="S1.p12.m14" class="ltx_Math" alttext="\{U_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は互いに素な族である．
+∎</p>
+</div>
+</div>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p">局所有限開被覆に従属する単位の分割が存在することと正規性は同値である．このことはウリゾーンの補題の系であるが，証明は省略する．
+ちなみにどんな開被覆にも単位の分割が存在するのがパラコンパクト性と同値であり，この見方からすると，パラコンパクト性はある種の分離公理と見做せなくもない．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を位相空間とする．
+このとき<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が正規空間であることと，
+<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の任意の局所有限な開被覆に対して
+それに従属する単位の分割が存在することは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p14" class="ltx_para">
+<p class="ltx_p"><cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>, Corollary 11.9]</cite>や<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>を参照のこと．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>本文</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">族正規性があると，閉集合上の局所有限被覆をある意味で拡張できることをまずは示そう．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math><span class="ltx_text ltx_font_italic">
+を無限基数とし，<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+を<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規で<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合とする．
+そして<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="\{U_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+を<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の部分集合族で(<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の中で)局所有限なものとし，
+<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="\mathrm{card}(I)\leq\mathfrak{m}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>𝔪</mi></mrow></math>とする．
+このとき<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の局所有限な開被覆
+<math id="Thmthm6.p1.m11" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が存在して
+<math id="Thmthm6.p1.m12" class="ltx_Math" alttext="A\cap V_{\alpha}\subset U_{\alpha}" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><msub><mi>V</mi><mi>α</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>
+が任意の<math id="Thmthm6.p1.m13" class="ltx_Math" alttext="\alpha\in I" display="inline"><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></math>で成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">添字集合<math id="S2.p2.m1" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>は整列されているとして良い．
+今<math id="S2.p2.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は正規空間なので，
+<math id="S2.p2.m3" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>開集合の被覆
+<math id="S2.p2.m4" class="ltx_Math" alttext="\{W_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が存在して
+<math id="S2.p2.m5" class="ltx_Math" alttext="W_{\alpha}\subset U_{\alpha}" display="inline"><mrow><msub><mi>W</mi><mi>α</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>
+を任意の<math id="S2.p2.m6" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>で満たす．
+ここで，<math id="S2.p2.m7" class="ltx_Math" alttext="\{W_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+も局所有限であることに注意しよう．
+そして<math id="S2.p2.m8" class="ltx_Math" alttext="C_{\alpha}" display="inline"><msub><mi>C</mi><mi>α</mi></msub></math>を超限帰納的に</p>
+<table id="S2.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex4.m1" class="ltx_Math" alttext="C_{\alpha}=W_{\alpha}\cap\left(A\setminus\bigcup_{\beta&lt;\alpha}W_{\beta}\right)" display="block"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo>=</mo><mrow><msub><mi>W</mi><mi>α</mi></msub><mo>∩</mo><mrow><mo>(</mo><mrow><mi>A</mi><mo rspace="0.055em">∖</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></munder><msub><mi>W</mi><mi>β</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定める．
+すると，<math id="S2.p2.m9" class="ltx_Math" alttext="W_{\alpha}" display="inline"><msub><mi>W</mi><mi>α</mi></msub></math>は<math id="S2.p2.m10" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>集合であり，
+<math id="S2.p2.m11" class="ltx_Math" alttext="A\setminus\bigcup_{\beta&lt;\alpha}W_{\beta}" display="inline"><mrow><mi>A</mi><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></msub><msub><mi>W</mi><mi>β</mi></msub></mrow></mrow></math>は閉集合なので，それらの共通部分である<math id="S2.p2.m12" class="ltx_Math" alttext="C_{\alpha}" display="inline"><msub><mi>C</mi><mi>α</mi></msub></math>
+も(<math id="S2.p2.m13" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の)<math id="S2.p2.m14" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>集合である．
+よって，可算個の閉集合<math id="S2.p2.m15" class="ltx_Math" alttext="C_{\alpha,r}(r\in\mathbb{Z}_{\geq 0})" display="inline"><mrow><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+を使って</p>
+<table id="S2.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex5.m1" class="ltx_Math" alttext="C_{\alpha}=\bigcup_{r\in\mathbb{Z}_{\geq 0}}C_{\alpha,r}" display="block"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と表すことができる．
+さて，<math id="S2.p2.m16" class="ltx_Math" alttext="C_{\alpha}\subset W_{\alpha}" display="inline"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo>⊂</mo><msub><mi>W</mi><mi>α</mi></msub></mrow></math>と，
+<math id="S2.p2.m17" class="ltx_Math" alttext="C_{\alpha}" display="inline"><msub><mi>C</mi><mi>α</mi></msub></math>の定義から，<math id="S2.p2.m18" class="ltx_Math" alttext="\{C_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>C</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は互いに素な集合族である．さらに</p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="\bigcup_{\alpha\in I}C_{\alpha}=\bigcup_{\alpha\in I}W_{\alpha}=A" display="block"><mrow><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>C</mi><mi>α</mi></msub></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>W</mi><mi>α</mi></msub></mrow><mo>=</mo><mi>A</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることがわかる．
+さて，<math id="S2.p2.m19" class="ltx_Math" alttext="\{W_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は冒頭で注意した通り局所有限である．
+そして</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="C_{\alpha,r}\subset C_{\alpha}\subset W_{\alpha}" display="block"><mrow><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><msub><mi>C</mi><mi>α</mi></msub><mo>⊂</mo><msub><mi>W</mi><mi>α</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S2.p2.m20" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を固定したとき
+<math id="S2.p2.m21" class="ltx_Math" alttext="\{C_{\alpha,r}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は互いに素な(<math id="S2.p2.m22" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の)閉集合の局所有限族である．つまり，疎な族となる．ここで<math id="S2.p2.m23" class="ltx_Math" alttext="\mathrm{card}(I)\leq\mathfrak{m}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>𝔪</mi></mrow></math>
+から<math id="S2.p2.m24" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の<math id="S2.p2.m25" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規性を使って，
+疎な開集合の族<math id="S2.p2.m26" class="ltx_Math" alttext="\{G_{\alpha,r}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が存在して</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="C_{\alpha,r}\subset G_{\alpha,r}" display="block"><mrow><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+ここで，ウリゾーンの補題より，
+各<math id="S2.p2.m27" class="ltx_Math" alttext="G_{\alpha,r}" display="inline"><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></math>
+は<math id="S2.p2.m28" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>開集合としても良い．
+さらに，各<math id="S2.p2.m29" class="ltx_Math" alttext="C_{\alpha,r}" display="inline"><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></math>
+は</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="C_{\alpha,r}\subset G_{\alpha,r}\cap(X\setminus(A\setminus U_{\alpha}))" display="block"><mrow><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><mrow><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>∩</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∖</mo><msub><mi>U</mi><mi>α</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることに注意しておこう．
+ここで</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="G=\bigcup_{\alpha\in I,r\in\mathbb{Z}_{\geq 0}}G_{\alpha,r}" display="block"><mrow><mi>G</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow></munder><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とするとこれは開集合で</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="A=\bigcup_{\alpha\in I}\bigcup_{r\in\mathbb{Z}_{\geq 0}}C_{\alpha,r}\subset G" display="block"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false" rspace="0em">⋃</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow><mo>⊂</mo><mi>G</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+故に，ウリゾーンの補題から
+<math id="S2.p2.m30" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>開集合
+<math id="S2.p2.m31" class="ltx_Math" alttext="G_{\omega}" display="inline"><msub><mi>G</mi><mi>ω</mi></msub></math>が存在して</p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="X\setminus G\subset G_{\omega}\subset X\setminus A" display="block"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>G</mi></mrow><mo>⊂</mo><msub><mi>G</mi><mi>ω</mi></msub><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+ここで，適当に<math id="S2.p2.m32" class="ltx_Math" alttext="G_{\alpha,r}" display="inline"><msub><mi>G</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></math>を選んで，<math id="S2.p2.m33" class="ltx_Math" alttext="G_{\omega}" display="inline"><msub><mi>G</mi><mi>ω</mi></msub></math>をわ集合する．例えば，<math id="S2.p2.m34" class="ltx_Math" alttext="\alpha_{0}=\min I" display="inline"><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>=</mo><mrow><mi>min</mi><mo lspace="0.167em">⁡</mo><mi>I</mi></mrow></mrow></math>として
+<math id="S2.p2.m35" class="ltx_Math" alttext="G_{\alpha_{0},0}" display="inline"><msub><mi>G</mi><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>,</mo><mn>0</mn></mrow></msub></math>を新たに<math id="S2.p2.m36" class="ltx_Math" alttext="G_{\alpha_{0},0}\cup H" display="inline"><mrow><msub><mi>G</mi><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>,</mo><mn>0</mn></mrow></msub><mo>∪</mo><mi>H</mi></mrow></math>とする．
+このとき，再びウリゾーンの補題を用いて
+<math id="S2.p2.m37" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>開集合の族<math id="S2.p2.m38" class="ltx_Math" alttext="\{L_{\alpha,r}\}_{\alpha\in I,r\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow></msub></math>で</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\bigcup_{\alpha\in I,r\in\mathbb{Z}_{\geq 0}}L_{\alpha,r}=X" display="block"><mrow><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow></munder><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow><mo>=</mo><mi>X</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">かつ</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="C_{\alpha,r}\subset L_{\alpha,r}\subset X\setminus(A\setminus U_{\alpha})" display="block"><mrow><msub><mi>C</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∖</mo><msub><mi>U</mi><mi>α</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たすものが取れ，さらに，
+各<math id="S2.p2.m39" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p2.m40" class="ltx_Math" alttext="\{L_{\alpha,r}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は局所有限である．
+ここで各<math id="S2.p2.m41" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+に対して</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="L_{r}=\bigcup_{r\in\mathbb{Z}_{\geq 0}}L_{\alpha,r}" display="block"><mrow><msub><mi>L</mi><mi>r</mi></msub><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると，<math id="S2.p2.m42" class="ltx_Math" alttext="\{L_{\alpha,r}\}_{\alpha\in I,r\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow></msub></math>
+の局所有限性から
+各<math id="S2.p2.m43" class="ltx_Math" alttext="L_{r}" display="inline"><msub><mi>L</mi><mi>r</mi></msub></math>は<math id="S2.p2.m44" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math>開集合になる．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">さて，今から<math id="S2.p3.m1" class="ltx_Math" alttext="L_{r}" display="inline"><msub><mi>L</mi><mi>r</mi></msub></math>を局所有限な開被覆で細分しよう．
+ウリゾーンの補題から各<math id="S2.p3.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>について
+閉集合の族<math id="S2.p3.m3" class="ltx_Math" alttext="\{F_{r,n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+と開集合の族<math id="S2.p3.m4" class="ltx_Math" alttext="\{O_{r,n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が存在して</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="L_{r}=\bigcup_{n\in\mathbb{Z}_{\geq 0}}F_{r,n}=\bigcup_{n\in\mathbb{Z}_{\geq 0%
+}}F_{r,n}" display="block"><mrow><msub><mi>L</mi><mi>r</mi></msub><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と</p>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="F_{r,n}\subset O_{r,n}\subset F_{r,n+1}" display="block"><mrow><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⊂</mo><msub><mi>O</mi><mrow><mi>r</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⊂</mo><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+そして各<math id="S2.p3.m5" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について</p>
+<table id="S2.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex18.m1" class="ltx_Math" alttext="V_{r}=L_{r}\cap\left(X\setminus\bigcup_{s&lt;r}F_{s,r}\right)" display="block"><mrow><msub><mi>V</mi><mi>r</mi></msub><mo>=</mo><mrow><msub><mi>L</mi><mi>r</mi></msub><mo>∩</mo><mrow><mo>(</mo><mrow><mi>X</mi><mo rspace="0.055em">∖</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>s</mi><mo>&lt;</mo><mi>r</mi></mrow></munder><msub><mi>F</mi><mrow><mi>s</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると
+<math id="S2.p3.m6" class="ltx_Math" alttext="\{V_{r}\}_{r\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>r</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+は局所有限な被覆になる．
+というのも，被覆であることは<math id="S2.p3.m7" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について<math id="S2.p3.m8" class="ltx_Math" alttext="x\in L_{r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>L</mi><mi>r</mi></msub></mrow></math>となる最小の<math id="S2.p3.m9" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>をとれば<math id="S2.p3.m10" class="ltx_Math" alttext="x\in V_{r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mi>r</mi></msub></mrow></math>となることがわかるし，
+局所有限性は<math id="S2.p3.m11" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について<math id="S2.p3.m12" class="ltx_Math" alttext="x\in O_{r,n+r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>O</mi><mrow><mi>r</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mi>r</mi></mrow></mrow></msub></mrow></math>となる<math id="S2.p3.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>, <math id="S2.p3.m14" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>
+をとれば(取れる)，<math id="S2.p3.m15" class="ltx_Math" alttext="n+r&lt;N" display="inline"><mrow><mrow><mi>n</mi><mo>+</mo><mi>r</mi></mrow><mo>&lt;</mo><mi>N</mi></mrow></math>となる<math id="S2.p3.m16" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について<math id="S2.p3.m17" class="ltx_Math" alttext="V_{N}\cap F_{r,N}=\emptyset" display="inline"><mrow><mrow><msub><mi>V</mi><mi>N</mi></msub><mo>∩</mo><msub><mi>F</mi><mrow><mi>r</mi><mo>,</mo><mi>N</mi></mrow></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>なので
+<math id="S2.p3.m18" class="ltx_Math" alttext="V_{N}\cap O_{r,n+r}=\emptyset" display="inline"><mrow><mrow><msub><mi>V</mi><mi>N</mi></msub><mo>∩</mo><msub><mi>O</mi><mrow><mi>r</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mi>r</mi></mrow></mrow></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>がわかるからである．
+(実は同じような状況において，星型有限な細分が取れるというのが森田紀一の初期の結果である．)</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">ここで</p>
+<table id="S2.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex19.m1" class="ltx_Math" alttext="V_{r}\subset L_{r}" display="block"><mrow><msub><mi>V</mi><mi>r</mi></msub><mo>⊂</mo><msub><mi>L</mi><mi>r</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">に注意せよ．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">さて，</p>
+<table id="S2.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex20.m1" class="ltx_Math" alttext="V_{\alpha,r}=L_{\alpha,r}\cap V_{r}" display="block"><mrow><msub><mi>V</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>=</mo><mrow><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>∩</mo><msub><mi>V</mi><mi>r</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義し</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="V_{\alpha}=\bigcup_{r\in\mathbb{Z}_{\geq 0}}V_{\alpha,r}" display="block"><mrow><msub><mi>V</mi><mi>α</mi></msub><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>V</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+今からこの<math id="S2.p5.m1" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が求める族になっていることを証明しよう．
+まず，これが被覆になっていることを示す．
+<math id="S2.p5.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+を任意にとる．このとき
+<math id="S2.p5.m3" class="ltx_Math" alttext="\{V_{r}\}_{r\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>r</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が被覆なので<math id="S2.p5.m4" class="ltx_Math" alttext="x\in V_{r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mi>r</mi></msub></mrow></math>
+となる<math id="S2.p5.m5" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>が存在する．
+そして<math id="S2.p5.m6" class="ltx_Math" alttext="x\in V_{r}\subset L_{r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mi>r</mi></msub><mo>⊂</mo><msub><mi>L</mi><mi>r</mi></msub></mrow></math>であり，
+<math id="S2.p5.m7" class="ltx_Math" alttext="L_{r}" display="inline"><msub><mi>L</mi><mi>r</mi></msub></math>の定義から<math id="S2.p5.m8" class="ltx_Math" alttext="x\in L_{\alpha,r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></math>となる<math id="S2.p5.m9" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が存在する．よって<math id="S2.p5.m10" class="ltx_Math" alttext="x\in V_{\alpha,r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></math>であり，
+特に<math id="S2.p5.m11" class="ltx_Math" alttext="x\in V_{\alpha,r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></math>である．これで被覆であることがわかった．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">次に局所有限性を証明しよう．<math id="S2.p6.m1" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>を任意にとる．
+<math id="S2.p6.m2" class="ltx_Math" alttext="\{V_{r\in\mathbb{Z}_{\geq 0}}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mo stretchy="false">}</mo></mrow></math>の局所有限性から
+<math id="S2.p6.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の近傍<math id="S2.p6.m4" class="ltx_Math" alttext="N_{0}" display="inline"><msub><mi>N</mi><mn>0</mn></msub></math>と<math id="S2.p6.m5" class="ltx_Math" alttext="m\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>m</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>と<math id="S2.p6.m6" class="ltx_Math" alttext="r(1)\dots,r(m)\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mrow><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+が存在して<math id="S2.p6.m7" class="ltx_Math" alttext="N_{0}" display="inline"><msub><mi>N</mi><mn>0</mn></msub></math>は<math id="S2.p6.m8" class="ltx_Math" alttext="V_{r(1)}\dots,V_{r(m)}" display="inline"><mrow><mrow><msub><mi>V</mi><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><msub><mi>V</mi><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>としか交わらない．ここで各<math id="S2.p6.m9" class="ltx_Math" alttext="i\in\{1,\dots,m\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+について<math id="S2.p6.m10" class="ltx_Math" alttext="\{L_{\alpha,r(i)}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+の局所有限性から<math id="S2.p6.m11" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の近傍<math id="S2.p6.m12" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>が存在して，
+<math id="S2.p6.m13" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>は<math id="S2.p6.m14" class="ltx_Math" alttext="\{L_{\alpha,r(i)}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>の有限個の元としか交わらない．
+さて，<math id="S2.p6.m15" class="ltx_Math" alttext="N=N_{0}\cap N_{1}\cap\dots\cap N_{m}" display="inline"><mrow><mi>N</mi><mo>=</mo><mrow><msub><mi>N</mi><mn>0</mn></msub><mo>∩</mo><msub><mi>N</mi><mn>1</mn></msub><mo>∩</mo><mi mathvariant="normal">⋯</mi><mo>∩</mo><msub><mi>N</mi><mi>m</mi></msub></mrow></mrow></math>とすると
+これは<math id="S2.p6.m16" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の近傍であり，前述のことから，
+<math id="S2.p6.m17" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>は<math id="S2.p6.m18" class="ltx_Math" alttext="\{L_{\alpha,r(i)}\}_{\alpha\in I,i\in\{1,\dots,m\}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></msub></math>の有限個の元としか交わらない．
+よって，<math id="S2.p6.m19" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>は<math id="S2.p6.m20" class="ltx_Math" alttext="\{V_{\alpha,r}\}_{\alpha\in I,r\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow></msub></math>
+の有限個の元としか交わらないので，結局
+<math id="S2.p6.m21" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>は
+<math id="S2.p6.m22" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>の有限個の元としか交わらない．つまり，<math id="S2.p6.m23" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は局所有限である．</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p7.m1" class="ltx_Math" alttext="A\cap V_{\alpha}\subset U_{\alpha}" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><msub><mi>V</mi><mi>α</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>
+を証明しよう．
+ここで</p>
+<table id="S2.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex22.m1" class="ltx_Math" alttext="V_{\alpha}\subset\bigcup_{r\in\mathbb{Z}_{\geq 0}}L_{\alpha,r}\subset X%
+\setminus(A\setminus U_{\alpha})" display="block"><mrow><msub><mi>V</mi><mi>α</mi></msub><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>L</mi><mrow><mi>α</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∖</mo><msub><mi>U</mi><mi>α</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+よって<math id="S2.p7.m2" class="ltx_Math" alttext="x\in A\cap V_{\alpha}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>V</mi><mi>α</mi></msub></mrow></mrow></math>
+をとると
+<math id="S2.p7.m3" class="ltx_Math" alttext="x\in X\setminus(A\setminus U_{\alpha})" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∖</mo><msub><mi>U</mi><mi>α</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>かつ<math id="S2.p7.m4" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>
+である．つまり<math id="S2.p7.m5" class="ltx_Math" alttext="x\not\in(A\setminus U_{\alpha})" display="inline"><mrow><mi>x</mi><mo>∉</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∖</mo><msub><mi>U</mi><mi>α</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></math>かつ
+<math id="S2.p7.m6" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>なので
+<math id="S2.p7.m7" class="ltx_Math" alttext="x\in U_{\alpha}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>
+となる．よって</p>
+<table id="S2.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex23.m1" class="ltx_Math" alttext="A\cap V_{\alpha}\subset U_{\alpha}" display="block"><mrow><mrow><mi>A</mi><mo>∩</mo><msub><mi>V</mi><mi>α</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">位相空間<math id="S2.p8.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の<span class="ltx_text ltx_font_bold">稠密度</span>とは，稠密部分集合の最小濃度のことである．つまり<math id="S2.p8.m2" class="ltx_Math" alttext="\min\{\,\mathrm{card}(A)\mid A\text{は}X\text{の稠密部分集合}\,\}" display="inline"><mrow><mi>min</mi><mo>⁡</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∣</mo><mrow><mi>A</mi><mo>⁢</mo><mtext>は</mtext><mo>⁢</mo><mi>X</mi><mo>⁢</mo><mtext>の稠密部分集合</mtext></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>のことである．
+無限基数<math id="S2.p8.m3" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>について，この稠密度が<math id="S2.p8.m4" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>かそれ以下のとき，空間
+<math id="S2.p8.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密度は<math id="S2.p8.m6" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+であるということにする．</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">次が示したい定理である．
+論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>
+においてDowkerは被覆から定まる複体(脈体?)を用いてこの定理を証明したが，現代的には単位の分割を使ったほうが良いだろうと思ったのがこの文書を書くきっかけになった．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math><span class="ltx_text ltx_font_italic">
+を無限基数とする．
+このとき<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\mathfrak{m}" display="inline"><mi>𝔪</mi></math>-族正規であることと以下の性質は同値である：
+任意のバナッハ空間<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>で稠密度が<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="\leq\mathfrak{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝔪</mi></mrow></math>であるもの，<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の閉集合<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>とその上の任意の
+連続関数<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="f\colon A\to B" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>に対して連続関数
+<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="F\colon X\to B" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>であって<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="F|_{A}=f" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>
+となるものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p"><math id="S2.p10.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>のノルムから誘導される距離を<math id="S2.p10.m2" class="ltx_Math" alttext="\rho" display="inline"><mi>ρ</mi></math>と書くことにする．
+今から帰納的に以下のような連続写像の列
+<math id="S2.p10.m3" class="ltx_Math" alttext="\{g_{n}\colon X\to B\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>n</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>B</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>を構成する．</p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>に対して</p>
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex24.m1" class="ltx_Math" alttext="\rho(g_{n}(x),g_{n+1}(x))&lt;2^{-n+2}" display="block"><mrow><mrow><mi>ρ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>+</mo><mn>2</mn></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．</p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>について</p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex25.m1" class="ltx_Math" alttext="\rho(g_{n}(x),f(x))&lt;2^{-n}" display="block"><mrow><mrow><mi>ρ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">以上のような列が構成されれば，極限<math id="S2.p10.m4" class="ltx_Math" alttext="F(x)=\lim_{n\to\infty}g_{n}(x)" display="inline"><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が存在して，それが連続であって<math id="S2.p10.m5" class="ltx_Math" alttext="F|_{A}=f" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>を満たすことは, <math id="S2.p10.m6" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>がバナッハ空間，つまり完備であることからすぐにわかる．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">早速構成しよう．
+まず<math id="S2.p11.m1" class="ltx_Math" alttext="g_{0}" display="inline"><msub><mi>g</mi><mn>0</mn></msub></math>を構成する．
+バナッハ空間
+<math id="S2.p11.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>
+は距離関数なので，
+特にパラコンパクトである．
+よって
+<math id="S2.p11.m3" class="ltx_Math" alttext="\rho" display="inline"><mi>ρ</mi></math>
+に関して半径
+<math id="S2.p11.m4" class="ltx_Math" alttext="1/2" display="inline"><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></math>
+の開球からなる被覆の局所有限細分が存在する．
+それを
+<math id="S2.p11.m5" class="ltx_Math" alttext="\{U_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+とする．
+ここで
+<math id="S2.p11.m6" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>
+は稠密度が
+<math id="S2.p11.m7" class="ltx_Math" alttext="\leq\mathfrak{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝔪</mi></mrow></math>
+なので，
+添字集合<math id="S2.p11.m8" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>
+の濃度は
+<math id="S2.p11.m9" class="ltx_Math" alttext="\leq\mathfrak{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝔪</mi></mrow></math>としても良い．
+そして
+<math id="S2.p11.m10" class="ltx_Math" alttext="\{f^{-1}(U_{\alpha})\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+は
+<math id="S2.p11.m11" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+の連続性から
+<math id="S2.p11.m12" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>
+の局所有限な開集合の被覆である．
+すると
+定理
+<a href="#Thmthm6" title="定理 6. ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>から
+<math id="S2.p11.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の局所有限な開被覆
+<math id="S2.p11.m14" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+が存在して</p>
+<table id="S2.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex26.m1" class="ltx_Math" alttext="V_{\alpha}\cap A\subset f^{-1}(U_{\alpha})" display="block"><mrow><mrow><msub><mi>V</mi><mi>α</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>⊂</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+さて，
+<math id="S2.p11.m15" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の正規性から，
+<math id="S2.p11.m16" class="ltx_Math" alttext="\{V_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+に従属する単位の分割
+<math id="S2.p11.m17" class="ltx_Math" alttext="\{u_{\alpha}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>u</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する．
+<math id="S2.p11.m18" class="ltx_Math" alttext="p_{\alpha}\in U_{\alpha}" display="inline"><mrow><msub><mi>p</mi><mi>α</mi></msub><mo>∈</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>
+を選んで，
+<math id="S2.p11.m19" class="ltx_Math" alttext="g_{0}\colon X\to B" display="inline"><mrow><msub><mi>g</mi><mn>0</mn></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>を</p>
+<table id="S2.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex27.m1" class="ltx_Math" alttext="g_{0}(x)=\sum_{\alpha\in I}p_{\alpha}\cdot u_{\alpha}(x)" display="block"><mrow><mrow><msub><mi>g</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">∑</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><mrow><mrow><msub><mi>p</mi><mi>α</mi></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>u</mi><mi>α</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+<math id="S2.p11.m20" class="ltx_Math" alttext="\{u_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>u</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+の局所有限性からこれは連続である．
+今<a href="#S2.I1.i2" title="item 2 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>番の条件を確認しよう．
+<math id="S2.p11.m21" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>を任意にとる．
+すると，
+<math id="S2.p11.m22" class="ltx_Math" alttext="u_{\alpha}(x)&gt;0" display="inline"><mrow><mrow><msub><mi>u</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&gt;</mo><mn>0</mn></mrow></math>となる
+<math id="S2.p11.m23" class="ltx_Math" alttext="\alpha\in I" display="inline"><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></math>
+について<math id="S2.p11.m24" class="ltx_Math" alttext="f(x),p_{\alpha}\in U_{\alpha}" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>p</mi><mi>α</mi></msub></mrow><mo>∈</mo><msub><mi>U</mi><mi>α</mi></msub></mrow></math>なので，
+<math id="S2.p11.m25" class="ltx_Math" alttext="\|f(x)-p_{\alpha}\|&lt;1" display="inline"><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>p</mi><mi>α</mi></msub></mrow><mo stretchy="false">‖</mo></mrow><mo>&lt;</mo><mn>1</mn></mrow></math>であることを用いて</p>
+<table id="S3.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex28"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex28.m1" class="ltx_Math" alttext="\displaystyle\rho(f(x),g_{0}(x))" display="inline"><mrow><mi>ρ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>g</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex28.m2" class="ltx_Math" alttext="\displaystyle=\left\|\sum_{\alpha\in I}f(x)\cdot u_{\alpha}(x)-\sum_{\alpha\in
+I%
+}p_{\alpha}\cdot u_{\alpha}(x)\right\|\leq\sum_{u_{\alpha}(x)&gt;0}\|f(x)-p_{%
+\alpha}\|u_{\alpha}(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mo>‖</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder></mstyle><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><msub><mi>u</mi><mi>α</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder></mstyle><mrow><mrow><msub><mi>p</mi><mi>α</mi></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>u</mi><mi>α</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>‖</mo></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>u</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&gt;</mo><mn>0</mn></mrow></munder></mstyle><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>p</mi><mi>α</mi></msub></mrow><mo stretchy="false">‖</mo></mrow><mo>⁢</mo><msub><mi>u</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex29"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex29.m1" class="ltx_Math" alttext="\displaystyle&lt;\sum_{u_{\alpha}(x)&gt;0}1\cdot u_{\alpha}(x)=\sum_{\alpha\in I}u_{%
+\alpha}(x)=1" display="inline"><mrow><mi></mi><mo>&lt;</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>u</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&gt;</mo><mn>0</mn></mrow></munder></mstyle><mrow><mrow><mn>1</mn><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>u</mi><mi>α</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder></mstyle><mrow><msub><mi>u</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<a href="#S2.I1.i2" title="item 2 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の評価は成り立つ．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">さて，<math id="S2.p12.m1" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math>まで構成できたとして，
+<math id="S2.p12.m2" class="ltx_Math" alttext="g_{n+1}" display="inline"><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>を構成しよう．
+<math id="S2.p12.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>のパラコンパクト性から，
+局所有限な<math id="S2.p12.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>の開被覆で各々の元の直径が
+<math id="S2.p12.m5" class="ltx_Math" alttext="&lt;2^{-n-3}" display="inline"><mrow><mi></mi><mo>&lt;</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow></math>になるものが存在する．
+それを<math id="S2.p12.m6" class="ltx_Math" alttext="\{U_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+とする．
+定理
+<a href="#Thmthm6" title="定理 6. ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>
+を<math id="S2.p12.m7" class="ltx_Math" alttext="\{f^{-1}(U_{\alpha})\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>に適応して
+局所有限被覆
+<math id="S2.p12.m8" class="ltx_Math" alttext="\{R_{\alpha}\}_{\alpha\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>R</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>で
+<math id="S2.p12.m9" class="ltx_Math" alttext="R_{\alpha}\subset f^{-1}(U_{\alpha})" display="inline"><mrow><msub><mi>R</mi><mi>α</mi></msub><mo>⊂</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となるものを得る．
+そして<math id="S2.p12.m10" class="ltx_Math" alttext="\{R_{\alpha}\cap g_{n}^{-1}(U_{\beta})\}_{(\alpha,\beta)\in I\times I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>R</mi><mi>α</mi></msub><mo>∩</mo><mrow><msubsup><mi>g</mi><mi>n</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>β</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mrow><mo stretchy="false">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>I</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>I</mi></mrow></mrow></msub></math>
+を考えるとこれは<math id="S2.p12.m11" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の局所有限な開被覆になっている．
+<math id="S2.p12.m12" class="ltx_Math" alttext="J=I\times I" display="inline"><mrow><mi>J</mi><mo>=</mo><mrow><mi>I</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>I</mi></mrow></mrow></math>と置くことにする．
+この被覆を
+<math id="S2.p12.m13" class="ltx_Math" alttext="\{W_{\gamma}\}_{\gamma\in J}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mi>γ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></msub></math>
+と書くことにする，
+そしてこれに従属する単位の分割を
+<math id="S2.p12.m14" class="ltx_Math" alttext="\{v_{\gamma}\}_{\gamma\in J}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>v</mi><mi>γ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></msub></math>とする．
+さて今から<math id="S2.p12.m15" class="ltx_Math" alttext="g_{n+1}" display="inline"><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>を定義したい．
+<math id="S2.p12.m16" class="ltx_Math" alttext="W_{\gamma}\cap A=\emptyset" display="inline"><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>の時は，
+適当に<math id="S2.p12.m17" class="ltx_Math" alttext="z_{\gamma}\in W_{\gamma}" display="inline"><mrow><msub><mi>z</mi><mi>γ</mi></msub><mo>∈</mo><msub><mi>W</mi><mi>γ</mi></msub></mrow></math>を選んで
+<math id="S2.p12.m18" class="ltx_Math" alttext="q_{\gamma}=g_{n}(z_{\gamma})" display="inline"><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>=</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とする．
+<math id="S2.p12.m19" class="ltx_Math" alttext="W\cap A\neq\emptyset" display="inline"><mrow><mrow><mi>W</mi><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+の時は<math id="S2.p12.m20" class="ltx_Math" alttext="z_{\gamma}\in W_{\gamma}" display="inline"><mrow><msub><mi>z</mi><mi>γ</mi></msub><mo>∈</mo><msub><mi>W</mi><mi>γ</mi></msub></mrow></math>
+を選んで
+<math id="S2.p12.m21" class="ltx_Math" alttext="q_{\gamma}=f(z_{\gamma})" display="inline"><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする．
+そして
+<math id="S2.p12.m22" class="ltx_Math" alttext="g_{n+1}\colon X\to B" display="inline"><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>
+を</p>
+<table id="S2.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex30.m1" class="ltx_Math" alttext="g_{n+1}(x)=\sum_{\gamma\in J}q_{\gamma}\cdot v_{\gamma}(x)" display="block"><mrow><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder><mrow><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．これは連続写像である．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">今から条件<a href="#S2.I1.i1" title="item 1 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>を満たすことを確認しよう．</p>
+<table id="S3.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex31"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex31.m1" class="ltx_Math" alttext="\displaystyle\rho(g_{n+1}(x),g_{n}(x))=\left\|\sum_{\gamma\in J}(q_{\gamma}-g_%
+{n}(x))\cdot v_{\gamma}(x)\right\|\leq\sum_{\gamma\in J}\left\|(q_{\gamma}-g_{%
+n}(x))\right\|\cdot v_{\gamma}(x)" display="inline"><mrow><mrow><mi>ρ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>‖</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>‖</mo></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo>‖</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo rspace="0.055em">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex32"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex32.m1" class="ltx_Math" alttext="\displaystyle=\sum_{W_{\gamma}\cap A\neq\emptyset}\|q_{\gamma}-g_{n}(x)\|\cdot
+v%
+_{\gamma}(x)+\sum_{W_{\gamma}\cap A=\emptyset}\|q_{\gamma}-g_{n}(x)\|\cdot v_{%
+\gamma}(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex33"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex33.m1" class="ltx_Math" alttext="\displaystyle=\sum_{W_{\gamma}\cap A\neq\emptyset}\|f(z_{\gamma})-g_{n}(x)\|%
+\cdot v_{\gamma}(x)+\sum_{W_{\gamma}\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}%
+(x)\|\cdot v_{\gamma}(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex34"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex34.m1" class="ltx_Math" alttext="\displaystyle\leq\sum_{W_{\gamma}\cap A\neq\emptyset}(\|f(z_{\gamma})-g_{n}(z_%
+{\gamma})\|+\|g_{n}(z_{\gamma})-g_{n}(x)\|)\cdot v_{\gamma}(x)" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow><mo>+</mo><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex35"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex35.m1" class="ltx_Math" alttext="\displaystyle+\sum_{W_{\gamma}\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}(x)\|%
+\cdot v_{\gamma}(x)" display="inline"><mrow><mo>+</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+ここで，
+帰納法の仮定から<math id="S2.p13.m1" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math>は条件<a href="#S2.I1.i2" title="item 2 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>を<math id="S2.p13.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について満たすので</p>
+<table id="S2.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex36.m1" class="ltx_Math" alttext="\|f(z_{\gamma})-g_{n}(z_{\gamma})\|&lt;2^{-n}" display="block"><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+そして</p>
+<table id="S2.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex37.m1" class="ltx_Math" alttext="z_{\gamma},x\in W_{\gamma}=R_{\alpha}\cap g_{n}^{-1}(U_{\beta})" display="block"><mrow><mrow><msub><mi>z</mi><mi>γ</mi></msub><mo>,</mo><mi>x</mi></mrow><mo>∈</mo><msub><mi>W</mi><mi>γ</mi></msub><mo>=</mo><mrow><msub><mi>R</mi><mi>α</mi></msub><mo>∩</mo><mrow><msubsup><mi>g</mi><mi>n</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>β</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S2.p13.m3" class="ltx_Math" alttext="\|g_{n}(z_{\gamma})-g_{n}(x)\|&lt;2\cdot 2^{-n-3}" display="inline"><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow><mo>&lt;</mo><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow></mrow></math>
+となる．
+よって</p>
+<table id="S3.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex38"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex38.m1" class="ltx_Math" alttext="\displaystyle\sum_{W_{\gamma}\cap A\neq\emptyset}(\|f(z_{\gamma})-g_{n}(z_{%
+\gamma})\|+\|g_{n}(z_{\gamma})-g_{n}(x)\|)\cdot v_{\gamma}(x)+\sum_{W_{\gamma}%
+\cap A=\emptyset}\|g_{n}(z_{\gamma})-g_{n}(x)\|\cdot v_{\gamma}(x)" display="inline"><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow><mo>+</mo><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><msub><mi>W</mi><mi>γ</mi></msub><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">‖</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>v</mi><mi>γ</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex39"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex39.m1" class="ltx_Math" alttext="\displaystyle\leq 2^{-n}+2^{-n-2}+2^{-n-2}=2^{-n}+2^{-n-1}&lt;2^{-n+1}=2^{-(n+1)+2}" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>+</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow><mo>=</mo><mrow><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>+</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mn>2</mn></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって条件
+<a href="#S2.I1.i1" title="item 1 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>
+が<math id="S2.p13.m4" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>
+に対して成り立つ．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">次に
+<a href="#S2.I1.i2" title="item 2 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>番の条件を確認する．
+<math id="S2.p14.m1" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>とすると，
+<math id="S2.p14.m2" class="ltx_Math" alttext="x\in W_{\gamma}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>W</mi><mi>γ</mi></msub></mrow></math>となる<math id="S2.p14.m3" class="ltx_Math" alttext="W_{\gamma}" display="inline"><msub><mi>W</mi><mi>γ</mi></msub></math>
+は<math id="S2.p14.m4" class="ltx_Math" alttext="A\cap W_{\gamma}\neq\emptyset" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><msub><mi>W</mi><mi>γ</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>となり，
+<math id="S2.p14.m5" class="ltx_Math" alttext="z_{\gamma},x\in W_{\gamma}\subset R_{\alpha}" display="inline"><mrow><mrow><msub><mi>z</mi><mi>γ</mi></msub><mo>,</mo><mi>x</mi></mrow><mo>∈</mo><msub><mi>W</mi><mi>γ</mi></msub><mo>⊂</mo><msub><mi>R</mi><mi>α</mi></msub></mrow></math>
+なので，</p>
+<table id="S3.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex40"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex40.m1" class="ltx_Math" alttext="\displaystyle\rho(g_{n+1}(x),f(x))=\left\|\sum_{\gamma\in J}(q_{\gamma}-f(x))v%
+_{\gamma}(x)\right\|=\left\|\sum_{\gamma\in J}(f(z_{\gamma})-f(x))v_{\gamma}(x%
+)\right\|" display="inline"><mrow><mrow><mi>ρ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>‖</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>q</mi><mi>γ</mi></msub><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>v</mi><mi>γ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>‖</mo></mrow><mo>=</mo><mrow><mo>‖</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>v</mi><mi>γ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>‖</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex41"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex41.m1" class="ltx_Math" alttext="\displaystyle\leq\sum_{\gamma\in J}\left\|f(z_{\gamma})-f(x)\right\|v_{\gamma}%
+(x)&lt;2\cdot 2^{-n-3}\cdot\sum_{\gamma\in J}v_{\gamma}(x)=2^{-n-2}&lt;2^{-(n+1)}" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><mrow><mo>‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>γ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>‖</mo></mrow><mo>⁢</mo><msub><mi>v</mi><mi>γ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>3</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>γ</mi><mo>∈</mo><mi>J</mi></mrow></munder></mstyle><mrow><msub><mi>v</mi><mi>γ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>&lt;</mo><msup><mn>2</mn><mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">という評価を得る．
+よって条件<a href="#S2.I1.i2" title="item 2 ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>が<math id="S2.p14.m6" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>に対して成り立つ．
+以上で証明が終わる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>応用</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.p1.m1" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>を無限基数とする．このとき
+位相空間<math id="S3.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の部分集合<math id="S3.p1.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>が<math id="S3.p1.m4" class="ltx_Math" alttext="P^{\gamma}" display="inline"><msup><mi>P</mi><mi>γ</mi></msup></math><span class="ltx_text ltx_font_bold">-embedded</span>であるとは，<math id="S3.p1.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>上の稠密度が<math id="S3.p1.m6" class="ltx_Math" alttext="\leq\gamma" display="inline"><mrow><mi></mi><mo>≤</mo><mi>γ</mi></mrow></math>である連続擬距離<math id="S3.p1.m7" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に対して
+<math id="S3.p1.m8" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の稠密度が<math id="S3.p1.m9" class="ltx_Math" alttext="\leq\gamma" display="inline"><mrow><mi></mi><mo>≤</mo><mi>γ</mi></mrow></math>である連続擬距離<math id="S3.p1.m10" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>が存在して<math id="S3.p1.m11" class="ltx_Math" alttext="e|_{S\times S}=d" display="inline"><mrow><msub><mrow><mi>e</mi><mo stretchy="false">|</mo></mrow><mrow><mi>S</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>S</mi></mrow></msub><mo>=</mo><mi>d</mi></mrow></math>
+となることである．</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">族正規性を<math id="S3.p2.m1" class="ltx_Math" alttext="P^{\gamma}" display="inline"><msup><mi>P</mi><mi>γ</mi></msup></math>-embeddedが特徴づけることを証明しよう．</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">その前に擬距離空間上の有界連続関数の空間の稠密度を計算しよう．</p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold"> </span>(Stone-Weierstrassの定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトハウスドルフ空間とし
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="C(A,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の部分環とし，さらに定数関数を含むとする．
+このとき任意の異なる２点<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="x,y\in X" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>
+に対して<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="f\in A" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi>A</mi></mrow></math>が存在して<math id="Thmthm8.p1.m6" class="ltx_Math" alttext="f(x)\neq f(y)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となるならば<math id="Thmthm8.p1.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は<math id="Thmthm8.p1.m8" class="ltx_Math" alttext="C(X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中で稠密である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">略．この定理の名前で検索すると証明が出てくる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math><span class="ltx_text ltx_font_italic">
+を無限基数とし
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>
+を稠密度が<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+であるような擬距離空間とする．
+そして<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>を<math id="Thmthm9.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の実有界連続関数の集合に
+supノルムを入れたバナッハ空間とする．
+このとき<math id="Thmthm9.p1.m6" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>の稠密度は<math id="Thmthm9.p1.m7" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p"><math id="S3.p5.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と<math id="S3.p5.m2" class="ltx_Math" alttext="C(\beta X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>が同型になることを利用しよう．
+ここで<math id="S3.p5.m3" class="ltx_Math" alttext="\beta X" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></math>は<math id="S3.p5.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のストーンチェックコンパクト化である．
+<math id="S3.p5.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密度が<math id="S3.p5.m6" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+であることから
+<math id="S3.p5.m7" class="ltx_Math" alttext="\beta X" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></math>の稠密度も<math id="S3.p5.m8" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+である．そして濃度が<math id="S3.p5.m9" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+となる<math id="S3.p5.m10" class="ltx_Math" alttext="\beta X" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></math>の稠密部分集合を<math id="S3.p5.m11" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>として，
+異なる2点<math id="S3.p5.m12" class="ltx_Math" alttext="x,y\in H" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>H</mi></mrow></math>に対して
+<math id="S3.p5.m13" class="ltx_Math" alttext="f_{x,y}" display="inline"><msub><mi>f</mi><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow></msub></math>を<math id="S3.p5.m14" class="ltx_Math" alttext="f_{x,y}(x)\neq f_{x,y}(y)" display="inline"><mrow><mrow><msub><mi>f</mi><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mrow><msub><mi>f</mi><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となるものを選ぶ．
+そして<math id="S3.p5.m15" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="S3.p5.m16" class="ltx_Math" alttext="C(\beta X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の部分環で<math id="S3.p5.m17" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>と<math id="S3.p5.m18" class="ltx_Math" alttext="f_{x,y}" display="inline"><msub><mi>f</mi><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow></msub></math>たちで生成されるものとする．
+すると<math id="S3.p5.m19" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>の稠密性と先のStone-Weierstrassの定理から
+<math id="S3.p5.m20" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は稠密である．
+ところで<math id="S3.p5.m21" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の任意の元<math id="S3.p5.m22" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>はに対して<math id="S3.p5.m23" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>係数の多変数多項式<math id="S3.p5.m24" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が存在して<math id="S3.p5.m25" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="S3.p5.m26" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>に生成元を代入したものに等しい．この<math id="S3.p5.m27" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の係数を十分よく近似する有理数に変えたものを<math id="S3.p5.m28" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>とし，<math id="S3.p5.m29" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の時と同じ生成元を代入したものを<math id="S3.p5.m30" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>
+とすると，<math id="S3.p5.m31" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>と<math id="S3.p5.m32" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>は十分に近い．
+つまり，<math id="S3.p5.m33" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と同じ生成元から生成される<math id="S3.p5.m34" class="ltx_Math" alttext="\mathbb{Q}" display="inline"><mi>ℚ</mi></math>係数の
+<math id="S3.p5.m35" class="ltx_Math" alttext="C(\beta X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の部分環<math id="S3.p5.m36" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>は<math id="S3.p5.m37" class="ltx_Math" alttext="C(\beta X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の中で稠密である．
+<math id="S3.p5.m38" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>の濃度は高々<math id="S3.p5.m39" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>であるから
+<math id="S3.p5.m40" class="ltx_Math" alttext="C(\beta X,\mathbb{R})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の稠密度が<math id="S3.p5.m41" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">以下の定理を証明して文書を終わろう．
+この定理自体は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>, Theorem 15.6]</cite>である．</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を位相空間とし，<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>を無限基数とする．
+このとき<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="Thmthm10.p1.m4" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規であることと
+<math id="Thmthm10.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の閉集合が<math id="Thmthm10.p1.m6" class="ltx_Math" alttext="P^{\mathbf{m}}" display="inline"><msup><mi>P</mi><mi>𝐦</mi></msup></math>-embeddedであることは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S3.p7.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を<math id="S3.p7.m2" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規と仮定しよう．
+そして閉集合<math id="S3.p7.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>とその上の稠密度が<math id="S3.p7.m4" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>である連続擬距離<math id="S3.p7.m5" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>を考える．<math id="S3.p7.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は空でないとしても良い．
+今からこれを<math id="S3.p7.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上に拡張しよう．
+まず
+<math id="S3.p7.m8" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>を<math id="S3.p7.m9" class="ltx_Math" alttext="(A,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>上の実有界連続関数全体のなす集合とし，
+supノルムを入れる．すると<math id="S3.p7.m10" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>はバナッハ空間であり，
+稠密度は<math id="S3.p7.m11" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>になる．
+そして<math id="S3.p7.m12" class="ltx_Math" alttext="p\in A" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>A</mi></mrow></math>を固定し<math id="S3.p7.m13" class="ltx_Math" alttext="f\colon A\to B" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>
+を<math id="S3.p7.m14" class="ltx_Math" alttext="f(x)=d(x,\bullet)-d(p,\bullet)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">∙</mo><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">∙</mo><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とする．<math id="S3.p7.m15" class="ltx_Math" alttext="\bullet" display="inline"><mo>∙</mo></math>は引数が入るところである．するとこれは
+<math id="S3.p7.m16" class="ltx_Math" alttext="d(x,y)=\|f(x)-f(y)\|" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow></mrow></math>という意味で等長になっており特に連続である．擬距離だと点が潰れたりするので<math id="S3.p7.m17" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は単射にならない．さて，<math id="S3.p7.m18" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S3.p7.m19" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規であることから定理<a href="#Thmthm7" title="定理 7. ‣ 2 本文 ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+より
+連続写像<math id="S3.p7.m20" class="ltx_Math" alttext="F\colon X\to B" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>であって
+<math id="S3.p7.m21" class="ltx_Math" alttext="F|_{A}=f" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>となるものが存在する．
+この<math id="S3.p7.m22" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>を用いて<math id="S3.p7.m23" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の擬距離<math id="S3.p7.m24" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>を
+<math id="S3.p7.m25" class="ltx_Math" alttext="e(x,y)=\|F(x)-F(y)\|" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">‖</mo></mrow></mrow></math>と定義すれば
+これは<math id="S3.p7.m26" class="ltx_Math" alttext="e|_{A\times A}=d" display="inline"><mrow><msub><mrow><mi>e</mi><mo stretchy="false">|</mo></mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow></msub><mo>=</mo><mi>d</mi></mrow></math>を満たすので，
+<math id="S3.p7.m27" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が<math id="S3.p7.m28" class="ltx_Math" alttext="P^{\mathbf{m}}" display="inline"><msup><mi>P</mi><mi>𝐦</mi></msup></math>-embedded
+であることがわかる．</p>
+</div>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p">次に
+閉集合
+<math id="S3.p8.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>
+が<math id="S3.p8.m2" class="ltx_Math" alttext="P^{\mathbf{m}}" display="inline"><msup><mi>P</mi><mi>𝐦</mi></msup></math>-embedded
+であると仮定しよう．
+そして
+<math id="S3.p8.m3" class="ltx_Math" alttext="\{L_{\alpha}\}_{\alpha&lt;\lambda}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>λ</mi></mrow></msub></math><math id="S3.p8.m4" class="ltx_Math" alttext="(\lambda\leq\mathbf{m})" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>≤</mo><mi>𝐦</mi></mrow><mo stretchy="false">)</mo></mrow></math>
+を<math id="S3.p8.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の疎な閉集合の族とする．
+ここで閉集合<math id="S3.p8.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を
+<math id="S3.p8.m7" class="ltx_Math" alttext="A=\bigcup_{\alpha&lt;\lambda}L_{\alpha}" display="inline"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>λ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></math>と定義し
+<math id="S3.p8.m8" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>上の擬距離を</p>
+<table id="S3.Ex42" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex42.m1" class="ltx_Math" alttext="d(x,y)=\begin{cases}0&amp;x\in L_{\alpha}\text{, }y\in L_{\beta}\text{, }\alpha%
+\neq\beta\\
+1&amp;x,y\in L_{\alpha}\end{cases}" display="block"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mn>0</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><msub><mi>L</mi><mi>α</mi></msub><mo>⁢</mo><mtext>, </mtext><mo>⁢</mo><mi>y</mi></mrow><mo>∈</mo><mrow><msub><mi>L</mi><mi>β</mi></msub><mo>⁢</mo><mtext>, </mtext><mo>⁢</mo><mi>α</mi></mrow><mo>≠</mo><mi>β</mi></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>1</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><msub><mi>L</mi><mi>α</mi></msub></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+すると，<math id="S3.p8.m9" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は連続であり，
+<math id="S3.p8.m10" class="ltx_Math" alttext="(A,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>の稠密度は<math id="S3.p8.m11" class="ltx_Math" alttext="\leq\lambda" display="inline"><mrow><mi></mi><mo>≤</mo><mi>λ</mi></mrow></math>，特に
+<math id="S3.p8.m12" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+である．
+よって<math id="S3.p8.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の
+擬距離<math id="S3.p8.m14" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>であって
+稠密度が<math id="S3.p8.m15" class="ltx_Math" alttext="\leq\mathbf{m}" display="inline"><mrow><mi></mi><mo>≤</mo><mi>𝐦</mi></mrow></math>
+で
+<math id="S3.p8.m16" class="ltx_Math" alttext="e|_{A\times A}=d" display="inline"><mrow><msub><mrow><mi>e</mi><mo stretchy="false">|</mo></mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow></msub><mo>=</mo><mi>d</mi></mrow></math>
+となるものが存在する.
+そして
+命題
+<a href="#Thmthm4" title="命題 4. ‣ 1 基本的なこと ‣ 族正規と写像の拡張" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>から
+<math id="S3.p8.m17" class="ltx_Math" alttext="(X,e)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></math>
+は<math id="S3.p8.m18" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規なので，
+<math id="S3.p8.m19" class="ltx_Math" alttext="\{L_{\alpha}\}_{\alpha&lt;\lambda}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>λ</mi></mrow></msub></math>
+を分離する<math id="S3.p8.m20" class="ltx_Math" alttext="(X,e)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></math>
+の開集合が存在する．
+<math id="S3.p8.m21" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>は連続なので，そのような開集合は特に
+<math id="S3.p8.m22" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>自体でも開集合になり，
+結局<math id="S3.p8.m23" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S3.p8.m24" class="ltx_Math" alttext="\mathbf{m}" display="inline"><mi>𝐦</mi></math>-族正規
+であることがわかった．
+∎</p>
+</div>
+</div>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p"><math id="S3.p9.m1" class="ltx_Math" alttext="P^{\gamma}" display="inline"><msup><mi>P</mi><mi>γ</mi></msup></math>-embedded-nessの詳しい話は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>などを参照のこと．</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信,
+「正規性の特徴付け」,
+https://concious4410.hatenablog.com/entry/2015/12/21/170610
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+C. H. Dowker,
+<span class="ltx_text ltx_font_italic">On a theorem of Hanner</span>,
+Ark. Mat. 2, 307–313 (1952),
+doi:
+10.1007/BF02591500.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+R. A. Alo and H. L. Shapiro,
+<span class="ltx_text ltx_font_italic">Normal topological spaces</span>,
+Reprint of the 1974 hardback ed. Cambridge: Cambridge University Press (2009).
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:37:56 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -93,6 +93,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         (result_dir / "LaTeXML.css").write_text("/* LaTeXML */\n", encoding="utf-8")
         (result_dir / "figure-01-page-2.png").write_bytes(b"png")
         (result_dir / "latexml.log").write_text("ok\n", encoding="utf-8")
+        (result_dir / "LaTeXML.cache").write_text("conversion cache\n", encoding="utf-8")
         write_json(
             self.trial / "report.json",
             {
@@ -161,6 +162,27 @@ class LaTeXMLPublicationTest(unittest.TestCase):
 
         self.assertFalse((self.paper_dir / "html").exists())
         self.assertNotIn("html_version", load_manifest(self.manifest_path).to_dict())
+
+    def test_automatic_publication_is_clearly_marked_unreviewed(self) -> None:
+        publication = publish_latexml_trial(
+            root=self.root,
+            paper=self.paper,
+            trial_output=self.trial,
+            automatically_published=True,
+        )
+
+        published = load_manifest(self.manifest_path, PaperToolError)
+        self.assertEqual("automatic", published.html_version.status)
+        self.assertEqual(
+            "HTML版を読む（自動変換・未目視）", published.html_version.label
+        )
+        self.assertEqual(
+            "HTML版を読む（自動変換・未目視）",
+            next(entry.label for entry in published.files if entry.role == "derived-html"),
+        )
+        public_html = publication.html_path.read_text(encoding="utf-8")
+        self.assertIn("AUTOMATIC HTML VERSION", public_html)
+        self.assertIn("元PDFとの目視比較は未実施です", public_html)
 
     def test_unsafe_inline_svg_is_rejected(self) -> None:
         trial_html = self.trial / self.paper.slug / "index.html"

@@ -1,0 +1,1300 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>ベールの範疇定理</title>
+<!--Generated on Sun Jul 26 16:37:38 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2024-01-27-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>ベールの範疇定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">
+ベールの範疇定理
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信 キトラ　ナンブ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では，
+ベールの範疇定理は
+コンパクトハウスドルフの場合に
+証明すれば
+完備距離空間および
+局所コンパクトハウスドルフの場合は
+そこから従うことを紹介する．
+Čech完備性を用いると
+統一的に扱えるのである．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">ベール空間の基本的な話は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx2" title="" class="ltx_ref">電波通信１</a>]</cite>
+などを
+参照のこと．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>ベール空間</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">この文章では
+位相空間
+<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+が
+<span class="ltx_text ltx_font_bold">ベール</span>
+であるとは
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の稠密な開集合の
+任意の可算族
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\{U_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+について
+<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\bigcap_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の中で稠密になる時にいうことにする．</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の空ではないコンパクトハウスドルフ空間
+<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+はベール空間である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密開集合の可算族
+<math id="S1.p1.m2" class="ltx_Math" alttext="\{U_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を任意に与える．
+空間<math id="S1.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がベールであることを証明するには
+<math id="S1.p1.m4" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+が<math id="S1.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の中で稠密であることを示せば良い．
+空間<math id="S1.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の空でない開集合<math id="S1.p1.m7" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>
+を与える．
+今から<math id="S1.p1.m8" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+と<math id="S1.p1.m9" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>が
+交わりを持つことを証明する．
+帰納的に以下の条件を満たす可算族
+<math id="S1.p1.m10" class="ltx_Math" alttext="\{P_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を構成する．</p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p">任意の
+<math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="i\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="P_{i}" display="inline"><msub><mi>P</mi><mi>i</mi></msub></math>
+は
+空でない
+開集合
+である．</p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p">任意の
+<math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="i\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="\mathrm{CL}(P_{i+1})\subset P_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>
+を満たす．</p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>
+について
+<math id="S1.I1.i3.p1.m2" class="ltx_Math" alttext="\mathrm{CL}(P_{i})\subset O\cap U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>O</mi><mo>∩</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow></math>
+を満たす．</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">まず<math id="S1.p1.m11" class="ltx_Math" alttext="P_{0}" display="inline"><msub><mi>P</mi><mn>0</mn></msub></math>
+は
+適当に
+<math id="S1.p1.m12" class="ltx_Math" alttext="P_{0}=O\cap U_{0}" display="inline"><mrow><msub><mi>P</mi><mn>0</mn></msub><mo>=</mo><mrow><mi>O</mi><mo>∩</mo><msub><mi>U</mi><mn>0</mn></msub></mrow></mrow></math>
+とか定義すれば良い．
+<math id="S1.p1.m13" class="ltx_Math" alttext="P_{i}" display="inline"><msub><mi>P</mi><mi>i</mi></msub></math>まで定義されたとき<math id="S1.p1.m14" class="ltx_Math" alttext="P_{i+1}" display="inline"><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+を以下のように定義する．
+今
+<math id="S1.p1.m15" class="ltx_Math" alttext="U_{i+1}" display="inline"><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+は稠密なので
+<math id="S1.p1.m16" class="ltx_Math" alttext="P_{i}\cap U_{i+1}" display="inline"><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+は空でない開集合である．
+適当に点
+<math id="S1.p1.m17" class="ltx_Math" alttext="p\in P_{i}\cap U_{i+1}" display="inline"><mrow><mi>p</mi><mo>∈</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+をとって
+空間<math id="S1.p1.m18" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の正則性を用いると
+開集合<math id="S1.p1.m19" class="ltx_Math" alttext="P_{i+1}" display="inline"><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+であって
+<math id="S1.p1.m20" class="ltx_Math" alttext="p\in P_{i+1}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+でありなおかつ
+<math id="S1.p1.m21" class="ltx_Math" alttext="\mathrm{CL}(P_{i+1})\subset P_{i}\cap U_{i+1}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+を満たすものが取れる．
+このとき
+明らかに
+<math id="S1.p1.m22" class="ltx_Math" alttext="\mathrm{CL}(P_{i+1})\subset P_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>
+であり
+なおかつ<math id="S1.p1.m23" class="ltx_Math" alttext="P_{i}\subset O" display="inline"><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⊂</mo><mi>O</mi></mrow></math>
+なので
+<math id="S1.p1.m24" class="ltx_Math" alttext="\mathrm{CL}(P_{i+1})\subset O\cap P_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>O</mi><mo>∩</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></math>
+である．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">さて以上を踏まえて族
+<math id="S1.p2.m1" class="ltx_Math" alttext="\{\mathrm{CL}(P_{i})\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を考えるとこれはnested
+なので特に
+有限交差性を持つ．
+よって
+<math id="S1.p2.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト性から
+<math id="S1.p2.m3" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}\mathrm{CL}(P_{i})" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+は空でなない．
+さてこのとき</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}\mathrm{CL}(P_{i})\subset\left(O\cap\bigcap_{%
+i\in\mathbb{Z}_{\geq 0}}U_{i}\right)" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mo>(</mo><mrow><mi>O</mi><mo rspace="0.055em">∩</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので
+<math id="S1.p2.m4" class="ltx_Math" alttext="O\cap\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><mi>O</mi><mo rspace="0.055em">∩</mo><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow></math>
+は空ではない．
+よって
+<math id="S1.p2.m5" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>の任意性から
+<math id="S1.p2.m6" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+が<math id="S1.p2.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の中で稠密であることがわかった．
+∎</p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をベール空間とする．
+このとき
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密な
+<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>集合はベール空間になる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p"><math id="S1.p3.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を<math id="S1.p3.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の稠密な
+<math id="S1.p3.m3" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>集合はベール空間とする．
+<math id="S1.p3.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の稠密な開集合の可算族
+<math id="S1.p3.m5" class="ltx_Math" alttext="\{U_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を任意にとる．
+今から<math id="S1.p3.m6" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+が<math id="S1.p3.m7" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の稠密部分集合であることを示す．
+まず<math id="S1.p3.m8" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の相対位相の定義から
+<math id="S1.p3.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の開集合族
+<math id="S1.p3.m10" class="ltx_Math" alttext="\{V_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が存在して
+<math id="S1.p3.m11" class="ltx_Math" alttext="V_{i}\cap S=U_{i}" display="inline"><mrow><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>∩</mo><mi>S</mi></mrow><mo>=</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+となる．
+このとき
+<math id="S1.p3.m12" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>が<math id="S1.p3.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の中で稠密であることと
+<math id="S1.p3.m14" class="ltx_Math" alttext="S\cap V_{i}=U_{i}" display="inline"><mrow><mrow><mi>S</mi><mo>∩</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>=</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+が<math id="S1.p3.m15" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の稠密部分集合であることから
+<math id="S1.p3.m16" class="ltx_Math" alttext="V_{i}" display="inline"><msub><mi>V</mi><mi>i</mi></msub></math>は
+<math id="S1.p3.m17" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密部分集合になる．
+ここで
+<math id="S1.p3.m18" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>も
+<math id="S1.p3.m19" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密部分集合であり
+<math id="S1.p3.m20" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+集合なので</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="S\cap\bigcap_{i\in\mathbb{Z}_{\geq 0}}V_{i}\left(=\bigcap_{i\in\mathbb{Z}_{%
+\geq 0}}U_{i}\right)" display="block"><mrow><mrow><mi>S</mi><mo rspace="0.055em">∩</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow><mspace width="0.3888888888888889em"></mspace><mrow><mo>(</mo><mrow><mi></mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は
+<math id="S1.p3.m21" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の稠密な開集合の可算族の共通部分として
+表すことができる．
+よって
+<math id="S1.p3.m22" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+がベール空間であることから
+<math id="S1.p3.m23" class="ltx_Math" alttext="S\cap\bigcap_{i\in\mathbb{Z}_{\geq 0}}V_{i}" display="inline"><mrow><mi>S</mi><mo rspace="0.055em">∩</mo><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow></math>
+は
+<math id="S1.p3.m24" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密部分集合である．
+この集合は<math id="S1.p3.m25" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の部分集合でもあるので
+特に<math id="S1.p3.m26" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の中でも稠密になる．
+よって
+<math id="S1.p3.m27" class="ltx_Math" alttext="\bigcap_{i\in\mathbb{Z}_{\geq 0}}U_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+は<math id="S1.p3.m28" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>
+の中
+で稠密である．
+以上で
+<math id="S1.p3.m29" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>
+がベール空間であることがわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Čech完備空間</h2>
+
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を位相空間とする．
+このとき
+<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の
+<span class="ltx_text ltx_font_bold">コンパクト化</span>
+とは
+コンパクトハウスドルフ空間
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+であって
+位相的埋め込み
+<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="f\colon X\to K" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>K</mi></mrow></mrow></math>
+であって
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="f(X)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が
+<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の中で稠密である
+ようなものが存在するものをいう．
+この定義から
+<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は
+<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の
+部分空間とみなせるので
+以下では
+<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト化を考える時には
+<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はそのコンパクト化の
+部分集合と考えることにする．</span></p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">コンパクト化は一意的では全くなく，
+一般にはたくさん存在する(コンパクト化が一個しかないやつもある, <math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="\omega_{1}" display="inline"><msub><mi>ω</mi><mn>1</mn></msub></math>とか)．
+また，
+コンパクト化の定義から
+<math id="Thmrmkx1.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がコンパクト化を持つならば
+<math id="Thmrmkx1.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は完全正則であることがわかる．
+逆に
+<math id="Thmrmkx1.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が完全正則ならば
+<math id="Thmrmkx1.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+にはストーンチェックコンパクト化が存在するので
+コンパクト化をもつ．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間
+<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>について
+その開被覆の可算族
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+が
+<span class="ltx_text ltx_font_bold">完備列</span>
+であるとは，
+<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意のフィルター
+<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+について
+もしも任意の<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+に対して
+<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+であるならば，
+<math id="Thmthm5.p1.m7" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+が成り立つ
+ときにいう．</span></p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を完全正則空間とする．
+このとき以下の条件は同値である．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+はその任意のコンパクト化の中で
+</span><math id="S2.I1.i1.p1.m2" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math><span class="ltx_text ltx_font_italic">集合になっている．</span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+はある
+コンパクト化の中で
+</span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math><span class="ltx_text ltx_font_italic">
+集合になっている．</span></p>
+</div>
+</li>
+<li id="S2.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+は完備列を持つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">
+<a href="#S2.I1.i1" title="item (1) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a><math id="S2.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math> <a href="#S2.I1.i2" title="item (2) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>の証明.</h6>
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">当たり前</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">[<a href="#S2.I1.i1" title="item (1) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a><math id="S2.p2.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math> <a href="#S2.I1.i2" title="item (2) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>の証明終わり]</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">[<a href="#S2.I1.i2" title="item (2) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a><math id="S2.p3.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math><a href="#S2.I1.i3" title="item (3) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>の証明]</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p"><math id="S2.p4.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>を
+<math id="S2.p4.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト化で
+<math id="S2.p4.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+が
+<math id="S2.p4.m4" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で
+<math id="S2.p4.m5" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+集合になっているものとしよう．
+今から
+<math id="S2.p4.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の完備列を構成する．
+空間<math id="S2.p4.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は
+<math id="S2.p4.m8" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の<math id="S2.p4.m9" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+集合なので
+ある
+<math id="S2.p4.m10" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の開集合の可算列
+<math id="S2.p4.m11" class="ltx_Math" alttext="\{O_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>
+が存在して
+<math id="S2.p4.m12" class="ltx_Math" alttext="K=\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_{n}" display="inline"><mrow><mi>K</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>O</mi><mi>n</mi></msub></mrow></mrow></math>
+となる．
+ここで各<math id="S2.p4.m13" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+と<math id="S2.p4.m14" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+について
+<math id="S2.p4.m15" class="ltx_Math" alttext="U_{x,n}" display="inline"><msub><mi>U</mi><mrow><mi>x</mi><mo>,</mo><mi>n</mi></mrow></msub></math>を
+<math id="S2.p4.m16" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の開集合であって
+<math id="S2.p4.m17" class="ltx_Math" alttext="x\in U_{x,n}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>U</mi><mrow><mi>x</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow></math>であり
+<math id="S2.p4.m18" class="ltx_Math" alttext="\mathrm{CL}_{K}(U_{x,n})\subset O_{n}" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><mi>x</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>O</mi><mi>n</mi></msub></mrow></math>
+となるものとする．
+そして
+各
+<math id="S2.p4.m19" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p4.m20" class="ltx_Math" alttext="\mathcal{U}_{n}=\{U_{x,n}\cap X\}_{x\in X}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>U</mi><mrow><mi>x</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>∩</mo><mi>X</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></msub></mrow></math>
+と定義すると
+これは<math id="S2.p4.m21" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の被覆になっている．
+今から
+<math id="S2.p4.m22" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+が完備列であることを証明しよう．
+任意に<math id="S2.p4.m23" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上のフィルター
+<math id="S2.p4.m24" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+を取り，
+任意の<math id="S2.p4.m25" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p4.m26" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+と仮定する．
+このとき
+<math id="S2.p4.m27" class="ltx_Math" alttext="\mathfrak{G}=\{\,\mathrm{CL}_{K}(F)\mid F\in\mathfrak{F}\,\}" display="inline"><mrow><mi>𝔊</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+を考えるとこれは
+<math id="S2.p4.m28" class="ltx_Math" alttext="\mathfrak{G}" display="inline"><mi>𝔊</mi></math>上のフィルター基底になっており，
+特に有限交差性を持つので
+<math id="S2.p4.m29" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{K}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+さて，
+<math id="S2.p4.m30" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+なのである<math id="S2.p4.m31" class="ltx_Math" alttext="U_{x_{n},n}\in\mathcal{U}_{n}" display="inline"><mrow><msub><mi>U</mi><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mi>n</mi></mrow></msub><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></mrow></math>
+が存在して
+<math id="S2.p4.m32" class="ltx_Math" alttext="U_{x_{n},n}\in\mathfrak{F}" display="inline"><mrow><msub><mi>U</mi><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mi>n</mi></mrow></msub><mo>∈</mo><mi>𝔉</mi></mrow></math>
+となる．
+特に</p>
+<table id="S2.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex3.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{K}(F)\subset\bigcap_{n\in\mathbb{Z}_{%
+\geq 0}}\mathrm{CL}_{K}(U_{x_{n},n})" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+ここで
+<math id="S2.p4.m33" class="ltx_Math" alttext="\mathrm{CL}_{K}(U_{x_{n},n})\subset O_{n}" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>O</mi><mi>n</mi></msub></mrow></math>なので</p>
+<table id="S2.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex4.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{K}(F)\subset\bigcap_{n\in\mathbb{Z}_{%
+\geq 0}}\mathrm{CL}_{K}(U_{x_{n},n})\subset\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_%
+{n}=X" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder><msub><mi>O</mi><mi>n</mi></msub></mrow><mo>=</mo><mi>X</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+よって</p>
+<table id="S2.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex5.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{K}(F)=\bigcap_{F\in\mathfrak{F}}\mathrm%
+{CL}_{X}(F)" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり，
+この交わりは空ではないので
+<math id="S2.p4.m34" class="ltx_Math" alttext="\mathbf{U}" display="inline"><mi>𝐔</mi></math>
+が完備列であることがわかった．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">[<a href="#S2.I1.i2" title="item (2) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a><math id="S2.p5.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math><a href="#S2.I1.i3" title="item (3) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>の証明終わり]</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">[<a href="#S2.I1.i3" title="item (3) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a><math id="S2.p6.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math><a href="#S2.I1.i1" title="item (1) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>の証明]</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p"><math id="S2.p7.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意のコンパクト化を
+<math id="S2.p7.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>とする．
+今から
+<math id="S2.p7.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が
+<math id="S2.p7.m4" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の中で
+<math id="S2.p7.m5" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+であることを示す．
+空間
+<math id="S2.p7.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の完備列を
+<math id="S2.p7.m7" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+とし
+<math id="S2.p7.m8" class="ltx_Math" alttext="\mathcal{U}_{n}=\{U_{i,n}\}_{i\in I_{n}}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></msub></mrow></math>
+と表示しよう．
+そして各
+<math id="S2.p7.m9" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+と
+<math id="S2.p7.m10" class="ltx_Math" alttext="i\in I_{n}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></math>
+について
+<math id="S2.p7.m11" class="ltx_Math" alttext="V_{i,n}\cap X=U_{i,n}" display="inline"><mrow><mrow><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>∩</mo><mi>X</mi></mrow><mo>=</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow></math>
+となるような
+<math id="S2.p7.m12" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の開集合
+<math id="S2.p7.m13" class="ltx_Math" alttext="V_{i,n}" display="inline"><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></math>をとる．
+ここで</p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="O_{n}=\bigcup_{i\in I_{n}}V_{i,n}" display="block"><mrow><msub><mi>O</mi><mi>n</mi></msub><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></munder><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+すると
+<math id="S2.p7.m14" class="ltx_Math" alttext="X\subset\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_{n}" display="inline"><mrow><mi>X</mi><mo rspace="0.111em">⊂</mo><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>O</mi><mi>n</mi></msub></mrow></mrow></math>
+は定義からすぐに従う．
+今から
+<math id="S2.p7.m15" class="ltx_Math" alttext="X\supset\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_{n}" display="inline"><mrow><mi>X</mi><mo rspace="0.111em">⊃</mo><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>O</mi><mi>n</mi></msub></mrow></mrow></math>
+を示す．
+点
+<math id="S2.p7.m16" class="ltx_Math" alttext="x\in\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_{n}" display="inline"><mrow><mi>x</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>O</mi><mi>n</mi></msub></mrow></mrow></math>
+を任意にとる．
+そして
+<math id="S2.p7.m17" class="ltx_Math" alttext="\mathfrak{N}" display="inline"><mi>𝔑</mi></math>
+を
+<math id="S2.p7.m18" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>
+の
+<math id="S2.p7.m19" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+における
+近傍系とする．
+さらに
+<math id="S2.p7.m20" class="ltx_Math" alttext="\mathfrak{F}=\{\,N\cap X\mid N\in\mathfrak{N}\,\}" display="inline"><mrow><mi>𝔉</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>N</mi><mo>∩</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>N</mi><mo>∈</mo><mi>𝔑</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+と定義する．
+空間
+<math id="S2.p7.m21" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+は
+<math id="S2.p7.m22" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で稠密なので
+<math id="S2.p7.m23" class="ltx_Math" alttext="\mathfrak{N}" display="inline"><mi>𝔑</mi></math>
+が開集合を基底とするフィルターとなることから
+<math id="S2.p7.m24" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+は
+<math id="S2.p7.m25" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の上の
+フィルター基底となる．
+任意に
+<math id="S2.p7.m26" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を与える．
+このとき
+<math id="S2.p7.m27" class="ltx_Math" alttext="x\in O_{n}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>O</mi><mi>n</mi></msub></mrow></math>であるから
+ある
+<math id="S2.p7.m28" class="ltx_Math" alttext="i\in I_{n}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></math>が存在sて
+<math id="S2.p7.m29" class="ltx_Math" alttext="x\in V_{i,n}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow></math>
+となる．
+つまり
+<math id="S2.p7.m30" class="ltx_Math" alttext="V_{i,n}" display="inline"><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></math>
+は
+<math id="S2.p7.m31" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の近傍になっている．
+このとき
+<math id="S2.p7.m32" class="ltx_Math" alttext="V_{i,n}" display="inline"><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub></math>と
+<math id="S2.p7.m33" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+の定義から
+<math id="S2.p7.m34" class="ltx_Math" alttext="U_{i,n}=V_{i,n}\cap X\in\mathfrak{F}" display="inline"><mrow><msub><mi>U</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>=</mo><mrow><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>∩</mo><mi>X</mi></mrow><mo>∈</mo><mi>𝔉</mi></mrow></math>
+となる．
+つまり
+<math id="S2.p7.m35" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+ここで
+<math id="S2.p7.m36" class="ltx_Math" alttext="\mathbf{U}" display="inline"><mi>𝐔</mi></math>
+が完備列であること
+を用いると
+<math id="S2.p7.m37" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+さてここで<math id="S2.p7.m38" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>が正則であることと<math id="S2.p7.m39" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+の定義及び<math id="S2.p7.m40" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S2.p7.m41" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で稠密であることから</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{K}(F)=\{x\}" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．一般に<math id="S2.p7.m42" class="ltx_Math" alttext="\mathrm{CL}_{X}(F)\subset\mathrm{CL}_{K}(F)" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+であることから</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)\subset\bigcap_{F\in\mathfrak{F}}%
+\mathrm{CL}_{K}(F)=\{x\}" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり
+<math id="S2.p7.m43" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+であることから</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)=\{x\}" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">でなければならない．
+集合
+<math id="S2.p7.m44" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+は
+<math id="S2.p7.m45" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の部分集合なので
+<math id="S2.p7.m46" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+が従う．
+以上から
+<math id="S2.p7.m47" class="ltx_Math" alttext="X=\bigcap_{n\in\mathbb{Z}_{\geq 0}}O_{n}" display="inline"><mrow><mi>X</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>O</mi><mi>n</mi></msub></mrow></mrow></math>
+なので
+<math id="S2.p7.m48" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+は
+<math id="S2.p7.m49" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の
+<math id="S2.p7.m50" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+集合である．</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">[<a href="#S2.I1.i3" title="item (3) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a><math id="S2.p8.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math><a href="#S2.I1.i1" title="item (1) ‣ 定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>の証明終わり]</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">以上で証明が終わった．
+∎</p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">完全正則空間
+<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+が
+<span class="ltx_text ltx_font_bold">チェック完備</span>
+(<span class="ltx_text ltx_font_bold">Čech完備</span>,
+<span class="ltx_text ltx_font_bold">Čech complete</span>)
+であるとは
+定理<a href="#Thmthm6" title="定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>
+の三つの条件のうちどれかひとつ
+(結果として全て)を満たすときに
+いう．
+一般的には
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のストーンチェックコンパクト化
+<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\beta X" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></math>
+の中で
+<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>
+であると定義する場合が多いような気がする．
+Čechというのは数学者の名前である．</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">チェック完備な完全正則空間は
+ベールである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">定理
+<a href="#Thmthm2" title="定理 2. ‣ 1 ベール空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+と
+補題
+<a href="#Thmthm3" title="補題 3. ‣ 1 ベール空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>，
+そして
+定理
+<a href="#Thmthm6" title="定理 6. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>
+からわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">完備距離化可能空間
+<math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+はチェック完備である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">空間<math id="S2.p11.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+上の距離関数
+<math id="S2.p11.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>
+であって
+完備であり
+なおかつ
+<math id="S2.p11.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と同じ位相を誘導するものを固定する．
+このとき
+各
+<math id="S2.p11.m4" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p11.m5" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>
+を
+(<math id="S2.p11.m6" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に関して)
+直径が<math id="S2.p11.m7" class="ltx_Math" alttext="2^{-n}" display="inline"><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup></math>以下の
+開集合全体とする．
+このとき
+<math id="S2.p11.m8" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+が完備列になるのは，
+完備距離空間の区間縮小法からわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所コンパクトハウスドルフ空間
+<math id="Thmthm10.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+はチェック完備である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p"><math id="S2.p12.m1" class="ltx_Math" alttext="\mathcal{U}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mn>0</mn></msub></math>
+を
+<math id="S2.p12.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+相対コンパクトな開集合全体とし
+<math id="S2.p12.m3" class="ltx_Math" alttext="n\geq 1" display="inline"><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow></math>のとき
+<math id="S2.p12.m4" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>
+はなんでもいい．
+<math id="S2.p12.m5" class="ltx_Math" alttext="\mathcal{U}_{n}=\mathcal{U}_{0}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mn>0</mn></msub></mrow></math>
+でもいいし
+<math id="S2.p12.m6" class="ltx_Math" alttext="\mathcal{U}_{n}=\{X\}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+でもいい．
+とにかくこのとき
+<math id="S2.p12.m7" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+が完備列であることを示そう．
+フィルター
+<math id="S2.p12.m8" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+が<math id="S2.p12.m9" class="ltx_Math" alttext="\mathfrak{F}\cap\mathcal{U}_{0}\neq\emptyset" display="inline"><mrow><mrow><mi>𝔉</mi><mo>∩</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mn>0</mn></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+とすると
+ある
+<math id="S2.p12.m10" class="ltx_Math" alttext="O\in\mathcal{U}_{0}" display="inline"><mrow><mi>O</mi><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mn>0</mn></msub></mrow></math>
+が存在して
+<math id="S2.p12.m11" class="ltx_Math" alttext="O\in\mathfrak{F}" display="inline"><mrow><mi>O</mi><mo>∈</mo><mi>𝔉</mi></mrow></math>
+である．
+ここで
+フィルター基底
+<math id="S2.p12.m12" class="ltx_Math" alttext="\mathfrak{G}=\{\,\mathrm{CL}_{X}(F\cap O)\mid F\in\mathfrak{F}\,\}" display="inline"><mrow><mi>𝔊</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>F</mi><mo>∩</mo><mi>O</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+を考えると
+<math id="S2.p12.m13" class="ltx_Math" alttext="\mathfrak{G}" display="inline"><mi>𝔊</mi></math>
+は
+コンパクト集合
+<math id="S2.p12.m14" class="ltx_Math" alttext="\mathrm{CL}_{X}(O)" display="inline"><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>O</mi><mo stretchy="false">)</mo></mrow></mrow></math>上の
+の有限交差性を持つ集合族になる．
+よって</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="\bigcap\mathfrak{G}\neq\emptyset" display="block"><mrow><mrow><mo movablelimits="false">⋂</mo><mi>𝔊</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+さて
+定義から</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\bigcap\mathfrak{G}\subset\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)" display="block"><mrow><mrow><mo movablelimits="false">⋂</mo><mi>𝔊</mi></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので
+特に
+<math id="S2.p12.m15" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{X}(F)" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．
+つまり
+<math id="S2.p12.m16" class="ltx_Math" alttext="\mathbf{U}" display="inline"><mi>𝐔</mi></math>
+は完備列である．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">実際はより強く，
+局所コンパクトハウスドルフ空間
+<math id="Thmrmkx2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は
+そのコンパクト化<math id="Thmrmkx2.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で
+開集合になることがわかる．
+実際点
+<math id="Thmrmkx2.p1.m3" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+に対して
+<math id="Thmrmkx2.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の中での相対コンパクトな開近傍
+<math id="Thmrmkx2.p1.m5" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>を取り，
+<math id="Thmrmkx2.p1.m6" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>を
+<math id="Thmrmkx2.p1.m7" class="ltx_Math" alttext="U\cap X=V" display="inline"><mrow><mrow><mi>U</mi><mo>∩</mo><mi>X</mi></mrow><mo>=</mo><mi>V</mi></mrow></math>
+となるような
+<math id="Thmrmkx2.p1.m8" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の近傍とする．
+このとき
+<math id="Thmrmkx2.p1.m9" class="ltx_Math" alttext="\mathrm{CL}_{X}(V)" display="inline"><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+はコンパクトで
+<math id="Thmrmkx2.p1.m10" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>はハウスドルフであるから
+<math id="Thmrmkx2.p1.m11" class="ltx_Math" alttext="\mathrm{CL}_{X}(V)=\mathrm{CL}_{K}(V)" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つ．
+<math id="Thmrmkx2.p1.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は
+<math id="Thmrmkx2.p1.m13" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で稠密であるから，
+特に
+<math id="Thmrmkx2.p1.m14" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>
+は
+<math id="Thmrmkx2.p1.m15" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>
+の中で稠密である．
+つまり
+<math id="Thmrmkx2.p1.m16" class="ltx_Math" alttext="\mathrm{CL}_{K}(U)=\mathrm{CL}_{K}(V)" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+である．
+よって
+<math id="Thmrmkx2.p1.m17" class="ltx_Math" alttext="\mathrm{CL}_{K}(V)=\mathrm{CL}_{X}(V)\subset X" display="inline"><mrow><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>X</mi></mrow></math>
+であるからさらに
+<math id="Thmrmkx2.p1.m18" class="ltx_Math" alttext="U\subset\mathrm{CL}_{K}(U)\subset X" display="inline"><mrow><mi>U</mi><mo>⊂</mo><mrow><msub><mi>CL</mi><mi>K</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>X</mi></mrow></math>
+が成り立つ．
+ゆえに
+<math id="Thmrmkx2.p1.m19" class="ltx_Math" alttext="U=V" display="inline"><mrow><mi>U</mi><mo>=</mo><mi>V</mi></mrow></math>である．
+つまり
+任意の<math id="Thmrmkx2.p1.m20" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+は<math id="Thmrmkx2.p1.m21" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の中で
+<math id="Thmrmkx2.p1.m22" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の
+内点になっている
+ので
+<math id="Thmrmkx2.p1.m23" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+は<math id="Thmrmkx2.p1.m24" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の
+中で開集合である．
+参考文献
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx3" title="" class="ltx_ref">電波通信2</a>]</cite>
+も参照のこと．</span></p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 11</span></span><span class="ltx_text ltx_font_bold"> </span>(ベールの範疇定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">完備距離化可能空間
+と
+局所コンパクトハウスドルフ空間
+は
+ベール空間である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">定理
+<a href="#Thmthm8" title="定理 8. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>
+と
+定理<a href="#Thmthm9" title="定理 9. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>と
+<a href="#Thmthm10" title="定理 10. ‣ 2 Čech完備空間 ‣ ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>
+から
+従う．
+本当は完全正則空間には
+コンパクト化が少なくとも一つ存在するという議論が必要だが
+省略する．ストーンチェックコンパクト化などがある．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>おまけ</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">以下の定理を
+完備列を用いて証明する．</p>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">チェック完備な
+完全正則空間
+はベール空間である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p"><math id="S3.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の完備列を
+<math id="S3.p2.m2" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+とし
+<math id="S3.p2.m3" class="ltx_Math" alttext="\mathcal{U}_{n}=\{U_{i}\}_{i\in I_{n}}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></msub></mrow></math>
+と表すことにする．
+そして
+<math id="S3.p2.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密な開集合の可算族
+を
+<math id="S3.p2.m5" class="ltx_Math" alttext="\{G_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>G</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+とする．
+さらに
+<math id="S3.p2.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の空ではない開集合<math id="S3.p2.m7" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>
+を任意に与える．
+このとき帰納的に
+<math id="S3.p2.m8" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math>を
+以下のように定義する．
+<math id="S3.p2.m9" class="ltx_Math" alttext="n=0" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></math>のときは適当に
+<math id="S3.p2.m10" class="ltx_Math" alttext="U_{i_{0},0}\cap G_{0}\cap O\neq\emptyset" display="inline"><mrow><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mn>0</mn></msub><mo>,</mo><mn>0</mn></mrow></msub><mo>∩</mo><msub><mi>G</mi><mn>0</mn></msub><mo>∩</mo><mi>O</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる
+<math id="S3.p2.m11" class="ltx_Math" alttext="U_{i_{0},0}\in\mathcal{U}_{0}" display="inline"><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mn>0</mn></msub><mo>,</mo><mn>0</mn></mrow></msub><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mn>0</mn></msub></mrow></math>
+をとって
+<math id="S3.p2.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の正規性を使って
+<math id="S3.p2.m13" class="ltx_Math" alttext="\mathrm{CL}(P_{0})\subset U_{i_{0},0}\cap G_{0}\cap O" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mn>0</mn></msub><mo>,</mo><mn>0</mn></mrow></msub><mo>∩</mo><msub><mi>G</mi><mn>0</mn></msub><mo>∩</mo><mi>O</mi></mrow></mrow></math>
+となる開集合<math id="S3.p2.m14" class="ltx_Math" alttext="P_{0}" display="inline"><msub><mi>P</mi><mn>0</mn></msub></math>
+とする．
+<math id="S3.p2.m15" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>まで<math id="S3.p2.m16" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math>が定義されたとき
+<math id="S3.p2.m17" class="ltx_Math" alttext="P_{n+1}" display="inline"><msub><mi>P</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+は適当に
+<math id="S3.p2.m18" class="ltx_Math" alttext="U_{i_{n+1},n+1}\cap G_{n+1}\cap P_{n}\neq\emptyset" display="inline"><mrow><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub><mo>∩</mo><msub><mi>G</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∩</mo><msub><mi>P</mi><mi>n</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる
+<math id="S3.p2.m19" class="ltx_Math" alttext="U_{i_{n+1},n+1}\in\mathcal{U}_{n+1}" display="inline"><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+をとる．このような
+<math id="S3.p2.m20" class="ltx_Math" alttext="U_{i_{n+1},n+1}" display="inline"><msub><mi>U</mi><mrow><msub><mi>i</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub></math>が取れるのは
+<math id="S3.p2.m21" class="ltx_Math" alttext="\mathcal{U}_{n+1}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>が開被覆であり
+<math id="S3.p2.m22" class="ltx_Math" alttext="G_{n+1}" display="inline"><msub><mi>G</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>の稠密性から
+<math id="S3.p2.m23" class="ltx_Math" alttext="G_{n+1}\cap P_{n}\neq\emptyset" display="inline"><mrow><mrow><msub><mi>G</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∩</mo><msub><mi>P</mi><mi>n</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるからである．
+そして
+<math id="S3.p2.m24" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の正則性を使って
+適当に
+<math id="S3.p2.m25" class="ltx_Math" alttext="\mathrm{CL}(P_{n+1})\subset U_{i_{n+1},n+1}\cap G_{n+1}\cap P_{n}" display="inline"><mrow><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>U</mi><mrow><msub><mi>i</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub><mo>∩</mo><msub><mi>G</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∩</mo><msub><mi>P</mi><mi>n</mi></msub></mrow></mrow></math>
+となる開集合として選ぶ．
+このとき<math id="S3.p2.m26" class="ltx_Math" alttext="\{P_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>P</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>は有限交差族であり，
+これから生成されるフィルターは
+任意の<math id="S3.p2.m27" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について
+<math id="S3.p2.m28" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．
+よって
+<math id="S3.p2.m29" class="ltx_Math" alttext="\mathbf{U}" display="inline"><mi>𝐔</mi></math>
+が完備列であることから
+<math id="S3.p2.m30" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><mi>CL</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+つまりこの交わりから
+点<math id="S3.p2.m31" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>
+をとると
+<math id="S3.p2.m32" class="ltx_Math" alttext="p\in P_{n}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>P</mi><mi>n</mi></msub></mrow></math>なので
+<math id="S3.p2.m33" class="ltx_Math" alttext="p\in O" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>O</mi></mrow></math>
+でなおかつ
+<math id="S3.p2.m34" class="ltx_Math" alttext="p\in G_{n}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>G</mi><mi>n</mi></msub></mrow></math>
+でもある．
+よって
+<math id="S3.p2.m35" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>
+と
+<math id="S3.p2.m36" class="ltx_Math" alttext="\bigcap_{n}G_{n}" display="inline"><mrow><msub><mo>⋂</mo><mi>n</mi></msub><msub><mi>G</mi><mi>n</mi></msub></mrow></math>
+は交わりをもつ．
+つまり
+<math id="S3.p2.m37" class="ltx_Math" alttext="\bigcap_{n}G_{n}" display="inline"><mrow><msub><mo>⋂</mo><mi>n</mi></msub><msub><mi>G</mi><mi>n</mi></msub></mrow></math>
+は
+<math id="S3.p2.m38" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の中で稠密である．
+このことから
+<math id="S3.p2.m39" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+がベール空間であることが従う．
+∎</p>
+</div>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">チェック完備性が完全写像で保たれることも証明しておこう．</p>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">,
+<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>
+を完全正則写像とし，
+<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+を完全写像とする．
+このとき
+<math id="Thmthm13.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+がチェック完備ならば
+<math id="Thmthm13.p1.m5" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>
+もそうである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">この文書では写像<math id="S3.p4.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+の小像を
+<math id="S3.p4.m2" class="ltx_Math" alttext="f_{?}" display="inline"><msub><mi>f</mi><mi mathvariant="normal">?</mi></msub></math>
+とかく．
+つまり
+<math id="S3.p4.m3" class="ltx_Math" alttext="A\subset X" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>X</mi></mrow></math>
+について
+<math id="S3.p4.m4" class="ltx_Math" alttext="f_{?}(A)=Y\setminus f(X\setminus A)" display="inline"><mrow><mrow><msub><mi>f</mi><mi mathvariant="normal">?</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Y</mi><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+である．</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">今<math id="S3.p5.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の完備列を
+<math id="S3.p5.m2" class="ltx_Math" alttext="\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐔</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+とし，
+<math id="S3.p5.m3" class="ltx_Math" alttext="\mathcal{U}_{n}=\{U_{i,n}\}_{i\in I_{n}}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></msub></mrow></math>
+と表示しよう．
+このとき
+<math id="S3.p5.m4" class="ltx_Math" alttext="\mathcal{O}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></math>
+という記号で
+<math id="S3.p5.m5" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>
+の有限部分族の和集合からなる族とする．
+つまり
+<math id="S3.p5.m6" class="ltx_Math" alttext="\mathcal{O}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></math>
+の元
+<math id="S3.p5.m7" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>
+は
+<math id="S3.p5.m8" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>
+の有限個の元<math id="S3.p5.m9" class="ltx_Math" alttext="U_{1},\dots U_{m}" display="inline"><mrow><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>U</mi><mi>m</mi></msub></mrow></mrow></math>
+を用いて
+<math id="S3.p5.m10" class="ltx_Math" alttext="O=\bigcup_{i=1}^{m}U_{i}" display="inline"><mrow><mi>O</mi><mo rspace="0.111em">=</mo><mrow><msubsup><mo>⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow></math>
+と表すことができる．
+次に各
+<math id="S3.p5.m11" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S3.p5.m12" class="ltx_Math" alttext="\mathcal{V}_{n}=\{\,f_{?}(O)\mid O\in\mathcal{O}_{n}\,\}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>n</mi></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><msub><mi>f</mi><mi mathvariant="normal">?</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>O</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>O</mi><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+と定義する．
+このとき
+<math id="S3.p5.m13" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が完全写像であることと
+<math id="S3.p5.m14" class="ltx_Math" alttext="\mathcal{O}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></math>
+の定義から
+各
+<math id="S3.p5.m15" class="ltx_Math" alttext="\mathcal{V}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>n</mi></msub></math>
+は
+<math id="S3.p5.m16" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の
+開被覆になっている．</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">今から
+<math id="S3.p6.m1" class="ltx_Math" alttext="\mathbf{V}=\{\mathcal{U}_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mi>𝐕</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+が
+<math id="S3.p6.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の
+完備列になっていることを示そう．
+<math id="S3.p6.m3" class="ltx_Math" alttext="\mathfrak{F}" display="inline"><mi>𝔉</mi></math>
+を
+<math id="S3.p6.m4" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>のフィルターであって
+各
+<math id="S3.p6.m5" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S3.p6.m6" class="ltx_Math" alttext="\mathcal{V}_{n}\cap\mathfrak{F}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔉</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるものとする．
+このとき
+<math id="S3.p6.m7" class="ltx_Math" alttext="\mathfrak{G}=\{\,f^{-1}(F)\mid F\in\mathfrak{F}\,\}" display="inline"><mrow><mi>𝔊</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+と定義すると
+<math id="S3.p6.m8" class="ltx_Math" alttext="\mathfrak{G}" display="inline"><mi>𝔊</mi></math>
+は<math id="S3.p6.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の上のフィルターであり，
+<math id="S3.p6.m10" class="ltx_Math" alttext="\mathcal{O}_{n}\cap\mathfrak{G}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔊</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たす．
+ここでさらに<math id="S3.p6.m11" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>
+を<math id="S3.p6.m12" class="ltx_Math" alttext="\mathfrak{G}\subset\mathfrak{A}" display="inline"><mrow><mi>𝔊</mi><mo>⊂</mo><mi>𝔄</mi></mrow></math>
+を満たすような極大フィルターとする．
+このとき<math id="S3.p6.m13" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>
+が極大であることと
+<math id="S3.p6.m14" class="ltx_Math" alttext="\mathcal{O}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></math>
+の定義から
+<math id="S3.p6.m15" class="ltx_Math" alttext="\mathcal{U}_{n}\cap\mathfrak{A}\neq\emptyset" display="inline"><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub><mo>∩</mo><mi>𝔄</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる(この部分がこの証明のポイントである，<math id="S3.p6.m16" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>の元の小像全体は
+被覆とは限らないが<math id="S3.p6.m17" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>による点の逆像がコンパクトであることを用いると
+<math id="S3.p6.m18" class="ltx_Math" alttext="\mathcal{U}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒰</mi><mi>n</mi></msub></math>の元の有限和集合の族<math id="S3.p6.m19" class="ltx_Math" alttext="\mathcal{O}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒪</mi><mi>n</mi></msub></math>の元の小像全体<math id="S3.p6.m20" class="ltx_Math" alttext="\mathcal{V}_{n}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>n</mi></msub></math>
+が<math id="S3.p6.m21" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の被覆になることがわかる，
+ここで有限和集合をとっているが極大フィルターをとることで埋め合わせをしている，一般に極大フィルター<math id="S3.p6.m22" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>について
+<math id="S3.p6.m23" class="ltx_Math" alttext="A\cup B\in\mathfrak{A}" display="inline"><mrow><mrow><mi>A</mi><mo>∪</mo><mi>B</mi></mrow><mo>∈</mo><mi>𝔄</mi></mrow></math>
+ならば<math id="S3.p6.m24" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>か<math id="S3.p6.m25" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>の少なくとも一つは
+<math id="S3.p6.m26" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>に属するのである)．</p>
+</div>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">よって<math id="S3.p7.m1" class="ltx_Math" alttext="\mathbf{U}" display="inline"><mi>𝐔</mi></math>
+が完備列であることから</p>
+<table id="S3.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex12.m1" class="ltx_Math" alttext="\bigcap_{A\in\mathfrak{A}}\mathrm{CL}_{X}(A)\neq\emptyset" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>A</mi><mo>∈</mo><mi>𝔄</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+ここで
+<math id="S3.p7.m2" class="ltx_Math" alttext="\mathfrak{G}\subset\mathfrak{A}" display="inline"><mrow><mi>𝔊</mi><mo>⊂</mo><mi>𝔄</mi></mrow></math>
+なので</p>
+<table id="S3.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex13.m1" class="ltx_Math" alttext="\bigcap_{A\in\mathfrak{A}}\mathrm{CL}_{X}(A)\subset\bigcap_{G\in\mathfrak{G}}%
+\mathrm{CL}_{X}(G)" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>A</mi><mo>∈</mo><mi>𝔄</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>G</mi><mo>∈</mo><mi>𝔊</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+特に</p>
+<table id="S3.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex14.m1" class="ltx_Math" alttext="\bigcap_{G\in\mathfrak{G}}\mathrm{CL}_{X}(G)\neq\emptyset" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>G</mi><mo>∈</mo><mi>𝔊</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+ここで<math id="S3.p7.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は連続写像なので任意の<math id="S3.p7.m4" class="ltx_Math" alttext="A\subset X" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>X</mi></mrow></math>
+について
+<math id="S3.p7.m5" class="ltx_Math" alttext="f(\mathrm{CL}_{X}(A))\subset\mathrm{CL}_{Y}(f(A))" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>CL</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つ．
+よって
+<math id="S3.p7.m6" class="ltx_Math" alttext="\mathfrak{G}" display="inline"><mi>𝔊</mi></math>
+の定義から</p>
+<table id="S3.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex15.m1" class="ltx_Math" alttext="f\left(\bigcap_{G\in\mathfrak{G}}\mathrm{CL}_{X}(G)\right)\subset\bigcap_{G\in%
+\mathfrak{G}}\mathrm{CL}_{Y}(f(G))=\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{Y}(F)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><munder><mo lspace="0em" movablelimits="false">⋂</mo><mrow><mi>G</mi><mo>∈</mo><mi>𝔊</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow><mo rspace="0.111em">⊂</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>G</mi><mo>∈</mo><mi>𝔊</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></munder><mrow><msub><mi>CL</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S3.p7.m7" class="ltx_Math" alttext="\bigcap_{G\in\mathfrak{G}}\mathrm{CL}_{X}(G)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>G</mi><mo>∈</mo><mi>𝔊</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+から
+<math id="S3.p7.m8" class="ltx_Math" alttext="\bigcap_{F\in\mathfrak{F}}\mathrm{CL}_{Y}(F)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>F</mi><mo>∈</mo><mi>𝔉</mi></mrow></msub><mrow><msub><mi>CL</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．
+これで
+<math id="S3.p7.m9" class="ltx_Math" alttext="\mathbf{V}" display="inline"><mi>𝐕</mi></math>
+が完備列であることがわかった．
+∎</p>
+</div>
+</div>
+</section>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">参考文献</h2>
+
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">参考にしたウェブページ</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bibx1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[数物レジュメ]</span>
+<span class="ltx_bibblock">
+湯地 智紀,
+数物セミナー春の大談話会 in 京大 のレジュメ
+「Lindelöf空間の深淵」
+<pre class="ltx_verbatim ltx_font_typewriter">http://physmathseminar.web.fc2.com/
+discourse/2016/spring/kyoto-sp_abst/abst_yuji.pdf
+</pre>
+
+</span>
+</li>
+<li id="bib.bibx2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[電波通信１]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信の記事
+「Baire 空間の話」
+https://concious4410.hatenablog.com/entry/2023/07/12/213338
+
+</span>
+</li>
+<li id="bib.bibx3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[電波通信2]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信の記事
+「ハウスドルフ空間の中で稠密な局所コンパクト部分集合が開集合であること」
+https://concious4410.hatenablog.com/entry/2016/06/12/175658
+
+</span>
+</li>
+</ul>
+</section>
+<section id="biba" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">一般の参考文献</h2>
+
+<ul id="biba.L1" class="ltx_biblist">
+<li id="biba.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Frolík</span><span class="ltx_text ltx_bib_year"> (1960)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Generalizations of the <math id="bib.bib4.m1a" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>-property of complete metric spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Czechoslovak Math. J.</span> <span class="ltx_text ltx_bib_volume">10(85)</span>, <span class="ltx_text ltx_bib_pages"> pp. 359–379</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://dml.cz/dmlcz/100420</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0011-4642</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=116305" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. R. Isbell)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p3" title="ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_title">ベールの範疇定理</span></a>.
+</span>
+</li>
+<li id="biba.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Frolík</span><span class="ltx_text ltx_bib_year"> (1961)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Baire spaces and some generalizations of complete metric spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Czechoslovak Math. J.</span> <span class="ltx_text ltx_bib_volume">11(86)</span>, <span class="ltx_text ltx_bib_pages"> pp. 237–248</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://dml.cz/dmlcz/100457</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0011-4642</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=124870" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. R. Isbell)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p3" title="ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_title">ベールの範疇定理</span></a>.
+</span>
+</li>
+<li id="biba.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Frolík</span><span class="ltx_text ltx_bib_year"> (1961)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Invariance of <math id="bib.bib2.m1a" class="ltx_Math" alttext="G_{\delta}" display="inline"><msub><mi>G</mi><mi>δ</mi></msub></math>-spaces under mappings</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Czechoslovak Math. J.</span> <span class="ltx_text ltx_bib_volume">11(86)</span>, <span class="ltx_text ltx_bib_pages"> pp. 258–261</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://dml.cz/dmlcz/100459</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0011-4642</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=126251" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. R. Isbell)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p3" title="ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_title">ベールの範疇定理</span></a>.
+</span>
+</li>
+<li id="biba.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">E. Michael</span><span class="ltx_text ltx_bib_year"> (1986)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A note on completely metrizable spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">96</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 513–522</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2046606" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2046606" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=822451" title="" class="ltx_ref mr ltx_bib_external">MathReview (H. H. Wicke)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p3" title="ベールの範疇定理" class="ltx_ref"><span class="ltx_text ltx_ref_title">ベールの範疇定理</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p3" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:37:38 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

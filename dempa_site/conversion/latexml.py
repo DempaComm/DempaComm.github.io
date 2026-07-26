@@ -8,7 +8,7 @@ import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 
 from dempa_site.dates import local_now_seconds
 from dempa_site.errors import PaperToolError
@@ -436,6 +436,29 @@ def configured_targets(
     return tuple(targets)
 
 
+def unconverted_tex_slugs(
+    papers: Iterable[tuple[Path, Paper]],
+) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]]:
+    """Return batch candidates, papers without TeX, and already converted papers."""
+    candidates = []
+    without_tex = []
+    already_converted = []
+    for manifest_path, paper in papers:
+        if paper.html_version is not None:
+            already_converted.append(paper.slug)
+            continue
+        try:
+            source = _tex_source(manifest_path.parent, paper)
+        except PaperToolError:
+            without_tex.append(paper.slug)
+            continue
+        if not source.is_file():
+            without_tex.append(paper.slug)
+            continue
+        candidates.append(paper.slug)
+    return tuple(candidates), tuple(without_tex), tuple(already_converted)
+
+
 def _tool_version(executable: str) -> str:
     result = subprocess.run(
         [executable, "--VERSION"],
@@ -454,6 +477,7 @@ def run_latexml_trial(
     output: Path,
     requested_slugs: Iterable[str] = (),
     timeout: int = 180,
+    progress: Callable[[int, int, dict], None] | None = None,
 ) -> dict:
     executable = shutil.which("latexmlc")
     if executable is None:
@@ -477,7 +501,7 @@ def run_latexml_trial(
     binding_files = _binding_files(root)
     binding_dir = binding_files[0].parent if binding_files else None
     results = []
-    for target in targets:
+    for position, target in enumerate(targets, start=1):
         target_dir = output / target.paper.slug
         target_dir.mkdir()
         destination = target_dir / "index.html"
@@ -691,6 +715,8 @@ def run_latexml_trial(
                 "error": error,
             }
         )
+        if progress is not None:
+            progress(position, len(targets), results[-1])
     report = {
         "schema_version": 2,
         "generated_at": conversion_time.isoformat(timespec="seconds"),

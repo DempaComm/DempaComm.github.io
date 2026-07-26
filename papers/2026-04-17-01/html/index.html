@@ -1,0 +1,1240 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>善良超フィルターの存在証明</title>
+<!--Generated on Sun Jul 26 16:40:28 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-04-17-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>善良超フィルターの存在証明のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../ultrafiltergood.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">
+善良超フィルターの存在証明
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では
+Kunen
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>の方法によって善良超フィルター(good ultrafilter)の存在を証明する．
+よくわかんないところは
+学士論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>
+を参考にした．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">善良超フィルターの存在証明といえば
+数学書「超積と超準解析」
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>に記述がある．
+しかしこの本
+が2026年現在
+入手困難で，
+善良超フィルターの存在が記述された日本語の文書も見かけないことからこの文書を書くことにした．
+とりあえず善良超フィルターの存在がわかれば
+飽和モデルの構成の難しい部分が解消できて，
+超準解析の部分は色々な本に記述があるので絶版本を
+無理して購入する必要がなくなるのではないかと思われなくもない．
+ところでこの本は国会図書館デジタルコレクションで閲覧可能であるらしい．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>準備: ケーニヒの補題</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">基数に関する
+Königの補題が必要になったので，急いで証明する．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">基数<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>によって添字づけられた
+基数の二つの族<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\{\kappa_{\alpha}\}_{\alpha&lt;\mu}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>κ</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub></math>
+と<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\{\lambda_{\alpha}\}_{\alpha&lt;\mu}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>λ</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub></math>
+は任意の<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\alpha&lt;\mu" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></math>について</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\kappa_{\alpha}&lt;\lambda_{\alpha}" display="block"><mrow><msub><mi>κ</mi><mi>α</mi></msub><mo>&lt;</mo><msub><mi>λ</mi><mi>α</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を満たすとする．
+このとき以下の不等式が成り立つ．</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\sum_{\alpha&lt;\mu}\kappa_{\alpha}&lt;\prod_{\alpha&lt;\mu}\lambda_{\alpha}." display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">∑</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></munder><msub><mi>κ</mi><mi>α</mi></msub></mrow><mo rspace="0.111em">&lt;</mo><mrow><munder><mo movablelimits="false">∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></munder><msub><mi>λ</mi><mi>α</mi></msub></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">二つの集合族
+<math id="S1.p2.m1" class="ltx_Math" alttext="\{K_{\alpha}\}_{\alpha&lt;\mu}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub></math>
+と
+<math id="S1.p2.m2" class="ltx_Math" alttext="\{L_{\alpha}\}_{\alpha&lt;\mu}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub></math>
+は
+<math id="S1.p2.m3" class="ltx_Math" alttext="\alpha&lt;\mu" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></math>
+について
+<math id="S1.p2.m4" class="ltx_Math" alttext="\mathrm{card}(K_{\alpha})=\kappa_{\alpha}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>κ</mi><mi>α</mi></msub></mrow></math>,
+<math id="S1.p2.m5" class="ltx_Math" alttext="\mathrm{card}(L_{\alpha})=\lambda_{\alpha}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>L</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>λ</mi><mi>α</mi></msub></mrow></math>,
+を満たし，
+そして<math id="S1.p2.m6" class="ltx_Math" alttext="\alpha\neq\beta" display="inline"><mrow><mi>α</mi><mo>≠</mo><mi>β</mi></mrow></math>の時
+<math id="S1.p2.m7" class="ltx_Math" alttext="K_{\alpha}\cap K_{\beta}=\emptyset" display="inline"><mrow><mrow><msub><mi>K</mi><mi>α</mi></msub><mo>∩</mo><msub><mi>K</mi><mi>β</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+と
+<math id="S1.p2.m8" class="ltx_Math" alttext="L_{\alpha}\cap L_{\beta}=\emptyset" display="inline"><mrow><mrow><msub><mi>L</mi><mi>α</mi></msub><mo>∩</mo><msub><mi>L</mi><mi>β</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たすとする．このような族は常に取ることが出来る．
+このとき
+<math id="S1.p2.m9" class="ltx_Math" alttext="\mathrm{card}\left(\coprod_{\alpha&lt;\mu}K_{\alpha}\right)=\sum_{\alpha&lt;\mu}%
+\kappa_{\alpha}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msub><mo lspace="0em">∐</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>K</mi><mi>α</mi></msub></mrow><mo>)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∑</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>κ</mi><mi>α</mi></msub></mrow></mrow></math>
+であり
+<math id="S1.p2.m10" class="ltx_Math" alttext="\mathrm{card}\left(\prod_{\alpha&lt;\mu}L_{\alpha}\right)=\prod_{\alpha&lt;\mu}L_{\alpha}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msub><mo lspace="0em">∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow><mo>)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></math>
+である．
+まず最初に
+<math id="S1.p2.m11" class="ltx_Math" alttext="\coprod_{\alpha&lt;\mu}K_{\alpha}" display="inline"><mrow><msub><mo>∐</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>K</mi><mi>α</mi></msub></mrow></math>
+から
+<math id="S1.p2.m12" class="ltx_Math" alttext="\prod_{\alpha&lt;\mu}L_{\alpha}" display="inline"><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></math>
+への単射を構成しよう．
+適当に各<math id="S1.p2.m13" class="ltx_Math" alttext="\alpha&lt;\mu" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></math>に対して
+単射<math id="S1.p2.m14" class="ltx_Math" alttext="f_{\alpha}\colon K_{\alpha}\to L_{\alpha}" display="inline"><mrow><msub><mi>f</mi><mi>α</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">→</mo><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></math>
+をとってくる．
+<math id="S1.p2.m15" class="ltx_Math" alttext="\kappa_{\alpha}&lt;\lambda_{\alpha}" display="inline"><mrow><msub><mi>κ</mi><mi>α</mi></msub><mo>&lt;</mo><msub><mi>λ</mi><mi>α</mi></msub></mrow></math>
+なので，
+<math id="S1.p2.m16" class="ltx_Math" alttext="f_{\alpha}" display="inline"><msub><mi>f</mi><mi>α</mi></msub></math>は絶対に全射ではない．
+よって<math id="S1.p2.m17" class="ltx_Math" alttext="f_{\alpha}" display="inline"><msub><mi>f</mi><mi>α</mi></msub></math>の像に含まれない元を一つとり
+<math id="S1.p2.m18" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>とする．
+このとき写像
+<math id="S1.p2.m19" class="ltx_Math" alttext="h\colon\coprod_{\alpha&lt;\mu}K_{\alpha}\to\prod_{\alpha&lt;\mu}L_{\alpha}" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.111em">:</mo><mrow><mrow><msub><mo>∐</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>K</mi><mi>α</mi></msub></mrow><mo rspace="0.111em" stretchy="false">→</mo><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></mrow></math>
+を
+<math id="S1.p2.m20" class="ltx_Math" alttext="x\in K_{\alpha}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>K</mi><mi>α</mi></msub></mrow></math>のとき
+<math id="S1.p2.m21" class="ltx_Math" alttext="h(x)" display="inline"><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>の第<math id="S1.p2.m22" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>成分が<math id="S1.p2.m23" class="ltx_Math" alttext="f_{\alpha}(x)" display="inline"><mrow><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+でそれ以外の<math id="S1.p2.m24" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>成分は<math id="S1.p2.m25" class="ltx_Math" alttext="p_{\beta}" display="inline"><msub><mi>p</mi><mi>β</mi></msub></math>
+となるように定義する．
+この<math id="S1.p2.m26" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>が単射となることを見よう．
+<math id="S1.p2.m27" class="ltx_Math" alttext="f_{\alpha}" display="inline"><msub><mi>f</mi><mi>α</mi></msub></math>の単射性から各<math id="S1.p2.m28" class="ltx_Math" alttext="K_{\alpha}" display="inline"><msub><mi>K</mi><mi>α</mi></msub></math>上では
+単射である．<math id="S1.p2.m29" class="ltx_Math" alttext="\alpha\neq\beta" display="inline"><mrow><mi>α</mi><mo>≠</mo><mi>β</mi></mrow></math>で<math id="S1.p2.m30" class="ltx_Math" alttext="x\in K_{\alpha}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>K</mi><mi>α</mi></msub></mrow></math>かつ<math id="S1.p2.m31" class="ltx_Math" alttext="y\in K_{\beta}" display="inline"><mrow><mi>y</mi><mo>∈</mo><msub><mi>K</mi><mi>β</mi></msub></mrow></math>のときには
+<math id="S1.p2.m32" class="ltx_Math" alttext="h(x)" display="inline"><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>の第<math id="S1.p2.m33" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>成分は<math id="S1.p2.m34" class="ltx_Math" alttext="f_{\alpha}(x)" display="inline"><mrow><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+であり，
+<math id="S1.p2.m35" class="ltx_Math" alttext="h(y)" display="inline"><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>のそれは<math id="S1.p2.m36" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>である．
+<math id="S1.p2.m37" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>は<math id="S1.p2.m38" class="ltx_Math" alttext="f_{\alpha}" display="inline"><msub><mi>f</mi><mi>α</mi></msub></math>の像には含まれないから
+<math id="S1.p2.m39" class="ltx_Math" alttext="f_{\alpha}(x)\neq p_{\alpha}" display="inline"><mrow><mrow><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><msub><mi>p</mi><mi>α</mi></msub></mrow></math>
+であるから
+<math id="S1.p2.m40" class="ltx_Math" alttext="h(x)\neq h(y)" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+である．
+以上で<math id="S1.p2.m41" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>が単射であることがわかった．
+つまり
+<math id="S1.p2.m42" class="ltx_Math" alttext="\sum_{\alpha&lt;\mu}\kappa_{\alpha}\leq\prod_{\alpha&lt;\mu}\lambda_{\alpha}" display="inline"><mrow><mrow><msub><mo>∑</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>κ</mi><mi>α</mi></msub></mrow><mo rspace="0.111em">≤</mo><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>λ</mi><mi>α</mi></msub></mrow></mrow></math>がわかった．
+次にこれが真の不等式になることを示す．
+そのために任意の
+写像<math id="S1.p2.m43" class="ltx_Math" alttext="f\colon\coprod_{\alpha&lt;\mu}K_{\alpha}\to\prod_{\alpha&lt;\mu}L_{\alpha}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.111em">:</mo><mrow><mrow><msub><mo>∐</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>K</mi><mi>α</mi></msub></mrow><mo rspace="0.111em" stretchy="false">→</mo><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></mrow></math>
+が全射ではないことを示せば良い．
+写像<math id="S1.p2.m44" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を成分表示して
+<math id="S1.p2.m45" class="ltx_Math" alttext="f=(f_{\alpha})_{\alpha&lt;\mu}" display="inline"><mrow><mi>f</mi><mo>=</mo><msub><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub></mrow></math>
+とする．
+このとき<math id="S1.p2.m46" class="ltx_Math" alttext="\kappa_{\alpha}&lt;\lambda_{\alpha}" display="inline"><mrow><msub><mi>κ</mi><mi>α</mi></msub><mo>&lt;</mo><msub><mi>λ</mi><mi>α</mi></msub></mrow></math>
+なので写像
+<math id="S1.p2.m47" class="ltx_Math" alttext="f_{\alpha}|_{K_{\alpha}}\colon K_{\alpha}\to L_{\alpha}" display="inline"><mrow><msub><mrow><msub><mi>f</mi><mi>α</mi></msub><mo stretchy="false">|</mo></mrow><msub><mi>K</mi><mi>α</mi></msub></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">→</mo><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></math>
+は全射ではないので
+これの像に含まれない元<math id="S1.p2.m48" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>を取ることが出来る．
+そして点<math id="S1.p2.m49" class="ltx_Math" alttext="p\in\prod_{\alpha&lt;\mu}L_{\alpha}" display="inline"><mrow><mi>p</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>∏</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></msub><msub><mi>L</mi><mi>α</mi></msub></mrow></mrow></math>
+を第<math id="S1.p2.m50" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>成分が<math id="S1.p2.m51" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>となる点とする．
+今から<math id="S1.p2.m52" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が<math id="S1.p2.m53" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の像に含まれないことを証明しよう．
+そのためには任意の<math id="S1.p2.m54" class="ltx_Math" alttext="\alpha&lt;\mu" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mi>μ</mi></mrow></math>について
+<math id="S1.p2.m55" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が<math id="S1.p2.m56" class="ltx_Math" alttext="f(K_{\alpha})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>に属していないことを示せば良い．
+なんとなれば<math id="S1.p2.m57" class="ltx_Math" alttext="f(K_{\alpha})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>の<math id="S1.p2.m58" class="ltx_Math" alttext="L_{\alpha}" display="inline"><msub><mi>L</mi><mi>α</mi></msub></math>への射影は
+<math id="S1.p2.m59" class="ltx_Math" alttext="f_{\alpha}|_{K_{\alpha}}" display="inline"><msub><mrow><msub><mi>f</mi><mi>α</mi></msub><mo stretchy="false">|</mo></mrow><msub><mi>K</mi><mi>α</mi></msub></msub></math>の像であるから
+<math id="S1.p2.m60" class="ltx_Math" alttext="p_{\alpha}" display="inline"><msub><mi>p</mi><mi>α</mi></msub></math>はこれに含まれない．
+よって<math id="S1.p2.m61" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>は<math id="S1.p2.m62" class="ltx_Math" alttext="f(K_{\alpha})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+に含まれない．
+これで<math id="S1.p2.m63" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が絶対に全射ではないことがわかった．
+つまり目的の不等式が成り立つ．
+∎</p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">基数<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>について
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\kappa&lt;\kappa^{cf(\kappa)}" display="inline"><mrow><mi>κ</mi><mo>&lt;</mo><msup><mi>κ</mi><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow></mrow></msup></mrow></math>
+が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">列
+<math id="S1.p3.m1" class="ltx_Math" alttext="\{\theta_{\alpha}\}_{\alpha&lt;cf(\kappa)}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>θ</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></math>
+を<math id="S1.p3.m2" class="ltx_Math" alttext="\sup_{\alpha&lt;cf(\kappa)}\theta_{\alpha}=\kappa" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><msub><mi>θ</mi><mi>α</mi></msub></mrow><mo>=</mo><mi>κ</mi></mrow></math>かつ
+<math id="S1.p3.m3" class="ltx_Math" alttext="\theta_{\alpha}&lt;\kappa" display="inline"><mrow><msub><mi>θ</mi><mi>α</mi></msub><mo>&lt;</mo><mi>κ</mi></mrow></math>を満たすものとしてとってくる．
+定数列<math id="S1.p3.m4" class="ltx_Math" alttext="\{\kappa\}_{\alpha&lt;cf(\kappa)}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mi>κ</mi><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></math>
+と上記の列に対して定理<a href="#Thmthm1" title="定理 1. ‣ 1 準備: ケーニヒの補題 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>
+を適応すると
+<math id="S1.p3.m5" class="ltx_Math" alttext="\kappa&lt;\kappa^{cf(\kappa)}" display="inline"><mrow><mi>κ</mi><mo>&lt;</mo><msup><mi>κ</mi><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow></mrow></msup></mrow></math>
+を得る．
+∎</p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">基数<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>について
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\kappa&lt;cf(2^{\kappa})" display="inline"><mrow><mi>κ</mi><mo>&lt;</mo><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">もしも<math id="S1.p4.m1" class="ltx_Math" alttext="cf(2^{\kappa})\leq\kappa" display="inline"><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>κ</mi></mrow></math>だとすると</p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\displaystyle(2^{\kappa})^{cf(2^{\kappa})}\leq(2^{\kappa})^{\kappa}=2^{\kappa%
+\times\kappa}=2^{\kappa}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow></mrow></msup><mo>≤</mo><msup><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow><mi>κ</mi></msup><mo>=</mo><msup><mn>2</mn><mrow><mi>κ</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>κ</mi></mrow></msup><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となり
+系<a href="#Thmthm2" title="系 2. ‣ 1 準備: ケーニヒの補題 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+に矛盾する．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>本文</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">フィルターの定義は省略する．
+特に断りのない限り，
+フィルターといえば真のフィルターとする．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p"><math id="S2.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を集合とするとき
+<math id="S2.p2.m2" class="ltx_Math" alttext="[X]^{&lt;\omega_{0}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></math>
+で<math id="S2.p2.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の有限部分集合全体の集合を表すとする．
+そして
+<math id="S2.p2.m4" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+で<math id="S2.p2.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の冪集合を表すとする．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold"> </span>(単調写像, 準同型)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とする．
+写像<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="p\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+が単調であるとは
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="a,b\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+についてもしも
+<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="a\subset b" display="inline"><mrow><mi>a</mi><mo>⊂</mo><mi>b</mi></mrow></math>ならば
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="p(b)\subset p(a)" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となるときにいう．
+そして<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="h\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+が準同型であるとは
+任意の<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="a,b\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+について
+<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="h(a\cup b)=h(a)\cap h(b)" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>∪</mo><mi>b</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を満たすときにいう．
+準同型ならば単調であることに注意しよう．
+そして二つの写像
+<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="f,g\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+について<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="f\leq g" display="inline"><mrow><mi>f</mi><mo>≤</mo><mi>g</mi></mrow></math>とは
+任意の<math id="Thmthm4.p1.m11" class="ltx_Math" alttext="a\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>a</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>について
+<math id="Thmthm4.p1.m12" class="ltx_Math" alttext="f(a)\subset g(a)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold"> </span>(善良超フィルター(good ultrafilter))<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とし
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+をその上のフィルターとする．
+このとき<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が
+<span class="ltx_text ltx_font_bold">善良超フィルター(good ultrafilter)</span>
+であるとは
+任意の単調写像
+<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="p\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></mrow></math>
+について
+準同型写像<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="h\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></mrow></math>
+が存在して<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="h\leq p" display="inline"><mrow><mi>h</mi><mo>≤</mo><mi>p</mi></mrow></math>となることである．</span></p>
+</div>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">集合<math id="S2.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>, <math id="S2.p3.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>
+について
+<math id="S2.p3.m3" class="ltx_Math" alttext="\mathrm{Map}(X,Y)" display="inline"><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+で<math id="S2.p3.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から
+<math id="S2.p3.m5" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>への写像全体の集合を表すとする．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(large oscillation family)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とし
+<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+をその上の(<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>も含めた)フィルターとする．
+このとき<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="\mathrm{Map}(X,X)" display="inline"><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の部分集合
+<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+が<span class="ltx_text ltx_font_bold">large oscillation family mod <math id="Thmthm6.p1.m6" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math></span>
+であるとは
+有限個の任意の<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>の元<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="f_{1},\dots f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>f</mi><mi>m</mi></msub></mrow></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>と同じ個数の任意の有限個の<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の元
+<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="v_{1},\dots,v_{m}\in X" display="inline"><mrow><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi>X</mi></mrow></math>について</span></p>
+<table id="S2.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex4.m1" class="ltx_Math" alttext="X\setminus\{\,x\in X\mid\forall i\in\{1,\dots,m\}\ f_{i}(x)=v_{i}\,\}\not\in%
+\mathcal{F}" display="block"><mrow><mrow><mi>X</mi><mo>∖</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>∉</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである．</span></p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">Kunenの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>
+では上記概念はindependent set mod
+<math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+と名付けられている．
+論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>
+によれば<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>のプレプリントの段階では
+large oscillation family という名前が用いられていたらしく，
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>ではlarge oscillation family という名前が使われている．
+independent setはすでに他の名前に使われているというか
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>では三つくらい異なるindependent setの概念が出てくる(互いに関係があるが)のでややこしいから
+large oscillation family という名前の方がいいと思う．</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とし
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+をその上のフィルターとする．
+このとき<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\mathrm{Map}(X,X)" display="inline"><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の部分集合
+<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+が
+large oscillation family mod <math id="Thmthm7.p1.m5" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+であることと
+有限個の任意の<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>の元<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="f_{1},\dots f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>f</mi><mi>m</mi></msub></mrow></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>と同じ個数の任意の有限個の<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の元
+<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="v_{1},\dots,v_{m}\in X" display="inline"><mrow><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi>X</mi></mrow></math>,
+そして任意の<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="A\in\mathcal{F}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>について</span></p>
+<table id="S2.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex5.m1" class="ltx_Math" alttext="A\cap\{\,x\in X\mid\forall i\in\{1,\dots,m\}\ f_{i}(x)=v_{i}\,\}\neq\emptyset" display="block"><mrow><mrow><mi>A</mi><mo>∩</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p4.m1" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+がlarge oscillation family mod <math id="S2.p4.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>と仮定し，
+有限個の任意の<math id="S2.p4.m3" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>の元<math id="S2.p4.m4" class="ltx_Math" alttext="f_{1},\dots f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>f</mi><mi>m</mi></msub></mrow></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>と同じ個数の任意の有限個の<math id="S2.p4.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の元
+<math id="S2.p4.m6" class="ltx_Math" alttext="v_{1},\dots,v_{m}\in X" display="inline"><mrow><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi>X</mi></mrow></math>,
+そして任意の<math id="S2.p4.m7" class="ltx_Math" alttext="A\in\mathcal{F}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>をとってくる．
+ここで
+<math id="S2.p4.m8" class="ltx_Math" alttext="Z=\{\,x\in X\mid\forall i\in\{1,\dots,m\}\ f_{i}(x)=v_{i}\,\}" display="inline"><mrow><mi>Z</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とおく．
+すると</p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="X\setminus Z\not\in\mathcal{F}" display="block"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>∉</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+もしも<math id="S2.p4.m9" class="ltx_Math" alttext="Z\cap A=\emptyset" display="inline"><mrow><mrow><mi>Z</mi><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+だとすると
+<math id="S2.p4.m10" class="ltx_Math" alttext="A\subset X\setminus Z" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow></mrow></math>なので
+<math id="S2.p4.m11" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+がフィルターであることから
+<math id="S2.p4.m12" class="ltx_Math" alttext="X\setminus Z\in\mathcal{F}" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>
+が成り立ち矛盾する．
+よって<math id="S2.p4.m13" class="ltx_Math" alttext="Z\cap A\neq\emptyset" display="inline"><mrow><mrow><mi>Z</mi><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+であり，補題の条件が成り立つ．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">逆に補題の条件が成り立つとしよう．
+そして
+有限個の任意の<math id="S2.p5.m1" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>の元<math id="S2.p5.m2" class="ltx_Math" alttext="f_{1},\dots f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>f</mi><mi>m</mi></msub></mrow></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>と同じ個数の任意の有限個の<math id="S2.p5.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の元
+<math id="S2.p5.m4" class="ltx_Math" alttext="v_{1},\dots,v_{m}\in X" display="inline"><mrow><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi>X</mi></mrow></math>をとってくる．
+ここで
+<math id="S2.p5.m5" class="ltx_Math" alttext="Z=\{\,x\in X\mid\forall i\in\{1,\dots,m\}\ f_{i}(x)=v_{i}\,\}" display="inline"><mrow><mi>Z</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とおく．
+ここでもしも
+<math id="S2.p5.m6" class="ltx_Math" alttext="X\setminus Z\in\mathcal{F}" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>
+だとすると
+補題の条件から
+<math id="S2.p5.m7" class="ltx_Math" alttext="Z\cap(X\setminus Z)\neq\emptyset" display="inline"><mrow><mrow><mi>Z</mi><mo>∩</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+でなければならないが
+これはありえない．
+よって
+<math id="S2.p5.m8" class="ltx_Math" alttext="X\setminus Z\not\in\mathcal{F}" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>∉</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>
+である．
+つまり<math id="S2.p5.m9" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>は
+large oscillation family mod <math id="S2.p5.m10" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>である．
+∎</p>
+</div>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">さて以下の命題を考えるにあたって
+<math id="S2.p6.m1" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>は<math id="S2.p6.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上のフィルターであることに注意しよう．</p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math><span class="ltx_text ltx_font_italic">を基数とし
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を濃度<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>の集合とする．
+このとき
+large oscillation family mod <math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>
+となるような
+<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+であって
+<math id="Thmthm8.p1.m6" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S})=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathscript">𝒮</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+となるものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">集合<math id="S2.p7.m1" class="ltx_Math" alttext="K=\{\,(s,r)\mid s\in[X]^{&lt;\omega_{0}},r\in\mathrm{Map}(\mathcal{P}(s),X)\,\}" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>s</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow><mo>,</mo><mrow><mi>r</mi><mo>∈</mo><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mi>X</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+の濃度は<math id="S2.p7.m2" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>である．
+そこでこれを<math id="S2.p7.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>で添字づけして
+<math id="S2.p7.m4" class="ltx_Math" alttext="\{(s_{x},r_{x})\}_{x\in X}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">(</mo><msub><mi>s</mi><mi>x</mi></msub><mo>,</mo><msub><mi>r</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></msub></math>
+とする．
+そして
+各<math id="S2.p7.m5" class="ltx_Math" alttext="A\in\mathcal{P}(X)" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+について
+<math id="S2.p7.m6" class="ltx_Math" alttext="f_{A}\colon X\to X" display="inline"><mrow><msub><mi>f</mi><mi>A</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>
+を
+<math id="S2.p7.m7" class="ltx_Math" alttext="f_{A}(x)=r_{x}(A\cap s_{x})" display="inline"><mrow><mrow><msub><mi>f</mi><mi>A</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>r</mi><mi>x</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>s</mi><mi>x</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．
+このとき
+<math id="S2.p7.m8" class="ltx_Math" alttext="\mathscr{S}=\{f_{A}\}_{A\in\mathcal{P}(X)}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒮</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>A</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></math>
+が条件を満たすことを見よう．
+相異なる<math id="S2.p7.m9" class="ltx_Math" alttext="A_{1},\dots,A_{m}" display="inline"><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>A</mi><mi>m</mi></msub></mrow></math>
+と<math id="S2.p7.m10" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の元<math id="S2.p7.m11" class="ltx_Math" alttext="v_{1},\dots,v_{m}" display="inline"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow></math>
+を任意にとってくる．
+このとき
+<math id="S2.p7.m12" class="ltx_Math" alttext="A_{1},\dots,A_{m}" display="inline"><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>A</mi><mi>m</mi></msub></mrow></math>は相異なるから
+有限集合<math id="S2.p7.m13" class="ltx_Math" alttext="t\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>t</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+が存在して
+<math id="S2.p7.m14" class="ltx_Math" alttext="A_{1}\cap t,\dots,A_{m}\cap t" display="inline"><mrow><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>∩</mo><mi>t</mi></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><msub><mi>A</mi><mi>m</mi></msub><mo>∩</mo><mi>t</mi></mrow></mrow></math>
+が相異なる．
+そして関数<math id="S2.p7.m15" class="ltx_Math" alttext="l\colon\mathcal{P}(t)\to X" display="inline"><mrow><mi>l</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>
+を<math id="S2.p7.m16" class="ltx_Math" alttext="l(A_{i}\cap t)=v_{i}" display="inline"><mrow><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>∩</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow></math>と定義する．
+これは<math id="S2.p7.m17" class="ltx_Math" alttext="A_{1}\cap t,\dots,A_{m}\cap t" display="inline"><mrow><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>∩</mo><mi>t</mi></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><msub><mi>A</mi><mi>m</mi></msub><mo>∩</mo><mi>t</mi></mrow></mrow></math>が相異なることから可能である．
+ここで<math id="S2.p7.m18" class="ltx_Math" alttext="Z=\{\,x\in X\mid\forall i\in\{1,\dots,m\}\ f_{A_{i}}=v_{i}\,\}" display="inline"><mrow><mi>Z</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><msub><mi>f</mi><msub><mi>A</mi><mi>i</mi></msub></msub></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+とする．
+そして<math id="S2.p7.m19" class="ltx_Math" alttext="(s_{a},r_{a})=(t,l)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>s</mi><mi>a</mi></msub><mo>,</mo><msub><mi>r</mi><mi>a</mi></msub><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+となる<math id="S2.p7.m20" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>をとってくると
+<math id="S2.p7.m21" class="ltx_Math" alttext="a\in Z" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>Z</mi></mrow></math>
+なので
+<math id="S2.p7.m22" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>は空ではない．
+よって
+<math id="S2.p7.m23" class="ltx_Math" alttext="X\setminus Z\neq X" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>≠</mo><mi>X</mi></mrow></math>
+であるから
+<math id="S2.p7.m24" class="ltx_Math" alttext="X\setminus Z\not\in\{X\}" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>Z</mi></mrow><mo>∉</mo><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+なので
+族<math id="S2.p7.m25" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>は
+large oscillation family mod
+<math id="S2.p7.m26" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>
+である．
+また<math id="S2.p7.m27" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+は<math id="S2.p7.m28" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+で添字づけられており，この添字づけが単射であることが
+上の議論からわかるから
+<math id="S2.p7.m29" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S})=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathscript">𝒮</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とし
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+をその上のフィルター，
+そして
+<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+をlarge oscillation family mod <math id="Thmthm9.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+とし
+<math id="Thmthm9.p1.m5" class="ltx_Math" alttext="A\in\mathcal{P}(X)" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とする．
+このとき
+<math id="Thmthm9.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上のフィルター<math id="Thmthm9.p1.m7" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+と
+<math id="Thmthm9.p1.m8" class="ltx_Math" alttext="\mathscr{T}\subset\mathrm{Map}(X,X)" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>⊂</mo><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が存在して以下を満たす．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset\mathcal{G}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math><span class="ltx_text ltx_font_italic">
+はlarge oscillation family mod </span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="\mathscr{G}" display="inline"><mi class="ltx_font_mathscript">𝒢</mi></math><span class="ltx_text ltx_font_italic">
+であり，
+</span><math id="S2.I1.i2.p1.m3" class="ltx_Math" alttext="\mathscr{T}\subset\mathscr{S}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>⊂</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S2.I1.i2.p1.m4" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S}\setminus\mathscr{T})&lt;\aleph_{0}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi class="ltx_font_mathscript">𝒮</mi><mo>∖</mo><mi class="ltx_font_mathscript">𝒯</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic">
+を満たす．</span></p>
+</div>
+</li>
+<li id="S2.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i3.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">と</span><math id="S2.I1.i3.p1.m2" class="ltx_Math" alttext="X\setminus A" display="inline"><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow></math><span class="ltx_text ltx_font_italic">
+のどちらかは
+</span><math id="S2.I1.i3.p1.m3" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math><span class="ltx_text ltx_font_italic">
+に属する．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">場合わけで証明する．
+<math id="S2.p8.m1" class="ltx_Math" alttext="\mathcal{F}\cup\{A\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi>A</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+から生成される
+（<math id="S2.p8.m2" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>も含めた）フィルターを
+<math id="S2.p8.m3" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+とする．</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">最初に<math id="S2.p9.m1" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+がlarge oscillation family mod <math id="S2.p9.m2" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+である場合を考えよう．
+このとき
+<math id="S2.p9.m3" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>は真のフィルターであり
+<math id="S2.p9.m4" class="ltx_Math" alttext="A\in\mathcal{H}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℋ</mi></mrow></math>である．
+ここで<math id="S2.p9.m5" class="ltx_Math" alttext="\mathcal{G}=\mathcal{H}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>=</mo><mi class="ltx_font_mathcaligraphic">ℋ</mi></mrow></math>,
+<math id="S2.p9.m6" class="ltx_Math" alttext="\mathscr{T}=\mathscr{S}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>=</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>
+とおけば命題の条件をすべて満たす．</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">次に
+<math id="S2.p10.m1" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+がlarge oscillation family mod <math id="S2.p10.m2" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+でない場合を考えよう．
+すると補題<a href="#Thmthm7" title="補題 7. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>からある<math id="S2.p10.m3" class="ltx_Math" alttext="f_{1},\dots,f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>f</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>
+と<math id="S2.p10.m4" class="ltx_Math" alttext="v_{1},\dots,v_{m}" display="inline"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow></math>が存在し，
+さらに
+<math id="S2.p10.m5" class="ltx_Math" alttext="F\in\mathcal{F}" display="inline"><mrow><mi>F</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>が存在して</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="A\cap F\cap\{\,x\in X\mid\forall i\in\{1,\dots,m\}f_{i}(x)=v_{i}\,\}=\emptyset" display="block"><mrow><mrow><mi>A</mi><mo>∩</mo><mi>F</mi><mo>∩</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+ここで<math id="S2.p10.m6" class="ltx_Math" alttext="Z=\{\,x\in X\mid\forall i\in\{1,\dots,m\}f_{i}(x)=v_{i}\,\}" display="inline"><mrow><mi>Z</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とおこう．
+すると<math id="S2.p10.m7" class="ltx_Math" alttext="A\cap F\cap Z=\emptyset" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><mi>F</mi><mo>∩</mo><mi>Z</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+ここで<math id="S2.p10.m8" class="ltx_Math" alttext="\mathcal{F}\cup\{Z\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi>Z</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+から生成されるフィルターを
+<math id="S2.p10.m9" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+とする．このとき補題<a href="#Thmthm7" title="補題 7. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+から<math id="S2.p10.m10" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は真のフィルターになっている．
+そして<math id="S2.p10.m11" class="ltx_Math" alttext="A\cap F\cap Z=\emptyset" display="inline"><mrow><mrow><mi>A</mi><mo>∩</mo><mi>F</mi><mo>∩</mo><mi>Z</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+から
+<math id="S2.p10.m12" class="ltx_Math" alttext="F\cap Z\subset X\setminus A" display="inline"><mrow><mrow><mi>F</mi><mo>∩</mo><mi>Z</mi></mrow><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow></mrow></math>なので
+<math id="S2.p10.m13" class="ltx_Math" alttext="X\setminus A\in\mathcal{G}" display="inline"><mrow><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi></mrow></math>である．
+そして
+<math id="S2.p10.m14" class="ltx_Math" alttext="\mathscr{T}=\mathscr{S}\setminus\{f_{1},\dots,f_{m}\}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>=</mo><mrow><mi class="ltx_font_mathscript">𝒮</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>f</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+とする．
+この<math id="S2.p10.m15" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math>がlarge oscillation family mod
+<math id="S2.p10.m16" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>であることを見よう．
+<math id="S2.p10.m17" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math>から<math id="S2.p10.m18" class="ltx_Math" alttext="g_{1},\dots,g_{k}" display="inline"><mrow><msub><mi>g</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>g</mi><mi>k</mi></msub></mrow></math>
+と<math id="S2.p10.m19" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="S2.p10.m20" class="ltx_Math" alttext="u_{1},\dots,u_{k}" display="inline"><mrow><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>u</mi><mi>k</mi></msub></mrow></math>
+をとってくる．
+そして
+<math id="S2.p10.m21" class="ltx_Math" alttext="W=\{\,x\in X\mid\forall i\in\{1,\dots,k\}g_{i}(x)=u_{i}\,\}" display="inline"><mrow><mi>W</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>g</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>u</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+とする．
+このとき</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="W\cap Z=\{\,x\in X\mid\forall i\in\{1,\dots,m\}f_{i}(x)=v_{i}\text{かつ}\forall j%
+\in\{1,\dots,k\}g_{j}(x)=u_{j}\,\}" display="block"><mrow><mrow><mi>W</mi><mo>∩</mo><mi>Z</mi></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>⁢</mo><mtext>かつ</mtext><mo lspace="0.167em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>j</mi></mrow></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>g</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>u</mi><mi>j</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，<math id="S2.p10.m22" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>がlarge oscillation family mod
+<math id="S2.p10.m23" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>であることから
+補題<a href="#Thmthm7" title="補題 7. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+から
+任意の<math id="S2.p10.m24" class="ltx_Math" alttext="F\in\mathcal{F}" display="inline"><mrow><mi>F</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>
+から
+<math id="S2.p10.m25" class="ltx_Math" alttext="W\cap Z\cap F\neq\emptyset" display="inline"><mrow><mrow><mi>W</mi><mo>∩</mo><mi>Z</mi><mo>∩</mo><mi>F</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+これは
+<math id="S2.p10.m26" class="ltx_Math" alttext="W" display="inline"><mi>W</mi></math>が<math id="S2.p10.m27" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+の任意の元と交わりを持つということを示している．
+よって
+再び補題<a href="#Thmthm7" title="補題 7. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>から
+<math id="S2.p10.m28" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math>
+がlarge oscillation family
+mod <math id="S2.p10.m29" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+であることが従う．
+∎</p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を集合とし
+<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+をその上のフィルター，
+そして
+<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+をlarge oscillation family mod <math id="Thmthm10.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+とし
+<math id="Thmthm10.p1.m5" class="ltx_Math" alttext="p\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></mrow></math>
+を単調写像
+とする．
+このとき
+<math id="Thmthm10.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上のフィルター<math id="Thmthm10.p1.m7" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+と
+<math id="Thmthm10.p1.m8" class="ltx_Math" alttext="\mathscr{T}\subset\mathrm{Map}(X,X)" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>⊂</mo><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が存在して以下を満たす．</span></p>
+<ol id="S2.I2" class="ltx_enumerate">
+<li id="S2.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i1.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset\mathcal{G}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i2.p1.m1" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math><span class="ltx_text ltx_font_italic">
+はlarge oscillation family mod </span><math id="S2.I2.i2.p1.m2" class="ltx_Math" alttext="\mathscr{G}" display="inline"><mi class="ltx_font_mathscript">𝒢</mi></math><span class="ltx_text ltx_font_italic">
+であり，
+</span><math id="S2.I2.i2.p1.m3" class="ltx_Math" alttext="\mathscr{T}\subset\mathscr{S}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>⊂</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S2.I2.i2.p1.m4" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S}\setminus\mathscr{T})&lt;\aleph_{0}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi class="ltx_font_mathscript">𝒮</mi><mo>∖</mo><mi class="ltx_font_mathscript">𝒯</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic">
+を満たす．</span></p>
+</div>
+</li>
+<li id="S2.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">準同型</span><math id="S2.I2.i3.p1.m1" class="ltx_Math" alttext="h\colon[X]^{&lt;\omega_{0}}\to\mathcal{G}" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I2.i3.p1.m2" class="ltx_Math" alttext="h\leq p" display="inline"><mrow><mi>h</mi><mo>≤</mo><mi>p</mi></mrow></math><span class="ltx_text ltx_font_italic">
+を満たす．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">適当に<math id="S2.p11.m1" class="ltx_Math" alttext="g\in\mathscr{S}" display="inline"><mrow><mi>g</mi><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>
+をとってくる．
+そして
+<math id="S2.p11.m2" class="ltx_Math" alttext="\mathscr{T}=\mathscr{S}\setminus\{g\}" display="inline"><mrow><mi class="ltx_font_mathscript">𝒯</mi><mo>=</mo><mrow><mi class="ltx_font_mathscript">𝒮</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>g</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+とおく．
+そして
+各<math id="S2.p11.m3" class="ltx_Math" alttext="t\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>t</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+に対して
+<math id="S2.p11.m4" class="ltx_Math" alttext="q_{t}\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><msub><mi>q</mi><mi>t</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="q_{t}(s)=\begin{cases}\emptyset&amp;\textit{$s\not\subset t$}\\
+p(t)&amp;\textit{$s\subset t$}\end{cases}" display="block"><mrow><mrow><msub><mi>q</mi><mi>t</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi mathvariant="normal">∅</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>s</mi><mo>⊄</mo><mi>t</mi></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>s</mi><mo>⊂</mo><mi>t</mi></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+そして
+<math id="S2.p11.m5" class="ltx_Math" alttext="\{t_{x}\}_{x\in X}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></msub></math>
+を<math id="S2.p11.m6" class="ltx_Math" alttext="[X]^{&lt;\omega_{0}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></math>
+の添字づけとする．
+そして
+<math id="S2.p11.m7" class="ltx_Math" alttext="q\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="q(s)=\bigcup_{x\in X}\left(q_{t_{x}}(s)\cap g^{-1}(\{x\})\right)" display="block"><mrow><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false" rspace="0em">⋃</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo>(</mo><mrow><mrow><msub><mi>q</mi><msub><mi>t</mi><mi>x</mi></msub></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+さらに
+<math id="S2.p11.m8" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>を
+<math id="S2.p11.m9" class="ltx_Math" alttext="\mathcal{F}\cup\bigcup_{s\in[X]^{&lt;\omega_{0}}}q(s)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo rspace="0.055em">∪</mo><mrow><msub><mo>⋃</mo><mrow><mi>s</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></msub><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+から生成される
+(<math id="S2.p11.m10" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>を含めた)フィルターとする．
+まず<math id="S2.p11.m11" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>が準同型であることを見よう．
+任意に<math id="S2.p11.m12" class="ltx_Math" alttext="a,b\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+をとる．
+ここで
+一般に<math id="S2.p11.m13" class="ltx_Math" alttext="w\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>w</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>について</p>
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\displaystyle q(w)" display="inline"><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex11.m2" class="ltx_Math" alttext="\displaystyle=\bigcup_{x\in X}(q_{t_{x}}(w)\cap g^{-1}(x))=\bigcup_{x\in X,w%
+\subset t_{x}}(p(t_{x})\cap g^{-1}(x))" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><msub><mi>q</mi><msub><mi>t</mi><mi>x</mi></msub></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>w</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることに注意しよう．
+この観察のもと
+以下の式変形をする．</p>
+<table id="S2.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex12"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex12.m1" class="ltx_Math" alttext="\displaystyle q(a)\cap q(b)" display="inline"><mrow><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex12.m2" class="ltx_Math" alttext="\displaystyle=\left(\bigcup_{x\in X,a\subset t_{x}}(p(t_{x})\cap g^{-1}(x))%
+\right)\cap\left(\bigcup_{y\in X,b\subset t_{y}}(p(t_{y})\cap g^{-1}(y))\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow><mo>∩</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>b</mi><mo>⊂</mo><msub><mi>t</mi><mi>y</mi></msub></mrow></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>y</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex13"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\displaystyle=\bigcup_{x\in X,y\in X,a\subset t_{x},b\subset t_{y}}p(t_{x})%
+\cap g^{-1}(x)\cap p(t_{y})\cap g^{-1}(y)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>a</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow><mo>,</mo><mrow><mi>b</mi><mo>⊂</mo><msub><mi>t</mi><mi>y</mi></msub></mrow></mrow></mrow></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>y</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex14"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex14.m1" class="ltx_Math" alttext="\displaystyle=\bigcup_{x\in X,y\in X,a\subset t_{x},b\subset t_{y}}p(t_{x})%
+\cap p(t_{y})\cap g^{-1}(x)\cap g^{-1}(y)." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>a</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow><mo>,</mo><mrow><mi>b</mi><mo>⊂</mo><msub><mi>t</mi><mi>y</mi></msub></mrow></mrow></mrow></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∩</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>y</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで，<math id="S2.p11.m14" class="ltx_Math" alttext="x\neq y" display="inline"><mrow><mi>x</mi><mo>≠</mo><mi>y</mi></mrow></math>なら<math id="S2.p11.m15" class="ltx_Math" alttext="g^{-1}(x)\cap g^{-1}(y)=\emptyset" display="inline"><mrow><mrow><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>となるから</p>
+<table id="S2.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex15"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\displaystyle\bigcup_{x\in X,y\in X,a\subset t_{x},b\subset t_{y}}p(t_{x})\cap
+p%
+(t_{y})\cap g^{-1}(x)\cap g^{-1}(y)" display="inline"><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mrow><mi>a</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow><mo>,</mo><mrow><mi>b</mi><mo>⊂</mo><msub><mi>t</mi><mi>y</mi></msub></mrow></mrow></mrow></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∩</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>y</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex16.m1" class="ltx_Math" alttext="\displaystyle=\bigcup_{x\in Xa\subset t_{x},b\subset t_{x}}p(t_{x})\cap g^{-1}%
+(x)=\bigcup_{x\in Xa\cup b\subset t_{x}}p(t_{x})\cap g^{-1}(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mi>X</mi><mo>⁢</mo><mi>a</mi></mrow><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow><mo>,</mo><mrow><mi>b</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>x</mi><mo>∈</mo><mrow><mrow><mi>X</mi><mo>⁢</mo><mi>a</mi></mrow><mo>∪</mo><mi>b</mi></mrow><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex17"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex17.m1" class="ltx_Math" alttext="\displaystyle=q(a\cup b)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>∪</mo><mi>b</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるから
+<math id="S2.p11.m16" class="ltx_Math" alttext="q(a\cup b)=q(a)\cap q(b)" display="inline"><mrow><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>∪</mo><mi>b</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>となる．
+よって
+<math id="S2.p11.m17" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>が準同型であることがわかる．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p12.m1" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+が真のフィルターであることを見てみよう．
+写像<math id="S2.p12.m2" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>が準同型であることから
+任意の<math id="S2.p12.m3" class="ltx_Math" alttext="s\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>s</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+と
+任意の<math id="S2.p12.m4" class="ltx_Math" alttext="F\in\mathcal{F}" display="inline"><mrow><mi>F</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>について
+<math id="S2.p12.m5" class="ltx_Math" alttext="F\cap q(s)\neq\emptyset" display="inline"><mrow><mrow><mi>F</mi><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+であることを証明すれば良い．
+ここで<math id="S2.p12.m6" class="ltx_Math" alttext="t_{x}=s" display="inline"><mrow><msub><mi>t</mi><mi>x</mi></msub><mo>=</mo><mi>s</mi></mrow></math>となる<math id="S2.p12.m7" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+をとる．
+すると<math id="S2.p12.m8" class="ltx_Math" alttext="g\in\mathscr{S}" display="inline"><mrow><mi>g</mi><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>
+で<math id="S2.p12.m9" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+がlarge oscillation family mod <math id="S2.p12.m10" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+であることと<math id="S2.p12.m11" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の像が<math id="S2.p12.m12" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+であることから
+<math id="S2.p12.m13" class="ltx_Math" alttext="F\cap p(t_{x})\cap g^{-1}(x)\neq\emptyset" display="inline"><mrow><mrow><mi>F</mi><mo>∩</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．<math id="S2.p12.m14" class="ltx_Math" alttext="s=t_{x}" display="inline"><mrow><mi>s</mi><mo>=</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></math>なので
+<math id="S2.p12.m15" class="ltx_Math" alttext="p(t_{x})\cap g^{-1}(x)\subset q(s)" display="inline"><mrow><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+であり，
+<math id="S2.p12.m16" class="ltx_Math" alttext="F\cap q(s)\neq\emptyset" display="inline"><mrow><mrow><mi>F</mi><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を得る．
+これで<math id="S2.p12.m17" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+が真のフィルターであることがわかった．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">ここで
+<math id="S2.p13.m1" class="ltx_Math" alttext="q\leq p" display="inline"><mrow><mi>q</mi><mo>≤</mo><mi>p</mi></mrow></math>を証明しよう．任意の<math id="S2.p13.m2" class="ltx_Math" alttext="w\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>w</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>
+をとる．
+このとき</p>
+<table id="S2.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex18"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex18.m1" class="ltx_Math" alttext="\displaystyle q(w)" display="inline"><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex18.m2" class="ltx_Math" alttext="\displaystyle=\bigcup_{x\in X,w\subset t_{x}}(p(t_{x})\cap g^{-1}(x))" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>w</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+写像<math id="S2.p13.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>
+は単調であったので，
+<math id="S2.p13.m4" class="ltx_Math" alttext="w\subset t_{x}" display="inline"><mrow><mi>w</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></math>となる<math id="S2.p13.m5" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について
+<math id="S2.p13.m6" class="ltx_Math" alttext="p(t_{x})\subset p(w)" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+故に</p>
+<table id="S2.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex19"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex19.m1" class="ltx_Math" alttext="\displaystyle q(x)=\bigcup_{x\in X,w\subset t_{x}}(p(t_{x})\cap g^{-1}(x))%
+\subset\bigcup_{x\in X,w\subset t_{x}}p(t_{x})\subset p(w)" display="inline"><mrow><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>w</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo>,</mo><mrow><mi>w</mi><mo>⊂</mo><msub><mi>t</mi><mi>x</mi></msub></mrow></mrow></munder></mstyle><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので
+<math id="S2.p13.m7" class="ltx_Math" alttext="q\leq p" display="inline"><mrow><mi>q</mi><mo>≤</mo><mi>p</mi></mrow></math>
+が従う．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">最後に<math id="S2.p14.m1" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math>
+が
+large oscillation family mod <math id="S2.p14.m2" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>
+であることを証明しよう．
+任意の<math id="S2.p14.m3" class="ltx_Math" alttext="f_{1},\dots,f_{m}\in\mathscr{S}" display="inline"><mrow><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>f</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi class="ltx_font_mathscript">𝒮</mi></mrow></math>
+と<math id="S2.p14.m4" class="ltx_Math" alttext="v_{1},\dots,v_{m}\in X" display="inline"><mrow><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>v</mi><mi>m</mi></msub></mrow><mo>∈</mo><mi>X</mi></mrow></math>をとる．
+そして</p>
+<table id="S2.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex20.m1" class="ltx_Math" alttext="Z=\{\,z\in X\mid\forall i\in\{1,\dots,m\}f_{i}(z)=v_{i}\,\}" display="block"><mrow><mi>Z</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とおく．このとき任意の<math id="S2.p14.m5" class="ltx_Math" alttext="w\in[X]^{&lt;\omega_{0}}" display="inline"><mrow><mi>w</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></mrow></math>と
+任意の<math id="S2.p14.m6" class="ltx_Math" alttext="F\in\mathcal{F}" display="inline"><mrow><mi>F</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>
+をとる．そして
+<math id="S2.p14.m7" class="ltx_Math" alttext="t_{x}=w" display="inline"><mrow><msub><mi>t</mi><mi>x</mi></msub><mo>=</mo><mi>w</mi></mrow></math>となる<math id="S2.p14.m8" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>をとる．
+このとき<math id="S2.p14.m9" class="ltx_Math" alttext="\mathscr{S}" display="inline"><mi class="ltx_font_mathscript">𝒮</mi></math>
+がlarge oscillation family mod <math id="S2.p14.m10" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+であることと<math id="S2.p14.m11" class="ltx_Math" alttext="p(w)\in\mathcal{F}" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>であることから
+<math id="S2.p14.m12" class="ltx_Math" alttext="(F\cap p(w))\cap(Z\cap g^{-1}(x))\neq\emptyset" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>F</mi><mo>∩</mo><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mrow><mo stretchy="false">(</mo><mrow><mi>Z</mi><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+ここで<math id="S2.p14.m13" class="ltx_Math" alttext="p(w)\cap g^{-1}(x)=p(t_{x})\cap g^{-1}(x)\subset q(w)" display="inline"><mrow><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>x</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので
+<math id="S2.p14.m14" class="ltx_Math" alttext="(F\cap q(w))\cap Z\neq\emptyset" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>F</mi><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mi>Z</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+がわかる．
+フィルター<math id="S2.p14.m15" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は<math id="S2.p14.m16" class="ltx_Math" alttext="F\cap q(w)" display="inline"><mrow><mi>F</mi><mo>∩</mo><mrow><mi>q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>という形の集合から生成されるから
+<math id="S2.p14.m17" class="ltx_Math" alttext="\mathscr{T}" display="inline"><mi class="ltx_font_mathscript">𝒯</mi></math>が
+large oscillation family mod
+<math id="S2.p14.m18" class="ltx_Math" alttext="\mathscr{G}" display="inline"><mi class="ltx_font_mathscript">𝒢</mi></math>
+であることがわかる．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合
+<math id="Thmthm11.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+上のフィルター
+<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+が<span class="ltx_text ltx_font_bold">可算非完備</span>
+であるとは
+ある可算列<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="\{A_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が存在して
+<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="A_{n}\in\mathcal{F}" display="inline"><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>と
+<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="\bigcap_{n\in\mathbb{Z}_{\geq 0}}A_{n}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>A</mi><mi>n</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たすときにいう．</span></p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 12</span></span><span class="ltx_text ltx_font_bold"> </span>(Kunen)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm12.p1.m1" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math><span class="ltx_text ltx_font_italic">を無限基数とし
+<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を濃度が<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>
+であるような集合とする．
+このとき<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上に
+可算非完備な善良超フィルターが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p">冪集合<math id="S2.p15.m1" class="ltx_Math" alttext="\mathcal{P}(X)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>の濃度は<math id="S2.p15.m2" class="ltx_Math" alttext="2^{\kappa}" display="inline"><msup><mn>2</mn><mi>κ</mi></msup></math>
+であるから
+この集合を<math id="S2.p15.m3" class="ltx_Math" alttext="2^{\kappa}" display="inline"><msup><mn>2</mn><mi>κ</mi></msup></math>で全単射に添字づけして
+<math id="S2.p15.m4" class="ltx_Math" alttext="\{A_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+とする．
+そして
+<math id="S2.p15.m5" class="ltx_Math" alttext="\mathrm{card}([X]^{&lt;\omega_{0}})=\kappa" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>κ</mi></mrow></math>
+と<math id="S2.p15.m6" class="ltx_Math" alttext="\mathrm{card}(\mathcal{P}(X))=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+から
+<math id="S2.p15.m7" class="ltx_Math" alttext="\mathrm{Map}([X]^{&lt;\omega_{0}},\mathcal{P}(X))" display="inline"><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo>,</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+の濃度は<math id="S2.p15.m8" class="ltx_Math" alttext="(2^{\kappa})^{\kappa}=2^{\kappa\times\kappa}=2^{\kappa}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow><mi>κ</mi></msup><mo>=</mo><msup><mn>2</mn><mrow><mi>κ</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>κ</mi></mrow></msup><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+である．
+よって
+<math id="S2.p15.m9" class="ltx_Math" alttext="\mathrm{Map}([X]^{&lt;\omega_{0}},\mathcal{P}(X))" display="inline"><mrow><mi>Map</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo>,</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の部分集合である
+単調な写像全体を全射に添字づけしてそれを
+<math id="S2.p15.m10" class="ltx_Math" alttext="\{p_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+とする．
+ただしここで，各単調写像<math id="S2.p15.m11" class="ltx_Math" alttext="p\colon[X]^{&lt;\omega_{0}}\to\mathcal{P}(X)" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+について
+<math id="S2.p15.m12" class="ltx_Math" alttext="p=p_{\alpha}" display="inline"><mrow><mi>p</mi><mo>=</mo><msub><mi>p</mi><mi>α</mi></msub></mrow></math>となる<math id="S2.p15.m13" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>
+は<math id="S2.p15.m14" class="ltx_Math" alttext="2^{\kappa}" display="inline"><msup><mn>2</mn><mi>κ</mi></msup></math>個あるように添字づけする．
+これは<math id="S2.p15.m15" class="ltx_Math" alttext="2^{\kappa}\times 2^{\kappa}=2^{\kappa}" display="inline"><mrow><mrow><msup><mn>2</mn><mi>κ</mi></msup><mo lspace="0.222em" rspace="0.222em">×</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+であるから可能である．</p>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p">今から超限再帰によって以下のような
+列<math id="S2.p16.m1" class="ltx_Math" alttext="\{\mathcal{F}_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+と<math id="S2.p16.m2" class="ltx_Math" alttext="\{\mathscr{S}_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+を構成する．</p>
+<ol id="S2.I3" class="ltx_enumerate">
+<li id="S2.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K1)</span> 
+<div id="S2.I3.i1.p1" class="ltx_para">
+<p class="ltx_p">各<math id="S2.I3.i1.p1.m1" class="ltx_Math" alttext="\alpha&lt;2^{\kappa}" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+について
+<math id="S2.I3.i1.p1.m2" class="ltx_Math" alttext="\mathcal{F}_{\alpha}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></math>
+は<math id="S2.I3.i1.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の真のフィルターであり
+<math id="S2.I3.i1.p1.m4" class="ltx_Math" alttext="\mathscr{S}_{\alpha}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub></math>
+はlarge oscillation family mod
+<math id="S2.I3.i1.p1.m5" class="ltx_Math" alttext="\mathcal{F}_{\alpha}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></math>
+である．</p>
+</div>
+</li>
+<li id="S2.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K2)</span> 
+<div id="S2.I3.i2.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I3.i2.p1.m1" class="ltx_Math" alttext="\alpha&lt;2^{\kappa}" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+について
+<math id="S2.I3.i2.p1.m2" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S}_{\alpha})=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+である．</p>
+</div>
+</li>
+<li id="S2.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K3)</span> 
+<div id="S2.I3.i3.p1" class="ltx_para">
+<p class="ltx_p">もしも
+<math id="S2.I3.i3.p1.m1" class="ltx_Math" alttext="\gamma&lt;2^{\kappa}" display="inline"><mrow><mi>γ</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+が極限順序数であるときには
+<math id="S2.I3.i3.p1.m2" class="ltx_Math" alttext="\mathcal{F}_{\gamma}=\bigcup_{\alpha&lt;\gamma}\mathcal{F}_{\alpha}" display="inline"><mrow><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>γ</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>γ</mi></mrow></msub><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></mrow></mrow></math>
+と
+<math id="S2.I3.i3.p1.m3" class="ltx_Math" alttext="\mathscr{S}_{\gamma}=\bigcap_{\alpha&lt;\gamma}\mathscr{S}_{\alpha}" display="inline"><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>γ</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋂</mo><mrow><mi>α</mi><mo>&lt;</mo><mi>γ</mi></mrow></msub><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub></mrow></mrow></math>
+が成り立つ．</p>
+</div>
+</li>
+<li id="S2.I3.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K4)</span> 
+<div id="S2.I3.i4.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I3.i4.p1.m1" class="ltx_Math" alttext="\alpha&lt;2^{\kappa}" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>について
+<math id="S2.I3.i4.p1.m2" class="ltx_Math" alttext="\mathscr{S}_{\alpha}\setminus\mathscr{S}_{\alpha+1}" display="inline"><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub><mo>∖</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mi>α</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+は有限集合である．</p>
+</div>
+</li>
+<li id="S2.I3.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K5)</span> 
+<div id="S2.I3.i5.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i5.p1.m1" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>
+は可算非完備である．</p>
+</div>
+</li>
+<li id="S2.I3.i6" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K6)</span> 
+<div id="S2.I3.i6.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I3.i6.p1.m1" class="ltx_Math" alttext="\alpha&lt;2^{\kappa}" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+について
+<math id="S2.I3.i6.p1.m2" class="ltx_Math" alttext="A_{\alpha}" display="inline"><msub><mi>A</mi><mi>α</mi></msub></math>か<math id="S2.I3.i6.p1.m3" class="ltx_Math" alttext="X\setminus A_{\alpha}" display="inline"><mrow><mi>X</mi><mo>∖</mo><msub><mi>A</mi><mi>α</mi></msub></mrow></math>
+のいずれか一方は
+<math id="S2.I3.i6.p1.m4" class="ltx_Math" alttext="\mathcal{F}_{\alpha+1}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mrow><mi>α</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+に属する．</p>
+</div>
+</li>
+<li id="S2.I3.i7" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K7)</span> 
+<div id="S2.I3.i7.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.I3.i7.p1.m1" class="ltx_Math" alttext="\alpha&lt;2^{\kappa}" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+について
+<math id="S2.I3.i7.p1.m2" class="ltx_Math" alttext="p_{\alpha}\colon[\to]^{&lt;\omega_{0}}\mathcal{P}(X)" display="inline"><mrow><msub><mi>p</mi><mi>α</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が
+<math id="S2.I3.i7.p1.m3" class="ltx_Math" alttext="p_{\alpha}([X]^{&lt;\omega_{0}})\subset\mathcal{F}_{\alpha}" display="inline"><mrow><mrow><msub><mi>p</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></mrow></math>を満たすとき準同型
+<math id="S2.I3.i7.p1.m4" class="ltx_Math" alttext="q\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}_{\alpha+1}" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mrow><mi>α</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+が存在して
+<math id="S2.I3.i7.p1.m5" class="ltx_Math" alttext="q\leq p_{\alpha}" display="inline"><mrow><mi>q</mi><mo>≤</mo><msub><mi>p</mi><mi>α</mi></msub></mrow></math>
+を満たす．</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">まず
+<math id="S2.p16.m3" class="ltx_Math" alttext="\mathscr{S}_{0}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mn>0</mn></msub></math>と
+<math id="S2.p16.m4" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>
+の構成をしよう．
+命題
+<a href="#Thmthm8" title="命題 8. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>
+で保証されるlarge oscillation family mod <math id="S2.p16.m5" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>
+を<math id="S2.p16.m6" class="ltx_Math" alttext="\mathscr{S}_{-1}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub></math>
+とする．
+そして
+<math id="S2.p16.m7" class="ltx_Math" alttext="f\in\mathscr{S}_{-1}" display="inline"><mrow><mi>f</mi><mo>∈</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub></mrow></math>
+をとる．そして
+<math id="S2.p16.m8" class="ltx_Math" alttext="\mathscr{S}_{0}=\mathscr{S}_{-1}\setminus\{f\}" display="inline"><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mn>0</mn></msub><mo>=</mo><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>f</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+とする．ここで
+<math id="S2.p16.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の空でない部分集合の可算族<math id="S2.p16.m10" class="ltx_Math" alttext="\{J_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>J</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+であって,
+<math id="S2.p16.m11" class="ltx_Math" alttext="J_{n}\neq X" display="inline"><mrow><msub><mi>J</mi><mi>n</mi></msub><mo>≠</mo><mi>X</mi></mrow></math>,
+<math id="S2.p16.m12" class="ltx_Math" alttext="J_{n+1}\subset J_{n}" display="inline"><mrow><msub><mi>J</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⊂</mo><msub><mi>J</mi><mi>n</mi></msub></mrow></math>かつ
+<math id="S2.p16.m13" class="ltx_Math" alttext="\bigcap_{n\in\mathbb{Z}_{\geq 0}}J_{n}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><msub><mi>J</mi><mi>n</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるものをとり
+<math id="S2.p16.m14" class="ltx_Math" alttext="\{f^{-1}(J_{n})\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>J</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>から生成されるフィルターを
+<math id="S2.p16.m15" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>とする．このとき<math id="S2.p16.m16" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>
+はもちろん可算非完備である．
+族<math id="S2.p16.m17" class="ltx_Math" alttext="\mathscr{S}_{-1}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub></math>が
+large oscillation family mod <math id="S2.p16.m18" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>であることから
+<math id="S2.p16.m19" class="ltx_Math" alttext="\mathscr{S}_{0}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mn>0</mn></msub></math>がlarge oscillation family mod
+<math id="S2.p16.m20" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>であることがわかる．
+すると
+命題<a href="#Thmthm9" title="命題 9. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>
+と命題<a href="#Thmthm10" title="命題 10. ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>
+から上記の性質を満たす
+<math id="S2.p16.m21" class="ltx_Math" alttext="\{\mathcal{F}_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+と<math id="S2.p16.m22" class="ltx_Math" alttext="\{\mathscr{S}_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+が構成できる．
+このとき</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="\mathcal{F}=\bigcup_{\alpha&lt;2^{\kappa}}\mathcal{F}_{\alpha}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></munder><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+各<math id="S2.p16.m23" class="ltx_Math" alttext="\mathcal{F}_{\alpha}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>α</mi></msub></math>
+が真のフィルターなのでそのいずれも<math id="S2.p16.m24" class="ltx_Math" alttext="\emptyset" display="inline"><mi mathvariant="normal">∅</mi></math>
+を含んでいない．
+よって<math id="S2.p16.m25" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>も<math id="S2.p16.m26" class="ltx_Math" alttext="\emptyset" display="inline"><mi mathvariant="normal">∅</mi></math>を含んでおらず
+これが真のフィルターであることがわかる．
+条件<a href="#S2.I3.i6" title="item (K6) ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K6)</span></a>から
+任意の<math id="S2.p16.m27" class="ltx_Math" alttext="A\in\mathcal{P}(X)" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+について
+<math id="S2.p16.m28" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と<math id="S2.p16.m29" class="ltx_Math" alttext="X\setminus A" display="inline"><mrow><mi>X</mi><mo>∖</mo><mi>A</mi></mrow></math>
+のいずれか一方は
+<math id="S2.p16.m30" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>に属するので
+<math id="S2.p16.m31" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は超フィルターである．
+また<math id="S2.p16.m32" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>が可算非完備であるから
+<math id="S2.p16.m33" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>もそうである．
+このフィルター<math id="S2.p16.m34" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+が善良であることを示すために
+任意の<math id="S2.p16.m35" class="ltx_Math" alttext="p\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></mrow></math>
+を考える．
+系<a href="#Thmthm3" title="系 3. ‣ 1 準備: ケーニヒの補題 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>から<math id="S2.p16.m36" class="ltx_Math" alttext="\kappa&lt;cf(2^{\kappa})" display="inline"><mrow><mi>κ</mi><mo>&lt;</mo><mrow><mi>c</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>κ</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+であり
+<math id="S2.p16.m37" class="ltx_Math" alttext="[X]^{&lt;\omega_{0}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup></math>の濃度は<math id="S2.p16.m38" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>
+なので
+<math id="S2.p16.m39" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の定義から
+<math id="S2.p16.m40" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の像は十分大きい番号<math id="S2.p16.m41" class="ltx_Math" alttext="\beta&lt;2^{\kappa}" display="inline"><mrow><mi>β</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>を持つ
+<math id="S2.p16.m42" class="ltx_Math" alttext="\mathcal{F}_{\beta}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>β</mi></msub></math>に含まれる．
+添字づけ<math id="S2.p16.m43" class="ltx_Math" alttext="\{p_{\alpha}\}_{\alpha&lt;2^{\kappa}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></msub></math>
+はダブりが<math id="S2.p16.m44" class="ltx_Math" alttext="2^{\kappa}" display="inline"><msup><mn>2</mn><mi>κ</mi></msup></math>回起こるようにとったので
+十分大きい<math id="S2.p16.m45" class="ltx_Math" alttext="\beta&lt;\gamma" display="inline"><mrow><mi>β</mi><mo>&lt;</mo><mi>γ</mi></mrow></math>となる<math id="S2.p16.m46" class="ltx_Math" alttext="\gamma&lt;2^{\kappa}" display="inline"><mrow><mi>γ</mi><mo>&lt;</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+について<math id="S2.p16.m47" class="ltx_Math" alttext="p=p_{\gamma}" display="inline"><mrow><mi>p</mi><mo>=</mo><msub><mi>p</mi><mi>γ</mi></msub></mrow></math>となる．
+すると<math id="S2.p16.m48" class="ltx_Math" alttext="p_{\gamma}" display="inline"><msub><mi>p</mi><mi>γ</mi></msub></math>は単調写像<math id="S2.p16.m49" class="ltx_Math" alttext="p_{\gamma}\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}_{\gamma}" display="inline"><mrow><msub><mi>p</mi><mi>γ</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>γ</mi></msub></mrow></mrow></math>
+となるので，
+条件<a href="#S2.I3.i7" title="item (K7) ‣ 2 本文 ‣ 善良超フィルターの存在証明" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K7)</span></a>から
+準同型<math id="S2.p16.m50" class="ltx_Math" alttext="q\colon[X]^{&lt;\omega_{0}}\to\mathcal{F}_{\gamma+1}" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></msup><mo stretchy="false">→</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mrow><mi>γ</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+が存在し<math id="S2.p16.m51" class="ltx_Math" alttext="q\leq p" display="inline"><mrow><mi>q</mi><mo>≤</mo><mi>p</mi></mrow></math>を満たす．
+よって<math id="S2.p16.m52" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が善良であることがわかる．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">上記の証明において<math id="Thmrmkx2.p1.m1" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>
+の定義をうまく変えることによって
+<math id="Thmrmkx2.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の善良超フィルター全体の濃度が
+<math id="Thmrmkx2.p1.m3" class="ltx_Math" alttext="2^{2^{\kappa}}" display="inline"><msup><mn>2</mn><msup><mn>2</mn><mi>κ</mi></msup></msup></math>となることがわかる．
+今からそれを見よう．
+記号は流用する．
+部分族
+<math id="Thmrmkx2.p1.m4" class="ltx_Math" alttext="\Theta\subset\mathscr{S}_{-1}" display="inline"><mrow><mi mathvariant="normal">Θ</mi><mo>⊂</mo><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub></mrow></math>
+で
+<math id="Thmrmkx2.p1.m5" class="ltx_Math" alttext="\mathrm{card}(\Theta)=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>
+かつ<math id="Thmrmkx2.p1.m6" class="ltx_Math" alttext="\mathrm{card}(\mathscr{S}_{-1}\setminus\Theta)=2^{\kappa}" display="inline"><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>∖</mo><mi mathvariant="normal">Θ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>となるものと
+<math id="Thmrmkx2.p1.m7" class="ltx_Math" alttext="\theta\in\mathscr{S}_{-1}\setminus\Theta" display="inline"><mrow><mi>θ</mi><mo>∈</mo><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>∖</mo><mi mathvariant="normal">Θ</mi></mrow></mrow></math>を
+任意にとって固定する．
+ところでこのような<math id="Thmrmkx2.p1.m8" class="ltx_Math" alttext="\Theta" display="inline"><mi mathvariant="normal">Θ</mi></math>は<math id="Thmrmkx2.p1.m9" class="ltx_Math" alttext="2^{2^{\kappa}}" display="inline"><msup><mn>2</mn><msup><mn>2</mn><mi>κ</mi></msup></msup></math>個あることに注意しよう(<math id="Thmrmkx2.p1.m10" class="ltx_Math" alttext="2^{\kappa}+2^{\kappa}+2^{\kappa}=2^{\kappa}" display="inline"><mrow><mrow><msup><mn>2</mn><mi>κ</mi></msup><mo>+</mo><msup><mn>2</mn><mi>κ</mi></msup><mo>+</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow><mo>=</mo><msup><mn>2</mn><mi>κ</mi></msup></mrow></math>から当濃度で3分割して一つの成分の部分集合と他の成分の和集合を考えれば良い)．
+そして
+<math id="Thmrmkx2.p1.m11" class="ltx_Math" alttext="G(\Theta)=\{\theta^{-1}(J_{n})\}_{n\in\mathbb{Z}_{\geq 0}}\cup\{X\setminus f^{%
+-1}(J_{0})\}_{f\in\Theta}" display="inline"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mrow><mo stretchy="false">{</mo><mrow><msup><mi>θ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>J</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mo>∪</mo><msub><mrow><mo stretchy="false">{</mo><mrow><mi>X</mi><mo>∖</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>J</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>f</mi><mo>∈</mo><mi mathvariant="normal">Θ</mi></mrow></msub></mrow></mrow></math>
+から生成されるフィルターを<math id="Thmrmkx2.p1.m12" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>
+とし，<math id="Thmrmkx2.p1.m13" class="ltx_Math" alttext="\mathscr{S}_{0}=\mathscr{S}_{-1}\setminus\Theta" display="inline"><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mn>0</mn></msub><mo>=</mo><mrow><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>∖</mo><mi mathvariant="normal">Θ</mi></mrow></mrow></math>
+とする．
+作り方から<math id="Thmrmkx2.p1.m14" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>が
+可算非完備なのはわかる．
+また
+<math id="Thmrmkx2.p1.m15" class="ltx_Math" alttext="J_{0}\neq\emptyset" display="inline"><mrow><msub><mi>J</mi><mn>0</mn></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>と
+<math id="Thmrmkx2.p1.m16" class="ltx_Math" alttext="J_{0}\neq X" display="inline"><mrow><msub><mi>J</mi><mn>0</mn></msub><mo>≠</mo><mi>X</mi></mrow></math>
+そして
+<math id="Thmrmkx2.p1.m17" class="ltx_Math" alttext="\mathscr{S}_{-1}" display="inline"><msub><mi class="ltx_font_mathscript">𝒮</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub></math>
+がlarge oscillation family mod
+<math id="Thmrmkx2.p1.m18" class="ltx_Math" alttext="\{X\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>X</mi><mo stretchy="false">}</mo></mrow></math>であることから
+<math id="Thmrmkx2.p1.m19" class="ltx_Math" alttext="G(\Theta)" display="inline"><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が有限交差性を持つことがわかる．
+よって
+<math id="Thmrmkx2.p1.m20" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>は真のフィルターであることがわかる．
+ここでもしも<math id="Thmrmkx2.p1.m21" class="ltx_Math" alttext="\Theta_{0}\neq\Theta_{1}" display="inline"><mrow><msub><mi mathvariant="normal">Θ</mi><mn>0</mn></msub><mo>≠</mo><msub><mi mathvariant="normal">Θ</mi><mn>1</mn></msub></mrow></math>
+と仮定する．
+ここで対称性から<math id="Thmrmkx2.p1.m22" class="ltx_Math" alttext="h\in\Theta_{0}\setminus\Theta_{1}" display="inline"><mrow><mi>h</mi><mo>∈</mo><mrow><msub><mi mathvariant="normal">Θ</mi><mn>0</mn></msub><mo>∖</mo><msub><mi mathvariant="normal">Θ</mi><mn>1</mn></msub></mrow></mrow></math>
+が取れるとしても一般性を失わない．
+このとき<math id="Thmrmkx2.p1.m23" class="ltx_Math" alttext="h^{-1}(J_{0})" display="inline"><mrow><msup><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>J</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="Thmrmkx2.p1.m24" class="ltx_Math" alttext="G(\Theta_{0})" display="inline"><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">Θ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+の元と空な交わりをもつ．
+そして<math id="Thmrmkx2.p1.m25" class="ltx_Math" alttext="h^{-1}(J_{0})" display="inline"><mrow><msup><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>J</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="Thmrmkx2.p1.m26" class="ltx_Math" alttext="G(\Theta)" display="inline"><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow></mrow></math>と空でない交わりを常に持つ．
+よって<math id="Thmrmkx2.p1.m27" class="ltx_Math" alttext="\Theta" display="inline"><mi mathvariant="normal">Θ</mi></math>ごとの<math id="Thmrmkx2.p1.m28" class="ltx_Math" alttext="\mathcal{F}_{0}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mn>0</mn></msub></math>およびそれを含む超フィルターは<math id="Thmrmkx2.p1.m29" class="ltx_Math" alttext="\Theta" display="inline"><mi mathvariant="normal">Θ</mi></math>ごとに絶対に相異なる．
+そして<math id="Thmrmkx2.p1.m30" class="ltx_Math" alttext="\Theta" display="inline"><mi mathvariant="normal">Θ</mi></math>の選び方は<math id="Thmrmkx2.p1.m31" class="ltx_Math" alttext="2^{2^{\kappa}}" display="inline"><msup><mn>2</mn><msup><mn>2</mn><mi>κ</mi></msup></msup></math>
+個あるので善良超フィルター全体が<math id="Thmrmkx2.p1.m32" class="ltx_Math" alttext="2^{2^{\kappa}}" display="inline"><msup><mn>2</mn><msup><mn>2</mn><mi>κ</mi></msup></msup></math>
+の濃度を持つことがわかる．</span></p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+齋藤正彦,
+超積と超準解析,
+東京図書, 1972.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+W. W. Comfort　 and S. Negrepontis,
+<span class="ltx_text ltx_font_italic">On families of large oscillation</span>,
+Fund. Math.,
+75 (1972),
+275–290,
+doi: 10.4064/fm-75-3-275-290
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+G. Montagna,
+<span class="ltx_text ltx_font_italic">Good ultrafilter and saturated models</span>,
+Bacheler Thesis,
+2019,
+Delft University of Technology,
+Netherland.
+https://repository.tudelft.nl/record/uuid:f5cc2f93-556f-46b6-9833-a2d08b33538e
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+K. Kunen,
+<span class="ltx_text ltx_font_italic">Ultrafilters and independent sets</span>,
+Trans. Am. Math. Soc. 172, 299–306 (1973)
+doi: 10.2307/1996350.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:40:28 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

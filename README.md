@@ -60,8 +60,9 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 `docs/EXPLORATION.md` にまとめています。
 
 LaTeXMLによるHTML変換は通常公開から隔離した試験コマンドとして導入しています。自動検査と
-PDFとの目視比較を通過した原稿に限り、試験HTML版として個別公開できます。
-代表4分類を変換する方法と確認項目は `docs/LATEXML_TRIAL.md` を参照してください。
+PDFとの目視比較を通過した原稿は、試験HTML版として個別公開できます。全体状況を先に
+確認する場合は、未変換TeXを一括処理し、自動合格版だけを「自動変換・未目視」と明示して
+追加できます。手順と確認項目は `docs/LATEXML_TRIAL.md` を参照してください。
 
 普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
 できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は
