@@ -1,0 +1,988 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Lebesgue–Stieltjes Measure</title>
+<!--Generated on Sun Jul 26 17:40:43 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2023-06-20-03/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>ルベーグスティルチェス積分についてのLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../LS.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">Lebesgue–Stieltjes Measure</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブキトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章ではLebesgue–Stieltjes測度を構成してゆく．
+つまり以下の定理を証明する．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする．このとき，
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の測度<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\mu_{\phi}" display="inline"><msub><mi>μ</mi><mi>ϕ</mi></msub></math>で，
+任意の<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="a,b\in[-\infty,\infty]" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></math>で<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="a&lt;b" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow></math>を満たすものに対して</span></p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となるものが存在する．</span></p>
+</div>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Riesz–Markov–Kakutaniによる方法</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">以下の内容については<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>や
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>を読んでも良い．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を局所コンパクトハウスドルフ空間とする．
+このとき<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の測度<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>がRMK測度であるとは以下の条件を満たすときにいう</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math><span class="ltx_text ltx_font_italic">に値をとるボレル測度である．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意のコンパクト集合</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">について</span><math id="S1.I1.i2.p1.m3" class="ltx_Math" alttext="\mu(K)&lt;\infty" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意のボレル集合は外部正則である．つまり
+</span><math id="S1.I1.i3.p1.m2" class="ltx_Math" alttext="\mu(E)=\inf\{\mu(V)\ |\ V\in\mathfrak{O}_{X}\ E\subset V\}" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0em">inf</mo><mrow><mo stretchy="false">{</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo rspace="0.222em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.500em">|</mo><mrow><mi>V</mi><mo>∈</mo><mrow><msub><mi>𝔒</mi><mi>X</mi></msub><mo>⁢</mo><mi>E</mi></mrow><mo>⊂</mo><mi>V</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．ここで</span><math id="S1.I1.i3.p1.m3" class="ltx_Math" alttext="\mathfrak{O}_{X}" display="inline"><msub><mi>𝔒</mi><mi>X</mi></msub></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I1.i3.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の開集合系である．</span></p>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i4.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">が開集合もしくは</span><math id="S1.I1.i4.p1.m2" class="ltx_Math" alttext="\mu(E)&lt;\infty" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic">ならば</span><math id="S1.I1.i4.p1.m3" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">は
+コンパクト正則である．つまり，
+</span><math id="S1.I1.i4.p1.m4" class="ltx_Math" alttext="\mu(E)=\sup\{\mu(K)\ |\ K\in Cpt(X)\ K\subset E\}" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0em">sup</mo><mrow><mo stretchy="false">{</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo rspace="0.222em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.500em">|</mo><mrow><mi>K</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mi>K</mi></mrow><mo>⊂</mo><mi>E</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．ここで</span><math id="S1.I1.i4.p1.m5" class="ltx_Math" alttext="Cpt(X)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I1.i4.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">のコンパクト集合全体である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+<div id="Thmthm2.p2" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">上のRMK測度全体を<math id="Thmthm2.p2.m2" class="ltx_Math" alttext="M(X)" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>と書くことにする
+<math id="Thmthm2.p2.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の符号付き測度で二つのRMK測度の差で表されるもの全体を<math id="Thmthm2.p2.m4" class="ltx_Math" alttext="S(X)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>と書くことにする．</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を位相空間とする．
+このとき
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="C(X)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の実連続関数全体の集合を表す・
+<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の有界実連続関数全体の集合を表す．
+また，<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が距離空間で距離関数<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>を備えているとき，
+<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="C_{u}(X)" display="inline"><mrow><msub><mi>C</mi><mi>u</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm3.p1.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の(<math id="Thmthm3.p1.m10" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に関して)一様連続な実関数全体を表す．<math id="Thmthm3.p1.m11" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>を明示的に書いていないが，以下では紛れがないので心配は無用である．
+また，以下では<math id="Thmthm3.p1.m12" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>には<math id="Thmthm3.p1.m13" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>ノルムが備わっているとする．</span></p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">以下の定理はRiesz–Markov–Kakutaniの表現定理の一つの形態である．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトハウスドルフ空間とする．
+このとき</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="C_{b}(X)^{*}=C(X)^{*}=S(X)." display="block"><mrow><mrow><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow><mo>=</mo><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">である．
+より詳しく述べると，<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="\mu\in C_{b}(X)^{*}" display="inline"><mrow><mi>μ</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow></mrow></math>に対して
+二つのRMK測度<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>と<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>が（差を除いて）一意的に対応して，
+任意の<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="f\in C_{b}(X)" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\mu(f)=\int_{X}f\ d\alpha-\int_{X}f\ d\beta" display="block"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><mrow><msub><mo>∫</mo><mi>X</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>α</mi></mrow></mrow></mrow><mo rspace="0.055em">−</mo><mrow><msub><mo>∫</mo><mi>X</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>β</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．
+特に非負な<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="\mu\in C_{b}(X)^{*}" display="inline"><mrow><mi>μ</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow></mrow></math>つまり
+<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="f\geq 0" display="inline"><mrow><mi>f</mi><mo>≥</mo><mn>0</mn></mrow></math>ならば<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="\mu(f)\geq 0" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math>を満たすような<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>
+は通常の意味での測度（非負の値しか取らない測度）
+に対応する．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+このとき，
+任意の<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="n\in\mathbb{N}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>に対して
+<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="L_{\phi,n}:C_{c}(\mathbb{R})\mathbb{R}" display="inline"><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>C</mi><mi>c</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>ℝ</mi></mrow></mrow></math>
+を以下のように定義する．</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="L_{\phi,n}(f)=\sum_{i=-\infty}^{\infty}f\left(\frac{i}{2^{n}}\right)\left(\phi%
+\left(\frac{i}{2^{n}}\right)-\phi\left(\frac{i-1}{2^{n}}\right)\right)" display="block"><mrow><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の台がコンパクトなので，これは有限和である．</span></p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+任意の<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="f\in C_{c}(\mathbb{R})" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><msub><mi>C</mi><mi>c</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して
+<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\lim_{n\to\infty}L_{\phi,n}(f)" display="inline"><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p"><math id="S1.p3.m1" class="ltx_Math" alttext="M&gt;0" display="inline"><mrow><mi>M</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を<math id="S1.p3.m2" class="ltx_Math" alttext="\operatorname{supp}(f)\subset[-M,M]" display="inline"><mrow><mrow><mi>supp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi>M</mi></mrow><mo>,</mo><mi>M</mi><mo stretchy="false">]</mo></mrow></mrow></math>を満たすものとし，
+<math id="S1.p3.m3" class="ltx_Math" alttext="C=\phi(2M)-\phi(-2M)" display="inline"><mrow><mi>C</mi><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とする．
+任意に<math id="S1.p3.m4" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を与える．
+このとき<math id="S1.p3.m5" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は一様連続なので，ある<math id="S1.p3.m6" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>
+が存在して，
+<math id="S1.p3.m7" class="ltx_Math" alttext="|x-y|&lt;\delta" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>ならば<math id="S1.p3.m8" class="ltx_Math" alttext="|f(x)-f(y)|&lt;\varepsilon/C" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mi>C</mi></mrow></mrow></math>を満たす．
+<math id="S1.p3.m9" class="ltx_Math" alttext="N\in\mathbb{N}" display="inline"><mrow><mi>N</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>を<math id="S1.p3.m10" class="ltx_Math" alttext="2^{-N}&lt;\delta" display="inline"><mrow><msup><mn>2</mn><mrow><mo>−</mo><mi>N</mi></mrow></msup><mo>&lt;</mo><mi>δ</mi></mrow></math>とすると，
+<math id="S1.p3.m11" class="ltx_Math" alttext="N&lt;m&lt;n" display="inline"><mrow><mi>N</mi><mo>&lt;</mo><mi>m</mi><mo>&lt;</mo><mi>n</mi></mrow></math>をみたす<math id="S1.p3.m12" class="ltx_Math" alttext="n,m\in\mathbb{N}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>m</mi></mrow><mo>∈</mo><mi>ℕ</mi></mrow></math>について，
+<math id="S1.p3.m13" class="ltx_Math" alttext="\{a_{i}\}\subset\mathbb{R}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mo>⊂</mo><mi>ℝ</mi></mrow></math>
+を
+<math id="S1.p3.m14" class="ltx_Math" alttext="0\leq k&lt;2^{n-m}" display="inline"><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>&lt;</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow></msup></mrow></math>ならば
+<math id="S1.p3.m15" class="ltx_Math" alttext="a_{i+k}=a_{i}" display="inline"><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mi>k</mi></mrow></msub><mo>=</mo><msub><mi>a</mi><mi>i</mi></msub></mrow></math>
+とし，<math id="S1.p3.m16" class="ltx_Math" alttext="a_{k(2^{n-m})}=k" display="inline"><mrow><msub><mi>a</mi><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow></msup><mo stretchy="false">)</mo></mrow></mrow></msub><mo>=</mo><mi>k</mi></mrow></math>
+と定義すると，</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="L_{\phi,m}(f)\sum_{i=-\infty}^{\infty}f\left(\frac{a_{i}}{2^{n}}\right)\left(%
+\phi\left(\frac{i}{2^{n}}\right)-\phi\left(\frac{i-1}{2^{n}}\right)\right)" display="block"><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>m</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><msub><mi>a</mi><mi>i</mi></msub><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるから，</p>
+<table id="S3.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\displaystyle|L_{\phi,n}(f)-L_{\phi,m}(f)|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>m</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex6.m2" class="ltx_Math" alttext="\displaystyle=\sum_{i=-\infty}^{\infty}\left|f\left(\frac{i}{2^{n}}\right)-f%
+\left(\frac{a_{i}}{2^{-n}}\right)\right|\left(\phi\left(\frac{i}{2^{n}}\right)%
+-\phi\left(\frac{i-1}{2^{n}}\right)\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><mrow><mo>|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><msub><mi>a</mi><mi>i</mi></msub><msup><mn>2</mn><mrow><mo>−</mo><mi>n</mi></mrow></msup></mfrac></mstyle><mo>)</mo></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mstyle><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex7.m1" class="ltx_Math" alttext="\displaystyle&lt;\frac{\varepsilon}{C}\sum_{i=-\infty}^{\infty}\left(\phi\left(%
+\frac{i}{2^{n}}\right)-\phi\left(\frac{i-1}{2^{n}}\right)\right)\leq\varepsilon" display="inline"><mrow><mi></mi><mo>&lt;</mo><mrow><mstyle displaystyle="true"><mfrac><mi>ε</mi><mi>C</mi></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><mo>(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>i</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mstyle><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow><mo>≤</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+つまり，<math id="S1.p3.m17" class="ltx_Math" alttext="\{L_{\phi,n}(f)\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>
+はコーシー列なので，
+<math id="S1.p3.m18" class="ltx_Math" alttext="\lim_{n\to\infty}L_{\phi,n}(f)" display="inline"><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が存在する．
+∎</p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+このとき，
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="L{\phi}:C_{c}(\mathbb{R})\to\mathbb{R}" display="inline"><mrow><mrow><mi>L</mi><mo>⁢</mo><mi>ϕ</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msub><mi>C</mi><mi>c</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を</span></p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="L_{\phi}(f)=\lim_{n\to\infty}L_{\phi,n}(f)" display="block"><mrow><mrow><msub><mi>L</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+このとき<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="L_{\phi}" display="inline"><msub><mi>L</mi><mi>ϕ</mi></msub></math>
+は正値線形形式である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">各<math id="S1.p4.m1" class="ltx_Math" alttext="L_{\phi,n}" display="inline"><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>n</mi></mrow></msub></math>が正値線形形式だからその極限で定義される
+<math id="S1.p4.m2" class="ltx_Math" alttext="L_{\phi}" display="inline"><msub><mi>L</mi><mi>ϕ</mi></msub></math>もそうである.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+上の補題 <a href="#Thmthm8" title="補題 8. ‣ 1 Riesz–Markov–Kakutaniによる方法 ‣ Lebesgue–Stieltjes Measure" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a> とRMKから，
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="L_{\phi}" display="inline"><msub><mi>L</mi><mi>ϕ</mi></msub></math>に対応する
+RMK測度が存在する．
+これを<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="\mu_{\phi}" display="inline"><msub><mi>μ</mi><mi>ϕ</mi></msub></math>と書くことにする．
+もちろん</span></p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="L_{\phi}(f)=\int_{\mathbb{R}}f\ d\mu_{\phi}" display="block"><mrow><mrow><msub><mi>L</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>ℝ</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><msub><mi>μ</mi><mi>ϕ</mi></msub></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする.
+このとき
+任意の<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="a,b\in[-\infty,\infty]" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></math>で<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="a&lt;b" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow></math>を満たすものに対して</span></p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">まず最初に, <math id="S1.p6.m1" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math>が
+<math id="S1.p6.m2" class="ltx_Math" alttext="s,t\in\mathbb{Z}" display="inline"><mrow><mrow><mi>s</mi><mo>,</mo><mi>t</mi></mrow><mo>∈</mo><mi>ℤ</mi></mrow></math>で<math id="S1.p6.m3" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を使って
+<math id="S1.p6.m4" class="ltx_Math" alttext="a=s/2^{N}" display="inline"><mrow><mi>a</mi><mo>=</mo><mrow><mi>s</mi><mo>/</mo><msup><mn>2</mn><mi>N</mi></msup></mrow></mrow></math>,
+<math id="S1.p6.m5" class="ltx_Math" alttext="b=t/2^{N}" display="inline"><mrow><mi>b</mi><mo>=</mo><mrow><mi>t</mi><mo>/</mo><msup><mn>2</mn><mi>N</mi></msup></mrow></mrow></math>
+と表される場合に等式を証明する．
+<math id="S1.p6.m6" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>を<math id="S1.p6.m7" class="ltx_Math" alttext="N&lt;n" display="inline"><mrow><mi>N</mi><mo>&lt;</mo><mi>n</mi></mrow></math>として，
+<math id="S1.p6.m8" class="ltx_Math" alttext="c_{n}=(s2^{n-N}+1)/2^{N}" display="inline"><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>s</mi><mo>⁢</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mi>N</mi></mrow></msup></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><msup><mn>2</mn><mi>N</mi></msup></mrow></mrow></math>,
+<math id="S1.p6.m9" class="ltx_Math" alttext="d_{n}=(t2^{n-N}+1)/2^{N}" display="inline"><mrow><msub><mi>d</mi><mi>n</mi></msub><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mi>N</mi></mrow></msup></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><msup><mn>2</mn><mi>N</mi></msup></mrow></mrow></math>
+とおく．
+このとき<math id="S1.p6.m10" class="ltx_Math" alttext="f_{n}\in C_{c}(\mathbb{R})" display="inline"><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>∈</mo><mrow><msub><mi>C</mi><mi>c</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>を以下のように定義する．</p>
+<table id="S3.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex11.m1" class="ltx_Math" alttext="\displaystyle f_{n}(x)=\begin{cases}\frac{1}{c_{n}-a}(x-a)&amp;\text{if }x\in[a,c_%
+{n}]\\
+1&amp;\text{if }x\in[c_{n},b]\\
+\frac{-1}{d_{n}-b}(x-d_{n})&amp;\text{if }x\in[b,d_{n}]\\
+0&amp;\text{o. w. }\end{cases}" display="inline"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mfrac><mn>1</mn><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>−</mo><mi>a</mi></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext>if </mtext><mo>⁢</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>1</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext>if </mtext><mo>⁢</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><msub><mi>c</mi><mi>n</mi></msub><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mfrac><mrow><mo>−</mo><mn>1</mn></mrow><mrow><msub><mi>d</mi><mi>n</mi></msub><mo>−</mo><mi>b</mi></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><msub><mi>d</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext>if </mtext><mo>⁢</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mi>b</mi><mo>,</mo><msub><mi>d</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>0</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mtext>o. w.</mtext></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">すると，<math id="S1.p6.m11" class="ltx_Math" alttext="n\to\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき<math id="S1.p6.m12" class="ltx_Math" alttext="f_{n}\to\chi_{(a,b]}" display="inline"><mrow><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">→</mo><msub><mi>χ</mi><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></msub></mrow></math>
+なので，</p>
+<table id="S1.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex12.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\lim_{n\to\infty}\int_{\mathbb{R}}f_{n}\ d\mu_{\phi}=\lim_{n%
+\to\infty}L_{\phi}(f_{n})" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mo>∫</mo><mi>ℝ</mi></msub><mrow><msub><mi>f</mi><mi>n</mi></msub><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><msub><mi>μ</mi><mi>ϕ</mi></msub></mrow></mrow></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>L</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+<math id="S1.p6.m13" class="ltx_Math" alttext="m&gt;n" display="inline"><mrow><mi>m</mi><mo>&gt;</mo><mi>n</mi></mrow></math>として，
+<math id="S1.p6.m14" class="ltx_Math" alttext="L_{\phi,m}(f_{n})" display="inline"><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>m</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>を計算する．</p>
+<table id="S1.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex13.m1" class="ltx_Math" alttext="|L_{\phi,m}(f_{n})-(\phi(b)-\phi(a))|\leq(\phi(d_{n})-\phi(b))+(\phi(c_{n})-%
+\phi(a))" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>L</mi><mrow><mi>ϕ</mi><mo>,</mo><mi>m</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>d</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので特に</p>
+<table id="S1.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex14.m1" class="ltx_Math" alttext="|L_{\phi}(f_{n})-(\phi(b)-\phi(a))|\leq(\phi(d_{n})-\phi(b))+(\phi(c_{n})-\phi%
+(a))" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>L</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>d</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+<math id="S1.p6.m15" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>は右連続なので，<math id="S1.p6.m16" class="ltx_Math" alttext="n\to\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき右辺は<math id="S1.p6.m17" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に近づくから，</p>
+<table id="S1.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex15.m1" class="ltx_Math" alttext="\lim_{n\to\infty}L_{\phi}(f_{n})=\phi(b)-\phi(a)" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>L</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって</p>
+<table id="S1.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex16.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．<math id="S1.p6.m18" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math>が一般の場合には，測度論を使えばわかる．
+つまり，
+<math id="S1.p6.m19" class="ltx_Math" alttext="a_{n}" display="inline"><msub><mi>a</mi><mi>n</mi></msub></math>と<math id="S1.p6.m20" class="ltx_Math" alttext="b_{n}" display="inline"><msub><mi>b</mi><mi>n</mi></msub></math>を<math id="S1.p6.m21" class="ltx_Math" alttext="s/2^{N}" display="inline"><mrow><mi>s</mi><mo>/</mo><msup><mn>2</mn><mi>N</mi></msup></mrow></math> <math id="S1.p6.m22" class="ltx_Math" alttext="(s\in\mathbb{Z},N\in\mathbb{Z}_{\geq 0})" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>s</mi><mo>∈</mo><mi>ℤ</mi></mrow><mo>,</mo><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow></math>の形で表される数で
+<math id="S1.p6.m23" class="ltx_Math" alttext="a&lt;a_{n}" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><msub><mi>a</mi><mi>n</mi></msub></mrow></math>と<math id="S1.p6.m24" class="ltx_Math" alttext="b&lt;b_{n}" display="inline"><mrow><mi>b</mi><mo>&lt;</mo><msub><mi>b</mi><mi>n</mi></msub></mrow></math>を満たし
+<math id="S1.p6.m25" class="ltx_Math" alttext="\lim_{n\to\infty}a_{n}=a" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><msub><mi>a</mi><mi>n</mi></msub></mrow><mo>=</mo><mi>a</mi></mrow></math>と
+<math id="S1.p6.m26" class="ltx_Math" alttext="\lim_{n\to\infty}b_{n}=b" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><msub><mi>b</mi><mi>n</mi></msub></mrow><mo>=</mo><mi>b</mi></mrow></math>
+を満たすものとする．
+すると
+<math id="S1.p6.m27" class="ltx_Math" alttext="\bigcup_{n\in\mathbb{Z}_{\geq 0}}\bigcap_{m\in\mathbb{Z}_{\geq 0}}(a_{n},b_{m}%
+]=(a,b]" display="inline"><mrow><mrow><msub><mo>⋃</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mrow><msub><mo lspace="0.167em" rspace="0em">⋂</mo><mrow><mi>m</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo>,</mo><msub><mi>b</mi><mi>m</mi></msub><mo stretchy="false">]</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></mrow></math>
+なので，有限測度に関する極限公式と<math id="S1.p6.m28" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>の右連続性を使えば
+<math id="S1.p6.m29" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="inline"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+がわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>分位関数を使う方法</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">この節では，
+Lebesgue–Stieltjes測度の存在を
+Quantile function（分位関数）を使って証明する．
+ただし，通常のLebesgue測度の存在は前提とする点には注意しよう．</p>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の右連続な単調増加関数とする．
+このとき，
+<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="I_{\phi}=[\inf\phi,\sup\phi]\cap\mathbb{R}" display="inline"><mrow><msub><mi>I</mi><mi>ϕ</mi></msub><mo>=</mo><mrow><mrow><mo stretchy="false">[</mo><mrow><mo lspace="0em" rspace="0.167em">inf</mo><mi>ϕ</mi></mrow><mo>,</mo><mrow><mo lspace="0em" rspace="0.167em">sup</mo><mi>ϕ</mi></mrow><mo stretchy="false">]</mo></mrow><mo>∩</mo><mi>ℝ</mi></mrow></mrow></math>と定義する
+（ここでわざわざ<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>との共通部分をとっているのは，
+<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>や<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="\inf" display="inline"><mo>inf</mo></math>が<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>や<math id="Thmthm11.p1.m8" class="ltx_Math" alttext="-\infty" display="inline"><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></math>の値を取る場合を見越してのことであり，そうでない場合には余計なものである）．
+<math id="Thmthm11.p1.m9" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>の<span class="ltx_text ltx_font_bold">分位関数<math id="Thmthm11.p1.m10" class="ltx_Math" alttext="Q_{\phi}:I_{\phi}\to\mathbb{R}" display="inline"><mrow><msub><mi mathvariant="normal">Q</mi><mi mathvariant="normal">ϕ</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi mathvariant="normal">I</mi><mi mathvariant="normal">ϕ</mi></msub><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math></span>を以下のように定義する．</span></p>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="Q_{\phi}(w)=\inf\{\,x\in\mathbb{R}\mid w\leq\phi(x)\,\}" display="block"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" movablelimits="false" rspace="0em">inf</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">分位関数のことを<span class="ltx_text ltx_font_bold">一般化した逆関数</span>と呼んだりもする．</span></p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm12.p1.m1" class="ltx_Math" alttext="w\in I_{\phi}" display="inline"><mrow><mi>w</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow></math>と<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について
+<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="w\leq\phi(x)" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="Q_{\phi}(w)\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>
+は同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p2.m1" class="ltx_Math" alttext="w\leq\phi(x)" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>を仮定する．
+このとき<math id="S2.p2.m2" class="ltx_Math" alttext="Q_{\phi}" display="inline"><msub><mi>Q</mi><mi>ϕ</mi></msub></math>の定義から
+<math id="S2.p2.m3" class="ltx_Math" alttext="Q_{\phi}(w)\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>である．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">逆に<math id="S2.p3.m1" class="ltx_Math" alttext="Q_{\phi}(w)\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>を仮定する．
+このとき<math id="S2.p3.m2" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>の右連続性から
+<math id="S2.p3.m3" class="ltx_Math" alttext="\{\,z\in\mathbb{R}\mid w\leq\phi(z)\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>z</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></math>
+は閉集合であるから
+この集合の<math id="S2.p3.m4" class="ltx_Math" alttext="\inf" display="inline"><mo>inf</mo></math>である<math id="S2.p3.m5" class="ltx_Math" alttext="Q_{\phi}(w)" display="inline"><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>も
+この集合に属する．よって
+<math id="S2.p3.m6" class="ltx_Math" alttext="w\leq\phi(Q_{\phi}(w))" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+今，<math id="S2.p3.m7" class="ltx_Math" alttext="Q_{\phi}(w)\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>と仮定しているので，
+<math id="S2.p3.m8" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>の単調性から<math id="S2.p3.m9" class="ltx_Math" alttext="w\leq\phi(x)" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math><span class="ltx_text ltx_font_italic">を固定すると</span></p>
+<table id="S2.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex18.m1" class="ltx_Math" alttext="\{\,w\in I_{\phi}\mid Q_{\phi}(w)\leq x\,\}=\{\,w\in I_{\phi}\mid w\leq\phi(x)\,\}" display="block"><mrow><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>w</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>w</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の右連続な単調増加関数とする．
+このとき任意の<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="y\in I_{\phi}" display="inline"><mrow><mi>y</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow></math>について
+<math id="Thmthm14.p1.m4" class="ltx_Math" alttext="y\leq\phi(Q_{\phi}(y))" display="inline"><mrow><mi>y</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つ．
+また，任意の<math id="Thmthm14.p1.m5" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について
+<math id="Thmthm14.p1.m6" class="ltx_Math" alttext="Q_{\phi}(\phi(x))\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">まず当然<math id="S2.p4.m1" class="ltx_Math" alttext="Q_{\phi}(y)\leq Q_{\phi}(y)" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので
+先の補題から<math id="S2.p4.m2" class="ltx_Math" alttext="y\leq\phi(Q_{\phi}(y))" display="inline"><mrow><mi>y</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つ．
+また，当然<math id="S2.p4.m3" class="ltx_Math" alttext="\phi(x)\leq\phi(x)" display="inline"><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので，当然
+<math id="S2.p4.m4" class="ltx_Math" alttext="Q_{\phi}(\phi(x))\leq x" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow></math>が成り立つ．
+∎</p>
+</div>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm15.p1.m1" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の右連続な単調増加関数とする．
+このとき
+<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="Q_{\phi}" display="inline"><msub><mi>Q</mi><mi>ϕ</mi></msub></math>は右連続な単調増加関数
+である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">記述を簡単にするために<math id="S2.p5.m1" class="ltx_Math" alttext="Q=Q_{\phi}" display="inline"><mrow><mi>Q</mi><mo>=</mo><msub><mi>Q</mi><mi>ϕ</mi></msub></mrow></math>と書くことにする．
+<math id="S2.p5.m2" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>の単調性は定義から従う．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p"><math id="S2.p6.m1" class="ltx_Math" alttext="w" display="inline"><mi>w</mi></math>を任意に固定する．
+<math id="S2.p6.m2" class="ltx_Math" alttext="\sup_{y&lt;w}Q(w)=x" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>y</mi><mo>&lt;</mo><mi>w</mi></mrow></msub><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>とおく．
+すると
+<math id="S2.p6.m3" class="ltx_Math" alttext="x\leq Q(w)" display="inline"><mrow><mi>x</mi><mo>≤</mo><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+<math id="S2.p6.m4" class="ltx_Math" alttext="y&lt;w" display="inline"><mrow><mi>y</mi><mo>&lt;</mo><mi>w</mi></mrow></math>となる<math id="S2.p6.m5" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>を任意にとる．
+今<math id="S2.p6.m6" class="ltx_Math" alttext="x&lt;Q(w)" display="inline"><mrow><mi>x</mi><mo>&lt;</mo><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と仮定して
+<math id="S2.p6.m7" class="ltx_Math" alttext="\epsilon=(Q(w)-x)/2" display="inline"><mrow><mi>ϵ</mi><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></mrow></math>とする．
+ここで，もしも<math id="S2.p6.m8" class="ltx_Math" alttext="w\leq\phi(x-\epsilon)" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とすると<math id="S2.p6.m9" class="ltx_Math" alttext="Q(w)\leq x-\epsilon&lt;x" display="inline"><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mi>x</mi></mrow></math>となるがこれは仮定に反するので<math id="S2.p6.m10" class="ltx_Math" alttext="\phi(x-\epsilon)&lt;w" display="inline"><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>w</mi></mrow></math>である．
+さらに，<math id="S2.p6.m11" class="ltx_Math" alttext="Q(y)\leq Q(w)" display="inline"><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>より，
+<math id="S2.p6.m12" class="ltx_Math" alttext="Q(y)+\epsilon\leq x-\epsilon" display="inline"><mrow><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow></mrow></math>が成り立つ．
+よって
+<math id="S2.p6.m13" class="ltx_Math" alttext="y\leq\phi(Q(y))\leq\phi(Q(y)+\epsilon)\leq\phi(x-\epsilon)&lt;w" display="inline"><mrow><mi>y</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>w</mi></mrow></math>である．
+ゆえに<math id="S2.p6.m14" class="ltx_Math" alttext="w\leq\phi(x-\epsilon)&lt;w" display="inline"><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>w</mi></mrow></math>となって矛盾する．
+つまり<math id="S2.p6.m15" class="ltx_Math" alttext="Q(w)=x" display="inline"><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>であり，<math id="S2.p6.m16" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>の左連続性が示された．
+∎</p>
+</div>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S2.p7.m1" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>が有界な場合にLebesgue–Stieltjes測度を構成する.</p>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm16.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする．
+さらに<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>は有界であると仮定する．
+このとき，
+<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の測度<math id="Thmthm16.p1.m4" class="ltx_Math" alttext="\mu_{\phi}" display="inline"><msub><mi>μ</mi><mi>ϕ</mi></msub></math>で，
+任意の<math id="Thmthm16.p1.m5" class="ltx_Math" alttext="a,b\in[-\infty,\infty]" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></math>で<math id="Thmthm16.p1.m6" class="ltx_Math" alttext="a&lt;b" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow></math>を満たすものに対して</span></p>
+<table id="S2.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex19.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となるものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p"><math id="S2.p8.m1" class="ltx_Math" alttext="I_{\phi}" display="inline"><msub><mi>I</mi><mi>ϕ</mi></msub></math>上の通常のルベーグ測度を
+<math id="S2.p8.m2" class="ltx_Math" alttext="\nu" display="inline"><mi>ν</mi></math>と書くことにする．
+そして<math id="S2.p8.m3" class="ltx_Math" alttext="\mu=(Q_{\phi})_{*}\nu" display="inline"><mrow><mi>μ</mi><mo>=</mo><mrow><msub><mrow><mo stretchy="false">(</mo><msub><mi>Q</mi><mi>ϕ</mi></msub><mo stretchy="false">)</mo></mrow><mo>∗</mo></msub><mo>⁢</mo><mi>ν</mi></mrow></mrow></math>と書くことにしよう．
+ここで<math id="S2.p8.m4" class="ltx_Math" alttext="Q_{\phi}" display="inline"><msub><mi>Q</mi><mi>ϕ</mi></msub></math>は左連続だから特にボレル可測であることに注意しよう．
+この<math id="S2.p8.m5" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が求めている測度であることを以下で証明しよう．
+まず任意の<math id="S2.p8.m6" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について
+<math id="S2.p8.m7" class="ltx_Math" alttext="\mu((-\infty,x])=\nu(Q_{\phi}^{-1}((-\infty,x]))" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>ν</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>Q</mi><mi>ϕ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+であるが，</p>
+<table id="S2.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex20.m1" class="ltx_Math" alttext="Q_{\phi}^{-1}((-\infty,x])=\{\,w\in I_{\phi}\mid Q_{\phi}(w)\leq x\,\}=\{\,w%
+\in I_{\phi}\mid w\leq\phi(x)\,\}" display="block"><mrow><mrow><msubsup><mi>Q</mi><mi>ϕ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>w</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msub><mi>Q</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>x</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>w</mi><mo>∈</mo><msub><mi>I</mi><mi>ϕ</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>w</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であるから，
+<math id="S2.p8.m8" class="ltx_Math" alttext="\mu((-\infty,x])=\phi(x)-\inf\phi" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mo lspace="0em" rspace="0.167em">inf</mo><mi>ϕ</mi></mrow></mrow></mrow></math>である．
+<math id="S2.p8.m9" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>が有界なので，この値は有限の値であることに注意しよう．
+よって</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="\mu((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+∎</p>
+</div>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p9.m1" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>が一般の場合にLebesgue–Stieltjes測度を構成しよう．</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm17.p1.m1" class="ltx_Math" alttext="\phi:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を右連続な非減少関数とする．
+このとき，
+<math id="Thmthm17.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の測度<math id="Thmthm17.p1.m3" class="ltx_Math" alttext="\mu_{\phi}" display="inline"><msub><mi>μ</mi><mi>ϕ</mi></msub></math>で，
+任意の<math id="Thmthm17.p1.m4" class="ltx_Math" alttext="a,b\in[-\infty,\infty]" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></math>で<math id="Thmthm17.p1.m5" class="ltx_Math" alttext="a&lt;b" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow></math>を満たすものに対して</span></p>
+<table id="S2.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex22.m1" class="ltx_Math" alttext="\mu_{\phi}((a,b])=\phi(b)-\phi(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>ϕ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となるものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">各<math id="S2.p10.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について<math id="S2.p10.m2" class="ltx_Math" alttext="\phi_{n}i:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mrow><msub><mi>ϕ</mi><mi>n</mi></msub><mo>⁢</mo><mi>i</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を
+<math id="S2.p10.m3" class="ltx_Math" alttext="\phi_{n}(s)=\min\{\max\{\phi(s),-n\},n\}" display="inline"><mrow><mrow><msub><mi>ϕ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>min</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mo>−</mo><mi>n</mi></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>と定義する．
+これは</p>
+<table id="S2.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex23.m1" class="ltx_Math" alttext="\phi_{n}(s)=\begin{cases}n&amp;n\leq\phi(s)\text{のとき}\\
+\phi(s)&amp;-n\leq\phi(s)&lt;n\text{のとき}\\
+-n&amp;\phi(s)&lt;-n\text{のとき}\end{cases}" display="block"><mrow><mrow><msub><mi>ϕ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi>n</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>n</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>n</mi><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mo>−</mo><mi>n</mi></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mo>−</mo><mrow><mi>n</mi><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と書いても同じことである．
+この関数<math id="S2.p10.m4" class="ltx_Math" alttext="\phi_{n}" display="inline"><msub><mi>ϕ</mi><mi>n</mi></msub></math>は有界で右連続な単調関数になっている．
+よって先の定理から
+各<math id="S2.p10.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について</p>
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex24.m1" class="ltx_Math" alttext="\mu_{n}((a,b])=\phi_{n}(b)-\phi_{n}(a)" display="block"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>ϕ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>ϕ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる測度<math id="S2.p10.m6" class="ltx_Math" alttext="\mu_{n}" display="inline"><msub><mi>μ</mi><mi>n</mi></msub></math>が存在する．
+<math id="S2.p10.m7" class="ltx_Math" alttext="\phi_{n}" display="inline"><msub><mi>ϕ</mi><mi>n</mi></msub></math>は右連続なので二つの集合
+<math id="S2.p10.m8" class="ltx_Math" alttext="\{\,s\in\mathbb{R}\mid n\leq\phi(s)\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>s</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>n</mi><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="S2.p10.m9" class="ltx_Math" alttext="\{\,s\in\mathbb{R}\mid-n\leq\phi(s)\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>s</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo>−</mo><mi>n</mi></mrow><mo>≤</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></math>
+には最小元が存在する．
+<math id="S2.p10.m10" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>は単調増加なので
+<math id="S2.p10.m11" class="ltx_Math" alttext="m_{n}\leq M_{n}" display="inline"><mrow><msub><mi>m</mi><mi>n</mi></msub><mo>≤</mo><msub><mi>M</mi><mi>n</mi></msub></mrow></math>である．
+それをそれぞれ
+<math id="S2.p10.m12" class="ltx_Math" alttext="M_{n}" display="inline"><msub><mi>M</mi><mi>n</mi></msub></math>, <math id="S2.p10.m13" class="ltx_Math" alttext="m_{n}" display="inline"><msub><mi>m</mi><mi>n</mi></msub></math>と書くことにする．
+まず
+任意の<math id="S2.p10.m14" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>と<math id="S2.p10.m15" class="ltx_Math" alttext="A\in\mathfrak{B}(\mathbb{R})" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について
+<math id="S2.p10.m16" class="ltx_Math" alttext="\mu_{n}(A)=\mu_{n}(A\cap[m_{n},M_{n}])" display="inline"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><mrow><mo stretchy="false">[</mo><msub><mi>m</mi><mi>n</mi></msub><mo>,</mo><msub><mi>M</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つことを示そう．
+この式が成り立つ<math id="S2.p10.m17" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>全体を<math id="S2.p10.m18" class="ltx_Math" alttext="\mathfrak{S}" display="inline"><mi>𝔖</mi></math>とおく．
+すると<math id="S2.p10.m19" class="ltx_Math" alttext="\mathfrak{S}" display="inline"><mi>𝔖</mi></math>は<math id="S2.p10.m20" class="ltx_Math" alttext="(a,b]" display="inline"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>の形の集合を全て含んでいる．
+<math id="S2.p10.m21" class="ltx_Math" alttext="\mathfrak{S}" display="inline"><mi>𝔖</mi></math>が<math id="S2.p10.m22" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>系であることを示そう．
+<math id="S2.p10.m23" class="ltx_Math" alttext="X\in\mathfrak{S}" display="inline"><mrow><mi>X</mi><mo>∈</mo><mi>𝔖</mi></mrow></math> <math id="S2.p10.m24" class="ltx_Math" alttext="(\lambda 1)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>⁢</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></math>と
+<math id="S2.p10.m25" class="ltx_Math" alttext="\mathfrak{S}" display="inline"><mi>𝔖</mi></math>が単調な族について閉じている<math id="S2.p10.m26" class="ltx_Math" alttext="(\lambda 2)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>⁢</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></math>
+ことは簡単にわかる．
+<math id="S2.p10.m27" class="ltx_Math" alttext="\mu_{n}(B\setminus A)=\mu_{n}(B)-\mu_{n}(A)=\mu_{n}(B\cap[m_{n},M_{n}])-\mu_{n%
+}(A\cap[m_{n},M_{n}])=\mu_{n}((B\setminus A)\cap[m_{n},M_{n}])" display="inline"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>∖</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>∩</mo><mrow><mo stretchy="false">[</mo><msub><mi>m</mi><mi>n</mi></msub><mo>,</mo><msub><mi>M</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><mrow><mo stretchy="false">[</mo><msub><mi>m</mi><mi>n</mi></msub><mo>,</mo><msub><mi>M</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>∖</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mrow><mo stretchy="false">[</mo><msub><mi>m</mi><mi>n</mi></msub><mo>,</mo><msub><mi>M</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので<math id="S2.p10.m28" class="ltx_Math" alttext="(\lambda 3)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>⁢</mo><mn>3</mn></mrow><mo stretchy="false">)</mo></mrow></math>も成り立つ．
+よって<math id="S2.p10.m29" class="ltx_Math" alttext="\pi" display="inline"><mi>π</mi></math>-<math id="S2.p10.m30" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>定理によって，
+<math id="S2.p10.m31" class="ltx_Math" alttext="\mathfrak{S}=\mathfrak{B}(\mathbb{R})" display="inline"><mrow><mi>𝔖</mi><mo>=</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となることがわかる．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">同様にして，
+任意の<math id="S2.p11.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>と<math id="S2.p11.m2" class="ltx_Math" alttext="A\in\mathfrak{B}(\mathbb{R})" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について</p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex25.m1" class="ltx_Math" alttext="\mu_{n}(A\cap I_{n})=\mu_{n+1}(A\cap I_{n})" display="block"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることがわかる．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">次に任意の<math id="S2.p12.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>と<math id="S2.p12.m2" class="ltx_Math" alttext="A\in\mathcal{B}(\mathbb{R})" display="inline"><mrow><mi>A</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℬ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について
+<math id="S2.p12.m3" class="ltx_Math" alttext="\mu_{n}(A)\leq\mu_{n+1}(A)" display="inline"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となることを示す．
+まず<math id="S2.p12.m4" class="ltx_Math" alttext="I_{n}=[m_{n},M_{n}]" display="inline"><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><msub><mi>m</mi><mi>n</mi></msub><mo>,</mo><msub><mi>M</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow></math>と置くと，定義から
+<math id="S2.p12.m5" class="ltx_Math" alttext="I_{n}\subset I_{n+1}" display="inline"><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⊂</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>となることがわかる．
+よって
+<math id="S2.p12.m6" class="ltx_Math" alttext="\mu_{n}(A)=\mu_{n}(A\cap I_{n})=\mu_{n+1}(A\cap I_{n})\leq\mu_{n+1}(A\cap I_{n%
+})+\mu_{n+1}(A\cap(I_{n+1}\setminus I_{n}))=\mu_{n+1}(A\cap I_{n+1})" display="inline"><mrow><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∖</mo><msub><mi>I</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>μ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので成り立つ．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">関数
+<math id="S2.p13.m1" class="ltx_Math" alttext="\mu:\mathfrak{B}(\mathbb{R})\to[0,\infty]" display="inline"><mrow><mi>μ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+を
+<math id="S2.p13.m2" class="ltx_Math" alttext="\mu(A)=\lim_{n\to\infty}\mu_{n}(A)" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>と定義する．
+<math id="S2.p13.m3" class="ltx_Math" alttext="\mu_{n}" display="inline"><msub><mi>μ</mi><mi>n</mi></msub></math>の単調性からこの極限は存在する．
+この<math id="S2.p13.m4" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>があの式を満たすことは<math id="S2.p13.m5" class="ltx_Math" alttext="\phi_{n}" display="inline"><msub><mi>ϕ</mi><mi>n</mi></msub></math>
+が<math id="S2.p13.m6" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>に各点収束することからわかる．
+<math id="S2.p13.m7" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が測度であることを示そう．完全加法性を示せば良い．
+<math id="S2.p13.m8" class="ltx_Math" alttext="\sum" display="inline"><mo>∑</mo></math>に関する単調収束定理，つまり数え上げ測度に関する
+単調収束定理から</p>
+<table id="S3.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex26"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex26.m1" class="ltx_Math" alttext="\displaystyle\mu\left(\coprod_{i\in\mathbb{Z}_{\geq 0}}A_{i}\right)" display="inline"><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∐</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder></mstyle><msub><mi>A</mi><mi>i</mi></msub></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex26.m2" class="ltx_Math" alttext="\displaystyle=\lim_{n\to\infty}\mu_{n}\left(\coprod_{i\in\mathbb{Z}_{\geq 0}}A%
+_{i}\right)=\lim_{n\to\infty}\sum_{i=0}^{\infty}\mu_{n}\left(A_{i}\right)=\sum%
+_{i=0}^{\infty}\lim_{n\to\infty}\mu_{n}\left(A_{i}\right)" display="inline"><mrow><mi></mi><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∐</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></munder></mstyle><msub><mi>A</mi><mi>i</mi></msub></mrow><mo>)</mo></mrow></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo>(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><munder><mo lspace="0.167em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo>(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex27"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex27.m1" class="ltx_Math" alttext="\displaystyle=\sum_{i=0}^{\infty}\mu\left(A_{i}\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo>(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="S2.p13.m9" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>は完全加法的である．
+以上で一般の<math id="S2.p13.m10" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>に対しても
+Lebesgue–Stieltjes測度が存在することがわかった．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>おまけ：<math id="S3.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>についてのProkhorovの定理</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.p1.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>に対するProkhovの定理はHellyの選出定理を使えば比較的簡単に示せるので，おまけとして紹介する．</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">以下の定理の証明は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>などを参考にしても良い．</p>
+</div>
+<div id="Thmthm18" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 18</span></span><span class="ltx_text ltx_font_bold"> </span>(Hellyの選出定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm18.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm18.p1.m1" class="ltx_Math" alttext="\{F_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm18.p1.m2" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>に値をとる右連続な非減少関数の列とする．このとき部分列<math id="Thmthm18.p1.m3" class="ltx_Math" alttext="\{F_{\phi(n)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>とある右連続な非減少関数<math id="Thmthm18.p1.m4" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>が存在して<math id="Thmthm18.p1.m5" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>の連続点<math id="Thmthm18.p1.m6" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>毎に</span></p>
+<table id="S3.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex28.m1" class="ltx_Math" alttext="\lim_{n\to\infty}F_{\phi(n)}(x)=F(x)" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>F</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を満たす．</span></p>
+</div>
+</div>
+<div id="Thmthm19" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 19</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm19.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>についてのProkhorovの定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm19.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm19.p1.m1" class="ltx_Math" alttext="\mathcal{S}\subset\mathcal{P}(\mathbb{R})" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>⊂</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">とする．
+このとき以下は同値である．</span></p>
+<ol id="S3.I1" class="ltx_enumerate">
+<li id="S3.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S3.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.I1.i1.p1.m1" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math><span class="ltx_text ltx_font_italic">は相対コンパクトである．</span></p>
+</div>
+</li>
+<li id="S3.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S3.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.I1.i2.p1.m1" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math><span class="ltx_text ltx_font_italic">は緊密である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">相対コンパクト性から緊密性を示す．</p>
+<table id="S3.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex29.m1" class="ltx_Math" alttext="\ \forall\epsilon\in(0,1)\ \exists m\in\mathbb{N}\ \forall\mu\in\mathcal{S}\ %
+\mu((-m,m))\geq 1-\epsilon" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ϵ</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>m</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>μ</mi></mrow></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo lspace="0.500em">⁢</mo><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>m</mi></mrow><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mrow><mn>1</mn><mo>−</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を示そう．
+背理法による．</p>
+<table id="S3.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex30.m1" class="ltx_Math" alttext="\ \exists\epsilon\in(0,1)\ \forall m\in\mathbb{N}\ \exists\mu\in\mathcal{S}\ %
+\mu((-m,m))&lt;1-\epsilon" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>ϵ</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>m</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>μ</mi></mrow></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo lspace="0.500em">⁢</mo><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>m</mi></mrow><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mn>1</mn><mo>−</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を仮定する．
+各<math id="S3.p3.m1" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について対応する測度を<math id="S3.p3.m2" class="ltx_Math" alttext="\mu_{m}" display="inline"><msub><mi>μ</mi><mi>m</mi></msub></math>
+とかく．
+このとき，<math id="S3.p3.m3" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math>のコンパクト性から，
+部分列<math id="S3.p3.m4" class="ltx_Math" alttext="\{m_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>と<math id="S3.p3.m5" class="ltx_Math" alttext="\{\mu_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>μ</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>
+が存在して<math id="S3.p3.m6" class="ltx_Math" alttext="x\leq m_{i}" display="inline"><mrow><mi>x</mi><mo>≤</mo><msub><mi>m</mi><mi>i</mi></msub></mrow></math>ならば</p>
+<table id="S3.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex31.m1" class="ltx_Math" alttext="\mu_{i}((-x,x))&lt;1-\epsilon" display="block"><mrow><mrow><msub><mi>μ</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mn>1</mn><mo>−</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と</p>
+<table id="S3.Ex32" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex32.m1" class="ltx_Math" alttext="\mu_{i}\Longrightarrow\mu" display="block"><mrow><msub><mi>μ</mi><mi>i</mi></msub><mo stretchy="false">⟹</mo><mi>μ</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+そして弱収束していることと<math id="S3.p3.m7" class="ltx_Math" alttext="m_{i}\to\infty" display="inline"><mrow><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>から
+任意の<math id="S3.p3.m8" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について</p>
+<table id="S3.Ex33" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex33.m1" class="ltx_Math" alttext="\mu((-x,x))\leq\liminf_{i\to\infty}\mu_{i}((-x,x))\leq 1-\epsilon" display="block"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">≤</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim inf</mo><mrow><mi>i</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>μ</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mn>1</mn><mo>−</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つが，<math id="S3.p3.m9" class="ltx_Math" alttext="x\to\infty" display="inline"><mrow><mi>x</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>とすると，
+<math id="S3.p3.m10" class="ltx_Math" alttext="1\leq 1-\epsilon" display="inline"><mrow><mn>1</mn><mo>≤</mo><mrow><mn>1</mn><mo>−</mo><mi>ϵ</mi></mrow></mrow></math>となるので矛盾する．</p>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">今度は逆を示そう．
+<math id="S3.p4.m1" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math>
+は緊密であるとする．このとき</p>
+<table id="S3.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex34.m1" class="ltx_Math" alttext="\forall N\in\mathbb{N}\ \exists M_{N}\in\mathbb{N}\ \forall\mu\in\mathcal{S}\ %
+\mu([-M_{N},M_{N}])\geq 1-2^{-N}\land M_{N}\geq N" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><msub><mi>M</mi><mi>N</mi></msub></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>μ</mi></mrow></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo lspace="0.500em">⁢</mo><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><msub><mi>M</mi><mi>N</mi></msub></mrow><mo>,</mo><msub><mi>M</mi><mi>N</mi></msub><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mrow><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>N</mi></mrow></msup></mrow><mo>∧</mo><msub><mi>M</mi><mi>N</mi></msub></mrow><mo>≥</mo><mi>N</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+<math id="S3.p4.m2" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math>内の部分列<math id="S3.p4.m3" class="ltx_Math" alttext="\{\mu_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>μ</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>をとる．
+<math id="S3.p4.m4" class="ltx_Math" alttext="\mu_{n}" display="inline"><msub><mi>μ</mi><mi>n</mi></msub></math>の分布関数を<math id="S3.p4.m5" class="ltx_Math" alttext="F_{n}" display="inline"><msub><mi>F</mi><mi>n</mi></msub></math>と書くことにする．
+このとき，
+Hellyの選出定理から
+<math id="S3.p4.m6" class="ltx_Math" alttext="F_{n}" display="inline"><msub><mi>F</mi><mi>n</mi></msub></math>の部分列と単調非減少関数<math id="S3.p4.m7" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>で，
+<math id="S3.p4.m8" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>の連続点について
+各点収束する．
+緊密性から，<math id="S3.p4.m9" class="ltx_Math" alttext="M_{N}\leq x" display="inline"><mrow><msub><mi>M</mi><mi>N</mi></msub><mo>≤</mo><mi>x</mi></mrow></math>を満たす<math id="S3.p4.m10" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について</p>
+<table id="S3.Ex35" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex35.m1" class="ltx_Math" alttext="1\geq F_{n}(x)-F_{n}(-x)\geq 1-2^{-N}" display="block"><mrow><mn>1</mn><mo>≥</mo><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≥</mo><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>N</mi></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり，<math id="S3.p4.m11" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>の不連続点は高々可算個しかないので，
+<math id="S3.p4.m12" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を連続点として<math id="S3.p4.m13" class="ltx_Math" alttext="n\to\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>とすると，</p>
+<table id="S3.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex36.m1" class="ltx_Math" alttext="1\geq F(x)-F(-x)\geq 1-2^{-N}" display="block"><mrow><mn>1</mn><mo>≥</mo><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≥</mo><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>N</mi></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．<math id="S3.p4.m14" class="ltx_Math" alttext="x\to\infty" display="inline"><mrow><mi>x</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>
+とすると，</p>
+<table id="S3.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex37.m1" class="ltx_Math" alttext="\lim_{x\to\infty}(F(x)-F(-x))=1" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mo lspace="0em" stretchy="false">(</mo><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+また，<math id="S3.p4.m15" class="ltx_Math" alttext="\lim_{x\to\infty}F(-x)=0" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>は<math id="S3.p4.m16" class="ltx_Math" alttext="F_{n}" display="inline"><msub><mi>F</mi><mi>n</mi></msub></math>の収束先であることからすぐわかるので，
+この文章の前半で頑張って示した内容から
+<math id="S3.p4.m17" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>はある確率測度<math id="S3.p4.m18" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>の分布関数になる．
+つまり，<math id="S3.p4.m19" class="ltx_Math" alttext="\mu_{n}\Longrightarrow\mu" display="inline"><mrow><msub><mi>μ</mi><mi>n</mi></msub><mo stretchy="false">⟹</mo><mi>μ</mi></mrow></math>となるので，<math id="S3.p4.m20" class="ltx_Math" alttext="\mathcal{S}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒮</mi></math>が相対コンパクトであることがわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信の記事
+「Helly空間とHellyの選出定理」,
+https://concious4410.hatenablog.com/entry/2021/03/25/100947
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信の記事
+「リース・マルコフ・角谷の表現定理の証明(入射角16.225°の測度論入門2)」,
+https://concious4410.hatenablog.com/entry/2015/10/28/213025
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信の記事
+「Riesz-Markov-Kakutaniの表現定理II」,
+https://concious4410.hatenablog.com/entry/2020/02/02/213341
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">伊藤清三，「ルベーグ積分入門」，
+1963年，
+裳華房．
+
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">船木直久, 「確率論」,
+講座・数学の考え方 20，2004, 朝倉書店．
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:40:43 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,975 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>クラインミルマンの定理</title>
+<!--Generated on Sun Jul 26 17:41:00 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-03-23-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>クレイン・ミルマンの定理：関数解析その0のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../kreinmilman.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">クラインミルマンの定理</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では，主に<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>に沿って
+Krein–Milmanの定理を紹介する．
+応用としてextreme pointを使った議論によってBernsteinの定理を証明する．
+この文章で局所凸空間といったら局所凸線形位相空間のことであり，さらにハウスドルフな物だけ考える．
+また，局所凸空間の線形形式といったら連続な物だけ考えることにする．係数は基本的に<math id="p1.m1" class="ltx_Math" alttext="\mathbb{C}" display="inline"><mi>ℂ</mi></math>で考えているが，
+以下の議論は全て<math id="p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>でも成り立つので，応用編では断りなく係数<math id="p1.m3" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の話をしている．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>本文</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(Hahn–Banachの定理の一つの形，使う分だけ)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">を局所凸線型空間とし，
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>をその空でない凸コンパクト空間,
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="p\in E" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>E</mi></mrow></math>は点で<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="p\not\in A" display="inline"><mrow><mi>p</mi><mo>∉</mo><mi>A</mi></mrow></math>
+とする．
+このとき連続な線型写像<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="f\colon E\to\mathbb{C}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>E</mi><mo stretchy="false">→</mo><mi>ℂ</mi></mrow></mrow></math>が存在して
+<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="\sup_{x\in A}\mathrm{Re}f(x)&lt;\mathrm{Re}f(p)" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">定理の名前で調べると証明が出てくる．省略．
+∎</p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(extreme point)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の凸集合<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>
+の点<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="p\in L" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>L</mi></mrow></math>
+が<span class="ltx_text ltx_font_bold">extreme point</span>
+であるとは，
+任意の<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="x,y\in L" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>L</mi></mrow></math>
+についてもしも<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="t\in(0,1)" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が存在して
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="tx+(1-t)y=p" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>=</mo><mi>p</mi></mrow></math>ならば
+<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="p=x=y" display="inline"><mrow><mi>p</mi><mo>=</mo><mi>x</mi><mo>=</mo><mi>y</mi></mrow></math>となるときにいう．
+凸集合<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>
+のextreme point 全体の集合を
+<math id="Thmthm2.p1.m9" class="ltx_Math" alttext="\partial_{ext}(L)" display="inline"><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>L</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+と書くことにする．</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の凸集合<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>とその点<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>について以下の二つは
+同値である．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">点</span><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math><span class="ltx_text ltx_font_italic">のextreme point である．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="x,y\in L" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>L</mi></mrow></math><span class="ltx_text ltx_font_italic">についてもしも</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="p=\frac{1}{2}x+\frac{1}{2}y" display="inline"><mrow><mi>p</mi><mo>=</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>y</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が成り立つならば</span><math id="S1.I1.i2.p1.m3" class="ltx_Math" alttext="x=y=p" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>y</mi><mo>=</mo><mi>p</mi></mrow></math><span class="ltx_text ltx_font_italic">となる．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p"><math id="S1.p2.m1" class="ltx_Math" alttext="\ref{item:lemext}\Longrightarrow\ref{item:lemtyuu}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i1" title="item (1) ‣ 補題 3. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i2" title="item (2) ‣ 補題 3. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext></mrow></math>はわかる．
+<math id="S1.p2.m2" class="ltx_Math" alttext="\ref{item:lemtyuu}\Longrightarrow\ref{item:lemext}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i2" title="item (2) ‣ 補題 3. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S1.I1.i1" title="item (1) ‣ 補題 3. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext></mrow></math>
+を示そう．任意の<math id="S1.p2.m3" class="ltx_Math" alttext="x,y\in L" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>L</mi></mrow></math>について
+<math id="S1.p2.m4" class="ltx_Math" alttext="t\in(0,1)" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が存在して<math id="S1.p2.m5" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が<math id="S1.p2.m6" class="ltx_Math" alttext="p=t\cdot x+(1-t)y" display="inline"><mrow><mi>p</mi><mo>=</mo><mrow><mrow><mi>t</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow></mrow></math>となるとしよう．
+ここで<math id="S1.p2.m7" class="ltx_Math" alttext="s\in(0,1)" display="inline"><mrow><mi>s</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>について<math id="S1.p2.m8" class="ltx_Math" alttext="l(s)=sx+(1-s)y" display="inline"><mrow><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>s</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>s</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow></mrow></math>とおく．
+このとき<math id="S1.p2.m9" class="ltx_Math" alttext="\epsilon\in(0,\min\{t,1-t\})" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mrow><mi>min</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mi>t</mi><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>となる<math id="S1.p2.m10" class="ltx_Math" alttext="\epsilon" display="inline"><mi>ϵ</mi></math>について
+<math id="S1.p2.m11" class="ltx_Math" alttext="t_{\epsilon,+}=t+\epsilon" display="inline"><mrow><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">+</mo></mrow></msub><mo>=</mo><mrow><mi>t</mi><mo>+</mo><mi>ϵ</mi></mrow></mrow></math>で<math id="S1.p2.m12" class="ltx_Math" alttext="t_{\epsilon,-}=t-\epsilon" display="inline"><mrow><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">−</mo></mrow></msub><mo>=</mo><mrow><mi>t</mi><mo>−</mo><mi>ϵ</mi></mrow></mrow></math>
+としたとき，<math id="S1.p2.m13" class="ltx_Math" alttext="p=\frac{1}{2}(l(t_{\epsilon,+})+l(t_{\epsilon,-}))" display="inline"><mrow><mi>p</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">+</mo></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">−</mo></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．よって<math id="S1.p2.m14" class="ltx_Math" alttext="p=l(t_{\epsilon,+})=l(t_{\epsilon,-})" display="inline"><mrow><mi>p</mi><mo>=</mo><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">+</mo></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mrow><mi>ϵ</mi><mo rspace="0em">,</mo><mo lspace="0em">−</mo></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+である．
+よって<math id="S1.p2.m15" class="ltx_Math" alttext="(t+\epsilon)x+(1-t-\epsilon)y=(t-\epsilon)x+(1-t+\epsilon)y" display="inline"><mrow><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>+</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo>+</mo><mi>ϵ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow></mrow></math>であるから式変形して
+<math id="S1.p2.m16" class="ltx_Math" alttext="x=y" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>y</mi></mrow></math>がわかる．よって<math id="S1.p2.m17" class="ltx_Math" alttext="p=x=y" display="inline"><mrow><mi>p</mi><mo>=</mo><mi>x</mi><mo>=</mo><mi>y</mi></mrow></math>も従う．
+∎</p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold"> </span>(閉凸包)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の部分集合<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の<span class="ltx_text ltx_font_bold">凸包</span>とは
+<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を含む全ての凸集合の共通部分のことである．
+これを
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="\mathrm{co}(S)" display="inline"><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+と書く事にする．
+また
+<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の<span class="ltx_text ltx_font_bold">閉凸包</span>とは
+<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を含む全ての閉凸集合の共通部分のことである．
+<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を含む閉凸集合のうち最小のものと言っても良い．
+<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の閉凸包のことを
+<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)" display="inline"><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+と書くことにする．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の部分集合<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について
+<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)" display="inline"><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\mathrm{co}(S)" display="inline"><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>の閉包に等しい．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">局所凸空間において
+凸集合の閉包が凸集合であることから
+まず
+<math id="S1.p3.m1" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)\subset\mathrm{cl}(\mathrm{co}(S))" display="inline"><mrow><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．
+また
+<math id="S1.p3.m2" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)" display="inline"><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>は凸集合なので
+<math id="S1.p3.m3" class="ltx_Math" alttext="\mathrm{co}(S)\subset\overline{\mathrm{co}}(S)" display="inline"><mrow><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかるから
+<math id="S1.p3.m4" class="ltx_Math" alttext="\mathrm{co}(S)\subset\overline{\mathrm{co}}(S)" display="inline"><mrow><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が従う．
+∎</p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(Face)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の空でない集合<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の
+部分集合<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>が
+<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の
+<span class="ltx_text ltx_font_bold">face</span>
+であるとは
+もしも<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="x,y\in S" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>S</mi></mrow></math>について
+<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="t\in(0,1)" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が存在して
+<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="tx+(1-t)y\in F" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>∈</mo><mi>F</mi></mrow></math>となっているならば
+<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="x,y\in F" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>F</mi></mrow></math>
+となるときにいう．
+ここで<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>が凸集合の状況で一点集合<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="\{p\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>p</mi><mo stretchy="false">}</mo></mrow></math>がfaceになっていることと
+<math id="Thmthm6.p1.m11" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>がextreme point であることは
+同値であることに注意しよう．</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の凸集合<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の
+部分集合<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="F_{0}" display="inline"><msub><mi>F</mi><mn>0</mn></msub></math>
+と<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="F_{1}" display="inline"><msub><mi>F</mi><mn>1</mn></msub></math>について
+<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="F_{0}" display="inline"><msub><mi>F</mi><mn>0</mn></msub></math>が<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>のfaceで
+<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="F_{1}" display="inline"><msub><mi>F</mi><mn>1</mn></msub></math>が<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="F_{0}" display="inline"><msub><mi>F</mi><mn>0</mn></msub></math>のfaceならば
+<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="F_{1}" display="inline"><msub><mi>F</mi><mn>1</mn></msub></math>は<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>のfaceである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.p4.m1" class="ltx_Math" alttext="x,y\in L" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>L</mi></mrow></math>について
+ある<math id="S1.p4.m2" class="ltx_Math" alttext="t\in(0,1)" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が存在して
+<math id="S1.p4.m3" class="ltx_Math" alttext="tx+(1-t)y\in F_{1}" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>∈</mo><msub><mi>F</mi><mn>1</mn></msub></mrow></math>
+となっているとしよう．
+このとき<math id="S1.p4.m4" class="ltx_Math" alttext="F_{1}\subset F_{0}" display="inline"><mrow><msub><mi>F</mi><mn>1</mn></msub><mo>⊂</mo><msub><mi>F</mi><mn>0</mn></msub></mrow></math>
+であるから
+<math id="S1.p4.m5" class="ltx_Math" alttext="tx+(1-t)y\in F_{0}" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>∈</mo><msub><mi>F</mi><mn>0</mn></msub></mrow></math>である．
+よって<math id="S1.p4.m6" class="ltx_Math" alttext="F_{0}" display="inline"><msub><mi>F</mi><mn>0</mn></msub></math>
+が<math id="S1.p4.m7" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>のfaceであることから
+<math id="S1.p4.m8" class="ltx_Math" alttext="x,y\in F_{0}" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><msub><mi>F</mi><mn>0</mn></msub></mrow></math>
+である．
+よって
+<math id="S1.p4.m9" class="ltx_Math" alttext="F_{1}" display="inline"><msub><mi>F</mi><mn>1</mn></msub></math>が<math id="S1.p4.m10" class="ltx_Math" alttext="F_{0}" display="inline"><msub><mi>F</mi><mn>0</mn></msub></math>
+のfaceであることから
+<math id="S1.p4.m11" class="ltx_Math" alttext="x,y\in F_{0}" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><msub><mi>F</mi><mn>0</mn></msub></mrow></math>
+である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm8.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の凸集合<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の
+faceの族<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="\{F_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>
+について<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\bigcap_{i\in I}F_{i}" display="inline"><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>F</mi><mi>i</mi></msub></mrow></math>
+は<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>のfaceである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">明らか．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間
+<math id="Thmthm9.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>と線形形式<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を与える．
+このとき<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の部分集合<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>
+と<math id="Thmthm9.p1.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>のface
+<math id="Thmthm9.p1.m6" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>
+について
+集合
+<math id="Thmthm9.p1.m7" class="ltx_Math" alttext="A=\{\,p\in F\mid\mathrm{Re}f(p)=\sup_{a\in F}\mathrm{Re}f(a)\,\}" display="inline"><mrow><mi>A</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>p</mi><mo>∈</mo><mi>F</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>a</mi><mo>∈</mo><mi>F</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が空でないならば
+<math id="Thmthm9.p1.m8" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は<math id="Thmthm9.p1.m9" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>のfaceである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">補題 <a href="#Thmthm7" title="補題 7. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+より
+<math id="S1.p6.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が<math id="S1.p6.m2" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>のfaceであることを示せば良い．
+<math id="S1.p6.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が空でないので特に<math id="S1.p6.m4" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>も空でない．
+そこで
+<math id="S1.p6.m5" class="ltx_Math" alttext="M=\sup_{a\in F}\mathrm{Re}f(a)" display="inline"><mrow><mi>M</mi><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>a</mi><mo>∈</mo><mi>F</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とおく．
+任意の
+<math id="S1.p6.m6" class="ltx_Math" alttext="x,y\in F" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>F</mi></mrow></math>について
+ある<math id="S1.p6.m7" class="ltx_Math" alttext="t\in(0,1)" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が存在して
+<math id="S1.p6.m8" class="ltx_Math" alttext="tx+(1-t)y\in A" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>∈</mo><mi>A</mi></mrow></math>となっているとする．
+このとき
+<math id="S1.p6.m9" class="ltx_Math" alttext="M=\mathrm{Re}f(tx+(1-t)y)=\mathrm{Re}(tf(x)+(1-t)f(y))=t\mathrm{Re}f(x)+(1-t)%
+\mathrm{Re}f(y)\leq t\max\{\mathrm{Re}f(x),\mathrm{Re}f(y)\}+(1-t)\max\{%
+\mathrm{Re}f(x),\mathrm{Re}f(y)\}\leq tM+(1-t)M\leq M" display="inline"><mrow><mi>M</mi><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>y</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>t</mi><mo lspace="0.167em">⁢</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.167em">⁢</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow></mrow><mo>≤</mo><mi>M</mi></mrow></math>となる．よって<math id="S1.p6.m10" class="ltx_Math" alttext="\max\{\mathrm{Re}f(x),\mathrm{Re}f(y)\}=M" display="inline"><mrow><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>=</mo><mi>M</mi></mrow></math>である．
+対称性から<math id="S1.p6.m11" class="ltx_Math" alttext="f(x)=M" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>M</mi></mrow></math>としても良い．すると
+<math id="S1.p6.m12" class="ltx_Math" alttext="t\mathrm{Re}f(x)+(1-t)\mathrm{Re}f(y)=M" display="inline"><mrow><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>M</mi></mrow></math>から
+<math id="S1.p6.m13" class="ltx_Math" alttext="f(y)=M" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>M</mi></mrow></math>も成り立つ．
+よって<math id="S1.p6.m14" class="ltx_Math" alttext="x,y\in A" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>A</mi></mrow></math>となるから
+<math id="S1.p6.m15" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は<math id="S1.p6.m16" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>のfaceである．
+∎</p>
+</div>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">Krein–Milmannの定理を証明しよう．
+以下の<a href="#S1.I2.i2" title="item (2) ‣ 定理 10 (Krein–Milmanの定理: 幾何形). ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>が通常，Krein–Milmanの定理と呼ばれる．</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold"> </span>(Krein–Milmanの定理: 幾何形)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">を局所凸線型空間とする．
+そして<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>を
+空でない
+凸コンパクト空間とする．
+このとき
+以下が成り立つ．</span></p>
+<ol id="S1.I2" class="ltx_enumerate">
+<li id="S1.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i1.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">の閉集合であるような任意の空でないface </span><math id="S1.I2.i1.p1.m2" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math><span class="ltx_text ltx_font_italic">について</span><math id="S1.I2.i1.p1.m3" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math><span class="ltx_text ltx_font_italic">に属するextreme point が存在する．特に
+</span><math id="S1.I2.i1.p1.m4" class="ltx_Math" alttext="\partial_{ext}(K)\neq\emptyset" display="inline"><mrow><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i2.p1.m1" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">上の連続な線形形式全体を適当に添字付けして
+<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\{f_{\alpha}\}_{\alpha&lt;\kappa+1}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>κ</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub></math>とおきさらに
+<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="f_{\kappa}" display="inline"><msub><mi>f</mi><mi>κ</mi></msub></math>は<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>としておこう．
+例えば<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>は線形形式全体の濃度にすれば良い．
+ここで添字付けは全射になっていることに注意しよう(単射性は特に必要ない)．
+ここで超限再帰によって
+<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の部分集合
+<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="F_{\alpha}" display="inline"><msub><mi>F</mi><mi>α</mi></msub></math>を以下のように定義する．
+<math id="Thmthm11.p1.m8" class="ltx_Math" alttext="\beta&lt;\alpha" display="inline"><mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></math>となる<math id="Thmthm11.p1.m9" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>については
+<math id="Thmthm11.p1.m10" class="ltx_Math" alttext="F_{\beta}" display="inline"><msub><mi>F</mi><mi>β</mi></msub></math>が定義されているとして，
+<math id="Thmthm11.p1.m11" class="ltx_Math" alttext="C_{\alpha}=\bigcap_{\beta&lt;\alpha}F_{\beta}" display="inline"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋂</mo><mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></msub><msub><mi>F</mi><mi>β</mi></msub></mrow></mrow></math>
+かつ<math id="Thmthm11.p1.m12" class="ltx_Math" alttext="C_{0}=F" display="inline"><mrow><msub><mi>C</mi><mn>0</mn></msub><mo>=</mo><mi>F</mi></mrow></math>
+と定義して</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="F_{\alpha}=\begin{cases}C_{\alpha}&amp;C_{\alpha}=\emptyset\text{のとき}\\
+\{\,x\in C_{\alpha}\mid\mathrm{Re}f_{\alpha}(x)=\sup_{p\in C_{\alpha}}\mathrm{%
+Re}f(p)\,\}&amp;C_{\alpha}\neq\emptyset\text{のとき}\end{cases}" display="block"><mrow><msub><mi>F</mi><mi>α</mi></msub><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><msub><mi>C</mi><mi>α</mi></msub></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">∅</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">のとき</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msub><mi>C</mi><mi>α</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>Re</mi><mo>⁢</mo><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>p</mi><mo>∈</mo><msub><mi>C</mi><mi>α</mi></msub></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo>≠</mo><mrow><mi mathvariant="normal">∅</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">のとき</mtext></mrow></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+このようにして<math id="Thmthm11.p1.m13" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の閉部分集合の列
+<math id="Thmthm11.p1.m14" class="ltx_Math" alttext="\{F_{\alpha}\}_{\alpha&lt;\kappa+1}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>α</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>κ</mi><mo>+</mo><mn>1</mn></mrow></mrow></msub></math>を得る．
+今から任意の<math id="Thmthm11.p1.m15" class="ltx_Math" alttext="\alpha&lt;\kappa+1" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>κ</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>について
+<math id="Thmthm11.p1.m16" class="ltx_Math" alttext="F_{\alpha}\neq\emptyset" display="inline"><mrow><msub><mi>F</mi><mi>α</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>を証明しよう．
+まず
+<math id="Thmthm11.p1.m17" class="ltx_Math" alttext="C_{0}=F" display="inline"><mrow><msub><mi>C</mi><mn>0</mn></msub><mo>=</mo><mi>F</mi></mrow></math>
+であり
+<math id="Thmthm11.p1.m18" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>のコンパクト性から
+<math id="Thmthm11.p1.m19" class="ltx_Math" alttext="\mathrm{Re}f_{0}(x)=\sup_{p\in C_{0}}\mathrm{Re}f(p)" display="inline"><mrow><mrow><mi>Re</mi><mo>⁢</mo><msub><mi>f</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>p</mi><mo>∈</mo><msub><mi>C</mi><mn>0</mn></msub></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+となる
+<math id="Thmthm11.p1.m20" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>
+は存在するから
+<math id="Thmthm11.p1.m21" class="ltx_Math" alttext="F_{0}\neq\emptyset" display="inline"><mrow><msub><mi>F</mi><mn>0</mn></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>である．
+そして一般に<math id="Thmthm11.p1.m22" class="ltx_Math" alttext="\beta&lt;\alpha" display="inline"><mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></math>となる<math id="Thmthm11.p1.m23" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>について<math id="Thmthm11.p1.m24" class="ltx_Math" alttext="F_{\beta}\neq\emptyset" display="inline"><mrow><msub><mi>F</mi><mi>β</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>だとすると
+<math id="Thmthm11.p1.m25" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のコンパクト性から<math id="Thmthm11.p1.m26" class="ltx_Math" alttext="C_{\alpha}\neq\emptyset" display="inline"><mrow><msub><mi>C</mi><mi>α</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．よって<math id="Thmthm11.p1.m27" class="ltx_Math" alttext="C_{\alpha}" display="inline"><msub><mi>C</mi><mi>α</mi></msub></math>自体もコンパクトとなるから
+<math id="Thmthm11.p1.m28" class="ltx_Math" alttext="F_{\alpha}\neq\emptyset" display="inline"><mrow><msub><mi>F</mi><mi>α</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>となる．
+以上から任意の<math id="Thmthm11.p1.m29" class="ltx_Math" alttext="F_{\alpha}" display="inline"><msub><mi>F</mi><mi>α</mi></msub></math>について
+<math id="Thmthm11.p1.m30" class="ltx_Math" alttext="F_{\alpha}\neq\emptyset" display="inline"><mrow><msub><mi>F</mi><mi>α</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>となる．
+次に<math id="Thmthm11.p1.m31" class="ltx_Math" alttext="F_{\kappa}" display="inline"><msub><mi>F</mi><mi>κ</mi></msub></math>が一点のみからなることを証明しよう．
+任意の2点<math id="Thmthm11.p1.m32" class="ltx_Math" alttext="e,q\in F_{\kappa}" display="inline"><mrow><mrow><mi>e</mi><mo>,</mo><mi>q</mi></mrow><mo>∈</mo><msub><mi>F</mi><mi>κ</mi></msub></mrow></math>をとる．
+このとき任意の<math id="Thmthm11.p1.m33" class="ltx_Math" alttext="\alpha&lt;\kappa+1" display="inline"><mrow><mi>α</mi><mo>&lt;</mo><mrow><mi>κ</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>について
+<math id="Thmthm11.p1.m34" class="ltx_Math" alttext="e,q\in F_{\gamma}" display="inline"><mrow><mrow><mi>e</mi><mo>,</mo><mi>q</mi></mrow><mo>∈</mo><msub><mi>F</mi><mi>γ</mi></msub></mrow></math>であることから
+<math id="Thmthm11.p1.m35" class="ltx_Math" alttext="\sup_{{u\in C_{\alpha}}}\mathrm{Re}f_{\alpha}(u)=\mathrm{Re}f_{\alpha}(e)=%
+\mathrm{Re}f_{\alpha}(q)" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>u</mi><mo>∈</mo><msub><mi>C</mi><mi>α</mi></msub></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><msub><mi>f</mi><mi>α</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+つまり任意の線形形式について
+<math id="Thmthm11.p1.m36" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>と<math id="Thmthm11.p1.m37" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>は同じ値をとる．
+よってHahn–Banachの定理
+(定理<a href="#Thmthm1" title="定理 1 (Hahn–Banachの定理の一つの形，使う分だけ). ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>)から
+<math id="Thmthm11.p1.m38" class="ltx_Math" alttext="e=q" display="inline"><mrow><mi>e</mi><mo>=</mo><mi>q</mi></mrow></math>となる．
+つまり
+<math id="Thmthm11.p1.m39" class="ltx_Math" alttext="F_{\kappa}=\{e\}" display="inline"><mrow><msub><mi>F</mi><mi>κ</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>e</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+である．
+補題<a href="#Thmthm8" title="補題 8. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>から
+任意の<math id="Thmthm11.p1.m40" class="ltx_Math" alttext="C_{\alpha}" display="inline"><msub><mi>C</mi><mi>α</mi></msub></math>は<math id="Thmthm11.p1.m41" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のfaceであり
+また定義と
+補題<a href="#Thmthm9" title="補題 9. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>から任意の<math id="Thmthm11.p1.m42" class="ltx_Math" alttext="F_{\alpha}" display="inline"><msub><mi>F</mi><mi>α</mi></msub></math>は
+<math id="Thmthm11.p1.m43" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のfaceであることがわかる．特に<math id="Thmthm11.p1.m44" class="ltx_Math" alttext="F_{\kappa}=\{e\}" display="inline"><mrow><msub><mi>F</mi><mi>κ</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>e</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+は<math id="Thmthm11.p1.m45" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のfaceなので<math id="Thmthm11.p1.m46" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>が<math id="Thmthm11.p1.m47" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のextreme point であることが従う．</span></p>
+</div>
+<div id="Thmthm11.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に
+主張<a href="#S1.I2.i2" title="item (2) ‣ 定理 10 (Krein–Milmanの定理: 幾何形). ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>を示す．つまり<math id="Thmthm11.p2.m1" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を示そう．<math id="Thmthm11.p2.m2" class="ltx_Math" alttext="L=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>L</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とおく．
+まず<math id="Thmthm11.p2.m3" class="ltx_Math" alttext="L\subset K" display="inline"><mrow><mi>L</mi><mo>⊂</mo><mi>K</mi></mrow></math>がわかる．
+そして任意の<math id="Thmthm11.p2.m4" class="ltx_Math" alttext="p\in K" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>K</mi></mrow></math>をとる．
+このとき<math id="Thmthm11.p2.m5" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>上の任意の線形形式<math id="Thmthm11.p2.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>について
+<math id="Thmthm11.p2.m7" class="ltx_Math" alttext="M_{f}=\sup_{k\in K}\mathrm{Re}f(k)" display="inline"><mrow><msub><mi>M</mi><mi>f</mi></msub><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>k</mi><mo>∈</mo><mi>K</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とおく．
+<math id="Thmthm11.p2.m8" class="ltx_Math" alttext="S_{f}=\{\,x\in K\mid\mathrm{Re}f(x)=M_{f}\,\}" display="inline"><mrow><msub><mi>S</mi><mi>f</mi></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>K</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>M</mi><mi>f</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+は<math id="Thmthm11.p2.m9" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の閉集合かつfaceである．よって
+extreme point <math id="Thmthm11.p2.m10" class="ltx_Math" alttext="a_{f}\in S_{f}" display="inline"><mrow><msub><mi>a</mi><mi>f</mi></msub><mo>∈</mo><msub><mi>S</mi><mi>f</mi></msub></mrow></math>が存在する．
+ここで<math id="Thmthm11.p2.m11" class="ltx_Math" alttext="a_{f}\in L" display="inline"><mrow><msub><mi>a</mi><mi>f</mi></msub><mo>∈</mo><mi>L</mi></mrow></math>なので特に
+<math id="Thmthm11.p2.m12" class="ltx_Math" alttext="\sup_{l\in L}\mathrm{Re}f(l)=M_{f}" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>l</mi><mo>∈</mo><mi>L</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><msub><mi>M</mi><mi>f</mi></msub></mrow></math>
+である．故に<math id="Thmthm11.p2.m13" class="ltx_Math" alttext="M_{f}" display="inline"><msub><mi>M</mi><mi>f</mi></msub></math>の定義から
+<math id="Thmthm11.p2.m14" class="ltx_Math" alttext="\mathrm{Re}f(p)\leq\sup_{l\in L}\mathrm{Re}f(l)" display="inline"><mrow><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">≤</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">sup</mo><mrow><mi>l</mi><mo>∈</mo><mi>L</mi></mrow></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>となる．
+よって
+Hahn–Banachの定理
+(定理<a href="#Thmthm1" title="定理 1 (Hahn–Banachの定理の一つの形，使う分だけ). ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>)より
+<math id="Thmthm11.p2.m15" class="ltx_Math" alttext="p\in L" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>L</mi></mrow></math>でなければならない．
+よって
+<math id="Thmthm11.p2.m16" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．</span></p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">手で操作してる感じが欲しかったので超限帰納法による証明にしてみた．</span></p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmrmkx2.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>
+の空でないコンパクト部分集合<math id="Thmrmkx2.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>
+とその点<math id="Thmrmkx2.p1.m3" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>,
+<math id="Thmrmkx2.p1.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>上のラドン確率測度<math id="Thmrmkx2.p1.m5" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>
+について，
+<math id="Thmrmkx2.p1.m6" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math><span class="ltx_text ltx_font_bold">が<math id="Thmrmkx2.p1.m7" class="ltx_Math" alttext="x" display="inline"><mi mathvariant="normal">x</mi></math>を表現する</span>, あるいは，
+<math id="Thmrmkx2.p1.m8" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math><span class="ltx_text ltx_font_bold">の重心が<math id="Thmrmkx2.p1.m9" class="ltx_Math" alttext="x" display="inline"><mi mathvariant="normal">x</mi></math>
+である</span>とは
+<math id="Thmrmkx2.p1.m10" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>上の任意の線形形式
+<math id="Thmrmkx2.p1.m11" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>について
+<math id="Thmrmkx2.p1.m12" class="ltx_Math" alttext="L(x)=\mu(L)" display="inline"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>L</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となるときにいう．
+ここで<math id="Thmrmkx2.p1.m13" class="ltx_Math" alttext="\mu(L)=\int_{A}L\ d\mu" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>L</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><mi>L</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow></math>という意味である．</span></p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">局所凸空間<math id="Thmthm12.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の空でないコンパクト部分集合<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>
+と<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="x\in E" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>E</mi></mrow></math>について
+<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="x\in\overline{\mathrm{co}}(T)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つことと
+<math id="Thmthm12.p1.m5" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>上のラドン確率測度<math id="Thmthm12.p1.m6" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が存在して
+<math id="Thmthm12.p1.m7" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>が<math id="Thmthm12.p1.m8" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>の重心になることは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">後半から前半を示そう．
+<math id="S1.p8.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を表現する<math id="S1.p8.m2" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>上の確率測度<math id="S1.p8.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>
+があったとき任意の線形形式<math id="S1.p8.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>について</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\mathrm{Re}f(x)=\mathrm{Re}\mu(f)=\mathrm{Re}\int_{A}f(a)\ d\mu=\int_{A}%
+\mathrm{Re}f(a)\ d\mu\leq\int_{A}\sup_{a\in A}\mathrm{Re}f(a)\ d\mu=\sup_{a\in
+A%
+}\mathrm{Re}f(a)" display="block"><mrow><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Re</mi><mo>⁢</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow><mo rspace="0.111em">≤</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><munder><mo lspace="0em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></munder><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mi>d</mi><mo>⁢</mo><mi>μ</mi></mrow></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></munder><mrow><mi>Re</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，Hahn–Banachの定理
+(定理<a href="#Thmthm1" title="定理 1 (Hahn–Banachの定理の一つの形，使う分だけ). ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>)から
+<math id="S1.p8.m5" class="ltx_Math" alttext="x\in\overline{\mathrm{co}}(T)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+今度は前半から後半を示そう．
+<math id="S1.p8.m6" class="ltx_Math" alttext="x\in\overline{\mathrm{co}}(T)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であることから
+<math id="S1.p8.m7" class="ltx_Math" alttext="\mathrm{co}(T)" display="inline"><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></math>のフィルター基底<math id="S1.p8.m8" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>
+であって<math id="S1.p8.m9" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>上で<math id="S1.p8.m10" class="ltx_Math" alttext="\mathcal{F}\to x" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo stretchy="false">→</mo><mi>x</mi></mrow></math>となるものが存在する．
+このとき<math id="S1.p8.m11" class="ltx_Math" alttext="\mathrm{co}(T)" display="inline"><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></math>の元は<math id="S1.p8.m12" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>上のディラック測度の有限凸結合であるから特に<math id="S1.p8.m13" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>上のラドン確率測度と見做せる．
+写像<math id="S1.p8.m14" class="ltx_Math" alttext="\iota\colon\mathrm{co}(T)\to\mathcal{P}r(T)(\subset C(T)^{*}_{w^{*}})" display="inline"><mrow><mi>ι</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>co</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow><mspace width="0.3888888888888889em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mi></mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><msup><mi>w</mi><mo>∗</mo></msup><mo>∗</mo></msubsup></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+をそのようにみなす写像とする．
+ここでバナッハ・アラオグルの定理から
+<math id="S1.p8.m15" class="ltx_Math" alttext="\mathcal{P}r(T)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S1.p8.m16" class="ltx_Math" alttext="w^{*}" display="inline"><msup><mi>w</mi><mo>∗</mo></msup></math>位相についてコンパクトである．
+つまりこの上の全ての極大イデアルは収束する．
+よって<math id="S1.p8.m17" class="ltx_Math" alttext="\iota\mathcal{F}" display="inline"><mrow><mi>ι</mi><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>を含む極大イデアル<math id="S1.p8.m18" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+はある確率測度<math id="S1.p8.m19" class="ltx_Math" alttext="\mu\in\mathcal{P}r(K)" display="inline"><mrow><mi>μ</mi><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に収束する．
+<math id="S1.p8.m20" class="ltx_Math" alttext="C(T)^{*}" display="inline"><mrow><mi>C</mi><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow></math>の<math id="S1.p8.m21" class="ltx_Math" alttext="w^{*}" display="inline"><msup><mi>w</mi><mo>∗</mo></msup></math>位相とは<math id="S1.p8.m22" class="ltx_Math" alttext="g\in C(T)" display="inline"><mrow><mi>g</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>を<math id="S1.p8.m23" class="ltx_Math" alttext="C(T)^{**}" display="inline"><mrow><mi>C</mi><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><mrow><mi></mi><mo lspace="0.222em" rspace="0em">∗</mo><mo lspace="0em">∗</mo></mrow></msup></mrow></math>の元とみなして<math id="S1.p8.m24" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>を連続とする<math id="S1.p8.m25" class="ltx_Math" alttext="C(T)^{*}" display="inline"><mrow><mi>C</mi><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><mo>∗</mo></msup></mrow></math>上の最弱の位相のことであったから任意の<math id="S1.p8.m26" class="ltx_Math" alttext="g\in C(T)" display="inline"><mrow><mi>g</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について
+<math id="S1.p8.m27" class="ltx_Math" alttext="g\mathcal{A}\to g(\mu)=\mu(g)=\int_{T}g\ d\mu" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow><mo stretchy="false">→</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>T</mi></msub><mrow><mi>g</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow></math>である．
+特<math id="S1.p8.m28" class="ltx_Math" alttext="g(\mu)\in\mathbb{C}" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>ℂ</mi></mrow></math>の任意の近傍<math id="S1.p8.m29" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>についてある<math id="S1.p8.m30" class="ltx_Math" alttext="W\in\mathcal{F}" display="inline"><mrow><mi>W</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>と<math id="S1.p8.m31" class="ltx_Math" alttext="A\in\mathcal{A}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow></math>が存在して
+<math id="S1.p8.m32" class="ltx_Math" alttext="g(\iota(W)\cap A)\in V" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ι</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>V</mi></mrow></math>となる．
+ここで<math id="S1.p8.m33" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が線形形式<math id="S1.p8.m34" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の<math id="S1.p8.m35" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>への制限になっている時を考えよう．
+<math id="S1.p8.m36" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>を任意にとる．このとき
+上記の<math id="S1.p8.m37" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>を<math id="S1.p8.m38" class="ltx_Math" alttext="g(\mu)=f(\mu)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>の<math id="S1.p8.m39" class="ltx_Math" alttext="\epsilon" display="inline"><mi>ϵ</mi></math>近傍とする．
+さて<math id="S1.p8.m40" class="ltx_Math" alttext="f(x)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>の<math id="S1.p8.m41" class="ltx_Math" alttext="\epsilon" display="inline"><mi>ϵ</mi></math>近傍を<math id="S1.p8.m42" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>とし，
+<math id="S1.p8.m43" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の<math id="S1.p8.m44" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>での連続性を担保する<math id="S1.p8.m45" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>近傍を<math id="S1.p8.m46" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>とする．
+ここで上記の<math id="S1.p8.m47" class="ltx_Math" alttext="W\in\mathcal{F}" display="inline"><mrow><mi>W</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>を十分小さく取り追加で<math id="S1.p8.m48" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の<math id="S1.p8.m49" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>近傍<math id="S1.p8.m50" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>
+について<math id="S1.p8.m51" class="ltx_Math" alttext="W\subset N" display="inline"><mrow><mi>W</mi><mo>⊂</mo><mi>N</mi></mrow></math>となるようにできる．
+特に<math id="S1.p8.m52" class="ltx_Math" alttext="f(W)\subset f(N)\subset U" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>U</mi></mrow></math>である．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">ここで<math id="S1.p9.m1" class="ltx_Math" alttext="g(\iota(W)\cap A)\subset V" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ι</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>V</mi></mrow></math>となることから
+<math id="S1.p9.m2" class="ltx_Math" alttext="\iota p\in A" display="inline"><mrow><mrow><mi>ι</mi><mo>⁢</mo><mi>p</mi></mrow><mo>∈</mo><mi>A</mi></mrow></math>となる<math id="S1.p9.m3" class="ltx_Math" alttext="p\in W" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>W</mi></mrow></math>をとる．
+さて
+<math id="S1.p9.m4" class="ltx_Math" alttext="p=\sum_{i=1}^{m}\lambda_{i}y_{i}" display="inline"><mrow><mi>p</mi><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>λ</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>y</mi><mi>i</mi></msub></mrow></mrow></mrow></math> <math id="S1.p9.m5" class="ltx_Math" alttext="(y_{i}\in T,\lambda_{i}\in[0,1],\sum_{i}\lambda_{i}=1)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>∈</mo><mi>T</mi></mrow><mo>,</mo><mrow><mrow><msub><mi>λ</mi><mi>i</mi></msub><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo rspace="0em">,</mo><mrow><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>λ</mi><mi>i</mi></msub></mrow><mo>=</mo><mn>1</mn></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></math>となっているとする．ついで<math id="S1.p9.m6" class="ltx_Math" alttext="\iota p=\sum_{i=1}^{m}\lambda_{i}\delta_{y_{i}}" display="inline"><mrow><mrow><mi>ι</mi><mo>⁢</mo><mi>p</mi></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>λ</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>δ</mi><msub><mi>y</mi><mi>i</mi></msub></msub></mrow></mrow></mrow></math>に注意せよ．
+すると
+<math id="S1.p9.m7" class="ltx_Math" alttext="f(p)=\sum_{i=1}^{m}\lambda_{i}f(y_{i})=(\iota p)(f)=f(\iota p)=g(\iota p)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>λ</mi><mi>i</mi></msub><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>ι</mi><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>ι</mi><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>ι</mi><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので
+<math id="S1.p9.m8" class="ltx_Math" alttext="f(p)\in f(N)\cap g(\iota(W)\cap A)\subset U\cap V" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>ι</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>A</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow></mrow></math>である．
+よって<math id="S1.p9.m9" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>と<math id="S1.p9.m10" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>は共通部分を持つので<math id="S1.p9.m11" class="ltx_Math" alttext="f(x)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>と
+<math id="S1.p9.m12" class="ltx_Math" alttext="f(\mu)=\mu(f)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>の距離は<math id="S1.p9.m13" class="ltx_Math" alttext="2\epsilon" display="inline"><mrow><mn>2</mn><mo>⁢</mo><mi>ϵ</mi></mrow></math>以下である．
+<math id="S1.p9.m14" class="ltx_Math" alttext="\epsilon" display="inline"><mi>ϵ</mi></math>は任意であったから
+<math id="S1.p9.m15" class="ltx_Math" alttext="\mu(f)=f(x)" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+よって<math id="S1.p9.m16" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>は<math id="S1.p9.m17" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を表現する測度である．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx3" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ネットは使いづらいのでフィルターを用いた証明にした．</span></p>
+</div>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold"> </span>(Krein–Milmanの定理: 積分形)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">を局所凸空間とし，
+<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+をその空ではないコンパクト凸集合とする．
+すると<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+の任意の点は<math id="Thmthm13.p1.m4" class="ltx_Math" alttext="\mathrm{cl}(\partial_{ext}(K))" display="inline"><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+に台を持つラドン確率測度の重心である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p"><math id="S1.p10.m1" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であるから
+特に<math id="S1.p10.m2" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\mathrm{cl}(\partial_{ext}(K)))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+でもある．よって
+命題
+<a href="#Thmthm12" title="命題 12. ‣ 1 本文 ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a>
+から<math id="S1.p10.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の任意の点は
+<math id="S1.p10.m4" class="ltx_Math" alttext="\mathrm{cl}(\partial_{ext}(K))" display="inline"><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+に台を持つ確率測度<math id="S1.p10.m5" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>
+によって
+表現される．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx4" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">逆に積分形から幾何形を導くことができる．
+なぜならば一般に集合<math id="Thmrmkx4.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について
+<math id="Thmrmkx4.p1.m2" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)=\overline{\mathrm{co}}(\mathrm{cl}(S))" display="inline"><mrow><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つからである．
+なんとなればまず<math id="Thmrmkx4.p1.m3" class="ltx_Math" alttext="\overline{\mathrm{co}}(S)\subset\overline{\mathrm{co}}(\mathrm{cl}(S))" display="inline"><mrow><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は自明であり，
+<math id="Thmrmkx4.p1.m4" class="ltx_Math" alttext="\mathrm{cl}(S)\subset\overline{\mathrm{co}}(S)" display="inline"><mrow><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であることから
+<math id="Thmrmkx4.p1.m5" class="ltx_Math" alttext="\overline{\mathrm{co}}(\mathrm{cl}(S))\subset\overline{\mathrm{co}}(S)" display="inline"><mrow><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>cl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が従う．</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>応用：Bernstein functions</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">以下では線型空間は<math id="S2.p1.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>係数である．</p>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">関数<math id="Thmthm14.p1.m1" class="ltx_Math" alttext="f\colon(0,\infty)\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>が
+<span class="ltx_text ltx_font_bold">completely monotonic</span>であるとは
+<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="C^{\infty}" display="inline"><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></math>級であり
+任意の<math id="Thmthm14.p1.m4" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>と
+任意の<math id="Thmthm14.p1.m5" class="ltx_Math" alttext="x\in(0,\infty)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>について
+<math id="Thmthm14.p1.m6" class="ltx_Math" alttext="(-1)^{n}f^{(n)}(x)\geq 0" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math>
+が成り立つときにいう．</span></p>
+</div>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">Krein–Milmanの定理を用いてBernsteinの定理を証明していく．
+つまり次の定理を証明する：
+<math id="S2.p2.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を有界なcompletely monotonic 関数とする．
+このとき<math id="S2.p2.m2" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>上のラドン測度
+<math id="S2.p2.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が一意的に存在して
+<math id="S2.p2.m4" class="ltx_Math" alttext="\mu([0,\infty])=\lim_{x\to+0}f(x)" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0.167em">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mn>0</mn></mrow></mrow></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>かつ</p>
+<table id="S2.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex3.m1" class="ltx_Math" alttext="f(x)=\int_{[0,\infty]}\exp(-\alpha x)\ d\mu(\alpha)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+また，<math id="S2.p2.m5" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>がこの結論のように表されることと，
+<math id="S2.p2.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が有界かつcompletely monotonicであることは同値である．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">この定理は<math id="S2.p3.m1" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>上の有限測度のラプラス変換の値になるような関数の特徴づけを与えている．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">このセクションでは
+<math id="S2.p4.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>を<math id="S2.p4.m2" class="ltx_Math" alttext="(0,\infty)" display="inline"><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></math>上の<math id="S2.p4.m3" class="ltx_Math" alttext="C^{\infty}" display="inline"><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></math>有界関数全体であって，
+位相はその導関数の広義一様収束とする．
+<math id="S2.p4.m4" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>上のセミノルム<math id="S2.p4.m5" class="ltx_Math" alttext="p_{m,n}" display="inline"><msub><mi>p</mi><mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub></math>を</p>
+<table id="S2.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex4.m1" class="ltx_Math" alttext="p_{m,n}(f)=\sup_{x\in[2^{-m},2^{m}]}\max_{0\leq k\leq n}\left|f^{(k)}(x)\right|" display="block"><mrow><mrow><msub><mi>p</mi><mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>m</mi></mrow></msup><mo>,</mo><msup><mn>2</mn><mi>m</mi></msup><mo stretchy="false">]</mo></mrow></mrow></munder><mrow><munder><mi>max</mi><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mi>n</mi></mrow></munder><mo>⁡</mo><mrow><mo>|</mo><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>|</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とすれば<math id="S2.p4.m6" class="ltx_Math" alttext="\{p_{m,n}\}_{m,n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+は<math id="S2.p4.m7" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の位相を生成するセミノルムの族となる．
+可算個のセミノルムによって位相が生成されているので
+<math id="S2.p4.m8" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>は距離づけ可能であることに注意しよう．
+そして
+<math id="S2.p4.m9" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>を<math id="S2.p4.m10" class="ltx_Math" alttext="f(+0)\leq 1" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>1</mn></mrow></math>となる<math id="S2.p4.m11" class="ltx_Math" alttext="f\in E" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi>E</mi></mrow></math>全体とする．</p>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm15.p1.m1" class="ltx_Math" alttext="K_{n}=\{\,(-1)^{n}f^{(n)}\mid f\in K\,\}" display="inline"><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>f</mi><mo>∈</mo><mi>K</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+とする．
+このとき
+任意の<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+と任意の<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="a\in(0,\infty)" display="inline"><mrow><mi>a</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>について<math id="Thmthm15.p1.m4" class="ltx_Math" alttext="[a,\infty)" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></math>
+上で
+<math id="Thmthm15.p1.m5" class="ltx_Math" alttext="K_{n}" display="inline"><msub><mi>K</mi><mi>n</mi></msub></math>の各元は上から
+<math id="Thmthm15.p1.m6" class="ltx_Math" alttext="a^{-n}2^{(n+1)(n/2)}" display="inline"><mrow><msup><mi>a</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msup><mn>2</mn><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup></mrow></math>
+で抑えることができる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p"><math id="S2.p5.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>に関する帰納法で証明する．
+まず<math id="S2.p5.m2" class="ltx_Math" alttext="n=0" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></math>のときは<math id="S2.p5.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は上から<math id="S2.p5.m4" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>で抑えられているので大丈夫である．
+<math id="S2.p5.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>において上の命題が成り立つと仮定する．
+<math id="S2.p5.m6" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>のときを考えよう．
+<math id="S2.p5.m7" class="ltx_Math" alttext="f^{(n)}" display="inline"><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup></math>に対して<math id="S2.p5.m8" class="ltx_Math" alttext="[a/2,a]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo>,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow></math>上で
+平均値の定理を用いて
+<math id="S2.p5.m9" class="ltx_Math" alttext="c\in[a/2,a]" display="inline"><mrow><mi>c</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo>,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow></mrow></math>であって
+<math id="S2.p5.m10" class="ltx_Math" alttext="(a/2)f^{(n+1)}(c)=f^{(n)}(a)-f^{(n)}(a/2)" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が成り立つものが存在する．
+<math id="S2.p5.m11" class="ltx_Math" alttext="(-1)^{n}f^{(n+1)}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup></mrow></math>の導関数を考えると
+<math id="S2.p5.m12" class="ltx_Math" alttext="(-1)^{n}f^{(n+2)}=(-1)^{n+2}f^{(n+2)}\geq 0" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></msup></mrow><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></msup></mrow><mo>≥</mo><mn>0</mn></mrow></math>なので
+<math id="S2.p5.m13" class="ltx_Math" alttext="(-1)^{n}f^{(n+1)}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup></mrow></math>は広義の単調増加である．
+つまり
+<math id="S2.p5.m14" class="ltx_Math" alttext="(-1)^{n+1}f^{n+1}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>は広義の単調減少である．
+よって任意の<math id="S2.p5.m15" class="ltx_Math" alttext="x\in[a,\infty)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+について</p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex5.m1" class="ltx_Math" alttext="\displaystyle(-1)^{n+1}f^{(n+1)}(x)\leq(-1)^{n+1}f^{(n+1)}(a)\leq(-1)^{n+1}f^{%
+(n+1)}(c)" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex6.m1" class="ltx_Math" alttext="\displaystyle\leq\frac{2}{a}((-1)^{n}f^{(n)}(a/2)-(-1)^{n}f^{(n)}(a))\leq\frac%
+{2}{a}(-1)^{n}f^{(n)}(a/2)\leq\frac{2}{a}(a/2)^{-n}2^{(n+1)(n/2)}" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mstyle displaystyle="true"><mfrac><mn>2</mn><mi>a</mi></mfrac></mstyle><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><mfrac><mn>2</mn><mi>a</mi></mfrac></mstyle><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><mfrac><mn>2</mn><mi>a</mi></mfrac></mstyle><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msup><mn>2</mn><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex7.m1" class="ltx_Math" alttext="\displaystyle=a^{-(n+1)}2^{(n+1)(n/2)+n+1}=a^{-(n+1)}2^{(n+2)(n+1)/2}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><msup><mi>a</mi><mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup><mo>⁢</mo><msup><mn>2</mn><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>/</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mo>=</mo><mrow><msup><mi>a</mi><mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup><mo>⁢</mo><msup><mn>2</mn><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>/</mo><mn>2</mn></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって帰納法が回って補題が正しいことがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm16.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">は<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の空でないコンパクト凸集合である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p"><math id="S2.p6.m1" class="ltx_Math" alttext="1\in K" display="inline"><mrow><mn>1</mn><mo>∈</mo><mi>K</mi></mrow></math>なので空ではない．
+凸性もわかる．
+コンパクト性は
+補題
+<a href="#Thmthm15" title="補題 15. ‣ 2 応用：Bernstein functions ‣ クラインミルマンの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15</span></a>
+とアスコリアルツェラの定理，
+そして<math id="S2.p6.m2" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>が距離化可能であることからコンパクト性と点列コンパクト性が同値になることからわかる．
+∎</p>
+</div>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">以下では<math id="S2.p7.m1" class="ltx_Math" alttext="\alpha=\infty" display="inline"><mrow><mi>α</mi><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき
+<math id="S2.p7.m2" class="ltx_Math" alttext="\exp(-\alpha x)" display="inline"><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は定数関数<math id="S2.p7.m3" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+と思うことにする．</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm17.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">のextreme pont全体は
+<math id="Thmthm17.p1.m2" class="ltx_Math" alttext="\{\,x\mapsto\exp(-\alpha x)\mid\alpha\in[0,\infty]\,\}" display="inline"><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo stretchy="false">↦</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>α</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo rspace="0.170em" stretchy="false">]</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>に一致する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p"><math id="S2.p8.m1" class="ltx_Math" alttext="f\in\partial_{ext}(K)" display="inline"><mrow><mi>f</mi><mo rspace="0.1389em">∈</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+をとり<math id="S2.p8.m2" class="ltx_Math" alttext="p\in(0,\infty)" display="inline"><mrow><mi>p</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を任意にとる．
+そして
+<math id="S2.p8.m3" class="ltx_Math" alttext="u(x)=f(x+p)-f(x)f(p)" display="inline"><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+とおく．
+今から<math id="S2.p8.m4" class="ltx_Math" alttext="f\pm u\in K" display="inline"><mrow><mrow><mi>f</mi><mo>±</mo><mi>u</mi></mrow><mo>∈</mo><mi>K</mi></mrow></math>を証明する．
+<math id="S2.p8.m5" class="ltx_Math" alttext="f(p)\in[0,1]" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>であることに注意せよ．
+このとき
+<math id="S2.p8.m6" class="ltx_Math" alttext="f(+0)+u(+0)=f(+0)+f(p)-f(p)f(+0)=(1-f(p))f(+0)+f(p)\leq(1-f(p))+f(p)=1" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+であり，
+<math id="S2.p8.m7" class="ltx_Math" alttext="f(+0)-u(+0)=f(+0)-f(p)+f(p)f(+0)=f(+0)+f(p)(f(+0)-1)\leq f(+0)\leq 1" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+である．
+さらに任意の<math id="S2.p8.m8" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について<math id="S2.p8.m9" class="ltx_Math" alttext="(-1)^{n}f^{n}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mi>n</mi></msup></mrow></math>が単調減少であることを用いると以下を得る．</p>
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex8.m1" class="ltx_Math" alttext="\displaystyle(-1)^{n}(f+u)^{(n)}(x)=(-1)^{n}f^{(n)}(x)+(-1)^{n}f^{(n)}(x+p)-(-%
+1)^{n}f(p)f^{(n)}(x)" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>+</mo><mi>u</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex9"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\displaystyle=(-1)^{n}(1-f(p))f^{(n)}(x)+(-1)^{n}f^{(n)}(x+p)\geq 0" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">かつ</p>
+<table id="S2.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex10.m1" class="ltx_Math" alttext="\displaystyle(-1)^{n}(f-u)^{(n)}(x)=(-1)^{n}f^{(n)}(x)-(-1)^{n}f^{(n)}(x+p)+(-%
+1)^{n}f(p)f^{(n)}(x)" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>−</mo><mi>u</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\displaystyle\geq(-1)^{n}f^{(n)}(x+p)-(-1)^{n}f^{(n)}(x+p)+(-1)^{n}f(p)f^{(n)}%
+(x)=(-1)^{n}f(p)f^{(n)}(x)\geq 0" display="inline"><mrow><mi></mi><mo>≥</mo><mrow><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+よって
+<math id="S2.p8.m10" class="ltx_Math" alttext="f\pm u\in K" display="inline"><mrow><mrow><mi>f</mi><mo>±</mo><mi>u</mi></mrow><mo>∈</mo><mi>K</mi></mrow></math>
+である．
+このことと
+<math id="S2.p8.m11" class="ltx_Math" alttext="f=\frac{1}{2}((f+u)+(f-u))" display="inline"><mrow><mi>f</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>+</mo><mi>u</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>−</mo><mi>u</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>，
+そして<math id="S2.p8.m12" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が extreme pointであることから
+<math id="S2.p8.m13" class="ltx_Math" alttext="f=f+u=f-u" display="inline"><mrow><mi>f</mi><mo>=</mo><mrow><mi>f</mi><mo>+</mo><mi>u</mi></mrow><mo>=</mo><mrow><mi>f</mi><mo>−</mo><mi>u</mi></mrow></mrow></math>がわかる．
+これはつまり<math id="S2.p8.m14" class="ltx_Math" alttext="u=0" display="inline"><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow></math>ということである．
+よって
+<math id="S2.p8.m15" class="ltx_Math" alttext="f(x+p)=f(x)f(p)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．これはコーシーの関数方程式の乗法版であり，
+<math id="S2.p8.m16" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が連続であることから
+<math id="S2.p8.m17" class="ltx_Math" alttext="f=0" display="inline"><mrow><mi>f</mi><mo>=</mo><mn>0</mn></mrow></math>かもしくは
+<math id="S2.p8.m18" class="ltx_Math" alttext="f(x)=\exp(-\alpha x)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><math id="S2.p8.m19" class="ltx_Math" alttext="\alpha\in\mathbb{R}" display="inline"><mrow><mi>α</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>と表される．
+ところで<math id="S2.p8.m20" class="ltx_Math" alttext="f^{(1)}(x)\leq 0" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>0</mn></mrow></math>なので<math id="S2.p8.m21" class="ltx_Math" alttext="\alpha\in[0,\infty)" display="inline"><mrow><mi>α</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+である．
+これでextreme pointになっている関数は求める形になっていることがわかった．
+逆に<math id="S2.p8.m22" class="ltx_Math" alttext="\exp(-\alpha x)" display="inline"><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>はextreme point になっているだろうか?
+ここで<math id="S2.p8.m23" class="ltx_Math" alttext="r\in(0,\infty)" display="inline"><mrow><mi>r</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+に対して<math id="S2.p8.m24" class="ltx_Math" alttext="T_{r}\colon E\to E" display="inline"><mrow><msub><mi>T</mi><mi>r</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>E</mi><mo stretchy="false">→</mo><mi>E</mi></mrow></mrow></math>
+を<math id="S2.p8.m25" class="ltx_Math" alttext="T_{r}(f)(x)=f(rx)" display="inline"><mrow><mrow><msub><mi>T</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>で定義すると
+これは連続な全単射線形作用素で
+<math id="S2.p8.m26" class="ltx_Math" alttext="T_{r}(K)=K" display="inline"><mrow><mrow><msub><mi>T</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>K</mi></mrow></math>となる．
+線形性から
+<math id="S2.p8.m27" class="ltx_Math" alttext="T_{r}(\partial_{ext}(K))=\partial_{ext}(K)" display="inline"><mrow><mrow><msub><mi>T</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>もわかる．
+ところで<math id="S2.p8.m28" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は空でないコンパクト凸集合であることから，
+Krein–Milmanの定理から
+<math id="S2.p8.m29" class="ltx_Math" alttext="K=\overline{\mathrm{co}}(\partial_{ext}(K))" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mover accent="true"><mi>co</mi><mo>¯</mo></mover><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mo lspace="0em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+<math id="S2.p8.m30" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>はもちろん定数でない関数も含んであるので，
+<math id="S2.p8.m31" class="ltx_Math" alttext="\partial_{ext}(K)" display="inline"><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></math>も定数でない関数を含んでいなければならない．よって定数でないextreme point <math id="S2.p8.m32" class="ltx_Math" alttext="p(x)=\exp(-\gamma x)" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><math id="S2.p8.m33" class="ltx_Math" alttext="(\gamma\in(0,\infty))" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>が存在する．
+上の議論から
+<math id="S2.p8.m34" class="ltx_Math" alttext="T_{r}(p)(x)=\exp(-r\gamma x)" display="inline"><mrow><mrow><msub><mi>T</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><mi>γ</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>もextreme point である．
+<math id="S2.p8.m35" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の任意性から<math id="S2.p8.m36" class="ltx_Math" alttext="\exp(-\alpha x)" display="inline"><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math><math id="S2.p8.m37" class="ltx_Math" alttext="(\alpha\in(0,\infty))" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>α</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>
+がextreme point になることが従う．
+定数関数<math id="S2.p8.m38" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>と<math id="S2.p8.m39" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>がextreme point になることは，
+<math id="S2.p8.m40" class="ltx_Math" alttext="f\in K" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi>K</mi></mrow></math>が<math id="S2.p8.m41" class="ltx_Math" alttext="0\leq f\leq 1" display="inline"><mrow><mn>0</mn><mo>≤</mo><mi>f</mi><mo>≤</mo><mn>1</mn></mrow></math>となることから従う．
+∎</p>
+</div>
+</div>
+<div id="Thmthm18" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 18</span></span><span class="ltx_text ltx_font_bold"> </span>(Bernstein)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm18.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm18.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">は有界なcompletely monotonic 関数とする．
+このとき<math id="Thmthm18.p1.m2" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>上のラドン測度
+<math id="Thmthm18.p1.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が一意的に存在して
+<math id="Thmthm18.p1.m4" class="ltx_Math" alttext="\mu([0,\infty])=f(+0)" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>かつ</span></p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="f(x)=\int_{[0,\infty]}e^{-\alpha x}\ d\mu(\alpha)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を満たす．</span></p>
+</div>
+<div id="Thmthm18.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">また，<math id="Thmthm18.p2.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>がこの結論のように表されることと，
+<math id="Thmthm18.p2.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が有界かつcompletely monotonicであることは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">写像<math id="S2.p9.m1" class="ltx_Math" alttext="H\colon[0,\infty]\to\partial_{ext}(K)" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo rspace="0.1389em" stretchy="false">→</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を<math id="S2.p9.m2" class="ltx_Math" alttext="H(\alpha)(x)=\exp(-\alpha x)" display="inline"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と定義する．
+このとき<math id="S2.p9.m3" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>は連続になり，さらに<math id="S2.p9.m4" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>
+はコンパクトなので<math id="S2.p9.m5" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>は同相写像になる．
+さて<math id="S2.p9.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>をcompletely monotonic な関数とする．
+このとき<math id="S2.p9.m7" class="ltx_Math" alttext="f/f(+0)" display="inline"><mrow><mrow><mi>f</mi><mo>/</mo><mi>f</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>を考えれば，問題は
+<math id="S2.p9.m8" class="ltx_Math" alttext="f(+0)=1" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>のときに帰着されるから最初からそのように仮定しても良い．
+Krein–Milmanの定理より，
+<math id="S2.p9.m9" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に対して<math id="S2.p9.m10" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が存在して
+任意の線形形式<math id="S2.p9.m11" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>について</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="L(f)=\int_{\partial_{ext}(K)}L(p)\ dm(p)" display="block"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+特に</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="f(x)=\int_{\partial_{ext}(K)}\delta_{x}(p)\ dm(p)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><msub><mi>δ</mi><mi>x</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+同相写像<math id="S2.p9.m12" class="ltx_Math" alttext="H\colon[0,\infty]\to\partial_{ext}(K)" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo rspace="0.1389em" stretchy="false">→</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+により
+右辺を変数変換する．
+<math id="S2.p9.m13" class="ltx_Math" alttext="p=H(\alpha)" display="inline"><mrow><mi>p</mi><mo>=</mo><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とすると<math id="S2.p9.m14" class="ltx_Math" alttext="\alpha=H^{-1}(p)" display="inline"><mrow><mi>α</mi><mo>=</mo><mrow><msup><mi>H</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\int_{\partial_{ext}(K)}\delta_{x}(p)\ dm(p)=\int_{\partial_{ext}(K)}H(\alpha)%
+(x)\ dm=\int_{[0,\infty]}H(\alpha)(x)\ d\mu(\alpha)=\int_{[0,\infty]}\exp(-%
+\alpha x)\ d\mu(\alpha)" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><msub><mi>δ</mi><mi>x</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><msub><mo>∂</mo><mrow><mi>e</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mi>t</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．ここで<math id="S2.p9.m15" class="ltx_Math" alttext="\mu=(H^{-1})_{*}m" display="inline"><mrow><mi>μ</mi><mo>=</mo><mrow><msub><mrow><mo stretchy="false">(</mo><msup><mi>H</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo></mrow><mo>∗</mo></msub><mo>⁢</mo><mi>m</mi></mrow></mrow></math>である．
+これで測度の存在性がわかる．
+一意性を考えよう．
+<math id="S2.p9.m16" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>上の確率測度
+<math id="S2.p9.m17" class="ltx_Math" alttext="\mu_{0},\mu_{1}" display="inline"><mrow><msub><mi>μ</mi><mn>0</mn></msub><mo>,</mo><msub><mi>μ</mi><mn>1</mn></msub></mrow></math>が</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="f(x)=\int_{[0,\infty]}\exp(-\alpha x)\ d\mu_{0}(\alpha)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><msub><mi>μ</mi><mn>0</mn></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="f(x)=\int_{[0,\infty]}\exp(-\alpha x)\ d\mu_{1}(\alpha)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></msub><mrow><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><msub><mi>μ</mi><mn>1</mn></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たしているとする．
+このとき族<math id="S2.p9.m18" class="ltx_Math" alttext="\{\alpha\mapsto\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>α</mi><mo stretchy="false">↦</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>
+を考える．
+ここで<math id="S2.p9.m19" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>の関数と見て，<math id="S2.p9.m20" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>はパラメーターと見ている事に注意せよ．
+するとこの族
+<math id="S2.p9.m21" class="ltx_Math" alttext="\{\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>は乗法について閉じている．故に<math id="S2.p9.m22" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>をこの族<math id="S2.p9.m23" class="ltx_Math" alttext="\{\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>で生成された
+<math id="S2.p9.m24" class="ltx_Math" alttext="C([0,\infty])" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の部分代数とすると，
+<math id="S2.p9.m25" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の任意の元<math id="S2.p9.m26" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="S2.p9.m27" class="ltx_Math" alttext="\{\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>に属する有限個の元の多変数多項式で表されるが，
+<math id="S2.p9.m28" class="ltx_Math" alttext="\{\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>が情報で閉じていることから<math id="S2.p9.m29" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>はただ単に<math id="S2.p9.m30" class="ltx_Math" alttext="\{\exp(-\alpha x)\}_{x\in[0,\infty]}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></msub></math>に属する有限個の元の線型結合で表される．
+<math id="S2.p9.m31" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>上で<math id="S2.p9.m32" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>と<math id="S2.p9.m33" class="ltx_Math" alttext="\nu" display="inline"><mi>ν</mi></math>が等しいことを示したいが，上記のことから<math id="S2.p9.m34" class="ltx_Math" alttext="\exp(-\alpha x)" display="inline"><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>における値が等しいことを確かめれば良い．仮定から<math id="S2.p9.m35" class="ltx_Math" alttext="\mu(\exp(-\alpha x))=f(x)=\nu(\exp(-\alpha x))" display="inline"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>ν</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mi>α</mi><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので
+<math id="S2.p9.m36" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>と<math id="S2.p9.m37" class="ltx_Math" alttext="\nu" display="inline"><mi>ν</mi></math>は<math id="S2.p9.m38" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>上で等しい．
+ところで<math id="S2.p9.m39" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の元は<math id="S2.p9.m40" class="ltx_Math" alttext="[0,\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></math>の任意の2点を分離することからストーン・ワイエルストラスの定理より
+<math id="S2.p9.m41" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は<math id="S2.p9.m42" class="ltx_Math" alttext="C([0,\infty])" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の中で稠密である．
+故に<math id="S2.p9.m43" class="ltx_Math" alttext="\mu=\nu" display="inline"><mrow><mi>μ</mi><mo>=</mo><mi>ν</mi></mrow></math>であるから一意性が示された．</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">後半の話は優収束定理などから従う．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+宮島静雄,
+関数解析,
+横浜図書, 2005.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+R. R. Phelps,
+<span class="ltx_text ltx_font_italic">Lectures on Choquet’s Theorem</span>,
+2nd ed.,
+2001,
+Lecture Note in Mathematics 1757,
+Springer-Verlag.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+K. R. Davidson,
+<span class="ltx_text ltx_font_italic">Functional
+Analysis
+and Operator
+Algebras</span>,
+2025,
+Springer-Verlag.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:41:00 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>
