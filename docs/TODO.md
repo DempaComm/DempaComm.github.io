@@ -34,11 +34,13 @@
   - 0.8.8の `latexmlc` を使う隔離コマンドと4分類の試験設定を追加した。
   - 試験出力は `_experiments/` に置き、自動公開せず手動確認を必須にした。
   - `ltjsarticle`・`jsarticle` の外置きbindingと、PDFページ図版のPoppler変換に対応した。
+  - `pxjahyper`、`\textgt`、`\text` 内数式、複数行にまたがる集合の波括弧に対応した。
+  - 複雑なTeX原稿「Urysohn universal spaces」で自動検査を通過した。
 
 ## 機能追加候補
 - TeX原稿から生成したHTMLを正式公開する条件を検討する。
   - 試験導入したLaTeXMLを代表的な原稿で評価する。
-  - 独自マクロ、TikZ、BibTeX・独自BSTの変換結果を確認する。
+  - TikZ、BibTeX・独自BSTの変換結果を確認する。
   - HTML変換の成否と生成物を原稿ごとに記録できるようにする。
   - 変換に失敗した原稿は、現在のPDF・TeX公開へ安全にフォールバックする。
   - 生成HTMLに原稿由来の個人情報や意図しない内容が含まれないか公開前に検査する。

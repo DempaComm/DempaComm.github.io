@@ -96,6 +96,81 @@ def _without_tex_comments(source: str) -> str:
     return "\n".join(re.sub(r"(?<!\\)%.*$", "", line) for line in source.splitlines())
 
 
+def _normalize_math_inside_text(source: str) -> tuple[str, int]:
+    r"""Lift inline math out of a text command while retaining text segments.
+
+    TeX accepts ``\text{words $...$}`` inside display math, but LaTeXML's math
+    parser can leave that construct unparsed. The temporary copy becomes
+    ``\text{words }...``. The protected manuscript is never rewritten.
+    """
+    output = []
+    cursor = 0
+    replacements = 0
+    marker = r"\text{"
+    while True:
+        start = source.find(marker, cursor)
+        if start < 0:
+            output.append(source[cursor:])
+            break
+        output.append(source[cursor:start])
+        depth = 1
+        end = start + len(marker)
+        while end < len(source) and depth:
+            character = source[end]
+            escaped = end > 0 and source[end - 1] == "\\"
+            if not escaped and character == "{":
+                depth += 1
+            elif not escaped and character == "}":
+                depth -= 1
+            end += 1
+        if depth:
+            output.append(source[start:])
+            break
+        content = source[start + len(marker) : end - 1]
+        matches = list(re.finditer(r"(?<!\\)\$([^$]+)(?<!\\)\$", content))
+        if matches:
+            inner_cursor = 0
+            for match in matches:
+                text_part = content[inner_cursor : match.start()]
+                if _without_tex_comments(text_part).strip():
+                    output.append(marker + text_part + "}")
+                output.append(match.group(1))
+                replacements += 1
+                inner_cursor = match.end()
+            text_part = content[inner_cursor:]
+            if _without_tex_comments(text_part).strip():
+                output.append(marker + text_part + "}")
+        else:
+            output.append(marker + content + "}")
+        cursor = end
+    return "".join(output), replacements
+
+
+def _normalize_cross_row_braces(source: str) -> tuple[str, int]:
+    """Render braces as text when an align row contains only one side."""
+    replacements = 0
+    environment_pattern = re.compile(
+        r"(\\begin\{align\*?\})(.*?)(\\end\{align\*?\})", re.DOTALL
+    )
+
+    def replace_environment(match: re.Match[str]) -> str:
+        nonlocal replacements
+        parts = re.split(r"(?<!\\)(\\\\(?:\s*\[[^]]*\])?)", match.group(2))
+        for index in range(0, len(parts), 2):
+            row = parts[index]
+            opening = row.count(r"\{")
+            closing = row.count(r"\}")
+            if opening == closing:
+                continue
+            parts[index] = row.replace(r"\{", r"\text{\{}").replace(
+                r"\}", r"\text{\}}"
+            )
+            replacements += opening + closing
+        return match.group(1) + "".join(parts) + match.group(3)
+
+    return environment_pattern.sub(replace_environment, source), replacements
+
+
 def _prepare_pdf_graphics(
     source: Path, target_dir: Path, timeout: int
 ) -> tuple[PreparedGraphic, ...]:
@@ -325,19 +400,53 @@ def run_latexml_trial(
             command.append(f"--path={binding_dir.resolve()}")
         graphics: tuple[PreparedGraphic, ...] = ()
         missing_graphics = 0
+        source_normalizations = []
         try:
             graphics = _prepare_pdf_graphics(target.source, target_dir, timeout)
             if graphics:
                 command.append("--nographicimages")
-            command.append(str(target.source.relative_to(target.paper_dir)))
-            completed = subprocess.run(
-                command,
-                cwd=target.paper_dir,
-                capture_output=True,
-                text=True,
-                timeout=timeout + 30,
-                check=False,
+            source_text = target.source.read_text(encoding="utf-8", errors="replace")
+            normalized_source, normalization_count = _normalize_math_inside_text(
+                source_text
             )
+            normalized_source, brace_normalization_count = (
+                _normalize_cross_row_braces(normalized_source)
+            )
+            conversion_source = target.source
+            temporary_source = None
+            if normalization_count or brace_normalization_count:
+                temporary_source = target_dir / ".latexml-normalized.tex"
+                temporary_source.write_text(normalized_source, encoding="utf-8")
+                conversion_source = temporary_source
+            if normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "math-inside-text",
+                        "count": normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if brace_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "cross-row-braces",
+                        "count": brace_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            command.append(str(conversion_source))
+            try:
+                completed = subprocess.run(
+                    command,
+                    cwd=target.paper_dir,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout + 30,
+                    check=False,
+                )
+            finally:
+                if temporary_source is not None:
+                    temporary_source.unlink(missing_ok=True)
             log_text = log.read_text(encoding="utf-8", errors="replace") if log.is_file() else ""
             warning_count = sum(line.startswith("Warning:") for line in log_text.splitlines())
             error_count = sum(line.startswith("Error:") for line in log_text.splitlines())
@@ -417,6 +526,7 @@ def run_latexml_trial(
                     for graphic in graphics
                 ],
                 "missing_graphics": missing_graphics,
+                "source_normalizations": source_normalizations,
                 "privacy_findings": findings,
                 "comments_removed": True,
                 "automatic_checks_passed": not blocking_reasons,

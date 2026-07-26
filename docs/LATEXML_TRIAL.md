@@ -137,3 +137,20 @@ python3 scripts/paper_tool.py publish-latexml 2015-08-28-01 \
 欠落図版、`ltx_ERROR`、簡易個人情報候補がすべて0となり、定理への相互参照もHTML内リンクとして
 保持された。試験結果は `_experiments/latexml-sphere-graphics-2/2024-01-08-01/index.html` で
 目視確認できる。公開承認はこのHTMLと元PDFを人が比較した後に行う。
+
+## 複雑なTeX原稿の改善結果
+
+「Urysohn universal spaces」では、公開原稿を変更せず、変換時だけ使う一時コピーに対して
+次の互換処理を行うようにした。
+
+- `pxjahyper` をHTML変換では何もしない外置きbindingとして扱う。
+- `\textgt` をHTML上の太字へ変換する。
+- `\text{...}` の中にある数式をLaTeXMLが解釈できる形へ一時的に正規化する。
+- `align` の複数行にまたがる集合の波括弧を表示用文字として一時的に正規化する。
+- HTML本文中の一般語としての「著者」を個人情報ラベルと誤判定しないようにする。
+
+一時コピーは変換終了時に削除し、正規化の種類と件数だけを `report.json` に記録する。
+2026-07-26の再試験では警告、エラー、未解釈数式、欠落要素、簡易個人情報候補がすべて0となった。
+目次、394件の内部参照、3点のXy-pic図、58件の文献も生成された。試験結果は
+`_experiments/latexml-urysohn-clean/2018-10-14-01/index.html` で確認できる。
+公開承認はこのHTMLと元PDFを人が比較した後に行う。

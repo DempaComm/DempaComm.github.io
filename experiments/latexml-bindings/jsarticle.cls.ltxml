@@ -9,4 +9,8 @@ use LaTeXML::Package;
 
 LoadClass('article');
 
+# pLaTeX's Gothic-family text command has no direct HTML distinction in
+# LaTeXML. Preserve its emphasis rather than leaving an error marker.
+DefMacro('\textgt{}', '\textbf{#1}');
+
 1;

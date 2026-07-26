@@ -6,10 +6,15 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from dempa_site.conversion.latexml import run_latexml_trial
+from dempa_site.conversion.latexml import (
+    _normalize_cross_row_braces,
+    _normalize_math_inside_text,
+    run_latexml_trial,
+)
 from dempa_site.errors import PaperToolError
 from dempa_site.files import sha256_file
 from dempa_site.manifests.model import Paper
+from dempa_site.protection.privacy import privacy_findings
 
 
 class LaTeXMLTrialTest(unittest.TestCase):
@@ -69,6 +74,27 @@ class LaTeXMLTrialTest(unittest.TestCase):
                     output=self.root / "trial",
                     requested_slugs=[self.paper.slug],
                 )
+
+    def test_temporary_math_normalization_and_html_label_context(self) -> None:
+        source = r"\[\text{任意の $x\in A$ について}\]"
+        normalized, count = _normalize_math_inside_text(source)
+
+        self.assertEqual(1, count)
+        self.assertEqual(
+            r"\[\text{任意の }x\in A\text{ について}\]", normalized
+        )
+        aligned = r"\begin{align*}\{&x\\&y\}\end{align*}"
+        normalized_align, brace_count = _normalize_cross_row_braces(aligned)
+        self.assertEqual(2, brace_count)
+        self.assertEqual(
+            r"\begin{align*}\text{\{}&x\\&y\text{\}}\end{align*}",
+            normalized_align,
+        )
+        self.assertEqual([], privacy_findings("論文の著者である", "html"))
+        self.assertEqual(
+            ["personal-information label found: 著者"],
+            privacy_findings("<dt>著者</dt><dd>実名</dd>", "html"),
+        )
 
     def test_success_writes_derived_html_and_review_report_only(self) -> None:
         conversion_commands = []

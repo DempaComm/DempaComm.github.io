@@ -54,8 +54,17 @@ def privacy_findings(text: str, file_type: str) -> list[str]:
         )
         for key, value in metadata_pattern.findall(text):
             findings.append(f"PDF metadata {key}: {' '.join(value.split())}")
-    for label in ("氏名", "著者", "所属", "住所", "電話", "連絡先"):
-        if label in text:
+    labels = ("氏名", "著者", "所属", "住所", "電話", "連絡先")
+    for label in labels:
+        if file_type == "html":
+            label_pattern = re.compile(
+                rf"{label}(?:名)?\s*(?:[:：]|</(?:dt|th|label)>)",
+                re.IGNORECASE,
+            )
+            found = label_pattern.search(text) is not None
+        else:
+            found = label in text
+        if found:
             findings.append(f"personal-information label found: {label}")
     return list(dict.fromkeys(findings))
 
