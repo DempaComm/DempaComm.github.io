@@ -326,7 +326,6 @@ def _normalize_norm_delimiters(source: str) -> tuple[str, int]:
         lines.append(line)
     source = "".join(lines)
     patterns = (
-        re.compile(r"\\\|([^$\n]*?)\\\|"),
         re.compile(r"\\lVert((?:(?!\\[lr]Vert)[^$\n])*?)\\lVert"),
         re.compile(r"(?<!\|)\|\|([^|$\n]*?)\|\|(?!\|)"),
     )

@@ -146,11 +146,18 @@ class LaTeXMLTrialTest(unittest.TestCase):
 
         norms = r"$\|x\|$ $\lVert y\lVert$ $||z||$ $|t|$"
         normalized_norms, norm_count = _normalize_norm_delimiters(norms)
-        self.assertEqual(3, norm_count)
+        self.assertEqual(2, norm_count)
         self.assertEqual(
-            r"$\lVert x\rVert$ $\lVert  y\rVert$ $\lVert z\rVert$ $|t|$",
+            r"$\|x\|$ $\lVert  y\rVert$ $\lVert z\rVert$ $|t|$",
             normalized_norms,
         )
+
+        nested_norms = r"$\|v(x)\|=\|x+Q(\|x\|^2)P(x)\|$"
+        normalized_nested_norms, nested_norm_count = _normalize_norm_delimiters(
+            nested_norms
+        )
+        self.assertEqual(0, nested_norm_count)
+        self.assertEqual(nested_norms, normalized_nested_norms)
 
         reversed_norms = (
             r"&=\rVert f(x)\lVert+\rVert g(x)\lVert" "\n"
