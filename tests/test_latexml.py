@@ -10,6 +10,9 @@ from dempa_site.conversion.latexml import (
     _effective_warning_lines,
     _normalize_bigtriangleup_symbol,
     _normalize_cross_row_braces,
+    _normalize_group_action_dots,
+    _normalize_group_map_display,
+    _normalize_empty_membership_before_condition,
     _normalize_math_inside_text,
     _normalize_nocite_all,
     _normalize_left_exponent_function_space,
@@ -168,6 +171,49 @@ class LaTeXMLTrialTest(unittest.TestCase):
         )
         self.assertEqual(1, parenthesis_count)
         self.assertEqual(r"\Bigl(A\Bigr)", parentheses)
+
+        action_source = (
+            r"$f(g,x)$を$g.x$と書く。$g.(h.x)=gh.x$ $3.14$ e.g." "\n"
+            r"\[G..\Delta_X\]" "\n"
+            r"\begin{align}1_G.x&=x\end{align}"
+        )
+        normalized_action, action_count = _normalize_group_action_dots(
+            action_source
+        )
+        self.assertEqual(6, action_count)
+        self.assertEqual(
+            r"$f(g,x)$を$g\mathbin{.}x$と書く。"
+            r"$g\mathbin{.}(h\mathbin{.}x)=gh\mathbin{.}x$ $3.14$ e.g."
+            "\n"
+            r"\[G\mathbin{..}\Delta_X\]"
+            "\n"
+            r"\begin{align}1_G\mathbin{.}x&=x\end{align}",
+            normalized_action,
+        )
+        unchanged_action, unchanged_action_count = _normalize_group_action_dots(
+            r"$g.x$ without an explicit notation declaration"
+        )
+        self.assertEqual(0, unchanged_action_count)
+        self.assertEqual(
+            r"$g.x$ without an explicit notation declaration", unchanged_action
+        )
+        map_display = (
+            r"\[binary:G\times G\rightarrow G\ (x,y)\mapsto xy\ \ "
+            r"inverse:G\rightarrow G\ x\mapsto x^{-1}\]"
+        )
+        normalized_map_display, map_display_count = _normalize_group_map_display(
+            map_display
+        )
+        self.assertEqual(1, map_display_count)
+        self.assertIn(r"\begin{gathered}", normalized_map_display)
+        self.assertIn(r"\mathrm{inverse}", normalized_map_display)
+        normalized_membership, membership_count = (
+            _normalize_empty_membership_before_condition(
+                r"$AB=\{ab\in \mid a\in A,b\in B\}$"
+            )
+        )
+        self.assertEqual(1, membership_count)
+        self.assertEqual(r"$AB=\{ab\mid a\in A,b\in B\}$", normalized_membership)
         warnings, ignored = _effective_warning_lines(
             "Warning:expected:bibkeys Missing bibkeys local\n",
             '<a class="ltx_ref">resolved</a>',

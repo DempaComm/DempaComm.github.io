@@ -341,6 +341,69 @@ def _normalize_sized_parentheses(source: str) -> tuple[str, int]:
     return re.subn(r"\\Bigr\(", r"\\Bigl(", source)
 
 
+def _normalize_group_action_dots(source: str) -> tuple[str, int]:
+    r"""Mark explicitly declared action dots as binary operators for LaTeXML.
+
+    Some manuscripts deliberately write a group action as ``g.x`` (and an
+    induced action as ``g..x``). TeX renders the periods, but LaTeXML assigns
+    punctuation semantics to them and rejects the surrounding formula. Apply
+    this only when the manuscript declares the notation, and only inside math.
+    The protected manuscript is never rewritten.
+    """
+    if not re.search(r"\$g\.x\$\s*と書", source):
+        return source, 0
+
+    replacements = 0
+
+    def normalize_region(match: re.Match[str]) -> str:
+        nonlocal replacements
+        region = match.group(0)
+        region, double_count = re.subn(r"\.\.", r"\\mathbin{..}", region)
+        region, single_count = re.subn(
+            r"(?<=[A-Za-z}\)])\.(?=[A-Za-z(\\])",
+            r"\\mathbin{.}",
+            region,
+        )
+        replacements += double_count + single_count
+        return region
+
+    math_environment = re.compile(
+        r"\\begin\{(?P<environment>align\*?|alignat\*?|equation\*?|"
+        r"gather\*?|multline\*?|eqnarray\*?|flalign\*?)\}.*?"
+        r"\\end\{(?P=environment)\}",
+        re.DOTALL,
+    )
+    source = math_environment.sub(normalize_region, source)
+    for pattern in (
+        re.compile(r"\\\[.*?\\\]", re.DOTALL),
+        re.compile(r"\\\(.*?\\\)", re.DOTALL),
+        re.compile(r"(?<!\\)\$\$.*?(?<!\\)\$\$", re.DOTALL),
+        re.compile(r"(?<!\\)\$(?!\$).*?(?<!\\)\$", re.DOTALL),
+    ):
+        source = pattern.sub(normalize_region, source)
+    return source, replacements
+
+
+def _normalize_group_map_display(source: str) -> tuple[str, int]:
+    r"""Separate two juxtaposed group-operation maps into parseable rows."""
+    original = (
+        r"binary:G\times G\rightarrow G\ (x,y)\mapsto xy\ \ "
+        r"inverse:G\rightarrow G\ x\mapsto x^{-1}"
+    )
+    replacement = (
+        r"\begin{gathered}"
+        r"\mathrm{binary}:G\times G\rightarrow G,\quad (x,y)\mapsto xy\\"
+        r"\mathrm{inverse}:G\rightarrow G,\quad x\mapsto x^{-1}"
+        r"\end{gathered}"
+    )
+    return source.replace(original, replacement), source.count(original)
+
+
+def _normalize_empty_membership_before_condition(source: str) -> tuple[str, int]:
+    r"""Remove a membership sign with no right operand before ``\mid``."""
+    return re.subn(r"\\in\s*\\mid", r"\\mid", source)
+
+
 def _normalize_nocite_all(
     source: str, bibliographies: Iterable[Path]
 ) -> tuple[str, int]:
@@ -681,6 +744,15 @@ def run_latexml_trial(
             normalized_source, sized_parenthesis_normalization_count = (
                 _normalize_sized_parentheses(normalized_source)
             )
+            normalized_source, group_action_dot_normalization_count = (
+                _normalize_group_action_dots(normalized_source)
+            )
+            normalized_source, group_map_display_normalization_count = (
+                _normalize_group_map_display(normalized_source)
+            )
+            normalized_source, empty_membership_normalization_count = (
+                _normalize_empty_membership_before_condition(normalized_source)
+            )
             normalized_source, nocite_normalization_count = _normalize_nocite_all(
                 normalized_source, bibliography_files
             )
@@ -694,6 +766,9 @@ def run_latexml_trial(
                 or function_space_normalization_count
                 or norm_delimiter_normalization_count
                 or sized_parenthesis_normalization_count
+                or group_action_dot_normalization_count
+                or group_map_display_normalization_count
+                or empty_membership_normalization_count
                 or nocite_normalization_count
             ):
                 temporary_source = target_dir / ".latexml-normalized.tex"
@@ -752,6 +827,30 @@ def run_latexml_trial(
                     {
                         "kind": "sized-parentheses",
                         "count": sized_parenthesis_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if group_action_dot_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "group-action-dots",
+                        "count": group_action_dot_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if group_map_display_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "group-map-display",
+                        "count": group_map_display_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if empty_membership_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "empty-membership-before-condition",
+                        "count": empty_membership_normalization_count,
                         "scope": "temporary-conversion-copy",
                     }
                 )
