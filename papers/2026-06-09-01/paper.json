@@ -35,7 +35,7 @@
       "label": "TeXソース",
       "public": true,
       "original_sha256": "79aa0613bb743790237a1ee4301dbb59e96f6adf6f4d2f55cea719b613d22c48",
-      "sha256": "79aa0613bb743790237a1ee4301dbb59e96f6adf6f4d2f55cea719b613d22c48"
+      "sha256": "c1d6f9fbb8b8826955123d93a7ffba5e7b703ac4d49fc50607e7a2dbc1a655f5"
     },
     {
       "path": "published.pdf",
@@ -51,7 +51,7 @@
       "label": "BibTeX：bibmet.bib",
       "public": true,
       "original_sha256": "365f94529f880b31544b88acdb6883ab0e06ba6cb3bdabf66c804bc75b98cbd3",
-      "sha256": "13455ab87b33d2e494c39e5846e16f2b88cef4646ab97464ec78dcd7d1534edf"
+      "sha256": "7b6e01cb91c533da79a88ab7a722efbea8d857af6f7c496988ff4cd9fbc2f2a1"
     },
     {
       "path": "myplaindoidoi.bst",
@@ -60,6 +60,30 @@
       "public": true,
       "original_sha256": "ccdacb434c1a5877b5d36f49286dee8b4d72fd8777f6dc0b216be5f2fe31ac6e",
       "sha256": "ccdacb434c1a5877b5d36f49286dee8b4d72fd8777f6dc0b216be5f2fe31ac6e"
+    },
+    {
+      "path": "html/LaTeXML.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4",
+      "sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4"
+    },
+    {
+      "path": "html/index.html",
+      "role": "derived-html",
+      "label": "HTML版を読む（自動変換・未目視）",
+      "public": true,
+      "original_sha256": "e3037abffe04925e5f1fb54b5be633bb0215f1e3e0742833f90e9dc6b0cbdff3",
+      "sha256": "e3037abffe04925e5f1fb54b5be633bb0215f1e3e0742833f90e9dc6b0cbdff3"
+    },
+    {
+      "path": "html/ltx-article.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102",
+      "sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102"
     }
   ],
   "approved_changes": [
@@ -73,16 +97,43 @@
           "to_sha256": "13455ab87b33d2e494c39e5846e16f2b88cef4646ab97464ec78dcd7d1534edf"
         }
       ]
+    },
+    {
+      "approved_at": "2026-07-26T10:53:36+00:00",
+      "reason": "LaTeXML変換で判明したTeX・BibTeX誤記と未使用パッケージ指定の修正",
+      "files": [
+        {
+          "path": "funcspbairefine111.tex",
+          "from_sha256": "79aa0613bb743790237a1ee4301dbb59e96f6adf6f4d2f55cea719b613d22c48",
+          "to_sha256": "3bea9d8255c807b248241f046468a9e27064097de52badf336ff9eed710a026c"
+        },
+        {
+          "path": "bibtexmet/bibmet.bib",
+          "from_sha256": "13455ab87b33d2e494c39e5846e16f2b88cef4646ab97464ec78dcd7d1534edf",
+          "to_sha256": "7b6e01cb91c533da79a88ab7a722efbea8d857af6f7c496988ff4cd9fbc2f2a1"
+        }
+      ]
+    },
+    {
+      "approved_at": "2026-07-26T10:55:59+00:00",
+      "reason": "行末空白を除去して公開HTMLの変換元SHAを更新",
+      "files": [
+        {
+          "path": "funcspbairefine111.tex",
+          "from_sha256": "3bea9d8255c807b248241f046468a9e27064097de52badf336ff9eed710a026c",
+          "to_sha256": "c1d6f9fbb8b8826955123d93a7ffba5e7b703ac4d49fc50607e7a2dbc1a655f5"
+        }
+      ]
     }
   ],
   "privacy_reviews": [
     {
       "path": "funcspbairefine111.tex",
-      "status": "overridden",
-      "reason": "TeX全文、PDFメタデータ、およびGhostscriptによる全23ページ表示を確認済み。公開用BibTeXは未引用の指定名義項目を削除してから公開する。",
-      "source_sha256": "79aa0613bb743790237a1ee4301dbb59e96f6adf6f4d2f55cea719b613d22c48",
+      "status": "reviewed",
+      "reason": "",
+      "source_sha256": "c1d6f9fbb8b8826955123d93a7ffba5e7b703ac4d49fc50607e7a2dbc1a655f5",
       "inspection_status": "completed",
-      "recorded_at": "2026-07-18T06:43:08+00:00"
+      "recorded_at": "2026-07-26T10:55:59+00:00"
     },
     {
       "path": "published.pdf",
@@ -92,5 +143,16 @@
       "inspection_status": "failed",
       "recorded_at": "2026-07-18T06:43:08+00:00"
     }
-  ]
+  ],
+  "html_version": {
+    "status": "automatic",
+    "generator": "LaTeXML",
+    "generator_version": "latexmlc (LaTeXML version 0.8.8)",
+    "generated_at": "2026-07-26T19:54:59+09:00",
+    "source_path": "funcspbairefine111.tex",
+    "source_sha256": "c1d6f9fbb8b8826955123d93a7ffba5e7b703ac4d49fc50607e7a2dbc1a655f5",
+    "path": "html/index.html",
+    "label": "HTML版を読む（自動変換・未目視）",
+    "reviewed_at": "2026-07-26T19:56:05+09:00"
+  }
 }
