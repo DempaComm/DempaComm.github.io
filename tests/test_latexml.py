@@ -7,8 +7,11 @@ from pathlib import Path
 from unittest.mock import patch
 
 from dempa_site.conversion.latexml import (
+    _effective_warning_lines,
     _normalize_cross_row_braces,
     _normalize_math_inside_text,
+    _normalize_nocite_all,
+    _normalize_quotient_relation,
     run_latexml_trial,
 )
 from dempa_site.errors import PaperToolError
@@ -29,6 +32,8 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.binding.write_text("LoadClass('article');\n1;\n", encoding="utf-8")
         source = paper_dir / "main.tex"
         source.write_text("\\documentclass{article}\\begin{document}test\\end{document}", encoding="utf-8")
+        bibliography = paper_dir / "references.bib"
+        bibliography.write_text("@book{test,title={Test}}\n", encoding="utf-8")
         digest = sha256_file(source)
         data = {
             "schema_version": 1,
@@ -54,6 +59,13 @@ class LaTeXMLTrialTest(unittest.TestCase):
                 "public": True,
                 "original_sha256": digest,
                 "sha256": digest,
+            }, {
+                "path": "references.bib",
+                "role": "bibliography",
+                "label": "BibTeX",
+                "public": True,
+                "original_sha256": sha256_file(bibliography),
+                "sha256": sha256_file(bibliography),
             }],
             "approved_changes": [],
             "privacy_reviews": [],
@@ -90,6 +102,30 @@ class LaTeXMLTrialTest(unittest.TestCase):
             r"\begin{align*}\text{\{}&x\\&y\text{\}}\end{align*}",
             normalized_align,
         )
+        normalized_quotient, quotient_count = _normalize_quotient_relation(
+            r"$Z=W/\sim$"
+        )
+        self.assertEqual(1, quotient_count)
+        self.assertEqual(r"$Z=W/\mathord{\sim}$", normalized_quotient)
+        normalized_nocite, nocite_count = _normalize_nocite_all(
+            r"\nocite{*}", [self.paper.source_path.parent / "references.bib"]
+        )
+        self.assertEqual(1, nocite_count)
+        self.assertEqual(r"\nocite{test}", normalized_nocite)
+        warnings, ignored = _effective_warning_lines(
+            "Warning:expected:bibkeys Missing bibkeys local\n",
+            '<a class="ltx_ref">resolved</a>',
+            True,
+        )
+        self.assertEqual([], warnings)
+        self.assertEqual(1, len(ignored))
+        warnings, ignored = _effective_warning_lines(
+            "Warning:expected:bibkeys Missing bibkeys missing\n",
+            '<span class="ltx_missing_citation">missing</span>',
+            True,
+        )
+        self.assertEqual(1, len(warnings))
+        self.assertEqual([], ignored)
         self.assertEqual([], privacy_findings("論文の著者である", "html"))
         self.assertEqual(
             ["personal-information label found: 著者"],
@@ -137,6 +173,11 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertEqual("experiments/latexml-bindings/article.cls.ltxml", report["binding_files"][0]["path"])
         self.assertIn("--nocomments", conversion_commands[0])
         self.assertTrue(any(value.startswith("--path=") for value in conversion_commands[0]))
+        self.assertIn(
+            f"--bibliography={(self.paper.source_path.parent / 'references.bib').resolve()}",
+            conversion_commands[0],
+        )
+        self.assertEqual("references.bib", report["results"][0]["bibliographies"][0]["source"])
         self.assertTrue((output / self.paper.slug / "index.html").is_file())
         self.assertTrue((output / "report.json").is_file())
         self.assertEqual("\\documentclass{article}\\begin{document}test\\end{document}", (self.paper.source_path.parent / "main.tex").read_text(encoding="utf-8"))

@@ -8,6 +8,7 @@ import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote
 
 from dempa_site.config import SITE_TITLE_TOP, SITE_URL
 from dempa_site.dates import local_now_seconds
@@ -58,7 +59,27 @@ def _reviewed_result(report: dict, paper: Paper) -> dict:
     return result
 
 
-def _integrate_site_html(source: str, paper: Paper) -> str:
+def _public_source_href(paper: Paper, source_path: str) -> str:
+    for entry in paper.files:
+        if entry.public and entry.path == source_path:
+            return "../" + quote(entry.path, safe="/")
+    return ""
+
+
+def _public_pdf_href(paper: Paper) -> str:
+    preferred_roles = ("published-pdf", "built-pdf")
+    for role in preferred_roles:
+        for entry in paper.files:
+            if (
+                entry.public
+                and entry.role == role
+                and Path(entry.path).suffix.casefold() == ".pdf"
+            ):
+                return "../" + quote(entry.path, safe="/")
+    return ""
+
+
+def _integrate_site_html(source: str, paper: Paper, source_path: str) -> str:
     if any(pattern.search(source) for pattern in UNSAFE_HTML_PATTERNS):
         raise PaperToolError("LaTeXML HTMLに公開を許可しない動的要素があります")
     slug = html.escape(paper.slug, quote=True)
@@ -81,15 +102,17 @@ def _integrate_site_html(source: str, paper: Paper) -> str:
     source = source.replace(
         '<article class="', '<article id="main-content" class="', 1
     )
+    pdf_href = _public_pdf_href(paper)
+    tex_href = _public_source_href(paper, source_path)
+    pdf_link = f'    <a href="{pdf_href}">PDFを読む</a>\n' if pdf_href else ""
+    tex_link = f'    <a href="{tex_href}">TeXソース</a>\n' if tex_href else ""
     navigation = f"""<a class="skip-link" href="#main-content">本文へ移動</a>
 <header class="html-version-header">
   <p class="eyebrow">EXPERIMENTAL HTML VERSION</p>
   <p>{title}のLaTeXML版です。正本はPDF・TeXです。</p>
   <nav class="paper-actions" aria-label="HTML版の案内">
     <a class="primary-action" href="../">原稿ページへ戻る</a>
-    <a href="../main.pdf">PDFを読む</a>
-    <a href="../main.tex">TeXソース</a>
-    <a href="../../../">{html.escape(SITE_TITLE_TOP)}トップ</a>
+{pdf_link}{tex_link}    <a href="../../../">{html.escape(SITE_TITLE_TOP)}トップ</a>
   </nav>
 </header>
 """
@@ -142,7 +165,7 @@ def publish_latexml_trial(
             target = temporary / source_file.name
             if source_file.name == "index.html":
                 transformed = _integrate_site_html(
-                    source_file.read_text(encoding="utf-8"), paper
+                    source_file.read_text(encoding="utf-8"), paper, result["source"]
                 )
                 target.write_text(transformed, encoding="utf-8")
             else:

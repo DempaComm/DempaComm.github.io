@@ -16,8 +16,10 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.paper_dir = self.root / "papers" / "2026-07-26-01"
         self.paper_dir.mkdir(parents=True)
-        source = self.paper_dir / "main.tex"
+        source = self.paper_dir / "article.tex"
         source.write_text("\\documentclass{article}\n", encoding="utf-8")
+        pdf = self.paper_dir / "published.pdf"
+        pdf.write_bytes(b"%PDF-test")
         digest = sha256_file(source)
         self.manifest_path = self.paper_dir / "paper.json"
         write_json(
@@ -38,24 +40,40 @@ class LaTeXMLPublicationTest(unittest.TestCase):
                 "order": 2026072601,
                 "tags": ["数学"],
                 "keywords": ["HTML"],
-                "build": {"enabled": True, "engine": "lualatex", "root": "main.tex"},
+                "build": {"enabled": True, "engine": "lualatex", "root": "article.tex"},
                 "files": [
                     {
-                        "path": "main.tex",
+                        "path": "article.tex",
                         "role": "manuscript",
                         "label": "TeXソース",
                         "public": True,
                         "original_sha256": digest,
                         "sha256": digest,
+                    },
+                    {
+                        "path": "published.pdf",
+                        "role": "published-pdf",
+                        "label": "PDF",
+                        "public": True,
+                        "original_sha256": sha256_file(pdf),
+                        "sha256": sha256_file(pdf),
                     }
                 ],
                 "approved_changes": [],
                 "privacy_reviews": [
                     {
-                        "path": "main.tex",
+                        "path": "article.tex",
                         "status": "reviewed",
                         "reason": "",
                         "source_sha256": digest,
+                        "inspection_status": "completed",
+                        "recorded_at": "2026-07-26T12:00:00+09:00",
+                    },
+                    {
+                        "path": "published.pdf",
+                        "status": "reviewed",
+                        "reason": "",
+                        "source_sha256": sha256_file(pdf),
                         "inspection_status": "completed",
                         "recorded_at": "2026-07-26T12:00:00+09:00",
                     }
@@ -87,7 +105,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
                 "results": [
                     {
                         "slug": self.paper.slug,
-                        "source": "main.tex",
+                        "source": "article.tex",
                         "source_sha256": digest,
                         "html": f"{self.paper.slug}/index.html",
                         "log": f"{self.paper.slug}/latexml.log",
@@ -119,6 +137,10 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         self.assertIn('../../../styles.css', public_html)
         self.assertIn('id="main-content"', public_html)
         self.assertIn("HTML変換日：2026年7月26日", public_html)
+        self.assertIn('href="../article.tex">TeXソース</a>', public_html)
+        self.assertIn('href="../published.pdf">PDFを読む</a>', public_html)
+        self.assertNotIn("../main.tex", public_html)
+        self.assertNotIn("../main.pdf", public_html)
         self.assertTrue((self.paper_dir / "html" / "figure-01-page-2.png").is_file())
 
     def test_dynamic_markup_is_rejected_without_changing_the_paper(self) -> None:

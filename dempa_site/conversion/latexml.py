@@ -171,6 +171,51 @@ def _normalize_cross_row_braces(source: str) -> tuple[str, int]:
     return environment_pattern.sub(replace_environment, source), replacements
 
 
+def _normalize_quotient_relation(source: str) -> tuple[str, int]:
+    r"""Give LaTeXML an explicit atom type for quotient notation ``/\sim``."""
+    return re.subn(r"/\s*\\sim\b", r"/\\mathord{\\sim}", source)
+
+
+def _normalize_nocite_all(
+    source: str, bibliographies: Iterable[Path]
+) -> tuple[str, int]:
+    r"""Expand ``\nocite{*}`` because LaTeXML can omit uncited BibTeX rows."""
+    keys = []
+    key_pattern = re.compile(
+        r"^\s*@(?:article|book|booklet|conference|inbook|incollection|"
+        r"inproceedings|manual|mastersthesis|misc|phdthesis|proceedings|"
+        r"techreport|unpublished)\s*[({]\s*([^,\s]+)\s*,",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    for bibliography in bibliographies:
+        text = bibliography.read_text(encoding="utf-8", errors="replace")
+        keys.extend(key_pattern.findall(text))
+    keys = list(dict.fromkeys(keys))
+    if not keys:
+        return source, 0
+    return re.subn(
+        r"\\nocite\s*\{\s*\*\s*\}",
+        r"\\nocite{" + ",".join(keys) + "}",
+        source,
+    )
+
+
+def _effective_warning_lines(
+    log_text: str, html_text: str, has_bibliographies: bool
+) -> tuple[list[str], list[str]]:
+    """Separate actionable warnings from a safe mixed-bibliography warning."""
+    warnings = [
+        line for line in log_text.splitlines() if line.startswith("Warning:")
+    ]
+    ignored = []
+    if has_bibliographies and "ltx_missing_citation" not in html_text:
+        for line in tuple(warnings):
+            if line.startswith("Warning:expected:bibkeys "):
+                warnings.remove(line)
+                ignored.append(line)
+    return warnings, ignored
+
+
 def _prepare_pdf_graphics(
     source: Path, target_dir: Path, timeout: int
 ) -> tuple[PreparedGraphic, ...]:
@@ -306,6 +351,22 @@ def _tex_source(paper_dir: Path, paper: Paper) -> Path:
     return candidates[0]
 
 
+def _bibliography_files(target: LaTeXMLTarget) -> tuple[Path, ...]:
+    files = []
+    for entry in target.paper.files:
+        if (
+            entry.public
+            and entry.role == "bibliography"
+            and Path(entry.path).suffix.casefold() == ".bib"
+        ):
+            candidate = target.paper_dir / safe_relative_path(
+                entry.path, PaperToolError
+            )
+            if candidate.is_file():
+                files.append(candidate)
+    return tuple(files)
+
+
 def configured_targets(
     root: Path,
     papers: Iterable[tuple[Path, Paper]],
@@ -398,6 +459,9 @@ def run_latexml_trial(
         ]
         if binding_dir is not None:
             command.append(f"--path={binding_dir.resolve()}")
+        bibliography_files = _bibliography_files(target)
+        for bibliography in bibliography_files:
+            command.append(f"--bibliography={bibliography.resolve()}")
         graphics: tuple[PreparedGraphic, ...] = ()
         missing_graphics = 0
         source_normalizations = []
@@ -412,9 +476,20 @@ def run_latexml_trial(
             normalized_source, brace_normalization_count = (
                 _normalize_cross_row_braces(normalized_source)
             )
+            normalized_source, quotient_normalization_count = (
+                _normalize_quotient_relation(normalized_source)
+            )
+            normalized_source, nocite_normalization_count = _normalize_nocite_all(
+                normalized_source, bibliography_files
+            )
             conversion_source = target.source
             temporary_source = None
-            if normalization_count or brace_normalization_count:
+            if (
+                normalization_count
+                or brace_normalization_count
+                or quotient_normalization_count
+                or nocite_normalization_count
+            ):
                 temporary_source = target_dir / ".latexml-normalized.tex"
                 temporary_source.write_text(normalized_source, encoding="utf-8")
                 conversion_source = temporary_source
@@ -434,6 +509,22 @@ def run_latexml_trial(
                         "scope": "temporary-conversion-copy",
                     }
                 )
+            if quotient_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "quotient-relation",
+                        "count": quotient_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if nocite_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "nocite-all",
+                        "count": nocite_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
             command.append(str(conversion_source))
             try:
                 completed = subprocess.run(
@@ -448,7 +539,6 @@ def run_latexml_trial(
                 if temporary_source is not None:
                     temporary_source.unlink(missing_ok=True)
             log_text = log.read_text(encoding="utf-8", errors="replace") if log.is_file() else ""
-            warning_count = sum(line.startswith("Warning:") for line in log_text.splitlines())
             error_count = sum(line.startswith("Error:") for line in log_text.splitlines())
             html_text = (
                 destination.read_text(encoding="utf-8", errors="replace")
@@ -463,6 +553,10 @@ def run_latexml_trial(
             )
             if destination.is_file():
                 destination.write_text(html_text, encoding="utf-8")
+            warning_lines, ignored_warnings = _effective_warning_lines(
+                log_text, html_text, bool(bibliography_files)
+            )
+            warning_count = len(warning_lines)
             has_error_markup = "ltx_ERROR" in html_text
             title_present = target.paper.title in html_text
             findings = privacy_findings(html_text, "html")
@@ -489,6 +583,7 @@ def run_latexml_trial(
             conversion_date_visible = False
             missing_graphics = len(graphics)
             findings = []
+            ignored_warnings = []
         blocking_reasons = _blocking_reasons(
             status=status,
             warning_count=warning_count,
@@ -527,6 +622,14 @@ def run_latexml_trial(
                 ],
                 "missing_graphics": missing_graphics,
                 "source_normalizations": source_normalizations,
+                "bibliographies": [
+                    {
+                        "source": str(path.relative_to(target.paper_dir)),
+                        "sha256": sha256_file(path),
+                    }
+                    for path in bibliography_files
+                ],
+                "ignored_warnings": ignored_warnings,
                 "privacy_findings": findings,
                 "comments_removed": True,
                 "automatic_checks_passed": not blocking_reasons,
