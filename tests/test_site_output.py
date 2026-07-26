@@ -296,6 +296,9 @@ class SiteOutputContractTest(unittest.TestCase):
             {
                 "index.html",
                 "archive/index.html",
+                "explore/index.html",
+                "graph/index.html",
+                "lineage/index.html",
                 "math/index.html",
                 "math/algebra-combinatorics/index.html",
                 "math/topology-geometry/index.html",
@@ -306,6 +309,7 @@ class SiteOutputContractTest(unittest.TestCase):
                 "papers/2025-06-06-01/index.html",
                 "papers/2026-07-07-01/index.html",
                 "papers/old-normal-paper/index.html",
+                "reading-paths/index.html",
                 "tags/数学/index.html",
                 "tags/位相空間/index.html",
                 "tags/読み物/index.html",
@@ -325,6 +329,23 @@ class SiteOutputContractTest(unittest.TestCase):
             self.assertIn("missing target missing-page/", result.stderr)
         finally:
             broken_page.unlink()
+
+    def test_exploration_pages_and_machine_readable_data_are_generated(self) -> None:
+        explore = self.read("explore/index.html")
+        self.assertIn("読書経路", explore)
+        self.assertIn("原稿の系譜", explore)
+        self.assertIn("原稿関係図", explore)
+
+        graph = json.loads(self.read("graph/paper-graph.json"))
+        self.assertEqual(4, len(graph["nodes"]))
+        self.assertTrue(any(node["title"] == "通常原稿" for node in graph["nodes"]))
+        self.assertNotIn("数学", [tag["name"] for tag in graph["tags"]])
+
+        lineage = json.loads(self.read("lineage/lineage.json"))
+        normal = next(item for item in lineage["papers"] if item["slug"] == "2023-04-04-01")
+        self.assertEqual("published", normal["events"][0]["kind"])
+        paper_page = self.read("papers/2023-04-04-01/index.html")
+        self.assertIn("../../lineage/#paper-2023-04-04-01", paper_page)
 
 
 if __name__ == "__main__":

@@ -17,6 +17,10 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
         (f"{SITE_URL}/", None),
         (f"{SITE_URL}/archive/", None),
         (f"{SITE_URL}/math/", None),
+        (f"{SITE_URL}/explore/", None),
+        (f"{SITE_URL}/reading-paths/", None),
+        (f"{SITE_URL}/lineage/", None),
+        (f"{SITE_URL}/graph/", None),
     ]
     for section in MATH_SECTIONS:
         section_slug = MATH_SECTION_DETAILS[section]["slug"]

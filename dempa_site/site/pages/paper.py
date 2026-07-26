@@ -97,6 +97,15 @@ def rendered_paper_page(manifest: Paper) -> str:
 {keyword_chips}
         </div>
       </section>
+      <section aria-labelledby="explore-paper-title">
+        <p class="section-number">EXPLORE</p>
+        <h2 id="explore-paper-title">この原稿からたどる</h2>
+        <nav class="paper-actions" aria-label="この原稿の探索機能">
+          <a href="../../lineage/#paper-{slug}">この原稿の系譜</a>
+          <a href="../../graph/">タグ関係図</a>
+          <a href="../../reading-paths/">読書経路</a>
+        </nav>
+      </section>
     </article>
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>

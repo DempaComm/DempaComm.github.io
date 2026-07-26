@@ -13,6 +13,7 @@ def site_navigation(prefix: str, current: str = "") -> str:
         ("home", home_href, "トップ"),
         ("archive", f"{prefix}archive/", "全原稿"),
         ("math", f"{prefix}math/", "数学記事総覧"),
+        ("explore", f"{prefix}explore/", "原稿を探索"),
         ("tags", f"{prefix}archive/#tags-title", "タグ索引"),
     )
     rendered = []
@@ -64,4 +65,3 @@ def page_head(
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;family=Zen+Kurenaido&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{stylesheet}">"""
-

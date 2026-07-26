@@ -194,6 +194,11 @@ main { padding: 64px 0 80px; }
   color: #dfe8f0;
 }
 
+.portal-card-wide {
+  grid-column: 1 / -1;
+  min-height: 150px;
+}
+
 .latest-papers,
 .archive-note {
   scroll-margin-top: 1rem;
@@ -765,6 +770,260 @@ footer .title-attribute {
   color: var(--muted);
 }
 
+.exploration-page h1,
+.reading-path-page h1,
+.lineage-page h1,
+.graph-page h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.explore-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 220px;
+  padding: clamp(26px, 5vw, 42px);
+  border: 1px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+}
+
+.explore-card:hover,
+.explore-card:focus-visible {
+  border-color: var(--ink);
+  box-shadow: 0 16px 40px rgb(23 33 43 / 9%);
+}
+
+.explore-card strong {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 500;
+}
+
+.explore-card > span:not(.section-number),
+.explore-card small,
+.lineage-note {
+  color: var(--muted);
+}
+
+.reading-path-intro,
+.lineage-note {
+  margin-bottom: 30px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--accent);
+  background: var(--white);
+}
+
+.reading-path-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.reading-path-steps {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: reading-step;
+}
+
+.reading-step {
+  padding: clamp(26px, 5vw, 42px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.reading-step h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 500;
+}
+
+.reading-step-meta,
+.reading-step nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.reading-step nav {
+  justify-content: space-between;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.lineage-list {
+  display: grid;
+  gap: 10px;
+}
+
+.lineage-paper {
+  border: 1px solid var(--line);
+  background: var(--white);
+  scroll-margin-top: 1rem;
+}
+
+.lineage-paper:target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(180 66 47 / 15%);
+}
+
+.lineage-paper summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+.lineage-paper summary span:last-child {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.lineage-paper-body {
+  padding: 0 22px 24px;
+}
+
+.lineage-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lineage-timeline li {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.lineage-timeline time,
+.lineage-undated > span,
+.lineage-relations span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.lineage-timeline p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.graph-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  gap: 12px;
+  align-items: end;
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.graph-controls label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.graph-controls select,
+.graph-controls button {
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+}
+
+.graph-controls button {
+  cursor: pointer;
+}
+
+.graph-canvas {
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+#paper-graph {
+  display: block;
+  min-width: 760px;
+  width: 100%;
+  min-height: 560px;
+}
+
+.graph-edge {
+  stroke: #8795a1;
+  stroke-opacity: 0.36;
+}
+
+.graph-edge-explicit {
+  stroke: var(--accent);
+  stroke-opacity: 0.72;
+}
+
+.graph-node circle {
+  fill: var(--navy);
+  stroke: var(--white);
+  stroke-width: 3px;
+}
+
+.graph-node text {
+  fill: var(--ink);
+  font: 500 12px var(--font-sans);
+  paint-order: stroke;
+  stroke: var(--white);
+  stroke-width: 4px;
+}
+
+.graph-node:hover circle,
+.graph-node:focus circle {
+  fill: var(--accent);
+}
+
+.graph-empty {
+  fill: var(--muted);
+  font: 16px var(--font-sans);
+}
+
+.graph-accessible-list {
+  margin: 16px 0 30px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.graph-accessible-list summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.graph-accessible-list li {
+  margin-top: 10px;
+}
+
+.graph-accessible-list li span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
 @media (max-width: 680px) {
   .paper-search-controls {
     grid-template-columns: 1fr;
@@ -777,4 +1036,8 @@ footer .title-attribute {
   .year-groups,
   .portal-grid { grid-template-columns: 1fr; }
   .math-directory-grid { grid-template-columns: 1fr; }
+  .explore-grid { grid-template-columns: 1fr; }
+  .portal-card-wide { grid-column: auto; }
+  .graph-controls { grid-template-columns: 1fr; }
+  .lineage-timeline li { grid-template-columns: 1fr; gap: 4px; }
 }

@@ -9,6 +9,7 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 公開サイト: https://dempacomm.github.io/
 - 全原稿アーカイブ: https://dempacomm.github.io/archive/
 - 数学記事総覧: https://dempacomm.github.io/math/
+- 原稿を探索: https://dempacomm.github.io/explore/
 - はてなブログ: https://concious4410.hatenablog.com/
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
@@ -53,6 +54,13 @@ python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 `archive/` に自動生成します。`math/` は数学分野別総覧への入口となり、
 各分野の記事一覧を `math/<分野>/` に生成します。RSSは `feed.xml`、
 サイトマップは `sitemap.xml` で公開します。
+
+`explore/` からは、テーマ別に順番を定めた読書経路、初出・移行・改訂を並べた
+原稿の系譜、電波通信のタグを使った原稿関係図へ移動できます。登録方法は
+`docs/EXPLORATION.md` にまとめています。
+
+LaTeXMLによるHTML変換は通常公開から隔離した試験コマンドとして導入しています。
+代表4分類を変換する方法と確認項目は `docs/LATEXML_TRIAL.md` を参照してください。
 
 普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
 できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は

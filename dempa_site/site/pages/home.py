@@ -67,6 +67,11 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
         <strong>タグから探す</strong>
         <span>電波通信の元タグを引き継いだ索引です。</span>
       </a>
+      <a class="portal-card portal-card-wide" href="explore/">
+        <span class="section-number">EXPLORE</span>
+        <strong>原稿のつながりから探す</strong>
+        <span>読書経路、原稿の系譜、タグ関係図からアーカイブを歩けます。</span>
+      </a>
     </section>
 
     <section class="latest-papers" aria-labelledby="papers-title">

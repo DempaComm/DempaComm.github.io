@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "数識電収 読書経路",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "slug",
+    "title",
+    "description",
+    "difficulty",
+    "prerequisites",
+    "papers"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "enum": [1]},
+    "slug": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "difficulty": {"type": "string", "minLength": 1},
+    "prerequisites": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "papers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["slug", "guide"],
+        "properties": {
+          "slug": {"type": "string", "minLength": 1},
+          "guide": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

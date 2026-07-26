@@ -25,6 +25,13 @@ from dempa_site.features import (
     run_site_features,
 )
 from dempa_site.features.base import FeatureGenerator
+from dempa_site.features.explore import generate_explore
+from dempa_site.features.lineage import generate_lineage
+from dempa_site.features.reading_paths import (
+    generate_reading_paths,
+    validate_reading_paths,
+)
+from dempa_site.features.relation_graph import generate_relation_graph
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
@@ -154,6 +161,15 @@ def generate_static_pages(context: StageContext) -> None:
         (section_dir / "index.html").write_text(
             rendered_math_section_page(section, papers), encoding="utf-8"
         )
+
+    # These dependency-free exploration pages are part of the site's public
+    # navigation. Generate them atomically with the other basic pages so a
+    # custom optional-feature run can never leave their links broken.
+    validate_reading_paths(context.catalog)
+    generate_reading_paths(context.catalog, output)
+    generate_lineage(context.catalog, output)
+    generate_relation_graph(context.catalog, output)
+    generate_explore(context.catalog, output)
 
 
 def copy_public_files(context: StageContext) -> None:

@@ -15,6 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.config import LATEXMKRC_BY_ENGINE  # noqa: E402
+from dempa_site.conversion.latexml import run_latexml_trial  # noqa: E402
 from dempa_site.errors import DempaSiteError, PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
@@ -168,6 +169,29 @@ def command_check_all(args: argparse.Namespace) -> None:
     output = output.resolve()
     steps = complete_check_steps(PROJECT_ROOT, output)
     run_check_suite(steps, ROOT)
+
+
+def command_latexml_trial(args: argparse.Namespace) -> None:
+    output = Path(args.output)
+    if not output.is_absolute():
+        output = ROOT / output
+    report = run_latexml_trial(
+        root=ROOT,
+        papers=manifests(),
+        output=output,
+        requested_slugs=args.slugs,
+        timeout=args.timeout,
+    )
+    generated = sum(item["status"].startswith("generated") for item in report["results"])
+    partial = sum(item["status"] == "partial" for item in report["results"])
+    failed = sum(item["status"] == "failed" for item in report["results"])
+    for item in report["results"]:
+        print(f"LATEXML {item['status']:9} {item['slug']} {item['category']}")
+    print(
+        f"LATEXML generated={generated} partial={partial} failed={failed} "
+        f"report={output / 'report.json'}"
+    )
+    print("MANUAL REVIEW REQUIRED: 試験出力は自動公開されません")
 
 
 def command_inspect_file(args: argparse.Namespace) -> None:
@@ -356,6 +380,30 @@ def parser() -> argparse.ArgumentParser:
         help="staged site directory (default: _site)",
     )
     check_all_parser.set_defaults(func=command_check_all)
+
+    latexml_parser = subparsers.add_parser(
+        "latexml-trial",
+        help="experimentally convert selected TeX papers to HTML with LaTeXML",
+    )
+    latexml_parser.add_argument(
+        "slugs",
+        nargs="*",
+        help="paper slugs; omit to use experiments/latexml-trial.json",
+    )
+    latexml_parser.add_argument(
+        "--output",
+        default="_experiments/latexml",
+        metavar="DIR",
+        help="empty trial output directory (default: _experiments/latexml)",
+    )
+    latexml_parser.add_argument(
+        "--timeout",
+        type=int,
+        default=180,
+        metavar="SECONDS",
+        help="per-paper LaTeXML timeout (default: 180)",
+    )
+    latexml_parser.set_defaults(func=command_latexml_trial)
 
     inspect_parser = subparsers.add_parser(
         "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"
