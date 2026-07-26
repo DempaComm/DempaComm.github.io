@@ -13,6 +13,7 @@ from dempa_site.conversion.latexml import (
     _normalize_nocite_all,
     _normalize_quotient_relation,
     run_latexml_trial,
+    svg_findings,
 )
 from dempa_site.errors import PaperToolError
 from dempa_site.files import sha256_file
@@ -172,6 +173,9 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertEqual(digest, self.paper.files[0].sha256)
         self.assertEqual("experiments/latexml-bindings/article.cls.ltxml", report["binding_files"][0]["path"])
         self.assertIn("--nocomments", conversion_commands[0])
+        self.assertIn("--svg", conversion_commands[0])
+        self.assertEqual(0, report["results"][0]["inline_svg_count"])
+        self.assertEqual([], report["results"][0]["unsafe_svg_findings"])
         self.assertTrue(any(value.startswith("--path=") for value in conversion_commands[0]))
         self.assertIn(
             f"--bibliography={(self.paper.source_path.parent / 'references.bib').resolve()}",
@@ -181,6 +185,25 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertTrue((output / self.paper.slug / "index.html").is_file())
         self.assertTrue((output / "report.json").is_file())
         self.assertEqual("\\documentclass{article}\\begin{document}test\\end{document}", (self.paper.source_path.parent / "main.tex").read_text(encoding="utf-8"))
+
+    def test_inline_svg_is_counted_and_unsafe_content_is_rejected(self) -> None:
+        safe = '<svg><path d="M0 0 L1 1"></path></svg>'
+        self.assertEqual((1, []), svg_findings(safe))
+
+        unsafe = (
+            '<svg onload="run()"><script>run()</script>'
+            '<image href="https://example.com/a.png"></image></svg>'
+        )
+        count, findings = svg_findings(unsafe)
+        self.assertEqual(1, count)
+        self.assertEqual(
+            [
+                "inline SVG 1: script element",
+                "inline SVG 1: event handler",
+                "inline SVG 1: external resource",
+            ],
+            findings,
+        )
 
     def test_warning_blocks_automatic_checks(self) -> None:
         def fake_run(command, **_kwargs):

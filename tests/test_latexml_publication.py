@@ -162,6 +162,22 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         self.assertFalse((self.paper_dir / "html").exists())
         self.assertNotIn("html_version", load_manifest(self.manifest_path).to_dict())
 
+    def test_unsafe_inline_svg_is_rejected(self) -> None:
+        trial_html = self.trial / self.paper.slug / "index.html"
+        trial_html.write_text(
+            trial_html.read_text(encoding="utf-8").replace(
+                "</article>", '<svg onload="run()"></svg></article>'
+            ),
+            encoding="utf-8",
+        )
+
+        with self.assertRaisesRegex(PaperToolError, "動的要素"):
+            publish_latexml_trial(
+                root=self.root,
+                paper=self.paper,
+                trial_output=self.trial,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

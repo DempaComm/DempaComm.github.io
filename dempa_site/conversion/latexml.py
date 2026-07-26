@@ -41,6 +41,18 @@ MISSING_IMAGE_PATTERN = re.compile(
     r'<img\b(?=[^>]*\bclass="[^"]*\bltx_missing_image\b)[^>]*>',
     re.IGNORECASE,
 )
+SVG_PATTERN = re.compile(r"<svg\b.*?</svg>", re.IGNORECASE | re.DOTALL)
+UNSAFE_SVG_PATTERNS = (
+    ("script element", re.compile(r"<script\b", re.IGNORECASE)),
+    ("event handler", re.compile(r"\son[a-z]+\s*=", re.IGNORECASE)),
+    (
+        "external resource",
+        re.compile(
+            r"(?:href|xlink:href)\s*=\s*['\"]\s*(?:https?:|//|data:|javascript:)",
+            re.IGNORECASE,
+        ),
+    ),
+)
 
 
 def _binding_files(root: Path) -> tuple[Path, ...]:
@@ -59,6 +71,7 @@ def _blocking_reasons(
     title_present: bool,
     conversion_date_visible: bool,
     missing_graphics: int,
+    unsafe_svg_findings: list[str],
     findings: list[str],
 ) -> list[str]:
     reasons = []
@@ -76,9 +89,22 @@ def _blocking_reasons(
         reasons.append("生成HTMLにHTML変換日を表示できませんでした")
     if missing_graphics:
         reasons.append(f"生成HTMLに未変換の図版が{missing_graphics}件あります")
+    if unsafe_svg_findings:
+        reasons.append("生成SVGに公開を許可しない要素があります")
     if findings:
         reasons.append("生成HTMLの簡易個人情報検査に確認事項があります")
     return reasons
+
+
+def svg_findings(html_text: str) -> tuple[int, list[str]]:
+    """Count inline SVGs and report executable or externally loaded content."""
+    fragments = SVG_PATTERN.findall(html_text)
+    findings = []
+    for index, fragment in enumerate(fragments, start=1):
+        for label, pattern in UNSAFE_SVG_PATTERNS:
+            if pattern.search(fragment):
+                findings.append(f"inline SVG {index}: {label}")
+    return len(fragments), findings
 
 
 def _set_conversion_date(html_text: str, label: str) -> tuple[str, bool]:
@@ -452,6 +478,7 @@ def run_latexml_trial(
             f"--destination={destination}",
             "--format=html5",
             "--presentationmathml",
+            "--svg",
             "--nocomments",
             f"--timeout={timeout}",
             "--expire=-1",
@@ -557,6 +584,7 @@ def run_latexml_trial(
                 log_text, html_text, bool(bibliography_files)
             )
             warning_count = len(warning_lines)
+            inline_svg_count, unsafe_svg_findings = svg_findings(html_text)
             has_error_markup = "ltx_ERROR" in html_text
             title_present = target.paper.title in html_text
             findings = privacy_findings(html_text, "html")
@@ -582,6 +610,8 @@ def run_latexml_trial(
             title_present = False
             conversion_date_visible = False
             missing_graphics = len(graphics)
+            inline_svg_count = 0
+            unsafe_svg_findings = []
             findings = []
             ignored_warnings = []
         blocking_reasons = _blocking_reasons(
@@ -592,6 +622,7 @@ def run_latexml_trial(
             title_present=title_present,
             conversion_date_visible=conversion_date_visible,
             missing_graphics=missing_graphics,
+            unsafe_svg_findings=unsafe_svg_findings,
             findings=findings,
         )
         results.append(
@@ -621,6 +652,8 @@ def run_latexml_trial(
                     for graphic in graphics
                 ],
                 "missing_graphics": missing_graphics,
+                "inline_svg_count": inline_svg_count,
+                "unsafe_svg_findings": unsafe_svg_findings,
                 "source_normalizations": source_normalizations,
                 "bibliographies": [
                     {

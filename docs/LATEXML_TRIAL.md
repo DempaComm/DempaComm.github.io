@@ -75,6 +75,8 @@ python3 scripts/paper_tool.py latexml-trial 2015-08-28-01 \
 
 `automatic_checks_passed` が `true` になる条件は、LaTeXMLの警告・エラーがなく、生成HTMLに
 `ltx_ERROR` と未変換図版がなく、題名が保持され、簡易個人情報検査にも確認事項がないことである。
+TikZなどから生成したインラインSVGについては、`script`、イベント属性、外部資源参照がないことも
+検査する。`report.json` の `inline_svg_count` で生成数を確認できる。
 この条件を満たしても、数式、定理番号、相互参照、内容を元PDFと目視比較するまで公開してはならない。
 
 ## 単純なTeXの限定パイロット
@@ -171,3 +173,15 @@ LaTeXMLが `\nocite{*}` から未引用文献を1件省略したため、変換�
 独自BSTの外観は再現せず、LaTeXMLの意味的な標準書式を使う。試験結果は
 `_experiments/latexml-cw-complete/2024-01-13-01/index.html` で確認できる。
 公開承認はこのHTMLと元PDFを人が比較した後に行う。
+
+## TikZ可換図式の試験結果
+
+本名や既存原稿を含まない人工素材
+`experiments/latexml-fixtures/tikz-commutative-diagram.tex` を使い、4対象と4射からなる
+可換四角形を試験した。通常のLaTeXML試験は `--svg` を常に指定し、TikZ図をインラインSVGへ
+変換する。2026-07-26の試験では警告・エラーなしで、頂点 `A, B, C, D`、射のラベル
+`f, g, h, k`、4本の矢印と矢印先端が保持された。
+
+生成HTMLにはSVG数と安全性検査結果を記録する。SVG内の `script`、`onload` などのイベント属性、
+HTTP・data URL・JavaScriptによる外部資源参照を検出した場合は、自動検査と正式公開の両方を停止する。
+SVGが生成できても、複雑なTikZライブラリ、色、線種、配置は元PDFとの目視比較を必須とする。

@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\title{TikZ commutative diagram pilot}
+\author{Synthetic test data}
+\date{}
+
+\begin{document}
+\maketitle
+
+The following square commutes, so $g\circ f=k\circ h$.
+
+\begin{center}
+\begin{tikzpicture}
+  \node (A) at (0,2) {$A$};
+  \node (B) at (4,2) {$B$};
+  \node (C) at (0,0) {$C$};
+  \node (D) at (4,0) {$D$};
+
+  \draw[->] (A) -- node[above] {$f$} (B);
+  \draw[->] (A) -- node[left] {$h$} (C);
+  \draw[->] (B) -- node[right] {$g$} (D);
+  \draw[->] (C) -- node[below] {$k$} (D);
+\end{tikzpicture}
+\end{center}
+
+\end{document}

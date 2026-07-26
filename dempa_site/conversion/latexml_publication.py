@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from dempa_site.config import SITE_TITLE_TOP, SITE_URL
+from dempa_site.conversion.latexml import svg_findings
 from dempa_site.dates import local_now_seconds
 from dempa_site.errors import PaperToolError
 from dempa_site.files import read_json, sha256_file, write_json
@@ -28,6 +29,7 @@ UNSAFE_HTML_PATTERNS = (
     re.compile(r"<embed\b", re.IGNORECASE),
     re.compile(r"<form\b", re.IGNORECASE),
     re.compile(r"javascript\s*:", re.IGNORECASE),
+    re.compile(r"\son[a-z]+\s*=", re.IGNORECASE),
 )
 
 
@@ -82,6 +84,9 @@ def _public_pdf_href(paper: Paper) -> str:
 def _integrate_site_html(source: str, paper: Paper, source_path: str) -> str:
     if any(pattern.search(source) for pattern in UNSAFE_HTML_PATTERNS):
         raise PaperToolError("LaTeXML HTMLに公開を許可しない動的要素があります")
+    _, unsafe_svg_findings = svg_findings(source)
+    if unsafe_svg_findings:
+        raise PaperToolError("LaTeXML SVGに公開を許可しない要素があります")
     slug = html.escape(paper.slug, quote=True)
     title = html.escape(paper.title)
     canonical = f"{SITE_URL}/papers/{slug}/html/"
