@@ -1,0 +1,570 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>アスコリ・アルツェラの定理</title>
+<!--Generated on Sun Jul 26 16:55:09 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2018-03-29-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>アスコリアルツェラの定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../ascoliarzera.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">アスコリ・アルツェラの定理</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">コンパクト性は位相空間の情報が有限開被覆で網羅できるほど小さい（コンパクト）という概念だが、その亜種である点列コンパクト性はどちらかというと位相空間の中の特別な元の存在を保証するために用いられることが多い。
+存在を保証したいものに似ている元を可算個作ってやれば、（まあ、運が良ければ）求めるものが得られるというわけである。
+そういうわけで位相空間が与えられたときにその部分集合が（点列）コンパクトであるかどうか判定できるととても便利である。
+特に写像の空間の部分集合のコンパクト性が判定できれば位相空間の間の特別な写像を構成する鍵になるので、コンパクト性の判定はより重要さを増す。
+この方法論は例えばリーマンの写像定理の証明や、微分方程式の解の存在を保証するために使われている。
+そういったコンパクト性の判定法のひとつとしてこの文章ではアスコリ・アルツェラの定理を紹介する。
+この定理はコンパクト一様収束の位相が入った写像の空間のコンパクト性の判定法と考えることができる。
+余談ではあるがチコノフの定理は各点収束の位相におけるコンパクト性判定法と考えることができる。</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>準備</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="A,B" display="inline"><mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></math>に対して</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\operatorname{Map}(A,B)" display="block"><mrow><mi>Map</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">で<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>から<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>への写像全体の集合を表すことにする。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>、<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>に対して</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="C(X,Y)" display="block"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">で<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>への連続写像全体の集合を表す。</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold"> </span>(評価写像)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="e:C(X,Y)\times X\to Y" display="inline"><mrow><mi>e</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mi>X</mi></mrow><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="e(f,a)=f(a)" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>で定義する。また<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="A\subset X" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>X</mi></mrow></math>について</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="e(\mathcal{F},A)=\{f(a)\mid f\in\mathcal{F},a\in A\}" display="block"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo>,</mo><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">という表記をする。</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="(M,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>M</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>と<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="a\in M" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>M</mi></mrow></math>および<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="r&gt;0" display="inline"><mrow><mi>r</mi><mo>&gt;</mo><mn>0</mn></mrow></math>について
+この文章では<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="U(a,r)" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を中心とする<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>-開球を表すことにする。また<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="A\subset M" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>M</mi></mrow></math>に対して</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="U(A,r)=\bigcup_{a\in A}U(a,r)" display="block"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></munder><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>-開近傍である。</span></p>
+</div>
+</div>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">以下では、<math id="S1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と<math id="S1.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>は常に距離空間であり、その距離をそれぞれ<math id="S1.p1.m3" class="ltx_Math" alttext="d_{X}" display="inline"><msub><mi>d</mi><mi>X</mi></msub></math>と<math id="S1.p1.m4" class="ltx_Math" alttext="d_{Y}" display="inline"><msub><mi>d</mi><mi>Y</mi></msub></math>と書くことにする。
+有界閉集合が常にコンパクトになるような距離空間を固有距離空間と呼ぶ。</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold"> </span>(同程度連続)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が点<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>で同程度連続であるとは</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\forall a\in X\ \forall\varepsilon&gt;0\ \exists\delta&gt;0\ \forall f\in\mathcal{F}%
+\ \forall x\in X,\ d_{X}(x,a)&lt;\delta\Longrightarrow d_{Y}(f(x),f(a))&lt;\varepsilon" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>a</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>f</mi></mrow></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mi>X</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>ε</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである。各点<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>で同程度連続であるとき<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>で同程度連続であるとかいう。</span></p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(同程度一様連続)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が同程度一様連続であるとは</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists\delta&gt;0\ \forall f\in\mathcal{F}\ \forall x,y\in
+X%
+,\ d_{X}(x,y)&lt;\delta\Longrightarrow d_{Y}(f(x),f(y))&lt;\varepsilon" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>f</mi></mrow></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>ε</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである。</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold"> </span>(各点一様有界性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が各点一様有界であるとは任意の<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>に対して<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="e(\mathcal{F},a)=\{f(a)\mid f\in\mathcal{F}\}" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の有界集合であるときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold"> </span>(一様有界性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が一様有界であるとは<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="e(\mathcal{F},X)=\{f(x)\mid f\in\mathcal{F},x\in X\}" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo>,</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の有界集合であるときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 9</span></span><span class="ltx_text ltx_font_bold"> </span>(一様全有界性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が一様全有界であるとは<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="e(\mathcal{F},X)=\{f(a)\mid f\in\mathcal{F},x\in X\}" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo>,</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の全有界集合であるときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 10</span></span><span class="ltx_text ltx_font_bold"> </span>(広義一様全有界性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が一様全有界であるとは<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意のコンパクト部分集合<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>について
+<math id="Thmthm10.p1.m4" class="ltx_Math" alttext="e(\mathcal{F},K)=\{f(a)\mid f\in\mathcal{F},x\in K\}" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo>,</mo><mrow><mi>x</mi><mo>∈</mo><mi>K</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が<math id="Thmthm10.p1.m5" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の全有界集合であるときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 11</span></span><span class="ltx_text ltx_font_bold"> </span>(ヘミコンパクト)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm11.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は、その可算個のコンパクト部分集合族<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\{K_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>で</span></p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="X=\bigcup_{i\in\mathbb{N}}K_{i}" display="block"><mrow><mi>X</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>K</mi><mi>i</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="\forall i\in\mathbb{N}\ K_{i}\subset\text{{\rm Int}}(K_{i+1})" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><msub><mi>K</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mtext>Int</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすものが存在するときヘミコンパクトと言う。</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>本文</h2>
+
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm12.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">がコンパクトであるとき<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続であることと、同程度一様連続であることは同値である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">略証.</h6>
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はコンパクトなのでルベーグ数が存在する。これを使う。
+∎</p>
+</div>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">がコンパクトで<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続であるとき、<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が各点一様有界であることと<math id="Thmthm13.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が一様有界であることは同値である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">先の命題から<math id="S2.p2.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は同程度一様連続である。
+<math id="S2.p2.m2" class="ltx_Math" alttext="\varepsilon=1" display="inline"><mrow><mi>ε</mi><mo>=</mo><mn>1</mn></mrow></math>に対して<math id="S2.p2.m3" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の同程度一様連続性を担保する<math id="S2.p2.m4" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>を一つ取る。つまり</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\forall f\in\mathcal{F}\ \forall x,y\in X,\ d_{X}(x,y)&lt;\delta\Longrightarrow d%
+_{Y}(f(x),f(y))&lt;1" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>f</mi></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mn>1</mn></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を成り立たせる<math id="S2.p2.m5" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>を一つ取る。<math id="S2.p2.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はコンパクトなのでその<math id="S2.p2.m7" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>-ネット<math id="S2.p2.m8" class="ltx_Math" alttext="\{p_{1},p_{2},\dots,p_{k}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><msub><mi>p</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>p</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する。さて任意に<math id="S2.p2.m9" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>をとると<math id="S2.p2.m10" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>が存在して<math id="S2.p2.m11" class="ltx_Math" alttext="d_{X}(x,p_{i})&lt;\delta" display="inline"><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>となる。よって任意の<math id="S2.p2.m12" class="ltx_Math" alttext="f\in\mathcal{F}" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>について<math id="S2.p2.m13" class="ltx_Math" alttext="d_{Y}(f(x),f(p_{i}))&lt;1" display="inline"><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mn>1</mn></mrow></math>となる。つまり</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="e(\mathcal{F},X)\subset U(e(\mathcal{F},\{p_{1},\dots,p_{k}\}),1)" display="block"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>p</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり、<math id="S2.p2.m14" class="ltx_Math" alttext="e(\mathcal{F},\{p_{1},\dots,p_{k}\})" display="inline"><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>p</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は有界集合なので<math id="S2.p2.m15" class="ltx_Math" alttext="e(\mathcal{F},X)" display="inline"><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は有界集合である。
+∎</p>
+</div>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p"><math id="S2.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>をコンパクト距離空間とする。このとき<math id="S2.p3.m2" class="ltx_Math" alttext="C(X,Y)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>に<math id="S2.p3.m3" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>距離<math id="S2.p3.m4" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>が次のように定義できる。</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="D(f,g)=\sup_{x\in X}d_{Y}(f(x),g(x))" display="block"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">この距離に関する全有界を述べるのがアスコリ・アルツェラの定理である。</p>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 14</span></span><span class="ltx_text ltx_font_bold"> </span>(アスコリ・アルツェラ)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトとする。<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続かつ一様全有界であることと、<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="Thmthm14.p1.m4" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>距離<math id="Thmthm14.p1.m5" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>について全有界であることは同値である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p4.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が同程度連続であり、一様全有界と仮定して<math id="S2.p4.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の全有界性を示す。
+<math id="S2.p4.m3" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を任意に与える。<math id="S2.p4.m4" class="ltx_Math" alttext="A=e(\mathcal{F},X)" display="inline"><mrow><mi>A</mi><mo>=</mo><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は全有界なので<math id="S2.p4.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の<math id="S2.p4.m6" class="ltx_Math" alttext="\varepsilon/8" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow></math>-ネット<math id="S2.p4.m7" class="ltx_Math" alttext="\{y_{1},y_{2},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する。<math id="S2.p4.m8" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がコンパクトなので<math id="S2.p4.m9" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が同程度一様連続であるが、<math id="S2.p4.m10" class="ltx_Math" alttext="\varepsilon/8" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow></math>に対して<math id="S2.p4.m11" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の同程度一様連続性を担保する<math id="S2.p4.m12" class="ltx_Math" alttext="\delta&gt;0" display="inline"><mrow><mi>δ</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を一つ取る。つまり</p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="\forall f\in\mathcal{F}\ \forall x,y\in X,\ d_{X}(x,y)&lt;\delta\Longrightarrow d%
+_{Y}(f(x),f(y))&lt;\varepsilon/8" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>f</mi></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立たせる<math id="S2.p4.m13" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>のことである。<math id="S2.p4.m14" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はコンパクトなので<math id="S2.p4.m15" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>-ネット<math id="S2.p4.m16" class="ltx_Math" alttext="\{p_{1},\dots,p_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>p</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する。ところで
+各<math id="S2.p4.m17" class="ltx_Math" alttext="\phi\in\operatorname{Map}(\{1,2,\dots,m\},\{1,2,\dots,n\})" display="inline"><mrow><mi>ϕ</mi><mo>∈</mo><mrow><mi>Map</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="S(\phi)=\{f\in\mathcal{F}\mid\forall i\in\{1,2,\dots,m\}\ f(p_{i})\in U(y_{%
+\phi(i)},\varepsilon/8)\}" display="block"><mrow><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>,</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。そしてさらに</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="I=\{\phi\in\operatorname{Map}(\{1,2,\dots,m\},\{1,2,\dots,n\})\mid S(\phi)\neq\O\}" display="block"><mrow><mi>I</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>ϕ</mi><mo>∈</mo><mrow><mi>Map</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。<math id="S2.p4.m18" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>は<math id="S2.p4.m19" class="ltx_Math" alttext="\operatorname{Map}(\{1,2,\dots,m\},\{1,2,\dots,n\})" display="inline"><mrow><mi>Map</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の部分集合なので有限集合である。また、<math id="S2.p4.m20" class="ltx_Math" alttext="\{y_{1},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>がネットであることから<math id="S2.p4.m21" class="ltx_Math" alttext="I\neq\O" display="inline"><mrow><mi>I</mi><mo>≠</mo><mi>Ø</mi></mrow></math>がわかる。そこで各<math id="S2.p4.m22" class="ltx_Math" alttext="\phi\in I" display="inline"><mrow><mi>ϕ</mi><mo>∈</mo><mi>I</mi></mrow></math>に対して<math id="S2.p4.m23" class="ltx_Math" alttext="h_{\phi}\in S(\phi)" display="inline"><mrow><msub><mi>h</mi><mi>ϕ</mi></msub><mo>∈</mo><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる<math id="S2.p4.m24" class="ltx_Math" alttext="h_{\phi}" display="inline"><msub><mi>h</mi><mi>ϕ</mi></msub></math>を選んでおく。
+いまからこの<math id="S2.p4.m25" class="ltx_Math" alttext="\{h_{\phi}\}_{\phi\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mi>ϕ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>ϕ</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>が<math id="S2.p4.m26" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>-ネットであることを示そう。任意に<math id="S2.p4.m27" class="ltx_Math" alttext="f\in\mathcal{F}" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>を取る。そしてこの<math id="S2.p4.m28" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に対して<math id="S2.p4.m29" class="ltx_Math" alttext="\psi\in\operatorname{Map}(\{1,2,\dots,m\},\{1,2,\dots,n\})" display="inline"><mrow><mi>ψ</mi><mo>∈</mo><mrow><mi>Map</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>を各<math id="S2.p4.m30" class="ltx_Math" alttext="i\in\{1,2,\dots,m\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></mrow></math>について</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="f(p_{i})\in U(y_{\psi(i)},\varepsilon/8)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>,</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるように定義する。このような<math id="S2.p4.m31" class="ltx_Math" alttext="\psi" display="inline"><mi>ψ</mi></math>が存在することは<math id="S2.p4.m32" class="ltx_Math" alttext="\{y_{1},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>がネットであることからわかる。
+<math id="S2.p4.m33" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>の定義から<math id="S2.p4.m34" class="ltx_Math" alttext="\psi\in I" display="inline"><mrow><mi>ψ</mi><mo>∈</mo><mi>I</mi></mrow></math>がわかる。<math id="S2.p4.m35" class="ltx_Math" alttext="h_{\psi}" display="inline"><msub><mi>h</mi><mi>ψ</mi></msub></math>と<math id="S2.p4.m36" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の距離を評価しよう。任意の<math id="S2.p4.m37" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>について<math id="S2.p4.m38" class="ltx_Math" alttext="d_{X}(x,p_{i})&lt;\delta" display="inline"><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>となる<math id="S2.p4.m39" class="ltx_Math" alttext="p_{i}" display="inline"><msub><mi>p</mi><mi>i</mi></msub></math>を取る。このとき同程度一様連続性や<math id="S2.p4.m40" class="ltx_Math" alttext="\psi" display="inline"><mi>ψ</mi></math>及び<math id="S2.p4.m41" class="ltx_Math" alttext="S(\psi)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の定義などから</p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex16.m1" class="ltx_Math" alttext="\displaystyle d_{Y}(f(x),h_{\psi}(x))" display="inline"><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>ψ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex16.m2" class="ltx_Math" alttext="\displaystyle\leq d_{Y}(f(x),f(p_{i}))+d_{Y}(f(p_{i}),y_{\psi(i)})+d_{Y}(y_{%
+\psi(i)},h_{\psi}(p_{i}))+d_{Y}(h_{\psi}(p_{i}),h_{\psi}(x))" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>y</mi><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>,</mo><mrow><msub><mi>h</mi><mi>ψ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>ψ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>ψ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex17"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex17.m1" class="ltx_Math" alttext="\displaystyle\leq\varepsilon/8+\varepsilon/8+\varepsilon/8+\varepsilon/8=%
+\varepsilon/2" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow><mo>+</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow><mo>+</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow><mo>+</mo><mrow><mi>ε</mi><mo>/</mo><mn>8</mn></mrow></mrow><mo>=</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="S2.p4.m42" class="ltx_Math" alttext="D(f,h_{\psi})\leq\varepsilon/2&lt;\varepsilon" display="inline"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>ψ</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow><mo>&lt;</mo><mi>ε</mi></mrow></math>
+すなわち<math id="S2.p4.m43" class="ltx_Math" alttext="\{h_{\phi}\}_{\phi\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mi>ϕ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>ϕ</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>は<math id="S2.p4.m44" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>-ネットであり、<math id="S2.p4.m45" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が全有界であることがわかった。</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">今度は逆を示そう。つまり<math id="S2.p5.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="S2.p5.m2" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>について全有界であるならば、同程度連続かつ一様全有界であることを示す。まず最初に同程度連続であることを示そう。任意に点<math id="S2.p5.m3" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>と<math id="S2.p5.m4" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を与える。<math id="S2.p5.m5" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の全有界性から<math id="S2.p5.m6" class="ltx_Math" alttext="\varepsilon/3" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>3</mn></mrow></math>-ネット<math id="S2.p5.m7" class="ltx_Math" alttext="\{h_{1},h_{2},\dots,h_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><msub><mi>h</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する。<math id="S2.p5.m8" class="ltx_Math" alttext="\delta&gt;0" display="inline"><mrow><mi>δ</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を適当に小さく選んで</p>
+<table id="S2.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex18.m1" class="ltx_Math" alttext="\forall i\in\{1,2,\dots,m\}\ \forall x\in S\ d_{X}(x,a)&lt;\delta\Longrightarrow d%
+_{Y}(h_{i}(x),h_{i}(a))&lt;\varepsilon/3" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><mi>S</mi><mo lspace="0.500em">⁢</mo><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>3</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を成り立たせるようにする。このことは各<math id="S2.p5.m9" class="ltx_Math" alttext="h_{i}" display="inline"><msub><mi>h</mi><mi>i</mi></msub></math>の連続性と、<math id="S2.p5.m10" class="ltx_Math" alttext="\{h_{1},h_{2},\dots,h_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><msub><mi>h</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>が有限集合であることから可能である。さて、任意の<math id="S2.p5.m11" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>が<math id="S2.p5.m12" class="ltx_Math" alttext="d_{X}(x,a)&lt;\delta" display="inline"><mrow><mrow><msub><mi>d</mi><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>が成り立つと仮定する。
+そして任意の<math id="S2.p5.m13" class="ltx_Math" alttext="f\in\mathcal{F}" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>について<math id="S2.p5.m14" class="ltx_Math" alttext="D(f,h_{i})&lt;\varepsilon/3" display="inline"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>3</mn></mrow></mrow></math>となるような<math id="S2.p5.m15" class="ltx_Math" alttext="h_{i}" display="inline"><msub><mi>h</mi><mi>i</mi></msub></math>を取る。すると</p>
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex19"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex19.m1" class="ltx_Math" alttext="\displaystyle d_{Y}(f(x),f(a))" display="inline"><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex19.m2" class="ltx_Math" alttext="\displaystyle\leq d_{Y}(f(x),h_{i}(x))+d_{Y}(h_{i}(x),h_{i}(a))+d_{Y}(h_{i}(a)%
+,f(a))" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S2.Ex20"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.Ex20.m1" class="ltx_Math" alttext="\displaystyle\leq d_{Y}(h_{i}(x),h_{i}(a))+2D(f,h_{i})&lt;\varepsilon" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mn>2</mn><mo>⁢</mo><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="S2.p5.m16" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は同程度連続である。</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">次に一様全有界性を示そう。任意に<math id="S2.p6.m1" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を与える。そして<math id="S2.p6.m2" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の<math id="S2.p6.m3" class="ltx_Math" alttext="\varepsilon/2" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></math>-ネット<math id="S2.p6.m4" class="ltx_Math" alttext="\{h_{1},\dots,h_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>を取る。すると<math id="S2.p6.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト性から各<math id="S2.p6.m6" class="ltx_Math" alttext="e(h_{i},X)=h_{i}(X)" display="inline"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>h</mi><mi>i</mi></msub><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>はコンパクトであるから</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="e(\{h_{1},\dots,h_{m}\},X)=\bigcup_{i=1}^{m}h_{i}(X)" display="block"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">もコンパクトである。
+よってこの集合の<math id="S2.p6.m7" class="ltx_Math" alttext="\varepsilon/2" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></math>-ネット<math id="S2.p6.m8" class="ltx_Math" alttext="\{y_{1},y_{2},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在する。いまから<math id="S2.p6.m9" class="ltx_Math" alttext="\{y_{1},y_{2},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>が<math id="S2.p6.m10" class="ltx_Math" alttext="e(\mathcal{F},X)" display="inline"><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>の<math id="S2.p6.m11" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>-ネットであることを示そう。任意に<math id="S2.p6.m12" class="ltx_Math" alttext="f\in\mathcal{F}" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>と<math id="S2.p6.m13" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>を与える。
+そして<math id="S2.p6.m14" class="ltx_Math" alttext="D(f,h_{i})&lt;\varepsilon/2" display="inline"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math>となる<math id="S2.p6.m15" class="ltx_Math" alttext="h_{i}" display="inline"><msub><mi>h</mi><mi>i</mi></msub></math>を取り、さらに<math id="S2.p6.m16" class="ltx_Math" alttext="d_{Y}(h_{i}(a),y_{j})&lt;\varepsilon/2" display="inline"><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math>となる<math id="S2.p6.m17" class="ltx_Math" alttext="y_{j}" display="inline"><msub><mi>y</mi><mi>j</mi></msub></math>を取る。このとき</p>
+<table id="S2.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex22.m1" class="ltx_Math" alttext="d_{Y}(f(a),y_{i})\leq d_{Y}(f(a),h_{i}(a))+d_{Y}(h_{i}(a),y_{j})\leq D(f,h_{i}%
+)+d_{Y}(h_{i}(a),y_{j})&lt;\varepsilon" display="block"><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので<math id="S2.p6.m18" class="ltx_Math" alttext="\{y_{1},y_{2},\dots,y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S2.p6.m19" class="ltx_Math" alttext="e(\mathcal{F},X)" display="inline"><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>の<math id="S2.p6.m20" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>-ネットである。
+∎</p>
+</div>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p"><math id="S2.p7.m1" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>に固有性を仮定すると次のように言い換えることもできる。</p>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm15.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトとし、<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>を固有距離空間とする。このとき<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続かつ各点一様有界であることと、<math id="Thmthm15.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="Thmthm15.p1.m5" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>距離<math id="Thmthm15.p1.m6" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>で全有界であることは同値である。</span></p>
+</div>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">一般的によく見るのは次の形のアスコリ・アルツェラだと思う。</p>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm16.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトとし、<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>を固有距離空間とする。このとき<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続かつ一様有界であることと、<math id="Thmthm16.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="Thmthm16.p1.m5" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>距離<math id="Thmthm16.p1.m6" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>で全有界であることは同値である。</span></p>
+</div>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p"><math id="S2.p9.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がコンパクトじゃない場合にもある程度条件を課せばアスコリ・アルツェラ型の定理が成り立つ。それを述べるために広義一様収束のための距離を用意しよう。<math id="S2.p9.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を<math id="S2.p9.m3" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトとする。<math id="S2.p9.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の可算で増大なコンパクト部分集合族<math id="S2.p9.m5" class="ltx_Math" alttext="\{K_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>で、<math id="S2.p9.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を被覆するものについて、
+<math id="S2.p9.m7" class="ltx_Math" alttext="f,g\in C(X,Y)" display="inline"><mrow><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対し、</p>
+<table id="S2.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex23.m1" class="ltx_Math" alttext="D_{i}(f,g)=\sup_{x\in K_{i}}d_{Y}(f(x),g(x))" display="block"><mrow><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mi>x</mi><mo>∈</mo><msub><mi>K</mi><mi>i</mi></msub></mrow></munder><mrow><msub><mi>d</mi><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義し、さらに</p>
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex24.m1" class="ltx_Math" alttext="E(f,g)=\sup_{i\in\mathbb{N}}\left\{\frac{1}{2^{i}}\frac{D_{i}(f,g)}{1+D_{i}(f,%
+g)}\right\}" display="block"><mrow><mrow><mi>E</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><mrow><mo>{</mo><mrow><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>⁢</mo><mfrac><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mrow><mo>}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。<math id="S2.p9.m8" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>は<math id="S2.p9.m9" class="ltx_Math" alttext="C(X,Y)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>上の距離となり、<math id="S2.p9.m10" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について収束することと、広義一様収束することは同値になる。</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm17.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm17.p1.m2" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトとする。このとき<math id="Thmthm17.p1.m3" class="ltx_Math" alttext="\mathcal{F}\subset C(X,Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が同程度連続で、広義一様全有界であるならば<math id="Thmthm17.p1.m4" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は<math id="Thmthm17.p1.m5" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について全有界である。さらに<math id="Thmthm17.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がヘミコンパクトならば、逆も成り立つ。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p10.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が同程度連続で、広義一様全有界であると仮定して全有界性を調べよう。
+<math id="S2.p10.m2" class="ltx_Math" alttext="\varepsilon&gt;0" display="inline"><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow></math>を任意に与える。<math id="S2.p10.m3" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>を十分大きくとって<math id="S2.p10.m4" class="ltx_Math" alttext="N&lt;i" display="inline"><mrow><mi>N</mi><mo>&lt;</mo><mi>i</mi></mrow></math>ならば<math id="S2.p10.m5" class="ltx_Math" alttext="2^{-i}&lt;\varepsilon/2" display="inline"><mrow><msup><mn>2</mn><mrow><mo>−</mo><mi>i</mi></mrow></msup><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math>となるようにとる。
+そして</p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex25.m1" class="ltx_Math" alttext="\mathcal{G}=\{f|K_{N}\mid f\in\mathcal{F}\}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>f</mi><mo lspace="0em" rspace="0em">|</mo><mrow><mrow><msub><mi>K</mi><mi>N</mi></msub><mo>∣</mo><mi>f</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると<math id="S2.p10.m6" class="ltx_Math" alttext="\mathcal{G}\subset C(K_{N},Y)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>⊂</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>N</mi></msub><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であり、また同程度連続で、一様全有界であることもわかる。よって先のアスコリ・アルツェラの定理から<math id="S2.p10.m7" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は<math id="S2.p10.m8" class="ltx_Math" alttext="D_{N}" display="inline"><msub><mi>D</mi><mi>N</mi></msub></math>について全有界である。
+そこで<math id="S2.p10.m9" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>の<math id="S2.p10.m10" class="ltx_Math" alttext="\varepsilon/2" display="inline"><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></math>-ネット<math id="S2.p10.m11" class="ltx_Math" alttext="\{h_{1},h_{2},\dots,h_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><msub><mi>h</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>を取る。
+<math id="S2.p10.m12" class="ltx_Math" alttext="j\leq N" display="inline"><mrow><mi>j</mi><mo>≤</mo><mi>N</mi></mrow></math>ならば<math id="S2.p10.m13" class="ltx_Math" alttext="D_{j}(f,g)\leq D_{N}(f,g)" display="inline"><mrow><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であるから</p>
+<table id="S2.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex26.m1" class="ltx_Math" alttext="\frac{D_{j}(f,g)}{1+D_{j}(f,g)}\leq\frac{D_{N}(f,g)}{1+D_{N}(f,g)}" display="block"><mrow><mfrac><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac><mo>≤</mo><mfrac><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる。任意に<math id="S2.p10.m14" class="ltx_Math" alttext="f\in\mathcal{F}" display="inline"><mrow><mi>f</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow></math>を与え、<math id="S2.p10.m15" class="ltx_Math" alttext="D_{N}(f,h_{i})&lt;\varepsilon/2" display="inline"><mrow><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math>となる<math id="S2.p10.m16" class="ltx_Math" alttext="h_{i}" display="inline"><msub><mi>h</mi><mi>i</mi></msub></math>を取ると<math id="S2.p10.m17" class="ltx_Math" alttext="j\leq N" display="inline"><mrow><mi>j</mi><mo>≤</mo><mi>N</mi></mrow></math>となる<math id="S2.p10.m18" class="ltx_Math" alttext="j" display="inline"><mi>j</mi></math>について</p>
+<table id="S2.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex27.m1" class="ltx_Math" alttext="\frac{1}{2^{j}}\frac{D_{j}(f,h_{i})}{1+D_{j}(f,h_{i})}\leq\frac{1}{2^{j}}\frac%
+{D_{N}(f,h_{i})}{1+D_{N}(f,h_{i})}\leq\frac{1}{2^{j}}D_{N}(f,h_{i})&lt;%
+\varepsilon/2" display="block"><mrow><mrow><mfrac><mn>1</mn><msup><mn>2</mn><mi>j</mi></msup></mfrac><mo>⁢</mo><mfrac><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mrow><mo>≤</mo><mrow><mfrac><mn>1</mn><msup><mn>2</mn><mi>j</mi></msup></mfrac><mo>⁢</mo><mfrac><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mrow><mo>≤</mo><mrow><mfrac><mn>1</mn><msup><mn>2</mn><mi>j</mi></msup></mfrac><mo>⁢</mo><msub><mi>D</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">さらに<math id="S2.p10.m19" class="ltx_Math" alttext="N&lt;j" display="inline"><mrow><mi>N</mi><mo>&lt;</mo><mi>j</mi></mrow></math>ならば<math id="S2.p10.m20" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>の取り方から</p>
+<table id="S2.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex28.m1" class="ltx_Math" alttext="\frac{1}{2^{j}}\frac{D_{j}(f,h_{i})}{1+D_{j}(f,h_{i})}&lt;\varepsilon/2" display="block"><mrow><mrow><mfrac><mn>1</mn><msup><mn>2</mn><mi>j</mi></msup></mfrac><mo>⁢</mo><mfrac><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mrow><msub><mi>D</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mrow><mo>&lt;</mo><mrow><mi>ε</mi><mo>/</mo><mn>2</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので<math id="S2.p10.m21" class="ltx_Math" alttext="E(f,h_{i})&lt;\varepsilon" display="inline"><mrow><mrow><mi>E</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>ε</mi></mrow></math>である。よって<math id="S2.p10.m22" class="ltx_Math" alttext="\{h_{1},h_{2},\dots,h_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mn>1</mn></msub><mo>,</mo><msub><mi>h</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>h</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S2.p10.m23" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>の<math id="S2.p10.m24" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>における<math id="S2.p10.m25" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>-ネットである。つまり<math id="S2.p10.m26" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は<math id="S2.p10.m27" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について全有界である。</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">次は<math id="S2.p11.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>にヘミコンパクト性を課して逆を示そう。<math id="S2.p11.m2" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>について<math id="S2.p11.m3" class="ltx_Math" alttext="a\in\text{{\rm Int}}(K_{i})" display="inline"><mrow><mi>a</mi><mo>∈</mo><mrow><mtext>Int</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる<math id="S2.p11.m4" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>が存在する。
+<math id="S2.p11.m5" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の定義と<math id="S2.p11.m6" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="S2.p11.m7" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について全有界であることから</p>
+<table id="S2.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex29.m1" class="ltx_Math" alttext="\mathcal{G}=\{f|K_{i}\mid f\in\mathcal{F}\}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>f</mi><mo lspace="0em" rspace="0em">|</mo><mrow><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>∣</mo><mi>f</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は<math id="S2.p11.m8" class="ltx_Math" alttext="D_{i}" display="inline"><msub><mi>D</mi><mi>i</mi></msub></math>について全有界である。よって先のアスコリ・アルツェラの定理から<math id="S2.p11.m9" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は<math id="S2.p11.m10" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>において<math id="S2.p11.m11" class="ltx_Math" alttext="K_{i}" display="inline"><msub><mi>K</mi><mi>i</mi></msub></math>上で同程度連続である。ところで<math id="S2.p11.m12" class="ltx_Math" alttext="x\in\text{{\rm Int}}(K_{i})" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mtext>Int</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので結局<math id="S2.p11.m13" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="S2.p11.m14" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>で<math id="S2.p11.m15" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上同程度連続であることがわかる。また<math id="S2.p11.m16" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト集合<math id="S2.p11.m17" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>を与え、<math id="S2.p11.m18" class="ltx_Math" alttext="K\subset K_{j}" display="inline"><mrow><mi>K</mi><mo>⊂</mo><msub><mi>K</mi><mi>j</mi></msub></mrow></math>となる<math id="S2.p11.m19" class="ltx_Math" alttext="K_{j}" display="inline"><msub><mi>K</mi><mi>j</mi></msub></math>を取るとやはり<math id="S2.p11.m20" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>の定義と<math id="S2.p11.m21" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>が<math id="S2.p11.m22" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について全有界であることから</p>
+<table id="S2.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex30.m1" class="ltx_Math" alttext="\mathcal{G}=\{f|K_{j}\mid f\in\mathcal{F}\}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>f</mi><mo lspace="0em" rspace="0em">|</mo><mrow><mrow><msub><mi>K</mi><mi>j</mi></msub><mo>∣</mo><mi>f</mi></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は<math id="S2.p11.m23" class="ltx_Math" alttext="D_{j}" display="inline"><msub><mi>D</mi><mi>j</mi></msub></math>について全有界である。よって先のアスコリ・アルツェラの定理から<math id="S2.p11.m24" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は<math id="S2.p11.m25" class="ltx_Math" alttext="K_{j}" display="inline"><msub><mi>K</mi><mi>j</mi></msub></math>上一様全有界である。ゆえに<math id="S2.p11.m26" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>上でも<math id="S2.p11.m27" class="ltx_Math" alttext="\mathcal{G}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒢</mi></math>は一様全有界である。つまり<math id="S2.p11.m28" class="ltx_Math" alttext="\mathcal{F}" display="inline"><mi class="ltx_font_mathcaligraphic">ℱ</mi></math>は広義一様全有界である。
+∎</p>
+</div>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">この定義域がノンコンパクトな場合のアスコリ・アルツェラの定理も<math id="S2.p12.m1" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>が固有で広義各点一様有界な場合に特殊化できるが面倒なので述べない。
+またアスコリ・アルツェラ型の定理は一様空間の範疇まで一般化できるが、面倒なのでここでは述べない。</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">ケリー著児玉之宏訳, 位相空間論, 吉岡書店1968
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:55:09 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

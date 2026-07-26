@@ -1,0 +1,520 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>論文メモ — テイラー級数の収束と円周上の部分集合について —</title>
+<!--Generated on Sun Jul 26 16:58:37 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2023-12-30-02/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>論文メモ：テイラー級数の収束と円周上の部分集合についてのLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../TR.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document" style="font-size:120%;">
+<span class="ltx_text" style="font-size:83%;">論文メモ
+
+<br class="ltx_break"></span>— テイラー級数の収束と円周上の部分集合について —
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">無限級数の収束に関する話である．</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="On the uniform but not absolute convergence of power series with gaps" class="ltx_ref">4</a>]</cite>でエルデシュは
+間隙級数の冪級数で<math id="p3.m1" class="ltx_Math" alttext="|z|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>では一様収束するが，
+絶対収束はしないという級数を構成している．
+エルデシュが初めてというわけではなく，
+ハーディらのそういう研究を受けて発展として論文を書いたようだ．</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib12" title="Sets of convergence of Taylor series. I" class="ltx_ref">6</a>]</cite>と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib11" title="Sets of convergence of Taylor series. II" class="ltx_ref">7</a>]</cite>
+は連作である．
+これらの論文では
+<math id="p4.m1" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に収束する複素数列
+<math id="p4.m2" class="ltx_Math" alttext="\{a_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>で
+<math id="p4.m3" class="ltx_Math" alttext="\sum_{i=0}^{\infty}|a_{i}|=\infty" display="inline"><mrow><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mrow><mo lspace="0em" stretchy="false">|</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>
+となるものを係数とする複素関数
+<math id="p4.m4" class="ltx_Math" alttext="\sum_{i=0}^{\infty}a_{i}z_{i}" display="inline"><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>z</mi><mi>i</mi></msub></mrow></mrow></math>
+(テイラー級数)
+を
+考え，
+この複素関数の単位円周
+<math id="p4.m5" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>
+上での収束する点全体の集合を調べている．
+このような級数は<math id="p4.m6" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>上では絶対収束しないことに注意しよう．
+テイラー級数の収束性とボレル階層が交わり面白い論文に見える．カントールの集合論がフーリエ級数の収束性に端を発していたことを思い返すと
+この研究はある意味正統派の集合論とも言えるし先祖返りとも言えるかもしれない．</p>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib12" title="Sets of convergence of Taylor series. I" class="ltx_ref">6</a>]</cite>においては次の定理を証明している．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下が成り立つ．</span></p>
+<ol id="S0.I1" class="ltx_enumerate">
+<li id="S0.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S0.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S0.I1.i1.p1.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">を
+</span><math id="S0.I1.i1.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の
+任意の
+</span><math id="S0.I1.i1.p1.m3" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math><span class="ltx_text ltx_font_italic">集合とすると
+Taylor 級数
+</span><math id="S0.I1.i1.p1.m4" class="ltx_Math" alttext="\sum_{i=0}^{\infty}a_{i}z_{i}" display="inline"><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>z</mi><mi>i</mi></msub></mrow></mrow></math><span class="ltx_text ltx_font_italic">が存在して
+</span><math id="S0.I1.i1.p1.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">上では収束し，
+</span><math id="S0.I1.i1.p1.m6" class="ltx_Math" alttext="C\setminus M" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>M</mi></mrow></math><span class="ltx_text ltx_font_italic">
+上では
+発散する．</span></p>
+</div>
+</li>
+<li id="S0.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S0.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S0.I1.i2.p1.m1" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math><span class="ltx_text ltx_font_italic">を
+</span><math id="S0.I1.i2.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の任意の閉集合とすると
+テイラー級数が存在してそれは
+</span><math id="S0.I1.i2.p1.m3" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math><span class="ltx_text ltx_font_italic">上では一様収束し，
+</span><math id="S0.I1.i2.p1.m4" class="ltx_Math" alttext="C\setminus F" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>F</mi></mrow></math><span class="ltx_text ltx_font_italic">
+上では発散する．</span></p>
+</div>
+</li>
+<li id="S0.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S0.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S0.I1.i3.p1.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">を
+</span><math id="S0.I1.i3.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の部分集合であって，
+あるテイラー級数が</span><math id="S0.I1.i3.p1.m3" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">上一様収束し，
+</span><math id="S0.I1.i3.p1.m4" class="ltx_Math" alttext="C\setminus M" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>M</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が発散するようなものとする．
+このとき
+</span><math id="S0.I1.i3.p1.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">は
+</span><math id="S0.I1.i3.p1.m6" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の閉集合である．</span></p>
+</div>
+</li>
+<li id="S0.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S0.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S0.I1.i4.p1.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">
+を
+</span><math id="S0.I1.i4.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の部分集合であって
+あるテイラー級数が</span><math id="S0.I1.i4.p1.m3" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">上
+収束し，
+</span><math id="S0.I1.i4.p1.m4" class="ltx_Math" alttext="C\setminus M" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>M</mi></mrow></math><span class="ltx_text ltx_font_italic">
+では発散するものとする．
+このとき
+</span><math id="S0.I1.i4.p1.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">は
+</span><math id="S0.I1.i4.p1.m6" class="ltx_Math" alttext="F_{\sigma\delta}" display="inline"><msub><mi>F</mi><mrow><mi>σ</mi><mo>⁢</mo><mi>δ</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">
+集合である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="p6" class="ltx_para">
+<p class="ltx_p">論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib11" title="Sets of convergence of Taylor series. II" class="ltx_ref">7</a>]</cite>
+は，正直何やってんのかよくわからないが
+何やら単位開円盤上の複素関数とその境界上の収束に関する
+微妙な話題の反例をたくさん与えているようである．</p>
+</div>
+<div id="p7" class="ltx_para">
+<p class="ltx_p">この論文には
+schlicht function というのが出てくるがこれは単葉関数という意味である．
+大まかにかいつまんで定理のいくつかを紹介する．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下が成り立つ．</span></p>
+<ol id="S0.I2" class="ltx_enumerate">
+<li id="S0.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S0.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">全てのテイラー級数が</span><math id="S0.I2.i1.p1.m1" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math><span class="ltx_text ltx_font_italic">型とは限らない．
+つまりテイラー級数であって，その円周上の収束する点全体が
+</span><math id="S0.I2.i1.p1.m2" class="ltx_Math" alttext="F_{\sigma}" display="inline"><msub><mi>F</mi><mi>σ</mi></msub></math><span class="ltx_text ltx_font_italic">に
+は成らないものが存在する．</span></p>
+</div>
+</li>
+<li id="S0.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S0.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">単位開円盤上で定義された有界単葉関数で，
+</span><math id="S0.I2.i2.p1.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">上では各点で収束するけれども，
+</span><math id="S0.I2.i2.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">上のどの弧上でも一様収束には成らない
+ようなものが存在する．</span></p>
+</div>
+</li>
+<li id="S0.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span> 
+<div id="S0.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合</span><math id="S0.I2.i3.p1.m1" class="ltx_Math" alttext="|z|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math><span class="ltx_text ltx_font_italic">上で連続な関数であって，
+そのテイラー級数は</span><math id="S0.I2.i3.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">上で各点収束するけれども
+どの弧の上でも一様収束しないようなものが存在する．</span></p>
+</div>
+</li>
+<li id="S0.I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span> 
+<div id="S0.I2.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S0.I2.i4.p1.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">の部分集合
+</span><math id="S0.I2.i4.p1.m2" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">についてこれがあるテイラー級数の有界集合全体と一致するための必要十分条件は
+</span><math id="S0.I2.i4.p1.m3" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">が閉集合で疎であることである．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="p8" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib7" title="Schlicht Taylor series whose convergence on the unit circle is uniform but not absolute" class="ltx_ref">3</a>]</cite>
+では
+<math id="p8.m1" class="ltx_Math" alttext="|z|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>上で定義された
+単葉関数
+で円周上では
+収束するけれども
+絶対収束しない例を二つ構成している．
+この論文は
+パシフィックのVol.1なのでそれで珍しがって手元にあったのかもしれない．</p>
+</div>
+<div id="p9" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="Sur les séries de puissances" class="ltx_ref">9</a>]</cite>
+はフランス語なのでよくわかっていないけど，
+以下のようなことを示していると書いているような気がする．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">円周<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>の閉部分集合<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を任意に与える．
+このとき以下が成り立つ．</span></p>
+<ol id="S0.I3" class="ltx_enumerate">
+<li id="S0.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S0.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">テイラー級数が存在してそれは
+</span><math id="S0.I3.i1.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">上の各点では収束するが，
+</span><math id="S0.I3.i1.p1.m2" class="ltx_Math" alttext="C\setminus A" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>A</mi></mrow></math><span class="ltx_text ltx_font_italic">上では
+発散する．</span></p>
+</div>
+</li>
+<li id="S0.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S0.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">テイラー級数が存在してそれは
+</span><math id="S0.I3.i2.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">上では発散して
+</span><math id="S0.I3.i2.p1.m2" class="ltx_Math" alttext="C\setminus A" display="inline"><mrow><mi>C</mi><mo>∖</mo><mi>A</mi></mrow></math><span class="ltx_text ltx_font_italic">
+上では収束する．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="p10" class="ltx_para">
+<p class="ltx_p">つまりは上の論文の
+前身的結果ということである．</p>
+</div>
+<div id="p11" class="ltx_para">
+<p class="ltx_p">論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="Inaccessible boundary points" class="ltx_ref">5</a>]</cite>
+はちょっとよくわかんなかったんだけど，
+何やらスリットの入った領域に関してリーマンの写像定理の写像を具体的に書いているような気がする．</p>
+</div>
+<div id="p12" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="An extension of Knopp’s core theorem" class="ltx_ref">2</a>]</cite>と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Some analogues of Knopp’s core theorem" class="ltx_ref">8</a>]</cite>
+はKnopp’s core theorem
+に関するものらしいが，
+あんまりよくわかんない．
+多分級数の総和法に関する話だと思うがわかんない．</p>
+</div>
+<div id="p13" class="ltx_para">
+<p class="ltx_p">今からは解析関数と空間充填曲線の話である．</p>
+</div>
+<div id="p14" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="Lacunary power series and Peano curves" class="ltx_ref">11</a>]</cite>
+では
+<math id="p14.m1" class="ltx_Math" alttext="|z|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>上で定義された連続関数で,
+<math id="p14.m2" class="ltx_Math" alttext="|z|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>では解析的で，
+<math id="p14.m3" class="ltx_Math" alttext="|z|=1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math>の像は<math id="p14.m4" class="ltx_Math" alttext="\mathbb{R}^{2}" display="inline"><msup><mi>ℝ</mi><mn>2</mn></msup></math>の正方形を含むような
+ものを初めて構成した．
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="Power series and Peano curves" class="ltx_ref">12</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="Conformal mappings and Peano curves" class="ltx_ref">10</a>]</cite>
+や
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="Absolutely convergent power series" class="ltx_ref">1</a>]</cite>
+もそういう感じ．
+たぶん
+数学書“Space-filling curves”の対応する章の論文を
+印刷したんだと思う．</p>
+</div>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Bagemihl and G. Piranian</span><span class="ltx_text ltx_bib_year"> (1960/61)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Absolutely convergent power series</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. Univ. Sci. Budapest. Eötvös Sect. Math.</span> <span class="ltx_text ltx_bib_volume">3/4</span>, <span class="ltx_text ltx_bib_pages"> pp. 27–34</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0524-9007</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=133439" title="" class="ltx_ref mr ltx_bib_external">MathReview (M. E. Noble)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p14" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. Choudhary</span><span class="ltx_text ltx_bib_year"> (1988)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">An extension of Knopp’s core theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Math. Anal. Appl.</span> <span class="ltx_text ltx_bib_volume">132</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 226–233</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-247X</span>,
+<a href="https://dx.doi.org/10.1016/0022-247X%2888%2990055-8" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/0022-247X(88)90055-8" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=942366" title="" class="ltx_ref mr ltx_bib_external">MathReview (B. K. Tripathy)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p12" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Erdős, F. Herzog, and G. Piranian</span><span class="ltx_text ltx_bib_year"> (1951)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Schlicht Taylor series whose convergence on the unit circle is uniform but not absolute</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Pacific J. Math.</span> <span class="ltx_text ltx_bib_volume">1</span>, <span class="ltx_text ltx_bib_pages"> pp. 75–82</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0030-8730,1945-5844</span>,
+<a href="http://projecteuclid.org/euclid.pjm/1102613153" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=43889" title="" class="ltx_ref mr ltx_bib_external">MathReview (W. W. Rogosinski)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p8" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Erdös</span><span class="ltx_text ltx_bib_year"> (1952)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the uniform but not absolute convergence of power series with gaps</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. Soc. Polon. Math.</span> <span class="ltx_text ltx_bib_volume">25</span>, <span class="ltx_text ltx_bib_pages"> pp. 162–168</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://www.ams.org/mathscinet-getitem?mr=58734" title="" class="ltx_ref mr ltx_bib_external">MathReview (A. Dvoretzky)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p3" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. W. Goodman</span><span class="ltx_text ltx_bib_year"> (1952)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Inaccessible boundary points</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">3</span>, <span class="ltx_text ltx_bib_pages"> pp. 742–750</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2032176" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2032176" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=50680" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. Ferrand)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p11" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Herzog and G. Piranian</span><span class="ltx_text ltx_bib_year"> (1949)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sets of convergence of Taylor series. I</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">16</span>, <span class="ltx_text ltx_bib_pages"> pp. 529–534</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="http://projecteuclid.org/euclid.dmj/1077475672" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=31049" title="" class="ltx_ref mr ltx_bib_external">MathReview (R. C. Buck)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p4" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p5" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Herzog and G. Piranian</span><span class="ltx_text ltx_bib_year"> (1953)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sets of convergence of Taylor series. II</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">20</span>, <span class="ltx_text ltx_bib_pages"> pp. 41–54</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="http://projecteuclid.org/euclid.dmj/1077465063" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=53210" title="" class="ltx_ref mr ltx_bib_external">MathReview (R. C. Buck)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p4" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p6" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. J. Maddox</span><span class="ltx_text ltx_bib_year"> (1979)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Some analogues of Knopp’s core theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Internat. J. Math. Math. Sci.</span> <span class="ltx_text ltx_bib_volume">2</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 605–614</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0161-1712,1687-0425</span>,
+<a href="https://dx.doi.org/10.1155/S0161171279000454" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1155/S0161171279000454" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=549529" title="" class="ltx_ref mr ltx_bib_external">MathReview (G. U. Brauer)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p12" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Mazurkiewicz</span><span class="ltx_text ltx_bib_year"> (1922)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sur les séries de puissances</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Fundamenta Mathematicae</span> <span class="ltx_text ltx_bib_volume">3</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 52–58</span> (<span class="ltx_text ltx_bib_language">fre</span>).
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="http://eudml.org/doc/213279" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p9" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Piranian, C. J. Titus, and G. S. Young</span><span class="ltx_text ltx_bib_year"> (1952)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Conformal mappings and Peano curves</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Michigan Math. J.</span> <span class="ltx_text ltx_bib_volume">1</span>, <span class="ltx_text ltx_bib_pages"> pp. 69–72</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0026-2285,1945-2365</span>,
+<a href="http://projecteuclid.org/euclid.mmj/1028989728" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=50016" title="" class="ltx_ref mr ltx_bib_external">MathReview (W. W. Rogosinski)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p14" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. Salem and A. Zygmund</span><span class="ltx_text ltx_bib_year"> (1945)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lacunary power series and Peano curves</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">12</span>, <span class="ltx_text ltx_bib_pages"> pp. 569–578</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="http://projecteuclid.org/euclid.dmj/1077473367" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=15154" title="" class="ltx_ref mr ltx_bib_external">MathReview (W. W. Rogosinski)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p14" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. C. Schaeffer</span><span class="ltx_text ltx_bib_year"> (1954)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Power series and Peano curves</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">21</span>, <span class="ltx_text ltx_bib_pages"> pp. 383–389</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="http://projecteuclid.org/euclid.dmj/1077465742" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=62219" title="" class="ltx_ref mr ltx_bib_external">MathReview (G. Piranian)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p14" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>,
+<a href="#p15" title="論文メモ — テイラー級数の収束と円周上の部分集合について —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— テイラー級数の収束と円周上の部分集合について —</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p15" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:58:37 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

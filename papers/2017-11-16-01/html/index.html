@@ -1,0 +1,888 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>極限集合の話</title>
+<!--Generated on Sun Jul 26 16:55:06 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2017-11-16-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>極限集合の基本的性質の証明のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">極限集合の話</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">一色三良(concious77)
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では極限集合を定義し、その基本的な性質を紹介する(命題<a href="#Thmthm20" title="命題 20. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">20</span></a>、<a href="#Thmthm21" title="命題 21. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">21</span></a>、系<a href="#Thmthm22" title="系 22. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">22</span></a>)。この極限集合とその基本的な性質はホイットニーの埋め込み定理を証明する際によく利用されるが、証明を見たことがなかったので、証明をつけてみた。
+極限集合は多様体の間の写像の場合に利用されるところしか見たことがないのだが、厳密に証明すると写像の定義域が<math id="p1.m1" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな局所コンパクト距離化可能空間で、写像のコドメインが距離化可能空間である場合に証明できることがわかるのでそのように証明している。また、やろうと思えばもっと広いクラスの空間の間の写像で証明ができると思われる。
+しかしながらそのような一般化に意味があるかといえば特に意味はなく、ただ使われている道具がハッキリする程度の効能しかないように私は思うし、普通の多様体は距離化可能であるということを宣伝するためにも距離化可能空間程度の仮定にとどめておく。</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p"><em class="ltx_emph ltx_font_italic"><math id="p2.m1" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな位相多様体は距離化可能であることを強く注意しておく。</em><span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>一般に位相多様体において、パラコンパクト性と距離化可能性は同値である。</span></span></span>このことはウリゾーンの距離化可能定理や、<math id="p2.m2" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな位相多様体には常にリーマン計量が存在することから分かる。<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>リーマン計量から多様体の位相と両立する距離がおなじみの方法で構成できる。</span></span></span>多様体の位相に関するとても強い性質なのだが、あまり注意されてないように思うので強く注意しておく。恐らくリーマン計量の存在性から従うことなのであまり強く注意しないのかもしれない。</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">この文章の主要部分はセクション3である。基本事項がわかっている読者はここだけ読めばよい。</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">この文章では位相空間<math id="p4.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の点<math id="p4.m2" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の近傍系を<math id="p4.m3" class="ltx_Math" alttext="\mathfrak{N}(a)" display="inline"><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>で表し、<math id="p4.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の部分集合<math id="p4.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の閉包を<math id="p4.m6" class="ltx_Math" alttext="\text{{\rm CL}}_{X}(A)" display="inline"><mrow><msub><mtext>CL</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>、<math id="p4.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の内核を<math id="p4.m8" class="ltx_Math" alttext="\text{{\rm Int}}_{X}(A)" display="inline"><mrow><msub><mtext>Int</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>で表す。</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>準備</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(点列)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>内の点列とは写像<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\alpha:\mathbb{N}\to X" display="inline"><mrow><mi>α</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>のことである。この文書では簡単に<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\{\alpha_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>などと書く。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(部分列)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">内の点列<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>が点列<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>の部分列であるとは狭義単調な写像<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="\phi:\mathbb{N}\to\mathbb{N}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>ℕ</mi></mrow></mrow></math>が存在して</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\beta=\alpha\circ\phi" display="block"><mrow><mi>β</mi><mo>=</mo><mrow><mi>α</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>ϕ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と表されることである。すなわち<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="\{\beta_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>β</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="\{\alpha_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>α</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>という形をしている。</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold"> </span>(点列の収束)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">内の点列<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の点<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>に収束するとは</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(p)\ \exists M\in\mathbb{N}\ \forall n\geq M\ (\alpha_%
+{n}\in V)" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>M</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>≥</mo><mrow><mi>M</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>α</mi><mi>n</mi></msub><mo>∈</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである。<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="\{\alpha_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>が<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>に収束することを<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="\lim_{n\to\infty}\alpha_{n}=p" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><msub><mi>α</mi><mi>n</mi></msub></mrow><mo>=</mo><mi>p</mi></mrow></math>と書いたり、<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="\alpha_{n}\to p" display="inline"><mrow><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false">→</mo><mi>p</mi></mrow></math>と書いたりする。</span></p>
+</div>
+</div>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">距離空間<math id="S1.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>においては<math id="S1.p1.m2" class="ltx_Math" alttext="\alpha_{n}\to p" display="inline"><mrow><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false">→</mo><mi>p</mi></mrow></math> in <math id="S1.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と<math id="S1.p1.m4" class="ltx_Math" alttext="d(\alpha_{n},p)\to 0" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>α</mi><mi>n</mi></msub><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mn>0</mn></mrow></math> in <math id="S1.p1.m5" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>は同値である。</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の部分集合<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と点<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>について<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の集積点であるとは</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(p)\ (N\setminus\{p\})\cap A\neq\O" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>N</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>p</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>A</mi></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである。<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の集積点全体を<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="A^{d}" display="inline"><msup><mi>A</mi><mi>d</mi></msup></math>で表すことにする。</span></p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">以下の二つの補題は距離空間の基本的な命題であるが、一応紹介しておく。証明は省略する。</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>とその部分集合<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>について以下は同値である。</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math><span class="ltx_text ltx_font_italic">の閉集合。</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">内の点列</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="\{a_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">が</span><math id="S1.I1.i2.p1.m3" class="ltx_Math" alttext="a_{n}\in A" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>∈</mo><mi>A</mi></mrow></math><span class="ltx_text ltx_font_italic">と</span><math id="S1.I1.i2.p1.m4" class="ltx_Math" alttext="a_{n}\to a" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">→</mo><mi>a</mi></mrow></math><span class="ltx_text ltx_font_italic">をみたすならば</span><math id="S1.I1.i2.p1.m5" class="ltx_Math" alttext="a\in A" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離化可能空間の間の写像<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="g:X\to Y" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>について以下は同値である。</span></p>
+<ol id="S1.I2" class="ltx_enumerate">
+<li id="S1.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i1.p1.m1" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math><span class="ltx_text ltx_font_italic">は連続写像</span></p>
+</div>
+</li>
+<li id="S1.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">内の点列</span><math id="S1.I2.i2.p1.m2" class="ltx_Math" alttext="\{a_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">ついて</span><math id="S1.I2.i2.p1.m3" class="ltx_Math" alttext="a_{n}\to a" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">→</mo><mi>a</mi></mrow></math><span class="ltx_text ltx_font_italic">ならば、</span><math id="S1.I2.i2.p1.m4" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">内の点列</span><math id="S1.I2.i2.p1.m5" class="ltx_Math" alttext="\{g(a_{n})\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I2.i2.p1.m6" class="ltx_Math" alttext="g(a_{n})\to g(a)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">を充たす。</span></p>
+</div>
+</li>
+<li id="S1.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の部分集合</span><math id="S1.I2.i3.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_italic">について</span><math id="S1.I2.i3.p1.m3" class="ltx_Math" alttext="g(\text{{\rm CL}}_{X}(A))\subset\text{{\rm CL}}_{Y}(g(A))" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mtext>CL</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mtext>CL</mtext><mi>Y</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">補題<a href="#Thmthm6" title="補題 6. ‣ 1 準備 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>について<math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="(1)" display="inline"><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>と<math id="Thmcaux1.p1.m2" class="ltx_Math" alttext="(3)" display="inline"><mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow></math>は一般の位相空間の間の写像でも同値になる。</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>が<span class="ltx_text ltx_font_bold">埋め込み</span>であるとは、<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="f:X\to f(X)" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が同相写像となることをいう。
+つまり、<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が単射で、<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="f^{-1}:f(X)\to X" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>が連続ということである。</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>点列の集積の概念について</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">まずは数列に関する二つの集積点の概念を紹介しよう。</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">このセクションでは<math id="S2.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は距離化可能空間上で考えているものとする。</span></p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\{x_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">が「点列として集積点を持つ」とは</span></p>
+<table id="S2.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex4.m1" class="ltx_Math" alttext="\exists a\in X\ \forall N\in\mathfrak{N}(a)\ \text{{\rm card}}(\{i\in\mathbb{N%
+}\mid x_{i}\in N\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>a</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことである。</span></p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ちなみに<math id="Thmthm9.p1.m1" class="ltx_Math" alttext="\{x_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>が「集積点を持つ」とは</span></p>
+<table id="S2.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex5.m1" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="block"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">つまり集合として集積点を持つということである。</span></p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以降では「点列として集積点を持つ」という概念しか使わず、集合として集積点を持つ方は使わない。
+点列が集積点を持つと言った場合には普通は「点列として集積点を持つ」という意味で解釈すると思うが、集合として集積点を持つ意味と紛らわしいので違いを強調するために一応両方ともに定義として紹介した。上の二つの定義はもちろん同値ではない。（考えてみよ。）</span></p>
+</div>
+<div id="Thmcaux2.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">また、点列として集積点を持つことは同相写像で保たれる性質であることに注意しよう。</span></p>
+</div>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">以下ではまず点列として集積点をもつことの必要十分条件を決定して行く。</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下は同値である。</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">が点列として集積点を持つ</span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math><span class="ltx_text ltx_font_italic">または</span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="\exists n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})=%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">まず<math id="S2.p4.m1" class="ltx_Math" alttext="(1)\Longrightarrow(2)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo stretchy="false">⟹</mo><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></mrow></math>を証明しよう。
+そのためには<math id="S2.p4.m2" class="ltx_Math" alttext="(1)" display="inline"><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>と<math id="S2.p4.m3" class="ltx_Math" alttext="\forall n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})&lt;%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math>を
+仮定して<math id="S2.p4.m4" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math>を導けばよい。
+まず<math id="S2.p4.m5" class="ltx_Math" alttext="(1)" display="inline"><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>から</p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="\exists a\in X\ \forall N\in\mathfrak{N}(a)\ \text{{\rm card}}(\{i\in\mathbb{N%
+}\mid x_{i}\in N\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>a</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ。
+この点<math id="S2.p4.m6" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>は集合<math id="S2.p4.m7" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow></math>には属しない。
+なぜなら今は</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="\forall n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})&lt;%
+\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を仮定しているからである。よって</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(a)\ (N\setminus\{a\})\cap\{x_{i}\mid i\in\mathbb{N}\}\neq\O" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>N</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である。即ち<math id="S2.p4.m8" class="ltx_Math" alttext="a\in\{x_{i}\mid i\in\mathbb{N}\}^{d}" display="inline"><mrow><mi>a</mi><mo>∈</mo><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup></mrow></math>なので<math id="S2.p4.m9" class="ltx_Math" alttext="(2)" display="inline"><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></math>が導かれた。</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p5.m1" class="ltx_Math" alttext="(2)\Longrightarrow(1)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mo stretchy="false">⟹</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>を証明しよう。
+まず、<math id="S2.p5.m2" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math>ならば、<math id="S2.p5.m3" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}" display="inline"><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup></math>から点<math id="S2.p5.m4" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>を取ればこれは集合
+<math id="S2.p5.m5" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow></math>の集積点であることから</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(a)\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}\in N%
+\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることがわかる。</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p6.m1" class="ltx_Math" alttext="\exists n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})=%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math>ならば<math id="S2.p6.m2" class="ltx_Math" alttext="x_{n}" display="inline"><msub><mi>x</mi><mi>n</mi></msub></math>について、もちろん</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(x_{n})\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}%
+\in N\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるのでいづれにせよ<math id="S2.p6.m3" class="ltx_Math" alttext="(1)" display="inline"><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>が証明された。
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">が点列として集積点を持つ<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\iff" display="inline"><mo stretchy="false">⇔</mo></math> <math id="Thmthm11.p1.m3" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は収束する部分列を持つ。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">まず、<math id="S2.p7.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が収束する部分列を持つとして点列として集積点を持つことを示そう。
+部分列<math id="S2.p7.m2" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>は点<math id="S2.p7.m3" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>に収束すると仮定する。ここで<math id="S2.p7.m4" class="ltx_Math" alttext="\phi:\mathbb{N}\to\mathbb{N}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>ℕ</mi></mrow></mrow></math>は狭義単調関数である。
+<math id="S2.p7.m5" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>は<math id="S2.p7.m6" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>の収束点なので</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(a)\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{\phi(i)%
+}\in N\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって特に</p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="\forall N\in\mathfrak{N}(a)\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}\in N%
+\})=\aleph_{0}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow><mo>∈</mo><mrow><mi>𝔑</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なのでつまり<math id="S2.p7.m7" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は点列として集積点を持つ。</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">逆を示そう。そのために定理<a href="#Thmthm10" title="命題 10. ‣ 2 点列の集積の概念について ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>を利用する。<math id="S2.p8.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の位相と両立する距離の一つを<math id="S2.p8.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>とする。</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">もし<math id="S2.p9.m1" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math>ならばここから点<math id="S2.p9.m2" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>をとって、<math id="S2.p9.m3" class="ltx_Math" alttext="d(a,x_{\phi(i)})&lt;1/i" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mn>1</mn><mo>/</mo><mi>i</mi></mrow></mrow></math>となるように
+部分列<math id="S2.p9.m4" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>を取れば、これは<math id="S2.p9.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>に収束する。</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">もし<math id="S2.p10.m1" class="ltx_Math" alttext="\exists n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})=%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math>ならば
+<math id="S2.p10.m2" class="ltx_Math" alttext="x_{\phi(i)}=x_{n}" display="inline"><mrow><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></math>となる部分列<math id="S2.p10.m3" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>（これは定数列である。）を取ればこれは点<math id="S2.p10.m4" class="ltx_Math" alttext="x_{n}" display="inline"><msub><mi>x</mi><mi>n</mi></msub></math>に収束する。もちろん<math id="S2.p10.m5" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>は狭義単調増加関数である。
+∎</p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm12.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">が点列として集積点をもつ<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="\iff" display="inline"><mo stretchy="false">⇔</mo></math></span></p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\exists K:cpt\ \forall N\in\mathbb{N}\ \exists n\geq N\ x_{n}\in K" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>K</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow></mrow><mo>≥</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>∈</mo><mi>K</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">（<math id="S2.p11.m1" class="ltx_Math" alttext="\Longleftarrow" display="inline"><mo stretchy="false">⟸</mo></math>の証明）</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">仮定から単調増加数列<math id="S2.p12.m1" class="ltx_Math" alttext="\phi:\mathbb{N}\to\mathbb{N}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>ℕ</mi></mrow></mrow></math>を<math id="S2.p12.m2" class="ltx_Math" alttext="x_{\phi(i)}\in K" display="inline"><mrow><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>∈</mo><mi>K</mi></mrow></math>となるようにとることができる。
+<math id="S2.p12.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>はコンパクトなので<math id="S2.p12.m4" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>の部分列で収束するものが存在する。
+ところでそもそも<math id="S2.p12.m5" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S2.p12.m6" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>の部分列なので<math id="S2.p12.m7" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は収束する部分列を持つことが言えた。</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">（<math id="S2.p13.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>の証明）</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p"><math id="S2.p14.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が点列として集積点をもつと、収束する部分列<math id="S2.p14.m2" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>が存在する。ここで<math id="S2.p14.m3" class="ltx_Math" alttext="\phi:\mathbb{N}\to\mathbb{N}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>ℕ</mi></mrow></mrow></math>は単調増加写像である。
+この部分列<math id="S2.p14.m4" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>の収束点を<math id="S2.p14.m5" class="ltx_Math" alttext="a\in X" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>X</mi></mrow></math>とし、</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="K=\{x_{\phi(i)}\mid i\in\mathbb{N}\}\cup\{a\}" display="block"><mrow><mi>K</mi><mo>=</mo><mrow><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とすると<math id="S2.p14.m6" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>はコンパクトである。さらに任意の<math id="S2.p14.m7" class="ltx_Math" alttext="n\in\mathbb{N}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="S2.p14.m8" class="ltx_Math" alttext="\phi(n)\geq n" display="inline"><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mi>n</mi></mrow></math>なので</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\exists K:cpt\ \forall N\in\mathbb{N}\ \exists n\geq N\ x_{n}\in K" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>K</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow></mrow><mo>≥</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>∈</mo><mi>K</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ。
+∎</p>
+</div>
+</div>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p">以上を合わせて以下を得る</p>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm13.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>内の点列<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>について以下は同値である。</span></p>
+<ol id="S2.I2" class="ltx_enumerate">
+<li id="S2.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i1.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">は点列として収束する。</span></p>
+</div>
+</li>
+<li id="S2.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i2.p1.m1" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}\neq\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>≠</mo><mi>Ø</mi></mrow></math><span class="ltx_text ltx_font_italic">または</span><math id="S2.I2.i2.p1.m2" class="ltx_Math" alttext="\exists n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})=%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i3.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">は収束する部分列を持つ。</span></p>
+</div>
+</li>
+<li id="S2.I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I2.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i4.p1.m1" class="ltx_Math" alttext="\exists K:cpt\ \forall N\in\mathbb{N}\ \exists n\geq N\ x_{n}\in K" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>K</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow></mrow><mo>≥</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>∈</mo><mi>K</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p">次のセクションで利用するのは主に点列として収束することの否定である。次のように定義して用いる。</p>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が点列として集積点を持たないことと定義する。</span></p>
+</div>
+</div>
+<div id="S2.p17" class="ltx_para">
+<p class="ltx_p"><math id="S2.p17.m1" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>は単に点列として集積点を持つことの否定なので、命題<a href="#Thmthm13" title="命題 13. ‣ 2 点列の集積の概念について ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">13</span></a>から直ちに以下の同値性が従う。</p>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm15.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>内の点列<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>について以下は同値である。</span></p>
+<ol id="S2.I3" class="ltx_enumerate">
+<li id="S2.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i1.p1.m1" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i2.p1.m1" class="ltx_Math" alttext="\{x_{i}\mid i\in\mathbb{N}\}^{d}=\O" display="inline"><mrow><msup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow><mi>d</mi></msup><mo>=</mo><mi>Ø</mi></mrow></math><span class="ltx_text ltx_font_italic">かつ</span><math id="S2.I3.i2.p1.m2" class="ltx_Math" alttext="\forall n\in\mathbb{N}\ \text{{\rm card}}(\{i\in\mathbb{N}\mid x_{i}=x_{n}\})&lt;%
+\aleph_{0}" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mtext>card</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I3.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i3.p1.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">の任意の部分列は収束しない。</span></p>
+</div>
+</li>
+<li id="S2.I3.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I3.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i4.p1.m1" class="ltx_Math" alttext="\forall K:cpt\ \exists N\in\mathbb{N}\ \forall n\geq N\ x_{n}\not\in K" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>K</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>c</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>t</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>≥</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>∉</mo><mi>K</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="S2.p18" class="ltx_para">
+<p class="ltx_p">主に<math id="S2.p18.m1" class="ltx_Math" alttext="(3)" display="inline"><mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow></math>と<math id="S2.p18.m2" class="ltx_Math" alttext="(4)" display="inline"><mrow><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></math>を利用することになると思う。</p>
+</div>
+<div id="Thmcaux3" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">定義を見ればわかるが、<math id="Thmcaux3.p1.m1" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>は<math id="Thmcaux3.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を一点コンパクト化したときに無限遠点に収束するのと同値である。</span></p>
+</div>
+<div id="Thmcaux3.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">また、<math id="Thmcaux3.p2.m1" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>は距離には依存せず、位相に依存する性質であることに注意しよう！</span></p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>極限集合</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">このセクションでは
+<math id="S3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を<math id="S3.p1.m2" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトかつ局所コンパクトな距離化可能空間とし、<math id="S3.p1.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>を距離化可能空間とする。</span></p>
+</div>
+<div id="Thmcaux4" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このセクションで扱う極限集合は主に多様体の理論で利用されるし、その補完としてこの文章を書いている。
+この<math id="Thmcaux4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と<math id="Thmcaux4.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>に関する仮定は<math id="Thmcaux4.p1.m3" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな位相多様体も満たすことに注意しよう。
+即ち、<math id="Thmcaux4.p1.m4" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな位相多様体は距離化可能である。<math id="Thmcaux4.p1.m5" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクト性の仮定が気になるかもしれないが、普通多様体論で扱われる多様体は<math id="Thmcaux4.p1.m6" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトである。パラコンパクトの方が親しみがある人もいるかもしれないが、パラコンパクトな位相多様体は<math id="Thmcaux4.p1.m7" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクト位相多様体の直和になってるし、およそ、連結多様体やもしくは高々可算個の連結多様体の直和にしか興味がない場合が多いので<math id="Thmcaux4.p1.m8" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクト性が突飛な仮定というわけでもない。
+しかしながら<math id="Thmcaux4.p1.m9" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトではないような連結位相多様体は存在するし、そういった連結位相多様体は距離化不可能であるといったことも注意しておこう。</span></p>
+</div>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">以下の命題の証明は省略する。</p>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm16.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">のコンパクト部分集合の列<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="\{K_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>で</span></p>
+<table id="S3.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S3.Ex16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.Ex16.m1" class="ltx_Math" alttext="\displaystyle X=\bigcup_{i\in\mathbb{N}}K_{i}" display="inline"><mrow><mi>X</mi><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder></mstyle><msub><mi>K</mi><mi>i</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S3.Ex17"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.Ex17.m1" class="ltx_Math" alttext="\displaystyle\forall i\in\mathbb{N}\ (K_{i}\subset\text{{\rm Int}}_{X}(K_{i+1}))" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>⊂</mo><mrow><msub><mtext>Int</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">の二つを充たすものが存在する。
+またこのとき<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意のコンパクト部分集合<math id="Thmthm16.p1.m4" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>についてある<math id="Thmthm16.p1.m5" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>が存在して<math id="Thmthm16.p1.m6" class="ltx_Math" alttext="K\subset K_{m}" display="inline"><mrow><mi>K</mi><mo>⊂</mo><msub><mi>K</mi><mi>m</mi></msub></mrow></math>
+となることに注意しよう。</span></p>
+</div>
+</div>
+<div id="Thmcaux5" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">この命題内の性質を充たす<math id="Thmcaux5.p1.m1" class="ltx_Math" alttext="\{K_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>が存在する空間のことを<em class="ltx_emph ltx_font_upright">Hemicompact</em>と呼ぶ。
+一般に<math id="Thmcaux5.p1.m2" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>コンパクトな局所コンパクトハウスドルフ空間はHemicompactである。</span></p>
+</div>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">命題<a href="#Thmthm16" title="命題 16. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>の後半の注意からすぐに次のことがわかる。</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm17.p1.m1" class="ltx_Math" alttext="\{K_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">を命題<a href="#Thmthm16" title="命題 16. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>で述べられている<math id="Thmthm17.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>コンパクト部分集合列としよう。このとき
+<math id="Thmthm17.p1.m3" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>と</span></p>
+<table id="S3.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex18.m1" class="ltx_Math" alttext="\forall m\in\mathbb{N}\ \exists N\in\mathbb{N}\ \forall i\geq N\ x_{i}\not\in K%
+_{m}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>m</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow></mrow><mo>≥</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><mo>∉</mo><msub><mi>K</mi><mi>m</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が同値になる</span></p>
+</div>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">以下で定義する極限集合がこの文書の主役である。この集合の振る舞いを見ることで写像の性質がわかったりする。</p>
+</div>
+<div id="Thmthm18" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 18</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm18.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像<math id="Thmthm18.p1.m1" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>に対し</span></p>
+<table id="S3.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex19.m1" class="ltx_Math" alttext="L(f)=\{y\in Y\mid x_{i}\to\infty\text{となる}\{x_{i}\}\text{が存在して}f(x_{i})\to y%
+\text{となる}\}" display="block"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mrow><mi mathvariant="normal">∞</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">となる</mtext><mo>⁢</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mo>⁢</mo><mtext class="ltx_mathvariant_italic">が存在して</mtext><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>y</mi><mo>⁢</mo><mtext class="ltx_mathvariant_italic">となる</mtext></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。これを<math id="Thmthm18.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の<em class="ltx_emph ltx_font_upright">極限集合</em>と呼ぶ。</span></p>
+</div>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">まず簡単に次のことがわかる。</p>
+</div>
+<div id="Thmthm19" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 19</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm19.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm19.p1.m1" class="ltx_Math" alttext="L(f)" display="inline"><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">は<math id="Thmthm19.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の閉集合</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">命題<a href="#Thmthm16" title="命題 16. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>を用いて
+<math id="S3.p6.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト集合の列<math id="S3.p6.m2" class="ltx_Math" alttext="\{K_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>で</p>
+<table id="S3.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S3.Ex20"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.Ex20.m1" class="ltx_Math" alttext="\displaystyle X=\bigcup_{i\in\mathbb{N}}K_{i}" display="inline"><mrow><mi>X</mi><mo>=</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder></mstyle><msub><mi>K</mi><mi>i</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S3.Ex21"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.Ex21.m1" class="ltx_Math" alttext="\displaystyle\forall i\in\mathbb{N}\ (K_{i}\subset\text{{\rm Int}}_{X}(K_{i+1}))" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>⊂</mo><mrow><msub><mtext>Int</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>K</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">の二つを充たすものを取る。
+距離空間の部分集合の閉性を確かめる昔ながらの方法（補題<a href="#Thmthm5" title="補題 5. ‣ 1 準備 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>）を用いる。
+<math id="S3.p6.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の位相と両立する距離の一つを<math id="S3.p6.m4" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>としよう。
+<math id="S3.p6.m5" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>内の点列<math id="S3.p6.m6" class="ltx_Math" alttext="\{y_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S3.p6.m7" class="ltx_Math" alttext="y_{i}\in L(f)" display="inline"><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>∈</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であり、<math id="S3.p6.m8" class="ltx_Math" alttext="\{y_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S3.p6.m9" class="ltx_Math" alttext="y\in Y" display="inline"><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow></math>に収束してるとする。ここで、適当に部分列をとって</p>
+<table id="S3.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex22.m1" class="ltx_Math" alttext="e(y_{i},y)&lt;2^{-i}" display="block"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>i</mi></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">としても一般性を失わない。
+各<math id="S3.p6.m10" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>毎に<math id="S3.p6.m11" class="ltx_Math" alttext="y_{m}\in L(f)" display="inline"><mrow><msub><mi>y</mi><mi>m</mi></msub><mo>∈</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので、<math id="S3.p6.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>内の点列<math id="S3.p6.m13" class="ltx_Math" alttext="\{x_{i}^{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msubsup><mi>x</mi><mi>i</mi><mi>m</mi></msubsup><mo stretchy="false">}</mo></mrow></math>が存在して、<math id="S3.p6.m14" class="ltx_Math" alttext="x_{i}^{m}\to\infty" display="inline"><mrow><msubsup><mi>x</mi><mi>i</mi><mi>m</mi></msubsup><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>でかつ</p>
+<table id="S3.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex23.m1" class="ltx_Math" alttext="\lim_{i\to\infty}f(x_{i}^{m})=y_{m}" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>i</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>x</mi><mi>i</mi><mi>m</mi></msubsup><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><msub><mi>y</mi><mi>m</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。
+さてここで単調増加写像<math id="S3.p6.m15" class="ltx_Math" alttext="\phi:\mathbb{N}\to\mathbb{N}" display="inline"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><mi>ℕ</mi></mrow></mrow></math>を<math id="S3.p6.m16" class="ltx_Math" alttext="i\geq\phi(m)" display="inline"><mrow><mi>i</mi><mo>≥</mo><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>ならば</p>
+<table id="S3.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex24.m1" class="ltx_Math" alttext="x_{i}^{m}\not\in K_{m},\ e(y_{m},f(x_{i}^{m}))&lt;2^{-m}" display="block"><mrow><mrow><msubsup><mi>x</mi><mi>i</mi><mi>m</mi></msubsup><mo>∉</mo><msub><mi>K</mi><mi>m</mi></msub></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>m</mi></msub><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msubsup><mi>x</mi><mi>i</mi><mi>m</mi></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><msup><mn>2</mn><mrow><mo>−</mo><mi>m</mi></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるように定める。このことはちゃんと可能である。
+そして<math id="S3.p6.m17" class="ltx_Math" alttext="z_{i}=x_{\phi(i)}^{i}" display="inline"><mrow><msub><mi>z</mi><mi>i</mi></msub><mo>=</mo><msubsup><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mi>i</mi></msubsup></mrow></math>とする。<math id="S3.p6.m18" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>の定義から任意の<math id="S3.p6.m19" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について</p>
+<table id="S3.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex25.m1" class="ltx_Math" alttext="z_{i}=x_{\phi(i)}^{i}\not\in K_{i}" display="block"><mrow><msub><mi>z</mi><mi>i</mi></msub><mo>=</mo><msubsup><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mi>i</mi></msubsup><mo>∉</mo><msub><mi>K</mi><mi>i</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ。<math id="S3.p6.m20" class="ltx_Math" alttext="K_{i}\subset K_{i+1}" display="inline"><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>K</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>なので、<math id="S3.p6.m21" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>ならば<math id="S3.p6.m22" class="ltx_Math" alttext="z_{n}\not\in K_{N}" display="inline"><mrow><msub><mi>z</mi><mi>n</mi></msub><mo>∉</mo><msub><mi>K</mi><mi>N</mi></msub></mrow></math>が成り立ち、命題<a href="#Thmthm17" title="命題 17. ‣ 3 極限集合 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">17</span></a>から<math id="S3.p6.m23" class="ltx_Math" alttext="z_{i}\to\infty" display="inline"><mrow><msub><mi>z</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>がわかる。
+そして、</p>
+<table id="S3.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex26.m1" class="ltx_Math" alttext="e(y,f(z_{i}))\leq e(y,y_{i})+e(y_{i},f(z_{i}))\leq 2^{-i+1}" display="block"><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><msup><mn>2</mn><mrow><mrow><mo>−</mo><mi>i</mi></mrow><mo>+</mo><mn>1</mn></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="S3.p6.m24" class="ltx_Math" alttext="f(z_{i})\to y" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>y</mi></mrow></math>がわかる。よって<math id="S3.p6.m25" class="ltx_Math" alttext="y\in L(f)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となるから、<math id="S3.p6.m26" class="ltx_Math" alttext="L(f)" display="inline"><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math>は閉集合である。
+∎</p>
+</div>
+</div>
+<div id="Thmthm20" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 20</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm20.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm20.p1.m1" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を単射と仮定する。このとき</span></p>
+<table id="S3.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex27.m1" class="ltx_Math" alttext="fが埋め込み\iff L(f)\cap f(X)=\O" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mi mathvariant="normal">が</mi><mo>⁢</mo><mi mathvariant="normal">埋</mi><mo>⁢</mo><mi mathvariant="normal">め</mi><mo>⁢</mo><mi mathvariant="normal">込</mi><mo>⁢</mo><mi mathvariant="normal">み</mi></mrow><mo stretchy="false">⇔</mo><mrow><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>Ø</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">（<math id="S3.p7.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>の証明）</p>
+</div>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p">対偶を証明しよう。即ち、<math id="S3.p8.m1" class="ltx_Math" alttext="L(f)\cap f(X)\neq\O" display="inline"><mrow><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math>を仮定して<math id="S3.p8.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が埋め込みでないことを示す。
+今、<math id="S3.p8.m3" class="ltx_Math" alttext="y\in L(f)\cap f(X)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を取ると、
+<math id="S3.p8.m4" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>かつ<math id="S3.p8.m5" class="ltx_Math" alttext="f(x_{i})\to y" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>y</mi></mrow></math>となる<math id="S3.p8.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>内の点列<math id="S3.p8.m7" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在し、また、<math id="S3.p8.m8" class="ltx_Math" alttext="y=f(x)" display="inline"><mrow><mi>y</mi><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる<math id="S3.p8.m9" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>が存在する。
+<math id="S3.p8.m10" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>であることから<math id="S3.p8.m11" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は収束しない。
+よって<math id="S3.p8.m12" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>内の点列<math id="S3.p8.m13" class="ltx_Math" alttext="\{f(x_{i})\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>は<math id="S3.p8.m14" class="ltx_Math" alttext="f(x_{i})\to y" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>y</mi></mrow></math>にも関らず、</p>
+<table id="S3.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex28.m1" class="ltx_Math" alttext="\lim_{i\to\infty}f^{-1}(f(x_{i}))\neq f^{-1}(y)(=x)" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>i</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mspace width="0.3888888888888889em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mi></mi><mo>=</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので<math id="S3.p8.m15" class="ltx_Math" alttext="f^{-1}:f(X)\to X" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>は連続ではない。よって特に<math id="S3.p8.m16" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は埋め込みではない。</p>
+</div>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p">(<math id="S3.p9.m1" class="ltx_Math" alttext="\Longleftarrow" display="inline"><mo stretchy="false">⟸</mo></math>の証明)</p>
+</div>
+<div id="S3.p10" class="ltx_para">
+<p class="ltx_p"><math id="S3.p10.m1" class="ltx_Math" alttext="L(f)\cap f(X)=\O" display="inline"><mrow><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>Ø</mi></mrow></math>から<math id="S3.p10.m2" class="ltx_Math" alttext="f^{-1}:f(X)\to X" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>が連続であることを示せばよい。つまり任意の<math id="S3.p10.m3" class="ltx_Math" alttext="A\subset f(X)" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について</p>
+<table id="S3.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex29.m1" class="ltx_Math" alttext="f^{-1}(\text{{\rm CL}}_{f(X)}(A))\subset\text{{\rm CL}}_{X}(f^{-1}(A))" display="block"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mtext>CL</mtext><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mtext>CL</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であることを証明する（補題<a href="#Thmthm6" title="補題 6. ‣ 1 準備 ‣ 極限集合の話" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>）。</p>
+</div>
+<div id="S3.p11" class="ltx_para">
+<p class="ltx_p">任意に<math id="S3.p11.m1" class="ltx_Math" alttext="y\in\text{{\rm CL}}_{f(X)}(A)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><msub><mtext>CL</mtext><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>を取る。すると
+<math id="S3.p11.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>内の点列<math id="S3.p11.m3" class="ltx_Math" alttext="\{y_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が存在して<math id="S3.p11.m4" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>に収束する。
+さて<math id="S3.p11.m5" class="ltx_Math" alttext="x_{i}=f^{-1}(y_{i})" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする。<math id="S3.p11.m6" class="ltx_Math" alttext="L(f)\cap f(X)=\O" display="inline"><mrow><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>Ø</mi></mrow></math>という仮定と<math id="S3.p11.m7" class="ltx_Math" alttext="y\in f(X)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>から<math id="S3.p11.m8" class="ltx_Math" alttext="y\not\in L(f)" display="inline"><mrow><mi>y</mi><mo>∉</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>がわかる。よって<math id="S3.p11.m9" class="ltx_Math" alttext="x_{i}\not\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">↛</mo><mi mathvariant="normal">∞</mi></mrow></math>がわかる。すなわち<math id="S3.p11.m10" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は点列として集積点を持つ。
+よって収束する部分列<math id="S3.p11.m11" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>が存在する。<math id="S3.p11.m12" class="ltx_Math" alttext="\{x_{\phi(i)}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">}</mo></mrow></math>の収束点を<math id="S3.p11.m13" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>とする。
+写像<math id="S3.p11.m14" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の連続性から<math id="S3.p11.m15" class="ltx_Math" alttext="f(x_{\phi(i)})\to f(x)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>がわかり、さらに<math id="S3.p11.m16" class="ltx_Math" alttext="f(x_{\phi(i)})=y_{\phi(i)}" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mi>y</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>であり、収束列の部分列は元の列の収束点に収束するので、<math id="S3.p11.m17" class="ltx_Math" alttext="f(x)=y" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>y</mi></mrow></math>である。
+つまり<math id="S3.p11.m18" class="ltx_Math" alttext="x=f^{-1}(y)" display="inline"><mrow><mi>x</mi><mo>=</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である。
+以上から<math id="S3.p11.m19" class="ltx_Math" alttext="\{y_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>の部分列を適当にとれば<math id="S3.p11.m20" class="ltx_Math" alttext="f^{-1}(y_{\phi(i)})\to f^{-1}(y)" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となることがわかった。
+<math id="S3.p11.m21" class="ltx_Math" alttext="\{f^{-1}(y_{\phi(i)})\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>は<math id="S3.p11.m22" class="ltx_Math" alttext="f^{-1}(A)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>内の点列であるから</p>
+<table id="S3.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex30.m1" class="ltx_Math" alttext="f^{-1}(\text{{\rm CL}}_{f(X)}(A))\subset\text{{\rm CL}}_{X}(f^{-1}(A))" display="block"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mtext>CL</mtext><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mtext>CL</mtext><mi>X</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかるので<math id="S3.p11.m23" class="ltx_Math" alttext="f^{-1}" display="inline"><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>は連続である。
+∎</p>
+</div>
+</div>
+<div id="Thmthm21" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 21</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm21.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続関数<math id="Thmthm21.p1.m1" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>について</span></p>
+<table id="S3.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex31.m1" class="ltx_Math" alttext="f(X)がYの閉集合\iff L(f)\subset f(X)" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi mathvariant="normal">が</mi><mo>⁢</mo><mi>Y</mi><mo>⁢</mo><mi mathvariant="normal">の</mi><mo>⁢</mo><mi mathvariant="normal">閉</mi><mo>⁢</mo><mi mathvariant="normal">集</mi><mo>⁢</mo><mi mathvariant="normal">合</mi></mrow><mo stretchy="false">⇔</mo><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p12" class="ltx_para">
+<p class="ltx_p">(<math id="S3.p12.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>の証明)</p>
+</div>
+<div id="S3.p13" class="ltx_para">
+<p class="ltx_p"><math id="S3.p13.m1" class="ltx_Math" alttext="L(f)" display="inline"><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math>の定義から自明。</p>
+</div>
+<div id="S3.p14" class="ltx_para">
+<p class="ltx_p">(<math id="S3.p14.m1" class="ltx_Math" alttext="\Longleftarrow" display="inline"><mo stretchy="false">⟸</mo></math>の証明)</p>
+</div>
+<div id="S3.p15" class="ltx_para">
+<p class="ltx_p"><math id="S3.p15.m1" class="ltx_Math" alttext="f(X)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>内の点列<math id="S3.p15.m2" class="ltx_Math" alttext="\{y_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S3.p15.m3" class="ltx_Math" alttext="y_{i}\to y" display="inline"><mrow><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi>y</mi></mrow></math>を充たすと仮定する。
+そして点列<math id="S3.p15.m4" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>を<math id="S3.p15.m5" class="ltx_Math" alttext="x_{i}\in f^{-1}(y_{i})" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となるように定義する。</p>
+</div>
+<div id="S3.p16" class="ltx_para">
+<p class="ltx_p">もし<math id="S3.p16.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が収束する部分列を持つならば<math id="S3.p16.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の連続性からその部分列の収束点<math id="S3.p16.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について<math id="S3.p16.m4" class="ltx_Math" alttext="f(x)=y" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>y</mi></mrow></math>になるので
+<math id="S3.p16.m5" class="ltx_Math" alttext="y\in f(X)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>がわかる。</p>
+</div>
+<div id="S3.p17" class="ltx_para">
+<p class="ltx_p">もし<math id="S3.p17.m1" class="ltx_Math" alttext="\{x_{i}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></math>が収束する部分列を持たない、
+すなわち<math id="S3.p17.m2" class="ltx_Math" alttext="x_{i}\to\infty" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>ならば<math id="S3.p17.m3" class="ltx_Math" alttext="y\in L(f)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であり、仮定から<math id="S3.p17.m4" class="ltx_Math" alttext="L(f)\subset f(X)" display="inline"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので<math id="S3.p17.m5" class="ltx_Math" alttext="y\in f(X)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である。</p>
+</div>
+<div id="S3.p18" class="ltx_para">
+<p class="ltx_p">いづれにせよ<math id="S3.p18.m1" class="ltx_Math" alttext="y\in f(X)" display="inline"><mrow><mi>y</mi><mo>∈</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので<math id="S3.p18.m2" class="ltx_Math" alttext="f(X)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S3.p18.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の中で閉集合である。
+∎</p>
+</div>
+</div>
+<div id="S3.p19" class="ltx_para">
+<p class="ltx_p">結果として次のことがわかる。</p>
+</div>
+<div id="Thmthm22" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 22</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm22.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm22.p1.m1" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を単射と仮定する。このとき</span></p>
+</div>
+<div id="Thmthm22.p2" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm22.p2.m1" class="ltx_Math" alttext="L(f)=\O" display="inline"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>Ø</mi></mrow></math><span class="ltx_text ltx_font_italic">ならば<math id="Thmthm22.p2.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は閉写像でかつ埋め込みになっている。</span></p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"> 志賀浩二, 多様体論I, 岩波書店,岩波講座基礎数学幾何学i, 1976
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:55:06 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

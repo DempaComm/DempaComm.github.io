@@ -42,6 +42,10 @@ MISSING_IMAGE_PATTERN = re.compile(
     re.IGNORECASE,
 )
 SVG_PATTERN = re.compile(r"<svg\b.*?</svg>", re.IGNORECASE | re.DOTALL)
+DOCUMENT_TITLE_PATTERN = re.compile(
+    r'<h1\b(?=[^>]*\bclass="[^"]*\bltx_title_document\b)[^>]*>(.*?)</h1>',
+    re.IGNORECASE | re.DOTALL,
+)
 UNSAFE_SVG_PATTERNS = (
     ("script element", re.compile(r"<script\b", re.IGNORECASE)),
     ("event handler", re.compile(r"\son[a-z]+\s*=", re.IGNORECASE)),
@@ -105,6 +109,15 @@ def svg_findings(html_text: str) -> tuple[int, list[str]]:
             if pattern.search(fragment):
                 findings.append(f"inline SVG {index}: {label}")
     return len(fragments), findings
+
+
+def has_document_title(html_text: str) -> bool:
+    """Return whether LaTeXML emitted a non-empty document-title heading."""
+    for fragment in DOCUMENT_TITLE_PATTERN.findall(html_text):
+        plain_text = re.sub(r"<[^>]+>", "", fragment)
+        if re.sub(r"\s+", " ", html.unescape(plain_text)).strip():
+            return True
+    return False
 
 
 def _set_conversion_date(html_text: str, label: str) -> tuple[str, bool]:
@@ -631,7 +644,7 @@ def run_latexml_trial(
             warning_count = len(warning_lines)
             inline_svg_count, unsafe_svg_findings = svg_findings(html_text)
             has_error_markup = "ltx_ERROR" in html_text
-            title_present = target.paper.title in html_text
+            title_present = has_document_title(html_text)
             findings = privacy_findings(html_text, "html")
             if not destination.is_file() or completed.returncode != 0:
                 status = "failed"

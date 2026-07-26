@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>可算離散位相の直積に関するStoneの定理</title>
+<!--Generated on Sun Jul 26 16:49:18 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2015-09-12-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>非可算個の可算離散空間の直積についてのLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">可算離散位相の直積に関するStoneの定理</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では可算離散位相の非加算個の直積が非正規であるという定理を証明する。一般にStone定理と言えば「距離空間はパラコンパクト」という定理のことだが、この距離空間のパラコンパクト性を証明した参考文献１の後半で示されている定理がこの可算離散位相の非加算直積に対する定理である。参考文献１は初めて距離空間のパラコンパクト性を証明したことで有名だが、後半の定理はあまり有名になってない気がするのでこの文章で紹介することにしてみた。また正規という言葉は<math id="p1.m1" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>を積極的には仮定しない意味で使うが、以下の前半のセクションで出てくる空間はハウスドルフ空間ばかりなので<math id="p1.m2" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>を仮定するかしないかで差異が出てくることのは後半のセクションからである。</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>定理</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">このセクションではStoneの定理を証明する。まず最初に証明で用いる用語などを定義する。</p>
+</div>
+<div id="Thmdf1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmdf1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が正規であるとは交わらない二つの閉集合の任意の組<math id="Thmdf1.p1.m2" class="ltx_Math" alttext="F,G" display="inline"><mrow><mi>F</mi><mo>,</mo><mi>G</mi></mrow></math>に対して開集合<math id="Thmdf1.p1.m3" class="ltx_Math" alttext="U,V" display="inline"><mrow><mi>U</mi><mo>,</mo><mi>V</mi></mrow></math>が存在して</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="F\subset U,\ G\subset V,\ U\cap V=\emptyset" display="block"><mrow><mrow><mi>F</mi><mo>⊂</mo><mi>U</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>G</mi><mo>⊂</mo><mi>V</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことである。</span></p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">つまり、空間の非正規性を証明するには、互いに素な２つの閉集合で開集合で分離できない物の存在を示せば良いのである。
+<br class="ltx_break">以下で使う定義</p>
+</div>
+<div id="Thmdf2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmdf2.p1.m1" class="ltx_Math" alttext="\mathbb{N}" display="inline"><mi>ℕ</mi></math><span class="ltx_text ltx_font_italic">は<math id="Thmdf2.p1.m2" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math><span class="ltx_text ltx_font_bold">を含めない自然数全体</span>とし、<span class="ltx_text ltx_font_bold">以下常に離散位相を入れて考える。</span></span></p>
+</div>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">そして</p>
+</div>
+<div id="Thmdf3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmdf3.p1.m1" class="ltx_Math" alttext="\Lambda" display="inline"><mi mathvariant="normal">Λ</mi></math><span class="ltx_text ltx_font_italic">を添え字集合として位相空間<math id="Thmdf3.p1.m2" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>を</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="T=\prod_{\lambda\in\Lambda}\mathbb{N}=\mathbb{N}^{\Lambda}" display="block"><mrow><mi>T</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">∏</mo><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></munder><mi>ℕ</mi></mrow><mo>=</mo><msup><mi>ℕ</mi><mi mathvariant="normal">Λ</mi></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。もちろん<math id="Thmdf3.p1.m3" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>には直積位相をいれて考える。</span></p>
+</div>
+</div>
+<div id="Thmdf4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmdf4.p1.m1" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math><span class="ltx_text ltx_font_bold ltx_font_italic">の基本開集合<span class="ltx_text ltx_font_medium">とは
+<math id="Thmdf4.p1.m2" class="ltx_Math" alttext="U=\prod_{\lambda}U_{\lambda}" display="inline"><mrow><mi mathvariant="normal">U</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>∏</mo><mi mathvariant="normal">λ</mi></msub><msub><mi mathvariant="normal">U</mi><mi mathvariant="normal">λ</mi></msub></mrow></mrow></math>と書き表される集合で、有限個の<math id="Thmdf4.p1.m3" class="ltx_Math" alttext="\lambda" display="inline"><mi mathvariant="normal">λ</mi></math>について<math id="Thmdf4.p1.m4" class="ltx_Math" alttext="U_{\lambda}" display="inline"><msub><mi mathvariant="normal">U</mi><mi mathvariant="normal">λ</mi></msub></math>は１点集合で、それ以外の<math id="Thmdf4.p1.m5" class="ltx_Math" alttext="\lambda" display="inline"><mi mathvariant="normal">λ</mi></math>について<math id="Thmdf4.p1.m6" class="ltx_Math" alttext="U_{\lambda}=\mathbb{N}" display="inline"><mrow><msub><mi mathvariant="normal">U</mi><mi mathvariant="normal">λ</mi></msub><mo>=</mo><mi>ℕ</mi></mrow></math>となるような<math id="Thmdf4.p1.m7" class="ltx_Math" alttext="T" display="inline"><mi mathvariant="normal">T</mi></math>の部分集合のことである。</span></span></p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p"><math id="S1.p4.m1" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>には直積位相が入っており<math id="S1.p4.m2" class="ltx_Math" alttext="\mathbb{N}" display="inline"><mi>ℕ</mi></math>には離散位相が入っているので基本開集合全体は<math id="S1.p4.m3" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>の開基となる。
+<br class="ltx_break"></p>
+</div>
+<div id="Thmdf5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">基本開集合<math id="Thmdf5.p1.m1" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>について</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\mathfrak{R}(U)=\{\lambda\in\Lambda\ |\ \pi_{\lambda}(U)が1元集合\}" display="block"><mrow><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><msub><mi>π</mi><mi>λ</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi mathvariant="normal">が</mi><mo>⁢</mo><mn>1</mn><mo>⁢</mo><mi mathvariant="normal">元</mi><mo>⁢</mo><mi mathvariant="normal">集</mi><mo>⁢</mo><mi mathvariant="normal">合</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。もちろん<math id="Thmdf5.p1.m2" class="ltx_Math" alttext="\pi_{\lambda}" display="inline"><msub><mi>π</mi><mi>λ</mi></msub></math>は第<math id="Thmdf5.p1.m3" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>成分への射影である。つまり<math id="Thmdf5.p1.m4" class="ltx_Math" alttext="\mathfrak{R}(U)" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow></mrow></math>は基本開集合<math id="Thmdf5.p1.m5" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>の一個の値しか取らない座標<math id="Thmdf5.p1.m6" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>の全体の集合である。基本開集合の定義から<math id="Thmdf5.p1.m7" class="ltx_Math" alttext="\mathfrak{R}(U)" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow></mrow></math>は有限集合である。</span></p>
+</div>
+</div>
+<div id="Thmdf6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">各<math id="Thmdf6.p1.m1" class="ltx_Math" alttext="k\in\mathbb{N}" display="inline"><mrow><mi>k</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>に対して</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="A_{k}=\{x=\{\xi_{\lambda}\}\in T\ |\ k以外のn\in\mathbb{N}について\xi_{\lambda}=nとなる%
+\lambda は高々ひとつしか存在しない\}" display="block"><mrow><msub><mi>A</mi><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>ξ</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow><mo>∈</mo><mi>T</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mi>k</mi><mo>⁢</mo><mi mathvariant="normal">以</mi><mo>⁢</mo><mi mathvariant="normal">外</mi><mo>⁢</mo><mi mathvariant="normal">の</mi><mo>⁢</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo>⁢</mo><mi mathvariant="normal">に</mi><mo>⁢</mo><mi mathvariant="normal">つ</mi><mo>⁢</mo><mi mathvariant="normal">い</mi><mo>⁢</mo><mi mathvariant="normal">て</mi><mo>⁢</mo><msub><mi>ξ</mi><mi>λ</mi></msub></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mi mathvariant="normal">と</mi><mo>⁢</mo><mi mathvariant="normal">な</mi><mo>⁢</mo><mi mathvariant="normal">る</mi><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi mathvariant="normal">は</mi><mo>⁢</mo><mi mathvariant="normal">高</mi><mo>⁢</mo><mi mathvariant="normal">々</mi><mo>⁢</mo><mi mathvariant="normal">ひ</mi><mo>⁢</mo><mi mathvariant="normal">と</mi><mo>⁢</mo><mi mathvariant="normal">つ</mi><mo>⁢</mo><mi mathvariant="normal">し</mi><mo>⁢</mo><mi mathvariant="normal">か</mi><mo>⁢</mo><mi mathvariant="normal">存</mi><mo>⁢</mo><mi mathvariant="normal">在</mi><mo>⁢</mo><mi mathvariant="normal">し</mi><mo>⁢</mo><mi mathvariant="normal">な</mi><mo>⁢</mo><mi mathvariant="normal">い</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。</span></p>
+</div>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">この<math id="S1.p5.m1" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>を用いて定理を証明するのだがその前に<math id="S1.p5.m2" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>の性質を２つ紹介して定理に備えよう。
+<br class="ltx_break"><math id="S1.p5.m3" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>について次が成り立つ。</p>
+</div>
+<div id="Thmclaim1" class="ltx_theorem ltx_theorem_claim">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">性質 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmclaim1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">各<math id="Thmclaim1.p1.m1" class="ltx_Math" alttext="k\in\mathbb{N}" display="inline"><mrow><mi>k</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="Thmclaim1.p1.m2" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>は閉集合</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p"><math id="S1.p6.m1" class="ltx_Math" alttext="\alpha=\{a_{\lambda}\}\in T\backslash A_{k}" display="inline"><mrow><mi>α</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow><mo>∈</mo><mrow><mi>T</mi><mo lspace="0.222em" rspace="0.222em">\</mo><msub><mi>A</mi><mi>k</mi></msub></mrow></mrow></math>とすると、<math id="S1.p6.m2" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>の定義からある<math id="S1.p6.m3" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>とは異なる<math id="S1.p6.m4" class="ltx_Math" alttext="n\in\mathbb{N}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>と<math id="S1.p6.m5" class="ltx_Math" alttext="i\neq j,\ i,j\in\Lambda" display="inline"><mrow><mrow><mi>i</mi><mo>≠</mo><mrow><mi>j</mi><mo rspace="0.667em">,</mo><mi>i</mi></mrow></mrow><mo>,</mo><mrow><mi>j</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></mrow></math>が存在して</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="a_{i}=a_{j}=n" display="block"><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><msub><mi>a</mi><mi>j</mi></msub><mo>=</mo><mi>n</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。ここで<math id="S1.p6.m6" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>の開集合<math id="S1.p6.m7" class="ltx_Math" alttext="U=\prod_{\lambda}U_{\lambda}" display="inline"><mrow><mi>U</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>∏</mo><mi>λ</mi></msub><msub><mi>U</mi><mi>λ</mi></msub></mrow></mrow></math>を</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="U_{i}=U_{j}=\{n\},\ U_{\lambda}=\mathbb{N}\ (\lambda\neq i,j)" display="block"><mrow><mrow><msub><mi>U</mi><mi>i</mi></msub><mo>=</mo><msub><mi>U</mi><mi>j</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><msub><mi>U</mi><mi>λ</mi></msub><mo>=</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>≠</mo><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると明らかに<math id="S1.p6.m8" class="ltx_Math" alttext="a\in U" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>U</mi></mrow></math>と<math id="S1.p6.m9" class="ltx_Math" alttext="U\cap A_{k}=\emptyset" display="inline"><mrow><mrow><mi>U</mi><mo>∩</mo><msub><mi>A</mi><mi>k</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>がわかり、<math id="S1.p6.m10" class="ltx_Math" alttext="A_{k}" display="inline"><msub><mi>A</mi><mi>k</mi></msub></math>が開集合であることがわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmclaim2" class="ltx_theorem ltx_theorem_claim">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">性質 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmclaim2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmclaim2.p1.m1" class="ltx_Math" alttext="\Lambda" display="inline"><mi mathvariant="normal">Λ</mi></math><span class="ltx_text ltx_font_italic">が非可算のとき<math id="Thmclaim2.p1.m2" class="ltx_Math" alttext="i\neq j" display="inline"><mrow><mi>i</mi><mo>≠</mo><mi>j</mi></mrow></math>ならば<math id="Thmclaim2.p1.m3" class="ltx_Math" alttext="A_{i}\cap A_{j}=\emptyset" display="inline"><mrow><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>A</mi><mi>j</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math></span></p>
+</div>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">証明は明らかである。
+いよいよ定理を述べよう。</p>
+</div>
+<div id="Thmtheorem1" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(Stoneの定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem1.p1.m1" class="ltx_Math" alttext="\Lambda" display="inline"><mi mathvariant="normal">Λ</mi></math><span class="ltx_text ltx_font_italic">が非可算集合の時、<math id="Thmtheorem1.p1.m2" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>は非正規</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">先の性質1,2より、<math id="S1.p8.m1" class="ltx_Math" alttext="A_{1}" display="inline"><msub><mi>A</mi><mn>1</mn></msub></math>と<math id="S1.p8.m2" class="ltx_Math" alttext="A_{2}" display="inline"><msub><mi>A</mi><mn>2</mn></msub></math>は交わらない閉集合の組である。今、
+<math id="S1.p8.m3" class="ltx_Math" alttext="A_{1}\subset U,A_{2}\subset V" display="inline"><mrow><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>⊂</mo><mi>U</mi></mrow><mo>,</mo><mrow><msub><mi>A</mi><mn>2</mn></msub><mo>⊂</mo><mi>V</mi></mrow></mrow></math>となる任意の開集合の組<math id="S1.p8.m4" class="ltx_Math" alttext="U,V" display="inline"><mrow><mi>U</mi><mo>,</mo><mi>V</mi></mrow></math>を考え、<math id="S1.p8.m5" class="ltx_Math" alttext="U\cap V" display="inline"><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow></math>の元を構成する。この元の存在と開集合の組の任意性から<math id="S1.p8.m6" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>が非正規であることがわかる。</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">今から可算列<math id="S1.p9.m1" class="ltx_Math" alttext="\{x_{n}\}\subset A_{1}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mo>⊂</mo><msub><mi>A</mi><mn>1</mn></msub></mrow></math>と<math id="S1.p9.m2" class="ltx_Math" alttext="x_{n}\in A_{1}\subset U_{n}" display="inline"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>∈</mo><msub><mi>A</mi><mn>1</mn></msub><mo>⊂</mo><msub><mi>U</mi><mi>n</mi></msub></mrow></math>となる基本開集合の可算列<math id="S1.p9.m3" class="ltx_Math" alttext="\{U_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>、正の整数の狭義単調増加列<math id="S1.p9.m4" class="ltx_Math" alttext="\{M(n)\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>及び
+<math id="S1.p9.m5" class="ltx_Math" alttext="\{\lambda_{n}\}\subset\Lambda" display="inline"><mrow><mrow><mo stretchy="false">{</mo><msub><mi>λ</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mo>⊂</mo><mi mathvariant="normal">Λ</mi></mrow></math>を帰納的に構成していく。
+<br class="ltx_break"><math id="S1.p9.m6" class="ltx_Math" alttext="n=1" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow></math>の時、<math id="S1.p9.m7" class="ltx_Math" alttext="x_{1}" display="inline"><msub><mi>x</mi><mn>1</mn></msub></math>は全ての座標が<math id="S1.p9.m8" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>である<math id="S1.p9.m9" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>の元とする。つまり<math id="S1.p9.m10" class="ltx_Math" alttext="x_{1}=\{\xi_{\lambda}\}" display="inline"><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>ξ</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>としたとき</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="\xi_{\lambda}=1\ (\forall\lambda\in\Lambda)" display="block"><mrow><msub><mi>ξ</mi><mi>λ</mi></msub><mo>=</mo><mrow><mn>1</mn><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo rspace="0.167em">∀</mo><mi>λ</mi></mrow><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">明らかに<math id="S1.p9.m11" class="ltx_Math" alttext="x_{1}\in A_{1}\subset U" display="inline"><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>∈</mo><msub><mi>A</mi><mn>1</mn></msub><mo>⊂</mo><mi>U</mi></mrow></math>であり、基本開集合<math id="S1.p9.m12" class="ltx_Math" alttext="U_{1}" display="inline"><msub><mi>U</mi><mn>1</mn></msub></math>が存在して<math id="S1.p9.m13" class="ltx_Math" alttext="x_{1}\in U_{1}\subset U" display="inline"><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>∈</mo><msub><mi>U</mi><mn>1</mn></msub><mo>⊂</mo><mi>U</mi></mrow></math>となる。この時の<math id="S1.p9.m14" class="ltx_Math" alttext="\mathfrak{R}(U_{1})" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>の元の個数を<math id="S1.p9.m15" class="ltx_Math" alttext="M(1)" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>とし<math id="S1.p9.m16" class="ltx_Math" alttext="\mathfrak{R}(U_{1})" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>の元に適当に番号をつけて<math id="S1.p9.m17" class="ltx_Math" alttext="\mathfrak{R}(U_{1})=\{\lambda_{1}\dots\lambda_{M(1)}\}" display="inline"><mrow><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><msub><mi>λ</mi><mn>1</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>λ</mi><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とする。
+<br class="ltx_break"><math id="S1.p9.m18" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>まで諸々が構成されたとして<math id="S1.p9.m19" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>の時、<math id="S1.p9.m20" class="ltx_Math" alttext="x_{n+1}=\{\xi_{\lambda}\}" display="inline"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>ξ</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>を</p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="\xi_{\lambda}=\begin{cases}k&amp;\lambda=\lambda_{k},1\leq k\leq M(n)\text{のとき}\\
+1&amp;\text{その他}\end{cases}" display="block"><mrow><msub><mi>ξ</mi><mi>λ</mi></msub><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi>k</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi>λ</mi><mo>=</mo><msub><mi>λ</mi><mi>k</mi></msub></mrow><mo>,</mo><mrow><mn>1</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>1</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mtext>その他</mtext></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。明らかに<math id="S1.p9.m21" class="ltx_Math" alttext="x_{n+1}\in A_{1}\subset U" display="inline"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∈</mo><msub><mi>A</mi><mn>1</mn></msub><mo>⊂</mo><mi>U</mi></mrow></math>である。この時やはり基本開集合<math id="S1.p9.m22" class="ltx_Math" alttext="U_{n+1}" display="inline"><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>が存在して<math id="S1.p9.m23" class="ltx_Math" alttext="x_{n+1}\in U_{n+1}\subset U" display="inline"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∈</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⊂</mo><mi>U</mi></mrow></math>となる。近傍を小さく取り直して
+<math id="S1.p9.m24" class="ltx_Math" alttext="\mathfrak{R}(U_{n})\subsetneqq\mathfrak{R}(U_{n+1})" display="inline"><mrow><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⫋</mo><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と仮定しても良く、<math id="S1.p9.m25" class="ltx_Math" alttext="\mathfrak{R}(U_{n+1})" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></math>の元の個数を<math id="S1.p9.m26" class="ltx_Math" alttext="M(n+1)" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>とし、
+<math id="S1.p9.m27" class="ltx_Math" alttext="\mathfrak{R}(U_{n+1})\smallsetminus\mathfrak{R}(U_{n})" display="inline"><mrow><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math>の元を<math id="S1.p9.m28" class="ltx_Math" alttext="\{\lambda_{M(n)+1}\dots\lambda_{M(n+1)}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><msub><mi>λ</mi><mrow><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>λ</mi><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></math>とする。（<math id="S1.p9.m29" class="ltx_Math" alttext="M(n)+1" display="inline"><mrow><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mn>1</mn></mrow></math>と<math id="S1.p9.m30" class="ltx_Math" alttext="M(n+1)" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の違いに注意せよ）
+<br class="ltx_break">上で得られた可算列を用いて<math id="S1.p9.m31" class="ltx_Math" alttext="y=\{\eta_{\lambda}\}" display="inline"><mrow><mi>y</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>η</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>を</p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="\eta_{\lambda}=\begin{cases}k&amp;\lambda=\lambda_{k}\text{のとき}\\
+2&amp;\text{その他の場合}\end{cases}" display="block"><mrow><msub><mi>η</mi><mi>λ</mi></msub><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi>k</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>λ</mi><mo>=</mo><mrow><msub><mi>λ</mi><mi>k</mi></msub><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>2</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mtext>その他の場合</mtext></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。
+明らかに<math id="S1.p9.m32" class="ltx_Math" alttext="y\in A_{2}\subset V" display="inline"><mrow><mi>y</mi><mo>∈</mo><msub><mi>A</mi><mn>2</mn></msub><mo>⊂</mo><mi>V</mi></mrow></math>である。この時基本開集合<math id="S1.p9.m33" class="ltx_Math" alttext="V_{0}" display="inline"><msub><mi>V</mi><mn>0</mn></msub></math>が存在して
+<math id="S1.p9.m34" class="ltx_Math" alttext="y\in V_{0}\subset V" display="inline"><mrow><mi>y</mi><mo>∈</mo><msub><mi>V</mi><mn>0</mn></msub><mo>⊂</mo><mi>V</mi></mrow></math>となる。<math id="S1.p9.m35" class="ltx_Math" alttext="\mathfrak{R}(V_{0})" display="inline"><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>は有限なので</p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="\exists n\in\mathbb{N}\ k&gt;M(n)\Rightarrow\lambda_{k}\in\Lambda\smallsetminus%
+\mathfrak{R}(V_{0})" display="block"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>n</mi></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mi>k</mi></mrow><mo>&gt;</mo><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⇒</mo><msub><mi>λ</mi><mi>k</mi></msub><mo>∈</mo><mrow><mi mathvariant="normal">Λ</mi><mo>∖</mo><mrow><mi>ℜ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。この<math id="S1.p9.m36" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>を用いて<math id="S1.p9.m37" class="ltx_Math" alttext="z=\{\zeta_{\lambda}\}" display="inline"><mrow><mi>z</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>ζ</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>を</p>
+<table id="S1.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex11.m1" class="ltx_Math" alttext="\zeta_{\lambda}=\begin{cases}k&amp;\lambda=\lambda_{k},1\leq k\leq M(n)\text{のとき}%
+\\
+1&amp;M(n)&lt;k\leq M(n+1)\text{のとき}\\
+2&amp;\text{その他の場合}\end{cases}" display="block"><mrow><msub><mi>ζ</mi><mi>λ</mi></msub><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi>k</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi>λ</mi><mo>=</mo><msub><mi>λ</mi><mi>k</mi></msub></mrow><mo>,</mo><mrow><mn>1</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>1</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>k</mi><mo>≤</mo><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mtext>のとき</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>2</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mtext>その他の場合</mtext></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">と定義する。<math id="S1.p10.m1" class="ltx_Math" alttext="V_{0}=\prod_{\lambda}V_{\lambda}" display="inline"><mrow><msub><mi>V</mi><mn>0</mn></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>∏</mo><mi>λ</mi></msub><msub><mi>V</mi><mi>λ</mi></msub></mrow></mrow></math>（<math id="S1.p10.m2" class="ltx_Math" alttext="V_{\lambda}" display="inline"><msub><mi>V</mi><mi>λ</mi></msub></math>は一元集合か<math id="S1.p10.m3" class="ltx_Math" alttext="\mathbb{N}" display="inline"><mi>ℕ</mi></math>）と書けるが、<math id="S1.p10.m4" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>の定義から<math id="S1.p10.m5" class="ltx_Math" alttext="V_{\lambda}" display="inline"><msub><mi>V</mi><mi>λ</mi></msub></math>が１元集合であるような座標では<math id="S1.p10.m6" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>と<math id="S1.p10.m7" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>の値は一致してるので</p>
+<table id="S1.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex12.m1" class="ltx_Math" alttext="z\in V_{0}" display="block"><mrow><mi>z</mi><mo>∈</mo><msub><mi>V</mi><mn>0</mn></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">そして同様に<math id="S1.p10.m8" class="ltx_Math" alttext="U_{n+1}=\prod_{\lambda}U_{\lambda}" display="inline"><mrow><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>∏</mo><mi>λ</mi></msub><msub><mi>U</mi><mi>λ</mi></msub></mrow></mrow></math>（<math id="S1.p10.m9" class="ltx_Math" alttext="U_{\lambda}" display="inline"><msub><mi>U</mi><mi>λ</mi></msub></math>は一元集合か<math id="S1.p10.m10" class="ltx_Math" alttext="\mathbb{N}" display="inline"><mi>ℕ</mi></math>）と書けるが、<math id="S1.p10.m11" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>の定義から<math id="S1.p10.m12" class="ltx_Math" alttext="U_{\lambda}" display="inline"><msub><mi>U</mi><mi>λ</mi></msub></math>が１元集合となる座標では<math id="S1.p10.m13" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>と<math id="S1.p10.m14" class="ltx_Math" alttext="x_{n+1}" display="inline"><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math>の値は一致するので</p>
+<table id="S1.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex13.m1" class="ltx_Math" alttext="z\in U_{n+1}" display="block"><mrow><mi>z</mi><mo>∈</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって
+<math id="S1.p10.m15" class="ltx_Math" alttext="z\in U_{n+1}\cap V_{0}\subset U\cap V" display="inline"><mrow><mi>z</mi><mo>∈</mo><mrow><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∩</mo><msub><mi>V</mi><mn>0</mn></msub></mrow><mo>⊂</mo><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow></mrow></math>となり、<math id="S1.p10.m16" class="ltx_Math" alttext="U\cap V\neq\emptyset" display="inline"><mrow><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>が分かった。
+結論として<math id="S1.p10.m17" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>は非正規である。
+∎</p>
+</div>
+</div>
+<div id="Thmtheorem2" class="ltx_theorem ltx_theorem_corollary">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem2.p1.m1" class="ltx_Math" alttext="\{X_{\lambda}\}_{\lambda\in\Lambda}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>X</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">はノンコンパクト距離空間の非加算な族とする。<math id="Thmtheorem2.p1.m2" class="ltx_Math" alttext="(" display="inline"><mo stretchy="false">(</mo></math>各<math id="Thmtheorem2.p1.m3" class="ltx_Math" alttext="X_{\lambda}" display="inline"><msub><mi>X</mi><mi>λ</mi></msub></math>は異なっても良い<math id="Thmtheorem2.p1.m4" class="ltx_Math" alttext=")" display="inline"><mo stretchy="false">)</mo></math>
+<br class="ltx_break">この時、
+<math id="Thmtheorem2.p1.m5" class="ltx_Math" alttext="\displaystyle{\prod_{\lambda\in\Lambda}X_{\lambda}}" display="inline"><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∏</mo><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></munder></mstyle><msub><mi>X</mi><mi>λ</mi></msub></mrow></math>は非正規である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">正規空間の閉集合は正規空間となることと、ノンコンパクトな距離空間は可算離散空間を閉集合として持つ（なぜか？）ことからわかる。
+∎</p>
+</div>
+</div>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p">位相群は必ず完全正則となる事がよく知られているが、では常に正規なのだろうかというう疑問が起こる。ストーンの定理を用いるとこの疑問に対し反例を容易に作る事ができる。</p>
+</div>
+<div id="Thmtheorem3" class="ltx_theorem ltx_theorem_corollary">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 3</span></span><span class="ltx_text ltx_font_bold"> </span>(完全正則だが正規ではない位相群の例)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相群の直積が直積位相に対して位相群になってることを使うと、<math id="Thmtheorem3.p1.m1" class="ltx_Math" alttext="\Lambda" display="inline"><mi mathvariant="normal">Λ</mi></math>を非可算集合として</span></p>
+<table id="S1.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex14.m1" class="ltx_Math" alttext="\mathbb{Z}^{\Lambda}" display="block"><msup><mi>ℤ</mi><mi mathvariant="normal">Λ</mi></msup></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">は完全正則だが正規でない位相群であることがわかる。</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>応用</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">このセクションではStoneの定理からわかる重要なひとつの応用を述べる。</p>
+</div>
+<div id="Thmdf7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold"> </span>(可算コンパクト)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmdf7.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はその上の任意の可算開被覆に有限部分被覆が存在するとき可算コンパクトという。また、可算コンパクト性は空間<math id="Thmdf7.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の非空閉集合からなる任意の有限交叉的な可算族が非空な共通部分をもつことと同値である。またまた、可算個の非空閉集合からなる単調減少<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">1</span></span><span class="ltx_text ltx_font_upright">つまり</span><math id="footnote1.m1" class="ltx_Math" alttext="F_{n}\supset F_{n+1}" display="inline"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⊃</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_upright">ということ</span></span></span></span>な<math id="Thmdf7.p1.m3" class="ltx_Math" alttext="\{F_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>族が非空な共通部分を持つことと可算コンパクト性は同値である。</span></p>
+</div>
+</div>
+<div id="Thmdf8" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmdf8.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の部分空間<math id="Thmdf8.p1.m2" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>と点<math id="Thmdf8.p1.m3" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>について<math id="Thmdf8.p1.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>が部分集合<math id="Thmdf8.p1.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>の集積点であるとは、</span></p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="x\in\text{{\rm CL}}(M\setminus\{x\})" display="block"><mrow><mi>x</mi><mo>∈</mo><mrow><mtext>CL</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>M</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことである。つまり、<math id="Thmdf8.p1.m6" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の任意の近傍<math id="Thmdf8.p1.m7" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>について、ある<math id="Thmdf8.p1.m8" class="ltx_Math" alttext="m\in M" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>M</mi></mrow></math>が存在して<math id="Thmdf8.p1.m9" class="ltx_Math" alttext="m\in V" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>V</mi></mrow></math>と<math id="Thmdf8.p1.m10" class="ltx_Math" alttext="x\neq m" display="inline"><mrow><mi>x</mi><mo>≠</mo><mi>m</mi></mrow></math>を充たすということである。</span></p>
+</div>
+</div>
+<div id="Thmdf9" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 9</span></span><span class="ltx_text ltx_font_bold"> </span>(集積コンパクト)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmdf9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmdf9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の無限集合が集積点を持つとき、空間<math id="Thmdf9.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は集積コンパクトであるという。無限集合は可算部分集合を持つので空間<math id="Thmdf9.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が集積コンパクトであることと、<math id="Thmdf9.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の可算無限集合が集積点を持つことは同値である。</span></p>
+</div>
+</div>
+<div id="Thmtheorem4" class="ltx_theorem ltx_theorem_proposition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem4.p1.m1" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math><span class="ltx_text ltx_font_italic">空間<math id="Thmtheorem4.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>において可算コンパクト性と集積コンパクト性は同値である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">[可算コンパクト<math id="S2.p2.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>集積コンパクトの証明]</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p"><math id="S2.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の可算集合に集積点があることを示せばよい。<math id="S2.p3.m2" class="ltx_Math" alttext="\{a_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>を可算集合とする。添え字付けは単射であるとする。<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>つまり、<math id="footnote2.m1" class="ltx_Math" alttext="n\neq m\Longrightarrow a_{n}\neq a_{m}" display="inline"><mrow><mi>n</mi><mo>≠</mo><mi>m</mi><mo stretchy="false">⟹</mo><msub><mi>a</mi><mi>n</mi></msub><mo>≠</mo><msub><mi>a</mi><mi>m</mi></msub></mrow></math>ということである。</span></span></span>さて、</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="F_{n}=\text{{\rm CL}}(\{a_{i}\ |\ i\geq n\})" display="block"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>=</mo><mrow><mtext>CL</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>i</mi></msub><mo lspace="0em" rspace="0.500em">|</mo><mrow><mi>i</mi><mo>≥</mo><mi>n</mi></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とすると、もちろん<math id="S2.p3.m3" class="ltx_Math" alttext="F_{n}" display="inline"><msub><mi>F</mi><mi>n</mi></msub></math>は非空な閉集合で<math id="S2.p3.m4" class="ltx_Math" alttext="F_{n}\supset F_{n+1}" display="inline"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⊃</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>を充たす。よって<math id="S2.p3.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の可算コンパクト性から</p>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="\bigcap_{n\in\mathbb{N}}F_{n}\neq\O" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>F</mi><mi>n</mi></msub></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である。ここで<math id="S2.p3.m6" class="ltx_Math" alttext="\displaystyle c\in\bigcap_{n\in\mathbb{N}}F_{n}" display="inline"><mrow><mi>c</mi><mo>∈</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder></mstyle><msub><mi>F</mi><mi>n</mi></msub></mrow></mrow></math>を取ろう。このとき<math id="S2.p3.m7" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>の任意の近傍<math id="S2.p3.m8" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>と任意の<math id="S2.p3.m9" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について</p>
+<table id="S2.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex18.m1" class="ltx_Math" alttext="V\cap\{a_{i}\ |\ i\geq n\}\neq\O" display="block"><mrow><mrow><mi>V</mi><mo>∩</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>i</mi></msub><mo lspace="0em" rspace="0.500em">|</mo><mrow><mi>i</mi><mo>≥</mo><mi>n</mi></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり、<math id="S2.p3.m10" class="ltx_Math" alttext="\{a_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>の添え字付けは単射なので<math id="S2.p3.m11" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>は<math id="S2.p3.m12" class="ltx_Math" alttext="\{a_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>の集積点となる。よって<math id="S2.p3.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は集積コンパクトである。（実は<math id="S2.p3.m14" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>を用いていないことに注意しよう。<math id="S2.p3.m15" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>を使うのは逆を導くときということである。）</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">[可算コンパクト<math id="S2.p4.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>集積コンパクトの証明終わり]</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">[集積コンパクト<math id="S2.p5.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>可算コンパクトの証明]</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">非空な閉集合なる単調減少な族<math id="S2.p6.m1" class="ltx_Math" alttext="\{F_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>を考える。必要なら番号を付け替えて単調減少よりも強く</p>
+<table id="S2.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex19.m1" class="ltx_Math" alttext="F_{n}\supsetneq F_{n+1}" display="block"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⊋</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">としてもよい。（狭義の単調減少）
+さて<math id="S2.p6.m2" class="ltx_Math" alttext="x_{n}" display="inline"><msub><mi>x</mi><mi>n</mi></msub></math>を</p>
+<table id="S2.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex20.m1" class="ltx_Math" alttext="x_{n}\in F_{n}\setminus F_{n+1}" display="block"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>∈</mo><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>∖</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を充たすものとしよう。このとき<math id="S2.p6.m3" class="ltx_Math" alttext="A=\{x_{n}\}_{n\in\mathbb{N}}" display="inline"><mrow><mi>A</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></mrow></math>は添え字付けが単射なので可算集合である。そして<math id="S2.p6.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の集積コンパクト性から<math id="S2.p6.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>には集積点<math id="S2.p6.m6" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>が存在する。もしこのときある<math id="S2.p6.m7" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>が存在して<math id="S2.p6.m8" class="ltx_Math" alttext="c=x_{m}" display="inline"><mrow><mi>c</mi><mo>=</mo><msub><mi>x</mi><mi>m</mi></msub></mrow></math>となったとしよう。</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">このとき<math id="S2.p7.m1" class="ltx_Math" alttext="F_{m+1}" display="inline"><msub><mi>F</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub></math>は閉集合であり<math id="S2.p7.m2" class="ltx_Math" alttext="F_{m+1}\supset\{x_{i}\ |\ i&gt;m\}" display="inline"><mrow><msub><mi>F</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⊃</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo lspace="0em" rspace="0.500em">|</mo><mrow><mi>i</mi><mo>&gt;</mo><mi>m</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math>であるから<math id="S2.p7.m3" class="ltx_Math" alttext="X\setminus F_{m+1}" display="inline"><mrow><mi>X</mi><mo>∖</mo><msub><mi>F</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>は<math id="S2.p7.m4" class="ltx_Math" alttext="c=x_{m}" display="inline"><mrow><mi>c</mi><mo>=</mo><msub><mi>x</mi><mi>m</mi></msub></mrow></math>を含み、<math id="S2.p7.m5" class="ltx_Math" alttext="\{x_{i}\ |\ i&gt;m\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo lspace="0em" rspace="0.500em">|</mo><mrow><mi>i</mi><mo>&gt;</mo><mi>m</mi></mrow><mo stretchy="false">}</mo></mrow></math>と交わらない開集合であり、また<math id="S2.p7.m6" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>性から<math id="S2.p7.m7" class="ltx_Math" alttext="X\setminus\{x_{1},x_{2},\cdots,x_{m-1}\}" display="inline"><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><msub><mi>x</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math>は<math id="S2.p7.m8" class="ltx_Math" alttext="c=x_{m}" display="inline"><mrow><mi>c</mi><mo>=</mo><msub><mi>x</mi><mi>m</mi></msub></mrow></math>を含み、<math id="S2.p7.m9" class="ltx_Math" alttext="\{x_{1},x_{2},\cdots,x_{m-1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><msub><mi>x</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>と交わらない開集合であるから、これら二つの開集合の共通部分を<math id="S2.p7.m10" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>とするとこれは<math id="S2.p7.m11" class="ltx_Math" alttext="c=x_{m}" display="inline"><mrow><mi>c</mi><mo>=</mo><msub><mi>x</mi><mi>m</mi></msub></mrow></math>を含む開集合であり、<math id="S2.p7.m12" class="ltx_Math" alttext="O\cap A=\{x_{m}\}" display="inline"><mrow><mrow><mi>O</mi><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>となり、<math id="S2.p7.m13" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>が<math id="S2.p7.m14" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の集積点であることと矛盾する。よって任意の<math id="S2.p7.m15" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="S2.p7.m16" class="ltx_Math" alttext="c\neq x_{m}" display="inline"><mrow><mi>c</mi><mo>≠</mo><msub><mi>x</mi><mi>m</mi></msub></mrow></math>である。</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">以上のことを踏まえると任意の<math id="S2.p8.m1" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="S2.p8.m2" class="ltx_Math" alttext="X\setminus\{x_{1},x_{2},\cdots,x_{m}\}" display="inline"><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><msub><mi>x</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>は<math id="S2.p8.m3" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>性から開集合であり、<math id="S2.p8.m4" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>を含む開集合である。このことから<math id="S2.p8.m5" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>は任意の<math id="S2.p8.m6" class="ltx_Math" alttext="m\in\mathbb{N}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="S2.p8.m7" class="ltx_Math" alttext="\{x_{i}\ |\ i&gt;m\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo lspace="0em" rspace="0.500em">|</mo><mrow><mi>i</mi><mo>&gt;</mo><mi>m</mi></mrow><mo stretchy="false">}</mo></mrow></math>の集積点でもある。<math id="S2.p8.m8" class="ltx_Math" alttext="x_{n}" display="inline"><msub><mi>x</mi><mi>n</mi></msub></math>の定義と<math id="S2.p8.m9" class="ltx_Math" alttext="F_{n}" display="inline"><msub><mi>F</mi><mi>n</mi></msub></math>が閉集合であることから、特に任意の<math id="S2.p8.m10" class="ltx_Math" alttext="n\in\mathbb{N}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>について<math id="S2.p8.m11" class="ltx_Math" alttext="c\in F_{n}" display="inline"><mrow><mi>c</mi><mo>∈</mo><msub><mi>F</mi><mi>n</mi></msub></mrow></math>である。よって</p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex21.m1" class="ltx_Math" alttext="\bigcap_{n\in\mathbb{N}}F_{n}\ni c" display="block"><mrow><mrow><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>F</mi><mi>n</mi></msub></mrow><mo>∋</mo><mi>c</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="S2.p8.m12" class="ltx_Math" alttext="\displaystyle\bigcap_{n\in\mathbb{N}}F_{n}\neq\O" display="inline"><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋂</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder></mstyle><msub><mi>F</mi><mi>n</mi></msub></mrow><mo>≠</mo><mi>Ø</mi></mrow></math>がわかり、<math id="S2.p8.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の可算コンパクト性が分かった。
+[集積コンパクト<math id="S2.p8.m14" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>可算コンパクトの証明終わり]
+∎</p>
+</div>
+</div>
+<div id="Thmtheorem5" class="ltx_theorem ltx_theorem_proposition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem5.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">が<math id="Thmtheorem5.p1.m2" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>空間でかつ<span class="ltx_text ltx_font_bold">可算コンパクトではない</span>とすると<math id="Thmtheorem5.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はその相対位相が離散位相である可算な閉部分集合を持つ。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">先の命題からこのような<math id="S2.p9.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>には集積点を持たない可算集合<math id="S2.p9.m2" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>が存在するが、これはつまり<math id="S2.p9.m3" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>と<math id="S2.p9.m4" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>の孤立点全体が一致しているということであり、<math id="S2.p9.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>は閉集合である。<math id="S2.p9.m6" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>は孤立点からのみ成るということから<math id="S2.p9.m7" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>がその相対位相で閉集合であることは直ちに従う、
+∎</p>
+</div>
+</div>
+<div id="Thmtheorem6" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">非空な<math id="Thmtheorem6.p1.m1" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>位相空間の族<math id="Thmtheorem6.p1.m2" class="ltx_Math" alttext="\{X_{\lambda}\}_{\lambda\in\Lambda}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>X</mi><mi>λ</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></msub></math>に於いて<math id="Thmtheorem6.p1.m3" class="ltx_Math" alttext="\displaystyle\prod_{\lambda\in\Lambda}X_{\lambda}" display="inline"><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∏</mo><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></munder></mstyle><msub><mi>X</mi><mi>λ</mi></msub></mrow></math>が正規<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">3</span></span><span class="ltx_text ltx_font_upright">このとき自動的に</span><math id="footnote3.m1" class="ltx_Math" alttext="T_{4}" display="inline"><msub><mi>T</mi><mn>4</mn></msub></math><span class="ltx_text ltx_font_upright">にもなる。</span></span></span></span>なら<math id="Thmtheorem6.p1.m4" class="ltx_Math" alttext="\Lambda" display="inline"><mi mathvariant="normal">Λ</mi></math>の高々可算な元を除いて<math id="Thmtheorem6.p1.m5" class="ltx_Math" alttext="X_{\lambda}" display="inline"><msub><mi>X</mi><mi>λ</mi></msub></math>は可算コンパクトである。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">もし 非可算個の<math id="S2.p10.m1" class="ltx_Math" alttext="\lambda\in\Lambda" display="inline"><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></math>について<math id="S2.p10.m2" class="ltx_Math" alttext="X_{\lambda}" display="inline"><msub><mi>X</mi><mi>λ</mi></msub></math>が<span class="ltx_text ltx_font_bold">可算コンパクトではない</span>とすると先の命題からそのような<math id="S2.p10.m3" class="ltx_Math" alttext="X_{\lambda}" display="inline"><msub><mi>X</mi><mi>λ</mi></msub></math>は可算な閉集合でその相対位相が離散位相になるようなものが存在するが、ともすると<math id="S2.p10.m4" class="ltx_Math" alttext="\displaystyle\prod_{\lambda\in\Lambda}X_{\lambda}" display="inline"><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∏</mo><mrow><mi>λ</mi><mo>∈</mo><mi mathvariant="normal">Λ</mi></mrow></munder></mstyle><msub><mi>X</mi><mi>λ</mi></msub></mrow></math>はその相対位相が可算離散位相の非可算直積位相空間と同相になるような閉部分空間が存在することになる。その閉集合は定理<a href="#Thmtheorem1" title="定理 1 (Stoneの定理). ‣ 1 定理 ‣ 可算離散位相の直積に関するStoneの定理" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>（Stoneの定理）から非正規であるが、正規空間の閉部分集合は正規になるので、これは矛盾である。よって背理法から定理の証明は終わる。
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">A.H.Stone,Paracompactness and product spaces,Bull. Amer. Math. Soc. 54(1948),977-983
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:49:18 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

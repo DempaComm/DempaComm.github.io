@@ -1,0 +1,554 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>拡張された実数</title>
+<!--Generated on Sun Jul 26 16:49:41 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2015-10-24-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>入射角16.225°の測度論入門:-1のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">拡張された実数</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書では拡張された実数を定義し、その性質を調べる。</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(拡張された直線)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">実直線<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>に<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>に属さない異なる<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math>点<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="-\infty,+\infty" display="inline"><mrow><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>を付け加えた集合を<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>と書き、拡張された実数、または拡張された直線という。つまり、集合として</span></p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="\mathbb{E}=\mathbb{R}\sqcup\{-\infty\}\sqcup\{+\infty\}" display="block"><mrow><mi>𝔼</mi><mo>=</mo><mrow><mi>ℝ</mi><mo>⊔</mo><mrow><mo stretchy="false">{</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">}</mo></mrow><mo>⊔</mo><mrow><mo stretchy="false">{</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">である。この集合に順序、演算、位相を順次定義していく。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm2.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の順序)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math><span class="ltx_text ltx_font_italic">の順序は任意の<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="a\in\mathbb{R}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="-\infty&lt;a&lt;+\infty" display="inline"><mrow><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>と直感通りに定義する。この順序により<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>は最小値<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="-\infty" display="inline"><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></math>、最大値<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="+\infty" display="inline"><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></math>を備え、線型
+<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">1</span></span><span class="ltx_text ltx_font_upright">順序集合として線型であるということである。つまり任意の二元</span><math id="footnote1.m1" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math><span class="ltx_text ltx_font_upright">について
+</span>
+<span id="S0.Ex2" class="ltx_equation ltx_eqn_table">
+
+<span><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex2.m1" class="ltx_Math" alttext="a&lt;b,\ a=b,\ a&gt;b" display="block"><mrow><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>a</mi><mo>=</mo><mi>b</mi></mrow><mo rspace="0.667em">,</mo><mrow><mi>a</mi><mo>&gt;</mo><mi>b</mi></mrow></mrow></mrow></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+</span><span class="ltx_text ltx_font_upright">のいずれかが成り立つということである。</span></span></span></span>
+で完備
+<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">2</span></span><span class="ltx_text ltx_font_upright">線型順序集合として完備ということである。つまり任意の部分集合に上限と下限が存在するということである。</span></span></span></span>
+な順序集合となる。この事を確かめるのは簡単な割に長くなるので省略する。この順序を根拠にして、</span></p>
+<table id="S0.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex3.m1" class="ltx_Math" alttext="\mathbb{E}=[-\infty,+\infty]" display="block"><mrow><mi>𝔼</mi><mo>=</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と書いたりもする。</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm3.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の演算)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math><span class="ltx_text ltx_font_italic">の演算を、<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の元同士の演算はそのままに
+まず和を</span></p>
+<table id="S0.EGx1" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E1.m1" class="ltx_Math" alttext="\displaystyle a\in\mathbb{R}\Longrightarrow(\pm\infty)+a=a+(\pm\infty)+a=\pm\infty" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℝ</mi><mo stretchy="false">⟹</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mi>a</mi></mrow><mo>=</mo><mrow><mi>a</mi><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mi>a</mi></mrow><mo>=</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E2.m1" class="ltx_Math" alttext="\displaystyle(+\infty)+(+\infty)=+\infty" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E3.m1" class="ltx_Math" alttext="\displaystyle(-\infty)+(-\infty)=-\infty" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と拡張する。複合同順である。そして積を</span></p>
+<table id="S0.EGx2" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E4.m1" class="ltx_Math" alttext="\displaystyle[a\in\mathbb{E}\land a&gt;0]\Longrightarrow(\pm\infty)\times a=a%
+\times(\pm\infty)=\pm\infty" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>∈</mo><mrow><mi>𝔼</mi><mo>∧</mo><mi>a</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">⟹</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">×</mo><mi>a</mi></mrow><mo>=</mo><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E5.m1" class="ltx_Math" alttext="\displaystyle[a\in\mathbb{E}\land a&lt;0]\Longrightarrow(\pm\infty)\times a=a%
+\times(\pm\infty)=\mp\infty" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>∈</mo><mrow><mi>𝔼</mi><mo>∧</mo><mi>a</mi></mrow><mo>&lt;</mo><mn>0</mn></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">⟹</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">×</mo><mi>a</mi></mrow><mo>=</mo><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>∓</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(6)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E6.m1" class="ltx_Math" alttext="\displaystyle(\pm\infty)\times 0=0\times(\pm\infty)=0" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">×</mo><mn>0</mn></mrow><mo>=</mo><mrow><mn>0</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と拡張する。複合同順である。<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="(4),(5)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><mn>5</mn><mo stretchy="false">)</mo></mrow></mrow></math>では<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="(+\infty)\times(\pm\infty)=(\pm\infty)" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>なども主張していることに注意しよう。さて次に<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="a\in\mathbb{E}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>𝔼</mi></mrow></math>に対して<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="\displaystyle\frac{1}{a}" display="inline"><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>a</mi></mfrac></mstyle></math>という</span><span class="ltx_text ltx_font_bold">新しい演算</span><span class="ltx_text ltx_font_italic">を<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="a\in\mathbb{R}\setminus\{0\}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mrow><mi>ℝ</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></mrow></math>なら<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="\displaystyle\frac{1}{a}=a^{-1}" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>a</mi></mfrac></mstyle><mo>=</mo><msup><mi>a</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>と定義し、<math id="Thmthm3.p1.m9" class="ltx_Math" alttext="a=\pm\infty" display="inline"><mrow><mi>a</mi><mo>=</mo><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>ならば</span></p>
+<table id="S0.EGx3" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(7)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E7.m1" class="ltx_Math" alttext="\displaystyle\frac{1}{\pm\infty}=0" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mo>±</mo><mi mathvariant="normal">∞</mi></mrow></mfrac></mstyle><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と</span><span class="ltx_text ltx_font_bold">定義</span><span class="ltx_text ltx_font_italic">する。以上の拡張された演算に於いても
+<math id="Thmthm3.p1.m10" class="ltx_Math" alttext="\displaystyle(+\infty)+(-\infty),\ \dfrac{+\infty}{+\infty},\frac{1}{0}" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.667em">,</mo><mstyle displaystyle="true"><mfrac><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mfrac></mstyle><mo>,</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>0</mn></mfrac></mstyle></mrow></math>は</span><span class="ltx_text ltx_font_bold">定義しない。<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_medium">3</span></span>
+<span id="S0.Ex4" class="ltx_equation ltx_eqn_table">
+
+<span><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex4.m1" class="ltx_Math" alttext="\frac{+\infty}{+\infty}:=+\infty\times\left(\frac{1}{+\infty}\right)=+\infty%
+\times 0=0" display="block"><mrow><mfrac><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mfrac><mo lspace="0.278em" rspace="0.278em">:=</mo><mrow><mo>+</mo><mrow><mi mathvariant="normal">∞</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo>(</mo><mfrac><mn>1</mn><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mfrac><mo>)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mrow><mi mathvariant="normal">∞</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mn>0</mn></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+</span><span class="ltx_text ltx_font_medium">と定義しても良かったが、考えることが増えるので慣習通り未定義と言うことにした。</span></span></span></span></span><span class="ltx_text ltx_font_italic">このような未定義な演算を不定形な演算と言う。</span></p>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="\displaystyle\frac{1}{\infty}" display="inline"><mstyle displaystyle="true"><mfrac><mn>1</mn><mi mathvariant="normal">∞</mi></mfrac></mstyle></math><span class="ltx_text ltx_font_italic">は<math id="Thmcaux1.p1.m2" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>の逆数と言う</span><span class="ltx_text ltx_font_bold">意味ではない</span><span class="ltx_text ltx_font_italic">また、<math id="Thmcaux1.p1.m3" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>に於いてはもはや</span></p>
+<table id="S0.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex5.m1" class="ltx_Math" alttext="\frac{y}{x}=y\frac{1}{x}" display="block"><mrow><mfrac><mi>y</mi><mi>x</mi></mfrac><mo>=</mo><mrow><mi>y</mi><mo>⁢</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立たないことに注意せよ。例えば<math id="Thmcaux1.p1.m4" class="ltx_Math" alttext="x=y=\infty" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>y</mi><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき、そもそも左辺は定義されていない。</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm4.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の位相)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math><span class="ltx_text ltx_font_italic">に位相を定義するのだが、先に定義した<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の順序を用いて順序位相を<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>に定義する。つまり</span></p>
+<table id="S0.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex6.m1" class="ltx_Math" alttext="(\leftarrow,a)=\{x\ |\ x&lt;a\}=[-\infty,a),\ (b,\to)=\{x\ |\ b&lt;x\}=(b,+\infty]\ %
+(a,b\in\mathbb{E})" display="block"><mrow><mrow><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi></mrow><mo stretchy="false">}</mo></mrow><mo>=</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mi>b</mi><mo>&lt;</mo><mi>x</mi></mrow><mo stretchy="false">}</mo></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">]</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>𝔼</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">の形の集合全体からなる集合族を準開基とする位相である。同じ事だが</span></p>
+<table id="S0.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex7.m1" class="ltx_Math" alttext="(c,d)=\{x\ |\ c&lt;x&lt;d\}\ (a,b,c,d\in\mathbb{E})" display="block"><mrow><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">{</mo><mi>x</mi><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mi>c</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>d</mi></mrow><mo stretchy="false">}</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi></mrow><mo>∈</mo><mi>𝔼</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">として、</span></p>
+<table id="S0.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex8.m1" class="ltx_Math" alttext="(\leftarrow,a),(b,\to),(c,d)\ (a,b,c,d\in\mathbb{E})" display="block"><mrow><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi></mrow><mo>∈</mo><mi>𝔼</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">の形全体の集合
+<span id="footnote4" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">4</span></span><span class="ltx_text ltx_font_upright">開区間と呼ぶ</span></span></span></span>
+全体からなる集合族を開基とする位相である。</span></p>
+</div>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">さて、以降はこの<math id="p2.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の性質を簡単に調べていく。</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 5</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm5.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の連続関数の<math id="Thmthm5.m2" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>への拡大)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">写像<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="f:(a,b)\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>は連続であるとし、</span></p>
+<table id="S0.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex9.m1" class="ltx_Math" alttext="\lim_{x\to a}f(x)=\alpha,\ \lim_{x\to b}f(x)=\beta\ (\alpha,\beta\in\mathbb{E})" display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mi>a</mi></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>α</mi></mrow><mo rspace="0.389em">,</mo><mrow><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mi>b</mi></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>β</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>α</mi><mo>,</mo><mi>β</mi></mrow><mo>∈</mo><mi>𝔼</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ならば、<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="F:[a,b]\to\mathbb{E}" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>𝔼</mi></mrow></mrow></math>を</span></p>
+<table id="S0.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex10.m1" class="ltx_Math" alttext="F(x)=\begin{cases}\alpha&amp;x=a\\
+f(x)&amp;x\in(a,b)\\
+\beta&amp;x=b\end{cases}" display="block"><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mi>α</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>=</mo><mi>a</mi></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mi>β</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>=</mo><mi>b</mi></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義するとこれは連続である。また、<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の拡張はこの関数に限る。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明のスケッチ.</h6>
+<div id="p3" class="ltx_para">
+<p class="ltx_p"><math id="p3.m1" class="ltx_Math" alttext="a,b,\alpha,\beta" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>β</mi></mrow></math>がすべて<math id="p3.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>に属してるならこれは<math id="p3.m3" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の範囲で問題無く処理出来る。それ以外の場合、
+例えば<math id="p3.m4" class="ltx_Math" alttext="a\in\mathbb{R}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>で<math id="p3.m5" class="ltx_Math" alttext="\alpha=\infty" display="inline"><mrow><mi>α</mi><mo>=</mo><mi mathvariant="normal">∞</mi></mrow></math>のときつまり<math id="p3.m6" class="ltx_Math" alttext="\displaystyle\lim_{x\to a}f(x)=+\infty" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mi>a</mi></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>のとき、この式の意味は</p>
+<table id="S0.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex11.m1" class="ltx_Math" alttext="\forall K&gt;0\ \exists\delta&gt;0\ |x-a|&lt;\delta\Longrightarrow K&lt;f(x)" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>K</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mi>K</mi><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">だが、<math id="p3.m7" class="ltx_Math" alttext="(K,+\infty]" display="inline"><mrow><mo stretchy="false">(</mo><mi>K</mi><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">]</mo></mrow></math>という形の集合全体は<math id="p3.m8" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>に於いて<math id="p3.m9" class="ltx_Math" alttext="+\infty" display="inline"><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></math>の基本近傍系を成してるので連続的に拡張出来ることはわかる。他の場合も同様である。
+∎</p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm6.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の位相)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math><span class="ltx_text ltx_font_italic">は<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の有界閉区間と位相同型である。よって<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>はコンパクト距離空間である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明のスケッチ.</h6>
+<div id="p4" class="ltx_para">
+<p class="ltx_p"><math id="p4.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の有界閉区間はどれも位相同型なので例えば<math id="p4.m2" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>と<math id="p4.m3" class="ltx_Math" alttext="[-1,+1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></math>が位相同型であることを示す。まず双曲線関数<math id="p4.m4" class="ltx_Math" alttext="\tanh:\mathbb{R}\to(-1,+1)" display="inline"><mrow><mi>tanh</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は連続で、</p>
+<table id="S0.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex12.m1" class="ltx_Math" alttext="\tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}" display="block"><mrow><mrow><mi>tanh</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である。これから簡単に逆関数<math id="p4.m5" class="ltx_Math" alttext="g:(-1,+1)\to\mathbb{R}" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>が存在する事がわかり、</p>
+<table id="S0.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex13.m1" class="ltx_Math" alttext="g(x)=\frac{1}{2}\log\left(\frac{1+x}{1-x}\right)" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo lspace="0.167em">⁢</mo><mrow><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である。さて</p>
+<table id="S0.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex14.m1" class="ltx_Math" alttext="\lim_{x\to-\infty}h(x)=-1,\ \lim_{x\to+\infty}h(x)=+1" display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow><mo rspace="0.389em">,</mo><mrow><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mn>1</mn></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="p4.m6" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>は<math id="p4.m7" class="ltx_Math" alttext="H:\mathbb{R}\to[-1,+1]" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></mrow></mrow></math>へと拡大する。
+そして、</p>
+<table id="S0.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex15.m1" class="ltx_Math" alttext="\lim_{x\to-1}g(x)=-\infty,\ \lim_{x\to+1}g(x)=+\infty" display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow></munder><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mo rspace="0.389em">,</mo><mrow><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mn>1</mn></mrow></mrow></munder><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="p4.m8" class="ltx_Math" alttext="G:[-1,+1]\to\mathbb{E}" display="inline"><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>𝔼</mi></mrow></mrow></math>へと拡張する。簡単にわかるように<math id="p4.m9" class="ltx_Math" alttext="H,G" display="inline"><mrow><mi>H</mi><mo>,</mo><mi>G</mi></mrow></math>は互いに逆写像なので
+<math id="p4.m10" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>と<math id="p4.m11" class="ltx_Math" alttext="[-1,+1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></math>は同型である。
+∎</p>
+</div>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">以下、<math id="p5.m1" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>の演算と位相の関わりを見るのだが、
+距離空間の間の写像の連続性を点列で特徴付ける次の事実を思い出そう。</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_fact">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">事実 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から距離空間<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>への写像<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="f:X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>について以下は同値</span></p>
+<table id="S0.EGx4" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E1a"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E1a.m1" class="ltx_Math" alttext="\displaystyle fは点a\in Xで連続" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mi mathvariant="normal">は</mi><mo>⁢</mo><mi mathvariant="normal">点</mi><mo>⁢</mo><mi>a</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo>⁢</mo><mi mathvariant="normal">で</mi><mo>⁢</mo><mi mathvariant="normal">連</mi><mo>⁢</mo><mi mathvariant="normal">続</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E2a"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E2a.m1" class="ltx_Math" alttext="\displaystyle\lim_{n\to\infty}x_{n}=aとなるX内の任意の点列\{x_{n}\}_{n\in\mathbb{N}}について%
+\lim_{n\to\infty}f(x_{n})=f(a)" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mi>a</mi><mo>⁢</mo><mi mathvariant="normal">と</mi><mo>⁢</mo><mi mathvariant="normal">な</mi><mo>⁢</mo><mi mathvariant="normal">る</mi><mo>⁢</mo><mi>X</mi><mo>⁢</mo><mi mathvariant="normal">内</mi><mo>⁢</mo><mi mathvariant="normal">の</mi><mo>⁢</mo><mi mathvariant="normal">任</mi><mo>⁢</mo><mi mathvariant="normal">意</mi><mo>⁢</mo><mi mathvariant="normal">の</mi><mo>⁢</mo><mi mathvariant="normal">点</mi><mo>⁢</mo><mi mathvariant="normal">列</mi><mo>⁢</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub><mo>⁢</mo><mi mathvariant="normal">に</mi><mo>⁢</mo><mi mathvariant="normal">つ</mi><mo>⁢</mo><mi mathvariant="normal">い</mi><mo>⁢</mo><mi mathvariant="normal">て</mi><mo lspace="0.167em">⁢</mo><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">写像</span></p>
+<table id="S0.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex16.m1" class="ltx_Math" alttext="f:\mathbb{E}\setminus\{0\}\to\mathbb{E}" display="block"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>𝔼</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">→</mo><mi>𝔼</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を</span></p>
+<table id="S0.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex17.m1" class="ltx_Math" alttext="f(x)=\frac{1}{x}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義すると、<math id="Thmthm8.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は連続写像である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p6" class="ltx_para">
+<table id="S0.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex18.m1" class="ltx_Math" alttext="\lim_{x\to-\infty}f(x)=\lim_{x\to+\infty}f(x)=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>x</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定理<a href="#Thmthm5" title="定理 5 (ℝ上の連続関数の𝔼への拡大). ‣ 拡張された実数" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>よりわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="D=\mathbb{E}^{2}\setminus\{(-\infty,+\infty),(+\infty,-\infty)\}" display="inline"><mrow><mi>D</mi><mo>=</mo><mrow><msup><mi>𝔼</mi><mn>2</mn></msup><mo>∖</mo><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">と置き、</span></p>
+<table id="S0.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex19.m1" class="ltx_Math" alttext="F:D\to\mathbb{E}" display="block"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>D</mi><mo stretchy="false">→</mo><mi>𝔼</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を</span></p>
+<table id="S0.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex20.m1" class="ltx_Math" alttext="F(x,y)=x+y" display="block"><mrow><mrow><mi>F</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義すると<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>は連続関数である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p7" class="ltx_para">
+<p class="ltx_p">事実<a href="#Thmthm7" title="事実 7. ‣ 拡張された実数" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>を用いる。<math id="p7.m1" class="ltx_Math" alttext="(x,y)\in\mathbb{R}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi>ℝ</mi></mrow></math>についての連続性は明らかなので、<math id="p7.m2" class="ltx_Math" alttext="x,y" display="inline"><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow></math>が無限大の値を取りうる場合を考える。
+<br class="ltx_break"><math id="p7.m3" class="ltx_Math" alttext="x=+\infty,\ y\in\mathbb{R}" display="inline"><mrow><mrow><mi>x</mi><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mi>y</mi><mo>∈</mo><mi>ℝ</mi></mrow></mrow></math>の場合：<math id="p7.m4" class="ltx_Math" alttext="\displaystyle\lim_{n\to\infty}x_{n}=+\infty,\ \lim_{n\to\infty}y_{n}=y\in%
+\mathbb{R}" display="inline"><mrow><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mo rspace="0.389em">,</mo><mrow><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><msub><mi>y</mi><mi>n</mi></msub></mrow><mo>=</mo><mi>y</mi><mo>∈</mo><mi>ℝ</mi></mrow></mrow></math>となる点列を考えたとき、十分大きい番号で<math id="p7.m5" class="ltx_Math" alttext="\{y_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>は有界となる。つまり<math id="p7.m6" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>ならば</p>
+<table id="S0.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex21.m1" class="ltx_Math" alttext="-M&lt;y_{n}&lt;M" display="block"><mrow><mrow><mo>−</mo><mi>M</mi></mrow><mo>&lt;</mo><msub><mi>y</mi><mi>n</mi></msub><mo>&lt;</mo><mi>M</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる<math id="p7.m7" class="ltx_Math" alttext="M\in\mathbb{R}" display="inline"><mrow><mi>M</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>が存在するので</p>
+<table id="S0.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex22.m1" class="ltx_Math" alttext="x_{n}-M&lt;x_{n}+y_{n}&lt;x_{n}+M" display="block"><mrow><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>M</mi></mrow><mo>&lt;</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><msub><mi>y</mi><mi>n</mi></msub></mrow><mo>&lt;</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><mi>M</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となり、<math id="p7.m8" class="ltx_Math" alttext="\displaystyle\lim_{n\to+\infty}(x_{n}-M)=\lim_{n\to\infty}(x_{n}+M)=+\infty" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><mo lspace="0em" stretchy="false">(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>M</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mo stretchy="false">(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><mi>M</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>なのでこの点での連続性がわかる。<math id="p7.m9" class="ltx_Math" alttext="[x=-\infty,y\in\mathbb{R}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mrow><mi>x</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mo>,</mo><mrow><mi>y</mi><mo>∈</mo><mi>ℝ</mi></mrow></mrow><mo stretchy="false">]</mo></mrow></math>や<math id="p7.m10" class="ltx_Math" alttext="[x\in\mathbb{R},\ y=+\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo rspace="0.667em">,</mo><mrow><mi>y</mi><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></mrow><mo stretchy="false">]</mo></mrow></math>そして<math id="p7.m11" class="ltx_Math" alttext="[x\in\mathbb{R},\ y=-\infty]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow><mo rspace="0.667em">,</mo><mrow><mi>y</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow></mrow><mo stretchy="false">]</mo></mrow></math>の場合も同様である。<math id="p7.m12" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>の定義から残るは<math id="p7.m13" class="ltx_Math" alttext="x=y=+\infty" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>y</mi><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>と<math id="p7.m14" class="ltx_Math" alttext="x=y=-\infty" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>y</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>の場合だが、<math id="p7.m15" class="ltx_Math" alttext="\displaystyle\lim_{n\to\infty}x_{n}=\lim_{n\to\infty}y_{n}=+\infty" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><msub><mi>x</mi><mi>n</mi></msub></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><msub><mi>y</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>ならば<math id="p7.m16" class="ltx_Math" alttext="\lim_{n\to\infty}(x_{n}+y_{n})=+\infty" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><msub><mi>y</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></math>からわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">わざわざ定義域を<math id="Thmcaux2.p1.m1" class="ltx_Math" alttext="D=\mathbb{E}^{2}\setminus\{(-\infty,+\infty),(+\infty,-\infty)\}" display="inline"><mrow><mi>D</mi><mo>=</mo><mrow><msup><mi>𝔼</mi><mn>2</mn></msup><mo>∖</mo><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math>としたのは</span></p>
+<table id="S0.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex23.m1" class="ltx_Math" alttext="(+\infty)+(-\infty)" display="block"><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">という不定形な演算を避けるためである。</span></p>
+</div>
+</div>
+<div id="p8" class="ltx_para">
+<p class="ltx_p">次に積について調べるが、積は連続にはならない、しかし連続関数で近似できると言う性質を持っている。
+以下の拡張された実数の積の性質の証明のために、実数の積の連続性を援用しよう。</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_fact">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">事実 10</span></span><span class="ltx_text ltx_font_bold"> </span>(実数の積の連続性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="(x,y)\in\mathbb{R}^{2}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mi>ℝ</mi><mn>2</mn></msup></mrow></math><span class="ltx_text ltx_font_italic">に<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="xy\in\mathbb{R}" display="inline"><mrow><mrow><mi>x</mi><mo>⁢</mo><mi>y</mi></mrow><mo>∈</mo><mi>ℝ</mi></mrow></math>を対応させる写像は連続</span></p>
+</div>
+</div>
+<div id="p9" class="ltx_para">
+<p class="ltx_p">拡張された実数の積は先の２つの場合と違って連続にはならないが、連続関数列の極限になっていると言う性質がある。いまだ定義されてない言葉を使うと、積はボレル写像なのである。</p>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<table id="S0.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex24.m1" class="ltx_Math" alttext="G:\mathbb{E}^{2}\to\mathbb{E}" display="block"><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝔼</mi><mn>2</mn></msup><mo stretchy="false">→</mo><mi>𝔼</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を</span></p>
+<table id="S0.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex25.m1" class="ltx_Math" alttext="G(x,y)=xy" display="block"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mi>y</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義すると、<math id="Thmthm11.p1.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は</span><span class="ltx_text ltx_font_bold">連続ではない。</span><span class="ltx_text ltx_font_italic">しかし、<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\mathbb{E}^{2}" display="inline"><msup><mi>𝔼</mi><mn>2</mn></msup></math>から<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>への連続関数列<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="\{g_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>が存在して、各点<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="(x,y)\in\mathbb{E}^{2}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mi>𝔼</mi><mn>2</mn></msup></mrow></math>毎に、</span></p>
+<table id="S0.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex26.m1" class="ltx_Math" alttext="\lim_{n\to+\infty}g_{n}(x,y)=G(x,y)=xy" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></mrow></munder><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mi>y</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる。つまり<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="\{g_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>は<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>に各点収束する。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p10" class="ltx_para">
+<p class="ltx_p"><math id="p10.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>が連続出ないことは、<math id="p10.m2" class="ltx_Math" alttext="\displaystyle(1/n,n)\to(0,\infty)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>/</mo><mi>n</mi></mrow><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="p10.m3" class="ltx_Math" alttext="0\times\infty=0" display="inline"><mrow><mrow><mn>0</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mi mathvariant="normal">∞</mi></mrow><mo>=</mo><mn>0</mn></mrow></math>にもかかわらず<math id="p10.m4" class="ltx_Math" alttext="\displaystyle G(1/n,n)=1" display="inline"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>/</mo><mi>n</mi></mrow><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>であることからわかる。後半を示そう。まず<math id="p10.m5" class="ltx_Math" alttext="\mathbb{E}" display="inline"><mi>𝔼</mi></math>から<math id="p10.m6" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>への連続関数列<math id="p10.m7" class="ltx_Math" alttext="\{f_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>を</p>
+<table id="S0.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex27.m1" class="ltx_Math" alttext="f_{n}(x)=\begin{cases}-n&amp;x\in[-\infty,-n]\\
+x&amp;x\in[-n,+n]\\
++n&amp;x\in[+n,+\infty]\end{cases}" display="block"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mo>−</mo><mi>n</mi></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mrow><mo>−</mo><mi>n</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mi>x</mi></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi>n</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi>n</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mo>+</mo><mi>n</mi></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mo>+</mo><mi>n</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義するとこれは確かに連続で各点<math id="p10.m8" class="ltx_Math" alttext="x\in\mathbb{E}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>𝔼</mi></mrow></math>を固定する毎に<math id="p10.m9" class="ltx_Math" alttext="\displaystyle\lim_{n\to\infty}f_{n}(x)=x" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>となる。そして<math id="p10.m10" class="ltx_Math" alttext="\{g_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>を</p>
+<table id="S0.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex28.m1" class="ltx_Math" alttext="g_{n}(x,y)=f_{n}(x)f_{n}(y)" display="block"><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると、<math id="p10.m11" class="ltx_Math" alttext="\{f_{n}\}_{n\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>は<math id="p10.m12" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の値しか取り得ないので事実<a href="#Thmthm10" title="事実 10 (実数の積の連続性). ‣ 拡張された実数" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>から<math id="p10.m13" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math>は連続関数となり、
+<math id="p10.m14" class="ltx_Math" alttext="\displaystyle\lim_{n\to\infty}f_{n}(x)=x" display="inline"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>なので各点<math id="p10.m15" class="ltx_Math" alttext="(x,y)\in\mathbb{E}^{2}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mi>𝔼</mi><mn>2</mn></msup></mrow></math>を固定する毎に</p>
+<table id="S0.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex29.m1" class="ltx_Math" alttext="G_{n}(x,y)=xy" display="block"><mrow><mrow><msub><mi>G</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mi>y</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。これで命題の主張が全て示された。</p>
+</div>
+<div id="p11" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:49:41 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

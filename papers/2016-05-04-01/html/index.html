@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>積分の変数変公式の証明の概略</title>
+<!--Generated on Sun Jul 26 16:54:20 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2016-05-04-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>入射角16.225°の測度論入門:ω_0のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../omega-null.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">積分の変数変公式の証明の概略</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">一色三良(concious77)
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では積分の変数変換の公式の証明の概略を与える。ここでいう積分とはルベーグ積分である。</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">リーマン積分に関する変数変換の公式の証明はいくつかの文献に見られるが、そのどれもが煩雑でとても信用できないと私は思ったのでルベーグ積分で変換公式の証明をして見ようと思ったきっかけである。そもそも高次元のリーマン積分、特に広義積分は定義自体が煩雑で、これをわざわざ教えるくらいならさっさとルベーグ積分教えたほうが効率的なのでは？と思っている。この文章もその現れなのかもしれない。</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(Radon-Nikodym)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">可測空間<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="(X,\mathfrak{M})" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝔐</mi><mo stretchy="false">)</mo></mrow></math>上で定義された二つの正値<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\sigma-" display="inline"><mrow><mi>σ</mi><mo>−</mo></mrow></math>有限測度<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>と<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>について<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>は<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>について絶対連続、つまり<math id="Thmthm1.p1.m7" class="ltx_Math" alttext="\lambda\ll\mu" display="inline"><mrow><mi>λ</mi><mo>≪</mo><mi>μ</mi></mrow></math>であるとする。このとき<math id="Thmthm1.p1.m8" class="ltx_Math" alttext="(X,\mathfrak{M})" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝔐</mi><mo stretchy="false">)</mo></mrow></math>上の可測関数<math id="Thmthm1.p1.m9" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が存在し、すべての<math id="Thmthm1.p1.m10" class="ltx_Math" alttext="A\in\mathfrak{A}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi>𝔄</mi></mrow></math>について</span></p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="\lambda(A)=\int_{A}f\ d\mu" display="block"><mrow><mrow><mi>λ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たす。この<math id="Thmthm1.p1.m11" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を<math id="Thmthm1.p1.m12" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>の<math id="Thmthm1.p1.m13" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>に対するラドン・ニコディム微分という。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">可測空間<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="(X,\mathfrak{M})" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝔐</mi><mo stretchy="false">)</mo></mrow></math>上で定義された二つの正値<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\sigma-" display="inline"><mrow><mi>σ</mi><mo>−</mo></mrow></math>有限測度<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>と<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>について<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="(X,\mathfrak{M})" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝔐</mi><mo stretchy="false">)</mo></mrow></math>上の可測関数<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が存在し、すべての<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="A\in\mathfrak{A}" display="inline"><mrow><mi>A</mi><mo>∈</mo><mi>𝔄</mi></mrow></math>について</span></p>
+<table id="S0.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex2.m1" class="ltx_Math" alttext="\lambda(A)=\int_{A}f\ d\mu" display="block"><mrow><mrow><mi>λ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>A</mi></msub><mrow><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立っているとする。このとき<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="(X,\mathfrak{M},\lambda)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝔐</mi><mo>,</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow></math>上の可積分関数<math id="Thmthm2.p1.m9" class="ltx_Math" alttext="\phi" display="inline"><mi>ϕ</mi></math>について</span></p>
+<table id="S0.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex3.m1" class="ltx_Math" alttext="\int_{X}\phi\ d\lambda=\int_{X}\phi f\ d\mu" display="block"><mrow><mrow><msub><mo>∫</mo><mi>X</mi></msub><mrow><mi>ϕ</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>λ</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>X</mi></msub><mrow><mi>ϕ</mi><mo>⁢</mo><mi>f</mi><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる。</span></p>
+</div>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">以下では<math id="p3.m1" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>でルベーグ測度を表す。</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">以下に述べるルベーグの微分定理は今ではHardy-Littlewoodの極大関数の弱評価を用いて証明する方法が有名になっているが極大関数を用いない証明もある。いづれにせよVitaliの被覆定理などの被覆定理を援用しなければならないようである。</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold"> </span>(Lebesgueの微分定理その１)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="f\in L_{loc}^{1}(\mathbb{R}^{N})" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><msubsup><mi>L</mi><mrow><mi>l</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>c</mi></mrow><mn>1</mn></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>ℝ</mi><mi>N</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">について殆ど至る所の<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="x\in\mathbb{R}^{N}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>N</mi></msup></mrow></math>で</span></p>
+<table id="S0.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex4.m1" class="ltx_Math" alttext="\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}f(y)\ dm(y)=f(x)" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>0</mn></mrow></munder><mrow><mfrac><mn>1</mn><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。ここで<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="B(x,r)" display="inline"><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math>は中心が<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>で半径<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）</span></p>
+</div>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">この微分定理から次の二つの微分定理が得られるが、本文とは関係ない。</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 4</span></span><span class="ltx_text ltx_font_bold"> </span>(Lebesgueの微分定理その２)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="f\in L_{loc}^{1}(\mathbb{R}^{N})" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><msubsup><mi>L</mi><mrow><mi>l</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>c</mi></mrow><mn>1</mn></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>ℝ</mi><mi>N</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">について殆ど至る所の<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="x\in\mathbb{R}^{N}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>N</mi></msup></mrow></math>で</span></p>
+<table id="S0.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex5.m1" class="ltx_Math" alttext="\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}|f(y)-f(x)|\ dm(y)=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>0</mn></mrow></munder><mrow><mfrac><mn>1</mn><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msub><mo rspace="0em">∫</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。ここで<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="B(x,r)" display="inline"><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math>は中心が<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>で半径<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 5</span></span><span class="ltx_text ltx_font_bold"> </span>(Lebesgueの微分定理その3（<math id="Thmthm5.m1" class="ltx_Math" alttext="L^{p}版" display="inline"><mrow><msup><mi>L</mi><mi>p</mi></msup><mo>⁢</mo><mi mathvariant="normal">版</mi></mrow></math>）)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="1\leq p&lt;\infty" display="inline"><mrow><mn>1</mn><mo>≤</mo><mi>p</mi><mo>&lt;</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic">としたとき任意の
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="f\in L_{loc}^{p}(\mathbb{R}^{N})" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><msubsup><mi>L</mi><mrow><mi>l</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>c</mi></mrow><mi>p</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>ℝ</mi><mi>N</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について殆ど至る所の<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="x\in\mathbb{R}^{N}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>N</mi></msup></mrow></math>で</span></p>
+<table id="S0.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex6.m1" class="ltx_Math" alttext="\lim_{r\to 0}\frac{1}{m(B(x,r))}\int_{B(x,r)}|f(y)-f(x)|^{p}\ dm(y)=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>0</mn></mrow></munder><mrow><mfrac><mn>1</mn><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msub><mo rspace="0em">∫</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mrow><msup><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mi>p</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。ここで<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="B(x,r)" display="inline"><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math>は中心が<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>で半径<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の開球または、閉球を表す。（開球でも閉球でも定理は成り立つ。）</span></p>
+</div>
+</div>
+<div id="p6" class="ltx_para">
+<p class="ltx_p">この定理<a href="#Thmthm5" title="定理 5 (Lebesgueの微分定理その3（𝐿^𝑝⁢版）). ‣ 積分の変数変公式の証明の概略" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>は<math id="p6.m1" class="ltx_Math" alttext="\infty\geq p&gt;N" display="inline"><mrow><mi mathvariant="normal">∞</mi><mo>≥</mo><mi>p</mi><mo>&gt;</mo><mi>N</mi></mrow></math>のとき<math id="p6.m2" class="ltx_Math" alttext="W^{1,p}(\mathbb{R}^{N})" display="inline"><mrow><msup><mi>W</mi><mrow><mn>1</mn><mo>,</mo><mi>p</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>ℝ</mi><mi>N</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>の元は殆ど至る所微分可能というCalder<math id="p6.m3" class="ltx_Math" alttext="\acute{\textrm{o}}" display="inline"><mover accent="true"><mtext>o</mtext><mo>´</mo></mover></math>nの定理の証明でMorreyの不等式と合わせて効果的に用いられる。（このCalder<math id="p6.m4" class="ltx_Math" alttext="\acute{\textrm{o}}" display="inline"><mover accent="true"><mtext>o</mtext><mo>´</mo></mover></math>nの定理はリプシッツ関数が殆ど至る所微分可能であることを語るRademacherの定理の拡張になっている。）詳細な証明については<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>参照</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="U,V\subset\mathbb{R}^{N}" display="inline"><mrow><mrow><mi>U</mi><mo>,</mo><mi>V</mi></mrow><mo>⊂</mo><msup><mi>ℝ</mi><mi>N</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="\mathbb{R}^{N}" display="inline"><msup><mi>ℝ</mi><mi>N</mi></msup></math>の開集合とし、<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\Phi:U\to V" display="inline"><mrow><mi mathvariant="normal">Φ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>U</mi><mo stretchy="false">→</mo><mi>V</mi></mrow></mrow></math>を<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>球の微分同相写像とする。このとき</span></p>
+<table id="S0.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex7.m1" class="ltx_Math" alttext="\lim_{r\to 0}\frac{m(\Phi(B(x,r)))}{m(B(x,r))}=|\det J\Phi(x)|" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mo lspace="0em" movablelimits="false" rspace="0.167em">det</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。ここで<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="J\Phi(x)" display="inline"><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>とは点<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>における<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\Phi" display="inline"><mi mathvariant="normal">Φ</mi></math>のヤコビ行列である。</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ユークリッド空間の間の局所リプシッツ写像によるルベーグ測度に関する零集合の像はルベーグ測度に関する零集合である。</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold"> </span>(変数変換公式)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="U,V\subset\mathbb{R}^{N}" display="inline"><mrow><mrow><mi>U</mi><mo>,</mo><mi>V</mi></mrow><mo>⊂</mo><msup><mi>ℝ</mi><mi>N</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\mathbb{R}^{N}" display="inline"><msup><mi>ℝ</mi><mi>N</mi></msup></math>の開集合とし、<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="\Phi:U\to V" display="inline"><mrow><mi mathvariant="normal">Φ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>U</mi><mo stretchy="false">→</mo><mi>V</mi></mrow></mrow></math>を<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>球の微分同相写像とする。このとき<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>上の測度<math id="Thmthm8.p1.m6" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>を</span></p>
+<table id="S0.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex8.m1" class="ltx_Math" alttext="\mu(A)=m(\Phi(A))" display="block"><mrow><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">で定めると、<math id="Thmthm8.p1.m7" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>は<math id="Thmthm8.p1.m8" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>上のルベーグ測度<math id="Thmthm8.p1.m9" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>に関して絶対連続となり、そのラドン・ニコディム微分は<math id="Thmthm8.p1.m10" class="ltx_Math" alttext="|\det J\Phi(x)|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mo lspace="0em" rspace="0.167em">det</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></math>となる。従って<math id="Thmthm8.p1.m11" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>上の可積分関数<math id="Thmthm8.p1.m12" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に対して</span></p>
+<table id="S0.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex9.m1" class="ltx_Math" alttext="\int_{V}f(y)\ dm(y)=\int_{U}f(\Phi(x))d\mu(x)=\int_{U}f(\Phi(x))|\det J\Phi(x)%
+|\ dm(x)" display="block"><mrow><mrow><msub><mo>∫</mo><mi>V</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>U</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mi>U</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mo lspace="0em" movablelimits="false" rspace="0.167em">det</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。最左辺の<math id="Thmthm8.p1.m13" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>は<math id="Thmthm8.p1.m14" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>上のルベーグ測度である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p7" class="ltx_para">
+<p class="ltx_p">先の補題から<math id="p7.m1" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>が<math id="p7.m2" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>に関して絶対連続であることはすぐにわかる。（ところで<math id="p7.m3" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math>及び<math id="p7.m4" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>は<math id="p7.m5" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>有限なのでラドン・ニコディムの定理を適応できる。）ラドン・ニコディム微分を求めるには定理<a href="#Thmthm6" title="定理 6. ‣ 積分の変数変公式の証明の概略" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>と定理<a href="#Thmthm3" title="定理 3 (Lebesgueの微分定理その１). ‣ 積分の変数変公式の証明の概略" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>を用いれば良い。最後の公式は単関数近似と単調収束定理を用いれば<math id="p7.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が特性関数の場合に証明すればよいことが分かる。さて、集合<math id="p7.m7" class="ltx_Math" alttext="A\subset V" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>V</mi></mrow></math>について</p>
+<table id="S0.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex10.m1" class="ltx_Math" alttext="\chi_{A}(\Phi(x))=\chi_{\Phi^{-1}(A)}(x)" display="block"><mrow><mrow><msub><mi>χ</mi><mi>A</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>χ</mi><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が簡単にわかる。そして</p>
+<table id="S0.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex11.m1" class="ltx_Math" alttext="\displaystyle\int_{V}\chi_{A}\ dm(y)=m(A)=m(\Phi(\Phi^{-1}(A)))=\mu(\Phi^{-1}(%
+A))=\int_{U}\chi_{\Phi^{-1}(A)}(x)\ d\mu(x)" display="inline"><mrow><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>V</mi></msub></mstyle><mrow><msub><mi>χ</mi><mi>A</mi></msub><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>m</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>μ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>U</mi></msub></mstyle><mrow><msub><mi>χ</mi><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex12"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex12.m1" class="ltx_Math" alttext="\displaystyle=\int_{U}\chi_{A}(\Phi(x))\ d\mu(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>U</mi></msub></mstyle><mrow><msub><mi>χ</mi><mi>A</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>μ</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかり、あとは補題<a href="#Thmthm2" title="補題 2. ‣ 積分の変数変公式の証明の概略" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>から変換公式が従う。
+∎</p>
+</div>
+</div>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">竹之内脩,ルベーグ積分,培風館,現代数学レクチャーズB-7,1980
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">ユルゲン・ヨスト著,小谷元子訳,ポストモダン解析学,シュプリンガー・ジャパン,2009
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">J.Heinonen,Lectures on Analysis on Metric Spces,springer,UTX,2001
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">W.Rudin,Real and Complex Analysis second edition,McGraw-Hill, 1974
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 16:54:20 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

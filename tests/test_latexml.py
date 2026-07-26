@@ -13,6 +13,7 @@ from dempa_site.conversion.latexml import (
     _normalize_math_inside_text,
     _normalize_nocite_all,
     _normalize_quotient_relation,
+    has_document_title,
     run_latexml_trial,
     unconverted_tex_slugs,
     svg_findings,
@@ -153,7 +154,8 @@ class LaTeXMLTrialTest(unittest.TestCase):
             destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
             log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
             destination.write_text(
-                '<html><body><h1>LaTeXML試験</h1><div class="ltx_dates">(today)</div></body></html>',
+                '<html><body><h1 class="ltx_title ltx_title_document">LaTeXML試験</h1>'
+                '<div class="ltx_dates">(today)</div></body></html>',
                 encoding="utf-8",
             )
             log.write_text("conversion log", encoding="utf-8")
@@ -215,13 +217,29 @@ class LaTeXMLTrialTest(unittest.TestCase):
             findings,
         )
 
+    def test_document_title_need_not_equal_the_blog_card_title(self) -> None:
+        converted = (
+            '<html><body><h1 class="ltx_title ltx_title_document">'
+            "TeX内部の正式題名</h1></body></html>"
+        )
+        self.assertTrue(has_document_title(converted))
+        self.assertFalse(
+            has_document_title(
+                "<html><head><title>Untitled Document</title></head></html>"
+            )
+        )
+
     def test_warning_blocks_automatic_checks(self) -> None:
         def fake_run(command, **_kwargs):
             if "--VERSION" in command:
                 return subprocess.CompletedProcess(command, 0, "latexmlc version 0.8.8\n", "")
             destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
             log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
-            destination.write_text("<html><body>LaTeXML試験</body></html>", encoding="utf-8")
+            destination.write_text(
+                '<html><body><h1 class="ltx_title ltx_title_document">'
+                "LaTeXML試験</h1></body></html>",
+                encoding="utf-8",
+            )
             log.write_text("Warning:test A reviewable warning\n", encoding="utf-8")
             return subprocess.CompletedProcess(command, 0, "", "")
 
@@ -263,7 +281,8 @@ class LaTeXMLTrialTest(unittest.TestCase):
             destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
             log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
             destination.write_text(
-                '<html><body><h1>LaTeXML試験</h1><div class="ltx_dates">(today)</div>'
+                '<html><body><h1 class="ltx_title ltx_title_document">LaTeXML試験</h1>'
+                '<div class="ltx_dates">(today)</div>'
                 '<img src="" class="ltx_graphics ltx_missing ltx_missing_image"></body></html>',
                 encoding="utf-8",
             )
