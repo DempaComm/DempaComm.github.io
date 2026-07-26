@@ -14,9 +14,12 @@ LaTeXMLが直接対応していない文書クラスは、原稿を変更せず
 ## 導入
 
 ```sh
-brew install latexml
+brew install latexml poppler
 latexmlc --VERSION
+pdftoppm -v
 ```
+
+Popplerの `pdftoppm` は、原稿がPDFの特定ページを図として読み込む場合だけ使う。
 
 ## 代表4分類を変換する
 
@@ -39,7 +42,9 @@ python3 scripts/paper_tool.py latexml-trial
 
 変換には `--nocomments` を常に指定し、TeXコメントを派生HTMLへ残さない。`report.json` には
 変換元SHA-256、使用したbinding、題名保持、警告・エラー、`ltx_ERROR`、簡易個人情報検査、
-自動検査を通らなかった理由を記録する。
+自動検査を通らなかった理由を記録する。PDF図版は元TeXを書き換えず、指定ページだけを
+144 dpiのPNGへ変換する。変換したページ、出力名、表示幅も `report.json` に記録し、
+未変換の図が一枚でも残れば自動検査を不合格にする。
 
 原稿内の `\date` や `\today` が出力した日付は、変換後に
 `HTML変換日：YYYY年M月D日` へ置き換える。この日付はサイトのデプロイ日ではなく、実際に
@@ -69,8 +74,8 @@ python3 scripts/paper_tool.py latexml-trial 2015-08-28-01 \
 変換の成功だけでは公開承認にならない。公開には次節の目視確認と、独立した公開コマンドが必要になる。
 
 `automatic_checks_passed` が `true` になる条件は、LaTeXMLの警告・エラーがなく、生成HTMLに
-`ltx_ERROR` がなく、題名が保持され、簡易個人情報検査にも確認事項がないことである。この条件を
-満たしても、数式、定理番号、相互参照、内容を元PDFと目視比較するまで公開してはならない。
+`ltx_ERROR` と未変換図版がなく、題名が保持され、簡易個人情報検査にも確認事項がないことである。
+この条件を満たしても、数式、定理番号、相互参照、内容を元PDFと目視比較するまで公開してはならない。
 
 ## 単純なTeXの限定パイロット
 
@@ -120,3 +125,15 @@ python3 scripts/paper_tool.py publish-latexml 2015-08-28-01 \
 したがって一括自動公開へは進めない。日本語クラス用binding、画像変換依存、BibTeXの
 読み込み方法をそれぞれ調査し、原稿ごとに元PDFとの目視比較を続ける。自動検査と目視確認を
 ともに通過した原稿だけを、上記の限定公開手順で個別に追加する。
+
+## 図・相互参照原稿の改善結果
+
+「二次元以上の球面の基本群」では、次の二点を変換処理側で解決した。
+
+- `jsarticle` をHTMLの `article` 構造へ対応させる外置きbindingを追加した。
+- `Figures.pdf` の `page` 指定を読み、必要な6ページだけをPopplerでPNG化した。
+
+元TeXと元PDFは変更していない。2026-07-26の再試験ではLaTeXMLの警告・エラー、
+欠落図版、`ltx_ERROR`、簡易個人情報候補がすべて0となり、定理への相互参照もHTML内リンクとして
+保持された。試験結果は `_experiments/latexml-sphere-graphics-2/2024-01-08-01/index.html` で
+目視確認できる。公開承認はこのHTMLと元PDFを人が比較した後に行う。

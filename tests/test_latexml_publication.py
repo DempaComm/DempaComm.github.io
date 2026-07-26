@@ -73,6 +73,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
             encoding="utf-8",
         )
         (result_dir / "LaTeXML.css").write_text("/* LaTeXML */\n", encoding="utf-8")
+        (result_dir / "figure-01-page-2.png").write_bytes(b"png")
         (result_dir / "latexml.log").write_text("ok\n", encoding="utf-8")
         write_json(
             self.trial / "report.json",
@@ -108,7 +109,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
             trial_output=self.trial,
         )
 
-        self.assertEqual(2, publication.file_count)
+        self.assertEqual(3, publication.file_count)
         published = load_manifest(self.manifest_path, PaperToolError)
         self.assertIsNotNone(published.html_version)
         self.assertEqual("approved", published.html_version.status)
@@ -118,6 +119,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         self.assertIn('../../../styles.css', public_html)
         self.assertIn('id="main-content"', public_html)
         self.assertIn("HTML変換日：2026年7月26日", public_html)
+        self.assertTrue((self.paper_dir / "html" / "figure-01-page-2.png").is_file())
 
     def test_dynamic_markup_is_rejected_without_changing_the_paper(self) -> None:
         trial_html = self.trial / self.paper.slug / "index.html"

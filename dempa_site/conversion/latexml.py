@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import re
 import shutil
 import subprocess
@@ -25,6 +26,23 @@ class LaTeXMLTarget:
     category: str
 
 
+@dataclass(frozen=True)
+class PreparedGraphic:
+    source: str
+    page: int
+    output: str
+    width: str
+
+
+INCLUDE_GRAPHICS_PATTERN = re.compile(
+    r"\\includegraphics\s*(?:\[(?P<options>[^]]*)\])?\s*\{(?P<source>[^{}]+)\}"
+)
+MISSING_IMAGE_PATTERN = re.compile(
+    r'<img\b(?=[^>]*\bclass="[^"]*\bltx_missing_image\b)[^>]*>',
+    re.IGNORECASE,
+)
+
+
 def _binding_files(root: Path) -> tuple[Path, ...]:
     binding_dir = root / "experiments" / "latexml-bindings"
     if not binding_dir.is_dir():
@@ -40,6 +58,7 @@ def _blocking_reasons(
     has_error_markup: bool,
     title_present: bool,
     conversion_date_visible: bool,
+    missing_graphics: int,
     findings: list[str],
 ) -> list[str]:
     reasons = []
@@ -55,6 +74,8 @@ def _blocking_reasons(
         reasons.append("生成HTMLに原稿題名がありません")
     if not conversion_date_visible:
         reasons.append("生成HTMLにHTML変換日を表示できませんでした")
+    if missing_graphics:
+        reasons.append(f"生成HTMLに未変換の図版が{missing_graphics}件あります")
     if findings:
         reasons.append("生成HTMLの簡易個人情報検査に確認事項があります")
     return reasons
@@ -69,6 +90,130 @@ def _set_conversion_date(html_text: str, label: str) -> tuple[str, bool]:
     if body_pattern.search(html_text):
         return body_pattern.sub(rf"\1\n{replacement}", html_text, count=1), True
     return html_text, False
+
+
+def _without_tex_comments(source: str) -> str:
+    return "\n".join(re.sub(r"(?<!\\)%.*$", "", line) for line in source.splitlines())
+
+
+def _prepare_pdf_graphics(
+    source: Path, target_dir: Path, timeout: int
+) -> tuple[PreparedGraphic, ...]:
+    references = []
+    other_graphics = []
+    for match in INCLUDE_GRAPHICS_PATTERN.finditer(
+        _without_tex_comments(source.read_text(encoding="utf-8", errors="replace"))
+    ):
+        relative = safe_relative_path(match.group("source"), PaperToolError)
+        if relative.suffix.casefold() != ".pdf":
+            other_graphics.append(str(relative))
+            continue
+        options = match.group("options") or ""
+        page_match = re.search(r"(?:^|,)\s*page\s*=\s*(\d+)\s*(?:,|$)", options)
+        page = int(page_match.group(1)) if page_match else 1
+        width_match = re.search(
+            r"(?:^|,)\s*width\s*=\s*([0-9.]+(?:cm|mm|in|pt|px|em|rem|%))\s*(?:,|$)",
+            options,
+        )
+        width = width_match.group(1) if width_match else ""
+        references.append((relative, page, width))
+    if not references:
+        return ()
+    if other_graphics:
+        raise PaperToolError(
+            "PDFと他形式の図版が混在しているため自動画像化できません: "
+            + ", ".join(other_graphics)
+        )
+
+    converter = shutil.which("pdftoppm")
+    if converter is None:
+        raise PaperToolError(
+            "PDF図版のHTML変換にはpdftoppmが必要です。macOSでは `brew install poppler` で導入してください"
+        )
+    prepared_by_key: dict[tuple[Path, int], PreparedGraphic] = {}
+    prepared = []
+    for relative, page, width in references:
+        key = (relative, page)
+        graphic = prepared_by_key.get(key)
+        if graphic is None:
+            pdf_path = source.parent / relative
+            if not pdf_path.is_file():
+                raise PaperToolError(f"PDF図版がありません: {relative}")
+            output_name = f"figure-{len(prepared_by_key) + 1:02d}-page-{page}.png"
+            output_prefix = target_dir / output_name.removesuffix(".png")
+            completed = subprocess.run(
+                [
+                    converter,
+                    "-f",
+                    str(page),
+                    "-l",
+                    str(page),
+                    "-singlefile",
+                    "-png",
+                    "-r",
+                    "144",
+                    str(pdf_path),
+                    str(output_prefix),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                check=False,
+            )
+            output_path = target_dir / output_name
+            if completed.returncode != 0 or not output_path.is_file():
+                detail = (completed.stderr or completed.stdout).strip()
+                raise PaperToolError(
+                    f"PDF図版をPNGへ変換できません: {relative} page={page} {detail}"
+                )
+            graphic = PreparedGraphic(str(relative), page, output_name, "")
+            prepared_by_key[key] = graphic
+        prepared.append(
+            PreparedGraphic(graphic.source, graphic.page, graphic.output, width)
+        )
+    return tuple(prepared)
+
+
+def _insert_prepared_graphics(
+    html_text: str, graphics: tuple[PreparedGraphic, ...]
+) -> tuple[str, int]:
+    index = 0
+
+    def replace(match: re.Match[str]) -> str:
+        nonlocal index
+        if index >= len(graphics):
+            return match.group(0)
+        graphic = graphics[index]
+        index += 1
+        tag = match.group(0)
+        tag = re.sub(
+            r'src="[^"]*"',
+            f'src="{html.escape(graphic.output, quote=True)}"',
+            tag,
+            count=1,
+        )
+        class_match = re.search(r'class="([^"]*)"', tag)
+        if class_match:
+            classes = [
+                value
+                for value in class_match.group(1).split()
+                if value not in {"ltx_missing", "ltx_missing_image"}
+            ]
+            tag = (
+                tag[: class_match.start(1)]
+                + " ".join(classes)
+                + tag[class_match.end(1) :]
+            )
+        width = html.escape(graphic.width, quote=True)
+        sizing = f"width:{width};" if width else ""
+        tag = tag[:-1] + f' style="{sizing}max-width:100%;height:auto">'
+        return tag
+
+    converted = MISSING_IMAGE_PATTERN.sub(replace, html_text)
+    missing = len(MISSING_IMAGE_PATTERN.findall(converted))
+    if index != len(graphics):
+        missing += len(graphics) - index
+    return converted, missing
 
 
 def _tex_source(paper_dir: Path, paper: Paper) -> Path:
@@ -178,8 +323,13 @@ def run_latexml_trial(
         ]
         if binding_dir is not None:
             command.append(f"--path={binding_dir.resolve()}")
-        command.append(str(target.source.relative_to(target.paper_dir)))
+        graphics: tuple[PreparedGraphic, ...] = ()
+        missing_graphics = 0
         try:
+            graphics = _prepare_pdf_graphics(target.source, target_dir, timeout)
+            if graphics:
+                command.append("--nographicimages")
+            command.append(str(target.source.relative_to(target.paper_dir)))
             completed = subprocess.run(
                 command,
                 cwd=target.paper_dir,
@@ -195,6 +345,9 @@ def run_latexml_trial(
                 destination.read_text(encoding="utf-8", errors="replace")
                 if destination.is_file()
                 else ""
+            )
+            html_text, missing_graphics = _insert_prepared_graphics(
+                html_text, graphics
             )
             html_text, conversion_date_visible = _set_conversion_date(
                 html_text, conversion_date_label
@@ -213,14 +366,19 @@ def run_latexml_trial(
             else:
                 status = "generated"
             error = "" if status != "failed" else (completed.stderr or completed.stdout)[-4000:]
-        except subprocess.TimeoutExpired as exception:
+        except (PaperToolError, subprocess.TimeoutExpired) as exception:
             status = "failed"
-            error = f"Python側の制限時間を超過しました: {exception}"
+            error = (
+                str(exception)
+                if isinstance(exception, PaperToolError)
+                else f"Python側の制限時間を超過しました: {exception}"
+            )
             warning_count = 0
             error_count = 0
             has_error_markup = False
             title_present = False
             conversion_date_visible = False
+            missing_graphics = len(graphics)
             findings = []
         blocking_reasons = _blocking_reasons(
             status=status,
@@ -229,6 +387,7 @@ def run_latexml_trial(
             has_error_markup=has_error_markup,
             title_present=title_present,
             conversion_date_visible=conversion_date_visible,
+            missing_graphics=missing_graphics,
             findings=findings,
         )
         results.append(
@@ -247,6 +406,17 @@ def run_latexml_trial(
                 "title_present": title_present,
                 "html_conversion_date": conversion_date,
                 "html_conversion_date_visible": conversion_date_visible,
+                "graphics": [
+                    {
+                        "source": graphic.source,
+                        "page": graphic.page,
+                        "output": f"{target.paper.slug}/{graphic.output}",
+                        "converter": "pdftoppm",
+                        "width": graphic.width,
+                    }
+                    for graphic in graphics
+                ],
+                "missing_graphics": missing_graphics,
                 "privacy_findings": findings,
                 "comments_removed": True,
                 "automatic_checks_passed": not blocking_reasons,

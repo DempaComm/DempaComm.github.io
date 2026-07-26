@@ -140,6 +140,59 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertFalse(result["automatic_checks_passed"])
         self.assertEqual(["LaTeXML警告が1件あります"], result["blocking_reasons"])
 
+    def test_pdf_pages_are_rasterized_without_changing_the_tex_source(self) -> None:
+        source = self.paper.source_path.parent / "main.tex"
+        tex = (
+            "\\documentclass{article}\\begin{document}LaTeXML試験"
+            "\\includegraphics[width=12cm,page=2]{Figures.pdf}\\end{document}"
+        )
+        source.write_text(tex, encoding="utf-8")
+        (source.parent / "Figures.pdf").write_bytes(b"%PDF-test")
+        conversion_commands = []
+
+        def fake_which(name):
+            return f"/test/{name}"
+
+        def fake_run(command, **_kwargs):
+            if "--VERSION" in command:
+                return subprocess.CompletedProcess(command, 0, "latexmlc version 0.8.8\n", "")
+            if command[0] == "/test/pdftoppm":
+                Path(command[-1] + ".png").write_bytes(b"png")
+                return subprocess.CompletedProcess(command, 0, "", "")
+            conversion_commands.append(command)
+            destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
+            log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
+            destination.write_text(
+                '<html><body><h1>LaTeXML試験</h1><div class="ltx_dates">(today)</div>'
+                '<img src="" class="ltx_graphics ltx_missing ltx_missing_image"></body></html>',
+                encoding="utf-8",
+            )
+            log.write_text("conversion log", encoding="utf-8")
+            return subprocess.CompletedProcess(command, 0, "", "")
+
+        output = self.root / "graphics-trial"
+        with patch(
+            "dempa_site.conversion.latexml.shutil.which", side_effect=fake_which
+        ), patch("dempa_site.conversion.latexml.subprocess.run", side_effect=fake_run):
+            report = run_latexml_trial(
+                root=self.root,
+                papers=self.papers,
+                output=output,
+                requested_slugs=[self.paper.slug],
+            )
+
+        result = report["results"][0]
+        self.assertTrue(result["automatic_checks_passed"])
+        self.assertEqual(0, result["missing_graphics"])
+        self.assertEqual(2, result["graphics"][0]["page"])
+        self.assertIn("--nographicimages", conversion_commands[0])
+        converted = (output / self.paper.slug / "index.html").read_text(encoding="utf-8")
+        self.assertIn('src="figure-01-page-2.png"', converted)
+        self.assertIn('style="width:12cm;max-width:100%;height:auto"', converted)
+        self.assertNotIn("ltx_missing_image", converted)
+        self.assertTrue((output / self.paper.slug / "figure-01-page-2.png").is_file())
+        self.assertEqual(tex, source.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
