@@ -1,0 +1,1920 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>論文メモ — 至る所微分不可能な連続関数 —</title>
+<!--Generated on Sun Jul 26 19:29:43 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2023-12-24-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>論文メモ：連続だが至る所微分不可能な関数のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../undiff.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document" style="font-size:120%;">
+<span class="ltx_text" style="font-size:83%;">論文メモ
+
+<br class="ltx_break"></span>— 至る所微分不可能な連続関数 —
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では
+連続だが至る所微分不可能な関数に関する
+論文のメモである．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">このような関数について知りたい場合は
+大体
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib15" title="Continuous Nowhere Differentiable Functions" class="ltx_ref">31</a>]</cite>
+と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib29" title="Continuous nowhere differentiable functions" class="ltx_ref">14</a>]</cite>
+を読めばいいと思う．
+日本語だと
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx1" title="" class="ltx_ref">和1</a>]</cite>
+もとても良いと思う．</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">この文章はほぼ論文に関するメモ書きなのだが
+数学っぽい議論を読みたい場合には
+セクション<a href="#S2" title="2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+を読んでも良い．
+微分不可能関数の構成を行なっている．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>本文</h2>
+
+<section id="S1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.1 </span>リーマンの関数</h3>
+
+<div id="S1.SS1.p1" class="ltx_para">
+<p class="ltx_p">リーマンは関数</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="f(x)=\sum_{n=1}^{\infty}\frac{\sin(n^{2}x)}{n^{2}}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">について
+至る所微分不可能と
+言ったらしいが，
+結局いくつかの点では微分可能であることが証明されているようだ．
+リーマンの関数に関する論文は多分以下の通りである．
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib18" title="The differentiability of Fourier gap series and “Riemann’s example” of a continuous, nondifferentiable function" class="ltx_ref">19</a>]</cite>
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib23" title="Differentiability of Riemann’s function" class="ltx_ref">13</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib31" title="More on the differentiability of the Riemann function" class="ltx_ref">8</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib25" title="The differentiability of Riemann’s functions" class="ltx_ref">27</a>]</cite>,
+そして
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib24" title="Correction to: “The differentiability of Riemann’s function” [Proc. Amer. Math. Soc. 34 (1972), 463–468; MR0308337 (46 #7451)]" class="ltx_ref">28</a>]</cite>
+を参照のこと．</p>
+</div>
+</section>
+<section id="S1.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.2 </span>ワイエルストラスの関数</h3>
+
+<div id="S1.SS2.p1" class="ltx_para">
+<p class="ltx_p">ワイエルストラスの関数は
+以下の関数である．</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="f(x)=\sum_{n=0}^{\infty}a^{n}\cos(b^{n}\pi x)." display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mrow><msup><mi>a</mi><mi>n</mi></msup><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>b</mi><mi>n</mi></msup><mo>⁢</mo><mi>π</mi><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで<math id="S1.SS2.p1.m1" class="ltx_Math" alttext="a\in(0,1)" display="inline"><mrow><mi>a</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>
+であり，
+<math id="S1.SS2.p1.m2" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>は奇数である正の整数であり，
+さらに<math id="S1.SS2.p1.m3" class="ltx_Math" alttext="ab&gt;\frac{3}{2}\pi+1" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow><mo>&gt;</mo><mrow><mrow><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mn>1</mn></mrow></mrow></math>
+を満たすものである．例えば
+<math id="S1.SS2.p1.m4" class="ltx_Math" alttext="a=1/2" display="inline"><mrow><mi>a</mi><mo>=</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>で<math id="S1.SS2.p1.m5" class="ltx_Math" alttext="b=73" display="inline"><mrow><mi>b</mi><mo>=</mo><mn>73</mn></mrow></math>とすればこの条件を満たす．
+つまり</p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="f(x)=\sum_{n=0}^{\infty}\frac{\cos(73^{n}\pi x)}{2^{n}}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mn>73</mn><mi>n</mi></msup><mo>⁢</mo><mi>π</mi><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は連続だが至る所部分不可能な関数である．
+ワイエルストラスの関数はなんか反例として
+よく出てくるが，別にワイエルストラスが最初に
+こういう例を構成したわけではないらしい(1875に論文発表)．
+例えば
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib13" title="Ein einfaches Beispiel für eine Funktion, welche überall stetig und nicht differenzierbar ist" class="ltx_ref">18</a>]</cite>
+は1830年の論文でウィエルストラスより前らしい
+(今から数えると約200年前である)．
+数学書<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib14" title="Classics on fractals" class="ltx_ref">7</a>]</cite>
+にはワイエルストラスの原論文と
+Kiesswetterの原論文
+の
+英訳が載っている．
+これ以外にもなんか色々あったような気がする．
+そういう細かい話は参考文献
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib15" title="Continuous Nowhere Differentiable Functions" class="ltx_ref">31</a>]</cite>
+と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib29" title="Continuous nowhere differentiable functions" class="ltx_ref">14</a>]</cite>
+を参照のこと．</p>
+</div>
+<div id="S1.SS2.p2" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib19" title="Simple proofs of nowhere-differentiability for Weierstrass’s function and cases of slow growth" class="ltx_ref">16</a>]</cite>
+ではフーリエ級数みたいなフレーバーでワイエルストラス関数の
+微分不可能性を
+証明しているようだ．
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib26" title="Weierstrass’s non-differentiable function" class="ltx_ref">9</a>]</cite>
+ではワイエルストラスの関数の条件をちょっと改良したようだ．</p>
+</div>
+<div id="S1.SS2.p3" class="ltx_para">
+<p class="ltx_p">数学書
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib27" title="The theory of functions" class="ltx_ref">32</a>]</cite>
+にも証明が載っている．</p>
+</div>
+<div id="S1.SS2.p4" class="ltx_para">
+<p class="ltx_p">ワイエルストラス関数のグラフのハウスドルフ次元を計算する研究がある．
+例えば
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib21" title="Dimension of the graphs of the Weierstrass-type functions" class="ltx_ref">2</a>]</cite>
+や
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib1" title="The Hausdorff dimension of graphs of Weierstrass functions" class="ltx_ref">12</a>]</cite>
+などを参照のこと．</p>
+</div>
+<div id="S1.SS2.p5" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx5" title="" class="ltx_ref">和5</a>]</cite>
+にも原論文に沿った証明が紹介されている．</p>
+</div>
+</section>
+<section id="S1.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.3 </span>高木関数</h3>
+
+<div id="S1.SS3.p1" class="ltx_para">
+<p class="ltx_p">今連続関数<math id="S1.SS3.p1.m1" class="ltx_Math" alttext="s\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>s</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を
+<math id="S1.SS3.p1.m2" class="ltx_Math" alttext="s(x)=\inf_{n\in\mathbb{Z}}|x-n|" display="inline"><mrow><mrow><mi>s</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">inf</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℤ</mi></mrow></msub><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>n</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></math>と定義する．
+つまり<math id="S1.SS3.p1.m3" class="ltx_Math" alttext="s(x)" display="inline"><mrow><mi>s</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>は
+点<math id="S1.SS3.p1.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>と集合<math id="S1.SS3.p1.m5" class="ltx_Math" alttext="\mathbb{Z}" display="inline"><mi>ℤ</mi></math>の距離である．
+このとき高木関数<math id="S1.SS3.p1.m6" class="ltx_Math" alttext="t\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>t</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="t(x)=\sum_{n=0}^{\infty}\frac{s(2^{n}x)}{2^{n}}" display="block"><mrow><mrow><mi>t</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>s</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+高木貞治が構成したというこの
+至る所微分不可能な連続関数
+は大体以下の論文で
+触れられていると思う．
+論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib32" title="A simple example of the continuous function without derivative (誘導函數ヲ有セザル連續函數ノ簡單ナル例)" class="ltx_ref">30</a>]</cite>
+は高木の原論文で，
+有名な解析概論<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx4" title="" class="ltx_ref">和4</a>]</cite>
+の付録で高木関数が紹介されている．</p>
+</div>
+</section>
+<section id="S1.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.4 </span>その他</h3>
+
+<div id="S1.SS4.p1" class="ltx_para">
+<p class="ltx_p"><cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib16" title="Note sur les principes fondamentaux de l’analyse" class="ltx_ref">5</a>]</cite>
+でもそういう関数が扱われているようだがフランス語なので読めかった．
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib30" title="Differentiability and dimension of some fractal Fourier series" class="ltx_ref">6</a>]</cite>
+では
+<math id="S1.SS4.p1.m1" class="ltx_Math" alttext="\sum_{n=1}^{\infty}\frac{\exp(2\pi\sqrt{-1}n^{k}x)}{n^{\alpha}}" display="inline"><mrow><msubsup><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mfrac><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msqrt><mrow><mo>−</mo><mn>1</mn></mrow></msqrt><mo>⁢</mo><msup><mi>n</mi><mi>k</mi></msup><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msup><mi>n</mi><mi>α</mi></msup></mfrac></mrow></math>
+みたいな関数の可微分性やグラフの次元を考察しているようだ．</p>
+</div>
+<div id="S1.SS4.p2" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx3" title="" class="ltx_ref">和3</a>]</cite>
+では
+<math id="S1.SS4.p2.m1" class="ltx_Math" alttext="\sum_{n=1}^{\infty}\frac{\cos(n!x)}{n!}" display="inline"><mrow><msubsup><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>!</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>n</mi><mo>!</mo></mrow></mfrac></mrow></math>
+が至る所微分不可能という証明が載っているらしいことが
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx1" title="" class="ltx_ref">和1</a>]</cite>に書いているが
+ちょっと入手困難だった．</p>
+</div>
+</section>
+<section id="S1.SS5" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.5 </span>空間充填曲線</h3>
+
+<div id="S1.SS5.p1" class="ltx_para">
+<p class="ltx_p">空間充填曲線と可微分性は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx6" title="" class="ltx_ref">和6</a>]</cite>
+とか
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib9" title="Some reflections on the emergence of space-filling curves: the way it could have happened and should have happened, but did not happen" class="ltx_ref">23</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib8" title="An elementary proof that Schoenberg’s space-filling curve is nowhere differentiable" class="ltx_ref">24</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib10" title="Space-filling curves" class="ltx_ref">25</a>]</cite>
+を読めばいいと思う．
+ザーガンの本
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx6" title="" class="ltx_ref">和6</a>]</cite>によれば
+至る所微分可能な関数は
+空間充填曲線になり得ないことが証明されているらしい．
+また<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx6" title="" class="ltx_ref">和6</a>]</cite>ではカントール集合を除いて微分可能な
+空間充填曲線が紹介されている．</p>
+</div>
+</section>
+<section id="S1.SS6" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.6 </span>範疇定理</h3>
+
+<div id="S1.SS6.p1" class="ltx_para">
+<p class="ltx_p">至る所微分不可能な関数の存在性の
+範疇定理を使った証明は
+多分
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib5" title="Über die baire’sche kategorie gewisser funktionenmengen" class="ltx_ref">1</a>]</cite>
+と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib6" title="Sur les fonctions non dérivables" class="ltx_ref">21</a>]</cite>
+が最初だと思う．</p>
+</div>
+<div id="S1.SS6.p2" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib7" title="Über die differenzierbarkeit stetiger funktionen" class="ltx_ref">15</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib2" title="A note on a residual subset of Lipschitz functions on metric spaces" class="ltx_ref">4</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib3" title="The set of continuous nowhere differentiable functions" class="ltx_ref">20</a>]</cite>
+なども参照のこと．</p>
+</div>
+<div id="S1.SS6.p3" class="ltx_para">
+<p class="ltx_p">多分
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib4" title="On the functions of besicovitch in the space of continuous functions" class="ltx_ref">26</a>]</cite>
+も関係ある．</p>
+</div>
+<div id="S1.SS6.p4" class="ltx_para">
+<p class="ltx_p">有名な方法なので一般の数学書にも記述がある．
+数学書
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib17" title="A primer of real functions" class="ltx_ref">3</a>]</cite>
+にも記述がある．</p>
+</div>
+</section>
+<section id="S1.SS7" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.7 </span>追記</h3>
+
+<div id="S1.SS7.p1" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib11" title="Every separable Banach space is isometric to a space of continuous nowhere differentiable functions" class="ltx_ref">22</a>]</cite>
+では
+任意の可分距離空間を
+<math id="S1.SS7.p1.m1" class="ltx_Math" alttext="C[0,1]" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>内の至る所微分不可能な関数の集合に
+等長に埋め込めることが証明されている．
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib12" title="Isometrical embeddings of separable Banach spaces into the set of nowhere approximatively differentiable and nowhere Hölder functions" class="ltx_ref">10</a>]</cite>
+も参照のこと．</p>
+</div>
+<div id="S1.SS7.p2" class="ltx_para">
+<p class="ltx_p">これ以外にも色々
+文献はあると思うが，
+これらの論文が引用している論文や，
+これらの論文を引用している論文を調べるといいと思う．</p>
+</div>
+</section>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Appendix</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">せっかくだし実数上に連続だが
+微分不可能な関数が存在することを証明しよう．
+講究録
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx5" title="" class="ltx_ref">和5</a>]</cite>や
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#biba.bib15" title="Continuous Nowhere Differentiable Functions" class="ltx_ref">31</a>]</cite>に記述されている
+ワイエルストラスの方法などは
+可微分性に関してかなりギリギリを攻めているような嫌いがある．
+それは底が異なる指数関数の増大度を使って頑張っているということだが
+急増加数列を使って
+オリジナルの方法をゆるゆる
+にしてみたものが以下である．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(怠け者のためのワイエルストラス関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">数列
+<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="\{r_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>r</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+と
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\{h_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+は
+正の実数列とし，以下の条件を満たすとする．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の収束が成り立つ．</span></p>
+<table id="S2.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex5.m1" class="ltx_Math" alttext="\sum_{i=0}^{\infty}\frac{1}{r_{i}}&lt;\infty" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><msub><mi>r</mi><mi>i</mi></msub></mfrac></mrow><mo>&lt;</mo><mi mathvariant="normal">∞</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">各
+</span><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">は奇数であるような整数であり，なおかつ任意の</span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S2.I1.i2.p1.m3" class="ltx_Math" alttext="h_{n+1}" display="inline"><msub><mi>h</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></math><span class="ltx_text ltx_font_italic">は</span><math id="S2.I1.i2.p1.m4" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">で割り切れる．
+特に，</span><math id="S2.I1.i2.p1.m5" class="ltx_Math" alttext="m&gt;n" display="inline"><mrow><mi>m</mi><mo>&gt;</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic">のとき</span><math id="S2.I1.i2.p1.m6" class="ltx_Math" alttext="h_{m}" display="inline"><msub><mi>h</mi><mi>m</mi></msub></math><span class="ltx_text ltx_font_italic">は</span><math id="S2.I1.i2.p1.m7" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">の奇数倍である．</span></p>
+</div>
+</li>
+<li id="S2.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A3)</span> 
+<div id="S2.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の発散が成り立つ．</span></p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="\lim_{k\to\infty}\left(\frac{2}{\pi}\frac{h_{k}}{r_{k}}-\sum_{n=0}^{k-1}\frac{%
+h_{n}}{r_{n}}\right)=\infty." display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>k</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mo lspace="0em">(</mo><mrow><mrow><mfrac><mn>2</mn><mi>π</mi></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>n</mi></msub><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∞</mi></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき
+以下で定義される関数<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="f\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+は<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上連続だが，全ての点において微分不可能である．</span></p>
+<table id="Sx1.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex7.m1" class="ltx_Math" alttext="\displaystyle f(x)=\sum_{i=0}^{\infty}\frac{\cos(h_{n}x)}{r_{n}}." display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">まず条件
+<a href="#S2.I1.i1" title="item (A1) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A1)</span></a>
+と
+<math id="S2.p2.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>テストから
+<math id="S2.p2.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が連続であることがわかる．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">今から<math id="S2.p3.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が至るところで
+可微分ではないことを
+証明しよう．
+点
+<math id="S2.p3.m2" class="ltx_Math" alttext="p\in\mathbb{R}" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>を任意に固定する．
+そして各<math id="S2.p3.m3" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+に対して<math id="S2.p3.m4" class="ltx_Math" alttext="L_{k}\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><msub><mi>L</mi><mi>k</mi></msub><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を
+<math id="S2.p3.m5" class="ltx_Math" alttext="\frac{h_{k}p}{\pi}" display="inline"><mfrac><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mi>π</mi></mfrac></math>
+に一番距離が近い整数とし，
+<math id="S2.p3.m6" class="ltx_Math" alttext="u_{k}" display="inline"><msub><mi>u</mi><mi>k</mi></msub></math>は<math id="S2.p3.m7" class="ltx_Math" alttext="\frac{h_{k}p}{\pi}-L_{k}" display="inline"><mrow><mfrac><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mi>π</mi></mfrac><mo>−</mo><msub><mi>L</mi><mi>k</mi></msub></mrow></math>
+とする．このとき
+<math id="S2.p3.m8" class="ltx_Math" alttext="L_{k}" display="inline"><msub><mi>L</mi><mi>k</mi></msub></math>の定義から
+<math id="S2.p3.m9" class="ltx_Math" alttext="|u_{k}|\leq 1/2" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>である．つまり</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="h_{k}p=(L_{k}+u_{k})\pi" display="block"><mrow><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>L</mi><mi>k</mi></msub><mo>+</mo><msub><mi>u</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>π</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と
+<math id="S2.p3.m10" class="ltx_Math" alttext="|u_{n}|\leq 1/2" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>n</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>
+が成り立つような<math id="S2.p3.m11" class="ltx_Math" alttext="L_{k}" display="inline"><msub><mi>L</mi><mi>k</mi></msub></math>
+と
+<math id="S2.p3.m12" class="ltx_Math" alttext="u_{n}" display="inline"><msub><mi>u</mi><mi>n</mi></msub></math>をとる．
+そして<math id="S2.p3.m13" class="ltx_Math" alttext="x_{n}\in\mathbb{R}" display="inline"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>∈</mo><mi>ℝ</mi></mrow></math>を</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="x_{n}=\frac{1}{h_{n}}(L_{n}+1)\pi" display="block"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mrow><mfrac><mn>1</mn><msub><mi>h</mi><mi>n</mi></msub></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>π</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+もちろんこのとき</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="h_{n}x_{n}=L_{n}\pi+\pi=(L_{n}+1)\pi" display="block"><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mi>π</mi></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>π</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+このとき<math id="S2.p3.m14" class="ltx_Math" alttext="|u_{k}|\leq 1/2" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>
+から<math id="S2.p3.m15" class="ltx_Math" alttext="x_{k}\neq p" display="inline"><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>≠</mo><mi>p</mi></mrow></math>であることに注意しよう．
+また
+定義式から
+<math id="S2.p3.m16" class="ltx_Math" alttext="n\to\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき
+<math id="S2.p3.m17" class="ltx_Math" alttext="|x_{n}-a|\to 0" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">|</mo></mrow><mo stretchy="false">→</mo><mn>0</mn></mrow></math>
+が成り立つ．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">今<math id="S2.p4.m1" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を任意に固定して</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="S_{k}=\sum_{n=0}^{k-1}\frac{\cos(h_{n}x)-\cos(h_{n}a)}{r_{n}}" display="block"><mrow><msub><mi>S</mi><mi>k</mi></msub><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="T_{k}=\sum_{n=k}^{\infty}\frac{\cos(h_{n}x)-\cos(h_{n}a)}{r_{n}}" display="block"><mrow><msub><mi>T</mi><mi>k</mi></msub><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mi>k</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると
+<math id="S2.p4.m2" class="ltx_Math" alttext="f(x_{k})-f(a)=S_{k}+T_{k}" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>S</mi><mi>k</mi></msub><mo>+</mo><msub><mi>T</mi><mi>k</mi></msub></mrow></mrow></math>
+となる．
+これから<math id="S2.p4.m3" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>を上から評価し
+<math id="S2.p4.m4" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>
+を下から評価していこう．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">まずは<math id="S2.p5.m1" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>
+を評価する．
+平均値の定理と
+任意の<math id="S2.p5.m2" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>に関する不等式<math id="S2.p5.m3" class="ltx_Math" alttext="|\sin(x)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>を使うと
+関数<math id="S2.p5.m4" class="ltx_Math" alttext="\cos(x)" display="inline"><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.p5.m5" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>-Lipschitz
+であることがわかる．よって</p>
+<table id="Sx1.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex13"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\displaystyle|S_{k}|\leq\sum_{n=0}^{k-1}\frac{|\cos(h_{n}x_{k})-\cos(h_{n}p)|}%
+{r_{i}}\leq\sum_{n=0}^{k-1}\frac{|h_{n}x_{k}-h_{n}p|}{r_{i}}=\sum_{n=0}^{k-1}%
+\frac{h_{i}|x-p|}{r_{n}}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mi>r</mi><mi>i</mi></msub></mfrac></mstyle></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo>−</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mi>r</mi><mi>i</mi></msub></mfrac></mstyle></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+このことから</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="\left|S_{k}\right|\leq|x_{k}-p|\cdot\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}," display="block"><mrow><mrow><mrow><mo>|</mo><msub><mi>S</mi><mi>k</mi></msub><mo>|</mo></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.055em">⋅</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>i</mi></msub><msub><mi>r</mi><mi>i</mi></msub></mfrac></mrow></mrow></mrow><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+つまり</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\frac{\left|S_{k}\right|}{|x_{k}-p|}\leq\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}" display="block"><mrow><mfrac><mrow><mo>|</mo><msub><mi>S</mi><mi>k</mi></msub><mo>|</mo></mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo rspace="0.111em">≤</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>i</mi></msub><msub><mi>r</mi><mi>i</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p6.m1" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>を下から評価する．さて，
+<math id="S2.p6.m2" class="ltx_Math" alttext="k\leq n" display="inline"><mrow><mi>k</mi><mo>≤</mo><mi>n</mi></mrow></math>となる<math id="S2.p6.m3" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について
+<math id="S2.p6.m4" class="ltx_Math" alttext="I_{k}=h_{n}/h_{k}" display="inline"><mrow><msub><mi>I</mi><mi>k</mi></msub><mo>=</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>/</mo><msub><mi>h</mi><mi>k</mi></msub></mrow></mrow></math>
+とすると仮定
+<a href="#S2.I1.i2" title="item (A2) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>
+から<math id="S2.p6.m5" class="ltx_Math" alttext="I_{n}" display="inline"><msub><mi>I</mi><mi>n</mi></msub></math>は奇数であるような整数になる．
+よって</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="h_{n}p=I_{n}h_{k}p=I_{n}L_{k}\pi+I_{n}u_{k}\pi" display="block"><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo>=</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo>=</mo><mrow><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>L</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">かつ</p>
+<table id="S2.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex17.m1" class="ltx_Math" alttext="h_{n}x_{k}=I_{n}h_{k}x_{k}=I_{n}(L_{k}+1)\pi" display="block"><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo>=</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo>=</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>L</mi><mi>k</mi></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>π</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+ゆえに，
+加法定理と<math id="S2.p6.m6" class="ltx_Math" alttext="I_{n}" display="inline"><msub><mi>I</mi><mi>n</mi></msub></math>が奇数であることから</p>
+<table id="Sx1.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex18"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex18.m1" class="ltx_Math" alttext="\displaystyle\cos(h_{n}p)=(-1)^{L_{k}I_{n}}\cos(I_{n}u_{k}\pi)=(-1)^{L_{k}}%
+\cos(I_{n}u_{k}\pi)" display="inline"><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><msub><mi>L</mi><mi>k</mi></msub><mo>⁢</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></msup><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><msub><mi>L</mi><mi>k</mi></msub></msup><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">かつ</p>
+<table id="Sx1.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex19"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex19.m1" class="ltx_Math" alttext="\displaystyle\cos(h_{n}x_{k})=(-1)^{(L_{n}+1)I_{n}}\cos(0)=(-1)^{L_{n}+1}" display="inline"><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></msup><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+よって<math id="S2.p6.m7" class="ltx_Math" alttext="k\leq n" display="inline"><mrow><mi>k</mi><mo>≤</mo><mi>n</mi></mrow></math>となる<math id="S2.p6.m8" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="Sx1.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex20"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex20.m1" class="ltx_Math" alttext="\displaystyle\frac{\cos(h_{n}x_{k})-\cos(h_{n}p)}{r_{n}}=\frac{(-1)^{L_{n}+1}-%
+(-1)^{L_{n}}\cos(I_{n}u_{k}\pi)}{r_{n}}=(-1)^{L_{n}+1}\times\frac{1+\cos(I_{n}%
+u_{k}\pi)}{r_{n}}" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><msub><mi>L</mi><mi>n</mi></msub></msup><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow></msup><mo rspace="0.222em">×</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+このことと，
+任意の<math id="S2.p6.m9" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>
+について
+<math id="S2.p6.m10" class="ltx_Math" alttext="1+\cos(x)\geq 0" display="inline"><mrow><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math>
+であることから</p>
+<table id="Sx1.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex21"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex21.m1" class="ltx_Math" alttext="\displaystyle|T_{k}|=\left|(-1)^{L_{n}+1}\sum_{n=k}^{\infty}\frac{1+\cos(I_{n}%
+u_{k}\pi)}{r_{n}}\right|=\sum_{n=k}^{\infty}\frac{1+\cos(I_{n}u_{k}\pi)}{r_{n}}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo>|</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mi>k</mi></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow><mo>|</mo></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mi>k</mi></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる(非負の数の和なので絶対値がちゃんと外れてくれる)．
+級数の各項は非負なのでさらに</p>
+<table id="Sx1.EGx7" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex22"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex22.m1" class="ltx_Math" alttext="\displaystyle\sum_{i=k}^{\infty}\frac{1+\cos(I_{n}u_{k}\pi)}{r_{n}}\geq\frac{1%
++\cos(u_{k}\pi)}{r_{k}}" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mi>k</mi></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow><mo>≥</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>k</mi></msub></mfrac></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+ここで
+<math id="S2.p6.m11" class="ltx_Math" alttext="|u_{k}|\leq 1/2" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>なので
+<math id="S2.p6.m12" class="ltx_Math" alttext="\cos(u_{k}\pi)\geq 0" display="inline"><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math>となる．
+ゆえに</p>
+<table id="Sx1.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex23"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex23.m1" class="ltx_Math" alttext="\displaystyle\frac{1+\cos(u_{k}\pi)}{r_{k}}\geq\frac{1}{r_{k}}." display="inline"><mrow><mrow><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>k</mi></msub></mfrac></mstyle><mo>≥</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac></mstyle></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+以上で述べた不等式から
+<math id="S2.p6.m13" class="ltx_Math" alttext="|T_{k}|\geq 1/r_{k}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><mn>1</mn><mo>/</mo><msub><mi>r</mi><mi>k</mi></msub></mrow></mrow></math>
+を導くことができる．
+ここで<math id="S2.p6.m14" class="ltx_Math" alttext="|u_{k}|\leq 1/2" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></mrow></math>
+なので</p>
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex24.m1" class="ltx_Math" alttext="|x_{h}-p|=\frac{1}{h_{n}}|u_{n}-1|\pi\leq\frac{\pi}{2h_{k}}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>h</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><msub><mi>h</mi><mi>n</mi></msub></mfrac><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><msub><mi>u</mi><mi>n</mi></msub><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mi>π</mi></mrow><mo>≤</mo><mfrac><mi>π</mi><mrow><mn>2</mn><mo>⁢</mo><msub><mi>h</mi><mi>k</mi></msub></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+よって</p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex25.m1" class="ltx_Math" alttext="\frac{|T_{k}|}{|x_{k}-p|}\geq\frac{2}{\pi}\frac{h_{k}}{r_{k}}" display="block"><mrow><mfrac><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo>≥</mo><mrow><mfrac><mn>2</mn><mi>π</mi></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">数<math id="S2.p7.m1" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+の任意性，
+以上の<math id="S2.p7.m2" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>と
+<math id="S2.p7.m3" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>の評価と，
+三角不等式</p>
+<table id="S2.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex26.m1" class="ltx_Math" alttext="|f(x_{k})-f(p)|\geq|T_{k}|-|S_{k}|" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を用いると，任意の<math id="S2.p7.m4" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="S2.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex27.m1" class="ltx_Math" alttext="\left|\frac{f(x_{k})-f(a)}{x_{k}-a}\right|\geq\frac{1}{|x_{k}-p|}(|T_{k}|-|S_{%
+k}|)\geq\frac{2}{\pi}\frac{h_{k}}{r_{k}}-\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}" display="block"><mrow><mrow><mo>|</mo><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>a</mi></mrow></mfrac><mo>|</mo></mrow><mo>≥</mo><mrow><mfrac><mn>1</mn><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mrow><mrow><mfrac><mn>2</mn><mi>π</mi></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>n</mi></msub><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+仮定
+<a href="#S2.I1.i3" title="item (A3) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A3)</span></a>
+から
+<math id="S2.p7.m5" class="ltx_Math" alttext="k\to\infty" display="inline"><mrow><mi>k</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>
+のとき</p>
+<table id="S2.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex28.m1" class="ltx_Math" alttext="\left|\frac{f(x_{k})-f(p)}{x_{k}-p}\right|\to\infty" display="block"><mrow><mrow><mo>|</mo><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow></mfrac><mo>|</mo></mrow><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+つまり<math id="S2.p7.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は
+<math id="S2.p7.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>で微分不可能である．
+点
+<math id="S2.p7.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の任意性から
+<math id="S2.p7.m9" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+は至る所微分不可能であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">定理
+<a href="#Thmthm1" title="定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>の
+仮定
+<a href="#S2.I1.i1" title="item (A1) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A1)</span></a>,
+<a href="#S2.I1.i2" title="item (A2) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>,
+<a href="#S2.I1.i3" title="item (A3) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A3)</span></a>
+を満たす数列<math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math>
+と<math id="Thmrmkx1.p1.m2" class="ltx_Math" alttext="r_{n}" display="inline"><msub><mi>r</mi><mi>n</mi></msub></math>は存在する．
+例えば以下のような例がある．</span></p>
+<ol id="S2.I2" class="ltx_enumerate">
+<li id="S2.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i1.p1.m1" class="ltx_Math" alttext="r_{n}=(n+1)^{2}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I2.i1.p1.m2" class="ltx_Math" alttext="h_{n}=(2n+1)!!\times 3^{n}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo rspace="0.055em">!!</mo></mrow><mo rspace="0.222em">×</mo><msup><mn>3</mn><mi>n</mi></msup></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i2.p1.m1" class="ltx_Math" alttext="r_{n}=(n+1)^{2}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I2.i2.p1.m2" class="ltx_Math" alttext="h_{n}=3^{3^{n}}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mn>3</mn><msup><mn>3</mn><mi>n</mi></msup></msup></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i3.p1.m1" class="ltx_Math" alttext="r_{n}=2^{n}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mn>2</mn><mi>n</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I2.i3.p1.m2" class="ltx_Math" alttext="h_{n}=5^{n^{2}}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mn>5</mn><msup><mi>n</mi><mn>2</mn></msup></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+ここで</span><math id="S2.I2.i3.p1.m3" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math><span class="ltx_text ltx_font_italic">と</span><math id="S2.I2.i3.p1.m4" class="ltx_Math" alttext="5" display="inline"><mn>5</mn></math><span class="ltx_text ltx_font_italic">というのは意味がある．
+これらの数字は</span><math id="S2.I2.i3.p1.m5" class="ltx_Math" alttext="2\times 2&lt;5" display="inline"><mrow><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>2</mn></mrow><mo>&lt;</mo><mn>5</mn></mrow></math><span class="ltx_text ltx_font_italic">
+であることが重要である．</span></p>
+</div>
+</li>
+<li id="S2.I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I2.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i4.p1.m1" class="ltx_Math" alttext="h_{n}=3\mathbin{\uparrow\uparrow}(2n+1)" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><mrow><mn>3</mn><mrow><mi></mi><mo rspace="0em" stretchy="false">↑</mo><mo lspace="0em" stretchy="false">↑</mo></mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I2.i4.p1.m2" class="ltx_Math" alttext="r_{n}=3\mathbin{\uparrow\uparrow}(2n)" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><mrow><mn>3</mn><mrow><mi></mi><mo rspace="0em" stretchy="false">↑</mo><mo lspace="0em" stretchy="false">↑</mo></mrow><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">,
+ここで</span><math id="S2.I2.i4.p1.m3" class="ltx_Math" alttext="\mathbin{\uparrow\uparrow}" display="inline"><mrow><mi></mi><mo rspace="0em" stretchy="false">↑</mo><mo lspace="0em" stretchy="false">↑</mo></mrow></math><span class="ltx_text ltx_font_italic">
+はクヌースの二重矢印である．</span></p>
+</div>
+</li>
+<li id="S2.I2.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(5)</span> 
+<div id="S2.I2.i5.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i5.p1.m1" class="ltx_Math" alttext="r_{n}" display="inline"><msub><mi>r</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">を仮定</span><a href="#S2.I1.i1" title="item (A1) ‣ 定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(A1)</span></a><span class="ltx_text ltx_font_italic">
+を満たす関数とし，
+</span><math id="S2.I2.i5.p1.m2" class="ltx_Math" alttext="h_{n}=3^{3^{\lfloor r_{n}\rfloor}}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mn>3</mn><msup><mn>3</mn><mrow><mo stretchy="false">⌊</mo><msub><mi>r</mi><mi>n</mi></msub><mo stretchy="false">⌋</mo></mrow></msup></msup></mrow></math><span class="ltx_text ltx_font_italic">とする．</span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">よって連続関数で至る所微分不可能な関数が存在することがわかる．
+特に例えば</span></p>
+<table id="S2.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex29.m1" class="ltx_Math" alttext="\sum_{n=0}^{\infty}\frac{\cos\left(5^{n^{2}}x\right)}{2^{n}}" display="block"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><msup><mn>5</mn><msup><mi>n</mi><mn>2</mn></msup></msup><mo>⁢</mo><mi>x</mi></mrow><mo>)</mo></mrow></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">などはそうである．</span></p>
+</div>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">以上の定理
+<a href="#Thmthm1" title="定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>
+では賢く<math id="S2.p8.m1" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math>が奇数であることをたくみに用いて
+<math id="S2.p8.m2" class="ltx_Math" alttext="T_{k}" display="inline"><msub><mi>T</mi><mi>k</mi></msub></math>の下からの評価をしており，すごいけどめんどくさい．よってもっとガバガバにしよう．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 2</span></span><span class="ltx_text ltx_font_bold"> </span>(ものぐさワイエルストラス関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">正の実数からなる二つの数列
+<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="\{h_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>と
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\{r_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>r</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>，
+及び正の実数<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は以下の条件を満たすとする．</span></p>
+<ol id="S2.I3" class="ltx_enumerate">
+<li id="S2.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(B1)</span> 
+<div id="S2.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の収束が成り立つ</span></p>
+<table id="S2.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex30.m1" class="ltx_Math" alttext="\sum_{n=0}^{\infty}\frac{1}{r_{n}}&lt;\infty." display="block"><mrow><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow><mo>&lt;</mo><mi mathvariant="normal">∞</mi></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(B2)</span> 
+<div id="S2.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">整数</span><math id="S2.I3.i2.p1.m1" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して</span><math id="S2.I3.i2.p1.m2" class="ltx_Math" alttext="k\geq N" display="inline"><mrow><mi>k</mi><mo>≥</mo><mi>N</mi></mrow></math><span class="ltx_text ltx_font_italic">ならば
+以下の不等式が成り立つ</span></p>
+<table id="S2.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex31.m1" class="ltx_Math" alttext="\frac{1}{r_{k}}-\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}\geq C\cdot\frac{1}{r_{k}}." display="block"><mrow><mrow><mrow><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mn>2</mn><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow><mo>≥</mo><mrow><mi>C</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">この不等式から</span><math id="S2.I3.i2.p1.m3" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math><span class="ltx_text ltx_font_italic">は結構小さい正の数であることがわかる．</span></p>
+</div>
+</li>
+<li id="S2.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(B3)</span> 
+<div id="S2.I3.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i3.p1.m1" class="ltx_Math" alttext="k\to\infty" display="inline"><mrow><mi>k</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math><span class="ltx_text ltx_font_italic">のとき</span></p>
+<table id="S2.Ex32" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex32.m1" class="ltx_Math" alttext="\frac{C}{100}\frac{h_{k}}{r_{k}}-\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}\to\infty" display="block"><mrow><mrow><mrow><mfrac><mi>C</mi><mn>100</mn></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>n</mi></msub><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">である．</span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき
+以下で定義される関数<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="f\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+は<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上連続だが，全ての点において微分不可能である．</span></p>
+<table id="Sx1.EGx9" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex33"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex33.m1" class="ltx_Math" alttext="\displaystyle f(x)=\sum_{i=0}^{\infty}\frac{\cos(h_{n}x)}{r_{n}}." display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">まず条件
+<a href="#S2.I3.i1" title="item (B1) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B1)</span></a>
+と
+<math id="S2.p9.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>テストから
+<math id="S2.p9.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が連続であることがわかる．</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">今から<math id="S2.p10.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が至るところで
+可微分ではないことを
+証明しよう．
+点
+<math id="S2.p10.m2" class="ltx_Math" alttext="p\in\mathbb{R}" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>を任意に固定する．
+そして各<math id="S2.p10.m3" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+に対して<math id="S2.p10.m4" class="ltx_Math" alttext="L_{k}\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><msub><mi>L</mi><mi>k</mi></msub><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を
+<math id="S2.p10.m5" class="ltx_Math" alttext="\frac{h_{k}p}{2\pi}" display="inline"><mfrac><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac></math>
+に一番距離が近い整数とし，
+<math id="S2.p10.m6" class="ltx_Math" alttext="u_{k}" display="inline"><msub><mi>u</mi><mi>k</mi></msub></math>は<math id="S2.p10.m7" class="ltx_Math" alttext="\frac{h_{k}p}{2\pi}-L_{k}" display="inline"><mrow><mfrac><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>−</mo><msub><mi>L</mi><mi>k</mi></msub></mrow></math>
+とする．このとき
+<math id="S2.p10.m8" class="ltx_Math" alttext="L_{k}" display="inline"><msub><mi>L</mi><mi>k</mi></msub></math>の定義から
+<math id="S2.p10.m9" class="ltx_Math" alttext="|u_{k}|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>である．つまり</p>
+<table id="S2.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex34.m1" class="ltx_Math" alttext="h_{k}p=2L_{k}\pi+2u_{k}\pi" display="block"><mrow><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo>=</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>L</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mrow><mn>2</mn><mo>⁢</mo><msub><mi>u</mi><mi>k</mi></msub><mo>⁢</mo><mi>π</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と
+<math id="S2.p10.m10" class="ltx_Math" alttext="|u_{n}|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>n</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+が成り立つような<math id="S2.p10.m11" class="ltx_Math" alttext="L_{k}" display="inline"><msub><mi>L</mi><mi>k</mi></msub></math>
+と
+<math id="S2.p10.m12" class="ltx_Math" alttext="u_{n}" display="inline"><msub><mi>u</mi><mi>n</mi></msub></math>をとる(定理<a href="#Thmthm1" title="定理 1 (怠け者のためのワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>と取り方が異なることに注意しよう)．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">さて今<math id="S2.p11.m1" class="ltx_Math" alttext="q\in\mathbb{R}" display="inline"><mrow><mi>q</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>
+を固定して関数
+<math id="S2.p11.m2" class="ltx_Math" alttext="g\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を<math id="S2.p11.m3" class="ltx_Math" alttext="g(z)=|\cos(z)-\cos(q)|" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>
+と定義する．
+このとき
+<math id="S2.p11.m4" class="ltx_Math" alttext="g(q)=0" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>
+で
+<math id="S2.p11.m5" class="ltx_Math" alttext="g(0)=|1-\cos(q)|=1-\cos(q)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+かつ
+<math id="S2.p11.m6" class="ltx_Math" alttext="g(\pi)=|-1-\cos(p)|=1+\cos(p)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>π</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mo>−</mo><mn>1</mn></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mn>1</mn><mo>+</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+なので
+<math id="S2.p11.m7" class="ltx_Math" alttext="\cos(q)" display="inline"><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></math>の符号がプラスか<math id="S2.p11.m8" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>の時は
+<math id="S2.p11.m9" class="ltx_Math" alttext="g(\pi)\geq 1" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>π</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>1</mn></mrow></math>
+で
+<math id="S2.p11.m10" class="ltx_Math" alttext="\cos(q)" display="inline"><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></math>の符号がマイナスのときは
+<math id="S2.p11.m11" class="ltx_Math" alttext="g(0)\geq 1" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>1</mn></mrow></math>
+である．
+よって<math id="S2.p11.m12" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が周期<math id="S2.p11.m13" class="ltx_Math" alttext="2\pi" display="inline"><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></math>の関数であることを用いて
+さらに<math id="S2.p11.m14" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>に中間値の定理を適応すると点<math id="S2.p11.m15" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>であり
+<math id="S2.p11.m16" class="ltx_Math" alttext="z\in[0,2\pi]" display="inline"><mrow><mi>z</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></math>を満たしなおかつ</p>
+<table id="S2.Ex35" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex35.m1" class="ltx_Math" alttext="|\cos(z)-\cos(q)|=1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるものが存在する
+（こういうのはグラフを書くとなんでこんな点が存在するのかよくわかる）．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">上の主張を<math id="S2.p12.m1" class="ltx_Math" alttext="q=h_{k}p" display="inline"><mrow><mi>q</mi><mo>=</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow></mrow></math>に適応すると，
+点
+<math id="S2.p12.m2" class="ltx_Math" alttext="z_{k}\in[0,2\pi]" display="inline"><mrow><msub><mi>z</mi><mi>k</mi></msub><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></math>であって</p>
+<table id="S2.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex36.m1" class="ltx_Math" alttext="|\cos(z_{k})-\cos(h_{k}p)|=1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi>z</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるものを得る．
+そして<math id="S2.p12.m3" class="ltx_Math" alttext="x_{n}\in\mathbb{R}" display="inline"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>∈</mo><mi>ℝ</mi></mrow></math>を</p>
+<table id="S2.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex37.m1" class="ltx_Math" alttext="x_{n}=\frac{1}{h_{n}}(2L_{n}\pi+10\pi+z_{k})" display="block"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mrow><mfrac><mn>1</mn><msub><mi>h</mi><mi>n</mi></msub></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mrow><mn>10</mn><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><msub><mi>z</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+もちろんこのとき</p>
+<table id="S2.Ex38" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex38.m1" class="ltx_Math" alttext="h_{n}x_{n}=2L_{n}\pi+10\pi+z_{k}" display="block"><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><mrow><mn>10</mn><mo>⁢</mo><mi>π</mi></mrow><mo>+</mo><msub><mi>z</mi><mi>k</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+さらに<math id="S2.p12.m4" class="ltx_Math" alttext="z_{k}" display="inline"><msub><mi>z</mi><mi>k</mi></msub></math>の定義と<math id="S2.p12.m5" class="ltx_Math" alttext="\cos" display="inline"><mi>cos</mi></math>の周期が<math id="S2.p12.m6" class="ltx_Math" alttext="2\pi" display="inline"><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></math>であることから</p>
+<table id="S2.Ex39" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex39.m1" class="ltx_Math" alttext="|\cos(h_{k}x_{k})-\cos(h_{k}p)|=1" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となることに注意しよう．
+また<math id="S2.p12.m7" class="ltx_Math" alttext="x_{k}" display="inline"><msub><mi>x</mi><mi>k</mi></msub></math>の定義と
+<math id="S2.p12.m8" class="ltx_Math" alttext="|u_{k}|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+から<math id="S2.p12.m9" class="ltx_Math" alttext="x_{k}\neq p" display="inline"><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>≠</mo><mi>p</mi></mrow></math>であることに注意しよう
+(これを簡単に言うためにわざわざ<math id="S2.p12.m10" class="ltx_Math" alttext="x_{k}" display="inline"><msub><mi>x</mi><mi>k</mi></msub></math>の定義式の中には<math id="S2.p12.m11" class="ltx_Math" alttext="10\pi" display="inline"><mrow><mn>10</mn><mo>⁢</mo><mi>π</mi></mrow></math>が足されている)．
+また
+定義式および，
+<math id="S2.p12.m12" class="ltx_Math" alttext="u_{k}" display="inline"><msub><mi>u</mi><mi>k</mi></msub></math>と<math id="S2.p12.m13" class="ltx_Math" alttext="z_{k}" display="inline"><msub><mi>z</mi><mi>k</mi></msub></math>が有界であることから
+<math id="S2.p12.m14" class="ltx_Math" alttext="n\to\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>のとき
+<math id="S2.p12.m15" class="ltx_Math" alttext="|x_{n}-a|\to 0" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">|</mo></mrow><mo stretchy="false">→</mo><mn>0</mn></mrow></math>
+が成り立つ．
+特に<math id="S2.p12.m16" class="ltx_Math" alttext="|u_{k}|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>u</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+と<math id="S2.p12.m17" class="ltx_Math" alttext="0\leq z_{k}\leq 2\pi" display="inline"><mrow><mn>0</mn><mo>≤</mo><msub><mi>z</mi><mi>k</mi></msub><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mrow></math>
+から，かなりどんぶり勘定で評価して</p>
+<table id="S2.Ex40" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex40.m1" class="ltx_Math" alttext="0&lt;|x_{k}-p|\leq\frac{100}{h_{k}}" display="block"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mfrac><mn>100</mn><msub><mi>h</mi><mi>k</mi></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">今
+<a href="#S2.I3.i2" title="item (B2) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B2)</span></a>
+で述べられている<math id="S2.p13.m1" class="ltx_Math" alttext="N\in\mathbb{Z}" display="inline"><mrow><mi>N</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>
+を取り
+<math id="S2.p13.m2" class="ltx_Math" alttext="k\geq N" display="inline"><mrow><mi>k</mi><mo>≥</mo><mi>N</mi></mrow></math>となる
+<math id="S2.p13.m3" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を任意に固定して</p>
+<table id="S2.Ex41" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex41.m1" class="ltx_Math" alttext="S_{k}=\sum_{n=0}^{k-1}\frac{\cos(h_{n}x)-\cos(h_{n}p)}{r_{n}}" display="block"><mrow><msub><mi>S</mi><mi>k</mi></msub><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S2.Ex42" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex42.m1" class="ltx_Math" alttext="T_{k}=\sum_{n=k}^{\infty}\frac{\cos(h_{n}x)-\cos(h_{n}p)}{r_{n}}" display="block"><mrow><msub><mi>T</mi><mi>k</mi></msub><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mi>k</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると
+<math id="S2.p13.m4" class="ltx_Math" alttext="f(x_{k})-f(a)=S_{k}+T_{k}" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>S</mi><mi>k</mi></msub><mo>+</mo><msub><mi>T</mi><mi>k</mi></msub></mrow></mrow></math>
+となる．
+これから<math id="S2.p13.m5" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>を上から評価し
+<math id="S2.p13.m6" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>
+を下から評価していこう．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">まずは<math id="S2.p14.m1" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>
+を評価する．
+平均値の定理と
+任意の<math id="S2.p14.m2" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>に関する不等式<math id="S2.p14.m3" class="ltx_Math" alttext="|\sin(x)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>を使うと
+関数<math id="S2.p14.m4" class="ltx_Math" alttext="\cos(x)" display="inline"><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.p14.m5" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>-Lipschitz
+であることがわかる．よって</p>
+<table id="Sx1.EGx10" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.Ex43"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.Ex43.m1" class="ltx_Math" alttext="\displaystyle|S_{k}|\leq\sum_{n=0}^{k-1}\frac{|\cos(h_{n}x_{k})-\cos(h_{n}p)|}%
+{r_{i}}\leq\sum_{n=0}^{k-1}\frac{|h_{n}x_{k}-h_{n}p|}{r_{i}}=\sum_{n=0}^{k-1}%
+\frac{h_{i}|x-p|}{r_{n}}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mi>r</mi><mi>i</mi></msub></mfrac></mstyle></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo>−</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mi>r</mi><mi>i</mi></msub></mfrac></mstyle></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって</p>
+<table id="S2.Ex44" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex44.m1" class="ltx_Math" alttext="\left|S_{k}\right|\leq|x_{k}-p|\cdot\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}," display="block"><mrow><mrow><mrow><mo>|</mo><msub><mi>S</mi><mi>k</mi></msub><mo>|</mo></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.055em">⋅</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>i</mi></msub><msub><mi>r</mi><mi>i</mi></msub></mfrac></mrow></mrow></mrow><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">つまり</p>
+<table id="S2.Ex45" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex45.m1" class="ltx_Math" alttext="\frac{\left|S_{k}\right|}{|x_{k}-p|}\leq\sum_{n=0}^{k-1}\frac{h_{i}}{r_{i}}" display="block"><mrow><mfrac><mrow><mo>|</mo><msub><mi>S</mi><mi>k</mi></msub><mo>|</mo></mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo rspace="0.111em">≤</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>i</mi></msub><msub><mi>r</mi><mi>i</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．</p>
+</div>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p15.m1" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>を下から評価する．さて，
+まず<math id="S2.p15.m2" class="ltx_Math" alttext="x_{k}" display="inline"><msub><mi>x</mi><mi>k</mi></msub></math>の定義から</p>
+<table id="S2.Ex46" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex46.m1" class="ltx_Math" alttext="\left|\frac{\cos(h_{k}x_{k})-\cos(h_{k}p)}{r_{k}}\right|=\frac{1}{r_{k}}" display="block"><mrow><mrow><mo>|</mo><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>k</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>k</mi></msub></mfrac><mo>|</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である.
+さらに
+<math id="S2.p15.m3" class="ltx_Math" alttext="k+1\leq n" display="inline"><mrow><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo>≤</mo><mi>n</mi></mrow></math>となる<math id="S2.p15.m4" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>についての和について，
+<math id="S2.p15.m5" class="ltx_Math" alttext="|\cos(z)|\leq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mn>1</mn></mrow></math>の不等式を用いて</p>
+<table id="S2.Ex47" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex47.m1" class="ltx_Math" alttext="\left|\sum_{n=k+1}^{\infty}\frac{\cos(h_{n}x_{k})-\cos(h_{n}p)}{r_{n}}\right|%
+\leq\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}" display="block"><mrow><mrow><mo>|</mo><mrow><munderover><mo lspace="0em" movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>x</mi><mi>k</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow><mo>|</mo></mrow><mo rspace="0.111em">≤</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mn>2</mn><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">の評価を得る．
+よって
+仮定<a href="#S2.I3.i2" title="item (B2) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B2)</span></a>
+と三角不等式を使って</p>
+<table id="S2.Ex48" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex48.m1" class="ltx_Math" alttext="|T_{k}|\geq\frac{1}{r_{k}}-\sum_{n=k+1}^{\infty}\frac{2}{r_{n}}\geq C\cdot%
+\frac{1}{r_{k}}" display="block"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mn>2</mn><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow><mo>≥</mo><mrow><mi>C</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mfrac><mn>1</mn><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+つまり</p>
+<table id="S2.Ex49" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex49.m1" class="ltx_Math" alttext="\frac{|T_{k}|}{|x_{k}-p|}\geq\frac{C}{100}\frac{h_{k}}{r_{k}}" display="block"><mrow><mfrac><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo>≥</mo><mrow><mfrac><mi>C</mi><mn>100</mn></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．</p>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p">数<math id="S2.p16.m1" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+の任意性，
+以上の<math id="S2.p16.m2" class="ltx_Math" alttext="|S_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>と
+<math id="S2.p16.m3" class="ltx_Math" alttext="|T_{k}|" display="inline"><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></math>の評価と，
+三角不等式</p>
+<table id="S2.Ex50" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex50.m1" class="ltx_Math" alttext="|f(x_{k})-f(p)|\geq|T_{k}|-|S_{k}|" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を用いると，<math id="S2.p16.m4" class="ltx_Math" alttext="k\geq N" display="inline"><mrow><mi>k</mi><mo>≥</mo><mi>N</mi></mrow></math>となる任意の<math id="S2.p16.m5" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="S2.Ex51" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex51.m1" class="ltx_Math" alttext="\left|\frac{f(x_{k})-f(a)}{x_{k}-a}\right|\geq\frac{1}{|x_{k}-p|}(|T_{k}|-|S_{%
+k}|)\geq\frac{C}{100}\frac{h_{k}}{r_{k}}-\sum_{n=0}^{k-1}\frac{h_{n}}{r_{n}}" display="block"><mrow><mrow><mo>|</mo><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>a</mi></mrow></mfrac><mo>|</mo></mrow><mo>≥</mo><mrow><mfrac><mn>1</mn><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow><mo stretchy="false">|</mo></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">|</mo><msub><mi>T</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><msub><mi>S</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mrow><mrow><mfrac><mi>C</mi><mn>100</mn></mfrac><mo>⁢</mo><mfrac><msub><mi>h</mi><mi>k</mi></msub><msub><mi>r</mi><mi>k</mi></msub></mfrac></mrow><mo rspace="0.055em">−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><msub><mi>h</mi><mi>n</mi></msub><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+ゆえに
+仮定
+<a href="#S2.I3.i3" title="item (B3) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B3)</span></a>
+から
+<math id="S2.p16.m6" class="ltx_Math" alttext="k\to\infty" display="inline"><mrow><mi>k</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>
+のとき</p>
+<table id="S2.Ex52" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex52.m1" class="ltx_Math" alttext="\left|\frac{f(x_{k})-f(p)}{x_{k}-p}\right|\to\infty" display="block"><mrow><mrow><mo>|</mo><mfrac><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>p</mi></mrow></mfrac><mo>|</mo></mrow><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+つまり<math id="S2.p16.m7" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は
+<math id="S2.p16.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>で微分不可能である．
+点
+<math id="S2.p16.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の任意性から
+<math id="S2.p16.m10" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+は至る所微分不可能であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">定理<a href="#Thmthm2" title="定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+の仮定
+<a href="#S2.I3.i1" title="item (B1) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B1)</span></a>,
+<a href="#S2.I3.i2" title="item (B2) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B2)</span></a>,
+<a href="#S2.I3.i3" title="item (B3) ‣ 定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(B3)</span></a>を満たす数列
+<math id="Thmrmkx2.p1.m1" class="ltx_Math" alttext="h_{n}" display="inline"><msub><mi>h</mi><mi>n</mi></msub></math>, <math id="Thmrmkx2.p1.m2" class="ltx_Math" alttext="r_{n}" display="inline"><msub><mi>r</mi><mi>n</mi></msub></math>及び<math id="Thmrmkx2.p1.m3" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は存在する．以下のような例がある(たぶん)．<math id="Thmrmkx2.p1.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は省略する．</span></p>
+<ol id="S2.I4" class="ltx_enumerate">
+<li id="S2.I4.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I4.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i1.p1.m1" class="ltx_Math" alttext="h_{n}=2^{n!}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>!</mo></mrow></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i1.p1.m2" class="ltx_Math" alttext="r_{n}=n!" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><mrow><mi>n</mi><mo>!</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">,</span></p>
+</div>
+</li>
+<li id="S2.I4.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I4.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i2.p1.m1" class="ltx_Math" alttext="h_{n}=e^{e^{e^{n}}}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mi>e</mi><msup><mi>e</mi><msup><mi>e</mi><mi>n</mi></msup></msup></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i2.p1.m2" class="ltx_Math" alttext="r_{n}=e^{e^{n}}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mi>e</mi><msup><mi>e</mi><mi>n</mi></msup></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i2.p1.m3" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math><span class="ltx_text ltx_font_italic">は自然対数の底．</span></p>
+</div>
+</li>
+<li id="S2.I4.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I4.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i3.p1.m1" class="ltx_Math" alttext="h_{n}=(n!)^{n!}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>!</mo></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>!</mo></mrow></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i3.p1.m2" class="ltx_Math" alttext="r_{n}=n^{n}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mi>n</mi><mi>n</mi></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+ここで</span><math id="S2.I4.i3.p1.m3" class="ltx_Math" alttext="0^{0}=1" display="inline"><mrow><msup><mn>0</mn><mn>0</mn></msup><mo>=</mo><mn>1</mn></mrow></math><span class="ltx_text ltx_font_italic">
+とする．</span></p>
+</div>
+</li>
+<li id="S2.I4.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I4.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i4.p1.m1" class="ltx_Math" alttext="h_{n}=42^{n^{5}}" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><msup><mn>42</mn><msup><mi>n</mi><mn>5</mn></msup></msup></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i4.p1.m2" class="ltx_Math" alttext="r_{n}=3^{n^{2}}" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><msup><mn>3</mn><msup><mi>n</mi><mn>2</mn></msup></msup></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I4.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(5)</span> 
+<div id="S2.I4.i5.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i5.p1.m1" class="ltx_Math" alttext="h_{n}=2\mathbin{\uparrow\uparrow\uparrow}n" display="inline"><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><mrow><mn>2</mn><mrow><mo stretchy="false">↑</mo><mo lspace="0em">⁣</mo><mo stretchy="false">↑</mo><mo lspace="0em">⁣</mo><mo stretchy="false">↑</mo></mrow><mi>n</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">,
+</span><math id="S2.I4.i5.p1.m2" class="ltx_Math" alttext="r_{n}=2\mathbin{\uparrow\uparrow}n" display="inline"><mrow><msub><mi>r</mi><mi>n</mi></msub><mo>=</mo><mrow><mn>2</mn><mrow><mi></mi><mo rspace="0em" stretchy="false">↑</mo><mo lspace="0em" stretchy="false">↑</mo></mrow><mi>n</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">,
+矢印の個数に注意．
+クヌースの記法である．</span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">特に</span></p>
+<table id="S2.Ex53" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex53.m1" class="ltx_Math" alttext="f(x)=\sum_{n=0}^{\infty}\frac{\cos\left(2^{n!}x\right)}{n!}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>!</mo></mrow></msup><mo>⁢</mo><mi>x</mi></mrow><mo>)</mo></mrow></mrow><mrow><mi>n</mi><mo>!</mo></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">は至る所微分不可能関数である．</span></p>
+</div>
+</div>
+<div id="S2.p17" class="ltx_para">
+<p class="ltx_p">定理
+<a href="#Thmthm2" title="定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+の証明の議論ではもはや
+<math id="S2.p17.m1" class="ltx_Math" alttext="\cos(x)" display="inline"><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>特有の性質，
+例えば加法定理などではなく，
+これが周期関数であること,
+連続であること(中間値の定理),
+リプシッツであること，
+などしか用いていないので
+以下のように一般化できる．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold"> </span>(難技者のワイエルストラス関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">関数<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="w\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>w</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+は周期関数でリプシッツ関数であり，
+そして定数関数ではないとする．
+このとき
+<span class="ltx_text ltx_font_bold">適切に急増化する正の実数列
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="\{r_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi mathvariant="normal">r</mi><mi mathvariant="normal">n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi mathvariant="normal">n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+と
+<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\{h_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi mathvariant="normal">h</mi><mi mathvariant="normal">n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi mathvariant="normal">n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math></span>
+が存在して
+以下で定義される関数<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="f\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+は至る所連続だが至る所微分不可能である．</span></p>
+<table id="S2.Ex54" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex54.m1" class="ltx_Math" alttext="f(x)=\sum_{n=0}^{\infty}\frac{w(h_{n}x)}{r_{n}}." display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>w</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msub><mi>r</mi><mi>n</mi></msub></mfrac></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p18" class="ltx_para">
+<p class="ltx_p">省略．
+定理<a href="#Thmthm2" title="定理 2 (ものぐさワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+と同様にできる．
+∎</p>
+</div>
+</div>
+<div id="S2.p19" class="ltx_para">
+<p class="ltx_p">一つ注意点として
+<math id="S2.p19.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上のリプシッツ関数は
+ほとんど至る所微分可能であることに注意しよう．
+そういうある程度滑らかなものから
+微分不可能関数を作れるわけである．</p>
+</div>
+<div id="S2.p20" class="ltx_para">
+<p class="ltx_p">定理
+<a href="#Thmthm3" title="定理 3 (難技者のワイエルストラス関数). ‣ 2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+を適応できる関数で<math id="S2.p20.m1" class="ltx_Math" alttext="w" display="inline"><mi>w</mi></math>であって<math id="S2.p20.m2" class="ltx_Math" alttext="\cos x" display="inline"><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></math>
+以外のものは例えば
+<math id="S2.p20.m3" class="ltx_Math" alttext="w(x)=\inf_{n\in\mathbb{Z}}|x-n|" display="inline"><mrow><mrow><mi>w</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><msub><mo lspace="0.1389em" rspace="0em">inf</mo><mrow><mi>n</mi><mo>∈</mo><mi>ℤ</mi></mrow></msub><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>n</mi></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></math>
+がある．
+この<math id="S2.p20.m4" class="ltx_Math" alttext="w" display="inline"><mi>w</mi></math>から定義される上のような微分不可能関数は
+Takagi-type の関数と呼ばれているようである．
+言うまでもないが高木の例は
+<math id="S2.p20.m5" class="ltx_Math" alttext="\sum_{n=0}\frac{w(2^{n}x)}{2^{n}}" display="inline"><mrow><msub><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></msub><mfrac><mrow><mi>w</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow></math>
+が微分不可能ということを述べており，
+上の定理より具体的だし，関数の外と内側で
+同じオーダーの数列を扱っているので
+高木の例の方が良い結果である．
+ワイエルストラスの例も同様である．</p>
+</div>
+</section>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">参考文献たち</h2>
+
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">和文参考文献</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bibx1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和1]</span>
+<span class="ltx_bibblock">
+徳永秀也 and 鹿野健,
+「微分不可能な連続関数をめぐっての小史」
+津田塾大学第 3 回数学史
+シンポジウム，1993,
+65–76.
+
+</span>
+</li>
+<li id="bib.bibx2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和2]</span>
+<span class="ltx_bibblock">
+河野敬雄,
+「至る所微分不可能な連続関数を初めて理解した日本人は土木技術者だった」,
+数理解析研究所講究録別冊 2023, B92: 57-76,
+http://hdl.handle.net/2433/284815
+
+</span>
+</li>
+<li id="bib.bibx3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和3]</span>
+<span class="ltx_bibblock">
+徳永秀也,
+「Riemannの三角級数の数論的研究」,
+岡山大学大学院理学研究科修士論文,
+1990.
+
+</span>
+</li>
+<li id="bib.bibx4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和4]</span>
+<span class="ltx_bibblock">
+高木貞治,
+「定本 解析概論」,
+2010,
+岩波書店,
+補遺の解説：黒田成俊.
+
+</span>
+</li>
+<li id="bib.bibx5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和5]</span>
+<span class="ltx_bibblock">
+小柴洋一,
+『Weierstrass 論文「至る所微分不可能である連続関数の例」
+について』,
+数理解析研究所講究録
+1195
+(2001),
+62–66.
+http://hdl.handle.net/2433/64842
+
+</span>
+</li>
+<li id="bib.bibx6" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[和6]</span>
+<span class="ltx_bibblock">
+H. ザーガン著,
+鎌田清一郎訳
+空間充填曲線とフラクタル,
+シュプリンガー・
+フェアラーク東京，
+1998年
+
+</span>
+</li>
+</ul>
+</section>
+<section id="biba" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">一般の参考文献</h2>
+
+<ul id="biba.L1" class="ltx_biblist">
+<li id="biba.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Banach</span><span class="ltx_text ltx_bib_year"> (1931)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Über die baire’sche kategorie gewisser funktionenmengen</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Studia Mathematica</span> <span class="ltx_text ltx_bib_volume">3</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 174–179</span> (<span class="ltx_text ltx_bib_language">ger</span>).
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://eudml.org/doc/217560</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p1" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib21" class="ltx_bibitem ltx_bib_incollection">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">K. Barański</span><span class="ltx_text ltx_bib_year"> (2015)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Dimension of the graphs of the Weierstrass-type functions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Fractal geometry and stochastics V</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Progr. Probab.</span>, Vol. <span class="ltx_text ltx_bib_volume">70</span>, <span class="ltx_text ltx_bib_pages"> pp. 77–91</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 978-3-319-18660-3; 978-3-319-18659-7</span>,
+<a href="https://dx.doi.org/10.1007/978-3-319-18660-3%5F5" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/978-3-319-18660-3_5" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3558151" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p4" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib17" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. P. Boas</span><span class="ltx_text ltx_bib_year"> (1996)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A primer of real functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_edition">Fourth edition</span>, <span class="ltx_text ltx_bib_series">Carus Mathematical Monographs</span>, Vol. <span class="ltx_text ltx_bib_volume">13</span>,  <span class="ltx_text ltx_bib_publisher">Mathematical Association of America, Washington, DC</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">Revised and with a preface by Harold P. Boas</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 0-88385-029-X</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1411907" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p4" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Cavalletti</span><span class="ltx_text ltx_bib_year"> (2015)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A note on a residual subset of Lipschitz functions on metric spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Edinb. Math. Soc. (2)</span> <span class="ltx_text ltx_bib_volume">58</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 631–636</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0013-0915,1464-3839</span>,
+<a href="https://dx.doi.org/10.1017/S0013091514000261" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1017/S0013091514000261" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3391364" title="" class="ltx_ref mr ltx_bib_external">MathReview (Jesús A. Jaramillo)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p2" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib16" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. Cellérier</span><span class="ltx_text ltx_bib_year"> (1890)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Note sur les principes fondamentaux de l’analyse</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Darboux Bull.</span> <span class="ltx_text ltx_bib_volume">14</span>, <span class="ltx_text ltx_bib_pages"> pp. 142–160</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS4.p1" title="1.4 その他 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.4</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib30" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Chamizo and A. Córdoba</span><span class="ltx_text ltx_bib_year"> (1999)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Differentiability and dimension of some fractal Fourier series</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Adv. Math.</span> <span class="ltx_text ltx_bib_volume">142</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 335–354</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0001-8708,1090-2082</span>,
+<a href="https://dx.doi.org/10.1006/aima.1998.1792" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1006/aima.1998.1792" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1680194" title="" class="ltx_ref mr ltx_bib_external">MathReview (Steen Pedersen)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS4.p1" title="1.4 その他 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.4</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib14" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_editor">G. A. Edgar (Ed.)</span><span class="ltx_text ltx_bib_year"> (2004)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Classics on fractals</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Studies in Nonlinearity</span>,  <span class="ltx_text ltx_bib_publisher">Westview Press. Advanced Book Program, Boulder, CO</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 0-8133-4153-1</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2049443" title="" class="ltx_ref mr ltx_bib_external">MathReview (Yimin Xiao)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p1" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib31" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Gerver</span><span class="ltx_text ltx_bib_year"> (1971)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">More on the differentiability of the Riemann function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. J. Math.</span> <span class="ltx_text ltx_bib_volume">93</span>, <span class="ltx_text ltx_bib_pages"> pp. 33–41</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9327,1080-6377</span>,
+<a href="https://dx.doi.org/10.2307/2373445" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2373445" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=276422" title="" class="ltx_ref mr ltx_bib_external">MathReview (A. M. Bruckner)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS1.p1" title="1.1 リーマンの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.1</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib26" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. H. Hardy</span><span class="ltx_text ltx_bib_year"> (1916)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Weierstrass’s non-differentiable function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Trans. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">17</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 301–325</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9947,1088-6850</span>,
+<a href="https://dx.doi.org/10.2307/1989005" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1989005" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1501044" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p2" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib12" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Hencl</span><span class="ltx_text ltx_bib_year"> (2000)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Isometrical embeddings of separable Banach spaces into the set of nowhere approximatively differentiable and nowhere Hölder functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">128</span> (<span class="ltx_text ltx_bib_number">12</span>), <span class="ltx_text ltx_bib_pages"> pp. 3505–3511</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9939-00-05595-7" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9939-00-05595-7" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1707147" title="" class="ltx_ref mr ltx_bib_external">MathReview (Grzegorz Lewicki)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS7.p1" title="1.7 追記 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.7</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib28" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. A. Hocutt and P. L. Robinson</span><span class="ltx_text ltx_bib_year"> (2018)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Everywhere differentiable, nowhere continuous functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. Math. Monthly</span> <span class="ltx_text ltx_bib_volume">125</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 923–928</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9890,1930-0972</span>,
+<a href="https://dx.doi.org/10.1080/00029890.2018.1517569" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1080/00029890.2018.1517569" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3882060" title="" class="ltx_ref mr ltx_bib_external">MathReview (Rotraut Goubau Cahill)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. R. Hunt</span><span class="ltx_text ltx_bib_year"> (1998)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Hausdorff dimension of graphs of Weierstrass functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. f this is the caseth. Soc.</span> <span class="ltx_text ltx_bib_volume">126</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 791–800</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9939-98-04387-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9939-98-04387-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1452806" title="" class="ltx_ref mr ltx_bib_external">MathReview (Lars Olsen)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p4" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib23" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Itatsu</span><span class="ltx_text ltx_bib_year"> (1981)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Differentiability of Riemann’s function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Japan Acad. Ser. A Math. Sci.</span> <span class="ltx_text ltx_bib_volume">57</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 492–495</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0386-2194</span>,
+<a href="http://projecteuclid.org/euclid.pja/1195516225" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=640257" title="" class="ltx_ref mr ltx_bib_external">MathReview (S. L. Segal)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS1.p1" title="1.1 リーマンの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.1</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib29" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Jarnicki and P. Pflug</span><span class="ltx_text ltx_bib_year"> (2015)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Continuous nowhere differentiable functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Springer Monographs in Mathematics</span>,  <span class="ltx_text ltx_bib_publisher">Springer, Cham</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">The monsters of analysis</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 978-3-319-12669-2; 978-3-319-12670-8</span>,
+<a href="https://dx.doi.org/10.1007/978-3-319-12670-8" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/978-3-319-12670-8" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3444902" title="" class="ltx_ref mr ltx_bib_external">MathReview (Robert W. Vallin)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p1" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p2" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">V. Jarník</span><span class="ltx_text ltx_bib_year"> (1933)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Über die differenzierbarkeit stetiger funktionen</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Fundamenta Mathematicae</span> <span class="ltx_text ltx_bib_volume">21</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 48–58</span> (<span class="ltx_text ltx_bib_language">ger</span>).
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://eudml.org/doc/212678</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p2" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib19" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Johnsen</span><span class="ltx_text ltx_bib_year"> (2010)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Simple proofs of nowhere-differentiability for Weierstrass’s function and cases of slow growth</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Fourier Anal. Appl.</span> <span class="ltx_text ltx_bib_volume">16</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 17–33</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 1069-5869,1531-5851</span>,
+<a href="https://dx.doi.org/10.1007/s00041-009-9072-2" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s00041-009-9072-2" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2587578" title="" class="ltx_ref mr ltx_bib_external">MathReview (Jasson Vindas)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p2" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib22" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Keller</span><span class="ltx_text ltx_bib_year"> (2017)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A simpler proof for the dimension of the graph of the classical Weierstrass function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. Inst. Henri Poincaré Probab. Stat.</span> <span class="ltx_text ltx_bib_volume">53</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 169–181</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0246-0203,1778-7017</span>,
+<a href="https://dx.doi.org/10.1214/15-AIHP711" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1214/15-AIHP711" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3606737" title="" class="ltx_ref mr ltx_bib_external">MathReview (Leonardo E. Mora)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib13" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">K. Kiesswetter</span><span class="ltx_text ltx_bib_year"> (1966)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Ein einfaches Beispiel für eine Funktion, welche überall stetig und nicht differenzierbar ist</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Math.-Phys. Semesterber.</span> <span class="ltx_text ltx_bib_volume">13</span>, <span class="ltx_text ltx_bib_pages"> pp. 216–221</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0340-4897</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=202936" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p1" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib18" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">W. Luther</span><span class="ltx_text ltx_bib_year"> (1986)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The differentiability of Fourier gap series and “Riemann’s example” of a continuous, nondifferentiable function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Approx. Theory</span> <span class="ltx_text ltx_bib_volume">48</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 303–321</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0021-9045,1096-0430</span>,
+<a href="https://dx.doi.org/10.1016/0021-9045%2886%2990053-5" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/0021-9045(86)90053-5" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=864753" title="" class="ltx_ref mr ltx_bib_external">MathReview (H. Burkill)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS1.p1" title="1.1 リーマンの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.1</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. D. Mauldin</span><span class="ltx_text ltx_bib_year"> (1979)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The set of continuous nowhere differentiable functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Pacific J. Math.</span> <span class="ltx_text ltx_bib_volume">83</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 199–205</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0030-8730,1945-5844</span>,
+<a href="http://projecteuclid.org/euclid.pjm/1102784670" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=555048" title="" class="ltx_ref mr ltx_bib_external">MathReview (K. M. Garg)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p2" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib6" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Mazurkiewicz</span><span class="ltx_text ltx_bib_year"> (1931)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sur les fonctions non dérivables</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Studia Mathematica</span> <span class="ltx_text ltx_bib_volume">3</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 92–94</span> (<span class="ltx_text ltx_bib_language">fre</span>).
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://eudml.org/doc/217572</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p1" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib11" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Rodríguez-Piazza</span><span class="ltx_text ltx_bib_year"> (1995)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Every separable Banach space is isometric to a space of continuous nowhere differentiable functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">123</span> (<span class="ltx_text ltx_bib_number">12</span>), <span class="ltx_text ltx_bib_pages"> pp. 3649–3654</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2161889" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2161889" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1328375" title="" class="ltx_ref mr ltx_bib_external">MathReview (Grzegorz Lewicki)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS7.p1" title="1.7 追記 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.7</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Sagan</span><span class="ltx_text ltx_bib_year"> (1991)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Some reflections on the emergence of space-filling curves: the way it could have happened and should have happened, but did not happen</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Franklin Inst.</span> <span class="ltx_text ltx_bib_volume">328</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 419–430</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0016-0032</span>,
+<a href="https://dx.doi.org/10.1016/0016-0032%2891%2990017-W" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/0016-0032(91)90017-W" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1124993" title="" class="ltx_ref mr ltx_bib_external">MathReview (Ryszard J. Paẇlak)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS5.p1" title="1.5 空間充填曲線 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.5</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Sagan</span><span class="ltx_text ltx_bib_year"> (1992)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">An elementary proof that Schoenberg’s space-filling curve is nowhere differentiable</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Math. Mag.</span> <span class="ltx_text ltx_bib_volume">65</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 125–128</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-570X,1930-0980</span>,
+<a href="https://dx.doi.org/10.2307/2690494" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2690494" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1160715" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS5.p1" title="1.5 空間充填曲線 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.5</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib10" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Sagan</span><span class="ltx_text ltx_bib_year"> (1994)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Space-filling curves</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Universitext</span>,  <span class="ltx_text ltx_bib_publisher">Springer-Verlag, New York</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 0-387-94265-3</span>,
+<a href="https://dx.doi.org/10.1007/978-1-4612-0871-6" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/978-1-4612-0871-6" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1299533" title="" class="ltx_ref mr ltx_bib_external">MathReview (Ryszard J. Paẇlak)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS5.p1" title="1.5 空間充填曲線 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.5</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Saks</span><span class="ltx_text ltx_bib_year"> (1932)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the functions of besicovitch in the space of continuous functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Fundamenta Mathematicae</span> <span class="ltx_text ltx_bib_volume">19</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 211–219</span> (<span class="ltx_text ltx_bib_language">eng</span>).
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">http://eudml.org/doc/212573</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS6.p3" title="1.6 範疇定理 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.6</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib25" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Smith</span><span class="ltx_text ltx_bib_year"> (1972)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The differentiability of Riemann’s functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">34</span>, <span class="ltx_text ltx_bib_pages"> pp. 463–468</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2038391" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2038391" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=308337" title="" class="ltx_ref mr ltx_bib_external">MathReview (K. M. Garg)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS1.p1" title="1.1 リーマンの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.1</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib24" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Smith</span><span class="ltx_text ltx_bib_year"> (1983)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Correction to: “The differentiability of Riemann’s function” [Proc. Amer. Math. Soc. <span class="ltx_text ltx_font_bold">34</span> (1972), 463–468; MR0308337 (46 #7451)]</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">89</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 567–568</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2045519" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2045519" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=715889" title="" class="ltx_ref mr ltx_bib_external">MathReview (K. M. Garg)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS1.p1" title="1.1 リーマンの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.1</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib20" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Sun and Z. Wen</span><span class="ltx_text ltx_bib_year"> (1996)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Hausdorff dimension of graph of a class of Weierstrass functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Progr. Natur. Sci. (English Ed.)</span> <span class="ltx_text ltx_bib_volume">6</span> (<span class="ltx_text ltx_bib_number">5</span>), <span class="ltx_text ltx_bib_pages"> pp. 547–553</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 1002-0071,1745-5391</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1461263" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib32" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Takagi</span><span class="ltx_text ltx_bib_year"> (1901)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A simple example of the continuous function without derivative (誘導函數ヲ有セザル連續函數ノ簡單ナル例)</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Tokyo Sugaku-Butsurigakkwai Hokoku</span> <span class="ltx_text ltx_bib_volume">1</span>, <span class="ltx_text ltx_bib_pages"> pp. F176–F177</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.11429/subutsuhokoku1901.1.F176" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS3.p1" title="1.3 高木関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.3</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib15" class="ltx_bibitem ltx_bib_thesis">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Thim</span><span class="ltx_text ltx_bib_year"> (2003)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Continuous Nowhere Differentiable Functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_type">Master’s Thesis</span>, <span class="ltx_text ltx_bib_publisher">Luleå University of Technology</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">https://urn.kb.se/resolve?urn=urn:nbn:se:ltu:diva-49636</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p1" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#S2.p1" title="2 Appendix ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p2" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+<li id="biba.bib27" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">E. C. Titchmarsh</span><span class="ltx_text ltx_bib_year"> (1958)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The theory of functions</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">Oxford University Press, Oxford</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">Reprint of the second (1939) edition</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://www.ams.org/mathscinet-getitem?mr=3155290" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.SS2.p3" title="1.2 ワイエルストラスの関数 ‣ 1 本文 ‣ 論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1.2</span></a>,
+<a href="#p4" title="論文メモ — 至る所微分不可能な連続関数 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— 至る所微分不可能な連続関数 —</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p4" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:29:43 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

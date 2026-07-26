@@ -1,0 +1,2367 @@
+
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+\usepackage{stmaryrd}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+\newcommand{\mappa}[1]{\llbracket #1\rrbracket}
+
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{直積測度の構成について}
+\author{ナンブ　
+キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では測度の直積を構成する．
+まず，有限個の場合を述べて，それの応用として
+確率測度の無限直積の構成を述べる．
+最後に，有限測度の存在を前提としない
+確率測度の無限直積測度の構成を紹介する．
+\section{基本的な定義のおさらい}
+簡単に基本的な定義と定理のおさらいをする．
+ブログ記事
+\cite{hatenabsokudo-1}, 
+\cite{hatenabsokudo0}, 
+\cite{hatenabsokudo1}
+を参考にしても良い．
+\setcounter{equation}{0}
+\begin{df}[$\sigma$加法族と可測空間]
+集合$X$の部分集合族
+$\mathfrak{M}$が
+\textbf{$\sigma$加法族}であるとは
+\begin{enumerate}
+\item $A\in \mathfrak{M} \To X\setminus A\in \mathfrak{M}$
+\item $A,B\in\mathfrak{M} \To A\cap B\in \mathfrak{M}$
+\item $\{A_n\}_{n\in \nn}\subset \mathfrak{M} \To \bigcup_{n\in\nn}A_n\in \mathfrak{M}$
+\end{enumerate}
+を充たすときにいう．
+$\sigma$加法族のことを
+\textbf{完全加法族}ともいう．
+このとき組
+$(X,\mathfrak{M})$を\textbf{可測空間}などと言う.
+また$\mathfrak{M}$に属する集合を
+\textbf{可測空間}，もしくは
+$(X, \mathfrak{M})$の\textbf{可測集合}などと呼ぶ．
+
+また，$X$の部分集合族$\mathfrak{S}$に対して，
+$\mathfrak{S}$から生成される最小の$\sigma$加法族を
+$\sigma(\mathfrak{S})$と書くことにする．
+
+\end{df}
+
+\begin{df}[有限加法族]
+集合$X$の部分集合族
+$\mathfrak{M}$が
+\textbf{有限加法族}であるとは
+\begin{enumerate}
+\item $A\in \mathfrak{M} \To X\setminus A\in \mathfrak{M}$
+\item $A,  B\in  \mathfrak{M} \To A\cup B\in \mathfrak{M}$
+\end{enumerate}
+を充たすときにいう．
+$\mathfrak{M}$が有限加法族であるとき，
+$A,B\in\mathfrak{M} \To A\cap B\in \mathfrak{M}$
+も成り立つことに注意しよう．
+\end{df}
+
+
+
+\begin{df}[可測写像]可測空間
+$(X,\mathfrak{M})$から可測空間
+$(Y,\mathfrak{N})$への写像
+\[
+f:(X,\mathfrak{M})\to (Y,\mathfrak{N})
+\]
+が\textbf{可測写像}であるとは
+\[
+\forall N\in \mathfrak{N}\ f^{-1}(N)\in \mathfrak{M}
+\]
+を充たすことときにいう．
+どこの可測空間で可測であるかを強調して
+\textbf{$(\mathfrak{M},\mathfrak{N})$可測写像}
+と呼んだりもする.
+\end{df}
+
+
+\begin{df}[測度]
+写像$  \mu :\mathfrak{M} \rightarrow [0,\infty]$が
+$X$上の
+$\sigma $加法族
+$\mathfrak{M}$上の測度であるとは
+$\mu(\emptyset)=0$
+を満たしかつ,
+互いに交わらぬ
+$\mathfrak{M}$
+の部分集合
+$\{A_{n}\}_{n\in \nn}\subset \mathfrak{M}$
+に対して
+ \[
+  \mu \left(\coprod_{n\in \nn }{A_{n}}\right)=\sum_{n=0}^{\infty}\mu (A_{n})
+ \]
+を充たすときに言う．
+このとき三つ組
+$(X,\mathfrak{M}, \mu)$を測度空間ともいう．
+さらに$\mu(X)=1$を満たすときに$\mu$を
+\textbf{確率}や
+\textbf{確率測度}などと呼ぶ．
+\end{df}
+
+
+\begin{prop}\label{lim}
+$(X,\mathfrak{M},\mu)$
+を測度空間とするとき以下の事が成り立つ．
+	\begin{align}
+	&\{A_n\}_{n\in \nn}\subset \mathfrak{M}\ A_n\subset A_{n+1}\To
+	\mu \left(\bigcup_{n\in \mathbb{N}} A_{n}\right)=
+	\lim_{n \to \infty}\mu (A_{n}),\\ 
+	&\{A_n\}_{n\in \nn}\subset \mathfrak{M},\ A_{n+1}\subset A_{n},\ \mu(A_1)<\mgn\To
+	 \mu \left(\bigcap_{n\in \mathbb{N}} A_{n}\right)=\lim_{n \to \infty}\mu (A_{n}).
+	\end{align}
+\end{prop}
+
+
+\begin{prop}[単関数近似]\label{prop:tankinji}
+測度空間$(X, \mathfrak{M}, \mu)$上の非負可測関数列
+$f$に対して，非負単関数の列$\{s_{n}\}_{n\in \nn}$
+が存在して$s_{n}\le s_{n+1}$と
+各$x\in X$に対して$\lim_{n\to \infty}s_{n}(x)=f(x)$
+が成り立つ．
+\end{prop}
+
+\begin{thm}[単調収束定理]\label{thm:tancho}
+測度空間$(X, \mathfrak{M}, \mu)$上の非負可測関数列
+$\{f_{n}\}_{n\in \nn}$が
+ \[
+  f_{n}\le f_{n+1}
+ \]を充たすとし、$\displaystyle f(x):=\lim_{n\to \infty}f_{n}(x)$と置く、このとき$f$は可測であり、
+ \[
+  \lim_{n\to \infty}\int_X f\ d \mu =\int_X f\ d\mu
+ \] が成立する。
+\end{thm}
+
+
+
+\section{$\pi$-$\lambda$定理}
+測度の一致や集合族の一致を調べるのに便利な
+$\pi-\lambda$定理を紹介する．
+\begin{df}[$\pi$系]
+$X$を集合とし，
+$\mathfrak{A}$を$X$の部分集合族とする．
+このとき
+$\mathfrak{A}$が
+\textbf{$\pi$系}
+であるとは以下の条件を満たすときにいう．
+\[
+\forall A, B\in \mathfrak{A}\ A\cap B\in \mathfrak{A}. 
+\]
+また，$X$の部分集合族$\mathfrak{S}$に対して，
+$\mathfrak{S}$から生成される最小の$\pi$系を
+$\pi(\mathfrak{S})$と書くことにする．
+\end{df}
+
+\begin{df}
+$X$を集合とし，
+$\mathfrak{B}$を$X$の部分集合族とする．
+このとき
+$\mathfrak{B}$が
+\textbf{$\lambda$系}
+であるとは以下の条件を満たすときにいう．
+\begin{enumerate}
+\item[\emph{($\lambda$1)}] $X\in \mathfrak{B}$. 
+\item[\emph{($\lambda$2)}] $\forall A, B\in \mathfrak{B}\ 
+A\subset B\To B\setminus A\in \mathfrak{B}$. 
+\item[\emph{($\lambda$3)}] 
+$\{A_{i}\}_{i\in \nn}\subset \mathfrak{B}$
+が単調な列ならば，
+$\bigcup_{i\in \nn}A_{i}\in \mathfrak{B}$. 
+\end{enumerate}
+また，$X$の部分集合族$\mathfrak{S}$に対して，
+$\mathfrak{S}$から生成される最小の$\lambda$系を
+$\lambda(\mathfrak{S})$と書くことにする．
+
+\end{df}
+\begin{rmk}
+条件
+$(\lambda 3)$は以下の条件に置き換えても良い．
+\begin{enumerate}
+\item[\emph{($\lambda'$3)}] 
+$\{A_{i}\}_{i\in \nn}\subset \mathfrak{B}$
+が互いに素な列ならば，
+$\bigcup_{i\in \nn}A_i
+\in \mathfrak{B}$．
+\end{enumerate}
+実際，
+$(\lambda 3)$から
+$(\lambda'3)$が従うのは，
+$(\lambda2)$を使って，
+単調列
+$\{A_{i}\}_{i\in \nn}\subset \mathfrak{B}$
+から互いに素な列
+$\{A_{1}\}\cup \{A_{i+1}\setminus A_{i}\}_{i\in \nn}$
+が
+$\mathfrak{B}$に属することからわかる．
+逆を示そう．
+$A, B\in \mathfrak{A}$
+が互いに素な族とすると，
+$A\subset X\setminus B$
+で 
+$X\setminus B\in \mathfrak{A}$
+なので
+$(X\setminus B)\setminus A=X\setminus (A\cup B)\in \mathfrak{A}$
+よって，
+$A\cup B=X\setminus (X\setminus (A\cup B))\in \mathfrak{A}$
+であるから，互いに素な列
+$\{A_{i}\}_{i\in \nn}\subset \mathfrak{B}$
+に対して
+$\bigcup_{i=1}^{n}A_{i}$
+が
+$\mathfrak{B}$に属することから
+わかる．
+
+\end{rmk}
+
+\begin{prop}\label{prop:pl=l}
+$X$を集合とし，
+$\mathfrak{A}$を$X$の
+$\pi$系とする．
+このとき
+\[
+\pi(\lambda(\mathfrak{A}))=\lambda(\mathfrak{A})
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+$\lambda(\mathfrak{A})$
+が
+$\pi$系であることを示せば良い．
+
+任意の
+$A\in \mathfrak{A}$について
+ $\mathfrak{C}_A
+ =\{B\in \lambda(\mathfrak{A})\mid A\cap B\in \lambda(\mathfrak{A})\}$
+ とする．
+ $\mathfrak{C}_{A}=\lambda(\mathfrak{A})$
+ を示そう．
+ まず，
+ $\mathfrak{A}$が
+ $\pi$系であるから，
+ $\mathfrak{A}\subset \mathfrak{C}_{A}$
+ である．
+ 次に$\mathfrak{C}_{A}$
+ が$\lambda$系であることを示す．
+
+ まず$(\lambda1)$を示そう．
+ 定義から明らかに
+ $X\in \mathfrak{C}_A$である．
+ 
+ 次に
+ $(\lambda 2)$を示そう．
+ $G, H\in \mathfrak{C}_A$
+ は$G\subset H$を満たしているとする．
+ このとき 
+ $A\cap G, \ A\cap H\in \lambda(\mathfrak{A})$
+ なので，
+ $A\cap H\setminus A\cap G=
+ A\cap (H\setminus G)\in \lambda(\mathfrak{A})$である．つまり，
+ $H\setminus G\in \mathfrak{C}_{A}$である．
+
+ そして，
+ $(\lambda 3)$を示そう．
+ $\{A_{i}\}_{i\in \nn}\subset \mathfrak{C}_{A}$
+ は単調な族であるとする.
+ このとき任意の$i$について 
+ $A\cap A_{i}\in \lambda(\mathfrak{A})$である．
+ よって
+ $\bigcup_{i}(A\cap A_{i})=
+ A\cap \bigcup_{i}A_{i}\in \lambda(\mathfrak{A})$
+ を満たす．
+ 
+ 以上から，
+ $\mathfrak{C}_A$
+ が
+ $\lambda$族であることがわかった．
+ $\mathfrak{A}\subset \mathfrak{C}_{A}$
+ なので
+ $\lambda(\mathfrak{A})\subset \mathfrak{C}_A$
+ である．
+ここで$A$は任意であったので，
+\begin{align}
+	\forall A\in \mathfrak{A}\ 
+	\forall B\in \lambda(\mathfrak{A})\ 
+	A\cap B\in \lambda(\mathfrak{A})
+\end{align}
+が成り立つ．
+これだけではまだ$\lambda(\mathfrak{A})$が$\pi$系であることは示せていない．
+
+次に
+$A\in \lambda(\mathfrak{A})$
+について
+$\mathfrak{D}_{A}=\{B\in \lambda(\mathfrak{A})\mid A\cap B\in \lambda(\mathfrak{A})\}$
+と定義する．
+この$\mathfrak{D}_{A}$が$\lambda$系であることを示そう．
+まず定義から
+$X\in \mathfrak{D}_{A}$であるから
+$(\lambda 1)$が満たされる．
+
+次に
+$(\lambda 2)$を示す．
+$G, H\in \mathfrak{D}_{A}$
+は$G\subset H$を満たすとする．
+このとき定義から
+$A\cap G, \ A\cap H\in \lambda(\mathfrak{A})$
+ なので，
+ $A\cap H\setminus A\cap G=
+ A\cap (H\setminus G)\in \lambda(\mathfrak{A})$
+ である．
+ つまり，
+ $H\setminus G\in \mathfrak{D}_{A}$
+である．
+
+
+次に
+$(\lambda 3)$
+を示そう．
+$\{A_i\}\subset \mathfrak{D}_{A}$
+の単調な列とすると，
+任意の
+$i$について
+$A\cap A_i\in \lambda(\mathfrak{A})$
+である．
+ よって
+ $\bigcup_{i}(A\cap A_{i})=A\cap \bigcup_{i}A_{i}
+ \in \lambda(\mathfrak{A})$
+ を満たす．
+ 以上から，
+ $\mathfrak{D}_A$が
+ $\lambda$族であることがわかる．
+ また，
+ 先に示したこと(1)から，
+ $\mathfrak{A}\subset \mathfrak{D}_{A}$
+ であるから，
+ $\lambda(\mathfrak{A})\subset \mathfrak{D}_{A}$
+ がわかる．
+ $A\in \lambda(\mathfrak{A})$
+ は任意であったから，
+ $\lambda(\mathfrak{A})$は
+ $\pi$系であることがわかった．
+\end{proof}
+
+\begin{prop}\label{prop:pl=s}
+$X$を集合とし，
+$\mathfrak{A}$
+を
+$X$の
+$\pi$系で，かつ
+$\lambda$系とする．
+このとき
+$\mathfrak{A}$は
+$\sigma$加法族である．
+\end{prop}
+\begin{proof}
+まず
+$A, B\in \mathfrak{A}$とする．
+このとき，
+$A\cap B\in \mathfrak{A}$
+なので，
+$A\setminus A\cap B\in \mathfrak{A}$
+で，
+$A\setminus A\cap B$
+と
+$B$
+は互いに素であるから，
+$A\cup B\in \mathfrak{A}$
+である．
+よって
+$\{A_{i}\}_{i\in \nn}$
+を
+$\mathfrak{A}$
+の列とする．
+このとき
+$B_{n}=\bigcup_{i=1}^{n}A_{i}$
+とすると，
+$B_{n}\in \mathfrak{A}$
+である．
+さて，
+$\{B_{n}\}$
+は単調族であるから， 
+$\bigcup_{i}A_{i}=\bigcup_{n}B_{n}\in
+ \mathfrak{A}$である．
+つまり，
+$\mathfrak{A}$は
+$\sigma$加法族である．
+\end{proof}
+
+
+\begin{thm}[$\pi$-$\lambda$定理]\label{thm:plthm}
+$X$を集合とし，
+$\mathfrak{A}$を
+$X$の
+$\pi$系で，
+$\mathfrak{B}$を
+$X$の
+$\lambda$系とする．
+このとき
+$\mathfrak{A}\subset \mathfrak{B}$
+ならば
+\[
+\sigma(\mathfrak{A})\subset \mathfrak{B}
+\]
+が成り立つ．
+\end{thm}
+\begin{proof}
+$\lambda(\mathfrak{A})=\sigma(\mathfrak{A})$
+を示せば良い．
+$\lambda(\mathfrak{A})\subset \sigma(\mathfrak{A})$
+は成り立つ．逆を示そう．
+命題 \ref{prop:pl=l}から
+$\lambda(\mathfrak{A})$
+は$\pi$系かつ
+$\lambda$系であるから，
+命題 \ref{prop:pl=s}から
+$\lambda(\mathfrak{A})$は$\sigma$加法族である．
+\end{proof}
+
+\begin{prop}\label{prop:equal}
+$X$を集合とし，
+$\mathfrak{A}$を
+$X$上の
+$\pi$系で
+$X\in \mathfrak{A}$
+とする．
+$\mu$と
+$\nu$が$\sigma(\mathfrak{A})$
+上の有限測度であり，尚且つ
+$\mathfrak{A}$上で一致しているとすると，
+$\mu=\nu$である．
+\end{prop}
+\begin{proof}
+$\mathfrak{B}=\{S\in \sigma(\mathfrak{A})\mid \mu(S)=\nu(S)\}$
+とする．
+仮定から
+$\mathfrak{A}\subset \mathfrak{B}$
+なので
+$\mathfrak{B}$が
+$\lambda$系であることが示すことができれば，
+定理 \ref{thm:plthm}から
+命題は示される．
+$X\in \mathfrak{B}$
+は明らかなので
+$(\lambda 1)$
+が満たされる．
+$(\lambda2)$は
+$\mu, \nu$が有限測度であることから従う．
+$(\lambda3)$は，
+測度の単調収束定理からわかる．
+\end{proof}
+
+
+
+\begin{prop}\label{prop:equal2}
+$X$を集合とし，
+$\mathfrak{A}$を
+$X$上の$\pi$系で
+$X\in \mathfrak{A}$とする．
+$\mu$と
+$\nu$を
+$\sigma(\mathfrak{A})$
+上の有限測度で
+$\mathfrak{A}$上で一致しており，
+$\mathfrak{A}$の列
+$\{A_{i}\}_{i\in \nn}$
+が存在して
+$\mu(A_{i}), \nu(A_{i})<\infty$と
+$\bigcup_{i\in \nn}A_{i}=X$
+を満たすと仮定すると，
+$\mu=\nu$である．
+\end{prop}
+\begin{proof}
+命題 \ref{prop:equal}から
+任意の
+$i\in \nn$
+と
+$B\in \sigma(\mathfrak{A})$
+について
+$\mu(A_{i}\cap B)=\nu (A_{i}\cap B)$
+であるから，
+$\bigcup_{i\in \nn}A_{i}=X$より$\mu=\nu$
+である．
+\end{proof}
+
+
+\section{Hopf--Caratheodoryの拡張定理}
+無限直積測度を構成する上で大切な
+Hopf--Caratheodoryの拡張定理を紹介する．
+\begin{df}[外測度]
+$X$を集合とする．
+このとき$X$の冪集合
+$\mathfrak{P}(X)$
+上の関数
+$\Gamma: \mathfrak{P}: \to [0, \infty]$
+が
+\textbf{外測度}
+であるとは以下の三つの条件を満たす時にいう．
+\begin{enumerate}
+\item $\Gamma(\emptyset)=0$;
+\item $A, B\in \mathfrak{P}(X)$が
+$A\subset B$を満たすならば
+\[
+\Gamma(A)\subset \Gamma(B);
+\]
+\item 
+$X$の部分集合族からなる可算族
+$\{A_{i}\}_{i\in\zz_{\ge 0}}$
+について
+\[
+\Gamma\left(\bigcup_{i=0}^{\infty}A_{i}\right)
+\le \sum_{i=0}^{\infty}\Gamma(A_{i}). 
+\]
+\end{enumerate}
+\end{df}
+
+\begin{df}
+集合
+$X$と外測度
+$\Gamma: \mathfrak{P}(X)\to [0, \infty]$
+について集合$A$が
+\textbf{$\Gamma$-可測}
+であるとは
+任意の
+$E\subset X$について
+\[
+\Gamma(E)=\Gamma(E\cap A)+ \Gamma(E\cap (X\setminus A))
+\]
+が成り立つことである．
+$\Gamma$-可測集合全体を
+$\mathfrak{M}_{\Gamma}$
+と書くことにする．
+簡単な注意として
+$A$が$\Gamma$-可測であることと，
+以下の三つの条件は同値である．
+\begin{enumerate}
+\item 
+任意の
+$E\subset X$について
+\[
+\Gamma(E)\ge \Gamma(E\cap A)+ \Gamma(E\cap (X\setminus A))
+\]
+\item 
+任意の
+$E_{1}\subset A$と$E_{2}\subset X\setminus A$
+について
+\[
+\Gamma(E_{1}\cup E_{2})=\Gamma(E_{1})+ \Gamma(E_{2})
+\]
+
+\item 
+任意の
+$E_{1}\subset A$と$E_{2}\subset X\setminus A$
+について
+\[
+\Gamma(E_{1}\cup E_{2})\ge \Gamma(E_{1})+ \Gamma(E_{2})
+\]
+
+\end{enumerate}
+
+\end{df}
+
+
+
+
+\begin{prop}\label{prop:gaisoku}
+集合$X$
+上の外測度
+$\Gamma$
+について
+$\mathfrak{M}_{\Gamma}$
+は
+$X$上の
+$\sigma$-集合族になる．
+\end{prop}
+
+\begin{proof}
+まず
+$\emptyset, X\in \mathfrak{M}_{\Gamma}$
+は明らかである．
+
+次に
+$\mathfrak{M}_{\Gamma}$
+が$\pi$系であることを示す．
+$A, B\in \mathfrak{M}_{\Gamma}$
+を任意に取る．
+そして
+$E\subset A\cap B$
+と
+$F\subset X\setminus (A\cap B)$
+を任意に取る．
+さて，
+$G=F\cap (X\setminus A)$
+で
+$H=F\cap A$
+とおく．
+この時
+$H\subset X\setminus B$
+に注意しよう．
+すると，
+$B\in \mathfrak{M}_{\Gamma}$
+と
+$E\subset A\cap B\subset B$
+と
+$H\subset X\setminus B$
+から
+\[
+\Gamma(E)+\Gamma(H)\le \Gamma(E\cup H)
+\]
+がわかる．
+さらに
+$E\cup H\subset (A\cap B)\cup A=A$
+で
+$G\subset X\setminus A$
+なので
+$A\in \mathfrak{M}_{\Gamma}$
+から
+\[
+\Gamma(E\cup H)+\Gamma(G)\le 
+\Gamma(E\cap H\cup G)=\Gamma(E\cup F)
+\]
+となる．
+これらと
+外測度の劣加法性を用いると
+\begin{align*}
+\Gamma(E)+\Gamma(F)
+&\le \Gamma(E)+\Gamma(G)+\Gamma(H)
+\le \Gamma(E\cup H)+\Gamma(G)\\
+&\le \Gamma(E\cup H\cup G)
+=\Gamma(E\cup F)
+\end{align*}
+となるので，
+$A\cap B\in \mathfrak{M}_{\Gamma}$
+であり，
+$\mathfrak{M}_{\Gamma}$
+が
+$\pi$系であることがわかる．
+
+さて，
+$\mathfrak{M}_{\Gamma}$
+の定義から，
+$A\in \mathfrak{M}_{\Gamma}$
+ならば
+$X\setminus A\in \mathfrak{M}_{\Gamma}$
+が直ちにわかる．
+
+$\mathfrak{M}_{\Gamma}$
+が条件$(\lambda'3)$
+を満たすことをみよう．
+互いに素な族
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+で
+$A_{i}\in \mathfrak{M}_{\Gamma}$
+であるもの
+と
+$E\subset X$
+をとる．
+$S=\bigcup_{i=0}^{\infty}A_{i}$
+とおく．
+このとき次の不等式を
+$P(n, E)$
+と表すことにする．
+\[
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{n}\Gamma(E\cap A_{i})
+\le \Gamma(E). 
+\]
+まず
+$P(n, E)$が任意の
+$E$と$n$で成り立つことを帰納法で示そう．
+
+$n=0$の時は，
+$X\setminus S\subset X\setminus A_{0}$
+と
+$\Gamma$の単調性，
+そして
+$A_{0}\in \mathfrak{M}_{\Gamma}$
+から成り立つことがわかる．
+さて，任意の
+$E$について
+$P(n, E)$
+が成り立つことを仮定して，
+$P(n+1, E)$
+を示そう．
+今，
+$P(n, E\cap (X\setminus A_{n+1}))$が成り立っている．
+つまり
+\[
+\Gamma(E\cap (X\setminus A_{n+1})\cap (X\setminus S))+
+\sum_{i=0}^{n}\Gamma(E\cap (X\setminus A_{n+1})\cap A_{i})
+\le \Gamma(E\cap (X\setminus A_{n+1})). 
+\]
+である．
+ここで
+$X\setminus S\subset X\setminus A_{n+1}$であり，
+互いに素であるという条件から$A_{i}\subset X\setminus A_{n+1}$である．
+これらを
+用いると
+\[
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{n}\Gamma(E\cap A_{i})
+\le \Gamma(E\cap (X\setminus A_{n+1})). 
+\]
+を得る．
+さて，$A_{n+1}\in \mathfrak{M}_{\Gamma}$なので
+\begin{align*}
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{n+1}\Gamma(E\cap A_{i})
+=
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{n}\Gamma(E\cap A_{i})+
+ \Gamma(E\cap A_{n+1})\\
+ \le 
+ \Gamma(E\cap (X\setminus A_{n+1}))+
+  \Gamma(E\cap A_{n+1})\le 
+\Gamma(E)
+\end{align*}
+ゆえに
+$P(n+1, E)$
+が成り立つ．
+
+以上で任意の$n$と
+$E$について
+$P(n, E)$が成り立つことがわかった.
+ここで
+$P(n, E)$の式で
+$n\to \infty$をすると，
+\[
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{\infty}\Gamma(E\cap A_{i})
+\le \Gamma(E). 
+\]
+を得る．
+さて，
+$\Gamma$
+の劣加法性から
+\begin{align*}
+\Gamma(E\cap (X\setminus S))+
+\Gamma(E\cap S)\le 
+\Gamma(E\cap (X\setminus S))+
+\sum_{i=0}^{\infty}\Gamma(E\cap A_{i})
+\le \Gamma(E). 
+\end{align*}
+となるので，
+$S\in \mathfrak{M}_{\Gamma}$
+である．
+よって
+$\mathfrak{M}_{\Gamma}$
+は条件$(\lambda'3)$を満たし，
+$\mathfrak{M}_{\Gamma}$
+が
+$\lambda$系であることがわかった．
+
+以上で
+$\mathfrak{M}_{\Gamma}$
+が$\pi$系かつ
+$\lambda$系であることがわかったので，
+$\mathfrak{M}_{\Gamma}$
+は
+$\sigma$加法族である．
+\end{proof}
+
+
+\begin{df}[有限加法族]
+集合$X$の部分集合からなる族
+$\mathfrak{F}$
+が\emph{有限加法族}であるとは
+以下の条件を満たすときにいう．
+\begin{enumerate}
+\item 
+$\emptyset, X\in \mathfrak{F}$;
+\item 
+$A, B\in \mathfrak{F}$ならば
+$A\setminus B\in \mathfrak{F}$;
+\item 
+$A, B\in \mathfrak{F}$ならば
+$A\cup B\in \mathfrak{F}$. 
+\end{enumerate}
+\end{df}
+
+\begin{df}[有限加法的測度]
+$X$を集合とし，
+$\mathfrak{F}$
+を
+$X$
+上の有限加法族とする．
+このとき写像
+$m:\mathfrak{F}\to [0, \infty]$
+が$\mathfrak{F}$
+上の
+\textbf{有限加法的測度}であるとは
+$A, B\in \mathfrak{F}$
+が
+$A\cap B=\emptyset$
+を満たすならば
+$m(A\cup B)=m(A)+m(B)$
+を満たす
+ときにいう．
+\end{df}
+
+\begin{df}[有限加法的測度から誘導される外測度]
+$X$を集合とし，
+$\mathfrak{F}$
+を$X$上の有限加法族とする．
+そして$m$を
+$\mathfrak{F}$
+上の有限加法的測度とする．
+このとき写像
+$\mappa{m}:\mathfrak{P}(X)\to [0, \infty]$
+を
+\[
+\mappa{m}(A) =\inf 
+\left\{\, 
+\sum_{i=1}^{\infty}m(S_{i})
+\ 
+\middle |
+\ 
+A\subset \bigcup_{i=1}^{\infty} S_{i}, 
+S_{i}\in \mathfrak{F}
+\, \right\}
+\]
+と定義する．以下の補題によってこの
+$\mappa{m}$
+は外測度に
+なる．
+この
+$\mappa{m}$
+を$m$から誘導された外測度と呼ぶことにする．
+\end{df}
+
+\begin{lem}\label{lem:fmgaisoku}
+$X$を集合とし，
+$\mathfrak{F}$
+を$X$上の有限加法族とする．
+そして$m$を
+$\mathfrak{F}$
+上の有限加法的測度とする．
+このとき
+$\mappa{m}$は
+$X$上の外測度になる．
+\end{lem}
+\begin{proof}
+定義から
+$\mappa{m}(\emptyset)=0$
+がわかる．
+同様に定義から
+$A\subset B$
+ならば
+$\mappa{m}(A)\le \mappa{m}(B)$
+となることがわかる．
+劣加法性を示そう．
+$\{A_{i}\}_{i=1}^{\infty}$
+と
+$\epsilon\in (0, \infty)$
+を任意に取る．
+このとき任意の
+$i\in \zz_\ge 0$
+に対して
+$\{B_{i, j}\}_{j\in \zz_{\ge 0}}\subset \mathfrak{F}$
+が存在して
+\[
+A_{i}\subset \bigcup_{j\in \zz_{\ge 0}}B_{i, j}
+\]
+と
+\[
+\sum_{j=0}^{\infty}m(B_{i, j})<
+\mappa{m}(A)+\epsilon 2^{-i-1}
+\]
+を満たす．
+このとき
+$\{B_{i, j}\}_{i, j\in \zz_{\ge 0}}$
+は
+$\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+を被覆するので，
+\[
+\mappa{m}\left(\bigcup_{i\in \zz_{\ge 0}}A_{i}\right)
+\le \sum_{i=0}^{\infty}\sum_{j=0}^{\infty}m(B_{i, j})
+\le \sum_{i=0}^{\infty}\mappa{m}(A_{i})+\epsilon. 
+\]
+を得る．
+ここで
+$\epsilon\to 0$
+とすれば
+\[
+\mappa{m}\left(\bigcup_{i\in \zz_{\ge 0}}A_{i}\right)
+\le \sum_{i=0}^{\infty}\mappa{m}(A_{i})
+\]
+を得る．これは劣加法性である．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:sasa}
+$X$を集合とし，
+$\mathfrak{F}$
+を$X$上の有限加法族，$m$
+を
+$\mathfrak{F}$
+上の有限加法的測度とする．
+このとき
+$\mathfrak{F}\subset \mathfrak{M}_{\mappa{m}}$
+が成り立つ．
+\end{lem}
+\begin{proof}
+任意に$E\subset X$をとる．
+このとき$E\cap A$の被覆と$E\cap (X\setminus A)$
+の被覆を合わせたものは$E$の被覆になるので，
+これで証明が終わる．
+\end{proof}
+
+\begin{thm}[Hopf--Caratheodoryの拡張定理]\label{thm:hcthm}
+$X$を集合とし，
+$\mathfrak{F}$を$X$上の有限加法族，$m$
+を$\mathfrak{F}$上の有限加法的測度とする．
+このとき
+$\mappa{m}$が$\mathfrak{F}$上で$m$と一致するための
+必要十分条件は
+$m$が$\mathfrak{F}$上で完全加法的であることである．
+\end{thm}
+\begin{proof}
+$\mappa{m}$が$\mathfrak{F}$
+上で
+$m$と一致していたら，
+$m$が
+$\mathfrak{F}$
+上で完全加法的なのは当然である．
+逆を示そう．
+
+今，
+$m$が
+$\mathfrak{F}$上で
+完全加法的であったとする．
+このとき，任意の
+$E\in \mathfrak{F}$に対して
+$E$はそれ自身の被覆になっているので，
+$\mappa{m}(E)\le m(E)$
+がわかる．
+逆向きの不等式を示そう．
+$E$の任意の
+$\mathfrak{F}$
+の元の列による可算被覆
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+をとる．このとき
+$\mathfrak{F}$の有限加法性から
+$A_{i}\subset A_{i+1}$であるとしても良い．
+そして
+$B_{0}=E\cap A_{0}$, $B_{i+1}=
+E\cap (A_{i+1}\setminus A_{i})$
+と定義すると，
+$\{B_{i}\}_{i\in \zz_{\ge 0}}$
+は互いに素な
+$\mathfrak{F}$の可算列で
+$E=\coprod_{i\in \zz_{\ge0}}B_{i}$を満たす．
+ここで
+$m$が
+$\mathfrak{F}$上で完全加法的であるという
+仮定を用いると
+\[
+m(E)=m\left(
+\coprod_{i\in \zz_{\ge0}}B_{i}
+\right)
+=
+\sum_{i=0}^{\infty}m(B_{i}). 
+\]
+を得て，さらに$m$の単調性から
+\[
+\sum_{i=0}^{\infty}m(B_{i})\le 
+\sum_{i=0}^{\infty}m(A_{i})
+\]
+となる．よって
+\[
+m(E)\le \sum_{i=0}^{\infty}m(A_{i})
+\]
+であり，$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+の任意性から
+\[
+m(E)\le \mappa{m}(E)
+\]
+を得る．これで定理が証明された．
+\end{proof}
+
+一般に$m$の完全加法性を証明するのは大変だが，
+次の便利な言い換えがある．
+\begin{lem}\label{lem:douchi}
+$X$を集合とし，
+$\mathfrak{F}$をその上の
+有限加法族とする．
+このとき$m$が
+$\mathfrak{F}$
+上で完全加法的であることは次の二つの条件が成り立つことと同値である．
+\begin{enumerate}
+\item 
+$\mathfrak{F}$の部分集合族
+$\{E_{i}\}_{i\in \zz_{\ge 0}}$
+が
+$E_{i+1}\subset E_{i}$と
+$m(E_{0})<\infty$，
+そして
+$\bigcap_{i\in \zz_{\ge 0}}E_{i}=\emptyset$
+を満たすならば
+$\lim_{n\to \infty}m(E_{n})=0$である．
+\item 
+$\mathfrak{F}$の部分集合族
+$\{E_{i}\}_{i\in \zz_{\ge 0}}$
+が$E_{i}\subset E_{i+1}$と
+$E=\bigcup_{i\in \zz_{\ge 0}}E_{i}\in \mathfrak{F}$，
+そして
+$m(E)=\infty$
+を満たすならば
+$\lim_{n\to \infty}m(E_{n})=\infty$である．
+
+\end{enumerate}
+\end{lem}
+\begin{proof}
+まず最初に
+$m$
+が完全加法的であるときに二つの条件が成り立つことを示そう．
+$\mathfrak{F}$
+の部分集合族$\{E_{i}\}_{i\in \zz_{\ge 0}}$
+が$E_{i+1}\subset E_{i}$と$m(E_{0})<\infty$，
+そして
+$\bigcap_{i\in \zz_{\ge 0}}E_{i}=\emptyset$
+を満たすとする．
+さて任意の$n\in \zz_{\ge 0}$
+に対して
+$F_{n}=E_{n}\setminus E_{n+1}$
+とおく．このとき，
+$i\neq j$ならば
+$F_{i}\cap F_{j}=\emptyset$である．
+さらに
+$\bigcap_{i\in \zz_{\ge 0}}E_{i}=\emptyset$
+であるから
+任意の
+$k\in \zz_{\ge 0}$に対して
+$E_{k}=\bigcup_{m=k}^{\infty}F_{m}$
+が成り立つ．
+特に
+$E_{0}=\bigcup_{m=0}^{\infty}F_{m}$
+なので$m$の完全加法性から
+\[
+m(E_{0})=\sum_{m=0}^{\infty}m(F_{m})=\sum_{m=0}^{k-1}m(F_{m})+
+\sum_{m=k}^{\infty}m(F_{m})
+\]
+である．ここで
+$m(E_{k})=\sum_{m=k}^{\infty}m(F_{m})$であることと$m(E_{1})<\infty$
+であるから$\lim_{k\to \infty}m(E_{k})=0$が成り立つ．つまり(1)が成り立つ．
+
+次に
+$\mathfrak{F}$の部分集合族
+$\{E_{i}\}_{i\in \zz_{\ge 0}}$
+が$E_{i}\subset E_{i+1}$と
+$E=\bigcup_{i\in \zz_{\ge 0}}E_{i}\in \mathfrak{F}$，
+そして
+$m(E)=\infty$
+を満たすとする．
+このとき
+$F_{0}=E_{0}$，$F_{n+1}=E_{n+1}\setminus E_{n}$
+とすると$\{F_{n}\}_{n\in \zz_{\ge 0} }$
+は互いに素な
+$\mathfrak{F}$の部分族であり，
+$E=\bigcup_{n\in \zz_{\ge 0}}F_{n}$
+が成り立つ．
+$m$の完全加法性から
+\[
+\sum_{n\in \zz_{\ge 0}}m(F_{n})=m(E)=\infty
+\]
+である．ここで
+\[
+\lim_{n\to \infty}m(E_{n})=\lim_{n\to \infty}\sum_{k=1}^{n}m(F_{k})
+=\sum_{n\in \zz_{\ge 0}}m(F_{n})=m(E)=\infty
+\]
+なので(2)が成り立つ．
+
+
+今から逆に二つの条件が成り立つときに$m$が完全加法的であることを示そう．
+$\{E_{n}\}_{n\in \zz_{\ge 0}}$
+を$\mathfrak{F}$の互いに素な部分集合族であって，
+$E=\bigcup_{n\in \zz_{\ge 0}}E_{n}\in \mathfrak{F}$
+であるとする．
+まず最初に$m(E)<\infty$の場合，
+任意の$n\in \zz_{\ge 0}$に対して
+$F_{n}=E\setminus \bigcup_{i=0}^{n-1}E_{i}$
+と定義すると$F_{n+1}\subset F_{n}$であり，
+$\bigcap_{n}F_{n}=\emptyset$と
+$m(F_{0})=m(E)<\infty$を満たす．よって条件(1)から
+$\lim_{n\to \infty}m(F_{n})=0$が成り立つ．
+さて$m$の有限加法性から
+\[
+\bigcup_{i=0}^{n}E_{i}=E\setminus F_{n+1}
+\]
+である．
+さらに
+$m$の有限加法性から
+\[
+\sum_{i=0}^{n}m(E_{i})=m(E)-m( F_{n+1})
+\]
+であるから$n\to \infty$とすると
+\[
+\sum_{i=0}^{\infty}m(E_{i})=m(E)
+\]
+がなりたつ．
+
+次に$m(E)=\infty$の場合を考えよう．
+このとき$F_{n}=\bigcup_{i=0}^{n}E_{i}$
+とすると$\{F_{n}\}_{n\in \zz_{\ge 0}}$
+は(2)の仮定を満たすので
+$\lim_{n\to \infty}m(F_{n})=\infty$を満たす．
+ここで$m$の有限加法性を使うと
+\[
+\lim_{n\to \infty}\sum_{i=0}^{n}m(E_{i})=\infty
+\]
+であるがこれは
+\[
+\sum_{i=0}^{\infty}m(E_{i})=m(E)
+\]
+を意味するので$m$の完全加法性が従う．
+\end{proof}
+
+
+\section{直積測度}
+この節では有限個の測度の直積測度を構成する．
+
+\begin{df}
+$(X, \mathfrak{M})$と
+$(Y, \mathfrak{N})$
+を可測空間とする．このとき
+$A\in \mathfrak{M}$と
+$B\in \mathfrak{N}$
+の直積集合
+$A\times B$
+を
+\textbf{可測矩形集合}
+と呼ぶことにする．
+可測矩形集合の互いに素な有限族の和集合として
+表される集合を基本集合と呼ぶことにする．
+基本集合全体の集合族を
+$\mathfrak{E}$で
+書くことにする．
+記号
+$\mathfrak{M}\times \mathfrak{N}$
+で可測矩形集合全体から生成される
+$X\times Y$上の
+$\sigma$集合系とする．
+\end{df}
+
+\begin{df}
+$(X, \mathfrak{M})$と
+$(Y, \mathfrak{N})$
+を可測空間とする．このとき
+集合
+$E\subset X\times Y$
+と
+$x\in X$と
+$y\in Y$に対して
+\[
+E_{x}=\{\, y\in Y\mid (x, y)\in E\, \}, \ \ 
+E^{y}=\{\, x\in X\mid (x, y)\in E\, \}
+\]
+と定義する．
+\end{df}
+
+\begin{lem}\label{lem:slice}
+$(X, \mathfrak{M})$と
+$(Y, \mathfrak{N})$
+を可測空間とする．このとき
+任意の
+$E\in \mathfrak{M}\times \mathfrak{N}$
+と任意の
+$x\in X$および
+$y\in Y$に対して
+$E_{x}\in \mathfrak{M}$かつ
+$E^{y}\in \mathfrak{N}$
+である．
+\end{lem}
+\begin{proof}
+$E_{x}$に関する部分だけを証明する．$E^{y}$については全く同様にできる．
+
+$\mathfrak{K}$を
+$S\in \mathfrak{M}\times \mathfrak{N}$
+のうち，
+$S_{x}\in \mathfrak{M}$
+が成り立つもの全体とする．
+まず，任意の
+$A\in \mathfrak{M}$と
+$B\in \mathfrak{N}$
+に対して
+$A\times B\in \mathfrak{K}$がわかる．
+特に
+$\emptyset, X\times Y\in \mathfrak{K}$
+がわかる．
+次に
+$\mathfrak{K}$が
+$\pi$系であることを示そう．
+$S, T\in \mathfrak{K}$
+とする．
+このとき
+$S_{x}, T_{x}\in \mathfrak{M}$
+であるから
+$S_{x}\cap T_{x}\in \mathfrak{M}$
+である．
+定義から明らかに
+$S_{x}\cap T_{x}=(S\cap T)_{x}$
+であるから
+$(S\cap T)_{x}\in \mathfrak{M}$である．
+つまり
+$S\cap T\in \mathfrak{K}$がわかり，
+$\mathfrak{K}$が
+$\pi$系であることが従う．
+
+次に
+$\mathfrak{K}$が
+$\lambda$系であることを示そう．
+まず
+$X\times Y\in \mathfrak{K}$なので
+$(\lambda 1)$
+は満たされる．
+次に
+$S, T\in \mathfrak{K}$で$S\subset T$とする．
+このとき
+$S_{x}, T_{x}\in \mathfrak{M}$であり，
+定義から
+$T_{x}\setminus S_{x}=(T\setminus S)_{x}$
+なので
+$T\setminus S\in \mathfrak{K}$であり，
+$(\lambda 2)$が満たされることがわかる．
+次に$(\lambda 3)$を示そう．
+$\{S_{i}\}_{i\in \zz_{\ge 0}}$
+を
+$\mathfrak{K}$
+の部分族で単調増大なものとする．
+このとき任意の
+$i\in \zz_{\ge 0}$
+について
+$(S_{i})_{x}\in \mathfrak{M}$
+が成り立つ．
+$\mathfrak{M}$
+は$\sigma$集合系なので
+$\bigcup_{i\in \zz_{\ge 0}}(S_{i})_{x}\in \mathfrak{M}$
+である．定義から
+$\bigcup_{i\in \zz_{\ge 0}}(S_{i})_{x}
+=(\bigcup_{i\in \zz_{\ge 0}}S_{i})_{x}$
+なので
+$\bigcup_{i\in \zz_{\ge 0}}S_{i}\in \mathfrak{K}$
+である．
+よって$(\lambda 3)$が満たされることがわかり，
+$\mathfrak{K}$が
+$\lambda$系であることがわかった．
+$\mathfrak{K}$
+は可測矩形集合全体を含み，
+$\pi$系かつ
+$\lambda$系で，
+また$\sigma$集合系
+$\mathfrak{M}\times \mathfrak{N}$
+の部分族なので結局
+$\mathfrak{K}=\mathfrak{M}\times \mathfrak{N}$
+がわかる．
+これは補題が成り立つことを示している．
+\end{proof}
+
+\begin{lem}\label{lem:timesfam}
+$(X, \mathfrak{M})$と
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき以下が成り立つ．
+\begin{enumerate}
+\item 
+$\mathfrak{E}$は
+$\pi$系であり，
+なおかつ
+$E, F\in \mathfrak{E}$ならば
+$E\setminus F\in \mathfrak{E}$である．
+\item 
+$\mathfrak{M}\times \mathfrak{N}$
+は$\mathfrak{E}$を含む最小の
+$\lambda$系である．
+\end{enumerate}
+\end{lem}
+\begin{proof}
+$(2)$は$(1)$から従うので，$(1)$だけを示す．
+任意の
+$A_{1}, A_{2}\in \mathfrak{M}$と
+$B_{1}, B_{2}\in \mathfrak{N}$
+に対して
+\[
+(A_{1}\times B_{1})\cap (A_{2}\times B_{2})
+=(A_{1}\cap A_{2})\times (B_{1}\cap B_{2})
+\]
+であり，また
+\[
+(A_{1}\times B_{1})\setminus  (A_{2}\times B_{2})
+=((A_{1}\setminus A_{2})\times B_{1})
+\sqcup 
+((A_{1}\cap A_{2})\times (B_{1}\setminus B_{2}))
+\]
+なので，$(1)$もわかる．
+\end{proof}
+
+
+\begin{df}
+$X$, $Y$を集合とし，
+$f: X\times Y\to \rr^{*}$
+を写像とする．
+このとき
+任意の$x\in X$と$y\in Y$に関して
+$f_{x}: Y\to \rr^{*}$を
+$f_{x}(s)=f(x, s)$
+で定義される関数とし，
+$f^{y}: X\to \rr^{*}$を
+$f^{y}(t)=f(t, y)$
+で定義される関数とする．
+\end{df}
+
+\begin{lem}\label{lem:mapslice}
+$(X, \mathfrak{M})$と
+$(Y, \mathfrak{N})$
+を可測空間とし，
+$f: X\times Y\to \rr^{*}$
+を
+$\mathfrak{M}\times \mathfrak{N}$
+に関する可測関数とする．
+このとき任意の
+$x\in X$と
+$y\in Y$に関して
+$f_{x}$は
+$\mathfrak{N}$可測であり，
+$f^{y}$は
+$\mathfrak{M}$可測である．
+\end{lem}
+\begin{proof}
+$x\in X$に関する主張のみ証明すればよい．
+$y\in Y$に関する主張は全く同じ方法で証明することができる．
+$V$を$\rr^{*}$の開集合とする．このとき
+集合
+\[
+E=\{\, (x, y)\in X\times Y\mid f(x, y)\in V\, \}
+\]
+は
+$\mathfrak{M}\times \mathfrak{N}$可測である．
+よって先の補題から
+$E_{x}$は$\mathfrak{N}$可測となる．ここで
+\[
+E_{x}=\{\, y\in Y\mid f_{x}(y)\in V\, \}
+\]
+なので，$f_{x}$が$\mathfrak{N}$
+に関して可測関数となることがわかる．
+\end{proof}
+
+\begin{prop}\label{prop:sliceint}
+$(X, \mathfrak{M}, \mu)$と
+$(Y, \mathfrak{N}, \nu)$
+を$\sigma$有限な測度空間とする．
+集合
+$Q\in \mathfrak{M}\times \mathfrak{N}$
+に対して
+\[
+\phi(x)=\nu(Q_{x}), \ \psi(y)=\mu(Q^{y})
+\]
+とおく．
+すると
+$\phi(x)$は
+$\mathfrak{M}$可測であり，
+$\psi(y)$は
+$\mathfrak{N}$可測である．
+そして以下が成り立つ．
+\[
+\int_{X}\phi(x)\ d\mu(x)=\int_{Y}\psi(y)\ d\nu(y). 
+\]
+
+\end{prop}
+
+\begin{proof}
+$\mathfrak{K}$を命題が成り立つ
+$\mathfrak{M}\times \mathfrak{N}$
+の元全体とする．
+今から
+$\mathfrak{K}$が
+$\mathfrak{M}\times \mathfrak{N}$
+に一致することを示そう．
+まず最初に可測矩形集合，
+つまり
+$A\in \mathfrak{M}$と
+$B\in \mathfrak{N}$
+を使って
+$A\times B$と表示できる集合について考える．
+このとき
+$\phi(x)=\nu((A\times B)_{x})=\nu(B)\chi_{A}(x)$
+で
+$\psi(x)=\mu((A\times B)^{y})=\mu(A)\chi_{B}(y)$
+なので$A\times B\in \mathfrak{K}$
+がわかる．
+また，このことから
+$\mathfrak{K}$が$(\lambda1)$
+を満たすことがわかる．
+今から
+$\mathfrak{K}$が$\lambda$系であることを示そう．
+$(\lambda1)$
+を満たすことを上で述べた．
+次に
+$(\lambda3)$を満たすことを示そう．
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+を
+$\mathfrak{K}$
+の部分族で単調なものとする．
+このとき
+\[
+\phi_{i}(x)=\nu((A_{i})_{x}), \ \psi_{i}(y)=\mu((A_{i})^{y})
+\]
+とおく．
+すると
+$\mathfrak{K}$
+の定義から各
+$i\in \zz_{\ge 0}$
+について
+$\phi_{i}(x)$と
+$\psi_{i}(x)$
+は可測であり，また
+\[
+\int_{X}\phi_{i}(x)\ d\mu(x)=\int_{Y}\psi_{i}(y)\ d\nu(y). 
+\]
+が成り立つ．
+今
+$A=\bigcup_{i\in \zz_{\ge 0}}A_{i}$と置き，
+\[
+\phi(x)=\nu((A_{i})_{x}), \ \psi_{i}(y)=\mu((A_{i})^{y})
+\]
+とすると，単調収束定理から
+$\phi=\lim_{i\to \infty}\phi_{i}$
+で
+$\psi=\lim_{i\to \infty}\psi_{i}$である．
+\[
+\int_{X}\phi(x)\ d\mu(x)=\int_{Y}\psi(y)\ d\nu(y). 
+\]
+がわかる．よって
+$A\in \mathfrak{K}$
+であり$(\lambda3)$が満たされることがわかる．
+
+$(\lambda2)$を示そう．
+$A, B\in \mathfrak{K}$で
+$A\subset B$とする．
+今，$E\in \mathfrak{M}$と
+$F\in \mathfrak{N}$
+が存在して
+$\mu(E)<\infty$と$\nu(F)<\infty$
+で
+$A\subset B\times E\times F$
+を満たしている場合を最初に考える．
+このとき
+$\phi_{A}$と
+$\phi_{B}$, 
+$\psi_{A}$と
+$\psi_{B}$
+は全て有限の値しか取らないので，
+$\phi_{B\setminus A}=\phi_{B}\setminus \phi_{A}$
+と$\psi_{B\setminus A}=\psi_{B}\setminus \psi_{A}$
+は可測であり，
+\[
+\int_{X}\phi_{B\setminus A}(x)\ d\mu(x)=
+\int_{Y}\psi_{B\setminus A}(y)\ d\nu(y). 
+\]
+がなりたつ．
+
+次に任意の
+$E\in \mathfrak{M}$と
+$F\in \mathfrak{N}$
+で
+$E\in \mathfrak{M}$と
+$F\in \mathfrak{N}$
+を満たすものについて，
+任意の
+$A\in \mathfrak{M}\times \mathfrak{N}$
+は
+$A\cap (E\times F)\in \mathfrak{K}$
+を満たすことを示そう．
+この主張が成り立つ
+$\mathfrak{K}$
+の集合全体を
+$\mathfrak{L}$
+とすると，
+$\mathfrak{L}$
+には可測矩形集合が全て含まれており，
+また先の
+$(\lambda2)$の証明と同様に
+$(\lambda2)$
+を満たすことがわかる．そして先の証明から，
+$A\subset B$ならば
+$B\setminus A\in \mathfrak{L}$
+もわかる．
+よって主張が成り立つ．
+$\sigma$有限性の仮定から
+$\mathfrak{M}$の部分族
+$\{S_{i}\}_{i\in \zz_{\ge 0}}$
+と
+$\mathfrak{N}$
+の部分族
+$\{T_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$\{S_{i}\times T_{j}\}_{i, j\in \zz_{\ge 0}}$
+が互いに素な
+$X\times Y$の被覆になる．
+今任意の
+$A, B\in \mathfrak{K}$で
+$A\subset B$
+となるものを取ろう．
+そして
+$B_{i, j}=B\cap (S_{i}\times T_{j})$で
+$A_{i, j}=A\cap (S_{i}\times T_{j})$
+と書くことにする．
+このとき
+$A_{i, j}\subset B_{i, j}$である．
+そして先の主張から
+$B_{i,j}\setminus A_{i, j}\in \mathfrak{K}$
+である．
+また，
+$B\setminus A=\bigcup_{i, j}B_{i, j}\setminus A_{i, j}$
+であるから主張から
+$B\setminus A\in \mathfrak{K}$
+である．
+
+以上で
+$\mathfrak{K}$が
+$\lambda$系であることがわかった．
+$\mathfrak{E}$は$\pi$系なので，
+$\mathfrak{K}=\mathfrak{M}\times \mathfrak{N}$
+であることがわかる．
+\end{proof}
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$と
+$(Y, \mathfrak{N}, \nu)$
+を$\sigma$有限な測度空間とする．
+上の命題を元にして，
+$\mathfrak{M}\times \mathfrak{N}$上の測度
+$\mu\times \nu$を
+\[
+(\mu\times \nu)(Q)=
+\int_{X}\mu(Q_{x})\ d\mu(x)=
+\int_{Y}\nu(Q^{y})\ d\nu(y). 
+\]
+と定義する．
+定義式から
+$\mu\times \nu$
+は確かに測度の定義を満たしていることがわかる．
+また
+$A\times B$
+に対して$\mu(A)\nu(B)$
+を返す測度は
+$\mu\times \nu$しか存在しない．
+$\mu\times \nu$を$\mu\otimes \nu$と書いたりもする．
+一般に有限個の測度$\mu_{1}, \dots, \mu_{n}$に対して直積測度が考えられるが，
+それを$\bigotimes_{i=1}^{n}\mu_{i}$などと書くことにする．
+\end{df}
+
+Fubini-Tonelliの定理を証明する．
+\begin{thm}\label{thm:ft}
+$(X, \mathfrak{M}, \mu)$と
+$(Y, \mathfrak{N}, \nu)$
+を$\sigma$有限な測度空間とする．
+$f: X\times Y\to \rr^{*}$を
+$\mathfrak{M}\times \mathfrak{N}$
+可測な関数とする．
+このとき以下が成り立つ．
+\begin{enumerate}
+\item $f(X\times Y)\subset  [0, \infty]$
+とする．そして
+\[
+\phi(x)=\int_{Y}f_{x}(y)\ d\nu(y), \ 
+\psi(y)=\int_{X}f^{y}(x)\ d\mu(x)
+\]
+とすると$\phi$は
+$\mathfrak{M}$可測で
+$\psi$は
+$\mathfrak{N}$可測であり，
+さらに
+\[
+\int_{X}\phi(x)\ d\mu(x)=\int_{Y}\psi(y)\ d\nu(y)
+=\int_{X\times Y} f(x, y)\ d(\mu\times \nu)(x, y)
+\]
+が成り立つ．
+\item 
+$f\in L^{1}(\mu\times \nu)$ならば
+ほとんど至る所の
+$x\in X$で
+$f_{x}\in L^{1}(\nu)$
+であり，ほとんど至る所の
+$y\in Y$で$f^{y}\in L^{1}(\mu)$
+が成り立ち，さらに
+\begin{align*}
+\int_{X}\int_{Y}f(x, y)\ d\nu(y)\ d\mu(x)
+&=\int_{Y}\int_{X} f(x, y)\ d\mu(x)\ d\nu(y)\\
+&=\int_{X\times Y} f(x, y)\ d(\mu\times \nu)(x, y).
+\end{align*}
+が成り立つ．
+
+\end{enumerate}
+\end{thm}
+\begin{proof}
+$(1)$は命題 \ref{prop:sliceint}と
+単調収束定理と単関数近似からわかる．
+$(2)$は$(1)$から従う．
+\end{proof}
+
+\section{無限直積確率測度の構成その１：標準的な方法}
+この節では標準的な方法で無限直積確率測度を
+構成する．
+
+\begin{df}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i})\}_{i\in I}$
+を可測空間の族とする．
+このとき$\prod_{i\in I}X_{i}$
+の部分集合が
+\textbf{柱状集合}であるとはそれが
+集合族$\{A_{i}\}_{i\in I}$であって
+$A_{i}\in \mathfrak{M}_{i}$を満たしさらに
+有限個の$i$をのぞいて$A_{i}=X_{i}$となるようなものを用いて
+\[
+\prod_{i\in I}A_{i}
+\]
+の形にかける時にいう．
+柱状集合全体を$\mathfrak{C}$で書くことにする．
+そして$\mathfrak{C}$から生成される有限加法族を
+$\mathfrak{D}$から生成される完全加法族を
+$\bigotimes_{i\in I}\mathfrak{M}_{i}$と書くことにする．(つまり
+$\bigotimes_{i\in I}\mathfrak{M}_{i}=\sigma(\mathfrak{D})=\sigma(\mathfrak{C})$)
+以下では可測空間の直積にはこの可測構造が備わっているものとする．
+
+\end{df}
+
+
+\begin{lem}\label{lem:finiteunion}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i})\}_{i\in I}$
+を確率空間の族とする．このとき
+$\mathfrak{D}$の任意の元は
+$\mathfrak{C}$の交わらない有限個の元の和集合
+として表される．
+\end{lem}
+
+\begin{df}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i}, \mu_{i})\}_{i\in I}$
+を確率空間の族
+とする．
+$\mathfrak{C}$上に以下のようにして関数
+$\bigotimes_{i\in I}\mu_{i}$を定義する．
+\[
+\bigotimes_{i\in I}\mu_{i}\left(\prod_{i\in I}A_{i}\right)=
+\prod_{i\in I}\mu_{i}(A_{i})
+\]
+各$\mu_{i}$が確率測度であるから，$\mathfrak{C}$
+上では$\mu$は有限個の実数の積として定義されていることに注意しよう．
+
+一般に$A\in \mathfrak{D}$に対しては
+補題 \ref{lem:finiteunion} を用いて
+$A=\coprod_{i=1}^{k}E_{i}$ ($E_{i}\in \mathfrak{C}$)と表して，
+\[
+\bigotimes_{i\in I}\mu_{i}(A)=
+\sum_{i=1}^{k}\bigotimes_{i\in I}\mu_{i}(E_{i})
+\]
+と定義する．
+この定義のwell-definedness
+は次の補題で示す．
+\end{df}
+
+\begin{lem}\label{lem:yuugen}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i}, \mu_{i})\}_{i\in I}$
+を確率空間の族とする．
+このとき$\mathfrak{D}$上の関数
+$\bigotimes_{i\in I}\mu_{i}$は
+well-definedであり，さらに
+有限加法的である．
+\end{lem}
+\begin{proof}
+$\{E_{i}\}_{i=1}^{k}$
+と
+$\{F_{i}\}_{i=1}^{l}$
+はそれぞれ互いに交わらない
+$\mathfrak{C}$内
+の列とし
+\[
+\coprod_{i}^{k}E_{i}
+=\coprod_{i}^{l}F_{i}
+\]
+を満たしているとする．
+さて，$\mathfrak{C}$の定義から
+$E_{i}=\prod_{j\in I}Q_{i, j}$
+で
+$F_{i}=\prod_{j\in I}W_{i, j}$と書き表すことができ，
+$J_{E}=\{\, j\in I\mid \exists i\ E_{i, j}\neq X_{j}\, \}$
+で
+$J_{F}=\{\, j\in I\mid \exists i\  F_{i, j}\neq X_{i}\, \}$
+と定義するとこれらはそれぞれ有限集合となる．
+ここで$J=J_{E}\cup J_{F}$とすると
+$\bigotimes_{i\in I}\mu_{i}$の定義から
+\[
+\sum_{i=1}^{k}\bigotimes_{i\in I}\mu_{i}(E_{i})
+=
+\sum_{i=1}^{k}\bigotimes_{i\in J}\mu_{i}(E_{i})
+\]
+であり，
+\[
+\sum_{i=1}^{k}\bigotimes_{i\in I}\mu_{i}(F_{i})
+=
+\sum_{i=1}^{k}\bigotimes_{i\in J}\mu_{i}(F_{i})
+\]
+である．
+$\bigotimes_{i\in J}\mu_{i}$
+は有限個の測度の直積なので有限加法性を持つ．
+よって
+\[
+\sum_{i=1}^{k}\bigotimes_{i\in I}\mu_{i}(E_{i})
+=
+\sum_{i=1}^{k}\bigotimes_{i\in I}\mu_{i}(F_{i})
+\]
+が成り立つので，$\bigotimes_{i\in I}\mu_{i}$
+は$\mathfrak{D}$上でwell-definedである．
+
+有限加法性は上と同様にやはり
+有限個の測度の直積測度の加法性から従う．
+\end{proof}
+
+次の定理は角谷 \cite{Kaku} が証明した．
+\begin{thm}\label{thm:kakutani}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i}, \mu_{i})\}_{i\in I}$
+を確率空間の族とする．
+すると
+$\bigotimes_{i\in I}\mu_{i}$は
+$\mathfrak{D}$上で
+完全加法的である．
+\end{thm}
+\begin{proof}
+完全加法性を証明するために，次のことを証明する:
+$\{E_{k}\}_{k\in \zz_{\ge 0}}$
+を$\mathfrak{D}$の部分族とし，
+$E_{k+1}\subset E_{k}$
+と$\delta>0$が存在して$\bigotimes_{i\in I}\mu_{i}(E_{k})>\delta>0$
+が成り立つならば
+$\bigcap_{k=0}^{\infty}E_{k}\neq \emptyset$. 
+である．
+
+柱状集合の定義と
+$\mathfrak{D}$の定義から，
+$\{E_{k}\}_{k\in \zz_{\ge 0}}$のそれぞれの元の直積因子のうち，$\bigotimes_{i\in I}\mu_{i}$
+の定義に寄与する因子の個数は高々可算個しかない．
+よって
+$I$が可算集合の時にこれを示しても一般性を失わない．
+$I=\zz_{\ge 1}$と仮定してもよい．
+各$n\in I$に対して
+$\mu_{n}^{*}=\bigotimes_{i> n}\mu_{i}$と定義する．
+$\mu_{n}^{*}\otimes \bigotimes_{i=1}^{n}\mu_{i}
+=\bigotimes_{i\in I}\mu_{i}$となることに注意せよ．
+$A\subset \prod_{i\in I}X_{i}$と
+$x_{1}\in X_{2}, \dots, x_{n}\in X_{n}$に対して
+$A(x_{1}, \dots, x_{n})=
+\{\, z\in \prod_{i>n}X_{i}\mid 
+z\in A, z_{1}=x_{1}, \dots, z_{n}=x_{n}
+\, \}$
+と書くことにする．
+
+まず各$j\in I$に対して
+$F_{j}=\{\,
+ x\in X_{1}\mid 
+\mu_{1}^{*}(E_{j}({x}))>\delta/2
+\, \}$
+とおく．
+すると
+\begin{align*}
+\delta<\mu(E_{j})&=
+\int_{X_{1}}\mu_{1}^{*}((E_{j})({x}))\ d\mu_{1}(x)
+=
+\left(\int_{F_{j}}+\int_{X_{1}\setminus F_{j}}\right)
+\mu_{1}^{*}(E_{j}(x))\ d\mu_{1}\\
+&
+\le \mu_{1}(F_{j})+\delta/2
+\end{align*}
+よって$\delta/2<\mu_{1}(F_{j})$
+である．
+また$E_{j+1}\subset E_{j}$より，
+$F_{j+1}\subset F_{j}$である．
+よって$\mu_{1}$の完全加法性
+と補題 \ref{lem:douchi} により
+$\bigcap_{j\in I}F_{j}\neq \emptyset$
+となる．
+そこで
+$a_{1}\in \bigcap_{j}F_{j}$をとると，
+任意の$j\in I$について
+$\mu_{1}^{*}(E_{j}(a_{1}))>\delta/2$がなりたつ．
+
+上の論法を繰り返して
+帰納的に
+$\{a_{i}\}_{i\in I}\in \prod_{i\in I}X_{i}$を
+任意の$i, j\in I$について
+$\mu_{i}^{*}(E_{j}(a_{1}, a_{2}, \dots, a_{i}))>\delta/2^{i}$
+となるように構成できる．
+$a=(a_{i})_{i\in \zz_{\ge 0}}$とおこう．
+すると任意の$i, j\in I$について
+$\mu_{i}^{*}(E_{j}(a_{1}, \dots, a_{i}))>0$である．
+各$E_{j}$は互いに交わらない有限個の
+$\mathfrak{C}$の元の和集合として表すことができる．
+それらを
+$\{G_{j, l}\}_{l=1}^{h}$としよう．
+そして
+$\{G_{j, l}\}_{l=1}^{h}$の直積因子のうち，
+$X_{i}$と一致しない
+$i$全体を$J$とおくと，これは有限集合になる．
+$k\in I$を十分大きく取り，$J\subset \{1, \dots, k\}$
+となるようにする．このとき
+$\mu_{k}^{*}(E_{j}(a_{1}, \dots, a_{k}))=
+\sum_{l=1}^{h}\mu_{k}^{*}(G_{j, l}(a_{1}, \dots, a_{k}))
+>0$
+となる．
+特に
+$\mu_{k}^{*}(G_{j, l}(a_{1}, \dots, a_{k}))>0$
+となる$l$が存在する．
+$G_{j, l}=\prod_{i\in I}T_{i}$と表示しよう．
+$i>k$ならば$T_{i}=X_{i}$である．
+もしも$(a_{1}, \dots, a_{k})\not\in \prod_{i=1}^{k}T_{i}$
+ならば$G_{j, l}(a_{1}, \dots, a_{k})=\emptyset$となり，
+$\mu_{k}^{*}(G_{j, l}(a_{1}, \dots, a_{k}))=0$になるので矛盾する．よって
+$(a_{1}, \dots, a_{k})\in \prod_{i=1}^{k}T_{i}$である．
+$i>k$ならば$T_{i}=X_{i}$であるから
+$a\in \prod_{i\in I}T_{i}=G_{j, l}$である.
+つまり$a\in E_{j}$となる．
+$j\in I$は任意なので$a\in \bigcap_{j\in I}E_{j}$である．
+よって補題 \ref{lem:douchi} より$\mu$の完全加法性が証明された．
+\end{proof}
+以上から，
+$\mu$は$\bigotimes_{i\in I}\mathfrak{M}_{i}$上の測度になっていることがわかる．
+
+
+\section{無限もしくは有限直積確率測度の構成その２：別の方法}
+
+
+ここでは標準的な方法とは別の簡明な証明を紹介する．
+論文 \cite{Sae}で紹介されている方法である．
+次の命題が大元である．
+
+\begin{prop}\label{prop:hodai}
+$(X, \mathfrak{M})$
+を可測空間とし，
+$\mathfrak{G}$は
+$\mathfrak{M}$
+の部分族であり，
+$A, B\in \mathfrak{G}$ならば，
+$A\setminus B$は$\mathfrak{G}$
+の互いに交わらない有限個の元の和集合で表すことができると仮定する．
+そして$\mathfrak{G}$は
+$\mathfrak{M}$を生成するとする．
+$\mu: \mathfrak{G}\to [0, \infty]$
+を関数とする．
+このときもしも$\mathfrak{G}$の元からなる
+互いに素な族$\{A_{i}\}_{i\in \zz_{\ge 0}}$で
+$\bigcup_{i=0}^{\infty}A_{i}=X$を満たすものについて
+常に
+\begin{equation}
+\tag{A}
+\sum_{i=0}^{\infty}\mu(A_{i})=1
+\end{equation}
+が満たされるならば
+$\mu$の拡張であるような
+$\mathfrak{M}$上の完全加法的測度
+が一意的に存在する．
+\end{prop}
+\begin{proof}
+$\mathfrak{G}$
+から生成される有限加法族を
+$\mathfrak{A}$と書くことにする．
+$\mathfrak{G}$に関する仮定から，
+$\mathfrak{A}$のすべての元は$\mathfrak{G}$
+の互いに交わらない有限個の和集合で表すことができる．
+（そのように表すことのできる集合全体は仮定から有限加法族になり，
+$\mathfrak{G}$を含んでいるので
+$\mathfrak{A}$と一致する．）
+
+まず最初に$\mu$を$\mathfrak{A}$に拡張することを考えよう．
+$A\in \mathfrak{A}$に対して$\mu(A)$の値を
+$A=\coprod_{i=1}^{k}A_{i}$ $(A_{i}\in \mathfrak{G})$
+と表したときに$\mu(A)=\sum_{i=1}^{k}\mu(A_{i})$
+と定義しよう．
+この定義が$A$の表示の仕方によらないことを示そう．
+$X\setminus A\in \mathfrak{A}$なので
+$X\setminus A=\coprod_{i=1}^{a}W_{i}$となる
+$W_{i}\in \mathfrak{G}$が存在する．
+このとき
+$\mu$に関する仮定から
+\[
+\sum_{i=0}^{k}\mu(A_{i})+\sum_{i=0}^{a}\mu(W_{i})=1
+\]
+である．
+そして$A=\coprod_{i=0}^{k'}A_{i}'$ $(A_{i}'\in \mathfrak{A})$と表示されているなら上と同様の議論で
+\[
+\sum_{i=0}^{k'}\mu(A_{i}')+\sum_{i=0}^{a}\mu(W_{i})=1
+\]
+を満たす．よって
+\[
+\sum_{i=0}^{k}\mu(A_{i})
+=
+\sum_{i=0}^{k'}\mu(A_{i}')
+\]
+なので$\mu(A)$の定義はwell-definedである．
+よって$\mu$を$\mathfrak{A}$上まで拡張できた．
+Hopf--Caratheodoryの拡張定理 (定理 \ref{thm:hcthm})を適応するために
+次に$\mu$が$\mathfrak{A}$上で完全加法的であることを示そう．
+$\{A_{i}\}_{i=0}^{\infty}$を$\mathfrak{A}$内の互いに交わらない集合の列とし，
+$A=\coprod_{i=0}^{\infty}A_{i}$とおき，
+$A\in \mathfrak{A}$
+と仮定する．
+$X\setminus A\in \mathfrak{A}$なので
+$X\setminus A=\coprod_{i=1}^{a}W_{i}$となる
+$W_{i}\in \mathfrak{G}$が存在する．
+このとき，
+$\mu(A)$の定義と$\mu$に関する仮定から
+$\mu(A)=1-\sum_{i=0}^{a}\mu(W_{i})$となる．
+さて，各$i$について$A_{i}=\coprod_{j=0}^{k_{i}}E_{i, j}$ 
+$(E_{i, j}\in \mathfrak{G})$と表す．
+すると，
+$\{E_{i, j}\}_{i, j}$と$\{W_{i}\}_{i=0}^{a}$は互いに交わらない
+$\mathfrak{G}$の元の列でその和集合は$X$になるから，
+$\mu$に関する仮定から
+\[
+\sum_{i, j}\mu(E_{i, j})+
+\sum_{i=0}^{a}\mu(W_{i})=1
+\]
+である．この和は非負の数の和なので左辺は絶対収束しているので，和の順番を変えても値は変わらない．よって
+\[
+\sum_{i=0}^{\infty}\sum_{j=0}^{k_{i}}\mu(E_{i, j})=
+1-
+\sum_{i=0}^{a}\mu(W_{i})
+\]
+である．
+そして$\mu$の定義から
+\[
+\sum_{i=0}^{\infty}\sum_{j=0}^{k_{i}}\mu(E_{i, j})=
+\sum_{i=0}^{\infty}\mu(A_{i})
+\]
+である．よって以上の議論から
+\[
+\mu(A)=\sum_{i=0}^{\infty}\mu(A_{i})
+\]
+がわかり，$\mu$は$\mathfrak{A}$上で完全加法的である．
+$\mathfrak{A}$から生成される$\sigma$加法族は
+$\mathfrak{M}$なので，$\mu$に対して
+Hopf--Caratheordoryの拡張定理 (定理 \ref{thm:hcthm})
+を適応すれば
+命題の証明が終わる．
+一位性は命題 \ref{prop:equal}からわかる．
+\end{proof} 
+
+\begin{thm}\label{thm:delta}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i}, \mu_{i})\}_{i\in I}$
+を確率空間の族とする．
+このとき$\mathfrak{D}$上の
+無限直積測度
+$\bigotimes_{i\in I}\mu_{i}$は完全加法性を満たす．
+\end{thm}
+
+\begin{proof}
+$\mathfrak{C}$は$\mathfrak{D}$
+を生成し，さらに
+任意の$A, B\in \mathfrak{C}$
+について$A\setminus B$は$\mathfrak{C}$の互いに交わらない有限個の元の和集合で表されるから，
+命題 \ref{prop:hodai}の仮定を満たしている．
+今から$\bigotimes_{i\in I}\mu_{i}$が
+条件(A)を満たしていることを示そう．
+
+$\{A_{i}\}_{i\in \zz_{\ge 0}}$を
+$\mathfrak{C}$内の列で互いに交わらないもので，
+$\bigcup_{i}A_{i}=\prod_{i\in I}X_{i}$
+を満たすとする．
+このとき条件(A)を示すには
+$I=\zz_{\ge 0}$
+と仮定しても一般性を失わない．
+
+記述を簡単にするために
+$\mu=\bigotimes_{i\in I}\mu_{i}$
+と書くことにする．
+
+各$n\in \zz_{\ge 0}$について
+$A_{n}=\prod_{i}A_{n, i}$
+$(A_{n, i}\in \mathfrak{M}_{i})$
+と表し，$i_{n}\in \zz_{\ge 0}$を
+$i>i_{n}$ならば
+$A_{n, i}=X_{i}$
+を満たすものとする．
+
+まず最初に次の主張を証明する：
+もしも$m\in \zz_{\ge 0}$
+で$x\in A_{m}$ならば任意の$n\in \zz_{\ge 0}$
+について
+\begin{equation}
+\tag{E1}
+\left(
+\prod_{i=0}^{i_{m}}\chi_{A_{n, i}}(x_{i})
+\right)
+\prod_{i>i_{m}}\mu_{i}(A_{n, i})
+=\delta_{m, n}
+\end{equation}
+が成り立つ．
+
+もし$m=n$ならば，
+$x\in A_{m}$と$\mu_{i}(A_{m, i})=1$ $(i>i_{m})$から
+等式 (E1) は成り立つ．
+
+次に$m\neq n$の場合を考えよう．
+
+もし$i_{n}<i_{m}$ならば
+$i>i_{m}$について$A_{n, i}=X_{i}$
+であるから
+$\prod_{i>i_{m}}\mu_{i}(A_{n, i})=1$
+となる．また同じ理由で
+\[
+\prod_{i=0}^{i_{m}}A_{m, i}
+\neq
+\prod_{i=0}^{i_{m}}A_{n, i}
+\]
+となるので，$A_{m}\cap A_{n}=\emptyset$から
+\[
+\prod_{i=0}^{i_{m}}A_{m, i}
+\cap
+\prod_{i=0}^{i_{m}}A_{n, i}=\emptyset
+\]
+がわかる．
+よって
+$x\in A_{m}$ならば
+\[
+\prod_{i=0}^{i_{m}}\chi_{A_{n, i}}(x_{i})=0
+\]
+となるから等式 (E1) がなりたつ．
+
+もし$i_{m}<i_{n}$ならば直積の定義から
+任意の$e_{i}\in X_{i}$について
+\[
+\left(
+\prod_{i=0}^{i_{m}}\chi_{A_{n, i}}(x_{i})
+\right)
+\left(
+\prod_{i=i_{m}+1}^{i_{n}}\chi_{A_{n, i}}(e_{i})
+\right)=0
+\]
+となる．$e_{i}$を変数としてみなして，他の$e_{j}$を固定したときに この等式の左辺の$e_{i}$を変数とする関数は可測集合の特性関数の定数倍なので
+$\mathfrak{M}_{i}$可測である．
+そこでこの式を$\mu_{i}$ $(i=i_{m}+1, \dots, i_{n})$
+で$e_{i}$について繰り返し積分すると
+\[
+\left(
+\prod_{i=0}^{i_{m}}\chi_{A_{n, i}}(x_{i})
+\right)
+\left(
+\prod_{i=i_{m}+1}^{i_{n}}\mu_{i}({A_{n, i}})
+\right)=0
+\]
+を得る．
+$i>i_{n}$ならば$\mu_{i}(A_{n, i})=\mu_{i}(X_{i})=1$なので
+\[
+\left(
+\prod_{i=0}^{i_{m}}\chi_{A_{n, i}}(x_{i})
+\right)
+\left(
+\prod_{i>i_{m}}\mu_{i}({A_{n, i}})
+\right)=0
+\]
+を得る．
+よって等式  (E1) が証明された．
+ちなみにここで$e_{i}$について繰り返し積分しているが，
+これは直積測度を使って積分しているわけではなく，多変数の関数を一変数ずつ積分しているだけなので，直積測度の存在を前提にせずとも議論は成り立つ．
+(多変数の関数を一変数づつ積分した値と直積測度による積分が同じ値になるというのがFubini-Toneliの定理 \ref{thm:ft} であった．)
+
+等式 (E1) を用いて
+$\mu$が命題の条件 (A) を満たすことを示そう．
+$\prod_{i\in I}X_{i}$
+の互いに素な被覆$\{A_{i}\}$で
+\[
+\sum_{i=0}^{\infty}\mu(A_{i})<1
+\]
+となるものが存在すると仮定しよう．
+つまり次が成り立つということである．
+\begin{equation}
+\tag{B}
+\sum_{i=0}^{\infty}\prod_{j=0}\mu_{j}(A_{i, j})<1
+\end{equation}
+である．
+さらに，
+もし任意の$x\in X_{0}$について
+\[
+\sum_{i=0}^{\infty}\chi_{A_{i, 0}}(x)
+\prod_{j=1}\mu_{j}(A_{i, j})=1
+\]
+と仮定すると，この式を$x_{1}$について
+$\mu_{0}$で積分をすると式 (B)に矛盾する．
+よって
+$a_{0}\in X_{0}$であって
+\[
+\sum_{i=0}^{\infty}\chi_{A_{i, 0}}(a_{0})
+\prod_{j=1}\mu_{j}(A_{i, j})<1
+\]
+となるものが存在する．
+以上の議論を繰り返し行うと，
+帰納的に列$\{a_{i}\}\in \prod_{i\in I}X_{i}$であって，
+任意の$k\in \zz_{\ge 0}$について
+\begin{equation}
+\tag{C}
+\sum_{i=0}^{\infty}
+\left(\prod_{j=0}^{k}\chi_{A_{i, j}}(a_{j})\right)
+\left(\prod_{j=k+1}^{\infty}\mu_{j}(A_{i, j})\right)<1
+\end{equation}
+を満たすものが存在する．
+
+ところで等式 (E1)において
+$a=(a_{i})_{i\in \zz_{\ge 0}}$
+とおくと$\prod_{i\in I}X_{i}=\coprod_{i}A_{i}$なので
+$a\in A_{m}$となる$m\in I$が存在する．
+よって先の主張から
+\[
+\sum_{i=0}^{\infty}
+\left(\prod_{j=0}^{m}\chi_{A_{i, j}}(a_{j})\right)
+\left(\prod_{j=m+1}^{\infty}\mu_{j}(A_{i, j})\right)
+=\sum_{i=0}^{\infty}\delta_{i, m}=1
+\]
+であるがこれは式（C)に矛盾する．
+これで$\mu$が先の命題 \ref{prop:hodai}の仮定を満たすことがわかった．よって命題 \ref{prop:hodai}より，
+$\mu$は$\mathfrak{D}$上で完全加法的である．
+\end{proof}
+
+\begin{rmk}
+この節での直積測度の構成方法では，
+有限個の測度の直積測度の存在を前提にしていない．
+特に$I$を有限集合とするこの節の構成から有限個の場合の直積測度の存在もわかる．ただし，上で述べた構成は確率測度に関するものとして述べているので，適宜正規化をして適応する必要がある．有限個の直積測度は$\sigma$有限性を仮定するので，それも踏まえると良いだろう．
+一般に$\sigma$有限性を仮定しないと直積測度の一意性がなくなる．
+\end{rmk}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{-20pt}
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{hatenabsokudo-1}
+はてなブログの記事
+「入射角16.225°の測度論入門：-1」, 
+https://concious4410.hatenablog.com/entry/2015/10/24/140238
+
+\bibitem{hatenabsokudo0}
+はてなブログの記事
+「入射角16.225°の測度論入門：0」, 
+https://concious4410.hatenablog.com/entry/2015/10/25/165608
+
+\bibitem{hatenabsokudo1}
+はてなブログの記事
+「入射角16.225°の測度論入門：1」, 
+https://concious4410.hatenablog.com/entry/2015/10/26/112239
+
+
+
+
+\bibitem{0}小谷眞一, 「測度と確率」, 2005　岩波書店．
+
+\bibitem{1}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+
+\bibitem{Kiyo} 伊藤清三，「ルベーグ積分入門」，
+1963年，
+裳華房．
+\bibitem{Bell}
+J. Bell, 
+Infinite product measure, 
+2022/1/1閲覧
+
+\verb|http://individual.utoronto.ca/jordanbell/notes/productmeasure.pdf|
+
+\bibitem{3}K. R. Parthasarathy,  Probability measures on metric spaces. 
+Academic Press. 
+
+
+
+\bibitem{Ru} W. 
+Rudin, 
+\textit{Real and Complex analysis}, 
+3rd. ed. McGraw-Hill. 1987. 
+\bibitem{Sae}S. Saeki, 
+\textit{A proof of the existence of infinite product probability measures}, 
+Amer. Math. Monthly, 
+103(8) (1996), 682-683. 
+
+\bibitem{Kaku}S. Kakutani, 
+\textit{Notes on infinite product measure space, I. }, 
+Proc. Imp. Acad. 19(3) (1943), 
+148--151. 
+\end{thebibliography}
+
+「知識は公共財」
+
+
+
+以下に参考文献を追加しておく．
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{pp.bib}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

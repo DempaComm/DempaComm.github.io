@@ -1,0 +1,1427 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+%\usepackage{showkeys}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+
+\DeclareMathOperator{\mean}{\mathbb{E}}
+\DeclareMathOperator{\varian}{\mathbb{V}}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+\title{確率論の初歩と大数の法則}
+\author{ナンブ キトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+
+この文書では，確率変数などの定義や，確率変数の独立性の概念を説明した後に，様々な形の大数の法則を紹介する．
+
+
+\section{確率空間の基本事項}
+$\pi$-$\lambda$定理については
+\cite{hatena0}
+を参考にしても良い．
+\begin{df}[$\pi$系]
+$X$を集合とし，
+$\mathfrak{A}$を$X$の部分集合族とする．
+このとき
+$\mathfrak{A}$が
+\textbf{$\pi$系}
+であるとは以下の条件を満たすときにいう．
+\[
+\forall A, B\in \mathfrak{A}\ A\cap B\in \mathfrak{A}. 
+\]
+また，$X$の部分集合族$\mathfrak{S}$に対して，
+$\mathfrak{S}$から生成される最小の$\pi$系を
+$\pi(\mathfrak{S})$と書くことにする．
+\end{df}
+
+\begin{df}
+$X$を集合とし，
+$\mathfrak{B}$を$X$の部分集合族とする．
+このとき
+$\mathfrak{B}$が
+\textbf{$\lambda$系}
+であるとは以下の条件を満たすときにいう．
+\begin{enumerate}
+\item[\emph{($\lambda$1)}] $X\in \mathfrak{B}$. 
+\item[\emph{($\lambda$2)}] $\forall A, B\in \mathfrak{B}\ 
+A\subset B\To B\setminus A\in \mathfrak{B}$. 
+\item[\emph{($\lambda$3)}] 
+$\{A_{i}\}_{i\in \nn}\subset \mathfrak{B}$
+が単調な列ならば，
+$\bigcup_{i\in \nn}A_{i}\in \mathfrak{B}$. 
+\end{enumerate}
+また，$X$の部分集合族$\mathfrak{S}$に対して，
+$\mathfrak{S}$から生成される最小の$\lambda$系を
+$\lambda(\mathfrak{S})$と書くことにする．
+
+\end{df}
+
+\begin{thm}[$\pi$-$\lambda$定理]\label{thm:plthm}
+$X$を集合とし，
+$\mathfrak{A}$を
+$X$の
+$\pi$系で，
+$\mathfrak{B}$を
+$X$の
+$\lambda$系とする．
+このとき
+$\mathfrak{A}\subset \mathfrak{B}$
+ならば
+\[
+\sigma(\mathfrak{A})\subset \mathfrak{B}
+\]
+が成り立つ．ここで$\sigma(\mathfrak{A})$
+は$\mathfrak{A}$から生成される最小の完全加法族を表すとする．
+\end{thm}
+
+\begin{df}
+位相空間$X$に対して，$X$の開集合系から生成される
+完全加法族を$\mathfrak{B}(X)$と書くことにする．
+この集合族を\textbf{ボレル集合族}という．
+\end{df}
+
+\begin{df}
+測度空間
+$(X, \mathfrak{M})$
+上の測度
+$\mu$が
+\textbf{確率測度}であるとは，
+$\mu(X)=1$
+を満たすときにいう．
+$\mu$
+が確率測度であるとき，測度空間
+$(X, \mathfrak{M}, \mu)$を
+\textbf{確率空間}と呼び，
+$X$の元のことを
+\textbf{事象}と呼ぶ．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$から
+可測空間$(Y, \mathfrak{N})$への可測写像可測写像を
+\textbf{$(Y, \mathfrak{N})$-値確率変数}と呼ぶ．
+あるいは紛れがないときには単に
+\textbf{確率変数}と呼んだりもする．
+\end{df}
+
+\begin{df}
+確率空間
+$(X, \mathfrak{M}, \mu)$
+とその上の確率変数$f$について
+$\int_{X}f\ d\mu$を
+$\mean(f)$と書いたりする．
+特に
+$\mean(f)$を
+$f$の\textbf{期待値}と呼んだり，
+$f$の\textbf{平均値}と呼んだりする．
+そして$n\in \zz_{\ge 1}$に対して，
+$\mean(f^{n})$を$f$の$n$次モーメントと
+呼んだりする．
+$\mean(f^{n})<\infty$であるとき$f$は$L^{n}$
+関数とか言ったりするが，これは測度論と同じ言葉遣いである．
+また，
+$\varian(f)=\mean((f-\mean(f))^{2})$
+を$f$の\textbf{分散}と呼ぶ．
+簡単な式変形で
+$\varian(f)=\mean(f^{2})-(\mean(f))^{2}$
+となることがわかる．
+\end{df}
+
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき可測写像$\phi:X\to Y$に対して
+写像$\phi_{*}\mu: \mathfrak{N}\to [0, \infty]$
+を
+$\phi_{*}\mu(A)=\mu(\phi^{-1}(A))$
+と定義するとこれは
+$(Y, \mathfrak{N})$上の測度になる．
+この測度
+$\phi_{*}\mu$
+を$\phi$による$\mu$の押し出し測度と呼ぶ．
+\end{df}
+\begin{lem}\label{lem:push}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき可測写像$\phi:X\to Y$と
+任意の可測関数$f: Y\to \rr$について
+\[
+\int_{X}f(\phi(x))\ d\mu
+=\int_{Y} f(y)\ d(\phi_{*}\mu)
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+$f$が階段関数の場合を示せば単調収束定理から定理は従う．
+その階段関数の場合というのも，特性関数の場合を示せば従う．$A\in \mathfrak{N}$とする．
+このとき任意の$x\in X$について
+$\phi(x)\in A$は$x\in \phi^{-1}(A)$と
+同値なので，
+$\chi_{A}(\phi(x))=\chi_{\phi^{-1}(A)}(x)$
+となる．
+よって
+\[
+\int_{X}\chi_{A}(\phi(x))\ d\mu
+=\mu(\phi^{-1}(A))=(\phi_{*}\mu)(A)
+=\int_{Y}\chi_{A}\ d\phi_{*}\mu
+\]
+となるから特性関数の場合が証明された．
+\end{proof}
+
+\begin{df}
+$X$
+を集合とし，
+$(Y, \mathfrak{N})$
+を可測空間とする．
+このとき写像$\phi:X\to Y$に対して
+\[
+\phi^{-1}(\mathfrak{N})
+=
+\{\phi^{-1}(A)\mid A\in \mathfrak{N}\}
+\]
+と定義する．これを，$\mathfrak{N}$の
+$\phi$による引き戻しと呼ぶ．
+\end{df}
+
+
+
+\begin{lem}[一般化マルコフの不等式]\label{lem:Markov}
+$\phi: [0, \infty)\to [0, \infty)$
+を非負値単調非減少関数とし，
+$(X, \mathfrak{M}_X, \mu)$を測度空間とする．
+このとき任意の
+$t>0$
+について,
+$\phi(t)>0$
+ならば，
+任意の可測関数
+$f: X\to \rr$
+について
+\[
+\mu(\{x\in X\mid |f(x)|>\ep\})
+\le \frac{1}{\phi(\ep)}
+\int_X\phi(|f(x)|)\ d\mu
+\]
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず，$\phi$は可測であることに注意しよう．
+これは不連続点が高々可算個しかないからである．
+$S=\{x\in X\mid f(x)>\ep\}$とおく．
+任意の$x\in S$について，$\phi(\ep)\le \phi(f(x))$なので，任意の$x\in X$
+について
+$1_S\le \phi(f)/\phi(\ep)$が成り立つ．
+よって
+\[
+\mu(S)=\int_X1_S\ d\mu\le \int_X \phi(f)/\phi(\ep)\ d\mu\le \frac{1}{\phi(\ep)}\int_X\phi(f)\ d\mu
+\]
+を得る．
+\end{proof}
+
+
+\begin{prop}[チェビシェフの不等式]\label{prop:che}
+$(X, \mathcal{M}_X, \mu)$を確率空間とし，
+$f$を可測関数，
+$m=\mean(f)$, 
+$\sigma=\varian(f)$とおく．
+このとき任意の$r\in [0, \infty)$について
+\[
+\mu(\{x\in X\mid |f(x)-m|>r\sigma\})\le \frac{1}{r^2}
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+$|f-m|$と
+$\phi(x)=x^2$について
+マルコフの不等式(補題 \ref{lem:Markov})を用いれば良い．
+\end{proof}
+
+
+\begin{df}
+$(X, \mathcal{M}_X)$
+を可測空間とする．可測集合列$\{A_n\}$
+について
+\[
+\limsup A_n=\bigcap_{k=1}\bigcup_{n=k}A_n
+\]
+と定義し，この集合を$\{A_n\}$
+の上極限と呼ぶ．
+また，
+\[
+\liminf A_n=\bigcup_{k=1}\bigcap_{n=k} A_n
+\]
+と定義し，$\{A_n\}$の下極限と呼ぶ．
+定義から$\limsup(X\setminus A_n)=X\setminus \liminf(A_n)$
+がわかる．
+\end{df}
+
+\begin{lem}[Borel-Cannteliの補題その１]\label{lem:bc}
+$(X, \mathfrak{M}_X, \mu)$を確率空間とし，
+$\{A_n\}_{n\in \nn}$をその可測集合列とする．
+もし$\sum_{i=1}^{\infty}\mu(A_n)<\infty$ならば，
+$\mu(\limsup A_n)=0$である．
+\end{lem}
+\begin{proof}
+上極限の定理から，任意の$k\in \nn$について，
+$\limsup A_n\subset \bigcup_{n=k}A_n$なので
+\[
+\mu(\limsup A_n)\le \sum_{n=k}^{\infty}\mu(A_n)
+\]
+がわかる．$\sum_{k=1}^{\infty}\mu(A_k)<\infty$なので，
+右辺は$k\to \infty$のとき$0$に収束する．よって
+$\mu(\limsup A_n)=0$. 
+\end{proof}
+
+\begin{lem}[Borel-Cannteliの補題その2]\label{lem:bc2}
+$(X, \mathfrak{M}_X, \mu)$
+を確率空間とし，
+$\{A_n\}_{n\in \nn}$をその独立な可測集合列とする．
+もし
+$\sum_{i=1}^{\infty}\mu(A_n)=\infty$ならば，
+$\mu(\limsup A_n)=1$である．
+\end{lem}
+\begin{proof}
+任意に$k\in \nn$と$k<N$を与えたとき，
+\begin{align*}
+1-\mu\left(\bigcup_{n=k}^{\infty}A_n\right)
+&\le 1-\mu\left(\bigcup_{n=k}^NA_n\right)
+\le
+\mu\left(\bigcap_{n=k}^N (X\setminus A_n)\right)\\
+&=\prod_{n=k}^N\mu(X\setminus A_n)=\prod_{n=k}^N(1-\mu(A_n))\\
+&\le \exp\left(-\sum_{n=k}^N\mu(A_n)\right)
+\end{align*}
+が成り立つ．
+ここで，$x\in (0, \infty)$について$1-x\le \exp(-x)$と$\{A_n\}$の独立性を用いた．
+$N\to \infty$とすれば，$\exp(-\sum_{n=k}^N\mu(A_n))\to 0$
+となるので，任意の$k$について$\mu(\bigcup_{n=k}^{\infty}A_n)=1$である．
+換言すると
+\[
+\mu\left(\bigcap_{n=k}(X\setminus A_n)\right)=0
+\]である．
+さて，
+\begin{align*}
+\mu(X\setminus \liminf A_n)=\mu\left(\bigcup_{k=1}\bigcap_{n=k} (X\setminus A_{n})\right)\le 
+\sum_{k=1}^{\infty}\mu\left(\bigcap_{n=k}(X\setminus A_n)\right)=0
+\end{align*}
+なので$\mu(\limsup A_n)=1$である．
+\end{proof}
+
+
+
+
+\section{確率論における独立性概念}
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を確率空間とする．
+$\{\mathfrak{F}_{i}\}_{i\in I}$を
+$X$の完全加法族の族で
+$\mathfrak{F}_{i}\subset \mathfrak{M}$
+を満たすものとする．
+このとき，$\{\mathfrak{F}_{i}\}_{i\in I}$が
+\textbf{独立}であるとは
+$I$の任意の有限部分集合$\{i_{1}, \dots, i_{n}\}$と
+任意の
+$A_{1}\in \mathfrak{F}_{i_{1}}, \dots, 
+A_{n}\in \mathfrak{F}_{i_{n}}$に対して
+\[
+\mu\left(\bigcap_{k=1}^{n}A_{k}\right)
+=\prod_{k=1}^{n}\mu\left(A_{k}\right)
+\]
+が成り立つときにいう．
+また，$\{\mathfrak{F}_{i}\}_{i\in I}$が
+\textbf{組ごとに独立}であるとは
+異なる二つの$a, b\in I$に対して，
+$\{\mathfrak{F}_{a}, \mathfrak{F}_{b}\}$
+が独立であるときにいう．
+\end{df} 
+
+
+\begin{df}
+$(X, \mathfrak{M}_X, \mu)$を確率空間とし，
+と
+$\{(Y_i, \mathfrak{M}_{Y_i})\}_{i\in I}$
+を可測空間の列とする．
+このとき，
+可測関数の族
+$\{f_i: X\to Y_i\}_{i\in I}$
+が\textbf{独立}であるとは，
+任意の有限集合
+$S\subset I$
+と$\rr$の任意の部分集合族
+$\{A_i\}_{i\in S}$について．
+\[
+\mu\left(\bigcap_{i\in S}f_i^{-1}(A_i)\right)=
+\prod_{i\in S}\mu\left(f_{i}^{-1}(A_i)\right)
+\]
+が成り立つことと定義する．
+これは，族
+$\{f_{i}^{-1}(\mathfrak{M}_{Y_{i}})\}$が
+完全加法族の族として
+独立であるということである．
+
+
+また，
+可測関数の族$\{f_i: X\to Y_i\}_{i\in I}$
+が\textbf{組ごとに独立}であるとは，
+任意の二元集合$\{a, b\}\subset I$について
+$f_a$と$f_b$が独立である時にいう．
+\end{df}
+
+\begin{lem}\label{lem:gousei}
+$(X, \mathfrak{M}_X, \mu)$を確率空間とし，
+と
+$\{(Y_i, \mathfrak{M}_{Y_i})\}_{i\in I}$
+と
+$\{(Z_i, \mathfrak{M}_{Z_i})\}_{i\in I}$
+を可測空間の列とする．
+また，
+$\{G_i: Y_i\to Z_i\}_{i\in I}$
+は可測関数の列であるとする．このとき
+関数の族
+$\{f_i: X\to Y_i\}_{i\in I}$
+が独立な可測関数からなるのならば，
+$\{G_i\circ f_i: X\to Z_i\}_{i\in I}$
+も独立である．
+\end{lem}
+\begin{proof}
+任意の$i\in I$について
+\[
+(G_i\circ f_i)^{-1}(A)=f_i^{-1}(G_i^{-1}(A))
+\]
+が成り立つことから明らかである．
+\end{proof}
+
+
+\begin{df}
+$I$を集合とし，
+$\{(X_{i}, \mathfrak{M}_{i})\}_{i\in I}$
+を可測空間の族とする．
+このとき$\prod_{i\in I}X_{i}$
+の部分集合が
+\textbf{柱状集合}であるとはそれが
+集合族$\{A_{i}\}_{i\in I}$であって
+$A_{i}\in \mathfrak{M}_{i}$を満たしさらに
+有限個の$i$をのぞいて$A_{i}=X_{i}$となるようなものを用いて
+\[
+\prod_{i\in I}A_{i}
+\]
+の形にかける時にいう．
+柱状集合全体を$\mathfrak{C}$で書くことにする．
+そして$\mathfrak{C}$から生成される有限加法族を
+$\mathfrak{D}$と表すことにする．
+$\mathfrak{D}$から生成される完全加法族を
+$\bigotimes_{i\in I}\mathfrak{M}_{i}$と書くことにする．(つまり
+$\bigotimes_{i\in I}\mathfrak{M}_{i}=\sigma(\mathfrak{D})=\sigma(\mathfrak{C})$)
+以下では可測空間の直積にはこの可測構造が備わっているものとする．
+\end{df}
+
+\begin{prop}\label{prop:prodind}
+$(X, \mathfrak{M}_X, \mu)$を確率空間とし，
+と
+$\{(Y_i, \mathfrak{M}_{Y_i})\}_{i\in I}$
+を可測空間の列とする．
+$\{f_i: X\to Y_i\}_{i\in I}$は
+独立な確率変数の族とする．
+$J\subset I$とし，
+$F: X\to \prod_{j\in J}Y_{j}$
+を$F(x)=(f_{j}(x))_{j\in J}$と定義する．
+このとき，確率変数の列
+$\{F\}\cup \{f_{i}\}_{i\in I\setminus J}$
+は独立である．
+\end{prop}
+\begin{proof}
+$S\subset (I\setminus J)$を有限集合とし，
+各$i\in S$について$A_{i}\in \mathfrak{M}_{Y_{i}}$
+を任意に固定する．
+さて，$\mathfrak{A}$を
+$\bigotimes_{j\in J}\mathfrak{M}_{Y_{j}}$の部分集合で，
+\[
+\mu\left(F^{-1}(A)\cap \bigcap_{i\in S}f_i^{-1}(A_i)\right)=
+\mu(F^{-1}(A))\cdot\prod_{i\in S}\mu\left(f_{i}^{-1}(A_i)\right)
+\]
+が成り立つような$A$全体の集合とする．
+さて，柱状集合と$F$，そして独立性の定義から
+$\mathfrak{C}\subset \mathfrak{A}$
+がわかる．
+また，$\mathfrak{A}$が$\lambda$系をなすことも
+容易にわかる．
+$\mathfrak{C}$は$\pi$系なので，
+$\pi$-$\lambda$定理から
+$\mathfrak{A}=\bigotimes_{j\in J}\mathfrak{M}_{Y_{j}}$
+がわかる．
+よって$\{F\}\cup \{f_{i}\}_{i\in I\setminus J}$
+は独立である．
+\end{proof}
+
+\begin{cor}\label{cor:prodind2}
+$(X, \mathfrak{M}_X, \mu)$, 
+を確率空間とし，
+$(Z, \mathfrak{M}_{Z})$は可測空間で，
+$\{(Y_i, \mathfrak{M}_{Y_i})\}_{i\in I}$
+を可測空間の列とする．
+$\{f_i: X\to Y_i\}_{i\in I}$は
+独立な確率変数の族とする．
+$J\subset I$とし，
+$g:  \prod_{j\in J}Y_{j}\to Z$
+は可測関数とする．
+このとき，確率変数の列
+$\{g((f_{j})_{j\in J})\}\cup \{f_{i}\}_{i\in I\setminus J}$
+は独立である．
+
+\end{cor}
+\begin{cor}
+$F: X\to \prod_{j\in J}Y_{j}$
+を$F(x)=(f_{j}(x))_{j\in J}$と定義すると
+考えている族は
+$\{g\circ F\}\cup \{f_{i}\}_{i\in I\setminus J}$
+とかける．
+よって命題\ref{prop:prodind}
+と補題\ref{lem:gousei}から，系が従う．
+\end{cor}
+
+\begin{cor}\label{cor:minmax}
+上と同じ仮定で
+$M_i$は$\min$もしくは$\max$を表すとする．このとき
+$\{f_i\}_{i\in I}$
+が独立ならば
+$\{M_i(f_i, 0)\}_{i\in I}$
+も独立である．
+\end{cor}
+
+以下の命題は独立な可測関数に関する重要な性質である．
+\begin{thm}\label{thm:ind}
+任意の確率空間
+$(X, \mathfrak{M}, \mu)$上の
+任意の独立な有限個の可測関数列
+$\{f_i:X\to \rr\}_{i=1}^n$
+について
+\[
+\mean(f_1\cdot f_2  \cdots f_n)=\mean(f_1)\mean(f_2) \cdots \mean(f_n)
+\]
+が成立する．
+\end{thm}
+\begin{proof}
+確率変数$f$に対して
+$f^+=\max(f, 0)$，
+$f^-=-\min(f, 0)$
+と書くことにすると，
+$\mean(f)=\mean(f^+)-\mean(f^-)$である．
+よって先の系
+より，各$f_i$が非負値の時に命題を証明すれば良い．
+$f_i$が非負値の時には各$i\in I$について以下の条件を満たす単関数の列$\{s_i^k\}_{k\in \nn}$が存在する．
+\begin{enumerate}
+\item 任意の$k$について$s_i^k\le f_i$
+\item 任意の$k$について$s_i^k\le s_i^{k+1}$
+\item 任意の$k\in \nn$と任意の$a\in s_i^k(X)$について
+$(s_i^k)^{-1}(a)=\sigma(f_i^{-1}(\mathcal{B}(\rr)))$
+\end{enumerate}
+この$\{s_i^k\}_{i}$について命題が成り立つことをみよう．
+各$s_i^k$は互いに素な可測集合$\{A_{(i, k,l)}\}_l$を用いて
+\[
+s_i^k(x)=\sum_{l=1}^{m(i)}a_{(, il)}1_{A_(i, k, l)}
+\]
+と表されているとする．
+この時
+\[
+\mean(s_i^k)=\sum_{l=1}^{m(i)}a_{(i, l)}\mu(A_{(i, k, l)})
+\]
+である．
+さて
+\[
+\prod_{i=1}^ns_i^k=\sum_{l_1, l_2, \dots, l_i}a_{l_1}\prod_{i=1}a_{(i. l_i)}1_{\bigcap_{i=1}^nA_{(i, k, l)}}
+\]
+であり，$A_{(i, k, l)}$は$f_i$による一点集合の引き戻しとして書けるのだから$\{f_i\}_i$の独立性から
+\[
+\mean\left(\prod_{i=1}^ns_i^k\right)=\sum_{l_1, l_2, \dots, l_i}a_{l_1}\prod_{i=1}a_{(i. l_i)}\mu(A_{(i, k, l)})
+\]
+である．
+この右辺は$\prod_{i=1}^n\mean(s_i^k)$に等しいので結局
+任意の$k\in \nn$について
+\[
+\mean\left(\prod_{i=1}^ns_i^k\right)=\prod_{i=1}^n\mean(s_i^k)
+\]
+が成り立つ．ここで，$k\to \infty$とすれば
+単調収束定理から
+\[
+\mean(f_1\cdot f_2, \cdots, f_n)=
+\mean(f_1)\mean(f_2) \cdots \mean(f_n)
+\]
+がわかる．
+\end{proof}
+
+\section{可測関数の収束の概念}
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を測度空間とする．
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を
+$(X, \mathfrak{M}, \mu)$上の確率変数の列とする．
+$f$を$(X, \mathfrak{M}, \mu)$上の確率変数とする．
+このとき
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+が$f$に\textbf{概収束}するとは，
+\[
+\mu\left(\left\{x\in X\mid 
+\lim_{n\to \infty}f_{n}(x)=f(x)\right\}\right)=0
+\]
+となるときにいう．つまりはほとんど至る所各点収束しているということである．このとき
+$f_{n}\xrightarrow{a. s.}f$と書く．
+\end{df}
+
+\begin{df}
+$p\in [1, \infty)$とする．
+$(X, \mathfrak{M}, \mu)$
+を測度空間とする．
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を
+$(X, \mathfrak{M}, \mu)$上の確率変数の列とする．
+$f$を$(X, \mathfrak{M}, \mu)$上の確率変数とする．
+このとき
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+が$f$に\textbf{$p$次平均収束}するとは，
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$が
+$f$に$L^{p}$収束するときにいう．
+つまり，
+\[
+\int_{X}|f_{n}(x)-f(x)|^{p}\ d\mu=0
+\]
+が成り立つことである．
+この条件は
+$\lim_{n\to \infty}\mean(|f_{n}-f|^{p})=0$
+と書いても同じことである．
+このとき
+$f_{n}\xrightarrow{L^{p}}f$
+とかく．
+\end{df}
+
+\begin{df}
+$(X, \mathfrak{M}, \mu)$
+を測度空間とする．
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を
+$(X, \mathfrak{M}, \mu)$上の確率変数の列とする．
+$f$を$(X, \mathfrak{M}, \mu)$上の確率変数とする．
+このとき
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+が$f$に\textbf{確率収束}するとは，
+任意の$\epsilon\in (0, \infty)$に対して
+\[
+\lim_{n\to \infty}
+\mu\left(\left\{
+x\in X\mid |f_{n}(x)-f(x)|>\epsilon
+\right\}\right)
+=0
+\]
+が成り立つときにいう．
+このとき
+$f_{n} \xrightarrow{P} f$と書く．
+\end{df}
+
+
+\begin{df}
+$\{(X_{n}, \mathfrak{M}_{n}, \mu_{n})\}_{n\in \zz_{\ge 0}}$
+を測度空間の列とする．
+各$n$について$f_{n}: X\to \rr$は
+$(X_{n}, \mathfrak{M}_{n}, \mu_{n})$上の確率変数とする．
+$(X, \mathfrak{M}, \mu)$を確率空間とし，
+$f$を$(X, \mathfrak{M}, \mu)$上の確率変数とする．
+このとき
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+が$f$に\textbf{分布収束}する，あるいは
+\textbf{法則収束}するとは，
+任意の$\phi\in C_{b}(\rr)$について
+\[
+\lim_{n\to \infty}\int_{X_{n}}\phi\circ f(x)\ d\mu_{n}
+=
+\int_{X}\phi\circ f(x) \ d\mu
+\]
+が成り立つときにいう．
+これは
+\[
+\lim_{n\to \infty}\int_{X_{n}}\phi(t)\ d((f_{n})_{*}\mu_{n})
+=
+\int_{X}\phi(t) \ d(f_{*}\mu)
+\]
+と同値である．
+このとき
+$f_{n}\xrightarrow{d} f$
+とかく．
+上記で説明した三つの収束とは違い，各$f_{n}$
+は同一の確率空間上に定義されている必要はないことに注意しよう．
+\end{df}
+
+
+\begin{prop}\label{prop:333}
+$(X, \mathfrak{M}, \mu)$
+を測度空間とする．
+$\{f_{n}\}_{n\in \zz_{\ge 0}}$
+を
+$(X, \mathfrak{M}, \mu)$上の確率変数の列とする．
+$f$を$(X, \mathfrak{M}, \mu)$上の確率変数とする．
+このとき
+以下が成り立つ．
+\begin{enumerate}
+\item $f_{n}\xrightarrow{a.s.} f$
+ならば 
+$f_{n}\xrightarrow{P} f$
+\item 
+$p\in [1, \infty)$とする．このとき
+ $f_{n}\xrightarrow{L^{p}} f$
+ならば 
+$f_{n}\xrightarrow{P} f$
+
+\item $f_{n}\xrightarrow{P} f$
+ならば 
+$f_{n}\xrightarrow{d} f$
+\end{enumerate}
+
+\end{prop}
+\begin{proof}
+
+[(1)の証明]
+$\epsilon\in (0, \infty)$を任意に与える．
+$S_{n}=\{x\in X\mid |f_{n}(x)-f(x)|>\epsilon \}$
+と定義する．
+$f_{n}\xrightarrow{P}$を示すには
+$\mu(S_{n})\to 0$を示せば良い．
+ここで，仮定より$f_{n}\xrightarrow{a.s.} f$なので，
+$\chi_{S_{n}}$は$0$に各点収束する．よってルベーグの優収束定理から，$\mu(S_{n})\to 0$がわかる．
+
+[(1)の証明終わり]
+
+[(2)の証明]
+マルコフの不等式(補題 \ref{lem:Markov})から
+\[
+\mu(S_{n})\le \frac{1}{\epsilon^{p}}\int_{X}|f_{n}-f|^{p}\ d\mu
+\]
+となるのでわかる．
+
+[(2)の証明終わり]
+
+[(3)の証明]
+
+任意に単射$\phi: \zz_{\ge 0}\to \zz_{\ge 0}$
+を与える．
+$f_{n}\xrightarrow{P} f$なので特に
+$f_{\phi(n)}\xrightarrow{P} f$でもある．
+よって単射$\psi\zz_{\ge 0}\to \zz_{\ge 0}$
+が存在して，
+$f_{\phi\circ \psi(n)}\xrightarrow{a.s.} f$
+となる．
+特に任意の$g\in C_{b}(\rr)$について
+$g\circ f_{\phi\circ \psi(n)}\xrightarrow{a.s.} g\circ f$
+である．
+よってルベーグの優収束定理から
+$\mean(g\circ f_{\phi\circ \psi(n)})\to \mean(g\circ f)$
+である．
+もしも，$\mean(g\circ f_{n})$が$\mean(g\circ f)$
+に収束しないならば，ある単射$\phi:\zz_{\ge 0}\to \zz_{\ge 0}$とある$r\in (0, \infty)$が存在して
+$r<|\mean(g\circ f_{\phi(n)})-\mean(g\circ f)|$
+となるが，これは上記の議論に矛盾する．
+よって$\mean(g\circ f_{n})\to \mean(g\circ f)$である．
+これは$f_{n}\xrightarrow{d}f$を意味する．
+
+
+[(3)の証明終わり]
+\end{proof}
+
+\section{大数の弱法則}
+
+この節では，大数の弱法則を二つ紹介する．
+
+大数の弱法則は大まかに言えば，
+平均値が有限で，同一であるような
+確率変数列から$n$項目までの平均という確率変数列を新たに作ると，その平均の列は元の確率変数列の平均値に
+確率収束することを述べた定理である．
+一般には最初に与える確率変数列の平均が同一である必要はなく，より強く次のことが言える．
+
+\begin{thm}[大数の弱法則その１]\label{thm:weaklaw1}
+$(X, \mathcal{M}_X, \mu)$
+を確率空間とする．そして
+$\{f_i\}_{i\in \nn}$を組ごとに独立な$L^1$確率変数とする．
+ここで，$S_n=\frac{1}{n}\sum_{i=1}^nf_i$，
+$m_n=\frac{1}{n}\sum_{i=1}^n\mean(f_i)$
+とおくと，
+もし
+$\Theta=\sup_{i\in \nn}\varian(f_i)<\infty$
+ならば，
+任意の$\ep$に対して，
+\[
+\mu(\{x\in X\mid |S_n-m_n|> \ep\})\le \frac{\Theta}{\ep^2 n}
+\]
+が成り立つ．
+特に$m_n\to m$ならば
+$S_n\xrightarrow{P} m (n\to \infty)$である．　
+\end{thm}
+\begin{proof}
+$S=\{x\in X\mid |S_n-m_n|>\Theta \ep\}$とおく．
+このとき，一般化マルコフの不等式から，
+\begin{align*}
+\mu(S)&\le 
+\frac{1}{\ep^2}\int_{X}|S_n-m_n|^2\ d\mu
+=
+\frac{1}{\ep^2n^2}\int_{X}
+\left|\sum_{i=1}^n(f_i-\mean(f_i))\right|^2\ d\mu\\
+&=
+\frac{1}{\ep^2n^2}\int_{X}\left(\sum_{i=1}^n
+(f_i-\mean(f_i))\right)^2\ d\mu
+=
+\frac{1}{\ep^2n^2}\int_{X}\sum_{i, j}
+(f_i-\mean(f_i))(f_j-\mean(f_j))\ d\mu\\
+&
+=\frac{1}{\ep^2n^2}\sum_i\int_{X}(f_i-\mean(f_i))^2\ d\mu
+=\frac{1}{\ep^2n^2}\sum_{i}\varian(f_i)\le \frac{1}{\ep^2n^2}(n\Theta)\\
+&\le \frac{\Theta}{\ep^2 n}
+\end{align*}
+がわかる．
+途中で，組ごとの独立性から，$i\neq j$ならば
+\[
+\int_X(f_{i}-\mean(f_{i}))(f_{j}-\mean(f_{j}))\ d\mu
+=\left(\int_X(f_{i}-\mean(f_{i}))\ d\mu\right)\cdot
+\left(\int_X(f_{j}-\mean(f_{j}))\ d\mu\right)
+=
+0
+\]
+となることを使った．
+\end{proof}
+
+定理 \ref{thm:weaklaw1} から，
+系として次を得る．
+一般にはこちらの形の弱法則を見る機会が多いかもしれない．
+\begin{thm}[大数の弱法則その2]\label{thm:weaklaw2}
+$(X, \mathcal{M}_X, \mu)$
+を確率空間とする．そして
+$\{f_i\}_{i\in \nn}$を組ごとに独立な同分布$L^1$確率変数
+とする．
+ここで，$S_n=\frac{1}{n}\sum_{i=1}^nf_i$，
+$m=\mean(f_1)$とおくと，
+もし
+$\sigma=\varian(f_i)<\infty$
+ならば，
+任意の$\ep$に対して，
+\[
+\mu(|S_n-m|>\ep)\le \frac{\sigma}{\ep^2 n}
+\]
+が成り立つ．
+特に
+$n\to \infty$のとき
+$S_n\xrightarrow{P} m$である．
+\end{thm}
+\section{大数の強法則}
+この節では大数の強法則を証明する．
+弱法則が確率収束について述べた定理であるのに対して，
+強法則は概収束に関する定理である．
+
+まず最初に確率変数の4次モーメントが有限であるという仮定の下での強法則を証明する．この仮定を使うと比較的簡単に定理を証明できる．
+\begin{thm}[大数の強法則その１]\label{thm:strlaw1}
+$\{f_i\}_{i\in \nn}$を確率空間$(X, \mathfrak{M}_X, \mu)$
+上の独立な可測関数とする．
+$S_n=\frac{1}{n}\sum_{i=1}^nf_{i}$とおく．
+$m, v, h\in (0, \infty)$とする．
+もし，$i$によらず，
+$m=\mean(f_{i})$, 
+$v=\mean(f_{i}^{2})$, 
+$h=\mean(f_{i}^{4})$が成り立つならば，$S_n\xrightarrow{a. s. }m$となる．
+\end{thm}
+\begin{proof}
+まず，
+\begin{align*}
+(S_n-m)^4&=((f_i-m)/n)^4\\
+&=
+\frac{1}{n^4}\Biggl(
+\sum_{i}(f_i-m)^4+\sum_{i, j}\binom{4}{2}(f_i-m)^2(f_j-m)^2\\
+&+\sum_{i, j, k, l}\binom{4}{1}(f_i-m)(f_j-m)(f_k-m)(f_l-m)+
+\sum_{i, j}\binom{4}{3}(f_i-m)^3(f_j-m)
+\Biggr)
+\end{align*}
+である．
+積分をすると独立性から，後ろ二つの項は$0$になる．よって
+\begin{align*}
+\mean((S-m)^4)&=
+\frac{1}{n^4}\left(\sum_{i=1}^nh+\sum_{i\neq j}\binom{4}{2}v^2\right)\\
+&=\frac{1}{n^4}\left(nh+3(n^2-n)v^2\right)
+\end{align*}
+つまり，
+\[
+E((S_n-m)^4)=O(n^{-2})
+\]
+である．
+各$k\in \zz_{\ge 0}$に対して
+$A_k=\{x\in X\mid |S_k-m|\le k^{-0.1}\}$, 
+ $B_k=X\setminus A_k$とおく．
+すると
+マルコフの不等式(補題 \ref{lem:Markov})から
+\[
+\mu(B_k)\le E((S_k-m)^4)/(k^{-0.1})^4\le 
+Mk^{-1.6}
+\]
+がわかるので，
+\[
+\sum_{k=1}^{\infty}\mu(B_k)<\infty
+\]
+がわかる．
+よってボレルカンテリの補題その1 (補題\ref{lem:bc})から
+$\mu(\limsup B_k)=0$である．
+つまり$\mu(\liminf A_k)=1$である．
+$x\in \liminf A_k$とすると，
+下極限の定義から，ある$n$が存在して，任意の$k\ge n$について，
+$x\in A_k$, 
+つまり$|S_k(x)-m|<k^{-0.1}$．
+よって
+$\lim_{n\to \infty}S_n(x)=m$がわかるので
+$S_n$は$m$に概収束する．
+\end{proof}
+
+次に，4次モーメントではなく，
+2次モーメント(分散)が上から抑えられているときの強法則を紹介する．
+\begin{thm}[大数の強法則その2]\label{thm:strlaw2}
+$\{f_i\}_{i\in \nn}$を確率空間$(X, \mathfrak{M}_X, \mu)$
+上の独立な$L^2$可測関数とし，$v\in (0, \infty)$
+とする．そして
+$\mean(f_i)=0$で
+$v_i=\mean(f_i^2)\le v$と仮定する．
+$S_n=\frac{1}{n}\sum_{i=1}^nf_{i}$とおく．
+このとき$S_n\xrightarrow{a. s. }0$
+が成り立つ．
+\end{thm}
+\begin{proof}
+$T_n=\sum_{i=1}^nf_i$とおく．
+そして，可測関数$\sum_{m=1}^{\infty}(T_{m^2}/m^2)^2$の積分を考える．
+\begin{align*}
+\mean\left(\sum_{m=1}^{\infty}(T_{m^2}/m^2)^2\right)
+&=\sum_{m=1}^{\infty}\frac{1}{m^4}
+\mean(T_{m^2}^2)=
+\sum_{m=1}^{\infty}\frac{1}{m^4}\sum_{i=1}^{m^2}\mean(f_i^2)\le 
+\sum_{m=1}^{\infty}\frac{1}{m^4}m^2v\\
+&=v\sum_{m=1}^{\infty}\frac{1}{m^2}<\infty
+\end{align*}
+故に
+ほとんど至る所の$x\in X$で，
+$\sum_{m=1}^{\infty}(T_{m^2}(x)/m^2)^2<\infty$である．
+よって，ほとんど至る所の$x\in X$で$\lim_{m\to \infty}(T_{m^2}(x)/m^2)^2=0$, 
+つまり，
+$\lim_{m\to \infty}T_{m^2}(x)/m^2=0$
+となることががわかる．
+さて，可測関数$U_m$を以下のように定義する．
+\[
+U_m=\max_{m^2+1\le k\le (m+1)^2}\left|\sum_{i=m^2+1}^kf_i\right|
+\]
+そして，$U_m$の２次モーメントを以下のように評価する．
+\begin{align*}
+\mean(U_m^2)
+&\le
+\sum_{k=m^2+1}^{(m+1)^2}
+\mean
+\left(\left(\sum_{i=m^2+1}^kf_{i}\right)^2\right)\\
+&=
+\sum_{k=m^2+1}^{(m+1)^2}\sum_{i=m^2+1}^k\mean(f_i^2)
+=\sum_{k=m^2+1}^{(m+1)^2}(k-m^2)v
+\le 
+\sum_{k=m^2+1}^{(m+1)^2}(2m+1)v\\
+&\le (2m+1)^2v.
+\end{align*}
+故に，可測関数$\sum_{m=1}^{\infty}(U_m/m^2)^2$の積分を考えると，
+\[
+\mean\left(\sum_{m=1}^{\infty}
+\left(\frac{U_m}{m^2}\right)^2\right)
+= \sum_{m=1}^{\infty}\frac{1}{m^4}\mean(U_m^2)\le 
+\sum_{m=1}^{\infty}\frac{(2m+1)^2}{m^4}<\infty
+\]
+である．
+よってほとんど至るところの$x\in X$について，
+$\lim_{m\to \infty}U_m(x)/m^2=0$
+である．
+任意の$n$について，$m=\lfloor \sqrt{n}\rfloor$
+とすると$m^2+1\le n\le (m+1)^2$である．
+このとき
+\begin{align*}
+\left|S_n\right|=\left|\frac{T_n}{n}\right|\le \frac{|T_n|}{m^2}\le 
+\frac{T_{m^2}+U_m}{m^2}=\left|\frac{T_{m^2}}{m^2}\right|+\frac{U_m}{m^2}
+\end{align*}
+である．
+ほとんど至る所の$x\in X$について
+$\lim_{m\to \infty}T_{m^2}(x)/m^2=\lim_{m\to \infty}U_m(x)/m^2=0$
+なので，ほとんど至る所の$x\in X$で，
+\[
+\lim_{n\to \infty}S_{n}(x)=0
+\]
+となり，結論を得る．
+\end{proof}
+
+次にコルモゴロフが証明した大数の強法則を紹介していこう．
+
+まずクロネッカーの補題を紹介する．
+\begin{lem}[Kroneckerの補題その１]\label{lem:kro}
+$\{b_{i}\}_{i=1}^{\infty}$を
+$0<b_1<b_2<\dots <b_n<\dots$を満たす数列とし，
+数列$\{a_{i}\}_{i=1}^{\infty}$は$a_n\to a$を満たすとする。このとき，
+\[
+\lim_{n\to \infty}\frac{\sum_{i=1}^{n-1}(b_{i+1}-b_i)a_i}{b_n}=a
+\]
+が成り立つ。
+\end{lem}
+\begin{proof}
+実数$a\in \rr$に対して
+\[
+\frac{\sum_{i=1}^{n-1}(b_{i+1}-b_i)a}{b_n}=\left(1-\frac{b_1}{b_n}\right)\to a
+\]
+が成り立つので、$a=0$の場合にのみ定理を証明すれば十分である。
+これは十分大きい$k$について
+\[
+\left|\frac{\sum_{i=k}^{n-1}(b_{i+1}-b_i)a_i}{b_n}\right|
+\le \frac{1}{b_n}(b_n-b_k)\ep'<\ep'
+\]
+などからわかる。
+\end{proof}
+\begin{lem}[クロネッカーの補題その２]\label{lem:kro2}
+$\{b_{i}\}_{i=1}^{\infty}$を
+$0<b_1<b_2<\dots <b_n<\dots$を満たす数列とし，
+$\{a_{i}\}_{i=1}^{\infty}$は実数列で，
+$\sum_{i=1}^{\infty}a_i$が収束すると仮定する．
+このとき
+\[
+\lim_{n\to\infty}\frac{1}{b_n}\sum_{k=1}^nb_ka_k=0
+\]
+である．
+\end{lem}
+\begin{proof}
+$S_n=\sum_{i=1}^na_i$
+とする．
+部分和の公式から，
+\[
+\frac{1}{b_n}\sum_{k=1}^nb_ka_k=S_n-\frac{1}{b_n}\sum_{k=1}^{n-1}(b_{k+1}-b_k)S_k
+\]
+なので，クロネッカーの補題その１ (補題 \ref{lem:kro})から補題は従う．
+\end{proof}
+
+
+\begin{prop}[コルモゴロフの不等式]\label{prop:inq}
+$(X, \mathfrak{M}_X, \mu)$を確率空間とし，
+$\{f_i\}_{i\in \nn}$をその上の独立な可測関数とする．
+そして各
+$i\in \nn$について$\mean(f_i)=0$とする．
+そして
+$S_{n}=\sum_{i=1}^{n}f_{i}$
+とする．
+
+このとき任意の$a\in (0, \infty)$について
+\[
+\mu\left(\left\{x\in X\mid \max_{1\le k\le n}|S_k(x)|\ge a\right\}\right)\le \frac{1}{a^2}\mean(S_n^2)
+\]
+が成り立つ．
+\end{prop}
+\begin{proof}
+$A=\{x\in X\mid \max_{1\le k\le n}|S_k(x)|\ge a\}$
+とおく．
+$\mu(A)$を上から評価していく．
+そして
+$k\in \{1,\dots,  n\}$について
+\[
+B_k=\{x\in X\mid \forall i<k \ |S_i(x)|<a \land |S_k(x)|\ge a\}
+\]
+とおく．
+すると
+\[
+A=\coprod_{1\le k \le n}B_k
+\]
+が成り立つ．よって，マルコフの不等式から
+\[
+\mu(A)=\sum_{1\le k\le n}\mu(B_k)\le \sum_{1\le k\le n}\frac{1}{a^2}\int_{B_k}(S_k)^2\ d\mu
+\]
+を得る．
+ここで，各$k$について，$S_n=S_k+(S_n-S_k)$
+なので，
+\begin{align*}
+\int_{B_k}S_n^2\ d\mu-\int_{B_k}S_k^2\ d\mu&=
+2\int_{B_k}S_k(S_n-S_k)\ d\mu+\int_{B_k}(S_n-S_k)^2\ d\mu\\
+&\ge 2\int_{X}(\chi_{B_k}\cdot S_k)(S_n-S_k)\ d\mu\\
+&=2\mean((\chi_{B_k}\cdot S_k)(S_n-S_k))
+\end{align*}
+である．
+ここで，系 \ref{cor:prodind2}から$\chi_{B_{k}}S_k$と$S_{n}-S_{k}=\sum_{i=k+1}^{n}f_{i}$は独立である．
+よって
+\[
+\mean((\chi_{B_{k}}S_k)(S_n-S_k))
+=
+\mean(\chi_{B_{k}}S_k)\mean(S_{n}-S_{k})=0
+\]
+であるから，結局
+$\mean(S_{n}^{2}\chi_{B_{k}})\ge 
+\mean(S_{k}^{2}\chi_{B_{k}})$
+である．
+したがって
+\begin{align*}
+\mu(A)\le 
+\sum_{1\le k\le n}\frac{1}{a^2}\mean(S_{k}^{2}\cdot \chi_{B_{k}})
+\le \sum_{1\le k\le n}\frac{1}{a^2}\mean(S_n^2\cdot \chi_{B_{k}})
+\le 
+\frac{1}{a^2}\mean(S_n^2)
+\end{align*}
+を得る．
+\end{proof}
+
+\begin{thm}[コルモゴロフの二級数定理]\label{thm:kotwo}
+$(X, \mathfrak{M}_X, \mu)$を
+確率空間とし，$\{f_i\}_{i\in \nn}$を独立な可測関数列とする．このとき，
+$\sum_{i=1}^{\infty}\mean(f_i)<\infty$と
+$\sum_{i=1}^{\infty}\varian(f_i)<\infty$
+が成り立つならば，
+ほとんど至る所$\sum_{i=1}^{\infty}f_i$は有限値に収束する．
+\end{thm}
+\begin{proof}
+任意の$i$について
+$\mean(f_i)=0$
+と仮定しても良い．
+$T_n=\sum_{i=1}^nf_i$
+とおく．
+$N\in \nn$について
+\[
+A_{N}(\epsilon)=\{x\in X\mid \exists i, j>N\ |T_i(x)-T_j(x)|\ge 2\ep\}
+\]
+\[
+B_{N}(\epsilon)=
+\{x\in X\mid \exists i>N\ |T_i(x)-T_N(x)|\ge \ep\}
+\]
+と定義する．
+定義から$A_{N}(\epsilon)\subset B_{N}(\epsilon)$である．
+ここで
+\[
+C_{N, k}(\epsilon)=\{x\in X\mid \exists i\in \nn\ N\le i\le k\land |T_i(x)-T_N(x)|\ge \ep\}
+\]
+と定義すると，
+$C_{N, k}(\epsilon)\subset B_{N}(\epsilon)$
+で，
+$B_{N}(\epsilon)=\bigcup_{k=N}^{\infty}C_{N, k}(\epsilon)$である．
+ここで，コルモゴロフの不等式(命題 \ref{prop:inq})から，
+\[
+\mu(C_{N, k}(\epsilon))\le 
+\ep^{-2}\sum_{k=N}^{k}\varian(f_i)
+\]
+である．
+ここで$k\to \infty$とすれば
+\[
+\mu(B_{N}(\epsilon))
+\le \ep^{-2}\sum_{k=N}^{\infty}\varian(f_i)
+\]
+となる．
+つまり，
+\[
+\mu\left(\bigcap_{n\in \nn}A_n(\epsilon)\right)\le \mu(A_{N}(\epsilon))
+\le \mu(B_{N}(\epsilon))\le
+ \sum_{k=N}^{\infty}\varian(f_i)
+\]
+であり，$N\to \infty$とすれば，
+最左辺は$N$に依存しないので，
+$\mu\left(\bigcap_{n\in \nn}A_{n}(\epsilon)\right)=0$
+がわかる．
+ $D(\ep)=\bigcap_{n\in \nn}A_{n}(\epsilon)$とおこう．
+ $D=\bigcup_{n\in \nn}D(2^{-n})$とすると，$\mu(D)=0$
+ なので，
+ \[
+X\setminus D=\bigcap_{n\in \nn}(X\setminus D(2^{-n}))
+ \]
+ の測度が$1$である．この集合に属しているということは，$\{T_n(x)\}$
+ がコーシー列をなしているということなので，$\{T_n\}$はほとんど至る所有限の値に収束する．
+\end{proof}
+
+
+平均値が同じ確率変数で，分散について良い振る舞いをするものについて強法則が成り立つことを示したのが次の定理である．
+\begin{thm}[大数の強法則その3：コルモゴロフの第一定理]
+\label{thm:strlaw3}
+$\{f_i\}_{i\in \nn}$を確率空間
+$(X, \mathfrak{M}_X, \mu)$
+上の独立な可測関数列とする．
+$S_n=\frac{1}{n}\sum_{i=1}^nf_{i}$とおく．
+もし，$i$によらず，
+$m=\mean(f_i)$が成り立ち
+さらに
+\[
+\sum_{i=1}^{\infty}\frac{\varian(f_i)}{n^2}<\infty
+\]
+ならば，$S_n\xrightarrow{a. s. }m$となる．
+\end{thm}
+\begin{proof}
+各$i\in \nn$について
+\[
+g_i=\frac{f_i-m}{i}
+\]
+とおくと，
+$\mean(g_i)=0$であり，
+\[
+\sum_{i\in \nn}\varian(g_i)
+=\sum_{i=1}^{\infty}\frac{\varian(f_i)}{n^2}<\infty
+\]
+なので，コルモゴロフの二級数定理(定理 \ref{thm:kotwo})から，
+ほとんど至る所の$x\in X$で
+$\sum_{i\in \nn}g_i(x)=\sum_{i=1}^{\infty}(f_i(x)-m)/i$は有限の値に収束する．
+ここで，クロネッカーの補題その2 (補題 \ref{lem:kro2})を適応すると，ほとんど至る所の$x\in X$で，
+$\lim_{n\to \infty}\frac{1}{n}\sum_{i=1}^n(f_i(x)-m)=0$である．
+これは，$S_n\xrightarrow{a. s. } m$を意味する．
+\end{proof}
+
+分散に関する仮定なしで，
+平均値が有限な分布を共有する確率変数について強法則が成り立つことを主張するのが次の定理である．
+\begin{thm}[大数の強法則その４：コルモゴロフの第二定理]
+\label{thm:strlaw4}
+$\{f_i\}_{i\in \nn}$を確率空間
+$(X, \mathfrak{M}_X, \mu)$
+上の独立なで同分布な可測関数列とする．
+$S_{n}=\frac{1}{n}\sum_{i=1}^nf_{i}$とおく．
+もし，
+$\mean(f_1)=m<\infty$ならば，
+$S_n\xrightarrow{a. s. }m$となる．
+\end{thm}
+\begin{proof}
+各$i\in \nn$に対して
+\[
+g_i(x)=f_i(x)\cdot \left(\chi_{[-i, i]}\circ f_{i}(x)\right)
+\]
+と定義する．
+つまり，$g_{i}(x)$は$|f_{i}(x)|\le i$となるときは$g_{i}(x)=f_{i}(x)$で，そうでないときは$g_{i}(x)=0$である．
+
+まず最初に$\{g_i\}$について大数の強法則が成り立つことを示す．
+つまり，
+$\frac{1}{n}\sum_{i=1}^ng_{i}\xrightarrow{a. s.}m$を示す．
+ところで，ルベーグの収束定理から，
+$\frac{1}{n}\sum_{i=1}^n\mean(g_{i})\to m$
+なので，
+結局
+$\frac{1}{n}\sum_{i=1}^n(g_i-\mean(g_i))\xrightarrow{a. s. }0$
+が言えれば良い．
+また，$m=0$としても一般性を失わない．
+$\varian(g_{i})=\varian(g_{i}-\mean(g_{i}))$と，
+コルモゴロフの第一定理(定理 \ref{thm:strlaw3})から
+\[
+\sum_{i=1}^{\infty}\frac{\varian(g_i)}{i^2}<\infty
+\]
+が示せれば良い．
+まず，
+$\varian(g_{i)}=\mean(g_{i}^{2})-(\mean(g_{i}))^{2}\le 
+\mean(g_{i}^{2})$に注意しよう．
+\begin{align*}
+\sum_{i=1}^{\infty}\frac{\varian(g_i)}{i^2}
+&\le 
+\sum_{i=1}^{\infty}\frac{\mean(g_i^2)}{i^2}
+\le 
+4\sum_{i=1}^{\infty}\frac{\mean(g_i^2)}{(i+1)^2}
+=
+4\sum_{i=1}^{\infty}\frac{1}{(i+1)^2}\int_{-i}^{i}x^2\ d((f_1)_{*}\mu)\\
+&\le 
+4\int_{[0, \infty]}\frac{1}{y^2}\int_{-y}^{y}x^2\ 
+d((f_1)_{*}\mu)\ d\mathcal{L}^1(y)\\
+&\le 
+4\int_{\rr}\left(\int_{[|x|, \infty]}\frac{1}{y^2}\right)x^2\ d\mathcal{L}^1(y)
+\ d((f_1)_{*}\mu)\\
+&\le 
+4\int_{\rr}|x|\ d((f_1)_{*}\mu)=4\mean(|f_1|)<\infty
+\end{align*}
+なので，
+$\frac{1}{n}\sum_{i=1}^n(g_i-\mean(g_i))\xrightarrow{a. s. }0$
+が結論できる．
+
+次に$\{f_i\}$について大数の強法則が成り立つことを示そう．
+$\{x\mid f_{i}(x)\neq g_{i}(x)\}=
+\{x\in X\mid |f_i(x)|>i\}$であり，
+$f_{i}$たちは同一分布に従うので，
+$\mu(\{x\mid |f_{i}(x)|>i\})=\mu(\{x\in X\mid |f_{1}(x)|>i\})$である．
+よって
+\begin{align*}
+\sum_{i=1}^{\infty}\mu(\{x\in X\mid f_{i}(x)\neq g_{i}(x)\})
+&=
+\sum_{i=1}^{\infty}\mu(\{x\in X\mid |f_{i}(x)|>i\})\\
+&=
+\sum_{i=1}^{\infty}\mu(\{x\in X\mid |f_{1}(x)|>i\})\\
+&\le 
+\int_{0}^{\infty}\mu(\{x\mid |f_{1}(x)|>t\})\ d\mathcal{L}^1(t)\\
+&=
+\int_{[0, \infty]}\int_{X}1_{\{|f_1|>t\}}(y)\ d\mu(y)d\mathcal{L}^1(t)\\
+&=\int_X\int_{[0, \infty]}1_{\{|f_1|>t\}}(y)\ d\mathcal{L}^1(t)d\mu\\
+&=
+\int_X\int_{0}^{|f_1(y)|}\ d\mathcal{L}^{1}(t) d\mu=
+\int_X|f_1(y)|\ d\mu\\
+&=
+\mean(|f_1|)<\infty
+\end{align*}
+となるから
+ボレルカンテリの補題その１
+(補題 \ref{lem:bc})から，
+$\liminf_i \{x\in X\mid f_{i}(x)=g_{i}(x)\}$の測度は
+$1$である．つまり，ほとんど至る所の$x$について，$N_x$が存在して，
+$n>N_x$ならば，$g_n(x)$と$f_n(x)$は等しい．
+よって，このような$x$について
+$\frac{1}{n}\sum_{i=1}^{n}f_{i}(x)\to m$がわかるので，大数の強法則が成り立つ．
+\end{proof}
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{hatena0}
+はてなブログ電波通信の記事
+「直積測度の構成について：確率論その0」, 
+https://concious4410.hatenablog.com/entry/2022/01/03/011245
+
+\bibitem{0}小谷眞一, 「測度と確率」, 2005　岩波書店．
+
+\bibitem{1}船木直久, 「確率論」, 
+講座・数学の考え方 20，2004, 朝倉書店．
+\bibitem{2}中嶋眞澄, 「大数の強法則の初等的証明」, 鹿児島経済論集 45 (2004) 1--5.
+\bibitem{3}K. R. Parthasarathy,  Probability measures on metric spaces. 
+Academic Press. 
+\end{thebibliography}
+
+「知識は公共財」
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

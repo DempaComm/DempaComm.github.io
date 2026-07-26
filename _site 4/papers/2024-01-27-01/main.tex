@@ -1,0 +1,1042 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage{enumitem}
+%\usepackage{showkeys}
+
+
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{cau}{注意}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{証明}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\LongLeftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+\newcommand{\dpst}{\displaystyle}
+
+
+\newcommand{\card}{\mathrm{card}}
+
+\newcommand{\cl}{\mathrm{CL}}
+
+\newcommand{\nai}{\mathrm{INT}}
+
+\newcommand{\bound}{\mathrm{Fr}}
+
+\newcommand{\myinv}[1]{#1^{\gets}}
+
+\newcommand{\mysm}[1]{#1_{?}}
+
+\newcommand{\myps}{\mathfrak{F}}
+
+\newcommand{\mycrset}[1]{\mathfrak{C}(#1)}
+
+\newcommand{\myopseta}[1]{W(#1)}
+\newcommand{\myopsetb}[1]{O(#1)}
+
+\newcommand{\mysha}[1]{\tau_{#1}}
+
+\title{
+ベールの範疇定理
+}
+\author{電波通信 キトラ　ナンブ}
+\date{\today}
+\begin{document}
+\maketitle
+
+この文章では，
+ベールの範疇定理は
+コンパクトハウスドルフの場合に
+証明すれば
+完備距離空間および
+局所コンパクトハウスドルフの場合は
+そこから従うことを紹介する．
+\v{C}ech完備性を用いると
+統一的に扱えるのである．
+
+ベール空間の基本的な話は
+\cite{Den1}
+などを
+参照のこと．
+
+\section{ベール空間}
+
+\begin{df}
+この文章では
+位相空間
+$X$
+が
+\textbf{ベール}
+であるとは
+$X$
+の稠密な開集合の
+任意の可算族
+$\{U_{n}\}_{n\in \zz_{\ge 0}}$
+について
+$\bigcap_{n\in \zz_{\ge 0}}$
+が$X$
+の中で稠密になる時にいうことにする．
+\end{df}
+
+
+\begin{thm}\label{thm:cptbaire}
+任意の空ではないコンパクトハウスドルフ空間
+$X$
+はベール空間である．
+\end{thm}
+\begin{proof}
+$X$の稠密開集合の可算族
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+を任意に与える．
+空間$X$がベールであることを証明するには
+$\bigcap_{i\in \zz_{\ge 0}}U_{i}$
+が$X$
+の中で稠密であることを示せば良い．
+空間$X$の空でない開集合$O$
+を与える．
+今から$\bigcap_{i\in \zz_{\ge 0}}U_{i}$
+と$O$が
+交わりを持つことを証明する．
+帰納的に以下の条件を満たす可算族
+$\{P_{i}\}_{i\in \zz_{\ge 0}}$
+を構成する．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item 
+任意の
+$i\in \zz_{\ge 0}$
+について
+$P_{i}$
+は
+空でない
+開集合
+である．
+\item 
+任意の
+$i\in \zz_{\ge 0}$
+について
+$\cl(P_{i+1})\subset P_{i}$
+を満たす．
+\item 
+任意の$i$
+について
+$\cl(P_{i})\subset O\cap U_{i}$
+を満たす．
+\end{enumerate}
+まず$P_{0}$
+は
+適当に
+$P_{0}=O\cap U_{0}$
+とか定義すれば良い．
+$P_{i}$まで定義されたとき$P_{i+1}$
+を以下のように定義する．
+今
+$U_{i+1}$
+は稠密なので
+$P_{i}\cap U_{i+1}$
+は空でない開集合である．
+適当に点
+$p\in P_{i}\cap U_{i+1}$
+をとって
+空間$X$
+の正則性を用いると
+開集合$P_{i+1}$
+であって
+$p\in P_{i+1}$
+でありなおかつ
+$\cl(P_{i+1})\subset P_{i}\cap U_{i+1}$
+を満たすものが取れる．
+このとき
+明らかに
+$\cl(P_{i+1})\subset P_{i}$
+であり
+なおかつ$P_{i}\subset O$
+なので
+$\cl(P_{i+1})\subset O\cap P_{i}$
+である．
+
+さて以上を踏まえて族
+$\{\cl(P_{i})\}_{i\in \zz_{\ge 0}}$
+を考えるとこれはnested
+なので特に
+有限交差性を持つ．
+よって
+$X$のコンパクト性から
+$\bigcap_{i\in \zz_{\ge 0}}\cl(P_{i})$
+は空でなない．
+さてこのとき
+\[
+\bigcap_{i\in \zz_{\ge 0}}\cl(P_{i})\subset
+\left( O\cap \bigcap_{i\in \zz_{\ge 0}}U_{i}\right)
+\]
+なので
+$O\cap \bigcap_{i\in \zz_{\ge 0}}U_{i}$
+は空ではない．
+よって
+$O$の任意性から
+$\bigcap_{i\in \zz_{\ge 0}}U_{i}$
+が$X$の中で稠密であることがわかった．
+\end{proof}
+
+
+\begin{lem}\label{lem:gdelta}
+$X$をベール空間とする．
+このとき
+$X$の稠密な
+$G_{\delta}$集合はベール空間になる．
+\end{lem}
+\begin{proof}
+$S$を$X$の任意の稠密な
+$G_{\delta}$集合はベール空間とする．
+$S$の稠密な開集合の可算族
+$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+を任意にとる．
+今から$\bigcap_{i\in \zz_{\ge 0}}U_{i}$
+が$S$の稠密部分集合であることを示す．
+まず$S$の相対位相の定義から
+$X$の開集合族
+$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して
+$V_{i}\cap S=U_{i}$
+となる．
+このとき
+$S$が$X$の中で稠密であることと
+$S\cap V_{i}=U_{i}$
+が$S$の稠密部分集合であることから
+$V_{i}$は
+$X$の稠密部分集合になる．
+ここで
+$S$も
+$X$の稠密部分集合であり
+$G_{\delta}$
+集合なので
+\[
+S\cap \bigcap_{i\in \zz_{\ge 0}}V_{i}\left(=\bigcap_{i\in\zz_{\ge 0}}U_{i}\right)
+\]
+は
+$X$
+の稠密な開集合の可算族の共通部分として
+表すことができる．
+よって
+$X$
+がベール空間であることから
+$S\cap \bigcap_{i\in \zz_{\ge 0}}V_{i}$
+は
+$X$の稠密部分集合である．
+この集合は$S$の部分集合でもあるので
+特に$S$の中でも稠密になる．
+よって
+$\bigcap_{i\in \zz_{\ge 0}}U_{i}$
+は$S$
+の中
+で稠密である．
+以上で
+$S$
+がベール空間であることがわかる．
+\end{proof}
+
+
+\section{\v{C}ech完備空間}
+
+\begin{df}
+$X$
+を位相空間とする．
+このとき
+$X$
+の
+\textbf{コンパクト化}
+とは
+コンパクトハウスドルフ空間
+$K$
+であって
+位相的埋め込み
+$f\colon X\to K$
+であって
+$f(X)$
+が
+$K$の中で稠密である
+ようなものが存在するものをいう．
+この定義から
+$X$は
+$K$の
+部分空間とみなせるので
+以下では
+$X$のコンパクト化を考える時には
+$X$はそのコンパクト化の
+部分集合と考えることにする．
+\end{df}
+\begin{rmk}
+コンパクト化は一意的では全くなく，
+一般にはたくさん存在する(コンパクト化が一個しかないやつもある, $\omega_{1}$とか)．
+また，
+コンパクト化の定義から
+$X$がコンパクト化を持つならば
+$X$は完全正則であることがわかる．
+逆に
+$X$が完全正則ならば
+$X$
+にはストーンチェックコンパクト化が存在するので
+コンパクト化をもつ．
+\end{rmk}
+
+\begin{df}
+位相空間
+$X$について
+その開被覆の可算族
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+が
+\textbf{完備列}
+であるとは，
+$X$の任意のフィルター
+$\mathfrak{F}$
+について
+もしも任意の$n\in \zz_{\ge 0}$
+に対して
+$\mathcal{U}_{n}\cap \mathfrak{F}\neq \emptyset$
+であるならば，
+$\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)\neq \emptyset$
+が成り立つ
+ときにいう．
+\end{df}
+
+
+\begin{thm}\label{thm:frolik}
+$X$
+を完全正則空間とする．
+このとき以下の条件は同値である．
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:cptg}
+$X$
+はその任意のコンパクト化の中で
+$G_{\delta}$集合になっている．
+
+\item\label{item:aaa}
+$X$
+はある
+コンパクト化の中で
+$G_{\delta}$
+集合になっている．
+
+\item\label{item:compseq}
+$X$
+は完備列を持つ．
+\end{enumerate}
+\end{thm}
+\begin{proof}
+[\ref{item:cptg}$\To$ \ref{item:aaa}の証明]
+
+当たり前
+
+[\ref{item:cptg}$\To$ \ref{item:aaa}の証明終わり]
+
+[\ref{item:aaa}$\To$\ref{item:compseq}の証明]
+
+$K$を
+$X$のコンパクト化で
+$X$
+が
+$K$
+の中で
+$G_{\delta}$
+集合になっているものとしよう．
+今から
+$X$
+の完備列を構成する．
+空間$X$は
+$K$
+の$G_{\delta}$
+集合なので
+ある
+$K$の開集合の可算列
+$\{O_{n}\}$
+が存在して
+$K=\bigcap_{n\in \zz_{\ge 0}}O_{n}$
+となる．
+ここで各$n\in \zz_{\ge 0}$
+と$x\in X$
+について
+$U_{x, n}$を
+$K$の開集合であって
+$x\in U_{x, n}$であり
+$\cl_{K}(U_{x, n})\subset O_{n}$
+となるものとする．
+そして
+各
+$n\in \zz_{\ge 0}$
+について
+$\mathcal{U}_{n}=\{U_{x, n}\cap X\}_{x\in X}$
+と定義すると
+これは$X$の被覆になっている．
+今から
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+が完備列であることを証明しよう．
+任意に$X$上のフィルター
+$\mathfrak{F}$
+を取り，
+任意の$n\in \zz_{\ge 0}$
+について
+$\mathcal{U}_{n}\cap \mathfrak{F}\neq \emptyset$
+と仮定する．
+このとき
+$\mathfrak{G}=\{\, \cl_{K}(F)\mid F\in \mathfrak{F}\, \}$
+を考えるとこれは
+$\mathfrak{G}$上のフィルター基底になっており，
+特に有限交差性を持つので
+$\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)\neq \emptyset$
+である．
+さて，
+$\mathcal{U}_{n}\cap \mathfrak{F}\neq \emptyset$
+なのである$U_{x_{n}, n}\in \mathcal{U}_{n}$
+が存在して
+$U_{x_{n}, n}\in \mathfrak{F}$
+となる．
+特に
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)\subset 
+\bigcap_{n\in \zz_{\ge 0}}\cl_{K}(U_{x_{n}, n})
+\]
+である．
+ここで
+$\cl_{K}(U_{x_{n}, n})\subset O_{n}$なので
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)\subset 
+\bigcap_{n\in \zz_{\ge 0}}\cl_{K}(U_{x_{n}, n})
+\subset \bigcap_{n\in \zz_{\ge 0}}O_{n}=X
+\]
+である．
+よって
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)
+=\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)
+\]
+であり，
+この交わりは空ではないので
+$\mathbf{U}$
+が完備列であることがわかった．
+
+[\ref{item:aaa}$\To$\ref{item:compseq}の証明終わり]
+
+
+[\ref{item:compseq}$\To$\ref{item:cptg}の証明]
+
+$X$の任意のコンパクト化を
+$K$とする．
+今から
+$X$が
+$K$の中で
+$G_{\delta}$
+であることを示す．
+空間
+$X$
+の完備列を
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+とし
+$\mathcal{U}_{n}=\{U_{i, n}\}_{i\in I_{n}}$
+と表示しよう．
+そして各
+$n\in \zz_{\ge 0}$
+と
+$i\in I_{n}$
+について
+$V_{i, n}\cap X=U_{i, n}$
+となるような
+$K$の開集合
+$V_{i, n}$をとる．
+ここで
+\[
+O_{n}=\bigcup_{i\in I_{n}}V_{i, n}
+\]
+と定義する．
+すると
+$X\subset \bigcap_{n\in \zz_{\ge 0}}O_{n}$
+は定義からすぐに従う．
+今から
+$X\supset \bigcap_{n\in \zz_{\ge 0}}O_{n}$
+を示す．
+点
+$x\in \bigcap_{n\in \zz_{\ge 0}}O_{n}$
+を任意にとる．
+そして
+$\mathfrak{N}$
+を
+$x$
+の
+$K$
+における
+近傍系とする．
+さらに
+$\mathfrak{F}=\{\, N \cap X\mid N\in \mathfrak{N}\, \}$
+と定義する．
+空間
+$X$
+は
+$K$
+の中で稠密なので
+$\mathfrak{N}$
+が開集合を基底とするフィルターとなることから
+$\mathfrak{F}$
+は
+$X$の上の
+フィルター基底となる．
+任意に
+$n\in \zz_{\ge 0}$
+を与える．
+このとき
+$x\in O_{n}$であるから
+ある
+$i\in I_{n}$が存在sて
+$x\in V_{i, n}$
+となる．
+つまり
+$V_{i,n}$
+は
+$x$の近傍になっている．
+このとき
+$V_{i, n}$と
+$\mathfrak{F}$
+の定義から
+$U_{i, n}=V_{i, n}\cap X\in \mathfrak{F}$
+となる．
+つまり
+$\mathcal{U}_{n}\cap \mathfrak{F}\neq \emptyset$
+である．
+ここで
+$\mathbf{U}$
+が完備列であること
+を用いると
+$\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)\neq \emptyset$
+である．
+さてここで$K$が正則であることと$\mathcal{F}$
+の定義及び$X$が$K$
+の中で稠密であることから
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)=\{x\}
+\]
+である．一般に$\cl_{X}(F)\subset \cl_{K}(F)$
+であることから
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)
+\subset 
+\bigcap_{F\in \mathfrak{F}}\cl_{K}(F)=\{x\}
+\]
+であり
+$\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)\neq \emptyset$
+であることから
+\[
+\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)=\{x\}
+\]
+でなければならない．
+集合
+$\bigcap_{F\in \mathfrak{F}}\cl_{X}(F)$
+は
+$X$
+の部分集合なので
+$x\in X$
+が従う．
+以上から
+$X=\bigcap_{n\in \zz_{\ge 0}}O_{n}$
+なので
+$X$
+は
+$K$
+の
+$G_{\delta}$
+集合である．
+
+[\ref{item:compseq}$\To$\ref{item:cptg}の証明終わり]
+
+以上で証明が終わった．
+\end{proof}
+
+\begin{df}
+完全正則空間
+$X$
+が
+\textbf{チェック完備}
+(\textbf{\v{C}ech完備}, 
+\textbf{\v{C}ech complete})
+であるとは
+定理\ref{thm:frolik}
+の三つの条件のうちどれかひとつ
+(結果として全て)を満たすときに
+いう．
+一般的には
+$X$のストーンチェックコンパクト化
+$\beta X$
+の中で
+$G_{\delta}$
+であると定義する場合が多いような気がする．
+\v{C}echというのは数学者の名前である．
+\end{df}
+
+\begin{thm}\label{thm:cechcechbaire}
+チェック完備な完全正則空間は
+ベールである．
+\end{thm}
+\begin{proof}
+定理
+\ref{thm:cptbaire}
+と
+補題
+\ref{lem:gdelta}，
+そして
+定理
+\ref{thm:frolik}
+からわかる．
+\end{proof}
+
+\begin{thm}\label{thm:cechcomp}
+完備距離化可能空間
+$X$
+はチェック完備である．
+\end{thm}
+\begin{proof}
+空間$X$
+上の距離関数
+$d$
+であって
+完備であり
+なおかつ
+$X$と同じ位相を誘導するものを固定する．
+このとき
+各
+$n\in \zz_{\ge 0}$
+について
+$\mathcal{U}_{n}$
+を
+($d$に関して)
+直径が$2^{-n}$以下の
+開集合全体とする．
+このとき
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+が完備列になるのは，
+完備距離空間の区間縮小法からわかる．
+\end{proof}
+
+
+\begin{thm}\label{thm:cechloccpt}
+局所コンパクトハウスドルフ空間
+$X$
+はチェック完備である．
+\end{thm}
+\begin{proof}
+$\mathcal{U}_{0}$
+を
+$X$の
+相対コンパクトな開集合全体とし
+$n\ge 1$のとき
+$\mathcal{U}_{n}$
+はなんでもいい．
+$\mathcal{U}_{n}=\mathcal{U}_{0}$
+でもいいし
+$\mathcal{U}_{n}=\{ X\}$
+でもいい．
+とにかくこのとき
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+が完備列であることを示そう．
+フィルター
+$\mathfrak{F}$
+が$\mathfrak{F}\cap \mathcal{U}_{0}\neq \emptyset$
+とすると
+ある
+$O\in \mathcal{U}_{0}$
+が存在して
+$O\in \mathfrak{F}$
+である．
+ここで
+フィルター基底
+$\mathfrak{G}=\{\, \cl_{X}(F\cap O) \mid F\in \mathfrak{F}\, \}$
+を考えると
+$\mathfrak{G}$
+は
+コンパクト集合
+$\cl_{X}(O)$上の
+の有限交差性を持つ集合族になる．
+よって
+\[
+\bigcap\mathfrak{G}\neq \emptyset
+\]
+となる．
+さて
+定義から
+\[
+\bigcap\mathfrak{G}\subset \bigcap_{F\in \mathfrak{F}}
+\cl_{X}(F)
+\]
+なので
+特に
+$ \bigcap_{F\in \mathfrak{F}}
+\cl_{X}(F)$
+がわかる．
+つまり
+$\mathbf{U}$
+は完備列である．
+\end{proof}
+
+\begin{rmk}
+実際はより強く，
+局所コンパクトハウスドルフ空間
+$X$は
+そのコンパクト化$K$
+の中で
+開集合になることがわかる．
+実際点
+$x\in X$
+に対して
+$X$
+の中での相対コンパクトな開近傍
+$V$を取り，
+$U$を
+$U\cap X=V$
+となるような
+$K$の近傍とする．
+このとき
+$\cl_{X}(V)$
+はコンパクトで
+$K$はハウスドルフであるから
+$\cl_{X}(V)=\cl_{K}(V)$
+が成り立つ．
+$X$は
+$K$
+の中で稠密であるから，
+特に
+$U$
+は
+$V$
+の中で稠密である．
+つまり
+$\cl_{K}(U)=\cl_{K}(V)$
+である．
+よって
+$\cl_{K}(V)=\cl_{X}(V)\subset X$
+であるからさらに
+$U\subset \cl_{K}(U)\subset X$
+が成り立つ．
+ゆえに
+$U=V$である．
+つまり
+任意の$x\in X$
+は$K$
+の中で
+$X$
+の
+内点になっている
+ので
+$X$
+は$K$
+の
+中で開集合である．
+参考文献
+\cite{Den2}
+も参照のこと．
+\end{rmk}
+
+\begin{cor}[ベールの範疇定理]
+完備距離化可能空間
+と
+局所コンパクトハウスドルフ空間
+は
+ベール空間である．
+\end{cor}
+\begin{proof}
+定理
+\ref{thm:cechcechbaire}
+と
+定理\ref{thm:cechcomp}と
+\ref{thm:cechloccpt}
+から
+従う．
+本当は完全正則空間には
+コンパクト化が少なくとも一つ存在するという議論が必要だが
+省略する．ストーンチェックコンパクト化などがある．
+\end{proof}
+
+
+\section{おまけ}
+
+以下の定理を
+完備列を用いて証明する．
+\begin{thm}
+チェック完備な
+完全正則空間
+はベール空間である．
+\end{thm}
+\begin{proof}
+$X$の完備列を
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+とし
+$\mathcal{U}_{n}=\{U_{i}\}_{i\in I_{n}}$
+と表すことにする．
+そして
+$X$の稠密な開集合の可算族
+を
+$\{G_{n}\}_{n\in \zz_{\ge 0}}$
+とする．
+さらに
+$X$の空ではない開集合$O$
+を任意に与える．
+このとき帰納的に
+$P_{n}$を
+以下のように定義する．
+$n=0$のときは適当に
+$U_{i_{0}, 0}\cap G_{0}\cap O\neq \emptyset$
+となる
+$U_{i_{0}, 0}\in \mathcal{U}_{0}$
+をとって
+$X$の正規性を使って
+$\cl(P_{0})\subset U_{i_{0}, 0}\cap G_{0}\cap O$
+となる開集合$P_{0}$
+とする．
+$n$まで$P_{n}$が定義されたとき
+$P_{n+1}$
+は適当に
+$U_{i_{n+1}, n+1}\cap G_{n+1}\cap P_{n}\neq \emptyset$
+となる
+$U_{i_{n+1}, n+1}\in \mathcal{U}_{n+1}$
+をとる．このような
+$U_{i_{n+1}, n+1}$が取れるのは
+$\mathcal{U}_{n+1}$が開被覆であり
+$G_{n+1}$の稠密性から
+$ G_{n+1}\cap P_{n}\neq \emptyset$
+となるからである．
+そして
+$X$
+の正則性を使って
+適当に
+$\cl(P_{n+1})\subset U_{i_{n+1}, n+1}\cap G_{n+1}\cap P_{n}$
+となる開集合として選ぶ．
+このとき$\{P_{n}\}_{n\in \zz_{\ge 0}}$は有限交差族であり，
+これから生成されるフィルターは
+任意の$n$について
+$\mathcal{U}_{n}\cap \mathfrak{F}\neq \emptyset$
+となる．
+よって
+$\mathbf{U}$
+が完備列であることから
+$\bigcap_{F\in \mathfrak{F}}\cl(F)\neq \emptyset$
+である．
+つまりこの交わりから
+点$p$
+をとると
+$p\in P_{n}$なので
+$p\in O$
+でなおかつ
+$p\in G_{n}$
+でもある．
+よって
+$O$
+と
+$\bigcap_{n}G_{n}$
+は交わりをもつ．
+つまり
+$\bigcap_{n}G_{n}$
+は
+$X$
+の中で稠密である．
+このことから
+$X$
+がベール空間であることが従う．
+\end{proof}
+
+チェック完備性が完全写像で保たれることも証明しておこう．
+\begin{thm}
+$X$, 
+$Y$
+を完全正則写像とし，
+$f\colon X\to Y$
+を完全写像とする．
+このとき
+$X$
+がチェック完備ならば
+$Y$
+もそうである．
+\end{thm}
+\begin{proof}
+この文書では写像$f$
+の小像を
+$\mysm{f}$
+とかく．
+つまり
+$A\subset X$
+について
+$\mysm{f}(A)=Y\setminus f(X\setminus A)$
+である．
+
+今$X$の完備列を
+$\mathbf{U}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+とし，
+$\mathcal{U}_{n}=\{U_{i, n}\}_{i\in I_{n}}$
+と表示しよう．
+このとき
+$\mathcal{O}_{n}$
+という記号で
+$\mathcal{U}_{n}$
+の有限部分族の和集合からなる族とする．
+つまり
+$\mathcal{O}_{n}$
+の元
+$O$
+は
+$\mathcal{U}_{n}$
+の有限個の元$U_{1}, \dots U_{m}$
+を用いて
+$O=\bigcup_{i=1}^{m}U_{i}$
+と表すことができる．
+次に各
+$n\in \zz_{\ge 0}$
+について
+$\mathcal{V}_{n}=\{\, \mysm{f}(O)\mid O\in \mathcal{O}_{n}\, \}$
+と定義する．
+このとき
+$f$が完全写像であることと
+$\mathcal{O}_{n}$
+の定義から
+各
+$\mathcal{V}_{n}$
+は
+$Y$の
+開被覆になっている．
+
+今から
+$\mathbf{V}=\{\mathcal{U}_{n}\}_{n\in \zz_{\ge 0}}$
+が
+$Y$の
+完備列になっていることを示そう．
+$\mathfrak{F}$
+を
+$Y$のフィルターであって
+各
+$n\in \zz_{\ge 0}$
+について
+$\mathcal{V}_{n}\cap \mathfrak{F}\neq \emptyset$
+となるものとする．
+このとき
+$\mathfrak{G}=\{\, f^{-1}(F)\mid F\in \mathfrak{F}\, \}$
+と定義すると
+$\mathfrak{G}$
+は$X$の上のフィルターであり，
+$\mathcal{O}_{n}\cap \mathfrak{G}\neq \emptyset$
+を満たす．
+ここでさらに$\mathfrak{A}$
+を$\mathfrak{G}\subset \mathfrak{A}$
+を満たすような極大フィルターとする．
+このとき$\mathfrak{A}$
+が極大であることと
+$\mathcal{O}_{n}$
+の定義から
+$\mathcal{U}_{n}\cap \mathfrak{A}\neq \emptyset$
+となる(この部分がこの証明のポイントである，$\mathcal{U}_{n}$の元の小像全体は
+被覆とは限らないが$f$による点の逆像がコンパクトであることを用いると
+$\mathcal{U}_{n}$の元の有限和集合の族$\mathcal{O}_{n}$の元の小像全体$\mathcal{V}_{n}$
+が$Y$の被覆になることがわかる，
+ここで有限和集合をとっているが極大フィルターをとることで埋め合わせをしている，一般に極大フィルター$\mathfrak{A}$について
+$A\cup B\in \mathfrak{A}$
+ならば$A$か$B$の少なくとも一つは
+$\mathfrak{A}$に属するのである)．
+
+よって$\mathbf{U}$
+が完備列であることから
+\[
+\bigcap_{A\in \mathfrak{A}}\cl_{X}(A)\neq \emptyset
+\]
+である．
+ここで
+$\mathfrak{G}\subset \mathfrak{A}$
+なので
+\[
+\bigcap_{A\in \mathfrak{A}}\cl_{X}(A)\subset 
+\bigcap_{G\in \mathfrak{G}}\cl_{X}(G)
+\]
+が成り立つ．
+特に
+\[
+\bigcap_{G\in \mathfrak{G}}\cl_{X}(G)\neq \emptyset
+\]
+である．
+ここで$f$は連続写像なので任意の$A\subset X$
+について
+$f(\cl_{X}(A))\subset \cl_{Y}(f(A))$
+が成り立つ．
+よって
+$\mathfrak{G}$
+の定義から
+\[
+f\left(\bigcap_{G\in \mathfrak{G}}\cl_{X}(G)\right)
+\subset 
+\bigcap_{G\in \mathfrak{G}}\cl_{Y}(f(G))
+=
+\bigcap_{F\in \mathfrak{F}}\cl_{Y}(F)
+\]
+なので，
+$\bigcap_{G\in \mathfrak{G}}\cl_{X}(G)\neq \emptyset$
+から
+$\bigcap_{F\in \mathfrak{F}}\cl_{Y}(F)\neq \emptyset$
+となる．
+これで
+$\mathbf{V}$
+が完備列であることがわかった．
+\end{proof}
+
+\section*{参考文献}\addcontentsline{toc}{section}{参考文献}
+
+
+\renewcommand{\refname}{参考にしたウェブページ}
+
+\begin{thebibliography}{99}
+
+\bibitem[数物レジュメ]{jjw}
+湯地 智紀, 
+数物セミナー春の大談話会 in 京大 のレジュメ
+「Lindel\"{o}f空間の深淵」
+\begin{verbatim}http://physmathseminar.web.fc2.com/
+discourse/2016/spring/kyoto-sp_abst/abst_yuji.pdf
+\end{verbatim}
+
+\bibitem[電波通信１]{Den1}
+はてなブログ電波通信の記事
+「Baire 空間の話」
+https://concious4410.hatenablog.com/entry/2023/07/12/213338
+
+\bibitem[電波通信2]{Den2}
+はてなブログ電波通信の記事
+「ハウスドルフ空間の中で稠密な局所コンパクト部分集合が開集合であること」
+https://concious4410.hatenablog.com/entry/2016/06/12/175658
+\end{thebibliography}
+
+
+
+\renewcommand{\refname}{一般の参考文献}
+%READ!
+%myplain is the same to amsplain style. 
+\nocite{*}
+\bibliographystyle{myplaindoidoi}
+\bibliography{bb.bib}
+
+
+
+\end{document}

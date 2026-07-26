@@ -1,0 +1,1156 @@
+\documentclass[leqno, a4paper, 12pt]{jsarticle}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{comment}
+	%可換図式用
+		%\usepackage[all]{xy}
+	%重くなるので使わいときはコメント化しておく。
+%定理環境 thmはあまり使わずpropをなるべく使う。
+%主張は基本的に証明の中で使い、そのため番号を付けない。
+%注意環境を付けてみた。
+\newtheorem{thm}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{df}[thm]{定義}
+\newtheorem{exam}[thm]{例}
+\newtheorem{fact}[thm]{事実}
+\newtheorem*{claim}{主張}
+\newtheorem*{rmk}{注意}
+\renewcommand{\proofname}{{\bf 証明}}
+%矢印たち。
+%\toは\rightarrowと同じ。\getsは\leftarrowと同じ。同値は\iff
+%上向き矢はuparrow逆はdownarrow
+\newcommand{\To}{\Longrightarrow}
+\newcommand{\Gets}{\Longleftarrow}
+%黒板太字
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+%無限大
+\newcommand{\mgn}{\infty}
+%ギリシャン
+\newcommand{\dpst}{\displaystyle}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ga}{\gamma}
+\newcommand{\lil}{\la\in \La}
+%商集合
+\newcommand{\qt}[2]{#1/\! #2}
+%enumerate環境
+\renewcommand{\labelenumi}{{\rm (\arabic{enumi})}}
+%以降alignじゃなくてenumerate を使え。
+%なんか演算
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\supp}{supp}
+%なんか演算２
+\DeclareMathOperator{\bd}{Bdry}
+\DeclareMathOperator{\cl}{CL}
+\DeclareMathOperator{\nai}{Int}
+\DeclareMathOperator{\di}{diam}
+
+\newcommand{\ind}{\text{{\rm ind}}}
+
+\DeclareMathOperator{\emb}{Emb}
+%差集合は\setminusで統一する。等号の否定は\neq
+%真部分集合は\subsetneqq　偏微分は\partial
+%ディスプレイスタイル。\dfracでディスプレイ分数
+%空集合は\Oを使う！！！！！！！！！！！！
+
+
+\DeclareMathOperator{\rank}{rank}
+\title{
+位相次元論入門：
+$0$次元から始める次元論
+}
+\author{ナンブキトラ}
+\date{\today}
+			\begin{document}
+\maketitle
+この文章では可分距離化可能空間に関する
+位相次元論を$0$次元空間を元にして
+構築する．
+
+
+その応用として
+参考文献\cite{0}に紹介されている多様体の埋め込み定理のための次元論的な補題、この文章で定理\ref{main}とされている命題を証明する．
+\textbf{第二可算な位相多様体は可分な距離付け可能空間である}という事実を知っておけば定理\ref{main}が第二可算多様体に適用することができ、参考文献\cite{0}の多様体の埋め込み定理の大きな行間を埋めることができることであろう。\par
+多様体は局所コンパクトハウスドルフ空間であり、特に正則空間なので、第二可算な多様体は\textbf{ウリゾーンの距離付け可能定理から距離付け可能である。}ことが分かる。また第二加算な空間は可分なので第二可算な多様体が可分であることもよくわかる。
+局所コンパクトハウスドルフな空間が第二可算ならば距離化可能であることは，はてなブログ「電波通信」の
+記事\cite{den4}に書いてある．
+
+後半の応用の話は既に私が記事化している\cite{den3}をそのまま引き写した．
+\section{次元論}
+この文章ではスタンダードな次元論とは異なり，
+$0$次元空間の和集合によって次元を定義している．
+これは多様体の埋め込み定理
+で本質的に$0$次元部分空間の和集合に分解する定理を用いているから最初からそれを定義にしたものである．
+埋め込み定理の証明を
+理解するためには
+この節の
+定理\ref{thm:sumsum}
+と
+補題
+\ref{lem:nnn}
+が分かれば十分である．
+一応先人に敬意を払って小さい帰納的次元$\ind$
+と同じものであることも証明してはいる．
+
+\subsection{本文}
+\begin{df}
+$\dim_{T} X=-1$
+であるとは$X=\emptyset$
+と定義する．
+\end{df}
+
+\begin{df}
+位相空間$X$の部分集合$S$が
+\textbf{clopen}であるとは，$S$
+が開かつ閉集合であるときにいう．
+\end{df}
+
+\begin{df}
+$X$を可分距離化可能空間とする．
+このとき$X$が$0$次元であるとは
+$X$が空集合ではなく
+$X$のclopen集合からなる開基
+が存在する時にいう．
+このとき$\dim_{T} X=0$と表す．
+\end{df}
+
+
+\begin{df}
+$n\in \zz_{\ge 0}$とし，
+$X$を可分距離化可能空間とする．
+このとき整数$\dim_{T}X$を
+以下を満たす最小の整数$m$で定義する．
+$X$の$m+1$個の部分空間$X_{0}\dots, X_{m}$
+が存在して$\dim_{T}X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{m}X_{i}$
+を満たす．
+この定義のもと，$\dim_{T}X\le n$とは
+$X$の$n+1$個の部分空間$X_{0}\dots, X_{n}$
+で$\dim_{T}X_{i}\le 0$
+と
+$X=\bigcup_{i=0}^{n}X_{i}$
+を満たすものが存在することを意味する．
+また，$\dim_{T}$は位相不変量であることがわかる．
+\end{df}
+
+$\dim_{T}$の定義から直ちに次の二つのことがわかる．
+\begin{lem}
+$X$を可分距離化可能空間とし，
+$S\subset X$とする．この時
+$\dim_{T}S\le \dim_{T}X$
+が成り立つ．
+\end{lem}
+
+\begin{lem}\label{lem:plpl}
+$X$を可分距離化可能空間とし，
+$A, B\subset X$とする．この時
+$\dim_{T}A\le n$かつ$\dim_{T}B\le 0$ならば
+$\dim_{T}A\cup B\le n+1$
+が成り立つ．
+\end{lem}
+
+
+
+\begin{lem}\label{lem:toridashi}
+$X$を可分距離化可能空間とする．
+$\mathcal{B}$を$X$の開基とする．
+このとき$\mathcal{B}$
+の部分集合
+$\mathcal{A}$で開基になりさらに$\card(\mathcal{A})\le \aleph_{0}$を満たすものが存在する．
+\end{lem}
+\begin{proof}
+$X$は可分距離化可能空間なのでその部分集合も
+可分距離化可能である．
+よって$X$の任意の部分集合はリンデレフである．
+$X$の可算な開基$\mathcal{C}$を取る．
+任意の$U\in \mathcal{C}$に対して
+$\mathcal{B}$が開基であることと，$U$がリンデレフである
+ことから可算集合$\mathcal{A}_{U}\subset \mathcal{B}$
+で$\bigcup_{V\in  \mathcal{A}_{U}}V=U$となるものが存在する．
+そして
+\[
+\mathcal{A}=\bigcup_{U\in \mathcal{C}}\mathcal{A}_{U}
+\]
+とおけば$\mathcal{A}$が求めるものになっている．
+\end{proof}
+
+
+\begin{cor}
+$X$を可分距離化可能空間とする．
+このとき$\dim_{T}\le 0$であることと，
+可算開基であってclopenな集合からなるものが存在することは同値である．
+\end{cor}
+
+\begin{lem}\label{lem:ultranormal}
+$X$を可分距離化可能空間とするこのとき
+$\dim_{T}X\le 0$であることと
+任意の$X$内の交わらない二つの閉集合$G, H$に対して
+clopen集合$O$が存在して
+$G\subset O$と$H\cap O=\emptyset$
+を満たすことは同値である．
+\end{lem}
+\begin{proof}
+後半の条件から$\dim_{T} X\le 0$
+が導かれるのは明らかなので逆を示す．
+
+今
+$\dim_{T}X\le 0$
+なので
+各点に可算な近傍形でclopenなものからなるものが存在する．
+そのようなものを$p\in G$について$\mathcal{N}_{p}$
+と表すことにする．さらに$H$が閉集合であることから任意の
+$V\in \mathcal{N}_{p}$について$V\cap H=\emptyset$
+と仮定してもよい(必要なら$\{S\cap (X\setminus H)\}_{S\in \mathcal{N}_{p}}$と置き換えれば良い)．
+そして$X\setminus G$も次元が$0$以下なので
+clopenな集合からなる開基$\mathcal{B}$が存在する．
+このとき集合族
+\[
+\bigcup_{p\in G}\mathcal{N}_{p}\cup \mathcal{B}
+\]
+は$X$の開基になるので補題 \ref{lem:toridashi}
+からこの集合族の部分族で
+可算な開基$\{U_{i}\}_{i\in \zz_{\ge 0}}$
+が存在する．ここで$U_{i}\cap G\neq \emptyset$ならば
+$U_{i}\cap H=\emptyset$に注意しよう．
+そして$V_{0}=U_{0}$で
+$V_{i}=U_{i}\setminus \bigcup_{j=1}^{i-1}U_{i}$
+と定義する．すると各$V_{i}$
+は開集合で$X=\bigcup_{i}V_{i}$となる．
+そして
+\[
+O=\bigcup_{V_{i}\cap G\neq \emptyset}V_{i}
+\]
+とすると
+\[
+X\setminus O=\bigcup_{V_{i}\cap G= \emptyset}V_{i}
+\]
+なので$O$はclopenであり，$G\subset O$を満たす．
+さらに$V_{i}$について$V_{i}\cap G\neq \emptyset$
+ならば$V_{i}\cap H=\emptyset$なので
+$H\subset X\setminus O$
+となるから$O$は求める集合になっている．
+\end{proof}
+
+
+\begin{prop}\label{prop:sumn=0}
+$X$を空でない可分距離化可能空間とする．
+もしも可算個の閉集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+で$\dim_{T}A_{i}\le 0$
+と$X=\bigcup_{i\in \zz_{\ge 0}}A_{i}$
+を満たすならば
+$\dim_{T} X= 0$である．
+\end{prop}
+\begin{proof}
+$X$が
+補題 \ref{lem:ultranormal}
+の条件を満たすことを証明しよう．
+$X$の交わらない二つの閉集合
+$G$, $H$を与える．
+帰納的に$P_{i}$と$Q_{i}$, $R_{i}$, $L_{i}$
+を構成する．
+まず
+$G\cap A_{0}$
+と$H\cap A_{0}$
+は$A_{0}$
+のなかの交わらない閉集合である．
+$A_{0}$は$0$次元空間なので
+補題 \ref{lem:ultranormal}より
+$A_{0}$の中のあるclopen集合
+$P_{0}$
+と$Q_{0}$が存在して
+\begin{enumerate}
+\item $G\cap A_{0}\subset P_{0}$
+\item $H\cap A_{0}\subset Q_{0}$
+\item $P_{0}\cap Q_{0}=\emptyset$
+\item $P_{0}\cup Q_{0}=A_{0}$
+\end{enumerate}
+を満たす．
+
+さて$A_{0}$は閉集合だから$P_{0}$と$Q_{0}$
+は$X$の閉集合でもあるし，
+$G\cup P_{0}$と$H\cup Q_{0}$
+は$X$の交わらない閉集合である．
+ここで
+$X$の正規性\footnote{距離化可能空間は常に正規である．}を用いて
+以下を満たす$X$二つの開集合$R_{0}$と$L_{0}$
+を得る．
+\begin{enumerate}
+\item $G\cup P_{0}\subset R_{0}$
+\item $H\cup Q_{0}\subset L_{0}$
+\item $\cl (R_{0})\cap \cl(L_{0})=\emptyset$
+\end{enumerate}
+
+一般に$P_{i}$, $Q_{i}$
+$R_{i}$, $L_{i}$を帰納的に
+以下を満たすように定義する．
+\begin{enumerate}
+\item $P_{i}$と$Q_{i}$
+は$A_{i}$のclopen集合
+\item 
+$\cl(R_{i-1})\cap A_{i}\subset P_{i}$
+\item 
+$\cl(L_{i-1})\cap A_{i}\subset Q_{i}$
+\item 
+$P_{i}\cap Q_{i}=\emptyset$
+\item $P_{i}\cup Q_{i}=A_{i}$
+\item $R_{i}$, $L_{i}$
+は$X$の開集合
+\item 
+$\cl(R_{i-1})\cup P_{i}\subset R_{i}$
+
+\item 
+$\cl(L_{i-1})\cup Q_{i}\subset L_{i}$
+\item 
+$\cl(R_{i})\cap \cl(L_{i})=\emptyset$
+
+\end{enumerate}
+このように構成できることは
+各$A_{i}$がclopenであることと$X$の正規性からわかる．
+このとき以下が満たされる
+\begin{enumerate}
+\item $A_{i}\subset R_{i}\cup L_{i}$
+\item 
+$\cl(R_{i-1})\subset R_{i}$
+
+\item 
+$\cl(L_{i-1})\subset L_{i}$
+\end{enumerate}
+そして$R=\bigcup_{i}R_{i}$, 
+$L=\bigcup_{i}L_{i}$
+とすると$R$と$L$は開集合である．
+そして
+$X=\bigcup_{i}A_{i}\subset R\cup L$
+なので$X=R\cup L$である．
+また矛盾を導き出すために$x\in R\cap L$となる$x$がもしも存在したとすると
+$x\in R_{i}$と$x\in L_{j}$となる$i, j$
+が存在するが$k=\max\{i, j\}$
+とすると
+$x\in R_{k}\cap L_{k}=\emptyset$
+となり矛盾する．
+つまり$R\cap L=\emptyset$である. 
+$R$と$L$は交わらない開集合で定義から
+$G\subset R$と$H\subset L$
+を満たす．そして$R\cup L=X$
+なので$R$と$L$は閉集合でもある．
+このことは補題 \ref{lem:ultranormal}から$\dim_{T}X=0$を意味する．
+\end{proof}
+
+
+\begin{df}
+$X$を位相空間とする．
+$X$の部分集合$S$
+が$F_{\sigma}$
+であるとは
+$S$が$X$内の可算個の閉集合の和集合として表される時に
+いう．
+\end{df}
+
+\begin{cor}
+可分距離空間が$0$次元であるような可算個の$F_{\sigma}$
+集合の和集合で表されるのならば全体空間も$0$次元である．
+\end{cor}
+
+
+\begin{thm}\label{thm:sumsum}
+$n\in \zz_{\ge 0}$
+とする．
+$X$を可分距離空間とする．
+このとき
+$X$の可算個の$F_{\sigma}$集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し$\dim_{T}A_{i}\le n$と
+$X=\bigcup_{i}A_{i}$を満たすならば
+$\dim_{T}X\le n$である．
+\end{thm}
+\begin{proof}
+$n$に関する帰納法で証明する．
+$n=0$の時は既に
+命題\ref{prop:sumn=0}で
+証明されている．
+$n+1$より小さい数では定理が成り立つとする．
+このとき
+可算個の閉集合$\{A_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し$\dim_{T}A_{i}\le n+1$と
+$X=\bigcup_{i}A_{i}$を満たすと仮定してもよい．
+このとき$B_{0}=A_{0}$, 
+$B_{i}=A_{i}\setminus \bigcup_{j=0}^{i-1}A_{j}$
+と定義する．
+すると各$B_{i}$
+は$F_{\sigma}$集合であり$\dim_{T}B_{i}\le n+1$
+を満たしさらに$B_{i}$たちは交わらず$X=\bigcup_{i}B_{i}$
+が成り立つ．
+さて$\dim_{T}\le n+1$の定義から
+各$i$について$B_{i}$の部分集合$M_{i}$と$N_{i}$
+で$\dim_{T}M_{i}\le n$と$\dim_{T}N_{i}=0$
+となる．$M=\bigcup_{i}M_{i}$
+と$N=\bigcup_{i}N_{i}$と定義する．
+各$M_{i}$は互いに交わらないので
+$M_{i}=M\cap B_{i}$となる．
+よって
+$M_{i}$は$M$のなかで$F_{\sigma}$集合である．
+よって帰納法の仮定より$\dim_{T}M\le n$
+となる．同様に$\dim_{T}N=0$である．
+$X$は$M$と$N$の和集合なので，補題 \ref{lem:plpl}から
+$\dim_{T}X\le n+1$
+が成り立つ．
+\end{proof}
+さて今から
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+を証明する．
+ここで，
+$\mathbb{S}^{n}$とは$n$次元球面である．
+
+\begin{lem}\label{lem:qq00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$\qq^{n}$
+は$0$次元である．
+\end{lem}
+\begin{proof}
+一点集合は閉集合でなおかつ$0$次元なので
+命題 \ref{prop:sumn=0}からわかる．
+\end{proof}
+
+
+\begin{lem}\label{lem:pp00}
+$n\in \zz_{\ge 0}$
+とする．
+このとき
+$(\rr\setminus \qq)^{n}$
+は$0$次元である．
+\end{lem}
+\begin{proof}
+点$x=(x_{1}, \dots, x_{n})\in (\rr\setminus \qq)^{n}$
+をとる．任意に$\epsilon >0$をとり，
+各$i\in \{1, \dots, n\}$について
+$\eta_{i}, \kappa_{i}>0$
+を
+\begin{enumerate}
+\item 各$i$について
+$\eta_{i}<\epsilon$かつ$\kappa_{i}<\epsilon$
+\item $(x_{1}-\eta_{1}, \dots, x_{n}-\eta_{n})\in \qq^{n}$
+\item $(x_{1}+\kappa_{1}, \dots, x_{n}+\kappa_{n})\in \qq^{n}$
+\end{enumerate}
+を満たすようにとる．
+$(2), (3)$の条件を満たす$\eta_{i}, \kappa_{i}$
+が存在するのは$\qq$が$\rr$の中で
+が稠密だからである．
+$U=\prod_{i=1}^{n}(x_{i}-\eta_{i}, x_{i}+\kappa_{i})$
+かつ
+$C=\prod_{i=1}^{n}[x_{i}-\eta_{i}, x_{i}+\kappa_{i}]$
+とおく．これらの集合について
+$U\cap(\rr\setminus \qq)^{n}=C\cap (\rr\setminus \qq)^{n}$
+なので$U\cap(\rr\setminus \qq)^{n}$
+は$(\rr\setminus \qq)^{n}$のclopen集合であり，
+$x$の近傍でもある．
+$\epsilon$は任意なので各点$x$について$(\rr\setminus \qq)^{n}$内の
+clopenな近傍系が存在することがわかった．
+よって$\dim_{T}(\rr\setminus \qq)^{n}=0$
+である．
+\end{proof}
+
+\begin{lem}\label{lem:nnn}
+$n\in \zz_{\ge 0}$とする．
+このとき
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つ．
+\end{lem}
+\begin{proof}
+$k\in \{0, \dots, n\}$
+について
+$E_{k}\subset \rr^{n}$
+を$\rr^{n}$の部分集合で
+高々$k$個の座標が有理数になっている点全体とする．
+今から$\dim_{T}E_{k}= 0$
+を証明する．
+今$E_{n}=\qq^{n}$かつ$E_{0}=(\rr\setminus \qq)^{n}$
+なので補題 \ref{lem:qq00}, \ref{lem:pp00}
+から$\dim_{T}E_{n}=\dim_{T}E_{0}=0$
+がわかる．
+よって$k\in \{1, \dots, n-1\}$について
+$\dim_{T}E_{k}= 0$
+を証明する．
+$Z(k)$を$\{1, \dots, k\}$の濃度がちょうど$k$個の
+部分集合全体とする．
+そして$\sigma=\{i_{1}, \dots, i_{k}\}\in Z(n, k)$
+と$v=(v_{1}\dots, v_{k})\in \qq^{n}$
+について$A(\sigma, v)$を
+任意の$j\in \{1, \dots, k\}$について
+第$i_{j}$座標が$v_{j}$になるような
+$\rr^{n}$の点全体とし，
+$B(\sigma, v)$を
+任意の$j\in \{1, \dots, k\}$について
+第$i_{j}$座標が$v_{j}$になり，それ以外の座標が無理数に属するような$\rr^{n}$の点全体の集合とする．
+このとき
+$E_{k}$の定義から任意の$\sigma=\{i_{1}, \dots, i_{k}\}\in Z(n, k)$
+と$v=(v_{1}\dots, v_{k})\in \qq^{k}$
+について$E_{k}\cap A(\sigma, v)=B(\sigma, v)$
+となる．ゆえに$B(\sigma, v)$は$E_{k}$
+の閉集合である．さらに$B(\sigma, v)$
+は$(\rr\setminus \qq)^{n-k}$と同相なので
+$0$次元である．
+さて$E_{k}$の定義から
+\[
+E_{k}=\bigcup_{\sigma\in Z(n, k)}\bigcup_{v\in \qq^{k}}
+B(\sigma, v)
+\]
+が成り立ち，各$B(\sigma, v)$は$E_{k}$の閉集合かつ$0$次元で$Z(n, k)$と$\qq^{n-k}$
+は高々可算集合なので命題 \ref{prop:sumn=0}から
+$\dim_{T}E_{k}=0$
+が従う．
+さらに明らかに$\rr^{n}=\bigcup_{k=0}^{n}E_{k}$
+なので$\dim_{T}\rr^{n}\le n$がわかる．
+次に$\mathbb{S}^{n}$について考えよう．
+は$\rr^{n}$の一点コンパクト化であり，
+$\mathbb{S}^{n}=(E_{0}\cup\{\infty\})\cup \bigcup_{k=1}^{n}E_{k}$
+である．
+そして命題 \ref{prop:sumn=0}から
+$\dim_{T}(E_{0}\cup\{\infty\})= 0$
+なので，
+$\dim_{T}\mathbb{S}^{n}\le n$
+がわかる．
+\end{proof}
+\begin{rmk}
+一般に$\dim_{T}\rr^{n}=\dim_{T}\mathbb{S}^{n}=n$
+が示せるが，証明は面倒である．
+この文章で行う理論展開のためには
+$\dim_{T}\rr^{n}\le n$
+がわかっていれば良い．
+\end{rmk}
+
+\subsection{蛇足:小さい帰納的次元とか}
+
+\begin{df}
+$X$を位相空間とする．
+$S\subset X$とする．
+このとき$S$の境界集合を$\partial_{X}S$
+で表す．
+$x\in \partial_{X}S$であるとは
+任意の$x$の近傍$H$について
+$H\cap S\neq \emptyset$かつ
+$H\setminus S\neq \emptyset$
+を意味する．
+一般に$\partial_{X}S=\cl_{X}S\setminus \nai_{X}S$
+である．ここで$\cl_{X}$, $\nai_{X}$は$X$における閉包と
+開核を表す．
+\end{df}
+
+\begin{lem}\label{lem:par}
+$X$を位相空間とし，
+$A\subset S\subset X$とする．このとき
+$\partial_{S} A\subset S\cap \partial_{X}A$
+が成り立つ．
+\end{lem}
+\begin{proof}
+一般に位相空間$T$と$M\subset T$について
+$P\subset M\subset H$となる開集合$O$と閉集合$C$
+について$\partial_{T}M\subset H\setminus P$
+であり，$\partial_{T}M=\cl_{T}(A)\setminus \nai_{T}(A)$
+に注意しよう．
+
+さて，$O=\nai_{X}A$で$C=\cl_{X}A$とおく．
+すると$O\cap S$と$C\cap S$はそれぞれ
+$S$の開集合と閉集合で$O\cap S\subset A\subset C\cap S$を満たす．
+よって
+$\partial_{S}A\subset (C\cap S)\setminus (O\cap S)$
+を満たす．
+ここで
+$(C\cap S)\setminus (O\cap S)=
+(C\setminus O)\cap S=(\cl_{X}A\setminus \nai_{X}A)\cap S=\partial_{X}S$
+となる．
+これは
+$\partial_{S}A\subset \partial_{X}S$を意味する．
+\end{proof}
+
+
+
+\begin{lem}\label{lem:partial}
+$X$を位相空間とし，$N\subset A\subset X$とする．
+すると
+$N$が$A$の開集合であるとき
+$\partial_{A} N=A\cap (\cl_{X}(N)\setminus N)$
+が成り立つ．
+\end{lem}
+\begin{proof}
+まず
+$\partial_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)$
+である．
+ここで$N$は$A$の開集合なので
+$\nai_{A}N=N$である．
+そして
+$\cl_{A}(N)=A\cap \cl_{X}N$
+なので\footnote{この等式は一般に成り立つ}
+すると
+$\partial_{A}(N)=\cl_{A}(N)\setminus \nai_{A}(N)
+=A\cap \cl_{X}N\setminus N=A\cap (\cl_{X}N\setminus N)$
+が成り立つ．
+\end{proof}
+
+
+\begin{lem}\label{lem:jojo}
+$X$を可分距離化可能空間とし，
+$A$を
+$A\subset X$で
+$\dim_{T}A=0$とする．
+このとき任意の$p\in A$と
+$X$内の$p$の開近傍$U$
+に対して$X$内の
+開集合$W$が存在して
+$A\cap \partial_{X} W=\emptyset$
+を満たす．
+\end{lem}
+
+\begin{proof}
+まず$\dim_{T}A=0$より
+$A$内の$p$のclopenな
+近傍
+$N\subset A$で
+$N\subset U\cap A$
+となるものが存在する．
+ここで
+$\partial_{A}N=\emptyset$に注意しよう．
+いま$N$と$A\setminus \cl_{X}(N)$について考える．
+明らかに
+$\cl_{X}(N)\cap (X\setminus \cl_{X}(N))=\emptyset$
+であり，
+さらに
+\begin{align*}
+\cl_{X}(A\setminus \cl_{X}(N))
+&=
+A\cap \cl_{A}(A\setminus \cl_{X}(N))
+\\
+&=
+A\cap \cl_{A}(A\setminus (A\cap \cl_{X}(N)))
+=
+A\cap \cl_{A}(A\setminus \cl_{A}(N))\\
+&=
+\cl_{A}(A\setminus \cl_{A}(N))
+=
+(A\setminus \cl_{A} N)\cup \partial_{A} N
+\\
+&=(A\setminus \cl_{A} N)
+\end{align*}
+なので
+$N\cap \cl(A\setminus \cl_{X}(N))=\emptyset$
+である．以上のことから$N$と$A\setminus \cl_{X}A$
+は互いにもう一方の閉包と交わらない．
+よって$X$の完全正規性から$X$の開集合$W$が存在して
+$N\subset W$と$\cl_{X}(W)\cap (A\setminus \cl_{X}(N))=\emptyset$を満たす．
+後半の条件から
+$A\cap \cl_{X}W\subset A\cap \cl_{X}N$がわかる．
+必要なら$W$を$U\cap W$に置き換えて$W\subset U$としてもよい．
+さて以上と補題 \ref{lem:partial}を踏まえると
+\begin{align*}
+A\cap 
+\partial_{X} W
+&=
+A\cap (\cl_{X}(W)\cap (X\setminus W))
+\subset 
+A\cap \cl_{X}(N)\cap (X\setminus N)
+\\
+&=A\cap (\cl_{X}(N)\setminus N)
+=\partial_{A}N=\emptyset
+\end{align*}
+を得る．
+ゆえに$A\cap \partial_{X} W=\emptyset$がわかる．
+\end{proof}
+
+\begin{thm}\label{thm:boundary}
+$X$を可分距離化可能空間とする．
+この時$\dim_{T} X\le n$
+であることと$X$の開基$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して$\dim_{T}\partial_{X} V_{i}\le n-1$
+であることは同値である．
+\end{thm}
+\begin{proof}
+最初にまず$\dim_{T} X\le n$
+と仮定する．すると
+$X$の部分集合$A_{0}, \dots, A_{n}$
+が存在して
+$\dim_{T}A_{i}\le 0$
+と$\bigcup_{i=0}^{n}A_{i}=X$
+を満たす．
+補題 \ref{lem:jojo}より，
+各$i$と各$p\in A$について$p$の
+$X$内の開近傍系$\mathcal{N}_{p, i}$
+が存在して，任意の$V\in \mathcal{N}_{p, i}$
+について
+$A_{j}\cap \partial_{X} V=\emptyset$
+を満たす．
+このとき$\partial_{X}V$は
+は$A_{k}\cap \partial V$ $(k\neq i)$
+の和集合なので$\dim_{T}\partial_{X}V\le n-1$である．
+そして集合族
+\[
+\bigcup_{i=0}^{n}\bigcup_{p\in A_{i}}\mathcal{N}_{p, i}
+\]
+は$X$の開基になるので
+補題\ref{lem:toridashi}
+より可算な開基$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在し$\dim_{T}\partial_{X} V_{i}\le n-1$
+を満たす．
+
+逆を示そう．今$X$の開基$\{V_{i}\}_{i\in \zz_{\ge 0}}$
+が存在して$\dim_{T}\partial_{X} V_{i}\le n-1$
+を満たすとする．
+このとき定理 \ref{thm:sumsum}
+より$S=\bigcup_{i\in \zz_{\ge 0}}\partial_{X}V_{i}$
+は$\dim_{T}S\le n-1$を満たす．
+さらに$A=X\setminus S$とおくと，
+$\{A\cap V_{i}\}_{i\in \zz_{\ge 0}}$
+は$A$の開基になる．
+そして補題 \ref{lem:par}より
+$\partial_{A}V_{i}\subset A\cap \partial_{X}V_{i}=\emptyset$
+なので$\dim_{T}A\le 0$がわかる．
+そして$X=S\cup A$なので補題 \ref{lem:plpl}
+より$\dim_{T} X\le n$がわかる．
+\end{proof}
+
+\begin{df}[小さい帰納次元]
+空間$X$の小さい帰納次元を帰納的$\ind X$に次のように定義する。\par
+$\ind X=-1\iff X=\O$とし、$n-1$まで定義されたとして\par
+$\ind X\le n\iff$$X$の任意の点$x$と$x$の任意の近傍$U$に対して$x$の近傍$N$が存在して$\ind (\bd N)\le n-1$かつ$N\subset U$を充たす。\par
+と定義する。ちなみに$\ind X=n$とは$\ind X\le n$かつ$n-1<\ind X$である。
+\end{df}
+
+定理\ref{thm:boundary}から次のことが従う．
+\begin{cor}\label{cor:inddim}
+可分距離化可能空間$X$について
+$\ind X=\dim_{T}X$
+\end{cor}
+
+\begin{rmk}
+本来は$\ind$を定義したのちに
+$\ind \le n$ならば$n+1$個の$0$
+次元空間の和集合としてかけることを証明するのだが，
+この文章では逆にそちらを位相次元の定理にしている．
+\end{rmk}
+
+
+
+\begin{lem}\label{lem:nnn}
+$n\in \zz_{\ge 0}$とする．
+このとき
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つ．
+\end{lem}
+\begin{proof}[\textbf{$\ind$を使った別証明}]
+$m\in \zz_{\ge 1}$とする．
+$\rr^{m+1}$と$\mathbb{S}^{m+1}$
+はともに境界が$\mathbb{S}^{m}$
+となる開集合からなる開基を持つ．
+よって$\dim_{T}\rr^{m+1}\le \dim_{T}\mathbb{S}^{m}$
+と
+$\dim_{T}\mathbb{S}^{m+1}\le \dim_{T}\mathbb{S}^{m}$
+が成り立つ．
+$\mathbb{S}^{1}$
+は境界が2点になるような開集合からなる開基を持つから
+$\dim_{T}\mathbb{S}^{1}\le 1$
+である．もしくは$\rr$が有理数と無理数という二つの$0$
+次元集合の和であることと$\mathbb{S}^{1}$
+が$\rr$の一点コンパクト化であることを用いても
+$\dim_{T}\mathbb{S}^{1}\le 1$
+であることがわかる．
+よって帰納的に
+$\dim_{T}\rr^{n}\le n$と
+$\dim_{T}\mathbb{S}^{n}\le n$
+が成り立つことがわかる．
+\end{proof}
+
+\section{応用}
+この節では多様体をユークリッド空間に埋め込む話をする．
+
+\par まず部分空間の開集合をもとの空間の開集合に持ち上げるための次の補題から始まる。
+
+\begin{lem}\label{lem}
+空間$X$の部分空間$A$の開集合$U$について
+\[
+B(U)=\{x\in X\\ |\ d(x,U)<d(x,A\setminus U)\}
+\]
+と置くと、$B(U)$は$X$の開集合であり、$B(U)\cap A=U$を充たす。ここで$d$とは$X$の距離の一つである。\par
+さらに$A$の二つの開集合$U,V$について$U\cap V=\O$ならば$B(U)\cap B(V)=\O$である。
+\end{lem}
+\begin{proof}
+やるとわかる。
+\end{proof}
+
+\begin{prop}
+第二可算な$n$次元位相多様体$M$について
+\[
+\dim_{T} M\le n
+\]
+\end{prop}
+\begin{proof}
+局所ユークリッド性と
+第二可算性と$\dim_{T}\rr^{n}\le n$と
+定理 \ref{thm:sumsum}から命題が成り立つことがわかる．
+もしくは
+境界が$\mathbb{S}^{n-1}$と同相な開集合からなる開基が存在することと系\ref{cor:inddim}からもわかる．
+\end{proof}
+\begin{thm}\label{main}
+空間$X$は$\dim_{T} X\le n$を充たすとする。そして$\mathcal{U}$を空間$X$の開被覆とする。このとき$\mathcal{U}$の細分である$X$の局所有限な開被覆$\mathcal{V}$と開集合からなる（被覆とは限らない）$n+1$個の族$\mathcal{W}_0,\mathcal{W}_1,\dots,\mathcal{W}_n$が存在して
+\[
+\mathcal{V}=\mathcal{W}_0\cup\mathcal{W}_1\cup\cdots\cup\mathcal{W}_n
+\]
+及び
+\[
+\text{各$i$について$\mathcal{W}_i$は互いに素な族である。}
+\]
+を充たす。
+\end{thm}
+\begin{proof}
+空間$X$は距離化可能空間であるから
+$X$と同じ位相を生成する距離を一つ固定して$d$とする．
+さらに$X$はパラコンパクト\footnote{一般に距離空間はパラコンパクトであるが、可分距離空間のパラコンパクト性は一般的なそれよりも容易に証明できる。}であるので$\mathcal{U}$の細分である局所有限な開被覆である$\mathcal{C}$が存在する。ところで$X$は可分距離空間なので特にリンデレフであるから$\mathcal{C}$は可算であるとしても一般性を失わない。$\mathcal{C}=\{U_k\}_{k\in \nn}$としよう。\par
+さて$\dim_{T}X\le n$から$n+1$個の高々$0$次元部分空間$\{A_i\}_{i=0}^n$が存在して$\dpst X=\bigcup_{i=0}^nA_i$を充たす。\par
+ここで各$i$について$A_i$上で$A_i$の被覆$\{A_i\cap U_k\}_{k\in \nn}$を考えよう。$A_i$は$0$次元なので開かつ閉な開基を持つ。また可分でもあるので$\{A_i\cap U_k\}_{k\in \nn}$の細分で高々可算な開かつ閉な集合からなる$A_i$の被覆$\{O_l^{(i)}\}_{l\in \nn}$が存在する。これを用いて
+\[
+G_1^{(i)}=O_1^{(i)},\ G_j^{(i)}=O_j^{(i)}\setminus \bigcup_{l<j}O_l^{(i)}\ (j\ge 2)
+\]
+と定義すると$\{G_j^{(i)}\}_{j\in \nn}$は$A_i$の開集合からなる\footnote{$A_i$の閉集合でもあるが、そのことは使わない。}$A_i$の被覆で$\{A_i\cap U_k\}_{k\in \nn}$の細分になる。また定義から明らかに$a\neq b$ならば$G_a^{(i)}\cap G_b^{(i)}=\O$であるので$\{G_j^{(i)}\}_{j\in \nn}$の元は互いに素である。そして$\{I_a^{(i)}\}_{a\in \nn}$を
+\[
+I_{1}^{(i)}=\{j\in \nn\ |\ G_j\subset U_1\}
+\]
+とし、$m-1$まで$I_a^{(i)}$が定義されてるとして
+\[
+I_m^{(i)}=\{j\in\nn\ |\ G_j\subset U_m\}\setminus \bigcup_{a=1}^{m-1}I_{a}^{(i)}
+\]
+と帰納的に定義しよう。そしてこれを用いて
+\[
+P_a^{(i)}=\bigcup_{s\in I_a}G_s^{(i)}
+\]
+と定義しよう。するとこれは$A_i$の開集合であり、$\{P_a^{(i)}\}_{a\in \nn}$は$A_i$の被覆となり、定義から明らかに$\{P_a^{(i)}\}_{a\in \nn}$は互いに素な族である。\par
+これを用いて$Q_m^{(i)}=B(P_m^{(i)})\cap U_m$と定義しよう。（補題\ref{lem}参照）このとき補題\ref{lem}から$\{Q_m^{(i)}\}_{m\in \nn}$は互いに素な族となり、$A_i$を被覆する。（ただし$Q_m^{(i)}$は空である場合もある。）また、$Q_m^{(i)}\subset U_m$から$\{U_i\}_{i\in \nn}$の細分になっている。さて、任意の点$x\in X$について$\mathcal{C}$の局所有限性を担保する$x$の近傍を$N$とすると、一般に
+\[
+N\cap Q_m^{(i)}\neq\O\To N\cap U_m\neq\O
+\]
+が成り立つことから$\{Q_m^{(i)}\}_{m\in \nn}$は局所有限な族であることが分かる。（ただし$X$の被覆であるとは限らない）\par
+各$i=0,1,\dots ,n$ごとに存在する$\{Q_m^{(i)}\}_{m\in \nn}$を$\mathcal{W}_{i}$とすれば$\mathcal{W}_i$は互いに素な族であり、かつ局所有限であり、かつ$\mathcal{C}=\{U_k\}_{k\in \nn}$の細分となっている。そして$\mathcal{V}=\mathcal{W}_0\cup\mathcal{W}_1\cup\cdots\cup\mathcal{W}_n$と置けば各$\mathcal{W}_i$が局所有限で$\mathcal{C}=\{U_k\}_{k\in \nn}$の細分であることから$\mathcal{V}$は局所有限であり、$\mathcal{C}=\{U_k\}_{k\in \nn}$の細分となる。また$A_i\subset \bigcup\mathcal{W}_i$で$\dpst X=\bigcup_{i=0}^nA_i$なので$\mathcal{V}$は$X$の被覆となる。$\mathcal{C}=\{U_k\}_{k\in \nn}$が$\mathcal{U}$の細分であることから$\mathcal{V}$は$\mathcal{U}$の細分であることが分かる。\par
+以上で証明は終わった。
+\end{proof}
+
+\section{埋めこみ定理}
+
+
+
+\begin{df}[開収縮]位相空間$X$の開被覆$\mathcal{U}$に対して$\{V_U\ |\ U\in \mathcal{U}\}$が開収縮であるとは$\{V_U\ |\ U\in \mathcal{U}\}$が$X$の開被覆であって、任意の$U\in \mathcal{U}$について
+\[
+CL(V_U)\subset U
+\]
+を充たすこと。
+\end{df}
+
+
+以下の補題の証明は\cite{den}を参照のこと．
+
+
+\begin{lem}\label{lem:hoge}
+位相空間$X$について$X$が正規であることと
+$Xの$点有限開被覆に開収縮が存在することは同値である．
+\end{lem}
+
+\begin{df}
+連続写像$f:X\to Y$に対し
+\[
+L(f)=\{y\in Y\mid \text{$x_i\to \infty$となる$\{x_i\}$が存在して$f(x_i)\to y$となる}\}
+\]
+と定義する。これを$f$の\emph{極限集合}と呼ぶ。
+\end{df}
+
+次の命題の証明は\cite{den2}を参照のこと．
+\begin{prop}\label{ume}
+$f:X\to Y$を単射と仮定する。このとき
+\[
+fが埋め込み\iff L(f)\cap f(X)=\O
+\]
+\end{prop}
+
+
+
+さていよいよ多様体のユークリッド空間への埋め込みの存在の証明をする．
+\begin{thm}
+$N$を$n$次元$C^r$級多様体とする。このとき
+$\emb^r\left(N, \rr^{(n+1)^2}\right)\neq \emptyset$
+\end{thm}
+\begin{proof}
+$N$の相対コンパクトな局所座標系を$\mathcal{A}$に対して
+定理\ref{main}を用いて、$\mathcal{A}$の細分$\mathcal{B}$と開集合からなる（被覆とは限らない）$n+1$個の族$\mathcal{U}_0,\mathcal{U}_1,\dots,\mathcal{U}_n$が存在して
+\[
+\mathcal{B}=\mathcal{U}_0\cup\mathcal{U}_1\cup\cdots\cup\mathcal{U}_n
+\]
+及び
+\[
+\text{各$i$について$\mathcal{U}_i$は互いに素な族である。}
+\]
+を充たす。必要ならば、各$i$について
+$V, W\in \mathcal{U}_i$ならば$\cl(V)\cap \cl(W)=\O$と仮定しても良い。
+適当に番号付して、
+\[
+\mathcal{U}_k=\{U_i^{(k)}\}_{i\in \nn}
+\]
+とする。
+また正規性に関する補題\ref{lem:hoge}を用いて
+集合族の有限列$\{\mathcal{V}_k\}_{k=0}^n$を
+$\mathcal{V}_k=\{V_i^{(k)}\}_{i\in \nn}$と番号付されていて
+\[
+\cl(V_i^{(k)})\subset U_i^{(k)}
+\]
+を満たしかつ、
+$\mathcal{V}_0\cup \mathcal{V}_1\cup, \dots, \cup \mathcal{V}_n$が$N$の被覆になっているようなものとする。
+また、同様に集合族の有限列$\{\mathcal{W}_k\}_{k=0}^n$を
+$\mathcal{W}_k=\{W_i^{(k)}\}_{i\in \nn}$と番号付されていて
+\[
+\cl(W_i^{(k)})\subset V_i^{(k)}
+\]
+を満たしかつ、
+$\mathcal{W}_0\cup \mathcal{W}_1\cup, \dots, \cup \mathcal{W}_n$が$N$の被覆になっているようなものとする。
+
+さて、$A_i^{(k)}$を$\cl(V_i^{(k)})$となる$\mathcal{A}$の元とする。
+このとき$A_i^{(k)}$上の局所座標で
+\begin{enumerate}
+\item $i\neq j$ならば$\phi_i(\cl(V_i))\cap \phi_j(\cl(V_j))=\O$
+\item $x_s\in V_{i_s}$で$x_s\to \infty$ならば$\phi_{j_s}(x_s)\to \infty$
+\end{enumerate}
+となるものが存在する。これは平行移動とかを鑑みれば存在がわかる．
+
+そして$f_i^{(k)}$を$V_i^{(k)}$上で$1$の値をとり、$U_i^{(s)}$の外では$0$の値をとる$N$上の$C^r$級関数とする。
+これを用いて
+\[
+\psi^{(k)}(x)=
+\begin{cases}
+f_j^{(k)}\phi_j^{(k)} & \text{$x\in U_i^{(k)}$}\\
+0 & \text{$x\not  \in \bigcup_iU_i^{(k)}$}
+\end{cases}
+\]
+と定義する。
+$\phi^{(k)}|V_i^{(k)}=\phi_{i}^{(k)}$に注意しよう。
+
+$\cl(W_i^{(k)})\subset V_i^{(k)}$なので
+\[
+\phi_i^{(k)}(\cl(W_i^{(k)}))\subset \phi_i^{(k)}(V_i^{(k)})
+\]
+である、
+滑らかな関数$g_i^{(k)}:\rr^n\to \rr$を$\phi_i^{(k)}(W_i^{(k)})$上で$1$、$\phi_i^{(k)}(V_i^{(k)})$のそとで$0$の値をとる関数とする。
+そして
+\[
+\psi_i^{(s)}(x)=
+\begin{cases}
+g_j^{(k)}\circ \phi^{(k)} & \text{$x\in V_j^{(k)}$}\\
+0 & \text{$x\not\in \bigcup_{i}V_i^{(k)}$}
+\end{cases}
+\]
+
+として定義する。$\psi_j^{(k)}$は$C^r$級である。
+
+$l=(n+1)^2$として$\Phi:N\to \rr^l$を
+\[
+\Phi(x)=(\psi^{(0)}(x), \dots, \psi^{(n)}(x), \phi^{(0)}(x), \dots, \phi^{(n)}(x))
+\]
+として定義する。
+
+今から$\Phi$は可微分な埋めこみであることを今から証明しよう．
+
+まず$\Phi$の微分のランクが退化していないことは
+$\psi^{(k)}$の定義からわかる．
+
+次に単射性を調べよう。
+$\Phi(x)=\Phi(y)$
+とするとある$k$が存在して$x,y\in\bigcup_{i}V_i^{(k)} $である。
+よって$\phi^{(k)}(x)=\phi^{(k)}(y)$より$x=y$がわかる。
+
+次に$\Phi$が位相的埋め込みであることを示そう。
+$L(\Phi)$を
+$\Phi$の極限集合として, 
+命題\ref{ume}から
+$L(\Phi)=\emptyset$を示せば
+$\Phi$が埋め込みであることがわかる．
+$\{x_s\}_{s\in \nn}\subset N$を$x_s\to \infty$となる列とする。このとき適当に部分列をとればある$k$に対して
+\[
+x_s\in \bigcup_{i}V_i^{(k)}
+\]
+となっていると仮定しても一般性を失わない。
+このとき局所座標$\phi_i^{(k)}$の定め方から$\phi^{(k)}(x_s)\to \infty$となる。
+よって特に$\Phi(x)\to \infty$なので$L(\Phi)=\emptyset$がわかる。
+\end{proof}
+
+\begin{rmk}
+この証明から$\Phi$は閉写像であることがわかる。
+\end{rmk}
+
+\begin{rmk}
+いろいろ頑張れば，
+$\emb^{r}(N, \rr^{2n+1})\neq \emptyset$
+であることがわかるし，
+$2n+1\le N$
+ならば$\emb^{r}(N, \rr^{N})$
+が可微分写像の空間の中で稠密であることがわかる．
+\end{rmk}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\begin{thebibliography}{9}
+\bibitem{-1}yamyamtopさんの次元論PDF,
+\begin{verbatim}
+https://yamyamtopo.wordpress.com/2015/01/10/次元論pdf/
+\end{verbatim}
+\ 2016年6月閲覧
+
+\bibitem{den}
+はてなブログ「電波通信」の記事
+「正規性の特徴付け」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2015/12/21/170610
+\end{verbatim}
+
+\bibitem{den2}
+はてなブログ「電波通信」の記事
+「極限集合の基本的性質の証明」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2017/11/16/170409
+\end{verbatim}
+
+\bibitem{den3}
+はてなブログ「電波通信」の記事
+「いわゆる志賀多様体における多様体の埋め込み定理のための次元論的な補題の証明」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2016/06/11/202249
+\end{verbatim}
+
+\bibitem{den4}
+はてなブログ「電波通信」の記事
+「ウリゾーンの距離化可能定理」
+\begin{verbatim}
+https://concious4410.hatenablog.com/entry/2015/09/13/190522
+\end{verbatim}
+
+\bibitem{0}志賀浩二,多様体論,岩波書店,1976
+\bibitem{1}W.Hurewicz and H.Wallman,\textit{Dimension Theory},Princeton Univ. Press,1948
+\end{thebibliography}
+
+
+
+
+			\end{document}
+
+
+
+\begin{comment}
+[集合のやつは$\mid$を使う。]
+[真なる包含関係]
+\subsetneqq
+[可換図式]
+\[\xymatrix{
+&   & (2) \ar@{=>}[rd]&  &  &  & (5) \ar@{=>}[rd]&\\ 
+& (1)\ar@{=>}[ru] \ar@{=>}[rd]&  &(4)\ar@{=>}[r]&(7)& (1)\ar@{=>}[ru] \ar@{=>}[rd]& & (7)&\\ 
+&   & (3) \ar@{=>}[ur]&  &  &  &(6) \ar@{=>}[ur]&
+}\]
+
+[\bigin \endを使わない方法]
+
+{\prop[aa] aaa}
+で
+\begin{prop}[aa]
+aaa
+\end{prop}
+と同じ\df \thm \proof でも同様
+
+[直和]
+$\amalg$
+
+[同値関係でよく使う波線]
+\sim
+
+[引数付きの新命令]
+\newcommand{\prn}[1]{\|#1\|_p}
+
+[番号のリセット]
+
+\setcounter{equation}{0}
+
+
+[字体の変更]
+
+{\rm hogehoge}と使う。
+
+\rm ローマン
+\it イタリック
+\sl 斜体
+
+[supp]
+
+\newcommand{\supp}{\text{{\rm supp}}}
+
+[中央揃えの改行]
+
+	\begin{eqnarray*}
+		hoge1&=&hogehoge
+		hoge2&=&hogehofe
+
+	\end{eqnarray*}
+
+&&の部分で揃えられる。
+
+
+[\tag]
+\begin{equation}
+f(x) = ax^2 + bx + c \tag{1.2.3}
+\end{equation}
+
+
+
+[場合分け]
+
+	\begin{cases}
+		hoge1 & \text{状況１}\\
+		hoge2 & \text{状況２}\\
+		・
+		・
+		・
+	\end{cases}
+
+
+
+\end{comment}
+
+
+
+
+

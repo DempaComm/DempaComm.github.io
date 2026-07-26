@@ -1,0 +1,713 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>数学的失敗とその教訓：ファイバーバンドル</title>
+<!--Generated on Sun Jul 26 19:31:38 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2023-12-28-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>数学的失敗とその教訓：ファイバーバンドルのLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../copy/bundles.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">数学的失敗とその教訓：ファイバーバンドル</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章ではファイバーバンドルの理論を
+被覆の言葉だけで記述しようとした場合に起こった大失敗を
+紹介する．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">経緯を述べると6年くらい前に
+ファイバーバンドルの理論を勉強しようと思ったのだが，
+なんか難しくって，聞くところによるとバンドルの理論というのは被覆の言葉で書き直せるとのことであった．
+被覆の方が私に馴染みがあったし，
+またバンドルを被覆の言葉で記述した場合，
+(確か一次の)非可換(チェック)コホモロジー
+と見做せるのでそのように記述した方が都合がいいと思って
+ファイバーバンドルの理論を被覆の言葉で書き直したPDF
+を用意していた．
+しかしながら，
+プルバックのホモトピー不変性を証明するに至って，
+あまりにも証明が書き直せないことから6年くらい塩漬けになっていた．勉強も塩漬けになっていた．</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">最近年末の大掃除をしている時に
+塩漬けになっているのを再発見して
+なんとかプルバックのホモトピー不変性
+を証明できないかと唸っていたところ，
+おそらく成功したので，また将来の私が困らないように
+メモとして残しておく．
+成功したかどうかよくわからないが，
+アイデアの方向性はあっていると思うのでメモを残して
+これ以上この方向で進むのをやめろという警告とする．</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">証明が精密でなくとも，この方向でやろうとするのはやめろという警告程度にはなるだろう．</p>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">端的に言って，バンドルの理論は写像の言葉で行った方が
+とても良い．</span></p>
+</div>
+<div id="p6" class="ltx_para">
+<p class="ltx_p">元々の未完成のPDFをこの文章の後にくっつけておく．
+完成する予定だったのでうまくいったとか書いているが，
+完成してないしうまくもいっていない．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>何を定義したのか？</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">まずオリジナル版では添字付きの被覆を定義し，変換関数を
+導入する．
+元々電波通信はやぼったいほど基礎的なことを書き込み方針だったのだ．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(添え字付き開被覆)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>から<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\mathfrak{O}(X)" display="inline"><mrow><mi>𝔒</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>への写像<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="U:A\to\mathfrak{O}(X)" display="inline"><mrow><mi>U</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mrow><mi>𝔒</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="X=\bigcup_{a\in A}U(a)" display="block"><mrow><mi>X</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></munder><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすとき、<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>を添え字付き開被覆といい、<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>のことを添え字という。
+<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>の<math id="Thmthm1.p1.m7" class="ltx_Math" alttext="a\in A" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></math>における値<math id="Thmthm1.p1.m8" class="ltx_Math" alttext="U(a)" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>を<math id="Thmthm1.p1.m9" class="ltx_Math" alttext="U_{a}" display="inline"><msub><mi>U</mi><mi>a</mi></msub></math>と書いたりする。また、
+なまぐさをして<math id="Thmthm1.p1.m10" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>のことを<math id="Thmthm1.p1.m11" class="ltx_Math" alttext="U=\{U_{a}\}_{a\in A}" display="inline"><mrow><mi>U</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>a</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow></msub></mrow></math>とか書いたりする。</span></p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">集合として同じでも添え字が違う場合は別のものとして扱いたいので添え字付き開被覆を用いる。
+大げさだが、つぎのように定義する。</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="OMP(X,G)=\bigcup_{P\in\mathfrak{O}(X)}Map(P,G)" display="block"><mrow><mrow><mi>O</mi><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⋃</mo><mrow><mi>P</mi><mo>∈</mo><mrow><mi>𝔒</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></munder><mrow><mi>M</mi><mo>⁢</mo><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>P</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">つまり<math id="S1.p2.m1" class="ltx_Math" alttext="OMP(X)" display="inline"><mrow><mi>O</mi><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S1.p2.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の開集合から<math id="S1.p2.m3" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>への写像を全部集めた集合である。
+また集合<math id="S1.p2.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>に対して<math id="S1.p2.m5" class="ltx_Math" alttext="A^{2}" display="inline"><msup><mi>A</mi><mn>2</mn></msup></math>で<math id="S1.p2.m6" class="ltx_Math" alttext="A\times A" display="inline"><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow></math>を表すことにする。</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(変換関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の添え字付き開被覆とし、その添え字を<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>とする。<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="g:A\times\mathord{A{:}\to}OMP(X,G)" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mi>A</mi><mo lspace="0.278em" rspace="0em">:</mo><mo lspace="0em" stretchy="false">→</mo></mrow></mrow><mo>⁢</mo><mi>O</mi><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>に付随する変換関数であるとは次の条件を充たすときに言う。<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">1</span></span><span class="ltx_text ltx_font_upright">以下では</span><math id="footnote1.m1" class="ltx_Math" alttext="g(b,a)" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_upright">を</span><math id="footnote1.m2" class="ltx_Math" alttext="g_{ba}" display="inline"><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub></math><span class="ltx_text ltx_font_upright">と書くことにする。</span></span></span></span></span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="g_{ba}" display="inline"><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub></math><span class="ltx_text ltx_font_italic">の定義域は</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="U_{b}\cap U_{a}" display="inline"><mrow><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">である。</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="g_{ba}:U_{b}\cap U_{a}\to G" display="inline"><mrow><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow><mo stretchy="false">→</mo><mi>G</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">は連続写像である。</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="\forall x\in U_{c}\cap U_{b}\cap U_{a}\quad g_{cb}(x)g_{ba}(x)=g_{ca}(x)" display="inline"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><msub><mi>U</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow></mrow><mspace width="1em"></mspace><mrow><mrow><msub><mi>g</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>g</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"> （コサイクル条件）</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="U_{b}\cap U_{a}=\O" display="inline"><mrow><mrow><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow><mo>=</mo><mi>Ø</mi></mrow></math><span class="ltx_text ltx_font_italic">のとき<math id="Thmcaux1.p1.m2" class="ltx_Math" alttext="g_{ba}" display="inline"><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub></math>は空写像である。また、<math id="Thmcaux1.p1.m3" class="ltx_Math" alttext="U_{c}\cap U_{b}\cap U_{a}=\O" display="inline"><mrow><mrow><msub><mi>U</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow><mo>=</mo><mi>Ø</mi></mrow></math>のとき条件<math id="Thmcaux1.p1.m4" class="ltx_Math" alttext="(3)" display="inline"><mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow></math>は真になることに注意しよう。</span></p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">コサイクル条件から<math id="Thmcaux2.p1.m1" class="ltx_Math" alttext="U_{a}\neq\O" display="inline"><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>≠</mo><mi>Ø</mi></mrow></math>のとき<math id="Thmcaux2.p1.m2" class="ltx_Math" alttext="g_{aa}\equiv 1_{G}" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>≡</mo><msub><mn>1</mn><mi>G</mi></msub></mrow></math>となることや、
+<math id="Thmcaux2.p1.m3" class="ltx_Math" alttext="U_{b}\cap U_{a}\neq\O" display="inline"><mrow><mrow><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow><mo>≠</mo><mi>Ø</mi></mrow></math>のとき<math id="Thmcaux2.p1.m4" class="ltx_Math" alttext="g_{ba}=(g_{ab})^{-1}" display="inline"><mrow><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>が成り立つことなどがわかる。</span></p>
+</div>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">ついで
+<span class="ltx_text ltx_font_bold">抽象束</span>
+なる概念を位相空間の上の被覆と変換関数の集まりで定義する．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と位相群<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>に対して、
+<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>、添え字集合<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を添え字に持つ<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の添え字付き開被覆<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>, および<math id="Thmthm3.p1.m9" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>に付随する変換関数<math id="Thmthm3.p1.m10" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の五つ組<math id="Thmthm3.p1.m11" class="ltx_Math" alttext="(X,G,A,U,g)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>U</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></math>のことを<math id="Thmthm3.p1.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_bold">上の<math id="Thmthm3.p1.m13" class="ltx_Math" alttext="G" display="inline"><mi mathvariant="normal">G</mi></math>-抽象束</span>（もしくは<math id="Thmthm3.p1.m14" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_bold">上の<math id="Thmthm3.p1.m15" class="ltx_Math" alttext="G" display="inline"><mi mathvariant="normal">G</mi></math>-変換関数付き開被覆</span>、または<math id="Thmthm3.p1.m16" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_bold">の<math id="Thmthm3.p1.m17" class="ltx_Math" alttext="(G,1)" display="inline"><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">G</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>-チェックコサイクル</span>）と呼ぶ。
+<math id="Thmthm3.p1.m18" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を底空間、<math id="Thmthm3.p1.m19" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>をこの束の構造群と呼ぶ。
+<math id="Thmthm3.p1.m20" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の<math id="Thmthm3.p1.m21" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>-抽象束全体を<math id="Thmthm3.p1.m22" class="ltx_Math" alttext="\mathscr{C}(X,G)" display="inline"><mrow><mi class="ltx_font_mathscript">𝒞</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></math>と書く。<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">2</span></span><math id="footnote2.m1" class="ltx_Math" alttext="\mathscr{C}" display="inline"><mi class="ltx_font_mathscript">𝒞</mi></math><span class="ltx_text ltx_font_upright">はcocycleのcである。</span></span></span></span></span></p>
+</div>
+</div>
+<div id="Thmcaux3" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">抽象束にはファイバーがないことに注意せよ。</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_exam">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">例 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の位相空間<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と位相群<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>を与える。添え字付き開被覆<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="U:\{1\}\to\mathfrak{O}(X)" display="inline"><mrow><mi>U</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><mo stretchy="false">→</mo><mrow><mi>𝔒</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="U(1)=X" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>X</mi></mrow></math>と定義し、変換関数<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="g:\{1\}^{2}\to OMP(X)" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><mn>2</mn></msup><mo stretchy="false">→</mo><mrow><mi>O</mi><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="g_{11}\equiv 1_{G}" display="inline"><mrow><msub><mi>g</mi><mn>11</mn></msub><mo>≡</mo><msub><mn>1</mn><mi>G</mi></msub></mrow></math>と定義する<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">3</span></span><math id="footnote3.m1" class="ltx_Math" alttext="X=\emptyset" display="inline"><mrow><mi>X</mi><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_upright">の場合には</span><math id="footnote3.m2" class="ltx_Math" alttext="g_{11}" display="inline"><msub><mi>g</mi><mn>11</mn></msub></math><span class="ltx_text ltx_font_upright">は空写像と定義する。</span></span></span></span>と<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="(X,G,\{1\},U,g)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo>,</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><mo>,</mo><mi>U</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></math>は抽象束になる。この束のことを自明束という。
+どんな位相空間と位相群<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>についても
+<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="\mathscr{C}(X,G)\neq\emptyset" display="inline"><mrow><mrow><mi class="ltx_font_mathscript">𝒞</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>である。これは<math id="Thmthm4.p1.m10" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>上の自明束が常に存在するからである。</span></p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">バンドルの理論の教科書などに書いている通り，
+このような「抽象束」
+というのはファイバーバンドルと同じのはずであり
+(ファイバーを指定していないので主束と同じのような気がする)，
+ファイバーバンドルの理論をこの「抽象束」
+の言葉で書き換えることができてしかるべきである．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">次に束同士の同値性について定義するのである．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">以下では抽象束をフラクトゥールの一文字で表す。</p>
+</div>
+<section id="S1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.1 </span>抽象束の束同値</h3>
+
+<div id="S1.SS1.p1" class="ltx_para">
+<p class="ltx_p">二つの<math id="S1.SS1.p1.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>-抽象束が束同値であるということを定式化する。</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="\mathfrak{A},\mathfrak{B}\in\mathscr{C}(X,G)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>,</mo><mi>𝔅</mi></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathscript">𝒞</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">について</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\mathfrak{A}=(X,G,A,U,g),\ \mathfrak{B}=(X,G,B,V,h)" display="block"><mrow><mrow><mi>𝔄</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>U</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mi>𝔅</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>G</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>V</mi><mo>,</mo><mi>h</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">とする。任意の<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="(a,b)\in A\times B" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></mrow></mrow></math>について連続関数</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="p_{ba}:V_{b}\cap U_{a}\to G,\ q_{ab}:U_{a}\cap V_{b}\to G" display="block"><mrow><msub><mi>p</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msub><mi>V</mi><mi>b</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>a</mi></msub></mrow><mo stretchy="false">→</mo><mrow><mi>G</mi><mo rspace="0.667em">,</mo><msub><mi>q</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub></mrow></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>∩</mo><msub><mi>V</mi><mi>b</mi></msub></mrow><mo stretchy="false">→</mo><mi>G</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が存在して、以下の条件を充たすとき<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>と<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\mathfrak{B}" display="inline"><mi>𝔅</mi></math>は束同値であるという。</span></p>
+<ol id="S1.I2" class="ltx_enumerate">
+<li id="S1.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i1.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in A\times A\times B\ \forall x\in V_{c}\cap U_{b}\cap U_{a}\ p%
+_{cb}(x)g_{ba}(x)=p_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>V</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>p</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>g</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>p</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i2.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in A\times B\times A\ \forall x\in U_{c}\cap V_{b}\cap U_{a}\ q%
+_{cb}(x)p_{ba}(x)=g_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>U</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>V</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>q</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>p</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>g</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i3.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in B\times A\times A\ \forall x\in U_{c}\cap U_{b}\cap V_{a}\ g%
+_{cb}(x)q_{ba}(x)=q_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>U</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>V</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>g</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>q</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>q</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I2.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i4.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in B\times B\times A\ \forall x\in U_{c}\cap V_{b}\cap V_{a}\ q%
+_{cb}(x)h_{ba}(x)=q_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>U</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>V</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>V</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>q</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>h</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>q</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I2.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(5)</span> 
+<div id="S1.I2.i5.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i5.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in B\times A\times B\ \forall x\in V_{c}\cap U_{b}\cap V_{a}\ p%
+_{cb}(x)q_{ba}(x)=h_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>V</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>U</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>V</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>p</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>q</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>h</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I2.i6" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(6)</span> 
+<div id="S1.I2.i6.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i6.p1.m1" class="ltx_Math" alttext="\forall(a,b,c)\in A\times B\times B\ \forall x\in V_{c}\cap V_{b}\cap U_{a}\ h%
+_{cb}(x)p_{ba}(x)=p_{ca}(x)" display="inline"><mrow><mrow><mo>∀</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><msub><mi>V</mi><mi>c</mi></msub><mo>∩</mo><msub><mi>V</mi><mi>b</mi></msub><mo>∩</mo><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>⁢</mo><msub><mi>h</mi><mrow><mi>c</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>p</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msub><mi>p</mi><mrow><mi>c</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><math id="Thmthm5.p1.m5" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math><span class="ltx_text ltx_font_italic">と<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="\mathfrak{B}" display="inline"><mi>𝔅</mi></math>が束同値であることを</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\mathfrak{A}\bowtie\mathfrak{B}" display="block"><mrow><mi>𝔄</mi><mo>⋈</mo><mi>𝔅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と表す。</span></p>
+</div>
+</div>
+<div id="Thmcaux4" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux4.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">は<math id="Thmcaux4.p1.m2" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>から<math id="Thmcaux4.p1.m3" class="ltx_Math" alttext="\mathfrak{B}" display="inline"><mi>𝔅</mi></math>への変換で、<math id="Thmcaux4.p1.m4" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>は<math id="Thmcaux4.p1.m5" class="ltx_Math" alttext="\mathfrak{B}" display="inline"><mi>𝔅</mi></math>から<math id="Thmcaux4.p1.m6" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>への変換であり、</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="p_{ba}=(q_{ab})^{-1}" display="block"><mrow><msub><mi>p</mi><mrow><mi>b</mi><mo>⁢</mo><mi>a</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><msub><mi>q</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たす。</span></p>
+</div>
+</div>
+<div id="S1.SS1.p2" class="ltx_para">
+<p class="ltx_p">さすがにファイバーがないと束同士の写像は定義できない。</p>
+</div>
+<div id="S1.SS1.p3" class="ltx_para">
+<p class="ltx_p">オリジナルのPDFでは単位区間のバンドルが全て自明であることを証明しようとした痕跡がある．</p>
+</div>
+<div id="S1.SS1.p4" class="ltx_para">
+<p class="ltx_p">「区間のあれ」
+と書かれている補題は，
+単位閉区間にルベーグ数の存在とかを適応して
+被覆度が高々<math id="S1.SS1.p4.m1" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math>の被覆で細分できることを示したかったのだと思う．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">区間のあれ</span></p>
+</div>
+</div>
+<div id="S1.SS1.p5" class="ltx_para">
+<p class="ltx_p">区間上の束が自明であることを証明するために
+変換関数を頑張って引き伸ばすことをしている．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">単位閉区間<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="I=[0,1]" display="inline"><mrow><mi>I</mi><mo>=</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>と任意の位相群<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>について、</span></p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="\operatorname{card}\left(\mathscr{C}(I,G)/\!\mathord{\bowtie}\right)=1" display="block"><mrow><mrow><mi>card</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><mrow><mi class="ltx_font_mathscript">𝒞</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>I</mi><mo>,</mo><mi>G</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.052em">/</mo><mi mathvariant="normal">⋈</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">つまり<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>上の抽象束はすべて自明束である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.SS1.p6" class="ltx_para">
+<p class="ltx_p"><math id="S1.SS1.p6.m1" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>を<math id="S1.SS1.p6.m2" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>上の抽象束とする。
+この束の被覆は<math id="S1.SS1.p6.m3" class="ltx_Math" alttext="[a_{0},b_{0}),(a_{1},b_{1}),\dots,(a_{n-1},b_{n-1}),(a_{n},b_{n}]" display="inline"><mrow><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><msub><mi>b</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>,</mo><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo>,</mo><msub><mi>b</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow></math>という形で、</p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="a_{0}=0,\ b_{n}=1,\ a_{i-1}&lt;a_{i}&lt;b_{i-1}&lt;b_{i}" display="block"><mrow><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><mo rspace="0.667em">,</mo><mrow><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mn>1</mn></mrow><mo rspace="0.667em">,</mo><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>&lt;</mo><msub><mi>a</mi><mi>i</mi></msub><mo>&lt;</mo><msub><mi>b</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>&lt;</mo><msub><mi>b</mi><mi>i</mi></msub></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を充たすとしてよい。さて<math id="S1.SS1.p6.m4" class="ltx_Math" alttext="c_{1},c_{2},\dots c_{n}" display="inline"><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>,</mo><msub><mi>c</mi><mn>2</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>c</mi><mi>n</mi></msub></mrow></mrow></math>、<math id="S1.SS1.p6.m5" class="ltx_Math" alttext="d_{0},d_{2}\dots d_{n-1}" display="inline"><mrow><msub><mi>d</mi><mn>0</mn></msub><mo>,</mo><mrow><msub><mi>d</mi><mn>2</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>d</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow></math>を</p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="[c_{i},d_{i-1}]\subset(a_{i},b_{i-1})" display="block"><mrow><mrow><mo stretchy="false">[</mo><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><msub><mi>d</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">]</mo></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるようにとる。</p>
+</div>
+<div id="S1.SS1.p7" class="ltx_para">
+<p class="ltx_p"><math id="S1.SS1.p7.m1" class="ltx_Math" alttext="\mathfrak{A}\bowtie\mathfrak{B}" display="inline"><mrow><mi>𝔄</mi><mo>⋈</mo><mi>𝔅</mi></mrow></math>である。</p>
+</div>
+<div id="S1.SS1.p8" class="ltx_para">
+<p class="ltx_p"><math id="S1.SS1.p8.m1" class="ltx_Math" alttext="s_{0}:[a_{0},b_{0})\to G" display="inline"><mrow><msub><mi>s</mi><mn>0</mn></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><msub><mi>b</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mo stretchy="false">→</mo><mi>G</mi></mrow></mrow></math>を<math id="S1.SS1.p8.m2" class="ltx_Math" alttext="s_{0}\equiv 1" display="inline"><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>≡</mo><mn>1</mn></mrow></math></p>
+</div>
+<div id="S1.SS1.p9" class="ltx_para">
+<p class="ltx_p"><math id="S1.SS1.p9.m1" class="ltx_Math" alttext="x\in(a_{i},b_{i})" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>のとき（<math id="S1.SS1.p9.m2" class="ltx_Math" alttext="i=n" display="inline"><mrow><mi>i</mi><mo>=</mo><mi>n</mi></mrow></math>のときは<math id="S1.SS1.p9.m3" class="ltx_Math" alttext="x\in(a_{n},b_{n}]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo>,</mo><msub><mi>b</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow></mrow></math>）
+<math id="S1.SS1.p9.m4" class="ltx_Math" alttext="s_{i}(x)=g_{i,i-1}(t(x))s_{i-1}|_{(a_{i},b_{i-1})}(t(x))" display="inline"><mrow><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mrow><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>s</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>,</mo><msub><mi>b</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と定義する。<math id="S1.SS1.p9.m5" class="ltx_Math" alttext="(c_{i},d_{i-1})" display="inline"><mrow><mo stretchy="false">(</mo><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><msub><mi>d</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></math>上では<math id="S1.SS1.p9.m6" class="ltx_Math" alttext="s(x)=g_{i,i-1}(x)s_{i-1}(x)" display="inline"><mrow><mrow><mi>s</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>s</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので<math id="S1.SS1.p9.m7" class="ltx_Math" alttext="(c_{i},d_{i-1})" display="inline"><mrow><mo stretchy="false">(</mo><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><msub><mi>d</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></math>の上で<math id="S1.SS1.p9.m8" class="ltx_Math" alttext="s_{i}s_{i-1}^{-1}=g_{i,i-1}" display="inline"><mrow><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>⁢</mo><msubsup><mi>s</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup></mrow><mo>=</mo><msub><mi>g</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></mrow></msub></mrow></math>なので<math id="S1.SS1.p9.m9" class="ltx_Math" alttext="\mathfrak{B}" display="inline"><mi>𝔅</mi></math>は自明である。よって<math id="S1.SS1.p9.m10" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>も自明である。
+∎</p>
+</div>
+</div>
+</section>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>束同値に関する注意</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">上で定義した束同値だが，同型として強すぎる．
+二つの主束<math id="S2.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と<math id="S2.p1.m2" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>があったときにこれらの局所自明開被覆を全く同じように取れるかどうかは全く自明ではない．
+というか成り立たない．
+よって
+束同値は主束の話だと思うと，
+<math id="S2.p1.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と<math id="S2.p1.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>に<span class="ltx_text ltx_font_bold">共通の局所自明開被覆が取れて</span>尚且つ同型というかなりきつい同型になっている．
+なので通常の意味での主束の同型を被覆の言葉で書きたいのであれば，二つの抽象束<span class="ltx_text ltx_font_bold">それぞれの細分が存在して</span>それが上の意味での束同値という風に修正しなければならない．
+このことに気が付かなかったのが
+オリジナルの文書の執筆を滞らせる一因になっていた．</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>何を証明したかったのか？</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">以下のような命題が証明したかったはずである．
+この命題は
+大まかには
+ファイバーバンドルのプルバックの
+ホモトピー不変性である．</p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をパラコンパクトハウスドルフ空間とし，
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\mathfrak{T}" display="inline"><mi>𝔗</mi></math>
+を
+<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="X\times[0,1]" display="inline"><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>
+上の
+抽象束とする．
+このとき<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\mathfrak{T}|_{X\times\{0\}}" display="inline"><msub><mrow><mi>𝔗</mi><mo stretchy="false">|</mo></mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></msub></math>
+と
+<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="\mathfrak{T}|_{X\times\{1\}}" display="inline"><msub><mrow><mi>𝔗</mi><mo stretchy="false">|</mo></mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></mrow></msub></math>
+は束同値である．</span></p>
+</div>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">全く証明できなかった．
+色々頑張ると次のようなことは証明できる．</p>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をパラコンパクトハウスドルフ空間とする。
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="X\times I" display="inline"><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>I</mi></mrow></math>上の束は<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="\{U_{i}\times I\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>U</mi><mi>i</mi></msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>I</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>という形の添え字付き被覆を持つ抽象束と束同値である。</span></p>
+</div>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">この命題はつまり局所自明な被覆として
+<math id="S3.p3.m1" class="ltx_Math" alttext="\{U_{i}\times I\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>U</mi><mi>i</mi></msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>I</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>という形のものが取れるということである．</p>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>定理<a href="#Thmthm8" title="定理 8. ‣ 3 何を証明したかったのか？ ‣ 数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>の証明? 大体こういう感じでできると思う</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p class="ltx_p">今から<math id="S4.p1.m1" class="ltx_Math" alttext="\mathfrak{T}" display="inline"><mi>𝔗</mi></math>の被覆は常に
+命題<a href="#Thmthm9" title="命題 9. ‣ 3 何を証明したかったのか？ ‣ 数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>のようなものとする．
+さらに局所有限とする．
+そして<math id="S4.p1.m2" class="ltx_Math" alttext="\mathfrak{A}=\mathfrak{T}|_{X\times\{0\}}" display="inline"><mrow><mi>𝔄</mi><mo>=</mo><msub><mrow><mi>𝔗</mi><mo stretchy="false">|</mo></mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></msub></mrow></math>
+とする．</p>
+</div>
+<div id="S4.p2" class="ltx_para">
+<p class="ltx_p"><math id="S4.p2.m1" class="ltx_Math" alttext="V\in\mathfrak{A}" display="inline"><mrow><mi>V</mi><mo>∈</mo><mi>𝔄</mi></mrow></math>
+と<math id="S4.p2.m2" class="ltx_Math" alttext="\text{{\rm supp}}f\subset V" display="inline"><mrow><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow><mo>⊂</mo><mi>V</mi></mrow></math>となる
+<math id="S4.p2.m3" class="ltx_Math" alttext="f\colon X\to[0,1]" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>に対して
+<math id="S4.p2.m4" class="ltx_Math" alttext="\mathfrak{A}=\{O_{i}\}" display="inline"><mrow><mi>𝔄</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>の
+<math id="S4.p2.m5" class="ltx_Math" alttext="(V,f)" display="inline"><mrow><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></math>-変形
+<math id="S4.p2.m6" class="ltx_Math" alttext="\mathfrak{A}(V,f)" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math>を以下のように定義する．
+<math id="S4.p2.m7" class="ltx_Math" alttext="\mathfrak{A}(V,f)=\{O_{i}\setminus\text{{\rm supp}}f\}\cup\{V\}" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">{</mo><mrow><msub><mi>O</mi><mi>i</mi></msub><mo>∖</mo><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi>V</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+で変換関数は<math id="S4.p2.m8" class="ltx_Math" alttext="g_{ab}(x,f(x))" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+とする．ただし<math id="S4.p2.m9" class="ltx_Math" alttext="O_{i}" display="inline"><msub><mi>O</mi><mi>i</mi></msub></math>に<math id="S4.p2.m10" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>
+は含まれていないとする．
+このとき<math id="S4.p2.m11" class="ltx_Math" alttext="\mathfrak{A}(V,f)" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S4.p2.m12" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>
+と同値である．
+なぜなら<math id="S4.p2.m13" class="ltx_Math" alttext="O_{i}\setminus\text{{\rm supp}}f" display="inline"><mrow><msub><mi>O</mi><mi>i</mi></msub><mo>∖</mo><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow></mrow></math>
+しているからである．
+また<math id="S4.p2.m14" class="ltx_Math" alttext="\mathfrak{T}(V,f)" display="inline"><mrow><mi>𝔗</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を<math id="S4.p2.m15" class="ltx_Math" alttext="X\times[0,1]" display="inline"><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>
+上の束で変換関数が
+<math id="S4.p2.m16" class="ltx_Math" alttext="g_{ab}(x,f(x)+t)" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+となるものとする．</p>
+</div>
+<div id="S4.p3" class="ltx_para">
+<p class="ltx_p">一般に有限個の<math id="S4.p3.m1" class="ltx_Math" alttext="V_{j_{1}},\dots V_{j_{n}}\in\mathfrak{A}" display="inline"><mrow><mrow><msub><mi>V</mi><msub><mi>j</mi><mn>1</mn></msub></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>V</mi><msub><mi>j</mi><mi>n</mi></msub></msub></mrow></mrow><mo>∈</mo><mi>𝔄</mi></mrow></math>
+と
+<math id="S4.p3.m2" class="ltx_Math" alttext="\text{{\rm supp}}f_{j}\subset V_{j}" display="inline"><mrow><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>j</mi></msub></mrow><mo>⊂</mo><msub><mi>V</mi><mi>j</mi></msub></mrow></math>で
+<math id="S4.p3.m3" class="ltx_Math" alttext="\sum_{j}f_{j}(x)\in[0,1]" display="inline"><mrow><mrow><msub><mo>∑</mo><mi>j</mi></msub><mrow><msub><mi>f</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>とような
+<math id="S4.p3.m4" class="ltx_Math" alttext="\{f_{j}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow></math>について
+<math id="S4.p3.m5" class="ltx_Math" alttext="(\{V_{j}\},f_{j})" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><msub><mi>f</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></math>-変形
+<math id="S4.p3.m6" class="ltx_Math" alttext="\mathfrak{A}((\{V_{j}\},f_{j}))" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><msub><mi>f</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+を
+以下のように定義する．
+<math id="S4.p3.m7" class="ltx_Math" alttext="\mathfrak{A}^{\prime}=\{O_{i}\setminus\bigcup_{j}(\text{{\rm supp}}f_{j})\}%
+\cup\{V_{j}\setminus\bigcup_{j&lt;k}\text{{\rm supp}}f_{k}\}" display="inline"><mrow><msup><mi>𝔄</mi><mo>′</mo></msup><mo>=</mo><mrow><mrow><mo stretchy="false">{</mo><mrow><msub><mi>O</mi><mi>i</mi></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo rspace="0em">⋃</mo><mi>j</mi></msub><mrow><mo stretchy="false">(</mo><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>j</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mrow><msub><mi>V</mi><mi>j</mi></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mrow><mi>j</mi><mo>&lt;</mo><mi>k</mi></mrow></msub><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>k</mi></msub></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math>で
+変換関数は
+<math id="S4.p3.m8" class="ltx_Math" alttext="g_{ab}\left(x,\sum_{j}f_{j}(x)\right)" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo>(</mo><mi>x</mi><mo rspace="0em">,</mo><mrow><msub><mo>∑</mo><mi>j</mi></msub><mrow><msub><mi>f</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></math>
+とする．
+このとき
+これは元の被覆と同値である．
+なぜなら
+2枚の場合を考えるとそれは
+<math id="S4.p3.m9" class="ltx_Math" alttext="(V_{1},f_{1})" display="inline"><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></math>-変形<math id="S4.p3.m10" class="ltx_Math" alttext="\mathfrak{A}(V_{1},f_{1})" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>と
+<math id="S4.p3.m11" class="ltx_Math" alttext="\mathfrak{T}(V_{1},f_{1})" display="inline"><mrow><mi>𝔗</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+に対する
+変形なので
+<math id="S4.p3.m12" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>
+は<math id="S4.p3.m13" class="ltx_Math" alttext="\mathfrak{A}(V_{1},f_{1})" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+に同型で，
+<math id="S4.p3.m14" class="ltx_Math" alttext="\mathfrak{A}(V_{1},f_{1})" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S4.p3.m15" class="ltx_Math" alttext="\mathfrak{A}(\{V_{1},V_{2}\},\{f_{1},f_{2}\})" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>に同型なので
+結局同型である．
+この議論はようは
+<math id="S4.p3.m16" class="ltx_Math" alttext="\mathfrak{A}(V_{1},f_{1})(V_{2},f_{2})=\mathfrak{A}(\{V_{1},V_{2}\},\{f_{1},f_%
+{2}\})" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mn>2</mn></msub><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+ということである．</p>
+</div>
+<div id="S4.p4" class="ltx_para">
+<p class="ltx_p">ついで
+一般の<math id="S4.p4.m1" class="ltx_Math" alttext="V_{j}" display="inline"><msub><mi>V</mi><mi>j</mi></msub></math>と<math id="S4.p4.m2" class="ltx_Math" alttext="f_{j}" display="inline"><msub><mi>f</mi><mi>j</mi></msub></math>について
+<math id="S4.p4.m3" class="ltx_Math" alttext="(\{V_{j}\},f_{j})" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><msub><mi>f</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></math>-変形を
+定義する．まず添字集合は整列されているとして，
+<math id="S4.p4.m4" class="ltx_Math" alttext="\mathfrak{A}(\{V_{j}\},f_{j})=\{O_{i}\setminus\bigcup_{j}(\text{{\rm supp}}f_{%
+j})\}\cup\{V_{j}\setminus\bigcup_{j&lt;k}\text{{\rm supp}}f_{k}\}" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow><mo>,</mo><msub><mi>f</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">{</mo><mrow><msub><mi>O</mi><mi>i</mi></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo rspace="0em">⋃</mo><mi>j</mi></msub><mrow><mo stretchy="false">(</mo><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>j</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mrow><msub><mi>V</mi><mi>j</mi></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mrow><mi>j</mi><mo>&lt;</mo><mi>k</mi></mrow></msub><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>k</mi></msub></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math>で
+変換関数は
+<math id="S4.p4.m5" class="ltx_Math" alttext="g_{ab}\left(x,\sum_{j}f_{j}(x)\right)" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo>(</mo><mi>x</mi><mo rspace="0em">,</mo><mrow><msub><mo>∑</mo><mi>j</mi></msub><mrow><msub><mi>f</mi><mi>j</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></math>
+とする．
+ただし<math id="S4.p4.m6" class="ltx_Math" alttext="O_{i}" display="inline"><msub><mi>O</mi><mi>i</mi></msub></math>
+たちには<math id="S4.p4.m7" class="ltx_Math" alttext="V_{j}" display="inline"><msub><mi>V</mi><mi>j</mi></msub></math>は含まれていないとする．
+まず被覆になっていることを示す．
+点<math id="S4.p4.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>をとる．
+<math id="S4.p4.m9" class="ltx_Math" alttext="p\in V_{j}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>V</mi><mi>j</mi></msub></mrow></math>となるものが存在しない時は
+<math id="S4.p4.m10" class="ltx_Math" alttext="p\in O_{i}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>をとると
+<math id="S4.p4.m11" class="ltx_Math" alttext="p\in O_{i}\setminus\bigcup_{j}\text{{\rm supp}}f_{j}" display="inline"><mrow><mi>p</mi><mo>∈</mo><mrow><msub><mi>O</mi><mi>i</mi></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mi>j</mi></msub><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>j</mi></msub></mrow></mrow></mrow></mrow></math>
+である．
+<math id="S4.p4.m12" class="ltx_Math" alttext="p\in V_{j}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msub><mi>V</mi><mi>j</mi></msub></mrow></math>となるものが存在するときは局所有限なので
+<math id="S4.p4.m13" class="ltx_Math" alttext="V_{j_{n}},\dots V_{j_{n}}" display="inline"><mrow><msub><mi>V</mi><msub><mi>j</mi><mi>n</mi></msub></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>V</mi><msub><mi>j</mi><mi>n</mi></msub></msub></mrow></mrow></math>
+が存在して これらしか
+<math id="S4.p4.m14" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を含まない．
+<math id="S4.p4.m15" class="ltx_Math" alttext="j_{n}" display="inline"><msub><mi>j</mi><mi>n</mi></msub></math>が一番大きいとすると
+<math id="S4.p4.m16" class="ltx_Math" alttext="p\in V_{j_{n}}\setminus\bigcup_{j_{n}&lt;k}\text{{\rm supp}}f_{k}" display="inline"><mrow><mi>p</mi><mo>∈</mo><mrow><msub><mi>V</mi><msub><mi>j</mi><mi>n</mi></msub></msub><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mrow><msub><mi>j</mi><mi>n</mi></msub><mo>&lt;</mo><mi>k</mi></mrow></msub><mrow><mtext>supp</mtext><mo>⁢</mo><msub><mi>f</mi><mi>k</mi></msub></mrow></mrow></mrow></mrow></math>
+なので被覆である．
+これはもとの被覆と同値である．
+<math id="S4.p4.m17" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の周りを考えると有限回の反復なので
+有限の場合の話から大丈夫．
+つまり<math id="S4.p4.m18" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の局所有限性を体現する近傍<math id="S4.p4.m19" class="ltx_Math" alttext="U_{p}" display="inline"><msub><mi>U</mi><mi>p</mi></msub></math>
+を取り<math id="S4.p4.m20" class="ltx_Math" alttext="U_{p}" display="inline"><msub><mi>U</mi><mi>p</mi></msub></math>
+による被覆
+<math id="S4.p4.m21" class="ltx_Math" alttext="\{U_{p}\}_{p\in X}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>p</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></msub></math>で<math id="S4.p4.m22" class="ltx_Math" alttext="\mathfrak{A}" display="inline"><mi>𝔄</mi></math>
+を細分してその上で議論をするとわかると思う．
+よって<math id="S4.p4.m23" class="ltx_Math" alttext="g_{ab}(x,0)" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math>を変換関数とする
+<math id="S4.p4.m24" class="ltx_Math" alttext="\mathfrak{T}|_{X\times\{0\}}" display="inline"><msub><mrow><mi>𝔗</mi><mo stretchy="false">|</mo></mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></msub></math>
+と
+と<math id="S4.p4.m25" class="ltx_Math" alttext="g_{ab}(x,1)" display="inline"><mrow><msub><mi>g</mi><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>を変換関数とする
+<math id="S4.p4.m26" class="ltx_Math" alttext="\mathfrak{T}|_{X\times\{1\}}" display="inline"><msub><mrow><mi>𝔗</mi><mo stretchy="false">|</mo></mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></mrow></msub></math>が同値であることがわかった．たぶん．</p>
+</div>
+<div id="S4.p5" class="ltx_para">
+<p class="ltx_p">大人しく写像の話でバンドルを議論した方がよい．</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. L. Curtis and R. Lashof</span><span class="ltx_text ltx_bib_year"> (1958)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Homotopy equivalence of fiber bundles</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">9</span>, <span class="ltx_text ltx_bib_pages"> pp. 178–182</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2033133" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2033133" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=98378" title="" class="ltx_ref mr ltx_bib_external">MathReview (W. S. Massey)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Derwent</span><span class="ltx_text ltx_bib_year"> (1968)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A note on numerable covers</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">19</span>, <span class="ltx_text ltx_bib_pages"> pp. 1130–1132</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2036043" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2036043" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=234461" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. Dugundji)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Dold</span><span class="ltx_text ltx_bib_year"> (1963)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Partitions of unity in the theory of fibrations</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. of Math. (2)</span> <span class="ltx_text ltx_bib_volume">78</span>, <span class="ltx_text ltx_bib_pages"> pp. 223–255</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0003-486X</span>,
+<a href="https://dx.doi.org/10.2307/1970341" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1970341" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=155330" title="" class="ltx_ref mr ltx_bib_external">MathReview (E. Fadell)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">W. Huebsch</span><span class="ltx_text ltx_bib_year"> (1955)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the covering homotopy theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. of Math. (2)</span> <span class="ltx_text ltx_bib_volume">61</span>, <span class="ltx_text ltx_bib_pages"> pp. 555–563</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0003-486X</span>,
+<a href="https://dx.doi.org/10.2307/1969813" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1969813" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=91470" title="" class="ltx_ref mr ltx_bib_external">MathReview (F. Hirzebruch)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Husemoller</span><span class="ltx_text ltx_bib_year"> (1994)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fibre bundles</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_edition">Third edition</span>, <span class="ltx_text ltx_bib_series">Graduate Texts in Mathematics</span>, Vol. <span class="ltx_text ltx_bib_volume">20</span>,  <span class="ltx_text ltx_bib_publisher">Springer-Verlag, New York</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 0-387-94087-1</span>,
+<a href="https://dx.doi.org/10.1007/978-1-4757-2261-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/978-1-4757-2261-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1249482" title="" class="ltx_ref mr ltx_bib_external">MathReview (Jože Vrabec)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. K. Lashof</span><span class="ltx_text ltx_bib_year"> (1982)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Equivariant bundles</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Illinois J. Math.</span> <span class="ltx_text ltx_bib_volume">26</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 257–271</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0019-2082</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=650393" title="" class="ltx_ref mr ltx_bib_external">MathReview (T. tom Dieck)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">N. Steenrod</span><span class="ltx_text ltx_bib_year"> (1999)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The topology of fibre bundles</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Princeton Landmarks in Mathematics</span>,  <span class="ltx_text ltx_bib_publisher">Princeton University Press, Princeton, NJ</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">Reprint of the 1957 edition,
+Princeton Paperbacks</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 0-691-00548-6</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1688579" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. tom Dieck</span><span class="ltx_text ltx_bib_year"> (1971)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Partitions of unity in homotopy theory</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Compositio Math.</span> <span class="ltx_text ltx_bib_volume">23</span>, <span class="ltx_text ltx_bib_pages"> pp. 159–167</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0010-437X,1570-5846</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=293625" title="" class="ltx_ref mr ltx_bib_external">MathReview (Robert Freeman Brown)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p7" title="数学的失敗とその教訓：ファイバーバンドル" class="ltx_ref"><span class="ltx_text ltx_ref_title">数学的失敗とその教訓：ファイバーバンドル</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p7" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:31:38 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

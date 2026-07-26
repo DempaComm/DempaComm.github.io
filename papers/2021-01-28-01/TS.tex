@@ -305,7 +305,7 @@ $t\equiv 1\ \mod p$となるまで続けることができ，
 \ENDIF
 \STATE Take $s\ge 1$ and an odd number $d$ 
 with $p-1=2^sd$ 
-\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{2}}\not \equiv 1 \ \mod $
+\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{2}}\not\equiv 1\pmod{p}$
 \STATE $M\gets s$
 \STATE $R\gets a^{\frac{1+d}{2}}$
 \STATE $t\gets a^{d}$
@@ -402,7 +402,7 @@ $m=c_0+2c_1+\dots+2^{s-2}c_{s-2}$とすると補題の条件を満たす．
 \IF{$p=2$}
 \RETURN $a$
 \ENDIF
-\IF{$a^{\frac{p-1}{2}}\not\equiv 1\ \mod p$}
+\IF{$a^{\frac{p-1}{2}}\not\equiv 1\pmod{p}$}
 \RETURN Error
 \ENDIF
 \STATE Take $z\in \{1, \dots, p-1\}$ s.t. $z^{\frac{p-1}{2}}\not \equiv 1 \ \mod p$
@@ -411,7 +411,7 @@ $m=c_0+2c_1+\dots+2^{s-2}c_{s-2}$とすると補題の条件を満たす．
 \WHILE{$apow$ is even}
 \STATE $apow\leftarrow apow/2$
 \STATE $zpow\leftarrow zpow/2$
-\IF{$a^{apow}z^{zpow}\not\equiv 1\ \mod p$}
+\IF{$a^{apow}z^{zpow}\not\equiv 1\pmod{p}$}
 \STATE $zpow\leftarrow zpow + (p-1)/2$
 \ENDIF
 \ENDWHILE
@@ -583,7 +583,7 @@ $t\equiv 1\ \mod p$となるまで続けることができ，
 \STATE Take $s\ge 1$ and a number $d$ 
 s.t.  $p-1=r^sd$ and $\gcd(d, q)=1$ 
 \STATE Take $h$ s.t. $rh\equiv 1\ \mod d$
-\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{r}}\not \equiv 1 \ \mod $
+\STATE Take  $z\in \zz$ s.t. $z^{\frac{p-1}{r}}\not\equiv 1\pmod{p}$
 \STATE $M\gets s$
 \STATE $R\gets a^{h}$
 \STATE $t\gets a^{rh-1}$
@@ -705,9 +705,9 @@ $a^{\frac{p-1}{r}}\equiv 1\ \mod p$
 \WHILE{$apow\equiv 0\ \mod r$ }
 \STATE $apow\leftarrow apow/r$
 \STATE $zpow\leftarrow zpow/r$
-\IF{$a^{apow}z^{zpow}\not\equiv 1\mod p$}
+\IF{$a^{apow}z^{zpow}\not\equiv 1\pmod{p}$}
 \STATE Take $m\in \{0, \dots, p-1\}$ s.t. 
-$\left(a^{apow}z^{zpow}\right)\cdot \left(z^{(p-1)/r}\right)^{m}\equiv 1\ \mod p$
+$\left(a^{apow}z^{zpow}\right)\cdot \left(z^{(p-1)/r}\right)^{m}\equiv 1\pmod{p}$
 \STATE $zpow\leftarrow zpow + m(p-1)/r$
 \ENDIF
 \ENDWHILE
@@ -730,7 +730,7 @@ $\left(a^{apow}z^{zpow}\right)\cdot \left(z^{(p-1)/r}\right)^{m}\equiv 1\ \mod p
 \caption{Solving $x^r\equiv a\ \mod p$}
 \begin{algorithmic}
 \REQUIRE $a$:integer, $r$:positive integer,  $p$:prime 
-\IF{$a^{(p-1)/\gcd(p-1, r)}\not\equiv 1\ \mod p$}
+\IF{$a^{(p-1)/\gcd(p-1, r)}\not\equiv 1\pmod{p}$}
 \RETURN `$a$ is not an $r$-th residue.'
 \ENDIF
 \STATE $x\gets a$
@@ -854,8 +854,6 @@ f(x) = ax^2 + bx + c \tag{1.2.3}
 
 
 \end{comment}
-
-
 
 
 

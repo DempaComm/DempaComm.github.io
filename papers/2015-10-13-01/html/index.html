@@ -1,0 +1,1116 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>積分核と多項式近似</title>
+<!--Generated on Sun Jul 26 19:29:04 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2015-10-13-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>積分核を用いた多項式近似定理の証明のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">積分核と多項式近似</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書ではワイエルストラスの多項式近似定理を積分核を用いた方法で証明する。</p>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold"> </span>(円周上の連続関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math><span class="ltx_text ltx_font_italic">の区間<math id="Thmcaux1.p1.m2" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>の端点<math id="Thmcaux1.p1.m3" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math>を同一視した空間と円周<math id="Thmcaux1.p1.m4" class="ltx_Math" alttext="S^{1}" display="inline"><msup><mi>S</mi><mn>1</mn></msup></math>は位相同型である。この同型を根拠に<math id="Thmcaux1.p1.m5" class="ltx_Math" alttext="S^{1}" display="inline"><msup><mi>S</mi><mn>1</mn></msup></math>上の実数値連続関数と<math id="Thmcaux1.p1.m6" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>上の実数値連続関数で<math id="Thmcaux1.p1.m7" class="ltx_Math" alttext="f(a)=f(b)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる関数を同一視する。また、<math id="Thmcaux1.p1.m8" class="ltx_Math" alttext="S^{1}" display="inline"><msup><mi>S</mi><mn>1</mn></msup></math>上で行うべき積分を閉区間上の積分として処理する。
+<br class="ltx_break">以下の文章では<math id="Thmcaux1.p1.m9" class="ltx_Math" alttext="S^{1}" display="inline"><msup><mi>S</mi><mn>1</mn></msup></math>と<math id="Thmcaux1.p1.m10" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>やら<math id="Thmcaux1.p1.m11" class="ltx_Math" alttext="[-\pi,+\pi]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi>π</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi>π</mi></mrow><mo stretchy="false">]</mo></mrow></math>やらがこの方法によって同一視される。</span></p>
+</div>
+</div>
+<div id="Thmtheorem1" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(円周上もしくは直線上の関数の畳込み)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem1.p1.m1" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math><span class="ltx_text ltx_font_italic">の<math id="Thmtheorem1.p1.m2" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>と<math id="Thmtheorem1.p1.m3" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>を同一視して得られる円周上の関数<math id="Thmtheorem1.p1.m4" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>に対して畳み込みを</span></p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="(f*g)(x)=\int_{a}^{b}f(x-y)g(y)dy" display="block"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><mi>g</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。<math id="Thmtheorem1.p1.m5" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の値によっては<math id="Thmtheorem1.p1.m6" class="ltx_Math" alttext="x-y" display="inline"><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow></math>は<math id="Thmtheorem1.p1.m7" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>からはみ出してしまい<math id="Thmtheorem1.p1.m8" class="ltx_Math" alttext="f(x-y)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>の意味が不明瞭だが、これは<math id="Thmtheorem1.p1.m9" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を<math id="Thmtheorem1.p1.m10" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>まで周期的に拡張した関数として考え積分するのである。
+<br class="ltx_break"><math id="Thmtheorem1.p1.m11" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の連続関数<math id="Thmtheorem1.p1.m12" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>に対してその畳込みを</span></p>
+<table id="S0.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex2.m1" class="ltx_Math" alttext="(f*g)(x)=\int_{-\infty}^{+\infty}f(x-y)g(y)dy" display="block"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><mi>g</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。性質の良い関数<math id="Thmtheorem1.p1.m13" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>を選ばなければこの関数はwell-defindではないことに注意しよう。しかし後にこの畳込みを用いるときには都合の良い関数しか扱わないし、その時にちゃんと注意するので心配の必要はない。</span></p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続関数<math id="Thmcaux2.p1.m1" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>について畳み込み<math id="Thmcaux2.p1.m2" class="ltx_Math" alttext="f*g" display="inline"><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><mi>g</mi></mrow></math>が定義されるとき、</span></p>
+<table id="S0.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex3.m1" class="ltx_Math" alttext="f*g=g*f" display="block"><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><mi>g</mi></mrow><mo>=</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><mi>f</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる。</span></p>
+</div>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">次に良い核を定義しよう。”良い核”という単語で一つの固有名詞である。</p>
+</div>
+<div id="Thmtheorem2" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(直線上もしくは円周上の良い核)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">円周上の関数列<math id="Thmtheorem2.p1.m1" class="ltx_Math" alttext="\{K_{n}(t)\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>が<math id="Thmtheorem2.p1.m2" class="ltx_Math" alttext="c\in(a,b)" display="inline"><mrow><mi>c</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></math>に台を持つ良い核であるとは</span></p>
+<table id="Sx1.EGx1" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E1.m1" class="ltx_Math" alttext="\displaystyle\int_{a}^{b}K_{n}(t)dt=1" display="inline"><mrow><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup></mstyle><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E2.m1" class="ltx_Math" alttext="\displaystyle\exists M&gt;0\ \forall n\in\mathbb{N}\ \int_{a}^{b}|K_{n}(t)|dt\leq
+M" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>M</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup></mstyle><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>≤</mo><mi>M</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E3.m1" class="ltx_Math" alttext="\displaystyle\exists\eta&gt;0\ \forall\delta\in(0,\eta)\ \lim_{n\rightarrow\infty%
+}\int_{|c-t|\geq\delta}|K_{n}(t)|dt=0" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>η</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>δ</mi></mrow></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi>η</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub></mstyle><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="Thmtheorem2.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことである。
+<br class="ltx_break">上と同様に直線上の関数列<math id="Thmtheorem2.p2.m1" class="ltx_Math" alttext="\{K_{n}(t)\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>が<math id="Thmtheorem2.p2.m2" class="ltx_Math" alttext="c\in\mathbb{R}" display="inline"><mrow><mi>c</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>に台を持つ良い核であるとは</span></p>
+<table id="Sx1.EGx2" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E1a"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E1a.m1" class="ltx_Math" alttext="\displaystyle\int_{-\infty}^{+\infty}K_{n}(t)dt=1" display="inline"><mrow><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup></mstyle><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E2a"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E2a.m1" class="ltx_Math" alttext="\displaystyle\exists M&gt;0\ \forall n\in\mathbb{N}\ \int_{-\infty}^{+\infty}|K_{%
+n}(t)|dt\leq M" display="inline"><mrow><mrow><mo rspace="0.167em">∃</mo><mi>M</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup></mstyle><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>≤</mo><mi>M</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E3a"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E3a.m1" class="ltx_Math" alttext="\displaystyle\forall\delta&gt;0\ \lim_{n\rightarrow\infty}\int_{|c-t|\geq\delta}|%
+K_{n}(t)|dt=0" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>δ</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><munder><mo movablelimits="false" rspace="0.167em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub></mstyle><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことである。</span></p>
+</div>
+</div>
+<div id="Thmtheorem3" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold"> </span>(良い核と関数の近似)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem3.p1.m1" class="ltx_Math" alttext="\{K_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">を円周上の<math id="Thmtheorem3.p1.m2" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>を台にもつ良い核とし、<math id="Thmtheorem3.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を円周上の連続関数として</span></p>
+<table id="S0.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex4.m1" class="ltx_Math" alttext="H_{n}(x)=f*K_{n}(c+x)" display="block"><mrow><mrow><msub><mi>H</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><msub><mi>K</mi><mi>n</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と置くこのとき</span></p>
+<table id="S0.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex5.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists N\in\mathbb{N}\ \forall n&gt;N\ \lVert f-H_{n}%
+\rVert_{\infty}&lt;\varepsilon" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>&gt;</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>H</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></mrow><mo lspace="0.1389em">&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。
+<math id="Thmtheorem3.p1.m4" class="ltx_Math" alttext="\{K_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>を直線上の<math id="Thmtheorem3.p1.m5" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>を台にもつ良い核とし、<math id="Thmtheorem3.p1.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を直線上の<math id="Thmtheorem3.p1.m7" class="ltx_Math" alttext="suppf" display="inline"><mrow><mi>s</mi><mo>⁢</mo><mi>u</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>f</mi></mrow></math>がコンパクトな連続関数とすると</span></p>
+<table id="S0.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex6.m1" class="ltx_Math" alttext="H_{n}(x)=f*K_{n}(c+x)" display="block"><mrow><mrow><msub><mi>H</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><msub><mi>K</mi><mi>n</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義するとこの畳込みはwell-definedで</span></p>
+<table id="S0.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex7.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists N\in\mathbb{N}\ \forall n&gt;N\ \lVert f-H_{n}%
+\rVert_{\infty}&lt;\varepsilon" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>&gt;</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>H</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></mrow><mo lspace="0.1389em">&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">（円周上について）
+まず<math id="p3.m1" class="ltx_Math" alttext="C=\max\{M+1,\sup_{x\in[a,b]}|f(x)|+1\}" display="inline"><mrow><mi>C</mi><mo>=</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mi>M</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mrow><mrow><msub><mo lspace="0em" rspace="0em">sup</mo><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></mrow></msub><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math>と定義し任意の正の数<math id="p3.m2" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>について、コンパクト空間上の連続関数は一様連続だから<math id="p3.m3" class="ltx_Math" alttext="\delta&gt;0" display="inline"><mrow><mi>δ</mi><mo>&gt;</mo><mn>0</mn></mrow></math>が存在して</p>
+<table id="S0.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex8.m1" class="ltx_Math" alttext="|x-y|&lt;\delta\Rightarrow|f(x)-f(y)|&lt;\frac{\varepsilon}{2C}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⇒</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mfrac><mi>ε</mi><mrow><mn>2</mn><mo>⁢</mo><mi>C</mi></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。ここで<math id="p3.m4" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>を十分小さくとり<math id="p3.m5" class="ltx_Math" alttext="\delta&lt;\eta" display="inline"><mrow><mi>δ</mi><mo>&lt;</mo><mi>η</mi></mrow></math>と仮定できる。
+<br class="ltx_break">更に<math id="p3.m6" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>を十分大きく取り</p>
+<table id="S0.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex9.m1" class="ltx_Math" alttext="n&gt;N\Rightarrow\int_{a}^{b}|K_{n}(t)|dt&lt;\frac{\varepsilon}{4C}" display="block"><mrow><mi>n</mi><mo>&gt;</mo><mi>N</mi><mo rspace="0.111em" stretchy="false">⇒</mo><mrow><msubsup><mo rspace="0em">∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>&lt;</mo><mfrac><mi>ε</mi><mrow><mn>4</mn><mo>⁢</mo><mi>C</mi></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と出来る。
+そして<math id="p3.m7" class="ltx_Math" alttext="\int_{a}^{b}K(t)dt=1" display="inline"><mrow><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>より任意の<math id="p3.m8" class="ltx_Math" alttext="x\in[a,b]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></mrow></math>に対して</p>
+<table id="S0.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex10.m1" class="ltx_Math" alttext="|H_{n}(x)-f(x)|=\left|\int_{a}^{b}K(y)f(c+x-y)-\int_{a}^{b}K_{n}(y)f(x)dy%
+\right|=\left|\int_{a}^{b}K(y)(f(c+x-y)-f(x))dy\right|" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>H</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo>|</mo><mrow><mrow><msubsup><mo lspace="0em">∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em">−</mo><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow><mo>|</mo></mrow><mo>=</mo><mrow><mo>|</mo><mrow><msubsup><mo lspace="0em">∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow><mo>|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S0.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex11.m1" class="ltx_Math" alttext="\leq\int_{a}^{b}|K_{n}(y)||f(c+x-y)-f(x)|dy=\int_{|c-y|&lt;\delta}|K_{n}(y)||f(c+%
+x-y)-f(x)|dy+\int_{|c-y|\geq\delta}|K_{n}(y)||f(c+x-y)-f(x)|dy" display="block"><mrow><mi></mi><mo rspace="0.111em">≤</mo><mrow><msubsup><mo rspace="0em">∫</mo><mi>a</mi><mi>b</mi></msubsup><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><mrow><msub><mo rspace="0em">∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></msub><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow><mo rspace="0.055em">+</mo><mrow><msub><mo rspace="0em">∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで最後の式の初項について一様連続性から</p>
+<table id="S0.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex12.m1" class="ltx_Math" alttext="\int_{|c-y|&lt;\delta}|K_{n}(y)||f(c+x-y)-f(x)|dy&lt;\frac{\varepsilon}{2C}\int_{|c-%
+y|&lt;\delta}|K(y)|\ dy\leq\frac{\varepsilon}{2C}C=\frac{\varepsilon}{2}" display="block"><mrow><mrow><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></msub><mrow><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow><mo lspace="0em">⁢</mo><mrow><mo fence="true" rspace="0em">&lt;</mo><mrow><mfrac><mi>ε</mi><mrow><mn>2</mn><mo>⁢</mo><mi>C</mi></mrow></mfrac><mo>⁢</mo><msub><mo rspace="0em">∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></msub></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="false" rspace="0.778em">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>y</mi></mrow></mrow><mo>≤</mo><mrow><mfrac><mi>ε</mi><mrow><mn>2</mn><mo>⁢</mo><mi>C</mi></mrow></mfrac><mo>⁢</mo><mi>C</mi></mrow><mo>=</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">第二項について</p>
+<table id="S0.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex13.m1" class="ltx_Math" alttext="\int_{|c-y|\geq\delta}|K_{n}(y)||f(c+x-y)-f(x)|dy\leq 2C\int_{|c-y|\geq\delta}%
+|K_{n}(y)|&lt;2C\frac{\varepsilon}{4C}=\frac{\varepsilon}{2}" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>c</mi><mo>+</mo><mi>x</mi></mrow><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>C</mi><mo>⁢</mo><mrow><msub><mo rspace="0em">∫</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>c</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><mo stretchy="false">|</mo><mrow><msub><mi>K</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mn>2</mn><mo>⁢</mo><mi>C</mi><mo>⁢</mo><mfrac><mi>ε</mi><mrow><mn>4</mn><mo>⁢</mo><mi>C</mi></mrow></mfrac></mrow><mo>=</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって</p>
+<table id="S0.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex14.m1" class="ltx_Math" alttext="|H_{n}(x)-f(x)|&lt;\varepsilon" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>H</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><math id="p3.m9" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>は<math id="p3.m10" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>に依存しないので結局</p>
+<table id="S0.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex15.m1" class="ltx_Math" alttext="\lVert f-H_{n}\rVert_{\infty}&lt;\varepsilon" display="block"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>H</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なのでよって</p>
+<table id="S0.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex16.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists N\in\mathbb{N}\ \forall n&gt;N\ \lVert f-H_{n}%
+\rVert_{\infty}&lt;\varepsilon" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>n</mi></mrow></mrow><mo>&gt;</mo><mrow><mi>N</mi><mo lspace="0.500em">⁢</mo><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>H</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></mrow><mo lspace="0.1389em">&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">（直線上について）<math id="p3.m11" class="ltx_Math" alttext="\text{{\rm supp}}f" display="inline"><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow></math>のコンパクト性から畳込みがwell-defined であることはすぐわかるし、<math id="p3.m12" class="ltx_Math" alttext="\text{{\rm supp}}f" display="inline"><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow></math>がコンパクトであることから<math id="p3.m13" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の一様連続性がわかるので円周上の場合と同様である。
+∎</p>
+</div>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">しかし以降の文章では台が<math id="p4.m1" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となる核しか出てこない。また、パラメータが自然数<math id="p4.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>ではなく実数<math id="p4.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>で<math id="p4.m4" class="ltx_Math" alttext="a\to\infty" display="inline"><mrow><mi>a</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>の時に連続関数を近似したり、パラメータが<math id="p4.m5" class="ltx_Math" alttext="r\in(0,1)" display="inline"><mrow><mi>r</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="p4.m6" class="ltx_Math" alttext="r\to 1" display="inline"><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>1</mn></mrow></math>のときに連続関数を近似したりするものが出てくるが、証明は同様である。</p>
+</div>
+<div id="Thmtheorem4" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem4.p1.m1" class="ltx_Math" alttext="a&gt;0" display="inline"><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">に対して
+<math id="Thmtheorem4.p1.m2" class="ltx_Math" alttext="\displaystyle\int_{-\infty}^{+\infty}e^{-ax^{2}}=\sqrt{\frac{\pi}{a}}" display="inline"><mrow><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup></mstyle><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mrow></msup></mrow><mo>=</mo><msqrt><mstyle displaystyle="true"><mfrac><mi>π</mi><mi>a</mi></mfrac></mstyle></msqrt></mrow></math>に注意して</span></p>
+<table id="S0.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex17.m1" class="ltx_Math" alttext="W_{a}=\sqrt{\frac{a}{\pi}}e^{-ax^{2}}" display="block"><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>=</mo><mrow><msqrt><mfrac><mi>a</mi><mi>π</mi></mfrac></msqrt><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義しこれをワイエルストラス核と呼ぶ。定義域は<math id="Thmtheorem4.p1.m3" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>とする。</span></p>
+</div>
+</div>
+<div id="Thmtheorem5" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem5.p1.m1" class="ltx_Math" alttext="c_{n}=(\int_{-1}^{-1}(1-x^{2})^{n}dx)^{-1}" display="inline"><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><msubsup><mo lspace="0em" rspace="0em">∫</mo><mrow><mo>−</mo><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math><span class="ltx_text ltx_font_italic">とし、</span></p>
+<table id="S0.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex18.m1" class="ltx_Math" alttext="L_{n}(x)=c_{n}(1-x^{2})^{n}" display="block"><mrow><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。これをランダウ核と呼ぶ。定義域は<math id="Thmtheorem5.p1.m2" class="ltx_Math" alttext="[-1,+1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></math></span></p>
+</div>
+</div>
+<div id="Thmtheorem6" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem6.p1.m1" class="ltx_Math" alttext="\displaystyle a_{n}=(\int_{-\frac{\pi}{2}}^{+\frac{\pi}{2}}\cos^{n}x\ dx)^{-1}" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><mrow><mo>+</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow></msubsup></mstyle><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo lspace="0.167em">⁡</mo><mrow><mi>x</mi><mo lspace="0.500em">⁢</mo><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math><span class="ltx_text ltx_font_italic">とし、</span></p>
+<table id="S0.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex19.m1" class="ltx_Math" alttext="A_{n}(x)=a_{n}\cos^{n}x" display="block"><mrow><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>a</mi><mi>n</mi></msub><mo lspace="0.167em">⁢</mo><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を<math id="Thmtheorem6.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>核と呼ぶことにする。定義域は<math id="Thmtheorem6.p1.m3" class="ltx_Math" alttext="[-\frac{\pi}{2},+\frac{\pi}{2}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><mo>,</mo><mrow><mo>+</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><mo stretchy="false">]</mo></mrow></math></span></p>
+</div>
+</div>
+<div id="Thmtheorem7" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem7.p1" class="ltx_para">
+<table id="S0.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex20.m1" class="ltx_Math" alttext="F_{n}(x)=\frac{1}{2\pi}\frac{1}{n+1}\left(\frac{\sin(\frac{(n+1)x}{2})}{\sin(%
+\frac{x}{2})}\right)^{2}" display="block"><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><msup><mrow><mo>(</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>)</mo></mrow><mn>2</mn></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">をフェイエル核という。定義域は<math id="Thmtheorem7.p1.m1" class="ltx_Math" alttext="[-\pi,+\pi]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi>π</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi>π</mi></mrow><mo stretchy="false">]</mo></mrow></math></span></p>
+</div>
+</div>
+<div id="Thmtheorem8" class="ltx_theorem ltx_theorem_defnition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem8.p1" class="ltx_para">
+<table id="S0.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex21.m1" class="ltx_Math" alttext="P_{r}(x)=\frac{1}{2\pi}\frac{1-r^{2}}{1-2r\cos x+r^{2}}" display="block"><mrow><mrow><msub><mi>P</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">をポアソン核という。定義域は<math id="Thmtheorem8.p1.m1" class="ltx_Math" alttext="[-\pi,+\pi]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi>π</mi></mrow><mo>,</mo><mrow><mo>+</mo><mi>π</mi></mrow><mo stretchy="false">]</mo></mrow></math></span></p>
+</div>
+</div>
+<div id="Thmtheorem9" class="ltx_theorem ltx_theorem_lemma">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem9.p1.m1" class="ltx_Math" alttext="\displaystyle D_{k}(x)=\sum_{m=-k}^{k}e^{imx}" display="inline"><mrow><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mrow><mo>−</mo><mi>k</mi></mrow></mrow><mi>k</mi></munderover></mstyle><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></math><span class="ltx_text ltx_font_italic">とするとき</span></p>
+<table id="Sx1.EGx3" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.Ex22"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.Ex22.m1" class="ltx_Math" alttext="\displaystyle\int_{-\pi}^{+\pi}D_{k}(x)\ dx=2\pi" display="inline"><mrow><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup></mstyle><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex23"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.Ex23.m1" class="ltx_Math" alttext="\displaystyle D_{k}(x)=\cfrac{e^{i(k+\frac{1}{2})x}-e^{-i(k+\frac{1}{2})x}}{e^%
+{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}=\frac{\sin\left((k+\frac{1}{2}\right)x)}{%
+\sin(\frac{x}{2})}" display="inline"><mrow><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo>)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex24"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.Ex24.m1" class="ltx_Math" alttext="\displaystyle F_{n}(x)=\frac{1}{2\pi}\frac{D_{0}(x)+D_{1}(x)+\dots+D_{n}(x)}{n%
++1}" display="inline"><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><mrow><msub><mi>D</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>D</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex25"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.Ex25.m1" class="ltx_Math" alttext="\displaystyle P_{r}(x)=\frac{1}{2\pi}\sum_{n=-\infty}^{+\infty}r^{|n|}e^{inx}%
+\ (0&lt;r&lt;1)（一様収束）" display="inline"><mrow><mrow><msub><mi>P</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munderover></mstyle><mrow><msup><mi>r</mi><mrow><mo stretchy="false">|</mo><mi>n</mi><mo stretchy="false">|</mo></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>0</mn><mo>&lt;</mo><mi>r</mi><mo>&lt;</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi mathvariant="normal">（</mi><mo>⁢</mo><mi mathvariant="normal">一</mi><mo>⁢</mo><mi mathvariant="normal">様</mi><mo>⁢</mo><mi mathvariant="normal">収</mi><mo>⁢</mo><mi mathvariant="normal">束</mi><mo>⁢</mo><mi mathvariant="normal">）</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成立する。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">１番の式は</p>
+<table id="S0.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex26.m1" class="ltx_Math" alttext="\int_{-\pi}^{+\pi}e^{inx}\ dx=\begin{cases}2\pi&amp;n=0\\
+0&amp;n\neq 0\end{cases}" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>0</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>n</mi><mo>≠</mo><mn>0</mn></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">からわかる。残りは等比級数の総和公式を使えばわかる。</p>
+</div>
+<div id="p6" class="ltx_para">
+<p class="ltx_p">以上では<math id="p6.m1" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>は虚数単位でオイラーの等式</p>
+<table id="S0.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex27.m1" class="ltx_Math" alttext="e^{ix}=\cos x+i\sin x" display="block"><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>=</mo><mrow><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow><mo>+</mo><mrow><mi>i</mi><mo lspace="0.167em">⁢</mo><mrow><mi>sin</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を用いた。</p>
+</div>
+<div id="p7" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div id="Thmcaux3" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux3.p1.m1" class="ltx_Math" alttext="\frac{1}{2\pi}D_{k}" display="inline"><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><msub><mi>D</mi><mi>k</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">も良い核になりそうだが、これは良い核にはならない。このことを補うためにフーリエ級数論ではフェイエル核やポアソン核を用いる。</span></p>
+</div>
+</div>
+<div id="Thmtheorem10" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem10.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">上の核は全てそれぞれの定義域の上で良い核となる。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p8" class="ltx_para">
+<p class="ltx_p">まず最初に上で述べた核は全て正なので良い核の条件2は条件1を示せば直ちに従うことに注意しよう。</p>
+</div>
+<div id="p9" class="ltx_para">
+<p class="ltx_p">（ワイエルストラス核について）
+<br class="ltx_break"><math id="p9.m1" class="ltx_Math" alttext="\displaystyle\int_{-\infty}^{+\infty}e^{-ax^{2}}=\sqrt{\frac{\pi}{a}}" display="inline"><mrow><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup></mstyle><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mrow></msup></mrow><mo>=</mo><msqrt><mstyle displaystyle="true"><mfrac><mi>π</mi><mi>a</mi></mfrac></mstyle></msqrt></mrow></math>なので</p>
+<table id="S0.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex28.m1" class="ltx_Math" alttext="\int_{-\infty}^{+\infty}W_{a}(t)dt=1" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は明らかであるので条件1,及び条件2を充たす。そして</p>
+<table id="S0.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex29.m1" class="ltx_Math" alttext="\int_{\delta}^{+\infty}W_{a}(x)dx=\int_{\delta}^{+\infty}\sqrt{\frac{a}{\pi}}e%
+^{-ax^{2}}dx=\sqrt{\frac{1}{\pi}}\int_{\sqrt{a}\delta}^{+\infty}e^{-ay^{2}}dy" display="block"><mrow><mrow><msubsup><mo>∫</mo><mi>δ</mi><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∫</mo><mi>δ</mi><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><msqrt><mfrac><mi>a</mi><mi>π</mi></mfrac></msqrt><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><msqrt><mfrac><mn>1</mn><mi>π</mi></mfrac></msqrt><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mrow><msqrt><mi>a</mi></msqrt><mo>⁢</mo><mi>δ</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">で</p>
+<table id="S0.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex30.m1" class="ltx_Math" alttext="\lim_{a\rightarrow\infty}\int_{\sqrt{a}\delta}^{+\infty}e^{-ay^{2}}dy=0" display="block"><mrow><mrow><munder><mo movablelimits="false">lim</mo><mrow><mi>a</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msubsup><mo lspace="0.167em">∫</mo><mrow><msqrt><mi>a</mi></msqrt><mo>⁢</mo><mi>δ</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と<math id="p9.m2" class="ltx_Math" alttext="W_{a}" display="inline"><msub><mi>W</mi><mi>a</mi></msub></math>が偶関数であることから</p>
+<table id="S0.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex31.m1" class="ltx_Math" alttext="\forall\delta&gt;0\ \lim_{a\rightarrow\infty}\int_{|t|\geq\delta}W_{a}(t)dt=0" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>δ</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><munder><mo movablelimits="false" rspace="0em">lim</mo><mrow><mi>a</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mi>t</mi><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる。</p>
+</div>
+<div id="p10" class="ltx_para">
+<p class="ltx_p">（ランダウ核について）定義から明らかに</p>
+<table id="S0.Ex32" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex32.m1" class="ltx_Math" alttext="\int_{-1}^{+1}L_{n}(t)dt=1" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mn>1</mn></mrow><mrow><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であるので条件1,2を充たす。また<math id="p10.m1" class="ltx_Math" alttext="(1-t^{2})^{n}" display="inline"><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></math>が偶関数で<math id="p10.m2" class="ltx_Math" alttext="t\in[0,1]" display="inline"><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>のとき<math id="p10.m3" class="ltx_Math" alttext="1+t\geq 1" display="inline"><mrow><mrow><mn>1</mn><mo>+</mo><mi>t</mi></mrow><mo>≥</mo><mn>1</mn></mrow></math>より</p>
+<table id="S0.Ex33" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex33.m1" class="ltx_Math" alttext="\frac{1}{c_{n}}=\int_{-1}^{+1}(1-t^{2})^{n}dt=2\int_{0}^{+1}(1-t^{2})^{n}dt=2%
+\int_{0}^{+1}(1-t)^{n}(1+t)^{n}dt" display="block"><mrow><mfrac><mn>1</mn><msub><mi>c</mi><mi>n</mi></msub></mfrac><mo rspace="0.111em">=</mo><mrow><msubsup><mo rspace="0em">∫</mo><mrow><mo>−</mo><mn>1</mn></mrow><mrow><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mn>0</mn><mrow><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mn>0</mn><mrow><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>+</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S0.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex34.m1" class="ltx_Math" alttext="\geq 2\int_{0}^{+1}(1-t)^{n}dt=2\left[-\frac{1}{n+1}(1-t)^{n}\right]_{0}^{1}=2%
+(\frac{1}{n+1})" display="block"><mrow><mi></mi><mo>≥</mo><mrow><mn>2</mn><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mn>0</mn><mrow><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><msubsup><mrow><mo>[</mo><mrow><mo>−</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow></mrow><mo>]</mo></mrow><mn>0</mn><mn>1</mn></msubsup></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって</p>
+<table id="S0.Ex35" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex35.m1" class="ltx_Math" alttext="c_{n}\leq\frac{n+1}{2}" display="block"><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>≤</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">そして</p>
+</div>
+<div id="p11" class="ltx_para">
+<table id="S0.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex36.m1" class="ltx_Math" alttext="\int_{|t|\leq\delta}L_{n}(t)=\frac{2}{c_{n}}\int_{\delta}^{1}(1-t^{2})^{n}dt%
+\leq(n+1)\int_{\delta}^{1}(1-t^{2})^{n}dt" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mi>t</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>δ</mi></mrow></msub><mrow><msub><mi>L</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mn>2</mn><msub><mi>c</mi><mi>n</mi></msub></mfrac><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mi>δ</mi><mn>1</mn></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mi>δ</mi><mn>1</mn></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S0.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex37.m1" class="ltx_Math" alttext="\leq(n+1)\int_{\delta}^{1}(1-\delta^{2})^{n}dt=(n+1)(1-\delta)(1-\delta^{2})^{n}" display="block"><mrow><mi></mi><mo>≤</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><msubsup><mo rspace="0em">∫</mo><mi>δ</mi><mn>1</mn></msubsup><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>δ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">で<math id="p11.m1" class="ltx_Math" alttext="0&lt;\delta&lt;1" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mi>δ</mi><mo>&lt;</mo><mn>1</mn></mrow></math>より<math id="p11.m2" class="ltx_Math" alttext="0&lt;1-\delta^{2}&lt;1" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow><mo>&lt;</mo><mn>1</mn></mrow></math>なので条件3がわかる。</p>
+</div>
+<div id="p12" class="ltx_para">
+<p class="ltx_p">(<math id="p12.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>核について)</p>
+<table id="S0.Ex38" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex38.m1" class="ltx_Math" alttext="\int_{-\frac{\pi}{2}}^{+\frac{\pi}{2}}A_{n}(x)\ dx=1" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><mrow><mo>+</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow></msubsup><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は定義より明らか。後半は所謂ウォリスの公式を導出する議論を用いる。
+<math id="p12.m2" class="ltx_Math" alttext="\displaystyle I_{n}=\int_{0}^{\frac{\pi}{2}}\cos x\ dx" display="inline"><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>=</mo><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mn>0</mn><mfrac><mi>π</mi><mn>2</mn></mfrac></msubsup></mstyle><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mrow><mi>x</mi><mo lspace="0.500em">⁢</mo><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow></mrow></math>とした時、</p>
+<table id="S0.Ex39" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex39.m1" class="ltx_Math" alttext="I_{n}=\frac{n-1}{n}I_{n-2}" display="block"><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>=</mo><mrow><mfrac><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mi>n</mi></mfrac><mo>⁢</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ。このことは高校生程度の知識があれば容易にわかると思う。さてこの式と<math id="p12.m3" class="ltx_Math" alttext="I_{0}=\frac{\pi}{2},I_{1}=1" display="inline"><mrow><mrow><msub><mi>I</mi><mn>0</mn></msub><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><mo>,</mo><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow></mrow></math>から帰納的に次の事がわかる。</p>
+<table id="S0.Ex40" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex40.m1" class="ltx_Math" alttext="I_{2n}\geq\frac{1}{2n},\ \ I_{2n-1}\geq\frac{1}{2n-1}\ (n\geq 1)" display="block"><mrow><mrow><msub><mi>I</mi><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow></msub><mo>≥</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow></mfrac></mrow><mo rspace="1.167em">,</mo><mrow><msub><mi>I</mi><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>≥</mo><mrow><mfrac><mn>1</mn><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>−</mo><mn>1</mn></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">つまり</p>
+<table id="S0.Ex41" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex41.m1" class="ltx_Math" alttext="I_{n}\geq\frac{1}{n}\ (n\geq 1)" display="block"><mrow><msub><mi>I</mi><mi>n</mi></msub><mo>≥</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="p12.m4" class="ltx_Math" alttext="1/a_{n}=2I_{n}" display="inline"><mrow><mrow><mn>1</mn><mo>/</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><msub><mi>I</mi><mi>n</mi></msub></mrow></mrow></math>より</p>
+<table id="S0.Ex42" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex42.m1" class="ltx_Math" alttext="a_{n}\leq n/2\leq n" display="block"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>≤</mo><mrow><mi>n</mi><mo>/</mo><mn>2</mn></mrow><mo>≤</mo><mi>n</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">故に</p>
+<table id="S0.Ex43" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex43.m1" class="ltx_Math" alttext="\int_{|x|\geq\delta}A_{n}(x)\ dx\leq n\int_{|x|\geq\delta}\cos^{n}x\ dx=n\int_%
+{\delta}^{+\frac{\pi}{2}}\cos^{n}x\ dx\leq n\cos^{n}(\delta)\int_{\delta}^{+%
+\frac{\pi}{2}}\ dx=n(\frac{\pi}{2}-\delta)\cos^{n}(\delta)" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><msub><mo>∫</mo><mrow><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></msub><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo lspace="0.167em">⁡</mo><mrow><mi>x</mi><mo lspace="0.500em">⁢</mo><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mi>δ</mi><mrow><mo>+</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow></msubsup><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo lspace="0.167em">⁡</mo><mrow><mi>x</mi><mo lspace="0.500em">⁢</mo><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo lspace="0.167em">⁢</mo><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mi>δ</mi><mrow><mo>+</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow></msubsup><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>−</mo><mi>δ</mi></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.167em">⁢</mo><mrow><msup><mi>cos</mi><mi>n</mi></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので条件3が成立することがわかる。
+<br class="ltx_break">（フェイエル核について）補題<a href="#Thmtheorem9" title="補題 9. ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>より</p>
+<table id="S0.Ex44" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex44.m1" class="ltx_Math" alttext="\int_{-\pi}^{+\pi}F_{n}(x)\ dx=\frac{1}{2\pi}\int_{-\pi}^{+\pi}\frac{D_{0}(x)+%
+D_{1}(x)+\dots+D_{n}(x)}{n+1}\ dx=1" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><mfrac><mrow><mrow><msub><mi>D</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>D</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので条件1(ついでに2も)満たされる。
+<br class="ltx_break">条件3について</p>
+</div>
+<div id="p13" class="ltx_para">
+<table id="S0.Ex45" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex45.m1" class="ltx_Math" alttext="\int_{\delta\leq|x|\leq\pi}2\pi F_{n}(x)\ dx=\int_{\delta\leq|x|\leq\pi}\frac{%
+1}{n+1}\left(\frac{\sin(\frac{(n+1)x}{2})}{\sin(\frac{x}{2})}\right)^{2}\ dx=%
+\frac{1}{n+1}\frac{1}{\sin^{2}(\frac{\delta}{2})}\int_{\delta\leq|x|\leq\pi}%
+\sin^{2}(\frac{(n+1)x}{2})\ dx" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><msup><mrow><mo>(</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>δ</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S0.Ex46" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex46.m1" class="ltx_Math" alttext="\leq\frac{1}{n+1}\frac{1}{\sin^{2}(\frac{\delta}{2})}\int_{\delta\leq|x|\leq%
+\pi}\ dx\leq\frac{1}{n+1}\frac{1}{\sin^{2}(\frac{\delta}{2})}\int_{-\pi}^{+\pi%
+}dx=\frac{1}{n+1}\frac{1}{\sin^{2}(\frac{\delta}{2})}(2\pi)" display="block"><mrow><mi></mi><mo>≤</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>δ</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>≤</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>δ</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>δ</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">より</p>
+<table id="S0.Ex47" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex47.m1" class="ltx_Math" alttext="\int_{\delta\leq|x|\leq\pi}F_{n}(x)\ dx\leq\frac{1}{n+1}\frac{1}{\sin^{2}(%
+\frac{\delta}{2})}" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>≤</mo><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>δ</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">から後はわかる。</p>
+</div>
+<div id="p14" class="ltx_para">
+<p class="ltx_p">（ポアソン核について）
+補題<a href="#Thmtheorem9" title="補題 9. ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>より</p>
+<table id="S0.Ex48" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex48.m1" class="ltx_Math" alttext="\int_{-\pi}^{+\pi}P_{r}(x)\ dx=\int_{-\pi}^{+\pi}\frac{1}{2\pi}\frac{1-r^{2}}{%
+1-2r\cos x+r^{2}}\ dx=\int_{-\pi}^{+\pi}\frac{1}{2\pi}\sum_{n=-\infty}^{+%
+\infty}r^{|n|}e^{inx}\ dx=\frac{1}{2\pi}\sum_{n=-\infty}^{+\infty}r^{|n|}\int_%
+{-\pi}^{+\pi}e^{inx}\ dx=1" display="block"><mrow><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><msub><mi>P</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munderover><mrow><msup><mi>r</mi><mrow><mo stretchy="false">|</mo><mi>n</mi><mo stretchy="false">|</mo></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></mfrac><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munderover><mrow><msup><mi>r</mi><mrow><mo stretchy="false">|</mo><mi>n</mi><mo stretchy="false">|</mo></mrow></msup><mo>⁢</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo lspace="0em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので条件1(ついでに条件２も)満たされる。
+<br class="ltx_break">条件3について</p>
+</div>
+<div id="p15" class="ltx_para">
+<table id="S0.Ex49" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex49.m1" class="ltx_Math" alttext="\int_{\delta\leq|x|\leq\pi}2\pi P_{r}(x)\ dx=\int_{\delta\leq|x|\leq\pi}\frac{%
+1-r^{2}}{1-2r\cos x+r^{2}}\ dx\leq\int_{\delta\leq|x|\leq\pi}\frac{1-r^{2}}{1-%
+2r\cos\delta+r^{2}}\ dx" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi><mo>⁢</mo><msub><mi>P</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">=</mo><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo rspace="0.111em">≤</mo><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>δ</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S0.Ex50" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex50.m1" class="ltx_Math" alttext="\leq\int_{-\pi}^{+\pi}\frac{1-r^{2}}{1-2r\cos\delta+r^{2}}\ dx=\frac{1-r^{2}}{%
+1-2r\cos\delta+r^{2}}(2\pi)" display="block"><mrow><mi></mi><mo rspace="0.111em">≤</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mrow><mo>+</mo><mi>π</mi></mrow></msubsup><mrow><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>δ</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>=</mo><mrow><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>δ</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">より</p>
+<table id="S0.Ex51" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex51.m1" class="ltx_Math" alttext="\int_{\delta\leq|x|\leq\pi}P_{r}(x)\ dx\leq\frac{1-r^{2}}{1-2r\cos\delta+r^{2}}" display="block"><mrow><mrow><msub><mo>∫</mo><mrow><mi>δ</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><mo>≤</mo><mi>π</mi></mrow></msub><mrow><msub><mi>P</mi><mi>r</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>x</mi></mrow></mrow></mrow><mo>≤</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>δ</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので<math id="p15.m1" class="ltx_Math" alttext="r\to 1" display="inline"><mrow><mi>r</mi><mo stretchy="false">→</mo><mn>1</mn></mrow></math>のとき右辺は<math id="p15.m2" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>へ近づく
+∎</p>
+</div>
+</div>
+<div id="Thmtheorem11" class="ltx_theorem ltx_theorem_fact">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">事実 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">解析関数のテイラー展開は収束円板の中で広義一様収束する。</span></p>
+</div>
+</div>
+<div id="Thmtheorem12" class="ltx_theorem ltx_theorem_lemma">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmtheorem12.p1.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math><span class="ltx_text ltx_font_italic">を多項式とし<math id="Thmtheorem12.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を連続関数とすると畳み込み</span></p>
+<table id="S0.Ex52" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex52.m1" class="ltx_Math" alttext="\int_{K}f(y)P(x-y)\ dy" display="block"><mrow><msub><mo>∫</mo><mi>K</mi></msub><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">は<math id="Thmtheorem12.p1.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の多項式である。ただし<math id="Thmtheorem12.p1.m4" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は円周か直線でこれが直線の場合には<math id="Thmtheorem12.p1.m5" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>はコンパクト台を持つとする。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p16" class="ltx_para">
+<p class="ltx_p"><math id="p16.m1" class="ltx_Math" alttext="P(x-y)" display="inline"><mrow><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>を展開すれば明らかである。
+∎</p>
+</div>
+</div>
+<div id="p17" class="ltx_para">
+<p class="ltx_p">さていよいよワイエルストラスの多項式近似定理を証明する。定理<a href="#Thmtheorem3" title="定理 3 (良い核と関数の近似). ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>をが決め手である。</p>
+</div>
+<div id="Thmtheorem13" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold"> </span>(ワイエルストラスの多項式近似定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem13.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">有界閉区間上の連続関数は多項式で一様に近似出来る。</span></p>
+</div>
+</div>
+<div id="p18" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">証明の前に注意
+<br class="ltx_break"></span>直線上の核を使う場合：有界閉区間<math id="p18.m1" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>上の連続関数<math id="p18.m2" class="ltx_Math" alttext="f:[a,b]\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を任意に与えるとこの関数を<math id="p18.m3" class="ltx_Math" alttext="[a-1,b+1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></math>の外では<math id="p18.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となるように<math id="p18.m5" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の連続関数に拡張出来る。よって直線上のコンパクト台関数を多項式で一様に近似できれば多項式近似定理は証明される。
+<br class="ltx_break">円周上の核を使う場合：有界閉区間<math id="p18.m6" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>上の連続関数<math id="p18.m7" class="ltx_Math" alttext="f:[a,b]\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を任意に与える。有界閉区間<math id="p18.m8" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>は１次関数<math id="p18.m9" class="ltx_Math" alttext="\Phi" display="inline"><mi mathvariant="normal">Φ</mi></math>によって他の有界閉区間<math id="p18.m10" class="ltx_Math" alttext="[\alpha,\beta]" display="inline"><mrow><mo stretchy="false">[</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false">]</mo></mrow></math>に対して<math id="p18.m11" class="ltx_Math" alttext="\Phi([a,b])=[c,d]\subset(\alpha,\beta)" display="inline"><mrow><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">[</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">]</mo></mrow><mo>⊂</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow></math>となるように出来る。これによって<math id="p18.m12" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を<math id="p18.m13" class="ltx_Math" alttext="[a-\delta,b+\delta]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>−</mo><mi>δ</mi></mrow><mo>,</mo><mrow><mi>b</mi><mo>+</mo><mi>δ</mi></mrow><mo stretchy="false">]</mo></mrow></math>(<math id="p18.m14" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>は十分小さい)の外では<math id="p18.m15" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となるように<math id="p18.m16" class="ltx_Math" alttext="[\alpha,\beta]" display="inline"><mrow><mo stretchy="false">[</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false">]</mo></mrow></math>へ拡張できる。更に多項式と１次関数の合成は多項式なので円周上の連続関数を多項式で一様に近似できれば多項式近似定理は証明される。</p>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明：ワイエルストラス核の場合.</h6>
+<div id="p19" class="ltx_para">
+<p class="ltx_p">指数関数の<math id="p19.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>次までのテイラー展開を<math id="p19.m2" class="ltx_Math" alttext="E_{n}" display="inline"><msub><mi>E</mi><mi>n</mi></msub></math>と置くとこれは多項式で指数関数に広義一様収束する。<math id="p19.m3" class="ltx_Math" alttext="G_{n,a}(x)=E_{n}(x^{2})" display="inline"><mrow><mrow><msub><mi>G</mi><mrow><mi>n</mi><mo>,</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>E</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする。任意に<math id="p19.m4" class="ltx_Math" alttext="\varepsilon" display="inline"><mi>ε</mi></math>を与え<math id="p19.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を十分大きく取れば<math id="p19.m6" class="ltx_Math" alttext="H=f*W_{a}" display="inline"><mrow><mi>H</mi><mo>=</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><msub><mi>W</mi><mi>a</mi></msub></mrow></mrow></math>について定理<a href="#Thmtheorem3" title="定理 3 (良い核と関数の近似). ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>から</p>
+<table id="S0.Ex53" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex53.m1" class="ltx_Math" alttext="\lVert f-H\rVert_{\mathbb{R},\infty}&lt;\varepsilon" display="block"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><mi>H</mi></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mrow><mi>ℝ</mi><mo>,</mo><mi mathvariant="normal">∞</mi></mrow></msub><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と出来る。<math id="p19.m7" class="ltx_Math" alttext="\text{{\rm supp}}f=K" display="inline"><mrow><mrow><mtext>supp</mtext><mo>⁢</mo><mi>f</mi></mrow><mo>=</mo><mi>K</mi></mrow></math>として</p>
+<table id="S0.Ex54" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex54.m1" class="ltx_Math" alttext="L=K-K=\{x-y\ |\ x,y\in K\}" display="block"><mrow><mi>L</mi><mo>=</mo><mrow><mi>K</mi><mo>−</mo><mi>K</mi></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo lspace="0.500em" rspace="0.500em">|</mo><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>K</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と置くとこれはコンパクトで<math id="p19.m8" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>を十分大きくとり</p>
+<table id="S0.Ex55" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex55.m1" class="ltx_Math" alttext="\lVert W_{a}-G_{n,a}\rVert_{\infty,L}&lt;\varepsilon" display="block"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>−</mo><msub><mi>G</mi><mrow><mi>n</mi><mo>,</mo><mi>a</mi></mrow></msub></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mrow><mi mathvariant="normal">∞</mi><mo>,</mo><mi>L</mi></mrow></msub><mo>&lt;</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と出来るこのとき<math id="p19.m9" class="ltx_Math" alttext="P=f*G_{n,a}" display="inline"><mrow><mi>P</mi><mo>=</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∗</mo><msub><mi>G</mi><mrow><mi>n</mi><mo>,</mo><mi>a</mi></mrow></msub></mrow></mrow></math>は多項式で<math id="p19.m10" class="ltx_Math" alttext="x\in K" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>K</mi></mrow></math>のとき</p>
+<table id="Sx1.EGx4" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.Ex56"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex56.m1" class="ltx_Math" alttext="\displaystyle|H(x)-P(x)|=|\int_{\mathbb{R}}f(y)W_{a}(x-y)\ dy-\int_{\mathbb{R}%
+}f(y)G_{n,a}(x-y)\ dy|" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>ℝ</mi></msub></mstyle><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>W</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>ℝ</mi></msub></mstyle><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>G</mi><mrow><mi>n</mi><mo>,</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex57"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex57.m1" class="ltx_Math" alttext="\displaystyle\leq\int_{\mathbb{R}}|f(y)||W_{a}(x-y)-G_{n,a}(x-y)|\ dy&lt;%
+\varepsilon\int_{\mathbb{R}}|f(y)|\ dy" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mrow><mstyle displaystyle="true"><msub><mo>∫</mo><mi>ℝ</mi></msub></mstyle><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>W</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>G</mi><mrow><mi>n</mi><mo>,</mo><mi>a</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow><mo lspace="0em">⁢</mo><mrow><mo fence="true" rspace="0em">&lt;</mo><mrow><mi>ε</mi><mo>⁢</mo><mstyle displaystyle="true"><msub><mo>∫</mo><mi>ℝ</mi></msub></mstyle></mrow><mo stretchy="false">|</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="false" rspace="0.778em">|</mo><mrow><mi>d</mi><mo>⁢</mo><mi>y</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで<math id="p19.m11" class="ltx_Math" alttext="\int_{\mathbb{R}}|f(y)|\ dy" display="inline"><mrow><msub><mo>∫</mo><mi>ℝ</mi></msub><mrow><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo rspace="0em">𝑑</mo><mi>y</mi></mrow></mrow></mrow></math>は定数なので<math id="p19.m12" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は多項式<math id="p19.m13" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>で近似できる。よって定理は証明された。
+∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明：ランダウ核の場合.</h6>
+<div id="p20" class="ltx_para">
+<p class="ltx_p">補題<a href="#Thmtheorem12" title="補題 12. ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a>から<math id="p20.m1" class="ltx_Math" alttext="L_{n}" display="inline"><msub><mi>L</mi><mi>n</mi></msub></math>と連続関数との畳込みは多項式なので定理<a href="#Thmtheorem3" title="定理 3 (良い核と関数の近似). ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>からすぐに結論を得る。またランダウ核の形から、連続関数を近似する多項式はのそれを構成する単項式の次数が偶数となるものを選べることがわかる。（特にこのことを何かに使うわけではないが）</p>
+</div>
+<div id="p21" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明：<math id="m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>核の場合.</h6>
+<div id="p22" class="ltx_para">
+<p class="ltx_p"><math id="p22.m1" class="ltx_Math" alttext="A_{n}" display="inline"><msub><mi>A</mi><mi>n</mi></msub></math>の形からすぐにわかるように<math id="p22.m2" class="ltx_Math" alttext="A_{n}" display="inline"><msub><mi>A</mi><mi>n</mi></msub></math>と連続関数との畳込みは
+<math id="p22.m3" class="ltx_Math" alttext="\sin^{n}x,\cos^{m}x" display="inline"><mrow><mrow><msup><mi>sin</mi><mi>n</mi></msup><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow><mo>,</mo><mrow><msup><mi>cos</mi><mi>m</mi></msup><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></math>の形の関数の幾つかの線形結合となる。これらの関数は解析的である。（解析関数の積は解析的）よって事実<a href="#Thmtheorem11" title="事実 11. ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a>から結論が知れる。（三角関数の収束半径は<math id="p22.m4" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>）</p>
+</div>
+<div id="p23" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明：フェルエル核の場合.</h6>
+<div id="p24" class="ltx_para">
+<p class="ltx_p">フェイエル核と連続関数との畳込みは三角多項式となる。三角多項式は解析的なので結論がわかる。</p>
+</div>
+<div id="p25" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明：ポアソン核の場合.</h6>
+<div id="p26" class="ltx_para">
+<p class="ltx_p">ポアソン核と連続関数との畳込みは三角多項式の一様収束極限関数であるからフェイエル核の場合と同様に結論が知れる。</p>
+</div>
+<div id="p27" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">補足</h2>
+
+<div id="Sx1.p1" class="ltx_para">
+<p class="ltx_p">多項式近似定理の証明の前の注意について</p>
+</div>
+<div id="Thmtheorem14" class="ltx_theorem ltx_theorem_proposition">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem14.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">有界閉区間<math id="Thmtheorem14.p1.m1" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math>上の連続関数<math id="Thmtheorem14.p1.m2" class="ltx_Math" alttext="f:[a,b]\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を任意に与えるとこの関数を<math id="Thmtheorem14.p1.m3" class="ltx_Math" alttext="[a-1,b+1]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></math>の外では<math id="Thmtheorem14.p1.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となるように<math id="Thmtheorem14.p1.m5" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>上の連続関数に拡張出来る。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="Sx1.p2" class="ltx_para">
+<p class="ltx_p"><math id="Sx1.p2.m1" class="ltx_Math" alttext="(a,f(a))" display="inline"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>と<math id="Sx1.p2.m2" class="ltx_Math" alttext="(a-1,0)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math>を通る1次関数と<math id="Sx1.p2.m3" class="ltx_Math" alttext="(b,f(b))" display="inline"><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>と<math id="Sx1.p2.m4" class="ltx_Math" alttext="(b+1,0)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math>を通る1次関数を<math id="Sx1.p2.m5" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に繋げば良い。
+∎</p>
+</div>
+</div>
+<div id="Sx1.p3" class="ltx_para">
+<p class="ltx_p">円周の場合の拡張についてもほとんど同様。
+<br class="ltx_break">省略した補題<a href="#Thmtheorem9" title="補題 9. ‣ 積分核と多項式近似" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>の証明</p>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="Sx1.p4" class="ltx_para">
+<p class="ltx_p">等比級数の総和公式しか使わない。計算が長いだけである。</p>
+<table id="Sx1.EGx5" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="Sx1.Ex64">
+<tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="Sx1.Ex58.m1" class="ltx_Math" alttext="\displaystyle D_{k}(x)" display="inline"><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex58.m2" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex58.m3" class="ltx_Math" alttext="\displaystyle\sum_{m=-k}^{k}e^{imx}=\sum_{m=-k}^{-1}e^{imx}+1+\sum_{m=k}^{n}e^%
+{imx}=\sum_{m=1}^{1}e^{-imx}+1+\sum_{m=k}^{n}e^{imx}" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mrow><mo>−</mo><mi>k</mi></mrow></mrow><mi>k</mi></munderover></mstyle><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mrow><mo>−</mo><mi>k</mi></mrow></mrow><mrow><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mo>+</mo><mn>1</mn><mo>+</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mi>k</mi></mrow><mi>n</mi></munderover></mstyle><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mn>1</mn></mrow><mn>1</mn></munderover></mstyle><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>+</mo><mn>1</mn><mo>+</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>m</mi><mo>=</mo><mi>k</mi></mrow><mi>n</mi></munderover></mstyle><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex59.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex59.m2" class="ltx_Math" alttext="\displaystyle\frac{e^{-ix}(1-e^{-ikx})}{1-e^{-ix}}+\frac{e^{ix}(1-e^{ikx})}{1-%
+e^{ix}}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex60.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex60.m2" class="ltx_Math" alttext="\displaystyle\frac{e^{-i\frac{1}{2}x}}{e^{-i\frac{1}{2}x}}\frac{e^{-ix}(1-e^{-%
+ikx})}{1-e^{-ix}}+\frac{e^{i\frac{1}{2}x}}{e^{i\frac{1}{2}x}}\frac{e^{ix}(1-e^%
+{ikx})}{1-e^{ix}}+1" display="inline"><mrow><mrow><mstyle displaystyle="true"><mfrac><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle></mrow><mo>+</mo><mrow><mstyle displaystyle="true"><mfrac><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mfrac></mstyle></mrow><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex61.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex61.m2" class="ltx_Math" alttext="\displaystyle\frac{e^{-i\frac{1}{2}x}(1-e^{-ikx})}{e^{i\frac{1}{2}x}-e^{-i%
+\frac{1}{2}x}}+\frac{e^{-i\frac{1}{2}x}(e^{ikx}-1)}{e^{i\frac{1}{2}x}-e^{-i%
+\frac{1}{2}x}}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex62.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex62.m2" class="ltx_Math" alttext="\displaystyle\frac{e^{i(k+\frac{1}{2})x}-e^{-i(k+\frac{1}{2})x}-(e^{i\frac{1}{%
+2}x}-e^{-i\frac{1}{2}x})}{e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex63.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex63.m2" class="ltx_Math" alttext="\displaystyle\frac{e^{i(k+\frac{1}{2})x}-e^{-i(k+\frac{1}{2})x}}{e^{i\frac{1}{%
+2}x}-e^{-i\frac{1}{2}x}}" display="inline"><mstyle displaystyle="true"><mfrac><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex64.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex64.m2" class="ltx_Math" alttext="\displaystyle\frac{\sin\left((k+\frac{1}{2}\right)x)}{\sin(\frac{x}{2})}" display="inline"><mstyle displaystyle="true"><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo>)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+</tbody>
+</table>
+<p class="ltx_p">から第二式がわかる。ここで等比級数の総和公式を使った。
+また</p>
+<table id="Sx1.Ex65" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="Sx1.Ex65.m1" class="ltx_Math" alttext="\sum_{k=0}^{n}e^{i(k+\frac{1}{2})x}=e^{i\frac{1}{2}x}\sum_{k=0}^{n}e^{ikx}=e^{%
+i\frac{1}{2}x}\frac{1-e^{i(n+1)x}}{1-e^{ix}}" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="Sx1.Ex66" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="Sx1.Ex66.m1" class="ltx_Math" alttext="\sum_{k=0}^{n}e^{-i(k+\frac{1}{2})x}=e^{-i\frac{1}{2}x}\sum_{k=0}^{n}e^{-ikx}=%
+e^{-i\frac{1}{2}x}\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mrow><mo>=</mo><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">より</p>
+<table id="Sx1.EGx6" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="Sx1.Ex71">
+<tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="Sx1.Ex67.m1" class="ltx_Math" alttext="\displaystyle(e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x})\sum_{k=0}^{n}D_{k}(x)" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex67.m2" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex67.m3" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}\left(e^{i(k+\frac{1}{2})x}-e^{-i(k+\frac{1}{2})x}%
+\right)=e^{i\frac{1}{2}x}\frac{1-e^{i(n+1)x}}{1-e^{ix}}-e^{-i\frac{1}{2}x}%
+\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mo>(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mfrac></mstyle></mrow><mo>−</mo><mrow><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex68.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex68.m2" class="ltx_Math" alttext="\displaystyle\frac{1}{e^{-i\frac{1}{2}x}}\frac{1-e^{i(n+1)x}}{1-e^{ix}}-\frac{%
+1}{e^{i\frac{1}{2}x}}\frac{1-e^{-i(n+1)x}}{1-e^{-ix}}" display="inline"><mrow><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mfrac></mstyle></mrow><mo>−</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex69.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex69.m2" class="ltx_Math" alttext="\displaystyle\frac{1}{e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}\left((e^{i(n+1)x}-%
+1)-(1-e^{-i(n+1)x})\right)" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex70.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex70.m2" class="ltx_Math" alttext="\displaystyle\frac{1}{e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}\left(e^{i(n+1)x}+e%
+^{-i(n+1)x}-2\right)" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></msup><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>−</mo><mn>2</mn></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex71.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex71.m2" class="ltx_Math" alttext="\displaystyle\frac{1}{e^{i\frac{1}{2}x}-e^{-i\frac{1}{2}x}}\left(e^{i\frac{n+1%
+}{2}x}-e^{-i\frac{n+1}{2}x}\right)^{2}" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mfrac></mstyle><mo>⁢</mo><msup><mrow><mo>(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+</tbody>
+</table>
+<p class="ltx_p">から第三式がわかる。
+そして</p>
+<table id="Sx1.EGx7" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="Sx1.Ex77">
+<tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="Sx1.Ex72.m1" class="ltx_Math" alttext="\displaystyle\sum_{n=-\infty}^{\infty}r^{|n|}e^{inx}" display="inline"><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>n</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><msup><mi>r</mi><mrow><mo stretchy="false">|</mo><mi>n</mi><mo stretchy="false">|</mo></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex72.m2" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex72.m3" class="ltx_Math" alttext="\displaystyle\sum_{k=-\infty}^{-1}r^{|n|}e^{inx}+1+\sum_{k=1}^{\infty}r^{n}e^{inx}" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></mrow><mrow><mo>−</mo><mn>1</mn></mrow></munderover></mstyle><mrow><msup><mi>r</mi><mrow><mo stretchy="false">|</mo><mi>n</mi><mo stretchy="false">|</mo></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo>+</mo><mn>1</mn><mo>+</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><msup><mi>r</mi><mi>n</mi></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex73.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex73.m2" class="ltx_Math" alttext="\displaystyle\sum_{k=1}^{\infty}r^{n}e^{-inx}+1+\sum_{k=1}^{\infty}r^{n}e^{inx}" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><msup><mi>r</mi><mi>n</mi></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mrow><mo>+</mo><mn>1</mn><mo>+</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></munderover></mstyle><mrow><msup><mi>r</mi><mi>n</mi></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex74.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex74.m2" class="ltx_Math" alttext="\displaystyle\frac{re^{-ix}}{1-re^{-ix}}+\frac{re^{ix}}{1-re^{ix}}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mrow></mfrac></mstyle><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex75.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex75.m2" class="ltx_Math" alttext="\displaystyle\frac{re^{-ix}(1-re^{ix})+re^{ix}1-re^{-ix}}{(1-re^{-ix})(1-re^{%
+ix})}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><mrow><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>⁢</mo><mn>1</mn></mrow></mrow><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex76.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex76.m2" class="ltx_Math" alttext="\displaystyle\frac{re^{-ix}-r^{2}+re^{ix}-r^{2}}{1-r(e^{ix}+e^{-ix})+r^{2}}+1" display="inline"><mrow><mstyle displaystyle="true"><mfrac><mrow><mrow><mrow><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mo>+</mo><mrow><mi>r</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup></mrow></mrow><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>e</mi><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></msup><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></msup></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac></mstyle><mo>+</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+<tr class="ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="Sx1.Ex77.m1" class="ltx_Math" alttext="\displaystyle=" display="inline"><mo>=</mo></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="Sx1.Ex77.m2" class="ltx_Math" alttext="\displaystyle\frac{1-r^{2}}{1-2r\cos x+r^{2}}" display="inline"><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><mi>r</mi><mo lspace="0.167em">⁢</mo><mrow><mi>cos</mi><mo lspace="0.167em">⁡</mo><mi>x</mi></mrow></mrow></mrow><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></mfrac></mstyle></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr>
+</tbody>
+</table>
+<p class="ltx_p">から第四式がわかる。
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">伊藤清三,ルベーグ積分入門,数学選書4,裳華房,1963
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">エアリス・M・スタイン、ラミ・シャカルチ著、新井仁之・杉本充・高木啓行・千原浩之訳、フーリエ解析（プリンストン解析学講義）,日本評論社,2007
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">黒田成俊,関数解析,共立数学講座15,共立出版,1980
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:29:04 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

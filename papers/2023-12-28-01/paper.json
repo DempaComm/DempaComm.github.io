@@ -31,7 +31,8 @@
   ],
   "build": {
     "enabled": false,
-    "engine": "platex"
+    "engine": "platex",
+    "root": "copy/bundles.tex"
   },
   "files": [
     {
@@ -72,7 +73,7 @@
       "label": "修正版TeXソース",
       "public": true,
       "original_sha256": "854630ef52ee81be671363fa2ebccfbdab03f15d928e4d64c65c7779c4f82e3a",
-      "sha256": "854630ef52ee81be671363fa2ebccfbdab03f15d928e4d64c65c7779c4f82e3a"
+      "sha256": "d0605fb784071056f72447d3d37eeef19657c209bb8b425f77c5639566c2fb0a"
     },
     {
       "path": "copy/bundles.pdf",
@@ -97,9 +98,45 @@
       "public": true,
       "original_sha256": "ccdacb434c1a5877b5d36f49286dee8b4d72fd8777f6dc0b216be5f2fe31ac6e",
       "sha256": "ccdacb434c1a5877b5d36f49286dee8b4d72fd8777f6dc0b216be5f2fe31ac6e"
+    },
+    {
+      "path": "html/LaTeXML.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4",
+      "sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4"
+    },
+    {
+      "path": "html/index.html",
+      "role": "derived-html",
+      "label": "HTML版を読む（自動変換・未目視）",
+      "public": true,
+      "original_sha256": "475de78e9dc36d60df2c696360a9bf370ff3fd0f6add534d7d506598f1f63bff",
+      "sha256": "475de78e9dc36d60df2c696360a9bf370ff3fd0f6add534d7d506598f1f63bff"
+    },
+    {
+      "path": "html/ltx-article.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102",
+      "sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102"
     }
   ],
-  "approved_changes": [],
+  "approved_changes": [
+    {
+      "approved_at": "2026-07-26T10:32:31+00:00",
+      "reason": "LaTeXML変換で判明した明白なTeX誤記の修正",
+      "files": [
+        {
+          "path": "copy/bundles.tex",
+          "from_sha256": "854630ef52ee81be671363fa2ebccfbdab03f15d928e4d64c65c7779c4f82e3a",
+          "to_sha256": "d0605fb784071056f72447d3d37eeef19657c209bb8b425f77c5639566c2fb0a"
+        }
+      ]
+    }
+  ],
   "privacy_reviews": [
     {
       "path": "pppp/bundleshippai.tex",
@@ -135,11 +172,11 @@
     },
     {
       "path": "copy/bundles.tex",
-      "status": "overridden",
-      "reason": "全TeX、完成PDF全20ページの画像、構成元PDF、PDFメタデータを確認済み。画像化の日本語フォント警告はあるが、著者表示は公開可確認済みの筆名「ナンブ キトラ」のみで、メール・所属・住所・本名はない。",
-      "source_sha256": "854630ef52ee81be671363fa2ebccfbdab03f15d928e4d64c65c7779c4f82e3a",
+      "status": "reviewed",
+      "reason": "",
+      "source_sha256": "d0605fb784071056f72447d3d37eeef19657c209bb8b425f77c5639566c2fb0a",
       "inspection_status": "completed",
-      "recorded_at": "2026-07-16T10:35:20+00:00"
+      "recorded_at": "2026-07-26T10:32:31+00:00"
     },
     {
       "path": "copy/bundles.pdf",
@@ -149,5 +186,16 @@
       "inspection_status": "failed",
       "recorded_at": "2026-07-16T10:35:20+00:00"
     }
-  ]
+  ],
+  "html_version": {
+    "status": "automatic",
+    "generator": "LaTeXML",
+    "generator_version": "latexmlc (LaTeXML version 0.8.8)",
+    "generated_at": "2026-07-26T19:31:35+09:00",
+    "source_path": "copy/bundles.tex",
+    "source_sha256": "d0605fb784071056f72447d3d37eeef19657c209bb8b425f77c5639566c2fb0a",
+    "path": "html/index.html",
+    "label": "HTML版を読む（自動変換・未目視）",
+    "reviewed_at": "2026-07-26T19:33:43+09:00"
+  }
 }

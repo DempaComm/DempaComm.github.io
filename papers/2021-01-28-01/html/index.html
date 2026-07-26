@@ -1,0 +1,1118 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Tonelli–Shanks Algorithm</title>
+<!--Generated on Sun Jul 26 19:30:36 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2021-01-28-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>The Tonelli-Shanks algorithmのLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../TS.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">Tonelli–Shanks Algorithm</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では，有限素体で平方剰余になっている元の平方根を求める
+アルゴリズムであるTonelli–Shanksのアルゴリズムと，
+このアルゴリズムの<math id="p1.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>乗根への一般化を解説する.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>オイラーの規準</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を素数とし，
+<math id="S1.p1.m2" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>とする．
+このとき<math id="S1.p1.m3" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が
+<em class="ltx_emph ltx_font_italic">法<math id="S1.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S1.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余</em>
+であるとは
+ある<math id="S1.p1.m6" class="ltx_Math" alttext="b\in\mathbb{Z}" display="inline"><mrow><mi>b</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が存在して</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="b^{r}\equiv a\ \mod p" display="block"><mrow><msup><mi>b</mi><mi>r</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるときにいう．
+<math id="S1.p1.m7" class="ltx_Math" alttext="r=2,3" display="inline"><mrow><mi>r</mi><mo>=</mo><mrow><mn>2</mn><mo>,</mo><mn>3</mn></mrow></mrow></math>のときはそれぞれ平方剰余
+と立方剰余と呼ばれる．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">このセクションでは法<math id="S1.p2.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>において
+<math id="S1.p2.m2" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が<math id="S1.p2.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余になるための必要十分条件を
+与えるオイラーの規準を紹介する．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">まず重要なフェルマーの小定理を紹介する．
+証明は省略する．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>とする．このとき</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="a^{p-1}\equiv 1\ \mod p" display="block"><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">以下の命題がオイラーの規準である．
+通常は<math id="S1.p4.m1" class="ltx_Math" alttext="r=2" display="inline"><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow></math>の場合の命題をそのように呼ぶ．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>とする．
+このとき<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が法<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余であることと，</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="a^{\frac{p-1}{\gcd(p-1,r)}}\equiv 1\ \mod p" display="block"><mrow><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つことは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S1.p5.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>が法<math id="S1.p5.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S1.p5.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余であると仮定する．
+このとき<math id="S1.p5.m4" class="ltx_Math" alttext="b^{r}\equiv a\ \mod p" display="inline"><mrow><msup><mi>b</mi><mi>r</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>となる<math id="S1.p5.m5" class="ltx_Math" alttext="b\in\mathbb{Z}" display="inline"><mrow><mi>b</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>
+が存在する．
+するとフェルマーの小定理より</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="a^{\frac{p-1}{\gcd(p-1,r)}}\equiv b^{\frac{r}{\gcd(p-1,r)}(p-1)}\equiv 1\ \mod
+p" display="block"><mrow><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></msup><mo>≡</mo><msup><mi>b</mi><mrow><mfrac><mi>r</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立ち，定理の前半が証明された．
+後半を示そう．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S1.p6.m1" class="ltx_Math" alttext="\gcd(p-1,r)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+の場合に証明をする．
+このとき
+<math id="S1.p6.m2" class="ltx_Math" alttext="(p-1)/\gcd(p-1,r)=p-1" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+なのでフェルマーの小定理から，
+任意の<math id="S1.p6.m3" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が法<math id="S1.p6.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S1.p6.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余であることを示せば良い．
+さて今の状況で
+<math id="S1.p6.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>と<math id="S1.p6.m7" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>
+が互いに素なので，
+<math id="S1.p6.m8" class="ltx_Math" alttext="h\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>h</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>が存在して</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="hr\equiv 1\ \mod p-1" display="block"><mrow><mrow><mi>h</mi><mo>⁢</mo><mi>r</mi></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+このときフェルマーの小定理より<math id="S1.p6.m9" class="ltx_Math" alttext="a^{h}" display="inline"><msup><mi>a</mi><mi>h</mi></msup></math>が
+法<math id="S1.p6.m10" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S1.p6.m11" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="S1.p6.m12" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根になる．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">次に<math id="S1.p7.m1" class="ltx_Math" alttext="\gcd(p-1,r)\neq 1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mn>1</mn></mrow></math>の場合を証明する．
+<math id="S1.p7.m2" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>を法<math id="S1.p7.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における原始根とし，
+<math id="S1.p7.m4" class="ltx_Math" alttext="k\in\{0,1,\dots,p-1\}" display="inline"><mrow><mi>k</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>を用いて
+<math id="S1.p7.m5" class="ltx_Math" alttext="g^{k}\equiv a\ \mod p" display="inline"><mrow><msup><mi>g</mi><mi>k</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+となっているとする．
+このとき</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="a^{\frac{p-1}{\gcd(p-1,r)}}\equiv g^{k\frac{p-1}{\gcd(p-1,r)}}\equiv 1\ \mod p" display="block"><mrow><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></msup><mo>≡</mo><msup><mi>g</mi><mrow><mi>k</mi><mo>⁢</mo><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+<math id="S1.p7.m6" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の法<math id="S1.p7.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における位数は
+<math id="S1.p7.m8" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>なので，
+<math id="S1.p7.m9" class="ltx_Math" alttext="k\frac{p-1}{\gcd(p-1,r)}" display="inline"><mrow><mi>k</mi><mo>⁢</mo><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math>は
+<math id="S1.p7.m10" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の倍数である．
+よって<math id="S1.p7.m11" class="ltx_Math" alttext="m=\frac{k}{\gcd(p-1,r)}" display="inline"><mrow><mi>m</mi><mo>=</mo><mfrac><mi>k</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math>
+は整数であり，特に<math id="S1.p7.m12" class="ltx_Math" alttext="k=m\gcd(p-1,r)" display="inline"><mrow><mi>k</mi><mo>=</mo><mrow><mi>m</mi><mo lspace="0.167em">⁢</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とかける．
+さて，今<math id="S1.p7.m13" class="ltx_Math" alttext="r/(\gcd(p-1,r))" display="inline"><mrow><mi>r</mi><mo>/</mo><mrow><mo stretchy="false">(</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S1.p7.m14" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>と互いに素なので，
+ある<math id="S1.p7.m15" class="ltx_Math" alttext="h\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>h</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+が存在して<math id="S1.p7.m16" class="ltx_Math" alttext="hr/(\gcd(p-1,r))\equiv 1\ \mod p-1" display="inline"><mrow><mrow><mrow><mi>h</mi><mo>⁢</mo><mi>r</mi></mrow><mo>/</mo><mrow><mo stretchy="false">(</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></mrow></math>
+となる．
+上で得られた<math id="S1.p7.m17" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>と<math id="S1.p7.m18" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>を使って，
+<math id="S1.p7.m19" class="ltx_Math" alttext="b=g^{mh}" display="inline"><mrow><mi>b</mi><mo>=</mo><msup><mi>g</mi><mrow><mi>m</mi><mo>⁢</mo><mi>h</mi></mrow></msup></mrow></math>と定義する．
+するとフェルマーの小定理から</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="b^{r}\equiv g^{mhr}\equiv g^{m\gcd(p-1,r)\cdot h\frac{r}{\gcd(p-1,r)}}\equiv g%
+^{k\cdot h\frac{r}{\gcd(p-1,r)}}\equiv a^{h\frac{r}{\gcd(p-1,r)}}\equiv a\ \mod
+p" display="block"><mrow><msup><mi>b</mi><mi>r</mi></msup><mo>≡</mo><msup><mi>g</mi><mrow><mi>m</mi><mo>⁢</mo><mi>h</mi><mo>⁢</mo><mi>r</mi></mrow></msup><mo>≡</mo><msup><mi>g</mi><mrow><mrow><mrow><mi>m</mi><mo lspace="0.167em">⁢</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.222em">⋅</mo><mi>h</mi></mrow><mo>⁢</mo><mfrac><mi>r</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></msup><mo>≡</mo><msup><mi>g</mi><mrow><mrow><mi>k</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>h</mi></mrow><mo>⁢</mo><mfrac><mi>r</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></msup><mo>≡</mo><msup><mi>a</mi><mrow><mi>h</mi><mo>⁢</mo><mfrac><mi>r</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので，<math id="S1.p7.m20" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>が求めている
+<math id="S1.p7.m21" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="S1.p7.m22" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S1.p7.m23" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">命題<a href="#Thmthm2" title="命題 2. ‣ 1 オイラーの規準 ‣ Tonelli–Shanks Algorithm" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の証明の後半は
+<math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmrmkx1.p1.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求める手順になっている．
+しかし原始根を使っているので<math id="Thmrmkx1.p1.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が大きいときには
+(証明には使えるが)
+とても計算には使えない手順になっている．
+法<math id="Thmrmkx1.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における冪乗根の計算では
+如何に原始根を用いずに計算するかが重要になっていくる．</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Tonelli–Shanksのアルゴリズム</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">このセクションでは
+有限素体における平方根を求めるアルゴリズムの一つである
+Tonelli–Shanksのアルゴリズムの理論的背景と，アルゴリズムを紹介する．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">以下の補題がTonelli-Shanksのアルゴリズムの理論的支柱である．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を奇素数とし，<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="s\in\mathbb{N}" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>と奇数<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="p-1=2^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mn>2</mn><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>を満たすとする．
+<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を法<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方非剰余とする．
+<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="1\leq i&lt;s" display="inline"><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>s</mi></mrow></math>として，
+<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="t\in\mathbb{Z}" display="inline"><mrow><mi>t</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>は法<math id="Thmthm3.p1.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm3.p1.m10" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm3.p1.m11" class="ltx_Math" alttext="2^{s-i}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であり，
+なおかつ法<math id="Thmthm3.p1.m12" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm3.p1.m13" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm3.p1.m14" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根ではないとする．
+このとき<math id="Thmthm3.p1.m15" class="ltx_Math" alttext="b=z^{2^{i-1}d}" display="inline"><mrow><mi>b</mi><mo>=</mo><msup><mi>z</mi><mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>とすると
+<math id="Thmthm3.p1.m16" class="ltx_Math" alttext="tb^{2}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></math>は<math id="Thmthm3.p1.m17" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm3.p1.m18" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p"><math id="S2.p3.m1" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は法<math id="S2.p3.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+<math id="S2.p3.m3" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S2.p3.m4" class="ltx_Math" alttext="2^{s-i}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であるということは，
+<math id="S2.p3.m5" class="ltx_Math" alttext="t^{2^{s-i-1}}" display="inline"><msup><mi>t</mi><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup></math>は法<math id="S2.p3.m6" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S2.p3.m7" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の平方根である．
+仮定からこの値は法<math id="S2.p3.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>で<math id="S2.p3.m9" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>に合同である．
+今，オイラーの規準から，</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="z^{\frac{p-1}{2}}\equiv z^{2^{s-1}d}\equiv-1\ \mod p" display="block"><mrow><msup><mi>z</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></msup><mo>≡</mo><msup><mi>z</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo>≡</mo><mrow><mrow><mo>−</mo><mn>1</mn></mrow><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であることに注意すると，</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="(tb^{2})^{2^{s-i-1}}\equiv t^{2^{s-i-1}}z^{2^{s-1}d}\equiv(-1)(-1)\equiv 1\ \mod
+p" display="block"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mo stretchy="false">)</mo></mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>≡</mo><mrow><msup><mi>t</mi><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>⁢</mo><msup><mi>z</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S2.p3.m10" class="ltx_Math" alttext="tb^{2}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></math>は法<math id="S2.p3.m11" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>で<math id="S2.p3.m12" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S2.p3.m13" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根である．
+∎</p>
+</div>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">この補題<a href="#Thmthm3" title="補題 3. ‣ 2 Tonelli–Shanksのアルゴリズム ‣ Tonelli–Shanks Algorithm" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>を用いて
+法<math id="S2.p4.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方剰余の平方根を求めるアルゴリズムが
+Tonelli–Shanksのアルゴリズムである．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_kou">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">考察 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，
+<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を法<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方剰余とする．
+このとき<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方根を求めたい．</span></p>
+</div>
+<div id="Thmthm4.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">最初に<math id="Thmthm4.p2.m1" class="ltx_Math" alttext="p-1=2^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mn>2</mn><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>となるような<math id="Thmthm4.p2.m2" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>と奇数<math id="Thmthm4.p2.m3" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>を求める．</span></p>
+</div>
+<div id="Thmthm4.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に平方非剰余<math id="Thmthm4.p3.m1" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を適当に取ってくる．
+<math id="Thmthm4.p3.m2" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>から<math id="Thmthm4.p3.m3" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>までの間にはこのような数は<math id="Thmthm4.p3.m4" class="ltx_Math" alttext="(p-1)/2" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></math>個あるので，
+結構な確率で取ってこれる．</span></p>
+</div>
+<div id="Thmthm4.p4" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に<math id="Thmthm4.p4.m1" class="ltx_Math" alttext="R=a^{\frac{1+d}{2}}" display="inline"><mrow><mi>R</mi><mo>=</mo><msup><mi>a</mi><mfrac><mrow><mn>1</mn><mo>+</mo><mi>d</mi></mrow><mn>2</mn></mfrac></msup></mrow></math>とおく．<math id="Thmthm4.p4.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は奇数なので
+<math id="Thmthm4.p4.m3" class="ltx_Math" alttext="1+d/2" display="inline"><mrow><mn>1</mn><mo>+</mo><mrow><mi>d</mi><mo>/</mo><mn>2</mn></mrow></mrow></math>はちゃんと整数になっている．
+すると</span></p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="R^{2}=a^{1+d}=a\cdot a^{d}\ \mod p" display="block"><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mrow><mn>1</mn><mo>+</mo><mi>d</mi></mrow></msup><mo>=</mo><mrow><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>a</mi><mi>d</mi></msup></mrow><mo>mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる．
+<math id="Thmthm4.p4.m4" class="ltx_Math" alttext="t=a^{d}" display="inline"><mrow><mi>t</mi><mo>=</mo><msup><mi>a</mi><mi>d</mi></msup></mrow></math>とおく．
+もしも<math id="Thmthm4.p4.m5" class="ltx_Math" alttext="t\equiv 1\ \mod p" display="inline"><mrow><mi>t</mi><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+ならば
+<math id="Thmthm4.p4.m6" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm4.p4.m7" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm4.p4.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+平方根
+になっている．
+しかし一般にはこういう風にはなっていない．
+一般の場合も<math id="Thmthm4.p4.m9" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>の値を修正して，<math id="Thmthm4.p4.m10" class="ltx_Math" alttext="t\equiv 1" display="inline"><mrow><mi>t</mi><mo>≡</mo><mn>1</mn></mrow></math>となる理想的な
+ケースを目指すことを考える．
+まず，<math id="Thmthm4.p4.m11" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は平方剰余なので，オイラーの規準から</span></p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="t^{2^{s-1}}\equiv a^{\frac{p-1}{2}}\equiv 1\ \mod p" display="block"><mrow><msup><mi>t</mi><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>≡</mo><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">なので，<math id="Thmthm4.p4.m12" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は法<math id="Thmthm4.p4.m13" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p4.m14" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p4.m15" class="ltx_Math" alttext="2^{s-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根になっている．
+<math id="Thmthm4.p4.m16" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が法<math id="Thmthm4.p4.m17" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p4.m18" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p4.m19" class="ltx_Math" alttext="2^{s-s}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>s</mi></mrow></msup></math>乗根，すなわち<math id="Thmthm4.p4.m20" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>乗根
+ならば，<math id="Thmthm4.p4.m21" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は<math id="Thmthm4.p4.m22" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>に合同なので，<math id="Thmthm4.p4.m23" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm4.p4.m24" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm4.p4.m25" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+平方根である．
+<math id="Thmthm4.p4.m26" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>がそうではないとすると，
+次のような<math id="Thmthm4.p4.m27" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>を見つけることができる:
+<math id="Thmthm4.p4.m28" class="ltx_Math" alttext="1\leq i&lt;s" display="inline"><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>s</mi></mrow></math>であり，<math id="Thmthm4.p4.m29" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は法<math id="Thmthm4.p4.m30" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p4.m31" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p4.m32" class="ltx_Math" alttext="2^{s-i}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であるが，
+<math id="Thmthm4.p4.m33" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根ではない．
+よって，補題<a href="#Thmthm3" title="補題 3. ‣ 2 Tonelli–Shanksのアルゴリズム ‣ Tonelli–Shanks Algorithm" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>を適応することによって，
+<math id="Thmthm4.p4.m34" class="ltx_Math" alttext="b=z^{2^{i-1}d}" display="inline"><mrow><mi>b</mi><mo>=</mo><msup><mi>z</mi><mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>とすると，
+<math id="Thmthm4.p4.m35" class="ltx_Math" alttext="tb^{2}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></math>は法<math id="Thmthm4.p4.m36" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p4.m37" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p4.m38" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根である．
+よって，<math id="Thmthm4.p4.m39" class="ltx_Math" alttext="R^{\prime}=Rb" display="inline"><mrow><msup><mi>R</mi><mo>′</mo></msup><mo>=</mo><mrow><mi>R</mi><mo>⁢</mo><mi>b</mi></mrow></mrow></math>と値を修正すると，</span></p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="(R^{\prime})^{2}\equiv a\cdot tb^{2}\mod p" display="block"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mi>R</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>≡</mo><mrow><mrow><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>t</mi></mrow><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mo>mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる．<math id="Thmthm4.p4.m40" class="ltx_Math" alttext="t^{\prime}=tb^{2}" display="inline"><mrow><msup><mi>t</mi><mo>′</mo></msup><mo>=</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></mrow></math>とすると，
+<math id="Thmthm4.p4.m41" class="ltx_Math" alttext="t^{\prime}" display="inline"><msup><mi>t</mi><mo>′</mo></msup></math>は法<math id="Thmthm4.p4.m42" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p4.m43" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p4.m44" class="ltx_Math" alttext="2^{s-i-1}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根になっている．</span></p>
+</div>
+<div id="Thmthm4.p5" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以上の操作は
+<math id="Thmthm4.p5.m1" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が法<math id="Thmthm4.p5.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm4.p5.m3" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm4.p5.m4" class="ltx_Math" alttext="2^{s-s}" display="inline"><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>s</mi></mrow></msup></math>乗根，すなわち，
+<math id="Thmthm4.p5.m5" class="ltx_Math" alttext="t\equiv 1\ \mod p" display="inline"><mrow><mi>t</mi><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>となるまで続けることができ，
+そのときの<math id="Thmthm4.p5.m6" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm4.p5.m7" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm4.p5.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方根である．</span></p>
+</div>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">以上の操作を疑似コードにして表したのが次である．</p>
+</div>
+<figure id="alg1" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span class="ltx_text ltx_font_bold">Algorithm 1</span> </span> Solving <math id="alg1.m2" class="ltx_Math" alttext="x^{2}\equiv a\ \mod p" display="inline"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></figcaption>
+<div class="ltx_listing ltx_listing">
+<div id="alg1.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span class="ltx_text" style="font-size:80%;">0:</span></span>  <math id="alg1.l0.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>:integer and <math id="alg1.l0.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>:prime
+
+</div>
+<div id="alg1.l1" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">if</span> <math id="alg1.l1.m1" class="ltx_Math" alttext="p=2" display="inline"><mrow><mi>p</mi><mo>=</mo><mn>2</mn></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg1.l2" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">return</span>  <math id="alg1.l2.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>
+
+</div>
+<div id="alg1.l3" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg1.l4" class="ltx_listingline">  Take <math id="alg1.l4.m1" class="ltx_Math" alttext="s\geq 1" display="inline"><mrow><mi>s</mi><mo>≥</mo><mn>1</mn></mrow></math> and an odd number <math id="alg1.l4.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>
+with <math id="alg1.l4.m3" class="ltx_Math" alttext="p-1=2^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mn>2</mn><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>
+
+</div>
+<div id="alg1.l5" class="ltx_listingline">  Take <math id="alg1.l5.m1" class="ltx_Math" alttext="z\in\mathbb{Z}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>ℤ</mi></mrow></math> s.t. <math id="alg1.l5.m2" class="ltx_Math" alttext="z^{\frac{p-1}{2}}\not\equiv 1\pmod{p}" display="inline"><mrow><msup><mi>z</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></msup><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg1.l6" class="ltx_listingline">  <math id="alg1.l6.m1" class="ltx_Math" alttext="M\leftarrow s" display="inline"><mrow><mi>M</mi><mo stretchy="false">←</mo><mi>s</mi></mrow></math>
+
+</div>
+<div id="alg1.l7" class="ltx_listingline">  <math id="alg1.l7.m1" class="ltx_Math" alttext="R\leftarrow a^{\frac{1+d}{2}}" display="inline"><mrow><mi>R</mi><mo stretchy="false">←</mo><msup><mi>a</mi><mfrac><mrow><mn>1</mn><mo>+</mo><mi>d</mi></mrow><mn>2</mn></mfrac></msup></mrow></math>
+
+</div>
+<div id="alg1.l8" class="ltx_listingline">  <math id="alg1.l8.m1" class="ltx_Math" alttext="t\leftarrow a^{d}" display="inline"><mrow><mi>t</mi><mo stretchy="false">←</mo><msup><mi>a</mi><mi>d</mi></msup></mrow></math>
+
+</div>
+<div id="alg1.l9" class="ltx_listingline">  <math id="alg1.l9.m1" class="ltx_Math" alttext="c\leftarrow z^{d}" display="inline"><mrow><mi>c</mi><mo stretchy="false">←</mo><msup><mi>z</mi><mi>d</mi></msup></mrow></math>
+
+</div>
+<div id="alg1.l10" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">while</span> <math id="alg1.l10.m1" class="ltx_Math" alttext="M\not=0" display="inline"><mrow><mi>M</mi><mo>≠</mo><mn>0</mn></mrow></math> <span class="ltx_text ltx_font_bold">do</span>
+
+
+
+</div>
+<div id="alg1.l11" class="ltx_listingline">     Take the least <math id="alg1.l11.m1" class="ltx_Math" alttext="i\in\{1,\dots,s-1\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math> such that
+<math id="alg1.l11.m2" class="ltx_Math" alttext="t^{2^{i}}\equiv 1\ \mod p" display="inline"><mrow><msup><mi>t</mi><msup><mn>2</mn><mi>i</mi></msup></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg1.l12" class="ltx_listingline">     <math id="alg1.l12.m1" class="ltx_Math" alttext="b\leftarrow c^{2^{M-i-1}}" display="inline"><mrow><mi>b</mi><mo stretchy="false">←</mo><msup><mi>c</mi><msup><mn>2</mn><mrow><mi>M</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup></mrow></math>
+
+</div>
+<div id="alg1.l13" class="ltx_listingline">     <math id="alg1.l13.m1" class="ltx_Math" alttext="M\leftarrow i" display="inline"><mrow><mi>M</mi><mo stretchy="false">←</mo><mi>i</mi></mrow></math>
+
+</div>
+<div id="alg1.l14" class="ltx_listingline">     <math id="alg1.l14.m1" class="ltx_Math" alttext="c\leftarrow b^{2}" display="inline"><mrow><mi>c</mi><mo stretchy="false">←</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></math>
+
+</div>
+<div id="alg1.l15" class="ltx_listingline">     <math id="alg1.l15.m1" class="ltx_Math" alttext="R\leftarrow Rb" display="inline"><mrow><mi>R</mi><mo stretchy="false">←</mo><mrow><mi>R</mi><mo>⁢</mo><mi>b</mi></mrow></mrow></math>
+
+</div>
+<div id="alg1.l16" class="ltx_listingline">     <math id="alg1.l16.m1" class="ltx_Math" alttext="t\leftarrow tb^{2}" display="inline"><mrow><mi>t</mi><mo stretchy="false">←</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></mrow></math>
+
+</div>
+<div id="alg1.l17" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">while</span>
+</div>
+<div id="alg1.l18" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">return</span>  <math id="alg1.l18.m1" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>
+
+</div>
+</div>
+</figure>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">考察では<math id="S2.p6.m1" class="ltx_Math" alttext="t^{2^{s-i}}\equiv 1" display="inline"><mrow><msup><mi>t</mi><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></msup><mo>≡</mo><mn>1</mn></mrow></math>となる最大の<math id="S2.p6.m2" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>
+を取ってきたが，<math id="S2.p6.m3" class="ltx_Math" alttext="t^{2^{i}}\equiv 1" display="inline"><mrow><msup><mi>t</mi><msup><mn>2</mn><mi>i</mi></msup></msup><mo>≡</mo><mn>1</mn></mrow></math>となる最小の<math id="S2.p6.m4" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>を見つける方が
+計算量が少なくて済むのでそのように修正している．このコードはwikipediaの
+Tonelli–Shanksのページを大いに参考にした．</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">以上で説明したアルゴリズムは
+ある種伝統的なアルゴリズムであったが，
+次の補題を利用しても
+平方根を求めることができる．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を奇素数とし，
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="s\in\mathbb{Z}_{\geq 2}" display="inline"><mrow><mi>s</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>2</mn></mrow></msub></mrow></math>と奇数<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="p-1=2^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mn>2</mn><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>を満たすとする．
+<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を法<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方非剰余とする．
+そして<math id="Thmthm5.p1.m7" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を法<math id="Thmthm5.p1.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における平方剰余とする．
+このとき，<math id="Thmthm5.p1.m9" class="ltx_Math" alttext="m\in\mathbb{Z}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が存在して
+<math id="Thmthm5.p1.m10" class="ltx_Math" alttext="a^{d}z^{2md}\equiv 1\ \mod p" display="inline"><mrow><mrow><msup><mi>a</mi><mi>d</mi></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mn>2</mn><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+となる．
+この<math id="Thmthm5.p1.m11" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>を用いると，
+<math id="Thmthm5.p1.m12" class="ltx_Math" alttext="a^{\frac{1+d}{2}}z^{md}" display="inline"><mrow><msup><mi>a</mi><mfrac><mrow><mn>1</mn><mo>+</mo><mi>d</mi></mrow><mn>2</mn></mfrac></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>m</mi><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>
+は法<math id="Thmthm5.p1.m13" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm5.p1.m14" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の平方根の一つである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">補題の後半は自乗すれば直ちにわかる．
+前半を示す．
+もし<math id="S2.p8.m1" class="ltx_Math" alttext="s=1" display="inline"><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow></math>
+ならば，オイラーの規準より<math id="S2.p8.m2" class="ltx_Math" alttext="m=0" display="inline"><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow></math>とすれば条件を満たすので，
+以下では<math id="S2.p8.m3" class="ltx_Math" alttext="s\geq 2" display="inline"><mrow><mi>s</mi><mo>≥</mo><mn>2</mn></mrow></math>とする．
+<math id="S2.p8.m4" class="ltx_Math" alttext="\{0,1\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></math>に値をとる点列<math id="S2.p8.m5" class="ltx_Math" alttext="\{c_{i}\}_{i=0}^{s-2}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msubsup></math>
+を任意の<math id="S2.p8.m6" class="ltx_Math" alttext="n\in\{0,1,\dots,s-2\}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>について</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="a^{2^{s-n-2}d}\cdot z^{(2^{s-n-1}c_{0}+2^{s-n}c_{1}+\dots+2^{s-2}c_{n-1}+2^{s-%
+1}c_{n})d}\equiv 1\ \mod p" display="block"><mrow><mrow><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mi>n</mi></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たすように帰納的に以下のように定める．
+まず，<math id="S2.p8.m7" class="ltx_Math" alttext="c_{0}" display="inline"><msub><mi>c</mi><mn>0</mn></msub></math>を定義する．
+オイラーの規準から<math id="S2.p8.m8" class="ltx_Math" alttext="a^{2^{s-1}d}\equiv 1\ \mod p" display="inline"><mrow><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+である．よって<math id="S2.p8.m9" class="ltx_Math" alttext="a^{2^{s-2}d}" display="inline"><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></math>は<math id="S2.p8.m10" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>か<math id="S2.p8.m11" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>に合同である．
+<math id="S2.p8.m12" class="ltx_Math" alttext="a^{2^{s-2}d}" display="inline"><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></math>が<math id="S2.p8.m13" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>に合同ならば<math id="S2.p8.m14" class="ltx_Math" alttext="c_{0}=1" display="inline"><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>=</mo><mn>1</mn></mrow></math>，
+そうでない時は<math id="S2.p8.m15" class="ltx_Math" alttext="c_{0}=0" display="inline"><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow></math>とする．</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">一般に<math id="S2.p9.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>に対して<math id="S2.p9.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>以下の自然数に対して<math id="S2.p9.m3" class="ltx_Math" alttext="c_{i}" display="inline"><msub><mi>c</mi><mi>i</mi></msub></math>が定義されたとしよう．
+このとき，帰納法の仮定から，</p>
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="a^{2^{s-n-1}d}\cdot z^{(2^{s-n}c_{0}+2^{s-n+1}c_{1}+\dots+2^{s-1}c_{n-1})d}%
+\equiv 1\ \mod p" display="block"><mrow><mrow><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mn>2</mn><mrow><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+よって，その平方根である
+<math id="S2.p9.m4" class="ltx_Math" alttext="a^{2^{s-n-2}d}z^{(2^{s-n-1}c_{0}+2^{s-n}c_{1}+\dots+2^{s-2}c_{n-1})d}" display="inline"><mrow><msup><mi>a</mi><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>
+は<math id="S2.p9.m5" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>か<math id="S2.p9.m6" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>に合同である．
+この値がが<math id="S2.p9.m7" class="ltx_Math" alttext="-1" display="inline"><mrow><mo>−</mo><mn>1</mn></mrow></math>に合同ならば<math id="S2.p9.m8" class="ltx_Math" alttext="c_{n}=1" display="inline"><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><mn>1</mn></mrow></math>,
+そうでないときは<math id="S2.p9.m9" class="ltx_Math" alttext="c_{n}=0" display="inline"><mrow><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow></math>と定義する．</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">以上によって<math id="S2.p10.m1" class="ltx_Math" alttext="\{c_{i}\}_{i=1}^{s-2}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msubsup></math>が得られたが，帰納法の仮定と，
+<math id="S2.p10.m2" class="ltx_Math" alttext="c_{s-2}" display="inline"><msub><mi>c</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msub></math>の定義より，</p>
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="a^{d}z^{(2c_{0}+2^{2}c_{1}+\dots+2^{s-1}c_{s-2})d}\equiv 1\ \mod 1" display="block"><mrow><mrow><msup><mi>a</mi><mi>d</mi></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mn>2</mn><mn>2</mn></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mn>1</mn></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">このとき，
+<math id="S2.p10.m3" class="ltx_Math" alttext="m=c_{0}+2c_{1}+\dots+2^{s-2}c_{s-2}" display="inline"><mrow><mi>m</mi><mo>=</mo><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>+</mo><mrow><mn>2</mn><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mn>2</mn><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow></mrow></mrow></math>とすると補題の条件を満たす．
+∎</p>
+</div>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">この補題を使ったアルゴリズムの
+疑似コードを以下に書く．このコードは<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>を大いに参考にした．
+このアルゴリズムはプログラミングの初心者でも
+書きやすいという利点がある．</p>
+</div>
+<figure id="alg2" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span class="ltx_text ltx_font_bold">Algorithm 2</span> </span> Solving <math id="alg2.m2" class="ltx_Math" alttext="x^{2}\equiv a\ \mod p" display="inline"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></figcaption>
+<div class="ltx_listing ltx_listing">
+<div id="alg2.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span class="ltx_text" style="font-size:80%;">0:</span></span>  <math id="alg2.l0.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>:integer and <math id="alg2.l0.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>:prime
+
+</div>
+<div id="alg2.l1" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">if</span> <math id="alg2.l1.m1" class="ltx_Math" alttext="p=2" display="inline"><mrow><mi>p</mi><mo>=</mo><mn>2</mn></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg2.l2" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">return</span>  <math id="alg2.l2.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>
+
+</div>
+<div id="alg2.l3" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg2.l4" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">if</span> <math id="alg2.l4.m1" class="ltx_Math" alttext="a^{\frac{p-1}{2}}\not\equiv 1\pmod{p}" display="inline"><mrow><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></msup><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg2.l5" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">return</span>  Error
+
+</div>
+<div id="alg2.l6" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg2.l7" class="ltx_listingline">  Take <math id="alg2.l7.m1" class="ltx_Math" alttext="z\in\{1,\dots,p-1\}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math> s.t. <math id="alg2.l7.m2" class="ltx_Math" alttext="z^{\frac{p-1}{2}}\not\equiv 1\ \mod p" display="inline"><mrow><msup><mi>z</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></msup><mo>≢</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg2.l8" class="ltx_listingline">  <math id="alg2.l8.m1" class="ltx_Math" alttext="apow\leftarrow p-1" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+
+</div>
+<div id="alg2.l9" class="ltx_listingline">  <math id="alg2.l9.m1" class="ltx_Math" alttext="zpow\leftarrow 0" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mn>0</mn></mrow></math>
+
+</div>
+<div id="alg2.l10" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">while</span> <math id="alg2.l10.m1" class="ltx_Math" alttext="apow" display="inline"><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></math> is even <span class="ltx_text ltx_font_bold">do</span>
+
+
+
+</div>
+<div id="alg2.l11" class="ltx_listingline">     <math id="alg2.l11.m1" class="ltx_Math" alttext="apow\leftarrow apow/2" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mn>2</mn></mrow></mrow></math>
+
+</div>
+<div id="alg2.l12" class="ltx_listingline">     <math id="alg2.l12.m1" class="ltx_Math" alttext="zpow\leftarrow zpow/2" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mn>2</mn></mrow></mrow></math>
+
+</div>
+<div id="alg2.l13" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">if</span> <math id="alg2.l13.m1" class="ltx_Math" alttext="a^{apow}z^{zpow}\not\equiv 1\pmod{p}" display="inline"><mrow><mrow><msup><mi>a</mi><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup></mrow><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg2.l14" class="ltx_listingline">        <math id="alg2.l14.m1" class="ltx_Math" alttext="zpow\leftarrow zpow+(p-1)/2" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg2.l15" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg2.l16" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">while</span>
+</div>
+<div id="alg2.l17" class="ltx_listingline">  <math id="alg2.l17.m1" class="ltx_Math" alttext="apow\leftarrow(apow+1)/2" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></mrow></math>
+
+</div>
+<div id="alg2.l18" class="ltx_listingline">  <math id="alg2.l18.m1" class="ltx_Math" alttext="zpow\leftarrow zpow/2" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mn>2</mn></mrow></mrow></math>
+
+</div>
+<div id="alg2.l19" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">return</span>  <math id="alg2.l19.m1" class="ltx_Math" alttext="a^{apow}z^{zpow}" display="inline"><mrow><msup><mi>a</mi><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup></mrow></math>
+
+</div>
+</div>
+</figure>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>一般の冪根を求めるアルゴリズム(Adleman-Manders-Miler)</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">このセクションでは
+一般の<math id="S3.p1.m1" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math>に対して
+<math id="S3.p1.m2" class="ltx_Math" alttext="\mathbb{F}_{p}" display="inline"><msub><mi>𝔽</mi><mi>p</mi></msub></math>における<math id="S3.p1.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めることを考える．
+まずフェルマーの小定理から次の命題がわかる．
+オイラーの規準の証明の中でも用いていた手法である．
+証明は省略する．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math>とする．
+そして<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\gcd(p-1,r)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>と仮定する．
+このとき法<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>にける<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の逆数を<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>とすると，
+任意の<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="a\in\mathbb{Z}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>の法<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根
+は<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="a^{h}" display="inline"><msup><mi>a</mi><mi>h</mi></msup></math>である．</span></p>
+</div>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">よって以下の考察では，<math id="S3.p2.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は<math id="S3.p2.m2" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数と仮定する命題が多くなる．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数であるとする．
+<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="s\in\mathbb{N}" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>と<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>で割り切れない数<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="p-1=r^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mi>r</mi><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>を満たすとする．
+<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を法<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗非剰余とする．
+<math id="Thmthm7.p1.m11" class="ltx_Math" alttext="1\leq i&lt;s" display="inline"><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>s</mi></mrow></math>として，
+<math id="Thmthm7.p1.m12" class="ltx_Math" alttext="t\in\mathbb{Z}" display="inline"><mrow><mi>t</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>は法<math id="Thmthm7.p1.m13" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm7.p1.m14" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm7.p1.m15" class="ltx_Math" alttext="r^{s-i}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であり，
+なおかつ法<math id="Thmthm7.p1.m16" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm7.p1.m17" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm7.p1.m18" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根ではないとする．
+<math id="Thmthm7.p1.m19" class="ltx_Math" alttext="b=z^{r^{i-1}d}" display="inline"><mrow><mi>b</mi><mo>=</mo><msup><mi>z</mi><mrow><msup><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>とする．
+このときある<math id="Thmthm7.p1.m20" class="ltx_Math" alttext="m\in\{0,1,\dots,p-1\}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>が存在して
+<math id="Thmthm7.p1.m21" class="ltx_Math" alttext="tb^{mr}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow></math>が<math id="Thmthm7.p1.m22" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm7.p1.m23" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根となる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p"><math id="S3.p3.m1" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が法<math id="S3.p3.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+<math id="S3.p3.m3" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p3.m4" class="ltx_Math" alttext="r^{s-i}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であるということは，
+<math id="S3.p3.m5" class="ltx_Math" alttext="t^{r^{s-i-1}}" display="inline"><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup></math>は法<math id="S3.p3.m6" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S3.p3.m7" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p3.m8" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である．
+今オイラーの規準から，
+<math id="S3.p3.m9" class="ltx_Math" alttext="\gamma=z^{\frac{r^{s-1}}{d}}" display="inline"><mrow><mi>γ</mi><mo>=</mo><msup><mi>z</mi><mfrac><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mi>d</mi></mfrac></msup></mrow></math>は
+<math id="S3.p3.m10" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>とは異なる<math id="S3.p3.m11" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p3.m12" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根であり，
+<math id="S3.p3.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は素数なので，<math id="S3.p3.m14" class="ltx_Math" alttext="\{\gamma^{m}\}_{m=0}^{r-1}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msup><mi>γ</mi><mi>m</mi></msup><mo stretchy="false">}</mo></mrow><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow></msubsup></math>
+は<math id="S3.p3.m15" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p3.m16" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を全て含む．
+よって，ある<math id="S3.p3.m17" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>が存在して</p>
+<table id="S3.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex16.m1" class="ltx_Math" alttext="t^{r^{s-i-1}}\cdot\gamma^{m}=1" display="block"><mrow><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>γ</mi><mi>m</mi></msup></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．よって</p>
+<table id="S3.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex17.m1" class="ltx_Math" alttext="(tb^{mr})^{r^{s-i-1}}\equiv t^{r^{s-i-1}}z^{r^{s-1}md}\equiv t^{r^{s-i-1}}%
+\cdot\gamma^{m}\equiv 1\ \mod p" display="block"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow><mo stretchy="false">)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>≡</mo><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>⁢</mo><msup><mi>z</mi><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>γ</mi><mi>m</mi></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S3.p3.m18" class="ltx_Math" alttext="tb^{mr}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow></math>は法<math id="S3.p3.m19" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>で<math id="S3.p3.m20" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p3.m21" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_kou">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">考察 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を自然数とする．
+<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を法<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余とする．
+このとき<math id="Thmthm8.p1.m6" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm8.p1.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p1.m8" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めたい．</span></p>
+</div>
+<div id="Thmthm8.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">まず最初に，
+<math id="Thmthm8.p2.m1" class="ltx_Math" alttext="r/\gcd(p-1,r)" display="inline"><mrow><mi>r</mi><mo>/</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>の法<math id="Thmthm8.p2.m2" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>における逆数を<math id="Thmthm8.p2.m3" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>
+として<math id="Thmthm8.p2.m4" class="ltx_Math" alttext="a^{h}" display="inline"><msup><mi>a</mi><mi>h</mi></msup></math>とするとこれは
+<math id="Thmthm8.p2.m5" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm8.p2.m6" class="ltx_Math" alttext="r/\gcd(p-1,r)" display="inline"><mrow><mi>r</mi><mo>/</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>乗根になっているので，
+<math id="Thmthm8.p2.m7" class="ltx_Math" alttext="a^{h}" display="inline"><msup><mi>a</mi><mi>h</mi></msup></math>の<math id="Thmthm8.p2.m8" class="ltx_Math" alttext="\gcd(p-1,r)" display="inline"><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math>乗根を求めれば
+<math id="Thmthm8.p2.m9" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm8.p2.m10" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根になる．
+よって以下では<math id="Thmthm8.p2.m11" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を<math id="Thmthm8.p2.m12" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の約数とする．</span></p>
+</div>
+<div id="Thmthm8.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に<math id="Thmthm8.p3.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を素因数分解し，
+<math id="Thmthm8.p3.m2" class="ltx_Math" alttext="r=q_{1}q_{2}\dots q_{l}" display="inline"><mrow><mi>r</mi><mo>=</mo><mrow><msub><mi>q</mi><mn>1</mn></msub><mo>⁢</mo><msub><mi>q</mi><mn>2</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>q</mi><mi>l</mi></msub></mrow></mrow></math>
+とする．ここで，<math id="Thmthm8.p3.m3" class="ltx_Math" alttext="q_{i}" display="inline"><msub><mi>q</mi><mi>i</mi></msub></math>たちには重複があっても良い．
+このとき<math id="Thmthm8.p3.m4" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm8.p3.m5" class="ltx_Math" alttext="q_{1}" display="inline"><msub><mi>q</mi><mn>1</mn></msub></math>乗根を求めそれを<math id="Thmthm8.p3.m6" class="ltx_Math" alttext="f_{1}(a)" display="inline"><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>とする．
+そして<math id="Thmthm8.p3.m7" class="ltx_Math" alttext="f_{1}(a)" display="inline"><mrow><msub><mi>f</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>の<math id="Thmthm8.p3.m8" class="ltx_Math" alttext="q_{2}" display="inline"><msub><mi>q</mi><mn>2</mn></msub></math>乗根を<math id="Thmthm8.p3.m9" class="ltx_Math" alttext="f_{2}(f_{1})(a)" display="inline"><mrow><msub><mi>f</mi><mn>2</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>とすると，
+<math id="Thmthm8.p3.m10" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm8.p3.m11" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根は<math id="Thmthm8.p3.m12" class="ltx_Math" alttext="f_{l}\circ f_{l-1}\circ\dots f_{2}\circ f_{1}(a)" display="inline"><mrow><mrow><mrow><mrow><msub><mi>f</mi><mi>l</mi></msub><mo lspace="0.222em" rspace="0.222em">∘</mo><msub><mi>f</mi><mrow><mi>l</mi><mo>−</mo><mn>1</mn></mrow></msub><mo lspace="0.222em" rspace="0.222em">∘</mo><mi mathvariant="normal">…</mi></mrow><mo>⁢</mo><msub><mi>f</mi><mn>2</mn></msub></mrow><mo lspace="0.222em" rspace="0.222em">∘</mo><msub><mi>f</mi><mn>1</mn></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+である．
+よって<math id="Thmthm8.p3.m13" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm8.p3.m14" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めるには<math id="Thmthm8.p3.m15" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を素数としても良い．</span></p>
+</div>
+<div id="Thmthm8.p4" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に<math id="Thmthm8.p4.m1" class="ltx_Math" alttext="p-1=r^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mi>r</mi><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>となるような<math id="Thmthm8.p4.m2" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>と<math id="Thmthm8.p4.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>で割り切れない<math id="Thmthm8.p4.m4" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>を求める．
+<math id="Thmthm8.p4.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は<math id="Thmthm8.p4.m6" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数なので<math id="Thmthm8.p4.m7" class="ltx_Math" alttext="s\geq 1" display="inline"><mrow><mi>s</mi><mo>≥</mo><mn>1</mn></mrow></math>に注意せよ．</span></p>
+</div>
+<div id="Thmthm8.p5" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">次に<math id="Thmthm8.p5.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗非剰余<math id="Thmthm8.p5.m2" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を適当に取ってくる．
+<math id="Thmthm8.p5.m3" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>から<math id="Thmthm8.p5.m4" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>までの間にはこのような数は<math id="Thmthm8.p5.m5" class="ltx_Math" alttext="(r-1)(p-1)/r" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>/</mo><mi>r</mi></mrow></math>個あるので，
+結構な確率で取ってこれる．</span></p>
+</div>
+<div id="Thmthm8.p6" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">さて，次に平方根のときの同様に
+<math id="Thmthm8.p6.m1" class="ltx_Math" alttext="R=a^{\frac{1+d}{r}}" display="inline"><mrow><mi>R</mi><mo>=</mo><msup><mi>a</mi><mfrac><mrow><mn>1</mn><mo>+</mo><mi>d</mi></mrow><mi>r</mi></mfrac></msup></mrow></math>とおきたいところだが，
+<math id="Thmthm8.p6.m2" class="ltx_Math" alttext="d+1" display="inline"><mrow><mi>d</mi><mo>+</mo><mn>1</mn></mrow></math>が<math id="Thmthm8.p6.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の倍数とは全く限らない．
+そこで平方根の場合の議論ではなく，
+<math id="Thmthm8.p6.m4" class="ltx_Math" alttext="\gcd(r,p-1)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>の場合の議論を参考にして
+<math id="Thmthm8.p6.m5" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>の値を定める．
+つまり今の場合には
+<math id="Thmthm8.p6.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の法<math id="Thmthm8.p6.m7" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>における逆数を<math id="Thmthm8.p6.m8" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>として
+<math id="Thmthm8.p6.m9" class="ltx_Math" alttext="R=a^{h}" display="inline"><mrow><mi>R</mi><mo>=</mo><msup><mi>a</mi><mi>h</mi></msup></mrow></math>とする．</span></p>
+<table id="S3.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex18.m1" class="ltx_Math" alttext="R^{r}=a^{rh}=a\cdot a^{rh-1}\ \mod p" display="block"><mrow><msup><mi>R</mi><mi>r</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow></msup><mo>=</mo><mrow><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><mo>mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる．
+<math id="Thmthm8.p6.m10" class="ltx_Math" alttext="t=a^{rh-1}" display="inline"><mrow><mi>t</mi><mo>=</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>とおく．
+もしも<math id="Thmthm8.p6.m11" class="ltx_Math" alttext="t\equiv 1\ \mod p" display="inline"><mrow><mi>t</mi><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+なら<math id="Thmthm8.p6.m12" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm8.p6.m13" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm8.p6.m14" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+<math id="Thmthm8.p6.m15" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根
+になっている．
+しかし一般にはこういう風にはなっていない．
+一般の場合も<math id="Thmthm8.p6.m16" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>の値を修正して，<math id="Thmthm8.p6.m17" class="ltx_Math" alttext="t\equiv 1" display="inline"><mrow><mi>t</mi><mo>≡</mo><mn>1</mn></mrow></math>となる理想的な
+ケースを目指すことを考える．</span></p>
+</div>
+<div id="Thmthm8.p7" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p7.m1" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math><span class="ltx_text ltx_font_italic">の定義から<math id="Thmthm8.p7.m2" class="ltx_Math" alttext="rh-1" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></math>は<math id="Thmthm8.p7.m3" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>の倍数になっているので
+<math id="Thmthm8.p7.m4" class="ltx_Math" alttext="r^{s-1}(rh-1)" display="inline"><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="Thmthm8.p7.m5" class="ltx_Math" alttext="\frac{p-1}{r}" display="inline"><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mi>r</mi></mfrac></math>の倍数になっていることに注意すると
+<math id="Thmthm8.p7.m6" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="Thmthm8.p7.m7" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余なので，
+オイラーの規準から
+<math id="Thmthm8.p7.m8" class="ltx_Math" alttext="t^{r^{s-1}}\equiv a^{r^{s-1}(rh-1)}\equiv 1\ \mod p" display="inline"><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>≡</mo><msup><mi>a</mi><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+がわかる．
+よって<math id="Thmthm8.p7.m9" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は法<math id="Thmthm8.p7.m10" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p7.m11" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p7.m12" class="ltx_Math" alttext="r^{s-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根になっている．
+<math id="Thmthm8.p7.m13" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が法<math id="Thmthm8.p7.m14" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p7.m15" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p7.m16" class="ltx_Math" alttext="r^{s-s}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>s</mi></mrow></msup></math>乗根，
+すなわち<math id="Thmthm8.p7.m17" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>乗根
+ならば<math id="Thmthm8.p7.m18" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は<math id="Thmthm8.p7.m19" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>に合同なので
+<math id="Thmthm8.p7.m20" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm8.p7.m21" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm8.p7.m22" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+平方根である．
+<math id="Thmthm8.p7.m23" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>がそうではないとすると，
+次のような<math id="Thmthm8.p7.m24" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>を見つけることができる:
+<math id="Thmthm8.p7.m25" class="ltx_Math" alttext="1\leq i&lt;s" display="inline"><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>s</mi></mrow></math>であり，<math id="Thmthm8.p7.m26" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は法<math id="Thmthm8.p7.m27" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p7.m28" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p7.m29" class="ltx_Math" alttext="r^{s-i}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></math>乗根であるが，
+<math id="Thmthm8.p7.m30" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根ではない．
+よって，補題<a href="#Thmthm7" title="補題 7. ‣ 3 一般の冪根を求めるアルゴリズム(Adleman-Manders-Miler) ‣ Tonelli–Shanks Algorithm" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>にあるような<math id="Thmthm8.p7.m31" class="ltx_Math" alttext="m\in\{0,1,\dots,p-1\}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+を見つけることができる．
+<math id="Thmthm8.p7.m32" class="ltx_Math" alttext="b=z^{r^{i-1}d}" display="inline"><mrow><mi>b</mi><mo>=</mo><msup><mi>z</mi><mrow><msup><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>とすると，
+<math id="Thmthm8.p7.m33" class="ltx_Math" alttext="tb^{mr}" display="inline"><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow></math>は法<math id="Thmthm8.p7.m34" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p7.m35" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p7.m36" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根である．
+よって，<math id="Thmthm8.p7.m37" class="ltx_Math" alttext="R^{\prime}=Rb^{m}" display="inline"><mrow><msup><mi>R</mi><mo>′</mo></msup><mo>=</mo><mrow><mi>R</mi><mo>⁢</mo><msup><mi>b</mi><mi>m</mi></msup></mrow></mrow></math>と値を修正すると，</span></p>
+<table id="S3.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex19.m1" class="ltx_Math" alttext="(R^{\prime})^{r}\equiv a\cdot tb^{mr}\mod p" display="block"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mi>R</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow><mi>r</mi></msup><mo>≡</mo><mrow><mrow><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>t</mi></mrow><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow><mo>mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる．<math id="Thmthm8.p7.m38" class="ltx_Math" alttext="t^{\prime}=tb^{mr}" display="inline"><mrow><msup><mi>t</mi><mo>′</mo></msup><mo>=</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow></mrow></math>とすると，
+<math id="Thmthm8.p7.m39" class="ltx_Math" alttext="t^{\prime}" display="inline"><msup><mi>t</mi><mo>′</mo></msup></math>は法<math id="Thmthm8.p7.m40" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p7.m41" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p7.m42" class="ltx_Math" alttext="r^{s-i-1}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></math>乗根になっている．</span></p>
+</div>
+<div id="Thmthm8.p8" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以上の操作は
+<math id="Thmthm8.p8.m1" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が法<math id="Thmthm8.p8.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p8.m3" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="Thmthm8.p8.m4" class="ltx_Math" alttext="r^{s-s}" display="inline"><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>s</mi></mrow></msup></math>乗根，すなわち，
+<math id="Thmthm8.p8.m5" class="ltx_Math" alttext="t\equiv 1\ \mod p" display="inline"><mrow><mi>t</mi><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>となるまで続けることができ，
+そのときの<math id="Thmthm8.p8.m6" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が<math id="Thmthm8.p8.m7" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の法<math id="Thmthm8.p8.m8" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm8.p8.m9" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である．</span></p>
+</div>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">以上の操作を疑似コードにして表したのが次である．
+ここでは<math id="S3.p4.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は<math id="S3.p4.m2" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数で<math id="S3.p4.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="S3.p4.m4" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余であることがわかっているとする．</p>
+</div>
+<figure id="alg3" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span class="ltx_text ltx_font_bold">Algorithm 3</span> </span> Solving <math id="alg3.m2" class="ltx_Math" alttext="x^{r}\equiv a\ \mod p" display="inline"><mrow><msup><mi>x</mi><mi>r</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></figcaption>
+<div class="ltx_listing ltx_listing">
+<div id="alg3.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span class="ltx_text" style="font-size:80%;">0:</span></span>  <math id="alg3.l0.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>:integer and <math id="alg3.l0.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>:prime
+
+</div>
+<div id="alg3.l1" class="ltx_listingline">  Take <math id="alg3.l1.m1" class="ltx_Math" alttext="s\geq 1" display="inline"><mrow><mi>s</mi><mo>≥</mo><mn>1</mn></mrow></math> and a number <math id="alg3.l1.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>
+s.t. <math id="alg3.l1.m3" class="ltx_Math" alttext="p-1=r^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mi>r</mi><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math> and <math id="alg3.l1.m4" class="ltx_Math" alttext="\gcd(d,q)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo>,</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+
+</div>
+<div id="alg3.l2" class="ltx_listingline">  Take <math id="alg3.l2.m1" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math> s.t. <math id="alg3.l2.m2" class="ltx_Math" alttext="rh\equiv 1\ \mod d" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>d</mi></mrow></mrow></math>
+
+</div>
+<div id="alg3.l3" class="ltx_listingline">  Take <math id="alg3.l3.m1" class="ltx_Math" alttext="z\in\mathbb{Z}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mi>ℤ</mi></mrow></math> s.t. <math id="alg3.l3.m2" class="ltx_Math" alttext="z^{\frac{p-1}{r}}\not\equiv 1\pmod{p}" display="inline"><mrow><msup><mi>z</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mi>r</mi></mfrac></msup><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg3.l4" class="ltx_listingline">  <math id="alg3.l4.m1" class="ltx_Math" alttext="M\leftarrow s" display="inline"><mrow><mi>M</mi><mo stretchy="false">←</mo><mi>s</mi></mrow></math>
+
+</div>
+<div id="alg3.l5" class="ltx_listingline">  <math id="alg3.l5.m1" class="ltx_Math" alttext="R\leftarrow a^{h}" display="inline"><mrow><mi>R</mi><mo stretchy="false">←</mo><msup><mi>a</mi><mi>h</mi></msup></mrow></math>
+
+</div>
+<div id="alg3.l6" class="ltx_listingline">  <math id="alg3.l6.m1" class="ltx_Math" alttext="t\leftarrow a^{rh-1}" display="inline"><mrow><mi>t</mi><mo stretchy="false">←</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+
+</div>
+<div id="alg3.l7" class="ltx_listingline">  <math id="alg3.l7.m1" class="ltx_Math" alttext="c\leftarrow z^{d}" display="inline"><mrow><mi>c</mi><mo stretchy="false">←</mo><msup><mi>z</mi><mi>d</mi></msup></mrow></math>
+
+</div>
+<div id="alg3.l8" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">while</span> <math id="alg3.l8.m1" class="ltx_Math" alttext="M\not=0" display="inline"><mrow><mi>M</mi><mo>≠</mo><mn>0</mn></mrow></math> <span class="ltx_text ltx_font_bold">do</span>
+
+
+
+</div>
+<div id="alg3.l9" class="ltx_listingline">     Take the least <math id="alg3.l9.m1" class="ltx_Math" alttext="i\in\{1,\dots,s-1\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math> such that
+<math id="alg3.l9.m2" class="ltx_Math" alttext="t^{r^{i}}\equiv 1\ \mod p" display="inline"><mrow><msup><mi>t</mi><msup><mi>r</mi><mi>i</mi></msup></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg3.l10" class="ltx_listingline">     Take <math id="alg3.l10.m1" class="ltx_Math" alttext="m\in\{0,\dots,p-1\}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+s.t. <math id="alg3.l10.m2" class="ltx_Math" alttext="t^{r^{i-1}}\left(z^{(p-1)/r}\right)^{m}\equiv 1\ \mod p" display="inline"><mrow><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>⁢</mo><msup><mrow><mo>(</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mi>r</mi></mrow></msup><mo>)</mo></mrow><mi>m</mi></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg3.l11" class="ltx_listingline">     <math id="alg3.l11.m1" class="ltx_Math" alttext="b\leftarrow c^{r^{M-i-1}}" display="inline"><mrow><mi>b</mi><mo stretchy="false">←</mo><msup><mi>c</mi><msup><mi>r</mi><mrow><mi>M</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></msup></mrow></math>
+
+</div>
+<div id="alg3.l12" class="ltx_listingline">     <math id="alg3.l12.m1" class="ltx_Math" alttext="M\leftarrow i" display="inline"><mrow><mi>M</mi><mo stretchy="false">←</mo><mi>i</mi></mrow></math>
+
+</div>
+<div id="alg3.l13" class="ltx_listingline">     <math id="alg3.l13.m1" class="ltx_Math" alttext="c\leftarrow b^{r}" display="inline"><mrow><mi>c</mi><mo stretchy="false">←</mo><msup><mi>b</mi><mi>r</mi></msup></mrow></math>
+
+</div>
+<div id="alg3.l14" class="ltx_listingline">     <math id="alg3.l14.m1" class="ltx_Math" alttext="R\leftarrow Rb^{m}" display="inline"><mrow><mi>R</mi><mo stretchy="false">←</mo><mrow><mi>R</mi><mo>⁢</mo><msup><mi>b</mi><mi>m</mi></msup></mrow></mrow></math>
+
+</div>
+<div id="alg3.l15" class="ltx_listingline">     <math id="alg3.l15.m1" class="ltx_Math" alttext="t\leftarrow tb^{mr}" display="inline"><mrow><mi>t</mi><mo stretchy="false">←</mo><mrow><mi>t</mi><mo>⁢</mo><msup><mi>b</mi><mrow><mi>m</mi><mo>⁢</mo><mi>r</mi></mrow></msup></mrow></mrow></math>
+
+</div>
+<div id="alg3.l16" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">while</span>
+</div>
+<div id="alg3.l17" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">return</span>  <math id="alg3.l17.m1" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>
+
+</div>
+</div>
+</figure>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">ここでもやはり，
+<math id="S3.p5.m1" class="ltx_Math" alttext="t^{r^{s-i}}\equiv 1" display="inline"><mrow><msup><mi>t</mi><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>i</mi></mrow></msup></msup><mo>≡</mo><mn>1</mn></mrow></math>となる最大の<math id="S3.p5.m2" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>
+ではなく<math id="S3.p5.m3" class="ltx_Math" alttext="t^{r^{i}}\equiv 1" display="inline"><mrow><msup><mi>t</mi><msup><mi>r</mi><mi>i</mi></msup></msup><mo>≡</mo><mn>1</mn></mrow></math>
+となる最小の<math id="S3.p5.m4" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>を見つけるように修正をしている．
+また，アルゴリズムの中の“Take <math id="S3.p5.m5" class="ltx_Math" alttext="m\in\{0,\dots,p-1\}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>…”
+の部分は離散対数問題を解く必要があるので
+<math id="S3.p5.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>が大きすぎると計算機でも時間がかかる計算になる．
+この一般の<math id="S3.p5.m7" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めるアルゴリズムはAdleman-Manders-Milerのアルゴリズムとして知られているようである．</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">次の補題を利用しても
+<math id="S3.p6.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めることができる．この補題は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>を大いに参考にした．</p>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を素数とし，
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数とする．
+<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="s\in\mathbb{N}" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>ℕ</mi></mrow></math>と<math id="Thmthm9.p1.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>で割り切れない数<math id="Thmthm9.p1.m6" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>は
+<math id="Thmthm9.p1.m7" class="ltx_Math" alttext="p-1=r^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mi>r</mi><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math>を満たすとする．
+<math id="Thmthm9.p1.m8" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>を法<math id="Thmthm9.p1.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm9.p1.m10" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗非剰余とする．
+そして<math id="Thmthm9.p1.m11" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>を法<math id="Thmthm9.p1.m12" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm9.p1.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余とする．
+<math id="Thmthm9.p1.m14" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>を法<math id="Thmthm9.p1.m15" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>における<math id="Thmthm9.p1.m16" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の逆数とする．
+このとき，<math id="Thmthm9.p1.m17" class="ltx_Math" alttext="m\in\mathbb{Z}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mi>ℤ</mi></mrow></math>が存在して
+<math id="Thmthm9.p1.m18" class="ltx_Math" alttext="a^{rh-1}z^{rmd}\equiv 1\ \mod p" display="inline"><mrow><mrow><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>r</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+となる．
+この<math id="Thmthm9.p1.m19" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>を用いると，
+<math id="Thmthm9.p1.m20" class="ltx_Math" alttext="a^{h}z^{md}" display="inline"><mrow><msup><mi>a</mi><mi>h</mi></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>m</mi><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>
+は法<math id="Thmthm9.p1.m21" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="Thmthm9.p1.m22" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の<math id="Thmthm9.p1.m23" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根の一つである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">補題の後半は<math id="S3.p7.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗すれば直ちにわかる．
+前半を示す．
+もし<math id="S3.p7.m2" class="ltx_Math" alttext="s=1" display="inline"><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow></math>
+ならば，オイラーの規準より<math id="S3.p7.m3" class="ltx_Math" alttext="m=0" display="inline"><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow></math>とすれば条件を満たすので，
+以下では<math id="S3.p7.m4" class="ltx_Math" alttext="s\geq 2" display="inline"><mrow><mi>s</mi><mo>≥</mo><mn>2</mn></mrow></math>とする．
+仮定より<math id="S3.p7.m5" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>は<math id="S3.p7.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗非剰余なので
+<math id="S3.p7.m7" class="ltx_Math" alttext="\gamma=z^{r^{s-1}d}" display="inline"><mrow><mi>γ</mi><mo>=</mo><msup><mi>z</mi><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>とすると，
+<math id="S3.p7.m8" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>は法<math id="S3.p7.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S3.p7.m10" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の
+<math id="S3.p7.m11" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>剰余でありなおかつ<math id="S3.p7.m12" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>とは異なることに注意せよ．
+また，<math id="S3.p7.m13" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>が素数なので<math id="S3.p7.m14" class="ltx_Math" alttext="\{\gamma^{k}\}_{k=0}^{r-1}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msup><mi>γ</mi><mi>k</mi></msup><mo stretchy="false">}</mo></mrow><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow></msubsup></math>
+は法<math id="S3.p7.m15" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S3.p7.m16" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を全て含んでいることに注意しよう．
+<math id="S3.p7.m17" class="ltx_Math" alttext="\{0,1,\dots,r-1\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></math>に値をとる点列<math id="S3.p7.m18" class="ltx_Math" alttext="\{c_{i}\}_{i=0}^{s-2}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msubsup></math>
+を任意の<math id="S3.p7.m19" class="ltx_Math" alttext="n\in\{0,1,\dots,s-2\}" display="inline"><mrow><mi>n</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>について</p>
+<table id="S3.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex20.m1" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-n-2}}\cdot z^{(r^{s-n-1}c_{0}+r^{s-n}c_{1}+\dots+r%
+^{s-2}c_{n-1}+r^{s-1}c_{n})d}\equiv 1\ \mod p" display="block"><mrow><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mi>n</mi></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たすように帰納的に以下のように定める．
+まず，<math id="S3.p7.m20" class="ltx_Math" alttext="c_{0}" display="inline"><msub><mi>c</mi><mn>0</mn></msub></math>を定義する．
+オイラーの規準から
+<math id="S3.p7.m21" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-1}}\equiv 1\ \mod p" display="inline"><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+である．
+よって<math id="S3.p7.m22" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-2}}" display="inline"><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup></msup></math>は法<math id="S3.p7.m23" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における
+<math id="S3.p7.m24" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p7.m25" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である．
+ここで
+<math id="S3.p7.m26" class="ltx_Math" alttext="c_{0}" display="inline"><msub><mi>c</mi><mn>0</mn></msub></math>を<math id="S3.p7.m27" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-2}}\cdot\gamma^{c_{0}}\equiv 1" display="inline"><mrow><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>γ</mi><msub><mi>c</mi><mn>0</mn></msub></msup></mrow><mo>≡</mo><mn>1</mn></mrow></math>
+を満たすようにとる．
+一般に<math id="S3.p7.m28" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>に対して<math id="S3.p7.m29" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>以下の自然数に対して<math id="S3.p7.m30" class="ltx_Math" alttext="c_{i}" display="inline"><msub><mi>c</mi><mi>i</mi></msub></math>が定義されたとしよう．
+このとき，帰納法の仮定から，</p>
+<table id="S3.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex21.m1" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-n-1}}\cdot z^{(r^{s-n}c_{0}+r^{s-n+1}c_{1}+\dots+r%
+^{s-1}c_{n-1})d}\equiv 1\ \mod p" display="block"><mrow><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mrow><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+よって，その<math id="S3.p7.m31" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である
+<math id="S3.p7.m32" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-n-2}d}z^{(r^{s-n-1}c_{0}+r^{s-n}c_{1}+\dots+r^{s-2%
+}c_{n-1})d}" display="inline"><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow></math>
+法<math id="S3.p7.m33" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S3.p7.m34" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>の<math id="S3.p7.m35" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根である．
+<math id="S3.p7.m36" class="ltx_Math" alttext="c_{n}" display="inline"><msub><mi>c</mi><mi>n</mi></msub></math>を
+<math id="S3.p7.m37" class="ltx_Math" alttext="\left(a^{rh-1}\right)^{r^{s-n-2}d}z^{(r^{s-n-1}c_{0}+r^{s-n}c_{1}+\dots+r^{s-2%
+}c_{n-1})d}\cdot\gamma^{c_{n}}\equiv 1\ \mod p" display="inline"><mrow><mrow><mrow><msup><mrow><mo>(</mo><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><mi>d</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mi>n</mi></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><msup><mi>γ</mi><msub><mi>c</mi><mi>n</mi></msub></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+となるように定義する．
+以上によって<math id="S3.p7.m38" class="ltx_Math" alttext="\{c_{i}\}_{i=1}^{s-2}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msubsup></math>が得られたが，帰納法の仮定より
+<math id="S3.p7.m39" class="ltx_Math" alttext="a^{rh-1}z^{(rc_{0}+r^{2}c_{1}+\dots+r^{s-1}c_{s-2})d}\equiv 1\ \mod p" display="inline"><mrow><mrow><msup><mi>a</mi><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>r</mi><mo>⁢</mo><msub><mi>c</mi><mn>0</mn></msub></mrow><mo>+</mo><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>d</mi></mrow></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+が成り立つ．
+このとき，
+<math id="S3.p7.m40" class="ltx_Math" alttext="m=c_{0}+rc_{1}+\dots+r^{s-2}c_{s-2}" display="inline"><mrow><mi>m</mi><mo>=</mo><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>+</mo><mrow><mi>r</mi><mo>⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msup><mi>r</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>⁢</mo><msub><mi>c</mi><mrow><mi>s</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow></mrow></mrow></math>とすると補題の条件を満たす．
+∎</p>
+</div>
+</div>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p">この補題を用いたアルゴリズムの
+疑似コードを書くと以下のようになる．
+ここでは<math id="S3.p8.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は<math id="S3.p8.m2" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数で<math id="S3.p8.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は<math id="S3.p8.m4" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗剰余であることがわかっているとする．</p>
+</div>
+<figure id="alg4" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span class="ltx_text ltx_font_bold">Algorithm 4</span> </span> Solving <math id="alg4.m2" class="ltx_Math" alttext="x^{r}\equiv a\ \mod p" display="inline"><mrow><msup><mi>x</mi><mi>r</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></figcaption>
+<div class="ltx_listing ltx_listing">
+<div id="alg4.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span class="ltx_text" style="font-size:80%;">0:</span></span>  <math id="alg4.l0.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>:prime, <math id="alg4.l0.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>:prime s.t. <math id="alg4.l0.m3" class="ltx_Math" alttext="r|p-1" display="inline"><mrow><mi>r</mi><mo fence="false">|</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>, and <math id="alg4.l0.m4" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>:integer s.t.
+<math id="alg4.l0.m5" class="ltx_Math" alttext="a^{\frac{p-1}{r}}\equiv 1\ \mod p" display="inline"><mrow><msup><mi>a</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mi>r</mi></mfrac></msup><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l1" class="ltx_listingline">  Take <math id="alg4.l1.m1" class="ltx_Math" alttext="z\in\{1,\dots,p-1\}" display="inline"><mrow><mi>z</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math> s.t. <math id="alg4.l1.m2" class="ltx_Math" alttext="z^{\frac{p-1}{r}}\not\equiv 1\ \mod p" display="inline"><mrow><msup><mi>z</mi><mfrac><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mi>r</mi></mfrac></msup><mo>≢</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l2" class="ltx_listingline">  Take <math id="alg4.l2.m1" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math> and <math id="alg4.l2.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math> s.t. <math id="alg4.l2.m3" class="ltx_Math" alttext="p-1=r^{s}d" display="inline"><mrow><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>=</mo><mrow><msup><mi>r</mi><mi>s</mi></msup><mo>⁢</mo><mi>d</mi></mrow></mrow></math> and <math id="alg4.l2.m4" class="ltx_Math" alttext="\gcd(r,d)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+
+</div>
+<div id="alg4.l3" class="ltx_listingline">  Take <math id="alg4.l3.m1" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math> s.t. <math id="alg4.l3.m2" class="ltx_Math" alttext="rh\equiv 1\ \mod d" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mi>d</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l4" class="ltx_listingline">  <math id="alg4.l4.m1" class="ltx_Math" alttext="apow\leftarrow(rh-1)r^{s}" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>r</mi><mo>⁢</mo><mi>h</mi></mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>r</mi><mi>s</mi></msup></mrow></mrow></math>
+
+</div>
+<div id="alg4.l5" class="ltx_listingline">  <math id="alg4.l5.m1" class="ltx_Math" alttext="zpow\leftarrow 0" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mn>0</mn></mrow></math>
+
+</div>
+<div id="alg4.l6" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">while</span> <math id="alg4.l6.m1" class="ltx_Math" alttext="apow\equiv 0\ \mod r" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>≡</mo><mrow><mn>0</mn><mo lspace="0.778em">mod</mo><mi>r</mi></mrow></mrow></math>  <span class="ltx_text ltx_font_bold">do</span>
+
+
+
+</div>
+<div id="alg4.l7" class="ltx_listingline">     <math id="alg4.l7.m1" class="ltx_Math" alttext="apow\leftarrow apow/r" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mi>r</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l8" class="ltx_listingline">     <math id="alg4.l8.m1" class="ltx_Math" alttext="zpow\leftarrow zpow/r" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mi>r</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l9" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">if</span> <math id="alg4.l9.m1" class="ltx_Math" alttext="a^{apow}z^{zpow}\not\equiv 1\pmod{p}" display="inline"><mrow><mrow><msup><mi>a</mi><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup></mrow><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg4.l10" class="ltx_listingline">        Take <math id="alg4.l10.m1" class="ltx_Math" alttext="m\in\{0,\dots,p-1\}" display="inline"><mrow><mi>m</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math> s.t.
+<math id="alg4.l10.m2" class="ltx_Math" alttext="\left(a^{apow}z^{zpow}\right)\cdot\left(z^{(p-1)/r}\right)^{m}\equiv 1\pmod{p}" display="inline"><mrow><mrow><mrow><mo>(</mo><mrow><msup><mi>a</mi><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup></mrow><mo rspace="0.055em">)</mo></mrow><mo rspace="0.222em">⋅</mo><msup><mrow><mo>(</mo><msup><mi>z</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mi>r</mi></mrow></msup><mo>)</mo></mrow><mi>m</mi></msup></mrow><mo>≡</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg4.l11" class="ltx_listingline">        <math id="alg4.l11.m1" class="ltx_Math" alttext="zpow\leftarrow zpow+m(p-1)/r" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>+</mo><mrow><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>/</mo><mi>r</mi></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg4.l12" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg4.l13" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">while</span>
+</div>
+<div id="alg4.l14" class="ltx_listingline">  <math id="alg4.l14.m1" class="ltx_Math" alttext="apow\leftarrow(apow+1)/r" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mi>r</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l15" class="ltx_listingline">  <math id="alg4.l15.m1" class="ltx_Math" alttext="zpow\leftarrow zpow/r" display="inline"><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo stretchy="false">←</mo><mrow><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow><mo>/</mo><mi>r</mi></mrow></mrow></math>
+
+</div>
+<div id="alg4.l16" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">return</span>  <math id="alg4.l16.m1" class="ltx_Math" alttext="a^{apow}z^{zpow}" display="inline"><mrow><msup><mi>a</mi><mrow><mi>a</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup><mo>⁢</mo><msup><mi>z</mi><mrow><mi>z</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>w</mi></mrow></msup></mrow></math>
+
+</div>
+</div>
+</figure>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p">一般の<math id="S3.p9.m1" class="ltx_Math" alttext="r\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math>に対して<math id="S3.p9.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を求めるプログラムは以下のようになる．
+以下に現れる<math id="S3.p9.m3" class="ltx_Math" alttext="Solve\_Root\_prime(x,r,p)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>l</mi><mo>⁢</mo><mi>v</mi><mo>⁢</mo><mi>e</mi><mo>⁢</mo><mi mathvariant="normal">_</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>t</mi><mo>⁢</mo><mi mathvariant="normal">_</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S3.p9.m4" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>が<math id="S3.p9.m5" class="ltx_Math" alttext="p-1" display="inline"><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>の素因数のときの<math id="S3.p9.m6" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の法<math id="S3.p9.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>における<math id="S3.p9.m8" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>乗根を表すとする．
+このような値を求めるプログラムは既に上で記述している．</p>
+</div>
+<figure id="alg5" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span class="ltx_text ltx_font_bold">Algorithm 5</span> </span> Solving <math id="alg5.m2" class="ltx_Math" alttext="x^{r}\equiv a\ \mod p" display="inline"><mrow><msup><mi>x</mi><mi>r</mi></msup><mo>≡</mo><mrow><mi>a</mi><mo lspace="0.778em">mod</mo><mi>p</mi></mrow></mrow></math></figcaption>
+<div class="ltx_listing ltx_listing">
+<div id="alg5.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span class="ltx_text" style="font-size:80%;">0:</span></span>  <math id="alg5.l0.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>:integer, <math id="alg5.l0.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>:positive integer, <math id="alg5.l0.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>:prime
+
+</div>
+<div id="alg5.l1" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">if</span> <math id="alg5.l1.m1" class="ltx_Math" alttext="a^{(p-1)/\gcd(p-1,r)}\not\equiv 1\pmod{p}" display="inline"><mrow><msup><mi>a</mi><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msup><mo>≢</mo><mrow><mn>1</mn><mspace width="0.949em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mo lspace="0em" rspace="0.167em">mod</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg5.l2" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">return</span>  ‘<math id="alg5.l2.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math> is not an <math id="alg5.l2.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>-th residue.’
+
+</div>
+<div id="alg5.l3" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg5.l4" class="ltx_listingline">  <math id="alg5.l4.m1" class="ltx_Math" alttext="x\leftarrow a" display="inline"><mrow><mi>x</mi><mo stretchy="false">←</mo><mi>a</mi></mrow></math>
+
+</div>
+<div id="alg5.l5" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">if</span> <math id="alg5.l5.m1" class="ltx_Math" alttext="\gcd(p-1,r)=1" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math> <span class="ltx_text ltx_font_bold">then</span>
+
+
+
+</div>
+<div id="alg5.l6" class="ltx_listingline">     Take <math id="alg5.l6.m1" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math> s.t. <math id="alg5.l6.m2" class="ltx_Math" alttext="vr\equiv 1\ \mod p-1" display="inline"><mrow><mrow><mi>v</mi><mo>⁢</mo><mi>r</mi></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg5.l7" class="ltx_listingline">     <span class="ltx_text ltx_font_bold">return</span>  <math id="alg5.l7.m1" class="ltx_Math" alttext="x^{v}" display="inline"><msup><mi>x</mi><mi>v</mi></msup></math>
+
+</div>
+<div id="alg5.l8" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">else</span>
+
+
+</div>
+<div id="alg5.l9" class="ltx_listingline">     Take <math id="alg5.l9.m1" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math> s.t. <math id="alg5.l9.m2" class="ltx_Math" alttext="v\cdot\left(\frac{r}{\gcd(p-1,r)}\right)\equiv 1\ \mod p-1" display="inline"><mrow><mrow><mi>v</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>(</mo><mfrac><mi>r</mi><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>)</mo></mrow></mrow><mo>≡</mo><mrow><mn>1</mn><mo lspace="0.778em">mod</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg5.l10" class="ltx_listingline">     <math id="alg5.l10.m1" class="ltx_Math" alttext="x\leftarrow x^{v}" display="inline"><mrow><mi>x</mi><mo stretchy="false">←</mo><msup><mi>x</mi><mi>v</mi></msup></mrow></math>
+
+</div>
+<div id="alg5.l11" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">if</span>
+</div>
+<div id="alg5.l12" class="ltx_listingline">  Take primes <math id="alg5.l12.m1" class="ltx_Math" alttext="q_{1},\dots,q_{l}" display="inline"><mrow><msub><mi>q</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>q</mi><mi>l</mi></msub></mrow></math> s.t.
+<math id="alg5.l12.m2" class="ltx_Math" alttext="\gcd(p-1,r)=q_{1}\cdot q_{2}\cdots q_{l}" display="inline"><mrow><mrow><mi>gcd</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>q</mi><mn>1</mn></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>q</mi><mn>2</mn></msub></mrow><mo>⁢</mo><mi mathvariant="normal">⋯</mi><mo>⁢</mo><msub><mi>q</mi><mi>l</mi></msub></mrow></mrow></math>
+
+</div>
+<div id="alg5.l13" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">for</span> <math id="alg5.l13.m1" class="ltx_Math" alttext="i\in\{1,\dots,l\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>l</mi><mo stretchy="false">}</mo></mrow></mrow></math> <span class="ltx_text ltx_font_bold">do</span>
+
+
+
+</div>
+<div id="alg5.l14" class="ltx_listingline">     <math id="alg5.l14.m1" class="ltx_Math" alttext="x\leftarrow Solve\_Root\_prime(x,q_{i},p)" display="inline"><mrow><mi>x</mi><mo stretchy="false">←</mo><mrow><mi>S</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>l</mi><mo>⁢</mo><mi>v</mi><mo>⁢</mo><mi>e</mi><mo>⁢</mo><mi mathvariant="normal">_</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>o</mi><mo>⁢</mo><mi>t</mi><mo>⁢</mo><mi mathvariant="normal">_</mi><mo>⁢</mo><mi>p</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mi>i</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>e</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><msub><mi>q</mi><mi>i</mi></msub><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+
+</div>
+<div id="alg5.l15" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">end</span> <span class="ltx_text ltx_font_bold">for</span>
+</div>
+<div id="alg5.l16" class="ltx_listingline">  <span class="ltx_text ltx_font_bold">return</span>  <math id="alg5.l16.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>
+
+</div>
+</div>
+</figure>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">Z. Cao, Q. Sha and X. Fan,
+<span class="ltx_text ltx_font_italic">Adleman-Manders-Miler root extraction method revised</span>,
+in Information Security and Cryptology (Chuan-Kun Wu, Moti Yung and
+Dongdai Lin, eds. ), 7th International Conference, Inscrypt 2011
+Beijing, China, November/December 2011
+Revised Selected Papers,
+(2012), pp77–85.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+R. Kumar, <span class="ltx_text ltx_font_italic">A simple algorithm for finding square rot modulo <math id="bib.bib2.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math></span>,
+(2020), arXiv:2008.11814
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:30:36 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

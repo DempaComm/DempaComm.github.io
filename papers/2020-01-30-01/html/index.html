@@ -1,0 +1,878 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>van der Waerden Theorem and Ramsey Theorem</title>
+<!--Generated on Sun Jul 26 19:29:18 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2020-01-30-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>van der Waerdenの定理とRamseyの定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../vdW-Ram.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">van der Waerden Theorem and Ramsey Theorem</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章ではvan der waerdenの定理とRamseyの定理を証明し，コンパクト性原理とも呼ばれるRadoの選択定理を紹介する．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>van der Waerden’s Theorem</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">このセクションでは特に断らない限りは，自然数<math id="S1.p1.m1" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math>について<math id="S1.p1.m2" class="ltx_Math" alttext="[a,b]=\{x\in\mathbb{N}\mid a\leq x\leq b\}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>≤</mo><mi>x</mi><mo>≤</mo><mi>b</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とする．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">二つの<math id="S1.p2.m1" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>対
+<math id="S1.p2.m2" class="ltx_Math" alttext="(x_{i}),(y_{i})\in[0,l]^{m}" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>,</mo><mrow><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><mi>m</mi></msup></mrow></math>が<math id="S1.p2.m3" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値であるとは，値が<math id="S1.p2.m4" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>であるような最後の番号までこの二つが一致していることとする．つまり，</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\forall j\in\{n\mid x_{n}=l\}\cup\{n\mid y_{n}=l\}\ \forall i\leq j\ x_{i}=y_{i}" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>j</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mi>n</mi><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mi>l</mi></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mrow><mo stretchy="false">{</mo><mi>n</mi><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mi>y</mi><mi>n</mi></msub><mo>=</mo><mi>l</mi></mrow><mo stretchy="false">}</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>i</mi></mrow></mrow></mrow><mo>≤</mo><mrow><mi>j</mi><mo lspace="0.500em">⁢</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><mo>=</mo><msub><mi>y</mi><mi>i</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">この同値類による代表元は<math id="S1.p4.m1" class="ltx_Math" alttext="(*,*,\dots,*,l,0,0,\dots,0)" display="inline"><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em">∗</mo><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">∗</mo><mo>,</mo><mi mathvariant="normal">…</mi><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">∗</mo><mo>,</mo><mi>l</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math>という形のものを選べる．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.p5.m1" class="ltx_Math" alttext="m,l\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>m</mi><mo>,</mo><mi>l</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対して，次の主張を<math id="S1.p5.m2" class="ltx_Math" alttext="S(l,m)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></math>とかこう：
+任意の<math id="S1.p5.m3" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対して<math id="S1.p5.m4" class="ltx_Math" alttext="N(l,m,r)\in\mathbb{N}" display="inline"><mrow><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>ℕ</mi></mrow></math>が存在して，
+任意の写像<math id="S1.p5.m5" class="ltx_Math" alttext="[1,N(l,m,r)]\to[1,r]" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>
+に対して<math id="S1.p5.m6" class="ltx_Math" alttext="a,d_{1},d_{2},\dots,d_{m}" display="inline"><mrow><mi>a</mi><mo>,</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><msub><mi>d</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>d</mi><mi>m</mi></msub></mrow></math>が存在し，
+任意の<math id="S1.p5.m7" class="ltx_Math" alttext="(x_{i})\in[0,l]^{m}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><mi>m</mi></msup></mrow></math>に対して
+<math id="S1.p5.m8" class="ltx_Math" alttext="a+\sum_{i=1}x_{i}d_{i}\leq N(l,m,r)" display="inline"><mrow><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msub><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></msub><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>≤</mo><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であり，かつ
+<math id="S1.p5.m9" class="ltx_Math" alttext="C(a+\sum_{i=1}x_{i}d_{i})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msub><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></msub><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S1.p5.m10" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値類上で定数となる．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="S(l,1)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">と<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="S(l,m)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></math>が成立するならば，<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="S(l,m+1)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が成立する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p"><math id="S1.p6.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を固定する．<math id="S1.p6.m2" class="ltx_Math" alttext="M=N(l,m,r)" display="inline"><mrow><mi>M</mi><mo>=</mo><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とし，<math id="S1.p6.m3" class="ltx_Math" alttext="N=N(l,1,r^{M})" display="inline"><mrow><mi>N</mi><mo>=</mo><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mn>1</mn><mo>,</mo><msup><mi>r</mi><mi>M</mi></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする．
+そして，写像<math id="S1.p6.m4" class="ltx_Math" alttext="C:[1,MN]\to[1,r]" display="inline"><mrow><mi>C</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mrow><mi>M</mi><mo>⁢</mo><mi>N</mi></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が与えられているとする．
+さてこのとき，写像<math id="S1.p6.m5" class="ltx_Math" alttext="D:[1,N]\to[1,r]^{M}\cong[1,r^{M}]" display="inline"><mrow><mi>D</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><msup><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow><mi>M</mi></msup><mo>≅</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><msup><mi>r</mi><mi>M</mi></msup><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+を以下のように定義する．<math id="S1.p6.m6" class="ltx_Math" alttext="g,h\in[1,N]" display="inline"><mrow><mrow><mi>g</mi><mo>,</mo><mi>h</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>N</mi><mo stretchy="false">]</mo></mrow></mrow></math>について<math id="S1.p6.m7" class="ltx_Math" alttext="D(g)=D(h)" display="inline"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とは
+任意の<math id="S1.p6.m8" class="ltx_Math" alttext="j\in[0,M-1]" display="inline"><mrow><mi>j</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mi>M</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></mrow></math>について</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="C(gM-j)=C(hM-j)" display="block"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>g</mi><mo>⁢</mo><mi>M</mi></mrow><mo>−</mo><mi>j</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>h</mi><mo>⁢</mo><mi>M</mi></mrow><mo>−</mo><mi>j</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つこととする．
+<math id="S1.p6.m9" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>の定義から，ある<math id="S1.p6.m10" class="ltx_Math" alttext="q,k\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>q</mi><mo>,</mo><mi>k</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>が存在して
+任意の<math id="S1.p6.m11" class="ltx_Math" alttext="x\in[0,l-1]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mi>l</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></mrow></math>について
+<math id="S1.p6.m12" class="ltx_Math" alttext="q+xk\leq N" display="inline"><mrow><mrow><mi>q</mi><mo>+</mo><mrow><mi>x</mi><mo>⁢</mo><mi>k</mi></mrow></mrow><mo>≤</mo><mi>N</mi></mrow></math>であり，
+<math id="S1.p6.m13" class="ltx_Math" alttext="D(q+xk)" display="inline"><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>+</mo><mrow><mi>x</mi><mo>⁢</mo><mi>k</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が定数となる．
+さて，<math id="S1.p6.m14" class="ltx_Math" alttext="S(l,m)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></math>を区間<math id="S1.p6.m15" class="ltx_Math" alttext="[(q-1)M+1,qM]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>q</mi><mo>⁢</mo><mi>M</mi></mrow><mo stretchy="false">]</mo></mrow></math>
+に対して適応する．すると，ある<math id="S1.p6.m16" class="ltx_Math" alttext="a,d_{1},\dots,d_{m}\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>d</mi><mi>m</mi></msub></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>
+が存在して，
+<math id="S1.p6.m17" class="ltx_Math" alttext="a+\sum_{i=1}^{m}x_{i}d_{i}\in[(q-1)M+1,qM]" display="inline"><mrow><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>q</mi><mo>⁢</mo><mi>M</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></math>であり，
+<math id="S1.p6.m18" class="ltx_Math" alttext="C(a+\sum_{i=1}^{m}x_{i}d_{i})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S1.p6.m19" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値類上で定数になる．
+<math id="S1.p6.m20" class="ltx_Math" alttext="q,k" display="inline"><mrow><mi>q</mi><mo>,</mo><mi>k</mi></mrow></math>の定義から
+任意の
+<math id="S1.p6.m21" class="ltx_Math" alttext="x\in[0,l-1]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mrow><mi>l</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">]</mo></mrow></mrow></math>について</p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="D(q+xk)=D(q)" display="block"><mrow><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>+</mo><mrow><mi>x</mi><mo>⁢</mo><mi>k</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>D</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立ち，このことと<math id="S1.p6.m22" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>の定義から任意の<math id="S1.p6.m23" class="ltx_Math" alttext="b\in[1,M]" display="inline"><mrow><mi>b</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>M</mi><mo stretchy="false">]</mo></mrow></mrow></math>について</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="C((q-1)M+b+xkM)=C((q-1)M+b)" display="block"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mi>b</mi><mo>+</mo><mrow><mi>x</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>M</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mi>b</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+次に<math id="S1.p6.m24" class="ltx_Math" alttext="d_{m+1}=kM" display="inline"><mrow><msub><mi>d</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mi>k</mi><mo>⁢</mo><mi>M</mi></mrow></mrow></math>
+として，<math id="S1.p6.m25" class="ltx_Math" alttext="a,d_{1},\dots,d_{m},d_{m+1}" display="inline"><mrow><mi>a</mi><mo>,</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>d</mi><mi>m</mi></msub><mo>,</mo><msub><mi>d</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>が求める条件を満たすことを確めよう．任意に<math id="S1.p6.m26" class="ltx_Math" alttext="(x_{i})\in[0,l]^{m+1}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>とすると，</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="a+\sum_{i=1}^{m+1}x_{i}d_{i}\leq a+\sum_{i=1}^{m}x_{i}d_{i}+x_{m+1}kd_{m+1}%
+\leq qM+lkM=(q+lk)M\leq MN" display="block"><mrow><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></munderover><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>≤</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow><mo>+</mo><mrow><msub><mi>x</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mi>k</mi><mo>⁢</mo><msub><mi>d</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow><mo>≤</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mrow><mi>l</mi><mo>⁢</mo><mi>k</mi><mo>⁢</mo><mi>M</mi></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>+</mo><mrow><mi>l</mi><mo>⁢</mo><mi>k</mi></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>≤</mo><mrow><mi>M</mi><mo>⁢</mo><mi>N</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+任意に<math id="S1.p6.m27" class="ltx_Math" alttext="(x_{i})\in[0,l]^{m+1}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>をとる．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">Case1 <math id="S1.p7.m1" class="ltx_Math" alttext="x_{m+1}&lt;l" display="inline"><mrow><msub><mi>x</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>&lt;</mo><mi>l</mi></mrow></math>のとき，
+<math id="S1.p7.m2" class="ltx_Math" alttext="a+\sum_{i=1}^{m}x_{i}d_{i}\in[(q-1)M+1,qM]" display="inline"><mrow><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>M</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>q</mi><mo>⁢</mo><mi>M</mi></mrow><mo stretchy="false">]</mo></mrow></mrow></math>と
+先に示したことから，</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="C\left(a+\sum_{i=1}^{m}x_{i}d_{i}+x_{m+1}d_{m+1}\right)=C\left(a+\sum_{i=1}^{m%
+}x_{i}d_{i}\right)" display="block"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow><mo>+</mo><mrow><msub><mi>x</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msub><mi>d</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるので，<math id="S1.p7.m3" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値類の上で定数となる．</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">Case2 <math id="S1.p8.m1" class="ltx_Math" alttext="x_{m+1}=l" display="inline"><mrow><msub><mi>x</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>l</mi></mrow></math>のとき．このときは<math id="S1.p8.m2" class="ltx_Math" alttext="(x_{i})" display="inline"><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></math>の<math id="S1.p8.m3" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値類は一個しかないから証明することは何もない．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">以上で補題が示された．
+∎</p>
+</div>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">以下では一般に<math id="S1.p10.m1" class="ltx_Math" alttext="\sum_{i=1}^{0}f_{i}=0" display="inline"><mrow><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>0</mn></msubsup><msub><mi>f</mi><mi>i</mi></msub></mrow><mo>=</mo><mn>0</mn></mrow></math>であることに注意せよ．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="ｍ" display="inline"><mi>ｍ</mi></math>について<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="S(l,m)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></math>が成立するならば，
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="S(l+1,1)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>が成立する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p"><math id="S1.p11.m1" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>を固定する．
+簡単のために<math id="S1.p11.m2" class="ltx_Math" alttext="N=N(l,r,r)" display="inline"><mrow><mi>N</mi><mo>=</mo><mrow><mi>N</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>r</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする．
+さて，任意に<math id="S1.p11.m3" class="ltx_Math" alttext="C:[1,2N]\to[1,r]" display="inline"><mrow><mi>C</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mrow><mn>2</mn><mo>⁢</mo><mi>N</mi></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>をとる．
+すると，<math id="S1.p11.m4" class="ltx_Math" alttext="a,d_{1},\dots,d_{r}" display="inline"><mrow><mi>a</mi><mo>,</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>d</mi><mi>r</mi></msub></mrow></math>が存在して
+任意の<math id="S1.p11.m5" class="ltx_Math" alttext="(x_{i})\in[0,l]^{r}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><mi>r</mi></msup></mrow></math>について
+<math id="S1.p11.m6" class="ltx_Math" alttext="a+\sum_{i=1}^{r}x_{i}d_{i}\leq N" display="inline"><mrow><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>≤</mo><mi>N</mi></mrow></math>であり，
+<math id="S1.p11.m7" class="ltx_Math" alttext="C(a+\sum_{i=1}^{r}x_{i}d_{i})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S1.p11.m8" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値類上で定数となる．</p>
+</div>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p"><math id="S1.p12.m1" class="ltx_Math" alttext="w\in[0,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>について</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="C\left(a+\sum_{i=1}^{w}ld_{i}\right)" display="block"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>w</mi></munderover><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を考えよう．彩色は<math id="S1.p12.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>個で，<math id="S1.p12.m3" class="ltx_Math" alttext="[0,r]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></math>は<math id="S1.p12.m4" class="ltx_Math" alttext="r+1" display="inline"><mrow><mi>r</mi><mo>+</mo><mn>1</mn></mrow></math>個あるので，ある
+<math id="S1.p12.m5" class="ltx_Math" alttext="u,v\in[0,r]" display="inline"><mrow><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>が存在して<math id="S1.p12.m6" class="ltx_Math" alttext="u&lt;v" display="inline"><mrow><mi>u</mi><mo>&lt;</mo><mi>v</mi></mrow></math>と</p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="C\left(a+\sum_{i=1}^{u}ld_{i}\right)=C\left(a+\sum_{i=1}^{v}ld_{i}\right)" display="block"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>u</mi></munderover><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>v</mi></munderover><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+<math id="S1.p12.m7" class="ltx_Math" alttext="x\in[0,l]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow></mrow></math>を任意に与える，<math id="S1.p12.m8" class="ltx_Math" alttext="x&lt;l" display="inline"><mrow><mi>x</mi><mo>&lt;</mo><mi>l</mi></mrow></math>のときには
+<math id="S1.p12.m9" class="ltx_Math" alttext="(l,\dots,l,x,\dots,x)" display="inline"><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>l</mi><mo>,</mo><mi>x</mi><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></math>は<math id="S1.p12.m10" class="ltx_Math" alttext="(l,\dots,l,0\dots,0)" display="inline"><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>l</mi><mo>,</mo><mrow><mn>0</mn><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math>と
+<math id="S1.p12.m11" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>-同値なので</p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="C\left(\left(a+\sum_{i=1}^{u}ld_{i}\right)+x\left(\sum_{i=u+1}^{v}d_{i}\right)%
+\right)=C\left(a+\sum_{i=1}^{u}ld_{i}\right)" display="block"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>u</mi></munderover><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow><mo>+</mo><mrow><mi>x</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><munderover><mo lspace="0em" movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mrow><mi>u</mi><mo>+</mo><mn>1</mn></mrow></mrow><mi>v</mi></munderover><msub><mi>d</mi><mi>i</mi></msub></mrow><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>u</mi></munderover><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">また，
+<math id="S1.p12.m12" class="ltx_Math" alttext="x=l" display="inline"><mrow><mi>x</mi><mo>=</mo><mi>l</mi></mrow></math>のときは
+<math id="S1.p12.m13" class="ltx_Math" alttext="C(a+\sum_{i=1}^{u}ld_{i})=C(a+\sum_{i=1}^{v}ld_{i})" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>u</mi></msubsup><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>v</mi></msubsup><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので，
+<math id="S1.p12.m14" class="ltx_Math" alttext="q=(a+\sum_{i=1}^{u}ld_{i})" display="inline"><mrow><mi>q</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>u</mi></msubsup><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>, <math id="S1.p12.m15" class="ltx_Math" alttext="k=(a+\sum_{i=1}^{v}ld_{i})" display="inline"><mrow><mi>k</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><mrow><mi>a</mi><mo rspace="0.055em">+</mo><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>v</mi></msubsup><mrow><mi>l</mi><mo>⁢</mo><msub><mi>d</mi><mi>i</mi></msub></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+として，<math id="S1.p12.m16" class="ltx_Math" alttext="S(l+1,1)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>の成立がわかる．
+∎</p>
+</div>
+</div>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p">以上の補題から次のことがわかる．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="l,m\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>l</mi><mo>,</mo><mi>m</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について，<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="S(l,m)" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow></math>が成り立つ．</span></p>
+</div>
+</div>
+<div id="S1.p14" class="ltx_para">
+<p class="ltx_p">van der Waerdenの定理とは次の主張のことである．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 4</span></span><span class="ltx_text ltx_font_bold"> </span>(van der Waerden theorem)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="l,r\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>l</mi><mo>,</mo><mi>r</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対して<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="n(l,r)\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>が存在して，
+任意の<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="C:[1,n(l,r)]\to[1,r]" display="inline"><mrow><mi>C</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+に対してある<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>が存在して，<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="C^{-1}(w)" display="inline"><mrow><msup><mi>C</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>は
+長さ<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>の等差数列を含む．</span></p>
+</div>
+</div>
+<div id="S1.p15" class="ltx_para">
+<p class="ltx_p">このvan der Waerdenの定理は<math id="S1.p15.m1" class="ltx_Math" alttext="\forall l\in\mathbb{N}_{+}\ S(l,1)" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>l</mi></mrow><mo>∈</mo><mrow><msub><mi>ℕ</mi><mo>+</mo></msub><mo>⁢</mo><mi>S</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つというのと同値であるから，上の定理から成立がすぐにわかる．
+<math id="S1.p15.m2" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>という補助パラメーターを用いて，証明を簡略化しているのである．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 5</span></span><span class="ltx_text ltx_font_bold"> </span>(infinite van der Waerden theorem)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>と任意の彩色<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="C:\mathbb{N}_{+}\to[1,r]" display="inline"><mrow><mi>C</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>ℕ</mi><mo>+</mo></msub><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+についてある<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>が存在して<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="C^{-1}(w)" display="inline"><mrow><msup><mi>C</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は任意の長さの等差数列を含む．ここで，等差は一定でなくて良い．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p16" class="ltx_para">
+<p class="ltx_p">彩色<math id="S1.p16.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>に対して次のように集合を定義する．</p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="S=\{(l,n,w)\in\mathbb{N}_{+}\times\mathbb{N}_{+}\times[1,r]\mid C^{-1}(w)\cap[%
+1,n]\text{は長さ}l\text{の等差数列を含む}\}" display="block"><mrow><mi>S</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><msub><mi>ℕ</mi><mo>+</mo></msub><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mi>ℕ</mi><mo>+</mo></msub><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msup><mi>C</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo>⁢</mo><mtext>は長さ</mtext><mo>⁢</mo><mi>l</mi><mo>⁢</mo><mtext>の等差数列を含む</mtext></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">van der Weardenの定理より，任意の<math id="S1.p16.m2" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>について<math id="S1.p16.m3" class="ltx_Math" alttext="(n,w)\in\mathbb{N}_{+}\times[1,r]" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><msub><mi>ℕ</mi><mo>+</mo></msub><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+が存在して<math id="S1.p16.m4" class="ltx_Math" alttext="(l,n,w)\in S" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi>S</mi></mrow></math>である．特に<math id="S1.p16.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>は無限集合である．
+また写像<math id="S1.p16.m6" class="ltx_Math" alttext="p:S\to\mathbb{N}_{+};(l,n,w)\mapsto l" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>S</mi><mo stretchy="false">→</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow><mo>;</mo><mrow><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">↦</mo><mi>l</mi></mrow></mrow></mrow></math>は全射である．
+そして写像<math id="S1.p16.m7" class="ltx_Math" alttext="q:S\to[1,r];(l,n,w)\mapsto w" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>S</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow><mo>;</mo><mrow><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">↦</mo><mi>w</mi></mrow></mrow></mrow></math>
+を考えると，<math id="S1.p16.m8" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>が無限集合であることと，<math id="S1.p16.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が全射であることから
+ある<math id="S1.p16.m10" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>について<math id="S1.p16.m11" class="ltx_Math" alttext="p(q^{-1}(w))" display="inline"><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は無限集合である．
+また，<math id="S1.p16.m12" class="ltx_Math" alttext="(l,n,w)\in S" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi>S</mi></mrow></math>ならば<math id="S1.p16.m13" class="ltx_Math" alttext="m&lt;l" display="inline"><mrow><mi>m</mi><mo>&lt;</mo><mi>l</mi></mrow></math>となる<math id="S1.p16.m14" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>
+について<math id="S1.p16.m15" class="ltx_Math" alttext="(m,n,w)\in S" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi>S</mi></mrow></math>なので，
+<math id="S1.p16.m16" class="ltx_Math" alttext="p(q^{-1}(w))" display="inline"><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が無限集合となる<math id="S1.p16.m17" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>について，
+<math id="S1.p16.m18" class="ltx_Math" alttext="C^{-1}(w)" display="inline"><mrow><msup><mi>C</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>は任意の長さの等差数列を含む．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Ramsey’s Theorem</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">集合<math id="S2.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>と基数<math id="S2.p1.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について<math id="S2.p1.m3" class="ltx_Math" alttext="[S]^{n}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mi>S</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></math>で<math id="S2.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の濃度<math id="S2.p1.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>の部分集合全体を表すことにする．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">基数<math id="S2.p2.m1" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>, <math id="S2.p2.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>, <math id="S2.p2.m3" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>, <math id="S2.p2.m4" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>について，
+任意の彩色<math id="S2.p2.m5" class="ltx_Math" alttext="\Gamma:[\kappa]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>κ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>について，濃度<math id="S2.p2.m6" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>の<math id="S2.p2.m7" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>の部分
+集合<math id="S2.p2.m8" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>が存在して，<math id="S2.p2.m9" class="ltx_Math" alttext="\Gamma|_{[M]^{n}}" display="inline"><msub><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">|</mo></mrow><msup><mrow><mo stretchy="false">[</mo><mi>M</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></msub></math>が定数となるという命題を
+<math id="S2.p2.m10" class="ltx_Math" alttext="\kappa\to(\lambda)_{c}^{n}" display="inline"><mrow><mi>κ</mi><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>で表すことにする．
+この文章では特に<math id="S2.p2.m11" class="ltx_Math" alttext="\kappa" display="inline"><mi>κ</mi></math>, <math id="S2.p2.m12" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math>が高々可算基数の場合を取り扱う．
+つまり古典的なラムゼーの定理である．</p>
+</div>
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Infinite Ramsey Theorem</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p class="ltx_p">明らかに次がわかる．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{1}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mn>1</mn></msubsup></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</div>
+<div id="S2.SS1.p2" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S2.SS1.p2.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について帰納法を回せることを示す．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="n\geq 2" display="inline"><mrow><mi>n</mi><mo>≥</mo><mn>2</mn></mrow></math><span class="ltx_text ltx_font_italic">について
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>ならば
+<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n+1}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup></mrow></math></span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS1.p3" class="ltx_para">
+<p class="ltx_p">今
+<math id="S2.SS1.p3.m1" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>
+が正しいとする．</p>
+</div>
+<div id="S2.SS1.p4" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS1.p4.m1" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を加算集合とする．<math id="S2.SS1.p4.m2" class="ltx_Math" alttext="\Gamma:[A]^{n+1}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>を色付けとする．
+任意の<math id="S2.SS1.p4.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について，<math id="S2.SS1.p4.m4" class="ltx_Math" alttext="\Gamma_{x}:[A\setminus\{x\}]^{n}\to c" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mi>x</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mrow><mi>A</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>を以下のように定義する．<math id="S2.SS1.p4.m5" class="ltx_Math" alttext="S\in[A]^{n}" display="inline"><mrow><mi>S</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></math>について</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="\Gamma_{x}(S)=\Gamma(S\cup\{x\})" display="block"><mrow><mrow><msub><mi mathvariant="normal">Γ</mi><mi>x</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>S</mi><mo>∪</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.SS1.p5" class="ltx_para">
+<p class="ltx_p">帰納的に集合列<math id="S2.SS1.p5.m1" class="ltx_Math" alttext="S_{k}" display="inline"><msub><mi>S</mi><mi>k</mi></msub></math>と列 <math id="S2.SS1.p5.m2" class="ltx_Math" alttext="\{x_{k}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow></math>と
+関数列<math id="S2.SS1.p5.m3" class="ltx_Math" alttext="v_{k}:k\to c" display="inline"><mrow><msub><mi>v</mi><mi>k</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>k</mi><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>を構成していく．
+まず
+<math id="S2.SS1.p5.m4" class="ltx_Math" alttext="S_{0}=A" display="inline"><mrow><msub><mi>S</mi><mn>0</mn></msub><mo>=</mo><mi>A</mi></mrow></math>とし，<math id="S2.SS1.p5.m5" class="ltx_Math" alttext="x_{0}" display="inline"><msub><mi>x</mi><mn>0</mn></msub></math>は<math id="S2.SS1.p5.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の適当な元とする．<math id="S2.SS1.p5.m7" class="ltx_Math" alttext="v_{0}" display="inline"><msub><mi>v</mi><mn>0</mn></msub></math>
+は空写像である．</p>
+</div>
+<div id="S2.SS1.p6" class="ltx_para">
+<p class="ltx_p">一般に<math id="S2.SS1.p6.m1" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>まで<math id="S2.SS1.p6.m2" class="ltx_Math" alttext="S_{k}" display="inline"><msub><mi>S</mi><mi>k</mi></msub></math>と<math id="S2.SS1.p6.m3" class="ltx_Math" alttext="x_{k}" display="inline"><msub><mi>x</mi><mi>k</mi></msub></math>と<math id="S2.SS1.p6.m4" class="ltx_Math" alttext="v_{k}" display="inline"><msub><mi>v</mi><mi>k</mi></msub></math>が定義されたときに
+<math id="S2.SS1.p6.m5" class="ltx_Math" alttext="S_{k+1}" display="inline"><msub><mi>S</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>は<math id="S2.SS1.p6.m6" class="ltx_Math" alttext="A\setminus\{x_{k}\}" display="inline"><mrow><mi>A</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>の部分集合で
+<math id="S2.SS1.p6.m7" class="ltx_Math" alttext="\Gamma_{x_{k}}" display="inline"><msub><mi mathvariant="normal">Γ</mi><msub><mi>x</mi><mi>k</mi></msub></msub></math>について同色なものとする．
+<math id="S2.SS1.p6.m8" class="ltx_Math" alttext="x_{k+1}" display="inline"><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>は<math id="S2.SS1.p6.m9" class="ltx_Math" alttext="S_{k+1}" display="inline"><msub><mi>S</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>の適当な元とし
+<math id="S2.SS1.p6.m10" class="ltx_Math" alttext="v_{k+1}|_{k}=v_{k}" display="inline"><mrow><msub><mrow><msub><mi>v</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">|</mo></mrow><mi>k</mi></msub><mo>=</mo><msub><mi>v</mi><mi>k</mi></msub></mrow></math>と定義し，
+<math id="S2.SS1.p6.m11" class="ltx_Math" alttext="v_{k+1}(k)" display="inline"><mrow><msub><mi>v</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.SS1.p6.m12" class="ltx_Math" alttext="S_{k+1}" display="inline"><msub><mi>S</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>の色とする．</p>
+</div>
+<div id="S2.SS1.p7" class="ltx_para">
+<p class="ltx_p">さて，<math id="S2.SS1.p7.m1" class="ltx_Math" alttext="v:\omega_{0}\to c" display="inline"><mrow><mi>v</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>ω</mi><mn>0</mn></msub><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>を<math id="S2.SS1.p7.m2" class="ltx_Math" alttext="v(k)=v_{k+1}(k)" display="inline"><mrow><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>v</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．このとき<math id="S2.SS1.p7.m3" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>は<math id="S2.SS1.p7.m4" class="ltx_Math" alttext="0,1,\dots,c-1" display="inline"><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>の値のうちどちらを無限回とる．（これは<math id="S2.SS1.p7.m5" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{1}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mn>1</mn></msubsup></mrow></math>ということでもある．）
+一般性を失うことなく<math id="S2.SS1.p7.m6" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>がそうであるとしてもよい．</p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="B=\{x_{k}\mid v(k)=0\}" display="block"><mrow><mi>B</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>k</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．<math id="S2.SS1.p7.m7" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>は加算集合である．
+ここで，<math id="S2.SS1.p7.m8" class="ltx_Math" alttext="k_{0}&lt;\dots&lt;k_{n}" display="inline"><mrow><msub><mi>k</mi><mn>0</mn></msub><mo>&lt;</mo><mi mathvariant="normal">⋯</mi><mo>&lt;</mo><msub><mi>k</mi><mi>n</mi></msub></mrow></math>を任意にとる．
+<math id="S2.SS1.p7.m9" class="ltx_Math" alttext="S_{m}" display="inline"><msub><mi>S</mi><mi>m</mi></msub></math>の定義から，<math id="S2.SS1.p7.m10" class="ltx_Math" alttext="x_{k_{1}}\dots,x_{k_{n}}\in S_{k+1}" display="inline"><mrow><mrow><mrow><msub><mi>x</mi><msub><mi>k</mi><mn>1</mn></msub></msub><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><msub><mi>x</mi><msub><mi>k</mi><mi>n</mi></msub></msub></mrow><mo>∈</mo><msub><mi>S</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+であり，<math id="S2.SS1.p7.m11" class="ltx_Math" alttext="v(k)=0" display="inline"><mrow><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>から</p>
+<table id="S2.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex13.m1" class="ltx_Math" alttext="\Gamma_{x_{k_{0}}}(\{x_{k_{1}},\dots x_{k_{n}}\})=\Gamma(\{x_{k_{0}},\dots x_{%
+k_{n}}\})=0" display="block"><mrow><mrow><msub><mi mathvariant="normal">Γ</mi><msub><mi>x</mi><msub><mi>k</mi><mn>0</mn></msub></msub></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>k</mi><mn>1</mn></msub></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>x</mi><msub><mi>k</mi><mi>n</mi></msub></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>k</mi><mn>0</mn></msub></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>x</mi><msub><mi>k</mi><mi>n</mi></msub></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><math id="S2.SS1.p7.m12" class="ltx_Math" alttext="k_{0},\dots,k_{n}" display="inline"><mrow><msub><mi>k</mi><mn>0</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>k</mi><mi>n</mi></msub></mrow></math>は任意であったから
+つまり，<math id="S2.SS1.p7.m13" class="ltx_Math" alttext="\Gamma" display="inline"><mi mathvariant="normal">Γ</mi></math>は<math id="S2.SS1.p7.m14" class="ltx_Math" alttext="[B]^{n}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></math>は<math id="S2.SS1.p7.m15" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>の値しか取らない．
+∎</p>
+</div>
+</div>
+<div id="S2.SS1.p8" class="ltx_para">
+<p class="ltx_p">以上から次の定理がわかる．</p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold"> </span>(Ramsey’s Theorem)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="n,c\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math><span class="ltx_text ltx_font_italic">とすると
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>が成り立つ．</span></p>
+</div>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Finite Ramsey Theorem</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.SS2.p1.m1" class="ltx_Math" alttext="n,c,a_{0}\dots,a_{c-1}\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><msub><mi>a</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について
+次の言明を<math id="S2.SS2.p1.m2" class="ltx_Math" alttext="\operatorname{MRam}_{c}^{n}(a_{0},\dots,a_{c-1})" display="inline"><mrow><msubsup><mi>MRam</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>a</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></math>で表す．
+ある<math id="S2.SS2.p1.m3" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>が存在して，<math id="S2.SS2.p1.m4" class="ltx_Math" alttext="r\leq N" display="inline"><mrow><mi>r</mi><mo>≤</mo><mi>N</mi></mrow></math>となる任意の<math id="S2.SS2.p1.m5" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>と，
+任意の彩色<math id="S2.SS2.p1.m6" class="ltx_Math" alttext="\Gamma:[N]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>に対して
+ある<math id="S2.SS2.p1.m7" class="ltx_Math" alttext="i\in c" display="inline"><mrow><mi>i</mi><mo>∈</mo><mi>c</mi></mrow></math>と<math id="S2.SS2.p1.m8" class="ltx_Math" alttext="A\subset N" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>N</mi></mrow></math>が存在して<math id="S2.SS2.p1.m9" class="ltx_Math" alttext="a_{i}\leq|A|" display="inline"><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>かつ
+<math id="S2.SS2.p1.m10" class="ltx_Math" alttext="\Gamma([A]^{n})=i" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>i</mi></mrow></math>を満たす．</p>
+</div>
+<div id="S2.SS2.p2" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.SS2.p2.m1" class="ltx_Math" alttext="n,c,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について
+次の言明を<math id="S2.SS2.p2.m2" class="ltx_Math" alttext="\operatorname{Ram}_{c}^{n}(a)" display="inline"><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>で表す．
+ある<math id="S2.SS2.p2.m3" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>が存在して，<math id="S2.SS2.p2.m4" class="ltx_Math" alttext="r\leq N" display="inline"><mrow><mi>r</mi><mo>≤</mo><mi>N</mi></mrow></math>となる任意の<math id="S2.SS2.p2.m5" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>と，
+任意の彩色<math id="S2.SS2.p2.m6" class="ltx_Math" alttext="\Gamma:[N]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>に対して
+<math id="S2.SS2.p2.m7" class="ltx_Math" alttext="A\subset N" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>N</mi></mrow></math>が存在して<math id="S2.SS2.p2.m8" class="ltx_Math" alttext="a\leq|A|" display="inline"><mrow><mi>a</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>かつ
+<math id="S2.SS2.p2.m9" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数である．</p>
+</div>
+<div id="S2.SS2.p3" class="ltx_para">
+<p class="ltx_p">定義から直ちに次のことがわかる．</p>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<table id="S2.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex14.m1" class="ltx_Math" alttext="\forall n\ \forall c\ \forall a_{0}\dots\forall a_{c-1}\ (\operatorname{Ram}_{%
+c}^{n}(\max\{a_{0},\dots,a_{c-1}\})\Longrightarrow\operatorname{MRam}_{c}^{n}(%
+a_{0},\dots,a_{c-1}))" display="block"><mrow><mo rspace="0.167em">∀</mo><mrow><mi>n</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><mi>c</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo lspace="0.167em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><msub><mi>a</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>a</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟹</mo><mrow><msubsup><mi>MRam</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>a</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div id="S2.SS2.p4" class="ltx_para">
+<p class="ltx_p">我々が示すべき命題は次である．</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold"> </span>(Finite Ramsey Theorem)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<table id="S2.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex15.m1" class="ltx_Math" alttext="\forall n\ \forall c\ \forall a\ \operatorname{Ram}_{c}^{n}(a)" display="block"><mrow><mo rspace="0.167em">∀</mo><mrow><mi>n</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><mi>c</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><mi>a</mi><mo lspace="0.667em">⁢</mo><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS2.p5" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS2.p5.m1" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>の成立と
+背理法で示す．</p>
+<table id="S2.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex16.m1" class="ltx_Math" alttext="\exists\ n\ \exists c\ \exists a\ \lnot\operatorname{Ram}_{c}^{n}(a)" display="block"><mrow><mo rspace="0.667em">∃</mo><mrow><mi>n</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mrow><mi>c</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mrow><mi>a</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">¬</mo><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を仮定する．</p>
+</div>
+<div id="S2.SS2.p6" class="ltx_para">
+<p class="ltx_p">ここで，<math id="S2.SS2.p6.m1" class="ltx_Math" alttext="\lnot R_{c}^{n}(a)" display="inline"><mrow><mo rspace="0.167em">¬</mo><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とは次の言明のことである．
+任意の<math id="S2.SS2.p6.m2" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対して，ある<math id="S2.SS2.p6.m3" class="ltx_Math" alttext="r\leq N" display="inline"><mrow><mi>r</mi><mo>≤</mo><mi>N</mi></mrow></math>と彩色
+<math id="S2.SS2.p6.m4" class="ltx_Math" alttext="\Gamma:[N]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>が存在して，
+どんな<math id="S2.SS2.p6.m5" class="ltx_Math" alttext="a&lt;|A|" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>を満たす<math id="S2.SS2.p6.m6" class="ltx_Math" alttext="A\subset N" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>N</mi></mrow></math>も
+<math id="S2.SS2.p6.m7" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数にならない．</p>
+</div>
+<div id="S2.SS2.p7" class="ltx_para">
+<p class="ltx_p">よって，次のような短調増加列<math id="S2.SS2.p7.m1" class="ltx_Math" alttext="\{N_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>と
+彩色<math id="S2.SS2.p7.m2" class="ltx_Math" alttext="\Gamma_{i}:[N]^{n}\to c" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>が存在する．
+任意の<math id="S2.SS2.p7.m3" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について，
+どんな<math id="S2.SS2.p7.m4" class="ltx_Math" alttext="a&lt;|A|" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>を満たす<math id="S2.SS2.p7.m5" class="ltx_Math" alttext="A\subset N_{i}" display="inline"><mrow><mi>A</mi><mo>⊂</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>も
+<math id="S2.SS2.p7.m6" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数にならない．</p>
+</div>
+<div id="S2.SS2.p8" class="ltx_para">
+<p class="ltx_p">今全単射<math id="S2.SS2.p8.m1" class="ltx_Math" alttext="z:\mathbb{N}\to[\mathbb{N}]^{n}" display="inline"><mrow><mi>z</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℕ</mi><mo stretchy="false">→</mo><msup><mrow><mo stretchy="false">[</mo><mi>ℕ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></mrow></math>
+を考える．
+<math id="S2.SS2.p8.m2" class="ltx_Math" alttext="\Gamma_{i}" display="inline"><msub><mi mathvariant="normal">Γ</mi><mi>i</mi></msub></math>たちのコドメインは有限集合なので
+次のような
+<math id="S2.SS2.p8.m3" class="ltx_Math" alttext="\mathbb{N}" display="inline"><mi>ℕ</mi></math>の無限部分集合<math id="S2.SS2.p8.m4" class="ltx_Math" alttext="\{m(i,0)\}_{j}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mi>j</mi></msub></math>が存在する．
+任意の<math id="S2.SS2.p8.m5" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について<math id="S2.SS2.p8.m6" class="ltx_Math" alttext="0\in N_{m(i,0)}" display="inline"><mrow><mn>0</mn><mo>∈</mo><msub><mi>N</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>であり，
+<math id="S2.SS2.p8.m7" class="ltx_Math" alttext="\Gamma_{m(i,0)}(z(0))" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>z</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+は同じ値．</p>
+</div>
+<div id="S2.SS2.p9" class="ltx_para">
+<p class="ltx_p">帰納的に<math id="S2.SS2.p9.m1" class="ltx_Math" alttext="\{m(i,k)\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>が構成されたときに
+その可算部分集合<math id="S2.SS2.p9.m2" class="ltx_Math" alttext="\{m(i,k+1)\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>
+を以下を満たすものとして定義する．
+任意の<math id="S2.SS2.p9.m3" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について<math id="S2.SS2.p9.m4" class="ltx_Math" alttext="k+1\in m(i,k+1)" display="inline"><mrow><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo>∈</mo><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であり，
+<math id="S2.SS2.p9.m5" class="ltx_Math" alttext="\Gamma_{m(i,k+1)}(z(k+1))" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>z</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は単色．</p>
+</div>
+<div id="S2.SS2.p10" class="ltx_para">
+<p class="ltx_p">さて，<math id="S2.SS2.p10.m1" class="ltx_Math" alttext="\Gamma:[\mathbb{N}]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>ℕ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>
+を以下のように定義する．
+<math id="S2.SS2.p10.m2" class="ltx_Math" alttext="e\in[\mathbb{N}]^{n}" display="inline"><mrow><mi>e</mi><mo>∈</mo><msup><mrow><mo stretchy="false">[</mo><mi>ℕ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></math>について
+<math id="S2.SS2.p10.m3" class="ltx_Math" alttext="\Gamma(e)=\Gamma_{m(z^{-1}(e),z^{-1}(e))}(e)" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi mathvariant="normal">Γ</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．
+このとき<math id="S2.SS2.p10.m4" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>が成立するので，
+ある無限集合<math id="S2.SS2.p10.m5" class="ltx_Math" alttext="A\subset\mathbb{N}" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>ℕ</mi></mrow></math>が存在して
+<math id="S2.SS2.p10.m6" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は単色となる．
+有限集合<math id="S2.SS2.p10.m7" class="ltx_Math" alttext="S\subset A" display="inline"><mrow><mi>S</mi><mo>⊂</mo><mi>A</mi></mrow></math>を<math id="S2.SS2.p10.m8" class="ltx_Math" alttext="|S|=a" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>S</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>a</mi></mrow></math>となるように適当に取る．
+そして，<math id="S2.SS2.p10.m9" class="ltx_Math" alttext="m(i,i)" display="inline"><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></math>を<math id="S2.SS2.p10.m10" class="ltx_Math" alttext="\max S&lt;N_{m(i,i)}" display="inline"><mrow><mrow><mi>max</mi><mo lspace="0.167em">⁡</mo><mi>S</mi></mrow><mo>&lt;</mo><msub><mi>N</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>となるように取る．
+<math id="S2.SS2.p10.m11" class="ltx_Math" alttext="m(i,j)" display="inline"><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></mrow></math>の定義から，
+<math id="S2.SS2.p10.m12" class="ltx_Math" alttext="\Gamma|_{N_{m(i,i)}}=\Gamma_{m(i,i)}" display="inline"><mrow><msub><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">|</mo></mrow><msub><mi>N</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></msub><mo>=</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>
+である．さて，<math id="S2.SS2.p10.m13" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>はその定義の仕方から<math id="S2.SS2.p10.m14" class="ltx_Math" alttext="\Gamma_{m(i,i)}([S]^{n})" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>S</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>
+が定数になり，<math id="S2.SS2.p10.m15" class="ltx_Math" alttext="S\subset N_{m(i,i)}" display="inline"><mrow><mi>S</mi><mo>⊂</mo><msub><mi>N</mi><mrow><mi>m</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>となる．
+これは<math id="S2.SS2.p10.m16" class="ltx_Math" alttext="Ni" display="inline"><mrow><mi>N</mi><mo>⁢</mo><mi>i</mi></mrow></math>の定義に反するので，背理法により定理が証明された．
+∎</p>
+</div>
+</div>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Compactness Principle</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">上の方法と同じだが，
+このセクションではRadoの選択原理を用いて
+無限ラムゼーの定理から有限ラムゼーの定理を証明する．
+また，無限van der Waerdenの定理から有限版を導く．</p>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold"> </span>(Rado’s selection principle)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">族<math id="Thmthm11.p1.m1" class="ltx_Math" alttext="\{A_{i}\}_{i\in I}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></math>を有限集合の族とする．
+また，<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\mathcal{P}\subset[I]^{&lt;\omega}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>⊂</mo><msup><mrow><mo stretchy="false">[</mo><mi>I</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><mi>ω</mi></mrow></msup></mrow></math>
+は任意の
+<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="J_{1},J_{2}\in\mathcal{P}" display="inline"><mrow><mrow><msub><mi>J</mi><mn>1</mn></msub><mo>,</mo><msub><mi>J</mi><mn>2</mn></msub></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>に対してある<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="J_{3}\in\mathcal{P}" display="inline"><mrow><msub><mi>J</mi><mn>3</mn></msub><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>
+が存在して<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="J_{1}\cup J_{2}\subset J_{3}" display="inline"><mrow><mrow><msub><mi>J</mi><mn>1</mn></msub><mo>∪</mo><msub><mi>J</mi><mn>2</mn></msub></mrow><mo>⊂</mo><msub><mi>J</mi><mn>3</mn></msub></mrow></math>を満たすとする．
+各<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="J\in\mathcal{P}" display="inline"><mrow><mi>J</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>について
+<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="f_{J}\in\prod_{i\in J}A_{i}" display="inline"><mrow><msub><mi>f</mi><mi>J</mi></msub><mo rspace="0.111em">∈</mo><mrow><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>J</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow></math>が与えられているとする．
+このとき，<math id="Thmthm11.p1.m8" class="ltx_Math" alttext="F\in\prod_{i\in I}A_{i}" display="inline"><mrow><mi>F</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow></math>が存在して，
+任意の<math id="Thmthm11.p1.m9" class="ltx_Math" alttext="J\in\mathcal{P}" display="inline"><mrow><mi>J</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>に対して<math id="Thmthm11.p1.m10" class="ltx_Math" alttext="K\in\mathcal{P}" display="inline"><mrow><mi>K</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>
+が存在して
+<math id="Thmthm11.p1.m11" class="ltx_Math" alttext="J\subset K" display="inline"><mrow><mi>J</mi><mo>⊂</mo><mi>K</mi></mrow></math>と<math id="Thmthm11.p1.m12" class="ltx_Math" alttext="F|J=f_{K}|J" display="inline"><mrow><mrow><mi>F</mi><mo fence="false">|</mo><mi>J</mi></mrow><mo>=</mo><mrow><msub><mi>f</mi><mi>K</mi></msub><mo fence="false">|</mo><mi>J</mi></mrow></mrow></math>
+を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">チコノフの定理から<math id="S3.p2.m1" class="ltx_Math" alttext="\prod_{i\in I}A_{i}" display="inline"><mrow><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></math>
+は離散空間の直積空間としてコンパクトである．
+各<math id="S3.p2.m2" class="ltx_Math" alttext="J\in\mathcal{P}" display="inline"><mrow><mi>J</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>について</p>
+<table id="S3.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex17.m1" class="ltx_Math" alttext="E_{J}=\{g\in\prod_{i\in\mathbb{N}}A_{i}\mid\exists K\in[I]^{&lt;\omega}\ g|J=f_{K%
+}|J\}" display="block"><mrow><msub><mi>E</mi><mi>J</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>g</mi><mo rspace="0.111em">∈</mo><mrow><munder><mo movablelimits="false">∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow><mo fence="true" lspace="0em" rspace="0.167em">∣</mo><mrow><mrow><mo rspace="0.167em">∃</mo><mi>K</mi></mrow><mo>∈</mo><mrow><mrow><msup><mrow><mo stretchy="false">[</mo><mi>I</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><mi>ω</mi></mrow></msup><mo>⁢</mo><mi>g</mi></mrow><mo fence="false">|</mo><mi>J</mi></mrow><mo>=</mo><mrow><msub><mi>f</mi><mi>K</mi></msub><mo fence="false">|</mo><mi>J</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．<math id="S3.p2.m3" class="ltx_Math" alttext="E_{J}" display="inline"><msub><mi>E</mi><mi>J</mi></msub></math>
+は非空である．　
+これが閉集合であることを示そう．
+<math id="S3.p2.m4" class="ltx_Math" alttext="g\not\in E_{J}" display="inline"><mrow><mi>g</mi><mo>∉</mo><msub><mi>E</mi><mi>J</mi></msub></mrow></math>とする．このとき任意の<math id="S3.p2.m5" class="ltx_Math" alttext="J\subset K" display="inline"><mrow><mi>J</mi><mo>⊂</mo><mi>K</mi></mrow></math>について
+<math id="S3.p2.m6" class="ltx_Math" alttext="g|_{J}\neq f_{K}|_{J}" display="inline"><mrow><msub><mrow><mi>g</mi><mo stretchy="false">|</mo></mrow><mi>J</mi></msub><mo>≠</mo><msub><mrow><msub><mi>f</mi><mi>K</mi></msub><mo stretchy="false">|</mo></mrow><mi>J</mi></msub></mrow></math>である．
+さて，<math id="S3.p2.m7" class="ltx_Math" alttext="O=\{h\in\prod_{i\in I}\mid f|J=g|J\}" display="inline"><mrow><mi>O</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>h</mi><mo rspace="0.111em">∈</mo><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo fence="false">|</mo><mi>J</mi></mrow><mo>=</mo><mrow><mi>g</mi><mo fence="false">|</mo><mi>J</mi></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+とすると，<math id="S3.p2.m8" class="ltx_Math" alttext="J" display="inline"><mi>J</mi></math>は有限集合なので<math id="S3.p2.m9" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>開集合である．
+定義から<math id="S3.p2.m10" class="ltx_Math" alttext="O\cap E_{J}=\O" display="inline"><mrow><mrow><mi>O</mi><mo>∩</mo><msub><mi>E</mi><mi>J</mi></msub></mrow><mo>=</mo><mi>Ø</mi></mrow></math>なので，<math id="S3.p2.m11" class="ltx_Math" alttext="E_{J}" display="inline"><msub><mi>E</mi><mi>J</mi></msub></math>が閉集合であることがわかる．
+また，<math id="S3.p2.m12" class="ltx_Math" alttext="J_{1}\cup J_{2}\subset J_{3}" display="inline"><mrow><mrow><msub><mi>J</mi><mn>1</mn></msub><mo>∪</mo><msub><mi>J</mi><mn>2</mn></msub></mrow><mo>⊂</mo><msub><mi>J</mi><mn>3</mn></msub></mrow></math>となる<math id="S3.p2.m13" class="ltx_Math" alttext="\mathcal{P}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒫</mi></math>の元
+の三つ組に対して
+<math id="S3.p2.m14" class="ltx_Math" alttext="E_{J_{3}}\subset E_{J_{1}}\cap E_{J_{2}}" display="inline"><mrow><msub><mi>E</mi><msub><mi>J</mi><mn>3</mn></msub></msub><mo>⊂</mo><mrow><msub><mi>E</mi><msub><mi>J</mi><mn>1</mn></msub></msub><mo>∩</mo><msub><mi>E</mi><msub><mi>J</mi><mn>2</mn></msub></msub></mrow></mrow></math>
+なので，<math id="S3.p2.m15" class="ltx_Math" alttext="\{E_{J}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>E</mi><mi>J</mi></msub><mo stretchy="false">}</mo></mrow></math>は有限交叉性を持ち，よってコンパクト性から
+<math id="S3.p2.m16" class="ltx_Math" alttext="\bigcap_{J}E_{J}\neq\O" display="inline"><mrow><mrow><msub><mo>⋂</mo><mi>J</mi></msub><msub><mi>E</mi><mi>J</mi></msub></mrow><mo>≠</mo><mi>Ø</mi></mrow></math>となる．
+<math id="S3.p2.m17" class="ltx_Math" alttext="F\in\bigcap_{J}E_{J}" display="inline"><mrow><mi>F</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>⋂</mo><mi>J</mi></msub><msub><mi>E</mi><mi>J</mi></msub></mrow></mrow></math>を取れば，これは求める性質を持つ．</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">Proof finite Ramsey theorems from infinite Ramsey theorem.</h6>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">背理法で示す．</p>
+<table id="S3.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex18.m1" class="ltx_Math" alttext="\exists\ n\ \exists c\ \exists a\ \lnot\operatorname{Ram}_{c}^{n}(a)" display="block"><mrow><mo rspace="0.667em">∃</mo><mrow><mi>n</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mrow><mi>c</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mrow><mi>a</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">¬</mo><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を仮定する．</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">ここで，<math id="S3.p5.m1" class="ltx_Math" alttext="\lnot\operatorname{Ram}_{c}^{n}(a)" display="inline"><mrow><mo rspace="0.167em">¬</mo><mrow><msubsup><mi>Ram</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とは次の言明のことである．
+任意の<math id="S3.p5.m2" class="ltx_Math" alttext="r\in\mathbb{N}_{+}" display="inline"><mrow><mi>r</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対して，ある<math id="S3.p5.m3" class="ltx_Math" alttext="r\leq N" display="inline"><mrow><mi>r</mi><mo>≤</mo><mi>N</mi></mrow></math>と彩色
+<math id="S3.p5.m4" class="ltx_Math" alttext="\Gamma:[N]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>が存在して，
+どんな<math id="S3.p5.m5" class="ltx_Math" alttext="a&lt;|A|" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>を満たす<math id="S3.p5.m6" class="ltx_Math" alttext="A\subset N" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>N</mi></mrow></math>も
+<math id="S3.p5.m7" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数にならない．</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">よって，次のような短調増加列<math id="S3.p6.m1" class="ltx_Math" alttext="\{N_{i}\}_{i\in\mathbb{N}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></math>と
+彩色<math id="S3.p6.m2" class="ltx_Math" alttext="\Gamma_{i}:[N]^{n}\to c" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>が存在する．
+任意の<math id="S3.p6.m3" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について，
+どんな<math id="S3.p6.m4" class="ltx_Math" alttext="a\leq|A|" display="inline"><mrow><mi>a</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>を満たす<math id="S3.p6.m5" class="ltx_Math" alttext="A\subset N_{i}" display="inline"><mrow><mi>A</mi><mo>⊂</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>も
+<math id="S3.p6.m6" class="ltx_Math" alttext="\Gamma([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数にならない．</p>
+</div>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p"><math id="S3.p7.m1" class="ltx_Math" alttext="I=[\mathbb{N}]^{n}" display="inline"><mrow><mi>I</mi><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mi>ℕ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></math>とし，
+<math id="S3.p7.m2" class="ltx_Math" alttext="A_{i}=c" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>=</mo><mi>c</mi></mrow></math>と定義し，
+<math id="S3.p7.m3" class="ltx_Math" alttext="\mathcal{P}=\{[N_{i}]^{n}\mid i\in\mathbb{N}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+とする．このとき
+<math id="S3.p7.m4" class="ltx_Math" alttext="f_{[N_{i}]^{n}}:[N_{i}]^{n}\to c" display="inline"><mrow><msub><mi>f</mi><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>を
+<math id="S3.p7.m5" class="ltx_Math" alttext="f_{[N_{i}]^{n}}(e)=\Gamma_{i}(e)" display="inline"><mrow><mrow><msub><mi>f</mi><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi mathvariant="normal">Γ</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と定義する．
+するとRado’s selection principle から
+<math id="S3.p7.m6" class="ltx_Math" alttext="\Gamma:[\mathbb{N}]^{n}\to c" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>ℕ</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>c</mi></mrow></mrow></math>が存在し，
+任意の<math id="S3.p7.m7" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>について，<math id="S3.p7.m8" class="ltx_Math" alttext="N_{k}(i&lt;k)" display="inline"><mrow><msub><mi>N</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>i</mi><mo>&lt;</mo><mi>k</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+が存在し<math id="S3.p7.m9" class="ltx_Math" alttext="\Gamma|[N_{i}]^{n}=\Gamma_{k}|[N_{i}]^{n}" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo fence="false">|</mo><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow><mo>=</mo><mrow><msub><mi mathvariant="normal">Γ</mi><mi>k</mi></msub><mo fence="false">|</mo><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></mrow></math>
+が成り立つ．
+さて，<math id="S3.p7.m10" class="ltx_Math" alttext="\aleph_{0}\to(\aleph_{0})_{c}^{n}" display="inline"><mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>が成り立つので，
+ある<math id="S3.p7.m11" class="ltx_Math" alttext="S\subset\mathbb{N}" display="inline"><mrow><mi>S</mi><mo>⊂</mo><mi>ℕ</mi></mrow></math>が存在して<math id="S3.p7.m12" class="ltx_Math" alttext="\Gamma([S]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>S</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は定数になる．
+<math id="S3.p7.m13" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の部分集合<math id="S3.p7.m14" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="S3.p7.m15" class="ltx_Math" alttext="a\leq|A|" display="inline"><mrow><mi>a</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>となるようにとる．
+次に<math id="S3.p7.m16" class="ltx_Math" alttext="\max A&lt;N_{i}" display="inline"><mrow><mrow><mi>max</mi><mo lspace="0.167em">⁡</mo><mi>A</mi></mrow><mo>&lt;</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>となる<math id="S3.p7.m17" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>をとる．
+すると，<math id="S3.p7.m18" class="ltx_Math" alttext="\Gamma|[N_{i}]^{n}=\Gamma_{k}|[N_{i}]^{n}" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo fence="false">|</mo><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow><mo>=</mo><mrow><msub><mi mathvariant="normal">Γ</mi><mi>k</mi></msub><mo fence="false">|</mo><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></mrow></mrow></math>
+なので，<math id="S3.p7.m19" class="ltx_Math" alttext="[N_{k}]^{n}" display="inline"><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mi>k</mi></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></math>の部分集合で，<math id="S3.p7.m20" class="ltx_Math" alttext="\Gamma_{k}([A]^{n})" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mi>k</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>
+が定数で，<math id="S3.p7.m21" class="ltx_Math" alttext="a\leq|A|" display="inline"><mrow><mi>a</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mrow></math>となるものは存在しないはずなので，これは矛盾である．よって有限Ramseyの定理が成り立つ．
+∎</p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">Proof finite van der Waerden theorems from infinite one.</h6>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p">無限van der Waerdenの定理を仮定して有限のそれを証明する．
+有限van der waerdenの定理が成り立たないとする．つまり，
+ある<math id="S3.p8.m1" class="ltx_Math" alttext="l,r\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>l</mi><mo>,</mo><mi>r</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>が存在して任意の<math id="S3.p8.m2" class="ltx_Math" alttext="n\in\mathbb{N}_{+}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>に対してある彩色<math id="S3.p8.m3" class="ltx_Math" alttext="C_{n}:[1,n]\to[1,r]" display="inline"><mrow><msub><mi>C</mi><mi>n</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が存在してどんな<math id="S3.p8.m4" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>についても<math id="S3.p8.m5" class="ltx_Math" alttext="C_{n}^{-1}(w)" display="inline"><mrow><msubsup><mi>C</mi><mi>n</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>が長さ<math id="S3.p8.m6" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>の等差数列を含まないとする．
+<math id="S3.p8.m7" class="ltx_Math" alttext="I=\mathbb{N}_{+}" display="inline"><mrow><mi>I</mi><mo>=</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>とし
+<math id="S3.p8.m8" class="ltx_Math" alttext="\mathcal{P}=\{[1,n]\mid n\in\mathbb{N}_{+}\}\subset[I]^{&lt;\omega}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow><mo stretchy="false">}</mo></mrow><mo>⊂</mo><msup><mrow><mo stretchy="false">[</mo><mi>I</mi><mo stretchy="false">]</mo></mrow><mrow><mi></mi><mo>&lt;</mo><mi>ω</mi></mrow></msup></mrow></math>とおく．
+また，<math id="S3.p8.m9" class="ltx_Math" alttext="i\in I" display="inline"><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></math>に対して<math id="S3.p8.m10" class="ltx_Math" alttext="A_{i}=[1,r]" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>とする．
+各<math id="S3.p8.m11" class="ltx_Math" alttext="[1,n]\in\mathcal{P}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>について
+<math id="S3.p8.m12" class="ltx_Math" alttext="f_{[1,n]}:[1,n]\to[1,r]=A_{i}" display="inline"><mrow><msub><mi>f</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow></math>を
+<math id="S3.p8.m13" class="ltx_Math" alttext="f_{[1,n]}=C_{n}\in\prod_{i\in[1,n]}A_{i}" display="inline"><mrow><msub><mi>f</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></msub><mo>=</mo><msub><mi>C</mi><mi>n</mi></msub><mo rspace="0.111em">∈</mo><mrow><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow></math>と定義する．
+このときRado’s selection principleより，ある<math id="S3.p8.m14" class="ltx_Math" alttext="F\in\prod_{i\in I}A_{i}" display="inline"><mrow><mi>F</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mi>i</mi></msub></mrow></mrow></math>つまり，
+写像<math id="S3.p8.m15" class="ltx_Math" alttext="F:\mathbb{N}_{+}\to[1,r]" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>ℕ</mi><mo>+</mo></msub><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が存在して
+任意の<math id="S3.p8.m16" class="ltx_Math" alttext="[1,n]\in\mathcal{P}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>に対して<math id="S3.p8.m17" class="ltx_Math" alttext="[1,k]\in\mathcal{P}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>k</mi><mo stretchy="false">]</mo></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow></math>が存在して
+<math id="S3.p8.m18" class="ltx_Math" alttext="[1,n]\subset[1,k]" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mo>⊂</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>k</mi><mo stretchy="false">]</mo></mrow></mrow></math>と<math id="S3.p8.m19" class="ltx_Math" alttext="F|_{[1,n]}=f_{[1,k]}|_{[1,n]}=C_{k}|_{[1,n]}" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></msub><mo>=</mo><msub><mrow><msub><mi>f</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>k</mi><mo stretchy="false">]</mo></mrow></msub><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></msub><mo>=</mo><msub><mrow><msub><mi>C</mi><mi>k</mi></msub><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></msub></mrow></math>
+が成り立つ．<math id="S3.p8.m20" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>は<math id="S3.p8.m21" class="ltx_Math" alttext="\mathbb{N}_{+}" display="inline"><msub><mi>ℕ</mi><mo>+</mo></msub></math>の彩色なので，infinite van der Waerdenの定理から，ある <math id="S3.p8.m22" class="ltx_Math" alttext="w\in[1,r]" display="inline"><mrow><mi>w</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>r</mi><mo stretchy="false">]</mo></mrow></mrow></math>が存在して<math id="S3.p8.m23" class="ltx_Math" alttext="F^{-1}(w)" display="inline"><mrow><msup><mi>F</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>は任意の長さの等差数列を含む．
+特に長さ<math id="S3.p8.m24" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>の等差数列<math id="S3.p8.m25" class="ltx_Math" alttext="\{a_{i}\}_{i=1}^{l}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>l</mi></msubsup></math>を含む．
+<math id="S3.p8.m26" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>を<math id="S3.p8.m27" class="ltx_Math" alttext="\{a_{i}\}_{i=1}^{l}\subset[1,N]" display="inline"><mrow><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>l</mi></msubsup><mo>⊂</mo><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>N</mi><mo stretchy="false">]</mo></mrow></mrow></math>となるように大きくとると，
+<math id="S3.p8.m28" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>の取り方から<math id="S3.p8.m29" class="ltx_Math" alttext="N\leq K" display="inline"><mrow><mi>N</mi><mo>≤</mo><mi>K</mi></mrow></math>となる<math id="S3.p8.m30" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>が存在して<math id="S3.p8.m31" class="ltx_Math" alttext="F|_{[1,K]}=C_{K}|_{[1,N]}" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>K</mi><mo stretchy="false">]</mo></mrow></msub><mo>=</mo><msub><mrow><msub><mi>C</mi><mi>K</mi></msub><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>,</mo><mi>N</mi><mo stretchy="false">]</mo></mrow></msub></mrow></math>
+となる．これは<math id="S3.p8.m32" class="ltx_Math" alttext="C_{K}^{-1}(w)" display="inline"><mrow><msubsup><mi>C</mi><mi>K</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow></math>が長さ<math id="S3.p8.m33" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>の等差数列を含むということだから矛盾する．よって有限van der Waerdenの定理が成り立つ．</p>
+</div>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p">∎</p>
+</div>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span> おまけ：帰納法による有限ラムゼーの定理の証明</h2>
+
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm12.p1.m1" class="ltx_Math" alttext="n,c,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について，<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="R_{c}^{n}(a)" display="inline"><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>で，
+<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="R_{c}^{n}(a)\to(a)_{c}^{n}" display="inline"><mrow><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>を成り立たせる最小の正の自然数とする．
+もちろんまだ存在するかどうかは知らないとする．
+もし，<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="l\to(a)_{c}^{n}" display="inline"><mrow><mi>l</mi><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math>ならば，<math id="Thmthm12.p1.m5" class="ltx_Math" alttext="R_{c}^{n}(a)" display="inline"><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>は存在するし，
+<math id="Thmthm12.p1.m6" class="ltx_Math" alttext="R_{c}^{n}(a)\leq l" display="inline"><mrow><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>l</mi></mrow></math>である．</span></p>
+</div>
+</div>
+<div id="S4.p1" class="ltx_para">
+<p class="ltx_p">鳩の巣原理から次がわかる．</p>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm13.p1.m1" class="ltx_Math" alttext="n,c,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について
+<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="ac\to(a)_{c}^{1}" display="inline"><mrow><mrow><mi>a</mi><mo>⁢</mo><mi>c</mi></mrow><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mi>c</mi><mn>1</mn></msubsup></mrow></math>
+つまり<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="R_{c}^{1}(a)\leq ac" display="inline"><mrow><mrow><msubsup><mi>R</mi><mi>c</mi><mn>1</mn></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>a</mi><mo>⁢</mo><mi>c</mi></mrow></mrow></math>.</span></p>
+</div>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">当たり前だが，<math id="Thmthm14.p1.m1" class="ltx_Math" alttext="R_{c}^{n}(a)\geq a" display="inline"><mrow><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mi>a</mi></mrow></math>である．</span></p>
+</div>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm15.p1.m1" class="ltx_Math" alttext="n,k,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について次がわかる．
+もし<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="R_{k}^{n}(a)" display="inline"><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>が存在し，
+かつ<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="R_{2}^{n}(R_{k}^{n}(a))" display="inline"><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が存在するなら
+<math id="Thmthm15.p1.m4" class="ltx_Math" alttext="R_{k+1}^{n}(a)" display="inline"><mrow><msubsup><mi>R</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>も存在し，
+<math id="Thmthm15.p1.m5" class="ltx_Math" alttext="R_{k+1}^{n}(a)\leq R_{2}^{n}(R_{k}^{n}(a))" display="inline"><mrow><mrow><msubsup><mi>R</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S4.p2" class="ltx_para">
+<p class="ltx_p"><math id="S4.p2.m1" class="ltx_Math" alttext="N\leq R_{2}^{n}(R_{k}^{n}(a))" display="inline"><mrow><mi>N</mi><mo>≤</mo><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とし，
+<math id="S4.p2.m2" class="ltx_Math" alttext="\Gamma:[N]^{n}\to k+1" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow></mrow></math>を彩色とする．
+そして<math id="S4.p2.m3" class="ltx_Math" alttext="r\in k+1" display="inline"><mrow><mi>r</mi><mo>∈</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>を適当にとり，新たに彩色<math id="S4.p2.m4" class="ltx_Math" alttext="\Delta:N\to 2" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>N</mi><mo stretchy="false">→</mo><mn>2</mn></mrow></mrow></math>を</p>
+<table id="S4.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex19.m1" class="ltx_Math" alttext="\Delta(i)=\begin{cases}0&amp;\Gamma(i)\neq r\\
+1&amp;\Gamma(i)=r\end{cases}" display="block"><mrow><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mn>0</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi>r</mi></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn>1</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>r</mi></mrow></mtd></mtr></mtable></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+<math id="S4.p2.m5" class="ltx_Math" alttext="N\leq R_{2}^{n}(R_{k}^{n}(a))" display="inline"><mrow><mi>N</mi><mo>≤</mo><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので，
+ある<math id="S4.p2.m6" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>の部分集合<math id="S4.p2.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>で <math id="S4.p2.m8" class="ltx_Math" alttext="\Delta([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>が定数であって，<math id="S4.p2.m9" class="ltx_Math" alttext="\operatorname{card}(A)=R_{k}^{n}(a)" display="inline"><mrow><mrow><mi>card</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となる．もし<math id="S4.p2.m10" class="ltx_Math" alttext="\Delta([A]^{n})" display="inline"><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>の値が<math id="S4.p2.m11" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>ならば，<math id="S4.p2.m12" class="ltx_Math" alttext="\Gamma([A]^{n})=\{r\}" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>r</mi><mo stretchy="false">}</mo></mrow></mrow></math>で，
+<math id="S4.p2.m13" class="ltx_Math" alttext="\operatorname{card}(A)=R_{k}^{n}(a)\geq a" display="inline"><mrow><mrow><mi>card</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mi>a</mi></mrow></math>なので，証明は終わる．
+もし<math id="S4.p2.m14" class="ltx_Math" alttext="\Delta([A]^{n})=0" display="inline"><mrow><mrow><mi mathvariant="normal">Δ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>ならば
+<math id="S4.p2.m15" class="ltx_Math" alttext="\Gamma|_{[A]^{n}}:[A]^{n}\to k" display="inline"><mrow><msub><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">|</mo></mrow><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">→</mo><mi>k</mi></mrow></mrow></math>とみなせるので，
+<math id="S4.p2.m16" class="ltx_Math" alttext="\operatorname{card}(A)=R_{k}^{n}(a)" display="inline"><mrow><mrow><mi>card</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msubsup><mi>R</mi><mi>k</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>からさらに<math id="S4.p2.m17" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の部分集合<math id="S4.p2.m18" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>で<math id="S4.p2.m19" class="ltx_Math" alttext="\operatorname{card}(B)\geq a" display="inline"><mrow><mrow><mi>card</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mi>a</mi></mrow></math>であり，<math id="S4.p2.m20" class="ltx_Math" alttext="\Gamma([B]^{n})" display="inline"><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>が定数であるものが存在する．これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">もし<math id="Thmthm16.p1.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>を任意に与える．
+もし任意の<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="x\in\mathbb{N}_{+}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="R_{2}^{n}(x)" display="inline"><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>が存在するならば，
+<math id="Thmthm16.p1.m4" class="ltx_Math" alttext="R_{2}^{n+1}(a)" display="inline"><mrow><msubsup><mi>R</mi><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>も存在し，
+<math id="Thmthm16.p1.m5" class="ltx_Math" alttext="R_{2}^{n+1}(a)\leq(R_{2}^{n})^{2a}(a)=R_{2}^{n}(R_{2}^{n}(\dots R_{2}^{n}(a)))" display="inline"><mrow><mrow><msubsup><mi>R</mi><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msup><mrow><mo stretchy="false">(</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo stretchy="false">)</mo></mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S4.p3" class="ltx_para">
+<p class="ltx_p"><math id="S4.p3.m1" class="ltx_Math" alttext="(R_{2}^{n})^{2a}(a)\leq N" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo stretchy="false">)</mo></mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>N</mi></mrow></math>
+とする．
+帰納的に
+<math id="S4.p3.m2" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>で<math id="S4.p3.m3" class="ltx_Math" alttext="N_{i}\subset N" display="inline"><mrow><msub><mi>N</mi><mi>i</mi></msub><mo>⊂</mo><mi>N</mi></mrow></math>かつ<math id="S4.p3.m4" class="ltx_Math" alttext="|N_{i}|\geq(2R_{2}^{n})^{2a-i}(a)" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup></mrow><mo stretchy="false">)</mo></mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mi>i</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>,
+<math id="S4.p3.m5" class="ltx_Math" alttext="x_{i}\in N_{i}" display="inline"><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><msub><mi>N</mi><mi>i</mi></msub></mrow></math>と
+<math id="S4.p3.m6" class="ltx_Math" alttext="v_{i}:i\to 2" display="inline"><mrow><msub><mi>v</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>i</mi><mo stretchy="false">→</mo><mn>2</mn></mrow></mrow></math>
+<math id="S4.p3.m7" class="ltx_Math" alttext="(i\in 2a)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>i</mi><mo>∈</mo><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></math>
+を構成しいていく．
+まず<math id="S4.p3.m8" class="ltx_Math" alttext="N_{0}=N" display="inline"><mrow><msub><mi>N</mi><mn>0</mn></msub><mo>=</mo><mi>N</mi></mrow></math>とし，<math id="S4.p3.m9" class="ltx_Math" alttext="x_{0}" display="inline"><msub><mi>x</mi><mn>0</mn></msub></math>は <math id="S4.p3.m10" class="ltx_Math" alttext="N_{0}" display="inline"><msub><mi>N</mi><mn>0</mn></msub></math>の適当な元とする．
+そして，<math id="S4.p3.m11" class="ltx_Math" alttext="v_{0}" display="inline"><msub><mi>v</mi><mn>0</mn></msub></math>は空写像である．
+<math id="S4.p3.m12" class="ltx_Math" alttext="N_{i}" display="inline"><msub><mi>N</mi><mi>i</mi></msub></math>, <math id="S4.p3.m13" class="ltx_Math" alttext="e_{i}" display="inline"><msub><mi>e</mi><mi>i</mi></msub></math>, <math id="S4.p3.m14" class="ltx_Math" alttext="v_{i}" display="inline"><msub><mi>v</mi><mi>i</mi></msub></math>
+が構成された時に <math id="S4.p3.m15" class="ltx_Math" alttext="N_{i+1}" display="inline"><msub><mi>N</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></math>, <math id="S4.p3.m16" class="ltx_Math" alttext="e_{i}" display="inline"><msub><mi>e</mi><mi>i</mi></msub></math>, <math id="S4.p3.m17" class="ltx_Math" alttext="v_{i}" display="inline"><msub><mi>v</mi><mi>i</mi></msub></math>を構成する．
+<math id="S4.p3.m18" class="ltx_Math" alttext="|N_{i}|\geq(2R_{2}^{n})^{2a-i}(a)" display="inline"><mrow><mrow><mo stretchy="false">|</mo><msub><mi>N</mi><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mn>2</mn><mo>⁢</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup></mrow><mo stretchy="false">)</mo></mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mi>i</mi></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので，
+<math id="S4.p3.m19" class="ltx_Math" alttext="\Gamma_{x_{i}}" display="inline"><msub><mi mathvariant="normal">Γ</mi><msub><mi>x</mi><mi>i</mi></msub></msub></math>をについて同色な部分集合<math id="S4.p3.m20" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>で，
+<math id="S4.p3.m21" class="ltx_Math" alttext="A\leq(R_{2}^{n})^{2a-i-1}(a)" display="inline"><mrow><mi>A</mi><mo>≤</mo><mrow><msup><mrow><mo stretchy="false">(</mo><msubsup><mi>R</mi><mn>2</mn><mi>n</mi></msubsup><mo stretchy="false">)</mo></mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる<math id="S4.p3.m22" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が存在する．これを<math id="S4.p3.m23" class="ltx_Math" alttext="N_{i+1}" display="inline"><msub><mi>N</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></math>とし，<math id="S4.p3.m24" class="ltx_Math" alttext="v_{i+}(i+1)" display="inline"><mrow><msub><mi>v</mi><mrow><mi>i</mi><mo>+</mo></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>は
+<math id="S4.p3.m25" class="ltx_Math" alttext="[N_{i+1}]^{n}" display="inline"><msup><mrow><mo stretchy="false">[</mo><msub><mi>N</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">]</mo></mrow><mi>n</mi></msup></math>の色とする．</p>
+</div>
+<div id="S4.p4" class="ltx_para">
+<p class="ltx_p">さて，<math id="S4.p4.m1" class="ltx_Math" alttext="v_{2a-1}:2a\to 2" display="inline"><mrow><msub><mi>v</mi><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mn>1</mn></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo stretchy="false">→</mo><mn>2</mn></mrow></mrow></math>はについて，<math id="S4.p4.m2" class="ltx_Math" alttext="|S|=a" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>S</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>a</mi></mrow></math>で，<math id="S4.p4.m3" class="ltx_Math" alttext="v_{2a-1}(S)" display="inline"><mrow><msub><mi>v</mi><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>が等色になるものが存在する(<math id="S4.p4.m4" class="ltx_Math" alttext="2a\to(a)_{2}^{1}" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mn>2</mn><mn>1</mn></msubsup></mrow></math>が成り立つということでもある)．その値は<math id="S4.p4.m5" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>としても一般性を失わない．
+<math id="S4.p4.m6" class="ltx_Math" alttext="M=\{x_{i}\mid i\in A\}" display="inline"><mrow><mi>M</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><mi>A</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math>とする．
+もちろん<math id="S4.p4.m7" class="ltx_Math" alttext="|M|=a" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>M</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mi>a</mi></mrow></math>である．
+任意に<math id="S4.p4.m8" class="ltx_Math" alttext="k_{0}&lt;k_{1}\dots k_{n}" display="inline"><mrow><msub><mi>k</mi><mn>0</mn></msub><mo>&lt;</mo><mrow><msub><mi>k</mi><mn>1</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>k</mi><mi>n</mi></msub></mrow></mrow></math>をとると，
+<math id="S4.p4.m9" class="ltx_Math" alttext="x_{k_{i}}\in N_{k_{0}}" display="inline"><mrow><msub><mi>x</mi><msub><mi>k</mi><mi>i</mi></msub></msub><mo>∈</mo><msub><mi>N</mi><msub><mi>k</mi><mn>0</mn></msub></msub></mrow></math>である．
+また，<math id="S4.p4.m10" class="ltx_Math" alttext="v_{2a-1}(k_{0})=0" display="inline"><mrow><mrow><msub><mi>v</mi><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>k</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>なので</p>
+<table id="S4.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex20.m1" class="ltx_Math" alttext="\Gamma_{x_{k_{0}}}(\{x_{k_{1}},\dots,x_{k_{n}}\})=\Gamma(\{x_{k_{0}},\dots x_{%
+k_{n}}\})=0" display="block"><mrow><mrow><msub><mi mathvariant="normal">Γ</mi><msub><mi>x</mi><msub><mi>k</mi><mn>0</mn></msub></msub></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>k</mi><mn>1</mn></msub></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>x</mi><msub><mi>k</mi><mi>n</mi></msub></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>k</mi><mn>0</mn></msub></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>x</mi><msub><mi>k</mi><mi>n</mi></msub></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．<math id="S4.p4.m11" class="ltx_Math" alttext="k_{*}" display="inline"><msub><mi>k</mi><mo>∗</mo></msub></math>は任意であったから，<math id="S4.p4.m12" class="ltx_Math" alttext="\Gamma([M]^{n+1})=0" display="inline"><mrow><mrow><mi mathvariant="normal">Γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mi>M</mi><mo stretchy="false">]</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>
+であり，等色である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の<math id="Thmthm17.p1.m1" class="ltx_Math" alttext="n,c,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について<math id="Thmthm17.p1.m2" class="ltx_Math" alttext="R_{c}^{n}(a)" display="inline"><mrow><msubsup><mi>R</mi><mi>c</mi><mi>n</mi></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>が存在する．つまり，
+任意の<math id="Thmthm17.p1.m3" class="ltx_Math" alttext="n,c,a\in\mathbb{N}_{+}" display="inline"><mrow><mrow><mi>n</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>a</mi></mrow><mo>∈</mo><msub><mi>ℕ</mi><mo>+</mo></msub></mrow></math>について十分大きい<math id="Thmthm17.p1.m4" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>が存在して</span></p>
+<table id="S4.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex21.m1" class="ltx_Math" alttext="N\to(a)_{c}^{n}" display="block"><mrow><mi>N</mi><mo stretchy="false">→</mo><msubsup><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mi>c</mi><mi>n</mi></msubsup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S4.p5" class="ltx_para">
+<p class="ltx_p">上の命題を帰納法で回すとわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">W. H. Gottschalk, <span class="ltx_text ltx_font_italic">Choice functions and Tychonoff’s theorem</span>, Proc. Amer. Math. Soc. 2 (1951), 172.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">R. L. Graham and B. L. Rothchild, <span class="ltx_text ltx_font_italic">A short proof of van der Waerden’s theorem on arithmetic progressions</span>, Proc. Amer. Math. Soc. 42 (1974), 385–386.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">R. Rado, <span class="ltx_text ltx_font_italic">Aximatic treatment of rank in infinite sets</span>, Canad. J. Math. 1 (1949), 337–343.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:29:18 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>
