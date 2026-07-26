@@ -6,6 +6,7 @@ import html
 import re
 import shutil
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Iterable
@@ -36,6 +37,9 @@ class PreparedGraphic:
 
 INCLUDE_GRAPHICS_PATTERN = re.compile(
     r"\\includegraphics\s*(?:\[(?P<options>[^]]*)\])?\s*\{(?P<source>[^{}]+)\}"
+)
+TIKZCD_PATTERN = re.compile(
+    r"\\begin\{tikzcd\}(?:\[[^]]*\])?.*?\\end\{tikzcd\}", re.DOTALL
 )
 MISSING_IMAGE_PATTERN = re.compile(
     r'<img\b(?=[^>]*\bclass="[^"]*\bltx_missing_image\b)[^>]*>',
@@ -335,6 +339,79 @@ def _normalize_norm_delimiters(source: str) -> tuple[str, int]:
     return source, replacements
 
 
+def _normalize_absolute_value_placeholders(source: str) -> tuple[str, int]:
+    r"""Give the common ``|\cdot|`` placeholder explicit delimiters."""
+    return re.subn(
+        r"(?<![A-Za-z0-9}\)])\|\s*\\cdot\s*\|",
+        r"\\lvert\\cdot\\rvert ",
+        source,
+    )
+
+
+def _normalize_empty_domain_maps(source: str) -> tuple[str, int]:
+    r"""Keep visible ``f:\to Y`` notation while avoiding a missing operand.
+
+    Several historical manuscripts visibly omit the domain.  It would be
+    unsafe to invent one, so the temporary conversion copy groups only the
+    function name, colon, and arrow into a single math atom.
+    """
+    return re.subn(
+        r"(?<![A-Za-z@\\])([A-Za-z])\s*:\s*\\to\b",
+        r"\\mathord{\1{:}\\to}",
+        source,
+    )
+
+
+def _normalize_continuation_relations(source: str) -> tuple[str, int]:
+    r"""Join an alignment row that continues the preceding equivalence."""
+    return re.subn(
+        r"(?m)\\\\\s*\n\s*(\\(?:iff|implies|Longleftright)\b)",
+        r" \1",
+        source,
+    )
+
+
+def _normalize_inverse_image_half_open_intervals(source: str) -> tuple[str, int]:
+    r"""Mark mixed interval delimiters inside inverse images explicitly."""
+    replacements = 0
+
+    def open_closed(match: re.Match[str]) -> str:
+        nonlocal replacements
+        replacements += 1
+        return (
+            r"f^{-1}(\mathopen{(}"
+            + match.group("body")
+            + r"\mathclose{]})"
+        )
+
+    def closed_open(match: re.Match[str]) -> str:
+        nonlocal replacements
+        replacements += 1
+        return (
+            r"f^{-1}(\mathopen{[}"
+            + match.group("body")
+            + r"\mathclose{)})"
+        )
+
+    source = re.sub(
+        r"f\^\{-1\}\(\((?P<body>[^$\n]*?)\]\)", open_closed, source
+    )
+    source = re.sub(
+        r"f\^\{-1\}\(\[(?P<body>[^$\n]*?)\)\)", closed_open, source
+    )
+    return source, replacements
+
+
+def _inject_latexml_compat_package(
+    source: str, bibliographies: Iterable[Path]
+) -> tuple[str, int]:
+    r"""Load repository bindings in recursive bibliography conversion."""
+    if not tuple(bibliographies) or r"\usepackage{dempa-compat}" in source:
+        return source, 0
+    pattern = re.compile(r"(\\documentclass(?:\[[^]]*\])?\{[^{}]+\})")
+    return pattern.subn(r"\1\n\\usepackage{dempa-compat}", source, count=1)
+
+
 def _normalize_sized_parentheses(source: str) -> tuple[str, int]:
     r"""Correct unambiguous left/right command typos around parentheses."""
     return re.subn(r"\\Bigr\(", r"\\Bigl(", source)
@@ -521,6 +598,172 @@ def _prepare_pdf_graphics(
     return tuple(prepared)
 
 
+def _replace_tikzcd_environments(
+    source: str, output_names: Iterable[str]
+) -> tuple[str, int]:
+    """Replace tikz-cd environments with already rendered image references."""
+    names = iter(output_names)
+    replacements = 0
+
+    def replace(_match: re.Match[str]) -> str:
+        nonlocal replacements
+        try:
+            name = next(names)
+        except StopIteration as error:
+            raise PaperToolError("tikz-cd図版の出力数が不足しています") from error
+        replacements += 1
+        return rf"\includegraphics{{{name}}}"
+
+    converted = TIKZCD_PATTERN.sub(replace, source)
+    try:
+        next(names)
+    except StopIteration:
+        pass
+    else:
+        raise PaperToolError("tikz-cd図版の出力数が原稿より多くなっています")
+    if replacements:
+        converted = re.sub(
+            r"\\usepackage(?:\[[^]]*\])?\{tikz-cd\}",
+            r"\\usepackage{graphicx}",
+            converted,
+            count=1,
+        )
+    return converted, replacements
+
+
+def _prepare_tikzcd_graphics(
+    source_path: Path, source: str, target_dir: Path, timeout: int
+) -> tuple[str, tuple[PreparedGraphic, ...]]:
+    r"""Render every tikz-cd environment with TeX before LaTeXML runs.
+
+    The full manuscript is compiled first so labels referenced inside diagrams
+    retain their numbers. A standalone copy then emits one tightly cropped PDF
+    page per diagram, which is rasterized for reliable browser display. The
+    protected source is never rewritten.
+    """
+    diagrams = TIKZCD_PATTERN.findall(_without_tex_comments(source))
+    if not diagrams:
+        return source, ()
+    required = {
+        "platex": shutil.which("platex"),
+        "pdflatex": shutil.which("pdflatex"),
+        "pdftoppm": shutil.which("pdftoppm"),
+    }
+    missing = [name for name, executable in required.items() if executable is None]
+    if missing:
+        raise PaperToolError(
+            "tikz-cd図版の描画に必要なコマンドがありません: "
+            + ", ".join(missing)
+        )
+
+    with tempfile.TemporaryDirectory(prefix=".tikzcd-render-", dir=target_dir) as raw:
+        workspace = Path(raw)
+        full_source = workspace / "source.tex"
+        full_source.write_text(source, encoding="utf-8")
+        full_command = [
+            required["platex"],
+            "-halt-on-error",
+            "-interaction=nonstopmode",
+            f"-output-directory={workspace}",
+            str(full_source),
+        ]
+        for _ in range(2):
+            completed = subprocess.run(
+                full_command,
+                cwd=source_path.parent,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                check=False,
+            )
+            if completed.returncode != 0:
+                detail = (completed.stderr or completed.stdout)[-4000:]
+                raise PaperToolError("tikz-cd原稿をコンパイルできません: " + detail)
+
+        preamble = source.split(r"\begin{document}", 1)[0]
+        preamble, class_count = re.subn(
+            r"\\documentclass(?:\[[^]]*\])?\{[^{}]+\}",
+            r"\\documentclass[border=4pt,multi=tikzcd]{standalone}",
+            preamble,
+            count=1,
+        )
+        if class_count != 1:
+            raise PaperToolError("tikz-cd図版用のdocumentclassを準備できません")
+        wrapper = workspace / "diagrams.tex"
+        wrapper.write_text(
+            preamble
+            + r"\begin{document}"
+            + "\n".join(diagrams)
+            + r"\end{document}",
+            encoding="utf-8",
+        )
+        full_aux = workspace / "source.aux"
+        if full_aux.is_file():
+            shutil.copy2(full_aux, workspace / "diagrams.aux")
+        render_command = [
+            required["pdflatex"],
+            "-halt-on-error",
+            "-interaction=nonstopmode",
+            f"-output-directory={workspace}",
+            str(wrapper),
+        ]
+        completed = subprocess.run(
+            render_command,
+            cwd=source_path.parent,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+        rendered_pdf = workspace / "diagrams.pdf"
+        if completed.returncode != 0 or not rendered_pdf.is_file():
+            detail = (completed.stderr or completed.stdout)[-4000:]
+            raise PaperToolError("tikz-cd図版を分離描画できません: " + detail)
+        completed = subprocess.run(
+            [
+                required["pdftoppm"],
+                "-png",
+                "-r",
+                "192",
+                str(rendered_pdf),
+                str(workspace / "tikzcd"),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+        rendered = sorted(
+            workspace.glob("tikzcd-*.png"),
+            key=lambda path: int(re.search(r"-(\d+)\.png$", path.name).group(1)),
+        )
+        if completed.returncode != 0 or len(rendered) != len(diagrams):
+            detail = (completed.stderr or completed.stdout)[-4000:]
+            raise PaperToolError(
+                f"tikz-cd図版数が一致しません: expected={len(diagrams)} "
+                f"actual={len(rendered)} {detail}"
+            )
+        width = max(2, len(str(len(rendered))))
+        output_names = []
+        graphics = []
+        for index, rendered_path in enumerate(rendered, start=1):
+            output_name = f"tikzcd-{index:0{width}d}.png"
+            shutil.copy2(rendered_path, target_dir / output_name)
+            output_names.append(output_name)
+            graphics.append(
+                PreparedGraphic(
+                    source=f"tikzcd environment {index}",
+                    page=index,
+                    output=output_name,
+                    width="",
+                )
+            )
+    converted, count = _replace_tikzcd_environments(source, output_names)
+    if count != len(graphics):
+        raise PaperToolError("tikz-cd図版の置換数が一致しません")
+    return converted, tuple(graphics)
+
+
 def _insert_prepared_graphics(
     html_text: str, graphics: tuple[PreparedGraphic, ...]
 ) -> tuple[str, int]:
@@ -561,6 +804,53 @@ def _insert_prepared_graphics(
     if index != len(graphics):
         missing += len(graphics) - index
     return converted, missing
+
+
+def _deduplicate_tikzcd_graphics(
+    html_text: str, graphics: tuple[PreparedGraphic, ...], target_dir: Path
+) -> str:
+    """Point HTML at stable TikZ filenames and remove LaTeXML copies."""
+    tikz_graphics = [
+        graphic
+        for graphic in graphics
+        if graphic.source.startswith("tikzcd environment ")
+    ]
+    if not tikz_graphics:
+        return html_text
+    originals = {graphic.output for graphic in tikz_graphics}
+    candidates: dict[str, list[Path]] = {}
+    for path in target_dir.glob("*.png"):
+        if path.name not in originals:
+            candidates.setdefault(sha256_file(path), []).append(path)
+    for graphic in tikz_graphics:
+        original = target_dir / graphic.output
+        if not original.is_file():
+            continue
+        copies = candidates.get(sha256_file(original), [])
+        for copy in copies:
+            html_text = html_text.replace(
+                f'src="{html.escape(copy.name, quote=True)}"',
+                f'src="{html.escape(graphic.output, quote=True)}"',
+            )
+            copy.unlink(missing_ok=True)
+    return html_text
+
+
+def _link_public_pdf_assets(
+    html_text: str, paper: Paper, target_dir: Path
+) -> str:
+    """Link copied PDF resources to their manifest-protected paper files."""
+    for entry in paper.files:
+        if not entry.public or Path(entry.path).suffix.casefold() != ".pdf":
+            continue
+        relative = safe_relative_path(entry.path, PaperToolError)
+        if relative.parent != Path("."):
+            continue
+        encoded = html.escape(relative.name, quote=True)
+        html_text = html_text.replace(f'href="{encoded}"', f'href="../{encoded}"')
+        copied = target_dir / relative.name
+        copied.unlink(missing_ok=True)
+    return html_text
 
 
 def _tex_source(paper_dir: Path, paper: Paper) -> Path:
@@ -715,15 +1005,22 @@ def run_latexml_trial(
         for bibliography in bibliography_files:
             command.append(f"--bibliography={bibliography.resolve()}")
         graphics: tuple[PreparedGraphic, ...] = ()
+        pdf_graphics: tuple[PreparedGraphic, ...] = ()
+        tikzcd_graphics: tuple[PreparedGraphic, ...] = ()
         missing_graphics = 0
         source_normalizations = []
         try:
-            graphics = _prepare_pdf_graphics(target.source, target_dir, timeout)
-            if graphics:
+            pdf_graphics = _prepare_pdf_graphics(target.source, target_dir, timeout)
+            if pdf_graphics:
                 command.append("--nographicimages")
             source_text = target.source.read_text(encoding="utf-8", errors="replace")
+            normalized_source, tikzcd_graphics = _prepare_tikzcd_graphics(
+                target.source, source_text, target_dir, timeout
+            )
+            graphics = pdf_graphics + tikzcd_graphics
+            tikzcd_normalization_count = len(tikzcd_graphics)
             normalized_source, normalization_count = _normalize_math_inside_text(
-                source_text
+                normalized_source
             )
             normalized_source, brace_normalization_count = (
                 _normalize_cross_row_braces(normalized_source)
@@ -740,6 +1037,18 @@ def run_latexml_trial(
             normalized_source, norm_delimiter_normalization_count = (
                 _normalize_norm_delimiters(normalized_source)
             )
+            normalized_source, absolute_value_normalization_count = (
+                _normalize_absolute_value_placeholders(normalized_source)
+            )
+            normalized_source, empty_domain_map_normalization_count = (
+                _normalize_empty_domain_maps(normalized_source)
+            )
+            normalized_source, continuation_relation_normalization_count = (
+                _normalize_continuation_relations(normalized_source)
+            )
+            normalized_source, half_open_interval_normalization_count = (
+                _normalize_inverse_image_half_open_intervals(normalized_source)
+            )
             normalized_source, sized_parenthesis_normalization_count = (
                 _normalize_sized_parentheses(normalized_source)
             )
@@ -755,20 +1064,31 @@ def run_latexml_trial(
             normalized_source, nocite_normalization_count = _normalize_nocite_all(
                 normalized_source, bibliography_files
             )
+            normalized_source, compat_package_count = (
+                _inject_latexml_compat_package(
+                    normalized_source, bibliography_files
+                )
+            )
             conversion_source = target.source
             temporary_source = None
             if (
                 normalization_count
+                or tikzcd_normalization_count
                 or brace_normalization_count
                 or quotient_normalization_count
                 or triangle_normalization_count
                 or function_space_normalization_count
                 or norm_delimiter_normalization_count
+                or absolute_value_normalization_count
+                or empty_domain_map_normalization_count
+                or continuation_relation_normalization_count
+                or half_open_interval_normalization_count
                 or sized_parenthesis_normalization_count
                 or group_action_dot_normalization_count
                 or group_map_display_normalization_count
                 or empty_membership_normalization_count
                 or nocite_normalization_count
+                or compat_package_count
             ):
                 temporary_source = target_dir / ".latexml-normalized.tex"
                 temporary_source.write_text(normalized_source, encoding="utf-8")
@@ -778,6 +1098,14 @@ def run_latexml_trial(
                     {
                         "kind": "math-inside-text",
                         "count": normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if tikzcd_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "tikzcd-rasterized",
+                        "count": tikzcd_normalization_count,
                         "scope": "temporary-conversion-copy",
                     }
                 )
@@ -821,6 +1149,38 @@ def run_latexml_trial(
                         "scope": "temporary-conversion-copy",
                     }
                 )
+            if absolute_value_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "absolute-value-placeholder",
+                        "count": absolute_value_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if empty_domain_map_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "empty-domain-map",
+                        "count": empty_domain_map_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if continuation_relation_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "continuation-relation",
+                        "count": continuation_relation_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if half_open_interval_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "inverse-image-half-open-interval",
+                        "count": half_open_interval_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
             if sized_parenthesis_normalization_count:
                 source_normalizations.append(
                     {
@@ -861,6 +1221,14 @@ def run_latexml_trial(
                         "scope": "temporary-conversion-copy",
                     }
                 )
+            if compat_package_count:
+                source_normalizations.append(
+                    {
+                        "kind": "latexml-compat-package",
+                        "count": compat_package_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
             command.append(str(conversion_source))
             try:
                 completed = subprocess.run(
@@ -881,8 +1249,14 @@ def run_latexml_trial(
                 if destination.is_file()
                 else ""
             )
+            html_text = _deduplicate_tikzcd_graphics(
+                html_text, graphics, target_dir
+            )
+            html_text = _link_public_pdf_assets(
+                html_text, target.paper, target_dir
+            )
             html_text, missing_graphics = _insert_prepared_graphics(
-                html_text, graphics
+                html_text, pdf_graphics
             )
             html_text, conversion_date_visible = _set_conversion_date(
                 html_text, conversion_date_label

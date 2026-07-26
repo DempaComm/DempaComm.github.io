@@ -1,0 +1,17 @@
+# -*- mode: Perl -*-
+# Compatibility definitions shared by the historical Japanese manuscripts.
+package LaTeXML::Package::Pool;
+use strict;
+use warnings;
+use LaTeXML::Package;
+
+# LaTeXML's BibTeX parser encodes some non-ASCII characters as \UTF{HEX}
+# while recursively processing a bibliography. Decode the code point instead
+# of exposing the hexadecimal number in the generated bibliography.
+DefMacro('\UTF{}', sub {
+    my ($gullet, $hexcode) = @_;
+    my $hex = $hexcode->toString();
+    return ExplodeText(UTF(hex($hex)));
+});
+
+1;

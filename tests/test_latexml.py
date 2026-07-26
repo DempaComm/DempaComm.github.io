@@ -8,16 +8,22 @@ from unittest.mock import patch
 
 from dempa_site.conversion.latexml import (
     _effective_warning_lines,
+    _inject_latexml_compat_package,
+    _normalize_absolute_value_placeholders,
     _normalize_bigtriangleup_symbol,
     _normalize_cross_row_braces,
+    _normalize_continuation_relations,
     _normalize_group_action_dots,
     _normalize_group_map_display,
     _normalize_empty_membership_before_condition,
+    _normalize_empty_domain_maps,
     _normalize_math_inside_text,
     _normalize_nocite_all,
     _normalize_left_exponent_function_space,
+    _normalize_inverse_image_half_open_intervals,
     _normalize_norm_delimiters,
     _normalize_sized_parentheses,
+    _replace_tikzcd_environments,
     _normalize_quotient_relation,
     has_document_title,
     run_latexml_trial,
@@ -158,6 +164,77 @@ class LaTeXMLTrialTest(unittest.TestCase):
         )
         self.assertEqual(0, nested_norm_count)
         self.assertEqual(nested_norms, normalized_nested_norms)
+
+        absolute_values, absolute_value_count = (
+            _normalize_absolute_value_placeholders(
+                r"$|\cdot |_1$ and $|x|$"
+            )
+        )
+        self.assertEqual(1, absolute_value_count)
+        self.assertEqual(
+            r"$\lvert\cdot\rvert _1$ and $|x|$", absolute_values
+        )
+        multiplied_norms, multiplied_norm_count = (
+            _normalize_absolute_value_placeholders(
+                r"$|A|\cdot|x|$ and $|L^{-1}|\cdot |e|$"
+            )
+        )
+        self.assertEqual(0, multiplied_norm_count)
+        self.assertEqual(
+            r"$|A|\cdot|x|$ and $|L^{-1}|\cdot |e|$", multiplied_norms
+        )
+
+        maps, map_count = _normalize_empty_domain_maps(
+            r"$f:\to Y$ $g: X\to Y$ $\alpha:\to[0,1]$"
+        )
+        self.assertEqual(1, map_count)
+        self.assertEqual(
+            r"$\mathord{f{:}\to} Y$ $g: X\to Y$ $\alpha:\to[0,1]$",
+            maps,
+        )
+
+        continued, continued_count = _normalize_continuation_relations(
+            "x=y\\\\\n\\iff z=w"
+        )
+        self.assertEqual(1, continued_count)
+        self.assertEqual("x=y \\iff z=w", continued)
+
+        intervals, interval_count = _normalize_inverse_image_half_open_intervals(
+            r"$f^{-1}((a,1])$ and $f^{-1}([0,b))$"
+        )
+        self.assertEqual(2, interval_count)
+        self.assertEqual(
+            r"$f^{-1}(\mathopen{(}a,1\mathclose{]})$ and "
+            r"$f^{-1}(\mathopen{[}0,b\mathclose{)})$",
+            intervals,
+        )
+
+        tikz_source = (
+            r"\usepackage{tikz-cd}\begin{document}"
+            r"\begin{tikzcd}A\arrow[r]&B\end{tikzcd}"
+            r"\end{document}"
+        )
+        replaced_tikz, tikz_count = _replace_tikzcd_environments(
+            tikz_source, ["tikzcd-01.png"]
+        )
+        self.assertEqual(1, tikz_count)
+        self.assertEqual(
+            r"\usepackage{graphicx}\begin{document}"
+            r"\includegraphics{tikzcd-01.png}\end{document}",
+            replaced_tikz,
+        )
+
+        compat, compat_count = _inject_latexml_compat_package(
+            r"\documentclass[12pt]{article}\begin{document}x\end{document}",
+            [self.paper.source_path.parent / "references.bib"],
+        )
+        self.assertEqual(1, compat_count)
+        self.assertEqual(
+            r"\documentclass[12pt]{article}"
+            "\n"
+            r"\usepackage{dempa-compat}\begin{document}x\end{document}",
+            compat,
+        )
 
         reversed_norms = (
             r"&=\rVert f(x)\lVert+\rVert g(x)\lVert" "\n"

@@ -1,0 +1,1617 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>pullback と 完全写像 —Describing perfect maps with pullback—</title>
+<!--Generated on Sun Jul 26 19:06:47 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-03-11-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>完全写像をpullbackで記述する，圏を知らぬ私が．のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../permap.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document" style="font-size:120%;">
+<span class="ltx_text" style="font-size:83%;">pullback と 完全写像
+<br class="ltx_break"></span>—Describing perfect maps with pullback—</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>
+に沿ってpullbackによって完全写像の特徴付けを記述していく．
+よくわからなかったところは
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="" class="ltx_ref">5</a>]</cite>も参考にした．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>pullback</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">可換図式の説明は省略する．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">位相空間<math id="S1.p2.m1" class="ltx_Math" alttext="X,Y,Z" display="inline"><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>Z</mi></mrow></math>と
+写像<math id="S1.p2.m2" class="ltx_Math" alttext="f\colon X\to Z" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>
+と
+<math id="S1.p2.m3" class="ltx_Math" alttext="g\colon X\to Z" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>を考える．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-01.png" id="S1.Ex1.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="145" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">このとき
+位相空間<math id="S1.p3.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>と二つの写像
+<math id="S1.p3.m2" class="ltx_Math" alttext="g^{\prime}\colon P\to X" display="inline"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>P</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>
+と
+<math id="S1.p3.m3" class="ltx_Math" alttext="f^{\prime}\colon P\to Y" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>P</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+が上の図式に対する
+<span class="ltx_text ltx_font_bold">pullback</span>
+であるとは以下の図式が可換であり</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-02.png" id="S1.Ex2.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">尚且つ図式を果敢にする他の
+<math id="S1.p4.m1" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>,
+<math id="S1.p4.m2" class="ltx_Math" alttext="b\colon T\to X" display="inline"><mrow><mi>b</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>,
+<math id="S1.p4.m3" class="ltx_Math" alttext="a\colon T\to Y" display="inline"><mrow><mi>a</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+が与えられた時に
+以下の図式を可換にする<math id="S1.p4.m4" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>が一意的に存在するときにいう．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-03.png" id="S1.Ex3.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="283" height="230" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-04.png" id="S1.Ex4.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="145" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p"><math id="S1.p6.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>がpullbackであることを示すために以下のように直角記号を書く．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-05.png" id="S1.Ex5.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">また<math id="S1.p8.m1" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>をbase changeなどと言ったりする．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">pullback<math id="S1.p9.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>を
+<math id="S1.p9.m2" class="ltx_Math" alttext="X\times_{Z,f,g}Y" display="inline"><mrow><mi>X</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mi>Z</mi><mo>,</mo><mi>f</mi><mo>,</mo><mi>g</mi></mrow></msub><mi>Y</mi></mrow></math>や
+<math id="S1.p9.m3" class="ltx_Math" alttext="X\times_{Z}Y" display="inline"><mrow><mi>X</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></msub><mi>Y</mi></mrow></math>と書いたりする．</p>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">以上の定義からpullbackは存在するならば同型を除いて一意的であることがわかる．
+今から位相空間のpullbackに関する幾つかの基本事項を確認しよう．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間の圏において，pullbackは常に存在する．つまり上で述べた状況において，pullback <math id="Thmthm1.p1.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>は常に存在する．
+さらにpullbackの具体的表示として<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="P=\{\,(x,y)\in X\times Y\mid f(x)=g(y)\,\}" display="inline"><mrow><mi>P</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Y</mi></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>で，<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>と<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="g^{\prime}" display="inline"><msup><mi>g</mi><mo>′</mo></msup></math>は射影であるように取れる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">具体的に表示を与えているので可換性と普遍性を調べるだけである．せかせか手を動かせばわかる．
+∎</p>
+</div>
+</div>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p">位相空間のpullbackは上記のように具体的に書けるのだが，
+特殊な状況においてそれが何と同一視できるのかが大事だと思われる．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の命題群が成り立つ．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の図式において
+</span><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="f^{-1}(x)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">はpullbackになっている．
+つまり，写像</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="f\colon X\to Z" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+に対して，一点</span><math id="S1.I1.i1.p1.m3" class="ltx_Math" alttext="y\colon\{*\}\to Z" display="inline"><mrow><mi>y</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を考えたとき，
+</span><math id="S1.I1.i1.p1.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">のbase changeは一般化ファイバー</span><math id="S1.I1.i1.p1.m5" class="ltx_Math" alttext="f^{-1}(y)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+になっている．</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-06.png" id="S1.Ex6.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="235" height="163" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像</span><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+と位相空間</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">について以下の図式はpullbackである．</span></p>
+</div>
+<div id="S1.I1.i2.p2" class="ltx_para">
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-07.png" id="S1.Ex7.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="231" height="149" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S1.I1.i2.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像</span><math id="S1.I1.i2.p3.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">と</span><math id="S1.I1.i2.p3.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">の部分集合</span><math id="S1.I1.i2.p3.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math><span class="ltx_text ltx_font_italic">について以下の図式はpullbackである．ここで</span><math id="S1.I1.i2.p3.m4" class="ltx_Math" alttext="\iota\colon B\to Y" display="inline"><mrow><mi>ι</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>B</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は包含写像である．</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-08.png" id="S1.Ex8.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="243" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A4)</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像</span><math id="S1.I1.i4.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+について以下の自明なpullback図式が成り立つ．</span></p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-09.png" id="S1.Ex9.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="180" height="150" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S1.I1.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(A5)</span> 
+<div id="S1.I1.i5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の図式がpullbackとする．</span></p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-10.png" id="S1.Ex10.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="148" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき任意の位相空間</span><math id="S1.I1.i5.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">について
+以下の図式もpullbackとなる．</span></p>
+<table id="S1.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-11.png" id="S1.Ex11.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="294" height="156" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i1" title="item (A1) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A1)</span></a>の証明:
+上の状況で
+<math id="S1.p13.m1" class="ltx_Math" alttext="X\times_{Z}\{*\}=\{\,(x,*)\in X\times\{*\}\mid f(x)=y\,\}" display="inline"><mrow><mrow><mi>X</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></msub><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>y</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+なので，<math id="S1.p13.m2" class="ltx_Math" alttext="X\times_{Z}\{*\}" display="inline"><mrow><mi>X</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></msub><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></math>と
+<math id="S1.p13.m3" class="ltx_Math" alttext="f^{-1}(y)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>は同相になる．</p>
+</div>
+<div id="S1.p14" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i2" title="item (A2) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>の証明:
+普遍性をせかせか計算するとわかる．</p>
+</div>
+<div id="S1.p15" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i3" title="item (A3) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A3)</span></a>
+の証明:
+<math id="S1.p15.m1" class="ltx_Math" alttext="P=X\times_{Y}B=\{\,(x,b)\in X\times B\mid f(x)=\iota(b)\,\}" display="inline"><mrow><mi>P</mi><mo>=</mo><mrow><mi>X</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Y</mi></msub><mi>B</mi></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>ι</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>b</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+である．
+<math id="S1.p15.m2" class="ltx_Math" alttext="\alpha\colon f^{-1}(B)\to P" display="inline"><mrow><mi>α</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>P</mi></mrow></mrow></math>
+を<math id="S1.p15.m3" class="ltx_Math" alttext="\alpha(x)=(x,f(x))" display="inline"><mrow><mrow><mi>α</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+と定義する．
+<math id="S1.p15.m4" class="ltx_Math" alttext="\beta\colon P\to f^{-1}(B)" display="inline"><mrow><mi>β</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>P</mi><mo stretchy="false">→</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を<math id="S1.p15.m5" class="ltx_Math" alttext="\beta(x,b)=x" display="inline"><mrow><mrow><mi>β</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>x</mi></mrow></math>
+と定義する．
+これらは互いに逆写像になっているので
+<math id="S1.p15.m6" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>と<math id="S1.p15.m7" class="ltx_Math" alttext="f^{-1}(B)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が同相であることがわかる．</p>
+</div>
+<div id="S1.p16" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i4" title="item (A4) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A4)</span></a>の証明:
+普遍性を計算するとわかる．</p>
+</div>
+<div id="S1.p17" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i5" title="item (A5) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A5)</span></a>の証明：
+普遍性をせかせか計算するとわかる．</p>
+</div>
+<div id="S1.p18" class="ltx_para">
+<p class="ltx_p">一般にpullbackと極限は交換する．特にpullbackと直積は交換するので，二つのpullhack図式を直積するとpullbackになる．</p>
+</div>
+<div id="S1.p19" class="ltx_para">
+<p class="ltx_p">ここら辺で証明を終わろう．
+∎</p>
+</div>
+</div>
+<div id="S1.p20" class="ltx_para">
+<p class="ltx_p">pullback同士を連結させてもpullbackになる．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の可換図式の状況を考える．</span></p>
+</div>
+<div id="Thmthm3.p2" class="ltx_para">
+<table id="S1.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-12.png" id="S1.Ex12.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="286" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="Thmthm3.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">つまり右側の図式において<math id="Thmthm3.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は<math id="Thmthm3.p3.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と<math id="Thmthm3.p3.m3" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>の<math id="Thmthm3.p3.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>上のpullbackとする．
+このとき<math id="Thmthm3.p3.m5" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>が左側の図式のpullbackになっていることと，
+<math id="Thmthm3.p3.m6" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>は一番外側の大きい図式のpullbackになっていること
+つまり</span></p>
+</div>
+<div id="Thmthm3.p4" class="ltx_para">
+<table id="S1.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-13.png" id="S1.Ex13.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="175" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">がpullback図式になっていることは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p21" class="ltx_para">
+<p class="ltx_p">まず<math id="S1.p21.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>が小さい図式のpullbackになっているとする.
+大きい図式の
+普遍性を示すために位相空間<math id="S1.p21.m2" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>から
+図式が可換になるような連続写像<math id="S1.p21.m3" class="ltx_Math" alttext="p\colon T\to A" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>A</mi></mrow></mrow></math>
+と
+<math id="S1.p21.m4" class="ltx_Math" alttext="q\colon T\to Y" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+が伸びてるとする．</p>
+<table id="S1.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-14.png" id="S1.Ex14.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="487" height="305" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">すると
+<math id="S1.p21.m5" class="ltx_Math" alttext="p\colon T\to A" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>A</mi></mrow></mrow></math>
+と
+<math id="S1.p21.m6" class="ltx_Math" alttext="g\circ q\colon T\to Z" display="inline"><mrow><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>q</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>
+は
+<math id="S1.p21.m7" class="ltx_Math" alttext="v\colon A\to B" display="inline"><mrow><mi>v</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>と
+<math id="S1.p21.m8" class="ltx_Math" alttext="h\colon Z\to B" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>Z</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>からなる図式を可換にする．</p>
+<table id="S1.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-15.png" id="S1.Ex15.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="487" height="313" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="S1.p21.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がpullbackであることから一意的に写像
+<math id="S1.p21.m10" class="ltx_Math" alttext="r\colon T\to X" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>が存在して図式を可換にする．</p>
+<table id="S1.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-16.png" id="S1.Ex16.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="487" height="305" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">そして<math id="S1.p21.m11" class="ltx_Math" alttext="r\colon T\to X" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>と<math id="S1.p21.m12" class="ltx_Math" alttext="q\colon T\to Y" display="inline"><mrow><mi>q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+に対して<math id="S1.p21.m13" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>の普遍性を用いて一意的な写像<math id="S1.p21.m14" class="ltx_Math" alttext="l\colon T\to P" display="inline"><mrow><mi>l</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>P</mi></mrow></mrow></math>
+を得る．</p>
+<table id="S1.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-17.png" id="S1.Ex17.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="487" height="305" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">以上の図式は全て可換なので以下の図式も可換になる．</p>
+<table id="S1.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-18.png" id="S1.Ex18.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="345" height="278" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">一意性も<math id="S1.p21.m15" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>や<math id="S1.p21.m16" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>の一意性からわかる(なぜか?)．
+以上から<math id="S1.p21.m17" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>が<math id="S1.p21.m18" class="ltx_Math" alttext="A\times_{B}Y" display="inline"><mrow><mi>A</mi><msub><mo lspace="0.222em" rspace="0.222em">×</mo><mi>B</mi></msub><mi>Y</mi></mrow></math>であることがわかった．
+逆を示すのは省略する．今やった操作を逆に辿ればきっとできるよ．
+∎</p>
+</div>
+</div>
+<div id="S1.p22" class="ltx_para">
+<p class="ltx_p">図式を縦にすることで以下のこともわかる．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の可換図式の状況を考える．</span></p>
+</div>
+<div id="Thmthm4.p2" class="ltx_para">
+<table id="S1.Ex19" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-19.png" id="S1.Ex19.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="240" height="240" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="Thmthm4.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき<math id="Thmthm4.p3.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>が小さい四角のpullbackになっていることと一番外側の大きい図式のpullbackになっていることは同値である．</span></p>
+</div>
+<div id="Thmthm4.p4" class="ltx_para">
+<table id="S1.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-20.png" id="S1.Ex20.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="198" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>完全写像</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">まず最初に埋め込みのbase changeは埋め込みなることを説明する．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下のpullback図式を考える．</span></p>
+<table id="S2.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-05.png" id="S2.Ex21.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="178" height="155" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が埋め込みならば<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>もそうである．
+さらに<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉埋め込みならば<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>もそうである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p"><math id="S2.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は埋め込みなので<math id="S2.p2.m2" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>の部分集合と見なしても良い．
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+の<a href="#S1.I1.i3" title="item (A3) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A3)</span></a>
+より<math id="S2.p2.m3" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>は<math id="S2.p2.m4" class="ltx_Math" alttext="g^{-1}(X)" display="inline"><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>である．
+つまり</p>
+<table id="S2.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-22.png" id="S2.Ex22.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="243" height="161" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．<math id="S2.p2.m5" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>は<math id="S2.p2.m6" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>への包含写像である．
+特に埋め込みである．
+また<math id="S2.p2.m7" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉埋め込みであるとき
+<math id="S2.p2.m8" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S2.p2.m9" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>の閉集合であることから<math id="S2.p2.m10" class="ltx_Math" alttext="g^{-1}(X)" display="inline"><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S2.p2.m11" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の閉集合である．つまり<math id="S2.p2.m12" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>
+は閉埋め込みである．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="X,Y" display="inline"><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></math><span class="ltx_text ltx_font_italic">を位相空間とし，
+<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>を連続写像とする．
+このとき以下が成り立つ．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(T1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">がハウスドルフであることと対角写像</span><math id="S2.I1.i1.p1.m2" class="ltx_Math" alttext="\Delta_{X}\colon X\to X\times X" display="inline"><mrow><msub><mi mathvariant="normal">Δ</mi><mi>X</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>X</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が閉埋め込みであるは同値である．</span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(T2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">がハウスドルフならば，
+グラフへの写像</span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="\Gamma_{f}\colon X\to X\times Y;x\mapsto(x,f(x))" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mi>f</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Y</mi></mrow></mrow><mo>;</mo><mrow><mi>x</mi><mo stretchy="false">↦</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">は閉埋め込みである．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p"><a href="#S2.I1.i1" title="item (T1) ‣ 命題 6. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(T1)</span></a>の証明: 対角線が閉集合であることと
+<math id="S2.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S2.p3.m2" class="ltx_Math" alttext="T_{2}" display="inline"><msub><mi>T</mi><mn>2</mn></msub></math>であることが同値ということからすぐに従う．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p"><a href="#S2.I1.i2" title="item (T2) ‣ 命題 6. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(T2)</span></a>の証明:
+次の可換図式からわかる．</p>
+<table id="S2.Ex23" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-23.png" id="S2.Ex23.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="345" height="158" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の<a href="#S1.I1.i4" title="item (A4) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A4)</span></a>から一番外側の四角が
+pullbackであることと
+同じく命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の<a href="#S1.I1.i2" title="item (A2) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>から右側の図式がpullbackになることに注意しよう．すると
+定理<a href="#Thmthm3" title="定理 3. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>から
+左側の四角がpullbackになることがわかる．
+このとき
+命題<a href="#Thmthm5" title="命題 5. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>と
+<math id="S2.p4.m1" class="ltx_Math" alttext="\Delta_{X}" display="inline"><msub><mi mathvariant="normal">Δ</mi><mi>X</mi></msub></math>が閉埋め込みであることを用いて，
+それの
+base change である<math id="S2.p4.m2" class="ltx_Math" alttext="\Gamma_{f}" display="inline"><msub><mi mathvariant="normal">Γ</mi><mi>f</mi></msub></math>も閉埋め込みであることを用いた．おわり．
+∎</p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">連続写像<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+が<span class="ltx_text ltx_font_bold">完全写像</span>であるとは
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉写像であり，任意の<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="y\in Y" display="inline"><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow></math>
+について<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="f^{-1}(y)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+がコンパクトになる時にいう．</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下のことが成り立つ．</span></p>
+</div>
+<div id="Thmthm8.p2" class="ltx_para">
+<ol id="S2.I2" class="ltx_enumerate">
+<li id="S2.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K1)</span> 
+<div id="S2.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をコンパクトとし，</span><math id="S2.I2.i1.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">をハウスドルフとすると
+任意の連続写像</span><math id="S2.I2.i1.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">は完全写像である．</span></p>
+</div>
+</li>
+<li id="S2.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K2)</span> 
+<div id="S2.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">空間
+</span><math id="S2.I2.i2.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">
+がコンパクトであることと
+一点への写像</span><math id="S2.I2.i2.p1.m2" class="ltx_Math" alttext="K\to\{*\}" display="inline"><mrow><mi>K</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が完全写像であることは同値である．</span></p>
+</div>
+</li>
+<li id="S2.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(K3)</span> 
+<div id="S2.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">空間</span><math id="S2.I2.i3.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">がコンパクトであることと
+任意の位相空間</span><math id="S2.I2.i3.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">について
+射影</span><math id="S2.I2.i3.p1.m3" class="ltx_Math" alttext="pr\colon S\times K\to S" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mi>r</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>S</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>K</mi></mrow><mo stretchy="false">→</mo><mi>S</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が閉写像であることは同値である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">コンパクトハウスドルフ性
+から<a href="#S2.I2.i1" title="item (K1) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K1)</span></a>や<a href="#S2.I2.i2" title="item (K2) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K2)</span></a>は従う．
+そしてtube lemma(<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>などを参照のこと)を使うと<a href="#S2.I2.i3" title="item (K3) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K3)</span></a>のうち射影が閉写像であることがわかる．
+射影が閉であることからコンパクト性を証明する話は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>で解説されている．
+∎</p>
+</div>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">今から完全写像の性質をpullbackで記述していく．</p>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">と<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>
+を位相空間とし，
+<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+を連続写像とする．
+このとき以下は同値である．</span></p>
+<ol id="S2.I3" class="ltx_enumerate">
+<li id="S2.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(P1)</span> 
+<div id="S2.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i1.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">は完全写像である．</span></p>
+</div>
+</li>
+<li id="S2.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(P2)</span> 
+<div id="S2.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の空間</span><math id="S2.I3.i2.p1.m1" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S2.I3.i2.p1.m2" class="ltx_Math" alttext="f\times 1_{Z}\colon X\times Z\to Y\times Z" display="inline"><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>Z</mi></msub></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow><mo stretchy="false">→</mo><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は完全写像である．</span></p>
+</div>
+</li>
+<li id="S2.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(P3)</span> 
+<div id="S2.I3.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">どんな</span><math id="S2.I3.i3.p1.m1" class="ltx_Math" alttext="g\colon Y^{\prime}\to Y" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>Y</mi><mo>′</mo></msup><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">についても
+base change </span><math id="S2.I3.i3.p1.m2" class="ltx_Math" alttext="f^{\prime}\colon X^{\prime}\to X" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>X</mi><mo>′</mo></msup><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は完全写像である．</span></p>
+</div>
+<div id="S2.I3.i3.p2" class="ltx_para">
+<table id="S2.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-24.png" id="S2.Ex24.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="188" height="156" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I3.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(P4)</span> 
+<div id="S2.I3.i4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の空間</span><math id="S2.I3.i4.p1.m1" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S2.I3.i4.p1.m2" class="ltx_Math" alttext="f\times 1_{Z}\colon X\times Z\to Y\times Z" display="inline"><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>Z</mi></msub></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow><mo stretchy="false">→</mo><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は閉写像である．</span></p>
+</div>
+</li>
+<li id="S2.I3.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(P5)</span> 
+<div id="S2.I3.i5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">どんな</span><math id="S2.I3.i5.p1.m1" class="ltx_Math" alttext="g\colon Y^{\prime}\to Y" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>Y</mi><mo>′</mo></msup><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">についても
+base change </span><math id="S2.I3.i5.p1.m2" class="ltx_Math" alttext="f^{\prime}\colon X^{\prime}\to X" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>X</mi><mo>′</mo></msup><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は閉写像である．</span></p>
+<table id="S2.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-25.png" id="S2.Ex25.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="188" height="148" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">以下のように証明する．</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<table id="S2.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-26.png" id="S2.Ex26.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="651" height="162" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p"><math id="S2.p9.m1" class="ltx_Math" alttext="\ref{item:perfectmain1}\Longrightarrow\ref{item:bcper}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i1" title="item (P1) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P3)</span></a></mtext></mrow></math>の証明:</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">まずファイバーがコンパクトであることを示そう．
+以下の図式を考える．
+<math id="S2.p10.m1" class="ltx_Math" alttext="p\in Y^{\prime}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></math>
+を任意にとる．
+そして<math id="S2.p10.m2" class="ltx_Math" alttext="q=g(p)\in Y" display="inline"><mrow><mi>q</mi><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>Y</mi></mrow></math>とする．
+一番外側の図式は命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の<a href="#S1.I1.i1" title="item (A1) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A1)</span></a>
+からpullbackとなり，
+右側の図式は
+<a href="#S2.I3.i1" title="item (P1) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P1)</span></a>の仮定からpullbackである．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<table id="S2.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-27.png" id="S2.Ex27.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="352" height="209" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって
+定理
+<a href="#Thmthm3" title="定理 3. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+から右側の四角がpullbackになっている．
+このpullbackは<math id="S2.p11.m1" class="ltx_Math" alttext="(f^{\prime})^{-1}(p)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>のはずなので
+<math id="S2.p11.m2" class="ltx_Math" alttext="(f^{\prime})^{-1}(p)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>と<math id="S2.p11.m3" class="ltx_Math" alttext="f^{-1}(q)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow></math>が同相であることがわかる．よって
+<math id="S2.p11.m4" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>
+のファイバーがコンパクトであることがわかる．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">次に<math id="S2.p12.m1" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>
+が閉写像であることを示す．
+完全写像の話のここは
+ジェネトポパワーでなんとかする．</p>
+<table id="S2.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex28.m1" class="ltx_Math" alttext="X^{\prime}=\{\,(x,a)\in X\times Y^{\prime}\mid f(x)=g(a)\,\}" display="block"><mrow><msup><mi>X</mi><mo>′</mo></msup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であることと
+<math id="S2.p12.m2" class="ltx_Math" alttext="f^{\prime}\colon X\to Y^{\prime}" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></mrow></math>が射影であることに注意しよう．
+<math id="S2.p12.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="S2.p12.m4" class="ltx_Math" alttext="X^{\prime}" display="inline"><msup><mi>X</mi><mo>′</mo></msup></math>の閉集合とする．
+そして
+<math id="S2.p12.m5" class="ltx_Math" alttext="p\not\in f^{\prime}(A)" display="inline"><mrow><mi>p</mi><mo>∉</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>をとる．
+<math id="S2.p12.m6" class="ltx_Math" alttext="p\in Y^{\prime}" display="inline"><mrow><mi>p</mi><mo>∈</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></math>に注意しよう．
+このとき
+任意の<math id="S2.p12.m7" class="ltx_Math" alttext="(f^{-1}(g(p))\times\{p\})\cap A=\emptyset" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mi>p</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．というのも，交わりを持った場合，
+<math id="S2.p12.m8" class="ltx_Math" alttext="p\not\in f^{\prime}(A)" display="inline"><mrow><mi>p</mi><mo>∉</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に反するからである．
+ここで<math id="S2.p12.m9" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が完全であることから
+<math id="S2.p12.m10" class="ltx_Math" alttext="f^{-1}(g(p))" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>はコンパクトであるので，特に
+<math id="S2.p12.m11" class="ltx_Math" alttext="f^{-1}(g(p))\times\{p\}" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mi>p</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+もコンパクトである．
+するとtube lemmaから
+開集合
+<math id="S2.p12.m12" class="ltx_Math" alttext="V\subset X" display="inline"><mrow><mi>V</mi><mo>⊂</mo><mi>X</mi></mrow></math>と
+<math id="S2.p12.m13" class="ltx_Math" alttext="W\subset Y^{\prime}" display="inline"><mrow><mi>W</mi><mo>⊂</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></math>が存在して
+<math id="S2.p12.m14" class="ltx_Math" alttext="(V\times W)\cap A=\emptyset" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>V</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>W</mi></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+かつ
+<math id="S2.p12.m15" class="ltx_Math" alttext="f^{-1}(g(p))\times\{p\}\subset V\times W" display="inline"><mrow><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mi>p</mi><mo stretchy="false">}</mo></mrow></mrow><mo>⊂</mo><mrow><mi>V</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>W</mi></mrow></mrow></math>
+となる．
+さて
+<math id="S2.p12.m16" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉写像であることから，
+<math id="S2.p12.m17" class="ltx_Math" alttext="O=Y\setminus f(X\setminus V)" display="inline"><mrow><mi>O</mi><mo>=</mo><mrow><mi>Y</mi><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>とおくとこれは<math id="S2.p12.m18" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の開集合で
+ある(この操作についてのより詳しい解説は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>を参照のこと)．
+そして<math id="S2.p12.m19" class="ltx_Math" alttext="P=g^{-1}(O)\subset Y^{\prime}" display="inline"><mrow><mi>P</mi><mo>=</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>O</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msup><mi>Y</mi><mo>′</mo></msup></mrow></math>とし，
+<math id="S2.p12.m20" class="ltx_Math" alttext="G=P\cap W" display="inline"><mrow><mi>G</mi><mo>=</mo><mrow><mi>P</mi><mo>∩</mo><mi>W</mi></mrow></mrow></math>とする．
+今から<math id="S2.p12.m21" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>が<math id="S2.p12.m22" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の近傍であり<math id="S2.p12.m23" class="ltx_Math" alttext="f^{\prime}(A)" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>と交わらないことを証明しよう．まず
+<math id="S2.p12.m24" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>が<math id="S2.p12.m25" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の近傍であることを示そう．
+<math id="S2.p12.m26" class="ltx_Math" alttext="f^{-1}(g(p))\in V" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mi>V</mi></mrow></math>なので<math id="S2.p12.m27" class="ltx_Math" alttext="f^{-1}(g(p))\cap X\setminus V=\emptyset" display="inline"><mrow><mrow><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>X</mi></mrow><mo>∖</mo><mi>V</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>である．よって
+そして<math id="S2.p12.m28" class="ltx_Math" alttext="g(p)\not\in f(X\setminus V)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∉</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+故に<math id="S2.p12.m29" class="ltx_Math" alttext="g(p)\in Y\setminus f(X\setminus V)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mi>Y</mi><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+なので<math id="S2.p12.m30" class="ltx_Math" alttext="p\in g^{-1}(Y\setminus f(X\setminus V))=P" display="inline"><mrow><mi>p</mi><mo>∈</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>Y</mi><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>P</mi></mrow></math>
+である．
+これで<math id="S2.p12.m31" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>が<math id="S2.p12.m32" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の近傍であることがわかった．
+次に
+<math id="S2.p12.m33" class="ltx_Math" alttext="G\cap f^{\prime}(A)=\emptyset" display="inline"><mrow><mrow><mi>G</mi><mo>∩</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>を示そう．
+<math id="S2.p12.m34" class="ltx_Math" alttext="q\in G" display="inline"><mrow><mi>q</mi><mo>∈</mo><mi>G</mi></mrow></math>について<math id="S2.p12.m35" class="ltx_Math" alttext="q\in W" display="inline"><mrow><mi>q</mi><mo>∈</mo><mi>W</mi></mrow></math>かつ
+<math id="S2.p12.m36" class="ltx_Math" alttext="g(q)\in Y\setminus f(X\setminus V)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mi>Y</mi><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+である．
+故に
+<math id="S2.p12.m37" class="ltx_Math" alttext="g(q)\not\in f(X\setminus V)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∉</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であるから
+<math id="S2.p12.m38" class="ltx_Math" alttext="f^{-1}(g(q))\cap(X\setminus V)=\emptyset" display="inline"><mrow><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>V</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+つまり<math id="S2.p12.m39" class="ltx_Math" alttext="f^{-1}(g(q))\subset V" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mi>V</mi></mrow></math>
+である．
+つまり
+<math id="S2.p12.m40" class="ltx_Math" alttext="f^{-1}(g(q))\times\{q\}\subset V\times W" display="inline"><mrow><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mi>q</mi><mo stretchy="false">}</mo></mrow></mrow><mo>⊂</mo><mrow><mi>V</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>W</mi></mrow></mrow></math>
+であり
+<math id="S2.p12.m41" class="ltx_Math" alttext="(V\times W)\cap A=\emptyset" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>V</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>W</mi></mrow><mo stretchy="false">)</mo></mrow><mo>∩</mo><mi>A</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+だから<math id="S2.p12.m42" class="ltx_Math" alttext="q\not\in f^{\prime}(A)" display="inline"><mrow><mi>q</mi><mo>∉</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+よって<math id="S2.p12.m43" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>と<math id="S2.p12.m44" class="ltx_Math" alttext="f(A)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>が交わりを持たないことがわかった．
+そして<math id="S2.p12.m45" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の任意性から
+<math id="S2.p12.m46" class="ltx_Math" alttext="f^{\prime}(A)" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>の補集合が開集合であることがわかったので，
+<math id="S2.p12.m47" class="ltx_Math" alttext="f^{\prime}(A)" display="inline"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>は閉集合である．
+すなわち
+<math id="S2.p12.m48" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>は閉写像である．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p"><math id="S2.p13.m1" class="ltx_Math" alttext="\ref{item:bcper}\Longrightarrow\ref{item:uniper}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i2" title="item (P2) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P2)</span></a></mtext></mrow></math>の証明:
+以下の図式を考える．
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の
+<a href="#S1.I1.i2" title="item (A2) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>から
+これはpullbackである．
+よって
+<a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P3)</span></a>から
+<math id="S2.p13.m2" class="ltx_Math" alttext="f\times 1_{Z}" display="inline"><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>Z</mi></msub></mrow></math>が完全写像であることが従う．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<table id="S2.Ex29" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-28.png" id="S2.Ex29.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="297" height="152" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p"><math id="S2.p15.m1" class="ltx_Math" alttext="\ref{item:uniper}\Longrightarrow\ref{item:uniclo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i2" title="item (P2) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i4" title="item (P4) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P4)</span></a></mtext></mrow></math>: 自明．</p>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p"><math id="S2.p16.m1" class="ltx_Math" alttext="\ref{item:bcper}\Longrightarrow\ref{item:bcclo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i5" title="item (P5) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P5)</span></a></mtext></mrow></math>: 自明.</p>
+</div>
+<div id="S2.p17" class="ltx_para">
+<p class="ltx_p"><math id="S2.p17.m1" class="ltx_Math" alttext="\ref{item:bcclo}\Longrightarrow\ref{item:uniclo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i5" title="item (P5) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P5)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i4" title="item (P4) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P4)</span></a></mtext></mrow></math>の証明:
+<math id="S2.p17.m2" class="ltx_Math" alttext="\ref{item:bcper}\Longrightarrow\ref{item:uniper}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i2" title="item (P2) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P2)</span></a></mtext></mrow></math>の証明と同様である．つまり
+以下の図式を考える．
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の
+<a href="#S1.I1.i2" title="item (A2) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A2)</span></a>から
+これはpullbackである．
+よって
+<a href="#S2.I3.i5" title="item (P5) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P5)</span></a>から
+<math id="S2.p17.m3" class="ltx_Math" alttext="f\times 1_{Z}" display="inline"><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>Z</mi></msub></mrow></math>が閉写像であることが従う．</p>
+</div>
+<div id="S2.p18" class="ltx_para">
+<table id="S2.Ex30" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-28.png" id="S2.Ex30.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="297" height="152" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p19" class="ltx_para">
+<p class="ltx_p"><math id="S2.p19.m1" class="ltx_Math" alttext="\ref{item:uniclo}\Longrightarrow\ref{item:perfectmain1}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i4" title="item (P4) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P4)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i1" title="item (P1) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(P1)</span></a></mtext></mrow></math>の証明:
+<math id="S2.p19.m2" class="ltx_Math" alttext="Z=\{*\}" display="inline"><mrow><mi>Z</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></math>
+とすることで<math id="S2.p19.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉写像であることがわかる．
+次に<math id="S2.p19.m4" class="ltx_Math" alttext="f^{-1}(p)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>がコンパクトであることを証明しよう．
+<math id="S2.p19.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を任意の位相空間とする</p>
+</div>
+<div id="S2.p20" class="ltx_para">
+<table id="S2.Ex31" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-30.png" id="S2.Ex31.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="298" height="163" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">上の図式
+はpullbackなので
+以下の図式もpullbackになる(命題<a href="#Thmthm2" title="命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>の<a href="#S1.I1.i5" title="item (A5) ‣ 命題 2. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(A5)</span></a>)．</p>
+</div>
+<div id="S2.p21" class="ltx_para">
+<table id="S2.Ex32" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-31.png" id="S2.Ex32.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="414" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p22" class="ltx_para">
+<p class="ltx_p">命題<a href="#Thmthm5" title="命題 5. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>と
+<math id="S2.p22.m1" class="ltx_Math" alttext="(p,1_{S})" display="inline"><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><msub><mn>1</mn><mi>S</mi></msub><mo stretchy="false">)</mo></mrow></math>が閉埋め込みであることから
+<math id="S2.p22.m2" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>も閉埋め込みである．
+さらに
+<a href="#S2.I3.i4" title="item (P4) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P4)</span></a>から
+<math id="S2.p22.m3" class="ltx_Math" alttext="f\times 1_{S}" display="inline"><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>S</mi></msub></mrow></math>も閉写像である．
+今から<math id="S2.p22.m4" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>が閉写像であることを示そう．
+<math id="S2.p22.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を左上の空間の閉集合とすると
+<math id="S2.p22.m6" class="ltx_Math" alttext="\{p\}\times v(A)=(f\times 1_{S})(h(A))" display="inline"><mrow><mrow><mrow><mrow><mo stretchy="false">{</mo><mi>p</mi><mo rspace="0.055em" stretchy="false">}</mo></mrow><mo rspace="0.222em">×</mo><mi>v</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>S</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+となる．今まで積み重ねてきたことから右辺は閉集合である．
+よって<math id="S2.p22.m7" class="ltx_Math" alttext="\{p\}\times v(A)" display="inline"><mrow><mrow><mrow><mo stretchy="false">{</mo><mi>p</mi><mo rspace="0.055em" stretchy="false">}</mo></mrow><mo rspace="0.222em">×</mo><mi>v</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>は部分空間<math id="S2.p22.m8" class="ltx_Math" alttext="\{p\}\times S" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mi>p</mi><mo rspace="0.055em" stretchy="false">}</mo></mrow><mo rspace="0.222em">×</mo><mi>S</mi></mrow></math>の閉集合となる．よって<math id="S2.p22.m9" class="ltx_Math" alttext="v(A)" display="inline"><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.p22.m10" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の閉部分集合となり
+<math id="S2.p22.m11" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>が閉写像であることが従う．
+すると
+<math id="S2.p22.m12" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の任意性と
+命題<a href="#Thmthm8" title="命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>の<a href="#S2.I2.i3" title="item (K3) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K3)</span></a>から
+<math id="S2.p22.m13" class="ltx_Math" alttext="f^{-1}(p)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></math>はコンパクトになる．
+よって<math id="S2.p22.m14" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が完全写像であることがわかる．
+以上で証明を終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">を完全写像とする．
+このとき<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の任意の部分集合<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>について
+<math id="Thmthm10.p1.m4" class="ltx_Math" alttext="f|_{f^{-1}(B)}\colon f^{-1}(B)\to B" display="inline"><mrow><msub><mrow><mi>f</mi><mo stretchy="false">|</mo></mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>
+は完全写像である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p23" class="ltx_para">
+<p class="ltx_p">以下の図式を考える．ここで<math id="S2.p23.m1" class="ltx_Math" alttext="v=f|_{f^{-1}(B)}" display="inline"><mrow><mi>v</mi><mo>=</mo><msub><mrow><mi>f</mi><mo stretchy="false">|</mo></mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>
+である．</p>
+</div>
+<div id="S2.p24" class="ltx_para">
+<table id="S2.Ex33" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-32.png" id="S2.Ex33.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="307" height="158" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p25" class="ltx_para">
+<p class="ltx_p">するとこの図式がpullbackであることから
+<math id="S2.p25.m1" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>は完全写像である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">と
+<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="g\colon Y\to Z" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>Y</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>
+を完全写像とする．
+このとき
+<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="g\circ f\colon X\to Z" display="inline"><mrow><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>f</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>
+も完全である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p26" class="ltx_para">
+<p class="ltx_p">任意に<math id="S2.p26.m1" class="ltx_Math" alttext="h\colon A\to Z" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>を考えて
+以下の図式を考える．</p>
+<table id="S2.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-33.png" id="S2.Ex34.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="240" height="241" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">すると定理<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>
+の<a href="#S2.I3.i5" title="item (P5) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P5)</span></a>
+から
+<math id="S2.p26.m2" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>
+と
+<math id="S2.p26.m3" class="ltx_Math" alttext="g^{\prime}" display="inline"><msup><mi>g</mi><mo>′</mo></msup></math>
+は閉写像である．
+よってそれらの合成
+<math id="S2.p26.m4" class="ltx_Math" alttext="g^{\prime}\circ f^{\prime}" display="inline"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><msup><mi>f</mi><mo>′</mo></msup></mrow></math>も閉写像である．</p>
+</div>
+<div id="S2.p27" class="ltx_para">
+<p class="ltx_p">よってpullbackの図式</p>
+<table id="S2.Ex35" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-34.png" id="S2.Ex35.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="240" height="156" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">において<math id="S2.p27.m1" class="ltx_Math" alttext="g^{\prime}\circ f^{\prime}" display="inline"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><msup><mi>f</mi><mo>′</mo></msup></mrow></math>が常に閉写像になるから再び
+<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>より
+<math id="S2.p27.m2" class="ltx_Math" alttext="g\circ f" display="inline"><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>f</mi></mrow></math>が完全であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm12.p1.m1" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+を完全写像とし，
+<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>を<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>のコンパクト集合とする．
+このとき<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="f^{-1}(K)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="Thmthm12.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト集合である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p28" class="ltx_para">
+<p class="ltx_p"><math id="S2.p28.m1" class="ltx_Math" alttext="g=f|_{f^{-1}(K)}\colon f^{-1}(K)\to K" display="inline"><mrow><mrow><mi>g</mi><mo>=</mo><msub><mrow><mi>f</mi><mo rspace="0.278em" stretchy="false">|</mo></mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow><mo rspace="0.278em">:</mo><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>K</mi></mrow></mrow></math>
+とおく．
+これは
+系<a href="#Thmthm10" title="系 10. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>より完全写像である．
+そして
+<math id="S2.p28.m2" class="ltx_Math" alttext="K\to\{*\}" display="inline"><mrow><mi>K</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></math>は
+命題<a href="#Thmthm8" title="命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>の
+<a href="#S2.I2.i2" title="item (K2) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K2)</span></a>より完全写像である．
+そして
+補題
+<a href="#Thmthm11" title="補題 11. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a>より
+これら二つの写像の合成<math id="S2.p28.m3" class="ltx_Math" alttext="f^{-1}(K)\to\{*\}" display="inline"><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">{</mo><mo lspace="0em" rspace="0em">∗</mo><mo stretchy="false">}</mo></mrow></mrow></math>
+は完全である．
+よって再び
+命題<a href="#Thmthm8" title="命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>の
+<a href="#S2.I2.i2" title="item (K2) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K2)</span></a>より
+<math id="S2.p28.m4" class="ltx_Math" alttext="f^{-1}(K)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+がコンパクトであることがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold"> </span>(<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="" class="ltx_ref">9</a>, Theorem 1.1]</cite>)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="X,Y" display="inline"><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></math><span class="ltx_text ltx_font_italic">を位相空間とし，
+<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>をハウスドルフ空間とする．
+そして<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>を完全写像とし
+<math id="Thmthm13.p1.m4" class="ltx_Math" alttext="g\colon X\to Z" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Z</mi></mrow></mrow></math>
+を連続写像とする．
+このとき<math id="Thmthm13.p1.m5" class="ltx_Math" alttext="(f,g)\colon X\to Y\times Z" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow><mo rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow></mrow></mrow></math>
+は完全写像である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p29" class="ltx_para">
+<p class="ltx_p"><math id="S2.p29.m1" class="ltx_Math" alttext="(1_{X},g)\colon X\to X\times Z" display="inline"><mrow><mrow><mo stretchy="false">(</mo><msub><mn>1</mn><mi>X</mi></msub><mo>,</mo><mi>g</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow><mo rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow></mrow></mrow></math>は<math id="S2.p29.m2" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>がハウスドルフであることから閉埋め込みである(命題<a href="#Thmthm6" title="命題 6. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>)．特に完全である．
+さらに<math id="S2.p29.m3" class="ltx_Math" alttext="f\times 1_{Z}\colon X\times Z\to Y\times Z" display="inline"><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mn>1</mn><mi>Z</mi></msub></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow><mo stretchy="false">→</mo><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>Z</mi></mrow></mrow></mrow></math>
+は完全写像である(定理<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>の<a href="#S2.I3.i2" title="item (P2) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P2)</span></a>)．
+よってこれら二つの合成である<math id="S2.p29.m4" class="ltx_Math" alttext="(f,g)" display="inline"><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></math>も完全写像である
+(補題<a href="#Thmthm11" title="補題 11. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a>)．
+∎</p>
+</div>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 14</span></span><span class="ltx_text ltx_font_bold"> </span>(<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="" class="ltx_ref">9</a>, Corollary 1.4]</cite>)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="A,B,C" display="inline"><mrow><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>C</mi></mrow></math><span class="ltx_text ltx_font_italic">を位相空間とし，
+<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>はハウスドルフとする．
+そして<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="\alpha\colon A\to B" display="inline"><mrow><mi>α</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>は連続写像で
+<math id="Thmthm14.p1.m4" class="ltx_Math" alttext="\beta\colon B\to C" display="inline"><mrow><mi>β</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>B</mi><mo stretchy="false">→</mo><mi>C</mi></mrow></mrow></math>は完全射像とする．
+もしも<math id="Thmthm14.p1.m5" class="ltx_Math" alttext="\beta\circ\alpha\colon A\to C" display="inline"><mrow><mrow><mi>β</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>α</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>C</mi></mrow></mrow></math>
+が完全写像ならば<math id="Thmthm14.p1.m6" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>も完全写像である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p30" class="ltx_para">
+<p class="ltx_p">pullbackを使う証明が思いつかなかったので普通に証明する．
+<math id="S2.p30.m1" class="ltx_Math" alttext="\gamma=(\alpha,\beta\circ\alpha)\colon A\to B\times C" display="inline"><mrow><mrow><mi>γ</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><mi>α</mi><mo>,</mo><mrow><mi>β</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>α</mi></mrow><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mrow><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>C</mi></mrow></mrow></mrow></math>
+とすると<math id="S2.p30.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>がハウスドルフであることから
+<math id="S2.p30.m3" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>は完全写像となる(定理<a href="#Thmthm13" title="定理 13 ([9, Theorem 1.1]). ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">13</span></a>)．
+<math id="S2.p30.m4" class="ltx_Math" alttext="G_{\beta}\subset B\times C" display="inline"><mrow><msub><mi>G</mi><mi>β</mi></msub><mo>⊂</mo><mrow><mi>B</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>C</mi></mrow></mrow></math>を<math id="S2.p30.m5" class="ltx_Math" alttext="\beta" display="inline"><mi>β</mi></math>のグラフとする．
+このとき
+<math id="S2.p30.m6" class="ltx_Math" alttext="pr\colon G_{\beta}\to B" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mi>r</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>G</mi><mi>β</mi></msub><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>
+は同相写像である．特に完全である．
+<math id="S2.p30.m7" class="ltx_Math" alttext="\gamma(A)\subset G_{\beta}" display="inline"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>G</mi><mi>β</mi></msub></mrow></math>
+で<math id="S2.p30.m8" class="ltx_Math" alttext="\alpha=pr\circ\gamma" display="inline"><mrow><mi>α</mi><mo>=</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mi>r</mi></mrow><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>γ</mi></mrow></mrow></math>
+なので<math id="S2.p30.m9" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>が完全であることが従う．
+∎</p>
+</div>
+</div>
+<div id="S2.p31" class="ltx_para">
+<p class="ltx_p">この文章で
+完全正則空間といったら
+<math id="S2.p31.m1" class="ltx_Math" alttext="T_{1}" display="inline"><msub><mi>T</mi><mn>1</mn></msub></math>を仮定する方の意味である．
+また<math id="S2.p31.m2" class="ltx_Math" alttext="\beta X" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></math>で位相空間<math id="S2.p31.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+ストーンチェックコンパクト化を表すとする．</p>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm15.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">と<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>
+を完全正則空間とし
+<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+を連続写像とする．
+このとき以下は同値である．</span></p>
+</div>
+<div id="Thmthm15.p2" class="ltx_para">
+<ol id="S2.I4" class="ltx_enumerate">
+<li id="S2.I4.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q1)</span> 
+<div id="S2.I4.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i1.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">は完全写像である．</span></p>
+</div>
+</li>
+<li id="S2.I4.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q2)</span> 
+<div id="S2.I4.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">あるコンパクト空間</span><math id="S2.I4.i2.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">と閉埋め込み</span><math id="S2.I4.i2.p1.m2" class="ltx_Math" alttext="i\colon X\to Y\times K" display="inline"><mrow><mi>i</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>K</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">が存在して
+</span><math id="S2.I4.i2.p1.m3" class="ltx_Math" alttext="f=pr\circ i" display="inline"><mrow><mi>f</mi><mo>=</mo><mrow><mrow><mi>p</mi><mo>⁢</mo><mi>r</mi></mrow><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>i</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．
+ここで</span><math id="S2.I4.i2.p1.m4" class="ltx_Math" alttext="pr\colon Y\times K\to Y" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mi>r</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>Y</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>K</mi></mrow><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">である．</span></p>
+</div>
+</li>
+<li id="S2.I4.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q3)</span> 
+<div id="S2.I4.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の図式がpullback
+になる．ここで</span><math id="S2.I4.i3.p1.m1" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math><span class="ltx_text ltx_font_italic">と</span><math id="S2.I4.i3.p1.m2" class="ltx_Math" alttext="g^{\prime}" display="inline"><msup><mi>g</mi><mo>′</mo></msup></math><span class="ltx_text ltx_font_italic">
+は自然な埋め込みである．</span></p>
+<table id="S2.Ex36" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-35.png" id="S2.Ex36.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="210" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I4.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q4)</span> 
+<div id="S2.I4.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i4.p1.m1" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">の任意のコンパクト化を</span><math id="S2.I4.i4.p1.m2" class="ltx_Math" alttext="\eta Y" display="inline"><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow></math><span class="ltx_text ltx_font_italic">と書くこのとき以下の図式がpullbackになる．</span></p>
+<table id="S2.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-36.png" id="S2.Ex37.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="207" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I4.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q5)</span> 
+<div id="S2.I4.i5.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I4.i5.p1.m1" class="ltx_Math" alttext="\gamma X" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">と</span><math id="S2.I4.i5.p1.m2" class="ltx_Math" alttext="\eta Y" display="inline"><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow></math><span class="ltx_text ltx_font_italic">はそれぞれ</span><math id="S2.I4.i5.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">と</span><math id="S2.I4.i5.p1.m4" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math><span class="ltx_text ltx_font_italic">
+のコンパクト化であって尚且つ以下の図式を可換にするものとする．このとき以下の図式はpullbackになる．</span></p>
+<table id="S2.Ex38" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-37.png" id="S2.Ex38.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="206" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S2.I4.i6" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q6)</span> 
+<div id="S2.I4.i6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">条件</span><a href="#S2.I4.i3" title="item (Q3) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q3)</span></a><span class="ltx_text ltx_font_italic">と同じ状況で
+</span><math id="S2.I4.i6.p1.m1" class="ltx_Math" alttext="(\beta f)^{-1}(Y)=X" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I4.i7" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q7)</span> 
+<div id="S2.I4.i7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">条件</span><a href="#S2.I4.i4" title="item (Q4) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q4)</span></a><span class="ltx_text ltx_font_italic">と同じ状況下で
+</span><math id="S2.I4.i7.p1.m1" class="ltx_Math" alttext="(\beta f)^{-1}(Y)=X" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I4.i8" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(Q8)</span> 
+<div id="S2.I4.i8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">条件</span><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a><span class="ltx_text ltx_font_italic">と同じ状況下で
+</span><math id="S2.I4.i8.p1.m1" class="ltx_Math" alttext="(\gamma f)^{-1}(Y)=X" display="inline"><mrow><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p32" class="ltx_para">
+<p class="ltx_p"><math id="S2.p32.m1" class="ltx_Math" alttext="\ref{item:0perfect}\Longrightarrow\ref{item:comp}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i2" title="item (Q2) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q2)</span></a></mtext></mrow></math>の証明：
+以下の可換図式を考える．</p>
+</div>
+<div id="S2.p33" class="ltx_para">
+<table id="S2.Ex39" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-38.png" id="S2.Ex39.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="364" height="159" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><math id="S2.p33.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="S2.p33.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に伸びる射は合成すると恒等写像になる．
+よって<math id="S2.p33.m3" class="ltx_Math" alttext="K=\beta X" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></mrow></math>ととれば
+<a href="#S2.I4.i2" title="item (Q2) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q2)</span></a>が満たされる．</p>
+</div>
+<div id="S2.p34" class="ltx_para">
+<p class="ltx_p"><math id="S2.p34.m1" class="ltx_Math" alttext="\ref{item:comp}\Longrightarrow\ref{item:0perfect}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i2" title="item (Q2) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext></mrow></math>の証明:
+命題<a href="#Thmthm8" title="命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>の<a href="#S2.I2.i3" title="item (K3) ‣ 命題 8. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(K3)</span></a>と
+補題<a href="#Thmthm11" title="補題 11. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a>から従う．</p>
+</div>
+<div id="S2.p35" class="ltx_para">
+<p class="ltx_p"><math id="S2.p35.m1" class="ltx_Math" alttext="\ref{item:0pullback}\lor\ref{item:1pullback}\lor\ref{item:2pullback}%
+\Longrightarrow\ref{item:0perfect}" display="inline"><mrow><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i3" title="item (Q3) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q3)</span></a></mtext><mo>∨</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i4" title="item (Q4) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q4)</span></a></mtext><mo>∨</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext></mrow><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext></mrow></math>の証明:
+<math id="S2.p35.m2" class="ltx_Math" alttext="\beta f" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow></math>, <math id="S2.p35.m3" class="ltx_Math" alttext="\gamma f" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow></math>などはコンパクトハウスドルフ空間の間の連続写像なので完全写像である．このことと
+定理
+<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>の
+<a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P3)</span></a>から従う．</p>
+</div>
+<div id="S2.p36" class="ltx_para">
+<p class="ltx_p"><math id="S2.p36.m1" class="ltx_Math" alttext="\ref{item:0perfect}\Longrightarrow\ref{item:0pullback}\land\ref{item:1pullback%
+}\land\ref{item:2pullback}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext><mo stretchy="false">⟹</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i3" title="item (Q3) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q3)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i4" title="item (Q4) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q4)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext></mrow></mrow></math>の証明:</p>
+</div>
+<div id="S2.p37" class="ltx_para">
+<p class="ltx_p"><math id="S2.p37.m1" class="ltx_Math" alttext="\ref{item:2pullback}\Longrightarrow\ref{item:0pullback}\land\ref{item:1pullback}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext><mo stretchy="false">⟹</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i3" title="item (Q3) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q3)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i4" title="item (Q4) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q4)</span></a></mtext></mrow></mrow></math>
+なので，
+<math id="S2.p37.m2" class="ltx_Math" alttext="\ref{item:0perfect}\Longrightarrow\ref{item:2pullback}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext></mrow></math>
+を証明する．</p>
+</div>
+<div id="S2.p38" class="ltx_para">
+<p class="ltx_p">以下の図式を考える．
+<math id="S2.p38.m1" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>を作った後に<math id="S2.p38.m2" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>を作る．</p>
+<table id="S2.Ex40" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-39.png" id="S2.Ex40.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_square" width="270" height="247" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで<math id="S2.p38.m3" class="ltx_Math" alttext="g\colon Y\to\eta Y" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>Y</mi><mo stretchy="false">→</mo><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow></mrow></mrow></math>が埋め込みであることから
+<math id="S2.p38.m4" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>は<math id="S2.p38.m5" class="ltx_Math" alttext="(\gamma f)^{-1}(Y)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>と同相である．
+よって以下の図式を得る．</p>
+<table id="S2.Ex41" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-40.png" id="S2.Ex41.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="355" height="252" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで<math id="S2.p38.m6" class="ltx_Math" alttext="u^{\prime}" display="inline"><msup><mi>u</mi><mo>′</mo></msup></math>は包含写像である．</p>
+</div>
+<div id="S2.p39" class="ltx_para">
+<p class="ltx_p">先の定理
+<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>の
+<a href="#S2.I3.i3" title="item (P3) ‣ 定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(P3)</span></a>より，
+<math id="S2.p39.m1" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>は完全である．
+また同様に<math id="S2.p39.m2" class="ltx_Math" alttext="\gamma f" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow></math>は完全なので
+<math id="S2.p39.m3" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>も完全であり，また<math id="S2.p39.m4" class="ltx_Math" alttext="h^{\prime}" display="inline"><msup><mi>h</mi><mo>′</mo></msup></math>
+も完全になる．</p>
+</div>
+<div id="S2.p40" class="ltx_para">
+<p class="ltx_p">自明な埋め込み
+<math id="S2.p40.m1" class="ltx_Math" alttext="v^{\prime}\colon X\to\beta X" display="inline"><mrow><msup><mi>v</mi><mo>′</mo></msup><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow></mrow></mrow></math>があるので以下の図式が成り立つ．</p>
+</div>
+<div id="S2.p41" class="ltx_para">
+<table id="S2.Ex42" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-41.png" id="S2.Ex42.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="464" height="349" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって<math id="S2.p41.m1" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>の普遍性から<math id="S2.p41.m2" class="ltx_Math" alttext="r\colon X\to Q" display="inline"><mrow><mi>r</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Q</mi></mrow></mrow></math>が一意的に存在する．</p>
+</div>
+<div id="S2.p42" class="ltx_para">
+<table id="S2.Ex43" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-42.png" id="S2.Ex43.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="464" height="349" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">さらに<math id="S2.p42.m1" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>の普遍性から<math id="S2.p42.m2" class="ltx_Math" alttext="l\colon X\to P" display="inline"><mrow><mi>l</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>P</mi></mrow></mrow></math>
+が一意的に存在する．</p>
+</div>
+<div id="S2.p43" class="ltx_para">
+<table id="S2.Ex44" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-43.png" id="S2.Ex44.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="464" height="349" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで<math id="S2.p43.m1" class="ltx_Math" alttext="g^{\prime}\circ l=1_{X}" display="inline"><mrow><mrow><msup><mi>g</mi><mo>′</mo></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>l</mi></mrow><mo>=</mo><msub><mn>1</mn><mi>X</mi></msub></mrow></math>で，
+<math id="S2.p43.m2" class="ltx_Math" alttext="g^{\prime}" display="inline"><msup><mi>g</mi><mo>′</mo></msup></math>と<math id="S2.p43.m3" class="ltx_Math" alttext="1_{X}" display="inline"><msub><mn>1</mn><mi>X</mi></msub></math>は完全写像なので，
+定理
+<a href="#Thmthm14" title="定理 14 ([9, Corollary 1.4]). ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">14</span></a>から
+<math id="S2.p43.m4" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>も完全写像になる．
+さらに<math id="S2.p43.m5" class="ltx_Math" alttext="r=f^{\prime}\circ l" display="inline"><mrow><mi>r</mi><mo>=</mo><mrow><msup><mi>f</mi><mo>′</mo></msup><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>l</mi></mrow></mrow></math>なので
+<math id="S2.p43.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>も完全写像である．</p>
+</div>
+<div id="S2.p44" class="ltx_para">
+<p class="ltx_p">ところで<math id="S2.p44.m1" class="ltx_Math" alttext="X\subset(\gamma f)^{-1}(Y)" display="inline"><mrow><mi>X</mi><mo>⊂</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>なので
+包含写像<math id="S2.p44.m2" class="ltx_Math" alttext="X\to(\beta f)^{-1}(Y)" display="inline"><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>があるが，
+これは<math id="S2.p44.m3" class="ltx_Math" alttext="(\beta f)^{-1}(Y)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>の図式の<math id="S2.p44.m4" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>と入れ替えても可換図式を満たす．よって<math id="S2.p44.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>の一意性より<math id="S2.p44.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は
+包含写像<math id="S2.p44.m7" class="ltx_Math" alttext="X\to(\gamma f)^{-1}(Y)" display="inline"><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+<math id="S2.p44.m8" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は<math id="S2.p44.m9" class="ltx_Math" alttext="\gamma X" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mi>X</mi></mrow></math>の中で稠密なので特に
+<math id="S2.p44.m10" class="ltx_Math" alttext="(\gamma f)^{-1}(Y)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中でも稠密である．
+今<math id="S2.p44.m11" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>が完全写像で，特に閉写像であることがわかっているので<math id="S2.p44.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は<math id="S2.p44.m13" class="ltx_Math" alttext="(\gamma f)^{-1}(Y)" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中で閉集合ということになる．
+稠密性から<math id="S2.p44.m14" class="ltx_Math" alttext="X=(\gamma f)^{-1}(Y)" display="inline"><mrow><mi>X</mi><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となり，結局
+<math id="S2.p44.m15" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>は恒等写像であったことがわかる．
+さらに図式の可換性から<math id="S2.p44.m16" class="ltx_Math" alttext="h=f" display="inline"><mrow><mi>h</mi><mo>=</mo><mi>f</mi></mrow></math>がわかるので結局以下の図式がわかる．</p>
+</div>
+<div id="S2.p45" class="ltx_para">
+<table id="S2.Ex45" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-44.png" id="S2.Ex45.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="206" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.p46" class="ltx_para">
+<p class="ltx_p">これは
+<a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q5)</span></a>が成り立つということである．</p>
+</div>
+<div id="S2.p47" class="ltx_para">
+<p class="ltx_p"><math id="S2.p47.m1" class="ltx_Math" alttext="\ref{item:2pullback}\Longrightarrow\ref{item:0jouyo}\land\ref{item:1jouyo}%
+\land\ref{item:2jouyo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext><mo stretchy="false">⟹</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i6" title="item (Q6) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q6)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i7" title="item (Q7) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q7)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q8)</span></a></mtext></mrow></mrow></math>の証明:
+<math id="S2.p47.m2" class="ltx_Math" alttext="\ref{item:2jouyo}\Longrightarrow\ref{item:1jouyo}\land\ref{item:2jouyo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q8)</span></a></mtext><mo stretchy="false">⟹</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i7" title="item (Q7) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q7)</span></a></mtext><mo>∧</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q8)</span></a></mtext></mrow></mrow></math>が成り立つので
+<math id="S2.p47.m3" class="ltx_Math" alttext="\ref{item:2pullback}\Longrightarrow\ref{item:2jouyo}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q8)</span></a></mtext></mrow></math>
+を証明すれば良い．
+上述の
+<math id="S2.p47.m4" class="ltx_Math" alttext="\ref{item:0perfect}\Longrightarrow\ref{item:2pullback}" display="inline"><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i5" title="item (Q5) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q5)</span></a></mtext></mrow></math>の証明と似たようなもんだが，めんどくさがらず一応説明する．</p>
+<table id="S2.Ex46" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-44.png" id="S2.Ex46.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="206" height="157" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がpullbackであることと</p>
+</div>
+<div id="S2.p48" class="ltx_para">
+<table id="S2.Ex47" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-46.png" id="S2.Ex47.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="289" height="171" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がpullbackであることから
+<math id="S2.p48.m1" class="ltx_Math" alttext="X=(\gamma f)^{-1}(Y)" display="inline"><mrow><mi>X</mi><mo>=</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が従う．</p>
+</div>
+<div id="S2.p49" class="ltx_para">
+<p class="ltx_p"><math id="S2.p49.m1" class="ltx_Math" alttext="\ref{item:0jouyo}\lor\ref{item:1jouyo}\lor\ref{item:2jouyo}\Longrightarrow\ref%
+{item:0perfect}" display="inline"><mrow><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i6" title="item (Q6) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q6)</span></a></mtext><mo>∨</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i7" title="item (Q7) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q7)</span></a></mtext><mo>∨</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q8)</span></a></mtext></mrow><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I4.i1" title="item (Q1) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(Q1)</span></a></mtext></mrow></math>の証明:
+<math id="S2.p49.m2" class="ltx_Math" alttext="\beta f" display="inline"><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi></mrow></math>や<math id="S2.p49.m3" class="ltx_Math" alttext="\gamma f" display="inline"><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi></mrow></math>が完全写像であることと，系<a href="#Thmthm10" title="系 10. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>
+から<math id="S2.p49.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が完全写像であることが従う．</p>
+</div>
+<div id="S2.p50" class="ltx_para">
+<p class="ltx_p">以上で証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">定理 <a href="#Thmthm15" title="定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15</span></a>
+の
+<a href="#S2.I4.i6" title="item (Q6) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q6)</span></a>, <a href="#S2.I4.i7" title="item (Q7) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q7)</span></a>, <a href="#S2.I4.i8" title="item (Q8) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q8)</span></a>
+の条件はそれぞれ
+<math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="\beta f(\beta X\setminus X)=\mathrm{cl}_{\beta Y}(f(X))\setminus f(X)" display="inline"><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>cl</mi><mrow><mi>β</mi><mo>⁢</mo><mi>Y</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>,
+<math id="Thmrmkx1.p1.m2" class="ltx_Math" alttext="\beta f(\beta X\setminus X)=\mathrm{cl}_{\eta Y}(f(X))\setminus f(X)" display="inline"><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>cl</mi><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>,
+<math id="Thmrmkx1.p1.m3" class="ltx_Math" alttext="\gamma f(\gamma X\setminus X)=\mathrm{cl}_{\eta Y}(f(X))\setminus f(X)" display="inline"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>cl</mi><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+と同値になる．
+<math id="Thmrmkx1.p1.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が全射の時は
+<math id="Thmrmkx1.p1.m5" class="ltx_Math" alttext="\beta f(\beta X\setminus X)=\beta Y\setminus Y" display="inline"><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>Y</mi></mrow><mo>∖</mo><mi>Y</mi></mrow></mrow></math>,
+<math id="Thmrmkx1.p1.m6" class="ltx_Math" alttext="\beta f(\beta X\setminus X)=\eta Y\setminus Y" display="inline"><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>β</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow><mo>∖</mo><mi>Y</mi></mrow></mrow></math>,
+<math id="Thmrmkx1.p1.m7" class="ltx_Math" alttext="\gamma f(\gamma X\setminus X)=\eta Y\setminus Y" display="inline"><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>X</mi></mrow><mo>∖</mo><mi>X</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>η</mi><mo>⁢</mo><mi>Y</mi></mrow><mo>∖</mo><mi>Y</mi></mrow></mrow></math>
+となる．
+つまり，コンパクト化の剰余の像が行き先の剰余に等しいということである．</span></p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>おまけ</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">連続写像<math id="S3.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が
+<span class="ltx_text ltx_font_bold">固有写像</span>であるとは<math id="S3.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>によるコンパクト集合の引き戻しがコンパクトになるときにいう．</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">空間<math id="S3.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<math id="S3.p2.m2" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math><span class="ltx_text ltx_font_bold">-空間</span>であるとは
+<math id="S3.p2.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の部分集合<math id="S3.p2.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が閉集合であることと，
+任意のコンパクト部分集合<math id="S3.p2.m5" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>について
+<math id="S3.p2.m6" class="ltx_Math" alttext="K\cap A" display="inline"><mrow><mi>K</mi><mo>∩</mo><mi>A</mi></mrow></math>が<math id="S3.p2.m7" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の閉集合であることが同値になるときにいう．つまり写像の族<math id="S3.p2.m8" class="ltx_Math" alttext="\{\iota_{K}\colon K\to X\}_{K\text{:cpt in }X}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>ι</mi><mi>K</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>K</mi><mo stretchy="false">→</mo><mi>X</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>K</mi><mo>⁢</mo><mtext>:cpt in </mtext><mo>⁢</mo><mi>X</mi></mrow></msub></math>
+による商位相と<math id="S3.p2.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>自体の位相が一致するということである．
+この空間のことを<span class="ltx_text ltx_font_bold">コンパクト生成</span>であるともいう．</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">位相空間<math id="S3.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<span class="ltx_text ltx_font_bold">弱ハウスドルフ</span>であるとは，任意のコンパクト部分集合が閉集合になるときにいう．</p>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm16.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を位相空間とし，
+<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>をコンパクト生成弱ハウスドルフ空間とする．
+このとき連続写像<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="f\colon X\to Y" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>
+が完全写像であることと固有写像であることは同値である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">まず<math id="S3.p4.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が完全であると仮定する．このとき
+系
+<a href="#Thmthm12" title="系 12. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a>より
+<math id="S3.p4.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は固有写像になる．
+逆に<math id="S3.p4.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が固有であると仮定しよう．
+このとき固有写像の定義から<math id="S3.p4.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の各ファイバーは
+コンパクトになる．今から<math id="S3.p4.m5" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉写像になることを示そう．
+<math id="S3.p4.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="S3.p4.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の閉集合とする．
+このとき<math id="S3.p4.m8" class="ltx_Math" alttext="f(A)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="S3.p4.m9" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の中で閉集合であると言えれば良い．
+<math id="S3.p4.m10" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>の任意のコンパクト部分集合を
+<math id="S3.p4.m11" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>とする．このとき
+<math id="S3.p4.m12" class="ltx_Math" alttext="f(A)\cap K=f(A\cap f^{-1}(K))" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>K</mi></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が成り立つ(この式は射影公式と呼ばれ，集合間の写像とその部分集合についていつでも成り立つ)．
+ここで<math id="S3.p4.m13" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が固有であることから<math id="S3.p4.m14" class="ltx_Math" alttext="f^{-1}(K)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></math>はコンパクト集合であり
+<math id="S3.p4.m15" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>は<math id="S3.p4.m16" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合なので
+<math id="S3.p4.m17" class="ltx_Math" alttext="A\cap f^{-1}(K)" display="inline"><mrow><mi>A</mi><mo>∩</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は<math id="S3.p4.m18" class="ltx_Math" alttext="f^{-1}(K)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></math>の閉集合である．
+特にコンパクトである．
+故に<math id="S3.p4.m19" class="ltx_Math" alttext="f(A\cap f^{-1}(K))" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>A</mi><mo>∩</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></math>もコンパクトである．
+つまり<math id="S3.p4.m20" class="ltx_Math" alttext="f(A)\cap K" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>K</mi></mrow></math>は<math id="S3.p4.m21" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>のコンパクト部分集合である．
+よって<math id="S3.p4.m22" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>が弱ハウスドルフであることから
+<math id="S3.p4.m23" class="ltx_Math" alttext="f(A)\cap K" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∩</mo><mi>K</mi></mrow></math>は閉集合である．<math id="S3.p4.m24" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>の任意性と
+<math id="S3.p4.m25" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>が<math id="S3.p4.m26" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>-空間であることから
+<math id="S3.p4.m27" class="ltx_Math" alttext="f(A)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>は閉集合である．
+よって<math id="S3.p4.m28" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が閉写像，ひいては完全写像であることがわかった．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_italic">[</span><a href="#bib.bib1" title="" class="ltx_ref">1</a><span class="ltx_text ltx_font_italic">]</span></cite><span class="ltx_text ltx_font_italic">においては全て完全正則空間で考えて，完全写像をpullbackで記述していた．
+もしかしたら完全正則空間の圏はスキームっぽさがあるのかもしれない．今回の文書では，筆者が手を加えて最後の定理以外ではなるべく一般の位相空間で証明が済むようになっている．
+結果として<a href="#Thmthm9" title="定理 9. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a>の証明が一つずつ証明をするようなものになってけったいなものなったかもしれない．</span></p>
+</div>
+<div id="Thmrmkx2.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">定理<a href="#Thmthm15" title="定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15</span></a>
+の
+<a href="#S2.I4.i2" title="item (Q2) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q2)</span></a>
+は，文献<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="" class="ltx_ref">9</a>]</cite>によれば，
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="" class="ltx_ref">8</a>, Theorem 1]</cite>と<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="" class="ltx_ref">10</a>, Theorem, p.21]</cite>で見出されたものらしい．
+定理
+<a href="#Thmthm15" title="定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15</span></a>の<a href="#S2.I4.i3" title="item (Q3) ‣ 定理 15. ‣ 2 完全写像 ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(Q3)</span></a>
+は文献<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib7" title="" class="ltx_ref">7</a>]</cite>
+によれば
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="" class="ltx_ref">6</a>, Lemma 1.5]</cite>
+で見出されたものらしい．</span></p>
+</div>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">次の定理は使うかもと思って準備したが使わなかった．</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p"><math id="S3.p6.m1" class="ltx_Math" alttext="3\times 3" display="inline"><mrow><mn>3</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>3</mn></mrow></math>の図式のpullbackについても考えよう．</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">以下の可換図式において小さい正方形の図式の左上はpullbackになっているとする．このとき<math id="Thmthm17.p1.m1" class="ltx_Math" alttext="A^{\prime}" display="inline"><msup><mi>A</mi><mo>′</mo></msup></math>
+は一番大きい外側のpullbackにもなっている．</span></p>
+</div>
+<div id="Thmthm17.p2" class="ltx_para">
+<table id="S3.Ex48" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><img src="tikzcd-47.png" id="S3.Ex48.m1.g1" class="ltx_graphics ltx_markedasmath ltx_img_landscape" width="376" height="284" alt="[Uncaptioned image]"></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">縦に分割したり，横に分割したりして
+定理
+<a href="#Thmthm3" title="定理 3. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>や
+定理<a href="#Thmthm4" title="定理 4. ‣ 1 pullback ‣ pullback と 完全写像 —Describing perfect maps with pullback—" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>
+を使うと証明できる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+A private communication with yujitomo.
+2024年7月14日．
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信,
+「未完成(tube lemma)」,
+https://concious4410.hatenablog.com/entry/2015/12/04/204115
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信,
+「コンパクト性と閉射影:Kuratowski–Mrówka’s Thoerem」,
+https://concious4410.hatenablog.com/entry/2016/06/23/151341
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+はてなブログ電波通信,
+「閉写像云々とか固有写像とか」
+https://concious4410.hatenablog.com/entry/2015/11/06/205115
+
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Stack Project, 5.17 Characterizing proper maps,
+https://stacks.math.columbia.edu/tag/005M
+
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+M. Henriksen and J. R. Isbell,
+<span class="ltx_text ltx_font_italic">Some properties of compactifications</span>,
+Duke Math. J. 25, 83–105 (1958),
+doi: 10.1215/S0012-7094-58-02509-2.
+
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+D. Holgate,
+<span class="ltx_text ltx_font_italic">The pullback closure, perfect morphisms and completions</span>, (1995), PhD Thesis, University of Cape town,
+https://open.uct.ac.za/server/api/core/bitstreams/c3824df1-0075-4bb1-a4a2-9aecdb5a7f5f/content
+
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+J. Nagata,
+<span class="ltx_text ltx_font_italic">A note on M-space and topologically complete space</span>, Proc. Japan
+Acad. 45 (1969), 541-543,
+doi: 10.3792/pja/1195520664.
+
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+E. Michael,
+<span class="ltx_text ltx_font_italic">A theorem on perfect maps</span>,
+Proc. Am. Math. Soc.,
+(1971) 28,
+633–634,
+doi:10.2307/2038028.
+
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+J. van der Slot,
+<span class="ltx_text ltx_font_italic">Some properties related to compactness, Mathematical Center</span>,
+Tracts 19, Amsterdam, 1966.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:06:47 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1626 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>論文メモ — ブラウン・モース・サードの定理 —</title>
+<!--Generated on Sun Jul 26 18:36:00 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2024-01-20-04/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>論文メモ：サードの定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../sard1.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document" style="font-size:120%;">
+<span class="ltx_text" style="font-size:83%;">論文メモ
+
+<br class="ltx_break"></span>— ブラウン・モース・サードの定理 —
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">本棚を整理したいので，
+溜まっている論文のメモを書いて未来への手紙とすることにする．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">ここではときとしてブラウン・モース・サードの定理としても呼ばれるサードの定理についての論文を色々紹介する．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>サードの定理まで</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">おそらくサードの定理の雛形になるのは
+関数の従属関係に関する研究であろう．
+とりあえずこの方面の研究は
+1926年のクノップとシュミットの共著である
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib58" title="Funktionaldeterminanten und abhängigkeit von funktionen" class="ltx_ref">29</a>]</cite>
+にまで遡れると思う．
+この論文は日本語による解説もある
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib57" title="函數行列式及び函數の從屬關係" class="ltx_ref">26</a>]</cite>．
+しかしながらそれ以前から
+ヤコビ行列式と関数それ自体の従属関係
+については研究があったようである．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">1929年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib56" title="Sur les multiplicités des zéros des fonctions indéfiniment dérivables de deux variables" class="ltx_ref">43</a>]</cite>
+では任意の閉集合が
+何かしらの関数の臨界点(critical point)
+全体と一致するようにできることが書かれているらしい．
+この解説は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib55" title="A function not constant on a connected set of critical points" class="ltx_ref">56</a>]</cite>の注釈３による．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">1929年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib54" title="Non-isolated critical points of functions" class="ltx_ref">57</a>]</cite>
+も臨界点の話をしているがよくわからず．</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">1929年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib53" title="The critical points of functions and the calculus of variations in the large" class="ltx_ref">37</a>]</cite>
+は
+モースの論文である．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">1935年のBrownの
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib52" title="Functional dependence" class="ltx_ref">9</a>]</cite>
+の
+Lemma 3. I.
+はサードの定理の原型だと思われる．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">1939年のモースの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib51" title="The behavior of a function on its critical set" class="ltx_ref">36</a>]</cite>
+では，
+値域が<math id="S1.p6.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>
+の場合のサードの定理の主張が書かれており，
+現在よりも大きな微分可能性を仮定した上で
+それが成り立つことが述べられている．
+つまり<math id="S1.p6.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>を<math id="S1.p6.m3" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>の開集合として
+<math id="S1.p6.m4" class="ltx_Math" alttext="f\colon G\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>G</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を
+<math id="S1.p6.m5" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>
+階微分可能関数とするとき<math id="S1.p6.m6" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>が十分大きければ
+<math id="S1.p6.m7" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の臨界値(critical value)
+の値が測度ゼロであることが知られていいたことを述べている．
+どれくらい大きければいいのかというとサードの未発表論文
+においては<math id="S1.p6.m8" class="ltx_Math" alttext="r\leq n+(n-3)^{2}/16" display="inline"><mrow><mi>r</mi><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>3</mn></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>/</mo><mn>16</mn></mrow></mrow></mrow></math>
+であれば良いということが<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib51" title="The behavior of a function on its critical set" class="ltx_ref">36</a>]</cite>の冒頭で述べられている．
+この論文の主定理としては上で述べた
+値域が
+<math id="S1.p6.m9" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>
+の場合には<math id="S1.p6.m10" class="ltx_Math" alttext="r=m" display="inline"><mrow><mi>r</mi><mo>=</mo><mi>m</mi></mrow></math>のときに
+も上の主張が正しいことを証明している．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">1942年の
+サードの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib50" title="The measure of the critical values of differentiable maps" class="ltx_ref">49</a>]</cite>
+では
+今現在の知られている形でのサードの定理が証明されている．
+つまり
+<math id="S1.p7.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>を<math id="S1.p7.m2" class="ltx_Math" alttext="\mathbb{R}^{m}" display="inline"><msup><mi>ℝ</mi><mi>m</mi></msup></math>の開集合として
+<math id="S1.p7.m3" class="ltx_Math" alttext="f\colon G\to\mathbb{R}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>G</mi><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></mrow></math>
+を<math id="S1.p7.m4" class="ltx_Math" alttext="C^{r}" display="inline"><msup><mi>C</mi><mi>r</mi></msup></math>級の関数としたとき，
+もしも<math id="S1.p7.m5" class="ltx_Math" alttext="r\geq\max\{m-n+1,1\}" display="inline"><mrow><mi>r</mi><mo>≥</mo><mrow><mi>max</mi><mo>⁡</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+ならば
+その臨界値の測度がゼロであることを
+証明している．
+この論文では
+モースの論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib51" title="The behavior of a function on its critical set" class="ltx_ref">36</a>]</cite>
+での補題が証明に用いられていることに注意しよう．
+ここら辺の事情がモース・サードの定理と呼ばれる所以だと思われる．</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">サードの
+1958年の
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib49" title="Images of critical sets" class="ltx_ref">50</a>]</cite>
+では，サードの定理が本質的に
+ハウスドルフ次元にまつわる現象であることが見抜かれている．例えば<math id="S1.p8.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の定義域内の集合<math id="S1.p8.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>について
+<math id="S1.p8.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>のrankが<math id="S1.p8.m4" class="ltx_Math" alttext="&lt;s" display="inline"><mrow><mi></mi><mo>&lt;</mo><mi>s</mi></mrow></math>となるならば<math id="S1.p8.m5" class="ltx_Math" alttext="f(A)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の<math id="S1.p8.m6" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>次元ハウスドルフ測度は
+<math id="S1.p8.m7" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>になることなどが証明されている．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">サードの
+1965年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib48" title="Hausdorff measure of critical images on Banach manifolds" class="ltx_ref">52</a>]</cite>
+では臨界点の像の話が
+バナッハ多様体の話へと拡張されている．
+この論文には修正
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib47" title="Errata to “Hausdorff measures of critical images on Banach manifolds”" class="ltx_ref">51</a>]</cite>
+があることに注意しよう．</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>サードの定理から</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">1966年のFederer の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib39" title="Two theorems in geometric measure theory" class="ltx_ref">17</a>]</cite>
+は１ページしかない．
+そこでサードの定理の変種の話をしているのだが，
+証明は有名なFedererのGeometric Measure Theory
+に入っていることを述べている．
+論文というよりアナウンスというであろう．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">1967年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib46" title="Sets of points of degeneracy" class="ltx_ref">16</a>]</cite>
+でも臨界値のハウスドルフ測度の話をしている．</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">1967年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib40" title="Functional dependence" class="ltx_ref">38</a>]</cite>
+では
+普通にfunctional dependenceの話をしている．
+多分この話題について知りたければこの論文を読むと良いのではないだろうか．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">1968年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib45" title="The set of critical values of a functional" class="ltx_ref">45</a>]</cite>
+ではバナッハ空間上で定義されたフレドホルム作用素についての臨界値のハウスドルフ次元の話をしている．
+こういうフレドホルム作用素の話でサードの定理をやるのは
+Smaleがやり始めたらしい(An infinite version of Sard’s theorem)．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">1971年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib44" title="A constructive proof of Sard’s theorem" class="ltx_ref">10</a>]</cite>
+ではサードの定理の
+構成的証明(constructive proof)
+を与えているらしい．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">1983年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib38" title="The geometry of critical and near-critical values of differentiable mappings" class="ltx_ref">58</a>]</cite>
+はなぜだか知らないが，
+すごく面白そうな気がする．
+この論文を読むと何かいいことがあるような気がするが
+あんまり読めていない．ごめんね．</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">1986年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib29" title="A critical set with nonnull image has large Hausdorff dimension" class="ltx_ref">39</a>]</cite>
+ではなんか色々やっている．
+多分サードの定理の証明読みたい時はこれを読むといいんじゃないかな．</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">1987年の
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib43" title="The theorem of Brown and Sard" class="ltx_ref">24</a>]</cite>
+では<math id="S2.p8.m1" class="ltx_Math" alttext="C^{\infty}" display="inline"><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></math>関数に関するサードの定理に対して
+簡略化した関数を与えている．
+おそらく大抵の人が目にするサードの定理の証明は
+この論文が元ネタなのではないだろうか？
+違う可能性もある．</p>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">1991年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib37" title="The Morse-Sard theorem with mixed differentiability" class="ltx_ref">46</a>]</cite>
+では関数の変数を二つの部分に分けて片側では
+<math id="S2.p9.m1" class="ltx_Math" alttext="C^{k}" display="inline"><msup><mi>C</mi><mi>k</mi></msup></math>でもう片側では
+<math id="S2.p9.m2" class="ltx_Math" alttext="C^{\omega}" display="inline"><msup><mi>C</mi><mi>ω</mi></msup></math>
+のときのサードの定理を証明している．</p>
+</div>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p">1992年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="On the image size of singular maps. I" class="ltx_ref">3</a>]</cite>
+ではヘルダー連続性を混ぜた話をしている．
+1993年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="On the image size of singular maps. II" class="ltx_ref">4</a>]</cite>
+はその続きである．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p">1993年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib36" title="Toward a precise smoothness hypothesis in Sard’s theorem" class="ltx_ref">6</a>]</cite>
+では
+<math id="S2.p11.m1" class="ltx_Math" alttext="C^{p,\alpha}" display="inline"><msup><mi>C</mi><mrow><mi>p</mi><mo>,</mo><mi>α</mi></mrow></msup></math>
+級関数についての
+サードの定理が証明されている．
+<math id="S2.p11.m2" class="ltx_Math" alttext="C^{p,\alpha}" display="inline"><msup><mi>C</mi><mrow><mi>p</mi><mo>,</mo><mi>α</mi></mrow></msup></math>
+というのは
+<math id="S2.p11.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>
+階微分が局所
+<math id="S2.p11.m4" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>
+次ヘルダーということである．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p">1994年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib15" title="The Zygmund Morse-Sard theorem" class="ltx_ref">42</a>]</cite>
+では
+微分可能性とZygmund 関数を混ぜた関数についての
+サードの定理を証明している．
+<math id="S2.p12.m1" class="ltx_Math" alttext="C^{k+\textrm{Zygmund}}" display="inline"><msup><mi>C</mi><mrow><mi>k</mi><mo>+</mo><mtext>Zygmund</mtext></mrow></msup></math>級関数の話ということ．
+Zygmundはある種の微分可能性である．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">1996年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="On sets of critical values in the real line" class="ltx_ref">2</a>]</cite>
+では実数直線のコンパクト部分集合が
+臨界値になるための条件を調べているようだ．
+面白い論文だと思う．</p>
+</div>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">2001年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib35" title="HAUSDORFF measures and the morse–sard theorem" class="ltx_ref">14</a>]</cite>
+では
+<math id="S2.p14.m1" class="ltx_Math" alttext="C^{k,\alpha}" display="inline"><msup><mi>C</mi><mrow><mi>k</mi><mo>,</mo><mi>α</mi></mrow></msup></math>
+級関数の臨界値のハウスドルフ次元の
+評価を行なっているようだ．</p>
+</div>
+<div id="S2.p15" class="ltx_para">
+<p class="ltx_p">2004年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib42" title="A general version of the morse-sard theorem" class="ltx_ref">25</a>]</cite>
+では
+臨界値のより詳しいハウスドルフ次元の評価をしているようだ．</p>
+</div>
+<div id="S2.p16" class="ltx_para">
+<p class="ltx_p">2006年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib17" title="An analog of sard’s theorem for C1-smooth functions of two variables" class="ltx_ref">31</a>]</cite>
+では
+<math id="S2.p16.m1" class="ltx_Math" alttext="\Omega\subset\mathbb{R}^{2}" display="inline"><mrow><mi mathvariant="normal">Ω</mi><mo>⊂</mo><msup><mi>ℝ</mi><mn>2</mn></msup></mrow></math>
+を開集合として
+<math id="S2.p16.m2" class="ltx_Math" alttext="v\colon\Omega\to\mathbb{R}" display="inline"><mrow><mi>v</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+が<math id="S2.p16.m3" class="ltx_Math" alttext="0\not\in\mathrm{CL}\mathrm{Int}Dv(\Omega)" display="inline"><mrow><mn>0</mn><mo>∉</mo><mrow><mi>CLInt</mi><mo>⁢</mo><mi>D</mi><mo>⁢</mo><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たすならば
+<math id="S2.p16.m4" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>の臨界値の測度がゼロになることを証明している．
+これが成り立つのはなんか
+すごいような気がする．</p>
+</div>
+<div id="S2.p17" class="ltx_para">
+<p class="ltx_p">2009年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib34" title="The curve selection lemma and the Morse-Sard theorem" class="ltx_ref">35</a>]</cite>
+では
+curve selection lemma
+というものを使って
+サードの定理の証明を簡略化している．
+ただしこの
+curve selection lemma
+というのは
+o-minimal structureの理解がないと証明できなさそうである．</p>
+</div>
+<div id="S2.p18" class="ltx_para">
+<p class="ltx_p">2015年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib41" title="The Morse-Sard theorem revisited" class="ltx_ref">1</a>]</cite>
+では関数の微分に適切な条件を課すと
+サードの定理の仮定を少し緩められるという
+話をしているようだ．</p>
+</div>
+<div id="S2.p19" class="ltx_para">
+<p class="ltx_p">2019年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib33" title="The Morse criticality revisited and some new applications to the Morse-Sard theorem" class="ltx_ref">27</a>]</cite>
+は
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib34" title="The curve selection lemma and the Morse-Sard theorem" class="ltx_ref">35</a>]</cite>
+の発展である．
+Bochnak–Łojasiewicz inequality
+の不等式というのがあってそれの一般化と見做せる
+いい不等式を使ってサードの定理を証明している．
+Bochnak–Łojasiewicz inequality はcurve
+selection lemma
+というか
+o-minimal
+というか
+semi-analytic sets
+の話なので
+なんかすごい難しい．</p>
+</div>
+<div id="S2.p20" class="ltx_para">
+<p class="ltx_p">2021年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib18" title="The generalized Morse-Sard theorem" class="ltx_ref">33</a>]</cite>
+はヘルダーを混ぜたサードの定理の話だと思う．
+多分これを読むといいんじゃないかな．</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>サードの定理にまつわる反例</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">微分可能性が低い場合にはサードの定理が成り立たなかったりするがそのような例を
+構成した論文を紹介する．</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">サードの定理にまつわる最初の反例は
+Whitney
+の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib55" title="A function not constant on a connected set of critical points" class="ltx_ref">56</a>]</cite>
+である．
+Whitneyは自身の証明した有名な
+Whitneyの拡張定理を用いて
+<math id="S3.p2.m1" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級関数<math id="S3.p2.m2" class="ltx_Math" alttext="f\colon\mathbb{R}^{2}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>ℝ</mi><mn>2</mn></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+であってその臨界値が非退化な区間を含むものを
+構成している．
+注意すべきなのはサードの定理が証明される以前に
+Whitneyは現在のサードの定理の
+仮定を
+ギリギリ満たさない反例を構成しているということである．</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">1942年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib32" title="On some singular monotonic functions which are strictly increasing" class="ltx_ref">48</a>]</cite>
+では
+連続で単調増加な
+特異関数
+を構成しているが,
+これは多分サードの定理に関係ないと思う．
+紛れていた．</p>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">1965年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="Counterexample to the Morse-Sard theorem in the case of infinite-dimensional manifolds" class="ltx_ref">32</a>]</cite>
+では無限次元多様体の間の写像に関する
+サードの定理の反例の話のようだ．</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">1979年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib31" title="A singular map of a cube onto a square" class="ltx_ref">28</a>]</cite>
+では，<math id="S3.p5.m1" class="ltx_Math" alttext="R_{n}" display="inline"><msub><mi>R</mi><mi>n</mi></msub></math>を
+<math id="S3.p5.m2" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>の<math id="S3.p5.m3" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>次元立方体としたときに
+<math id="S3.p5.m4" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級関数
+<math id="S3.p5.m5" class="ltx_Math" alttext="f\colon R_{3}\to R_{2}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>R</mi><mn>3</mn></msub><mo stretchy="false">→</mo><msub><mi>R</mi><mn>2</mn></msub></mrow></mrow></math>
+であって，
+全射でなおかつ
+至る所のrankが<math id="S3.p5.m6" class="ltx_Math" alttext="\leq 1" display="inline"><mrow><mi></mi><mo>≤</mo><mn>1</mn></mrow></math>
+となるような例が構成されている．
+これはハーシュの「微分トポロジー」
+の演習問題に載っている未解決問題であった．
+またこれはサードの定理の仮定も満たさないし，
+結論も満たさない．</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">1985年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib30" title="On the smoothness hypothesis in Sard’s theorem" class="ltx_ref">20</a>]</cite>
+では，カントール集合<math id="S3.p6.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>について
+<math id="S3.p6.m2" class="ltx_Math" alttext="C+C=\{\,x+y\mid x,y\in C\,\}=[0,2]" display="inline"><mrow><mrow><mi>C</mi><mo>+</mo><mi>C</mi></mrow><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>C</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow><mo>=</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>2</mn><mo stretchy="false">]</mo></mrow></mrow></math>
+という現象を用いてサードの定理の仮定を満たさないし
+結論も満たさない例を構成している．</p>
+</div>
+<div id="S3.p7" class="ltx_para">
+<p class="ltx_p">1989年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib28" title="Functions not constant on fractal quasi-arcs of critical points" class="ltx_ref">40</a>]</cite>
+では
+quasi-arcが
+関数の臨界点になるための十分条件が考察されている．</p>
+</div>
+<div id="S3.p8" class="ltx_para">
+<p class="ltx_p">1991年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib37" title="The Morse-Sard theorem with mixed differentiability" class="ltx_ref">46</a>]</cite>
+では関数の変数を二つの部分に分けて片側では
+<math id="S3.p8.m1" class="ltx_Math" alttext="C^{k}" display="inline"><msup><mi>C</mi><mi>k</mi></msup></math>でもう片側では
+<math id="S3.p8.m2" class="ltx_Math" alttext="C^{\omega}" display="inline"><msup><mi>C</mi><mi>ω</mi></msup></math>
+のときのサードの定理を証明しているということを上で紹介したが，
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="A C×1∞ function with an interval of critical values" class="ltx_ref">41</a>]</cite>
+では片側を
+<math id="S3.p8.m3" class="ltx_Math" alttext="C^{\infty}" display="inline"><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></math>にすると
+Pughの結果が成り立たないことを示しているらしい．</p>
+</div>
+<div id="S3.p9" class="ltx_para">
+<p class="ltx_p">1993年の
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib27" title="On smooth rank-1 mappings of Banach spaces onto the plane" class="ltx_ref">5</a>]</cite>
+では任意の可分バナッハ空間<math id="S3.p9.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>に対して
+全射<math id="S3.p9.m2" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級関数<math id="S3.p9.m3" class="ltx_Math" alttext="f\colon E\to\mathbb{R}^{2}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>E</mi><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mn>2</mn></msup></mrow></mrow></math>
+であってその微分のランクは至るところ
+<math id="S3.p9.m4" class="ltx_Math" alttext="\leq 1" display="inline"><mrow><mi></mi><mo>≤</mo><mn>1</mn></mrow></math>になっているものを構成している．
+これはKaufmanの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib31" title="A singular map of a cube onto a square" class="ltx_ref">28</a>]</cite>
+の発展と見做せる．</p>
+</div>
+<div id="S3.p10" class="ltx_para">
+<p class="ltx_p">1999年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib26" title="On Whitney pairs" class="ltx_ref">13</a>]</cite>
+では
+Whitney arcというものを構成している．
+これはおそらくWhitneyの論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib55" title="A function not constant on a connected set of critical points" class="ltx_ref">56</a>]</cite>に出てくるようなarcのことだと思われる．</p>
+</div>
+<div id="S3.p11" class="ltx_para">
+<p class="ltx_p">2003年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib25" title="Whitney’s example by way of Assouad’s embedding" class="ltx_ref">22</a>]</cite>
+では
+Assouadの埋め込み定理を用いて
+Whiney型の例を構成している．</p>
+</div>
+<div id="S3.p12" class="ltx_para">
+<p class="ltx_p">2008年の
+論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib20" title="Whitney arcs and 1-critical arcs" class="ltx_ref">12</a>]</cite>
+もWhitneyの例の話をしている．</p>
+</div>
+<div id="S3.p13" class="ltx_para">
+<p class="ltx_p">2009年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib21" title="The geometry of Whitney’s critical sets" class="ltx_ref">55</a>]</cite>
+は
+Whitneyの例を受け，
+連結集合が臨界点になるような特徴付けを発見したらしい．
+すごい．</p>
+</div>
+<div id="S3.p14" class="ltx_para">
+<p class="ltx_p">2011年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib19" title="Nonconstant continuous functions whose tangential derivative vanishes along a smooth curve" class="ltx_ref">34</a>]</cite>
+では
+滑らかなある曲線上で
+接微分が消えるような
+定数でない連続関数を構成しているようだ．</p>
+</div>
+<div id="S3.p15" class="ltx_para">
+<p class="ltx_p">2020年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib24" title="Topologically nontrivial counterexamples to Sard’s theorem" class="ltx_ref">19</a>]</cite>
+は面白いと思う．
+<math id="S3.p15.m1" class="ltx_Math" alttext="\mathbb{S}^{n+1}" display="inline"><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></math>から
+<math id="S3.p15.m2" class="ltx_Math" alttext="\mathbb{S}^{n}" display="inline"><msup><mi>𝕊</mi><mi>n</mi></msup></math>への写像について
+ホモトピー的な考察と
+サード的な考察を行なっており大変興味深いと思う．
+ちょっと細かいところはわかんなかった．</p>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>サードの定理の系</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p class="ltx_p">1963年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib23" title="A proof of the nonretractibility of a cell onto its boundary" class="ltx_ref">23</a>]</cite>
+では
+サードの定理を用いて
+<math id="S4.p1.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>次元単体<math id="S4.p1.m2" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>について
+その境界<math id="S4.p1.m3" class="ltx_Math" alttext="\partial E" display="inline"><mrow><mo rspace="0em">∂</mo><mi>E</mi></mrow></math>
+は<math id="S4.p1.m4" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>のレトラクトではないことを証明している．
+このことから
+ブラウワーの不動点定理などを証明できる．</p>
+</div>
+<div id="S4.p2" class="ltx_para">
+<p class="ltx_p">1975年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib22" title="A note on a corollary of Sard’s theorem" class="ltx_ref">54</a>]</cite>
+では<math id="S4.p2.m1" class="ltx_Math" alttext="K\subset\mathbb{R}^{n}" display="inline"><mrow><mi>K</mi><mo>⊂</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></math>として
+<math id="S4.p2.m2" class="ltx_Math" alttext="f\colon K\to\mathbb{R}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>K</mi><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></mrow></math>をリプシッツ写像
+として<math id="S4.p2.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>のルベーグ測度が有限としたときに
+<math id="S4.p2.m4" class="ltx_Math" alttext="C=\{\,y\in\mathbb{R}^{n}\mid\mathrm{card}(f^{-1}(y))=\infty\,\}" display="inline"><mrow><mi>C</mi><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>y</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>card</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∞</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math>
+がルベーグ測度で測度<math id="S4.p2.m5" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+になることを述べている．
+<math id="S4.p2.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が<math id="S4.p2.m7" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>級のときはこのことはサードの定理の系である．</p>
+</div>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>サードの定理の変種</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p class="ltx_p">可微分ではなく他のいろいろな種類の関数についての
+サードの定理の類似が色々証明されているようだ．</p>
+</div>
+<section id="S5.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Delta-convex</h3>
+
+<div id="S5.SS1.p1" class="ltx_para">
+<p class="ltx_p">2008年の論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Morse-Sard theorem for delta-convex curves" class="ltx_ref">44</a>]</cite>
+ではバナッハ空間の間のdelta-convex関数という
+クラスについて，
+定義域が
+<math id="S5.SS1.p1.m1" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>の区間の場合にはその臨界値の
+<math id="S5.SS1.p1.m2" class="ltx_Math" alttext="1/2" display="inline"><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></math>ハウスドルフ測度はゼロになることを証明している．</p>
+</div>
+</section>
+<section id="S5.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Borel</h3>
+
+<div id="S5.SS2.p1" class="ltx_para">
+<p class="ltx_p">論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib14" title="A Sard type theorem for Borel mappings" class="ltx_ref">21</a>]</cite>
+ではBorel写像に関するサードの定理のようなものを
+証明している．
+サードの定理の系として
+<math id="S5.SS2.p1.m1" class="ltx_Math" alttext="f\colon\mathbb{R}^{m}\to\mathbb{R}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>ℝ</mi><mi>m</mi></msup><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></mrow></math>をいい感じに滑らかな関数としたときに
+<math id="S5.SS2.p1.m2" class="ltx_Math" alttext="f^{-1}(y)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>が大体の<math id="S5.SS2.p1.m3" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>について
+<math id="S5.SS2.p1.m4" class="ltx_Math" alttext="m-n" display="inline"><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow></math>次元
+可微分多様体になっているというものがある．
+この論文では
+適切な条件のもと，ボレル写像<math id="S5.SS2.p1.m5" class="ltx_Math" alttext="f\colon\mathbb{R}^{m}\to\mathbb{R}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>ℝ</mi><mi>m</mi></msup><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></mrow></math>
+について<math id="S5.SS2.p1.m6" class="ltx_Math" alttext="f^{-1}(y)" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>がほとんどの<math id="S5.SS2.p1.m7" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>について
+ハウスドルフ次元が<math id="S5.SS2.p1.m8" class="ltx_Math" alttext="m-n" display="inline"><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow></math>以下ということを示している．</p>
+</div>
+</section>
+<section id="S5.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>ソボレフ</h3>
+
+<div id="S5.SS3.p1" class="ltx_para">
+<p class="ltx_p">ソボレフ空間に属する関数についての
+サードの定理に関する論文は
+以下の通りである．
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib13" title="The Morse-Sard theorem in Sobolev spaces" class="ltx_ref">15</a>]</cite>(大元の論文?),
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib12" title="Sard’s theorem for mappings in Hölder and Sobolev spaces" class="ltx_ref">7</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib11" title="A simple proof of the Morse-Sard theorem in Sobolev spaces" class="ltx_ref">18</a>]</cite>(simple proof?),
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="The Morse-Sard theorem for Sobolev spaces in a borderline case" class="ltx_ref">53</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="On the Morse-Sard property and level sets of Wn,1 Sobolev functions on Rn" class="ltx_ref">8</a>]</cite>.</p>
+</div>
+</section>
+<section id="S5.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.4 </span>リーマン多様体の距離関数</h3>
+
+<div id="S5.SS4.p1" class="ltx_para">
+<p class="ltx_p">論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="A Morse-Sard theorem for the distance function on Riemannian manifolds" class="ltx_ref">47</a>]</cite>
+はリーマン多様体の距離関数
+に関するサードの定理の話である．</p>
+</div>
+</section>
+<section id="S5.SS5" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.5 </span>よくわかんないやつ</h3>
+
+<div id="S5.SS5.p1" class="ltx_para">
+<p class="ltx_p">多分サードの定理に関係するが，
+よくわからなかったやつ．
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Differentiable open maps on manifolds" class="ltx_ref">11</a>]</cite>,
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib7" title="Necessary and sufficient conditions for a curve to be the gradient range of a C1-smooth function" class="ltx_ref">30</a>]</cite>.</p>
+</div>
+<div id="S5.SS5.p2" class="ltx_para">
+<p class="ltx_p">以上の論文以外にも本当にたくさんのサードの定理に関係する論文があるとは思うがおそらくこれらの論文の参考文献やこれらの論文を引用している論文から全て見つけ出せるのではないだろうか．</p>
+</div>
+</section>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib41" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Azagra, J. Ferrera, and J. Gómez-Gil</span><span class="ltx_text ltx_bib_year"> (2018)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Morse-Sard theorem revisited</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Q. J. Math.</span> <span class="ltx_text ltx_bib_volume">69</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 887–913</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0033-5606,1464-3847</span>,
+<a href="https://dx.doi.org/10.1093/qmath/hay004" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1093/qmath/hay004" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3859213" title="" class="ltx_ref mr ltx_bib_external">MathReview (Richard M. Aron)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p18" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Bates and A. Norton</span><span class="ltx_text ltx_bib_year"> (1996)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On sets of critical values in the real line</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">83</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 399–413</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="https://dx.doi.org/10.1215/S0012-7094-96-08313-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1215/S0012-7094-96-08313-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1390652" title="" class="ltx_ref mr ltx_bib_external">MathReview (P. T. Church)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p13" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Bates</span><span class="ltx_text ltx_bib_year"> (1992)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the image size of singular maps. I</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">114</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 699–705</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2159392" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2159392" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1074748" title="" class="ltx_ref mr ltx_bib_external">MathReview (Y. Yomdin)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p10" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Bates</span><span class="ltx_text ltx_bib_year"> (1992)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the image size of singular maps. II</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">68</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 463–476</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="https://dx.doi.org/10.1215/S0012-7094-92-06818-9" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1215/S0012-7094-92-06818-9" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1194950" title="" class="ltx_ref mr ltx_bib_external">MathReview (Y. Yomdin)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p10" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib27" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Bates</span><span class="ltx_text ltx_bib_year"> (1993)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On smooth rank-<math id="bib.bib27.m1a" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math> mappings of Banach spaces onto the plane</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Differential Geom.</span> <span class="ltx_text ltx_bib_volume">37</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 729–733</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-040X,1945-743X</span>,
+<a href="http://projecteuclid.org/euclid.jdg/1214453907" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1217168" title="" class="ltx_ref mr ltx_bib_external">MathReview (P. T. Church)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p9" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib36" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Bates</span><span class="ltx_text ltx_bib_year"> (1993)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Toward a precise smoothness hypothesis in Sard’s theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">117</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 279–283</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2159728" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2159728" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1112486" title="" class="ltx_ref mr ltx_bib_external">MathReview (Claudio Martins Mendes)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p11" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. Bojarski, P. Hajłasz, and P. Strzelecki</span><span class="ltx_text ltx_bib_year"> (2005)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sard’s theorem for mappings in Hölder and Sobolev spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Manuscripta Math.</span> <span class="ltx_text ltx_bib_volume">118</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 383–397</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-2611,1432-1785</span>,
+<a href="https://dx.doi.org/10.1007/s00229-005-0590-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s00229-005-0590-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2183045" title="" class="ltx_ref mr ltx_bib_external">MathReview (Luigi De Pascale)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS3.p1" title="5.3 ソボレフ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Bourgain, M. V. Korobkov, and J. Kristensen</span><span class="ltx_text ltx_bib_year"> (2015)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the Morse-Sard property and level sets of <math id="bib.bib9.m1a" class="ltx_Math" alttext="{\rm W}^{n,1}" display="inline"><msup><mi mathvariant="normal">W</mi><mrow><mi>n</mi><mo>,</mo><mn>1</mn></mrow></msup></math> Sobolev functions on <math id="bib.bib9.m2a" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math></span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Reine Angew. Math.</span> <span class="ltx_text ltx_bib_volume">700</span>, <span class="ltx_text ltx_bib_pages"> pp. 93–112</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0075-4102,1435-5345</span>,
+<a href="https://dx.doi.org/10.1515/crelle-2013-0002" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1515/crelle-2013-0002" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=3318511" title="" class="ltx_ref mr ltx_bib_external">MathReview (Hossein Movahedi-Lankarani)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS3.p1" title="5.3 ソボレフ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib52" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. B. Brown</span><span class="ltx_text ltx_bib_year"> (1935)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Functional dependence</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Trans. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">38</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 379–394</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9947,1088-6850</span>,
+<a href="https://dx.doi.org/10.2307/1989688" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1989688" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1501816" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p5" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib44" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Chan</span><span class="ltx_text ltx_bib_year"> (1971)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A constructive proof of Sard’s theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Pacific J. Math.</span> <span class="ltx_text ltx_bib_volume">36</span>, <span class="ltx_text ltx_bib_pages"> pp. 291–301</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0030-8730,1945-5844</span>,
+<a href="http://projecteuclid.org/euclid.pjm/1102971067" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=276988" title="" class="ltx_ref mr ltx_bib_external">MathReview (John Willard Milnor)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p5" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. T. Church</span><span class="ltx_text ltx_bib_year"> (1963)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Differentiable open maps on manifolds</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Trans. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">109</span>, <span class="ltx_text ltx_bib_pages"> pp. 87–100</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9947,1088-6850</span>,
+<a href="https://dx.doi.org/10.2307/1993648" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1993648" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=154296" title="" class="ltx_ref mr ltx_bib_external">MathReview (E. Hemmingsen)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS5.p1" title="5.5 よくわかんないやつ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.5</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib20" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Csörnyei, J. Kališ, and L. Zajíček</span><span class="ltx_text ltx_bib_year"> (2008)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Whitney arcs and 1-critical arcs</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Fund. Math.</span> <span class="ltx_text ltx_bib_volume">199</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 119–130</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0016-2736,1730-6329</span>,
+<a href="https://dx.doi.org/10.4064/fm199-2-2" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.4064/fm199-2-2" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2399495" title="" class="ltx_ref mr ltx_bib_external">MathReview (Bogdan Choczewski)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p12" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Csörnyei</span><span class="ltx_text ltx_bib_year"> (1999)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On Whitney pairs</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Fund. Math.</span> <span class="ltx_text ltx_bib_volume">160</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 63–79</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0016-2736,1730-6329</span>,
+<a href="https://dx.doi.org/10.4064/fm-160-1-63-79" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.4064/fm-160-1-63-79" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1694403" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p10" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib35" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. G. T. de A. Moreira</span><span class="ltx_text ltx_bib_year"> (2001)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">HAUSDORFF measures and the morse–sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Publicacions Matemàtiques</span> <span class="ltx_text ltx_bib_volume">45</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 149–162</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">https://www.jstor.org/stable/43736715</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p14" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. de Pascale</span><span class="ltx_text ltx_bib_year"> (2001)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Morse-Sard theorem in Sobolev spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Indiana Univ. Math. J.</span> <span class="ltx_text ltx_bib_volume">50</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 1371–1386</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-2518,1943-5258</span>,
+<a href="https://dx.doi.org/10.1512/iumj.2001.50.1878" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1512/iumj.2001.50.1878" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1871360" title="" class="ltx_ref mr ltx_bib_external">MathReview (Georges Comte)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS3.p1" title="5.3 ソボレフ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib46" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Y. Dubovitskii</span><span class="ltx_text ltx_bib_year"> (1967)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sets of points of degeneracy</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Izvestiya Rossiiskoi Akademii Nauk. Seriya Matematicheskaya</span> <span class="ltx_text ltx_bib_volume">31</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 27–36</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/https%3A//doi.org/10.1070/IM1967v001n01ABEH000545" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib39" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Federer</span><span class="ltx_text ltx_bib_year"> (1966)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Two theorems in geometric measure theory</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">72</span>, <span class="ltx_text ltx_bib_pages"> pp. 719</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9904</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9904-1966-11567-7" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9904-1966-11567-7" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=196033" title="" class="ltx_ref mr ltx_bib_external">MathReview (G. Freilich)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Figalli</span><span class="ltx_text ltx_bib_year"> (2008)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A simple proof of the Morse-Sard theorem in Sobolev spaces</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">136</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 3675–3681</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9939-08-09321-0" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9939-08-09321-0" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2415054" title="" class="ltx_ref mr ltx_bib_external">MathReview (Daniel Azagra)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS3.p1" title="5.3 ソボレフ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Goldstein, P. Hajłasz, and P. Pankka</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Topologically nontrivial counterexamples to Sard’s theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Int. Math. Res. Not. IMRN</span> (<span class="ltx_text ltx_bib_number">20</span>), <span class="ltx_text ltx_bib_pages"> pp. 7073–7096</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 1073-7928,1687-0247</span>,
+<a href="https://dx.doi.org/10.1093/imrn/rny179" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1093/imrn/rny179" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=4172678" title="" class="ltx_ref mr ltx_bib_external">MathReview (Dorin Andrica)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p15" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">E. L. Grinberg</span><span class="ltx_text ltx_bib_year"> (1985)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On the smoothness hypothesis in Sard’s theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. Math. Monthly</span> <span class="ltx_text ltx_bib_volume">92</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 733–734</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9890,1930-0972</span>,
+<a href="https://dx.doi.org/10.2307/2323231" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2323231" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=820057" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p6" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Hajłasz</span><span class="ltx_text ltx_bib_year"> (1994)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A Sard type theorem for Borel mappings</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Colloq. Math.</span> <span class="ltx_text ltx_bib_volume">67</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 217–221</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0010-1354,1730-6302</span>,
+<a href="https://dx.doi.org/10.4064/cm-67-2-217-221" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.4064/cm-67-2-217-221" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1305213" title="" class="ltx_ref mr ltx_bib_external">MathReview (Run Sheng Yang)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS2.p1" title="5.2 Borel ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Hajłasz</span><span class="ltx_text ltx_bib_year"> (2003)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Whitney’s example by way of Assouad’s embedding</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">131</span> (<span class="ltx_text ltx_bib_number">11</span>), <span class="ltx_text ltx_bib_pages"> pp. 3463–3467</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9939-03-06913-2" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9939-03-06913-2" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1991757" title="" class="ltx_ref mr ltx_bib_external">MathReview (Victor A. Milman)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p11" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib23" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. W. Hirsch</span><span class="ltx_text ltx_bib_year"> (1963)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A proof of the nonretractibility of a cell onto its boundary</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">14</span>, <span class="ltx_text ltx_bib_pages"> pp. 364–365</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2034644" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2034644" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=145502" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. Dugundji)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.p1" title="4 サードの定理の系 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib43" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Holm</span><span class="ltx_text ltx_bib_year"> (1987)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The theorem of Brown and Sard</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Enseign. Math. (2)</span> <span class="ltx_text ltx_bib_volume">33</span> (<span class="ltx_text ltx_bib_number">3-4</span>), <span class="ltx_text ltx_bib_pages"> pp. 199–202</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0013-8584</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=925986" title="" class="ltx_ref mr ltx_bib_external">MathReview (Javier Gómez Gil)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p8" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib42" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Jiang</span><span class="ltx_text ltx_bib_year"> (2004)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A general version of the morse-sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Journal of Zhejiang University-SCIENCE A</span> <span class="ltx_text ltx_bib_volume">5</span> (<span class="ltx_text ltx_bib_number">7</span>), <span class="ltx_text ltx_bib_pages"> pp. 754–758</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/https%3A//doi.org/10.1631/jzus.2004.0754" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p15" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib57" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">ク. K・ and シ. R・</span><span class="ltx_text ltx_bib_year"> (1927)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">函數行列式及び函數の從屬關係</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">日本数学物理学会誌</span> <span class="ltx_text ltx_bib_volume">1</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 227–231</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.11429/subutsukaishi1927.1.227" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib33" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">X. Kang, X. Xu, and D. Zhang</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Morse criticality revisited and some new applications to the Morse-Sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Manuscripta Math.</span> <span class="ltx_text ltx_bib_volume">161</span> (<span class="ltx_text ltx_bib_number">3-4</span>), <span class="ltx_text ltx_bib_pages"> pp. 467–485</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-2611,1432-1785</span>,
+<a href="https://dx.doi.org/10.1007/s00229-019-01103-2" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s00229-019-01103-2" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=4060490" title="" class="ltx_ref mr ltx_bib_external">MathReview (Daniel Azagra)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p19" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib31" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. Kaufman</span><span class="ltx_text ltx_bib_year"> (1979)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A singular map of a cube onto a square</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Differential Geometry</span> <span class="ltx_text ltx_bib_volume">14</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 593–594</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-040X,1945-743X</span>,
+<a href="http://projecteuclid.org/euclid.jdg/1214435238" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=600614" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p5" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#S3.p9" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib58" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">K. Knopp and R. Schmidt</span><span class="ltx_text ltx_bib_year"> (1926)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Funktionaldeterminanten und abhängigkeit von funktionen</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mathematische Zeitschrift</span> <span class="ltx_text ltx_bib_volume">25</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 373–381</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/https%3A//doi.org/10.1007/BF01283845" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. V. Korobkov and E. Yu. Panov</span><span class="ltx_text ltx_bib_year"> (2007)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Necessary and sufficient conditions for a curve to be the gradient range of a <math id="bib.bib7.m1a" class="ltx_Math" alttext="C^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>-smooth function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Sibirsk. Mat. Zh.</span> <span class="ltx_text ltx_bib_volume">48</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 789–810</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0037-4474</span>,
+<a href="https://dx.doi.org/10.1007/s11202-007-0065-6" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s11202-007-0065-6" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2355374" title="" class="ltx_ref mr ltx_bib_external">MathReview (Corneliu Ursescu)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS5.p1" title="5.5 よくわかんないやつ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.5</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib17" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M.V. Korobkov</span><span class="ltx_text ltx_bib_year"> (2006)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">An analog of sard’s theorem for <math id="bib.bib17.m1a" class="ltx_Math" alttext="{C}^{1}" display="inline"><msup><mi>C</mi><mn>1</mn></msup></math>-smooth functions of two variables</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Sib Math J</span> <span class="ltx_text ltx_bib_volume">47</span>, <span class="ltx_text ltx_bib_pages"> pp. 889–895</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/https%3A//doi.org/10.1007/s11202-006-0098-2" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p16" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. Kupka</span><span class="ltx_text ltx_bib_year"> (1965)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Counterexample to the Morse-Sard theorem in the case of infinite-dimensional manifolds</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">16</span>, <span class="ltx_text ltx_bib_pages"> pp. 954–957</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2035591" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2035591" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=182024" title="" class="ltx_ref mr ltx_bib_external">MathReview (S. Rolewicz)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p4" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib18" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. McLennan</span><span class="ltx_text ltx_bib_year"> (2021)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The generalized Morse-Sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Expo. Math.</span> <span class="ltx_text ltx_bib_volume">39</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 515–539</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0723-0869,1878-0792</span>,
+<a href="https://dx.doi.org/10.1016/j.exmath.2021.01.002" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/j.exmath.2021.01.002" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=4340761" title="" class="ltx_ref mr ltx_bib_external">MathReview (Miguel García-Bravo)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p20" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib19" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Moonens</span><span class="ltx_text ltx_bib_year"> (2011)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Nonconstant continuous functions whose tangential derivative vanishes along a smooth curve</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Canad. Math. Bull.</span> <span class="ltx_text ltx_bib_volume">54</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 706–715</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0008-4395,1496-4287</span>,
+<a href="https://dx.doi.org/10.4153/CMB-2011-027-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.4153/CMB-2011-027-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2894520" title="" class="ltx_ref mr ltx_bib_external">MathReview (Davide La Torre)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p14" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib34" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. G. Moreira and M. A. S. Ruas</span><span class="ltx_text ltx_bib_year"> (2009)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The curve selection lemma and the Morse-Sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Manuscripta Math.</span> <span class="ltx_text ltx_bib_volume">129</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 401–408</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-2611,1432-1785</span>,
+<a href="https://dx.doi.org/10.1007/s00229-009-0275-2" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s00229-009-0275-2" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2515490" title="" class="ltx_ref mr ltx_bib_external">MathReview (Daniel Azagra)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p17" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S2.p19" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib51" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. P. Morse</span><span class="ltx_text ltx_bib_year"> (1939)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The behavior of a function on its critical set</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. of Math. (2)</span> <span class="ltx_text ltx_bib_volume">40</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 62–70</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0003-486X,1939-8980</span>,
+<a href="https://dx.doi.org/10.2307/1968544" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1968544" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1503449" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p6" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S1.p7" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib53" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Morse</span><span class="ltx_text ltx_bib_year"> (1929)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The critical points of functions and the calculus of variations in the large</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">35</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 38–54</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9904</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9904-1929-04690-1" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9904-1929-04690-1" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1561686" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib40" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">W. F. Newns</span><span class="ltx_text ltx_bib_year"> (1967)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Functional dependence</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. Math. Monthly</span> <span class="ltx_text ltx_bib_volume">74</span>, <span class="ltx_text ltx_bib_pages"> pp. 911–920</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9890,1930-0972</span>,
+<a href="https://dx.doi.org/10.2307/2315264" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2315264" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=220884" title="" class="ltx_ref mr ltx_bib_external">MathReview (W. P. Ziemer)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p3" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Norton</span><span class="ltx_text ltx_bib_year"> (1986)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A critical set with nonnull image has large Hausdorff dimension</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Trans. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">296</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 367–376</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9947,1088-6850</span>,
+<a href="https://dx.doi.org/10.2307/2000579" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2000579" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=837817" title="" class="ltx_ref mr ltx_bib_external">MathReview (Jack B. Brown)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p7" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Norton</span><span class="ltx_text ltx_bib_year"> (1989)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Functions not constant on fractal quasi-arcs of critical points</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">106</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 397–405</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2048819" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2048819" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=969524" title="" class="ltx_ref mr ltx_bib_external">MathReview (J. Král)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p7" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Norton</span><span class="ltx_text ltx_bib_year"> (1991)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A <math id="bib.bib4.m1a" class="ltx_Math" alttext="C^{1\times\infty}" display="inline"><msup><mi>C</mi><mrow><mn>1</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mi mathvariant="normal">∞</mi></mrow></msup></math> function with an interval of critical values</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Indiana Univ. Math. J.</span> <span class="ltx_text ltx_bib_volume">40</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 1483–1488</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-2518,1943-5258</span>,
+<a href="https://dx.doi.org/10.1512/iumj.1991.40.40067" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1512/iumj.1991.40.40067" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1142725" title="" class="ltx_ref mr ltx_bib_external">MathReview (P. T. Church)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p8" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Norton</span><span class="ltx_text ltx_bib_year"> (1994)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Zygmund Morse-Sard theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Geom. Anal.</span> <span class="ltx_text ltx_bib_volume">4</span> (<span class="ltx_text ltx_bib_number">3</span>), <span class="ltx_text ltx_bib_pages"> pp. 403–424</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 1050-6926,1559-002X</span>,
+<a href="https://dx.doi.org/10.1007/BF02921589" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/BF02921589" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1294335" title="" class="ltx_ref mr ltx_bib_external">MathReview (Y. Yomdin)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p12" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib56" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. A. Ostrowski</span><span class="ltx_text ltx_bib_year"> (1929)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sur les multiplicités des zéros des fonctions indéfiniment dérivables de deux variables</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. des Science Math.</span>, <span class="ltx_text ltx_bib_pages"> pp. 64–72</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Pavlica</span><span class="ltx_text ltx_bib_year"> (2008)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Morse-Sard theorem for delta-convex curves</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Math. Bohem.</span> <span class="ltx_text ltx_bib_volume">133</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 337–340</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0862-7959,2464-7136</span>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2472482" title="" class="ltx_ref mr ltx_bib_external">MathReview (Alberto Zaffaroni)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS1.p1" title="5.1 Delta-convex ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib45" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Pohožaev</span><span class="ltx_text ltx_bib_year"> (1968)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The set of critical values of a functional</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mathematics of the USSR-Sbornik</span> <span class="ltx_text ltx_bib_volume">4</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 93</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1070/SM1968v004n01ABEH002777" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. C. Pugh</span><span class="ltx_text ltx_bib_year"> (1991)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Morse-Sard theorem with mixed differentiability</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Indiana Univ. Math. J.</span> <span class="ltx_text ltx_bib_volume">40</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 1387–1396</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-2518,1943-5258</span>,
+<a href="https://dx.doi.org/10.1512/iumj.1991.40.40062" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1512/iumj.1991.40.40062" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1142720" title="" class="ltx_ref mr ltx_bib_external">MathReview (M. P. Heble)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p9" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.p8" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[47]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Rifford</span><span class="ltx_text ltx_bib_year"> (2004)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A Morse-Sard theorem for the distance function on Riemannian manifolds</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Manuscripta Math.</span> <span class="ltx_text ltx_bib_volume">113</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 251–265</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-2611,1432-1785</span>,
+<a href="https://dx.doi.org/10.1007/s00229-003-0436-7" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s00229-003-0436-7" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2128549" title="" class="ltx_ref mr ltx_bib_external">MathReview (James J. Hebda)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS4.p1" title="5.4 リーマン多様体の距離関数 ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.4</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib32" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[48]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. Salem</span><span class="ltx_text ltx_bib_year"> (1943)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On some singular monotonic functions which are strictly increasing</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Trans. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">53</span>, <span class="ltx_text ltx_bib_pages"> pp. 427–439</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9947,1088-6850</span>,
+<a href="https://dx.doi.org/10.2307/1990210" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1990210" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=7929" title="" class="ltx_ref mr ltx_bib_external">MathReview (A. Zygmund)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p3" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib50" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[49]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Sard</span><span class="ltx_text ltx_bib_year"> (1942)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The measure of the critical values of differentiable maps</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">48</span>, <span class="ltx_text ltx_bib_pages"> pp. 883–890</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9904</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9904-1942-07811-6" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9904-1942-07811-6" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=7523" title="" class="ltx_ref mr ltx_bib_external">MathReview (H. Blumberg)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p7" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib49" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[50]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Sard</span><span class="ltx_text ltx_bib_year"> (1958)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Images of critical sets</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Ann. of Math. (2)</span> <span class="ltx_text ltx_bib_volume">68</span>, <span class="ltx_text ltx_bib_pages"> pp. 247–259</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0003-486X</span>,
+<a href="https://dx.doi.org/10.2307/1970246" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/1970246" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=100063" title="" class="ltx_ref mr ltx_bib_external">MathReview (K. Krickeberg)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p8" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib47" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Sard</span><span class="ltx_text ltx_bib_year"> (1965)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Errata to “Hausdorff measures of critical images on Banach manifolds”</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. J. Math.</span> <span class="ltx_text ltx_bib_volume">87</span>, <span class="ltx_text ltx_bib_pages"> pp. 760</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9327,1080-6377</span>,
+<a href="https://dx.doi.org/10.2307/2373229" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2373229" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=180649" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p9" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib48" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[52]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Sard</span><span class="ltx_text ltx_bib_year"> (1965)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Hausdorff measure of critical images on Banach manifolds</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Amer. J. Math.</span> <span class="ltx_text ltx_bib_volume">87</span>, <span class="ltx_text ltx_bib_pages"> pp. 158–174</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9327,1080-6377</span>,
+<a href="https://dx.doi.org/10.2307/2373229" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2373229" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=173748" title="" class="ltx_ref mr ltx_bib_external">MathReview (F. J. Almgren, Jr.)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p9" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[53]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. van der Putten</span><span class="ltx_text ltx_bib_year"> (2012)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Morse-Sard theorem for Sobolev spaces in a borderline case</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. Sci. Math.</span> <span class="ltx_text ltx_bib_volume">136</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 463–475</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0007-4497</span>,
+<a href="https://dx.doi.org/10.1016/j.bulsci.2010.02.001" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/j.bulsci.2010.02.001" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2923414" title="" class="ltx_ref mr ltx_bib_external">MathReview (Mohameden Sidi El Vally)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS3.p1" title="5.3 ソボレフ ‣ 5 サードの定理の変種 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5.3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib22" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[54]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. C. Wells</span><span class="ltx_text ltx_bib_year"> (1975)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A note on a corollary of Sard’s theorem</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">48</span>, <span class="ltx_text ltx_bib_pages"> pp. 513–514</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2040294" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2040294" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=364578" title="" class="ltx_ref mr ltx_bib_external">MathReview (William Eames)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.p2" title="4 サードの定理の系 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[55]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Wen and L. Xi</span><span class="ltx_text ltx_bib_year"> (2009)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The geometry of Whitney’s critical sets</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Israel J. Math.</span> <span class="ltx_text ltx_bib_volume">174</span>, <span class="ltx_text ltx_bib_pages"> pp. 303–348</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0021-2172,1565-8511</span>,
+<a href="https://dx.doi.org/10.1007/s11856-009-0116-8" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/s11856-009-0116-8" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=2581221" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p13" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib55" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[56]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Whitney</span><span class="ltx_text ltx_bib_year"> (1935)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A function not constant on a connected set of critical points</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Duke Math. J.</span> <span class="ltx_text ltx_bib_volume">1</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 514–517</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0012-7094,1547-7398</span>,
+<a href="https://dx.doi.org/10.1215/S0012-7094-35-00138-7" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1215/S0012-7094-35-00138-7" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1545896" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.p10" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#S3.p2" title="3 サードの定理にまつわる反例 ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib54" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[57]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">W. M. Whyburn</span><span class="ltx_text ltx_bib_year"> (1929)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Non-isolated critical points of functions</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Bull. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">35</span> (<span class="ltx_text ltx_bib_number">5</span>), <span class="ltx_text ltx_bib_pages"> pp. 701–708</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9904</span>,
+<a href="https://dx.doi.org/10.1090/S0002-9904-1929-04806-7" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1090/S0002-9904-1929-04806-7" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=1561794" title="" class="ltx_ref mr ltx_bib_external">MathReview Entry</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3" title="1 サードの定理まで ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+<li id="bib.bib38" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[58]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Yomdin</span><span class="ltx_text ltx_bib_year"> (1983)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The geometry of critical and near-critical values of differentiable mappings</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Math. Ann.</span> <span class="ltx_text ltx_bib_volume">264</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 495–515</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0025-5831,1432-1807</span>,
+<a href="https://dx.doi.org/10.1007/BF01456957" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1007/BF01456957" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=716263" title="" class="ltx_ref mr ltx_bib_external">MathReview (S. Łojasiewicz)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p6" title="2 サードの定理から ‣ 論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="論文メモ — ブラウン・モース・サードの定理 —" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_text" style="font-size:83%;">論文メモ
+<span class="ltx_text"> </span></span>— ブラウン・モース・サードの定理 —</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p3" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 18:36:00 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

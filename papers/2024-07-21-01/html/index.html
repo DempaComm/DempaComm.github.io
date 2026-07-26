@@ -1,0 +1,1448 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相</title>
+<!--Generated on Sun Jul 26 19:07:45 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2024-07-21-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>ユークリッド空間内の星型領域はその全体に微分同相である．のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../StarDiffeo.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">
+<math id="m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math id="m2" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書では
+<math id="p1.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域が
+<math id="p1.m2" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+に微分同相であることを証明する．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">この定理はBott–Tuにある
+“Good cover”
+の存在証明に利用されるはずである．
+本来はGood coverの存在証明をはてなブログ
+「電波通信」で行う予定であったが，
+その目的はいまだに未達成である．</p>
+</div>
+<nav class="ltx_TOC ltx_list_toc ltx_toc_toc"><h6 class="ltx_title ltx_title_contents">Contents</h6>
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>本文</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>この定理の参考文献にまつわる謎</span></a></li>
+</ol></nav>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>本文</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(下半連続関数)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>
+上の，
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="-\infty" display="inline"><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></math>の値も取りうる関数
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="f\colon X\to[-\infty,\infty)" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が<span class="ltx_text ltx_font_bold">下半連続関数</span>であるとは
+任意の<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>と
+任意の
+<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+に対して
+ある
+<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="\delta\in(0,\infty)" display="inline"><mrow><mi>δ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が存在し，
+任意の<math id="Thmthm1.p1.m7" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>が<math id="Thmthm1.p1.m8" class="ltx_Math" alttext="d(x,y)&lt;\delta" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>
+を満たすのであれば，
+<math id="Thmthm1.p1.m9" class="ltx_Math" alttext="f(x)-\epsilon&lt;f(y)" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たすときにいう．
+論理式でわざわざ書くと</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\forall x\in X\ \forall\epsilon\in(0,\infty)\ \exists\delta\in(0,\infty)\ %
+\forall y\ (d(x,y)&lt;\delta\Longrightarrow f(x)-\epsilon&lt;f(y))" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>ϵ</mi></mrow></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mrow><mi>y</mi><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⟹</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ということである．
+このことは，
+任意の<math id="Thmthm1.p1.m10" class="ltx_Math" alttext="a\in\mathbb{R}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について
+<math id="Thmthm1.p1.m11" class="ltx_Math" alttext="f^{-1}((a,\infty))" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が
+<math id="Thmthm1.p1.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の開集合であることと同値であるし，
+さらに
+任意の
+<math id="Thmthm1.p1.m13" class="ltx_Math" alttext="a\in\mathbb{R}" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>
+について
+<math id="Thmthm1.p1.m14" class="ltx_Math" alttext="f^{-1}([-\infty,a])" display="inline"><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+が<math id="Thmthm1.p1.m15" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合であることとも同値である．</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math><span class="ltx_text ltx_font_italic">を距離空間とし，
+実数<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="s\in(0,\infty)" display="inline"><mrow><mi>s</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>と
+下半連続関数<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="f\colon X\to[-\infty,\infty)" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を与え，
+任意の<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>について
+<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="s\leq f(x)" display="inline"><mrow><mi>s</mi><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たすと仮定する．
+このとき，
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の実連続関数の列
+<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="\{f_{n}\colon X\to\mathbb{R}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>n</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+が
+存在して以下を満たす．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と任意の</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">
+について
+</span><math id="S1.I1.i1.p1.m3" class="ltx_Math" alttext="s\leq f_{n}(x)\leq f(x)" display="inline"><mrow><mi>s</mi><mo>≤</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と
+任意の</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">
+について
+</span><math id="S1.I1.i2.p1.m3" class="ltx_Math" alttext="f_{n}(x)\leq f_{n+1}(x)" display="inline"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msub><mi>f</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">
+について
+</span><math id="S1.I1.i3.p1.m2" class="ltx_Math" alttext="\lim_{n\to\infty}f_{n}(x)=f(x)" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．
+つまり，
+</span><math id="S1.I1.i3.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">は
+</span><math id="S1.I1.i3.p1.m4" class="ltx_Math" alttext="\{f_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+の各点収束極限である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">各
+<math id="S1.p1.m1" class="ltx_Math" alttext="f_{n}" display="inline"><msub><mi>f</mi><mi>n</mi></msub></math>は具体的に定義できる．
+実際</p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(D1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\displaystyle f_{n}(x)=\inf_{p\in X}\{f(p)+n\cdot d(x,p)\}" display="inline"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">inf</mo><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+これが命題の条件を満たすことを見ていこう．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">Step 1:
+定義式
+(<a href="#S1.Ex2" title="In 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">D1</span></a>)
+において<math id="S1.p2.m1" class="ltx_Math" alttext="p=x" display="inline"><mrow><mi>p</mi><mo>=</mo><mi>x</mi></mrow></math>とすれば
+<math id="S1.p2.m2" class="ltx_Math" alttext="f_{n}(x)\leq f(x)" display="inline"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>がわかる．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">Step 2:
+任意の<math id="S1.p3.m1" class="ltx_Math" alttext="p\in X" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></math>
+と
+任意の<math id="S1.p3.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>,
+そして
+任意の<math id="S1.p3.m3" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="f(p)+n\cdot d(x,p)\leq f(p)+(n+1)\cdot d(x,p)\ " display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つので，
+<math id="S1.p3.m4" class="ltx_Math" alttext="f_{n}(x)\leq f_{n+1}(x)" display="inline"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><msub><mi>f</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">Step 3:
+任意の
+<math id="S1.p4.m1" class="ltx_Math" alttext="x,p\in X" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>p</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>について
+もちろん
+<math id="S1.p4.m2" class="ltx_Math" alttext="d(x,p)\geq 0" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≥</mo><mn>0</mn></mrow></math>
+なので，
+任意の<math id="S1.p4.m3" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="s\leq f(p)\leq f(p)+n\cdot d(x,p)" display="block"><mrow><mi>s</mi><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つので
+<math id="S1.p4.m4" class="ltx_Math" alttext="s\leq f_{n}(x)" display="inline"><mrow><mi>s</mi><mo>≤</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">Step 4: このステップでは
+各<math id="S1.p5.m1" class="ltx_Math" alttext="f_{n}" display="inline"><msub><mi>f</mi><mi>n</mi></msub></math>
+の連続性を証明する．
+<math id="S1.p5.m2" class="ltx_Math" alttext="x,y\in X" display="inline"><mrow><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>を任意に与える．
+このとき
+<math id="S1.p5.m3" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を任意に与えると
+<math id="S1.p5.m4" class="ltx_Math" alttext="f_{n}(x)" display="inline"><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>の定義式
+(<a href="#S1.Ex2" title="In 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">D1</span></a>)
+から
+<math id="S1.p5.m5" class="ltx_Math" alttext="q\in X" display="inline"><mrow><mi>q</mi><mo>∈</mo><mi>X</mi></mrow></math>が存在して</p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="f(q)+n\cdot d(q,x)&lt;f_{n}(x)+\epsilon" display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+また，<math id="S1.p5.m6" class="ltx_Math" alttext="f_{n}(y)" display="inline"><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math>の定義から</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="f_{n}(y)\leq f(q)+n\cdot d(q,y)" display="block"><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+これらの式を辺々引くと三角不等式から</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="f_{n}(y)-f_{n}(x)\leq n\cdot(d(q,y)-d(q,x))-\epsilon\leq n\cdot d(x,y)+\epsilon" display="block"><mrow><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>q</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>ϵ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+ここで
+<math id="S1.p5.m7" class="ltx_Math" alttext="\epsilon" display="inline"><mi>ϵ</mi></math>
+は任意であったので</p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="f_{n}(y)-f_{n}(x)\leq n\cdot d(x,y)" display="block"><mrow><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+そして<math id="S1.p5.m8" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>と<math id="S1.p5.m9" class="ltx_Math" alttext="y" display="inline"><mi>y</mi></math>の対称性から</p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="|f_{n}(y)-f_{n}(x)|\leq n\cdot d(x,y)" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が得られる．よって
+各<math id="S1.p5.m10" class="ltx_Math" alttext="f_{n}" display="inline"><msub><mi>f</mi><mi>n</mi></msub></math>
+は連続である(実際はより強くリプシッツ連続である．ただしこのことはこの文書では使わないけれども)．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">Step 5: このステップでは
+<math id="S1.p6.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が<math id="S1.p6.m2" class="ltx_Math" alttext="f_{n}" display="inline"><msub><mi>f</mi><mi>n</mi></msub></math>の各点収束極限であることを証明する．
+点<math id="S1.p6.m3" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+を任意に与える．
+このとき
+<math id="S1.p6.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の下半連続性から
+任意の<math id="S1.p6.m5" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+についてある
+<math id="S1.p6.m6" class="ltx_Math" alttext="\delta\in(0,\infty)" display="inline"><mrow><mi>δ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が存在して
+任意の<math id="S1.p6.m7" class="ltx_Math" alttext="y\in X" display="inline"><mrow><mi>y</mi><mo>∈</mo><mi>X</mi></mrow></math>が
+<math id="S1.p6.m8" class="ltx_Math" alttext="d(x,y)&lt;\delta" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>
+を満たすならば
+<math id="S1.p6.m9" class="ltx_Math" alttext="f(x)-\epsilon&lt;f(y)" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つ．
+さて，
+<math id="S1.p6.m10" class="ltx_Math" alttext="p\in X" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></math>
+についてまず，
+<math id="S1.p6.m11" class="ltx_Math" alttext="d(p,x)&lt;\delta" display="inline"><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi></mrow></math>
+と仮定すると
+上のことから</p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="f(x)-\epsilon&lt;f(p)\leq f(p)+n\cdot d(p,x)" display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+次に
+<math id="S1.p6.m12" class="ltx_Math" alttext="\delta\leq d(p,x)" display="inline"><mrow><mi>δ</mi><mo>≤</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+ならば
+<math id="S1.p6.m13" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を十分大きく取り，</p>
+<table id="S1.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex11.m1" class="ltx_Math" alttext="f(x)-\epsilon\leq N\cdot\delta" display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><mi>N</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>δ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つようにすると，
+<math id="S1.p6.m14" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>ならば</p>
+<table id="S1.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex12.m1" class="ltx_Math" alttext="f(x)-\epsilon\leq n\cdot d(p,x)\leq f(p)+n\cdot d(p,x)" display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+上記のことから<math id="S1.p6.m15" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>を十分大きく取れば
+<math id="S1.p6.m16" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>ならば任意の<math id="S1.p6.m17" class="ltx_Math" alttext="p\in X" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></math>について</p>
+<table id="S1.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex13.m1" class="ltx_Math" alttext="f(x)-\epsilon\leq f(p)+n\cdot d(x,p)" display="block"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>d</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+つまり十分大きい
+<math id="S1.p6.m18" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>については
+<math id="S1.p6.m19" class="ltx_Math" alttext="f(x)-\epsilon\leq f_{n}(x)\leq f(x)" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>≤</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つので，
+<math id="S1.p6.m20" class="ltx_Math" alttext="f_{n}\to f(x)" display="inline"><mrow><msub><mi>f</mi><mi>n</mi></msub><mo stretchy="false">→</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">
+をコンパクト可微分多様体とし，
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="f\colon M\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>M</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を連続写像とする．
+このとき<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を
+滑らかな関数によって
+一様近似することができる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">任意に
+<math id="S1.p7.m1" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を与える．
+そして
+各点<math id="S1.p7.m2" class="ltx_Math" alttext="a\in M" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>M</mi></mrow></math>
+について</p>
+<table id="S1.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex14.m1" class="ltx_Math" alttext="U_{a}=\{x\in M\mid|f(x)-f(a)|&lt;\epsilon\}" display="block"><mrow><msub><mi>U</mi><mi>a</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>ϵ</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき
+<math id="S1.p7.m3" class="ltx_Math" alttext="a\in U_{a}" display="inline"><mrow><mi>a</mi><mo>∈</mo><msub><mi>U</mi><mi>a</mi></msub></mrow></math>
+であり，
+<math id="S1.p7.m4" class="ltx_Math" alttext="M=\bigcup_{a\in M}U_{a}" display="inline"><mrow><mi>M</mi><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>a</mi><mo>∈</mo><mi>M</mi></mrow></msub><msub><mi>U</mi><mi>a</mi></msub></mrow></mrow></math>
+となる．
+よって
+<math id="S1.p7.m5" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math>
+のコンパクト性から
+有限の点
+<math id="S1.p7.m6" class="ltx_Math" alttext="a_{1},\dots,a_{n}" display="inline"><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>a</mi><mi>n</mi></msub></mrow></math>
+がとれて</p>
+<table id="S1.Ex15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex15.m1" class="ltx_Math" alttext="M=\bigcup_{i=1}^{n}U_{a_{i}}" display="block"><mrow><mi>M</mi><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>U</mi><msub><mi>a</mi><mi>i</mi></msub></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とできる．
+さてこのとき，
+滑らかな単位の分割
+<math id="S1.p7.m7" class="ltx_Math" alttext="\{\lambda_{i}\}_{i=1}^{n}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup></math>
+が存在して</p>
+<table id="S1.Ex16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex16.m1" class="ltx_Math" alttext="\mathrm{supp}(\lambda_{i})\subseteq U_{i}" display="block"><mrow><mrow><mi>supp</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>⊆</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を満たす．
+そして<math id="S1.p7.m8" class="ltx_Math" alttext="g\colon M\to\mathbb{R}" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>M</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を</p>
+<table id="S1.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex17.m1" class="ltx_Math" alttext="g(x)=\sum_{i=1}^{n}f(a_{i})\cdot\lambda_{i}(x)" display="block"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><msub><mi>λ</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義しよう．
+このとき<math id="S1.p7.m9" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>は滑らかな関数である．
+今からこれが<math id="S1.p7.m10" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の一様近似になっていることを示そう．
+任意の
+<math id="S1.p7.m11" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+について</p>
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex18"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex18.m1" class="ltx_Math" alttext="\displaystyle|f(x)-g(x)|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex18.m2" class="ltx_Math" alttext="\displaystyle=\left|\sum_{i=1}^{n}f(x)\cdot\lambda_{i}(x)-g(x)\right|=\left|%
+\sum_{i=1}^{n}(f(x)-f(a_{i}))\cdot\lambda_{i}(x)\right|" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mo>|</mo><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><msub><mi>λ</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>|</mo></mrow><mo>=</mo><mrow><mo>|</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">)</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>λ</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex19"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex19.m1" class="ltx_Math" alttext="\displaystyle\leq\sum_{x\in U_{a_{i}}}|f(x)-f(a_{i})|\cdot\lambda_{i}(x)&lt;%
+\epsilon\cdot\sum_{i=1}^{n}\lambda_{i}(x)=\epsilon." display="inline"><mrow><mrow><mi></mi><mo>≤</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mi>x</mi><mo>∈</mo><msub><mi>U</mi><msub><mi>a</mi><mi>i</mi></msub></msub></mrow></munder></mstyle><mrow><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.222em">⋅</mo><msub><mi>λ</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mi>ϵ</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msub><mi>λ</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mi>ϵ</mi></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">つまり，
+<math id="S1.p7.m12" class="ltx_Math" alttext="\sup_{x\in M}|f(x)-g(x)|\leq\epsilon" display="inline"><mrow><mrow><msub><mo>sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>≤</mo><mi>ϵ</mi></mrow></math>
+である．
+∎</p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="M" display="inline"><mi>M</mi></math><span class="ltx_text ltx_font_italic">
+をコンパクト可微分多様体とし，
+<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="f\colon M\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>M</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を下半連続関数で，ある実数
+<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="s\in(0,\infty)" display="inline"><mrow><mi>s</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>が存在して
+任意の<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="x\in M" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow></math>について
+<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="s\leq f(x)" display="inline"><mrow><mi>s</mi><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とする．
+このとき
+十分大きい<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+と滑らかな関数の列
+<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="\{g_{i}\colon M\to\mathbb{R}\}_{i=N}^{\infty}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>M</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mi>N</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></math>
+が存在して(番号が<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>から始まっていることに注意)
+以下を満たす．</span></p>
+<ol id="S1.I2" class="ltx_enumerate">
+<li id="S1.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I2.i1.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と
+任意の</span><math id="S1.I2.i1.p1.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">
+について</span></p>
+<table id="S1.Ex20" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex20.m1" class="ltx_Math" alttext="\frac{1}{2n(n+1)}&lt;g_{n+1}(x)-g_{n}(x)" display="block"><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>&lt;</mo><mrow><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が満たされる．
+ここで
+</span><math id="S1.I2.i1.p1.m3" class="ltx_Math" alttext="\frac{1}{2n(n+1)}=\frac{1}{2}(\frac{1}{n}-\frac{1}{n+1})" display="inline"><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+に注意せよ(あとで使う)．</span></p>
+</div>
+</li>
+<li id="S1.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I2.i2.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S1.I2.i2.p1.m2" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S1.I2.i2.p1.m3" class="ltx_Math" alttext="g_{n}(x)&lt;g_{n+1}(x)" display="inline"><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I2.i3.p1.m1" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">は</span><math id="S1.I2.i3.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">に各点収束する．</span></p>
+</div>
+</li>
+<li id="S1.I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I2.i4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I2.i4.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と任意の</span><math id="S1.I2.i4.p1.m2" class="ltx_Math" alttext="x\in M" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S1.I2.i4.p1.m3" class="ltx_Math" alttext="s/2&lt;g_{n}(x)&lt;f(x)" display="inline"><mrow><mrow><mi>s</mi><mo>/</mo><mn>2</mn></mrow><mo>&lt;</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">まず，コンパクト可微分多様体は距離空間にできることに注意しよう．それこそウリゾーンの距離化可能定理を用いれば良い．
+そうすると命題
+<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+より
+連続関数列
+<math id="S1.p8.m1" class="ltx_Math" alttext="\{f_{n}\colon X\to\mathbb{R}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mi>n</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow><mo stretchy="false">}</mo></mrow></math>
+が存在して
+<math id="S1.p8.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+に単調増加で各点収束し，
+<math id="S1.p8.m3" class="ltx_Math" alttext="s\leq f_{n}" display="inline"><mrow><mi>s</mi><mo>≤</mo><msub><mi>f</mi><mi>n</mi></msub></mrow></math>を満たす．
+そして</p>
+<table id="S1.Ex21" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex21.m1" class="ltx_Math" alttext="F_{n}=f_{n}-\frac{1}{n}" display="block"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>=</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>−</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+ここで
+<math id="S1.p8.m4" class="ltx_Math" alttext="N\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>N</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+を</p>
+<table id="S1.Ex22" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex22.m1" class="ltx_Math" alttext="\frac{4}{s}&lt;N" display="block"><mrow><mfrac><mn>4</mn><mi>s</mi></mfrac><mo>&lt;</mo><mi>N</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と取る．
+すると
+<math id="S1.p8.m5" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>ならば</p>
+<table id="S2.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex23"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex23.m1" class="ltx_Math" alttext="\displaystyle F_{n}=f_{n}-\frac{1}{n}\geq s-\frac{1}{N}=\frac{3}{4}s" display="inline"><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>=</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle></mrow><mo>≥</mo><mrow><mi>s</mi><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>N</mi></mfrac></mstyle></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>3</mn><mn>4</mn></mfrac></mstyle><mo>⁢</mo><mi>s</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+つまり
+<math id="S1.p8.m6" class="ltx_Math" alttext="\frac{3}{4}s&lt;F_{n}" display="inline"><mrow><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow><mo>&lt;</mo><msub><mi>F</mi><mi>n</mi></msub></mrow></math>が成り立つ．
+さらに</p>
+<table id="S1.Ex24" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex24.m1" class="ltx_Math" alttext="F_{n+1}-F_{n}=(f_{n+1}-f_{n})-\frac{1}{n+1}+\frac{1}{n}\geq-\frac{1}{n+1}+%
+\frac{1}{n}=\frac{1}{n(n+1)}" display="block"><mrow><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>F</mi><mi>n</mi></msub></mrow><mo>=</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>f</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>f</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>≥</mo><mrow><mrow><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので</p>
+<table id="S1.Ex25" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex25.m1" class="ltx_Math" alttext="F_{n+1}-F_{n}\geq\frac{1}{n(n+1)}" display="block"><mrow><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>F</mi><mi>n</mi></msub></mrow><mo>≥</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を得る．
+そして
+命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+より滑らかな関数<math id="S1.p8.m7" class="ltx_Math" alttext="g\colon M\to\mathbb{R}" display="inline"><mrow><mi>g</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>M</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+が存在して</p>
+<table id="S1.Ex26" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex26.m1" class="ltx_Math" alttext="\sup_{x\in X}|F_{n}(x)-g_{n}|&lt;\frac{1}{4n(n+1)}" display="block"><mrow><mrow><munder><mo movablelimits="false">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>g</mi><mi>n</mi></msub></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>&lt;</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+これをもってして
+<math id="S1.p8.m8" class="ltx_Math" alttext="\{g_{i}\}_{i=N}^{\infty}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mi>N</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></math>
+を定義しよう．
+このとき<math id="S1.p8.m9" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math>が<math id="S1.p8.m10" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に各点収束することはよくわかる．
+残りの条件を確かめよう．
+まず最初に二つの式</p>
+<table id="S1.Ex27" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex27.m1" class="ltx_Math" alttext="\sup_{x\in X}|F_{n}(x)-g_{n}|&lt;\frac{1}{4n(n+1)}" display="block"><mrow><mrow><munder><mo movablelimits="false">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>g</mi><mi>n</mi></msub></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>&lt;</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と</p>
+<table id="S1.Ex28" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex28.m1" class="ltx_Math" alttext="\sup_{x\in X}|F_{n+1}(x)-g_{n+1}|&lt;\frac{1}{4(n+1)(n+2)}" display="block"><mrow><mrow><munder><mo movablelimits="false">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>&lt;</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">から以下を計算できる．</p>
+<table id="S2.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex29"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex29.m1" class="ltx_Math" alttext="\displaystyle g_{n+1}-g_{n}" display="inline"><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>g</mi><mi>n</mi></msub></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex29.m2" class="ltx_Math" alttext="\displaystyle&gt;F_{n+1}-\frac{1}{4(n+1)(n+2)}-F_{n}-\frac{1}{4n(n+1)}" display="inline"><mrow><mi></mi><mo>&gt;</mo><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>−</mo><msub><mi>F</mi><mi>n</mi></msub><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex30"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex30.m1" class="ltx_Math" alttext="\displaystyle=(F_{n+1}-F_{n})-\frac{1}{4(n+1)(n+2)}-\frac{1}{4n(n+1)}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>F</mi><mi>n</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex31"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex31.m1" class="ltx_Math" alttext="\displaystyle\geq\frac{1}{n(n+1)}-\frac{1}{4(n+1)(n+2)}-\frac{1}{4n(n+1)}" display="inline"><mrow><mi></mi><mo>≥</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex32"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex32.m1" class="ltx_Math" alttext="\displaystyle\geq\frac{1}{n(n+1)}-2\cdot\frac{1}{4n(n+1)}=\frac{1}{2n(n+1)}." display="inline"><mrow><mrow><mi></mi><mo>≥</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>−</mo><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">⋅</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow><mo>=</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">よって，<math id="S1.p8.m11" class="ltx_Math" alttext="g_{n+1}-g_{n}&gt;\frac{1}{2n(n+1)}" display="inline"><mrow><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>g</mi><mi>n</mi></msub></mrow><mo>&gt;</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math>
+である．
+ここで，
+<math id="S1.p8.m12" class="ltx_Math" alttext="\frac{1}{4(n+1)(n+2)}\leq\frac{1}{4n(n+1)}" display="inline"><mrow><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>≤</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></math>
+を使った．
+さて，さらに</p>
+<table id="S1.Ex33" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex33.m1" class="ltx_Math" alttext="g_{n}&gt;F_{n}-\frac{1}{4n(n+1)}&gt;\frac{3}{4}s-\frac{1}{n}&gt;\frac{3}{4}s-\frac{1}{4%
+}s=\frac{1}{2}s" display="block"><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>&gt;</mo><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>−</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow><mo>&gt;</mo><mrow><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow><mo>−</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>&gt;</mo><mrow><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow><mo>−</mo><mrow><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，</p>
+<table id="S1.Ex34" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex34.m1" class="ltx_Math" alttext="g_{n}&gt;\frac{1}{2}s" display="block"><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>&gt;</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>s</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+ここで
+<math id="S1.p8.m13" class="ltx_Math" alttext="n\geq N\geq\frac{4}{s}" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi><mo>≥</mo><mfrac><mn>4</mn><mi>s</mi></mfrac></mrow></math>に注意せよ．
+また，
+<math id="S1.p8.m14" class="ltx_Math" alttext="\frac{1}{4n(n+1)}\leq\frac{1}{n}" display="inline"><mrow><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac><mo>≤</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></math>
+を用いた．
+次に
+<math id="S1.p8.m15" class="ltx_Math" alttext="g_{n}(x)\leq f(x)" display="inline"><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を示そう．</p>
+<table id="S2.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex35"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex35.m1" class="ltx_Math" alttext="\displaystyle g_{n}(x)" display="inline"><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex35.m2" class="ltx_Math" alttext="\displaystyle&lt;F_{n}(x)+\frac{1}{4n(n+1)}\leq f_{n}(x)-\frac{1}{n}+\frac{1}{4n(%
+n+1)}" display="inline"><mrow><mi></mi><mo>&lt;</mo><mrow><mrow><msub><mi>F</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow><mo>≤</mo><mrow><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.Ex36"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex36.m1" class="ltx_Math" alttext="\displaystyle=f_{n}(x)+\frac{-4n-3}{4n(n+1)}&lt;f_{n}(x)\leq f(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mrow><mo>−</mo><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi></mrow></mrow><mo>−</mo><mn>3</mn></mrow><mrow><mn>4</mn><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow><mo>&lt;</mo><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，
+<math id="S1.p8.m16" class="ltx_Math" alttext="g_{n}(x)&lt;f(x)" display="inline"><mrow><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>もわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>を</span></p>
+<table id="S1.Ex37" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex37.m1" class="ltx_Math" alttext="E=\left\{\,(a,b,c,d)\in\mathbb{R}^{4}\mid a&lt;b,\ c&lt;d,\ \frac{b-a}{2}&lt;d-c\,\right\}" display="block"><mrow><mi>E</mi><mo>=</mo><mrow><mo rspace="0.170em">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mi>ℝ</mi><mn>4</mn></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><mo rspace="0.667em">,</mo><mrow><mrow><mi>c</mi><mo>&lt;</mo><mi>d</mi></mrow><mo rspace="0.667em">,</mo><mrow><mfrac><mrow><mi>b</mi><mo>−</mo><mi>a</mi></mrow><mn>2</mn></mfrac><mo>&lt;</mo><mrow><mi>d</mi><mo>−</mo><mi>c</mi></mrow></mrow></mrow></mrow><mo lspace="0.170em">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+このとき<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>は<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="\mathbb{R}^{4}" display="inline"><msup><mi>ℝ</mi><mn>4</mn></msup></math>
+の開部分多様体になる．
+このとき滑らかな関数</span></p>
+<table id="S1.Ex38" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex38.m1" class="ltx_Math" alttext="h\colon\mathbb{R}\times E\to\mathbb{R}" display="block"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>ℝ</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>E</mi></mrow><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が存在して以下を満たす．</span></p>
+<ol id="S1.I3" class="ltx_enumerate">
+<li id="S1.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I3.i1.p1.m1" class="ltx_Math" alttext="\partial_{r}h&gt;0" display="inline"><mrow><mrow><msub><mo>∂</mo><mi>r</mi></msub><mi>h</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．
+ここで</span><math id="S1.I3.i1.p1.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math><span class="ltx_text ltx_font_italic">というのは</span><math id="S1.I3.i1.p1.m3" class="ltx_Math" alttext="\mathbb{R}\times E" display="inline"><mrow><mi>ℝ</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>E</mi></mrow></math><span class="ltx_text ltx_font_italic">の</span><math id="S1.I3.i1.p1.m4" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math><span class="ltx_text ltx_font_italic">の方の変数である．</span></p>
+</div>
+</li>
+<li id="S1.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I3.i2.p1.m1" class="ltx_Math" alttext="h([a,b],ab,c,d)=[c,d]" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo>,</mo><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">[</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">]</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+つまり，</span><math id="S1.I3.i2.p1.m2" class="ltx_Math" alttext="a,b,c,d" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi></mrow></math><span class="ltx_text ltx_font_italic">を固定した上(そうすると変数が</span><math id="S1.I3.i2.p1.m3" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math><span class="ltx_text ltx_font_italic">だけになる)で，区間</span><math id="S1.I3.i2.p1.m4" class="ltx_Math" alttext="[a,b]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></math><span class="ltx_text ltx_font_italic">
+の像を考えるとそれは
+</span><math id="S1.I3.i2.p1.m5" class="ltx_Math" alttext="[c,d]" display="inline"><mrow><mo stretchy="false">[</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">]</mo></mrow></math><span class="ltx_text ltx_font_italic">に一致するということである．</span></p>
+</div>
+</li>
+<li id="S1.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I3.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I3.i3.p1.m1" class="ltx_Math" alttext="\delta=\frac{b-a}{4}" display="inline"><mrow><mi>δ</mi><mo>=</mo><mfrac><mrow><mi>b</mi><mo>−</mo><mi>a</mi></mrow><mn>4</mn></mfrac></mrow></math><span class="ltx_text ltx_font_italic">
+とする．
+もしも</span><math id="S1.I3.i3.p1.m2" class="ltx_Math" alttext="r&lt;a+\delta" display="inline"><mrow><mi>r</mi><mo>&lt;</mo><mrow><mi>a</mi><mo>+</mo><mi>δ</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">ならば
+</span><math id="S1.I3.i3.p1.m3" class="ltx_Math" alttext="h(r,a,b,c,d)=\frac{1}{2}(r-a)+c" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>c</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">であり，
+もしも
+</span><math id="S1.I3.i3.p1.m4" class="ltx_Math" alttext="b-\delta&lt;r" display="inline"><mrow><mrow><mi>b</mi><mo>−</mo><mi>δ</mi></mrow><mo>&lt;</mo><mi>r</mi></mrow></math><span class="ltx_text ltx_font_italic">ならば
+</span><math id="S1.I3.i3.p1.m5" class="ltx_Math" alttext="h(r,a,b,c,d)=\frac{1}{2}(r-b)+d" display="inline"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>−</mo><mi>b</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>d</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+である．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">滑らかな関数
+<math id="S1.p9.m1" class="ltx_Math" alttext="\psi\colon\mathbb{R}\to\mathbb{R}" display="inline"><mrow><mi>ψ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℝ</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>
+を以下の条件を満たすものとしてとってくる．</p>
+<ol id="S1.I4" class="ltx_enumerate">
+<li id="S1.I4.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I4.i1.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.I4.i1.p1.m1" class="ltx_Math" alttext="x\in\mathbb{R}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></math>について
+<math id="S1.I4.i1.p1.m2" class="ltx_Math" alttext="0\leq\psi(x)\leq 1" display="inline"><mrow><mn>0</mn><mo>≤</mo><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>1</mn></mrow></math>である;</p>
+</div>
+</li>
+<li id="S1.I4.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I4.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I4.i2.p1.m1" class="ltx_Math" alttext="x\leq 1/4" display="inline"><mrow><mi>x</mi><mo>≤</mo><mrow><mn>1</mn><mo>/</mo><mn>4</mn></mrow></mrow></math>ならば
+<math id="S1.I4.i2.p1.m2" class="ltx_Math" alttext="\psi(x)=1" display="inline"><mrow><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>;</p>
+</div>
+</li>
+<li id="S1.I4.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I4.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I4.i3.p1.m1" class="ltx_Math" alttext="1/4&lt;x&lt;3/4" display="inline"><mrow><mrow><mn>1</mn><mo>/</mo><mn>4</mn></mrow><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mrow><mn>3</mn><mo>/</mo><mn>4</mn></mrow></mrow></math>
+ならば
+<math id="S1.I4.i3.p1.m2" class="ltx_Math" alttext="\frac{d\psi}{dx}&lt;0" display="inline"><mrow><mfrac><mrow><mi>d</mi><mo>⁢</mo><mi>ψ</mi></mrow><mrow><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mfrac><mo>&lt;</mo><mn>0</mn></mrow></math>である;</p>
+</div>
+</li>
+<li id="S1.I4.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I4.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I4.i4.p1.m1" class="ltx_Math" alttext="3/4\leq x" display="inline"><mrow><mrow><mn>3</mn><mo>/</mo><mn>4</mn></mrow><mo>≤</mo><mi>x</mi></mrow></math>ならば
+<math id="S1.I4.i4.p1.m2" class="ltx_Math" alttext="\psi(x)=0" display="inline"><mrow><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>である．</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">このような<math id="S1.p9.m2" class="ltx_Math" alttext="\psi" display="inline"><mi>ψ</mi></math>
+が存在することは多様体の基礎を知っていればよくわかる．
+このような<math id="S1.p9.m3" class="ltx_Math" alttext="\psi" display="inline"><mi>ψ</mi></math>
+を用いて</p>
+<table id="S1.Ex39" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex39.m1" class="ltx_Math" alttext="h(r,a,b,c,d)=\left(\frac{1}{2}(r-a)+c\right)\cdot\psi\left(\frac{r-a}{b-a}%
+\right)+\left(\frac{1}{2}(r-a)+d\right)\cdot\left(1-\psi\left(\frac{r-a}{b-a}%
+\right)\right)" display="block"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mrow><mo>(</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>c</mi></mrow><mo rspace="0.055em">)</mo></mrow><mo rspace="0.222em">⋅</mo><mi>ψ</mi></mrow><mo>⁢</mo><mrow><mo>(</mo><mfrac><mrow><mi>r</mi><mo>−</mo><mi>a</mi></mrow><mrow><mi>b</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo>)</mo></mrow></mrow><mo>+</mo><mrow><mrow><mo>(</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>r</mi><mo>−</mo><mi>a</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mi>d</mi></mrow><mo rspace="0.055em">)</mo></mrow><mo rspace="0.222em">⋅</mo><mrow><mo>(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mrow><mi>r</mi><mo>−</mo><mi>a</mi></mrow><mrow><mi>b</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo>)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると，
+これは命題の条件を満たす．
+∎</p>
+</div>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">See pages 3 of <a href="../mei.pdf" title="" class="ltx_ref">mei.pdf</a></p>
+</div>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">See pages 4 of <a href="../mei.pdf" title="" class="ltx_ref">mei.pdf</a></p>
+</div>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p">See pages 5 of <a href="../mei.pdf" title="" class="ltx_ref">mei.pdf</a></p>
+</div>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p">ユークリッド空間
+<math id="S1.p13.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+内の
+<math id="S1.p13.m2" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math>点<math id="S1.p13.m3" class="ltx_Math" alttext="a,b\in\mathbb{R}^{n}" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></math>
+について</p>
+<table id="S1.Ex40" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex40.m1" class="ltx_Math" alttext="\overline{ab}=\{\,ta+(1-t)b\mid t\in[0,1]\,\}" display="block"><mrow><mover accent="true"><mrow><mi>a</mi><mo>⁢</mo><mi>b</mi></mrow><mo>¯</mo></mover><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mrow><mi>t</mi><mo>⁢</mo><mi>a</mi></mrow><mo>+</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>b</mi></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>t</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo rspace="0.170em" stretchy="false">]</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(星型集合)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math><span class="ltx_text ltx_font_italic">
+内の部分集合<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が
+<span class="ltx_text ltx_font_bold">星型集合</span>
+であるとは
+ある点<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="c\in A" display="inline"><mrow><mi>c</mi><mo>∈</mo><mi>A</mi></mrow></math>
+が存在して任意の<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+について
+<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="\overline{cx}\subseteq A" display="inline"><mrow><mover accent="true"><mrow><mi>c</mi><mo>⁢</mo><mi>x</mi></mrow><mo>¯</mo></mover><mo>⊆</mo><mi>A</mi></mrow></math>
+を満たすこととする．
+上のような<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>を
+<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math><span class="ltx_text ltx_font_bold">の星の中心</span>
+と呼ぶことにする．</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold"> </span>(星型領域)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math><span class="ltx_text ltx_font_italic">
+内の部分集合
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>
+は
+星型であり，なおかつ開集合であるときに
+星型領域と呼ぶ．</span></p>
+</div>
+</div>
+<div id="S1.p14" class="ltx_para">
+<p class="ltx_p">以下，
+星型領域を
+<math id="S1.p14.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+の開部分多様体とみなして
+話を進める．</p>
+</div>
+<div id="S1.p15" class="ltx_para">
+<p class="ltx_p">また，以下では，</p>
+<table id="S1.Ex41" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex41.m1" class="ltx_Math" alttext="U(x,r)" display="block"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">で<math id="S1.p15.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を中心とする<math id="S1.p15.m2" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>-開球で，
+記号</p>
+<table id="S1.Ex42" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex42.m1" class="ltx_Math" alttext="B(x,r)" display="block"><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">で<math id="S1.p15.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を中心とする<math id="S1.p15.m4" class="ltx_Math" alttext="r" display="inline"><mi>r</mi></math>-閉球を表すことにする．</p>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ユークリッド空間
+<math id="Thmthm8.p1.m1" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の
+星型領域は
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+に微分同相である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p16" class="ltx_para">
+<p class="ltx_p"><math id="S1.p16.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>を<math id="S1.p16.m2" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+の星型領域とする．
+適当に並行移動させることにより，
+<math id="S1.p16.m3" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>の星の中心は原点<math id="S1.p16.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+としても良い．
+また，動径しか変えない微分同相
+<math id="S1.p16.m5" class="ltx_Math" alttext="\mathbb{R}^{n}\cong U(0,1)" display="inline"><mrow><msup><mi>ℝ</mi><mi>n</mi></msup><mo>≅</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+の存在から
+<math id="S1.p16.m6" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は誘拐であると改訂しても一般性を失わない．</p>
+</div>
+<div id="S1.p17" class="ltx_para">
+<p class="ltx_p">また，
+<math id="S1.p17.m1" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>は開集合なので
+<math id="S1.p17.m2" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>
+の十分小さい近傍を含む．
+なので適当に<math id="S1.p17.m3" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+全体をスカラー倍して</p>
+<table id="S1.Ex43" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex43.m1" class="ltx_Math" alttext="U(0,2)\subseteq C" display="block"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></mrow><mo>⊆</mo><mi>C</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となると仮定しても良い．ここで，この操作で<math id="S1.p17.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>の有界性
+が崩れないことに注意しよう．</p>
+</div>
+<div id="S1.p18" class="ltx_para">
+<p class="ltx_p">さて，</p>
+<table id="S1.Ex44" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex44.m1" class="ltx_Math" alttext="\mathbb{S}^{n-1}=\{\,x\in\mathbb{R}^{n}\mid\|x\|_{2}=1\,\}" display="block"><mrow><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mn>2</mn></msub><mo>=</mo><mn>1</mn></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とし，
+写像</p>
+<table id="S1.Ex45" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex45.m1" class="ltx_Math" alttext="f\colon\mathbb{S}^{n-1}\to\mathbb{R}" display="block"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を</p>
+<table id="S1.Ex46" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex46.m1" class="ltx_Math" alttext="f(x)=\sup\{\,\lambda\in[0,\infty)\mid\lambda\cdot x\in C\,\}" display="block"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>λ</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>λ</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>x</mi></mrow><mo>∈</mo><mi>C</mi></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき次のことが成立する．</p>
+<ol id="S1.I5" class="ltx_enumerate">
+<li id="S1.I5.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S1.I5.i1.p1" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.I5.i1.p1.m1" class="ltx_Math" alttext="x\in\mathbb{S}^{n-1}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>について
+<math id="S1.I5.i1.p1.m2" class="ltx_Math" alttext="1\leq f(x)" display="inline"><mrow><mn>1</mn><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．これは
+<math id="S1.I5.i1.p1.m3" class="ltx_Math" alttext="U(0,2)\subseteq C" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></mrow><mo>⊆</mo><mi>C</mi></mrow></math>だからである．</p>
+</div>
+</li>
+<li id="S1.I5.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S1.I5.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I5.i2.p1.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は下半連続である．</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">∎</p>
+</div>
+</div>
+<div id="S1.p19" class="ltx_para">
+<p class="ltx_p">写像
+<math id="S1.p19.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が下半連続であることを証明しよう．
+<math id="S1.p19.m2" class="ltx_Math" alttext="x\in\mathbb{S}^{n-1}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+と
+<math id="S1.p19.m3" class="ltx_Math" alttext="\epsilon\in(0,\infty)" display="inline"><mrow><mi>ϵ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を任意に与える．
+すると
+<math id="S1.p19.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の定義から
+ある<math id="S1.p19.m5" class="ltx_Math" alttext="\lambda\in(0,\infty)" display="inline"><mrow><mi>λ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+がとれて，
+<math id="S1.p19.m6" class="ltx_Math" alttext="\lambda\cdot x\in C" display="inline"><mrow><mrow><mi>λ</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>x</mi></mrow><mo>∈</mo><mi>C</mi></mrow></math>
+かつ
+<math id="S1.p19.m7" class="ltx_Math" alttext="f(x)-\epsilon&lt;\lambda" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mi>λ</mi></mrow></math>
+を満たす．
+いま，
+<math id="S1.p19.m8" class="ltx_Math" alttext="\lambda\cdot x\in C" display="inline"><mrow><mrow><mi>λ</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>x</mi></mrow><mo>∈</mo><mi>C</mi></mrow></math>
+なので，
+<math id="S1.p19.m9" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>が開集合であることから
+ある<math id="S1.p19.m10" class="ltx_Math" alttext="\delta\in(0,\infty)" display="inline"><mrow><mi>δ</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が存在して
+<math id="S1.p19.m11" class="ltx_Math" alttext="B(\lambda\cdot x,\delta)\subseteq C" display="inline"><mrow><mrow><mi>B</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>x</mi></mrow><mo>,</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊆</mo><mi>C</mi></mrow></math>
+を満たす．
+ここで</p>
+<table id="S1.Ex47" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex47.m1" class="ltx_Math" alttext="V=U\left(x,\frac{\lambda}{\delta}\right)\cap\mathbb{S}^{n-1}" display="block"><mrow><mi>V</mi><mo>=</mo><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo>(</mo><mi>x</mi><mo>,</mo><mfrac><mi>λ</mi><mi>δ</mi></mfrac><mo>)</mo></mrow></mrow><mo>∩</mo><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とおくと
+<math id="S1.p19.m12" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>は<math id="S1.p19.m13" class="ltx_Math" alttext="\mathbb{S}^{n-1}" display="inline"><msup><mi>𝕊</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></math>
+の開集合である．
+もしも<math id="S1.p19.m14" class="ltx_Math" alttext="y\in V" display="inline"><mrow><mi>y</mi><mo>∈</mo><mi>V</mi></mrow></math>
+ならば
+<math id="S1.p19.m15" class="ltx_Math" alttext="\|x-y\|&lt;\frac{\delta}{\lambda}" display="inline"><mrow><mrow><mo stretchy="false">‖</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">‖</mo></mrow><mo>&lt;</mo><mfrac><mi>δ</mi><mi>λ</mi></mfrac></mrow></math>
+なので</p>
+<table id="S1.Ex48" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex48.m1" class="ltx_Math" alttext="\|\lambda x-\lambda y\|=\lambda\|x-y\|&lt;\frac{\delta}{\lambda}\lambda=\delta" display="block"><mrow><mrow><mo stretchy="false">‖</mo><mrow><mrow><mi>λ</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mrow><mi>λ</mi><mo>⁢</mo><mi>y</mi></mrow></mrow><mo stretchy="false">‖</mo></mrow><mo>=</mo><mrow><mi>λ</mi><mo>⁢</mo><mrow><mo stretchy="false">‖</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">‖</mo></mrow></mrow><mo>&lt;</mo><mrow><mfrac><mi>δ</mi><mi>λ</mi></mfrac><mo>⁢</mo><mi>λ</mi></mrow><mo>=</mo><mi>δ</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり，
+<math id="S1.p19.m16" class="ltx_Math" alttext="U(\lambda x,\delta)\subseteq C" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>⁢</mo><mi>x</mi></mrow><mo>,</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊆</mo><mi>C</mi></mrow></math>
+から<math id="S1.p19.m17" class="ltx_Math" alttext="\lambda y\in C" display="inline"><mrow><mrow><mi>λ</mi><mo>⁢</mo><mi>y</mi></mrow><mo>∈</mo><mi>C</mi></mrow></math>
+がわかる．
+これは
+<math id="S1.p19.m18" class="ltx_Math" alttext="\lambda\leq f(y)" display="inline"><mrow><mi>λ</mi><mo>≤</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+が成り立つことを意味している．
+つまり，以上の議論から
+<math id="S1.p19.m19" class="ltx_Math" alttext="y\in V" display="inline"><mrow><mi>y</mi><mo>∈</mo><mi>V</mi></mrow></math>ならば
+<math id="S1.p19.m20" class="ltx_Math" alttext="f(x)-\epsilon&lt;f(y)" display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mi>ϵ</mi></mrow><mo>&lt;</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+がわかる．
+つまり
+<math id="S1.p19.m21" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は下半連続である．
+写像<math id="S1.p19.m22" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>
+はいわば<math id="S1.p19.m23" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>に関する動径の関数である．
+この
+<math id="S1.p19.m24" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に対して
+命題
+<a href="#Thmthm4" title="命題 4. ‣ 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>
+を適応してそこで述べられている
+滑らかな関数列
+<math id="S1.p19.m25" class="ltx_Math" alttext="\{g_{n}\}_{n=N}^{\infty}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>g</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>=</mo><mi>N</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></math>
+をとる．
+ここで，もしも
+<math id="S1.p19.m26" class="ltx_Math" alttext="N\leq 1" display="inline"><mrow><mi>N</mi><mo>≤</mo><mn>1</mn></mrow></math>のときは
+<math id="S1.p19.m27" class="ltx_Math" alttext="N\geq 2" display="inline"><mrow><mi>N</mi><mo>≥</mo><mn>2</mn></mrow></math>になるように取り直すことにする．
+このようにしても<math id="S1.p19.m28" class="ltx_Math" alttext="g_{n}" display="inline"><msub><mi>g</mi><mi>n</mi></msub></math>には影響はない．
+すると</p>
+<table id="S1.Ex49" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex49.m1" class="ltx_Math" alttext="g_{n+1}-g_{n}&gt;\frac{1}{2}\left(\frac{1}{n}-\frac{1}{n+1}\right)" display="block"><mrow><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>g</mi><mi>n</mi></msub></mrow><mo>&gt;</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり，</p>
+<table id="S1.Ex50" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex50.m1" class="ltx_Math" alttext="g_{n}&gt;\frac{s}{2}=\frac{1}{2}&gt;\frac{1}{2}\left((1-\frac{1}{N})-0\right)" display="block"><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>&gt;</mo><mfrac><mi>s</mi><mn>2</mn></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>&gt;</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>N</mi></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>−</mo><mn>0</mn></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+つまり，</p>
+<table id="S1.Ex51" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex51.m1" class="ltx_Math" alttext="g_{N}-0&gt;\frac{1}{2}\left((1-\frac{1}{N})-0\right)" display="block"><mrow><mrow><msub><mi>g</mi><mi>N</mi></msub><mo>−</mo><mn>0</mn></mrow><mo>&gt;</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>N</mi></mfrac></mrow><mo stretchy="false">)</mo></mrow><mo>−</mo><mn>0</mn></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+以上を踏まえて，
+命題
+<a href="#Thmthm5" title="命題 5. ‣ 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>
+の関数<math id="S1.p19.m29" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>を用いて
+関数
+<math id="S1.p19.m30" class="ltx_Math" alttext="\Phi\colon U(0,1)\to C" display="inline"><mrow><mi mathvariant="normal">Φ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mi>C</mi></mrow></mrow></math>
+を以下のように定義する．
+もしも<math id="S1.p19.m31" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>が
+<math id="S1.p19.m32" class="ltx_Math" alttext="x\in B\left(0,1-\frac{1}{N}\right)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi>B</mi><mo>⁢</mo><mrow><mo>(</mo><mn>0</mn><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>N</mi></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></math>
+を満たすのであれば，</p>
+<table id="S2.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex52"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex52.m1" class="ltx_Math" alttext="\displaystyle\Phi(x)=\displaystyle\frac{x}{\|x\|}\cdot h\left(\|x\|,0,1-\frac{%
+1}{N},0,g_{N}\left(\frac{x}{\|x\|}\right)\right)" display="inline"><mrow><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac></mstyle><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>h</mi></mrow><mo>⁢</mo><mrow><mo>(</mo><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mo>,</mo><mn>0</mn><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>N</mi></mfrac></mstyle></mrow><mo>,</mo><mn>0</mn><mo>,</mo><mrow><msub><mi>g</mi><mi>N</mi></msub><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+もしもある<math id="S1.p19.m33" class="ltx_Math" alttext="n\geq N" display="inline"><mrow><mi>n</mi><mo>≥</mo><mi>N</mi></mrow></math>が存在して<math id="S1.p19.m34" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>が
+<math id="S1.p19.m35" class="ltx_Math" alttext="x\in B\left(0,1-\frac{1}{n+1}\right)\setminus U\left(0,1-\frac{1}{n}\right)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mrow><mi>B</mi><mo>⁢</mo><mrow><mo>(</mo><mn>0</mn><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><mo>)</mo></mrow></mrow><mo>∖</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo>(</mo><mn>0</mn><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math>
+を満たすのであれば</p>
+<table id="S2.EGx7" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex53"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex53.m1" class="ltx_Math" alttext="\displaystyle\Phi(x)" display="inline"><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.Ex53.m2" class="ltx_Math" alttext="\displaystyle=\displaystyle\frac{x}{\|x\|}\cdot h\left(\|x\|,1-\frac{1}{n},1-%
+\frac{1}{n+1},g_{n}\left(\frac{x}{\|x\|}\right),g_{n+1}\left(\frac{x}{\|x\|}%
+\right)\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac></mstyle><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>h</mi></mrow><mo>⁢</mo><mrow><mo>(</mo><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle></mrow><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mstyle></mrow><mo>,</mo><mrow><msub><mi>g</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac></mstyle><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき
+<math id="S1.p19.m36" class="ltx_Math" alttext="\Phi" display="inline"><mi mathvariant="normal">Φ</mi></math>
+が全単射であることはよくわかる．
+<math id="S1.p19.m37" class="ltx_Math" alttext="\Phi" display="inline"><mi mathvariant="normal">Φ</mi></math>
+が微分同相であることを示そう．
+<math id="S1.p19.m38" class="ltx_Math" alttext="\det J\Phi\neq 0" display="inline"><mrow><mrow><mo rspace="0.167em">det</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>
+が任意の点で言えれば良い．</p>
+</div>
+<div id="S1.p20" class="ltx_para">
+<p class="ltx_p">極座標を使えば，
+<math id="S1.p20.m1" class="ltx_Math" alttext="x\neq 0" display="inline"><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>
+ならば</p>
+<table id="S2.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex59"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex59.m1" class="ltx_Math" alttext="\displaystyle(J\Phi)_{x}=\left(\begin{array}[]{c|cccc}\frac{x}{\|x\|}\partial_%
+{r}h&amp;*&amp;*&amp;\dots&amp;*\\
+\hline\cr 0&amp;1&amp;&amp;&amp;\\
+0&amp;&amp;1&amp;&amp;\\
+\vdots&amp;&amp;&amp;\ddots&amp;\\
+0&amp;&amp;&amp;&amp;1\\
+\end{array}\right)" display="inline"><mrow><msub><mrow><mo stretchy="false">(</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi></mrow><mo stretchy="false">)</mo></mrow><mi>x</mi></msub><mo>=</mo><mrow><mo>(</mo><mtable columnspacing="5pt" rowspacing="0pt"><mtr><mtd class="ltx_border_r"><mrow><mfrac><mi>x</mi><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow></mfrac><mo lspace="0em">⁢</mo><mrow><msub><mo rspace="0em">∂</mo><mi>r</mi></msub><mi>h</mi></mrow></mrow></mtd><mtd><mo>∗</mo></mtd><mtd><mo>∗</mo></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mo>∗</mo></mtd></mtr><mtr><mtd class="ltx_border_t"></mtd><mtd class="ltx_border_t"></mtd><mtd class="ltx_border_t"></mtd><mtd class="ltx_border_t"></mtd><mtd class="ltx_border_t"></mtd></mtr><mtr><mtd class="ltx_border_r"><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd class="ltx_border_r"><mn>0</mn></mtd><mtd></mtd><mtd><mn>1</mn></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd class="ltx_border_r"><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd></mtr><mtr><mtd class="ltx_border_r"><mn>0</mn></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+右下は単位行列のつもりである．
+なので，<math id="S1.p20.m2" class="ltx_Math" alttext="\partial_{r}h&gt;0" display="inline"><mrow><mrow><msub><mo>∂</mo><mi>r</mi></msub><mi>h</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow></math>
+なので，<math id="S1.p20.m3" class="ltx_Math" alttext="\det J\Phi\neq 0" display="inline"><mrow><mrow><mo rspace="0.167em">det</mo><mrow><mi>J</mi><mo>⁢</mo><mi mathvariant="normal">Φ</mi></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>がわかる．
+また，<math id="S1.p20.m4" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>の十分近くでは
+<math id="S1.p20.m5" class="ltx_Math" alttext="\Phi(x)=\frac{1}{2}x" display="inline"><mrow><mrow><mi mathvariant="normal">Φ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mi>x</mi></mrow></mrow></math>
+なので，結局
+<math id="S1.p20.m6" class="ltx_Math" alttext="\Phi" display="inline"><mi mathvariant="normal">Φ</mi></math>は微分同相である．
+<math id="S1.p20.m7" class="ltx_Math" alttext="U(0,1)" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>
+と<math id="S1.p20.m8" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+は微分同相なので，
+結局<math id="S1.p20.m9" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>
+は<math id="S1.p20.m10" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+と微分同相であることがわかる．</p>
+</div>
+<div id="S1.p21" class="ltx_para">
+<p class="ltx_p">See pages 30 of <a href="../zu.pdf" title="" class="ltx_ref">zu.pdf</a></p>
+</div>
+<div id="S1.p22" class="ltx_para">
+<p class="ltx_p">See pages 31 of <a href="../zu.pdf" title="" class="ltx_ref">zu.pdf</a></p>
+</div>
+<div id="S1.p23" class="ltx_para">
+<p class="ltx_p">See pages 32 of <a href="../zu.pdf" title="" class="ltx_ref">zu.pdf</a></p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>この定理の参考文献にまつわる謎</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">この文書はもともと2016年に，
+はてなブログ「電波通信」
+にて，手書きの原稿として公開された
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="星型領域はユークリッド空間に微分同相" class="ltx_ref">9</a>]</cite>．
+それを<span class="ltx_text ltx_TeX_logo" style="letter-spacing:-0.2em; margin-right:0.2em;">T<span class="ltx_text" style="position:relative; bottom:-0.2ex;font-variant:small-caps;font-size:120%;;">e</span>X</span>に落とし込んだのがこの文書である．
+この文書の
+の議論自体は
+2015年10月に閲覧したという，ドイツ語の解析学の講義ノートらしい
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Analysis III" class="ltx_ref">6</a>]</cite>
+を頑張って読んだものだと思われる．
+この文献の存在自体は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="What are the open subsets of Rn that are diffeomorphic to Rn" class="ltx_ref">4</a>]</cite>
+から知ったと思われる．
+ドイツ語の文献
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Analysis III" class="ltx_ref">6</a>]</cite>
+は現在閲覧不可能であり，
+作者が他のドメインで公開しているかどうかということも不明である．よもやドイツ語の講義ノートの証明を，どこかの誰かが日本語にして流布しているとは，この講義ノートの著者は思いもしなかったと思う．
+とにかく，以上の証明方法について何か元ネタがあるのかどうか探索したところ，
+Mathoverflowの二つの質問
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="What are the open subsets of Rn that are diffeomorphic to Rn" class="ltx_ref">1</a>]</cite>
+と
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="Is there a citeable reference for star-shaped open subsets of R^n being diffeomorphic to R^n?" class="ltx_ref">3</a>]</cite>
+を見つけた．
+質問
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="Is there a citeable reference for star-shaped open subsets of R^n being diffeomorphic to R^n?" class="ltx_ref">3</a>]</cite>
+は
+この文書の主定理の引用可能な文献はないかと問うているが，
+なかなかないようである．
+一応<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="Uniqueness of the open cone neighborhood" class="ltx_ref">8</a>]</cite>が候補として挙げられているが，
+少々趣が違うようである．
+この論文自体は
+Brownによる論文
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="The monotone union of open n-cells is an open n-cell" class="ltx_ref">5</a>]</cite>
+の発展のような内容であり，
+それでは
+Brown<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="The monotone union of open n-cells is an open n-cell" class="ltx_ref">5</a>]</cite>が何を証明しているのかというと，
+<math id="S2.p1.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>-cellの和になる位相空間が<math id="S2.p1.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>-cellに同相になることを証明している．我々の議論だと，<math id="S2.p1.m3" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>の境界を下から滑らかな関数で近似することによって増大する開集合の可算列で<math id="S2.p1.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>を表現することによって定理を証明している．
+つまり，我々の論法の元ネタは
+Brown<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="The monotone union of open n-cells is an open n-cell" class="ltx_ref">5</a>]</cite>である可能性が高い．ただしBrownの論文は連続写像でしか話をしていないことに注意しよう．
+このBrownの論文の発展については
+Mathoverflowの質問
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="Manifolds with two coordinate charts" class="ltx_ref">2</a>]</cite>の回答に色々ある．
+おそらく誰かが
+Brown<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="The monotone union of open n-cells is an open n-cell" class="ltx_ref">5</a>]</cite>の議論を可微分写像の圏でやり直したのかもしれない．
+強いて言えばそれが「笑い男のオリジナル」
+ということである．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">また，下半連続関数が（リプシッツ）連続関数の増加列の
+各点収束極限になることはBaire関数の文脈でよく知られているようであり，
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+で行った構成法は，いわば「いつものやつ」
+のようである．
+ここら辺の話は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="Lipschitz extensions and approximations" class="ltx_ref">7</a>, Theorem 2.1]</cite>
+などに，今のこの文書の話とは関係なく，一般の話として紹介されている．</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">O. (https://mathoverflow.net/users/1570/oliver)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">What are the open subsets of <math id="bib.bib9.m1a" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math> that are diffeomorphic to <math id="bib.bib9.m2a" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math></span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">MathOverflowURL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://mathoverflow.net/q/4468</span> (version: 2020-12-28)</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">https://mathoverflow.net/q/4468</span>,
+<a href="https://mathoverflow.net/q/4468" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. P. (https://mathoverflow.net/users/317/andy-putman)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Manifolds with two coordinate charts</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">MathOverflowURL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://mathoverflow.net/q/117475</span> (version: 2022-07-21)</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">https://mathoverflow.net/q/117475</span>,
+<a href="https://mathoverflow.net/q/117475" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. P. (https://mathoverflow.net/users/402/dmitri-pavlov)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Is there a citeable reference for star-shaped open subsets of R^n being diffeomorphic to R^n?</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">MathOverflowURL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://mathoverflow.net/q/198882</span> (version: 2022-11-19)</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">https://mathoverflow.net/q/198882</span>,
+<a href="https://mathoverflow.net/q/198882" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. E. (https://mathoverflow.net/users/450/georges-elencwajg)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">What are the open subsets of <math id="bib.bib6.m1a" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math> that are diffeomorphic to <math id="bib.bib6.m2a" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math></span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">MathOverflowURL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://mathoverflow.net/q/4516</span> (version: 2013-07-10)</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">https://mathoverflow.net/q/4516</span>,
+<a href="https://mathoverflow.net/q/4516" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Brown</span><span class="ltx_text ltx_bib_year"> (1961)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The monotone union of open <math id="bib.bib4.m1a" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>-cells is an open <math id="bib.bib4.m2a" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>-cell</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">12</span>, <span class="ltx_text ltx_bib_pages"> pp. 812–814</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2034881" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2034881" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=126835" title="" class="ltx_ref mr ltx_bib_external">MathReview (S. Mardešić)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Ferus</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Analysis III</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">（ドイツ語）2015年10月閲覧．現在リンク切れ．行方不明．
+URL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://page.math.tu-berlin.de/ferus/ANA/Ana3.pdf</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">V. Gutev</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lipschitz extensions and approximations</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">J. Math. Anal. Appl.</span> <span class="ltx_text ltx_bib_volume">491</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 124242, 13</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022-247X,1096-0813</span>,
+<a href="https://dx.doi.org/10.1016/j.jmaa.2020.124242" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.1016/j.jmaa.2020.124242" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=4103879" title="" class="ltx_ref mr ltx_bib_external">MathReview (Mihai Turinici)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">K. W. Kwun</span><span class="ltx_text ltx_bib_year"> (1964)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Uniqueness of the open cone neighborhood</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Amer. Math. Soc.</span> <span class="ltx_text ltx_bib_volume">15</span>, <span class="ltx_text ltx_bib_pages"> pp. 476–479</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0002-9939,1088-6826</span>,
+<a href="https://dx.doi.org/10.2307/2034528" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2034528" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://www.ams.org/mathscinet-getitem?mr=161319" title="" class="ltx_ref mr ltx_bib_external">MathReview (R. H. Rosen)</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">ナンブキトラ</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">星型領域はユークリッド空間に微分同相</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">はてなブログ「電波通信」URL:<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://concious4410.hatenablog.com/entry/2016/07/06/194138</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1" title="2 この定理の参考文献にまつわる謎 ‣ ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">松本幸夫</span><span class="ltx_text ltx_bib_year"> (1998)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">多様体の基礎</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">基礎数学５</span>,  <span class="ltx_text ltx_bib_publisher">東京大学出版会</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#p3" title="ℝ^𝑛内の星型領域は ℝ^𝑛に微分同相" class="ltx_ref"><span class="ltx_text ltx_ref_title"><math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>内の星型領域は
+<math class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>に微分同相</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<div id="p3" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:07:45 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>
