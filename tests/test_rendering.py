@@ -23,6 +23,7 @@ def paper(
     title: str,
     math_section: str = "その他",
     tags: list[str] | None = None,
+    with_html: bool = False,
 ) -> Paper:
     published_at = f"{slug[:10]}T12:00:00+09:00"
     sequence = int(slug[-2:])
@@ -47,6 +48,18 @@ def paper(
         "approved_changes": [],
         "privacy_reviews": [],
     }
+    if with_html:
+        value["html_version"] = {
+            "status": "approved",
+            "generator": "LaTeXML",
+            "generator_version": "0.8.8",
+            "generated_at": "2026-07-26T12:00:00+09:00",
+            "source_path": "main.tex",
+            "source_sha256": "a" * 64,
+            "path": "html/index.html",
+            "label": "HTML版を読む（試験）",
+            "reviewed_at": "2026-07-26T13:00:00+09:00",
+        }
     return Paper.from_dict(value, Path(slug) / "paper.json")
 
 
@@ -107,6 +120,18 @@ class PublicRenderingTest(unittest.TestCase):
             "https://dempacomm.github.io/tags/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93/",
             sitemap,
         )
+
+        html_paper = paper(
+            "2026-07-26-01", "HTML版記事", with_html=True
+        )
+        html_detail = rendered_paper_page(html_paper)
+        self.assertIn('href="html/index.html">HTML版を読む（試験）</a>', html_detail)
+        html_sitemap = rendered_sitemap([(html_paper.source_path, html_paper)])
+        self.assertIn(
+            "https://dempacomm.github.io/papers/2026-07-26-01/html/",
+            html_sitemap,
+        )
+        self.assertIn("<lastmod>2026-07-26</lastmod>", html_sitemap)
 
     def test_compatibility_renderer_remains_a_thin_page_module_index(self) -> None:
         rendering = (

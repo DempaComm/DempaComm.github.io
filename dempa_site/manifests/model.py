@@ -137,6 +137,23 @@ class PaperRelation:
 
 
 @dataclass(frozen=True)
+class HtmlVersion:
+    status: str
+    generator: str
+    generator_version: str
+    generated_at: str
+    source_path: str
+    source_sha256: str
+    path: str
+    label: str
+    reviewed_at: str
+
+    @classmethod
+    def from_dict(cls, value: Mapping[str, Any]) -> "HtmlVersion":
+        return cls(**{key: value[key] for key in cls.__dataclass_fields__})
+
+
+@dataclass(frozen=True)
 class Paper(Mapping[str, Any]):
     """Validated manifest with typed fields and a read-only legacy mapping view."""
 
@@ -165,6 +182,7 @@ class Paper(Mapping[str, Any]):
     corrections: Tuple[Correction, ...] = ()
     statements: Tuple[Statement, ...] = ()
     relations: Tuple[PaperRelation, ...] = ()
+    html_version: Optional[HtmlVersion] = None
     license: str = ""
     _raw: Mapping[str, Any] = field(default_factory=dict, repr=False, compare=False)
 
@@ -210,6 +228,11 @@ class Paper(Mapping[str, Any]):
             ),
             relations=tuple(
                 PaperRelation.from_dict(item) for item in value.get("relations", [])
+            ),
+            html_version=(
+                HtmlVersion.from_dict(value["html_version"])
+                if "html_version" in value
+                else None
             ),
             license=value.get("license", ""),
             _raw=deepcopy(dict(value)),

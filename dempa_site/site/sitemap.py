@@ -34,6 +34,13 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
                 str(manifest["published_at"])[:10],
             )
         )
+        if manifest.html_version is not None:
+            urls.append(
+                (
+                    f"{SITE_URL}/papers/{quote(manifest.slug, safe='')}/html/",
+                    manifest.html_version.generated_at[:10],
+                )
+            )
     entries = []
     for location, last_modified in urls:
         lastmod = f"\n    <lastmod>{last_modified}</lastmod>" if last_modified else ""

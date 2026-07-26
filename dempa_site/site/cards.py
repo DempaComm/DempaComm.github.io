@@ -27,8 +27,16 @@ def public_file_actions(
         actions.append(
             f'{indent}<a class="primary-action" href="{prefix}main.pdf">PDFを読む</a>'
         )
+    if manifest.html_version is not None:
+        html_path = html.escape(manifest.html_version.path, quote=True)
+        html_label = html.escape(manifest.html_version.label)
+        actions.append(
+            f'{indent}<a class="primary-action" href="{prefix}{html_path}">{html_label}</a>'
+        )
     primary_source_added = False
     for entry in manifest.files:
+        if entry.role == "derived-html":
+            continue
         if not entry.public or not entry.label:
             continue
         relative = html.escape(entry.path, quote=True)
@@ -113,4 +121,3 @@ def paper_card(manifest: Paper, prefix: str = "") -> str:
 {actions_html}
         </nav>
       </article>"""
-

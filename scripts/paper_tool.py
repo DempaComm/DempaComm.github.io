@@ -16,6 +16,9 @@ if str(PROJECT_ROOT) not in sys.path:
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
 from dempa_site.config import LATEXMKRC_BY_ENGINE  # noqa: E402
 from dempa_site.conversion.latexml import run_latexml_trial  # noqa: E402
+from dempa_site.conversion.latexml_publication import (  # noqa: E402
+    publish_latexml_trial,
+)
 from dempa_site.errors import DempaSiteError, PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.importing.paper import import_paper  # noqa: E402
@@ -192,6 +195,28 @@ def command_latexml_trial(args: argparse.Namespace) -> None:
         f"report={output / 'report.json'}"
     )
     print("MANUAL REVIEW REQUIRED: 試験出力は自動公開されません")
+
+
+def command_publish_latexml(args: argparse.Namespace) -> None:
+    if not args.reviewed:
+        raise PaperToolError(
+            "LaTeXML HTMLを目視確認してから --reviewed を付けてください"
+        )
+    selected = manifests([args.slug])
+    paper = selected[0][1]
+    trial = Path(args.trial)
+    if not trial.is_absolute():
+        trial = ROOT / trial
+    publication = publish_latexml_trial(
+        root=ROOT,
+        paper=paper,
+        trial_output=trial,
+    )
+    command_catalog(argparse.Namespace(check=False))
+    print(
+        f"PUBLISHED LATEXML {paper.slug} files={publication.file_count} "
+        f"html={publication.html_path}"
+    )
 
 
 def command_inspect_file(args: argparse.Namespace) -> None:
@@ -404,6 +429,24 @@ def parser() -> argparse.ArgumentParser:
         help="per-paper LaTeXML timeout (default: 180)",
     )
     latexml_parser.set_defaults(func=command_latexml_trial)
+
+    publish_latexml_parser = subparsers.add_parser(
+        "publish-latexml",
+        help="promote a manually reviewed LaTeXML trial to public paper files",
+    )
+    publish_latexml_parser.add_argument("slug", help="paper slug")
+    publish_latexml_parser.add_argument(
+        "--trial",
+        required=True,
+        metavar="DIR",
+        help="LaTeXML trial output containing report.json",
+    )
+    publish_latexml_parser.add_argument(
+        "--reviewed",
+        action="store_true",
+        help="confirm that the HTML was compared with the PDF and approved",
+    )
+    publish_latexml_parser.set_defaults(func=command_publish_latexml)
 
     inspect_parser = subparsers.add_parser(
         "inspect-file", help="prepare a mandatory privacy review for a TeX or PDF file"

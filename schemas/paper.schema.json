@@ -75,6 +75,7 @@
       "type": "array",
       "items": {"$ref": "#/$defs/relation"}
     },
+    "html_version": {"$ref": "#/$defs/html_version"},
     "license": {"type": "string"}
   },
   "additionalProperties": false,
@@ -194,6 +195,32 @@
         "target_slug": {"type": "string", "minLength": 1},
         "kind": {"type": "string", "minLength": 1},
         "label": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "html_version": {
+      "type": "object",
+      "required": [
+        "status",
+        "generator",
+        "generator_version",
+        "generated_at",
+        "source_path",
+        "source_sha256",
+        "path",
+        "label",
+        "reviewed_at"
+      ],
+      "properties": {
+        "status": {"type": "string", "enum": ["approved"]},
+        "generator": {"type": "string", "const": "LaTeXML"},
+        "generator_version": {"type": "string", "minLength": 1},
+        "generated_at": {"type": "string", "minLength": 1},
+        "source_path": {"type": "string", "minLength": 1},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "path": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "reviewed_at": {"type": "string", "minLength": 1}
       },
       "additionalProperties": false
     }

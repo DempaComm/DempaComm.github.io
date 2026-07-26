@@ -153,6 +153,35 @@ def validate_manifest_data(
         except ValueError as error:
             raise error_type(f"{path}: approved_at must be ISO 8601") from error
 
+    html_version = manifest.get("html_version")
+    if html_version is not None:
+        source_path = str(safe_relative_path(html_version["source_path"], error_type))
+        html_path = str(safe_relative_path(html_version["path"], error_type))
+        entries = {entry["path"]: entry for entry in files}
+        if source_path not in entries:
+            _error(error_type, path, "html_version source_path is not in files")
+        if html_path not in entries:
+            _error(error_type, path, "html_version path is not in files")
+        source_entry = entries[source_path]
+        html_entry = entries[html_path]
+        if source_entry["sha256"] != html_version["source_sha256"]:
+            _error(error_type, path, "html_version source SHA does not match files")
+        if not html_entry["public"] or html_entry["role"] != "derived-html":
+            _error(
+                error_type,
+                path,
+                "html_version path must be a public derived-html file",
+            )
+        if Path(html_path).suffix.casefold() != ".html":
+            _error(error_type, path, "html_version path must end in .html")
+        for date_field in ("generated_at", "reviewed_at"):
+            try:
+                parse_iso_datetime(html_version[date_field])
+            except ValueError as error:
+                raise error_type(
+                    f"{path}: html_version.{date_field} must be ISO 8601"
+                ) from error
+
     if manifest["schema_version"] == 2:
         reviews = manifest.get("privacy_reviews")
         if not isinstance(reviews, list):
@@ -216,4 +245,3 @@ def validate_manifest_collection(
                 paper.source_path,
                 "relations refer to unknown paper slugs: " + ", ".join(missing),
             )
-
