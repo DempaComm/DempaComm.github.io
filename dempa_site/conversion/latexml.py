@@ -224,6 +224,123 @@ def _normalize_bigtriangleup_symbol(source: str) -> tuple[str, int]:
     )
 
 
+def _normalize_left_exponent_function_space(source: str) -> tuple[str, int]:
+    r"""Rewrite function-space notation ``{}^{A}B`` as equivalent ``B^{A}``."""
+    marker = "{}^{"
+    output = []
+    cursor = 0
+    replacements = 0
+    while True:
+        start = source.find(marker, cursor)
+        if start < 0:
+            output.append(source[cursor:])
+            break
+        output.append(source[cursor:start])
+        exponent_start = start + len(marker)
+        depth = 1
+        exponent_end = exponent_start
+        while exponent_end < len(source) and depth:
+            character = source[exponent_end]
+            escaped = exponent_end > 0 and source[exponent_end - 1] == "\\"
+            if not escaped and character == "{":
+                depth += 1
+            elif not escaped and character == "}":
+                depth -= 1
+            exponent_end += 1
+        if depth:
+            output.append(source[start:])
+            break
+        base_start = exponent_end
+        while base_start < len(source) and source[base_start].isspace():
+            base_start += 1
+        if base_start >= len(source):
+            output.append(source[start:exponent_end])
+            cursor = exponent_end
+            continue
+        if source[base_start] == "\\":
+            match = re.match(r"\\(?:[A-Za-z@]+|.)", source[base_start:])
+            base_end = base_start + len(match.group(0)) if match else base_start
+        elif source[base_start] == "{":
+            base_depth = 1
+            base_end = base_start + 1
+            while base_end < len(source) and base_depth:
+                character = source[base_end]
+                escaped = base_end > 0 and source[base_end - 1] == "\\"
+                if not escaped and character == "{":
+                    base_depth += 1
+                elif not escaped and character == "}":
+                    base_depth -= 1
+                base_end += 1
+            if base_depth:
+                output.append(source[start:exponent_end])
+                cursor = exponent_end
+                continue
+        else:
+            base_end = base_start + 1
+        if base_end < len(source) and source[base_end] == "_":
+            subscript_end = base_end + 1
+            if subscript_end < len(source) and source[subscript_end] == "{":
+                subscript_depth = 1
+                subscript_end += 1
+                while subscript_end < len(source) and subscript_depth:
+                    character = source[subscript_end]
+                    escaped = subscript_end > 0 and source[subscript_end - 1] == "\\"
+                    if not escaped and character == "{":
+                        subscript_depth += 1
+                    elif not escaped and character == "}":
+                        subscript_depth -= 1
+                    subscript_end += 1
+                if not subscript_depth:
+                    base_end = subscript_end
+            elif subscript_end < len(source):
+                base_end = subscript_end + 1
+        exponent = source[exponent_start : exponent_end - 1]
+        base = source[base_start:base_end]
+        output.append(f"{base}^{{{exponent}}}")
+        replacements += 1
+        cursor = base_end
+    return "".join(output), replacements
+
+
+def _normalize_norm_delimiters(source: str) -> tuple[str, int]:
+    r"""Give paired norm delimiters explicit left and right semantics."""
+    replacements = 0
+    lines = []
+    for line in source.splitlines(keepends=True):
+        delimiters = list(re.finditer(r"\\[lr]Vert", line))
+        if (
+            delimiters
+            and len(delimiters) % 2 == 0
+            and delimiters[0].group(0) == r"\rVert"
+        ):
+            delimiter_index = 0
+
+            def alternate_delimiter(_match: re.Match[str]) -> str:
+                nonlocal delimiter_index
+                value = r"\lVert" if delimiter_index % 2 == 0 else r"\rVert"
+                delimiter_index += 1
+                return value
+
+            line = re.sub(r"\\[lr]Vert", alternate_delimiter, line)
+            replacements += len(delimiters) // 2
+        lines.append(line)
+    source = "".join(lines)
+    patterns = (
+        re.compile(r"\\\|([^$\n]*?)\\\|"),
+        re.compile(r"\\lVert((?:(?!\\[lr]Vert)[^$\n])*?)\\lVert"),
+        re.compile(r"(?<!\|)\|\|([^|$\n]*?)\|\|(?!\|)"),
+    )
+    for pattern in patterns:
+        source, count = pattern.subn(r"\\lVert \1\\rVert", source)
+        replacements += count
+    return source, replacements
+
+
+def _normalize_sized_parentheses(source: str) -> tuple[str, int]:
+    r"""Correct unambiguous left/right command typos around parentheses."""
+    return re.subn(r"\\Bigr\(", r"\\Bigl(", source)
+
+
 def _normalize_nocite_all(
     source: str, bibliographies: Iterable[Path]
 ) -> tuple[str, int]:
@@ -555,6 +672,15 @@ def run_latexml_trial(
             normalized_source, triangle_normalization_count = (
                 _normalize_bigtriangleup_symbol(normalized_source)
             )
+            normalized_source, function_space_normalization_count = (
+                _normalize_left_exponent_function_space(normalized_source)
+            )
+            normalized_source, norm_delimiter_normalization_count = (
+                _normalize_norm_delimiters(normalized_source)
+            )
+            normalized_source, sized_parenthesis_normalization_count = (
+                _normalize_sized_parentheses(normalized_source)
+            )
             normalized_source, nocite_normalization_count = _normalize_nocite_all(
                 normalized_source, bibliography_files
             )
@@ -565,6 +691,9 @@ def run_latexml_trial(
                 or brace_normalization_count
                 or quotient_normalization_count
                 or triangle_normalization_count
+                or function_space_normalization_count
+                or norm_delimiter_normalization_count
+                or sized_parenthesis_normalization_count
                 or nocite_normalization_count
             ):
                 temporary_source = target_dir / ".latexml-normalized.tex"
@@ -599,6 +728,30 @@ def run_latexml_trial(
                     {
                         "kind": "bigtriangleup-symbol",
                         "count": triangle_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if function_space_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "left-exponent-function-space",
+                        "count": function_space_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if norm_delimiter_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "norm-delimiters",
+                        "count": norm_delimiter_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if sized_parenthesis_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "sized-parentheses",
+                        "count": sized_parenthesis_normalization_count,
                         "scope": "temporary-conversion-copy",
                     }
                 )

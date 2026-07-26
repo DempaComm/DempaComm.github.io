@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>多項式近似定理</title>
+<!--Generated on Sun Jul 26 17:12:23 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2015-09-10-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>ワイエルストラスの多項式近似定理のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../Weierstrass_app_thm.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">多項式近似定理</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では実直線の有界閉区間上の連続関数が多項式で一様に近似出来るというワイエルストラスの多項式近似定理をベルンシュタイン多項式を用いた方法で証明する。多項式近似定理は一般の有界閉区間上の関数に対する定理だが、一般の有界閉区間は<math id="p1.m1" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>と同相なので、<math id="p1.m2" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>上で証明してしまっても構わない。
+<br class="ltx_break">早速証明に必要な補題を準備しよう。多項式<math id="p1.m3" class="ltx_Math" alttext="B_{n,k}(x)" display="inline"><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>を</p>
+<table id="S0.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex1.m1" class="ltx_Math" alttext="B_{n,k}(x):=\binom{n}{k}x^{k}(1-x)^{n-k}={}_{n}\text{C}_{k}\ x^{k}(1-x)^{n-k}%
+\ \ (0\leq k\leq n)" display="block"><mrow><mrow><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:=</mo><mrow><mrow><mo>(</mo><mfrac linethickness="0pt"><mi>n</mi><mi>k</mi></mfrac><mo>)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></msup></mrow><mo>=</mo><mrow><mmultiscripts><mtext>C</mtext><mi>k</mi><mrow></mrow><mprescripts></mprescripts><mi>n</mi><mrow></mrow></mmultiscripts><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></msup></mrow></mrow><mspace width="1em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mi>n</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する。<math id="p1.m4" class="ltx_Math" alttext="\binom{n}{k}={}_{n}\text{C}_{k}" display="inline"><mrow><mrow><mo>(</mo><mfrac linethickness="0pt"><mi>n</mi><mi>k</mi></mfrac><mo>)</mo></mrow><mo>=</mo><mmultiscripts><mtext>C</mtext><mi>k</mi><mrow></mrow><mprescripts></mprescripts><mi>n</mi><mrow></mrow></mmultiscripts></mrow></math>は二項係数である。<math id="p1.m5" class="ltx_Math" alttext="[0,1]上この多項式は常に0以上となることに注意せよ。" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo>⁢</mo><mi mathvariant="normal">上</mi><mo>⁢</mo><mi mathvariant="normal">こ</mi><mo>⁢</mo><mi mathvariant="normal">の</mi><mo>⁢</mo><mi mathvariant="normal">多</mi><mo>⁢</mo><mi mathvariant="normal">項</mi><mo>⁢</mo><mi mathvariant="normal">式</mi><mo>⁢</mo><mi mathvariant="normal">は</mi><mo>⁢</mo><mi mathvariant="normal">常</mi><mo>⁢</mo><mi mathvariant="normal">に</mi><mo>⁢</mo><mn>0</mn><mo>⁢</mo><mi mathvariant="normal">以</mi><mo>⁢</mo><mi mathvariant="normal">上</mi><mo>⁢</mo><mi mathvariant="normal">と</mi><mo>⁢</mo><mi mathvariant="normal">な</mi><mo>⁢</mo><mi mathvariant="normal">る</mi><mo>⁢</mo><mi mathvariant="normal">こ</mi><mo>⁢</mo><mi mathvariant="normal">と</mi><mo>⁢</mo><mi mathvariant="normal">に</mi><mo>⁢</mo><mi mathvariant="normal">注</mi><mo>⁢</mo><mi mathvariant="normal">意</mi><mo>⁢</mo><mi mathvariant="normal">せ</mi><mo>⁢</mo><mi mathvariant="normal">よ</mi><mo>⁢</mo><mi mathvariant="normal">。</mi></mrow></math>
+このとき次が成立する。</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic"></span></p>
+<table id="S0.EGx1" class="ltx_equationgroup ltx_eqn_eqnarray ltx_eqn_table">
+
+<tbody id="S0.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E1.m1" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}B_{n,k}(x)=1" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E2.m1" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}kB_{n,k}(x)=nx" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mi>k</mi><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E3.m1" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}k(k-1)B_{n,k}(x)=n(n-1)x" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>x</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E4.m1" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}k^{2}B_{n,k}(x)=n(n-1)x^{2}+nx" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msup><mi>k</mi><mn>2</mn></msup><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><mo>+</mo><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_center ltx_eqn_cell"><math id="S0.E5.m1" class="ltx_Math" alttext="\displaystyle\sum_{k=0}^{n}(nx-k)^{2}B_{n,k}(x)=nx(1-x)" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mi>k</mi></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="p2" class="ltx_para">
+<p class="ltx_p"><math id="p2.m1" class="ltx_Math" alttext="B_{n,k}(x)" display="inline"><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>を２変数化して証明する。</p>
+<table id="S0.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex2.m1" class="ltx_Math" alttext="D_{n,k}(x,y):=\binom{n}{k}x^{k}y^{n-k}={}_{n}\text{C}_{k}\ x^{k}y^{n-k}" display="block"><mrow><mrow><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:=</mo><mrow><mrow><mo>(</mo><mfrac linethickness="0pt"><mi>n</mi><mi>k</mi></mfrac><mo>)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup><mo>⁢</mo><msup><mi>y</mi><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></msup></mrow><mo>=</mo><mrow><mmultiscripts><mtext>C</mtext><mi>k</mi><mrow></mrow><mprescripts></mprescripts><mi>n</mi><mrow></mrow></mmultiscripts><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup><mo>⁢</mo><msup><mi>y</mi><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とおけば、<math id="p2.m2" class="ltx_Math" alttext="B_{n,k}(x)=D_{n,k}(x,1-x)" display="inline"><mrow><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となる。まず1番の式に関しては二項係数の定義から</p>
+<table id="S0.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex3.m1" class="ltx_Math" alttext="\sum_{k=1}^{n}D_{n,k}(x,y)=(x+y)^{n}" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">から<math id="p2.m3" class="ltx_Math" alttext="y=1-x" display="inline"><mrow><mi>y</mi><mo>=</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mrow></math>を代入すればよい。
+<br class="ltx_break">2番の式に関しては微分公式<math id="p2.m4" class="ltx_Math" alttext="\frac{d}{dx}x^{k}=kx^{k-1}" display="inline"><mrow><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mfrac><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup></mrow><mo>=</mo><mrow><mi>k</mi><mo>⁢</mo><msup><mi>x</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math>から<math id="p2.m5" class="ltx_Math" alttext="kx^{k}=x\frac{d}{dx}x^{k}" display="inline"><mrow><mrow><mi>k</mi><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mo>⁢</mo><mi>x</mi></mrow></mfrac><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup></mrow></mrow></math>なので</p>
+<table id="S0.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex4.m1" class="ltx_Math" alttext="\sum_{k=1}^{n}kD_{n,k}(x,y)=x\frac{\partial}{\partial x}\sum_{k=1}^{n}D_{n,k}(%
+x,y)=x\frac{\partial}{\partial x}(x+y)^{n}=nx(x+y)^{n-1}" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mi>k</mi><mo>⁢</mo><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mfrac><mo>∂</mo><mrow><mo rspace="0em">∂</mo><mi>x</mi></mrow></mfrac><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mi>x</mi><mo>⁢</mo><mfrac><mo>∂</mo><mrow><mo rspace="0em">∂</mo><mi>x</mi></mrow></mfrac><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となり、やはり<math id="p2.m6" class="ltx_Math" alttext="y=1-x" display="inline"><mrow><mi>y</mi><mo>=</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mrow></math>を代入すればわかる。
+<br class="ltx_break">第3式も同様に<math id="p2.m7" class="ltx_Math" alttext="k(k-1)x^{k}=x^{2}\frac{d^{2}}{dx^{2}}x^{k}" display="inline"><mrow><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup></mrow><mo>=</mo><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>⁢</mo><mfrac><msup><mi>d</mi><mn>2</mn></msup><mrow><mi>d</mi><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><msup><mi>x</mi><mi>k</mi></msup></mrow></mrow></math>から</p>
+<table id="S0.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex5.m1" class="ltx_Math" alttext="\sum_{k=1}^{n}k(k-1)D_{n,k}(x,y)=x^{2}\frac{\partial^{2}}{\partial x^{2}}\sum_%
+{k=1}^{n}D_{n,k}(x,y)=x^{2}\frac{\partial^{2}}{\partial x^{2}}(x+y)^{n}=n(n-1)%
+x^{2}(x+y)^{n-2}" display="block"><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>⁢</mo><mfrac><msup><mo>∂</mo><mn>2</mn></msup><mrow><mo rspace="0em">∂</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>D</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>⁢</mo><mfrac><msup><mo>∂</mo><mn>2</mn></msup><mrow><mo rspace="0em">∂</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mi>n</mi></msup></mrow><mo>=</mo><mrow><mi>n</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mn>2</mn></msup><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なのでやっぱり<math id="p2.m8" class="ltx_Math" alttext="y=1-x" display="inline"><mrow><mi>y</mi><mo>=</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mrow></math>を代入すれば良い。
+<br class="ltx_break">第4,5式に関しては展開して1,2,3式を用いれば容易にわかる。
+∎</p>
+</div>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">さていよいよ多項式近似定理を証明しよう。以下では<math id="p3.m1" class="ltx_Math" alttext="\lVert\bullet\rVert_{\infty}" display="inline"><msub><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">∙</mo><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></math>は<math id="p3.m2" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>上の一様ノルム（<math id="p3.m3" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>ノルム）である。</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 2</span></span><span class="ltx_text ltx_font_bold"> </span>(多項式近似定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math><span class="ltx_text ltx_font_italic">上の連続関数<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>に対して</span></p>
+<table id="S0.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex6.m1" class="ltx_Math" alttext="p_{n}(x)=\sum_{k=0}^{n}f\left(\frac{k}{n}\right)B_{n,k}(x)" display="block"><mrow><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mo>)</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義すると
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\lVert f-p_{n}\rVert_{\infty}\rightarrow 0" display="inline"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>p</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo stretchy="false">→</mo><mn>0</mn></mrow></math> as <math id="Thmthm2.p1.m4" class="ltx_Math" alttext="n\rightarrow\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math>が成立する。</span></p>
+</div>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">この多項式<math id="p4.m1" class="ltx_Math" alttext="p_{n}" display="inline"><msub><mi>p</mi><mi>n</mi></msub></math>を<math id="p4.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>のベルンシュタイン多項式と言う。
+<br class="ltx_break"><span class="ltx_text ltx_font_bold">証明
+<br class="ltx_break"></span></p>
+<table id="S0.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex7.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists N\in\mathbb{N}\ n&gt;N\Rightarrow\lVert f-p_{n}%
+\rVert_{\infty}\leq\varepsilon" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>N</mi></mrow></mrow><mo>∈</mo><mrow><mi>ℕ</mi><mo lspace="0.500em">⁢</mo><mi>n</mi></mrow><mo>&gt;</mo><mi>N</mi><mo rspace="0.1389em" stretchy="false">⇒</mo><msub><mrow><mo fence="true" lspace="0.1389em" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>p</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo lspace="0.1389em">≤</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を示す。
+コンパクト集合上の連続関数は一様連続であるから</p>
+<table id="S0.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex8.m1" class="ltx_Math" alttext="\forall\varepsilon&gt;0\ \exists\delta&gt;0\ \forall x,y\in[0,1]\ |x-y|&lt;\delta%
+\Rightarrow|f(x)-f(y)|&lt;\frac{\varepsilon}{2}" display="block"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>ε</mi></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>δ</mi></mrow></mrow><mo>&gt;</mo><mrow><mn>0</mn><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow></mrow></mrow><mo>,</mo><mrow><mi>y</mi><mo>∈</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo lspace="0.500em">⁢</mo><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>&lt;</mo><mi>δ</mi><mo stretchy="false">⇒</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。<math id="p4.m3" class="ltx_Math" alttext="\displaystyle M=\max_{x\in M}f(x)" display="inline"><mrow><mi>M</mi><mo>=</mo><mrow><mrow><munder><mi>max</mi><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow></munder><mo lspace="0.167em">⁡</mo><mi>f</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>とし、さきの<math id="p4.m4" class="ltx_Math" alttext="\delta" display="inline"><mi>δ</mi></math>に対して<math id="p4.m5" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>を</p>
+<table id="S0.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex9.m1" class="ltx_Math" alttext="n&gt;N\Rightarrow\frac{M}{2\delta^{2}}\frac{1}{n}&lt;\frac{\varepsilon}{2}" display="block"><mrow><mi>n</mi><mo>&gt;</mo><mi>N</mi><mo stretchy="false">⇒</mo><mrow><mfrac><mi>M</mi><mrow><mn>2</mn><mo>⁢</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>&lt;</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるように取る。さて、任意の<math id="p4.m6" class="ltx_Math" alttext="x\in[0,1]" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>に対して</p>
+<table id="S0.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex10.m1" class="ltx_Math" alttext="|f(x)-p_{n}(x)|\leq\sum_{|x-\frac{k}{n}|&lt;\delta}\left|f(x)-f\left(\frac{k}{n}%
+\right)\!\right|B_{n,k}(x)+\sum_{|x-\frac{k}{n}|\geq\delta}\left|f(x)-f\left(%
+\frac{k}{n}\right)\!\right|B_{n,k}(x)" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo rspace="0.111em">≤</mo><mrow><mrow><munder><mo movablelimits="false" rspace="0em">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></munder><mrow><mrow><mo>|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo rspace="0.055em">+</mo><mrow><munder><mo movablelimits="false" rspace="0em">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></munder><mrow><mrow><mo>|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。ここで<math id="p4.m7" class="ltx_Math" alttext="\displaystyle\sum_{|x-\frac{k}{n}|&lt;\delta}" display="inline"><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></munder></mstyle></math>の意味は<math id="p4.m8" class="ltx_Math" alttext="|x-\frac{k}{n}|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow></math>を充たす<math id="p4.m9" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>について和を取ると言う意味である。(もちろん<math id="p4.m10" class="ltx_Math" alttext="0\leq k\leq n" display="inline"><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mi>n</mi></mrow></math>である。)ただし<math id="p4.m11" class="ltx_Math" alttext="|x-\frac{k}{n}|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow></math>となる<math id="p4.m12" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>が存在しなければ<math id="p4.m13" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>と定義する。<math id="p4.m14" class="ltx_Math" alttext="\displaystyle\sum_{|x-\frac{k}{n}|\geq\delta}" display="inline"><mstyle displaystyle="true"><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></munder></mstyle></math>も同様の意味である。
+まず上式の初項について一様連続性から<math id="p4.m15" class="ltx_Math" alttext="\displaystyle{\left|f(x)-f\left(\frac{k}{n}\right)\!\right|&lt;\frac{\varepsilon}%
+{2}}" display="inline"><mrow><mrow><mo>|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><mi>k</mi><mi>n</mi></mfrac></mstyle><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>&lt;</mo><mstyle displaystyle="true"><mfrac><mi>ε</mi><mn>2</mn></mfrac></mstyle></mrow></math>となり</p>
+<table id="S0.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex11.m1" class="ltx_Math" alttext="\sum_{|x-\frac{k}{n}|&lt;\delta}\left|f(x)-f\left(\frac{k}{n}\right)\!\right|B_{n%
+,k}(x)&lt;\frac{\varepsilon}{2}\sum_{|x-\frac{k}{n}|&lt;\delta}B_{n,k}(x)\leq\frac{%
+\varepsilon}{2}\sum_{k=1}^{n}B_{n,k}(x)=\frac{\varepsilon}{2}" display="block"><mrow><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></munder><mrow><mrow><mo lspace="0em">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>&lt;</mo><mrow><mfrac><mi>ε</mi><mn>2</mn></mfrac><mo>⁢</mo><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mi>δ</mi></mrow></munder><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mfrac><mi>ε</mi><mn>2</mn></mfrac><mo>⁢</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>=</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ここで補題の１番の式を使った。
+<br class="ltx_break">さて第二項について<math id="p4.m16" class="ltx_Math" alttext="|x-\frac{k}{n}|\geq\delta" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></math>より<math id="p4.m17" class="ltx_Math" alttext="|nx-k|\geq n\delta" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mi>k</mi></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mrow><mi>n</mi><mo>⁢</mo><mi>δ</mi></mrow></mrow></math>よって<math id="p4.m18" class="ltx_Math" alttext="(nx-k)^{2}\geq n^{2}\delta^{2}" display="inline"><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mi>k</mi></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>≥</mo><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>⁢</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow></mrow></math>これを元に</p>
+<table id="S0.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex12.m1" class="ltx_Math" alttext="n^{2}\delta^{2}\sum_{|x-\frac{k}{n}|\geq\delta}\left|f(x)-f\left(\frac{k}{n}%
+\right)\!\right|B_{n,k}(x)\leq 2M\sum_{|x-\frac{k}{n}|\geq\delta}(nx-k)^{2}B_{%
+n,k}(x)\leq 2M\sum_{k=1}^{n}(nx-k)^{2}B_{n,k}(x)" display="block"><mrow><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>⁢</mo><msup><mi>δ</mi><mn>2</mn></msup><mo>⁢</mo><mrow><munder><mo movablelimits="false" rspace="0em">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></munder><mrow><mrow><mo>|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mrow><munder><mo movablelimits="false" rspace="0em">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></munder><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mi>k</mi></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mrow><munderover><mo movablelimits="false" rspace="0em">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>⁢</mo><mi>x</mi></mrow><mo>−</mo><mi>k</mi></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><math id="p4.m19" class="ltx_Math" alttext="\displaystyle{=2Mnx(1-x)\leq 2Mn\frac{1}{4}=M\frac{n}{2}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mi>x</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi><mo>⁢</mo><mi>n</mi><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>4</mn></mfrac></mstyle></mrow><mo>=</mo><mrow><mi>M</mi><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mi>n</mi><mn>2</mn></mfrac></mstyle></mrow></mrow></math>を得る。ここで<math id="p4.m20" class="ltx_Math" alttext="|f(x)-f(y)|\leq 2M" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><mn>2</mn><mo>⁢</mo><mi>M</mi></mrow></mrow></math>と補題の第５式を用いた。
+<br class="ltx_break">よって<math id="p4.m21" class="ltx_Math" alttext="n&gt;N" display="inline"><mrow><mi>n</mi><mo>&gt;</mo><mi>N</mi></mrow></math>ならば</p>
+<table id="S0.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex13.m1" class="ltx_Math" alttext="\sum_{|x-\frac{k}{n}|\geq\delta}\left|f(x)-f\left(\frac{k}{n}\right)\!\right|B%
+_{n,k}(x)\leq\frac{M}{2\delta^{2}}\frac{1}{n}&lt;\frac{\varepsilon}{2}" display="block"><mrow><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>x</mi><mo>−</mo><mfrac><mi>k</mi><mi>n</mi></mfrac></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mi>δ</mi></mrow></munder><mrow><mrow><mo lspace="0em">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><mi>n</mi></mfrac><mpadded width="0.288em"><mo>)</mo></mpadded></mrow></mrow></mrow><mo>|</mo></mrow><mo>⁢</mo><msub><mi>B</mi><mrow><mi>n</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≤</mo><mrow><mfrac><mi>M</mi><mrow><mn>2</mn><mo>⁢</mo><msup><mi>δ</mi><mn>2</mn></msup></mrow></mfrac><mo>⁢</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>&lt;</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">以上より<math id="p4.m22" class="ltx_Math" alttext="n&gt;N" display="inline"><mrow><mi>n</mi><mo>&gt;</mo><mi>N</mi></mrow></math>ならば</p>
+<table id="S0.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S0.Ex14.m1" class="ltx_Math" alttext="|f(x)-p_{n}(x)|&lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mrow><mfrac><mi>ε</mi><mn>2</mn></mfrac><mo>+</mo><mfrac><mi>ε</mi><mn>2</mn></mfrac></mrow><mo>=</mo><mi>ε</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">この<math id="p4.m23" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>は<math id="p4.m24" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>に依存せず、<math id="p4.m25" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>は任意であったから<math id="p4.m26" class="ltx_Math" alttext="n&gt;N\Rightarrow\lVert f-p_{n}\rVert_{\infty}\leq\varepsilon" display="inline"><mrow><mi>n</mi><mo>&gt;</mo><mi>N</mi><mo rspace="0.1389em" stretchy="false">⇒</mo><msub><mrow><mo fence="true" lspace="0.1389em" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>p</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0.1389em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo lspace="0.1389em">≤</mo><mi>ε</mi></mrow></math>つまり<math id="p4.m27" class="ltx_Math" alttext="\lVert f-p_{n}\rVert_{\infty}\rightarrow 0" display="inline"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>f</mi><mo>−</mo><msub><mi>p</mi><mi>n</mi></msub></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo stretchy="false">→</mo><mn>0</mn></mrow></math> as <math id="p4.m28" class="ltx_Math" alttext="n\rightarrow\infty" display="inline"><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></math> <math id="p4.m29" class="ltx_Math" alttext="\square" display="inline"><mi mathvariant="normal">□</mi></math></p>
+</div>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">杉浦光夫『解析入門I』（基礎数学２）東京大学出版会(1980)
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:12:23 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

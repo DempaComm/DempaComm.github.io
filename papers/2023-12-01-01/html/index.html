@@ -1,0 +1,597 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —</title>
+<!--Generated on Sun Jul 26 17:25:20 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2023-12-01-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>平方数ではない整数の平方根が無理数であることのニュートン法を用いた証明のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../irr.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document" style="font-size:120%;">
+<span class="ltx_text" style="font-size:83%;">ニュートン法を用いた整数の平方根の無理性の証明
+
+<br class="ltx_break"></span>— Proving irrationality by Newton method —
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信 ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章ではニュートン法を用いて，
+平方数ではない(正の)整数<math id="p1.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>に
+対して<math id="p1.m2" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>
+が無理数であることを証明する．</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">最初に大事なことを伝えておくが，
+普通に証明したほうが早いし汎用性がある．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>本文</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">まず最初にこの文章で用いる無理数の判定法を
+紹介する．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の有理数<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>について，定数<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="C&gt;0" display="inline"><mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn></mrow></math>が存在して以下の条件を満たす：任意の整数<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>と<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>
+が<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="0&lt;|a-xb|" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><mi>a</mi><mo>−</mo><mrow><mi>x</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>を満たすとすると，
+<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="C\leq|a-xb|" display="inline"><mrow><mi>C</mi><mo>≤</mo><mrow><mo stretchy="false">|</mo><mrow><mi>a</mi><mo>−</mo><mrow><mi>x</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>
+が成り立つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">いま
+<math id="S1.p2.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>は有理数なので整数<math id="S1.p2.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>と正の整数<math id="S1.p2.m3" class="ltx_Math" alttext="q" display="inline"><mi>q</mi></math>を用いて
+<math id="S1.p2.m4" class="ltx_Math" alttext="x=p/q" display="inline"><mrow><mi>x</mi><mo>=</mo><mrow><mi>p</mi><mo>/</mo><mi>q</mi></mrow></mrow></math>と書くことができる．
+すると</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="|a-xb|=\frac{|qa-pb|}{q}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>a</mi><mo>−</mo><mrow><mi>x</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mrow><mi>p</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><mi>q</mi></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．そして<math id="S1.p2.m5" class="ltx_Math" alttext="0&lt;|a-xb|" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><mi>a</mi><mo>−</mo><mrow><mi>x</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>という仮定から
+<math id="S1.p2.m6" class="ltx_Math" alttext="0&lt;|qa-pb|" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mrow><mi>p</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>がわかる．
+ここで
+<math id="S1.p2.m7" class="ltx_Math" alttext="|qa-pb|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mrow><mi>p</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></math>は整数なので
+<math id="S1.p2.m8" class="ltx_Math" alttext="|qa-pb|\geq 1" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>q</mi><mo>⁢</mo><mi>a</mi></mrow><mo>−</mo><mrow><mi>p</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mn>1</mn></mrow></math>である．よって</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="|a-xb|\geq\frac{1}{q}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><mi>a</mi><mo>−</mo><mrow><mi>x</mi><mo>⁢</mo><mi>b</mi></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≥</mo><mfrac><mn>1</mn><mi>q</mi></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">がわかる．
+ゆえに<math id="S1.p2.m9" class="ltx_Math" alttext="C=1/q" display="inline"><mrow><mi>C</mi><mo>=</mo><mrow><mn>1</mn><mo>/</mo><mi>q</mi></mrow></mrow></math>とすれば定理は成り立つ．
+∎</p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math><span class="ltx_text ltx_font_italic">を実数とする．
+そして
+以下のような整数の列
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\{A_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>と
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\{B_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>B</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>が存在すると仮定する：
+任意の<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>に対して
+<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="0&lt;|A_{n}-B_{n}x|" display="inline"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>B</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math>かつ
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="\lim_{n\to\infty}|A_{n}-B_{n}x|=0" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><msub><mi>A</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>B</mi><mi>n</mi></msub><mo>⁢</mo><mi>x</mi></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>
+が成り立つ.
+このとき
+<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>は無理数である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">上の補題
+<a href="#Thmthm1" title="補題 1. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>からわかる．
+∎</p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">この補題にある
+無理数の判定法については，
+(その昔に)
+筆者は
+文献<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>, p.1]</cite>
+で初めて学習したと思う．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">次にニュートン法で得られる
+<math id="S1.p5.m1" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>の近似列に関する基本事項を
+証明する．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="a\in\mathbb{R}_{&gt;0}" display="inline"><mrow><mi>a</mi><mo>∈</mo><msub><mi>ℝ</mi><mrow><mi></mi><mo>&gt;</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">とする．
+そして，<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="x_{0}" display="inline"><msub><mi>x</mi><mn>0</mn></msub></math>を適当に選んで
+数列<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\{x_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="x_{n+1}=x_{n}-\frac{x_{n}^{2}-a}{2x_{n}}=\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}%
+}\right)" display="block"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mfrac><mrow><msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup><mo>−</mo><mi>a</mi></mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><mfrac><mi>a</mi><msub><mi>x</mi><mi>n</mi></msub></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．このとき以下が成り立つ．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">もしも
+</span><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="x_{0}&gt;0" display="inline"><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">ならば任意の</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">について</span><math id="S1.I1.i1.p1.m3" class="ltx_Math" alttext="x_{n}&gt;0" display="inline"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の</span><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">について</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="x_{n+1}-\sqrt{a}=\frac{1}{2x_{n}}(x_{n}-\sqrt{a})^{2}" display="block"><mrow><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．
+特に</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="x_{0}&gt;0" display="inline"><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">ならば任意の</span><math id="S1.I1.i2.p1.m3" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 1}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>1</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+について
+</span><math id="S1.I1.i2.p1.m4" class="ltx_Math" alttext="\sqrt{a}&lt;x_{n}" display="inline"><mrow><msqrt><mi>a</mi></msqrt><mo>&lt;</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="x_{0}&gt;0" display="inline"><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">とする．
+数列
+</span><math id="S1.I1.i3.p1.m2" class="ltx_Math" alttext="\{P_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>P</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S1.I1.i3.p1.m3" class="ltx_Math" alttext="\{Q_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>Q</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math><span class="ltx_text ltx_font_italic">
+を以下のように定義する．</span></p>
+<ol id="S1.I1.i3.I1" class="ltx_enumerate">
+<li id="S1.I1.i3.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(a)</span> 
+<div id="S1.I1.i3.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.I1.i1.p1.m1" class="ltx_Math" alttext="n=0" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">の時は適当に以下を満たすものとする．</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="x_{0}=\frac{P_{0}}{Q_{0}}" display="block"><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mfrac><msub><mi>P</mi><mn>0</mn></msub><msub><mi>Q</mi><mn>0</mn></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S1.I1.i3.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(b)</span> 
+<div id="S1.I1.i3.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.I1.i2.p1.m1" class="ltx_Math" alttext="n&gt;0" display="inline"><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">の時は</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="P_{n+1}=aQ_{n}^{2}+P_{n}^{2}" display="block"><mrow><msub><mi>P</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mrow><mi>a</mi><mo>⁢</mo><msubsup><mi>Q</mi><mi>n</mi><mn>2</mn></msubsup></mrow><mo>+</mo><msubsup><mi>P</mi><mi>n</mi><mn>2</mn></msubsup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">でなおかつ</span></p>
+</div>
+</li>
+<li id="S1.I1.i3.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(c)</span> 
+<div id="S1.I1.i3.I1.i3.p1" class="ltx_para">
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="Q_{n+1}=2P_{n}Q_{n}" display="block"><mrow><msub><mi>Q</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mn>2</mn><mo>⁢</mo><msub><mi>P</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>Q</mi><mi>n</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+このとき
+任意の</span><math id="S1.I1.i3.p1.m4" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">について</span></p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="x_{n}=\frac{P_{n}}{Q_{n}}" display="block"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mfrac><msub><mi>P</mi><mi>n</mi></msub><msub><mi>Q</mi><mi>n</mi></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">いま</span><math id="S1.I1.i4.p1.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math><span class="ltx_text ltx_font_italic">を平方数にはならない正の整数と仮定する．
+このとき
+</span><math id="S1.I1.i4.p1.m2" class="ltx_Math" alttext="x_{0}" display="inline"><msub><mi>x</mi><mn>0</mn></msub></math><span class="ltx_text ltx_font_italic">を</span><math id="S1.I1.i4.p1.m3" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math><span class="ltx_text ltx_font_italic">よりも大きい整数のうち最小のものとし，
+</span><math id="S1.I1.i4.p1.m4" class="ltx_Math" alttext="P_{0}=x_{0}" display="inline"><mrow><msub><mi>P</mi><mn>0</mn></msub><mo>=</mo><msub><mi>x</mi><mn>0</mn></msub></mrow></math><span class="ltx_text ltx_font_italic">, </span><math id="S1.I1.i4.p1.m5" class="ltx_Math" alttext="Q_{0}=1" display="inline"><mrow><msub><mi>Q</mi><mn>0</mn></msub><mo>=</mo><mn>1</mn></mrow></math><span class="ltx_text ltx_font_italic">とする．さらに
+</span><math id="S1.I1.i4.p1.m6" class="ltx_Math" alttext="\eta_{0}=x_{0}-\sqrt{a}" display="inline"><mrow><msub><mi>η</mi><mn>0</mn></msub><mo>=</mo><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow></mrow></math><span class="ltx_text ltx_font_italic">とし帰納的に
+</span><math id="S1.I1.i4.p1.m7" class="ltx_Math" alttext="\{\eta_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>η</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math><span class="ltx_text ltx_font_italic">を</span></p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="\eta_{n+1}=\eta_{n}^{2}" display="block"><mrow><msub><mi>η</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msubsup><mi>η</mi><mi>n</mi><mn>2</mn></msubsup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する．
+このとき任意の</span><math id="S1.I1.i4.p1.m8" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">について
+</span><math id="S1.I1.i4.p1.m9" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">と</span><math id="S1.I1.i4.p1.m10" class="ltx_Math" alttext="Q_{n}" display="inline"><msub><mi>Q</mi><mi>n</mi></msub></math><span class="ltx_text ltx_font_italic">は整数であり，</span></p>
+<table id="S1.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex10.m1" class="ltx_Math" alttext="|x_{n}-\sqrt{a}|\leq\eta_{n}\frac{1}{Q_{n}}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><mrow><msub><mi>η</mi><mi>n</mi></msub><mo>⁢</mo><mfrac><mn>1</mn><msub><mi>Q</mi><mi>n</mi></msub></mfrac></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i1" title="item (1) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>
+は定義からわかる．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i2" title="item (2) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>
+を示そう．</p>
+<table id="S1.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex11.m1" class="ltx_Math" alttext="x_{n+1}-\sqrt{a}=\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}}\right)-\sqrt{a}=\frac{%
+1}{2x_{n}}\left(x_{n}^{2}-2x_{n}\sqrt{a}+a\right)=\frac{1}{2x_{n}}(x_{n}-\sqrt%
+{a})^{2}" display="block"><mrow><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo>=</mo><mrow><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><mfrac><mi>a</mi><msub><mi>x</mi><mi>n</mi></msub></mfrac></mrow><mo>)</mo></mrow></mrow><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup><mo>−</mo><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub><mo>⁢</mo><msqrt><mi>a</mi></msqrt></mrow></mrow><mo>+</mo><mi>a</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac><mo>⁢</mo><msup><mrow><mo stretchy="false">(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので成り立つ．</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i3" title="item (3) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>
+を示す．
+今<math id="S1.p8.m1" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>について</p>
+<table id="S1.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex12.m1" class="ltx_Math" alttext="x_{n}=\frac{P_{n}}{Q_{n}}" display="block"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mfrac><msub><mi>P</mi><mi>n</mi></msub><msub><mi>Q</mi><mi>n</mi></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つと仮定する．
+この時</p>
+<table id="S1.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex13.m1" class="ltx_Math" alttext="x_{n+1}=\frac{1}{2}\left(x_{n}+\frac{a}{x_{n}}\right)" display="block"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><mfrac><mi>a</mi><msub><mi>x</mi><mi>n</mi></msub></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">に
+<math id="S1.p8.m2" class="ltx_Math" alttext="x_{n}=P_{n}/Q_{n}" display="inline"><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mrow><msub><mi>P</mi><mi>n</mi></msub><mo>/</mo><msub><mi>Q</mi><mi>n</mi></msub></mrow></mrow></math>を代入すると</p>
+<table id="S1.Ex14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex14.m1" class="ltx_Math" alttext="x_{n+1}=\frac{1}{2}\left(\frac{P_{n}}{Q_{n}}+\frac{aQ_{n}}{P_{n}}\right)=\frac%
+{aQ_{n}^{2}+P_{n}^{2}}{2P_{n}Q_{n}}=\frac{P_{n+1}}{Q_{n+1}}" display="block"><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⁢</mo><mrow><mo>(</mo><mrow><mfrac><msub><mi>P</mi><mi>n</mi></msub><msub><mi>Q</mi><mi>n</mi></msub></mfrac><mo>+</mo><mfrac><mrow><mi>a</mi><mo>⁢</mo><msub><mi>Q</mi><mi>n</mi></msub></mrow><msub><mi>P</mi><mi>n</mi></msub></mfrac></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mrow><mi>a</mi><mo>⁢</mo><msubsup><mi>Q</mi><mi>n</mi><mn>2</mn></msubsup></mrow><mo>+</mo><msubsup><mi>P</mi><mi>n</mi><mn>2</mn></msubsup></mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>P</mi><mi>n</mi></msub><mo>⁢</mo><msub><mi>Q</mi><mi>n</mi></msub></mrow></mfrac><mo>=</mo><mfrac><msub><mi>P</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>Q</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので成り立つ．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p"><a href="#S1.I1.i4" title="item (4) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>を示す．
+まず<math id="S1.p9.m1" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math>と<math id="S1.p9.m2" class="ltx_Math" alttext="Q_{n}" display="inline"><msub><mi>Q</mi><mi>n</mi></msub></math>
+が整数であることが<math id="S1.p9.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>
+が整数と仮定されていることから帰納的にわかる．
+最後の不等式を示そう．帰納法による．<math id="S1.p9.m4" class="ltx_Math" alttext="n=0" display="inline"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></math>のときは定義からわかる．
+<math id="S1.p9.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>までは成り立つとして<math id="S1.p9.m6" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>の場合を考える．
+このとき
+<a href="#S1.I1.i2" title="item (2) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>
+から</p>
+<table id="S3.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex15"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex15.m1" class="ltx_Math" alttext="\displaystyle|x_{n+1}-{\sqrt{a}}|=\frac{1}{2x_{n}}|x_{n}-\sqrt{a}|^{2}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac></mstyle><mo>⁢</mo><msup><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+今<math id="S1.p9.m7" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>については
+<math id="S1.p9.m8" class="ltx_Math" alttext="|x_{n}-\sqrt{a}|=\eta_{n}/Q_{n}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><msub><mi>η</mi><mi>n</mi></msub><mo>/</mo><msub><mi>Q</mi><mi>n</mi></msub></mrow></mrow></math>
+が成り立つと仮定しているので，</p>
+<table id="S3.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex16.m1" class="ltx_Math" alttext="\displaystyle|x_{n+1}-{\sqrt{a}}|=\frac{1}{2x_{n}}|x_{n}-\sqrt{a}|^{2}\leq%
+\frac{Q_{n}}{2P_{n}}\frac{1}{Q_{n}^{2}}\eta_{n}^{2}=\eta_{n+1}\frac{1}{Q_{n+1}}" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac></mstyle><mo>⁢</mo><msup><mrow><mo stretchy="false">|</mo><mrow><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>≤</mo><mrow><mstyle displaystyle="true"><mfrac><msub><mi>Q</mi><mi>n</mi></msub><mrow><mn>2</mn><mo>⁢</mo><msub><mi>P</mi><mi>n</mi></msub></mrow></mfrac></mstyle><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><msubsup><mi>Q</mi><mi>n</mi><mn>2</mn></msubsup></mfrac></mstyle><mo>⁢</mo><msubsup><mi>η</mi><mi>n</mi><mn>2</mn></msubsup></mrow><mo>=</mo><mrow><msub><mi>η</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><msub><mi>Q</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つ．
+よって
+<a href="#S1.I1.i4" title="item (4) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>
+が成立する．
+∎</p>
+</div>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+の系として以下の定理を得る．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math><span class="ltx_text ltx_font_italic">を平方数にはならない正の整数とする．
+このとき<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>は無理数である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>の
+<a href="#S1.I1.i4" title="item (4) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>
+と同じく<math id="S1.p11.m1" class="ltx_Math" alttext="x_{0}" display="inline"><msub><mi>x</mi><mn>0</mn></msub></math>
+を
+<math id="S1.p11.m2" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>よりも真に大きい整数のうち最小のものとする．
+いま<math id="S1.p11.m3" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>
+は整数なので
+命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>の
+<a href="#S1.I1.i3" title="item (3) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>で定義した
+<math id="S1.p11.m4" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math>と<math id="S1.p11.m5" class="ltx_Math" alttext="Q_{n}" display="inline"><msub><mi>Q</mi><mi>n</mi></msub></math>が整数であることが帰納的にわかる．
+さらに
+<math id="S1.p11.m6" class="ltx_Math" alttext="|P_{n}-Q_{n}\sqrt{a}|" display="inline"><mrow><mo stretchy="false">|</mo><mrow><msub><mi>P</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>⁢</mo><msqrt><mi>a</mi></msqrt></mrow></mrow><mo stretchy="false">|</mo></mrow></math>
+を考えると，
+命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+の<a href="#S1.I1.i2" title="item (2) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>から<math id="S1.p11.m7" class="ltx_Math" alttext="\sqrt{a}&lt;x_{n}" display="inline"><mrow><msqrt><mi>a</mi></msqrt><mo>&lt;</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></math>がわかる．
+よって特に，任意の<math id="S1.p11.m8" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について</p>
+<table id="S1.Ex17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex17.m1" class="ltx_Math" alttext="0&lt;|P_{n}-Q_{n}\sqrt{a}|" display="block"><mrow><mn>0</mn><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><mrow><msub><mi>P</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>⁢</mo><msqrt><mi>a</mi></msqrt></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つことがわかる．
+また<math id="S1.p11.m9" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>は平方数にならないので，
+<math id="S1.p11.m10" class="ltx_Math" alttext="\eta_{0}=x_{0}-\sqrt{a}" display="inline"><mrow><msub><mi>η</mi><mn>0</mn></msub><mo>=</mo><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>−</mo><msqrt><mi>a</mi></msqrt></mrow></mrow></math>は
+<math id="S1.p11.m11" class="ltx_Math" alttext="(0,1)" display="inline"><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></math>に属する．
+命題
+<a href="#Thmthm3" title="命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>
+の
+<a href="#S1.I1.i4" title="item (4) ‣ 命題 3. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>
+から任意の<math id="S1.p11.m12" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について</p>
+<table id="S1.Ex18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex18.m1" class="ltx_Math" alttext="|P_{n}-Q_{n}\sqrt{a}|\leq\eta_{n}" display="block"><mrow><mrow><mo stretchy="false">|</mo><mrow><msub><mi>P</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>⁢</mo><msqrt><mi>a</mi></msqrt></mrow></mrow><mo stretchy="false">|</mo></mrow><mo>≤</mo><msub><mi>η</mi><mi>n</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+さらに<math id="S1.p11.m13" class="ltx_Math" alttext="\eta_{n}=\eta_{0}^{2^{n}}" display="inline"><mrow><msub><mi>η</mi><mi>n</mi></msub><mo>=</mo><msubsup><mi>η</mi><mn>0</mn><msup><mn>2</mn><mi>n</mi></msup></msubsup></mrow></math>
+であり<math id="S1.p11.m14" class="ltx_Math" alttext="\eta_{0}\in(0,1)" display="inline"><mrow><msub><mi>η</mi><mn>0</mn></msub><mo>∈</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></math>
+であることから
+<math id="S1.p11.m15" class="ltx_Math" alttext="\lim_{n\to\infty}|P_{n}-Q_{n}\sqrt{a}|=0" display="inline"><mrow><mrow><msub><mo>lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></msub><mrow><mo lspace="0em" stretchy="false">|</mo><mrow><msub><mi>P</mi><mi>n</mi></msub><mo>−</mo><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>⁢</mo><msqrt><mi>a</mi></msqrt></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>
+が従う．
+よって
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>から
+<math id="S1.p11.m16" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>は無理数である．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>解説</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">命題<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+は無理数の判定のちょっとした有名な事実である．
+これを用いることで
+自然対数の底
+<math id="S2.p1.m1" class="ltx_Math" alttext="e" display="inline"><mi>e</mi></math>
+が無理数であることが簡単にわかったりする．
+この
+命題
+<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+の他の応用はないものかと考えた結果，
+ニュートン法から得られる<math id="S2.p1.m2" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>
+に収束する点列に適応する応用を考えついた．
+詰まるところ
+命題<a href="#Thmthm2" title="命題 2. ‣ 1 本文 ‣ ニュートン法を用いた整数の平方根の無理性の証明 — Proving irrationality by Newton method —" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+を適応することありきで考察をしているので
+あんまり健康的ではないかもしれない
+(でもこういうのって楽しいと思う)．
+それで
+お分かりかもしれないが
+上で述べた<math id="S2.p1.m3" class="ltx_Math" alttext="\{x_{n}\}_{n\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+の定義は<math id="S2.p1.m4" class="ltx_Math" alttext="x^{2}-a" display="inline"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi></mrow></math>にニュートン法を適応して得られる
+<math id="S2.p1.m5" class="ltx_Math" alttext="x^{2}-a" display="inline"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi></mrow></math>の零点に収束する点列である．
+ちなみにその昔Pythonを触っていたことがあって，
+ニュートン法で
+<math id="S2.p1.m6" class="ltx_Math" alttext="\sqrt{2}" display="inline"><msqrt><mn>2</mn></msqrt></math>
+の小数点以下100桁とかを求めたりしていたので，
+上の<math id="S2.p1.m7" class="ltx_Math" alttext="P_{n}" display="inline"><msub><mi>P</mi><mi>n</mi></msub></math>と<math id="S2.p1.m8" class="ltx_Math" alttext="Q_{n}" display="inline"><msub><mi>Q</mi><mi>n</mi></msub></math>を思いついたという経緯がある
+(Pythonのint型?ってなんか桁の制限がない?とかなんとかなのでこういう無茶なことができたりする)．
+それで二次多項式以外に三次多項式とかでも同様のことできないかと思ったが，なんだか二次方程式の場合だけうまくいって，他の場合は上で述べたのと同様の方法は適応できなさそうであった．<math id="S2.p1.m9" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>の無理性の証明は普通に<math id="S2.p1.m10" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>の素因数の偶奇を考えたりした方が早いし汎用性あると思う．
+まあもしかしたらこの方針に何か面白いことが見つかるかもしれない
+ので一応ここにメモとして残しておく．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">私の知識の範囲においては
+無理数と超越数両方を扱った数学の和書は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>が唯一である．POD版もある．
+タイトルの通り無理数のみならず超越数も扱っている．
+変わった感じの議論で何かしらの数の無理性を示す論文としては
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite>なども面白いと思う．</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>追記</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">この文章を書き終わってから思いついたのだが，
+上で述べた方法がうまくいくのは，以下に基づくのではないかとなんとなく推測する．</p>
+<ol id="S3.I1" class="ltx_enumerate">
+<li id="S3.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S3.I1.i1.p1" class="ltx_para">
+<p class="ltx_p">おそらく奇跡的に<math id="S3.I1.i1.p1.m1" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>のニュートン法による近似が
+連分数による<math id="S3.I1.i1.p1.m2" class="ltx_Math" alttext="\sqrt{a}" display="inline"><msqrt><mi>a</mi></msqrt></math>の近似と同じになっており，
+それが最良近似?だから無理性を証明できるのではないだろうか？</p>
+</div>
+</li>
+<li id="S3.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S3.I1.i2.p1" class="ltx_para">
+<p class="ltx_p">そしてなぜニュートン法による近似と連分数による
+近似が奇跡的に一致しているのかというと，
+二次の代数的数の連分数表示は循環的という事実に由来するのではないか？</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">しかし面倒だし，やる気とか時間の都合とかあるのでこれらを確かめるのは私はやらない．</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">訳が分からない現象に対しても自分の知識から関連する現象を取り出して関連性を確かめようとするのは
+数学者と呼ばれる類の人たちの
+習慣なのではないかと思われる．
+たくさん論文を読んだり本を読んだりするといいよ．</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">私がこれ以上このことを調べないことのお詫びと言ってはなんだが，連分数の和書を紹介しよう．とはいえ
+連分数を詳しく解説している和書はよく知らないのだが，
+最近出版された
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>は連分数の成書であり，
+数学セミナー2014年8月号<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>
+は連分数の特集で基本事項がまとまっていると思う．</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+雑誌「数学セミナー2014年8月号」, 日本評論社．
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+塩川宇賢,
+「無理数と超越数」,
+森北出版,
+1999.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+木田雅成,
+「連分数」,
+大学数学スポットライト・シリーズ第9巻,
+2022年
+近代科学社．
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+M. R. Murty, and
+V. K. Murty,
+<span class="ltx_text ltx_font_italic">Irrational numbers arising from certain differential equations</span>,
+Canad. Math. Bul. 20 (1) (1977), 117–120.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:25:20 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

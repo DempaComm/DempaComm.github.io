@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>終結式</title>
+<!--Generated on Sun Jul 26 17:25:18 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2022-09-06-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>対角化可能な行列は稠密のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../Resultant.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">終結式</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>終結式の話</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">この文章では共通因子を持つ多項式と終結式の関係を紹介する．
+その応用として
+固有値が全て相異なる行列が行列の空間の中で稠密開集合になっていることを紹介する．系として対角化可能な行列は行列の空間の中で第二類集合になっていることがわかる．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">終結式の話については
+参考文献 <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>を大いに参考にした．
+また
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>には集結式のみならず代数学の色々な事項がたくさん載っている．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math><span class="ltx_text ltx_font_italic">
+を体とする．
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>を<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>上の定数ではない多項式とし，
+その次数はそれぞれ<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>, <math id="Thmthm1.p1.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>とする．
+このとき<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm1.p1.m7" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が定数ではない共通因子を持つための必要十分条件は
+多項式<math id="Thmthm1.p1.m8" class="ltx_Math" alttext="u,v\in\mathbb{F}[x]" display="inline"><mrow><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><mo>∈</mo><mrow><mi>𝔽</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が存在して以下の三つの条件を満たすことである．</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math><span class="ltx_text ltx_font_italic">と</span><math id="S1.I1.i1.p1.m2" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math><span class="ltx_text ltx_font_italic">は共に</span><math id="S1.I1.i1.p1.m3" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math><span class="ltx_text ltx_font_italic">ではない．</span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="\deg(u)\leq n-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+かつ</span><math id="S1.I1.i2.p1.m2" class="ltx_Math" alttext="\deg(v)\leq m-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+である．</span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=0" display="inline"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">まず<math id="S1.p3.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="S1.p3.m2" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が定数ではない共通因子を持つと仮定する．
+つまりある定数ではない多項式<math id="S1.p3.m3" class="ltx_Math" alttext="a,b,h\in\mathbb{F}[x]" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>h</mi></mrow><mo>∈</mo><mrow><mi>𝔽</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が
+存在して<math id="S1.p3.m4" class="ltx_Math" alttext="f(x)=a(x)h(x)" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>a</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と<math id="S1.p3.m5" class="ltx_Math" alttext="g(x)=b(x)h(x)" display="inline"><mrow><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>b</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たす．このとき<math id="S1.p3.m6" class="ltx_Math" alttext="h" display="inline"><mi>h</mi></math>は定数ではないので少なくともその次数は<math id="S1.p3.m7" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>より大きいことに注意しよう．
+すると<math id="S1.p3.m8" class="ltx_Math" alttext="\deg(u)\leq m-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>かつ<math id="S1.p3.m9" class="ltx_Math" alttext="\deg(v)\leq n-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+であり，<math id="S1.p3.m10" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>と<math id="S1.p3.m11" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>は<math id="S1.p3.m12" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>ではない．
+よって<math id="S1.p3.m13" class="ltx_Math" alttext="v=a" display="inline"><mrow><mi>v</mi><mo>=</mo><mi>a</mi></mrow></math>で<math id="S1.p3.m14" class="ltx_Math" alttext="u=-b" display="inline"><mrow><mi>u</mi><mo>=</mo><mrow><mo>−</mo><mi>b</mi></mrow></mrow></math>と置くと</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=b(x)a(x)h(x)-a(x)b(x)h(x)=0" display="block"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mi>b</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>a</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>a</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>b</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるのでこの<math id="S1.p3.m15" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>, <math id="S1.p3.m16" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>は補題の条件を満たす．</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">今度は逆に補題の条件にあるような多項式
+<math id="S1.p4.m1" class="ltx_Math" alttext="u,v\in\mathbb{F}[x]" display="inline"><mrow><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><mo>∈</mo><mrow><mi>𝔽</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>が存在すると仮定する．
+このとき</p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="u(x)f(x)=-v(x)g(x)" display="block"><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+もしも<math id="S1.p4.m2" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の素因子が全て
+<math id="S1.p4.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を割り切らないとすると全て<math id="S1.p4.m4" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>を割り切ることになり，
+つまり<math id="S1.p4.m5" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>は<math id="S1.p4.m6" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>の因子になる．
+しかし<math id="S1.p4.m7" class="ltx_Math" alttext="\deg(u)\leq n-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>なのでこれはあり得ない．
+よって<math id="S1.p4.m8" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="S1.p4.m9" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>は共通因子を持つ．
+∎</p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="f,g\in\mathbb{F}[x]" display="inline"><mrow><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow><mo>∈</mo><mrow><mi>𝔽</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic">をそれぞれ定数ではない多項式とし
+その次数はそれぞれ<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>, <math id="Thmthm2.p1.m3" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>とする．
+そして</span></p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E1.m1" class="ltx_Math" alttext="\displaystyle f(x)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E1.m2" class="ltx_Math" alttext="\displaystyle=a_{m}x^{m}+\dots+a_{1}x+a_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>a</mi><mi>m</mi></msub><mo>⁢</mo><msup><mi>x</mi><mi>m</mi></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>a</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E2.m1" class="ltx_Math" alttext="\displaystyle g(x)" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E2.m2" class="ltx_Math" alttext="\displaystyle=b_{n}x^{n}+\dots+b_{1}x+b_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>⁢</mo><msup><mi>x</mi><mi>n</mi></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>b</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>b</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と表示されているとする．
+このとき<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>のシルベスター行列
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="\mathrm{Syl}(f,g)" display="inline"><mrow><mi>Syl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></math>とは
+以下で定義される<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="m+n" display="inline"><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow></math>次の正方行列である．</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\mathrm{Syl}(f,g)=\begin{pmatrix}a_{m}&amp;&amp;&amp;&amp;b_{n}&amp;&amp;&amp;&amp;\\
+a_{m-1}&amp;a_{m}&amp;&amp;&amp;b_{n-1}&amp;b_{n}&amp;&amp;&amp;\\
+a_{m-2}&amp;a_{m-1}&amp;\ddots&amp;&amp;b_{n-2}&amp;b_{n-1}&amp;\ddots&amp;&amp;\\
+\vdots&amp;\vdots&amp;\ddots&amp;a_{m}&amp;\vdots&amp;\vdots&amp;\ddots&amp;b_{n}&amp;\\
+\vdots&amp;\vdots&amp;&amp;a_{m-1}&amp;\vdots&amp;\vdots&amp;&amp;b_{n-1}&amp;\\
+a_{0}&amp;a_{1}&amp;&amp;\vdots&amp;b_{0}&amp;b_{1}&amp;&amp;\vdots&amp;\\
+&amp;a_{0}&amp;\ddots&amp;\vdots&amp;&amp;b_{0}&amp;\ddots&amp;\vdots&amp;\\
+&amp;&amp;\ddots&amp;a_{1}&amp;&amp;&amp;\ddots&amp;b_{1}&amp;\\
+&amp;&amp;&amp;a_{0}&amp;&amp;&amp;&amp;b_{0}&amp;\end{pmatrix}" display="block"><mrow><mrow><mi>Syl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>(</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd></mtd></mtr></mtable><mo>)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">また<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm2.p1.m9" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の終結式 <math id="Thmthm2.p1.m10" class="ltx_Math" alttext="\mathrm{Res}(f,g)" display="inline"><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></math> とは
+<math id="Thmthm2.p1.m11" class="ltx_Math" alttext="\mathrm{Syl}(f,g)" display="inline"><mrow><mi>Syl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></math>の行列式のことである．
+つまり</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="\mathrm{Res}(f,g)=\begin{vmatrix}a_{m}&amp;&amp;&amp;&amp;b_{n}&amp;&amp;&amp;&amp;\\
+a_{m-1}&amp;a_{m}&amp;&amp;&amp;b_{n-1}&amp;b_{n}&amp;&amp;&amp;\\
+a_{m-2}&amp;a_{m-1}&amp;\ddots&amp;&amp;b_{n-2}&amp;b_{n-1}&amp;\ddots&amp;&amp;\\
+\vdots&amp;\vdots&amp;\ddots&amp;a_{m}&amp;\vdots&amp;\vdots&amp;\ddots&amp;b_{n}&amp;\\
+\vdots&amp;\vdots&amp;&amp;a_{m-1}&amp;\vdots&amp;\vdots&amp;&amp;b_{n-1}&amp;\\
+a_{0}&amp;a_{1}&amp;&amp;\vdots&amp;b_{0}&amp;b_{1}&amp;&amp;\vdots&amp;\\
+&amp;a_{0}&amp;\ddots&amp;\vdots&amp;&amp;b_{0}&amp;\ddots&amp;\vdots&amp;\\
+&amp;&amp;\ddots&amp;a_{1}&amp;&amp;&amp;\ddots&amp;b_{1}&amp;\\
+&amp;&amp;&amp;a_{0}&amp;&amp;&amp;&amp;b_{0}&amp;\end{vmatrix}" display="block"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>|</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd></mtd></mtr></mtable><mo>|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">である．
+同じことだが</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\mathrm{Res}(f,g)=\begin{vmatrix}a_{m}&amp;a_{m-1}&amp;a_{m-2}&amp;\dots&amp;\dots&amp;a_{1}&amp;a_{0}%
+&amp;&amp;\\
+&amp;a_{m}&amp;a_{m-1}&amp;a_{m-2}&amp;\dots&amp;\dots&amp;a_{1}&amp;a_{0}&amp;\\
+&amp;&amp;\ddots&amp;\ddots&amp;&amp;&amp;\ddots&amp;\ddots&amp;\\
+&amp;&amp;&amp;a_{m}&amp;a_{m-1}&amp;\dots&amp;\dots&amp;a_{1}&amp;a_{0}\\
+b_{n}&amp;b_{n-1}&amp;b_{n-2}&amp;\dots&amp;\dots&amp;b_{1}&amp;b_{0}&amp;&amp;\\
+&amp;b_{n}&amp;b_{n-1}&amp;b_{n-2}&amp;\dots&amp;\dots&amp;b_{1}&amp;b_{0}&amp;\\
+&amp;&amp;\ddots&amp;\ddots&amp;&amp;&amp;\ddots&amp;\ddots&amp;\\
+&amp;&amp;&amp;b_{n}&amp;b_{n-1}&amp;\dots&amp;\dots&amp;b_{1}&amp;b_{0}\end{vmatrix}" display="block"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>|</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><mi mathvariant="normal">…</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd></mtr></mtable><mo>|</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">でもある．</span></p>
+</div>
+<div id="Thmthm2.p2" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p2.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm2.p2.m2" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math>次以上の多項式とするとき，
+<math id="Thmthm2.p2.m3" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm2.p2.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>の微分<math id="Thmthm2.p2.m5" class="ltx_Math" alttext="f^{\prime}" display="inline"><msup><mi>f</mi><mo>′</mo></msup></math>
+の終結式 <math id="Thmthm2.p2.m6" class="ltx_Math" alttext="\mathrm{Res}(f,f^{\prime})" display="inline"><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow></math>
+のことを判別式と呼ぶ．</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math><span class="ltx_text ltx_font_italic">
+を体とする．
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>を<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>上の定数ではない多項式とし，
+その次数はそれぞれ<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>, <math id="Thmthm3.p1.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>とする．
+このとき<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm3.p1.m7" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が定数ではない共通因子を持つための必要十分条件は
+<math id="Thmthm3.p1.m8" class="ltx_Math" alttext="\mathrm{Res}(f,g)=0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S1.p5" class="ltx_para">
+<table id="S2.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E3.m1" class="ltx_Math" alttext="\displaystyle f(x)" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E3.m2" class="ltx_Math" alttext="\displaystyle=a_{m}x^{m}+\dots+a_{1}x+a_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>a</mi><mi>m</mi></msub><mo>⁢</mo><msup><mi>x</mi><mi>m</mi></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>a</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E4.m1" class="ltx_Math" alttext="\displaystyle g(x)" display="inline"><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E4.m2" class="ltx_Math" alttext="\displaystyle=b_{n}x^{n}+\dots+b_{1}x+b_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>⁢</mo><msup><mi>x</mi><mi>n</mi></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>b</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>b</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と表示されているとする．</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">まず最初に<math id="S1.p6.m1" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="S1.p6.m2" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が共通因子を持っているとする．
+このとき補題
+<a href="#Thmthm1" title="補題 1. ‣ 1 終結式の話 ‣ 終結式" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>より<math id="S1.p6.m3" class="ltx_Math" alttext="\deg(u)\leq n-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>と<math id="S1.p6.m4" class="ltx_Math" alttext="\deg(v)\leq m-1" display="inline"><mrow><mrow><mi>deg</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+となる多項式で
+<math id="S1.p6.m5" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=0" display="inline"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>
+となるものが存在する．
+ここで</p>
+<table id="S2.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E5.m1" class="ltx_Math" alttext="\displaystyle u(x)" display="inline"><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E5.m2" class="ltx_Math" alttext="\displaystyle=r_{n-1}x^{n-1}+\dots+r_{1}x+r_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>r</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>r</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(6)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E6.m1" class="ltx_Math" alttext="\displaystyle v(x)" display="inline"><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E6.m2" class="ltx_Math" alttext="\displaystyle=l_{m-1}x^{m-1}+\dots+l_{1}x+l_{0}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><msup><mi>x</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>l</mi><mn>1</mn></msub><mo>⁢</mo><mi>x</mi></mrow><mo>+</mo><msub><mi>l</mi><mn>0</mn></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と表す．ここで<math id="S1.p6.m6" class="ltx_Math" alttext="r_{m-1}=0" display="inline"><mrow><msub><mi>r</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn></mrow></math>の場合も含んでいることに注意しよう．
+<math id="S1.p6.m7" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=0" display="inline"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>の係数を考えると
+<math id="S1.p6.m8" class="ltx_Math" alttext="x^{k}" display="inline"><msup><mi>x</mi><mi>k</mi></msup></math>の係数は</p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\sum_{i+j=k}a_{i}r_{j}+\sum_{i+j=k}b_{i}l_{j}=0" display="block"><mrow><mrow><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mi>i</mi><mo>+</mo><mi>j</mi></mrow><mo>=</mo><mi>k</mi></mrow></munder><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>r</mi><mi>j</mi></msub></mrow></mrow><mo rspace="0.055em">+</mo><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mi>i</mi><mo>+</mo><mi>j</mi></mrow><mo>=</mo><mi>k</mi></mrow></munder><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>l</mi><mi>j</mi></msub></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">である．
+これを連立方程式と見ると</p>
+<table id="S1.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex7.m1" class="ltx_Math" alttext="\begin{pmatrix}a_{m}&amp;&amp;&amp;&amp;b_{n}&amp;&amp;&amp;&amp;\\
+a_{m-1}&amp;a_{m}&amp;&amp;&amp;b_{n-1}&amp;b_{n}&amp;&amp;&amp;\\
+a_{m-2}&amp;a_{m-1}&amp;\ddots&amp;&amp;b_{n-2}&amp;b_{n-1}&amp;\ddots&amp;&amp;\\
+\vdots&amp;\vdots&amp;\ddots&amp;a_{m}&amp;\vdots&amp;\vdots&amp;\ddots&amp;b_{n}&amp;\\
+\vdots&amp;\vdots&amp;&amp;a_{m-1}&amp;\vdots&amp;\vdots&amp;&amp;b_{n-1}&amp;\\
+a_{0}&amp;a_{1}&amp;&amp;\vdots&amp;b_{0}&amp;b_{1}&amp;&amp;\vdots&amp;\\
+&amp;a_{0}&amp;\ddots&amp;\vdots&amp;&amp;b_{0}&amp;\ddots&amp;\vdots&amp;\\
+&amp;&amp;\ddots&amp;a_{1}&amp;&amp;&amp;\ddots&amp;b_{1}&amp;\\
+&amp;&amp;&amp;a_{0}&amp;&amp;&amp;&amp;b_{0}&amp;\end{pmatrix}\begin{pmatrix}r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}\end{pmatrix}=0" display="block"><mrow><mrow><mrow><mo>(</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mi>m</mi></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mi>n</mi></msub></mtd><mtd></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd><mtd></mtd></mtr><mtr><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><mi mathvariant="normal">⋮</mi></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>a</mi><mn>1</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd><mi mathvariant="normal">⋱</mi></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>a</mi><mn>0</mn></msub></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd><msub><mi>b</mi><mn>0</mn></msub></mtd><mtd></mtd></mtr></mtable><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mtable displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>l</mi><mn>0</mn></msub></mtd></mtr></mtable><mo>)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+ベクトル</p>
+<table id="S1.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex8.m1" class="ltx_Math" alttext="\begin{pmatrix}r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}\end{pmatrix}" display="block"><mrow><mo>(</mo><mtable displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>l</mi><mn>0</mn></msub></mtd></mtr></mtable><mo>)</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">はゼロベクトルではないので，行列<math id="S1.p6.m9" class="ltx_Math" alttext="\mathrm{Syl}(f,g)" display="inline"><mrow><mi>Syl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の固有値<math id="S1.p6.m10" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に対応する固有ベクトル
+になっている．特に<math id="S1.p6.m11" class="ltx_Math" alttext="\mathrm{Syl}(f,g)" display="inline"><mrow><mi>Syl</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は固有値<math id="S1.p6.m12" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>を持つのでその行列式は<math id="S1.p6.m13" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>になる．
+つまり
+<math id="S1.p6.m14" class="ltx_Math" alttext="\mathrm{Res}(f,g)=0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>である．</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">逆に<math id="S1.p7.m1" class="ltx_Math" alttext="\mathrm{Res}(f,g)=0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>だとすると
+固有値<math id="S1.p7.m2" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に対応する固有ベクトルを</p>
+<table id="S1.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex9.m1" class="ltx_Math" alttext="\begin{pmatrix}r_{n-1}\\
+r_{n-2}\\
+\vdots\\
+\vdots\\
+r_{0}\\
+l_{m-1}\\
+l_{m-2}\\
+\vdots\\
+\vdots\\
+l_{0}\end{pmatrix}" display="block"><mrow><mo>(</mo><mtable displaystyle="true" rowspacing="0pt"><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>r</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>l</mi><mrow><mi>m</mi><mo>−</mo><mn>2</mn></mrow></msub></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msub><mi>l</mi><mn>0</mn></msub></mtd></mtr></mtable><mo>)</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">としてここから逆に多項式<math id="S1.p7.m3" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>, <math id="S1.p7.m4" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>を定義してやると
+<math id="S1.p7.m5" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=0" display="inline"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>となる．
+ここで，<math id="S1.p7.m6" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>, <math id="S1.p7.m7" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>のいずれかは<math id="S1.p7.m8" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>ではないが，
+式<math id="S1.p7.m9" class="ltx_Math" alttext="u(x)f(x)+v(x)g(x)=0" display="inline"><mrow><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>から他方も<math id="S1.p7.m10" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>ではないことがわかる．
+この式が成り立つので補題
+<a href="#Thmthm1" title="補題 1. ‣ 1 終結式の話 ‣ 終結式" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>から<math id="S1.p7.m11" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="S1.p7.m12" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>
+は共通因子を持つことがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math><span class="ltx_text ltx_font_italic">
+を代数閉体とする．
+<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="f,g" display="inline"><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow></math>を<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>上の定数ではない多項式とし，
+その次数はそれぞれ<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>, <math id="Thmthm4.p1.m5" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>とする．
+このとき<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>と<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が
+共通の根を持つための必要十分条件は
+<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="\mathrm{Res}(f,g)=0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>である．</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math><span class="ltx_text ltx_font_italic">
+を代数閉体とする．
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>上の<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="2" display="inline"><mn>2</mn></math>次以上の多項式とし，
+その次数はそれぞれ<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>, <math id="Thmthm5.p1.m6" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>とする．
+このとき<math id="Thmthm5.p1.m7" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>が
+重根を持つための必要十分条件は
+<math id="Thmthm5.p1.m8" class="ltx_Math" alttext="\mathrm{Res}(f,f^{\prime})=0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow></math>である．</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>応用</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">終結式の応用として
+互いに異なる固有値を持つ複素行列全体が
+複素行列の空間の中で稠密開集合になることを示す．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math><span class="ltx_text ltx_font_italic">を体とする．
+このとき<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="M(n;\mathbb{F})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>;</mo><mi>𝔽</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を成分が<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>に入っている<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>次正方行列の
+全体とする．もしも<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="\mathbb{F}" display="inline"><mi>𝔽</mi></math>
+に位相が入っているなら<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="M(n,\mathbb{F})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>𝔽</mi><mo stretchy="false">)</mo></mrow></mrow></math>と<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\mathbb{F}^{n\times n}" display="inline"><msup><mi>𝔽</mi><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>n</mi></mrow></msup></math>
+は自然に同一視できるので<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="M(n,\mathbb{F})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>𝔽</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+に位相を導入することができる．</span></p>
+</div>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">次の補題の証明は，例えば
+参考文献 <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>などを参照せよ．
+もしくはただ単に多変数の解析関数の一致の定理からももちろん従う．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 7</span></span><span class="ltx_text ltx_font_bold"> </span>(多項式に関する一致の定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math>変数の実係数多項式とする．
+もしも<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の零点全体の集合<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="Z" display="inline"><mi>Z</mi></math>が内点を持つならば
+<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>は恒等的に<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>となる．
+つまり<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が定数<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>に等しくないならば
+<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="p(x)\neq 0" display="inline"><mrow><mrow><mi>p</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>となる<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="x\in\mathbb{R}^{n}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></math>全体の集合は<math id="Thmthm7.p1.m11" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline"><msup><mi>ℝ</mi><mi>n</mi></msup></math>
+のなかで稠密になる．</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+の元で互いに異なる固有値を持つもの全体とする．
+このとき<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>は<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の
+稠密開集合である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_italic ltx_title_proof">証明.</h6>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">行列が<math id="S2.p3.m1" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>に属することはその行列の
+固有多項式が重根を持たないことと同値であることに注意しよう．
+<math id="S2.p3.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>を<math id="S2.p3.m3" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の元としたときにその固有多項式<math id="S2.p3.m4" class="ltx_Math" alttext="f_{A}" display="inline"><msub><mi>f</mi><mi>A</mi></msub></math>を</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="f_{A}(x)=x^{n}+\alpha_{n-1}(A)x^{n-1}+\dots+\alpha_{0}(A)" display="block"><mrow><mrow><msub><mi>f</mi><mi>A</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mi>x</mi><mi>n</mi></msup><mo>+</mo><mrow><msub><mi>α</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mo>+</mo><mi mathvariant="normal">⋯</mi><mo>+</mo><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と表すと，各<math id="S2.p3.m5" class="ltx_Math" alttext="\alpha_{i}" display="inline"><msub><mi>α</mi><mi>i</mi></msub></math>は特定の行列に依存しない，
+<math id="S2.p3.m6" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の成分を変数とする(<math id="S2.p3.m7" class="ltx_Math" alttext="n\times n" display="inline"><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>n</mi></mrow></math>変数の)(普遍的な)多項式となる．
+そして判別式<math id="S2.p3.m8" class="ltx_Math" alttext="\mathrm{Res}(f_{A},f_{A}^{\prime})" display="inline"><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>A</mi></msub><mo>,</mo><msubsup><mi>f</mi><mi>A</mi><mo>′</mo></msubsup><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S2.p3.m9" class="ltx_Math" alttext="f_{A}" display="inline"><msub><mi>f</mi><mi>A</mi></msub></math>の係数の多項式になるので，
+結局<math id="S2.p3.m10" class="ltx_Math" alttext="\mathrm{Res}(f_{A},f_{A}^{\prime})" display="inline"><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>A</mi></msub><mo>,</mo><msubsup><mi>f</mi><mi>A</mi><mo>′</mo></msubsup><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.p3.m11" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の成分を変数とする多項式になる．
+ところで<math id="S2.p3.m12" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>ではない多項式の0点は内点を持たない閉集合になるので (定理 <a href="#Thmthm7" title="定理 7 (多項式に関する一致の定理). ‣ 2 応用 ‣ 終結式" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>)，
+<math id="S2.p3.m13" class="ltx_Math" alttext="\mathrm{Res}(f_{A},f_{A}^{\prime})\neq 0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>A</mi></msub><mo>,</mo><msubsup><mi>f</mi><mi>A</mi><mo>′</mo></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>
+となる<math id="S2.p3.m14" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>全体は<math id="S2.p3.m15" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中で
+稠密開集合となる．
+<math id="S2.p3.m16" class="ltx_Math" alttext="\mathrm{Res}(f_{A},f_{A}^{\prime})\neq 0" display="inline"><mrow><mrow><mi>Res</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mi>A</mi></msub><mo>,</mo><msubsup><mi>f</mi><mi>A</mi><mo>′</mo></msubsup><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mn>0</mn></mrow></math>
+であることと<math id="S2.p3.m17" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の固有値が互いに異なるということは同値なので，結局<math id="S2.p3.m18" class="ltx_Math" alttext="D" display="inline"><mi>D</mi></math>が<math id="S2.p3.m19" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中で稠密開集合となっていることがわかる．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math><span class="ltx_text ltx_font_italic">を
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の元で対角化可能なもの全体とすると，
+<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="E" display="inline"><mi>E</mi></math>は<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="M(n,\mathbb{C})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow></mrow></math>の中で
+第二類集合となる．</span></p>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">実係数の行列については異なる固有値を持つものが稠密であるとは限らない．実際，<math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="M(2,\mathbb{R})" display="inline"><mrow><mi>M</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow></mrow></math>において，その固有値が実数ではない複素数であるもの全体は内点を持つ．
+なぜなら実係数多項式の
+二次方程式の判別式が負であることと実数ではない複素数解を持つことは同値だからである．</span></p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+H. Wppdy,
+<span class="ltx_text ltx_font_italic">Polinomial Resultants</span>,
+<pre class="ltx_verbatim ltx_font_typewriter">
+http://buzzard.ups.edu/courses/2016spring/projects
+/woody-resultants-ups-434-2016.pdf
+ 
+</pre>
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+S. Lang, <span class="ltx_text ltx_font_italic">Algebra</span>,
+GTM, Vol. 211, Springer, 2012.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+はてなブログ「電波通信」の記事
+「多項式に関する一致の定理」,
+<pre class="ltx_verbatim ltx_font_typewriter">
+https://concious4410.hatenablog.com/entry/2022/03/12/160928
+</pre>
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:25:18 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

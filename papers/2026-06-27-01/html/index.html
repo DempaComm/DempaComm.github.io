@@ -1,0 +1,1685 @@
+<!DOCTYPE html><html prefix="dcterms: http://purl.org/dc/terms/" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>可分距離空間上の 被覆次元と帰納次元</title>
+<!--Generated on Sun Jul 26 17:23:08 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2026-06-27-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>正規空間の被覆次元のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../covdimdayon.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">
+可分距離空間上の
+被覆次元と帰納次元
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブキトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<nav class="ltx_TOC ltx_list_toc ltx_toc_toc"><h6 class="ltx_title ltx_title_contents">Contents</h6>
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>位相的準備</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>被覆次元</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>可分距離空間</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S4" title="In 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>おまけ:球面への写像の拡張問題が被覆次元を特徴付けること</span></a></li>
+</ol></nav>
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文書では正規空間の被覆次元にまつわる基本的な命題を紹介していく．
+特におまけの球面の拡張問題の話は興味深いと思う．
+この文書の内容は
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="" class="ltx_ref">8</a>]</cite>
+を大いに参考にした．
+基本的な命題を述べた後に，
+可分距離化可能空間において，
+被覆次元で帰納的次元が上から抑えられることを証明する．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>位相的準備</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 1</span></span><span class="ltx_text ltx_font_bold"> </span>(被覆の収縮補題)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">正規空間<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の有限開被覆
+<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+について，開被覆
+<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+が存在して
+<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+が満たされる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">帰納法によって証明できる．
+詳細は省略する．
+∎</p>
+</div>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">集合族の相似という概念を導入する．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p"><math id="S1.p3.m1" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>
+を添字集合とする．
+集合
+<math id="S1.p3.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の部分集合族
+<math id="S1.p3.m3" class="ltx_Math" alttext="\mathcal{A}=\{A_{i}\}_{i\in I}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒜</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow></math>
+と
+<math id="S1.p3.m4" class="ltx_Math" alttext="\mathcal{B}=\{B_{i}\}_{i\in I}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℬ</mi><mo>=</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>B</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow></math>
+が
+<em class="ltx_emph ltx_font_italic">相似</em>であるとは
+<math id="S1.p3.m5" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>の任意の部分集合<math id="S1.p3.m6" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>
+について
+<math id="S1.p3.m7" class="ltx_Math" alttext="\bigcap_{s\in S}A_{s}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>A</mi><mi>s</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+と
+<math id="S1.p3.m8" class="ltx_Math" alttext="\bigcap_{s\in S}B_{s}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>B</mi><mi>s</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+が同値になることである．
+同じことだが
+<math id="S1.p3.m9" class="ltx_Math" alttext="\bigcap_{s\in S}A_{s}\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>A</mi><mi>s</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+と
+<math id="S1.p3.m10" class="ltx_Math" alttext="\bigcap_{s\in S}B_{s}\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>B</mi><mi>s</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+が同値になるということでもある．</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">位相空間論では特に
+特に
+<math id="S1.p4.m1" class="ltx_Math" alttext="B_{i}\subset A_{i}" display="inline"><mrow><msub><mi>B</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>A</mi><mi>i</mi></msub></mrow></math>
+などの包含関係が存在して
+<math id="S1.p4.m2" class="ltx_Math" alttext="A_{i}" display="inline"><msub><mi>A</mi><mi>i</mi></msub></math>
+や
+<math id="S1.p4.m3" class="ltx_Math" alttext="B_{i}" display="inline"><msub><mi>B</mi><mi>i</mi></msub></math>
+が開集合だったり
+閉集合だったりするような状況において
+相似な集合族を構成できるかどうかに興味がある．
+この文章では一般的な話は行わず
+有限集合族の場合に限って話を進めるということにする．</p>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を
+正規空間とする．
+そして
+<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="\{F_{1},\dots,F_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+を
+それぞれ
+閉集合族と開集合族で
+<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="F_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たしているとする
+(<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を被覆しているなどの条件はつけない)．
+このとき
+開集合族集合族
+<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="\{W_{1},\dots,W_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>W</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+が存在して
+<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="F_{i}\subset W_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>W</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="\operatorname{CL}W_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たしさらに
+<math id="Thmthm2.p1.m9" class="ltx_Math" alttext="\{F_{1},\dots,F_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="Thmthm2.p1.m10" class="ltx_Math" alttext="\{\operatorname{CL}W_{1},\dots,\operatorname{CL}W_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+は相似である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">帰納法によって証明する．
+自然数<math id="S1.p5.m1" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>について
+族
+<math id="S1.p5.m2" class="ltx_Math" alttext="\{W_{1},\dots,W_{k}\}\cup\{F_{k+1},\dots,F_{m}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>W</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+が
+<math id="S1.p5.m3" class="ltx_Math" alttext="\{F_{1},\dots,F_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+と相似であり
+<math id="S1.p5.m4" class="ltx_Math" alttext="F_{j}\subset W_{j}" display="inline"><mrow><msub><mi>F</mi><mi>j</mi></msub><mo>⊂</mo><msub><mi>W</mi><mi>j</mi></msub></mrow></math>
+かつ
+<math id="S1.p5.m5" class="ltx_Math" alttext="\operatorname{CL}W_{j}\subset U_{j}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>j</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>j</mi></msub></mrow></math>
+を
+<math id="S1.p5.m6" class="ltx_Math" alttext="j=1,\dots,k" display="inline"><mrow><mi>j</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi></mrow></mrow></math>で満たしているとする．
+今から
+<math id="S1.p5.m7" class="ltx_Math" alttext="W_{k+1}" display="inline"><msub><mi>W</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>を構成する．
+今
+<math id="S1.p5.m8" class="ltx_Math" alttext="\{\operatorname{CL}W_{1},\dots,\operatorname{CL}W_{k}\}\cup\{F_{k+1},\dots,F_{%
+m}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>k</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+の有限個の共通部分で表される集合のうち
+<math id="S1.p5.m9" class="ltx_Math" alttext="F_{k+1}" display="inline"><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>と交わらないものを
+<math id="S1.p5.m10" class="ltx_Math" alttext="\mathcal{K}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒦</mi></math>とかく．
+そして
+<math id="S1.p5.m11" class="ltx_Math" alttext="H=\setminus\bigcup\mathcal{K}" display="inline"><mrow><mi>H</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0em">∖</mo><mrow><mo>⋃</mo><mi class="ltx_font_mathcaligraphic">𝒦</mi></mrow></mrow></mrow></math>
+と定義すると，
+<math id="S1.p5.m12" class="ltx_Math" alttext="\mathcal{K}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒦</mi></math>
+は有限集合であるから
+<math id="S1.p5.m13" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>
+は
+<math id="S1.p5.m14" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の開集合であり
+<math id="S1.p5.m15" class="ltx_Math" alttext="F_{k+1}\subset H" display="inline"><mrow><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⊂</mo><mi>H</mi></mrow></math>
+を満たす．
+ここで
+<math id="S1.p5.m16" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の正規性を用いて
+<math id="S1.p5.m17" class="ltx_Math" alttext="W_{k+1}" display="inline"><msub><mi>W</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></math>
+を
+<math id="S1.p5.m18" class="ltx_Math" alttext="F_{k+1}\subset W_{k}" display="inline"><mrow><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>⊂</mo><msub><mi>W</mi><mi>k</mi></msub></mrow></math>
+かつ
+<math id="S1.p5.m19" class="ltx_Math" alttext="\operatorname{CL}W_{k}\subset H\cap U_{k+1}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>k</mi></msub></mrow><mo>⊂</mo><mrow><mi>H</mi><mo>∩</mo><msub><mi>U</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+となる開集合とする．
+このとき
+<math id="S1.p5.m20" class="ltx_Math" alttext="\mathcal{K}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒦</mi></math>
+の定義から
+<math id="S1.p5.m21" class="ltx_Math" alttext="\{\operatorname{CL}W_{1},\dots,\operatorname{CL}W_{k}\}\cup\{F_{k+1},\dots,F_{%
+m}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>k</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+と
+<math id="S1.p5.m22" class="ltx_Math" alttext="\{\operatorname{CL}W_{1},\dots,\operatorname{CL}W_{k+1}\}\cup\{F_{k+2},\dots,F%
+_{m}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+は相似である．
+以上で証明が終わる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>被覆次元</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">集合
+<math id="S2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+集合族
+<math id="S2.p1.m2" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>
+と
+<math id="S2.p1.m3" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>について
+<math id="S2.p1.m4" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{U};x)" display="inline"><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒰</mi><mo>;</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を
+<math id="S2.p1.m5" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>を含む
+<math id="S2.p1.m6" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>
+の個数とする．
+そして
+<math id="S2.p1.m7" class="ltx_Math" alttext="\mathrm{Cdeg}({\mathcal{U}})" display="inline"><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒰</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を
+<math id="S2.p1.m8" class="ltx_Math" alttext="\sup\mathrm{Cdeg}(\mathcal{U};x)" display="inline"><mrow><mo rspace="0.167em">sup</mo><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒰</mi><mo>;</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">さて位相空間<math id="S2.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+と<math id="S2.p2.m2" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p2.m3" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>であるとは
+<math id="S2.p2.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の有限開被覆
+<math id="S2.p2.m5" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>
+について，
+その細分となる開被覆
+<math id="S2.p2.m6" class="ltx_Math" alttext="\mathcal{V}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒱</mi></math>
+が存在して
+<math id="S2.p2.m7" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{V})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>
+となることである．
+また
+<math id="S2.p2.m8" class="ltx_Math" alttext="n&lt;\mathrm{dim}X" display="inline"><mrow><mi>n</mi><mo>&lt;</mo><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow></mrow></math>
+とは
+<math id="S2.p2.m9" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>の否定が成り立つときにそう書く．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 3</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を正規空間とする．
+このとき以下は同値である．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意の有限開被覆
+</span><math id="S2.I1.i2.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開被覆
+</span><math id="S2.I1.i2.p1.m3" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I1.i2.p1.m4" class="ltx_Math" alttext="V_{i}\subset U_{i}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+かつ
+</span><math id="S2.I1.i2.p1.m5" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{V})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意の有限開被覆
+</span><math id="S2.I1.i3.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開被覆
+</span><math id="S2.I1.i3.p1.m3" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I1.i3.p1.m4" class="ltx_Math" alttext="V_{i}\subset U_{i}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+かつ</span><math id="S2.I1.i3.p1.m5" class="ltx_Math" alttext="\{1,\dots,m\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+の濃度が</span><math id="S2.I1.i3.p1.m6" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math><span class="ltx_text ltx_font_italic">の部分集合</span><math id="S2.I1.i3.p1.m7" class="ltx_Math" alttext="J" display="inline"><mi>J</mi></math><span class="ltx_text ltx_font_italic">
+について
+</span><math id="S2.I1.i3.p1.m8" class="ltx_Math" alttext="\bigcap_{j\in J}V_{j}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></msub><msub><mi>V</mi><mi>j</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の
+濃度が</span><math id="S2.I1.i4.p1.m2" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math><span class="ltx_text ltx_font_italic">の
+任意の開被覆
+</span><math id="S2.I1.i4.p1.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開被覆
+</span><math id="S2.I1.i4.p1.m4" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{n+2}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I1.i4.p1.m5" class="ltx_Math" alttext="V_{i}\subset U_{i}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+かつ
+</span><math id="S2.I1.i4.p1.m6" class="ltx_Math" alttext="\bigcap_{j=1}^{n+2}V_{j}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msubsup><msub><mi>V</mi><mi>j</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">同値性
+<math id="S2.p3.m1" class="ltx_Math" alttext="[\ref{item:lem:degn+2}\iff\ref{item:lem:n+20}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i2" title="item (2) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⇔</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i3" title="item (3) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+は自明である．
+また
+<math id="S2.p3.m2" class="ltx_Math" alttext="[\ref{item:lem:degn+2}\Longrightarrow\ref{item:lem:dimn}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i2" title="item (2) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i1" title="item (1) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+と
+<math id="S2.p3.m3" class="ltx_Math" alttext="[\ref{item:lem:n+20}\Longrightarrow\ref{item:lem:n+2n+2}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i3" title="item (3) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i4" title="item (4) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+も自明である．</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p"><math id="S2.p4.m1" class="ltx_Math" alttext="[\ref{item:lem:dimn}\Longrightarrow\ref{item:lem:degn+2}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i1" title="item (1) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i2" title="item (2) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+の証明：
+開被覆
+<math id="S2.p4.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+に対してその細分となる開被覆
+<math id="S2.p4.m3" class="ltx_Math" alttext="\mathcal{G}=\{G_{1},\dots,G_{k}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>G</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>G</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+で<math id="S2.p4.m4" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{G})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>
+となるものが存在する．
+ここで
+<math id="S2.p4.m5" class="ltx_Math" alttext="l\colon\{1,\dots,k\}\to\{1,\dots,m\}" display="inline"><mrow><mi>l</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">→</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+を
+<math id="S2.p4.m6" class="ltx_Math" alttext="l(a)" display="inline"><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を
+<math id="S2.p4.m7" class="ltx_Math" alttext="G_{a}\subset U_{b}" display="inline"><mrow><msub><mi>G</mi><mi>a</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>b</mi></msub></mrow></math>
+となる最小の<math id="S2.p4.m8" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>
+として定義する．
+そして各<math id="S2.p4.m9" class="ltx_Math" alttext="i=1,\dots,m" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi></mrow></mrow></math>
+について
+<math id="S2.p4.m10" class="ltx_Math" alttext="V_{i}=\bigcup_{l(a)=i}G_{a}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mrow><mi>l</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi>i</mi></mrow></msub><msub><mi>G</mi><mi>a</mi></msub></mrow></mrow></math>
+と定義し
+<math id="S2.p4.m11" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+とすれば
+<math id="S2.p4.m12" class="ltx_Math" alttext="\mathcal{V}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒱</mi></math>は
+<math id="S2.p4.m13" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の開被覆であり，
+<math id="S2.p4.m14" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{G})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒢</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>から
+<math id="S2.p4.m15" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{V})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>
+を満たす．</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p"><math id="S2.p5.m1" class="ltx_Math" alttext="[\ref{item:lem:n+2n+2}\Longrightarrow\ref{item:lem:n+20}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i4" title="item (4) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I1.i3" title="item (3) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+の証明：
+<math id="S2.p5.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の有限開被覆
+<math id="S2.p5.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+を任意に与える．
+もしも
+<math id="S2.p5.m4" class="ltx_Math" alttext="m&lt;n+2" display="inline"><mrow><mi>m</mi><mo>&lt;</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mrow></math>のときは適当に空集合を付加して
+やって<math id="S2.p5.m5" class="ltx_Math" alttext="n+2\leq m" display="inline"><mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo>≤</mo><mi>m</mi></mrow></math>と仮定しても良い．
+そして<math id="S2.p5.m6" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>
+を集合<math id="S2.p5.m7" class="ltx_Math" alttext="\{1,\dots,m\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></math>
+の<math id="S2.p5.m8" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math>個の部分集合の直和分割全体の集合とする．
+つまり<math id="S2.p5.m9" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>の元は<math id="S2.p5.m10" class="ltx_Math" alttext="\{I_{1},\dots I_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>I</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+であって各<math id="S2.p5.m11" class="ltx_Math" alttext="I_{k}" display="inline"><msub><mi>I</mi><mi>k</mi></msub></math>は<math id="S2.p5.m12" class="ltx_Math" alttext="\{1,\dots,n+2\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow></math>の空でない部分集合で
+<math id="S2.p5.m13" class="ltx_Math" alttext="a\neq b" display="inline"><mrow><mi>a</mi><mo>≠</mo><mi>b</mi></mrow></math>の時<math id="S2.p5.m14" class="ltx_Math" alttext="I_{a}\cap I_{b}=\emptyset" display="inline"><mrow><mrow><msub><mi>I</mi><mi>a</mi></msub><mo>∩</mo><msub><mi>I</mi><mi>b</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+で<math id="S2.p5.m15" class="ltx_Math" alttext="\bigcup_{k}I_{k}=\{1,\dots,n+2\}" display="inline"><mrow><mrow><msub><mo>⋃</mo><mi>k</mi></msub><msub><mi>I</mi><mi>k</mi></msub></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+である．
+<math id="S2.p5.m16" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>は有限集合なので
+番号をつけて
+<math id="S2.p5.m17" class="ltx_Math" alttext="\{A_{1},\dots,A_{r}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>A</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>A</mi><mi>r</mi></msub><mo stretchy="false">}</mo></mrow></math>
+とする．
+以下の操作を帰納的に繰り返して
+<math id="S2.p5.m18" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の開被覆
+<math id="S2.p5.m19" class="ltx_Math" alttext="\{G_{l,1},\dots,G_{l,m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mn>1</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mi>m</mi></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+<math id="S2.p5.m20" class="ltx_Math" alttext="(l=0,1,\dots,r+1)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>l</mi><mo>=</mo><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>r</mi><mo>+</mo><mn>1</mn></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></math>
+を構成する．
+まず
+<math id="S2.p5.m21" class="ltx_Math" alttext="G_{0,i}=U_{i}" display="inline"><mrow><msub><mi>G</mi><mrow><mn>0</mn><mo>,</mo><mi>i</mi></mrow></msub><mo>=</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>とする．
+そして
+<math id="S2.p5.m22" class="ltx_Math" alttext="\{G_{l,1},\dots,G_{l,m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mn>1</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mi>m</mi></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+が構成されたとき
+<math id="S2.p5.m23" class="ltx_Math" alttext="G_{l+1,i}" display="inline"><msub><mi>G</mi><mrow><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mi>i</mi></mrow></msub></math>を構成する．
+<math id="S2.p5.m24" class="ltx_Math" alttext="A_{l}=\{I_{1},\dots,I_{n+2}\}" display="inline"><mrow><msub><mi>A</mi><mi>l</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>I</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+として<math id="S2.p5.m25" class="ltx_Math" alttext="k=1,\dots,n+2" display="inline"><mrow><mi>k</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mrow></mrow></math>について
+<math id="S2.p5.m26" class="ltx_Math" alttext="O_{k}=\bigcup_{j\in I_{k}}G_{l,j}" display="inline"><mrow><msub><mi>O</mi><mi>k</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>j</mi><mo>∈</mo><msub><mi>I</mi><mi>k</mi></msub></mrow></msub><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mi>j</mi></mrow></msub></mrow></mrow></math>
+とする．
+すると
+<math id="S2.p5.m27" class="ltx_Math" alttext="\{O_{1},\dots,O_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+は
+<math id="S2.p5.m28" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の開被覆になるので
+<a href="#S2.I1.i4" title="item (4) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>を用いて
+その細分となる開被覆
+<math id="S2.p5.m29" class="ltx_Math" alttext="\{P_{1},\dots,P_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>P</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>P</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+で<math id="S2.p5.m30" class="ltx_Math" alttext="\bigcap_{i=1}^{n+2}P_{i}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msubsup><msub><mi>P</mi><mi>i</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるものが存在する．
+ここで
+<math id="S2.p5.m31" class="ltx_Math" alttext="i=1,\dots,m" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi></mrow></mrow></math>について
+<math id="S2.p5.m32" class="ltx_Math" alttext="G_{l+1,i}=P_{k(i)}\cap G_{l,i}" display="inline"><mrow><msub><mi>G</mi><mrow><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mi>i</mi></mrow></msub><mo>=</mo><mrow><msub><mi>P</mi><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>∩</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mi>i</mi></mrow></msub></mrow></mrow></math>
+と定義する．ここで<math id="S2.p5.m33" class="ltx_Math" alttext="k(i)" display="inline"><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></math>は
+<math id="S2.p5.m34" class="ltx_Math" alttext="i\in I_{k(i)}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>I</mi><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>となる<math id="S2.p5.m35" class="ltx_Math" alttext="k(i)\in\{1,\dots,n+2\}" display="inline"><mrow><mrow><mi>k</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+である．
+今
+<math id="S2.p5.m36" class="ltx_Math" alttext="G_{l+1,i}\subset G_{l,i}" display="inline"><mrow><msub><mi>G</mi><mrow><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mi>i</mi></mrow></msub><mo>⊂</mo><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><mi>i</mi></mrow></msub></mrow></math>
+に注意しよう．
+ここで
+<math id="S2.p5.m37" class="ltx_Math" alttext="V_{i}=G_{r+1,i}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>=</mo><msub><mi>G</mi><mrow><mrow><mi>r</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><mi>i</mi></mrow></msub></mrow></math>
+で
+<math id="S2.p5.m38" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>と定義する．
+今から<math id="S2.p5.m39" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{V})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>を示そう．
+<math id="S2.p5.m40" class="ltx_Math" alttext="\{1,\dots,m\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></math>
+の濃度が<math id="S2.p5.m41" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math>の任意の部分集合<math id="S2.p5.m42" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+について<math id="S2.p5.m43" class="ltx_Math" alttext="K=\{a_{1},\dots,a_{n+2}\}" display="inline"><mrow><mi>K</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+として
+<math id="S2.p5.m44" class="ltx_Math" alttext="I_{1}=a_{1},\dots,I_{n+1}=\{a_{n+1}\}" display="inline"><mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>=</mo><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi></mrow></mrow><mo>,</mo><mrow><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+として<math id="S2.p5.m45" class="ltx_Math" alttext="I_{n+2}" display="inline"><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub></math>は余った<math id="S2.p5.m46" class="ltx_Math" alttext="\{1,\dots,m\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></math>
+の元全部とする．
+そして
+<math id="S2.p5.m47" class="ltx_Math" alttext="A_{l}=\{I_{1},\dots,I_{n+2}\}" display="inline"><mrow><msub><mi>A</mi><mi>l</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>I</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>I</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math>とする．
+上で構成したのと同じ記号を用いる．
+任意の
+<math id="S2.p5.m48" class="ltx_Math" alttext="a_{i}\in K" display="inline"><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>∈</mo><mi>K</mi></mrow></math>について</p>
+<table id="S4.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2.1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E1.m1" class="ltx_Math" alttext="\displaystyle V_{a_{i}}=G_{r+1,a_{i}}\subset G_{l+1,a_{i}}\subset G_{l,a_{i}}%
+\cap P_{i}" display="inline"><mrow><msub><mi>V</mi><msub><mi>a</mi><mi>i</mi></msub></msub><mo>=</mo><msub><mi>G</mi><mrow><mrow><mi>r</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><msub><mi>a</mi><mi>i</mi></msub></mrow></msub><mo>⊂</mo><msub><mi>G</mi><mrow><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><mo>,</mo><msub><mi>a</mi><mi>i</mi></msub></mrow></msub><mo>⊂</mo><mrow><msub><mi>G</mi><mrow><mi>l</mi><mo>,</mo><msub><mi>a</mi><mi>i</mi></msub></mrow></msub><mo>∩</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">であり，
+<math id="S2.p5.m49" class="ltx_Math" alttext="\bigcap_{i=1}^{n+2}P_{i}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msubsup><msub><mi>P</mi><mi>i</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+なので
+<math id="S2.p5.m50" class="ltx_Math" alttext="\bigcap_{a\in K}V_{a}=\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>a</mi><mo>∈</mo><mi>K</mi></mrow></msub><msub><mi>V</mi><mi>a</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+よって
+<a href="#S2.I1.i3" title="item (3) ‣ 補題 3. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(3)</span></a>が成り立つ．</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">以上で証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を正規空間とする．
+このとき以下は同値である．</span></p>
+<ol id="S2.I2" class="ltx_enumerate">
+<li id="S2.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I2.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i1.p1.m1" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I2.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意の有限開被覆
+</span><math id="S2.I2.i2.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開被覆
+</span><math id="S2.I2.i2.p1.m3" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I2.i2.p1.m4" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+かつ
+</span><math id="S2.I2.i2.p1.m5" class="ltx_Math" alttext="\mathrm{Cdeg}(\mathcal{V})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I2.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I2.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の
+濃度が</span><math id="S2.I2.i3.p1.m2" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math><span class="ltx_text ltx_font_italic">の
+任意の開被覆
+</span><math id="S2.I2.i3.p1.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+閉被覆
+</span><math id="S2.I2.i3.p1.m4" class="ltx_Math" alttext="\mathcal{V}=\{F_{1},\dots,F_{n+2}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I2.i3.p1.m5" class="ltx_Math" alttext="F_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+かつ
+</span><math id="S2.I2.i3.p1.m6" class="ltx_Math" alttext="\bigcap_{j=1}^{n+2}F_{j}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msubsup><msub><mi>F</mi><mi>j</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p"><math id="S2.p7.m1" class="ltx_Math" alttext="[\ref{item:lem2:dimn}\iff\ref{item:lem2:degn+2shrink}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i1" title="item (1) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext><mo stretchy="false">⇔</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i2" title="item (2) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+は補題
+<a href="#Thmthm1" title="補題 1 (被覆の収縮補題). ‣ 1 位相的準備 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>からわかる．
+また
+<math id="S2.p7.m2" class="ltx_Math" alttext="[\ref{item:lem2:degn+2shrink}\Longrightarrow\ref{item:lem2:n+2n+2}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i2" title="item (2) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i3" title="item (3) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+は自明である．</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p"><math id="S2.p8.m1" class="ltx_Math" alttext="[\ref{item:lem2:n+2n+2}\Longrightarrow\ref{item:lem2:dimn}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i3" title="item (3) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I2.i1" title="item (1) ‣ 補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+は補題
+<a href="#Thmthm2" title="補題 2. ‣ 1 位相的準備 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+から従う．
+∎</p>
+</div>
+</div>
+<div id="S2.p9" class="ltx_para">
+<p class="ltx_p">被覆の境界のdegreeによって
+被覆次元を特徴付けることができる．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を正規空間とする．
+このとき以下は同値である
+(以下の条件において，被覆とは仮定していないことに注意せよ)．</span></p>
+<ol id="S2.I3" class="ltx_enumerate">
+<li id="S2.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I3.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i1.p1.m1" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S2.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I3.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意の有限開集合族
+</span><math id="S2.I3.i2.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+と閉集合族
+</span><math id="S2.I3.i2.p1.m3" class="ltx_Math" alttext="\{F_{1},\dots,F_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開集合族
+</span><math id="S2.I3.i2.p1.m4" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I3.i2.p1.m5" class="ltx_Math" alttext="F_{i}\subset V_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">と
+</span><math id="S2.I3.i2.p1.m6" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+を満たし
+かつ
+</span><math id="S2.I3.i2.p1.m7" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V_{1},\dots,\operatorname{\partial}V_{m%
+}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I3.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I3.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の任意の有限開集合族
+</span><math id="S2.I3.i3.p1.m2" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+と閉集合族
+</span><math id="S2.I3.i3.p1.m3" class="ltx_Math" alttext="\{F_{1},\dots,F_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+について
+開集合族
+</span><math id="S2.I3.i3.p1.m4" class="ltx_Math" alttext="\mathcal{V}=\{W_{1},\dots,W_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>W</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S2.I3.i3.p1.m5" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I3.i3.p1.m6" class="ltx_Math" alttext="F_{i}\subset V_{i}\subset\operatorname{CL}V_{i}\subset W_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>W</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">と
+</span><math id="S2.I3.i3.p1.m7" class="ltx_Math" alttext="\operatorname{CL}W_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+を満たし
+</span><math id="S2.I3.i3.p1.m8" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{CL}W_{1}\setminus V_{1},\dots,\operatorname{CL}W%
+_{m}\setminus V_{m}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>∖</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>m</mi></msub></mrow><mo>∖</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+<li id="S2.I3.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S2.I3.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I3.i4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">の
+濃度が</span><math id="S2.I3.i4.p1.m2" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math><span class="ltx_text ltx_font_italic">の
+任意の開集合族
+</span><math id="S2.I3.i4.p1.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">
+と
+閉集合族
+</span><math id="S2.I3.i4.p1.m4" class="ltx_Math" alttext="\{F_{1},\dots,F_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math><span class="ltx_text ltx_font_italic">で
+</span><math id="S2.I3.i4.p1.m5" class="ltx_Math" alttext="F_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+となるもの
+について
+開集合族
+</span><math id="S2.I3.i4.p1.m6" class="ltx_Math" alttext="\mathcal{V}=\{V_{1},\dots,V_{n+1}\}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+が存在して
+</span><math id="S2.I3.i4.p1.m7" class="ltx_Math" alttext="F_{i}\subset V_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+と
+</span><math id="S2.I3.i4.p1.m8" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math><span class="ltx_text ltx_font_italic">
+を満たし
+かつ
+</span><math id="S2.I3.i4.p1.m9" class="ltx_Math" alttext="\bigcap_{j=1}^{n+1}\operatorname{\partial}V_{j}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>j</mi></msub></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math><span class="ltx_text ltx_font_italic">
+が成り立つ．</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p10" class="ltx_para">
+<p class="ltx_p"><math id="S2.p10.m1" class="ltx_Math" alttext="[\ref{item:prop:dimn}\Longrightarrow\ref{item:prop:bdm}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i1" title="item (1) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i2" title="item (2) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>の証明：
+<math id="S2.p10.m2" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+を
+<math id="S2.p10.m3" class="ltx_Math" alttext="\{U_{1},\dots,U_{m}\}\cup\{X\setminus F_{1},\dots,X\setminus F_{m}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>F</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>F</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+の濃度が<math id="S2.p10.m4" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>の部分集合族の共通部分で表される集合全体
+とする．
+このとき仮定から
+<math id="S2.p10.m5" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+は
+<math id="S2.p10.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の開被覆となる．
+よって
+<a href="#S2.I3.i1" title="item (1) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(1)</span></a>
+から
+degreeが<math id="S2.p10.m7" class="ltx_Math" alttext="\leq n+1" display="inline"><mrow><mi></mi><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>
+であるような
+開被覆
+<math id="S2.p10.m8" class="ltx_Math" alttext="\{W_{1},\dots W_{q}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>W</mi><mi>q</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+で<math id="S2.p10.m9" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>
+の細分になるものが存在する．
+さらに
+閉被覆
+<math id="S2.p10.m10" class="ltx_Math" alttext="\{K_{1},\dots,K_{q}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>K</mi><mi>q</mi></msub><mo stretchy="false">}</mo></mrow></math>
+で<math id="S2.p10.m11" class="ltx_Math" alttext="K_{r}\subset W_{r}" display="inline"><mrow><msub><mi>K</mi><mi>r</mi></msub><mo>⊂</mo><msub><mi>W</mi><mi>r</mi></msub></mrow></math>
+となるものをとる．
+ここで
+<math id="S2.p10.m12" class="ltx_Math" alttext="r=1,\dots,q" display="inline"><mrow><mi>r</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>q</mi></mrow></mrow></math>
+に対して
+<math id="S2.p10.m13" class="ltx_Math" alttext="N_{r}" display="inline"><msub><mi>N</mi><mi>r</mi></msub></math>
+を
+<math id="S2.p10.m14" class="ltx_Math" alttext="F_{i}\cap W_{r}\neq\emptyset" display="inline"><mrow><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>W</mi><mi>r</mi></msub></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるような
+<math id="S2.p10.m15" class="ltx_Math" alttext="i=1,\dots,m" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi></mrow></mrow></math>
+の集合全体とする．
+そして
+補題
+<a href="#Thmthm1" title="補題 1 (被覆の収縮補題). ‣ 1 位相的準備 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>
+から
+各
+<math id="S2.p10.m16" class="ltx_Math" alttext="i\in N_{r}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>N</mi><mi>r</mi></msub></mrow></math>
+について
+<math id="S2.p10.m17" class="ltx_Math" alttext="V_{i,r}" display="inline"><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub></math>
+を
+<math id="S2.p10.m18" class="ltx_Math" alttext="K_{r}\subset V_{i,r}\subset\operatorname{CL}V_{i,r}\subset W_{r}" display="inline"><mrow><msub><mi>K</mi><mi>r</mi></msub><mo>⊂</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow><mo>⊂</mo><msub><mi>W</mi><mi>r</mi></msub></mrow></math>
+となるようにとる．
+ここで，<math id="S2.p10.m19" class="ltx_Math" alttext="i,j\in N_{r}" display="inline"><mrow><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow><mo>∈</mo><msub><mi>N</mi><mi>r</mi></msub></mrow></math>
+が<math id="S2.p10.m20" class="ltx_Math" alttext="i&lt;j" display="inline"><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow></math>を満たすならば<math id="S2.p10.m21" class="ltx_Math" alttext="\operatorname{CL}V_{i,r}\subset V_{j,r}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow><mo>⊂</mo><msub><mi>V</mi><mrow><mi>j</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></math>
+となるようにとる．
+さて，
+<math id="S2.p10.m22" class="ltx_Math" alttext="i=1,\dots,m" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi></mrow></mrow></math>
+について</p>
+<table id="S4.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2.2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E2.m1" class="ltx_Math" alttext="\displaystyle V_{i}=\bigcup\{V_{i,r}\mid i\in N_{r}\}" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>=</mo><mstyle displaystyle="true"><mrow><mo movablelimits="false" rspace="0em">⋃</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>N</mi><mi>r</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき
+<math id="S2.p10.m23" class="ltx_Math" alttext="F_{i}\subset V_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math>
+が成り立つ．
+というのも，
+<math id="S2.p10.m24" class="ltx_Math" alttext="x\in F_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>F</mi><mi>i</mi></msub></mrow></math>
+かつ
+<math id="S2.p10.m25" class="ltx_Math" alttext="x\in K_{r}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>K</mi><mi>r</mi></msub></mrow></math>
+となる<math id="S2.p10.m26" class="ltx_Math" alttext="i,r" display="inline"><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></math>が存在するので
+<math id="S2.p10.m27" class="ltx_Math" alttext="x\in V_{i,r}\subset V_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math>
+となるからである．
+また
+<math id="S2.p10.m28" class="ltx_Math" alttext="N_{r}" display="inline"><msub><mi>N</mi><mi>r</mi></msub></math>の定義と
+<math id="S2.p10.m29" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math>の定義から
+<math id="S2.p10.m30" class="ltx_Math" alttext="i\in N_{r}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>N</mi><mi>r</mi></msub></mrow></math>なら
+<math id="S2.p10.m31" class="ltx_Math" alttext="W_{r}\subset U_{i}" display="inline"><mrow><msub><mi>W</mi><mi>r</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>であり，
+<math id="S2.p10.m32" class="ltx_Math" alttext="V_{i}" display="inline"><msub><mi>V</mi><mi>i</mi></msub></math>を定義する式は有限和であるから
+<math id="S2.p10.m33" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+となることがわかる．
+最後に背理法のために
+濃度が<math id="S2.p10.m34" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>の<math id="S2.p10.m35" class="ltx_Math" alttext="\{1,\dots,m\}" display="inline"><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>m</mi><mo stretchy="false">}</mo></mrow></math>の部分集合<math id="S2.p10.m36" class="ltx_Math" alttext="I" display="inline"><mi>I</mi></math>
+が存在し
+<math id="S2.p10.m37" class="ltx_Math" alttext="\bigcap_{i\in I}\operatorname{\partial}V_{i}\neq\emptyset" display="inline"><mrow><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となるとしよう．
+点
+<math id="S2.p10.m38" class="ltx_Math" alttext="x\in\bigcap_{i\in I}\operatorname{\partial}V_{i}" display="inline"><mrow><mi>x</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>⋂</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow></mrow></math>をとる．
+さて
+<math id="S2.p10.m39" class="ltx_Math" alttext="x\in\operatorname{\partial}V_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow></math>
+であるから
+<math id="S2.p10.m40" class="ltx_Math" alttext="x\in\bigcup_{i\in N_{r}}\operatorname{\partial}V_{i,r}" display="inline"><mrow><mi>x</mi><mo rspace="0.111em">∈</mo><mrow><msub><mo>⋃</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>N</mi><mi>r</mi></msub></mrow></msub><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mi>r</mi></mrow></msub></mrow></mrow></mrow></math>
+である．
+ここで各<math id="S2.p10.m41" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について
+<math id="S2.p10.m42" class="ltx_Math" alttext="r(i)" display="inline"><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+を
+<math id="S2.p10.m43" class="ltx_Math" alttext="x\in\operatorname{\partial}V_{i,r(i)}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></mrow></math>
+満たすものとして定義しよう．
+このとき<math id="S2.p10.m44" class="ltx_Math" alttext="i\neq j" display="inline"><mrow><mi>i</mi><mo>≠</mo><mi>j</mi></mrow></math>ならば
+<math id="S2.p10.m45" class="ltx_Math" alttext="r(i)\neq qr(j)" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mrow><mi>q</mi><mo>⁢</mo><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>である．
+というのも，<math id="S2.p10.m46" class="ltx_Math" alttext="i&lt;j" display="inline"><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow></math>と仮定して
+もしも<math id="S2.p10.m47" class="ltx_Math" alttext="r(i)=r(j)" display="inline"><mrow><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>ならば，
+<math id="S2.p10.m48" class="ltx_Math" alttext="\operatorname{CL}V_{i,r(i)}\subset V_{j,r(i)}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow><mo>⊂</mo><msub><mi>V</mi><mrow><mi>j</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></math>
+なので
+<math id="S2.p10.m49" class="ltx_Math" alttext="x\not\in\operatorname{\partial}V_{i}" display="inline"><mrow><mi>x</mi><mo>∉</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow></math>
+となり矛盾するからである．
+さて
+<math id="S2.p10.m50" class="ltx_Math" alttext="x\in\operatorname{\partial}V_{i,r(i)}" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></mrow></math>
+なので
+特に
+<math id="S2.p10.m51" class="ltx_Math" alttext="x\not\in V_{i,r(i)}" display="inline"><mrow><mi>x</mi><mo>∉</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></math>
+である．
+ここで
+<math id="S2.p10.m52" class="ltx_Math" alttext="x\in K_{r(n+2)}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>K</mi><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>
+となる番号
+<math id="S2.p10.m53" class="ltx_Math" alttext="r(n+2)" display="inline"><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+をとる．
+<math id="S2.p10.m54" class="ltx_Math" alttext="\{K_{r}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>r</mi></msub><mo stretchy="false">}</mo></mrow></math>
+は被覆なのでこれは可能である．
+さて
+<math id="S2.p10.m55" class="ltx_Math" alttext="x\not\in V_{i,r(i)}" display="inline"><mrow><mi>x</mi><mo>∉</mo><msub><mi>V</mi><mrow><mi>i</mi><mo>,</mo><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub></mrow></math>なので
+<math id="S2.p10.m56" class="ltx_Math" alttext="r(n+2)" display="inline"><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="S2.p10.m57" class="ltx_Math" alttext="r(i)" display="inline"><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></math>たちとは異なる．
+よって<math id="S2.p10.m58" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset W_{r(i)}" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>W</mi><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></math>
+より
+<math id="S2.p10.m59" class="ltx_Math" alttext="x\in\bigcap_{i=1}^{n+2}W_{r(i)}" display="inline"><mrow><mi>x</mi><mo rspace="0.111em">∈</mo><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msubsup><msub><mi>W</mi><mrow><mi>r</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></mrow></msub></mrow></mrow></math>
+となるが，
+これは
+<math id="S2.p10.m60" class="ltx_Math" alttext="\mathrm{Cdeg}(\{W_{1},\dots,W_{m}\})\leq n+1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>W</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>
+に矛盾する．
+よって
+<math id="S2.p10.m61" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V_{1},\dots,\operatorname{\partial}V_{m%
+}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+である．</p>
+</div>
+<div id="S2.p11" class="ltx_para">
+<p class="ltx_p"><math id="S2.p11.m1" class="ltx_Math" alttext="[\ref{item:prop:bdm}\Longrightarrow\ref{item:prop:fatbdm}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i2" title="item (2) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(2)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (3) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>の証明：
+<a href="#S2.I3.i2" title="item (2) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(2)</span></a>から
+開集合族
+<math id="S2.p11.m2" class="ltx_Math" alttext="\{V_{1},\dots,V_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+で
+<math id="S2.p11.m3" class="ltx_Math" alttext="F_{i}\subset V_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S2.p11.m4" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たしかつ
+<math id="S2.p11.m5" class="ltx_Math" alttext="\mathrm{Cdeg}\{\operatorname{\partial}V_{1},\dots,\operatorname{\partial}V_{m}%
+\}\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+となるものが存在する．
+このとき
+<math id="S2.p11.m6" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+であるから
+補題<a href="#Thmthm2" title="補題 2. ‣ 1 位相的準備 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>
+から
+開集合族<math id="S2.p11.m7" class="ltx_Math" alttext="\{P_{1},\dots,P_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>P</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>P</mi><mi>m</mi></msub><mo stretchy="false">}</mo></mrow></math>
+で
+<math id="S2.p11.m8" class="ltx_Math" alttext="\{\operatorname{CL}P_{1},\dots,\operatorname{CL}P_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="S2.p11.m9" class="ltx_Math" alttext="\{\operatorname{\partial}V_{1},\dots,\operatorname{\partial}V_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+が相似なもので
+<math id="S2.p11.m10" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset P_{i}\subset U_{i}" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>P</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+となるものが存在する．
+ここで
+<math id="S2.p11.m11" class="ltx_Math" alttext="W_{i}=V_{i}\cup P_{i}" display="inline"><mrow><msub><mi>W</mi><mi>i</mi></msub><mo>=</mo><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></math>
+と定義すると，<math id="S2.p11.m12" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset W_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>W</mi><mi>i</mi></msub></mrow></math>
+であり
+<math id="S2.p11.m13" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset\operatorname{CL}W_{i}\setminus V_{i}" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><mo>∖</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow></math>
+かつ
+<math id="S2.p11.m14" class="ltx_Math" alttext="\operatorname{CL}W_{i}\setminus V_{i}\subset\operatorname{CL}P_{i}" display="inline"><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><mo>∖</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></math>
+なので
+<math id="S2.p11.m15" class="ltx_Math" alttext="\{\operatorname{CL}W_{1}\setminus V_{1},\dots,\operatorname{CL}W_{m}\setminus V%
+_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>∖</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>m</mi></msub></mrow><mo>∖</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+は
+<math id="S2.p11.m16" class="ltx_Math" alttext="\{\operatorname{\partial}V_{1},\dots,\operatorname{\partial}V_{m}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+と相似である．
+よって
+<math id="S2.p11.m17" class="ltx_Math" alttext="\mathrm{Cdeg}\{\operatorname{CL}W_{1}\setminus V_{1},\dots,\operatorname{CL}W_%
+{m}\setminus V_{m}\}\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>∖</mo><msub><mi>V</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>W</mi><mi>m</mi></msub></mrow><mo>∖</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><mo stretchy="false">}</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+である．</p>
+</div>
+<div id="S2.p12" class="ltx_para">
+<p class="ltx_p"><math id="S2.p12.m1" class="ltx_Math" alttext="[\ref{item:prop:fatbdm}\Longrightarrow\ref{item:prop:bdn+1}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i3" title="item (3) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(3)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i4" title="item (4) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>の証明：
+自明である．</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p"><math id="S2.p13.m1" class="ltx_Math" alttext="[\ref{item:prop:bdn+1}\Longrightarrow\ref{item:prop:dimn}]" display="inline"><mrow><mo stretchy="false">[</mo><mrow><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i4" title="item (4) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(4)</span></a></mtext><mo stretchy="false">⟹</mo><mtext class="ltx_mathvariant_italic"><a href="#S2.I3.i1" title="item (1) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref ltx_font_italic"><span class="ltx_text ltx_ref_tag">(1)</span></a></mtext></mrow><mo stretchy="false">]</mo></mrow></math>
+の証明：
+<math id="S2.p13.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+<math id="S2.p13.m3" class="ltx_Math" alttext="n+2" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></math>枚の開集合からなる開被覆
+<math id="S2.p13.m4" class="ltx_Math" alttext="\{O_{1},\dots,O_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+を任意に与える．
+補題
+<a href="#Thmthm1" title="補題 1 (被覆の収縮補題). ‣ 1 位相的準備 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>
+から
+閉被覆<math id="S2.p13.m5" class="ltx_Math" alttext="\{A_{1}\dots,A_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>⁢</mo><mi mathvariant="normal">…</mi></mrow><mo>,</mo><msub><mi>A</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+が存在して
+<math id="S2.p13.m6" class="ltx_Math" alttext="A_{i}\subset O_{i}" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>を満たす．
+ここで
+<math id="S2.p13.m7" class="ltx_Math" alttext="\{O_{1},\dots O_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>O</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+と
+<math id="S2.p13.m8" class="ltx_Math" alttext="\{F_{1},\dots F_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="false">}</mo></mrow></math>
+に対して
+<a href="#S2.I3.i4" title="item (4) ‣ 命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">(4)</span></a>
+を用いて
+開集合族
+<math id="S2.p13.m9" class="ltx_Math" alttext="\{H_{1},\dots,H_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>H</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>H</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+で
+<math id="S2.p13.m10" class="ltx_Math" alttext="F_{i}\subset H_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S2.p13.m11" class="ltx_Math" alttext="\operatorname{CL}H_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>H</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たし
+<math id="S2.p13.m12" class="ltx_Math" alttext="\bigcap_{i=1}^{n+1}\operatorname{\partial}H_{i}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たすものが存在する．
+そして
+ここで閉集合
+<math id="S2.p13.m13" class="ltx_Math" alttext="i=1,\dots,n+2" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mrow></mrow></math>について
+閉集合<math id="S2.p13.m14" class="ltx_Math" alttext="L_{i}" display="inline"><msub><mi>L</mi><mi>i</mi></msub></math>
+を<math id="S2.p13.m15" class="ltx_Math" alttext="i=1,\dots,n+1" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mrow></mrow></math>のとき
+<math id="S2.p13.m16" class="ltx_Math" alttext="L_{i}=\operatorname{CL}H_{i}\setminus\bigcup_{k&lt;i}H_{k}" display="inline"><mrow><msub><mi>L</mi><mi>i</mi></msub><mo>=</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>H</mi><mi>i</mi></msub></mrow><mo rspace="0.055em">∖</mo><mrow><msub><mo>⋃</mo><mrow><mi>k</mi><mo>&lt;</mo><mi>i</mi></mrow></msub><msub><mi>H</mi><mi>k</mi></msub></mrow></mrow></mrow></math>
+で
+<math id="S2.p13.m17" class="ltx_Math" alttext="L_{n+2}=F_{n+2}\setminus\bigcup_{k=1}^{n+1}H_{k}" display="inline"><mrow><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>=</mo><mrow><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo rspace="0.055em">∖</mo><mrow><msubsup><mo>⋃</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><msub><mi>H</mi><mi>k</mi></msub></mrow></mrow></mrow></math>
+と定義する．
+このとき<math id="S2.p13.m18" class="ltx_Math" alttext="\{L_{1},\dots,L_{n+2}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>L</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>は<math id="S2.p13.m19" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉被覆である．
+というのも任意の<math id="S2.p13.m20" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>について
+<math id="S2.p13.m21" class="ltx_Math" alttext="x\in H_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></math>となる<math id="S2.p13.m22" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>が存在しなければ
+<math id="S2.p13.m23" class="ltx_Math" alttext="x\in L_{n+2}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub></mrow></math>
+であり，
+<math id="S2.p13.m24" class="ltx_Math" alttext="x\in H_{i}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></math>となる添字が存在するなら値が最小のそれを
+<math id="S2.p13.m25" class="ltx_Math" alttext="j" display="inline"><mi>j</mi></math>として<math id="S2.p13.m26" class="ltx_Math" alttext="x\in L_{j}" display="inline"><mrow><mi>x</mi><mo>∈</mo><msub><mi>L</mi><mi>j</mi></msub></mrow></math>
+となるからである．
+さらに<math id="S2.p13.m27" class="ltx_Math" alttext="L_{i}\subset O_{i}" display="inline"><mrow><msub><mi>L</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>
+である．
+さて</p>
+<table id="S4.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2.3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E3.m1" class="ltx_Math" alttext="\displaystyle\bigcap_{i=1}^{n+2}L_{i}=L_{n+2}\cap\bigcap_{i=1}^{n+2}\left(%
+\operatorname{CL}H_{i}\setminus\bigcup_{k&lt;i}H_{k}\right)\subset L_{n+2}\cap%
+\bigcap_{i=1}\operatorname{\partial}H_{i}=\emptyset" display="inline"><mrow><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></munderover></mstyle><msub><mi>L</mi><mi>i</mi></msub></mrow><mo>=</mo><mrow><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>∩</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></munderover></mstyle><mrow><mo>(</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>H</mi><mi>i</mi></msub></mrow><mo>∖</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>k</mi><mo>&lt;</mo><mi>i</mi></mrow></munder></mstyle><msub><mi>H</mi><mi>k</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>∩</mo><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></munder></mstyle><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるから
+補題
+<a href="#Thmthm4" title="補題 4. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>から
+<math id="S2.p13.m28" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+が従う．
+∎</p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm6.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+とし，
+<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+を
+<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+である正規空間とし，
+<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="\{F_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+と
+<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="\{U_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+をそれぞれ閉集合族，
+開集合族
+で
+<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="F_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たすとする．
+このとき
+開集合族
+<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\{V_{i}\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+であって
+<math id="Thmthm6.p1.m8" class="ltx_Math" alttext="F_{i}\subset V_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="Thmthm6.p1.m9" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たしかつ
+<math id="Thmthm6.p1.m10" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V_{i}\}_{i\in\mathbb{Z}_{\geq 0}})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+を満たすものが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p14" class="ltx_para">
+<p class="ltx_p">まず
+<math id="S2.p14.m1" class="ltx_Math" alttext="\mathbb{Z}_{\geq 0}" display="inline"><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></math>
+の部分集合であって
+濃度が
+<math id="S2.p14.m2" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>
+のもの全体を考える．
+そのような集合は高々可算個しかないので，
+番号をつけて列挙して
+<math id="S2.p14.m3" class="ltx_Math" alttext="\Gamma_{1},\Gamma_{2},\dots,\Gamma_{i},\dots" display="inline"><mrow><msub><mi mathvariant="normal">Γ</mi><mn>1</mn></msub><mo>,</mo><msub><mi mathvariant="normal">Γ</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi mathvariant="normal">Γ</mi><mi>i</mi></msub><mo>,</mo><mi mathvariant="normal">…</mi></mrow></math>
+とする．
+そして
+今から帰納法により，
+<math id="S2.p14.m4" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>によって添字付られた
+以下のような開集合の列の列
+<math id="S2.p14.m5" class="ltx_Math" alttext="\{P_{i}(k)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>,
+<math id="S2.p14.m6" class="ltx_Math" alttext="\{Q_{i}(k)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+で
+任意の<math id="S2.p14.m7" class="ltx_Math" alttext="i\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+について
+<math id="S2.p14.m8" class="ltx_Math" alttext="F_{i}\subset P_{i}(k)" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と
+<math id="S2.p14.m9" class="ltx_Math" alttext="\operatorname{CL}Q_{i}(k)\subset U_{i}" display="inline"><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たしかつ
+任意の
+<math id="S2.p14.m10" class="ltx_Math" alttext="l\in\{1,\dots,k\}" display="inline"><mrow><mi>l</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi><mo stretchy="false">}</mo></mrow></mrow></math>
+について
+<math id="S2.p14.m11" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{CL}(Q_{a}(k))\setminus P_{a}(k)\mid a\in\Gamma_{%
+l}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mi>l</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+が成り立つ
+ものを構成する．
+今<math id="S2.p14.m12" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>までは上記の列が構成できたとする．
+今から<math id="S2.p14.m13" class="ltx_Math" alttext="\{P_{i}(k+1)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>,
+<math id="S2.p14.m14" class="ltx_Math" alttext="\{Q_{i}(k+1)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を構成する．
+まず
+<math id="S2.p14.m15" class="ltx_Math" alttext="a\in\Gamma_{k+1}" display="inline"><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math>
+については
+<math id="S2.p14.m16" class="ltx_Math" alttext="\{\operatorname{CL}P_{a}(k)\}_{a\in\Gamma_{k+1}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>a</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></msub></math>
+と
+<math id="S2.p14.m17" class="ltx_Math" alttext="\{Q_{a}(k)\}_{a\in\Gamma_{k+1}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></msub></math>
+について
+命題
+<a href="#Thmthm5" title="命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>
+を用いて
+<math id="S2.p14.m18" class="ltx_Math" alttext="\operatorname{CL}P_{a}(k)\subset P_{a}(k+1)\subset Q_{a}(k+1)" display="inline"><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>a</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>P</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+かつ
+<math id="S2.p14.m19" class="ltx_Math" alttext="\operatorname{CL}Q_{a}(k+1)\subset Q_{a}(k)" display="inline"><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>a</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+で
+<math id="S2.p14.m20" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{CL}Q_{a}(k+1)\setminus P_{a}(k+1)\}_{a\in\Gamma_%
+{k+1}})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mrow><mo stretchy="false">{</mo><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>a</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+となる
+<math id="S2.p14.m21" class="ltx_Math" alttext="\{Q_{a}(k+1)\}_{a\in\Gamma_{k+1}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></msub></math>
+と<math id="S2.p14.m22" class="ltx_Math" alttext="\{P_{a}(k+1)\}_{a\in\Gamma_{k+1}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>P</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></msub></math>
+をとる．
+<math id="S2.p14.m23" class="ltx_Math" alttext="b\in\mathbb{Z}_{\geq 0}\setminus\Gamma_{k+1}" display="inline"><mrow><mi>b</mi><mo>∈</mo><mrow><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub><mo>∖</mo><msub><mi mathvariant="normal">Γ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></math>
+については
+<math id="S2.p14.m24" class="ltx_Math" alttext="P_{b}(k+1)=P_{b}(k)" display="inline"><mrow><mrow><msub><mi>P</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>P</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+かつ
+<math id="S2.p14.m25" class="ltx_Math" alttext="Q_{b}(k+1)=Q_{b}(k)" display="inline"><mrow><mrow><msub><mi>Q</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>Q</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+と定義する．
+ここで任意の<math id="S2.p14.m26" class="ltx_Math" alttext="i\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について
+<math id="S2.p14.m27" class="ltx_Math" alttext="\operatorname{CL}Q_{i}(k+1)\setminus P_{i}(k+1)\subset\operatorname{CL}Q_{i}(k%
+)\setminus P_{i}(k)" display="inline"><mrow><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>⊂</mo><mrow><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+なので，
+任意の<math id="S2.p14.m28" class="ltx_Math" alttext="l" display="inline"><mi>l</mi></math>
+について
+について
+<math id="S2.p14.m29" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{CL}(Q_{a}(k))\setminus P_{a}(k)\mid a\in\Gamma_{%
+l}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mi>CL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>a</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mi>l</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+が成り立つ．
+さて，この
+<math id="S2.p14.m30" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>によって添字付られた
+列
+<math id="S2.p14.m31" class="ltx_Math" alttext="\{P_{i}(k)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>,
+<math id="S2.p14.m32" class="ltx_Math" alttext="\{Q_{i}(k)\}_{i\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+を用いて，
+任意の<math id="S2.p14.m33" class="ltx_Math" alttext="i\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>i</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>について
+<math id="S2.p14.m34" class="ltx_Math" alttext="V_{i}=\bigcup_{k\in\mathbb{Z}_{\geq 0}}P_{i}(k)" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+と定義する．もちろん
+<math id="S2.p14.m35" class="ltx_Math" alttext="F_{i}\subset V_{i}\subset\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+は満たされる．
+また任意の<math id="S2.p14.m36" class="ltx_Math" alttext="k" display="inline"><mi>k</mi></math>について
+<math id="S2.p14.m37" class="ltx_Math" alttext="P_{i}(k)\subset V_{i}" display="inline"><mrow><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></math>
+かつ
+<math id="S2.p14.m38" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset Q_{i}(k)" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので
+<math id="S2.p14.m39" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset\operatorname{CL}(Q_{i}(k))\setminus P_{i}(k)" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mrow><mi>CL</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>∖</mo><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+である．
+よって
+<math id="S2.p14.m40" class="ltx_Math" alttext="\Gamma_{k}" display="inline"><msub><mi mathvariant="normal">Γ</mi><mi>k</mi></msub></math>について
+<math id="S2.p14.m41" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V_{a}\mid a\in\Gamma_{k}\})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>a</mi></msub></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>∈</mo><msub><mi mathvariant="normal">Γ</mi><mi>k</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+となる．
+これで証明が終わる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>可分距離空間</h2>
+
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm7.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+とする．
+そして
+<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+を
+<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>を満たす
+可分距離化可能空間とする．
+さらに<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合
+<math id="Thmthm7.p1.m5" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>と開集合
+<math id="Thmthm7.p1.m6" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>
+は
+<math id="Thmthm7.p1.m7" class="ltx_Math" alttext="F\subset U" display="inline"><mrow><mi>F</mi><mo>⊂</mo><mi>U</mi></mrow></math>
+を満たしているとする．
+このとき開集合
+<math id="Thmthm7.p1.m8" class="ltx_Math" alttext="V" display="inline"><mi>V</mi></math>が存在して
+<math id="Thmthm7.p1.m9" class="ltx_Math" alttext="F\subset V" display="inline"><mrow><mi>F</mi><mo>⊂</mo><mi>V</mi></mrow></math>
+と
+<math id="Thmthm7.p1.m10" class="ltx_Math" alttext="\operatorname{CL}V\subset U" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo>⊂</mo><mi>U</mi></mrow></math>
+を満たし
+さらに
+<math id="Thmthm7.p1.m11" class="ltx_Math" alttext="\mathrm{dim}\operatorname{\partial}V\leq n-1" display="inline"><mrow><mrow><mi>dim</mi><mo lspace="0.167em">⁢</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に全有界な距離関数<math id="S3.p1.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>で<math id="S3.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と同じ位相を生成するのもを与える．これは<math id="S3.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が完備距離化可能であることから
+<math id="S3.p1.m5" class="ltx_Math" alttext="[0,1]^{\aleph_{0}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><msub><mi mathvariant="normal">ℵ</mi><mn>0</mn></msub></msup></math>に位相的に埋め込み可能であることから
+とってこれる．
+適当に正の有理数全体を番号付して
+<math id="S3.p1.m6" class="ltx_Math" alttext="\{r_{k}\}_{k\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>r</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+とし
+空間<math id="S3.p1.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の可算稠密部分集合を
+<math id="S3.p1.m8" class="ltx_Math" alttext="\{q_{s}\}_{s\in\mathbb{Z}_{\geq 0}}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>q</mi><mi>s</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>s</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></math>
+とする．
+そして
+<math id="S3.p1.m9" class="ltx_Math" alttext="(k,s)\in\mathbb{Z}_{\geq 0}^{2}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msubsup><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow><mn>2</mn></msubsup></mrow></math>について
+<math id="S3.p1.m10" class="ltx_Math" alttext="F_{k,s}" display="inline"><msub><mi>F</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></math>
+を半径が<math id="S3.p1.m11" class="ltx_Math" alttext="r_{k}" display="inline"><msub><mi>r</mi><mi>k</mi></msub></math>で
+中心が<math id="S3.p1.m12" class="ltx_Math" alttext="q_{s}" display="inline"><msub><mi>q</mi><mi>s</mi></msub></math>
+<math id="S3.p1.m13" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に関する閉球
+とし，
+<math id="S3.p1.m14" class="ltx_Math" alttext="U_{k,s}" display="inline"><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></math>
+を
+を半径が<math id="S3.p1.m15" class="ltx_Math" alttext="2r_{k}" display="inline"><mrow><mn>2</mn><mo>⁢</mo><msub><mi>r</mi><mi>k</mi></msub></mrow></math>で
+中心が<math id="S3.p1.m16" class="ltx_Math" alttext="q_{s}" display="inline"><msub><mi>q</mi><mi>s</mi></msub></math>
+<math id="S3.p1.m17" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に関する
+開球
+とする．
+もちろん
+<math id="S3.p1.m18" class="ltx_Math" alttext="F_{k,s}\subset U_{k,s}" display="inline"><mrow><msub><mi>F</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo>⊂</mo><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></mrow></math>
+である．
+今
+二つの可算族
+<math id="S3.p1.m19" class="ltx_Math" alttext="\{F\}\cup\{F_{k,s}\}_{k,s\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mi>F</mi><mo stretchy="false">}</mo></mrow><mo>∪</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+と
+<math id="S3.p1.m20" class="ltx_Math" alttext="\{U\}\cup\{U_{k,s}\}_{k,s\in\mathbb{Z}_{\geq 0}}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mi>U</mi><mo stretchy="false">}</mo></mrow><mo>∪</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow></math>
+に対して
+定理
+<a href="#Thmthm6" title="定理 6. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>
+を用いて
+<math id="S3.p1.m21" class="ltx_Math" alttext="F\subset V" display="inline"><mrow><mi>F</mi><mo>⊂</mo><mi>V</mi></mrow></math>
+かつ
+<math id="S3.p1.m22" class="ltx_Math" alttext="\operatorname{CL}V\subset U" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo>⊂</mo><mi>U</mi></mrow></math>
+となる開集合<math id="S3.p1.m23" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>
+と
+<math id="S3.p1.m24" class="ltx_Math" alttext="F_{k,s}\subset V_{k,s}" display="inline"><mrow><msub><mi>F</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo>⊂</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></mrow></math>
+かつ
+<math id="S3.p1.m25" class="ltx_Math" alttext="\operatorname{CL}V_{k,s}\subset U_{k,s}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></mrow></math>
+となる開集合<math id="S3.p1.m26" class="ltx_Math" alttext="V_{k,s}" display="inline"><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub></math>
+であって
+<math id="S3.p1.m27" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V\}\cup\{V_{k,s}\}_{k,s\in\mathbb{Z}_{%
+\geq 0}})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+となるものをとる．
+このとき
+<math id="S3.p1.m28" class="ltx_Math" alttext="\mathrm{dim}\operatorname{\partial}V\leq n-1" display="inline"><mrow><mrow><mi>dim</mi><mo lspace="0.167em">⁢</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+であることを示そう．
+閉集合族
+<math id="S3.p1.m29" class="ltx_Math" alttext="\{C_{1},\dots,C_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>C</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>C</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>
+と開集合族
+<math id="S3.p1.m30" class="ltx_Math" alttext="\{O_{1},\dots,O_{n}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></math>
+は
+<math id="S3.p1.m31" class="ltx_Math" alttext="C_{i}\subset O_{i}" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S3.p1.m32" class="ltx_Math" alttext="C_{i}\cap\operatorname{\partial}V\neq\emptyset" display="inline"><mrow><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>∩</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></mrow><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たすとする．
+さて<math id="S3.p1.m33" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は
+<math id="S3.p1.m34" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>に関して全有界であるから
+開被覆<math id="S3.p1.m35" class="ltx_Math" alttext="\{X\setminus A_{1},\dots,X\setminus A_{n}\}\cup\{O_{1},\dots,O_{n}\}" display="inline"><mrow><mrow><mo stretchy="false">{</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>A</mi><mn>1</mn></msub></mrow><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>A</mi><mi>n</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></mrow></math>
+にはルベーグ数
+<math id="S3.p1.m36" class="ltx_Math" alttext="\eta" display="inline"><mi>η</mi></math>
+が存在する．
+<math id="S3.p1.m37" class="ltx_Math" alttext="2r_{k}&lt;\eta" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>r</mi><mi>k</mi></msub></mrow><mo>&lt;</mo><mi>η</mi></mrow></math>
+となる<math id="S3.p1.m38" class="ltx_Math" alttext="k\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>k</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+をとる．
+再び全有界性から
+有限集合<math id="S3.p1.m39" class="ltx_Math" alttext="H\subset\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>H</mi><mo>⊂</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math>
+が存在して
+<math id="S3.p1.m40" class="ltx_Math" alttext="\{F_{k,q_{h}}\}_{h\in H}" display="inline"><msub><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><mi>h</mi></msub></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mi>h</mi><mo>∈</mo><mi>H</mi></mrow></msub></math>
+が<math id="S3.p1.m41" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>を被覆する．
+ここで，
+<math id="S3.p1.m42" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>を<math id="S3.p1.m43" class="ltx_Math" alttext="m" display="inline"><mi>m</mi></math>個数の部分集合
+<math id="S3.p1.m44" class="ltx_Math" alttext="H_{1},\dots,H_{n}" display="inline"><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>H</mi><mi>n</mi></msub></mrow></math>に
+と
+<span class="ltx_text ltx_framed ltx_framed_underline">直和分割</span>してさらに
+<math id="S3.p1.m45" class="ltx_Math" alttext="i=1,\dots,n" display="inline"><mrow><mi>i</mi><mo>=</mo><mrow><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi></mrow></mrow></math>
+について
+各<math id="S3.p1.m46" class="ltx_Math" alttext="H_{i}" display="inline"><msub><mi>H</mi><mi>i</mi></msub></math>
+は
+<math id="S3.p1.m47" class="ltx_Math" alttext="U_{k,q_{h}}\subset O_{i}" display="inline"><mrow><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><mi>h</mi></msub></mrow></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>となる
+ようにする．
+ここで適当に<math id="S3.p1.m48" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>に有限個の元を追加することにより
+任意の<math id="S3.p1.m49" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>について
+<math id="S3.p1.m50" class="ltx_Math" alttext="H_{i}\neq\emptyset" display="inline"><mrow><msub><mi>H</mi><mi>i</mi></msub><mo>≠</mo><mi mathvariant="normal">∅</mi></mrow></math>
+としても良い．
+これは
+<math id="S3.p1.m51" class="ltx_Math" alttext="2r_{k}&lt;\eta" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>r</mi><mi>k</mi></msub></mrow><mo>&lt;</mo><mi>η</mi></mrow></math>なので可能である．
+そして
+<math id="S3.p1.m52" class="ltx_Math" alttext="S_{i}=\bigcup_{h\in H_{i}}V_{k,q_{h}}" display="inline"><mrow><msub><mi>S</mi><mi>i</mi></msub><mo rspace="0.111em">=</mo><mrow><msub><mo>⋃</mo><mrow><mi>h</mi><mo>∈</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></msub><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><mi>h</mi></msub></mrow></msub></mrow></mrow></math>
+と定義すると<math id="S3.p1.m53" class="ltx_Math" alttext="i\in\{1,\dots,n\}" display="inline"><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>n</mi><mo stretchy="false">}</mo></mrow></mrow></math>について
+<math id="S3.p1.m54" class="ltx_Math" alttext="A_{i}\subset S_{i}\subset O_{i}" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>S</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>O</mi><mi>i</mi></msub></mrow></math>
+である．
+これは<math id="S3.p1.m55" class="ltx_Math" alttext="2r_{k}&lt;\eta" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><msub><mi>r</mi><mi>k</mi></msub></mrow><mo>&lt;</mo><mi>η</mi></mrow></math>からの帰結である．
+ここで
+<math id="S3.p1.m56" class="ltx_Math" alttext="\operatorname{\partial}_{\operatorname{\partial}V}S_{i}\subset\operatorname{%
+\partial}S_{i}\subset\bigcup_{h\in H_{i}}\operatorname{\partial}V_{k,q_{h}}" display="inline"><mrow><mrow><msub><mi mathvariant="normal">∂</mi><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></msub><mo lspace="0.167em">⁡</mo><msub><mi>S</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>S</mi><mi>i</mi></msub></mrow><mo rspace="0.111em">⊂</mo><mrow><msub><mo>⋃</mo><mrow><mi>h</mi><mo>∈</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></msub><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><mi>h</mi></msub></mrow></msub></mrow></mrow></mrow></math>
+であることから
+<math id="S3.p1.m57" class="ltx_Math" alttext="\mathrm{Cdeg}(\{\operatorname{\partial}V\}\cup\{V_{k,s}\}_{k,s\in\mathbb{Z}_{%
+\geq 0}})\leq n" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mo stretchy="false">{</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><msub><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo stretchy="false">}</mo></mrow><mrow><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+を用いて</p>
+<table id="S4.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S3.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3.1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E1.m1" class="ltx_Math" alttext="\displaystyle\operatorname{\partial}V\cap\bigcap_{i=1}^{n}\operatorname{%
+\partial}S_{i}\subset\operatorname{\partial}V\cap\bigcap_{i=1}^{n}\bigcup_{h%
+\in H_{i}}\operatorname{\partial}V_{k,q_{h}}=\bigcup_{a_{1}\in H_{1},\dots,a_{%
+n+1}\in H_{n+1}}\operatorname{\partial}V\cap\bigcap_{i=1}^{n}\operatorname{%
+\partial}V_{k,q_{a_{i}}}=\emptyset" display="inline"><mrow><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo>∩</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>S</mi><mi>i</mi></msub></mrow></mrow></mrow><mo>⊂</mo><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow><mo>∩</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mi>h</mi><mo>∈</mo><msub><mi>H</mi><mi>i</mi></msub></mrow></munder></mstyle><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><mi>h</mi></msub></mrow></msub></mrow></mrow></mrow></mrow><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋃</mo><mrow><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>∈</mo><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi></mrow></mrow><mo>,</mo><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∈</mo><msub><mi>H</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></mrow></munder></mstyle><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></mrow><mo>∩</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mrow><mi>k</mi><mo>,</mo><msub><mi>q</mi><msub><mi>a</mi><mi>i</mi></msub></msub></mrow></msub></mrow></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+よって
+<a href="#Thmthm5" title="命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>
+より
+<math id="S3.p1.m58" class="ltx_Math" alttext="\mathrm{dim}\operatorname{\partial}V\leq n-1" display="inline"><mrow><mrow><mi>dim</mi><mo lspace="0.167em">⁢</mo><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><mi>V</mi></mrow></mrow><mo>≤</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mrow></math>
+である．
+以上で証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm8.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を正規空間で
+<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="\mathrm{dim}X\leq 0" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mn>0</mn></mrow></math>
+を満たしているとする．
+このとき
+<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+はclopen
+な開基を持つ．
+つまり
+<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\mathrm{ind}X\leq 0" display="inline"><mrow><mrow><mi>ind</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mn>0</mn></mrow></math>
+である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">点
+<math id="S3.p2.m1" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>
+をとる．
+そして<math id="S3.p2.m2" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>
+を
+<math id="S3.p2.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math>の
+開近傍とする．
+ここで
+開被覆
+<math id="S3.p2.m4" class="ltx_Math" alttext="\{O,X\setminus\{x\}\}" display="inline"><mrow><mo stretchy="false">{</mo><mi>O</mi><mo>,</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></math>
+を考える．
+<math id="S3.p2.m5" class="ltx_Math" alttext="\mathrm{dim}X\leq 0" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mn>0</mn></mrow></math>
+より
+<math id="S3.p2.m6" class="ltx_Math" alttext="P\subset O" display="inline"><mrow><mi>P</mi><mo>⊂</mo><mi>O</mi></mrow></math>
+かつ
+<math id="S3.p2.m7" class="ltx_Math" alttext="Q\subset X\setminus\{x\}" display="inline"><mrow><mi>Q</mi><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></math>
+で
+<math id="S3.p2.m8" class="ltx_Math" alttext="P\cup Q=X" display="inline"><mrow><mrow><mi>P</mi><mo>∪</mo><mi>Q</mi></mrow><mo>=</mo><mi>X</mi></mrow></math>となる
+開集合
+<math id="S3.p2.m9" class="ltx_Math" alttext="P,Q" display="inline"><mrow><mi>P</mi><mo>,</mo><mi>Q</mi></mrow></math>
+であって
+<math id="S3.p2.m10" class="ltx_Math" alttext="\mathrm{Cdeg}(\{P,Q\})\leq 1" display="inline"><mrow><mrow><mi>Cdeg</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>≤</mo><mn>1</mn></mrow></math>
+を満たすものが存在する．
+この条件から
+<math id="S3.p2.m11" class="ltx_Math" alttext="P\cap Q=\emptyset" display="inline"><mrow><mrow><mi>P</mi><mo>∩</mo><mi>Q</mi></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+そして<math id="S3.p2.m12" class="ltx_Math" alttext="P\cup Q=X" display="inline"><mrow><mrow><mi>P</mi><mo>∪</mo><mi>Q</mi></mrow><mo>=</mo><mi>X</mi></mrow></math>
+より
+<math id="S3.p2.m13" class="ltx_Math" alttext="P" display="inline"><mi>P</mi></math>と
+<math id="S3.p2.m14" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>はclopenである．
+このとき
+<math id="S3.p2.m15" class="ltx_Math" alttext="x\in P\subset O" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>P</mi><mo>⊂</mo><mi>O</mi></mrow></math>
+であるから
+<math id="S3.p2.m16" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+にclopenな開基が存在することがわかった．
+∎</p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を可分距離空間とする．
+このとき
+<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="\mathrm{ind}X\leq\mathrm{dim}X" display="inline"><mrow><mrow><mi>ind</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow></mrow></math>
+である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">定理
+<a href="#Thmthm7" title="定理 7. ‣ 3 可分距離空間 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+と
+補題
+<a href="#Thmthm8" title="補題 8. ‣ 3 可分距離空間 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>
+と帰納法を用いるとわかる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>おまけ:球面への写像の拡張問題が被覆次元を特徴付けること</h2>
+
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold"> </span>(Borsukのホモトピー拡張定理)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="n\in\mathbb{Z}_{\geq 0}" display="inline"><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℤ</mi><mrow><mi></mi><mo>≥</mo><mn>0</mn></mrow></msub></mrow></math><span class="ltx_text ltx_font_italic">
+で
+<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+を可算パラコンパクトな正規空間とし
+<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>をその閉集合とする．
+連続写像
+<math id="Thmthm10.p1.m4" class="ltx_Math" alttext="H\colon A\times[0,1]\to\mathbf{S}^{n}" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+について
+<math id="Thmthm10.p1.m5" class="ltx_Math" alttext="H(x,0)=f(x)" display="inline"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>で<math id="Thmthm10.p1.m6" class="ltx_Math" alttext="H(x,1)=g(x)" display="inline"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とおく．
+このときもしも
+<math id="Thmthm10.p1.m7" class="ltx_Math" alttext="F\colon X\to\mathbf{S}^{n}" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+で
+<math id="Thmthm10.p1.m8" class="ltx_Math" alttext="F|_{A}=f" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>
+となるものが存在するならば
+<math id="Thmthm10.p1.m9" class="ltx_Math" alttext="G\colon X\to\mathbf{S}^{n}" display="inline"><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+で
+<math id="Thmthm10.p1.m10" class="ltx_Math" alttext="G|_{A}=g" display="inline"><mrow><msub><mrow><mi>G</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>g</mi></mrow></math>となるものが存在する．
+さらに
+<math id="Thmthm10.p1.m11" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は<math id="Thmthm10.p1.m12" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>とホモトピックに選べる．
+つまり，空間全体に
+拡張されるという性質は
+(球面に値をとるホモトピーに関して)ホモトピー
+不変ということである．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が可算パラコンパクトなので
+<math id="S4.p1.m2" class="ltx_Math" alttext="X\times[0,1]" display="inline"><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></math>は正規である．
+定理の仮定にある<math id="S4.p1.m3" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>を用いて写像
+<math id="S4.p1.m4" class="ltx_Math" alttext="H\colon A\times[0,1]\to\mathbf{S}^{n}" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>を
+拡張子て
+<math id="S4.p1.m5" class="ltx_Math" alttext="H\colon X\times\{0\}\cup A\times[0,1]\to\mathbf{S}^{n}" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo>∪</mo><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>とみなす．
+もちろん<math id="S4.p1.m6" class="ltx_Math" alttext="X\times\{0\}" display="inline"><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></math>上で
+<math id="S4.p1.m7" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>は<math id="S4.p1.m8" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>に一致するということである．
+さらにこの<math id="S4.p1.m9" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>を
+<math id="S4.p1.m10" class="ltx_Math" alttext="\mathbb{R}^{n+1}" display="inline"><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></math>への写像とみなして
+Tietze-Urysohn
+の拡張定理を適応すると
+<math id="S4.p1.m11" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>の拡張
+<math id="S4.p1.m12" class="ltx_Math" alttext="P\colon X\times[0,1]\to\mathbb{R}^{n+1}" display="inline"><mrow><mi>P</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></math>
+を得る．
+そして
+<math id="S4.p1.m13" class="ltx_Math" alttext="W=P^{-1}(\mathbb{R}^{n+1}\setminus\{0\})" display="inline"><mrow><mi>W</mi><mo>=</mo><mrow><msup><mi>P</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>∖</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とし，
+<math id="S4.p1.m14" class="ltx_Math" alttext="Q\colon W\to\mathbf{S}^{n}" display="inline"><mrow><mi>Q</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>W</mi><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+を</p>
+<table id="S4.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S4.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4.1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S4.E1.m1" class="ltx_Math" alttext="\displaystyle Q(x,t)=\frac{P(x,t)}{\lVert P(x,t)\rVert}" display="inline"><mrow><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>P</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em">∥</mo></mrow></mfrac></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義すると
+<math id="S4.p1.m15" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math>は<math id="S4.p1.m16" class="ltx_Math" alttext="W" display="inline"><mi>W</mi></math>上連続である．
+もちろん
+<math id="S4.p1.m17" class="ltx_Math" alttext="X\times\{0\}\cup A\times[0,1]\subset W" display="inline"><mrow><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo>∪</mo><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow><mo>⊂</mo><mi>W</mi></mrow></math>
+であり
+<math id="S4.p1.m18" class="ltx_Math" alttext="Q|_{X\times\{0\}\cup A\times[0,1]}=P" display="inline"><mrow><msub><mrow><mi>Q</mi><mo stretchy="false">|</mo></mrow><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow><mo>∪</mo><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></msub><mo>=</mo><mi>P</mi></mrow></math>
+である
+(以上の議論は<math id="S4.p1.m19" class="ltx_Math" alttext="\mathbf{S}^{n}" display="inline"><msup><mi>𝐒</mi><mi>n</mi></msup></math>がANR(正規空間)ということをこの言葉を用いずに証明したものである)．
+そして
+<math id="S4.p1.m20" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+開集合
+<math id="S4.p1.m21" class="ltx_Math" alttext="U" display="inline"><mi>U</mi></math>
+を
+<math id="S4.p1.m22" class="ltx_Math" alttext="p\in X" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>X</mi></mrow></math>であってある近傍<math id="S4.p1.m23" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の<math id="S4.p1.m24" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>が存在し
+<math id="S4.p1.m25" class="ltx_Math" alttext="N\times[0,1]\subset W" display="inline"><mrow><mrow><mi>N</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo>⊂</mo><mi>W</mi></mrow></math>となるもの全体
+とする．
+すると
+Tube Lemma
+と
+<math id="S4.p1.m26" class="ltx_Math" alttext="A\times[0,1]\subset W" display="inline"><mrow><mrow><mi>A</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo>⊂</mo><mi>W</mi></mrow></math>
+から
+<math id="S4.p1.m27" class="ltx_Math" alttext="A\subset U" display="inline"><mrow><mi>A</mi><mo>⊂</mo><mi>U</mi></mrow></math>
+そして
+<math id="S4.p1.m28" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の正規性から
+ある連続写像
+<math id="S4.p1.m29" class="ltx_Math" alttext="u\colon X\to[0,1]" display="inline"><mrow><mi>u</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+で<math id="S4.p1.m30" class="ltx_Math" alttext="u(A)=1" display="inline"><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>かつ
+<math id="S4.p1.m31" class="ltx_Math" alttext="u(X\setminus U)=\{0\}" display="inline"><mrow><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><mi>U</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow></mrow></math>
+となるものが取れる．
+そこで
+<math id="S4.p1.m32" class="ltx_Math" alttext="L\colon X\times[0,1]\to\mathbf{S}^{n}" display="inline"><mrow><mi>L</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>を</p>
+<table id="S4.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S4.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4.2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S4.E2.m1" class="ltx_Math" alttext="\displaystyle L(x,t)=Q(x,t\cdot u(x))" display="inline"><mrow><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>Q</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mrow><mrow><mi>t</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>u</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+もちろんこれは連続であり
+<math id="S4.p1.m33" class="ltx_Math" alttext="G(x)=L(x,1)" display="inline"><mrow><mrow><mi>G</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>L</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow></mrow></math>は<math id="S4.p1.m34" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>の拡張になっていて，
+<math id="S4.p1.m35" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math>は<math id="S4.p1.m36" class="ltx_Math" alttext="F" display="inline"><mi>F</mi></math>とホモトピックである．
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">
+を正規空間とする．
+このとき
+<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+であることと以下の条件は同値である．
+<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の閉集合
+<math id="Thmthm11.p1.m4" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と
+連続写像<math id="Thmthm11.p1.m5" class="ltx_Math" alttext="f\colon A\to\mathbf{S}^{n}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+に対して連続写像
+<math id="Thmthm11.p1.m6" class="ltx_Math" alttext="F\colon X\to\mathbf{S}^{n}" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><msup><mi>𝐒</mi><mi>n</mi></msup></mrow></mrow></math>
+が存在し<math id="Thmthm11.p1.m7" class="ltx_Math" alttext="F|_{A}=f" display="inline"><mrow><msub><mrow><mi>F</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>を満たす．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S4.p2" class="ltx_para">
+<p class="ltx_p">位相的には同じなので
+<math id="S4.p2.m1" class="ltx_Math" alttext="\mathbf{S}^{n}" display="inline"><msup><mi>𝐒</mi><mi>n</mi></msup></math>と<math id="S4.p2.m2" class="ltx_Math" alttext="\partial\mathbf{I}^{n+1}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>
+を同一視する．
+まず最初に
+<math id="S4.p2.m3" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+を仮定する．
+このとき写像<math id="S4.p2.m4" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は
+写像<math id="S4.p2.m5" class="ltx_Math" alttext="f\colon A\to\partial\mathbf{I}^{n+1}" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></mrow></math>である．
+そして<math id="S4.p2.m6" class="ltx_Math" alttext="f=(f_{1},\dots,f_{n+1})" display="inline"><mrow><mi>f</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>f</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+と成分表示し</p>
+<table id="S4.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex1.m1" class="ltx_Math" alttext="K_{i}=\{\,x\in A\mid f_{i}(x)=-1\,\}" display="block"><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<table id="S4.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex2.m1" class="ltx_Math" alttext="L_{i}=\{\,x\in A\mid f_{i}(x)=1\,\}" display="block"><mrow><msub><mi>L</mi><mi>i</mi></msub><mo>=</mo><mrow><mo rspace="0.170em" stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><msub><mi>f</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow><mo lspace="0.170em" stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とすると
+<math id="S4.p2.m7" class="ltx_Math" alttext="K_{i}" display="inline"><msub><mi>K</mi><mi>i</mi></msub></math>と<math id="S4.p2.m8" class="ltx_Math" alttext="L_{i}" display="inline"><msub><mi>L</mi><mi>i</mi></msub></math>
+は
+<math id="S4.p2.m9" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+の閉集合でなおかつ
+<math id="S4.p2.m10" class="ltx_Math" alttext="K_{i}\cap L_{i}=\emptyset" display="inline"><mrow><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>∩</mo><msub><mi>L</mi><mi>i</mi></msub></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たしさらに</p>
+<table id="S4.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex3.m1" class="ltx_Math" alttext="A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})" display="block"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false" rspace="0em">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>L</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる．
+ここで
+定理
+<a href="#Thmthm5" title="命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>
+を
+<math id="S4.p2.m11" class="ltx_Math" alttext="\{K_{i}\}_{i=1}^{n+1}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>K</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup></math>
+と
+<math id="S4.p2.m12" class="ltx_Math" alttext="\{X\setminus L_{i}\}_{i=1}^{n+1}" display="inline"><msubsup><mrow><mo stretchy="false">{</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>L</mi><mi>i</mi></msub></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup></math>
+に適応し
+各
+<math id="S4.p2.m13" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>
+について
+開集合<math id="S4.p2.m14" class="ltx_Math" alttext="P_{i}" display="inline"><msub><mi>P</mi><mi>i</mi></msub></math>
+と
+<math id="S4.p2.m15" class="ltx_Math" alttext="Q_{i}" display="inline"><msub><mi>Q</mi><mi>i</mi></msub></math>
+で
+<math id="S4.p2.m16" class="ltx_Math" alttext="A_{i}\subset P_{i}" display="inline"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></math>
+と
+<math id="S4.p2.m17" class="ltx_Math" alttext="P_{i}\subset Q_{i}" display="inline"><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow></math>
+<math id="S4.p2.m18" class="ltx_Math" alttext="\operatorname{CL}Q_{i}\subset X\setminus L_{i}" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>L</mi><mi>i</mi></msub></mrow></mrow></math>
+でなおかつ
+<math id="S4.p2.m19" class="ltx_Math" alttext="\bigcap_{i=1}^{n+1}(\operatorname{CL}Q_{i}\setminus P_{i})=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mo lspace="0em" stretchy="false">(</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>∖</mo><msub><mi>P</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+を満たすものが存在する．
+ここでTietze-Urysohnの拡張定理から
+各
+<math id="S4.p2.m20" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について
+連続写像<math id="S4.p2.m21" class="ltx_Math" alttext="u_{i}\colon X\to[-1,1]" display="inline"><mrow><msub><mi>u</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+であって
+<math id="S4.p2.m22" class="ltx_Math" alttext="u_{i}(\operatorname{CL}P_{i})=-1" display="inline"><mrow><mrow><msub><mi>u</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow></math>
+かつ
+<math id="S4.p2.m23" class="ltx_Math" alttext="u_{i}(X\setminus Q_{i})=1" display="inline"><mrow><mrow><msub><mi>u</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+となるものが存在する．
+このとき
+<math id="S4.p2.m24" class="ltx_Math" alttext="u_{i}^{-1}(0)\subset Q_{i}\setminus\operatorname{CL}P_{i}\subset\operatorname{%
+CL}Q_{i}\setminus P_{i}" display="inline"><mrow><mrow><msubsup><mi>u</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><msub><mi>Q</mi><mi>i</mi></msub><mo>∖</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow><mo>⊂</mo><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>Q</mi><mi>i</mi></msub></mrow><mo>∖</mo><msub><mi>P</mi><mi>i</mi></msub></mrow></mrow></math>
+なので
+<math id="S4.p2.m25" class="ltx_Math" alttext="\bigcap_{i=1}^{n+1}u_{i}^{-1}(\{0\})=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><msubsup><mi>u</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+となる．
+もちろん
+各<math id="S4.p2.m26" class="ltx_Math" alttext="i" display="inline"><mi>i</mi></math>について
+<math id="S4.p2.m27" class="ltx_Math" alttext="K_{i}\subset u_{i}^{-1}(\{-1\})" display="inline"><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>⊂</mo><mrow><msubsup><mi>u</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>,
+<math id="S4.p2.m28" class="ltx_Math" alttext="L_{i}\subset u_{i}^{-1}(\{1\})" display="inline"><mrow><msub><mi>L</mi><mi>i</mi></msub><mo>⊂</mo><mrow><msubsup><mi>u</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+を満たすことに注意せよ．
+ここで</p>
+<table id="S4.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex4.m1" class="ltx_Math" alttext="u\colon X\to[-1,1]^{n+1}" display="block"><mrow><mi>u</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><msup><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を<math id="S4.p2.m29" class="ltx_Math" alttext="u=(u_{1},\dots,u_{n})" display="inline"><mrow><mi>u</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>u</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+と定義する．
+ここで
+<math id="S4.p2.m30" class="ltx_Math" alttext="A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})" display="inline"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><msubsup><mo rspace="0em">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>L</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と
+<math id="S4.p2.m31" class="ltx_Math" alttext="u_{i}" display="inline"><msub><mi>u</mi><mi>i</mi></msub></math>の性質から<math id="S4.p2.m32" class="ltx_Math" alttext="x\in A" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow></math>のとき
+<math id="S4.p2.m33" class="ltx_Math" alttext="u(x)" display="inline"><mrow><mi>u</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S4.p2.m34" class="ltx_Math" alttext="\partial\mathbf{I}^{n+1}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>
+への写像になる．ここで
+<math id="S4.p2.m35" class="ltx_Math" alttext="v=u|_{A}\colon A\to\partial\mathbf{I}^{n+1}" display="inline"><mrow><mrow><mi>v</mi><mo>=</mo><msub><mrow><mi>u</mi><mo rspace="0.278em" stretchy="false">|</mo></mrow><mi>A</mi></msub></mrow><mo rspace="0.278em">:</mo><mrow><mi>A</mi><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></mrow></math>とおく．
+そして
+<math id="S4.p2.m36" class="ltx_Math" alttext="h\colon[0,1]\to\mathbb{R}^{n+1}" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></math>
+を</p>
+<table id="S4.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex5.m1" class="ltx_Math" alttext="h(x,t)=(1-t)v(x)+tf(x)" display="block"><mrow><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>t</mi><mo>⁢</mo><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+<math id="S4.p2.m37" class="ltx_Math" alttext="A=\bigcup_{i=1}^{n+1}(K_{i}\cup L_{i})" display="inline"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><msubsup><mo rspace="0em">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>L</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+であることと
+<math id="S4.p2.m38" class="ltx_Math" alttext="K_{i}" display="inline"><msub><mi>K</mi><mi>i</mi></msub></math>, <math id="S4.p2.m39" class="ltx_Math" alttext="L_{i}" display="inline"><msub><mi>L</mi><mi>i</mi></msub></math>
+<math id="S4.p2.m40" class="ltx_Math" alttext="u_{i}" display="inline"><msub><mi>u</mi><mi>i</mi></msub></math>の定義から
+<math id="S4.p2.m41" class="ltx_Math" alttext="h(x,t)" display="inline"><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></math>は常にその成分のいずれかは絶対値が<math id="S4.p2.m42" class="ltx_Math" alttext="1" display="inline"><mn>1</mn></math>
+である．
+つまり<math id="S4.p2.m43" class="ltx_Math" alttext="\lVert h(x,t)\rVert_{\infty}\neq 0" display="inline"><mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub><mo>≠</mo><mn>0</mn></mrow></math>である．
+ここで
+<math id="S4.p2.m44" class="ltx_Math" alttext="\lVert*\rVert_{\infty}" display="inline"><msub><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">∗</mo><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></math>
+は<math id="S4.p2.m45" class="ltx_Math" alttext="\ell^{\infty}" display="inline"><msup><mi mathvariant="normal">ℓ</mi><mi mathvariant="normal">∞</mi></msup></math>-ノルムである．
+つまり<math id="S4.p2.m46" class="ltx_Math" alttext="H\colon X\times[0,1]\to\partial\mathbf{I}^{n+1}" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>X</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></mrow></math>
+を</p>
+<table id="S4.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.Ex6.m1" class="ltx_Math" alttext="H(x,t)=\frac{h(x,t)}{\lVert h(x,t)\rVert_{\infty}}" display="block"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><msub><mrow><mo fence="true" rspace="0em">∥</mo><mrow><mi>h</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo fence="true" lspace="0em">∥</mo></mrow><mi mathvariant="normal">∞</mi></msub></mfrac></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義できる．
+ここで
+<math id="S4.p2.m47" class="ltx_Math" alttext="H(x,0)=v(x)" display="inline"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>v</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+で
+<math id="S4.p2.m48" class="ltx_Math" alttext="H(x,1)=f(x)" display="inline"><mrow><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+に注意せよ．
+この<math id="S4.p2.m49" class="ltx_Math" alttext="H" display="inline"><mi>H</mi></math>
+は<math id="S4.p2.m50" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>と
+<math id="S4.p2.m51" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>を結ぶホモトピーであり，
+<math id="S4.p2.m52" class="ltx_Math" alttext="v" display="inline"><mi>v</mi></math>は<math id="S4.p2.m53" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>全体への連続拡張
+<math id="S4.p2.m54" class="ltx_Math" alttext="u" display="inline"><mi>u</mi></math>
+を持つから
+Borsukのホモトピー拡張定理
+(定理<a href="#Thmthm10" title="定理 10 (Borsukのホモトピー拡張定理). ‣ 4 おまけ:球面への写像の拡張問題が被覆次元を特徴付けること ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>)から
+<math id="S4.p2.m55" class="ltx_Math" alttext="f" display="inline"><mi>f</mi></math>は拡張<math id="S4.p2.m56" class="ltx_Math" alttext="F\colon X\to\partial\mathbf{I}^{n+1}" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></mrow></math>
+を持つ．</p>
+</div>
+<div id="S4.p3" class="ltx_para">
+<p class="ltx_p">逆に拡張問題が常に解けるとして，
+<math id="S4.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の次元の評価をしよう．
+<math id="S4.p3.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の
+濃度が<math id="S4.p3.m3" class="ltx_Math" alttext="n+1" display="inline"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></math>の
+任意の開集合族
+<math id="S4.p3.m4" class="ltx_Math" alttext="\{U_{1},\dots,U_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>
+と
+閉集合族
+<math id="S4.p3.m5" class="ltx_Math" alttext="\{F_{1},\dots,F_{n+1}\}" display="inline"><mrow><mo stretchy="false">{</mo><msub><mi>F</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow></math>で
+<math id="S4.p3.m6" class="ltx_Math" alttext="F_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+となるもの
+を考える．
+今
+<math id="S4.p3.m7" class="ltx_Math" alttext="H_{i}=X\setminus U_{i}" display="inline"><mrow><msub><mi>H</mi><mi>i</mi></msub><mo>=</mo><mrow><mi>X</mi><mo>∖</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow></math>
+として
+<math id="S4.p3.m8" class="ltx_Math" alttext="A=\bigcup_{i=1}^{n+1}(F_{i}\cup H_{i})" display="inline"><mrow><mi>A</mi><mo rspace="0.111em">=</mo><mrow><msubsup><mo rspace="0em">⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="false">(</mo><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>∪</mo><msub><mi>H</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とする．
+そして
+各<math id="S4.p3.m9" class="ltx_Math" alttext="u_{i}\colon A\to[-1,1]" display="inline"><mrow><msub><mi>u</mi><mi>i</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>
+を
+<math id="S4.p3.m10" class="ltx_Math" alttext="u_{i}(F_{i})=-1" display="inline"><mrow><mrow><msub><mi>u</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>F</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow></math>かつ
+<math id="S4.p3.m11" class="ltx_Math" alttext="u_{i}(H_{i})=1" display="inline"><mrow><mrow><msub><mi>u</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>1</mn></mrow></math>
+を満たすものとする．
+このとき<math id="S4.p3.m12" class="ltx_Math" alttext="u=(u_{1},\dots,u_{n+1})" display="inline"><mrow><mi>u</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>u</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></math>
+は
+<math id="S4.p3.m13" class="ltx_Math" alttext="\partial\mathbf{I}^{n+1}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>
+への写像になっている．
+さて，定理の仮定から
+連続写像
+<math id="S4.p3.m14" class="ltx_Math" alttext="g=(g_{1},\dots g_{n+1})\colon X\to\partial\mathbf{I}^{n+1}" display="inline"><mrow><mrow><mi>g</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>g</mi><mn>1</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>g</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mi>X</mi><mo rspace="0.1389em" stretchy="false">→</mo><mrow><mo lspace="0.1389em" rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mrow></mrow></math>
+で<math id="S4.p3.m15" class="ltx_Math" alttext="g|_{A}=u" display="inline"><mrow><msub><mrow><mi>g</mi><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>u</mi></mrow></math>
+となるものが存在する．
+そして
+<math id="S4.p3.m16" class="ltx_Math" alttext="V_{i}=g_{i}^{-1}([-1,0))" display="inline"><mrow><msub><mi>V</mi><mi>i</mi></msub><mo>=</mo><mrow><msubsup><mi>g</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+とすると
+<math id="S4.p3.m17" class="ltx_Math" alttext="\operatorname{CL}V_{i}\subset g_{i}^{-1}([-1,0])" display="inline"><mrow><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><msubsup><mi>g</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+で
+<math id="S4.p3.m18" class="ltx_Math" alttext="F_{i}\subset V_{i}\subset\operatorname{CL}V_{i}\subset U_{i}" display="inline"><mrow><msub><mi>F</mi><mi>i</mi></msub><mo>⊂</mo><msub><mi>V</mi><mi>i</mi></msub><mo>⊂</mo><mrow><mi>CL</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><msub><mi>U</mi><mi>i</mi></msub></mrow></math>
+を満たす．
+さらに
+<math id="S4.p3.m19" class="ltx_Math" alttext="\operatorname{\partial}V_{i}\subset g_{i}^{-1}(\{0\})" display="inline"><mrow><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><mo>⊂</mo><mrow><msubsup><mi>g</mi><mi>i</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math>
+なので<math id="S4.p3.m20" class="ltx_Math" alttext="g" display="inline"><mi>g</mi></math>が<math id="S4.p3.m21" class="ltx_Math" alttext="\partial\mathbf{I}^{n+1}" display="inline"><mrow><mo rspace="0em">∂</mo><msup><mi>𝐈</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></math>
+への写像であることから
+<math id="S4.p3.m22" class="ltx_Math" alttext="\bigcap_{i=1}^{n+1}\operatorname{\partial}V_{i}=\emptyset" display="inline"><mrow><mrow><msubsup><mo>⋂</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mrow><mi mathvariant="normal">∂</mi><mo lspace="0.167em">⁡</mo><msub><mi>V</mi><mi>i</mi></msub></mrow></mrow><mo>=</mo><mi mathvariant="normal">∅</mi></mrow></math>
+である．
+よって
+命題
+<a href="#Thmthm5" title="命題 5. ‣ 2 被覆次元 ‣ 可分距離空間上の 被覆次元と帰納次元" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>
+から
+<math id="S4.p3.m23" class="ltx_Math" alttext="\mathrm{dim}X\leq n" display="inline"><mrow><mrow><mi>dim</mi><mo>⁢</mo><mi>X</mi></mrow><mo>≤</mo><mi>n</mi></mrow></math>
+である．
+∎</p>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+電波通信
+「不動点定理」
+https://concious4410.hatenablog.com/entry/2017/08/27/182714
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+電波通信, 「次元論ショートコース：0次元から始める位相次元」,
+https://concious4410.hatenablog.com/entry/2022/03/12/161532
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+電波通信, 「不動点定理と同値な命題」,
+https://concious4410.hatenablog.com/entry/2026/04/05/181441
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+電波通信，
+「次元論からの領域不変性定理の証明」，
+https://concious4410.hatenablog.com/entry/2026/04/15/220550
+
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+M. G. Charalambous,
+<span class="ltx_text ltx_font_italic">Dimension theory. A selection of theorems and counterexamples</span> Springer/Atlantis Press (2019).
+
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">W. Hurewicz and H. Wallman,<span class="ltx_text ltx_font_italic">Dimension Theory</span>,Princeton Univ. Press,1948
+
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+A. R.
+Pears,
+<span class="ltx_text ltx_font_italic">Dimension theory of general spaces</span>,
+Cambridge University Press
+1975.
+
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+K. Morita,
+<span class="ltx_text ltx_font_italic">On the dimension of normal spaces, I. </span>,
+Japanese journal of mathematics :transactions and abstracts,
+vol 20
+(1950),
+pp. 5–36,
+DOI:
+10.4099/JJM1924.20.0_5
+
+</span>
+</li>
+</ul>
+</section><div class="ltx_rdf" about="" property="dcterms:creator"></div>
+<div class="ltx_rdf" about="" property="dcterms:subject"></div>
+<div class="ltx_rdf" about="" property="dcterms:subject"></div>
+<div class="ltx_rdf" about="" property="dcterms:title"></div>
+
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 17:23:08 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

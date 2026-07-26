@@ -12,6 +12,9 @@ from dempa_site.conversion.latexml import (
     _normalize_cross_row_braces,
     _normalize_math_inside_text,
     _normalize_nocite_all,
+    _normalize_left_exponent_function_space,
+    _normalize_norm_delimiters,
+    _normalize_sized_parentheses,
     _normalize_quotient_relation,
     has_document_title,
     run_latexml_trial,
@@ -124,6 +127,47 @@ class LaTeXMLTrialTest(unittest.TestCase):
         )
         self.assertEqual(1, nocite_count)
         self.assertEqual(r"\nocite{test}", normalized_nocite)
+
+        function_spaces = (
+            r"${}^{A}B$ ${}^{\omega_{0}}2$ "
+            r"${}^{<\omega_{0}}\omega_{0}$"
+        )
+        normalized_spaces, function_space_count = (
+            _normalize_left_exponent_function_space(function_spaces)
+        )
+        self.assertEqual(3, function_space_count)
+        self.assertEqual(
+            r"$B^{A}$ $2^{\omega_{0}}$ $\omega_{0}^{<\omega_{0}}$",
+            normalized_spaces,
+        )
+
+        norms = r"$\|x\|$ $\lVert y\lVert$ $||z||$ $|t|$"
+        normalized_norms, norm_count = _normalize_norm_delimiters(norms)
+        self.assertEqual(3, norm_count)
+        self.assertEqual(
+            r"$\lVert x\rVert$ $\lVert  y\rVert$ $\lVert z\rVert$ $|t|$",
+            normalized_norms,
+        )
+
+        reversed_norms = (
+            r"&=\rVert f(x)\lVert+\rVert g(x)\lVert" "\n"
+            r"&=\lVert f(x)\rVert+\lVert g(x)\rVert"
+        )
+        corrected_norms, reversed_count = _normalize_norm_delimiters(
+            reversed_norms
+        )
+        self.assertEqual(2, reversed_count)
+        self.assertEqual(
+            r"&=\lVert f(x)\rVert+\lVert g(x)\rVert" "\n"
+            r"&=\lVert f(x)\rVert+\lVert g(x)\rVert",
+            corrected_norms,
+        )
+
+        parentheses, parenthesis_count = _normalize_sized_parentheses(
+            r"\Bigr(A\Bigr)"
+        )
+        self.assertEqual(1, parenthesis_count)
+        self.assertEqual(r"\Bigl(A\Bigr)", parentheses)
         warnings, ignored = _effective_warning_lines(
             "Warning:expected:bibkeys Missing bibkeys local\n",
             '<a class="ltx_ref">resolved</a>',
