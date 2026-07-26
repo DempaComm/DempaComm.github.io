@@ -335,11 +335,17 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn("読書経路", explore)
         self.assertIn("原稿の系譜", explore)
         self.assertIn("原稿関係図", explore)
+        reading_paths = self.read("reading-paths/index.html")
+        self.assertNotIn("難易度", reading_paths)
 
         graph = json.loads(self.read("graph/paper-graph.json"))
         self.assertEqual(4, len(graph["nodes"]))
         self.assertTrue(any(node["title"] == "通常原稿" for node in graph["nodes"]))
         self.assertNotIn("数学", [tag["name"] for tag in graph["tags"]])
+        graph_page = self.read("graph/index.html")
+        self.assertIn("graph-zoom-in", graph_page)
+        self.assertIn("全体を表示", graph_page)
+        self.assertIn("ドラッグして移動", graph_page)
 
         lineage = json.loads(self.read("lineage/lineage.json"))
         normal = next(item for item in lineage["papers"] if item["slug"] == "2023-04-04-01")

@@ -934,6 +934,12 @@ footer .title-attribute {
   background: var(--white);
 }
 
+.graph-page .header-inner,
+.graph-page main,
+.graph-page footer {
+  width: min(1320px, calc(100% - 40px));
+}
+
 .graph-controls label {
   display: grid;
   gap: 6px;
@@ -955,6 +961,34 @@ footer .title-attribute {
   cursor: pointer;
 }
 
+.graph-view-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.graph-view-controls button {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.graph-view-controls button:hover,
+.graph-view-controls button:focus-visible {
+  border-color: var(--navy);
+}
+
+.graph-view-controls span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .graph-canvas {
   overflow: auto;
   border: 1px solid var(--line);
@@ -963,9 +997,16 @@ footer .title-attribute {
 
 #paper-graph {
   display: block;
-  min-width: 760px;
+  min-width: 900px;
   width: 100%;
-  min-height: 560px;
+  min-height: 720px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+#paper-graph.is-panning {
+  cursor: grabbing;
 }
 
 .graph-edge {
@@ -1039,5 +1080,6 @@ footer .title-attribute {
   .explore-grid { grid-template-columns: 1fr; }
   .portal-card-wide { grid-column: auto; }
   .graph-controls { grid-template-columns: 1fr; }
+  #paper-graph { min-height: 560px; }
   .lineage-timeline li { grid-template-columns: 1fr; gap: 4px; }
 }

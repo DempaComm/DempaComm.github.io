@@ -14,7 +14,7 @@
 `metric-spaces.json` などをコピーし、次を変更する。
 
 - `slug`: ファイル名から `.json` を除いた値
-- `title`, `description`, `difficulty`: 公開ページに表示する案内
+- `title`, `description`: 公開ページに表示する案内
 - `prerequisites`: 先に読む別の経路のslug。なければ空配列
 - `papers`: 原稿番号と、その段階で読む理由
 
@@ -28,8 +28,9 @@ JSON Schemaは `schemas/reading-path.schema.json` にある。公開時に次を
 ## 原稿の系譜を追記する
 
 自動的に、`published_at` を初出、`migration_record_id` を移行台帳、
-`approved_changes` を改訂として表示する。その他の出来事は各 `paper.json` の
-`history` に記録する。
+`approved_changes` を改訂として表示する。ただし、承認理由には個人情報除去などの内部事情が
+含まれ得るため、公開ページと `lineage.json` には理由の原文を出さず、改訂した事実と
+ファイル数だけを表示する。その他の公開してよい出来事は各 `paper.json` の `history` に記録する。
 
 ```json
 {

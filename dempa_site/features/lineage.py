@@ -40,7 +40,7 @@ def _events(paper: Paper) -> list[dict[str, str]]:
         {
             "recorded_at": change.approved_at,
             "kind": "revision",
-            "summary": change.reason,
+            "summary": f"公開原稿を改訂（{len(change.files)}ファイル）",
         }
         for change in paper.approved_changes
     )

@@ -22,13 +22,40 @@ GRAPH_SCRIPT = r"""(() => {
   const count = document.querySelector("#graph-count");
   const list = document.querySelector("#graph-paper-list");
   const reset = document.querySelector("#graph-reset");
+  const zoomIn = document.querySelector("#graph-zoom-in");
+  const zoomOut = document.querySelector("#graph-zoom-out");
+  const viewReset = document.querySelector("#graph-view-reset");
   const ns = "http://www.w3.org/2000/svg";
+  const initialView = {x: 0, y: 0, width: 1200, height: 820};
+  let view = {...initialView};
+  let pan = null;
   const make = (name, attrs = {}) => {
     const element = document.createElementNS(ns, name);
     Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
     return element;
   };
   const shorten = (value, length = 14) => value.length > length ? `${value.slice(0, length)}…` : value;
+  const applyView = () => svg.setAttribute("viewBox", `${view.x} ${view.y} ${view.width} ${view.height}`);
+  const resetView = () => {
+    view = {...initialView};
+    applyView();
+  };
+  const changeZoom = (factor, clientX = null, clientY = null) => {
+    const rect = svg.getBoundingClientRect();
+    const ratioX = clientX === null ? 0.5 : (clientX - rect.left) / rect.width;
+    const ratioY = clientY === null ? 0.5 : (clientY - rect.top) / rect.height;
+    const nextWidth = Math.max(300, Math.min(2400, view.width * factor));
+    const nextHeight = nextWidth * initialView.height / initialView.width;
+    const anchorX = view.x + view.width * ratioX;
+    const anchorY = view.y + view.height * ratioY;
+    view = {
+      x: anchorX - nextWidth * ratioX,
+      y: anchorY - nextHeight * ratioY,
+      width: nextWidth,
+      height: nextHeight
+    };
+    applyView();
+  };
 
   fetch("paper-graph.json")
     .then(response => {
@@ -73,9 +100,9 @@ GRAPH_SCRIPT = r"""(() => {
         }
 
         const positions = new Map();
-        const centerX = 500;
-        const centerY = 350;
-        const radius = Math.min(300, 95 + nodes.length * 5);
+        const centerX = 600;
+        const centerY = 400;
+        const radius = Math.min(350, 110 + nodes.length * 6);
         nodes.forEach((node, index) => {
           const angle = -Math.PI / 2 + (Math.PI * 2 * index / nodes.length);
           const ring = nodes.length > 24 && index % 2 ? radius * 0.68 : radius;
@@ -123,6 +150,7 @@ GRAPH_SCRIPT = r"""(() => {
           item.append(itemLink, meta);
           list.append(item);
         });
+        resetView();
       };
 
       tagSelect.addEventListener("change", draw);
@@ -132,6 +160,33 @@ GRAPH_SCRIPT = r"""(() => {
         yearSelect.value = "";
         draw();
       });
+      zoomIn.addEventListener("click", () => changeZoom(0.8));
+      zoomOut.addEventListener("click", () => changeZoom(1.25));
+      viewReset.addEventListener("click", resetView);
+      svg.addEventListener("wheel", event => {
+        event.preventDefault();
+        changeZoom(event.deltaY < 0 ? 0.86 : 1.16, event.clientX, event.clientY);
+      }, {passive: false});
+      svg.addEventListener("pointerdown", event => {
+        if (event.target.closest(".graph-node")) return;
+        pan = {pointerId: event.pointerId, x: event.clientX, y: event.clientY, viewX: view.x, viewY: view.y};
+        svg.setPointerCapture(event.pointerId);
+        svg.classList.add("is-panning");
+      });
+      svg.addEventListener("pointermove", event => {
+        if (!pan || pan.pointerId !== event.pointerId) return;
+        const rect = svg.getBoundingClientRect();
+        view.x = pan.viewX - (event.clientX - pan.x) * view.width / rect.width;
+        view.y = pan.viewY - (event.clientY - pan.y) * view.height / rect.height;
+        applyView();
+      });
+      const endPan = event => {
+        if (!pan || pan.pointerId !== event.pointerId) return;
+        pan = null;
+        svg.classList.remove("is-panning");
+      };
+      svg.addEventListener("pointerup", endPan);
+      svg.addEventListener("pointercancel", endPan);
       draw();
     })
     .catch(error => {
@@ -216,7 +271,13 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
         <button id="graph-reset" type="button">条件を戻す</button>
       </div>
       <p id="graph-count" class="paper-count" aria-live="polite">関係図を読み込み中です</p>
-      <div class="graph-canvas"><svg id="paper-graph" viewBox="0 0 1000 720" role="img" aria-label="タグを使った原稿関係図"></svg></div>
+      <div class="graph-view-controls" aria-label="関係図の表示操作">
+        <button id="graph-zoom-in" type="button" aria-label="関係図を拡大">＋ 拡大</button>
+        <button id="graph-zoom-out" type="button" aria-label="関係図を縮小">− 縮小</button>
+        <button id="graph-view-reset" type="button">全体を表示</button>
+        <span>余白をドラッグして移動、ホイールまたはボタンで拡大縮小できます。</span>
+      </div>
+      <div class="graph-canvas"><svg id="paper-graph" viewBox="0 0 1200 820" role="img" aria-label="タグを使った原稿関係図"></svg></div>
       <details class="graph-accessible-list">
         <summary>表示中の原稿を一覧で見る</summary>
         <ul id="graph-paper-list"></ul>

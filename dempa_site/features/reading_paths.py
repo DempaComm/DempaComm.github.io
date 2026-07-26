@@ -29,7 +29,6 @@ class ReadingPath:
     slug: str
     title: str
     description: str
-    difficulty: str
     prerequisites: tuple[str, ...]
     papers: tuple[ReadingStep, ...]
 
@@ -59,7 +58,6 @@ def _load_paths(catalog: SiteCatalog) -> tuple[ReadingPath, ...]:
                 slug=slug,
                 title=value["title"],
                 description=value["description"],
-                difficulty=value["difficulty"],
                 prerequisites=tuple(value["prerequisites"]),
                 papers=tuple(
                     ReadingStep(item["slug"], item["guide"], papers[item["slug"]])
@@ -105,14 +103,12 @@ def validate_reading_paths(catalog: SiteCatalog) -> None:
 
 
 def _path_card(path: ReadingPath) -> str:
-    prerequisites = (
-        " / 前提経路あり" if path.prerequisites else " / 前提経路なし"
-    )
+    prerequisites = "前提経路あり" if path.prerequisites else "前提経路なし"
     return f"""      <a class="explore-card" href="{path.slug}/">
         <span class="section-number">{len(path.papers)} PAPERS</span>
         <strong>{html.escape(path.title)}</strong>
         <span>{html.escape(path.description)}</span>
-        <small>{html.escape(path.difficulty + prerequisites)}</small>
+        <small>{prerequisites}</small>
       </a>"""
 
 
@@ -146,11 +142,13 @@ def _rendered_path_page(path: ReadingPath, all_paths: dict[str, ReadingPath]) ->
         <nav aria-label="経路内の前後の記事">{' '.join(navigation)}</nav>
       </li>"""
         )
+    intro = (
+        f'<section class="reading-path-intro">{prerequisite_links}</section>'
+        if prerequisite_links
+        else ""
+    )
     body = f"""    <p class="directory-back"><a href="../">← 読書経路一覧へ</a></p>
-    <section class="reading-path-intro">
-      <p><strong>難易度：</strong>{html.escape(path.difficulty)}</p>
-      {prerequisite_links}
-    </section>
+    {intro}
     <ol class="reading-path-steps">
 {chr(10).join(steps)}
     </ol>"""
@@ -205,7 +203,6 @@ def generate_reading_paths(catalog: SiteCatalog, output: Path) -> None:
                     "slug": path.slug,
                     "title": path.title,
                     "description": path.description,
-                    "difficulty": path.difficulty,
                     "prerequisites": list(path.prerequisites),
                     "papers": [
                         {"slug": step.slug, "guide": step.guide}
