@@ -17,6 +17,7 @@ from dempa_site.catalog.metadata import (
 )
 from dempa_site.config import MATH_SECTION_DETAILS, SITE_URL
 from dempa_site.errors import PaperToolError
+from dempa_site.files import write_json
 from dempa_site.features import (
     FeatureResult,
     FunctionFeature,
@@ -35,6 +36,7 @@ from dempa_site.features.relation_graph import generate_relation_graph
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
+from dempa_site.site.discovery import DISCOVERY_SCRIPT, paper_summary_data
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
 from dempa_site.site.rendering import (
@@ -223,6 +225,8 @@ def generate_discovery_files(context: StageContext) -> None:
         f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
         encoding="utf-8",
     )
+    write_json(output / "papers-summary.json", paper_summary_data(selected))
+    (output / "discovery.js").write_text(DISCOVERY_SCRIPT, encoding="utf-8")
 
 
 def generate_additional_features(

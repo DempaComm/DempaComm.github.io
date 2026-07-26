@@ -78,6 +78,39 @@
       </a>
     </section>
 
+    <section class="paper-discovery" aria-labelledby="discovery-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">SERENDIPITY</p>
+          <h2 id="discovery-title">この日・ランダム記事</h2>
+        </div>
+        <p>公開日や分野から、思いがけない原稿へ案内します。</p>
+      </div>
+      <div class="discovery-grid">
+        <article class="discovery-card" aria-live="polite">
+          <p class="section-number">ON THIS DAY</p>
+          <div id="today-paper"><p class="discovery-note">この日の記事を選んでいます…</p></div>
+        </article>
+        <article class="discovery-card" aria-live="polite">
+          <p class="section-number">RANDOM PAPER</p>
+          <div class="discovery-controls">
+            <label for="random-paper-scope">選ぶ範囲</label>
+            <select id="random-paper-scope">
+              <option value="all">全原稿</option>
+              <option value="substantial">断片ではないもの</option>
+              <option value="代数・組合せ">代数・組合せ</option>
+              <option value="位相・距離・幾何">位相・距離・幾何</option>
+              <option value="解析・測度・確率">解析・測度・確率</option>
+              <option value="その他">その他</option>
+            </select>
+            <button id="random-paper-button" type="button">別の記事を選ぶ</button>
+          </div>
+          <div id="random-paper"><p class="discovery-note">ランダム記事を選んでいます…</p></div>
+        </article>
+      </div>
+      <noscript><p><a href="archive/">JavaScriptを使わず全原稿から探す</a></p></noscript>
+    </section>
+
     <section class="latest-papers" aria-labelledby="papers-title">
       <div class="section-heading">
         <div>
@@ -181,5 +214,6 @@
   <footer>
     <p>数識電収 — 数学識電脳界溢出部位封神蔵収 <span class="title-attribute">私と放電</span></p>
   </footer>
+  <script src="discovery.js" defer></script>
 </body>
 </html>

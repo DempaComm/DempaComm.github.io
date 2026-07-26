@@ -353,6 +353,21 @@ class SiteOutputContractTest(unittest.TestCase):
         paper_page = self.read("papers/2023-04-04-01/index.html")
         self.assertIn("../../lineage/#paper-2023-04-04-01", paper_page)
 
+    def test_home_page_daily_and_random_discovery_data_are_generated(self) -> None:
+        home = self.read("index.html")
+        self.assertIn("この日・ランダム記事", home)
+        self.assertIn('src="discovery.js"', home)
+        summaries = json.loads(self.read("papers-summary.json"))
+        self.assertEqual(1, summaries["schema_version"])
+        self.assertEqual(4, len(summaries["papers"]))
+        self.assertEqual(
+            {"slug", "title", "published_at", "year", "math_section", "summary", "tags"},
+            set(summaries["papers"][0]),
+        )
+        script = self.read("discovery.js")
+        self.assertIn('paper.published_at.slice(5) === monthDay', script)
+        self.assertIn('paper.tags.includes("断片ではないもの")', script)
+
 
 if __name__ == "__main__":
     unittest.main()

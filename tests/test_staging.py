@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -121,6 +122,14 @@ class StagingPipelineTest(unittest.TestCase):
         generate_discovery_files(context)
         self.assertTrue((working / "feed.xml").is_file())
         self.assertTrue((working / "sitemap.xml").is_file())
+        summaries = json.loads(
+            (working / "papers-summary.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(1, summaries["schema_version"])
+        self.assertEqual(self.paper.slug, summaries["papers"][0]["slug"])
+        self.assertEqual(["数学", "試験"], summaries["papers"][0]["tags"])
+        discovery_script = (working / "discovery.js").read_text(encoding="utf-8")
+        self.assertIn("断片ではないもの", discovery_script)
         check_generated_links(context)
         self.assertEqual([], local_link_errors(working))
 
