@@ -7,6 +7,10 @@ LaTeXMLはTeX/LaTeXをXML、HTML、MathMLへ変換する公開リポジトリで
 - Homebrew: LaTeXML 0.8.8、public domain表記
 - 使用形式: HTML5 + Presentation MathML
 
+LaTeXMLが直接対応していない文書クラスは、原稿を変更せず
+`experiments/latexml-bindings/` の外置きbindingでHTML向けの文書構造へ対応させる。
+最初の対象は `ltjsarticle` で、ページ組版ではなくLaTeXMLの `article` 構造を利用する。
+
 ## 導入
 
 ```sh
@@ -33,6 +37,14 @@ python3 scripts/paper_tool.py latexml-trial
 `latexml.log` と、全体の `report.json` を確認する。出力先が既に空でない場合は上書きせず停止する。
 再試験では別名を指定する。
 
+変換には `--nocomments` を常に指定し、TeXコメントを派生HTMLへ残さない。`report.json` には
+変換元SHA-256、使用したbinding、題名保持、警告・エラー、`ltx_ERROR`、簡易個人情報検査、
+自動検査を通らなかった理由を記録する。
+
+原稿内の `\date` や `\today` が出力した日付は、変換後に
+`HTML変換日：YYYY年M月D日` へ置き換える。この日付はサイトのデプロイ日ではなく、実際に
+LaTeXML変換を実行した日であり、同じ日付と時刻を `report.json` にも記録する。
+
 ```sh
 python3 scripts/paper_tool.py latexml-trial --output _experiments/latexml-2
 ```
@@ -47,13 +59,29 @@ python3 scripts/paper_tool.py latexml-trial 2015-08-28-01 \
 ## 人が確認する項目
 
 1. 題名、著者名などに公開したくない情報がないか。
-2. 日本語が欠落・文字化けしていないか。
-3. 数式、定理環境、番号、相互参照が対応しているか。
-4. 図版、TikZ、BibTeX、独自BSTが欠落していないか。
-5. 元PDFと意味が変わっていないか。
+2. HTML変換日が実際の変換日と一致しているか。
+3. 日本語が欠落・文字化けしていないか。
+4. 数式、定理環境、番号、相互参照が対応しているか。
+5. 図版、TikZ、BibTeX、独自BSTが欠落していないか。
+6. 元PDFと意味が変わっていないか。
 
 `report.json` の `publishable` は常に `false`、`manual_review_required` は常に `true` である。
 変換の成功だけでは公開承認にならない。正式公開機能は、この試験結果を見てから別途実装する。
+
+`automatic_checks_passed` が `true` になる条件は、LaTeXMLの警告・エラーがなく、生成HTMLに
+`ltx_ERROR` がなく、題名が保持され、簡易個人情報検査にも確認事項がないことである。この条件を
+満たしても、数式、定理番号、相互参照、内容を元PDFと目視比較するまで公開してはならない。
+
+## 単純なTeXの限定パイロット
+
+最初は「素数の無限性」だけを別出力へ変換する。
+
+```sh
+python3 scripts/paper_tool.py latexml-trial 2015-08-28-01 \
+  --output _experiments/latexml-primes-pilot
+```
+
+HTML版はPDF・TeXを置き換える正本ではなく、全確認を終えた原稿だけに追加できる派生版として扱う。
 
 ## 2026-07-26の初回結果
 

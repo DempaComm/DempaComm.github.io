@@ -18,6 +18,10 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.root = Path(self.temporary.name)
         paper_dir = self.root / "papers" / "2026-07-26-01"
         paper_dir.mkdir(parents=True)
+        binding_dir = self.root / "experiments" / "latexml-bindings"
+        binding_dir.mkdir(parents=True)
+        self.binding = binding_dir / "article.cls.ltxml"
+        self.binding.write_text("LoadClass('article');\n1;\n", encoding="utf-8")
         source = paper_dir / "main.tex"
         source.write_text("\\documentclass{article}\\begin{document}test\\end{document}", encoding="utf-8")
         digest = sha256_file(source)
@@ -67,12 +71,18 @@ class LaTeXMLTrialTest(unittest.TestCase):
                 )
 
     def test_success_writes_derived_html_and_review_report_only(self) -> None:
+        conversion_commands = []
+
         def fake_run(command, **_kwargs):
             if "--VERSION" in command:
                 return subprocess.CompletedProcess(command, 0, "latexmlc version 0.8.8\n", "")
+            conversion_commands.append(command)
             destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
             log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
-            destination.write_text("<html><body>converted</body></html>", encoding="utf-8")
+            destination.write_text(
+                '<html><body><h1>LaTeXML試験</h1><div class="ltx_dates">(today)</div></body></html>',
+                encoding="utf-8",
+            )
             log.write_text("conversion log", encoding="utf-8")
             return subprocess.CompletedProcess(command, 0, "", "")
 
@@ -90,9 +100,45 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertEqual("generated", report["results"][0]["status"])
         self.assertTrue(report["manual_review_required"])
         self.assertFalse(report["publishable"])
+        self.assertTrue(report["results"][0]["automatic_checks_passed"])
+        self.assertTrue(report["results"][0]["comments_removed"])
+        self.assertTrue(report["results"][0]["html_conversion_date_visible"])
+        converted_html = (output / self.paper.slug / "index.html").read_text(encoding="utf-8")
+        self.assertIn("HTML変換日：", converted_html)
+        self.assertNotIn("(today)", converted_html)
+        self.assertEqual(digest := sha256_file(self.paper.source_path.parent / "main.tex"), report["results"][0]["source_sha256"])
+        self.assertEqual(digest, self.paper.files[0].sha256)
+        self.assertEqual("experiments/latexml-bindings/article.cls.ltxml", report["binding_files"][0]["path"])
+        self.assertIn("--nocomments", conversion_commands[0])
+        self.assertTrue(any(value.startswith("--path=") for value in conversion_commands[0]))
         self.assertTrue((output / self.paper.slug / "index.html").is_file())
         self.assertTrue((output / "report.json").is_file())
         self.assertEqual("\\documentclass{article}\\begin{document}test\\end{document}", (self.paper.source_path.parent / "main.tex").read_text(encoding="utf-8"))
+
+    def test_warning_blocks_automatic_checks(self) -> None:
+        def fake_run(command, **_kwargs):
+            if "--VERSION" in command:
+                return subprocess.CompletedProcess(command, 0, "latexmlc version 0.8.8\n", "")
+            destination = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--destination=")))
+            log = Path(next(value.split("=", 1)[1] for value in command if value.startswith("--log=")))
+            destination.write_text("<html><body>LaTeXML試験</body></html>", encoding="utf-8")
+            log.write_text("Warning:test A reviewable warning\n", encoding="utf-8")
+            return subprocess.CompletedProcess(command, 0, "", "")
+
+        with patch("dempa_site.conversion.latexml.shutil.which", return_value="/test/latexmlc"), patch(
+            "dempa_site.conversion.latexml.subprocess.run", side_effect=fake_run
+        ):
+            report = run_latexml_trial(
+                root=self.root,
+                papers=self.papers,
+                output=self.root / "warning-trial",
+                requested_slugs=[self.paper.slug],
+            )
+
+        result = report["results"][0]
+        self.assertEqual("generated-with-warnings", result["status"])
+        self.assertFalse(result["automatic_checks_passed"])
+        self.assertEqual(["LaTeXML警告が1件あります"], result["blocking_reasons"])
 
 
 if __name__ == "__main__":
