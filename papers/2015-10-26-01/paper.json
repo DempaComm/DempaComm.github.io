@@ -32,7 +32,7 @@
       "label": "TeXソース",
       "public": true,
       "original_sha256": "d963172c67f190a1d4f4edd7462cf4b29e7661863f2ed23ee1c4fa000db99950",
-      "sha256": "d963172c67f190a1d4f4edd7462cf4b29e7661863f2ed23ee1c4fa000db99950"
+      "sha256": "dd4f56d749e33b1c0eff3dd68a5ad9b4ad3561960116a390fa882616b634b048"
     },
     {
       "path": "published.pdf",
@@ -41,17 +41,53 @@
       "public": true,
       "original_sha256": "ecb43d14d076eac4135738b18813ac2babf8a8336622cc25e4ba2ff4c3652033",
       "sha256": "ecb43d14d076eac4135738b18813ac2babf8a8336622cc25e4ba2ff4c3652033"
+    },
+    {
+      "path": "html/LaTeXML.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4",
+      "sha256": "e7bbb8614cb5065aa24946d398ff8bfbe6c90c2dcffb33d76010e0470873b0b4"
+    },
+    {
+      "path": "html/index.html",
+      "role": "derived-html",
+      "label": "HTML版を読む（自動変換・未目視）",
+      "public": true,
+      "original_sha256": "b49218ae9957b055633a563a1175b41c80385a7b8a2e668eb73e52c4994beb13",
+      "sha256": "b49218ae9957b055633a563a1175b41c80385a7b8a2e668eb73e52c4994beb13"
+    },
+    {
+      "path": "html/ltx-article.css",
+      "role": "derived-asset",
+      "label": "",
+      "public": true,
+      "original_sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102",
+      "sha256": "ff496feba79de089ccd24a97da63bb0db859b10c1c68d2d9576f402a0473a102"
     }
   ],
-  "approved_changes": [],
+  "approved_changes": [
+    {
+      "approved_at": "2026-07-26T10:48:51+00:00",
+      "reason": "LaTeXML変換で判明した明白なTeX誤記の修正",
+      "files": [
+        {
+          "path": "main.tex",
+          "from_sha256": "d963172c67f190a1d4f4edd7462cf4b29e7661863f2ed23ee1c4fa000db99950",
+          "to_sha256": "dd4f56d749e33b1c0eff3dd68a5ad9b4ad3561960116a390fa882616b634b048"
+        }
+      ]
+    }
+  ],
   "privacy_reviews": [
     {
       "path": "main.tex",
-      "status": "overridden",
-      "reason": "TeX原稿との対応、抽出テキストとPDFメタデータ、全ページ画像を確認済み。Popplerの日本語フォント警告のみ。",
-      "source_sha256": "d963172c67f190a1d4f4edd7462cf4b29e7661863f2ed23ee1c4fa000db99950",
+      "status": "reviewed",
+      "reason": "",
+      "source_sha256": "dd4f56d749e33b1c0eff3dd68a5ad9b4ad3561960116a390fa882616b634b048",
       "inspection_status": "completed",
-      "recorded_at": "2026-07-18T05:03:04+00:00"
+      "recorded_at": "2026-07-26T10:48:51+00:00"
     },
     {
       "path": "published.pdf",
@@ -61,5 +97,16 @@
       "inspection_status": "failed",
       "recorded_at": "2026-07-18T05:03:04+00:00"
     }
-  ]
+  ],
+  "html_version": {
+    "status": "automatic",
+    "generator": "LaTeXML",
+    "generator_version": "latexmlc (LaTeXML version 0.8.8)",
+    "generated_at": "2026-07-26T19:45:39+09:00",
+    "source_path": "main.tex",
+    "source_sha256": "dd4f56d749e33b1c0eff3dd68a5ad9b4ad3561960116a390fa882616b634b048",
+    "path": "html/index.html",
+    "label": "HTML版を読む（自動変換・未目視）",
+    "reviewed_at": "2026-07-26T19:49:07+09:00"
+  }
 }

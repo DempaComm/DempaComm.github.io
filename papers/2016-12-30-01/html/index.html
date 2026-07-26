@@ -1,0 +1,487 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>LOTSの位相の基本</title>
+<!--Generated on Sun Jul 26 19:46:05 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2016-12-30-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>線形順序位相空間のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../main.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">LOTSの位相の基本</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">電波通信
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">うろ覚えで書いたので標準的な用語と異なるかもしれません。</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>定義など</h2>
+
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 1</span></span><span class="ltx_text ltx_font_bold"> </span>(線形順序)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">集合<math id="Thmthm1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の二項関係<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="R" display="inline"><mi>R</mi></math>が線形順序であるとは</span></p>
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i1.p1.m1" class="ltx_Math" alttext="\forall a\in X\ aRa" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>a</mi></mrow><mo>∈</mo><mrow><mi>X</mi><mo lspace="0.500em">⁢</mo><mi>a</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>a</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i2.p1.m1" class="ltx_Math" alttext="\forall a,b\in X\ aRb\land bRa\Longrightarrow a=b" display="inline"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>a</mi></mrow><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mrow><mi>X</mi><mo lspace="0.500em">⁢</mo><mi>a</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>b</mi></mrow><mo>∧</mo><mrow><mi>b</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>a</mi></mrow></mrow><mo stretchy="false">⟹</mo><mi>a</mi><mo>=</mo><mi>b</mi></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i3.p1.m1" class="ltx_Math" alttext="\forall a,b,c\in X\ aRb\land bRc\Longrightarrow aRc" display="inline"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>a</mi></mrow><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi></mrow><mo>∈</mo><mrow><mrow><mi>X</mi><mo lspace="0.500em">⁢</mo><mi>a</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>b</mi></mrow><mo>∧</mo><mrow><mi>b</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>c</mi></mrow></mrow><mo stretchy="false">⟹</mo><mrow><mi>a</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>c</mi></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(4)</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p class="ltx_p"><math id="S1.I1.i4.p1.m1" class="ltx_Math" alttext="\forall a,b\in X\ aRb\lor bRa" display="inline"><mrow><mrow><mrow><mo rspace="0.167em">∀</mo><mi>a</mi></mrow><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mrow><mrow><mi>X</mi><mo lspace="0.500em">⁢</mo><mi>a</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>b</mi></mrow><mo>∨</mo><mrow><mi>b</mi><mo>⁢</mo><mi>R</mi><mo>⁢</mo><mi>a</mi></mrow></mrow></mrow></math><span class="ltx_text ltx_font_italic"></span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことを言う。慣例に従い線形順序を<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="\leq" display="inline"><mo>≤</mo></math>などと書き表すことにする。また、</span></p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="a&lt;b\iff a\leq b\land a\neq b" display="block"><mrow><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><mo stretchy="false">⇔</mo><mrow><mi>a</mi><mo>≤</mo><mrow><mi>b</mi><mo>∧</mo><mi>a</mi></mrow><mo>≠</mo><mi>b</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 2</span></span><span class="ltx_text ltx_font_bold"> </span>(部分線形順序集合)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の部分集合<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について<math id="Thmthm2.p1.m3" class="ltx_Math" alttext="\leq" display="inline"><mo>≤</mo></math>を<math id="Thmthm2.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>に制限した関係を<math id="Thmthm2.p1.m5" class="ltx_Math" alttext="\leq" display="inline"><mo>≤</mo></math>の<math id="Thmthm2.p1.m6" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>のへの制限といい、<math id="Thmthm2.p1.m7" class="ltx_Math" alttext="\leq_{S}" display="inline"><msub><mo>≤</mo><mi>S</mi></msub></math>と書いてみたりするが、しばしば同じ記号<math id="Thmthm2.p1.m8" class="ltx_Math" alttext="\leq" display="inline"><mo>≤</mo></math>を流用してしまう。大体文脈で分かるので問題ないのだが、区別する必要がある場合もある。このとき<math id="Thmthm2.p1.m9" class="ltx_Math" alttext="(S,\leq_{S})" display="inline"><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><msub><mo lspace="0em" rspace="0em">≤</mo><mi>S</mi></msub><mo stretchy="false">)</mo></mrow></math>を<math id="Thmthm2.p1.m10" class="ltx_Math" alttext="(X.\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mrow><mi>X</mi><mo lspace="0em" rspace="0.0835em">.</mo><mo lspace="0.0835em" rspace="0em">≤</mo></mrow><mo stretchy="false">)</mo></mrow></math>の部分線形順序集合という。</span></p>
+</div>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 3</span></span><span class="ltx_text ltx_font_bold"> </span>(順序稠密性、順序の意味で稠密性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm3.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の部分集合<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>が（順序の意味で）稠密であるとは<math id="Thmthm3.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の二元<math id="Thmthm3.p1.m4" class="ltx_Math" alttext="a,b\in X" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>について<math id="Thmthm3.p1.m5" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の元<math id="Thmthm3.p1.m6" class="ltx_Math" alttext="c" display="inline"><mi>c</mi></math>が存在して</span></p>
+<table id="S1.Ex2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex2.m1" class="ltx_Math" alttext="a&lt;c&lt;b" display="block"><mrow><mi>a</mi><mo>&lt;</mo><mi>c</mi><mo>&lt;</mo><mi>b</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすことを言う。これは順序位相における稠密性と同じことである。</span></p>
+</div>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の元<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="a" display="inline"><mi>a</mi></math>が<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上界であるとは</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\forall x\in S\ x\leq a" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mi>S</mi><mo lspace="0.500em">⁢</mo><mi>x</mi></mrow><mo>≤</mo><mi>a</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすときに言う。</span></p>
+</div>
+<div id="Thmthm4.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm4.p2.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の元<math id="Thmthm4.p2.m2" class="ltx_Math" alttext="b" display="inline"><mi>b</mi></math>が<math id="Thmthm4.p2.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の下界であるとは</span></p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="\forall x\in S\ b\leq x" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>x</mi></mrow><mo>∈</mo><mrow><mi>S</mi><mo lspace="0.500em">⁢</mo><mi>b</mi></mrow><mo>≤</mo><mi>x</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 5</span></span><span class="ltx_text ltx_font_bold"> </span>(<math id="Thmthm5.m1" class="ltx_Math" alttext="\sup,\inf,\max,\min" display="inline"><mrow><mo rspace="0em">sup</mo><mo>,</mo><mo lspace="0em" rspace="0em">inf</mo><mo>,</mo><mi>max</mi><mo>,</mo><mi>min</mi></mrow></math>)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の元<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>が<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上界でありかつ</span></p>
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\forall y&lt;s\ \exists x\in S\ y&lt;x\leq s" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>y</mi></mrow><mo>&lt;</mo><mrow><mi>s</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><mi>S</mi><mo lspace="0.500em">⁢</mo><mi>y</mi></mrow><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mi>s</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たすとき<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>を<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上限といい<math id="Thmthm5.p1.m6" class="ltx_Math" alttext="\sup S" display="inline"><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow></math>などと書き表す。特に<math id="Thmthm5.p1.m7" class="ltx_Math" alttext="\sup S\in S" display="inline"><mrow><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow><mo>∈</mo><mi>S</mi></mrow></math>のとき<math id="Thmthm5.p1.m8" class="ltx_Math" alttext="\sup S" display="inline"><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow></math>は<math id="Thmthm5.p1.m9" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の最大元といい<math id="Thmthm5.p1.m10" class="ltx_Math" alttext="\max S" display="inline"><mrow><mi>max</mi><mo lspace="0.167em">⁡</mo><mi>S</mi></mrow></math>などと表す。
+双対的に<math id="Thmthm5.p1.m11" class="ltx_Math" alttext="\inf S" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow></math>が定義される。</span></p>
+</div>
+<div id="Thmthm5.p2" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm5.p2.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math><span class="ltx_text ltx_font_italic">の元<math id="Thmthm5.p2.m2" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>が<math id="Thmthm5.p2.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の下限であるとは<math id="Thmthm5.p2.m4" class="ltx_Math" alttext="t" display="inline"><mi>t</mi></math>は<math id="Thmthm5.p2.m5" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の下界で</span></p>
+<table id="S1.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex6.m1" class="ltx_Math" alttext="\forall y&gt;t\ \exists x\in S\ t\leq x&lt;y" display="block"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>y</mi></mrow><mo>&gt;</mo><mrow><mi>t</mi><mo lspace="0.667em">⁢</mo><mrow><mo rspace="0.167em">∃</mo><mi>x</mi></mrow></mrow><mo>∈</mo><mrow><mi>S</mi><mo lspace="0.500em">⁢</mo><mi>t</mi></mrow><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つときに言い、<math id="Thmthm5.p2.m6" class="ltx_Math" alttext="\inf S" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow></math>などと書く。<math id="Thmthm5.p2.m7" class="ltx_Math" alttext="\inf S\in S" display="inline"><mrow><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow><mo>∈</mo><mi>S</mi></mrow></math>のとき<math id="Thmthm5.p2.m8" class="ltx_Math" alttext="\min S" display="inline"><mrow><mi>min</mi><mo lspace="0.167em">⁡</mo><mi>S</mi></mrow></math>だとか書く。</span></p>
+</div>
+<div id="Thmthm5.p3" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">上限と下限は常に存在するわけではないことに注意せよ。</span></p>
+</div>
+</div>
+<div id="Thmcaux1" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux1.p1.m1" class="ltx_Math" alttext="\sup S" display="inline"><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow></math><span class="ltx_text ltx_font_italic">は<math id="Thmcaux1.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上界の最小値であり、<math id="Thmcaux1.p1.m3" class="ltx_Math" alttext="\inf S" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow></math>は<math id="Thmcaux1.p1.m4" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の下界の最大限である。</span></p>
+</div>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 6</span></span><span class="ltx_text ltx_font_bold"> </span>(順序完備性)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序空間<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>が順序完備であるとは、<math id="Thmthm6.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の非空な部分集合<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>について<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="\inf S" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow></math>と<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="\sup S" display="inline"><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow></math>が存在するときに言う。</span></p>
+</div>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 7</span></span><span class="ltx_text ltx_font_bold"> </span>(区間)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>と<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="a,b\in X" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>について</span></p>
+<table id="S3.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E1.m1" class="ltx_Math" alttext="\displaystyle(a,b)=\{x\in X\mid a&lt;x&lt;b\}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>b</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E2.m1" class="ltx_Math" alttext="\displaystyle(a,b]=\{x\in X\mid a&lt;x\leq b\}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mi>b</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E3.m1" class="ltx_Math" alttext="\displaystyle[a,b)=\{x\in X\mid a\leq x&lt;b\}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>b</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E4.m1" class="ltx_Math" alttext="\displaystyle[a,b]=\{x\in X\mid a\leq x\leq b\}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>≤</mo><mi>x</mi><mo>≤</mo><mi>b</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">と定義する。それぞれ開区間、半開区間、閉区間という。また</span></p>
+<table id="S3.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E5.m1" class="ltx_Math" alttext="\displaystyle(a,\to)=\{x\in X\mid a&lt;x\}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(6)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E6.m1" class="ltx_Math" alttext="\displaystyle(\leftarrow,a)=\{x\in X\mid x&lt;a\}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(7)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E7.m1" class="ltx_Math" alttext="\displaystyle[a,\to)=\{x\in X\mid a\leq x\}" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>≤</mo><mi>x</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S1.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(8)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E8.m1" class="ltx_Math" alttext="\displaystyle(\leftarrow,a]=\{x\in X\mid x\leq a\}" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>x</mi><mo>≤</mo><mi>a</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">も無限開区間、無限閉区間などという。</span></p>
+</div>
+</div>
+<div id="Thmcaux2" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmcaux2.p1.m1" class="ltx_Math" alttext="b\leq a" display="inline"><mrow><mi>b</mi><mo>≤</mo><mi>a</mi></mrow></math><span class="ltx_text ltx_font_italic">のとき、<math id="Thmcaux2.p1.m2" class="ltx_Math" alttext="(a,b)=\O" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mi>Ø</mi></mrow></math>に注意せよ。</span></p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">線形順序集合<math id="Thmthm8.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>について<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の開区間及び無限開区間全体の族は開基の公理を充たす。この開基から生成される位相を<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の順序位相といい、ここでは<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="\mathfrak{O}_{\leq}" display="inline"><msub><mi>𝔒</mi><mo>≤</mo></msub></math>と書くことにしよう。何らかの線形順序集合の順序位相と同相になっている位相空間をLOTS(Linearly Ordered TopolTogical Space)（線形順序位相空間）という。</span></p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>性質</h2>
+
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">LOTSはハウスドルフ空間である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">線形順序位相空間<math id="S2.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の二点<math id="S2.p1.m2" class="ltx_Math" alttext="a,b" display="inline"><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></math>を任意に与える。このとき<math id="S2.p1.m3" class="ltx_Math" alttext="a&lt;b" display="inline"><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow></math>としても一般性を失わない。</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">Case1:<math id="S2.p2.m1" class="ltx_Math" alttext="(a,b)\neq\O" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>≠</mo><mi>Ø</mi></mrow></math>のとき;<math id="S2.p2.m2" class="ltx_Math" alttext="c\in(a,b)" display="inline"><mrow><mi>c</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mrow></math>をとると、<math id="S2.p2.m3" class="ltx_Math" alttext="a\in(\leftarrow,c),\ b\in(c,\to)" display="inline"><mrow><mrow><mi>a</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mi>b</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow></mrow></mrow></math>であるからわかる。</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">Case2:<math id="S2.p3.m1" class="ltx_Math" alttext="(a,b)=\O" display="inline"><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mi>Ø</mi></mrow></math>のとき;この状況のもと、<math id="S2.p3.m2" class="ltx_Math" alttext="(a,\to)=[b,\to),(\leftarrow,b)=(\leftarrow,a]" display="inline"><mrow><mrow><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">[</mo><mi>b</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em" stretchy="false">←</mo><mo>,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math>であるからわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmcaux3" class="ltx_theorem ltx_theorem_cau">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmcaux3.p1" class="ltx_para">
+<p class="ltx_p">実は一般にLOTSは単調正規という結構強めの分離公理を充たす。どのくらいの強さかというと、単調正規ならば遺伝的族正規であるくらいの強さである。詳しくは
+<br class="ltx_break">R.W.Heath, D.J.Lutzer and P.L.zenor, <span class="ltx_text ltx_font_italic">Monotonically Normal spaces</span>, Trans.Amer.Math.Soc.178(1973), p481-493
+を参照のこと</p>
+</div>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">LOTS<math id="Thmthm10.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の閉集合<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>に下限が存在するならば、<math id="Thmthm10.p1.m3" class="ltx_Math" alttext="\inf A\in A" display="inline"><mrow><mrow><mo rspace="0.167em">inf</mo><mi>A</mi></mrow><mo>∈</mo><mi>A</mi></mrow></math>。上限についても同様。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">下限の定義から、<math id="S2.p4.m1" class="ltx_Math" alttext="\inf A" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>A</mi></mrow></math>は<math id="S2.p4.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>の触点になるのでわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math><span class="ltx_text ltx_font_italic">が順序完備であることと、<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="(X,\mathfrak{O}_{\leq})" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>𝔒</mi><mo>≤</mo></msub><mo stretchy="false">)</mo></mrow></math>がコンパクトであることは同値である。</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.p5" class="ltx_para">
+<p class="ltx_p">[順序完備<math id="S2.p5.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>コンパクト]</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p"><math id="S2.p6.m1" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>を<math id="S2.p6.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の任意の開被覆としよう。<math id="S2.p6.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>には最小値と最大値が存在するので<math id="S2.p6.m4" class="ltx_Math" alttext="a=\min X,\ b=\max S" display="inline"><mrow><mrow><mi>a</mi><mo>=</mo><mrow><mi>min</mi><mo lspace="0.167em">⁡</mo><mi>X</mi></mrow></mrow><mo rspace="0.667em">,</mo><mrow><mi>b</mi><mo>=</mo><mrow><mi>max</mi><mo lspace="0.167em">⁡</mo><mi>S</mi></mrow></mrow></mrow></math>しよう。そして</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="S=\{x\in X\mid[a,x]\text{は}\mathcal{U}\text{の有限部分族で被覆される}\}" display="block"><mrow><mi>S</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo>⁢</mo><mtext>は</mtext><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒰</mi><mo>⁢</mo><mtext>の有限部分族で被覆される</mtext></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">とおく。<math id="S2.p6.m5" class="ltx_Math" alttext="a\in S" display="inline"><mrow><mi>a</mi><mo>∈</mo><mi>S</mi></mrow></math>なので<math id="S2.p6.m6" class="ltx_Math" alttext="S\neq\O" display="inline"><mrow><mi>S</mi><mo>≠</mo><mi>Ø</mi></mrow></math>である。また、<math id="S2.p6.m7" class="ltx_Math" alttext="x\in S\Longrightarrow[a,x]\subset S" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>S</mi><mo stretchy="false">⟹</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mo>⊂</mo><mi>S</mi></mrow></math>にも注意しよう。<math id="S2.p6.m8" class="ltx_Math" alttext="\ s=\sup S" display="inline"><mrow><mi>s</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0.167em">sup</mo><mi>S</mi></mrow></mrow></math>と置く。まずは<math id="S2.p6.m9" class="ltx_Math" alttext="s\in S" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></math>を示そう。<math id="S2.p6.m10" class="ltx_Math" alttext="[a,s)\subset S" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><mo>⊂</mo><mi>S</mi></mrow></math>となることはすぐにわかる。<math id="S2.p6.m11" class="ltx_Math" alttext="s\in U" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>U</mi></mrow></math>となる<math id="S2.p6.m12" class="ltx_Math" alttext="U\in\mathcal{U}" display="inline"><mrow><mi>U</mi><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒰</mi></mrow></math>を一つとる。そして<math id="S2.p6.m13" class="ltx_Math" alttext="A=[a,s]\setminus U" display="inline"><mrow><mi>A</mi><mo>=</mo><mrow><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>s</mi><mo stretchy="false">]</mo></mrow><mo>∖</mo><mi>U</mi></mrow></mrow></math>は閉集合であるから<math id="S2.p6.m14" class="ltx_Math" alttext="t=\sup A\in A" display="inline"><mrow><mi>t</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0.167em">sup</mo><mi>A</mi></mrow><mo>∈</mo><mi>A</mi></mrow></math>で<math id="S2.p6.m15" class="ltx_Math" alttext="s\not\in A" display="inline"><mrow><mi>s</mi><mo>∉</mo><mi>A</mi></mrow></math>より<math id="S2.p6.m16" class="ltx_Math" alttext="t&lt;s" display="inline"><mrow><mi>t</mi><mo>&lt;</mo><mi>s</mi></mrow></math>が分かる。そして<math id="S2.p6.m17" class="ltx_Math" alttext="t\in S" display="inline"><mrow><mi>t</mi><mo>∈</mo><mi>S</mi></mrow></math>なので<math id="S2.p6.m18" class="ltx_Math" alttext="[a,t]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>t</mi><mo stretchy="false">]</mo></mrow></math>は有限個の<math id="S2.p6.m19" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>の元<math id="S2.p6.m20" class="ltx_Math" alttext="V_{1},V_{2},\dots V_{n}" display="inline"><mrow><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>V</mi><mi>n</mi></msub></mrow></mrow></math>で被覆されるので結局<math id="S2.p6.m21" class="ltx_Math" alttext="[a,s]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>s</mi><mo stretchy="false">]</mo></mrow></math>は<math id="S2.p6.m22" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>の有限個の元<math id="S2.p6.m23" class="ltx_Math" alttext="V_{1},V_{2},\dots V_{n},U" display="inline"><mrow><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>V</mi><mi>n</mi></msub></mrow><mo>,</mo><mi>U</mi></mrow></math>で被覆されるから<math id="S2.p6.m24" class="ltx_Math" alttext="s\in S" display="inline"><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></math>となる。</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">今、<math id="S2.p7.m1" class="ltx_Math" alttext="[a,s]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>s</mi><mo stretchy="false">]</mo></mrow></math>を被覆する<math id="S2.p7.m2" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>の有限個の元を<math id="S2.p7.m3" class="ltx_Math" alttext="U_{1},U_{2},\dots,U_{m}" display="inline"><mrow><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><msub><mi>U</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>U</mi><mi>m</mi></msub></mrow></math>とし、<math id="S2.p7.m4" class="ltx_Math" alttext="B=[s,b]\setminus\bigcup_{i=1}^{m}U_{i}" display="inline"><mrow><mi>B</mi><mo>=</mo><mrow><mrow><mo stretchy="false">[</mo><mi>s</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><mo rspace="0.055em">∖</mo><mrow><msubsup><mo>⋃</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><msub><mi>U</mi><mi>i</mi></msub></mrow></mrow></mrow></math>と定義する。<math id="S2.p7.m5" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>は閉集合で<math id="S2.p7.m6" class="ltx_Math" alttext="s\notin B" display="inline"><mrow><mi>s</mi><mo>∉</mo><mi>B</mi></mrow></math>である。もし<math id="S2.p7.m7" class="ltx_Math" alttext="B=\O" display="inline"><mrow><mi>B</mi><mo>=</mo><mi>Ø</mi></mrow></math>ならば<math id="S2.p7.m8" class="ltx_Math" alttext="p=\inf B\in B" display="inline"><mrow><mi>p</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0.167em">inf</mo><mi>B</mi></mrow><mo>∈</mo><mi>B</mi></mrow></math>が存在するから<math id="S2.p7.m9" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>を含む<math id="S2.p7.m10" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>の元<math id="S2.p7.m11" class="ltx_Math" alttext="O" display="inline"><mi>O</mi></math>を選べば<math id="S2.p7.m12" class="ltx_Math" alttext="U_{1},U_{2},\dots U_{m},O" display="inline"><mrow><msub><mi>U</mi><mn>1</mn></msub><mo>,</mo><msub><mi>U</mi><mn>2</mn></msub><mo>,</mo><mrow><mi mathvariant="normal">…</mi><mo>⁢</mo><msub><mi>U</mi><mi>m</mi></msub></mrow><mo>,</mo><mi>O</mi></mrow></math>は<math id="S2.p7.m13" class="ltx_Math" alttext="[a,p]" display="inline"><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>p</mi><mo stretchy="false">]</mo></mrow></math>を被覆するので<math id="S2.p7.m14" class="ltx_Math" alttext="p\in S" display="inline"><mrow><mi>p</mi><mo>∈</mo><mi>S</mi></mrow></math>だが他方<math id="S2.p7.m15" class="ltx_Math" alttext="s&lt;p" display="inline"><mrow><mi>s</mi><mo>&lt;</mo><mi>p</mi></mrow></math>となので<math id="S2.p7.m16" class="ltx_Math" alttext="s=\sup S" display="inline"><mrow><mi>s</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0.167em">sup</mo><mi>S</mi></mrow></mrow></math>に反する。よって<math id="S2.p7.m17" class="ltx_Math" alttext="B=\O" display="inline"><mrow><mi>B</mi><mo>=</mo><mi>Ø</mi></mrow></math>つまり<math id="S2.p7.m18" class="ltx_Math" alttext="s=\max X" display="inline"><mrow><mi>s</mi><mo>=</mo><mrow><mi>max</mi><mo lspace="0.167em">⁡</mo><mi>X</mi></mrow></mrow></math>なので<math id="S2.p7.m19" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>は<math id="S2.p7.m20" class="ltx_Math" alttext="\mathcal{U}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒰</mi></math>の有限個の元で被覆される。</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p class="ltx_p">[コンパクト<math id="S2.p8.m1" class="ltx_Math" alttext="\Longrightarrow" display="inline"><mo stretchy="false">⟹</mo></math>順序完備]
+<math id="S2.p8.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>を<math id="S2.p8.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の非空な部分集合とする。このとき<math id="S2.p8.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の閉集合族</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="\{\text{{\rm CL}}(S)\}\cup\{[a,\to)\mid a\in S\}" display="block"><mrow><mrow><mo stretchy="false">{</mo><mrow><mtext>CL</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow><mo>∪</mo><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mi>a</mi><mo>∈</mo><mi>S</mi></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">は<math id="S2.p8.m5" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の有限交叉族であるので<math id="S2.p8.m6" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト性から</p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="\text{{\rm CL}}(S)\cap\bigcap_{a\in S}[a,\to)\neq\O" display="block"><mrow><mrow><mrow><mtext>CL</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em">∩</mo><mrow><munder><mo movablelimits="false" rspace="0em">⋂</mo><mrow><mi>a</mi><mo>∈</mo><mi>S</mi></mrow></munder><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となる。この集合から元<math id="S2.p8.m7" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>をとると、<math id="S2.p8.m8" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>は<math id="S2.p8.m9" class="ltx_Math" alttext="\displaystyle\bigcap_{a\in S}[a,\to)" display="inline"><mrow><mstyle displaystyle="true"><munder><mo movablelimits="false">⋂</mo><mrow><mi>a</mi><mo>∈</mo><mi>S</mi></mrow></munder></mstyle><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow></mrow></math>の元であることから<math id="S2.p8.m10" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上界になり、<math id="S2.p8.m11" class="ltx_Math" alttext="\text{{\rm CL}}(S)" display="inline"><mrow><mtext>CL</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>に属していることから任意の<math id="S2.p8.m12" class="ltx_Math" alttext="y&lt;s" display="inline"><mrow><mi>y</mi><mo>&lt;</mo><mi>s</mi></mrow></math>について</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="S\cap(y,\to)\neq\O" display="block"><mrow><mrow><mi>S</mi><mo>∩</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mo lspace="0em" rspace="0em" stretchy="false">→</mo><mo stretchy="false">)</mo></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">だが、<math id="S2.p8.m13" class="ltx_Math" alttext="s" display="inline"><mi>s</mi></math>は<math id="S2.p8.m14" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>の上界なのでこれは</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="S\cap(y,s]\neq\O" display="block"><mrow><mrow><mi>S</mi><mo>∩</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>s</mi><mo stretchy="false">]</mo></mrow></mrow><mo>≠</mo><mi>Ø</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">ということであり、これは<math id="S2.p8.m15" class="ltx_Math" alttext="s=\sup S" display="inline"><mrow><mi>s</mi><mo rspace="0.1389em">=</mo><mrow><mo lspace="0.1389em" rspace="0.167em">sup</mo><mi>S</mi></mrow></mrow></math>ということと同値である。よって<math id="S2.p8.m16" class="ltx_Math" alttext="\sup S" display="inline"><mrow><mo rspace="0.167em">sup</mo><mi>S</mi></mrow></math>が存在する。<math id="S2.p8.m17" class="ltx_Math" alttext="\inf S" display="inline"><mrow><mo rspace="0.167em">inf</mo><mi>S</mi></mrow></math>が存在することも同様である。
+∎</p>
+</div>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">順序数<math id="Thmthm12.p1.m1" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>について<math id="Thmthm12.p1.m2" class="ltx_Math" alttext="[0,\alpha]=\alpha+1" display="inline"><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi>α</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mi>α</mi><mo>+</mo><mn>1</mn></mrow></mrow></math>はコンパクトである。</span></p>
+</div>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>部分集合について</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S3.p1.m1" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の部分集合<math id="S3.p1.m2" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>には、<math id="S3.p1.m3" class="ltx_Math" alttext="\leq_{S}" display="inline"><msub><mo>≤</mo><mi>S</mi></msub></math>から誘導される順序位相<math id="S3.p1.m4" class="ltx_Math" alttext="\mathfrak{A}(S)" display="inline"><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>と、LOTS<math id="S3.p1.m5" class="ltx_Math" alttext="(X,\leq)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mo lspace="0em" rspace="0em">≤</mo><mo stretchy="false">)</mo></mrow></math>の部分空間としての位相<math id="S3.p1.m6" class="ltx_Math" alttext="\mathcal{B}(S)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">ℬ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></math>の二種類が考えられるが、一般にこの二つは<span class="ltx_text ltx_font_bold">一致しない。</span>ただし、<math id="S3.p1.m7" class="ltx_Math" alttext="\mathcal{B}" display="inline"><mi class="ltx_font_mathcaligraphic">ℬ</mi></math>の位相は<math id="S3.p1.m8" class="ltx_Math" alttext="\mathcal{A}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒜</mi></math>より細かいことはよくわかる。つまり<math id="S3.p1.m9" class="ltx_Math" alttext="\mathcal{A}(S)\subset\mathcal{B}(S)" display="inline"><mrow><mrow><mi class="ltx_font_mathcaligraphic">𝒜</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi class="ltx_font_mathcaligraphic">ℬ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>。これは、<math id="S3.p1.m10" class="ltx_Math" alttext="\leq_{S}" display="inline"><msub><mo>≤</mo><mi>S</mi></msub></math>による開区間を<math id="S3.p1.m11" class="ltx_Math" alttext="(a,b)_{S}" display="inline"><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>S</mi></msub></math>と書き、<math id="S3.p1.m12" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>における開区間を<math id="S3.p1.m13" class="ltx_Math" alttext="(a,b)_{X}" display="inline"><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>X</mi></msub></math>と書いたときに、<math id="S3.p1.m14" class="ltx_Math" alttext="a,b\in S" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>S</mi></mrow></math>について</p>
+<table id="S3.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex12.m1" class="ltx_Math" alttext="(a,b)_{S}=(a,b)_{X}\cap S" display="block"><mrow><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>S</mi></msub><mo>=</mo><mrow><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>X</mi></msub><mo>∩</mo><mi>S</mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">が成り立つことからわかる。
+これら二つが一致する簡単な十分条件を二つ紹介しよう。</p>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 13</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm13.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">が<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の稠密な部分集合のとき、<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="\mathfrak{A}(S)=\mathfrak{B}(S)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">稠密性から任意の<math id="S3.p2.m1" class="ltx_Math" alttext="a,b\in X" display="inline"><mrow><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><mo>∈</mo><mi>X</mi></mrow></math>について</p>
+<table id="S3.Ex13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.Ex13.m1" class="ltx_Math" alttext="(a,b)_{X}\cap S=\bigcup_{s,t\in(a,b)_{X}\cap S}(s,t)_{S}" display="block"><mrow><mrow><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>X</mi></msub><mo>∩</mo><mi>S</mi></mrow><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false" rspace="0em">⋃</mo><mrow><mrow><mi>s</mi><mo>,</mo><mi>t</mi></mrow><mo>∈</mo><mrow><msub><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>X</mi></msub><mo>∩</mo><mi>S</mi></mrow></mrow></munder><msub><mrow><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mi>S</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">となるのでわかる。
+∎</p>
+</div>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 14</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">が<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>のコンパクト集合であるとき、<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="\mathfrak{A}(S)=\mathfrak{B}(S)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p"><math id="S3.p3.m1" class="ltx_Math" alttext="(S,\mathfrak{B}(S))" display="inline"><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>がコンパクトで<math id="S3.p3.m2" class="ltx_Math" alttext="(S,\mathfrak{A}(S))" display="inline"><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></math>はハウスドルフでかつ<math id="S3.p3.m3" class="ltx_Math" alttext="\mathfrak{A}(S)\subset\mathfrak{B}(S)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>から<math id="S3.p3.m4" class="ltx_Math" alttext="\mathfrak{A}(S)=\mathfrak{B}(S)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>が分かる。
+∎</p>
+</div>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 15</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm15.p1.m1" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_italic">が<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>の区間であるとき、<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="\mathfrak{A}(S)=\mathfrak{B}(S)" display="inline"><mrow><mrow><mi>𝔄</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>𝔅</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">わかる。
+∎</p>
+</div>
+</div>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:46:05 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

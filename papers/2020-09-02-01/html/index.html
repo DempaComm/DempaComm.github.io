@@ -1,0 +1,762 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性</title>
+<!--Generated on Sun Jul 26 19:48:09 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on July 26, 2026.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://dempacomm.github.io/papers/2020-09-02-01/html/">
+<link rel="stylesheet" href="../../../styles.css" type="text/css">
+</head>
+<body class="paper-html-page">
+<a class="skip-link" href="#main-content">本文へ移動</a>
+<header class="html-version-header">
+  <p class="eyebrow">AUTOMATIC HTML VERSION</p>
+  <p>バナッハ空間を関数空間に埋め込むことと，関数空間の可分距離空間に対する普遍性のLaTeXML自動変換版です。自動検査には合格していますが、元PDFとの目視比較は未実施です。正本はPDF・TeXです。</p>
+  <nav class="paper-actions" aria-label="HTML版の案内">
+    <a class="primary-action" href="../">原稿ページへ戻る</a>
+    <a href="../published.pdf">PDFを読む</a>
+    <a href="../univinfuncsbanach.tex">TeXソース</a>
+    <a href="../../../">数識電収トップ</a>
+  </nav>
+</header>
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article id="main-content" class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">ナンブ　キトラ
+</span></span>
+</div>
+<div class="ltx_dates">HTML変換日：2026年7月26日</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">この文章では，まず最初に任意の実バナッハ空間がコンパクト空間上の実連続関数の空間に等長に埋め込めることを示す．次に任意の可分距離空間を等長的に埋め込めるような関数空間を調べる．この文章では実係数の線形空間しか扱わないので，バナッハ空間と言ったら全て実係数である．</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>バナッハ空間の関数空間への埋め込み</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">一般にバナッハ空間<math id="S1.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>に対して<math id="S1.p1.m2" class="ltx_Math" alttext="B^{*}" display="inline"><msup><mi>B</mi><mo>∗</mo></msup></math>でその双対空間を表す．
+また，
+<math id="S1.p1.m3" class="ltx_Math" alttext="f\in B^{*}" display="inline"><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow></math>と<math id="S1.p1.m4" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>に対して
+<math id="S1.p1.m5" class="ltx_Math" alttext="\langle f,x\rangle=f(x)" display="inline"><mrow><mrow><mo stretchy="false">⟨</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>と定義する．
+そして<math id="S1.p1.m6" class="ltx_Math" alttext="B^{*}" display="inline"><msup><mi>B</mi><mo>∗</mo></msup></math>上のノルム<math id="S1.p1.m7" class="ltx_Math" alttext="\lVert\cdot\rVert_{B^{*}}" display="inline"><msub><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="true" lspace="0em">∥</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub></math>は</p>
+<table id="S1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex1.m1" class="ltx_Math" alttext="\|f\|_{B^{*}}=\sup_{x\in B,x\neq 0}\frac{|f(x)|}{\|x\|_{B}}=\sup_{\|x\|_{B}%
+\leq 1,x\neq 0}\frac{|f(x)|}{\|x\|_{B}}=\sup_{\|x\|_{B}\leq 1}|f(x)|=\sup_{\|x%
+\|_{B}=1}|f(x)|." display="block"><mrow><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow><mo>,</mo><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></mrow></munder><mfrac><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub></mfrac></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub><mo>≤</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></mrow></munder><mfrac><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub></mfrac></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub><mo>≤</mo><mn>1</mn></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub><mo>=</mo><mn>1</mn></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">一般にバナッハ空間<math id="S1.p2.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>のノルムは単に<math id="S1.p2.m2" class="ltx_Math" alttext="\lVert\cdot\rVert" display="inline"><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="true" lspace="0em">∥</mo></mrow></math>と書くが，区別の必要があるときには<math id="S1.p2.m3" class="ltx_Math" alttext="\lVert\cdot\rVert_{B}" display="inline"><msub><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="true" lspace="0em">∥</mo></mrow><mi>B</mi></msub></math>と書く．</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">以下の定理はHahn–Banachの定理の系の一つである．Hahn–Banachの定理については例えば<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>を
+参照のこと．</p>
+</div>
+<div id="Thmthm1" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 1</span></span><span class="ltx_text ltx_font_bold"> </span>(Hahn–Banach)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm1.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math><span class="ltx_text ltx_font_italic">を<math id="Thmthm1.p1.m2" class="ltx_Math" alttext="0" display="inline"><mn>0</mn></math>次元線形空間でないバナッハ空間とし，<math id="Thmthm1.p1.m3" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>とする．
+このとき，<math id="Thmthm1.p1.m4" class="ltx_Math" alttext="f\in B^{*}" display="inline"><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow></math>で，
+<math id="Thmthm1.p1.m5" class="ltx_Math" alttext="\|f\|_{B^{*}}=1" display="inline"><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo>=</mo><mn>1</mn></mrow></math>で<math id="Thmthm1.p1.m6" class="ltx_Math" alttext="f(x)=\|x\|_{B}" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub></mrow></math>
+となるものが存在する．</span></p>
+</div>
+</div>
+<div id="Thmthm2" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 2</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm2.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意のバナッハ空間<math id="Thmthm2.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と任意の<math id="Thmthm2.p1.m2" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>について</span></p>
+<table id="S2.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.Ex2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.Ex2.m1" class="ltx_Math" alttext="\displaystyle\|x\|_{B}=\sup_{f\in B^{*},f\neq 0}\frac{|f(x)|}{\|f\|_{B^{*}}}=%
+\sup_{\|f\|_{B^{*}}\leq 1,f\neq 0}\frac{|f(x)|}{\|f\|_{B^{*}}}=\sup_{\|f\|_{B^%
+{*}}\leq 1}|f(x)|=\sup_{\|f\|_{B^{*}}=1}|f(x)|." display="inline"><mrow><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow><mo>,</mo><mrow><mi>f</mi><mo>≠</mo><mn>0</mn></mrow></mrow></munder><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub></mfrac></mstyle></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0.167em">sup</mo><mrow><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo>≤</mo><mn>1</mn></mrow><mo>,</mo><mrow><mi>f</mi><mo>≠</mo><mn>0</mn></mrow></mrow></munder><mstyle displaystyle="true"><mfrac><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub></mfrac></mstyle></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo>≤</mo><mn>1</mn></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo>=</mo><mn>1</mn></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が成り立つ．</span></p>
+</div>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p"><math id="S1.p4.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>をバナッハ空間とする．<math id="S1.p4.m2" class="ltx_Math" alttext="S\subset B^{*}" display="inline"><mrow><mi>S</mi><mo>⊂</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow></math>とする．
+<math id="S1.p4.m3" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>に対して<math id="S1.p4.m4" class="ltx_Math" alttext="\tau_{x}(f)=\langle f,x\rangle" display="inline"><mrow><mrow><msub><mi>τ</mi><mi>x</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">⟨</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">⟩</mo></mrow></mrow></math>として写像<math id="S1.p4.m5" class="ltx_Math" alttext="\tau_{x}:B^{*}\to\mathbb{R}" display="inline"><mrow><msub><mi>τ</mi><mi>x</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msup><mi>B</mi><mo>∗</mo></msup><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を定義し，写像の族
+<math id="S1.p4.m6" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>で添字付けられた写像族<math id="S1.p4.m7" class="ltx_Math" alttext="\left.\tau_{x}\right|_{S}\colon S\to\mathbb{R}" display="inline"><mrow><msub><mrow><msub><mi>τ</mi><mi>x</mi></msub><mo>|</mo></mrow><mi>S</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>S</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>の元の全てを連続にする<math id="S1.p4.m8" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>上の位相のことを
+<math id="S1.p4.m9" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math><span class="ltx_text ltx_font_bold">上の汎弱位相</span>と呼ぶ．
+<math id="S1.p4.m10" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>上の汎弱位相は<math id="S1.p4.m11" class="ltx_Math" alttext="B^{*}" display="inline"><msup><mi>B</mi><mo>∗</mo></msup></math>上の汎弱位相を<math id="S1.p4.m12" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>に制限した位相に等しい．
+また，<math id="S1.p4.m13" class="ltx_Math" alttext="S" display="inline"><mi>S</mi></math>上の汎弱位相はハウスドルフ位相である．
+以下では，<math id="S1.p4.m14" class="ltx_Math" alttext="\{f\in B^{*}\mid\|f\|\leq 1\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></math>に汎弱位相を入れた空間を，<math id="S1.p4.m15" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>と書くことにする．</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">次の有名な定理の証明は，例えば<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>を参照されたい．</p>
+</div>
+<div id="Thmthm3" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 3</span></span><span class="ltx_text ltx_font_bold"> </span>(Banach–Alaoglu)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm3.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm3.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math><span class="ltx_text ltx_font_italic">をバナッハ空間とする．このとき汎弱位相を持つ空間
+<math id="Thmthm3.p1.m2" class="ltx_Math" alttext="U[B]=\{f\in B^{*}\mid\|f\|\leq 1\}" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+はコンパクト空間である．</span></p>
+</div>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">以上のBanach–Alaogluの定理を使って，バナッハ空間を関数空間に埋め込む．その前に関数空間を定義する．</p>
+</div>
+<div id="Thmthm4" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 4</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm4.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">空でない位相空間<math id="Thmthm4.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に対して<math id="Thmthm4.p1.m2" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm4.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="Thmthm4.p1.m4" class="ltx_Math" alttext="\mathbb{R}" display="inline"><mi>ℝ</mi></math>への有界実連続関数全体を表すことにする．
+そして<math id="Thmthm4.p1.m5" class="ltx_Math" alttext="f,g\in C_{b}(X)" display="inline"><mrow><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow><mo>∈</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して，</span></p>
+<table id="S1.Ex3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex3.m1" class="ltx_Math" alttext="\|f-g\|_{C_{b}(X)}=\sup_{x\in X}|f(x)-g(x)|" display="block"><mrow><msub><mrow><mo stretchy="false">‖</mo><mrow><mi>f</mi><mo>−</mo><mi>g</mi></mrow><mo stretchy="false">‖</mo></mrow><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>g</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">で<math id="Thmthm4.p1.m6" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>上のノルム<math id="Thmthm4.p1.m7" class="ltx_Math" alttext="\lVert\cdot\rVert_{C(X)}" display="inline"><msub><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="true" lspace="0em">∥</mo></mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></msub></math>
+を定義する．
+このノルムを単に<math id="Thmthm4.p1.m8" class="ltx_Math" alttext="\lVert\cdot\rVert" display="inline"><mrow><mo fence="true" rspace="0em">∥</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="true" lspace="0em">∥</mo></mrow></math>と省略したりする．
+このとき<math id="Thmthm4.p1.m9" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>はバナッハ空間になる．</span></p>
+</div>
+<div id="Thmthm4.p2" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">同様に<math id="Thmthm4.p2.m1" class="ltx_Math" alttext="C(X)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>で<math id="Thmthm4.p2.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>上の実連続関数
+全体の集合とし，上と同様に<math id="Thmthm4.p2.m3" class="ltx_Math" alttext="\sup" display="inline"><mo>sup</mo></math>ノルムを導入する．このときノルムは<math id="Thmthm4.p2.m4" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>の値を一般にとりうる．</span></p>
+</div>
+<div id="Thmthm4.p3" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm4.p3.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">がコンパクト空間の場合には
+<math id="Thmthm4.p3.m2" class="ltx_Math" alttext="C(X)=C_{b}(X)" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>となることに注意せよ．</span></p>
+</div>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">以下の定理がこのセクションの主定理である．</p>
+</div>
+<div id="Thmthm5" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 5</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm5.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意のバナッハ空間<math id="Thmthm5.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>に対して，
+<math id="Thmthm5.p1.m2" class="ltx_Math" alttext="\tau:B\to C(U[B])" display="inline"><mrow><mi>τ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>B</mi><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を任意の<math id="Thmthm5.p1.m3" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>に対して，
+<math id="Thmthm5.p1.m4" class="ltx_Math" alttext="\tau(x)(f)=\langle f,x\rangle" display="inline"><mrow><mrow><mi>τ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">⟨</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">⟩</mo></mrow></mrow></math>で定義する．
+このとき，<math id="Thmthm5.p1.m5" class="ltx_Math" alttext="\tau" display="inline"><mi>τ</mi></math>は線形等長写像である．
+よって，特に任意のバナッハ空間はコンパクトハウスドルフ空間上の
+関数空間に等長埋め込むことができる．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">任意の<math id="S1.p8.m1" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>について<math id="S1.p8.m2" class="ltx_Math" alttext="\tau(x)" display="inline"><mrow><mi>τ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="S1.p8.m3" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>上の連続関数であることは，
+汎弱位相の定義そのものから従う．
+<math id="S1.p8.m4" class="ltx_Math" alttext="\tau" display="inline"><mi>τ</mi></math>の線形性は明らかである．
+等長性を示そう．
+任意の<math id="S1.p8.m5" class="ltx_Math" alttext="x\in B" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow></math>について，</p>
+<table id="S1.Ex4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex4.m1" class="ltx_Math" alttext="\|\tau(x)\|_{C(U[B])}=\|x\|_{B}" display="block"><mrow><msub><mrow><mo stretchy="false">‖</mo><mrow><mi>τ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">‖</mo></mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></msub><mo>=</mo><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">を示せば良い．</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<p class="ltx_p">系<a href="#Thmthm2" title="系 2. ‣ 1 バナッハ空間の関数空間への埋め込み ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>より，</p>
+</div>
+<div id="S1.p10" class="ltx_para">
+<table id="S1.Ex5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.Ex5.m1" class="ltx_Math" alttext="\|\tau(x)\|_{C(U[B])}=\sup_{f\in U[B]}|\tau(x)(f)|=\sup_{\|f\|_{B^{*}}\leq 1}|%
+f(x)|=\|x\|_{B}" display="block"><mrow><msub><mrow><mo stretchy="false">‖</mo><mrow><mi>τ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">‖</mo></mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></msub><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mi>f</mi><mo>∈</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>τ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><msub><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><msup><mi>B</mi><mo>∗</mo></msup></msub><mo>≤</mo><mn>1</mn></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><msub><mrow><mo stretchy="false">‖</mo><mi>x</mi><mo stretchy="false">‖</mo></mrow><mi>B</mi></msub></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，証明は終わる．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>関数空間の可分距離空間に対する普遍性</h2>
+
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>普遍性の定理</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p class="ltx_p">このセクションでは，任意の可分距離空間を等長に埋め込むことができるような関数空間を調べる．</p>
+</div>
+<div id="S2.SS1.p2" class="ltx_para">
+<p class="ltx_p">二つの空でない位相空間<math id="S2.SS1.p2.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>, <math id="S2.SS1.p2.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>と連続写像<math id="S2.SS1.p2.m3" class="ltx_Math" alttext="p:X\to Y" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>に対して，
+<math id="S2.SS1.p2.m4" class="ltx_Math" alttext="C(p):C(Y)\to C(X)" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>を<math id="S2.SS1.p2.m5" class="ltx_Math" alttext="C(p)(f)=f\circ p" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>p</mi></mrow></mrow></math>で定義する．
+このとき以下が成り立つ．</p>
+</div>
+<div id="Thmthm6" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 6</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm6.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">二つの空でない位相空間<math id="Thmthm6.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>, <math id="Thmthm6.p1.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>と連続写像<math id="Thmthm6.p1.m3" class="ltx_Math" alttext="p:X\to Y" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>Y</mi></mrow></mrow></math>に対して，
+<math id="Thmthm6.p1.m4" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>が全射ならば，<math id="Thmthm6.p1.m5" class="ltx_Math" alttext="C(p):C(Y)\to C(X)" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>はノルムを保つ．つまり
+任意の<math id="Thmthm6.p1.m6" class="ltx_Math" alttext="f\in C(Y)" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について，</span></p>
+<table id="S2.Ex6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex6.m1" class="ltx_Math" alttext="\|f\|=\|C(p)(f)\|" display="block"><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo>=</mo><mrow><mo stretchy="false">‖</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">‖</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">となる．ここで，ノルムには<math id="Thmthm6.p1.m7" class="ltx_Math" alttext="\infty" display="inline"><mi mathvariant="normal">∞</mi></math>の値も許されていることに注意しよう．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS1.p3" class="ltx_para">
+<p class="ltx_p">任意の<math id="S2.SS1.p3.m1" class="ltx_Math" alttext="f\in C(Y)" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>について，<math id="S2.SS1.p3.m2" class="ltx_Math" alttext="p" display="inline"><mi>p</mi></math>の全射性から</p>
+<table id="S2.Ex7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex7.m1" class="ltx_Math" alttext="\|f\|=\sup_{y\in Y}|f(x)|=\sup_{x\in X}|f\circ p(x)|=\|f\circ p\|" display="block"><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><munder><mo lspace="0.1389em" movablelimits="false" rspace="0em">sup</mo><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></munder><mrow><mo stretchy="false">|</mo><mrow><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>p</mi></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">‖</mo><mrow><mi>f</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>p</mi></mrow><mo stretchy="false">‖</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">なので，証明が終わる．
+∎</p>
+</div>
+</div>
+<div id="S2.SS1.p4" class="ltx_para">
+<p class="ltx_p">空でない距離空間<math id="S2.SS1.p4.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に対して，<math id="S2.SS1.p4.m2" class="ltx_Math" alttext="d" display="inline"><mi>d</mi></math>をその距離とし，<math id="S2.SS1.p4.m3" class="ltx_Math" alttext="o\in X" display="inline"><mrow><mi>o</mi><mo>∈</mo><mi>X</mi></mrow></math>を固定点とする．このとき<math id="S2.SS1.p4.m4" class="ltx_Math" alttext="x\in X" display="inline"><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></math>に対して
+<math id="S2.SS1.p4.m5" class="ltx_Math" alttext="K(x):X\to\mathbb{R}" display="inline"><mrow><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow></math>を</p>
+<table id="S2.Ex8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex8.m1" class="ltx_Math" alttext="K(x)(y)=d(x,y)-d(y,o)" display="block"><mrow><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>d</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>o</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義することによって
+写像<math id="S2.SS1.p4.m6" class="ltx_Math" alttext="K:X\to C_{b}(X)" display="inline"><mrow><mi>K</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を定義する．このとき
+<math id="S2.SS1.p4.m7" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は等長埋め込みになっている．
+この埋め込み写像をクラトフスキー埋め込みと呼ぶ．</p>
+</div>
+<div id="Thmthm7" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 7</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm7.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">可分距離空間<math id="Thmthm7.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>に対して，
+可分バナッハ空間<math id="Thmthm7.p1.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>が存在して，
+<math id="Thmthm7.p1.m3" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="Thmthm7.p1.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>への等長埋め込みが存在する．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS1.p5" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS1.p5.m1" class="ltx_Math" alttext="K:X\to C_{b}(X)" display="inline"><mrow><mi>K</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>をクラトフスキー埋め込みとする．
+このとき<math id="S2.SS1.p5.m2" class="ltx_Math" alttext="K(X)" display="inline"><mrow><mi>K</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>によって生成される<math id="S2.SS1.p5.m3" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>の部分空間の完備化が求める可分バナッハ空間になる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm8" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 8</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm8.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm8.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が
+<span class="ltx_text ltx_font_bold">可分距離空間に対して普遍的</span>
+であるとは，任意の可分距離空間<math id="Thmthm8.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>
+に対して，<math id="Thmthm8.p1.m3" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>から<math id="Thmthm8.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>への等長埋め込みが存在するときにいう．</span></p>
+</div>
+</div>
+<div id="Thmthm9" class="ltx_theorem ltx_theorem_df">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定義 9</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm9.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">位相空間<math id="Thmthm9.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<span class="ltx_text ltx_font_bold">パラメトライジング</span>であるとは，
+任意の可分バナッハ空間<math id="Thmthm9.p1.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と汎弱位相を持つ双対空間の単位球<math id="Thmthm9.p1.m3" class="ltx_Math" alttext="U[B]=\{f\in B^{*}\mid\|f\|\leq 1\}" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>
+に対して，<math id="Thmthm9.p1.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>から<math id="Thmthm9.p1.m5" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>に対して全射連続写像が存在するときにいう．
+この用語はこの文章でしか使わないので注意されたい．</span></p>
+</div>
+</div>
+<div id="S2.SS1.p6" class="ltx_para">
+<p class="ltx_p">以下の定理がこの文書の中心的な定理である．証明は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib7" title="" class="ltx_ref">7</a>, Theorem 3.6]</cite>の証明を大いに参考にした．</p>
+</div>
+<div id="Thmthm10" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 10</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm10.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm10.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">をパラメトライジングな位相空間とする．
+このとき，<math id="Thmthm10.p1.m2" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は可分距離空間に対して普遍的である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS1.p7" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS1.p7.m1" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>を可分距離空間とする．
+このとき<math id="S2.SS1.p7.m2" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>に<math id="S2.SS1.p7.m3" class="ltx_Math" alttext="T" display="inline"><mi>T</mi></math>
+が埋め込めることを証明する．
+系<a href="#Thmthm7" title="補題 7. ‣ 2.1 普遍性の定理 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>
+により，可分バナッハ空間<math id="S2.SS1.p7.m4" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>と等長埋め込み
+<math id="S2.SS1.p7.m5" class="ltx_Math" alttext="h:T\to B" display="inline"><mrow><mi>h</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mi>B</mi></mrow></mrow></math>が存在する．
+さて，
+<math id="S2.SS1.p7.m6" class="ltx_Math" alttext="p:X\to U[B]" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></mrow></math>を全射連続写像とする．
+<math id="S2.SS1.p7.m7" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がパラメトライジングであることからこのような写像は存在する．
+このとき<math id="S2.SS1.p7.m8" class="ltx_Math" alttext="p:X\to U[B]" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></mrow></math>
+は全射なので，命題<a href="#Thmthm6" title="命題 6. ‣ 2.1 普遍性の定理 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>から
+<math id="S2.SS1.p7.m9" class="ltx_Math" alttext="C(p):C(U[B])\to C_{b}(X)" display="inline"><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0.278em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.278em">:</mo><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+は等長埋め込みである．
+また，定理<a href="#Thmthm5" title="定理 5. ‣ 1 バナッハ空間の関数空間への埋め込み ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>から等長埋め込み
+<math id="S2.SS1.p7.m10" class="ltx_Math" alttext="\tau:T\to C(U[B])" display="inline"><mrow><mi>τ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が存在する．よって
+写像<math id="S2.SS1.p7.m11" class="ltx_Math" alttext="C(p)\circ\tau\circ h:T\to C_{b}(X)" display="inline"><mrow><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">∘</mo><mi>τ</mi><mo lspace="0.222em" rspace="0.222em">∘</mo><mi>h</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>T</mi><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>が求める等長埋め込みである．
+∎</p>
+</div>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>普遍性を持つ関数空間を持つ空間</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p class="ltx_p">このサブセクションでは可分距離空間に対して普遍性を持つ距離空間の例を挙げていく．最初にパラメトライジングなもの，後にそうでないものを挙げる．</p>
+</div>
+<div id="S2.SS2.p2" class="ltx_para">
+<p class="ltx_p">以下の定理は基本的なものである．</p>
+</div>
+<div id="Thmthm11" class="ltx_theorem ltx_theorem_lem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">補題 11</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm11.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm11.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math><span class="ltx_text ltx_font_italic">を可分バナッハ空間として汎弱位相を持つ空間<math id="Thmthm11.p1.m2" class="ltx_Math" alttext="U[B]=\{f\in B^{*}\mid\|f\|\leq 1\}" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>f</mi><mo>∈</mo><msup><mi>B</mi><mo>∗</mo></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mo>≤</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow></mrow></math>はコンパクトで，距離化可能空間であり，
+弧状連結で，かつ<math id="Thmthm11.p1.m3" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>の任意の空でない開集合も弧状連結である．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p3" class="ltx_para">
+<p class="ltx_p">以下の定理は結構有名である．証明は例えば
+<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="" class="ltx_ref">8</a>, Theorem 4.18]</cite>を参照のこと．</p>
+</div>
+<div id="Thmthm12" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 12</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm12.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm12.p1.m1" class="ltx_Math" alttext="\Gamma" display="inline"><mi mathvariant="normal">Γ</mi></math><span class="ltx_text ltx_font_italic">をカントール集合とする．
+このとき，
+任意の空でないコンパクト距離化可能空間 <math id="Thmthm12.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>
+に対して全射連続写像<math id="Thmthm12.p1.m3" class="ltx_Math" alttext="p:\Gamma\to K" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">→</mo><mi>K</mi></mrow></mrow></math>が存在する．
+特に<math id="Thmthm12.p1.m4" class="ltx_Math" alttext="\Gamma" display="inline"><mi mathvariant="normal">Γ</mi></math>
+はパラメトライジングである．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p4" class="ltx_para">
+<p class="ltx_p">以下の定理の証明は，例えば<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>を参照のこと．</p>
+</div>
+<div id="Thmthm13" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 13</span></span><span class="ltx_text ltx_font_bold"> </span>(Hahn–Mazurkiewicz)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm13.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">空でない位相空間<math id="Thmthm13.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>
+は以下を満たすとする．</span></p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(1)</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i1.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">はコンパクトな距離化可能空間</span></p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(2)</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i2.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">は連結</span></p>
+</div>
+</li>
+<li id="S2.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">(3)</span> 
+<div id="S2.I1.i3.p1" class="ltx_para">
+<p class="ltx_p"><math id="S2.I1.i3.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">は局所連結，つまり，連結開集合からなる開基が存在する．</span></p>
+</div>
+</li>
+</ol>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">このとき，全射連続写像<math id="Thmthm13.p1.m2" class="ltx_Math" alttext="p:[0,1]\to X" display="inline"><mrow><mi>p</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>
+が存在する．
+特に<math id="Thmthm13.p1.m3" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>はパラメトライジングである．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p5" class="ltx_para">
+<p class="ltx_p">距離化可能空間<math id="S2.SS2.p5.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が<span class="ltx_text ltx_font_bold">絶対レトラクト</span>であるとは，
+<math id="S2.SS2.p5.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が他の距離空間<math id="S2.SS2.p5.m3" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>に閉集合として位相的に埋め込まれているならば，
+連続写像<math id="S2.SS2.p5.m4" class="ltx_Math" alttext="R:Y\to X" display="inline"><mrow><mi>R</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>Y</mi><mo stretchy="false">→</mo><mi>X</mi></mrow></mrow></math>が存在して，<math id="S2.SS2.p5.m5" class="ltx_Math" alttext="R|_{X}=id_{X}" display="inline"><mrow><msub><mrow><mi>R</mi><mo stretchy="false">|</mo></mrow><mi>X</mi></msub><mo>=</mo><mrow><mi>i</mi><mo>⁢</mo><msub><mi>d</mi><mi>X</mi></msub></mrow></mrow></math>を満たす．ここで，<math id="S2.SS2.p5.m6" class="ltx_Math" alttext="X\subset Y" display="inline"><mrow><mi>X</mi><mo>⊂</mo><mi>Y</mi></mrow></math>とみなしている．</p>
+</div>
+<div id="S2.SS2.p6" class="ltx_para">
+<p class="ltx_p">次の定理は単位閉区間<math id="S2.SS2.p6.m1" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>の可算直積空間<math id="S2.SS2.p6.m2" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>の特徴付け定理の一つである．空間<math id="S2.SS2.p6.m3" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>は<span class="ltx_text ltx_font_bold">ヒルベルトキューブ</span>と呼ばれる．
+以下の定理は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib9" title="" class="ltx_ref">9</a>]</cite>によってフレシェ空間の場合に原型が示され，
+によって以下に述べる形になった．</p>
+</div>
+<div id="Thmthm14" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 14</span></span><span class="ltx_text ltx_font_bold"> </span>(Keller-Dobrowolski–Toruńczyk)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm14.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm14.p1.m1" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math><span class="ltx_text ltx_font_italic">を位相線形空間の凸集合とする．
+もし，<math id="Thmthm14.p1.m2" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は無限大の位相次元を持ち，コンパクトで距離化可能空間であって，絶対レトラクトならば，
+<math id="Thmthm14.p1.m3" class="ltx_Math" alttext="K" display="inline"><mi>K</mi></math>は<math id="Thmthm14.p1.m4" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>に同相
+である．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p7" class="ltx_para">
+<p class="ltx_p">距離空間が絶対レトラクトかどうかを証明するには拡張定理がとても役に立つ．
+次の定理はDugundjiの拡張定理と呼ばれている．証明はこのブログでも紹介している <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite>．また原論文<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="" class="ltx_ref">6</a>]</cite> を参照のこと．
+局所凸空間の定義は<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite>などを参照のこと．大雑把に局所凸位相線形空間のことを説明すると，セミノルムの族によって位相が生成されている位相線形空間が局所凸空間である．</p>
+</div>
+<div id="Thmthm15" class="ltx_theorem ltx_theorem_thm">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">定理 15</span></span><span class="ltx_text ltx_font_bold"> </span>(Dugundji)<span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm15.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">距離空間<math id="Thmthm15.p1.m1" class="ltx_Math" alttext="(X,d)" display="inline"><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></math>の閉集合<math id="Thmthm15.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>と局所凸型線形位相空間<math id="Thmthm15.p1.m3" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>の凸集合<math id="Thmthm15.p1.m4" class="ltx_Math" alttext="C" display="inline"><mi>C</mi></math>及び連続写像<math id="Thmthm15.p1.m5" class="ltx_Math" alttext="f:A\to C" display="inline"><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>A</mi><mo stretchy="false">→</mo><mi>C</mi></mrow></mrow></math>について、連続写像<math id="Thmthm15.p1.m6" class="ltx_Math" alttext="F:X\to C" display="inline"><mrow><mi>F</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mi>C</mi></mrow></mrow></math>が存在し、</span></p>
+<table id="S2.Ex9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex9.m1" class="ltx_Math" alttext="F|A=f" display="block"><mrow><mrow><mi>F</mi><mo fence="false">|</mo><mi>A</mi></mrow><mo>=</mo><mi>f</mi></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">を充たす。</span></p>
+</div>
+</div>
+<div id="S2.SS2.p8" class="ltx_para">
+<p class="ltx_p">これを用いると次のことがわかる．</p>
+</div>
+<div id="Thmthm16" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 16</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm16.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">任意の無限次元可分バナッハ空間<math id="Thmthm16.p1.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>について，<math id="Thmthm16.p1.m2" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>は絶対レトラクトである．
+特に<math id="Thmthm16.p1.m3" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>はヒルベルトキューブ<math id="Thmthm16.p1.m4" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>に同相である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS2.p9" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS2.p9.m1" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>が他の距離化可能空間<math id="S2.SS2.p9.m2" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>に閉集合として位相的に埋め込まれているとする．
+ここでは<math id="S2.SS2.p9.m3" class="ltx_Math" alttext="U[B]\subset Y" display="inline"><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo>⊂</mo><mi>Y</mi></mrow></math>とみなすことにする．
+<math id="S2.SS2.p9.m4" class="ltx_Math" alttext="B^{*}" display="inline"><msup><mi>B</mi><mo>∗</mo></msup></math>に汎弱位相を導入すると，この位相空間は局所凸線形位相空間になるので，
+恒等写像<math id="S2.SS2.p9.m5" class="ltx_Math" alttext="id:U[B]\to U[B]" display="inline"><mrow><mrow><mi>i</mi><mo>⁢</mo><mi>d</mi></mrow><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></mrow></math>は，
+Dugundjiの拡張定理(定理<a href="#Thmthm15" title="定理 15 (Dugundji). ‣ 2.2 普遍性を持つ関数空間を持つ空間 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15</span></a>)の仮定を満たす．
+したがって<math id="S2.SS2.p9.m6" class="ltx_Math" alttext="id" display="inline"><mrow><mi>i</mi><mo>⁢</mo><mi>d</mi></mrow></math>を<math id="S2.SS2.p9.m7" class="ltx_Math" alttext="Y" display="inline"><mi>Y</mi></math>全体に拡張し，連続写像<math id="S2.SS2.p9.m8" class="ltx_Math" alttext="R:Y\to U[B]" display="inline"><mrow><mi>R</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>Y</mi><mo stretchy="false">→</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></mrow></math>であって，
+<math id="S2.SS2.p9.m9" class="ltx_Math" alttext="R|_{U[B]}=id" display="inline"><mrow><msub><mrow><mi>R</mi><mo stretchy="false">|</mo></mrow><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></msub><mo>=</mo><mrow><mi>i</mi><mo>⁢</mo><mi>d</mi></mrow></mrow></math>なるものを得る．よって<math id="S2.SS2.p9.m10" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>は絶対レトラクトである．
+補題<a href="#Thmthm11" title="補題 11. ‣ 2.2 普遍性を持つ関数空間を持つ空間 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a>より，
+<math id="S2.SS2.p9.m11" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>が可分なので，<math id="S2.SS2.p9.m12" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>はコンパクトで距離化可能である．ゆえに定理<a href="#Thmthm14" title="定理 14 (Keller-Dobrowolski–Toruńczyk). ‣ 2.2 普遍性を持つ関数空間を持つ空間 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">14</span></a>から，<math id="S2.SS2.p9.m13" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>がヒルベルトキューブに同相であることがわかる．
+∎</p>
+</div>
+</div>
+<div id="S2.SS2.p10" class="ltx_para">
+<p class="ltx_p">有限次元バナッハ空間<math id="S2.SS2.p10.m1" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>について<math id="S2.SS2.p10.m2" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>は有限次元閉球に同相で，この空間は
+<math id="S2.SS2.p10.m3" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>からの全射連続写像が存在するので，以下を得る．</p>
+</div>
+<div id="Thmthm17" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 17</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm17.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">ヒルベルトキューブ<math id="Thmthm17.p1.m1" class="ltx_Math" alttext="[0,1]^{\mathbb{N}}" display="inline"><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup></math>はパラメトライジングである．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p11" class="ltx_para">
+<p class="ltx_p">以上であげた三つの空間がパラメトライジングであることは以下のようにまとめることができる．</p>
+</div>
+<div id="Thmthm18" class="ltx_theorem ltx_theorem_cor">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">系 18</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm18.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">バナッハ空間
+<math id="Thmthm18.p1.m1" class="ltx_Math" alttext="C(\Gamma)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mo stretchy="false">)</mo></mrow></mrow></math>，<math id="Thmthm18.p1.m2" class="ltx_Math" alttext="C([0,1])" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>そして<math id="Thmthm18.p1.m3" class="ltx_Math" alttext="C([0,1]^{\mathbb{N}})" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>ℕ</mi></msup><mo stretchy="false">)</mo></mrow></mrow></math>は可分距離空間に対して普遍的である．</span></p>
+</div>
+</div>
+<div id="Thmrmkx1" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx1.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmrmkx1.p1.m1" class="ltx_Math" alttext="C(\Gamma)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">と<math id="Thmrmkx1.p1.m2" class="ltx_Math" alttext="C([0,1])" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></math>が可分距離空間に対して普遍性を持つことは，
+<em class="ltx_emph ltx_font_upright"><cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite></em>で最初に示された．</span></p>
+</div>
+</div>
+<div id="S2.SS2.p12" class="ltx_para">
+<p class="ltx_p">一般に距離空間<math id="S2.SS2.p12.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>がパラメトライジングでなくとも，その上の関数空間は可分距離空間に対して普遍的であり得る．
+無限次元可分バナッハ空間<math id="S2.SS2.p12.m2" class="ltx_Math" alttext="B" display="inline"><mi>B</mi></math>について<math id="S2.SS2.p12.m3" class="ltx_Math" alttext="U[B]" display="inline"><mrow><mi>U</mi><mo>⁢</mo><mrow><mo stretchy="false">[</mo><mi>B</mi><mo stretchy="false">]</mo></mrow></mrow></math>は非可算集合なので，
+可算空間はパラメトライジングではないことに注意しよう．</p>
+</div>
+<div id="Thmthm19" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 19</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm19.p1" class="ltx_para">
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">有理数の空間<math id="Thmthm19.p1.m1" class="ltx_Math" alttext="\mathbb{Q}" display="inline"><mi>ℚ</mi></math>について，
+<math id="Thmthm19.p1.m2" class="ltx_Math" alttext="C_{b}(\mathbb{Q})" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℚ</mi><mo stretchy="false">)</mo></mrow></mrow></math>は可分距離空間に対して
+普遍性を持つ．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS2.p13" class="ltx_para">
+<p class="ltx_p">順序を保つ位相的埋め込み
+<math id="S2.SS2.p13.m1" class="ltx_Math" alttext="H:\mathbb{Q}\to[0,1]" display="inline"><mrow><mi>H</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>ℚ</mi><mo stretchy="false">→</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow></math>で<math id="S2.SS2.p13.m2" class="ltx_Math" alttext="H(\mathbb{Q})" display="inline"><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℚ</mi><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="S2.SS2.p13.m3" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>のなかで稠密になるものを考える．
+任意の可分距離空間<math id="S2.SS2.p13.m4" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と
+等長埋め込み<math id="S2.SS2.p13.m5" class="ltx_Math" alttext="I:X\to C([0,1])" display="inline"><mrow><mi>I</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+をとる．
+このとき，
+写像<math id="S2.SS2.p13.m6" class="ltx_Math" alttext="J:X\to C_{b}(\mathbb{Q})" display="inline"><mrow><mi>J</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℚ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を
+<math id="S2.SS2.p13.m7" class="ltx_Math" alttext="J(x)=I(x)\circ H" display="inline"><mrow><mrow><mi>J</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>I</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">∘</mo><mi>H</mi></mrow></mrow></math>と定義する．
+すると，<math id="S2.SS2.p13.m8" class="ltx_Math" alttext="H(\mathbb{Q})" display="inline"><mrow><mi>H</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>ℚ</mi><mo stretchy="false">)</mo></mrow></mrow></math>が<math id="S2.SS2.p13.m9" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>
+の中で稠密であることから，
+<math id="S2.SS2.p13.m10" class="ltx_Math" alttext="J" display="inline"><mi>J</mi></math>が等長埋め込みであることがわかる．
+∎</p>
+</div>
+</div>
+<div id="Thmthm20" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 20</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm20.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm20.p1.m1" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math><span class="ltx_text ltx_font_italic">は可算離散空間とする．
+このとき， <math id="Thmthm20.p1.m2" class="ltx_Math" alttext="C_{b}(N)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+は可分距離空間に対して普遍的である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS2.p14" class="ltx_para">
+<p class="ltx_p">空間<math id="S2.SS2.p14.m1" class="ltx_Math" alttext="N" display="inline"><mi>N</mi></math>について</p>
+<table id="S2.Ex10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex10.m1" class="ltx_Math" alttext="N=\{(k,n)\in\mathbb{N}^{2}\mid n\in\mathbb{N},0\leq k\leq 2^{n}\}" display="block"><mrow><mi>N</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><msup><mi>ℕ</mi><mn>2</mn></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><mo>,</mo><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><msup><mn>2</mn><mi>n</mi></msup></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と仮定しても良い．</p>
+</div>
+<div id="S2.SS2.p15" class="ltx_para">
+<p class="ltx_p">任意の可分距離空間<math id="S2.SS2.p15.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>と
+等長埋め込み<math id="S2.SS2.p15.m2" class="ltx_Math" alttext="I:X\to C([0,1])" display="inline"><mrow><mi>I</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+をとる．
+このとき，
+写像<math id="S2.SS2.p15.m3" class="ltx_Math" alttext="J:X\to C_{b}(N)" display="inline"><mrow><mi>J</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>X</mi><mo stretchy="false">→</mo><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math>
+を</p>
+<table id="S2.Ex11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex11.m1" class="ltx_Math" alttext="J(x)(k,n)=f\left(\frac{k}{2^{n}}\right)" display="block"><mrow><mrow><mi>J</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo>(</mo><mfrac><mi>k</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">と定義する．
+このとき，
+<math id="S2.SS2.p15.m4" class="ltx_Math" alttext="\{k/2^{n}\mid(k,n)\in N\}" display="inline"><mrow><mo stretchy="false">{</mo><mrow><mi>k</mi><mo>/</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><mo fence="true" lspace="0em" rspace="0em">∣</mo><mrow><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi>N</mi></mrow><mo stretchy="false">}</mo></mrow></math>
+は<math id="S2.SS2.p15.m5" class="ltx_Math" alttext="[0,1]" display="inline"><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></math>の中で稠密であることから，
+<math id="S2.SS2.p15.m6" class="ltx_Math" alttext="J" display="inline"><mi>J</mi></math>は等長埋め込みになっている．
+∎</p>
+</div>
+</div>
+<div id="S2.SS2.p16" class="ltx_para">
+<p class="ltx_p">カントール集合上の関数空間<math id="S2.SS2.p16.m1" class="ltx_Math" alttext="C(\Gamma)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+が可分距離空間に対して普遍的であるということからより広いクラスの空間に対して同様の性質が言える．</p>
+</div>
+<div id="S2.SS2.p17" class="ltx_para">
+<p class="ltx_p">以下の定理はDugundjiの拡張定理の証明法を詳細に見るとわかることである．<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="" class="ltx_ref">6</a>, Theorem 5.1]</cite>を参照のこと．</p>
+</div>
+<div id="Thmthm21" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 21</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm21.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm21.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を空でない距離化可能空間とし，<math id="Thmthm21.p1.m2" class="ltx_Math" alttext="A" display="inline"><mi>A</mi></math>をその空でない閉集合とする．
+このとき，
+等長な線形写像</span></p>
+<table id="S2.Ex12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.Ex12.m1" class="ltx_Math" alttext="\phi:C(A)\to C(X)" display="block"><mrow><mi>ϕ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p"><span class="ltx_text ltx_font_italic">が存在し，任意の<math id="Thmthm21.p1.m3" class="ltx_Math" alttext="f\in C(A)" display="inline"><mrow><mi>f</mi><mo>∈</mo><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math>に対して
+<math id="Thmthm21.p1.m4" class="ltx_Math" alttext="\phi(f)|_{A}=f" display="inline"><mrow><msub><mrow><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">|</mo></mrow><mi>A</mi></msub><mo>=</mo><mi>f</mi></mrow></math>を満たす．</span></p>
+</div>
+</div>
+<div id="Thmthm22" class="ltx_theorem ltx_theorem_prop">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">命題 22</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmthm22.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmthm22.p1.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math><span class="ltx_text ltx_font_italic">を非可算可分完備距離化可能空間とする．
+このとき，
+<math id="Thmthm22.p1.m2" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は可分距離空間に対して普遍的である．</span></p>
+</div>
+</div>
+<div class="ltx_proof">
+<h6 class="ltx_title ltx_runin ltx_font_bold ltx_title_proof">証明<span class="ltx_text ltx_font_medium ltx_font_italic">.</span>
+</h6>
+<div id="S2.SS2.p18" class="ltx_para">
+<p class="ltx_p"><math id="S2.SS2.p18.m1" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>が非可算可分完備距離化可能空間ならば，<math id="S2.SS2.p18.m2" class="ltx_Math" alttext="X" display="inline"><mi>X</mi></math>はカントール集合
+<math id="S2.SS2.p18.m3" class="ltx_Math" alttext="\Gamma" display="inline"><mi mathvariant="normal">Γ</mi></math>
+と同相な部分集合を持つ(例えば<cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="" class="ltx_ref">8</a>, Corollary 6.5]</cite>を参照のこと)．
+よって，命題<a href="#Thmthm21" title="命題 21. ‣ 2.2 普遍性を持つ関数空間を持つ空間 ‣ 2 関数空間の可分距離空間に対する普遍性 ‣ バナッハ空間の関数空間への埋め込みと，関数空間の可分距離空間に対する普遍性" class="ltx_ref"><span class="ltx_text ltx_ref_tag">21</span></a>
+から，<math id="S2.SS2.p18.m4" class="ltx_Math" alttext="C_{b}(X)" display="inline"><mrow><msub><mi>C</mi><mi>b</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow></math>は<math id="S2.SS2.p18.m5" class="ltx_Math" alttext="C(\Gamma)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mo stretchy="false">)</mo></mrow></mrow></math>
+と等長的な部分空間を含むので，
+特に可分距離空間に対して普遍的である．
+∎</p>
+</div>
+</div>
+<div id="Thmrmkx2" class="ltx_theorem ltx_theorem_rmk">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span class="ltx_text ltx_font_bold">注意</span></span><span class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmrmkx2.p1" class="ltx_para">
+<p class="ltx_p"><math id="Thmrmkx2.p1.m1" class="ltx_Math" alttext="C(\omega_{0}+1)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ω</mi><mn>0</mn></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math><span class="ltx_text ltx_font_italic">
+は可分距離空間に対して普遍的でない．
+特に，<math id="Thmrmkx2.p1.m2" class="ltx_Math" alttext="C(\omega_{0}\cdot 2+1)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><msub><mi>ω</mi><mn>0</mn></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><mn>2</mn></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+は<math id="Thmrmkx2.p1.m3" class="ltx_Math" alttext="C(\omega_{0}+1)" display="inline"><mrow><mi>C</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ω</mi><mn>0</mn></msub><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></math>
+に等長的に埋め込めない．
+これは<em class="ltx_emph ltx_font_upright"><cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="" class="ltx_ref">10</a>, Lemma 5]</cite></em>を参照のこと．</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">宮島静雄, 関数解析,
+横浜図書, 2005年.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">yamyamtop, 全射な曲線と単射な曲線, 
+<br class="ltx_break">https://yamyamtopo.files.wordpress.com/2019/08/hahn-mazurkiewicz.pdf,
+2020年9月閲覧．
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">電波通信(ナンブキトラ), ダガンディーとハウスドルフの拡張定理,
+http://concious4410.hatenablog.com/entry/2017/01/18/185814
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">S. Banach, <span class="ltx_text ltx_font_italic">Théorie des Óperations Linéaires</span>,
+Chelsea Publishing Co., New
+York, 1955.
+
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">T. Dobrowolski and H. Truńczyk,
+<span class="ltx_text ltx_font_italic">On metric linear space homeomorphic to <math id="bib.bib5.m1" class="ltx_Math" alttext="\ell^{2}" display="inline"><msup><mi mathvariant="normal">ℓ</mi><mn>2</mn></msup></math> and compact convex sets homeomorphic to <math id="bib.bib5.m2" class="ltx_Math" alttext="Q" display="inline"><mi>Q</mi></math></span>, Bull. Acad. Polon. Sci. Sér. Sci. Math.
+27 (1979), 883–887.
+
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">J. Dugundji, <span class="ltx_text ltx_font_italic">An extension of Tietze’s theorem</span>,
+Paciffic J. Math. vol. 1 (1951), 105–125.
+
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">J. Heinonen, <span class="ltx_text ltx_font_italic">Geometrical embedding of metric spaces</span>, Report, University of Jyväskylä Department of Mathematics and Statics, vol. 90. 2003. http://www.math.jyu.fi/tukimas/ber.html.
+
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">A. S. Kechris, <span class="ltx_text ltx_font_italic">Classical Descriptive Set Theory</span>,
+Springer-Verlag, GTM 156 (1995).
+
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">O. H. Keller, <span class="ltx_text ltx_font_italic">Die homoiomorphie der kompakten konvexen mengen in Hirbertscen Raum</span>,
+Math. Ann. 105 (1931), 748–758.
+
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">R. Villa, <span class="ltx_text ltx_font_italic">Isometric embedding into space of continuous functions</span>,
+Studia Math. 129 (3) (1998),
+197–205.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jul 26 19:48:09 2026 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -689,7 +689,7 @@ F(t)=\int_{X}f(x,t)\ d\mu(x)
 \forall x\in X\ \forall t\in N\ \left|\frac{\partial f}{\partial t}(x,t)\right|\le \phi(x)
 \]を充たすとするこのとき、
 \[
-\frac{d}{dt}\biggl|_{t=a}\int_X f(x,t)\ d\mu(x)=\int_X \frac{\partial f}{\partial t}(x,a)\ d\mu(x)
+\left.\frac{d}{dt}\right|_{t=a}\int_X f(x,t)\ d\mu(x)=\int_X \frac{\partial f}{\partial t}(x,a)\ d\mu(x)
 \]
 \end{thm}
 \begin{proof}
@@ -711,7 +711,7 @@ F(t)=\int_X f(x,t)\ d\mu(x)
 \end{eqnarray*}
 であり、
 \[
-\lim_{h\to 0}\frac{F(a+h)-F(a)}{h}=\frac{d}{dt}\biggl|_{t=a}\int_X f(x,t)\ d\mu(x)
+\lim_{h\to 0}\frac{F(a+h)-F(a)}{h}=\left.\frac{d}{dt}\right|_{t=a}\int_X f(x,t)\ d\mu(x)
 \]
 なので定理がわかる。
 \end{proof}
@@ -719,13 +719,13 @@ F(t)=\int_X f(x,t)\ d\mu(x)
 \section{零集合}
 このセクションでは零集合を定義し、その扱いを簡単に紹介する。
 
-{\df[零集合]
+\begin{df}[零集合]
 測度空間$(X,\mm,\mu)$に置いて$N\subset X$が零集合であるとは
 \[
 \mu(N)=0
 \]
 となること。
-}
+\end{df}
 
 
 \begin{prop}[零集合の可算和]測度空間$(X,\mm,\mu)$の部分集合族$\{A_i\}_{i\in \nn}\subset \mm$
@@ -876,7 +876,6 @@ $\amalg$
 
 
 \end{comment}
-
 
 
 

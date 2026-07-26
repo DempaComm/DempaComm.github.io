@@ -117,7 +117,7 @@ d(x,x_U)\le \frac{1}{4}d(x_U,A)
 \]
 となる。そして$a\in A$について
 \[
-d(a,a_U)\le d(a, x)+d(x,x_U)+d(x_U,a_U)\le d(a.x)+\frac{1}{4}d(x_U,A)+\frac{5}{4}d(x_U,A)=d(a,x)+\frac{3}{2}d(x_U,A)
+d(a,a_U)\le d(a, x)+d(x,x_U)+d(x_U,a_U)\le d(a,x)+\frac{1}{4}d(x_U,A)+\frac{5}{4}d(x_U,A)=d(a,x)+\frac{3}{2}d(x_U,A)
 \]
 となり、さらに
 \[
@@ -165,7 +165,7 @@ d(a,y)<r\ and\ y\in A\To p(f(a)-f(y))<1
 \[
 F(x)=\sum_{i=1}^ms_{U_i}(x)f(a_{U_i})
 \]
-となり、先の補題から$d(a.a_{U_i})\le 3d(a,x)<r$となり、$a_{U_i}\in A$なので
+となり、先の補題から$d(a,a_{U_i})\le 3d(a,x)<r$となり、$a_{U_i}\in A$なので
 \[
 p(f(a)-f(a_{U_i}))<1
 \]
@@ -271,7 +271,7 @@ h(x,0)=Q(x,f(x))=(x-\be(f(x)),f(x))=(x-f^{-1}(f(x)),f(x))=(0,f(x))=g(x,0)
 となり、確かに$h$は$g$の拡張になっている。
 \end{proof}
 \begin{cau}
-次の定理に入る前に一つ注意をしておく。二つのノルム空間$(E,\|*\|_E),(F,\|*\|_F)$に対する直積空間$E\times F$のノルムのことである。この文章では一応$E\times F$のノルムを
+次の定理に入る前に一つ注意をしておく。二つのノルム空間$(E,\lVert\cdot\rVert_E),(F,\lVert\cdot\rVert_F)$に対する直積空間$E\times F$のノルムのことである。この文章では一応$E\times F$のノルムを
 \[
 \|(x,y)\|_{E\times F}=\sqrt{\|x\|^2_{E}+\|y\|^2_F}
 \]
@@ -282,7 +282,7 @@ h(x,0)=Q(x,f(x))=(x-\be(f(x)),f(x))=(x-f^{-1}(f(x)),f(x))=(0,f(x))=g(x,0)
 $X$を距離付け可能空間で$A$をその閉部分集合とし、$A$には$A$の位相と両立する距離$\rho$が与えられているとする。このとき$X$の位相と両立する$X$上の距離で、$A$上で$\rho$と一致するものが存在する。
 \end{thm}
 \begin{proof}
-$X$の距離を何か適当に$d$と置く。定理\ref{n}から等長埋め込み$i:(X,d)\to (E,\|*\|_E)$で$i(X)$が$E$の閉集合であるものが存在する。同様に$(A,\rho)$についても等長埋め込み$j:(A,\rho)\to (F,\|*\|_F)$が存在し、$j(A)$は$F$の閉集合となる。\par
+$X$の距離を何か適当に$d$と置く。定理\ref{n}から等長埋め込み$i:(X,d)\to (E,\lVert\cdot\rVert_E)$で$i(X)$が$E$の閉集合であるものが存在する。同様に$(A,\rho)$についても等長埋め込み$j:(A,\rho)\to (F,\lVert\cdot\rVert_F)$が存在し、$j(A)$は$F$の閉集合となる。\par
 さて$i$が閉埋め込みであることと、$A$が$X$の閉集合であることから$i(A)$も$E$の閉集合であり、$i$と$j$は埋め込みであるから$i(A)$と$j(A)$は自然に同相である。つまり$j\circ i^{-1}$が同相写像を与える。この同相写像を$f:i(A)\to j(A)$として補題\ref{lem}を用いて
 $g:i(A)\times \{0\}\to \{0\}\times j(A); (i(a),0)\mapsto (0,j(a))$の拡張となる同相写像$h:E\times F\to E\times F$を得る。\par
 さて$k:E\to E\times\{0\}$を$k(x)=(x,0)$で与えられる自然な閉埋め込みだとして
@@ -293,7 +293,7 @@ H=h\circ k\circ i:X\to E\times F
 \[
 e(x,y)=\|H(x)-H(y)\|_{E\times F}
 \]
-で定義すると、この$e$は$X$の位相と両立する。また$a\in A$について$H(a)=(0,j(a))$で$j:(A,\rho)\to (F,\|*\|_F)$が等長であることから$a\mapsto (0,j(a))$で定義される写像も等長なので、$e$は$A$上で$\rho$と一致する。
+で定義すると、この$e$は$X$の位相と両立する。また$a\in A$について$H(a)=(0,j(a))$で$j:(A,\rho)\to (F,\lVert\cdot\rVert_F)$が等長であることから$a\mapsto (0,j(a))$で定義される写像も等長なので、$e$は$A$上で$\rho$と一致する。
 \end{proof}
 \begin{thm}[Hausdorff's Metric Extension theorem1]
 $X$を完備距離付け可能空間で$A$をその閉部分集合とし、$A$には$A$の位相と両立する距離$\rho$が与えられているとし、更に$(A,\rho)$は完備であるとする。このとき$X$の位相と両立する$X$上の完備な距離で、$A$上で$\rho$と一致するものが存在する。
@@ -416,7 +416,6 @@ f(x) = ax^2 + bx + c \tag{1.2.3}
 
 
 \end{comment}
-
 
 
 

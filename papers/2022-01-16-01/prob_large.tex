@@ -583,7 +583,7 @@ $(s_i^k)^{-1}(a)=\sigma(f_i^{-1}(\mathcal{B}(\rr)))$
 この$\{s_i^k\}_{i}$について命題が成り立つことをみよう．
 各$s_i^k$は互いに素な可測集合$\{A_{(i, k,l)}\}_l$を用いて
 \[
-s_i^k(x)=\sum_{l=1}^{m(i)}a_{(, il)}1_{A_(i, k, l)}
+s_i^k(x)=\sum_{l=1}^{m(i)}a_{(i,l)}1_{A_{(i,k,l)}}
 \]
 と表されているとする．
 この時
@@ -893,12 +893,9 @@ $h=\mean(f_{i}^{4})$が成り立つならば，$S_n\xrightarrow{a. s. }m$とな�
 まず，
 \begin{align*}
 (S_n-m)^4&=((f_i-m)/n)^4\\
-&=
-\frac{1}{n^4}\Biggl(
-\sum_{i}(f_i-m)^4+\sum_{i, j}\binom{4}{2}(f_i-m)^2(f_j-m)^2\\
-&+\sum_{i, j, k, l}\binom{4}{1}(f_i-m)(f_j-m)(f_k-m)(f_l-m)+
-\sum_{i, j}\binom{4}{3}(f_i-m)^3(f_j-m)
-\Biggr)
+&=\frac{1}{n^4}\Biggl(\sum_{i}(f_i-m)^4+\sum_{i, j}\binom{4}{2}(f_i-m)^2(f_j-m)^2
++\sum_{i, j, k, l}\binom{4}{1}(f_i-m)(f_j-m)(f_k-m)(f_l-m)
++\sum_{i, j}\binom{4}{3}(f_i-m)^3(f_j-m)\Biggr)
 \end{align*}
 である．
 積分をすると独立性から，後ろ二つの項は$0$になる．よって
@@ -1262,7 +1259,7 @@ $\varian(g_{i})=\varian(g_{i}-\mean(g_{i}))$と，
 \]
 が示せれば良い．
 まず，
-$\varian(g_{i)}=\mean(g_{i}^{2})-(\mean(g_{i}))^{2}\le 
+$\varian(g_{i})=\mean(g_{i}^{2})-(\mean(g_{i}))^{2}\le
 \mean(g_{i}^{2})$に注意しよう．
 \begin{align*}
 \sum_{i=1}^{\infty}\frac{\varian(g_i)}{i^2}
@@ -1420,8 +1417,6 @@ f(x) = ax^2 + bx + c \tag{1.2.3}
 
 
 \end{comment}
-
-
 
 
 

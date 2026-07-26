@@ -238,7 +238,7 @@ F_{n}\subset \bigcup_{i=1}^nV_i\tag{hoge}
 $i=0$のとき:$F_0=\O$であるから$\mathcal{V}_0=\{\O\}$とおけば条件$({\rm hoge})$は充たされる。\par
 $i=n$まで構成されたとして、$i=n+1$のとき、
 \[
-I=\{\ \{U_{1},U_{2},\cdots,U_{n+1}\}\ |\ \mbox{$\{U_{1},U_{2},\cdots,U_{n+1}\in \mathcal{U}$で$U_{1},U_{2},\cdots,U_{n+1}$は互いに異なる}\}
+I=\{\ \{U_{1},U_{2},\cdots,U_{n+1}\}\ |\ \mbox{$\{U_{1},U_{2},\cdots,U_{n+1}\}\subset \mathcal{U}$で$U_{1},U_{2},\cdots,U_{n+1}$は互いに異なる}\}
 \]
 と定義し、$T\in I$に対して
 \[
@@ -252,7 +252,7 @@ A_{T}\subset \bigcap_{U\in T}U
 さて$\{A_T\}_{T\in I}$が疎であることを示そう。$x\in X$を任意に与える。\par 
 $deg(x;\mathcal{U})\le n$のとき：$x\in F_n\subset \bigcup_{j=0}^nV_j$で$\bigcup_{j=0}^nV_j$は$A_T$の定義から$\{A_T\}_{T\in I}$の元と交わらない。\par 
 $\deg(x;\mathcal{U})\ge n+2$のとき：$x$を含む$n+2$個の$\mathcal{U}$の元$U_1,U_2,\cdots,U_{n+2}$が存在しする。そこで$\dpst N=\bigcap_{i=1}^{n+2}U_{i}$と置けばどんな$T\in I$に対しても、この$U_1,U_2,\cdots,U_{n+2}$のいづれかひとつは$T$に属しないので$A_T$の定義から$N$は$\{A_T\}_{T\in I}$の元と交わらない。\par
-$deg(x;\mathcal{U})=n+1$のとき：ちょうど$n+1$個の$\mathcal{U}$の元$U_1,_U2,\cdots,U_{n+1}$が$x$を含む。$S=\{U_1,_U2,\cdots,U_{n+1}\}\in I$と置けば、$A_T$の定義から
+$deg(x;\mathcal{U})=n+1$のとき：ちょうど$n+1$個の$\mathcal{U}$の元$U_1,U_2,\cdots,U_{n+1}$が$x$を含む。$S=\{U_1,U_2,\cdots,U_{n+1}\}\in I$と置けば、$A_T$の定義から
 $\dpst N=\bigcap_{i=1}^{n+2}U_{i}$は$A_S$としか交わらない。\par 
 よって以上から$\{A_T\}_{T\in I}$は閉集合からなる疎な族である。$(6)$から$X$が族正規であることと命題\ref{benri}から疎な開集合の族$\{O_T\}_{T\in I}$が存在して$A_T\subset O_T$を充たす。これを用いて
 \[
@@ -264,7 +264,7 @@ P_T=O_T\cap \bigcap_{U\in T}U
 F_{n+1}=F_n\cup F_{n+1}\subset \left(\bigcup_{j=0}^{n}V_j\right)\cup F_{n+1}= \left(\bigcup_{j=0}^{n}V_j\right)\cup \left(F_{n+1}\setminus \left(\bigcup_{j=0}^{n}V_j\right)\right)
 \]
 そこで$x\in F_{n+1}\setminus \left(\bigcup_{j=0}^{n}V_j\right)$を任意に与えると
-$deg(x:\mathcal{U})=n+1$であり、このときある$T\in I$が存在して
+$deg(x;\mathcal{U})=n+1$であり、このときある$T\in I$が存在して
 \[
 x\in X\setminus \bigcup_{U\not\in T}U
 \]
@@ -504,7 +504,7 @@ H_{\al,n}=V_{\al,n}\setminus\bigcup_{\be<\al}U_{\be,n+1}
 理由を説明しよう。今$\al>\be$と仮定しても一般性を失わない。このとき$H_{\al,n}$の定義から$p\in H_{\al,n},\ q\in H_{\be,n}$とすると$p\not\in U_{\be,n+1}$なので$(1)$から$d(p,q)\ge2^{-n-1}$がわかる。\par
 さてさて
 \[
-E_{\al,n}=\{x\in X\ |\ d(x,H_{\al,n})<2^{-n-3}=\bigcup_{c\in H_{\al,n}}B(c,2^{-n-3})
+E_{\al,n}=\{x\in X\ |\ d(x,H_{\al,n})<2^{-n-3}\}=\bigcup_{c\in H_{\al,n}}B(c,2^{-n-3})
 \]
 と定義すると明らかに$E_{\al,n}$は開集合であり、$2^{-n-3}<2^{-n}$から$E_{\al,n}\subset U_{\al}$がわかる。この開集合について次の事が成り立つ。
 \begin{equation}
@@ -610,7 +610,6 @@ $\amalg$
 
 
 \end{comment}
-
 
 
 
