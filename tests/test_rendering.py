@@ -60,6 +60,14 @@ def paper(
             "label": "HTML版を読む（試験）",
             "reviewed_at": "2026-07-26T13:00:00+09:00",
         }
+        value["alternate_html_versions"] = [
+            {
+                **value["html_version"],
+                "source_path": "original.tex",
+                "path": "html-original/index.html",
+                "label": "元版HTMLを読む（自動変換・未目視）",
+            }
+        ]
     return Paper.from_dict(value, Path(slug) / "paper.json")
 
 
@@ -126,9 +134,17 @@ class PublicRenderingTest(unittest.TestCase):
         )
         html_detail = rendered_paper_page(html_paper)
         self.assertIn('href="html/index.html">HTML版を読む（試験）</a>', html_detail)
+        self.assertIn(
+            'href="html-original/index.html">元版HTMLを読む（自動変換・未目視）</a>',
+            html_detail,
+        )
         html_sitemap = rendered_sitemap([(html_paper.source_path, html_paper)])
         self.assertIn(
             "https://dempacomm.github.io/papers/2026-07-26-01/html/",
+            html_sitemap,
+        )
+        self.assertIn(
+            "https://dempacomm.github.io/papers/2026-07-26-01/html-original/",
             html_sitemap,
         )
         self.assertIn("<lastmod>2026-07-26</lastmod>", html_sitemap)

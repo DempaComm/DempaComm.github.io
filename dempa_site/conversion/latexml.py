@@ -216,7 +216,35 @@ def _normalize_cross_row_braces(source: str) -> tuple[str, int]:
 
 def _normalize_quotient_relation(source: str) -> tuple[str, int]:
     r"""Give LaTeXML an explicit atom type for quotient notation ``/\sim``."""
-    return re.subn(r"/\s*\\sim\b", r"/\\mathord{\\sim}", source)
+    source, count = re.subn(r"/\s*\\sim\b", r"/\\mathord{\\sim}", source)
+    source, bowtie_count = re.subn(
+        r"/\\!\\bowtie\b", r"\\mathbin{/\\!\\bowtie}", source
+    )
+    return source, count + bowtie_count
+
+
+def _normalize_legacy_math_punctuation(source: str) -> tuple[str, int]:
+    r"""Disambiguate old but visibly clear punctuation in a temporary copy."""
+    replacements = 0
+    source, count = re.subn(
+        r"\\newcommand\{\\card\}\{\\text\{\{\\rm card\}\}\}",
+        r"\\DeclareMathOperator{\\card}{card}",
+        source,
+    )
+    replacements += count
+    source, count = re.subn(r"(?<=[A-Za-z]),\s*(?=:[A-Za-z\\])", "", source)
+    replacements += count
+    source, count = re.subn(
+        r"(?<=\))\.(?=[A-Za-z\\])", r"\\mathbin{.}", source
+    )
+    replacements += count
+    source, count = re.subn(
+        r"GL\(([^()\n]*?)\.\s*(\\mathbb\{[^{}]+\})\)",
+        r"GL(\1,\2)",
+        source,
+    )
+    replacements += count
+    return source, replacements
 
 
 def _normalize_bigtriangleup_symbol(source: str) -> tuple[str, int]:
@@ -1028,6 +1056,9 @@ def run_latexml_trial(
             normalized_source, quotient_normalization_count = (
                 _normalize_quotient_relation(normalized_source)
             )
+            normalized_source, legacy_punctuation_normalization_count = (
+                _normalize_legacy_math_punctuation(normalized_source)
+            )
             normalized_source, triangle_normalization_count = (
                 _normalize_bigtriangleup_symbol(normalized_source)
             )
@@ -1076,6 +1107,7 @@ def run_latexml_trial(
                 or tikzcd_normalization_count
                 or brace_normalization_count
                 or quotient_normalization_count
+                or legacy_punctuation_normalization_count
                 or triangle_normalization_count
                 or function_space_normalization_count
                 or norm_delimiter_normalization_count
@@ -1122,6 +1154,14 @@ def run_latexml_trial(
                     {
                         "kind": "quotient-relation",
                         "count": quotient_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if legacy_punctuation_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "legacy-math-punctuation",
+                        "count": legacy_punctuation_normalization_count,
                         "scope": "temporary-conversion-copy",
                     }
                 )

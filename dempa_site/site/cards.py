@@ -27,11 +27,12 @@ def public_file_actions(
         actions.append(
             f'{indent}<a class="primary-action" href="{prefix}main.pdf">PDFを読む</a>'
         )
-    if manifest.html_version is not None:
-        html_path = html.escape(manifest.html_version.path, quote=True)
-        html_label = html.escape(manifest.html_version.label)
+    for index, version in enumerate(manifest.html_versions):
+        html_path = html.escape(version.path, quote=True)
+        html_label = html.escape(version.label)
+        primary = ' class="primary-action"' if index == 0 else ""
         actions.append(
-            f'{indent}<a class="primary-action" href="{prefix}{html_path}">{html_label}</a>'
+            f'{indent}<a{primary} href="{prefix}{html_path}">{html_label}</a>'
         )
     primary_source_added = False
     for entry in manifest.files:

@@ -34,11 +34,12 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
                 str(manifest["published_at"])[:10],
             )
         )
-        if manifest.html_version is not None:
+        for version in manifest.html_versions:
             urls.append(
                 (
-                    f"{SITE_URL}/papers/{quote(manifest.slug, safe='')}/html/",
-                    manifest.html_version.generated_at[:10],
+                    f"{SITE_URL}/papers/{quote(manifest.slug, safe='')}/"
+                    f"{quote(str(Path(version.path).parent), safe='/')}/",
+                    version.generated_at[:10],
                 )
             )
     entries = []

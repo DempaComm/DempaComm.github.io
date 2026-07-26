@@ -184,6 +184,35 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         self.assertIn("AUTOMATIC HTML VERSION", public_html)
         self.assertIn("元PDFとの目視比較は未実施です", public_html)
 
+    def test_alternate_html_version_can_be_published_beside_primary(self) -> None:
+        first = publish_latexml_trial(
+            root=self.root,
+            paper=self.paper,
+            trial_output=self.trial,
+            automatically_published=True,
+        )
+        self.assertTrue(first.html_path.is_file())
+        refreshed = load_manifest(self.manifest_path, PaperToolError)
+        alternate = publish_latexml_trial(
+            root=self.root,
+            paper=refreshed,
+            trial_output=self.trial,
+            automatically_published=True,
+            public_directory="html-original",
+            label="元版HTMLを読む（自動変換・未目視）",
+            version_name="元版HTML",
+            alternate=True,
+        )
+
+        published = load_manifest(self.manifest_path, PaperToolError)
+        self.assertEqual(2, len(published.html_versions))
+        self.assertEqual(
+            "html-original/index.html", published.alternate_html_versions[0].path
+        )
+        public_html = alternate.html_path.read_text(encoding="utf-8")
+        self.assertIn("/html-original/", public_html)
+        self.assertIn("元版HTMLをLaTeXMLで自動変換", public_html)
+
     def test_unsafe_inline_svg_is_rejected(self) -> None:
         trial_html = self.trial / self.paper.slug / "index.html"
         trial_html.write_text(

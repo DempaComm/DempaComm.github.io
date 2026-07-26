@@ -83,7 +83,13 @@ def _public_pdf_href(paper: Paper) -> str:
 
 
 def _integrate_site_html(
-    source: str, paper: Paper, source_path: str, *, automatically_published: bool
+    source: str,
+    paper: Paper,
+    source_path: str,
+    *,
+    automatically_published: bool,
+    public_directory: str,
+    version_name: str,
 ) -> str:
     if any(pattern.search(source) for pattern in UNSAFE_HTML_PATTERNS):
         raise PaperToolError("LaTeXML HTMLに公開を許可しない動的要素があります")
@@ -92,7 +98,7 @@ def _integrate_site_html(
         raise PaperToolError("LaTeXML SVGに公開を許可しない要素があります")
     slug = html.escape(paper.slug, quote=True)
     title = html.escape(paper.title)
-    canonical = f"{SITE_URL}/papers/{slug}/html/"
+    canonical = f"{SITE_URL}/papers/{slug}/{quote(public_directory, safe='')}/"
     head_addition = (
         f'<link rel="canonical" href="{canonical}">\n'
         '<link rel="stylesheet" href="../../../styles.css" type="text/css">\n'
@@ -117,12 +123,16 @@ def _integrate_site_html(
     if automatically_published:
         eyebrow = "AUTOMATIC HTML VERSION"
         description = (
-            f"{title}のLaTeXML自動変換版です。自動検査には合格していますが、"
+            f"{title}の{html.escape(version_name)}をLaTeXMLで自動変換したものです。"
+            "自動検査には合格していますが、"
             "元PDFとの目視比較は未実施です。正本はPDF・TeXです。"
         )
     else:
         eyebrow = "EXPERIMENTAL HTML VERSION"
-        description = f"{title}のLaTeXML版です。正本はPDF・TeXです。"
+        description = (
+            f"{title}の{html.escape(version_name)}をLaTeXMLで変換したものです。"
+            "正本はPDF・TeXです。"
+        )
     navigation = f"""<a class="skip-link" href="#main-content">本文へ移動</a>
 <header class="html-version-header">
   <p class="eyebrow">{eyebrow}</p>
@@ -148,6 +158,10 @@ def publish_latexml_trial(
     paper: Paper,
     trial_output: Path,
     automatically_published: bool = False,
+    public_directory: str = "html",
+    label: str | None = None,
+    version_name: str = "HTML版",
+    alternate: bool = False,
 ) -> LaTeXMLPublication:
     root = root.resolve()
     paper_dir = paper.source_path.parent.resolve()
@@ -182,7 +196,10 @@ def publish_latexml_trial(
     if not public_files or unexpected:
         raise PaperToolError("LaTeXML試験出力に公開対象外のファイルがあります")
 
-    target_dir = paper_dir / "html"
+    public_directory = str(safe_relative_path(public_directory, PaperToolError))
+    if Path(public_directory).parent != Path("."):
+        raise PaperToolError("HTML版の公開フォルダ名は一階層で指定してください")
+    target_dir = paper_dir / public_directory
     if target_dir.exists():
         raise PaperToolError(f"HTML版の公開先が既にあります: {target_dir}")
     temporary = Path(tempfile.mkdtemp(prefix=".html-publication-", dir=paper_dir))
@@ -196,19 +213,21 @@ def publish_latexml_trial(
                     paper,
                     result["source"],
                     automatically_published=automatically_published,
+                    public_directory=public_directory,
+                    version_name=version_name,
                 )
                 target.write_text(transformed, encoding="utf-8")
             else:
                 shutil.copy2(source_file, target)
 
-        html_label = (
+        html_label = label or (
             "HTML版を読む（自動変換・未目視）"
             if automatically_published
             else "HTML版を読む（試験）"
         )
         files = []
         for target in sorted(temporary.iterdir()):
-            relative = f"html/{target.name}"
+            relative = f"{public_directory}/{target.name}"
             files.append(
                 {
                     "path": relative,
@@ -221,21 +240,28 @@ def publish_latexml_trial(
             )
 
         manifest = paper.to_dict()
-        if manifest.get("html_version") is not None:
-            raise PaperToolError("paper.jsonには既にHTML版の承認情報があります")
         manifest["files"].extend(files)
         reviewed_at = local_now_seconds().isoformat(timespec="seconds")
-        manifest["html_version"] = {
+        version_record = {
             "status": "automatic" if automatically_published else "approved",
             "generator": "LaTeXML",
             "generator_version": report["version"],
             "generated_at": report["generated_at"],
             "source_path": result["source"],
             "source_sha256": result["source_sha256"],
-            "path": "html/index.html",
+            "path": f"{public_directory}/index.html",
             "label": html_label,
             "reviewed_at": reviewed_at,
         }
+        if alternate:
+            alternatives = manifest.setdefault("alternate_html_versions", [])
+            if any(item["path"] == version_record["path"] for item in alternatives):
+                raise PaperToolError("paper.jsonには同じ公開先の別版HTMLがあります")
+            alternatives.append(version_record)
+        else:
+            if manifest.get("html_version") is not None:
+                raise PaperToolError("paper.jsonには既にHTML版の承認情報があります")
+            manifest["html_version"] = version_record
         validate_manifest_data(manifest, manifest_path, load_schema(), PaperToolError)
         temporary.rename(target_dir)
         try:

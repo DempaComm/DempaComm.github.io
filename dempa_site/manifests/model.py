@@ -183,6 +183,7 @@ class Paper(Mapping[str, Any]):
     statements: Tuple[Statement, ...] = ()
     relations: Tuple[PaperRelation, ...] = ()
     html_version: Optional[HtmlVersion] = None
+    alternate_html_versions: Tuple[HtmlVersion, ...] = ()
     license: str = ""
     _raw: Mapping[str, Any] = field(default_factory=dict, repr=False, compare=False)
 
@@ -234,12 +235,22 @@ class Paper(Mapping[str, Any]):
                 if "html_version" in value
                 else None
             ),
+            alternate_html_versions=tuple(
+                HtmlVersion.from_dict(item)
+                for item in value.get("alternate_html_versions", [])
+            ),
             license=value.get("license", ""),
             _raw=deepcopy(dict(value)),
         )
 
     def to_dict(self) -> dict[str, Any]:
         return deepcopy(dict(self._raw))
+
+    @property
+    def html_versions(self) -> Tuple[HtmlVersion, ...]:
+        """Return the primary HTML version followed by any named alternatives."""
+        primary = (self.html_version,) if self.html_version is not None else ()
+        return primary + self.alternate_html_versions
 
     def __getitem__(self, key: str) -> Any:
         return deepcopy(self._raw[key])
