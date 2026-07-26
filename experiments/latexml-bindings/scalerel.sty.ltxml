@@ -1,0 +1,13 @@
+# -*- mode: Perl -*-
+# scalerel changes only the visual size of its first argument relative to the
+# second. HTML/MathML keeps the semantic symbol; the unstarred form also keeps
+# the reference object, matching scalerel's TeX behavior.
+package LaTeXML::Package::Pool;
+use strict;
+use warnings;
+use LaTeXML::Package;
+
+DefMacro('\scalerel OptionalMatch:* [] {}{}',
+  '\ifx.#1.#3#4\else#3\fi');
+
+1;

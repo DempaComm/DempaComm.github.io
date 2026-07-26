@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from dempa_site.conversion.latexml import (
     _effective_warning_lines,
+    _normalize_bigtriangleup_symbol,
     _normalize_cross_row_braces,
     _normalize_math_inside_text,
     _normalize_nocite_all,
@@ -108,6 +109,14 @@ class LaTeXMLTrialTest(unittest.TestCase):
         )
         self.assertEqual(1, quotient_count)
         self.assertEqual(r"$Z=W/\mathord{\sim}$", normalized_quotient)
+        normalized_triangle, triangle_count = _normalize_bigtriangleup_symbol(
+            r"$\bigtriangleup_\kappa$ and $\mathord{\bigtriangleup}_\lambda$"
+        )
+        self.assertEqual(1, triangle_count)
+        self.assertEqual(
+            r"$\mathord{\bigtriangleup}_\kappa$ and $\mathord{\bigtriangleup}_\lambda$",
+            normalized_triangle,
+        )
         normalized_nocite, nocite_count = _normalize_nocite_all(
             r"\nocite{*}", [self.paper.source_path.parent / "references.bib"]
         )

@@ -185,3 +185,16 @@ LaTeXMLが `\nocite{*}` から未引用文献を1件省略したため、変換�
 生成HTMLにはSVG数と安全性検査結果を記録する。SVG内の `script`、`onload` などのイベント属性、
 HTTP・data URL・JavaScriptによる外部資源参照を検出した場合は、自動検査と正式公開の両方を停止する。
 SVGが生成できても、複雑なTikZライブラリ、色、線種、配置は元PDFとの目視比較を必須とする。
+
+## scalerelを使う原稿の改善結果
+
+「対角的交叉とFodorの補題」では、対角的交叉記号を作る
+`\scalerel*{\bigtriangleup}{\sum}` が未対応だった。`scalerel` は第1引数を第2引数の寸法へ
+拡大する紙面上の処理なので、HTML/MathMLでは意味を持つ第1引数を保持する外置きbindingを追加した。
+星なし形式では元パッケージと同様に第2引数も残す。
+
+LaTeXMLが `\bigtriangleup` を加法演算子と誤分類する問題は、変換時の一時コピーだけで
+`\mathord{\bigtriangleup}` として数式上の型を明示する。元TeXとPDFは変更しない。
+2026-07-26の再試験では6箇所の三角記号を保持し、警告、エラー、未解釈数式、欠落要素、
+簡易個人情報候補がすべて0となった。試験結果は
+`_experiments/latexml-fodor-clean/2021-05-22-01/index.html` で確認できる。

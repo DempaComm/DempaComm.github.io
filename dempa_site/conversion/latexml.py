@@ -202,6 +202,15 @@ def _normalize_quotient_relation(source: str) -> tuple[str, int]:
     return re.subn(r"/\s*\\sim\b", r"/\\mathord{\\sim}", source)
 
 
+def _normalize_bigtriangleup_symbol(source: str) -> tuple[str, int]:
+    r"""Prevent LaTeXML from treating ``\bigtriangleup`` as addition."""
+    return re.subn(
+        r"(?<!\\mathord\{)\\bigtriangleup(?![A-Za-z@])",
+        r"\\mathord{\\bigtriangleup}",
+        source,
+    )
+
+
 def _normalize_nocite_all(
     source: str, bibliographies: Iterable[Path]
 ) -> tuple[str, int]:
@@ -506,6 +515,9 @@ def run_latexml_trial(
             normalized_source, quotient_normalization_count = (
                 _normalize_quotient_relation(normalized_source)
             )
+            normalized_source, triangle_normalization_count = (
+                _normalize_bigtriangleup_symbol(normalized_source)
+            )
             normalized_source, nocite_normalization_count = _normalize_nocite_all(
                 normalized_source, bibliography_files
             )
@@ -515,6 +527,7 @@ def run_latexml_trial(
                 normalization_count
                 or brace_normalization_count
                 or quotient_normalization_count
+                or triangle_normalization_count
                 or nocite_normalization_count
             ):
                 temporary_source = target_dir / ".latexml-normalized.tex"
@@ -541,6 +554,14 @@ def run_latexml_trial(
                     {
                         "kind": "quotient-relation",
                         "count": quotient_normalization_count,
+                        "scope": "temporary-conversion-copy",
+                    }
+                )
+            if triangle_normalization_count:
+                source_normalizations.append(
+                    {
+                        "kind": "bigtriangleup-symbol",
+                        "count": triangle_normalization_count,
                         "scope": "temporary-conversion-copy",
                     }
                 )
