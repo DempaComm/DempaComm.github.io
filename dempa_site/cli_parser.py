@@ -132,6 +132,30 @@ def build_parser(
     )
     latexml_parser.set_defaults(func=commands["latexml-trial"])
 
+    typst_parser = subparsers.add_parser(
+        "typst-trial",
+        help="compare isolated LaTeX-to-Typst conversions",
+    )
+    typst_parser.add_argument(
+        "slugs",
+        nargs="*",
+        help="paper slugs; omit to use experiments/typst-trial.json",
+    )
+    typst_parser.add_argument(
+        "--output",
+        default="_experiments/typst",
+        metavar="DIR",
+        help="empty trial output directory (default: _experiments/typst)",
+    )
+    typst_parser.add_argument(
+        "--timeout",
+        type=int,
+        default=180,
+        metavar="SECONDS",
+        help="per-command timeout (default: 180)",
+    )
+    typst_parser.set_defaults(func=commands["typst-trial"])
+
     publish_latexml_parser = subparsers.add_parser(
         "publish-latexml",
         help="promote a manually reviewed LaTeXML trial to public paper files",

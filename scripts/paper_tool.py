@@ -23,6 +23,7 @@ from dempa_site.conversion.latexml import (  # noqa: E402
 from dempa_site.conversion.latexml_publication import (  # noqa: E402
     publish_latexml_trial,
 )
+from dempa_site.conversion.typst import run_typst_trial  # noqa: E402
 from dempa_site.errors import DempaSiteError, PaperToolError  # noqa: E402
 from dempa_site.features import feature_result_lines  # noqa: E402
 from dempa_site.files import write_json  # noqa: E402
@@ -260,6 +261,27 @@ def command_latexml_trial(args: argparse.Namespace) -> None:
         f"LATEXML generated={generated} partial={partial} failed={failed} "
         f"report={output / 'report.json'}"
     )
+    print("MANUAL REVIEW REQUIRED: 試験出力は自動公開されません")
+
+
+def command_typst_trial(args: argparse.Namespace) -> None:
+    output = Path(args.output)
+    if not output.is_absolute():
+        output = ROOT / output
+    report = run_typst_trial(
+        root=ROOT,
+        papers=manifests(),
+        output=output,
+        requested_slugs=args.slugs,
+        timeout=args.timeout,
+    )
+    for item in report["results"]:
+        statuses = " ".join(
+            f"{result['converter']}={result['status']}"
+            for result in item["converters"]
+        )
+        print(f"TYPST {item['slug']} {item['category']} {statuses}")
+    print(f"TYPST report={output / 'report.json'}")
     print("MANUAL REVIEW REQUIRED: 試験出力は自動公開されません")
 
 
@@ -523,6 +545,7 @@ COMMANDS = {
     "add-addendum": command_add_note,
     "pagefind-index": command_pagefind_index,
     "latexml-trial": command_latexml_trial,
+    "typst-trial": command_typst_trial,
     "publish-latexml": command_publish_latexml,
     "latexml-batch": command_latexml_batch,
     "inspect-file": command_inspect_file,
