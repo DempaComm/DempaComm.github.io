@@ -7,6 +7,7 @@ from pathlib import Path
 
 from dempa_site.catalog.metadata import collect_metadata
 from dempa_site.features.statements import generate_statements, indexed_statements
+from dempa_site.features.paper_capabilities import paper_capabilities
 from dempa_site.manifests.model import Paper
 
 
@@ -121,6 +122,16 @@ class StatementIndexTest(unittest.TestCase):
         fallback = next(item for item in statements if item.kind == "counterexample")
         self.assertEqual("tag", fallback.source)
         self.assertEqual("../papers/2026-07-28-01/html/index.html", fallback.href)
+
+    def test_shared_capabilities_summarize_html_and_statements(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            catalog = self.prepared_catalog(Path(temporary))
+            capability = paper_capabilities(catalog)["2026-07-28-01"]
+
+        self.assertEqual("html/index.html", capability.html_path)
+        self.assertEqual(4, capability.statement_count)
+        self.assertEqual(1, capability.statement_counts["theorem"])
+        self.assertEqual(0, capability.correction_count)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import re
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -12,6 +13,7 @@ from dempa_site.features.exploration_common import (
     rendered_exploration_page,
     repository_root,
 )
+from dempa_site.features.paper_capabilities import PaperCapabilities, paper_capabilities
 from dempa_site.files import read_json, write_json
 from dempa_site.manifests.model import Paper
 from dempa_site.manifests.schema import validate_json_schema
@@ -33,7 +35,7 @@ class ReadingPath:
     papers: tuple[ReadingStep, ...]
 
 
-def _load_paths(catalog: SiteCatalog) -> tuple[ReadingPath, ...]:
+def load_reading_paths(catalog: SiteCatalog) -> tuple[ReadingPath, ...]:
     root = repository_root(catalog)
     papers = {paper.slug: paper for _, paper in catalog.selected}
     paths: list[ReadingPath] = []
@@ -99,7 +101,7 @@ def _validate_path_graph(paths: tuple[ReadingPath, ...] | list[ReadingPath]) -> 
 
 
 def validate_reading_paths(catalog: SiteCatalog) -> None:
-    _load_paths(catalog)
+    load_reading_paths(catalog)
 
 
 def _path_card(path: ReadingPath) -> str:
@@ -112,7 +114,28 @@ def _path_card(path: ReadingPath) -> str:
       </a>"""
 
 
-def _rendered_path_page(path: ReadingPath, all_paths: dict[str, ReadingPath]) -> str:
+def _step_actions(step: ReadingStep, capability: PaperCapabilities) -> str:
+    links = [
+        f'<a href="../../papers/{html.escape(step.slug, quote=True)}/">原稿ページ</a>'
+    ]
+    if capability.html_path:
+        links.append(
+            f'<a href="../../papers/{html.escape(step.slug, quote=True)}/'
+            f'{html.escape(capability.html_path, quote=True)}">HTML本文を読む</a>'
+        )
+        if capability.statement_count:
+            links.append(
+                f'<a href="../../statements/?paper={html.escape(step.slug, quote=True)}">'
+                f'定理等{capability.statement_count}件</a>'
+            )
+    return '<nav class="reading-step-actions" aria-label="本文への入口">' + "".join(links) + "</nav>"
+
+
+def _rendered_path_page(
+    path: ReadingPath,
+    all_paths: dict[str, ReadingPath],
+    capabilities: Mapping[str, PaperCapabilities],
+) -> str:
     prerequisite_links = ""
     if path.prerequisites:
         links = "、".join(
@@ -139,6 +162,7 @@ def _rendered_path_page(path: ReadingPath, all_paths: dict[str, ReadingPath]) ->
         <h2><a href="../../papers/{html.escape(step.slug, quote=True)}/">{html.escape(step.paper.title)}</a></h2>
         <p>{html.escape(step.guide)}</p>
         <div class="reading-step-meta"><span>{step.paper.published_at:%Y-%m-%d}</span><span>{html.escape(step.paper.math_section or 'その他')}</span></div>
+        {_step_actions(step, capabilities[step.slug])}
         <nav aria-label="経路内の前後の記事">{' '.join(navigation)}</nav>
       </li>"""
         )
@@ -164,7 +188,8 @@ def _rendered_path_page(path: ReadingPath, all_paths: dict[str, ReadingPath]) ->
 
 
 def generate_reading_paths(catalog: SiteCatalog, output: Path) -> None:
-    paths = _load_paths(catalog)
+    paths = load_reading_paths(catalog)
+    capabilities = paper_capabilities(catalog)
     target = output / "reading-paths"
     target.mkdir(parents=True)
     cards = "\n".join(_path_card(path) for path in paths)
@@ -192,7 +217,7 @@ def generate_reading_paths(catalog: SiteCatalog, output: Path) -> None:
         path_dir = target / path.slug
         path_dir.mkdir()
         (path_dir / "index.html").write_text(
-            _rendered_path_page(path, by_slug), encoding="utf-8"
+            _rendered_path_page(path, by_slug, capabilities), encoding="utf-8"
         )
     write_json(
         target / "reading-paths.json",
@@ -205,7 +230,12 @@ def generate_reading_paths(catalog: SiteCatalog, output: Path) -> None:
                     "description": path.description,
                     "prerequisites": list(path.prerequisites),
                     "papers": [
-                        {"slug": step.slug, "guide": step.guide}
+                        {
+                            "slug": step.slug,
+                            "guide": step.guide,
+                            "html_path": capabilities[step.slug].html_path,
+                            "statement_count": capabilities[step.slug].statement_count,
+                        }
                         for step in path.papers
                     ],
                 }
@@ -217,7 +247,7 @@ def generate_reading_paths(catalog: SiteCatalog, output: Path) -> None:
 
 def paths_for_paper(catalog: SiteCatalog) -> dict[str, tuple[ReadingPath, ...]]:
     result: dict[str, list[ReadingPath]] = {}
-    for path in _load_paths(catalog):
+    for path in load_reading_paths(catalog):
         for step in path.papers:
             result.setdefault(step.slug, []).append(path)
     return {slug: tuple(paths) for slug, paths in result.items()}

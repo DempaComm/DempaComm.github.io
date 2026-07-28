@@ -8,11 +8,10 @@ from dempa_site.manifests.model import Paper
 
 
 class ExplorationPrivacyTest(unittest.TestCase):
-    def test_lineage_does_not_publish_internal_approval_reason(self) -> None:
+    def paper_value(self) -> dict:
         digest_a = "a" * 64
         digest_b = "b" * 64
-        private_reason = "公開用コピーから本名と本名名義サイトURLを含むコメント2行を削除"
-        value = {
+        return {
             "schema_version": 1,
             "slug": "2026-07-27-01",
             "migration_record_id": "fixture:lineage",
@@ -39,7 +38,7 @@ class ExplorationPrivacyTest(unittest.TestCase):
             }],
             "approved_changes": [{
                 "approved_at": "2026-07-27T13:00:00+09:00",
-                "reason": private_reason,
+                "reason": "公開用コピーから本名と本名名義サイトURLを含むコメント2行を削除",
                 "files": [{
                     "path": "main.tex",
                     "from_sha256": digest_a,
@@ -48,11 +47,46 @@ class ExplorationPrivacyTest(unittest.TestCase):
             }],
             "privacy_reviews": [],
         }
+
+    def test_lineage_does_not_publish_internal_approval_reason(self) -> None:
+        private_reason = "公開用コピーから本名と本名名義サイトURLを含むコメント2行を削除"
+        value = self.paper_value()
         paper = Paper.from_dict(value, Path("papers/2026-07-27-01/paper.json"))
         events = _events(paper)
 
         self.assertNotIn(private_reason, str(events))
         self.assertEqual("公開原稿を改訂（1ファイル）", events[-1]["summary"])
+
+    def test_lineage_derives_html_review_and_correction_events(self) -> None:
+        value = self.paper_value()
+        value["html_versions"] = [{
+            "status": "approved",
+            "generator": "LaTeXML",
+            "generator_version": "0.8.8",
+            "generated_at": "2026-07-27T14:00:00+09:00",
+            "source_path": "main.tex",
+            "source_sha256": "b" * 64,
+            "path": "html/index.html",
+            "label": "HTML版",
+            "reviewed_at": "2026-07-27T15:00:00+09:00",
+        }]
+        value["corrections"] = [{
+            "recorded_at": "2026-07-27T16:00:00+09:00",
+            "kind": "addendum",
+            "summary": "別証明を追記",
+            "anchor": "#Thm1",
+        }]
+        paper = Paper.from_dict(value, Path("papers/2026-07-27-01/paper.json"))
+        events = _events(paper)
+
+        self.assertEqual(
+            ["html", "html-review", "addendum"],
+            [event["kind"] for event in events[-3:]],
+        )
+        self.assertEqual(
+            "../papers/2026-07-27-01/html/index.html#Thm1",
+            events[-1]["href"],
+        )
 
 
 if __name__ == "__main__":
