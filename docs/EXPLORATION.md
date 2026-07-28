@@ -57,6 +57,10 @@ JSON Schemaは `schemas/reading-path.schema.json` にある。公開時に次を
 2. 同じ読書経路で前後に並んでいる。
 3. 共有タグを持つ原稿が6件以下である。
 
+関係データとページHTMLは `dempa_site/features/relation_graph.py`、ブラウザ上の描画・
+絞り込み・拡大縮小は `dempa_site/features/relation_graph.js` が担当する。表示操作だけを
+変更する場合はJavaScriptを修正し、Pythonのデータ生成規則と混在させない。
+
 「数学」「すべて」「雑談」「僕のお気に入り」「論文メモ」は広すぎるため線の計算から除外する。
 画面ではタグ、公開年、HTML版・定理等・訂正追記の有無で絞り込める。最大60件を表示し、
 図の点を選ぶとHTML本文や定理等への入口が現れる。表示中の記事はHTML一覧でも確認できる。

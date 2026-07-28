@@ -6,6 +6,7 @@ import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from dempa_site.features.relation_graph import GRAPH_SCRIPT_PATH
 from tests.support import (
     add_privacy_review_receipt as add_review_receipt,
     prepare_paper_repository as prepare_root,
@@ -371,11 +372,16 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertEqual([], normal_node["reading_paths"])
         self.assertNotIn("数学", [tag["name"] for tag in graph["tags"]])
         graph_page = self.read("graph/index.html")
+        self.assertIn("原稿関係図は現在調整中です。", graph_page)
         self.assertIn("graph-zoom-in", graph_page)
         self.assertIn("全体を表示", graph_page)
         self.assertIn("ドラッグして移動", graph_page)
         self.assertIn('id="graph-content"', graph_page)
         self.assertIn('id="graph-detail"', graph_page)
+        self.assertEqual(
+            GRAPH_SCRIPT_PATH.read_text(encoding="utf-8"),
+            self.read("graph/graph.js"),
+        )
 
         lineage = json.loads(self.read("lineage/lineage.json"))
         normal = next(item for item in lineage["papers"] if item["slug"] == "2023-04-04-01")

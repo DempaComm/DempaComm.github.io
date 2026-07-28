@@ -1,13 +1,27 @@
 from __future__ import annotations
 
+import shutil
+import subprocess
 import unittest
 from pathlib import Path
 
 from dempa_site.features.lineage import _events
+from dempa_site.features.relation_graph import GRAPH_SCRIPT_PATH
 from dempa_site.manifests.model import Paper
 
 
 class ExplorationPrivacyTest(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("node"), "Node.js is needed for JavaScript syntax")
+    def test_relation_graph_javascript_has_valid_syntax(self) -> None:
+        completed = subprocess.run(
+            ["node", "--check", str(GRAPH_SCRIPT_PATH)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        self.assertEqual(0, completed.returncode, completed.stderr)
+
     def paper_value(self) -> dict:
         digest_a = "a" * 64
         digest_b = "b" * 64
