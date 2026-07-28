@@ -26,13 +26,6 @@ from dempa_site.features import (
     run_site_features,
 )
 from dempa_site.features.base import FeatureGenerator
-from dempa_site.features.explore import generate_explore
-from dempa_site.features.lineage import generate_lineage
-from dempa_site.features.reading_paths import (
-    generate_reading_paths,
-    validate_reading_paths,
-)
-from dempa_site.features.relation_graph import generate_relation_graph
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
@@ -164,14 +157,9 @@ def generate_static_pages(context: StageContext) -> None:
             rendered_math_section_page(section, papers), encoding="utf-8"
         )
 
-    # These dependency-free exploration pages are part of the site's public
-    # navigation. Generate them atomically with the other basic pages so a
-    # custom optional-feature run can never leave their links broken.
-    validate_reading_paths(context.catalog)
-    generate_reading_paths(context.catalog, output)
-    generate_lineage(context.catalog, output)
-    generate_relation_graph(context.catalog, output)
-    generate_explore(context.catalog, output)
+    # Public navigation features are centrally registered and isolated from
+    # one another. They are required, so a failure keeps the previous site.
+    generate_additional_features(context, configured_features())
 
 
 def copy_public_files(context: StageContext) -> None:
@@ -306,7 +294,7 @@ def stage_site(
         )
     )
     context = StageContext(paths, destination, working_output, catalog)
-    selected_features = configured_features() if features is None else features
+    selected_features = () if features is None else features
     try:
         generate_static_pages(context)
         copy_public_files(context)

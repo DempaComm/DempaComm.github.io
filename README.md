@@ -28,8 +28,8 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 python3 scripts/paper_tool.py check-all
 ```
 
-自動テスト、SHA、変更履歴、カタログ、移行台帳、公開サイト生成、リンク、公開物の
-基準比較を順番に確認します。VS Codeでは「ターミナル」→「タスクの実行」から
+自動テスト、移行台帳、公開サイト生成兼総合検査、公開物の基準比較を順番に確認します。
+公開サイト生成の内部でSHA、カタログ、リンクも一度ずつ検査します。VS Codeでは「ターミナル」→「タスクの実行」から
 「数識電収: すべて確認」を選んでも同じ確認を実行できます。
 任意の追加機能だけが失敗した場合は公開を継続しますが、`WARN feature failed` と対象原稿、
 失敗段階、理由を表示するため、見落とさずに後から修正できます。
@@ -49,6 +49,16 @@ python3 scripts/paper_tool.py check-links _site
 python3 scripts/site_snapshot.py check _site
 python3 scripts/paper_tool.py inspect-file /path/to/manuscript.tex
 ```
+
+一つの記事だけを素早く確認する場合は次を使います。承認済みSHA、個人情報検査記録、
+`keywords.txt` を確認し、自動ビルド対象なら `latexmk` も実行します。
+
+```sh
+python3 scripts/paper_tool.py check-paper 2015-08-28-01
+```
+
+これは編集途中の補助検査です。未承認の原稿変更は停止し、`review-change` の利用を促します。
+コミット前には必ず `check-all` を実行します。
 
 トップページには新着3件だけを表示し、全件検索・タグ索引・公開年別一覧は
 `archive/` に自動生成します。`math/` は数学分野別総覧への入口となり、

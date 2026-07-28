@@ -52,34 +52,14 @@ def complete_check_steps(
             (python_executable, "-m", "unittest", "discover", "-s", "tests"),
         ),
         CheckStep(
-            "verify",
-            "保護ファイルのSHA検査",
-            (python_executable, str(paper_tool), "verify"),
-        ),
-        CheckStep(
-            "audit",
-            "原稿変更履歴の監査",
-            (python_executable, str(paper_tool), "audit"),
-        ),
-        CheckStep(
-            "catalog",
-            "記事カタログ検査",
-            (python_executable, str(paper_tool), "catalog", "--check"),
-        ),
-        CheckStep(
             "ledger",
             "移行台帳検査",
             (python_executable, str(ledger_tool), "check"),
         ),
         CheckStep(
             "stage",
-            "公開サイト生成",
+            "公開サイト生成・SHA・カタログ・リンク総合検査",
             (python_executable, str(paper_tool), "stage", site),
-        ),
-        CheckStep(
-            "links",
-            "公開サイトのリンク検査",
-            (python_executable, str(paper_tool), "check-links", site),
         ),
         CheckStep(
             "snapshot",

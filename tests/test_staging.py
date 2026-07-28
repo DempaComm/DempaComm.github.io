@@ -9,6 +9,7 @@ from unittest.mock import patch
 from dempa_site.catalog.metadata import collect_metadata, rendered_keywords
 from dempa_site.errors import PaperToolError
 from dempa_site.features import FunctionFeature
+from dempa_site.features.registry import SITE_FEATURES
 from dempa_site.files import sha256_file, write_json
 from dempa_site.manifests.model import Paper
 from dempa_site.paths import RepositoryPaths
@@ -27,6 +28,13 @@ from dempa_site.site.staging import (
 
 
 class StagingPipelineTest(unittest.TestCase):
+    CORE_FEATURE_NAMES = {
+        "reading-paths",
+        "lineage",
+        "relation-graph",
+        "explore",
+    }
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
@@ -92,6 +100,13 @@ class StagingPipelineTest(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
+
+    def custom_results(self, report):
+        return [
+            result
+            for result in report.feature_results
+            if result.name not in self.CORE_FEATURE_NAMES
+        ]
 
     def test_publication_stages_can_be_run_and_checked_independently(self) -> None:
         validate_stage_sources(self.paths, self.selected)
@@ -175,9 +190,10 @@ class StagingPipelineTest(unittest.TestCase):
             (destination / "papers" / self.paper.slug / "index.html").is_file()
         )
         self.assertFalse((destination / "derived").exists())
-        self.assertEqual("failed", report.feature_results[0].status)
-        self.assertEqual(self.paper.slug, report.feature_results[0].paper_slug)
-        self.assertIn("converter unavailable", report.feature_results[0].error)
+        result = self.custom_results(report)[0]
+        self.assertEqual("failed", result.status)
+        self.assertEqual(self.paper.slug, result.paper_slug)
+        self.assertIn("converter unavailable", result.error)
 
     def test_required_feature_failure_does_not_replace_existing_site(self) -> None:
         destination = self.root / "_site"
@@ -237,7 +253,7 @@ class StagingPipelineTest(unittest.TestCase):
         )
         self.assertEqual(
             ["disabled", "generated"],
-            [result.status for result in report.feature_results],
+            [result.status for result in self.custom_results(report)],
         )
 
     def test_normal_stage_uses_the_central_feature_registry(self) -> None:
@@ -248,7 +264,10 @@ class StagingPipelineTest(unittest.TestCase):
 
         with patch(
             "dempa_site.site.staging.configured_features",
-            return_value=(FunctionFeature("registered", registered_feature),),
+            return_value=(
+                *SITE_FEATURES,
+                FunctionFeature("registered", registered_feature),
+            ),
         ):
             report = stage_site(self.paths, self.selected, destination)
 
@@ -256,7 +275,11 @@ class StagingPipelineTest(unittest.TestCase):
             "registered",
             (destination / "registered.txt").read_text(encoding="utf-8"),
         )
-        self.assertEqual("generated", report.feature_results[0].status)
+        registered = next(
+            result for result in report.feature_results
+            if result.name == "registered"
+        )
+        self.assertEqual("generated", registered.status)
 
     def test_optional_validation_failure_does_not_run_or_block_next_feature(
         self,
@@ -278,7 +301,7 @@ class StagingPipelineTest(unittest.TestCase):
             destination,
             [
                 FunctionFeature(
-                    "relation-graph",
+                    "relation-check",
                     rejected_generator,
                     validator=reject_catalog,
                 ),
@@ -286,7 +309,7 @@ class StagingPipelineTest(unittest.TestCase):
             ],
         )
 
-        failed, generated = report.feature_results
+        failed, generated = self.custom_results(report)
         self.assertEqual(("failed", "validation"), (failed.status, failed.phase))
         self.assertIn("missing relation metadata", failed.error)
         self.assertEqual("generated", generated.status)
@@ -317,7 +340,7 @@ class StagingPipelineTest(unittest.TestCase):
         self.assertEqual("ok", (destination / "independent.txt").read_text())
         self.assertEqual(
             ["failed", "generated"],
-            [result.status for result in report.feature_results],
+            [result.status for result in self.custom_results(report)],
         )
 
 

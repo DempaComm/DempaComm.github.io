@@ -21,16 +21,16 @@
 python3 scripts/paper_tool.py check-all
 ```
 
-次の8項目を安全上必要な順序で実行する。
+次の4項目を安全上必要な順序で実行する。
 
 1. 自動テスト
-2. 保護ファイルのSHA検査
-3. 原稿変更履歴の監査
-4. 記事カタログ検査
-5. 移行台帳検査
-6. `_site` への公開サイト生成
-7. 公開サイトのローカルリンク検査
-8. 承認済み公開物スナップショットとの比較
+2. 移行台帳検査
+3. `_site` への公開サイト生成兼総合検査
+4. 承認済み公開物スナップショットとの比較
+
+3番の内部で、全保護ファイルのSHA、承認履歴を含むmanifest、記事カタログ、
+`keywords.txt`、生成後のローカルリンクを検査する。従来は同じSHAとリンクを複数の
+工程で再検査していたが、安全条件を公開サイト生成へ集約して一度ずつ実行する。
 
 成功した項目は一行だけ表示し、すべて通ると `ALL OK` と表示する。失敗した場合は、
 その項目の詳しい出力を表示して後続処理を行わない。したがって、SHAやカタログが不正な
@@ -54,6 +54,16 @@ GitHub Actionsでは従来どおり、TeXのビルドを公開サイト生成の
 VS Codeでは「ターミナル」→「タスクの実行」→「数識電収: すべて確認」を選ぶと、
 同じ操作を実行できる。個別の `verify`、`audit`、`catalog --check`、`stage` などは、
 失敗原因の調査や限定した確認のために今後も残す。
+
+一つの記事だけを確認する場合は次を使う。
+
+```sh
+python3 scripts/paper_tool.py check-paper 2015-08-28-01
+```
+
+対象記事の承認済みSHA、個人情報検査記録、`keywords.txt` を確認し、自動ビルド対象なら
+原稿指定のTeXエンジンで `latexmk` を実行する。LaTeX環境がない場所でビルドだけを
+省く場合は `--skip-build` を付ける。これは完全検査の代わりではない。
 
 ## 新しい原稿の取り込み
 
@@ -285,11 +295,10 @@ python3 scripts/paper_tool.py catalog
 python3 scripts/paper_tool.py catalog --check
 ```
 
-GitHub Actionsでは、公開前に `verify` と `catalog --check` を実行する。PDF生成後は次の操作で公開用ディレクトリを作る。
+GitHub Actionsでは、公開前に `verify` と `catalog --check` を実行する。PDF生成後は次の操作で公開用ディレクトリを作る。リンク検査もこの操作に含まれる。
 
 ```sh
 python3 scripts/paper_tool.py stage _site
-python3 scripts/paper_tool.py check-links _site
 ```
 
 `stage` は公開物を一時領域へ生成し、SHA検査、ページ生成、ファイル配置、RSS・
@@ -301,7 +310,7 @@ python3 scripts/paper_tool.py check-links _site
 
 トップページには新着3件と主要な入口だけを表示する。全原稿の検索欄、件数付きタグ索引、公開年別記事一覧は `archive/` に生成する。検索欄では、題名、説明、タグ、検索キーワードを横断検索でき、元タグと公開年による絞り込みもできる。タグごとの記事一覧は `tags/<タグ名>/` に公開年別で自動生成する。
 
-公開時には `404.html`、`feed.xml`、`sitemap.xml`、`robots.txt` も生成する。`stage` とGitHub Actionsの `check-links` は、公開HTML内のローカルリンク切れを検出して公開を止める。
+公開時には `404.html`、`feed.xml`、`sitemap.xml`、`robots.txt` も生成する。`stage` は公開HTML内のローカルリンク切れを検出して公開を止め、GitHub Actionsでも同じ `stage` を実行する。
 
 各原稿には `papers/<公開日-順番>/` 形式の個別ページを自動生成する。個別ページには原稿情報、公開ファイル、電波通信のタグ、検索キーワードをまとめ、トップページとタグ別ページの記事名からリンクする。
 

@@ -124,6 +124,8 @@ class SharedFoundationTest(unittest.TestCase):
                 )
         self.assertIn("latexmk_use_lualatex: true", workflow)
         self.assertIn("latexmk_use_xelatex: true", workflow)
+        self.assertIn("Prepare and validate public site", workflow)
+        self.assertNotIn("Check public links", workflow)
 
 
 if __name__ == "__main__":

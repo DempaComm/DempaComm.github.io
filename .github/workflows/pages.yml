@@ -83,11 +83,8 @@ jobs:
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
           latexmk_use_xelatex: true
 
-      - name: Prepare public site
+      - name: Prepare and validate public site
         run: python3 scripts/paper_tool.py stage _site
-
-      - name: Check public links
-        run: python3 scripts/paper_tool.py check-links _site
 
       - name: Verify public site snapshot
         run: python3 scripts/site_snapshot.py check _site

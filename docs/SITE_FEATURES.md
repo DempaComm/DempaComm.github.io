@@ -6,9 +6,11 @@
 追加するための規約である。追加機能が失敗または無効でも、PDF、TeX、記事個別ページ、
 総覧などの基本サイトを維持する。
 
-読書経路、原稿の系譜、タグ関係図は2026-07-26にトップと各原稿から常時たどる
-基本ナビゲーションへ昇格した。この三つは外部依存がなく、リンク切れを残して無効化する
-状態を許さないため、`generate_static_pages` の同一トランザクションで生成する。
+読書経路、原稿の系譜、タグ関係図、探索ページはトップと各原稿から常時たどる
+基本ナビゲーションである。この四つは `SITE_FEATURES` に `required=True` で登録する。
+それぞれ別の一時領域で生成し、一つでも失敗した場合は公開全体を中止して以前のサイトを
+保持する。これにより、機能固有の呼び出しをサイト生成本体へ直接書かず、リンク切れも
+残さない。
 LaTeXMLは外部コマンドと原稿ごとの互換性問題があるため、一括生成機能として通常公開には
 登録せず `latexml-trial` で隔離実行する。自動検査と目視比較を通過した出力だけは
 `publish-latexml` で原稿ごとの保護された公開ファイルに昇格できる。
@@ -118,13 +120,7 @@ PDF・TeXの通常公開まで止める機能は原則として `required=False`
 その後、通常の全検査を実行する。
 
 ```sh
-python3 -m unittest discover -s tests
-python3 scripts/paper_tool.py verify
-python3 scripts/paper_tool.py catalog --check
-python3 scripts/migration_ledger.py check
-python3 scripts/paper_tool.py stage _site
-python3 scripts/paper_tool.py check-links _site
-python3 scripts/site_snapshot.py check _site
+python3 scripts/paper_tool.py check-all
 ```
 
 公開物スナップショットが変わった場合は、新機能による意図した追加だけかを確認してから、

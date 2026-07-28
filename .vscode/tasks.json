@@ -21,6 +21,22 @@
       }
     },
     {
+      "label": "数識電収: 記事だけ高速確認",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/paper_tool.py", "check-paper", "${input:paperSlug}"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
       "label": "数識電収: 原稿修正を検査",
       "type": "process",
       "command": "python3",
