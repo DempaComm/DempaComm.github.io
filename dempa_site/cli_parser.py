@@ -175,6 +175,22 @@ def build_parser(
     inspect_parser.add_argument("file")
     inspect_parser.set_defaults(func=commands["inspect-file"])
 
+    clean_parser = subparsers.add_parser(
+        "clean-local",
+        help="remove reproducible local output without touching paper sources",
+    )
+    clean_parser.add_argument(
+        "--apply",
+        action="store_true",
+        help="remove the listed files; omit for a dry run",
+    )
+    clean_parser.add_argument(
+        "--include-experiments",
+        action="store_true",
+        help="also remove ignored LaTeXML experiment output",
+    )
+    clean_parser.set_defaults(func=commands["clean-local"])
+
     import_parser = subparsers.add_parser(
         "import-paper", help="copy a new paper byte-for-byte from a JSON spec"
     )

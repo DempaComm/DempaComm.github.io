@@ -61,6 +61,10 @@ python3 scripts/paper_tool.py check-paper 2015-08-28-01
 これは編集途中の補助検査です。未承認の原稿変更は停止し、`review-change` の利用を促します。
 コミット前には必ず `check-all` を実行します。
 
+ローカルの試験出力や承認済み個人情報検査を整理するときは、削除候補だけを表示する
+`python3 scripts/paper_tool.py clean-local` を使います。実際の削除方法と安全範囲は
+`docs/LOCAL_CLEANUP.md` にまとめています。
+
 トップページには新着3件だけを表示し、全件検索・タグ索引・公開年別一覧は
 `archive/` に自動生成します。`math/` は数学分野別総覧への入口となり、
 各分野の記事一覧を `math/<分野>/` に生成します。RSSは `feed.xml`、

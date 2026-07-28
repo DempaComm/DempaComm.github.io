@@ -32,6 +32,11 @@ from dempa_site.importing.tex import import_tex  # noqa: E402
 from dempa_site.manifests.loader import load_manifest_directory  # noqa: E402
 from dempa_site.manifests.model import Paper  # noqa: E402
 from dempa_site.manifests.notes import NOTE_KINDS, record_note  # noqa: E402
+from dempa_site.maintenance import (  # noqa: E402
+    apply_local_cleanup,
+    human_bytes,
+    local_cleanup_plan,
+)
 from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     safe_relative_path as shared_safe_relative_path,
@@ -356,6 +361,28 @@ def command_inspect_file(args: argparse.Namespace) -> None:
     print("MANUAL REVIEW REQUIRED before using --privacy-reviewed")
 
 
+def command_clean_local(args: argparse.Namespace) -> None:
+    plan = local_cleanup_plan(
+        ROOT,
+        (paper for _, paper in manifests()),
+        include_experiments=args.include_experiments,
+    )
+    if not plan.groups:
+        print("CLEAN LOCAL: cleanup candidates were not found")
+        return
+    for group in plan.groups:
+        print(
+            f"CLEAN {group.name}: paths={len(group.paths)} "
+            f"size={human_bytes(group.bytes)}"
+        )
+    print(f"CLEAN TOTAL: paths={plan.path_count} size={human_bytes(plan.bytes)}")
+    if not args.apply:
+        print("DRY RUN: add --apply to remove these generated files")
+        return
+    apply_local_cleanup(plan)
+    print("CLEAN LOCAL DONE")
+
+
 def command_import_tex(args: argparse.Namespace) -> None:
     result = import_tex(
         paths=PATHS,
@@ -499,6 +526,7 @@ COMMANDS = {
     "publish-latexml": command_publish_latexml,
     "latexml-batch": command_latexml_batch,
     "inspect-file": command_inspect_file,
+    "clean-local": command_clean_local,
     "import": command_import,
     "import-tex": command_import_tex,
     "import-pdf": command_import_pdf,
