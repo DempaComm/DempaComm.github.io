@@ -10,6 +10,7 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 全原稿アーカイブ: https://dempacomm.github.io/archive/
 - 数学記事総覧: https://dempacomm.github.io/math/
 - 原稿を探索: https://dempacomm.github.io/explore/
+- 本文全文検索: https://dempacomm.github.io/search/
 - はてなブログ: https://concious4410.hatenablog.com/
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
@@ -28,7 +29,7 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 python3 scripts/paper_tool.py check-all
 ```
 
-自動テスト、移行台帳、公開サイト生成兼総合検査、公開物の基準比較を順番に確認します。
+自動テスト、移行台帳、公開サイト生成兼総合検査、Pagefind日本語全文索引、公開物の基準比較を順番に確認します。
 公開サイト生成の内部でSHA、カタログ、リンクも一度ずつ検査します。VS Codeでは「ターミナル」→「タスクの実行」から
 「数識電収: すべて確認」を選んでも同じ確認を実行できます。
 任意の追加機能だけが失敗した場合は公開を継続しますが、`WARN feature failed` と対象原稿、
@@ -68,6 +69,9 @@ python3 scripts/paper_tool.py check-paper 2015-08-28-01
 `explore/` からは、テーマ別に順番を定めた読書経路、初出・移行・改訂を並べた
 原稿の系譜、電波通信のタグを使った原稿関係図へ移動できます。登録方法は
 `docs/EXPLORATION.md` にまとめています。
+
+`search/` では、LaTeXMLの主HTML版がある記事を本文、節見出し、定理名、参考文献から
+検索できます。最初の導入とローカル確認方法は `docs/PAGEFIND.md` にまとめています。
 
 LaTeXMLによるHTML変換は通常公開から隔離した試験コマンドとして導入しています。自動検査と
 PDFとの目視比較を通過した原稿は、試験HTML版として個別公開できます。全体状況を先に

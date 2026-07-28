@@ -46,6 +46,7 @@ from dempa_site.protection.change_workflow import (  # noqa: E402
 from dempa_site.protection.hashes import protected_file_errors  # noqa: E402
 from dempa_site.protection.privacy import inspect_file  # noqa: E402
 from dempa_site.site.links import local_link_errors  # noqa: E402
+from dempa_site.site.pagefind import build_pagefind_index  # noqa: E402
 from dempa_site.site.rendering import rendered_home_page  # noqa: E402
 from dempa_site.site.staging import stage_site  # noqa: E402
 from dempa_site.site.snapshot import (  # noqa: E402
@@ -194,6 +195,17 @@ def command_check_paper(args: argparse.Namespace) -> None:
         f"privacy-receipts={report.privacy_receipts} {build_status}"
     )
     print("FAST CHECK ONLY: コミット前には check-all を実行してください")
+
+
+def command_pagefind_index(args: argparse.Namespace) -> None:
+    site_root = Path(args.site)
+    if not site_root.is_absolute():
+        site_root = ROOT / site_root
+    report = build_pagefind_index(site_root)
+    print(
+        f"PAGEFIND indexed={report.page_count} "
+        f"bundle={report.bundle.relative_to(ROOT)}"
+    )
 
 
 def command_latexml_trial(args: argparse.Namespace) -> None:
@@ -453,6 +465,7 @@ COMMANDS = {
     "check-links": command_check_links,
     "check-all": command_check_all,
     "check-paper": command_check_paper,
+    "pagefind-index": command_pagefind_index,
     "latexml-trial": command_latexml_trial,
     "publish-latexml": command_publish_latexml,
     "latexml-batch": command_latexml_batch,

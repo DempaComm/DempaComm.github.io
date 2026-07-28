@@ -62,6 +62,11 @@ def complete_check_steps(
             (python_executable, str(paper_tool), "stage", site),
         ),
         CheckStep(
+            "pagefind",
+            "Pagefind日本語全文索引生成",
+            (python_executable, str(paper_tool), "pagefind-index", site),
+        ),
+        CheckStep(
             "snapshot",
             "承認済み公開物との比較",
             (python_executable, str(snapshot_tool), "check", site),

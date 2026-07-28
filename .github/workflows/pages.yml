@@ -86,6 +86,12 @@ jobs:
       - name: Prepare and validate public site
         run: python3 scripts/paper_tool.py stage _site
 
+      - name: Install Pagefind extended
+        run: python3 -m pip install --requirement requirements-pagefind.txt
+
+      - name: Build Japanese full-text search index
+        run: python3 scripts/paper_tool.py pagefind-index _site
+
       - name: Verify public site snapshot
         run: python3 scripts/site_snapshot.py check _site
 

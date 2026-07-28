@@ -188,6 +188,7 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn("TeXだけの原稿", home)
         self.assertIn('href="archive/"', home)
         self.assertIn('href="math/"', home)
+        self.assertIn('href="search/"', home)
 
         archive = self.read("archive/index.html")
         self.assertEqual(4, archive.count('class="paper-card"'))
@@ -254,6 +255,7 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn("https://dempacomm.github.io/", locations)
         self.assertIn("https://dempacomm.github.io/archive/", locations)
         self.assertIn("https://dempacomm.github.io/math/", locations)
+        self.assertIn("https://dempacomm.github.io/search/", locations)
         self.assertIn(
             "https://dempacomm.github.io/tags/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93/",
             locations,
@@ -310,6 +312,7 @@ class SiteOutputContractTest(unittest.TestCase):
                 "papers/2026-07-07-01/index.html",
                 "papers/old-normal-paper/index.html",
                 "reading-paths/index.html",
+                "search/index.html",
                 "tags/数学/index.html",
                 "tags/位相空間/index.html",
                 "tags/読み物/index.html",
@@ -318,6 +321,11 @@ class SiteOutputContractTest(unittest.TestCase):
             routes,
         )
         run_tool(self.environment, "check-links", str(self.site))
+
+        fulltext = self.read("search/index.html")
+        self.assertIn("本文全文検索", fulltext)
+        self.assertIn('src="../full-text-search.js"', fulltext)
+        self.assertTrue((self.site / "full-text-search.js").is_file())
 
         broken_page = self.site / "broken.html"
         broken_page.write_text('<a href="missing-page/">broken</a>', encoding="utf-8")

@@ -34,6 +34,7 @@ from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
 from dempa_site.site.rendering import (
     rendered_archive_page,
+    rendered_full_text_search_page,
     rendered_home_page,
     rendered_math_page,
     rendered_math_section_page,
@@ -129,6 +130,12 @@ def generate_static_pages(context: StageContext) -> None:
     )
     (output / "404.html").write_text(rendered_not_found_page(), encoding="utf-8")
 
+    search_dir = output / "search"
+    search_dir.mkdir()
+    (search_dir / "index.html").write_text(
+        rendered_full_text_search_page(selected), encoding="utf-8"
+    )
+
     for _, paper in selected:
         target_dir = output / "papers" / paper.slug
         target_dir.mkdir(parents=True)
@@ -168,6 +175,7 @@ def copy_public_files(context: StageContext) -> None:
     root = context.paths.root
     shutil.copy2(root / "styles.css", output / "styles.css")
     shutil.copy2(context.paths.search_script, output / "search.js")
+    shutil.copy2(root / "full-text-search.js", output / "full-text-search.js")
     for asset in STATIC_ASSETS:
         shutil.copy2(root / asset, output / asset)
 

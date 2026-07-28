@@ -22,6 +22,7 @@ class CompleteCheckSuiteTest(unittest.TestCase):
                 "tests",
                 "ledger",
                 "stage",
+                "pagefind",
                 "snapshot",
             ],
             [step.key for step in steps],
@@ -29,6 +30,7 @@ class CompleteCheckSuiteTest(unittest.TestCase):
         self.assertEqual("python-for-test", steps[0].command[0])
         self.assertEqual(str(site), steps[-1].command[-1])
         self.assertIn("SHA・カタログ・リンク", steps[2].label)
+        self.assertIn("Pagefind", steps[3].label)
 
     def test_successful_checks_are_compact_and_keep_their_order(self) -> None:
         steps = (

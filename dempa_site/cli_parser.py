@@ -73,6 +73,13 @@ def build_parser(
     )
     check_paper_parser.set_defaults(func=commands["check-paper"])
 
+    pagefind_parser = subparsers.add_parser(
+        "pagefind-index",
+        help="build the Japanese full-text index for a staged site",
+    )
+    pagefind_parser.add_argument("site", help="staged site directory")
+    pagefind_parser.set_defaults(func=commands["pagefind-index"])
+
     latexml_parser = subparsers.add_parser(
         "latexml-trial",
         help="experimentally convert selected TeX papers to HTML with LaTeXML",
@@ -226,4 +233,3 @@ def build_parser(
     )
     finish_change_parser.set_defaults(func=commands["finish-change"])
     return result
-

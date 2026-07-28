@@ -86,6 +86,9 @@ class StagingPipelineTest(unittest.TestCase):
         )
         (self.root / "styles.css").write_text("/* fixture */\n", encoding="utf-8")
         (self.root / "search.js").write_text("// fixture\n", encoding="utf-8")
+        (self.root / "full-text-search.js").write_text(
+            "// full-text fixture\n", encoding="utf-8"
+        )
         for asset in (
             "favicon.ico",
             "favicon-16.png",
