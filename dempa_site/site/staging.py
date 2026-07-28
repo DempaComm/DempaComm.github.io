@@ -169,7 +169,7 @@ def generate_static_pages(context: StageContext) -> None:
     topic_dir.mkdir()
     all_papers = [paper for _, paper in selected]
     for topic in MATH_TOPICS:
-        target = topic_dir / str(topic["slug"])
+        target = topic_dir / topic.slug
         target.mkdir()
         (target / "index.html").write_text(
             rendered_math_topic_page(

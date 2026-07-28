@@ -15,9 +15,9 @@ from dempa_site.manifests.model import Paper
 PaperSource = tuple[Path, Paper]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, eq=False)
 class SiteCatalog:
-    """The validated papers and their derived navigation groupings."""
+    """One immutable, identity-keyed catalog for a publication run."""
 
     selected: tuple[PaperSource, ...]
     tags: Mapping[str, tuple[Paper, ...]]

@@ -28,7 +28,7 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
         section_slug = MATH_SECTION_DETAILS[section]["slug"]
         urls.append((f"{SITE_URL}/math/{section_slug}/", None))
     for topic in MATH_TOPICS:
-        urls.append((f"{SITE_URL}/math/topics/{topic['slug']}/", None))
+        urls.append((f"{SITE_URL}/math/topics/{topic.slug}/", None))
     for tag in grouped_tags(selected):
         urls.append((f"{SITE_URL}/tags/{quote(tag, safe='')}/", None))
     for _, manifest in selected:

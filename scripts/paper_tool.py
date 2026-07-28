@@ -14,6 +14,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from dempa_site.catalog.metadata import rendered_keywords  # noqa: E402
+from dempa_site.build_selection import selected_build_papers  # noqa: E402
 from dempa_site.cli_parser import build_parser  # noqa: E402
 from dempa_site.conversion.latexml import (  # noqa: E402
     run_latexml_trial,
@@ -142,13 +143,19 @@ def command_catalog(args: argparse.Namespace) -> None:
 
 def command_build_roots(args: argparse.Namespace) -> None:
     """List only TeX roots whose manifests explicitly enable compilation."""
-    for manifest_path, manifest in manifests():
-        if not manifest.build.enabled:
-            continue
+    loaded = manifests()
+    changed_paths = None
+    if args.changed_files:
+        changed_paths = Path(args.changed_files).read_text(encoding="utf-8").splitlines()
+    selected = selected_build_papers(
+        [manifest for _, manifest in loaded], changed_paths
+    )
+    paths = {manifest.slug: manifest_path for manifest_path, manifest in loaded}
+    for manifest in selected:
         if args.engine and manifest.build.effective_engine != args.engine:
             continue
         root = safe_relative_path(str(manifest.build.root))
-        print((manifest_path.parent / root).relative_to(ROOT))
+        print((paths[manifest.slug].parent / root).relative_to(ROOT))
 
 
 def command_check_links(args: argparse.Namespace) -> None:

@@ -51,7 +51,10 @@ python3 scripts/paper_tool.py check-all --output preview-site
 
 この一括確認はTeXのコンパイル自体は行わない。自動生成対象の `main.pdf` がまだない場合、
 「公開サイト生成」で停止するため、対象原稿を `latexmk` で生成してから再実行する。
-GitHub Actionsでは従来どおり、TeXのビルドを公開サイト生成の前に行う。
+GitHub ActionsではTeXのビルドを公開サイト生成の前に行う。ただし、成功した生成PDFを
+Actionsキャッシュへ保存し、原稿群とビルド設定が同一なら再コンパイルを省略する。原稿に
+変更がある場合は以前のキャッシュを復元した上で、変更された `papers/<slug>/` だけを
+再コンパイルする。キャッシュがない初回とビルド設定変更時は、安全のため全対象を生成する。
 
 VS Codeでは「ターミナル」→「タスクの実行」→「数識電収: すべて確認」を選ぶと、
 同じ操作を実行できる。個別の `verify`、`audit`、`catalog --check`、`stage` などは、
@@ -250,7 +253,7 @@ python3 scripts/paper_tool.py verify 2018-10-14-01
 python3 scripts/paper_tool.py audit 2018-10-14-01
 python3 scripts/paper_tool.py catalog --check
 python3 scripts/migration_ledger.py check
-python3 -m unittest discover -s tests
+python3 tools/run_tests.py
 ```
 
 TeXのビルドも手元で確認する場合は、対象フォルダでGitHub Actionsと同じ形式のコマンドを実行する。

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -119,6 +120,7 @@ def _automatic_statements(manifest_path: Path, paper: Paper) -> list[IndexedStat
     ]
 
 
+@lru_cache(maxsize=8)
 def indexed_statements(catalog: SiteCatalog) -> tuple[IndexedStatement, ...]:
     """Combine LaTeXML extraction with explicit manifest overrides."""
     result: list[IndexedStatement] = []

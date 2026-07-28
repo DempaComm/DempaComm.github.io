@@ -38,6 +38,13 @@ def build_parser(
         choices=sorted(LATEXMKRC_BY_ENGINE),
         help="list only roots using this effective TeX engine",
     )
+    build_roots_parser.add_argument(
+        "--changed-files",
+        help=(
+            "newline-separated repository paths; select only affected paper "
+            "folders, while an outside path safely selects every build"
+        ),
+    )
     build_roots_parser.set_defaults(func=commands["build-roots"])
 
     stage_parser = subparsers.add_parser("stage", help="prepare the GitHub Pages directory")

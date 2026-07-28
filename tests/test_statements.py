@@ -4,8 +4,10 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from dempa_site.catalog.metadata import collect_metadata
+from dempa_site.features import statements as statements_feature
 from dempa_site.features.statements import generate_statements, indexed_statements
 from dempa_site.features.paper_capabilities import paper_capabilities
 from dempa_site.manifests.model import Paper
@@ -132,6 +134,21 @@ class StatementIndexTest(unittest.TestCase):
         self.assertEqual(4, capability.statement_count)
         self.assertEqual(1, capability.statement_counts["theorem"])
         self.assertEqual(0, capability.correction_count)
+
+    def test_statement_extraction_is_shared_within_one_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            catalog = self.prepared_catalog(Path(temporary))
+            indexed_statements.cache_clear()
+            with patch.object(
+                statements_feature,
+                "_automatic_statements",
+                wraps=statements_feature._automatic_statements,
+            ) as extraction:
+                first = indexed_statements(catalog)
+                second = indexed_statements(catalog)
+
+        self.assertIs(first, second)
+        self.assertEqual(1, extraction.call_count)
 
 
 if __name__ == "__main__":

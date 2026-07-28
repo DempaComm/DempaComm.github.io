@@ -90,10 +90,45 @@ class SourceOnlyImportTest(unittest.TestCase):
                 text=True,
                 env=environment,
             )
+            changed_file = root / "changed-files.txt"
+            changed_file.write_text(f"papers/{slug}/main.tex\n", encoding="utf-8")
+            changed = subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "build-roots",
+                    "--engine",
+                    "lualatex",
+                    "--changed-files",
+                    str(changed_file),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
+            changed_file.write_text("", encoding="utf-8")
+            unchanged = subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOL),
+                    "build-roots",
+                    "--engine",
+                    "lualatex",
+                    "--changed-files",
+                    str(changed_file),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=environment,
+            )
 
             self.assertEqual(f"papers/{slug}/main.tex\n", selected.stdout)
             self.assertEqual("", excluded.stdout)
             self.assertEqual(selected.stdout, compatible.stdout)
+            self.assertEqual(selected.stdout, changed.stdout)
+            self.assertEqual("", unchanged.stdout)
 
     def test_import_blog_only_article_without_public_files(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

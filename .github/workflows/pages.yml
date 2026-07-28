@@ -20,9 +20,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Run unit tests
-        run: python3 -m unittest discover -s tests -v
+        run: python3 tools/run_tests.py
 
       - name: Verify protected source files and catalog
         run: |
@@ -30,13 +32,38 @@ jobs:
           python3 scripts/paper_tool.py catalog --check
           python3 scripts/migration_ledger.py check
 
+      - name: Restore generated PDF cache
+        id: latex-pdf-cache
+        uses: actions/cache@v5
+        with:
+          path: papers/**/main.pdf
+          key: latex-pdfs-v1-${{ runner.os }}-${{ hashFiles('papers/**', '.github/workflows/pages.yml', 'dempa_site/build_selection.py', 'dempa_site/cli_parser.py', 'dempa_site/config.py', 'dempa_site/manifests/**', 'dempa_site/paths.py', 'scripts/paper_tool.py') }}
+          restore-keys: |
+            latex-pdfs-v1-${{ runner.os }}-
+
       - name: Select manifest-approved TeX roots
         id: latex-roots
+        env:
+          CACHE_HIT: ${{ steps.latex-pdf-cache.outputs.cache-hit }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
         run: |
+          changed_option=()
+          if [[ "$CACHE_HIT" == "true" ]]; then
+            : > "$RUNNER_TEMP/changed-paper-files.txt"
+            changed_option=(--changed-files "$RUNNER_TEMP/changed-paper-files.txt")
+            echo "Exact PDF cache hit; no TeX rebuild is needed."
+          elif [[ "$CACHE_HIT" == "false" && "${{ github.event_name }}" == "push" ]]; then
+            git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" > "$RUNNER_TEMP/changed-paper-files.txt"
+            changed_option=(--changed-files "$RUNNER_TEMP/changed-paper-files.txt")
+            echo "Restored an earlier PDF cache; rebuilding affected papers."
+          else
+            echo "No usable PDF cache; rebuilding every enabled paper."
+          fi
           for engine in platex uplatex pdflatex lualatex xelatex; do
             {
               echo "${engine}<<EOF"
-              python3 scripts/paper_tool.py build-roots --engine "$engine"
+              python3 scripts/paper_tool.py build-roots --engine "$engine" "${changed_option[@]}"
               echo 'EOF'
             } >> "$GITHUB_OUTPUT"
           done

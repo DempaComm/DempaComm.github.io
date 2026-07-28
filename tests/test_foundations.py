@@ -97,12 +97,12 @@ class SharedFoundationTest(unittest.TestCase):
         self.assertEqual(set(MATH_SECTIONS), set(MATH_SECTION_DETAILS))
         self.assertEqual({"", *MATH_SECTIONS}, set(VALID_MATH_SECTIONS))
         self.assertEqual(
-            len(MATH_TOPICS), len({topic["slug"] for topic in MATH_TOPICS})
+            len(MATH_TOPICS), len({topic.slug for topic in MATH_TOPICS})
         )
         self.assertTrue(
-            all(topic["section"] in MATH_SECTIONS for topic in MATH_TOPICS)
+            all(topic.section in MATH_SECTIONS for topic in MATH_TOPICS)
         )
-        self.assertTrue(all(topic["tags"] for topic in MATH_TOPICS))
+        self.assertTrue(all(topic.tags for topic in MATH_TOPICS))
         self.assertIn(DEFAULT_BUILD_ENGINE, LATEXMKRC_BY_ENGINE)
         self.assertIn("platex", LATEXMKRC_BY_ENGINE[DEFAULT_BUILD_ENGINE])
         self.assertEqual(
@@ -132,6 +132,9 @@ class SharedFoundationTest(unittest.TestCase):
                 )
         self.assertIn("latexmk_use_lualatex: true", workflow)
         self.assertIn("latexmk_use_xelatex: true", workflow)
+        self.assertIn("actions/cache@v5", workflow)
+        self.assertIn("steps.latex-pdf-cache.outputs.cache-hit", workflow)
+        self.assertIn("--changed-files", workflow)
         self.assertIn("Prepare and validate public site", workflow)
         self.assertIn("requirements-pagefind.txt", workflow)
         self.assertIn("pagefind-index _site", workflow)

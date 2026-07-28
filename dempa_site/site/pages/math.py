@@ -10,6 +10,7 @@ from urllib.parse import quote
 from dempa_site.catalog.metadata import grouped_math_sections
 from dempa_site.config import (
     BLOG_ONLY_KIND,
+    MathTopic,
     MATH_SECTION_DETAILS,
     MATH_SECTIONS,
     MATH_TOPICS,
@@ -84,13 +85,13 @@ def representative_math_tags(papers: Sequence[Paper]) -> list[str]:
     ]
 
 
-def papers_for_math_topic(topic: dict, papers: Sequence[Paper]) -> list[Paper]:
+def papers_for_math_topic(topic: MathTopic, papers: Sequence[Paper]) -> list[Paper]:
     """Select a non-exclusive topic from one primary section and its tags."""
-    tags = set(topic["tags"])
+    tags = set(topic.tags)
     return [
         paper
         for paper in papers
-        if paper.math_section == topic["section"] and tags.intersection(paper.tags)
+        if paper.math_section == topic.section and tags.intersection(paper.tags)
     ]
 
 
@@ -98,13 +99,13 @@ def _rendered_topic_cards(
     papers: Sequence[Paper], *, section: str = "", prefix: str = "topics/"
 ) -> str:
     topics = [
-        topic for topic in MATH_TOPICS if not section or topic["section"] == section
+        topic for topic in MATH_TOPICS if not section or topic.section == section
     ]
     return "\n".join(
-        f"""      <a class="math-topic-card" href="{prefix}{topic['slug']}/">
+        f"""      <a class="math-topic-card" href="{prefix}{topic.slug}/">
         <span class="section-number">TOPIC {index:02d}</span>
-        <strong>{html.escape(str(topic['title']))}</strong>
-        <span>{html.escape(str(topic['description']))}</span>
+        <strong>{html.escape(topic.title)}</strong>
+        <span>{html.escape(topic.description)}</span>
         <span class="math-topic-count">{len(papers_for_math_topic(topic, papers))}件</span>
       </a>"""
         for index, topic in enumerate(topics, start=1)
@@ -199,7 +200,7 @@ def rendered_math_section_page(
     details = MATH_SECTION_DETAILS[section]
     year_sections = _rendered_year_sections(papers, "../../")
     section_topics = ""
-    if any(topic["section"] == section for topic in MATH_TOPICS):
+    if any(topic.section == section for topic in MATH_TOPICS):
         section_topics = f"""    <section class="math-topic-directory" aria-labelledby="section-topics-title">
       <div class="section-heading">
         <h2 id="section-topics-title">この分野のテーマ</h2>
@@ -239,11 +240,11 @@ def rendered_math_section_page(
 """
 
 
-def rendered_math_topic_page(topic: dict, papers: Sequence[Paper]) -> str:
-    title = str(topic["title"])
-    description = str(topic["description"])
-    slug = str(topic["slug"])
-    section = str(topic["section"])
+def rendered_math_topic_page(topic: MathTopic, papers: Sequence[Paper]) -> str:
+    title = topic.title
+    description = topic.description
+    slug = topic.slug
+    section = topic.section
     section_slug = str(MATH_SECTION_DETAILS[section]["slug"])
     return f"""<!doctype html>
 <html lang="ja">

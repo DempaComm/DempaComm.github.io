@@ -6,6 +6,7 @@ import html
 import re
 from collections.abc import Mapping
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 
 from dempa_site.catalog.metadata import SiteCatalog
@@ -35,6 +36,7 @@ class ReadingPath:
     papers: tuple[ReadingStep, ...]
 
 
+@lru_cache(maxsize=8)
 def load_reading_paths(catalog: SiteCatalog) -> tuple[ReadingPath, ...]:
     root = repository_root(catalog)
     papers = {paper.slug: paper for _, paper in catalog.selected}

@@ -49,7 +49,7 @@ def complete_check_steps(
         CheckStep(
             "tests",
             "自動テスト",
-            (python_executable, "-m", "unittest", "discover", "-s", "tests"),
+            (python_executable, str(repository / "tools" / "run_tests.py")),
         ),
         CheckStep(
             "ledger",

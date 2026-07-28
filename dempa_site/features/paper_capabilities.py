@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
+from functools import lru_cache
 from types import MappingProxyType
 from typing import Mapping
 
@@ -22,6 +23,7 @@ class PaperCapabilities:
         return sum(self.statement_counts.values())
 
 
+@lru_cache(maxsize=8)
 def paper_capabilities(catalog: SiteCatalog) -> Mapping[str, PaperCapabilities]:
     """Return one stable enrichment record per paper."""
     counts: dict[str, Counter[str]] = {}

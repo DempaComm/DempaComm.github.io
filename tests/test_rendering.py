@@ -167,7 +167,7 @@ class PublicRenderingTest(unittest.TestCase):
 
     def test_math_topics_are_tag_derived_and_link_to_html_and_statements(self) -> None:
         topic = next(
-            item for item in MATH_TOPICS if item["slug"] == "metric-metrization"
+            item for item in MATH_TOPICS if item.slug == "metric-metrization"
         )
         metric_paper = paper(
             "2026-07-28-01",
