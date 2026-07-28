@@ -253,15 +253,21 @@ def publish_latexml_trial(
             "label": html_label,
             "reviewed_at": reviewed_at,
         }
-        if alternate:
-            alternatives = manifest.setdefault("alternate_html_versions", [])
-            if any(item["path"] == version_record["path"] for item in alternatives):
-                raise PaperToolError("paper.jsonには同じ公開先の別版HTMLがあります")
-            alternatives.append(version_record)
-        else:
+        versions = manifest.get("html_versions")
+        if versions is None:
+            versions = []
             if manifest.get("html_version") is not None:
+                versions.append(manifest.pop("html_version"))
+            versions.extend(manifest.pop("alternate_html_versions", []))
+            manifest["html_versions"] = versions
+        if alternate:
+            if any(item["path"] == version_record["path"] for item in versions):
+                raise PaperToolError("paper.jsonには同じ公開先の別版HTMLがあります")
+            versions.append(version_record)
+        else:
+            if versions:
                 raise PaperToolError("paper.jsonには既にHTML版の承認情報があります")
-            manifest["html_version"] = version_record
+            versions.append(version_record)
         validate_manifest_data(manifest, manifest_path, load_schema(), PaperToolError)
         temporary.rename(target_dir)
         try:

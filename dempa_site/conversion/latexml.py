@@ -141,7 +141,7 @@ def unconverted_tex_slugs(
     without_tex = []
     already_converted = []
     for manifest_path, paper in papers:
-        if paper.html_version is not None:
+        if paper.html_versions:
             already_converted.append(paper.slug)
             continue
         try:

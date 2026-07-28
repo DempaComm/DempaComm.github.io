@@ -130,9 +130,11 @@ class LaTeXMLPublicationTest(unittest.TestCase):
 
         self.assertEqual(3, publication.file_count)
         published = load_manifest(self.manifest_path, PaperToolError)
-        self.assertIsNotNone(published.html_version)
-        self.assertEqual("approved", published.html_version.status)
-        self.assertEqual("html/index.html", published.html_version.path)
+        self.assertEqual(1, len(published.html_versions))
+        self.assertEqual("approved", published.html_versions[0].status)
+        self.assertEqual("html/index.html", published.html_versions[0].path)
+        self.assertIn("html_versions", published.to_dict())
+        self.assertNotIn("html_version", published.to_dict())
         public_html = publication.html_path.read_text(encoding="utf-8")
         self.assertIn("EXPERIMENTAL HTML VERSION", public_html)
         self.assertIn('../../../styles.css', public_html)
@@ -161,7 +163,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
             )
 
         self.assertFalse((self.paper_dir / "html").exists())
-        self.assertNotIn("html_version", load_manifest(self.manifest_path).to_dict())
+        self.assertNotIn("html_versions", load_manifest(self.manifest_path).to_dict())
 
     def test_automatic_publication_is_clearly_marked_unreviewed(self) -> None:
         publication = publish_latexml_trial(
@@ -172,9 +174,10 @@ class LaTeXMLPublicationTest(unittest.TestCase):
         )
 
         published = load_manifest(self.manifest_path, PaperToolError)
-        self.assertEqual("automatic", published.html_version.status)
+        self.assertEqual("automatic", published.html_versions[0].status)
         self.assertEqual(
-            "HTML版を読む（自動変換・未目視）", published.html_version.label
+            "HTML版を読む（自動変換・未目視）",
+            published.html_versions[0].label,
         )
         self.assertEqual(
             "HTML版を読む（自動変換・未目視）",
@@ -206,9 +209,7 @@ class LaTeXMLPublicationTest(unittest.TestCase):
 
         published = load_manifest(self.manifest_path, PaperToolError)
         self.assertEqual(2, len(published.html_versions))
-        self.assertEqual(
-            "html-original/index.html", published.alternate_html_versions[0].path
-        )
+        self.assertEqual("html-original/index.html", published.html_versions[1].path)
         public_html = alternate.html_path.read_text(encoding="utf-8")
         self.assertIn("/html-original/", public_html)
         self.assertIn("元版HTMLをLaTeXMLで自動変換", public_html)

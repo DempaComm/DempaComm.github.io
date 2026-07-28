@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from copy import deepcopy
 from pathlib import Path
 
 from dempa_site.errors import DempaSiteError
@@ -258,6 +259,85 @@ class ManifestModelTest(unittest.TestCase):
             self.assertIsInstance(paper.statements[0], Statement)
             self.assertIsInstance(paper.relations[0], PaperRelation)
             self.assertNotIn("history", blog_manifest())
+
+    def test_html_versions_reads_new_and_legacy_metadata(self) -> None:
+        version = {
+            "status": "approved",
+            "generator": "LaTeXML",
+            "generator_version": "0.8.8",
+            "generated_at": "2026-07-26T12:00:00+09:00",
+            "source_path": "source.tex",
+            "source_sha256": HASH_A,
+            "path": "html/index.html",
+            "label": "HTML版を読む",
+            "reviewed_at": "2026-07-26T13:00:00+09:00",
+        }
+        alternate = {
+            **version,
+            "path": "html-original/index.html",
+            "label": "元版HTMLを読む",
+        }
+        new_value = tex_manifest()
+        new_value["files"].extend(
+            [
+                {
+                    "path": version["path"],
+                    "role": "derived-html",
+                    "label": version["label"],
+                    "public": True,
+                    "original_sha256": HASH_A,
+                    "sha256": HASH_A,
+                },
+                {
+                    "path": alternate["path"],
+                    "role": "derived-html",
+                    "label": alternate["label"],
+                    "public": True,
+                    "original_sha256": HASH_A,
+                    "sha256": HASH_A,
+                },
+            ]
+        )
+        new_value["html_versions"] = [version, alternate]
+        legacy_value = deepcopy(new_value)
+        legacy_value.pop("html_versions")
+        legacy_value["html_version"] = version
+        legacy_value["alternate_html_versions"] = [alternate]
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            new = load_manifest(self.write_manifest(root / "new", new_value))
+            legacy = load_manifest(
+                self.write_manifest(root / "legacy", legacy_value)
+            )
+
+            self.assertEqual(new.html_versions, legacy.html_versions)
+            self.assertEqual(version["path"], legacy.html_version.path)
+            self.assertEqual(
+                alternate["path"], legacy.alternate_html_versions[0].path
+            )
+
+    def test_new_and_legacy_html_fields_cannot_be_combined(self) -> None:
+        value = tex_manifest()
+        version = {
+            "status": "approved",
+            "generator": "LaTeXML",
+            "generator_version": "0.8.8",
+            "generated_at": "2026-07-26T12:00:00+09:00",
+            "source_path": "source.tex",
+            "source_sha256": HASH_A,
+            "path": "html/index.html",
+            "label": "HTML版を読む",
+            "reviewed_at": "2026-07-26T13:00:00+09:00",
+        }
+        value["html_versions"] = [version]
+        value["html_version"] = version
+        with tempfile.TemporaryDirectory() as temporary:
+            path = self.write_manifest(Path(temporary), value)
+            with self.assertRaisesRegex(
+                DempaSiteError, "cannot be combined with legacy"
+            ):
+                load_manifest(path)
 
     def test_relation_target_must_exist_in_loaded_collection(self) -> None:
         value = blog_manifest()

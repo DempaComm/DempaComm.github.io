@@ -182,8 +182,7 @@ class Paper(Mapping[str, Any]):
     corrections: Tuple[Correction, ...] = ()
     statements: Tuple[Statement, ...] = ()
     relations: Tuple[PaperRelation, ...] = ()
-    html_version: Optional[HtmlVersion] = None
-    alternate_html_versions: Tuple[HtmlVersion, ...] = ()
+    html_versions: Tuple[HtmlVersion, ...] = ()
     license: str = ""
     _raw: Mapping[str, Any] = field(default_factory=dict, repr=False, compare=False)
 
@@ -230,14 +229,16 @@ class Paper(Mapping[str, Any]):
             relations=tuple(
                 PaperRelation.from_dict(item) for item in value.get("relations", [])
             ),
-            html_version=(
-                HtmlVersion.from_dict(value["html_version"])
-                if "html_version" in value
-                else None
-            ),
-            alternate_html_versions=tuple(
+            html_versions=tuple(
                 HtmlVersion.from_dict(item)
-                for item in value.get("alternate_html_versions", [])
+                for item in (
+                    value.get("html_versions", [])
+                    if "html_versions" in value
+                    else (
+                        ([value["html_version"]] if "html_version" in value else [])
+                        + value.get("alternate_html_versions", [])
+                    )
+                )
             ),
             license=value.get("license", ""),
             _raw=deepcopy(dict(value)),
@@ -247,10 +248,14 @@ class Paper(Mapping[str, Any]):
         return deepcopy(dict(self._raw))
 
     @property
-    def html_versions(self) -> Tuple[HtmlVersion, ...]:
-        """Return the primary HTML version followed by any named alternatives."""
-        primary = (self.html_version,) if self.html_version is not None else ()
-        return primary + self.alternate_html_versions
+    def html_version(self) -> Optional[HtmlVersion]:
+        """Return the primary HTML version for legacy callers."""
+        return self.html_versions[0] if self.html_versions else None
+
+    @property
+    def alternate_html_versions(self) -> Tuple[HtmlVersion, ...]:
+        """Return non-primary versions for legacy callers."""
+        return self.html_versions[1:]
 
     def __getitem__(self, key: str) -> Any:
         return deepcopy(self._raw[key])

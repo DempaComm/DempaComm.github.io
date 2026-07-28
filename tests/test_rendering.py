@@ -49,7 +49,7 @@ def paper(
         "privacy_reviews": [],
     }
     if with_html:
-        value["html_version"] = {
+        primary_html = {
             "status": "approved",
             "generator": "LaTeXML",
             "generator_version": "0.8.8",
@@ -60,9 +60,10 @@ def paper(
             "label": "HTML版を読む（試験）",
             "reviewed_at": "2026-07-26T13:00:00+09:00",
         }
-        value["alternate_html_versions"] = [
+        value["html_versions"] = [
+            primary_html,
             {
-                **value["html_version"],
+                **primary_html,
                 "source_path": "original.tex",
                 "path": "html-original/index.html",
                 "label": "元版HTMLを読む（自動変換・未目視）",

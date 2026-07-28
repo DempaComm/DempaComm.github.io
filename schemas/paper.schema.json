@@ -75,8 +75,17 @@
       "type": "array",
       "items": {"$ref": "#/$defs/relation"}
     },
-    "html_version": {"$ref": "#/$defs/html_version"},
+    "html_versions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/html_version"}
+    },
+    "html_version": {
+      "description": "Deprecated compatibility field; use html_versions.",
+      "$ref": "#/$defs/html_version"
+    },
     "alternate_html_versions": {
+      "description": "Deprecated compatibility field; use html_versions.",
       "type": "array",
       "items": {"$ref": "#/$defs/html_version"}
     },

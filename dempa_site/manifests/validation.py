@@ -153,13 +153,30 @@ def validate_manifest_data(
         except ValueError as error:
             raise error_type(f"{path}: approved_at must be ISO 8601") from error
 
-    html_versions = []
-    if manifest.get("html_version") is not None:
-        html_versions.append(("html_version", manifest["html_version"]))
-    html_versions.extend(
-        (f"alternate_html_versions[{index}]", item)
-        for index, item in enumerate(manifest.get("alternate_html_versions", []))
-    )
+    legacy_html_fields = {
+        "html_version", "alternate_html_versions"
+    } & manifest.keys()
+    if "html_versions" in manifest and legacy_html_fields:
+        _error(
+            error_type,
+            path,
+            "html_versions cannot be combined with legacy HTML version fields",
+        )
+    if "html_versions" in manifest:
+        html_versions = [
+            (f"html_versions[{index}]", item)
+            for index, item in enumerate(manifest["html_versions"])
+        ]
+    else:
+        html_versions = []
+        if manifest.get("html_version") is not None:
+            html_versions.append(("html_version", manifest["html_version"]))
+        html_versions.extend(
+            (f"alternate_html_versions[{index}]", item)
+            for index, item in enumerate(
+                manifest.get("alternate_html_versions", [])
+            )
+        )
     html_paths: set[str] = set()
     for field_name, html_version in html_versions:
         source_path = str(safe_relative_path(html_version["source_path"], error_type))
