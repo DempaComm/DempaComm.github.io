@@ -646,6 +646,35 @@ main { padding: 64px 0 80px; }
   font-size: 0.82rem;
 }
 
+.correction-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.correction-list li {
+  padding: 18px 20px;
+  border-left: 4px solid var(--accent);
+  background: var(--paper);
+}
+
+.correction-list time,
+.correction-empty,
+.correction-report {
+  color: var(--muted);
+}
+
+.correction-list strong {
+  margin-left: 0.75rem;
+}
+
+.correction-list p,
+.correction-report {
+  margin: 0.5rem 0 0;
+}
+
 .math-page h1 {
   font-size: clamp(2.7rem, 9vw, 5.5rem);
 }
@@ -836,8 +865,44 @@ footer .title-attribute {
 .exploration-page h1,
 .reading-path-page h1,
 .lineage-page h1,
-.graph-page h1 {
+.graph-page h1,
+.statements-page h1 {
   font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+.statement-shortcuts {
+  margin-bottom: 64px;
+}
+
+.statement-section + .statement-section {
+  margin-top: 64px;
+}
+
+.statement-list {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--line);
+  list-style-position: inside;
+}
+
+.statement-list li {
+  display: grid;
+  gap: 5px;
+  padding: 16px 20px;
+  background: var(--white);
+  scroll-margin-top: 1rem;
+}
+
+.statement-list li > a {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.statement-list li > span {
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 .explore-grid {

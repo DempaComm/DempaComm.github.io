@@ -186,7 +186,9 @@
       "required": ["recorded_at", "summary"],
       "properties": {
         "recorded_at": {"type": "string", "minLength": 1},
-        "summary": {"type": "string", "minLength": 1}
+        "summary": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "enum": ["correction", "addendum"]},
+        "anchor": {"type": "string"}
       },
       "additionalProperties": false
     },
@@ -195,7 +197,10 @@
       "required": ["identifier", "kind", "title", "anchor"],
       "properties": {
         "identifier": {"type": "string", "minLength": 1},
-        "kind": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["theorem", "definition", "proposition", "counterexample"]
+        },
         "title": {"type": "string", "minLength": 1},
         "anchor": {"type": "string", "minLength": 1}
       },

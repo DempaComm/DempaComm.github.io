@@ -1,12 +1,14 @@
 # 原稿探索機能の管理
 
-`/explore/` は、全原稿一覧とは別の三つの入口をまとめる。
+`/explore/` は、全原稿一覧とは別の四つの入口をまとめる。
 
 - `/reading-paths/`: 人が順番と案内文を決めた読書経路
 - `/lineage/`: 初出、移行、改訂、派生版生成の系譜
 - `/graph/`: 電波通信のタグと明示関係を使った原稿関係図
+- `/statements/`: 定理、定義、命題、反例から原稿本文へ入る索引
 
 いずれも `python3 scripts/paper_tool.py stage _site` で静的に生成され、外部CDNへ依存しない。
+定理等の索引と訂正・追記の登録方法は `STATEMENTS_AND_CORRECTIONS.md` に記載する。
 
 ## 読書経路を追加する
 

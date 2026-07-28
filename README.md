@@ -73,6 +73,10 @@ python3 scripts/paper_tool.py check-paper 2015-08-28-01
 `search/` では、LaTeXMLの主HTML版がある記事を本文、節見出し、定理名、参考文献から
 検索できます。最初の導入とローカル確認方法は `docs/PAGEFIND.md` にまとめています。
 
+`statements/` では、LaTeXMLの主HTML版から抽出した定理、定義、命題、反例を種類別に
+参照できます。各原稿ページには、正式な訂正・追記と報告窓口も表示します。登録方法は
+`docs/STATEMENTS_AND_CORRECTIONS.md` にまとめています。
+
 LaTeXMLによるHTML変換は通常公開から隔離した試験コマンドとして導入しています。自動検査と
 PDFとの目視比較を通過した原稿は、試験HTML版として個別公開できます。全体状況を先に
 確認する場合は、未変換TeXを一括処理し、自動合格版だけを「自動変換・未目視」と明示して

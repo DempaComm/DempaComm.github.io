@@ -33,6 +33,7 @@ class StagingPipelineTest(unittest.TestCase):
         "lineage",
         "relation-graph",
         "explore",
+        "statements",
     }
 
     def setUp(self) -> None:

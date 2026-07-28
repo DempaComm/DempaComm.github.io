@@ -256,6 +256,7 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn("https://dempacomm.github.io/archive/", locations)
         self.assertIn("https://dempacomm.github.io/math/", locations)
         self.assertIn("https://dempacomm.github.io/search/", locations)
+        self.assertIn("https://dempacomm.github.io/statements/", locations)
         self.assertIn(
             "https://dempacomm.github.io/tags/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93/",
             locations,
@@ -313,6 +314,7 @@ class SiteOutputContractTest(unittest.TestCase):
                 "papers/old-normal-paper/index.html",
                 "reading-paths/index.html",
                 "search/index.html",
+                "statements/index.html",
                 "tags/数学/index.html",
                 "tags/位相空間/index.html",
                 "tags/読み物/index.html",

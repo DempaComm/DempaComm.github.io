@@ -53,6 +53,34 @@ def rendered_paper_page(manifest: Paper) -> str:
         if manifest["kind"] == BLOG_ONLY_KIND
         else ""
     )
+    correction_items = []
+    correction_labels = {"correction": "訂正", "addendum": "追記"}
+    for correction in sorted(manifest.corrections, key=lambda item: item.recorded_at):
+        label = correction_labels.get(correction.kind, "訂正・追記")
+        location = ""
+        if correction.anchor and manifest.html_version is not None:
+            href = f"{manifest.html_version.path}{correction.anchor}"
+            location = f' <a href="{html.escape(href, quote=True)}">該当箇所</a>'
+        correction_items.append(
+            f"          <li><time datetime=\"{html.escape(correction.recorded_at, quote=True)}\">"
+            f"{html.escape(correction.recorded_at[:10])}</time> "
+            f"<strong>{label}</strong><p>{html.escape(correction.summary)}{location}</p></li>"
+        )
+    if correction_items:
+        corrections = '<ol class="correction-list">\n' + "\n".join(correction_items) + "\n        </ol>"
+    else:
+        corrections = '<p class="correction-empty">現在、登録された訂正・追記はありません。</p>'
+    issue_title = quote(f"[{manifest.slug}] {manifest.title}の訂正・追記", safe="")
+    issue_body = quote(
+        f"対象記事: https://dempacomm.github.io/papers/{manifest.slug}/\n\n"
+        "訂正または追記の候補:\n",
+        safe="",
+    )
+    issue_url = (
+        "https://github.com/DempaComm/DempaComm.github.io/issues/new"
+        f"?title={issue_title}&body={issue_body}"
+    )
+    issue_url = html.escape(issue_url, quote=True)
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -105,6 +133,12 @@ def rendered_paper_page(manifest: Paper) -> str:
           <a href="../../graph/">タグ関係図</a>
           <a href="../../reading-paths/">読書経路</a>
         </nav>
+      </section>
+      <section aria-labelledby="corrections-title">
+        <p class="section-number">CORRECTIONS &amp; ADDENDA</p>
+        <h2 id="corrections-title">訂正・追記</h2>
+        {corrections}
+        <p class="correction-report"><a href="{issue_url}">訂正・追記の候補をGitHubで報告する <span aria-hidden="true">↗</span></a></p>
       </section>
     </article>
   </main>

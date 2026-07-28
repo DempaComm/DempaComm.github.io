@@ -20,6 +20,7 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
         (f"{SITE_URL}/explore/", None),
         (f"{SITE_URL}/reading-paths/", None),
         (f"{SITE_URL}/search/", None),
+        (f"{SITE_URL}/statements/", None),
         (f"{SITE_URL}/lineage/", None),
         (f"{SITE_URL}/graph/", None),
     ]

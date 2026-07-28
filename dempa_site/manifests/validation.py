@@ -255,6 +255,16 @@ def validate_manifest_data(
     statement_ids = [item["identifier"] for item in manifest.get("statements", [])]
     if len(statement_ids) != len(set(statement_ids)):
         _error(error_type, path, "statements contain duplicate identifiers")
+    for correction in manifest.get("corrections", []):
+        try:
+            parse_iso_datetime(correction["recorded_at"])
+        except ValueError as error:
+            raise error_type(
+                f"{path}: corrections.recorded_at must be ISO 8601"
+            ) from error
+        anchor = correction.get("anchor", "")
+        if anchor and not anchor.startswith("#"):
+            _error(error_type, path, "corrections.anchor must start with #")
 
 
 def validate_manifest_collection(

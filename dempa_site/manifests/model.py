@@ -107,10 +107,17 @@ class HistoryEvent:
 class Correction:
     recorded_at: str
     summary: str
+    kind: str = "correction"
+    anchor: str = ""
 
     @classmethod
     def from_dict(cls, value: Mapping[str, Any]) -> "Correction":
-        return cls(**{key: value[key] for key in cls.__dataclass_fields__})
+        return cls(
+            recorded_at=value["recorded_at"],
+            summary=value["summary"],
+            kind=value.get("kind", "correction"),
+            anchor=value.get("anchor", ""),
+        )
 
 
 @dataclass(frozen=True)

@@ -117,6 +117,9 @@ class PublicRenderingTest(unittest.TestCase):
         detail = rendered_paper_page(self.papers[0])
         self.assertIn("電波通信で読む", detail)
         self.assertIn("ブログ本文のみ", detail)
+        self.assertIn("訂正・追記", detail)
+        self.assertIn("現在、登録された訂正・追記はありません。", detail)
+        self.assertIn("issues/new?title=", detail)
         not_found = rendered_not_found_page()
         self.assertIn("404 NOT FOUND", not_found)
         self.assertIn('content="noindex"', not_found)
@@ -153,6 +156,23 @@ class PublicRenderingTest(unittest.TestCase):
             html_sitemap,
         )
         self.assertIn("<lastmod>2026-07-26</lastmod>", html_sitemap)
+        self.assertIn("https://dempacomm.github.io/statements/", html_sitemap)
+
+    def test_corrections_and_addenda_are_rendered_on_paper_page(self) -> None:
+        value = self.papers[0].to_dict()
+        value["corrections"] = [
+            {
+                "recorded_at": "2026-07-28T16:00:00+09:00",
+                "kind": "addendum",
+                "summary": "別証明への説明を追加しました。",
+            }
+        ]
+        corrected = Paper.from_dict(value, self.papers[0].source_path)
+        rendered = rendered_paper_page(corrected)
+
+        self.assertIn("2026-07-28", rendered)
+        self.assertIn("<strong>追記</strong>", rendered)
+        self.assertIn("別証明への説明を追加しました。", rendered)
 
     def test_compatibility_renderer_remains_a_thin_page_module_index(self) -> None:
         rendering = (

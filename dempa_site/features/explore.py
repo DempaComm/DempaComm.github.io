@@ -13,8 +13,8 @@ def generate_explore(catalog: SiteCatalog, output: Path) -> None:
     target.mkdir(parents=True)
     body = """    <section aria-labelledby="explore-title">
       <div class="section-heading">
-        <h2 id="explore-title">三つの入口</h2>
-        <p>読む順番、時間的な履歴、主題間の近さという異なる見方で原稿を探せます。</p>
+        <h2 id="explore-title">四つの入口</h2>
+        <p>読む順番、時間的な履歴、主題間の近さ、数学的記述の種類から原稿を探せます。</p>
       </div>
       <div class="explore-grid">
         <a class="explore-card" href="../reading-paths/">
@@ -32,13 +32,18 @@ def generate_explore(catalog: SiteCatalog, output: Path) -> None:
           <strong>原稿関係図</strong>
           <span>電波通信のタグを手掛かりに、近い話題の原稿を図から探します。</span>
         </a>
+        <a class="explore-card" href="../statements/">
+          <span class="section-number">STATEMENTS</span>
+          <strong>定理等の索引</strong>
+          <span>定理、定義、命題、反例をLaTeXML HTML版の該当箇所から探します。</span>
+        </a>
       </div>
     </section>"""
     (target / "index.html").write_text(
         rendered_exploration_page(
             title="原稿を探索する",
             eyebrow="EXPLORE THE ARCHIVE",
-            description=f"{len(catalog.selected)}件の原稿を、一覧とは違う三つの方法でたどるための入口です。",
+            description=f"{len(catalog.selected)}件の原稿を、一覧とは違う四つの方法でたどるための入口です。",
             canonical_path="/explore/",
             body=body,
         ),

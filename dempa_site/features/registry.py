@@ -10,6 +10,7 @@ from dempa_site.features.reading_paths import (
     validate_reading_paths,
 )
 from dempa_site.features.relation_graph import generate_relation_graph
+from dempa_site.features.statements import generate_statements
 
 
 # Add production feature instances here. Keeping this immutable makes the
@@ -34,6 +35,11 @@ SITE_FEATURES: tuple[SiteFeature, ...] = (
     FunctionFeature(
         name="explore",
         generator=generate_explore,
+        required=True,
+    ),
+    FunctionFeature(
+        name="statements",
+        generator=generate_statements,
         required=True,
     ),
 )

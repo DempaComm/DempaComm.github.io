@@ -29,6 +29,7 @@ def rendered_exploration_page(
     body: str,
     prefix: str = "../",
     body_class: str = "exploration-page",
+    current_navigation: str = "explore",
 ) -> str:
     return f"""<!doctype html>
 <html lang="ja">
@@ -43,7 +44,7 @@ def rendered_exploration_page(
       <h1>{html.escape(title)}</h1>
       <p class="lead">{html.escape(description)}</p>
       <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation(prefix, "explore")}
+{site_navigation(prefix, current_navigation)}
       </nav>
     </div>
   </header>

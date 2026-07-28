@@ -15,6 +15,7 @@ def site_navigation(prefix: str, current: str = "") -> str:
         ("math", f"{prefix}math/", "数学記事総覧"),
         ("explore", f"{prefix}explore/", "原稿を探索"),
         ("search", f"{prefix}search/", "本文検索"),
+        ("statements", f"{prefix}statements/", "定理等の索引"),
         ("tags", f"{prefix}archive/#tags-title", "タグ索引"),
     )
     rendered = []
