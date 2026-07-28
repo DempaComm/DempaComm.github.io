@@ -28,8 +28,11 @@ VS Codeでは「ターミナル」→「タスクの実行」→
 python3 scripts/paper_tool.py check-all
 ```
 
-自動テスト、移行台帳、サイト生成に続いてPagefind索引を生成し、索引を含む公開物を
-承認済み基準と比較する。索引生成だけをやり直す場合は次を使う。
+自動テスト、移行台帳、サイト生成に続いてPagefind索引を生成し、公開物を承認済み基準と
+比較する。Pagefind索引はmacOSとGitHub ActionsのLinuxでチャンク名やWASMのバイト列が
+変わるため、SHAの一括比較からは除外し、直前の索引生成工程で必須ファイル群を検査する。
+検索ページと起動スクリプトは従来どおりSHAで厳密に比較する。索引生成だけをやり直す場合は
+次を使う。
 
 ```sh
 python3 scripts/paper_tool.py stage _site

@@ -12,6 +12,7 @@ from dempa_site.manifests.loader import load_manifest
 
 
 Emitter = Callable[[str], None]
+PAGEFIND_PREFIX = "pagefind/"
 
 
 def generated_pdf_paths(papers_dir: Path) -> set[str]:
@@ -38,6 +39,12 @@ def snapshot(site_root: Path, papers_dir: Path) -> dict[str, Any]:
         if not path.is_file():
             continue
         relative = path.relative_to(site_root).as_posix()
+        # Pagefind's Rust/WASM bundle is functionally equivalent but not
+        # byte-for-byte identical across macOS and Linux.  Its dedicated build
+        # step validates the complete bundle, so omit it from this cross-platform
+        # deterministic inventory.
+        if relative.startswith(PAGEFIND_PREFIX):
+            continue
         entries.append(
             {
                 "path": relative,
@@ -54,10 +61,13 @@ def snapshot(site_root: Path, papers_dir: Path) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "hash_policy": {
+            "excluded_prefixes": [PAGEFIND_PREFIX],
             "ignored_paths": sorted(ignored_hashes),
             "reason": (
                 "TeX-generated PDFs are checked for presence only because build "
-                "metadata may vary by environment."
+                "metadata may vary by environment. Pagefind output is validated "
+                "by the dedicated indexing step and excluded because its chunk "
+                "names and WASM bytes vary by platform."
             ),
         },
         "files": entries,
@@ -117,7 +127,7 @@ def snapshot_differences(
         if expected_files[path] != actual_files[path]
     )
     if expected.get("hash_policy") != actual["hash_policy"]:
-        differences.append("generated-PDF hash policy changed")
+        differences.append("public-site snapshot policy changed")
     return tuple(differences)
 
 
@@ -133,7 +143,7 @@ def write_baseline(
     ignored = len(value["hash_policy"]["ignored_paths"])
     emit(
         f"WROTE {baseline_path} ({len(value['files'])} files; "
-        f"{ignored} generated PDFs presence-only)"
+        f"{ignored} generated PDFs presence-only; pagefind/ separately validated)"
     )
 
 
@@ -150,5 +160,5 @@ def check_baseline(
     ignored = len(actual["hash_policy"]["ignored_paths"])
     emit(
         f"OK  public site snapshot ({len(actual['files'])} files; "
-        f"{ignored} generated PDFs presence-only)"
+        f"{ignored} generated PDFs presence-only; pagefind/ separately validated)"
     )

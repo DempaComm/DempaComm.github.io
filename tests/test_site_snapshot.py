@@ -101,6 +101,23 @@ class SiteSnapshotTest(unittest.TestCase):
             self.assertNotEqual(0, checked.returncode)
             self.assertIn("changed: index.html", checked.stderr)
 
+    def test_pagefind_bundle_is_validated_outside_cross_platform_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            environment, site, baseline = self.prepare(Path(temporary))
+            pagefind = site / "pagefind"
+            pagefind.mkdir()
+            (pagefind / "macos-chunk.pf_index").write_bytes(b"macos")
+            written = self.run_tool(
+                environment, "write", str(site), "--baseline", str(baseline)
+            )
+            self.assertEqual(0, written.returncode, written.stderr)
+            (pagefind / "macos-chunk.pf_index").unlink()
+            (pagefind / "linux-chunk.pf_index").write_bytes(b"linux")
+            checked = self.run_tool(
+                environment, "check", str(site), "--baseline", str(baseline)
+            )
+            self.assertEqual(0, checked.returncode, checked.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -27,9 +27,15 @@ class PagefindIndexTest(unittest.TestCase):
             def successful(command, **_kwargs):
                 commands.append(command)
                 bundle = site / "pagefind"
-                bundle.mkdir()
+                (bundle / "index").mkdir(parents=True)
+                (bundle / "fragment").mkdir()
                 (bundle / "pagefind.js").write_text("export {};", encoding="utf-8")
                 (bundle / "pagefind-entry.json").write_text("{}", encoding="utf-8")
+                (bundle / "pagefind-worker.js").write_text("worker", encoding="utf-8")
+                (bundle / "wasm.unknown.pagefind").write_bytes(b"wasm")
+                (bundle / "pagefind.ja_test.pf_meta").write_bytes(b"meta")
+                (bundle / "index" / "test.pf_index").write_bytes(b"index")
+                (bundle / "fragment" / "test.pf_fragment").write_bytes(b"fragment")
                 return subprocess.CompletedProcess(command, 0, "", "")
 
             report = build_pagefind_index(
@@ -59,6 +65,19 @@ class PagefindIndexTest(unittest.TestCase):
             (site / "search" / "index.html").write_text("search")
             with self.assertRaisesRegex(PaperToolError, "HTML版がありません"):
                 build_pagefind_index(site)
+
+    def test_incomplete_successful_bundle_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            site = self.prepared_site(Path(temporary))
+
+            def incomplete(command, **_kwargs):
+                bundle = site / "pagefind"
+                bundle.mkdir()
+                (bundle / "pagefind.js").write_text("export {};", encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0, "", "")
+
+            with self.assertRaisesRegex(PaperToolError, "pagefind-entry.json"):
+                build_pagefind_index(site, run_command=incomplete)
 
 
 if __name__ == "__main__":

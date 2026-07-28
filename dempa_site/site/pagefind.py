@@ -26,6 +26,24 @@ class PagefindReport:
 CommandRunner = Callable[..., subprocess.CompletedProcess[str]]
 
 
+def missing_bundle_parts(bundle: Path) -> tuple[str, ...]:
+    """Return missing fixed files or generated-file groups in a Pagefind bundle."""
+    fixed = (
+        "pagefind.js",
+        "pagefind-entry.json",
+        "pagefind-worker.js",
+        "wasm.unknown.pagefind",
+    )
+    missing = [name for name in fixed if not (bundle / name).is_file()]
+    groups = (
+        ("pagefind.*.pf_meta", tuple(bundle.glob("pagefind.*.pf_meta"))),
+        ("index/*.pf_index", tuple((bundle / "index").glob("*.pf_index"))),
+        ("fragment/*.pf_fragment", tuple((bundle / "fragment").glob("*.pf_fragment"))),
+    )
+    missing.extend(label for label, matches in groups if not matches)
+    return tuple(missing)
+
+
 def pagefind_command(
     site_root: Path,
     executable: Sequence[str] = (sys.executable, "-m", "pagefind"),
@@ -82,10 +100,10 @@ def build_pagefind_index(
             " `python3 -m pip install --user -r requirements-pagefind.txt` を"
             f"実行してください。{suffix}"
         )
-    required = (bundle / "pagefind.js", bundle / "pagefind-entry.json")
-    missing = [str(path.relative_to(site_root)) for path in required if not path.is_file()]
+    missing = missing_bundle_parts(bundle)
     if missing:
         raise PaperToolError(
-            "Pagefind索引の必須ファイルがありません: " + ", ".join(missing)
+            "Pagefind索引の必須ファイルがありません: "
+            + ", ".join(f"pagefind/{name}" for name in missing)
         )
     return PagefindReport(len(pages), bundle)
