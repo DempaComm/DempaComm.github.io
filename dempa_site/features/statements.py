@@ -176,7 +176,7 @@ def _render_statement(item: IndexedStatement) -> str:
         "tag": "反例タグから補完",
     }
     source = source_labels[item.source]
-    return f"""        <li id="statement-{html.escape(item.paper_slug, quote=True)}-{html.escape(item.identifier, quote=True)}">
+    return f"""        <li id="statement-{html.escape(item.paper_slug, quote=True)}-{html.escape(item.identifier, quote=True)}" data-kind="{item.kind}" data-year="{item.paper_slug[:4]}" data-paper="{html.escape(item.paper_slug, quote=True)}">
           <a href="{html.escape(item.href, quote=True)}">{html.escape(item.title)}</a>
           <span><a href="../papers/{html.escape(item.paper_slug, quote=True)}/">{html.escape(item.paper_title)}</a> · {source}</span>
         </li>"""
@@ -207,6 +207,18 @@ def generate_statements(catalog: SiteCatalog, output: Path) -> None:
       </ol>
     </section>"""
         )
+    years = sorted({item.paper_slug[:4] for item in statements}, reverse=True)
+    year_options = "".join(
+        f'<option value="{year}">{year}年</option>' for year in years
+    )
+    papers = sorted(
+        {(item.paper_slug, item.paper_title) for item in statements}
+    )
+    paper_options = "".join(
+        f'<option value="{html.escape(slug, quote=True)}">'
+        f'{html.escape(title)}（{html.escape(slug)}）</option>'
+        for slug, title in papers
+    )
     body = f"""    <section aria-labelledby="statement-index-title">
       <div class="section-heading">
         <h2 id="statement-index-title">種類から選ぶ</h2>
@@ -216,7 +228,22 @@ def generate_statements(catalog: SiteCatalog, output: Path) -> None:
 {shortcuts}
       </div>
     </section>
-{chr(10).join(sections)}"""
+    <section class="statement-filter-panel" aria-labelledby="statement-filter-title">
+      <div class="section-heading">
+        <h2 id="statement-filter-title">索引を絞り込む</h2>
+        <p>検索語、種類、公開年、原稿を組み合わせられます。</p>
+      </div>
+      <form id="statement-filter" class="statement-filter" role="search">
+        <label>検索語<input id="statement-query" type="search" placeholder="定理名・原稿名"></label>
+        <label>種類<select id="statement-kind"><option value="">すべて</option><option value="theorem">定理</option><option value="definition">定義</option><option value="proposition">命題</option><option value="counterexample">反例</option></select></label>
+        <label>公開年<select id="statement-year"><option value="">すべて</option>{year_options}</select></label>
+        <label>原稿<select id="statement-paper"><option value="">すべて</option>{paper_options}</select></label>
+        <button id="statement-reset" type="button">条件を消す</button>
+      </form>
+      <p id="statement-filter-status" class="statement-filter-status" role="status" aria-live="polite">{len(statements)}件を表示しています。</p>
+    </section>
+{chr(10).join(sections)}
+    <script src="../statements.js" defer></script>"""
     target = output / "statements"
     target.mkdir(parents=True)
     (target / "index.html").write_text(

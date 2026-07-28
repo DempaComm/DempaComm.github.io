@@ -100,6 +100,10 @@ class StatementIndexTest(unittest.TestCase):
 
         self.assertIn("定理・定義・命題・反例索引", rendered)
         self.assertIn("../papers/2026-07-28-01/html/index.html#Thm1", rendered)
+        self.assertIn('id="statement-filter"', rendered)
+        self.assertIn('data-kind="theorem"', rendered)
+        self.assertIn('data-year="2026"', rendered)
+        self.assertIn('src="../statements.js"', rendered)
         self.assertEqual(1, data["counts"]["counterexample"])
 
     def test_counterexample_tag_supplies_article_level_fallback(self) -> None:

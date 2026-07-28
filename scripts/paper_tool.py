@@ -30,6 +30,7 @@ from dempa_site.importing.pdf import import_pdf  # noqa: E402
 from dempa_site.importing.tex import import_tex  # noqa: E402
 from dempa_site.manifests.loader import load_manifest_directory  # noqa: E402
 from dempa_site.manifests.model import Paper  # noqa: E402
+from dempa_site.manifests.notes import NOTE_KINDS, record_note  # noqa: E402
 from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     safe_relative_path as shared_safe_relative_path,
@@ -195,6 +196,25 @@ def command_check_paper(args: argparse.Namespace) -> None:
         f"privacy-receipts={report.privacy_receipts} {build_status}"
     )
     print("FAST CHECK ONLY: コミット前には check-all を実行してください")
+
+
+def command_add_note(args: argparse.Namespace) -> None:
+    manifest_path, paper = manifests([args.slug])[0]
+    entry = record_note(
+        manifest_path,
+        paper,
+        kind=args.note_kind,
+        summary=args.summary,
+        anchor=args.anchor,
+        recorded_at=args.recorded_at,
+    )
+    print(
+        f"RECORDED {NOTE_KINDS[args.note_kind]} {args.slug} "
+        f"date={entry['recorded_at'][:10]}"
+    )
+    print("NEXT python3 scripts/paper_tool.py stage _site")
+    print("REVIEW _site, then: python3 scripts/site_snapshot.py write _site")
+    print("FINAL python3 scripts/paper_tool.py check-all")
 
 
 def command_pagefind_index(args: argparse.Namespace) -> None:
@@ -465,6 +485,8 @@ COMMANDS = {
     "check-links": command_check_links,
     "check-all": command_check_all,
     "check-paper": command_check_paper,
+    "add-correction": command_add_note,
+    "add-addendum": command_add_note,
     "pagefind-index": command_pagefind_index,
     "latexml-trial": command_latexml_trial,
     "publish-latexml": command_publish_latexml,

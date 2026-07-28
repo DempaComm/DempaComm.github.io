@@ -874,6 +874,51 @@ footer .title-attribute {
   margin-bottom: 64px;
 }
 
+.statement-filter-panel {
+  margin-bottom: 64px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.statement-filter {
+  display: grid;
+  grid-template-columns: minmax(14rem, 2fr) repeat(3, minmax(10rem, 1fr)) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.statement-filter label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.statement-filter input,
+.statement-filter select,
+.statement-filter button {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.statement-filter button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.statement-filter-status {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
 .statement-section + .statement-section {
   margin-top: 64px;
 }
@@ -1351,6 +1396,7 @@ footer .title-attribute {
     grid-template-columns: 1fr;
   }
   .fulltext-search-form > div { grid-template-columns: 1fr; }
+  .statement-filter { grid-template-columns: 1fr; }
   .header-inner { padding: 52px 0 46px; }
   .paper-meta { flex-wrap: wrap; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }

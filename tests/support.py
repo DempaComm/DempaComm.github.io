@@ -46,6 +46,9 @@ def prepare_paper_repository(root: Path) -> dict[str, str]:
     (root / "full-text-search.js").write_text(
         "// full-text fixture\n", encoding="utf-8"
     )
+    (root / "statements.js").write_text(
+        "// statements fixture\n", encoding="utf-8"
+    )
     for asset in (
         "favicon.ico",
         "favicon-16.png",

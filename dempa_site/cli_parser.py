@@ -73,6 +73,27 @@ def build_parser(
     )
     check_paper_parser.set_defaults(func=commands["check-paper"])
 
+    for command_name, label in (
+        ("add-correction", "correction"),
+        ("add-addendum", "addendum"),
+    ):
+        note_parser = subparsers.add_parser(
+            command_name,
+            help=f"record a public {label} in paper.json",
+        )
+        note_parser.add_argument("slug", help="paper slug")
+        note_parser.add_argument("--summary", required=True, help="public note text")
+        note_parser.add_argument(
+            "--anchor",
+            default="",
+            help="optional primary-HTML anchor beginning with #",
+        )
+        note_parser.add_argument(
+            "--recorded-at",
+            help="ISO 8601 timestamp; defaults to the current local time",
+        )
+        note_parser.set_defaults(func=commands[command_name], note_kind=label)
+
     pagefind_parser = subparsers.add_parser(
         "pagefind-index",
         help="build the Japanese full-text index for a staged site",

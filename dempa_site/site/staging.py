@@ -176,6 +176,7 @@ def copy_public_files(context: StageContext) -> None:
     shutil.copy2(root / "styles.css", output / "styles.css")
     shutil.copy2(context.paths.search_script, output / "search.js")
     shutil.copy2(root / "full-text-search.js", output / "full-text-search.js")
+    shutil.copy2(root / "statements.js", output / "statements.js")
     for asset in STATIC_ASSETS:
         shutil.copy2(root / asset, output / asset)
 
