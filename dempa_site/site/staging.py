@@ -15,7 +15,7 @@ from dempa_site.catalog.metadata import (
     collect_metadata,
     rendered_keywords,
 )
-from dempa_site.config import MATH_SECTION_DETAILS, SITE_URL
+from dempa_site.config import MATH_SECTION_DETAILS, MATH_TOPICS, SITE_URL
 from dempa_site.errors import PaperToolError
 from dempa_site.files import write_json
 from dempa_site.features import (
@@ -33,11 +33,13 @@ from dempa_site.site.discovery import DISCOVERY_SCRIPT, paper_summary_data
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
 from dempa_site.site.rendering import (
+    papers_for_math_topic,
     rendered_archive_page,
     rendered_full_text_search_page,
     rendered_home_page,
     rendered_math_page,
     rendered_math_section_page,
+    rendered_math_topic_page,
     rendered_not_found_page,
     rendered_paper_page,
     rendered_tag_page,
@@ -162,6 +164,18 @@ def generate_static_pages(context: StageContext) -> None:
         section_dir.mkdir()
         (section_dir / "index.html").write_text(
             rendered_math_section_page(section, papers), encoding="utf-8"
+        )
+    topic_dir = math_dir / "topics"
+    topic_dir.mkdir()
+    all_papers = [paper for _, paper in selected]
+    for topic in MATH_TOPICS:
+        target = topic_dir / str(topic["slug"])
+        target.mkdir()
+        (target / "index.html").write_text(
+            rendered_math_topic_page(
+                topic, papers_for_math_topic(topic, all_papers)
+            ),
+            encoding="utf-8",
         )
 
     # Public navigation features are centrally registered and isolated from

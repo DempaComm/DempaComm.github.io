@@ -12,6 +12,7 @@ from dempa_site.config import (
     LATEXMKRC_BY_ENGINE,
     MATH_SECTIONS,
     MATH_SECTION_DETAILS,
+    MATH_TOPICS,
     VALID_MATH_SECTIONS,
 )
 from dempa_site.dates import local_now_isoformat, parse_iso_datetime, utc_now_seconds
@@ -95,6 +96,13 @@ class SharedFoundationTest(unittest.TestCase):
     def test_math_and_tex_settings_are_internally_consistent(self) -> None:
         self.assertEqual(set(MATH_SECTIONS), set(MATH_SECTION_DETAILS))
         self.assertEqual({"", *MATH_SECTIONS}, set(VALID_MATH_SECTIONS))
+        self.assertEqual(
+            len(MATH_TOPICS), len({topic["slug"] for topic in MATH_TOPICS})
+        )
+        self.assertTrue(
+            all(topic["section"] in MATH_SECTIONS for topic in MATH_TOPICS)
+        )
+        self.assertTrue(all(topic["tags"] for topic in MATH_TOPICS))
         self.assertIn(DEFAULT_BUILD_ENGINE, LATEXMKRC_BY_ENGINE)
         self.assertIn("platex", LATEXMKRC_BY_ENGINE[DEFAULT_BUILD_ENGINE])
         self.assertEqual(

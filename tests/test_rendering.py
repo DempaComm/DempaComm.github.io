@@ -3,14 +3,17 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from dempa_site.config import MATH_TOPICS
 from dempa_site.manifests.model import Paper
 from dempa_site.site.layout import page_head, site_navigation
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.rendering import (
+    papers_for_math_topic,
     rendered_archive_page,
     rendered_home_page,
     rendered_math_page,
     rendered_math_section_page,
+    rendered_math_topic_page,
     rendered_not_found_page,
     rendered_paper_page,
     rendered_tag_page,
@@ -136,6 +139,10 @@ class PublicRenderingTest(unittest.TestCase):
             "https://dempacomm.github.io/tags/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93/",
             sitemap,
         )
+        self.assertIn(
+            "https://dempacomm.github.io/math/topics/metric-metrization/",
+            sitemap,
+        )
 
         html_paper = paper(
             "2026-07-26-01", "HTML版記事", with_html=True
@@ -157,6 +164,37 @@ class PublicRenderingTest(unittest.TestCase):
         )
         self.assertIn("<lastmod>2026-07-26</lastmod>", html_sitemap)
         self.assertIn("https://dempacomm.github.io/statements/", html_sitemap)
+
+    def test_math_topics_are_tag_derived_and_link_to_html_and_statements(self) -> None:
+        topic = next(
+            item for item in MATH_TOPICS if item["slug"] == "metric-metrization"
+        )
+        metric_paper = paper(
+            "2026-07-28-01",
+            "距離化の記事",
+            "位相・距離・幾何",
+            ["数学", "距離空間"],
+            with_html=True,
+        )
+        wrong_section = paper(
+            "2026-07-28-02",
+            "別分野の記事",
+            "解析・測度・確率",
+            ["数学", "距離空間"],
+        )
+
+        selected = papers_for_math_topic(topic, [metric_paper, wrong_section])
+        rendered = rendered_math_topic_page(topic, selected)
+
+        self.assertEqual([metric_paper], selected)
+        self.assertIn("距離化の記事", rendered)
+        self.assertNotIn("別分野の記事", rendered)
+        self.assertIn(
+            '../../../papers/2026-07-28-01/html/index.html', rendered
+        )
+        self.assertIn(
+            '../../../statements/?paper=2026-07-28-01', rendered
+        )
 
     def test_corrections_and_addenda_are_rendered_on_paper_page(self) -> None:
         value = self.papers[0].to_dict()

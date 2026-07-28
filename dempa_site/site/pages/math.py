@@ -12,6 +12,7 @@ from dempa_site.config import (
     BLOG_ONLY_KIND,
     MATH_SECTION_DETAILS,
     MATH_SECTIONS,
+    MATH_TOPICS,
     SITE_TITLE_ATTRIBUTE,
     SITE_TITLE_FORMAL,
     SITE_TITLE_TOP,
@@ -39,6 +40,14 @@ def rendered_math_index_item(
         path = html.escape(entry.path, quote=True)
         label = html.escape(entry.label)
         file_links.append(f'<a href="{prefix}papers/{slug}/{path}">{label}</a>')
+    if manifest.html_version is not None:
+        html_path = html.escape(manifest.html_version.path, quote=True)
+        html_href = f"{prefix}papers/{slug}/{html_path}"
+        if html_href not in "".join(file_links):
+            file_links.append(f'<a href="{html_href}">HTML本文</a>')
+        file_links.append(
+            f'<a href="{prefix}statements/?paper={slug}">定理等索引</a>'
+        )
     if manifest["kind"] == BLOG_ONLY_KIND and manifest["original_url"]:
         original_url = html.escape(manifest["original_url"], quote=True)
         file_links.append(f'<a href="{original_url}">電波通信で読む</a>')
@@ -75,8 +84,59 @@ def representative_math_tags(papers: Sequence[Paper]) -> list[str]:
     ]
 
 
+def papers_for_math_topic(topic: dict, papers: Sequence[Paper]) -> list[Paper]:
+    """Select a non-exclusive topic from one primary section and its tags."""
+    tags = set(topic["tags"])
+    return [
+        paper
+        for paper in papers
+        if paper.math_section == topic["section"] and tags.intersection(paper.tags)
+    ]
+
+
+def _rendered_topic_cards(
+    papers: Sequence[Paper], *, section: str = "", prefix: str = "topics/"
+) -> str:
+    topics = [
+        topic for topic in MATH_TOPICS if not section or topic["section"] == section
+    ]
+    return "\n".join(
+        f"""      <a class="math-topic-card" href="{prefix}{topic['slug']}/">
+        <span class="section-number">TOPIC {index:02d}</span>
+        <strong>{html.escape(str(topic['title']))}</strong>
+        <span>{html.escape(str(topic['description']))}</span>
+        <span class="math-topic-count">{len(papers_for_math_topic(topic, papers))}件</span>
+      </a>"""
+        for index, topic in enumerate(topics, start=1)
+    )
+
+
+def _rendered_year_sections(papers: Sequence[Paper], prefix: str) -> str:
+    by_year: dict[int, list[Paper]] = {}
+    for paper in papers:
+        by_year.setdefault(paper.year, []).append(paper)
+    if not by_year:
+        return f"""      <section class="math-empty">
+        <p>このテーマには、まだ公開原稿がありません。</p>
+        <a href="{prefix}archive/">全原稿アーカイブを見る</a>
+      </section>"""
+    return "\n".join(
+        f"""      <section class="math-index-section" aria-labelledby="year-{year}">
+        <div class="math-index-heading">
+          <h2 id="year-{year}">{year}年</h2>
+          <span>{len(year_papers)}件</span>
+        </div>
+        <ul class="math-index-list">
+{chr(10).join(rendered_math_index_item(paper, prefix) for paper in reversed(year_papers))}
+        </ul>
+      </section>"""
+        for year, year_papers in sorted(by_year.items(), reverse=True)
+    )
+
+
 def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
     grouped = grouped_math_sections(selected)
+    all_papers = [paper for _, paper in selected]
     directory_cards = "\n".join(
         f"""      <a class="math-directory-card" href="{MATH_SECTION_DETAILS[section]['slug']}/">
         <span class="section-number">{index:02d}</span>
@@ -90,6 +150,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       </a>"""
         for index, section in enumerate(MATH_SECTIONS, start=1)
     )
+    topic_cards = _rendered_topic_cards(all_papers)
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -111,6 +172,15 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
     <nav class="math-directory-grid" aria-label="数学分野別総覧">
 {directory_cards}
     </nav>
+    <section class="math-topic-directory" aria-labelledby="math-topics-title">
+      <div class="section-heading">
+        <h2 id="math-topics-title">テーマから探す</h2>
+        <p>電波通信のタグから自動分類しています。一つの原稿が複数のテーマに現れることがあります。</p>
+      </div>
+      <nav class="math-topic-grid" aria-label="数学テーマ別総覧">
+{topic_cards}
+      </nav>
+    </section>
     <section class="archive-note" aria-labelledby="math-guide-title">
       <p class="section-number">GUIDE</p>
       <h2 id="math-guide-title">分類について</h2>
@@ -127,27 +197,18 @@ def rendered_math_section_page(
     section: str, papers: Sequence[Paper]
 ) -> str:
     details = MATH_SECTION_DETAILS[section]
-    by_year: dict[int, list[Paper]] = {}
-    for paper in papers:
-        by_year.setdefault(int(paper["year"]), []).append(paper)
-    if by_year:
-        year_sections = "\n".join(
-            f"""      <section class="math-index-section" aria-labelledby="year-{year}">
-        <div class="math-index-heading">
-          <h2 id="year-{year}">{year}年</h2>
-          <span>{len(year_papers)}件</span>
-        </div>
-        <ul class="math-index-list">
-{chr(10).join(rendered_math_index_item(paper, "../../") for paper in reversed(year_papers))}
-        </ul>
-      </section>"""
-            for year, year_papers in sorted(by_year.items(), reverse=True)
-        )
-    else:
-        year_sections = """      <section class="math-empty">
-        <p>この分野には、まだ公開原稿がありません。</p>
-        <a href="../../archive/">全原稿アーカイブを見る</a>
-      </section>"""
+    year_sections = _rendered_year_sections(papers, "../../")
+    section_topics = ""
+    if any(topic["section"] == section for topic in MATH_TOPICS):
+        section_topics = f"""    <section class="math-topic-directory" aria-labelledby="section-topics-title">
+      <div class="section-heading">
+        <h2 id="section-topics-title">この分野のテーマ</h2>
+        <p>タグを使って、さらに範囲を絞れます。</p>
+      </div>
+      <nav class="math-topic-grid" aria-label="{html.escape(section)}のテーマ">
+{_rendered_topic_cards(papers, section=section, prefix="../topics/")}
+      </nav>
+    </section>"""
     description = str(details["description"])
     slug = str(details["slug"])
     return f"""<!doctype html>
@@ -169,7 +230,41 @@ def rendered_math_section_page(
   </header>
   <main id="main-content">
     <p class="directory-back"><a href="../">数学記事総覧へ戻る</a></p>
+{section_topics}
 {year_sections}
+  </main>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+</body>
+</html>
+"""
+
+
+def rendered_math_topic_page(topic: dict, papers: Sequence[Paper]) -> str:
+    title = str(topic["title"])
+    description = str(topic["description"])
+    slug = str(topic["slug"])
+    section = str(topic["section"])
+    section_slug = str(MATH_SECTION_DETAILS[section]["slug"])
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{page_head(f"{title}の記事総覧 — {SITE_TITLE_TOP}", description, f"/math/topics/{slug}/", "../../../styles.css")}
+</head>
+<body class="math-page math-topic-page">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">MATHEMATICS TOPIC</p>
+      <h1>{html.escape(title)}</h1>
+      <p class="lead">{html.escape(description)} 現在{len(papers)}件です。</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation("../../../", "math")}
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <p class="directory-back"><a href="../../">数学記事総覧へ戻る</a> · <a href="../../{section_slug}/">{html.escape(section)}へ戻る</a></p>
+{_rendered_year_sections(papers, "../../../")}
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
 </body>

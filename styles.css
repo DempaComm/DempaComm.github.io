@@ -734,6 +734,52 @@ main { padding: 64px 0 80px; }
   font-size: 0.82rem;
 }
 
+.math-topic-directory {
+  margin-bottom: 64px;
+}
+
+.math-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.math-topic-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  min-height: 180px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+}
+
+.math-topic-card:hover,
+.math-topic-card:focus-visible {
+  border-color: var(--ink);
+  box-shadow: 0 12px 30px rgb(23 33 43 / 8%);
+}
+
+.math-topic-card strong {
+  padding-right: 3rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.math-topic-card > span:nth-of-type(2) {
+  color: var(--muted);
+}
+
+.math-topic-count {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .math-index-heading > span,
 .math-index-meta {
   color: var(--muted);
@@ -1443,6 +1489,7 @@ footer .title-attribute {
   .year-groups,
   .portal-grid { grid-template-columns: 1fr; }
   .math-directory-grid { grid-template-columns: 1fr; }
+  .math-topic-grid { grid-template-columns: 1fr; }
   .explore-grid { grid-template-columns: 1fr; }
   .discovery-grid,
   .discovery-controls { grid-template-columns: 1fr; }

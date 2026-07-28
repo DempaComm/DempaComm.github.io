@@ -8,7 +8,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
 from dempa_site.catalog.metadata import grouped_tags
-from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, SITE_URL
+from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, MATH_TOPICS, SITE_URL
 from dempa_site.manifests.model import Paper
 
 
@@ -27,6 +27,8 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
     for section in MATH_SECTIONS:
         section_slug = MATH_SECTION_DETAILS[section]["slug"]
         urls.append((f"{SITE_URL}/math/{section_slug}/", None))
+    for topic in MATH_TOPICS:
+        urls.append((f"{SITE_URL}/math/topics/{topic['slug']}/", None))
     for tag in grouped_tags(selected):
         urls.append((f"{SITE_URL}/tags/{quote(tag, safe='')}/", None))
     for _, manifest in selected:

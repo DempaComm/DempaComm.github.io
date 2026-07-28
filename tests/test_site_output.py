@@ -209,6 +209,8 @@ class SiteOutputContractTest(unittest.TestCase):
 
     def test_math_directory_and_all_section_pages_are_present(self) -> None:
         math = self.read("math/index.html")
+        self.assertIn("テーマから探す", math)
+        self.assertIn('href="topics/metric-metrization/"', math)
         for route, title in (
             ("algebra-combinatorics", "代数・組合せ"),
             ("topology-geometry", "位相・距離・幾何"),
@@ -219,6 +221,9 @@ class SiteOutputContractTest(unittest.TestCase):
             section = self.read(f"math/{route}/index.html")
             self.assertIn(title, section)
             self.assertIn("年", section)
+        topic = self.read("math/topics/metric-metrization/index.html")
+        self.assertIn("距離空間・距離化", topic)
+        self.assertIn("数学記事総覧へ戻る", topic)
 
     def test_each_paper_kind_has_the_correct_primary_action(self) -> None:
         normal = self.read("papers/2023-04-04-01/index.html")
@@ -307,6 +312,15 @@ class SiteOutputContractTest(unittest.TestCase):
                 "math/topology-geometry/index.html",
                 "math/analysis-probability/index.html",
                 "math/other/index.html",
+                "math/topics/algebraic-topology/index.html",
+                "math/topics/complex-analysis/index.html",
+                "math/topics/counterexamples-set-theoretic-topology/index.html",
+                "math/topics/dimension-manifold-embedding/index.html",
+                "math/topics/fixed-points/index.html",
+                "math/topics/functional-linear/index.html",
+                "math/topics/measure-probability/index.html",
+                "math/topics/metric-metrization/index.html",
+                "math/topics/separation-compactness/index.html",
                 "papers/2023-04-04-01/index.html",
                 "papers/2024-05-05-01/index.html",
                 "papers/2025-06-06-01/index.html",
