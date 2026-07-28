@@ -47,7 +47,7 @@ def rendered_math_index_item(
         if html_href not in "".join(file_links):
             file_links.append(f'<a href="{html_href}">HTML本文</a>')
         file_links.append(
-            f'<a href="{prefix}statements/?paper={slug}">定理等索引</a>'
+            f'<a href="{prefix}statements/years/{slug[:4]}/?paper={slug}">定理等索引</a>'
         )
     if manifest["kind"] == BLOG_ONLY_KIND and manifest["original_url"]:
         original_url = html.escape(manifest["original_url"], quote=True)

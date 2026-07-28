@@ -192,11 +192,13 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn('href="search/"', home)
 
         archive = self.read("archive/index.html")
-        self.assertEqual(4, archive.count('class="paper-card"'))
-        self.assertIn('id="paper-query"', archive)
+        self.assertEqual(0, archive.count('class="paper-card"'))
         for year in range(2023, 2027):
-            self.assertIn(f'id="year-{year}"', archive)
+            self.assertIn(f'href="{year}/"', archive)
             self.assertIn(f"{year}年", archive)
+            year_page = self.read(f"archive/{year}/index.html")
+            self.assertIn('id="paper-query"', year_page)
+            self.assertEqual(1, year_page.count('class="paper-card"'))
 
     def test_japanese_tag_page_is_grouped_by_year(self) -> None:
         tag_page = self.read("tags/位相空間/index.html")
@@ -305,6 +307,10 @@ class SiteOutputContractTest(unittest.TestCase):
             {
                 "index.html",
                 "archive/index.html",
+                "archive/2023/index.html",
+                "archive/2024/index.html",
+                "archive/2025/index.html",
+                "archive/2026/index.html",
                 "explore/index.html",
                 "graph/index.html",
                 "lineage/index.html",
@@ -330,6 +336,10 @@ class SiteOutputContractTest(unittest.TestCase):
                 "reading-paths/index.html",
                 "search/index.html",
                 "statements/index.html",
+                "statements/kinds/counterexample/index.html",
+                "statements/kinds/definition/index.html",
+                "statements/kinds/proposition/index.html",
+                "statements/kinds/theorem/index.html",
                 "tags/数学/index.html",
                 "tags/位相空間/index.html",
                 "tags/読み物/index.html",

@@ -12,7 +12,10 @@ from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, MATH_TOPICS, 
 from dempa_site.manifests.model import Paper
 
 
-def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
+def rendered_sitemap(
+    selected: Sequence[tuple[Path, Paper]],
+    statement_years: Sequence[str] = (),
+) -> str:
     urls: list[tuple[str, str | None]] = [
         (f"{SITE_URL}/", None),
         (f"{SITE_URL}/archive/", None),
@@ -24,6 +27,12 @@ def rendered_sitemap(selected: Sequence[tuple[Path, Paper]]) -> str:
         (f"{SITE_URL}/lineage/", None),
         (f"{SITE_URL}/graph/", None),
     ]
+    for year in sorted({str(paper.year) for _, paper in selected}, reverse=True):
+        urls.append((f"{SITE_URL}/archive/{year}/", None))
+    for kind in ("theorem", "definition", "proposition", "counterexample"):
+        urls.append((f"{SITE_URL}/statements/kinds/{kind}/", None))
+    for year in sorted(set(statement_years), reverse=True):
+        urls.append((f"{SITE_URL}/statements/years/{year}/", None))
     for section in MATH_SECTIONS:
         section_slug = MATH_SECTION_DETAILS[section]["slug"]
         urls.append((f"{SITE_URL}/math/{section_slug}/", None))

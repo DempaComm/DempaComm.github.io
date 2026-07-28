@@ -95,6 +95,12 @@ class StatementIndexTest(unittest.TestCase):
             rendered = (output / "statements" / "index.html").read_text(
                 encoding="utf-8"
             )
+            theorem_page = (
+                output / "statements" / "kinds" / "theorem" / "index.html"
+            ).read_text(encoding="utf-8")
+            year_page = (
+                output / "statements" / "years" / "2026" / "index.html"
+            ).read_text(encoding="utf-8")
             data = json.loads(
                 (output / "statements" / "statements.json").read_text(
                     encoding="utf-8"
@@ -102,11 +108,14 @@ class StatementIndexTest(unittest.TestCase):
             )
 
         self.assertIn("定理・定義・命題・反例索引", rendered)
-        self.assertIn("../papers/2026-07-28-01/html/index.html#Thm1", rendered)
-        self.assertIn('id="statement-filter"', rendered)
-        self.assertIn('data-kind="theorem"', rendered)
-        self.assertIn('data-year="2026"', rendered)
-        self.assertIn('src="../statements.js"', rendered)
+        self.assertIn('href="kinds/theorem/"', rendered)
+        self.assertIn('href="years/2026/"', rendered)
+        self.assertNotIn('class="statement-list"', rendered)
+        self.assertIn("../../../papers/2026-07-28-01/html/index.html#Thm1", theorem_page)
+        self.assertIn('id="statement-filter"', theorem_page)
+        self.assertIn('data-kind="theorem"', theorem_page)
+        self.assertIn('data-year="2026"', year_page)
+        self.assertIn('src="../../../statements.js"', year_page)
         self.assertEqual(1, data["counts"]["counterexample"])
 
     def test_counterexample_tag_supplies_article_level_fallback(self) -> None:

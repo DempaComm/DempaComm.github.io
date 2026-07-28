@@ -171,80 +171,103 @@ def indexed_statements(catalog: SiteCatalog) -> tuple[IndexedStatement, ...]:
     )
 
 
-def _render_statement(item: IndexedStatement) -> str:
+def _render_statement(item: IndexedStatement, prefix: str) -> str:
     source_labels = {
         "manual": "手動登録",
         "automatic": "HTMLから抽出",
         "tag": "反例タグから補完",
     }
     source = source_labels[item.source]
+    href = item.href
+    if href.startswith("../"):
+        href = prefix + href.removeprefix("../")
     return f"""        <li id="statement-{html.escape(item.paper_slug, quote=True)}-{html.escape(item.identifier, quote=True)}" data-kind="{item.kind}" data-year="{item.paper_slug[:4]}" data-paper="{html.escape(item.paper_slug, quote=True)}">
-          <a href="{html.escape(item.href, quote=True)}">{html.escape(item.title)}</a>
-          <span><a href="../papers/{html.escape(item.paper_slug, quote=True)}/">{html.escape(item.paper_title)}</a> · {source}</span>
+          <a href="{html.escape(href, quote=True)}">{html.escape(item.title)}</a>
+          <span><a href="{prefix}papers/{html.escape(item.paper_slug, quote=True)}/">{html.escape(item.paper_title)}</a> · {source}</span>
         </li>"""
 
 
-def generate_statements(catalog: SiteCatalog, output: Path) -> None:
-    statements = indexed_statements(catalog)
-    counts = {
-        kind: sum(item.kind == kind for item in statements) for kind in KIND_ORDER
-    }
-    shortcuts = "\n".join(
-        f'<a class="explore-card" href="#{kind}"><span class="section-number">{kind.upper()}</span>'
-        f'<strong>{label}</strong><span>{counts[kind]}件</span></a>'
-        for kind, label in KIND_LABELS.items()
-    )
+def _statement_sections(
+    statements: tuple[IndexedStatement, ...], prefix: str
+) -> str:
     sections = []
     for kind, label in KIND_LABELS.items():
+        matching = tuple(item for item in statements if item.kind == kind)
+        if not matching:
+            continue
         items = "\n".join(
-            _render_statement(item) for item in statements if item.kind == kind
+            _render_statement(item, prefix) for item in matching
         )
-        if not items:
-            items = "        <li>登録された項目はありません。</li>"
         sections.append(
             f"""    <section class="statement-section" id="{kind}" aria-labelledby="{kind}-title">
-      <div class="section-heading"><h2 id="{kind}-title">{label}</h2><p>{counts[kind]}件</p></div>
+      <div class="section-heading"><h2 id="{kind}-title">{label}</h2><p>{len(matching)}件</p></div>
       <ol class="statement-list">
 {items}
       </ol>
     </section>"""
         )
+    return "\n".join(sections)
+
+
+def _filter_panel(
+    statements: tuple[IndexedStatement, ...], *, fixed_kind: bool, fixed_year: bool
+) -> str:
     years = sorted({item.paper_slug[:4] for item in statements}, reverse=True)
     year_options = "".join(
         f'<option value="{year}">{year}年</option>' for year in years
     )
-    papers = sorted(
-        {(item.paper_slug, item.paper_title) for item in statements}
-    )
+    papers = sorted({(item.paper_slug, item.paper_title) for item in statements})
     paper_options = "".join(
         f'<option value="{html.escape(slug, quote=True)}">'
         f'{html.escape(title)}（{html.escape(slug)}）</option>'
         for slug, title in papers
     )
-    body = f"""    <section aria-labelledby="statement-index-title">
-      <div class="section-heading">
-        <h2 id="statement-index-title">種類から選ぶ</h2>
-        <p>LaTeXMLの主HTML版から自動抽出し、必要な項目は原稿メタデータで補正しています。</p>
-      </div>
-      <div class="explore-grid statement-shortcuts">
-{shortcuts}
-      </div>
-    </section>
-    <section class="statement-filter-panel" aria-labelledby="statement-filter-title">
+    kind_control = "" if fixed_kind else '<label>種類<select id="statement-kind"><option value="">すべて</option><option value="theorem">定理</option><option value="definition">定義</option><option value="proposition">命題</option><option value="counterexample">反例</option></select></label>'
+    year_control = "" if fixed_year else f'<label>公開年<select id="statement-year"><option value="">すべて</option>{year_options}</select></label>'
+    return f"""    <section class="statement-filter-panel" aria-labelledby="statement-filter-title">
       <div class="section-heading">
         <h2 id="statement-filter-title">索引を絞り込む</h2>
-        <p>検索語、種類、公開年、原稿を組み合わせられます。</p>
+        <p>このページに含まれる項目を絞り込みます。</p>
       </div>
       <form id="statement-filter" class="statement-filter" role="search">
         <label>検索語<input id="statement-query" type="search" placeholder="定理名・原稿名"></label>
-        <label>種類<select id="statement-kind"><option value="">すべて</option><option value="theorem">定理</option><option value="definition">定義</option><option value="proposition">命題</option><option value="counterexample">反例</option></select></label>
-        <label>公開年<select id="statement-year"><option value="">すべて</option>{year_options}</select></label>
+        {kind_control}
+        {year_control}
         <label>原稿<select id="statement-paper"><option value="">すべて</option>{paper_options}</select></label>
         <button id="statement-reset" type="button">条件を消す</button>
       </form>
       <p id="statement-filter-status" class="statement-filter-status" role="status" aria-live="polite">{len(statements)}件を表示しています。</p>
+    </section>"""
+
+
+def _directory_card(href: str, number: str, title: str, count: int) -> str:
+    return f'<a class="explore-card" href="{href}"><span class="section-number">{number}</span><strong>{title}</strong><span>{count}件</span></a>'
+
+
+def generate_statements(catalog: SiteCatalog, output: Path) -> None:
+    statements = indexed_statements(catalog)
+    counts = {kind: sum(item.kind == kind for item in statements) for kind in KIND_ORDER}
+    years = sorted({item.paper_slug[:4] for item in statements}, reverse=True)
+    kind_cards = "\n".join(
+        _directory_card(f"kinds/{kind}/", kind.upper(), label, counts[kind])
+        for kind, label in KIND_LABELS.items()
+    )
+    year_cards = "\n".join(
+        _directory_card(
+            f"years/{year}/", year, f"{year}年",
+            sum(item.paper_slug[:4] == year for item in statements),
+        )
+        for year in years
+    )
+    body = f"""    <section data-statement-directory aria-labelledby="statement-kind-title">
+      <div class="section-heading"><h2 id="statement-kind-title">種類から選ぶ</h2><p>定理・定義・命題・反例ごとの索引です。</p></div>
+      <div class="explore-grid statement-shortcuts">{kind_cards}</div>
     </section>
-{chr(10).join(sections)}
+    <section aria-labelledby="statement-year-title">
+      <div class="section-heading"><h2 id="statement-year-title">公開年から選ぶ</h2><p>原稿の初出年ごとの索引です。</p></div>
+      <div class="explore-grid statement-year-directory">{year_cards}</div>
+    </section>
+    <section><p>LaTeXMLの主HTML版から自動抽出し、必要な項目は原稿メタデータで補正しています。</p></section>
     <script src="../statements.js" defer></script>"""
     target = output / "statements"
     target.mkdir(parents=True)
@@ -260,6 +283,50 @@ def generate_statements(catalog: SiteCatalog, output: Path) -> None:
         ),
         encoding="utf-8",
     )
+    kinds_dir = target / "kinds"
+    years_dir = target / "years"
+    kinds_dir.mkdir()
+    years_dir.mkdir()
+    for kind, label in KIND_LABELS.items():
+        subset = tuple(item for item in statements if item.kind == kind)
+        page_body = (
+            f'    <p class="breadcrumb"><a href="../../">定理等索引</a> / {label}</p>\n'
+            + _filter_panel(subset, fixed_kind=True, fixed_year=False)
+            + "\n"
+            + _statement_sections(subset, "../../../")
+            + '\n    <script src="../../../statements.js" defer></script>'
+        )
+        kind_dir = kinds_dir / kind
+        kind_dir.mkdir()
+        (kind_dir / "index.html").write_text(
+            rendered_exploration_page(
+                title=f"{label}索引", eyebrow="STATEMENT BY KIND",
+                description=f"{label}として登録された{len(subset)}件を掲載します。",
+                canonical_path=f"/statements/kinds/{kind}/", body=page_body,
+                prefix="../../../", body_class="statements-page",
+                current_navigation="statements",
+            ), encoding="utf-8"
+        )
+    for year in years:
+        subset = tuple(item for item in statements if item.paper_slug[:4] == year)
+        page_body = (
+            f'    <p class="breadcrumb"><a href="../../">定理等索引</a> / {year}年</p>\n'
+            + _filter_panel(subset, fixed_kind=False, fixed_year=True)
+            + "\n"
+            + _statement_sections(subset, "../../../")
+            + '\n    <script src="../../../statements.js" defer></script>'
+        )
+        year_dir = years_dir / year
+        year_dir.mkdir()
+        (year_dir / "index.html").write_text(
+            rendered_exploration_page(
+                title=f"{year}年の定理等索引", eyebrow="STATEMENT BY YEAR",
+                description=f"{year}年公開の原稿から抽出した{len(subset)}件を掲載します。",
+                canonical_path=f"/statements/years/{year}/", body=page_body,
+                prefix="../../../", body_class="statements-page",
+                current_navigation="statements",
+            ), encoding="utf-8"
+        )
     write_json(
         target / "statements.json",
         {

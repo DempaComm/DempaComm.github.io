@@ -93,7 +93,7 @@
         }
         if (node.statement_count) {
           const statementLink = document.createElement("a");
-          statementLink.href = `../statements/?paper=${node.slug}`;
+          statementLink.href = `../statements/years/${node.slug.slice(0, 4)}/?paper=${node.slug}`;
           statementLink.textContent = `定理等${node.statement_count}件`;
           actions.append(statementLink);
         }

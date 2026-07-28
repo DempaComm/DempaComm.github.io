@@ -332,8 +332,13 @@ class SourceOnlyImportTest(unittest.TestCase):
                 encoding="utf-8"
             )
             self.assertIn("全原稿アーカイブ", archive)
-            self.assertIn("絞り込みを解除", archive)
+            self.assertIn('href="2026/"', archive)
             self.assertNotIn("<span>TeX原稿</span>", archive)
+            year_archive = (
+                output / "archive" / "2026" / "index.html"
+            ).read_text(encoding="utf-8")
+            self.assertIn("絞り込みを解除", year_archive)
+            self.assertNotIn("<span>TeX原稿</span>", year_archive)
             math_home = (output / "math" / "index.html").read_text(
                 encoding="utf-8"
             )

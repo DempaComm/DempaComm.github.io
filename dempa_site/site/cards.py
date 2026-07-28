@@ -108,7 +108,7 @@ def paper_card(manifest: Paper, prefix: str = "") -> str:
         if manifest["kind"] == BLOG_ONLY_KIND
         else ""
     )
-    year_href = f"#year-{year}" if prefix else f"archive/#year-{year}"
+    year_href = f"{prefix}archive/{year}/"
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
         <div class="paper-meta">
           <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}

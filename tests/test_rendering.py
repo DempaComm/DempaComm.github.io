@@ -105,8 +105,8 @@ class PublicRenderingTest(unittest.TestCase):
         self.assertIn('id="random-paper-scope"', home)
         self.assertIn('src="discovery.js"', home)
         archive = rendered_archive_page(self.selected)
-        self.assertEqual(4, archive.count('class="paper-card"'))
-        self.assertIn('id="year-2026"', archive)
+        self.assertEqual(0, archive.count('class="paper-card"'))
+        self.assertIn('href="2026/"', archive)
         self.assertIn("タグ索引", archive)
 
         tag = rendered_tag_page("位相空間", [self.papers[1]])
@@ -142,6 +142,10 @@ class PublicRenderingTest(unittest.TestCase):
         self.assertIn(
             "https://dempacomm.github.io/math/topics/metric-metrization/",
             sitemap,
+        )
+        self.assertIn("https://dempacomm.github.io/archive/2026/", sitemap)
+        self.assertIn(
+            "https://dempacomm.github.io/statements/kinds/theorem/", sitemap
         )
 
         html_paper = paper(
@@ -193,7 +197,7 @@ class PublicRenderingTest(unittest.TestCase):
             '../../../papers/2026-07-28-01/html/index.html', rendered
         )
         self.assertIn(
-            '../../../statements/?paper=2026-07-28-01', rendered
+            '../../../statements/years/2026/?paper=2026-07-28-01', rendered
         )
 
     def test_corrections_and_addenda_are_rendered_on_paper_page(self) -> None:

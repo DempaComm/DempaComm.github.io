@@ -101,7 +101,7 @@ def rendered_paper_page(manifest: Paper) -> str:
   <main id="main-content">
     <article class="paper-detail">
       <div class="paper-meta">
-        <span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>
+        <span>初出 <a class="paper-year-link" href="../../archive/{year}/" aria-label="{year}年の記事一覧">{published_date}</a></span>
         <span>原稿番号 {slug}</span>{kind_badge}
       </div>
       <section aria-labelledby="files-title">

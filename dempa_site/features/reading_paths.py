@@ -127,7 +127,7 @@ def _step_actions(step: ReadingStep, capability: PaperCapabilities) -> str:
         )
         if capability.statement_count:
             links.append(
-                f'<a href="../../statements/?paper={html.escape(step.slug, quote=True)}">'
+                f'<a href="../../statements/years/{html.escape(step.slug[:4], quote=True)}/?paper={html.escape(step.slug, quote=True)}">'
                 f'定理等{capability.statement_count}件</a>'
             )
     return '<nav class="reading-step-actions" aria-label="本文への入口">' + "".join(links) + "</nav>"

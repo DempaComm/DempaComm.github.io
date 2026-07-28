@@ -25,6 +25,7 @@ from dempa_site.features import (
     configured_features,
     run_site_features,
 )
+from dempa_site.features.statements import indexed_statements
 from dempa_site.features.base import FeatureGenerator
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
@@ -44,6 +45,7 @@ from dempa_site.site.rendering import (
     rendered_paper_page,
     rendered_tag_page,
 )
+from dempa_site.site.pages.archive import grouped_archive_years, rendered_archive_year_page
 from dempa_site.site.sitemap import rendered_sitemap
 
 
@@ -130,6 +132,12 @@ def generate_static_pages(context: StageContext) -> None:
     (archive_dir / "index.html").write_text(
         rendered_archive_page(selected), encoding="utf-8"
     )
+    for year, papers in grouped_archive_years(selected).items():
+        year_dir = archive_dir / str(year)
+        year_dir.mkdir()
+        (year_dir / "index.html").write_text(
+            rendered_archive_year_page(year, papers), encoding="utf-8"
+        )
     (output / "404.html").write_text(rendered_not_found_page(), encoding="utf-8")
 
     search_dir = output / "search"
@@ -230,7 +238,11 @@ def generate_discovery_files(context: StageContext) -> None:
     selected = context.catalog.selected
     (output / "feed.xml").write_text(rendered_feed(selected), encoding="utf-8")
     (output / "sitemap.xml").write_text(
-        rendered_sitemap(selected), encoding="utf-8"
+        rendered_sitemap(
+            selected,
+            sorted({item.paper_slug[:4] for item in indexed_statements(context.catalog)}),
+        ),
+        encoding="utf-8",
     )
     (output / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",

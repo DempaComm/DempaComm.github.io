@@ -46,7 +46,7 @@ def rendered_tag_page_paper(manifest: Paper) -> str:
     )
     action_label = "ブログ記事へのリンク" if manifest["kind"] == BLOG_ONLY_KIND else "ファイル"
     return f"""        <article class="tag-page-paper">
-          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/#year-{year}" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}</div>
+          <div class="paper-meta"><span>初出 <a class="paper-year-link" href="../../archive/{year}/" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}</div>
           <h3><a href="../../papers/{slug}/">{title}</a></h3>
           <p>{summary}</p>
           <div class="paper-tags" aria-label="電波通信のタグ">
