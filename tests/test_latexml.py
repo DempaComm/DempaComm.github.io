@@ -18,6 +18,7 @@ from dempa_site.conversion.latexml import (
     _normalize_empty_membership_before_condition,
     _normalize_empty_domain_maps,
     _normalize_math_inside_text,
+    _normalize_conversion_source,
     _normalize_nocite_all,
     _normalize_left_exponent_function_space,
     _normalize_inverse_image_half_open_intervals,
@@ -318,6 +319,24 @@ class LaTeXMLTrialTest(unittest.TestCase):
             privacy_findings("<dt>著者</dt><dd>実名</dd>", "html"),
         )
 
+    def test_conversion_source_stage_reports_normalizations_in_order(self) -> None:
+        source = (
+            r"\documentclass{article}\begin{document}"
+            r"\[\text{任意の $x\in A$ について}\]\nocite{*}"
+            r"\end{document}"
+        )
+        normalized, records = _normalize_conversion_source(
+            source, (self.paper.source_path.parent / "references.bib",)
+        )
+
+        self.assertIn(r"\text{任意の }x\in A\text{ について}", normalized)
+        self.assertIn(r"\nocite{test}", normalized)
+        self.assertIn(r"\usepackage{dempa-compat}", normalized)
+        self.assertEqual(
+            ["math-inside-text", "nocite-all", "latexml-compat-package"],
+            [record["kind"] for record in records],
+        )
+
     def test_success_writes_derived_html_and_review_report_only(self) -> None:
         conversion_commands = []
 
@@ -370,6 +389,9 @@ class LaTeXMLTrialTest(unittest.TestCase):
         self.assertEqual("references.bib", report["results"][0]["bibliographies"][0]["source"])
         self.assertTrue((output / self.paper.slug / "index.html").is_file())
         self.assertTrue((output / "report.json").is_file())
+        self.assertFalse(
+            (output / self.paper.slug / ".latexml-normalized.tex").exists()
+        )
         self.assertEqual("\\documentclass{article}\\begin{document}test\\end{document}", (self.paper.source_path.parent / "main.tex").read_text(encoding="utf-8"))
 
     def test_inline_svg_is_counted_and_unsafe_content_is_rejected(self) -> None:

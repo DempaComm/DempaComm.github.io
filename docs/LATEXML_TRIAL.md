@@ -77,6 +77,20 @@ python3 scripts/paper_tool.py latexml-trial 2015-08-28-01 \
 `report.json` の `publishable` は常に `false`、`manual_review_required` は常に `true` である。
 変換の成功だけでは公開承認にならない。公開には次節の目視確認と、独立した公開コマンドが必要になる。
 
+## 変換処理の保守境界
+
+実装では、原稿一件の変換を次の段階に分けている。
+
+1. binding、BibTeX、出力先を含むLaTeXMLコマンドを組み立てる。
+2. PDF・TikZ図版と、原稿本体を変更しない一時正規化コピーを準備する。
+3. LaTeXMLを実行し、成否にかかわらず一時コピーを削除する。
+4. HTMLの日付・図版を後処理し、警告、題名、SVG、個人情報候補を検査する。
+5. 公開可否を決めず、機械検査結果を `report.json` へ集約する。
+
+正規化規則を増やす場合は、`latexml_normalization.py` に規則を置き、
+`latexml.py` の正規化一覧へ実行順と報告名を一度だけ登録する。図版変換は
+`latexml_graphics.py`、HTML安全性と警告判定は `latexml_analysis.py` の責務とする。
+
 `automatic_checks_passed` が `true` になる条件は、LaTeXMLの警告・エラーがなく、生成HTMLに
 `ltx_ERROR` と未変換図版がなく、題名が保持され、簡易個人情報検査にも確認事項がないことである。
 TikZなどから生成したインラインSVGについては、`script`、イベント属性、外部資源参照がないことも
