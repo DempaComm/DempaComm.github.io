@@ -305,7 +305,11 @@ def _prepare_conversion(
         command.append("--nographicimages")
     source_text = target.source.read_text(encoding="utf-8", errors="replace")
     normalized_source, tikzcd_graphics = _prepare_tikzcd_graphics(
-        target.source, source_text, target_dir, timeout
+        target.source,
+        source_text,
+        target_dir,
+        timeout,
+        target.paper.build.effective_engine,
     )
     normalized_source, source_normalizations = _normalize_conversion_source(
         normalized_source, bibliography_files

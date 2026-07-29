@@ -145,11 +145,13 @@ def _integrate_site_html(
 """
     if '<body class="paper-html-page">' not in source:
         raise PaperToolError("LaTeXML HTMLにbody要素がありません")
-    return source.replace(
+    integrated = source.replace(
         '<body class="paper-html-page">',
         '<body class="paper-html-page">\n' + navigation,
         1,
     )
+    trailing_newline = "\n" if integrated.endswith("\n") else ""
+    return "\n".join(line.rstrip() for line in integrated.splitlines()) + trailing_newline
 
 
 def publish_latexml_trial(

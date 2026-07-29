@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import os
 import re
 import shutil
 import subprocess
@@ -147,7 +148,11 @@ def _replace_tikzcd_environments(
 
 
 def _prepare_tikzcd_graphics(
-    source_path: Path, source: str, target_dir: Path, timeout: int
+    source_path: Path,
+    source: str,
+    target_dir: Path,
+    timeout: int,
+    engine: str = "platex",
 ) -> tuple[str, tuple[PreparedGraphic, ...]]:
     r"""Render every tikz-cd environment with TeX before LaTeXML runs.
 
@@ -159,9 +164,13 @@ def _prepare_tikzcd_graphics(
     diagrams = TIKZCD_PATTERN.findall(_without_tex_comments(source))
     if not diagrams:
         return source, ()
+    full_engine = engine or "platex"
+    render_engine = (
+        "pdflatex" if full_engine in {"platex", "uplatex"} else full_engine
+    )
     required = {
-        "platex": shutil.which("platex"),
-        "pdflatex": shutil.which("pdflatex"),
+        full_engine: shutil.which(full_engine),
+        render_engine: shutil.which(render_engine),
         "pdftoppm": shutil.which("pdftoppm"),
     }
     missing = [name for name, executable in required.items() if executable is None]
@@ -173,10 +182,17 @@ def _prepare_tikzcd_graphics(
 
     with tempfile.TemporaryDirectory(prefix=".tikzcd-render-", dir=target_dir) as raw:
         workspace = Path(raw)
+        tex_cache = workspace / "tex-cache"
+        tex_cache.mkdir()
+        tex_environment = {
+            **os.environ,
+            "TEXMFVAR": str(tex_cache),
+            "TEXMFCACHE": str(tex_cache),
+        }
         full_source = workspace / "source.tex"
         full_source.write_text(source, encoding="utf-8")
         full_command = [
-            required["platex"],
+            required[full_engine],
             "-halt-on-error",
             "-interaction=nonstopmode",
             f"-output-directory={workspace}",
@@ -190,6 +206,7 @@ def _prepare_tikzcd_graphics(
                 text=True,
                 timeout=timeout,
                 check=False,
+                env=tex_environment,
             )
             if completed.returncode != 0:
                 detail = (completed.stderr or completed.stdout)[-4000:]
@@ -216,7 +233,7 @@ def _prepare_tikzcd_graphics(
         if full_aux.is_file():
             shutil.copy2(full_aux, workspace / "diagrams.aux")
         render_command = [
-            required["pdflatex"],
+            required[render_engine],
             "-halt-on-error",
             "-interaction=nonstopmode",
             f"-output-directory={workspace}",
@@ -229,6 +246,7 @@ def _prepare_tikzcd_graphics(
             text=True,
             timeout=timeout,
             check=False,
+            env=tex_environment,
         )
         rendered_pdf = workspace / "diagrams.pdf"
         if completed.returncode != 0 or not rendered_pdf.is_file():
@@ -366,6 +384,4 @@ def _link_public_pdf_assets(
         copied = target_dir / relative.name
         copied.unlink(missing_ok=True)
     return html_text
-
-
 
