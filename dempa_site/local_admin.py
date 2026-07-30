@@ -25,11 +25,19 @@ from dempa_site.catalog.metadata import rendered_keywords
 from dempa_site.conversion.latexml import run_latexml_trial
 from dempa_site.conversion.latexml_publication import publish_latexml_trial
 from dempa_site.errors import PaperToolError
-from dempa_site.files import sha256_file
-from dempa_site.manifests.loader import load_manifest_directory
+from dempa_site.files import read_json, sha256_file, write_json
+from dempa_site.manifests.loader import load_manifest_directory, load_schema
 from dempa_site.manifests.model import Paper
+from dempa_site.manifests.validation import validate_manifest_data
 from dempa_site.paths import safe_relative_path
+from dempa_site.protection.approval import approve_changes
 from dempa_site.protection.change_workflow import changed_protected_files, review_changes
+from dempa_site.site.snapshot import (
+    check_baseline,
+    snapshot_differences,
+    write_baseline,
+)
+from tools.check_all import complete_check_steps
 
 
 LOCAL_ADMIN_TITLE = "数識電収 ローカル管理"
@@ -39,6 +47,14 @@ LOCAL_ADMIN_TITLE = "数識電収 ローカル管理"
 class LocalFile:
     root: Path
     label: str
+
+
+@dataclass(frozen=True)
+class ReviewResult:
+    path: str
+    token: str
+    findings: str
+    rendered_pages: tuple[str, ...]
 
 
 class LocalAdmin:
@@ -51,6 +67,8 @@ class LocalAdmin:
         self.experiments_root = self.root / "_experiments" / "local-admin"
         self._files: dict[str, LocalFile] = {}
         self._trials: dict[str, tuple[str, Path]] = {}
+        self._baseline_previews: dict[str, tuple[str, ...]] = {}
+        self.csrf_token = secrets.token_urlsafe(32)
         self._lock = threading.Lock()
 
     def papers(self) -> list[tuple[Path, Paper]]:
@@ -99,7 +117,7 @@ class LocalAdmin:
             raise PaperToolError("表示できないローカルファイルです")
         return path
 
-    def review(self, slug: str, files: Iterable[str]) -> list[tuple[str, str, str]]:
+    def review(self, slug: str, files: Iterable[str]) -> list[ReviewResult]:
         manifest_path, paper = self.paper(slug)
         reviewed = review_changes(
             manifest_path, paper, self.privacy_root, list(files)
@@ -107,12 +125,178 @@ class LocalAdmin:
         results = []
         for item in reviewed:
             if item.report_directory is None:
-                results.append((item.path, "", "自動個人情報検査は不要です"))
+                results.append(
+                    ReviewResult(item.path, "", "自動個人情報検査は不要です", ())
+                )
                 continue
             token = self.token_for(item.report_directory, f"{slug} の検査報告")
             findings = "\n".join(item.findings) or "自動検査の確認事項はありません"
-            results.append((item.path, token, findings))
+            report = read_json(item.report_directory / "report.json")
+            rendered_pages = tuple(
+                str(value) for value in report.get("rendered_pages", [])
+            )
+            results.append(ReviewResult(item.path, token, findings, rendered_pages))
         return results
+
+    def retire_stale_html(
+        self, manifest_path: Path, paper: Paper
+    ) -> tuple[tuple[str, ...], Path | None]:
+        """Move HTML derived from changed sources aside and unregister it safely."""
+        stale_versions = []
+        entries = {entry.path: entry for entry in paper.files}
+        for version in paper.html_versions:
+            source = entries.get(version.source_path)
+            source_path = paper.source_path.parent / safe_relative_path(
+                version.source_path, PaperToolError
+            )
+            if source is None or not source_path.is_file():
+                stale_versions.append(version)
+                continue
+            if sha256_file(source_path) != version.source_sha256:
+                stale_versions.append(version)
+        if not stale_versions:
+            return (), None
+        stale_directories = {
+            Path(version.path).parts[0] for version in stale_versions
+        }
+        return self.retire_html_directories(
+            manifest_path, paper, stale_directories
+        )
+
+    def retire_html_directories(
+        self,
+        manifest_path: Path,
+        paper: Paper,
+        stale_directories: set[str],
+    ) -> tuple[tuple[str, ...], Path | None]:
+        """Recoverably unregister and move selected derived HTML directories."""
+        if not stale_directories:
+            return (), None
+        non_derived = [
+            entry.path
+            for entry in paper.files
+            if Path(entry.path).parts[0] in stale_directories
+            and entry.role not in {"derived-html", "derived-asset"}
+        ]
+        if non_derived:
+            raise PaperToolError(
+                "HTMLフォルダに派生物ではない保護ファイルがあります: "
+                + ", ".join(non_derived)
+            )
+        current_versions = [
+            version
+            for version in paper.html_versions
+            if Path(version.path).parts[0] not in stale_directories
+        ]
+        used_directories = {
+            Path(version.path).parts[0] for version in current_versions
+        }
+        conflict = stale_directories & used_directories
+        if conflict:
+            raise PaperToolError(
+                "同じフォルダを使うHTML版があるため安全に退避できません: "
+                + ", ".join(sorted(conflict))
+            )
+
+        backup = (
+            self.experiments_root
+            / "retired-html"
+            / f"{paper.slug}-{secrets.token_urlsafe(10)}"
+        )
+        backup.mkdir(parents=True, exist_ok=False)
+        moved: list[tuple[Path, Path]] = []
+        original = manifest_path.read_bytes()
+        try:
+            for directory in sorted(stale_directories):
+                source_dir = manifest_path.parent / directory
+                if not source_dir.is_dir():
+                    raise PaperToolError(f"退避するHTMLフォルダがありません: {source_dir}")
+                target_dir = backup / directory
+                source_dir.rename(target_dir)
+                moved.append((source_dir, target_dir))
+
+            manifest = paper.to_dict()
+            manifest["files"] = [
+                entry
+                for entry in manifest["files"]
+                if Path(entry["path"]).parts[0] not in stale_directories
+            ]
+            versions = [
+                version
+                for version in manifest.get("html_versions", [])
+                if Path(version["path"]).parts[0] not in stale_directories
+            ]
+            if versions:
+                manifest["html_versions"] = versions
+            else:
+                manifest.pop("html_versions", None)
+            validate_manifest_data(
+                manifest, manifest_path, load_schema(), PaperToolError
+            )
+            write_json(manifest_path, manifest)
+        except Exception:
+            manifest_path.write_bytes(original)
+            for source_dir, target_dir in reversed(moved):
+                if target_dir.exists() and not source_dir.exists():
+                    target_dir.rename(source_dir)
+            raise
+        return tuple(sorted(stale_directories)), backup
+
+    def preflight(self) -> str:
+        """Run every check except the expected public snapshot comparison."""
+        lines = []
+        for step in complete_check_steps(self.root, self.root / "_site")[:-1]:
+            completed = subprocess.run(
+                step.command,
+                cwd=self.root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            lines.append(f"{step.label}: {'成功' if completed.returncode == 0 else '失敗'}")
+            if completed.returncode:
+                detail = "\n".join(
+                    value.rstrip()
+                    for value in (completed.stdout, completed.stderr)
+                    if value.strip()
+                )
+                raise PaperToolError("\n".join(lines + [detail]))
+        return "\n".join(lines)
+
+    def approve_reviewed_change(
+        self, slug: str, files: list[str], reason: str
+    ) -> str:
+        """Approve reviewed files, retiring now-stale HTML before validation."""
+        manifest_path, paper = self.paper(slug)
+        original = manifest_path.read_bytes()
+        retired, backup = self.retire_stale_html(manifest_path, paper)
+        try:
+            _, refreshed = self.paper(slug)
+            count = approve_changes(
+                manifest_path,
+                refreshed,
+                self.privacy_root,
+                reason,
+                files,
+                True,
+                None,
+            )
+        except Exception:
+            manifest_path.write_bytes(original)
+            if backup is not None:
+                for directory in retired:
+                    source_dir = backup / directory
+                    target_dir = manifest_path.parent / directory
+                    if source_dir.exists() and not target_dir.exists():
+                        source_dir.rename(target_dir)
+            raise
+        checked = self.preflight()
+        retirement = (
+            "\n旧HTMLを回復可能な隔離領域へ退避: " + ", ".join(retired)
+            if retired
+            else ""
+        )
+        return f"承認したファイル: {count}件{retirement}\n{checked}"
 
     def create_trial(self, slug: str) -> tuple[str, dict]:
         manifest_path, paper = self.paper(slug)
@@ -132,19 +316,42 @@ class LocalAdmin:
             requested_slugs=[slug],
         )
         self._trials[token] = (slug, output)
-        self.token_for(output, f"{slug} のLaTeXML試験")
         return token, report
 
     def publish_trial(self, slug: str, token: str) -> str:
         recorded = self._trials.get(token)
         if recorded is None or recorded[0] != slug:
             raise PaperToolError("この画面で作成したHTML試験出力を選んでください")
-        _, paper = self.paper(slug)
-        publication = publish_latexml_trial(
-            root=self.root,
-            paper=paper,
-            trial_output=recorded[1],
+        manifest_path, paper = self.paper(slug)
+        original = manifest_path.read_bytes()
+        directories = {
+            Path(version.path).parts[0]
+            for version in paper.html_versions
+            if Path(version.path).parts[0] == "html"
+        }
+        if (manifest_path.parent / "html").exists() and not directories:
+            raise PaperToolError(
+                "paper.jsonに登録されていないhtmlフォルダがあるため置換できません"
+            )
+        retired, backup = self.retire_html_directories(
+            manifest_path, paper, directories
         )
+        try:
+            _, refreshed = self.paper(slug)
+            publication = publish_latexml_trial(
+                root=self.root,
+                paper=refreshed,
+                trial_output=recorded[1],
+            )
+        except Exception:
+            manifest_path.write_bytes(original)
+            if backup is not None:
+                for directory in retired:
+                    source_dir = backup / directory
+                    target_dir = manifest_path.parent / directory
+                    if source_dir.exists() and not target_dir.exists():
+                        source_dir.rename(target_dir)
+            raise
         self.write_catalog()
         return str(publication.html_path.relative_to(self.root))
 
@@ -173,9 +380,51 @@ class LocalAdmin:
         )
         return completed.returncode, output or "出力はありません"
 
+    def prepare_baseline(self) -> tuple[str, tuple[str, ...], str]:
+        checks = self.preflight()
+        differences = snapshot_differences(
+            self.root / "_site",
+            self.papers_dir,
+            self.root / "tests" / "fixtures" / "site-baseline.json",
+        )
+        if not differences:
+            raise PaperToolError("承認する公開差分はありません")
+        token = secrets.token_urlsafe(18)
+        self._baseline_previews[token] = differences
+        return token, differences, checks
+
+    def accept_baseline(self, token: str, reason: str) -> str:
+        expected = self._baseline_previews.get(token)
+        if expected is None:
+            raise PaperToolError("公開差分の確認が期限切れです。もう一度差分を表示してください")
+        checks = self.preflight()
+        baseline = self.root / "tests" / "fixtures" / "site-baseline.json"
+        current = snapshot_differences(self.root / "_site", self.papers_dir, baseline)
+        if current != expected:
+            raise PaperToolError("確認後に公開差分が変わりました。もう一度差分を確認してください")
+        original = baseline.read_bytes()
+        try:
+            write_baseline(self.root / "_site", self.papers_dir, baseline)
+            check_baseline(self.root / "_site", self.papers_dir, baseline)
+        except Exception:
+            baseline.write_bytes(original)
+            raise
+        self._baseline_previews.pop(token, None)
+        return f"理由: {reason}\n{checks}\n公開基準を更新しました（差分{len(current)}件）"
+
 
 def _escape(value: object) -> str:
     return html.escape(str(value), quote=True)
+
+
+def _csrf_field(app: LocalAdmin) -> str:
+    return f'<input type="hidden" name="csrf" value="{_escape(app.csrf_token)}">'
+
+
+def _require_csrf(app: LocalAdmin, values: dict[str, list[str]]) -> None:
+    supplied = _one(values, "csrf")
+    if not secrets.compare_digest(supplied, app.csrf_token):
+        raise PaperToolError("操作確認トークンが不正です。管理画面を開き直してください")
 
 
 def _page(title: str, body: str) -> bytes:
@@ -190,6 +439,7 @@ a{{color:#144ea0}} .muted{{color:#637083}} .card{{background:#fff;border:1px sol
 button{{background:#164e9b;color:#fff;border:0;border-radius:7px;padding:9px 14px;font:inherit;cursor:pointer}} button.warn{{background:#9a5000}} button.danger{{background:#9b2929}}
 input[type=text]{{width:min(100%,620px);padding:8px;border:1px solid #aeb8c9;border-radius:6px;font:inherit}} pre{{white-space:pre-wrap;background:#161a22;color:#edf0f5;padding:14px;border-radius:8px;overflow:auto}}
 table{{border-collapse:collapse;width:100%}} th,td{{border-bottom:1px solid #e1e5ec;padding:8px;text-align:left;vertical-align:top}} .actions{{display:flex;gap:10px;flex-wrap:wrap;align-items:center}}
+.pages{{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}} .pages img{{display:block;width:100%;height:auto;border:1px solid #cbd2df;border-radius:6px}}
 </style></head><body><main><p><a href="/">← 記事一覧</a></p>{body}</main></body></html>""".encode("utf-8")
 
 
@@ -242,8 +492,8 @@ def _dashboard(app: LocalAdmin) -> bytes:
     body = f"""<h1>{LOCAL_ADMIN_TITLE}</h1>
 <p>原稿はVS Codeで編集します。この画面は、検査・HTML生成・公開準備だけを行います。Gitへのコミットとpushは行いません。</p>
 <div class="card"><strong>作業ツリー</strong><pre>{_escape(changes)}</pre></div>
-<div class="card actions"><form method="post" action="/actions/check-all"><button class="warn">全体検査を実行</button></form>
-<form method="post" action="/actions/write-baseline"><label><input type="checkbox" name="accept" value="yes"> 公開差分を確認済み</label> <input name="reason" type="text" required placeholder="基準更新の理由"> <button class="danger">公開基準を更新</button></form></div>
+<div class="card actions"><form method="post" action="/actions/check-all">{_csrf_field(app)}<button class="warn">全体検査を実行</button></form>
+<form method="post" action="/actions/prepare-baseline">{_csrf_field(app)}<button class="danger">公開差分を表示</button></form></div>
 <h2>記事</h2><table><thead><tr><th>記事</th><th>HTML</th><th>状態</th></tr></thead><tbody>{''.join(rows)}</tbody></table>"""
     return _page(LOCAL_ADMIN_TITLE, body)
 
@@ -265,13 +515,13 @@ def _paper_page(app: LocalAdmin, slug: str) -> bytes:
     body = f"""<h1>{_escape(paper.title)}</h1><p class="muted">{_escape(slug)} · HTML版: {html_note}</p>
 <div class="card"><strong>VS Codeの変更</strong><pre>{_escape(git_text)}</pre>
 <p class="muted">新規BibTeX・図版など、paper.json未登録の公開ファイルはこの初期版では登録しません。先に移行手順を使ってください。</p></div>
-<form class="card" method="post" action="/papers/{quote(slug)}/review"><h2>1. 修正を検査</h2><p>変更した保護ファイルを選び、個人情報検査レポートを作ります。</p>
+<form class="card" method="post" action="/papers/{quote(slug)}/review">{_csrf_field(app)}<h2>1. 修正を検査</h2><p>変更した保護ファイルを選び、個人情報検査レポートを作ります。</p>
 <table><thead><tr><th></th><th>ファイル</th><th>種類</th><th>状態</th></tr></thead><tbody>{''.join(changed_rows)}</tbody></table><p><button>変更を検査</button></p></form>
-<form class="card" method="post" action="/papers/{quote(slug)}/finish"><h2>2. 承認して全体検査</h2><p>PDF全ページと検査報告を確認した後だけ実行してください。選択した既存ファイルだけを承認します。</p>
+<form class="card" method="post" action="/papers/{quote(slug)}/finish">{_csrf_field(app)}<h2>2. 承認して事前検査</h2><p>PDF全ページと検査報告を確認した後だけ実行してください。選択した既存ファイルを承認し、古くなったHTML版があれば回復可能な隔離領域へ退避します。</p>
 <input name="reason" type="text" required placeholder="修正理由"><p><label><input type="checkbox" name="privacy_reviewed" value="yes"> PDF全ページと個人情報検査報告を確認した</label></p>
 <p><label><input type="checkbox" name="accept_public_change" value="yes"> 意図した公開差分だけを承認する</label></p>
-<p>承認するファイル:</p><table><tbody>{''.join(changed_rows)}</tbody></table><p><button class="danger">承認して全体検査</button></p></form>
-<div class="card"><h2>3. HTML版を生成</h2><p>未承認の原稿変更がない場合だけ、隔離領域に試験HTMLを生成します。</p><form method="post" action="/papers/{quote(slug)}/trial"><button>HTML試験版を生成</button></form></div>"""
+<p>承認するファイル:</p><table><tbody>{''.join(changed_rows)}</tbody></table><p><button class="danger">承認して事前検査</button></p></form>
+<div class="card"><h2>3. HTML版を生成</h2><p>未承認の原稿変更がない場合だけ、隔離領域に試験HTMLを生成します。</p><form method="post" action="/papers/{quote(slug)}/trial">{_csrf_field(app)}<button>HTML試験版を生成</button></form></div>"""
     return _page(paper.title, body)
 
 
@@ -286,13 +536,53 @@ def _result_page(app: LocalAdmin, slug: str, token: str, report: dict) -> bytes:
     reasons = "\n".join(item.get("blocking_reasons", [])) or "なし"
     publish = ""
     if passed:
-        publish = f"""<form class="card" method="post" action="/papers/{quote(slug)}/publish">
+        publish = f"""<form class="card" method="post" action="/papers/{quote(slug)}/publish">{_csrf_field(app)}
 <input type="hidden" name="trial" value="{_escape(token)}"><h2>HTML版を公開登録</h2>
-<p>PDFとHTMLを比較した後にだけ進めます。公開登録後は「全体検査」と「公開基準を更新」を行ってください。</p>
+<p>PDFとHTMLを比較した後にだけ進めます。公開登録後は「全体検査」と「公開差分を表示」を行ってください。</p>
 <label><input type="checkbox" name="reviewed" value="yes"> PDFと比較して公開してよいことを確認した</label><p><button class="danger">HTML版を公開登録</button></p></form>"""
     body = f"""<h1>HTML試験版</h1><p class="{'ok' if passed else 'danger'}">自動検査: {'合格' if passed else '不合格'}</p>{result_link}
 <div class="card"><strong>停止理由</strong><pre>{_escape(reasons)}</pre><strong>変換処理</strong><pre>{_escape(json.dumps(item.get('source_normalizations', []), ensure_ascii=False, indent=2))}</pre></div>{publish}"""
     return _page("HTML試験版", body)
+
+
+def _review_result_card(result: ReviewResult) -> str:
+    report_link = ""
+    pages = ""
+    if result.token:
+        report_link = (
+            f' <a href="/files/{result.token}/report.txt" target="_blank">'
+            "検査報告を開く</a>"
+        )
+        page_links = []
+        for number, page in enumerate(result.rendered_pages, start=1):
+            href = f"/files/{result.token}/{quote(page)}"
+            page_links.append(
+                f'<a href="{href}" target="_blank"><img src="{href}" '
+                f'alt="{_escape(result.path)} {number}ページ"></a>'
+            )
+        if page_links:
+            pages = (
+                '<p><strong>PDF全ページ画像</strong></p><div class="pages">'
+                + "".join(page_links)
+                + "</div>"
+            )
+    return (
+        f'<div class="card"><strong>{_escape(result.path)}</strong>{report_link}'
+        f'<pre>{_escape(result.findings)}</pre>{pages}</div>'
+    )
+
+
+def _baseline_preview_page(
+    app: LocalAdmin, token: str, differences: tuple[str, ...], checks: str
+) -> bytes:
+    rows = "".join(f"<li>{_escape(value)}</li>" for value in differences)
+    body = f"""<h1>公開差分の確認</h1><p class="ok">公開基準以外の事前検査は成功しました。</p>
+<pre>{_escape(checks)}</pre><div class="card"><h2>承認対象の公開差分</h2><ul>{rows}</ul></div>
+<form class="card" method="post" action="/actions/write-baseline">{_csrf_field(app)}
+<input type="hidden" name="preview" value="{_escape(token)}"><input name="reason" type="text" required placeholder="基準更新の理由">
+<p><label><input type="checkbox" name="accept" value="yes"> 上記の公開差分をすべて確認した</label></p>
+<button class="danger">確認した差分を公開基準へ反映</button></form>"""
+    return _page("公開差分の確認", body)
 
 
 def make_handler(app: LocalAdmin):
@@ -305,6 +595,14 @@ def make_handler(app: LocalAdmin):
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(payload)))
             self.send_header("Cache-Control", "no-store")
+            self.send_header(
+                "Content-Security-Policy",
+                "default-src 'self'; img-src 'self' data:; "
+                "style-src 'self' 'unsafe-inline'; form-action 'self'; "
+                "frame-ancestors 'none'",
+            )
+            self.send_header("Referrer-Policy", "no-referrer")
+            self.send_header("X-Frame-Options", "DENY")
             self.end_headers()
             self.wfile.write(payload)
 
@@ -326,6 +624,8 @@ def make_handler(app: LocalAdmin):
                     self.send_header("Content-Type", content_type)
                     self.send_header("Content-Length", str(len(content)))
                     self.send_header("Cache-Control", "no-store")
+                    self.send_header("Referrer-Policy", "no-referrer")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(content)
                     return
@@ -337,29 +637,36 @@ def make_handler(app: LocalAdmin):
             parsed = urlparse(self.path)
             values = _form_values(self)
             try:
+                _require_csrf(app, values)
                 with app._lock:
                     if parsed.path == "/actions/check-all":
                         code, output = app.command(["check-all"])
                         self.send_html(_message("全体検査", "成功" if code == 0 else "失敗", output=output, good=code == 0))
                         return
+                    if parsed.path == "/actions/prepare-baseline":
+                        token, differences, checks = app.prepare_baseline()
+                        self.send_html(
+                            _baseline_preview_page(app, token, differences, checks)
+                        )
+                        return
                     if parsed.path == "/actions/write-baseline":
-                        _require_checked(values, "accept", "公開差分を確認したことをチェックしてください")
+                        _require_checked(
+                            values,
+                            "accept",
+                            "表示された公開差分を確認したことをチェックしてください",
+                        )
                         reason = _one(values, "reason")
                         if not reason:
                             raise PaperToolError("公開基準を更新する理由を入力してください")
-                        code, output = app.command(["stage", "_site"])
-                        if code == 0:
-                            code, output = app.command(["pagefind-index", "_site"])
-                        if code == 0:
-                            completed = subprocess.run(
-                                [sys.executable, str(app.root / "scripts" / "site_snapshot.py"), "write", "_site"],
-                                cwd=app.root, capture_output=True, text=True, check=False,
+                        output = app.accept_baseline(_one(values, "preview"), reason)
+                        self.send_html(
+                            _message(
+                                "公開基準の更新",
+                                "成功",
+                                output=output,
+                                good=True,
                             )
-                            code = completed.returncode
-                            output = "\n".join(value.rstrip() for value in (completed.stdout, completed.stderr) if value.strip())
-                        if code == 0:
-                            code, output = app.command(["check-all"])
-                        self.send_html(_message("公開基準の更新", "成功" if code == 0 else "失敗", output=output, good=code == 0))
+                        )
                         return
                     if parsed.path.startswith("/papers/"):
                         rest = parsed.path.removeprefix("/papers/").strip("/").split("/")
@@ -369,12 +676,7 @@ def make_handler(app: LocalAdmin):
                         if action == "review":
                             files = values.get("file", [])
                             results = app.review(slug, files)
-                            cards = []
-                            for path, token, findings in results:
-                                report_link = ""
-                                if token:
-                                    report_link = f' <a href="/files/{token}/report.txt" target="_blank">検査報告を開く</a>'
-                                cards.append(f"<div class=\"card\"><strong>{_escape(path)}</strong>{report_link}<pre>{_escape(findings)}</pre></div>")
+                            cards = [_review_result_card(result) for result in results]
                             self.send_html(_page("変更検査", "<h1>変更検査を作成しました</h1>" + "".join(cards) + "<p>PDF全ページと報告を確認してから、記事画面の承認操作へ進んでください。</p>"))
                             return
                         if action == "finish":
@@ -384,12 +686,15 @@ def make_handler(app: LocalAdmin):
                             files = values.get("file", [])
                             if not reason or not files:
                                 raise PaperToolError("修正理由と承認対象ファイルを指定してください")
-                            arguments = ["finish-change", slug, "--reason", reason]
-                            for value in files:
-                                arguments.extend(["--file", value])
-                            arguments.extend(["--privacy-reviewed", "--accept-public-change"])
-                            code, output = app.command(arguments)
-                            self.send_html(_message("承認と全体検査", "成功" if code == 0 else "失敗", output=output, good=code == 0))
+                            output = app.approve_reviewed_change(slug, files, reason)
+                            self.send_html(
+                                _message(
+                                    "承認と事前検査",
+                                    "成功。HTML版を生成し、最後に公開差分を確認してください。",
+                                    output=output,
+                                    good=True,
+                                )
+                            )
                             return
                         if action == "trial":
                             token, report = app.create_trial(slug)
@@ -398,7 +703,7 @@ def make_handler(app: LocalAdmin):
                         if action == "publish":
                             _require_checked(values, "reviewed", "PDFとHTMLを比較してから公開登録してください")
                             published = app.publish_trial(slug, _one(values, "trial"))
-                            self.send_html(_message("HTML版を公開登録", f"{published} を登録しました。次に全体検査を実行し、公開基準を更新してください。", good=True))
+                            self.send_html(_message("HTML版を公開登録", f"{published} を登録しました。次に全体検査を実行し、公開差分を表示して確認してください。", good=True))
                             return
                     raise PaperToolError("この操作は存在しません")
             except PaperToolError as error:
