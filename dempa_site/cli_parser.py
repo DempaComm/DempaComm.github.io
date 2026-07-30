@@ -300,4 +300,12 @@ def build_parser(
         "--output", default="_site", metavar="DIR"
     )
     finish_change_parser.set_defaults(func=commands["finish-change"])
+
+    local_admin_parser = subparsers.add_parser(
+        "local-admin",
+        help="run the localhost-only manuscript review and HTML workflow",
+    )
+    local_admin_parser.add_argument("--host", default="127.0.0.1")
+    local_admin_parser.add_argument("--port", type=int, default=8765)
+    local_admin_parser.set_defaults(func=commands["local-admin"])
     return result

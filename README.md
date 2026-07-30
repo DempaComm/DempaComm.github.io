@@ -92,6 +92,10 @@ PDFとの目視比較を通過した原稿は、試験HTML版として個別公�
 AIへ渡す作業指示は、TeX版を `docs/MINIMAL_TEX_IMPORT.md`、PDF版を
 `docs/MINIMAL_PDF_IMPORT.md` にまとめています。
 
+TeX原稿はVS Codeで編集したまま、変更検査、HTML試験生成、公開準備、総合検査をブラウザで
+行いたい場合は、`python3 scripts/paper_tool.py local-admin` でlocalhost専用の管理画面を
+起動できます。使い方と安全上の境界は `docs/LOCAL_ADMIN.md` を参照してください。
+
 電波通信の記事とMyBlog原稿の対応、未移行・検査中・公開済みの状態は
 `ledger/migration-ledger.csv` で管理します。使い方は
 `docs/MIGRATION_LEDGER.md` にまとめています。

@@ -38,6 +38,7 @@ from dempa_site.maintenance import (  # noqa: E402
     human_bytes,
     local_cleanup_plan,
 )
+from dempa_site.local_admin import serve_local_admin  # noqa: E402
 from dempa_site.paths import (  # noqa: E402
     RepositoryPaths,
     safe_relative_path as shared_safe_relative_path,
@@ -532,6 +533,10 @@ def command_finish_change(args: argparse.Namespace) -> None:
     print("NEXT git status, then commit and push the intended files")
 
 
+def command_local_admin(args: argparse.Namespace) -> None:
+    serve_local_admin(ROOT, host=args.host, port=args.port)
+
+
 COMMANDS = {
     "verify": command_verify,
     "audit": command_audit,
@@ -556,6 +561,7 @@ COMMANDS = {
     "approve": command_approve,
     "review-change": command_review_change,
     "finish-change": command_finish_change,
+    "local-admin": command_local_admin,
 }
 
 
