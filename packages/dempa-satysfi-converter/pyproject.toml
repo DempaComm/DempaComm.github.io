@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dempa-satysfi-converter"
+version = "0.1.0a0"
+description = "Conservative Pandoc AST to SATySFi converter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "DempaComm"}]
+dependencies = []
+
+[project.scripts]
+dempa-satysfi-convert = "dempa_satysfi_converter.cli:main"
+
+[tool.setuptools.package-data]
+dempa_satysfi_converter = ["styles/*.satyh"]

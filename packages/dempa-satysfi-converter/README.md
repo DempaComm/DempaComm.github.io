@@ -1,44 +1,45 @@
 # dempa-satysfi-converter
 
-LaTeX原稿からSATySFi派生物を作る変換器を、別スレッドで開発するための予約領域である。
-このフォルダには現時点で変換器の実装を入れていない。
+LaTeXをPandoc JSON AST経由でSATySFiへ保守的に変換する試作CLIである。入力原稿を一時領域へ
+コピーし、AST、SATySFiソース、変換報告、コンパイルログ、PDFを指定した隔離先へ分けて保存する。
+未対応のASTノードや数式命令は推測せず、安全に停止する。
 
-数識電収のサイト本体から独立させ、将来はこのフォルダだけを別リポジトリへ切り出せる構成を
-目指す。元TeXを変更せず、生成物を隔離し、未知の構造を推測変換しない方針はTypst試験と共通である。
+## 状態
 
-## 現在の状態
+- バージョン: `0.1.0a0`
+- 実装: Python 3.11以上
+- 中間表現: Pandoc JSON AST
+- 組版: SATySFiと同梱の `dempa.satyh`
+- ライセンス: Apache-2.0
+- 公開連携: なし（生成物は常に人間の確認が必要）
 
-- 状態: 設計待ち・実装未着手
-- 変換器: なし
-- SATySFi: ローカル導入済み
-- Pandoc: ローカル導入済み
-- 公開機能: なし
-- GitHubリポジトリ: 未作成
-- ライセンス: 実装開始時に決定する
+本文、インライン・別行立て数式、定義・命題・定理、証明、相互参照、単純な箇条書きを初期範囲と
+する。引用、参考文献、図版、表、任意の独自マクロ、複雑な定理本文は未対応である。
 
-## 予定するフォルダ
+## 実行
 
-```text
-dempa-satysfi-converter/
-├── src/                 変換器本体
-├── styles/              電波通信用SATySFiクラス・ヘッダ
-├── tests/               人工的な最小入力と回帰テスト
-├── examples/minimal/    実原稿を含まない利用例
-├── docs/
-│   ├── REQUIREMENTS.md  必須要件と安全条件
-│   ├── ARCHITECTURE.md  構成案と責務境界
-│   └── HANDOFF.md       別スレッドへの引き継ぎ
-└── README.md
+PandocとSATySFiを用意し、このフォルダで次を実行する。
+
+```sh
+PYTHONPATH=src python3 -m dempa_satysfi_converter.cli \
+  examples/minimal/input.tex \
+  --output-dir /tmp/dempa-satysfi-example \
+  --compile
 ```
 
-実装担当は最初に [`docs/HANDOFF.md`](docs/HANDOFF.md) と
-[`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) を読むこと。推奨経路はLaTeXを直接正規表現で
-変換する方法ではなく、Pandoc JSON AST等の構造化された中間表現を調査する方法である。
+既存の生成ファイルがある出力先は上書きしない。`conversion-report.json` の
+`manual_review_required` は常に `true`、`publishable` は常に `false` である。
 
-## やらないこと
+インストールして使う場合は `pip install -e .` 後に `dempa-satysfi-convert` を実行できる。
 
-- この予約タスク内で変換器を実装しない。
-- `papers/*` の実原稿を例やテストへコピーしない。
-- 元TeX、PDF、BibTeX、図版、`paper.json` を変更しない。
-- 変換成功だけでSATySFi版を公開しない。
-- Typst補正器へSATySFi固有処理を混在させない。
+## 検査
+
+```sh
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+```
+
+テストは新規作成した人工例だけを使い、決定性、上書き拒否、安全停止、数式補正、SATySFiでの
+PDF生成を確認する。実原稿はテストや利用例へ収録しない。
+
+詳細は [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) と
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) を参照する。
