@@ -69,9 +69,9 @@ python3 scripts/paper_tool.py finish-change "記事番号" \
 - Tylax出力の補正器とTypst共通スタイルは `packages/dempa-typst-converter/` で育てる。
   生出力を上書きせず、意味が一意でない補正は成功扱いにしない。このパッケージの例とテストへ
   実原稿をコピーしない。
-- SATySFi変換器の予約領域は `packages/dempa-satysfi-converter/` にある。変換器は未実装で、
-  別スレッドが `docs/HANDOFF.md` と `docs/REQUIREMENTS.md` を読んでから着手する。予約領域を
-  完成済みと扱わず、Typst変換器へSATySFi固有処理を混在させない。
+- SATySFi変換器は `packages/dempa-satysfi-converter/` にある。変更前に `docs/HANDOFF.md` と
+  `docs/REQUIREMENTS.md` を読み、実原稿をテストへ収録せず、未知の構造では安全停止する。
+  Typst変換器へSATySFi固有処理を混在させない。
 - LaTeXMLの現行手順は [`docs/LATEXML_TRIAL.md`](docs/LATEXML_TRIAL.md)、Typstの現行手順は
   [`docs/TYPST_TRIAL.md`](docs/TYPST_TRIAL.md) を参照する。
 - SATySFi変換器はこのリポジトリへ即座に組み込まず、別タスク・別リポジトリでの試作を
@@ -103,7 +103,7 @@ python3 scripts/paper_tool.py check-all
 3. 読書経路を増やす。
 4. 原稿関係図がほぼ完全グラフになる問題を、関係の重みや明示メタデータを使って再設計する。
 5. Search Consoleの確認と非公開バックアップ複製を利用者側の運用として行う。
-6. SATySFi変換器の試作は別タスクで扱う。
+6. SATySFi変換器は対応範囲を人工例のテストから段階的に広げる。
 
 CSS分割と生成済みファイル整理は低優先度である。見た目だけの大規模変更や、既に完了した
 リファクタリングのやり直しより、既存機能を壊さない小さな改善を優先する。

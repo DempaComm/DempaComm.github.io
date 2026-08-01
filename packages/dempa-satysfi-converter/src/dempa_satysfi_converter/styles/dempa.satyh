@@ -1,0 +1,45 @@
+@require: stdja
+@require: annot
+
+module DempaStyle : sig
+  direct \dempa-strong : [inline-text] inline-cmd
+  direct \dempa-proof-heading : [inline-text] inline-cmd
+  direct \dempa-statement-label : [string; string; inline-text] inline-cmd
+  direct \dempa-qed : [] inline-cmd
+  direct \dempa-factorial : [] math-cmd
+end = struct
+  let no-pads = (0pt, 0pt, 0pt, 0pt)
+
+  let set-cjk-font font ctx =
+    ctx |> set-font HanIdeographic font
+        |> set-font Kana font
+
+  let-inline ctx \dempa-strong inner =
+    let bold-context =
+      ctx |> set-font Latin StdJa.font-latin-bold
+          |> set-cjk-font StdJa.font-cjk-gothic
+    in
+      read-inline bold-context inner
+
+  let-inline ctx \dempa-proof-heading inner =
+    let italic-context = ctx |> set-font Latin StdJa.font-latin-italic in
+      read-inline italic-context inner
+
+  let-inline ctx \dempa-statement-label label number inner =
+    let () = register-cross-reference (label ^ `:num`) number in
+    let bold-context =
+      ctx |> set-font Latin StdJa.font-latin-bold
+          |> set-cjk-font StdJa.font-cjk-gothic
+    in
+    let boxes = read-inline bold-context inner in
+      inline-frame-breakable no-pads
+        (Annot.register-location-frame label)
+        (boxes ++ hook-page-break
+          (fun info _ -> register-cross-reference
+            (label ^ `:page`) (arabic info#page-number)))
+
+  let-inline ctx \dempa-qed = read-inline ctx {（証明終）}
+
+  let-math \dempa-factorial =
+    text-in-math MathOrd (fun ctx -> read-inline ctx {!})
+end

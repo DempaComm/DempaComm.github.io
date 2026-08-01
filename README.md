@@ -94,9 +94,11 @@ TylaxによるTypst変換は、元TeXを変更しない隔離試験として進�
 欠落、重複ラベル、未解決参照は安全のため停止します。試験全体の手順は
 `docs/TYPST_TRIAL.md` を参照してください。
 
-SATySFi変換器は未実装です。別スレッドで開発するための予約領域、要件、構成案、環境情報は
-[`packages/dempa-satysfi-converter/`](packages/dempa-satysfi-converter/README.md) に分離し、
-現状と引き継ぎは [`docs/SATYSFI_TRIAL.md`](docs/SATYSFI_TRIAL.md) にまとめています。
+SATySFi変換器の試作は
+[`packages/dempa-satysfi-converter/`](packages/dempa-satysfi-converter/README.md) に分離しています。
+Pandoc JSON ASTを経由して人工例と「素数の無限性」をPDFまで変換できる段階で、公開連携はせず、
+未対応構造では安全停止します。試験結果は [`docs/SATYSFI_TRIAL.md`](docs/SATYSFI_TRIAL.md) に
+まとめています。
 
 普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
 できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は
@@ -127,8 +129,8 @@ TeX原稿はVS Codeで編集したまま、変更検査、HTML試験生成、公
 - 読書経路を増やし、ほぼ完全グラフになりやすい原稿関係図の関係線を後日再検討する。
 - Typst変換は `typst-trial` と代表4分類の初回比較まで完了している。未補正出力の参照、
   入れ子数式、独自命令を安全に補正できる範囲が次の課題である。
-- SATySFi変換は別のタスクで扱う。成熟したLaTeX全文変換器が見当たらないため、
-  Pandoc ASTからSATySFiへ書き出す小型変換器を別リポジトリで試作する案がある。
+- SATySFi変換器の最小試作は完了した。次は見出し、引用・参考文献、図版、複数段落の定理を
+  人工例の安全停止テストから段階的に追加する。
 - MathJaxは導入せず、LaTeXMLが生成するMathML表示を維持する。
 - 生成済みファイルとCSSの再整理は低優先度であり、利益が明確な場合だけ行う。
 - Search Consoleの状態確認と、非公開バックアップの別媒体への複製はサイト外の運用作業として残る。

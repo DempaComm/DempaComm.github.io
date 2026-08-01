@@ -1,21 +1,28 @@
 # SATySFi変換試作
 
-LaTeXからSATySFiへの変換は未実装である。別スレッドで変換器を開発できるよう、
-[`packages/dempa-satysfi-converter/`](../packages/dempa-satysfi-converter/README.md) に予約領域、
-要件、構成案、引き継ぎを用意している。
+LaTeXからSATySFiへの最小変換器を
+[`packages/dempa-satysfi-converter/`](../packages/dempa-satysfi-converter/README.md) に実装した。
+Pandoc JSON ASTを中間表現として検査し、未知の構造や数式命令を推測せず安全停止する。
 
-2026-08-01時点で、ローカルにはSATySFi `v0.0.11-22-gc2cbc48`、opam `2.5.2`、
-Pandoc `3.10.1` が導入済みである。変換器本体、SATySFiスタイル、テスト入力、公開機能は
-まだ存在しない。
+## 2026-08-01の確認結果
 
-## 方針
+ローカルのSATySFi `v0.0.11-22-gc2cbc48`、opam `2.5.2`、Pandoc `3.10.1` を使用した。
+人工例は回帰テストで変換、決定性、安全停止、警告なしPDF生成を確認した。
 
-- 元TeXと公開ファイルを変更しない。
-- 実験出力は隔離し、自動公開しない。
-- 実原稿を公開リポジトリの例やテストへ含めない。
-- Pandoc JSON AST等の構造化中間表現を第一候補として調査する。
-- 未対応構造は推測せず停止する。
-- 生成PDFは元PDFと全ページ比較する。
+実原稿「素数の無限性」は元TeXを変更せず隔離領域で試験し、次を確認した。
 
-別スレッドは最初に
-[`HANDOFF.md`](../packages/dempa-satysfi-converter/docs/HANDOFF.md) を読み、未決事項を確定する。
+- A4、1ページのPDFを生成できる。
+- 定義・命題・定理4件、証明2件を保持する。
+- ラベル2件と参照2件をSATySFiの相互参照として解決する。
+- インライン数式53件を変換する。
+- SATySFiコンパイルのエラー、警告、行あふれがない。
+- 証明末尾は収録フォントにない白四角を避け、`（証明終）` とする。
+
+実原稿、Pandoc AST、SATySFiソース、PDF、ログは公開テストへ収録していない。試験成功だけで
+公開候補とはせず、変換報告も `manual_review_required: true`、`publishable: false` を維持する。
+
+## 次の範囲
+
+見出し、引用・参考文献、図版、表、複数段落の定理は未対応である。それぞれ人工的な最小入力と
+安全停止テストを先に追加してから対応する。公開連携は変換器が安定し、複数原稿の内容比較方法が
+定まるまで行わない。
