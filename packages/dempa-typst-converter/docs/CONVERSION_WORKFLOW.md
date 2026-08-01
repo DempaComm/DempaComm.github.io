@@ -24,7 +24,8 @@ dempa-typst-correct work/tylax.raw.typ \
   --report work/correction-report.json
 ```
 
-補正可能な場合は `main.typ` と報告を生成する。意味の判断を必要とする構造が残る場合は、
+補正可能な場合は `main.typ` と報告を生成する。定理構造を変換した場合は、同じフォルダへ
+`dempa-style.typ` も生成し、`main.typ` から読み込む。意味の判断を必要とする構造が残る場合は、
 報告だけを書き、終了コード `2` で停止する。停止を無視して公開へ進んではならない。
 入力・補正版・報告には別々のパスを指定する。補正版または報告が既に存在する場合も、
 意図しない上書きを避けるため停止する。
@@ -37,10 +38,11 @@ dempa-typst-correct work/tylax.raw.typ \
 - `manual_review_required: true`
 - `publishable: false`
 
-## 4. スタイルを読み込む
+## 4. 生成されたスタイルを確認する
 
-補正後の文書から `dempa-style.typ` を読み込む。定理環境の自動変換が未対応の間は、
-`#definition`、`#proposition`、`#theorem`、`#proof` への変換を人間が確認する。
+補正器はパッケージ同梱の `dempa-style.typ` を出力先へコピーする。同名の異なるファイルが
+すでにある場合は上書きせず停止する。`#definition`、`#proposition`、`#theorem`、`#proof` と
+ラベル参照の範囲が元原稿と一致するかは人間が確認する。
 
 ## 5. TypstでPDFを生成する
 

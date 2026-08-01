@@ -9,6 +9,13 @@ from pathlib import Path
 from dempa_typst_converter.correction import correct_tylax_source
 
 
+STYLE_NAME = "dempa-style.typ"
+
+
+def _bundled_style() -> Path:
+    return Path(__file__).resolve().parent / "styles" / STYLE_NAME
+
+
 def parser() -> argparse.ArgumentParser:
     value = argparse.ArgumentParser(
         description="Safely post-process Tylax output without changing the source TeX"
@@ -33,6 +40,12 @@ def main(arguments: list[str] | None = None) -> int:
         return 2
     source = input_path.read_text(encoding="utf-8")
     result = correct_tylax_source(source)
+    style_output = output_path.parent / STYLE_NAME
+    bundled_style = _bundled_style()
+    if result.requires_style and style_output.exists():
+        if style_output.read_bytes() != bundled_style.read_bytes():
+            print(f"BLOCKED: refusing to overwrite a different style file: {style_output}")
+            return 2
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         json.dumps(result.report.to_dict(), ensure_ascii=False, indent=2) + "\n",
@@ -44,6 +57,8 @@ def main(arguments: list[str] | None = None) -> int:
         print(f"REPORT: {report_path}")
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if result.requires_style and not style_output.exists():
+        style_output.write_bytes(bundled_style.read_bytes())
     output_path.write_text(result.source, encoding="utf-8")
     print(f"WROTE: {output_path}")
     print(f"REPORT: {report_path}")

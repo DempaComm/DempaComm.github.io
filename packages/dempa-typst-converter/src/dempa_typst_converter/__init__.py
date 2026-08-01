@@ -8,4 +8,4 @@ from dempa_typst_converter.correction import (
 
 __all__ = ["CorrectionReport", "CorrectionResult", "correct_tylax_source"]
 
-__version__ = "0.1.0a0"
+__version__ = "0.2.0a0"

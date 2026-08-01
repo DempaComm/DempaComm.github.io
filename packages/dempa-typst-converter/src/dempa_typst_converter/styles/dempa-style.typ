@@ -1,7 +1,7 @@
 // Shared Typst style for converted DempaComm manuscripts.
 // This file handles presentation only. Invalid Tylax syntax must be corrected first.
 
-#let statement_counter = counter("dempa-statement")
+#let statement-counter = counter(figure.where(kind: "dempa-statement"))
 
 #let dempa_article(
   title: "",
@@ -26,10 +26,17 @@
 }
 
 #let statement(name, body) = {
-  statement_counter.step()
-  block(width: 100%, above: 0.8em, below: 0.8em)[
-    *#name #context statement_counter.display("1").* #body
-  ]
+  figure(
+    kind: "dempa-statement",
+    supplement: name,
+    numbering: "1",
+    outlined: false,
+    align(left)[
+      #block(width: 100%, above: 0.8em, below: 0.8em)[
+        *#name #context statement-counter.display("1").* #body
+      ]
+    ],
+  )
 }
 
 #let definition(body) = statement([定義], body)

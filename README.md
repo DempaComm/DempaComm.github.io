@@ -90,7 +90,9 @@ TylaxによるTypst変換は、元TeXを変更しない隔離試験として進�
 意味が一意な補正だけを適用するPythonコードと、電波通信用の共通Typstスタイルは、将来
 独立公開できる [`packages/dempa-typst-converter/`](packages/dempa-typst-converter/README.md)
 に分離しています。現在はアルファ版であり、定理・参照など未対応構造を検出した場合は
-自動変換を停止します。試験全体の手順は `docs/TYPST_TRIAL.md` を参照してください。
+自動変換を停止します。対応する境界を持つ定理構造とラベル参照は変換できますが、境界の
+欠落、重複ラベル、未解決参照は安全のため停止します。試験全体の手順は
+`docs/TYPST_TRIAL.md` を参照してください。
 
 SATySFi変換器は未実装です。別スレッドで開発するための予約領域、要件、構成案、環境情報は
 [`packages/dempa-satysfi-converter/`](packages/dempa-satysfi-converter/README.md) に分離し、

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import subprocess
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -37,6 +39,49 @@ class TypstConverterPackageTest(unittest.TestCase):
             "src/dempa_typst_converter/styles/dempa-style.typ",
         )
         self.assertEqual([], [path for path in required if not (PACKAGE / path).is_file()])
+
+    @unittest.skipUnless(shutil.which("typst"), "Typst is not installed")
+    def test_structured_output_compiles_with_bundled_style(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            raw = root / "raw.typ"
+            output = root / "main.typ"
+            report = root / "report.json"
+            pdf = root / "main.pdf"
+            raw.write_text(
+                """/* Begin prop */
+<sample> 人工的な命題．
+/* End prop */
+_Proof._ 命題 @sample を参照する． #h(1fr) $square.stroked$
+""",
+                encoding="utf-8",
+            )
+            converted = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "dempa_typst_converter.cli",
+                    str(raw),
+                    "--output",
+                    str(output),
+                    "--report",
+                    str(report),
+                ],
+                cwd=PACKAGE,
+                env={"PYTHONPATH": str(PACKAGE / "src")},
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, converted.returncode, converted.stdout + converted.stderr)
+            compiled = subprocess.run(
+                ["typst", "compile", "--root", str(root), str(output), str(pdf)],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, compiled.returncode, compiled.stdout + compiled.stderr)
+            self.assertTrue(pdf.is_file())
 
 
 if __name__ == "__main__":

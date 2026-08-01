@@ -14,10 +14,11 @@
 
 #proposition[
   偶数と偶数の和は偶数である。
-]
+] <even-sum>
 
 #proof[
-  $a = 2 m$、$b = 2 n$ と書けば、$a + b = 2 (m + n)$ である。
+  命題 #ref(<even-sum>, supplement: none) について、$a = 2 m$、$b = 2 n$ と書けば、
+  $a + b = 2 (m + n)$ である。
 ]
 
 #theorem[
