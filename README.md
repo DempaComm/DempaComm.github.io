@@ -86,6 +86,16 @@ PDFとの目視比較を通過した原稿は、試験HTML版として個別公�
 確認する場合は、未変換TeXを一括処理し、自動合格版だけを「自動変換・未目視」と明示して
 追加できます。手順と確認項目は `docs/LATEXML_TRIAL.md` を参照してください。
 
+TylaxによるTypst変換は、元TeXを変更しない隔離試験として進めています。Tylax出力へ
+意味が一意な補正だけを適用するPythonコードと、電波通信用の共通Typstスタイルは、将来
+独立公開できる [`packages/dempa-typst-converter/`](packages/dempa-typst-converter/README.md)
+に分離しています。現在はアルファ版であり、定理・参照など未対応構造を検出した場合は
+自動変換を停止します。試験全体の手順は `docs/TYPST_TRIAL.md` を参照してください。
+
+SATySFi変換器は未実装です。別スレッドで開発するための予約領域、要件、構成案、環境情報は
+[`packages/dempa-satysfi-converter/`](packages/dempa-satysfi-converter/README.md) に分離し、
+現状と引き継ぎは [`docs/SATYSFI_TRIAL.md`](docs/SATYSFI_TRIAL.md) にまとめています。
+
 普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
 できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は
 `docs/MIGRATION.md` にまとめています。ファイル1本だけからの非常用取り込みと、一般的な

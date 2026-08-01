@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dempa-typst-converter"
+version = "0.1.0a0"
+description = "Conservative post-processing and Typst styles for Tylax output"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "DempaComm"}]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Text Processing :: Markup",
+]
+dependencies = []
+
+[project.scripts]
+dempa-typst-correct = "dempa_typst_converter.cli:main"
+
+[tool.setuptools.package-data]
+dempa_typst_converter = ["styles/*.typ"]

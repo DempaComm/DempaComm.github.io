@@ -66,6 +66,12 @@ python3 scripts/paper_tool.py finish-change "記事番号" \
 - 変換時は原稿を一時領域へコピーし、元TeXと `paper.json` を変更しない。
 - 実験出力は `_experiments/` に置き、自動公開しない。自動検査と人間による元PDFとの比較を
   通ったものだけ正式な公開候補にする。
+- Tylax出力の補正器とTypst共通スタイルは `packages/dempa-typst-converter/` で育てる。
+  生出力を上書きせず、意味が一意でない補正は成功扱いにしない。このパッケージの例とテストへ
+  実原稿をコピーしない。
+- SATySFi変換器の予約領域は `packages/dempa-satysfi-converter/` にある。変換器は未実装で、
+  別スレッドが `docs/HANDOFF.md` と `docs/REQUIREMENTS.md` を読んでから着手する。予約領域を
+  完成済みと扱わず、Typst変換器へSATySFi固有処理を混在させない。
 - LaTeXMLの現行手順は [`docs/LATEXML_TRIAL.md`](docs/LATEXML_TRIAL.md)、Typstの現行手順は
   [`docs/TYPST_TRIAL.md`](docs/TYPST_TRIAL.md) を参照する。
 - SATySFi変換器はこのリポジトリへ即座に組み込まず、別タスク・別リポジトリでの試作を
