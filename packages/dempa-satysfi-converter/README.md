@@ -16,6 +16,24 @@ LaTeXをPandoc JSON AST経由でSATySFiへ保守的に変換する試作CLIで�
 本文、インライン・別行立て数式、定義・命題・定理、証明、相互参照、単純な箇条書きを初期範囲と
 する。引用、参考文献、図版、表、任意の独自マクロ、複雑な定理本文は未対応である。
 
+## 実装言語の方針
+
+当面はPython実装を維持する。SATySFi公式の
+[日本語README](https://github.com/gfngfn/SATySFi/blob/master/README-ja.md) と
+[概説](https://github.com/gfngfn/SATySFi/blob/master/demo/demo.saty) は、静的型つき函数型言語、
+コマンド定義の可読性とカスタマイズ性、早く明確なエラー報告、局所的な処理を重視しているが、
+外部変換器にもOCamlを要求してはいない。この変換器では、その思想を次の設計として取り入れる。
+
+- Pandoc ASTからSATySFiへの変換規則を小さく局所的に保つ。
+- 未対応構造を推測せず、安全停止して理由を報告する。
+- SATySFi固有の組版定義を `.satyh` に分離する。
+- 生成後はSATySFi自身の型検査とコンパイルを通す。
+
+OCamlへの移行は、SATySFiのOCamlライブラリを直接利用する、OPAM/Duneで単一ツールとして配布する、
+またはASTの網羅性をOCamlの型検査で保証する必要が明確になった場合に再検討する。それまでは言語を
+揃えること自体を目的に書き直さず、将来変換コアだけを交換できるよう中間表現との境界を維持する。
+Python版とOCaml版を同時に育てる二重実装は行わない。
+
 ## 実行
 
 PandocとSATySFiを用意し、このフォルダで次を実行する。
