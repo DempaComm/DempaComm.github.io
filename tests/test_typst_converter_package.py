@@ -32,6 +32,7 @@ class TypstConverterPackageTest(unittest.TestCase):
             "README.md",
             "LICENSE",
             "pyproject.toml",
+            "docs/HANDOFF.md",
             "docs/INSTALLATION.md",
             "docs/CONVERSION_WORKFLOW.md",
             "docs/ARCHITECTURE.md",
