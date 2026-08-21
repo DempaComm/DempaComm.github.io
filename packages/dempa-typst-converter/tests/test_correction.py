@@ -45,6 +45,65 @@ class CorrectionTest(unittest.TestCase):
             "references without a converted statement target: missing",
             result.report.blocking_findings,
         )
+        diagnostic = next(
+            item
+            for item in result.report.diagnostics
+            if item.code == "unresolved-reference"
+        )
+        self.assertEqual((2, 10), (diagnostic.line, diagnostic.column))
+        self.assertEqual("@missing", diagnostic.token)
+        self.assertEqual("input", diagnostic.source)
+
+    def test_diagnostics_report_input_locations_for_unsupported_tokens(self) -> None:
+        raw = "前文\n$ x \\foo y $\n\\*\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = {
+            item.code: (item.token, item.line, item.column, item.source)
+            for item in result.report.diagnostics
+        }
+        self.assertEqual(
+            ("\\foo", 2, 5, "input"),
+            locations["unsupported-latex-command"],
+        )
+        self.assertEqual(
+            ("\\*", 3, 1, "input"),
+            locations["unsupported-escaped-symbol"],
+        )
+
+    def test_diagnostics_report_raw_label_and_unpaired_marker_locations(self) -> None:
+        raw = "前文\n/* Begin prop */\n<1abc> 本文．\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = {
+            item.code: (item.line, item.column)
+            for item in result.report.diagnostics
+        }
+        self.assertEqual((2, 1), locations["statement-marker"])
+        self.assertEqual((3, 1), locations["raw-label"])
+
+    def test_report_json_keeps_findings_and_adds_structured_diagnostics(self) -> None:
+        result = correct_tylax_source("$x \\unknown y$\n")
+
+        report = result.report.to_dict()
+
+        self.assertIn("blocking_findings", report)
+        self.assertEqual(2, report["schema_version"])
+        self.assertEqual(
+            {
+                "code": "unsupported-latex-command",
+                "message": "Unsupported LaTeX command remains: \\unknown",
+                "token": "\\unknown",
+                "line": 1,
+                "column": 4,
+                "source": "input",
+            },
+            report["diagnostics"][0],
+        )
 
     def test_numeric_statement_labels_and_references_are_converted(self) -> None:
         raw = """/* Begin prop */
@@ -543,6 +602,32 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             self.assertEqual(2, code)
             self.assertFalse(output.exists())
             self.assertTrue(report.is_file())
+
+    def test_cli_prints_structured_diagnostic_location(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            raw = root / "raw.typ"
+            output = root / "main.typ"
+            report = root / "report.json"
+            raw.write_text("本文\n$ x \\bad y $\n", encoding="utf-8")
+            stdout = StringIO()
+
+            with redirect_stdout(stdout):
+                code = main(
+                    [
+                        str(raw),
+                        "--output",
+                        str(output),
+                        "--report",
+                        str(report),
+                    ]
+                )
+
+            self.assertEqual(2, code)
+            self.assertIn(
+                "AT input:2:5 [unsupported-latex-command]",
+                stdout.getvalue(),
+            )
 
     def test_cli_typst_validation_rejects_invalid_output(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

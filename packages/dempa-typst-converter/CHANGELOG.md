@@ -2,6 +2,9 @@
 
 ## 0.3.0a0 - Unreleased
 
+- 既存の `blocking_findings` を維持したまま、入力上の行・列、診断コード、対象トークンを持つ
+  `diagnostics` 配列をJSON報告へ追加。
+- 未対応LaTeX命令、残存ラベル、未解決参照、対応しない境界マーカーの位置をCLIにも表示。
 - Tylaxが固定表示へ変えた `Fact` と `Lemma` を共有番号付き構造へ復元。
 - 事実・例環境と、単純な手書き参考文献の表示へ対応。
 - 数式中に残る `\displaystyle` 由来の `display` トークンを安全に除去。
