@@ -7,6 +7,8 @@ import re
 from collections import Counter
 from dataclasses import asdict, dataclass
 
+from dempa_typst_converter.latex_hints import StatementHint
+
 
 @dataclass(frozen=True)
 class AppliedRule:
@@ -22,6 +24,7 @@ class CorrectionReport:
     output_sha256: str
     applied_rules: tuple[AppliedRule, ...]
     blocking_findings: tuple[str, ...]
+    review_findings: tuple[str, ...] = ()
     manual_review_required: bool = True
     publishable: bool = False
 
@@ -50,6 +53,53 @@ class _StructureState:
     statement_labels: tuple[str, ...] = ()
     duplicate_labels: tuple[str, ...] = ()
     unresolved_references: tuple[str, ...] = ()
+    flattened_statement_kinds: tuple[str, ...] = ()
+    hint_findings: tuple[str, ...] = ()
+
+
+class _HintTracker:
+    def __init__(self, hints: tuple[StatementHint, ...]) -> None:
+        self.original = hints
+        self.queues: dict[str, list[StatementHint]] = {}
+        for hint in hints:
+            self.queues.setdefault(hint.kind, []).append(hint)
+        self.findings: list[str] = []
+        self.applied_titles = 0
+
+    def validate_sequence(self, observed: tuple[str, ...]) -> None:
+        expected = tuple(hint.kind for hint in self.original)
+        if observed != expected:
+            self.findings.append(
+                "LaTeX and Tylax statement sequences differ: "
+                f"expected {expected}, observed {observed}"
+            )
+
+    def apply(self, kind: str, body: str) -> tuple[str, str | None]:
+        queue = self.queues.get(kind, [])
+        if not queue:
+            self.findings.append(f"no LaTeX statement hint remains for: {kind}")
+            return body, None
+        hint = queue.pop(0)
+        if hint.title is None:
+            return body, None
+        if re.search(r"[\\\[\]#@$*_<>]", hint.title):
+            self.findings.append(f"unsupported LaTeX in statement title: {hint.title}")
+            return body, None
+        if not body.startswith(hint.title):
+            self.findings.append(
+                f"statement title does not match Tylax output: {hint.title}"
+            )
+            return body, None
+        self.applied_titles += 1
+        return body[len(hint.title) :].lstrip(), hint.title
+
+    def finish(self) -> tuple[str, ...]:
+        for kind, queue in sorted(self.queues.items()):
+            if queue:
+                self.findings.append(
+                    f"unused LaTeX statement hints for {kind}: {len(queue)}"
+                )
+        return tuple(self.findings)
 
 
 _LABEL = r"[A-Za-z][A-Za-z0-9:_.-]*"
@@ -57,7 +107,7 @@ _PROTECTED = re.compile(r'(/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*")', re.DOTALL)
 _STRING_OR_LINE_COMMENT = re.compile(r'(//[^\n]*|"(?:\\.|[^"\\])*")')
 _STYLE_IMPORT = (
     '#import "dempa-style.typ": definition, proposition, theorem, lemma, '
-    "corollary, proof\n\n"
+    "corollary, fact, example, proof, bibliography-entry\n\n"
 )
 _STATEMENT_FUNCTIONS = {
     "df": "definition",
@@ -65,7 +115,30 @@ _STATEMENT_FUNCTIONS = {
     "thm": "theorem",
     "lem": "lemma",
     "cor": "corollary",
+    "fact": "fact",
+    "exam": "example",
 }
+_FLATTENED_STATEMENT_FUNCTIONS = {
+    "Fact": "fact",
+    "Lemma": "lemma",
+}
+
+
+def _statement_kind_sequence(source: str) -> tuple[str, ...]:
+    inspectable = _without_strings_and_line_comments(source)
+    pattern = re.compile(
+        r"/\*\s*Begin\s+(?P<marker>df|prop|thm|lem|cor|fact|exam)\s*\*/"
+        r"|^[ \t]*\*(?P<flat>Fact|Lemma)\s+\d+\.\*",
+        re.MULTILINE,
+    )
+    kinds: list[str] = []
+    for match in pattern.finditer(inspectable):
+        marker = match.group("marker")
+        if marker is not None:
+            kinds.append(marker)
+        else:
+            kinds.append("fact" if match.group("flat") == "Fact" else "lem")
+    return tuple(kinds)
 
 
 def _sha256_text(value: str) -> str:
@@ -114,6 +187,89 @@ def _remove_tylax_title_separator(source: str) -> tuple[str, AppliedRule | None]
     )
 
 
+def _remove_latex_displaystyle_token(source: str) -> tuple[str, AppliedRule | None]:
+    math = re.compile(r"\$(?P<body>.*?)\$", re.DOTALL)
+    count = 0
+
+    def replace_math(match: re.Match[str]) -> str:
+        nonlocal count
+        body, replacements = re.subn(r"(?<![A-Za-z0-9_])display\s+", "", match.group("body"))
+        count += replacements
+        return f"${body}$"
+
+    pieces = _PROTECTED.split(source)
+    for index in range(0, len(pieces), 2):
+        pieces[index] = math.sub(replace_math, pieces[index])
+    corrected = "".join(pieces)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="latex-displaystyle",
+        description="Remove Tylax's residual display token inside Typst math",
+        replacements=count,
+    )
+
+
+def _unwrap_fraction_in_absolute_value(source: str) -> tuple[str, AppliedRule | None]:
+    math = re.compile(r"\$(?P<body>.*?)\$", re.DOTALL)
+    wrapped_fraction = re.compile(
+        r"abs\(\{\s*(?P<fraction>frac\([^{}]*\))\s*\}\)"
+    )
+    count = 0
+
+    def replace_math(match: re.Match[str]) -> str:
+        nonlocal count
+        body, replacements = wrapped_fraction.subn(
+            r"abs(\g<fraction>)", match.group("body")
+        )
+        count += replacements
+        return f"${body}$"
+
+    pieces = _PROTECTED.split(source)
+    for index in range(0, len(pieces), 2):
+        pieces[index] = math.sub(replace_math, pieces[index])
+    corrected = "".join(pieces)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="absolute-fraction-braces",
+        description=(
+            "Remove Tylax's set-producing braces around a single fraction inside abs"
+        ),
+        replacements=count,
+    )
+
+
+def _replace_tylax_bibliography(source: str) -> tuple[str, AppliedRule | None]:
+    entry = re.compile(
+        r'#figure\(kind:\s*"bib",\s*supplement:\s*none,\s*caption:\s*'
+        r"\[(?P<number>[^\[\]]+)\]\)\[(?P<body>[^\[\]]*)\]"
+        rf"(?P<label>\s*<{_LABEL}>)?"
+    )
+
+    def replace_entry(match: re.Match[str]) -> str:
+        label = match.group("label") or ""
+        return (
+            f"#bibliography-entry([{match.group('number').strip()}], "
+            f"[{match.group('body').strip()}]){label}"
+        )
+
+    corrected, count = entry.subn(replace_entry, source)
+    if not count:
+        return source, None
+    corrected = re.sub(
+        r'(?m)^#show figure\.where\(kind:\s*"bib"\):[^\n]*\n?', "", corrected
+    )
+    corrected = re.sub(
+        r"(?m)^= References\s*$", "#heading(numbering: none)[参考文献]", corrected
+    )
+    return corrected, AppliedRule(
+        rule_id="tylax-bibliography",
+        description="Convert Tylax bibliography figures to simple numbered entries",
+        replacements=count,
+    )
+
+
 def _without_protected_text(source: str) -> str:
     return _PROTECTED.sub(
         lambda match: "\n" * match.group(0).count("\n"),
@@ -130,9 +286,10 @@ def _without_strings_and_line_comments(source: str) -> str:
 
 def _replace_statement_environments(
     source: str,
+    hints: _HintTracker | None,
 ) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
     pattern = re.compile(
-        r"/\*\s*Begin\s+(?P<kind>df|prop|thm|lem|cor)\s*\*/"
+        r"/\*\s*Begin\s+(?P<kind>df|prop|thm|lem|cor|fact|exam)\s*\*/"
         r"(?P<body>.*?)"
         r"/\*\s*End\s+(?P=kind)\s*\*/",
         re.DOTALL,
@@ -148,8 +305,12 @@ def _replace_statement_environments(
             labels.append(label)
             body = body[label_match.end() :]
             suffix = f" <{label}>"
+        title = None
+        if hints is not None:
+            body, title = hints.apply(match.group("kind"), body)
         function = _STATEMENT_FUNCTIONS[match.group("kind")]
-        return f"#{function}[\n  {body}\n]{suffix}"
+        title_argument = f"(title: [{title}])" if title is not None else ""
+        return f"#{function}{title_argument}[\n  {body}\n]{suffix}"
 
     pieces = _STRING_OR_LINE_COMMENT.split(source)
     count = 0
@@ -164,12 +325,60 @@ def _replace_statement_environments(
         AppliedRule(
             rule_id="statement-environments",
             description=(
-                "Convert paired Tylax definition, proposition, theorem, lemma, and "
-                "corollary markers to dempa-style statement calls"
+                "Convert paired Tylax statement markers to dempa-style statement calls"
             ),
             replacements=count,
         ),
         tuple(labels),
+    )
+
+
+def _replace_flattened_statements(
+    source: str,
+    hints: _HintTracker | None,
+) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
+    """Recover statement structure that Tylax rendered as broken emphasis.
+
+    Tylax discards the boundary between an optional theorem title and its body in this
+    representation. Without verified LaTeX hints, the complete text is retained as the
+    body instead of guessing a title.
+    """
+    pattern = re.compile(
+        r"(?ms)^[ \t]*\*(?P<kind>Fact|Lemma)\s+\d+\.\*[ \t]*_"
+        r"(?P<body>.*?)[ \t]+_[ \t]*$"
+    )
+    kinds: list[str] = []
+
+    def replace(match: re.Match[str]) -> str:
+        kind = match.group("kind")
+        kinds.append(kind)
+        function = _FLATTENED_STATEMENT_FUNCTIONS[kind]
+        body = match.group("body").strip()
+        title = None
+        if hints is not None:
+            body, title = hints.apply("fact" if kind == "Fact" else "lem", body)
+        title_argument = f"(title: [{title}])" if title is not None else ""
+        return f"#{function}{title_argument}[\n  {body}\n]"
+
+    pieces = _STRING_OR_LINE_COMMENT.split(source)
+    count = 0
+    for index in range(0, len(pieces), 2):
+        pieces[index], replacements = pattern.subn(replace, pieces[index])
+        count += replacements
+    corrected = "".join(pieces)
+    if not count:
+        return source, None, ()
+    return (
+        corrected,
+        AppliedRule(
+            rule_id="flattened-statements",
+            description=(
+                "Recover Tylax Fact and Lemma displays as shared-numbered dempa-style "
+                "statements while retaining all title and body text"
+            ),
+            replacements=count,
+        ),
+        tuple(kinds),
     )
 
 
@@ -239,7 +448,7 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
     findings: list[str] = []
     marker_inspectable = _without_strings_and_line_comments(source)
     if re.search(
-        r"/\*\s*(?:Begin|End)\s+(?:df|prop|thm|lem|cor|proof)\s*\*/",
+        r"/\*\s*(?:Begin|End)\s+(?:df|prop|thm|lem|cor|fact|exam|proof)\s*\*/",
         marker_inspectable,
     ):
         findings.append(
@@ -261,6 +470,7 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
             "references without a converted statement target: "
             + ", ".join(state.unresolved_references)
         )
+    findings.extend(state.hint_findings)
     remaining_references = sorted(set(re.findall(rf"@({_LABEL})", inspectable)))
     if remaining_references and not state.unresolved_references:
         findings.append("unsupported references remain: " + ", ".join(remaining_references))
@@ -277,17 +487,36 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
     return tuple(findings)
 
 
-def correct_tylax_source(source: str) -> CorrectionResult:
+def correct_tylax_source(
+    source: str, statement_hints: tuple[StatementHint, ...] | None = None
+) -> CorrectionResult:
     """Return corrected text and a fail-closed report without mutating the input."""
     corrected = source
     applied: list[AppliedRule] = []
+    hint_tracker = _HintTracker(statement_hints) if statement_hints is not None else None
+    if hint_tracker is not None:
+        hint_tracker.validate_sequence(_statement_kind_sequence(source))
     corrected, rule = _replace_latex_neq(corrected)
     if rule is not None:
         applied.append(rule)
     corrected, rule = _remove_tylax_title_separator(corrected)
     if rule is not None:
         applied.append(rule)
-    corrected, rule, labels = _replace_statement_environments(corrected)
+    corrected, rule = _remove_latex_displaystyle_token(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule = _unwrap_fraction_in_absolute_value(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule = _replace_tylax_bibliography(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule, labels = _replace_statement_environments(corrected, hint_tracker)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule, flattened_kinds = _replace_flattened_statements(
+        corrected, hint_tracker
+    )
     if rule is not None:
         applied.append(rule)
     corrected, rule = _replace_proofs(corrected)
@@ -301,20 +530,51 @@ def correct_tylax_source(source: str) -> CorrectionResult:
     if rule is not None:
         applied.append(rule)
     if any(
-        item.rule_id in {"statement-environments", "proof-environments"}
+        item.rule_id in {
+            "statement-environments",
+            "flattened-statements",
+            "proof-environments",
+            "tylax-bibliography",
+        }
         for item in applied
     ):
         corrected = _STYLE_IMPORT + corrected
+    hint_findings = hint_tracker.finish() if hint_tracker is not None else ()
+    if hint_tracker is not None and hint_tracker.applied_titles:
+        applied.append(
+            AppliedRule(
+                rule_id="statement-titles",
+                description=(
+                    "Separate optional statement titles only when they match the read-only LaTeX hints"
+                ),
+                replacements=hint_tracker.applied_titles,
+            )
+        )
     state = _StructureState(
         statement_labels=labels,
         duplicate_labels=duplicate_labels,
         unresolved_references=unresolved_references,
+        flattened_statement_kinds=flattened_kinds,
+        hint_findings=hint_findings,
     )
+    review_findings: list[str] = []
+    if statement_hints is None and any(
+        item.rule_id == "statement-environments" for item in applied
+    ):
+        review_findings.append(
+            "Tylax statement markers do not preserve optional title boundaries; review statement headings"
+        )
+    if statement_hints is None and flattened_kinds:
+        review_findings.append(
+            "Tylax flattened optional statement titles into body text for: "
+            + ", ".join(sorted(set(flattened_kinds)))
+        )
     report = CorrectionReport(
-        schema_version=1,
+        schema_version=2,
         source_sha256=_sha256_text(source),
         output_sha256=_sha256_text(corrected),
         applied_rules=tuple(applied),
         blocking_findings=_blocking_findings(corrected, state),
+        review_findings=tuple(review_findings),
     )
     return CorrectionResult(corrected, report)
