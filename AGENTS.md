@@ -67,6 +67,7 @@ python3 scripts/paper_tool.py finish-change "記事番号" \
 - 実験出力は `_experiments/` に置き、自動公開しない。自動検査と人間による元PDFとの比較を
   通ったものだけ正式な公開候補にする。
 - Tylax出力の補正器とTypst共通スタイルは `packages/dempa-typst-converter/` で育てる。
+  変更前に `packages/dempa-typst-converter/docs/HANDOFF.md` を読み、
   生出力を上書きせず、意味が一意でない補正は成功扱いにしない。このパッケージの例とテストへ
   実原稿をコピーしない。
 - SATySFi変換器は `packages/dempa-satysfi-converter/` にある。変更前に `docs/HANDOFF.md` と
