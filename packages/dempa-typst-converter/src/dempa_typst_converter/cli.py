@@ -11,7 +11,10 @@ from dataclasses import replace
 from pathlib import Path
 
 from dempa_typst_converter.correction import CorrectionResult, correct_tylax_source
-from dempa_typst_converter.latex_hints import extract_statement_hints
+from dempa_typst_converter.latex_hints import (
+    extract_equation_numbering_hint,
+    extract_statement_hints,
+)
 
 
 STYLE_NAME = "dempa-style.typ"
@@ -85,10 +88,13 @@ def main(arguments: list[str] | None = None) -> int:
         return 2
     source = input_path.read_text(encoding="utf-8")
     statement_hints = None
+    equation_numbering_hint = None
     if args.latex_source is not None:
         latex_path = args.latex_source.expanduser().resolve()
-        statement_hints = extract_statement_hints(latex_path.read_text(encoding="utf-8"))
-    result = correct_tylax_source(source, statement_hints)
+        latex_source = latex_path.read_text(encoding="utf-8")
+        statement_hints = extract_statement_hints(latex_source)
+        equation_numbering_hint = extract_equation_numbering_hint(latex_source)
+    result = correct_tylax_source(source, statement_hints, equation_numbering_hint)
     style_output = output_path.parent / STYLE_NAME
     bundled_style = _bundled_style()
     if result.requires_style and style_output.exists():

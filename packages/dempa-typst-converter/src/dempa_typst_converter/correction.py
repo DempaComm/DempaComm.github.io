@@ -7,7 +7,7 @@ import re
 from collections import Counter
 from dataclasses import asdict, dataclass
 
-from dempa_typst_converter.latex_hints import StatementHint
+from dempa_typst_converter.latex_hints import EquationNumberingHint, StatementHint
 
 
 @dataclass(frozen=True)
@@ -55,6 +55,7 @@ class _StructureState:
     unresolved_references: tuple[str, ...] = ()
     flattened_statement_kinds: tuple[str, ...] = ()
     hint_findings: tuple[str, ...] = ()
+    equation_findings: tuple[str, ...] = ()
 
 
 class _HintTracker:
@@ -102,7 +103,7 @@ class _HintTracker:
         return tuple(self.findings)
 
 
-_LABEL = r"[A-Za-z][A-Za-z0-9:_.-]*"
+_LABEL = r"(?:[A-Za-z][A-Za-z0-9:_.-]*|[0-9]+)"
 _PROTECTED = re.compile(r'(/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*")', re.DOTALL)
 _STRING_OR_LINE_COMMENT = re.compile(r'(//[^\n]*|"(?:\\.|[^"\\])*")')
 _STYLE_IMPORT = (
@@ -171,7 +172,7 @@ def _replace_latex_neq(source: str) -> tuple[str, AppliedRule | None]:
 
 def _remove_tylax_title_separator(source: str) -> tuple[str, AppliedRule | None]:
     pattern = re.compile(
-        r"(?m)^[ \t]*\\\*[ \t]+\\\*[ \t]+\\\*[ \t]*\n"
+        r"(?m)^[ \t]*(?:\\\*[ \t]+){1,2}\\\*[ \t]*\n"
         r"(?=[ \t]*\n?[ \t]*/\*\s*\\maketitle\s*\*/)"
     )
     corrected, count = pattern.subn("", source)
@@ -182,6 +183,53 @@ def _remove_tylax_title_separator(source: str) -> tuple[str, AppliedRule | None]
         description=(
             "Remove the standalone escaped-star artifact immediately before Tylax's "
             "maketitle comment"
+        ),
+        replacements=count,
+    )
+
+
+def _replace_tylax_card_operator(source: str) -> tuple[str, AppliedRule | None]:
+    math = re.compile(r"\$(?P<body>.*?)\$", re.DOTALL)
+    count = 0
+
+    def replace_math(match: re.Match[str]) -> str:
+        nonlocal count
+        body, replacements = re.subn(
+            r"#text\[\\rm\s+card\]", 'op("card")', match.group("body")
+        )
+        count += replacements
+        return f"${body}$"
+
+    pieces = _PROTECTED.split(source)
+    for index in range(0, len(pieces), 2):
+        pieces[index] = math.sub(replace_math, pieces[index])
+    corrected = "".join(pieces)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="tylax-card-operator",
+        description=(
+            "Convert Tylax's residual roman card text inside math to a Typst operator"
+        ),
+        replacements=count,
+    )
+
+
+def _remove_tylax_comment_environments(
+    source: str,
+) -> tuple[str, AppliedRule | None]:
+    pattern = re.compile(
+        r"/\*\s*Begin\s+comment\s*\*/.*?/\*\s*End\s+comment\s*\*/",
+        re.DOTALL,
+    )
+    corrected, count = pattern.subn("", source)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="tylax-comment-environments",
+        description=(
+            "Remove content enclosed by paired Tylax markers for a LaTeX comment "
+            "environment"
         ),
         replacements=count,
     )
@@ -208,6 +256,33 @@ def _remove_latex_displaystyle_token(source: str) -> tuple[str, AppliedRule | No
         description="Remove Tylax's residual display token inside Typst math",
         replacements=count,
     )
+
+
+def _apply_equation_numbering_hint(
+    source: str, hint: EquationNumberingHint | None
+) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
+    if hint is None:
+        return source, None, ()
+    if hint.has_numbered_display and hint.has_unnumbered_display:
+        return source, None, (
+            "LaTeX mixes numbered and unnumbered display math; Tylax's global numbering cannot preserve both",
+        )
+    if hint.has_numbered_display:
+        return source, None, ()
+    pattern = re.compile(
+        r'(?m)^#set math\.equation\(numbering:\s*"\(1\)"\)\s*\n?'
+    )
+    corrected, count = pattern.subn("", source)
+    if not count:
+        return source, None, ()
+    return corrected, AppliedRule(
+        rule_id="unnumbered-display-math",
+        description=(
+            "Remove Tylax's global equation numbering when the read-only LaTeX "
+            "source has no numbered display environment"
+        ),
+        replacements=count,
+    ), ()
 
 
 def _unwrap_fraction_in_absolute_value(source: str) -> tuple[str, AppliedRule | None]:
@@ -408,6 +483,34 @@ def _replace_proofs(source: str) -> tuple[str, AppliedRule | None]:
     )
 
 
+def _replace_single_line_legacy_proofs(
+    source: str,
+) -> tuple[str, AppliedRule | None]:
+    pattern = re.compile(
+        r"(?m)^[ \t]*/\*\s*\\proof\s*\*/[ \t]*(?P<body>[^\r\n]+?)[ \t]*$"
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        return f"#proof[\n  {match.group('body').strip()}\n]"
+
+    pieces = _STRING_OR_LINE_COMMENT.split(source)
+    count = 0
+    for index in range(0, len(pieces), 2):
+        pieces[index], replacements = pattern.subn(replace, pieces[index])
+        count += replacements
+    corrected = "".join(pieces)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="single-line-legacy-proofs",
+        description=(
+            "Convert a legacy Tylax proof marker only when its body has an explicit "
+            "single-line boundary"
+        ),
+        replacements=count,
+    )
+
+
 def _replace_statement_references(
     source: str, labels: tuple[str, ...]
 ) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
@@ -454,8 +557,12 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
         findings.append(
             "unpaired or unsupported Tylax statement markers remain"
         )
+    if re.search(r"/\*\s*(?:Begin|End)\s+comment\s*\*/", marker_inspectable):
+        findings.append("unpaired Tylax comment environment marker remains")
+    if re.search(r"/\*\s*\\proof\s*\*/", marker_inspectable):
+        findings.append("a legacy LaTeX proof marker remains without safe boundaries")
     inspectable = _without_protected_text(source)
-    if re.search(rf"(?m)^\s*<{_LABEL}>\s*", inspectable):
+    if re.search(r"(?m)^\s*<[^<>\r\n]+>\s*", inspectable):
         findings.append(
             "raw labels remain outside supported statement elements"
         )
@@ -471,6 +578,7 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
             + ", ".join(state.unresolved_references)
         )
     findings.extend(state.hint_findings)
+    findings.extend(state.equation_findings)
     remaining_references = sorted(set(re.findall(rf"@({_LABEL})", inspectable)))
     if remaining_references and not state.unresolved_references:
         findings.append("unsupported references remain: " + ", ".join(remaining_references))
@@ -488,14 +596,19 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
 
 
 def correct_tylax_source(
-    source: str, statement_hints: tuple[StatementHint, ...] | None = None
+    source: str,
+    statement_hints: tuple[StatementHint, ...] | None = None,
+    equation_numbering_hint: EquationNumberingHint | None = None,
 ) -> CorrectionResult:
     """Return corrected text and a fail-closed report without mutating the input."""
     corrected = source
     applied: list[AppliedRule] = []
     hint_tracker = _HintTracker(statement_hints) if statement_hints is not None else None
+    corrected, rule = _remove_tylax_comment_environments(corrected)
+    if rule is not None:
+        applied.append(rule)
     if hint_tracker is not None:
-        hint_tracker.validate_sequence(_statement_kind_sequence(source))
+        hint_tracker.validate_sequence(_statement_kind_sequence(corrected))
     corrected, rule = _replace_latex_neq(corrected)
     if rule is not None:
         applied.append(rule)
@@ -503,6 +616,11 @@ def correct_tylax_source(
     if rule is not None:
         applied.append(rule)
     corrected, rule = _remove_latex_displaystyle_token(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule, equation_findings = _apply_equation_numbering_hint(
+        corrected, equation_numbering_hint
+    )
     if rule is not None:
         applied.append(rule)
     corrected, rule = _unwrap_fraction_in_absolute_value(corrected)
@@ -522,6 +640,9 @@ def correct_tylax_source(
     corrected, rule = _replace_proofs(corrected)
     if rule is not None:
         applied.append(rule)
+    corrected, rule = _replace_single_line_legacy_proofs(corrected)
+    if rule is not None:
+        applied.append(rule)
     counts = Counter(labels)
     duplicate_labels = tuple(sorted(label for label, count in counts.items() if count > 1))
     corrected, rule, unresolved_references = _replace_statement_references(
@@ -529,11 +650,15 @@ def correct_tylax_source(
     )
     if rule is not None:
         applied.append(rule)
+    corrected, rule = _replace_tylax_card_operator(corrected)
+    if rule is not None:
+        applied.append(rule)
     if any(
         item.rule_id in {
             "statement-environments",
             "flattened-statements",
             "proof-environments",
+            "single-line-legacy-proofs",
             "tylax-bibliography",
         }
         for item in applied
@@ -556,6 +681,7 @@ def correct_tylax_source(
         unresolved_references=unresolved_references,
         flattened_statement_kinds=flattened_kinds,
         hint_findings=hint_findings,
+        equation_findings=equation_findings,
     )
     review_findings: list[str] = []
     if statement_hints is None and any(

@@ -16,7 +16,9 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from dempa_typst_converter.correction import correct_tylax_source  # noqa: E402
 from dempa_typst_converter.cli import main  # noqa: E402
 from dempa_typst_converter.latex_hints import (  # noqa: E402
+    EquationNumberingHint,
     StatementHint,
+    extract_equation_numbering_hint,
     extract_statement_hints,
 )
 
@@ -43,6 +45,29 @@ class CorrectionTest(unittest.TestCase):
             "references without a converted statement target: missing",
             result.report.blocking_findings,
         )
+
+    def test_numeric_statement_labels_and_references_are_converted(self) -> None:
+        raw = """/* Begin prop */
+<1> 一つ目．
+/* End prop */
+/* Begin thm */
+<2> 命題 @1 を使う．
+/* End thm */
+"""
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("] <1>", result.source)
+        self.assertIn("] <2>", result.source)
+        self.assertIn("#ref(<1>, supplement: none)", result.source)
+
+    def test_mixed_digit_first_label_remains_unsupported(self) -> None:
+        raw = "/* Begin prop */\n<1abc> 本文．\n/* End prop */\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
 
     def test_previous_trial_structure_is_converted_without_fixed_numbers(self) -> None:
         raw = """前文． /* Begin df */
@@ -175,6 +200,77 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             extract_statement_hints(latex),
         )
 
+    def test_equation_hint_classifies_numbered_and_unnumbered_displays(self) -> None:
+        latex = r"""
+\[x=1\]
+\begin{equation}y=2\end{equation}
+\end{document}
+\begin{equation}ignored=3\end{equation}
+"""
+
+        self.assertEqual(
+            EquationNumberingHint(True, True),
+            extract_equation_numbering_hint(latex),
+        )
+
+    def test_global_numbering_is_removed_for_unnumbered_latex_displays(self) -> None:
+        raw = '#set math.equation(numbering: "(1)")\n$ x = 1 $\n'
+
+        result = correct_tylax_source(
+            raw,
+            equation_numbering_hint=EquationNumberingHint(False, True),
+        )
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertNotIn("math.equation(numbering", result.source)
+        self.assertEqual("unnumbered-display-math", result.report.applied_rules[0].rule_id)
+
+    def test_mixed_latex_equation_numbering_fails_closed(self) -> None:
+        raw = '#set math.equation(numbering: "(1)")\n$ x = 1 $\n'
+
+        result = correct_tylax_source(
+            raw,
+            equation_numbering_hint=EquationNumberingHint(True, True),
+        )
+
+        self.assertFalse(result.safe_to_write)
+        self.assertTrue(
+            any(
+                finding.startswith("LaTeX mixes numbered and unnumbered display math")
+                for finding in result.report.blocking_findings
+            )
+        )
+
+    def test_paired_tylax_comment_environment_is_removed_before_hint_matching(self) -> None:
+        raw = """/* Begin prop */
+本文．
+/* End prop */
+/* Begin comment */
+/* Begin thm */
+文書外．
+/* End thm */
+/* End comment */
+"""
+        hints = (StatementHint("prop", None),)
+
+        result = correct_tylax_source(raw, hints)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#proposition[", result.source)
+        self.assertNotIn("文書外", result.source)
+        self.assertEqual(
+            "tylax-comment-environments", result.report.applied_rules[0].rule_id
+        )
+
+    def test_unpaired_tylax_comment_environment_fails_closed(self) -> None:
+        result = correct_tylax_source("/* Begin comment */\n文書外．\n")
+
+        self.assertFalse(result.safe_to_write)
+        self.assertIn(
+            "unpaired Tylax comment environment marker remains",
+            result.report.blocking_findings,
+        )
+
     def test_fact_and_example_markers_use_shared_style(self) -> None:
         raw = """/* Begin fact */
 事実本文．
@@ -264,6 +360,18 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
         self.assertEqual('display text\n"$display x$"\n$1/f$\n', result.source)
         self.assertTrue(result.safe_to_write)
 
+    def test_tylax_card_text_is_converted_only_inside_math(self) -> None:
+        raw = '#text[\\rm card] text\n$#text[\\rm card](X)$\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertEqual('#text[\\rm card] text\n$op("card")(X)$\n', result.source)
+        self.assertFalse(result.safe_to_write)
+        self.assertIn(
+            "unsupported LaTeX commands remain: \\rm",
+            result.report.blocking_findings,
+        )
+
     def test_fraction_inside_absolute_value_does_not_render_as_set(self) -> None:
         raw = '$ abs({frac(1, f(a))}) < abs({frac(1, f(b))}) $\n'
 
@@ -299,6 +407,29 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
         self.assertTrue(result.safe_to_write)
         self.assertNotIn("\\* \\* \\*", result.source)
         self.assertEqual("tylax-title-separator", result.report.applied_rules[0].rule_id)
+
+    def test_two_star_title_separator_is_removed_before_maketitle_comment(self) -> None:
+        raw = "\\* \\*\n\n/* \\maketitle */本文\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write)
+        self.assertNotIn("\\* \\*", result.source)
+
+    def test_single_line_legacy_proof_is_recovered(self) -> None:
+        result = correct_tylax_source(" /* \\proof */明らか．\n")
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#proof[\n  明らか．\n]", result.source)
+
+    def test_legacy_proof_without_single_line_body_fails_closed(self) -> None:
+        result = correct_tylax_source("/* \\proof */\n複数行の本文．\n")
+
+        self.assertFalse(result.safe_to_write)
+        self.assertIn(
+            "a legacy LaTeX proof marker remains without safe boundaries",
+            result.report.blocking_findings,
+        )
 
     def test_standalone_stars_elsewhere_are_preserved(self) -> None:
         raw = "本文\n\\* \\* \\*\n次の本文\n"
