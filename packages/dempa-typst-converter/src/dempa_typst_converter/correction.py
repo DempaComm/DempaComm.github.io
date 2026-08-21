@@ -18,6 +18,16 @@ class AppliedRule:
 
 
 @dataclass(frozen=True)
+class Diagnostic:
+    code: str
+    message: str
+    token: str
+    line: int
+    column: int
+    source: str = "input"
+
+
+@dataclass(frozen=True)
 class CorrectionReport:
     schema_version: int
     source_sha256: str
@@ -25,12 +35,14 @@ class CorrectionReport:
     applied_rules: tuple[AppliedRule, ...]
     blocking_findings: tuple[str, ...]
     review_findings: tuple[str, ...] = ()
+    diagnostics: tuple[Diagnostic, ...] = ()
     manual_review_required: bool = True
     publishable: bool = False
 
     def to_dict(self) -> dict:
         value = asdict(self)
         value["applied_rules"] = [asdict(rule) for rule in self.applied_rules]
+        value["diagnostics"] = [asdict(item) for item in self.diagnostics]
         return value
 
 
@@ -357,6 +369,149 @@ def _without_strings_and_line_comments(source: str) -> str:
         lambda match: "\n" * match.group(0).count("\n"),
         source,
     )
+
+
+def _mask_matches(source: str, pattern: re.Pattern[str]) -> str:
+    return pattern.sub(
+        lambda match: "".join("\n" if char == "\n" else " " for char in match.group(0)),
+        source,
+    )
+
+
+def _line_column(source: str, index: int) -> tuple[int, int]:
+    line = source.count("\n", 0, index) + 1
+    previous_newline = source.rfind("\n", 0, index)
+    return line, index - previous_newline
+
+
+def _diagnostics(
+    input_source: str, corrected_source: str, state: _StructureState
+) -> tuple[Diagnostic, ...]:
+    input_inspectable = _mask_matches(input_source, _PROTECTED)
+    input_with_markers = _mask_matches(input_source, _STRING_OR_LINE_COMMENT)
+    corrected_inspectable = _without_protected_text(corrected_source)
+    corrected_with_markers = _without_strings_and_line_comments(corrected_source)
+    pending: list[tuple[str, str, str, re.Pattern[str], str]] = []
+
+    marker_patterns = (
+        (
+            "statement-marker",
+            "Unpaired or unsupported Tylax statement marker",
+            re.compile(
+                r"/\*\s*(?:Begin|End)\s+(?:df|prop|thm|lem|cor|fact|exam|proof)\s*\*/"
+            ),
+        ),
+        (
+            "comment-marker",
+            "Unpaired Tylax comment environment marker",
+            re.compile(r"/\*\s*(?:Begin|End)\s+comment\s*\*/"),
+        ),
+        (
+            "legacy-proof-marker",
+            "Legacy LaTeX proof marker without safe boundaries",
+            re.compile(r"/\*\s*\\proof\s*\*/"),
+        ),
+    )
+    for code, message, pattern in marker_patterns:
+        remaining = {match.group(0) for match in pattern.finditer(corrected_with_markers)}
+        for token in remaining:
+            pending.append((code, message, token, re.compile(re.escape(token)), "markers"))
+
+    raw_labels = {
+        match.group(0).strip()
+        for match in re.finditer(r"(?m)^\s*<[^<>\r\n]+>\s*", corrected_inspectable)
+    }
+    for token in raw_labels:
+        pending.append(
+            (
+                "raw-label",
+                "Raw label remains outside a supported statement",
+                token,
+                re.compile(re.escape(token)),
+                "inspectable",
+            )
+        )
+
+    if "_Proof._" in corrected_inspectable:
+        pending.append(
+            (
+                "proof-boundary",
+                "Proof remains without the supported explicit square end marker",
+                "_Proof._",
+                re.compile(re.escape("_Proof._")),
+                "inspectable",
+            )
+        )
+
+    for label in state.duplicate_labels:
+        token = f"<{label}>"
+        pending.append(
+            (
+                "duplicate-label",
+                f"Duplicate statement label: {label}",
+                token,
+                re.compile(re.escape(token)),
+                "inspectable",
+            )
+        )
+    for label in state.unresolved_references:
+        token = f"@{label}"
+        pending.append(
+            (
+                "unresolved-reference",
+                f"Reference has no converted statement target: {label}",
+                token,
+                re.compile(re.escape(token)),
+                "inspectable",
+            )
+        )
+
+    residual_commands = sorted(set(re.findall(r"\\[A-Za-z@]+", corrected_inspectable)))
+    for token in residual_commands:
+        pending.append(
+            (
+                "unsupported-latex-command",
+                f"Unsupported LaTeX command remains: {token}",
+                token,
+                re.compile(re.escape(token)),
+                "inspectable",
+            )
+        )
+    residual_symbols = sorted(set(re.findall(r"\\[^A-Za-z@\s]", corrected_inspectable)))
+    for token in residual_symbols:
+        pending.append(
+            (
+                "unsupported-escaped-symbol",
+                f"Unsupported escaped symbol remains: {token}",
+                token,
+                re.compile(re.escape(token)),
+                "inspectable",
+            )
+        )
+
+    found: list[tuple[int, Diagnostic]] = []
+    seen: set[tuple[str, int, str]] = set()
+    for code, message, token, pattern, source_kind in pending:
+        searchable = input_with_markers if source_kind == "markers" else input_inspectable
+        for match in pattern.finditer(searchable):
+            key = (code, match.start(), token)
+            if key in seen:
+                continue
+            seen.add(key)
+            line, column = _line_column(input_source, match.start())
+            found.append(
+                (
+                    match.start(),
+                    Diagnostic(
+                        code=code,
+                        message=message,
+                        token=token,
+                        line=line,
+                        column=column,
+                    ),
+                )
+            )
+    return tuple(item for _, item in sorted(found, key=lambda pair: pair[0]))
 
 
 def _replace_statement_environments(
@@ -702,5 +857,6 @@ def correct_tylax_source(
         applied_rules=tuple(applied),
         blocking_findings=_blocking_findings(corrected, state),
         review_findings=tuple(review_findings),
+        diagnostics=_diagnostics(source, corrected, state),
     )
     return CorrectionResult(corrected, report)

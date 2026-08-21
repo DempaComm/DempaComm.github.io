@@ -111,6 +111,11 @@ def main(arguments: list[str] | None = None) -> int:
     if not result.safe_to_write:
         for finding in result.report.blocking_findings:
             print(f"BLOCKED: {finding}")
+        for diagnostic in result.report.diagnostics:
+            print(
+                f"AT {diagnostic.source}:{diagnostic.line}:{diagnostic.column} "
+                f"[{diagnostic.code}] {diagnostic.message}"
+            )
         print(f"REPORT: {report_path}")
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)

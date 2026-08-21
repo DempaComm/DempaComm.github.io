@@ -48,6 +48,7 @@ dempa-typst-correct work/tylax.raw.typ \
 - 生出力と補正版のSHA-256
 - 適用した規則と置換回数
 - 未対応構造と停止理由
+- 未対応命令、残存ラベル、未解決参照、境界マーカーの入力行・列と診断コード
 - Tylaxが失った任意題名境界など、人が確認すべき事項
 - `manual_review_required: true`
 - `publishable: false`

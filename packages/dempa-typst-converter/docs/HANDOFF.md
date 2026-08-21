@@ -18,8 +18,8 @@
 7. [`../../../docs/TODO.md`](../../../docs/TODO.md)
 
 作業開始時に `git status --short --branch` を実行し、利用者の変更を消さない。引き継ぎ文書を
-追加した時点の作業ブランチは `codex/typst-handoff` である。最新状態は必ずGitとGitHubで
-再確認し、古いローカル `main` を前提にしない。
+診断位置改善の作業ブランチは `codex/typst-diagnostic-locations` である。最新状態は必ずGitと
+GitHubで再確認し、古いローカル `main` を前提にしない。
 
 ## 現在の到達点
 
@@ -48,6 +48,10 @@ Tylax本文先頭の題名が完全一致した場合だけ題名を分離する
 CLIはTypstが導入済みなら、補正版を書き出す前に一時領域で実コンパイルする。Typstがない
 環境では検査省略を要目視事項としてJSONへ記録する。テストはTypstの有無に依存しないよう
 模擬してあり、GitHub Actionsでも成功する。
+
+JSON報告は従来の `blocking_findings` を維持し、追加の `diagnostics` 配列へ生のTylax入力を
+基準とする1始まりの行・列、診断コード、対象トークンを記録する。CLIも停止時に同じ位置を
+`AT input:行:列` として表示する。
 
 ## 確認済み事例
 
@@ -94,6 +98,12 @@ CLIはTypstが導入済みなら、補正版を書き出す前に一時領域で
   - マージコミット: `bd412fc`
 - PR #3マージ後のGitHub Actions:
   - https://github.com/DempaComm/DempaComm.github.io/actions/runs/32473913627
+  - `build` と `deploy` はともに成功した。
+- PR #4: `Typst変換器で順序数原稿の安全な補正に対応`
+  - https://github.com/DempaComm/DempaComm.github.io/pull/4
+  - マージコミット: `e427f19`
+- PR #4マージ後のGitHub Actions:
+  - https://github.com/DempaComm/DempaComm.github.io/actions/runs/32477252393
   - `build` と `deploy` はともに成功した。
 
 この記録は2026-08-21時点である。次の作業時にはGitHub上の現状を再確認する。
@@ -146,7 +156,7 @@ cd ../..
 python3 scripts/paper_tool.py check-all
 ```
 
-2026-08-21時点ではパッケージ単体テスト38件、リポジトリ連携テスト3件、`check-all` 全5項目が
+2026-08-21時点ではパッケージ単体テスト42件、リポジトリ連携テスト3件、`check-all` 全5項目が
 成功している。GitHub ActionsにTypstがない場合、実コンパイル連携テスト1件が意図どおり
 スキップされるが、模擬した構文失敗・Typst不在の単体テストは実行される。
 
@@ -154,7 +164,6 @@ python3 scripts/paper_tool.py check-all
 
 ## 未完了事項
 
-- 診断位置を行・列付きで報告する機能。
 - 証明終端記号がない原稿の安全な構造解析。
 - 番号方式が混在する表示数式の安全な構造解析。
 - 複数原稿で再現した補正だけを安定APIへ昇格する判断。
