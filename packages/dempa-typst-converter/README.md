@@ -8,14 +8,21 @@ Tylaxが生成したTypstソースに、意味が一意に決まる補正だけ�
 
 ## 現在の状態
 
-バージョン `0.2.0a0` の実験段階である。文字列・コメント外に残った
+バージョン `0.3.0a0` の実験段階である。文字列・コメント外に残った
 `識別子\neq識別子` に加え、対応する開始・終了マーカーを持つ定義・命題・定理・補題・系、
-先頭ラベル、変換済みラベルへの参照、明示的な終端記号を持つ証明を変換する。境界が欠けた
-環境、重複ラベル、未解決参照、未対応LaTeX命令は推測で直さず停止する。
+事実・例、先頭ラベル、変換済みラベルへの参照、明示的な終端記号を持つ証明を変換する。
+Tylaxが英語の固定表示へ潰した `Fact` と `Lemma`、残存した `display`、手書き参考文献の
+図扱いも補正する。境界が欠けた環境、重複ラベル、未解決参照、未対応LaTeX命令は推測で
+直さず停止する。
 
 - 生のTylax出力は書き換えない。
 - 入力・補正版・報告に同じパスを指定できず、既存の出力も上書きしない。
 - 補正内容と停止理由をJSONへ記録する。
+- Typstが導入済みなら、出力前に一時領域で実コンパイルして構文エラーを停止理由へ加える。
+- 元TeXを `--latex-source` で読み取り専用の手掛かりとして渡した場合だけ、環境種別・順序・
+  題名先頭がすべて一致する任意題名を本文から分離する。不一致なら停止する。
+- 元TeXを渡さない場合、Tylaxが失った任意題名と本文の境界は推測せず、要目視事項として
+  JSONへ記録する。
 - 生成結果は常に人間による確認を必要とする。
 - このツール単独で公開承認は行わない。
 
@@ -43,6 +50,7 @@ dempa-typst-converter/
 python3 -m pip install -e .
 t2l input.tex -o work/tylax.raw.typ
 dempa-typst-correct work/tylax.raw.typ \
+  --latex-source input.tex \
   --output work/main.typ \
   --report work/correction-report.json
 typst compile work/main.typ work/main.pdf
@@ -55,8 +63,9 @@ typst compile work/main.typ work/main.pdf
 
 ## Typstスタイル
 
-`dempa-style.typ` は、A4、日本語本文、タイトル、共通番号を使う定義・命題・定理、証明表示を
-提供する。変換器はラベルを番号付き要素へ付け、Tylaxの番号参照をTypstの番号参照へ変える。
+`dempa-style.typ` は、A4、日本語本文、タイトル、共通番号を使う定義・命題・定理・事実・例、
+証明、参考文献表示を提供する。変換器はラベルを番号付き要素へ付け、Tylaxの番号参照を
+Typstの番号参照へ変える。
 
 ```typst
 #import "path/to/dempa-style.typ": *

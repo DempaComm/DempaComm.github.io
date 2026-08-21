@@ -20,9 +20,15 @@ t2l input.tex -o work/tylax.raw.typ
 
 ```sh
 dempa-typst-correct work/tylax.raw.typ \
+  --latex-source input.tex \
   --output work/main.typ \
   --report work/correction-report.json
 ```
+
+`--latex-source` は元TeXを読み取り専用の手掛かりとして使う。定理等の環境種別と出現順が
+一致し、Tylax本文の先頭が元TeXの任意題名と完全一致する場合だけ、題名を本文から分離する。
+一致しない場合は推測せず停止する。指定しない場合は全テキストを本文として保持し、題名境界を
+要目視事項へ記録する。
 
 補正可能な場合は `main.typ` と報告を生成する。定理構造を変換した場合は、同じフォルダへ
 `dempa-style.typ` も生成し、`main.typ` から読み込む。意味の判断を必要とする構造が残る場合は、
@@ -30,11 +36,16 @@ dempa-typst-correct work/tylax.raw.typ \
 入力・補正版・報告には別々のパスを指定する。補正版または報告が既に存在する場合も、
 意図しない上書きを避けるため停止する。
 
+ローカルにTypstがある場合、補正器は `main.typ` を書く前に一時領域でコンパイルする。
+構文エラーがあれば報告だけを保存して終了コード `2` で停止する。Typstがない場合は検査を
+省略したことを要目視事項へ記録する。
+
 報告には次を記録する。
 
 - 生出力と補正版のSHA-256
 - 適用した規則と置換回数
 - 未対応構造と停止理由
+- Tylaxが失った任意題名境界など、人が確認すべき事項
 - `manual_review_required: true`
 - `publishable: false`
 
