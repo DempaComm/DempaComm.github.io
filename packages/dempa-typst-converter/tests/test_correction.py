@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import subprocess
 import sys
 import tempfile
 import unittest
 from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
+from unittest.mock import patch
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -419,7 +421,23 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             report = root / "report.json"
             raw.write_text("#this-function-does-not-exist[]\n", encoding="utf-8")
 
-            with redirect_stdout(StringIO()):
+            failed_compile = subprocess.CompletedProcess(
+                args=["typst", "compile"],
+                returncode=1,
+                stdout="",
+                stderr="error: unknown variable\n",
+            )
+            with (
+                patch(
+                    "dempa_typst_converter.cli.shutil.which",
+                    return_value="/usr/bin/typst",
+                ),
+                patch(
+                    "dempa_typst_converter.cli.subprocess.run",
+                    return_value=failed_compile,
+                ),
+                redirect_stdout(StringIO()),
+            ):
                 code = main(
                     [
                         str(raw),
@@ -434,6 +452,35 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             self.assertFalse(output.exists())
             self.assertIn(
                 "Typst syntax validation failed",
+                report.read_text(encoding="utf-8"),
+            )
+
+    def test_cli_records_when_typst_validation_is_unavailable(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            raw = root / "raw.typ"
+            output = root / "main.typ"
+            report = root / "report.json"
+            raw.write_text("本文．\n", encoding="utf-8")
+
+            with (
+                patch("dempa_typst_converter.cli.shutil.which", return_value=None),
+                redirect_stdout(StringIO()),
+            ):
+                code = main(
+                    [
+                        str(raw),
+                        "--output",
+                        str(output),
+                        "--report",
+                        str(report),
+                    ]
+                )
+
+            self.assertEqual(0, code)
+            self.assertTrue(output.is_file())
+            self.assertIn(
+                "Typst executable not found; syntax validation was skipped",
                 report.read_text(encoding="utf-8"),
             )
 
