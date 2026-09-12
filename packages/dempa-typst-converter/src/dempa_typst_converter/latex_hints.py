@@ -18,6 +18,11 @@ class EquationNumberingHint:
     has_unnumbered_display: bool
 
 
+@dataclass(frozen=True)
+class DescriptionItemHint:
+    text_fragments: tuple[str, ...]
+
+
 _KINDS = {
     "df": "df",
     "prop": "prop",
@@ -68,3 +73,40 @@ def extract_equation_numbering_hint(source: str) -> EquationNumberingHint:
         has_numbered_display=numbered is not None,
         has_unnumbered_display=unnumbered is not None,
     )
+
+
+def extract_description_item_hints(
+    source: str,
+) -> tuple[DescriptionItemHint, ...]:
+    """Read verifiable description labels with an explicit empty line break."""
+    document = _document_content(source)
+    environments = re.finditer(
+        r"\\begin\{description\}(?P<body>.*?)\\end\{description\}",
+        document,
+        flags=re.DOTALL,
+    )
+    hints: list[DescriptionItemHint] = []
+    for environment in environments:
+        body = environment.group("body")
+        starts = list(re.finditer(r"\\item\b", body))
+        for index, start in enumerate(starts):
+            end = starts[index + 1].start() if index + 1 < len(starts) else len(body)
+            item = body[start.start() : end]
+            match = re.match(
+                r"\\item\s*\[(?P<label>.*?)\]\s*\\mbox\{\}\s*\\\\",
+                item,
+                flags=re.DOTALL,
+            )
+            if match is None:
+                hints.append(DescriptionItemHint(()))
+                continue
+            fragments = tuple(
+                normalized
+                for part in re.split(r"\$.*?\$", match.group("label"), flags=re.DOTALL)
+                if (normalized := re.sub(r"\s+", " ", part).strip())
+            )
+            if not fragments or any(re.search(r"[\\{}]", part) for part in fragments):
+                hints.append(DescriptionItemHint(()))
+            else:
+                hints.append(DescriptionItemHint(fragments))
+    return tuple(hints)

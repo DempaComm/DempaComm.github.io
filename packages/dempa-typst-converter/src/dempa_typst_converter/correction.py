@@ -7,7 +7,11 @@ import re
 from collections import Counter
 from dataclasses import asdict, dataclass
 
-from dempa_typst_converter.latex_hints import EquationNumberingHint, StatementHint
+from dempa_typst_converter.latex_hints import (
+    DescriptionItemHint,
+    EquationNumberingHint,
+    StatementHint,
+)
 
 
 @dataclass(frozen=True)
@@ -68,6 +72,9 @@ class _StructureState:
     flattened_statement_kinds: tuple[str, ...] = ()
     hint_findings: tuple[str, ...] = ()
     equation_findings: tuple[str, ...] = ()
+    description_findings: tuple[str, ...] = ()
+    proof_findings: tuple[str, ...] = ()
+    proof_boundary_positions: tuple[int, ...] = ()
 
 
 class _HintTracker:
@@ -116,8 +123,25 @@ class _HintTracker:
 
 
 _LABEL = r"(?:[A-Za-z][A-Za-z0-9:_.-]*|[0-9]+)"
-_PROTECTED = re.compile(r'(/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*")', re.DOTALL)
-_STRING_OR_LINE_COMMENT = re.compile(r'(//[^\n]*|"(?:\\.|[^"\\])*")')
+_PROTECTED = re.compile(
+    r'(/\*.*?\*/|(?<!:)//[^\n]*|"(?:\\.|[^"\\])*")', re.DOTALL
+)
+_STRING_OR_LINE_COMMENT = re.compile(
+    r'((?<!:)//[^\n]*|"(?:\\.|[^"\\])*")'
+)
+_TYLAX_COMMENT_ENVIRONMENT = re.compile(
+    r"/\*\s*Begin\s+comment\s*\*/.*?/\*\s*End\s+comment\s*\*/",
+    re.DOTALL,
+)
+_TYLAX_COMMENT_MARKER = re.compile(
+    r"/\*\s*(?:Begin|End)\s+comment\s*\*/"
+)
+_DESCRIPTION_ITEM = re.compile(
+    r"(?m)^(?P<indent>[ \t]*)/[ \t]+(?P<label>.*?)"
+    + "\0\0"
+    + r"\\[ \t]+"
+    r"(?P<body>[^\r\n]*)$"
+)
 _STYLE_IMPORT = (
     '#import "dempa-style.typ": definition, proposition, theorem, lemma, '
     "corollary, fact, example, proof, bibliography-entry\n\n"
@@ -227,16 +251,54 @@ def _replace_tylax_card_operator(source: str) -> tuple[str, AppliedRule | None]:
     )
 
 
+def _replace_tylax_domain_operators(
+    source: str,
+) -> tuple[str, AppliedRule | None]:
+    math = re.compile(r"\$(?P<body>.*?)\$", re.DOTALL)
+    operator = re.compile(r"#text\[\\rm\s+(?P<name>dom|cod)\]")
+    count = 0
+
+    def replace_math(match: re.Match[str]) -> str:
+        nonlocal count
+
+        def replace_operator(operator_match: re.Match[str]) -> str:
+            nonlocal count
+            count += 1
+            name = operator_match.group("name")
+            return f'op("{name}")'
+
+        return f"${operator.sub(replace_operator, match.group('body'))}$"
+
+    pieces = _PROTECTED.split(source)
+    for index in range(0, len(pieces), 2):
+        pieces[index] = math.sub(replace_math, pieces[index])
+    corrected = "".join(pieces)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="tylax-domain-operators",
+        description=(
+            "Convert Tylax's residual roman dom and cod text inside math to "
+            "Typst operators"
+        ),
+        replacements=count,
+    )
+
+
 def _remove_tylax_comment_environments(
     source: str,
 ) -> tuple[str, AppliedRule | None]:
-    pattern = re.compile(
-        r"/\*\s*Begin\s+comment\s*\*/.*?/\*\s*End\s+comment\s*\*/",
-        re.DOTALL,
-    )
-    corrected, count = pattern.subn("", source)
+    spans = _tylax_comment_environment_spans(source)
+    count = len(spans)
     if not count:
         return source, None
+    pieces: list[str] = []
+    cursor = 0
+    for start, end in spans:
+        pieces.append(source[cursor:start])
+        cursor = end
+    pieces.append(source[cursor:])
+    corrected = "".join(pieces)
     return corrected, AppliedRule(
         rule_id="tylax-comment-environments",
         description=(
@@ -295,6 +357,77 @@ def _apply_equation_numbering_hint(
         ),
         replacements=count,
     ), ()
+
+
+def _description_label_matches(
+    label: str, hint: DescriptionItemHint
+) -> bool:
+    normalized = re.sub(r"\s+", " ", label).strip()
+    fragments = hint.text_fragments
+    if not fragments or not normalized.startswith(fragments[0]):
+        return False
+    cursor = 0
+    for fragment in fragments:
+        position = normalized.find(fragment, cursor)
+        if position == -1:
+            return False
+        cursor = position + len(fragment)
+    return normalized.endswith(fragments[-1])
+
+
+def _replace_description_items(
+    source: str,
+    hints: tuple[DescriptionItemHint, ...] | None,
+) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
+    inspectable = _mask_typst_protected_regions(source)
+    matches = list(_DESCRIPTION_ITEM.finditer(inspectable))
+    if not matches:
+        return source, None, ()
+    if hints is None:
+        return source, None, (
+            "Tylax description item boundaries require read-only LaTeX hints",
+        )
+    if len(matches) != len(hints):
+        return source, None, (
+            "LaTeX and Tylax description item counts differ: "
+            f"expected {len(hints)}, observed {len(matches)}",
+        )
+    if any(not hint.text_fragments for hint in hints):
+        return source, None, (
+            "a LaTeX description item lacks a safely verifiable label boundary",
+        )
+    for match, hint in zip(matches, hints, strict=True):
+        label_start, label_end = match.span("label")
+        if not _description_label_matches(source[label_start:label_end], hint):
+            return source, None, (
+                "a LaTeX description label does not match Tylax output",
+            )
+
+    pieces: list[str] = []
+    cursor = 0
+    for match in matches:
+        label_start, label_end = match.span("label")
+        body_start, body_end = match.span("body")
+        indent = match.group("indent")
+        pieces.append(source[cursor : match.start()])
+        pieces.append(
+            f"{indent}/ {source[label_start:label_end].rstrip()}:\n"
+            f"{indent}  {source[body_start:body_end].lstrip()}"
+        )
+        cursor = match.end()
+    pieces.append(source[cursor:])
+    return (
+        "".join(pieces),
+        AppliedRule(
+            rule_id="description-items",
+            description=(
+                "Restore Tylax description item boundaries only when read-only "
+                "LaTeX labels match"
+            ),
+            replacements=len(matches),
+        ),
+        (),
+    )
 
 
 def _unwrap_fraction_in_absolute_value(source: str) -> tuple[str, AppliedRule | None]:
@@ -378,6 +511,98 @@ def _mask_matches(source: str, pattern: re.Pattern[str]) -> str:
     )
 
 
+def _mask_spans_with_nuls(
+    source: str, spans: tuple[tuple[int, int], ...]
+) -> str:
+    """Mask spans while retaining offsets and preventing cross-span joins."""
+    masked = list(source)
+    for start, end in spans:
+        for index in range(start, end):
+            if masked[index] != "\n":
+                masked[index] = "\0"
+    return "".join(masked)
+
+
+def _mask_typst_protected_regions(
+    source: str, *, preserve_comment_markers: bool = False
+) -> str:
+    """Mask strings and nested comments without creating matchable whitespace."""
+    masked = list(source)
+
+    def hide(start: int, end: int) -> None:
+        for index in range(start, end):
+            if masked[index] != "\n":
+                masked[index] = "\0"
+
+    index = 0
+    while index < len(source):
+        if source.startswith("//", index) and (
+            index == 0 or source[index - 1] != ":"
+        ):
+            start = index
+            newline = source.find("\n", index + 2)
+            index = len(source) if newline == -1 else newline
+            hide(start, index)
+            continue
+        if source.startswith("/*", index):
+            start = index
+            depth = 1
+            index += 2
+            while index < len(source) and depth:
+                if source.startswith("/*", index):
+                    depth += 1
+                    index += 2
+                elif source.startswith("*/", index):
+                    depth -= 1
+                    index += 2
+                else:
+                    index += 1
+            is_top_level_comment_marker = (
+                depth == 0
+                and _TYLAX_COMMENT_MARKER.fullmatch(source[start:index]) is not None
+            )
+            if not (preserve_comment_markers and is_top_level_comment_marker):
+                hide(start, index)
+            continue
+        if source[index] == '"':
+            start = index
+            index += 1
+            while index < len(source):
+                if source[index] == "\\":
+                    index = min(index + 2, len(source))
+                elif source[index] == '"':
+                    index += 1
+                    break
+                else:
+                    index += 1
+            hide(start, index)
+            continue
+        index += 1
+    return "".join(masked)
+
+
+def _tylax_comment_environment_spans(
+    source: str,
+) -> tuple[tuple[int, int], ...]:
+    inspectable = _mask_typst_protected_regions(
+        source, preserve_comment_markers=True
+    )
+    return tuple(
+        match.span() for match in _TYLAX_COMMENT_ENVIRONMENT.finditer(inspectable)
+    )
+
+
+def _proof_input_positions(source: str) -> tuple[int, ...]:
+    """Locate proof starts in the input that survive comment-environment removal."""
+    without_comment_environments = _mask_spans_with_nuls(
+        source, _tylax_comment_environment_spans(source)
+    )
+    inspectable = _mask_typst_protected_regions(without_comment_environments)
+    return tuple(
+        match.start() for match in re.finditer(re.escape("_Proof._"), inspectable)
+    )
+
+
 def _line_column(source: str, index: int) -> tuple[int, int]:
     line = source.count("\n", 0, index) + 1
     previous_newline = source.rfind("\n", 0, index)
@@ -387,10 +612,16 @@ def _line_column(source: str, index: int) -> tuple[int, int]:
 def _diagnostics(
     input_source: str, corrected_source: str, state: _StructureState
 ) -> tuple[Diagnostic, ...]:
-    input_inspectable = _mask_matches(input_source, _PROTECTED)
+    input_inspectable = _mask_typst_protected_regions(input_source)
     input_with_markers = _mask_matches(input_source, _STRING_OR_LINE_COMMENT)
-    corrected_inspectable = _without_protected_text(corrected_source)
+    input_comment_markers = _mask_typst_protected_regions(
+        input_source, preserve_comment_markers=True
+    )
+    corrected_inspectable = _mask_typst_protected_regions(corrected_source)
     corrected_with_markers = _without_strings_and_line_comments(corrected_source)
+    corrected_comment_markers = _mask_typst_protected_regions(
+        corrected_source, preserve_comment_markers=True
+    )
     pending: list[tuple[str, str, str, re.Pattern[str], str]] = []
 
     marker_patterns = (
@@ -413,9 +644,17 @@ def _diagnostics(
         ),
     )
     for code, message, pattern in marker_patterns:
-        remaining = {match.group(0) for match in pattern.finditer(corrected_with_markers)}
+        corrected_searchable = (
+            corrected_comment_markers
+            if code == "comment-marker"
+            else corrected_with_markers
+        )
+        remaining = {
+            match.group(0) for match in pattern.finditer(corrected_searchable)
+        }
         for token in remaining:
-            pending.append((code, message, token, re.compile(re.escape(token)), "markers"))
+            source_kind = "comment-markers" if code == "comment-marker" else "markers"
+            pending.append((code, message, token, re.compile(re.escape(token)), source_kind))
 
     raw_labels = {
         match.group(0).strip()
@@ -432,13 +671,13 @@ def _diagnostics(
             )
         )
 
-    if "_Proof._" in corrected_inspectable:
+    if _DESCRIPTION_ITEM.search(corrected_inspectable):
         pending.append(
             (
-                "proof-boundary",
-                "Proof remains without the supported explicit square end marker",
-                "_Proof._",
-                re.compile(re.escape("_Proof._")),
+                "description-boundary",
+                "Tylax description item remains without a verified term boundary",
+                '""\\',
+                _DESCRIPTION_ITEM,
                 "inspectable",
             )
         )
@@ -491,8 +730,31 @@ def _diagnostics(
 
     found: list[tuple[int, Diagnostic]] = []
     seen: set[tuple[str, int, str]] = set()
+    for input_index in state.proof_boundary_positions:
+        key = ("proof-boundary", input_index, "_Proof._")
+        seen.add(key)
+        line, column = _line_column(input_source, input_index)
+        found.append(
+            (
+                input_index,
+                Diagnostic(
+                    code="proof-boundary",
+                    message=(
+                        "Proof remains without the supported explicit square end marker"
+                    ),
+                    token="_Proof._",
+                    line=line,
+                    column=column,
+                ),
+            )
+        )
     for code, message, token, pattern, source_kind in pending:
-        searchable = input_with_markers if source_kind == "markers" else input_inspectable
+        if source_kind == "markers":
+            searchable = input_with_markers
+        elif source_kind == "comment-markers":
+            searchable = input_comment_markers
+        else:
+            searchable = input_inspectable
         for match in pattern.finditer(searchable):
             key = (code, match.start(), token)
             if key in seen:
@@ -612,29 +874,46 @@ def _replace_flattened_statements(
     )
 
 
-def _replace_proofs(source: str) -> tuple[str, AppliedRule | None]:
+def _replace_proofs(
+    source: str,
+) -> tuple[str, AppliedRule | None, tuple[int, ...]]:
     pattern = re.compile(
-        r"_Proof\._(?P<body>.*?)#h\(1fr\)\s*\$square\.stroked\$",
+        r"_Proof\._(?P<body>(?:(?!_Proof\._).)*?)"
+        r"#h\(1fr\)\s*\$square\.stroked\$",
         re.DOTALL,
     )
-
-    def replace(match: re.Match[str]) -> str:
-        return f"#proof[\n  {match.group('body').strip()}\n]"
-
-    pieces = _PROTECTED.split(source)
-    count = 0
-    for index in range(0, len(pieces), 2):
-        pieces[index], replacements = pattern.subn(replace, pieces[index])
-        count += replacements
+    inspectable = _mask_typst_protected_regions(source)
+    starts = list(re.finditer(re.escape("_Proof._"), inspectable))
+    matches = list(pattern.finditer(inspectable))
+    converted_starts = {match.start() for match in matches}
+    remaining_ordinals = tuple(
+        ordinal
+        for ordinal, start in enumerate(starts)
+        if start.start() not in converted_starts
+    )
+    pieces: list[str] = []
+    cursor = 0
+    for match in matches:
+        body_start, body_end = match.span("body")
+        pieces.append(source[cursor : match.start()])
+        pieces.append(f"#proof[\n  {source[body_start:body_end].strip()}\n]")
+        cursor = match.end()
+    pieces.append(source[cursor:])
     corrected = "".join(pieces)
+    count = len(matches)
     if not count:
-        return source, None
-    return corrected, AppliedRule(
-        rule_id="proof-environments",
-        description=(
-            "Convert a Tylax proof with an explicit square end marker to dempa-style proof"
+        return source, None, remaining_ordinals
+    return (
+        corrected,
+        AppliedRule(
+            rule_id="proof-environments",
+            description=(
+                "Convert a Tylax proof with an explicit square end marker to "
+                "dempa-style proof"
+            ),
+            replacements=count,
         ),
-        replacements=count,
+        remaining_ordinals,
     )
 
 
@@ -705,6 +984,9 @@ def _replace_statement_references(
 def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
     findings: list[str] = []
     marker_inspectable = _without_strings_and_line_comments(source)
+    comment_marker_inspectable = _mask_typst_protected_regions(
+        source, preserve_comment_markers=True
+    )
     if re.search(
         r"/\*\s*(?:Begin|End)\s+(?:df|prop|thm|lem|cor|fact|exam|proof)\s*\*/",
         marker_inspectable,
@@ -712,16 +994,19 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
         findings.append(
             "unpaired or unsupported Tylax statement markers remain"
         )
-    if re.search(r"/\*\s*(?:Begin|End)\s+comment\s*\*/", marker_inspectable):
+    if re.search(
+        r"/\*\s*(?:Begin|End)\s+comment\s*\*/",
+        comment_marker_inspectable,
+    ):
         findings.append("unpaired Tylax comment environment marker remains")
     if re.search(r"/\*\s*\\proof\s*\*/", marker_inspectable):
         findings.append("a legacy LaTeX proof marker remains without safe boundaries")
-    inspectable = _without_protected_text(source)
+    inspectable = _mask_typst_protected_regions(source)
     if re.search(r"(?m)^\s*<[^<>\r\n]+>\s*", inspectable):
         findings.append(
             "raw labels remain outside supported statement elements"
         )
-    if "_Proof._" in inspectable:
+    if state.proof_boundary_positions:
         findings.append(
             "a proof without the supported explicit square end marker remains"
         )
@@ -734,6 +1019,8 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
         )
     findings.extend(state.hint_findings)
     findings.extend(state.equation_findings)
+    findings.extend(state.description_findings)
+    findings.extend(state.proof_findings)
     remaining_references = sorted(set(re.findall(rf"@({_LABEL})", inspectable)))
     if remaining_references and not state.unresolved_references:
         findings.append("unsupported references remain: " + ", ".join(remaining_references))
@@ -754,9 +1041,11 @@ def correct_tylax_source(
     source: str,
     statement_hints: tuple[StatementHint, ...] | None = None,
     equation_numbering_hint: EquationNumberingHint | None = None,
+    description_item_hints: tuple[DescriptionItemHint, ...] | None = None,
 ) -> CorrectionResult:
     """Return corrected text and a fail-closed report without mutating the input."""
     corrected = source
+    proof_input_positions = _proof_input_positions(source)
     applied: list[AppliedRule] = []
     hint_tracker = _HintTracker(statement_hints) if statement_hints is not None else None
     corrected, rule = _remove_tylax_comment_environments(corrected)
@@ -778,6 +1067,11 @@ def correct_tylax_source(
     )
     if rule is not None:
         applied.append(rule)
+    corrected, rule, description_findings = _replace_description_items(
+        corrected, description_item_hints
+    )
+    if rule is not None:
+        applied.append(rule)
     corrected, rule = _unwrap_fraction_in_absolute_value(corrected)
     if rule is not None:
         applied.append(rule)
@@ -792,9 +1086,23 @@ def correct_tylax_source(
     )
     if rule is not None:
         applied.append(rule)
-    corrected, rule = _replace_proofs(corrected)
+    corrected, rule, remaining_proof_ordinals = _replace_proofs(corrected)
     if rule is not None:
         applied.append(rule)
+    proof_occurrence_count = len(remaining_proof_ordinals) + (
+        rule.replacements if rule is not None else 0
+    )
+    if proof_occurrence_count == len(proof_input_positions):
+        proof_boundary_positions = tuple(
+            proof_input_positions[ordinal] for ordinal in remaining_proof_ordinals
+        )
+        proof_findings: tuple[str, ...] = ()
+    else:
+        proof_boundary_positions = ()
+        proof_findings = (
+            "proof occurrences changed before boundary conversion; "
+            "input diagnostic locations are unavailable",
+        )
     corrected, rule = _replace_single_line_legacy_proofs(corrected)
     if rule is not None:
         applied.append(rule)
@@ -806,6 +1114,9 @@ def correct_tylax_source(
     if rule is not None:
         applied.append(rule)
     corrected, rule = _replace_tylax_card_operator(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule = _replace_tylax_domain_operators(corrected)
     if rule is not None:
         applied.append(rule)
     if any(
@@ -837,6 +1148,9 @@ def correct_tylax_source(
         flattened_statement_kinds=flattened_kinds,
         hint_findings=hint_findings,
         equation_findings=equation_findings,
+        description_findings=description_findings,
+        proof_findings=proof_findings,
+        proof_boundary_positions=proof_boundary_positions,
     )
     review_findings: list[str] = []
     if statement_hints is None and any(

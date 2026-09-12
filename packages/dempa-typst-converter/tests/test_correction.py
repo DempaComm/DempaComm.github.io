@@ -16,8 +16,10 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from dempa_typst_converter.correction import correct_tylax_source  # noqa: E402
 from dempa_typst_converter.cli import main  # noqa: E402
 from dempa_typst_converter.latex_hints import (  # noqa: E402
+    DescriptionItemHint,
     EquationNumberingHint,
     StatementHint,
+    extract_description_item_hints,
     extract_equation_numbering_hint,
     extract_statement_hints,
 )
@@ -85,6 +87,71 @@ class CorrectionTest(unittest.TestCase):
         }
         self.assertEqual((2, 1), locations["statement-marker"])
         self.assertEqual((3, 1), locations["raw-label"])
+
+    def test_unpaired_statement_marker_after_url_fails_closed(self) -> None:
+        raw = "https://example.com /* Begin prop */\n本文．\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "statement-marker"
+        ]
+        self.assertEqual([(1, 21)], locations)
+
+    def test_proof_diagnostic_reports_only_the_unconverted_occurrence(self) -> None:
+        raw = (
+            "_Proof._ 完結． #h(1fr) $square.stroked$\n"
+            "間の本文．\n"
+            "_Proof._ 境界なし．\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "proof-boundary"
+        ]
+        self.assertEqual([(3, 1)], locations)
+
+    def test_repeated_proof_diagnostics_keep_exact_unconverted_locations(self) -> None:
+        raw = (
+            "_Proof._ X\n"
+            "_Proof._ X #h(1fr) $square.stroked$\n"
+            "_Proof._ X\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "proof-boundary"
+        ]
+        self.assertEqual([(1, 1), (3, 1)], locations)
+
+    def test_removed_comment_proof_does_not_shift_proof_diagnostic(self) -> None:
+        raw = (
+            "/* Begin comment */\n"
+            "_Proof._ コメント内．\n"
+            "/* End comment */\n"
+            "_Proof._ 境界なし．\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "proof-boundary"
+        ]
+        self.assertEqual([(4, 1)], locations)
 
     def test_report_json_keeps_findings_and_adds_structured_diagnostics(self) -> None:
         result = correct_tylax_source("$x \\unknown y$\n")
@@ -272,6 +339,62 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             extract_equation_numbering_hint(latex),
         )
 
+    def test_description_hints_capture_stable_label_text(self) -> None:
+        latex = r"""\begin{description}
+\item[場合A]\mbox{}\\
+本文．
+\item[場合B（$x<y$のとき。）]\mbox{}\\
+本文．
+\end{description}
+"""
+
+        self.assertEqual(
+            (
+                DescriptionItemHint(("場合A",)),
+                DescriptionItemHint(("場合B（", "のとき。）")),
+            ),
+            extract_description_item_hints(latex),
+        )
+
+    def test_description_items_use_only_matching_latex_hints(self) -> None:
+        raw = '/ 場合A""\\  本文．\n/ 場合B（$x < y$のとき。）""\\  続き．\n'
+        hints = (
+            DescriptionItemHint(("場合A",)),
+            DescriptionItemHint(("場合B（", "のとき。）")),
+        )
+
+        result = correct_tylax_source(raw, description_item_hints=hints)
+
+        self.assertEqual(
+            "/ 場合A:\n  本文．\n/ 場合B（$x < y$のとき。）:\n  続き．\n",
+            result.source,
+        )
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+
+    def test_description_item_without_hints_fails_closed(self) -> None:
+        raw = '/ 場合A""\\  本文．\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        diagnostic = next(
+            item
+            for item in result.report.diagnostics
+            if item.code == "description-boundary"
+        )
+        self.assertEqual((1, 1), (diagnostic.line, diagnostic.column))
+
+    def test_mismatched_description_label_fails_closed(self) -> None:
+        raw = '/ 場合B""\\  本文．\n'
+
+        result = correct_tylax_source(
+            raw,
+            description_item_hints=(DescriptionItemHint(("場合A",)),),
+        )
+
+        self.assertFalse(result.safe_to_write)
+        self.assertEqual(raw, result.source)
+
     def test_global_numbering_is_removed_for_unnumbered_latex_displays(self) -> None:
         raw = '#set math.equation(numbering: "(1)")\n$ x = 1 $\n'
 
@@ -328,6 +451,23 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
         self.assertIn(
             "unpaired Tylax comment environment marker remains",
             result.report.blocking_findings,
+        )
+
+    def test_comment_environment_markers_in_protected_regions_are_preserved(self) -> None:
+        raw = (
+            '"/* Begin comment */ 文字列 /* End comment */"\n'
+            "/* 外側 /* Begin comment */ 注記 /* End comment */ */\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertEqual(raw, result.source)
+        self.assertFalse(
+            any(
+                item.code == "comment-marker"
+                for item in result.report.diagnostics
+            )
         )
 
     def test_fact_and_example_markers_use_shared_style(self) -> None:
@@ -431,6 +571,34 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             result.report.blocking_findings,
         )
 
+    def test_tylax_domain_and_codomain_text_become_math_operators(self) -> None:
+        raw = '$#text[\\rm dom](f), #text[\\rm cod](f)$\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertEqual('$op("dom")(f), op("cod")(f)$\n', result.source)
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+
+    def test_tylax_domain_text_outside_math_is_not_rewritten(self) -> None:
+        raw = '#text[\\rm dom] text\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertEqual(raw, result.source)
+        self.assertFalse(result.safe_to_write)
+
+    def test_unknown_tylax_roman_text_still_fails_closed(self) -> None:
+        raw = '$#text[\\rm ran](f)$\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertEqual(raw, result.source)
+        self.assertFalse(result.safe_to_write)
+        self.assertIn(
+            "unsupported LaTeX commands remain: \\rm",
+            result.report.blocking_findings,
+        )
+
     def test_fraction_inside_absolute_value_does_not_render_as_set(self) -> None:
         raw = '$ abs({frac(1, f(a))}) < abs({frac(1, f(b))}) $\n'
 
@@ -480,6 +648,115 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
 
         self.assertTrue(result.safe_to_write, result.report.blocking_findings)
         self.assertIn("#proof[\n  明らか．\n]", result.source)
+
+    def test_proof_with_quoted_typst_content_is_recovered(self) -> None:
+        raw = (
+            '_Proof._ 前半． ""\\\n'
+            '"これは #h(1fr) $square.stroked$ という文字列"\n'
+            "後半． #h(1fr) $square.stroked$\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#proof[", result.source)
+        self.assertIn('"これは #h(1fr) $square.stroked$ という文字列"', result.source)
+        self.assertNotIn("_Proof._ 前半", result.source)
+
+    def test_proof_with_url_is_recovered(self) -> None:
+        raw = (
+            "_Proof._ https://example.com を参照． "
+            "#h(1fr) $square.stroked$\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#proof[", result.source)
+        self.assertIn("https://example.com", result.source)
+
+    def test_unsupported_command_after_url_still_fails_closed(self) -> None:
+        raw = (
+            "_Proof._ https://example.com \\foo "
+            "#h(1fr) $square.stroked$\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "unsupported-latex-command"
+        ]
+        self.assertEqual([(1, 30)], locations)
+
+    def test_unclosed_proof_after_url_fails_closed(self) -> None:
+        raw = "https://example.com _Proof._ 境界なし．\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "proof-boundary"
+        ]
+        self.assertEqual([(1, 21)], locations)
+
+    def test_proof_end_marker_is_not_joined_across_a_string(self) -> None:
+        raw = '_Proof._ 本文． #h(1fr) "これは終端でない" $square.stroked$\n'
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        self.assertNotIn("#proof[", result.source)
+        self.assertIn(raw, result.source)
+
+    def test_proof_end_marker_is_not_joined_across_a_comment(self) -> None:
+        raw = "_Proof._ 本文． #h(1fr) /* 終端を分断 */ $square.stroked$\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        self.assertNotIn("#proof[", result.source)
+        self.assertIn(raw, result.source)
+
+    def test_proof_markers_inside_nested_comment_are_not_rewritten(self) -> None:
+        raw = (
+            "/* 外側 /* 内側 */ _Proof._ 偽物． "
+            "#h(1fr) $square.stroked$ */\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertNotIn("#proof[", result.source)
+        self.assertIn(raw, result.source)
+        self.assertFalse(
+            any(
+                item.code == "proof-boundary"
+                for item in result.report.diagnostics
+            )
+        )
+
+    def test_unmatched_proof_does_not_consume_the_following_proof(self) -> None:
+        raw = (
+            "_Proof._ 最初は境界なし．\n"
+            "_Proof._ 次は完結． #h(1fr) $square.stroked$\n"
+        )
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        self.assertIn("_Proof._ 最初は境界なし．", result.source)
+        self.assertIn("#proof[\n  次は完結．\n]", result.source)
+        locations = [
+            (item.line, item.column)
+            for item in result.report.diagnostics
+            if item.code == "proof-boundary"
+        ]
+        self.assertEqual([(1, 1)], locations)
 
     def test_legacy_proof_without_single_line_body_fails_closed(self) -> None:
         result = correct_tylax_source("/* \\proof */\n複数行の本文．\n")
