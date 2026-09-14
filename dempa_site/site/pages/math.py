@@ -20,7 +20,7 @@ from dempa_site.config import (
 )
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import has_pdf
-from dempa_site.site.layout import page_head, site_navigation
+from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 
 
 def rendered_math_index_item(
@@ -188,7 +188,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <p>各原稿は主分類を一つ持ちます。分野別ページでは公開年ごとの一覧と、電波通信から引き継いだタグを併記しています。</p>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
 </body>
 </html>
 """
@@ -234,7 +234,7 @@ def rendered_math_section_page(
 {section_topics}
 {year_sections}
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
 </body>
 </html>
 """
@@ -267,7 +267,7 @@ def rendered_math_topic_page(topic: MathTopic, papers: Sequence[Paper]) -> str:
     <p class="directory-back"><a href="../../">数学記事総覧へ戻る</a> · <a href="../../{section_slug}/">{html.escape(section)}へ戻る</a></p>
 {_rendered_year_sections(papers, "../../../")}
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
 </body>
 </html>
 """

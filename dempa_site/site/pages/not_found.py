@@ -7,7 +7,7 @@ from dempa_site.config import (
     SITE_TITLE_FORMAL,
     SITE_TITLE_TOP,
 )
-from dempa_site.site.layout import page_head, site_navigation
+from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 
 
 def rendered_not_found_page() -> str:
@@ -43,7 +43,7 @@ def rendered_not_found_page() -> str:
       </nav>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
 </body>
 </html>
 """

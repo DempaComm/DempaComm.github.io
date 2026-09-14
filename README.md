@@ -15,6 +15,10 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
 
+## 著作物のライセンス
+
+数識電収内の著作物は、[クリエイティブ・コモンズ 表示 4.0 国際（CC BY 4.0）](https://creativecommons.org/licenses/by/4.0/deed.ja)で公開しています。
+
 ## 収録状況
 
 現在は2015年から2026年までの191記事を収録しています。TeX・PDF付き、PDFのみ、TeXのみ、ブログ本文のみの記事が含まれます。保存している元のTeXと当時の完成PDFは無改変で維持し、再現可能な原稿だけを自動コンパイルの対象にします。`paper.json` の `kind` は取り込み方法を記録する内部管理項目で、公開ページには表示しません。

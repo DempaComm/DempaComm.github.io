@@ -15,7 +15,7 @@ from dempa_site.config import (
 )
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import paper_card
-from dempa_site.site.layout import page_head, site_navigation
+from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 
 
 def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
@@ -131,7 +131,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
 
   <footer>
     <p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>
-  </footer>
+  {CONTENT_LICENSE_NOTICE}</footer>
   <script src="discovery.js" defer></script>
 </body>
 </html>

@@ -7,6 +7,13 @@ import html
 from dempa_site.config import SITE_TITLE_TOP, SITE_URL
 
 
+CONTENT_LICENSE_NOTICE = (
+    '<p>数識電収内の著作物は、'
+    '<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.ja">'
+    'クリエイティブ・コモンズ 表示 4.0 国際（CC BY 4.0）</a>'
+    'で公開しています。</p>'
+)
+
 def site_navigation(prefix: str, current: str = "") -> str:
     home_href = prefix or "./"
     links = (

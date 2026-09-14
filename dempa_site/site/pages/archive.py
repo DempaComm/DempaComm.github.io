@@ -8,7 +8,7 @@ from pathlib import Path
 from dempa_site.config import SITE_TITLE_ATTRIBUTE, SITE_TITLE_FORMAL, SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import paper_card
-from dempa_site.site.layout import page_head, site_navigation
+from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 from dempa_site.site.pages.common import rendered_tag_index
 
 
@@ -73,7 +73,7 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <p><a class="primary-action" href="../search/">全文検索を開く</a></p>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
 </body>
 </html>
 '''
@@ -106,7 +106,7 @@ def rendered_archive_year_page(year: int, papers: Sequence[Paper]) -> str:
       <div class="paper-list">{cards}</div>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p></footer>
+  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
   <script src="../../search.js"></script>
 </body>
 </html>
