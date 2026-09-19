@@ -1,5 +1,6 @@
 @require: stdja
 @require: annot
+@require: footnote-scheme
 
 module DempaStyle : sig
   direct \dempa-strong : [inline-text] inline-cmd
@@ -7,6 +8,19 @@ module DempaStyle : sig
   direct \dempa-statement-label : [string; string; inline-text] inline-cmd
   direct \dempa-qed : [] inline-cmd
   direct \dempa-factorial : [] math-cmd
+  direct \dempa-ell : [] math-cmd
+  direct \dempa-bar : [math] math-cmd
+  direct \dempa-sum : [math; math] math-cmd
+  direct \dempa-pi-sub : [math] math-cmd
+  direct \dempa-bigcup : [math; math] math-cmd
+  direct \dempa-bigcup-sub : [math] math-cmd
+  direct \dempa-matrix : [math; math; math; math] math-cmd
+  direct \dempa-footnote : [inline-text] inline-cmd
+  direct \dempa-href : [string; inline-text] inline-cmd
+  direct \dempa-image : [string] inline-cmd
+  direct \dempa-table : [(inline-text list) list] inline-cmd
+  direct +dempa-section : [string; string; inline-text] block-cmd
+  direct +dempa-section-unnumbered : [string; inline-text] block-cmd
 end = struct
   let no-pads = (0pt, 0pt, 0pt, 0pt)
 
@@ -42,4 +56,129 @@ end = struct
 
   let-math \dempa-factorial =
     text-in-math MathOrd (fun ctx -> read-inline ctx {!})
+
+  let-math \dempa-ell = math-char MathOrd `ℓ`
+
+  let-math \dempa-bar value =
+    text-in-math MathOrd (fun ctx -> (
+      let body = embed-math ctx value in
+      let (width, _, _) = get-natural-metrics body in
+      let size = get-font-size ctx in
+      let thickness = size *' 0.04 in
+      let gap = size *' 0.08 in
+      let bar =
+        inline-graphics width (thickness +' gap) 0pt (fun (x, y) ->
+          [ fill Color.black
+              (Gr.rectangle (x, y +' gap) (x +' width, y +' gap +' thickness)); ]
+        )
+      in
+        line-stack-bottom [bar; body]
+    ))
+
+  let-math \dempa-sum lower upper =
+    math-upper (math-lower (math-big-char MathOp `∑`) lower) upper
+
+  let-math \dempa-pi-sub subscript =
+    math-lower (math-char MathOrd `π`) subscript
+
+  let-math \dempa-bigcup lower upper =
+    math-upper (math-lower (math-big-char MathOp `⋃`) lower) upper
+
+  let-math \dempa-bigcup-sub lower =
+    math-lower (math-big-char MathOp `⋃`) lower
+
+  let-math \dempa-matrix value11 value12 value21 value22 =
+    let rows = [[value11; value12]; [value21; value22]] in
+    let matrix-inner =
+      text-in-math MathInner (fun ctx -> (
+        let size = get-font-size ctx in
+        let pads = (size *' 0.2, size *' 0.2, size *' 0.15, size *' 0.15) in
+        let cells =
+          rows |> List.map (List.map (fun value ->
+            NormalCell(pads, inline-fil ++ embed-math ctx value ++ inline-fil)
+          ))
+        in
+        let boxes = tabular cells (fun _ _ -> []) in
+        let (_, height, depth) = get-natural-metrics boxes in
+        let axis = get-axis-height ctx in
+          raise-inline (axis -' (height +' depth) *' 0.5) boxes
+      ))
+    in
+      math-paren Math.paren-left Math.paren-right matrix-inner
+
+  let-inline ctx \dempa-footnote inner =
+    let size = get-font-size ctx in
+    let ibf num =
+      let number = embed-string (arabic num) in
+      let marker-context =
+        ctx |> set-font-size (size *' 0.75)
+            |> set-manual-rising (size *' 0.25)
+      in
+        read-inline marker-context {\*#number;}
+    in
+    let bbf num =
+      let number = embed-string (arabic num) in
+      let note-context =
+        ctx |> set-font-size (size *' 0.9)
+            |> set-leading (size *' 1.2)
+            |> set-paragraph-margin (size *' 0.5) (size *' 0.5)
+      in
+        line-break false false note-context
+          (read-inline note-context {#number; #inner;} ++ inline-fil)
+    in
+      FootnoteScheme.main ctx ibf bbf
+
+  let-inline ctx \dempa-href uri inner =
+    inline-frame-breakable no-pads
+      (Annot.link-to-uri-frame uri None)
+      (read-inline ctx inner)
+
+  let-inline ctx \dempa-image source =
+    use-image-by-width (load-image source) 9cm
+
+  let-inline ctx \dempa-table rows =
+    let pads = (5pt, 5pt, 3pt, 3pt) in
+    let cellf inner =
+      NormalCell(pads, inline-fil ++ read-inline ctx inner ++ inline-fil)
+    in
+    let cells = rows |> List.map (List.map cellf) in
+      tabular cells (fun _ _ -> [])
+
+  let section-title-context ctx =
+    ctx |> set-font-size 18pt
+        |> set-font Latin StdJa.font-latin-bold
+        |> set-cjk-font StdJa.font-cjk-gothic
+
+  let section-heading ctx boxes =
+    line-break true false
+      (ctx |> set-paragraph-margin 20pt 12pt)
+      (boxes ++ inline-fil)
+
+  let-block ctx +dempa-section label number title =
+    let title-context = section-title-context ctx in
+    let () = register-cross-reference (label ^ `:num`) number in
+    let number-boxes =
+      read-inline title-context (embed-string (number ^ `.`))
+        ++ inline-skip 10pt
+    in
+    let title-boxes = read-inline title-context title in
+    let heading-boxes =
+      inline-frame-breakable no-pads
+        (Annot.register-location-frame label)
+        (number-boxes ++ title-boxes
+          ++ hook-page-break
+            (fun info _ -> register-cross-reference
+              (label ^ `:page`) (arabic info#page-number)))
+    in
+      section-heading title-context heading-boxes
+
+  let-block ctx +dempa-section-unnumbered label title =
+    let title-context = section-title-context ctx in
+    let title-boxes = read-inline title-context title in
+    let heading-boxes =
+      inline-frame-breakable no-pads
+        (Annot.register-location-frame label)
+        title-boxes
+    in
+      section-heading title-context heading-boxes
 end

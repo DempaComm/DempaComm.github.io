@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -42,7 +43,9 @@ def _report(input_path: Path, result: ConversionResult, pandoc_version: str) -> 
         "input": {"name": input_path.name, "sha256": _sha256(input_path)},
         "pandoc_version": pandoc_version, "manual_review_required": True, "publishable": False,
         "rules": result.rule_report(), "labels": dict(sorted(result.labels.items())),
-        "references": sorted(result.references), "warnings": result.warnings,
+        "references": sorted(result.references), "citations": sorted(set(result.citations)),
+        "images": sorted(set(result.images)),
+        "warnings": result.warnings,
         "errors": sorted(set(result.errors)),
     }
 
@@ -78,11 +81,13 @@ def run(args: argparse.Namespace) -> int:
         temporary_path = Path(temporary)
         copied_input = temporary_path / input_path.name
         shutil.copy2(input_path, copied_input)
+        for bibliography in sorted(input_path.parent.glob("*.bib")):
+            shutil.copy2(bibliography, temporary_path / bibliography.name)
         ast_temporary = temporary_path / "pandoc-ast.json"
         version = subprocess.run([args.pandoc, "--version"], capture_output=True, text=True, check=False)
         pandoc_version = version.stdout.splitlines()[0] if version.returncode == 0 else "unknown"
         completed = subprocess.run(
-            [args.pandoc, "--standalone", "--from=latex", "--to=json", "--metadata=date:",
+            [args.pandoc, "--standalone", "--from=latex", "--to=json", "--citeproc", "--metadata=date:",
              str(copied_input), "--output", str(ast_temporary)],
             cwd=temporary_path, capture_output=True, text=True, check=False,
         )
@@ -91,7 +96,7 @@ def run(args: argparse.Namespace) -> int:
                 "converter_version": __version__, "status": "failed",
                 "input": {"name": input_path.name, "sha256": _sha256(input_path)},
                 "pandoc_version": pandoc_version, "manual_review_required": True, "publishable": False,
-                "rules": [], "labels": {}, "references": [], "warnings": [],
+                "rules": [], "labels": {}, "references": [], "citations": [], "images": [], "warnings": [],
                 "errors": ["PANDOC_FAILED: " + completed.stderr.strip()],
             }
             (output_dir / "conversion-report.json").write_text(
@@ -102,11 +107,35 @@ def run(args: argparse.Namespace) -> int:
         document = json.loads(ast_text)
 
     result = convert_document(document)
+    bibliography_styles = sorted(set(re.findall(
+        r"\\bibliographystyle\s*\{([^{}]+)\}",
+        input_path.read_text(encoding="utf-8"),
+    )))
+    if bibliography_styles:
+        result.applied("BIBLIOGRAPHY_CITEPROC")
+        result.warnings.append(
+            "BIBLIOGRAPHY_STYLE_NOT_PRESERVED: Pandoc citeproc does not apply "
+            + ", ".join(bibliography_styles)
+        )
+    image_sources: list[tuple[Path, Path]] = []
+    for image_name in sorted(set(result.images)):
+        source = input_path.parent / image_name
+        destination = output_dir / image_name
+        if source.is_symlink():
+            result.errors.append(f"IMAGE_UNSAFE_SYMLINK: {image_name}")
+        elif not source.is_file():
+            result.errors.append(f"IMAGE_NOT_FOUND: {image_name}")
+        elif destination.exists():
+            result.errors.append(f"IMAGE_OUTPUT_COLLISION: {image_name}")
+        else:
+            image_sources.append((source, destination))
     report = _report(input_path, result, pandoc_version)
     report_path = output_dir / "conversion-report.json"
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if not result.succeeded:
         return 2
+    for source, destination in image_sources:
+        shutil.copyfile(source, destination)
     (output_dir / "main.saty").write_text(result.satysfi or "", encoding="utf-8")
     shutil.copyfile(_style_path(), output_dir / "dempa.satyh")
 

@@ -96,9 +96,11 @@ TylaxによるTypst変換は、元TeXを変更しない隔離試験として進�
 
 SATySFi変換器の試作は
 [`packages/dempa-satysfi-converter/`](packages/dempa-satysfi-converter/README.md) に分離しています。
-Pandoc JSON ASTを経由して人工例と「素数の無限性」をPDFまで変換できる段階で、公開連携はせず、
-未対応構造では安全停止します。試験結果は [`docs/SATYSFI_TRIAL.md`](docs/SATYSFI_TRIAL.md) に
-まとめています。
+Pandoc JSON ASTを経由して人工例と複数の実原稿をPDFまで変換でき、通常の引用、BibTeX文献一覧、
+HTTP(S)リンク、引用符、単一ローカル画像の図版、結合のない単純表、限定的な2×2行列にも対応しています。独自BST、画像寸法、
+float配置、表の列配置の差は
+警告し、公開連携はせず、未対応構造では安全
+停止します。試験結果は [`docs/SATYSFI_TRIAL.md`](docs/SATYSFI_TRIAL.md) にまとめています。
 
 普段の原稿修正は、記事番号・ファイル名・理由の三項目だけを入れればコマンドをコピー
 できる `docs/EDITING_WORKFLOW.md` を参照してください。詳しい移行と手動承認は

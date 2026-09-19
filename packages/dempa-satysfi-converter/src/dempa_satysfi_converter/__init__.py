@@ -3,4 +3,4 @@
 from .converter import ConversionResult, convert_document
 
 __all__ = ["ConversionResult", "convert_document"]
-__version__ = "0.1.0a0"
+__version__ = "0.1.0a8"
