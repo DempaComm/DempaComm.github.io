@@ -2,6 +2,7 @@
 // This file handles presentation only. Invalid Tylax syntax must be corrected first.
 
 #let statement-counter = counter(figure.where(kind: "dempa-statement"))
+#let numbered-item-counter = counter(figure.where(kind: "dempa-numbered-item"))
 
 #let dempa_article(
   title: "",
@@ -51,6 +52,21 @@
 #let proof(body) = block(width: 100%, above: 0.5em, below: 0.8em)[
   *証明.* #body #h(1fr) $square.stroked$
 ]
+
+#let numbered-list-start() = numbered-item-counter.update(0)
+
+#let numbered-item(body) = figure(
+  kind: "dempa-numbered-item",
+  supplement: none,
+  numbering: "(1)",
+  outlined: false,
+  placement: none,
+  align(left)[
+    #block(width: 100%, above: 0.15em, below: 0.15em)[
+      #context numbered-item-counter.display("(1)") #h(0.5em) #body
+    ]
+  ],
+)
 
 #let bibliography-entry(number, body) = block(width: 100%, above: 0.25em, below: 0.25em)[
   #grid(columns: (auto, 1fr), column-gutter: 0.5em, [#number.], body)

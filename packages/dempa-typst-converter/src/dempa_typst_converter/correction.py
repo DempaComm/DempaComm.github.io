@@ -10,6 +10,8 @@ from dataclasses import asdict, dataclass
 from dempa_typst_converter.latex_hints import (
     DescriptionItemHint,
     EquationNumberingHint,
+    IntersectionHint,
+    NumberedListHint,
     StatementHint,
 )
 
@@ -73,8 +75,11 @@ class _StructureState:
     hint_findings: tuple[str, ...] = ()
     equation_findings: tuple[str, ...] = ()
     description_findings: tuple[str, ...] = ()
+    intersection_findings: tuple[str, ...] = ()
+    numbered_list_findings: tuple[str, ...] = ()
     proof_findings: tuple[str, ...] = ()
     proof_boundary_positions: tuple[int, ...] = ()
+    ignored_diagnostic_spans: tuple[tuple[int, int], ...] = ()
 
 
 class _HintTracker:
@@ -206,12 +211,14 @@ def _replace_latex_neq(source: str) -> tuple[str, AppliedRule | None]:
     )
 
 
+_TYLAX_TITLE_SEPARATOR = re.compile(
+    r"(?m)^[ \t]*(?:\\\*[ \t]+){1,2}\\\*[ \t]*\n"
+    r"(?=[ \t]*\n?[ \t]*/\*\s*\\maketitle\s*\*/)"
+)
+
+
 def _remove_tylax_title_separator(source: str) -> tuple[str, AppliedRule | None]:
-    pattern = re.compile(
-        r"(?m)^[ \t]*(?:\\\*[ \t]+){1,2}\\\*[ \t]*\n"
-        r"(?=[ \t]*\n?[ \t]*/\*\s*\\maketitle\s*\*/)"
-    )
-    corrected, count = pattern.subn("", source)
+    corrected, count = _TYLAX_TITLE_SEPARATOR.subn("", source)
     if not count:
         return source, None
     return corrected, AppliedRule(
@@ -282,6 +289,140 @@ def _replace_tylax_domain_operators(
             "Typst operators"
         ),
         replacements=count,
+    )
+
+
+def _tylax_intersection_positions(source: str) -> tuple[int, ...]:
+    inspectable = _mask_typst_protected_regions(source)
+    math = re.compile(r"\$(?P<body>.*?)\$", re.DOTALL)
+    token = re.compile(r"(?<![A-Za-z0-9_])sect(?![A-Za-z0-9_])")
+    positions: list[int] = []
+    for math_match in math.finditer(inspectable):
+        body_start = math_match.start("body")
+        positions.extend(
+            body_start + match.start()
+            for match in token.finditer(math_match.group("body"))
+        )
+    return tuple(positions)
+
+
+def _replace_tylax_intersections(
+    source: str,
+    hint: IntersectionHint | None,
+) -> tuple[str, AppliedRule | None, tuple[str, ...]]:
+    positions = _tylax_intersection_positions(source)
+    if not positions:
+        return source, None, ()
+    if hint is None:
+        return source, None, (
+            "Tylax sect tokens require a read-only LaTeX intersection hint",
+        )
+    if len(positions) != hint.occurrences:
+        return source, None, (
+            "LaTeX and Tylax intersection counts differ: "
+            f"expected {hint.occurrences}, observed {len(positions)}",
+        )
+    pieces: list[str] = []
+    cursor = 0
+    for position in positions:
+        pieces.append(source[cursor:position])
+        pieces.append("inter")
+        cursor = position + len("sect")
+    pieces.append(source[cursor:])
+    return (
+        "".join(pieces),
+        AppliedRule(
+            rule_id="tylax-intersections",
+            description=(
+                "Convert Tylax sect tokens to Typst intersections only when their "
+                "count matches read-only LaTeX hints"
+            ),
+            replacements=len(positions),
+        ),
+        (),
+    )
+
+
+def _replace_numbered_lists(
+    source: str,
+    hints: tuple[NumberedListHint, ...] | None,
+) -> tuple[str, AppliedRule | None, tuple[str, ...], tuple[str, ...]]:
+    pattern = re.compile(
+        r"(?m)^[ \t]*label=\(\\arabic\*\)[ \t]*\n"
+        r"(?P<items>(?:^[ \t]*\+[ \t]+[^\r\n]*(?:\n|$))+)",
+    )
+    matches = list(pattern.finditer(source))
+    if not matches:
+        return source, None, (), ()
+    if hints is None:
+        return source, None, (), (
+            "Tylax decimal lists require read-only LaTeX numbered-list hints",
+        )
+    if len(matches) != len(hints):
+        return source, None, (), (
+            "LaTeX and Tylax decimal-list counts differ: "
+            f"expected {len(hints)}, observed {len(matches)}",
+        )
+
+    replacements: list[tuple[re.Match[str], str]] = []
+    all_labels: list[str] = []
+    for list_index, (match, hint) in enumerate(zip(matches, hints), start=1):
+        item_lines = tuple(
+            line for line in match.group("items").splitlines() if line.strip()
+        )
+        if len(item_lines) != len(hint.labels):
+            return source, None, (), (
+                f"LaTeX and Tylax item counts differ in decimal list {list_index}: "
+                f"expected {len(hint.labels)}, observed {len(item_lines)}",
+            )
+        converted = ["#numbered-list-start()"]
+        for item_index, (line, latex_label) in enumerate(
+            zip(item_lines, hint.labels), start=1
+        ):
+            item = re.match(
+                rf"^[ \t]*\+[ \t]+(?:<(?P<label>{_LABEL})>[ \t]+)?(?P<body>.*)$",
+                line,
+            )
+            if item is None or not item.group("body").strip():
+                return source, None, (), (
+                    f"Tylax decimal list {list_index} item {item_index} lacks a safe body",
+                )
+            observed_label = item.group("label")
+            expected_label = (
+                latex_label.replace(":", "-") if latex_label is not None else None
+            )
+            if observed_label != expected_label:
+                return source, None, (), (
+                    f"LaTeX and Tylax labels differ in decimal list {list_index} "
+                    f"item {item_index}",
+                )
+            suffix = f" <{observed_label}>" if observed_label is not None else ""
+            converted.append(
+                f"#numbered-item[{item.group('body').strip()}]{suffix}"
+            )
+            if observed_label is not None:
+                all_labels.append(observed_label)
+        replacements.append((match, "\n".join(converted) + "\n"))
+
+    pieces: list[str] = []
+    cursor = 0
+    for match, replacement in replacements:
+        pieces.append(source[cursor : match.start()])
+        pieces.append(replacement)
+        cursor = match.end()
+    pieces.append(source[cursor:])
+    return (
+        "".join(pieces),
+        AppliedRule(
+            rule_id="numbered-lists",
+            description=(
+                "Convert decimal Tylax lists only when item counts and labels match "
+                "read-only LaTeX hints"
+            ),
+            replacements=len(matches),
+        ),
+        tuple(all_labels),
+        (),
     )
 
 
@@ -490,10 +631,44 @@ def _replace_tylax_bibliography(source: str) -> tuple[str, AppliedRule | None]:
     )
 
 
+_TYLAX_BIBLIOGRAPHY_CONTROL_TAIL = re.compile(
+    r"(?m)^[ \t]*\\\*[ \t]+"
+    r"/\*\s*\\bibliographystyle\s*\*/[^\r\n]*?"
+    r"/\*\s*\\bibliography\s*\*/[^\r\n]*[ \t]*$"
+)
+
+
+def _remove_tylax_bibliography_control_tail(
+    source: str,
+) -> tuple[str, AppliedRule | None]:
+    if "#bibliography-entry(" not in source:
+        return source, None
+    corrected, count = _TYLAX_BIBLIOGRAPHY_CONTROL_TAIL.subn("", source)
+    if not count:
+        return source, None
+    return corrected, AppliedRule(
+        rule_id="tylax-bibliography-control-tail",
+        description=(
+            "Remove Tylax's residual nocite wildcard, bibliography style, and "
+            "database control line after bibliography entries were recovered"
+        ),
+        replacements=count,
+    )
+
+
 def _without_protected_text(source: str) -> str:
     return _PROTECTED.sub(
         lambda match: "\n" * match.group(0).count("\n"),
         source,
+    )
+
+
+def _mask_typst_math(source: str) -> str:
+    return re.sub(
+        r"\$.*?\$",
+        lambda match: "\n".join("\0" * len(part) for part in match.group(0).split("\n")),
+        source,
+        flags=re.DOTALL,
     )
 
 
@@ -642,6 +817,11 @@ def _diagnostics(
             "Legacy LaTeX proof marker without safe boundaries",
             re.compile(r"/\*\s*\\proof\s*\*/"),
         ),
+        (
+            "unsupported-diagram",
+            "Tylax CD diagram requires a dedicated structure conversion",
+            re.compile(r"/\*\s*(?:Begin|End)\s+CD\s*\*/"),
+        ),
     )
     for code, message, pattern in marker_patterns:
         corrected_searchable = (
@@ -756,6 +936,11 @@ def _diagnostics(
         else:
             searchable = input_inspectable
         for match in pattern.finditer(searchable):
+            if code == "unsupported-escaped-symbol" and any(
+                start <= match.start() < end
+                for start, end in state.ignored_diagnostic_spans
+            ):
+                continue
             key = (code, match.start(), token)
             if key in seen:
                 continue
@@ -790,16 +975,24 @@ def _replace_statement_environments(
 
     def replace(match: re.Match[str]) -> str:
         body = match.group("body").strip()
-        label_match = re.match(rf"^<(?P<label>{_LABEL})>\s*", body)
         suffix = ""
-        if label_match is not None:
+
+        def consume_label(value: str) -> str:
+            nonlocal suffix
+            label_match = re.match(rf"^<(?P<label>{_LABEL})>\s*", value)
+            if label_match is None:
+                return value
             label = label_match.group("label")
             labels.append(label)
-            body = body[label_match.end() :]
             suffix = f" <{label}>"
+            return value[label_match.end() :]
+
+        body = consume_label(body)
         title = None
         if hints is not None:
             body, title = hints.apply(match.group("kind"), body)
+            if not suffix:
+                body = consume_label(body)
         function = _STATEMENT_FUNCTIONS[match.group("kind")]
         title_argument = f"(title: [{title}])" if title is not None else ""
         return f"#{function}{title_argument}[\n  {body}\n]{suffix}"
@@ -951,19 +1144,21 @@ def _replace_statement_references(
     known = set(labels)
     unresolved: set[str] = set()
     count = 0
-
-    def replace(match: re.Match[str]) -> str:
-        nonlocal count
+    inspectable = _mask_typst_math(_mask_typst_protected_regions(source))
+    matches = list(re.finditer(rf"@(?P<label>{_LABEL})", inspectable))
+    pieces: list[str] = []
+    cursor = 0
+    for match in matches:
         label = match.group("label")
-        if label not in known:
+        pieces.append(source[cursor : match.start()])
+        if label in known:
+            pieces.append(f"#ref(<{label}>, supplement: none)")
+            count += 1
+        else:
+            pieces.append(source[match.start() : match.end()])
             unresolved.add(label)
-            return match.group(0)
-        count += 1
-        return f"#ref(<{label}>, supplement: none)"
-
-    pieces = _PROTECTED.split(source)
-    for index in range(0, len(pieces), 2):
-        pieces[index] = re.sub(rf"@(?P<label>{_LABEL})", replace, pieces[index])
+        cursor = match.end()
+    pieces.append(source[cursor:])
     corrected = "".join(pieces)
     if not count:
         return corrected, None, tuple(sorted(unresolved))
@@ -999,6 +1194,8 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
         comment_marker_inspectable,
     ):
         findings.append("unpaired Tylax comment environment marker remains")
+    if re.search(r"/\*\s*(?:Begin|End)\s+CD\s*\*/", marker_inspectable):
+        findings.append("a Tylax CD diagram remains unsupported")
     if re.search(r"/\*\s*\\proof\s*\*/", marker_inspectable):
         findings.append("a legacy LaTeX proof marker remains without safe boundaries")
     inspectable = _mask_typst_protected_regions(source)
@@ -1020,8 +1217,13 @@ def _blocking_findings(source: str, state: _StructureState) -> tuple[str, ...]:
     findings.extend(state.hint_findings)
     findings.extend(state.equation_findings)
     findings.extend(state.description_findings)
+    findings.extend(state.intersection_findings)
+    findings.extend(state.numbered_list_findings)
     findings.extend(state.proof_findings)
-    remaining_references = sorted(set(re.findall(rf"@({_LABEL})", inspectable)))
+    reference_inspectable = _mask_typst_math(inspectable)
+    remaining_references = sorted(
+        set(re.findall(rf"@({_LABEL})", reference_inspectable))
+    )
     if remaining_references and not state.unresolved_references:
         findings.append("unsupported references remain: " + ", ".join(remaining_references))
     residual_commands = sorted(set(re.findall(r"\\[A-Za-z@]+", inspectable)))
@@ -1042,8 +1244,18 @@ def correct_tylax_source(
     statement_hints: tuple[StatementHint, ...] | None = None,
     equation_numbering_hint: EquationNumberingHint | None = None,
     description_item_hints: tuple[DescriptionItemHint, ...] | None = None,
+    intersection_hint: IntersectionHint | None = None,
+    numbered_list_hints: tuple[NumberedListHint, ...] | None = None,
 ) -> CorrectionResult:
     """Return corrected text and a fail-closed report without mutating the input."""
+    ignored_diagnostic_spans = tuple(
+        match.span() for match in _TYLAX_TITLE_SEPARATOR.finditer(source)
+    )
+    if '#figure(kind: "bib"' in source:
+        ignored_diagnostic_spans += tuple(
+            match.span()
+            for match in _TYLAX_BIBLIOGRAPHY_CONTROL_TAIL.finditer(source)
+        )
     corrected = source
     proof_input_positions = _proof_input_positions(source)
     applied: list[AppliedRule] = []
@@ -1078,6 +1290,14 @@ def correct_tylax_source(
     corrected, rule = _replace_tylax_bibliography(corrected)
     if rule is not None:
         applied.append(rule)
+    corrected, rule = _remove_tylax_bibliography_control_tail(corrected)
+    if rule is not None:
+        applied.append(rule)
+    corrected, rule, numbered_list_labels, numbered_list_findings = (
+        _replace_numbered_lists(corrected, numbered_list_hints)
+    )
+    if rule is not None:
+        applied.append(rule)
     corrected, rule, labels = _replace_statement_environments(corrected, hint_tracker)
     if rule is not None:
         applied.append(rule)
@@ -1106,6 +1326,7 @@ def correct_tylax_source(
     corrected, rule = _replace_single_line_legacy_proofs(corrected)
     if rule is not None:
         applied.append(rule)
+    labels = labels + numbered_list_labels
     counts = Counter(labels)
     duplicate_labels = tuple(sorted(label for label, count in counts.items() if count > 1))
     corrected, rule, unresolved_references = _replace_statement_references(
@@ -1119,6 +1340,11 @@ def correct_tylax_source(
     corrected, rule = _replace_tylax_domain_operators(corrected)
     if rule is not None:
         applied.append(rule)
+    corrected, rule, intersection_findings = _replace_tylax_intersections(
+        corrected, intersection_hint
+    )
+    if rule is not None:
+        applied.append(rule)
     if any(
         item.rule_id in {
             "statement-environments",
@@ -1126,6 +1352,7 @@ def correct_tylax_source(
             "proof-environments",
             "single-line-legacy-proofs",
             "tylax-bibliography",
+            "numbered-lists",
         }
         for item in applied
     ):
@@ -1149,8 +1376,11 @@ def correct_tylax_source(
         hint_findings=hint_findings,
         equation_findings=equation_findings,
         description_findings=description_findings,
+        intersection_findings=intersection_findings,
+        numbered_list_findings=numbered_list_findings,
         proof_findings=proof_findings,
         proof_boundary_positions=proof_boundary_positions,
+        ignored_diagnostic_spans=ignored_diagnostic_spans,
     )
     review_findings: list[str] = []
     if statement_hints is None and any(

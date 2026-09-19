@@ -24,3 +24,10 @@
 #theorem[
   この例では定義・命題・定理が同じ番号列を共有する。
 ]
+
+#numbered-list-start()
+#numbered-item[第一の条件。] <condition-one>
+#numbered-item[第二の条件。] <condition-two>
+
+条件 #ref(<condition-one>, supplement: none) と条件 #ref(<condition-two>, supplement: none) は、
+固定番号ではなく項目要素への参照である。

@@ -18,9 +18,13 @@ from dempa_typst_converter.cli import main  # noqa: E402
 from dempa_typst_converter.latex_hints import (  # noqa: E402
     DescriptionItemHint,
     EquationNumberingHint,
+    IntersectionHint,
+    NumberedListHint,
     StatementHint,
     extract_description_item_hints,
     extract_equation_numbering_hint,
+    extract_intersection_hint,
+    extract_numbered_list_hints,
     extract_statement_hints,
 )
 
@@ -55,6 +59,24 @@ class CorrectionTest(unittest.TestCase):
         self.assertEqual((2, 10), (diagnostic.line, diagnostic.column))
         self.assertEqual("@missing", diagnostic.token)
         self.assertEqual("input", diagnostic.source)
+
+    def test_cd_diagram_blocks_without_treating_math_arrows_as_references(self) -> None:
+        raw = "$ /* Begin CD */ A @V V V B /* End CD */ $\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        self.assertIn(
+            "a Tylax CD diagram remains unsupported",
+            result.report.blocking_findings,
+        )
+        self.assertFalse(
+            any("references" in finding for finding in result.report.blocking_findings)
+        )
+        diagnostics = tuple(
+            item for item in result.report.diagnostics if item.code == "unsupported-diagram"
+        )
+        self.assertEqual(2, len(diagnostics))
 
     def test_diagnostics_report_input_locations_for_unsupported_tokens(self) -> None:
         raw = "前文\n$ x \\foo y $\n\\*\n"
@@ -271,6 +293,19 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
                 if rule.rule_id == "statement-titles"
             ),
         )
+
+    def test_title_before_statement_label_uses_exact_latex_hint(self) -> None:
+        raw = "/* Begin df */題名<df-one> 本文．/* End df */\n@df-one\n"
+
+        result = correct_tylax_source(
+            raw,
+            statement_hints=(StatementHint("df", "題名"),),
+        )
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#definition(title: [題名])[", result.source)
+        self.assertIn("] <df-one>", result.source)
+        self.assertIn("#ref(<df-one>, supplement: none)", result.source)
 
     def test_mismatched_latex_title_hint_fails_closed(self) -> None:
         raw = "/* Begin thm */本文だけ．/* End thm */\n"
@@ -599,6 +634,115 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
             result.report.blocking_findings,
         )
 
+    def test_tylax_sect_becomes_intersection_with_matching_hint(self) -> None:
+        raw = "$A sect B$\n"
+
+        result = correct_tylax_source(
+            raw,
+            intersection_hint=IntersectionHint(1),
+        )
+
+        self.assertEqual("$A inter B$\n", result.source)
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+
+    def test_tylax_sect_without_matching_hint_fails_closed(self) -> None:
+        raw = "$A sect B$\n"
+
+        without_hint = correct_tylax_source(raw)
+        wrong_count = correct_tylax_source(
+            raw,
+            intersection_hint=IntersectionHint(0),
+        )
+
+        self.assertFalse(without_hint.safe_to_write)
+        self.assertFalse(wrong_count.safe_to_write)
+        self.assertEqual(raw, without_hint.source)
+        self.assertEqual(raw, wrong_count.source)
+
+    def test_tylax_sect_outside_math_is_left_unchanged(self) -> None:
+        raw = "sect is ordinary text here.\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertEqual(raw, result.source)
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+
+    def test_tylax_sect_rewrites_multiple_math_tokens_but_not_protected_text(
+        self,
+    ) -> None:
+        raw = '$A sect B$ "fake $C sect D$" /* $E sect F$ */ $G sect H$\n'
+
+        result = correct_tylax_source(
+            raw,
+            intersection_hint=IntersectionHint(2),
+        )
+
+        self.assertEqual(
+            '$A inter B$ "fake $C sect D$" /* $E sect F$ */ $G inter H$\n',
+            result.source,
+        )
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+
+    def test_intersection_hint_ignores_comments_and_post_document_text(self) -> None:
+        latex = "\\cap\n% \\cap\n\\end{document}\n\\cap\n"
+
+        self.assertEqual(IntersectionHint(1), extract_intersection_hint(latex))
+
+    def test_intersection_hint_ignores_preamble_macro_definitions(self) -> None:
+        latex = (
+            "\\newcommand{\\meet}{\\cap}\n"
+            "\\begin{document}\n"
+            "$A \\cap B$ and $C \\meet D$\n"
+            "\\end{document}\n"
+        )
+
+        self.assertEqual(IntersectionHint(1), extract_intersection_hint(latex))
+
+    def test_numbered_list_hints_capture_item_labels(self) -> None:
+        latex = r"""\begin{enumerate}[label=\textup{(\arabic*)}]
+\item\label{item:first} First.
+\item Second.
+\end{enumerate}
+"""
+
+        self.assertEqual(
+            (NumberedListHint(("item:first", None)),),
+            extract_numbered_list_hints(latex),
+        )
+
+    def test_numbered_list_uses_matching_latex_labels_and_references(self) -> None:
+        raw = """label=(\\arabic*)
+  + <item-first> First.
+  + Second.
+See @item-first
+"""
+
+        result = correct_tylax_source(
+            raw,
+            numbered_list_hints=(NumberedListHint(("item:first", None)),),
+        )
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertIn("#numbered-list-start()", result.source)
+        self.assertIn("#numbered-item[First.] <item-first>", result.source)
+        self.assertIn("#numbered-item[Second.]", result.source)
+        self.assertIn("#ref(<item-first>, supplement: none)", result.source)
+        self.assertTrue(result.requires_style)
+
+    def test_numbered_list_without_matching_hint_fails_closed(self) -> None:
+        raw = "label=(\\arabic*)\n  + <item-first> First.\n"
+
+        missing = correct_tylax_source(raw)
+        mismatch = correct_tylax_source(
+            raw,
+            numbered_list_hints=(NumberedListHint(("item:other",)),),
+        )
+
+        self.assertFalse(missing.safe_to_write)
+        self.assertFalse(mismatch.safe_to_write)
+        self.assertEqual(raw, missing.source)
+        self.assertEqual(raw, mismatch.source)
+
     def test_fraction_inside_absolute_value_does_not_render_as_set(self) -> None:
         raw = '$ abs({frac(1, f(a))}) < abs({frac(1, f(b))}) $\n'
 
@@ -626,6 +770,50 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
         self.assertIn("#bibliography-entry([1], [Book title]) <book>", result.source)
         self.assertNotIn("figure.where", result.source)
 
+    def test_tylax_bibliography_control_tail_is_removed_after_entries(self) -> None:
+        raw = '''= References
+
+#show figure.where(kind: "bib"): it => block[#it.caption #it.body]
+#figure(kind: "bib", supplement: none, caption: [1])[Book title ] <book>
+\\* /* \\bibliographystyle */plain /* \\bibliography */references.bib
+'''
+
+        result = correct_tylax_source(raw)
+
+        self.assertTrue(result.safe_to_write, result.report.blocking_findings)
+        self.assertNotIn("bibliographystyle", result.source)
+        self.assertNotIn("references.bib", result.source)
+        self.assertIn(
+            "tylax-bibliography-control-tail",
+            tuple(rule.rule_id for rule in result.report.applied_rules),
+        )
+
+    def test_tylax_bibliography_control_tail_without_entries_fails_closed(
+        self,
+    ) -> None:
+        raw = "\\* /* \\bibliographystyle */plain /* \\bibliography */refs.bib\n"
+
+        result = correct_tylax_source(raw)
+
+        self.assertFalse(result.safe_to_write)
+        self.assertEqual(raw, result.source)
+
+    def test_removed_bibliography_tail_is_not_reported_with_other_star(self) -> None:
+        raw = '''residual \\*
+#figure(kind: "bib", supplement: none, caption: [1])[Book title ]
+\\* /* \\bibliographystyle */plain /* \\bibliography */references.bib
+'''
+
+        result = correct_tylax_source(raw)
+
+        diagnostics = tuple(
+            item
+            for item in result.report.diagnostics
+            if item.code == "unsupported-escaped-symbol"
+        )
+        self.assertEqual(1, len(diagnostics))
+        self.assertEqual((1, 10), (diagnostics[0].line, diagnostics[0].column))
+
     def test_title_separator_is_removed_only_before_maketitle_comment(self) -> None:
         raw = "\\* \\* \\*\n/* \\maketitle */本文\n"
 
@@ -642,6 +830,21 @@ _Proof._ 命題 @nab を使う． #h(1fr) $square.stroked$
 
         self.assertTrue(result.safe_to_write)
         self.assertNotIn("\\* \\*", result.source)
+
+    def test_removed_title_separator_is_not_reported_as_a_residual_symbol(
+        self,
+    ) -> None:
+        raw = "\\* \\* \\*\n\n/* \\maketitle */本文\n残存 \\*\n"
+
+        result = correct_tylax_source(raw)
+
+        diagnostics = tuple(
+            item
+            for item in result.report.diagnostics
+            if item.code == "unsupported-escaped-symbol"
+        )
+        self.assertEqual(1, len(diagnostics))
+        self.assertEqual((4, 4), (diagnostics[0].line, diagnostics[0].column))
 
     def test_single_line_legacy_proof_is_recovered(self) -> None:
         result = correct_tylax_source(" /* \\proof */明らか．\n")

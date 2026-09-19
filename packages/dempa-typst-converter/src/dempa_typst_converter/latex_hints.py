@@ -23,6 +23,16 @@ class DescriptionItemHint:
     text_fragments: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class IntersectionHint:
+    occurrences: int
+
+
+@dataclass(frozen=True)
+class NumberedListHint:
+    labels: tuple[str | None, ...]
+
+
 _KINDS = {
     "df": "df",
     "prop": "prop",
@@ -109,4 +119,38 @@ def extract_description_item_hints(
                 hints.append(DescriptionItemHint(()))
             else:
                 hints.append(DescriptionItemHint(fragments))
+    return tuple(hints)
+
+
+def extract_intersection_hint(source: str) -> IntersectionHint:
+    """Count explicit LaTeX intersection symbols in the document source."""
+    document = _document_content(source)
+    _, begin, body = document.partition(r"\begin{document}")
+    if begin:
+        document = body
+    return IntersectionHint(
+        occurrences=len(re.findall(r"(?<!\\)\\cap\b", document))
+    )
+
+
+def extract_numbered_list_hints(source: str) -> tuple[NumberedListHint, ...]:
+    """Read flat decimal enumerate lists with an explicit enumitem format."""
+    document = _document_content(source)
+    pattern = re.compile(
+        r"\\begin\{enumerate\}\s*"
+        r"\[\s*label\s*=\s*\\textup\s*\{\s*\(\\arabic\*\)\s*\}\s*\]"
+        r"(?P<body>.*?)\\end\{enumerate\}",
+        re.DOTALL,
+    )
+    hints: list[NumberedListHint] = []
+    for environment in pattern.finditer(document):
+        body = environment.group("body")
+        starts = list(re.finditer(r"\\item\b", body))
+        labels: list[str | None] = []
+        for index, start in enumerate(starts):
+            end = starts[index + 1].start() if index + 1 < len(starts) else len(body)
+            item = body[start.end() : end]
+            label = re.match(r"\s*\\label\{(?P<label>[^{}\r\n]+)\}", item)
+            labels.append(label.group("label") if label is not None else None)
+        hints.append(NumberedListHint(tuple(labels)))
     return tuple(hints)

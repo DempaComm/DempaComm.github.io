@@ -14,6 +14,8 @@ from dempa_typst_converter.correction import CorrectionResult, correct_tylax_sou
 from dempa_typst_converter.latex_hints import (
     extract_description_item_hints,
     extract_equation_numbering_hint,
+    extract_intersection_hint,
+    extract_numbered_list_hints,
     extract_statement_hints,
 )
 
@@ -91,17 +93,23 @@ def main(arguments: list[str] | None = None) -> int:
     statement_hints = None
     equation_numbering_hint = None
     description_item_hints = None
+    intersection_hint = None
+    numbered_list_hints = None
     if args.latex_source is not None:
         latex_path = args.latex_source.expanduser().resolve()
         latex_source = latex_path.read_text(encoding="utf-8")
         statement_hints = extract_statement_hints(latex_source)
         equation_numbering_hint = extract_equation_numbering_hint(latex_source)
         description_item_hints = extract_description_item_hints(latex_source)
+        intersection_hint = extract_intersection_hint(latex_source)
+        numbered_list_hints = extract_numbered_list_hints(latex_source)
     result = correct_tylax_source(
         source,
         statement_hints,
         equation_numbering_hint,
         description_item_hints,
+        intersection_hint,
+        numbered_list_hints,
     )
     style_output = output_path.parent / STYLE_NAME
     bundled_style = _bundled_style()
