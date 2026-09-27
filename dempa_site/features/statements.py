@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import re
 from dataclasses import asdict, dataclass
 from functools import lru_cache
 from html.parser import HTMLParser
@@ -18,6 +19,8 @@ KIND_LABELS = {
     "theorem": "定理",
     "definition": "定義",
     "proposition": "命題",
+    "lemma": "補題",
+    "corollary": "系",
     "counterexample": "反例",
 }
 KIND_ORDER = tuple(KIND_LABELS)
@@ -29,6 +32,10 @@ _CLASS_KINDS = {
     "defnition": "definition",
     "prop": "proposition",
     "proposition": "proposition",
+    "lem": "lemma",
+    "lemma": "lemma",
+    "cor": "corollary",
+    "corollary": "corollary",
     "counterexample": "counterexample",
 }
 
@@ -48,6 +55,8 @@ def _kind_from_title(title: str, fallback: str = "") -> str:
     compact = title.lstrip()
     for kind, label in KIND_LABELS.items():
         if compact.startswith(label):
+            return kind
+        if re.match(rf"{kind}\b", compact, re.IGNORECASE):
             return kind
     return fallback
 
@@ -200,7 +209,7 @@ def _statement_sections(
         )
         sections.append(
             f"""    <section class="statement-section" id="{kind}" aria-labelledby="{kind}-title">
-      <div class="section-heading"><h2 id="{kind}-title">{label}</h2><p>{len(matching)}件</p></div>
+      <div class="section-heading"><h2 id="{kind}-title">{label}</h2><p data-statement-count>{len(matching)}件</p></div>
       <ol class="statement-list">
 {items}
       </ol>
@@ -222,7 +231,8 @@ def _filter_panel(
         f'{html.escape(title)}（{html.escape(slug)}）</option>'
         for slug, title in papers
     )
-    kind_control = "" if fixed_kind else '<label>種類<select id="statement-kind"><option value="">すべて</option><option value="theorem">定理</option><option value="definition">定義</option><option value="proposition">命題</option><option value="counterexample">反例</option></select></label>'
+    kind_options = "".join(f'<option value="{kind}">{label}</option>' for kind, label in KIND_LABELS.items())
+    kind_control = "" if fixed_kind else f'<label>種類<select id="statement-kind"><option value="">すべて</option>{kind_options}</select></label>'
     year_control = "" if fixed_year else f'<label>公開年<select id="statement-year"><option value="">すべて</option>{year_options}</select></label>'
     return f"""    <section class="statement-filter-panel" aria-labelledby="statement-filter-title">
       <div class="section-heading">
@@ -260,7 +270,7 @@ def generate_statements(catalog: SiteCatalog, output: Path) -> None:
         for year in years
     )
     body = f"""    <section data-statement-directory aria-labelledby="statement-kind-title">
-      <div class="section-heading"><h2 id="statement-kind-title">種類から選ぶ</h2><p>定理・定義・命題・反例ごとの索引です。</p></div>
+      <div class="section-heading"><h2 id="statement-kind-title">種類から選ぶ</h2><p>定理・定義・命題・補題・系・反例ごとの索引です。</p></div>
       <div class="explore-grid statement-shortcuts">{kind_cards}</div>
     </section>
     <section aria-labelledby="statement-year-title">
@@ -273,7 +283,7 @@ def generate_statements(catalog: SiteCatalog, output: Path) -> None:
     target.mkdir(parents=True)
     (target / "index.html").write_text(
         rendered_exploration_page(
-            title="定理・定義・命題・反例索引",
+            title="定理・定義・命題・補題・系・反例索引",
             eyebrow="MATHEMATICAL STATEMENTS",
             description=f"{len(statements)}件の数学的記述を、種類と原稿からたどります。",
             canonical_path="/statements/",

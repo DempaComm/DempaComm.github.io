@@ -1,8 +1,8 @@
 # 定理等の索引と訂正・追記
 
-## 定理・定義・命題・反例索引
+## 定理・定義・命題・補題・系・反例索引
 
-公開サイト生成時に、各原稿の主LaTeXML HTML版から定理、定義、命題、反例の見出しを
+公開サイト生成時に、各原稿の主LaTeXML HTML版から定理、定義、命題、補題、系、反例の見出しを
 自動抽出する。入口は `/statements/`、種類別索引は `/statements/kinds/<種類>/`、
 公開年別索引は `/statements/years/<年>/` に出力する。全件の機械可読データは
 `/statements/statements.json` に残す。
@@ -28,7 +28,7 @@ LaTeXMLで種類を判定できない反例や、自動抽出結果を直した�
 ]
 ```
 
-`kind` は `theorem`、`definition`、`proposition`、`counterexample` のいずれかとする。
+`kind` は `theorem`、`definition`、`proposition`、`lemma`、`corollary`、`counterexample` のいずれかとする。
 `anchor` は主HTML版内の `#` から始まる位置を指定する。
 
 ## 訂正・追記欄

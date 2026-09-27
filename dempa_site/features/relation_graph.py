@@ -10,6 +10,7 @@ from dempa_site.catalog.metadata import SiteCatalog
 from dempa_site.features.exploration_common import rendered_exploration_page
 from dempa_site.features.paper_capabilities import paper_capabilities
 from dempa_site.features.reading_paths import load_reading_paths
+from dempa_site.features.statements import KIND_LABELS
 from dempa_site.files import write_json
 
 
@@ -69,12 +70,7 @@ def _graph_data(catalog: SiteCatalog) -> dict:
     )
     return {
         "schema_version": 1,
-        "statement_labels": {
-            "theorem": "定理",
-            "definition": "定義",
-            "proposition": "命題",
-            "counterexample": "反例",
-        },
+        "statement_labels": KIND_LABELS,
         "excluded_generic_tags": sorted(GENERIC_TAGS),
         "default_tag": default_tag,
         "years": sorted({paper.year for paper in papers}, reverse=True),
@@ -120,7 +116,10 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
         <h2 id="graph-title">意味のある関係をたどる</h2>
         <p>明示関係、読書経路での前後、希少タグだけを線にして、過密な図を避けます。</p>
       </div>
+      <p id="graph-context" class="graph-context" hidden></p>
+      <button id="graph-all" class="more-results" type="button" hidden>全原稿の関係図に戻る</button>
       <div class="graph-controls">
+        <label>原稿名・タグ<input id="graph-query" type="search" placeholder="原稿名・タグを検索"></label>
         <label>タグ<select id="graph-tag"><option value="">すべてのタグ</option></select></label>
         <label>公開年<select id="graph-year"><option value="">すべての年</option></select></label>
         <label>公開内容<select id="graph-content"><option value="">指定なし</option><option value="html">HTML版あり</option><option value="statements">定理等あり</option><option value="corrections">訂正・追記あり</option></select></label>
@@ -131,9 +130,9 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
         <button id="graph-zoom-in" type="button" aria-label="関係図を拡大">＋ 拡大</button>
         <button id="graph-zoom-out" type="button" aria-label="関係図を縮小">− 縮小</button>
         <button id="graph-view-reset" type="button">全体を表示</button>
-        <span>余白をドラッグして移動、ホイールまたはボタンで拡大縮小できます。</span>
+        <span>ボタンで拡大縮小できます。パソコンでは余白のドラッグやホイールも使えます。</span>
       </div>
-      <div class="graph-canvas"><svg id="paper-graph" viewBox="0 0 1200 820" role="img" aria-label="タグを使った原稿関係図"></svg></div>
+      <div class="graph-canvas"><svg id="paper-graph" viewBox="0 0 1200 820" role="group" aria-label="タグを使った原稿関係図"></svg></div>
       <aside id="graph-detail" class="graph-detail" aria-live="polite"><p>図または一覧から原稿を選ぶと、HTML版や定理等への入口を表示します。</p></aside>
       <details class="graph-accessible-list">
         <summary>表示中の原稿を一覧で見る</summary>

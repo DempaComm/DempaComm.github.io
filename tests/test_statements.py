@@ -25,6 +25,9 @@ class StatementIndexTest(unittest.TestCase):
 <div id="Prop3" class="ltx_theorem ltx_theorem_prop"><h6 class="ltx_title_theorem">命題 3.</h6></div>
 <div id="Ex4" class="ltx_theorem ltx_theorem_exam"><h6 class="ltx_title_theorem">例 4.</h6></div>
 <div id="Lem5" class="ltx_theorem ltx_theorem_lem"><h6 class="ltx_title_theorem">補題 5.</h6></div>
+<div id="Cor6" class="ltx_theorem ltx_theorem_cor"><h6 class="ltx_title_theorem">系 6.</h6></div>
+<div id="Lem7" class="ltx_theorem ltx_theorem_custom"><h6 class="ltx_title_theorem">Lemma 7 (Tube lemma).</h6></div>
+<div id="Cor8" class="ltx_theorem ltx_theorem_custom"><h6 class="ltx_title_theorem">Corollary 8.</h6></div>
 </body></html>""",
             encoding="utf-8",
         )
@@ -71,16 +74,18 @@ class StatementIndexTest(unittest.TestCase):
         paper = Paper.from_dict(value, manifest_path)
         return collect_metadata([(manifest_path, paper)])
 
-    def test_extracts_four_kinds_and_applies_manual_override(self) -> None:
+    def test_extracts_six_kinds_and_applies_manual_override(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             catalog = self.prepared_catalog(Path(temporary))
             statements = indexed_statements(catalog)
 
         self.assertEqual(
-            {"theorem", "definition", "proposition", "counterexample"},
+            {"theorem", "definition", "proposition", "lemma", "corollary", "counterexample"},
             {item.kind for item in statements},
         )
-        self.assertEqual(4, len(statements))
+        self.assertEqual(8, len(statements))
+        self.assertEqual({"Lem5", "Lem7"}, {s.identifier for s in statements if s.kind == "lemma"})
+        self.assertEqual({"Cor6", "Cor8"}, {s.identifier for s in statements if s.kind == "corollary"})
         counterexample = next(item for item in statements if item.kind == "counterexample")
         self.assertEqual("manual", counterexample.source)
         self.assertEqual("反例 4（手動補正）", counterexample.title)
@@ -107,7 +112,9 @@ class StatementIndexTest(unittest.TestCase):
                 )
             )
 
-        self.assertIn("定理・定義・命題・反例索引", rendered)
+        self.assertIn("定理・定義・命題・補題・系・反例索引", rendered)
+        self.assertIn('href="kinds/lemma/"', rendered)
+        self.assertIn('href="kinds/corollary/"', rendered)
         self.assertIn('href="kinds/theorem/"', rendered)
         self.assertIn('href="years/2026/"', rendered)
         self.assertNotIn('class="statement-list"', rendered)
@@ -140,7 +147,7 @@ class StatementIndexTest(unittest.TestCase):
             capability = paper_capabilities(catalog)["2026-07-28-01"]
 
         self.assertEqual("html/index.html", capability.html_path)
-        self.assertEqual(4, capability.statement_count)
+        self.assertEqual(8, capability.statement_count)
         self.assertEqual(1, capability.statement_counts["theorem"])
         self.assertEqual(0, capability.correction_count)
 

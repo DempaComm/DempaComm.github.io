@@ -33,7 +33,7 @@ def rendered_full_text_search_page(
     <div class="header-inner">
       <p class="eyebrow">FULL-TEXT SEARCH</p>
       <h1>本文全文検索</h1>
-      <p class="lead">LaTeXML HTML版{indexed}件の本文をPagefindで検索します。</p>
+      <p class="lead">HTML版{indexed}件の本文から検索できます。題名だけでなく、節見出し・定理名・参考文献も対象です。</p>
       <nav class="site-navigation" aria-label="主要ページ">
 {site_navigation("../", "search")}
       </nav>
@@ -59,12 +59,13 @@ def rendered_full_text_search_page(
       </form>
       <p id="fulltext-status" class="fulltext-status" aria-live="polite">検索語を入力してください。</p>
       <ol id="fulltext-results" class="fulltext-results"></ol>
+      <button id="fulltext-more" class="more-results" type="button" hidden>さらに20件表示</button>
       <noscript><p class="paper-empty">本文全文検索にはJavaScriptが必要です。</p></noscript>
     </section>
 
     <aside class="fulltext-search-note">
       <h2>検索範囲</h2>
-      <p>検索対象は主HTML版だけです。HTML版がない記事は<a href="../archive/">全原稿アーカイブ</a>の題名・タグ・キーワード検索を利用してください。</p>
+      <p>検索対象はHTML本文のある{indexed}件です。PDFのみの記事やブログ記事も含む全{len(selected)}件は、<a id="fulltext-archive-link" href="../archive/">全原稿の題名・タグ検索</a>から探せます。</p>
     </aside>
   </main>
 

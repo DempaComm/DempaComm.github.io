@@ -33,10 +33,11 @@ def _year_directory(selected: Sequence[tuple[Path, Paper]]) -> str:
 
 
 def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
-    """Render the compact archive hub; papers live on individual year pages."""
+    """Search every paper, including those without a searchable HTML body."""
+    cards = "\n".join(paper_card(paper, "../", compact=True) for _, paper in reversed(selected))
     description = (
         f"{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を、"
-        "公開年とタグからたどる総合アーカイブです。"
+        "題名・説明・タグ・キーワードで検索できる総合アーカイブです。"
     )
     return f'''<!doctype html>
 <html lang="ja">
@@ -49,13 +50,31 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
     <div class="header-inner">
       <p class="eyebrow">COMPLETE ARCHIVE</p>
       <h1>全原稿アーカイブ</h1>
-      <p class="lead">全{len(selected)}原稿を、公開年またはタグからたどれます。</p>
+      <p class="lead">全{len(selected)}原稿の題名・説明・タグ・キーワードを検索できます。PDFのみの記事やブログ記事も対象です。</p>
       <nav class="site-navigation" aria-label="主要ページ">
 {site_navigation("../", "archive")}
       </nav>
     </div>
   </header>
   <main id="main-content">
+    <section aria-labelledby="archive-search-title">
+      <div class="section-heading"><h2 id="archive-search-title">全原稿を検索</h2><p><a id="archive-fulltext-link" href="../search/">HTML本文の全文検索へ</a></p></div>
+      <form class="paper-search" role="search" aria-label="全原稿を絞り込む" data-page-size="10">
+        <label for="paper-query">題名・説明・タグ・キーワード</label>
+        <div class="paper-search-controls">
+          <input id="paper-query" name="q" type="search" placeholder="例：不動点　可算" autocomplete="off">
+          <select id="paper-tag" aria-label="タグで絞り込む"><option value="">すべてのタグ</option></select>
+          <select id="paper-year" aria-label="公開年で絞り込む"><option value="">すべての年</option></select>
+          <button id="paper-reset" type="button">絞り込みを解除</button>
+        </div>
+        <p id="paper-count" class="paper-count" aria-live="polite"></p>
+        <div id="paper-empty" class="paper-empty" hidden><p>条件に一致する原稿はありません。</p><button type="button" data-reset-papers>絞り込みを解除</button></div>
+      </form>
+      <p class="archive-shortcuts"><a href="#years-title">公開年から選ぶ</a> · <a href="#tags-title">タグ索引へ</a></p>
+      <div class="paper-list paper-list-compact">{cards}</div>
+      <button id="paper-more" class="more-results" type="button" hidden>さらに10件表示</button>
+      <noscript><p>絞り込みにはJavaScriptが必要です。全原稿の一覧と年別・タグ別のリンクはそのまま利用できます。</p></noscript>
+    </section>
     <section class="year-directory" aria-labelledby="years-title">
       <div class="section-heading"><div><p class="section-number">01</p><h2 id="years-title">公開年から選ぶ</h2></div><p>各年のページで、その年の原稿だけを検索できます。</p></div>
       <nav class="explore-grid archive-year-grid" aria-label="公開年別記事一覧">
@@ -68,12 +87,9 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
 {rendered_tag_index(selected).replace('href="tags/', 'href="../tags/')}
       </nav>
     </section>
-    <section aria-labelledby="archive-search-title">
-      <div class="section-heading"><div><p class="section-number">03</p><h2 id="archive-search-title">全文から探す</h2></div><p>年をまたぐ検索には全文検索を利用できます。</p></div>
-      <p><a class="primary-action" href="../search/">全文検索を開く</a></p>
-    </section>
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+  <script src="../search.js" defer></script>
 </body>
 </html>
 '''
@@ -100,7 +116,7 @@ def rendered_archive_year_page(year: int, papers: Sequence[Paper]) -> str:
       <div class="section-heading"><div><p class="section-number">{year}</p><h2 id="papers-title">公開原稿</h2></div><p>{len(papers)}件</p></div>
       <form class="paper-search" role="search" aria-label="{year}年の公開原稿を絞り込む" onsubmit="return false">
         <label for="paper-query">この年の原稿を検索</label>
-        <div class="paper-search-controls"><input id="paper-query" type="search" placeholder="タイトル・タグ・キーワード" autocomplete="off"><select id="paper-tag" aria-label="タグで絞り込む"><option value="">すべてのタグ</option></select><select id="paper-year" aria-label="公開年"><option value="{year}">{year}年</option></select><button id="paper-reset" type="button">絞り込みを解除</button></div>
+        <div class="paper-search-controls paper-search-controls-year"><input id="paper-query" type="search" placeholder="タイトル・タグ・キーワード" autocomplete="off"><select id="paper-tag" aria-label="タグで絞り込む"><option value="">すべてのタグ</option></select><button id="paper-reset" type="button">絞り込みを解除</button></div>
         <p id="paper-count" class="paper-count" aria-live="polite"></p><div id="paper-empty" class="paper-empty" hidden><p>条件に一致する原稿はありません。</p><button type="button" data-reset-papers>絞り込みを解除</button></div>
       </form>
       <div class="paper-list">{cards}</div>

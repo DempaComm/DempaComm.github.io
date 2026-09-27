@@ -19,7 +19,7 @@ from dempa_site.config import (
     SITE_TITLE_TOP,
 )
 from dempa_site.manifests.model import Paper
-from dempa_site.site.cards import has_pdf
+from dempa_site.site.cards import has_pdf, is_pdf_alias
 from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 
 
@@ -38,8 +38,12 @@ def rendered_math_index_item(
     for entry in manifest.files:
         if not entry.public or not entry.label:
             continue
+        if is_pdf_alias(manifest, entry.path):
+            continue
         path = html.escape(entry.path, quote=True)
         label = html.escape(entry.label)
+        if manifest.build.enabled and entry.path == "published.pdf":
+            label = "初出時のPDF"
         file_links.append(f'<a href="{prefix}papers/{slug}/{path}">{label}</a>')
     if manifest.html_version is not None:
         html_path = html.escape(manifest.html_version.path, quote=True)
@@ -86,12 +90,12 @@ def representative_math_tags(papers: Sequence[Paper]) -> list[str]:
 
 
 def papers_for_math_topic(topic: MathTopic, papers: Sequence[Paper]) -> list[Paper]:
-    """Select a non-exclusive topic from one primary section and its tags."""
+    """Select a topic across primary sections using its subject tags."""
     tags = set(topic.tags)
     return [
         paper
         for paper in papers
-        if paper.math_section == topic.section and tags.intersection(paper.tags)
+        if tags.intersection(paper.tags)
     ]
 
 
@@ -176,7 +180,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
     <section class="math-topic-directory" aria-labelledby="math-topics-title">
       <div class="section-heading">
         <h2 id="math-topics-title">テーマから探す</h2>
-        <p>電波通信のタグから自動分類しています。一つの原稿が複数のテーマに現れることがあります。</p>
+        <p>主分類をまたいで、電波通信のタグから原稿を集めています。一つの原稿が複数のテーマに現れることがあります。</p>
       </div>
       <nav class="math-topic-grid" aria-label="数学テーマ別総覧">
 {topic_cards}
@@ -195,7 +199,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
 
 
 def rendered_math_section_page(
-    section: str, papers: Sequence[Paper]
+    section: str, papers: Sequence[Paper], all_papers: Sequence[Paper] | None = None
 ) -> str:
     details = MATH_SECTION_DETAILS[section]
     year_sections = _rendered_year_sections(papers, "../../")
@@ -204,10 +208,10 @@ def rendered_math_section_page(
         section_topics = f"""    <section class="math-topic-directory" aria-labelledby="section-topics-title">
       <div class="section-heading">
         <h2 id="section-topics-title">この分野のテーマ</h2>
-        <p>タグを使って、さらに範囲を絞れます。</p>
+        <p>関連テーマから探せます。テーマ別一覧には、ほかの主分類の原稿も含まれます。</p>
       </div>
       <nav class="math-topic-grid" aria-label="{html.escape(section)}のテーマ">
-{_rendered_topic_cards(papers, section=section, prefix="../topics/")}
+{_rendered_topic_cards(all_papers if all_papers is not None else papers, section=section, prefix="../topics/")}
       </nav>
     </section>"""
     description = str(details["description"])
@@ -264,7 +268,8 @@ def rendered_math_topic_page(topic: MathTopic, papers: Sequence[Paper]) -> str:
     </div>
   </header>
   <main id="main-content">
-    <p class="directory-back"><a href="../../">数学記事総覧へ戻る</a> · <a href="../../{section_slug}/">{html.escape(section)}へ戻る</a></p>
+    <p class="directory-back"><a href="../../">数学記事総覧へ戻る</a> · 関連分野：<a href="../../{section_slug}/">{html.escape(section)}</a></p>
+    <p>このテーマのタグを持つ原稿を、主分類に関係なく掲載しています。</p>
 {_rendered_year_sections(papers, "../../../")}
   </main>
   <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>

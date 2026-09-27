@@ -6,6 +6,7 @@ import html
 from urllib.parse import quote
 
 from dempa_site.config import BLOG_ONLY_KIND
+from dempa_site.catalog.search_terms import expanded_search_terms
 from dempa_site.files import compact_json
 from dempa_site.manifests.model import Paper
 
@@ -38,16 +39,25 @@ def public_file_actions(
     for entry in manifest.files:
         if entry.role == "derived-html":
             continue
+        if is_pdf_alias(manifest, entry.path):
+            continue
         if not entry.public or not entry.label:
             continue
         relative = html.escape(entry.path, quote=True)
         label = html.escape(entry.label)
+        if manifest.build.enabled and entry.path == "published.pdf":
+            label = "初出時のPDF"
         primary = ""
         if not pdf_available and not primary_source_added and entry.role == "manuscript":
             primary = ' class="primary-action"'
             primary_source_added = True
         actions.append(f'{indent}<a{primary} href="{prefix}{relative}">{label}</a>')
     return actions
+
+
+def is_pdf_alias(manifest: Paper, path: str) -> bool:
+    """Disabled builds copy this same PDF to main.pdf during staging."""
+    return not manifest.build.enabled and path == "published.pdf"
 
 
 def original_article_action(
@@ -65,7 +75,7 @@ def tag_href(tag: str, prefix: str = "") -> str:
     return f"{prefix}tags/{quote(tag, safe='')}/"
 
 
-def paper_card(manifest: Paper, prefix: str = "") -> str:
+def paper_card(manifest: Paper, prefix: str = "", *, compact: bool = False) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
@@ -80,7 +90,7 @@ def paper_card(manifest: Paper, prefix: str = "") -> str:
             *manifest["keywords"],
         ]
     )
-    search_attribute = html.escape(search_terms.casefold(), quote=True)
+    search_attribute = html.escape(expanded_search_terms(search_terms).casefold(), quote=True)
     tags_attribute = html.escape(
         compact_json(manifest["tags"]), quote=True
     )
@@ -109,6 +119,27 @@ def paper_card(manifest: Paper, prefix: str = "") -> str:
         else ""
     )
     year_href = f"{prefix}archive/{year}/"
+    if compact:
+        reading_actions = []
+        if has_pdf(manifest):
+            reading_actions.append(f'<a href="{prefix}papers/{slug}/main.pdf">PDFを読む</a>')
+        if manifest.html_version is not None:
+            version = manifest.html_version
+            reading_actions.append(
+                f'<a href="{prefix}papers/{slug}/{html.escape(version.path, quote=True)}">'
+                f'{html.escape(version.label)}</a>'
+            )
+        if manifest.kind == BLOG_ONLY_KIND:
+            original_action = original_article_action(manifest, "")
+            if original_action:
+                reading_actions.append(original_action)
+        reading_actions.append(f'<a href="{prefix}papers/{slug}/">原稿・関連資料</a>')
+        return f'''      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
+        <div class="paper-meta"><time datetime="{published_date}">{published_date}</time><span>{html.escape(manifest.math_section or 'その他')}</span></div>
+        <h3><a href="{prefix}papers/{slug}/">{title}</a></h3>
+        <p>{summary}</p>
+        <nav class="compact-paper-actions" aria-label="{aria}">{' '.join(reading_actions)}</nav>
+      </article>'''
     return f"""      <article class="paper-card" id="paper-{slug}" data-search="{search_attribute}" data-tags="{tags_attribute}" data-year="{year}">
         <div class="paper-meta">
           <span>初出 <a class="paper-year-link" href="{year_href}" aria-label="{year}年の記事一覧">{published_date}</a></span>{kind_badge}

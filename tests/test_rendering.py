@@ -5,6 +5,8 @@ from pathlib import Path
 
 from dempa_site.config import MATH_TOPICS
 from dempa_site.manifests.model import Paper
+from dempa_site.features.reading_paths import ReadingPath, ReadingStep
+from dempa_site.site.cards import public_file_actions
 from dempa_site.site.layout import page_head, site_navigation
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.rendering import (
@@ -105,7 +107,10 @@ class PublicRenderingTest(unittest.TestCase):
         self.assertIn('id="random-paper-scope"', home)
         self.assertIn('src="discovery.js"', home)
         archive = rendered_archive_page(self.selected)
-        self.assertEqual(0, archive.count('class="paper-card"'))
+        self.assertEqual(4, archive.count('class="paper-card"'))
+        self.assertIn('id="paper-query"', archive)
+        self.assertIn('id="paper-more"', archive)
+        self.assertLess(home.index('id="papers-title"'), home.index('id="today-paper"'))
         self.assertIn('href="2026/"', archive)
         self.assertIn("タグ索引", archive)
 
@@ -180,19 +185,25 @@ class PublicRenderingTest(unittest.TestCase):
             ["数学", "距離空間"],
             with_html=True,
         )
-        wrong_section = paper(
+        other_section = paper(
             "2026-07-28-02",
             "別分野の記事",
             "解析・測度・確率",
             ["数学", "距離空間"],
         )
 
-        selected = papers_for_math_topic(topic, [metric_paper, wrong_section])
+        unrelated = paper("2026-07-28-03", "無関係の記事", tags=["代数"])
+        selected = papers_for_math_topic(topic, [metric_paper, other_section, unrelated])
         rendered = rendered_math_topic_page(topic, selected)
 
-        self.assertEqual([metric_paper], selected)
+        self.assertEqual([metric_paper, other_section], selected)
         self.assertIn("距離化の記事", rendered)
-        self.assertNotIn("別分野の記事", rendered)
+        self.assertIn("別分野の記事", rendered)
+        self.assertNotIn("無関係の記事", rendered)
+        section = rendered_math_section_page(
+            "位相・距離・幾何", [metric_paper], [metric_paper, other_section, unrelated]
+        )
+        self.assertIn('class="math-topic-count">2件', section)
         self.assertIn(
             '../../../papers/2026-07-28-01/html/index.html', rendered
         )
@@ -215,6 +226,34 @@ class PublicRenderingTest(unittest.TestCase):
         self.assertIn("2026-07-28", rendered)
         self.assertIn("<strong>追記</strong>", rendered)
         self.assertIn("別証明への説明を追加しました。", rendered)
+
+    def test_paper_navigation_keeps_the_current_paper_context(self) -> None:
+        item = self.papers[0]
+        path = ReadingPath(
+            "fixture-path", "例の読書経路", "説明", (),
+            (ReadingStep(self.papers[1].slug, "準備", self.papers[1]),
+             ReadingStep(item.slug, "本文", item)),
+        )
+        rendered = rendered_paper_page(item, [path])
+        self.assertIn(f'../../graph/?paper={item.slug}', rendered)
+        self.assertIn('../../reading-paths/fixture-path/#step-2', rendered)
+        self.assertIn("まだ登録されていません", rendered_paper_page(item))
+
+    def test_pdf_alias_has_one_action_but_distinct_original_pdf_remains(self) -> None:
+        value = self.papers[0].to_dict()
+        value["files"] = [{
+            "path": "published.pdf", "role": "manuscript", "public": True,
+            "label": "保存PDF", "sha256": "a" * 64, "original_sha256": "a" * 64,
+        }]
+        item = Paper.from_dict(value, self.papers[0].source_path)
+        actions = "\n".join(public_file_actions(item, "", ""))
+        self.assertIn('href="main.pdf"', actions)
+        self.assertNotIn('href="published.pdf"', actions)
+        value["build"] = {"enabled": True, "engine": "lualatex", "root": "main.tex"}
+        item = Paper.from_dict(value, self.papers[0].source_path)
+        actions = "\n".join(public_file_actions(item, "", ""))
+        self.assertIn('href="main.pdf"', actions)
+        self.assertIn('href="published.pdf">初出時のPDF', actions)
 
     def test_compatibility_renderer_remains_a_thin_page_module_index(self) -> None:
         rendering = (

@@ -51,3 +51,15 @@ GitHub Actionsは固定バージョンのextended版を導入し、サイト生�
 からGitHub Pagesへ送る。索引対象は日付形式の正式URLにある
 `papers/20??-??-??-??/html/index.html` に限定し、旧URL互換コピーを重複登録しない。
 Pagefindの導入失敗、索引生成失敗、必須索引ファイルの欠落がある場合は公開を停止する。
+
+## 該当箇所への移動
+
+公開用HTMLの見出しに一意なIDを補い、Pagefindの節別検索結果から直接リンクする。
+結果には最大3箇所の見出しを示し、本文を開いた後も検索語を強調する。
+強調表示はローカル生成した `pagefind-highlight.js` を使い、MathMLの内部を除外する。
+元HTMLの見出し・定理IDは維持する。
+
+仕様の参照先：
+- https://pagefind.app/docs/sub-results/
+- https://pagefind.app/docs/highlighting/
+- https://pagefind.app/docs/highlight-config/

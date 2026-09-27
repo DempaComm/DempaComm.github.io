@@ -26,6 +26,7 @@ from dempa_site.features import (
     run_site_features,
 )
 from dempa_site.features.statements import indexed_statements
+from dempa_site.features.reading_paths import paths_for_paper
 from dempa_site.features.base import FeatureGenerator
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
@@ -33,6 +34,7 @@ from dempa_site.site.cards import has_pdf
 from dempa_site.site.discovery import DISCOVERY_SCRIPT, paper_summary_data
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
+from dempa_site.site.html_view import rendered_public_html
 from dempa_site.site.rendering import (
     papers_for_math_topic,
     rendered_archive_page,
@@ -146,11 +148,13 @@ def generate_static_pages(context: StageContext) -> None:
         rendered_full_text_search_page(selected), encoding="utf-8"
     )
 
+    reading_paths = paths_for_paper(context.catalog)
+    all_papers = [paper for _, paper in selected]
     for _, paper in selected:
         target_dir = output / "papers" / paper.slug
         target_dir.mkdir(parents=True)
         (target_dir / "index.html").write_text(
-            rendered_paper_page(paper), encoding="utf-8"
+            rendered_paper_page(paper, reading_paths.get(paper.slug, ())), encoding="utf-8"
         )
 
     for tag, papers in context.catalog.tags.items():
@@ -171,11 +175,10 @@ def generate_static_pages(context: StageContext) -> None:
         section_dir = math_dir / str(MATH_SECTION_DETAILS[section]["slug"])
         section_dir.mkdir()
         (section_dir / "index.html").write_text(
-            rendered_math_section_page(section, papers), encoding="utf-8"
+            rendered_math_section_page(section, papers, all_papers), encoding="utf-8"
         )
     topic_dir = math_dir / "topics"
     topic_dir.mkdir()
-    all_papers = [paper for _, paper in selected]
     for topic in MATH_TOPICS:
         target = topic_dir / topic.slug
         target.mkdir()
@@ -199,6 +202,7 @@ def copy_public_files(context: StageContext) -> None:
     shutil.copy2(context.paths.search_script, output / "search.js")
     shutil.copy2(root / "full-text-search.js", output / "full-text-search.js")
     shutil.copy2(root / "statements.js", output / "statements.js")
+    shutil.copy2(Path(__file__).with_name("html_reader.js"), output / "html-reader.js")
     for asset in STATIC_ASSETS:
         shutil.copy2(root / asset, output / asset)
 
@@ -217,6 +221,11 @@ def copy_public_files(context: StageContext) -> None:
             target = target_dir / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source_dir / relative, target)
+            if entry.role == "derived-html":
+                target.write_text(
+                    rendered_public_html((source_dir / relative).read_text(encoding="utf-8")),
+                    encoding="utf-8",
+                )
         if paper.build.enabled:
             pdf = source_dir / "main.pdf"
             if not pdf.is_file():

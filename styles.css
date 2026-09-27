@@ -1158,7 +1158,7 @@ footer .title-attribute {
 
 .graph-controls {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) auto;
   gap: 12px;
   align-items: end;
   padding: 20px;
@@ -1191,6 +1191,7 @@ footer .title-attribute {
   font-weight: 700;
 }
 
+.graph-controls input,
 .graph-controls select,
 .graph-controls button {
   min-height: 2.75rem;
@@ -1242,11 +1243,10 @@ footer .title-attribute {
 
 #paper-graph {
   display: block;
-  min-width: 900px;
   width: 100%;
-  min-height: 720px;
+  height: clamp(320px, 65vw, 720px);
   cursor: grab;
-  touch-action: none;
+  touch-action: pan-y;
   user-select: none;
 }
 
@@ -1373,6 +1373,7 @@ footer .title-attribute {
 .paper-html-page .ltx_page_main {
   width: min(1040px, calc(100% - 40px));
   margin: 0 auto 36px;
+  padding: 0;
   background: var(--white);
 }
 
@@ -1384,7 +1385,30 @@ footer .title-attribute {
   font-family: var(--font-serif);
   font-size: 1rem;
   line-height: 1.8;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
+
+.paper-html-page .math-scroll {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+}
+
+.paper-html-page .math-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.paper-html-page .math-scroll math { overflow-wrap: normal; }
+.paper-html-page .math-overflow { box-shadow: inset -3px 0 0 var(--accent); }
+.paper-html-page .math-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.paper-html-page [id^="dempa-heading-"] { scroll-margin-top: 1rem; }
+.graph-detail h3 { scroll-margin-top: 1rem; }
+.graph-return { margin-top: 1rem; padding: .5rem .75rem; }
+.paper-html-page img, .paper-html-page svg { max-width: 100%; height: auto; }
 
 .paper-html-page .ltx_title_document,
 .paper-html-page .ltx_authors,
@@ -1508,8 +1532,52 @@ footer .title-attribute {
   .discovery-controls { grid-template-columns: 1fr; }
   .portal-card-wide { grid-column: auto; }
   .graph-controls { grid-template-columns: 1fr; }
-  #paper-graph { min-height: 560px; }
+  #paper-graph { height: 360px; }
   .lineage-timeline li { grid-template-columns: 1fr; gap: 4px; }
   .html-version-header { padding: 20px; }
   .paper-html-page article.ltx_document { padding: 30px 20px; }
+}
+
+/* Compact navigation and reading previews keep the first useful items close. */
+.home-search { margin-bottom: 32px; }
+.home-search .fulltext-search-form { margin-top: 0; }
+.home-browse-links, .compact-paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.home-browse-links a, .compact-paper-actions a { padding-block: 4px; }
+.paper-list-compact .paper-card { padding: 24px; }
+.paper-list-compact .paper-card h3 { font-size: clamp(1.25rem, 3vw, 1.65rem); margin-bottom: 12px; }
+.paper-list-compact .paper-card > p { max-width: none; margin-bottom: 14px; }
+.compact-paper-actions { font-size: .9rem; }
+.archive-shortcuts { margin-bottom: 20px; }
+.archive-page .year-directory { margin-top: 56px; }
+.paper-search-controls-year { grid-template-columns: minmax(0, 1fr) auto auto; }
+.more-results {
+  padding: 12px 20px;
+  margin: 16px 0 32px;
+  border: 1px solid var(--navy);
+  background: var(--white);
+  color: var(--navy);
+  font: inherit;
+  cursor: pointer;
+}
+.fulltext-results mark { background: #f6df9b; color: var(--ink); font-weight: 700; }
+.fulltext-results .fulltext-passages { margin: .5rem 0 0; padding-left: 1.25rem; }
+.fulltext-results .fulltext-passages li { padding: .25rem 0; border: 0; }
+.graph-context { padding: 16px; border-left: 4px solid var(--accent); background: var(--white); }
+.graph-node-current circle { fill: var(--accent); stroke: var(--navy); stroke-width: 3; }
+.graph-list-select { border: 0; padding: 8px 0; background: transparent; color: var(--navy); font: inherit; text-align: left; text-decoration: underline; cursor: pointer; }
+.graph-controls, .paper-search-controls { min-width: 0; }
+input, select { min-width: 0; }
+[hidden] { display: none !important; }
+@media (max-width: 680px) {
+  .home-page .header-inner { padding: 30px 0; }
+  .home-page main { padding-top: 28px; }
+  .home-search .fulltext-search-form > div { grid-template-columns: minmax(0, 1fr) auto; }
+  .home-search .fulltext-search-form button { padding-inline: 14px; }
+  .home-page .section-heading { margin-bottom: 18px; }
+  .paper-list-compact .paper-card { padding: 20px; }
+  .paper-search-controls-year { grid-template-columns: 1fr; }
 }

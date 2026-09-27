@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import html
+from collections.abc import Sequence
+from typing import TYPE_CHECKING
 from urllib.parse import quote
 
 from dempa_site.config import (
@@ -12,6 +14,8 @@ from dempa_site.config import (
     SITE_TITLE_TOP,
 )
 from dempa_site.manifests.model import Paper
+if TYPE_CHECKING:
+    from dempa_site.features.reading_paths import ReadingPath
 from dempa_site.site.cards import (
     original_article_action,
     public_file_actions,
@@ -19,7 +23,7 @@ from dempa_site.site.cards import (
 from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
 
 
-def rendered_paper_page(manifest: Paper) -> str:
+def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = ()) -> str:
     slug = html.escape(manifest["slug"], quote=True)
     title = html.escape(manifest["title"])
     summary = html.escape(manifest["summary"])
@@ -81,6 +85,17 @@ def rendered_paper_page(manifest: Paper) -> str:
         f"?title={issue_title}&body={issue_body}"
     )
     issue_url = html.escape(issue_url, quote=True)
+    path_links = []
+    for path in reading_paths:
+        step = next(index for index, entry in enumerate(path.papers, 1) if entry.slug == manifest.slug)
+        path_links.append(
+            f'<li><a href="../../reading-paths/{html.escape(path.slug, quote=True)}/#step-{step}">'
+            f'{html.escape(path.title)}（第{step}記事）</a></li>'
+        )
+    paths_html = (
+        '<ul class="paper-reading-paths">' + ''.join(path_links) + '</ul>'
+        if path_links else '<p>この原稿を含む読書経路は、まだ登録されていません。</p>'
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -130,9 +145,11 @@ def rendered_paper_page(manifest: Paper) -> str:
         <h2 id="explore-paper-title">この原稿からたどる</h2>
         <nav class="paper-actions" aria-label="この原稿の探索機能">
           <a href="../../lineage/#paper-{slug}">この原稿の系譜</a>
-          <a href="../../graph/">タグ関係図</a>
-          <a href="../../reading-paths/">読書経路</a>
+          <a href="../../graph/?paper={slug}">この原稿の関係図</a>
         </nav>
+        <h3>この原稿を含む読書経路</h3>
+        {paths_html}
+        <p><a href="../../reading-paths/">すべての読書経路を見る</a></p>
       </section>
       <section aria-labelledby="corrections-title">
         <p class="section-number">CORRECTIONS &amp; ADDENDA</p>

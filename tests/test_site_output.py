@@ -192,12 +192,13 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn('href="search/"', home)
 
         archive = self.read("archive/index.html")
-        self.assertEqual(0, archive.count('class="paper-card"'))
+        self.assertEqual(4, archive.count('class="paper-card"'))
         for year in range(2023, 2027):
             self.assertIn(f'href="{year}/"', archive)
             self.assertIn(f"{year}年", archive)
             year_page = self.read(f"archive/{year}/index.html")
             self.assertIn('id="paper-query"', year_page)
+            self.assertNotIn('id="paper-year"', year_page)
             self.assertEqual(1, year_page.count('class="paper-card"'))
 
     def test_japanese_tag_page_is_grouped_by_year(self) -> None:
@@ -338,6 +339,8 @@ class SiteOutputContractTest(unittest.TestCase):
                 "statements/index.html",
                 "statements/kinds/counterexample/index.html",
                 "statements/kinds/definition/index.html",
+                "statements/kinds/lemma/index.html",
+                "statements/kinds/corollary/index.html",
                 "statements/kinds/proposition/index.html",
                 "statements/kinds/theorem/index.html",
                 "tags/数学/index.html",
@@ -385,7 +388,7 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertIn("原稿関係図は現在調整中です。", graph_page)
         self.assertIn("graph-zoom-in", graph_page)
         self.assertIn("全体を表示", graph_page)
-        self.assertIn("ドラッグして移動", graph_page)
+        self.assertIn("ボタンで拡大縮小", graph_page)
         self.assertIn('id="graph-content"', graph_page)
         self.assertIn('id="graph-detail"', graph_page)
         self.assertEqual(

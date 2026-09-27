@@ -9,7 +9,7 @@
       parameters.delete("year");
       const query = parameters.toString();
       window.location.replace(`years/${year}/${query ? `?${query}` : ""}`);
-    } else if (["theorem", "definition", "proposition", "counterexample"].includes(kind)) {
+    } else if (["theorem", "definition", "proposition", "lemma", "corollary", "counterexample"].includes(kind)) {
       parameters.delete("kind");
       const query = parameters.toString();
       window.location.replace(`kinds/${kind}/${query ? `?${query}` : ""}`);
@@ -45,7 +45,11 @@
       if (matches) visible += 1;
     }
     for (const section of sections) {
-      section.hidden = !section.querySelector(".statement-list li[data-kind]:not([hidden])");
+      const total = section.querySelectorAll(".statement-list li[data-kind]").length;
+      const shown = section.querySelectorAll(".statement-list li[data-kind]:not([hidden])").length;
+      section.hidden = shown === 0;
+      const sectionCount = section.querySelector("[data-statement-count]");
+      if (sectionCount) sectionCount.textContent = shown === total ? `${total}件` : `${total}件中${shown}件`;
     }
     status.textContent = `${items.length}件中${visible}件を表示しています。`;
     const url = new URL(window.location.href);

@@ -10,6 +10,7 @@ from xml.sax.saxutils import escape as xml_escape
 from dempa_site.catalog.metadata import grouped_tags
 from dempa_site.config import MATH_SECTION_DETAILS, MATH_SECTIONS, MATH_TOPICS, SITE_URL
 from dempa_site.manifests.model import Paper
+from dempa_site.features.statements import KIND_LABELS
 
 
 def rendered_sitemap(
@@ -29,7 +30,7 @@ def rendered_sitemap(
     ]
     for year in sorted({str(paper.year) for _, paper in selected}, reverse=True):
         urls.append((f"{SITE_URL}/archive/{year}/", None))
-    for kind in ("theorem", "definition", "proposition", "counterexample"):
+    for kind in KIND_LABELS:
         urls.append((f"{SITE_URL}/statements/kinds/{kind}/", None))
     for year in sorted(set(statement_years), reverse=True):
         urls.append((f"{SITE_URL}/statements/years/{year}/", None))

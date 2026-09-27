@@ -81,7 +81,7 @@ python3 scripts/paper_tool.py check-paper 2015-08-28-01
 `search/` では、LaTeXMLの主HTML版がある記事を本文、節見出し、定理名、参考文献から
 検索できます。最初の導入とローカル確認方法は `docs/PAGEFIND.md` にまとめています。
 
-`statements/` では、LaTeXMLの主HTML版から抽出した定理、定義、命題、反例を種類別に
+`statements/` では、LaTeXMLの主HTML版から抽出した定理、定義、命題、補題、系、反例を種類別に
 参照できます。各原稿ページには、正式な訂正・追記と報告窓口も表示します。登録方法は
 `docs/STATEMENTS_AND_CORRECTIONS.md` にまとめています。
 
