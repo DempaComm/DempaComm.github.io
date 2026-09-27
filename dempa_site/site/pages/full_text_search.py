@@ -53,9 +53,10 @@ def rendered_full_text_search_page(
       <form id="fulltext-search-form" class="fulltext-search-form" role="search">
         <label for="fulltext-query">検索語</label>
         <div>
-          <input id="fulltext-query" name="q" type="search" placeholder="本文に含まれる語" autocomplete="off" required>
+          <input id="fulltext-query" name="q" type="search" placeholder="本文に含まれる語" autocomplete="off">
           <button type="submit">検索</button>
         </div>
+        <button id="fulltext-reset" class="fulltext-reset" type="button">検索を解除</button>
       </form>
       <p id="fulltext-status" class="fulltext-status" aria-live="polite">検索語を入力してください。</p>
       <ol id="fulltext-results" class="fulltext-results"></ol>

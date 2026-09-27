@@ -30,14 +30,14 @@
   const normalized = (value) => value.normalize("NFKC").toLocaleLowerCase("ja").trim();
 
   const update = () => {
-    const wantedQuery = normalized(query.value);
+    const words = normalized(query.value).split(/\s+/).filter(Boolean);
     const wantedKind = kind?.value || "";
     const wantedYear = year?.value || "";
     const wantedPaper = paper.value;
     let visible = 0;
     for (const item of items) {
       const matches =
-        (!wantedQuery || normalized(item.textContent).includes(wantedQuery)) &&
+        words.every(word => normalized(item.textContent).includes(word)) &&
         (!wantedKind || item.dataset.kind === wantedKind) &&
         (!wantedYear || item.dataset.year === wantedYear) &&
         (!wantedPaper || item.dataset.paper === wantedPaper);

@@ -12,6 +12,7 @@
   const zoomIn = document.querySelector("#graph-zoom-in");
   const zoomOut = document.querySelector("#graph-zoom-out");
   const viewReset = document.querySelector("#graph-view-reset");
+  const panButtons = [...document.querySelectorAll(".graph-pan-controls button")];
   const context = document.querySelector("#graph-context");
   const showAll = document.querySelector("#graph-all");
   const parameters = new URLSearchParams(window.location.search);
@@ -281,6 +282,11 @@
       zoomIn.addEventListener("click", () => changeZoom(0.8));
       zoomOut.addEventListener("click", () => changeZoom(1.25));
       viewReset.addEventListener("click", resetView);
+      panButtons.forEach(button => button.addEventListener("click", () => {
+        view.x += Number(button.dataset.panX) * view.width * 0.2;
+        view.y += Number(button.dataset.panY) * view.height * 0.2;
+        applyView();
+      }));
       svg.addEventListener("wheel", event => {
         event.preventDefault();
         changeZoom(event.deltaY < 0 ? 0.86 : 1.16, event.clientX, event.clientY);

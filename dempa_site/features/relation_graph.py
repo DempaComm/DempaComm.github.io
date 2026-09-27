@@ -130,7 +130,13 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
         <button id="graph-zoom-in" type="button" aria-label="関係図を拡大">＋ 拡大</button>
         <button id="graph-zoom-out" type="button" aria-label="関係図を縮小">− 縮小</button>
         <button id="graph-view-reset" type="button">全体を表示</button>
-        <span>ボタンで拡大縮小できます。パソコンでは余白のドラッグやホイールも使えます。</span>
+        <div class="graph-pan-controls" role="group" aria-label="関係図の表示位置">
+          <button type="button" data-pan-x="-1" data-pan-y="0" aria-label="関係図の左側を見る">← 左へ</button>
+          <button type="button" data-pan-x="0" data-pan-y="-1" aria-label="関係図の上側を見る">↑ 上へ</button>
+          <button type="button" data-pan-x="0" data-pan-y="1" aria-label="関係図の下側を見る">↓ 下へ</button>
+          <button type="button" data-pan-x="1" data-pan-y="0" aria-label="関係図の右側を見る">→ 右へ</button>
+        </div>
+        <span>ボタンで拡大縮小し、上下左右へ表示位置を移動できます。パソコンでは余白のドラッグやホイールも使えます。</span>
       </div>
       <div class="graph-canvas"><svg id="paper-graph" viewBox="0 0 1200 820" role="group" aria-label="タグを使った原稿関係図"></svg></div>
       <aside id="graph-detail" class="graph-detail" aria-live="polite"><p>図または一覧から原稿を選ぶと、HTML版や定理等への入口を表示します。</p></aside>

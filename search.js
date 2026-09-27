@@ -47,6 +47,19 @@
     card, text: normalize(card.dataset.search), tags: tagsFor(card)
   }));
 
+  function saveView(url = window.location.href) {
+    const active = document.activeElement;
+    const focusedCard = active?.closest(".paper-card");
+    window.history.replaceState({
+      ...window.history.state,
+      paperSearch: {
+        limit, scrollX: window.scrollX, scrollY: window.scrollY,
+        card: focusedCard?.id || "",
+        href: focusedCard && active.matches("a") ? active.getAttribute("href") : "",
+      },
+    }, "", url);
+  }
+
   function filterPapers(save = true) {
     if (fulltext) {
       const url = new URL(fulltext.href);
@@ -77,7 +90,7 @@
       for (const [key, value] of Object.entries({q: queryInput.value.trim(), tag: selectedTag, year: selectedYear})) {
         value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
       }
-      window.history.replaceState(null, "", url);
+      saveView(url);
     }
   }
 
@@ -86,7 +99,13 @@
   tagSelect.addEventListener("change", changed);
   yearSelect?.addEventListener("change", changed);
   form.addEventListener("submit", event => { event.preventDefault(); changed(); });
-  more?.addEventListener("click", () => { limit += pageSize; filterPapers(false); });
+  more?.addEventListener("click", () => {
+    const shown = cards.filter(card => !card.hidden).length;
+    limit += pageSize;
+    filterPapers(false);
+    cards.filter(card => !card.hidden)[shown]?.querySelector("h3 a")?.focus();
+    saveView();
+  });
   for (const button of resetButtons) {
     button.addEventListener("click", () => {
       queryInput.value = "";
@@ -107,14 +126,31 @@
 
   window.addEventListener("hashchange", openDirectoryFromHash);
   const restore = () => {
+    const saved = window.history.state?.paperSearch;
     const parameters = new URLSearchParams(window.location.search);
     queryInput.value = parameters.get("q") || "";
     tagSelect.value = parameters.get("tag") || "";
     if (!tagSelect.value) tagSelect.value = "";
     if (yearSelect) yearSelect.value = parameters.get("year") || "";
-    limit = pageSize;
+    limit = Number.isInteger(saved?.limit)
+      ? Math.max(pageSize, Math.min(saved.limit, cards.length)) : limit;
     filterPapers(false);
+    if (Number.isFinite(saved?.scrollY)) {
+      requestAnimationFrame(() => {
+        const card = cards.find(item => item.id === saved.card && !item.hidden);
+        const link = card && [...card.querySelectorAll("a")]
+          .find(item => item.getAttribute("href") === saved.href);
+        link?.focus({preventScroll: true});
+        window.scrollTo(saved.scrollX || 0, saved.scrollY);
+      });
+    }
   };
+  // Save before fragment links too: they do not trigger pagehide.
+  document.addEventListener("click", event => {
+    if (event.target.closest("a[href]")) saveView();
+  });
+  window.addEventListener("pagehide", () => saveView());
+  window.addEventListener("pageshow", event => { if (event.persisted) restore(); });
   window.addEventListener("popstate", restore);
   restore();
   openDirectoryFromHash();

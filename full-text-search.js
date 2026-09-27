@@ -4,6 +4,7 @@
   const status = document.querySelector("#fulltext-status");
   const results = document.querySelector("#fulltext-results");
   const more = document.querySelector("#fulltext-more");
+  const reset = document.querySelector("#fulltext-reset");
   const archive = document.querySelector("#fulltext-archive-link");
   if (!form || !input || !status || !results) return;
 
@@ -67,17 +68,19 @@
     return item;
   };
 
-  async function showMore(token) {
+  async function showMore(token, focusNew = false) {
     if (more) more.disabled = true;
     try {
       const entries = await Promise.all(matches.slice(shown, shown + 20).map(result => result.data()));
       if (token !== request) return;
-      for (const entry of entries) results.append(resultItem(entry));
+      const items = entries.map(resultItem);
+      for (const item of items) results.append(item);
       shown += entries.length;
       status.textContent = matches.length
         ? `${matches.length}件見つかりました。` + (shown < matches.length ? `先頭${shown}件を表示しています。` : "")
         : "一致するHTML本文はありません。全原稿の題名・タグ検索もお試しください。";
       if (more) more.hidden = shown >= matches.length;
+      if (focusNew) items[0]?.querySelector("h2 a")?.focus();
     } finally {
       if (token === request && more) more.disabled = false;
     }
@@ -109,18 +112,29 @@
     }
   }
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const query = input.value;
+  const runSearch = (query) => {
     const url = new URL(window.location.href);
     query.trim() ? url.searchParams.set("q", query) : url.searchParams.delete("q");
     window.history.replaceState(null, "", url);
     search(query);
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    runSearch(input.value);
+  });
+  input.addEventListener("input", () => {
+    if (!input.value.trim()) runSearch("");
+  });
+  reset?.addEventListener("click", () => {
+    input.value = "";
+    runSearch("");
+    input.focus();
   });
 
   more?.addEventListener("click", () => {
     const token = request;
-    showMore(token).catch(error => {
+    showMore(token, true).catch(error => {
       if (token !== request) return;
       console.error(error);
       status.textContent = "続きの結果を読み込めませんでした。もう一度お試しください。";
