@@ -6,8 +6,23 @@
 \usepackage{url}
 
 \usepackage{enumitem}
-\usepackage{pdfpages}
+\usepackage{tikz}
 \usepackage{graphicx}
+% Smooth step and positive radial function used only in the schematic figures.
+\pgfmathdeclarefunction{starstep}{1}{%
+  \pgfmathparse{max(0.001,min(0.999,#1))}%
+  \let\startemp\pgfmathresult
+  \pgfmathparse{exp(-1/\startemp)/%
+    (exp(-1/\startemp)+exp(-1/(1-\startemp)))}%
+}
+\pgfmathdeclarefunction{starradius}{1}{%
+  \pgfmathparse{1+0.16*cos(3*#1+20)+0.09*sin(5*#1)%
+    +0.04*cos(7*#1-25)}%
+}
+\tikzset{star axis/.style={->,>=stealth,thin},
+  star guide/.style={densely dashed,black!45,thin},
+  star curve/.style={thick},
+  star join/.style={red!70!black,very thick}}
 %\usepackage{showkeys}
 %定理環境 thmはあまり使わずpropをなるべく使う。
 %主張は基本的に証明の中で使い、そのため番号を付けない。
@@ -591,11 +606,80 @@ h(r, a, b, c, d)
 \end{proof}
 
 
-\includepdf[pages={3}]{mei.pdf}
+% BEGIN TIKZ: mei.pdf, pages 3--5.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.65cm,y=1.05cm,font=\small]
+  \draw[star axis] (0,0) -- (5.65,0) node[right] {$r$};
+  \draw[star axis] (0,0) -- (0,4.85);
+  \draw[star guide] (0,1) node[left,text=black] {$c$} -- (5,1);
+  \draw[star guide] (0,4) node[left,text=black] {$d$} -- (5,4);
+  \draw[star guide] (1,0) -- (1,4);
+  \draw[star guide] (5,0) -- (5,4);
+  \draw[star guide] (2,0) -- (2,1.5);
+  \draw[star guide] (4,0) -- (4,3.5);
+  \draw[star guide] (0.7,0.85) -- (5.3,3.15);
+  \draw[star guide] (0.7,1.85) -- (5.3,4.15);
+  \draw[star curve,domain=0.7:5.3,samples=141,variable=\r]
+    plot (\r,{0.5*(\r-1)+1+starstep((\r-2)/2)});
+  \fill (1,1) circle (1.4pt);
+  \fill (5,4) circle (1.4pt);
+  \foreach \x/\lab in {1/a,2/{a+\delta},4/{b-\delta},5/b}{
+    \draw (\x,0.06) -- (\x,-0.06) node[below] {$\lab$};
+  }
+  \node at (2.65,4.65) {$h(r,a,b,c,d)$};
+\end{tikzpicture}
+\caption{$h$の概形．両端の近くでは傾き$1/2$の直線になり，
+区間$[a,b]$を$[c,d]$へ単調に写す．
+$\delta=(b-a)/4$とする．}
+\label{fig:star-h}
+\end{figure}
 
-\includepdf[pages={4}]{mei.pdf}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=7.3cm,y=2.4cm,font=\small]
+  \draw[star axis] (-0.25,0) -- (1.13,0) node[right] {$x$};
+  \draw[star axis] (0,-0.16) -- (0,1.38);
+  \draw[star guide] (0.25,0) -- (0.25,1);
+  \draw[star curve,domain=-0.22:1.06,samples=161,variable=\t]
+    plot (\t,{1-starstep(2*\t-0.5)});
+  \node[above left] at (0,1) {$1$};
+  \node[below left] at (0,0) {$0$};
+  \draw (0.25,0.035) -- (0.25,-0.035)
+    node[below] {$\frac14$};
+  \draw (0.75,0.035) -- (0.75,-0.035)
+    node[below] {$\frac34$};
+  \node at (0.55,1.18) {$\psi$};
+\end{tikzpicture}
+\caption{滑らかな関数$\psi$の概形．
+$x\le 1/4$では$1$，$x\ge 3/4$では$0$であり，その間では狭義に減少する．}
+\label{fig:star-psi}
+\end{figure}
 
-\includepdf[pages={5}]{mei.pdf}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.7cm,y=3.6cm,font=\small]
+  \draw[star axis] (-0.15,0) -- (4.65,0) node[right] {$r$};
+  \draw[star axis] (0,-0.05) -- (0,1.2);
+  \draw[star guide] (0,0.25) -- (1,0.25) -- (1,0);
+  \draw[star guide] (0,0.75) -- (3,0.75) -- (3,0);
+  \draw[star guide] (0,1) -- (4,1) -- (4,0);
+  \draw[star curve] (0,0) -- (4,1);
+  \node[above left] at (0,0) {$0$};
+  \node[left] at (0,0.25) {$\frac14$};
+  \node[left] at (0,0.75) {$\frac34$};
+  \node[left] at (0,1) {$1$};
+  \foreach \x/\lab in {0/a,1/{a+\delta},3/{b-\delta},4/b}{
+    \draw (\x,0.018) -- (\x,-0.018) node[below] {$\lab$};
+  }
+  \node at (2.2,1.17) {$\displaystyle\frac{r-a}{b-a}$};
+\end{tikzpicture}
+\caption{参考として，$(r-a)/(b-a)$のグラフ．
+$\delta=(b-a)/4$なので，$a+\delta$と$b-\delta$はそれぞれ$1/4$と$3/4$に対応する．}
+\label{fig:star-rescale}
+\end{figure}
+\clearpage
+% END TIKZ: mei.pdf, pages 3--5.
 
 ユークリッド空間
 $\rr^{n}$
@@ -861,16 +945,133 @@ $U(0, 1)$
 
 
 
-\includepdf[pages={30}]{zu.pdf}
+% BEGIN TIKZ: zu.pdf, pages 30--32.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.35cm,y=1.02cm,font=\small]
+  \draw[star axis] (-0.15,0) -- (8.5,0) node[right] {$r$};
+  \draw[star axis] (0,-0.1) -- (0,5.7);
+  \foreach \xa/\ya/\xb/\yb in
+    {0/0/2/1.25,2/1.25/3.2/2.35,3.2/2.35/4.2/3.1,
+     4.2/3.1/5.05/3.75,5.05/3.75/5.75/4.2,
+     5.75/4.2/6.3/4.6,6.3/4.6/6.8/4.95}{
+    \draw[star curve,domain=\xa:\xb,samples=65,variable=\r]
+      plot (\r,{\ya+0.5*(\r-\xa)
+        +(\yb-\ya-0.5*(\xb-\xa))
+        *starstep(2*(\r-\xa)/(\xb-\xa)-0.5)});
+  }
+  \draw[star guide] (0,1.25) node[left,text=black] {$g_N(x)$}
+    -- (2,1.25) -- (2,0);
+  \draw[star guide] (0,2.35) -- (3.2,2.35) -- (3.2,0);
+  \draw[star guide] (0,3.75) node[left,text=black] {$g_n(x)$}
+    -- (5.05,3.75) -- (5.05,0);
+  \draw[star guide] (0,4.2) -- (5.75,4.2) -- (5.75,0);
+  \foreach \x/\y in
+    {0/0,2/1.25,3.2/2.35,4.2/3.1,5.05/3.75,
+     5.75/4.2,6.3/4.6,6.8/4.95}{
+    \draw[star join] ({\x-0.075},{\y-0.0375})
+      -- ({\x+0.075},{\y+0.0375});
+  }
+  \foreach \x/\lab in
+    {2/{1-\frac1N},3.2/{1-\frac1{N+1}},5.05/{1-\frac1n},8/1}{
+    \draw (\x,0.055) -- (\x,-0.055) node[below] {$\lab$};
+  }
+  \node[below left] at (0,0) {$0$};
+  \draw[star guide] (0,5.35) node[left,text=black] {$f(x)$}
+    -- (8,5.35);
+  \draw[loosely dotted,black!65] (6.8,4.95)
+    to[out=25,in=180] (8,5.35);
+  \draw[fill=white] (8,5.35) circle (1.3pt);
+  \draw[star guide] (8,0.15) -- (8,5.3);
+\end{tikzpicture}
 
+\smallskip
+\begin{minipage}{0.94\linewidth}
+\small
+赤い部分では，隣り合う区間の定義が同じ傾き$1/2$の直線と一致するので，
+滑らかに貼り合わせられる．これは，端点の近くで
+\[
+  h(r,a,b,c,d)=\frac12(r-a)+c\quad(r<a+\delta),
+\]
+\[
+  h(r,a,b,c,d)=\frac12(r-b)+d\quad(b-\delta<r)
+\]
+となることによる．
+\end{minipage}
+\caption{方向$x\in\mathbb{S}^{n-1}$を固定したときの，動径方向の写像の模式図．
+各$1-1/n$が$g_n(x)$へ写る．}
+\label{fig:star-gluing}
+\end{figure}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.93,font=\small]
+  \draw[star curve] (0,0) circle (2.05);
+  \fill (0,0) circle (1.5pt) node[below left] {$0$};
+  \node at (0,-2.55) {$U(0,1)$};
+  \draw[star axis,thick] (2.55,0) -- (4.05,0)
+    node[midway,above] {$\Phi$};
+  \begin{scope}[shift={(6.8,0)}]
+    \draw[star curve,domain=0:360,samples=181,variable=\t]
+      plot ({2.05*starradius(\t)*cos(\t)},
+            {2.05*starradius(\t)*sin(\t)}) -- cycle;
+    \fill (0,0) circle (1.5pt) node[below left] {$0$};
+    \node at (0,-2.55) {星型領域$C$};
+  \end{scope}
+\end{tikzpicture}
+\caption{単位開球$U(0,1)$と星型領域$C$．
+どちらの星の中心も原点であり，$\Phi$は動径方向に点を動かす．}
+\label{fig:star-domains}
+\end{figure}
 
-
-\includepdf[pages={31}]{zu.pdf}
-
-
-
-\includepdf[pages={32}]{zu.pdf}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.93,font=\small]
+  \fill[red!9,even odd rule] (0,0) circle (1.66)
+    (0,0) circle (1.39);
+  \foreach \r in {0.74,1.09,1.39,1.66,1.87,2.05}{
+    \draw[star curve] (0,0) circle (\r);
+  }
+  \draw[star axis] (0,0) -- (25:2.28) node[above right] {$x$};
+  \fill (0,0) circle (1.5pt) node[above left] {$0$};
+  \draw[thin] (-55:0.74) -- (0.58,-1.02) -- (0.58,-2.6)
+    node[below] {$1-\frac1N$};
+  \draw[thin] (-28:1.39) -- (2.28,-1.12) -- (2.28,-2.25)
+    node[below] {$1-\frac1n$};
+  \node at (-1.15,-2.78) {$U(0,1)$};
+  \draw[star axis,thick] (2.6,0.4) -- (4.04,0.4)
+    node[midway,above] {$\Phi$};
+  \begin{scope}[shift={(6.8,0)}]
+    \fill[red!9,even odd rule]
+      plot[domain=0:360,samples=181,variable=\t]
+        ({1.66*starradius(\t)*cos(\t)},
+         {1.66*starradius(\t)*sin(\t)}) -- cycle
+      plot[domain=0:360,samples=181,variable=\t]
+        ({1.39*starradius(\t)*cos(\t)},
+         {1.39*starradius(\t)*sin(\t)}) -- cycle;
+    \foreach \r in {0.74,1.09,1.39,1.66,1.87,2.05}{
+      \draw[star curve,domain=0:360,samples=181,variable=\t]
+        plot ({\r*starradius(\t)*cos(\t)},
+              {\r*starradius(\t)*sin(\t)}) -- cycle;
+    }
+    \draw[star axis] (0,0) -- (25:2.28) node[above right] {$x$};
+    \fill (0,0) circle (1.5pt) node[above left] {$0$};
+    \draw[thin] ({0.74*starradius(-55)*cos(-55)},
+                  {0.74*starradius(-55)*sin(-55)})
+      -- (0.58,-1.02) -- (0.58,-2.6) node[below] {$g_N$};
+    \draw[thin] ({1.39*starradius(-28)*cos(-28)},
+                  {1.39*starradius(-28)*sin(-28)})
+      -- (2.28,-1.12) -- (2.28,-2.25) node[below] {$g_n$};
+    \node at (-1.15,-2.78) {星型領域$C$};
+  \end{scope}
+\end{tikzpicture}
+\caption{同心球面と動径グラフの対応の模式図．
+半径$1-1/n$の球面上の点$(1-1/n)x$は$g_n(x)x$へ写り，
+隣り合う球面の間は$h$で補間される．薄赤色は対応する殻を表す．}
+\label{fig:star-shells}
+\end{figure}
+\clearpage
+% END TIKZ: zu.pdf, pages 30--32.
 
 
 \section{この定理の参考文献にまつわる謎}
