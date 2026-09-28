@@ -29,6 +29,46 @@
   document.fonts?.ready.then(schedule);
   schedule();
 
+  const footnotes = [];
+  for (const note of document.querySelectorAll(".ltx_note.ltx_role_footnote")) {
+    const mark = note.querySelector(":scope > .ltx_note_mark");
+    const content = note.querySelector(".ltx_note_content");
+    if (!mark || !content) continue;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "footnote-toggle";
+    button.setAttribute("aria-label", `脚注${mark.textContent.trim()}`);
+    if (!content.id) {
+      let identifier = `dempa-footnote-${footnotes.length + 1}`;
+      while (document.getElementById(identifier)) identifier += "-note";
+      content.id = identifier;
+    }
+    button.setAttribute("aria-controls", content.id);
+    const setOpen = (open) => {
+      content.hidden = !open;
+      button.setAttribute("aria-expanded", String(open));
+      schedule();
+    };
+    mark.replaceWith(button);
+    button.append(mark);
+    note.classList.add("footnote-interactive");
+    setOpen(false);
+    button.addEventListener("click", () => setOpen(content.hidden));
+    note.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !content.hidden) {
+        event.preventDefault();
+        setOpen(false);
+        button.focus({preventScroll: true});
+      }
+    });
+    footnotes.push({note, setOpen});
+  }
+  document.addEventListener("click", event => {
+    for (const {note, setOpen} of footnotes) {
+      if (!note.contains(event.target)) setOpen(false);
+    }
+  });
+
   // Keep MathML intact: highlight prose using the locally generated Pagefind asset.
   if (new URLSearchParams(window.location.search).has("highlight")) {
     import("/pagefind/pagefind-highlight.js").then(() => {
@@ -38,10 +78,19 @@
           className: "pagefind-highlight",
           exclude: ["[data-pagefind-ignore]", "[data-pagefind-ignore] *", "math", "math *", "script", "style"],
           done: () => {
+            for (const {note, setOpen} of footnotes) {
+              if (note.querySelector("mark.pagefind-highlight")) setOpen(true);
+            }
             const hash = window.location.hash.slice(1);
             let identifier = hash;
             try { identifier = decodeURIComponent(hash); } catch { /* Keep a literal malformed fragment. */ }
-            const target = identifier ? document.getElementById(identifier) : document.querySelector("mark.pagefind-highlight");
+            const anchor = identifier ? document.getElementById(identifier) : null;
+            const marks = [...document.querySelectorAll("mark.pagefind-highlight")];
+            const match = marks.find(mark => !anchor || anchor.contains(mark) ||
+              (anchor.compareDocumentPosition(mark) & Node.DOCUMENT_POSITION_FOLLOWING));
+            const matchedNote = match?.closest(".footnote-interactive");
+            const target = matchedNote || anchor || match;
+            matchedNote?.querySelector(".footnote-toggle")?.focus({preventScroll: true});
             target?.scrollIntoView({block: "start"});
             schedule();
           }

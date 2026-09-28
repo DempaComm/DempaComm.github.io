@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import unittest
+from html import escape
 
 from dempa_site.site.html_view import rendered_public_html
 
@@ -51,6 +52,31 @@ class PublicHTMLViewTest(unittest.TestCase):
         self.assertIn('<div id="Lemma1">', result)
         self.assertIn('<h2 id="S2">節2</h2>', result)
         self.assertIn('<script src="/html-reader.js" defer></script>', result)
+
+    def test_search_heading_labels_keep_math_and_escape_metadata(self) -> None:
+        math = '<math alttext="p"><mi>p</mi></math>'
+        source = ('<html><head></head><body><h2 id="norm">例 2 (' + math + '-ノルム).</h2>'
+                  '<h3><math><mn>0</mn></math>次元 &amp; &quot;例&quot;</h3>'
+                  '<h4>通常の見出し</h4></body></html>')
+        result = rendered_public_html(source)
+        self.assertIn('data-pagefind-meta="heading_html_norm[content]" content="' +
+                      escape('例 2 (' + math + '-ノルム).', quote=True) + '"', result)
+        self.assertIn(escape('<math><mn>0</mn></math>次元 &amp; &quot;例&quot;', quote=True), result)
+        self.assertEqual(2, result.count('data-pagefind-meta='))
+        self.assertIn(math, result)
+        self.assertEqual(re.sub('<[^>]+>', '', source), re.sub('<[^>]+>', '', result))
+
+    def test_search_math_labels_keep_fractions_exponents_and_resolved_references(self) -> None:
+        formula = ('<math alttext="\\frac{x^{n+1}}{2}"><mfrac><msup><mi>x</mi>'
+                   '<mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mn>2</mn></mfrac></math>')
+        reference = ('<math alttext="\\ref{condition}"><mtext><a href="#condition">'
+                     '<span>(1)</span></a></mtext></math>')
+        source = '<head></head><h2 id="formula">' + formula + '</h2><h3 id="ref">' + reference + '</h3>'
+        result = rendered_public_html(source)
+        self.assertIn('content="' + escape(formula, quote=True) + '"', result)
+        self.assertIn('content="' + escape(reference, quote=True) + '"', result)
+        self.assertIn(formula, result)
+        self.assertIn(reference, result)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import gzip
+import json
+import re
 import shutil
 import subprocess
 import sys
@@ -24,6 +27,42 @@ class PagefindReport:
 
 
 CommandRunner = Callable[..., subprocess.CompletedProcess[str]]
+
+
+def adapt_japanese_queries(bundle: Path) -> None:
+    """Bridge the pinned Pagefind 1.5.2 query splitter and its indexed words.
+
+    Pagefind has no query-segmentation hook. Patch the same narrow call in its
+    main-thread and worker bundles; stop the build if their format changes.
+    """
+    call = "for(const{segment:word}of wordSegmenter.segment(term))"
+    fragment_call = re.compile(r"this\.loadFragment\(([^,]+),([^,]+),term\)")
+    scripts = {name: (bundle / name).read_text(encoding="utf-8")
+               for name in ("pagefind.js", "pagefind-worker.js")}
+    if any(source.count(call) != 1 or len(fragment_call.findall(source)) != 1
+           for source in scripts.values()):
+        raise PaperToolError("Pagefindの検索処理が想定と異なります。日本語分割の補正を確認してください")
+    words: set[str] = set()
+    for fragment in sorted((bundle / "fragment").glob("*.pf_fragment")):
+        raw = gzip.decompress(fragment.read_bytes()).decode("utf-8")
+        content = json.loads(raw[raw.index("{"):])["content"]
+        words.update(word for word in re.split(r"[\s\u200b]+", content)
+                     if re.fullmatch(r"[\u30a1-\u30fa\u30fc]+", word))
+    helper = Path(__file__).with_name("pagefind_query.js").read_text(encoding="utf-8")
+    # Pagefind starts a classic worker, so inline the shared helper instead of
+    # adding an ES-module import that would silently disable worker searching.
+    helper = helper.replace("export function indexedKatakanaSegments", "function indexedKatakanaSegments")
+    helper += "\nconst indexedKatakana = new Set(" + json.dumps(sorted(words), ensure_ascii=False) + ");\n"
+    helper += "const segmentQuery = (term, language, segmenter) => indexedKatakanaSegments(term, language, segmenter, indexedKatakana);\n"
+    replacement = "for(const{segment:word}of segmentQuery(term,trueLanguage,wordSegmenter))"
+    for name, source in scripts.items():
+        # The folded search term drops dakuten. Carry the original segmented
+        # term to the reader so that highlighting still finds ディリクレ, etc.
+        source = fragment_call.sub(r"this.loadFragment(\1,\2,originalTerm)", source)
+        (bundle / name).write_text(
+            helper + source.replace(call, replacement),
+            encoding="utf-8",
+        )
 
 
 def missing_bundle_parts(bundle: Path) -> tuple[str, ...]:
@@ -106,4 +145,5 @@ def build_pagefind_index(
             "Pagefind索引の必須ファイルがありません: "
             + ", ".join(f"pagefind/{name}" for name in missing)
         )
+    adapt_japanese_queries(bundle)
     return PagefindReport(len(pages), bundle)

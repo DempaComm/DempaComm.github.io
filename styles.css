@@ -1417,6 +1417,28 @@ footer .title-attribute {
 .paper-html-page .math-scroll math { overflow-wrap: normal; }
 .paper-html-page .math-overflow { box-shadow: inset -3px 0 0 var(--accent); }
 .paper-html-page .math-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.paper-html-page .footnote-toggle {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  margin: 0 .15em;
+  padding: .1em .25em;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--white);
+  color: var(--accent);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+.paper-html-page .footnote-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.paper-html-page .footnote-interactive .ltx_note_content[hidden] { display: none; }
+.paper-html-page .footnote-interactive .ltx_note_content:not([hidden]) {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  font-style: normal;
+  text-indent: 0;
+}
 .paper-html-page [id^="dempa-heading-"] { scroll-margin-top: 1rem; }
 .graph-detail h3 { scroll-margin-top: 1rem; }
 .graph-return { margin-top: 1rem; padding: .5rem .75rem; }
