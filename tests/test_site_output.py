@@ -385,16 +385,25 @@ class SiteOutputContractTest(unittest.TestCase):
         self.assertEqual([], normal_node["reading_paths"])
         self.assertNotIn("数学", [tag["name"] for tag in graph["tags"]])
         graph_page = self.read("graph/index.html")
-        self.assertIn("原稿関係図は現在調整中です。", graph_page)
+        self.assertNotIn("調整中", graph_page)
+        self.assertEqual(2, graph["schema_version"])
+        self.assertEqual(4, len(graph["groups"]))
+        self.assertIn("summary", normal_node)
+        self.assertIn("group", normal_node)
         self.assertIn("graph-zoom-in", graph_page)
-        self.assertIn("全体を表示", graph_page)
-        self.assertIn("ボタンで拡大縮小", graph_page)
+        self.assertIn("全体が見える位置に戻す", graph_page)
+        self.assertIn("Tab・Enterと表示ボタンでも操作できます", graph_page)
+        self.assertIn('src="graph.js" type="module"', graph_page)
+        self.assertIn('href="graph.css"', graph_page)
         self.assertIn('id="graph-content"', graph_page)
         self.assertIn('id="graph-detail"', graph_page)
         self.assertEqual(
             GRAPH_SCRIPT_PATH.read_text(encoding="utf-8"),
             self.read("graph/graph.js"),
         )
+        for source, output in (("graph_model.js", "graph-model.js"), ("relation_graph.css", "graph.css")):
+            self.assertEqual(GRAPH_SCRIPT_PATH.with_name(source).read_text(encoding="utf-8"),
+                             self.read(f"graph/{output}"))
 
         lineage = json.loads(self.read("lineage/lineage.json"))
         normal = next(item for item in lineage["papers"] if item["slug"] == "2023-04-04-01")
