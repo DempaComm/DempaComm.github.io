@@ -41,7 +41,7 @@ def prepare_paper_repository(root: Path) -> dict[str, str]:
         ),
         encoding="utf-8",
     )
-    (root / "styles.css").write_text("/* fixture */\n", encoding="utf-8")
+    prepare_styles(root)
     (root / "search.js").write_text("// fixture\n", encoding="utf-8")
     (root / "full-text-search.js").write_text(
         "// full-text fixture\n", encoding="utf-8"
@@ -86,3 +86,12 @@ def add_privacy_review_receipt(root: Path, source: Path) -> None:
         ),
         encoding="utf-8",
     )
+
+
+def prepare_styles(root: Path) -> None:
+    from dempa_site.site.assets import STYLE_PARTS
+
+    target = root / "assets" / "styles"
+    target.mkdir(parents=True)
+    for name in STYLE_PARTS:
+        (target / name).write_text("/* fixture */\n", encoding="utf-8")

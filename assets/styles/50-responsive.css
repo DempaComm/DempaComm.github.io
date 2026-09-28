@@ -1,0 +1,65 @@
+
+@media (max-width: 680px) {
+  .paper-search-controls {
+    grid-template-columns: 1fr;
+  }
+  .fulltext-search-form > div { grid-template-columns: 1fr; }
+  .statement-filter { grid-template-columns: 1fr; }
+  .header-inner { padding: 52px 0 46px; }
+  .paper-meta { flex-wrap: wrap; }
+  .section-heading { grid-template-columns: 1fr; gap: 8px; }
+  .workflow ol { grid-template-columns: 1fr; }
+  .tag-index,
+  .year-groups,
+  .portal-grid { grid-template-columns: 1fr; }
+  .math-directory-grid { grid-template-columns: 1fr; }
+  .math-topic-grid { grid-template-columns: 1fr; }
+  .explore-grid { grid-template-columns: 1fr; }
+  .discovery-grid,
+  .discovery-controls { grid-template-columns: 1fr; }
+  .portal-card-wide { grid-column: auto; }
+  .lineage-timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .html-version-header { padding: 20px; }
+  .paper-html-page article.ltx_document { padding: 30px 20px; }
+}
+
+/* Compact navigation and reading previews keep the first useful items close. */
+.home-search { margin-bottom: 32px; }
+.home-search .fulltext-search-form { margin-top: 0; }
+.home-browse-links, .compact-paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.home-browse-links a, .compact-paper-actions a { padding-block: 4px; }
+.paper-list-compact .paper-card { padding: 24px; }
+.paper-list-compact .paper-card h3 { font-size: clamp(1.25rem, 3vw, 1.65rem); margin-bottom: 12px; }
+.paper-list-compact .paper-card > p { max-width: none; margin-bottom: 14px; }
+.compact-paper-actions { font-size: .9rem; }
+.archive-shortcuts { margin-bottom: 20px; }
+.archive-page .year-directory { margin-top: 56px; }
+.paper-search-controls-year { grid-template-columns: minmax(0, 1fr) auto auto; }
+.more-results {
+  padding: 12px 20px;
+  margin: 16px 0 32px;
+  border: 1px solid var(--navy);
+  background: var(--white);
+  color: var(--navy);
+  font: inherit;
+  cursor: pointer;
+}
+.fulltext-results mark { background: #f6df9b; color: var(--ink); font-weight: 700; }
+.fulltext-results .fulltext-passages { margin: .5rem 0 0; padding-left: 1.25rem; }
+.fulltext-results .fulltext-passages li { padding: .25rem 0; border: 0; }
+.paper-search-controls { min-width: 0; }
+input, select { min-width: 0; }
+[hidden] { display: none !important; }
+@media (max-width: 680px) {
+  .home-page .header-inner { padding: 30px 0; }
+  .home-page main { padding-top: 28px; }
+  .home-search .fulltext-search-form > div { grid-template-columns: minmax(0, 1fr) auto; }
+  .home-search .fulltext-search-form button { padding-inline: 14px; }
+  .home-page .section-heading { margin-bottom: 18px; }
+  .paper-list-compact .paper-card { padding: 20px; }
+  .paper-search-controls-year { grid-template-columns: 1fr; }
+}

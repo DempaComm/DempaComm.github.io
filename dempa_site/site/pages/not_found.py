@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-from dempa_site.config import (
-    SITE_TITLE_ATTRIBUTE,
-    SITE_TITLE_FORMAL,
-    SITE_TITLE_TOP,
-)
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.config import SITE_TITLE_TOP
+from dempa_site.site.layout import page_head, site_footer, site_header
 
 
 def rendered_not_found_page() -> str:
     description = "指定されたページは見つかりませんでした。数識電収の各索引から原稿を探せます。"
+    header = site_header(
+        eyebrow_html="404 NOT FOUND",
+        title_html="ページが見つかりません",
+        lead_html="URLが変更されたか、原稿がまだ公開されていないようです。別の入口から探してみてください。",
+        prefix="/",
+        current_navigation="",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -20,16 +23,7 @@ def rendered_not_found_page() -> str:
 </head>
 <body class="not-found-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">404 NOT FOUND</p>
-      <h1>ページが見つかりません</h1>
-      <p class="lead">URLが変更されたか、原稿がまだ公開されていないようです。別の入口から探してみてください。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("/", "")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <section class="not-found-guide">
       <p class="section-number">WAYFINDER</p>
@@ -43,7 +37,7 @@ def rendered_not_found_page() -> str:
       </nav>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """

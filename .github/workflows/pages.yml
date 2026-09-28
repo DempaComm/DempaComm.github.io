@@ -24,7 +24,9 @@ jobs:
           fetch-depth: 0
 
       - name: Run unit tests
-        run: python3 tools/run_tests.py
+        run: |
+          node --version
+          python3 tools/run_tests.py
 
       - name: Verify protected source files and catalog
         run: |
@@ -37,7 +39,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: papers/**/main.pdf
-          key: latex-pdfs-v1-${{ runner.os }}-${{ hashFiles('papers/**', '.github/workflows/pages.yml', 'dempa_site/build_selection.py', 'dempa_site/cli_parser.py', 'dempa_site/config.py', 'dempa_site/manifests/**', 'dempa_site/paths.py', 'scripts/paper_tool.py') }}
+          key: latex-pdfs-v1-${{ runner.os }}-${{ hashFiles('papers/**', '.github/workflows/pages.yml', 'dempa_site/build_selection.py', 'dempa_site/cli.py', 'dempa_site/cli_parser.py', 'dempa_site/commands/*.py', 'dempa_site/config.py', 'dempa_site/manifests/**', 'dempa_site/paths.py', 'scripts/paper_tool.py') }}
           restore-keys: |
             latex-pdfs-v1-${{ runner.os }}-
 

@@ -11,10 +11,10 @@ from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import tag_href
 
 
-def rendered_tag_index(selected: Sequence[tuple[Path, Paper]]) -> str:
+def rendered_tag_index(selected: Sequence[tuple[Path, Paper]], prefix: str = "") -> str:
     grouped = grouped_tags(selected)
     return "\n".join(
-        f'      <a class="tag-index-item" href="{tag_href(tag)}">'
+        f'      <a class="tag-index-item" href="{prefix}{tag_href(tag)}">'
         f"<span>{html.escape(tag)}</span><span>{len(papers)}件</span></a>"
         for tag, papers in sorted(grouped.items(), key=lambda item: (-len(item[1]), item[0]))
     )

@@ -74,6 +74,15 @@ def complete_check_steps(
     )
 
 
+def preflight_check_steps(
+    repository: Path,
+    site_output: Path,
+    python_executable: str = sys.executable,
+) -> tuple[CheckStep, ...]:
+    """Validate a proposed public change before comparing its reviewed baseline."""
+    return complete_check_steps(repository, site_output, python_executable)[:-1]
+
+
 def _show_failure_output(
     completed: subprocess.CompletedProcess[str], output: TextIO
 ) -> None:

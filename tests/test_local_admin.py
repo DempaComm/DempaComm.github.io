@@ -280,7 +280,7 @@ class LocalAdminTest(unittest.TestCase):
                 raise PaperToolError("自動テスト: 失敗")
 
             app.preflight = fail_preflight  # type: ignore[method-assign]
-            with patch("dempa_site.local_admin.write_baseline") as write:
+            with patch("dempa_site.admin.service.write_baseline") as write:
                 with self.assertRaisesRegex(PaperToolError, "自動テスト: 失敗"):
                     app.accept_baseline("preview", "意図した更新")
 

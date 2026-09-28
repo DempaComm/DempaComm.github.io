@@ -18,6 +18,15 @@ from dempa_site.files import write_json
 GENERIC_TAGS = frozenset({"数学", "すべて", "雑談", "僕のお気に入り", "論文メモ"})
 
 
+GRAPH_ASSETS = {
+    "graph.js": "relation_graph.js",
+    "graph-model.js": "graph_model.js",
+    "graph-dom.js": "graph_dom.js",
+    "graph-state.js": "graph_state.js",
+    "graph-view.js": "graph_view.js",
+    "graph-inspector.js": "graph_inspector.js",
+    "graph.css": "relation_graph.css",
+}
 GRAPH_SCRIPT_PATH = Path(__file__).with_name("relation_graph.js")
 GROUPS = (
     ("topology", "位相・距離・幾何", "#b5a2ed"),
@@ -136,11 +145,8 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
     target.mkdir(parents=True)
     data = _graph_data(catalog)
     write_json(target / "paper-graph.json", data)
-    (target / "graph.js").write_text(
-        GRAPH_SCRIPT_PATH.read_text(encoding="utf-8"), encoding="utf-8"
-    )
-    for source, name in (("graph_model.js", "graph-model.js"), ("relation_graph.css", "graph.css")):
-        (target / name).write_text(Path(__file__).with_name(source).read_text(encoding="utf-8"), encoding="utf-8")
+    for name, source in GRAPH_ASSETS.items():
+        (target / name).write_bytes(Path(__file__).with_name(source).read_bytes())
     body = """    <section class="graph-explorer" aria-label="原稿のつながりを探索">
       <div class="graph-toolbar">
         <label class="graph-search"><span aria-hidden="true">⌕</span><span class="graph-sr">原稿名・タグ</span><input id="graph-query" type="search" placeholder="原稿名・タグを探す" autocomplete="off"></label>
@@ -189,6 +195,7 @@ def generate_relation_graph(catalog: SiteCatalog, output: Path) -> None:
             canonical_path="/graph/",
             body=body,
             body_class="graph-page",
-        ).replace("</head>", '<link rel="stylesheet" href="graph.css">\n</head>', 1),
+            extra_head='<link rel="stylesheet" href="graph.css">\n',
+        ),
         encoding="utf-8",
     )

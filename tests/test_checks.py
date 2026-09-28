@@ -7,10 +7,14 @@ import unittest
 from pathlib import Path
 
 from dempa_site.errors import PaperToolError
-from tools.check_all import CheckStep, complete_check_steps, run_check_suite
+from tools.check_all import CheckStep, complete_check_steps, preflight_check_steps, run_check_suite
 
 
 class CompleteCheckSuiteTest(unittest.TestCase):
+    def test_preflight_keeps_every_check_except_public_baseline_comparison(self) -> None:
+        steps = preflight_check_steps(Path("/repository"), Path("/output"))
+        self.assertEqual(["tests", "ledger", "stage", "pagefind"], [step.key for step in steps])
+
     def test_complete_steps_cover_the_routine_publication_checks(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             repository = Path(temporary)

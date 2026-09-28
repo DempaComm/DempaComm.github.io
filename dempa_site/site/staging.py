@@ -31,7 +31,8 @@ from dempa_site.features.base import FeatureGenerator
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.hashes import protected_file_errors
 from dempa_site.site.cards import has_pdf
-from dempa_site.site.discovery import DISCOVERY_SCRIPT, paper_summary_data
+from dempa_site.site.assets import copy_site_assets
+from dempa_site.site.discovery import paper_summary_data
 from dempa_site.site.feeds import rendered_feed
 from dempa_site.site.links import local_link_errors
 from dempa_site.site.html_view import rendered_public_html
@@ -51,16 +52,7 @@ from dempa_site.site.pages.archive import grouped_archive_years, rendered_archiv
 from dempa_site.site.sitemap import rendered_sitemap
 
 
-STATIC_ASSETS = (
-    "favicon.ico",
-    "favicon-16.png",
-    "favicon-32.png",
-    "apple-touch-icon.png",
-    "icon-192.png",
-    "icon-512.png",
-    "og-image.png",
-    "site.webmanifest",
-)
+
 
 
 class StageFeature(FunctionFeature):
@@ -198,13 +190,7 @@ def copy_public_files(context: StageContext) -> None:
     """Copy site assets, protected public files, PDFs, and compatibility routes."""
     output = context.working_output
     root = context.paths.root
-    shutil.copy2(root / "styles.css", output / "styles.css")
-    shutil.copy2(context.paths.search_script, output / "search.js")
-    shutil.copy2(root / "full-text-search.js", output / "full-text-search.js")
-    shutil.copy2(root / "statements.js", output / "statements.js")
-    shutil.copy2(Path(__file__).with_name("html_reader.js"), output / "html-reader.js")
-    for asset in STATIC_ASSETS:
-        shutil.copy2(root / asset, output / asset)
+    copy_site_assets(root, output)
 
     for manifest_path, paper in context.catalog.selected:
         source_dir = manifest_path.parent
@@ -258,7 +244,6 @@ def generate_discovery_files(context: StageContext) -> None:
         encoding="utf-8",
     )
     write_json(output / "papers-summary.json", paper_summary_data(selected))
-    (output / "discovery.js").write_text(DISCOVERY_SCRIPT, encoding="utf-8")
 
 
 def generate_additional_features(

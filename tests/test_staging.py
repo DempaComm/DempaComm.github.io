@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import prepare_styles
+
 from dempa_site.catalog.metadata import collect_metadata, rendered_keywords
 from dempa_site.errors import PaperToolError
 from dempa_site.features import FunctionFeature
@@ -85,7 +87,7 @@ class StagingPipelineTest(unittest.TestCase):
         (paper_dir / "keywords.txt").write_text(
             rendered_keywords(self.paper), encoding="utf-8"
         )
-        (self.root / "styles.css").write_text("/* fixture */\n", encoding="utf-8")
+        prepare_styles(self.root)
         (self.root / "search.js").write_text("// fixture\n", encoding="utf-8")
         (self.root / "full-text-search.js").write_text(
             "// full-text fixture\n", encoding="utf-8"

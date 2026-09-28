@@ -8,19 +8,10 @@ from pathlib import Path
 from urllib.parse import quote
 
 from dempa_site.catalog.metadata import grouped_math_sections
-from dempa_site.config import (
-    BLOG_ONLY_KIND,
-    MathTopic,
-    MATH_SECTION_DETAILS,
-    MATH_SECTIONS,
-    MATH_TOPICS,
-    SITE_TITLE_ATTRIBUTE,
-    SITE_TITLE_FORMAL,
-    SITE_TITLE_TOP,
-)
+from dempa_site.config import BLOG_ONLY_KIND, MathTopic, MATH_SECTION_DETAILS, MATH_SECTIONS, MATH_TOPICS, SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import has_pdf, is_pdf_alias
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.site.layout import page_head, site_footer, site_header
 
 
 def rendered_math_index_item(
@@ -156,6 +147,13 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
         for index, section in enumerate(MATH_SECTIONS, start=1)
     )
     topic_cards = _rendered_topic_cards(all_papers)
+    header = site_header(
+        eyebrow_html="MATHEMATICS DIRECTORY",
+        title_html="数学記事総覧",
+        lead_html=f"分野別総覧への入口です。現在公開している全{len(selected)}原稿を、四つの主分類からたどれます。",
+        prefix="../",
+        current_navigation="math",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -163,16 +161,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
 </head>
 <body class="math-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">MATHEMATICS DIRECTORY</p>
-      <h1>数学記事総覧</h1>
-      <p class="lead">分野別総覧への入口です。現在公開している全{len(selected)}原稿を、四つの主分類からたどれます。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../", "math")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <nav class="math-directory-grid" aria-label="数学分野別総覧">
 {directory_cards}
@@ -192,7 +181,7 @@ def rendered_math_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <p>各原稿は主分類を一つ持ちます。分野別ページでは公開年ごとの一覧と、電波通信から引き継いだタグを併記しています。</p>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """
@@ -216,6 +205,13 @@ def rendered_math_section_page(
     </section>"""
     description = str(details["description"])
     slug = str(details["slug"])
+    header = site_header(
+        eyebrow_html="MATHEMATICS SECTION",
+        title_html=html.escape(section),
+        lead_html=f"{html.escape(description)} 現在{len(papers)}件です。",
+        prefix="../../",
+        current_navigation="math",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -223,22 +219,13 @@ def rendered_math_section_page(
 </head>
 <body class="math-page math-section-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">MATHEMATICS SECTION</p>
-      <h1>{html.escape(section)}</h1>
-      <p class="lead">{html.escape(description)} 現在{len(papers)}件です。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../../", "math")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <p class="directory-back"><a href="../">数学記事総覧へ戻る</a></p>
 {section_topics}
 {year_sections}
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """
@@ -250,6 +237,13 @@ def rendered_math_topic_page(topic: MathTopic, papers: Sequence[Paper]) -> str:
     slug = topic.slug
     section = topic.section
     section_slug = str(MATH_SECTION_DETAILS[section]["slug"])
+    header = site_header(
+        eyebrow_html="MATHEMATICS TOPIC",
+        title_html=html.escape(title),
+        lead_html=f"{html.escape(description)} 現在{len(papers)}件です。",
+        prefix="../../../",
+        current_navigation="math",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -257,22 +251,13 @@ def rendered_math_topic_page(topic: MathTopic, papers: Sequence[Paper]) -> str:
 </head>
 <body class="math-page math-topic-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">MATHEMATICS TOPIC</p>
-      <h1>{html.escape(title)}</h1>
-      <p class="lead">{html.escape(description)} 現在{len(papers)}件です。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../../../", "math")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <p class="directory-back"><a href="../../">数学記事総覧へ戻る</a> · 関連分野：<a href="../../{section_slug}/">{html.escape(section)}</a></p>
     <p>このテーマのタグを持つ原稿を、主分類に関係なく掲載しています。</p>
 {_rendered_year_sections(papers, "../../../")}
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """

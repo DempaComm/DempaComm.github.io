@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import html
 
-from dempa_site.config import SITE_TITLE_TOP, SITE_URL
+from dempa_site.config import SITE_TITLE_ATTRIBUTE, SITE_TITLE_FORMAL, SITE_TITLE_TOP, SITE_URL
 
 
 CONTENT_LICENSE_NOTICE = (
@@ -74,3 +74,29 @@ def page_head(
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;family=Zen+Kurenaido&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{stylesheet}">"""
+
+
+def site_footer() -> str:
+    """The shared title and license, with stable public markup."""
+    return f'''  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>'''
+
+
+def site_header(
+    *,
+    eyebrow_html: str,
+    title_html: str,
+    lead_html: str,
+    prefix: str,
+    current_navigation: str = "",
+) -> str:
+    """Render trusted, already escaped fragments from page renderers."""
+    return f'''  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">{eyebrow_html}</p>
+      <h1>{title_html}</h1>
+      <p class="lead">{lead_html}</p>
+      <nav class="site-navigation" aria-label="主要ページ">
+{site_navigation(prefix, current_navigation)}
+      </nav>
+    </div>
+  </header>'''

@@ -17,7 +17,10 @@ from dempa_site.protection.change_workflow import (
     resumable_change_count,
     unexpected_public_differences,
 )
-from scripts import paper_tool
+from dempa_site.commands import editing as paper_tool
+from dempa_site.commands.context import CommandContext
+from dempa_site.paths import RepositoryPaths
+from dempa_site.cli import command_context
 from tests.support import add_privacy_review_receipt
 
 
@@ -89,9 +92,10 @@ def prepare_paper(root: Path, *, two_files: bool = False):
 class ChangeWorkflowTest(unittest.TestCase):
     def test_finish_change_requires_explicit_public_acceptance_before_approval(self) -> None:
         args = argparse.Namespace(accept_public_change=False)
+        context = command_context()
 
         with self.assertRaisesRegex(PaperToolError, "--accept-public-change"):
-            paper_tool.command_finish_change(args)
+            paper_tool.command_finish_change(args, context)
 
     def test_review_change_creates_a_current_privacy_report(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -162,19 +166,17 @@ class ChangeWorkflowTest(unittest.TestCase):
                 "changed: papers/legacy-change/paper.json",
             )
 
+            context = CommandContext(RepositoryPaths(root), root, root / ".privacy-review")
             with (
-                patch.object(paper_tool, "ROOT", root),
-                patch.object(paper_tool, "PAPERS_DIR", root / "papers"),
-                patch.object(paper_tool, "PRIVACY_REVIEW_DIR", root / ".privacy-review"),
-                patch.object(paper_tool, "manifests", return_value=[(manifest_path, paper)]),
-                patch.object(paper_tool, "complete_check_steps", return_value=(object(),)),
+                patch.object(CommandContext, "manifests", return_value=[(manifest_path, paper)]),
+                patch.object(paper_tool, "preflight_check_steps", return_value=()),
                 patch.object(paper_tool, "run_check_suite") as run_checks,
                 patch.object(paper_tool, "snapshot_differences", return_value=differences),
                 patch.object(paper_tool, "write_baseline") as write_snapshot,
                 patch.object(paper_tool, "check_baseline") as check_snapshot,
                 redirect_stdout(io.StringIO()),
             ):
-                paper_tool.command_finish_change(args)
+                paper_tool.command_finish_change(args, context)
 
             updated = load_manifest(manifest_path, PaperToolError)
             self.assertEqual(sha256_file(main), updated.files[0].sha256)

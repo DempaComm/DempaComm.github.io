@@ -1,0 +1,247 @@
+
+.exploration-page h1,
+.reading-path-page h1,
+.lineage-page h1,
+.statements-page h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+.statement-shortcuts {
+  margin-bottom: 64px;
+}
+
+.statement-filter-panel {
+  margin-bottom: 64px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.statement-filter {
+  display: grid;
+  grid-template-columns: minmax(14rem, 2fr) repeat(3, minmax(10rem, 1fr)) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.statement-filter label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.statement-filter input,
+.statement-filter select,
+.statement-filter button {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.statement-filter button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.statement-filter-status {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.statement-section + .statement-section {
+  margin-top: 64px;
+}
+
+.statement-list {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--line);
+  list-style-position: inside;
+}
+
+.statement-list li {
+  display: grid;
+  gap: 5px;
+  padding: 16px 20px;
+  background: var(--white);
+  scroll-margin-top: 1rem;
+}
+
+.statement-list li > a {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.statement-list li > span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.explore-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 220px;
+  padding: clamp(26px, 5vw, 42px);
+  border: 1px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+}
+
+.explore-card:hover,
+.explore-card:focus-visible {
+  border-color: var(--ink);
+  box-shadow: 0 16px 40px rgb(23 33 43 / 9%);
+}
+
+.explore-card strong {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 500;
+}
+
+.explore-card > span:not(.section-number),
+.explore-card small,
+.lineage-note {
+  color: var(--muted);
+}
+
+.reading-path-intro,
+.lineage-note {
+  margin-bottom: 30px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--accent);
+  background: var(--white);
+}
+
+.reading-path-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.reading-path-steps {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: reading-step;
+}
+
+.reading-step {
+  padding: clamp(26px, 5vw, 42px);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.reading-step h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 500;
+}
+
+.reading-step-meta,
+.reading-step nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.reading-step .reading-step-actions {
+  justify-content: flex-start;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.reading-step-actions a {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  text-decoration: none;
+}
+
+.reading-step nav {
+  justify-content: space-between;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.lineage-list {
+  display: grid;
+  gap: 10px;
+}
+
+.lineage-paper {
+  border: 1px solid var(--line);
+  background: var(--white);
+  scroll-margin-top: 1rem;
+}
+
+.lineage-paper:target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(180 66 47 / 15%);
+}
+
+.lineage-paper summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+.lineage-paper summary span:last-child {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.lineage-paper-body {
+  padding: 0 22px 24px;
+}
+
+.lineage-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lineage-timeline li {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.lineage-timeline time,
+.lineage-undated > span,
+.lineage-relations span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.lineage-timeline p {
+  margin-bottom: 0;
+  color: var(--muted);
+}

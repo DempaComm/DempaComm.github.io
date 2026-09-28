@@ -7,12 +7,7 @@ from collections.abc import Sequence
 from typing import TYPE_CHECKING
 from urllib.parse import quote
 
-from dempa_site.config import (
-    BLOG_ONLY_KIND,
-    SITE_TITLE_ATTRIBUTE,
-    SITE_TITLE_FORMAL,
-    SITE_TITLE_TOP,
-)
+from dempa_site.config import BLOG_ONLY_KIND, SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
 if TYPE_CHECKING:
     from dempa_site.features.reading_paths import ReadingPath
@@ -20,7 +15,7 @@ from dempa_site.site.cards import (
     original_article_action,
     public_file_actions,
 )
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.site.layout import page_head, site_footer, site_header
 
 
 def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = ()) -> str:
@@ -96,6 +91,13 @@ def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = 
         '<ul class="paper-reading-paths">' + ''.join(path_links) + '</ul>'
         if path_links else '<p>この原稿を含む読書経路は、まだ登録されていません。</p>'
     )
+    header = site_header(
+        eyebrow_html=eyebrow,
+        title_html=title,
+        lead_html=summary,
+        prefix="../../",
+        current_navigation="",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -103,16 +105,7 @@ def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = 
 </head>
 <body class="paper-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">{eyebrow}</p>
-      <h1>{title}</h1>
-      <p class="lead">{summary}</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../../")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <article class="paper-detail">
       <div class="paper-meta">
@@ -159,7 +152,7 @@ def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = 
       </section>
     </article>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """

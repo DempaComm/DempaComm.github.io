@@ -1,4 +1,8 @@
-import {activeEdges, neighborhood, visibleGraph, createLayout, stepLayout, fitView} from "./graph-model.js";
+import {visibleGraph, createLayout, stepLayout, fitView} from "./graph-model.js";
+import {html, makeSvg, button, link, shortTitle} from "./graph-dom.js";
+import {defaults, readOptions as parseOptions, optionsUrl} from "./graph-state.js";
+import {paintLabels as paintLabelsView, highlight as highlightView, draw as drawView} from "./graph-view.js";
+import {renderInspector} from "./graph-inspector.js";
 
 const $ = id => document.getElementById(id);
 const svg = $("paper-graph");
@@ -8,34 +12,6 @@ const list = $("graph-paper-list");
 const settings = document.querySelector(".graph-settings");
 const accessibleList = document.querySelector(".graph-accessible-list");
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-const ns = "http://www.w3.org/2000/svg";
-const html = (name, className = "", text = "") => {
-  const element = document.createElement(name);
-  if (className) element.className = className;
-  if (text) element.textContent = text;
-  return element;
-};
-const makeSvg = (name, attributes = {}) => {
-  const element = document.createElementNS(ns, name);
-  Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
-  return element;
-};
-const button = (text, action, className = "") => {
-  const element = html("button", className, text);
-  element.type = "button";
-  element.addEventListener("click", action);
-  return element;
-};
-const link = (text, href, className = "") => {
-  const element = html("a", className, text);
-  element.href = href;
-  return element;
-};
-const shortTitle = (title, limit = 15) => Array.from(title).length > limit
-  ? Array.from(title).slice(0, limit).join("") + "…" : title;
-const defaults = {q: "", tag: "", year: "", group: "", content: "", paper: "", depth: 1,
-  tags: true, paths: true, explicit: true, orphans: true, labels: "auto", spacing: 100};
-
 async function start() {
   const response = await fetch("paper-graph.json");
   if (!response.ok) throw new Error(`Graph data: HTTP ${response.status}`);
@@ -43,21 +19,7 @@ async function start() {
   const byId = new Map(data.nodes.map(node => [node.slug, node]));
   const groups = new Map(data.groups.map(group => [group.id, group]));
   const locationKey = () => location.pathname + location.search;
-  const readOptions = () => {
-    const params = new URLSearchParams(location.search);
-    const value = {...defaults};
-    for (const key of ["q", "tag", "year", "group", "content", "paper"]) value[key] = params.get(key) || "";
-    if (!byId.has(value.paper)) value.paper = "";
-    if (!groups.has(value.group)) value.group = "";
-    if (!data.tags.some(tag => tag.name === value.tag)) value.tag = "";
-    if (!data.years.some(year => String(year) === value.year)) value.year = "";
-    if (!["html", "statements", "corrections"].includes(value.content)) value.content = "";
-    for (const key of ["tags", "paths", "explicit", "orphans"]) value[key] = params.get(key) !== "0";
-    value.depth = params.get("depth") === "2" ? 2 : 1;
-    value.labels = ["all", "none"].includes(params.get("labels")) ? params.get("labels") : "auto";
-    value.spacing = Math.max(70, Math.min(160, Number(params.get("spacing")) || 100));
-    return value;
-  };
+  const readOptions = () => parseOptions(location.search, data, byId, groups);
   let options = readOptions();
   const saved = history.state?.paperGraph;
   const initial = saved?.location === locationKey() ? saved : null;
@@ -100,14 +62,7 @@ async function start() {
     }}, "");
   };
   const saveSoon = () => { clearTimeout(saveTimer); saveTimer = setTimeout(save, 180); };
-  const updateUrl = () => {
-    const url = new URL(location.href);
-    for (const [key, value] of Object.entries(options)) {
-      url.searchParams.delete(key);
-      if (value !== defaults[key]) url.searchParams.set(key, typeof value === "boolean" ? (value ? "1" : "0") : String(value));
-    }
-    history.replaceState(history.state, "", url);
-  };
+  const updateUrl = () => history.replaceState(history.state, "", optionsUrl(options, location.href));
   const synchronizeControls = () => {
     for (const key of ["q", "tag", "year", "content", "labels", "spacing"]) {
       $(key === "q" ? "graph-query" : `graph-${key}`).value = options[key];
@@ -120,48 +75,12 @@ async function start() {
     $("graph-context").hidden = !options.paper;
     $("graph-context").textContent = options.paper ? `${shortTitle(byId.get(options.paper).title, 24)} · ${options.depth}段階のつながり` : "";
   };
+  const viewState = () => ({svg, list, options, selected, hovered, graph, layout, view, fitted, nodeElements, edgeElements, degrees, scale});
   const aspect = () => Math.max(0.45, svg.clientWidth / Math.max(1, svg.clientHeight));
   const world = (x, y) => new DOMPoint(x, y).matrixTransform(svg.getScreenCTM().inverse());
   const scale = () => Math.max(0.1, svg.getScreenCTM()?.a || 1);
 
-  function paintLabels() {
-    if (!view) return;
-    const zoom = fitted.width / view.width;
-    const unit = 1 / scale();
-    const occupied = [];
-    const nearby = neighborhood(hovered || selected, graph.edges);
-    const sorted = [...graph.nodes].sort((a, b) =>
-      (Number(b.slug === hovered || b.slug === selected) - Number(a.slug === hovered || a.slug === selected)) ||
-      (Number(nearby.has(b.slug)) - Number(nearby.has(a.slug))) ||
-      (degrees.get(b.slug) - degrees.get(a.slug)) || a.slug.localeCompare(b.slug));
-    let shown = 0;
-    for (const node of sorted) {
-      const elements = nodeElements.get(node.slug), point = layout.byId.get(node.slug);
-      const densityScale = Math.min(1, Math.max(0.62, svg.clientWidth / 760));
-      const radius = (3.4 + Math.sqrt(degrees.get(node.slug) || 0) * 1.1) * densityScale;
-      elements.dot.setAttribute("r", radius * unit);
-      elements.hit.setAttribute("r", Math.max(13, radius + 5) * unit);
-      elements.ring.setAttribute("r", (radius + 5) * unit);
-      const labelWidth = (Array.from(elements.text.textContent).length * 10.5 + 6) * unit;
-      const leftLabel = point.x + (radius + 7) * unit + labelWidth > view.x + view.width - 12 * unit;
-      elements.text.setAttribute("text-anchor", leftLabel ? "end" : "start");
-      elements.text.setAttribute("x", (leftLabel ? -1 : 1) * (radius + 7) * unit);
-      elements.text.setAttribute("y", 4 * unit);
-      elements.text.setAttribute("font-size", 11.5 * unit);
-      const important = node.slug === hovered || node.slug === selected;
-      const neighbor = Boolean(hovered || selected) && nearby.has(node.slug);
-      const limit = Math.ceil(Math.max(3, Math.floor(svg.clientWidth / 115)) * Math.min(10, zoom ** 1.8));
-      let show = important || options.labels === "all" || (options.labels === "auto" && (neighbor || shown < limit));
-      if (point.x < view.x || point.x > view.x + view.width || point.y < view.y || point.y > view.y + view.height) show = false;
-      const box = {x: leftLabel ? point.x - (radius + 7) * unit - labelWidth : point.x + (radius + 5) * unit,
-        y: point.y - 10 * unit, width: labelWidth, height: 21 * unit};
-      if (show && options.labels !== "all" && !important && occupied.some(other =>
-        box.x < other.x + other.width && box.x + box.width > other.x &&
-        box.y < other.y + other.height && box.y + box.height > other.y)) show = false;
-      elements.text.classList.toggle("is-visible", show);
-      if (show) { occupied.push(box); shown += 1; }
-    }
-  }
+  function paintLabels() { paintLabelsView(viewState()); }
   const applyView = () => {
     svg.setAttribute("viewBox", `${view.x} ${view.y} ${view.width} ${view.height}`);
     $("graph-zoom-level").value = `${Math.round(fitted.width / view.width * 100)}%`;
@@ -186,32 +105,8 @@ async function start() {
     view.x += x * view.width * 0.15; view.y += y * view.height * 0.15;
     applyView(); saveSoon();
   };
-  function highlight() {
-    const active = hovered || selected;
-    const neighbors = active ? neighborhood(active, graph.edges) : null;
-    nodeElements.forEach((elements, slug) => {
-      elements.group.classList.toggle("is-dimmed", Boolean(neighbors && !neighbors.has(slug)));
-      elements.group.classList.toggle("is-selected", slug === selected);
-      elements.group.classList.toggle("is-highlighted", slug === active);
-      elements.group.setAttribute("aria-pressed", String(slug === selected));
-    });
-    edgeElements.forEach(({element, edge}) => {
-      const connected = edge.source === active || edge.target === active;
-      element.classList.toggle("is-highlighted", Boolean(active && connected));
-      element.classList.toggle("is-dimmed", Boolean(active && !connected));
-    });
-    list.querySelectorAll("button").forEach(element => element.setAttribute("aria-pressed", String(element.dataset.graphSlug === selected)));
-    paintLabels();
-  }
-  function draw() {
-    layout.points.forEach(point => nodeElements.get(point.slug)?.group.setAttribute("transform", `translate(${point.x},${point.y})`));
-    edgeElements.forEach(({element, edge}) => {
-      const a = layout.byId.get(edge.source), b = layout.byId.get(edge.target);
-      element.setAttribute("x1", a.x); element.setAttribute("y1", a.y);
-      element.setAttribute("x2", b.x); element.setAttribute("y2", b.y);
-    });
-    paintLabels();
-  }
+  function highlight() { highlightView(viewState()); }
+  function draw() { drawView(viewState()); }
   function animate() {
     cancelAnimationFrame(frame);
     if (paused) return;
@@ -225,91 +120,18 @@ async function start() {
     };
     frame = requestAnimationFrame(tick);
   }
-  const relationText = edge => {
-    const parts = [];
-    if (options.explicit && edge.explicit.length) parts.push("明示された関係");
-    if (options.paths && edge.reading_paths.length) parts.push("読書経路");
-    if (options.tags && edge.tags.length) parts.push(`共通タグ: ${edge.tags.join("・")}`);
-    return parts.join(" / ");
-  };
   function showInspector(focus = false) {
-    inspector.replaceChildren();
-    const node = byId.get(selected);
-    if (!node) {
-      const welcome = html("div", "graph-welcome");
-      const motif = makeSvg("svg", {viewBox: "0 0 200 130", "aria-hidden": "true"});
-      [[35,75,95,48],[95,48,158,25],[95,48,153,94],[35,75,63,117],[95,48,63,117]].forEach(([x1,y1,x2,y2]) => motif.append(makeSvg("line", {x1,y1,x2,y2})));
-      [[35,75,4],[95,48,6],[158,25,3],[153,94,4],[63,117,3]].forEach(([cx,cy,r]) => motif.append(makeSvg("circle", {cx,cy,r})));
-      welcome.append(motif, html("p", "graph-kicker", "つながりから、読みはじめる"),
-        html("h2", "", "点の向こうに、\n次の原稿。"),
-        html("p", "", "気になる点を選ぶと、原稿の概要と関連する原稿がここに現れます。"));
-      const counts = html("div", "graph-welcome-counts");
-      const nodeCount = html("span"); nodeCount.append(html("strong", "", String(data.nodes.length)), "原稿");
-      const edgeCount = html("span"); edgeCount.append(html("strong", "", String(data.edges.length)), "つながり");
-      counts.append(nodeCount, edgeCount); welcome.append(counts);
-      const hint = html("p", "graph-small", "色は数学の分野、点の大きさは表示中のつながりの数を表します。");
-      inspector.append(welcome, hint);
-      return;
-    }
-    const top = html("div", "graph-inspector-top");
-    const meta = html("span", "graph-kicker", `${node.math_section} · ${node.year}`);
-    meta.style.color = groups.get(node.group).color;
-    const close = button("×", () => { selected = ""; showInspector(); highlight(); svg.focus({preventScroll: true}); saveSoon(); });
-    close.setAttribute("aria-label", "原稿の選択を解除");
-    top.append(meta, close);
-    const heading = html("h2", "", node.title); heading.id = "graph-detail-heading"; heading.tabIndex = -1;
-    const actions = html("nav", "graph-paper-actions"); actions.setAttribute("aria-label", "原稿を読む");
-    if (node.html_path) actions.append(link("HTMLで読む ↗", `../papers/${node.slug}/${node.html_path}`, "graph-primary-link"));
-    actions.append(link("原稿ページ ↗", `../papers/${node.slug}/`));
-    if (node.statement_count) actions.append(link(`定理等 ${node.statement_count}件`, `../statements/years/${node.year}/?paper=${node.slug}`));
-    const tags = html("div", "graph-paper-tags");
-    node.tags.filter(tag => !data.excluded_generic_tags.includes(tag)).forEach(tag => tags.append(button(tag, () => {
-      options.tag = tag; options.paper = ""; change();
-    })));
-    inspector.append(top, heading);
-    if (node.summary) inspector.append(html("p", "graph-paper-summary", node.summary));
-    inspector.append(actions, tags);
-    if (node.correction_count) inspector.append(html("p", "graph-small", `訂正・追記 ${node.correction_count}件。内容は原稿ページで確認できます。`));
-    const local = html("div", "graph-local-actions");
-    local.append(button("この原稿の周辺を見る", () => {
-      options = {...options, q: "", tag: "", year: "", content: "", group: "", paper: node.slug, depth: 1}; change();
-    }, "graph-local-button"));
-    if (options.paper) {
-      const depth = html("div", "graph-depth");
-      depth.append(html("span", "", "範囲"));
-      [1, 2].forEach(value => {
-        const control = button(`${value}段階`, () => { options.depth = value; change(); });
-        control.setAttribute("aria-pressed", String(options.depth === value)); depth.append(control);
-      });
-      local.append(depth);
-    }
-    inspector.append(local);
-    if (node.reading_paths.length) {
-      const paths = html("div", "graph-reading-paths");
-      paths.append(html("h3", "", "この原稿を含む読書経路"));
-      node.reading_paths.forEach(path => paths.append(link(`${path.title} ↗`, `../reading-paths/${encodeURIComponent(path.slug)}/`)));
-      inspector.append(paths);
-    }
-    const related = activeEdges(data.edges, options).filter(edge => edge.source === node.slug || edge.target === node.slug)
-      .sort((a, b) => b.weight - a.weight || a.source.localeCompare(b.source));
-    const section = html("div", "graph-related");
-    section.append(html("h3", "", `つながる原稿 · ${related.length}`));
-    if (!related.length) section.append(html("p", "graph-small", "現在の線の設定では、つながる原稿はありません。タグや分野から探せます。"));
-    related.forEach(edge => {
-      const target = byId.get(edge.source === node.slug ? edge.target : edge.source);
-      const item = button("", () => {
-        if (!nodeElements.has(target.slug)) {
-          options = {...options, q: "", tag: "", year: "", content: "", group: "", paper: target.slug, depth: 1}; selected = target.slug; change();
-        } else select(target.slug);
-      });
-      item.append(html("span", "", target.title), html("small", "", relationText(edge)));
-      section.append(item);
-    });
-    inspector.append(section, button("関係図に戻る ↑", () => {
-      const target = nodeElements.get(node.slug)?.group || svg;
-      target.focus(); target.scrollIntoView({block: "nearest"});
-    }, "graph-return"));
-    if (focus) heading.focus({preventScroll: true});
+    renderInspector({inspector, svg, data, byId, groups, options, selected, nodeElements}, {
+      clearSelection: () => { selected = ""; showInspector(); highlight(); svg.focus({preventScroll: true}); saveSoon(); },
+      filterTag: tag => { options.tag = tag; options.paper = ""; change(); },
+      setDepth: value => { options.depth = value; change(); },
+      openNeighborhood: (slug, selectTarget = false) => {
+        options = {...options, q: "", tag: "", year: "", content: "", group: "", paper: slug, depth: 1};
+        if (selectTarget) selected = slug;
+        change();
+      },
+      select,
+    }, focus);
   }
   function select(slug, focus = false) {
     selected = slug; keyboardSlug = slug;

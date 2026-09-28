@@ -5,13 +5,9 @@ from __future__ import annotations
 from collections.abc import Sequence
 from pathlib import Path
 
-from dempa_site.config import (
-    SITE_TITLE_ATTRIBUTE,
-    SITE_TITLE_FORMAL,
-    SITE_TITLE_TOP,
-)
+from dempa_site.config import SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.site.layout import page_head, site_footer, site_header
 
 
 def rendered_full_text_search_page(
@@ -22,6 +18,13 @@ def rendered_full_text_search_page(
         f"{SITE_TITLE_TOP}のLaTeXML HTML版{indexed}件を本文、節見出し、"
         "定理名、参考文献から検索します。"
     )
+    header = site_header(
+        eyebrow_html="FULL-TEXT SEARCH",
+        title_html="本文全文検索",
+        lead_html=f"HTML版{indexed}件の本文から検索できます。題名だけでなく、節見出し・定理名・参考文献も対象です。",
+        prefix="../",
+        current_navigation="search",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -29,16 +32,7 @@ def rendered_full_text_search_page(
 </head>
 <body class="fulltext-search-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">FULL-TEXT SEARCH</p>
-      <h1>本文全文検索</h1>
-      <p class="lead">HTML版{indexed}件の本文から検索できます。題名だけでなく、節見出し・定理名・参考文献も対象です。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../", "search")}
-      </nav>
-    </div>
-  </header>
+{header}
 
   <main id="main-content">
     <section class="fulltext-search-panel" aria-labelledby="fulltext-title">
@@ -70,8 +64,8 @@ def rendered_full_text_search_page(
     </aside>
   </main>
 
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
-  <script src="../full-text-search.js" defer></script>
+{site_footer()}
+  <script src="../full-text-search.js" type="module" defer></script>
 </body>
 </html>
 """

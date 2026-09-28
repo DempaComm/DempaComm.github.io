@@ -6,18 +6,13 @@ import html
 from collections.abc import Sequence
 from urllib.parse import quote
 
-from dempa_site.config import (
-    BLOG_ONLY_KIND,
-    SITE_TITLE_ATTRIBUTE,
-    SITE_TITLE_FORMAL,
-    SITE_TITLE_TOP,
-)
+from dempa_site.config import BLOG_ONLY_KIND, SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import (
     original_article_action,
     public_file_actions,
 )
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.site.layout import page_head, site_footer, site_header
 
 
 def rendered_tag_page_paper(manifest: Paper) -> str:
@@ -73,6 +68,13 @@ def rendered_tag_page(tag: str, papers: Sequence[Paper]) -> str:
     )
     escaped_tag = html.escape(tag)
     description = f"電波通信のタグ「{tag}」が付いた公開原稿の一覧です。"
+    header = site_header(
+        eyebrow_html="TAG ARCHIVE",
+        title_html=escaped_tag,
+        lead_html=f"電波通信でこのタグが付けられていた公開原稿、全{len(papers)}件。",
+        prefix="../../",
+        current_navigation="tags",
+    )
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -80,20 +82,11 @@ def rendered_tag_page(tag: str, papers: Sequence[Paper]) -> str:
 </head>
 <body class="tag-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">TAG ARCHIVE</p>
-      <h1>{escaped_tag}</h1>
-      <p class="lead">電波通信でこのタグが付けられていた公開原稿、全{len(papers)}件。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../../", "tags")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
 {year_sections}
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
 </body>
 </html>
 """

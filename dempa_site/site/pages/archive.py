@@ -5,10 +5,10 @@ from __future__ import annotations
 from collections.abc import Sequence
 from pathlib import Path
 
-from dempa_site.config import SITE_TITLE_ATTRIBUTE, SITE_TITLE_FORMAL, SITE_TITLE_TOP
+from dempa_site.config import SITE_TITLE_TOP
 from dempa_site.manifests.model import Paper
 from dempa_site.site.cards import paper_card
-from dempa_site.site.layout import CONTENT_LICENSE_NOTICE, page_head, site_navigation
+from dempa_site.site.layout import page_head, site_footer, site_header, site_navigation
 from dempa_site.site.pages.common import rendered_tag_index
 
 
@@ -39,6 +39,13 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
         f"{SITE_TITLE_TOP}で公開している全{len(selected)}原稿を、"
         "題名・説明・タグ・キーワードで検索できる総合アーカイブです。"
     )
+    header = site_header(
+        eyebrow_html="COMPLETE ARCHIVE",
+        title_html="全原稿アーカイブ",
+        lead_html=f"全{len(selected)}原稿の題名・説明・タグ・キーワードを検索できます。PDFのみの記事やブログ記事も対象です。",
+        prefix="../",
+        current_navigation="archive",
+    )
     return f'''<!doctype html>
 <html lang="ja">
 <head>
@@ -46,16 +53,7 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
 </head>
 <body class="archive-page">
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">COMPLETE ARCHIVE</p>
-      <h1>全原稿アーカイブ</h1>
-      <p class="lead">全{len(selected)}原稿の題名・説明・タグ・キーワードを検索できます。PDFのみの記事やブログ記事も対象です。</p>
-      <nav class="site-navigation" aria-label="主要ページ">
-{site_navigation("../", "archive")}
-      </nav>
-    </div>
-  </header>
+{header}
   <main id="main-content">
     <section aria-labelledby="archive-search-title">
       <div class="section-heading"><h2 id="archive-search-title">全原稿を検索</h2><p><a id="archive-fulltext-link" href="../search/">HTML本文の全文検索へ</a></p></div>
@@ -84,11 +82,11 @@ def rendered_archive_page(selected: Sequence[tuple[Path, Paper]]) -> str:
     <section class="tag-directory" aria-labelledby="tags-title">
       <div class="section-heading"><div><p class="section-number">02</p><h2 id="tags-title">タグ索引</h2></div><p>タグごとの専用ページへ移動します。</p></div>
       <nav class="tag-index" aria-label="タグ索引">
-{rendered_tag_index(selected).replace('href="tags/', 'href="../tags/')}
+{rendered_tag_index(selected, "../")}
       </nav>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
   <script src="../search.js" defer></script>
 </body>
 </html>
@@ -122,7 +120,7 @@ def rendered_archive_year_page(year: int, papers: Sequence[Paper]) -> str:
       <div class="paper-list">{cards}</div>
     </section>
   </main>
-  <footer><p>{SITE_TITLE_TOP} — {SITE_TITLE_FORMAL} <span class="title-attribute">{SITE_TITLE_ATTRIBUTE}</span></p>{CONTENT_LICENSE_NOTICE}</footer>
+{site_footer()}
   <script src="../../search.js"></script>
 </body>
 </html>
