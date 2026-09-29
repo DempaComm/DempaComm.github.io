@@ -4,6 +4,7 @@ import hashlib
 import json
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 from unittest.mock import patch
 
@@ -16,12 +17,12 @@ from dempa_site.local_admin import (
     _paper_page,
     _require_csrf,
     _review_result_card,
+    _review_page,
 )
 from tests.support import prepare_paper_repository
 
 
-def _paper(root: Path, *, with_html: bool = False) -> tuple[Path, Path]:
-    slug = "2026-07-30-01"
+def _paper(root: Path, *, with_html: bool = False, slug: str = "2026-07-30-01") -> tuple[Path, Path]:
     paper_dir = root / "papers" / slug
     paper_dir.mkdir()
     source = paper_dir / "source.tex"
@@ -33,14 +34,14 @@ def _paper(root: Path, *, with_html: bool = False) -> tuple[Path, Path]:
         "migration_record_id": "fixture:local-admin",
         "legacy_slugs": [],
         "title": "管理画面の試験原稿",
-        "published_at": "2026-07-30T12:00:00+09:00",
-        "sequence": 1,
-        "year": 2026,
+        "published_at": f"{slug[:10]}T12:00:00+09:00",
+        "sequence": int(slug[-2:]),
+        "year": int(slug[:4]),
         "kind": "単純なTeX",
         "math_section": "その他",
         "summary": "ローカル管理画面の試験です。",
         "original_url": "",
-        "order": 2026073001,
+        "order": int(slug.replace("-", "")),
         "tags": ["数学"],
         "keywords": ["試験"],
         "build": {"enabled": False, "engine": "platex"},
@@ -152,10 +153,84 @@ class LocalAdminTest(unittest.TestCase):
             detail = _paper_page(app, "2026-07-30-01").decode("utf-8")
 
             self.assertIn("管理画面の試験原稿", dashboard)
-            self.assertIn("未承認: source.tex", dashboard)
-            self.assertIn("HTML試験版を生成", detail)
-            self.assertIn("承認して事前検査", detail)
+            self.assertIn("修正したファイル：source.tex", dashboard)
+            self.assertIn("修正したファイルを検査する", detail)
+            self.assertIn("内容を確認して、修正を登録する", detail)
+            self.assertIn('<button disabled>確認用のHTML版を作る</button>', detail)
+            self.assertNotIn('action="/papers/2026-07-30-01/finish"', detail)
             self.assertIn(app.csrf_token, detail)
+
+    def test_dashboard_filters_and_searches_without_losing_pending_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            prepare_paper_repository(root)
+            _, source = _paper(root)
+            _paper(root, slug="2026-07-31-01")
+            source.write_text("changed", encoding="utf-8")
+            app = LocalAdmin(root)
+
+            default = _dashboard(app).decode()
+            all_papers = _dashboard(app, view="all").decode()
+            searched = _dashboard(app, query="２０２６-０７-３１ SOURCE.TEX").decode()
+            empty = _dashboard(app, query='"<no-match>&').decode()
+
+            self.assertIn('href="/papers/2026-07-30-01"', default)
+            self.assertNotIn('href="/papers/2026-07-31-01"', default)
+            self.assertLess(all_papers.index('href="/papers/2026-07-30-01"'), all_papers.index('href="/papers/2026-07-31-01"'))
+            self.assertIn('href="/papers/2026-07-31-01"', searched)
+            self.assertNotIn('href="/papers/2026-07-30-01"', searched)
+            self.assertIn("該当する記事がありません", empty)
+            self.assertIn("&quot;&lt;no-match&gt;&amp;", empty)
+            self.assertNotIn("<no-match>", empty)
+
+    def test_review_form_preserves_selected_files_and_requires_human_confirmation(self) -> None:
+        class Inputs(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.inputs = []
+
+            def handle_starttag(self, tag, attrs):
+                if tag == "input":
+                    self.inputs.append(dict(attrs))
+
+        with tempfile.TemporaryDirectory() as temporary:
+            app = LocalAdmin(Path(temporary))
+            result = ReviewResult('source&notes.tex', "", "内容を確認してください", ())
+            page = _review_page(app, "2026-07-30-01", [result]).decode()
+            parser = Inputs()
+            parser.feed(page)
+            inputs = {item["name"]: item for item in parser.inputs}
+
+            self.assertEqual(result.path, inputs["file"]["value"])
+            self.assertEqual(app.csrf_token, inputs["csrf"]["value"])
+            for field in ("privacy_reviewed", "accept_public_change"):
+                self.assertIn("required", inputs[field])
+                self.assertNotIn("checked", inputs[field])
+            self.assertIn("required", inputs["reason"])
+            self.assertIn('action="/papers/2026-07-30-01/finish"', page)
+
+    def test_missing_file_is_explained_before_review(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            prepare_paper_repository(root)
+            _, source = _paper(root)
+            source.unlink()
+            page = _paper_page(LocalAdmin(root), "2026-07-30-01").decode()
+            self.assertIn("ファイルが見つかりません", page)
+            self.assertIn('<button disabled>修正したファイルを検査する</button>', page)
+
+    def test_approval_reports_when_registration_succeeded_but_preflight_failed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            prepare_paper_repository(root)
+            paper_dir, source = _paper(root)
+            source.write_text("changed", encoding="utf-8")
+            app = LocalAdmin(root)
+            with patch.object(app, "preflight", side_effect=PaperToolError("別の記事の確認が必要")):
+                with self.assertRaisesRegex(PaperToolError, "登録は完了しましたが"):
+                    app.approve_reviewed_change("2026-07-30-01", ["source.tex"], "本文の修正")
+            manifest = json.loads((paper_dir / "paper.json").read_text())
+            self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), manifest["files"][0]["sha256"])
 
     def test_local_file_tokens_cannot_escape_registered_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

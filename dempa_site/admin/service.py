@@ -106,7 +106,7 @@ class LocalAdmin:
         for item in reviewed:
             if item.report_directory is None:
                 results.append(
-                    ReviewResult(item.path, "", "自動個人情報検査は不要です", ())
+                    ReviewResult(item.path, "", "この種類のファイルは自動個人情報検査の対象外です。内容を自分で確認してください。", ())
                 )
                 continue
             token = self.token_for(item.report_directory, f"{slug} の検査報告")
@@ -270,7 +270,14 @@ class LocalAdmin:
                     if source_dir.exists() and not target_dir.exists():
                         source_dir.rename(target_dir)
             raise
-        checked = self.preflight()
+        try:
+            checked = self.preflight()
+        except PaperToolError as error:
+            raise PaperToolError(
+                "選んだ修正の登録は完了しましたが、続く全体検査で停止しました。"
+                "下の詳細を確認してください。原稿を再修正した場合は、もう一度修正を検査してください。\n\n"
+                + str(error)
+            ) from error
         retirement = (
             "\n旧HTMLを回復可能な隔離領域へ退避: " + ", ".join(retired)
             if retired
