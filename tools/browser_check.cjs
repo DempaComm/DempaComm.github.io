@@ -90,6 +90,13 @@ async function run() {
       await go('/');
       await page.waitForSelector('#today-paper a');
       await shot('home');
+      const graphLink = page.getByRole('link', {name: '関係図を開く', exact: true});
+      await graphLink.focus();
+      await page.keyboard.press('Enter');
+      await page.waitForURL(new URL('/graph/', base).href);
+      assert.equal(new URL(page.url()).pathname, '/graph/');
+      await page.waitForSelector('#paper-graph [data-graph-slug]');
+      report.checks.push(`${width}: home graph link opens the interactive graph with Enter`);
       for (const [route, name] of [['/math/', 'math'], ['/explore/', 'explore'], ['/reading-paths/', 'paths'], ['/lineage/', 'lineage'], ['/404.html', '404']]) {
         await go(route); await shot(name);
       }

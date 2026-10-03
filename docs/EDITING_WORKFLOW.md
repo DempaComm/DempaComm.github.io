@@ -3,6 +3,9 @@
 この手順は、既存原稿を原稿フォルダ内でコンパイルしながら修正し、個人情報検査、
 SHA承認、公開サイト生成、公開物基準更新まで安全に完了するためのものである。
 
+このMacでは、編集も管理画面の起動も `/Users/yoshitoishiki/Documents/Codex/dempa/dempa-cc-by-4`
+で行う。`数識電収.code-workspace` もこのフォルダを開く。
+
 ## 最初に三項目だけ書き換える
 
 リポジトリのルートで、次の三行を実際の記事番号、ファイル名、修正理由へ書き換えて
@@ -82,6 +85,7 @@ python3 scripts/paper_tool.py finish-change "$SLUG" \
 ## 4. コミットしてpushする
 
 ```sh
+git branch --show-current
 git status
 git diff -- "papers/$SLUG"
 git diff -- tests/fixtures/site-baseline.json
@@ -94,8 +98,13 @@ git add -u "papers/$SLUG"
 git add tests/fixtures/site-baseline.json
 git status
 git commit -m "$REASON"
-git push origin main
+git push -u origin HEAD
 ```
+
+`HEAD` は現在の作業ブランチを指す。このコピーの作業ブランチは
+`codex/site-search-navigation` なので、上のコマンドはそのブランチへ送信する。
+作業ブランチへのpushだけでは公開されない。公開する場合は、確認済みの変更を `main` へ
+統合した後、GitHub Actionsのbuild・deploy成功と公開サイトへの反映を確認する。
 
 新しいファイルを追加した場合は `git add -u` では登録されない。新規ファイルの追加は
 `paper.json` への新しいSHA登録も必要なので、この簡単手順では扱わず、先に個別対応する。

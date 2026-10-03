@@ -15,6 +15,15 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`
 
+## LuaLaTeX移行用の再検査
+
+LuaLaTeXへ切り替え済みの作業コピーでは、`python3 tools/build_lualatex.py` で全原稿をビルドできます。
+結果とログは `_experiments/lualatex-migration/` に保存します。`--failed-only` で失敗した原稿、
+前回検査後にTeXやPDFが変わった原稿、PDF・SyncTeXが欠けているか空になった原稿を再ビルドします。
+成功記録を再利用する前に、現在のTeX・PDFの内容と両出力ファイルの存在を確認します。
+文献データや設定も変更した場合は全件検査を使います。
+`python3 tools/build_lualatex.py --force` は補助ファイルが最新と判断されても全件を再処理します。
+
 ## 著作物のライセンス
 
 数識電収内の著作物は、[クリエイティブ・コモンズ 表示 4.0 国際（CC BY 4.0）](https://creativecommons.org/licenses/by/4.0/deed.ja)で公開しています。

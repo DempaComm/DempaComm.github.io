@@ -54,6 +54,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <nav class="home-browse-links" aria-label="探し方を選ぶ">
         <a href="archive/">全原稿</a><a href="math/">数学記事総覧</a>
         <a href="archive/#years-title">公開年</a><a href="archive/#tags-title">タグ</a>
+        <a href="graph/">関係図を開く</a>
         <a href="explore/">読書経路・関係図</a>
       </nav>
     </section>
