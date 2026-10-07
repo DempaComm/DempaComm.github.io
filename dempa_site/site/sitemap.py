@@ -27,6 +27,7 @@ def rendered_sitemap(
         (f"{SITE_URL}/statements/", None),
         (f"{SITE_URL}/lineage/", None),
         (f"{SITE_URL}/graph/", None),
+        (f"{SITE_URL}/tools/", None),
     ]
     for year in sorted({str(paper.year) for _, paper in selected}, reverse=True):
         urls.append((f"{SITE_URL}/archive/{year}/", None))

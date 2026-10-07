@@ -36,6 +36,7 @@ class StagingPipelineTest(unittest.TestCase):
         "relation-graph",
         "explore",
         "statements",
+        "github-tools",
     }
 
     def setUp(self) -> None:

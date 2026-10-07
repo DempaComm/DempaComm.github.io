@@ -110,6 +110,12 @@ EXAMPLE_FEATURE = FunctionFeature(
 `SITE_FEATURES` に加える。`scripts/paper_tool.py` や `site/staging.py` に機能固有の処理を
 書かない。
 
+`/tools/` はDempaCommの公開GitHubリポジトリ、skills、変換試作の紹介ページである。
+本文は `features/github_tools.html`、専用CSSは `features/github_tools.css`、生成処理は
+`features/github_tools.py` で管理する。トップページから常時リンクするため、
+`github-tools` を `required=True` で登録する。生成時のGitHubアクセスは不要で、内容を
+更新するときに公開README・skills・リリースを照合し、本文末尾の確認日を更新する。
+
 複数の変換機能で同じライフサイクルや設定が必要になった場合は、`SiteFeature` を満たす
 専用クラスへ共通化する。単独の小さな機能のために基底クラス階層を増やさない。
 

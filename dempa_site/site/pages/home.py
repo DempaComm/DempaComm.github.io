@@ -41,6 +41,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <p class="lead">数学記事の原稿と、原稿から生成したPDFを保存・公開するアーカイブです。</p>
       <nav class="site-navigation" aria-label="主要ページ">
 {site_navigation("", "home")}
+        <a href="tools/">skills・ツール</a>
       </nav>
     </div>
   </header>
@@ -108,6 +109,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <p class="section-number">ABOUT</p>
       <h2 id="archive-note-title">このアーカイブについて</h2>
       <p>記事本文への入口に加えて、公開可能なTeX原稿、PDF、BibTeX、図版などを原稿単位で保存しています。元記事は引き続き、はてなブログ「電波通信」から参照できます。</p>
+      <p>数学の執筆や原稿公開に使う仕組みもGitHubで公開しています。<a href="tools/">日本語数学文書用のskills・用例検索・公開ツールの紹介</a>から、使い方と各リポジトリへ進めます。</p>
     </section>
   </main>
 

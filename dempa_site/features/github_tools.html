@@ -1,0 +1,124 @@
+    <div class="tools-intro">
+      <p>数識電収で蓄積してきた数学の文章や、原稿を保存・公開する仕組みを、ほかの執筆にも使える形で公開しています。日本語数学文書用のskillsを入口に、用例を探すコーパス、サイトの公開基盤、変換の試作ツールへ進めます。</p>
+      <a class="tools-link" href="https://github.com/DempaComm?tab=repositories">DempaCommの公開リポジトリ一覧 <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <nav class="tools-contents" aria-label="このページの目次">
+      <a href="#japanese-math-skills">執筆・レビューのskills</a>
+      <a href="#corpus">数学の用例を探す</a>
+      <a href="#publishing">原稿を公開する</a>
+      <a href="#experiments">試作ツール</a>
+    </nav>
+
+    <section class="tools-section" aria-labelledby="japanese-math-skills">
+      <p class="section-number">01 / SKILLS</p>
+      <h2 id="japanese-math-skills">日本語の数学文書を書く・読む</h2>
+      <p>skillsは、AIに作業の進め方や参照資料を伝える指示と資料のセットです。<a href="https://github.com/DempaComm/japanese-math-skills">japanese-math-skills</a>には、日本語の論文・解説・講義ノートに使う2本を収録しています。</p>
+
+      <div class="tools-grid">
+        <article class="tool-card" aria-labelledby="writing-skill">
+          <p class="tool-kind">執筆・改稿・推敲</p>
+          <h3 id="writing-skill"><code>write-japanese-math</code></h3>
+          <p>対象読者と編集範囲を確かめ、定義・定理・証明のつながりを保ちながら日本語の文章を整えます。英語原稿の和訳を伴う改稿にも使えます。</p>
+          <p class="tool-example-label">依頼の例</p>
+          <blockquote>$write-japanese-math を使って、この定理と証明を学部3年向けの日本語の解説にしてください。</blockquote>
+          <a class="tools-link" href="https://github.com/DempaComm/japanese-math-skills/blob/main/skills/write-japanese-math/SKILL.md">執筆スキルの内容を読む <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="tool-card" aria-labelledby="reading-skill">
+          <p class="tool-kind">独立した読者によるレビュー</p>
+          <h3 id="reading-skill"><code>read-japanese-math</code></h3>
+          <p>版を固定した原稿を、執筆時の会話や作業履歴を渡さずに別の読者へ委任します。読者がつまずく箇所、説明の不足、前後のつながりを、場所を示して報告します。</p>
+          <p class="tool-example-label">依頼の例</p>
+          <blockquote>別エージェントに $read-japanese-math を使わせ、この原稿を学部3年の読者として editorial 方式でレビューしてください。</blockquote>
+          <a class="tools-link" href="https://github.com/DempaComm/japanese-math-skills/blob/main/skills/read-japanese-math/SKILL.md">レビュー用スキルの内容を読む <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+
+      <div class="tools-note">
+        <p>レビューには、順に読む <code>continuous</code>、全体を読む <code>editorial</code>、変更箇所を読む <code>delta</code> の3方式があります。独立レビューは明示的に依頼したときに行い、原稿を書き換えずに読解上の指摘を返します。証明の正しさの認定は、これらのskillsの役割に含まれません。</p>
+      </div>
+
+      <div class="tools-install" aria-labelledby="install-title">
+        <h3 id="install-title">使い始めるには</h3>
+        <ol>
+          <li><a href="https://github.com/DempaComm/japanese-math-skills/releases/latest">リリースページ</a>のAssetsから配布用ZIPをダウンロードし、展開します。</li>
+          <li><code>skills/write-japanese-math</code>と<code>skills/read-japanese-math</code>を、利用するAI環境のスキル探索フォルダへ一緒にコピーします。レビュー用スキルが執筆基準を参照するため、2フォルダは隣り合わせに置きます。</li>
+          <li>対象原稿と読者、修正する範囲を添えて、上の例のようにスキル名を指定します。</li>
+        </ol>
+        <p>既存の同名スキルがある場合は退避してから更新してください。導入の詳細は<a href="https://github.com/DempaComm/japanese-math-skills#導入">READMEの導入手順</a>を参照できます。</p>
+      </div>
+    </section>
+
+    <section class="tools-section" aria-labelledby="corpus">
+      <p class="section-number">02 / CORPUS</p>
+      <h2 id="corpus">数学の表現を、前後の文脈とともに探す</h2>
+      <p>日本語数学文書用のskillsには、数識電収の公開TeXを出典とするコーパスを同梱しています。定義を導入する、対象を選ぶ、独立性を確かめる、結論へ進む、といった文章や論証の役割から用例を探せます。</p>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3>表現の使い方を読む</h3>
+          <p>前後の原文と出典、定理環境を一緒に読み、用法を確認した例と自動抽出した候補を見分けられます。登録された別表記も検索できます。</p>
+          <a class="tools-link" href="https://github.com/DempaComm/japanese-math-skills/blob/main/skills/write-japanese-math/references/lexicon.md">文脈別の表現辞書 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="tool-card">
+          <h3>証明の運びを読む</h3>
+          <p>証明のまとまりを、設定・目標・論証・結論に対応する原文と編集注からたどります。各例を使える場面や必要な前提も確認できます。</p>
+          <a class="tools-link" href="https://github.com/DempaComm/japanese-math-skills/blob/main/skills/write-japanese-math/references/argument-guide.md">論証の目的別案内 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="tools-install">
+        <h3>手元のブラウザで検索する</h3>
+        <p>Python 3.10以上を用意し、展開したパッケージのフォルダで次を実行します。追加のPythonパッケージやTeX環境は不要です。</p>
+        <pre><code>python3 viewer/serve.py</code></pre>
+        <p>起動後、ブラウザのアドレス欄に<code>http://127.0.0.1:8769/</code>を入力すると検索画面が開きます。コマンドから用例を探すこともできます。</p>
+        <pre><code>python3 skills/write-japanese-math/scripts/corpus.py '1の分割' --limit 3</code></pre>
+        <p>用例は、対象原稿に合う表現を選ぶための資料です。頻度の高い表現を一律の規則にしたり、採録された証明を条件の違う問題へそのまま移したりせず、前提と文脈を確かめて使います。</p>
+      </div>
+    </section>
+
+    <section class="tools-section" aria-labelledby="publishing">
+      <p class="section-number">03 / PUBLISHING</p>
+      <h2 id="publishing">数識電収の公開基盤</h2>
+      <article class="tool-card">
+        <p class="tool-kind">このサイトのソースコード</p>
+        <h3><a href="https://github.com/DempaComm/DempaComm.github.io">DempaComm.github.io</a></h3>
+        <p>数学原稿、PDF、TeX、図版を記事ごとに保存し、静的なサイトとして公開する仕組みです。原稿のハッシュを検査し、LaTeXからPDFを生成して、GitHub Pagesへ配置します。</p>
+        <p>公開年・タグ・数学分野別の一覧、本文検索、定理等の索引、読書経路、原稿関係図も、このリポジトリで管理しています。公開済みの機能と運用手順はREADMEから確認できます。</p>
+        <a class="tools-link" href="https://github.com/DempaComm/DempaComm.github.io/blob/main/README.md">サイトの構成と管理方法を読む <span aria-hidden="true">↗</span></a>
+      </article>
+    </section>
+
+    <section class="tools-section" aria-labelledby="experiments">
+      <p class="section-number">04 / EXPERIMENTS</p>
+      <h2 id="experiments">変換・共同執筆の試作ツール</h2>
+      <p>ここからは実験段階のプロジェクトです。対応する入力と現在の制限を各READMEで確認してから、小さな例で試せます。</p>
+      <div class="tools-grid">
+        <article class="tool-card">
+          <p class="tool-kind">Typstへの変換補助 · アルファ版</p>
+          <h3><a href="https://github.com/DempaComm/DempaComm.github.io/tree/main/packages/dempa-typst-converter">dempa-typst-converter</a></h3>
+          <p>Tylaxが生成したTypstソースを補正し、日本語の定理・証明を共通スタイルで組版するためのツールです。元のTeXと生の変換結果を保ち、補正内容や停止理由を報告します。</p>
+          <p class="tool-status">未対応の命令や未解決の参照などは停止対象です。生成物は元PDFと見比べて確認します。</p>
+          <a class="tools-link" href="https://github.com/DempaComm/DempaComm.github.io/blob/main/packages/dempa-typst-converter/README.md">対応範囲と試し方 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="tool-card">
+          <p class="tool-kind">SATySFiへの変換 · アルファ版</p>
+          <h3><a href="https://github.com/DempaComm/DempaComm.github.io/tree/main/packages/dempa-satysfi-converter">dempa-satysfi-converter</a></h3>
+          <p>Pandocの中間表現を経由してLaTeXをSATySFiへ変換する試作です。元原稿を一時領域へコピーし、変換ソース、報告、ログ、PDFを分けて保存します。</p>
+          <p class="tool-status">本文・基本的な数式や定理・参照が初期範囲です。引用・文献・図版・表などは未対応で、生成物には目視確認が必要です。</p>
+          <a class="tools-link" href="https://github.com/DempaComm/DempaComm.github.io/blob/main/packages/dempa-satysfi-converter/README.md">対応範囲と試し方 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="tool-card tool-card-wide">
+          <p class="tool-kind">一般位相の共同執筆に向けた技術試作</p>
+          <h3><a href="https://github.com/DempaComm/genetopo-demo">genetopo-demo</a></h3>
+          <p>LaTeX原稿、PDF、静的HTML、SVG図版を組み合わせ、定義や定理に永続タグを付けるためのデモです。章や定理の番号が変わっても同じタグから参照できる、持ち運びやすい執筆基盤を目指しています。</p>
+          <p class="tool-status">短い日本語原稿の全文HTML化、タグ移動、PDF、代表図式のSVG化を実演できます。全文検索・コメント・全図式の自動変換は今後の課題です。</p>
+          <a class="tools-link" href="https://github.com/DempaComm/genetopo-demo/blob/main/README.md">デモの目的と現在の到達点 <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="tools-sources" aria-labelledby="tools-sources-title">
+      <h2 id="tools-sources-title">更新・出典・利用条件</h2>
+      <p>紹介内容の確認日：<time datetime="2026-10-07">2026年10月7日</time>。上記の各リポジトリのREADMEと公開スキルをもとにまとめています。最新の対応範囲や導入方法は、それぞれのリンク先を参照してください。</p>
+      <p>ソフトウェアや収録資料の利用条件は、各リポジトリのライセンス表示に従ってください。日本語数学文書用skillsには<a href="https://github.com/DempaComm/japanese-math-skills/blob/main/LICENSE.md">ライセンスと適用範囲</a>、<a href="https://github.com/DempaComm/japanese-math-skills/blob/main/ATTRIBUTION.md">出典・加工内容</a>を同梱しています。</p>
+      <a class="tools-link" href="../">数識電収のトップへ戻る</a>
+    </section>

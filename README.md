@@ -11,6 +11,7 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 数学記事総覧: https://dempacomm.github.io/math/
 - 原稿を探索: https://dempacomm.github.io/explore/
 - 本文全文検索: https://dempacomm.github.io/search/
+- GitHubのskills・ツール紹介: https://dempacomm.github.io/tools/
 - はてなブログ: https://concious4410.hatenablog.com/
 - 原稿: `papers/`
 - 自動ビルド: `.github/workflows/pages.yml`

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dempa_site.features.base import FunctionFeature, SiteFeature
 from dempa_site.features.explore import generate_explore
+from dempa_site.features.github_tools import generate_github_tools
 from dempa_site.features.lineage import generate_lineage
 from dempa_site.features.reading_paths import (
     generate_reading_paths,
@@ -40,6 +41,11 @@ SITE_FEATURES: tuple[SiteFeature, ...] = (
     FunctionFeature(
         name="statements",
         generator=generate_statements,
+        required=True,
+    ),
+    FunctionFeature(
+        name="github-tools",
+        generator=generate_github_tools,
         required=True,
     ),
 )
