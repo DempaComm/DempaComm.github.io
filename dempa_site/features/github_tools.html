@@ -1,17 +1,38 @@
     <div class="tools-intro">
-      <p>数識電収で蓄積してきた数学の文章や、原稿を保存・公開する仕組みを、ほかの執筆にも使える形で公開しています。日本語数学文書用のskillsを入口に、用例を探すコーパス、サイトの公開基盤、変換の試作ツールへ進めます。</p>
+      <p>数識電収で蓄積してきた数学の文章や、原稿を保存・公開する仕組みを、ほかの執筆にも使える形で公開しています。マーケットプレイスから日本語数学文書用のskillsを導入し、用例を探すコーパス、サイトの公開基盤、変換の試作ツールへ進めます。</p>
       <a class="tools-link" href="https://github.com/DempaComm?tab=repositories">DempaCommの公開リポジトリ一覧 <span aria-hidden="true">↗</span></a>
     </div>
 
     <nav class="tools-contents" aria-label="このページの目次">
+      <a href="#marketplace">マーケットプレイス</a>
       <a href="#japanese-math-skills">執筆・レビューのskills</a>
       <a href="#corpus">数学の用例を探す</a>
       <a href="#publishing">原稿を公開する</a>
       <a href="#experiments">試作ツール</a>
     </nav>
 
+    <section class="tools-section" aria-labelledby="marketplace">
+      <p class="section-number">01 / MARKETPLACE</p>
+      <h2 id="marketplace">マーケットプレイスからまとめて導入する</h2>
+      <article class="tool-card">
+        <p class="tool-kind">Codexのプラグインとして導入</p>
+        <h3><a href="https://github.com/DempaComm/japanese-math-skills-marketplace">DempaComm Skills Marketplace</a></h3>
+        <p>日本語数学文書用のskillsをまとめて導入するためのマーケットプレイスです。プラグイン一覧では「DempaComm」と表示されます。</p>
+        <p>収録プラグイン「Japanese Math Skills」（0.1.0）には、<code>write-japanese-math</code>と<code>read-japanese-math</code>の2本に加え、公開TeXの用例コーパスと検索ツールを同梱しています。2つのskillsを個別にフォルダへ配置せずに使えます。</p>
+        <a class="tools-link" href="https://github.com/DempaComm/japanese-math-skills-marketplace/blob/main/README.md">導入・更新の手順を読む <span aria-hidden="true">↗</span></a>
+      </article>
+      <div class="tools-install" aria-labelledby="marketplace-install-title">
+        <h3 id="marketplace-install-title">Codexで導入する</h3>
+        <p><code>codex plugin</code>に対応するCodex CLIで、次の2行を実行します。</p>
+        <pre><code>codex plugin marketplace add DempaComm/japanese-math-skills-marketplace
+codex plugin add japanese-math-skills@dempacomm</code></pre>
+        <p>追加後は、対応するアプリのプラグイン一覧で「DempaComm」を選び、「Japanese Math Skills」をインストールすることもできます。導入後は新しいチャットを開始し、対象原稿と読者、作業範囲を添えて依頼してください。</p>
+        <p>Codex側のコマンド仕様は<a href="https://learn.chatgpt.com/docs/developer-commands#codex-plugin">公式OpenAIドキュメント</a>を参照できます。</p>
+      </div>
+    </section>
+
     <section class="tools-section" aria-labelledby="japanese-math-skills">
-      <p class="section-number">01 / SKILLS</p>
+      <p class="section-number">02 / SKILLS</p>
       <h2 id="japanese-math-skills">日本語の数学文書を書く・読む</h2>
       <p>skillsは、AIに作業の進め方や参照資料を伝える指示と資料のセットです。<a href="https://github.com/DempaComm/japanese-math-skills">japanese-math-skills</a>には、日本語の論文・解説・講義ノートに使う2本を収録しています。</p>
 
@@ -39,7 +60,7 @@
       </div>
 
       <div class="tools-install" aria-labelledby="install-title">
-        <h3 id="install-title">使い始めるには</h3>
+        <h3 id="install-title">ZIPから導入する</h3>
         <ol>
           <li><a href="https://github.com/DempaComm/japanese-math-skills/releases/latest">リリースページ</a>のAssetsから配布用ZIPをダウンロードし、展開します。</li>
           <li><code>skills/write-japanese-math</code>と<code>skills/read-japanese-math</code>を、利用するAI環境のスキル探索フォルダへ一緒にコピーします。レビュー用スキルが執筆基準を参照するため、2フォルダは隣り合わせに置きます。</li>
@@ -50,7 +71,7 @@
     </section>
 
     <section class="tools-section" aria-labelledby="corpus">
-      <p class="section-number">02 / CORPUS</p>
+      <p class="section-number">03 / CORPUS</p>
       <h2 id="corpus">数学の表現を、前後の文脈とともに探す</h2>
       <p>日本語数学文書用のskillsには、数識電収の公開TeXを出典とするコーパスを同梱しています。定義を導入する、対象を選ぶ、独立性を確かめる、結論へ進む、といった文章や論証の役割から用例を探せます。</p>
       <div class="tools-grid">
@@ -76,7 +97,7 @@
     </section>
 
     <section class="tools-section" aria-labelledby="publishing">
-      <p class="section-number">03 / PUBLISHING</p>
+      <p class="section-number">04 / PUBLISHING</p>
       <h2 id="publishing">数識電収の公開基盤</h2>
       <article class="tool-card">
         <p class="tool-kind">このサイトのソースコード</p>
@@ -88,7 +109,7 @@
     </section>
 
     <section class="tools-section" aria-labelledby="experiments">
-      <p class="section-number">04 / EXPERIMENTS</p>
+      <p class="section-number">05 / EXPERIMENTS</p>
       <h2 id="experiments">変換の試作ツール</h2>
       <p>ここからは実験段階のプロジェクトです。対応する入力と現在の制限を各READMEで確認してから、小さな例で試せます。</p>
       <div class="tools-grid">
@@ -111,7 +132,7 @@
 
     <section class="tools-sources" aria-labelledby="tools-sources-title">
       <h2 id="tools-sources-title">更新・出典・利用条件</h2>
-      <p>紹介内容の確認日：<time datetime="2026-10-07">2026年10月7日</time>。上記の各リポジトリのREADMEと公開スキルをもとにまとめています。最新の対応範囲や導入方法は、それぞれのリンク先を参照してください。</p>
+      <p>紹介内容の確認日：<time datetime="2026-10-08">2026年10月8日</time>。上記の各リポジトリのREADMEと公開スキルをもとにまとめています。最新の対応範囲や導入方法は、それぞれのリンク先を参照してください。</p>
       <p>ソフトウェアや収録資料の利用条件は、各リポジトリのライセンス表示に従ってください。日本語数学文書用skillsには<a href="https://github.com/DempaComm/japanese-math-skills/blob/main/LICENSE.md">ライセンスと適用範囲</a>、<a href="https://github.com/DempaComm/japanese-math-skills/blob/main/ATTRIBUTION.md">出典・加工内容</a>を同梱しています。</p>
       <a class="tools-link" href="../">数識電収のトップへ戻る</a>
     </section>
