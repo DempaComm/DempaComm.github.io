@@ -29,6 +29,11 @@ def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = 
         f"{html.escape(tag)}</a>"
         for tag in manifest["tags"]
     )
+    tags_html = (
+        f'        <div class="paper-tags">\n{tag_chips}\n        </div>'
+        if manifest.original_url
+        else '        <p>電波通信に対応記事なし</p>'
+    )
     keyword_chips = "\n".join(
         f'          <span class="keyword-chip">{html.escape(keyword)}</span>'
         for keyword in manifest["keywords"]
@@ -122,9 +127,7 @@ def rendered_paper_page(manifest: Paper, reading_paths: Sequence[ReadingPath] = 
       <section aria-labelledby="paper-tags-title">
         <p class="section-number">TAGS</p>
         <h2 id="paper-tags-title">電波通信のタグ</h2>
-        <div class="paper-tags">
-{tag_chips}
-        </div>
+{tags_html}
       </section>
       <section aria-labelledby="keywords-title">
         <p class="section-number">KEYWORDS</p>
