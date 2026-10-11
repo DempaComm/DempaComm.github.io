@@ -42,6 +42,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <nav class="site-navigation" aria-label="主要ページ">
 {site_navigation("", "home")}
         <a href="tools/">skills・ツール</a>
+        <a href="kodama-nagami/">児玉・永見の参考文献</a>
       </nav>
     </div>
   </header>
@@ -110,6 +111,7 @@ def rendered_home_page(selected: Sequence[tuple[Path, Paper]]) -> str:
       <h2 id="archive-note-title">このアーカイブについて</h2>
       <p>記事本文への入口に加えて、公開可能なTeX原稿、PDF、BibTeX、図版などを原稿単位で保存しています。元記事は引き続き、はてなブログ「電波通信」から参照できます。</p>
       <p>数学の執筆や原稿公開に使う仕組みもGitHubで公開しています。<a href="tools/">日本語数学文書用のskills・用例検索・公開ツールの紹介</a>から、使い方と各リポジトリへ進めます。</p>
+      <p>児玉之宏・永見啓応『位相空間論』の学習には、<a href="kodama-nagami/">参考文献・本文との対応・付記の案内</a>を用意しています。原本の頁や定理番号から文献をたどれます。</p>
     </section>
   </main>
 

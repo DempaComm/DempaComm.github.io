@@ -37,6 +37,7 @@ class StagingPipelineTest(unittest.TestCase):
         "explore",
         "statements",
         "github-tools",
+        "kodama-nagami",
     }
 
     def setUp(self) -> None:

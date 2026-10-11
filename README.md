@@ -11,6 +11,7 @@ LuaLaTeX、XeLaTeXを選択できます。既定値はpLaTeXです。
 - 数学記事総覧: https://dempacomm.github.io/math/
 - 原稿を探索: https://dempacomm.github.io/explore/
 - 本文全文検索: https://dempacomm.github.io/search/
+- 児玉・永見『位相空間論』の参考文献案内: https://dempacomm.github.io/kodama-nagami/ （[記事紹介](https://dempacomm.github.io/papers/2026-10-11-01/)、[保守手順](docs/KODAMA_NAGAMI.md)）
 - GitHubのskills・ツール紹介: https://dempacomm.github.io/tools/
 - はてなブログ: https://concious4410.hatenablog.com/
 - 原稿: `papers/`
@@ -31,7 +32,7 @@ LuaLaTeXへ切り替え済みの作業コピーでは、`python3 tools/build_lua
 
 ## 収録状況
 
-現在は2015年から2026年までの191記事を収録しています。TeX・PDF付き、PDFのみ、TeXのみ、ブログ本文のみの記事が含まれます。保存している元のTeXと当時の完成PDFは無改変で維持し、再現可能な原稿だけを自動コンパイルの対象にします。`paper.json` の `kind` は取り込み方法を記録する内部管理項目で、公開ページには表示しません。
+現在は2015年から2026年までの192記事を収録しています。TeX・PDF付き、PDFのみ、TeXのみ、ブログ本文のみ、HTML文献案内の記事が含まれます。保存している元のTeXと当時の完成PDFは無改変で維持し、再現可能な原稿だけを自動コンパイルの対象にします。`paper.json` の `kind` は取り込み方法を記録する内部管理項目で、公開ページには表示しません。
 
 ## 原稿保護と移行
 
