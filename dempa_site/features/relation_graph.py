@@ -8,6 +8,7 @@ from math import log
 from pathlib import Path
 
 from dempa_site.catalog.metadata import SiteCatalog
+from dempa_site.catalog.search_terms import expanded_search_terms
 from dempa_site.features.exploration_common import rendered_exploration_page
 from dempa_site.features.paper_capabilities import paper_capabilities
 from dempa_site.features.reading_paths import load_reading_paths
@@ -122,6 +123,7 @@ def _graph_data(catalog: SiteCatalog) -> dict:
             {
                 "slug": paper.slug,
                 "title": paper.title,
+                "search_text": expanded_search_terms(" ".join([paper.title, *paper.tags])),
                 "summary": paper.summary,
                 "year": paper.year,
                 "order": paper.order,

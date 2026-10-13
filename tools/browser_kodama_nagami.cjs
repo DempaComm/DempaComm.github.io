@@ -68,6 +68,30 @@ module.exports = async function checkBibliography(page, go, width, output, repor
   assert.equal(await page.locator('.kn-matches:visible').count(), 0);
   report.checks.push(`${width}: hidden bibliography matches have safe visible excerpts and reset cleanly`);
 
+  const visibleIds = () => page.locator('[data-kn-item]:visible').evaluateAll(items => items.map(item => item.id));
+  await query.fill('パラコンパクト');
+  const paracompact = await visibleIds();
+  assert.equal(paracompact.length, 46);
+  for (const spelling of ['ﾊﾟﾗｺﾝﾊﾟｸﾄ', 'パラコンパクト'.normalize('NFD')]) {
+    await query.fill(spelling);
+    assert.deepEqual(await visibleIds(), paracompact);
+  }
+  for (const spelling of ['バラコンパクト', 'ハラコンハクト']) {
+    await query.fill(spelling);
+    assert.equal(await visible(), 0, 'Japanese voiced and unvoiced letters must remain distinct');
+  }
+  for (const [accented, plain] of [['Čech', 'Cech'], ['Frolík', 'Frolik']]) {
+    await query.fill(accented);
+    const expected = await visibleIds();
+    assert(expected.length > 0);
+    for (const spelling of [plain, plain.toUpperCase(), accented.normalize('NFD')]) {
+      await query.fill(spelling);
+      assert.deepEqual(await visibleIds(), expected, 'Latin accent folding should be preserved');
+    }
+  }
+  await query.fill('');
+  report.checks.push(`${width}: bibliography preserves Japanese voicing and folds Latin accents and character width`);
+
   const filters = await page.locator('[data-kn-item]').first().evaluate(item =>
     Object.fromEntries(['chapter', 'section', 'relationship', 'era'].map(name => [name, item.dataset[name].split('|')[0]])));
   for (const [name, value] of Object.entries(filters)) {

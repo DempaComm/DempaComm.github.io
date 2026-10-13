@@ -22,6 +22,13 @@ assert.equal(visibleGraph(data, {...options, tag: "位相"}).edges.length, 1);
 assert.equal(visibleGraph(data, {...options, paper: "a", depth: 2}).nodes.length, 3);
 assert.equal(visibleGraph(data, {...options, paper: "a", depth: 2, paths: false}).nodes.length, 2);
 assert.equal(visibleGraph(data, {...options, paper: "a", year: "2025"}).nodes.length, 0);
+const aliases = {nodes: [node("ascoli", {title: "アスコリ", tags: ["解析"],
+  search_text: "アスコリ 解析 Ascoli", year: 2025}), node("unrelated")], edges: []};
+for (const q of ["Ascoli", "ＡＳＣＯＬＩ", "アスコリ", "Ascoli 解析"]) {
+  assert.deepEqual(visibleGraph(aliases, {...options, q}).nodes.map(n => n.slug), ["ascoli"]);
+}
+assert.equal(visibleGraph(aliases, {...options, q: "Ascoli", year: "2026"}).nodes.length, 0);
+assert.equal(visibleGraph(aliases, {...options, q: "Brouwer"}).nodes.length, 0);
 for (const filters of [{group: "analysis"}, {content: "html"}, {paper: "a"}, {tag: "位相", orphans: false}]) {
   const result = visibleGraph(data, {...options, ...filters});
   assert(result.edges.every(e => result.nodes.some(n => n.slug === e.source) && result.nodes.some(n => n.slug === e.target)));

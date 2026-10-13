@@ -134,6 +134,7 @@ async function run() {
       await page.waitForTimeout(500);
       assert.equal(await page.locator('#fulltext-results > li').count(), 0);
       report.checks.push(`${width}: Japanese full text, highlight, return and cancellation`);
+      await require('./browser_search_recovery.cjs')(page, go, width, report);
 
       await go('/statements/years/2020/');
       await page.waitForSelector('#statement-query');
@@ -162,7 +163,15 @@ async function run() {
       await page.waitForSelector('#graph-detail-heading');
       assert.equal(await page.locator('#graph-detail-heading').textContent(), title);
       assert.equal(await page.locator('#paper-graph').getAttribute('viewBox'), view);
-      await page.locator('#graph-detail button').filter({hasText: 'この原稿の周辺を見る'}).click();
+      const related = page.locator('#graph-detail .graph-related button').first();
+      const relatedTitle = await related.locator('span').textContent();
+      await related.press('Enter');
+      assert.equal(await page.locator('#graph-detail-heading').textContent(), relatedTitle);
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'graph-detail-heading');
+      await page.keyboard.press('Tab');
+      assert(await page.locator('#graph-detail .graph-paper-actions').evaluate(nav => nav.contains(document.activeElement)));
+      await page.locator('#graph-detail button').filter({hasText: 'この原稿の周辺を見る'}).press('Enter');
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'graph-detail-heading');
       assert.ok(await page.locator('#paper-graph [data-graph-slug]').count() < total);
       await page.locator('#graph-all').click();
       await page.locator('#graph-query').fill('zz-no-match-9876');
@@ -171,6 +180,37 @@ async function run() {
       await page.locator('#graph-empty-reset').click();
       await page.waitForFunction(total => document.querySelectorAll('#paper-graph [data-graph-slug]').length === total, total);
       report.checks.push(`${width}: graph keyboard selection, zoom, return, neighborhood, empty and reset`);
+      // This branch replaces the graph as well as the selected detail panel.
+      await go('/graph/?paper=2026-07-02-01');
+      await page.locator('#paper-graph [data-graph-slug="2026-06-28-01"]').press('Enter');
+      const outsideSlug = graphData.nodes.find(node => node.title === 'Baire 空間の話').slug;
+      assert.equal(await page.locator(`#paper-graph [data-graph-slug="${outsideSlug}"]`).count(), 0);
+      await page.locator('#graph-detail .graph-related button').filter({hasText: 'Baire 空間の話'}).press('Enter');
+      assert.equal(await page.locator('#graph-detail-heading').textContent(), 'Baire 空間の話');
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'graph-detail-heading');
+      const immediate = await page.locator('#paper-graph [data-graph-slug]').evaluateAll(nodes => nodes.map(node => node.dataset.graphSlug));
+      await page.locator('#graph-detail .graph-depth button').filter({hasText: '2段階'}).press('Enter');
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'graph-detail-heading');
+      const expanded = await page.locator('#paper-graph [data-graph-slug]').evaluateAll(nodes => nodes.map(node => node.dataset.graphSlug));
+      const distant = expanded.find(slug => !immediate.includes(slug));
+      assert(distant, 'The two-step neighborhood should contain a distant paper');
+      await page.locator(`#paper-graph [data-graph-slug="${distant}"]`).press('Enter');
+      await page.locator('#graph-detail .graph-depth button').filter({hasText: '1段階'}).press('Enter');
+      assert.equal(await page.locator('#graph-detail-heading').count(), 0);
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'paper-graph');
+      report.checks.push(`${width}: related-paper and depth changes keep graph keyboard focus`);
+
+      await page.locator('#graph-all').click();
+      await page.locator('#graph-query').fill('Ascoli');
+      await page.waitForFunction(() => document.querySelectorAll('#paper-graph [data-graph-slug]').length === 1);
+      const ascoli = await page.locator('#paper-graph [data-graph-slug]').getAttribute('data-graph-slug');
+      await page.locator('#graph-query').fill('アスコリ');
+      await page.waitForFunction(() => new URL(location.href).searchParams.get('q') === 'アスコリ');
+      assert.equal(await page.locator('#paper-graph [data-graph-slug]').getAttribute('data-graph-slug'), ascoli);
+      await page.locator('#paper-graph [data-graph-slug]').press('Enter');
+      await page.locator('#graph-detail .graph-paper-tags button').first().press('Enter');
+      assert.equal(await page.evaluate(() => document.activeElement.id), 'graph-detail-heading');
+      report.checks.push(`${width}: graph finds Japanese and English aliases and preserves focus after a tag selection`);
       await go('/graph/');
       await page.locator('#paper-graph [data-graph-slug]').first().waitFor();
       await page.locator('.graph-settings').evaluate(element => { element.open = true; });

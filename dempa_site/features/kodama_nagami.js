@@ -6,7 +6,9 @@
   const items = Array.from(document.querySelectorAll("[data-kn-item]"));
   const count = document.querySelector("[data-kn-count]");
   const empty = document.querySelector("[data-kn-empty]");
-  const normalize = text => text.normalize("NFKC").normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase();
+  // Fold Latin accents without erasing Japanese dakuten and handakuten.
+  const normalize = text => text.normalize("NFKC").normalize("NFD")
+    .replace(/(\p{Script=Latin})\p{M}+/gu, "$1").normalize("NFC").toLocaleLowerCase();
   const searchable = new Map(items.map(item => [item, normalize(item.textContent)]));
   // Cache original text before adding search excerpts, so excerpts never become
   // search input themselves. Keep the original links and details untouched.

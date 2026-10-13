@@ -137,30 +137,39 @@ async function start() {
   function showInspector(focus = false) {
     renderInspector({inspector, svg, data, byId, groups, options, selected, nodeElements}, {
       clearSelection: () => { selected = ""; showInspector(); highlight(); svg.focus({preventScroll: true}); saveSoon(); },
-      filterTag: tag => { options.tag = tag; options.paper = ""; change(); },
-      setDepth: value => { options.depth = value; change(); },
+      filterTag: tag => { options.tag = tag; options.paper = ""; change(true); },
+      setDepth: value => { options.depth = value; change(true); },
       openNeighborhood: (slug, selectTarget = false) => {
         options = {...options, q: "", tag: "", year: "", content: "", group: "", paper: slug, depth: 1};
         if (selectTarget) selected = slug;
-        change();
+        change(true);
       },
       select,
       returnToGraph: () => focusNode(selected, true),
     }, focus);
+    if (focus) {
+      if ($("graph-detail-heading")) revealInspector();
+      else { svg.focus({preventScroll: true}); svg.scrollIntoView({block: "nearest"}); }
+    }
   }
   function select(slug, focus = false) {
     selected = slug; keyboardSlug = slug;
     nodeElements.forEach(({group}, id) => group.setAttribute("tabindex", id === slug ? "0" : "-1"));
     showInspector(focus); highlight(); saveSoon();
+    if (!focus) revealInspector();
+  }
+  function revealInspector() {
+    const heading = $("graph-detail-heading");
+    if (!heading) return;
     if (matchMedia("(max-width: 760px)").matches) inspector.scrollIntoView({block: "start"});
     else {
       const sidebar = document.querySelector(".graph-sidebar");
-      const heading = $("graph-detail-heading").getBoundingClientRect();
+      const position = heading.getBoundingClientRect();
       const bounds = sidebar.getBoundingClientRect();
-      if (heading.top < bounds.top || heading.bottom > bounds.bottom) sidebar.scrollTop = settings.offsetHeight;
+      if (position.top < bounds.top || position.bottom > bounds.bottom) sidebar.scrollTop = settings.offsetHeight;
     }
   }
-  function render(restored = null) {
+  function render(restored = null, focusInspector = false) {
     cancelAnimationFrame(frame);
     if (!restored) rememberPositions();
     graph = visibleGraph(data, options);
@@ -212,11 +221,11 @@ async function start() {
     view = restored?.view && Object.values(restored.view).every(Number.isFinite) && restored.view.width > 0 && restored.view.height > 0
       ? {...restored.view} : {...fitted};
     if (restored?.fitted) fitted = {...restored.fitted};
-    draw(); applyView(); showInspector(); highlight();
+    draw(); applyView(); showInspector(focusInspector); highlight();
     if (!restored) animate();
     saveSoon();
   }
-  function change() { clearTimeout(searchTimer); updateUrl(); render(); }
+  function change(focusInspector = false) { clearTimeout(searchTimer); updateUrl(); render(null, focusInspector); }
   const reset = () => {
     clearTimeout(searchTimer); options = {...defaults}; selected = ""; change();
   };

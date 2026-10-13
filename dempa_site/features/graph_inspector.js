@@ -74,7 +74,7 @@ export function renderInspector(state, on, focus = false) {
     const item = button("", () => {
       if (!nodeElements.has(target.slug)) {
         on.openNeighborhood(target.slug, true);
-      } else on.select(target.slug);
+      } else on.select(target.slug, true);
     });
     item.append(html("span", "", target.title), html("small", "", relationText(edge, options)));
     section.append(item);

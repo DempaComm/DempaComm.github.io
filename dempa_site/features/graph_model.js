@@ -32,7 +32,7 @@ export function visibleGraph(data, options) {
     (!options.content || (options.content === "html" && node.html_path) ||
       (options.content === "statements" && node.statement_count > 0) ||
       (options.content === "corrections" && node.correction_count > 0)) &&
-    terms.every(term => normalize(`${node.title} ${node.tags.join(" ")}`).includes(term)));
+    terms.every(term => normalize(node.search_text ?? `${node.title} ${node.tags.join(" ")}`).includes(term)));
   const ids = new Set(nodes.map(node => node.slug));
   let edges = activeEdges(data.edges, options).filter(edge => ids.has(edge.source) && ids.has(edge.target));
   if (options.paper) {

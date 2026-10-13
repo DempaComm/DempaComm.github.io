@@ -69,6 +69,24 @@ print(json.dumps([(key, value) for key, value in _tag_connections(papers, counts
             env={**os.environ, "PYTHONHASHSEED": str(seed)}) for seed in (1, 72)]
         self.assertEqual(*results)
 
+    def test_search_aliases_derive_only_from_titles_and_tags(self):
+        papers = [paper(index) for index in range(3)]
+        papers[0].title = "アルツェラ・アスコリの定理"
+        papers[1].tags = ("バナッハ",)
+        papers[2].summary = "アスコリ"
+        capability = SimpleNamespace(html_path="", statement_counts={}, statement_count=0, correction_count=0)
+        catalog = SimpleNamespace(selected=[(None, item) for item in papers])
+        with patch("dempa_site.features.relation_graph.paper_capabilities", return_value={item.slug: capability for item in papers}), \
+             patch("dempa_site.features.relation_graph.load_reading_paths", return_value=[]):
+            nodes = _graph_data(catalog)["nodes"]
+        self.assertIn("Ascoli", nodes[0]["search_text"])
+        self.assertIn("Arzelà", nodes[0]["search_text"])
+        self.assertIn("アスコリ", nodes[0]["search_text"])
+        self.assertIn("Banach", nodes[1]["search_text"])
+        self.assertNotIn("Brouwer", nodes[1]["search_text"])
+        self.assertNotIn("Ascoli", nodes[2]["search_text"])
+        self.assertEqual("アルツェラ・アスコリの定理", nodes[0]["title"])
+
     @unittest.skipUnless(shutil.which("node"), "Node.js is needed for graph model checks")
     def test_browser_graph_filter_and_layout_contracts(self):
         result = subprocess.run(["node", str(ROOT / "tests" / "graph_model.mjs")],
