@@ -8,7 +8,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 from unittest.mock import patch
 
-from dempa_site.errors import PaperToolError
+from dempa_site.errors import PaperToolError, SiteSnapshotError
+from dempa_site.files import read_json, write_json
+from dempa_site.site.snapshot import snapshot, write_baseline
 from dempa_site.local_admin import (
     LocalAdmin,
     ReviewResult,
@@ -141,6 +143,17 @@ def _trial(root: Path, source: Path) -> Path:
 
 
 class LocalAdminTest(unittest.TestCase):
+    def prepare_baseline_fixture(self, root: Path) -> tuple[LocalAdmin, Path, Path]:
+        (root / "papers").mkdir()
+        site = root / "_site"
+        site.mkdir()
+        page = site / "index.html"
+        page.write_text("original", encoding="utf-8")
+        baseline = root / "tests" / "fixtures" / "site-baseline.json"
+        write_baseline(site, root / "papers", baseline, emit=lambda _: None)
+        page.write_text("reviewed version", encoding="utf-8")
+        return LocalAdmin(root), page, baseline
+
     def test_dashboard_and_paper_page_show_changed_manuscript(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -343,26 +356,70 @@ class LocalAdminTest(unittest.TestCase):
 
     def test_baseline_is_not_written_when_preflight_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            prepare_paper_repository(root)
-            baseline = root / "tests" / "fixtures" / "site-baseline.json"
-            baseline.parent.mkdir(parents=True)
-            baseline.write_text('{"original": true}\n', encoding="utf-8")
-            app = LocalAdmin(root)
-            app._baseline_previews["preview"] = ("changed: index.html",)
-
-            def fail_preflight() -> str:
-                raise PaperToolError("自動テスト: 失敗")
-
-            app.preflight = fail_preflight  # type: ignore[method-assign]
-            with patch("dempa_site.admin.service.write_baseline") as write:
+            app, _, baseline = self.prepare_baseline_fixture(Path(temporary))
+            original = baseline.read_bytes()
+            with patch.object(app, "preflight", return_value="検査成功"):
+                token, _, _ = app.prepare_baseline()
+            with patch.object(app, "preflight", side_effect=PaperToolError("自動テスト: 失敗")):
                 with self.assertRaisesRegex(PaperToolError, "自動テスト: 失敗"):
-                    app.accept_baseline("preview", "意図した更新")
+                    app.accept_baseline(token, "意図した更新")
+            self.assertEqual(original, baseline.read_bytes())
 
-            write.assert_not_called()
-            self.assertEqual(
-                '{"original": true}\n', baseline.read_text(encoding="utf-8")
-            )
+    def test_baseline_approves_reviewed_contents_once(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            app, _, baseline = self.prepare_baseline_fixture(root)
+            reviewed = snapshot(root / "_site", root / "papers")
+            with patch.object(app, "preflight", return_value="検査成功"):
+                token, differences, _ = app.prepare_baseline()
+                self.assertEqual(("changed: index.html",), differences)
+                result = app.accept_baseline(token, "意図した更新")
+                self.assertEqual(reviewed, read_json(baseline))
+                self.assertIn("差分1件", result)
+                with self.assertRaisesRegex(PaperToolError, "期限切れ"):
+                    app.accept_baseline(token, "再送信")
+
+    def test_baseline_rejects_same_path_with_new_contents(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            app, page, baseline = self.prepare_baseline_fixture(Path(temporary))
+            original = baseline.read_bytes()
+            with patch.object(app, "preflight", return_value="検査成功"):
+                token, _, _ = app.prepare_baseline()
+                page.write_text("unreviewed version", encoding="utf-8")
+                with self.assertRaisesRegex(PaperToolError, "確認後に公開差分が変わりました"):
+                    app.accept_baseline(token, "意図した更新")
+            self.assertEqual(original, baseline.read_bytes())
+
+    def test_baseline_rejects_preview_after_another_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            app, _, baseline = self.prepare_baseline_fixture(Path(temporary))
+            with patch.object(app, "preflight", return_value="検査成功"):
+                token, _, _ = app.prepare_baseline()
+                newer = read_json(baseline)
+                newer["files"].append({"path": "another.html", "sha256": "a" * 64})
+                write_json(baseline, newer)
+                with self.assertRaisesRegex(PaperToolError, "確認後に公開差分が変わりました"):
+                    app.accept_baseline(token, "意図した更新")
+            self.assertEqual(newer, read_json(baseline))
+
+    def test_baseline_rolls_back_if_contents_change_during_write(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            app, page, baseline = self.prepare_baseline_fixture(root)
+            original = baseline.read_bytes()
+            reviewed = snapshot(root / "_site", root / "papers")
+
+            def write_after_edit(path: Path, value: dict) -> None:
+                page.write_text("changed during approval", encoding="utf-8")
+                write_json(path, value)
+                self.assertEqual(reviewed, read_json(path))
+
+            with patch.object(app, "preflight", return_value="検査成功"):
+                token, _, _ = app.prepare_baseline()
+                with patch("dempa_site.admin.service.write_json", side_effect=write_after_edit):
+                    with self.assertRaisesRegex(SiteSnapshotError, "changed: index.html"):
+                        app.accept_baseline(token, "意図した更新")
+            self.assertEqual(original, baseline.read_bytes())
 
     def test_pdf_review_card_links_every_rendered_page(self) -> None:
         card = _review_result_card(

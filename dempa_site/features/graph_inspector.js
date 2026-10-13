@@ -10,7 +10,7 @@ const relationText = (edge, options) => {
 };
 
 export function renderInspector(state, on, focus = false) {
-  const {inspector, svg, data, byId, groups, options, selected, nodeElements} = state;
+  const {inspector, data, byId, groups, options, selected, nodeElements} = state;
   inspector.replaceChildren();
   const node = byId.get(selected);
   if (!node) {
@@ -79,9 +79,6 @@ export function renderInspector(state, on, focus = false) {
     item.append(html("span", "", target.title), html("small", "", relationText(edge, options)));
     section.append(item);
   });
-  inspector.append(section, button("関係図に戻る ↑", () => {
-    const target = nodeElements.get(node.slug)?.group || svg;
-    target.focus(); target.scrollIntoView({block: "nearest"});
-  }, "graph-return"));
+  inspector.append(section, button("関係図に戻る ↑", on.returnToGraph, "graph-return"));
   if (focus) heading.focus({preventScroll: true});
 }

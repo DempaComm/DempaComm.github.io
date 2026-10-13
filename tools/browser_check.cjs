@@ -171,6 +171,62 @@ async function run() {
       await page.locator('#graph-empty-reset').click();
       await page.waitForFunction(total => document.querySelectorAll('#paper-graph [data-graph-slug]').length === total, total);
       report.checks.push(`${width}: graph keyboard selection, zoom, return, neighborhood, empty and reset`);
+      await go('/graph/');
+      await page.locator('#paper-graph [data-graph-slug]').first().waitFor();
+      await page.locator('.graph-settings').evaluate(element => { element.open = true; });
+      await page.locator('#graph-query').fill('距離');
+      await page.waitForFunction(() => new URL(location.href).searchParams.get('q') === '距離');
+      await page.locator('#graph-year').selectOption('2026');
+      const matchingSlugs = () => page.locator('#paper-graph [data-graph-slug]').evaluateAll(nodes => nodes.map(node => node.dataset.graphSlug));
+      const expectedMatches = await matchingSlugs();
+      assert(expectedMatches.length > 0 && expectedMatches.length < total);
+      await page.locator('#graph-reset').click();
+      // Dispatch both actions before the search debounce, regardless of CI speed.
+      await page.evaluate(() => {
+        const query = document.querySelector('#graph-query');
+        query.value = '距離'; query.dispatchEvent(new Event('input', {bubbles: true}));
+        const year = document.querySelector('#graph-year');
+        year.value = '2026'; year.dispatchEvent(new Event('change', {bubbles: true}));
+      });
+      assert.equal(await page.locator('#graph-query').inputValue(), '距離');
+      assert.deepEqual(await matchingSlugs(), expectedMatches);
+      await page.waitForTimeout(200);
+      assert.equal(new URL(page.url()).searchParams.get('q'), '距離');
+      assert.deepEqual(await matchingSlugs(), expectedMatches);
+      report.checks.push(`${width}: graph preserves pending search when a filter changes`);
+
+      for (const expandedMode of [false, true]) {
+        await go('/graph/');
+        await page.locator('#paper-graph [data-graph-slug]').first().waitFor();
+        if (expandedMode) await page.locator('#graph-expand').click();
+        for (let step = 0; step < 5; step++) await page.locator('#graph-zoom-in').click();
+        const offscreen = await page.locator('#paper-graph').evaluate(svg => {
+          const bounds = svg.getBoundingClientRect();
+          return [...svg.querySelectorAll('[data-graph-slug]')].find(node => {
+            const dot = node.querySelector('.graph-point-dot').getBoundingClientRect();
+            return dot.right < bounds.left - 50 || dot.left > bounds.right + 50 ||
+              dot.bottom < bounds.top - 50 || dot.top > bounds.bottom + 50;
+          })?.dataset.graphSlug;
+        });
+        assert(offscreen, 'Zoom should put a paper outside the visible graph');
+        const oldView = (await page.locator('#paper-graph').getAttribute('viewBox')).split(' ').map(Number);
+        await page.locator('.graph-accessible-list summary').click();
+        await page.locator(`#graph-paper-list [data-graph-slug="${offscreen}"]`).press('Enter');
+        await page.locator('.graph-return').press('Enter');
+        const returned = await page.locator(`#paper-graph [data-graph-slug="${offscreen}"]`).evaluate(node => {
+          const svg = node.ownerSVGElement, bounds = svg.getBoundingClientRect();
+          const dot = node.querySelector('.graph-point-dot').getBoundingClientRect();
+          return {focused: document.activeElement === node,
+            visible: dot.left >= Math.max(0, bounds.left) && dot.right <= Math.min(innerWidth, bounds.right) &&
+              dot.top >= Math.max(0, bounds.top) && dot.bottom <= Math.min(innerHeight, bounds.bottom),
+            view: svg.getAttribute('viewBox').split(' ').map(Number)};
+        });
+        assert(returned.focused && returned.visible, 'Return must reveal and focus the selected paper');
+        assert.deepEqual(returned.view.slice(2), oldView.slice(2), 'Returning should preserve zoom');
+        report.checks.push(`${width}: graph return reveals an offscreen paper (${expandedMode ? 'expanded' : 'normal'})`);
+        if (expandedMode) await page.keyboard.press('Escape');
+      }
+      await require('./browser_kodama_nagami.cjs')(page, go, width, output, report);
       await context.close();
     }
     assert.deepEqual(report.errors, [], 'Browser runtime errors');

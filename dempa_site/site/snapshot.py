@@ -112,6 +112,13 @@ def snapshot_differences(
 ) -> tuple[str, ...]:
     expected = load_baseline(baseline_path)
     actual = snapshot(site_root, papers_dir)
+    return compare_snapshots(expected, actual)
+
+
+def compare_snapshots(
+    expected: dict[str, Any], actual: dict[str, Any]
+) -> tuple[str, ...]:
+    """Describe differences using the exact inventories supplied by the caller."""
     expected_files = file_map(expected, "baseline")
     actual_files = file_map(actual, "staged site")
     differences: list[str] = []

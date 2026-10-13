@@ -87,7 +87,7 @@ def filter_controls(data, *, references=False) -> str:
     sections = "".join(f'<option value="{s["number"]}">§{s["number"]}　{esc(s["title"])}</option>' for s in data["sections"])
     extra = '''<label>対応の種類<select name="relationship"><option value="">すべて</option><option value="body">本文の特定箇所を照合</option><option value="afterword">あとがきに書誌指定</option><option value="inferred">推定・適用範囲の付記あり</option><option value="related">上記の対応がない関連候補</option></select></label>
 <label>刊行時期<select name="era"><option value="">すべて</option><option value="early">初版刊行年以前・年未詳</option><option value="later">1974年より後の補助資料</option></select></label>''' if references else ""
-    return f'''<form class="kn-filters" data-kn-filter hidden role="search">
+    return f'''<form id="kn-search" class="kn-filters" data-kn-filter hidden role="search">
 <label class="kn-query">著者・題名・本の頁・番号・付記を検索<input name="q" type="search" placeholder="例：Morita，47.25，箱位相"></label>
 <label>章<select name="chapter"><option value="">すべての章</option>{chapters}</select></label>
 <label>節<select name="section"><option value="">すべての節</option>{sections}</select></label>{extra}
@@ -256,7 +256,11 @@ def generate_kodama_nagami(catalog, output: Path) -> None:
         asset_prefix = "../" if nested else ""
         nav = '<nav class="kn-navigation" aria-label="児玉・永見の文献案内">' + "".join(
             f'<a href="{asset_prefix + path + "/" if path else asset_prefix or "./"}"' + (' aria-current="page"' if path == slug else '') + f'>{text}</a>' for path, text in PAGES) + '</nav>'
-        body = nav + renderers[slug](data)
+        shortcut = ''
+        if slug in ("references", "correspondence"):
+            search_label = "文献を検索する" if slug == "references" else "本文との対応を検索する"
+            shortcut = f'<p class="kn-search-shortcut" data-kn-search-shortcut hidden><a href="#kn-search">{search_label} ↓</a></p>'
+        body = shortcut + nav + renderers[slug](data)
         path = target / slug
         path.mkdir(exist_ok=True)
         (path / "index.html").write_text(rendered_exploration_page(

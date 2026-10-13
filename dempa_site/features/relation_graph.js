@@ -105,6 +105,20 @@ async function start() {
     view.x += x * view.width * 0.15; view.y += y * view.height * 0.15;
     applyView(); saveSoon();
   };
+  function focusNode(slug, scroll = false) {
+    const point = layout.byId.get(slug);
+    if (point) {
+      keyboardSlug = slug;
+      nodeElements.forEach(({group}, id) => group.setAttribute("tabindex", id === slug ? "0" : "-1"));
+      if (point.x < view.x + 20 || point.x > view.x + view.width - 20 || point.y < view.y + 20 || point.y > view.y + view.height - 20) {
+        view.x = point.x - view.width / 2; view.y = point.y - view.height / 2; applyView();
+      }
+    }
+    const target = nodeElements.get(slug)?.group || svg;
+    target.focus({preventScroll: true});
+    if (scroll) target.scrollIntoView({block: "nearest"});
+    saveSoon();
+  }
   function highlight() { highlightView(viewState()); }
   function draw() { drawView(viewState()); }
   function animate() {
@@ -131,6 +145,7 @@ async function start() {
         change();
       },
       select,
+      returnToGraph: () => focusNode(selected, true),
     }, focus);
   }
   function select(slug, focus = false) {
@@ -201,7 +216,7 @@ async function start() {
     if (!restored) animate();
     saveSoon();
   }
-  function change() { updateUrl(); render(); }
+  function change() { clearTimeout(searchTimer); updateUrl(); render(); }
   const reset = () => {
     clearTimeout(searchTimer); options = {...defaults}; selected = ""; change();
   };
@@ -215,8 +230,9 @@ async function start() {
     $("graph-legend").append(control);
   });
   $("graph-query").addEventListener("input", () => {
+    options.q = $("graph-query").value;
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { options.q = $("graph-query").value; change(); }, 160);
+    searchTimer = setTimeout(change, 160);
   });
   for (const key of ["tag", "year", "content"]) $(`graph-${key}`).addEventListener("change", event => { options[key] = event.target.value; change(); });
   for (const key of ["tags", "paths", "explicit", "orphans"]) $(`graph-${key}`).addEventListener("change", event => { options[key] = event.target.checked; change(); });
@@ -294,13 +310,7 @@ async function start() {
       return {point, forward, score: Math.hypot(dx, dy) + Math.abs(dx * direction[1] - dy * direction[0]) * 2};
     }).filter(candidate => candidate.forward > 0).sort((a, b) => a.score - b.score);
     if (candidates.length) {
-      keyboardSlug = candidates[0].point.slug;
-      nodeElements.forEach(({group}, id) => group.setAttribute("tabindex", id === keyboardSlug ? "0" : "-1"));
-      const point = candidates[0].point;
-      if (point.x < view.x + 20 || point.x > view.x + view.width - 20 || point.y < view.y + 20 || point.y > view.y + view.height - 20) {
-        view.x = point.x - view.width / 2; view.y = point.y - view.height / 2; applyView();
-      }
-      nodeElements.get(keyboardSlug).group.focus();
+      focusNode(candidates[0].point.slug);
     }
   });
   const outside = [...document.body.children].filter(element => !element.contains(workspace) && element.tagName !== "SCRIPT");
@@ -359,6 +369,7 @@ async function start() {
   settings.addEventListener("toggle", saveSoon); accessibleList.addEventListener("toggle", saveSoon);
   addEventListener("pagehide", save);
   addEventListener("popstate", () => {
+    clearTimeout(searchTimer);
     options = readOptions(); const state = history.state?.paperGraph;
     selected = state?.selected || options.paper; positions = new Map(state?.positions || []);
     render(state); if (state) restore(state);

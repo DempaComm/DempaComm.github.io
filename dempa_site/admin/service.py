@@ -7,7 +7,7 @@ import sys
 import threading
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 from dempa_site.catalog.writing import write_catalog
 from dempa_site.conversion.latexml import run_latexml_trial
 from dempa_site.conversion.latexml_publication import publish_latexml_trial
@@ -19,7 +19,7 @@ from dempa_site.manifests.validation import validate_manifest_data
 from dempa_site.paths import RepositoryPaths, safe_relative_path
 from dempa_site.protection.approval import approve_changes
 from dempa_site.protection.change_workflow import changed_protected_files, review_changes
-from dempa_site.site.snapshot import check_baseline, snapshot_differences, write_baseline
+from dempa_site.site.snapshot import check_baseline, compare_snapshots, load_baseline, snapshot
 from tools.check_all import preflight_check_steps
 
 
@@ -37,6 +37,13 @@ class ReviewResult:
     rendered_pages: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class BaselinePreview:
+    baseline: dict[str, Any]
+    reviewed: dict[str, Any]
+    differences: tuple[str, ...]
+
+
 class LocalAdmin:
     """State and safe command wrappers for one local administration session."""
 
@@ -47,7 +54,7 @@ class LocalAdmin:
         self.experiments_root = self.root / "_experiments" / "local-admin"
         self._files: dict[str, LocalFile] = {}
         self._trials: dict[str, tuple[str, Path]] = {}
-        self._baseline_previews: dict[str, tuple[str, ...]] = {}
+        self._baseline_previews: dict[str, BaselinePreview] = {}
         self.csrf_token = secrets.token_urlsafe(32)
         self._lock = threading.Lock()
 
@@ -360,15 +367,13 @@ class LocalAdmin:
 
     def prepare_baseline(self) -> tuple[str, tuple[str, ...], str]:
         checks = self.preflight()
-        differences = snapshot_differences(
-            self.root / "_site",
-            self.papers_dir,
-            self.root / "tests" / "fixtures" / "site-baseline.json",
-        )
+        baseline = load_baseline(self.root / "tests" / "fixtures" / "site-baseline.json")
+        reviewed = snapshot(self.root / "_site", self.papers_dir)
+        differences = compare_snapshots(baseline, reviewed)
         if not differences:
             raise PaperToolError("承認する公開差分はありません")
         token = secrets.token_urlsafe(18)
-        self._baseline_previews[token] = differences
+        self._baseline_previews[token] = BaselinePreview(baseline, reviewed, differences)
         return token, differences, checks
 
     def accept_baseline(self, token: str, reason: str) -> str:
@@ -377,15 +382,16 @@ class LocalAdmin:
             raise PaperToolError("公開差分の確認が期限切れです。もう一度差分を表示してください")
         checks = self.preflight()
         baseline = self.root / "tests" / "fixtures" / "site-baseline.json"
-        current = snapshot_differences(self.root / "_site", self.papers_dir, baseline)
-        if current != expected:
+        current = snapshot(self.root / "_site", self.papers_dir)
+        if current != expected.reviewed or load_baseline(baseline) != expected.baseline:
             raise PaperToolError("確認後に公開差分が変わりました。もう一度差分を確認してください")
         original = baseline.read_bytes()
         try:
-            write_baseline(self.root / "_site", self.papers_dir, baseline)
+            # Write only the reviewed inventory, even if files change during approval.
+            write_json(baseline, expected.reviewed)
             check_baseline(self.root / "_site", self.papers_dir, baseline)
         except Exception:
             baseline.write_bytes(original)
             raise
         self._baseline_previews.pop(token, None)
-        return f"理由: {reason}\n{checks}\n公開基準を更新しました（差分{len(current)}件）"
+        return f"理由: {reason}\n{checks}\n公開基準を更新しました（差分{len(expected.differences)}件）"
