@@ -1,0 +1,1500 @@
+% !TEX program = lualatex
+\documentclass[a4paper,10pt]{ltjsarticle}
+\usepackage{amsmath,amssymb,longtable,array,booktabs,geometry,needspace}
+\geometry{left=20mm,right=20mm,top=22mm,bottom=22mm}
+\usepackage[colorlinks=false,linkbordercolor={1 0 0},citebordercolor={0 1 0},urlbordercolor={0 1 1}]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\setlength{\tabcolsep}{3pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{8pt}
+\renewcommand{\arraystretch}{1.16}
+\setcounter{tocdepth}{1}
+\title{松島与三『多様体入門』\\誤植表・数学的疑義と解決案}
+\author{照合・作成補助：Codex}
+\date{2026年11月8日・分類改訂版}
+\begin{document}
+\maketitle
+\pagestyle{empty}\thispagestyle{empty}
+\noindent 対象は裳華房「数学選書5」の，奥付に昭和45年7月15日第5版発行と記された個体である\cite{matsushima}．以下，所在を表す頁・章節・式番号は原本のものを用いる．
+
+文字・添字・参照などの訂正を第1部に，仮定，量化，成立範囲，推論や証明の修復を要する項目を第2部に分けた．第2部には原記載，問題点，具体的な解決策，反例や修復の理由，判断を記す．元の仮定を保つ修復と，仮定を強める修復は区別する．結論が正しく説明だけを補う項目も，その旨を明記する．
+
+本書の記法・用語の約束で読めるもの，誤りとは認定しないもの，および撤回した指摘は，末尾の参考部に分離した．項目IDは相互参照のために保持する．
+
+paper氏（paper3510mm）の誤植表\cite{paper2017}を参考にした．同表の対象は2011年5月20日発行第37版3刷であり，本冊の対象版と区別する．
+
+\noindent 収録：単純な誤植216項目，数学的疑義・証明補足57項目，参考・撤回15項目（計288項目）．
+\clearpage\section{単純な誤植}\label{part:typos}
+周囲の定義・用例・参照先から，文字や記号の訂正が決まる項目を原頁順に示す．数式を含む場合でも，仮定や証明の実質的な修復は第2部に分けた．
+\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.19\linewidth}>{\raggedright\arraybackslash}p{.77\linewidth}@{}}
+\toprule 原本位置・ID & 原記載と修正案\\\midrule\endfirsthead
+\toprule 原本位置・ID & 原記載と修正案\\\midrule\endhead
+\midrule\multicolumn{2}{r}{次頁へ続く}\\\endfoot
+\bottomrule\endlastfoot
+\hypertarget{MATS-0002}{}\textbf{MATS-0002}\par 第I章\S1 B，第1段落，印刷3頁，Bの始まる行から2行目． & \textbf{「二つ元」の助詞脱落}\par\textbf{原記載：}「$X$の相異なる二つ元$x,y$に対応する$Y$の元$f(x),f(y)$がつねに相異なるとき」．\par\textbf{修正案：}「二つ元」を「二つの元」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0003}{}\textbf{MATS-0003}\par 第I章\S2 C，印刷8頁．(a)「すなわち」の直後の別行式末尾，(b)その次の行，(c)問3の$a_i\in V_i$直後． & \textbf{直和の説明に現れる添字範囲$n$}\par\textbf{原記載：}(a)「$a_i,a_i'\in V_i,\ i=1,\cdots,n$」，(b)「$a_i=a_i'\ (i=1,\cdots,n)$」，(c)「$a_i\in V_i\ (i=1,\cdots,n)$」．\par\textbf{修正案：}それぞれ$n$を$k$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0006}{}\textbf{MATS-0006}\par 第I章\S2 E，印刷11頁・問7，第3行． & \textbf{双対写像の行列の基の末尾}\par\textbf{原記載：}「$\{g^1,\cdots,g^n\},\{f^1,\cdots,f^n\}$に関し，${}^t\varphi$に対応する行列は」．\par\textbf{修正案：}最初の$g^n$を$g^m$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0010}{}\textbf{MATS-0010}\par 第I章\S4，印刷17頁の補題1の証明中3箇所および18頁の補題2の証明中1箇所． & \textbf{$R^m$値写像の座標添字の範囲}\par\textbf{原記載：}17頁の$\partial\varphi^i/\partial x^j$の後の「$(i,j=1,\cdots,n)$」が2箇所，最後の座標評価の後の「$(i=1,\cdots,n)$」が1箇所．18頁の導関数の式の直後に「だから，$i=1,2,\cdots,n$にたいし」とある．\par\textbf{修正案：}$i$の範囲を$1,\ldots,m$，$j$の範囲を$1,\ldots,n$とする．最後の2箇所も$i=1,\ldots,m$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0012}{}\textbf{MATS-0012}\par 第I章\S4定理1の証明，印刷19頁，式(4)の次の段落，第2行． & \textbf{漸化式の差の符号}\par\textbf{原記載：}「$p_l$の定義により，$p_l-p_{l-1}=g(p_{l-1})-g(p_{l-2})$」．\par\textbf{修正案：}右辺を$g(p_{l-2})-g(p_{l-1})$とする（または右辺全体に$-$を付ける）． \\[3pt]
+\hline
+\hypertarget{MATS-0013}{}\textbf{MATS-0013}\par 第I章\S4定理1の証明，印刷19頁，「そのため」で始まる点列導入の文． & \textbf{立方体記号の区切り記号}\par\textbf{原記載：}「そのため$Q(0:r)$の点列$\{p_k\}$」．\par\textbf{修正案：}$Q(0:r)$を$Q(0;r)$にそろえる．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0014}{}\textbf{MATS-0014}\par 第II章\S1，印刷25頁，式(1)の直後の行． & \textbf{座標変換の引数の添字の上下}\par\textbf{原記載：}「$f_{\beta\alpha}(u)$の座標を$(f_{\beta\alpha}^1(u_1,\cdots,u_n),\cdots,f_{\beta\alpha}^n(u^1,\cdots,u^n))$」．最初の成分だけ引数に下付添字を使う．\par\textbf{修正案：}第一成分の引数$(u_1,\cdots,u_n)$を$(u^1,\cdots,u^n)$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0015}{}\textbf{MATS-0015}\par 第II章\S1定義1，印刷27頁，定義1の第1行． & \textbf{座標近傍系の添字集合}\par\textbf{原記載：}$S=\{(U_\alpha,\psi_\alpha)\}_{\alpha\in U}$．\par\textbf{修正案：}$\alpha\in U$を$\alpha\in A$にする．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0016}{}\textbf{MATS-0016}\par 第II章\S2例1，印刷27頁下部，「逆関数の定理」の直後． & \textbf{逆関数の定理への節参照}\par\textbf{原記載：}「逆関数の定理（I，\S1）により」．\par\textbf{修正案：}「I，\S1」を「I，\S4」にする． \\[3pt]
+\hline
+\hypertarget{MATS-0017}{}\textbf{MATS-0017}\par 第II章\S2例2，印刷28頁，つの半円の定義の4番目． & \textbf{円周の半円$V_2$の集合表示}\par\textbf{原記載：}$V_2=\{p=(x,y)=S^1\mid x<0\}$．\par\textbf{修正案：}$(x,y)=S^1$の等号を$\in$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0018}{}\textbf{MATS-0018}\par 第II章\S2例3，印刷29頁，「写像$\varphi_i,\psi_i$を」の次の行． & \textbf{球面の座標近傍の写像がスカラー値になっている}\par\textbf{原記載：}$p\to(x^1)^2+\cdots+(x^{i-1})^2+(x^{i+1})^2+\cdots+(x^{n+1})^2$．この式を$U_i,V_i$から$B^n\subset R^n$への同相写像とする．\par\textbf{修正案：}$p\to(x^1,\ldots,x^{i-1},x^{i+1},\ldots,x^{n+1})$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0019}{}\textbf{MATS-0019}\par 第II章\S2例4，印刷29頁，射影$\pi$の導入に続く段落末尾の2箇所． & \textbf{射影空間を直線の集合とみなす際の周囲の次元}\par\textbf{原記載：}「$P^n$の元$\pi(x)$に$R^n$の原点をとおる直線$tx$」，および「$P^n$を$R^n$の原点をとおる直線の全体の集合」．\par\textbf{修正案：}両方の$R^n$を$R^{n+1}$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0020}{}\textbf{MATS-0020}\par 第II章\S2例4，印刷30頁，上部の$p\in U_a\cap U_b,a<b$から始まる説明． & \textbf{射影座標の逆数関係の添字}\par\textbf{原記載：}$x_b^a(p)=(x_a^{a-1}(p))^{-1}$．\par\textbf{修正案：}右辺の$a-1$を$b-1$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0021}{}\textbf{MATS-0021}\par 第II章\S2例4，印刷30頁，$x_b^i(p)$の区分表示の第1の場合． & \textbf{射影座標の変換式で$i=b$が抜ける}\par\textbf{原記載：}「$i<a$または$i>b$のとき」．他の場合は$i=a$と$a<i<b$である．\par\textbf{修正案：}$i>b$を$i\geqq b$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0022}{}\textbf{MATS-0022}\par 第II章\S2例4，印刷30頁，$x_b^i(p)$の区分表示の第3の場合の分子． & \textbf{射影座標の変換式の点$p$の表示}\par\textbf{原記載：}分子が$x_a^{i-1}$（他の項と異なり$(p)$がない）．\par\textbf{修正案：}$x_a^{i-1}(p)$にそろえる． \\[3pt]
+\hline
+\hypertarget{MATS-0023}{}\textbf{MATS-0023}\par 第II章\S3，第1段落末尾，印刷31頁． & \textbf{局所座標関数の定義域}\par\textbf{原記載：}「とくに各$U_\alpha$での局所座標$x_\alpha^i\ (i=1,\cdots,n)$は$U$上の$C^r$級関数である．」\par\textbf{修正案：}$U$を$U_\alpha$とする．もし直前の任意の$U$上の関数の定義に直接合わせたいなら，「$U\cap U_\alpha$への制限は$C^r$級」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0025}{}\textbf{MATS-0025}\par 印刷35頁，付記「可微分構造の従属性と同値性」第3--4行． & \textbf{可微分構造を表す記号の順序}\par\textbf{原記載：}「これらの$C^r$多様体および$C^s$多様体をかりに$(M,T),(M,S)$という記号であらわすことにしよう．」\par\textbf{修正案：}$(M,T),(M,S)$を$(M,S),(M,T)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0280}{}\textbf{MATS-0280}\par 第II章\S4冒頭，印刷35頁・下部の座標近傍を選ぶ段落（文献\cite{paper2017}の対象版では35頁27行目）． & \textbf{写像と値域側座標写像の記号の衝突}\par\textbf{原記載：}「$M$および$M\prime$における座標近傍$(U,\psi)$および$(V,\varphi)$をば，$\varphi(U)\subset V$となるように」．\par\textbf{修正案：}座標近傍$(V,\varphi)$を$(V,\eta)$などと改め，$\varphi:M\to M\prime$はそのままとする．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0281}{}\textbf{MATS-0281}\par 第II章\S3付記「可微分構造の従属性と同値性」，印刷35頁・付記の第5行付近（文献\cite{paper2017}の対象版では35頁9行目）． & \textbf{一つの座標近傍を「座標近傍系」とする語}\par\textbf{原記載：}「各$i\in I$について$(V_i,\varphi_i)$が$C^r$多様体$(M,S)$の$C^s$級座標近傍系である場合」．\par\textbf{修正案：}「$C^s$級座標近傍系」を「$C^s$級座標近傍」とする．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0282}{}\textbf{MATS-0282}\par 第II章\S4，印刷36頁・微分同型の定義の末尾（文献\cite{paper2017}の対象版では36頁12行目）． & \textbf{微分同型な多様体の次元の一致の参照節}\par\textbf{原記載：}「$M$の次元と$M\prime$の次元は等しいことを\S5で証明する．」\par\textbf{修正案：}「\S5」を「\S7」にする．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0029}{}\textbf{MATS-0029}\par 印刷43頁，例2，第4行付近． & \textbf{上半平面の計量を表す式の括弧}\par\textbf{原記載：}「このリーマン計量を$(dx)^2+(dy)^2/y^2$であらわす．」\par\textbf{修正案：}$((dx)^2+(dy)^2)/y^2$または$\bigl((dx)^2+(dy)^2\bigr)/y^2$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0030}{}\textbf{MATS-0030}\par 印刷44頁，問2． & \textbf{問2の「$p$の臨界値」}\par\textbf{原記載：}「関数$f$の極大値，極小値を定義し，これらは$p$の臨界値であることをしめせ．」\par\textbf{修正案：}「$p$の臨界値」を「$f$の臨界値」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0032}{}\textbf{MATS-0032}\par 印刷45頁，一般の対称正則双一次形式$G$の標準形の式． & \textbf{標準形の最初の負項の添字}\par\textbf{原記載：}$G(u,u)=(\xi^1)^2+\cdots+(\xi^r)^2-(\xi^{p+1})^2-\cdots-(\xi^{r+s})^2$，$r+s=n$．\par\textbf{修正案：}$p+1$を$r+1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0034}{}\textbf{MATS-0034}\par 印刷48頁，式(9)の下の微分式． & \textbf{Morseの証明の微分式の評価点}\par\textbf{原記載：}$\partial y^i/\partial x^k(q)=s^i_k(q)$．\par\textbf{修正案：}両辺の$q$を$p$にする．一般点$q$なら右辺に$\sum_l(\partial s^i_l/\partial x^k)(q)x^l(q)$が必要． \\[3pt]
+\hline
+\hypertarget{MATS-0035}{}\textbf{MATS-0035}\par 印刷48頁，\S7の直前の文． & \textbf{関数行列式と逆行列の取り違え}\par\textbf{原記載：}$D(y^1,\cdots,y^n)/D(x^1,\cdots,x^n)_p=T^{-1}(p)$．\par\textbf{修正案：}右辺を$\det T^{-1}(p)\ne0$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0036}{}\textbf{MATS-0036}\par 印刷48頁，式(9)直後の文． & \textbf{式(9)を反転した座標の添字位置}\par\textbf{原記載：}$x_i=\sum_k t^i_k y^k$．\par\textbf{修正案：}左辺を$x^i$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0283}{}\textbf{MATS-0283}\par 第II章\S6，印刷48頁・\S7直前の最終文（文献\cite{paper2017}の対象版では48頁17行目）． & \textbf{Morseの補題の結論の「局所近傍系」}\par\textbf{原記載：}「$(y^1,\cdots,y^n)$が$p$のまわりの求める局所近傍系である．」\par\textbf{修正案：}「局所近傍系」を「局所座標系」とする．\par\cite{paper2017}参照． \\[3pt]
+\hline
+\hypertarget{MATS-0037}{}\textbf{MATS-0037}\par 印刷49頁末，問3の下の文．印刷50頁第1段落の$T_{\varphi(p)}(M)$も同様． & \textbf{階数の定義直前の微分の値域}\par\textbf{原記載：}「線型写像$(\varphi_*)_p:T_p(M)\to T_{\varphi(p)}(M)$の階数」．\par\textbf{修正案：}値域を$T_{\varphi(p)}(M')$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0038}{}\textbf{MATS-0038}\par 印刷51頁，\S8冒頭，第1--2行． & \textbf{Sardの定理の節冒頭の正常点の階数}\par\textbf{原記載：}「$M,M'$をともに$n$次元多様体」とした上で「$\operatorname{rank}_p(\varphi)=m$となる点$p$を$\varphi$の正常点」．臨界点の条件は$\operatorname{rank}_p(\varphi)<n$．\par\textbf{修正案：}正常点の条件の$m$を$n$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0040}{}\textbf{MATS-0040}\par 印刷54頁，\S9「注意」． & \textbf{等距離写像の内積表示での計量のプライム}\par\textbf{原記載：}$g_{\varphi(p)}(\varphi_*u,\varphi_*v)=g_p(u,v)$．節冒頭では$M,M'$の計量はそれぞれ$g,g'$．\par\textbf{修正案：}左辺を$g'_{\varphi(p)}(\varphi_*u,\varphi_*v)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0042}{}\textbf{MATS-0042}\par 印刷55頁，$L_{ikj}$の定義に続く文． & \textbf{ユークリッド空間の運動の証明中の係数2}\par\textbf{原記載：}「$L_{ikj}+L_{kji}-L_{jik}$を計算するとこれは$\sum_s(\partial\varphi^s/\partial x^i)(\partial^2\varphi^s/\partial x^j\partial x^k)$にひとしい」．\par\textbf{修正案：}右辺に係数$2$を掛ける． \\[3pt]
+\hline
+\hypertarget{MATS-0043}{}\textbf{MATS-0043}\par 印刷56頁，第1段落の$\theta$の説明． & \textbf{上半平面の反射が属する運動群}\par\textbf{原記載：}「$\theta\in I(M)$」．ここでは$\theta:z\mapsto-\bar z$は$H$の微分同型．\par\textbf{修正案：}$I(M)$を$I(H)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0044}{}\textbf{MATS-0044}\par 印刷57頁，定義1の条件2)の直後の段落． & \textbf{部分多様体の位相の説明の$M,M'$}\par\textbf{原記載：}「$M$は$M'$の部分集合であるけれども，$M'$の位相は$M$の部分空間の位相であることは要求していない」．\par\textbf{修正案：}後半を「$M$の位相は$M'$の部分空間としての位相であることは要求していない」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0045}{}\textbf{MATS-0045}\par 印刷58頁，第1段落第2行． & \textbf{部分多様体の接空間の包含写像の定義域}\par\textbf{原記載：}「$T_p(M')$の部分ベクトル空間$\iota_*T_p(M')$を$T_p(M)$と同一視して」．\par\textbf{修正案：}$\iota_*T_p(M')$を$\iota_*T_p(M)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0046}{}\textbf{MATS-0046}\par 印刷58頁末，例題の証明2)．59頁末にも同じ参照がある． & \textbf{挿入の局所標準形への参照}\par\textbf{原記載：}「\S5定理1により」局所座標系をえらぶ．\par\textbf{修正案：}「\S7の定理により」とする（印刷50頁の定理）． \\[3pt]
+\hline
+\hypertarget{MATS-0047}{}\textbf{MATS-0047}\par 印刷60頁，定理1の証明，$V_a=V_a'\cap M$に続く集合表示． & \textbf{正規部分多様体を構成する座標領域の範囲}\par\textbf{原記載：}$V_a=V_a'\cap M=\{q\in V'\mid y^{n+i}(q)=0,\ i=1,\cdots,m-n\}$．\par\textbf{修正案：}集合表示の$q\in V'$を$q\in V_a'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0048}{}\textbf{MATS-0048}\par 印刷61頁「注意」，独立な微分の個数を述べる文． & \textbf{定義方程式の注意に現れる余次元の文字}\par\textbf{原記載：}「必ずしも$n-\dim M$に等しいとは限らない」．\par\textbf{修正案：}$n-\dim M$を$m-\dim M$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0049}{}\textbf{MATS-0049}\par 印刷62頁，定理2の単射性の証明，「$p\in W_\alpha$より」の直後． & \textbf{単射性の証明で値1を代入する点}\par\textbf{原記載：}「$p\in W_\alpha$より$f_\alpha^0(q)=1$」．\par\textbf{修正案：}この最初の$q$を$p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0050}{}\textbf{MATS-0050}\par 印刷62頁，MATS-0049の後，「ところが$p,q\in W_\alpha$だから」． & \textbf{単射性の証明での$W_\alpha$の閉包}\par\textbf{原記載：}$q\in\bar W_\alpha$を導いた後で「$p,q\in W_\alpha$だから」と述べる．\par\textbf{修正案：}$p,q\in\bar W_\alpha$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0051}{}\textbf{MATS-0051}\par 印刷62頁，定理2の証明の最終文． & \textbf{うめ込み像が閉部分多様体となる周囲の空間}\par\textbf{原記載：}「$\varphi(M)$は$M$の閉部分多様体となる」．\par\textbf{修正案：}「$M$の」を「$A^N$の」にする． \\[3pt]
+\hline
+\hypertarget{MATS-0059}{}\textbf{MATS-0059}\par 印刷62頁末から63頁冒頭に続く注意の参照，および71頁「注意」の括弧内． & \textbf{パラコンパクト多様体への節参照}\par\textbf{原記載：}パラコンパクト多様体について「\S12を参照」，「パラコンパクト（\S12）」．\par\textbf{修正案：}いずれも\S14とする． \\[3pt]
+\hline
+\hypertarget{MATS-0053}{}\textbf{MATS-0053}\par 印刷63頁，図2・6の左下に続く$g(t)$の説明． & \textbf{切断関数が零となる範囲の不等号}\par\textbf{原記載：}「$|t|\leqq a$のときは$g(t)=0$；$|t|\leqq b$のときは$g(t)=1$」．\par\textbf{修正案：}最初の$|t|\leqq a$を$|t|\geqq a$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0054}{}\textbf{MATS-0054}\par 印刷66頁末，補題の証明．80頁の接ベクトルを大域ベクトル場の値にする補題の証明にも関連した誤参照がある． & \textbf{局所座標の大域関数への延長に使う補題の参照}\par\textbf{原記載：}「\S8，補題により，$p$の近傍で$x^i$と一致するような$f^i\in C^\infty(M)$」をとる．\par\textbf{修正案：}66頁は「\S10，補題2により」，80頁の「\S8，補題1」は「\S10，補題1」とする（いずれも印刷63頁）． \\[3pt]
+\hline
+\hypertarget{MATS-0055}{}\textbf{MATS-0055}\par 印刷66頁，加群の定義の第2行の式． & \textbf{加群の分配法則の右辺の変数}\par\textbf{原記載：}$(a+b)x=ax+by$．\par\textbf{修正案：}右辺の$by$を$bx$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0058}{}\textbf{MATS-0058}\par 印刷70頁，「さて$X_1$と$X_1'$，$X_2$と$X_2'$が」の段落． & \textbf{関連する交換子積の説明で繰り返された添字1}\par\textbf{原記載：}第2組も$D_{X_1}$と$D_{X_1'}$と書かれ，続く式も$[D_{X_1},D_{X_1}]=D_{[X_1,X_1]}$，$[D_{X_1'},D_{X_1'}]=D_{[X_1',X_1']}$と印刷される．結論は$[X_1,X_2]$と$[X_1',X_2']$が関連するというもの．\par\textbf{修正案：}第2組を$D_{X_2},D_{X_2'}$とし，交換子積を$[D_{X_1},D_{X_2}]=D_{[X_1,X_2]}$，$[D_{X_1'},D_{X_2'}]=D_{[X_1',X_2']}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0060}{}\textbf{MATS-0060}\par 印刷72頁，補題の証明の初期条件． & \textbf{積分曲線の一意性の証明での初期時刻}\par\textbf{原記載：}$p_0=\varphi(t_0)=\psi(t_0)$とおいた後で「$\varphi^i(0)=x^i(p_0),\psi^i(0)=x^i(p_0)$」とする．\par\textbf{修正案：}両方の$0$を$t_0$にする． \\[3pt]
+\hline
+\hypertarget{MATS-0061}{}\textbf{MATS-0061}\par 印刷76頁，定理1の存在証明，$\varepsilon_p>0$を選んだ直後の二つの時間条件． & \textbf{局所群の存在証明中の時間範囲の添字}\par\textbf{原記載：}$\varepsilon_p>0$を選んだ後で「$|t|<\varepsilon$のとき」，「$|s|,|t|,|s+t|<\varepsilon$ならば」と書かれる．\par\textbf{修正案：}この二つの$\varepsilon$を$\varepsilon_p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0062}{}\textbf{MATS-0062}\par 印刷77頁，上部の$s=ls_1$から始まる段落． & \textbf{小時間の変換の帰納式のチルダ}\par\textbf{原記載：}$\varphi_{ks_1}=\varphi_{s_1}\cdot\varphi_{(k-1)s_1}$，$\varphi_{ks_1}=(\varphi_{s_1})^k$と，チルダのない$\varphi$で書かれる．\par\textbf{修正案：}この二式の$\varphi$をすべて$\tilde\varphi$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0064}{}\textbf{MATS-0064}\par 印刷79頁，上部の$-d\zeta^i/dt$の式に続く文． & \textbf{交換子積の成分公式への参照}\par\textbf{原記載：}「故に\S9，(5)により(6)の右辺は$[X,Y]_p$にひとしい」．\par\textbf{修正案：}「\S11，(5)により」とする（印刷68頁）． \\[3pt]
+\hline
+\hypertarget{MATS-0065}{}\textbf{MATS-0065}\par 印刷80頁，式(1)の右辺第1項． & \textbf{無限小運動の定義式の内積の引数の区切り}\par\textbf{原記載：}$g([X,Y]\ Z)$と印刷され，$[X,Y]$と$Z$の間にコンマがない．\par\textbf{修正案：}$g([X,Y],Z)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0069}{}\textbf{MATS-0069}\par 印刷83頁，定義4の直後の注意． & \textbf{単位の分割の和が有限となる説明の点の文字}\par\textbf{原記載：}「$p$をふくむ$U_\alpha$の数は有限個，ゆえに2)により有限個の$\alpha$をのぞいて$f_\alpha(q)=0$」とし，続けて$\sum_\alpha f_\alpha(p)$は有限和とする．\par\textbf{修正案：}$f_\alpha(q)$を$f_\alpha(p)$とする．近傍全体での局所有限性を述べるなら，$q$を$p$の十分小さい近傍内の任意の点と明示してもよい． \\[3pt]
+\hline
+\hypertarget{MATS-0070}{}\textbf{MATS-0070}\par 印刷83頁冒頭，補題1の証明の続き． & \textbf{局所有限被覆の閉包の証明中のプライム}\par\textbf{原記載：}有限和集合の4箇所で$\bar V_{i_\alpha}$，途中で$W\cap V_i=\varnothing$と書かれる．前頁では局所有限な細分の元を$V_i'$と定義し，直後の文も$W'\cap V_i'=\varnothing$と書く．\par\textbf{修正案：}4箇所の$\bar V_{i_\alpha}$を$\bar V_{i_\alpha}'$とし，$W\cap V_i$を$W\cap V_i'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0072}{}\textbf{MATS-0072}\par 印刷85頁末，補題1の証明の最初の句． & \textbf{可算基を用いる証明の冒頭の文末}\par\textbf{原記載：}「$X$は可算基$\{O_i\}_{i\in N}$をもつとし．」と句点で区切られ，その次に任意の開被覆をとる．「し」の直後には脚注印がある．\par\textbf{修正案：}最小の修正は句点を読点にして「もつとし，$\{U_\alpha\}$を……とする」とつなぐこと．「もつとしよう．」も文法上の候補だが，著者の意図は未確定． \\[3pt]
+\hline
+\hypertarget{MATS-0074}{}\textbf{MATS-0074}\par 印刷86頁，補題2の証明1)． & \textbf{有限被覆を選ぶ式の上限}\par\textbf{原記載：}有限個の点$p_1,\cdots,p_k$を選んで$V=\bigcup_{i=1}^nW_{p_i}$とする．\par\textbf{修正案：}上限$n$を$k$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0075}{}\textbf{MATS-0075}\par 印刷86頁，補題1の証明の最後の段落中ほど． & \textbf{可算基の証明中のユークリッド空間の指数}\par\textbf{原記載：}「結局$X$は$R^N$の立方体と位相同型な可算個の開集合で被われる」．\par\textbf{修正案：}$R^N$を$R^n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0076}{}\textbf{MATS-0076}\par 印刷88頁，補題5の冒頭． & \textbf{可算開被覆の添字の文字}\par\textbf{原記載：}開被覆を$\{V_m\}_{n\in N}$と表す．以後は各$V_m$の成分と$m\in N$を用いる．\par\textbf{修正案：}$\{V_m\}_{m\in N}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0081}{}\textbf{MATS-0081}\par 印刷90頁A項の最初． & \textbf{複素数空間の二点を述べる助詞}\par\textbf{原記載：}「$C^n$二点$z=(z^i)$，$w=(w^i)$間の距離を」．\par\textbf{修正案：}「$C^n$の二点」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0078}{}\textbf{MATS-0078}\par 印刷91頁の末尾3行． & \textbf{双対の複素化の基の末尾と星の位置}\par\textbf{原記載：}「$(F_*)^C$の基$\{f^1,\cdots,f^k\}$が$(F^C)^*$の基$\{\tilde f^1,\cdots,\tilde f^k\}$にうつるから」．次の行でも$(F_*)^C$と下付き星を用いる．\par\textbf{修正案：}基の末尾の二つの$k$を$n$，二つの$F_*$を$F^*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0080}{}\textbf{MATS-0080}\par 印刷94頁E項，正則座標系の定義の最初の段落． & \textbf{逆の座標変換の値域の添字}\par\textbf{原記載：}「$\psi_\beta(U_\alpha\cap U_\beta)$から$\psi_\beta(U_\alpha\cap U_\beta)$への写像$f_{\alpha\beta}=\psi_\alpha\circ\psi_\beta^{-1}$」．\par\textbf{修正案：}後の$\psi_\beta(U_\alpha\cap U_\beta)$を$\psi_\alpha(U_\alpha\cap U_\beta)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0083}{}\textbf{MATS-0083}\par 印刷98頁，式(12)の証明の二つの押し出し式とその後のコーシー・リーマン条件． & \textbf{異なる複素次元間の写像の和の上限}\par\textbf{原記載：}$\dim_C M=n$，$\dim_C M'=m$，像側の座標は$w^1,\ldots,w^m$とした後，二つの和は$\sum_{j=1}^n$，後の条件の範囲は$(j,k=1,\ldots,n)$となる．\par\textbf{修正案：}二つの和を$\sum_{j=1}^m$，条件の範囲を$j=1,\ldots,m$，$k=1,\ldots,n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0084}{}\textbf{MATS-0084}\par 印刷98頁，$\varphi_*(\partial/\partial x^k)_p$および$\varphi_*(\partial/\partial y^k)_p$の二つの式． & \textbf{押し出し先の接ベクトルの評価点}\par\textbf{原記載：}右辺の像側のベクトルは各式とも$(\partial/\partial u^j)_p$，$(\partial/\partial v^j)_p$と表示．\par\textbf{修正案：}像側のベクトルの添字$p$をすべて$\varphi(p)$とする．係数の微分は定義域で計算しているので係数の$(p)$は保持する． \\[3pt]
+\hline
+\hypertarget{MATS-0085}{}\textbf{MATS-0085}\par 印刷98頁，J項直前の文． & \textbf{正則写像の判定の証明末の式番号}\par\textbf{原記載：}「ゆえに(10)がなりたつことと$\varphi$が正則であることとは同値である」．\par\textbf{修正案：}(10)を(12)とする． \\[3pt]
+\hline
+\hypertarget{MATS-0087}{}\textbf{MATS-0087}\par 印刷100頁，$J_p^2=-1$に続く計算． & \textbf{基本2形式の反対称性の計算の変数}\par\textbf{原記載：}$g_p(J_p(J_pu),J_pu)=-g_p(u,J_pv)$．\par\textbf{修正案：}左辺の第2引数$J_pu$を$J_pv$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0088}{}\textbf{MATS-0088}\par 印刷101頁，K項の例4の冒頭． & \textbf{複素射影空間の同値関係を置く集合の次元}\par\textbf{原記載：}「$C^{n+1}$から原点0をのぞいた集合$C^n-\{0\}$」．\par\textbf{修正案：}$C^n-\{0\}$を$C^{n+1}-\{0\}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0091}{}\textbf{MATS-0091}\par 印刷101頁，K項の例4，「この同値関係による同値数の集合」． & \textbf{複素射影空間の商集合を述べる語}\par\textbf{原記載：}「この同値関係による同値数の集合」\par\textbf{修正案：}「同値数」を「同値類」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0089}{}\textbf{MATS-0089}\par 印刷104頁，式(1)の後の概複素構造の定義． & \textbf{概複素構造の実座標成分の添字範囲}\par\textbf{原記載：}成分を$J_i^k$（$i,k=1,\ldots,n$）とする．\par\textbf{修正案：}$i,k=1,\ldots,2n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0090}{}\textbf{MATS-0090}\par 印刷105頁，最初の二つの式の第2式第1項． & \textbf{座標変換の和の中の基底の添字}\par\textbf{原記載：}$-\sum_j\dfrac{\partial\varphi^j}{\partial y^i}\dfrac\partial{\partial v^i}$．\par\textbf{修正案：}$\partial/\partial v^i$を$\partial/\partial v^j$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0092}{}\textbf{MATS-0092}\par 印刷109頁中央，「したがって(4)がなりたつことは」の文． & \textbf{解析ベクトル場の判定の量化する変数}\par\textbf{原記載：}「$X\in\mathfrak X^-$のとき$[X,A]\in\mathfrak X^-$，と同値である」．\par\textbf{修正案：}「任意の$A\in\mathfrak X^-$に対し$[X,A]\in\mathfrak X^-$」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0094}{}\textbf{MATS-0094}\par 印刷111頁，III章§1の最初の定義式． & \textbf{$p$次線型形式の定義の変数番号の範囲}\par\textbf{原記載：}線型性を要求する変数の範囲を$i=1,\ldots,n$とする．\par\textbf{修正案：}$i=1,\ldots,p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0095}{}\textbf{MATS-0095}\par 印刷111頁末，テンソル積$f\otimes g$の定義． & \textbf{テンソル積の第2因子の引数の個数}\par\textbf{原記載：}$f(v_1,\ldots,v_p)\cdot g(w_1,\ldots,w_p)$．\par\textbf{修正案：}$g(w_1,\ldots,w_q)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0096}{}\textbf{MATS-0096}\par 印刷113頁末，§2問1． & \textbf{対称・交代形式の入れ替える変数番号の範囲}\par\textbf{原記載：}$p$次形式の変数を入れ替える番号を$1\leqq i<k\leqq n$とする．\par\textbf{修正案：}$1\leqq i<k\leqq p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0097}{}\textbf{MATS-0097}\par 印刷114頁，式(3)の直後の証明． & \textbf{交代成分への分解の証明の変数}\par\textbf{原記載：}任意の$f$を$f=\dfrac1{p!}A_p\varphi+(f-\dfrac1{p!}A_p\varphi)$と書き，続けて$f-\dfrac1{p!}A_p\varphi\in N^p$および$\dfrac1{p!}A_p\varphi\in\overset p\bigwedge V^*$とする．\par\textbf{修正案：}四つの$A_p\varphi$を$A_pf$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0098}{}\textbf{MATS-0098}\par 印刷114頁，式(3)． & \textbf{直和分解の式の双対記号の脱落}\par\textbf{原記載：}$\overset p\bigotimes V^*=\overset p\bigwedge V+N^p$．\par\textbf{修正案：}右辺の$V$を$V^*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0099}{}\textbf{MATS-0099}\par 印刷115頁，式(6)の直前． & \textbf{外積の結合則の第3因子の次数}\par\textbf{原記載：}$f\in\overset p\bigwedge V^*$，$g\in\overset q\bigwedge V^*$，$h\in\overset q\bigwedge V^*$．\par\textbf{修正案：}$h\in\overset r\bigwedge V^*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0100}{}\textbf{MATS-0100}\par 印刷116頁の脚注． & \textbf{交代形式の消滅を述べる脚注の双対記号}\par\textbf{原記載：}$p>n$ならば$\overset p\bigwedge V=(0)$とする．\par\textbf{修正案：}$V$を$V^*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0101}{}\textbf{MATS-0101}\par 印刷117頁，式(8)の証明末の行列式2箇所と式(10)の証明の行列式1箇所． & \textbf{一次形式$p$個の外積の行列式の添字範囲}\par\textbf{原記載：}いずれも$\det(\phi_i(u_j))_{i,j=1,\ldots,n}$とする．\par\textbf{修正案：}三つの上限$n$を$p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0102}{}\textbf{MATS-0102}\par 印刷118頁，次元$2^n$を計算する段落． & \textbf{外積多元環の直和の開始次数}\par\textbf{原記載：}$\bigwedge V^*=\sum_{p=1}^n\overset p\bigwedge V^*$とするが，次元の和は$\sum_{p=0}^n\binom np=2^n$とする．\par\textbf{修正案：}直和の開始次数を$p=0$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0103}{}\textbf{MATS-0103}\par 印刷119頁，式(13)の後の計算の第2行． & \textbf{内部積の積公式の証明の和の添字}\par\textbf{原記載：}$\sum_{i=1}^q(-1)^{p+j+1}i(v)\theta_j(\psi\wedge\cdots\wedge\theta_{j-1}\wedge\theta_{j+1}\wedge\cdots\wedge\theta_q)$．\par\textbf{修正案：}下限の$i=1$を$j=1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0104}{}\textbf{MATS-0104}\par 印刷123頁，冒頭の$T$の線型性の式，中段の$t$の定義と線型性の計算．また124頁，二組の$p$個のベクトル場の値を比較する段落． & \textbf{テンソル場を加群上の形式とみる際の入力の個数}\par\textbf{原記載：}冒頭の$T$の式の三つの末尾が$X_n$，その下の番号の範囲が$i=1,\ldots,n$．中段では「すなわち$t(X_1,\ldots,X_n)$は」，問3直後の計算の最初と，続く線型性の等式の$f\cdot t$の項にも$X_n$を用いる．\par\textbf{修正案：}123頁の六つの$X_n$を$X_p$，番号の範囲の$n$を$p$とする．124頁の$(X_i)_a=(Y_i)_a$の範囲$i=1,\ldots,n$も$i=1,\ldots,p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0105}{}\textbf{MATS-0105}\par 印刷124頁，$t_a$を定義する段落の冒頭． & \textbf{点ごとのテンソルを定義する空間}\par\textbf{原記載：}$t_a\in\overset p\bigotimes V^*$とする．\par\textbf{修正案：}$\overset p\bigotimes T_a^*(M)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0107}{}\textbf{MATS-0107}\par 印刷124頁の第2段落． & \textbf{局所係数を延長した関数の添字の上下}\par\textbf{原記載：}$\xi^j$と一致する全体上の関数を最初に$f^j$と呼ぶが，その後は$X_i-\sum_jf_jY_j$，$f_j(a)=0$，$\sum_jf_j\cdot T(\ldots,Y_j,\ldots)$と一貫して下付き$f_j$を用いる．\par\textbf{修正案：}最初の$f^j$を$f_j$とし，以後と統一する．逆に全箇所を上付きに統一しても数学的内容は同じ． \\[3pt]
+\hline
+\hypertarget{MATS-0111}{}\textbf{MATS-0111}\par 印刷136頁冒頭，$t\geqq1$のときの式． & \textbf{ポアンカレの補題のホモトピーの記号}\par\textbf{原記載：}$\varphi_1(t,x)=x$．\par\textbf{修正案：}$\varphi(t,x)=x$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0113}{}\textbf{MATS-0113}\par 印刷141頁，$d'f,d''f$の座標表示． & \textbf{$d''f$の座標表示の和の添字}\par\textbf{原記載：}$d''f=\sum_{i=1}^n\dfrac{\partial f}{\partial\bar z^\alpha}dz^{\bar\alpha}$．\par\textbf{修正案：}和の下限を$\alpha=1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0117}{}\textbf{MATS-0117}\par 印刷145頁，$\theta_\alpha$の形の最初の表示式． & \textbf{正規化した方程式の和の上限}\par\textbf{原記載：}$\theta_\alpha=dx^\alpha-\sum_{j=n-r+1}^{r}\Phi_{\alpha j}dx^j$．\par\textbf{修正案：}上限$r$を$n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0118}{}\textbf{MATS-0118}\par 印刷145頁末，$U_2(\delta_2)$の定義． & \textbf{初期値の領域の座標条件}\par\textbf{原記載：}$U_2(\delta_2)=\{(y^1,\ldots,y^s)\mid|y^s|<\delta_2\}$．\par\textbf{修正案：}$|y^\alpha|<\delta_2$（$\alpha=1,\ldots,s$）とする． \\[3pt]
+\hline
+\hypertarget{MATS-0119}{}\textbf{MATS-0119}\par 印刷146頁，$dy^\alpha(t)/dt$の表示式の第1行． & \textbf{解を時間で微分する式のパラメーターの添字}\par\textbf{原記載：}$\sum_{k=1}^r\widetilde\Phi_{\alpha k}(st,x,y(t))x^is$．\par\textbf{修正案：}$x^i$を$x^k$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0120}{}\textbf{MATS-0120}\par 印刷146頁，$\Psi_a$の座標表示直後． & \textbf{写像Psiの小文字表記}\par\textbf{原記載：}「すなわち$\psi_a$は方程式」．\par\textbf{修正案：}$\psi_a$を$\Psi_a$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0121}{}\textbf{MATS-0121}\par 印刷147頁，式(12)の中間項． & \textbf{引き戻しの外微分を表す記号の省略}\par\textbf{原記載：}$d\Psi(\omega_\alpha)$．\par\textbf{修正案：}$d\Psi_a^*(\omega_\alpha)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0122}{}\textbf{MATS-0122}\par 印刷147頁，式(13)左辺． & \textbf{局所方程式の微分形式の添字の上下}\par\textbf{原記載：}$\Psi_a^*(d\omega^\alpha)$．\par\textbf{修正案：}$d\omega_\alpha$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0125}{}\textbf{MATS-0125}\par 印刷148頁末から149頁冒頭の定理1'． & \textbf{正則な積分関数の添字の上下}\par\textbf{原記載：}148頁で関数を$g^\alpha$と定義し，149頁の結論で$dg_\beta$を用いる．\par\textbf{修正案：}$dg_\beta$を$dg^\beta$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0124}{}\textbf{MATS-0124}\par 印刷149頁冒頭，148頁から続く定理1'の結論． & \textbf{正則Frobenius定理の結論の形式の次数}\par\textbf{原記載：}$d\omega_\alpha=\sum_{\beta=1}^{n-r}a_{\alpha\beta}dg_\beta$．\par\textbf{修正案：}左辺を$\omega_\alpha$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0126}{}\textbf{MATS-0126}\par 印刷150頁，補題3の証明中の$\mathfrak D_q$の表示． & \textbf{共通核を述べる式の零条件の脱落}\par\textbf{原記載：}$\mathfrak D_q=\{v\in T_q(M)\mid(\omega_{r+1})_q(v)=\cdots=(\omega_n)_q(v)\}$．\par\textbf{修正案：}最後に$=0$を補う． \\[3pt]
+\hline
+\hypertarget{MATS-0127}{}\textbf{MATS-0127}\par 印刷150頁，補題3の主張の末尾． & \textbf{局所基の対象となる点の添字}\par\textbf{原記載：}$U$の各点$q$で$(X_1)_q,\ldots,(X_r)_q$が「$\mathfrak D_r$の基」になる．\par\textbf{修正案：}$\mathfrak D_r$を$\mathfrak D_q$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0129}{}\textbf{MATS-0129}\par 印刷151頁，十分性の証明で$d\omega_\alpha$を展開する第1表示式． & \textbf{二形式を基で展開する和の添字範囲}\par\textbf{原記載：}最初の和の範囲は$1<i<j<r$．\par\textbf{修正案：}$1\leqq i<j\leqq r$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0130}{}\textbf{MATS-0130}\par 印刷151頁，必要性の証明で$d\omega_\alpha$を展開する表示式の第2項． & \textbf{必要性の展開式の一次形式の添字}\par\textbf{原記載：}$\sum_{r+1\leqq\beta<\gamma\leqq n}d_{\beta\gamma}^\alpha\omega_\alpha\wedge\omega_\gamma$．\par\textbf{修正案：}$\omega_\alpha$を$\omega_\beta$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0131}{}\textbf{MATS-0131}\par 印刷152頁，§9冒頭． & \textbf{概複素構造の成分を述べる実座標の個数}\par\textbf{原記載：}$2n$次元解析多様体$M$の局所座標系を$(x^1,\ldots,x^n)$とし，その次の文でも$J$の$(x^1,\ldots,x^n)$に関する成分とする（2箇所）．\par\textbf{修正案：}二つの末尾$x^n$を$x^{2n}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0132}{}\textbf{MATS-0132}\par 印刷152頁，補題の証明冒頭． & \textbf{関数の添字の上下位置}\par\textbf{原記載：}関数$f^\alpha$とその共役$\bar f^\alpha$を導入した後，$(d\bar f_\alpha)_q(b)=(df_\alpha)_q(\bar b)$および$(d\bar f_\alpha)_q(b)=0$とする（3箇所）．\par\textbf{修正案：}この3箇所の下付き$\alpha$を上付き$\alpha$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0136}{}\textbf{MATS-0136}\par 印刷153頁，$X_\alpha$とその共役を並べる集合の先頭． & \textbf{枠の最初のベクトルの添字の上下}\par\textbf{原記載：}$\{X^1,\ldots,X_n,X_{\bar1},\ldots,X_{\bar n}\}$とする．\par\textbf{修正案：}最初の$X^1$を$X_1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0137}{}\textbf{MATS-0137}\par 印刷154頁，式(4)直前の$\tilde\omega_{\bar\alpha}$の定義． & \textbf{正則延長された微分形式の座標微分の飾り}\par\textbf{原記載：}$\tilde\omega_{\bar\alpha}=\sum_{i=1}^{2n}\tilde f_{\bar\alpha i}(z)d\tilde z^i$と表示され，$z$の上に波線がある．\par\textbf{修正案：}$d\tilde z^i$を$dz^i$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0138}{}\textbf{MATS-0138}\par 印刷154頁「$C^{2n}$の0の近傍$\widetilde U$と$U$で正則な関数」．関連：155頁「および$U$上の正則関数$\widetilde A_{\alpha\beta}(z)$」． & \textbf{正則延長を定める領域の波線}\par\textbf{原記載：}「$C^{2n}$の0の近傍$\widetilde U$と$U$で正則な関数」；「および$U$上の正則関数$\widetilde A_{\alpha\beta}(z)$」\par\textbf{修正案：}どちらの「$U$」も「$\widetilde U$」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0139}{}\textbf{MATS-0139}\par 印刷154頁末，「すなわち正則関数」の直後． & \textbf{正則係数の波線の脱落}\par\textbf{原記載：}正則関数を$c_{\bar\beta\bar\gamma}^{\alpha}$と呼び，同じ文の後では$\tilde c_{\bar\beta\bar\gamma}^{\alpha}$を用いる．\par\textbf{修正案：}最初も$\tilde c_{\bar\beta\bar\gamma}^{\alpha}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0140}{}\textbf{MATS-0140}\par 印刷155頁，式(6)第1式． & \textbf{正則Frobenius定理の係数の波線}\par\textbf{原記載：}$d\tilde g_\alpha=\sum_\beta A_{\alpha\beta}\tilde\omega_\beta$．\par\textbf{修正案：}$A_{\alpha\beta}$を$\widetilde A_{\alpha\beta}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0141}{}\textbf{MATS-0141}\par 印刷155頁，式(6)を$U$へ制限した後の表示式． & \textbf{実領域へ制限後の変数の属する領域}\par\textbf{原記載：}$\det(A_{\alpha\beta}(x))\ne0$の条件を$x\in\widetilde U$とする．\par\textbf{修正案：}$x\in U$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0142}{}\textbf{MATS-0142}\par 印刷155頁末，§10定理1の証明． & \textbf{連結な和集合を表す文字}\par\textbf{原記載：}「$N_\alpha$の和である$M_p$も連結である」．\par\textbf{修正案：}$M_p$を$F_p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0143}{}\textbf{MATS-0143}\par 印刷156頁，補題1の証明． & \textbf{切片上の局所座標の偏微分記号}\par\textbf{原記載：}$x^j$の$V_q$への制限を$y^j$とした後，$V_q$の接空間を張るものを$\partial/\partial y^1,\ldots,\partial/\partial x^r$とする．\par\textbf{修正案：}最後を$\partial/\partial y^r$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0144}{}\textbf{MATS-0144}\par 印刷157頁，第2段落． & \textbf{ハウスドルフ性の証明の近傍の文字}\par\textbf{原記載：}点の近傍を$Q,Q'$と呼んだ直後，$U\cap U'=\varnothing$とする．\par\textbf{修正案：}$Q\cap Q'=\varnothing$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0145}{}\textbf{MATS-0145}\par 印刷157頁，例の最初の文． & \textbf{定義域の多様体の文字}\par\textbf{原記載：}「$m$の各点$p$において$\operatorname{rank}_p(\varphi)=m$」．\par\textbf{修正案：}最初の$m$を$M$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0146}{}\textbf{MATS-0146}\par 印刷157頁，例の略解． & \textbf{核分布を定義する対応の点}\par\textbf{原記載：}「対応$\mathfrak D:q\to\mathfrak D_p$」．\par\textbf{修正案：}$p\to\mathfrak D_p$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0148}{}\textbf{MATS-0148}\par 印刷160頁末，性質5）の証明． & \textbf{共役写像の左移動の添字}\par\textbf{原記載：}$(L_a\cdot R_{g^{-1}})(V)=g\cdot V\cdot g^{-1}\subset U$．\par\textbf{修正案：}$L_a$を$L_g$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0149}{}\textbf{MATS-0149}\par 印刷161頁，例題1）の証明末． & \textbf{元が属する集合の記号}\par\textbf{原記載：}$guv^{-1}h^{-1}\subset g\cdot V\cdot V^{-1}\cdot h^{-1}$．\par\textbf{修正案：}最初の$\subset$を$\in$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0150}{}\textbf{MATS-0150}\par 印刷164頁，第1段落末． & \textbf{準同型の核を含む群の添字}\par\textbf{原記載：}$\varphi:G_1\to G_2$の核$N$を「$G$の正規閉部分群」とする．\par\textbf{修正案：}$G$を$G_1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0151}{}\textbf{MATS-0151}\par 印刷166頁，例題の帰納法の$n=1$の場合． & \textbf{$GL^+$の引数の区切り}\par\textbf{原記載：}「$n=1$のときには$GL^+(nR)$は$R^+$にひとしい」．\par\textbf{修正案：}$GL^+(n,R)$とする．$n=1$を代入して$GL^+(1,R)$と明記してもよい． \\[3pt]
+\hline
+\hypertarget{MATS-0152}{}\textbf{MATS-0152}\par 印刷167頁，第1文． & \textbf{群作用による位相同型の空間の文字}\par\textbf{原記載：}「これより$x\to g\cdot x$は$M$の位相同型である」．\par\textbf{修正案：}$M$を$X$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0153}{}\textbf{MATS-0153}\par 印刷167頁，等質空間の定義の文． & \textbf{推移的作用の助詞}\par\textbf{原記載：}「$G$が$X$の推移的に作用するとき」．\par\textbf{修正案：}「$X$に推移的に作用」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0154}{}\textbf{MATS-0154}\par 印刷167頁，例1． & \textbf{商空間に作用する群の用語}\par\textbf{原記載：}「$G$は$G/H$の位相変換であり」．\par\textbf{修正案：}「位相変換群であり」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0155}{}\textbf{MATS-0155}\par 印刷167頁，問1． & \textbf{群作用の核を定める点の属する空間}\par\textbf{原記載：}「すべての$x\in M$にたいし$g\cdot x=x$をみたす……」．\par\textbf{修正案：}$M$を$X$とする（閉性の条件は次項）． \\[3pt]
+\hline
+\hypertarget{MATS-0157}{}\textbf{MATS-0157}\par 印刷169頁，図4・1に続く$\alpha$の連続性の証明． & \textbf{開集合の所属を述べる助詞}\par\textbf{原記載：}「$\pi^{-1}(\alpha^{-1}(O))$は$G$は開集合である」．\par\textbf{修正案：}二つ目の「は」を「の」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0159}{}\textbf{MATS-0159}\par 172頁，定理1証明，$\xi^i(g)$を計算する表示式． & \textbf{和の添字と被加算項の不一致}\par\textbf{原記載：}$\displaystyle\xi^i(g)=\sum_{i=1}^n\frac{\partial\varphi^i}{\partial v^j}(y^1(g),\cdots,y^n(g);0\cdots0)a^j$．\par\textbf{修正案：}和の下添字を$i=1$から$j=1$へ変更する． \\[3pt]
+\hline
+\hypertarget{MATS-0160}{}\textbf{MATS-0160}\par 175頁，中央，$Y_i$を表示する行． & \textbf{ベクトル場の表示に余分な$\omega$}\par\textbf{原記載：}$\displaystyle Y_i=\sum_{j=1}^n\eta^j{}_iZ_j\omega$．\par\textbf{修正案：}右辺末尾の$\omega$を削除する． \\[3pt]
+\hline
+\hypertarget{MATS-0161}{}\textbf{MATS-0161}\par 175頁，下から約7行，$h$から構成した$\omega$の交代性を述べる行． & \textbf{関数環の多様体名}\par\textbf{原記載：}「$\omega$は$C^\infty(M)$加群$\mathfrak X(G)$上の$p$次交代形式である」．\par\textbf{修正案：}$C^\infty(M)$を$C^\infty(G)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0162}{}\textbf{MATS-0162}\par 177頁，補題1の証明，第1表示式． & \textbf{微分写像の星印欠落}\par\textbf{原記載：}$(L_gX)_hf=X_{g^{-1}h}(f\circ L_g)$．\par\textbf{修正案：}左辺を$((L_g)_*X)_hf$（または原著の他の行と同じ$ (L_{g*}X)_hf$）とする． \\[3pt]
+\hline
+\hypertarget{MATS-0163}{}\textbf{MATS-0163}\par 179頁，最終表示式（180頁冒頭へ続く式）． & \textbf{随伴表現の引数の括弧}\par\textbf{原記載：}$\displaystyle [X,Y]=\lim_{t\to0}\frac1t\{Y-\operatorname{Ad}((\exp-tX)\cdot Y\}$．\par\textbf{修正案：}$\operatorname{Ad}(\exp(-tX))\cdot Y$または原著の表記に合わせ$\operatorname{Ad}(\exp-tX)\cdot Y$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0164}{}\textbf{MATS-0164}\par 180頁，下部，式（4）から可換性を導く証明の末尾． & \textbf{共役の中央因子の文字}\par\textbf{原記載：}「右辺は$(\exp sY)(\exp tY)(\exp sY)^{-1}$である」．\par\textbf{修正案：}中央因子を$\exp tX$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0165}{}\textbf{MATS-0165}\par 印刷182頁，脚注． & \textbf{複素リイ群の定義を参照する節番号}\par\textbf{原記載：}「$GL(n,C)$は§5にのべる意味で複素リイ群である．」\par\textbf{修正案：}§5を§11とする． \\[3pt]
+\hline
+\hypertarget{MATS-0166}{}\textbf{MATS-0166}\par 印刷183頁，式(2)． & \textbf{行列の交換子成分の第2項の引数}\par\textbf{原記載：}$c_j^i([X,Y])=\sum_l(c_l^i(X)c_j^l(Y)-c_l^i(Y)c_j^l(Y))$．\par\textbf{修正案：}最後の$c_j^l(Y)$を$c_j^l(X)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0167}{}\textbf{MATS-0167}\par 印刷187頁，問3後半． & \textbf{標準座標の変換を述べる文字の大小}\par\textbf{原記載：}$\mathfrak g$の二つの基に関する座標を$(x^1,\ldots,x^n)$，$(\bar x^1,\ldots,\bar x^n)$とした後，座標変換を$(x^1,\ldots,X^n)$，$(\bar X^1,\ldots,\bar X^n)$の間とする．\par\textbf{修正案：}後半の$X^n,\bar X^i$を$x^i,\bar x^i$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0168}{}\textbf{MATS-0168}\par 印刷190頁，問4の写像$\Phi$の定義． & \textbf{問4の和の上限}\par\textbf{原記載：}$\mathfrak g=\mathfrak v_1+\cdots+\mathfrak v_m$の直和に対し，$\Phi(\sum_{i=1}^nX_i)=\exp X_1\cdots\exp X_m$（$X_i\in\mathfrak v_i$）．\par\textbf{修正案：}$\sum_{i=1}^nX_i$を$\sum_{i=1}^mX_i$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0171}{}\textbf{MATS-0171}\par 印刷194頁，式（8）の直後の計算の第2行． & \textbf{固定パラメータ$s_i$の添字}\par\textbf{原記載：}$(L_{g_1}\cdot R_{g_2})_*(R_{b_i(s)})_*a_i'(t_i)$．\par\textbf{修正案：}$b_i(s)$を$b_i(s_i)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0172}{}\textbf{MATS-0172}\par 印刷194頁，上記計算の直後，「ゆえに（7）より」に続く式． & \textbf{曲線$a_i$の添字}\par\textbf{原記載：}$(R_{b_i(s_i)})_*a'(t_i)=(X_i)_{b_i(s_i)a_i(t_i)}$．\par\textbf{修正案：}$a'(t_i)$を$a_i'(t_i)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0174}{}\textbf{MATS-0174}\par 印刷195頁，「注意」の第1文． & \textbf{可換な指数の積の式の余分な$I$}\par\textbf{原記載：}$\exp t^kX_k\exp s^kY_k=\exp(t^kX_k+s^kIY_k)$．\par\textbf{修正案：}右辺を$\exp(t^kX_k+s^kY_k)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0175}{}\textbf{MATS-0175}\par 印刷195頁，複素リイ群の例4の第1文． & \textbf{例4の「すべての」}\par\textbf{原記載：}「偶数次元の可換リイ群$G$はすべての複素リイ群である」．\par\textbf{修正案：}「すべて複素リイ群である」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0176}{}\textbf{MATS-0176}\par 印刷197頁，微分式系の完全積分可能性の証明中の独立行． & \textbf{部分リイ環の基と構造定数の式}\par\textbf{原記載：}$\mathfrak h$の基を$\{Y_1,\ldots,Y_r\}$とした後に$[Y_i,Y_j]=\sum_{k=1}^{n}c^k{}_{ij}X_k$（$i,j=1,\ldots,r$）とする．\par\textbf{修正案：}$[Y_i,Y_j]=\sum_{k=1}^{r}c^k{}_{ij}Y_k$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0180}{}\textbf{MATS-0180}\par 印刷198頁，注意1の末尾「§17，定理2を参照」；印刷199頁，注意2の「§17において」「§17，定理3」． & \textbf{閉部分群の定理への節番号}\par\textbf{原記載：}部分群である連結部分多様体をリイ群とする定理と，閉部分群をリイ閉部分群とする定理を§17の定理2・3として参照する．\par\textbf{修正案：}該当参照を§18の定理2・3へ変更する． \\[3pt]
+\hline
+\hypertarget{MATS-0177}{}\textbf{MATS-0177}\par 印刷199頁，最終段落と最終独立行． & \textbf{指数積の個数の添字}\par\textbf{原記載：}「$Y_1,\ldots,Y_n\in\mathfrak h$が存在して」$h=\exp Y_1\cdots\exp Y_k$．\par\textbf{修正案：}前半を$Y_1,\ldots,Y_k\in\mathfrak h$とする（あるいは双方を同じ添字に統一）． \\[3pt]
+\hline
+\hypertarget{MATS-0179}{}\textbf{MATS-0179}\par 印刷201頁，直交群の項の「$\frac12n(n+1)$個の関数」に続く記号． & \textbf{直交群を定める関数の添字}\par\textbf{原記載：}$f_{ih}$（$1\leqq i\leqq k\leqq n$）．\par\textbf{修正案：}$f_{ih}$を$f_{ik}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0182}{}\textbf{MATS-0182}\par 印刷203頁，分配多元環の基の間の乗法を表す最初の表示式． & \textbf{構造定数の展開の総和添字}\par\textbf{原記載：}$u_i\circ u_j=\sum_{j=1}^n\alpha^k_{ij}u_k$．\par\textbf{修正案：}下添字$j=1$を$k=1$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0184}{}\textbf{MATS-0184}\par 印刷205頁，下半の2）． & \textbf{群の中の部分空間を移す写像}\par\textbf{原記載：}「$U_1$と$gU_1$は$T_g$により位相同型」．\par\textbf{修正案：}$T_g$を$L_g$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0185}{}\textbf{MATS-0185}\par 印刷206頁，第2表示式．関連：205頁の$\sigma_{\bar g}$と座標の定義． & \textbf{移した局所切断による座標式の合成}\par\textbf{原記載：}$x^i_{\bar g}=x^i\circ\sigma_{\bar g}\ (i=1,\cdots,m)$．\par\textbf{修正案：}$x^i_{\bar g}=x^i\circ L_{g^{-1}}\circ\sigma_{\bar g}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0186}{}\textbf{MATS-0186}\par 印刷206頁，$F^i$の表示式に続く「さて」の段落． & \textbf{零となる座標の列の末尾}\par\textbf{原記載：}$x^{m+1}(v_1)=\cdots=x^{m+1}(v_1)=0$．\par\textbf{修正案：}最後の$x^{m+1}$を$x^{m+r}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0187}{}\textbf{MATS-0187}\par 印刷206頁，3）の写像を列記する文． & \textbf{複素の場合の作用写像の文字}\par\textbf{原記載：}$\pi:G\to G/H,t:G\times G/H\to G/H$はともに正則写像．\par\textbf{修正案：}$t$を$\varphi$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0188}{}\textbf{MATS-0188}\par 印刷210頁，定理1の複素リイ群に関する文． & \textbf{複素線型な微分と同値とする準同型の種類}\par\textbf{原記載：}「$\varphi$が正則同型であること」と微分$\varphi_*$が複素リイ環としての準同型であることとは同値．\par\textbf{修正案：}「正則同型」を「正則準同型」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0190}{}\textbf{MATS-0190}\par 印刷214頁，中段，正の有理数$t=s/r$に対する計算． & \textbf{比例式の成分添字}\par\textbf{原記載：}$a^k(s\varepsilon_0/r)=s a^k(\varepsilon_0/r)$，$a^i(\varepsilon_0)=r a^k(\varepsilon_0/r)$．\par\textbf{修正案：}第2式の左辺$a^i$を$a^k$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0192}{}\textbf{MATS-0192}\par 印刷215頁，§18定理1の条件2）． & \textbf{積の座標表示の最初の引数}\par\textbf{原記載：}$x^i(g\cdot h^{-1})=f^i(x^i(g),\ldots,x^n(g);x^1(h),\ldots,x^n(h))$．\par\textbf{修正案：}$f^i$の最初の引数を$x^1(g)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0195}{}\textbf{MATS-0195}\par 印刷216頁，中段，右移動の可微分性の証明． & \textbf{連結と連続の語の取り違え}\par\textbf{原記載：}「また$G$は連続であると仮定したから」．\par\textbf{修正案：}「連続」を「連結」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0196}{}\textbf{MATS-0196}\par 印刷217頁，中段，$\varphi(a(t))=\exp tX$の直後． & \textbf{リイ環の属する群のプライム}\par\textbf{原記載：}「なる$G$のリイ環$\mathfrak g'$の元$X=X(a)$がきまる．」\par\textbf{修正案：}$G$を$G'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0197}{}\textbf{MATS-0197}\par 印刷217頁，下半，$\mathfrak g'$の基の選択に続く括弧書き． & \textbf{部分ベクトル空間の包含先}\par\textbf{原記載：}「実は$\mathfrak g_1$は$\mathfrak g_1$の部分ベクトル空間であることを後で証明する．」\par\textbf{修正案：}後半の$\mathfrak g_1$を$\mathfrak g'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0198}{}\textbf{MATS-0198}\par 印刷218頁，式(1)の直後のノルム定義． & \textbf{座標記号の添字の上下}\par\textbf{原記載：}$\|h\|^2=\sum_{i=1}^n|x_i(h)|^2$．\par\textbf{修正案：}$x_i(h)$を$x^i(h)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0199}{}\textbf{MATS-0199}\par 印刷218頁，補題1証明第1段落． & \textbf{巾の座標の絶対値の脱落}\par\textbf{原記載：}$|x^i(\varphi(g_k)^{l_k})|=l_kx^i(\varphi(g_k))<\alpha$．\par\textbf{修正案：}等号直後を$l_k|x^i(\varphi(g_k))|$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0200}{}\textbf{MATS-0200}\par 印刷218頁，中段，$K$が無限の場合の背理法． & \textbf{集積点の属する閉集合}\par\textbf{原記載：}「$\bar U$がコンパクトだから，$\bar V$で集積点$h$をもつ」．\par\textbf{修正案：}$\bar V$を$\bar U$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0201}{}\textbf{MATS-0201}\par 印刷218頁，下段，$m_k$の導入直後． & \textbf{座標に代入する写像の脱落}\par\textbf{原記載：}$g_k{}^{m_k}\in\bar U$，$m_k|x^i(g_k)|<\alpha$．\par\textbf{修正案：}$x^i(g_k)$を$x^i(\varphi(g_k))$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0203}{}\textbf{MATS-0203}\par 印刷220頁，下半，補題5証明で$\Psi$を定義した直後． & \textbf{写像Psiの定義域のリイ環}\par\textbf{原記載：}「$\Psi$は$\mathfrak g$の0の近傍から，$G'$への可微分写像」．\par\textbf{修正案：}$\mathfrak g$を$\mathfrak g'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0204}{}\textbf{MATS-0204}\par 印刷220頁，最下段． & \textbf{局所座標近傍V2の包含先}\par\textbf{原記載：}「$V_2\subset U$としてよい．」\par\textbf{修正案：}$V_2\subset V$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0205}{}\textbf{MATS-0205}\par 224頁，中段，$[X^*,Y^*]=[X,Y]^*$の証明を始める文． & \textbf{交換子と流れの公式の参照節}\par\textbf{原記載：}「II，§10により」．\par\textbf{修正案：}「II，§12，定理4により」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0206}{}\textbf{MATS-0206}\par 224頁，中段，「ところが」で始まる$(T_{a_t*}Y^*)_p$の展開． & \textbf{$Y^*$の移送式の$X_e$}\par\textbf{原記載：}$(T_{a_t*}Y^*)_p=T_{a_t*}Y^*_{a_t^{-1}p}=-T_{a_t*}\cdot S_{a_t^{-1}p*}X_e$．\par\textbf{修正案：}右辺の$X_e$を$Y_e$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0207}{}\textbf{MATS-0207}\par 224頁，「ゆえに」の直後の表示式，第1等号右辺． & \textbf{微分の下添字の順序}\par\textbf{原記載：}$(T_{a_t*}Y^*)_p=-S_{*p}(A_{a_t*}Y)_e=-S_{p*}R_{a_t^{-1}*}Y_e$．\par\textbf{修正案：}$S_{*p}$を$S_{p*}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0208}{}\textbf{MATS-0208}\par 224頁，交換子計算の直後，「各点$p$において」で始まる文． & \textbf{準同型の式の星の位置}\par\textbf{原記載：}$[X^*,Y^*]=[X,Y^*]$．\par\textbf{修正案：}右辺を$[X,Y]^*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0209}{}\textbf{MATS-0209}\par 225頁，下部，$f\circ\alpha$を局所座標で表す段落の3箇所． & \textbf{$F$の変数の数}\par\textbf{原記載：}$F(u^1,\cdots,u^n)$は連続関数；$(f\circ S)(g)=F(x^1(g),\cdots,x^n(g))$；$F(u^1,\cdots,u^n)$は$C^\infty$級．\par\textbf{修正案：}3箇所の最終上添字$n$を$m$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0210}{}\textbf{MATS-0210}\par 226頁，第1行「それには」の直後，および約8行目「線型写像」の直後． & \textbf{微分$\alpha_*$の星が肩付き}\par\textbf{原記載：}「$\alpha^*$が$o$において1：1写像」「線型写像$\alpha^*$の核」．\par\textbf{修正案：}$\alpha^*$を$\alpha_*$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0211}{}\textbf{MATS-0211}\par 226頁，上部，$S_*X_e=0$に続く文． & \textbf{$S_*X_e$の符号}\par\textbf{原記載：}「ところが$S_*X_e=X^*_{p_0}$であるから」．\par\textbf{修正案：}$S_*X_e=-X^*_{p_0}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0212}{}\textbf{MATS-0212}\par 226頁，「ゆえに$T_o(G/H)$から」で始まる文． & \textbf{接空間の基点}\par\textbf{原記載：}「$T_o(G/H)$から$T_p(M)$への線型写像」．\par\textbf{修正案：}$T_p(M)$を$T_{p_0}(M)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0213}{}\textbf{MATS-0213}\par 227頁，最終行，問2． & \textbf{問2の助詞}\par\textbf{原記載：}「$P^n(C)$の点$\pi(x_0)(x_0=(1,0,\cdots,0))$とおける」．\par\textbf{修正案：}「とおける」を「における」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0214}{}\textbf{MATS-0214}\par 229頁，例7，第1段の「5）と同様にして」および行列表示直後「ゆえに5）と同様にして」． & \textbf{実グラスマン多様体の例番号}\par\textbf{原記載：}「5）と同様にして」（2箇所）．\par\textbf{修正案：}両箇所の5）を6）とする． \\[3pt]
+\hline
+\hypertarget{MATS-0215}{}\textbf{MATS-0215}\par 229頁，例7の終わりに近い「一方」で始まる文． & \textbf{複素グラスマン多様体の$(C)$欠落}\par\textbf{原記載：}「$SU(N)/H$に$G_{N,n}$と正則同型となるような複素構造」．\par\textbf{修正案：}$G_{N,n}$を$G_{N,n}(C)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0216}{}\textbf{MATS-0216}\par 230頁，中段，$U(N)$の作用を述べる文． & \textbf{「上の推移的」の助詞}\par\textbf{原記載：}「$U(N)$（および$SU(N)$）が$\mathfrak F$の上の推移的に作用し」．\par\textbf{修正案：}「上の推移的」を「上に推移的」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0217}{}\textbf{MATS-0217}\par 230頁，下側の対角行列表示式，右側の条件． & \textbf{対角成分の添字範囲}\par\textbf{原記載：}$|a^i{}_i|=1$，$(i=1,\cdots,n)$．\par\textbf{修正案：}$n$を$N$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0218}{}\textbf{MATS-0218}\par 231頁，同値類が二つであることの証明，「同値でない二つの元」の直後，第1の組． & \textbf{順序づけられた基の最終添字}\par\textbf{原記載：}$(e'_1,\cdots,e'_1)$．\par\textbf{修正案：}最後の$e'_1$を$e'_n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0219}{}\textbf{MATS-0219}\par 印刷232頁，最終段落の末尾付近． & \textbf{同値関係の導入の「な」}\par\textbf{原記載：}「$\mathfrak F^*$に次のよう同値関係を定義する」．\par\textbf{修正案：}「次のような同値関係」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0220}{}\textbf{MATS-0220}\par 印刷233頁，第1段落第2文． & \textbf{同値類の個数の重複語}\par\textbf{原記載：}「このとき同値類の類の個数は丁度2である」．\par\textbf{修正案：}「同値類の個数」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0221}{}\textbf{MATS-0221}\par 印刷233頁，第2段落末，集合表示の直前． & \textbf{向きと対応する同値類の語}\par\textbf{原記載：}「$\mathfrak F^*$の同値数$\mathfrak F_1^*,\mathfrak F_2^*$」．\par\textbf{修正案：}「同値類$\mathfrak F_1^*,\mathfrak F_2^*$」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0223}{}\textbf{MATS-0223}\par 印刷237頁，第1段落第2文． & \textbf{法ベクトル場の定義中の対象}\par\textbf{原記載：}「$M$の各点$p$にたいし，$p$における$p$の法ベクトル$N_p$を対応させる」．\par\textbf{修正案：}2番目の$p$を$M$とし，「$p$における$M$の法ベクトル」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0224}{}\textbf{MATS-0224}\par 印刷237頁，最初の独立行の式． & \textbf{法ベクトルと体積形式の対応の外積の末尾}\par\textbf{原記載：}$\omega_p(v_1,\ldots,v_n)e_1\wedge\cdots\wedge e_{n+1}=N_p\wedge v_1\wedge\cdots\wedge v_p$．\par\textbf{修正案：}末尾の$v_p$を$v_n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0225}{}\textbf{MATS-0225}\par 印刷239頁，例5の第1脚注． & \textbf{線型等方群・随伴表現への参照}\par\textbf{原記載：}「IV章§13参照」．\par\textbf{修正案：}「IV章§19参照」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0226}{}\textbf{MATS-0226}\par 印刷239頁，例5の証明第1段落「記号を簡単にするため」． & \textbf{随伴表現の略記の活字}\par\textbf{原記載：}$\operatorname{ab}_{\mathfrak g/\mathfrak h}(h)=\alpha(h)$．\par\textbf{修正案：}$\operatorname{ab}$を$\operatorname{ad}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0227}{}\textbf{MATS-0227}\par 印刷240頁，例5証明の最終段落． & \textbf{不変性で量化する群の文字}\par\textbf{原記載：}「任意の$g\in T$にたいし$T_g^*\omega=\omega$」．\par\textbf{修正案：}$g\in T$を$g\in G$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0228}{}\textbf{MATS-0228}\par 印刷240頁，問8． & \textbf{球面の向きづけの演習の参照先}\par\textbf{原記載：}「例3をつかって球面が向きづけ可能であることをしめせ」．\par\textbf{修正案：}「例5をつかって」とすることを候補とする． \\[3pt]
+\hline
+\hypertarget{MATS-0229}{}\textbf{MATS-0229}\par 印刷241頁，式（4）． & \textbf{積分の最初の上限の座標添字}\par\textbf{原記載：}$I(\theta)=\int_{b^1-\eta}^{b^n+\eta}\cdots\int_{b^n-\eta}^{b^n+\eta}g(v^1,\ldots,v^n)dv^1\cdots dv^n$．\par\textbf{修正案：}最初の上限$b^n+\eta$を$b^1+\eta$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0230}{}\textbf{MATS-0230}\par 印刷242頁，第1段落． & \textbf{積分の定義の独立性を結ぶ助詞}\par\textbf{原記載：}「えらび方によらないことを証明された」．\par\textbf{修正案：}「ことが証明された」または「ことを証明した」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0232}{}\textbf{MATS-0232}\par 印刷243頁，最初の表示式の直前． & \textbf{先行する説明を参照する助詞}\par\textbf{原記載：}「1）の最後ののべたように」．\par\textbf{修正案：}「最後にのべたように」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0233}{}\textbf{MATS-0233}\par 印刷244頁，別の座標での$G'$を定める文． & \textbf{行列式を定める文の余分な助詞}\par\textbf{原記載：}「$G'=\det(g'_{ij})$をとおくと」．\par\textbf{修正案：}「を」を削除し「$G'=\det(g'_{ij})$とおくと」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0234}{}\textbf{MATS-0234}\par 印刷245頁，補題1の証明で三つの積分を等置する表示式の左辺． & \textbf{引き戻しの積分の星印}\par\textbf{原記載：}$\int_M\varphi\omega$．\par\textbf{修正案：}$\int_M\varphi^*\omega$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0235}{}\textbf{MATS-0235}\par 印刷245頁，上記の三つの積分を等置する表示式の右端． & \textbf{引き戻し公式の最後の積分の領域}\par\textbf{原記載：}$\pm\int_M\omega$．\par\textbf{修正案：}$\pm\int_{M'}\omega$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0236}{}\textbf{MATS-0236}\par 印刷246頁，補題2の最終文． & \textbf{同じ多様体上の体積要素の同定}\par\textbf{原記載：}「$M=M'$，$\Omega=\Omega$として(14)がなりたつ」．\par\textbf{修正案：}$\Omega=\Omega'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0239}{}\textbf{MATS-0239}\par 印刷248頁，式(3)，式(4)，および式(5)の証明後の無番号の積分等式． & \textbf{リイ群上の積分の領域の文字}\par\textbf{原記載：}以上の三つの等式の両辺で積分領域を$M$とする（計6箇所）．\par\textbf{修正案：}6箇所の$M$を$G$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0240}{}\textbf{MATS-0240}\par 印刷248頁，式(5)の証明で接ベクトルへの作用を述べる文． & \textbf{反転の接写像の星の位置}\par\textbf{原記載：}$\Omega_e(\psi_e^*v_1,\ldots,\psi_e^*v_n)$，$\psi_e^*v=-v$．\par\textbf{修正案：}接ベクトルに作用する$\psi_e^*$を$(\psi_*)_e$（または$(\psi_e)_*$）とする． \\[3pt]
+\hline
+\hypertarget{MATS-0241}{}\textbf{MATS-0241}\par 印刷249頁，「さらにあきらかに」に続く最初の等式． & \textbf{別の連結成分上の関数の添字}\par\textbf{原記載：}$(f\circ\psi)_\alpha=f_\alpha\circ\psi_\alpha$．\par\textbf{修正案：}右辺の$f_\alpha$を$f_{\alpha'}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0243}{}\textbf{MATS-0243}\par 印刷250頁，定理1証明の第1文． & \textbf{等質空間の向きづけの参照例番号}\par\textbf{原記載：}「すでに§1，例2でしめした」．\par\textbf{修正案：}例2を例5とする． \\[3pt]
+\hline
+\hypertarget{MATS-0244}{}\textbf{MATS-0244}\par 印刷251頁，$T_o(M)$と$\mathfrak g/\mathfrak h$を同一視する文． & \textbf{線型等方作用を表す接写像の星}\par\textbf{原記載：}$(T_t^*)_o=\operatorname{Ad}_{\mathfrak g/\mathfrak h}(t)$．\par\textbf{修正案：}$(T_{t*})_o=\operatorname{Ad}_{\mathfrak g/\mathfrak h}(t)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0245}{}\textbf{MATS-0245}\par 印刷251頁，$F(s;x,u_1,\ldots,u_n)>0$の直後． & \textbf{平均した形式の正値性の参照式}\par\textbf{原記載：}「ゆえに(2)より$\Theta_x(u_1,\ldots,u_n)>0$」．\par\textbf{修正案：}(2)を(3)とする． \\[3pt]
+\hline
+\hypertarget{MATS-0247}{}\textbf{MATS-0247}\par 印刷253頁，補題証明の末尾． & \textbf{スカラー行列のサイズ}\par\textbf{原記載：}$X=x1_n,Y=y1_l$とおく．\par\textbf{修正案：}$1_l$を$1_m$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0248}{}\textbf{MATS-0248}\par 印刷254頁，定理4証明の後半． & \textbf{計量を定義する接空間の基点}\par\textbf{原記載：}$T_s(o)=p$となる$G$の元$s$をとり「$T_s(M)$における内積」を定義し，式の条件も$u,v\in T_s(M)$とする．\par\textbf{修正案：}2か所の$T_s(M)$を$T_p(M)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0286}{}\textbf{MATS-0286}\par 印刷254頁，定理4証明の最終文． & \textbf{不変リーマン計量の構成の参照例番号}\par\textbf{原記載：}「$\S1$，例3と全く同じように証明することができる」．\par\textbf{修正案：}「$\S1$，例5と同様に」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0250}{}\textbf{MATS-0250}\par 印刷256頁，式(3)後の点列$q_k$の指定． & \textbf{座標近傍の共通部分}\par\textbf{原記載：}$q_k$を「$U\cap V$の点」とする．\par\textbf{修正案：}$U\cap V$を$U\cap U'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0251}{}\textbf{MATS-0251}\par 印刷256頁，式(4)の直前． & \textbf{偏微分の分子のバーとプライム}\par\textbf{原記載：}$(\partial x'^n/\partial x^n)_q>0$．\par\textbf{修正案：}$x'^n$を$\bar x^n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0252}{}\textbf{MATS-0252}\par 印刷257頁，冒頭． & \textbf{正規直交基の末尾の添字}\par\textbf{原記載：}$v_1,\ldots,v_{p-1}$を$\partial D$の接空間の正の正規直交基とする．\par\textbf{修正案：}$v_{p-1}$を$v_{n-1}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0254}{}\textbf{MATS-0254}\par 印刷257頁，切平面の符号の議論の末尾． & \textbf{Lの引数の文字の配置}\par\textbf{原記載：}「ゆえに$y^1L(,\ldots,y^n)>0$．」\par\textbf{修正案：}$L(y^1,\ldots,y^n)>0$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0255}{}\textbf{MATS-0255}\par 印刷258頁，最初の行列式の計算の結論． & \textbf{一次式Lに代入する最後の座標の文字}\par\textbf{原記載：}$L(y^1(q),\ldots,g^n(q))=-\sqrt{G(p)}<0$．\par\textbf{修正案：}$g^n(q)$を$y^n(q)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0256}{}\textbf{MATS-0256}\par 印刷260頁，冒頭の最後の場合分け． & \textbf{空集合の記号と零の混在}\par\textbf{原記載：}$U_\alpha\cap\partial D\ne0$．\par\textbf{修正案：}$0$を空集合記号$\phi$または$\varnothing$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0257}{}\textbf{MATS-0257}\par 印刷260頁，上半，$\int_Dd\omega$を境界の係数で表した最初の式． & \textbf{積分表示の閉じ括弧の欠落}\par\textbf{原記載：}$-\int\cdots\int[a_n(x^1,\ldots,x^{n-1},0)\cdot dx^1\cdots dx^{n-1}$．\par\textbf{修正案：}不要な開き角括弧$[$を除く，または係数の直後に閉じ角括弧を補う． \\[3pt]
+\hline
+\hypertarget{MATS-0258}{}\textbf{MATS-0258}\par 印刷260頁，上半，局所座標を境界に制限する説明． & \textbf{境界で零となる座標の添字}\par\textbf{原記載：}「$U_\alpha\cap\partial D$では$x_n=0$」．\par\textbf{修正案：}$x_n$を$x^n$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0260}{}\textbf{MATS-0260}\par 印刷261頁，例2のストークスの定理を適用する積分式． & \textbf{実部・虚部の積分の添字}\par\textbf{原記載：}$\int_Cf(z)dz=\int_C\omega_1+i\int_C\omega_i$．\par\textbf{修正案：}$\omega_i$を$\omega_2$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0262}{}\textbf{MATS-0262}\par 262頁，定理3の直前，「ゆえに」で始まる文． & \textbf{集合への非所属の記号}\par\textbf{原記載：}$\omega\ne B^n(M)$．\par\textbf{修正案：}$\omega\notin B^n(M)$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0287}{}\textbf{MATS-0287}\par 印刷263頁，§5問2． & \textbf{向き二重被覆を利用する演習の参照問題番号}\par\textbf{原記載：}「$\S1$，問4における多様体$\widetilde M$を利用して証明せよ」．\par\textbf{修正案：}「$\S1$，問5における」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0263}{}\textbf{MATS-0263}\par 264頁，上部，式（2）の直後の証明，第2表示式． & \textbf{基本形式のプライム欠落}\par\textbf{原記載：}$\displaystyle\int_M f^*\eta=\beta\int_M f^*\omega=\deg(f)\cdot\beta$．\par\textbf{修正案：}中央の$\omega$を$\omega'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0264}{}\textbf{MATS-0264}\par 264頁，下部，「ゆえにまた$f^{-1}(q)$の各点」で始まる文，立方座近傍$V$を導入する箇所． & \textbf{互いに素な近傍の非等号}\par\textbf{原記載：}$p\ne p'$ならば$U_p\cap U_{p'}\ne\phi$．\par\textbf{修正案：}$U_p\cap U_{p'}=\phi$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0265}{}\textbf{MATS-0265}\par 265頁，問2，第1文． & \textbf{ホモトピーの写像先}\par\textbf{原記載：}「$[0,1]\times M$から$M$への連続写像$f(t,p)$」．\par\textbf{修正案：}写像先を$M'$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0266}{}\textbf{MATS-0266}\par 267頁，定理2，式（6）の後にある$i_X\Omega$の表示式． & \textbf{内部積の符号}\par\textbf{原記載：}$\displaystyle i_X\Omega=\sum_{i,j=1}^n(-1)^i\sqrt G\,g^{ij}\frac{\partial f}{\partial x^j}dx^1\wedge\cdots\wedge dx^{i-1}\wedge dx^{i+1}\wedge\cdots\wedge dx^n$．\par\textbf{修正案：}$(-1)^i$を$(-1)^{i-1}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0269}{}\textbf{MATS-0269}\par 269頁，楕円型微分作用素を定義した段落の直後． & \textbf{ラプラシアンの座標式の参照番号}\par\textbf{原記載：}「（8）よりラプラシアン$\Delta$は……」．\par\textbf{修正案：}（8）を（9）とする． \\[3pt]
+\hline
+\hypertarget{MATS-0270}{}\textbf{MATS-0270}\par 269頁，脚注，第1文． & \textbf{脚注の「対応」の文の脱落}\par\textbf{原記載：}「$M$の各点$p$にたいし$T_p^*(M)$上の対称双一次形式$A_p$を対応$A$を$M$上の2次対称反変テンソルという」．\par\textbf{修正案：}「$A_p$を対応させる対応$A$を」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0271}{}\textbf{MATS-0271}\par 270頁，系1，$M_0,m_0$を導入する文． & \textbf{最小値を「最大値」と記す箇所}\par\textbf{原記載：}「最大値$M_0$および最大値$m_0$」．\par\textbf{修正案：}2番目の「最大値」を「最小値」とする． \\[3pt]
+\hline
+\hypertarget{MATS-0272}{}\textbf{MATS-0272}\par 271頁，上部，$F_1,F_0$を定義した直後，式（10）の前． & \textbf{球と球面の記号}\par\textbf{原記載：}$B_1=F_1\cup F_0$．\par\textbf{修正案：}$S_1=F_1\cup F_0$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0273}{}\textbf{MATS-0273}\par 271頁，中段，$L(g)$の表示式，最後の和の項． & \textbf{$L(g)$の係数の文字}\par\textbf{原記載：}$\displaystyle-2\alpha\sum_i(b^ix^i+g^{ii})$．\par\textbf{修正案：}$g^{ii}$を$a^{ii}$とする． \\[3pt]
+\hline
+\hypertarget{MATS-0274}{}\textbf{MATS-0274}\par 印刷273頁，参考書［6］． & \textbf{Sternbergの文献の著者と書名の区切り}\par\textbf{原記載：}S. Sternberg Lectures on differential geometry, Prentice-Hall. N. J. 1964.\par\textbf{修正案：}著者S. Sternbergと書名Lecturesの間にコンマを加える． \\[3pt]
+\hline
+\hypertarget{MATS-0275}{}\textbf{MATS-0275}\par 印刷275頁，右段，$C^r$級関数の項． & \textbf{$C^r$級関数の英語の綴り}\par\textbf{原記載：}fuuction of class $C^r$　15．\par\textbf{修正案：}fuuctionをfunctionとする． \\[3pt]
+\hline
+\hypertarget{MATS-0276}{}\textbf{MATS-0276}\par 印刷279頁，左段N，内部自己同型の項． & \textbf{内部自己同型の英訳内の空白}\par\textbf{原記載：}inner automor phism　171．\par\textbf{修正案：}automor phismをautomorphismとする． \\[3pt]
+\hline
+\hypertarget{MATS-0277}{}\textbf{MATS-0277}\par 印刷279頁，左段N，$n$次元数空間の項． & \textbf{$n$次元数空間の英訳}\par\textbf{原記載：}$n$-dimension number space　13．\par\textbf{修正案：}$n$-dimensional number spaceとする． \\[3pt]
+\hline
+\hypertarget{MATS-0278}{}\textbf{MATS-0278}\par 印刷280頁，左段，正則な可微分曲線の項． & \textbf{正則な可微分曲線の英語の綴り}\par\textbf{原記載：}regular differentiable curbe　40．\par\textbf{修正案：}curbeをcurveとする． \\[3pt]
+\hline
+\end{longtable}
+\normalsize
+\clearpage\section{数学的疑義と解決策}\label{part:math}
+数学的な成立条件・推論・証明の手順に検討を要する項目を集める．単純な誤植と異なり，反例で原文の不足を示した上で修復するもの，解釈を限定して成立させるもの，正しい結論の説明を補うものを含む．
+\small\begin{longtable}{@{}p{.14\linewidth}p{.82\linewidth}@{}}
+\toprule 原本頁 & 数学的疑義・補足\\\midrule\endfirsthead
+\toprule 原本頁 & 数学的疑義・補足\\\midrule\endhead
+\bottomrule\endlastfoot
+4頁 & \hyperref[math:MATS-0001]{MATS-0001：局所連結性の定義における量化の不足候補} \\
+6頁 & \hyperref[math:MATS-0007]{MATS-0007：「任意の体」と標数2の場合の注意} \\
+8頁 & \hyperref[math:MATS-0004]{MATS-0004：部分空間の条件に非空性が明記されていない} \\
+9頁 & \hyperref[math:MATS-0005]{MATS-0005：同値類の特徴付けに非空性が明記されていない} \\
+13頁 & \hyperref[math:MATS-0008]{MATS-0008：エルミット形式の定義に加法性がない} \\
+17頁 & \hyperref[math:MATS-0009]{MATS-0009：微分の一様評価における$v=0$} \\
+19頁 & \hyperref[math:MATS-0011]{MATS-0011：逐次近似の評価で$s=0$を含む場合} \\
+37頁 & \hyperref[math:MATS-0026]{MATS-0026：閉区間上の可微分曲線の定義と端点} \\
+39頁 & \hyperref[math:MATS-0027]{MATS-0027：接空間の次元定理の証明中の二次剰余項} \\
+42頁 & \hyperref[math:MATS-0028]{MATS-0028：曲線長による距離と連結性の仮定} \\
+44頁 & \hyperref[math:MATS-0031]{MATS-0031：正常値の定義と臨界値の併存} \\
+46頁 & \hyperref[math:MATS-0033]{MATS-0033：補題1の主小行列を正則とするための準備} \\
+52頁 & \hyperref[math:MATS-0039]{MATS-0039：測度零の像を扱う補題2の可算性} \\
+54頁 & \hyperref[math:MATS-0041]{MATS-0041：Sardの証明中の薄片の体積評価の定数} \\
+62頁 & \hyperref[math:MATS-0052]{MATS-0052：Whitneyの定理のパラコンパクト性と可算性} \\
+70頁 & \hyperref[math:MATS-0056]{MATS-0056：一般の写像に関係するベクトル場の一意性} \\
+70頁 & \hyperref[math:MATS-0057]{MATS-0057：問2の任意のベクトル場の射影の存在} \\
+74頁 & \hyperref[math:MATS-0279]{MATS-0279：局所群の定義と完備性判定に必要な積分曲線条件} \\
+78頁 & \hyperref[math:MATS-0063]{MATS-0063：交換子積の極限表示の証明中のJacobianの評価点} \\
+80頁 & \hyperref[math:MATS-0066]{MATS-0066：接ベクトルの大域的延長で用いる切断関数の台} \\
+81頁 & \hyperref[math:MATS-0067]{MATS-0067：無限小運動の証明の恒等式(5)} \\
+81頁 & \hyperref[math:MATS-0068]{MATS-0068：$\partial_t f=-Xf$から零を導く一意性の説明} \\
+86頁 & \hyperref[math:MATS-0073]{MATS-0073：局所コンパクトかつ$\sigma$コンパクトな空間の補題の範囲} \\
+89頁 & \hyperref[math:MATS-0077]{MATS-0077：局所微分同型の逆像の成分を単射とする推論} \\
+100頁 & \hyperref[math:MATS-0086]{MATS-0086：実接ベクトルの長さの式の係数} \\
+110頁 & \hyperref[math:MATS-0093]{MATS-0093：正則な流れの証明末の方程式の種類} \\
+135頁 & \hyperref[math:MATS-0109]{MATS-0109：0次コホモロジーの次元と連結成分の有限性} \\
+135頁 & \hyperref[math:MATS-0110]{MATS-0110：閉形式と境界形式の積の原始形式の符号} \\
+142頁 & \hyperref[math:MATS-0114]{MATS-0114：一次独立性を失った場合の核の次元の不等号} \\
+152頁 & \hyperref[math:MATS-0133]{MATS-0133：共役関数の微分と複素接ベクトルの共役} \\
+153頁 & \hyperref[math:MATS-0135]{MATS-0135：正則型成分への射影の係数} \\
+158頁 & \hyperref[math:MATS-0147]{MATS-0147：切片とコンパクト集合の交わりを有限とする推論} \\
+162頁 & \hyperref[math:MATS-0284]{MATS-0284：一般の位相群の中心を閉とする際の分離条件} \\
+167頁 & \hyperref[math:MATS-0156]{MATS-0156：群作用の核の閉性に必要な分離条件} \\
+170頁 & \hyperref[math:MATS-0158]{MATS-0158：特殊直交群の球面への推移性の次元} \\
+191頁 & \hyperref[math:MATS-0170]{MATS-0170：複素リイ群構造に関する逆命題の連結性} \\
+195頁 & \hyperref[math:MATS-0173]{MATS-0173：非連結成分へ移す概複素構造の式の型} \\
+201頁 & \hyperref[math:MATS-0178]{MATS-0178：左不変ベクトル場の行列積の順序} \\
+202頁 & \hyperref[math:MATS-0181]{MATS-0181：コンパクト性に用いる閉集合の周囲空間} \\
+205頁 & \hyperref[math:MATS-0183]{MATS-0183：商空間の局所切断の逆像の等式} \\
+212頁 & \hyperref[math:MATS-0189]{MATS-0189：粗な部分群の階数ゼロの場合} \\
+215頁 & \hyperref[math:MATS-0193]{MATS-0193：座標原点と単位元の対応の明記} \\
+216頁 & \hyperref[math:MATS-0194]{MATS-0194：座標変換を導く逆元の取り違え} \\
+219頁 & \hyperref[math:MATS-0202]{MATS-0202：補題2の零ベクトルの場合} \\
+223頁 & \hyperref[math:MATS-0285]{MATS-0285：殆んど効果的な商空間の判定と非連結成分} \\
+236頁 & \hyperref[math:MATS-0222]{MATS-0222：定理2の局所微分形式の非零条件} \\
+247頁 & \hyperref[math:MATS-0237]{MATS-0237：左不変最高次形式の非零条件} \\
+248頁 & \hyperref[math:MATS-0238]{MATS-0238：右移動で積分を変換するときの係数の逆数} \\
+249頁 & \hyperref[math:MATS-0242]{MATS-0242：反転による形式の引き戻しと向きの符号} \\
+252頁 & \hyperref[math:MATS-0246]{MATS-0246：実グラスマン多様体の端の場合の範囲} \\
+255頁 & \hyperref[math:MATS-0249]{MATS-0249：正の境界座標を選ぶ際の1次元の場合} \\
+257頁 & \hyperref[math:MATS-0253]{MATS-0253：領域が接平面の一方の半空間内にあるとの主張} \\
+260頁 & \hyperref[math:MATS-0259]{MATS-0259：問1のヒントの符号係数} \\
+261頁 & \hyperref[math:MATS-0261]{MATS-0261：コーシーの定理へのストークスの適用の正則性} \\
+264頁 & \hyperref[math:MATS-0288]{MATS-0288：写像度の証明における正常値の共通近傍の全逆像} \\
+268頁 & \hyperref[math:MATS-0267]{MATS-0267：$\Delta(f^2)$の係数2欠落} \\
+268頁 & \hyperref[math:MATS-0268]{MATS-0268：定数性の結論と連結性} \\
+\end{longtable}\normalsize
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0001：局所連結性の定義における量化の不足候補}\label{math:MATS-0001}
+\noindent\textbf{原本位置：}第I章\S1 C末尾，印刷4頁・下から2--1行．
+
+\paragraph{原記載}「位相空間$X$の各点$x$にたいし，$x$の近傍$U$で連結なものが存在するとき，$X$は局所連結であるという．」直後に「$X$が局所連結ならば，$X$の各連結成分は$X$の開集合である．」と続く．印刷2頁脚注では近傍を開集合とする約束がある．
+
+\paragraph{数学的疑義}定義の条件・量化の脱落候補．
+
+\paragraph{解決策}「位相空間$X$の各点$x$と$x$の任意の近傍$V$にたいし，$V$に含まれる$x$の連結な近傍$U$が存在するとき」とする．同値な案は「各点に連結な開近傍からなる基本近傍系がある」．
+
+\paragraph{根拠・修復の確認}\par\textbf{条件を区別する反例．}
+平面の部分空間
+\[
+D=([0,1]\times\{0\})\cup(\{0\}\times[0,1])
+ \cup\bigcup_{n=1}^{\infty}(\{1/n\}\times[0,1])
+\]
+を考える．各縦線分は底辺$[0,1]\times\{0\}$と交わるので$D$は弧状連結であり，原文の条件は$U=D$で満たす．一方，$p=(0,1/2)$の開近傍$V=D\cap(\mathbb R\times(1/4,3/4))$には$p$の連結な開近傍が含まれない．実際，$p$の任意の開近傍$U\subset V$は十分大きな$n$について$(1/n,1/2)$を含む．$U$が連結なら第1座標への射影も連結だが，その像は$\{0\}\cup\{1/n:n\ge1\}$の部分集合であり，$0$と正の点を含む．この像は実数の区間ではないため連結でなく，矛盾する．したがって$D$は通常の意味では局所連結でない．
+\par\textbf{直後の結論について．}
+原文の弱い条件からも，各連結成分が開であるという直後の結論は従う．各点の連結な開近傍はその点の連結成分に含まれ，各成分はそのような開近傍の和である．従って，この定義上の不足を理由に直後の命題を誤りと判定しない．
+
+\textbf{根拠：}原文の条件なら，連結空間では$U=X$とするだけで満たされる．しかし連結空間がすべて通常の意味で局所連結とは限らない．上の具体例で両条件を区別できる．
+
+\paragraph{判断}原文の条件は通常の局所連結性より弱い．通常の定義を意図したか，後続でどの強さを用いるかは未確定のため，条件補足候補として保留する．直後の連結成分が開であるとの結論は原条件でも成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0007：「任意の体」と標数2の場合の注意}\label{math:MATS-0007}
+\noindent\textbf{原本位置：}印刷6頁\S2冒頭の括弧書き「$K$を任意の体と考えてよい」と，12頁の交代双一次形式の定義・問8・問9．
+
+\paragraph{原記載}「$K$を任意の体と考えてよい」
+
+\paragraph{数学的疑義}一般化の範囲に関する条件補足．主設定$K=R$または$C$での誤りではない．
+
+\paragraph{解決策}任意の体への拡張について，少なくともこの部分では「標数2でない体」と制限する．または標数2の場合を別に論じる．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}原文では交代を$\alpha(a,b)=-\alpha(b,a)$で定義する．$K=\mathbb F_2$，$V=K$，$\beta(x,y)=xy$とすると，$-1=1$により$\beta$は対称かつ原文の意味で交代である．従って$0=0+0=\beta+\beta$と対称部分・交代部分への分解が一意でない（問8）．さらに$\beta$は正則で$\dim V=1$だから，問9の偶数次元という結論も成り立たない．標数2でなければ$\alpha$を$\frac12(\alpha+{}^t\alpha)+\frac12(\alpha-{}^t\alpha)$と分解でき，問題は生じない．
+
+\paragraph{判断}実数体・複素数体という本書の主設定では問題はない．印刷6頁の「任意の体」への一般化には標数の制限が必要である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0004：部分空間の条件に非空性が明記されていない}\label{math:MATS-0004}
+\noindent\textbf{原本位置：}第I章\S2 C冒頭，印刷8頁，条件(3.1),(3.2)および直後の問2．
+
+\paragraph{原記載}「$V$の部分集合$W$が次の条件をみたすとき，$W$を$V$の部分ベクトル空間，または簡単に部分空間とよぶ．」条件は加法閉性とスカラー倍閉性だけである．
+
+\paragraph{数学的疑義}定義の条件不足（空集合を排除する条件）．
+
+\paragraph{解決策}「空でない部分集合$W$」とする．または「$0\in W$」を条件に加える．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$W=\varnothing$は(3.1),(3.2)をともに空虚に満たすが，印刷6頁のベクトル空間の公理(1.3)にある零ベクトルの存在を満たさない．よって記載された条件だけから問2の結論は従わない．$W\ne\varnothing$を加えれば，$w\in W$を一つ取り，(3.2)で$\lambda=0$として$0\in W$，$\lambda=-1$として$-w\in W$を得る．残りの公理は$V$から継承するので修正後の問2は成立する．
+
+原文では非空性を暗黙に仮定した可能性もある．
+
+\paragraph{判断}空集合が記載条件を満たすため，非空性の明記が必要である．非空性を暗黙に含む「部分空間」の語義を意図した可能性は残る．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0005：同値類の特徴付けに非空性が明記されていない}\label{math:MATS-0005}
+\noindent\textbf{原本位置：}第I章\S2 D冒頭の続き，印刷9頁，第1段落．
+
+\paragraph{原記載}「$M$の部分集合$C$で次の性質をもつものを，同値関係$\sim$に関する一つの同値類とよぶ」．続く条件は，$a,b\in C$なら$a\sim b$，$a\in C,b\notin C$なら$a\not\sim b$という2条件である．
+
+\paragraph{数学的疑義}条件補足候補．
+
+\paragraph{解決策}「空でない部分集合$C$」とする．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}空集合は記載された両条件を空虚に満たす．一方，反射律により$C_a=\{b\in M:a\sim b\}$は$a$を含み非空である．従って原文の条件のままでは「逆に任意の同値類$C$をとり，$a\in C$とすると，$C=C_a$」という次の説明で任意の同値類の元を選ぶことができない．非空性を補えば任意の$a\in C$について条件から$C=C_a$が従う．
+
+\paragraph{判断}非空性を補えば説明が成立する．通常の「同値類」の語義に非空性を含めた省略とも読めるため，定義の明確化として扱う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0008：エルミット形式の定義に加法性がない}\label{math:MATS-0008}
+\noindent\textbf{原本位置：}第I章\S2 Eの続き，印刷13頁上半分，「つぎに$V$を$C$上のベクトル空間とする」から「エルミット形式とよぶ」まで．
+
+\paragraph{原記載}写像$h:V\times V\to C$に対して，共役対称性$h(x,y)=\overline{h(y,x)}$と斉次性$h(\lambda x,y)=\lambda h(x,y)$の2条件だけを列挙している．
+
+\paragraph{数学的疑義}定義の条件脱落．
+
+\paragraph{解決策}$h(x+x',y)=h(x,y)+h(x',y)$を条件に加える．共役対称性から第2変数の加法性も従い，2条件目と合わせて通常の半双線型性になる．
+
+\paragraph{根拠・修復の確認}\par\textbf{用語を誤植としない確認．}
+印刷12頁では「内積」を正則な対称双一次形式として定義し，正値性を別に要求する「正値内積」と区別している．これは本書内の用語の約束であり，現代の一部の用語と異なることだけを理由に，正値性の脱落と判定しない．
+
+\textbf{根拠・反例：}$V=\mathbb C^2$とし，$B(x,y)=x_1\overline{y_1}+x_2\overline{y_2}$，$N(x)=B(x,x)$とおく．両変数が非零のとき
+\[
+H(x,y)=B(x,y)\frac{|B(x,y)|^2}{N(x)N(y)},
+\]
+どちらかが零なら$H(x,y)=0$とする．この$H$は共役対称であり，任意の$\lambda\in\mathbb C$に対して$H(\lambda x,y)=\lambda H(x,y)$を満たす（$\lambda=0$は定義から，それ以外は分子・分母の$|\lambda|^2$が相殺する）．しかし標準基を$e_1,e_2$とすると
+\[
+H(e_1,e_1)=1,\quad H(e_2,e_1)=0,\quad H(e_1+e_2,e_1)=\tfrac12,
+\]
+なので加法性がない．従って原文の2条件だけではエルミット形式にならない．さらに$H(x,x)=N(x)>0$（$x\ne0$）なので，後の正値性を加えてもこの不足は補えない．
+
+問14自体は原文の2条件から成立するため，この反例によって否定されない．
+
+\paragraph{判断}記載された条件だけでは加法性が従わず，正値性を加えても不足は解消しない．加法性を補う必要がある．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0009：微分の一様評価における$v=0$}\label{math:MATS-0009}
+\noindent\textbf{原本位置：}第I章\S4補題1，印刷17頁の主張の別行不等式および証明末尾．
+
+\paragraph{原記載}$|(d\varphi)_p(v)-(d\varphi)_q(v)|<\varepsilon|v|$が「任意の$v\in R^n$」に対して成立する，とある．
+
+\paragraph{数学的疑義}厳密不等号の誤り．
+
+\paragraph{解決策}任意の$v$を保つなら$<$を$\leqq$にする．または$v\ne0$を加えて厳密不等号を保つ．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}線型写像の$0$での値は$0$だから，$v=0$では左右とも$0$になり，原文の$0<0$は成立しない．非零$v$では各偏微分の差を$\varepsilon/n$未満に抑える証明が厳密不等式を与え，零ベクトルを含めると非厳密不等式で統一できる．
+
+\textbf{参照：}文献\cite{paper2017}も原本印刷17頁の同じ不等式を挙げる．同文献の対象版は第37版3刷で，本表の原本とは異なる．
+
+\paragraph{判断}$v=0$を含む全称命題では非厳密不等号が必要である．非零ベクトルに限れば原証明の厳密不等式が成立する．
+
+\noindent 参考：\cite{paper2017}．
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0011：逐次近似の評価で$s=0$を含む場合}\label{math:MATS-0011}
+\noindent\textbf{原本位置：}第I章\S4定理1の証明，印刷19頁下部の$|p_k|$の評価と，20頁冒頭の同評価の再引用．
+
+\paragraph{原記載}$|p_k|\leqq\sum_{l=0}^{k-1}(1/2)^l|s|<2|s|$．20頁でも$|p_k|<2|s|$とする．
+
+\paragraph{数学的疑義}端点での厳密不等号の誤り．
+
+\paragraph{解決策}$2|s|$の前の$<$を$\leqq$とし，20頁の再引用も同様とする．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$s=0$は開立方体$Q(0;r/2)$に含まれる．この場合$g(0)=0$と漸化式より全ての$p_k=0$なので，$|p_k|<2|s|$は$0<0$となる．一方$|p_k|\leqq2|s|<r$は全ての$s\in Q(0;r/2)$で成立し，$p_k\in Q(0;r)$を得るために十分である．
+
+\paragraph{判断}$s=0$を含めるため非厳密不等号へ直す．この訂正で立方体内に点列が収まるという証明の結論は保たれる．文献\cite{paper2017}にも印刷19頁の同位置の指摘がある．
+
+\noindent 参考：\cite{paper2017}．
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0026：閉区間上の可微分曲線の定義と端点}\label{math:MATS-0026}
+\noindent\textbf{原本位置：}印刷37頁，注意の次の段落，第2--3行．
+
+\paragraph{原記載}開区間上の可微分写像$\varphi'$について「$a<t<b$のときには$\varphi(t)=\varphi'(t)$となるとき，$\varphi$を閉区間$[a,b]$で定義された可微分曲線とよぶ．」
+
+\paragraph{数学的疑義}数学的疑義：端点の条件不足候補．
+
+\paragraph{解決策}$a<t<b$を$a\leqq t\leqq b$にする．または，$\varphi$を最初から連続写像と仮定すれば，端点での一致は連続性から従う．前者は通常の「開近傍への滑らかな延長」の定義を直接表す．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$M=R$，$[a,b]=[0,1]$とし，$\varphi(t)=0$ $(0<t\leqq1)$，$\varphi(0)=1$とする．全実数上の定数写像$\varphi'(t)=0$は原文の一致条件を満たすが，$\varphi$は$0$で連続ですらない．直前には閉区間からの「写像」としか指定されておらず，連続性は明示されていない．直後の区分的可微分曲線の定義には「連続写像」と明記されている．
+
+\paragraph{判断}明記された条件だけでは端点での連続性が保証されない．連続性を暗黙に仮定した可能性は残るが，端点を含む一致条件を明記すれば定義が明確になる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0027：接空間の次元定理の証明中の二次剰余項}\label{math:MATS-0027}
+\noindent\textbf{原本位置：}印刷39頁，上半分の二つの展開式．
+
+\paragraph{原記載}第1式の剰余項は$\sum_{i,j}G_{ij}(x(p))(u^i-x^i(p))(u^j-x^j(p))$．続く$f$の展開にも$G_{ij}(x^1(p),\cdots,x^n(p))$とある．
+
+\paragraph{数学的疑義}数学的疑義・引数の誤植候補．
+
+\paragraph{解決策}第1式では$G_{ij}(u)$，第2式では$G_{ij}(x^1,\cdots,x^n)$とする．$G_{ij}$は$p$の十分小さな座標近傍で滑らかな剰余係数であると補足する．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}原文の$G_{ij}(x(p))$は固定した$p$に依存する定数なので，展開式の右辺は$u$の二次以下の多項式になる．一般の滑らかな$F$について等式は成立しない．$n=1$，$x(p)=0$，$F(u)=u^3$では，原式は$u^3=G_{11}(0)u^2$を近傍全体で要求し不可能である．正しい滑らかな剰余係数は，凸な小座標近傍で$a=x(p)$として
+\[G_{ij}(u)=\int_0^1(1-t)\,\frac{\partial^2F}{\partial u^i\partial u^j}(a+t(u-a))\,dt\]
+とおけば得られる．この修正後の剰余項へ導分$v$を作用させると，積の法則により各項は$0$となる．したがって続く$v(f)=\sum_i(\partial f/\partial x^i)(p)v(x^i)$という結論はこの修正で得られる．
+
+\paragraph{判断}固定点を引数とする原式は一般に成立しない．剰余係数を変数の滑らかな関数に直せば，後続の接空間の次元に関する計算は成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0028：曲線長による距離と連結性の仮定}\label{math:MATS-0028}
+\noindent\textbf{原本位置：}印刷42頁「注意」段落．関連：印刷24頁の位相多様体の定義，27頁の可微分多様体の定義．
+
+\paragraph{原記載}リーマン多様体$M$の二点$p,q$に対し，両点を結ぶ区分的可微分曲線の長さの下限$d(p,q)$をとると「$d$は距離になる」．
+
+\paragraph{数学的疑義}数学的疑義：連結性の仮定不足候補．
+
+\paragraph{解決策}この注意では$M$を連結と仮定する，または$p,q$を同じ連結成分に限り，成分ごとに距離が定義されると述べる．成分間の値を$+\infty$とするなら，通常の有限値距離ではなく拡張距離である旨を明記する．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}本書の24頁・27頁の多様体の定義は連結性を要求していない．$M=R\sqcup R$に各成分の標準計量を入れ，$p,q$を異なる成分にとると，両点を結ぶ連続曲線すら存在せず$C_{p,q}=\varnothing$となる．その長さの下限は実数としては定まらず，拡張実数の約束では$+\infty$である．一方，連結な多様体では，固定点と区分的滑らかな曲線で結べる点の集合とその補集合が局所座標によりともに開となり，連結性から全体となる．有限個の滑らかな区間片の長さは有限なので，同じ成分内では有限値性を得る．
+
+\paragraph{判断}連結性を補うか成分ごとの距離に限定すれば，有限値の距離として定義できる．本書の一般の多様体の定義には連結性が含まれないため，適用範囲の明記が必要である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0031：正常値の定義と臨界値の併存}\label{math:MATS-0031}
+\noindent\textbf{原本位置：}印刷44頁，定義1．
+
+\paragraph{原記載}「$(df)_p\ne0$なる点$p$を$f$の正常点，$f(p)$を$f$の正常値」．一方，臨界点の像を臨界値とする．
+
+\paragraph{数学的疑義}数学的疑義・用語定義の差異（採否保留）．
+
+\paragraph{解決策}通常のregular valueの意味なら「実数$c$が$f$の正常値であるとは，$f(p)=c$となるすべての点$p$が正常点であること」と定義する．原文の独自定義を意図したのであれば，この変更は単純な誤植訂正ではない．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}正常点の像に臨界点の像が重なる場合がある．$f:R\to R$，$f(x)=x^3-3x$では$f(-1)=f(2)=2$，$f'(-1)=0$，$f'(2)=9\ne0$である．原定義では$2$が臨界値であると同時に正常値となる．通常の定義では$2$は正常値ではない．また像に含まれない値は通常は空虚に正常値だが，原定義では正常点の像でない．
+
+印刷51頁の写像に対する正常値の定義は「臨界値でない値」であり，各原像点が正常点である条件が説明され，像の外の値も含む．
+
+\paragraph{判断}通常の正常値の定義および印刷51頁の写像に対する定義と一致しない．関数に対する独自の用語を意図した可能性が残り，著者の意図は未確定のため保留する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0033：補題1の主小行列を正則とするための準備}\label{math:MATS-0033}
+\noindent\textbf{原本位置：}印刷46頁，補題1の証明，下半分のii′)の直後．
+
+\paragraph{原記載}$(n-1,n)$型行列の階数が$n-1$なので，「$(n-1)$次行列$A'(0)=(a_{ji}(0))_{2\leqq i,j\leqq n}$の行列式は0でないとしても一般性を失わない」．
+
+\paragraph{数学的疑義}証明の説明補足候補（採否保留）．
+
+\paragraph{解決策}階数の事実のみから主小行列の正則性を結論せず，まず定数の基底変換で$A(0)$を対角化する準備を加える．直前45頁の対称正則形式の標準形を利用できる．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$A=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$は正則対称で下の1行の階数は1だが，$A'=(0)$は正則でない．添字の同時置換だけでも直らない．一方，実対称正則行列$A(0)$は定数正則行列$P$により${}^tP A(0)P$を非零対角成分の対角行列にでき，その右下主小行列は正則になる．$B(u)={}^tP A(u)P$に証明を適用し，その変換行列$S(u)$から$T(u)=P S(u)$と戻せばよいので，補題自体を否定する反例ではない．
+
+\paragraph{判断}定数基底変換を「一般性を失わない」に含めた意図なら，結論は正しく説明の補足で足りる．単純誤植とは区別する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0039：測度零の像を扱う補題2の可算性}\label{math:MATS-0039}
+\noindent\textbf{原本位置：}印刷52頁，補題2とその証明．関連：24頁の多様体の定義，53頁冒頭のSardの定理の仮定．
+
+\paragraph{原記載}任意の可微分写像$\varphi:M^n\to M'^m$について，1) $n<m$なら$\varphi(M)$は測度0，2) $n=m$なら測度0の集合の像も測度0，と述べる．可算基の仮定は補題2にはない．
+
+\paragraph{数学的疑義}数学的疑義：大域化のための可算性の仮定不足候補．
+
+\paragraph{解決策}補題2で$M$が可算基（または可算座標被覆）をもつと仮定する．$M'$の可算基はこの結論のためには不要．
+
+\paragraph{根拠・修復の確認}\textbf{根拠・2)の反例：}$M=\bigsqcup_{r\in R}R_r$を非可算個の実直線の位相的直和とし，$M'=R$，$\varphi(r,x)=r$とする．これは本書24・27頁の定義を満たす1次元多様体上の滑らかな写像である．$A=\{(r,0):r\in R\}$は各成分で1点なので局所的に測度0であり，任意の座標近傍でも測度0となる（その座標像は第二可算なので可算個の成分しか交わらない）．しかし$\varphi(A)=R$は測度0でない．
+
+\textbf{根拠・1)の反例：}$M=\bigsqcup_{z\in R^2}R_z$，$M'=R^2$，$\varphi(z,x)=z$とすると，$n=1<m=2$であるのに像は$R^2$全体．各成分で定数なので滑らかである．
+
+\textbf{修正後の理由：}可算座標被覆があれば，さらに逆像で細分した可算個の座標領域上で局所結果を用い，測度0集合の可算和で大域化できる．Sardの定理自体には53頁冒頭で$M$が可算基をもつ仮定が明記されているので，この項目はその定理を否定するものではない．
+
+\paragraph{判断}明示された仮定だけでは反例がある．可算座標被覆を仮定すれば局所結果を大域化できる．印刷53頁のSardの定理には可算基の仮定が既にあり，同定理への反例ではない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0041：Sardの証明中の薄片の体積評価の定数}\label{math:MATS-0041}
+\noindent\textbf{原本位置：}印刷54頁，上半分の$\bar Q(\varphi(x);\varepsilon L')\cap D_x$の体積と定数$A$の指定．
+
+\paragraph{原記載}13頁では$Q(p;r)=\{q:|q-p|_\infty<r\}$とする．54頁では$\bar Q(\varphi(x);\varepsilon L\prime)$の直径を$\sqrt n\,\varepsilon L\prime$とし，超平面から両側各$h=b(\sqrt n\,\varepsilon)\sqrt n\,\varepsilon$の薄片との交差の体積を$A\varepsilon^nb(\sqrt n\,\varepsilon)$より小とする（$A=n^{n/2}(L\prime)^{n-1}$）．
+
+\paragraph{数学的疑義}立方体の半巾の記法を保つと直径は$2\sqrt n\,\varepsilon L\prime$である．また薄片の厚さは$h$ではなく$2h$である．したがって，記載された交差集合の幾何だけから原文の定数を出す説明は不足している．Sardの定理そのものの反例ではない．
+
+\paragraph{解決策}定数を鋭く定める必要はないので，$C=2^n n^{n/2}(1+L\prime)^{n-1}$とおき，体積の評価を$\leqq C\varepsilon^nb(\sqrt n\,\varepsilon)$に替える．以後もこの定数と非厳密不等号で進めれば，$m\to\infty$で右辺が0となる結論を保てる．
+
+\paragraph{根拠・修復の確認}印刷13頁の半巾の定義に従い，立方体の直径を$d=2\sqrt n\,\varepsilon L\prime$とする．薄片に垂直な方向を一つの座標軸とし，残りの方向の各幅は高々$d$だから，交差集合の体積は
+\[
+ 2h\,d^{n-1}\leqq 2^n n^{n/2}(1+L\prime)^{n-1}
+ \varepsilon^n b(\sqrt n\,\varepsilon)
+\]
+で抑えられる．$L\prime=0$の場合も$(1+L\prime)$を用いた右辺は定義される．印刷54頁の分割個数は$(4m)^n$なので，和の体積は高々$C(4r)^nb(\sqrt n\,r/m)$であり，$b(t)\to0$から測度零が従う．なお像だけをより小さい立方体に入れる別の鋭い評価はありうるが，上の定数への変更でそれに依存しない修復が得られる． 必要なら，微分の振動の上限から単調非減少なmodulusとして$b$を選べる．
+
+\paragraph{判断}上記の定数で体積評価と測度零の結論が成立する．定数の値を厳密に最小化する必要はなく，Sardの定理の結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0052：Whitneyの定理のパラコンパクト性と可算性}\label{math:MATS-0052}
+\noindent\textbf{原本位置：}印刷62頁末「注意」．
+
+\paragraph{原記載}任意の$n$次元パラコンパクト多様体が$(2n+1)$次元アファイン空間の閉部分多様体と微分同型と述べる．
+
+\paragraph{数学的疑義}パラコンパクト性と可算性の仮定の範囲に関する疑義．
+
+\paragraph{解決策}「$M$は可算基をもつ」と仮定を補う．本書のパラコンパクト性を保つなら，代わりに「連結成分が高々可算個」と補っても，87--88頁の定理1により可算基が得られる．この可算性を明示した多様体にWhitneyの閉うめ込みの結論を適用する．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}非可算個の$R^n$の位相的直和はハウスドルフ・局所ユークリッドで通常の意味ではパラコンパクトだが，第二可算でない．有限次元アファイン空間の任意の部分空間は第二可算なので，この直和はその部分空間へ同相にうめ込めない．
+
+印刷82頁\S14定義3のパラコンパクト性は可算性を含まない．各成分で選んだ局所有限な開細分を直和で合わせれば局所有限性が保たれるため，上の空間はこの意味でもパラコンパクトである．
+
+\paragraph{判断}本書のパラコンパクト性の定義は可算性を含まないため，可算性の仮定補足が必要である．印刷87頁補題3も可算個の連結成分を明示しており，可算性が一般の多様体に自動的に課されるとは読めない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0056：一般の写像に関係するベクトル場の一意性}\label{math:MATS-0056}
+\noindent\textbf{原本位置：}印刷70頁，式(7)直後，および式(8)直前．
+
+\paragraph{原記載}$(\varphi_*)_pX_p=X'_{\varphi(p)}$から「$X'$は$X$によりただ一とおりにきまる」とし，対応する$D'$も一意と述べる．同じ一意性を使って$X'=\varphi_*X$と書く．
+
+\paragraph{数学的疑義}数学的疑義：像の外での一意性の不足．
+
+\paragraph{解決策}一般の写像では「$X'$の$\varphi(M)$上の値がきまる」と限定する．$M'$全体の一意性を述べるなら，少なくとも$\varphi(M)$が稠密という条件が十分であり，全射を仮定するのが簡明である．存在自体は別の問題（印刷70頁の関連項目）．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$\varphi:R\to R$を定数写像$\varphi(x)=0$，$X=0$とする．$X'_1=0$と$X'_2=y\,\partial/\partial y$は異なる滑らかなベクトル場だが，いずれも$X'_{\varphi(x)}=X'_0=0=\varphi_*X_x$なので$X$と$\varphi$関係にある．対応する導分も異なるため，$D'$の一意性にも同じ反例となる．
+
+\textbf{影響：}与えられた関連ベクトル場のかっこ積も関連するという主張は一意性を使わず成立する．一般の写像で$\varphi_*X$を$M'$全体の一意な場として扱う部分は条件の補足が必要．
+
+\paragraph{判断}一般の写像では像上の値だけが一意に定まる．像の外も含む一意性には追加条件が必要であり，関連するベクトル場の存在とは分けて扱う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0057：問2の任意のベクトル場の射影の存在}\label{math:MATS-0057}
+\noindent\textbf{原本位置：}印刷70頁，問2．
+
+\paragraph{原記載}$\varphi:M^n\to M'^m$が全点で$\operatorname{rank}_p\varphi=n$なら，任意の$X$に$\varphi$関係にある$X'$が存在する，と問う．
+
+\paragraph{数学的疑義}数学的疑義：設問が明示された仮定では成立しない．
+
+\paragraph{解決策}正しい元の設問の意図は未確定．例えば$\varphi$を微分同型に限定すれば任意の$X$の像が存在する．一般の全射では，$d\varphi_pX_p$が同じファイバーの点で一致することと，それが滑らかな場を定めることが必要で，階数の仮定だけでは足りない．単に全射を加える修正では上の反例を除けない．
+
+\paragraph{根拠・修復の確認}\textbf{反例：}$M=R$，$M'=S^1$，$\varphi(t)=(\cos t,\sin t)$，$X=t\,\partial/\partial t$とする．$n=m=1$で階数は全点で1であり，$\varphi$は全射でもある．しかし$t=0$と$t=2\pi$は同じ点$(1,0)$に写り，$\varphi_*X$の値はそれぞれ$0$と$2\pi(0,1)$になる．同じ$X'_{(1,0)}$に二つの異なる値を要求するので，そのような$X'$は存在しない．
+
+\paragraph{判断}全点での階数の仮定だけでは，任意のベクトル場を射影できない．全射性を加えても不足し，意図された修正の範囲は未確定である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0279：局所群の定義と完備性判定に必要な積分曲線条件}\label{math:MATS-0279}
+\noindent\textbf{原本位置：}第II章\S12，印刷74--75頁の定義3と積分曲線についての説明，および76頁の定理2・十分性の証明．
+
+\paragraph{原記載}定義3の3)は同じ添字の変換の合成則を課し，4)は異なる添字の変換が各点の十分小さい近傍・十分小さい時間で一致することを課す．75頁では「条件3)により」$t\mapsto\varphi_t^{(\alpha)}(p)$が$X$の積分曲線であるとし，76頁定理2は$X$の完備性と，代表を$\inf_\alpha\varepsilon_\alpha>0$となるように選べることが同値であると述べる．
+
+\paragraph{数学的疑義}記載された条件だけでは，$\varphi_t^{(\alpha)}(p)$が$U_\alpha$の外へ出た後も，対応する大域ベクトル場$X$の積分曲線であるとは限らない．4)は時刻0の近くの芽しか同定せず，3)は各添字の族の間の整合性を補わない．従って定理2の十分性は，定義3を字義通りに用いると成立しない．これは印刷76頁の関連項目の添字脱落とは別の条件不足である．
+
+\paragraph{解決策}局所群を$X$の実際の局所流から得られるものに限定する．具体的には，定義3で定まる$X$に対し，すべての$\alpha$と$p\in U_\alpha$について，曲線$\theta_p^{(\alpha)}(t)=\varphi_t^{(\alpha)}(p)$が区間$(-\varepsilon_\alpha,\varepsilon_\alpha)$全体で$\dot\theta_p^{(\alpha)}(t)=X_{\theta_p^{(\alpha)}(t)}$を満たすことを明記する．この補足の下では，一意性により異なる添字の曲線が共通時間区間全体で一致する．$0<\delta<\inf_\alpha\varepsilon_\alpha$を選ぶと，すべての初期点について少なくとも$(-\delta,\delta)$の解が存在し，任意の到達点から同じ長さだけ解を延長できる．これを反復すれば全実数上の積分曲線が得られ，定理2の十分性が回復する．必要性は完備流を用いればよい．
+
+\paragraph{根拠・修復の確認}反例は$M=(0,1)$，$X=\partial/\partial x$である．$n\ge3$に対し$U_n=(1/n,1-1/n)$とし，$\overline{U_n}$の近傍で1となる$\chi_n\in C_c^\infty(M)$をとる．台がコンパクトな$Y_n=\chi_n\partial/\partial x$は完備なので，その大域流$\Phi_t^{(n)}$と$\varepsilon_n=1$を用いる．$U_n$は$M$を覆い，各流は滑らかな微分同型で合成則を満たす．$U_n\cap U_m$の各点の十分小さい近傍では，十分小さい共通時間に両流が$q\mapsto q+t$で一致するので4)も成立する．対応するベクトル場は$X$で$\inf_n\varepsilon_n=1$だが，$X$の積分曲線$p+t$の最大定義域は$(-p,1-p)$であり完備でない．各族の大域流を採ったのは，定義域が$U_n$を含むという原文の条件に合わせるためである． 文献\cite{paper2017}の原本印刷76頁定理2の問題を指摘している．本項は，同問題に対する具体的な反例と積分曲線条件を補う修復案を示す．
+
+\paragraph{判断}定義3に全時間区間での積分曲線条件を補えば，定理2の十分性が成立する．これは明示的な修復案であり，原著者が意図した定義の確定ではない．
+
+\noindent 参考：\cite{paper2017}．
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0063：交換子積の極限表示の証明中のJacobianの評価点}\label{math:MATS-0063}
+\noindent\textbf{原本位置：}印刷78頁末の座標表示の式．
+
+\paragraph{原記載}$Y_q(x^i\circ\varphi_t)=\sum_j\eta^j(\varphi_{-t}(p))(\partial\varphi^i/\partial x^j)(t;0,\cdots,0)$，ただし$q=\varphi_{-t}(p)$，$x(p)=0$．
+
+\paragraph{数学的疑義}微分の評価点の誤植候補．
+
+\paragraph{解決策}Jacobianの初期座標を$(x^1(q),\cdots,x^n(q))$にする．これは一般に$(0,\cdots,0)$ではない．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}左辺は$q$での導分なので，合成関数$x^i\circ\varphi_t$の微分も$q$で評価する．$M=R$，$p=0$，$X=(1+x^2)\partial_x$，$Y=\partial_x$の局所流$\varphi_t(x)=\tan(t+\arctan x)$を考える．$q=-\tan t$で真のJacobianは$\partial_x\varphi_t(q)=\cos^2t$，原文の評価点では$\partial_x\varphi_t(0)=\sec^2t$となり，$t\ne0$で不一致．
+
+\textbf{影響・後続計算の確認：}$t=0$では$\varphi_0$が恒等写像で，Jacobianは初期座標によらず単位行列である．修正したJacobianを$t$で微分すると追加項は$\sum_k(\partial^2\varphi^i/\partial x^k\partial x^j)(0;0)\,(d x^k(q(t))/dt)_{t=0}$であり，$\varphi^i(0;x)=x^i$の二階微分が0なので消える．従って$t=0$での一次微分と続く極限の結論には影響しない．定理4自体への反例ではない．
+
+\paragraph{判断}有限の$t$に対する等式の評価点は訂正が必要である．追加項は$t=0$で消えるため，定理4の極限の結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0066：接ベクトルの大域的延長で用いる切断関数の台}\label{math:MATS-0066}
+\noindent\textbf{原本位置：}印刷80頁，補題の証明．
+
+\paragraph{原記載}$U$上の場$Y$をとり，$\bar V\subset U$なる近傍$V$を選んだ後，$f(p)=1$，$q\notin U$なら$f(q)=0$なる大域関数$f$を使い，$U$上で$fY$，外で0と定義する．
+
+\paragraph{数学的疑義}証明の選択条件の補足候補（採否保留）．
+
+\paragraph{解決策}$f$をさらに$V$の外で0となるように選ぶ，または$\operatorname{supp}f\subset U$と明記する．63頁補題1の構成を小さい近傍に適用してそのように選べる．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}明記された条件だけを満たす任意の$f$では，$fY$の0による延長が滑らかとは限らない．$U=(-1,1)\subset R$，$p=0$，$f(x)=\exp(1-1/(1-x^2))$ $(|x|<1)$，外では0とし，$Y=\exp(1/(1-x^2)^2)\partial_x$とする．$f$は大域的滑らかで$f(0)=1$，$U$の外で0だが，$fY$は$x\to1-$で発散する．一方，$f$を$V$の外で0と選べば，$\bar V\subset U$により$U$の境界近傍で積は0となり，延長が滑らかである．
+
+\paragraph{判断}必要な台をもつ切断関数は選べるので補題の存在結論は正しい．記載条件を満たす任意の選択に対して延長が滑らかとは限らず，選択条件の補足として扱う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0067：無限小運動の証明の恒等式(5)}\label{math:MATS-0067}
+\noindent\textbf{原本位置：}印刷81頁，式(5)とその直後の微分式．
+
+\paragraph{原記載}$f(s+t;Y,Z)=-\varphi_s^*f(t;Y,Z)+f(s;\varphi_{t*}X,\varphi_{t*}Y)$．直後も$f(s;\varphi_{t*}X,\varphi_{t*}Y)$を微分する．
+
+\paragraph{数学的疑義}符号・時間添字・引数の取り違え候補（複合）．
+
+\paragraph{解決策}\[f(s+t;Y,Z)=\varphi_{-s}^*f(t;Y,Z)+f(s;\varphi_{t*}Y,\varphi_{t*}Z).\]
+直後の微分式の二引数も$\varphi_{t*}Y,\varphi_{t*}Z$とする．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$A_s=\varphi_{-s}^*$，$B_s=\varphi_{s*}$とおくと，定義は$f(t;Y,Z)=-A_tg(Y,Z)+g(B_tY,B_tZ)$．$A_sA_t=A_{s+t}$，$B_sB_t=B_{s+t}$から，$A_s f(t;Y,Z)+f(s;B_tY,B_tZ)$を展開すれば中間の$A_sg(B_tY,B_tZ)$が打ち消して左辺になる．原式では$s=0$を代入すると右辺が$-f(t;Y,Z)$になり，証明したい$f=0$を既に仮定しないかぎり恒等式でない．
+
+\textbf{影響：}修正式を$s$で微分して$s=0$とすれば，$A_s$の微分が$-X$なので，本文の次の$\partial_t f=-Xf$という式は得られる．無限小運動の仮定により第2項の$s=0$での微分は0．定理そのものを変更する必要はない．
+
+\paragraph{判断}定義から展開すると修正式を得る．その式を微分すれば後続の微分方程式が成立し，無限小運動に関する定理の結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0068：$\partial_t f=-Xf$から零を導く一意性の説明}\label{math:MATS-0068}
+\noindent\textbf{原本位置：}印刷81頁，式(5)の次の微分方程式から$f(t;Y,Z)=0$を導く段落．
+
+\paragraph{原記載}「常微分方程式の解の一意性より$t$が0に近いときには$f(t;Y,Z)=0$」と述べる．
+
+\paragraph{数学的疑義}証明の説明補足候補．
+
+\paragraph{解決策}\textbf{補足案：}$F(t,p)=f(t;Y,Z)(p)$と書き，各$p$について$H_p(t)=F(t,\varphi_t(p))$を考える．連鎖律により$H_p'(t)=(\partial_tF+XF)(t,\varphi_t(p))=0$で，$H_p(0)=0$．したがって全時刻で$H_p(t)=0$，$\varphi_t$は全単射なので$F(t,\cdot)=0$．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}元の式は空間変数にも依存する輸送方程式であり，$p$を固定してそのまま通常のスカラーODEとみなすことはできない．流れに沿って評価すると，本文の意図を通常の1変数の微分計算として明示できる．$X$は定理の仮定で完備なので$\varphi_t$は全実数で存在する．
+
+\paragraph{判断}流れに沿う連鎖律により結論は成立する．著者がこの議論を暗黙に用いた可能性があり，説明補足として扱う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0073：局所コンパクトかつ$\sigma$コンパクトな空間の補題の範囲}\label{math:MATS-0073}
+\noindent\textbf{原本位置：}印刷86頁，補題2．関連：85頁の一般の位相空間の定義，82頁のパラコンパクト性の定義．
+
+\paragraph{原記載}「$X$が局所コンパクトでしかも$\sigma$コンパクトならば$X$はパラコンパクトである」．
+
+\paragraph{数学的疑義}仮定の範囲の疑義（一般位相空間として読む場合）．
+
+\paragraph{解決策}一般の空間に対する補題なら「$X$をハウスドルフ空間とする」と加える．直前の補題1と同じ位相多様体$X$に限定した主張ならハウスドルフ性は既に満たすので訂正不要．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}85頁の局所コンパクト性の定義自体にはハウスドルフ性が入っていない．Sierpiński空間$\{0,1\}$，開集合$\varnothing,\{1\},\{0,1\}$は有限でコンパクトかつ局所コンパクト，したがって$\sigma$コンパクトだが，ハウスドルフでないので82頁の定義のパラコンパクト空間ではない．
+
+\paragraph{判断}一般位相空間として読む場合は分離条件が必要である．本節の位相多様体の文脈を引き継ぐなら条件は満たされるため，適用範囲の明確化として保留する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0077：局所微分同型の逆像の成分を単射とする推論}\label{math:MATS-0077}
+\noindent\textbf{原本位置：}印刷89頁，補題6の証明，「$U_i$の各連結成分は$\varphi$により位相同型に$V_i$に写される」．
+
+\paragraph{原記載}\textbf{原文の仮定：}$\varphi:M^n\to R^n$は全点で階数$n$の写像，$D=\varphi(M)$の可算な連結開被覆$\{V_i\}$は各局所像$V_p$の細分で，$U_i=\varphi^{-1}(V_i)$．
+
+\paragraph{数学的疑義}証明中の一般には成立しない推論．
+
+\paragraph{解決策}proper性などの仮定を加えず，可算な球上の局所逆枝を反復してつなぐ方法に証明を替える．本項の根拠で，原補題6の連結性・ハウスドルフ性・局所微分同型性だけから可算な座標被覆を構成する．したがって補題6の結論は元の一般性で保たれ，これを使う補題7・定理2の当該依存箇所も継続できる．
+
+\paragraph{根拠・修復の確認}原文の途中の推論は，$\varphi(z)=\exp(\exp z)$という$\mathbb C$上の局所微分同型で反例をもつ．例えば$W=\{w:|w|<1\}$，$V=\exp W$とすると，$\varphi^{-1}(V)$の一つの連結成分は左半平面であり，$z,z+2\pi i$が同じ像をもつので，その成分から$V$への制限は単射でない．
+
+一方，補題の結論は次の構成で修復できる．$D=\varphi(M)$の可算な連結開球の基を$\mathcal B$とする．ここで逆枝とは，ある$B\in\mathcal B$上の連続写像$s:B\to M$で$\varphi\circ s=\operatorname{id}_B$を満たすものをいう．局所微分同型性により$s$は局所逆写像であり，像$s(B)$は$M$の開集合である．
+
+同じ連結球$B$上の二つの逆枝の一致集合は，$M$のハウスドルフ性により閉，$\varphi$の局所単射性により開である．従って非空な開球$C\subset B$上で一致する二つの逆枝は全$B$で一致する．
+
+一点の近傍から得る逆枝$s_0:B_0\to M$を一つ固定する．既得の逆枝$s:E\to M$と$B,C\in\mathcal B$で$\varnothing\ne C\subset E\cap B$なるものに対し，$C$上で$s$と一致する逆枝$t:B\to M$が存在すればすべて追加する．上の一意性により各三つ組$(s,B,C)$に対し追加される逆枝は高々一つである．この操作を有限段ずつ反復して得られる逆枝の族$\mathcal S$は可算である．
+
+$U=\bigcup_{s\in\mathcal S}s(\operatorname{dom}s)$は非空な開集合である．$q\in\overline U$をとり，$q$を像に含む局所逆枝$t:B\to M$を$B\in\mathcal B$上に選ぶ．$t(B)$は開だから，ある既得枝$s:E\to M$の像と交わる．交点の基点の近傍で$s=t$なので，その一致する近傍に球$C\in\mathcal B$をとれば，構成により$t$は次の段に追加される．ゆえに$q\in U$であり，$U$は閉でもある．$M$の連結性から$U=M$となる．
+
+従って$M$は可算個の開集合$s(B)$で覆われ，各$s(B)$は球$B$と位相同型で可算基をもつ．それらの可算基の和が$M$の可算基になる．この構成は印刷89頁の補題6の仮定の下で成り立ち，補題7と定理2が用いる可算性の結論を与える．
+
+\paragraph{判断}途中の単射性の推論は一般に成立しないが，可算な局所逆枝の構成で，仮定を強めずに原補題の結論を得られる．proper性の追加は必要ない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0086：実接ベクトルの長さの式の係数}\label{math:MATS-0086}
+\noindent\textbf{原本位置：}印刷100頁，問1の末尾．
+
+\paragraph{原記載}$a=\sum_\alpha\{a^\alpha(\partial/\partial z^\alpha)_p+b^\alpha(\partial/\partial\bar z^\alpha)_p\}\in T_p$のとき$g_p(a,a)=\sum_{\alpha,\beta}g_{\alpha\bar\beta}a^\alpha\bar a^\beta/2$とする．
+
+\paragraph{数学的疑義}エルミット計量を複素双線型に拡張したときの二つの交差項があるため，除数2の式は成立しない．
+
+\paragraph{解決策}実ベクトル$a=\sum_\alpha(a^\alpha\partial_{z^\alpha}+\bar a^\alpha\partial_{\bar z^\alpha})$について，$g_p(a,a)=2\sum_{\alpha,\beta}g_{\alpha\bar\beta}a^\alpha\bar a^\beta$とする．問2の$h_p(a_+,a_+)=g_p(a,a)/2$は変更しない．
+
+\paragraph{根拠・修復の確認}\textbf{計算による確認．}99頁のエルミット条件より$g_{\alpha\beta}=g_{\bar\alpha\bar\beta}=0$である．したがって展開には$\sum g_{\alpha\bar\beta}a^\alpha\bar a^\beta$と$\sum g_{\bar\alpha\beta}\bar a^\alpha a^\beta$の二項だけが残る．対称性$g_{\bar\alpha\beta}=g_{\beta\bar\alpha}$で添字を交換すると両項は等しい．\par\textbf{原式を区別する例．}$C$のユークリッド計量で$a=\partial_x=\partial_z+\partial_{\bar z}$とすれば$g_{1\bar1}=1/2$で，左辺は1，印刷された右辺は$1/4$となる．修正後は1となり，問2とも一致する．
+
+\paragraph{判断}係数を訂正すれば実接ベクトルの長さの計算が一致する．問2の式とエルミット計量の存在に関する結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0093：正則な流れの証明末の方程式の種類}\label{math:MATS-0093}
+\noindent\textbf{原本位置：}印刷110頁，式(6)およびその後の一意性の議論．関連：MATS-0068．
+
+\paragraph{原記載}$\dfrac{d\Phi(t;Y)_p}{dt}=-[X,\Phi(t,Y)]_p$を固定した$p$での「常微分方程式」とし，初期値0と解の一意性から$\Phi=0$と結論する．
+
+\paragraph{数学的疑義}式(6)の右辺の交換子は$\Phi(t;Y)$の空間微分を含むので，点$p$を固定しただけでは有限次元の通常の常微分方程式の一意性をそのまま適用できない．定理2の結論は流れによる移送で証明できる．
+
+\paragraph{解決策}$F_t=\Phi(t;Y)$とおき，$G_t=(\varphi_{-t})_*F_t$を考える．式(6)と流れの微分公式により$\partial_tG_t=(\varphi_{-t})_*(\partial_tF_t+[X,F_t])=0$となることを明記する．$G_0=F_0=0$より$G_t=0$，したがって$F_t=0$である．この議論を固定した任意の$Y$に適用すれば，各$\varphi_t$は正則同型となる．
+
+\paragraph{根拠・修復の確認}\textbf{成立の理由．}109頁では$\varphi_t$が全実数で定義された1パラメーター変換群と仮定され，$X$はその無限小変換である．固定した場$V$について$\partial_t((\varphi_t)_*V)=-[X,(\varphi_t)_*V]$であるから，時間に依存する場には積の微分として上記の式が成立する．また$\varphi_t$は微分同型なので押し出しは可逆である．原文の初期値と式(6)を保ったまま，空間微分を含む方程式を流れで引き戻して定数の場へ移した．
+
+\paragraph{判断}流れで引き戻す議論により結論は成立する．空間微分を含む方程式の一意性を明確にする証明補足である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0109：0次コホモロジーの次元と連結成分の有限性}\label{math:MATS-0109}
+\noindent\textbf{原本位置：}印刷135頁，注意1とその証明．
+
+\paragraph{原記載}「$M$の連結成分の個数を$k$とすると，$H^0(M)$は$k$次元ベクトル空間である」．成分の指示関数$f_1,\ldots,f_k$が基とする．
+
+\paragraph{数学的疑義}連結成分が無限個でもよいなら，閉0形式の空間は成分ごとの定数の直積であり，成分の指示関数は代数的な基にはならない．$k$を自然数として有限性を暗黙に仮定した記述か，適用範囲を明示する必要がある．
+
+\paragraph{解決策}有限個の成分についての主張として「$M$の連結成分が有限個で，その個数を$k$とすると」と書く．一般には成分集合を$I$として$H^0(M)\cong\prod_{i\in I}R$とし，$[f]\mapsto(f|_{M_i})_{i\in I}$で同型を与える．無限成分で指示関数族をHamel基とする説明は用いない．
+
+\paragraph{根拠・修復の確認}\textbf{同型の証明．}$B^0(M)=0$であり，$df=0$は$f$が各連結成分上で定数であることと同値である．多様体の各連結成分は開なので，任意の実数族$(c_i)_{i\in I}$を成分$M_i$上の値とする関数は局所定数，したがって滑らかである．これで上記写像は線型全単射となる．\par\textbf{有限性を区別する例．}$M=\bigsqcup_{j\geq0}R$なら$H^0(M)=R^{\mathbb N}$である．成分の指示関数の有限線型結合は有限個の成分の外で0なので，定数関数1を表せない．さらに各$t\in R$に対応する列$(1,t,t^2,\ldots)$は，相異なる$t_1,\ldots,t_m$を選ぶと最初の$m$成分のVandermonde行列により一次独立である．したがってこの例のHamel次元は可算ではない．
+
+\paragraph{判断}連結成分が有限個の場合の主張は正しい．無限個の成分を許す場合は直積による一般形を用いる必要がある．著者が$k$を有限自然数として用いた可能性は残る．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0110：閉形式と境界形式の積の原始形式の符号}\label{math:MATS-0110}
+\noindent\textbf{原本位置：}印刷135頁，第2段落，$\omega\wedge\theta\sim0$を示す計算．
+
+\paragraph{原記載}$d(\omega\wedge w\alpha)=\omega\wedge d\alpha=\omega\wedge\theta$．
+
+\paragraph{数学的疑義}次数符号作用素$w$を$\alpha$側に置いた原始形式では，閉形式$\omega$と境界形式$\theta=d\alpha$の積を一般には得られない．境界性の結論は正しいが，表示された原始形式の符号を訂正する必要がある．
+
+\paragraph{解決策}原始形式を$w\omega\wedge\alpha$とし，$d(w\omega\wedge\alpha)=\omega\wedge d\alpha=\omega\wedge\theta$と書く．斉次の$p$次閉形式なら$(-1)^p\omega\wedge\alpha$を原始形式とすればよい．
+
+\paragraph{根拠・修復の確認}\textbf{証明．}134頁の$w$の定義から$w^2=1$かつ$dw=-wd$である．$d\omega=0$なので$d(w\omega)=0$となり，同じ頁の積公式(1)を用いると$d(w\omega\wedge\alpha)=d(w\omega)\wedge\alpha+w(w\omega)\wedge d\alpha=\omega\wedge d\alpha$を得る．\par\textbf{原式の反例．}$R^2$で$\omega=dx$，$\alpha=y$，$\theta=dy$とすれば，$w\alpha=\alpha$で，原文の$d(dx\wedge y)=-dx\wedge dy$は$\omega\wedge\theta=dx\wedge dy$に一致しない．訂正後は$d(-y\,dx)=dx\wedge dy$となる．
+
+\paragraph{判断}原始形式の符号は訂正が必要である．修正後の原始形式により，コホモロジー環の積が代表元によらないという結論が成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0114：一次独立性を失った場合の核の次元の不等号}\label{math:MATS-0114}
+\noindent\textbf{原本位置：}印刷142頁，§8末の脚注．
+
+\paragraph{原記載}$\omega_1,\ldots,\omega_{n-r}$が点$q$で一次独立でなければ「$\mathfrak D_q$の次元は$r$以上になる」．
+
+\paragraph{数学的疑義}「核の次元は$r$以上」という弱い主張は真であるが，既定の次元$r$との矛盾を示すには$r$より真に大きいことが必要である．一次独立性の説明に階数・退化次数の一段を補う．
+
+\paragraph{解決策}$A_q:T_q(M)\to R^{n-r}$を$v\mapsto((\omega_1)_q(v),\ldots,(\omega_{n-r})_q(v))$とおく．もし形式が一次独立でなければ$\operatorname{rank}A_q<n-r$であり，$\dim\ker A_q=n-\operatorname{rank}A_q>r$となって$\ker A_q=\mathfrak D_q$の次元$r$に矛盾する，と書く．文章だけなら「$r$より大になる」と強める．
+
+\paragraph{根拠・修復の確認}\textbf{証明の確認．}142頁式(1)が$\mathfrak D_q=\ker A_q$を与え，定義の冒頭で各$\mathfrak D_q$は$r$次元と仮定されている．階数・退化次数の定理による上の計算はこの二つの記載だけを用いる．「以上」を字義通りの弱い不等式としても偽にはならないため，反例のある定理として扱わない．
+
+\paragraph{判断}原文の弱い不等式は偽ではない．次元の矛盾に必要な厳密不等式を明記する証明補足である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0133：共役関数の微分と複素接ベクトルの共役}\label{math:MATS-0133}
+\noindent\textbf{原本位置：}印刷152頁，補題の証明の最初の等式．
+
+\paragraph{原記載}任意の$b\in T_q^C(M)$について$(d\bar f_\alpha)_q(b)=(df_\alpha)_q(\bar b)$．右辺の値全体に共役線はない．
+
+\paragraph{数学的疑義}任意の複素接ベクトル$b$に対する原式は，右辺の複素数値の共役を欠くため成立しない．ただし証明で使う消滅条件は共役を取っても変わらず，補題の結論を否定するものではない．
+
+\paragraph{解決策}$(d\bar f^\alpha)_q(b)=\overline{(df^\alpha)_q(\bar b)}$とする．$b\in T_q^+$なら$\bar b\in T_q^-$であり，条件2）から右辺は0である，という形で次の消滅へ進む．添字の上下の統一は，印刷152頁の同じ補題の記号についての表記上の提案と併せて扱う．
+
+\paragraph{根拠・修復の確認}\textbf{証明．}$b=u+\sqrt{-1}v$（$u,v$は実接ベクトル）とすれば，左辺は$\overline{df^\alpha(u)}+\sqrt{-1}\,\overline{df^\alpha(v)}$である．一方$df^\alpha(\bar b)=df^\alpha(u)-\sqrt{-1}df^\alpha(v)$なので，その値を共役すると左辺を得る．\par\textbf{原式の反例．}$f(u,v)=u+\sqrt{-1}v$，$b=\sqrt{-1}\partial_u$では左辺は$\sqrt{-1}$，原文の右辺は$-\sqrt{-1}$である．消滅の場合の推論は修正後も保持される．
+
+\paragraph{判断}任意の複素接ベクトルに対する等式には値全体の共役が必要である．補題で使う消滅の結論は修正後も保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0135：正則型成分への射影の係数}\label{math:MATS-0135}
+\noindent\textbf{原本位置：}印刷153頁，定理の証明で局所正則型枠を構成する段落．
+
+\paragraph{原記載}$(\partial/\partial x^i)^+=\frac12((\partial/\partial x^i)-J(\partial/\partial x^i))$は正則型とする．
+
+\paragraph{数学的疑義}正則型への射影には$\sqrt{-1}$が必要であり，原式の$(v-Jv)/2$は非零の実ベクトル$v$を正則型へ写さない．解析的枠を選ぶ証明で用いる射影の式を訂正する必要がある．
+
+\paragraph{解決策}$P^+v=(v-\sqrt{-1}Jv)/2$とし，$(\partial/\partial x^i)^+=\frac12((\partial/\partial x^i)-\sqrt{-1}J(\partial/\partial x^i))$と書く．$P^+$の像は$T^+$であり，原点で独立な$n$本を選んで近傍を縮めれば原文の解析的局所枠を得られる．
+
+\paragraph{根拠・修復の確認}\textbf{射影の確認．}$J^2=-1$により$JP^+v=(Jv+\sqrt{-1}v)/2=\sqrt{-1}P^+v$となり，$v\in T^+$なら$P^+v=v$である．よって像は正則型全体である．成分は$J$の解析的成分の線型結合なので解析性も保たれる．原式は実ベクトルのままであり，$v-Jv=0$なら$J^2v=Jv=v$と$J^2v=-v$から$v=0$となる．したがって非零実$v$について原式の値は非零実ベクトルで，$J$の固有値$\sqrt{-1}$の空間には属さない．106頁の既定の$A^+$の式も修正後の係数と一致する．
+
+\paragraph{判断}局所枠の構成に用いる射影の係数は訂正が必要である．修正後も解析性が保たれ，積分可能な解析的概複素構造に関する定理の結論が成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0147：切片とコンパクト集合の交わりを有限とする推論}\label{math:MATS-0147}
+\noindent\textbf{原本位置：}印刷158頁，補題2の証明の中段．
+
+\paragraph{原記載}切片が互いに交わらない$F$の開集合であることから，「$F$のコンパクト集合はこれらの切片の有限個としか交わらない」とする．
+
+\paragraph{数学的疑義}互いに交わらない開集合の族という一般位相的性質だけから，任意のコンパクト集合との交叉が有限とは結論できない．ただしFrobenius座標立方体の幾何を用いれば原文の有限交叉の主張自体を補足できるので，これを葉体の状況の反例と断定しない．
+
+\paragraph{解決策}修補案A：切片立方体$Q$の閉包が，より大きなFrobenius座標立方体$Q^+$の内部に入るように選ぶ．$F$のコンパクト集合$K$が$Q$の有限個の切片としか交わらないことを，下記の有限被覆の議論で示す．この後，$F=\bigcup_{m\geq1}K_m$という$\sigma$コンパクト性から$Q\cap F$が可算個の切片の和であることを原文どおり導く．\par 修補案B：II，§15，定理2の$F$の可算基を直接用いる．各非空切片に含まれる基本開集合を一つ選べば，異なる切片には異なる基本開集合が対応するので，切片族は高々可算となる．
+
+\paragraph{根拠・修復の確認}\textbf{修補案Aの証明．}$C=K\cap\overline Q$は包含$F\to M$の連続性により$F$のコンパクト集合である．各$z\in C$に対して，$Q^+$内に写る連結な$F$の近傍$O_z$を取る．横断座標$x^{r+1},\ldots,x^n$の微分は$F$の接空間上で0だから，これらは$O_z$上で定数であり，$O_z$は$Q^+$の一つの切片に含まれる．$Q$を同じ座標系の小さい直積立方体としたので，この切片と$Q$の交わりは空か$Q$の一つの切片である．$C$を有限個の$O_z$で覆うと，$K\cap Q$が交わる切片は有限個に限られる．\par\textbf{一般位相の注意．}$R$の$\{0\}\cup\{1/j:j\geq1\}$はコンパクトで，互いに素な小開区間を各$1/j$の周囲に取れば無限個の開集合に交わる．この例は「開かつ互いに素」だけでは足りないことを示すもので，Frobenius座標近傍の切片の幾何を満たす反例ではない．\par II，§15の一般的な可算性の結果を利用する修補案Bは簡潔である．その際には，印刷89頁補題6の途中の単射性の推論を，可算な局所逆枝の構成によって補えばよい．
+
+\paragraph{判断}より大きい座標立方体の内部に閉包が入るように近傍を縮めれば，有限交叉の推論が成立する．葉体や多様体への新たな大域仮定は必要ない．一般位相空間の例だけで補題の結論を否定することはできない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0284：一般の位相群の中心を閉とする際の分離条件}\label{math:MATS-0284}
+\noindent\textbf{原本位置：}第IV章\S2，印刷162頁，問1 b）．関連：159頁の位相群の定義と161頁のハウスドルフ位相群の区別．
+
+\paragraph{原記載}「位相群$G$の各元と可換な$G$の元の全体を$G$の中心という．$G$の中心は$G$の閉部分群であることをしめせ．」
+
+\paragraph{数学的疑義}本書の位相群の定義はハウスドルフ性を含まず，161頁でハウスドルフ位相群を別に定義している．その一般性のままでは中心が閉という結論は偽である．
+
+\paragraph{解決策}問1 b）では$G$をハウスドルフ位相群と仮定する．各$a\in G$について$C_a(g)=gag^{-1}a^{-1}$は連続で，$Z(G)=\bigcap_{a\in G}C_a^{-1}(\{e\})$である．$\{e\}$が閉だから中心は閉．中心が部分群であることは分離条件によらない．なお位相群では$T_1$なら既にハウスドルフなので，この文脈で単位元の閉性を明示してもよい．
+
+\paragraph{根拠・修復の確認}反例は非可換有限群$S_3$に密着位相$\{\varnothing,S_3\}$を与えたものである．積・反転は連続で位相群だが，中心$Z(S_3)=\{e\}$は空でも全体でもないので閉でない．一方，同じ問のa）は$H$を閉部分群と明示しており，これはこの反例により否定されない．印刷167頁問1の核の閉性とは，分離条件の不足を区別する．
+
+\paragraph{判断}ハウスドルフ性を仮定すれば中心は閉となる．本書の一般の位相群にはその仮定がないため，条件補足が必要である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0156：群作用の核の閉性に必要な分離条件}\label{math:MATS-0156}
+\noindent\textbf{原本位置：}印刷167頁，問1．関連：166頁末の作用の定義，167頁の等方部分群の閉性の段落．
+
+\paragraph{原記載}一般の位相空間$X$への連続作用を定義した後，問1で「すべての$x\in M$にたいし$g\cdot x=x$をみたす$G$の元$g$の全体$N$は$G$の正規閉部分群」とする（$M$の文字についてはMATS-0155）．
+
+\paragraph{数学的疑義}$X$を単に位相空間とする現行の一般性では，核$N$は正規部分群だが閉とは限らない．直前の等方部分群の閉性の段落は明示的に$X$ハウスドルフを仮定しており，この条件を問1から落とせない．
+
+\paragraph{解決策}問1を「$X$はハウスドルフ空間とする」として述べる．より弱く各点集合が閉という$T_1$条件でも十分である．各$x\in X$について$S_x:G\to X$，$S_x(g)=g\cdot x$とおくと$N=\bigcap_{x\in X}S_x^{-1}(\{x\})$なので閉である．正規性は$g\in N,a\in G$に対し$(aga^{-1})\cdot x=a\cdot(g\cdot(a^{-1}\cdot x))=x$で従う．
+
+\paragraph{根拠・修復の確認}反例は$G=(\mathbb R,+)$，$X=\mathbb R/\mathbb Q$を商位相で考えた並進作用である．$\mathbb Q$が稠密なので$X$の空でない開集合は$X$だけであり，作用は連続で推移的．作用の核は$\mathbb Q$で，$G$の閉集合でない．従ってハウスドルフな群$G$だけを仮定しても不足する．
+
+\paragraph{判断}一般の位相空間への作用では閉性は従わず，$T_1$条件で修復できる．$M$が多様体を暗黙に指す意図なら閉性は正しいが，この箇所では$M$が未導入であり，意図は確定しない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0158：特殊直交群の球面への推移性の次元}\label{math:MATS-0158}
+\noindent\textbf{原本位置：}印刷170頁，例2の「同様に$SO(n)$も$S^{n-1}$の推移的な位相変換群」以下．
+
+\paragraph{原記載}「同様に$SO(n)$も$S^{n-1}$の推移的な位相変換群であり」，等方部分群を$SO(n-1)$とし$S^{n-1}\cong SO(n)/SO(n-1)$とする．
+
+\paragraph{数学的疑義}$n=1$では$SO(1)=\{1\}$が$S^0=\{-1,1\}$の各点を固定するので推移的でない．次元範囲を限定する必要がある．
+
+\paragraph{解決策}$SO(n)$に関するこの段落を$n\ge2$に限る．$u,v\in S^{n-1}$のとき，$Au=v$となる$A\in O(n)$を取り，$\det A=-1$なら$v$を固定する反射$B$を$v^\perp$上で一つ選べるので，$BA\in SO(n)$で$(BA)u=v$となる．等方部分群は$v=e_1$として$\operatorname{diag}(1,C)$，$C\in SO(n-1)$である．
+
+\paragraph{根拠・修復の確認}上の向きを反転する反射には$\dim v^\perp=n-1\ge1$が必要であり，これが正確な範囲である．$O(1)$は$S^0$に推移的に作用し，後の問3の$SO(n)$が$O(n)$の単位成分という結論は$n=1$でも正しい．
+
+\paragraph{判断}$SO(n)$の球面への推移性には$n\ge2$が必要である．後の球面の記述で次数を一つずらした場合にも，対応する最低次元の制限を要する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0170：複素リイ群構造に関する逆命題の連結性}\label{math:MATS-0170}
+\noindent\textbf{原本位置：}印刷191頁，下半，無番号定理の逆命題．
+
+\textbf{195頁の追記：}印刷195頁，第1段落，「これによって」から「以上により定理が証明された」まで．
+
+\paragraph{原記載}191頁：「逆に実リイ群$G$のリイ環$\mathfrak g$が複素リイ環であれば，$G$は複素リイ群の構造をもつ．」195頁では$G_0$の概複素構造を各成分へ左移動すると，すべての$L_g,R_g$と反転が概複素写像になるとして証明を終える．
+
+\paragraph{数学的疑義}$\operatorname{ad}(X)$と複素構造$I$の可換性から得るのは$\operatorname{Ad}(G_0)$との可換性までであり，非連結成分の$\operatorname{Ad}(g)$との可換性は従わない．左移動による延長だけでは右移動の複素線型性を保証できず，記載された逆命題は非連結群について偽である．
+
+\paragraph{解決策}簡潔な修復は逆命題の$G$を連結と仮定することで，192--194頁の証明を用い，195頁の一般の非連結群への拡張を削る．非連結群も扱う正確な形は「$\mathfrak g$に$I^2=-1$で，すべての$g\in G$に対し$I\operatorname{Ad}(g)=\operatorname{Ad}(g)I$を満たす実線型写像$I$が存在すること」とする．この条件は微分して$[X,IY]=I[X,Y]$を含む．左不変な$J_x=(L_x)_*I(L_{x^{-1}})_*$を作ると，各成分で192--194頁の局所座標構成が適用できる．$R_g$の微分は左自明化で$\operatorname{Ad}(g^{-1})$となるため複素線型，反転も複素線型である．積の微分は左右移動の微分の和なので複素線型となり，積・反転は正則である．必要性は共役写像が正則でその微分$\operatorname{Ad}(g)$が複素線型であることから従う．
+
+\paragraph{根拠・修復の確認}反例として$G=\mathbb C\rtimes\{1,s\}$，$s^2=1$，$szs^{-1}=\bar z$を実2次元リイ群と考える．$\mathfrak g=\mathbb R^2$は可換で複素リイ環にできる．しかし$\operatorname{Ad}(s)=\operatorname{diag}(1,-1)$は各固有空間が実1次元である．これと可換な実線型$I$は両固有空間を保つので，それぞれ実1次元上で$I^2=-1$を満たさなければならず不可能．従ってこの$G$は群演算が正則となる複素構造を持たない．
+
+\paragraph{判断}非連結群に対する原逆命題は反例をもつ．連結性を加えるか，$\operatorname{Ad}(G)$不変な複素構造の存在を条件にすれば修復できる．印刷195頁の移送式の型を直すだけでは，この問題は解消しない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0173：非連結成分へ移す概複素構造の式の型}\label{math:MATS-0173}
+\noindent\textbf{原本位置：}印刷195頁，第1段落の独立行の式．
+
+\paragraph{原記載}195頁，$x\in G_i$，$v\in T_xG$，$y=g_i^{-1}x\in G_0$に対し，$\tilde J_xv=J_y(L_{g_i^{-1}})_*v$とする．
+
+\paragraph{数学的疑義}右辺は$T_yG$のベクトルであり，$T_xG$の自己準同型$\tilde J_x$の値になっていない．左移動で$T_xG$へ戻す微分が必要である．
+
+\paragraph{解決策}$\tilde J_xv=(L_{g_i})_*J_y(L_{g_i^{-1}})_*v$とする．$g_i$を$g_ih$（$h\in G_0$）に換えても$J$の$G_0$に関する左不変性により同じ値となり，$\tilde J_x^2=-1$も共役式から従う．ただし右移動・反転まで概複素的と結論するには印刷191頁の関連項目の$\operatorname{Ad}(G)$不変条件を別途加えるか，議論を連結群に限定する．
+
+\paragraph{根拠・修復の確認}原式の右辺は$T_yG$に属するが，左辺は$T_xG$に属すべきベクトルである．$T_yG$から$T_xG$へ戻す$(L_{g_i})_*$を補うと，印刷192頁で構成した$J$の左不変性により，成分代表$g_i$の選び方によらない式となる．
+
+\paragraph{判断}移送式には左移動の微分を補う必要がある．その修正だけでは非連結群への拡張全体は正当化されず，印刷191頁の逆命題に対する条件補足が別に必要である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0178：左不変ベクトル場の行列積の順序}\label{math:MATS-0178}
+\noindent\textbf{原本位置：}印刷201頁，「注意」の第1式．
+
+\paragraph{原記載}201頁注意：「$GL(n,R)$上の左不変ベクトル場$X=\sum_{i,j}(\sum_k a^i{}_k x^k{}_j)\partial/\partial x^i{}_j$」とする．
+
+\paragraph{数学的疑義}固定行列を$A=(a^i{}_j)$，可変行列を$x$とすると，原式の接ベクトルは$Ax$である．これは右不変場であり，182--183頁で左不変場を$xA$とした同一視と一致しない．
+
+\paragraph{解決策}「左不変」を保ち，$X_A=\sum_{i,j}(\sum_k x^i{}_k a^k{}_j)\partial/\partial x^i{}_j$とする．左移動$L_b$の微分は$V\mapsto bV$なので$dL_b(xA)=bxA=X_A(bx)$で左不変性が成立する．単位元ではどちらの式も$A$となるため，この修復後も$(d\det)_e(A)=\operatorname{tr}A$，従って$\operatorname{tr}A=0$という$\mathfrak{sl}(n,R)$の条件を得る計算はそのまま正しい．
+
+\paragraph{根拠・修復の確認}例えば$A=\operatorname{diag}(1,-1)$，$b=\begin{pmatrix}1&1\\0&1\end{pmatrix}$では$Ab\ne bA$なので，原式は左不変でない．右移動の微分$V\mapsto Vb$では$dR_b(Ax)=Axb$となり右不変である．
+
+\paragraph{判断}原式は右不変場であり，左不変場の表示へ直す必要がある．単位元での値は同じなので，直後のトレース零という結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0181：コンパクト性に用いる閉集合の周囲空間}\label{math:MATS-0181}
+\noindent\textbf{原本位置：}印刷202頁末，ユニタリ群のコンパクト性の説明．
+
+\paragraph{原記載}202頁：「$U(n)$に属する行列の成分はすべて有界であり，$U(n)$は$GL(n,C)$の閉集合である．ゆえに$U(n)$はコンパクトである．」
+
+\paragraph{数学的疑義}$U(n)$のコンパクト性という結論は正しい．ただし$GL(n,C)$は全行列空間の開部分空間であり，その中で閉かつ成分有界であることだけからはコンパクト性を結論できない．
+
+\paragraph{解決策}周囲空間を$M_n(C)\cong R^{2n^2}$へ広げる．$F:M_n(C)\to M_n(C)$，$F(a)={}^t\bar a a$は連続であり，$U(n)=F^{-1}(\{1_n\})$は全行列空間の閉集合である（$F(a)=1_n$なら$\det a\ne0$なので正則性は自動的）．列の長さが1だから$|a^i{}_j|\le1$で有界．Heine--Borelによりコンパクトで，$SU(n)=U(n)\cap\det^{-1}(\{1\})$もその閉部分集合としてコンパクトである．
+
+\paragraph{根拠・修復の確認}原文の推論形式が一般には不十分である例は，$R\setminus\{0\}$内の閉有界集合$\{1/k:k\ge1\}$である．これは元の実数直線で0へ近づき，コンパクトでない．$U(n)$については上記の全行列空間での閉性で不足が埋まる．
+
+\paragraph{判断}コンパクト性の結論は正しい．Heine--Borelを適用する周囲空間を全行列空間として明記する証明補足である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0183：商空間の局所切断の逆像の等式}\label{math:MATS-0183}
+\noindent\textbf{原本位置：}印刷205頁，局所切断$\sigma$の連続性を示す段落．
+
+\paragraph{原記載}205頁，$W$を$G$の開集合とするとき「$\sigma^{-1}(W)=\pi(W)\cap\pi(U)$」として$\sigma$の連続性を結論する．
+
+\paragraph{数学的疑義}切断は各剰余類から$U_1$内の代表を選ぶ．$W$が同じ剰余類の別の代表を含むだけでも$\pi(W)$に入るため，原文の等式は一般に偽である．
+
+\paragraph{解決策}$\sigma^{-1}(W)=\pi(W\cap U_1)=\pi((W\cap U_1)U_2)$に直す．第2種標準座標の積写像$U_1\times U_2\to U$は微分同型であり，$W\cap U_1$は$U_1$の相対開集合なので$(W\cap U_1)U_2$は$U$の開集合，従って$G$の開集合となる．自然な射影$\pi$は開写像であるから，正しい逆像は$G/H$の開集合であり，$\sigma$の連続性が従う．
+
+\paragraph{根拠・修復の確認}具体例は加法群$G=R^2$，$H=\{0\}\times R$，$U=(-1,1)^2$，$U_1=(-1,1)\times\{0\}$，$U_2=\{0\}\times(-1,1)$である．$W=(-1/2,1/2)\times(1/2,3/4)$とすると，$\sigma^{-1}(W)=\varnothing$だが$\pi(W)\cap\pi(U)=(-1/2,1/2)$となり原等式は成立しない．
+
+\paragraph{判断}原文の集合等式は偽だが，正しい逆像を積座標と開射影で扱えば局所切断の連続性は成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0189：粗な部分群の階数ゼロの場合}\label{math:MATS-0189}
+\noindent\textbf{原本位置：}印刷212頁，定理1証明の最小数$m_0$の存在，および印刷213頁冒頭の$d$の範囲．
+
+\paragraph{原記載}212頁の証明は「$\{|a|;a\in\Gamma,a\ne0\}$には最小数$m_0>0$が存在する」として最短非零元を選び，213頁で「適当な整数$d$（$1\le d\le n$）が存在して$\Gamma_d=\Gamma$」とする．
+
+\paragraph{数学的疑義}許されている$\Gamma=\{0\}$では非零元の集合は空で最小値を持たず，正の$d$も存在しない．なお非零群の帰納構成で，正の下限の存在から最小値の達成までを明記すると論証が明確になる．
+
+\paragraph{解決策}最初に$\Gamma=\{0\}$なら空の基，$d=0$として主張を満たすと処理し，以後$\Gamma\ne\{0\}$を仮定する．定理の範囲は$0\le d\le n$である．非零の場合，閉離散集合$\Gamma$と有界閉集合の共通部分は有限なので，適当な非零元以下のノルムを持つ有限集合から最小元を取れる．帰納段階では$\Gamma\cap W_r=\sum_{i=1}^rZ u_i$を保つ．補空間への射影の非零ノルムに正の下限がないなら，$u_i$の整数倍を引いて$W_r$方向の係数を$[0,1)$に収めた代表が有界で，非零射影が0へ収束する．これは閉離散な$\Gamma$とコンパクト集合の共通部分が有限であることに反する．また射影ノルムをある一定値以下に制限し同じ代表の取り方をすると有限集合になり，最小値は実際に達成される．最短射影元を$u_{r+1}$とし，係数の整数部分を引けば$\Gamma\cap W_{r+1}=\sum_{i=1}^{r+1}Zu_i$が従う．次元が増えるため高々$n$段で終わる．
+
+\paragraph{根拠・修復の確認}$\Gamma=\{0\}$は本書の粗な部分群の定義を満たす．直後213頁の連結可換リイ群の構造定理は既に$0\le d\le n$と述べ，$d=0$は$R^n$に対応する．後続の構造定理を否定するのではなく，この証明の零階数の扱いを補う．
+
+\paragraph{判断}零階数の場合を補えば定理は成立する．非零群の帰納法では最小値の達成と飽和条件を明記すると論証が完結する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0193：座標原点と単位元の対応の明記}\label{math:MATS-0193}
+\noindent\textbf{原本位置：}印刷215頁の§18定理1の条件1）と印刷216頁冒頭．
+
+\paragraph{原記載}215頁定理1の条件1）は，$\psi:U\to Q=\{u:|u^i|<a\}$が位相同型であるとのみ述べ，$x^i(e)=0$は指定しない．216頁で$U\prime=\{g\in U:|x^i(g)|<b\}$を「$e$の近傍」として使う．
+
+\paragraph{数学的疑義}$U$が$e$を含むだけでは，その小さい中心立方体の逆像$U\prime$も$e$を含むとは限らない．これは証明で使う正規化の不足であり，直ちに元の定理の結論が偽であるとはいわない．
+
+\paragraph{解決策}掲載された証明をそのまま使う形の十分条件として，条件1）に$x^i(e)=0$（$i=1,\ldots,n$）を加える．より弱く$|x^i(e)|<b$を仮定しても$U\prime$が$e$の近傍となる部分は直る．原文の一般性を保つ場合には，単に座標を平行移動しただけで元の条件2）の滑らかさが新しい原点近くで確保されるとは限らず，別の局所座標構成または証明を要する．
+
+\paragraph{根拠・修復の確認}証明中の推論への具体例は$G=(R,+)$，$U=(-6,2)$，$x(g)=g+2$，$a=4$，$b=1/2$である．$\psi$は$U$から$(-4,4)$への位相同型で，$f(u,v)=u-v+2$は条件2）を満たす（$g,h\in(-5/2,-3/2)$なら$g-h\in(-1,1)\subset U$）．しかし$U\prime=(-5/2,-3/2)$は$e=0$を含まない．$G=R$自体はもちろんリイ群であり，この例は証明中の「近傍」への反例だけである．
+
+\paragraph{判断}原条件から$U\prime$が単位元の近傍であるとは従わない．原点正規化を加えれば提示された証明は進むが，原文の最も一般的な仮定のままでの別証明は本項では与えていない．定理の結論への反例ではない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0194：座標変換を導く逆元の取り違え}\label{math:MATS-0194}
+\noindent\textbf{原本位置：}印刷216頁，中段，$p\in aW\cap bW$の座標変換の計算．
+
+\paragraph{原記載}216頁，$p=ag^{-1}=bh$とおき，条件2）から$h=b^{-1}ag^{-1}$の座標を$x(g)$で表した後，「$x_a^i(p)=x^i(g)$」として座標変換が滑らかとする．
+
+\paragraph{数学的疑義}先に$x_a^i(az)=x^i(z)$と定義したので，$p=ag^{-1}$に対しては$x_a^i(p)=x^i(g^{-1})$である．右辺を一箇所直した後も，表示中の$x(g)$を新しい入力座標で表す一段が必要となる．
+
+\paragraph{解決策}$u=(x_a^1(p),\ldots,x_a^n(p))=x(g^{-1})$とし，条件2）のベクトル値関数を$f=(f^1,\ldots,f^n)$とおく．同条件を$(e,g^{-1})$に適用して$x(g)=f(x(e),u)$を得る．従って$x_b(p)=f(x(b^{-1}a),f(x(e),u))$であり，必要な近傍を縮小すればこれは$u$の滑らかな関数である．逆方向も$a,b$を交換して同様に示せる．ここでは印刷215頁の関連項目のように$e\in U′$となる条件を明記しておく．
+
+\paragraph{根拠・修復の確認}例えば加法群$R$と通常の座標$x$では$x_a(p)=p-a=-g$なのに原文は$g$とするため，単なる無害な別表記ではない．上の合成は逆元の滑らかさを条件2）から直接取り出すので循環論法を避ける．
+
+\paragraph{判断}逆元の対応を直し，条件2）から得る逆元の座標表示を代入すれば，滑らかな座標変換を得る．定理の結論を否定するものではない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0202：補題2の零ベクトルの場合}\label{math:MATS-0202}
+\noindent\textbf{原本位置：}印刷219頁，補題2とその証明．
+
+\paragraph{原記載}219頁補題2は任意の$a\in\bar{\mathfrak g}$に対し，$X(a)=\sum_i v^iX_i$として$|t|<\alpha(\sum_i(v^i)^2)^{-1/2}$を使い，証明で$g_k=a(k^{-1}t)\ne e$および$\|\varphi(g_k)\|$による除算を行う．
+
+\paragraph{数学的疑義}$X(a)=0$では右辺の逆平方根と除算が未定義であり，$a$が恒等な1パラメーター群なので$g_k\ne e$も偽である．また$X(a)\ne0$でも周期性があり得るため，$g_k\ne e$はすべての$k$ではなく十分大きい$k$について述べる必要がある．
+
+\paragraph{解決策}$X(a)=0$なら$\varphi(a(t))=\exp0=e′$と$\varphi$の単射性より$a(t)=e$で，すべての$t$について$a(t)\in\bar U$と別に処理する．非零の場合は$r=(\sum_i(v^i)^2)^{1/2}>0$とおき，$k$を十分大きくして$\exp(k^{-1}tX(a))$が指数写像の単射近傍内に入るようにする．この範囲では$g_k\ne e$で，正規化した座標は$v^i/r$となる．補題1から対応する1パラメーター群$c(s)$が$|s|<\alpha$で$\bar U$に入り，$\varphi(c(s))=\exp(sX(a)/r)$となる．単射性より$c(s)=a(s/r)$なので，$|t|<\alpha/r$なら$a(t)\in\bar U$を得る．
+
+\paragraph{根拠・修復の確認}単射近傍内の指数写像は，非零の小さい引数を単位元へ写さない．この性質を使えば，正規化した曲線のパラメータを戻して必要な時間範囲を得られる．
+
+\paragraph{判断}零ベクトルの場合を分け，非零の場合の$g_k\ne e$を十分大きい$k$に限定すれば，補題の結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0285：殆んど効果的な商空間の判定と非連結成分}\label{math:MATS-0285}
+\noindent\textbf{原本位置：}第IV章\S19，印刷223頁，第3段落末の「殆んど効果的」の必要十分条件．関連：222頁の定義と199頁のイデアル・正規部分群の対応．
+
+\paragraph{原記載}「$G$が$G/H$に殆んど効果的に作用するための必要十分条件は，$H$に対応する$G$のリイ環$\mathfrak g$の部分リイ環$\mathfrak h$が$(0)$とことなる$\mathfrak g$のイデアルをふくまないことである．」
+
+\paragraph{数学的疑義}一般の非連結リイ群では，Lie環のイデアルが対応する連結部分群を$G$全体の正規部分群にするとは限らない．199頁の逆命題自身が$G$連結を仮定している．従って原文の必要十分条件には連結性または全成分の随伴作用との適合条件が必要である．
+
+\paragraph{解決策}簡潔な修復はこの判定に$G$連結を仮定すること．一般の$G$に対する正確な条件は$\bigcap_{g\in G}\operatorname{Ad}(g)\mathfrak h=\{0\}$，同値に$\mathfrak h$が非零の$\operatorname{Ad}(G)$不変部分空間を含まないこと，とする．作用の核は$N=\bigcap_{g\in G}gHg^{-1}$であり，閉部分群$H$に対する指数写像の特徴付けから$\operatorname{Lie}(N)=\bigcap_{g\in G}\operatorname{Ad}(g)\mathfrak h$となる．従ってこの交わりが零であることと$N$が離散であることは同値で，222頁の「殆んど効果的」の定義に一致する．$G$連結ならイデアルはすべて$\operatorname{Ad}(G)$不変であるから原文の形へ戻る．
+
+\paragraph{根拠・修復の確認}反例は$G=\mathbb R^2\rtimes\{1,s\}$，$s(x,y)s^{-1}=(y,x)$，$H=\{((x,0),1):x\in\mathbb R\}$である．$H$は閉部分群，$\mathfrak g=\mathbb R^2$は可換なので$\mathfrak h=\mathbb R(1,0)$は非零イデアルである．しかし$H\cap sHs^{-1}=\{e\}$であり，全共役の共通部分である作用の核$N$は$\{e\}$となる．従って$G/H$への作用は効果的であり，原文の「必要」方向が成立しない．
+
+\paragraph{判断}原判定の必要方向は非連結群で反例をもつ．連結群に限定するか，全成分の随伴作用を使う条件へ替えれば正しい判定となる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0222：定理2の局所微分形式の非零条件}\label{math:MATS-0222}
+\noindent\textbf{原本位置：}印刷236頁，定理2の仮定と証明冒頭．
+
+\paragraph{原記載}各$U_\alpha$上の$n$次微分形式$\omega_\alpha$が重なりで$\omega_\beta=f_{\beta\alpha}\omega_\alpha$，$f_{\beta\alpha}>0$を満たせば，$M$は向きづけ可能であるとする．各$\omega_\alpha$の非零性の条件は記されていない．
+
+\paragraph{数学的疑義}各局所$n$次形式の各点非零性が欠けている．零形式を許す原条件からは向きづけ可能性が従わない．
+
+\paragraph{解決策}各$\omega_\alpha$が$U_\alpha$の各点で非零であることを仮定へ加える．その上で，非負の単位の分割$\{\rho_\alpha\}$を用い，各$\rho_\alpha\omega_\alpha$を零延長して$\omega=\sum_\alpha\rho_\alpha\omega_\alpha$と定めれば，向きづけを与える大域的非零形式が得られる．
+
+\paragraph{根拠・修復の確認}\textbf{根拠と修復の理由：}原条件ではすべての$\omega_\alpha=0$，$f_{\beta\alpha}=1$と置けるため，例えばメビウス帯にも適用できてしまう．非零性を加えた場合，点$p\in U_\beta$で各非零項は$\rho_\alpha(p)f_{\alpha\beta}(p)(\omega_\beta)_p$と書ける．係数は非負で，少なくとも一つは正であるから和は非零となる．局所有限性により和は本文の正則性を保つ．原証明で正の座標を選ぶ操作も，この各点非零性によって初めて可能になる．
+
+\paragraph{判断}各局所形式の各点非零性を加える必要がある．その条件の下では正の単位の分割を用いた構成が成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0237：左不変最高次形式の非零条件}\label{math:MATS-0237}
+\noindent\textbf{原本位置：}印刷247頁，§3冒頭．
+
+\paragraph{原記載}「$\Omega$を$G$上の左不変$n$次微分形式とすると，$\Omega$は$G$の各点で0にならない」．
+
+\paragraph{数学的疑義}零形式も左不変なので，「左不変」だけから各点非零を結論できない．
+
+\paragraph{解決策}「$\Omega$を非零の左不変$n$次微分形式とする」と補う．同値な指定として，$\Omega_e\ne0$を仮定するか，左不変な余標構の外積$\omega^1\wedge\cdots\wedge\omega^n$を選ぶ．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}左不変性より$\Omega_g((L_g)_*v_1,\ldots,(L_g)_*v_n)=\Omega_e(v_1,\ldots,v_n)$である．したがって$\Omega_e\ne0$なら全点で非零，$\Omega_e=0$なら全点で零である．零形式を除外すれば後続の向きの指定とHaar積分の議論は成立する．
+
+\paragraph{判断}非零性の条件が必要である．これを加えれば各点での非零性と後続の向き・Haar積分の議論が成立する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0238：右移動で積分を変換するときの係数の逆数}\label{math:MATS-0238}
+\noindent\textbf{原本位置：}印刷248頁，式(3)．関連：247頁式(2')と246頁式(13)．
+
+\paragraph{原記載}$\int_M f(xg)\,dx=|\det\operatorname{Ad}(g^{-1})|\int_M f(x)\,dx$．
+
+\paragraph{数学的疑義}形式の引き戻し係数を，関数の変数変換に逆数を取らず用いている．非ユニモジュラー群では式(3)が誤る．
+
+\paragraph{解決策}式(3)を$\displaystyle\int_G f(xg)\,dx=|\det\operatorname{Ad}(g)|\int_G f(x)\,dx$とする．積分領域$M$の文字の誤植は印刷248頁の関連項目として別扱いにする．
+
+\paragraph{根拠・修復の確認}\textbf{導出：}247頁(2$\prime$)は$R_g^*\Omega=c\Omega$，$c=\det\operatorname{Ad}(g^{-1})$である．246頁(13)へ$\varphi=R_g$を代入すると$\int_G f\Omega=|c|\int_G(f\circ R_g)\Omega$であるから，後者を解いた係数は$|c|^{-1}=|\det\operatorname{Ad}(g)|$となる．\textbf{具体例：}正のアファイン群$(a,b)(a_0,b_0)=(aa_0,b+ab_0)$，$a>0$の左Haar密度は$da\,db/a^2$である．$g=(2,0)$なら$u=2a$の置換により$\int f(2a,b)da\,db/a^2=2\int f(u,b)du\,db/u^2$となり，原式の係数$1/2$と一致しない．
+
+\paragraph{判断}非ユニモジュラー群では係数の逆数への訂正が必要である．ユニモジュラー群に限った後続の結論は変わらない．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0242：反転による形式の引き戻しと向きの符号}\label{math:MATS-0242}
+\noindent\textbf{原本位置：}印刷249頁，式(8)と，式(9)の直後で両成分上の積分を等置する無番号式．
+
+\paragraph{原記載}$\psi_\alpha^*\Omega_{\alpha'}=\pm\Omega_\alpha$から$\int_{G_\alpha}(f\circ\psi)_\alpha(\psi^*\Omega)_\alpha=\int_{G_{\alpha'}}f_{\alpha'}\Omega_{\alpha'}$とする．
+
+\paragraph{数学的疑義}形式$(f\circ\psi)\psi^*\Omega$の積分は，反転が向きを逆にする成分では負の符号を伴う．元の式(8)から関数積分の不変性へ移る推論には符号の混同がある．
+
+\paragraph{解決策}目標を$\int_G(f\circ\psi)\Omega=\sum_\alpha\int_{G_\alpha}(f\circ\psi)_\alpha\Omega_\alpha$と書き直す．$\psi_\alpha^*\Omega_{\alpha\prime}=c_\alpha\Omega_\alpha$，$|c_\alpha|=1$を証明した後，§2式(13)を使い，各項を$\int_{G_{\alpha\prime}}f_{\alpha\prime}\Omega_{\alpha\prime}$へ変換して成分を並べ替える．
+
+\paragraph{根拠・修復の確認}\textbf{符号の確認：}250頁の計算は$c_\alpha=(-1)^n\det\operatorname{Ad}(g_\alpha)$を与え，ユニモジュラー性から$|c_\alpha|=1$となる．したがって$\int_{G_\alpha}(f\circ\psi)_\alpha\Omega_\alpha=\int_{G_{\alpha\prime}}f_{\alpha\prime}\Omega_{\alpha\prime}$である．これに対し$\psi^*\Omega$を掛けた元の被積分形式には$c_\alpha$が残る．例えば加法群$G=R$，$\Omega=dx$，$\psi(x)=-x$では$\int_R(f\circ\psi)\psi^*dx=-\int_Rf\,dx$となり，原証明の等置は符号を誤る．反転不変な関数積分の結論自体は正しい．
+
+\paragraph{判断}反転不変な関数積分の結論は正しい．向きの符号を正して，形式の引き戻しと関数の変数変換を区別する証明修復である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0246：実グラスマン多様体の端の場合の範囲}\label{math:MATS-0246}
+\noindent\textbf{原本位置：}印刷252頁，末尾の向きづけ可能性の結論．
+
+\paragraph{原記載}「$N$が偶数ならば$G_{N,n}$は向きづけ可能，$N$が奇数ならば$G_{N,n}$は向きづけ不可能である．」
+
+\paragraph{数学的疑義}端の場合$n=0,N$を含めると，$N$奇数で非向きづけ可能という結論は成立しない．
+
+\paragraph{解決策}定理と非向きづけ可能性の議論の範囲を$0<n<N$と明記する．端の場合は$G_{N,0}$と$G_{N,N}$がともに1点であると別記する．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}印刷228頁の定義，251頁の定理，252頁の証明には$0<n<N$の明記がない．$n,m=N-n>0$なら，両ブロックに行列式$-1$の反射$A,B$を取れて，$\det\sigma=(\det A)^m(\det B)^{-n}=(-1)^N$となる．$N$奇数でこれが向き反転を与える．しかし$n=0$又は$m=0$ではこの二つの反射を取れず，商は1点である．
+
+\paragraph{判断}端の場合を除けば原結論は成立する．零次元を除く暗黙の慣習の可能性が残るため，適用範囲の明示化として扱う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0249：正の境界座標を選ぶ際の1次元の場合}\label{math:MATS-0249}
+\noindent\textbf{原本位置：}印刷255頁，補題1証明後半と脚注．
+
+\paragraph{原記載}条件(1)をみたす座標を正にできるとし，脚注で「例えば$(-x^1,x^2,\ldots,x^n)$をとればよい」とする．
+
+\paragraph{数学的疑義}$n=1$では$x^1$が同時に法線座標$x^n$であるため，脚注の符号反転で座標の向きと半空間条件を独立に調整できない．
+
+\paragraph{解決策}正の境界座標を選ぶ証明を$n\geqq2$に限定し，$n=1$は各区間の端点を符号付き0次元境界として別に扱う．標準の向きをもつ$(a,b)$なら$a$の符号を$-1$，$b$の符号を$+1$とし，$\int_{\partial(a,b)}h=h(b)-h(a)$と定めれば，Stokesは微積分の基本定理になる．
+
+\paragraph{根拠・修復の確認}\textbf{根拠：}$D=(0,1)\subset R$の右端$p=1$では，正の座標は標準座標に対して増加するため，$D$側は$x^1<x^1(p)$となる．条件(1)の$D$側$x^1\geqq x^1(p)$と両立しない．$n\geqq2$なら接線座標$x^1$だけを反転しても法線座標$x^n$は変わらず，原脚注の操作が有効である．補題の向きづけ可能性とStokesの結論を否定するものではなく，低次元での証明を補う．
+
+\paragraph{判断}1次元では別の境界符号規約が必要である．これを補えば補題とStokesの結論は保たれる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0253：領域が接平面の一方の半空間内にあるとの主張}\label{math:MATS-0253}
+\noindent\textbf{原本位置：}印刷257頁，切平面の式の直後から内向き・外向き法ベクトルの定義．
+
+\paragraph{原記載}「$p$の十分小さな近傍では$D$は$L(y^1,\ldots,y^n)>0$により定められる半空間内にある」とし，Taylor展開の剰余から符号一致を結論する．
+
+\paragraph{数学的疑義}一般の滑らかな境界に接平面による局所的な一側性はない．接線に極めて近い接近では一次の法線項が剰余より小さくなり，原証明の符号一致も従わない．
+
+\paragraph{解決策}領域全体の接平面に関する一側性を削除し，局所定義関数$\rho=x^n-x^n(p)$（$D$側で$\rho>0$）を用いて，非零法ベクトル$v$を$d\rho_p(v)<0$のとき外向きと定義する．体積形式から得た法ベクトル$N_p$についてこの不等式を直接計算する．
+
+\paragraph{根拠・修復の確認}\textbf{反例：}環状領域$D=\{1<(y^1)^2+(y^2)^2<4\}$の$p=(1,0)$では接線は$y^1=1$である．$q_+=(1+t,0)$と$q_-=(1-t^2/4,t)$は十分小さい$t>0$でともに$D$に属し，接線の異なる側にある．\textbf{修復の計算：}$a_i=(\partial/\partial x^i)_p$，$J=\det(\partial y/\partial x)_p>0$とし，$N_p=\sum c^ia_i$と書く．256頁式(5)から$(-1)^{n-1}c^nJ=(-1)^n\sqrt{G(p)}$，したがって$d\rho_p(N_p)=c^n=-\sqrt{G(p)}/J<0$となる．ゆえに$\rho(p+tN_p)=t\,d\rho_p(N_p)+o(t)<0$で，短い法線線分が領域外へ出る．この議論は領域の局所凸性を要しない．
+
+\paragraph{判断}接平面による局所的一側性の主張は偽である．局所定義関数を使う代替証明で，原文の法ベクトルが外向きであるとの結論を得られる．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0259：問1のヒントの符号係数}\label{math:MATS-0259}
+\noindent\textbf{原本位置：}印刷260頁，下半，問1のヒント．
+
+\paragraph{原記載}$\iota^*\omega=a_n(x^1,\ldots,x^{n-1},0)dx^1\wedge\cdots\wedge dx^{n-1}$とかけるとする．
+
+\paragraph{数学的疑義}同じ頁の証明と同じ係数規約を使うなら，ヒントの引き戻しには$(-1)^{n-1}$が必要である．ただし新座標での係数を再定義している読みと区別する必要がある．
+
+\paragraph{解決策}元の$y$座標の係数$a_i$をそのまま流用せず，$x$座標で$\omega=\sum_j(-1)^{j-1}\widetilde a_j\,dx^1\wedge\cdots\widehat{dx^j}\cdots\wedge dx^n$と定義し，$\iota^*\omega=(-1)^{n-1}\widetilde a_n(x^1,\ldots,x^{n-1},0)\,dx^1\wedge\cdots\wedge dx^{n-1}$と書く．
+
+\paragraph{根拠・修復の確認}\textbf{計算：}境界上では$\iota^*dx^n=0$なので$j<n$の項は消え，$j=n$の項だけがその係数$(-1)^{n-1}$とともに残る．例えば$n=2$，$\omega=-dx^1$なら$\widetilde a_2=1$であり，境界への引き戻しは$-dx^1$となる．ヒントの$a_n$を初めから符号を吸収した係数と定め直すなら式自体は書けるが，本文と同じ記号のままではその再定義が明示されていない．問の結論である流束の式を否定するものではない．
+
+\paragraph{判断}本文と同じ係数規約の下では符号が不足する．係数を再定義する意図の有無は未確定のため，条件付き修正と記法の明確化として保留する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0261：コーシーの定理へのストークスの適用の正則性}\label{math:MATS-0261}
+\noindent\textbf{原本位置：}印刷261頁，例2末尾．
+
+\paragraph{原記載}$f$が$D$で正則，$\bar D$で連続ならば$\int_C f(z)dz=0$と，ストークスの定理の計算から結論する．
+
+\paragraph{数学的疑義}コーシーの定理の結論は正しいが，$D$内で正則かつ$\bar D$で連続という条件だけでは，境界を含む近傍で滑らかな1形式にStokesを直接適用する仮定を満たさない．
+
+\paragraph{解決策}まず$f$が$\bar D$の近傍で正則である場合にStokesを適用する．一般の場合は滑らかな境界$C$を内側へ少し移した曲線$C_t=\partial D_t\subset D$を取り，$\bar D_t\subset D$でStokesを適用して$\int_{C_t}f(z)dz=0$を得た後，$t\downarrow0$で極限を取る．
+
+\paragraph{根拠・修復の確認}\textbf{極限の根拠：}滑らかなコンパクト境界の内向き管状近傍を使い，$C_t$のパラメータ表示が$C$へ$C^1$収束するように取る．$f$はコンパクト集合$\bar D$上で一様連続なので，パラメータ表示$\gamma_t$に対して$f(\gamma_t)\gamma_t^{\prime}$は$f(\gamma)\gamma^{\prime}$へ一様収束する．したがって線積分も収束し，$\int_Cf(z)dz=\lim_{t\downarrow0}\int_{C_t}f(z)dz=0$となる．$D_t$上では$f$が正則なので$C^\infty$級で，Stokesの適用条件を満たす．
+
+\paragraph{判断}コーシーの定理の結論は正しい．Stokesの適用条件を満たす内側の曲線へ移り，極限を取る証明補足が必要である．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0288：写像度の証明における正常値の共通近傍の全逆像}\label{math:MATS-0288}
+\noindent\textbf{原本位置：}印刷264頁末尾から265頁冒頭，写像度の定理の証明．
+
+\paragraph{原記載}この定理では$M,M\prime$は向きづけられたコンパクト連結$n$次元多様体，$q$は正常値である．各$p\in f^{-1}(q)$の互いに素な近傍$U_p$を同じ立方座標近傍$V$へ微分同相に写すように選んだ後，$f^*\eta$の台が$\bigcup_pU_p$に含まれるとする．
+
+\paragraph{数学的疑義}各$U_p$が共通の$V$へ写ることだけでは，$V$の点の逆像がそれ以外に存在しないことはまだ従わない．コンパクト性を使った$V$の縮小を明示すれば証明が閉じる．定理自体の誤りではなく，証明手順の補足である．
+
+\paragraph{解決策}$f^{-1}(q)=\{p_1,\ldots,p_r\}$とする．互いに素な逆関数近傍$W_i$を取り，$p_i\in W_i^{\prime}\Subset W_i$となる開近傍を選ぶ．$K=M\setminus\bigcup_iW_i^{\prime}$はコンパクトで$q\notin f(K)$だから，$q$の十分小さな共通立方近傍$V$を$\bigcap_i f(W_i^{\prime})\setminus f(K)$の中に取れる．$U_i=(f|_{W_i^{\prime}})^{-1}(V)$と置く． 逆像が空の場合は，コンパクトな像$f(M)$を避ける$V$を選べば$f^*\eta=0$となり，空和として同じ式が成立する．
+
+\paragraph{根拠・修復の確認}\textbf{成立理由：}$f(K)$はコンパクトしたがって閉なので$V\cap f(K)=\emptyset$を確保できる．これより$f^{-1}(V)\subset\bigcup_iW_i^{\prime}$となり，各枝の逆関数性と合わせて$f^{-1}(V)=\bigsqcup_iU_i$となる．さらに$0\leqq h\in C_c^\infty(V)$，$h(q)>0$を選び，$\eta=h\,dy^1\wedge\cdots\wedge dy^n$とすれば$\operatorname{supp}(f^*\eta)\subset\bigcup_iU_i$かつ$\int_{M^{\prime}}\eta>0$である．各枝を零延長した形式の有限和として式(4)が成立し，正の積分値で割る最終手順も正当化される．
+
+\paragraph{判断}正常値の近傍をコンパクトな像から離して縮めれば，全逆像を有限個の局所枝へ分解できる．定理の結論を変えず，証明の説明を補う．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0267：$\Delta(f^2)$の係数2欠落}\label{math:MATS-0267}
+\noindent\textbf{原本位置：}268頁，中段，$\Delta f^2$の計算から積分式まで．
+
+\paragraph{原記載}$\Delta f^2=2f\Delta f+\sum g^{ij}\partial_i f\partial_j f=2f\Delta f+\|\operatorname{grad}f\|^2$；調和の場合$\Delta f^2=\|\operatorname{grad}f\|^2$；$\int_M\|\operatorname{grad}f\|^2\Omega=\int_M\Delta f^2\Omega$．
+
+\paragraph{数学的疑義}$\Delta(f^2)$の勾配二乗項に係数2がなく，その後の調和の場合と積分式にも同じ係数の欠落が続いている．
+
+\paragraph{解決策}最初の二つの二重和に係数2を補い，$\Delta(f^2)=2f\Delta f+2\|\operatorname{grad}f\|^2$とする．$\Delta f=0$のときは$\Delta(f^2)=2\|\operatorname{grad}f\|^2$である．積分式は$2\int_M\|\operatorname{grad}f\|^2\Omega=\int_M\Delta(f^2)\Omega=0$へ直す．
+
+\paragraph{根拠・修復の確認}\textbf{直接計算：}$\partial_i\partial_j(f^2)=2f\,\partial_i\partial_jf+2(\partial_if)(\partial_jf)$，$\partial_j(f^2)=2f\partial_jf$を267頁式(9)へ代入すると，1階部分は$2f$倍の元の1階部分となり，2階部分から勾配二乗の係数2が残る．$\sum g^{ij}\partial_if\partial_jf=\|\operatorname{grad}f\|^2$なので修正式を得る．例えば$R$上の$f(x)=x$では左辺が2，原式の右辺が1となる．修正後も非負関数の積分が零となり$df=0$を得るため，後続の局所定数性の結論は変わらない．
+
+\paragraph{判断}勾配二乗項の係数2を補う必要がある．修正後も局所定数性の結論は変わらず，成分間の定数の一致には別に連結性を要する．
+
+
+\Needspace{8\baselineskip}
+\subsection*{MATS-0268：定数性の結論と連結性}\label{math:MATS-0268}
+\noindent\textbf{原本位置：}268頁，定理3とその直前の証明末尾；270頁，系2および系3．
+
+\paragraph{原記載}「コンパクト・リーマン多様体」の調和関数，またはコンパクト多様体上で$Lf=0$をみたす関数は「定数である」．
+
+\paragraph{数学的疑義}ここでの局所設定には連結性がなく，$df=0$から多様体全体で同じ定数とは結論できない．268頁定理3と270頁系2・系3に同じ問題がある．
+
+\paragraph{解決策}各主張へ「連結」を加えるか，結論を「各連結成分上で定数である」に直す．270頁系2の一般の楕円型作用素についても，最大値原理を各連結成分へ適用する．
+
+\paragraph{根拠・修復の確認}\textbf{反例：}$M=S^1\sqcup S^1$を各成分に標準計量を入れたコンパクトな向きづけ可能多様体とし，一方で$f=0$，他方で$f=1$と定める．$f$は滑らかで$\Delta f=0$だが全体で定数でない．一般の本書の$L$も零次項を持たないので，この局所定数関数は$Lf=0$を満たす．\textbf{文脈：}234頁は非連結多様体の向きを明示的に扱い，§6の263頁にあった連結条件は266頁§7の設定で再指定されていない．コンパクト多様体の連結成分は開で，有限個しかないので，成分ごとの積分又は最大値原理により限定した結論は成立する．
+
+\paragraph{判断}結論を成分ごとの定数性に限るか，連結性を仮定する必要がある．非連結なコンパクト多様体への反例がある．
+
+\clearpage\section{参考：記号・用語および撤回した疑義}\label{part:notes}
+以下は確定した誤植・反例として扱わない．本書の約束で意味が通るもの，読みやすくするための任意の明確化，原本の表記を再確認して撤回した指摘を，IDとの対応のために残す．
+\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.19\linewidth}>{\raggedright\arraybackslash}p{.77\linewidth}@{}}
+\toprule 原本位置・ID & 原記載と修正案\\\midrule\endfirsthead
+\toprule 原本位置・ID & 原記載と修正案\\\midrule\endhead
+\midrule\multicolumn{2}{r}{次頁へ続く}\\\endfoot
+\bottomrule\endlastfoot
+\hypertarget{MATS-0024}{}\textbf{MATS-0024}\par 第II章\S3，第1段落，印刷31頁，「$R^n$の開集合$\psi_\alpha(V)$で定義された関数」の直後． & \textbf{合成を表す位置の上付き0}\par\textbf{原記載：}$(f^0\psi_\alpha^{-1})(u)$と読める上付き0の字形がある．\par\textbf{説明・扱い：}$(f\circ\psi_\alpha^{-1})(u)$とする．\par 組版記号の疑義・表記明確化候補．数式の意図は関数の合成と判断できるが，印刷字形の意図まで確定しない．\par\textbf{判断：}関数の合成を表す意味は明白であり，数学的な訂正を要しない．合成記号を明確にする表記上の参考事項とする． \\[3pt]
+\hline
+\hypertarget{MATS-0071}{}\textbf{MATS-0071}\par 印刷85頁，\S14末の問2． & \textbf{問2で要求する関数の条件の意図}\par\textbf{原記載：}コンパクト集合$K\subset M$について，「$K$上で1にひとしいような$M$上の$C^\infty$級関数が存在すること」を問う．\par\textbf{説明・扱い：}記載された設問の解は定数関数1であり、訂正を要しない。コンパクト台をもつ切断関数の構成を問う意図なら、その条件を明記すると有用な強い設問になるが、意図は未確定。\par 設問は定数関数1により成立する。誤植や数学的反例として扱う根拠はない。\par\textbf{判断：}設問は定数関数1で解けるため，誤植としては採用しない．より強い切断関数の構成を問う意図の有無は未確定である． \\[3pt]
+\hline
+\hypertarget{MATS-0079}{}\textbf{MATS-0079}\par 印刷92頁，式(2)の第2行右側． & \textbf{複素接ベクトルの定義式の評価点}\par\textbf{原記載：}左辺は$\left(\partial/\partial\bar z^k\right)$で，点$p$の添字がない．右辺と左隣の定義はすべて点$p$での接ベクトルを用いる．\par\textbf{説明・扱い：}必要なら左辺を$(\partial/\partial\bar z^k)_p$と表示して点を明示する．定義の内容は変更しない．\par 点$p$での接ベクトルという周囲の文脈から読める評価点の省略であり，数学的な誤式とは認定しない．\par\textbf{判断：}評価点は前後から一意に補える．定義の内容を変える訂正ではなく，記法の省略を明示する参考事項である． \\[3pt]
+\hline
+\hypertarget{MATS-0082}{}\textbf{MATS-0082}\par 印刷97頁，式(10)の後の座標変換式． & \textbf{座標変換係数の共役の範囲}\par\textbf{原記載：}$(\partial/\partial\bar w^k)_p=\sum_j\dfrac{\overline{\partial F^j}}{\partial w^k}(p)(\partial/\partial\bar z^j)_p$．共役の横線が分子にのみ付いて見える．\par\textbf{説明・扱い：}係数を$\overline{(\partial F^j/\partial w^k)(p)}$と書いて値全体の共役を明示する．原著の確定誤式という扱いにはしない．\par 共役線の長さによる作用範囲の読み方の問題であり，分子上の短い線を分数係数の共役の略記と読むと証明は成立する．\par\textbf{判断：}値全体の共役と読むことで前後の定義と整合する．共役線の範囲を明確にする表記上の参考事項とし，原著の確定的な誤式とはしない． \\[3pt]
+\hline
+\hypertarget{MATS-0106}{}\textbf{MATS-0106}\par 印刷124頁，$t_{i_1\cdots i_p}(b)$の評価式． & \textbf{テンソル成分を評価する最後の接ベクトルの点}\par\textbf{原記載：}$t_b((\partial/\partial x^{i_1})_b,\ldots,(\partial/\partial x^{i_p}))$で，最後のベクトルに$b$がない．\par\textbf{説明・扱い：}最後の入力も$(\partial/\partial x^{i_p})_b$と書いて評価点を明示する．数学的な主張は変更しない．\par 点$b$における形式の入力という文脈から読める評価点の省略であり，異なる接空間のベクトルを意図したものとは認定しない．\par\textbf{判断：}最後の入力も同じ点で評価する意味が文脈から定まる．評価点を明示する参考事項であり，数学的な主張の訂正を要しない． \\[3pt]
+\hline
+\hypertarget{MATS-0108}{}\textbf{MATS-0108}\par 印刷131頁冒頭． & \textbf{引き戻しテンソル場を定める対応の表示}\par\textbf{原記載：}$(\varphi^*t)_a$を定義した後，「そして対応$a\to\varphi^*t$によって$M$上の$p$次共変テンソル場$\varphi^*t$がえられる」とする．\par\textbf{説明・扱い：}明示する場合には「対応$a\mapsto(\varphi^*t)_a$」と書く．確定誤植とは分けた表示上の明確化とする．\par 直前に定義した点ごとの値を場の記号で略している箇所で，定義そのものの不足や別の写像の構成ではない．\par\textbf{判断：}点ごとの値を対応させることは前の定義から読み取れる．対応の表示を明確にする参考事項である． \\[3pt]
+\hline
+\hypertarget{MATS-0112}{}\textbf{MATS-0112}\par 印刷136頁，$\gamma$の定義と積分式(*)および$\theta$の式． & \textbf{ポアンカレの補題の係数の引数の順序}\par\textbf{原記載：}$\varphi^*\omega$の展開で$\gamma_{j_1\cdots j_{p-1}}(t,x)$と定義するが，(*)内の偏微分の引数と$\theta$の積分内では$(x,t)$を用いる．\par\textbf{説明・扱い：}定義どおりに$\gamma(t,x)$と全箇所を表示するか，途中で$\widehat\gamma(x,t)=\gamma(t,x)$と置いたことを明記する．\par 同じ関数の時間変数と空間変数の表示順序が途中で交換されるため，厳密な引数表示として明示が望ましい．積分操作は$t$について行うと特定されており，原始形式の構成に新しい仮定は不要である．\par\textbf{判断：}時間変数と空間変数の順を統一すれば議論は成立する．引数の表示を明確にする参考事項である． \\[3pt]
+\hline
+\hypertarget{MATS-0115}{}\textbf{MATS-0115}\par 印刷143頁，式(3')直前． & \textbf{積分多様体の条件の参照番号}\par\textbf{原記載：}「条件(2)は」．\par\textbf{説明・扱い：}接空間の包含を指すことを明示するなら「条件(3)は」と書く．または「パッフ方程式(2)を$N$上で満たす条件は」と説明する．\par 「条件(2)」を前頁のパッフ方程式を積分多様体上で満たす条件として読むと意味が通るため，参照番号の誤りを確定しない．\par\textbf{判断：}本文の方程式を部分多様体上で満たすとの読みが可能である．参照する条件の意味を明示する参考事項とする． \\[3pt]
+\hline
+\hypertarget{MATS-0116}{}\textbf{MATS-0116}\par 印刷144頁末，$U=\{|x^i|<\delta\}$の後． & \textbf{局所座標の立方体の巾}\par\textbf{原記載：}「0を中心，巾が$\delta$の立方体」．\par\textbf{説明・扱い：}「各座標方向の半巾が$\delta$」または「各辺の長さが$2\delta$」と書く．集合$U=\{|x^i|<\delta\}$は変更しない．\par 立方体の集合は不等式で正確に定義されており，「巾」をどの量に使うかという用語の明確化である．\par\textbf{判断：}集合は不等式で正確に定義されており，「巾」の用語を明確にしても数学的内容は変わらない． \\[3pt]
+\hline
+\hypertarget{MATS-0123}{}\textbf{MATS-0123}\par 印刷147頁，式(14)の解の一意性を使う文． & \textbf{時間区間の旧指摘の撤回と領域記号の省略}\par\textbf{原記載：}「$I_2\times U(\delta_1\prime)$において$A_{\alpha k}\equiv0$である．」\par\textbf{説明・扱い：}時間区間の訂正は不要である．空間領域を明示する場合に限り$U(\delta_1\prime)$を$U_1(\delta_1\prime)$と書く．これは任意の記法明確化である．\par 原著の時間区間は$I_2$であり，$t=1$の代入が可能である．この時間区間に関する疑義は撤回する．空間領域の$U(\delta_1\prime)$は，既定の$U_1$の添字を省いた記法と読める．\par\textbf{判断：}原著の時間区間は$I_2$で正しく，この区間に関する疑義は撤回する．$U$を$U_1$と書くのは任意の記法明確化である． \\[3pt]
+\hline
+\hypertarget{MATS-0128}{}\textbf{MATS-0128}\par 印刷150頁，局所基を定義する段落． & \textbf{局所基の定義の集合と線型包}\par\textbf{原記載：}$\{(X_1)_q,\ldots,(X_r)_q\}=\mathfrak D_q$．\par\textbf{説明・扱い：}厳密に書く場合は$\operatorname{span}\{(X_1)_q,\ldots,(X_r)_q\}=\mathfrak D_q$，または「これらが$\mathfrak D_q$の基」とする．152頁問3の$\mathfrak D_p=\{X_p\}$も同じ約束で読む．\par 本書では波括弧で列挙したベクトルの張る空間を表す略記があり，有限集合が部分空間に等しいという字義通りの誤った等式としては扱わない．\par\textbf{判断：}本書では生成する部分空間をベクトルの列挙で略記していると読める．線型包を明示する参考事項とする． \\[3pt]
+\hline
+\hypertarget{MATS-0134}{}\textbf{MATS-0134}\par 印刷152頁，補題の証明，「このことと条件1）より」の文． & \textbf{関数の独立性と微分の独立性}\par\textbf{原記載：}$f^1,\ldots,f^n,\bar f^1,\ldots,\bar f^n$が$U$の各点で一次独立であるとする．\par\textbf{説明・扱い：}読みを明確にする場合には$df^1,\ldots,df^n,d\bar f^1,\ldots,d\bar f^n$が各点で一次独立であると書く．微分記号の確定的な脱落とはしない．\par 「関数が各点で一次独立」はここでは微分の独立性を表す省略と読め，関数値そのものの独立性を主張した誤った補題とはしない．\par\textbf{判断：}「関数が一次独立」を微分の独立性の略記と読めば後続の推論は成立する．微分記号を明記する参考事項とし，確定した記号脱落とはしない． \\[3pt]
+\hline
+\hypertarget{MATS-0169}{}\textbf{MATS-0169}\par 印刷190頁，上半，第2種標準座標の写像$\Phi$の定義と$g$の表示． & \textbf{第2種標準座標の係数添字の上下}\par\textbf{原記載：}$\Phi(\sum_{k=1}^n a^kX_k)=\exp a_1X_1\exp a_2X_2\cdots\exp a_nX_n$，および$g=\exp a_1X_1\cdots\exp a_nX_n$，$|a^k|<c$，$x^k(g)=a^k$．\par\textbf{説明・扱い：}右辺の$a_1,\ldots,a_n$を$a^1,\ldots,a^n$に統一する．\par 係数の添字の上下の不統一．\par\textbf{判断：}添字の上下は同じ係数の記号の不統一と読める．記号統一の提案にとどめ，数学的誤りとは認定しない． \\[3pt]
+\hline
+\hypertarget{MATS-0191}{}\textbf{MATS-0191}\par 印刷214頁，最下段，定理2証明の座標系の指定． & \textbf{第2種標準座標の添字の上下}\par\textbf{原記載：}$(x_1,\ldots,x_n)$を第2種標準座標系とする．\par\textbf{説明・扱い：}$(x^1,\ldots,x^n)$に統一する．\par 座標記号の上下添字の不統一．\par\textbf{判断：}上下どちらの添字でも座標名として意味は通る．統一は表記上の提案とし，数学的誤りとは認定しない． \\[3pt]
+\hline
+\hypertarget{MATS-0231}{}\textbf{MATS-0231}\par 印刷242頁，二つの有限和への分解から$K$を定める段落． & \textbf{積分の分解に用いる形式のコンパクトな台}\par\textbf{原記載：}各$\theta_i,\omega_j$は「台が立方座標近傍にふくまれる連続な$n$次微分形式」とし，それらの台の有限和集合$K$がコンパクトとする．\par\textbf{説明・扱い：}分解項について「$\theta_i,\omega_j$もコンパクトな台をもつ」と一言明記すれば，読み手の迷いを除ける．この追記は新しい仮定の導入ではなく，240頁で設定した積分の定義域を再掲するものである．\par 積分の定義域を引き継ぐと成立する省略であり，確定的な仮定欠落とはしない．\par\textbf{判断：}積分の定義域を引き継ぐ通常の読解では問題はない．新たな仮定の追加ではなく，定義域を明示する参考事項である． \\[3pt]
+\hline
+\end{longtable}
+\normalsize
+\clearpage
+\begin{thebibliography}{9}
+\addcontentsline{toc}{section}{参考文献}
+\bibitem{matsushima}松島与三，『多様体入門』，数学選書5，裳華房，1965年初版．本冊の原本：1970年7月15日第5版発行（奥付表記）．
+\bibitem{paper2017}paper（paper3510mm），『松島多様体誤植表（第37版3刷）』，2017年8月5日版．対象：2011年5月20日発行第37版3刷．
+\href{https://s2s.undefin.net/wiki/?file=matsushima_errors.pdf&pcmd=open&plugin=attach&refer=2016%2F%E8%87%AA%E4%B8%BB%E3%82%BC%E3%83%9F%2F%E6%9D%BE%E5%B3%B6%E5%A4%9A%E6%A7%98%E4%BD%93}{公開PDF}，\href{https://paper3510mm.github.io/notes}{著者のノート一覧}（閲覧：2026年11月8日）．
+\end{thebibliography}
+\end{document}
