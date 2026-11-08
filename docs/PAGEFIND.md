@@ -31,6 +31,10 @@ Node.jsとPagefindを導入した環境では、自動テストで小さな実�
 python3 -m pip install --user -r requirements-pagefind.txt
 ```
 
+Pythonパッケージ `pagefind` と、索引生成・ブラウザ用ファイルを提供する
+`pagefind-bin-extended` の両方を1.5.2に固定する。前者だけの固定では実行ファイルに
+別バージョンが選ばれ、日本語分割の補正と一致しなくなるためである。
+
 VS Codeでは「ターミナル」→「タスクの実行」→
 「数識電収: Pagefindを導入」を選んでもよい。
 
