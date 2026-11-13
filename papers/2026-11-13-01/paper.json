@@ -9,7 +9,7 @@
   "year": 2026,
   "kind": "PDF・TeX一式",
   "math_section": "位相・距離・幾何",
-  "summary": "ウリゾーンの論文・短報・訂正・共著・没後刊行論文を整理した目録です。主表39項目、問題欄への寄稿3件、書誌疑義13件、参考文献・根拠資料25件を収録し、刊年・頁・共著表示などの未確定事項と確認範囲を併記しています。全原誌の全頁校合と全著述の網羅性の確認は今後の課題として残しています。",
+  "summary": "ウリゾーンの論文・短報・訂正・共著・没後刊行論文を整理した目録です。主表39項目、個別問題への寄稿3件、書誌疑義・確認ノート15件、参考文献・根拠資料36件を収録しています。原誌の関連箇所を確認し、掲載範囲・著者順・改稿者と編集者・問題署名を訂正しました。全原論文の全頁校合と全著述の網羅性の確認は今後の課題として残し、未確定事項と確認範囲を併記しています。",
   "original_url": "",
   "order": 2026111301,
   "tags": [
@@ -43,7 +43,7 @@
       "label": "論文目録PDF（付録なし）",
       "public": true,
       "original_sha256": "20dea5e1d41efb708c8b79cac623238def5d41d20040fb95042f416df5a81ab2",
-      "sha256": "20dea5e1d41efb708c8b79cac623238def5d41d20040fb95042f416df5a81ab2"
+      "sha256": "c44e08dfc2fa96bbd271e87e19316eaf96f6386d4685438a5f7db3dece2dfc3b"
     },
     {
       "path": "issue-notes.pdf",
@@ -51,7 +51,7 @@
       "label": "書誌疑義・確認ノートPDF",
       "public": true,
       "original_sha256": "190ea0d801cc2ac8f28861041514440715a2867338861c4a7fe6dcb6681e627d",
-      "sha256": "190ea0d801cc2ac8f28861041514440715a2867338861c4a7fe6dcb6681e627d"
+      "sha256": "94e983c14808b89edf553228a2e26ad4cdc151c3d38409a5b518560d10a4e460"
     },
     {
       "path": "urysohn-bibliography-TeX.zip",
@@ -59,7 +59,7 @@
       "label": "編集可能なTeX一式（ZIP）",
       "public": true,
       "original_sha256": "e72fddd4d09b6ca4ee2576d56284b581da44c10e78cc0a099ae8fe6adaffc524",
-      "sha256": "e72fddd4d09b6ca4ee2576d56284b581da44c10e78cc0a099ae8fe6adaffc524"
+      "sha256": "ecdcd6e9d0ef24e20d4921c253c8c8612980cc76dd4adba6a8df463a1ceb1ba9"
     },
     {
       "path": "PUBLICATION-MANIFEST.json",
@@ -67,26 +67,60 @@
       "label": "配布ファイル・ハッシュ一覧",
       "public": true,
       "original_sha256": "044569eb546b2a2988996576c875afb5170bbc5ac939fdf4a7b59b7a59258d00",
-      "sha256": "044569eb546b2a2988996576c875afb5170bbc5ac939fdf4a7b59b7a59258d00"
+      "sha256": "9849fee670e20dbdc0217a2a2e47e1a1cc25e063f5ef66782e4c62cfa066a02b"
     }
   ],
-  "approved_changes": [],
+  "approved_changes": [
+    {
+      "approved_at": "2026-11-13T08:53:04+00:00",
+      "reason": "原誌確認に基づくウリゾーン論文目録の改訂版を、利用者の公開指示に従い反映",
+      "files": [
+        {
+          "path": "published.pdf",
+          "from_sha256": "20dea5e1d41efb708c8b79cac623238def5d41d20040fb95042f416df5a81ab2",
+          "to_sha256": "c44e08dfc2fa96bbd271e87e19316eaf96f6386d4685438a5f7db3dece2dfc3b"
+        },
+        {
+          "path": "issue-notes.pdf",
+          "from_sha256": "190ea0d801cc2ac8f28861041514440715a2867338861c4a7fe6dcb6681e627d",
+          "to_sha256": "94e983c14808b89edf553228a2e26ad4cdc151c3d38409a5b518560d10a4e460"
+        },
+        {
+          "path": "urysohn-bibliography-TeX.zip",
+          "from_sha256": "e72fddd4d09b6ca4ee2576d56284b581da44c10e78cc0a099ae8fe6adaffc524",
+          "to_sha256": "ecdcd6e9d0ef24e20d4921c253c8c8612980cc76dd4adba6a8df463a1ceb1ba9"
+        },
+        {
+          "path": "PUBLICATION-MANIFEST.json",
+          "from_sha256": "044569eb546b2a2988996576c875afb5170bbc5ac939fdf4a7b59b7a59258d00",
+          "to_sha256": "9849fee670e20dbdc0217a2a2e47e1a1cc25e063f5ef66782e4c62cfa066a02b"
+        }
+      ]
+    }
+  ],
   "privacy_reviews": [
     {
       "path": "published.pdf",
       "status": "overridden",
-      "reason": "通常のPoppler描画は日本語フォント不足で失敗。PDFiumで同一PDFの本文9頁・別紙3頁を表示確認し、全頁と検査報告を提示した後、利用者がこの一式の公開を承認したため、代替確認に基づいて公開する。",
-      "source_sha256": "20dea5e1d41efb708c8b79cac623238def5d41d20040fb95042f416df5a81ab2",
+      "reason": "標準Poppler描画はこの環境の和文フォント不足で失敗した。不合格報告を保存し、同一SHA-256のPDFをPDFiumで本文10頁・別紙4頁すべて表示確認した。全頁画像・TeX/PDFの検査報告・4配布候補を提示した後、利用者が「改訂版を公開して」と指示したため、代替確認に基づき改訂版を公開する。",
+      "source_sha256": "c44e08dfc2fa96bbd271e87e19316eaf96f6386d4685438a5f7db3dece2dfc3b",
       "inspection_status": "failed",
-      "recorded_at": "2026-11-13T07:40:05+00:00"
+      "recorded_at": "2026-11-13T08:53:04+00:00"
     },
     {
       "path": "issue-notes.pdf",
       "status": "overridden",
-      "reason": "通常のPoppler描画は日本語フォント不足で失敗。PDFiumで同一PDFの本文9頁・別紙3頁を表示確認し、全頁と検査報告を提示した後、利用者がこの一式の公開を承認したため、代替確認に基づいて公開する。",
-      "source_sha256": "190ea0d801cc2ac8f28861041514440715a2867338861c4a7fe6dcb6681e627d",
+      "reason": "標準Poppler描画はこの環境の和文フォント不足で失敗した。不合格報告を保存し、同一SHA-256のPDFをPDFiumで本文10頁・別紙4頁すべて表示確認した。全頁画像・TeX/PDFの検査報告・4配布候補を提示した後、利用者が「改訂版を公開して」と指示したため、代替確認に基づき改訂版を公開する。",
+      "source_sha256": "94e983c14808b89edf553228a2e26ad4cdc151c3d38409a5b518560d10a4e460",
       "inspection_status": "failed",
-      "recorded_at": "2026-11-13T07:40:05+00:00"
+      "recorded_at": "2026-11-13T08:53:04+00:00"
+    }
+  ],
+  "corrections": [
+    {
+      "recorded_at": "2026-11-13T17:55:24+09:00",
+      "kind": "correction",
+      "summary": "原誌確認により、UR20・UR29の終頁、UR34の著者順、UR35の本文範囲と別論文の正誤表の帰属、UR36の刊記年、UR37の原題・改稿者、UR39の編集者を訂正。PR01–PR03を個別問題22・29・34として整理し、1950年版RE01の改訂第2版の性格とAN01の470–472欄を明記した。"
     }
   ]
 }
